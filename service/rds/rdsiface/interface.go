@@ -193,6 +193,8 @@ type RDSAPI interface {
 
 	ListTagsForResourceRequest(*rds.ListTagsForResourceInput) rds.ListTagsForResourceRequest
 
+	ModifyCurrentDBClusterCapacityRequest(*rds.ModifyCurrentDBClusterCapacityInput) rds.ModifyCurrentDBClusterCapacityRequest
+
 	ModifyDBClusterRequest(*rds.ModifyDBClusterInput) rds.ModifyDBClusterRequest
 
 	ModifyDBClusterParameterGroupRequest(*rds.ModifyDBClusterParameterGroupInput) rds.ModifyDBClusterParameterGroupRequest
@@ -245,7 +247,11 @@ type RDSAPI interface {
 
 	RevokeDBSecurityGroupIngressRequest(*rds.RevokeDBSecurityGroupIngressInput) rds.RevokeDBSecurityGroupIngressRequest
 
+	StartDBClusterRequest(*rds.StartDBClusterInput) rds.StartDBClusterRequest
+
 	StartDBInstanceRequest(*rds.StartDBInstanceInput) rds.StartDBInstanceRequest
+
+	StopDBClusterRequest(*rds.StopDBClusterInput) rds.StopDBClusterRequest
 
 	StopDBInstanceRequest(*rds.StopDBInstanceInput) rds.StopDBInstanceRequest
 

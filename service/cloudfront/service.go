@@ -46,7 +46,7 @@ func New(config aws.Config) *CloudFront {
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				APIVersion:    "2017-10-30",
+				APIVersion:    "2018-06-18",
 			},
 		),
 	}

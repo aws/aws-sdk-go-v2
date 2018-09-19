@@ -1339,10 +1339,8 @@ func (r ListDeviceEventsRequest) Send() (*ListDeviceEventsOutput, error) {
 // ListDeviceEventsRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Lists the Device Event history for up to 30 days. If EventType isn't specified
-// in the request, this returns a list of all device events in reverse chronological
-// order. If EventType is specified, this returns a list of device events for
-// that EventType in reverse chronological order.
+// Lists the device event history, including device connection status, for up
+// to 30 days.
 //
 //    // Example sending a request using the ListDeviceEventsRequest method.
 //    req := client.ListDeviceEventsRequest(params)
@@ -1546,7 +1544,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 // ListTagsRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Lists all tags for a specific resource.
+// Lists all tags for the specified resource.
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
@@ -4889,17 +4887,21 @@ type ListDeviceEventsInput struct {
 	// DeviceArn is a required field
 	DeviceArn *string `type:"string" required:"true"`
 
-	// The event type to filter device events.
+	// The event type to filter device events. If EventType isn't specified, this
+	// returns a list of all device events in reverse chronological order. If EventType
+	// is specified, this returns a list of device events for that EventType in
+	// reverse chronological order.
 	EventType DeviceEventType `type:"string" enum:"true"`
 
-	// The maximum number of results to include in the response. If more results
-	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. Required.
+	// The maximum number of results to include in the response. The default value
+	// is 50. If more results exist than the specified MaxResults value, a token
+	// is included in the response so that the remaining results can be retrieved.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// only includes results beyond the token, up to the value specified by MaxResults.
+	// When the end of results is reached, the response has a value of null.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -4939,8 +4941,10 @@ type ListDeviceEventsOutput struct {
 
 	responseMetadata aws.Response
 
+	// The device events requested for the device ARN.
 	DeviceEvents []DeviceEvent `type:"list"`
 
+	// The token returned to indicate that there is more data available.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -5036,7 +5040,7 @@ func (s ListSkillsOutput) SDKResponseMetadata() aws.Response {
 type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the specific resource for which to list tags. Required.
+	// The ARN of the specified resource for which to list tags.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -5091,7 +5095,7 @@ type ListTagsOutput struct {
 	// The token returned to indicate that there is more data available.
 	NextToken *string `min:"1" type:"string"`
 
-	// The list of tags requested for the specific resource.
+	// The tags requested for the specified resource.
 	Tags []Tag `type:"list"`
 }
 

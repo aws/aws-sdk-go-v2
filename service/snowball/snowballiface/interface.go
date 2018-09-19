@@ -90,6 +90,8 @@ type SnowballAPI interface {
 
 	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
 
+	ListCompatibleImagesRequest(*snowball.ListCompatibleImagesInput) snowball.ListCompatibleImagesRequest
+
 	ListJobsRequest(*snowball.ListJobsInput) snowball.ListJobsRequest
 
 	UpdateClusterRequest(*snowball.UpdateClusterInput) snowball.UpdateClusterRequest

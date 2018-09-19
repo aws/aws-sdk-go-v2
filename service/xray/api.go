@@ -115,6 +115,112 @@ func (p *BatchGetTracesPager) CurrentPage() *BatchGetTracesOutput {
 	return p.Pager.CurrentPage().(*BatchGetTracesOutput)
 }
 
+const opCreateSamplingRule = "CreateSamplingRule"
+
+// CreateSamplingRuleRequest is a API request type for the CreateSamplingRule API operation.
+type CreateSamplingRuleRequest struct {
+	*aws.Request
+	Input *CreateSamplingRuleInput
+	Copy  func(*CreateSamplingRuleInput) CreateSamplingRuleRequest
+}
+
+// Send marshals and sends the CreateSamplingRule API request.
+func (r CreateSamplingRuleRequest) Send() (*CreateSamplingRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSamplingRuleOutput), nil
+}
+
+// CreateSamplingRuleRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Creates a rule to control sampling behavior for instrumented applications.
+// Services retrieve rules with GetSamplingRules, and evaluate each rule in
+// ascending order of priority for each request. If a rule matches, the service
+// records a trace, borrowing it from the reservoir size. After 10 seconds,
+// the service reports back to X-Ray with GetSamplingTargets to get updated
+// versions of each in-use rule. The updated rule contains a trace quota that
+// the service can use instead of borrowing from the reservoir.
+//
+//    // Example sending a request using the CreateSamplingRuleRequest method.
+//    req := client.CreateSamplingRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRule
+func (c *XRay) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) CreateSamplingRuleRequest {
+	op := &aws.Operation{
+		Name:       opCreateSamplingRule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/CreateSamplingRule",
+	}
+
+	if input == nil {
+		input = &CreateSamplingRuleInput{}
+	}
+
+	output := &CreateSamplingRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateSamplingRuleRequest{Request: req, Input: input, Copy: c.CreateSamplingRuleRequest}
+}
+
+const opDeleteSamplingRule = "DeleteSamplingRule"
+
+// DeleteSamplingRuleRequest is a API request type for the DeleteSamplingRule API operation.
+type DeleteSamplingRuleRequest struct {
+	*aws.Request
+	Input *DeleteSamplingRuleInput
+	Copy  func(*DeleteSamplingRuleInput) DeleteSamplingRuleRequest
+}
+
+// Send marshals and sends the DeleteSamplingRule API request.
+func (r DeleteSamplingRuleRequest) Send() (*DeleteSamplingRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSamplingRuleOutput), nil
+}
+
+// DeleteSamplingRuleRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Deletes a sampling rule.
+//
+//    // Example sending a request using the DeleteSamplingRuleRequest method.
+//    req := client.DeleteSamplingRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRule
+func (c *XRay) DeleteSamplingRuleRequest(input *DeleteSamplingRuleInput) DeleteSamplingRuleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSamplingRule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/DeleteSamplingRule",
+	}
+
+	if input == nil {
+		input = &DeleteSamplingRuleInput{}
+	}
+
+	output := &DeleteSamplingRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteSamplingRuleRequest{Request: req, Input: input, Copy: c.DeleteSamplingRuleRequest}
+}
+
 const opGetEncryptionConfig = "GetEncryptionConfig"
 
 // GetEncryptionConfigRequest is a API request type for the GetEncryptionConfig API operation.
@@ -163,6 +269,156 @@ func (c *XRay) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) GetEn
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetEncryptionConfigRequest}
+}
+
+const opGetSamplingRules = "GetSamplingRules"
+
+// GetSamplingRulesRequest is a API request type for the GetSamplingRules API operation.
+type GetSamplingRulesRequest struct {
+	*aws.Request
+	Input *GetSamplingRulesInput
+	Copy  func(*GetSamplingRulesInput) GetSamplingRulesRequest
+}
+
+// Send marshals and sends the GetSamplingRules API request.
+func (r GetSamplingRulesRequest) Send() (*GetSamplingRulesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSamplingRulesOutput), nil
+}
+
+// GetSamplingRulesRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Retrieves all sampling rules.
+//
+//    // Example sending a request using the GetSamplingRulesRequest method.
+//    req := client.GetSamplingRulesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRules
+func (c *XRay) GetSamplingRulesRequest(input *GetSamplingRulesInput) GetSamplingRulesRequest {
+	op := &aws.Operation{
+		Name:       opGetSamplingRules,
+		HTTPMethod: "POST",
+		HTTPPath:   "/GetSamplingRules",
+	}
+
+	if input == nil {
+		input = &GetSamplingRulesInput{}
+	}
+
+	output := &GetSamplingRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSamplingRulesRequest{Request: req, Input: input, Copy: c.GetSamplingRulesRequest}
+}
+
+const opGetSamplingStatisticSummaries = "GetSamplingStatisticSummaries"
+
+// GetSamplingStatisticSummariesRequest is a API request type for the GetSamplingStatisticSummaries API operation.
+type GetSamplingStatisticSummariesRequest struct {
+	*aws.Request
+	Input *GetSamplingStatisticSummariesInput
+	Copy  func(*GetSamplingStatisticSummariesInput) GetSamplingStatisticSummariesRequest
+}
+
+// Send marshals and sends the GetSamplingStatisticSummaries API request.
+func (r GetSamplingStatisticSummariesRequest) Send() (*GetSamplingStatisticSummariesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSamplingStatisticSummariesOutput), nil
+}
+
+// GetSamplingStatisticSummariesRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Retrieves information about recent sampling results for all sampling rules.
+//
+//    // Example sending a request using the GetSamplingStatisticSummariesRequest method.
+//    req := client.GetSamplingStatisticSummariesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummaries
+func (c *XRay) GetSamplingStatisticSummariesRequest(input *GetSamplingStatisticSummariesInput) GetSamplingStatisticSummariesRequest {
+	op := &aws.Operation{
+		Name:       opGetSamplingStatisticSummaries,
+		HTTPMethod: "POST",
+		HTTPPath:   "/SamplingStatisticSummaries",
+	}
+
+	if input == nil {
+		input = &GetSamplingStatisticSummariesInput{}
+	}
+
+	output := &GetSamplingStatisticSummariesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSamplingStatisticSummariesRequest{Request: req, Input: input, Copy: c.GetSamplingStatisticSummariesRequest}
+}
+
+const opGetSamplingTargets = "GetSamplingTargets"
+
+// GetSamplingTargetsRequest is a API request type for the GetSamplingTargets API operation.
+type GetSamplingTargetsRequest struct {
+	*aws.Request
+	Input *GetSamplingTargetsInput
+	Copy  func(*GetSamplingTargetsInput) GetSamplingTargetsRequest
+}
+
+// Send marshals and sends the GetSamplingTargets API request.
+func (r GetSamplingTargetsRequest) Send() (*GetSamplingTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSamplingTargetsOutput), nil
+}
+
+// GetSamplingTargetsRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Requests a sampling quota for rules that the service is using to sample requests.
+//
+//    // Example sending a request using the GetSamplingTargetsRequest method.
+//    req := client.GetSamplingTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargets
+func (c *XRay) GetSamplingTargetsRequest(input *GetSamplingTargetsInput) GetSamplingTargetsRequest {
+	op := &aws.Operation{
+		Name:       opGetSamplingTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/SamplingTargets",
+	}
+
+	if input == nil {
+		input = &GetSamplingTargetsInput{}
+	}
+
+	output := &GetSamplingTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSamplingTargetsRequest{Request: req, Input: input, Copy: c.GetSamplingTargetsRequest}
 }
 
 const opGetServiceGraph = "GetServiceGraph"
@@ -686,6 +942,56 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceSeg
 	return PutTraceSegmentsRequest{Request: req, Input: input, Copy: c.PutTraceSegmentsRequest}
 }
 
+const opUpdateSamplingRule = "UpdateSamplingRule"
+
+// UpdateSamplingRuleRequest is a API request type for the UpdateSamplingRule API operation.
+type UpdateSamplingRuleRequest struct {
+	*aws.Request
+	Input *UpdateSamplingRuleInput
+	Copy  func(*UpdateSamplingRuleInput) UpdateSamplingRuleRequest
+}
+
+// Send marshals and sends the UpdateSamplingRule API request.
+func (r UpdateSamplingRuleRequest) Send() (*UpdateSamplingRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSamplingRuleOutput), nil
+}
+
+// UpdateSamplingRuleRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Modifies a sampling rule's configuration.
+//
+//    // Example sending a request using the UpdateSamplingRuleRequest method.
+//    req := client.UpdateSamplingRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRule
+func (c *XRay) UpdateSamplingRuleRequest(input *UpdateSamplingRuleInput) UpdateSamplingRuleRequest {
+	op := &aws.Operation{
+		Name:       opUpdateSamplingRule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/UpdateSamplingRule",
+	}
+
+	if input == nil {
+		input = &UpdateSamplingRuleInput{}
+	}
+
+	output := &UpdateSamplingRuleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateSamplingRuleRequest{Request: req, Input: input, Copy: c.UpdateSamplingRuleRequest}
+}
+
 // An alias for an edge.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Alias
 type Alias struct {
@@ -984,6 +1290,170 @@ func (s BatchGetTracesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRuleRequest
+type CreateSamplingRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The rule definition.
+	//
+	// SamplingRule is a required field
+	SamplingRule *SamplingRule `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateSamplingRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSamplingRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateSamplingRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSamplingRuleInput"}
+
+	if s.SamplingRule == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SamplingRule"))
+	}
+	if s.SamplingRule != nil {
+		if err := s.SamplingRule.Validate(); err != nil {
+			invalidParams.AddNested("SamplingRule", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSamplingRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SamplingRule != nil {
+		v := s.SamplingRule
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingRule", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRuleResult
+type CreateSamplingRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The saved rule definition and metadata.
+	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateSamplingRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSamplingRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSamplingRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSamplingRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SamplingRuleRecord != nil {
+		v := s.SamplingRuleRecord
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingRuleRecord", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRuleRequest
+type DeleteSamplingRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
+	// both.
+	RuleARN *string `type:"string"`
+
+	// The name of the sampling rule. Specify a rule by either name or ARN, but
+	// not both.
+	RuleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteSamplingRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSamplingRuleInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteSamplingRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RuleARN != nil {
+		v := *s.RuleARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteSamplingRuleResult
+type DeleteSamplingRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The deleted rule definition and metadata.
+	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteSamplingRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSamplingRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSamplingRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteSamplingRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SamplingRuleRecord != nil {
+		v := s.SamplingRuleRecord
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingRuleRecord", v, metadata)
+	}
+	return nil
+}
+
 // Information about a connection between two services.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Edge
 type Edge struct {
@@ -1145,9 +1615,8 @@ type EncryptionConfig struct {
 	// The ID of the customer master key (CMK) used for encryption, if applicable.
 	KeyId *string `type:"string"`
 
-	// The encryption status. After modifying encryption configuration with PutEncryptionConfig,
-	// the status can be UPDATING for up to one hour before X-Ray starts encrypting
-	// data with the new key.
+	// The encryption status. While the status is UPDATING, X-Ray may encrypt data
+	// with a combination of the new and old settings.
 	Status EncryptionStatus `type:"string" enum:"true"`
 
 	// The type of encryption. Set to KMS for encryption with CMKs. Set to NONE
@@ -1330,6 +1799,295 @@ func (s GetEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "EncryptionConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRulesRequest
+type GetSamplingRulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Pagination token. Not used.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetSamplingRulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSamplingRulesInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSamplingRulesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRulesResult
+type GetSamplingRulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Pagination token. Not used.
+	NextToken *string `type:"string"`
+
+	// Rule definitions and metadata.
+	SamplingRuleRecords []SamplingRuleRecord `type:"list"`
+}
+
+// String returns the string representation
+func (s GetSamplingRulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSamplingRulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSamplingRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSamplingRulesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SamplingRuleRecords) > 0 {
+		v := s.SamplingRuleRecords
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SamplingRuleRecords", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummariesRequest
+type GetSamplingStatisticSummariesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Pagination token. Not used.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetSamplingStatisticSummariesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSamplingStatisticSummariesInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSamplingStatisticSummariesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummariesResult
+type GetSamplingStatisticSummariesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Pagination token. Not used.
+	NextToken *string `type:"string"`
+
+	// Information about the number of requests instrumented for each sampling rule.
+	SamplingStatisticSummaries []SamplingStatisticSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s GetSamplingStatisticSummariesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSamplingStatisticSummariesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSamplingStatisticSummariesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSamplingStatisticSummariesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SamplingStatisticSummaries) > 0 {
+		v := s.SamplingStatisticSummaries
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SamplingStatisticSummaries", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargetsRequest
+type GetSamplingTargetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Information about rules that the service is using to sample requests.
+	//
+	// SamplingStatisticsDocuments is a required field
+	SamplingStatisticsDocuments []SamplingStatisticsDocument `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSamplingTargetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSamplingTargetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSamplingTargetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSamplingTargetsInput"}
+
+	if s.SamplingStatisticsDocuments == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SamplingStatisticsDocuments"))
+	}
+	if s.SamplingStatisticsDocuments != nil {
+		for i, v := range s.SamplingStatisticsDocuments {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SamplingStatisticsDocuments", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSamplingTargetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.SamplingStatisticsDocuments) > 0 {
+		v := s.SamplingStatisticsDocuments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SamplingStatisticsDocuments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingTargetsResult
+type GetSamplingTargetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The last time a user changed the sampling rule configuration. If the sampling
+	// rule configuration changed since the service last retrieved it, the service
+	// should call GetSamplingRules to get the latest version.
+	LastRuleModification *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Updated rules that the service should use to sample requests.
+	SamplingTargetDocuments []SamplingTargetDocument `type:"list"`
+
+	// Information about SamplingStatisticsDocument that X-Ray could not process.
+	UnprocessedStatistics []UnprocessedStatistics `type:"list"`
+}
+
+// String returns the string representation
+func (s GetSamplingTargetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSamplingTargetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSamplingTargetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSamplingTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LastRuleModification != nil {
+		v := *s.LastRuleModification
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastRuleModification", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.SamplingTargetDocuments) > 0 {
+		v := s.SamplingTargetDocuments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SamplingTargetDocuments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.UnprocessedStatistics) > 0 {
+		v := s.UnprocessedStatistics
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UnprocessedStatistics", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -2163,6 +2921,697 @@ func (s PutTraceSegmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A sampling rule that services use to decide whether to instrument a request.
+// Rule fields can match properties of the service, or properties of a request.
+// The service can ignore rules that don't match its properties.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRule
+type SamplingRule struct {
+	_ struct{} `type:"structure"`
+
+	// Matches attributes derived from the request.
+	Attributes map[string]string `type:"map"`
+
+	// The percentage of matching requests to instrument, after the reservoir is
+	// exhausted.
+	//
+	// FixedRate is a required field
+	FixedRate *float64 `type:"double" required:"true"`
+
+	// Matches the HTTP method of a request.
+	//
+	// HTTPMethod is a required field
+	HTTPMethod *string `type:"string" required:"true"`
+
+	// Matches the hostname from a request URL.
+	//
+	// Host is a required field
+	Host *string `type:"string" required:"true"`
+
+	// The priority of the sampling rule.
+	//
+	// Priority is a required field
+	Priority *int64 `min:"1" type:"integer" required:"true"`
+
+	// A fixed number of matching requests to instrument per second, prior to applying
+	// the fixed rate. The reservoir is not used directly by services, but applies
+	// to all services using the rule collectively.
+	//
+	// ReservoirSize is a required field
+	ReservoirSize *int64 `type:"integer" required:"true"`
+
+	// Matches the ARN of the AWS resource on which the service runs.
+	//
+	// ResourceARN is a required field
+	ResourceARN *string `type:"string" required:"true"`
+
+	// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
+	// both.
+	RuleARN *string `type:"string"`
+
+	// The name of the sampling rule. Specify a rule by either name or ARN, but
+	// not both.
+	RuleName *string `min:"1" type:"string"`
+
+	// Matches the name that the service uses to identify itself in segments.
+	//
+	// ServiceName is a required field
+	ServiceName *string `type:"string" required:"true"`
+
+	// Matches the origin that the service uses to identify its type in segments.
+	//
+	// ServiceType is a required field
+	ServiceType *string `type:"string" required:"true"`
+
+	// Matches the path from a request URL.
+	//
+	// URLPath is a required field
+	URLPath *string `type:"string" required:"true"`
+
+	// The version of the sampling rule format (1).
+	//
+	// Version is a required field
+	Version *int64 `min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s SamplingRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SamplingRule) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SamplingRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SamplingRule"}
+
+	if s.FixedRate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FixedRate"))
+	}
+
+	if s.HTTPMethod == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HTTPMethod"))
+	}
+
+	if s.Host == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Host"))
+	}
+
+	if s.Priority == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
+	}
+	if s.Priority != nil && *s.Priority < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
+	}
+
+	if s.ReservoirSize == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservoirSize"))
+	}
+
+	if s.ResourceARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
+	}
+	if s.RuleName != nil && len(*s.RuleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
+	}
+
+	if s.ServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
+	}
+
+	if s.ServiceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceType"))
+	}
+
+	if s.URLPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("URLPath"))
+	}
+
+	if s.Version == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
+	}
+	if s.Version != nil && *s.Version < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Version", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingRule) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.FixedRate != nil {
+		v := *s.FixedRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedRate", protocol.Float64Value(v), metadata)
+	}
+	if s.HTTPMethod != nil {
+		v := *s.HTTPMethod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HTTPMethod", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Host != nil {
+		v := *s.Host
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Host", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
+	}
+	if s.ReservoirSize != nil {
+		v := *s.ReservoirSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservoirSize", protocol.Int64Value(v), metadata)
+	}
+	if s.ResourceARN != nil {
+		v := *s.ResourceARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RuleARN != nil {
+		v := *s.RuleARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceType != nil {
+		v := *s.ServiceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ServiceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.URLPath != nil {
+		v := *s.URLPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "URLPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// A SamplingRule and its metadata.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleRecord
+type SamplingRuleRecord struct {
+	_ struct{} `type:"structure"`
+
+	// When the rule was created.
+	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// When the rule was last modified.
+	ModifiedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The sampling rule.
+	SamplingRule *SamplingRule `type:"structure"`
+}
+
+// String returns the string representation
+func (s SamplingRuleRecord) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SamplingRuleRecord) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingRuleRecord) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.ModifiedAt != nil {
+		v := *s.ModifiedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ModifiedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.SamplingRule != nil {
+		v := s.SamplingRule
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingRule", v, metadata)
+	}
+	return nil
+}
+
+// A document specifying changes to a sampling rule's configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingRuleUpdate
+type SamplingRuleUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Matches attributes derived from the request.
+	Attributes map[string]string `type:"map"`
+
+	// The percentage of matching requests to instrument, after the reservoir is
+	// exhausted.
+	FixedRate *float64 `type:"double"`
+
+	// Matches the HTTP method of a request.
+	HTTPMethod *string `type:"string"`
+
+	// Matches the hostname from a request URL.
+	Host *string `type:"string"`
+
+	// The priority of the sampling rule.
+	Priority *int64 `type:"integer"`
+
+	// A fixed number of matching requests to instrument per second, prior to applying
+	// the fixed rate. The reservoir is not used directly by services, but applies
+	// to all services using the rule collectively.
+	ReservoirSize *int64 `type:"integer"`
+
+	// Matches the ARN of the AWS resource on which the service runs.
+	ResourceARN *string `type:"string"`
+
+	// The ARN of the sampling rule. Specify a rule by either name or ARN, but not
+	// both.
+	RuleARN *string `type:"string"`
+
+	// The name of the sampling rule. Specify a rule by either name or ARN, but
+	// not both.
+	RuleName *string `min:"1" type:"string"`
+
+	// Matches the name that the service uses to identify itself in segments.
+	ServiceName *string `type:"string"`
+
+	// Matches the origin that the service uses to identify its type in segments.
+	ServiceType *string `type:"string"`
+
+	// Matches the path from a request URL.
+	URLPath *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SamplingRuleUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SamplingRuleUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SamplingRuleUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SamplingRuleUpdate"}
+	if s.RuleName != nil && len(*s.RuleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingRuleUpdate) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.FixedRate != nil {
+		v := *s.FixedRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedRate", protocol.Float64Value(v), metadata)
+	}
+	if s.HTTPMethod != nil {
+		v := *s.HTTPMethod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HTTPMethod", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Host != nil {
+		v := *s.Host
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Host", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
+	}
+	if s.ReservoirSize != nil {
+		v := *s.ReservoirSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservoirSize", protocol.Int64Value(v), metadata)
+	}
+	if s.ResourceARN != nil {
+		v := *s.ResourceARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RuleARN != nil {
+		v := *s.RuleARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceType != nil {
+		v := *s.ServiceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ServiceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.URLPath != nil {
+		v := *s.URLPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "URLPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Aggregated request sampling data for a sampling rule across all services
+// for a 10 second window.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStatisticSummary
+type SamplingStatisticSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The number of requests recorded with borrowed reservoir quota.
+	BorrowCount *int64 `type:"integer"`
+
+	// The number of requests that matched the rule.
+	RequestCount *int64 `type:"integer"`
+
+	// The name of the sampling rule.
+	RuleName *string `type:"string"`
+
+	// The number of requests recorded.
+	SampledCount *int64 `type:"integer"`
+
+	// The start time of the reporting window.
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s SamplingStatisticSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SamplingStatisticSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingStatisticSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BorrowCount != nil {
+		v := *s.BorrowCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BorrowCount", protocol.Int64Value(v), metadata)
+	}
+	if s.RequestCount != nil {
+		v := *s.RequestCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestCount", protocol.Int64Value(v), metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SampledCount != nil {
+		v := *s.SampledCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SampledCount", protocol.Int64Value(v), metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// Request sampling results for a single rule from a service. Results are for
+// the last 10 seconds unless the service has been assigned a longer reporting
+// interval after a previous call to GetSamplingTargets.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingStatisticsDocument
+type SamplingStatisticsDocument struct {
+	_ struct{} `type:"structure"`
+
+	// The number of requests recorded with borrowed reservoir quota.
+	BorrowCount *int64 `type:"integer"`
+
+	// A unique identifier for the service in hexadecimal.
+	//
+	// ClientID is a required field
+	ClientID *string `min:"24" type:"string" required:"true"`
+
+	// The number of requests that matched the rule.
+	//
+	// RequestCount is a required field
+	RequestCount *int64 `type:"integer" required:"true"`
+
+	// The name of the sampling rule.
+	//
+	// RuleName is a required field
+	RuleName *string `min:"1" type:"string" required:"true"`
+
+	// The number of requests recorded.
+	//
+	// SampledCount is a required field
+	SampledCount *int64 `type:"integer" required:"true"`
+
+	// The current time.
+	//
+	// Timestamp is a required field
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+}
+
+// String returns the string representation
+func (s SamplingStatisticsDocument) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SamplingStatisticsDocument) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SamplingStatisticsDocument) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SamplingStatisticsDocument"}
+
+	if s.ClientID == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientID"))
+	}
+	if s.ClientID != nil && len(*s.ClientID) < 24 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientID", 24))
+	}
+
+	if s.RequestCount == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RequestCount"))
+	}
+
+	if s.RuleName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
+	}
+	if s.RuleName != nil && len(*s.RuleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
+	}
+
+	if s.SampledCount == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SampledCount"))
+	}
+
+	if s.Timestamp == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingStatisticsDocument) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BorrowCount != nil {
+		v := *s.BorrowCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BorrowCount", protocol.Int64Value(v), metadata)
+	}
+	if s.ClientID != nil {
+		v := *s.ClientID
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ClientID", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestCount != nil {
+		v := *s.RequestCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestCount", protocol.Int64Value(v), metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SampledCount != nil {
+		v := *s.SampledCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SampledCount", protocol.Int64Value(v), metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// Temporary changes to a sampling rule configuration. To meet the global sampling
+// target for a rule, X-Ray calculates a new reservoir for each service based
+// on the recent sampling results of all services that called GetSamplingTargets.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/SamplingTargetDocument
+type SamplingTargetDocument struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of matching requests to instrument, after the reservoir is
+	// exhausted.
+	FixedRate *float64 `type:"double"`
+
+	// The number of seconds for the service to wait before getting sampling targets
+	// again.
+	Interval *int64 `type:"integer"`
+
+	// The number of requests per second that X-Ray allocated this service.
+	ReservoirQuota *int64 `type:"integer"`
+
+	// When the reservoir quota expires.
+	ReservoirQuotaTTL *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the sampling rule.
+	RuleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SamplingTargetDocument) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SamplingTargetDocument) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SamplingTargetDocument) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FixedRate != nil {
+		v := *s.FixedRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedRate", protocol.Float64Value(v), metadata)
+	}
+	if s.Interval != nil {
+		v := *s.Interval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.Int64Value(v), metadata)
+	}
+	if s.ReservoirQuota != nil {
+		v := *s.ReservoirQuota
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservoirQuota", protocol.Int64Value(v), metadata)
+	}
+	if s.ReservoirQuotaTTL != nil {
+		v := *s.ReservoirQuotaTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservoirQuotaTTL", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A segment from a trace that has been ingested by the X-Ray service. The segment
 // can be compiled from documents uploaded with PutTraceSegments, or an inferred
 // segment for a downstream service, generated from a subsegment sent by the
@@ -2840,6 +4289,55 @@ func (s TraceUser) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Sampling statistics from a call to GetSamplingTargets that X-Ray could not
+// process.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UnprocessedStatistics
+type UnprocessedStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	ErrorCode *string `type:"string"`
+
+	// The error message.
+	Message *string `type:"string"`
+
+	// The name of the sampling rule.
+	RuleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UnprocessedStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UnprocessedStatistics) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UnprocessedStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ErrorCode != nil {
+		v := *s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RuleName != nil {
+		v := *s.RuleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RuleName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about a segment that failed processing.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UnprocessedTraceSegment
 type UnprocessedTraceSegment struct {
@@ -2884,6 +4382,93 @@ func (s UnprocessedTraceSegment) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRuleRequest
+type UpdateSamplingRuleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The rule and fields to change.
+	//
+	// SamplingRuleUpdate is a required field
+	SamplingRuleUpdate *SamplingRuleUpdate `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateSamplingRuleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSamplingRuleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateSamplingRuleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSamplingRuleInput"}
+
+	if s.SamplingRuleUpdate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SamplingRuleUpdate"))
+	}
+	if s.SamplingRuleUpdate != nil {
+		if err := s.SamplingRuleUpdate.Validate(); err != nil {
+			invalidParams.AddNested("SamplingRuleUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateSamplingRuleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.SamplingRuleUpdate != nil {
+		v := s.SamplingRuleUpdate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingRuleUpdate", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateSamplingRuleResult
+type UpdateSamplingRuleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The updated rule definition and metadata.
+	SamplingRuleRecord *SamplingRuleRecord `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateSamplingRuleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSamplingRuleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSamplingRuleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateSamplingRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SamplingRuleRecord != nil {
+		v := s.SamplingRuleRecord
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SamplingRuleRecord", v, metadata)
 	}
 	return nil
 }

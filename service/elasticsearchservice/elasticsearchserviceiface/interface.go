@@ -82,6 +82,12 @@ type ElasticsearchServiceAPI interface {
 
 	DescribeReservedElasticsearchInstancesRequest(*elasticsearchservice.DescribeReservedElasticsearchInstancesInput) elasticsearchservice.DescribeReservedElasticsearchInstancesRequest
 
+	GetCompatibleElasticsearchVersionsRequest(*elasticsearchservice.GetCompatibleElasticsearchVersionsInput) elasticsearchservice.GetCompatibleElasticsearchVersionsRequest
+
+	GetUpgradeHistoryRequest(*elasticsearchservice.GetUpgradeHistoryInput) elasticsearchservice.GetUpgradeHistoryRequest
+
+	GetUpgradeStatusRequest(*elasticsearchservice.GetUpgradeStatusInput) elasticsearchservice.GetUpgradeStatusRequest
+
 	ListDomainNamesRequest(*elasticsearchservice.ListDomainNamesInput) elasticsearchservice.ListDomainNamesRequest
 
 	ListElasticsearchInstanceTypesRequest(*elasticsearchservice.ListElasticsearchInstanceTypesInput) elasticsearchservice.ListElasticsearchInstanceTypesRequest
@@ -95,6 +101,8 @@ type ElasticsearchServiceAPI interface {
 	RemoveTagsRequest(*elasticsearchservice.RemoveTagsInput) elasticsearchservice.RemoveTagsRequest
 
 	UpdateElasticsearchDomainConfigRequest(*elasticsearchservice.UpdateElasticsearchDomainConfigInput) elasticsearchservice.UpdateElasticsearchDomainConfigRequest
+
+	UpgradeElasticsearchDomainRequest(*elasticsearchservice.UpgradeElasticsearchDomainInput) elasticsearchservice.UpgradeElasticsearchDomainRequest
 }
 
 var _ ElasticsearchServiceAPI = (*elasticsearchservice.ElasticsearchService)(nil)

@@ -48,6 +48,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
+	"github.com/aws/aws-sdk-go-v2/service/dlm"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
@@ -89,6 +90,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
+	"github.com/aws/aws-sdk-go-v2/service/macie"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
@@ -128,6 +130,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 	"github.com/aws/aws-sdk-go-v2/service/shield"
+	"github.com/aws/aws-sdk-go-v2/service/signer"
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
 	"github.com/aws/aws-sdk-go-v2/service/sms"
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
@@ -204,6 +207,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "devicefarm", value: reflect.ValueOf(devicefarm.New(cfg))},
 		{name: "directconnect", value: reflect.ValueOf(directconnect.New(cfg))},
 		{name: "directoryservice", value: reflect.ValueOf(directoryservice.New(cfg))},
+		{name: "dlm", value: reflect.ValueOf(dlm.New(cfg))},
 		{name: "dynamodb", value: reflect.ValueOf(dynamodb.New(cfg))},
 		{name: "dynamodbstreams", value: reflect.ValueOf(dynamodbstreams.New(cfg))},
 		{name: "ec2", value: reflect.ValueOf(ec2.New(cfg))},
@@ -245,6 +249,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "lexruntimeservice", value: reflect.ValueOf(lexruntimeservice.New(cfg))},
 		{name: "lightsail", value: reflect.ValueOf(lightsail.New(cfg))},
 		{name: "machinelearning", value: reflect.ValueOf(machinelearning.New(cfg))},
+		{name: "macie", value: reflect.ValueOf(macie.New(cfg))},
 		{name: "marketplacecommerceanalytics", value: reflect.ValueOf(marketplacecommerceanalytics.New(cfg))},
 		{name: "marketplaceentitlementservice", value: reflect.ValueOf(marketplaceentitlementservice.New(cfg))},
 		{name: "marketplacemetering", value: reflect.ValueOf(marketplacemetering.New(cfg))},
@@ -284,6 +289,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "ses", value: reflect.ValueOf(ses.New(cfg))},
 		{name: "sfn", value: reflect.ValueOf(sfn.New(cfg))},
 		{name: "shield", value: reflect.ValueOf(shield.New(cfg))},
+		{name: "signer", value: reflect.ValueOf(signer.New(cfg))},
 		{name: "simpledb", value: reflect.ValueOf(simpledb.New(cfg))},
 		{name: "sms", value: reflect.ValueOf(sms.New(cfg))},
 		{name: "snowball", value: reflect.ValueOf(snowball.New(cfg))},

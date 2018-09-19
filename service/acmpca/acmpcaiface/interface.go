@@ -86,6 +86,8 @@ type ACMPCAAPI interface {
 
 	ListTagsRequest(*acmpca.ListTagsInput) acmpca.ListTagsRequest
 
+	RestoreCertificateAuthorityRequest(*acmpca.RestoreCertificateAuthorityInput) acmpca.RestoreCertificateAuthorityRequest
+
 	RevokeCertificateRequest(*acmpca.RevokeCertificateInput) acmpca.RevokeCertificateRequest
 
 	TagCertificateAuthorityRequest(*acmpca.TagCertificateAuthorityInput) acmpca.TagCertificateAuthorityRequest

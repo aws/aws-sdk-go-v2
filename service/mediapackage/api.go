@@ -536,7 +536,8 @@ func (r RotateChannelCredentialsRequest) Send() (*RotateChannelCredentialsOutput
 // RotateChannelCredentialsRequest returns a request value for making API operation for
 // AWS Elemental MediaPackage.
 //
-// Changes the Channel ingest username and password.
+// Changes the Channel's first IngestEndpoint's username and password. WARNING
+// - This API is deprecated. Please use RotateIngestEndpointCredentials instead
 //
 //    // Example sending a request using the RotateChannelCredentialsRequest method.
 //    req := client.RotateChannelCredentialsRequest(params)
@@ -547,6 +548,9 @@ func (r RotateChannelCredentialsRequest) Send() (*RotateChannelCredentialsOutput
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentials
 func (c *MediaPackage) RotateChannelCredentialsRequest(input *RotateChannelCredentialsInput) RotateChannelCredentialsRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, RotateChannelCredentials, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opRotateChannelCredentials,
 		HTTPMethod: "PUT",
@@ -562,6 +566,57 @@ func (c *MediaPackage) RotateChannelCredentialsRequest(input *RotateChannelCrede
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RotateChannelCredentialsRequest{Request: req, Input: input, Copy: c.RotateChannelCredentialsRequest}
+}
+
+const opRotateIngestEndpointCredentials = "RotateIngestEndpointCredentials"
+
+// RotateIngestEndpointCredentialsRequest is a API request type for the RotateIngestEndpointCredentials API operation.
+type RotateIngestEndpointCredentialsRequest struct {
+	*aws.Request
+	Input *RotateIngestEndpointCredentialsInput
+	Copy  func(*RotateIngestEndpointCredentialsInput) RotateIngestEndpointCredentialsRequest
+}
+
+// Send marshals and sends the RotateIngestEndpointCredentials API request.
+func (r RotateIngestEndpointCredentialsRequest) Send() (*RotateIngestEndpointCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RotateIngestEndpointCredentialsOutput), nil
+}
+
+// RotateIngestEndpointCredentialsRequest returns a request value for making API operation for
+// AWS Elemental MediaPackage.
+//
+// Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's
+// id.
+//
+//    // Example sending a request using the RotateIngestEndpointCredentialsRequest method.
+//    req := client.RotateIngestEndpointCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentials
+func (c *MediaPackage) RotateIngestEndpointCredentialsRequest(input *RotateIngestEndpointCredentialsInput) RotateIngestEndpointCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opRotateIngestEndpointCredentials,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/channels/{id}/ingest_endpoints/{ingest_endpoint_id}/credentials",
+	}
+
+	if input == nil {
+		input = &RotateIngestEndpointCredentialsInput{}
+	}
+
+	output := &RotateIngestEndpointCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RotateIngestEndpointCredentialsRequest{Request: req, Input: input, Copy: c.RotateIngestEndpointCredentialsRequest}
 }
 
 const opUpdateChannel = "UpdateChannel"
@@ -1446,6 +1501,13 @@ type DashPackage struct {
 	// Streaming over HTTP (DASH) Media Presentation Description (MPD).
 	MinUpdatePeriodSeconds *int64 `locationName:"minUpdatePeriodSeconds" type:"integer"`
 
+	// A list of triggers that controls when the outgoing Dynamic Adaptive Streaming
+	// over HTTP (DASH)Media Presentation Description (MPD) will be partitioned
+	// into multiple periods. If empty, the content will notbe partitioned into
+	// more than one period. If the list contains "ADS", new periods will be created
+	// wherethe Channel source contains SCTE-35 ad markers.
+	PeriodTriggers []__PeriodTriggersElement `locationName:"periodTriggers" type:"list"`
+
 	// The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When set to
 	// "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
 	Profile Profile `locationName:"profile" type:"string" enum:"true"`
@@ -1511,6 +1573,18 @@ func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minUpdatePeriodSeconds", protocol.Int64Value(v), metadata)
+	}
+	if len(s.PeriodTriggers) > 0 {
+		v := s.PeriodTriggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "periodTriggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	if len(s.Profile) > 0 {
 		v := s.Profile
@@ -2460,6 +2534,9 @@ func (s HlsPackage) MarshalFields(e protocol.FieldEncoder) error {
 type IngestEndpoint struct {
 	_ struct{} `type:"structure"`
 
+	// The system generated unique identifier for the IngestEndpoint
+	Id *string `locationName:"id" type:"string"`
+
 	// The system generated password for ingest authentication.
 	Password *string `locationName:"password" type:"string"`
 
@@ -2482,6 +2559,12 @@ func (s IngestEndpoint) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s IngestEndpoint) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Password != nil {
 		v := *s.Password
 
@@ -2983,7 +3066,7 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsRequest
 type RotateChannelCredentialsInput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
 	// Id is a required field
 	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
@@ -3028,7 +3111,7 @@ func (s RotateChannelCredentialsInput) MarshalFields(e protocol.FieldEncoder) er
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsResponse
 type RotateChannelCredentialsOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
 	responseMetadata aws.Response
 
@@ -3059,6 +3142,124 @@ func (s RotateChannelCredentialsOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RotateChannelCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsIngest != nil {
+		v := s.HlsIngest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsRequest
+type RotateIngestEndpointCredentialsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Id is a required field
+	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
+
+	// IngestEndpointId is a required field
+	IngestEndpointId *string `location:"uri" locationName:"ingest_endpoint_id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RotateIngestEndpointCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RotateIngestEndpointCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RotateIngestEndpointCredentialsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RotateIngestEndpointCredentialsInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if s.IngestEndpointId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IngestEndpointId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RotateIngestEndpointCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IngestEndpointId != nil {
+		v := *s.IngestEndpointId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ingest_endpoint_id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateIngestEndpointCredentialsResponse
+type RotateIngestEndpointCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Arn *string `locationName:"arn" type:"string"`
+
+	Description *string `locationName:"description" type:"string"`
+
+	// An HTTP Live Streaming (HLS) ingest resource configuration.
+	HlsIngest *HlsIngest `locationName:"hlsIngest" type:"structure"`
+
+	Id *string `locationName:"id" type:"string"`
+}
+
+// String returns the string representation
+func (s RotateIngestEndpointCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RotateIngestEndpointCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RotateIngestEndpointCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RotateIngestEndpointCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Arn != nil {
 		v := *s.Arn
 
@@ -3718,6 +3919,22 @@ func (enum StreamOrder) MarshalValue() (string, error) {
 }
 
 func (enum StreamOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type __PeriodTriggersElement string
+
+// Enum values for __PeriodTriggersElement
+const (
+	__PeriodTriggersElementAds __PeriodTriggersElement = "ADS"
+)
+
+func (enum __PeriodTriggersElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum __PeriodTriggersElement) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

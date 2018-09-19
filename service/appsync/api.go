@@ -1577,6 +1577,9 @@ type CreateDataSourceInput struct {
 	// Amazon Elasticsearch settings.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig `locationName:"elasticsearchConfig" type:"structure"`
 
+	// Http endpoint settings.
+	HttpConfig *HttpDataSourceConfig `locationName:"httpConfig" type:"structure"`
+
 	// AWS Lambda settings.
 	LambdaConfig *LambdaDataSourceConfig `locationName:"lambdaConfig" type:"structure"`
 
@@ -1662,6 +1665,12 @@ func (s CreateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "elasticsearchConfig", v, metadata)
+	}
+	if s.HttpConfig != nil {
+		v := s.HttpConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpConfig", v, metadata)
 	}
 	if s.LambdaConfig != nil {
 		v := s.LambdaConfig
@@ -2164,6 +2173,9 @@ type DataSource struct {
 	// Amazon Elasticsearch settings.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig `locationName:"elasticsearchConfig" type:"structure"`
 
+	// Http endpoint settings.
+	HttpConfig *HttpDataSourceConfig `locationName:"httpConfig" type:"structure"`
+
 	// Lambda settings.
 	LambdaConfig *LambdaDataSourceConfig `locationName:"lambdaConfig" type:"structure"`
 
@@ -2187,6 +2199,8 @@ type DataSource struct {
 	//    to invoke a GraphQL operation without connecting to a data source, such
 	//    as performing data transformation with resolvers or triggering a subscription
 	//    to be invoked from a mutation.
+	//
+	//    * HTTP: The data source is an HTTP endpoint.
 	Type DataSourceType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -2225,6 +2239,12 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "elasticsearchConfig", v, metadata)
+	}
+	if s.HttpConfig != nil {
+		v := s.HttpConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpConfig", v, metadata)
 	}
 	if s.LambdaConfig != nil {
 		v := s.LambdaConfig
@@ -3526,6 +3546,39 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes a Http data source configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/HttpDataSourceConfig
+type HttpDataSourceConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Http url endpoint. You can either specify the domain name or ip and port
+	// combination and the url scheme must be http(s). If the port is not specified,
+	// AWS AppSync will use the default port 80 for http endpoint and port 443 for
+	// https endpoints.
+	Endpoint *string `locationName:"endpoint" type:"string"`
+}
+
+// String returns the string representation
+func (s HttpDataSourceConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HttpDataSourceConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Describes a Lambda data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaDataSourceConfig
 type LambdaDataSourceConfig struct {
@@ -4698,6 +4751,9 @@ type UpdateDataSourceInput struct {
 	// The new Elasticsearch configuration.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig `locationName:"elasticsearchConfig" type:"structure"`
 
+	// The new http endpoint configuration
+	HttpConfig *HttpDataSourceConfig `locationName:"httpConfig" type:"structure"`
+
 	// The new Lambda configuration.
 	LambdaConfig *LambdaDataSourceConfig `locationName:"lambdaConfig" type:"structure"`
 
@@ -4782,6 +4838,12 @@ func (s UpdateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "elasticsearchConfig", v, metadata)
+	}
+	if s.HttpConfig != nil {
+		v := s.HttpConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpConfig", v, metadata)
 	}
 	if s.LambdaConfig != nil {
 		v := s.LambdaConfig
@@ -5394,6 +5456,7 @@ const (
 	DataSourceTypeAmazonDynamodb      DataSourceType = "AMAZON_DYNAMODB"
 	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
 	DataSourceTypeNone                DataSourceType = "NONE"
+	DataSourceTypeHttp                DataSourceType = "HTTP"
 )
 
 func (enum DataSourceType) MarshalValue() (string, error) {

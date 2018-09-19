@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Connect Service.
 //    func myFunc(svc connectiface.ConnectAPI) bool {
-//        // Make svc.StartOutboundVoiceContact request
+//        // Make svc.CreateUser request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockConnectClient struct {
 //        connectiface.ConnectAPI
 //    }
-//    func (m *mockConnectClient) StartOutboundVoiceContact(input *connect.StartOutboundVoiceContactInput) (*connect.StartOutboundVoiceContactOutput, error) {
+//    func (m *mockConnectClient) CreateUser(input *connect.CreateUserInput) (*connect.CreateUserOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,9 +62,45 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ConnectAPI interface {
+	CreateUserRequest(*connect.CreateUserInput) connect.CreateUserRequest
+
+	DeleteUserRequest(*connect.DeleteUserInput) connect.DeleteUserRequest
+
+	DescribeUserRequest(*connect.DescribeUserInput) connect.DescribeUserRequest
+
+	DescribeUserHierarchyGroupRequest(*connect.DescribeUserHierarchyGroupInput) connect.DescribeUserHierarchyGroupRequest
+
+	DescribeUserHierarchyStructureRequest(*connect.DescribeUserHierarchyStructureInput) connect.DescribeUserHierarchyStructureRequest
+
+	GetCurrentMetricDataRequest(*connect.GetCurrentMetricDataInput) connect.GetCurrentMetricDataRequest
+
+	GetFederationTokenRequest(*connect.GetFederationTokenInput) connect.GetFederationTokenRequest
+
+	GetMetricDataRequest(*connect.GetMetricDataInput) connect.GetMetricDataRequest
+
+	ListRoutingProfilesRequest(*connect.ListRoutingProfilesInput) connect.ListRoutingProfilesRequest
+
+	ListSecurityProfilesRequest(*connect.ListSecurityProfilesInput) connect.ListSecurityProfilesRequest
+
+	ListUserHierarchyGroupsRequest(*connect.ListUserHierarchyGroupsInput) connect.ListUserHierarchyGroupsRequest
+
+	ListUsersRequest(*connect.ListUsersInput) connect.ListUsersRequest
+
 	StartOutboundVoiceContactRequest(*connect.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
 
 	StopContactRequest(*connect.StopContactInput) connect.StopContactRequest
+
+	UpdateContactAttributesRequest(*connect.UpdateContactAttributesInput) connect.UpdateContactAttributesRequest
+
+	UpdateUserHierarchyRequest(*connect.UpdateUserHierarchyInput) connect.UpdateUserHierarchyRequest
+
+	UpdateUserIdentityInfoRequest(*connect.UpdateUserIdentityInfoInput) connect.UpdateUserIdentityInfoRequest
+
+	UpdateUserPhoneConfigRequest(*connect.UpdateUserPhoneConfigInput) connect.UpdateUserPhoneConfigRequest
+
+	UpdateUserRoutingProfileRequest(*connect.UpdateUserRoutingProfileInput) connect.UpdateUserRoutingProfileRequest
+
+	UpdateUserSecurityProfilesRequest(*connect.UpdateUserSecurityProfilesInput) connect.UpdateUserSecurityProfilesRequest
 }
 
 var _ ConnectAPI = (*connect.Connect)(nil)

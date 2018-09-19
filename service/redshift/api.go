@@ -11,6 +11,58 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
+const opAcceptReservedNodeExchange = "AcceptReservedNodeExchange"
+
+// AcceptReservedNodeExchangeRequest is a API request type for the AcceptReservedNodeExchange API operation.
+type AcceptReservedNodeExchangeRequest struct {
+	*aws.Request
+	Input *AcceptReservedNodeExchangeInput
+	Copy  func(*AcceptReservedNodeExchangeInput) AcceptReservedNodeExchangeRequest
+}
+
+// Send marshals and sends the AcceptReservedNodeExchange API request.
+func (r AcceptReservedNodeExchangeRequest) Send() (*AcceptReservedNodeExchangeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AcceptReservedNodeExchangeOutput), nil
+}
+
+// AcceptReservedNodeExchangeRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to
+// the configuration (term, payment type, or number of nodes) and no additional
+// costs.
+//
+//    // Example sending a request using the AcceptReservedNodeExchangeRequest method.
+//    req := client.AcceptReservedNodeExchangeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchange
+func (c *Redshift) AcceptReservedNodeExchangeRequest(input *AcceptReservedNodeExchangeInput) AcceptReservedNodeExchangeRequest {
+	op := &aws.Operation{
+		Name:       opAcceptReservedNodeExchange,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AcceptReservedNodeExchangeInput{}
+	}
+
+	output := &AcceptReservedNodeExchangeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AcceptReservedNodeExchangeRequest{Request: req, Input: input, Copy: c.AcceptReservedNodeExchangeRequest}
+}
+
 const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIngress"
 
 // AuthorizeClusterSecurityGroupIngressRequest is a API request type for the AuthorizeClusterSecurityGroupIngress API operation.
@@ -220,10 +272,10 @@ func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 //
 // Creates a new cluster.
 //
-// To create the cluster in Virtual Private Cloud (VPC), you must provide a
-// cluster subnet group name. The cluster subnet group identifies the subnets
-// of your VPC that Amazon Redshift uses when creating the cluster. For more
-// information about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
+// To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster
+// subnet group name. The cluster subnet group identifies the subnets of your
+// VPC that Amazon Redshift uses when creating the cluster. For more information
+// about managing clusters, go to Amazon Redshift Clusters (http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
 // in the Amazon Redshift Cluster Management Guide.
 //
 //    // Example sending a request using the CreateClusterRequest method.
@@ -1329,6 +1381,56 @@ func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
+const opDescribeClusterDbRevisions = "DescribeClusterDbRevisions"
+
+// DescribeClusterDbRevisionsRequest is a API request type for the DescribeClusterDbRevisions API operation.
+type DescribeClusterDbRevisionsRequest struct {
+	*aws.Request
+	Input *DescribeClusterDbRevisionsInput
+	Copy  func(*DescribeClusterDbRevisionsInput) DescribeClusterDbRevisionsRequest
+}
+
+// Send marshals and sends the DescribeClusterDbRevisions API request.
+func (r DescribeClusterDbRevisionsRequest) Send() (*DescribeClusterDbRevisionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterDbRevisionsOutput), nil
+}
+
+// DescribeClusterDbRevisionsRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Returns an array of ClusterDbRevision objects.
+//
+//    // Example sending a request using the DescribeClusterDbRevisionsRequest method.
+//    req := client.DescribeClusterDbRevisionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterDbRevisions
+func (c *Redshift) DescribeClusterDbRevisionsRequest(input *DescribeClusterDbRevisionsInput) DescribeClusterDbRevisionsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusterDbRevisions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeClusterDbRevisionsInput{}
+	}
+
+	output := &DescribeClusterDbRevisionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeClusterDbRevisionsRequest{Request: req, Input: input, Copy: c.DescribeClusterDbRevisionsRequest}
+}
+
 const opDescribeClusterParameterGroups = "DescribeClusterParameterGroups"
 
 // DescribeClusterParameterGroupsRequest is a API request type for the DescribeClusterParameterGroups API operation.
@@ -1908,6 +2010,56 @@ type DescribeClusterSubnetGroupsPager struct {
 
 func (p *DescribeClusterSubnetGroupsPager) CurrentPage() *DescribeClusterSubnetGroupsOutput {
 	return p.Pager.CurrentPage().(*DescribeClusterSubnetGroupsOutput)
+}
+
+const opDescribeClusterTracks = "DescribeClusterTracks"
+
+// DescribeClusterTracksRequest is a API request type for the DescribeClusterTracks API operation.
+type DescribeClusterTracksRequest struct {
+	*aws.Request
+	Input *DescribeClusterTracksInput
+	Copy  func(*DescribeClusterTracksInput) DescribeClusterTracksRequest
+}
+
+// Send marshals and sends the DescribeClusterTracks API request.
+func (r DescribeClusterTracksRequest) Send() (*DescribeClusterTracksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClusterTracksOutput), nil
+}
+
+// DescribeClusterTracksRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Returns a list of all the available maintenance tracks.
+//
+//    // Example sending a request using the DescribeClusterTracksRequest method.
+//    req := client.DescribeClusterTracksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracks
+func (c *Redshift) DescribeClusterTracksRequest(input *DescribeClusterTracksInput) DescribeClusterTracksRequest {
+	op := &aws.Operation{
+		Name:       opDescribeClusterTracks,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeClusterTracksInput{}
+	}
+
+	output := &DescribeClusterTracksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeClusterTracksRequest{Request: req, Input: input, Copy: c.DescribeClusterTracksRequest}
 }
 
 const opDescribeClusterVersions = "DescribeClusterVersions"
@@ -3628,6 +3780,57 @@ func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInpu
 	return GetClusterCredentialsRequest{Request: req, Input: input, Copy: c.GetClusterCredentialsRequest}
 }
 
+const opGetReservedNodeExchangeOfferings = "GetReservedNodeExchangeOfferings"
+
+// GetReservedNodeExchangeOfferingsRequest is a API request type for the GetReservedNodeExchangeOfferings API operation.
+type GetReservedNodeExchangeOfferingsRequest struct {
+	*aws.Request
+	Input *GetReservedNodeExchangeOfferingsInput
+	Copy  func(*GetReservedNodeExchangeOfferingsInput) GetReservedNodeExchangeOfferingsRequest
+}
+
+// Send marshals and sends the GetReservedNodeExchangeOfferings API request.
+func (r GetReservedNodeExchangeOfferingsRequest) Send() (*GetReservedNodeExchangeOfferingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetReservedNodeExchangeOfferingsOutput), nil
+}
+
+// GetReservedNodeExchangeOfferingsRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Returns an array of DC2 ReservedNodeOfferings that matches the payment type,
+// term, and usage price of the given DC1 reserved node.
+//
+//    // Example sending a request using the GetReservedNodeExchangeOfferingsRequest method.
+//    req := client.GetReservedNodeExchangeOfferingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferings
+func (c *Redshift) GetReservedNodeExchangeOfferingsRequest(input *GetReservedNodeExchangeOfferingsInput) GetReservedNodeExchangeOfferingsRequest {
+	op := &aws.Operation{
+		Name:       opGetReservedNodeExchangeOfferings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetReservedNodeExchangeOfferingsInput{}
+	}
+
+	output := &GetReservedNodeExchangeOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetReservedNodeExchangeOfferingsRequest{Request: req, Input: input, Copy: c.GetReservedNodeExchangeOfferingsRequest}
+}
+
 const opModifyCluster = "ModifyCluster"
 
 // ModifyClusterRequest is a API request type for the ModifyCluster API operation.
@@ -3686,6 +3889,57 @@ func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) ModifyCluster
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ModifyClusterRequest{Request: req, Input: input, Copy: c.ModifyClusterRequest}
+}
+
+const opModifyClusterDbRevision = "ModifyClusterDbRevision"
+
+// ModifyClusterDbRevisionRequest is a API request type for the ModifyClusterDbRevision API operation.
+type ModifyClusterDbRevisionRequest struct {
+	*aws.Request
+	Input *ModifyClusterDbRevisionInput
+	Copy  func(*ModifyClusterDbRevisionInput) ModifyClusterDbRevisionRequest
+}
+
+// Send marshals and sends the ModifyClusterDbRevision API request.
+func (r ModifyClusterDbRevisionRequest) Send() (*ModifyClusterDbRevisionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterDbRevisionOutput), nil
+}
+
+// ModifyClusterDbRevisionRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Modifies the database revision of a cluster. The database revision is a unique
+// revision of the database running in a cluster.
+//
+//    // Example sending a request using the ModifyClusterDbRevisionRequest method.
+//    req := client.ModifyClusterDbRevisionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevision
+func (c *Redshift) ModifyClusterDbRevisionRequest(input *ModifyClusterDbRevisionInput) ModifyClusterDbRevisionRequest {
+	op := &aws.Operation{
+		Name:       opModifyClusterDbRevision,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyClusterDbRevisionInput{}
+	}
+
+	output := &ModifyClusterDbRevisionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifyClusterDbRevisionRequest{Request: req, Input: input, Copy: c.ModifyClusterDbRevisionRequest}
 }
 
 const opModifyClusterIamRoles = "ModifyClusterIamRoles"
@@ -4115,6 +4369,73 @@ func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParamete
 	return ResetClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ResetClusterParameterGroupRequest}
 }
 
+const opResizeCluster = "ResizeCluster"
+
+// ResizeClusterRequest is a API request type for the ResizeCluster API operation.
+type ResizeClusterRequest struct {
+	*aws.Request
+	Input *ResizeClusterInput
+	Copy  func(*ResizeClusterInput) ResizeClusterRequest
+}
+
+// Send marshals and sends the ResizeCluster API request.
+func (r ResizeClusterRequest) Send() (*ResizeClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResizeClusterOutput), nil
+}
+
+// ResizeClusterRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Changes the size of the cluster. You can change the cluster's type, or change
+// the number or type of nodes. The default behavior is to use the elastic resize
+// method. With an elastic resize your cluster is avaialble for read and write
+// operations more quickly than with the classic resize method.
+//
+// Elastic resize operations have the following restrictions:
+//
+//    * You can only resize clusters of the following types:
+//
+// dc2.large
+//
+// dc2.8xlarge
+//
+// ds2.xlarge
+//
+// ds2.8xlarge
+//
+//    * The type of nodes you add must match the node type for the cluster.
+//
+//    // Example sending a request using the ResizeClusterRequest method.
+//    req := client.ResizeClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeCluster
+func (c *Redshift) ResizeClusterRequest(input *ResizeClusterInput) ResizeClusterRequest {
+	op := &aws.Operation{
+		Name:       opResizeCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ResizeClusterInput{}
+	}
+
+	output := &ResizeClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ResizeClusterRequest{Request: req, Input: input, Copy: c.ResizeClusterRequest}
+}
+
 const opRestoreFromClusterSnapshot = "RestoreFromClusterSnapshot"
 
 // RestoreFromClusterSnapshotRequest is a API request type for the RestoreFromClusterSnapshot API operation.
@@ -4399,6 +4720,77 @@ func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) R
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RotateEncryptionKeyRequest{Request: req, Input: input, Copy: c.RotateEncryptionKeyRequest}
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeInputMessage
+type AcceptReservedNodeExchangeInput struct {
+	_ struct{} `type:"structure"`
+
+	// A string representing the node identifier of the DC1 Reserved Node to be
+	// exchanged.
+	//
+	// ReservedNodeId is a required field
+	ReservedNodeId *string `type:"string" required:"true"`
+
+	// The unique identifier of the DC2 Reserved Node offering to be used for the
+	// exchange. You can obtain the value for the parameter by calling GetReservedNodeExchangeOfferings
+	//
+	// TargetReservedNodeOfferingId is a required field
+	TargetReservedNodeOfferingId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AcceptReservedNodeExchangeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AcceptReservedNodeExchangeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AcceptReservedNodeExchangeInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptReservedNodeExchangeInput"}
+
+	if s.ReservedNodeId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservedNodeId"))
+	}
+
+	if s.TargetReservedNodeOfferingId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetReservedNodeOfferingId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeOutputMessage
+type AcceptReservedNodeExchangeOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Describes a reserved node. You can call the DescribeReservedNodeOfferings
+	// API to obtain the available reserved node offerings.
+	ExchangedReservedNode *ReservedNode `type:"structure"`
+}
+
+// String returns the string representation
+func (s AcceptReservedNodeExchangeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AcceptReservedNodeExchangeOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AcceptReservedNodeExchangeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Describes an AWS customer account authorized to restore a snapshot.
@@ -4690,6 +5082,10 @@ type Cluster struct {
 	// The status of the elastic IP (EIP) address.
 	ElasticIpStatus *ElasticIpStatus `type:"structure"`
 
+	// Indicates the number of nodes the cluster can be resized to with the elastic
+	// resize method.
+	ElasticResizeNumberOfNodeOptions *string `type:"string"`
+
 	// A Boolean value that, if true, indicates that data in the cluster is encrypted
 	// at rest.
 	Encrypted *bool `type:"boolean"`
@@ -4723,6 +5119,9 @@ type Cluster struct {
 	// to encrypt data in the cluster.
 	KmsKeyId *string `type:"string"`
 
+	// The name of the maintenance track for the cluster.
+	MaintenanceTrackName *string `type:"string"`
+
 	// The master user name for the cluster. This name is used to connect to the
 	// database that is specified in the DBName parameter.
 	MasterUsername *string `type:"string"`
@@ -4735,6 +5134,9 @@ type Cluster struct {
 
 	// The number of compute nodes in the cluster.
 	NumberOfNodes *int64 `type:"integer"`
+
+	// Cluster operations that are waiting to be started.
+	PendingActions []string `type:"list"`
 
 	// A value that, if present, indicates that changes to the cluster are pending.
 	// Specific pending changes are identified by subelements.
@@ -4771,6 +5173,35 @@ func (s Cluster) String() string {
 
 // GoString returns the string representation
 func (s Cluster) GoString() string {
+	return s.String()
+}
+
+// Describes a ClusterDbRevision.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevision
+type ClusterDbRevision struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of the cluster.
+	ClusterIdentifier *string `type:"string"`
+
+	// A string representing the current cluster version.
+	CurrentDatabaseRevision *string `type:"string"`
+
+	// The date on which the database revision was released.
+	DatabaseRevisionReleaseDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// A list of RevisionTarget objects, where each object describes the database
+	// revision that a cluster can be updated to.
+	RevisionTargets []RevisionTarget `locationNameList:"RevisionTarget" type:"list"`
+}
+
+// String returns the string representation
+func (s ClusterDbRevision) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ClusterDbRevision) GoString() string {
 	return s.String()
 }
 
@@ -5347,6 +5778,11 @@ type CreateClusterInput struct {
 	// The AWS Key Management Service (KMS) key ID of the encryption key that you
 	// want to use to encrypt data in the cluster.
 	KmsKeyId *string `type:"string"`
+
+	// An optional parameter for the name of the maintenance track for the cluster.
+	// If you don't provide a maintenance track name, the cluster is assigned to
+	// the current track.
+	MaintenanceTrackName *string `type:"string"`
 
 	// The password associated with the master user account for the cluster that
 	// is being created.
@@ -6978,6 +7414,79 @@ func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterDbRevisionsMessage
+type DescribeClusterDbRevisionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for a cluster whose ClusterDbRevisions you are requesting.
+	// This parameter is case sensitive. All clusters defined for an account are
+	// returned by default.
+	ClusterIdentifier *string `type:"string"`
+
+	// An optional parameter that specifies the starting point for returning a set
+	// of response records. When the results of a DescribeClusterDbRevisions request
+	// exceed the value specified in MaxRecords, Amazon Redshift returns a value
+	// in the marker field of the response. You can retrieve the next set of response
+	// records by providing the returned marker value in the marker parameter and
+	// retrying the request.
+	//
+	// Constraints: You can specify either the ClusterIdentifier parameter, or the
+	// marker parameter, but not both.
+	Marker *string `type:"string"`
+
+	// The maximum number of response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in the marker field of the response. You can retrieve the next
+	// set of response records by providing the returned marker value in the marker
+	// parameter and retrying the request.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20, maximum 100.
+	MaxRecords *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s DescribeClusterDbRevisionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeClusterDbRevisionsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevisionsMessage
+type DescribeClusterDbRevisionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of revisions.
+	ClusterDbRevisions []ClusterDbRevision `locationNameList:"ClusterDbRevision" type:"list"`
+
+	// A string representing the starting point for the next set of revisions. If
+	// a value is returned in a response, you can retrieve the next set of revisions
+	// by providing the value in the marker parameter and retrying the command.
+	// If the marker field is empty, all revisions have already been returned.
+	Marker *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeClusterDbRevisionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeClusterDbRevisionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClusterDbRevisionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroupsMessage
 type DescribeClusterParameterGroupsInput struct {
 	_ struct{} `type:"structure"`
@@ -7453,6 +7962,65 @@ func (s DescribeClusterSubnetGroupsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeClusterSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterTracksMessage
+type DescribeClusterTracksInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the maintenance track.
+	MaintenanceTrackName *string `type:"string"`
+
+	// An optional parameter that specifies the starting point to return a set of
+	// response records. When the results of a DescribeClusterTracks request exceed
+	// the value specified in MaxRecords, Amazon Redshift returns a value in the
+	// Marker field of the response. You can retrieve the next set of response records
+	// by providing the returned marker value in the Marker parameter and retrying
+	// the request.
+	Marker *string `type:"string"`
+
+	// An integer value for the maximum number of maintenance tracks to return.
+	MaxRecords *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s DescribeClusterTracksInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeClusterTracksInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TrackListMessage
+type DescribeClusterTracksOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of maintenance tracks output by the DescribeClusterTracks operation.
+	MaintenanceTracks []MaintenanceTrack `locationNameList:"MaintenanceTrack" type:"list"`
+
+	// The starting point to return a set of response tracklist records. You can
+	// retrieve the next set of response records by providing the returned marker
+	// value in the Marker parameter and retrying the request.
+	Marker *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeClusterTracksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeClusterTracksOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeClusterTracksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -8454,12 +9022,19 @@ type DescribeResizeOutput struct {
 	// Valid Values: List of table names
 	ImportTablesNotStarted []string `type:"list"`
 
+	// An optional string to provide additional details about the resize action.
+	Message *string `type:"string"`
+
 	// While the resize operation is in progress, this value shows the current amount
 	// of data, in megabytes, that has been processed so far. When the resize operation
 	// is complete, this value shows the total amount of data, in megabytes, on
 	// the cluster, which may be more or less than TotalResizeDataInMegaBytes (the
 	// estimated total amount of data before resize).
 	ProgressInMegaBytes *int64 `type:"long"`
+
+	// An enum with possible values of ClassicResize and ElasticResize. These values
+	// describe the type of resize operation being performed.
+	ResizeType *string `type:"string"`
 
 	// The status of the resize operation.
 	//
@@ -8470,6 +9045,12 @@ type DescribeResizeOutput struct {
 	//
 	// Valid Values: multi-node | single-node
 	TargetClusterType *string `type:"string"`
+
+	// The type of encryption for the cluster after the resize is complete.
+	//
+	// Possible values are KMS and None. In the China region possible values are:
+	// Legacy and None.
+	TargetEncryptionType *string `type:"string"`
 
 	// The node type that the cluster will have after the resize operation is complete.
 	TargetNodeType *string `type:"string"`
@@ -9454,6 +10035,80 @@ func (s GetClusterCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsInputMessage
+type GetReservedNodeExchangeOfferingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A value that indicates the starting point for the next set of ReservedNodeOfferings.
+	Marker *string `type:"string"`
+
+	// An integer setting the maximum number of ReservedNodeOfferings to retrieve.
+	MaxRecords *int64 `type:"integer"`
+
+	// A string representing the node identifier for the DC1 Reserved Node to be
+	// exchanged.
+	//
+	// ReservedNodeId is a required field
+	ReservedNodeId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetReservedNodeExchangeOfferingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetReservedNodeExchangeOfferingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetReservedNodeExchangeOfferingsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetReservedNodeExchangeOfferingsInput"}
+
+	if s.ReservedNodeId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservedNodeId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsOutputMessage
+type GetReservedNodeExchangeOfferingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An optional parameter that specifies the starting point for returning a set
+	// of response records. When the results of a GetReservedNodeExchangeOfferings
+	// request exceed the value specified in MaxRecords, Amazon Redshift returns
+	// a value in the marker field of the response. You can retrieve the next set
+	// of response records by providing the returned marker value in the marker
+	// parameter and retrying the request.
+	Marker *string `type:"string"`
+
+	// Returns an array of ReservedNodeOffering objects.
+	ReservedNodeOfferings []ReservedNodeOffering `locationNameList:"ReservedNodeOffering" type:"list"`
+}
+
+// String returns the string representation
+func (s GetReservedNodeExchangeOfferingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetReservedNodeExchangeOfferingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetReservedNodeExchangeOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Returns information about an HSM client certificate. The certificate is stored
 // in a secure Hardware Storage Module (HSM), and used by the Amazon Redshift
 // cluster to encrypt data files.
@@ -9569,6 +10224,106 @@ func (s IPRange) String() string {
 // GoString returns the string representation
 func (s IPRange) GoString() string {
 	return s.String()
+}
+
+// Defines a maintenance track that determines which Amazon Redshift version
+// to apply during a maintenance window. If the value for MaintenanceTrack is
+// current, the cluster is updated to the most recently certified maintenance
+// release. If the value is trailing, the cluster is updated to the previously
+// certified maintenance release.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/MaintenanceTrack
+type MaintenanceTrack struct {
+	_ struct{} `type:"structure"`
+
+	// The version number for the cluster release.
+	DatabaseVersion *string `type:"string"`
+
+	// The name of the maintenance track. Possible values are current and trailing.
+	MaintenanceTrackName *string `type:"string"`
+
+	// An array of UpdateTarget objects to update with the maintenance track.
+	UpdateTargets []UpdateTarget `locationNameList:"UpdateTarget" type:"list"`
+}
+
+// String returns the string representation
+func (s MaintenanceTrack) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MaintenanceTrack) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevisionMessage
+type ModifyClusterDbRevisionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of a cluster whose database revision you want to modify.
+	//
+	// Example: examplecluster
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+
+	// The identifier of the database revision. You can retrieve this value from
+	// the response to the DescribeClusterDbRevisions request.
+	//
+	// RevisionTarget is a required field
+	RevisionTarget *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ModifyClusterDbRevisionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterDbRevisionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyClusterDbRevisionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterDbRevisionInput"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if s.RevisionTarget == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RevisionTarget"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevisionResult
+type ModifyClusterDbRevisionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Describes a cluster.
+	Cluster *Cluster `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyClusterDbRevisionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterDbRevisionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyClusterDbRevisionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesMessage
@@ -9726,6 +10481,13 @@ type ModifyClusterInput struct {
 	// in the Amazon Redshift Cluster Management Guide.
 	ElasticIp *string `type:"string"`
 
+	// Indicates whether the cluster is encrypted. If the cluster is encrypted and
+	// you provide a value for the KmsKeyId parameter, we will encrypt the cluster
+	// with the provided KmsKeyId. If you don't provide a KmsKeyId, we will encrypt
+	// with the default key. In the China region we will use legacy encryption if
+	// you specify that the cluster is encrypted.
+	Encrypted *bool `type:"boolean"`
+
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
@@ -9744,6 +10506,17 @@ type ModifyClusterInput struct {
 	// Specifies the name of the HSM configuration that contains the information
 	// the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
 	HsmConfigurationIdentifier *string `type:"string"`
+
+	// The AWS Key Management Service (KMS) key ID of the encryption key that you
+	// want to use to encrypt data in the cluster.
+	KmsKeyId *string `type:"string"`
+
+	// The name for the maintenance track that you want to assign for the cluster.
+	// This name change is asynchronous. The new track name stays in the PendingModifiedValues
+	// for the cluster until the next maintenance window. When the maintenance track
+	// changes, the cluster is switched to the latest cluster release available
+	// for the maintenance track. At this point, the maintenance track name is applied.
+	MaintenanceTrackName *string `type:"string"`
 
 	// The new password for the cluster master user. This change is asynchronously
 	// applied as soon as possible. Between the time of the request and the completion
@@ -10289,6 +11062,10 @@ type PendingModifiedValues struct {
 	// The pending or in-progress change of the service version.
 	ClusterVersion *string `type:"string"`
 
+	// The encryption type for a cluster. Possible values are: KMS and None. For
+	// the China region the possible values are None, and Legacy.
+	EncryptionType *string `type:"string"`
+
 	// An option that specifies whether to create the cluster with enhanced VPC
 	// routing enabled. To create a cluster that uses enhanced VPC routing, the
 	// cluster must be in a VPC. For more information, see Enhanced VPC Routing
@@ -10299,6 +11076,10 @@ type PendingModifiedValues struct {
 	//
 	// Default: false
 	EnhancedVpcRouting *bool `type:"boolean"`
+
+	// The name of the maintenance track that the cluster will change to during
+	// the next maintenance window.
+	MaintenanceTrackName *string `type:"string"`
 
 	// The pending or in-progress change of the master user password for the cluster.
 	MasterUserPassword *string `type:"string"`
@@ -10522,6 +11303,11 @@ type ReservedNode struct {
 	//    use.
 	//
 	//    * payment-failed-Payment failed for the purchase attempt.
+	//
+	//    * retired-The reserved node is no longer available.
+	//
+	//    * exchanging-The owner is exchanging the reserved node for another reserved
+	//    node.
 	State *string `type:"string"`
 
 	// The hourly rate Amazon Redshift charges you for this reserved node.
@@ -10661,6 +11447,85 @@ func (s ResetClusterParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterMessage
+type ResizeClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// A boolean value indicating whether the resize operation is using the classic
+	// resize process. If you don't provide this parameter or set the value to false
+	// the resize type is elastic.
+	Classic *bool `type:"boolean"`
+
+	// The unique identifier for the cluster to resize.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+
+	// The new cluster type for the specified cluster.
+	ClusterType *string `type:"string"`
+
+	// The new node type for the nodes you are adding.
+	NodeType *string `type:"string"`
+
+	// The new number of nodes for the cluster.
+	//
+	// NumberOfNodes is a required field
+	NumberOfNodes *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ResizeClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResizeClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResizeClusterInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResizeClusterInput"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if s.NumberOfNodes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNodes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeClusterResult
+type ResizeClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Describes a cluster.
+	Cluster *Cluster `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResizeClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResizeClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ResizeClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage
 type RestoreFromClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
@@ -10769,6 +11634,15 @@ type RestoreFromClusterSnapshotInput struct {
 	// want to use to encrypt data in the cluster that you restore from a shared
 	// snapshot.
 	KmsKeyId *string `type:"string"`
+
+	// The name of the maintenance track for the restored cluster. When you take
+	// a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster.
+	// The snapshot might be on a different track than the cluster that was the
+	// source for the snapshot. For example, suppose that you take a snapshot of
+	// a cluster that is on the current track and then change the cluster to be
+	// on the trailing track. In this case, the snapshot and the source cluster
+	// are on different tracks.
+	MaintenanceTrackName *string `type:"string"`
 
 	// The node type that the restored cluster will be provisioned with.
 	//
@@ -11033,6 +11907,33 @@ func (s RestoreTableFromClusterSnapshotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RestoreTableFromClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Describes a RevisionTarget.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevisionTarget
+type RevisionTarget struct {
+	_ struct{} `type:"structure"`
+
+	// A unique string that identifies the version to update the cluster to. You
+	// can use this value in ModifyClusterDbRevision.
+	DatabaseRevision *string `type:"string"`
+
+	// The date on which the database revision was released.
+	DatabaseRevisionReleaseDate *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// A string that describes the changes and features that will be applied to
+	// the cluster when it is updated to the corresponding ClusterDbRevision.
+	Description *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RevisionTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RevisionTarget) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngressMessage
@@ -11313,6 +12214,9 @@ type Snapshot struct {
 	// used to encrypt data in the cluster from which the snapshot was taken.
 	KmsKeyId *string `type:"string"`
 
+	// The name of the maintenance track for the snapshot.
+	MaintenanceTrackName *string `type:"string"`
+
 	// The master user name for the cluster.
 	MasterUsername *string `type:"string"`
 
@@ -11587,6 +12491,28 @@ func (s TaggedResource) String() string {
 
 // GoString returns the string representation
 func (s TaggedResource) GoString() string {
+	return s.String()
+}
+
+// A maintenance track that you can switch the current track to.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UpdateTarget
+type UpdateTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The cluster version for the new maintenance track.
+	DatabaseVersion *string `type:"string"`
+
+	// The name of the new maintenance track.
+	MaintenanceTrackName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateTarget) GoString() string {
 	return s.String()
 }
 

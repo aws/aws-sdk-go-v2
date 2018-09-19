@@ -26,8 +26,8 @@ var initRequest func(*SageMaker, *aws.Request)
 
 // Service information constants
 const (
-	ServiceName = "sagemaker" // Service endpoint prefix API calls made to.
-	EndpointsID = ServiceName // Service ID for Regions and Endpoints metadata.
+	ServiceName = "api.sagemaker" // Service endpoint prefix API calls made to.
+	EndpointsID = ServiceName     // Service ID for Regions and Endpoints metadata.
 )
 
 // New creates a new instance of the SageMaker client with a config.

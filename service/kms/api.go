@@ -43,6 +43,10 @@ func (r CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
 // Deleting Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
 // in the AWS Key Management Service Developer Guide.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the CancelKeyDeletionRequest method.
 //    req := client.CancelKeyDeletionRequest(params)
 //    resp, err := req.Send()
@@ -91,8 +95,9 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 // CreateAliasRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Creates a display name for a customer master key (CMK). You can use an alias
-// to identify a CMK in selected operations, such as Encrypt and GenerateDataKey.
+// Creates a display name for a customer-managed customer master key (CMK).
+// You can use an alias to identify a CMK in selected operations, such as Encrypt
+// and GenerateDataKey.
 //
 // Each CMK can have multiple aliases, but each alias points to only one CMK.
 // The alias name must be unique in the AWS account and region. To simplify
@@ -104,16 +109,19 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 // the response from the DescribeKey operation. To get the aliases of all CMKs,
 // use the ListAliases operation.
 //
-// An alias must start with the word alias followed by a forward slash (alias/).
 // The alias name can contain only alphanumeric characters, forward slashes
-// (/), underscores (_), and dashes (-). Alias names cannot begin with aws;
-// that alias name prefix is reserved by Amazon Web Services (AWS).
+// (/), underscores (_), and dashes (-). Alias names cannot begin with aws/.
+// That alias name prefix is reserved for AWS managed CMKs.
 //
 // The alias and the CMK it is mapped to must be in the same AWS account and
 // the same region. You cannot perform this operation on an alias in a different
 // AWS account.
 //
 // To map an existing alias to a different CMK, call UpdateAlias.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
@@ -174,6 +182,10 @@ func (r CreateGrantRequest) Send() (*CreateGrantOutput, error) {
 // see Grants (http://docs.aws.amazon.com/kms/latest/developerguide/grants.html)
 // in the AWS Key Management Service Developer Guide.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the CreateGrantRequest method.
 //    req := client.CreateGrantRequest(params)
 //    resp, err := req.Send()
@@ -224,8 +236,8 @@ func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
 //
 // Creates a customer master key (CMK) in the caller's AWS account.
 //
-// You can use a CMK to encrypt small amounts of data (4 KiB or less) directly,
-// but CMKs are more commonly used to encrypt data encryption keys (DEKs), which
+// You can use a CMK to encrypt small amounts of data (4 KiB or less) directly.
+// But CMKs are more commonly used to encrypt data encryption keys (DEKs), which
 // are used to encrypt raw data. For more information about DEKs and the difference
 // between CMKs and DEKs, see the following:
 //
@@ -293,14 +305,17 @@ func (r DecryptRequest) Send() (*DecryptOutput, error) {
 //
 //    * Encrypt
 //
-// Note that if a caller has been granted access permissions to all keys (through,
-// for example, IAM user policies that grant Decrypt permission on all resources),
-// then ciphertext encrypted by using keys in other accounts where the key grants
-// access to the caller can be decrypted. To remedy this, we recommend that
-// you do not grant Decrypt access in an IAM user policy. Instead grant Decrypt
-// access only in key policies. If you must grant Decrypt access in an IAM user
-// policy, you should scope the resource to specific keys or to specific trusted
-// accounts.
+// Whenever possible, use key policies to give users permission to call the
+// Decrypt operation on the CMK, instead of IAM policies. Otherwise, you might
+// create an IAM user policy that gives the user Decrypt permission on all CMKs.
+// This user could decrypt ciphertext that was encrypted by CMKs in other accounts
+// if the key policy for the cross-account CMK permits it. If you must use an
+// IAM policy for Decrypt permissions, limit the user to particular CMKs or
+// particular trusted accounts.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the DecryptRequest method.
 //    req := client.DecryptRequest(params)
@@ -424,6 +439,10 @@ func (r DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutp
 // After you delete key material, you can use ImportKeyMaterial to reimport
 // the same key material into the CMK.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the DeleteImportedKeyMaterialRequest method.
 //    req := client.DeleteImportedKeyMaterialRequest(params)
 //    resp, err := req.Send()
@@ -475,6 +494,11 @@ func (r DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
 // AWS Key Management Service.
 //
 // Provides detailed information about the specified customer master key (CMK).
+//
+// You can use DescribeKey on a predefined AWS alias, that is, an AWS alias
+// with no key ID. When you do, AWS KMS associates the alias with an AWS managed
+// CMK (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
+// and returns its KeyId and Arn in the response.
 //
 // To perform this operation on a CMK in a different AWS account, specify the
 // key ARN or alias ARN in the value of the KeyId parameter.
@@ -535,6 +559,10 @@ func (r DisableKeyRequest) Send() (*DisableKeyOutput, error) {
 // Key State Affects the Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the DisableKeyRequest method.
 //    req := client.DisableKeyRequest(params)
 //    resp, err := req.Send()
@@ -585,9 +613,13 @@ func (r DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
 // DisableKeyRotationRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Disables automatic rotation of the key material for the specified customer
-// master key (CMK). You cannot perform this operation on a CMK in a different
-// AWS account.
+// Disables automatic rotation of the key material (http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
+// for the specified customer master key (CMK). You cannot perform this operation
+// on a CMK in a different AWS account.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the DisableKeyRotationRequest method.
 //    req := client.DisableKeyRotationRequest(params)
@@ -643,6 +675,10 @@ func (r EnableKeyRequest) Send() (*EnableKeyOutput, error) {
 // its use for cryptographic operations. You cannot perform this operation on
 // a CMK in a different AWS account.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the EnableKeyRequest method.
 //    req := client.EnableKeyRequest(params)
 //    resp, err := req.Send()
@@ -693,9 +729,13 @@ func (r EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
 // EnableKeyRotationRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Enables automatic rotation of the key material for the specified customer
-// master key (CMK). You cannot perform this operation on a CMK in a different
-// AWS account.
+// Enables automatic rotation of the key material (http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
+// for the specified customer master key (CMK). You cannot perform this operation
+// on a CMK in a different AWS account.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the EnableKeyRotationRequest method.
 //    req := client.EnableKeyRotationRequest(params)
@@ -753,23 +793,27 @@ func (r EncryptRequest) Send() (*EncryptOutput, error) {
 //    * You can encrypt up to 4 kilobytes (4096 bytes) of arbitrary data such
 //    as an RSA key, a database password, or other sensitive information.
 //
-//    * To move encrypted data from one AWS region to another, you can use this
-//    operation to encrypt in the new region the plaintext data key that was
-//    used to encrypt the data in the original region. This provides you with
-//    an encrypted copy of the data key that can be decrypted in the new region
-//    and used there to decrypt the encrypted data.
+//    * You can use the Encrypt operation to move encrypted data from one AWS
+//    region to another. In the first region, generate a data key and use the
+//    plaintext key to encrypt the data. Then, in the new region, call the Encrypt
+//    method on same plaintext data key. Now, you can safely move the encrypted
+//    data and encrypted data key to the new region, and decrypt in the new
+//    region when necessary.
+//
+// You don't need use this operation to encrypt a data key within a region.
+// The GenerateDataKey and GenerateDataKeyWithoutPlaintext operations return
+// an encrypted data key.
+//
+// Also, you don't need to use this operation to encrypt data in your application.
+// You can use the plaintext and encrypted data keys that the GenerateDataKey
+// operation returns.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 // To perform this operation on a CMK in a different AWS account, specify the
 // key ARN or alias ARN in the value of the KeyId parameter.
-//
-// Unless you are moving encrypted data from one region to another, you don't
-// use this operation to encrypt a generated data key within a region. To get
-// data keys that are already encrypted, call the GenerateDataKey or GenerateDataKeyWithoutPlaintext
-// operation. Data keys don't need to be encrypted again by calling Encrypt.
-//
-// To encrypt data locally in your application, use the GenerateDataKey operation
-// to return a plaintext data encryption key and a copy of the key encrypted
-// under the CMK of your choosing.
 //
 //    // Example sending a request using the EncryptRequest method.
 //    req := client.EncryptRequest(params)
@@ -866,6 +910,10 @@ func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
 // Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
 // in the AWS Key Management Service Developer Guide.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the GenerateDataKeyRequest method.
 //    req := client.GenerateDataKeyRequest(params)
 //    resp, err := req.Send()
@@ -929,9 +977,14 @@ func (r GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutP
 // (GenerateDataKeyWithoutPlaintext) to get an encrypted data key and then stores
 // it in the container. Later, a different component of the system, called the
 // data plane, puts encrypted data into the containers. To do this, it passes
-// the encrypted data key to the Decrypt operation, then uses the returned plaintext
-// data key to encrypt data, and finally stores the encrypted data in the container.
-// In this system, the control plane never sees the plaintext data key.
+// the encrypted data key to the Decrypt operation. It then uses the returned
+// plaintext data key to encrypt data and finally stores the encrypted data
+// in the container. In this system, the control plane never sees the plaintext
+// data key.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the GenerateDataKeyWithoutPlaintextRequest method.
 //    req := client.GenerateDataKeyWithoutPlaintextRequest(params)
@@ -1087,7 +1140,20 @@ func (r GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error)
 // AWS Key Management Service.
 //
 // Gets a Boolean value that indicates whether automatic rotation of the key
-// material is enabled for the specified customer master key (CMK).
+// material (http://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)
+// is enabled for the specified customer master key (CMK).
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
+//    * Disabled: The key rotation status does not change when you disable a
+//    CMK. However, while the CMK is disabled, AWS KMS does not rotate the backing
+//    key.
+//
+//    * Pending deletion: While a CMK is pending deletion, its key rotation
+//    status is false and AWS KMS does not rotate the backing key. If you cancel
+//    the deletion, the original key rotation status is restored.
 //
 // To perform this operation on a CMK in a different AWS account, specify the
 // key ARN in the value of the KeyId parameter.
@@ -1157,6 +1223,10 @@ func (r GetParametersForImportRequest) Send() (*GetParametersForImportOutput, er
 // response must be used together. These items are valid for 24 hours. When
 // they expire, they cannot be used for a subsequent ImportKeyMaterial request.
 // To get new ones, send another GetParametersForImport request.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the GetParametersForImportRequest method.
 //    req := client.GetParametersForImportRequest(params)
@@ -1243,6 +1313,10 @@ func (r ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
 // into a CMK, you can reimport the same key material into that CMK, but you
 // cannot import different key material.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the ImportKeyMaterialRequest method.
 //    req := client.ImportKeyMaterialRequest(params)
 //    resp, err := req.Send()
@@ -1291,14 +1365,22 @@ func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 // ListAliasesRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Gets a list of all aliases in the caller's AWS account and region. You cannot
+// Gets a list of aliases in the caller's AWS account and region. You cannot
 // list aliases in other accounts. For more information about aliases, see CreateAlias.
 //
-// The response might include several aliases that do not have a TargetKeyId
-// field because they are not associated with a CMK. These are predefined aliases
-// that are reserved for CMKs managed by AWS services. If an alias is not associated
-// with a CMK, the alias does not count against the alias limit (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#aliases-limit)
-// for your account.
+// By default, the ListAliases command returns all aliases in the account and
+// region. To get only the aliases that point to a particular customer master
+// key (CMK), use the KeyId parameter.
+//
+// The ListAliases response can include aliases that you created and associated
+// with your customer managed CMKs, and aliases that AWS created and associated
+// with AWS managed CMKs in your account. You can recognize AWS aliases because
+// their names have the format aws/<service-name>, such as aws/dynamodb.
+//
+// The response might also include aliases that have no TargetKeyId field. These
+// are predefined aliases that AWS has created but has not yet associated with
+// a CMK. Aliases that AWS creates in your account, including predefined aliases,
+// do not count against your AWS KMS aliases limit (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#aliases-limit).
 //
 //    // Example sending a request using the ListAliasesRequest method.
 //    req := client.ListAliasesRequest(params)
@@ -1886,9 +1968,13 @@ func (r ReEncryptRequest) Send() (*ReEncryptOutput, error) {
 // on the source CMK and once as ReEncryptTo on the destination CMK. We recommend
 // that you include the "kms:ReEncrypt*" permission in your key policies (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 // to permit reencryption from or to the CMK. This permission is automatically
-// included in the key policy when you create a CMK through the console, but
+// included in the key policy when you create a CMK through the console. But
 // you must include it manually when you create a CMK programmatically or when
 // you set a key policy with the PutKeyPolicy operation.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the ReEncryptRequest method.
 //    req := client.ReEncryptRequest(params)
@@ -2080,6 +2166,10 @@ func (r ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
 // Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html)
 // in the AWS Key Management Service Developer Guide.
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the ScheduleKeyDeletionRequest method.
 //    req := client.ScheduleKeyDeletionRequest(params)
 //    resp, err := req.Send()
@@ -2128,21 +2218,22 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 // TagResourceRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Adds or overwrites one or more tags for the specified customer master key
-// (CMK). You cannot perform this operation on a CMK in a different AWS account.
+// Adds or edits tags for a customer master key (CMK). You cannot perform this
+// operation on a CMK in a different AWS account.
 //
 // Each tag consists of a tag key and a tag value. Tag keys and tag values are
 // both required, but tag values can be empty (null) strings.
 //
-// You cannot use the same tag key more than once per CMK. For example, consider
-// a CMK with one tag whose tag key is Purpose and tag value is Test. If you
-// send a TagResource request for this CMK with a tag key of Purpose and a tag
-// value of Prod, it does not create a second tag. Instead, the original tag
-// is overwritten with the new tag value.
+// You can only use a tag key once for each CMK. If you use the tag key again,
+// AWS KMS replaces the current tag value with the specified value.
 //
 // For information about the rules that apply to tag keys and tag values, see
 // User-Defined Tag Restrictions (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // in the AWS Billing and Cost Management User Guide.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
@@ -2194,12 +2285,15 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 // UntagResourceRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Removes the specified tag or tags from the specified customer master key
-// (CMK). You cannot perform this operation on a CMK in a different AWS account.
+// Removes the specified tags from the specified customer master key (CMK).
+// You cannot perform this operation on a CMK in a different AWS account.
 //
-// To remove a tag, you specify the tag key for each tag to remove. You do not
-// specify the tag value. To overwrite the tag value for an existing tag, use
-// TagResource.
+// To remove a tag, specify the tag key. To change the tag value of an existing
+// tag key, use TagResource.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
@@ -2272,6 +2366,10 @@ func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 // cannot begin with aws; that alias name prefix is reserved by Amazon Web Services
 // (AWS).
 //
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
+//
 //    // Example sending a request using the UpdateAliasRequest method.
 //    req := client.UpdateAliasRequest(params)
 //    resp, err := req.Send()
@@ -2322,10 +2420,14 @@ func (r UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error)
 // UpdateKeyDescriptionRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Updates the description of a customer master key (CMK). To see the decription
+// Updates the description of a customer master key (CMK). To see the description
 // of a CMK, use DescribeKey.
 //
 // You cannot perform this operation on a CMK in a different AWS account.
+//
+// The result of this operation varies with the key state of the CMK. For details,
+// see How Key State Affects Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the AWS Key Management Service Developer Guide.
 //
 //    // Example sending a request using the UpdateKeyDescriptionRequest method.
 //    req := client.UpdateKeyDescriptionRequest(params)
@@ -2457,9 +2559,9 @@ func (s CancelKeyDeletionOutput) SDKResponseMetadata() aws.Response {
 type CreateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// String that contains the display name. The name must start with the word
-	// "alias" followed by a forward slash (alias/). Aliases that begin with "alias/AWS"
-	// are reserved.
+	// Specifies the alias name. This value must begin with alias/ followed by the
+	// alias name, such as alias/ExampleAlias. The alias name cannot begin with
+	// aws/. The alias/aws/ prefix is reserved for AWS managed CMKs.
 	//
 	// AliasName is a required field
 	AliasName *string `min:"1" type:"string" required:"true"`
@@ -2583,8 +2685,8 @@ type CreateGrantInput struct {
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
 
-	// A friendly name for identifying the grant. Use this value to prevent unintended
-	// creation of duplicate grants when retrying this request.
+	// A friendly name for identifying the grant. Use this value to prevent the
+	// unintended creation of duplicate grants when retrying this request.
 	//
 	// When this value is absent, all CreateGrant requests result in a new grant
 	// with a unique GrantId even if all the supplied parameters are identical.
@@ -2748,9 +2850,9 @@ type CreateKeyInput struct {
 	//    The principals in the key policy must exist and be visible to AWS KMS.
 	//    When you create a new AWS principal (for example, an IAM user or role),
 	//    you might need to enforce a delay before including the new principal in
-	//    a key policy because the new principal might not be immediately visible
-	//    to AWS KMS. For more information, see Changes that I make are not always
-	//    immediately visible (http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
+	//    a key policy. The reason for this is that the new principal might not
+	//    be immediately visible to AWS KMS. For more information, see Changes that
+	//    I make are not always immediately visible (http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	//    in the AWS Identity and Access Management User Guide.
 	//
 	// If you do not provide a key policy, AWS KMS attaches a default key policy
@@ -3045,7 +3147,11 @@ type DescribeKeyInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string `type:"list"`
 
-	// A unique identifier for the customer master key (CMK).
+	// Describes the specified customer master key (CMK).
+	//
+	// If you specify a predefined AWS alias (an AWS alias with no key ID), KMS
+	// associates the alias with an AWS managed CMK (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
+	// and returns its KeyId and Arn in the response.
 	//
 	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
 	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
@@ -3975,9 +4081,8 @@ type GetParametersForImportInput struct {
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
 
-	// The algorithm you will use to encrypt the key material before importing it
-	// with ImportKeyMaterial. For more information, see Encrypt the Key Material
-	// (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html)
+	// The algorithm you use to encrypt the key material before importing it with
+	// ImportKeyMaterial. For more information, see Encrypt the Key Material (http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html)
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// WrappingAlgorithm is a required field
@@ -4066,14 +4171,14 @@ func (s GetParametersForImportOutput) SDKResponseMetadata() aws.Response {
 }
 
 // A structure that you can use to allow certain operations in the grant only
-// when the desired encryption context is present. For more information about
+// when the preferred encryption context is present. For more information about
 // encryption context, see Encryption Context (http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
 // in the AWS Key Management Service Developer Guide.
 //
 // Grant constraints apply only to operations that accept encryption context
 // as input. For example, the DescribeKey operation does not accept encryption
 // context as input. A grant that allows the DescribeKey operation does so regardless
-// of the grant constraints. In constrast, the Encrypt operation accepts encryption
+// of the grant constraints. In contrast, the Encrypt operation accepts encryption
 // context as input. A grant that allows the Encrypt operation does so only
 // when the encryption context of the Encrypt operation satisfies the grant
 // constraints.
@@ -4326,7 +4431,7 @@ type KeyMetadata struct {
 	// KeyId is a required field
 	KeyId *string `min:"1" type:"string" required:"true"`
 
-	// The CMK's manager. CMKs are either customer-managed or AWS-managed. For more
+	// The CMK's manager. CMKs are either customer managed or AWS managed. For more
 	// information about the difference, see Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 	// in the AWS Key Management Service Developer Guide.
 	KeyManager KeyManagerType `type:"string" enum:"true"`
@@ -4370,6 +4475,14 @@ func (s KeyMetadata) GoString() string {
 type ListAliasesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Lists only aliases that refer to the specified CMK. The value of this parameter
+	// can be the ID or Amazon Resource Name (ARN) of a CMK in the caller's account
+	// and region. You cannot use an alias name or alias ARN in this value.
+	//
+	// This parameter is optional. If you omit it, ListAliases returns all aliases
+	// in the account and region.
+	KeyId *string `min:"1" type:"string"`
+
 	// Use this parameter to specify the maximum number of items to return. When
 	// this value is present, AWS KMS does not return more than the specified number
 	// of items, but it might return fewer.
@@ -4397,6 +4510,9 @@ func (s ListAliasesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAliasesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
+	if s.KeyId != nil && len(*s.KeyId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
+	}
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
@@ -4947,9 +5063,9 @@ type PutKeyPolicyInput struct {
 	//    The principals in the key policy must exist and be visible to AWS KMS.
 	//    When you create a new AWS principal (for example, an IAM user or role),
 	//    you might need to enforce a delay before including the new principal in
-	//    a key policy because the new principal might not be immediately visible
-	//    to AWS KMS. For more information, see Changes that I make are not always
-	//    immediately visible (http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
+	//    a key policy. The reason for this is that the new principal might not
+	//    be immediately visible to AWS KMS. For more information, see Changes that
+	//    I make are not always immediately visible (http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
 	//    in the AWS Identity and Access Management User Guide.
 	//
 	// The key policy size limit is 32 kilobytes (32768 bytes).

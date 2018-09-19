@@ -69,6 +69,10 @@ type AutoScalingAPI interface {
 
 	AttachLoadBalancersRequest(*autoscaling.AttachLoadBalancersInput) autoscaling.AttachLoadBalancersRequest
 
+	BatchDeleteScheduledActionRequest(*autoscaling.BatchDeleteScheduledActionInput) autoscaling.BatchDeleteScheduledActionRequest
+
+	BatchPutScheduledUpdateGroupActionRequest(*autoscaling.BatchPutScheduledUpdateGroupActionInput) autoscaling.BatchPutScheduledUpdateGroupActionRequest
+
 	CompleteLifecycleActionRequest(*autoscaling.CompleteLifecycleActionInput) autoscaling.CompleteLifecycleActionRequest
 
 	CreateAutoScalingGroupRequest(*autoscaling.CreateAutoScalingGroupInput) autoscaling.CreateAutoScalingGroupRequest

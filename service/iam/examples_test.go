@@ -603,8 +603,8 @@ func ExampleIAM_CreateRoleRequest_shared00() {
 	svc := iam.New(cfg)
 	input := &iam.CreateRoleInput{
 		AssumeRolePolicyDocument: aws.String("<URL-encoded-JSON>"),
-		Path:     aws.String("/"),
-		RoleName: aws.String("Test-Role"),
+		Path:                     aws.String("/"),
+		RoleName:                 aws.String("Test-Role"),
 	}
 
 	req := svc.CreateRoleRequest(input)

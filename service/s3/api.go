@@ -3698,7 +3698,8 @@ func (r PutBucketReplicationRequest) Send() (*PutBucketReplicationOutput, error)
 // Amazon Simple Storage Service.
 //
 // Creates a new replication configuration (or replaces an existing one, if
-// present).
+// present). For more information, see Cross-Region Replication (CRR) ( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+// in the Amazon S3 Developer Guide.
 //
 //    // Example sending a request using the PutBucketReplicationRequest method.
 //    req := client.PutBucketReplicationRequest(params)
@@ -5206,6 +5207,11 @@ func (s CORSRule) MarshalFields(e protocol.FieldEncoder) error {
 type CSVInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies that CSV field values may contain quoted record delimiters and
+	// such records should be allowed. Default value is FALSE. Setting this value
+	// to TRUE may lower performance.
+	AllowQuotedRecordDelimiter *bool `type:"boolean"`
+
 	// Single character used to indicate a row should be ignored when present at
 	// the start of a row.
 	Comments *string `type:"string"`
@@ -5239,6 +5245,12 @@ func (s CSVInput) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CSVInput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowQuotedRecordDelimiter != nil {
+		v := *s.AllowQuotedRecordDelimiter
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AllowQuotedRecordDelimiter", protocol.BoolValue(v), metadata)
+	}
 	if s.Comments != nil {
 		v := *s.Comments
 
@@ -7710,6 +7722,14 @@ func (s DeleteBucketPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteBucketReplicationInput struct {
 	_ struct{} `type:"structure"`
 
+	// Deletes the replication subresource associated with the specified bucket.
+	//
+	// There is usually some time lag before replication configuration deletion
+	// is fully propagated to all the Amazon S3 systems.
+	//
+	// For more information, see Cross-Region Replication (CRR) ( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+	// in the Amazon S3 Developer Guide.
+	//
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 }
@@ -8001,6 +8021,39 @@ func (s DeleteMarkerEntry) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VersionId", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Specifies whether Amazon S3 should replicate delete makers.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerReplication
+type DeleteMarkerReplication struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the delete marker replication.
+	//
+	// In the current implementation, Amazon S3 does not replicate the delete markers.
+	// Therefore, the status must be Disabled.
+	Status DeleteMarkerReplicationStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DeleteMarkerReplication) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteMarkerReplication) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteMarkerReplication) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
 	}
 	return nil
 }
@@ -8486,19 +8539,34 @@ type Destination struct {
 	_ struct{} `type:"structure"`
 
 	// Container for information regarding the access control for replicas.
+	//
+	// Use only in a cross-account scenario, where source and destination bucket
+	// owners are not the same, when you want to change replica ownership to the
+	// AWS account that owns the destination bucket. If you don't add this element
+	// to the replication configuration, the replicas are owned by same AWS account
+	// that owns the source object.
 	AccessControlTranslation *AccessControlTranslation `type:"structure"`
 
-	// Account ID of the destination bucket. Currently this is only being verified
-	// if Access Control Translation is enabled
+	// Account ID of the destination bucket. Currently Amazon S3 verifies this value
+	// only if Access Control Translation is enabled.
+	//
+	// In a cross-account scenario, if you tell Amazon S3 to change replica ownership
+	// to the AWS account that owns the destination bucket by adding the AccessControlTranslation
+	// element, this is the account ID of the destination bucket owner.
 	Account *string `type:"string"`
 
 	// Amazon resource name (ARN) of the bucket where you want Amazon S3 to store
 	// replicas of the object identified by the rule.
 	//
+	// If you have multiple rules in your replication configuration, all rules must
+	// specify the same bucket as the destination. A replication configuration can
+	// replicate objects only to one destination bucket.
+	//
 	// Bucket is a required field
 	Bucket *string `type:"string" required:"true"`
 
-	// Container for information regarding encryption based configuration for replicas.
+	// Container that provides encryption-related information. You must specify
+	// this element if the SourceSelectionCriteria is specified.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
 
 	// The class of storage used to store the object.
@@ -8648,7 +8716,8 @@ func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The id of the KMS key used to encrypt the replica object.
+	// The ID of the AWS KMS key for the region where the destination bucket resides.
+	// Amazon S3 uses this key to encrypt the replica object.
 	ReplicaKmsKeyID *string `type:"string"`
 }
 
@@ -8782,6 +8851,7 @@ type FilterRule struct {
 	// the filtering rule applies. Maximum prefix length can be up to 1,024 characters.
 	// Overlapping prefixes and suffixes are not supported. For more information,
 	// go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	Name FilterRuleName `type:"string" enum:"true"`
 
 	Value *string `type:"string"`
@@ -12380,12 +12450,15 @@ type InputSerialization struct {
 	// Describes the serialization of a CSV-encoded object.
 	CSV *CSVInput `type:"structure"`
 
-	// Specifies object's compression format. Valid values: NONE, GZIP. Default
+	// Specifies object's compression format. Valid values: NONE, GZIP, BZIP2. Default
 	// Value: NONE.
 	CompressionType CompressionType `type:"string" enum:"true"`
 
 	// Specifies JSON as object's input serialization format.
 	JSON *JSONInput `type:"structure"`
+
+	// Specifies Parquet as object's input serialization format.
+	Parquet *ParquetInput `type:"structure"`
 }
 
 // String returns the string representation
@@ -12417,6 +12490,12 @@ func (s InputSerialization) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "JSON", v, metadata)
+	}
+	if s.Parquet != nil {
+		v := s.Parquet
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Parquet", v, metadata)
 	}
 	return nil
 }
@@ -12965,6 +13044,7 @@ type LambdaFunctionConfiguration struct {
 
 	// Container for object key name filtering rules. For information about key
 	// name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
 	// Optional unique identifier for configurations in a notification configuration.
@@ -15811,7 +15891,8 @@ type NoncurrentVersionExpiration struct {
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in
+	// the Amazon Simple Storage Service Developer Guide.
 	NoncurrentDays *int64 `type:"integer"`
 }
 
@@ -15849,7 +15930,8 @@ type NoncurrentVersionTransition struct {
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in
+	// the Amazon Simple Storage Service Developer Guide.
 	NoncurrentDays *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
@@ -15885,6 +15967,7 @@ func (s NoncurrentVersionTransition) MarshalFields(e protocol.FieldEncoder) erro
 
 // Container for object key name filtering rules. For information about key
 // name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+// in the Amazon Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter
 type NotificationConfigurationFilter struct {
 	_ struct{} `type:"structure"`
@@ -16248,6 +16331,26 @@ func (s Owner) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ID", protocol.StringValue(v), metadata)
 	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ParquetInput
+type ParquetInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ParquetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ParquetInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ParquetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -18908,6 +19011,7 @@ type QueueConfiguration struct {
 
 	// Container for object key name filtering rules. For information about key
 	// name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
 	// Optional unique identifier for configurations in a notification configuration.
@@ -19186,8 +19290,8 @@ type ReplicationConfiguration struct {
 	// Role is a required field
 	Role *string `type:"string" required:"true"`
 
-	// Container for information about a particular replication rule. Replication
-	// configuration must have at least one rule and can contain up to 1,000 rules.
+	// Container for one or more replication rules. Replication configuration must
+	// have at least one rule and can contain up to 1,000 rules.
 	//
 	// Rules is a required field
 	Rules []ReplicationRule `locationName:"Rule" type:"list" flattened:"true" required:"true"`
@@ -19256,22 +19360,48 @@ func (s ReplicationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type ReplicationRule struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether Amazon S3 should replicate delete makers.
+	DeleteMarkerReplication *DeleteMarkerReplication `type:"structure"`
+
 	// Container for replication destination information.
 	//
 	// Destination is a required field
 	Destination *Destination `type:"structure" required:"true"`
 
+	// Filter that identifies subset of objects to which the replication rule applies.
+	// A Filter must specify exactly one Prefix, Tag, or an And child element.
+	Filter *ReplicationRuleFilter `type:"structure"`
+
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
 	ID *string `type:"string"`
 
 	// Object keyname prefix identifying one or more objects to which the rule applies.
-	// Maximum prefix length can be up to 1,024 characters. Overlapping prefixes
-	// are not supported.
-	//
-	// Prefix is a required field
-	Prefix *string `type:"string" required:"true"`
+	// Maximum prefix length can be up to 1,024 characters.
+	Prefix *string `deprecated:"true" type:"string"`
 
-	// Container for filters that define which source objects should be replicated.
+	// The priority associated with the rule. If you specify multiple rules in a
+	// replication configuration, then Amazon S3 applies rule priority in the event
+	// there are conflicts (two or more rules identify the same object based on
+	// filter specified). The rule with higher priority takes precedence. For example,
+	//
+	//    * Same object quality prefix based filter criteria If prefixes you specified
+	//    in multiple rules overlap.
+	//
+	//    * Same object qualify tag based filter criteria specified in multiple
+	//    rules
+	//
+	// For more information, see Cross-Region Replication (CRR) ( https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html)
+	// in the Amazon S3 Developer Guide.
+	Priority *int64 `type:"integer"`
+
+	// Container that describes additional filters in identifying source objects
+	// that you want to replicate. Currently, Amazon S3 supports only the filter
+	// that you can specify for objects created with server-side encryption using
+	// an AWS KMS-managed key. You can choose to enable or disable replication of
+	// these objects.
+	//
+	// if you want Amazon S3 to replicate objects created with server-side encryption
+	// using AWS KMS-managed keys.
 	SourceSelectionCriteria *SourceSelectionCriteria `type:"structure"`
 
 	// The rule is ignored if status is not Enabled.
@@ -19297,16 +19427,17 @@ func (s *ReplicationRule) Validate() error {
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
-
-	if s.Prefix == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
-	}
 	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.Destination != nil {
 		if err := s.Destination.Validate(); err != nil {
 			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Filter != nil {
+		if err := s.Filter.Validate(); err != nil {
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SourceSelectionCriteria != nil {
@@ -19323,11 +19454,23 @@ func (s *ReplicationRule) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ReplicationRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeleteMarkerReplication != nil {
+		v := s.DeleteMarkerReplication
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DeleteMarkerReplication", v, metadata)
+	}
 	if s.Destination != nil {
 		v := s.Destination
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Destination", v, metadata)
+	}
+	if s.Filter != nil {
+		v := s.Filter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Filter", v, metadata)
 	}
 	if s.ID != nil {
 		v := *s.ID
@@ -19341,6 +19484,12 @@ func (s ReplicationRule) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
 	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Priority", protocol.Int64Value(v), metadata)
+	}
 	if s.SourceSelectionCriteria != nil {
 		v := s.SourceSelectionCriteria
 
@@ -19352,6 +19501,145 @@ func (s ReplicationRule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleAndOperator
+type ReplicationRuleAndOperator struct {
+	_ struct{} `type:"structure"`
+
+	Prefix *string `type:"string"`
+
+	Tags []Tag `locationName:"Tag" locationNameList:"Tag" type:"list" flattened:"true"`
+}
+
+// String returns the string representation
+func (s ReplicationRuleAndOperator) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReplicationRuleAndOperator) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReplicationRuleAndOperator) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReplicationRuleAndOperator"}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReplicationRuleAndOperator) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Prefix != nil {
+		v := *s.Prefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{Flatten: true}
+		ls0 := e.List(protocol.BodyTarget, "Tag", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Filter that identifies subset of objects to which the replication rule applies.
+// A Filter must specify exactly one Prefix, Tag, or an And child element.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRuleFilter
+type ReplicationRuleFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Container for specifying rule filters. These filters determine the subset
+	// of objects to which the rule applies. The element is required only if you
+	// specify more than one filter. For example:
+	//
+	//    * You specify both a Prefix and a Tag filters. Then you wrap these in
+	//    an And tag.
+	//
+	//    * You specify filter based on multiple tags. Then you wrap the Tag elements
+	//    in an And tag.
+	And *ReplicationRuleAndOperator `type:"structure"`
+
+	// Object keyname prefix that identifies subset of objects to which the rule
+	// applies.
+	Prefix *string `type:"string"`
+
+	// Container for specifying a tag key and value.
+	//
+	// The rule applies only to objects having the tag in its tagset.
+	Tag *Tag `type:"structure"`
+}
+
+// String returns the string representation
+func (s ReplicationRuleFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReplicationRuleFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReplicationRuleFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReplicationRuleFilter"}
+	if s.And != nil {
+		if err := s.And.Validate(); err != nil {
+			invalidParams.AddNested("And", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tag != nil {
+		if err := s.Tag.Validate(); err != nil {
+			invalidParams.AddNested("Tag", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReplicationRuleFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if s.And != nil {
+		v := s.And
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "And", v, metadata)
+	}
+	if s.Prefix != nil {
+		v := *s.Prefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
+	}
+	if s.Tag != nil {
+		v := s.Tag
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Tag", v, metadata)
 	}
 	return nil
 }
@@ -20170,6 +20458,8 @@ type SourceSelectionCriteria struct {
 	_ struct{} `type:"structure"`
 
 	// Container for filter information of selection of KMS Encrypted S3 objects.
+	// The element is required if you include SourceSelectionCriteria in the replication
+	// configuration.
 	SseKmsEncryptedObjects *SseKmsEncryptedObjects `type:"structure"`
 }
 
@@ -20552,6 +20842,7 @@ type TopicConfiguration struct {
 
 	// Container for object key name filtering rules. For information about key
 	// name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
 	// Optional unique identifier for configurations in a notification configuration.
@@ -21610,8 +21901,9 @@ type CompressionType string
 
 // Enum values for CompressionType
 const (
-	CompressionTypeNone CompressionType = "NONE"
-	CompressionTypeGzip CompressionType = "GZIP"
+	CompressionTypeNone  CompressionType = "NONE"
+	CompressionTypeGzip  CompressionType = "GZIP"
+	CompressionTypeBzip2 CompressionType = "BZIP2"
 )
 
 func (enum CompressionType) MarshalValue() (string, error) {
@@ -21619,6 +21911,23 @@ func (enum CompressionType) MarshalValue() (string, error) {
 }
 
 func (enum CompressionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeleteMarkerReplicationStatus string
+
+// Enum values for DeleteMarkerReplicationStatus
+const (
+	DeleteMarkerReplicationStatusEnabled  DeleteMarkerReplicationStatus = "Enabled"
+	DeleteMarkerReplicationStatusDisabled DeleteMarkerReplicationStatus = "Disabled"
+)
+
+func (enum DeleteMarkerReplicationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeleteMarkerReplicationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

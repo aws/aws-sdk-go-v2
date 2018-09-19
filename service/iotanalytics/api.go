@@ -186,10 +186,10 @@ func (r CreateDatasetRequest) Send() (*CreateDatasetOutput, error) {
 // AWS IoT Analytics.
 //
 // Creates a data set. A data set stores data retrieved from a data store by
-// applying an SQL action.
-//
-// This operation creates the skeleton of a data set. To populate the data set,
-// call "CreateDatasetContent".
+// applying a "queryAction" (a SQL query) or a "containerAction" (executing
+// a containerized application). This operation creates the skeleton of a data
+// set. The data set can be populated manually by calling "CreateDatasetContent"
+// or automatically according to a "trigger" you specify.
 //
 //    // Example sending a request using the CreateDatasetRequest method.
 //    req := client.CreateDatasetRequest(params)
@@ -239,7 +239,7 @@ func (r CreateDatasetContentRequest) Send() (*CreateDatasetContentOutput, error)
 // CreateDatasetContentRequest returns a request value for making API operation for
 // AWS IoT Analytics.
 //
-// Creates the content of a data set by applying an SQL action.
+// Creates the content of a data set by applying a SQL action.
 //
 //    // Example sending a request using the CreateDatasetContentRequest method.
 //    req := client.CreateDatasetContentRequest(params)
@@ -262,8 +262,6 @@ func (c *IoTAnalytics) CreateDatasetContentRequest(input *CreateDatasetContentIn
 
 	output := &CreateDatasetContentOutput{}
 	req := c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateDatasetContentRequest{Request: req, Input: input, Copy: c.CreateDatasetContentRequest}
@@ -1035,6 +1033,108 @@ func (p *ListChannelsPager) CurrentPage() *ListChannelsOutput {
 	return p.Pager.CurrentPage().(*ListChannelsOutput)
 }
 
+const opListDatasetContents = "ListDatasetContents"
+
+// ListDatasetContentsRequest is a API request type for the ListDatasetContents API operation.
+type ListDatasetContentsRequest struct {
+	*aws.Request
+	Input *ListDatasetContentsInput
+	Copy  func(*ListDatasetContentsInput) ListDatasetContentsRequest
+}
+
+// Send marshals and sends the ListDatasetContents API request.
+func (r ListDatasetContentsRequest) Send() (*ListDatasetContentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDatasetContentsOutput), nil
+}
+
+// ListDatasetContentsRequest returns a request value for making API operation for
+// AWS IoT Analytics.
+//
+// Lists information about data set contents that have been created.
+//
+//    // Example sending a request using the ListDatasetContentsRequest method.
+//    req := client.ListDatasetContentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListDatasetContents
+func (c *IoTAnalytics) ListDatasetContentsRequest(input *ListDatasetContentsInput) ListDatasetContentsRequest {
+	op := &aws.Operation{
+		Name:       opListDatasetContents,
+		HTTPMethod: "GET",
+		HTTPPath:   "/datasets/{datasetName}/contents",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListDatasetContentsInput{}
+	}
+
+	output := &ListDatasetContentsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDatasetContentsRequest{Request: req, Input: input, Copy: c.ListDatasetContentsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListDatasetContentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListDatasetContents operation.
+//		req := client.ListDatasetContentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDatasetContentsRequest) Paginate(opts ...aws.Option) ListDatasetContentsPager {
+	return ListDatasetContentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDatasetContentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListDatasetContentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDatasetContentsPager struct {
+	aws.Pager
+}
+
+func (p *ListDatasetContentsPager) CurrentPage() *ListDatasetContentsOutput {
+	return p.Pager.CurrentPage().(*ListDatasetContentsOutput)
+}
+
 const opListDatasets = "ListDatasets"
 
 // ListDatasetsRequest is a API request type for the ListDatasets API operation.
@@ -1341,6 +1441,56 @@ func (p *ListPipelinesPager) CurrentPage() *ListPipelinesOutput {
 	return p.Pager.CurrentPage().(*ListPipelinesOutput)
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS IoT Analytics.
+//
+// Lists the tags (metadata) which you have assigned to the resource.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListTagsForResource
+func (c *IoTAnalytics) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
 const opPutLoggingOptions = "PutLoggingOptions"
 
 // PutLoggingOptionsRequest is a API request type for the PutLoggingOptions API operation.
@@ -1364,6 +1514,12 @@ func (r PutLoggingOptionsRequest) Send() (*PutLoggingOptionsOutput, error) {
 // AWS IoT Analytics.
 //
 // Sets or updates the AWS IoT Analytics logging options.
+//
+// Note that if you update the value of any loggingOptions field, it takes up
+// to one minute for the change to take effect. Also, if you change the policy
+// attached to the role you specified in the roleArn field (for example, to
+// correct an invalid policy) it takes up to 5 minutes for that change to take
+// effect.
 //
 //    // Example sending a request using the PutLoggingOptionsRequest method.
 //    req := client.PutLoggingOptionsRequest(params)
@@ -1542,6 +1698,107 @@ func (c *IoTAnalytics) StartPipelineReprocessingRequest(input *StartPipelineRepr
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StartPipelineReprocessingRequest{Request: req, Input: input, Copy: c.StartPipelineReprocessingRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS IoT Analytics.
+//
+// Adds to or modifies the tags of the given resource. Tags are metadata which
+// can be used to manage a resource.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/TagResource
+func (c *IoTAnalytics) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/tags",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS IoT Analytics.
+//
+// Removes the given tags (metadata) from the resource.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UntagResource
+func (c *IoTAnalytics) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/tags",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateChannel = "UpdateChannel"
@@ -2257,6 +2514,36 @@ func (s ChannelActivity) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Statistics information about the channel.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelStatistics
+type ChannelStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The estimated size of the channel.
+	Size *EstimatedResourceSize `locationName:"size" type:"structure"`
+}
+
+// String returns the string representation
+func (s ChannelStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ChannelStatistics) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ChannelStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Size != nil {
+		v := s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "size", v, metadata)
+	}
+	return nil
+}
+
 // A summary of information about a channel.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ChannelSummary
 type ChannelSummary struct {
@@ -2314,6 +2601,120 @@ func (s ChannelSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information needed to run the "containerAction" to produce data set contents.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ContainerDatasetAction
+type ContainerDatasetAction struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the role which gives permission to the system to access needed
+	// resources in order to run the "containerAction". This includes, at minimum,
+	// permission to retrieve the data set contents which are the input to the containerized
+	// application.
+	//
+	// ExecutionRoleArn is a required field
+	ExecutionRoleArn *string `locationName:"executionRoleArn" min:"20" type:"string" required:"true"`
+
+	// The ARN of the Docker container stored in your account. The Docker container
+	// contains an application and needed support libraries and is used to generate
+	// data set contents.
+	//
+	// Image is a required field
+	Image *string `locationName:"image" type:"string" required:"true"`
+
+	// Configuration of the resource which executes the "containerAction".
+	//
+	// ResourceConfiguration is a required field
+	ResourceConfiguration *ResourceConfiguration `locationName:"resourceConfiguration" type:"structure" required:"true"`
+
+	// The values of variables used within the context of the execution of the containerized
+	// application (basically, parameters passed to the application). Each variable
+	// must have a name and a value given by one of "stringValue", "datasetContentVersionValue",
+	// or "outputFileUriValue".
+	Variables []Variable `locationName:"variables" type:"list"`
+}
+
+// String returns the string representation
+func (s ContainerDatasetAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContainerDatasetAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContainerDatasetAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContainerDatasetAction"}
+
+	if s.ExecutionRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if s.ExecutionRoleArn != nil && len(*s.ExecutionRoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExecutionRoleArn", 20))
+	}
+
+	if s.Image == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
+	}
+
+	if s.ResourceConfiguration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceConfiguration"))
+	}
+	if s.ResourceConfiguration != nil {
+		if err := s.ResourceConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ResourceConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Variables != nil {
+		for i, v := range s.Variables {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Variables", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContainerDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExecutionRoleArn != nil {
+		v := *s.ExecutionRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "executionRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Image != nil {
+		v := *s.Image
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "image", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceConfiguration != nil {
+		v := s.ResourceConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resourceConfiguration", v, metadata)
+	}
+	if len(s.Variables) > 0 {
+		v := s.Variables
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "variables", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateChannelRequest
 type CreateChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -2325,6 +2726,9 @@ type CreateChannelInput struct {
 
 	// How long, in days, message data is kept for the channel.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
+
+	// Metadata which can be used to manage the channel.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2347,9 +2751,19 @@ func (s *CreateChannelInput) Validate() error {
 	if s.ChannelName != nil && len(*s.ChannelName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChannelName", 1))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
 			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -2373,6 +2787,18 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -2480,11 +2906,14 @@ func (s CreateDatasetContentInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateDatasetContentOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/CreateDatasetContentResponse
 type CreateDatasetContentOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
+
+	// The version ID of the data set contents which are being created.
+	VersionId *string `locationName:"versionId" min:"7" type:"string"`
 }
 
 // String returns the string representation
@@ -2504,6 +2933,12 @@ func (s CreateDatasetContentOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateDatasetContentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VersionId != nil {
+		v := *s.VersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "versionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -2511,8 +2946,7 @@ func (s CreateDatasetContentOutput) MarshalFields(e protocol.FieldEncoder) error
 type CreateDatasetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of actions that create the data set. Only one action is supported
-	// at this time.
+	// A list of actions that create the data set contents.
 	//
 	// Actions is a required field
 	Actions []DatasetAction `locationName:"actions" min:"1" type:"list" required:"true"`
@@ -2522,9 +2956,18 @@ type CreateDatasetInput struct {
 	// DatasetName is a required field
 	DatasetName *string `locationName:"datasetName" min:"1" type:"string" required:"true"`
 
-	// A list of triggers. A trigger causes data set content to be populated at
-	// a specified time or time interval. The list of triggers can be empty or contain
-	// up to five DataSetTrigger objects.
+	// [Optional] How long, in days, message data is kept for the data set. If not
+	// given or set to null, the latest version of the dataset content plus the
+	// latest succeeded version (if they are different) are retained for at most
+	// 90 days.
+	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
+
+	// Metadata which can be used to manage the data set.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
+
+	// A list of triggers. A trigger causes data set contents to be populated at
+	// a specified time interval or when another data set's contents are created.
+	// The list of triggers can be empty or contain up to five DataSetTrigger objects.
 	Triggers []DatasetTrigger `locationName:"triggers" type:"list"`
 }
 
@@ -2555,10 +2998,32 @@ func (s *CreateDatasetInput) Validate() error {
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.RetentionPeriod != nil {
+		if err := s.RetentionPeriod.Validate(); err != nil {
+			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Triggers != nil {
+		for i, v := range s.Triggers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2590,6 +3055,24 @@ func (s CreateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RetentionPeriod != nil {
+		v := s.RetentionPeriod
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.Triggers) > 0 {
 		v := s.Triggers
 
@@ -2616,6 +3099,9 @@ type CreateDatasetOutput struct {
 
 	// The name of the data set.
 	DatasetName *string `locationName:"datasetName" min:"1" type:"string"`
+
+	// How long, in days, message data is kept for the data set.
+	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 }
 
 // String returns the string representation
@@ -2647,6 +3133,12 @@ func (s CreateDatasetOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RetentionPeriod != nil {
+		v := s.RetentionPeriod
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
+	}
 	return nil
 }
 
@@ -2661,6 +3153,9 @@ type CreateDatastoreInput struct {
 
 	// How long, in days, message data is kept for the data store.
 	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
+
+	// Metadata which can be used to manage the data store.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2683,9 +3178,19 @@ func (s *CreateDatastoreInput) Validate() error {
 	if s.DatastoreName != nil && len(*s.DatastoreName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatastoreName", 1))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
 			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -2709,6 +3214,18 @@ func (s CreateDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -2786,6 +3303,9 @@ type CreatePipelineInput struct {
 	//
 	// PipelineName is a required field
 	PipelineName *string `locationName:"pipelineName" min:"1" type:"string" required:"true"`
+
+	// Metadata which can be used to manage the pipeline.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2815,10 +3335,20 @@ func (s *CreatePipelineInput) Validate() error {
 	if s.PipelineName != nil && len(*s.PipelineName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineName", 1))
 	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
 	if s.PipelineActivities != nil {
 		for i, v := range s.PipelineActivities {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PipelineActivities", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2849,6 +3379,18 @@ func (s CreatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "pipelineName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -2903,7 +3445,7 @@ func (s CreatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
 type Dataset struct {
 	_ struct{} `type:"structure"`
 
-	// The "DatasetAction" objects that create the data set.
+	// The "DatasetAction" objects that automatically create the data set contents.
 	Actions []DatasetAction `locationName:"actions" min:"1" type:"list"`
 
 	// The ARN of the data set.
@@ -2917,6 +3459,9 @@ type Dataset struct {
 
 	// The name of the data set.
 	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// [Optional] How long, in days, message data is kept for the data set.
+	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 
 	// The status of the data set.
 	Status DatasetStatus `locationName:"status" type:"string" enum:"true"`
@@ -2974,6 +3519,12 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RetentionPeriod != nil {
+		v := s.RetentionPeriod
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -3000,8 +3551,14 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 type DatasetAction struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the data set action.
+	// The name of the data set action by which data set contents are automatically
+	// created.
 	ActionName *string `locationName:"actionName" min:"1" type:"string"`
+
+	// Information which allows the system to run a containerized application in
+	// order to create the data set contents. The application must be in a Docker
+	// container along with any needed support libraries.
+	ContainerAction *ContainerDatasetAction `locationName:"containerAction" type:"structure"`
 
 	// An "SqlQueryDatasetAction" object that contains the SQL query to modify the
 	// message.
@@ -3024,6 +3581,11 @@ func (s *DatasetAction) Validate() error {
 	if s.ActionName != nil && len(*s.ActionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ActionName", 1))
 	}
+	if s.ContainerAction != nil {
+		if err := s.ContainerAction.Validate(); err != nil {
+			invalidParams.AddNested("ContainerAction", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.QueryAction != nil {
 		if err := s.QueryAction.Validate(); err != nil {
 			invalidParams.AddNested("QueryAction", err.(aws.ErrInvalidParams))
@@ -3044,6 +3606,12 @@ func (s DatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "actionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ContainerAction != nil {
+		v := s.ContainerAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "containerAction", v, metadata)
+	}
 	if s.QueryAction != nil {
 		v := s.QueryAction
 
@@ -3053,15 +3621,54 @@ func (s DatasetAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The state of the data set and the reason it is in this state.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetActionSummary
+type DatasetActionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the action which automatically creates the data set's contents.
+	ActionName *string `locationName:"actionName" min:"1" type:"string"`
+
+	// The type of action by which the data set's contents are automatically created.
+	ActionType DatasetActionType `locationName:"actionType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DatasetActionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DatasetActionSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatasetActionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActionName != nil {
+		v := *s.ActionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ActionType) > 0 {
+		v := s.ActionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The state of the data set contents and the reason they are in this state.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentStatus
 type DatasetContentStatus struct {
 	_ struct{} `type:"structure"`
 
-	// The reason the data set is in this state.
+	// The reason the data set contents are in this state.
 	Reason *string `locationName:"reason" type:"string"`
 
-	// The state of the data set. Can be one of "CREATING", "SUCCEEDED" or "FAILED".
+	// The state of the data set contents. Can be one of "READY", "CREATING", "SUCCEEDED"
+	// or "FAILED".
 	State DatasetContentState `locationName:"state" type:"string" enum:"true"`
 }
 
@@ -3088,6 +3695,114 @@ func (s DatasetContentStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Summary information about data set contents.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentSummary
+type DatasetContentSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The actual time the creation of the data set contents was started.
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The time the creation of the data set contents was scheduled to start.
+	ScheduleTime *time.Time `locationName:"scheduleTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The status of the data set contents.
+	Status *DatasetContentStatus `locationName:"status" type:"structure"`
+
+	// The version of the data set contents.
+	Version *string `locationName:"version" min:"7" type:"string"`
+}
+
+// String returns the string representation
+func (s DatasetContentSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DatasetContentSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatasetContentSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.ScheduleTime != nil {
+		v := *s.ScheduleTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "scheduleTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "status", v, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The data set whose latest contents will be used as input to the notebook
+// or application.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentVersionValue
+type DatasetContentVersionValue struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the data set whose latest contents will be used as input to the
+	// notebook or application.
+	//
+	// DatasetName is a required field
+	DatasetName *string `locationName:"datasetName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DatasetContentVersionValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DatasetContentVersionValue) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DatasetContentVersionValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DatasetContentVersionValue"}
+
+	if s.DatasetName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
+	}
+	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatasetContentVersionValue) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DatasetName != nil {
+		v := *s.DatasetName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3136,6 +3851,9 @@ func (s DatasetEntry) MarshalFields(e protocol.FieldEncoder) error {
 type DatasetSummary struct {
 	_ struct{} `type:"structure"`
 
+	// A list of "DataActionSummary" objects.
+	Actions []DatasetActionSummary `locationName:"actions" min:"1" type:"list"`
+
 	// The time the data set was created.
 	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
 
@@ -3147,6 +3865,11 @@ type DatasetSummary struct {
 
 	// The status of the data set.
 	Status DatasetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// A list of triggers. A trigger causes data set content to be populated at
+	// a specified time interval or when another data set is populated. The list
+	// of triggers can be empty or contain up to five DataSetTrigger objects
+	Triggers []DatasetTrigger `locationName:"triggers" type:"list"`
 }
 
 // String returns the string representation
@@ -3161,6 +3884,18 @@ func (s DatasetSummary) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DatasetSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Actions) > 0 {
+		v := s.Actions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "actions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.CreationTime != nil {
 		v := *s.CreationTime
 
@@ -3185,6 +3920,18 @@ func (s DatasetSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if len(s.Triggers) > 0 {
+		v := s.Triggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "triggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -3192,6 +3939,10 @@ func (s DatasetSummary) MarshalFields(e protocol.FieldEncoder) error {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetTrigger
 type DatasetTrigger struct {
 	_ struct{} `type:"structure"`
+
+	// The data set whose content creation will trigger the creation of this data
+	// set's contents.
+	Dataset *TriggeringDataset `locationName:"dataset" type:"structure"`
 
 	// The "Schedule" when the trigger is initiated.
 	Schedule *Schedule `locationName:"schedule" type:"structure"`
@@ -3207,8 +3958,29 @@ func (s DatasetTrigger) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DatasetTrigger) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DatasetTrigger"}
+	if s.Dataset != nil {
+		if err := s.Dataset.Validate(); err != nil {
+			invalidParams.AddNested("Dataset", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DatasetTrigger) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Dataset != nil {
+		v := s.Dataset
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dataset", v, metadata)
+	}
 	if s.Schedule != nil {
 		v := s.Schedule
 
@@ -3366,6 +4138,36 @@ func (s DatastoreActivity) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Statistical information about the data store.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreStatistics
+type DatastoreStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The estimated size of the data store.
+	Size *EstimatedResourceSize `locationName:"size" type:"structure"`
+}
+
+// String returns the string representation
+func (s DatastoreStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DatastoreStatistics) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatastoreStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Size != nil {
+		v := s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "size", v, metadata)
+	}
+	return nil
+}
+
 // A summary of information about a data store.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatastoreSummary
 type DatastoreSummary struct {
@@ -3511,7 +4313,7 @@ type DeleteDatasetContentInput struct {
 	// The version of the data set whose content is deleted. You can also use the
 	// strings "$LATEST" or "$LATEST_SUCCEEDED" to delete the latest or latest successfully
 	// completed data set. If not specified, "$LATEST_SUCCEEDED" is the default.
-	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
+	VersionId *string `location:"querystring" locationName:"versionId" min:"7" type:"string"`
 }
 
 // String returns the string representation
@@ -3533,6 +4335,9 @@ func (s *DeleteDatasetContentInput) Validate() error {
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
+	}
+	if s.VersionId != nil && len(*s.VersionId) < 7 {
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 7))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3814,6 +4619,76 @@ func (s DeletePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// When you create data set contents using message data from a specified time
+// frame, some message data may still be "in flight" when processing begins,
+// and so will not arrive in time to be processed. Use this field to make allowances
+// for the "in flight" time of your message data, so that data not processed
+// from the previous time frame will be included with the next time frame. Without
+// this, missed message data would be excluded from processing during the next
+// time frame as well, because its timestamp places it within the previous time
+// frame.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DeltaTime
+type DeltaTime struct {
+	_ struct{} `type:"structure"`
+
+	// The number of seconds of estimated "in flight" lag time of message data.
+	//
+	// OffsetSeconds is a required field
+	OffsetSeconds *int64 `locationName:"offsetSeconds" type:"integer" required:"true"`
+
+	// An expression by which the time of the message data may be determined. This
+	// may be the name of a timestamp field, or a SQL expression which is used to
+	// derive the time the message data was generated.
+	//
+	// TimeExpression is a required field
+	TimeExpression *string `locationName:"timeExpression" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeltaTime) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeltaTime) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeltaTime) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeltaTime"}
+
+	if s.OffsetSeconds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OffsetSeconds"))
+	}
+
+	if s.TimeExpression == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimeExpression"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeltaTime) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OffsetSeconds != nil {
+		v := *s.OffsetSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "offsetSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeExpression != nil {
+		v := *s.TimeExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DescribeChannelRequest
 type DescribeChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -3822,6 +4697,10 @@ type DescribeChannelInput struct {
 	//
 	// ChannelName is a required field
 	ChannelName *string `location:"uri" locationName:"channelName" min:"1" type:"string" required:"true"`
+
+	// If true, additional statistical information about the channel is included
+	// in the response.
+	IncludeStatistics *bool `location:"querystring" locationName:"includeStatistics" type:"boolean"`
 }
 
 // String returns the string representation
@@ -3860,6 +4739,12 @@ func (s DescribeChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.IncludeStatistics != nil {
+		v := *s.IncludeStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "includeStatistics", protocol.BoolValue(v), metadata)
+	}
 	return nil
 }
 
@@ -3871,6 +4756,10 @@ type DescribeChannelOutput struct {
 
 	// An object that contains information about the channel.
 	Channel *Channel `locationName:"channel" type:"structure"`
+
+	// Statistics about the channel. Included if the 'includeStatistics' parameter
+	// is set to true in the request.
+	Statistics *ChannelStatistics `locationName:"statistics" type:"structure"`
 }
 
 // String returns the string representation
@@ -3895,6 +4784,12 @@ func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "channel", v, metadata)
+	}
+	if s.Statistics != nil {
+		v := s.Statistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "statistics", v, metadata)
 	}
 	return nil
 }
@@ -3992,6 +4887,10 @@ type DescribeDatastoreInput struct {
 	//
 	// DatastoreName is a required field
 	DatastoreName *string `location:"uri" locationName:"datastoreName" min:"1" type:"string" required:"true"`
+
+	// If true, additional statistical information about the datastore is included
+	// in the response.
+	IncludeStatistics *bool `location:"querystring" locationName:"includeStatistics" type:"boolean"`
 }
 
 // String returns the string representation
@@ -4030,6 +4929,12 @@ func (s DescribeDatastoreInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "datastoreName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.IncludeStatistics != nil {
+		v := *s.IncludeStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "includeStatistics", protocol.BoolValue(v), metadata)
+	}
 	return nil
 }
 
@@ -4041,6 +4946,10 @@ type DescribeDatastoreOutput struct {
 
 	// Information about the data store.
 	Datastore *Datastore `locationName:"datastore" type:"structure"`
+
+	// Additional statistical information about the data store. Included if the
+	// 'includeStatistics' parameter is set to true in the request.
+	Statistics *DatastoreStatistics `locationName:"statistics" type:"structure"`
 }
 
 // String returns the string representation
@@ -4065,6 +4974,12 @@ func (s DescribeDatastoreOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "datastore", v, metadata)
+	}
+	if s.Statistics != nil {
+		v := s.Statistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "statistics", v, metadata)
 	}
 	return nil
 }
@@ -4442,12 +5357,51 @@ func (s DeviceShadowEnrichActivity) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// The estimated size of the resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/EstimatedResourceSize
+type EstimatedResourceSize struct {
+	_ struct{} `type:"structure"`
+
+	// The time when the estimate of the size of the resource was made.
+	EstimatedOn *time.Time `locationName:"estimatedOn" type:"timestamp" timestampFormat:"unix"`
+
+	// The estimated size of the resource in bytes.
+	EstimatedSizeInBytes *float64 `locationName:"estimatedSizeInBytes" type:"double"`
+}
+
+// String returns the string representation
+func (s EstimatedResourceSize) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EstimatedResourceSize) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EstimatedResourceSize) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EstimatedOn != nil {
+		v := *s.EstimatedOn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "estimatedOn", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.EstimatedSizeInBytes != nil {
+		v := *s.EstimatedSizeInBytes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "estimatedSizeInBytes", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
 // An activity that filters a message based on its attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/FilterActivity
 type FilterActivity struct {
 	_ struct{} `type:"structure"`
 
-	// An expression that looks like an SQL WHERE clause that must return a Boolean
+	// An expression that looks like a SQL WHERE clause that must return a Boolean
 	// value.
 	//
 	// Filter is a required field
@@ -4535,7 +5489,7 @@ type GetDatasetContentInput struct {
 	// the strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of
 	// the latest or latest successfully completed data set. If not specified, "$LATEST_SUCCEEDED"
 	// is the default.
-	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
+	VersionId *string `location:"querystring" locationName:"versionId" min:"7" type:"string"`
 }
 
 // String returns the string representation
@@ -4557,6 +5511,9 @@ func (s *GetDatasetContentInput) Validate() error {
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
+	}
+	if s.VersionId != nil && len(*s.VersionId) < 7 {
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 7))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4833,6 +5790,128 @@ func (s ListChannelsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "channelSummaries", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListDatasetContentsRequest
+type ListDatasetContentsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the data set whose contents information you want to list.
+	//
+	// DatasetName is a required field
+	DatasetName *string `location:"uri" locationName:"datasetName" min:"1" type:"string" required:"true"`
+
+	// The maximum number of results to return in this request.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token for the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListDatasetContentsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDatasetContentsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListDatasetContentsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetContentsInput"}
+
+	if s.DatasetName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
+	}
+	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDatasetContentsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DatasetName != nil {
+		v := *s.DatasetName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "datasetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListDatasetContentsResponse
+type ListDatasetContentsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Summary information about data set contents that have been created.
+	DatasetContentSummaries []DatasetContentSummary `locationName:"datasetContentSummaries" type:"list"`
+
+	// The token to retrieve the next set of results, or null if there are no more
+	// results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListDatasetContentsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDatasetContentsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDatasetContentsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDatasetContentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DatasetContentSummaries) > 0 {
+		v := s.DatasetContentSummaries
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "datasetContentSummaries", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
@@ -5167,6 +6246,97 @@ func (s ListPipelinesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource whose tags you want to list.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The tags (metadata) which you have assigned to the resource.
+	Tags []Tag `locationName:"tags" min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Information about logging options.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/LoggingOptions
 type LoggingOptions struct {
@@ -5349,12 +6519,15 @@ func (s MathActivity) MarshalFields(e protocol.FieldEncoder) error {
 type Message struct {
 	_ struct{} `type:"structure"`
 
-	// The ID you wish to assign to the message.
+	// The ID you wish to assign to the message. Each "messageId" must be unique
+	// within each batch sent.
 	//
 	// MessageId is a required field
 	MessageId *string `locationName:"messageId" min:"1" type:"string" required:"true"`
 
-	// The payload of the message.
+	// The payload of the message. This may be a JSON string or a Base64-encoded
+	// string representing binary data (in which case you must decode it by means
+	// of a pipeline activity).
 	//
 	// Payload is automatically base64 encoded/decoded by the SDK.
 	//
@@ -5406,6 +6579,54 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "payload", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The URI of the location where data set contents are stored, usually the URI
+// of a file in an S3 bucket.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/OutputFileUriValue
+type OutputFileUriValue struct {
+	_ struct{} `type:"structure"`
+
+	// The URI of the location where data set contents are stored, usually the URI
+	// of a file in an S3 bucket.
+	//
+	// FileName is a required field
+	FileName *string `locationName:"fileName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s OutputFileUriValue) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OutputFileUriValue) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OutputFileUriValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OutputFileUriValue"}
+
+	if s.FileName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FileName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutputFileUriValue) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FileName != nil {
+		v := *s.FileName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5811,6 +7032,60 @@ func (s PutLoggingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information which is used to filter message data, to segregate it according
+// to the time frame in which it arrives.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/QueryFilter
+type QueryFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Used to limit data to that which has arrived since the last execution of
+	// the action. When you create data set contents using message data from a specified
+	// time frame, some message data may still be "in flight" when processing begins,
+	// and so will not arrive in time to be processed. Use this field to make allowances
+	// for the "in flight" time of you message data, so that data not processed
+	// from a previous time frame will be included with the next time frame. Without
+	// this, missed message data would be excluded from processing during the next
+	// time frame as well, because its timestamp places it within the previous time
+	// frame.
+	DeltaTime *DeltaTime `locationName:"deltaTime" type:"structure"`
+}
+
+// String returns the string representation
+func (s QueryFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *QueryFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "QueryFilter"}
+	if s.DeltaTime != nil {
+		if err := s.DeltaTime.Validate(); err != nil {
+			invalidParams.AddNested("DeltaTime", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeltaTime != nil {
+		v := s.DeltaTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "deltaTime", v, metadata)
+	}
+	return nil
+}
+
 // An activity that removes attributes from a message.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/RemoveAttributesActivity
 type RemoveAttributesActivity struct {
@@ -5940,6 +7215,71 @@ func (s ReprocessingSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The configuration of the resource used to execute the "containerAction".
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/ResourceConfiguration
+type ResourceConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The type of the compute resource used to execute the "containerAction". Possible
+	// values are: ACU_1 (vCPU=4, memory=16GiB) or ACU_2 (vCPU=8, memory=32GiB).
+	//
+	// ComputeType is a required field
+	ComputeType ComputeType `locationName:"computeType" type:"string" required:"true" enum:"true"`
+
+	// The size (in GB) of the persistent storage available to the resource instance
+	// used to execute the "containerAction" (min: 1, max: 50).
+	//
+	// VolumeSizeInGB is a required field
+	VolumeSizeInGB *int64 `locationName:"volumeSizeInGB" min:"1" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ResourceConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceConfiguration"}
+	if len(s.ComputeType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ComputeType"))
+	}
+
+	if s.VolumeSizeInGB == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VolumeSizeInGB"))
+	}
+	if s.VolumeSizeInGB != nil && *s.VolumeSizeInGB < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("VolumeSizeInGB", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ComputeType) > 0 {
+		v := s.ComputeType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.VolumeSizeInGB != nil {
+		v := *s.VolumeSizeInGB
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "volumeSizeInGB", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -6375,7 +7715,10 @@ func (s SelectAttributesActivity) MarshalFields(e protocol.FieldEncoder) error {
 type SqlQueryDatasetAction struct {
 	_ struct{} `type:"structure"`
 
-	// An SQL query string.
+	// Pre-filters applied to message data.
+	Filters []QueryFilter `locationName:"filters" type:"list"`
+
+	// A SQL query string.
 	//
 	// SqlQuery is a required field
 	SqlQuery *string `locationName:"sqlQuery" type:"string" required:"true"`
@@ -6398,6 +7741,13 @@ func (s *SqlQueryDatasetAction) Validate() error {
 	if s.SqlQuery == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SqlQuery"))
 	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6407,6 +7757,18 @@ func (s *SqlQueryDatasetAction) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SqlQueryDatasetAction) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "filters", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.SqlQuery != nil {
 		v := *s.SqlQuery
 
@@ -6519,6 +7881,331 @@ func (s StartPipelineReprocessingOutput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
+// A set of key/value pairs which are used to manage the resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The tag's key.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
+
+	// The tag's value.
+	//
+	// Value is a required field
+	Value *string `locationName:"value" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource whose tags will be modified.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" min:"20" type:"string" required:"true"`
+
+	// The new or modified tags for the resource.
+	//
+	// Tags is a required field
+	Tags []Tag `locationName:"tags" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/TagResourceResponse
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Information about the data set whose content generation will trigger the
+// new data set content generation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/TriggeringDataset
+type TriggeringDataset struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the data set whose content generation will trigger the new data
+	// set content generation.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TriggeringDataset) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TriggeringDataset) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TriggeringDataset) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TriggeringDataset"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TriggeringDataset) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource whose tags will be removed.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" min:"20" type:"string" required:"true"`
+
+	// The keys of those tags which will be removed.
+	//
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+	if s.TagKeys != nil && len(s.TagKeys) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.QueryTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UntagResourceResponse
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/UpdateChannelRequest
 type UpdateChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -6613,7 +8300,7 @@ func (s UpdateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateDatasetInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of "DatasetAction" objects. Only one action is supported at this time.
+	// A list of "DatasetAction" objects.
 	//
 	// Actions is a required field
 	Actions []DatasetAction `locationName:"actions" min:"1" type:"list" required:"true"`
@@ -6622,6 +8309,9 @@ type UpdateDatasetInput struct {
 	//
 	// DatasetName is a required field
 	DatasetName *string `location:"uri" locationName:"datasetName" min:"1" type:"string" required:"true"`
+
+	// How long, in days, message data is kept for the data set.
+	RetentionPeriod *RetentionPeriod `locationName:"retentionPeriod" type:"structure"`
 
 	// A list of "DatasetTrigger" objects. The list can be empty or can contain
 	// up to five DataSetTrigger objects.
@@ -6662,6 +8352,18 @@ func (s *UpdateDatasetInput) Validate() error {
 			}
 		}
 	}
+	if s.RetentionPeriod != nil {
+		if err := s.RetentionPeriod.Validate(); err != nil {
+			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Triggers != nil {
+		for i, v := range s.Triggers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6683,6 +8385,12 @@ func (s UpdateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.RetentionPeriod != nil {
+		v := s.RetentionPeriod
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retentionPeriod", v, metadata)
 	}
 	if len(s.Triggers) > 0 {
 		v := s.Triggers
@@ -6935,6 +8643,104 @@ func (s UpdatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An instance of a variable to be passed to the "containerAction" execution.
+// Each variable must have a name and a value given by one of "stringValue",
+// "datasetContentVersionValue", or "outputFileUriValue".
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/Variable
+type Variable struct {
+	_ struct{} `type:"structure"`
+
+	// The value of the variable as a structure that specifies a data set content
+	// version.
+	DatasetContentVersionValue *DatasetContentVersionValue `locationName:"datasetContentVersionValue" type:"structure"`
+
+	// The value of the variable as a double (numeric).
+	DoubleValue *float64 `locationName:"doubleValue" type:"double"`
+
+	// The name of the variable.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The value of the variable as a structure that specifies an output file URI.
+	OutputFileUriValue *OutputFileUriValue `locationName:"outputFileUriValue" type:"structure"`
+
+	// The value of the variable as a string.
+	StringValue *string `locationName:"stringValue" type:"string"`
+}
+
+// String returns the string representation
+func (s Variable) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Variable) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Variable) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Variable"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.DatasetContentVersionValue != nil {
+		if err := s.DatasetContentVersionValue.Validate(); err != nil {
+			invalidParams.AddNested("DatasetContentVersionValue", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OutputFileUriValue != nil {
+		if err := s.OutputFileUriValue.Validate(); err != nil {
+			invalidParams.AddNested("OutputFileUriValue", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Variable) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DatasetContentVersionValue != nil {
+		v := s.DatasetContentVersionValue
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "datasetContentVersionValue", v, metadata)
+	}
+	if s.DoubleValue != nil {
+		v := *s.DoubleValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "doubleValue", protocol.Float64Value(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OutputFileUriValue != nil {
+		v := s.OutputFileUriValue
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "outputFileUriValue", v, metadata)
+	}
+	if s.StringValue != nil {
+		v := *s.StringValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stringValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type ChannelStatus string
 
 // Enum values for ChannelStatus
@@ -6949,6 +8755,40 @@ func (enum ChannelStatus) MarshalValue() (string, error) {
 }
 
 func (enum ChannelStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ComputeType string
+
+// Enum values for ComputeType
+const (
+	ComputeTypeAcu1 ComputeType = "ACU_1"
+	ComputeTypeAcu2 ComputeType = "ACU_2"
+)
+
+func (enum ComputeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DatasetActionType string
+
+// Enum values for DatasetActionType
+const (
+	DatasetActionTypeQuery     DatasetActionType = "QUERY"
+	DatasetActionTypeContainer DatasetActionType = "CONTAINER"
+)
+
+func (enum DatasetActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DatasetActionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

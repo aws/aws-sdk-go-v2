@@ -86,8 +86,7 @@ func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 //
 // Cancels the specified job. You can only cancel a job before its JobState
 // value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob
-// action will return a job's JobState as part of the response element data
-// returned.
+// action returns a job's JobState as part of the response element data returned.
 //
 //    // Example sending a request using the CancelJobRequest method.
 //    req := client.CancelJobRequest(params)
@@ -818,6 +817,60 @@ func (c *Snowball) ListClustersRequest(input *ListClustersInput) ListClustersReq
 	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
+const opListCompatibleImages = "ListCompatibleImages"
+
+// ListCompatibleImagesRequest is a API request type for the ListCompatibleImages API operation.
+type ListCompatibleImagesRequest struct {
+	*aws.Request
+	Input *ListCompatibleImagesInput
+	Copy  func(*ListCompatibleImagesInput) ListCompatibleImagesRequest
+}
+
+// Send marshals and sends the ListCompatibleImages API request.
+func (r ListCompatibleImagesRequest) Send() (*ListCompatibleImagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCompatibleImagesOutput), nil
+}
+
+// ListCompatibleImagesRequest returns a request value for making API operation for
+// Amazon Import/Export Snowball.
+//
+// This action returns a list of the different Amazon EC2 Amazon Machine Images
+// (AMIs) that are owned by your AWS account that would be supported for use
+// on a Snowball Edge device. Currently, supported AMIs are based on the CentOS
+// 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu
+// 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+//
+//    // Example sending a request using the ListCompatibleImagesRequest method.
+//    req := client.ListCompatibleImagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImages
+func (c *Snowball) ListCompatibleImagesRequest(input *ListCompatibleImagesInput) ListCompatibleImagesRequest {
+	op := &aws.Operation{
+		Name:       opListCompatibleImages,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListCompatibleImagesInput{}
+	}
+
+	output := &ListCompatibleImagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListCompatibleImagesRequest{Request: req, Input: input, Copy: c.ListCompatibleImagesRequest}
+}
+
 const opListJobs = "ListJobs"
 
 // ListJobsRequest is a API request type for the ListJobs API operation.
@@ -1339,11 +1392,11 @@ type ClusterMetadata struct {
 	RoleARN *string `type:"string"`
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
-	// how soon you'll get each Snowball Edge appliance, rather it represents how
-	// quickly each appliance moves to its destination while in transit. Regional
-	// shipping speeds are as follows:
+	// how soon you'll get each Snowball Edge device, rather it represents how quickly
+	// each device moves to its destination while in transit. Regional shipping
+	// speeds are as follows:
 	//
-	//    * In Australia, you have access to express shipping. Typically, appliances
+	//    * In Australia, you have access to express shipping. Typically, devices
 	//    shipped express are delivered in about a day.
 	//
 	//    * In the European Union (EU), you have access to express shipping. Typically,
@@ -1356,8 +1409,8 @@ type ClusterMetadata struct {
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption `type:"string" enum:"true"`
 
-	// The type of AWS Snowball appliance to use for this cluster. Currently, the
-	// only supported appliance type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster. Currently, the only
+	// supported device type for cluster jobs is EDGE.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1368,6 +1421,31 @@ func (s ClusterMetadata) String() string {
 
 // GoString returns the string representation
 func (s ClusterMetadata) GoString() string {
+	return s.String()
+}
+
+// A JSON-formatted object that describes a compatible Amazon Machine Image
+// (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible
+// with the device's physical hardware requirements, and it should be able to
+// be run in an SBE1 instance on the device.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CompatibleImage
+type CompatibleImage struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for an individual Snowball Edge AMI.
+	AmiId *string `min:"1" type:"string"`
+
+	// The optional name of a compatible image.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CompatibleImage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CompatibleImage) GoString() string {
 	return s.String()
 }
 
@@ -1483,11 +1561,11 @@ type CreateClusterInput struct {
 	RoleARN *string `type:"string" required:"true"`
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
-	// how soon you'll get each Snowball Edge appliance, rather it represents how
-	// quickly each appliance moves to its destination while in transit. Regional
-	// shipping speeds are as follows:
+	// how soon you'll get each Snowball Edge device, rather it represents how quickly
+	// each device moves to its destination while in transit. Regional shipping
+	// speeds are as follows:
 	//
-	//    * In Australia, you have access to express shipping. Typically, appliances
+	//    * In Australia, you have access to express shipping. Typically, devices
 	//    shipped express are delivered in about a day.
 	//
 	//    * In the European Union (EU), you have access to express shipping. Typically,
@@ -1502,8 +1580,8 @@ type CreateClusterInput struct {
 	// ShippingOption is a required field
 	ShippingOption ShippingOption `type:"string" required:"true" enum:"true"`
 
-	// The type of AWS Snowball appliance to use for this cluster. Currently, the
-	// only supported appliance type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster. Currently, the only
+	// supported device type for cluster jobs is EDGE.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1655,8 +1733,8 @@ type CreateJobInput struct {
 	// Snowballs come with 80 TB in storage capacity.
 	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 
-	// The type of AWS Snowball appliance to use for this job. Currently, the only
-	// supported appliance type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this job. Currently, the only
+	// supported device type for cluster jobs is EDGE.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1722,7 +1800,7 @@ func (s CreateJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Defines the real-time status of a Snowball's data transfer while the appliance
+// Defines the real-time status of a Snowball's data transfer while the device
 // is at AWS. This data is only available while a job has a JobState value of
 // InProgress, for both import and export jobs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DataTransfer
@@ -2015,6 +2093,53 @@ func (s DescribeJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// A JSON-formatted object that contains the IDs for an Amazon Machine Image
+// (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each
+// AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud
+// and on the device.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Ec2AmiResource
+type Ec2AmiResource struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the AMI in Amazon EC2.
+	//
+	// AmiId is a required field
+	AmiId *string `min:"12" type:"string" required:"true"`
+
+	// The ID of the AMI on the Snowball Edge device.
+	SnowballAmiId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Ec2AmiResource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Ec2AmiResource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Ec2AmiResource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Ec2AmiResource"}
+
+	if s.AmiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AmiId"))
+	}
+	if s.AmiId != nil && len(*s.AmiId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("AmiId", 12))
+	}
+	if s.SnowballAmiId != nil && len(*s.SnowballAmiId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SnowballAmiId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The container for the EventTriggerDefinition$EventResourceARN.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EventTriggerDefinition
 type EventTriggerDefinition struct {
@@ -2237,7 +2362,7 @@ type JobListEntry struct {
 	// The type of job.
 	JobType JobType `type:"string" enum:"true"`
 
-	// The type of appliance used with this job.
+	// The type of device used with this job.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -2312,7 +2437,7 @@ type JobMetadata struct {
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// A value that defines the real-time status of a Snowball's data transfer while
-	// the appliance is at AWS. This data is only available while a job has a JobState
+	// the device is at AWS. This data is only available while a job has a JobState
 	// value of InProgress, for both import and export jobs.
 	DataTransferProgress *DataTransfer `type:"structure"`
 
@@ -2367,7 +2492,7 @@ type JobMetadata struct {
 	// regions use 80 TB capacity Snowballs.
 	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 
-	// The type of appliance used with this job.
+	// The type of device used with this job.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -2381,12 +2506,15 @@ func (s JobMetadata) GoString() string {
 	return s.String()
 }
 
-// Contains an array of S3Resource objects. Each S3Resource object represents
-// an Amazon S3 bucket that your transferred data will be exported from or imported
-// into.
+// Contains an array of AWS resource objects. Each object represents an Amazon
+// S3 bucket, an AWS Lambda function, or an Amazon Machine Image (AMI) based
+// on Amazon EC2 that is associated with a particular job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobResource
 type JobResource struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Machine Images (AMIs) associated with this job.
+	Ec2AmiResources []Ec2AmiResource `type:"list"`
 
 	// The Python-language Lambda functions for this job.
 	LambdaResources []LambdaResource `type:"list"`
@@ -2408,6 +2536,13 @@ func (s JobResource) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "JobResource"}
+	if s.Ec2AmiResources != nil {
+		for i, v := range s.Ec2AmiResources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ec2AmiResources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.S3Resources != nil {
 		for i, v := range s.S3Resources {
 			if err := v.Validate(); err != nil {
@@ -2632,6 +2767,73 @@ func (s ListClustersOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListClustersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImagesRequest
+type ListCompatibleImagesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results for the list of compatible images. Currently,
+	// a Snowball Edge device can store 10 AMIs.
+	MaxResults *int64 `type:"integer"`
+
+	// HTTP requests are stateless. To identify what object comes "next" in the
+	// list of compatible images, you can specify a value for NextToken as the starting
+	// point for your list of returned images.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListCompatibleImagesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCompatibleImagesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListCompatibleImagesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListCompatibleImagesInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListCompatibleImagesResult
+type ListCompatibleImagesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A JSON-formatted object that describes a compatible AMI, including the ID
+	// and name for a Snowball Edge AMI.
+	CompatibleImages []CompatibleImage `type:"list"`
+
+	// Because HTTP requests are stateless, this is the starting point for your
+	// next list of returned images.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListCompatibleImagesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCompatibleImagesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCompatibleImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -2975,8 +3177,7 @@ type UpdateJobInput struct {
 	// The new or updated Notification object.
 	Notification *Notification `type:"structure"`
 
-	// The updated S3Resource object (for a single Amazon S3 bucket or key range),
-	// or the updated JobResource object (for multiple buckets or key ranges).
+	// The updated JobResource object, or the updated JobResource object.
 	Resources *JobResource `type:"structure"`
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
@@ -3098,18 +3299,19 @@ type JobState string
 
 // Enum values for JobState
 const (
-	JobStateNew                 JobState = "New"
-	JobStatePreparingAppliance  JobState = "PreparingAppliance"
-	JobStatePreparingShipment   JobState = "PreparingShipment"
-	JobStateInTransitToCustomer JobState = "InTransitToCustomer"
-	JobStateWithCustomer        JobState = "WithCustomer"
-	JobStateInTransitToAws      JobState = "InTransitToAWS"
-	JobStateWithAws             JobState = "WithAWS"
-	JobStateInProgress          JobState = "InProgress"
-	JobStateComplete            JobState = "Complete"
-	JobStateCancelled           JobState = "Cancelled"
-	JobStateListing             JobState = "Listing"
-	JobStatePending             JobState = "Pending"
+	JobStateNew                    JobState = "New"
+	JobStatePreparingAppliance     JobState = "PreparingAppliance"
+	JobStatePreparingShipment      JobState = "PreparingShipment"
+	JobStateInTransitToCustomer    JobState = "InTransitToCustomer"
+	JobStateWithCustomer           JobState = "WithCustomer"
+	JobStateInTransitToAws         JobState = "InTransitToAWS"
+	JobStateWithAwssortingFacility JobState = "WithAWSSortingFacility"
+	JobStateWithAws                JobState = "WithAWS"
+	JobStateInProgress             JobState = "InProgress"
+	JobStateComplete               JobState = "Complete"
+	JobStateCancelled              JobState = "Cancelled"
+	JobStateListing                JobState = "Listing"
+	JobStatePending                JobState = "Pending"
 )
 
 func (enum JobState) MarshalValue() (string, error) {

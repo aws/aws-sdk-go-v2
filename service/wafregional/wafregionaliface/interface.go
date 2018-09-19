@@ -94,6 +94,8 @@ type WAFRegionalAPI interface {
 
 	DeleteIPSetRequest(*wafregional.DeleteIPSetInput) wafregional.DeleteIPSetRequest
 
+	DeleteLoggingConfigurationRequest(*wafregional.DeleteLoggingConfigurationInput) wafregional.DeleteLoggingConfigurationRequest
+
 	DeletePermissionPolicyRequest(*wafregional.DeletePermissionPolicyInput) wafregional.DeletePermissionPolicyRequest
 
 	DeleteRateBasedRuleRequest(*wafregional.DeleteRateBasedRuleInput) wafregional.DeleteRateBasedRuleRequest
@@ -125,6 +127,8 @@ type WAFRegionalAPI interface {
 	GetGeoMatchSetRequest(*wafregional.GetGeoMatchSetInput) wafregional.GetGeoMatchSetRequest
 
 	GetIPSetRequest(*wafregional.GetIPSetInput) wafregional.GetIPSetRequest
+
+	GetLoggingConfigurationRequest(*wafregional.GetLoggingConfigurationInput) wafregional.GetLoggingConfigurationRequest
 
 	GetPermissionPolicyRequest(*wafregional.GetPermissionPolicyInput) wafregional.GetPermissionPolicyRequest
 
@@ -160,6 +164,8 @@ type WAFRegionalAPI interface {
 
 	ListIPSetsRequest(*wafregional.ListIPSetsInput) wafregional.ListIPSetsRequest
 
+	ListLoggingConfigurationsRequest(*wafregional.ListLoggingConfigurationsInput) wafregional.ListLoggingConfigurationsRequest
+
 	ListRateBasedRulesRequest(*wafregional.ListRateBasedRulesInput) wafregional.ListRateBasedRulesRequest
 
 	ListRegexMatchSetsRequest(*wafregional.ListRegexMatchSetsInput) wafregional.ListRegexMatchSetsRequest
@@ -181,6 +187,8 @@ type WAFRegionalAPI interface {
 	ListWebACLsRequest(*wafregional.ListWebACLsInput) wafregional.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*wafregional.ListXssMatchSetsInput) wafregional.ListXssMatchSetsRequest
+
+	PutLoggingConfigurationRequest(*wafregional.PutLoggingConfigurationInput) wafregional.PutLoggingConfigurationRequest
 
 	PutPermissionPolicyRequest(*wafregional.PutPermissionPolicyInput) wafregional.PutPermissionPolicyRequest
 

@@ -3326,7 +3326,7 @@ func (s InputService19TestShapeGrantee) MarshalFields(e protocol.FieldEncoder) e
 type InputService19TestShapeInputService19TestCaseOperation1Input struct {
 	_ struct{} `type:"structure" payload:"Grant"`
 
-	Grant *InputService19TestShapeGrant `type:"structure"`
+	Grant *InputService19TestShapeGrant `locationName:"Grant" type:"structure"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.

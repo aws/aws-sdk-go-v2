@@ -324,6 +324,58 @@ func (c *CodeCommit) DeleteCommentContentRequest(input *DeleteCommentContentInpu
 	return DeleteCommentContentRequest{Request: req, Input: input, Copy: c.DeleteCommentContentRequest}
 }
 
+const opDeleteFile = "DeleteFile"
+
+// DeleteFileRequest is a API request type for the DeleteFile API operation.
+type DeleteFileRequest struct {
+	*aws.Request
+	Input *DeleteFileInput
+	Copy  func(*DeleteFileInput) DeleteFileRequest
+}
+
+// Send marshals and sends the DeleteFile API request.
+func (r DeleteFileRequest) Send() (*DeleteFileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFileOutput), nil
+}
+
+// DeleteFileRequest returns a request value for making API operation for
+// AWS CodeCommit.
+//
+// Deletes a specified file from a specified branch. A commit is created on
+// the branch that contains the revision. The file will still exist in the commits
+// prior to the commit that contains the deletion.
+//
+//    // Example sending a request using the DeleteFileRequest method.
+//    req := client.DeleteFileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFile
+func (c *CodeCommit) DeleteFileRequest(input *DeleteFileInput) DeleteFileRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteFileInput{}
+	}
+
+	output := &DeleteFileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFileRequest{Request: req, Input: input, Copy: c.DeleteFileRequest}
+}
+
 const opDeleteRepository = "DeleteRepository"
 
 // DeleteRepositoryRequest is a API request type for the DeleteRepository API operation.
@@ -989,6 +1041,106 @@ type GetDifferencesPager struct {
 
 func (p *GetDifferencesPager) CurrentPage() *GetDifferencesOutput {
 	return p.Pager.CurrentPage().(*GetDifferencesOutput)
+}
+
+const opGetFile = "GetFile"
+
+// GetFileRequest is a API request type for the GetFile API operation.
+type GetFileRequest struct {
+	*aws.Request
+	Input *GetFileInput
+	Copy  func(*GetFileInput) GetFileRequest
+}
+
+// Send marshals and sends the GetFile API request.
+func (r GetFileRequest) Send() (*GetFileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFileOutput), nil
+}
+
+// GetFileRequest returns a request value for making API operation for
+// AWS CodeCommit.
+//
+// Returns the base-64 encoded contents of a specified file and its metadata.
+//
+//    // Example sending a request using the GetFileRequest method.
+//    req := client.GetFileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFile
+func (c *CodeCommit) GetFileRequest(input *GetFileInput) GetFileRequest {
+	op := &aws.Operation{
+		Name:       opGetFile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetFileInput{}
+	}
+
+	output := &GetFileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFileRequest{Request: req, Input: input, Copy: c.GetFileRequest}
+}
+
+const opGetFolder = "GetFolder"
+
+// GetFolderRequest is a API request type for the GetFolder API operation.
+type GetFolderRequest struct {
+	*aws.Request
+	Input *GetFolderInput
+	Copy  func(*GetFolderInput) GetFolderRequest
+}
+
+// Send marshals and sends the GetFolder API request.
+func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFolderOutput), nil
+}
+
+// GetFolderRequest returns a request value for making API operation for
+// AWS CodeCommit.
+//
+// Returns the contents of a specified folder in a repository.
+//
+//    // Example sending a request using the GetFolderRequest method.
+//    req := client.GetFolderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFolder
+func (c *CodeCommit) GetFolderRequest(input *GetFolderInput) GetFolderRequest {
+	op := &aws.Operation{
+		Name:       opGetFolder,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetFolderInput{}
+	}
+
+	output := &GetFolderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFolderRequest{Request: req, Input: input, Copy: c.GetFolderRequest}
 }
 
 const opGetMergeConflicts = "GetMergeConflicts"
@@ -1730,7 +1882,8 @@ func (r PutFileRequest) Send() (*PutFileOutput, error) {
 // PutFileRequest returns a request value for making API operation for
 // AWS CodeCommit.
 //
-// Adds or updates a file in an AWS CodeCommit repository.
+// Adds or updates a file in a branch in an AWS CodeCommit repository, and generates
+// a commit for the addition in the specified branch.
 //
 //    // Example sending a request using the PutFileRequest method.
 //    req := client.PutFileRequest(params)
@@ -2920,6 +3073,144 @@ func (s DeleteCommentContentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileInput
+type DeleteFileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the branch where the commit will be made deleting the file.
+	//
+	// BranchName is a required field
+	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
+
+	// The commit message you want to include as part of deleting the file. Commit
+	// messages are limited to 256 KB. If no message is specified, a default message
+	// will be used.
+	CommitMessage *string `locationName:"commitMessage" type:"string"`
+
+	// The email address for the commit that deletes the file. If no email address
+	// is specified, the email address will be left blank.
+	Email *string `locationName:"email" type:"string"`
+
+	// The fully-qualified path to the file that will be deleted, including the
+	// full name and extension of that file. For example, /examples/file.md is a
+	// fully qualified path to a file named file.md in a folder named examples.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// Specifies whether to delete the folder or directory that contains the file
+	// you want to delete if that file is the only object in the folder or directory.
+	// By default, empty folders will be deleted. This includes empty folders that
+	// are part of the directory structure. For example, if the path to a file is
+	// dir1/dir2/dir3/dir4, and dir2 and dir3 are empty, deleting the last file
+	// in dir4 will also delete the empty folders dir4, dir3, and dir2.
+	KeepEmptyFolders *bool `locationName:"keepEmptyFolders" type:"boolean"`
+
+	// The name of the author of the commit that deletes the file. If no name is
+	// specified, the user's ARN will be used as the author name and committer name.
+	Name *string `locationName:"name" type:"string"`
+
+	// The ID of the commit that is the tip of the branch where you want to create
+	// the commit that will delete the file. This must be the HEAD commit for the
+	// branch. The commit that deletes the file will be created from this commit
+	// ID.
+	//
+	// ParentCommitId is a required field
+	ParentCommitId *string `locationName:"parentCommitId" type:"string" required:"true"`
+
+	// The name of the repository that contains the file to delete.
+	//
+	// RepositoryName is a required field
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileInput"}
+
+	if s.BranchName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
+	}
+	if s.BranchName != nil && len(*s.BranchName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
+	}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+
+	if s.ParentCommitId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ParentCommitId"))
+	}
+
+	if s.RepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
+	}
+	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteFileOutput
+type DeleteFileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The blob ID removed from the tree as part of deleting the file.
+	//
+	// BlobId is a required field
+	BlobId *string `locationName:"blobId" type:"string" required:"true"`
+
+	// The full commit ID of the commit that contains the change that deletes the
+	// file.
+	//
+	// CommitId is a required field
+	CommitId *string `locationName:"commitId" type:"string" required:"true"`
+
+	// The fully-qualified path to the file that will be deleted, including the
+	// full name and extension of that file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the delete file change.
+	//
+	// TreeId is a required field
+	TreeId *string `locationName:"treeId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the input of a delete repository operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepositoryInput
 type DeleteRepositoryInput struct {
@@ -3091,6 +3382,62 @@ func (s Difference) String() string {
 
 // GoString returns the string representation
 func (s Difference) GoString() string {
+	return s.String()
+}
+
+// Returns information about a file in a repository.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/File
+type File struct {
+	_ struct{} `type:"structure"`
+
+	// The fully-qualified path to the file in the repository.
+	AbsolutePath *string `locationName:"absolutePath" type:"string"`
+
+	// The blob ID that contains the file information.
+	BlobId *string `locationName:"blobId" type:"string"`
+
+	// The extrapolated file mode permissions for the file. Valid values include
+	// EXECUTABLE and NORMAL.
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
+
+	// The relative path of the file from the folder where the query originated.
+	RelativePath *string `locationName:"relativePath" type:"string"`
+}
+
+// String returns the string representation
+func (s File) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s File) GoString() string {
+	return s.String()
+}
+
+// Returns information about a folder in a repository.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Folder
+type Folder struct {
+	_ struct{} `type:"structure"`
+
+	// The fully-qualified path of the folder in the repository.
+	AbsolutePath *string `locationName:"absolutePath" type:"string"`
+
+	// The relative path of the specified folder from the folder where the query
+	// originated.
+	RelativePath *string `locationName:"relativePath" type:"string"`
+
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the folder.
+	TreeId *string `locationName:"treeId" type:"string"`
+}
+
+// String returns the string representation
+func (s Folder) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Folder) GoString() string {
 	return s.String()
 }
 
@@ -3644,6 +3991,225 @@ func (s GetDifferencesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDifferencesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFileInput
+type GetFileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The fully-quaified reference that identifies the commit that contains the
+	// file. For example, you could specify a full commit ID, a tag, a branch name,
+	// or a reference such as refs/heads/master. If none is provided, then the head
+	// commit will be used.
+	CommitSpecifier *string `locationName:"commitSpecifier" type:"string"`
+
+	// The fully-qualified path to the file, including the full name and extension
+	// of the file. For example, /examples/file.md is the fully-qualified path to
+	// a file named file.md in a folder named examples.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The name of the repository that contains the file.
+	//
+	// RepositoryName is a required field
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFileInput"}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+
+	if s.RepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
+	}
+	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFileOutput
+type GetFileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The blob ID of the object that represents the file content.
+	//
+	// BlobId is a required field
+	BlobId *string `locationName:"blobId" type:"string" required:"true"`
+
+	// The full commit ID of the commit that contains the content returned by GetFile.
+	//
+	// CommitId is a required field
+	CommitId *string `locationName:"commitId" type:"string" required:"true"`
+
+	// The base-64 encoded binary data object that represents the content of the
+	// file.
+	//
+	// FileContent is automatically base64 encoded/decoded by the SDK.
+	//
+	// FileContent is a required field
+	FileContent []byte `locationName:"fileContent" type:"blob" required:"true"`
+
+	// The extrapolated file mode permissions of the blob. Valid values include
+	// strings such as EXECUTABLE and not numeric values.
+	//
+	// The file mode permissions returned by this API are not the standard file
+	// mode permission values, such as 100644, but rather extrapolated values. See
+	// below for a full list of supported return values.
+	//
+	// FileMode is a required field
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" required:"true" enum:"true"`
+
+	// The fully qualified path to the specified file. This returns the name and
+	// extension of the file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The size of the contents of the file, in bytes.
+	//
+	// FileSize is a required field
+	FileSize *int64 `locationName:"fileSize" type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFolderInput
+type GetFolderInput struct {
+	_ struct{} `type:"structure"`
+
+	// A fully-qualified reference used to identify a commit that contains the version
+	// of the folder's content to return. A fully-qualified reference can be a commit
+	// ID, branch name, tag, or reference such as HEAD. If no specifier is provided,
+	// the folder content will be returned as it exists in the HEAD commit.
+	CommitSpecifier *string `locationName:"commitSpecifier" type:"string"`
+
+	// The fully-qualified path to the folder whose contents will be returned, including
+	// the folder name. For example, /examples is a fully-qualified path to a folder
+	// named examples that was created off of the root directory (/) of a repository.
+	//
+	// FolderPath is a required field
+	FolderPath *string `locationName:"folderPath" type:"string" required:"true"`
+
+	// The name of the repository.
+	//
+	// RepositoryName is a required field
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFolderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFolderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFolderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFolderInput"}
+
+	if s.FolderPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FolderPath"))
+	}
+
+	if s.RepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
+	}
+	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetFolderOutput
+type GetFolderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The full commit ID used as a reference for which version of the folder content
+	// is returned.
+	//
+	// CommitId is a required field
+	CommitId *string `locationName:"commitId" type:"string" required:"true"`
+
+	// The list of files that exist in the specified folder, if any.
+	Files []File `locationName:"files" type:"list"`
+
+	// The fully-qualified path of the folder whose contents are returned.
+	//
+	// FolderPath is a required field
+	FolderPath *string `locationName:"folderPath" type:"string" required:"true"`
+
+	// The list of folders that exist beneath the specified folder, if any.
+	SubFolders []Folder `locationName:"subFolders" type:"list"`
+
+	// The list of submodules that exist in the specified folder, if any.
+	SubModules []SubModule `locationName:"subModules" type:"list"`
+
+	// The list of symbolic links to other files and folders that exist in the specified
+	// folder, if any.
+	SymbolicLinks []SymbolicLink `locationName:"symbolicLinks" type:"list"`
+
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// the folder.
+	TreeId *string `locationName:"treeId" type:"string"`
+}
+
+// String returns the string representation
+func (s GetFolderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFolderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFolderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4663,6 +5229,37 @@ func (s PullRequest) GoString() string {
 	return s.String()
 }
 
+// Metadata about the pull request that is used when comparing the pull request
+// source with its destination.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestCreatedEventMetadata
+type PullRequestCreatedEventMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The commit ID of the tip of the branch specified as the destination branch
+	// when the pull request was created.
+	DestinationCommitId *string `locationName:"destinationCommitId" type:"string"`
+
+	// The commit ID of the most recent commit that the source branch and the destination
+	// branch have in common.
+	MergeBase *string `locationName:"mergeBase" type:"string"`
+
+	// The name of the repository where the pull request was created.
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string"`
+
+	// The commit ID on the source branch used when the pull request was created.
+	SourceCommitId *string `locationName:"sourceCommitId" type:"string"`
+}
+
+// String returns the string representation
+func (s PullRequestCreatedEventMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PullRequestCreatedEventMetadata) GoString() string {
+	return s.String()
+}
+
 // Returns information about a pull request event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestEvent
 type PullRequestEvent struct {
@@ -4675,6 +5272,9 @@ type PullRequestEvent struct {
 
 	// The day and time of the pull request event, in timestamp format.
 	EventDate *time.Time `locationName:"eventDate" type:"timestamp" timestampFormat:"unix"`
+
+	// Information about the source and destination branches for the pull request.
+	PullRequestCreatedEventMetadata *PullRequestCreatedEventMetadata `locationName:"pullRequestCreatedEventMetadata" type:"structure"`
 
 	// The type of the pull request event, for example a status change event (PULL_REQUEST_STATUS_CHANGED)
 	// or update event (PULL_REQUEST_SOURCE_REFERENCE_UPDATED).
@@ -4742,6 +5342,10 @@ type PullRequestSourceReferenceUpdatedEventMetadata struct {
 	// of the branch at the time the pull request was updated.
 	BeforeCommitId *string `locationName:"beforeCommitId" type:"string"`
 
+	// The commit ID of the most recent commit that the source branch and the destination
+	// branch have in common.
+	MergeBase *string `locationName:"mergeBase" type:"string"`
+
 	// The name of the repository where the pull request was updated.
 	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string"`
 }
@@ -4788,6 +5392,10 @@ type PullRequestTarget struct {
 	// into. Also known as the destination branch.
 	DestinationReference *string `locationName:"destinationReference" type:"string"`
 
+	// The commit ID of the most recent commit that the source branch and the destination
+	// branch have in common.
+	MergeBase *string `locationName:"mergeBase" type:"string"`
+
 	// Returns metadata about the state of the merge, including whether the merge
 	// has been made.
 	MergeMetadata *MergeMetadata `locationName:"mergeMetadata" type:"structure"`
@@ -4820,7 +5428,8 @@ func (s PullRequestTarget) GoString() string {
 type PutFileInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the branch where you want to add or update the file.
+	// The name of the branch where you want to add or update the file. If this
+	// is an empty repository, this branch will be created.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
@@ -4859,9 +5468,11 @@ type PutFileInput struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The full commit ID of the head commit in the branch where you want to add
-	// or update the file. If the commit ID does not match the ID of the head commit
-	// at the time of the operation, an error will occur, and the file will not
-	// be added or updated.
+	// or update the file. If this is an empty repository, no commit ID is required.
+	// If this is not an empty repository, a commit ID is required.
+	//
+	// The commit ID must match the ID of the head commit at the time of the operation,
+	// or an error will occur, and the file will not be added or updated.
 	ParentCommitId *string `locationName:"parentCommitId" type:"string"`
 
 	// The name of the repository where you want to add or update the file.
@@ -4928,7 +5539,8 @@ type PutFileOutput struct {
 	// CommitId is a required field
 	CommitId *string `locationName:"commitId" type:"string" required:"true"`
 
-	// Tree information for the commit that contains this file change.
+	// The full SHA-1 pointer of the tree information for the commit that contains
+	// this file change.
 	//
 	// TreeId is a required field
 	TreeId *string `locationName:"treeId" type:"string" required:"true"`
@@ -5184,6 +5796,61 @@ func (s RepositoryTriggerExecutionFailure) String() string {
 
 // GoString returns the string representation
 func (s RepositoryTriggerExecutionFailure) GoString() string {
+	return s.String()
+}
+
+// Returns information about a submodule reference in a repository folder.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SubModule
+type SubModule struct {
+	_ struct{} `type:"structure"`
+
+	// The fully qualified path to the folder that contains the reference to the
+	// submodule.
+	AbsolutePath *string `locationName:"absolutePath" type:"string"`
+
+	// The commit ID that contains the reference to the submodule.
+	CommitId *string `locationName:"commitId" type:"string"`
+
+	// The relative path of the submodule from the folder where the query originated.
+	RelativePath *string `locationName:"relativePath" type:"string"`
+}
+
+// String returns the string representation
+func (s SubModule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SubModule) GoString() string {
+	return s.String()
+}
+
+// Returns information about a symbolic link in a repository folder.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SymbolicLink
+type SymbolicLink struct {
+	_ struct{} `type:"structure"`
+
+	// The fully-qualified path to the folder that contains the symbolic link.
+	AbsolutePath *string `locationName:"absolutePath" type:"string"`
+
+	// The blob ID that contains the information about the symbolic link.
+	BlobId *string `locationName:"blobId" type:"string"`
+
+	// The file mode permissions of the blob that cotains information about the
+	// symbolic link.
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
+
+	// The relative path of the symbolic link from the folder where the query originated.
+	RelativePath *string `locationName:"relativePath" type:"string"`
+}
+
+// String returns the string representation
+func (s SymbolicLink) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SymbolicLink) GoString() string {
 	return s.String()
 }
 

@@ -3212,6 +3212,27 @@ type CreateEndpointInput struct {
 	// The name of the endpoint database.
 	DatabaseName *string `type:"string"`
 
+	// The settings in JSON format for the DMS Transfer type source endpoint.
+	//
+	// Attributes include:
+	//
+	//    * serviceAccessRoleArn - The IAM role that has permission to access the
+	//    Amazon S3 bucket.
+	//
+	//    * bucketName - The name of the S3 bucket to use.
+	//
+	//    * compressionType - An optional parameter to use GZIP to compress the
+	//    target files. Set to NONE (the default) or do not use to leave the files
+	//    uncompressed.
+	//
+	// Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string
+	//
+	// JSON syntax:
+	//
+	// { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType":
+	// "none"|"gzip" }
+	DmsTransferSettings *DmsTransferSettings `type:"structure"`
+
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For more
 	// information about the available settings, see the Using Object Mapping to
 	// Migrate Data to DynamoDB section at  Using an Amazon DynamoDB Database as
@@ -3253,7 +3274,7 @@ type CreateEndpointInput struct {
 	// Settings in JSON format for the source MongoDB endpoint. For more information
 	// about the available settings, see the Configuration Properties When Using
 	// MongoDB as a Source for AWS Database Migration Service section at  Using
-	// Amazon S3 as a Target for AWS Database Migration Service (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html).
+	// MongoDB as a Target for AWS Database Migration Service (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html).
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 
 	// The password to be used to login to the endpoint database.
@@ -3698,6 +3719,8 @@ type CreateReplicationTaskInput struct {
 	// Indicates the start time for a change data capture (CDC) operation. Use either
 	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
 	// to start. Specifying both values results in an error.
+	//
+	// Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
 	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Indicates when you want a change data capture (CDC) operation to stop. The
@@ -5470,6 +5493,28 @@ func (s DescribeTableStatisticsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The settings in JSON format for the DMS Transfer type source endpoint.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DmsTransferSettings
+type DmsTransferSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the S3 bucket to use.
+	BucketName *string `type:"string"`
+
+	// The IAM role that has permission to access the Amazon S3 bucket.
+	ServiceAccessRoleArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DmsTransferSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DmsTransferSettings) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DynamoDbSettings
 type DynamoDbSettings struct {
 	_ struct{} `type:"structure"`
@@ -5513,6 +5558,27 @@ type Endpoint struct {
 
 	// The name of the database at the endpoint.
 	DatabaseName *string `type:"string"`
+
+	// The settings in JSON format for the DMS Transfer type source endpoint.
+	//
+	// Attributes include:
+	//
+	//    * serviceAccessRoleArn - The IAM role that has permission to access the
+	//    Amazon S3 bucket.
+	//
+	//    * bucketName - The name of the S3 bucket to use.
+	//
+	//    * compressionType - An optional parameter to use GZIP to compress the
+	//    target files. Set to NONE (the default) or do not use to leave the files
+	//    uncompressed.
+	//
+	// Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string
+	//
+	// JSON syntax:
+	//
+	// { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType":
+	// "none"|"gzip" }
+	DmsTransferSettings *DmsTransferSettings `type:"structure"`
 
 	// The settings for the target DynamoDB database. For more information, see
 	// the DynamoDBSettings structure.
@@ -5894,6 +5960,27 @@ type ModifyEndpointInput struct {
 
 	// The name of the endpoint database.
 	DatabaseName *string `type:"string"`
+
+	// The settings in JSON format for the DMS Transfer type source endpoint.
+	//
+	// Attributes include:
+	//
+	//    * serviceAccessRoleArn - The IAM role that has permission to access the
+	//    Amazon S3 bucket.
+	//
+	//    * BucketName - The name of the S3 bucket to use.
+	//
+	//    * compressionType - An optional parameter to use GZIP to compress the
+	//    target files. Set to NONE (the default) or do not use to leave the files
+	//    uncompressed.
+	//
+	// Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string
+	//
+	// JSON syntax:
+	//
+	// { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType":
+	// "none"|"gzip" }
+	DmsTransferSettings *DmsTransferSettings `type:"structure"`
 
 	// Settings in JSON format for the target Amazon DynamoDB endpoint. For more
 	// information about the available settings, see the Using Object Mapping to
@@ -6306,6 +6393,8 @@ type ModifyReplicationTaskInput struct {
 	// Indicates the start time for a change data capture (CDC) operation. Use either
 	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
 	// to start. Specifying both values results in an error.
+	//
+	// Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
 	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Indicates when you want a change data capture (CDC) operation to stop. The
@@ -6684,7 +6773,16 @@ func (s RefreshSchemasStatus) GoString() string {
 type ReloadTablesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the replication instance.
+	// Options for reload. Specify data-reload to reload the data and re-validate
+	// it if validation is enabled. Specify validate-only to re-validate the table.
+	// This option applies only when validation is enabled for the task.
+	//
+	// Valid values: data-reload, validate-only
+	//
+	// Default value is data-reload.
+	ReloadOption ReloadOptionValue `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the replication task.
 	//
 	// ReplicationTaskArn is a required field
 	ReplicationTaskArn *string `type:"string" required:"true"`
@@ -7052,7 +7150,7 @@ type ReplicationTask struct {
 	// The date the replication task was created.
 	ReplicationTaskCreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The replication task identifier.
+	// The user-assigned replication task identifier or name.
 	//
 	// Constraints:
 	//
@@ -7291,6 +7389,8 @@ type StartReplicationTaskInput struct {
 	// Indicates the start time for a change data capture (CDC) operation. Use either
 	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
 	// to start. Specifying both values results in an error.
+	//
+	// Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
 	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Indicates when you want a change data capture (CDC) operation to stop. The
@@ -7553,6 +7653,9 @@ type TableStatistics struct {
 	//
 	//    * Error—The table could not be validated because of an unexpected error.
 	ValidationState *string `type:"string"`
+
+	// Additional details about the state of validation.
+	ValidationStateDetails *string `type:"string"`
 
 	// The number of records that could not be validated.
 	ValidationSuspendedRecords *int64 `type:"long"`
@@ -7825,6 +7928,23 @@ func (enum RefreshSchemasStatusTypeValue) MarshalValue() (string, error) {
 }
 
 func (enum RefreshSchemasStatusTypeValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReloadOptionValue string
+
+// Enum values for ReloadOptionValue
+const (
+	ReloadOptionValueDataReload   ReloadOptionValue = "data-reload"
+	ReloadOptionValueValidateOnly ReloadOptionValue = "validate-only"
+)
+
+func (enum ReloadOptionValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReloadOptionValue) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

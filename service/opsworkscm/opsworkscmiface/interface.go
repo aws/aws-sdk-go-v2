@@ -85,6 +85,8 @@ type OpsWorksCMAPI interface {
 
 	DisassociateNodeRequest(*opsworkscm.DisassociateNodeInput) opsworkscm.DisassociateNodeRequest
 
+	ExportServerEngineAttributeRequest(*opsworkscm.ExportServerEngineAttributeInput) opsworkscm.ExportServerEngineAttributeRequest
+
 	RestoreServerRequest(*opsworkscm.RestoreServerInput) opsworkscm.RestoreServerRequest
 
 	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) opsworkscm.StartMaintenanceRequest

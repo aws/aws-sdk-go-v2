@@ -118,6 +118,8 @@ type CloudDirectoryAPI interface {
 
 	GetFacetRequest(*clouddirectory.GetFacetInput) clouddirectory.GetFacetRequest
 
+	GetLinkAttributesRequest(*clouddirectory.GetLinkAttributesInput) clouddirectory.GetLinkAttributesRequest
+
 	GetObjectAttributesRequest(*clouddirectory.GetObjectAttributesInput) clouddirectory.GetObjectAttributesRequest
 
 	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) clouddirectory.GetObjectInformationRequest
@@ -141,6 +143,8 @@ type CloudDirectoryAPI interface {
 	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) clouddirectory.ListIncomingTypedLinksRequest
 
 	ListIndexRequest(*clouddirectory.ListIndexInput) clouddirectory.ListIndexRequest
+
+	ListManagedSchemaArnsRequest(*clouddirectory.ListManagedSchemaArnsInput) clouddirectory.ListManagedSchemaArnsRequest
 
 	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) clouddirectory.ListObjectAttributesRequest
 
@@ -177,6 +181,8 @@ type CloudDirectoryAPI interface {
 	UntagResourceRequest(*clouddirectory.UntagResourceInput) clouddirectory.UntagResourceRequest
 
 	UpdateFacetRequest(*clouddirectory.UpdateFacetInput) clouddirectory.UpdateFacetRequest
+
+	UpdateLinkAttributesRequest(*clouddirectory.UpdateLinkAttributesInput) clouddirectory.UpdateLinkAttributesRequest
 
 	UpdateObjectAttributesRequest(*clouddirectory.UpdateObjectAttributesInput) clouddirectory.UpdateObjectAttributesRequest
 

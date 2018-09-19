@@ -3,6 +3,8 @@
 package resourcegroups
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -296,8 +298,8 @@ func (r ListGroupResourcesRequest) Send() (*ListGroupResourcesOutput, error) {
 func (c *ResourceGroups) ListGroupResourcesRequest(input *ListGroupResourcesInput) ListGroupResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListGroupResources,
-		HTTPMethod: "GET",
-		HTTPPath:   "/groups/{GroupName}/resource-identifiers",
+		HTTPMethod: "POST",
+		HTTPPath:   "/groups/{GroupName}/resource-identifiers-list",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
@@ -398,8 +400,8 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 func (c *ResourceGroups) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	op := &aws.Operation{
 		Name:       opListGroups,
-		HTTPMethod: "GET",
-		HTTPPath:   "/groups",
+		HTTPMethod: "POST",
+		HTTPPath:   "/groups-list",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
@@ -782,7 +784,7 @@ type CreateGroupInput struct {
 
 	// The name of the group, which is the identifier of the group in other operations.
 	// A resource group name cannot be updated after it is created. A resource group
-	// name can have a maximum of 127 characters, including letters, numbers, hyphens,
+	// name can have a maximum of 128 characters, including letters, numbers, hyphens,
 	// dots, and underscores. The name cannot start with AWS or aws; these are reserved.
 	// A resource group name must be unique within your account.
 	//
@@ -796,8 +798,8 @@ type CreateGroupInput struct {
 	ResourceQuery *ResourceQuery `type:"structure" required:"true"`
 
 	// The tags to add to the group. A tag is a string-to-string map of key-value
-	// pairs. Tag keys can have a maximum character length of 127 characters, and
-	// tag values can have a maximum length of 255 characters.
+	// pairs. Tag keys can have a maximum character length of 128 characters, and
+	// tag values can have a maximum length of 256 characters.
 	Tags map[string]string `type:"map"`
 }
 
@@ -1388,6 +1390,14 @@ func (s GroupQuery) MarshalFields(e protocol.FieldEncoder) error {
 type ListGroupResourcesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Filters, formatted as ResourceFilter objects, that you want to apply to a
+	// ListGroupResources operation.
+	//
+	//    * resource-type - Filter resources by their type. Specify up to five resource
+	//    types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance,
+	//    or AWS::S3::Bucket.
+	Filters []ResourceFilter `type:"list"`
+
 	// The name of the resource group.
 	//
 	// GroupName is a required field
@@ -1426,6 +1436,13 @@ func (s *ListGroupResourcesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1436,6 +1453,18 @@ func (s *ListGroupResourcesInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Filters", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.GroupName != nil {
 		v := *s.GroupName
 
@@ -1613,6 +1642,77 @@ func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A filter name and value pair that is used to obtain more specific results
+// from a list of resources.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceFilter
+type ResourceFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the filter. Filter names are case-sensitive.
+	//
+	// Name is a required field
+	Name ResourceFilterName `type:"string" required:"true" enum:"true"`
+
+	// One or more filter values. Allowed filter values vary by resource filter
+	// name, and are case-sensitive.
+	//
+	// Values is a required field
+	Values []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ResourceFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceFilter"}
+	if len(s.Name) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Values) > 0 {
+		v := s.Values
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Values", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -1862,8 +1962,8 @@ type TagInput struct {
 	Arn *string `location:"uri" locationName:"Arn" type:"string" required:"true"`
 
 	// The tags to add to the specified resource. A tag is a string-to-string map
-	// of key-value pairs. Tag keys can have a maximum character length of 127 characters,
-	// and tag values can have a maximum length of 255 characters.
+	// of key-value pairs. Tag keys can have a maximum character length of 128 characters,
+	// and tag values can have a maximum length of 256 characters.
 	//
 	// Tags is a required field
 	Tags map[string]string `type:"map" required:"true"`
@@ -2304,6 +2404,22 @@ func (enum QueryType) MarshalValue() (string, error) {
 }
 
 func (enum QueryType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResourceFilterName string
+
+// Enum values for ResourceFilterName
+const (
+	ResourceFilterNameResourceType ResourceFilterName = "resource-type"
+)
+
+func (enum ResourceFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -2999,6 +2999,9 @@ type BGPPeer struct {
 	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
+	// The Direct Connection endpoint which the BGP peer terminates on.
+	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
+
 	// The state of the BGP peer.
 	//
 	//    * Verifying: The BGP peering addresses or ASN require validation before
@@ -3018,6 +3021,9 @@ type BGPPeer struct {
 	// The Up/Down state of the BGP peer.
 	//
 	//    * Up: The BGP peer is established.
+	//
+	// A state of up does not indicate the state of the routing function. Ensure
+	//    that you are receiving routes over the BGP session.
 	//
 	//    * Down: The BGP peer is down.
 	BgpStatus BGPStatus `locationName:"bgpStatus" type:"string" enum:"true"`
@@ -3695,8 +3701,13 @@ type CreateInterconnectOutput struct {
 
 	responseMetadata aws.Response
 
+	// Deprecated in favor of awsDeviceV2.
+	//
 	// The Direct Connection endpoint which the physical connection terminates on.
-	AwsDevice *string `locationName:"awsDevice" type:"string"`
+	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
+
+	// The Direct Connection endpoint which the physical connection terminates on.
+	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
 	// Bandwidth of the connection.
 	//
@@ -3998,6 +4009,9 @@ type CreatePublicVirtualInterfaceOutput struct {
 	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
+	// The Direct Connection endpoint which the virtual interface terminates on.
+	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
+
 	// A list of the BGP peers configured on this virtual interface.
 	BgpPeers []BGPPeer `locationName:"bgpPeers" type:"list"`
 
@@ -4031,6 +4045,13 @@ type CreatePublicVirtualInterfaceOutput struct {
 
 	// The AWS account that will own the new virtual interface.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
+
+	// The AWS region where the virtual interface is located.
+	//
+	// Example: us-east-1
+	//
+	// Default: None
+	Region *string `locationName:"region" type:"string"`
 
 	// A list of routes to be advertised to the AWS network in this region (public
 	// virtual interface).
@@ -5511,8 +5532,13 @@ type DisassociateConnectionFromLagOutput struct {
 
 	responseMetadata aws.Response
 
+	// Deprecated in favor of awsDeviceV2.
+	//
 	// The Direct Connection endpoint which the physical connection terminates on.
-	AwsDevice *string `locationName:"awsDevice" type:"string"`
+	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
+
+	// The Direct Connection endpoint which the physical connection terminates on.
+	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
 	// Bandwidth of the connection.
 	//
@@ -5777,6 +5803,13 @@ type Location struct {
 	// The name of the AWS Direct Connect location. The name includes the colocation
 	// partner name and the physical site of the lit building.
 	LocationName *string `locationName:"locationName" type:"string"`
+
+	// The AWS region where the AWS Direct connect location is located.
+	//
+	// Example: us-east-1
+	//
+	// Default: None
+	Region *string `locationName:"region" type:"string"`
 }
 
 // String returns the string representation
@@ -6479,8 +6512,13 @@ type UpdateLagOutput struct {
 	// This is intended for use by AWS Direct Connect partners only.
 	AllowsHostedConnections *bool `locationName:"allowsHostedConnections" type:"boolean"`
 
+	// Deprecated in favor of awsDeviceV2.
+	//
 	// The AWS Direct Connection endpoint that hosts the LAG.
-	AwsDevice *string `locationName:"awsDevice" type:"string"`
+	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
+
+	// The AWS Direct Connection endpoint that hosts the LAG.
+	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
 	// A list of connections bundled by this LAG.
 	Connections []DisassociateConnectionFromLagOutput `locationName:"connections" type:"list"`
@@ -6656,6 +6694,9 @@ func (enum BGPPeerState) MarshalValueBuf(b []byte) ([]byte, error) {
 // The Up/Down state of the BGP peer.
 //
 //    * Up: The BGP peer is established.
+//
+// A state of up does not indicate the state of the routing function. Ensure
+//    that you are receiving routes over the BGP session.
 //
 //    * Down: The BGP peer is down.
 type BGPStatus string

@@ -129,6 +129,8 @@ type IAMAPI interface {
 
 	DeleteRoleRequest(*iam.DeleteRoleInput) iam.DeleteRoleRequest
 
+	DeleteRolePermissionsBoundaryRequest(*iam.DeleteRolePermissionsBoundaryInput) iam.DeleteRolePermissionsBoundaryRequest
+
 	DeleteRolePolicyRequest(*iam.DeleteRolePolicyInput) iam.DeleteRolePolicyRequest
 
 	DeleteSAMLProviderRequest(*iam.DeleteSAMLProviderInput) iam.DeleteSAMLProviderRequest
@@ -144,6 +146,8 @@ type IAMAPI interface {
 	DeleteSigningCertificateRequest(*iam.DeleteSigningCertificateInput) iam.DeleteSigningCertificateRequest
 
 	DeleteUserRequest(*iam.DeleteUserInput) iam.DeleteUserRequest
+
+	DeleteUserPermissionsBoundaryRequest(*iam.DeleteUserPermissionsBoundaryInput) iam.DeleteUserPermissionsBoundaryRequest
 
 	DeleteUserPolicyRequest(*iam.DeleteUserPolicyInput) iam.DeleteUserPolicyRequest
 
@@ -255,7 +259,11 @@ type IAMAPI interface {
 
 	PutGroupPolicyRequest(*iam.PutGroupPolicyInput) iam.PutGroupPolicyRequest
 
+	PutRolePermissionsBoundaryRequest(*iam.PutRolePermissionsBoundaryInput) iam.PutRolePermissionsBoundaryRequest
+
 	PutRolePolicyRequest(*iam.PutRolePolicyInput) iam.PutRolePolicyRequest
+
+	PutUserPermissionsBoundaryRequest(*iam.PutUserPermissionsBoundaryInput) iam.PutUserPermissionsBoundaryRequest
 
 	PutUserPolicyRequest(*iam.PutUserPolicyInput) iam.PutUserPolicyRequest
 

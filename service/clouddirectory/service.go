@@ -47,7 +47,7 @@ func New(config aws.Config) *CloudDirectory {
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				APIVersion:    "2016-05-10",
+				APIVersion:    "2017-01-11",
 			},
 		),
 	}

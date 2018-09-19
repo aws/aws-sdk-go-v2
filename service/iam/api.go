@@ -1968,6 +1968,62 @@ func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
 	return DeleteRoleRequest{Request: req, Input: input, Copy: c.DeleteRoleRequest}
 }
 
+const opDeleteRolePermissionsBoundary = "DeleteRolePermissionsBoundary"
+
+// DeleteRolePermissionsBoundaryRequest is a API request type for the DeleteRolePermissionsBoundary API operation.
+type DeleteRolePermissionsBoundaryRequest struct {
+	*aws.Request
+	Input *DeleteRolePermissionsBoundaryInput
+	Copy  func(*DeleteRolePermissionsBoundaryInput) DeleteRolePermissionsBoundaryRequest
+}
+
+// Send marshals and sends the DeleteRolePermissionsBoundary API request.
+func (r DeleteRolePermissionsBoundaryRequest) Send() (*DeleteRolePermissionsBoundaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRolePermissionsBoundaryOutput), nil
+}
+
+// DeleteRolePermissionsBoundaryRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
+//
+// Deletes the permissions boundary for the specified IAM role.
+//
+// Deleting the permissions boundary for a role might increase its permissions
+// by allowing anyone who assumes the role to perform all the actions granted
+// in its permissions policies.
+//
+//    // Example sending a request using the DeleteRolePermissionsBoundaryRequest method.
+//    req := client.DeleteRolePermissionsBoundaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePermissionsBoundary
+func (c *IAM) DeleteRolePermissionsBoundaryRequest(input *DeleteRolePermissionsBoundaryInput) DeleteRolePermissionsBoundaryRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRolePermissionsBoundary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRolePermissionsBoundaryInput{}
+	}
+
+	output := &DeleteRolePermissionsBoundaryOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRolePermissionsBoundaryRequest{Request: req, Input: input, Copy: c.DeleteRolePermissionsBoundaryRequest}
+}
+
 const opDeleteRolePolicy = "DeleteRolePolicy"
 
 // DeleteRolePolicyRequest is a API request type for the DeleteRolePolicy API operation.
@@ -2440,6 +2496,62 @@ func (c *IAM) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
+}
+
+const opDeleteUserPermissionsBoundary = "DeleteUserPermissionsBoundary"
+
+// DeleteUserPermissionsBoundaryRequest is a API request type for the DeleteUserPermissionsBoundary API operation.
+type DeleteUserPermissionsBoundaryRequest struct {
+	*aws.Request
+	Input *DeleteUserPermissionsBoundaryInput
+	Copy  func(*DeleteUserPermissionsBoundaryInput) DeleteUserPermissionsBoundaryRequest
+}
+
+// Send marshals and sends the DeleteUserPermissionsBoundary API request.
+func (r DeleteUserPermissionsBoundaryRequest) Send() (*DeleteUserPermissionsBoundaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserPermissionsBoundaryOutput), nil
+}
+
+// DeleteUserPermissionsBoundaryRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
+//
+// Deletes the permissions boundary for the specified IAM user.
+//
+// Deleting the permissions boundary for a user might increase its permissions
+// by allowing the user to perform all the actions granted in its permissions
+// policies.
+//
+//    // Example sending a request using the DeleteUserPermissionsBoundaryRequest method.
+//    req := client.DeleteUserPermissionsBoundaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPermissionsBoundary
+func (c *IAM) DeleteUserPermissionsBoundaryRequest(input *DeleteUserPermissionsBoundaryInput) DeleteUserPermissionsBoundaryRequest {
+	op := &aws.Operation{
+		Name:       opDeleteUserPermissionsBoundary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteUserPermissionsBoundaryInput{}
+	}
+
+	output := &DeleteUserPermissionsBoundaryOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteUserPermissionsBoundaryRequest{Request: req, Input: input, Copy: c.DeleteUserPermissionsBoundaryRequest}
 }
 
 const opDeleteUserPolicy = "DeleteUserPolicy"
@@ -6839,6 +6951,70 @@ func (c *IAM) PutGroupPolicyRequest(input *PutGroupPolicyInput) PutGroupPolicyRe
 	return PutGroupPolicyRequest{Request: req, Input: input, Copy: c.PutGroupPolicyRequest}
 }
 
+const opPutRolePermissionsBoundary = "PutRolePermissionsBoundary"
+
+// PutRolePermissionsBoundaryRequest is a API request type for the PutRolePermissionsBoundary API operation.
+type PutRolePermissionsBoundaryRequest struct {
+	*aws.Request
+	Input *PutRolePermissionsBoundaryInput
+	Copy  func(*PutRolePermissionsBoundaryInput) PutRolePermissionsBoundaryRequest
+}
+
+// Send marshals and sends the PutRolePermissionsBoundary API request.
+func (r PutRolePermissionsBoundaryRequest) Send() (*PutRolePermissionsBoundaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRolePermissionsBoundaryOutput), nil
+}
+
+// PutRolePermissionsBoundaryRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
+//
+// Adds or updates the policy that is specified as the IAM role's permissions
+// boundary. You can use an AWS managed policy or a customer managed policy
+// to set the boundary for a role. Use the boundary to control the maximum permissions
+// that the role can have. Setting a permissions boundary is an advanced feature
+// that can affect the permissions for the role.
+//
+// You cannot set the boundary for a service-linked role.
+//
+// Policies used as permissions boundaries do not provide permissions. You must
+// also attach a permissions policy to the role. To learn how the effective
+// permissions for a role are evaluated, see IAM JSON Policy Evaluation Logic
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
+// in the IAM User Guide.
+//
+//    // Example sending a request using the PutRolePermissionsBoundaryRequest method.
+//    req := client.PutRolePermissionsBoundaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundary
+func (c *IAM) PutRolePermissionsBoundaryRequest(input *PutRolePermissionsBoundaryInput) PutRolePermissionsBoundaryRequest {
+	op := &aws.Operation{
+		Name:       opPutRolePermissionsBoundary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutRolePermissionsBoundaryInput{}
+	}
+
+	output := &PutRolePermissionsBoundaryOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutRolePermissionsBoundaryRequest{Request: req, Input: input, Copy: c.PutRolePermissionsBoundaryRequest}
+}
+
 const opPutRolePolicy = "PutRolePolicy"
 
 // PutRolePolicyRequest is a API request type for the PutRolePolicy API operation.
@@ -6911,6 +7087,68 @@ func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) PutRolePolicyReque
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutRolePolicyRequest{Request: req, Input: input, Copy: c.PutRolePolicyRequest}
+}
+
+const opPutUserPermissionsBoundary = "PutUserPermissionsBoundary"
+
+// PutUserPermissionsBoundaryRequest is a API request type for the PutUserPermissionsBoundary API operation.
+type PutUserPermissionsBoundaryRequest struct {
+	*aws.Request
+	Input *PutUserPermissionsBoundaryInput
+	Copy  func(*PutUserPermissionsBoundaryInput) PutUserPermissionsBoundaryRequest
+}
+
+// Send marshals and sends the PutUserPermissionsBoundary API request.
+func (r PutUserPermissionsBoundaryRequest) Send() (*PutUserPermissionsBoundaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutUserPermissionsBoundaryOutput), nil
+}
+
+// PutUserPermissionsBoundaryRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
+//
+// Adds or updates the policy that is specified as the IAM user's permissions
+// boundary. You can use an AWS managed policy or a customer managed policy
+// to set the boundary for a user. Use the boundary to control the maximum permissions
+// that the user can have. Setting a permissions boundary is an advanced feature
+// that can affect the permissions for the user.
+//
+// Policies that are used as permissions boundaries do not provide permissions.
+// You must also attach a permissions policy to the user. To learn how the effective
+// permissions for a user are evaluated, see IAM JSON Policy Evaluation Logic
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
+// in the IAM User Guide.
+//
+//    // Example sending a request using the PutUserPermissionsBoundaryRequest method.
+//    req := client.PutUserPermissionsBoundaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPermissionsBoundary
+func (c *IAM) PutUserPermissionsBoundaryRequest(input *PutUserPermissionsBoundaryInput) PutUserPermissionsBoundaryRequest {
+	op := &aws.Operation{
+		Name:       opPutUserPermissionsBoundary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutUserPermissionsBoundaryInput{}
+	}
+
+	output := &PutUserPermissionsBoundaryOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutUserPermissionsBoundaryRequest{Request: req, Input: input, Copy: c.PutUserPermissionsBoundaryRequest}
 }
 
 const opPutUserPolicy = "PutUserPolicy"
@@ -8244,7 +8482,7 @@ func (r UpdateServiceSpecificCredentialRequest) Send() (*UpdateServiceSpecificCr
 //
 // Sets the status of a service-specific credential to Active or Inactive. Service-specific
 // credentials that are inactive cannot be used for authentication to the service.
-// This operation can be used to disable a user’s service-specific credential
+// This operation can be used to disable a user's service-specific credential
 // as part of a credential rotation work flow.
 //
 //    // Example sending a request using the UpdateServiceSpecificCredentialRequest method.
@@ -9206,6 +9444,38 @@ func (s AttachUserPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Contains information about an attached permissions boundary.
+//
+// An attached permissions boundary is a managed policy that has been attached
+// to a user or role to set the permissions boundary.
+//
+// For more information about permissions boundaries, see Permissions Boundaries
+// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+// in the IAM User Guide.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPermissionsBoundary
+type AttachedPermissionsBoundary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the policy used to set the permissions boundary for the user or
+	// role.
+	PermissionsBoundaryArn *string `min:"20" type:"string"`
+
+	// The permissions boundary usage type that indicates what type of IAM resource
+	// is used as the permissions boundary for an entity. This data type can only
+	// have a value of Policy.
+	PermissionsBoundaryType PermissionsBoundaryAttachmentType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s AttachedPermissionsBoundary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttachedPermissionsBoundary) GoString() string {
+	return s.String()
+}
+
 // Contains information about an attached policy.
 //
 // An attached policy is a managed policy that has been attached to a user,
@@ -10156,6 +10426,10 @@ type CreateRoleInput struct {
 	// letters.
 	Path *string `min:"1" type:"string"`
 
+	// The ARN of the policy that is used to set the permissions boundary for the
+	// role.
+	PermissionsBoundary *string `min:"20" type:"string"`
+
 	// The name of the role to create.
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
@@ -10194,6 +10468,9 @@ func (s *CreateRoleInput) Validate() error {
 	}
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
+	}
+	if s.PermissionsBoundary != nil && len(*s.PermissionsBoundary) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("PermissionsBoundary", 20))
 	}
 
 	if s.RoleName == nil {
@@ -10502,6 +10779,10 @@ type CreateUserInput struct {
 	// letters.
 	Path *string `min:"1" type:"string"`
 
+	// The ARN of the policy that is used to set the permissions boundary for the
+	// user.
+	PermissionsBoundary *string `min:"20" type:"string"`
+
 	// The name of the user to create.
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
@@ -10529,6 +10810,9 @@ func (s *CreateUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
+	}
+	if s.PermissionsBoundary != nil && len(*s.PermissionsBoundary) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("PermissionsBoundary", 20))
 	}
 
 	if s.UserName == nil {
@@ -11451,6 +11735,66 @@ func (s DeleteRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePermissionsBoundaryRequest
+type DeleteRolePermissionsBoundaryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name (friendly name, not ARN) of the IAM role from which you want to
+	// remove the permissions boundary.
+	//
+	// RoleName is a required field
+	RoleName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRolePermissionsBoundaryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRolePermissionsBoundaryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRolePermissionsBoundaryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRolePermissionsBoundaryInput"}
+
+	if s.RoleName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
+	}
+	if s.RoleName != nil && len(*s.RoleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePermissionsBoundaryOutput
+type DeleteRolePermissionsBoundaryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteRolePermissionsBoundaryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRolePermissionsBoundaryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRolePermissionsBoundaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyRequest
 type DeleteRolePolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -12006,6 +12350,66 @@ func (s DeleteUserOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPermissionsBoundaryRequest
+type DeleteUserPermissionsBoundaryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name (friendly name, not ARN) of the IAM user from which you want to
+	// remove the permissions boundary.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteUserPermissionsBoundaryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserPermissionsBoundaryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteUserPermissionsBoundaryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPermissionsBoundaryInput"}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPermissionsBoundaryOutput
+type DeleteUserPermissionsBoundaryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteUserPermissionsBoundaryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserPermissionsBoundaryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserPermissionsBoundaryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -14188,6 +14592,23 @@ type GetUserOutput struct {
 
 	// A structure containing details about the IAM user.
 	//
+	// Due to a service issue, password last used data does not include password
+	// use from May 3rd 2018 22:50 PDT to May 23rd 2018 14:08 PDT. This affects
+	// last sign-in (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_finding-unused.html)
+	// dates shown in the IAM console and password last used dates in the IAM credential
+	// report (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html),
+	// and returned by this GetUser API. If users signed in during the affected
+	// time, the password last used date that is returned is the date the user last
+	// signed in before May 3rd 2018. For users that signed in after May 23rd 2018
+	// 14:08 PDT, the returned password last used date is accurate.
+	//
+	// If you use password last used information to identify unused credentials
+	// for deletion, such as deleting users who did not sign in to AWS in the last
+	// 90 days, we recommend that you adjust your evaluation window to include dates
+	// after May 23rd 2018. Alternatively, if your users use access keys to access
+	// AWS programmatically you can refer to access key last used information because
+	// it is accurate for all dates.
+	//
 	// User is a required field
 	User *User `type:"structure" required:"true"`
 }
@@ -15045,6 +15466,15 @@ type ListEntitiesForPolicyInput struct {
 	//
 	// PolicyArn is a required field
 	PolicyArn *string `min:"20" type:"string" required:"true"`
+
+	// The policy usage method to use for filtering the results.
+	//
+	// To list only permissions policies, set PolicyUsageFilter to PermissionsPolicy.
+	// To list only the policies used to set permissions boundaries, set the value
+	// to PermissionsBoundary.
+	//
+	// This parameter is optional. If it is not included, all policies are returned.
+	PolicyUsageFilter PolicyUsageType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -15825,6 +16255,15 @@ type ListPoliciesInput struct {
 	// (\u007F), including most punctuation characters, digits, and upper and lowercased
 	// letters.
 	PathPrefix *string `type:"string"`
+
+	// The policy usage method to use for filtering the results.
+	//
+	// To list only permissions policies, set PolicyUsageFilter to PermissionsPolicy.
+	// To list only the policies used to set permissions boundaries, set the value
+	// to PermissionsBoundary.
+	//
+	// This parameter is optional. If it is not included, all policies are returned.
+	PolicyUsageFilter PolicyUsageType `type:"string" enum:"true"`
 
 	// The scope to use for filtering the results.
 	//
@@ -17036,6 +17475,14 @@ type ManagedPolicyDetail struct {
 	// in the Using IAM guide.
 	Path *string `type:"string"`
 
+	// The number of entities (users and roles) for which the policy is used as
+	// the permissions boundary.
+	//
+	// For more information about permissions boundaries, see Permissions Boundaries
+	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	PermissionsBoundaryUsageCount *int64 `type:"integer"`
+
 	// The stable and unique string identifying the policy.
 	//
 	// For more information about IDs, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -17208,6 +17655,14 @@ type Policy struct {
 	// For more information about paths, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
 	Path *string `type:"string"`
+
+	// The number of entities (users and roles) for which the policy is used to
+	// set the permissions boundary.
+	//
+	// For more information about permissions boundaries, see Permissions Boundaries
+	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	PermissionsBoundaryUsageCount *int64 `type:"integer"`
 
 	// The stable and unique string identifying the policy.
 	//
@@ -17534,6 +17989,79 @@ func (s PutGroupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundaryRequest
+type PutRolePermissionsBoundaryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the policy that is used to set the permissions boundary for the
+	// role.
+	//
+	// PermissionsBoundary is a required field
+	PermissionsBoundary *string `min:"20" type:"string" required:"true"`
+
+	// The name (friendly name, not ARN) of the IAM role for which you want to set
+	// the permissions boundary.
+	//
+	// RoleName is a required field
+	RoleName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutRolePermissionsBoundaryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutRolePermissionsBoundaryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutRolePermissionsBoundaryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutRolePermissionsBoundaryInput"}
+
+	if s.PermissionsBoundary == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PermissionsBoundary"))
+	}
+	if s.PermissionsBoundary != nil && len(*s.PermissionsBoundary) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("PermissionsBoundary", 20))
+	}
+
+	if s.RoleName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
+	}
+	if s.RoleName != nil && len(*s.RoleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePermissionsBoundaryOutput
+type PutRolePermissionsBoundaryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutRolePermissionsBoundaryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutRolePermissionsBoundaryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRolePermissionsBoundaryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyRequest
 type PutRolePolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -17634,6 +18162,79 @@ func (s PutRolePolicyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRolePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPermissionsBoundaryRequest
+type PutUserPermissionsBoundaryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the policy that is used to set the permissions boundary for the
+	// user.
+	//
+	// PermissionsBoundary is a required field
+	PermissionsBoundary *string `min:"20" type:"string" required:"true"`
+
+	// The name (friendly name, not ARN) of the IAM user for which you want to set
+	// the permissions boundary.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutUserPermissionsBoundaryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutUserPermissionsBoundaryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutUserPermissionsBoundaryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutUserPermissionsBoundaryInput"}
+
+	if s.PermissionsBoundary == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PermissionsBoundary"))
+	}
+	if s.PermissionsBoundary != nil && len(*s.PermissionsBoundary) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("PermissionsBoundary", 20))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPermissionsBoundaryOutput
+type PutUserPermissionsBoundaryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutUserPermissionsBoundaryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutUserPermissionsBoundaryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutUserPermissionsBoundaryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -18256,6 +18857,13 @@ type Role struct {
 	// Path is a required field
 	Path *string `min:"1" type:"string" required:"true"`
 
+	// The ARN of the policy used to set the permissions boundary for the role.
+	//
+	// For more information about permissions boundaries, see Permissions Boundaries
+	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
+
 	// The stable and unique string identifying the role. For more information about
 	// IDs, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
@@ -18312,6 +18920,13 @@ type RoleDetail struct {
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
 	Path *string `min:"1" type:"string"`
+
+	// The ARN of the policy used to set the permissions boundary for the role.
+	//
+	// For more information about permissions boundaries, see Permissions Boundaries
+	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
 
 	// The stable and unique string identifying the role. For more information about
 	// IDs, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -18914,15 +19529,19 @@ type SimulateCustomPolicyInput struct {
 	// instance, image, security-group, network-interface, subnet, volume
 	ResourceHandlingOption *string `min:"1" type:"string"`
 
-	// An AWS account ID that specifies the owner of any simulated resource that
-	// does not identify its owner in the resource ARN, such as an S3 bucket or
-	// object. If ResourceOwner is specified, it is also used as the account owner
-	// of any ResourcePolicy included in the simulation. If the ResourceOwner parameter
-	// is not specified, then the owner of the resources and the resource policy
-	// defaults to the account of the identity provided in CallerArn. This parameter
-	// is required only if you specify a resource-based policy and account that
-	// owns the resource is different from the account that owns the simulated calling
-	// user CallerArn.
+	// An ARN representing the AWS account ID that specifies the owner of any simulated
+	// resource that does not identify its owner in the resource ARN, such as an
+	// S3 bucket or object. If ResourceOwner is specified, it is also used as the
+	// account owner of any ResourcePolicy included in the simulation. If the ResourceOwner
+	// parameter is not specified, then the owner of the resources and the resource
+	// policy defaults to the account of the identity provided in CallerArn. This
+	// parameter is required only if you specify a resource-based policy and account
+	// that owns the resource is different from the account that owns the simulated
+	// calling user CallerArn.
+	//
+	// The ARN for an account uses the following syntax: arn:aws:iam::AWS-account-ID:root.
+	// For example, to represent the account with the 112233445566 ID, use the following
+	// ARN: arn:aws:iam::112233445566-ID:root.
 	ResourceOwner *string `min:"1" type:"string"`
 
 	// A resource-based policy to include in the simulation provided as a string.
@@ -20513,7 +21132,9 @@ type UploadSSHPublicKeyInput struct {
 	_ struct{} `type:"structure"`
 
 	// The SSH public key. The public key must be encoded in ssh-rsa format or PEM
-	// format.
+	// format. The miminum bit-length of the public key is 2048 bits. For example,
+	// you can generate a 2048-bit key, and the resulting PEM file is 1679 bytes
+	// long.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
@@ -20898,6 +21519,13 @@ type User struct {
 	// Path is a required field
 	Path *string `min:"1" type:"string" required:"true"`
 
+	// The ARN of the policy used to set the permissions boundary for the user.
+	//
+	// For more information about permissions boundaries, see Permissions Boundaries
+	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
+
 	// The stable and unique string identifying the user. For more information about
 	// IDs, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
@@ -20951,6 +21579,13 @@ type UserDetail struct {
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
 	// in the Using IAM guide.
 	Path *string `min:"1" type:"string"`
+
+	// The ARN of the policy used to set the permissions boundary for the user.
+	//
+	// For more information about permissions boundaries, see Permissions Boundaries
+	// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide.
+	PermissionsBoundary *AttachedPermissionsBoundary `type:"structure"`
 
 	// The stable and unique string identifying the user. For more information about
 	// IDs, see IAM Identifiers (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -21081,6 +21716,22 @@ func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PermissionsBoundaryAttachmentType string
+
+// Enum values for PermissionsBoundaryAttachmentType
+const (
+	PermissionsBoundaryAttachmentTypePermissionsBoundaryPolicy PermissionsBoundaryAttachmentType = "PermissionsBoundaryPolicy"
+)
+
+func (enum PermissionsBoundaryAttachmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PermissionsBoundaryAttachmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PolicyEvaluationDecisionType string
 
 // Enum values for PolicyEvaluationDecisionType
@@ -21117,6 +21768,29 @@ func (enum PolicySourceType) MarshalValue() (string, error) {
 }
 
 func (enum PolicySourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The policy usage type that indicates whether the policy is used as a permissions
+// policy or as the permissions boundary for an entity.
+//
+// For more information about permissions boundaries, see Permissions Boundaries
+// for IAM Identities  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+// in the IAM User Guide.
+type PolicyUsageType string
+
+// Enum values for PolicyUsageType
+const (
+	PolicyUsageTypePermissionsPolicy   PolicyUsageType = "PermissionsPolicy"
+	PolicyUsageTypePermissionsBoundary PolicyUsageType = "PermissionsBoundary"
+)
+
+func (enum PolicyUsageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyUsageType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

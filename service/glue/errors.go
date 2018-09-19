@@ -46,6 +46,12 @@ const (
 	// The specified crawler is stopping.
 	ErrCodeCrawlerStoppingException = "CrawlerStoppingException"
 
+	// ErrCodeEncryptionException for service response error code
+	// "EncryptionException".
+	//
+	// An encryption operation failed.
+	ErrCodeEncryptionException = "EncryptionException"
+
 	// ErrCodeEntityNotFoundException for service response error code
 	// "EntityNotFoundException".
 	//

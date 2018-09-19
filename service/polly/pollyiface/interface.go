@@ -68,9 +68,15 @@ type PollyAPI interface {
 
 	GetLexiconRequest(*polly.GetLexiconInput) polly.GetLexiconRequest
 
+	GetSpeechSynthesisTaskRequest(*polly.GetSpeechSynthesisTaskInput) polly.GetSpeechSynthesisTaskRequest
+
 	ListLexiconsRequest(*polly.ListLexiconsInput) polly.ListLexiconsRequest
 
+	ListSpeechSynthesisTasksRequest(*polly.ListSpeechSynthesisTasksInput) polly.ListSpeechSynthesisTasksRequest
+
 	PutLexiconRequest(*polly.PutLexiconInput) polly.PutLexiconRequest
+
+	StartSpeechSynthesisTaskRequest(*polly.StartSpeechSynthesisTaskInput) polly.StartSpeechSynthesisTaskRequest
 
 	SynthesizeSpeechRequest(*polly.SynthesizeSpeechInput) polly.SynthesizeSpeechRequest
 }

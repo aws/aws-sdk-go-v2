@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Kinesis Video Streams Archived Media.
 //    func myFunc(svc kinesisvideoarchivedmediaiface.KinesisVideoArchivedMediaAPI) bool {
-//        // Make svc.GetMediaForFragmentList request
+//        // Make svc.GetHLSStreamingSessionURL request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockKinesisVideoArchivedMediaClient struct {
 //        kinesisvideoarchivedmediaiface.KinesisVideoArchivedMediaAPI
 //    }
-//    func (m *mockKinesisVideoArchivedMediaClient) GetMediaForFragmentList(input *kinesisvideoarchivedmedia.GetMediaForFragmentListInput) (*kinesisvideoarchivedmedia.GetMediaForFragmentListOutput, error) {
+//    func (m *mockKinesisVideoArchivedMediaClient) GetHLSStreamingSessionURL(input *kinesisvideoarchivedmedia.GetHLSStreamingSessionURLInput) (*kinesisvideoarchivedmedia.GetHLSStreamingSessionURLOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type KinesisVideoArchivedMediaAPI interface {
+	GetHLSStreamingSessionURLRequest(*kinesisvideoarchivedmedia.GetHLSStreamingSessionURLInput) kinesisvideoarchivedmedia.GetHLSStreamingSessionURLRequest
+
 	GetMediaForFragmentListRequest(*kinesisvideoarchivedmedia.GetMediaForFragmentListInput) kinesisvideoarchivedmedia.GetMediaForFragmentListRequest
 
 	ListFragmentsRequest(*kinesisvideoarchivedmedia.ListFragmentsInput) kinesisvideoarchivedmedia.ListFragmentsRequest

@@ -44,7 +44,7 @@ import (
 //    type mockEFSClient struct {
 //        efsiface.EFSAPI
 //    }
-//    func (m *mockEFSClient) CreateFileSystem(input *efs.CreateFileSystemInput) (*efs.CreateFileSystemOutput, error) {
+//    func (m *mockEFSClient) CreateFileSystem(input *efs.CreateFileSystemInput) (*efs.UpdateFileSystemOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -83,6 +83,8 @@ type EFSAPI interface {
 	DescribeTagsRequest(*efs.DescribeTagsInput) efs.DescribeTagsRequest
 
 	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
+
+	UpdateFileSystemRequest(*efs.UpdateFileSystemInput) efs.UpdateFileSystemRequest
 }
 
 var _ EFSAPI = (*efs.EFS)(nil)

@@ -80,6 +80,8 @@ type StorageGatewayAPI interface {
 
 	CreateNFSFileShareRequest(*storagegateway.CreateNFSFileShareInput) storagegateway.CreateNFSFileShareRequest
 
+	CreateSMBFileShareRequest(*storagegateway.CreateSMBFileShareInput) storagegateway.CreateSMBFileShareRequest
+
 	CreateSnapshotRequest(*storagegateway.CreateSnapshotInput) storagegateway.CreateSnapshotRequest
 
 	CreateSnapshotFromVolumeRecoveryPointRequest(*storagegateway.CreateSnapshotFromVolumeRecoveryPointInput) storagegateway.CreateSnapshotFromVolumeRecoveryPointRequest
@@ -120,6 +122,10 @@ type StorageGatewayAPI interface {
 
 	DescribeNFSFileSharesRequest(*storagegateway.DescribeNFSFileSharesInput) storagegateway.DescribeNFSFileSharesRequest
 
+	DescribeSMBFileSharesRequest(*storagegateway.DescribeSMBFileSharesInput) storagegateway.DescribeSMBFileSharesRequest
+
+	DescribeSMBSettingsRequest(*storagegateway.DescribeSMBSettingsInput) storagegateway.DescribeSMBSettingsRequest
+
 	DescribeSnapshotScheduleRequest(*storagegateway.DescribeSnapshotScheduleInput) storagegateway.DescribeSnapshotScheduleRequest
 
 	DescribeStorediSCSIVolumesRequest(*storagegateway.DescribeStorediSCSIVolumesInput) storagegateway.DescribeStorediSCSIVolumesRequest
@@ -137,6 +143,8 @@ type StorageGatewayAPI interface {
 	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
 
 	DisableGatewayRequest(*storagegateway.DisableGatewayInput) storagegateway.DisableGatewayRequest
+
+	JoinDomainRequest(*storagegateway.JoinDomainInput) storagegateway.JoinDomainRequest
 
 	ListFileSharesRequest(*storagegateway.ListFileSharesInput) storagegateway.ListFileSharesRequest
 
@@ -168,6 +176,8 @@ type StorageGatewayAPI interface {
 
 	SetLocalConsolePasswordRequest(*storagegateway.SetLocalConsolePasswordInput) storagegateway.SetLocalConsolePasswordRequest
 
+	SetSMBGuestPasswordRequest(*storagegateway.SetSMBGuestPasswordInput) storagegateway.SetSMBGuestPasswordRequest
+
 	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) storagegateway.ShutdownGatewayRequest
 
 	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
@@ -183,6 +193,8 @@ type StorageGatewayAPI interface {
 	UpdateMaintenanceStartTimeRequest(*storagegateway.UpdateMaintenanceStartTimeInput) storagegateway.UpdateMaintenanceStartTimeRequest
 
 	UpdateNFSFileShareRequest(*storagegateway.UpdateNFSFileShareInput) storagegateway.UpdateNFSFileShareRequest
+
+	UpdateSMBFileShareRequest(*storagegateway.UpdateSMBFileShareInput) storagegateway.UpdateSMBFileShareRequest
 
 	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) storagegateway.UpdateSnapshotScheduleRequest
 

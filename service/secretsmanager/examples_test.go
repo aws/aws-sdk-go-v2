@@ -107,6 +107,48 @@ func ExampleSecretsManager_CreateSecretRequest_shared00() {
 				fmt.Println(secretsmanager.ErrCodeMalformedPolicyDocumentException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
 				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodePreconditionNotMetException:
+				fmt.Println(secretsmanager.ErrCodePreconditionNotMetException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete the resource-based policy attached to a secret
+//
+// The following example shows how to delete the resource-based policy that is attached
+// to a secret.
+func ExampleSecretsManager_DeleteResourcePolicyRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := secretsmanager.New(cfg)
+	input := &secretsmanager.DeleteResourcePolicyInput{
+		SecretId: aws.String("MyTestDatabaseSecret"),
+	}
+
+	req := svc.DeleteResourcePolicyRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case secretsmanager.ErrCodeResourceNotFoundException:
+				fmt.Println(secretsmanager.ErrCodeResourceNotFoundException, aerr.Error())
+			case secretsmanager.ErrCodeInternalServiceError:
+				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodeInvalidRequestException:
+				fmt.Println(secretsmanager.ErrCodeInvalidRequestException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -246,6 +288,46 @@ func ExampleSecretsManager_GetRandomPasswordRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To retrieve the resource-based policy attached to a secret
+//
+// The following example shows how to retrieve the resource-based policy that is attached
+// to a secret.
+func ExampleSecretsManager_GetResourcePolicyRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := secretsmanager.New(cfg)
+	input := &secretsmanager.GetResourcePolicyInput{
+		SecretId: aws.String("MyTestDatabaseSecret"),
+	}
+
+	req := svc.GetResourcePolicyRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case secretsmanager.ErrCodeResourceNotFoundException:
+				fmt.Println(secretsmanager.ErrCodeResourceNotFoundException, aerr.Error())
+			case secretsmanager.ErrCodeInternalServiceError:
+				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodeInvalidRequestException:
+				fmt.Println(secretsmanager.ErrCodeInvalidRequestException, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To retrieve the encrypted secret value of a secret
 //
 // The following example shows how to retrieve the secret string value from the version
@@ -357,6 +439,50 @@ func ExampleSecretsManager_ListSecretsRequest_shared00() {
 				fmt.Println(secretsmanager.ErrCodeInvalidNextTokenException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
 				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To add a resource-based policy to a secret
+//
+// The following example shows how to add a resource-based policy to a secret.
+func ExampleSecretsManager_PutResourcePolicyRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := secretsmanager.New(cfg)
+	input := &secretsmanager.PutResourcePolicyInput{
+		ResourcePolicy: aws.String("{\n\"Version\":\"2012-10-17\",\n\"Statement\":[{\n\"Effect\":\"Allow\",\n\"Principal\":{\n\"AWS\":\"arn:aws:iam::123456789012:root\"\n},\n\"Action\":\"secretsmanager:GetSecretValue\",\n\"Resource\":\"*\"\n}]\n}"),
+		SecretId:       aws.String("MyTestDatabaseSecret"),
+	}
+
+	req := svc.PutResourcePolicyRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case secretsmanager.ErrCodeMalformedPolicyDocumentException:
+				fmt.Println(secretsmanager.ErrCodeMalformedPolicyDocumentException, aerr.Error())
+			case secretsmanager.ErrCodeResourceNotFoundException:
+				fmt.Println(secretsmanager.ErrCodeResourceNotFoundException, aerr.Error())
+			case secretsmanager.ErrCodeInvalidParameterException:
+				fmt.Println(secretsmanager.ErrCodeInvalidParameterException, aerr.Error())
+			case secretsmanager.ErrCodeInternalServiceError:
+				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodeInvalidRequestException:
+				fmt.Println(secretsmanager.ErrCodeInvalidRequestException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -587,6 +713,8 @@ func ExampleSecretsManager_TagResourceRequest_shared00() {
 			switch aerr.Code() {
 			case secretsmanager.ErrCodeResourceNotFoundException:
 				fmt.Println(secretsmanager.ErrCodeResourceNotFoundException, aerr.Error())
+			case secretsmanager.ErrCodeInvalidRequestException:
+				fmt.Println(secretsmanager.ErrCodeInvalidRequestException, aerr.Error())
 			case secretsmanager.ErrCodeInvalidParameterException:
 				fmt.Println(secretsmanager.ErrCodeInvalidParameterException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
@@ -632,6 +760,8 @@ func ExampleSecretsManager_UntagResourceRequest_shared00() {
 			switch aerr.Code() {
 			case secretsmanager.ErrCodeResourceNotFoundException:
 				fmt.Println(secretsmanager.ErrCodeResourceNotFoundException, aerr.Error())
+			case secretsmanager.ErrCodeInvalidRequestException:
+				fmt.Println(secretsmanager.ErrCodeInvalidRequestException, aerr.Error())
 			case secretsmanager.ErrCodeInvalidParameterException:
 				fmt.Println(secretsmanager.ErrCodeInvalidParameterException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
@@ -687,6 +817,8 @@ func ExampleSecretsManager_UpdateSecretRequest_shared00() {
 				fmt.Println(secretsmanager.ErrCodeMalformedPolicyDocumentException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
 				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodePreconditionNotMetException:
+				fmt.Println(secretsmanager.ErrCodePreconditionNotMetException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -738,6 +870,8 @@ func ExampleSecretsManager_UpdateSecretRequest_shared01() {
 				fmt.Println(secretsmanager.ErrCodeMalformedPolicyDocumentException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
 				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodePreconditionNotMetException:
+				fmt.Println(secretsmanager.ErrCodePreconditionNotMetException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -789,6 +923,8 @@ func ExampleSecretsManager_UpdateSecretRequest_shared02() {
 				fmt.Println(secretsmanager.ErrCodeMalformedPolicyDocumentException, aerr.Error())
 			case secretsmanager.ErrCodeInternalServiceError:
 				fmt.Println(secretsmanager.ErrCodeInternalServiceError, aerr.Error())
+			case secretsmanager.ErrCodePreconditionNotMetException:
+				fmt.Println(secretsmanager.ErrCodePreconditionNotMetException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

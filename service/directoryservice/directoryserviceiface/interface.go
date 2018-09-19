@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Directory Service.
 //    func myFunc(svc directoryserviceiface.DirectoryServiceAPI) bool {
-//        // Make svc.AddIpRoutes request
+//        // Make svc.AcceptSharedDirectory request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockDirectoryServiceClient struct {
 //        directoryserviceiface.DirectoryServiceAPI
 //    }
-//    func (m *mockDirectoryServiceClient) AddIpRoutes(input *directoryservice.AddIpRoutesInput) (*directoryservice.AddIpRoutesOutput, error) {
+//    func (m *mockDirectoryServiceClient) AcceptSharedDirectory(input *directoryservice.AcceptSharedDirectoryInput) (*directoryservice.AcceptSharedDirectoryOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type DirectoryServiceAPI interface {
+	AcceptSharedDirectoryRequest(*directoryservice.AcceptSharedDirectoryInput) directoryservice.AcceptSharedDirectoryRequest
+
 	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) directoryservice.AddIpRoutesRequest
 
 	AddTagsToResourceRequest(*directoryservice.AddTagsToResourceInput) directoryservice.AddTagsToResourceRequest
@@ -78,6 +80,8 @@ type DirectoryServiceAPI interface {
 
 	CreateDirectoryRequest(*directoryservice.CreateDirectoryInput) directoryservice.CreateDirectoryRequest
 
+	CreateLogSubscriptionRequest(*directoryservice.CreateLogSubscriptionInput) directoryservice.CreateLogSubscriptionRequest
+
 	CreateMicrosoftADRequest(*directoryservice.CreateMicrosoftADInput) directoryservice.CreateMicrosoftADRequest
 
 	CreateSnapshotRequest(*directoryservice.CreateSnapshotInput) directoryservice.CreateSnapshotRequest
@@ -87,6 +91,8 @@ type DirectoryServiceAPI interface {
 	DeleteConditionalForwarderRequest(*directoryservice.DeleteConditionalForwarderInput) directoryservice.DeleteConditionalForwarderRequest
 
 	DeleteDirectoryRequest(*directoryservice.DeleteDirectoryInput) directoryservice.DeleteDirectoryRequest
+
+	DeleteLogSubscriptionRequest(*directoryservice.DeleteLogSubscriptionInput) directoryservice.DeleteLogSubscriptionRequest
 
 	DeleteSnapshotRequest(*directoryservice.DeleteSnapshotInput) directoryservice.DeleteSnapshotRequest
 
@@ -101,6 +107,8 @@ type DirectoryServiceAPI interface {
 	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
 
 	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
+
+	DescribeSharedDirectoriesRequest(*directoryservice.DescribeSharedDirectoriesInput) directoryservice.DescribeSharedDirectoriesRequest
 
 	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
 
@@ -120,11 +128,15 @@ type DirectoryServiceAPI interface {
 
 	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
 
+	ListLogSubscriptionsRequest(*directoryservice.ListLogSubscriptionsInput) directoryservice.ListLogSubscriptionsRequest
+
 	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
 
 	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
 
 	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
+
+	RejectSharedDirectoryRequest(*directoryservice.RejectSharedDirectoryInput) directoryservice.RejectSharedDirectoryRequest
 
 	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) directoryservice.RemoveIpRoutesRequest
 
@@ -134,7 +146,11 @@ type DirectoryServiceAPI interface {
 
 	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
 
+	ShareDirectoryRequest(*directoryservice.ShareDirectoryInput) directoryservice.ShareDirectoryRequest
+
 	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest
+
+	UnshareDirectoryRequest(*directoryservice.UnshareDirectoryInput) directoryservice.UnshareDirectoryRequest
 
 	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) directoryservice.UpdateConditionalForwarderRequest
 

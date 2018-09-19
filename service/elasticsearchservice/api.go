@@ -615,6 +615,206 @@ func (p *DescribeReservedElasticsearchInstancesPager) CurrentPage() *DescribeRes
 	return p.Pager.CurrentPage().(*DescribeReservedElasticsearchInstancesOutput)
 }
 
+const opGetCompatibleElasticsearchVersions = "GetCompatibleElasticsearchVersions"
+
+// GetCompatibleElasticsearchVersionsRequest is a API request type for the GetCompatibleElasticsearchVersions API operation.
+type GetCompatibleElasticsearchVersionsRequest struct {
+	*aws.Request
+	Input *GetCompatibleElasticsearchVersionsInput
+	Copy  func(*GetCompatibleElasticsearchVersionsInput) GetCompatibleElasticsearchVersionsRequest
+}
+
+// Send marshals and sends the GetCompatibleElasticsearchVersions API request.
+func (r GetCompatibleElasticsearchVersionsRequest) Send() (*GetCompatibleElasticsearchVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCompatibleElasticsearchVersionsOutput), nil
+}
+
+// GetCompatibleElasticsearchVersionsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Returns a list of upgrade compatible Elastisearch versions. You can optionally
+// pass a DomainName to get all upgrade compatible Elasticsearch versions for
+// that specific domain.
+//
+//    // Example sending a request using the GetCompatibleElasticsearchVersionsRequest method.
+//    req := client.GetCompatibleElasticsearchVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) GetCompatibleElasticsearchVersionsRequest(input *GetCompatibleElasticsearchVersionsInput) GetCompatibleElasticsearchVersionsRequest {
+	op := &aws.Operation{
+		Name:       opGetCompatibleElasticsearchVersions,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-01-01/es/compatibleVersions",
+	}
+
+	if input == nil {
+		input = &GetCompatibleElasticsearchVersionsInput{}
+	}
+
+	output := &GetCompatibleElasticsearchVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetCompatibleElasticsearchVersionsRequest{Request: req, Input: input, Copy: c.GetCompatibleElasticsearchVersionsRequest}
+}
+
+const opGetUpgradeHistory = "GetUpgradeHistory"
+
+// GetUpgradeHistoryRequest is a API request type for the GetUpgradeHistory API operation.
+type GetUpgradeHistoryRequest struct {
+	*aws.Request
+	Input *GetUpgradeHistoryInput
+	Copy  func(*GetUpgradeHistoryInput) GetUpgradeHistoryRequest
+}
+
+// Send marshals and sends the GetUpgradeHistory API request.
+func (r GetUpgradeHistoryRequest) Send() (*GetUpgradeHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUpgradeHistoryOutput), nil
+}
+
+// GetUpgradeHistoryRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Retrieves the complete history of the last 10 upgrades that were performed
+// on the domain.
+//
+//    // Example sending a request using the GetUpgradeHistoryRequest method.
+//    req := client.GetUpgradeHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) GetUpgradeHistoryRequest(input *GetUpgradeHistoryInput) GetUpgradeHistoryRequest {
+	op := &aws.Operation{
+		Name:       opGetUpgradeHistory,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-01-01/es/upgradeDomain/{DomainName}/history",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetUpgradeHistoryInput{}
+	}
+
+	output := &GetUpgradeHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetUpgradeHistoryRequest{Request: req, Input: input, Copy: c.GetUpgradeHistoryRequest}
+}
+
+// Paginate pages iterates over the pages of a GetUpgradeHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a GetUpgradeHistory operation.
+//		req := client.GetUpgradeHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetUpgradeHistoryRequest) Paginate(opts ...aws.Option) GetUpgradeHistoryPager {
+	return GetUpgradeHistoryPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetUpgradeHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// GetUpgradeHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetUpgradeHistoryPager struct {
+	aws.Pager
+}
+
+func (p *GetUpgradeHistoryPager) CurrentPage() *GetUpgradeHistoryOutput {
+	return p.Pager.CurrentPage().(*GetUpgradeHistoryOutput)
+}
+
+const opGetUpgradeStatus = "GetUpgradeStatus"
+
+// GetUpgradeStatusRequest is a API request type for the GetUpgradeStatus API operation.
+type GetUpgradeStatusRequest struct {
+	*aws.Request
+	Input *GetUpgradeStatusInput
+	Copy  func(*GetUpgradeStatusInput) GetUpgradeStatusRequest
+}
+
+// Send marshals and sends the GetUpgradeStatus API request.
+func (r GetUpgradeStatusRequest) Send() (*GetUpgradeStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetUpgradeStatusOutput), nil
+}
+
+// GetUpgradeStatusRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Retrieves the latest status of the last upgrade or upgrade eligibility check
+// that was performed on the domain.
+//
+//    // Example sending a request using the GetUpgradeStatusRequest method.
+//    req := client.GetUpgradeStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) GetUpgradeStatusRequest(input *GetUpgradeStatusInput) GetUpgradeStatusRequest {
+	op := &aws.Operation{
+		Name:       opGetUpgradeStatus,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-01-01/es/upgradeDomain/{DomainName}/status",
+	}
+
+	if input == nil {
+		input = &GetUpgradeStatusInput{}
+	}
+
+	output := &GetUpgradeStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetUpgradeStatusRequest{Request: req, Input: input, Copy: c.GetUpgradeStatusRequest}
+}
+
 const opListDomainNames = "ListDomainNames"
 
 // ListDomainNamesRequest is a API request type for the ListDomainNames API operation.
@@ -1059,6 +1259,55 @@ func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *Upd
 	return UpdateElasticsearchDomainConfigRequest{Request: req, Input: input, Copy: c.UpdateElasticsearchDomainConfigRequest}
 }
 
+const opUpgradeElasticsearchDomain = "UpgradeElasticsearchDomain"
+
+// UpgradeElasticsearchDomainRequest is a API request type for the UpgradeElasticsearchDomain API operation.
+type UpgradeElasticsearchDomainRequest struct {
+	*aws.Request
+	Input *UpgradeElasticsearchDomainInput
+	Copy  func(*UpgradeElasticsearchDomainInput) UpgradeElasticsearchDomainRequest
+}
+
+// Send marshals and sends the UpgradeElasticsearchDomain API request.
+func (r UpgradeElasticsearchDomainRequest) Send() (*UpgradeElasticsearchDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpgradeElasticsearchDomainOutput), nil
+}
+
+// UpgradeElasticsearchDomainRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Allows you to either upgrade your domain or perform an Upgrade eligibility
+// check to a compatible Elasticsearch version.
+//
+//    // Example sending a request using the UpgradeElasticsearchDomainRequest method.
+//    req := client.UpgradeElasticsearchDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) UpgradeElasticsearchDomainRequest(input *UpgradeElasticsearchDomainInput) UpgradeElasticsearchDomainRequest {
+	op := &aws.Operation{
+		Name:       opUpgradeElasticsearchDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-01-01/es/upgradeDomain",
+	}
+
+	if input == nil {
+		input = &UpgradeElasticsearchDomainInput{}
+	}
+
+	output := &UpgradeElasticsearchDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpgradeElasticsearchDomainRequest{Request: req, Input: input, Copy: c.UpgradeElasticsearchDomainRequest}
+}
+
 // The configured access rules for the domain's document and search endpoints,
 // and the current status of those rules.
 type AccessPoliciesStatus struct {
@@ -1436,6 +1685,51 @@ func (s CognitoOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A map from an ElasticsearchVersion to a list of compatible ElasticsearchVersion
+// s to which the domain can be upgraded.
+type CompatibleVersionsMap struct {
+	_ struct{} `type:"structure"`
+
+	// The current version of Elasticsearch on which a domain is.
+	SourceVersion *string `type:"string"`
+
+	// List of supported elastic search versions.
+	TargetVersions []string `type:"list"`
+}
+
+// String returns the string representation
+func (s CompatibleVersionsMap) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CompatibleVersionsMap) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CompatibleVersionsMap) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SourceVersion != nil {
+		v := *s.SourceVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourceVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TargetVersions) > 0 {
+		v := s.TargetVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "TargetVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 type CreateElasticsearchDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1479,6 +1773,9 @@ type CreateElasticsearchDomainInput struct {
 	// Map of LogType and LogPublishingOption, each containing options to publish
 	// a given type of Elasticsearch log.
 	LogPublishingOptions map[string]LogPublishingOption `type:"map"`
+
+	// Specifies the NodeToNodeEncryptionOptions.
+	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions `type:"structure"`
 
 	// Option to set time, in UTC format, of the daily automated snapshot. Default
 	// value is 0 hours.
@@ -1595,6 +1892,12 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		}
 		ms0.End()
 
+	}
+	if s.NodeToNodeEncryptionOptions != nil {
+		v := s.NodeToNodeEncryptionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "NodeToNodeEncryptionOptions", v, metadata)
 	}
 	if s.SnapshotOptions != nil {
 		v := s.SnapshotOptions
@@ -2664,6 +2967,9 @@ type ElasticsearchDomainConfig struct {
 	// Log publishing options for the given domain.
 	LogPublishingOptions *LogPublishingOptionsStatus `type:"structure"`
 
+	// Specifies the NodeToNodeEncryptionOptions for the Elasticsearch domain.
+	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptionsStatus `type:"structure"`
+
 	// Specifies the SnapshotOptions for the Elasticsearch domain.
 	SnapshotOptions *SnapshotOptionsStatus `type:"structure"`
 
@@ -2731,6 +3037,12 @@ func (s ElasticsearchDomainConfig) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "LogPublishingOptions", v, metadata)
+	}
+	if s.NodeToNodeEncryptionOptions != nil {
+		v := s.NodeToNodeEncryptionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "NodeToNodeEncryptionOptions", v, metadata)
 	}
 	if s.SnapshotOptions != nil {
 		v := s.SnapshotOptions
@@ -2817,6 +3129,9 @@ type ElasticsearchDomainStatus struct {
 	// Log publishing options for the given domain.
 	LogPublishingOptions map[string]LogPublishingOption `type:"map"`
 
+	// Specifies the status of the NodeToNodeEncryptionOptions.
+	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions `type:"structure"`
+
 	// The status of the Elasticsearch domain configuration. True if Amazon Elasticsearch
 	// Service is processing configuration changes. False if the configuration is
 	// active.
@@ -2824,6 +3139,10 @@ type ElasticsearchDomainStatus struct {
 
 	// Specifies the status of the SnapshotOptions
 	SnapshotOptions *SnapshotOptions `type:"structure"`
+
+	// The status of an Elasticsearch domain version upgrade. True if Amazon Elasticsearch
+	// Service is undergoing a version upgrade. False if the configuration is active.
+	UpgradeProcessing *bool `type:"boolean"`
 
 	// The VPCOptions for the specified domain. For more information, see VPC Endpoints
 	// for Amazon Elasticsearch Service Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
@@ -2950,6 +3269,12 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		ms0.End()
 
 	}
+	if s.NodeToNodeEncryptionOptions != nil {
+		v := s.NodeToNodeEncryptionOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "NodeToNodeEncryptionOptions", v, metadata)
+	}
 	if s.Processing != nil {
 		v := *s.Processing
 
@@ -2961,6 +3286,12 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SnapshotOptions", v, metadata)
+	}
+	if s.UpgradeProcessing != nil {
+		v := *s.UpgradeProcessing
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeProcessing", protocol.BoolValue(v), metadata)
 	}
 	if s.VPCOptions != nil {
 		v := s.VPCOptions
@@ -3107,6 +3438,334 @@ func (s EncryptionAtRestOptionsStatus) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Container for request parameters to GetCompatibleElasticsearchVersions operation.
+type GetCompatibleElasticsearchVersionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter
+	// or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
+	DomainName *string `location:"querystring" locationName:"domainName" min:"3" type:"string"`
+}
+
+// String returns the string representation
+func (s GetCompatibleElasticsearchVersionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCompatibleElasticsearchVersionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetCompatibleElasticsearchVersionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetCompatibleElasticsearchVersionsInput"}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCompatibleElasticsearchVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Container for response returned by GetCompatibleElasticsearchVersions operation.
+type GetCompatibleElasticsearchVersionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A map of compatible Elasticsearch versions returned as part of the GetCompatibleElasticsearchVersions
+	// operation.
+	CompatibleElasticsearchVersions []CompatibleVersionsMap `type:"list"`
+}
+
+// String returns the string representation
+func (s GetCompatibleElasticsearchVersionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCompatibleElasticsearchVersionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCompatibleElasticsearchVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCompatibleElasticsearchVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CompatibleElasticsearchVersions) > 0 {
+		v := s.CompatibleElasticsearchVersions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CompatibleElasticsearchVersions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Container for request parameters to GetUpgradeHistory operation.
+type GetUpgradeHistoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter
+	// or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
+	//
+	// DomainName is a required field
+	DomainName *string `location:"uri" locationName:"DomainName" min:"3" type:"string" required:"true"`
+
+	// Set this value to limit the number of results returned.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+
+	// Paginated APIs accepts NextToken input to returns next page results and provides
+	// a NextToken output in the response which can be used by the client to retrieve
+	// more results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetUpgradeHistoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUpgradeHistoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetUpgradeHistoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetUpgradeHistoryInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetUpgradeHistoryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Container for response returned by GetUpgradeHistory operation.
+type GetUpgradeHistoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Pagination token that needs to be supplied to the next call to get the next
+	// page of results
+	NextToken *string `type:"string"`
+
+	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade
+	// Eligibility Check performed on a domain returned as part of GetUpgradeHistoryResponse
+	// object.
+	UpgradeHistories []UpgradeHistory `type:"list"`
+}
+
+// String returns the string representation
+func (s GetUpgradeHistoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUpgradeHistoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUpgradeHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetUpgradeHistoryOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UpgradeHistories) > 0 {
+		v := s.UpgradeHistories
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UpgradeHistories", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Container for request parameters to GetUpgradeStatus operation.
+type GetUpgradeStatusInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter
+	// or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
+	//
+	// DomainName is a required field
+	DomainName *string `location:"uri" locationName:"DomainName" min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetUpgradeStatusInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUpgradeStatusInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetUpgradeStatusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetUpgradeStatusInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetUpgradeStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Container for response returned by GetUpgradeStatus operation.
+type GetUpgradeStatusOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// One of 4 statuses that a step can go through returned as part of the GetUpgradeStatusResponse
+	// object. The status can take one of the following values: In Progress
+	// Succeeded
+	// Succeeded with Issues
+	// Failed
+	StepStatus UpgradeStatus `type:"string" enum:"true"`
+
+	// A string that describes the update briefly
+	UpgradeName *string `type:"string"`
+
+	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
+	// through: PreUpgradeCheck
+	// Snapshot
+	// Upgrade
+	UpgradeStep UpgradeStep `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetUpgradeStatusOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetUpgradeStatusOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetUpgradeStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetUpgradeStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.StepStatus) > 0 {
+		v := s.StepStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StepStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.UpgradeName != nil {
+		v := *s.UpgradeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UpgradeStep) > 0 {
+		v := s.UpgradeStep
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeStep", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -3709,6 +4368,80 @@ func (s LogPublishingOptionsStatus) MarshalFields(e protocol.FieldEncoder) error
 		}
 		ms0.End()
 
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Specifies the node-to-node encryption options.
+type NodeToNodeEncryptionOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Specify true to enable node-to-node encryption.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s NodeToNodeEncryptionOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeToNodeEncryptionOptions) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeToNodeEncryptionOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Status of the node-to-node encryption options for the specified Elasticsearch
+// domain.
+type NodeToNodeEncryptionOptionsStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the node-to-node encryption options for the specified Elasticsearch
+	// domain.
+	//
+	// Options is a required field
+	Options *NodeToNodeEncryptionOptions `type:"structure" required:"true"`
+
+	// Specifies the status of the node-to-node encryption options for the specified
+	// Elasticsearch domain.
+	//
+	// Status is a required field
+	Status *OptionStatus `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s NodeToNodeEncryptionOptionsStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeToNodeEncryptionOptionsStatus) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeToNodeEncryptionOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Options != nil {
+		v := s.Options
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Options", v, metadata)
 	}
 	if s.Status != nil {
 		v := s.Status
@@ -4736,6 +5469,280 @@ func (s UpdateElasticsearchDomainConfigOutput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
+// Container for request parameters to UpgradeElasticsearchDomain operation.
+type UpgradeElasticsearchDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter
+	// or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+
+	// This flag, when set to True, indicates that an Upgrade Eligibility Check
+	// needs to be performed. This will not actually perform the Upgrade.
+	PerformCheckOnly *bool `type:"boolean"`
+
+	// The version of Elasticsearch that you intend to upgrade the domain to.
+	//
+	// TargetVersion is a required field
+	TargetVersion *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpgradeElasticsearchDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradeElasticsearchDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpgradeElasticsearchDomainInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpgradeElasticsearchDomainInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if s.TargetVersion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetVersion"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpgradeElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PerformCheckOnly != nil {
+		v := *s.PerformCheckOnly
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PerformCheckOnly", protocol.BoolValue(v), metadata)
+	}
+	if s.TargetVersion != nil {
+		v := *s.TargetVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TargetVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Container for response returned by UpgradeElasticsearchDomain operation.
+type UpgradeElasticsearchDomainOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter
+	// or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
+	DomainName *string `min:"3" type:"string"`
+
+	// This flag, when set to True, indicates that an Upgrade Eligibility Check
+	// needs to be performed. This will not actually perform the Upgrade.
+	PerformCheckOnly *bool `type:"boolean"`
+
+	// The version of Elasticsearch that you intend to upgrade the domain to.
+	TargetVersion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpgradeElasticsearchDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradeElasticsearchDomainOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpgradeElasticsearchDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpgradeElasticsearchDomainOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PerformCheckOnly != nil {
+		v := *s.PerformCheckOnly
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PerformCheckOnly", protocol.BoolValue(v), metadata)
+	}
+	if s.TargetVersion != nil {
+		v := *s.TargetVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TargetVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// History of the last 10 Upgrades and Upgrade Eligibility Checks.
+type UpgradeHistory struct {
+	_ struct{} `type:"structure"`
+
+	// UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ"
+	// format.
+	StartTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A list of UpgradeStepItem s representing information about each step performed
+	// as pard of a specific Upgrade or Upgrade Eligibility Check.
+	StepsList []UpgradeStepItem `type:"list"`
+
+	// A string that describes the update briefly
+	UpgradeName *string `type:"string"`
+
+	// The overall status of the update. The status can take one of the following
+	// values: In Progress
+	// Succeeded
+	// Succeeded with Issues
+	// Failed
+	UpgradeStatus UpgradeStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpgradeHistory) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradeHistory) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpgradeHistory) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.StepsList) > 0 {
+		v := s.StepsList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "StepsList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.UpgradeName != nil {
+		v := *s.UpgradeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UpgradeStatus) > 0 {
+		v := s.UpgradeStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.
+type UpgradeStepItem struct {
+	_ struct{} `type:"structure"`
+
+	// A list of strings containing detailed information about the errors encountered
+	// in a particular step.
+	Issues []string `type:"list"`
+
+	// The Floating point value representing progress percentage of a particular
+	// step.
+	ProgressPercent *float64 `type:"double"`
+
+	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
+	// through: PreUpgradeCheck
+	// Snapshot
+	// Upgrade
+	UpgradeStep UpgradeStep `type:"string" enum:"true"`
+
+	// The status of a particular step during an upgrade. The status can take one
+	// of the following values: In Progress
+	// Succeeded
+	// Succeeded with Issues
+	// Failed
+	UpgradeStepStatus UpgradeStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpgradeStepItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpgradeStepItem) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpgradeStepItem) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Issues) > 0 {
+		v := s.Issues
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Issues", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ProgressPercent != nil {
+		v := *s.ProgressPercent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProgressPercent", protocol.Float64Value(v), metadata)
+	}
+	if len(s.UpgradeStep) > 0 {
+		v := s.UpgradeStep
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeStep", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.UpgradeStepStatus) > 0 {
+		v := s.UpgradeStepStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpgradeStepStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Options to specify the subnets and security groups for VPC endpoint. For
 // more information, see  VPC Endpoints for Amazon Elasticsearch Service Domains
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
@@ -4964,16 +5971,20 @@ func (enum ESPartitionInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Type of Log File, it can be one of the following: INDEX_SLOW_LOGS: Index
-// slow logs contains insert requests that took more time than configured index
+// slow logs contain insert requests that took more time than configured index
 // query log threshold to execute.
-// SEARCH_SLOW_LOGS: Search slow logs contains search queries that took more
+// SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more
 // time than configured search query log threshold to execute.
+// ES_APPLICATION_LOGS: Elasticsearch application logs contain information about
+// errors and warnings raised during the operation of the service and can be
+// useful for troubleshooting.
 type LogType string
 
 // Enum values for LogType
 const (
-	LogTypeIndexSlowLogs  LogType = "INDEX_SLOW_LOGS"
-	LogTypeSearchSlowLogs LogType = "SEARCH_SLOW_LOGS"
+	LogTypeIndexSlowLogs     LogType = "INDEX_SLOW_LOGS"
+	LogTypeSearchSlowLogs    LogType = "SEARCH_SLOW_LOGS"
+	LogTypeEsApplicationLogs LogType = "ES_APPLICATION_LOGS"
 )
 
 func (enum LogType) MarshalValue() (string, error) {
@@ -5022,6 +6033,43 @@ func (enum ReservedElasticsearchInstancePaymentOption) MarshalValue() (string, e
 }
 
 func (enum ReservedElasticsearchInstancePaymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UpgradeStatus string
+
+// Enum values for UpgradeStatus
+const (
+	UpgradeStatusInProgress          UpgradeStatus = "IN_PROGRESS"
+	UpgradeStatusSucceeded           UpgradeStatus = "SUCCEEDED"
+	UpgradeStatusSucceededWithIssues UpgradeStatus = "SUCCEEDED_WITH_ISSUES"
+	UpgradeStatusFailed              UpgradeStatus = "FAILED"
+)
+
+func (enum UpgradeStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpgradeStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UpgradeStep string
+
+// Enum values for UpgradeStep
+const (
+	UpgradeStepPreUpgradeCheck UpgradeStep = "PRE_UPGRADE_CHECK"
+	UpgradeStepSnapshot        UpgradeStep = "SNAPSHOT"
+	UpgradeStepUpgrade         UpgradeStep = "UPGRADE"
+)
+
+func (enum UpgradeStep) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpgradeStep) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

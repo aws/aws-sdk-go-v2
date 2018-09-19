@@ -68,6 +68,8 @@ type InspectorAPI interface {
 
 	CreateAssessmentTemplateRequest(*inspector.CreateAssessmentTemplateInput) inspector.CreateAssessmentTemplateRequest
 
+	CreateExclusionsPreviewRequest(*inspector.CreateExclusionsPreviewInput) inspector.CreateExclusionsPreviewRequest
+
 	CreateResourceGroupRequest(*inspector.CreateResourceGroupInput) inspector.CreateResourceGroupRequest
 
 	DeleteAssessmentRunRequest(*inspector.DeleteAssessmentRunInput) inspector.DeleteAssessmentRunRequest
@@ -84,6 +86,8 @@ type InspectorAPI interface {
 
 	DescribeCrossAccountAccessRoleRequest(*inspector.DescribeCrossAccountAccessRoleInput) inspector.DescribeCrossAccountAccessRoleRequest
 
+	DescribeExclusionsRequest(*inspector.DescribeExclusionsInput) inspector.DescribeExclusionsRequest
+
 	DescribeFindingsRequest(*inspector.DescribeFindingsInput) inspector.DescribeFindingsRequest
 
 	DescribeResourceGroupsRequest(*inspector.DescribeResourceGroupsInput) inspector.DescribeResourceGroupsRequest
@@ -91,6 +95,8 @@ type InspectorAPI interface {
 	DescribeRulesPackagesRequest(*inspector.DescribeRulesPackagesInput) inspector.DescribeRulesPackagesRequest
 
 	GetAssessmentReportRequest(*inspector.GetAssessmentReportInput) inspector.GetAssessmentReportRequest
+
+	GetExclusionsPreviewRequest(*inspector.GetExclusionsPreviewInput) inspector.GetExclusionsPreviewRequest
 
 	GetTelemetryMetadataRequest(*inspector.GetTelemetryMetadataInput) inspector.GetTelemetryMetadataRequest
 
@@ -103,6 +109,8 @@ type InspectorAPI interface {
 	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
 
 	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
+
+	ListExclusionsRequest(*inspector.ListExclusionsInput) inspector.ListExclusionsRequest
 
 	ListFindingsRequest(*inspector.ListFindingsInput) inspector.ListFindingsRequest
 

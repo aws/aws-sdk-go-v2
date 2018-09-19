@@ -57,7 +57,7 @@ func NewDecryptionClient(cfg aws.Config, options ...func(*DecryptionClient)) *De
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{
-			AESGCMNoPadding:                                          newAESGCMContentCipher,
+			AESGCMNoPadding: newAESGCMContentCipher,
 			strings.Join([]string{AESCBC, AESCBCPadder.Name()}, "/"): newAESCBCContentCipher,
 		},
 		PadderRegistry: map[string]Padder{

@@ -80,6 +80,8 @@ type FMSAPI interface {
 
 	ListComplianceStatusRequest(*fms.ListComplianceStatusInput) fms.ListComplianceStatusRequest
 
+	ListMemberAccountsRequest(*fms.ListMemberAccountsInput) fms.ListMemberAccountsRequest
+
 	ListPoliciesRequest(*fms.ListPoliciesInput) fms.ListPoliciesRequest
 
 	PutNotificationChannelRequest(*fms.PutNotificationChannelInput) fms.PutNotificationChannelRequest

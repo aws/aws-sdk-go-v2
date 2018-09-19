@@ -494,10 +494,10 @@ func (r CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
 // CreateNFSFileShareRequest returns a request value for making API operation for
 // AWS Storage Gateway.
 //
-// Creates a file share on an existing file gateway. In Storage Gateway, a file
-// share is a file system mount point backed by Amazon S3 cloud storage. Storage
-// Gateway exposes file shares using a Network File System (NFS) interface.
-// This operation is only supported in the file gateway type.
+// Creates a Network File System (NFS) file share on an existing file gateway.
+// In Storage Gateway, a file share is a file system mount point backed by Amazon
+// S3 cloud storage. Storage Gateway exposes file shares using a NFS interface.
+// This operation is only supported for file gateways.
 //
 // File gateway requires AWS Security Token Service (AWS STS) to be activated
 // to enable you create a file share. Make sure AWS STS is activated in the
@@ -532,6 +532,68 @@ func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInpu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateNFSFileShareRequest{Request: req, Input: input, Copy: c.CreateNFSFileShareRequest}
+}
+
+const opCreateSMBFileShare = "CreateSMBFileShare"
+
+// CreateSMBFileShareRequest is a API request type for the CreateSMBFileShare API operation.
+type CreateSMBFileShareRequest struct {
+	*aws.Request
+	Input *CreateSMBFileShareInput
+	Copy  func(*CreateSMBFileShareInput) CreateSMBFileShareRequest
+}
+
+// Send marshals and sends the CreateSMBFileShare API request.
+func (r CreateSMBFileShareRequest) Send() (*CreateSMBFileShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSMBFileShareOutput), nil
+}
+
+// CreateSMBFileShareRequest returns a request value for making API operation for
+// AWS Storage Gateway.
+//
+// Creates a Server Message Block (SMB) file share on an existing file gateway.
+// In Storage Gateway, a file share is a file system mount point backed by Amazon
+// S3 cloud storage. Storage Gateway expose file shares using a SMB interface.
+// This operation is only supported for file gateways.
+//
+// File gateways require AWS Security Token Service (AWS STS) to be activated
+// to enable you to create a file share. Make sure that AWS STS is activated
+// in the AWS Region you are creating your file gateway in. If AWS STS is not
+// activated in this AWS Region, activate it. For information about how to activate
+// AWS STS, see Activating and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide.
+//
+// File gateways don't support creating hard or symbolic links on a file share.
+//
+//    // Example sending a request using the CreateSMBFileShareRequest method.
+//    req := client.CreateSMBFileShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShare
+func (c *StorageGateway) CreateSMBFileShareRequest(input *CreateSMBFileShareInput) CreateSMBFileShareRequest {
+	op := &aws.Operation{
+		Name:       opCreateSMBFileShare,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateSMBFileShareInput{}
+	}
+
+	output := &CreateSMBFileShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateSMBFileShareRequest{Request: req, Input: input, Copy: c.CreateSMBFileShareRequest}
 }
 
 const opCreateSnapshot = "CreateSnapshot"
@@ -974,7 +1036,7 @@ func (r DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
 // AWS Storage Gateway.
 //
 // Deletes a file share from a file gateway. This operation is only supported
-// in the file gateway type.
+// for file gateways.
 //
 //    // Example sending a request using the DeleteFileShareRequest method.
 //    req := client.DeleteFileShareRequest(params)
@@ -1635,8 +1697,8 @@ func (r DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, erro
 // DescribeNFSFileSharesRequest returns a request value for making API operation for
 // AWS Storage Gateway.
 //
-// Gets a description for one or more file shares from a file gateway. This
-// operation is only supported in the file gateway type.
+// Gets a description for one or more Network File System (NFS) file shares
+// from a file gateway. This operation is only supported for file gateways.
 //
 //    // Example sending a request using the DescribeNFSFileSharesRequest method.
 //    req := client.DescribeNFSFileSharesRequest(params)
@@ -1662,6 +1724,108 @@ func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileShar
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeNFSFileSharesRequest{Request: req, Input: input, Copy: c.DescribeNFSFileSharesRequest}
+}
+
+const opDescribeSMBFileShares = "DescribeSMBFileShares"
+
+// DescribeSMBFileSharesRequest is a API request type for the DescribeSMBFileShares API operation.
+type DescribeSMBFileSharesRequest struct {
+	*aws.Request
+	Input *DescribeSMBFileSharesInput
+	Copy  func(*DescribeSMBFileSharesInput) DescribeSMBFileSharesRequest
+}
+
+// Send marshals and sends the DescribeSMBFileShares API request.
+func (r DescribeSMBFileSharesRequest) Send() (*DescribeSMBFileSharesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSMBFileSharesOutput), nil
+}
+
+// DescribeSMBFileSharesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
+//
+// Gets a description for one or more Server Message Block (SMB) file shares
+// from a file gateway. This operation is only supported for file gateways.
+//
+//    // Example sending a request using the DescribeSMBFileSharesRequest method.
+//    req := client.DescribeSMBFileSharesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileShares
+func (c *StorageGateway) DescribeSMBFileSharesRequest(input *DescribeSMBFileSharesInput) DescribeSMBFileSharesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeSMBFileShares,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeSMBFileSharesInput{}
+	}
+
+	output := &DescribeSMBFileSharesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeSMBFileSharesRequest{Request: req, Input: input, Copy: c.DescribeSMBFileSharesRequest}
+}
+
+const opDescribeSMBSettings = "DescribeSMBSettings"
+
+// DescribeSMBSettingsRequest is a API request type for the DescribeSMBSettings API operation.
+type DescribeSMBSettingsRequest struct {
+	*aws.Request
+	Input *DescribeSMBSettingsInput
+	Copy  func(*DescribeSMBSettingsInput) DescribeSMBSettingsRequest
+}
+
+// Send marshals and sends the DescribeSMBSettings API request.
+func (r DescribeSMBSettingsRequest) Send() (*DescribeSMBSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSMBSettingsOutput), nil
+}
+
+// DescribeSMBSettingsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
+//
+// Gets a description of a Server Message Block (SMB) file share settings from
+// a file gateway. This operation is only supported for file gateways.
+//
+//    // Example sending a request using the DescribeSMBSettingsRequest method.
+//    req := client.DescribeSMBSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettings
+func (c *StorageGateway) DescribeSMBSettingsRequest(input *DescribeSMBSettingsInput) DescribeSMBSettingsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeSMBSettings,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeSMBSettingsInput{}
+	}
+
+	output := &DescribeSMBSettingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeSMBSettingsRequest{Request: req, Input: input, Copy: c.DescribeSMBSettingsRequest}
 }
 
 const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
@@ -2363,6 +2527,57 @@ func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) Disab
 	return DisableGatewayRequest{Request: req, Input: input, Copy: c.DisableGatewayRequest}
 }
 
+const opJoinDomain = "JoinDomain"
+
+// JoinDomainRequest is a API request type for the JoinDomain API operation.
+type JoinDomainRequest struct {
+	*aws.Request
+	Input *JoinDomainInput
+	Copy  func(*JoinDomainInput) JoinDomainRequest
+}
+
+// Send marshals and sends the JoinDomain API request.
+func (r JoinDomainRequest) Send() (*JoinDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*JoinDomainOutput), nil
+}
+
+// JoinDomainRequest returns a request value for making API operation for
+// AWS Storage Gateway.
+//
+// Adds a file gateway to an Active Directory domain. This operation is only
+// supported for file gateways that support the SMB file protocol.
+//
+//    // Example sending a request using the JoinDomainRequest method.
+//    req := client.JoinDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomain
+func (c *StorageGateway) JoinDomainRequest(input *JoinDomainInput) JoinDomainRequest {
+	op := &aws.Operation{
+		Name:       opJoinDomain,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &JoinDomainInput{}
+	}
+
+	output := &JoinDomainOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return JoinDomainRequest{Request: req, Input: input, Copy: c.JoinDomainRequest}
+}
+
 const opListFileShares = "ListFileShares"
 
 // ListFileSharesRequest is a API request type for the ListFileShares API operation.
@@ -2387,7 +2602,7 @@ func (r ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
 //
 // Gets a list of the file shares for a specific file gateway, or the list of
 // file shares that belong to the calling user account. This operation is only
-// supported in the file gateway type.
+// supported for file gateways.
 //
 //    // Example sending a request using the ListFileSharesRequest method.
 //    req := client.ListFileSharesRequest(params)
@@ -2951,7 +3166,7 @@ func (r NotifyWhenUploadedRequest) Send() (*NotifyWhenUploadedOutput, error) {
 // is done, Storage Gateway sends you notification through an Amazon CloudWatch
 // Event. You can configure CloudWatch Events to send the notification through
 // event targets such as Amazon SNS or AWS Lambda function. This operation is
-// only supported in the file gateway type.
+// only supported for file gateways.
 //
 // For more information, see Getting File Upload Notification in the Storage
 // Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification).
@@ -3316,6 +3531,57 @@ func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePa
 	output.responseMetadata = aws.Response{Request: req}
 
 	return SetLocalConsolePasswordRequest{Request: req, Input: input, Copy: c.SetLocalConsolePasswordRequest}
+}
+
+const opSetSMBGuestPassword = "SetSMBGuestPassword"
+
+// SetSMBGuestPasswordRequest is a API request type for the SetSMBGuestPassword API operation.
+type SetSMBGuestPasswordRequest struct {
+	*aws.Request
+	Input *SetSMBGuestPasswordInput
+	Copy  func(*SetSMBGuestPasswordInput) SetSMBGuestPasswordRequest
+}
+
+// Send marshals and sends the SetSMBGuestPassword API request.
+func (r SetSMBGuestPasswordRequest) Send() (*SetSMBGuestPasswordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetSMBGuestPasswordOutput), nil
+}
+
+// SetSMBGuestPasswordRequest returns a request value for making API operation for
+// AWS Storage Gateway.
+//
+// Sets the password for the guest user smbguest. The smbguest user is the user
+// when the authentication method for the file share is set to GuestAccess.
+//
+//    // Example sending a request using the SetSMBGuestPasswordRequest method.
+//    req := client.SetSMBGuestPasswordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPassword
+func (c *StorageGateway) SetSMBGuestPasswordRequest(input *SetSMBGuestPasswordInput) SetSMBGuestPasswordRequest {
+	op := &aws.Operation{
+		Name:       opSetSMBGuestPassword,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &SetSMBGuestPasswordInput{}
+	}
+
+	output := &SetSMBGuestPasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SetSMBGuestPasswordRequest{Request: req, Input: input, Copy: c.SetSMBGuestPasswordRequest}
 }
 
 const opShutdownGateway = "ShutdownGateway"
@@ -3757,8 +4023,8 @@ func (r UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
 // UpdateNFSFileShareRequest returns a request value for making API operation for
 // AWS Storage Gateway.
 //
-// Updates a file share. This operation is only supported in the file gateway
-// type.
+// Updates a Network File System (NFS) file share. This operation is only supported
+// in the file gateway type.
 //
 // To leave a file share field unchanged, set the corresponding input field
 // to null.
@@ -3802,6 +4068,68 @@ func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInpu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateNFSFileShareRequest{Request: req, Input: input, Copy: c.UpdateNFSFileShareRequest}
+}
+
+const opUpdateSMBFileShare = "UpdateSMBFileShare"
+
+// UpdateSMBFileShareRequest is a API request type for the UpdateSMBFileShare API operation.
+type UpdateSMBFileShareRequest struct {
+	*aws.Request
+	Input *UpdateSMBFileShareInput
+	Copy  func(*UpdateSMBFileShareInput) UpdateSMBFileShareRequest
+}
+
+// Send marshals and sends the UpdateSMBFileShare API request.
+func (r UpdateSMBFileShareRequest) Send() (*UpdateSMBFileShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSMBFileShareOutput), nil
+}
+
+// UpdateSMBFileShareRequest returns a request value for making API operation for
+// AWS Storage Gateway.
+//
+// Updates a Server Message Block (SMB) file share.
+//
+// To leave a file share field unchanged, set the corresponding input field
+// to null. This operation is only supported for file gateways.
+//
+// File gateways require AWS Security Token Service (AWS STS) to be activated
+// to enable you to create a file share. Make sure that AWS STS is activated
+// in the AWS Region you are creating your file gateway in. If AWS STS is not
+// activated in this AWS Region, activate it. For information about how to activate
+// AWS STS, see Activating and Deactivating AWS STS in an AWS Region (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide.
+//
+// File gateways don't support creating hard or symbolic links on a file share.
+//
+//    // Example sending a request using the UpdateSMBFileShareRequest method.
+//    req := client.UpdateSMBFileShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShare
+func (c *StorageGateway) UpdateSMBFileShareRequest(input *UpdateSMBFileShareInput) UpdateSMBFileShareRequest {
+	op := &aws.Operation{
+		Name:       opUpdateSMBFileShare,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateSMBFileShareInput{}
+	}
+
+	output := &UpdateSMBFileShareOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateSMBFileShareRequest{Request: req, Input: input, Copy: c.UpdateSMBFileShareRequest}
 }
 
 const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
@@ -4403,6 +4731,10 @@ type CachediSCSIVolume struct {
 	// don’t have this time stamp.
 	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
 	// If the cached volume was created from a snapshot, this field contains the
 	// snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
 	SourceSnapshotId *string `type:"string"`
@@ -4644,6 +4976,9 @@ func (s ChapInfo) GoString() string {
 type CreateCachediSCSIVolumeInput struct {
 	_ struct{} `type:"structure"`
 
+	// A unique identifier that you use to retry a request. If you retry a request,
+	// use the same ClientToken you specified in the initial request.
+	//
 	// ClientToken is a required field
 	ClientToken *string `min:"5" type:"string" required:"true"`
 
@@ -4653,9 +4988,28 @@ type CreateCachediSCSIVolumeInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
+	// The network interface of the gateway on which to expose the iSCSI target.
+	// Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a
+	// list of the network interfaces available on a gateway.
+	//
+	// Valid Values: A valid IP address.
+	//
 	// NetworkInterfaceId is a required field
 	NetworkInterfaceId *string `type:"string" required:"true"`
 
+	// The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the
+	// new cached volume. Specify this field if you want to create the iSCSI storage
+	// volume from a snapshot otherwise do not include this field. To list snapshots
+	// for your account use DescribeSnapshots (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html)
+	// in the Amazon Elastic Compute Cloud API Reference.
 	SnapshotId *string `type:"string"`
 
 	// The ARN for an existing volume. Specifying this ARN makes the new volume
@@ -4664,9 +5018,16 @@ type CreateCachediSCSIVolumeInput struct {
 	// than the size of the existing volume, in bytes.
 	SourceVolumeARN *string `min:"50" type:"string"`
 
+	// The name of the iSCSI target used by initiators to connect to the target
+	// and as a suffix for the target ARN. For example, specifying TargetName as
+	// myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+	// The target name must be unique across all volumes of a gateway.
+	//
 	// TargetName is a required field
 	TargetName *string `min:"1" type:"string" required:"true"`
 
+	// The size of the volume in bytes.
+	//
 	// VolumeSizeInBytes is a required field
 	VolumeSizeInBytes *int64 `type:"long" required:"true"`
 }
@@ -4697,6 +5058,9 @@ func (s *CreateCachediSCSIVolumeInput) Validate() error {
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
 
 	if s.NetworkInterfaceId == nil {
@@ -4729,8 +5093,11 @@ type CreateCachediSCSIVolumeOutput struct {
 
 	responseMetadata aws.Response
 
+	// he Amazon Resource Name (ARN) of the volume target that includes the iSCSI
+	// name that initiators can use to connect to the target.
 	TargetARN *string `min:"50" type:"string"`
 
+	// The Amazon Resource Name (ARN) of the configured volume.
 	VolumeARN *string `min:"50" type:"string"`
 }
 
@@ -4764,9 +5131,9 @@ type CreateNFSFileShareInput struct {
 	// ClientToken is a required field
 	ClientToken *string `min:"5" type:"string" required:"true"`
 
-	// The default storage class for objects put into an Amazon S3 bucket by file
-	// gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field
-	// is not populated, the default value S3_STANDARD is used. Optional.
+	// The default storage class for objects put into an Amazon S3 bucket by the
+	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
+	// If this field is not populated, the default value S3_STANDARD is used. Optional.
 	DefaultStorageClass *string `min:"5" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the file gateway on which you want to create
@@ -4775,17 +5142,17 @@ type CreateNFSFileShareInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
-	// Enables guessing of the MIME type for uploaded objects based on file extensions.
-	// Set this value to true to enable MIME type guessing, and otherwise to false.
-	// The default value is true.
+	// A value that enables guessing of the MIME type for uploaded objects based
+	// on file extensions. Set this value to true to enable MIME type guessing,
+	// and otherwise to false. The default value is true.
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
 	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The KMS key used for Amazon S3 server side encryption. This value can only
-	// be set when KmsEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"20" type:"string"`
 
 	// The ARN of the backed storage used for storing file data.
@@ -4796,17 +5163,16 @@ type CreateNFSFileShareInput struct {
 	// File share default values. Optional.
 	NFSFileShareDefaults *NFSFileShareDefaults `type:"structure"`
 
-	// Sets the access control list permission for objects in the Amazon S3 bucket
-	// that a file gateway puts objects into. The default value is "private".
+	// A value that sets the access control list permission for objects in the S3
+	// bucket that a file gateway puts objects into. The default value is "private".
 	ObjectACL ObjectACL `type:"string" enum:"true"`
 
-	// Sets the write status of a file share. This value is true if the write status
-	// is read-only, and otherwise false.
+	// A value that sets the write status of a file share. This value is true if
+	// the write status is read-only, and otherwise false.
 	ReadOnly *bool `type:"boolean"`
 
-	// Sets who pays the cost of the request and the data download from the Amazon
-	// S3 bucket. Set this value to true if you want the requester to pay instead
-	// of the bucket owner, and otherwise to false.
+	// A value that sets the access control list permission for objects in the Amazon
+	// S3 bucket that a file gateway puts objects into. The default value is private.
 	RequesterPays *bool `type:"boolean"`
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that a file
@@ -4817,11 +5183,11 @@ type CreateNFSFileShareInput struct {
 
 	// Maps a user to anonymous user. Valid options are the following:
 	//
-	//    * "RootSquash" - Only root is mapped to anonymous user.
+	//    * RootSquash - Only root is mapped to anonymous user.
 	//
-	//    * "NoSquash" - No one is mapped to anonymous user.
+	//    * NoSquash - No one is mapped to anonymous user
 	//
-	//    * "AllSquash" - Everyone is mapped to anonymous user.
+	//    * AllSquash - Everyone is mapped to anonymous user.
 	Squash *string `min:"5" type:"string"`
 }
 
@@ -4913,6 +5279,163 @@ func (s CreateNFSFileShareOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNFSFileShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// CreateSMBFileShareInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput
+type CreateSMBFileShareInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication method that users use to access the file share.
+	//
+	// Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
+	Authentication *string `min:"5" type:"string"`
+
+	// A unique string value that you supply that is used by file gateway to ensure
+	// idempotent file share creation.
+	//
+	// ClientToken is a required field
+	ClientToken *string `min:"5" type:"string" required:"true"`
+
+	// The default storage class for objects put into an Amazon S3 bucket by the
+	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
+	// If this field is not populated, the default value S3_STANDARD is used. Optional.
+	DefaultStorageClass *string `min:"5" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the file gateway on which you want to create
+	// a file share.
+	//
+	// GatewayARN is a required field
+	GatewayARN *string `min:"50" type:"string" required:"true"`
+
+	// A value that enables guessing of the MIME type for uploaded objects based
+	// on file extensions. Set this value to true to enable MIME type guessing,
+	// and otherwise to false. The default value is true.
+	GuessMIMETypeEnabled *bool `type:"boolean"`
+
+	// A list of users or groups in the Active Directory that are not allowed to
+	// access the file share. A group must be prefixed with the @ character. For
+	// example @group1. Can only be set if Authentication is set to ActiveDirectory.
+	InvalidUserList []string `type:"list"`
+
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
+	// The ARN of the backed storage used for storing file data.
+	//
+	// LocationARN is a required field
+	LocationARN *string `min:"16" type:"string" required:"true"`
+
+	// A value that sets the access control list permission for objects in the S3
+	// bucket that a file gateway puts objects into. The default value is "private".
+	ObjectACL ObjectACL `type:"string" enum:"true"`
+
+	// A value that sets the write status of a file share. This value is true if
+	// the write status is read-only, and otherwise false.
+	ReadOnly *bool `type:"boolean"`
+
+	// A value that sets the access control list permission for objects in the Amazon
+	// S3 bucket that a file gateway puts objects into. The default value is private.
+	RequesterPays *bool `type:"boolean"`
+
+	// The ARN of the AWS Identity and Access Management (IAM) role that a file
+	// gateway assumes when it accesses the underlying storage.
+	//
+	// Role is a required field
+	Role *string `min:"20" type:"string" required:"true"`
+
+	// A list of users or groups in the Active Directory that are allowed to access
+	// the file share. A group must be prefixed with the @ character. For example
+	// @group1. Can only be set if Authentication is set to ActiveDirectory.
+	ValidUserList []string `type:"list"`
+}
+
+// String returns the string representation
+func (s CreateSMBFileShareInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSMBFileShareInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateSMBFileShareInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSMBFileShareInput"}
+	if s.Authentication != nil && len(*s.Authentication) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("Authentication", 5))
+	}
+
+	if s.ClientToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientToken"))
+	}
+	if s.ClientToken != nil && len(*s.ClientToken) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 5))
+	}
+	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
+	}
+
+	if s.GatewayARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
+	}
+	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
+	}
+
+	if s.LocationARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LocationARN"))
+	}
+	if s.LocationARN != nil && len(*s.LocationARN) < 16 {
+		invalidParams.Add(aws.NewErrParamMinLen("LocationARN", 16))
+	}
+
+	if s.Role == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
+	}
+	if s.Role != nil && len(*s.Role) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("Role", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// CreateSMBFileShareOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareOutput
+type CreateSMBFileShareOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the newly created file share.
+	FileShareARN *string `min:"50" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateSMBFileShareOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSMBFileShareOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSMBFileShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5105,6 +5628,14 @@ type CreateStorediSCSIVolumeInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side
+	// encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
 	// The network interface of the gateway on which to expose the iSCSI target.
 	// Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a
 	// list of the network interfaces available on a gateway.
@@ -5164,6 +5695,9 @@ func (s *CreateStorediSCSIVolumeInput) Validate() error {
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
 
 	if s.NetworkInterfaceId == nil {
@@ -5232,6 +5766,14 @@ type CreateTapeWithBarcodeInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
 	// The barcode that you want to assign to the tape.
 	//
 	// Barcodes cannot be reused. This includes barcodes used for tapes that have
@@ -5267,6 +5809,9 @@ func (s *CreateTapeWithBarcodeInput) Validate() error {
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
 
 	if s.TapeBarcode == nil {
@@ -5333,6 +5878,14 @@ type CreateTapesInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
 	// The number of virtual tapes that you want to create.
 	//
 	// NumTapesToCreate is a required field
@@ -5381,6 +5934,9 @@ func (s *CreateTapesInput) Validate() error {
 	}
 	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
 	}
 
 	if s.NumTapesToCreate == nil {
@@ -6549,6 +7105,142 @@ func (s DescribeNFSFileSharesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// DescribeSMBFileSharesInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileSharesInput
+type DescribeSMBFileSharesInput struct {
+	_ struct{} `type:"structure"`
+
+	// An array containing the Amazon Resource Name (ARN) of each file share to
+	// be described.
+	//
+	// FileShareARNList is a required field
+	FileShareARNList []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeSMBFileSharesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSMBFileSharesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeSMBFileSharesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSMBFileSharesInput"}
+
+	if s.FileShareARNList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FileShareARNList"))
+	}
+	if s.FileShareARNList != nil && len(s.FileShareARNList) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareARNList", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// DescribeSMBFileSharesOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileSharesOutput
+type DescribeSMBFileSharesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array containing a description for each requested file share.
+	SMBFileShareInfoList []SMBFileShareInfo `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeSMBFileSharesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSMBFileSharesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSMBFileSharesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsInput
+type DescribeSMBSettingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and region.
+	//
+	// GatewayARN is a required field
+	GatewayARN *string `min:"50" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeSMBSettingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSMBSettingsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeSMBSettingsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSMBSettingsInput"}
+
+	if s.GatewayARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
+	}
+	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput
+type DescribeSMBSettingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of the domain that the gateway is joined to.
+	DomainName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and region.
+	GatewayARN *string `min:"50" type:"string"`
+
+	// This value is true if a password for the guest user “smbguest” is set, and
+	// otherwise false.
+	SMBGuestPasswordSet *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s DescribeSMBSettingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSMBSettingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSMBSettingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN of the
 // volume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleInput
@@ -6741,7 +7433,7 @@ type DescribeTapeArchivesOutput struct {
 	Marker *string `min:"1" type:"string"`
 
 	// An array of virtual tape objects in the virtual tape shelf (VTS). The description
-	// includes of the Amazon Resource Name(ARN) of the virtual tapes. The information
+	// includes of the Amazon Resource Name (ARN) of the virtual tapes. The information
 	// returned includes the Amazon Resource Names (ARNs) of the tapes, size of
 	// the tapes, status of the tapes, progress of the description and tape barcode.
 	TapeArchives []TapeArchive `type:"list"`
@@ -7211,7 +7903,7 @@ type DeviceiSCSIAttributes struct {
 	// The port used to communicate with iSCSI VTL device targets.
 	NetworkInterfacePort *int64 `type:"integer"`
 
-	// Specifies the unique Amazon Resource Name(ARN) that encodes the iSCSI qualified
+	// Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified
 	// name(iqn) of a tape drive or media changer target.
 	TargetARN *string `min:"50" type:"string"`
 }
@@ -7272,7 +7964,7 @@ type DisableGatewayOutput struct {
 
 	responseMetadata aws.Response
 
-	// The unique Amazon Resource Name of the disabled gateway.
+	// The unique Amazon Resource Name (ARN) of the disabled gateway.
 	GatewayARN *string `min:"50" type:"string"`
 }
 
@@ -7359,6 +8051,9 @@ type FileShareInfo struct {
 	// and DELETING.
 	FileShareStatus *string `min:"3" type:"string"`
 
+	// The type of the file share.
+	FileShareType FileShareType `type:"string" enum:"true"`
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
@@ -7408,6 +8103,100 @@ func (s GatewayInfo) String() string {
 // GoString returns the string representation
 func (s GatewayInfo) GoString() string {
 	return s.String()
+}
+
+// JoinDomainInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainInput
+type JoinDomainInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that you want the gateway to join.
+	//
+	// DomainName is a required field
+	DomainName *string `type:"string" required:"true"`
+
+	// The unique Amazon Resource Name (ARN) of the file gateway you want to add
+	// to the Active Directory domain.
+	//
+	// GatewayARN is a required field
+	GatewayARN *string `min:"50" type:"string" required:"true"`
+
+	// Sets the password of the user who has permission to add the gateway to the
+	// Active Directory domain.
+	//
+	// Password is a required field
+	Password *string `type:"string" required:"true"`
+
+	// Sets the user name of user who has permission to add the gateway to the Active
+	// Directory domain.
+	//
+	// UserName is a required field
+	UserName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s JoinDomainInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s JoinDomainInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *JoinDomainInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "JoinDomainInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+
+	if s.GatewayARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
+	}
+	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+
+	if s.Password == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// JoinDomainOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainOutput
+type JoinDomainOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The unique Amazon Resource Name (ARN) of the gateway that joined the domain.
+	GatewayARN *string `min:"50" type:"string"`
+}
+
+// String returns the string representation
+func (s JoinDomainOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s JoinDomainOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s JoinDomainOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // ListFileShareInput
@@ -8019,11 +8808,12 @@ func (s ListVolumesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Describes file share default values. Files and folders stored as Amazon S3
-// objects in S3 buckets don't, by default, have Unix file permissions assigned
-// to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects
-// that represent files and folders are assigned these default Unix permissions.
-// This operation is only supported in the file gateway type.
+// Describes Network File System (NFS) file share default values. Files and
+// folders stored as Amazon S3 objects in S3 buckets don't, by default, have
+// Unix file permissions assigned to them. Upon discovery in an S3 bucket by
+// Storage Gateway, the S3 objects that represent files and folders are assigned
+// these default Unix permissions. This operation is only supported for file
+// gateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareDefaults
 type NFSFileShareDefaults struct {
 	_ struct{} `type:"structure"`
@@ -8083,9 +8873,9 @@ type NFSFileShareInfo struct {
 	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string `min:"1" type:"list"`
 
-	// The default storage class for objects put into an Amazon S3 bucket by file
-	// gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field
-	// is not populated, the default value S3_STANDARD is used. Optional.
+	// The default storage class for objects put into an Amazon S3 bucket by the
+	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
+	// If this field is not populated, the default value S3_STANDARD is used. Optional.
 	DefaultStorageClass *string `min:"5" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the file share.
@@ -8102,42 +8892,43 @@ type NFSFileShareInfo struct {
 	// to return a list of gateways for your account and region.
 	GatewayARN *string `min:"50" type:"string"`
 
-	// Enables guessing of the MIME type for uploaded objects based on file extensions.
-	// Set this value to true to enable MIME type guessing, and otherwise to false.
-	// The default value is true.
+	// A value that enables guessing of the MIME type for uploaded objects based
+	// on file extensions. Set this value to true to enable MIME type guessing,
+	// and otherwise to false. The default value is true.
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
-	// True to use Amazon S3 server side encryption with your own KMS key, or false
-	// to use a key managed by Amazon S3. Optional.
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The ARN of the KMS key used for Amazon S3 server side encryption.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"20" type:"string"`
 
 	// The ARN of the backend storage used for storing file data.
 	LocationARN *string `min:"16" type:"string"`
 
-	// Describes file share default values. Files and folders stored as Amazon S3
-	// objects in S3 buckets don't, by default, have Unix file permissions assigned
-	// to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects
-	// that represent files and folders are assigned these default Unix permissions.
-	// This operation is only supported in the file gateway type.
+	// Describes Network File System (NFS) file share default values. Files and
+	// folders stored as Amazon S3 objects in S3 buckets don't, by default, have
+	// Unix file permissions assigned to them. Upon discovery in an S3 bucket by
+	// Storage Gateway, the S3 objects that represent files and folders are assigned
+	// these default Unix permissions. This operation is only supported for file
+	// gateways.
 	NFSFileShareDefaults *NFSFileShareDefaults `type:"structure"`
 
-	// Sets the access control list permission for objects in the S3 bucket that
-	// a file gateway puts objects into. The default value is "private".
+	// A value that sets the access control list permission for objects in the S3
+	// bucket that a file gateway puts objects into. The default value is "private".
 	ObjectACL ObjectACL `type:"string" enum:"true"`
 
 	// The file share path used by the NFS client to identify the mount point.
 	Path *string `type:"string"`
 
-	// Sets the write status of a file share. This value is true if the write status
-	// is read-only, and otherwise false.
+	// A value that sets the write status of a file share. This value is true if
+	// the write status is read-only, and otherwise false.
 	ReadOnly *bool `type:"boolean"`
 
-	// Sets who pays the cost of the request and the data download from the Amazon
-	// S3 bucket. Set this value to true if you want the requester to pay instead
-	// of the bucket owner, and otherwise to false.
+	// A value that sets the access control list permission for objects in the Amazon
+	// S3 bucket that a file gateway puts objects into. The default value is private.
 	RequesterPays *bool `type:"boolean"`
 
 	// The ARN of the IAM role that file gateway assumes when it accesses the underlying
@@ -8146,11 +8937,11 @@ type NFSFileShareInfo struct {
 
 	// The user mapped to anonymous user. Valid options are the following:
 	//
-	//    * "RootSquash" - Only root is mapped to anonymous user.
+	//    * RootSquash - Only root is mapped to anonymous user.
 	//
-	//    * "NoSquash" - No one is mapped to anonymous user
+	//    * NoSquash - No one is mapped to anonymous user
 	//
-	//    * "AllSquash" - Everyone is mapped to anonymous user.
+	//    * AllSquash - Everyone is mapped to anonymous user.
 	Squash *string `min:"5" type:"string"`
 }
 
@@ -8621,6 +9412,93 @@ func (s RetrieveTapeRecoveryPointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The Windows file permissions and ownership information assigned, by default,
+// to native S3 objects when file gateway discovers them in S3 buckets. This
+// operation is only supported for file gateways.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo
+type SMBFileShareInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication method of the file share.
+	//
+	// Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
+	Authentication *string `min:"5" type:"string"`
+
+	// The default storage class for objects put into an Amazon S3 bucket by the
+	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
+	// If this field is not populated, the default value S3_STANDARD is used. Optional.
+	DefaultStorageClass *string `min:"5" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the file share.
+	FileShareARN *string `min:"50" type:"string"`
+
+	// The ID of the file share.
+	FileShareId *string `min:"12" type:"string"`
+
+	// The status of the file share. Possible values are CREATING, UPDATING, AVAILABLE
+	// and DELETING.
+	FileShareStatus *string `min:"3" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and region.
+	GatewayARN *string `min:"50" type:"string"`
+
+	// A value that enables guessing of the MIME type for uploaded objects based
+	// on file extensions. Set this value to true to enable MIME type guessing,
+	// and otherwise to false. The default value is true.
+	GuessMIMETypeEnabled *bool `type:"boolean"`
+
+	// A list of users or groups in the Active Directory that are not allowed to
+	// access the file share. A group must be prefixed with the @ character. For
+	// example @group1. Can only be set if Authentication is set to ActiveDirectory.
+	InvalidUserList []string `type:"list"`
+
+	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
+	// The ARN of the backend storage used for storing file data.
+	LocationARN *string `min:"16" type:"string"`
+
+	// A value that sets the access control list permission for objects in the S3
+	// bucket that a file gateway puts objects into. The default value is "private".
+	ObjectACL ObjectACL `type:"string" enum:"true"`
+
+	// The file share path used by the SMB client to identify the mount point.
+	Path *string `type:"string"`
+
+	// A value that sets the write status of a file share. This value is true if
+	// the write status is read-only, and otherwise false.
+	ReadOnly *bool `type:"boolean"`
+
+	// A value that sets the access control list permission for objects in the Amazon
+	// S3 bucket that a file gateway puts objects into. The default value is private.
+	RequesterPays *bool `type:"boolean"`
+
+	// The ARN of the IAM role that file gateway assumes when it accesses the underlying
+	// storage.
+	Role *string `min:"20" type:"string"`
+
+	// A list of users or groups in the Active Directory that are allowed to access
+	// the file share. A group must be prefixed with the @ character. For example
+	// @group1. Can only be set if Authentication is set to ActiveDirectory.
+	ValidUserList []string `type:"list"`
+}
+
+// String returns the string representation
+func (s SMBFileShareInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SMBFileShareInfo) GoString() string {
+	return s.String()
+}
+
 // SetLocalConsolePasswordInput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordInput
 type SetLocalConsolePasswordInput struct {
@@ -8695,6 +9573,83 @@ func (s SetLocalConsolePasswordOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SetLocalConsolePasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// SetSMBGuestPasswordInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordInput
+type SetSMBGuestPasswordInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the file gateway the SMB file share is
+	// associated with.
+	//
+	// GatewayARN is a required field
+	GatewayARN *string `min:"50" type:"string" required:"true"`
+
+	// The password that you want to set for your SMB Server.
+	//
+	// Password is a required field
+	Password *string `min:"6" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SetSMBGuestPasswordInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetSMBGuestPasswordInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SetSMBGuestPasswordInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SetSMBGuestPasswordInput"}
+
+	if s.GatewayARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GatewayARN"))
+	}
+	if s.GatewayARN != nil && len(*s.GatewayARN) < 50 {
+		invalidParams.Add(aws.NewErrParamMinLen("GatewayARN", 50))
+	}
+
+	if s.Password == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
+	}
+	if s.Password != nil && len(*s.Password) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordOutput
+type SetSMBGuestPasswordOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
+	// to return a list of gateways for your account and region.
+	GatewayARN *string `min:"50" type:"string"`
+}
+
+// String returns the string representation
+func (s SetSMBGuestPasswordOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SetSMBGuestPasswordOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SetSMBGuestPasswordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -8839,6 +9794,10 @@ type StorediSCSIVolume struct {
 	// don’t have this time stamp.
 	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
 	// Indicates if when the stored volume was created, existing data on the underlying
 	// local disk was preserved.
 	//
@@ -8941,6 +9900,10 @@ func (s *Tag) Validate() error {
 type Tape struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
 	// For archiving virtual tapes, indicates how much data remains to be uploaded
 	// before archiving is complete.
 	//
@@ -8989,9 +9952,13 @@ type TapeArchive struct {
 
 	// The time that the archiving of the virtual tape was completed.
 	//
-	// The string format of the completion time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z'
+	// The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z'
 	// format.
 	CompletionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the tape gateway that the virtual tape
 	// is being retrieved to.
@@ -9005,6 +9972,7 @@ type TapeArchive struct {
 	// The barcode that identifies the archived virtual tape.
 	TapeBarcode *string `min:"7" type:"string"`
 
+	// The date the virtual tape was created.
 	TapeCreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The size, in bytes, of the archived virtual tape.
@@ -9072,8 +10040,8 @@ type TapeRecoveryPointInfo struct {
 	// The time when the point-in-time view of the virtual tape was replicated for
 	// later recovery.
 	//
-	// The string format of the tape recovery point time is in the ISO8601 extended
-	// YYYY-MM-DD'T'HH:MM:SS'Z' format.
+	// The default time stamp format of the tape recovery point time is in the ISO8601
+	// extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 	TapeRecoveryPointTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The size, in bytes, of the virtual tapes to recover.
@@ -9549,9 +10517,9 @@ type UpdateNFSFileShareInput struct {
 	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string `min:"1" type:"list"`
 
-	// The default storage class for objects put into an Amazon S3 bucket by a file
-	// gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field
-	// is not populated, the default value S3_STANDARD is used. Optional.
+	// The default storage class for objects put into an Amazon S3 bucket by the
+	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
+	// If this field is not populated, the default value S3_STANDARD is used. Optional.
 	DefaultStorageClass *string `min:"5" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the file share to be updated.
@@ -9559,42 +10527,41 @@ type UpdateNFSFileShareInput struct {
 	// FileShareARN is a required field
 	FileShareARN *string `min:"50" type:"string" required:"true"`
 
-	// Enables guessing of the MIME type for uploaded objects based on file extensions.
-	// Set this value to true to enable MIME type guessing, and otherwise to false.
-	// The default value is true.
+	// A value that enables guessing of the MIME type for uploaded objects based
+	// on file extensions. Set this value to true to enable MIME type guessing,
+	// and otherwise to false. The default value is true.
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
 	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
 	// false to use a key managed by Amazon S3. Optional.
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The KMS key used for Amazon S3 server side encryption. This value can only
-	// be set when KmsEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"20" type:"string"`
 
 	// The default values for the file share. Optional.
 	NFSFileShareDefaults *NFSFileShareDefaults `type:"structure"`
 
-	// Sets the access control list permission for objects in the S3 bucket that
-	// a file gateway puts objects into. The default value is "private".
+	// A value that sets the access control list permission for objects in the S3
+	// bucket that a file gateway puts objects into. The default value is "private".
 	ObjectACL ObjectACL `type:"string" enum:"true"`
 
-	// Sets the write status of a file share. This value is true if the write status
-	// is read-only, and otherwise false.
+	// A value that sets the write status of a file share. This value is true if
+	// the write status is read-only, and otherwise false.
 	ReadOnly *bool `type:"boolean"`
 
-	// Sets who pays the cost of the request and the data download from the Amazon
-	// S3 bucket. Set this value to true if you want the requester to pay instead
-	// of the bucket owner, and otherwise to false.
+	// A value that sets the access control list permission for objects in the Amazon
+	// S3 bucket that a file gateway puts objects into. The default value is private.
 	RequesterPays *bool `type:"boolean"`
 
 	// The user mapped to anonymous user. Valid options are the following:
 	//
-	//    * "RootSquash" - Only root is mapped to anonymous user.
+	//    * RootSquash - Only root is mapped to anonymous user.
 	//
-	//    * "NoSquash" - No one is mapped to anonymous user
+	//    * NoSquash - No one is mapped to anonymous user
 	//
-	//    * "AllSquash" - Everyone is mapped to anonymous user.
+	//    * AllSquash - Everyone is mapped to anonymous user.
 	Squash *string `min:"5" type:"string"`
 }
 
@@ -9665,6 +10632,116 @@ func (s UpdateNFSFileShareOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateNFSFileShareOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// UpdateSMBFileShareInput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput
+type UpdateSMBFileShareInput struct {
+	_ struct{} `type:"structure"`
+
+	// The default storage class for objects put into an Amazon S3 bucket by the
+	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
+	// If this field is not populated, the default value S3_STANDARD is used. Optional.
+	DefaultStorageClass *string `min:"5" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the SMB file share that you want to update.
+	//
+	// FileShareARN is a required field
+	FileShareARN *string `min:"50" type:"string" required:"true"`
+
+	// A value that enables guessing of the MIME type for uploaded objects based
+	// on file extensions. Set this value to true to enable MIME type guessing,
+	// and otherwise to false. The default value is true.
+	GuessMIMETypeEnabled *bool `type:"boolean"`
+
+	// A list of users or groups in the Active Directory that are not allowed to
+	// access the file share. A group must be prefixed with the @ character. For
+	// example @group1. Can only be set if Authentication is set to ActiveDirectory.
+	InvalidUserList []string `type:"list"`
+
+	// True to use Amazon S3 server side encryption with your own AWS KMS key, or
+	// false to use a key managed by Amazon S3. Optional.
+	KMSEncrypted *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server
+	// side encryption. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string `min:"20" type:"string"`
+
+	// A value that sets the access control list permission for objects in the S3
+	// bucket that a file gateway puts objects into. The default value is "private".
+	ObjectACL ObjectACL `type:"string" enum:"true"`
+
+	// A value that sets the write status of a file share. This value is true if
+	// the write status is read-only, and otherwise false.
+	ReadOnly *bool `type:"boolean"`
+
+	// A value that sets the access control list permission for objects in the Amazon
+	// S3 bucket that a file gateway puts objects into. The default value is private.
+	RequesterPays *bool `type:"boolean"`
+
+	// A list of users or groups in the Active Directory that are allowed to access
+	// the file share. A group must be prefixed with the @ character. For example
+	// @group1. Can only be set if Authentication is set to ActiveDirectory.
+	ValidUserList []string `type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateSMBFileShareInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSMBFileShareInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateSMBFileShareInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSMBFileShareInput"}
+	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
+	}
+
+	if s.FileShareARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FileShareARN"))
+	}
+	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
+	}
+	if s.KMSKey != nil && len(*s.KMSKey) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// UpdateSMBFileShareOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareOutput
+type UpdateSMBFileShareOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the updated SMB file share.
+	FileShareARN *string `min:"50" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateSMBFileShareOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateSMBFileShareOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateSMBFileShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -10057,8 +11134,26 @@ func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Sets the access control list permission for objects in the S3 bucket that
-// a file gateway puts objects into. The default value is "private".
+// The type of the file share.
+type FileShareType string
+
+// Enum values for FileShareType
+const (
+	FileShareTypeNfs FileShareType = "NFS"
+	FileShareTypeSmb FileShareType = "SMB"
+)
+
+func (enum FileShareType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FileShareType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// A value that sets the access control list permission for objects in the S3
+// bucket that a file gateway puts objects into. The default value is "private".
 type ObjectACL string
 
 // Enum values for ObjectACL

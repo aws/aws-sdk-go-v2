@@ -595,6 +595,71 @@ func (s EC2Specification) GoString() string {
 	return s.String()
 }
 
+// Details about the ES instances that AWS recommends that you purchase.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ESInstanceDetails
+type ESInstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Whether the recommendation is for a current generation instance.
+	CurrentGeneration *bool `type:"boolean"`
+
+	// The class of instance that AWS recommends.
+	InstanceClass *string `type:"string"`
+
+	// The size of instance that AWS recommends.
+	InstanceSize *string `type:"string"`
+
+	// The AWS Region of the recommended reservation.
+	Region *string `type:"string"`
+
+	// Whether the recommended reservation is size flexible.
+	SizeFlexEligible *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ESInstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ESInstanceDetails) GoString() string {
+	return s.String()
+}
+
+// Details about the ElastiCache instances that AWS recommends that you purchase.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ElastiCacheInstanceDetails
+type ElastiCacheInstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Whether the recommendation is for a current generation instance.
+	CurrentGeneration *bool `type:"boolean"`
+
+	// The instance family of the recommended reservation.
+	Family *string `type:"string"`
+
+	// The type of node that AWS recommends.
+	NodeType *string `type:"string"`
+
+	// The description of the recommended reservation.
+	ProductDescription *string `type:"string"`
+
+	// The AWS Region of the recommended reservation.
+	Region *string `type:"string"`
+
+	// Whether the recommended reservation is size flexible.
+	SizeFlexEligible *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ElastiCacheInstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ElastiCacheInstanceDetails) GoString() string {
+	return s.String()
+}
+
 // Use Expression to filter by cost or by usage. There are two patterns:
 //
 //    * Simple dimension values - You can set the dimension name and values
@@ -684,7 +749,7 @@ type GetCostAndUsageInput struct {
 	// and unblended rates, see Why does the "blended" annotation appear on some
 	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
-	// Valid values are BlendedCost, UnblendedCost, and UsageQuantity.
+	// Valid values are AmortizedCost, BlendedCost, UnblendedCost, and UsageQuantity.
 	//
 	// If you return the UsageQuantity metric, the service aggregates all usage
 	// numbers without taking into account the units. For example, if you aggregate
@@ -1050,6 +1115,8 @@ type GetReservationCoverageInput struct {
 	// object as the other operations, but only AND is supported among each dimension.
 	// You can nest only one level deep. If there are multiple values for a dimension,
 	// they are OR'd together.
+	//
+	// If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
 	Filter *Expression `type:"structure"`
 
 	// The granularity of the AWS cost data for the reservation. Valid values are
@@ -1171,9 +1238,12 @@ type GetReservationPurchaseRecommendationInput struct {
 	// The account ID that is associated with the recommendation.
 	AccountId *string `type:"string"`
 
-	// The account scope that you want recommendations for. The only valid value
-	// is Payer. This means that AWS includes the master account and any member
-	// accounts when it calculates its recommendations.
+	// The account scope that you want recommendations for. PAYER means that AWS
+	// includes the master account and any member accounts when it calculates its
+	// recommendations. LINKED means that AWS includes only member accounts when
+	// it calculates its recommendations.
+	//
+	// Valid values are PAYER and LINKED.
 	AccountScope AccountScope `type:"string" enum:"true"`
 
 	// The number of previous days that you want AWS to consider when it calculates
@@ -1532,8 +1602,17 @@ type InstanceDetails struct {
 	// The EC2 instances that AWS recommends that you purchase.
 	EC2InstanceDetails *EC2InstanceDetails `type:"structure"`
 
+	// The Amazon ES instances that AWS recommends that you purchase.
+	ESInstanceDetails *ESInstanceDetails `type:"structure"`
+
+	// The ElastiCache instances that AWS recommends that you purchase.
+	ElastiCacheInstanceDetails *ElastiCacheInstanceDetails `type:"structure"`
+
 	// The RDS instances that AWS recommends that you purchase.
 	RDSInstanceDetails *RDSInstanceDetails `type:"structure"`
+
+	// The Amazon Redshift instances that AWS recommends that you purchase.
+	RedshiftInstanceDetails *RedshiftInstanceDetails `type:"structure"`
 }
 
 // String returns the string representation
@@ -1576,11 +1655,14 @@ type RDSInstanceDetails struct {
 	// Whether the recommendation is for a current generation instance.
 	CurrentGeneration *bool `type:"boolean"`
 
+	// The database edition that the recommended reservation supports.
+	DatabaseEdition *string `type:"string"`
+
 	// The database engine that the recommended reservation supports.
 	DatabaseEngine *string `type:"string"`
 
-	// Whether the recommendation is for a reservation in a single availability
-	// zone or a reservation with a backup in a second availability zone.
+	// Whether the recommendation is for a reservation in a single Availability
+	// Zone or a reservation with a backup in a second Availability Zone.
 	DeploymentOption *string `type:"string"`
 
 	// The instance family of the recommended reservation.
@@ -1609,7 +1691,39 @@ func (s RDSInstanceDetails) GoString() string {
 	return s.String()
 }
 
-// The aggregated numbers for your RI usage.
+// Details about the Amazon Redshift instances that AWS recommends that you
+// purchase.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RedshiftInstanceDetails
+type RedshiftInstanceDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Whether the recommendation is for a current generation instance.
+	CurrentGeneration *bool `type:"boolean"`
+
+	// The instance family of the recommended reservation.
+	Family *string `type:"string"`
+
+	// The type of node that AWS recommends.
+	NodeType *string `type:"string"`
+
+	// The AWS Region of the recommended reservation.
+	Region *string `type:"string"`
+
+	// Whether the recommended reservation is size flexible.
+	SizeFlexEligible *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s RedshiftInstanceDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RedshiftInstanceDetails) GoString() string {
+	return s.String()
+}
+
+// The aggregated numbers for your Reserved Instance (RI) usage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationAggregates
 type ReservationAggregates struct {
 	_ struct{} `type:"structure"`
@@ -1620,8 +1734,8 @@ type ReservationAggregates struct {
 	// The upfront cost of your RI, amortized over the RI period.
 	AmortizedUpfrontFee *string `type:"string"`
 
-	// How much you saved due to purchasing and utilizing RIs. This is calculated
-	// by subtracting the TotalAmortizedFee from the OnDemandCostOfRIHoursUsed.
+	// How much you saved due to purchasing and utilizing RIs. AWS calculates this
+	// by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
 	NetRISavings *string `type:"string"`
 
 	// How much your RIs would cost if charged On-Demand rates.
@@ -1688,8 +1802,7 @@ type ReservationPurchaseRecommendation struct {
 	// in AWS Organizations.
 	AccountScope AccountScope `type:"string" enum:"true"`
 
-	// How many days of previous usage that AWS takes into consideration when making
-	// this recommendation.
+	// How many days of previous usage that AWS considers when making this recommendation.
 	LookbackPeriodInDays LookbackPeriodInDays `type:"string" enum:"true"`
 
 	// The payment option for the reservation. For example, AllUpfront or NoUpfront.
@@ -1825,8 +1938,8 @@ func (s ReservationPurchaseRecommendationMetadata) GoString() string {
 }
 
 // A summary about this recommendation, such as the currency code, the amount
-// that AWS estimates you could save, and the total amount of reservation to
-// purchase.
+// that AWS estimates that you could save, and the total amount of reservation
+// to purchase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationPurchaseRecommendationSummary
 type ReservationPurchaseRecommendationSummary struct {
 	_ struct{} `type:"structure"`
@@ -1853,7 +1966,7 @@ func (s ReservationPurchaseRecommendationSummary) GoString() string {
 	return s.String()
 }
 
-// A group of RIs that share a set of attributes.
+// A group of Reserved Instances (RIs) that share a set of attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationUtilizationGroup
 type ReservationUtilizationGroup struct {
 	_ struct{} `type:"structure"`
@@ -1980,7 +2093,8 @@ type AccountScope string
 
 // Enum values for AccountScope
 const (
-	AccountScopePayer AccountScope = "PAYER"
+	AccountScopePayer  AccountScope = "PAYER"
+	AccountScopeLinked AccountScope = "LINKED"
 )
 
 func (enum AccountScope) MarshalValue() (string, error) {
@@ -2117,9 +2231,12 @@ type PaymentOption string
 
 // Enum values for PaymentOption
 const (
-	PaymentOptionNoUpfront      PaymentOption = "NO_UPFRONT"
-	PaymentOptionPartialUpfront PaymentOption = "PARTIAL_UPFRONT"
-	PaymentOptionAllUpfront     PaymentOption = "ALL_UPFRONT"
+	PaymentOptionNoUpfront         PaymentOption = "NO_UPFRONT"
+	PaymentOptionPartialUpfront    PaymentOption = "PARTIAL_UPFRONT"
+	PaymentOptionAllUpfront        PaymentOption = "ALL_UPFRONT"
+	PaymentOptionLightUtilization  PaymentOption = "LIGHT_UTILIZATION"
+	PaymentOptionMediumUtilization PaymentOption = "MEDIUM_UTILIZATION"
+	PaymentOptionHeavyUtilization  PaymentOption = "HEAVY_UTILIZATION"
 )
 
 func (enum PaymentOption) MarshalValue() (string, error) {

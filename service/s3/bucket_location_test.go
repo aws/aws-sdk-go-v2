@@ -115,7 +115,7 @@ func TestPopulateLocationConstraint(t *testing.T) {
 func TestNoPopulateLocationConstraintIfProvided(t *testing.T) {
 	s := s3.New(unit.Config())
 	req := s.CreateBucketRequest(&s3.CreateBucketInput{
-		Bucket: aws.String("bucket"),
+		Bucket:                    aws.String("bucket"),
 		CreateBucketConfiguration: &s3.CreateBucketConfiguration{},
 	})
 	if err := req.Build(); err != nil {

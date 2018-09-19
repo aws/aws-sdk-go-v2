@@ -92,6 +92,8 @@ type WAFAPI interface {
 
 	DeleteIPSetRequest(*waf.DeleteIPSetInput) waf.DeleteIPSetRequest
 
+	DeleteLoggingConfigurationRequest(*waf.DeleteLoggingConfigurationInput) waf.DeleteLoggingConfigurationRequest
+
 	DeletePermissionPolicyRequest(*waf.DeletePermissionPolicyInput) waf.DeletePermissionPolicyRequest
 
 	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
@@ -121,6 +123,8 @@ type WAFAPI interface {
 	GetGeoMatchSetRequest(*waf.GetGeoMatchSetInput) waf.GetGeoMatchSetRequest
 
 	GetIPSetRequest(*waf.GetIPSetInput) waf.GetIPSetRequest
+
+	GetLoggingConfigurationRequest(*waf.GetLoggingConfigurationInput) waf.GetLoggingConfigurationRequest
 
 	GetPermissionPolicyRequest(*waf.GetPermissionPolicyInput) waf.GetPermissionPolicyRequest
 
@@ -154,6 +158,8 @@ type WAFAPI interface {
 
 	ListIPSetsRequest(*waf.ListIPSetsInput) waf.ListIPSetsRequest
 
+	ListLoggingConfigurationsRequest(*waf.ListLoggingConfigurationsInput) waf.ListLoggingConfigurationsRequest
+
 	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
 
 	ListRegexMatchSetsRequest(*waf.ListRegexMatchSetsInput) waf.ListRegexMatchSetsRequest
@@ -173,6 +179,8 @@ type WAFAPI interface {
 	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
+
+	PutLoggingConfigurationRequest(*waf.PutLoggingConfigurationInput) waf.PutLoggingConfigurationRequest
 
 	PutPermissionPolicyRequest(*waf.PutPermissionPolicyInput) waf.PutPermissionPolicyRequest
 

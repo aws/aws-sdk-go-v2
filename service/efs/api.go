@@ -22,13 +22,13 @@ type CreateFileSystemRequest struct {
 }
 
 // Send marshals and sends the CreateFileSystem API request.
-func (r CreateFileSystemRequest) Send() (*CreateFileSystemOutput, error) {
+func (r CreateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*CreateFileSystemOutput), nil
+	return r.Request.Data.(*UpdateFileSystemOutput), nil
 }
 
 // CreateFileSystemRequest returns a request value for making API operation for
@@ -100,7 +100,7 @@ func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFileSy
 		input = &CreateFileSystemInput{}
 	}
 
-	output := &CreateFileSystemOutput{}
+	output := &UpdateFileSystemOutput{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -824,6 +824,57 @@ func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSec
 	return ModifyMountTargetSecurityGroupsRequest{Request: req, Input: input, Copy: c.ModifyMountTargetSecurityGroupsRequest}
 }
 
+const opUpdateFileSystem = "UpdateFileSystem"
+
+// UpdateFileSystemRequest is a API request type for the UpdateFileSystem API operation.
+type UpdateFileSystemRequest struct {
+	*aws.Request
+	Input *UpdateFileSystemInput
+	Copy  func(*UpdateFileSystemInput) UpdateFileSystemRequest
+}
+
+// Send marshals and sends the UpdateFileSystem API request.
+func (r UpdateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFileSystemOutput), nil
+}
+
+// UpdateFileSystemRequest returns a request value for making API operation for
+// Amazon Elastic File System.
+//
+// Updates the throughput mode or the amount of provisioned throughput of an
+// existing file system.
+//
+//    // Example sending a request using the UpdateFileSystemRequest method.
+//    req := client.UpdateFileSystemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystem
+func (c *EFS) UpdateFileSystemRequest(input *UpdateFileSystemInput) UpdateFileSystemRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFileSystem,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2015-02-01/file-systems/{FileSystemId}",
+	}
+
+	if input == nil {
+		input = &UpdateFileSystemInput{}
+	}
+
+	output := &UpdateFileSystemOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateFileSystemRequest{Request: req, Input: input, Copy: c.UpdateFileSystemRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest
 type CreateFileSystemInput struct {
 	_ struct{} `type:"structure"`
@@ -834,30 +885,29 @@ type CreateFileSystemInput struct {
 	// CreationToken is a required field
 	CreationToken *string `min:"1" type:"string" required:"true"`
 
-	// A boolean value that, if true, creates an encrypted file system. When creating
+	// A Boolean value that, if true, creates an encrypted file system. When creating
 	// an encrypted file system, you have the option of specifying a CreateFileSystemRequest$KmsKeyId
 	// for an existing AWS Key Management Service (AWS KMS) customer master key
 	// (CMK). If you don't specify a CMK, then the default CMK for Amazon EFS, /aws/elasticfilesystem,
 	// is used to protect the encrypted file system.
 	Encrypted *bool `type:"boolean"`
 
-	// The id of the AWS KMS CMK that will be used to protect the encrypted file
-	// system. This parameter is only required if you want to use a non-default
-	// CMK. If this parameter is not specified, the default CMK for Amazon EFS is
-	// used. This id can be in one of the following formats:
+	// The ID of the AWS KMS CMK to be used to protect the encrypted file system.
+	// This parameter is only required if you want to use a non-default CMK. If
+	// this parameter is not specified, the default CMK for Amazon EFS is used.
+	// This ID can be in one of the following formats:
 	//
-	//    * Key ID - A unique identifier of the key. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
+	//    * Key ID - A unique identifier of the key, for example, 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	//    * ARN - An Amazon Resource Name for the key. For example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	//    * ARN - An Amazon Resource Name (ARN) for the key, for example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
 	//    * Key alias - A previously created display name for a key. For example,
 	//    alias/projectKey1.
 	//
-	//    * Key alias ARN - An Amazon Resource Name for a key alias. For example,
-	//    arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
+	//    * Key alias ARN - An ARN for a key alias, for example, arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
 	//
-	// Note that if the KmsKeyId is specified, the CreateFileSystemRequest$Encrypted
-	// parameter must be set to true.
+	// If KmsKeyId is specified, the CreateFileSystemRequest$Encrypted parameter
+	// must be set to true.
 	KmsKeyId *string `min:"1" type:"string"`
 
 	// The PerformanceMode of the file system. We recommend generalPurpose performance
@@ -866,6 +916,20 @@ type CreateFileSystemInput struct {
 	// with a tradeoff of slightly higher latencies for most file operations. This
 	// can't be changed after the file system has been created.
 	PerformanceMode PerformanceMode `type:"string" enum:"true"`
+
+	// The throughput, measured in MiB/s, that you want to provision for a file
+	// system that you're creating. The limit on throughput is 1024 MiB/s. You can
+	// get these limits increased by contacting AWS Support. For more information,
+	// see Amazon EFS Limits That You Can Increase (http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
+	// in the Amazon EFS User Guide.
+	ProvisionedThroughputInMibps *float64 `type:"double"`
+
+	// The throughput mode for the file system to be created. There are two throughput
+	// modes to choose from for your file system: bursting and provisioned. You
+	// can decrease your file system's throughput in Provisioned Throughput mode
+	// or change between the throughput modes as long as it’s been more than 24
+	// hours since the last decrease or throughput mode change.
+	ThroughputMode ThroughputMode `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -925,161 +989,17 @@ func (s CreateFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "PerformanceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
-	return nil
-}
-
-// Description of the file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription
-type CreateFileSystemOutput struct {
-	_ struct{} `type:"structure"`
-
-	responseMetadata aws.Response
-
-	// Time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
-
-	// Opaque string specified in the request.
-	//
-	// CreationToken is a required field
-	CreationToken *string `min:"1" type:"string" required:"true"`
-
-	// A boolean value that, if true, indicates that the file system is encrypted.
-	Encrypted *bool `type:"boolean"`
-
-	// ID of the file system, assigned by Amazon EFS.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `type:"string" required:"true"`
-
-	// The id of an AWS Key Management Service (AWS KMS) customer master key (CMK)
-	// that was used to protect the encrypted file system.
-	KmsKeyId *string `min:"1" type:"string"`
-
-	// Lifecycle phase of the file system.
-	//
-	// LifeCycleState is a required field
-	LifeCycleState LifeCycleState `type:"string" required:"true" enum:"true"`
-
-	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateTags. If the file system has a Name tag, Amazon EFS returns the
-	// value in this field.
-	Name *string `type:"string"`
-
-	// Current number of mount targets that the file system has. For more information,
-	// see CreateMountTarget.
-	//
-	// NumberOfMountTargets is a required field
-	NumberOfMountTargets *int64 `type:"integer" required:"true"`
-
-	// AWS account that created the file system. If the file system was created
-	// by an IAM user, the parent account to which the user belongs is the owner.
-	//
-	// OwnerId is a required field
-	OwnerId *string `type:"string" required:"true"`
-
-	// The PerformanceMode of the file system.
-	//
-	// PerformanceMode is a required field
-	PerformanceMode PerformanceMode `type:"string" required:"true" enum:"true"`
-
-	// Latest known metered size (in bytes) of data stored in the file system, in
-	// bytes, in its Value field, and the time at which that size was determined
-	// in its Timestamp field. The Timestamp value is the integer number of seconds
-	// since 1970-01-01T00:00:00Z. Note that the value does not represent the size
-	// of a consistent snapshot of the file system, but it is eventually consistent
-	// when there are no writes to the file system. That is, the value will represent
-	// actual size only if the file system is not modified for a period longer than
-	// a couple of hours. Otherwise, the value is not the exact size the file system
-	// was at any instant in time.
-	//
-	// SizeInBytes is a required field
-	SizeInBytes *FileSystemSize `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s CreateFileSystemOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s CreateFileSystemOutput) GoString() string {
-	return s.String()
-}
-
-// SDKResponseMetdata return sthe response metadata for the API.
-func (s CreateFileSystemOutput) SDKResponseMetadata() aws.Response {
-	return s.responseMetadata
-}
-
-// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s CreateFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
-	if s.CreationTime != nil {
-		v := *s.CreationTime
+	if s.ProvisionedThroughputInMibps != nil {
+		v := *s.ProvisionedThroughputInMibps
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+		e.SetValue(protocol.BodyTarget, "ProvisionedThroughputInMibps", protocol.Float64Value(v), metadata)
 	}
-	if s.CreationToken != nil {
-		v := *s.CreationToken
+	if len(s.ThroughputMode) > 0 {
+		v := s.ThroughputMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CreationToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.Encrypted != nil {
-		v := *s.Encrypted
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
-	}
-	if s.FileSystemId != nil {
-		v := *s.FileSystemId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.KmsKeyId != nil {
-		v := *s.KmsKeyId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.LifeCycleState) > 0 {
-		v := s.LifeCycleState
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LifeCycleState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.Name != nil {
-		v := *s.Name
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if s.NumberOfMountTargets != nil {
-		v := *s.NumberOfMountTargets
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NumberOfMountTargets", protocol.Int64Value(v), metadata)
-	}
-	if s.OwnerId != nil {
-		v := *s.OwnerId
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
-	if len(s.PerformanceMode) > 0 {
-		v := s.PerformanceMode
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PerformanceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
-	}
-	if s.SizeInBytes != nil {
-		v := s.SizeInBytes
-
-		metadata := protocol.Metadata{}
-		e.SetFields(protocol.BodyTarget, "SizeInBytes", v, metadata)
+		e.SetValue(protocol.BodyTarget, "ThroughputMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1700,7 +1620,7 @@ type DescribeFileSystemsOutput struct {
 	responseMetadata aws.Response
 
 	// Array of file system descriptions.
-	FileSystems []CreateFileSystemOutput `type:"list"`
+	FileSystems []UpdateFileSystemOutput `type:"list"`
 
 	// Present if provided by caller in the request (String).
 	Marker *string `type:"string"`
@@ -2320,12 +2240,263 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UpdateFileSystemRequest
+type UpdateFileSystemInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the file system that you want to update.
+	//
+	// FileSystemId is a required field
+	FileSystemId *string `location:"uri" locationName:"FileSystemId" type:"string" required:"true"`
+
+	// (Optional) The amount of throughput, in MiB/s, that you want to provision
+	// for your file system. If you're not updating the amount of provisioned throughput
+	// for your file system, you don't need to provide this value in your request.
+	ProvisionedThroughputInMibps *float64 `type:"double"`
+
+	// (Optional) The throughput mode that you want your file system to use. If
+	// you're not updating your throughput mode, you don't need to provide this
+	// value in your request.
+	ThroughputMode ThroughputMode `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateFileSystemInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFileSystemInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateFileSystemInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFileSystemInput"}
+
+	if s.FileSystemId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFileSystemInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ProvisionedThroughputInMibps != nil {
+		v := *s.ProvisionedThroughputInMibps
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProvisionedThroughputInMibps", protocol.Float64Value(v), metadata)
+	}
+	if len(s.ThroughputMode) > 0 {
+		v := s.ThroughputMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThroughputMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Description of the file system.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemOutput
+type UpdateFileSystemOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Opaque string specified in the request.
+	//
+	// CreationToken is a required field
+	CreationToken *string `min:"1" type:"string" required:"true"`
+
+	// A Boolean value that, if true, indicates that the file system is encrypted.
+	Encrypted *bool `type:"boolean"`
+
+	// ID of the file system, assigned by Amazon EFS.
+	//
+	// FileSystemId is a required field
+	FileSystemId *string `type:"string" required:"true"`
+
+	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK)
+	// that was used to protect the encrypted file system.
+	KmsKeyId *string `min:"1" type:"string"`
+
+	// Lifecycle phase of the file system.
+	//
+	// LifeCycleState is a required field
+	LifeCycleState LifeCycleState `type:"string" required:"true" enum:"true"`
+
+	// You can add tags to a file system, including a Name tag. For more information,
+	// see CreateTags. If the file system has a Name tag, Amazon EFS returns the
+	// value in this field.
+	Name *string `type:"string"`
+
+	// Current number of mount targets that the file system has. For more information,
+	// see CreateMountTarget.
+	//
+	// NumberOfMountTargets is a required field
+	NumberOfMountTargets *int64 `type:"integer" required:"true"`
+
+	// AWS account that created the file system. If the file system was created
+	// by an IAM user, the parent account to which the user belongs is the owner.
+	//
+	// OwnerId is a required field
+	OwnerId *string `type:"string" required:"true"`
+
+	// The PerformanceMode of the file system.
+	//
+	// PerformanceMode is a required field
+	PerformanceMode PerformanceMode `type:"string" required:"true" enum:"true"`
+
+	// The throughput, measured in MiB/s, that you want to provision for a file
+	// system. The limit on throughput is 1024 MiB/s. You can get these limits increased
+	// by contacting AWS Support. For more information, see Amazon EFS Limits That
+	// You Can Increase (http://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
+	// in the Amazon EFS User Guide.
+	ProvisionedThroughputInMibps *float64 `type:"double"`
+
+	// Latest known metered size (in bytes) of data stored in the file system, in
+	// its Value field, and the time at which that size was determined in its Timestamp
+	// field. The Timestamp value is the integer number of seconds since 1970-01-01T00:00:00Z.
+	// The SizeInBytes value doesn't represent the size of a consistent snapshot
+	// of the file system, but it is eventually consistent when there are no writes
+	// to the file system. That is, SizeInBytes represents actual size only if the
+	// file system is not modified for a period longer than a couple of hours. Otherwise,
+	// the value is not the exact size that the file system was at any point in
+	// time.
+	//
+	// SizeInBytes is a required field
+	SizeInBytes *FileSystemSize `type:"structure" required:"true"`
+
+	// The throughput mode for a file system. There are two throughput modes to
+	// choose from for your file system: bursting and provisioned. You can decrease
+	// your file system's throughput in Provisioned Throughput mode or change between
+	// the throughput modes as long as it’s been more than 24 hours since the last
+	// decrease or throughput mode change.
+	ThroughputMode ThroughputMode `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateFileSystemOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFileSystemOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFileSystemOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.CreationToken != nil {
+		v := *s.CreationToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.FileSystemId != nil {
+		v := *s.FileSystemId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSystemId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.LifeCycleState) > 0 {
+		v := s.LifeCycleState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LifeCycleState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NumberOfMountTargets != nil {
+		v := *s.NumberOfMountTargets
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NumberOfMountTargets", protocol.Int64Value(v), metadata)
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PerformanceMode) > 0 {
+		v := s.PerformanceMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PerformanceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ProvisionedThroughputInMibps != nil {
+		v := *s.ProvisionedThroughputInMibps
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProvisionedThroughputInMibps", protocol.Float64Value(v), metadata)
+	}
+	if s.SizeInBytes != nil {
+		v := s.SizeInBytes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SizeInBytes", v, metadata)
+	}
+	if len(s.ThroughputMode) > 0 {
+		v := s.ThroughputMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThroughputMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 type LifeCycleState string
 
 // Enum values for LifeCycleState
 const (
 	LifeCycleStateCreating  LifeCycleState = "creating"
 	LifeCycleStateAvailable LifeCycleState = "available"
+	LifeCycleStateUpdating  LifeCycleState = "updating"
 	LifeCycleStateDeleting  LifeCycleState = "deleting"
 	LifeCycleStateDeleted   LifeCycleState = "deleted"
 )
@@ -2352,6 +2523,23 @@ func (enum PerformanceMode) MarshalValue() (string, error) {
 }
 
 func (enum PerformanceMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ThroughputMode string
+
+// Enum values for ThroughputMode
+const (
+	ThroughputModeBursting    ThroughputMode = "bursting"
+	ThroughputModeProvisioned ThroughputMode = "provisioned"
+)
+
+func (enum ThroughputMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThroughputMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

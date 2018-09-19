@@ -74,6 +74,8 @@ type CodeCommitAPI interface {
 
 	DeleteCommentContentRequest(*codecommit.DeleteCommentContentInput) codecommit.DeleteCommentContentRequest
 
+	DeleteFileRequest(*codecommit.DeleteFileInput) codecommit.DeleteFileRequest
+
 	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) codecommit.DeleteRepositoryRequest
 
 	DescribePullRequestEventsRequest(*codecommit.DescribePullRequestEventsInput) codecommit.DescribePullRequestEventsRequest
@@ -91,6 +93,10 @@ type CodeCommitAPI interface {
 	GetCommitRequest(*codecommit.GetCommitInput) codecommit.GetCommitRequest
 
 	GetDifferencesRequest(*codecommit.GetDifferencesInput) codecommit.GetDifferencesRequest
+
+	GetFileRequest(*codecommit.GetFileInput) codecommit.GetFileRequest
+
+	GetFolderRequest(*codecommit.GetFolderInput) codecommit.GetFolderRequest
 
 	GetMergeConflictsRequest(*codecommit.GetMergeConflictsInput) codecommit.GetMergeConflictsRequest
 

@@ -83,6 +83,8 @@ type CloudWatchAPI interface {
 
 	GetMetricStatisticsRequest(*cloudwatch.GetMetricStatisticsInput) cloudwatch.GetMetricStatisticsRequest
 
+	GetMetricWidgetImageRequest(*cloudwatch.GetMetricWidgetImageInput) cloudwatch.GetMetricWidgetImageRequest
+
 	ListDashboardsRequest(*cloudwatch.ListDashboardsInput) cloudwatch.ListDashboardsRequest
 
 	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
