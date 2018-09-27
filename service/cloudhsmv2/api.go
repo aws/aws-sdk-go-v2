@@ -10,6 +10,56 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+const opCopyBackupToRegion = "CopyBackupToRegion"
+
+// CopyBackupToRegionRequest is a API request type for the CopyBackupToRegion API operation.
+type CopyBackupToRegionRequest struct {
+	*aws.Request
+	Input *CopyBackupToRegionInput
+	Copy  func(*CopyBackupToRegionInput) CopyBackupToRegionRequest
+}
+
+// Send marshals and sends the CopyBackupToRegion API request.
+func (r CopyBackupToRegionRequest) Send() (*CopyBackupToRegionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyBackupToRegionOutput), nil
+}
+
+// CopyBackupToRegionRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
+//
+// Copy an AWS CloudHSM cluster backup to a different region.
+//
+//    // Example sending a request using the CopyBackupToRegionRequest method.
+//    req := client.CopyBackupToRegionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegion
+func (c *CloudHSMV2) CopyBackupToRegionRequest(input *CopyBackupToRegionInput) CopyBackupToRegionRequest {
+	op := &aws.Operation{
+		Name:       opCopyBackupToRegion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CopyBackupToRegionInput{}
+	}
+
+	output := &CopyBackupToRegionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CopyBackupToRegionRequest{Request: req, Input: input, Copy: c.CopyBackupToRegionRequest}
+}
+
 const opCreateCluster = "CreateCluster"
 
 // CreateClusterRequest is a API request type for the CreateCluster API operation.
@@ -109,6 +159,58 @@ func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateHsmRequest{Request: req, Input: input, Copy: c.CreateHsmRequest}
+}
+
+const opDeleteBackup = "DeleteBackup"
+
+// DeleteBackupRequest is a API request type for the DeleteBackup API operation.
+type DeleteBackupRequest struct {
+	*aws.Request
+	Input *DeleteBackupInput
+	Copy  func(*DeleteBackupInput) DeleteBackupRequest
+}
+
+// Send marshals and sends the DeleteBackup API request.
+func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBackupOutput), nil
+}
+
+// DeleteBackupRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
+//
+// Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7
+// days after the DeleteBackup request. For more information on restoring a
+// backup, see RestoreBackup
+//
+//    // Example sending a request using the DeleteBackupRequest method.
+//    req := client.DeleteBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackup
+func (c *CloudHSMV2) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBackup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteBackupInput{}
+	}
+
+	output := &DeleteBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 
 const opDeleteCluster = "DeleteCluster"
@@ -595,6 +697,57 @@ func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
 	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
+const opRestoreBackup = "RestoreBackup"
+
+// RestoreBackupRequest is a API request type for the RestoreBackup API operation.
+type RestoreBackupRequest struct {
+	*aws.Request
+	Input *RestoreBackupInput
+	Copy  func(*RestoreBackupInput) RestoreBackupRequest
+}
+
+// Send marshals and sends the RestoreBackup API request.
+func (r RestoreBackupRequest) Send() (*RestoreBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreBackupOutput), nil
+}
+
+// RestoreBackupRequest returns a request value for making API operation for
+// AWS CloudHSM V2.
+//
+// Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION
+// state. For more information on deleting a backup, see DeleteBackup.
+//
+//    // Example sending a request using the RestoreBackupRequest method.
+//    req := client.RestoreBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackup
+func (c *CloudHSMV2) RestoreBackupRequest(input *RestoreBackupInput) RestoreBackupRequest {
+	op := &aws.Operation{
+		Name:       opRestoreBackup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RestoreBackupInput{}
+	}
+
+	output := &RestoreBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RestoreBackupRequest{Request: req, Input: input, Copy: c.RestoreBackupRequest}
+}
+
 const opTagResource = "TagResource"
 
 // TagResourceRequest is a API request type for the TagResource API operation.
@@ -711,8 +864,19 @@ type Backup struct {
 	// The identifier (ID) of the cluster that was backed up.
 	ClusterId *string `type:"string"`
 
+	CopyTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
 	// The date and time when the backup was created.
 	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The date and time when the backup will be permanently deleted.
+	DeleteTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	SourceBackup *string `type:"string"`
+
+	SourceCluster *string `type:"string"`
+
+	SourceRegion *string `type:"string"`
 }
 
 // String returns the string representation
@@ -813,6 +977,81 @@ func (s Cluster) String() string {
 // GoString returns the string representation
 func (s Cluster) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionRequest
+type CopyBackupToRegionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the backup that will be copied to the destination region.
+	//
+	// BackupId is a required field
+	BackupId *string `type:"string" required:"true"`
+
+	// The AWS region that will contain your copied CloudHSM cluster backup.
+	//
+	// DestinationRegion is a required field
+	DestinationRegion *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CopyBackupToRegionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CopyBackupToRegionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CopyBackupToRegionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CopyBackupToRegionInput"}
+
+	if s.BackupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
+	}
+
+	if s.DestinationRegion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionResponse
+type CopyBackupToRegionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information on the backup that will be copied to the destination region,
+	// including CreateTimestamp, SourceBackup, SourceCluster, and Source Region.
+	// CreateTimestamp of the destination backup will be the same as that of the
+	// source backup.
+	//
+	// You will need to use the sourceBackupID returned in this operation to use
+	// the DescribeBackups operation on the backup that will be copied to the destination
+	// region.
+	DestinationBackup *DestinationBackup `type:"structure"`
+}
+
+// String returns the string representation
+func (s CopyBackupToRegionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CopyBackupToRegionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyBackupToRegionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterRequest
@@ -973,6 +1212,66 @@ func (s CreateHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackupRequest
+type DeleteBackupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the backup to be deleted. To find the ID of a backup, use the DescribeBackups
+	// operation.
+	//
+	// BackupId is a required field
+	BackupId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteBackupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBackupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBackupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupInput"}
+
+	if s.BackupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackupResponse
+type DeleteBackupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information on the Backup object deleted.
+	Backup *Backup `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteBackupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBackupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteClusterRequest
 type DeleteClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -1112,6 +1411,10 @@ type DescribeBackupsInput struct {
 	// Use the backupIds filter to return only the specified backups. Specify backups
 	// by their backup identifier (ID).
 	//
+	// Use the sourceBackupIds filter to return only the backups created from a
+	// source backup. The sourceBackupID of a source backup is returned by the CopyBackupToRegion
+	// operation.
+	//
 	// Use the clusterIds filter to return only the backups for the specified clusters.
 	// Specify clusters by their cluster identifier (ID).
 	//
@@ -1125,6 +1428,8 @@ type DescribeBackupsInput struct {
 	// The NextToken value that you received in the previous response. Use this
 	// value to get more backups.
 	NextToken *string `type:"string"`
+
+	SortAscending *bool `type:"boolean"`
 }
 
 // String returns the string representation
@@ -1256,6 +1561,29 @@ func (s DescribeClustersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeClustersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DestinationBackup
+type DestinationBackup struct {
+	_ struct{} `type:"structure"`
+
+	CreateTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	SourceBackup *string `type:"string"`
+
+	SourceCluster *string `type:"string"`
+
+	SourceRegion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DestinationBackup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DestinationBackup) GoString() string {
+	return s.String()
 }
 
 // Contains information about a hardware security module (HSM) in an AWS CloudHSM
@@ -1462,6 +1790,66 @@ func (s ListTagsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackupRequest
+type RestoreBackupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the backup to be restored. To find the ID of a backup, use the
+	// DescribeBackups operation.
+	//
+	// BackupId is a required field
+	BackupId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RestoreBackupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreBackupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestoreBackupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreBackupInput"}
+
+	if s.BackupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackupResponse
+type RestoreBackupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information on the Backup object created.
+	Backup *Backup `type:"structure"`
+}
+
+// String returns the string representation
+func (s RestoreBackupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreBackupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreBackupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -1681,6 +2069,7 @@ const (
 	BackupStateCreateInProgress BackupState = "CREATE_IN_PROGRESS"
 	BackupStateReady            BackupState = "READY"
 	BackupStateDeleted          BackupState = "DELETED"
+	BackupStatePendingDeletion  BackupState = "PENDING_DELETION"
 )
 
 func (enum BackupState) MarshalValue() (string, error) {

@@ -71,9 +71,13 @@ type KinesisAPI interface {
 
 	DeleteStreamRequest(*kinesis.DeleteStreamInput) kinesis.DeleteStreamRequest
 
+	DeregisterStreamConsumerRequest(*kinesis.DeregisterStreamConsumerInput) kinesis.DeregisterStreamConsumerRequest
+
 	DescribeLimitsRequest(*kinesis.DescribeLimitsInput) kinesis.DescribeLimitsRequest
 
 	DescribeStreamRequest(*kinesis.DescribeStreamInput) kinesis.DescribeStreamRequest
+
+	DescribeStreamConsumerRequest(*kinesis.DescribeStreamConsumerInput) kinesis.DescribeStreamConsumerRequest
 
 	DescribeStreamSummaryRequest(*kinesis.DescribeStreamSummaryInput) kinesis.DescribeStreamSummaryRequest
 
@@ -89,6 +93,8 @@ type KinesisAPI interface {
 
 	ListShardsRequest(*kinesis.ListShardsInput) kinesis.ListShardsRequest
 
+	ListStreamConsumersRequest(*kinesis.ListStreamConsumersInput) kinesis.ListStreamConsumersRequest
+
 	ListStreamsRequest(*kinesis.ListStreamsInput) kinesis.ListStreamsRequest
 
 	ListTagsForStreamRequest(*kinesis.ListTagsForStreamInput) kinesis.ListTagsForStreamRequest
@@ -98,6 +104,8 @@ type KinesisAPI interface {
 	PutRecordRequest(*kinesis.PutRecordInput) kinesis.PutRecordRequest
 
 	PutRecordsRequest(*kinesis.PutRecordsInput) kinesis.PutRecordsRequest
+
+	RegisterStreamConsumerRequest(*kinesis.RegisterStreamConsumerInput) kinesis.RegisterStreamConsumerRequest
 
 	RemoveTagsFromStreamRequest(*kinesis.RemoveTagsFromStreamInput) kinesis.RemoveTagsFromStreamRequest
 

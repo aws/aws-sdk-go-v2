@@ -3,10 +3,734 @@
 package connect
 
 import (
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
+
+const opCreateUser = "CreateUser"
+
+// CreateUserRequest is a API request type for the CreateUser API operation.
+type CreateUserRequest struct {
+	*aws.Request
+	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
+}
+
+// Send marshals and sends the CreateUser API request.
+func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUserOutput), nil
+}
+
+// CreateUserRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Creates a new user account in your Amazon Connect instance.
+//
+//    // Example sending a request using the CreateUserRequest method.
+//    req := client.CreateUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUser
+func (c *Connect) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
+	op := &aws.Operation{
+		Name:       opCreateUser,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/users/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &CreateUserInput{}
+	}
+
+	output := &CreateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
+}
+
+const opDeleteUser = "DeleteUser"
+
+// DeleteUserRequest is a API request type for the DeleteUser API operation.
+type DeleteUserRequest struct {
+	*aws.Request
+	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
+}
+
+// Send marshals and sends the DeleteUser API request.
+func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserOutput), nil
+}
+
+// DeleteUserRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Deletes a user account from Amazon Connect.
+//
+//    // Example sending a request using the DeleteUserRequest method.
+//    req := client.DeleteUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUser
+func (c *Connect) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+	op := &aws.Operation{
+		Name:       opDeleteUser,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/users/{InstanceId}/{UserId}",
+	}
+
+	if input == nil {
+		input = &DeleteUserInput{}
+	}
+
+	output := &DeleteUserOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
+}
+
+const opDescribeUser = "DescribeUser"
+
+// DescribeUserRequest is a API request type for the DescribeUser API operation.
+type DescribeUserRequest struct {
+	*aws.Request
+	Input *DescribeUserInput
+	Copy  func(*DescribeUserInput) DescribeUserRequest
+}
+
+// Send marshals and sends the DescribeUser API request.
+func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUserOutput), nil
+}
+
+// DescribeUserRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns a User object that contains information about the user account specified
+// by the UserId.
+//
+//    // Example sending a request using the DescribeUserRequest method.
+//    req := client.DescribeUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUser
+func (c *Connect) DescribeUserRequest(input *DescribeUserInput) DescribeUserRequest {
+	op := &aws.Operation{
+		Name:       opDescribeUser,
+		HTTPMethod: "GET",
+		HTTPPath:   "/users/{InstanceId}/{UserId}",
+	}
+
+	if input == nil {
+		input = &DescribeUserInput{}
+	}
+
+	output := &DescribeUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeUserRequest{Request: req, Input: input, Copy: c.DescribeUserRequest}
+}
+
+const opDescribeUserHierarchyGroup = "DescribeUserHierarchyGroup"
+
+// DescribeUserHierarchyGroupRequest is a API request type for the DescribeUserHierarchyGroup API operation.
+type DescribeUserHierarchyGroupRequest struct {
+	*aws.Request
+	Input *DescribeUserHierarchyGroupInput
+	Copy  func(*DescribeUserHierarchyGroupInput) DescribeUserHierarchyGroupRequest
+}
+
+// Send marshals and sends the DescribeUserHierarchyGroup API request.
+func (r DescribeUserHierarchyGroupRequest) Send() (*DescribeUserHierarchyGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUserHierarchyGroupOutput), nil
+}
+
+// DescribeUserHierarchyGroupRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns a HierarchyGroup object that includes information about a hierarchy
+// group in your instance.
+//
+//    // Example sending a request using the DescribeUserHierarchyGroupRequest method.
+//    req := client.DescribeUserHierarchyGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroup
+func (c *Connect) DescribeUserHierarchyGroupRequest(input *DescribeUserHierarchyGroupInput) DescribeUserHierarchyGroupRequest {
+	op := &aws.Operation{
+		Name:       opDescribeUserHierarchyGroup,
+		HTTPMethod: "GET",
+		HTTPPath:   "/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}",
+	}
+
+	if input == nil {
+		input = &DescribeUserHierarchyGroupInput{}
+	}
+
+	output := &DescribeUserHierarchyGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeUserHierarchyGroupRequest{Request: req, Input: input, Copy: c.DescribeUserHierarchyGroupRequest}
+}
+
+const opDescribeUserHierarchyStructure = "DescribeUserHierarchyStructure"
+
+// DescribeUserHierarchyStructureRequest is a API request type for the DescribeUserHierarchyStructure API operation.
+type DescribeUserHierarchyStructureRequest struct {
+	*aws.Request
+	Input *DescribeUserHierarchyStructureInput
+	Copy  func(*DescribeUserHierarchyStructureInput) DescribeUserHierarchyStructureRequest
+}
+
+// Send marshals and sends the DescribeUserHierarchyStructure API request.
+func (r DescribeUserHierarchyStructureRequest) Send() (*DescribeUserHierarchyStructureOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUserHierarchyStructureOutput), nil
+}
+
+// DescribeUserHierarchyStructureRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns a HiearchyGroupStructure object, which contains data about the levels
+// in the agent hierarchy.
+//
+//    // Example sending a request using the DescribeUserHierarchyStructureRequest method.
+//    req := client.DescribeUserHierarchyStructureRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructure
+func (c *Connect) DescribeUserHierarchyStructureRequest(input *DescribeUserHierarchyStructureInput) DescribeUserHierarchyStructureRequest {
+	op := &aws.Operation{
+		Name:       opDescribeUserHierarchyStructure,
+		HTTPMethod: "GET",
+		HTTPPath:   "/user-hierarchy-structure/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &DescribeUserHierarchyStructureInput{}
+	}
+
+	output := &DescribeUserHierarchyStructureOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeUserHierarchyStructureRequest{Request: req, Input: input, Copy: c.DescribeUserHierarchyStructureRequest}
+}
+
+const opGetCurrentMetricData = "GetCurrentMetricData"
+
+// GetCurrentMetricDataRequest is a API request type for the GetCurrentMetricData API operation.
+type GetCurrentMetricDataRequest struct {
+	*aws.Request
+	Input *GetCurrentMetricDataInput
+	Copy  func(*GetCurrentMetricDataInput) GetCurrentMetricDataRequest
+}
+
+// Send marshals and sends the GetCurrentMetricData API request.
+func (r GetCurrentMetricDataRequest) Send() (*GetCurrentMetricDataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCurrentMetricDataOutput), nil
+}
+
+// GetCurrentMetricDataRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// The GetCurrentMetricData operation retrieves current metric data from your
+// Amazon Connect instance.
+//
+// If you are using an IAM account, it must have permission to the connect:GetCurrentMetricData
+// action.
+//
+//    // Example sending a request using the GetCurrentMetricDataRequest method.
+//    req := client.GetCurrentMetricDataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricData
+func (c *Connect) GetCurrentMetricDataRequest(input *GetCurrentMetricDataInput) GetCurrentMetricDataRequest {
+	op := &aws.Operation{
+		Name:       opGetCurrentMetricData,
+		HTTPMethod: "POST",
+		HTTPPath:   "/metrics/current/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetCurrentMetricDataInput{}
+	}
+
+	output := &GetCurrentMetricDataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetCurrentMetricDataRequest{Request: req, Input: input, Copy: c.GetCurrentMetricDataRequest}
+}
+
+// Paginate pages iterates over the pages of a GetCurrentMetricDataRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a GetCurrentMetricData operation.
+//		req := client.GetCurrentMetricDataRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetCurrentMetricDataRequest) Paginate(opts ...aws.Option) GetCurrentMetricDataPager {
+	return GetCurrentMetricDataPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetCurrentMetricDataInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// GetCurrentMetricDataPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetCurrentMetricDataPager struct {
+	aws.Pager
+}
+
+func (p *GetCurrentMetricDataPager) CurrentPage() *GetCurrentMetricDataOutput {
+	return p.Pager.CurrentPage().(*GetCurrentMetricDataOutput)
+}
+
+const opGetFederationToken = "GetFederationToken"
+
+// GetFederationTokenRequest is a API request type for the GetFederationToken API operation.
+type GetFederationTokenRequest struct {
+	*aws.Request
+	Input *GetFederationTokenInput
+	Copy  func(*GetFederationTokenInput) GetFederationTokenRequest
+}
+
+// Send marshals and sends the GetFederationToken API request.
+func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFederationTokenOutput), nil
+}
+
+// GetFederationTokenRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Retrieves a token for federation.
+//
+//    // Example sending a request using the GetFederationTokenRequest method.
+//    req := client.GetFederationTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationToken
+func (c *Connect) GetFederationTokenRequest(input *GetFederationTokenInput) GetFederationTokenRequest {
+	op := &aws.Operation{
+		Name:       opGetFederationToken,
+		HTTPMethod: "GET",
+		HTTPPath:   "/user/federate/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &GetFederationTokenInput{}
+	}
+
+	output := &GetFederationTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFederationTokenRequest{Request: req, Input: input, Copy: c.GetFederationTokenRequest}
+}
+
+const opGetMetricData = "GetMetricData"
+
+// GetMetricDataRequest is a API request type for the GetMetricData API operation.
+type GetMetricDataRequest struct {
+	*aws.Request
+	Input *GetMetricDataInput
+	Copy  func(*GetMetricDataInput) GetMetricDataRequest
+}
+
+// Send marshals and sends the GetMetricData API request.
+func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMetricDataOutput), nil
+}
+
+// GetMetricDataRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// The GetMetricData operation retrieves historical metrics data from your Amazon
+// Connect instance.
+//
+// If you are using an IAM account, it must have permission to the connect:GetMetricData
+// action.
+//
+//    // Example sending a request using the GetMetricDataRequest method.
+//    req := client.GetMetricDataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricData
+func (c *Connect) GetMetricDataRequest(input *GetMetricDataInput) GetMetricDataRequest {
+	op := &aws.Operation{
+		Name:       opGetMetricData,
+		HTTPMethod: "POST",
+		HTTPPath:   "/metrics/historical/{InstanceId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &GetMetricDataInput{}
+	}
+
+	output := &GetMetricDataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetMetricDataRequest{Request: req, Input: input, Copy: c.GetMetricDataRequest}
+}
+
+// Paginate pages iterates over the pages of a GetMetricDataRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a GetMetricData operation.
+//		req := client.GetMetricDataRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetMetricDataRequest) Paginate(opts ...aws.Option) GetMetricDataPager {
+	return GetMetricDataPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetMetricDataInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// GetMetricDataPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetMetricDataPager struct {
+	aws.Pager
+}
+
+func (p *GetMetricDataPager) CurrentPage() *GetMetricDataOutput {
+	return p.Pager.CurrentPage().(*GetMetricDataOutput)
+}
+
+const opListRoutingProfiles = "ListRoutingProfiles"
+
+// ListRoutingProfilesRequest is a API request type for the ListRoutingProfiles API operation.
+type ListRoutingProfilesRequest struct {
+	*aws.Request
+	Input *ListRoutingProfilesInput
+	Copy  func(*ListRoutingProfilesInput) ListRoutingProfilesRequest
+}
+
+// Send marshals and sends the ListRoutingProfiles API request.
+func (r ListRoutingProfilesRequest) Send() (*ListRoutingProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRoutingProfilesOutput), nil
+}
+
+// ListRoutingProfilesRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns an array of RoutingProfileSummary objects that includes information
+// about the routing profiles in your instance.
+//
+//    // Example sending a request using the ListRoutingProfilesRequest method.
+//    req := client.ListRoutingProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfiles
+func (c *Connect) ListRoutingProfilesRequest(input *ListRoutingProfilesInput) ListRoutingProfilesRequest {
+	op := &aws.Operation{
+		Name:       opListRoutingProfiles,
+		HTTPMethod: "GET",
+		HTTPPath:   "/routing-profiles-summary/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &ListRoutingProfilesInput{}
+	}
+
+	output := &ListRoutingProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListRoutingProfilesRequest{Request: req, Input: input, Copy: c.ListRoutingProfilesRequest}
+}
+
+const opListSecurityProfiles = "ListSecurityProfiles"
+
+// ListSecurityProfilesRequest is a API request type for the ListSecurityProfiles API operation.
+type ListSecurityProfilesRequest struct {
+	*aws.Request
+	Input *ListSecurityProfilesInput
+	Copy  func(*ListSecurityProfilesInput) ListSecurityProfilesRequest
+}
+
+// Send marshals and sends the ListSecurityProfiles API request.
+func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSecurityProfilesOutput), nil
+}
+
+// ListSecurityProfilesRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns an array of SecurityProfileSummary objects that contain information
+// about the security profiles in your instance, including the ARN, Id, and
+// Name of the security profile.
+//
+//    // Example sending a request using the ListSecurityProfilesRequest method.
+//    req := client.ListSecurityProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfiles
+func (c *Connect) ListSecurityProfilesRequest(input *ListSecurityProfilesInput) ListSecurityProfilesRequest {
+	op := &aws.Operation{
+		Name:       opListSecurityProfiles,
+		HTTPMethod: "GET",
+		HTTPPath:   "/security-profiles-summary/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &ListSecurityProfilesInput{}
+	}
+
+	output := &ListSecurityProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSecurityProfilesRequest{Request: req, Input: input, Copy: c.ListSecurityProfilesRequest}
+}
+
+const opListUserHierarchyGroups = "ListUserHierarchyGroups"
+
+// ListUserHierarchyGroupsRequest is a API request type for the ListUserHierarchyGroups API operation.
+type ListUserHierarchyGroupsRequest struct {
+	*aws.Request
+	Input *ListUserHierarchyGroupsInput
+	Copy  func(*ListUserHierarchyGroupsInput) ListUserHierarchyGroupsRequest
+}
+
+// Send marshals and sends the ListUserHierarchyGroups API request.
+func (r ListUserHierarchyGroupsRequest) Send() (*ListUserHierarchyGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUserHierarchyGroupsOutput), nil
+}
+
+// ListUserHierarchyGroupsRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns a UserHierarchyGroupSummaryList, which is an array of HierarchyGroupSummary
+// objects that contain information about the hierarchy groups in your instance.
+//
+//    // Example sending a request using the ListUserHierarchyGroupsRequest method.
+//    req := client.ListUserHierarchyGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroups
+func (c *Connect) ListUserHierarchyGroupsRequest(input *ListUserHierarchyGroupsInput) ListUserHierarchyGroupsRequest {
+	op := &aws.Operation{
+		Name:       opListUserHierarchyGroups,
+		HTTPMethod: "GET",
+		HTTPPath:   "/user-hierarchy-groups-summary/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &ListUserHierarchyGroupsInput{}
+	}
+
+	output := &ListUserHierarchyGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListUserHierarchyGroupsRequest{Request: req, Input: input, Copy: c.ListUserHierarchyGroupsRequest}
+}
+
+const opListUsers = "ListUsers"
+
+// ListUsersRequest is a API request type for the ListUsers API operation.
+type ListUsersRequest struct {
+	*aws.Request
+	Input *ListUsersInput
+	Copy  func(*ListUsersInput) ListUsersRequest
+}
+
+// Send marshals and sends the ListUsers API request.
+func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUsersOutput), nil
+}
+
+// ListUsersRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Returns a UserSummaryList, which is an array of UserSummary objects.
+//
+//    // Example sending a request using the ListUsersRequest method.
+//    req := client.ListUsersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsers
+func (c *Connect) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
+	op := &aws.Operation{
+		Name:       opListUsers,
+		HTTPMethod: "GET",
+		HTTPPath:   "/users-summary/{InstanceId}",
+	}
+
+	if input == nil {
+		input = &ListUsersInput{}
+	}
+
+	output := &ListUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
+}
 
 const opStartOutboundVoiceContact = "StartOutboundVoiceContact"
 
@@ -33,10 +757,7 @@ func (r StartOutboundVoiceContactRequest) Send() (*StartOutboundVoiceContactOutp
 // The StartOutboundVoiceContact operation initiates a contact flow to place
 // an outbound call to a customer.
 //
-// There is a throttling limit placed on usage of the API that includes a RateLimit
-// of 2 per second, and a BurstLimit of 5 per second.
-//
-// If you are using an IAM account, it must have permissions to the connect:StartOutboundVoiceContact
+// If you are using an IAM account, it must have permission to the connect:StartOutboundVoiceContact
 // action.
 //
 //    // Example sending a request using the StartOutboundVoiceContactRequest method.
@@ -89,8 +810,8 @@ func (r StopContactRequest) Send() (*StopContactOutput, error) {
 //
 // Ends the contact initiated by the StartOutboundVoiceContact operation.
 //
-// If you are using an IAM account, it must have permissions to the connect:StopContact
-// operation.
+// If you are using an IAM account, it must have permission to the connect:StopContact
+// action.
 //
 //    // Example sending a request using the StopContactRequest method.
 //    req := client.StopContactRequest(params)
@@ -118,6 +839,3074 @@ func (c *Connect) StopContactRequest(input *StopContactInput) StopContactRequest
 	return StopContactRequest{Request: req, Input: input, Copy: c.StopContactRequest}
 }
 
+const opUpdateContactAttributes = "UpdateContactAttributes"
+
+// UpdateContactAttributesRequest is a API request type for the UpdateContactAttributes API operation.
+type UpdateContactAttributesRequest struct {
+	*aws.Request
+	Input *UpdateContactAttributesInput
+	Copy  func(*UpdateContactAttributesInput) UpdateContactAttributesRequest
+}
+
+// Send marshals and sends the UpdateContactAttributes API request.
+func (r UpdateContactAttributesRequest) Send() (*UpdateContactAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateContactAttributesOutput), nil
+}
+
+// UpdateContactAttributesRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// The UpdateContactAttributes operation lets you programmatically create new,
+// or update existing, contact attributes associated with a contact. You can
+// use the operation to add or update attributes for both ongoing and completed
+// contacts. For example, you can update the customer's name or the reason the
+// customer called while the call is active, or add notes about steps that the
+// agent took during the call that are displayed to the next agent that takes
+// the call. You can also use the UpdateContactAttributes operation to update
+// attributes for a contact using data from your CRM application and save the
+// data with the contact in Amazon Connect. You could also flag calls for additional
+// analysis, such as legal review or identifying abusive callers.
+//
+// Contact attributes are available in Amazon Connect for 24 months, and are
+// then deleted.
+//
+// Important:
+//
+// You cannot use the operation to update attributes for contacts that occurred
+// prior to the release of the API, September 12, 2018. You can update attributes
+// only for contacts that started after the release of the API. If you attempt
+// to update attributes for a contact that occurred prior to the release of
+// the API, a 400 error is returned. This applies also to queued callbacks that
+// were initiated prior to the release of the API but are still active in your
+// instance.
+//
+//    // Example sending a request using the UpdateContactAttributesRequest method.
+//    req := client.UpdateContactAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributes
+func (c *Connect) UpdateContactAttributesRequest(input *UpdateContactAttributesInput) UpdateContactAttributesRequest {
+	op := &aws.Operation{
+		Name:       opUpdateContactAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/contact/attributes",
+	}
+
+	if input == nil {
+		input = &UpdateContactAttributesInput{}
+	}
+
+	output := &UpdateContactAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateContactAttributesRequest{Request: req, Input: input, Copy: c.UpdateContactAttributesRequest}
+}
+
+const opUpdateUserHierarchy = "UpdateUserHierarchy"
+
+// UpdateUserHierarchyRequest is a API request type for the UpdateUserHierarchy API operation.
+type UpdateUserHierarchyRequest struct {
+	*aws.Request
+	Input *UpdateUserHierarchyInput
+	Copy  func(*UpdateUserHierarchyInput) UpdateUserHierarchyRequest
+}
+
+// Send marshals and sends the UpdateUserHierarchy API request.
+func (r UpdateUserHierarchyRequest) Send() (*UpdateUserHierarchyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserHierarchyOutput), nil
+}
+
+// UpdateUserHierarchyRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Assigns the specified hierarchy group to the user.
+//
+//    // Example sending a request using the UpdateUserHierarchyRequest method.
+//    req := client.UpdateUserHierarchyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchy
+func (c *Connect) UpdateUserHierarchyRequest(input *UpdateUserHierarchyInput) UpdateUserHierarchyRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUserHierarchy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/users/{InstanceId}/{UserId}/hierarchy",
+	}
+
+	if input == nil {
+		input = &UpdateUserHierarchyInput{}
+	}
+
+	output := &UpdateUserHierarchyOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUserHierarchyRequest{Request: req, Input: input, Copy: c.UpdateUserHierarchyRequest}
+}
+
+const opUpdateUserIdentityInfo = "UpdateUserIdentityInfo"
+
+// UpdateUserIdentityInfoRequest is a API request type for the UpdateUserIdentityInfo API operation.
+type UpdateUserIdentityInfoRequest struct {
+	*aws.Request
+	Input *UpdateUserIdentityInfoInput
+	Copy  func(*UpdateUserIdentityInfoInput) UpdateUserIdentityInfoRequest
+}
+
+// Send marshals and sends the UpdateUserIdentityInfo API request.
+func (r UpdateUserIdentityInfoRequest) Send() (*UpdateUserIdentityInfoOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserIdentityInfoOutput), nil
+}
+
+// UpdateUserIdentityInfoRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Updates the identity information for the specified user in a UserIdentityInfo
+// object, including email, first name, and last name.
+//
+//    // Example sending a request using the UpdateUserIdentityInfoRequest method.
+//    req := client.UpdateUserIdentityInfoRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfo
+func (c *Connect) UpdateUserIdentityInfoRequest(input *UpdateUserIdentityInfoInput) UpdateUserIdentityInfoRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUserIdentityInfo,
+		HTTPMethod: "POST",
+		HTTPPath:   "/users/{InstanceId}/{UserId}/identity-info",
+	}
+
+	if input == nil {
+		input = &UpdateUserIdentityInfoInput{}
+	}
+
+	output := &UpdateUserIdentityInfoOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUserIdentityInfoRequest{Request: req, Input: input, Copy: c.UpdateUserIdentityInfoRequest}
+}
+
+const opUpdateUserPhoneConfig = "UpdateUserPhoneConfig"
+
+// UpdateUserPhoneConfigRequest is a API request type for the UpdateUserPhoneConfig API operation.
+type UpdateUserPhoneConfigRequest struct {
+	*aws.Request
+	Input *UpdateUserPhoneConfigInput
+	Copy  func(*UpdateUserPhoneConfigInput) UpdateUserPhoneConfigRequest
+}
+
+// Send marshals and sends the UpdateUserPhoneConfig API request.
+func (r UpdateUserPhoneConfigRequest) Send() (*UpdateUserPhoneConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserPhoneConfigOutput), nil
+}
+
+// UpdateUserPhoneConfigRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Updates the phone configuration settings in the UserPhoneConfig object for
+// the specified user.
+//
+//    // Example sending a request using the UpdateUserPhoneConfigRequest method.
+//    req := client.UpdateUserPhoneConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfig
+func (c *Connect) UpdateUserPhoneConfigRequest(input *UpdateUserPhoneConfigInput) UpdateUserPhoneConfigRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUserPhoneConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/users/{InstanceId}/{UserId}/phone-config",
+	}
+
+	if input == nil {
+		input = &UpdateUserPhoneConfigInput{}
+	}
+
+	output := &UpdateUserPhoneConfigOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUserPhoneConfigRequest{Request: req, Input: input, Copy: c.UpdateUserPhoneConfigRequest}
+}
+
+const opUpdateUserRoutingProfile = "UpdateUserRoutingProfile"
+
+// UpdateUserRoutingProfileRequest is a API request type for the UpdateUserRoutingProfile API operation.
+type UpdateUserRoutingProfileRequest struct {
+	*aws.Request
+	Input *UpdateUserRoutingProfileInput
+	Copy  func(*UpdateUserRoutingProfileInput) UpdateUserRoutingProfileRequest
+}
+
+// Send marshals and sends the UpdateUserRoutingProfile API request.
+func (r UpdateUserRoutingProfileRequest) Send() (*UpdateUserRoutingProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserRoutingProfileOutput), nil
+}
+
+// UpdateUserRoutingProfileRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Assigns the specified routing profile to a user.
+//
+//    // Example sending a request using the UpdateUserRoutingProfileRequest method.
+//    req := client.UpdateUserRoutingProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserRoutingProfile
+func (c *Connect) UpdateUserRoutingProfileRequest(input *UpdateUserRoutingProfileInput) UpdateUserRoutingProfileRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUserRoutingProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/users/{InstanceId}/{UserId}/routing-profile",
+	}
+
+	if input == nil {
+		input = &UpdateUserRoutingProfileInput{}
+	}
+
+	output := &UpdateUserRoutingProfileOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUserRoutingProfileRequest{Request: req, Input: input, Copy: c.UpdateUserRoutingProfileRequest}
+}
+
+const opUpdateUserSecurityProfiles = "UpdateUserSecurityProfiles"
+
+// UpdateUserSecurityProfilesRequest is a API request type for the UpdateUserSecurityProfiles API operation.
+type UpdateUserSecurityProfilesRequest struct {
+	*aws.Request
+	Input *UpdateUserSecurityProfilesInput
+	Copy  func(*UpdateUserSecurityProfilesInput) UpdateUserSecurityProfilesRequest
+}
+
+// Send marshals and sends the UpdateUserSecurityProfiles API request.
+func (r UpdateUserSecurityProfilesRequest) Send() (*UpdateUserSecurityProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserSecurityProfilesOutput), nil
+}
+
+// UpdateUserSecurityProfilesRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Updates the security profiles assigned to the user.
+//
+//    // Example sending a request using the UpdateUserSecurityProfilesRequest method.
+//    req := client.UpdateUserSecurityProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfiles
+func (c *Connect) UpdateUserSecurityProfilesRequest(input *UpdateUserSecurityProfilesInput) UpdateUserSecurityProfilesRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUserSecurityProfiles,
+		HTTPMethod: "POST",
+		HTTPPath:   "/users/{InstanceId}/{UserId}/security-profiles",
+	}
+
+	if input == nil {
+		input = &UpdateUserSecurityProfilesInput{}
+	}
+
+	output := &UpdateUserSecurityProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUserSecurityProfilesRequest{Request: req, Input: input, Copy: c.UpdateUserSecurityProfilesRequest}
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserRequest
+type CreateUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the user account in the directory service directory
+	// used for identity management. If Amazon Connect is unable to access the existing
+	// directory, you can use the DirectoryUserId to authenticate users. If you
+	// include the parameter, it is assumed that Amazon Connect cannot access the
+	// directory. If the parameter is not included, the UserIdentityInfo is used
+	// to authenticate users from your existing directory.
+	//
+	// This parameter is required if you are using an existing directory for identity
+	// management in Amazon Connect when Amazon Connect cannot access your directory
+	// to authenticate users. If you are using SAML for identity management and
+	// include this parameter, an InvalidRequestException is returned.
+	DirectoryUserId *string `type:"string"`
+
+	// The unique identifier for the hierarchy group to assign to the user created.
+	HierarchyGroupId *string `type:"string"`
+
+	// Information about the user, including email address, first name, and last
+	// name.
+	IdentityInfo *UserIdentityInfo `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The password for the user account to create. This is required if you are
+	// using Amazon Connect for identity management. If you are using SAML for identity
+	// management and include this parameter, an InvalidRequestException is returned.
+	Password *string `type:"string"`
+
+	// Specifies the phone settings for the user, including AfterContactWorkTimeLimit,
+	// AutoAccept, DeskPhoneNumber, and PhoneType.
+	//
+	// PhoneConfig is a required field
+	PhoneConfig *UserPhoneConfig `type:"structure" required:"true"`
+
+	// The unique identifier for the routing profile to assign to the user created.
+	//
+	// RoutingProfileId is a required field
+	RoutingProfileId *string `type:"string" required:"true"`
+
+	// The unique identifier of the security profile to assign to the user created.
+	//
+	// SecurityProfileIds is a required field
+	SecurityProfileIds []string `min:"1" type:"list" required:"true"`
+
+	// The user name in Amazon Connect for the account to create.
+	//
+	// Username is a required field
+	Username *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.PhoneConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneConfig"))
+	}
+
+	if s.RoutingProfileId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoutingProfileId"))
+	}
+
+	if s.SecurityProfileIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileIds"))
+	}
+	if s.SecurityProfileIds != nil && len(s.SecurityProfileIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityProfileIds", 1))
+	}
+
+	if s.Username == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
+	}
+	if s.Username != nil && len(*s.Username) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
+	}
+	if s.IdentityInfo != nil {
+		if err := s.IdentityInfo.Validate(); err != nil {
+			invalidParams.AddNested("IdentityInfo", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PhoneConfig != nil {
+		if err := s.PhoneConfig.Validate(); err != nil {
+			invalidParams.AddNested("PhoneConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DirectoryUserId != nil {
+		v := *s.DirectoryUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DirectoryUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HierarchyGroupId != nil {
+		v := *s.HierarchyGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HierarchyGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IdentityInfo != nil {
+		v := s.IdentityInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "IdentityInfo", v, metadata)
+	}
+	if s.Password != nil {
+		v := *s.Password
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Password", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PhoneConfig != nil {
+		v := s.PhoneConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneConfig", v, metadata)
+	}
+	if s.RoutingProfileId != nil {
+		v := *s.RoutingProfileId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoutingProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityProfileIds) > 0 {
+		v := s.SecurityProfileIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityProfileIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserResponse
+type CreateUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the user account created.
+	UserArn *string `type:"string"`
+
+	// The unique identifier for the user account in Amazon Connect
+	UserId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.UserArn != nil {
+		v := *s.UserArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The credentials to use for federation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Credentials
+type Credentials struct {
+	_ struct{} `type:"structure"`
+
+	// An access token generated for a federated user to access Amazon Connect
+	AccessToken *string `type:"string"`
+
+	// A token generated with an expiration time for the session a user is logged
+	// in to Amazon Connect
+	AccessTokenExpiration *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Renews a token generated for a user to access the Amazon Connect instance.
+	RefreshToken *string `type:"string"`
+
+	// Renews the expiration timer for a generated token.
+	RefreshTokenExpiration *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s Credentials) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Credentials) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Credentials) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessToken != nil {
+		v := *s.AccessToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccessToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AccessTokenExpiration != nil {
+		v := *s.AccessTokenExpiration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccessTokenExpiration", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.RefreshToken != nil {
+		v := *s.RefreshToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RefreshToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RefreshTokenExpiration != nil {
+		v := *s.RefreshTokenExpiration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RefreshTokenExpiration", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// A CurrentMetric object that contains the Name and Unit for the metric.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetric
+type CurrentMetric struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the metric.
+	Name CurrentMetricName `type:"string" enum:"true"`
+
+	// The unit for the metric.
+	Unit Unit `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CurrentMetric) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CurrentMetric) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CurrentMetric) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Unit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// A CurrentMetricData object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricData
+type CurrentMetricData struct {
+	_ struct{} `type:"structure"`
+
+	// The metric in a CurrentMetricData object.
+	Metric *CurrentMetric `type:"structure"`
+
+	// The value of the metric in the CurrentMetricData object.
+	Value *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s CurrentMetricData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CurrentMetricData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CurrentMetricData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Metric != nil {
+		v := s.Metric
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Metric", v, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// A CurrentMetricResult object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CurrentMetricResult
+type CurrentMetricResult struct {
+	_ struct{} `type:"structure"`
+
+	// The Collections for the CurrentMetricResult object.
+	Collections []CurrentMetricData `type:"list"`
+
+	// The Dimensions for the CurrentMetricResult object.
+	Dimensions *Dimensions `type:"structure"`
+}
+
+// String returns the string representation
+func (s CurrentMetricResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CurrentMetricResult) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CurrentMetricResult) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Collections) > 0 {
+		v := s.Collections
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Collections", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Dimensions != nil {
+		v := s.Dimensions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Dimensions", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserRequest
+type DeleteUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The unique identifier of the user to delete.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteUserOutput
+type DeleteUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroupRequest
+type DescribeUserHierarchyGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for the hierarchy group to return.
+	//
+	// HierarchyGroupId is a required field
+	HierarchyGroupId *string `location:"uri" locationName:"HierarchyGroupId" type:"string" required:"true"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeUserHierarchyGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserHierarchyGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUserHierarchyGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserHierarchyGroupInput"}
+
+	if s.HierarchyGroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HierarchyGroupId"))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserHierarchyGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.HierarchyGroupId != nil {
+		v := *s.HierarchyGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "HierarchyGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroupResponse
+type DescribeUserHierarchyGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Returns a HierarchyGroup object.
+	HierarchyGroup *HierarchyGroup `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeUserHierarchyGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserHierarchyGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserHierarchyGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserHierarchyGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HierarchyGroup != nil {
+		v := s.HierarchyGroup
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HierarchyGroup", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureRequest
+type DescribeUserHierarchyStructureInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeUserHierarchyStructureInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserHierarchyStructureInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUserHierarchyStructureInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserHierarchyStructureInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserHierarchyStructureInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyStructureResponse
+type DescribeUserHierarchyStructureOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A HierarchyStructure object.
+	HierarchyStructure *HierarchyStructure `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeUserHierarchyStructureOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserHierarchyStructureOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserHierarchyStructureOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserHierarchyStructureOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HierarchyStructure != nil {
+		v := s.HierarchyStructure
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HierarchyStructure", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserRequest
+type DescribeUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// Unique identifier for the user account to return.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserResponse
+type DescribeUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A User object that contains information about the user account and configuration
+	// settings.
+	User *User `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.User != nil {
+		v := s.User
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "User", v, metadata)
+	}
+	return nil
+}
+
+// A Dimensions object that includes the Channel and Queue for the metric.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Dimensions
+type Dimensions struct {
+	_ struct{} `type:"structure"`
+
+	// The channel used for grouping and filters. Only VOICE is supported.
+	Channel Channel `type:"string" enum:"true"`
+
+	// A QueueReference object used as one part of dimension for the metrics results.
+	Queue *QueueReference `type:"structure"`
+}
+
+// String returns the string representation
+func (s Dimensions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Dimensions) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Dimensions) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Channel) > 0 {
+		v := s.Channel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Channel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Queue != nil {
+		v := s.Queue
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Queue", v, metadata)
+	}
+	return nil
+}
+
+// The filter, either channel or queues, to apply to the metric results retrieved.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Filters
+type Filters struct {
+	_ struct{} `type:"structure"`
+
+	// The Channel to use as a filter for the metrics returned. Only VOICE is supported.
+	Channels []Channel `type:"list"`
+
+	// A list of up to 100 queue IDs or queue ARNs to use to filter the metrics
+	// retrieved. You can include both IDs and ARNs in a request.
+	Queues []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s Filters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Filters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Filters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Filters"}
+	if s.Queues != nil && len(s.Queues) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Queues", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Channels) > 0 {
+		v := s.Channels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Channels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Queues) > 0 {
+		v := s.Queues
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Queues", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest
+type GetCurrentMetricDataInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of CurrentMetric objects for the metrics to retrieve. Each CurrentMetric
+	// includes a name of a metric to retrieve and the unit to use for it.
+	//
+	// The following metrics are available:
+	//
+	// AGENTS_AVAILABLEUnit: COUNT
+	//
+	// AGENTS_ONLINEUnit: COUNT
+	//
+	// AGENTS_ON_CALLUnit: COUNT
+	//
+	// AGENTS_STAFFEDUnit: COUNT
+	//
+	// AGENTS_AFTER_CONTACT_WORKUnit: COUNT
+	//
+	// AGENTS_NON_PRODUCTIVEUnit: COUNT
+	//
+	// AGENTS_ERRORUnit: COUNT
+	//
+	// CONTACTS_IN_QUEUEUnit: COUNT
+	//
+	// OLDEST_CONTACT_AGEUnit: SECONDS
+	//
+	// CONTACTS_SCHEDULEDUnit: COUNT
+	//
+	// CurrentMetrics is a required field
+	CurrentMetrics []CurrentMetric `type:"list" required:"true"`
+
+	// A Filters object that contains a list of queue IDs or queue ARNs, up to 100,
+	// or list of Channels to use to filter the metrics returned in the response.
+	// Metric data is retrieved only for the resources associated with the queue
+	// IDs, ARNs, or Channels included in the filter. You can include both IDs and
+	// ARNs in the same request. To retrieve metrics for all queues, add the queue
+	// ID or ARN for each queue in your instance. Only VOICE is supported for Channels.
+	//
+	// To find the ARN for a queue, open the queue you want to use in the Amazon
+	// Connect Queue editor. The ARN for the queue is displayed in the address bar
+	// as part of the URL. For example, the queue ARN is the set of characters at
+	// the end of the URL, after 'id=' such as arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61.
+	// The queue ID is also included in the URL, and is the string after 'queue/'.
+	//
+	// Filters is a required field
+	Filters *Filters `type:"structure" required:"true"`
+
+	// The grouping applied to the metrics returned. For example, when grouped by
+	// QUEUE, the metrics returned apply to each queue rather than aggregated for
+	// all queues. If you group by CHANNEL, you should include a Channels filter.
+	// The only supported channel is VOICE.
+	//
+	// If no Grouping is included in the request, a summary of CurrentMetrics is
+	// returned.
+	Groupings []Grouping `type:"list"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// MaxResults indicates the maximum number of results to return per page in
+	// the response, between 1 and 100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	//
+	// The token expires after 5 minutes from the time it is created. Subsequent
+	// requests that use the NextToken must use the same request parameters as the
+	// request that generated the token.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetCurrentMetricDataInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCurrentMetricDataInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetCurrentMetricDataInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetCurrentMetricDataInput"}
+
+	if s.CurrentMetrics == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CurrentMetrics"))
+	}
+
+	if s.Filters == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Filters"))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.Filters != nil {
+		if err := s.Filters.Validate(); err != nil {
+			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCurrentMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.CurrentMetrics) > 0 {
+		v := s.CurrentMetrics
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CurrentMetrics", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Filters != nil {
+		v := s.Filters
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
+	}
+	if len(s.Groupings) > 0 {
+		v := s.Groupings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Groupings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataResponse
+type GetCurrentMetricDataOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The time at which CurrentMetricData was retrieved and cached for pagination.
+	DataSnapshotTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A list of CurrentMetricResult objects organized by Dimensions combining with
+	// CurrentMetricDataCollections.
+	//
+	// Dimensions is the resourceId specified in the Filters of the request.
+	//
+	// Collections is a list of CurrentMetricData objects with corresponding values
+	// to the CurrentMetrics specified in the request.
+	//
+	// If no Grouping is specified in the request, Collections is a summary for
+	// the CurrentMetric returned.
+	MetricResults []CurrentMetricResult `type:"list"`
+
+	// A string returned in the response. Use the value returned in the response
+	// as the value of the NextToken in a subsequent request to retrieve the next
+	// set of results.
+	//
+	// The token expires after 5 minutes from the time it is created. Subsequent
+	// requests that use the NextToken must use the same request parameters as the
+	// request that generated the token.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetCurrentMetricDataOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCurrentMetricDataOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCurrentMetricDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCurrentMetricDataOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSnapshotTime != nil {
+		v := *s.DataSnapshotTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DataSnapshotTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.MetricResults) > 0 {
+		v := s.MetricResults
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "MetricResults", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenRequest
+type GetFederationTokenInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFederationTokenInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFederationTokenInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFederationTokenInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFederationTokenInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFederationTokenInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetFederationTokenResponse
+type GetFederationTokenOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The credentials to use for federation.
+	Credentials *Credentials `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetFederationTokenOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFederationTokenOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFederationTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFederationTokenOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Credentials != nil {
+		v := s.Credentials
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Credentials", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataRequest
+type GetMetricDataInput struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp, in UNIX Epoch time format, at which to end the reporting interval
+	// for the retrieval of historical metrics data. The time must be specified
+	// using an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must be
+	// later than the StartTime timestamp.
+	//
+	// The time range between StartTime and EndTime must be less than 24 hours.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// A Filters object that contains a list of queue IDs or queue ARNs, up to 100,
+	// or a list of Channels to use to filter the metrics returned in the response.
+	// Metric data is retrieved only for the resources associated with the IDs,
+	// ARNs, or Channels included in the filter. You can use both IDs and ARNs together
+	// in a request. Only VOICE is supported for Channel.
+	//
+	// To find the ARN for a queue, open the queue you want to use in the Amazon
+	// Connect Queue editor. The ARN for the queue is displayed in the address bar
+	// as part of the URL. For example, the queue ARN is the set of characters at
+	// the end of the URL, after 'id=' such as arn:aws:connect:us-east-1:270923740243:instance/78fb859d-1b7d-44b1-8aa3-12f0835c5855/queue/1d1a4575-9618-40ab-bbeb-81e45795fe61.
+	// The queue ID is also included in the URL, and is the string after 'queue/'.
+	//
+	// Filters is a required field
+	Filters *Filters `type:"structure" required:"true"`
+
+	// The grouping applied to the metrics returned. For example, when results are
+	// grouped by queueId, the metrics returned are grouped by queue. The values
+	// returned apply to the metrics for each queue rather than aggregated for all
+	// queues.
+	//
+	// The current version supports grouping by Queue
+	//
+	// If no Grouping is included in the request, a summary of HistoricalMetrics
+	// for all queues is returned.
+	Groupings []Grouping `type:"list"`
+
+	// A list of HistoricalMetric objects that contain the metrics to retrieve with
+	// the request.
+	//
+	// A HistoricalMetric object contains: HistoricalMetricName, Statistic, Threshold,
+	// and Unit.
+	//
+	// For each historical metric you include in the request, you must include a
+	// Unit and a Statistic.
+	//
+	// The following historical metrics are available:
+	//
+	// CONTACTS_QUEUEDUnit: COUNT
+	//
+	// Statistic: SUM
+	//
+	// CONTACTS_HANDLEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_ABANDONEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_CONSULTEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_AGENT_HUNG_UP_FIRSTUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_HANDLED_INCOMINGUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_HANDLED_OUTBOUNDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_HOLD_ABANDONSUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_TRANSFERRED_INUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_TRANSFERRED_OUTUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_TRANSFERRED_IN_FROM_QUEUEUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUEUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CALLBACK_CONTACTS_HANDLEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CALLBACK_CONTACTS_HANDLEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// API_CONTACTS_HANDLEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// CONTACTS_MISSEDUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// OCCUPANCYUnit: PERCENT
+	//
+	// Statistics: AVG
+	//
+	// HANDLE_TIMEUnit: SECONDS
+	//
+	// Statistics: AVG
+	//
+	// AFTER_CONTACT_WORK_TIMEUnit: SECONDS
+	//
+	// Statistics: AVG
+	//
+	// QUEUED_TIMEUnit: SECONDS
+	//
+	// Statistics: MAX
+	//
+	// ABANDON_TIMEUnit: COUNT
+	//
+	// Statistics: SUM
+	//
+	// QUEUE_ANSWER_TIMEUnit: SECONDS
+	//
+	// Statistics: AVG
+	//
+	// HOLD_TIMEUnit: SECONDS
+	//
+	// Statistics: AVG
+	//
+	// INTERACTION_TIMEUnit: SECONDS
+	//
+	// Statistics: AVG
+	//
+	// INTERACTION_AND_HOLD_TIMEUnit: SECONDS
+	//
+	// Statistics: AVG
+	//
+	// SERVICE_LEVELUnit: PERCENT
+	//
+	// Statistics: AVG
+	//
+	// Threshold: Only "Less than" comparisons are supported, with the following
+	// service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120, 180, 240, 300,
+	// 600
+	//
+	// HistoricalMetrics is a required field
+	HistoricalMetrics []HistoricalMetric `type:"list" required:"true"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// Indicates the maximum number of results to return per page in the response,
+	// between 1-100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string `type:"string"`
+
+	// The timestamp, in UNIX Epoch time format, at which to start the reporting
+	// interval for the retrieval of historical metrics data. The time must be specified
+	// using a multiple of 5 minutes, such as 10:05, 10:10, 10:15.
+	//
+	// StartTime cannot be earlier than 24 hours before the time of the request.
+	// Historical metrics are available in Amazon Connect only for 24 hours.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+}
+
+// String returns the string representation
+func (s GetMetricDataInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetMetricDataInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetMetricDataInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetMetricDataInput"}
+
+	if s.EndTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
+	}
+
+	if s.Filters == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Filters"))
+	}
+
+	if s.HistoricalMetrics == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HistoricalMetrics"))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if s.StartTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
+	}
+	if s.Filters != nil {
+		if err := s.Filters.Validate(); err != nil {
+			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMetricDataInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.EndTime != nil {
+		v := *s.EndTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Filters != nil {
+		v := s.Filters
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Filters", v, metadata)
+	}
+	if len(s.Groupings) > 0 {
+		v := s.Groupings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Groupings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.HistoricalMetrics) > 0 {
+		v := s.HistoricalMetrics
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "HistoricalMetrics", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetMetricDataResponse
+type GetMetricDataOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of HistoricalMetricResult objects, organized by Dimensions, which
+	// is the ID of the resource specified in the Filters used for the request.
+	// The metrics are combined with the metrics included in Collections, which
+	// is a list of HisotricalMetricData objects.
+	//
+	// If no Grouping is specified in the request, Collections includes summary
+	// data for the HistoricalMetrics.
+	MetricResults []HistoricalMetricResult `type:"list"`
+
+	// A string returned in the response. Use the value returned in the response
+	// as the value of the NextToken in a subsequent request to retrieve the next
+	// set of results.
+	//
+	// The token expires after 5 minutes from the time it is created. Subsequent
+	// requests that use the NextToken must use the same request parameters as the
+	// request that generated the token.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetMetricDataOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetMetricDataOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMetricDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMetricDataOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.MetricResults) > 0 {
+		v := s.MetricResults
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "MetricResults", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A HierarchyGroup object that contains information about a hierarchy group
+// in your Amazon Connect instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup
+type HierarchyGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the hierarchy group.
+	Arn *string `type:"string"`
+
+	// A HierarchyPath object that contains information about the levels in the
+	// hierarchy group.
+	HierarchyPath *HierarchyPath `type:"structure"`
+
+	// The identifier for the hierarchy group.
+	Id *string `type:"string"`
+
+	// The identifier for the level in the hierarchy group.
+	LevelId *string `type:"string"`
+
+	// The name of the hierarchy group in your instance.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HierarchyGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HierarchyGroup) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HierarchyGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HierarchyPath != nil {
+		v := s.HierarchyPath
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HierarchyPath", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LevelId != nil {
+		v := *s.LevelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LevelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A HierarchyGroupSummary object that contains information about the hierarchy
+// group, including ARN, Id, and Name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroupSummary
+type HierarchyGroupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the hierarchy group.
+	Arn *string `type:"string"`
+
+	// The identifier of the hierarchy group.
+	Id *string `type:"string"`
+
+	// The name of the hierarchy group.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HierarchyGroupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HierarchyGroupSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HierarchyGroupSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A HierarchyLevel object that contains information about the levels in a hierarchy
+// group, including ARN, Id, and Name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyLevel
+type HierarchyLevel struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the hierarchy group level.
+	Arn *string `type:"string"`
+
+	// The identifier for the hierarchy group level.
+	Id *string `type:"string"`
+
+	// The name of the hierarchy group level.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HierarchyLevel) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HierarchyLevel) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HierarchyLevel) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A HierarchyPath object that contains information about the levels of the
+// hierarchy group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyPath
+type HierarchyPath struct {
+	_ struct{} `type:"structure"`
+
+	// A HierarchyGroupSummary object that contains information about the level
+	// of the hierarchy group, including ARN, Id, and Name.
+	LevelFive *HierarchyGroupSummary `type:"structure"`
+
+	// A HierarchyGroupSummary object that contains information about the level
+	// of the hierarchy group, including ARN, Id, and Name.
+	LevelFour *HierarchyGroupSummary `type:"structure"`
+
+	// A HierarchyGroupSummary object that contains information about the level
+	// of the hierarchy group, including ARN, Id, and Name.
+	LevelOne *HierarchyGroupSummary `type:"structure"`
+
+	// A HierarchyGroupSummary object that contains information about the level
+	// of the hierarchy group, including ARN, Id, and Name.
+	LevelThree *HierarchyGroupSummary `type:"structure"`
+
+	// A HierarchyGroupSummary object that contains information about the level
+	// of the hierarchy group, including ARN, Id, and Name.
+	LevelTwo *HierarchyGroupSummary `type:"structure"`
+}
+
+// String returns the string representation
+func (s HierarchyPath) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HierarchyPath) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HierarchyPath) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LevelFive != nil {
+		v := s.LevelFive
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelFive", v, metadata)
+	}
+	if s.LevelFour != nil {
+		v := s.LevelFour
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelFour", v, metadata)
+	}
+	if s.LevelOne != nil {
+		v := s.LevelOne
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelOne", v, metadata)
+	}
+	if s.LevelThree != nil {
+		v := s.LevelThree
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelThree", v, metadata)
+	}
+	if s.LevelTwo != nil {
+		v := s.LevelTwo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelTwo", v, metadata)
+	}
+	return nil
+}
+
+// A HierarchyStructure object that contains information about the hierarchy
+// group structure.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyStructure
+type HierarchyStructure struct {
+	_ struct{} `type:"structure"`
+
+	// A HierarchyLevel object that contains information about the hierarchy group
+	// level.
+	LevelFive *HierarchyLevel `type:"structure"`
+
+	// A HierarchyLevel object that contains information about the hierarchy group
+	// level.
+	LevelFour *HierarchyLevel `type:"structure"`
+
+	// A HierarchyLevel object that contains information about the hierarchy group
+	// level.
+	LevelOne *HierarchyLevel `type:"structure"`
+
+	// A HierarchyLevel object that contains information about the hierarchy group
+	// level.
+	LevelThree *HierarchyLevel `type:"structure"`
+
+	// A HierarchyLevel object that contains information about the hierarchy group
+	// level.
+	LevelTwo *HierarchyLevel `type:"structure"`
+}
+
+// String returns the string representation
+func (s HierarchyStructure) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HierarchyStructure) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HierarchyStructure) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LevelFive != nil {
+		v := s.LevelFive
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelFive", v, metadata)
+	}
+	if s.LevelFour != nil {
+		v := s.LevelFour
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelFour", v, metadata)
+	}
+	if s.LevelOne != nil {
+		v := s.LevelOne
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelOne", v, metadata)
+	}
+	if s.LevelThree != nil {
+		v := s.LevelThree
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelThree", v, metadata)
+	}
+	if s.LevelTwo != nil {
+		v := s.LevelTwo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LevelTwo", v, metadata)
+	}
+	return nil
+}
+
+// A HistoricalMetric object that contains the Name, Unit, Statistic, and Threshold
+// for the metric.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetric
+type HistoricalMetric struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the historical metric.
+	Name HistoricalMetricName `type:"string" enum:"true"`
+
+	// The statistic for the metric: SUM, MAX, or SUM.
+	Statistic Statistic `type:"string" enum:"true"`
+
+	// The threshold for the metric, used with service level metrics.
+	Threshold *Threshold `type:"structure"`
+
+	// The unit for the metric: COUNT, PERCENT, or SECONDS.
+	Unit Unit `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s HistoricalMetric) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HistoricalMetric) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HistoricalMetric) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Statistic) > 0 {
+		v := s.Statistic
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Statistic", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Threshold != nil {
+		v := s.Threshold
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Threshold", v, metadata)
+	}
+	if len(s.Unit) > 0 {
+		v := s.Unit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Unit", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// A HistoricalMetricData object than contains a Metric and a Value.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricData
+type HistoricalMetricData struct {
+	_ struct{} `type:"structure"`
+
+	// A HistoricalMetric object.
+	Metric *HistoricalMetric `type:"structure"`
+
+	// The Value of the metric.
+	Value *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s HistoricalMetricData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HistoricalMetricData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HistoricalMetricData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Metric != nil {
+		v := s.Metric
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Metric", v, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// The metrics data returned from a GetMetricData operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HistoricalMetricResult
+type HistoricalMetricResult struct {
+	_ struct{} `type:"structure"`
+
+	// A list of HistoricalMetricData objects.
+	Collections []HistoricalMetricData `type:"list"`
+
+	// The Dimensions for the metrics.
+	Dimensions *Dimensions `type:"structure"`
+}
+
+// String returns the string representation
+func (s HistoricalMetricResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HistoricalMetricResult) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HistoricalMetricResult) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Collections) > 0 {
+		v := s.Collections
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Collections", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Dimensions != nil {
+		v := s.Dimensions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Dimensions", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesRequest
+type ListRoutingProfilesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The maximum number of routing profiles to return in the response.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListRoutingProfilesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRoutingProfilesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListRoutingProfilesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListRoutingProfilesInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListRoutingProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListRoutingProfilesResponse
+type ListRoutingProfilesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A string returned in the response. Use the value returned in the response
+	// as the value of the NextToken in a subsequent request to retrieve the next
+	// set of results.
+	NextToken *string `type:"string"`
+
+	// An array of RoutingProfileSummary objects that include the ARN, Id, and Name
+	// of the routing profile.
+	RoutingProfileSummaryList []RoutingProfileSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListRoutingProfilesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListRoutingProfilesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListRoutingProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListRoutingProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.RoutingProfileSummaryList) > 0 {
+		v := s.RoutingProfileSummaryList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "RoutingProfileSummaryList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilesRequest
+type ListSecurityProfilesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The maximum number of security profiles to return.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSecurityProfilesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSecurityProfilesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSecurityProfilesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSecurityProfilesInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSecurityProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfilesResponse
+type ListSecurityProfilesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A string returned in the response. Use the value returned in the response
+	// as the value of the NextToken in a subsequent request to retrieve the next
+	// set of results.
+	NextToken *string `type:"string"`
+
+	// An array of SecurityProfileSummary objects.
+	SecurityProfileSummaryList []SecurityProfileSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSecurityProfilesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSecurityProfilesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSecurityProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSecurityProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityProfileSummaryList) > 0 {
+		v := s.SecurityProfileSummaryList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityProfileSummaryList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroupsRequest
+type ListUserHierarchyGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The maximum number of hierarchy groups to return.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListUserHierarchyGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListUserHierarchyGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListUserHierarchyGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListUserHierarchyGroupsInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUserHierarchyGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUserHierarchyGroupsResponse
+type ListUserHierarchyGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A string returned in the response. Use the value returned in the response
+	// as the value of the NextToken in a subsequent request to retrieve the next
+	// set of results.
+	NextToken *string `type:"string"`
+
+	// An array of HierarchyGroupSummary objects.
+	UserHierarchyGroupSummaryList []HierarchyGroupSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListUserHierarchyGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListUserHierarchyGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUserHierarchyGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUserHierarchyGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UserHierarchyGroupSummaryList) > 0 {
+		v := s.UserHierarchyGroupSummaryList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UserHierarchyGroupSummaryList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsersRequest
+type ListUsersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The maximum number of results to return in the response.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListUsersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListUsersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListUsersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListUsersResponse
+type ListUsersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A string returned in the response. Use the value returned in the response
+	// as the value of the NextToken in a subsequent request to retrieve the next
+	// set of results.
+	NextToken *string `type:"string"`
+
+	// An array of UserSummary objects that contain information about the users
+	// in your instance.
+	UserSummaryList []UserSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListUsersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListUsersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UserSummaryList) > 0 {
+		v := s.UserSummaryList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UserSummaryList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// A QueueReference object that contains the the QueueId and ARN for the queue
+// resource for which metrics are returned.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QueueReference
+type QueueReference struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of queue.
+	Arn *string `type:"string"`
+
+	// The ID of the queue associated with the metrics returned.
+	Id *string `type:"string"`
+}
+
+// String returns the string representation
+func (s QueueReference) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueueReference) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueueReference) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A RoutingProfileSummary object that contains information about a routing
+// profile, including ARN, Id, and Name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileSummary
+type RoutingProfileSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the routing profile.
+	Arn *string `type:"string"`
+
+	// The identifier of the routing profile.
+	Id *string `type:"string"`
+
+	// The name of the routing profile.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RoutingProfileSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RoutingProfileSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RoutingProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A SecurityProfileSummary object that contains information about a security
+// profile, including ARN, Id, Name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SecurityProfileSummary
+type SecurityProfileSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the security profile.
+	Arn *string `type:"string"`
+
+	// The identifier of the security profile.
+	Id *string `type:"string"`
+
+	// The name of the security profile.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SecurityProfileSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SecurityProfileSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SecurityProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactRequest
 type StartOutboundVoiceContactInput struct {
 	_ struct{} `type:"structure"`
@@ -129,8 +3918,8 @@ type StartOutboundVoiceContactInput struct {
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs. Attribute
 	// keys can include only alphanumeric, dash, and underscore characters.
 	//
-	// For example, to play a greeting when the customer answers the call, you can
-	// pass the customer name in attributes similar to the following:
+	// For example, if you want play a greeting when the customer answers the call,
+	// you can pass the customer name in attributes similar to the following:
 	Attributes map[string]string `type:"map"`
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
@@ -139,48 +3928,42 @@ type StartOutboundVoiceContactInput struct {
 	// a new contact is started.
 	ClientToken *string `type:"string" idempotencyToken:"true"`
 
-	// The identifier for the contact flow to execute for the outbound call. This
-	// is a GUID value only. Amazon Resource Name (ARN) values are not supported.
+	// The identifier for the contact flow to connect the outbound call to.
 	//
-	// To find the ContactFlowId, open the contact flow to use in the Amazon Connect
-	// contact flow designer. The ID for the contact flow is displayed in the address
-	// bar as part of the URL. For example, an address displayed when you open a
-	// contact flow is similar to the following: https://myconnectinstance.awsapps.com/connect/contact-flows/edit?id=arn:aws:connect:us-east-1:361814831152:instance/2fb42df9-78a2-4b99-b484-f5cf80dc300c/contact-flow/b0b8f2dd-ed1b-4c44-af36-ce189a178181.
-	// At the end of the URL, you see contact-flow/b0b8f2dd-ed1b-4c44-af36-ce189a178181.
-	// The ContactFlowID for this contact flow is b0b8f2dd-ed1b-4c44-af36-ce189a178181.
-	// Make sure to include only the GUID after the "contact-flow/" in your requests.
+	// To find the ContactFlowId, open the contact flow you want to use in the Amazon
+	// Connect contact flow editor. The ID for the contact flow is displayed in
+	// the address bar as part of the URL. For example, the contact flow ID is the
+	// set of characters at the end of the URL, after 'contact-flow/' such as 78ea8fd5-2659-4f2b-b528-699760ccfc1b.
 	//
 	// ContactFlowId is a required field
 	ContactFlowId *string `type:"string" required:"true"`
 
-	// The phone number, in E.164 format, of the customer to call with the outbound
-	// contact.
+	// The phone number of the customer in E.164 format.
 	//
 	// DestinationPhoneNumber is a required field
 	DestinationPhoneNumber *string `type:"string" required:"true"`
 
-	// The identifier for your Amazon Connect instance. To find the InstanceId value
-	// for your Amazon Connect instance, open the Amazon Connect console (https://console.aws.amazon.com/connect/).
-	// Select the instance alias of the instance and view the instance ID in the
-	// Overview section. For example, the instance ID is the set of characters at
-	// the end of the instance ARN, after "instance/", such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
 	//
 	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
+	InstanceId *string `min:"1" type:"string" required:"true"`
 
-	// The queue to which to add the call. If you specify a queue, the phone displayed
-	// for caller ID is the phone number defined for the queue. If you do not specify
-	// a queue, the queue used is the queue defined in the contact flow specified
-	// by ContactFlowId.
+	// The queue to add the call to. If you specify a queue, the phone displayed
+	// for caller ID is the phone number specified in the queue. If you do not specify
+	// a queue, the queue used will be the queue defined in the contact flow.
 	//
-	// To find the QueueId, open the queue to use in the Amazon Connect queue editor.
-	// The ID for the queue is displayed in the address bar as part of the URL.
-	// For example, the QueueId value is the set of characters at the end of the
-	// URL, after "queue/", such as aeg40574-2d01-51c3-73d6-bf8624d2168c.
+	// To find the QueueId, open the queue you want to use in the Amazon Connect
+	// Queue editor. The ID for the queue is displayed in the address bar as part
+	// of the URL. For example, the queue ID is the set of characters at the end
+	// of the URL, after 'queue/' such as queue/aeg40574-2d01-51c3-73d6-bf8624d2168c.
 	QueueId *string `type:"string"`
 
 	// The phone number, in E.164 format, associated with your Amazon Connect instance
-	// to use to place the outbound call.
+	// to use for the outbound call.
 	SourcePhoneNumber *string `type:"string"`
 }
 
@@ -208,6 +3991,9 @@ func (s *StartOutboundVoiceContactInput) Validate() error {
 
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -317,16 +4103,19 @@ func (s StartOutboundVoiceContactOutput) MarshalFields(e protocol.FieldEncoder) 
 type StopContactInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier of the contact to end. This is the ContactId value
-	// returned from the StartOutboundVoiceContact operation.
+	// The unique identifier of the contact to end.
 	//
 	// ContactId is a required field
 	ContactId *string `min:"1" type:"string" required:"true"`
 
-	// The identifier of the Amazon Connect instance in which the contact is active.
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
 	//
 	// InstanceId is a required field
-	InstanceId *string `type:"string" required:"true"`
+	InstanceId *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -352,6 +4141,9 @@ func (s *StopContactInput) Validate() error {
 
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -404,4 +4196,1206 @@ func (s StopContactOutput) SDKResponseMetadata() aws.Response {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s StopContactOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
+}
+
+// A Threshold object that includes a comparison and ThresholdValue to compare
+// to. Used with service level metrics.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Threshold
+type Threshold struct {
+	_ struct{} `type:"structure"`
+
+	// The Threshold to use to compare service level metrics to. Only "Less than"
+	// (LT) comparisons are supported.
+	Comparison Comparison `type:"string" enum:"true"`
+
+	// The value of the threshold to compare the metric to. Only "Less than" (LT)
+	// comparisons are supported.
+	ThresholdValue *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s Threshold) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Threshold) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Threshold) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Comparison) > 0 {
+		v := s.Comparison
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comparison", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ThresholdValue != nil {
+		v := *s.ThresholdValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThresholdValue", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesRequest
+type UpdateContactAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The key-value pairs for the attribute to update.
+	//
+	// Attributes is a required field
+	Attributes map[string]string `type:"map" required:"true"`
+
+	// The unique identifier of the contact for which to update attributes. This
+	// is the identifier for the contact associated with the first interaction with
+	// the contact center.
+	//
+	// InitialContactId is a required field
+	InitialContactId *string `min:"1" type:"string" required:"true"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateContactAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateContactAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateContactAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateContactAttributesInput"}
+
+	if s.Attributes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
+	}
+
+	if s.InitialContactId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InitialContactId"))
+	}
+	if s.InitialContactId != nil && len(*s.InitialContactId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InitialContactId", 1))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateContactAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.InitialContactId != nil {
+		v := *s.InitialContactId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitialContactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateContactAttributesResponse
+type UpdateContactAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateContactAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateContactAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateContactAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateContactAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyRequest
+type UpdateUserHierarchyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for the hierarchy group to assign to the user.
+	HierarchyGroupId *string `type:"string"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The identifier of the user account to assign the hierarchy group to.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateUserHierarchyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserHierarchyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUserHierarchyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserHierarchyInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserHierarchyInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.HierarchyGroupId != nil {
+		v := *s.HierarchyGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HierarchyGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserHierarchyOutput
+type UpdateUserHierarchyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateUserHierarchyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserHierarchyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserHierarchyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserHierarchyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfoRequest
+type UpdateUserIdentityInfoInput struct {
+	_ struct{} `type:"structure"`
+
+	// A UserIdentityInfo object.
+	//
+	// IdentityInfo is a required field
+	IdentityInfo *UserIdentityInfo `type:"structure" required:"true"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The identifier for the user account to update identity information for.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateUserIdentityInfoInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserIdentityInfoInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUserIdentityInfoInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserIdentityInfoInput"}
+
+	if s.IdentityInfo == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IdentityInfo"))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+	if s.IdentityInfo != nil {
+		if err := s.IdentityInfo.Validate(); err != nil {
+			invalidParams.AddNested("IdentityInfo", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserIdentityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.IdentityInfo != nil {
+		v := s.IdentityInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "IdentityInfo", v, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserIdentityInfoOutput
+type UpdateUserIdentityInfoOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateUserIdentityInfoOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserIdentityInfoOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserIdentityInfoOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserIdentityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfigRequest
+type UpdateUserPhoneConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// A UserPhoneConfig object that contains settings for AfterContactWorkTimeLimit,
+	// AutoAccept, DeskPhoneNumber, and PhoneType to assign to the user.
+	//
+	// PhoneConfig is a required field
+	PhoneConfig *UserPhoneConfig `type:"structure" required:"true"`
+
+	// The identifier for the user account to change phone settings for.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateUserPhoneConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserPhoneConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUserPhoneConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserPhoneConfigInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.PhoneConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneConfig"))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+	if s.PhoneConfig != nil {
+		if err := s.PhoneConfig.Validate(); err != nil {
+			invalidParams.AddNested("PhoneConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserPhoneConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.PhoneConfig != nil {
+		v := s.PhoneConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneConfig", v, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserPhoneConfigOutput
+type UpdateUserPhoneConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateUserPhoneConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserPhoneConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserPhoneConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserPhoneConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserRoutingProfileRequest
+type UpdateUserRoutingProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The identifier of the routing profile to assign to the user.
+	//
+	// RoutingProfileId is a required field
+	RoutingProfileId *string `type:"string" required:"true"`
+
+	// The identifier for the user account to assign the routing profile to.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateUserRoutingProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserRoutingProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUserRoutingProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserRoutingProfileInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.RoutingProfileId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoutingProfileId"))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserRoutingProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.RoutingProfileId != nil {
+		v := *s.RoutingProfileId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoutingProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserRoutingProfileOutput
+type UpdateUserRoutingProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateUserRoutingProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserRoutingProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserRoutingProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserRoutingProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfilesRequest
+type UpdateUserSecurityProfilesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier for your Amazon Connect instance. To find the ID of your instance,
+	// open the AWS console and select Amazon Connect. Select the alias of the instance
+	// in the Instance alias column. The instance ID is displayed in the Overview
+	// section of your instance settings. For example, the instance ID is the set
+	// of characters at the end of the instance ARN, after instance/, such as 10a4c4eb-f57e-4d4c-b602-bf39176ced07.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+
+	// The identifiers for the security profiles to assign to the user.
+	//
+	// SecurityProfileIds is a required field
+	SecurityProfileIds []string `min:"1" type:"list" required:"true"`
+
+	// The identifier of the user account to assign the security profiles.
+	//
+	// UserId is a required field
+	UserId *string `location:"uri" locationName:"UserId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateUserSecurityProfilesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserSecurityProfilesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUserSecurityProfilesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserSecurityProfilesInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if s.SecurityProfileIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityProfileIds"))
+	}
+	if s.SecurityProfileIds != nil && len(s.SecurityProfileIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityProfileIds", 1))
+	}
+
+	if s.UserId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserSecurityProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.SecurityProfileIds) > 0 {
+		v := s.SecurityProfileIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityProfileIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "UserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateUserSecurityProfilesOutput
+type UpdateUserSecurityProfilesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateUserSecurityProfilesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUserSecurityProfilesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUserSecurityProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserSecurityProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// A User object that contains information about a user account in your Amazon
+// Connect instance, including configuration settings.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/User
+type User struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the user account.
+	Arn *string `type:"string"`
+
+	// The directory Id for the user account in the existing directory used for
+	// identity management.
+	DirectoryUserId *string `type:"string"`
+
+	// The identifier for the hierarchy group assigned to the user.
+	HierarchyGroupId *string `type:"string"`
+
+	// The identifier of the user account.
+	Id *string `type:"string"`
+
+	// A UserIdentityInfo object.
+	IdentityInfo *UserIdentityInfo `type:"structure"`
+
+	// A UserPhoneConfig object.
+	PhoneConfig *UserPhoneConfig `type:"structure"`
+
+	// The identifier of the routing profile assigned to the user.
+	RoutingProfileId *string `type:"string"`
+
+	// The identifier(s) for the security profile assigned to the user.
+	SecurityProfileIds []string `min:"1" type:"list"`
+
+	// The user name assigned to the user account.
+	Username *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s User) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s User) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s User) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DirectoryUserId != nil {
+		v := *s.DirectoryUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DirectoryUserId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HierarchyGroupId != nil {
+		v := *s.HierarchyGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HierarchyGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IdentityInfo != nil {
+		v := s.IdentityInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "IdentityInfo", v, metadata)
+	}
+	if s.PhoneConfig != nil {
+		v := s.PhoneConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PhoneConfig", v, metadata)
+	}
+	if s.RoutingProfileId != nil {
+		v := *s.RoutingProfileId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoutingProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityProfileIds) > 0 {
+		v := s.SecurityProfileIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SecurityProfileIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A UserIdentityInfo object that contains information about the user's identity,
+// including email address, first name, and last name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserIdentityInfo
+type UserIdentityInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The email address added to the user account. If you are using SAML for identity
+	// management and include this parameter, an InvalidRequestException is returned.
+	Email *string `type:"string"`
+
+	// The first name used in the user account. This is required if you are using
+	// Amazon Connect or SAML for identity management.
+	FirstName *string `min:"1" type:"string"`
+
+	// The last name used in the user account. This is required if you are using
+	// Amazon Connect or SAML for identity management.
+	LastName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UserIdentityInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserIdentityInfo) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserIdentityInfo) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserIdentityInfo"}
+	if s.FirstName != nil && len(*s.FirstName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FirstName", 1))
+	}
+	if s.LastName != nil && len(*s.LastName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LastName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserIdentityInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Email != nil {
+		v := *s.Email
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Email", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FirstName != nil {
+		v := *s.FirstName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FirstName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastName != nil {
+		v := *s.LastName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A UserPhoneConfig object that contains information about the user phone configuration
+// settings.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserPhoneConfig
+type UserPhoneConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The After Call Work (ACW) timeout setting, in seconds, for the user.
+	AfterContactWorkTimeLimit *int64 `type:"integer"`
+
+	// The Auto accept setting for the user, Yes or No.
+	AutoAccept *bool `type:"boolean"`
+
+	// The phone number for the user's desk phone.
+	DeskPhoneNumber *string `type:"string"`
+
+	// The phone type selected for the user, either Soft phone or Desk phone.
+	//
+	// PhoneType is a required field
+	PhoneType PhoneType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s UserPhoneConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserPhoneConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserPhoneConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserPhoneConfig"}
+	if len(s.PhoneType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserPhoneConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AfterContactWorkTimeLimit != nil {
+		v := *s.AfterContactWorkTimeLimit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AfterContactWorkTimeLimit", protocol.Int64Value(v), metadata)
+	}
+	if s.AutoAccept != nil {
+		v := *s.AutoAccept
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AutoAccept", protocol.BoolValue(v), metadata)
+	}
+	if s.DeskPhoneNumber != nil {
+		v := *s.DeskPhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeskPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PhoneType) > 0 {
+		v := s.PhoneType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PhoneType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// A UserSummary object that contains Information about a user, including ARN,
+// Id, and user name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSummary
+type UserSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN for the user account.
+	Arn *string `type:"string"`
+
+	// The identifier for the user account.
+	Id *string `type:"string"`
+
+	// The Amazon Connect user name for the user account.
+	Username *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UserSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type Channel string
+
+// Enum values for Channel
+const (
+	ChannelVoice Channel = "VOICE"
+)
+
+func (enum Channel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Channel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Comparison string
+
+// Enum values for Comparison
+const (
+	ComparisonLt Comparison = "LT"
+)
+
+func (enum Comparison) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Comparison) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// A list of current metric names.
+type CurrentMetricName string
+
+// Enum values for CurrentMetricName
+const (
+	CurrentMetricNameAgentsOnline           CurrentMetricName = "AGENTS_ONLINE"
+	CurrentMetricNameAgentsAvailable        CurrentMetricName = "AGENTS_AVAILABLE"
+	CurrentMetricNameAgentsOnCall           CurrentMetricName = "AGENTS_ON_CALL"
+	CurrentMetricNameAgentsNonProductive    CurrentMetricName = "AGENTS_NON_PRODUCTIVE"
+	CurrentMetricNameAgentsAfterContactWork CurrentMetricName = "AGENTS_AFTER_CONTACT_WORK"
+	CurrentMetricNameAgentsError            CurrentMetricName = "AGENTS_ERROR"
+	CurrentMetricNameAgentsStaffed          CurrentMetricName = "AGENTS_STAFFED"
+	CurrentMetricNameContactsInQueue        CurrentMetricName = "CONTACTS_IN_QUEUE"
+	CurrentMetricNameOldestContactAge       CurrentMetricName = "OLDEST_CONTACT_AGE"
+	CurrentMetricNameContactsScheduled      CurrentMetricName = "CONTACTS_SCHEDULED"
+)
+
+func (enum CurrentMetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CurrentMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Grouping string
+
+// Enum values for Grouping
+const (
+	GroupingQueue   Grouping = "QUEUE"
+	GroupingChannel Grouping = "CHANNEL"
+)
+
+func (enum Grouping) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Grouping) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// A list of historical metric names.
+type HistoricalMetricName string
+
+// Enum values for HistoricalMetricName
+const (
+	HistoricalMetricNameContactsQueued                  HistoricalMetricName = "CONTACTS_QUEUED"
+	HistoricalMetricNameContactsHandled                 HistoricalMetricName = "CONTACTS_HANDLED"
+	HistoricalMetricNameContactsAbandoned               HistoricalMetricName = "CONTACTS_ABANDONED"
+	HistoricalMetricNameContactsConsulted               HistoricalMetricName = "CONTACTS_CONSULTED"
+	HistoricalMetricNameContactsAgentHungUpFirst        HistoricalMetricName = "CONTACTS_AGENT_HUNG_UP_FIRST"
+	HistoricalMetricNameContactsHandledIncoming         HistoricalMetricName = "CONTACTS_HANDLED_INCOMING"
+	HistoricalMetricNameContactsHandledOutbound         HistoricalMetricName = "CONTACTS_HANDLED_OUTBOUND"
+	HistoricalMetricNameContactsHoldAbandons            HistoricalMetricName = "CONTACTS_HOLD_ABANDONS"
+	HistoricalMetricNameContactsTransferredIn           HistoricalMetricName = "CONTACTS_TRANSFERRED_IN"
+	HistoricalMetricNameContactsTransferredOut          HistoricalMetricName = "CONTACTS_TRANSFERRED_OUT"
+	HistoricalMetricNameContactsTransferredInFromQueue  HistoricalMetricName = "CONTACTS_TRANSFERRED_IN_FROM_QUEUE"
+	HistoricalMetricNameContactsTransferredOutFromQueue HistoricalMetricName = "CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"
+	HistoricalMetricNameContactsMissed                  HistoricalMetricName = "CONTACTS_MISSED"
+	HistoricalMetricNameCallbackContactsHandled         HistoricalMetricName = "CALLBACK_CONTACTS_HANDLED"
+	HistoricalMetricNameApiContactsHandled              HistoricalMetricName = "API_CONTACTS_HANDLED"
+	HistoricalMetricNameOccupancy                       HistoricalMetricName = "OCCUPANCY"
+	HistoricalMetricNameHandleTime                      HistoricalMetricName = "HANDLE_TIME"
+	HistoricalMetricNameAfterContactWorkTime            HistoricalMetricName = "AFTER_CONTACT_WORK_TIME"
+	HistoricalMetricNameQueuedTime                      HistoricalMetricName = "QUEUED_TIME"
+	HistoricalMetricNameAbandonTime                     HistoricalMetricName = "ABANDON_TIME"
+	HistoricalMetricNameQueueAnswerTime                 HistoricalMetricName = "QUEUE_ANSWER_TIME"
+	HistoricalMetricNameHoldTime                        HistoricalMetricName = "HOLD_TIME"
+	HistoricalMetricNameInteractionTime                 HistoricalMetricName = "INTERACTION_TIME"
+	HistoricalMetricNameInteractionAndHoldTime          HistoricalMetricName = "INTERACTION_AND_HOLD_TIME"
+	HistoricalMetricNameServiceLevel                    HistoricalMetricName = "SERVICE_LEVEL"
+)
+
+func (enum HistoricalMetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HistoricalMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PhoneType string
+
+// Enum values for PhoneType
+const (
+	PhoneTypeSoftPhone PhoneType = "SOFT_PHONE"
+	PhoneTypeDeskPhone PhoneType = "DESK_PHONE"
+)
+
+func (enum PhoneType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PhoneType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Statistic string
+
+// Enum values for Statistic
+const (
+	StatisticSum Statistic = "SUM"
+	StatisticMax Statistic = "MAX"
+	StatisticAvg Statistic = "AVG"
+)
+
+func (enum Statistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Statistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Unit string
+
+// Enum values for Unit
+const (
+	UnitSeconds Unit = "SECONDS"
+	UnitCount   Unit = "COUNT"
+	UnitPercent Unit = "PERCENT"
+)
+
+func (enum Unit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Unit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }

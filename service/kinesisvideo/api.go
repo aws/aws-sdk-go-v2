@@ -599,6 +599,11 @@ type CreateStreamInput struct {
 	// stream.
 	//
 	// The default value is 0, indicating that the stream does not persist data.
+	//
+	// When the DataRetentionInHours value is 0, consumers can still consume the
+	// fragments that remain in the service host buffer, which has a retention time
+	// limit of 5 minutes and a retention memory limit of 200 MB. Fragments are
+	// removed from the buffer when either limit is reached.
 	DataRetentionInHours *int64 `type:"integer"`
 
 	// The name of the device that is writing to the stream.
@@ -1802,7 +1807,7 @@ type UpdateStreamInput struct {
 	// The stream's media type. Use MediaType to specify the type of content that
 	// the stream contains to the consumers of the stream. For more information
 	// about media types, see Media Types (http://www.iana.org/assignments/media-types/media-types.xhtml).
-	// If you choose to specify the MediaType, see Naming Requirements (https://tools.sietf.org/html/rfc6838#section-4.2).
+	// If you choose to specify the MediaType, see Naming Requirements (https://tools.ietf.org/html/rfc6838#section-4.2).
 	//
 	// To play video on the console, you must specify the correct video type. For
 	// example, if the video in the stream is H.264, specify video/h264 as the MediaType.
@@ -1924,10 +1929,11 @@ type APIName string
 
 // Enum values for APIName
 const (
-	APINamePutMedia                APIName = "PUT_MEDIA"
-	APINameGetMedia                APIName = "GET_MEDIA"
-	APINameListFragments           APIName = "LIST_FRAGMENTS"
-	APINameGetMediaForFragmentList APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
+	APINamePutMedia                  APIName = "PUT_MEDIA"
+	APINameGetMedia                  APIName = "GET_MEDIA"
+	APINameListFragments             APIName = "LIST_FRAGMENTS"
+	APINameGetMediaForFragmentList   APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
+	APINameGetHlsStreamingSessionUrl APIName = "GET_HLS_STREAMING_SESSION_URL"
 )
 
 func (enum APIName) MarshalValue() (string, error) {

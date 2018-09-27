@@ -96,6 +96,12 @@ type MediaConvertAPI interface {
 
 	ListQueuesRequest(*mediaconvert.ListQueuesInput) mediaconvert.ListQueuesRequest
 
+	ListTagsForResourceRequest(*mediaconvert.ListTagsForResourceInput) mediaconvert.ListTagsForResourceRequest
+
+	TagResourceRequest(*mediaconvert.TagResourceInput) mediaconvert.TagResourceRequest
+
+	UntagResourceRequest(*mediaconvert.UntagResourceInput) mediaconvert.UntagResourceRequest
+
 	UpdateJobTemplateRequest(*mediaconvert.UpdateJobTemplateInput) mediaconvert.UpdateJobTemplateRequest
 
 	UpdatePresetRequest(*mediaconvert.UpdatePresetInput) mediaconvert.UpdatePresetRequest

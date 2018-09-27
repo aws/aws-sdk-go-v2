@@ -72,7 +72,11 @@ type IoTAPI interface {
 
 	AttachPrincipalPolicyRequest(*iot.AttachPrincipalPolicyInput) iot.AttachPrincipalPolicyRequest
 
+	AttachSecurityProfileRequest(*iot.AttachSecurityProfileInput) iot.AttachSecurityProfileRequest
+
 	AttachThingPrincipalRequest(*iot.AttachThingPrincipalInput) iot.AttachThingPrincipalRequest
+
+	CancelAuditTaskRequest(*iot.CancelAuditTaskInput) iot.CancelAuditTaskRequest
 
 	CancelCertificateTransferRequest(*iot.CancelCertificateTransferInput) iot.CancelCertificateTransferRequest
 
@@ -98,6 +102,10 @@ type IoTAPI interface {
 
 	CreateRoleAliasRequest(*iot.CreateRoleAliasInput) iot.CreateRoleAliasRequest
 
+	CreateScheduledAuditRequest(*iot.CreateScheduledAuditInput) iot.CreateScheduledAuditRequest
+
+	CreateSecurityProfileRequest(*iot.CreateSecurityProfileInput) iot.CreateSecurityProfileRequest
+
 	CreateStreamRequest(*iot.CreateStreamInput) iot.CreateStreamRequest
 
 	CreateThingRequest(*iot.CreateThingInput) iot.CreateThingRequest
@@ -107,6 +115,8 @@ type IoTAPI interface {
 	CreateThingTypeRequest(*iot.CreateThingTypeInput) iot.CreateThingTypeRequest
 
 	CreateTopicRuleRequest(*iot.CreateTopicRuleInput) iot.CreateTopicRuleRequest
+
+	DeleteAccountAuditConfigurationRequest(*iot.DeleteAccountAuditConfigurationInput) iot.DeleteAccountAuditConfigurationRequest
 
 	DeleteAuthorizerRequest(*iot.DeleteAuthorizerInput) iot.DeleteAuthorizerRequest
 
@@ -128,6 +138,10 @@ type IoTAPI interface {
 
 	DeleteRoleAliasRequest(*iot.DeleteRoleAliasInput) iot.DeleteRoleAliasRequest
 
+	DeleteScheduledAuditRequest(*iot.DeleteScheduledAuditInput) iot.DeleteScheduledAuditRequest
+
+	DeleteSecurityProfileRequest(*iot.DeleteSecurityProfileInput) iot.DeleteSecurityProfileRequest
+
 	DeleteStreamRequest(*iot.DeleteStreamInput) iot.DeleteStreamRequest
 
 	DeleteThingRequest(*iot.DeleteThingInput) iot.DeleteThingRequest
@@ -141,6 +155,10 @@ type IoTAPI interface {
 	DeleteV2LoggingLevelRequest(*iot.DeleteV2LoggingLevelInput) iot.DeleteV2LoggingLevelRequest
 
 	DeprecateThingTypeRequest(*iot.DeprecateThingTypeInput) iot.DeprecateThingTypeRequest
+
+	DescribeAccountAuditConfigurationRequest(*iot.DescribeAccountAuditConfigurationInput) iot.DescribeAccountAuditConfigurationRequest
+
+	DescribeAuditTaskRequest(*iot.DescribeAuditTaskInput) iot.DescribeAuditTaskRequest
 
 	DescribeAuthorizerRequest(*iot.DescribeAuthorizerInput) iot.DescribeAuthorizerRequest
 
@@ -162,6 +180,10 @@ type IoTAPI interface {
 
 	DescribeRoleAliasRequest(*iot.DescribeRoleAliasInput) iot.DescribeRoleAliasRequest
 
+	DescribeScheduledAuditRequest(*iot.DescribeScheduledAuditInput) iot.DescribeScheduledAuditRequest
+
+	DescribeSecurityProfileRequest(*iot.DescribeSecurityProfileInput) iot.DescribeSecurityProfileRequest
+
 	DescribeStreamRequest(*iot.DescribeStreamInput) iot.DescribeStreamRequest
 
 	DescribeThingRequest(*iot.DescribeThingInput) iot.DescribeThingRequest
@@ -175,6 +197,8 @@ type IoTAPI interface {
 	DetachPolicyRequest(*iot.DetachPolicyInput) iot.DetachPolicyRequest
 
 	DetachPrincipalPolicyRequest(*iot.DetachPrincipalPolicyInput) iot.DetachPrincipalPolicyRequest
+
+	DetachSecurityProfileRequest(*iot.DetachSecurityProfileInput) iot.DetachSecurityProfileRequest
 
 	DetachThingPrincipalRequest(*iot.DetachThingPrincipalInput) iot.DetachThingPrincipalRequest
 
@@ -202,7 +226,13 @@ type IoTAPI interface {
 
 	GetV2LoggingOptionsRequest(*iot.GetV2LoggingOptionsInput) iot.GetV2LoggingOptionsRequest
 
+	ListActiveViolationsRequest(*iot.ListActiveViolationsInput) iot.ListActiveViolationsRequest
+
 	ListAttachedPoliciesRequest(*iot.ListAttachedPoliciesInput) iot.ListAttachedPoliciesRequest
+
+	ListAuditFindingsRequest(*iot.ListAuditFindingsInput) iot.ListAuditFindingsRequest
+
+	ListAuditTasksRequest(*iot.ListAuditTasksInput) iot.ListAuditTasksRequest
 
 	ListAuthorizersRequest(*iot.ListAuthorizersInput) iot.ListAuthorizersRequest
 
@@ -236,9 +266,17 @@ type IoTAPI interface {
 
 	ListRoleAliasesRequest(*iot.ListRoleAliasesInput) iot.ListRoleAliasesRequest
 
+	ListScheduledAuditsRequest(*iot.ListScheduledAuditsInput) iot.ListScheduledAuditsRequest
+
+	ListSecurityProfilesRequest(*iot.ListSecurityProfilesInput) iot.ListSecurityProfilesRequest
+
+	ListSecurityProfilesForTargetRequest(*iot.ListSecurityProfilesForTargetInput) iot.ListSecurityProfilesForTargetRequest
+
 	ListStreamsRequest(*iot.ListStreamsInput) iot.ListStreamsRequest
 
 	ListTargetsForPolicyRequest(*iot.ListTargetsForPolicyInput) iot.ListTargetsForPolicyRequest
+
+	ListTargetsForSecurityProfileRequest(*iot.ListTargetsForSecurityProfileInput) iot.ListTargetsForSecurityProfileRequest
 
 	ListThingGroupsRequest(*iot.ListThingGroupsInput) iot.ListThingGroupsRequest
 
@@ -259,6 +297,8 @@ type IoTAPI interface {
 	ListTopicRulesRequest(*iot.ListTopicRulesInput) iot.ListTopicRulesRequest
 
 	ListV2LoggingLevelsRequest(*iot.ListV2LoggingLevelsInput) iot.ListV2LoggingLevelsRequest
+
+	ListViolationEventsRequest(*iot.ListViolationEventsInput) iot.ListViolationEventsRequest
 
 	RegisterCACertificateRequest(*iot.RegisterCACertificateInput) iot.RegisterCACertificateRequest
 
@@ -284,6 +324,8 @@ type IoTAPI interface {
 
 	SetV2LoggingOptionsRequest(*iot.SetV2LoggingOptionsInput) iot.SetV2LoggingOptionsRequest
 
+	StartOnDemandAuditTaskRequest(*iot.StartOnDemandAuditTaskInput) iot.StartOnDemandAuditTaskRequest
+
 	StartThingRegistrationTaskRequest(*iot.StartThingRegistrationTaskInput) iot.StartThingRegistrationTaskRequest
 
 	StopThingRegistrationTaskRequest(*iot.StopThingRegistrationTaskInput) iot.StopThingRegistrationTaskRequest
@@ -293,6 +335,8 @@ type IoTAPI interface {
 	TestInvokeAuthorizerRequest(*iot.TestInvokeAuthorizerInput) iot.TestInvokeAuthorizerRequest
 
 	TransferCertificateRequest(*iot.TransferCertificateInput) iot.TransferCertificateRequest
+
+	UpdateAccountAuditConfigurationRequest(*iot.UpdateAccountAuditConfigurationInput) iot.UpdateAccountAuditConfigurationRequest
 
 	UpdateAuthorizerRequest(*iot.UpdateAuthorizerInput) iot.UpdateAuthorizerRequest
 
@@ -306,6 +350,10 @@ type IoTAPI interface {
 
 	UpdateRoleAliasRequest(*iot.UpdateRoleAliasInput) iot.UpdateRoleAliasRequest
 
+	UpdateScheduledAuditRequest(*iot.UpdateScheduledAuditInput) iot.UpdateScheduledAuditRequest
+
+	UpdateSecurityProfileRequest(*iot.UpdateSecurityProfileInput) iot.UpdateSecurityProfileRequest
+
 	UpdateStreamRequest(*iot.UpdateStreamInput) iot.UpdateStreamRequest
 
 	UpdateThingRequest(*iot.UpdateThingInput) iot.UpdateThingRequest
@@ -313,6 +361,8 @@ type IoTAPI interface {
 	UpdateThingGroupRequest(*iot.UpdateThingGroupInput) iot.UpdateThingGroupRequest
 
 	UpdateThingGroupsForThingRequest(*iot.UpdateThingGroupsForThingInput) iot.UpdateThingGroupsForThingRequest
+
+	ValidateSecurityProfileBehaviorsRequest(*iot.ValidateSecurityProfileBehaviorsInput) iot.ValidateSecurityProfileBehaviorsRequest
 }
 
 var _ IoTAPI = (*iot.IoT)(nil)

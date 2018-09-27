@@ -54,6 +54,10 @@ func ExampleEFS_CreateFileSystemRequest_shared00() {
 				fmt.Println(efs.ErrCodeFileSystemAlreadyExists, aerr.Error())
 			case efs.ErrCodeFileSystemLimitExceeded:
 				fmt.Println(efs.ErrCodeFileSystemLimitExceeded, aerr.Error())
+			case efs.ErrCodeInsufficientThroughputCapacity:
+				fmt.Println(efs.ErrCodeInsufficientThroughputCapacity, aerr.Error())
+			case efs.ErrCodeThroughputLimitExceeded:
+				fmt.Println(efs.ErrCodeThroughputLimitExceeded, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

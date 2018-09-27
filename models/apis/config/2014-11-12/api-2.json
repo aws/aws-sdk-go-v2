@@ -867,7 +867,8 @@
         "Source":{"shape":"Source"},
         "InputParameters":{"shape":"StringWithCharLimit1024"},
         "MaximumExecutionFrequency":{"shape":"MaximumExecutionFrequency"},
-        "ConfigRuleState":{"shape":"ConfigRuleState"}
+        "ConfigRuleState":{"shape":"ConfigRuleState"},
+        "CreatedBy":{"shape":"StringWithCharLimit256"}
       }
     },
     "ConfigRuleComplianceFilters":{
@@ -1992,7 +1993,11 @@
     },
     "ResourceCreationTime":{"type":"timestamp"},
     "ResourceDeletionTime":{"type":"timestamp"},
-    "ResourceId":{"type":"string"},
+    "ResourceId":{
+      "type":"string",
+      "max":768,
+      "min":1
+    },
     "ResourceIdList":{
       "type":"list",
       "member":{"shape":"ResourceId"}

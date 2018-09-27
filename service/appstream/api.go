@@ -133,7 +133,9 @@ func (r CreateDirectoryConfigRequest) Send() (*CreateDirectoryConfigOutput, erro
 // CreateDirectoryConfigRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Creates a directory configuration.
+// Creates a Directory Config object in AppStream 2.0. This object includes
+// the information required to join streaming instances to an Active Directory
+// domain.
 //
 //    // Example sending a request using the CreateDirectoryConfigRequest method.
 //    req := client.CreateDirectoryConfigRequest(params)
@@ -183,7 +185,8 @@ func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
 // CreateFleetRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Creates a fleet.
+// Creates a fleet. A fleet consists of streaming instances that run a specified
+// image.
 //
 //    // Example sending a request using the CreateFleetRequest method.
 //    req := client.CreateFleetRequest(params)
@@ -233,7 +236,8 @@ func (r CreateImageBuilderRequest) Send() (*CreateImageBuilderOutput, error) {
 // CreateImageBuilderRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Creates an image builder.
+// Creates an image builder. An image builder is a virtual machine that is used
+// to create an image.
 //
 // The initial state of the builder is PENDING. When it is ready, the state
 // is RUNNING.
@@ -336,7 +340,8 @@ func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
 // CreateStackRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Creates a stack.
+// Creates a stack to start streaming applications to users. A stack consists
+// of an associated fleet, user access policies, and storage configurations.
 //
 //    // Example sending a request using the CreateStackRequest method.
 //    req := client.CreateStackRequest(params)
@@ -386,7 +391,9 @@ func (r CreateStreamingURLRequest) Send() (*CreateStreamingURLOutput, error) {
 // CreateStreamingURLRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Creates a URL to start a streaming session for the specified user.
+// Creates a temporary URL to start an AppStream 2.0 streaming session for the
+// specified user. A streaming URL enables application streaming to be tested
+// without user setup.
 //
 //    // Example sending a request using the CreateStreamingURLRequest method.
 //    req := client.CreateStreamingURLRequest(params)
@@ -436,7 +443,9 @@ func (r DeleteDirectoryConfigRequest) Send() (*DeleteDirectoryConfigOutput, erro
 // DeleteDirectoryConfigRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Deletes the specified directory configuration.
+// Deletes the specified Directory Config object from AppStream 2.0. This object
+// includes the information required to join streaming instances to an Active
+// Directory domain.
 //
 //    // Example sending a request using the DeleteDirectoryConfigRequest method.
 //    req := client.DeleteDirectoryConfigRequest(params)
@@ -536,9 +545,8 @@ func (r DeleteImageRequest) Send() (*DeleteImageOutput, error) {
 // DeleteImageRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Deletes the specified image. You cannot delete an image that is currently
-// in use. After you delete an image, you cannot provision new capacity using
-// the image.
+// Deletes the specified image. You cannot delete an image when it is in use.
+// After you delete an image, you cannot provision new capacity using the image.
 //
 //    // Example sending a request using the DeleteImageRequest method.
 //    req := client.DeleteImageRequest(params)
@@ -616,6 +624,58 @@ func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) De
 	return DeleteImageBuilderRequest{Request: req, Input: input, Copy: c.DeleteImageBuilderRequest}
 }
 
+const opDeleteImagePermissions = "DeleteImagePermissions"
+
+// DeleteImagePermissionsRequest is a API request type for the DeleteImagePermissions API operation.
+type DeleteImagePermissionsRequest struct {
+	*aws.Request
+	Input *DeleteImagePermissionsInput
+	Copy  func(*DeleteImagePermissionsInput) DeleteImagePermissionsRequest
+}
+
+// Send marshals and sends the DeleteImagePermissions API request.
+func (r DeleteImagePermissionsRequest) Send() (*DeleteImagePermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteImagePermissionsOutput), nil
+}
+
+// DeleteImagePermissionsRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Deletes permissions for the specified private image. After you delete permissions
+// for an image, AWS accounts to which you previously granted these permissions
+// can no longer use the image.
+//
+//    // Example sending a request using the DeleteImagePermissionsRequest method.
+//    req := client.DeleteImagePermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissions
+func (c *AppStream) DeleteImagePermissionsRequest(input *DeleteImagePermissionsInput) DeleteImagePermissionsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteImagePermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteImagePermissionsInput{}
+	}
+
+	output := &DeleteImagePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteImagePermissionsRequest{Request: req, Input: input, Copy: c.DeleteImagePermissionsRequest}
+}
+
 const opDeleteStack = "DeleteStack"
 
 // DeleteStackRequest is a API request type for the DeleteStack API operation.
@@ -638,8 +698,10 @@ func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
 // DeleteStackRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Deletes the specified stack. After this operation completes, the environment
-// can no longer be activated and any reservations made for the stack are released.
+// Deletes the specified stack. After the stack is deleted, the application
+// streaming environment provided by the stack is no longer available to users.
+// Also, any reservations made for application streaming sessions for the stack
+// are released.
 //
 //    // Example sending a request using the DeleteStackRequest method.
 //    req := client.DeleteStackRequest(params)
@@ -689,9 +751,14 @@ func (r DescribeDirectoryConfigsRequest) Send() (*DescribeDirectoryConfigsOutput
 // DescribeDirectoryConfigsRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the specified directory configurations. Note that although the
-// response syntax in this topic includes the account password, this password
-// is not returned in the actual response.
+// Retrieves a list that describes one or more specified Directory Config objects
+// for AppStream 2.0, if the names for these objects are provided. Otherwise,
+// all Directory Config objects in the account are described. These objects
+// include the information required to join streaming instances to an Active
+// Directory domain.
+//
+// Although the response syntax in this topic includes the account password,
+// this password is not returned in the actual response.
 //
 //    // Example sending a request using the DescribeDirectoryConfigsRequest method.
 //    req := client.DescribeDirectoryConfigsRequest(params)
@@ -741,7 +808,8 @@ func (r DescribeFleetsRequest) Send() (*DescribeFleetsOutput, error) {
 // DescribeFleetsRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the specified fleets or all fleets in the account.
+// Retrieves a list that describes one or more specified fleets, if the fleet
+// names are provided. Otherwise, all fleets in the account are described.
 //
 //    // Example sending a request using the DescribeFleetsRequest method.
 //    req := client.DescribeFleetsRequest(params)
@@ -791,7 +859,9 @@ func (r DescribeImageBuildersRequest) Send() (*DescribeImageBuildersOutput, erro
 // DescribeImageBuildersRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the specified image builders or all image builders in the account.
+// Retrieves a list that describes one or more specified image builders, if
+// the image builder names are provided. Otherwise, all image builders in the
+// account are described.
 //
 //    // Example sending a request using the DescribeImageBuildersRequest method.
 //    req := client.DescribeImageBuildersRequest(params)
@@ -819,6 +889,109 @@ func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInp
 	return DescribeImageBuildersRequest{Request: req, Input: input, Copy: c.DescribeImageBuildersRequest}
 }
 
+const opDescribeImagePermissions = "DescribeImagePermissions"
+
+// DescribeImagePermissionsRequest is a API request type for the DescribeImagePermissions API operation.
+type DescribeImagePermissionsRequest struct {
+	*aws.Request
+	Input *DescribeImagePermissionsInput
+	Copy  func(*DescribeImagePermissionsInput) DescribeImagePermissionsRequest
+}
+
+// Send marshals and sends the DescribeImagePermissions API request.
+func (r DescribeImagePermissionsRequest) Send() (*DescribeImagePermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeImagePermissionsOutput), nil
+}
+
+// DescribeImagePermissionsRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Retrieves a list that describes the permissions for shared AWS account IDs
+// on a private image that you own.
+//
+//    // Example sending a request using the DescribeImagePermissionsRequest method.
+//    req := client.DescribeImagePermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissions
+func (c *AppStream) DescribeImagePermissionsRequest(input *DescribeImagePermissionsInput) DescribeImagePermissionsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeImagePermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeImagePermissionsInput{}
+	}
+
+	output := &DescribeImagePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeImagePermissionsRequest{Request: req, Input: input, Copy: c.DescribeImagePermissionsRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeImagePermissionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeImagePermissions operation.
+//		req := client.DescribeImagePermissionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeImagePermissionsRequest) Paginate(opts ...aws.Option) DescribeImagePermissionsPager {
+	return DescribeImagePermissionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeImagePermissionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeImagePermissionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeImagePermissionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeImagePermissionsPager) CurrentPage() *DescribeImagePermissionsOutput {
+	return p.Pager.CurrentPage().(*DescribeImagePermissionsOutput)
+}
+
 const opDescribeImages = "DescribeImages"
 
 // DescribeImagesRequest is a API request type for the DescribeImages API operation.
@@ -841,7 +1014,9 @@ func (r DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
 // DescribeImagesRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the specified images or all images in the account.
+// Retrieves a list that describes one or more specified images, if the image
+// names or image ARNs are provided. Otherwise, all images in the account are
+// described.
 //
 //    // Example sending a request using the DescribeImagesRequest method.
 //    req := client.DescribeImagesRequest(params)
@@ -856,6 +1031,12 @@ func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) DescribeIm
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -867,6 +1048,52 @@ func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) DescribeIm
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeImagesRequest{Request: req, Input: input, Copy: c.DescribeImagesRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeImagesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeImages operation.
+//		req := client.DescribeImagesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager {
+	return DescribeImagesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeImagesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeImagesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeImagesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeImagesPager) CurrentPage() *DescribeImagesOutput {
+	return p.Pager.CurrentPage().(*DescribeImagesOutput)
 }
 
 const opDescribeSessions = "DescribeSessions"
@@ -891,10 +1118,10 @@ func (r DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
 // DescribeSessionsRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the streaming sessions for the specified stack and fleet. If a
-// user ID is provided, only the streaming sessions for only that user are returned.
-// If an authentication type is not provided, the default is to authenticate
-// users using a streaming URL.
+// Retrieves a list that describes the streaming sessions for a specified stack
+// and fleet. If a user ID is provided for the stack and fleet, only streaming
+// sessions for that user are described. If an authentication type is not provided,
+// the default is to authenticate users using a streaming URL.
 //
 //    // Example sending a request using the DescribeSessionsRequest method.
 //    req := client.DescribeSessionsRequest(params)
@@ -944,7 +1171,8 @@ func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
 // DescribeStacksRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the specified stacks or all stacks in the account.
+// Retrieves a list that describes one or more specified stacks, if the stack
+// names are provided. Otherwise, all stacks in the account are described.
 //
 //    // Example sending a request using the DescribeStacksRequest method.
 //    req := client.DescribeStacksRequest(params)
@@ -1044,7 +1272,7 @@ func (r ExpireSessionRequest) Send() (*ExpireSessionOutput, error) {
 // ExpireSessionRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Stops the specified streaming session.
+// Immediately stops the specified streaming session.
 //
 //    // Example sending a request using the ExpireSessionRequest method.
 //    req := client.ExpireSessionRequest(params)
@@ -1094,7 +1322,7 @@ func (r ListAssociatedFleetsRequest) Send() (*ListAssociatedFleetsOutput, error)
 // ListAssociatedFleetsRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Lists the fleets associated with the specified stack.
+// Retrieves the name of the fleet that is associated with the specified stack.
 //
 //    // Example sending a request using the ListAssociatedFleetsRequest method.
 //    req := client.ListAssociatedFleetsRequest(params)
@@ -1144,7 +1372,7 @@ func (r ListAssociatedStacksRequest) Send() (*ListAssociatedStacksOutput, error)
 // ListAssociatedStacksRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Lists the stacks associated with the specified fleet.
+// Retrieves the name of the stack with which the specified fleet is associated.
 //
 //    // Example sending a request using the ListAssociatedStacksRequest method.
 //    req := client.ListAssociatedStacksRequest(params)
@@ -1194,8 +1422,8 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream
-// 2.0 image builders, images, fleets, and stacks.
+// Retrieves a list of all tags for the specified AppStream 2.0 resource. You
+// can tag AppStream 2.0 image builders, images, fleets, and stacks.
 //
 // For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 // in the Amazon AppStream 2.0 Developer Guide.
@@ -1508,7 +1736,8 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Disassociates the specified tags from the specified AppStream 2.0 resource.
+// Disassociates one or more specified tags from the specified AppStream 2.0
+// resource.
 //
 // To list the current tags for your resources, use ListTagsForResource.
 //
@@ -1563,7 +1792,9 @@ func (r UpdateDirectoryConfigRequest) Send() (*UpdateDirectoryConfigOutput, erro
 // UpdateDirectoryConfigRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Updates the specified directory configuration.
+// Updates the specified Directory Config object in AppStream 2.0. This object
+// includes the information required to join streaming instances to an Active
+// Directory domain.
 //
 //    // Example sending a request using the UpdateDirectoryConfigRequest method.
 //    req := client.UpdateDirectoryConfigRequest(params)
@@ -1646,6 +1877,56 @@ func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) UpdateFleetReque
 	return UpdateFleetRequest{Request: req, Input: input, Copy: c.UpdateFleetRequest}
 }
 
+const opUpdateImagePermissions = "UpdateImagePermissions"
+
+// UpdateImagePermissionsRequest is a API request type for the UpdateImagePermissions API operation.
+type UpdateImagePermissionsRequest struct {
+	*aws.Request
+	Input *UpdateImagePermissionsInput
+	Copy  func(*UpdateImagePermissionsInput) UpdateImagePermissionsRequest
+}
+
+// Send marshals and sends the UpdateImagePermissions API request.
+func (r UpdateImagePermissionsRequest) Send() (*UpdateImagePermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateImagePermissionsOutput), nil
+}
+
+// UpdateImagePermissionsRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Adds or updates permissions for the specified private image.
+//
+//    // Example sending a request using the UpdateImagePermissionsRequest method.
+//    req := client.UpdateImagePermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissions
+func (c *AppStream) UpdateImagePermissionsRequest(input *UpdateImagePermissionsInput) UpdateImagePermissionsRequest {
+	op := &aws.Operation{
+		Name:       opUpdateImagePermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateImagePermissionsInput{}
+	}
+
+	output := &UpdateImagePermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateImagePermissionsRequest{Request: req, Input: input, Copy: c.UpdateImagePermissionsRequest}
+}
+
 const opUpdateStack = "UpdateStack"
 
 // UpdateStackRequest is a API request type for the UpdateStack API operation.
@@ -1668,7 +1949,7 @@ func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
 // UpdateStackRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Updates the specified stack.
+// Updates the specified fields for the specified stack.
 //
 //    // Example sending a request using the UpdateStackRequest method.
 //    req := client.UpdateStackRequest(params)
@@ -1730,6 +2011,78 @@ func (s Application) String() string {
 
 // GoString returns the string representation
 func (s Application) GoString() string {
+	return s.String()
+}
+
+// The persistent application settings for users of a stack.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettings
+type ApplicationSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Enables or disables persistent application settings for users during their
+	// streaming sessions.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+
+	// The path prefix for the S3 bucket where users’ persistent application settings
+	// are stored. You can allow the same persistent application settings to be
+	// used across multiple stacks by specifying the same settings group for each
+	// stack.
+	SettingsGroup *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ApplicationSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ApplicationSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ApplicationSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ApplicationSettings"}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes the persistent application settings for users of a stack.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ApplicationSettingsResponse
+type ApplicationSettingsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether persistent application settings are enabled for users during
+	// their streaming sessions.
+	Enabled *bool `type:"boolean"`
+
+	// The S3 bucket where users’ persistent application settings are stored. When
+	// persistent application settings are enabled for the first time for an account
+	// in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS
+	// account and the Region.
+	S3BucketName *string `min:"1" type:"string"`
+
+	// The path prefix for the S3 bucket where users’ persistent application settings
+	// are stored.
+	SettingsGroup *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ApplicationSettingsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ApplicationSettingsResponse) GoString() string {
 	return s.String()
 }
 
@@ -2074,10 +2427,11 @@ type CreateFleetInput struct {
 	// apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
+	// The ARN of the public, private, or shared image to use.
+	ImageArn *string `type:"string"`
+
 	// The name of the image used to create the fleet.
-	//
-	// ImageName is a required field
-	ImageName *string `min:"1" type:"string" required:"true"`
+	ImageName *string `min:"1" type:"string"`
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
@@ -2155,10 +2509,6 @@ func (s *CreateFleetInput) Validate() error {
 	if s.ComputeCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputeCapacity"))
 	}
-
-	if s.ImageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
-	}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
 	}
@@ -2230,10 +2580,11 @@ type CreateImageBuilderInput struct {
 	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
+	// The ARN of the public, private, or shared image to use.
+	ImageArn *string `type:"string"`
+
 	// The name of the image used to create the builder.
-	//
-	// ImageName is a required field
-	ImageName *string `min:"1" type:"string" required:"true"`
+	ImageName *string `min:"1" type:"string"`
 
 	// The instance type to use when launching the image builder.
 	//
@@ -2264,10 +2615,6 @@ func (s *CreateImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderInput"}
 	if s.AppstreamAgentVersion != nil && len(*s.AppstreamAgentVersion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AppstreamAgentVersion", 1))
-	}
-
-	if s.ImageName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
 	}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
@@ -2388,6 +2735,11 @@ func (s CreateImageBuilderStreamingURLOutput) SDKResponseMetadata() aws.Response
 type CreateStackInput struct {
 	_ struct{} `type:"structure"`
 
+	// The persistent application settings for users of a stack. When these settings
+	// are enabled, changes that users make to applications and Windows settings
+	// are automatically saved after each session and applied to the next session.
+	ApplicationSettings *ApplicationSettings `type:"structure"`
+
 	// The description for display.
 	Description *string `type:"string"`
 
@@ -2401,7 +2753,7 @@ type CreateStackInput struct {
 	// The name of the stack.
 	//
 	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	Name *string `type:"string" required:"true"`
 
 	// The URL that users are redirected to after their streaming session ends.
 	RedirectURL *string `type:"string"`
@@ -2431,11 +2783,13 @@ func (s *CreateStackInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
 	if s.UserSettings != nil && len(s.UserSettings) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserSettings", 1))
+	}
+	if s.ApplicationSettings != nil {
+		if err := s.ApplicationSettings.Validate(); err != nil {
+			invalidParams.AddNested("ApplicationSettings", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
@@ -2823,6 +3177,71 @@ func (s DeleteImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissionsRequest
+type DeleteImagePermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the private image.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The 12-digit ID of the AWS account for which to delete image permissions.
+	//
+	// SharedAccountId is a required field
+	SharedAccountId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteImagePermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteImagePermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteImagePermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteImagePermissionsInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.SharedAccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SharedAccountId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissionsResult
+type DeleteImagePermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteImagePermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteImagePermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteImagePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackRequest
 type DeleteStackInput struct {
 	_ struct{} `type:"structure"`
@@ -3082,12 +3501,108 @@ func (s DescribeImageBuildersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissionsRequest
+type DescribeImagePermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum size of each results page.
+	MaxResults *int64 `type:"integer"`
+
+	// The name of the private image for which to describe permissions. The image
+	// must be one that you own.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The pagination token to use to retrieve the next page of results. If this
+	// value is empty, only the first page is retrieved.
+	NextToken *string `min:"1" type:"string"`
+
+	// The 12-digit ID of one or more AWS accounts with which the image is shared.
+	SharedAwsAccountIds []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeImagePermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeImagePermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeImagePermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeImagePermissionsInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.SharedAwsAccountIds != nil && len(s.SharedAwsAccountIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SharedAwsAccountIds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissionsResult
+type DescribeImagePermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of the private image.
+	Name *string `type:"string"`
+
+	// The pagination token to use to retrieve the next page of results. If this
+	// value is empty, only the first page is retrieved.
+	NextToken *string `min:"1" type:"string"`
+
+	// The permissions for a private image that you own.
+	SharedImagePermissionsList []SharedImagePermissions `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeImagePermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeImagePermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeImagePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesRequest
 type DescribeImagesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The names of the images to describe.
+	// The ARNs of the public, private, and shared images to describe.
+	Arns []string `type:"list"`
+
+	// The maximum size of each page of results.
+	MaxResults *int64 `type:"integer"`
+
+	// The names of the public or private images to describe.
 	Names []string `type:"list"`
+
+	// The pagination token to use to retrieve the next page of results. If this
+	// value is empty, only the first page is retrieved.
+	NextToken *string `min:"1" type:"string"`
+
+	// The type of image (public, private, or shared) to describe.
+	Type VisibilityType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3100,6 +3615,19 @@ func (s DescribeImagesInput) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeImagesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeImagesInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult
 type DescribeImagesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3108,6 +3636,10 @@ type DescribeImagesOutput struct {
 
 	// Information about the images.
 	Images []Image `type:"list"`
+
+	// The pagination token to use to retrieve the next page of results. If there
+	// are no more pages, this value is null.
+	NextToken *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -3522,10 +4054,11 @@ type Fleet struct {
 	// apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
+	// The ARN for the public, private, or shared image.
+	ImageArn *string `type:"string"`
+
 	// The name of the image used to create the fleet.
-	//
-	// ImageName is a required field
-	ImageName *string `min:"1" type:"string" required:"true"`
+	ImageName *string `min:"1" type:"string"`
 
 	// The instance type to use when launching fleet instances.
 	//
@@ -3611,6 +4144,10 @@ type Image struct {
 
 	// Indicates whether an image builder can be launched from this image.
 	ImageBuilderSupported *bool `type:"boolean"`
+
+	// The permissions to provide to the destination AWS account for the specified
+	// image.
+	ImagePermissions *ImagePermissions `type:"structure"`
 
 	// The name of the image.
 	//
@@ -3732,6 +4269,28 @@ func (s ImageBuilderStateChangeReason) GoString() string {
 	return s.String()
 }
 
+// Describes the permissions for an image.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImagePermissions
+type ImagePermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether the image can be used for a fleet.
+	AllowFleet *bool `locationName:"allowFleet" type:"boolean"`
+
+	// Indicates whether the image can be used for an image builder.
+	AllowImageBuilder *bool `locationName:"allowImageBuilder" type:"boolean"`
+}
+
+// String returns the string representation
+func (s ImagePermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ImagePermissions) GoString() string {
+	return s.String()
+}
+
 // Describes the reason why the last image state change occurred.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageStateChangeReason
 type ImageStateChangeReason struct {
@@ -3804,7 +4363,7 @@ type ListAssociatedFleetsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The names of the fleets.
+	// The name of the fleet.
 	Names []string `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -3877,7 +4436,7 @@ type ListAssociatedStacksOutput struct {
 
 	responseMetadata aws.Response
 
-	// The names of the stacks.
+	// The name of the stack.
 	Names []string `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -3957,6 +4516,31 @@ func (s ListTagsForResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// The network details of the fleet instance for the streaming session.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/NetworkAccessConfiguration
+type NetworkAccessConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The resource identifier of the elastic network interface that is attached
+	// to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource
+	// identifier.
+	EniId *string `min:"1" type:"string"`
+
+	// The private IP address of the elastic network interface that is attached
+	// to instances in your VPC.
+	EniPrivateIpAddress *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkAccessConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NetworkAccessConfiguration) GoString() string {
+	return s.String()
 }
 
 // Describes a resource error.
@@ -4056,6 +4640,9 @@ type Session struct {
 	// Id is a required field
 	Id *string `min:"1" type:"string" required:"true"`
 
+	// The network details for the streaming session.
+	NetworkAccessConfiguration *NetworkAccessConfiguration `type:"structure"`
+
 	// The name of the stack for the streaming session.
 	//
 	// StackName is a required field
@@ -4082,10 +4669,40 @@ func (s Session) GoString() string {
 	return s.String()
 }
 
+// Describes the permissions that are available to the specified AWS account
+// for a shared image.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/SharedImagePermissions
+type SharedImagePermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the permissions for a shared image.
+	//
+	// ImagePermissions is a required field
+	ImagePermissions *ImagePermissions `locationName:"imagePermissions" type:"structure" required:"true"`
+
+	// The 12-digit ID of the AWS account with which the image is shared.
+	//
+	// SharedAccountId is a required field
+	SharedAccountId *string `locationName:"sharedAccountId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SharedImagePermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SharedImagePermissions) GoString() string {
+	return s.String()
+}
+
 // Describes a stack.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack
 type Stack struct {
 	_ struct{} `type:"structure"`
+
+	// The persistent application settings for users of the stack.
+	ApplicationSettings *ApplicationSettingsResponse `type:"structure"`
 
 	// The ARN of the stack.
 	Arn *string `type:"string"`
@@ -4589,7 +5206,7 @@ func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 type UpdateDirectoryConfigInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the directory configuration.
+	// The name of the Directory Config object.
 	//
 	// DirectoryName is a required field
 	DirectoryName *string `type:"string" required:"true"`
@@ -4637,7 +5254,7 @@ type UpdateDirectoryConfigOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the directory configuration.
+	// Information about the Directory Config object.
 	DirectoryConfig *DirectoryConfig `type:"structure"`
 }
 
@@ -4686,6 +5303,9 @@ type UpdateFleetInput struct {
 
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
+
+	// The ARN of the public, private, or shared image to use.
+	ImageArn *string `type:"string"`
 
 	// The name of the image used to create the fleet.
 	ImageName *string `min:"1" type:"string"`
@@ -4739,9 +5359,7 @@ type UpdateFleetInput struct {
 	MaxUserDurationInSeconds *int64 `type:"integer"`
 
 	// A unique name for the fleet.
-	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	Name *string `min:"1" type:"string"`
 
 	// The VPC configuration for the fleet.
 	VpcConfig *VpcConfig `type:"structure"`
@@ -4765,10 +5383,6 @@ func (s *UpdateFleetInput) Validate() error {
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
@@ -4810,9 +5424,89 @@ func (s UpdateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissionsRequest
+type UpdateImagePermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The permissions for the image.
+	//
+	// ImagePermissions is a required field
+	ImagePermissions *ImagePermissions `type:"structure" required:"true"`
+
+	// The name of the private image.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The 12-digit ID of the AWS account for which you want add or update image
+	// permissions.
+	//
+	// SharedAccountId is a required field
+	SharedAccountId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateImagePermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateImagePermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateImagePermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateImagePermissionsInput"}
+
+	if s.ImagePermissions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ImagePermissions"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.SharedAccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SharedAccountId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissionsResult
+type UpdateImagePermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateImagePermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateImagePermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateImagePermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
+
+	// The persistent application settings for users of a stack. When these settings
+	// are enabled, changes that users make to applications and Windows settings
+	// are automatically saved after each session and applied to the next session.
+	ApplicationSettings *ApplicationSettings `type:"structure"`
 
 	// The stack attributes to delete.
 	AttributesToDelete []StackAttribute `type:"list"`
@@ -4868,6 +5562,11 @@ func (s *UpdateStackInput) Validate() error {
 	}
 	if s.UserSettings != nil && len(s.UserSettings) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserSettings", 1))
+	}
+	if s.ApplicationSettings != nil {
+		if err := s.ApplicationSettings.Validate(); err != nil {
+			invalidParams.AddNested("ApplicationSettings", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
@@ -5252,6 +5951,7 @@ const (
 	StackAttributeStorageConnectors           StackAttribute = "STORAGE_CONNECTORS"
 	StackAttributeStorageConnectorHomefolders StackAttribute = "STORAGE_CONNECTOR_HOMEFOLDERS"
 	StackAttributeStorageConnectorGoogleDrive StackAttribute = "STORAGE_CONNECTOR_GOOGLE_DRIVE"
+	StackAttributeStorageConnectorOneDrive    StackAttribute = "STORAGE_CONNECTOR_ONE_DRIVE"
 	StackAttributeRedirectUrl                 StackAttribute = "REDIRECT_URL"
 	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
 	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
@@ -5291,6 +5991,7 @@ type StorageConnectorType string
 const (
 	StorageConnectorTypeHomefolders StorageConnectorType = "HOMEFOLDERS"
 	StorageConnectorTypeGoogleDrive StorageConnectorType = "GOOGLE_DRIVE"
+	StorageConnectorTypeOneDrive    StorageConnectorType = "ONE_DRIVE"
 )
 
 func (enum StorageConnectorType) MarshalValue() (string, error) {
@@ -5308,6 +6009,7 @@ type VisibilityType string
 const (
 	VisibilityTypePublic  VisibilityType = "PUBLIC"
 	VisibilityTypePrivate VisibilityType = "PRIVATE"
+	VisibilityTypeShared  VisibilityType = "SHARED"
 )
 
 func (enum VisibilityType) MarshalValue() (string, error) {

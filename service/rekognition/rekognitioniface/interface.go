@@ -74,6 +74,8 @@ type RekognitionAPI interface {
 
 	DeleteStreamProcessorRequest(*rekognition.DeleteStreamProcessorInput) rekognition.DeleteStreamProcessorRequest
 
+	DescribeCollectionRequest(*rekognition.DescribeCollectionInput) rekognition.DescribeCollectionRequest
+
 	DescribeStreamProcessorRequest(*rekognition.DescribeStreamProcessorInput) rekognition.DescribeStreamProcessorRequest
 
 	DetectFacesRequest(*rekognition.DetectFacesInput) rekognition.DetectFacesRequest

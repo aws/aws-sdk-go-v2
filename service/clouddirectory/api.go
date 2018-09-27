@@ -44,7 +44,7 @@ func (r AddFacetToObjectRequest) Send() (*AddFacetToObjectOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AddFacetToObject
 func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) AddFacetToObjectRequest {
 	op := &aws.Operation{
 		Name:       opAddFacetToObject,
@@ -95,7 +95,7 @@ func (r ApplySchemaRequest) Send() (*ApplySchemaOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ApplySchema
 func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) ApplySchemaRequest {
 	op := &aws.Operation{
 		Name:       opApplySchema,
@@ -150,7 +150,7 @@ func (r AttachObjectRequest) Send() (*AttachObjectOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachObject
 func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) AttachObjectRequest {
 	op := &aws.Operation{
 		Name:       opAttachObject,
@@ -201,7 +201,7 @@ func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicy
 func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opAttachPolicy,
@@ -251,7 +251,7 @@ func (r AttachToIndexRequest) Send() (*AttachToIndexOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachToIndex
 func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) AttachToIndexRequest {
 	op := &aws.Operation{
 		Name:       opAttachToIndex,
@@ -302,7 +302,7 @@ func (r AttachTypedLinkRequest) Send() (*AttachTypedLinkOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLink
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLink
 func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) AttachTypedLinkRequest {
 	op := &aws.Operation{
 		Name:       opAttachTypedLink,
@@ -352,7 +352,7 @@ func (r BatchReadRequest) Send() (*BatchReadOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRead
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRead
 func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) BatchReadRequest {
 	op := &aws.Operation{
 		Name:       opBatchRead,
@@ -403,7 +403,7 @@ func (r BatchWriteRequest) Send() (*BatchWriteOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWrite
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWrite
 func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) BatchWriteRequest {
 	op := &aws.Operation{
 		Name:       opBatchWrite,
@@ -454,7 +454,7 @@ func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectory
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectory
 func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectory,
@@ -505,7 +505,7 @@ func (r CreateFacetRequest) Send() (*CreateFacetOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateFacet
 func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) CreateFacetRequest {
 	op := &aws.Operation{
 		Name:       opCreateFacet,
@@ -556,7 +556,7 @@ func (r CreateIndexRequest) Send() (*CreateIndexOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndex
 func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest {
 	op := &aws.Operation{
 		Name:       opCreateIndex,
@@ -609,7 +609,7 @@ func (r CreateObjectRequest) Send() (*CreateObjectOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObject
 func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) CreateObjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateObject,
@@ -671,7 +671,7 @@ func (r CreateSchemaRequest) Send() (*CreateSchemaOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchema
 func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaRequest {
 	op := &aws.Operation{
 		Name:       opCreateSchema,
@@ -721,7 +721,7 @@ func (r CreateTypedLinkFacetRequest) Send() (*CreateTypedLinkFacetOutput, error)
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateTypedLinkFacet
 func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) CreateTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opCreateTypedLinkFacet,
@@ -772,7 +772,7 @@ func (r DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectory
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectory
 func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectory,
@@ -823,7 +823,7 @@ func (r DeleteFacetRequest) Send() (*DeleteFacetOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteFacet
 func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) DeleteFacetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFacet,
@@ -874,7 +874,7 @@ func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObject
 func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObject,
@@ -925,7 +925,7 @@ func (r DeleteSchemaRequest) Send() (*DeleteSchemaOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchema
 func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSchema,
@@ -975,7 +975,7 @@ func (r DeleteTypedLinkFacetRequest) Send() (*DeleteTypedLinkFacetOutput, error)
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacet
 func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTypedLinkFacet,
@@ -1025,7 +1025,7 @@ func (r DetachFromIndexRequest) Send() (*DetachFromIndexOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndex
 func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) DetachFromIndexRequest {
 	op := &aws.Operation{
 		Name:       opDetachFromIndex,
@@ -1076,7 +1076,7 @@ func (r DetachObjectRequest) Send() (*DetachObjectOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObject
 func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) DetachObjectRequest {
 	op := &aws.Operation{
 		Name:       opDetachObject,
@@ -1126,7 +1126,7 @@ func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachPolicy
 func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachPolicy,
@@ -1177,7 +1177,7 @@ func (r DetachTypedLinkRequest) Send() (*DetachTypedLinkOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLink
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLink
 func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) DetachTypedLinkRequest {
 	op := &aws.Operation{
 		Name:       opDetachTypedLink,
@@ -1231,7 +1231,7 @@ func (r DisableDirectoryRequest) Send() (*DisableDirectoryOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectory
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectory
 func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) DisableDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDisableDirectory,
@@ -1282,7 +1282,7 @@ func (r EnableDirectoryRequest) Send() (*EnableDirectoryOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectory
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectory
 func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) EnableDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opEnableDirectory,
@@ -1333,7 +1333,7 @@ func (r GetAppliedSchemaVersionRequest) Send() (*GetAppliedSchemaVersionOutput, 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersion
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetAppliedSchemaVersion
 func (c *CloudDirectory) GetAppliedSchemaVersionRequest(input *GetAppliedSchemaVersionInput) GetAppliedSchemaVersionRequest {
 	op := &aws.Operation{
 		Name:       opGetAppliedSchemaVersion,
@@ -1383,7 +1383,7 @@ func (r GetDirectoryRequest) Send() (*GetDirectoryOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectory
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectory
 func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) GetDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opGetDirectory,
@@ -1435,7 +1435,7 @@ func (r GetFacetRequest) Send() (*GetFacetOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacet
 func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	op := &aws.Operation{
 		Name:       opGetFacet,
@@ -1452,6 +1452,56 @@ func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetFacetRequest{Request: req, Input: input, Copy: c.GetFacetRequest}
+}
+
+const opGetLinkAttributes = "GetLinkAttributes"
+
+// GetLinkAttributesRequest is a API request type for the GetLinkAttributes API operation.
+type GetLinkAttributesRequest struct {
+	*aws.Request
+	Input *GetLinkAttributesInput
+	Copy  func(*GetLinkAttributesInput) GetLinkAttributesRequest
+}
+
+// Send marshals and sends the GetLinkAttributes API request.
+func (r GetLinkAttributesRequest) Send() (*GetLinkAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLinkAttributesOutput), nil
+}
+
+// GetLinkAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Retrieves attributes that are associated with a typed link.
+//
+//    // Example sending a request using the GetLinkAttributesRequest method.
+//    req := client.GetLinkAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetLinkAttributes
+func (c *CloudDirectory) GetLinkAttributesRequest(input *GetLinkAttributesInput) GetLinkAttributesRequest {
+	op := &aws.Operation{
+		Name:       opGetLinkAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/attributes/get",
+	}
+
+	if input == nil {
+		input = &GetLinkAttributesInput{}
+	}
+
+	output := &GetLinkAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetLinkAttributesRequest{Request: req, Input: input, Copy: c.GetLinkAttributesRequest}
 }
 
 const opGetObjectAttributes = "GetObjectAttributes"
@@ -1485,7 +1535,7 @@ func (r GetObjectAttributesRequest) Send() (*GetObjectAttributesOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectAttributes
 func (c *CloudDirectory) GetObjectAttributesRequest(input *GetObjectAttributesInput) GetObjectAttributesRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectAttributes,
@@ -1535,7 +1585,7 @@ func (r GetObjectInformationRequest) Send() (*GetObjectInformationOutput, error)
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformation
 func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformationInput) GetObjectInformationRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectInformation,
@@ -1586,7 +1636,7 @@ func (r GetSchemaAsJsonRequest) Send() (*GetSchemaAsJsonOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJson
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJson
 func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) GetSchemaAsJsonRequest {
 	op := &aws.Operation{
 		Name:       opGetSchemaAsJson,
@@ -1637,7 +1687,7 @@ func (r GetTypedLinkFacetInformationRequest) Send() (*GetTypedLinkFacetInformati
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformation
 func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest {
 	op := &aws.Operation{
 		Name:       opGetTypedLinkFacetInformation,
@@ -1688,7 +1738,7 @@ func (r ListAppliedSchemaArnsRequest) Send() (*ListAppliedSchemaArnsOutput, erro
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArns
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArns
 func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListAppliedSchemaArns,
@@ -1790,7 +1840,7 @@ func (r ListAttachedIndicesRequest) Send() (*ListAttachedIndicesOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndices
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndices
 func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) ListAttachedIndicesRequest {
 	op := &aws.Operation{
 		Name:       opListAttachedIndices,
@@ -1892,7 +1942,7 @@ func (r ListDevelopmentSchemaArnsRequest) Send() (*ListDevelopmentSchemaArnsOutp
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArns
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArns
 func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListDevelopmentSchemaArns,
@@ -1994,7 +2044,7 @@ func (r ListDirectoriesRequest) Send() (*ListDirectoriesOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectories
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectories
 func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) ListDirectoriesRequest {
 	op := &aws.Operation{
 		Name:       opListDirectories,
@@ -2096,7 +2146,7 @@ func (r ListFacetAttributesRequest) Send() (*ListFacetAttributesOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetAttributes
 func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesInput) ListFacetAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListFacetAttributes,
@@ -2198,7 +2248,7 @@ func (r ListFacetNamesRequest) Send() (*ListFacetNamesOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNames
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetNames
 func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) ListFacetNamesRequest {
 	op := &aws.Operation{
 		Name:       opListFacetNames,
@@ -2302,7 +2352,7 @@ func (r ListIncomingTypedLinksRequest) Send() (*ListIncomingTypedLinksOutput, er
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIncomingTypedLinks
 func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedLinksInput) ListIncomingTypedLinksRequest {
 	op := &aws.Operation{
 		Name:       opListIncomingTypedLinks,
@@ -2352,7 +2402,7 @@ func (r ListIndexRequest) Send() (*ListIndexOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIndex
 func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) ListIndexRequest {
 	op := &aws.Operation{
 		Name:       opListIndex,
@@ -2423,6 +2473,110 @@ func (p *ListIndexPager) CurrentPage() *ListIndexOutput {
 	return p.Pager.CurrentPage().(*ListIndexOutput)
 }
 
+const opListManagedSchemaArns = "ListManagedSchemaArns"
+
+// ListManagedSchemaArnsRequest is a API request type for the ListManagedSchemaArns API operation.
+type ListManagedSchemaArnsRequest struct {
+	*aws.Request
+	Input *ListManagedSchemaArnsInput
+	Copy  func(*ListManagedSchemaArnsInput) ListManagedSchemaArnsRequest
+}
+
+// Send marshals and sends the ListManagedSchemaArns API request.
+func (r ListManagedSchemaArnsRequest) Send() (*ListManagedSchemaArnsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListManagedSchemaArnsOutput), nil
+}
+
+// ListManagedSchemaArnsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Lists the major version families of each managed schema. If a major version
+// ARN is provided as SchemaArn, the minor version revisions in that family
+// are listed instead.
+//
+//    // Example sending a request using the ListManagedSchemaArnsRequest method.
+//    req := client.ListManagedSchemaArnsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListManagedSchemaArns
+func (c *CloudDirectory) ListManagedSchemaArnsRequest(input *ListManagedSchemaArnsInput) ListManagedSchemaArnsRequest {
+	op := &aws.Operation{
+		Name:       opListManagedSchemaArns,
+		HTTPMethod: "POST",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/managed",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListManagedSchemaArnsInput{}
+	}
+
+	output := &ListManagedSchemaArnsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListManagedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListManagedSchemaArnsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListManagedSchemaArnsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListManagedSchemaArns operation.
+//		req := client.ListManagedSchemaArnsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListManagedSchemaArnsRequest) Paginate(opts ...aws.Option) ListManagedSchemaArnsPager {
+	return ListManagedSchemaArnsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListManagedSchemaArnsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListManagedSchemaArnsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListManagedSchemaArnsPager struct {
+	aws.Pager
+}
+
+func (p *ListManagedSchemaArnsPager) CurrentPage() *ListManagedSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*ListManagedSchemaArnsOutput)
+}
+
 const opListObjectAttributes = "ListObjectAttributes"
 
 // ListObjectAttributesRequest is a API request type for the ListObjectAttributes API operation.
@@ -2454,7 +2608,7 @@ func (r ListObjectAttributesRequest) Send() (*ListObjectAttributesOutput, error)
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributes
 func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributesInput) ListObjectAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListObjectAttributes,
@@ -2557,7 +2711,7 @@ func (r ListObjectChildrenRequest) Send() (*ListObjectChildrenOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildren
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectChildren
 func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInput) ListObjectChildrenRequest {
 	op := &aws.Operation{
 		Name:       opListObjectChildren,
@@ -2669,7 +2823,7 @@ func (r ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, erro
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPaths
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentPaths
 func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPathsInput) ListObjectParentPathsRequest {
 	op := &aws.Operation{
 		Name:       opListObjectParentPaths,
@@ -2772,7 +2926,7 @@ func (r ListObjectParentsRequest) Send() (*ListObjectParentsOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParents
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParents
 func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput) ListObjectParentsRequest {
 	op := &aws.Operation{
 		Name:       opListObjectParents,
@@ -2874,7 +3028,7 @@ func (r ListObjectPoliciesRequest) Send() (*ListObjectPoliciesOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPolicies
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPolicies
 func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) ListObjectPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListObjectPolicies,
@@ -2978,7 +3132,7 @@ func (r ListOutgoingTypedLinksRequest) Send() (*ListOutgoingTypedLinksOutput, er
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListOutgoingTypedLinks
 func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInput) ListOutgoingTypedLinksRequest {
 	op := &aws.Operation{
 		Name:       opListOutgoingTypedLinks,
@@ -3028,7 +3182,7 @@ func (r ListPolicyAttachmentsRequest) Send() (*ListPolicyAttachmentsOutput, erro
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachments
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPolicyAttachments
 func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmentsInput) ListPolicyAttachmentsRequest {
 	op := &aws.Operation{
 		Name:       opListPolicyAttachments,
@@ -3132,7 +3286,7 @@ func (r ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArns
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArns
 func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListPublishedSchemaArns,
@@ -3236,7 +3390,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTagsForResource
 func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
@@ -3339,7 +3493,7 @@ func (r ListTypedLinkFacetAttributesRequest) Send() (*ListTypedLinkFacetAttribut
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributes
 func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListTypedLinkFacetAttributes,
@@ -3442,7 +3596,7 @@ func (r ListTypedLinkFacetNamesRequest) Send() (*ListTypedLinkFacetNamesOutput, 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNames
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetNames
 func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesInput) ListTypedLinkFacetNamesRequest {
 	op := &aws.Operation{
 		Name:       opListTypedLinkFacetNames,
@@ -3550,7 +3704,7 @@ func (r LookupPolicyRequest) Send() (*LookupPolicyOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LookupPolicy
 func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) LookupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opLookupPolicy,
@@ -3653,7 +3807,7 @@ func (r PublishSchemaRequest) Send() (*PublishSchemaOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PublishSchema
 func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) PublishSchemaRequest {
 	op := &aws.Operation{
 		Name:       opPublishSchema,
@@ -3705,7 +3859,7 @@ func (r PutSchemaFromJsonRequest) Send() (*PutSchemaFromJsonOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJson
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJson
 func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) PutSchemaFromJsonRequest {
 	op := &aws.Operation{
 		Name:       opPutSchemaFromJson,
@@ -3755,7 +3909,7 @@ func (r RemoveFacetFromObjectRequest) Send() (*RemoveFacetFromObjectOutput, erro
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RemoveFacetFromObject
 func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput) RemoveFacetFromObjectRequest {
 	op := &aws.Operation{
 		Name:       opRemoveFacetFromObject,
@@ -3805,7 +3959,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TagResource
 func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
@@ -3855,7 +4009,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UntagResource
 func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
@@ -3911,7 +4065,7 @@ func (r UpdateFacetRequest) Send() (*UpdateFacetOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateFacet
 func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) UpdateFacetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFacet,
@@ -3928,6 +4082,57 @@ func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) UpdateFacet
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateFacetRequest{Request: req, Input: input, Copy: c.UpdateFacetRequest}
+}
+
+const opUpdateLinkAttributes = "UpdateLinkAttributes"
+
+// UpdateLinkAttributesRequest is a API request type for the UpdateLinkAttributes API operation.
+type UpdateLinkAttributesRequest struct {
+	*aws.Request
+	Input *UpdateLinkAttributesInput
+	Copy  func(*UpdateLinkAttributesInput) UpdateLinkAttributesRequest
+}
+
+// Send marshals and sends the UpdateLinkAttributes API request.
+func (r UpdateLinkAttributesRequest) Send() (*UpdateLinkAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLinkAttributesOutput), nil
+}
+
+// UpdateLinkAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Updates a given typed link’s attributes. Attributes to be updated must not
+// contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
+//
+//    // Example sending a request using the UpdateLinkAttributesRequest method.
+//    req := client.UpdateLinkAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributes
+func (c *CloudDirectory) UpdateLinkAttributesRequest(input *UpdateLinkAttributesInput) UpdateLinkAttributesRequest {
+	op := &aws.Operation{
+		Name:       opUpdateLinkAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/attributes/update",
+	}
+
+	if input == nil {
+		input = &UpdateLinkAttributesInput{}
+	}
+
+	output := &UpdateLinkAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateLinkAttributesRequest{Request: req, Input: input, Copy: c.UpdateLinkAttributesRequest}
 }
 
 const opUpdateObjectAttributes = "UpdateObjectAttributes"
@@ -3961,7 +4166,7 @@ func (r UpdateObjectAttributesRequest) Send() (*UpdateObjectAttributesOutput, er
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributes
 func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) UpdateObjectAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateObjectAttributes,
@@ -4012,7 +4217,7 @@ func (r UpdateSchemaRequest) Send() (*UpdateSchemaOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchema
 func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSchema,
@@ -4062,7 +4267,7 @@ func (r UpdateTypedLinkFacetRequest) Send() (*UpdateTypedLinkFacetOutput, error)
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacet
 func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) UpdateTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTypedLinkFacet,
@@ -4117,7 +4322,7 @@ func (r UpgradeAppliedSchemaRequest) Send() (*UpgradeAppliedSchemaOutput, error)
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchema
 func (c *CloudDirectory) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest {
 	op := &aws.Operation{
 		Name:       opUpgradeAppliedSchema,
@@ -4168,7 +4373,7 @@ func (r UpgradePublishedSchemaRequest) Send() (*UpgradePublishedSchemaOutput, er
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchema
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradePublishedSchema
 func (c *CloudDirectory) UpgradePublishedSchemaRequest(input *UpgradePublishedSchemaInput) UpgradePublishedSchemaRequest {
 	op := &aws.Operation{
 		Name:       opUpgradePublishedSchema,
@@ -4187,7 +4392,7 @@ func (c *CloudDirectory) UpgradePublishedSchemaRequest(input *UpgradePublishedSc
 	return UpgradePublishedSchemaRequest{Request: req, Input: input, Copy: c.UpgradePublishedSchemaRequest}
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AddFacetToObjectRequest
 type AddFacetToObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4292,7 +4497,7 @@ func (s AddFacetToObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AddFacetToObjectResponse
 type AddFacetToObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4319,7 +4524,7 @@ func (s AddFacetToObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ApplySchemaRequest
 type ApplySchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4382,7 +4587,7 @@ func (s ApplySchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ApplySchemaResponse
 type ApplySchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4430,7 +4635,7 @@ func (s ApplySchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachObjectRequest
 type AttachObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4525,7 +4730,7 @@ func (s AttachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachObjectResponse
 type AttachObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4561,7 +4766,7 @@ func (s AttachObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicyRequest
 type AttachPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4638,7 +4843,7 @@ func (s AttachPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicyResponse
 type AttachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4665,7 +4870,7 @@ func (s AttachPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndexRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachToIndexRequest
 type AttachToIndexInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4742,7 +4947,7 @@ func (s AttachToIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachToIndexResponse
 type AttachToIndexOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4778,7 +4983,7 @@ func (s AttachToIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLinkRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLinkRequest
 type AttachTypedLinkInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4903,7 +5108,7 @@ func (s AttachTypedLinkInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLinkResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLinkResponse
 type AttachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4940,7 +5145,7 @@ func (s AttachTypedLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A unique identifier for an attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttributeKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttributeKey
 type AttributeKey struct {
 	_ struct{} `type:"structure"`
 
@@ -5023,7 +5228,7 @@ func (s AttributeKey) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The combination of an attribute key and an attribute value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttributeKeyAndValue
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttributeKeyAndValue
 type AttributeKeyAndValue struct {
 	_ struct{} `type:"structure"`
 
@@ -5089,7 +5294,7 @@ func (s AttributeKeyAndValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Identifies the attribute name and value for a typed link.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttributeNameAndValue
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttributeNameAndValue
 type AttributeNameAndValue struct {
 	_ struct{} `type:"structure"`
 
@@ -5153,7 +5358,7 @@ func (s AttributeNameAndValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a batch add facet to object operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAddFacetToObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAddFacetToObject
 type BatchAddFacetToObject struct {
 	_ struct{} `type:"structure"`
 
@@ -5247,7 +5452,7 @@ func (s BatchAddFacetToObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The result of a batch add facet to object operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAddFacetToObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAddFacetToObjectResponse
 type BatchAddFacetToObjectResponse struct {
 	_ struct{} `type:"structure"`
 }
@@ -5268,7 +5473,7 @@ func (s BatchAddFacetToObjectResponse) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // Represents the output of an AttachObject operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachObject
 type BatchAttachObject struct {
 	_ struct{} `type:"structure"`
 
@@ -5347,7 +5552,7 @@ func (s BatchAttachObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output batch AttachObject response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachObjectResponse
 type BatchAttachObjectResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5378,7 +5583,7 @@ func (s BatchAttachObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 
 // Attaches a policy object to a regular object inside a BatchRead operation. For
 // more information, see AttachPolicy and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachPolicy
 type BatchAttachPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -5439,7 +5644,7 @@ func (s BatchAttachPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of an AttachPolicy response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachPolicyResponse
 type BatchAttachPolicyResponse struct {
 	_ struct{} `type:"structure"`
 }
@@ -5461,7 +5666,7 @@ func (s BatchAttachPolicyResponse) MarshalFields(e protocol.FieldEncoder) error 
 
 // Attaches the specified object to the specified index inside a BatchRead operation.
 // For more information, see AttachToIndex and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachToIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachToIndex
 type BatchAttachToIndex struct {
 	_ struct{} `type:"structure"`
 
@@ -5522,7 +5727,7 @@ func (s BatchAttachToIndex) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a AttachToIndex response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachToIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachToIndexResponse
 type BatchAttachToIndexResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5553,7 +5758,7 @@ func (s BatchAttachToIndexResponse) MarshalFields(e protocol.FieldEncoder) error
 
 // Attaches a typed link to a specified source and target object inside a BatchRead
 // operation. For more information, see AttachTypedLink and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachTypedLink
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachTypedLink
 type BatchAttachTypedLink struct {
 	_ struct{} `type:"structure"`
 
@@ -5662,7 +5867,7 @@ func (s BatchAttachTypedLink) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a AttachTypedLink response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachTypedLinkResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchAttachTypedLinkResponse
 type BatchAttachTypedLinkResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5693,7 +5898,7 @@ func (s BatchAttachTypedLinkResponse) MarshalFields(e protocol.FieldEncoder) err
 
 // Creates an index object inside of a BatchRead operation. For more information,
 // see CreateIndex and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchCreateIndex
 type BatchCreateIndex struct {
 	_ struct{} `type:"structure"`
 
@@ -5800,7 +6005,7 @@ func (s BatchCreateIndex) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a CreateIndex response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchCreateIndexResponse
 type BatchCreateIndexResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5830,7 +6035,7 @@ func (s BatchCreateIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a CreateObject operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchCreateObject
 type BatchCreateObject struct {
 	_ struct{} `type:"structure"`
 
@@ -5950,7 +6155,7 @@ func (s BatchCreateObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a CreateObject response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchCreateObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchCreateObjectResponse
 type BatchCreateObjectResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -5980,7 +6185,7 @@ func (s BatchCreateObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Represents the output of a DeleteObject operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDeleteObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDeleteObject
 type BatchDeleteObject struct {
 	_ struct{} `type:"structure"`
 
@@ -6026,7 +6231,7 @@ func (s BatchDeleteObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a DeleteObject response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDeleteObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDeleteObjectResponse
 type BatchDeleteObjectResponse struct {
 	_ struct{} `type:"structure"`
 }
@@ -6048,7 +6253,7 @@ func (s BatchDeleteObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 
 // Detaches the specified object from the specified index inside a BatchRead
 // operation. For more information, see DetachFromIndex and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachFromIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachFromIndex
 type BatchDetachFromIndex struct {
 	_ struct{} `type:"structure"`
 
@@ -6109,7 +6314,7 @@ func (s BatchDetachFromIndex) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a DetachFromIndex response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachFromIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachFromIndexResponse
 type BatchDetachFromIndexResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6139,7 +6344,7 @@ func (s BatchDetachFromIndexResponse) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Represents the output of a DetachObject operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachObject
 type BatchDetachObject struct {
 	_ struct{} `type:"structure"`
 
@@ -6213,7 +6418,7 @@ func (s BatchDetachObject) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a DetachObject response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachObjectResponse
 type BatchDetachObjectResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6244,7 +6449,7 @@ func (s BatchDetachObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 
 // Detaches the specified policy from the specified directory inside a BatchWrite
 // operation. For more information, see DetachPolicy and BatchWriteRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachPolicy
 type BatchDetachPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -6305,7 +6510,7 @@ func (s BatchDetachPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a DetachPolicy response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachPolicyResponse
 type BatchDetachPolicyResponse struct {
 	_ struct{} `type:"structure"`
 }
@@ -6327,7 +6532,7 @@ func (s BatchDetachPolicyResponse) MarshalFields(e protocol.FieldEncoder) error 
 
 // Detaches a typed link from a specified source and target object inside a
 // BatchRead operation. For more information, see DetachTypedLink and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachTypedLink
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachTypedLink
 type BatchDetachTypedLink struct {
 	_ struct{} `type:"structure"`
 
@@ -6378,7 +6583,7 @@ func (s BatchDetachTypedLink) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a DetachTypedLink response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachTypedLinkResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachTypedLinkResponse
 type BatchDetachTypedLinkResponse struct {
 	_ struct{} `type:"structure"`
 }
@@ -6398,10 +6603,119 @@ func (s BatchDetachTypedLinkResponse) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// Retrieves attributes that are associated with a typed link inside a BatchRead
+// operation. For more information, see GetLinkAttributes and BatchReadRequest$Operations.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchGetLinkAttributes
+type BatchGetLinkAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// A list of attribute names whose values will be retrieved.
+	//
+	// AttributeNames is a required field
+	AttributeNames []string `type:"list" required:"true"`
+
+	// Allows a typed link specifier to be accepted as input.
+	//
+	// TypedLinkSpecifier is a required field
+	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetLinkAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetLinkAttributes) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetLinkAttributes) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetLinkAttributes"}
+
+	if s.AttributeNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AttributeNames"))
+	}
+
+	if s.TypedLinkSpecifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
+	}
+	if s.TypedLinkSpecifier != nil {
+		if err := s.TypedLinkSpecifier.Validate(); err != nil {
+			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchGetLinkAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AttributeNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.TypedLinkSpecifier != nil {
+		v := s.TypedLinkSpecifier
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
+	}
+	return nil
+}
+
+// Represents the output of a GetLinkAttributes response operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchGetLinkAttributesResponse
+type BatchGetLinkAttributesResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The attributes that are associated with the typed link.
+	Attributes []AttributeKeyAndValue `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetLinkAttributesResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetLinkAttributesResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchGetLinkAttributesResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Attributes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Retrieves attributes within a facet that are associated with an object inside
 // an BatchRead operation. For more information, see GetObjectAttributes and
 // BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchGetObjectAttributes
 type BatchGetObjectAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -6489,7 +6803,7 @@ func (s BatchGetObjectAttributes) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a GetObjectAttributes response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchGetObjectAttributesResponse
 type BatchGetObjectAttributesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6526,7 +6840,7 @@ func (s BatchGetObjectAttributesResponse) MarshalFields(e protocol.FieldEncoder)
 
 // Retrieves metadata about an object inside a BatchRead operation. For more
 // information, see GetObjectInformation and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectInformation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchGetObjectInformation
 type BatchGetObjectInformation struct {
 	_ struct{} `type:"structure"`
 
@@ -6572,7 +6886,7 @@ func (s BatchGetObjectInformation) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Represents the output of a GetObjectInformation response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectInformationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchGetObjectInformationResponse
 type BatchGetObjectInformationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6618,7 +6932,7 @@ func (s BatchGetObjectInformationResponse) MarshalFields(e protocol.FieldEncoder
 
 // Lists indices attached to an object inside a BatchRead operation. For more
 // information, see ListAttachedIndices and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListAttachedIndices
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListAttachedIndices
 type BatchListAttachedIndices struct {
 	_ struct{} `type:"structure"`
 
@@ -6685,7 +6999,7 @@ func (s BatchListAttachedIndices) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a ListAttachedIndices response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListAttachedIndicesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListAttachedIndicesResponse
 type BatchListAttachedIndicesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6732,7 +7046,7 @@ func (s BatchListAttachedIndicesResponse) MarshalFields(e protocol.FieldEncoder)
 // Returns a paginated list of all the incoming TypedLinkSpecifier information
 // for an object inside a BatchRead operation. For more information, see ListIncomingTypedLinks
 // and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIncomingTypedLinks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListIncomingTypedLinks
 type BatchListIncomingTypedLinks struct {
 	_ struct{} `type:"structure"`
 
@@ -6839,7 +7153,7 @@ func (s BatchListIncomingTypedLinks) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Represents the output of a ListIncomingTypedLinks response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIncomingTypedLinksResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListIncomingTypedLinksResponse
 type BatchListIncomingTypedLinksResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -6885,7 +7199,7 @@ func (s BatchListIncomingTypedLinksResponse) MarshalFields(e protocol.FieldEncod
 
 // Lists objects attached to the specified index inside a BatchRead operation.
 // For more information, see ListIndex and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIndex
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListIndex
 type BatchListIndex struct {
 	_ struct{} `type:"structure"`
 
@@ -6974,7 +7288,7 @@ func (s BatchListIndex) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a ListIndex response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListIndexResponse
 type BatchListIndexResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7019,7 +7333,7 @@ func (s BatchListIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a ListObjectAttributes operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectAttributes
 type BatchListObjectAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -7102,7 +7416,7 @@ func (s BatchListObjectAttributes) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // Represents the output of a ListObjectAttributes response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectAttributesResponse
 type BatchListObjectAttributesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7148,7 +7462,7 @@ func (s BatchListObjectAttributesResponse) MarshalFields(e protocol.FieldEncoder
 }
 
 // Represents the output of a ListObjectChildren operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectChildren
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectChildren
 type BatchListObjectChildren struct {
 	_ struct{} `type:"structure"`
 
@@ -7216,7 +7530,7 @@ func (s BatchListObjectChildren) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a ListObjectChildren response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectChildrenResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectChildrenResponse
 type BatchListObjectChildrenResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7264,7 +7578,7 @@ func (s BatchListObjectChildrenResponse) MarshalFields(e protocol.FieldEncoder) 
 // Retrieves all available parent paths for any object type such as node, leaf
 // node, policy node, and index node objects inside a BatchRead operation. For
 // more information, see ListObjectParentPaths and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectParentPaths
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParentPaths
 type BatchListObjectParentPaths struct {
 	_ struct{} `type:"structure"`
 
@@ -7331,7 +7645,7 @@ func (s BatchListObjectParentPaths) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Represents the output of a ListObjectParentPaths response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectParentPathsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParentPathsResponse
 type BatchListObjectParentPathsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7377,7 +7691,7 @@ func (s BatchListObjectParentPathsResponse) MarshalFields(e protocol.FieldEncode
 
 // Returns policies attached to an object in pagination fashion inside a BatchRead
 // operation. For more information, see ListObjectPolicies and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectPolicies
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectPolicies
 type BatchListObjectPolicies struct {
 	_ struct{} `type:"structure"`
 
@@ -7444,7 +7758,7 @@ func (s BatchListObjectPolicies) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a ListObjectPolicies response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectPoliciesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectPoliciesResponse
 type BatchListObjectPoliciesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7491,7 +7805,7 @@ func (s BatchListObjectPoliciesResponse) MarshalFields(e protocol.FieldEncoder) 
 // Returns a paginated list of all the outgoing TypedLinkSpecifier information
 // for an object inside a BatchRead operation. For more information, see ListOutgoingTypedLinks
 // and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListOutgoingTypedLinks
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListOutgoingTypedLinks
 type BatchListOutgoingTypedLinks struct {
 	_ struct{} `type:"structure"`
 
@@ -7598,7 +7912,7 @@ func (s BatchListOutgoingTypedLinks) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Represents the output of a ListOutgoingTypedLinks response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListOutgoingTypedLinksResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListOutgoingTypedLinksResponse
 type BatchListOutgoingTypedLinksResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7645,7 +7959,7 @@ func (s BatchListOutgoingTypedLinksResponse) MarshalFields(e protocol.FieldEncod
 // Returns all of the ObjectIdentifiers to which a given policy is attached
 // inside a BatchRead operation. For more information, see ListPolicyAttachments
 // and BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListPolicyAttachments
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListPolicyAttachments
 type BatchListPolicyAttachments struct {
 	_ struct{} `type:"structure"`
 
@@ -7712,7 +8026,7 @@ func (s BatchListPolicyAttachments) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // Represents the output of a ListPolicyAttachments response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListPolicyAttachmentsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListPolicyAttachmentsResponse
 type BatchListPolicyAttachmentsResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7759,7 +8073,7 @@ func (s BatchListPolicyAttachmentsResponse) MarshalFields(e protocol.FieldEncode
 // Lists all policies from the root of the Directory to the object specified
 // inside a BatchRead operation. For more information, see LookupPolicy and
 // BatchReadRequest$Operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchLookupPolicy
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchLookupPolicy
 type BatchLookupPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -7826,7 +8140,7 @@ func (s BatchLookupPolicy) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a LookupPolicy response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchLookupPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchLookupPolicyResponse
 type BatchLookupPolicyResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -7873,7 +8187,7 @@ func (s BatchLookupPolicyResponse) MarshalFields(e protocol.FieldEncoder) error 
 
 // The batch read exception structure, which contains the exception type and
 // message.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadException
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadException
 type BatchReadException struct {
 	_ struct{} `type:"structure"`
 
@@ -7911,7 +8225,7 @@ func (s BatchReadException) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadRequest
 type BatchReadInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7997,9 +8311,12 @@ func (s BatchReadInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a BatchRead operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadOperation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadOperation
 type BatchReadOperation struct {
 	_ struct{} `type:"structure"`
+
+	// Retrieves attributes that are associated with a typed link.
+	GetLinkAttributes *BatchGetLinkAttributes `type:"structure"`
 
 	// Retrieves attributes within a facet that are associated with an object.
 	GetObjectAttributes *BatchGetObjectAttributes `type:"structure"`
@@ -8064,6 +8381,11 @@ func (s BatchReadOperation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchReadOperation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchReadOperation"}
+	if s.GetLinkAttributes != nil {
+		if err := s.GetLinkAttributes.Validate(); err != nil {
+			invalidParams.AddNested("GetLinkAttributes", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.GetObjectAttributes != nil {
 		if err := s.GetObjectAttributes.Validate(); err != nil {
 			invalidParams.AddNested("GetObjectAttributes", err.(aws.ErrInvalidParams))
@@ -8133,6 +8455,12 @@ func (s *BatchReadOperation) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchReadOperation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GetLinkAttributes != nil {
+		v := s.GetLinkAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GetLinkAttributes", v, metadata)
+	}
 	if s.GetObjectAttributes != nil {
 		v := s.GetObjectAttributes
 
@@ -8209,7 +8537,7 @@ func (s BatchReadOperation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a BatchRead response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadOperationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadOperationResponse
 type BatchReadOperationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -8247,7 +8575,7 @@ func (s BatchReadOperationResponse) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadResponse
 type BatchReadOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -8290,9 +8618,12 @@ func (s BatchReadOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a BatchRead success response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadSuccessfulResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadSuccessfulResponse
 type BatchReadSuccessfulResponse struct {
 	_ struct{} `type:"structure"`
+
+	// The list of attributes to retrieve from the typed link.
+	GetLinkAttributes *BatchGetLinkAttributesResponse `type:"structure"`
 
 	// Retrieves attributes within a facet that are associated with an object.
 	GetObjectAttributes *BatchGetObjectAttributesResponse `type:"structure"`
@@ -8356,6 +8687,12 @@ func (s BatchReadSuccessfulResponse) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchReadSuccessfulResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GetLinkAttributes != nil {
+		v := s.GetLinkAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GetLinkAttributes", v, metadata)
+	}
 	if s.GetObjectAttributes != nil {
 		v := s.GetObjectAttributes
 
@@ -8432,7 +8769,7 @@ func (s BatchReadSuccessfulResponse) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A batch operation to remove a facet from an object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRemoveFacetFromObject
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRemoveFacetFromObject
 type BatchRemoveFacetFromObject struct {
 	_ struct{} `type:"structure"`
 
@@ -8498,7 +8835,7 @@ func (s BatchRemoveFacetFromObject) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // An empty result that represents success.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRemoveFacetFromObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRemoveFacetFromObjectResponse
 type BatchRemoveFacetFromObjectResponse struct {
 	_ struct{} `type:"structure"`
 }
@@ -8518,8 +8855,111 @@ func (s BatchRemoveFacetFromObjectResponse) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
+// Updates a given typed link’s attributes inside a BatchRead operation. Attributes
+// to be updated must not contribute to the typed link’s identity, as defined
+// by its IdentityAttributeOrder. For more information, see UpdateLinkAttributes
+// and BatchReadRequest$Operations.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchUpdateLinkAttributes
+type BatchUpdateLinkAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// The attributes update structure.
+	//
+	// AttributeUpdates is a required field
+	AttributeUpdates []LinkAttributeUpdate `type:"list" required:"true"`
+
+	// Allows a typed link specifier to be accepted as input.
+	//
+	// TypedLinkSpecifier is a required field
+	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchUpdateLinkAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchUpdateLinkAttributes) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchUpdateLinkAttributes) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdateLinkAttributes"}
+
+	if s.AttributeUpdates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
+	}
+
+	if s.TypedLinkSpecifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
+	}
+	if s.AttributeUpdates != nil {
+		for i, v := range s.AttributeUpdates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TypedLinkSpecifier != nil {
+		if err := s.TypedLinkSpecifier.Validate(); err != nil {
+			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchUpdateLinkAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AttributeUpdates) > 0 {
+		v := s.AttributeUpdates
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AttributeUpdates", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.TypedLinkSpecifier != nil {
+		v := s.TypedLinkSpecifier
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
+	}
+	return nil
+}
+
+// Represents the output of a UpdateLinkAttributes response operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchUpdateLinkAttributesResponse
+type BatchUpdateLinkAttributesResponse struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s BatchUpdateLinkAttributesResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchUpdateLinkAttributesResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchUpdateLinkAttributesResponse) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Represents the output of a BatchUpdate operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchUpdateObjectAttributes
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchUpdateObjectAttributes
 type BatchUpdateObjectAttributes struct {
 	_ struct{} `type:"structure"`
 
@@ -8593,7 +9033,7 @@ func (s BatchUpdateObjectAttributes) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Represents the output of a BatchUpdate response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchUpdateObjectAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchUpdateObjectAttributesResponse
 type BatchUpdateObjectAttributesResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -8622,7 +9062,7 @@ func (s BatchUpdateObjectAttributesResponse) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWriteRequest
 type BatchWriteInput struct {
 	_ struct{} `type:"structure"`
 
@@ -8698,7 +9138,7 @@ func (s BatchWriteInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a BatchWrite operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWriteOperation
 type BatchWriteOperation struct {
 	_ struct{} `type:"structure"`
 
@@ -8744,6 +9184,9 @@ type BatchWriteOperation struct {
 
 	// A batch operation that removes a facet from an object.
 	RemoveFacetFromObject *BatchRemoveFacetFromObject `type:"structure"`
+
+	// Updates a given object's attributes.
+	UpdateLinkAttributes *BatchUpdateLinkAttributes `type:"structure"`
 
 	// Updates a given object's attributes.
 	UpdateObjectAttributes *BatchUpdateObjectAttributes `type:"structure"`
@@ -8825,6 +9268,11 @@ func (s *BatchWriteOperation) Validate() error {
 	if s.RemoveFacetFromObject != nil {
 		if err := s.RemoveFacetFromObject.Validate(); err != nil {
 			invalidParams.AddNested("RemoveFacetFromObject", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UpdateLinkAttributes != nil {
+		if err := s.UpdateLinkAttributes.Validate(); err != nil {
+			invalidParams.AddNested("UpdateLinkAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.UpdateObjectAttributes != nil {
@@ -8919,6 +9367,12 @@ func (s BatchWriteOperation) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "RemoveFacetFromObject", v, metadata)
 	}
+	if s.UpdateLinkAttributes != nil {
+		v := s.UpdateLinkAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "UpdateLinkAttributes", v, metadata)
+	}
 	if s.UpdateObjectAttributes != nil {
 		v := s.UpdateObjectAttributes
 
@@ -8929,7 +9383,7 @@ func (s BatchWriteOperation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Represents the output of a BatchWrite response operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWriteOperationResponse
 type BatchWriteOperationResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -8975,6 +9429,9 @@ type BatchWriteOperationResponse struct {
 
 	// The result of a batch remove facet from object operation.
 	RemoveFacetFromObject *BatchRemoveFacetFromObjectResponse `type:"structure"`
+
+	// Represents the output of a BatchWrite response operation.
+	UpdateLinkAttributes *BatchUpdateLinkAttributesResponse `type:"structure"`
 
 	// Updates a given object’s attributes.
 	UpdateObjectAttributes *BatchUpdateObjectAttributesResponse `type:"structure"`
@@ -9070,6 +9527,12 @@ func (s BatchWriteOperationResponse) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "RemoveFacetFromObject", v, metadata)
 	}
+	if s.UpdateLinkAttributes != nil {
+		v := s.UpdateLinkAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "UpdateLinkAttributes", v, metadata)
+	}
 	if s.UpdateObjectAttributes != nil {
 		v := s.UpdateObjectAttributes
 
@@ -9079,7 +9542,7 @@ func (s BatchWriteOperationResponse) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWriteResponse
 type BatchWriteOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9121,7 +9584,7 @@ func (s BatchWriteOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectoryRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectoryRequest
 type CreateDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9186,7 +9649,7 @@ func (s CreateDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectoryResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectoryResponse
 type CreateDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9260,12 +9723,17 @@ func (s CreateDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateFacetRequest
 type CreateFacetInput struct {
 	_ struct{} `type:"structure"`
 
 	// The attributes that are associated with the Facet.
 	Attributes []FacetAttribute `type:"list"`
+
+	// There are two different styles that you can define on any given facet, Static
+	// and Dynamic. For static facets, all attributes must be defined in the schema.
+	// For dynamic facets, attributes can be defined during data plane operations.
+	FacetStyle FacetStyle `type:"string" enum:"true"`
 
 	// The name of the Facet, which is unique for a given schema.
 	//
@@ -9283,9 +9751,7 @@ type CreateFacetInput struct {
 	//    information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
 	//
 	//    * Index: Can be created with the Index API.
-	//
-	// ObjectType is a required field
-	ObjectType ObjectType `type:"string" required:"true" enum:"true"`
+	ObjectType ObjectType `type:"string" enum:"true"`
 
 	// The schema ARN in which the new Facet will be created. For more information,
 	// see arns.
@@ -9313,9 +9779,6 @@ func (s *CreateFacetInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-	if len(s.ObjectType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ObjectType"))
 	}
 
 	if s.SchemaArn == nil {
@@ -9350,6 +9813,12 @@ func (s CreateFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if len(s.FacetStyle) > 0 {
+		v := s.FacetStyle
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FacetStyle", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -9371,7 +9840,7 @@ func (s CreateFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateFacetResponse
 type CreateFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9398,7 +9867,7 @@ func (s CreateFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndexRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndexRequest
 type CreateIndexInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9510,7 +9979,7 @@ func (s CreateIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndexResponse
 type CreateIndexOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9546,7 +10015,7 @@ func (s CreateIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObjectRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObjectRequest
 type CreateObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9666,7 +10135,7 @@ func (s CreateObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObjectResponse
 type CreateObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9702,7 +10171,7 @@ func (s CreateObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchemaRequest
 type CreateSchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9752,7 +10221,7 @@ func (s CreateSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchemaResponse
 type CreateSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9789,7 +10258,7 @@ func (s CreateSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateTypedLinkFacetRequest
 type CreateTypedLinkFacetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9856,7 +10325,7 @@ func (s CreateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateTypedLinkFacetResponse
 type CreateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9883,7 +10352,7 @@ func (s CreateTypedLinkFacetOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectoryRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectoryRequest
 type DeleteDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9929,7 +10398,7 @@ func (s DeleteDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectoryResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectoryResponse
 type DeleteDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9967,7 +10436,7 @@ func (s DeleteDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteFacetRequest
 type DeleteFacetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10032,7 +10501,7 @@ func (s DeleteFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteFacetResponse
 type DeleteFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10059,7 +10528,7 @@ func (s DeleteFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObjectRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObjectRequest
 type DeleteObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10121,7 +10590,7 @@ func (s DeleteObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObjectResponse
 type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10148,7 +10617,7 @@ func (s DeleteObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchemaRequest
 type DeleteSchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10195,7 +10664,7 @@ func (s DeleteSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchemaResponse
 type DeleteSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10232,7 +10701,7 @@ func (s DeleteSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacetRequest
 type DeleteTypedLinkFacetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10294,7 +10763,7 @@ func (s DeleteTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacetResponse
 type DeleteTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10321,7 +10790,7 @@ func (s DeleteTypedLinkFacetOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndexRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndexRequest
 type DetachFromIndexInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10398,7 +10867,7 @@ func (s DetachFromIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndexResponse
 type DetachFromIndexOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10434,7 +10903,7 @@ func (s DetachFromIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObjectRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObjectRequest
 type DetachObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10515,7 +10984,7 @@ func (s DetachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObjectResponse
 type DetachObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10551,7 +11020,7 @@ func (s DetachObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachPolicyRequest
 type DetachPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10628,7 +11097,7 @@ func (s DetachPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachPolicyResponse
 type DetachPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10655,7 +11124,7 @@ func (s DetachPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLinkRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLinkRequest
 type DetachTypedLinkInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10722,7 +11191,7 @@ func (s DetachTypedLinkInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLinkOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLinkOutput
 type DetachTypedLinkOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10750,7 +11219,7 @@ func (s DetachTypedLinkOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Directory structure that includes the directory name and directory ARN.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Directory
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/Directory
 type Directory struct {
 	_ struct{} `type:"structure"`
 
@@ -10807,7 +11276,7 @@ func (s Directory) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectoryRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectoryRequest
 type DisableDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10853,7 +11322,7 @@ func (s DisableDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectoryResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectoryResponse
 type DisableDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10891,7 +11360,7 @@ func (s DisableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectoryRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectoryRequest
 type EnableDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -10937,7 +11406,7 @@ func (s EnableDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectoryResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectoryResponse
 type EnableDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -10978,9 +11447,14 @@ func (s EnableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 // A structure that contains Name, ARN, Attributes, Rules, and ObjectTypes.
 // See Facets (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html)
 // for more information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Facet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/Facet
 type Facet struct {
 	_ struct{} `type:"structure"`
+
+	// There are two different styles that you can define on any given facet, Static
+	// and Dynamic. For static facets, all attributes must be defined in the schema.
+	// For dynamic facets, attributes can be defined during data plane operations.
+	FacetStyle FacetStyle `type:"string" enum:"true"`
 
 	// The name of the Facet.
 	Name *string `min:"1" type:"string"`
@@ -11002,6 +11476,12 @@ func (s Facet) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Facet) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FacetStyle) > 0 {
+		v := s.FacetStyle
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FacetStyle", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -11018,7 +11498,7 @@ func (s Facet) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An attribute that is associated with the Facet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttribute
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttribute
 type FacetAttribute struct {
 	_ struct{} `type:"structure"`
 
@@ -11109,7 +11589,7 @@ func (s FacetAttribute) MarshalFields(e protocol.FieldEncoder) error {
 
 // A facet attribute definition. See Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
 // for more information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttributeDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttributeDefinition
 type FacetAttributeDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -11188,7 +11668,7 @@ func (s FacetAttributeDefinition) MarshalFields(e protocol.FieldEncoder) error {
 
 // The facet attribute reference that specifies the attribute definition that
 // contains the attribute facet name and attribute name.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttributeReference
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttributeReference
 type FacetAttributeReference struct {
 	_ struct{} `type:"structure"`
 
@@ -11259,7 +11739,7 @@ func (s FacetAttributeReference) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A structure that contains information used to update an attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttributeUpdate
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttributeUpdate
 type FacetAttributeUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -11312,7 +11792,7 @@ func (s FacetAttributeUpdate) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetAppliedSchemaVersionRequest
 type GetAppliedSchemaVersionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11358,7 +11838,7 @@ func (s GetAppliedSchemaVersionInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetAppliedSchemaVersionResponse
 type GetAppliedSchemaVersionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11395,7 +11875,7 @@ func (s GetAppliedSchemaVersionOutput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectoryRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectoryRequest
 type GetDirectoryInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11441,7 +11921,7 @@ func (s GetDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectoryResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectoryResponse
 type GetDirectoryOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11479,7 +11959,7 @@ func (s GetDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacetRequest
 type GetFacetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11544,7 +12024,7 @@ func (s GetFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacetResponse
 type GetFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11580,7 +12060,146 @@ func (s GetFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetLinkAttributesRequest
+type GetLinkAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of attribute names whose values will be retrieved.
+	//
+	// AttributeNames is a required field
+	AttributeNames []string `type:"list" required:"true"`
+
+	// The consistency level at which to retrieve the attributes on a typed link.
+	ConsistencyLevel ConsistencyLevel `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) that is associated with the Directory where
+	// the typed link resides. For more information, see arns or Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	//
+	// DirectoryArn is a required field
+	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
+
+	// Allows a typed link specifier to be accepted as input.
+	//
+	// TypedLinkSpecifier is a required field
+	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetLinkAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLinkAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetLinkAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetLinkAttributesInput"}
+
+	if s.AttributeNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AttributeNames"))
+	}
+
+	if s.DirectoryArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
+	}
+
+	if s.TypedLinkSpecifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
+	}
+	if s.TypedLinkSpecifier != nil {
+		if err := s.TypedLinkSpecifier.Validate(); err != nil {
+			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetLinkAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AttributeNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.ConsistencyLevel) > 0 {
+		v := s.ConsistencyLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TypedLinkSpecifier != nil {
+		v := s.TypedLinkSpecifier
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
+	}
+	if s.DirectoryArn != nil {
+		v := *s.DirectoryArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetLinkAttributesResponse
+type GetLinkAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The attributes that are associated with the typed link.
+	Attributes []AttributeKeyAndValue `type:"list"`
+}
+
+// String returns the string representation
+func (s GetLinkAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLinkAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLinkAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetLinkAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Attributes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectAttributesRequest
 type GetObjectAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11693,7 +12312,7 @@ func (s GetObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectAttributesResponse
 type GetObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11735,7 +12354,7 @@ func (s GetObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformationRequest
 type GetObjectInformationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11805,7 +12424,7 @@ func (s GetObjectInformationInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformationResponse
 type GetObjectInformationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11858,7 +12477,7 @@ func (s GetObjectInformationOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJsonRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJsonRequest
 type GetSchemaAsJsonInput struct {
 	_ struct{} `type:"structure"`
 
@@ -11904,7 +12523,7 @@ func (s GetSchemaAsJsonInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJsonResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJsonResponse
 type GetSchemaAsJsonOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -11949,7 +12568,7 @@ func (s GetSchemaAsJsonOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformationRequest
 type GetTypedLinkFacetInformationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12011,7 +12630,7 @@ func (s GetTypedLinkFacetInformationInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformationResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformationResponse
 type GetTypedLinkFacetInformationOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12061,7 +12680,7 @@ func (s GetTypedLinkFacetInformationOutput) MarshalFields(e protocol.FieldEncode
 }
 
 // Represents an index and an attached object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/IndexAttachment
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/IndexAttachment
 type IndexAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -12108,7 +12727,101 @@ func (s IndexAttachment) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArnsRequest
+// The action to take on a typed link attribute value. Updates are only supported
+// for attributes which don’t contribute to link identity.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LinkAttributeAction
+type LinkAttributeAction struct {
+	_ struct{} `type:"structure"`
+
+	// A type that can be either UPDATE_OR_CREATE or DELETE.
+	AttributeActionType UpdateActionType `type:"string" enum:"true"`
+
+	// The value that you want to update to.
+	AttributeUpdateValue *TypedAttributeValue `type:"structure"`
+}
+
+// String returns the string representation
+func (s LinkAttributeAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LinkAttributeAction) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LinkAttributeAction) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AttributeActionType) > 0 {
+		v := s.AttributeActionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AttributeActionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.AttributeUpdateValue != nil {
+		v := s.AttributeUpdateValue
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AttributeUpdateValue", v, metadata)
+	}
+	return nil
+}
+
+// Structure that contains attribute update information.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LinkAttributeUpdate
+type LinkAttributeUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The action to perform as part of the attribute update.
+	AttributeAction *LinkAttributeAction `type:"structure"`
+
+	// The key of the attribute being updated.
+	AttributeKey *AttributeKey `type:"structure"`
+}
+
+// String returns the string representation
+func (s LinkAttributeUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LinkAttributeUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LinkAttributeUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LinkAttributeUpdate"}
+	if s.AttributeKey != nil {
+		if err := s.AttributeKey.Validate(); err != nil {
+			invalidParams.AddNested("AttributeKey", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LinkAttributeUpdate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttributeAction != nil {
+		v := s.AttributeAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AttributeAction", v, metadata)
+	}
+	if s.AttributeKey != nil {
+		v := s.AttributeKey
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AttributeKey", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArnsRequest
 type ListAppliedSchemaArnsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12185,7 +12898,7 @@ func (s ListAppliedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArnsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArnsResponse
 type ListAppliedSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12236,7 +12949,7 @@ func (s ListAppliedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndicesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndicesRequest
 type ListAttachedIndicesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12327,7 +13040,7 @@ func (s ListAttachedIndicesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndicesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndicesResponse
 type ListAttachedIndicesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12378,7 +13091,7 @@ func (s ListAttachedIndicesOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArnsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArnsRequest
 type ListDevelopmentSchemaArnsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12430,7 +13143,7 @@ func (s ListDevelopmentSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArnsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArnsResponse
 type ListDevelopmentSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12481,7 +13194,7 @@ func (s ListDevelopmentSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectoriesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectoriesRequest
 type ListDirectoriesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12543,7 +13256,7 @@ func (s ListDirectoriesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectoriesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectoriesResponse
 type ListDirectoriesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12597,7 +13310,7 @@ func (s ListDirectoriesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetAttributesRequest
 type ListFacetAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12682,7 +13395,7 @@ func (s ListFacetAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetAttributesResponse
 type ListFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12733,7 +13446,7 @@ func (s ListFacetAttributesOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNamesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetNamesRequest
 type ListFacetNamesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12800,7 +13513,7 @@ func (s ListFacetNamesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNamesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetNamesResponse
 type ListFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -12851,7 +13564,7 @@ func (s ListFacetNamesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinksRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIncomingTypedLinksRequest
 type ListIncomingTypedLinksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -12983,7 +13696,7 @@ func (s ListIncomingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinksResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIncomingTypedLinksResponse
 type ListIncomingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13034,7 +13747,7 @@ func (s ListIncomingTypedLinksOutput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndexRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIndexRequest
 type ListIndexInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13149,7 +13862,7 @@ func (s ListIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndexResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIndexResponse
 type ListIndexOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13200,7 +13913,120 @@ func (s ListIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListManagedSchemaArnsRequest
+type ListManagedSchemaArnsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to retrieve.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The pagination token.
+	NextToken *string `type:"string"`
+
+	// The response for ListManagedSchemaArns. When this parameter is used, all
+	// minor version ARNs for a major version are listed.
+	SchemaArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListManagedSchemaArnsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListManagedSchemaArnsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListManagedSchemaArnsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListManagedSchemaArnsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListManagedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SchemaArn != nil {
+		v := *s.SchemaArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListManagedSchemaArnsResponse
+type ListManagedSchemaArnsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The pagination token.
+	NextToken *string `type:"string"`
+
+	// The ARNs for all AWS managed schemas.
+	SchemaArns []string `type:"list"`
+}
+
+// String returns the string representation
+func (s ListManagedSchemaArnsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListManagedSchemaArnsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListManagedSchemaArnsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListManagedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SchemaArns) > 0 {
+		v := s.SchemaArns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributesRequest
 type ListObjectAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13309,7 +14135,7 @@ func (s ListObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributesResponse
 type ListObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13361,7 +14187,7 @@ func (s ListObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildrenRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectChildrenRequest
 type ListObjectChildrenInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13456,7 +14282,7 @@ func (s ListObjectChildrenInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildrenResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectChildrenResponse
 type ListObjectChildrenOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13508,7 +14334,7 @@ func (s ListObjectChildrenOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentPathsRequest
 type ListObjectParentPathsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13591,7 +14417,7 @@ func (s ListObjectParentPathsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentPathsResponse
 type ListObjectParentPathsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13642,7 +14468,7 @@ func (s ListObjectParentPathsOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentsRequest
 type ListObjectParentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13737,7 +14563,7 @@ func (s ListObjectParentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentsResponse
 type ListObjectParentsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13789,7 +14615,7 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPoliciesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPoliciesRequest
 type ListObjectPoliciesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -13883,7 +14709,7 @@ func (s ListObjectPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPoliciesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPoliciesResponse
 type ListObjectPoliciesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -13934,7 +14760,7 @@ func (s ListObjectPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinksRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListOutgoingTypedLinksRequest
 type ListOutgoingTypedLinksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14066,7 +14892,7 @@ func (s ListOutgoingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinksResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListOutgoingTypedLinksResponse
 type ListOutgoingTypedLinksOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14117,7 +14943,7 @@ func (s ListOutgoingTypedLinksOutput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachmentsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPolicyAttachmentsRequest
 type ListPolicyAttachmentsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14211,7 +15037,7 @@ func (s ListPolicyAttachmentsInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachmentsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPolicyAttachmentsResponse
 type ListPolicyAttachmentsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14262,7 +15088,7 @@ func (s ListPolicyAttachmentsOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArnsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArnsRequest
 type ListPublishedSchemaArnsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14324,7 +15150,7 @@ func (s ListPublishedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArnsResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArnsResponse
 type ListPublishedSchemaArnsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14375,7 +15201,7 @@ func (s ListPublishedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14445,7 +15271,7 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResourceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14497,7 +15323,7 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributesRequest
 type ListTypedLinkFacetAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14580,7 +15406,7 @@ func (s ListTypedLinkFacetAttributesInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributesResponse
 type ListTypedLinkFacetAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14631,7 +15457,7 @@ func (s ListTypedLinkFacetAttributesOutput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNamesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetNamesRequest
 type ListTypedLinkFacetNamesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14699,7 +15525,7 @@ func (s ListTypedLinkFacetNamesInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNamesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetNamesResponse
 type ListTypedLinkFacetNamesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14750,7 +15576,7 @@ func (s ListTypedLinkFacetNamesOutput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicyRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LookupPolicyRequest
 type LookupPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -14834,7 +15660,7 @@ func (s LookupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicyResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LookupPolicyResponse
 type LookupPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -14887,7 +15713,7 @@ func (s LookupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The action to take on the object attribute.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectAttributeAction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectAttributeAction
 type ObjectAttributeAction struct {
 	_ struct{} `type:"structure"`
 
@@ -14926,7 +15752,7 @@ func (s ObjectAttributeAction) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A range of attributes.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectAttributeRange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectAttributeRange
 type ObjectAttributeRange struct {
 	_ struct{} `type:"structure"`
 
@@ -14985,7 +15811,7 @@ func (s ObjectAttributeRange) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Structure that contains attribute update information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectAttributeUpdate
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectAttributeUpdate
 type ObjectAttributeUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -15039,7 +15865,7 @@ func (s ObjectAttributeUpdate) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The reference that identifies an object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ObjectReference
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectReference
 type ObjectReference struct {
 	_ struct{} `type:"structure"`
 
@@ -15083,7 +15909,7 @@ func (s ObjectReference) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Returns the path to the ObjectIdentifiers that is associated with the directory.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PathToObjectIdentifiers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PathToObjectIdentifiers
 type PathToObjectIdentifiers struct {
 	_ struct{} `type:"structure"`
 
@@ -15130,7 +15956,7 @@ func (s PathToObjectIdentifiers) MarshalFields(e protocol.FieldEncoder) error {
 
 // Contains the PolicyType, PolicyId, and the ObjectIdentifier to which it is
 // attached. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PolicyAttachment
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PolicyAttachment
 type PolicyAttachment struct {
 	_ struct{} `type:"structure"`
 
@@ -15180,7 +16006,7 @@ func (s PolicyAttachment) MarshalFields(e protocol.FieldEncoder) error {
 // Used when a regular object exists in a Directory and you want to find all
 // of the policies that are associated with that object and the parent to that
 // object.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PolicyToPath
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PolicyToPath
 type PolicyToPath struct {
 	_ struct{} `type:"structure"`
 
@@ -15224,7 +16050,7 @@ func (s PolicyToPath) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PublishSchemaRequest
 type PublishSchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -15317,7 +16143,7 @@ func (s PublishSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PublishSchemaResponse
 type PublishSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15354,7 +16180,7 @@ func (s PublishSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJsonRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJsonRequest
 type PutSchemaFromJsonInput struct {
 	_ struct{} `type:"structure"`
 
@@ -15415,7 +16241,7 @@ func (s PutSchemaFromJsonInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJsonResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJsonResponse
 type PutSchemaFromJsonOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15451,7 +16277,7 @@ func (s PutSchemaFromJsonOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObjectRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RemoveFacetFromObjectRequest
 type RemoveFacetFromObjectInput struct {
 	_ struct{} `type:"structure"`
 
@@ -15532,7 +16358,7 @@ func (s RemoveFacetFromObjectInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObjectResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RemoveFacetFromObjectResponse
 type RemoveFacetFromObjectOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15561,7 +16387,7 @@ func (s RemoveFacetFromObjectOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 // Contains an Amazon Resource Name (ARN) and parameters that are associated
 // with the rule.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Rule
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
@@ -15606,7 +16432,7 @@ func (s Rule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A facet.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/SchemaFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/SchemaFacet
 type SchemaFacet struct {
 	_ struct{} `type:"structure"`
 
@@ -15660,7 +16486,7 @@ func (s SchemaFacet) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The tag structure that contains a tag key and value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Tag
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -15698,7 +16524,7 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -15766,7 +16592,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResourceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -15796,7 +16622,7 @@ func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 // Represents the data for a typed attribute. You can set one, and only one,
 // of the elements. Each attribute in an item is a name-value pair. Attributes
 // have a single value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedAttributeValue
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedAttributeValue
 type TypedAttributeValue struct {
 	_ struct{} `type:"structure"`
 
@@ -15864,7 +16690,7 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A range of attribute values. For more information, see Range Filters (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters).
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedAttributeValueRange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedAttributeValueRange
 type TypedAttributeValueRange struct {
 	_ struct{} `type:"structure"`
 
@@ -15941,7 +16767,7 @@ func (s TypedAttributeValueRange) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A typed link attribute definition.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkAttributeDefinition
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedLinkAttributeDefinition
 type TypedLinkAttributeDefinition struct {
 	_ struct{} `type:"structure"`
 
@@ -16051,7 +16877,7 @@ func (s TypedLinkAttributeDefinition) MarshalFields(e protocol.FieldEncoder) err
 }
 
 // Identifies the range of attributes that are used by a specified filter.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkAttributeRange
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedLinkAttributeRange
 type TypedLinkAttributeRange struct {
 	_ struct{} `type:"structure"`
 
@@ -16115,7 +16941,7 @@ func (s TypedLinkAttributeRange) MarshalFields(e protocol.FieldEncoder) error {
 
 // Defines the typed links structure and its attributes. To create a typed link
 // facet, use the CreateTypedLinkFacet API.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkFacet
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedLinkFacet
 type TypedLinkFacet struct {
 	_ struct{} `type:"structure"`
 
@@ -16216,7 +17042,7 @@ func (s TypedLinkFacet) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A typed link facet attribute update.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkFacetAttributeUpdate
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedLinkFacetAttributeUpdate
 type TypedLinkFacetAttributeUpdate struct {
 	_ struct{} `type:"structure"`
 
@@ -16282,7 +17108,7 @@ func (s TypedLinkFacetAttributeUpdate) MarshalFields(e protocol.FieldEncoder) er
 
 // Identifies the schema Amazon Resource Name (ARN) and facet name for the typed
 // link.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkSchemaAndFacetName
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedLinkSchemaAndFacetName
 type TypedLinkSchemaAndFacetName struct {
 	_ struct{} `type:"structure"`
 
@@ -16349,7 +17175,7 @@ func (s TypedLinkSchemaAndFacetName) MarshalFields(e protocol.FieldEncoder) erro
 // while the DetachTypedLink API accepts one as input. Similarly, the ListIncomingTypedLinks
 // and ListOutgoingTypedLinks API operations provide typed link specifiers as
 // output. You can also construct a typed link specifier from scratch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedLinkSpecifier
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedLinkSpecifier
 type TypedLinkSpecifier struct {
 	_ struct{} `type:"structure"`
 
@@ -16457,7 +17283,7 @@ func (s TypedLinkSpecifier) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -16525,7 +17351,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResourceResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16552,7 +17378,7 @@ func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateFacetRequest
 type UpdateFacetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -16651,7 +17477,7 @@ func (s UpdateFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateFacetResponse
 type UpdateFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16678,7 +17504,130 @@ func (s UpdateFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributesRequest
+type UpdateLinkAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The attributes update structure.
+	//
+	// AttributeUpdates is a required field
+	AttributeUpdates []LinkAttributeUpdate `type:"list" required:"true"`
+
+	// The Amazon Resource Name (ARN) that is associated with the Directory where
+	// the updated typed link resides. For more information, see arns or Typed link
+	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	//
+	// DirectoryArn is a required field
+	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
+
+	// Allows a typed link specifier to be accepted as input.
+	//
+	// TypedLinkSpecifier is a required field
+	TypedLinkSpecifier *TypedLinkSpecifier `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateLinkAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateLinkAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateLinkAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateLinkAttributesInput"}
+
+	if s.AttributeUpdates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
+	}
+
+	if s.DirectoryArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
+	}
+
+	if s.TypedLinkSpecifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
+	}
+	if s.AttributeUpdates != nil {
+		for i, v := range s.AttributeUpdates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TypedLinkSpecifier != nil {
+		if err := s.TypedLinkSpecifier.Validate(); err != nil {
+			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateLinkAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeUpdates) > 0 {
+		v := s.AttributeUpdates
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AttributeUpdates", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.TypedLinkSpecifier != nil {
+		v := s.TypedLinkSpecifier
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TypedLinkSpecifier", v, metadata)
+	}
+	if s.DirectoryArn != nil {
+		v := *s.DirectoryArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributesResponse
+type UpdateLinkAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateLinkAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateLinkAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateLinkAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateLinkAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributesRequest
 type UpdateObjectAttributesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -16768,7 +17717,7 @@ func (s UpdateObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributesResponse
 type UpdateObjectAttributesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16804,7 +17753,7 @@ func (s UpdateObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchemaRequest
 type UpdateSchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -16869,7 +17818,7 @@ func (s UpdateSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchemaResponse
 type UpdateSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -16906,7 +17855,7 @@ func (s UpdateSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacetRequest
 type UpdateTypedLinkFacetInput struct {
 	_ struct{} `type:"structure"`
 
@@ -17024,7 +17973,7 @@ func (s UpdateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacetResponse
 type UpdateTypedLinkFacetOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -17051,7 +18000,7 @@ func (s UpdateTypedLinkFacetOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchemaRequest
 type UpgradeAppliedSchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -17123,7 +18072,7 @@ func (s UpgradeAppliedSchemaInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchemaResponse
 type UpgradeAppliedSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -17168,7 +18117,7 @@ func (s UpgradeAppliedSchemaOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradePublishedSchemaRequest
 type UpgradePublishedSchemaInput struct {
 	_ struct{} `type:"structure"`
 
@@ -17260,7 +18209,7 @@ func (s UpgradePublishedSchemaInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradePublishedSchemaResponse
 type UpgradePublishedSchemaOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -17401,6 +18350,7 @@ const (
 	FacetAttributeTypeBoolean  FacetAttributeType = "BOOLEAN"
 	FacetAttributeTypeNumber   FacetAttributeType = "NUMBER"
 	FacetAttributeTypeDatetime FacetAttributeType = "DATETIME"
+	FacetAttributeTypeVariant  FacetAttributeType = "VARIANT"
 )
 
 func (enum FacetAttributeType) MarshalValue() (string, error) {
@@ -17408,6 +18358,23 @@ func (enum FacetAttributeType) MarshalValue() (string, error) {
 }
 
 func (enum FacetAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FacetStyle string
+
+// Enum values for FacetStyle
+const (
+	FacetStyleStatic  FacetStyle = "STATIC"
+	FacetStyleDynamic FacetStyle = "DYNAMIC"
+)
+
+func (enum FacetStyle) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FacetStyle) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

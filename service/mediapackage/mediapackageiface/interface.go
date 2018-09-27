@@ -80,6 +80,8 @@ type MediaPackageAPI interface {
 
 	RotateChannelCredentialsRequest(*mediapackage.RotateChannelCredentialsInput) mediapackage.RotateChannelCredentialsRequest
 
+	RotateIngestEndpointCredentialsRequest(*mediapackage.RotateIngestEndpointCredentialsInput) mediapackage.RotateIngestEndpointCredentialsRequest
+
 	UpdateChannelRequest(*mediapackage.UpdateChannelInput) mediapackage.UpdateChannelRequest
 
 	UpdateOriginEndpointRequest(*mediapackage.UpdateOriginEndpointInput) mediapackage.UpdateOriginEndpointRequest

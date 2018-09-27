@@ -667,6 +667,65 @@ func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) Disas
 	return DisassociateNodeRequest{Request: req, Input: input, Copy: c.DisassociateNodeRequest}
 }
 
+const opExportServerEngineAttribute = "ExportServerEngineAttribute"
+
+// ExportServerEngineAttributeRequest is a API request type for the ExportServerEngineAttribute API operation.
+type ExportServerEngineAttributeRequest struct {
+	*aws.Request
+	Input *ExportServerEngineAttributeInput
+	Copy  func(*ExportServerEngineAttributeInput) ExportServerEngineAttributeRequest
+}
+
+// Send marshals and sends the ExportServerEngineAttribute API request.
+func (r ExportServerEngineAttributeRequest) Send() (*ExportServerEngineAttributeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExportServerEngineAttributeOutput), nil
+}
+
+// ExportServerEngineAttributeRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
+//
+// Exports a specified server engine attribute as a base64-encoded string. For
+// example, you can export user data that you can use in EC2 to associate nodes
+// with a server.
+//
+// This operation is synchronous.
+//
+// A ValidationException is raised when parameters of the request are not valid.
+// A ResourceNotFoundException is thrown when the server does not exist. An
+// InvalidStateException is thrown when the server is in any of the following
+// states: CREATING, TERMINATED, FAILED or DELETING.
+//
+//    // Example sending a request using the ExportServerEngineAttributeRequest method.
+//    req := client.ExportServerEngineAttributeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttribute
+func (c *OpsWorksCM) ExportServerEngineAttributeRequest(input *ExportServerEngineAttributeInput) ExportServerEngineAttributeRequest {
+	op := &aws.Operation{
+		Name:       opExportServerEngineAttribute,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ExportServerEngineAttributeInput{}
+	}
+
+	output := &ExportServerEngineAttributeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ExportServerEngineAttributeRequest{Request: req, Input: input, Copy: c.ExportServerEngineAttributeRequest}
+}
+
 const opRestoreServer = "RestoreServer"
 
 // RestoreServerRequest is a API request type for the RestoreServer API operation.
@@ -1562,21 +1621,10 @@ type DescribeBackupsInput struct {
 	// Describes a single backup.
 	BackupId *string `type:"string"`
 
-	// To receive a paginated response, use this parameter to specify the maximum
-	// number of results to be returned with a single call. If the number of available
-	// results exceeds this maximum, the response includes a NextToken value that
-	// you can assign to the NextToken request parameter to get the next set of
-	// results.
+	// This is not currently implemented for DescribeBackups requests.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// NextToken is a string that is returned in some command responses. It indicates
-	// that not all entries have been returned, and that you must run at least one
-	// more request to get remaining items. To get remaining results, call DescribeBackups
-	// again, and assign the token from the previous results as the value of the
-	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
-	// returned in your previous results causes an InvalidNextTokenException to
-	// occur.
+	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string `type:"string"`
 
 	// Returns backups for the server with the specified ServerName.
@@ -1618,14 +1666,7 @@ type DescribeBackupsOutput struct {
 	// Contains the response to a DescribeBackups request.
 	Backups []Backup `type:"list"`
 
-	// NextToken is a string that is returned in some command responses. It indicates
-	// that not all entries have been returned, and that you must run at least one
-	// more request to get remaining items. To get remaining results, call DescribeBackups
-	// again, and assign the token from the previous results as the value of the
-	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
-	// returned in your previous results causes an InvalidNextTokenException to
-	// occur.
+	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string `type:"string"`
 }
 
@@ -1823,21 +1864,10 @@ func (s DescribeNodeAssociationStatusOutput) SDKResponseMetadata() aws.Response 
 type DescribeServersInput struct {
 	_ struct{} `type:"structure"`
 
-	// To receive a paginated response, use this parameter to specify the maximum
-	// number of results to be returned with a single call. If the number of available
-	// results exceeds this maximum, the response includes a NextToken value that
-	// you can assign to the NextToken request parameter to get the next set of
-	// results.
+	// This is not currently implemented for DescribeServers requests.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// NextToken is a string that is returned in some command responses. It indicates
-	// that not all entries have been returned, and that you must run at least one
-	// more request to get remaining items. To get remaining results, call DescribeServers
-	// again, and assign the token from the previous results as the value of the
-	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
-	// returned in your previous results causes an InvalidNextTokenException to
-	// occur.
+	// This is not currently implemented for DescribeServers requests.
 	NextToken *string `type:"string"`
 
 	// Describes the server with the specified ServerName.
@@ -1876,14 +1906,7 @@ type DescribeServersOutput struct {
 
 	responseMetadata aws.Response
 
-	// NextToken is a string that is returned in some command responses. It indicates
-	// that not all entries have been returned, and that you must run at least one
-	// more request to get remaining items. To get remaining results, call DescribeServers
-	// again, and assign the token from the previous results as the value of the
-	// nextToken parameter. If there are no more results, the response object's
-	// nextToken parameter value is null. Setting a nextToken value that was not
-	// returned in your previous results causes an InvalidNextTokenException to
-	// occur.
+	// This is not currently implemented for DescribeServers requests.
 	NextToken *string `type:"string"`
 
 	// Contains the response to a DescribeServers request.
@@ -2011,6 +2034,95 @@ func (s EngineAttribute) String() string {
 // GoString returns the string representation
 func (s EngineAttribute) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeRequest
+type ExportServerEngineAttributeInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the export attribute. Currently supported export attribute is
+	// "Userdata" which exports a userdata script filled out with parameters provided
+	// in the InputAttributes list.
+	//
+	// ExportAttributeName is a required field
+	ExportAttributeName *string `type:"string" required:"true"`
+
+	// The list of engine attributes. The list type is EngineAttribute. EngineAttribute
+	// is a pair of attribute name and value. For ExportAttributeName "Userdata",
+	// currently supported input attribute names are: - "RunList": For Chef, an
+	// ordered list of roles and/or recipes that are run in the exact order. For
+	// Puppet, this parameter is ignored. - "OrganizationName": For Chef, an organization
+	// name. AWS OpsWorks for Chef Server always creates the organization "default".
+	// For Puppet, this parameter is ignored. - "NodeEnvironment": For Chef, a node
+	// environment (eg. development, staging, onebox). For Puppet, this parameter
+	// is ignored. - "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
+	// separated by dots, eg. "13.8.5"). If empty, it uses the latest one. For Puppet,
+	// this parameter is ignored.
+	InputAttributes []EngineAttribute `type:"list"`
+
+	// The name of the Server to which the attribute is being exported from
+	//
+	// ServerName is a required field
+	ServerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ExportServerEngineAttributeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportServerEngineAttributeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExportServerEngineAttributeInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExportServerEngineAttributeInput"}
+
+	if s.ExportAttributeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ExportAttributeName"))
+	}
+
+	if s.ServerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
+	}
+	if s.ServerName != nil && len(*s.ServerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeResponse
+type ExportServerEngineAttributeOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The requested engine attribute pair with attribute name and value.
+	EngineAttribute *EngineAttribute `type:"structure"`
+
+	// The requested ServerName.
+	ServerName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ExportServerEngineAttributeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportServerEngineAttributeOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExportServerEngineAttributeOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerRequest

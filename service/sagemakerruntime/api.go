@@ -34,11 +34,19 @@ func (r InvokeEndpointRequest) Send() (*InvokeEndpointOutput, error) {
 // your client applications use this API to get inferences from the model hosted
 // at the specified endpoint.
 //
-// For an overview of Amazon SageMaker, see How It Works (http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html)
+// For an overview of Amazon SageMaker, see How It Works (http://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 //
 // Amazon SageMaker strips all POST headers except those supported by the API.
 // Amazon SageMaker might add additional headers. You should not rely on the
 // behavior of headers outside those enumerated in the request syntax.
+//
+// Cals to InvokeEndpoint are authenticated by using AWS Signature Version 4.
+// For information, see Authenticating Requests (AWS Signature Version 4) (http://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
+// in the Amazon S3 API Reference.
+//
+// Endpoints are scoped to an individual account, and are not public. The URL
+// does not contain the account ID, but Amazon SageMaker determines the account
+// ID from the authentication token that is supplied by the caller.
 //
 //    // Example sending a request using the InvokeEndpointRequest method.
 //    req := client.InvokeEndpointRequest(params)
@@ -76,11 +84,16 @@ type InvokeEndpointInput struct {
 	// Provides input data, in the format specified in the ContentType request header.
 	// Amazon SageMaker passes all of the data in the body to the model.
 	//
+	// For information about the format of the request body, see Common Data Formats—Inference
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
+	//
 	// Body is a required field
 	Body []byte `type:"blob" required:"true"`
 
 	// The MIME type of the input data in the request body.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
+
+	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string"`
 
 	// The name of the endpoint that you specified when you created the endpoint
 	// using the CreateEndpoint (http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
@@ -133,6 +146,12 @@ func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CustomAttributes != nil {
+		v := *s.CustomAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Custom-Attributes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndpointName != nil {
 		v := *s.EndpointName
 
@@ -156,11 +175,16 @@ type InvokeEndpointOutput struct {
 
 	// Includes the inference provided by the model.
 	//
+	// For information about the format of the response body, see Common Data Formats—Inference
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
+	//
 	// Body is a required field
 	Body []byte `type:"blob" required:"true"`
 
 	// The MIME type of the inference returned in the response body.
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
+
+	CustomAttributes *string `location:"header" locationName:"X-Amzn-SageMaker-Custom-Attributes" type:"string"`
 
 	// Identifies the production variant that was invoked.
 	InvokedProductionVariant *string `location:"header" locationName:"x-Amzn-Invoked-Production-Variant" type:"string"`
@@ -188,6 +212,12 @@ func (s InvokeEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CustomAttributes != nil {
+		v := *s.CustomAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Custom-Attributes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.InvokedProductionVariant != nil {
 		v := *s.InvokedProductionVariant

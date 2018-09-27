@@ -494,7 +494,9 @@ func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
 // UpdateVocabularyRequest returns a request value for making API operation for
 // Amazon Transcribe Service.
 //
-// Updates an existing vocabulary with new values.
+// Updates an existing vocabulary with new values. The UpdateVocabulary operation
+// overwrites all of the existing information with the values that you provide
+// in the request.
 //
 //    // Example sending a request using the UpdateVocabularyRequest method.
 //    req := client.UpdateVocabularyRequest(params)
@@ -1031,16 +1033,31 @@ func (s *Media) Validate() error {
 type Settings struct {
 	_ struct{} `type:"structure"`
 
+	// Instructs Amazon Transcribe to process each audio channel separately and
+	// then merge the transcription output of each channel into a single transcription.
+	//
+	// Amazon Transcribe also produces a transcription of each item detected on
+	// an audio channel, including the start time and end time of the item and alternative
+	// transcriptions of the item including the confidence that Amazon Transcribe
+	// has in the transcription.
+	//
+	// You can't set both ShowSpeakerLabels and ChannelIdentification in the same
+	// request. If you set both, your request returns a BadRequestException.
+	ChannelIdentification *bool `type:"boolean"`
+
 	// The maximum number of speakers to identify in the input audio. If there are
 	// more speakers in the audio than this number, multiple speakers will be identified
 	// as a single speaker. If you specify the MaxSpeakerLabels field, you must
 	// set the ShowSpeakerLabels field to true.
 	MaxSpeakerLabels *int64 `min:"2" type:"integer"`
 
-	// Determines whether the transcription job should use speaker recognition to
-	// identify different speakers in the input audio. If you set the ShowSpeakerLabels
-	// field to true, you must also set the maximum number of speaker labels MaxSpeakerLabels
-	// field.
+	// Determines whether the transcription job uses speaker recognition to identify
+	// different speakers in the input audio. Speaker recognition labels individual
+	// speakers in the audio file. If you set the ShowSpeakerLabels field to true,
+	// you must also set the maximum number of speaker labels MaxSpeakerLabels field.
+	//
+	// You can't set both ShowSpeakerLabels and ChannelIdentification in the same
+	// request. If you set both, your request returns a BadRequestException.
 	ShowSpeakerLabels *bool `type:"boolean"`
 
 	// The name of a vocabulary to use when processing the transcription job.
@@ -1095,10 +1112,25 @@ type StartTranscriptionJobInput struct {
 	// The sample rate, in Hertz, of the audio track in the input media file.
 	MediaSampleRateHertz *int64 `min:"8000" type:"integer"`
 
+	// The location where the transcription is stored.
+	//
+	// If you set the OutputBucketName, Amazon Transcribe puts the transcription
+	// in the specified S3 bucket. When you call the GetTranscriptionJob operation,
+	// the operation returns this location in the TranscriptFileUri field. The S3
+	// bucket must have permissions that allow Amazon Transcribe to put files in
+	// the bucket. For more information, see Permissions Required for IAM User Roles
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user).
+	//
+	// If you don't set the OutputBucketName, Amazon Transcribe generates a pre-signed
+	// URL, a shareable URL that provides secure access to your transcription, and
+	// returns it in the TranscriptFileUri field. Use this URL to download the transcription.
+	OutputBucketName *string `type:"string"`
+
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *Settings `type:"structure"`
 
-	// The name of the job. The name must be unique within an AWS account.
+	// The name of the job. You can't use the strings "." or ".." in the job name.
+	// The name must be unique within an AWS account.
 	//
 	// TranscriptionJobName is a required field
 	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
@@ -1179,13 +1211,17 @@ func (s StartTranscriptionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Describes the output of a transcription job.
+// Identifies the location of a transcription.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Transcript
 type Transcript struct {
 	_ struct{} `type:"structure"`
 
-	// The S3 location where the transcription result is stored. Use this URI to
-	// access the results of the transcription job.
+	// The location where the transcription is stored.
+	//
+	// Use this URI to access the transcription. If you specified an S3 bucket in
+	// the OutputBucketName field when you created the job, this is the URI of that
+	// bucket. If you chose to store the transcription in Amazon Transcribe, this
+	// is a shareable URL that provides secure access to that location.
 	TranscriptFileUri *string `min:"1" type:"string"`
 }
 
@@ -1205,10 +1241,10 @@ func (s Transcript) GoString() string {
 type TranscriptionJob struct {
 	_ struct{} `type:"structure"`
 
-	// Timestamp of the date and time that the job completed.
+	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Timestamp of the date and time that the job was created.
+	// A timestamp that shows when the job was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// If the TranscriptionJobStatus field is FAILED, this field contains information
@@ -1218,7 +1254,7 @@ type TranscriptionJob struct {
 	// The language code for the input speech.
 	LanguageCode LanguageCode `type:"string" enum:"true"`
 
-	// An object that describes the input media for a transcription job.
+	// An object that describes the input media for the transcription job.
 	Media *Media `type:"structure"`
 
 	// The format of the input media file.
@@ -1227,13 +1263,16 @@ type TranscriptionJob struct {
 	// The sample rate, in Hertz, of the audio track in the input media file.
 	MediaSampleRateHertz *int64 `min:"8000" type:"integer"`
 
-	// Optional settings for the transcription job.
+	// Optional settings for the transcription job. Use these settings to turn on
+	// speaker recognition, to set the maximum number of speakers that should be
+	// identified and to specify a custom vocabulary to use when processing the
+	// transcription job.
 	Settings *Settings `type:"structure"`
 
 	// An object that describes the output of the transcription job.
 	Transcript *Transcript `type:"structure"`
 
-	// A name to identify the transcription job.
+	// The name of the transcription job.
 	TranscriptionJobName *string `min:"1" type:"string"`
 
 	// The status of the transcription job.
@@ -1255,20 +1294,30 @@ func (s TranscriptionJob) GoString() string {
 type TranscriptionJobSummary struct {
 	_ struct{} `type:"structure"`
 
-	// Timestamp of the date and time that the job completed.
+	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Timestamp of the date and time that the job was created.
+	// A timestamp that shows when the job was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// If the TranscriptionJobStatus field is FAILED, this field contains a description
-	// of the error.
+	// If the TranscriptionJobStatus field is FAILED, a description of the error.
 	FailureReason *string `type:"string"`
 
 	// The language code for the input speech.
 	LanguageCode LanguageCode `type:"string" enum:"true"`
 
-	// The name assigned to the transcription job when it was created.
+	// Indicates the location of the output of the transcription job.
+	//
+	// If the value is CUSTOMER_BUCKET then the location is the S3 bucket specified
+	// in the outputBucketName field when the transcription job was started with
+	// the StartTranscriptionJob operation.
+	//
+	// If the value is SERVICE_BUCKET then the output is stored by Amazon Transcribe
+	// and can be retrieved using the URI in the GetTranscriptionJob response's
+	// TranscriptFileUri field.
+	OutputLocationType OutputLocationType `type:"string" enum:"true"`
+
+	// The name of the transcription job.
 	TranscriptionJobName *string `min:"1" type:"string"`
 
 	// The status of the transcription job. When the status is COMPLETED, use the
@@ -1436,6 +1485,23 @@ func (enum MediaFormat) MarshalValue() (string, error) {
 }
 
 func (enum MediaFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OutputLocationType string
+
+// Enum values for OutputLocationType
+const (
+	OutputLocationTypeCustomerBucket OutputLocationType = "CUSTOMER_BUCKET"
+	OutputLocationTypeServiceBucket  OutputLocationType = "SERVICE_BUCKET"
+)
+
+func (enum OutputLocationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputLocationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

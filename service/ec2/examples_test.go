@@ -335,6 +335,43 @@ func ExampleEC2_AssociateDhcpOptionsRequest_shared01() {
 	fmt.Println(result)
 }
 
+// To associate an IAM instance profile with an instance
+//
+// This example associates an IAM instance profile named admin-role with the specified
+// instance.
+func ExampleEC2_AssociateIamInstanceProfileRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.AssociateIamInstanceProfileInput{
+		IamInstanceProfile: &ec2.IamInstanceProfileSpecification{
+			Name: aws.String("admin-role"),
+		},
+		InstanceId: aws.String("i-123456789abcde123"),
+	}
+
+	req := svc.AssociateIamInstanceProfileRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To associate a route table with a subnet
 //
 // This example associates the specified route table with the specified subnet.
@@ -456,6 +493,241 @@ func ExampleEC2_AttachVolumeRequest_shared00() {
 	}
 
 	req := svc.AttachVolumeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To add a rule that allows outbound traffic to a specific address range
+//
+// This example adds a rule that grants access to the specified address ranges on TCP
+// port 80.
+func ExampleEC2_AuthorizeSecurityGroupEgressRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.AuthorizeSecurityGroupEgressInput{
+		GroupId: aws.String("sg-1a2b3c4d"),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(80),
+				IpProtocol: aws.String("tcp"),
+				IpRanges: []ec2.IpRange{
+					{
+						CidrIp: aws.String("10.0.0.0/16"),
+					},
+				},
+				ToPort: aws.Int64(80),
+			},
+		},
+	}
+
+	req := svc.AuthorizeSecurityGroupEgressRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To add a rule that allows outbound traffic to a specific security group
+//
+// This example adds a rule that grants access to the specified security group on TCP
+// port 80.
+func ExampleEC2_AuthorizeSecurityGroupEgressRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.AuthorizeSecurityGroupEgressInput{
+		GroupId: aws.String("sg-1a2b3c4d"),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(80),
+				IpProtocol: aws.String("tcp"),
+				ToPort:     aws.Int64(80),
+				UserIdGroupPairs: []ec2.UserIdGroupPair{
+					{
+						GroupId: aws.String("sg-4b51a32f"),
+					},
+				},
+			},
+		},
+	}
+
+	req := svc.AuthorizeSecurityGroupEgressRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To add a rule that allows inbound SSH traffic from an IPv4 address range
+//
+// This example enables inbound traffic on TCP port 22 (SSH). The rule includes a description
+// to help you identify it later.
+func ExampleEC2_AuthorizeSecurityGroupIngressRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.AuthorizeSecurityGroupIngressInput{
+		GroupId: aws.String("sg-903004f8"),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(22),
+				IpProtocol: aws.String("tcp"),
+				IpRanges: []ec2.IpRange{
+					{
+						CidrIp:      aws.String("203.0.113.0/24"),
+						Description: aws.String("SSH access from the LA office"),
+					},
+				},
+				ToPort: aws.Int64(22),
+			},
+		},
+	}
+
+	req := svc.AuthorizeSecurityGroupIngressRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To add a rule that allows inbound HTTP traffic from another security group
+//
+// This example enables inbound traffic on TCP port 80 from the specified security group.
+// The group must be in the same VPC or a peer VPC. Incoming traffic is allowed based
+// on the private IP addresses of instances that are associated with the specified security
+// group.
+func ExampleEC2_AuthorizeSecurityGroupIngressRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.AuthorizeSecurityGroupIngressInput{
+		GroupId: aws.String("sg-111aaa22"),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(80),
+				IpProtocol: aws.String("tcp"),
+				ToPort:     aws.Int64(80),
+				UserIdGroupPairs: []ec2.UserIdGroupPair{
+					{
+						Description: aws.String("HTTP access from other instances"),
+						GroupId:     aws.String("sg-1a2b3c4d"),
+					},
+				},
+			},
+		},
+	}
+
+	req := svc.AuthorizeSecurityGroupIngressRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To add a rule that allows inbound RDP traffic from an IPv6 address range
+//
+// This example adds an inbound rule that allows RDP traffic from the specified IPv6
+// address range. The rule includes a description to help you identify it later.
+func ExampleEC2_AuthorizeSecurityGroupIngressRequest_shared02() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.AuthorizeSecurityGroupIngressInput{
+		GroupId: aws.String("sg-123abc12 "),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(3389),
+				IpProtocol: aws.String("tcp"),
+				Ipv6Ranges: []ec2.Ipv6Range{
+					{
+						CidrIpv6:    aws.String("2001:db8:1234:1a00::/64"),
+						Description: aws.String("RDP access from the NY office"),
+					},
+				},
+				ToPort: aws.Int64(3389),
+			},
+		},
+	}
+
+	req := svc.AuthorizeSecurityGroupIngressRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -618,6 +890,42 @@ func ExampleEC2_ConfirmProductInstanceRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To copy an AMI to another region
+//
+// This example copies the specified AMI from the us-east-1 region to the current region.
+func ExampleEC2_CopyImageRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.CopyImageInput{
+		Description:   aws.String(""),
+		Name:          aws.String("My server"),
+		SourceImageId: aws.String("ami-5731123e"),
+		SourceRegion:  aws.String("us-east-1"),
+	}
+
+	req := svc.CopyImageRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To copy a snapshot
 //
 // This example copies a snapshot with the snapshot ID of ``snap-066877671789bd71b``
@@ -733,6 +1041,52 @@ func ExampleEC2_CreateDhcpOptionsRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To create an AMI from an Amazon EBS-backed instance
+//
+// This example creates an AMI from the specified instance and adds an EBS volume with
+// the device name /dev/sdh and an instance store volume with the device name /dev/sdc.
+func ExampleEC2_CreateImageRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.CreateImageInput{
+		BlockDeviceMappings: []ec2.BlockDeviceMapping{
+			{
+				DeviceName: aws.String("/dev/sdh"),
+			},
+			{
+				DeviceName:  aws.String("/dev/sdc"),
+				VirtualName: aws.String("ephemeral1"),
+			},
+		},
+		Description: aws.String("An AMI for my server"),
+		InstanceId:  aws.String("i-1234567890abcdef0"),
+		Name:        aws.String("My server"),
+		NoReboot:    aws.Bool(true),
+	}
+
+	req := svc.CreateImageRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To create an Internet gateway
 //
 // This example creates an Internet gateway.
@@ -779,6 +1133,104 @@ func ExampleEC2_CreateKeyPairRequest_shared00() {
 	}
 
 	req := svc.CreateKeyPairRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To create a launch template
+//
+// This example creates a launch template that specifies the subnet in which to launch
+// the instance, assigns a public IP address and an IPv6 address to the instance, and
+// creates a tag for the instance.
+func ExampleEC2_CreateLaunchTemplateRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.CreateLaunchTemplateInput{
+		LaunchTemplateData: &ec2.RequestLaunchTemplateData{
+			ImageId:      aws.String("ami-8c1be5f6"),
+			InstanceType: ec2.InstanceTypeT2Small,
+			NetworkInterfaces: []ec2.LaunchTemplateInstanceNetworkInterfaceSpecificationRequest{
+				{
+					AssociatePublicIpAddress: aws.Bool(true),
+					DeviceIndex:              aws.Int64(0),
+					Ipv6AddressCount:         aws.Int64(1),
+					SubnetId:                 aws.String("subnet-7b16de0c"),
+				},
+			},
+			TagSpecifications: []ec2.LaunchTemplateTagSpecificationRequest{
+				{
+					ResourceType: ec2.ResourceTypeInstance,
+					Tags: []ec2.Tag{
+						{
+							Key:   aws.String("Name"),
+							Value: aws.String("webserver"),
+						},
+					},
+				},
+			},
+		},
+		LaunchTemplateName: aws.String("my-template"),
+		VersionDescription: aws.String("WebVersion1"),
+	}
+
+	req := svc.CreateLaunchTemplateRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To create a launch template version
+//
+// This example creates a new launch template version based on version 1 of the specified
+// launch template and specifies a different AMI ID.
+func ExampleEC2_CreateLaunchTemplateVersionRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.CreateLaunchTemplateVersionInput{
+		LaunchTemplateData: &ec2.RequestLaunchTemplateData{
+			ImageId: aws.String("ami-c998b6b2"),
+		},
+		LaunchTemplateId:   aws.String("lt-0abcd290751193123"),
+		SourceVersion:      aws.String("1"),
+		VersionDescription: aws.String("WebVersion2"),
+	}
+
+	req := svc.CreateLaunchTemplateVersionRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -1031,6 +1483,41 @@ func ExampleEC2_CreateRouteTableRequest_shared00() {
 	}
 
 	req := svc.CreateRouteTableRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To create a security group for a VPC
+//
+// This example creates a security group for the specified VPC.
+func ExampleEC2_CreateSecurityGroupRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.CreateSecurityGroupInput{
+		Description: aws.String("My security group"),
+		GroupName:   aws.String("my-security-group"),
+		VpcId:       aws.String("vpc-1a2b3c4d"),
+	}
+
+	req := svc.CreateSecurityGroupRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -1433,6 +1920,75 @@ func ExampleEC2_DeleteKeyPairRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To delete a launch template
+//
+// This example deletes the specified launch template.
+func ExampleEC2_DeleteLaunchTemplateRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DeleteLaunchTemplateInput{
+		LaunchTemplateId: aws.String("lt-0abcd290751193123"),
+	}
+
+	req := svc.DeleteLaunchTemplateRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete a launch template version
+//
+// This example deletes the specified launch template version.
+func ExampleEC2_DeleteLaunchTemplateVersionsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DeleteLaunchTemplateVersionsInput{
+		LaunchTemplateId: aws.String("lt-0abcd290751193123"),
+		Versions: []string{
+			"1",
+		},
+	}
+
+	req := svc.DeleteLaunchTemplateVersionsRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To delete a NAT gateway
 //
 // This example deletes the specified NAT gateway.
@@ -1650,6 +2206,39 @@ func ExampleEC2_DeleteRouteTableRequest_shared00() {
 	}
 
 	req := svc.DeleteRouteTableRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To delete a security group
+//
+// This example deletes the specified security group.
+func ExampleEC2_DeleteSecurityGroupRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DeleteSecurityGroupInput{
+		GroupId: aws.String("sg-903004f8"),
+	}
+
+	req := svc.DeleteSecurityGroupRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -2153,6 +2742,110 @@ func ExampleEC2_DescribeDhcpOptionsRequest_shared00() {
 	fmt.Println(result)
 }
 
+// To describe an IAM instance profile association
+//
+// This example describes the specified IAM instance profile association.
+func ExampleEC2_DescribeIamInstanceProfileAssociationsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeIamInstanceProfileAssociationsInput{
+		AssociationIds: []string{
+			"iip-assoc-0db249b1f25fa24b8",
+		},
+	}
+
+	req := svc.DescribeIamInstanceProfileAssociationsRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe the launch permissions for an AMI
+//
+// This example describes the launch permissions for the specified AMI.
+func ExampleEC2_DescribeImageAttributeRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeImageAttributeInput{
+		Attribute: ec2.ImageAttributeNameLaunchPermission,
+		ImageId:   aws.String("ami-5731123e"),
+	}
+
+	req := svc.DescribeImageAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe an AMI
+//
+// This example describes the specified AMI.
+func ExampleEC2_DescribeImagesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeImagesInput{
+		ImageIds: []string{
+			"ami-5731123e",
+		},
+	}
+
+	req := svc.DescribeImagesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To describe the instance type
 //
 // This example describes the instance type of the specified instance.
@@ -2258,6 +2951,156 @@ func ExampleEC2_DescribeInstanceAttributeRequest_shared02() {
 	fmt.Println(result)
 }
 
+// To describe the status of an instance
+//
+// This example describes the current status of the specified instance.
+func ExampleEC2_DescribeInstanceStatusRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeInstanceStatusInput{
+		InstanceIds: []string{
+			"i-1234567890abcdef0",
+		},
+	}
+
+	req := svc.DescribeInstanceStatusRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe an Amazon EC2 instance
+//
+// This example describes the specified instance.
+func ExampleEC2_DescribeInstancesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeInstancesInput{
+		InstanceIds: []string{
+			"i-1234567890abcdef0",
+		},
+	}
+
+	req := svc.DescribeInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe the instances with a specific instance type
+//
+// This example describes the instances with the t2.micro instance type.
+func ExampleEC2_DescribeInstancesRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeInstancesInput{
+		Filters: []ec2.Filter{
+			{
+				Name: aws.String("instance-type"),
+				Values: []string{
+					"t2.micro",
+				},
+			},
+		},
+	}
+
+	req := svc.DescribeInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe the instances with a specific tag
+//
+// This example describes the instances with the Purpose=test tag.
+func ExampleEC2_DescribeInstancesRequest_shared02() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeInstancesInput{
+		Filters: []ec2.Filter{
+			{
+				Name: aws.String("tag:Purpose"),
+				Values: []string{
+					"test",
+				},
+			},
+		},
+	}
+
+	req := svc.DescribeInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To describe the Internet gateway for a VPC
 //
 // This example describes the Internet gateway for the specified VPC.
@@ -2315,6 +3158,74 @@ func ExampleEC2_DescribeKeyPairsRequest_shared00() {
 	}
 
 	req := svc.DescribeKeyPairsRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe the versions for a launch template
+//
+// This example describes the versions for the specified launch template.
+func ExampleEC2_DescribeLaunchTemplateVersionsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeLaunchTemplateVersionsInput{
+		LaunchTemplateId: aws.String("068f72b72934aff71"),
+	}
+
+	req := svc.DescribeLaunchTemplateVersionsRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe a launch template
+//
+// This example describes the specified launch template.
+func ExampleEC2_DescribeLaunchTemplatesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeLaunchTemplatesInput{
+		LaunchTemplateIds: []string{
+			"lt-01238c059e3466abc",
+		},
+	}
+
+	req := svc.DescribeLaunchTemplatesRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -2737,6 +3648,116 @@ func ExampleEC2_DescribeScheduledInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeScheduledInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe security group references
+//
+// This example describes the security group references for the specified security group.
+func ExampleEC2_DescribeSecurityGroupReferencesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeSecurityGroupReferencesInput{
+		GroupId: []string{
+			"sg-903004f8",
+		},
+	}
+
+	req := svc.DescribeSecurityGroupReferencesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe a security group
+//
+// This example describes the specified security group.
+func ExampleEC2_DescribeSecurityGroupsRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeSecurityGroupsInput{
+		GroupIds: []string{
+			"sg-903004f8",
+		},
+	}
+
+	req := svc.DescribeSecurityGroupsRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To describe a tagged security group
+//
+// This example describes the security groups that include the specified tag (Purpose=test).
+func ExampleEC2_DescribeSecurityGroupsRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DescribeSecurityGroupsInput{
+		Filters: []ec2.Filter{
+			{
+				Name: aws.String("tag:Purpose"),
+				Values: []string{
+					"test",
+				},
+			},
+		},
+	}
+
+	req := svc.DescribeSecurityGroupsRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -3657,6 +4678,39 @@ func ExampleEC2_DisassociateAddressRequest_shared01() {
 	fmt.Println(result)
 }
 
+// To disassociate an IAM instance profile
+//
+// This example disassociates the specified IAM instance profile from an instance.
+func ExampleEC2_DisassociateIamInstanceProfileRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.DisassociateIamInstanceProfileInput{
+		AssociationId: aws.String("iip-assoc-05020b59952902f5f"),
+	}
+
+	req := svc.DisassociateIamInstanceProfileRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To disassociate a route table
 //
 // This example disassociates the specified route table from its associated subnet.
@@ -3740,6 +4794,259 @@ func ExampleEC2_EnableVolumeIORequest_shared00() {
 	}
 
 	req := svc.EnableVolumeIORequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get the console output
+//
+// This example gets the console output for the specified instance.
+func ExampleEC2_GetConsoleOutputRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.GetConsoleOutputInput{
+		InstanceId: aws.String("i-1234567890abcdef0"),
+	}
+
+	req := svc.GetConsoleOutputRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To get the launch template data for an instance
+//
+// This example gets the launch template data for the specified instance.
+func ExampleEC2_GetLaunchTemplateDataRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.GetLaunchTemplateDataInput{
+		InstanceId: aws.String("0123d646e8048babc"),
+	}
+
+	req := svc.GetLaunchTemplateDataRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To make an AMI public
+//
+// This example makes the specified AMI public.
+func ExampleEC2_ModifyImageAttributeRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ModifyImageAttributeInput{
+		ImageId: aws.String("ami-5731123e"),
+		LaunchPermission: &ec2.LaunchPermissionModifications{
+			Add: []ec2.LaunchPermission{
+				{
+					Group: ec2.PermissionGroupAll,
+				},
+			},
+		},
+	}
+
+	req := svc.ModifyImageAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To grant launch permissions
+//
+// This example grants launch permissions for the specified AMI to the specified AWS
+// account.
+func ExampleEC2_ModifyImageAttributeRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ModifyImageAttributeInput{
+		ImageId: aws.String("ami-5731123e"),
+		LaunchPermission: &ec2.LaunchPermissionModifications{
+			Add: []ec2.LaunchPermission{
+				{
+					UserId: aws.String("123456789012"),
+				},
+			},
+		},
+	}
+
+	req := svc.ModifyImageAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To modify the instance type
+//
+// This example modifies the instance type of the specified stopped instance.
+func ExampleEC2_ModifyInstanceAttributeRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ModifyInstanceAttributeInput{
+		InstanceId: aws.String("i-1234567890abcdef0"),
+		InstanceType: &ec2.AttributeValue{
+			Value: aws.String("m5.large"),
+		},
+	}
+
+	req := svc.ModifyInstanceAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To enable enhanced networking
+//
+// This example enables enhanced networking for the specified stopped instance.
+func ExampleEC2_ModifyInstanceAttributeRequest_shared01() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ModifyInstanceAttributeInput{
+		EnaSupport: &ec2.AttributeBooleanValue{
+			Value: aws.Bool(true),
+		},
+		InstanceId: aws.String("i-1234567890abcdef0"),
+	}
+
+	req := svc.ModifyInstanceAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To change the default version of a launch template
+//
+// This example specifies version 2 as the default version of the specified launch template.
+func ExampleEC2_ModifyLaunchTemplateRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ModifyLaunchTemplateInput{
+		DefaultVersion:   aws.String("2"),
+		LaunchTemplateId: aws.String("lt-0abcd290751193123"),
+	}
+
+	req := svc.ModifyLaunchTemplateRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -4258,6 +5565,41 @@ func ExampleEC2_PurchaseScheduledInstancesRequest_shared00() {
 	}
 
 	req := svc.PurchaseScheduledInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To reboot an EC2 instance
+//
+// This example reboots the specified EC2 instance.
+func ExampleEC2_RebootInstancesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.RebootInstancesInput{
+		InstanceIds: []string{
+			"i-1234567890abcdef5",
+		},
+	}
+
+	req := svc.RebootInstancesRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -4817,6 +6159,75 @@ func ExampleEC2_RequestSpotInstancesRequest_shared01() {
 	fmt.Println(result)
 }
 
+// To reset the launchPermission attribute
+//
+// This example resets the launchPermission attribute for the specified AMI. By default,
+// AMIs are private.
+func ExampleEC2_ResetImageAttributeRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ResetImageAttributeInput{
+		Attribute: ec2.ResetImageAttributeNameLaunchPermission,
+		ImageId:   aws.String("ami-5731123e"),
+	}
+
+	req := svc.ResetImageAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To reset the sourceDestCheck attribute
+//
+// This example resets the sourceDestCheck attribute for the specified instance.
+func ExampleEC2_ResetInstanceAttributeRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.ResetInstanceAttributeInput{
+		Attribute:  ec2.InstanceAttributeNameSourceDestCheck,
+		InstanceId: aws.String("i-1234567890abcdef0"),
+	}
+
+	req := svc.ResetInstanceAttributeRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To reset a snapshot attribute
 //
 // This example resets the create volume permissions for snapshot ``snap-1234567890abcdef0``.
@@ -4867,6 +6278,64 @@ func ExampleEC2_RestoreAddressToClassicRequest_shared00() {
 	}
 
 	req := svc.RestoreAddressToClassicRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To launch an instance
+//
+// This example launches an instance using the specified AMI, instance type, security
+// group, subnet, block device mapping, and tags.
+func ExampleEC2_RunInstancesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.RunInstancesInput{
+		BlockDeviceMappings: []ec2.BlockDeviceMapping{
+			{
+				DeviceName: aws.String("/dev/sdh"),
+			},
+		},
+		ImageId:      aws.String("ami-abc12345"),
+		InstanceType: ec2.InstanceTypeT2Micro,
+		KeyName:      aws.String("my-key-pair"),
+		MaxCount:     aws.Int64(1),
+		MinCount:     aws.Int64(1),
+		SecurityGroupIds: []string{
+			"sg-1a2b3c4d",
+		},
+		SubnetId: aws.String("subnet-6e7f829e"),
+		TagSpecifications: []ec2.TagSpecification{
+			{
+				ResourceType: ec2.ResourceTypeInstance,
+				Tags: []ec2.Tag{
+					{
+						Key:   aws.String("Purpose"),
+						Value: aws.String("test"),
+					},
+				},
+			},
+		},
+	}
+
+	req := svc.RunInstancesRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
@@ -4985,6 +6454,111 @@ func ExampleEC2_RunScheduledInstancesRequest_shared01() {
 	fmt.Println(result)
 }
 
+// To start a stopped EC2 instance
+//
+// This example starts the specified EC2 instance.
+func ExampleEC2_StartInstancesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.StartInstancesInput{
+		InstanceIds: []string{
+			"i-1234567890abcdef0",
+		},
+	}
+
+	req := svc.StartInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To stop a running EC2 instance
+//
+// This example stops the specified EC2 instance.
+func ExampleEC2_StopInstancesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.StopInstancesInput{
+		InstanceIds: []string{
+			"i-1234567890abcdef0",
+		},
+	}
+
+	req := svc.StopInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To terminate an EC2 instance
+//
+// This example terminates the specified EC2 instance.
+func ExampleEC2_TerminateInstancesRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.TerminateInstancesInput{
+		InstanceIds: []string{
+			"i-1234567890abcdef0",
+		},
+	}
+
+	req := svc.TerminateInstancesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
 // To unassign a secondary private IP address from a network interface
 //
 // This example unassigns the specified private IP address from the specified network
@@ -5004,6 +6578,98 @@ func ExampleEC2_UnassignPrivateIpAddressesRequest_shared00() {
 	}
 
 	req := svc.UnassignPrivateIpAddressesRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To update an outbound security group rule description
+//
+// This example updates the description for the specified security group rule.
+func ExampleEC2_UpdateSecurityGroupRuleDescriptionsEgressRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.UpdateSecurityGroupRuleDescriptionsEgressInput{
+		GroupId: aws.String("sg-123abc12"),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(80),
+				IpProtocol: aws.String("tcp"),
+				IpRanges: []ec2.IpRange{
+					{
+						CidrIp:      aws.String("203.0.113.0/24"),
+						Description: aws.String("Outbound HTTP access to server 2"),
+					},
+				},
+				ToPort: aws.Int64(80),
+			},
+		},
+	}
+
+	req := svc.UpdateSecurityGroupRuleDescriptionsEgressRequest(input)
+	result, err := req.Send()
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				fmt.Println(aerr.Error())
+			}
+		} else {
+			// Print the error, cast err to awserr.Error to get the Code and
+			// Message from an error.
+			fmt.Println(err.Error())
+		}
+		return
+	}
+
+	fmt.Println(result)
+}
+
+// To update an inbound security group rule description
+//
+// This example updates the description for the specified security group rule.
+func ExampleEC2_UpdateSecurityGroupRuleDescriptionsIngressRequest_shared00() {
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
+	input := &ec2.UpdateSecurityGroupRuleDescriptionsIngressInput{
+		GroupId: aws.String("sg-123abc12"),
+		IpPermissions: []ec2.IpPermission{
+			{
+				FromPort:   aws.Int64(22),
+				IpProtocol: aws.String("tcp"),
+				IpRanges: []ec2.IpRange{
+					{
+						CidrIp:      aws.String("203.0.113.0/16"),
+						Description: aws.String("SSH access from the LA office"),
+					},
+				},
+				ToPort: aws.Int64(22),
+			},
+		},
+	}
+
+	req := svc.UpdateSecurityGroupRuleDescriptionsIngressRequest(input)
 	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {

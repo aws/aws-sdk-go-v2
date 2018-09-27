@@ -45,7 +45,7 @@ func (r AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
 // The user who calls the API for an invitation to join must have the organizations:AcceptHandshake
 //    permission. If you enabled all features in the organization, then the
 //    user must also have the iam:CreateServiceLinkedRole permission so that
-//    Organizations can create the required service-linked role named OrgsServiceLinkedRoleName.
+//    Organizations can create the required service-linked role named AWSServiceRoleForOrganizations.
 //    For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
 //    in the AWS Organizations User Guide.
 //
@@ -260,57 +260,57 @@ func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 //
 // Creates an AWS account that is automatically a member of the organization
 // whose credentials made the request. This is an asynchronous request that
-// AWS performs in the background. If you want to check the status of the request
-// later, you need the OperationId response element from this operation to provide
-// as a parameter to the DescribeCreateAccountStatus operation.
+// AWS performs in the background. Because CreateAccount operates asynchronously,
+// it can return a successful completion message even though account initialization
+// might still be in progress. You might need to wait a few minutes before you
+// can successfully access the account. To check the status of the request,
+// do one of the following:
 //
-// The user who calls the API for an invitation to join must have the organizations:CreateAccount
-// permission. If you enabled all features in the organization, then the user
-// must also have the iam:CreateServiceLinkedRole permission so that Organizations
-// can create the required service-linked role named OrgsServiceLinkedRoleName.
-// For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles)
-// in the AWS Organizations User Guide.
+//    * Use the OperationId response element from this operation to provide
+//    as a parameter to the DescribeCreateAccountStatus operation.
 //
-// The user in the master account who calls this API must also have the iam:CreateRole
-// permission because AWS Organizations preconfigures the new member account
-// with a role (named OrganizationAccountAccessRole by default) that grants
-// users in the master account administrator permissions in the new member account.
-// Principals in the master account can assume the role. AWS Organizations clones
-// the company name and address information for the new account from the organization's
-// master account.
+//    * Check the AWS CloudTrail log for the CreateAccountResult event. For
+//    information on using AWS CloudTrail with Organizations, see Monitoring
+//    the Activity in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+//    in the AWS Organizations User Guide.
+//
+// The user who calls the API to create an account must have the organizations:CreateAccountpermission. If you enabled all features in the organization, AWS Organizations
+// will create the required service-linked role named AWSServiceRoleForOrganizations. For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)in the AWS Organizations User Guide.
+//
+// AWS Organizations preconfigures the new member account with a role (named
+// OrganizationAccountAccessRoleby default) that grants users in the master account administrator permissions
+// in the new member account. Principals in the master account can assume the
+// role. AWS Organizations clones the company name and address information for
+// the new account from the organization's master account.
 //
 // This operation can be called only from the organization's master account.
 //
 // For more information about creating accounts, see Creating an AWS Account
-// in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
-// in the AWS Organizations User Guide.
+// in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)in the AWS Organizations User Guide.
 //
 // When you create an account in an organization using the AWS Organizations
 // console, API, or CLI commands, the information required for the account to
 // operate as a standalone account, such as a payment method and signing the
-// End User Licence Agreement (EULA) is not automatically collected. If you
+// end user license agreement (EULA) is not automatically collected. If you
 // must remove an account from your organization later, you can do so only after
 // you provide the missing information. Follow the steps at  To leave an organization
-// when all required account information has not yet been provided (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// as a member account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
 // If you get an exception that indicates that you exceeded your account limits
-// for the organization or that the operation failed because your organization
-// is still initializing, wait one hour and then try again. If the error persists
-// after an hour, then contact AWS Customer Support (https://console.aws.amazon.com/support/home#/).
+// for the organization, contact AWS Support (https://console.aws.amazon.com/support/home#/).
 //
-// Because CreateAccount operates asynchronously, it can return a successful
-// completion message even though account initialization might still be in progress.
-// You might need to wait a few minutes before you can successfully access the
-// account.
+// If you get an exception that indicates that the operation failed because
+// your organization is still initializing, wait one hour and then try again.
+// If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
 //
 // When you create a member account with this operation, you can choose whether
 // to create the account with the IAM User and Role Access to Billing Information
 // switch enabled. If you enable it, IAM users and roles that have appropriate
 // permissions can view billing information for the account. If you disable
-// this, then only the account root user can access billing information. For
-// information about how to disable this for an account, see Granting Access
-// to Your Billing Information and Tools (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
+// it, only the account root user can access billing information. For information
+// about how to disable this switch for an account, see Granting Access to Your
+// Billing Information and Tools (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
 //
 //    // Example sending a request using the CreateAccountRequest method.
 //    req := client.CreateAccountRequest(params)
@@ -598,8 +598,7 @@ func (r DeleteOrganizationRequest) Send() (*DeleteOrganizationOutput, error) {
 // AWS Organizations.
 //
 // Deletes the organization. You can delete an organization only by using credentials
-// from the master account. The organization must be empty of member accounts,
-// organizational units (OUs), and policies.
+// from the master account. The organization must be empty of member accounts.
 //
 //    // Example sending a request using the DeleteOrganizationRequest method.
 //    req := client.DeleteOrganizationRequest(params)
@@ -3619,7 +3618,7 @@ type CreateAccountInput struct {
 
 	// The email address of the owner to assign to the new member account. This
 	// email address must not already be associated with another AWS account. You
-	// must use a valid email address to complete account creation. You cannot access
+	// must use a valid email address to complete account creation. You can't access
 	// the root user of the account or remove an account that was created with an
 	// invalid email address.
 	//
@@ -3627,25 +3626,26 @@ type CreateAccountInput struct {
 	Email *string `min:"6" type:"string" required:"true"`
 
 	// If set to ALLOW, the new account enables IAM users to access account billing
-	// information if they have the required permissions. If set to DENY, then only
-	// the root user of the new account can access account billing information.
-	// For more information, see Activating Access to the Billing and Cost Management
+	// information if they have the required permissions. If set to DENY, only the
+	// root user of the new account can access account billing information. For
+	// more information, see Activating Access to the Billing and Cost Management
 	// Console (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
 	// in the AWS Billing and Cost Management User Guide.
 	//
-	// If you do not specify this parameter, the value defaults to ALLOW, and IAM
+	// If you don't specify this parameter, the value defaults to ALLOW, and IAM
 	// users and roles with the required permissions can access billing information
 	// for the new account.
 	IamUserAccessToBilling IAMUserAccessToBilling `type:"string" enum:"true"`
 
 	// (Optional)
 	//
-	// The name of an IAM role that Organizations automatically preconfigures in
-	// the new member account. This role trusts the master account, allowing users
-	// in the master account to assume the role, as permitted by the master account
-	// administrator. The role has administrator permissions in the new member account.
+	// The name of an IAM role that AWS Organizations automatically preconfigures
+	// in the new member account. This role trusts the master account, allowing
+	// users in the master account to assume the role, as permitted by the master
+	// account administrator. The role has administrator permissions in the new
+	// member account.
 	//
-	// If you do not specify this parameter, the role name defaults to OrganizationAccountAccessRole.
+	// If you don't specify this parameter, the role name defaults to OrganizationAccountAccessRole.
 	//
 	// For more information about how to use this role to access the member account,
 	// see Accessing and Administering the Member Accounts in Your Organization
@@ -3705,7 +3705,10 @@ type CreateAccountOutput struct {
 	// This response structure might not be fully populated when you first receive
 	// it because account creation is an asynchronous process. You can pass the
 	// returned CreateAccountStatus ID as a parameter to DescribeCreateAccountStatus
-	// to get status about the progress of the request at later times.
+	// to get status about the progress of the request at later times. You can also
+	// check the AWS CloudTrail log for the CreateAccountResult event. For more
+	// information, see Monitoring the Activity in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+	// in the AWS Organizations User Guide.
 	CreateAccountStatus *CreateAccountStatus `type:"structure"`
 }
 
@@ -5264,7 +5267,7 @@ type InviteAccountToOrganizationInput struct {
 	// number as the Id. If you specify "Type": "EMAIL", then you must specify the
 	// email address that is associated with the account.
 	//
-	// --target Id=bill@example.com,Type=EMAIL
+	// --target Id=diego@example.com,Type=EMAIL
 	//
 	// Target is a required field
 	Target *HandshakeParty `type:"structure" required:"true"`
@@ -5366,15 +5369,15 @@ func (s LeaveOrganizationOutput) SDKResponseMetadata() aws.Response {
 type ListAWSServiceAccessForOrganizationInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5445,15 +5448,15 @@ func (s ListAWSServiceAccessForOrganizationOutput) SDKResponseMetadata() aws.Res
 type ListAccountsForParentInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5532,15 +5535,15 @@ func (s ListAccountsForParentOutput) SDKResponseMetadata() aws.Response {
 type ListAccountsInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5614,15 +5617,15 @@ type ListChildrenInput struct {
 	// ChildType is a required field
 	ChildType ChildType `type:"string" required:"true" enum:"true"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5715,15 +5718,15 @@ func (s ListChildrenOutput) SDKResponseMetadata() aws.Response {
 type ListCreateAccountStatusInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5806,15 +5809,15 @@ type ListHandshakesForAccountInput struct {
 	// handshakes that were generated by that parent request.
 	Filter *HandshakeFilter `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5892,15 +5895,15 @@ type ListHandshakesForOrganizationInput struct {
 	// the handshakes that were generated by that parent request.
 	Filter *HandshakeFilter `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -5970,15 +5973,15 @@ func (s ListHandshakesForOrganizationOutput) SDKResponseMetadata() aws.Response 
 type ListOrganizationalUnitsForParentInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -6084,15 +6087,15 @@ type ListParentsInput struct {
 	// ChildId is a required field
 	ChildId *string `type:"string" required:"true"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -6170,15 +6173,15 @@ type ListPoliciesForTargetInput struct {
 	// Filter is a required field
 	Filter PolicyType `type:"string" required:"true" enum:"true"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -6278,15 +6281,15 @@ type ListPoliciesInput struct {
 	// Filter is a required field
 	Filter PolicyType `type:"string" required:"true" enum:"true"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -6360,15 +6363,15 @@ func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
 type ListRootsInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -6437,15 +6440,15 @@ func (s ListRootsOutput) SDKResponseMetadata() aws.Response {
 type ListTargetsForPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Use this to limit the number of results you want included in the
-	// response. If you do not include this parameter, it defaults to a value that
-	// is specific to the operation. If additional items exist beyond the maximum
-	// you specify, the NextToken response element is present and has a value (is
-	// not null). Include that value as the NextToken request parameter in the next
-	// call to the operation to get the next part of the results. Note that Organizations
-	// might return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that
-	// you receive all of the results.
+	// (Optional) Use this to limit the number of results you want included per
+	// page in the response. If you do not include this parameter, it defaults to
+	// a value that is specific to the operation. If additional items exist beyond
+	// the maximum you specify, the NextToken response element is present and has
+	// a value (is not null). Include that value as the NextToken request parameter
+	// in the next call to the operation to get the next part of the results. Note
+	// that Organizations might return fewer results than the maximum even when
+	// there are more results available. You should check NextToken after every
+	// operation to ensure that you receive all of the results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// Use this parameter if you receive a NextToken response in a previous request
@@ -7289,6 +7292,8 @@ const (
 	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
 	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo             ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
 	ConstraintViolationExceptionReasonOrganizationNotInAllFeaturesMode            ConstraintViolationExceptionReason = "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"
+	ConstraintViolationExceptionReasonEmailVerificationCodeExpired                ConstraintViolationExceptionReason = "EMAIL_VERIFICATION_CODE_EXPIRED"
+	ConstraintViolationExceptionReasonWaitPeriodActive                            ConstraintViolationExceptionReason = "WAIT_PERIOD_ACTIVE"
 )
 
 func (enum ConstraintViolationExceptionReason) MarshalValue() (string, error) {

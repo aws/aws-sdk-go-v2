@@ -34,8 +34,10 @@ func (r AddTagsToStreamRequest) Send() (*AddTagsToStreamOutput, error) {
 // AddTagsToStreamRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Adds or updates tags for the specified Kinesis data stream. Each stream can
-// have up to 10 tags.
+// Adds or updates tags for the specified Kinesis data stream. Each time you
+// invoke this operation, you can specify up to 10 tags. If you want to add
+// more than 10 tags to your stream, you can invoke this operation multiple
+// times. In total, each stream can have up to 50 tags.
 //
 // If tags have already been assigned to the stream, AddTagsToStream overwrites
 // any existing tags that correspond to the specified tag keys.
@@ -289,6 +291,67 @@ func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequ
 	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 
+const opDeregisterStreamConsumer = "DeregisterStreamConsumer"
+
+// DeregisterStreamConsumerRequest is a API request type for the DeregisterStreamConsumer API operation.
+type DeregisterStreamConsumerRequest struct {
+	*aws.Request
+	Input *DeregisterStreamConsumerInput
+	Copy  func(*DeregisterStreamConsumerInput) DeregisterStreamConsumerRequest
+}
+
+// Send marshals and sends the DeregisterStreamConsumer API request.
+func (r DeregisterStreamConsumerRequest) Send() (*DeregisterStreamConsumerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterStreamConsumerOutput), nil
+}
+
+// DeregisterStreamConsumerRequest returns a request value for making API operation for
+// Amazon Kinesis.
+//
+// To deregister a consumer, provide its ARN. Alternatively, you can provide
+// the ARN of the data stream and the name you gave the consumer when you registered
+// it. You may also provide all three parameters, as long as they don't conflict
+// with each other. If you don't know the name or ARN of the consumer that you
+// want to deregister, you can use the ListStreamConsumers operation to get
+// a list of the descriptions of all the consumers that are currently registered
+// with a given data stream. The description of a consumer contains its name
+// and ARN.
+//
+// This operation has a limit of five transactions per second per account.
+//
+//    // Example sending a request using the DeregisterStreamConsumerRequest method.
+//    req := client.DeregisterStreamConsumerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumer
+func (c *Kinesis) DeregisterStreamConsumerRequest(input *DeregisterStreamConsumerInput) DeregisterStreamConsumerRequest {
+	op := &aws.Operation{
+		Name:       opDeregisterStreamConsumer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeregisterStreamConsumerInput{}
+	}
+
+	output := &DeregisterStreamConsumerOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeregisterStreamConsumerRequest{Request: req, Input: input, Copy: c.DeregisterStreamConsumerRequest}
+}
+
 const opDescribeLimits = "DescribeLimits"
 
 // DescribeLimitsRequest is a API request type for the DescribeLimits API operation.
@@ -462,6 +525,64 @@ type DescribeStreamPager struct {
 
 func (p *DescribeStreamPager) CurrentPage() *DescribeStreamOutput {
 	return p.Pager.CurrentPage().(*DescribeStreamOutput)
+}
+
+const opDescribeStreamConsumer = "DescribeStreamConsumer"
+
+// DescribeStreamConsumerRequest is a API request type for the DescribeStreamConsumer API operation.
+type DescribeStreamConsumerRequest struct {
+	*aws.Request
+	Input *DescribeStreamConsumerInput
+	Copy  func(*DescribeStreamConsumerInput) DescribeStreamConsumerRequest
+}
+
+// Send marshals and sends the DescribeStreamConsumer API request.
+func (r DescribeStreamConsumerRequest) Send() (*DescribeStreamConsumerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStreamConsumerOutput), nil
+}
+
+// DescribeStreamConsumerRequest returns a request value for making API operation for
+// Amazon Kinesis.
+//
+// To get the description of a registered consumer, provide the ARN of the consumer.
+// Alternatively, you can provide the ARN of the data stream and the name you
+// gave the consumer when you registered it. You may also provide all three
+// parameters, as long as they don't conflict with each other. If you don't
+// know the name or ARN of the consumer that you want to describe, you can use
+// the ListStreamConsumers operation to get a list of the descriptions of all
+// the consumers that are currently registered with a given data stream.
+//
+// This operation has a limit of 20 transactions per second per account.
+//
+//    // Example sending a request using the DescribeStreamConsumerRequest method.
+//    req := client.DescribeStreamConsumerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumer
+func (c *Kinesis) DescribeStreamConsumerRequest(input *DescribeStreamConsumerInput) DescribeStreamConsumerRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStreamConsumer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeStreamConsumerInput{}
+	}
+
+	output := &DescribeStreamConsumerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeStreamConsumerRequest{Request: req, Input: input, Copy: c.DescribeStreamConsumerRequest}
 }
 
 const opDescribeStreamSummary = "DescribeStreamSummary"
@@ -664,20 +785,21 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 // is closed, or when the shard iterator reaches the record with the sequence
 // number or other attribute that marks it as the last record to process.
 //
-// Each data record can be up to 1 MB in size, and each shard can read up to
-// 2 MB per second. You can ensure that your calls don't exceed the maximum
+// Each data record can be up to 1 MiB in size, and each shard can read up to
+// 2 MiB per second. You can ensure that your calls don't exceed the maximum
 // supported size or throughput by using the Limit parameter to specify the
 // maximum number of records that GetRecords can return. Consider your average
-// record size when determining this limit.
+// record size when determining this limit. The maximum number of records that
+// can be returned per call is 10,000.
 //
 // The size of the data returned by GetRecords varies depending on the utilization
-// of the shard. The maximum size of data that GetRecords can return is 10 MB.
+// of the shard. The maximum size of data that GetRecords can return is 10 MiB.
 // If a call returns this amount of data, subsequent calls made within the next
-// five seconds throw ProvisionedThroughputExceededException. If there is insufficient
+// 5 seconds throw ProvisionedThroughputExceededException. If there is insufficient
 // provisioned throughput on the stream, subsequent calls made within the next
-// one second throw ProvisionedThroughputExceededException. GetRecords won't
+// 1 second throw ProvisionedThroughputExceededException. GetRecords doesn't
 // return any data when it throws an exception. For this reason, we recommend
-// that you wait one second between calls to GetRecords; however, it's possible
+// that you wait 1 second between calls to GetRecords. However, it's possible
 // that the application will get exceptions for longer than 1 second.
 //
 // To detect whether the application is falling behind in processing, you can
@@ -694,6 +816,8 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 // are no guarantees about the time stamp accuracy, or that the time stamp is
 // always increasing. For example, records in a shard or across a stream might
 // have time stamps that are out of order.
+//
+// This operation has a limit of five transactions per second per account.
 //
 //    // Example sending a request using the GetRecordsRequest method.
 //    req := client.GetRecordsRequest(params)
@@ -743,7 +867,7 @@ func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
 // GetShardIteratorRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Gets an Amazon Kinesis shard iterator. A shard iterator expires five minutes
+// Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes
 // after it is returned to the requester.
 //
 // A shard iterator specifies the shard position from which to start reading
@@ -893,7 +1017,8 @@ func (r ListShardsRequest) Send() (*ListShardsOutput, error) {
 // ListShardsRequest returns a request value for making API operation for
 // Amazon Kinesis.
 //
-// Lists the shards in a stream and provides information about each shard.
+// Lists the shards in a stream and provides information about each shard. This
+// operation has a limit of 100 transactions per second per data stream.
 //
 // This API is a new operation that is used by the Amazon Kinesis Client Library
 // (KCL). If you have a fine-grained IAM policy that only allows specific operations,
@@ -925,6 +1050,111 @@ func (c *Kinesis) ListShardsRequest(input *ListShardsInput) ListShardsRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListShardsRequest{Request: req, Input: input, Copy: c.ListShardsRequest}
+}
+
+const opListStreamConsumers = "ListStreamConsumers"
+
+// ListStreamConsumersRequest is a API request type for the ListStreamConsumers API operation.
+type ListStreamConsumersRequest struct {
+	*aws.Request
+	Input *ListStreamConsumersInput
+	Copy  func(*ListStreamConsumersInput) ListStreamConsumersRequest
+}
+
+// Send marshals and sends the ListStreamConsumers API request.
+func (r ListStreamConsumersRequest) Send() (*ListStreamConsumersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStreamConsumersOutput), nil
+}
+
+// ListStreamConsumersRequest returns a request value for making API operation for
+// Amazon Kinesis.
+//
+// Lists the consumers registered to receive data from a stream using enhanced
+// fan-out, and provides information about each consumer.
+//
+// This operation has a limit of 10 transactions per second per account.
+//
+//    // Example sending a request using the ListStreamConsumersRequest method.
+//    req := client.ListStreamConsumersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumers
+func (c *Kinesis) ListStreamConsumersRequest(input *ListStreamConsumersInput) ListStreamConsumersRequest {
+	op := &aws.Operation{
+		Name:       opListStreamConsumers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListStreamConsumersInput{}
+	}
+
+	output := &ListStreamConsumersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListStreamConsumersRequest{Request: req, Input: input, Copy: c.ListStreamConsumersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListStreamConsumersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListStreamConsumers operation.
+//		req := client.ListStreamConsumersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListStreamConsumersRequest) Paginate(opts ...aws.Option) ListStreamConsumersPager {
+	return ListStreamConsumersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStreamConsumersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListStreamConsumersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListStreamConsumersPager struct {
+	aws.Pager
+}
+
+func (p *ListStreamConsumersPager) CurrentPage() *ListStreamConsumersOutput {
+	return p.Pager.CurrentPage().(*ListStreamConsumersOutput)
 }
 
 const opListStreams = "ListStreams"
@@ -1378,6 +1608,64 @@ func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
 	return PutRecordsRequest{Request: req, Input: input, Copy: c.PutRecordsRequest}
 }
 
+const opRegisterStreamConsumer = "RegisterStreamConsumer"
+
+// RegisterStreamConsumerRequest is a API request type for the RegisterStreamConsumer API operation.
+type RegisterStreamConsumerRequest struct {
+	*aws.Request
+	Input *RegisterStreamConsumerInput
+	Copy  func(*RegisterStreamConsumerInput) RegisterStreamConsumerRequest
+}
+
+// Send marshals and sends the RegisterStreamConsumer API request.
+func (r RegisterStreamConsumerRequest) Send() (*RegisterStreamConsumerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterStreamConsumerOutput), nil
+}
+
+// RegisterStreamConsumerRequest returns a request value for making API operation for
+// Amazon Kinesis.
+//
+// Registers a consumer with a Kinesis data stream. When you use this operation,
+// the consumer you register can read data from the stream at a rate of up to
+// 2 MiB per second. This rate is unaffected by the total number of consumers
+// that read from the same stream.
+//
+// You can register up to 5 consumers per stream. A given consumer can only
+// be registered with one stream.
+//
+// This operation has a limit of five transactions per second per account.
+//
+//    // Example sending a request using the RegisterStreamConsumerRequest method.
+//    req := client.RegisterStreamConsumerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumer
+func (c *Kinesis) RegisterStreamConsumerRequest(input *RegisterStreamConsumerInput) RegisterStreamConsumerRequest {
+	op := &aws.Operation{
+		Name:       opRegisterStreamConsumer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RegisterStreamConsumerInput{}
+	}
+
+	output := &RegisterStreamConsumerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RegisterStreamConsumerRequest{Request: req, Input: input, Copy: c.RegisterStreamConsumerRequest}
+}
+
 const opRemoveTagsFromStream = "RemoveTagsFromStream"
 
 // RemoveTagsFromStreamRequest is a API request type for the RemoveTagsFromStream API operation.
@@ -1494,7 +1782,8 @@ func (r SplitShardRequest) Send() (*SplitShardOutput, error) {
 // If you try to create more shards than are authorized for your account, you
 // receive a LimitExceededException.
 //
-// For the default shard limit for an AWS account, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
+// For the default shard limit for an AWS account, see Kinesis Data Streams
+// Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. To increase this limit,
 // contact AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
 //
@@ -1568,7 +1857,7 @@ func (r StartStreamEncryptionRequest) Send() (*StartStreamEncryptionOutput, erro
 // API Limits: You can successfully apply a new AWS KMS key for server-side
 // encryption 25 times in a rolling 24-hour period.
 //
-// Note: It can take up to five seconds after the stream is in an ACTIVE status
+// Note: It can take up to 5 seconds after the stream is in an ACTIVE status
 // before all records written to the stream are encrypted. After you enable
 // encryption, you can verify that encryption is applied by inspecting the API
 // response from PutRecord or PutRecords.
@@ -1637,7 +1926,7 @@ func (r StopStreamEncryptionRequest) Send() (*StopStreamEncryptionOutput, error)
 // API Limits: You can successfully disable server-side encryption 25 times
 // in a rolling 24-hour period.
 //
-// Note: It can take up to five seconds after the stream is in an ACTIVE status
+// Note: It can take up to 5 seconds after the stream is in an ACTIVE status
 // before all records written to the stream are no longer subject to encryption.
 // After you disabled encryption, you can verify that encryption is not applied
 // by inspecting the API response from PutRecord or PutRecords.
@@ -1707,7 +1996,8 @@ func (r UpdateShardCountRequest) Send() (*UpdateShardCountOutput, error) {
 // addition to the final shards. We recommend that you double or halve the shard
 // count, as this results in the fewest number of splits or merges.
 //
-// This operation has the following limits. You cannot do the following:
+// This operation has the following default limits. By default, you cannot do
+// the following:
 //
 //    * Scale more than twice per rolling 24-hour period per stream
 //
@@ -1763,7 +2053,7 @@ type AddTagsToStreamInput struct {
 	// StreamName is a required field
 	StreamName *string `min:"1" type:"string" required:"true"`
 
-	// The set of key-value pairs to use to create the tags.
+	// A set of up to 10 key-value pairs to use to create the tags.
 	//
 	// Tags is a required field
 	Tags map[string]string `min:"1" type:"map" required:"true"`
@@ -1823,6 +2113,91 @@ func (s AddTagsToStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AddTagsToStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// An object that represents the details of the consumer you registered.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Consumer
+type Consumer struct {
+	_ struct{} `type:"structure"`
+
+	// When you register a consumer, Kinesis Data Streams generates an ARN for it.
+	// You need this ARN to be able to call SubscribeToShard.
+	//
+	// If you delete a consumer and then create a new one with the same name, it
+	// won't have the same ARN. That's because consumer ARNs contain the creation
+	// timestamp. This is important to keep in mind if you have IAM policies that
+	// reference consumer ARNs.
+	//
+	// ConsumerARN is a required field
+	ConsumerARN *string `min:"1" type:"string" required:"true"`
+
+	// ConsumerCreationTimestamp is a required field
+	ConsumerCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The name of the consumer is something you choose when you register the consumer.
+	//
+	// ConsumerName is a required field
+	ConsumerName *string `min:"1" type:"string" required:"true"`
+
+	// A consumer can't read data while in the CREATING or DELETING states.
+	//
+	// ConsumerStatus is a required field
+	ConsumerStatus ConsumerStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s Consumer) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Consumer) GoString() string {
+	return s.String()
+}
+
+// An object that represents the details of a registered consumer.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ConsumerDescription
+type ConsumerDescription struct {
+	_ struct{} `type:"structure"`
+
+	// When you register a consumer, Kinesis Data Streams generates an ARN for it.
+	// You need this ARN to be able to call SubscribeToShard.
+	//
+	// If you delete a consumer and then create a new one with the same name, it
+	// won't have the same ARN. That's because consumer ARNs contain the creation
+	// timestamp. This is important to keep in mind if you have IAM policies that
+	// reference consumer ARNs.
+	//
+	// ConsumerARN is a required field
+	ConsumerARN *string `min:"1" type:"string" required:"true"`
+
+	// ConsumerCreationTimestamp is a required field
+	ConsumerCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The name of the consumer is something you choose when you register the consumer.
+	//
+	// ConsumerName is a required field
+	ConsumerName *string `min:"1" type:"string" required:"true"`
+
+	// A consumer can't read data while in the CREATING or DELETING states.
+	//
+	// ConsumerStatus is a required field
+	ConsumerStatus ConsumerStatus `type:"string" required:"true" enum:"true"`
+
+	// The ARN of the stream with which you registered the consumer.
+	//
+	// StreamARN is a required field
+	StreamARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ConsumerDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ConsumerDescription) GoString() string {
+	return s.String()
 }
 
 // Represents the input for CreateStream.
@@ -1983,6 +2358,10 @@ func (s DecreaseStreamRetentionPeriodOutput) SDKResponseMetadata() aws.Response 
 type DeleteStreamInput struct {
 	_ struct{} `type:"structure"`
 
+	// If this parameter is unset (null) or if you set it to false, and the stream
+	// has registered consumers, the call to DeleteStream fails with a ResourceInUseException.
+	EnforceConsumerDeletion *bool `type:"boolean"`
+
 	// The name of the stream to delete.
 	//
 	// StreamName is a required field
@@ -2038,6 +2417,77 @@ func (s DeleteStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumerInput
+type DeregisterStreamConsumerInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN returned by Kinesis Data Streams when you registered the consumer.
+	// If you don't know the ARN of the consumer that you want to deregister, you
+	// can use the ListStreamConsumers operation to get a list of the descriptions
+	// of all the consumers that are currently registered with a given data stream.
+	// The description of a consumer contains its ARN.
+	ConsumerARN *string `min:"1" type:"string"`
+
+	// The name that you gave to the consumer.
+	ConsumerName *string `min:"1" type:"string"`
+
+	// The ARN of the Kinesis data stream that the consumer is registered with.
+	// For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
+	StreamARN *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeregisterStreamConsumerInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeregisterStreamConsumerInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeregisterStreamConsumerInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterStreamConsumerInput"}
+	if s.ConsumerARN != nil && len(*s.ConsumerARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConsumerARN", 1))
+	}
+	if s.ConsumerName != nil && len(*s.ConsumerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConsumerName", 1))
+	}
+	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumerOutput
+type DeregisterStreamConsumerOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeregisterStreamConsumerOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeregisterStreamConsumerOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterStreamConsumerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsInput
 type DescribeLimitsInput struct {
 	_ struct{} `type:"structure"`
@@ -2082,6 +2532,78 @@ func (s DescribeLimitsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLimitsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumerInput
+type DescribeStreamConsumerInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN returned by Kinesis Data Streams when you registered the consumer.
+	ConsumerARN *string `min:"1" type:"string"`
+
+	// The name that you gave to the consumer.
+	ConsumerName *string `min:"1" type:"string"`
+
+	// The ARN of the Kinesis data stream that the consumer is registered with.
+	// For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
+	StreamARN *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeStreamConsumerInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStreamConsumerInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeStreamConsumerInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamConsumerInput"}
+	if s.ConsumerARN != nil && len(*s.ConsumerARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConsumerARN", 1))
+	}
+	if s.ConsumerName != nil && len(*s.ConsumerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConsumerName", 1))
+	}
+	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumerOutput
+type DescribeStreamConsumerOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that represents the details of the consumer.
+	//
+	// ConsumerDescription is a required field
+	ConsumerDescription *ConsumerDescription `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeStreamConsumerOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStreamConsumerOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStreamConsumerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -2759,7 +3281,8 @@ func (s IncreaseStreamRetentionPeriodOutput) SDKResponseMetadata() aws.Response 
 type ListShardsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the shard to start the list with.
+	// Specify this parameter to indicate that you want to list the shards starting
+	// with the shard whose ID immediately follows ExclusiveStartShardId.
 	//
 	// If you don't specify this parameter, the default behavior is for ListShards
 	// to list the shards starting with the first one in the stream.
@@ -2882,6 +3405,127 @@ func (s ListShardsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListShardsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumersInput
+type ListStreamConsumersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of consumers that you want a single call of ListStreamConsumers
+	// to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// When the number of consumers that are registered with the data stream is
+	// greater than the default value for the MaxResults parameter, or if you explicitly
+	// specify a value for MaxResults that is less than the number of consumers
+	// that are registered with the data stream, the response includes a pagination
+	// token named NextToken. You can specify this NextToken value in a subsequent
+	// call to ListStreamConsumers to list the next set of registered consumers.
+	//
+	// Don't specify StreamName or StreamCreationTimestamp if you specify NextToken
+	// because the latter unambiguously identifies the stream.
+	//
+	// You can optionally specify a value for the MaxResults parameter when you
+	// specify NextToken. If you specify a MaxResults value that is less than the
+	// number of consumers that the operation returns if you don't specify MaxResults,
+	// the response will contain a new NextToken value. You can use the new NextToken
+	// value in a subsequent call to the ListStreamConsumers operation to list the
+	// next set of consumers.
+	//
+	// Tokens expire after 300 seconds. When you obtain a value for NextToken in
+	// the response to a call to ListStreamConsumers, you have 300 seconds to use
+	// that value. If you specify an expired token in a call to ListStreamConsumers,
+	// you get ExpiredNextTokenException.
+	NextToken *string `min:"1" type:"string"`
+
+	// The ARN of the Kinesis data stream for which you want to list the registered
+	// consumers. For more information, see Amazon Resource Names (ARNs) and AWS
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
+	//
+	// StreamARN is a required field
+	StreamARN *string `min:"1" type:"string" required:"true"`
+
+	// Specify this input parameter to distinguish data streams that have the same
+	// name. For example, if you create a data stream and then delete it, and you
+	// later create another data stream with the same name, you can use this input
+	// parameter to specify which of the two streams you want to list the consumers
+	// for.
+	//
+	// You can't specify this parameter if you specify the NextToken parameter.
+	StreamCreationTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s ListStreamConsumersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListStreamConsumersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListStreamConsumersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListStreamConsumersInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.StreamARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StreamARN"))
+	}
+	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumersOutput
+type ListStreamConsumersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of JSON objects. Each object represents one registered consumer.
+	Consumers []Consumer `type:"list"`
+
+	// When the number of consumers that are registered with the data stream is
+	// greater than the default value for the MaxResults parameter, or if you explicitly
+	// specify a value for MaxResults that is less than the number of registered
+	// consumers, the response includes a pagination token named NextToken. You
+	// can specify this NextToken value in a subsequent call to ListStreamConsumers
+	// to list the next set of registered consumers. For more information about
+	// the use of this pagination token when calling the ListStreamConsumers operation,
+	// see ListStreamConsumersInput$NextToken.
+	//
+	// Tokens expire after 300 seconds. When you obtain a value for NextToken in
+	// the response to a call to ListStreamConsumers, you have 300 seconds to use
+	// that value. If you specify an expired token in a call to ListStreamConsumers,
+	// you get ExpiredNextTokenException.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListStreamConsumersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListStreamConsumersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListStreamConsumersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -3505,6 +4149,87 @@ func (s Record) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumerInput
+type RegisterStreamConsumerInput struct {
+	_ struct{} `type:"structure"`
+
+	// For a given Kinesis data stream, each consumer must have a unique name. However,
+	// consumer names don't have to be unique across data streams.
+	//
+	// ConsumerName is a required field
+	ConsumerName *string `min:"1" type:"string" required:"true"`
+
+	// The ARN of the Kinesis data stream that you want to register the consumer
+	// with. For more info, see Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
+	//
+	// StreamARN is a required field
+	StreamARN *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RegisterStreamConsumerInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegisterStreamConsumerInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisterStreamConsumerInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterStreamConsumerInput"}
+
+	if s.ConsumerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConsumerName"))
+	}
+	if s.ConsumerName != nil && len(*s.ConsumerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConsumerName", 1))
+	}
+
+	if s.StreamARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StreamARN"))
+	}
+	if s.StreamARN != nil && len(*s.StreamARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StreamARN", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumerOutput
+type RegisterStreamConsumerOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that represents the details of the consumer you registered. When
+	// you register a consumer, it gets an ARN that is generated by Kinesis Data
+	// Streams.
+	//
+	// Consumer is a required field
+	Consumer *Consumer `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s RegisterStreamConsumerOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegisterStreamConsumerOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterStreamConsumerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the input for RemoveTagsFromStream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStreamInput
 type RemoveTagsFromStreamInput struct {
@@ -3966,7 +4691,7 @@ type StreamDescription struct {
 	// The Amazon Resource Name (ARN) for the stream being described.
 	//
 	// StreamARN is a required field
-	StreamARN *string `type:"string" required:"true"`
+	StreamARN *string `min:"1" type:"string" required:"true"`
 
 	// The approximate time that the stream was created.
 	//
@@ -4014,6 +4739,9 @@ func (s StreamDescription) GoString() string {
 type StreamDescriptionSummary struct {
 	_ struct{} `type:"structure"`
 
+	// The number of enhanced fan-out consumers registered with the stream.
+	ConsumerCount *int64 `type:"integer"`
+
 	// The encryption type used. This value is one of the following:
 	//
 	//    * KMS
@@ -4055,7 +4783,7 @@ type StreamDescriptionSummary struct {
 	// The Amazon Resource Name (ARN) for the stream being described.
 	//
 	// StreamARN is a required field
-	StreamARN *string `type:"string" required:"true"`
+	StreamARN *string `min:"1" type:"string" required:"true"`
 
 	// The approximate time that the stream was created.
 	//
@@ -4211,6 +4939,24 @@ func (s UpdateShardCountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateShardCountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+type ConsumerStatus string
+
+// Enum values for ConsumerStatus
+const (
+	ConsumerStatusCreating ConsumerStatus = "CREATING"
+	ConsumerStatusDeleting ConsumerStatus = "DELETING"
+	ConsumerStatusActive   ConsumerStatus = "ACTIVE"
+)
+
+func (enum ConsumerStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConsumerStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type EncryptionType string

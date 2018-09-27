@@ -1152,6 +1152,10 @@ type Cluster struct {
 	// than 30 minutes, and is performed automatically within the maintenance window.
 	PreferredMaintenanceWindow *string `type:"string"`
 
+	// The description of the server-side encryption status on the specified DAX
+	// cluster.
+	SSEDescription *SSEDescription `type:"structure"`
+
 	// A list of security groups, and the status of each, for the nodes in the cluster.
 	SecurityGroups []SecurityGroupMembership `type:"list"`
 
@@ -1257,6 +1261,9 @@ type CreateClusterInput struct {
 	// ReplicationFactor is a required field
 	ReplicationFactor *int64 `type:"integer" required:"true"`
 
+	// Represents the settings used to enable server-side encryption on the cluster.
+	SSESpecification *SSESpecification `type:"structure"`
+
 	// A list of security group IDs to be assigned to each node in the DAX cluster.
 	// (Each of the security group ID is system-generated.)
 	//
@@ -1302,6 +1309,11 @@ func (s *CreateClusterInput) Validate() error {
 
 	if s.ReplicationFactor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationFactor"))
+	}
+	if s.SSESpecification != nil {
+		if err := s.SSESpecification.Validate(); err != nil {
+			invalidParams.AddNested("SSESpecification", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2576,6 +2588,70 @@ func (s RebootNodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The description of the server-side encryption status on the specified DAX
+// cluster.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSEDescription
+type SSEDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The current state of server-side encryption:
+	//
+	//    * ENABLING - Server-side encryption is being enabled.
+	//
+	//    * ENABLED - Server-side encryption is enabled.
+	//
+	//    * DISABLING - Server-side encryption is being disabled.
+	//
+	//    * DISABLED - Server-side encryption is disabled.
+	Status SSEStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SSEDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SSEDescription) GoString() string {
+	return s.String()
+}
+
+// Represents the settings used to enable server-side encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SSESpecification
+type SSESpecification struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether server-side encryption is enabled (true) or disabled (false)
+	// on the cluster.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s SSESpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SSESpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SSESpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SSESpecification"}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // An individual VPC security group and its status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SecurityGroupMembership
 type SecurityGroupMembership struct {
@@ -3085,6 +3161,25 @@ func (enum ParameterType) MarshalValue() (string, error) {
 }
 
 func (enum ParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SSEStatus string
+
+// Enum values for SSEStatus
+const (
+	SSEStatusEnabling  SSEStatus = "ENABLING"
+	SSEStatusEnabled   SSEStatus = "ENABLED"
+	SSEStatusDisabling SSEStatus = "DISABLING"
+	SSEStatusDisabled  SSEStatus = "DISABLED"
+)
+
+func (enum SSEStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SSEStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -182,6 +182,59 @@ func (c *Polly) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 	return GetLexiconRequest{Request: req, Input: input, Copy: c.GetLexiconRequest}
 }
 
+const opGetSpeechSynthesisTask = "GetSpeechSynthesisTask"
+
+// GetSpeechSynthesisTaskRequest is a API request type for the GetSpeechSynthesisTask API operation.
+type GetSpeechSynthesisTaskRequest struct {
+	*aws.Request
+	Input *GetSpeechSynthesisTaskInput
+	Copy  func(*GetSpeechSynthesisTaskInput) GetSpeechSynthesisTaskRequest
+}
+
+// Send marshals and sends the GetSpeechSynthesisTask API request.
+func (r GetSpeechSynthesisTaskRequest) Send() (*GetSpeechSynthesisTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSpeechSynthesisTaskOutput), nil
+}
+
+// GetSpeechSynthesisTaskRequest returns a request value for making API operation for
+// Amazon Polly.
+//
+// Retrieves a specific SpeechSynthesisTask object based on its TaskID. This
+// object contains information about the given speech synthesis task, including
+// the status of the task, and a link to the S3 bucket containing the output
+// of the task.
+//
+//    // Example sending a request using the GetSpeechSynthesisTaskRequest method.
+//    req := client.GetSpeechSynthesisTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTask
+func (c *Polly) GetSpeechSynthesisTaskRequest(input *GetSpeechSynthesisTaskInput) GetSpeechSynthesisTaskRequest {
+	op := &aws.Operation{
+		Name:       opGetSpeechSynthesisTask,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/synthesisTasks/{TaskId}",
+	}
+
+	if input == nil {
+		input = &GetSpeechSynthesisTaskInput{}
+	}
+
+	output := &GetSpeechSynthesisTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSpeechSynthesisTaskRequest{Request: req, Input: input, Copy: c.GetSpeechSynthesisTaskRequest}
+}
+
 const opListLexicons = "ListLexicons"
 
 // ListLexiconsRequest is a API request type for the ListLexicons API operation.
@@ -231,6 +284,110 @@ func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsReques
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListLexiconsRequest{Request: req, Input: input, Copy: c.ListLexiconsRequest}
+}
+
+const opListSpeechSynthesisTasks = "ListSpeechSynthesisTasks"
+
+// ListSpeechSynthesisTasksRequest is a API request type for the ListSpeechSynthesisTasks API operation.
+type ListSpeechSynthesisTasksRequest struct {
+	*aws.Request
+	Input *ListSpeechSynthesisTasksInput
+	Copy  func(*ListSpeechSynthesisTasksInput) ListSpeechSynthesisTasksRequest
+}
+
+// Send marshals and sends the ListSpeechSynthesisTasks API request.
+func (r ListSpeechSynthesisTasksRequest) Send() (*ListSpeechSynthesisTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSpeechSynthesisTasksOutput), nil
+}
+
+// ListSpeechSynthesisTasksRequest returns a request value for making API operation for
+// Amazon Polly.
+//
+// Returns a list of SpeechSynthesisTask objects ordered by their creation date.
+// This operation can filter the tasks by their status, for example, allowing
+// users to list only tasks that are completed.
+//
+//    // Example sending a request using the ListSpeechSynthesisTasksRequest method.
+//    req := client.ListSpeechSynthesisTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasks
+func (c *Polly) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasksInput) ListSpeechSynthesisTasksRequest {
+	op := &aws.Operation{
+		Name:       opListSpeechSynthesisTasks,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/synthesisTasks",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSpeechSynthesisTasksInput{}
+	}
+
+	output := &ListSpeechSynthesisTasksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSpeechSynthesisTasksRequest{Request: req, Input: input, Copy: c.ListSpeechSynthesisTasksRequest}
+}
+
+// Paginate pages iterates over the pages of a ListSpeechSynthesisTasksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListSpeechSynthesisTasks operation.
+//		req := client.ListSpeechSynthesisTasksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSpeechSynthesisTasksRequest) Paginate(opts ...aws.Option) ListSpeechSynthesisTasksPager {
+	return ListSpeechSynthesisTasksPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSpeechSynthesisTasksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListSpeechSynthesisTasksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSpeechSynthesisTasksPager struct {
+	aws.Pager
+}
+
+func (p *ListSpeechSynthesisTasksPager) CurrentPage() *ListSpeechSynthesisTasksOutput {
+	return p.Pager.CurrentPage().(*ListSpeechSynthesisTasksOutput)
 }
 
 const opPutLexicon = "PutLexicon"
@@ -286,6 +443,62 @@ func (c *Polly) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutLexiconRequest{Request: req, Input: input, Copy: c.PutLexiconRequest}
+}
+
+const opStartSpeechSynthesisTask = "StartSpeechSynthesisTask"
+
+// StartSpeechSynthesisTaskRequest is a API request type for the StartSpeechSynthesisTask API operation.
+type StartSpeechSynthesisTaskRequest struct {
+	*aws.Request
+	Input *StartSpeechSynthesisTaskInput
+	Copy  func(*StartSpeechSynthesisTaskInput) StartSpeechSynthesisTaskRequest
+}
+
+// Send marshals and sends the StartSpeechSynthesisTask API request.
+func (r StartSpeechSynthesisTaskRequest) Send() (*StartSpeechSynthesisTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartSpeechSynthesisTaskOutput), nil
+}
+
+// StartSpeechSynthesisTaskRequest returns a request value for making API operation for
+// Amazon Polly.
+//
+// Allows the creation of an asynchronous synthesis task, by starting a new
+// SpeechSynthesisTask. This operation requires all the standard information
+// needed for speech synthesis, plus the name of an Amazon S3 bucket for the
+// service to store the output of the synthesis task and two optional parameters
+// (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created,
+// this operation will return a SpeechSynthesisTask object, which will include
+// an identifier of this task as well as the current status.
+//
+//    // Example sending a request using the StartSpeechSynthesisTaskRequest method.
+//    req := client.StartSpeechSynthesisTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTask
+func (c *Polly) StartSpeechSynthesisTaskRequest(input *StartSpeechSynthesisTaskInput) StartSpeechSynthesisTaskRequest {
+	op := &aws.Operation{
+		Name:       opStartSpeechSynthesisTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/synthesisTasks",
+	}
+
+	if input == nil {
+		input = &StartSpeechSynthesisTaskInput{}
+	}
+
+	output := &StartSpeechSynthesisTaskOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartSpeechSynthesisTaskRequest{Request: req, Input: input, Copy: c.StartSpeechSynthesisTaskRequest}
 }
 
 const opSynthesizeSpeech = "SynthesizeSpeech"
@@ -419,6 +632,13 @@ func (s DeleteLexiconOutput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeVoicesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Boolean value indicating whether to return any bilingual voices that use
+	// the specified language as an additional language. For instance, if you request
+	// all languages that use US English (es-US), and there is an Italian voice
+	// that speaks both Italian (it-IT) and US English, that voice will be included
+	// if you specify yes but not if you specify no.
+	IncludeAdditionalLanguageCodes *bool `location:"querystring" locationName:"IncludeAdditionalLanguageCodes" type:"boolean"`
+
 	// The language identification tag (ISO 639 code for the language name-ISO 3166
 	// country code) for filtering the list of voices returned. If you don't specify
 	// this optional parameter, all available voices are returned.
@@ -442,6 +662,12 @@ func (s DescribeVoicesInput) GoString() string {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeVoicesInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.IncludeAdditionalLanguageCodes != nil {
+		v := *s.IncludeAdditionalLanguageCodes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "IncludeAdditionalLanguageCodes", protocol.BoolValue(v), metadata)
+	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 
@@ -598,6 +824,92 @@ func (s GetLexiconOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "LexiconAttributes", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTaskInput
+type GetSpeechSynthesisTaskInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Polly generated identifier for a speech synthesis task.
+	//
+	// TaskId is a required field
+	TaskId *string `location:"uri" locationName:"TaskId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSpeechSynthesisTaskInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSpeechSynthesisTaskInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSpeechSynthesisTaskInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSpeechSynthesisTaskInput"}
+
+	if s.TaskId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
+	}
+	if s.TaskId != nil && len(*s.TaskId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.TaskId != nil {
+		v := *s.TaskId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "TaskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetSpeechSynthesisTaskOutput
+type GetSpeechSynthesisTaskOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// SynthesisTask object that provides information from the requested task, including
+	// output format, creation time, task status, and so on.
+	SynthesisTask *SynthesisTask `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetSpeechSynthesisTaskOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSpeechSynthesisTaskOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSpeechSynthesisTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSpeechSynthesisTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SynthesisTask != nil {
+		v := s.SynthesisTask
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SynthesisTask", v, metadata)
 	}
 	return nil
 }
@@ -843,6 +1155,122 @@ func (s ListLexiconsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasksInput
+type ListSpeechSynthesisTasksInput struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum number of speech synthesis tasks returned in a List operation.
+	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
+
+	// The pagination token to use in the next request to continue the listing of
+	// speech synthesis tasks.
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
+
+	// Status of the speech synthesis tasks returned in a List operation
+	Status TaskStatus `location:"querystring" locationName:"Status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListSpeechSynthesisTasksInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSpeechSynthesisTasksInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSpeechSynthesisTasksInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSpeechSynthesisTasksInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSpeechSynthesisTasksInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListSpeechSynthesisTasksOutput
+type ListSpeechSynthesisTasksOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An opaque pagination token returned from the previous List operation in this
+	// request. If present, this indicates where to continue the listing.
+	NextToken *string `type:"string"`
+
+	// List of SynthesisTask objects that provides information from the specified
+	// task in the list request, including output format, creation time, task status,
+	// and so on.
+	SynthesisTasks []SynthesisTask `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSpeechSynthesisTasksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSpeechSynthesisTasksOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSpeechSynthesisTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSpeechSynthesisTasksOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SynthesisTasks) > 0 {
+		v := s.SynthesisTasks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SynthesisTasks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconInput
 type PutLexiconInput struct {
 	_ struct{} `type:"structure"`
@@ -933,9 +1361,418 @@ func (s PutLexiconOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskInput
+type StartSpeechSynthesisTaskInput struct {
+	_ struct{} `type:"structure"`
+
+	// Optional language code for the Speech Synthesis request. This is only necessary
+	// if using a bilingual voice, such as Aditi, which can be used for either Indian
+	// English (en-IN) or Hindi (hi-IN).
+	//
+	// If a bilingual voice is used and no language code is specified, Amazon Polly
+	// will use the default language of the bilingual voice. The default language
+	// for any voice is the one returned by the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
+	// operation for the LanguageCode parameter. For example, if no language code
+	// is specified, Aditi will use Indian English rather than Hindi.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// List of one or more pronunciation lexicon names you want the service to apply
+	// during synthesis. Lexicons are applied only if the language of the lexicon
+	// is the same as the language of the voice.
+	LexiconNames []string `type:"list"`
+
+	// The format in which the returned output will be encoded. For audio stream,
+	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	//
+	// OutputFormat is a required field
+	OutputFormat OutputFormat `type:"string" required:"true" enum:"true"`
+
+	// Amazon S3 bucket name to which the output file will be saved.
+	//
+	// OutputS3BucketName is a required field
+	OutputS3BucketName *string `type:"string" required:"true"`
+
+	// The Amazon S3 key prefix for the output speech file.
+	OutputS3KeyPrefix *string `type:"string"`
+
+	// The audio frequency specified in Hz.
+	//
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050".
+	// The default value is "22050".
+	//
+	// Valid values for pcm are "8000" and "16000" The default value is "16000".
+	SampleRate *string `type:"string"`
+
+	// ARN for the SNS topic optionally used for providing status notification for
+	// a speech synthesis task.
+	SnsTopicArn *string `type:"string"`
+
+	// The type of speech marks returned for the input text.
+	SpeechMarkTypes []SpeechMarkType `type:"list"`
+
+	// The input text to synthesize. If you specify ssml as the TextType, follow
+	// the SSML format for the input text.
+	//
+	// Text is a required field
+	Text *string `type:"string" required:"true"`
+
+	// Specifies whether the input text is plain text or SSML. The default value
+	// is plain text.
+	TextType TextType `type:"string" enum:"true"`
+
+	// Voice ID to use for the synthesis.
+	//
+	// VoiceId is a required field
+	VoiceId VoiceId `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StartSpeechSynthesisTaskInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartSpeechSynthesisTaskInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartSpeechSynthesisTaskInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartSpeechSynthesisTaskInput"}
+	if len(s.OutputFormat) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("OutputFormat"))
+	}
+
+	if s.OutputS3BucketName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutputS3BucketName"))
+	}
+
+	if s.Text == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Text"))
+	}
+	if len(s.VoiceId) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartSpeechSynthesisTaskInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.LanguageCode) > 0 {
+		v := s.LanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.LexiconNames) > 0 {
+		v := s.LexiconNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "LexiconNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.OutputFormat) > 0 {
+		v := s.OutputFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.OutputS3BucketName != nil {
+		v := *s.OutputS3BucketName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputS3BucketName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OutputS3KeyPrefix != nil {
+		v := *s.OutputS3KeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputS3KeyPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SampleRate != nil {
+		v := *s.SampleRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SampleRate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SpeechMarkTypes) > 0 {
+		v := s.SpeechMarkTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SpeechMarkTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Text != nil {
+		v := *s.Text
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Text", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TextType) > 0 {
+		v := s.TextType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TextType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.VoiceId) > 0 {
+		v := s.VoiceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/StartSpeechSynthesisTaskOutput
+type StartSpeechSynthesisTaskOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// SynthesisTask object that provides information and attributes about a newly
+	// submitted speech synthesis task.
+	SynthesisTask *SynthesisTask `type:"structure"`
+}
+
+// String returns the string representation
+func (s StartSpeechSynthesisTaskOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartSpeechSynthesisTaskOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartSpeechSynthesisTaskOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartSpeechSynthesisTaskOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SynthesisTask != nil {
+		v := s.SynthesisTask
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SynthesisTask", v, metadata)
+	}
+	return nil
+}
+
+// SynthesisTask object that provides information about a speech synthesis task.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesisTask
+type SynthesisTask struct {
+	_ struct{} `type:"structure"`
+
+	// Timestamp for the time the synthesis task was started.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Optional language code for a synthesis task. This is only necessary if using
+	// a bilingual voice, such as Aditi, which can be used for either Indian English
+	// (en-IN) or Hindi (hi-IN).
+	//
+	// If a bilingual voice is used and no language code is specified, Amazon Polly
+	// will use the default language of the bilingual voice. The default language
+	// for any voice is the one returned by the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
+	// operation for the LanguageCode parameter. For example, if no language code
+	// is specified, Aditi will use Indian English rather than Hindi.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// List of one or more pronunciation lexicon names you want the service to apply
+	// during synthesis. Lexicons are applied only if the language of the lexicon
+	// is the same as the language of the voice.
+	LexiconNames []string `type:"list"`
+
+	// The format in which the returned output will be encoded. For audio stream,
+	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	OutputFormat OutputFormat `type:"string" enum:"true"`
+
+	// Pathway for the output speech file.
+	OutputUri *string `type:"string"`
+
+	// Number of billable characters synthesized.
+	RequestCharacters *int64 `type:"integer"`
+
+	// The audio frequency specified in Hz.
+	//
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", and "22050".
+	// The default value is "22050".
+	//
+	// Valid values for pcm are "8000" and "16000" The default value is "16000".
+	SampleRate *string `type:"string"`
+
+	// ARN for the SNS topic optionally used for providing status notification for
+	// a speech synthesis task.
+	SnsTopicArn *string `type:"string"`
+
+	// The type of speech marks returned for the input text.
+	SpeechMarkTypes []SpeechMarkType `type:"list"`
+
+	// The Amazon Polly generated identifier for a speech synthesis task.
+	TaskId *string `min:"1" type:"string"`
+
+	// Current status of the individual speech synthesis task.
+	TaskStatus TaskStatus `type:"string" enum:"true"`
+
+	// Reason for the current status of a specific speech synthesis task, including
+	// errors if the task has failed.
+	TaskStatusReason *string `type:"string"`
+
+	// Specifies whether the input text is plain text or SSML. The default value
+	// is plain text.
+	TextType TextType `type:"string" enum:"true"`
+
+	// Voice ID to use for the synthesis.
+	VoiceId VoiceId `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SynthesisTask) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SynthesisTask) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SynthesisTask) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.LanguageCode) > 0 {
+		v := s.LanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.LexiconNames) > 0 {
+		v := s.LexiconNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "LexiconNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.OutputFormat) > 0 {
+		v := s.OutputFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.OutputUri != nil {
+		v := *s.OutputUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestCharacters != nil {
+		v := *s.RequestCharacters
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestCharacters", protocol.Int64Value(v), metadata)
+	}
+	if s.SampleRate != nil {
+		v := *s.SampleRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SampleRate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SnsTopicArn != nil {
+		v := *s.SnsTopicArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SnsTopicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SpeechMarkTypes) > 0 {
+		v := s.SpeechMarkTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "SpeechMarkTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.TaskId != nil {
+		v := *s.TaskId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TaskId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TaskStatus) > 0 {
+		v := s.TaskStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TaskStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TaskStatusReason != nil {
+		v := *s.TaskStatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TaskStatusReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TextType) > 0 {
+		v := s.TextType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TextType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.VoiceId) > 0 {
+		v := s.VoiceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechInput
 type SynthesizeSpeechInput struct {
 	_ struct{} `type:"structure"`
+
+	// Optional language code for the Synthesize Speech request. This is only necessary
+	// if using a bilingual voice, such as Aditi, which can be used for either Indian
+	// English (en-IN) or Hindi (hi-IN).
+	//
+	// If a bilingual voice is used and no language code is specified, Amazon Polly
+	// will use the default language of the bilingual voice. The default language
+	// for any voice is the one returned by the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
+	// operation for the LanguageCode parameter. For example, if no language code
+	// is specified, Aditi will use Indian English rather than Hindi.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon
@@ -945,6 +1782,9 @@ type SynthesizeSpeechInput struct {
 
 	// The format in which the returned output will be encoded. For audio stream,
 	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	//
+	// When pcm is used, the content returned is audio/pcm in a signed 16-bit, 1
+	// channel (mono), little-endian format.
 	//
 	// OutputFormat is a required field
 	OutputFormat OutputFormat `type:"string" required:"true" enum:"true"`
@@ -1011,6 +1851,12 @@ func (s *SynthesizeSpeechInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if len(s.LanguageCode) > 0 {
+		v := s.LanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.LexiconNames) > 0 {
 		v := s.LexiconNames
 
@@ -1136,6 +1982,14 @@ func (s SynthesizeSpeechOutput) MarshalFields(e protocol.FieldEncoder) error {
 type Voice struct {
 	_ struct{} `type:"structure"`
 
+	// Additional codes for languages available for the specified voice in addition
+	// to its default language.
+	//
+	// For example, the default language for Aditi is Indian English (en-IN) because
+	// it was first used for that language. Since Aditi is bilingual and fluent
+	// in both Indian English and Hindi, this parameter would show the code hi-IN.
+	AdditionalLanguageCodes []LanguageCode `type:"list"`
+
 	// Gender of the voice.
 	Gender Gender `type:"string" enum:"true"`
 
@@ -1166,6 +2020,18 @@ func (s Voice) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Voice) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdditionalLanguageCodes) > 0 {
+		v := s.AdditionalLanguageCodes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AdditionalLanguageCodes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.Gender) > 0 {
 		v := s.Gender
 
@@ -1220,6 +2086,7 @@ type LanguageCode string
 
 // Enum values for LanguageCode
 const (
+	LanguageCodeCmnCn   LanguageCode = "cmn-CN"
 	LanguageCodeCyGb    LanguageCode = "cy-GB"
 	LanguageCodeDaDk    LanguageCode = "da-DK"
 	LanguageCodeDeDe    LanguageCode = "de-DE"
@@ -1234,8 +2101,9 @@ const (
 	LanguageCodeFrFr    LanguageCode = "fr-FR"
 	LanguageCodeIsIs    LanguageCode = "is-IS"
 	LanguageCodeItIt    LanguageCode = "it-IT"
-	LanguageCodeKoKr    LanguageCode = "ko-KR"
 	LanguageCodeJaJp    LanguageCode = "ja-JP"
+	LanguageCodeHiIn    LanguageCode = "hi-IN"
+	LanguageCodeKoKr    LanguageCode = "ko-KR"
 	LanguageCodeNbNo    LanguageCode = "nb-NO"
 	LanguageCodeNlNl    LanguageCode = "nl-NL"
 	LanguageCodePlPl    LanguageCode = "pl-PL"
@@ -1290,6 +2158,25 @@ func (enum SpeechMarkType) MarshalValue() (string, error) {
 }
 
 func (enum SpeechMarkType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TaskStatus string
+
+// Enum values for TaskStatus
+const (
+	TaskStatusScheduled  TaskStatus = "scheduled"
+	TaskStatusInProgress TaskStatus = "inProgress"
+	TaskStatusCompleted  TaskStatus = "completed"
+	TaskStatusFailed     TaskStatus = "failed"
+)
+
+func (enum TaskStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaskStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -1368,6 +2255,7 @@ const (
 	VoiceIdTakumi    VoiceId = "Takumi"
 	VoiceIdSeoyeon   VoiceId = "Seoyeon"
 	VoiceIdAditi     VoiceId = "Aditi"
+	VoiceIdZhiyu     VoiceId = "Zhiyu"
 )
 
 func (enum VoiceId) MarshalValue() (string, error) {

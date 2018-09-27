@@ -218,7 +218,7 @@ func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
 // ListClustersRequest returns a request value for making API operation for
 // Amazon Elastic Container Service for Kubernetes.
 //
-// Lists the Amazon EKS clusters in your AWS account in the specified region.
+// Lists the Amazon EKS clusters in your AWS account in the specified Region.
 //
 //    // Example sending a request using the ListClustersRequest method.
 //    req := client.ListClustersRequest(params)
@@ -302,6 +302,11 @@ type Cluster struct {
 	// The name of the cluster.
 	Name *string `locationName:"name" type:"string"`
 
+	// The platform version of your Amazon EKS cluster. For more information, see
+	// Platform Versions (eks/latest/userguide/platform-versions.html) in the Amazon
+	// EKS User Guide.
+	PlatformVersion *string `locationName:"platformVersion" type:"string"`
+
 	// The VPC subnets and security groups used by the cluster control plane. Amazon
 	// EKS VPC resources have specific requirements to work properly with Kubernetes.
 	// For more information, see Cluster VPC Considerations (http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
@@ -369,6 +374,12 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.PlatformVersion != nil {
+		v := *s.PlatformVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "platformVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.ResourcesVpcConfig != nil {
 		v := s.ResourcesVpcConfig
 
@@ -413,7 +424,9 @@ type CreateClusterInput struct {
 	// EKS VPC resources have specific requirements to work properly with Kubernetes.
 	// For more information, see Cluster VPC Considerations (http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
 	// and Cluster Security Group Considerations (http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
-	// in the Amazon EKS User Guide.
+	// in the Amazon EKS User Guide. You must specify at least two subnets. You
+	// may specify up to 5 security groups, but we recommend that you use a dedicated
+	// security group for your cluster control plane.
 	//
 	// ResourcesVpcConfig is a required field
 	ResourcesVpcConfig *VpcConfigRequest `locationName:"resourcesVpcConfig" type:"structure" required:"true"`
@@ -421,7 +434,7 @@ type CreateClusterInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions
 	// for Amazon EKS to make calls to other AWS API operations on your behalf.
 	// For more information, see Amazon EKS Service IAM Role (http://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html)
-	// in the Amazon EKS User Guide
+	// in the Amazon EKS User Guide.
 	//
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
@@ -787,7 +800,7 @@ type ListClustersOutput struct {
 
 	responseMetadata aws.Response
 
-	// A list of all of the clusters for your account in the specified region.
+	// A list of all of the clusters for your account in the specified Region.
 	Clusters []string `locationName:"clusters" type:"list"`
 
 	// The nextToken value to include in a future ListClusters request. When the

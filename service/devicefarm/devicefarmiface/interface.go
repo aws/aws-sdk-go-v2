@@ -170,6 +170,8 @@ type DeviceFarmAPI interface {
 
 	ScheduleRunRequest(*devicefarm.ScheduleRunInput) devicefarm.ScheduleRunRequest
 
+	StopJobRequest(*devicefarm.StopJobInput) devicefarm.StopJobRequest
+
 	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) devicefarm.StopRemoteAccessSessionRequest
 
 	StopRunRequest(*devicefarm.StopRunInput) devicefarm.StopRunRequest
@@ -183,6 +185,8 @@ type DeviceFarmAPI interface {
 	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
 
 	UpdateProjectRequest(*devicefarm.UpdateProjectInput) devicefarm.UpdateProjectRequest
+
+	UpdateUploadRequest(*devicefarm.UpdateUploadInput) devicefarm.UpdateUploadRequest
 
 	UpdateVPCEConfigurationRequest(*devicefarm.UpdateVPCEConfigurationInput) devicefarm.UpdateVPCEConfigurationRequest
 }

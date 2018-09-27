@@ -3479,6 +3479,61 @@ func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequ
 	return ScheduleRunRequest{Request: req, Input: input, Copy: c.ScheduleRunRequest}
 }
 
+const opStopJob = "StopJob"
+
+// StopJobRequest is a API request type for the StopJob API operation.
+type StopJobRequest struct {
+	*aws.Request
+	Input *StopJobInput
+	Copy  func(*StopJobInput) StopJobRequest
+}
+
+// Send marshals and sends the StopJob API request.
+func (r StopJobRequest) Send() (*StopJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopJobOutput), nil
+}
+
+// StopJobRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Initiates a stop request for the current job. AWS Device Farm will immediately
+// stop the job on the device where tests have not started executing, and you
+// will not be billed for this device. On the device where tests have started
+// executing, Setup Suite and Teardown Suite tests will run to completion before
+// stopping execution on the device. You will be billed for Setup, Teardown,
+// and any tests that were in progress or already completed.
+//
+//    // Example sending a request using the StopJobRequest method.
+//    req := client.StopJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJob
+func (c *DeviceFarm) StopJobRequest(input *StopJobInput) StopJobRequest {
+	op := &aws.Operation{
+		Name:       opStopJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopJobInput{}
+	}
+
+	output := &StopJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopJobRequest{Request: req, Input: input, Copy: c.StopJobRequest}
+}
+
 const opStopRemoteAccessSession = "StopRemoteAccessSession"
 
 // StopRemoteAccessSessionRequest is a API request type for the StopRemoteAccessSession API operation.
@@ -3834,6 +3889,56 @@ func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) UpdateProje
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
+}
+
+const opUpdateUpload = "UpdateUpload"
+
+// UpdateUploadRequest is a API request type for the UpdateUpload API operation.
+type UpdateUploadRequest struct {
+	*aws.Request
+	Input *UpdateUploadInput
+	Copy  func(*UpdateUploadInput) UpdateUploadRequest
+}
+
+// Send marshals and sends the UpdateUpload API request.
+func (r UpdateUploadRequest) Send() (*UpdateUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUploadOutput), nil
+}
+
+// UpdateUploadRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Update an uploaded test specification (test spec).
+//
+//    // Example sending a request using the UpdateUploadRequest method.
+//    req := client.UpdateUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUpload
+func (c *DeviceFarm) UpdateUploadRequest(input *UpdateUploadInput) UpdateUploadRequest {
+	op := &aws.Operation{
+		Name:       opUpdateUpload,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateUploadInput{}
+	}
+
+	output := &UpdateUploadOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateUploadRequest{Request: req, Input: input, Copy: c.UpdateUploadRequest}
 }
 
 const opUpdateVPCEConfiguration = "UpdateVPCEConfiguration"
@@ -4423,6 +4528,9 @@ type CreateRemoteAccessSessionConfiguration struct {
 
 	// The billing method for the remote access session.
 	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
+
+	// An array of Amazon Resource Names (ARNs) included in the VPC endpoint configuration.
+	VpceConfigurationArns []string `locationName:"vpceConfigurationArns" type:"list"`
 }
 
 // String returns the string representation
@@ -4604,7 +4712,7 @@ type CreateUploadInput struct {
 	//
 	//    * IOS_APP: An iOS upload.
 	//
-	//    * WEB_APP: A web appliction upload.
+	//    * WEB_APP: A web application upload.
 	//
 	//    * EXTERNAL_DATA: An external data upload.
 	//
@@ -5547,6 +5655,10 @@ type ExecutionConfiguration struct {
 	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
 	// Farm FAQs.
 	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
+
+	// Set to true to enable video capture; otherwise, set to false. The default
+	// is true.
+	VideoCapture *bool `locationName:"videoCapture" type:"boolean"`
 }
 
 // String returns the string representation
@@ -6889,6 +7001,13 @@ type Job struct {
 	//
 	//    * XCTEST_UI: The XCode UI test type.
 	Type TestType `locationName:"type" type:"string" enum:"true"`
+
+	// This value is set to true if video capture is enabled; otherwise, it is set
+	// to false.
+	VideoCapture *bool `locationName:"videoCapture" type:"boolean"`
+
+	// The endpoint for streaming device video.
+	VideoEndpoint *string `locationName:"videoEndpoint" type:"string"`
 }
 
 // String returns the string representation
@@ -8183,6 +8302,62 @@ type ListUploadsInput struct {
 	// An identifier that was returned from the previous call to this operation,
 	// which can be used to return the next set of items in the list.
 	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
+
+	// The type of upload.
+	//
+	// Must be one of the following values:
+	//
+	//    * ANDROID_APP: An Android upload.
+	//
+	//    * IOS_APP: An iOS upload.
+	//
+	//    * WEB_APP: A web appliction upload.
+	//
+	//    * EXTERNAL_DATA: An external data upload.
+	//
+	//    * APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.
+	//
+	//    * APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package
+	//    upload.
+	//
+	//    * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+	//
+	//    * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package
+	//    upload.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package
+	//    upload.
+	//
+	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+	//
+	//    * CALABASH_TEST_PACKAGE: A Calabash test package upload.
+	//
+	//    * INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.
+	//
+	//    * UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.
+	//
+	//    * UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.
+	//
+	//    * XCTEST_TEST_PACKAGE: An XCode test package upload.
+	//
+	//    * XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.
+	//
+	//    * APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
+	//
+	//    * APPIUM_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.
+	//
+	//    * APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.
+	//
+	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.
+	//
+	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload.
+	//
+	//    * INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.
+	//
+	//    * XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.
+	Type UploadType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -9186,6 +9361,9 @@ type Run struct {
 	// The run's stop time.
 	Stopped *time.Time `locationName:"stopped" type:"timestamp" timestampFormat:"unix"`
 
+	// The ARN of the YAML-formatted test specification for the run.
+	TestSpecArn *string `locationName:"testSpecArn" min:"32" type:"string"`
+
 	// The total number of jobs for the run.
 	TotalJobs *int64 `locationName:"totalJobs" type:"integer"`
 
@@ -9570,6 +9748,9 @@ type ScheduleRunTest struct {
 	// The ARN of the uploaded test that will be run.
 	TestPackageArn *string `locationName:"testPackageArn" min:"32" type:"string"`
 
+	// The ARN of the YAML-formatted test specification.
+	TestSpecArn *string `locationName:"testSpecArn" min:"32" type:"string"`
+
 	// The test's type.
 	//
 	// Must be one of the following values:
@@ -9624,6 +9805,9 @@ func (s *ScheduleRunTest) Validate() error {
 	if s.TestPackageArn != nil && len(*s.TestPackageArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("TestPackageArn", 32))
 	}
+	if s.TestSpecArn != nil && len(*s.TestSpecArn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("TestSpecArn", 32))
+	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
@@ -9632,6 +9816,69 @@ func (s *ScheduleRunTest) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJobRequest
+type StopJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the Amazon Resource Name (ARN) of the Device Farm job you wish
+	// to stop.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopJobInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopJobResult
+type StopJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The job that was stopped.
+	Job *Job `locationName:"job" type:"structure"`
+}
+
+// String returns the string representation
+func (s StopJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the request to stop the remote access session.
@@ -10445,6 +10692,79 @@ func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUploadRequest
+type UpdateUploadInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the uploaded test spec.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+
+	// The upload's content type (for example, "application/x-yaml").
+	ContentType *string `locationName:"contentType" type:"string"`
+
+	// Set to true if the YAML file has changed and needs to be updated; otherwise,
+	// set to false.
+	EditContent *bool `locationName:"editContent" type:"boolean"`
+
+	// The upload's test spec file name. The name should not contain the '/' character.
+	// The test spec file name must end with the .yaml or .yml file extension.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateUploadInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUploadInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateUploadInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUploadInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateUploadResult
+type UpdateUploadOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A test spec uploaded to Device Farm.
+	Upload *Upload `locationName:"upload" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateUploadOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateUploadOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateUploadOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateVPCEConfigurationRequest
 type UpdateVPCEConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -10530,6 +10850,13 @@ type Upload struct {
 
 	// The upload's ARN.
 	Arn *string `locationName:"arn" min:"32" type:"string"`
+
+	// The upload's category. Allowed values include:
+	//
+	//    * CURATED: An upload managed by AWS Device Farm.
+	//
+	//    * PRIVATE: An upload managed by the AWS Device Farm customer.
+	Category UploadCategory `locationName:"category" type:"string" enum:"true"`
 
 	// The upload's content type (for example, "application/octet-stream").
 	ContentType *string `locationName:"contentType" type:"string"`
@@ -10699,6 +11026,7 @@ const (
 	ArtifactTypeVideo                  ArtifactType = "VIDEO"
 	ArtifactTypeCustomerArtifact       ArtifactType = "CUSTOMER_ARTIFACT"
 	ArtifactTypeCustomerArtifactLog    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
+	ArtifactTypeTestspecOutput         ArtifactType = "TESTSPEC_OUTPUT"
 )
 
 func (enum ArtifactType) MarshalValue() (string, error) {
@@ -11071,6 +11399,23 @@ func (enum TestType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type UploadCategory string
+
+// Enum values for UploadCategory
+const (
+	UploadCategoryCurated UploadCategory = "CURATED"
+	UploadCategoryPrivate UploadCategory = "PRIVATE"
+)
+
+func (enum UploadCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UploadCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UploadStatus string
 
 // Enum values for UploadStatus
@@ -11110,6 +11455,14 @@ const (
 	UploadTypeUiautomatorTestPackage         UploadType = "UIAUTOMATOR_TEST_PACKAGE"
 	UploadTypeXctestTestPackage              UploadType = "XCTEST_TEST_PACKAGE"
 	UploadTypeXctestUiTestPackage            UploadType = "XCTEST_UI_TEST_PACKAGE"
+	UploadTypeAppiumJavaJunitTestSpec        UploadType = "APPIUM_JAVA_JUNIT_TEST_SPEC"
+	UploadTypeAppiumJavaTestngTestSpec       UploadType = "APPIUM_JAVA_TESTNG_TEST_SPEC"
+	UploadTypeAppiumPythonTestSpec           UploadType = "APPIUM_PYTHON_TEST_SPEC"
+	UploadTypeAppiumWebJavaJunitTestSpec     UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"
+	UploadTypeAppiumWebJavaTestngTestSpec    UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"
+	UploadTypeAppiumWebPythonTestSpec        UploadType = "APPIUM_WEB_PYTHON_TEST_SPEC"
+	UploadTypeInstrumentationTestSpec        UploadType = "INSTRUMENTATION_TEST_SPEC"
+	UploadTypeXctestUiTestSpec               UploadType = "XCTEST_UI_TEST_SPEC"
 )
 
 func (enum UploadType) MarshalValue() (string, error) {

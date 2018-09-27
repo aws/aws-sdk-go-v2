@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Elemental MediaLive.
 //    func myFunc(svc medialiveiface.MediaLiveAPI) bool {
-//        // Make svc.CreateChannel request
+//        // Make svc.BatchUpdateSchedule request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockMediaLiveClient struct {
 //        medialiveiface.MediaLiveAPI
 //    }
-//    func (m *mockMediaLiveClient) CreateChannel(input *medialive.CreateChannelInput) (*medialive.CreateChannelOutput, error) {
+//    func (m *mockMediaLiveClient) BatchUpdateSchedule(input *medialive.BatchUpdateScheduleInput) (*medialive.BatchUpdateScheduleOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MediaLiveAPI interface {
+	BatchUpdateScheduleRequest(*medialive.BatchUpdateScheduleInput) medialive.BatchUpdateScheduleRequest
+
 	CreateChannelRequest(*medialive.CreateChannelInput) medialive.CreateChannelRequest
 
 	CreateInputRequest(*medialive.CreateInputInput) medialive.CreateInputRequest
@@ -74,17 +76,31 @@ type MediaLiveAPI interface {
 
 	DeleteInputSecurityGroupRequest(*medialive.DeleteInputSecurityGroupInput) medialive.DeleteInputSecurityGroupRequest
 
+	DeleteReservationRequest(*medialive.DeleteReservationInput) medialive.DeleteReservationRequest
+
 	DescribeChannelRequest(*medialive.DescribeChannelInput) medialive.DescribeChannelRequest
 
 	DescribeInputRequest(*medialive.DescribeInputInput) medialive.DescribeInputRequest
 
 	DescribeInputSecurityGroupRequest(*medialive.DescribeInputSecurityGroupInput) medialive.DescribeInputSecurityGroupRequest
 
+	DescribeOfferingRequest(*medialive.DescribeOfferingInput) medialive.DescribeOfferingRequest
+
+	DescribeReservationRequest(*medialive.DescribeReservationInput) medialive.DescribeReservationRequest
+
+	DescribeScheduleRequest(*medialive.DescribeScheduleInput) medialive.DescribeScheduleRequest
+
 	ListChannelsRequest(*medialive.ListChannelsInput) medialive.ListChannelsRequest
 
 	ListInputSecurityGroupsRequest(*medialive.ListInputSecurityGroupsInput) medialive.ListInputSecurityGroupsRequest
 
 	ListInputsRequest(*medialive.ListInputsInput) medialive.ListInputsRequest
+
+	ListOfferingsRequest(*medialive.ListOfferingsInput) medialive.ListOfferingsRequest
+
+	ListReservationsRequest(*medialive.ListReservationsInput) medialive.ListReservationsRequest
+
+	PurchaseOfferingRequest(*medialive.PurchaseOfferingInput) medialive.PurchaseOfferingRequest
 
 	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
 

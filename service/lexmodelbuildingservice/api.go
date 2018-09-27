@@ -10432,10 +10432,11 @@ type Status string
 
 // Enum values for Status
 const (
-	StatusBuilding Status = "BUILDING"
-	StatusReady    Status = "READY"
-	StatusFailed   Status = "FAILED"
-	StatusNotBuilt Status = "NOT_BUILT"
+	StatusBuilding          Status = "BUILDING"
+	StatusReady             Status = "READY"
+	StatusReadyBasicTesting Status = "READY_BASIC_TESTING"
+	StatusFailed            Status = "FAILED"
+	StatusNotBuilt          Status = "NOT_BUILT"
 )
 
 func (enum Status) MarshalValue() (string, error) {

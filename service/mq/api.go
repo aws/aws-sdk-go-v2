@@ -3,6 +3,8 @@
 package mq
 
 import (
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -81,8 +83,7 @@ func (r CreateConfigurationRequest) Send() (*CreateConfigurationOutput, error) {
 // AmazonMQ.
 //
 // Creates a new configuration for the specified configuration name. Amazon
-// MQ uses the default configuration (the engine type and version). Note: If
-// the configuration name already exists, Amazon MQ doesn't create a configuration.
+// MQ uses the default configuration (the engine type and version).
 //
 //    // Example sending a request using the CreateConfigurationRequest method.
 //    req := client.CreateConfigurationRequest(params)
@@ -870,6 +871,9 @@ type BrokerInstance struct {
 
 	// The broker's wire-level protocol endpoints.
 	Endpoints []string `locationName:"endpoints" type:"list"`
+
+	// The IP address of the Elastic Network Interface (ENI) attached to the broker.
+	IpAddress *string `locationName:"ipAddress" type:"string"`
 }
 
 // String returns the string representation
@@ -902,6 +906,12 @@ func (s BrokerInstance) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.IpAddress != nil {
+		v := *s.IpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -922,17 +932,16 @@ type BrokerSummary struct {
 	// characters.
 	BrokerName *string `locationName:"brokerName" type:"string"`
 
-	// The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED,
-	// DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS
+	// The status of the broker.
 	BrokerState BrokerState `locationName:"brokerState" type:"string" enum:"true"`
 
-	// Required. The deployment mode of the broker. Possible values: SINGLE_INSTANCE,
-	// ACTIVE_STANDBY_MULTI_AZ SINGLE_INSTANCE creates a single-instance broker
-	// in a single Availability Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby
-	// broker for high availability.
+	// The time when the broker was created.
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
+	// Required. The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
 
-	// The broker's instance type. Possible values: mq.t2.micro, mq.m4.large
+	// The broker's instance type.
 	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
 }
 
@@ -972,6 +981,12 @@ func (s BrokerSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "brokerState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
 	if len(s.DeploymentMode) > 0 {
 		v := s.DeploymentMode
 
@@ -994,6 +1009,9 @@ type Configuration struct {
 
 	// Required. The ARN of the configuration.
 	Arn *string `locationName:"arn" type:"string"`
+
+	// Required. The date and time of the configuration revision.
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
 
 	// Required. The description of the configuration.
 	Description *string `locationName:"description" type:"string"`
@@ -1034,6 +1052,12 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -1082,7 +1106,7 @@ type ConfigurationId struct {
 	// Required. The unique ID that Amazon MQ generates for the configuration.
 	Id *string `locationName:"id" type:"string"`
 
-	// The Universally Unique Identifier (UUID) of the request.
+	// The revision number of the configuration.
 	Revision *int64 `locationName:"revision" type:"integer"`
 }
 
@@ -1118,10 +1142,13 @@ func (s ConfigurationId) MarshalFields(e protocol.FieldEncoder) error {
 type ConfigurationRevision struct {
 	_ struct{} `type:"structure"`
 
+	// Required. The date and time of the configuration revision.
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
 	// The description of the configuration revision.
 	Description *string `locationName:"description" type:"string"`
 
-	// Required. The revision of the configuration.
+	// Required. The revision number of the configuration.
 	Revision *int64 `locationName:"revision" type:"integer"`
 }
 
@@ -1137,6 +1164,12 @@ func (s ConfigurationRevision) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -1219,9 +1252,7 @@ type CreateBrokerInput struct {
 
 	CreatorRequestId *string `locationName:"creatorRequestId" type:"string" idempotencyToken:"true"`
 
-	// The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
-	// SINGLE_INSTANCE creates a single-instance broker in a single Availability
-	// Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.
+	// The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
 
 	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
@@ -1230,6 +1261,9 @@ type CreateBrokerInput struct {
 	EngineVersion *string `locationName:"engineVersion" type:"string"`
 
 	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
+
+	// The list of information about logs to be enabled for the specified broker.
+	Logs *Logs `locationName:"logs" type:"structure"`
 
 	// The scheduled time period relative to UTC during which Amazon MQ begins to
 	// apply pending updates or patches to the broker.
@@ -1311,6 +1345,12 @@ func (s CreateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Logs != nil {
+		v := s.Logs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
 	}
 	if s.MaintenanceWindowStartTime != nil {
 		v := s.MaintenanceWindowStartTime
@@ -1461,6 +1501,8 @@ type CreateConfigurationOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
 	Id *string `locationName:"id" type:"string"`
 
 	// Returns information about the specified configuration revision.
@@ -1491,6 +1533,12 @@ func (s CreateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -1854,16 +1902,15 @@ type DescribeBrokerOutput struct {
 
 	BrokerName *string `locationName:"brokerName" type:"string"`
 
-	// The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED,
-	// DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS
+	// The status of the broker.
 	BrokerState BrokerState `locationName:"brokerState" type:"string" enum:"true"`
 
 	// Broker configuration information
 	Configurations *Configurations `locationName:"configurations" type:"structure"`
 
-	// The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
-	// SINGLE_INSTANCE creates a single-instance broker in a single Availability
-	// Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
+	// The deployment mode of the broker.
 	DeploymentMode DeploymentMode `locationName:"deploymentMode" type:"string" enum:"true"`
 
 	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
@@ -1873,9 +1920,15 @@ type DescribeBrokerOutput struct {
 
 	HostInstanceType *string `locationName:"hostInstanceType" type:"string"`
 
+	// The list of information about logs currently enabled and pending to be deployed
+	// for the specified broker.
+	Logs *LogsSummary `locationName:"logs" type:"structure"`
+
 	// The scheduled time period relative to UTC during which Amazon MQ begins to
 	// apply pending updates or patches to the broker.
 	MaintenanceWindowStartTime *WeeklyStartTime `locationName:"maintenanceWindowStartTime" type:"structure"`
+
+	PendingEngineVersion *string `locationName:"pendingEngineVersion" type:"string"`
 
 	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
 
@@ -1951,6 +2004,12 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "configurations", v, metadata)
 	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
 	if len(s.DeploymentMode) > 0 {
 		v := s.DeploymentMode
 
@@ -1975,11 +2034,23 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Logs != nil {
+		v := s.Logs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
+	}
 	if s.MaintenanceWindowStartTime != nil {
 		v := s.MaintenanceWindowStartTime
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "maintenanceWindowStartTime", v, metadata)
+	}
+	if s.PendingEngineVersion != nil {
+		v := *s.PendingEngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pendingEngineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PubliclyAccessible != nil {
 		v := *s.PubliclyAccessible
@@ -2079,6 +2150,8 @@ type DescribeConfigurationOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
 	Description *string `locationName:"description" type:"string"`
 
 	// The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
@@ -2116,6 +2189,12 @@ func (s DescribeConfigurationOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -2222,6 +2301,8 @@ type DescribeConfigurationRevisionOutput struct {
 
 	ConfigurationId *string `locationName:"configurationId" type:"string"`
 
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
 	Data *string `locationName:"data" type:"string"`
 
 	Description *string `locationName:"description" type:"string"`
@@ -2249,6 +2330,12 @@ func (s DescribeConfigurationRevisionOutput) MarshalFields(e protocol.FieldEncod
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "configurationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.Data != nil {
 		v := *s.Data
@@ -2807,7 +2894,7 @@ type ListUsersOutput struct {
 
 	BrokerId *string `locationName:"brokerId" type:"string"`
 
-	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `locationName:"maxResults" min:"5" type:"integer"`
 
 	NextToken *string `locationName:"nextToken" type:"string"`
 
@@ -2860,6 +2947,155 @@ func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// The list of information about logs to be enabled for the specified broker.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/Logs
+type Logs struct {
+	_ struct{} `type:"structure"`
+
+	// Enables audit logging. Every user management action made using JMX or the
+	// ActiveMQ Web Console is logged.
+	Audit *bool `locationName:"audit" type:"boolean"`
+
+	// Enables general logging.
+	General *bool `locationName:"general" type:"boolean"`
+}
+
+// String returns the string representation
+func (s Logs) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Logs) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Logs) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Audit != nil {
+		v := *s.Audit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "audit", protocol.BoolValue(v), metadata)
+	}
+	if s.General != nil {
+		v := *s.General
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "general", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// The list of information about logs currently enabled and pending to be deployed
+// for the specified broker.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/LogsSummary
+type LogsSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Enables audit logging. Every user management action made using JMX or the
+	// ActiveMQ Web Console is logged.
+	Audit *bool `locationName:"audit" type:"boolean"`
+
+	// The location of the CloudWatch Logs log group where audit logs are sent.
+	AuditLogGroup *string `locationName:"auditLogGroup" type:"string"`
+
+	// Enables general logging.
+	General *bool `locationName:"general" type:"boolean"`
+
+	// The location of the CloudWatch Logs log group where general logs are sent.
+	GeneralLogGroup *string `locationName:"generalLogGroup" type:"string"`
+
+	// The list of information about logs pending to be deployed for the specified
+	// broker.
+	Pending *PendingLogs `locationName:"pending" type:"structure"`
+}
+
+// String returns the string representation
+func (s LogsSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogsSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogsSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Audit != nil {
+		v := *s.Audit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "audit", protocol.BoolValue(v), metadata)
+	}
+	if s.AuditLogGroup != nil {
+		v := *s.AuditLogGroup
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "auditLogGroup", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.General != nil {
+		v := *s.General
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "general", protocol.BoolValue(v), metadata)
+	}
+	if s.GeneralLogGroup != nil {
+		v := *s.GeneralLogGroup
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "generalLogGroup", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Pending != nil {
+		v := s.Pending
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "pending", v, metadata)
+	}
+	return nil
+}
+
+// The list of information about logs to be enabled for the specified broker.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/PendingLogs
+type PendingLogs struct {
+	_ struct{} `type:"structure"`
+
+	// Enables audit logging. Every user management action made using JMX or the
+	// ActiveMQ Web Console is logged.
+	Audit *bool `locationName:"audit" type:"boolean"`
+
+	// Enables general logging.
+	General *bool `locationName:"general" type:"boolean"`
+}
+
+// String returns the string representation
+func (s PendingLogs) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PendingLogs) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PendingLogs) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Audit != nil {
+		v := *s.Audit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "audit", protocol.BoolValue(v), metadata)
+	}
+	if s.General != nil {
+		v := *s.General
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "general", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -2949,12 +3185,6 @@ type SanitizationWarning struct {
 	ElementName *string `locationName:"elementName" type:"string"`
 
 	// Required. The reason for which the XML elements or attributes were sanitized.
-	// Possible values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED,
-	// INVALID_ATTRIBUTE_VALUE_REMOVED DISALLOWED_ELEMENT_REMOVED shows that the
-	// provided element isn't allowed and has been removed. DISALLOWED_ATTRIBUTE_REMOVED
-	// shows that the provided attribute isn't allowed and has been removed. INVALID_ATTRIBUTE_VALUE_REMOVED
-	// shows that the provided value for the attribute isn't allowed and has been
-	// removed.
 	Reason SanitizationWarningReason `locationName:"reason" type:"string" enum:"true"`
 }
 
@@ -2995,11 +3225,18 @@ func (s SanitizationWarning) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateBrokerInput struct {
 	_ struct{} `type:"structure"`
 
+	AutoMinorVersionUpgrade *bool `locationName:"autoMinorVersionUpgrade" type:"boolean"`
+
 	// BrokerId is a required field
 	BrokerId *string `location:"uri" locationName:"broker-id" type:"string" required:"true"`
 
 	// A list of information about the configuration.
 	Configuration *ConfigurationId `locationName:"configuration" type:"structure"`
+
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// The list of information about logs to be enabled for the specified broker.
+	Logs *Logs `locationName:"logs" type:"structure"`
 }
 
 // String returns the string representation
@@ -3030,11 +3267,29 @@ func (s *UpdateBrokerInput) Validate() error {
 func (s UpdateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
+	}
 	if s.Configuration != nil {
 		v := s.Configuration
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Logs != nil {
+		v := s.Logs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
 	}
 	if s.BrokerId != nil {
 		v := *s.BrokerId
@@ -3051,10 +3306,17 @@ type UpdateBrokerOutput struct {
 
 	responseMetadata aws.Response
 
+	AutoMinorVersionUpgrade *bool `locationName:"autoMinorVersionUpgrade" type:"boolean"`
+
 	BrokerId *string `locationName:"brokerId" type:"string"`
 
 	// A list of information about the configuration.
 	Configuration *ConfigurationId `locationName:"configuration" type:"structure"`
+
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// The list of information about logs to be enabled for the specified broker.
+	Logs *Logs `locationName:"logs" type:"structure"`
 }
 
 // String returns the string representation
@@ -3074,6 +3336,12 @@ func (s UpdateBrokerOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
+	}
 	if s.BrokerId != nil {
 		v := *s.BrokerId
 
@@ -3085,6 +3353,18 @@ func (s UpdateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Logs != nil {
+		v := s.Logs
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logs", v, metadata)
 	}
 	return nil
 }
@@ -3158,6 +3438,8 @@ type UpdateConfigurationOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	Created *time.Time `locationName:"created" type:"timestamp" timestampFormat:"unix"`
+
 	Id *string `locationName:"id" type:"string"`
 
 	// Returns information about the specified configuration revision.
@@ -3190,6 +3472,12 @@ func (s UpdateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Created != nil {
+		v := *s.Created
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "created", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -3422,8 +3710,7 @@ type UserPendingChanges struct {
 	// and tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []string `locationName:"groups" type:"list"`
 
-	// Required. The type of change pending for the ActiveMQ user. Possible values:
-	// CREATE, UPDATE, DELETE
+	// Required. The type of change pending for the ActiveMQ user.
 	PendingChange ChangeType `locationName:"pendingChange" type:"string" enum:"true"`
 }
 
@@ -3471,8 +3758,7 @@ func (s UserPendingChanges) MarshalFields(e protocol.FieldEncoder) error {
 type UserSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The type of change pending for the ActiveMQ user. Possible values: CREATE,
-	// UPDATE, DELETE
+	// The type of change pending for the ActiveMQ user.
 	PendingChange ChangeType `locationName:"pendingChange" type:"string" enum:"true"`
 
 	// Required. The username of the ActiveMQ user. This value can contain only
@@ -3514,8 +3800,7 @@ func (s UserSummary) MarshalFields(e protocol.FieldEncoder) error {
 type WeeklyStartTime struct {
 	_ struct{} `type:"structure"`
 
-	// Required. The day of the week. Possible values: MONDAY, TUESDAY, WEDNESDAY,
-	// THURSDAY, FRIDAY, SATURDAY, SUNDAY
+	// Required. The day of the week.
 	DayOfWeek DayOfWeek `locationName:"dayOfWeek" type:"string" enum:"true"`
 
 	// Required. The time, in 24-hour format.
@@ -3559,8 +3844,7 @@ func (s WeeklyStartTime) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED,
-// DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS
+// The status of the broker.
 type BrokerState string
 
 // Enum values for BrokerState
@@ -3581,8 +3865,7 @@ func (enum BrokerState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The type of change pending for the ActiveMQ user. Possible values: CREATE,
-// UPDATE, DELETE
+// The type of change pending for the ActiveMQ user.
 type ChangeType string
 
 // Enum values for ChangeType
@@ -3623,9 +3906,7 @@ func (enum DayOfWeek) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
-// SINGLE_INSTANCE creates a single-instance broker in a single Availability
-// Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.
+// The deployment mode of the broker.
 type DeploymentMode string
 
 // Enum values for DeploymentMode
@@ -3660,13 +3941,7 @@ func (enum EngineType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The reason for which the XML elements or attributes were sanitized. Possible
-// values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED, INVALID_ATTRIBUTE_VALUE_REMOVED
-// DISALLOWED_ELEMENT_REMOVED shows that the provided element isn't allowed
-// and has been removed. DISALLOWED_ATTRIBUTE_REMOVED shows that the provided
-// attribute isn't allowed and has been removed. INVALID_ATTRIBUTE_VALUE_REMOVED
-// shows that the provided value for the attribute isn't allowed and has been
-// removed.
+// The reason for which the XML elements or attributes were sanitized.
 type SanitizationWarningReason string
 
 // Enum values for SanitizationWarningReason

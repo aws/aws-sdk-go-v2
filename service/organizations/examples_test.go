@@ -1190,6 +1190,8 @@ func ExampleOrganizations_InviteAccountToOrganizationRequest_shared00() {
 				fmt.Println(organizations.ErrCodeAccessDeniedException, aerr.Error())
 			case organizations.ErrCodeAWSOrganizationsNotInUseException:
 				fmt.Println(organizations.ErrCodeAWSOrganizationsNotInUseException, aerr.Error())
+			case organizations.ErrCodeAccountOwnerNotVerifiedException:
+				fmt.Println(organizations.ErrCodeAccountOwnerNotVerifiedException, aerr.Error())
 			case organizations.ErrCodeConcurrentModificationException:
 				fmt.Println(organizations.ErrCodeConcurrentModificationException, aerr.Error())
 			case organizations.ErrCodeHandshakeConstraintViolationException:

@@ -42,7 +42,7 @@ func (r CreateCertificateAuthorityRequest) Send() (*CreateCertificateAuthorityOu
 // (certificate revocation list) configuration specifies the CRL expiration
 // period in days (the validity period of the CRL), the Amazon S3 bucket that
 // will contain the CRL, and a CNAME alias for the S3 bucket that is included
-// in certificates issued by the CA. If successful, this function returns the
+// in certificates issued by the CA. If successful, this operation returns the
 // Amazon Resource Name (ARN) of the CA.
 //
 //    // Example sending a request using the CreateCertificateAuthorityRequest method.
@@ -95,7 +95,7 @@ func (r CreateCertificateAuthorityAuditReportRequest) Send() (*CreateCertificate
 //
 // Creates an audit report that lists every time that the your CA private key
 // is used. The report is saved in the Amazon S3 bucket that you specify on
-// input. The IssueCertificate and RevokeCertificate functions use the private
+// input. The IssueCertificate and RevokeCertificate operations use the private
 // key. You can generate a new report every 30 minutes.
 //
 //    // Example sending a request using the CreateCertificateAuthorityAuditReportRequest method.
@@ -146,17 +146,25 @@ func (r DeleteCertificateAuthorityRequest) Send() (*DeleteCertificateAuthorityOu
 // DeleteCertificateAuthorityRequest returns a request value for making API operation for
 // AWS Certificate Manager Private Certificate Authority.
 //
-// Deletes the private certificate authority (CA) that you created or started
-// to create by calling the CreateCertificateAuthority function. This action
-// requires that you enter an ARN (Amazon Resource Name) for the private CA
-// that you want to delete. You can find the ARN by calling the ListCertificateAuthorities
-// function. You can delete the CA if you are waiting for it to be created (the
-// Status field of the CertificateAuthority is CREATING) or if the CA has been
-// created but you haven't yet imported the signed certificate (the Status is
-// PENDING_CERTIFICATE) into ACM PCA. If you've already imported the certificate,
-// you cannot delete the CA unless it has been disabled for more than 30 days.
-// To disable a CA, call the UpdateCertificateAuthority function and set the
-// CertificateAuthorityStatus argument to DISABLED.
+// Deletes a private certificate authority (CA). You must provide the ARN (Amazon
+// Resource Name) of the private CA that you want to delete. You can find the
+// ARN by calling the ListCertificateAuthorities operation. Before you can delete
+// a CA, you must disable it. Call the UpdateCertificateAuthority operation
+// and set the CertificateAuthorityStatus parameter to DISABLED.
+//
+// Additionally, you can delete a CA if you are waiting for it to be created
+// (the Status field of the CertificateAuthority is CREATING). You can also
+// delete it if the CA has been created but you haven't yet imported the signed
+// certificate (the Status is PENDING_CERTIFICATE) into ACM PCA.
+//
+// If the CA is in one of the aforementioned states and you call DeleteCertificateAuthority,
+// the CA's status changes to DELETED. However, the CA won't be permentantly
+// deleted until the restoration period has passed. By default, if you do not
+// set the PermanentDeletionTimeInDays parameter, the CA remains restorable
+// for 30 days. You can set the parameter from 7 to 30 days. The DescribeCertificateAuthority
+// operation returns the time remaining in the restoration window of a Private
+// CA in the DELETED state. To restore an eligable CA, call the RestoreCertificateAuthority
+// operation.
 //
 //    // Example sending a request using the DeleteCertificateAuthorityRequest method.
 //    req := client.DeleteCertificateAuthorityRequest(params)
@@ -212,21 +220,25 @@ func (r DescribeCertificateAuthorityRequest) Send() (*DescribeCertificateAuthori
 // the private CA on input by its ARN (Amazon Resource Name). The output contains
 // the status of your CA. This can be any of the following:
 //
-//    * CREATING: ACM PCA is creating your private certificate authority.
+//    * CREATING - ACM PCA is creating your private certificate authority.
 //
-//    * PENDING_CERTIFICATE: The certificate is pending. You must use your on-premises
-//    root or subordinate CA to sign your private CA CSR and then import it
-//    into PCA.
+//    * PENDING_CERTIFICATE - The certificate is pending. You must use your
+//    on-premises root or subordinate CA to sign your private CA CSR and then
+//    import it into PCA.
 //
-//    * ACTIVE: Your private CA is active.
+//    * ACTIVE - Your private CA is active.
 //
-//    * DISABLED: Your private CA has been disabled.
+//    * DISABLED - Your private CA has been disabled.
 //
-//    * EXPIRED: Your private CA certificate has expired.
+//    * EXPIRED - Your private CA certificate has expired.
 //
-//    * FAILED: Your private CA has failed. Your CA can fail for problems such
-//    a network outage or backend AWS failure or other errors. A failed CA can
-//    never return to the pending state. You must create a new CA.
+//    * FAILED - Your private CA has failed. Your CA can fail because of problems
+//    such a network outage or backend AWS failure or other errors. A failed
+//    CA can never return to the pending state. You must create a new CA.
+//
+//    * DELETED - Your private CA is within the restoration period, after which
+//    it will be permanently deleted. The length of time remaining in the CA's
+//    restoration period will also be included in this operation's output.
 //
 //    // Example sending a request using the DescribeCertificateAuthorityRequest method.
 //    req := client.DescribeCertificateAuthorityRequest(params)
@@ -277,9 +289,9 @@ func (r DescribeCertificateAuthorityAuditReportRequest) Send() (*DescribeCertifi
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Lists information about a specific audit report created by calling the CreateCertificateAuthorityAuditReport
-// function. Audit information is created every time the certificate authority
+// operation. Audit information is created every time the certificate authority
 // (CA) private key is used. The private key is used when you call the IssueCertificate
-// function or the RevokeCertificate function.
+// operation or the RevokeCertificate operation.
 //
 //    // Example sending a request using the DescribeCertificateAuthorityAuditReportRequest method.
 //    req := client.DescribeCertificateAuthorityAuditReportRequest(params)
@@ -330,11 +342,11 @@ func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Retrieves a certificate from your private CA. The ARN of the certificate
-// is returned when you call the IssueCertificate function. You must specify
+// is returned when you call the IssueCertificate operation. You must specify
 // both the ARN of your private CA and the ARN of the issued certificate when
-// calling the GetCertificate function. You can retrieve the certificate if
+// calling the GetCertificate operation. You can retrieve the certificate if
 // it is in the ISSUED state. You can call the CreateCertificateAuthorityAuditReport
-// function to create a report that contains information about all of the certificates
+// operation to create a report that contains information about all of the certificates
 // issued and revoked by your private CA.
 //
 //    // Example sending a request using the GetCertificateRequest method.
@@ -440,9 +452,9 @@ func (r GetCertificateAuthorityCsrRequest) Send() (*GetCertificateAuthorityCsrOu
 //
 // Retrieves the certificate signing request (CSR) for your private certificate
 // authority (CA). The CSR is created when you call the CreateCertificateAuthority
-// function. Take the CSR to your on-premises X.509 infrastructure and sign
+// operation. Take the CSR to your on-premises X.509 infrastructure and sign
 // it by using your root or a subordinate CA. Then import the signed certificate
-// back into ACM PCA by calling the ImportCertificateAuthorityCertificate function.
+// back into ACM PCA by calling the ImportCertificateAuthorityCertificate operation.
 // The CSR is returned as a base64 PEM-encoded string.
 //
 //    // Example sending a request using the GetCertificateAuthorityCsrRequest method.
@@ -494,9 +506,9 @@ func (r ImportCertificateAuthorityCertificateRequest) Send() (*ImportCertificate
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Imports your signed private CA certificate into ACM PCA. Before you can call
-// this function, you must create the private certificate authority by calling
-// the CreateCertificateAuthority function. You must then generate a certificate
-// signing request (CSR) by calling the GetCertificateAuthorityCsr function.
+// this operation, you must create the private certificate authority by calling
+// the CreateCertificateAuthority operation. You must then generate a certificate
+// signing request (CSR) by calling the GetCertificateAuthorityCsr operation.
 // Take the CSR to your on-premises CA and use the root certificate or a subordinate
 // certificate to sign it. Create a certificate chain and copy the signed certificate
 // and the certificate chain to your working directory.
@@ -562,11 +574,11 @@ func (r IssueCertificateRequest) Send() (*IssueCertificateOutput, error) {
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Uses your private certificate authority (CA) to issue a client certificate.
-// This function returns the Amazon Resource Name (ARN) of the certificate.
-// You can retrieve the certificate by calling the GetCertificate function and
-// specifying the ARN.
+// This operation returns the Amazon Resource Name (ARN) of the certificate.
+// You can retrieve the certificate by calling the GetCertificate operation
+// and specifying the ARN.
 //
-// You cannot use the ACM ListCertificateAuthorities function to retrieve the
+// You cannot use the ACM ListCertificateAuthorities operation to retrieve the
 // ARNs of the certificates that you issue by using ACM PCA.
 //
 //    // Example sending a request using the IssueCertificateRequest method.
@@ -618,7 +630,7 @@ func (r ListCertificateAuthoritiesRequest) Send() (*ListCertificateAuthoritiesOu
 // AWS Certificate Manager Private Certificate Authority.
 //
 // Lists the private certificate authorities that you created by using the CreateCertificateAuthority
-// function.
+// operation.
 //
 //    // Example sending a request using the ListCertificateAuthoritiesRequest method.
 //    req := client.ListCertificateAuthoritiesRequest(params)
@@ -670,8 +682,8 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 // Lists the tags, if any, that are associated with your private CA. Tags are
 // labels that you can use to identify and organize your CAs. Each tag consists
-// of a key and an optional value. Call the TagCertificateAuthority function
-// to add one or more tags to your CA. Call the UntagCertificateAuthority function
+// of a key and an optional value. Call the TagCertificateAuthority operation
+// to add one or more tags to your CA. Call the UntagCertificateAuthority operation
 // to remove tags.
 //
 //    // Example sending a request using the ListTagsRequest method.
@@ -700,6 +712,71 @@ func (c *ACMPCA) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
+const opRestoreCertificateAuthority = "RestoreCertificateAuthority"
+
+// RestoreCertificateAuthorityRequest is a API request type for the RestoreCertificateAuthority API operation.
+type RestoreCertificateAuthorityRequest struct {
+	*aws.Request
+	Input *RestoreCertificateAuthorityInput
+	Copy  func(*RestoreCertificateAuthorityInput) RestoreCertificateAuthorityRequest
+}
+
+// Send marshals and sends the RestoreCertificateAuthority API request.
+func (r RestoreCertificateAuthorityRequest) Send() (*RestoreCertificateAuthorityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreCertificateAuthorityOutput), nil
+}
+
+// RestoreCertificateAuthorityRequest returns a request value for making API operation for
+// AWS Certificate Manager Private Certificate Authority.
+//
+// Restores a certificate authority (CA) that is in the DELETED state. You can
+// restore a CA during the period that you defined in the PermanentDeletionTimeInDays
+// parameter of the DeleteCertificateAuthority operation. Currently, you can
+// specify 7 to 30 days. If you did not specify a PermanentDeletionTimeInDays
+// value, by default you can restore the CA at any time in a 30 day period.
+// You can check the time remaining in the restoration period of a private CA
+// in the DELETED state by calling the DescribeCertificateAuthority or ListCertificateAuthorities
+// operations. The status of a restored CA is set to its pre-deletion status
+// when the RestoreCertificateAuthority operation returns. To change its status
+// to ACTIVE, call the UpdateCertificateAuthority operation. If the private
+// CA was in the PENDING_CERTIFICATE state at deletion, you must use the ImportCertificateAuthorityCertificate
+// operation to import a certificate authority into the private CA before it
+// can be activated. You cannot restore a CA after the restoration period has
+// ended.
+//
+//    // Example sending a request using the RestoreCertificateAuthorityRequest method.
+//    req := client.RestoreCertificateAuthorityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthority
+func (c *ACMPCA) RestoreCertificateAuthorityRequest(input *RestoreCertificateAuthorityInput) RestoreCertificateAuthorityRequest {
+	op := &aws.Operation{
+		Name:       opRestoreCertificateAuthority,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RestoreCertificateAuthorityInput{}
+	}
+
+	output := &RestoreCertificateAuthorityOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RestoreCertificateAuthorityRequest{Request: req, Input: input, Copy: c.RestoreCertificateAuthorityRequest}
+}
+
 const opRevokeCertificate = "RevokeCertificate"
 
 // RevokeCertificateRequest is a API request type for the RevokeCertificate API operation.
@@ -722,7 +799,7 @@ func (r RevokeCertificateRequest) Send() (*RevokeCertificateOutput, error) {
 // RevokeCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager Private Certificate Authority.
 //
-// Revokes a certificate that you issued by calling the IssueCertificate function.
+// Revokes a certificate that you issued by calling the IssueCertificate operation.
 // If you enable a certificate revocation list (CRL) when you create or update
 // your private CA, information about the revoked certificates will be included
 // in the CRL. ACM PCA writes the CRL to an S3 bucket that you specify. For
@@ -787,8 +864,8 @@ func (r TagCertificateAuthorityRequest) Send() (*TagCertificateAuthorityOutput, 
 // a tag to just one private CA if you want to identify a specific characteristic
 // of that CA, or you can apply the same tag to multiple private CAs if you
 // want to filter for a common relationship among those CAs. To remove one or
-// more tags, use the UntagCertificateAuthority function. Call the ListTags
-// function to see what tags are associated with your CA.
+// more tags, use the UntagCertificateAuthority operation. Call the ListTags
+// operation to see what tags are associated with your CA.
 //
 //    // Example sending a request using the TagCertificateAuthorityRequest method.
 //    req := client.TagCertificateAuthorityRequest(params)
@@ -842,10 +919,10 @@ func (r UntagCertificateAuthorityRequest) Send() (*UntagCertificateAuthorityOutp
 //
 // Remove one or more tags from your private CA. A tag consists of a key-value
 // pair. If you do not specify the value portion of the tag when calling this
-// function, the tag will be removed regardless of value. If you specify a value,
-// the tag is removed only if it is associated with the specified value. To
-// add tags to a private CA, use the TagCertificateAuthority. Call the ListTags
-// function to see what tags are associated with your CA.
+// operation, the tag will be removed regardless of value. If you specify a
+// value, the tag is removed only if it is associated with the specified value.
+// To add tags to a private CA, use the TagCertificateAuthority. Call the ListTags
+// operation to see what tags are associated with your CA.
 //
 //    // Example sending a request using the UntagCertificateAuthorityRequest method.
 //    req := client.UntagCertificateAuthorityRequest(params)
@@ -937,8 +1014,8 @@ func (c *ACMPCA) UpdateCertificateAuthorityRequest(input *UpdateCertificateAutho
 // a user, computer, device, or service. The Subject must contain an X.500 distinguished
 // name (DN). A DN is a sequence of relative distinguished names (RDNs). The
 // RDNs are separated by commas in the certificate. The DN must be unique for
-// each for each entity, but your private CA can issue more than one certificate
-// with the same DN to the same entity.
+// each entity, but your private CA can issue more than one certificate with
+// the same DN to the same entity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/ASN1Subject
 type ASN1Subject struct {
 	_ struct{} `type:"structure"`
@@ -946,7 +1023,7 @@ type ASN1Subject struct {
 	// Fully qualified domain name (FQDN) associated with the certificate subject.
 	CommonName *string `type:"string"`
 
-	// Two digit code that specifies the country in which the certificate subject
+	// Two-digit code that specifies the country in which the certificate subject
 	// located.
 	Country *string `type:"string"`
 
@@ -987,11 +1064,11 @@ type ASN1Subject struct {
 	// State in which the subject of the certificate is located.
 	State *string `type:"string"`
 
-	// Family name. In the US and the UK for example, the surname of an individual
+	// Family name. In the US and the UK, for example, the surname of an individual
 	// is ordered last. In Asian cultures the surname is typically ordered first.
 	Surname *string `type:"string"`
 
-	// A title such as Mr. or Ms. which is pre-pended to the name to refer formally
+	// A title such as Mr. or Ms., which is pre-pended to the name to refer formally
 	// to the certificate subject.
 	Title *string `type:"string"`
 }
@@ -1010,11 +1087,11 @@ func (s ASN1Subject) GoString() string {
 // private CA can issue and revoke X.509 digital certificates. Digital certificates
 // verify that the entity named in the certificate Subject field owns or controls
 // the public key contained in the Subject Public Key Info field. Call the CreateCertificateAuthority
-// function to create your private CA. You must then call the GetCertificateAuthorityCertificate
-// function to retrieve a private CA certificate signing request (CSR). Take
+// operation to create your private CA. You must then call the GetCertificateAuthorityCertificate
+// operation to retrieve a private CA certificate signing request (CSR). Take
 // the CSR to your on-premises CA and sign it with the root CA certificate or
 // a subordinate certificate. Call the ImportCertificateAuthorityCertificate
-// function to import the signed certificate into AWS Certificate Manager (ACM).
+// operation to import the signed certificate into AWS Certificate Manager (ACM).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthority
 type CertificateAuthority struct {
 	_ struct{} `type:"structure"`
@@ -1040,6 +1117,11 @@ type CertificateAuthority struct {
 
 	// Date and time before which your private CA certificate is not valid.
 	NotBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The period during which a deleted CA can be restored. For more information,
+	// see the PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthorityRequest
+	// operation.
+	RestorableUntil *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// Information about the certificate revocation list (CRL) created and maintained
 	// by your private CA.
@@ -1070,7 +1152,7 @@ func (s CertificateAuthority) GoString() string {
 // the key pair that your private CA creates when it issues a certificate, the
 // signature algorithm it uses used when issuing certificates, and its X.500
 // distinguished name. You must specify this information when you call the CreateCertificateAuthority
-// function.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CertificateAuthorityConfiguration
 type CertificateAuthorityConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -1134,7 +1216,7 @@ type CreateCertificateAuthorityAuditReportInput struct {
 
 	// Amazon Resource Name (ARN) of the CA to be audited. This is of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1225,9 +1307,9 @@ type CreateCertificateAuthorityInput struct {
 	// Alphanumeric string that can be used to distinguish between calls to CreateCertificateAuthority.
 	// Idempotency tokens time out after five minutes. Therefore, if you call CreateCertificateAuthority
 	// multiple times with the same idempotency token within a five minute period,
-	// ACM PCA recognizes that you are requesting only one certificate and will
-	// issue only one. If you change the idempotency token for each call, however,
-	// ACM PCA recognizes that you are requesting multiple certificates.
+	// ACM PCA recognizes that you are requesting only one certificate. As a result,
+	// ACM PCA issues only one. If you change the idempotency token for each call,
+	// however, ACM PCA recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string `min:"1" type:"string"`
 
 	// Contains a Boolean value that you can use to enable a certification revocation
@@ -1287,7 +1369,7 @@ type CreateCertificateAuthorityOutput struct {
 	// If successful, the Amazon Resource Name (ARN) of the certificate authority
 	// (CA). This is of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	CertificateAuthorityArn *string `min:"5" type:"string"`
 }
 
@@ -1374,8 +1456,8 @@ type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs)
 	// are enabled. You can use this value to enable certificate revocation for
-	// a new CA when you call the CreateCertificateAuthority function or for an
-	// existing CA when you call the UpdateCertificateAuthority function.
+	// a new CA when you call the CreateCertificateAuthority operation or for an
+	// existing CA when you call the UpdateCertificateAuthority operation.
 	//
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
@@ -1386,7 +1468,7 @@ type CrlConfiguration struct {
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value
 	// for the CustomCname argument, the name of your S3 bucket is placed into the
 	// CRL Distribution Points extension of the issued certificate. You can change
-	// the name of your bucket by calling the UpdateCertificateAuthority function.
+	// the name of your bucket by calling the UpdateCertificateAuthority operation.
 	// You must specify a bucket policy that allows ACM PCA to write the CRL to
 	// your bucket.
 	S3BucketName *string `min:"3" type:"string"`
@@ -1427,12 +1509,16 @@ type DeleteCertificateAuthorityInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
-	// This must be of the form:
+	// This must have the following form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
+
+	// The number of days to make a CA restorable after it has been deleted. This
+	// can be anywhere from 7 to 30 days, with 30 being the default.
+	PermanentDeletionTimeInDays *int64 `min:"7" type:"integer"`
 }
 
 // String returns the string representation
@@ -1454,6 +1540,9 @@ func (s *DeleteCertificateAuthorityInput) Validate() error {
 	}
 	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
+	}
+	if s.PermanentDeletionTimeInDays != nil && *s.PermanentDeletionTimeInDays < 7 {
+		invalidParams.Add(aws.NewErrParamMinValue("PermanentDeletionTimeInDays", 7))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1489,14 +1578,14 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 	_ struct{} `type:"structure"`
 
 	// The report ID returned by calling the CreateCertificateAuthorityAuditReport
-	// function.
+	// operation.
 	//
 	// AuditReportId is a required field
 	AuditReportId *string `min:"36" type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the private CA. This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1577,7 +1666,7 @@ type DescribeCertificateAuthorityInput struct {
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
 	// This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1642,7 +1731,7 @@ type GetCertificateAuthorityCertificateInput struct {
 
 	// The Amazon Resource Name (ARN) of your private CA. This is of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1710,9 +1799,9 @@ type GetCertificateAuthorityCsrInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
-	// function. This must be of the form:
+	// operation. This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1778,7 +1867,7 @@ type GetCertificateInput struct {
 	// The ARN of the issued certificate. The ARN contains the certificate serial
 	// number and must be in the following form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
 	//
 	// CertificateArn is a required field
 	CertificateArn *string `min:"5" type:"string" required:"true"`
@@ -1786,7 +1875,7 @@ type GetCertificateInput struct {
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
 	// This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012.
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1870,7 +1959,7 @@ type ImportCertificateAuthorityCertificateInput struct {
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
 	// This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1953,7 +2042,7 @@ type IssueCertificateInput struct {
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
 	// This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -1978,9 +2067,9 @@ type IssueCertificateInput struct {
 	Csr []byte `min:"1" type:"blob" required:"true"`
 
 	// Custom string that can be used to distinguish between calls to the IssueCertificate
-	// function. Idempotency tokens time out after one hour. Therefore, if you call
-	// IssueCertificate multiple times with the same idempotency token within 5
-	// minutes, ACM PCA recognizes that you are requesting only one certificate
+	// operation. Idempotency tokens time out after one hour. Therefore, if you
+	// call IssueCertificate multiple times with the same idempotency token within
+	// 5 minutes, ACM PCA recognizes that you are requesting only one certificate
 	// and will issue only one. If you change the idempotency token for each call,
 	// PCA recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string `min:"1" type:"string"`
@@ -2055,7 +2144,7 @@ type IssueCertificateOutput struct {
 	// The Amazon Resource Name (ARN) of the issued certificate and the certificate
 	// serial number. This is of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
 	CertificateArn *string `min:"5" type:"string"`
 }
 
@@ -2150,9 +2239,9 @@ type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
-	// function. This must be of the form:
+	// operation. This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -2231,8 +2320,70 @@ func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthorityRequest
+type RestoreCertificateAuthorityInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority
+	// operation. This must be of the form:
+	//
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// CertificateAuthorityArn is a required field
+	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RestoreCertificateAuthorityInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreCertificateAuthorityInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestoreCertificateAuthorityInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreCertificateAuthorityInput"}
+
+	if s.CertificateAuthorityArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArn"))
+	}
+	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 5))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/RestoreCertificateAuthorityOutput
+type RestoreCertificateAuthorityOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s RestoreCertificateAuthorityOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreCertificateAuthorityOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreCertificateAuthorityOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Certificate revocation information used by the CreateCertificateAuthority
-// and UpdateCertificateAuthority functions. Your private certificate authority
+// and UpdateCertificateAuthority operations. Your private certificate authority
 // (CA) can create and maintain a certificate revocation list (CRL). A CRL contains
 // information about certificates revoked by your CA. For more information,
 // see RevokeCertificate.
@@ -2277,7 +2428,7 @@ type RevokeCertificateInput struct {
 	// Amazon Resource Name (ARN) of the private CA that issued the certificate
 	// to be revoked. This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -2285,15 +2436,15 @@ type RevokeCertificateInput struct {
 	// Serial number of the certificate to be revoked. This must be in hexadecimal
 	// format. You can retrieve the serial number by calling GetCertificate with
 	// the Amazon Resource Name (ARN) of the certificate you want and the ARN of
-	// your private CA. The GetCertificate function retrieves the certificate in
+	// your private CA. The GetCertificate operation retrieves the certificate in
 	// the PEM format. You can use the following OpenSSL command to list the certificate
 	// in text format and copy the hexadecimal serial number.
 	//
 	// openssl x509 -in file_path -text -noout
 	//
 	// You can also copy the serial number from the console or use the DescribeCertificate
-	// (http://docs.aws.amazon.comacm/latest/APIReferenceAPI_DescribeCertificate.html)
-	// function in the AWS Certificate Manager API Reference.
+	// (https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html)
+	// operation in the AWS Certificate Manager API Reference.
 	//
 	// CertificateSerial is a required field
 	CertificateSerial *string `type:"string" required:"true"`
@@ -2363,8 +2514,8 @@ func (s RevokeCertificateOutput) SDKResponseMetadata() aws.Response {
 // Tags are labels that you can use to identify and organize your private CAs.
 // Each tag consists of a key and an optional value. You can associate up to
 // 50 tags with a private CA. To add one or more tags to a private CA, call
-// the TagCertificateAuthority function. To remove a tag, call the UntagCertificateAuthority
-// function.
+// the TagCertificateAuthority operation. To remove a tag, call the UntagCertificateAuthority
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -2412,7 +2563,7 @@ type TagCertificateAuthorityInput struct {
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
 	// This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -2493,7 +2644,7 @@ type UntagCertificateAuthorityInput struct {
 	// The Amazon Resource Name (ARN) that was returned when you called CreateCertificateAuthority.
 	// This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -2574,7 +2725,7 @@ type UpdateCertificateAuthorityInput struct {
 	// Amazon Resource Name (ARN) of the private CA that issued the certificate
 	// to be revoked. This must be of the form:
 	//
-	// arn:aws:acm:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// CertificateAuthorityArn is a required field
 	CertificateAuthorityArn *string `min:"5" type:"string" required:"true"`
@@ -2642,7 +2793,7 @@ func (s UpdateCertificateAuthorityOutput) SDKResponseMetadata() aws.Response {
 
 // Length of time for which the certificate issued by your private certificate
 // authority (CA), or by the private CA itself, is valid in days, months, or
-// years. You can issue a certificate by calling the IssueCertificate function.
+// years. You can issue a certificate by calling the IssueCertificate operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/Validity
 type Validity struct {
 	_ struct{} `type:"structure"`
@@ -2730,6 +2881,7 @@ const (
 	CertificateAuthorityStatusCreating           CertificateAuthorityStatus = "CREATING"
 	CertificateAuthorityStatusPendingCertificate CertificateAuthorityStatus = "PENDING_CERTIFICATE"
 	CertificateAuthorityStatusActive             CertificateAuthorityStatus = "ACTIVE"
+	CertificateAuthorityStatusDeleted            CertificateAuthorityStatus = "DELETED"
 	CertificateAuthorityStatusDisabled           CertificateAuthorityStatus = "DISABLED"
 	CertificateAuthorityStatusExpired            CertificateAuthorityStatus = "EXPIRED"
 	CertificateAuthorityStatusFailed             CertificateAuthorityStatus = "FAILED"

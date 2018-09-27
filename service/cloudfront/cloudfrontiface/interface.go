@@ -91,8 +91,6 @@ type CloudFrontAPI interface {
 
 	DeletePublicKeyRequest(*cloudfront.DeletePublicKeyInput) cloudfront.DeletePublicKeyRequest
 
-	DeleteServiceLinkedRoleRequest(*cloudfront.DeleteServiceLinkedRoleInput) cloudfront.DeleteServiceLinkedRoleRequest
-
 	DeleteStreamingDistributionRequest(*cloudfront.DeleteStreamingDistributionInput) cloudfront.DeleteStreamingDistributionRequest
 
 	GetCloudFrontOriginAccessIdentityRequest(*cloudfront.GetCloudFrontOriginAccessIdentityInput) cloudfront.GetCloudFrontOriginAccessIdentityRequest

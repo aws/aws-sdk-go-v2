@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS CloudHSM V2.
 //    func myFunc(svc cloudhsmv2iface.CloudHSMV2API) bool {
-//        // Make svc.CreateCluster request
+//        // Make svc.CopyBackupToRegion request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockCloudHSMV2Client struct {
 //        cloudhsmv2iface.CloudHSMV2API
 //    }
-//    func (m *mockCloudHSMV2Client) CreateCluster(input *cloudhsmv2.CreateClusterInput) (*cloudhsmv2.CreateClusterOutput, error) {
+//    func (m *mockCloudHSMV2Client) CopyBackupToRegion(input *cloudhsmv2.CopyBackupToRegionInput) (*cloudhsmv2.CopyBackupToRegionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,9 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type CloudHSMV2API interface {
+	CopyBackupToRegionRequest(*cloudhsmv2.CopyBackupToRegionInput) cloudhsmv2.CopyBackupToRegionRequest
+
 	CreateClusterRequest(*cloudhsmv2.CreateClusterInput) cloudhsmv2.CreateClusterRequest
 
 	CreateHsmRequest(*cloudhsmv2.CreateHsmInput) cloudhsmv2.CreateHsmRequest
+
+	DeleteBackupRequest(*cloudhsmv2.DeleteBackupInput) cloudhsmv2.DeleteBackupRequest
 
 	DeleteClusterRequest(*cloudhsmv2.DeleteClusterInput) cloudhsmv2.DeleteClusterRequest
 
@@ -77,6 +81,8 @@ type CloudHSMV2API interface {
 	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) cloudhsmv2.InitializeClusterRequest
 
 	ListTagsRequest(*cloudhsmv2.ListTagsInput) cloudhsmv2.ListTagsRequest
+
+	RestoreBackupRequest(*cloudhsmv2.RestoreBackupInput) cloudhsmv2.RestoreBackupRequest
 
 	TagResourceRequest(*cloudhsmv2.TagResourceInput) cloudhsmv2.TagResourceRequest
 

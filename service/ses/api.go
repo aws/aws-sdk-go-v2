@@ -2705,8 +2705,7 @@ func (r SendBulkTemplatedEmailRequest) Send() (*SendBulkTemplatedEmailOutput, er
 //    Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 //    in the Amazon SES Developer Guide.
 //
-//    * The total size of the message, including attachments, must be less than
-//    10 MB.
+//    * The maximum message size is 10 MB.
 //
 //    * Each Destination parameter must include at least one recipient email
 //    address. The recipient address can be a To: address, a CC: address, or
@@ -2714,6 +2713,15 @@ func (r SendBulkTemplatedEmailRequest) Send() (*SendBulkTemplatedEmailOutput, er
 //    not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire
 //    message will be rejected, even if the message contains other recipients
 //    that are valid.
+//
+//    * The message may not include more than 50 recipients, across the To:,
+//    CC: and BCC: fields. If you need to send an email message to a larger
+//    audience, you can divide your recipient list into groups of 50 or fewer,
+//    and then call the SendBulkTemplatedEmail operation several times to send
+//    the message to each group.
+//
+//    * The number of destinations you can contact in a single call to the API
+//    may be limited by your account's maximum sending rate.
 //
 //    // Example sending a request using the SendBulkTemplatedEmailRequest method.
 //    req := client.SendBulkTemplatedEmailRequest(params)
@@ -2837,8 +2845,7 @@ func (r SendEmailRequest) Send() (*SendEmailOutput, error) {
 //    Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 //    in the Amazon SES Developer Guide.
 //
-//    * The total size of the message, including attachments, must be smaller
-//    than 10 MB.
+//    * The maximum message size is 10 MB.
 //
 //    * The message must include at least one recipient email address. The recipient
 //    address can be a To: address, a CC: address, or a BCC: address. If a recipient
@@ -2907,45 +2914,49 @@ func (r SendRawEmailRequest) Send() (*SendRawEmailOutput, error) {
 // SendRawEmailRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Composes an email message and immediately queues it for sending. When calling
-// this operation, you may specify the message headers as well as the content.
-// The SendRawEmail operation is particularly useful for sending multipart MIME
-// emails (such as those that contain both a plain-text and an HTML version).
+// Composes an email message and immediately queues it for sending.
 //
-// In order to send email using the SendRawEmail operation, your message must
-// meet the following requirements:
+// This operation is more flexible than the SendEmail API operation. When you
+// use the SendRawEmail operation, you can specify the headers of the message
+// as well as its content. This flexibility is useful, for example, when you
+// want to send a multipart MIME email (such a message that contains both a
+// text and an HTML version). You can also use this operation to send messages
+// that include attachments.
 //
-//    * The message must be sent from a verified email address or domain. If
-//    you attempt to send email using a non-verified address or domain, the
-//    operation will result in an "Email address not verified" error.
+// The SendRawEmail operation has the following requirements:
 //
-//    * If your account is still in the Amazon SES sandbox, you may only send
-//    to verified addresses or domains, or to email addresses associated with
-//    the Amazon SES Mailbox Simulator. For more information, see Verifying
-//    Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+//    * You can only send email from verified email addresses or domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html).
+//    If you try to send email from an address that isn't verified, the operation
+//    results in an "Email address not verified" error.
+//
+//    * If your account is still in the Amazon SES sandbox (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/request-production-access.html),
+//    you can only send email to other verified addresses in your account, or
+//    to addresses that are associated with the Amazon SES mailbox simulator
+//    (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mailbox-simulator.html).
+//
+//    * The maximum message size, including attachments, is 10 MB.
+//
+//    * Each message has to include at least one recipient address. A recipient
+//    address includes any address on the To:, CC:, or BCC: lines.
+//
+//    * If you send a single message to more than one recipient address, and
+//    one of the recipient addresses isn't in a valid format (that is, it's
+//    not in the format UserName@[SubDomain.]Domain.TopLevelDomain), Amazon
+//    SES rejects the entire message, even if the other addresses are valid.
+//
+//    * Each message can include up to 50 recipient addresses across the To:,
+//    CC:, or BCC: lines. If you need to send a single message to more than
+//    50 recipients, you have to split the list of recipient addresses into
+//    groups of less than 50 recipients, and send separate messages to each
+//    group.
+//
+//    * Amazon SES allows you to specify 8-bit Content-Transfer-Encoding for
+//    MIME message parts. However, if Amazon SES has to modify the contents
+//    of your message (for example, if you use open and click tracking), 8-bit
+//    content isn't preserved. For this reason, we highly recommend that you
+//    encode all content that isn't 7-bit ASCII. For more information, see MIME
+//    Encoding (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html#send-email-mime-encoding)
 //    in the Amazon SES Developer Guide.
-//
-//    * The total size of the message, including attachments, must be smaller
-//    than 10 MB.
-//
-//    * The message must include at least one recipient email address. The recipient
-//    address can be a To: address, a CC: address, or a BCC: address. If a recipient
-//    email address is invalid (that is, it is not in the format UserName@[SubDomain.]Domain.TopLevelDomain),
-//    the entire message will be rejected, even if the message contains other
-//    recipients that are valid.
-//
-//    * The message may not include more than 50 recipients, across the To:,
-//    CC: and BCC: fields. If you need to send an email message to a larger
-//    audience, you can divide your recipient list into groups of 50 or fewer,
-//    and then call the SendRawEmail operation several times to send the message
-//    to each group.
-//
-// For every message that you send, the total number of recipients (including
-// each recipient in the To:, CC: and BCC: fields) is counted against the maximum
-// number of emails you can send in a 24-hour period (your sending quota). For
-// more information about sending quotas in Amazon SES, see Managing Your Amazon
-// SES Sending Limits (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
-// in the Amazon SES Developer Guide.
 //
 // Additionally, keep the following considerations in mind when using the SendRawEmail
 // operation:
@@ -2977,6 +2988,13 @@ func (r SendRawEmailRequest) Send() (*SendRawEmailOutput, error) {
 //    SES will set the From and Return Path addresses to the identity specified
 //    in SourceIdentityArn. For more information about sending authorization,
 //    see the Using Sending Authorization with Amazon SES (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
+//    in the Amazon SES Developer Guide.
+//
+//    * For every message that you send, the total number of recipients (including
+//    each recipient in the To:, CC: and BCC: fields) is counted against the
+//    maximum number of emails you can send in a 24-hour period (your sending
+//    quota). For more information about sending quotas in Amazon SES, see Managing
+//    Your Amazon SES Sending Limits (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html)
 //    in the Amazon SES Developer Guide.
 //
 //    // Example sending a request using the SendRawEmailRequest method.
@@ -3044,8 +3062,7 @@ func (r SendTemplatedEmailRequest) Send() (*SendTemplatedEmailOutput, error) {
 //    Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 //    in the Amazon SES Developer Guide.
 //
-//    * The total size of the message, including attachments, must be less than
-//    10 MB.
+//    * The maximum message size is 10 MB.
 //
 //    * Calls to the SendTemplatedEmail operation may only include one Destination
 //    parameter. A destination is a set of recipients who will receive the same
@@ -3419,13 +3436,12 @@ func (r SetIdentityNotificationTopicRequest) Send() (*SetIdentityNotificationTop
 // SetIdentityNotificationTopicRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Given an identity (an email address or a domain), sets the Amazon Simple
-// Notification Service (Amazon SNS) topic to which Amazon SES will publish
-// bounce, complaint, and/or delivery notifications for emails sent with that
-// identity as the Source.
-//
-// Unless feedback forwarding is enabled, you must specify Amazon SNS topics
-// for bounce and complaint notifications. For more information, see SetIdentityFeedbackForwardingEnabled.
+// Sets an Amazon Simple Notification Service (Amazon SNS) topic to use when
+// delivering notifications. When you use this operation, you specify a verified
+// identity, such as an email address or domain. When you send an email that
+// uses the chosen identity in the Source field, Amazon SES sends notifications
+// to the topic you specified. You can send bounce, complaint, or delivery notifications
+// (or any combination of the three) to the Amazon SNS topic that you specify.
 //
 // You can execute this operation no more than once per second.
 //
@@ -9637,18 +9653,26 @@ type SendRawEmailInput struct {
 	// SendRawEmail in this guide, or see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	FromArn *string `type:"string"`
 
-	// The raw text of the message. The client is responsible for ensuring the following:
+	// The raw email message itself. The message has to meet the following criteria:
 	//
-	//    * Message must contain a header and a body, separated by a blank line.
+	//    * The message has to contain a header and a body, separated by a blank
+	//    line.
 	//
-	//    * All required header fields must be present.
+	//    * All of the required header fields must be present in the message.
 	//
 	//    * Each part of a multipart MIME message must be formatted properly.
 	//
-	//    * MIME content types must be among those supported by Amazon SES. For
-	//    more information, go to the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html).
+	//    * Attachments must be of a content type that Amazon SES supports. For
+	//    a list on unsupported content types, see Unsupported Attachment Types
+	//    (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html)
+	//    in the Amazon SES Developer Guide.
 	//
-	//    * Must be base64-encoded.
+	//    * The entire message must be base64-encoded.
+	//
+	//    * If any of the MIME parts in your message contain content that is outside
+	//    of the 7-bit ASCII character range, we highly recommend that you encode
+	//    that content. For more information, see Sending Raw Email (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html)
+	//    in the Amazon SES Developer Guide.
 	//
 	//    * Per RFC 5321 (https://tools.ietf.org/html/rfc5321#section-4.5.3.1.6),
 	//    the maximum length of each line of text, including the <CRLF>, must not
@@ -10315,9 +10339,14 @@ func (s SetIdentityMailFromDomainOutput) SDKResponseMetadata() aws.Response {
 type SetIdentityNotificationTopicInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identity for which the Amazon SNS topic will be set. You can specify
-	// an identity by using its name or by using its Amazon Resource Name (ARN).
-	// Examples: user@example.com, example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
+	// The identity (email address or domain) that you want to set the Amazon SNS
+	// topic for.
+	//
+	// You can only specify a verified identity for this parameter.
+	//
+	// You can specify an identity by using its name or by using its Amazon Resource
+	// Name (ARN). The following examples are all valid identities: sender@example.com,
+	// example.com, arn:aws:ses:us-east-1:123456789012:identity/example.com.
 	//
 	// Identity is a required field
 	Identity *string `type:"string" required:"true"`

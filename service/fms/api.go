@@ -35,13 +35,13 @@ func (r AssociateAdminAccountRequest) Send() (*AssociateAdminAccountOutput, erro
 // Firewall Management Service.
 //
 // Sets the AWS Firewall Manager administrator account. AWS Firewall Manager
-// must be associated with a master account in AWS Organizations or associated
+// must be associated with the master account your AWS organization or associated
 // with a member account that has the appropriate permissions. If the account
 // ID that you submit is not an AWS Organizations master account, AWS Firewall
 // Manager will set the appropriate permissions for the given member account.
 //
 // The account that you associate with AWS Firewall Manager is called the AWS
-// Firewall manager administrator account.
+// Firewall Manager administrator account.
 //
 //    // Example sending a request using the AssociateAdminAccountRequest method.
 //    req := client.AssociateAdminAccountRequest(params)
@@ -488,6 +488,60 @@ func (c *FMS) ListComplianceStatusRequest(input *ListComplianceStatusInput) List
 	return ListComplianceStatusRequest{Request: req, Input: input, Copy: c.ListComplianceStatusRequest}
 }
 
+const opListMemberAccounts = "ListMemberAccounts"
+
+// ListMemberAccountsRequest is a API request type for the ListMemberAccounts API operation.
+type ListMemberAccountsRequest struct {
+	*aws.Request
+	Input *ListMemberAccountsInput
+	Copy  func(*ListMemberAccountsInput) ListMemberAccountsRequest
+}
+
+// Send marshals and sends the ListMemberAccounts API request.
+func (r ListMemberAccountsRequest) Send() (*ListMemberAccountsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMemberAccountsOutput), nil
+}
+
+// ListMemberAccountsRequest returns a request value for making API operation for
+// Firewall Management Service.
+//
+// Returns a MemberAccounts object that lists the member accounts in the administrator's
+// AWS organization.
+//
+// The ListMemberAccounts must be submitted by the account that is set as the
+// AWS Firewall Manager administrator.
+//
+//    // Example sending a request using the ListMemberAccountsRequest method.
+//    req := client.ListMemberAccountsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccounts
+func (c *FMS) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMemberAccountsRequest {
+	op := &aws.Operation{
+		Name:       opListMemberAccounts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListMemberAccountsInput{}
+	}
+
+	output := &ListMemberAccountsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListMemberAccountsRequest{Request: req, Input: input, Copy: c.ListMemberAccountsRequest}
+}
+
 const opListPolicies = "ListPolicies"
 
 // ListPoliciesRequest is a API request type for the ListPolicies API operation.
@@ -916,6 +970,9 @@ type GetAdminAccountOutput struct {
 
 	// The AWS account that is set as the AWS Firewall Manager administrator.
 	AdminAccount *string `min:"1" type:"string"`
+
+	// The status of the AWS account that you set as the AWS Firewall Manager administrator.
+	RoleStatus AccountRoleStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1208,6 +1265,83 @@ func (s ListComplianceStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsRequest
+type ListMemberAccountsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the number of member account IDs that you want AWS Firewall Manager
+	// to return for this request. If you have more IDs than the number that you
+	// specify for MaxResults, the response includes a NextToken value that you
+	// can use to get another batch of member account IDs. The maximum value for
+	// MaxResults is 100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If you specify a value for MaxResults and you have more account IDs than
+	// the number that you specify for MaxResults, AWS Firewall Manager returns
+	// a NextToken value in the response that allows you to list another group of
+	// IDs. For the second and subsequent ListMemberAccountsRequest requests, specify
+	// the value of NextToken from the previous response to get information about
+	// another batch of member account IDs.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListMemberAccountsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListMemberAccountsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListMemberAccountsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListMemberAccountsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListMemberAccountsResponse
+type ListMemberAccountsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of account IDs.
+	MemberAccounts []string `type:"list"`
+
+	// If you have more member account IDs than the number that you specified for
+	// MaxResults in the request, the response includes a NextToken value. To list
+	// more IDs, submit another ListMemberAccounts request, and specify the NextToken
+	// value from the response in the NextToken value in the next request.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListMemberAccountsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListMemberAccountsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMemberAccountsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListPoliciesRequest
 type ListPoliciesInput struct {
 	_ struct{} `type:"structure"`
@@ -1290,6 +1424,15 @@ func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
 type Policy struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies the AWS account IDs to exclude from the policy. The IncludeMap
+	// values are evaluated first, with all of the appropriate account IDs added
+	// to the policy. Then the accounts listed in ExcludeMap are removed, resulting
+	// in the final list of accounts to add to the policy.
+	//
+	// The key to the map is ACCOUNT. For example, a valid ExcludeMap would be {“ACCOUNT”
+	// : [“accountID1”, “accountID2”]}.
+	ExcludeMap map[string][]string `type:"map"`
+
 	// If set to True, resources with the tags that are specified in the ResourceTag
 	// array are not protected by the policy. If set to False, and the ResourceTag
 	// array is not null, only resources with the specified tags are associated
@@ -1297,6 +1440,15 @@ type Policy struct {
 	//
 	// ExcludeResourceTags is a required field
 	ExcludeResourceTags *bool `type:"boolean" required:"true"`
+
+	// Specifies the AWS account IDs to include in the policy. If IncludeMap is
+	// null, all accounts in the AWS Organization are included in the policy. If
+	// IncludeMap is not null, only values listed in IncludeMap will be included
+	// in the policy.
+	//
+	// The key to the map is ACCOUNT. For example, a valid IncludeMap would be {“ACCOUNT”
+	// : [“accountID1”, “accountID2”]}.
+	IncludeMap map[string][]string `type:"map"`
 
 	// The ID of the AWS Firewall Manager policy.
 	PolicyId *string `min:"36" type:"string"`
@@ -1413,6 +1565,12 @@ type PolicyComplianceDetail struct {
 	// out-of-date.
 	ExpiredAt *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// Details about problems with dependent services, such as AWS WAF or AWS Config,
+	// that are causing a resource to be non-compliant. The details include the
+	// name of the dependent service and the error message recieved indicating the
+	// problem with the service.
+	IssueInfoMap map[string]string `type:"map"`
+
 	// The AWS account ID.
 	MemberAccount *string `min:"1" type:"string"`
 
@@ -1445,6 +1603,12 @@ type PolicyComplianceStatus struct {
 
 	// An array of EvaluationResult objects.
 	EvaluationResults []EvaluationResult `type:"list"`
+
+	// Details about problems with dependent services, such as AWS WAF or AWS Config,
+	// that are causing a resource to be non-compliant. The details include the
+	// name of the dependent service and the error message recieved indicating the
+	// problem with the service.
+	IssueInfoMap map[string]string `type:"map"`
 
 	// Time stamp of the last update to the EvaluationResult objects.
 	LastUpdated *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1742,6 +1906,59 @@ func (s *SecurityServicePolicyData) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+type AccountRoleStatus string
+
+// Enum values for AccountRoleStatus
+const (
+	AccountRoleStatusReady           AccountRoleStatus = "READY"
+	AccountRoleStatusCreating        AccountRoleStatus = "CREATING"
+	AccountRoleStatusPendingDeletion AccountRoleStatus = "PENDING_DELETION"
+	AccountRoleStatusDeleting        AccountRoleStatus = "DELETING"
+	AccountRoleStatusDeleted         AccountRoleStatus = "DELETED"
+)
+
+func (enum AccountRoleStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccountRoleStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CustomerPolicyScopeIdType string
+
+// Enum values for CustomerPolicyScopeIdType
+const (
+	CustomerPolicyScopeIdTypeAccount CustomerPolicyScopeIdType = "ACCOUNT"
+)
+
+func (enum CustomerPolicyScopeIdType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CustomerPolicyScopeIdType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DependentServiceName string
+
+// Enum values for DependentServiceName
+const (
+	DependentServiceNameAwsconfig DependentServiceName = "AWSCONFIG"
+	DependentServiceNameAwswaf    DependentServiceName = "AWSWAF"
+)
+
+func (enum DependentServiceName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DependentServiceName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type PolicyComplianceStatusType string

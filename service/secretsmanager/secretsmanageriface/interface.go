@@ -66,17 +66,23 @@ type SecretsManagerAPI interface {
 
 	CreateSecretRequest(*secretsmanager.CreateSecretInput) secretsmanager.CreateSecretRequest
 
+	DeleteResourcePolicyRequest(*secretsmanager.DeleteResourcePolicyInput) secretsmanager.DeleteResourcePolicyRequest
+
 	DeleteSecretRequest(*secretsmanager.DeleteSecretInput) secretsmanager.DeleteSecretRequest
 
 	DescribeSecretRequest(*secretsmanager.DescribeSecretInput) secretsmanager.DescribeSecretRequest
 
 	GetRandomPasswordRequest(*secretsmanager.GetRandomPasswordInput) secretsmanager.GetRandomPasswordRequest
 
+	GetResourcePolicyRequest(*secretsmanager.GetResourcePolicyInput) secretsmanager.GetResourcePolicyRequest
+
 	GetSecretValueRequest(*secretsmanager.GetSecretValueInput) secretsmanager.GetSecretValueRequest
 
 	ListSecretVersionIdsRequest(*secretsmanager.ListSecretVersionIdsInput) secretsmanager.ListSecretVersionIdsRequest
 
 	ListSecretsRequest(*secretsmanager.ListSecretsInput) secretsmanager.ListSecretsRequest
+
+	PutResourcePolicyRequest(*secretsmanager.PutResourcePolicyInput) secretsmanager.PutResourcePolicyRequest
 
 	PutSecretValueRequest(*secretsmanager.PutSecretValueInput) secretsmanager.PutSecretValueRequest
 

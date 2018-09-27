@@ -388,20 +388,17 @@ func (r CreateGlobalTableRequest) Send() (*CreateGlobalTableOutput, error) {
 // relationship between two or more DynamoDB tables with the same table name
 // in the provided regions.
 //
-// Tables can only be added as the replicas of a global table group under the
-// following conditions:
+// If you want to add a new replica table to a global table, each of the following
+// conditions must be true:
 //
-//    *  The tables must have the same name.
+//    * The table must have the same primary key as all of the other replicas.
 //
-//    *  The tables must contain no items.
+//    * The table must have the same name as all of the other replicas.
 //
-//    *  The tables must have the same hash key and sort key (if present).
+//    * The table must have DynamoDB Streams enabled, with the stream containing
+//    both the new and the old images of the item.
 //
-//    *  The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).
-//
-//
-//    *  The tables must have same provisioned and maximum write capacity units.
-//
+//    * None of the replica tables in the global table can contain any data.
 //
 // If global secondary indexes are specified, then the following conditions
 // must also be met:
@@ -411,8 +408,15 @@ func (r CreateGlobalTableRequest) Send() (*CreateGlobalTableOutput, error) {
 //    *  The global secondary indexes must have the same hash key and sort key
 //    (if present).
 //
-//    *  The global secondary indexes must have the same provisioned and maximum
-//    write capacity units.
+// Write capacity settings should be set consistently across your replica tables
+// and secondary indexes. DynamoDB strongly recommends enabling auto scaling
+// to manage the write capacity settings for all of your global tables replicas
+// and indexes.
+//
+//  If you prefer to manage write capacity settings manually, you should provision
+// equal replicated write capacity units to your replica tables. You should
+// also provision equal replicated write capacity units to matching secondary
+// indexes across your global table.
 //
 //    // Example sending a request using the CreateGlobalTableRequest method.
 //    req := client.CreateGlobalTableRequest(params)
@@ -798,6 +802,54 @@ func (c *DynamoDB) DescribeContinuousBackupsRequest(input *DescribeContinuousBac
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeContinuousBackupsRequest{Request: req, Input: input, Copy: c.DescribeContinuousBackupsRequest}
+}
+
+const opDescribeEndpoints = "DescribeEndpoints"
+
+// DescribeEndpointsRequest is a API request type for the DescribeEndpoints API operation.
+type DescribeEndpointsRequest struct {
+	*aws.Request
+	Input *DescribeEndpointsInput
+	Copy  func(*DescribeEndpointsInput) DescribeEndpointsRequest
+}
+
+// Send marshals and sends the DescribeEndpoints API request.
+func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEndpointsOutput), nil
+}
+
+// DescribeEndpointsRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+//    // Example sending a request using the DescribeEndpointsRequest method.
+//    req := client.DescribeEndpointsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpoints
+func (c *DynamoDB) DescribeEndpointsRequest(input *DescribeEndpointsInput) DescribeEndpointsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeEndpoints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeEndpointsInput{}
+	}
+
+	output := &DescribeEndpointsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeEndpointsRequest{Request: req, Input: input, Copy: c.DescribeEndpointsRequest}
 }
 
 const opDescribeGlobalTable = "DescribeGlobalTable"
@@ -2689,6 +2741,270 @@ func (s AttributeValueUpdate) GoString() string {
 	return s.String()
 }
 
+// Represents the properties of the scaling policy.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingPolicyDescription
+type AutoScalingPolicyDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the scaling policy.
+	PolicyName *string `min:"1" type:"string"`
+
+	// Represents a target tracking scaling policy configuration.
+	TargetTrackingScalingPolicyConfiguration *AutoScalingTargetTrackingScalingPolicyConfigurationDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s AutoScalingPolicyDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AutoScalingPolicyDescription) GoString() string {
+	return s.String()
+}
+
+// Represents the autoscaling policy to be modified.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingPolicyUpdate
+type AutoScalingPolicyUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the scaling policy.
+	PolicyName *string `min:"1" type:"string"`
+
+	// Represents a target tracking scaling policy configuration.
+	//
+	// TargetTrackingScalingPolicyConfiguration is a required field
+	TargetTrackingScalingPolicyConfiguration *AutoScalingTargetTrackingScalingPolicyConfigurationUpdate `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoScalingPolicyUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AutoScalingPolicyUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoScalingPolicyUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoScalingPolicyUpdate"}
+	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
+	}
+
+	if s.TargetTrackingScalingPolicyConfiguration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetTrackingScalingPolicyConfiguration"))
+	}
+	if s.TargetTrackingScalingPolicyConfiguration != nil {
+		if err := s.TargetTrackingScalingPolicyConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("TargetTrackingScalingPolicyConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Represents the autoscaling settings for a global table or global secondary
+// index.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingSettingsDescription
+type AutoScalingSettingsDescription struct {
+	_ struct{} `type:"structure"`
+
+	// Disabled autoscaling for this global table or global secondary index.
+	AutoScalingDisabled *bool `type:"boolean"`
+
+	// Role ARN used for configuring autoScaling policy.
+	AutoScalingRoleArn *string `type:"string"`
+
+	// The maximum capacity units that a global table or global secondary index
+	// should be scaled up to.
+	MaximumUnits *int64 `min:"1" type:"long"`
+
+	// The minimum capacity units that a global table or global secondary index
+	// should be scaled down to.
+	MinimumUnits *int64 `min:"1" type:"long"`
+
+	// Information about the scaling policies.
+	ScalingPolicies []AutoScalingPolicyDescription `type:"list"`
+}
+
+// String returns the string representation
+func (s AutoScalingSettingsDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AutoScalingSettingsDescription) GoString() string {
+	return s.String()
+}
+
+// Represents the autoscaling settings to be modified for a global table or
+// global secondary index.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingSettingsUpdate
+type AutoScalingSettingsUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Disabled autoscaling for this global table or global secondary index.
+	AutoScalingDisabled *bool `type:"boolean"`
+
+	// Role ARN used for configuring autoscaling policy.
+	AutoScalingRoleArn *string `min:"1" type:"string"`
+
+	// The maximum capacity units that a global table or global secondary index
+	// should be scaled up to.
+	MaximumUnits *int64 `min:"1" type:"long"`
+
+	// The minimum capacity units that a global table or global secondary index
+	// should be scaled down to.
+	MinimumUnits *int64 `min:"1" type:"long"`
+
+	// The scaling policy to apply for scaling target global table or global secondary
+	// index capacity units.
+	ScalingPolicyUpdate *AutoScalingPolicyUpdate `type:"structure"`
+}
+
+// String returns the string representation
+func (s AutoScalingSettingsUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AutoScalingSettingsUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoScalingSettingsUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoScalingSettingsUpdate"}
+	if s.AutoScalingRoleArn != nil && len(*s.AutoScalingRoleArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingRoleArn", 1))
+	}
+	if s.MaximumUnits != nil && *s.MaximumUnits < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaximumUnits", 1))
+	}
+	if s.MinimumUnits != nil && *s.MinimumUnits < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinimumUnits", 1))
+	}
+	if s.ScalingPolicyUpdate != nil {
+		if err := s.ScalingPolicyUpdate.Validate(); err != nil {
+			invalidParams.AddNested("ScalingPolicyUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Represents the properties of a target tracking scaling policy.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingTargetTrackingScalingPolicyConfigurationDescription
+type AutoScalingTargetTrackingScalingPolicyConfigurationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether scale in by the target tracking policy is disabled. If
+	// the value is true, scale in is disabled and the target tracking policy won't
+	// remove capacity from the scalable resource. Otherwise, scale in is enabled
+	// and the target tracking policy can remove capacity from the scalable resource.
+	// The default value is false.
+	DisableScaleIn *bool `type:"boolean"`
+
+	// The amount of time, in seconds, after a scale in activity completes before
+	// another scale in activity can start. The cooldown period is used to block
+	// subsequent scale in requests until it has expired. You should scale in conservatively
+	// to protect your application's availability. However, if another alarm triggers
+	// a scale out policy during the cooldown period after a scale-in, application
+	// autoscaling scales out your scalable target immediately.
+	ScaleInCooldown *int64 `type:"integer"`
+
+	// The amount of time, in seconds, after a scale out activity completes before
+	// another scale out activity can start. While the cooldown period is in effect,
+	// the capacity that has been added by the previous scale out event that initiated
+	// the cooldown is calculated as part of the desired capacity for the next scale
+	// out. You should continuously (but not excessively) scale out.
+	ScaleOutCooldown *int64 `type:"integer"`
+
+	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
+	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	//
+	// TargetValue is a required field
+	TargetValue *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoScalingTargetTrackingScalingPolicyConfigurationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AutoScalingTargetTrackingScalingPolicyConfigurationDescription) GoString() string {
+	return s.String()
+}
+
+// Represents the settings of a target tracking scaling policy that will be
+// modified.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AutoScalingTargetTrackingScalingPolicyConfigurationUpdate
+type AutoScalingTargetTrackingScalingPolicyConfigurationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether scale in by the target tracking policy is disabled. If
+	// the value is true, scale in is disabled and the target tracking policy won't
+	// remove capacity from the scalable resource. Otherwise, scale in is enabled
+	// and the target tracking policy can remove capacity from the scalable resource.
+	// The default value is false.
+	DisableScaleIn *bool `type:"boolean"`
+
+	// The amount of time, in seconds, after a scale in activity completes before
+	// another scale in activity can start. The cooldown period is used to block
+	// subsequent scale in requests until it has expired. You should scale in conservatively
+	// to protect your application's availability. However, if another alarm triggers
+	// a scale out policy during the cooldown period after a scale-in, application
+	// autoscaling scales out your scalable target immediately.
+	ScaleInCooldown *int64 `type:"integer"`
+
+	// The amount of time, in seconds, after a scale out activity completes before
+	// another scale out activity can start. While the cooldown period is in effect,
+	// the capacity that has been added by the previous scale out event that initiated
+	// the cooldown is calculated as part of the desired capacity for the next scale
+	// out. You should continuously (but not excessively) scale out.
+	ScaleOutCooldown *int64 `type:"integer"`
+
+	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
+	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	//
+	// TargetValue is a required field
+	TargetValue *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation
+func (s AutoScalingTargetTrackingScalingPolicyConfigurationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AutoScalingTargetTrackingScalingPolicyConfigurationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AutoScalingTargetTrackingScalingPolicyConfigurationUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AutoScalingTargetTrackingScalingPolicyConfigurationUpdate"}
+
+	if s.TargetValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Contains the description of the backup created for the table.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDescription
 type BackupDescription struct {
@@ -2730,6 +3046,10 @@ type BackupDetails struct {
 	// BackupCreationDateTime is a required field
 	BackupCreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
 
+	// Time at which the automatic on-demand backup created by DynamoDB will expire.
+	// This SYSTEM on-demand backup expires automatically 35 days after its creation.
+	BackupExpiryDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
 	// Name of the requested backup.
 	//
 	// BackupName is a required field
@@ -2742,6 +3062,15 @@ type BackupDetails struct {
 	//
 	// BackupStatus is a required field
 	BackupStatus BackupStatus `type:"string" required:"true" enum:"true"`
+
+	// BackupType:
+	//
+	//    * USER - On-demand backup created by you.
+	//
+	//    * SYSTEM - On-demand backup automatically created by DynamoDB.
+	//
+	// BackupType is a required field
+	BackupType BackupType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2765,6 +3094,10 @@ type BackupSummary struct {
 	// Time at which the backup was created.
 	BackupCreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// Time at which the automatic on-demand backup created by DynamoDB will expire.
+	// This SYSTEM on-demand backup expires automatically 35 days after its creation.
+	BackupExpiryDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
 	// Name of the specified backup.
 	BackupName *string `min:"3" type:"string"`
 
@@ -2773,6 +3106,13 @@ type BackupSummary struct {
 
 	// Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
 	BackupStatus BackupStatus `type:"string" enum:"true"`
+
+	// BackupType:
+	//
+	//    * USER - On-demand backup created by you.
+	//
+	//    * SYSTEM - On-demand backup automatically created by DynamoDB.
+	BackupType BackupType `type:"string" enum:"true"`
 
 	// ARN associated with the table.
 	TableArn *string `type:"string"`
@@ -3312,7 +3652,7 @@ func (s ConsumedCapacity) GoString() string {
 type ContinuousBackupsDescription struct {
 	_ struct{} `type:"structure"`
 
-	// ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
+	// ContinuousBackupsStatus can be one of the following states: ENABLED, DISABLED
 	//
 	// ContinuousBackupsStatus is a required field
 	ContinuousBackupsStatus ContinuousBackupsStatus `type:"string" required:"true" enum:"true"`
@@ -3823,11 +4163,6 @@ func (s *CreateTableInput) Validate() error {
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
 			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.SSESpecification != nil {
-		if err := s.SSESpecification.Validate(); err != nil {
-			invalidParams.AddNested("SSESpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4424,7 +4759,8 @@ type DescribeContinuousBackupsOutput struct {
 
 	responseMetadata aws.Response
 
-	// ContinuousBackupsDescription can be one of the following : ENABLED, DISABLED.
+	// Represents the continuous backups and point in time recovery settings on
+	// the table.
 	ContinuousBackupsDescription *ContinuousBackupsDescription `type:"structure"`
 }
 
@@ -4440,6 +4776,46 @@ func (s DescribeContinuousBackupsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeContinuousBackupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsRequest
+type DescribeEndpointsInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeEndpointsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeEndpointsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsResponse
+type DescribeEndpointsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Endpoints is a required field
+	Endpoints []Endpoint `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeEndpointsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeEndpointsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4751,6 +5127,27 @@ func (s DescribeTimeToLiveOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTimeToLiveOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Endpoint
+type Endpoint struct {
+	_ struct{} `type:"structure"`
+
+	// Address is a required field
+	Address *string `type:"string" required:"true"`
+
+	// CachePeriodInMinutes is a required field
+	CachePeriodInMinutes *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s Endpoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Endpoint) GoString() string {
+	return s.String()
 }
 
 // Represents a condition to be compared with an attribute value. This condition
@@ -5425,6 +5822,10 @@ type GlobalTableGlobalSecondaryIndexSettingsUpdate struct {
 	// IndexName is a required field
 	IndexName *string `min:"3" type:"string" required:"true"`
 
+	// AutoScaling settings for managing a global secondary index's write capacity
+	// units.
+	ProvisionedWriteCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
+
 	// The maximum number of writes consumed per second before DynamoDB returns
 	// a ThrottlingException.
 	ProvisionedWriteCapacityUnits *int64 `min:"1" type:"long"`
@@ -5452,6 +5853,11 @@ func (s *GlobalTableGlobalSecondaryIndexSettingsUpdate) Validate() error {
 	}
 	if s.ProvisionedWriteCapacityUnits != nil && *s.ProvisionedWriteCapacityUnits < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProvisionedWriteCapacityUnits", 1))
+	}
+	if s.ProvisionedWriteCapacityAutoScalingSettingsUpdate != nil {
+		if err := s.ProvisionedWriteCapacityAutoScalingSettingsUpdate.Validate(); err != nil {
+			invalidParams.AddNested("ProvisionedWriteCapacityAutoScalingSettingsUpdate", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5673,7 +6079,21 @@ func (s *KeysAndAttributes) Validate() error {
 type ListBackupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// LastEvaluatedBackupARN returned by the previous ListBackups call.
+	// The backups from the table specified by BackupType are listed.
+	//
+	// Where BackupType can be:
+	//
+	//    * USER - On-demand backup created by you.
+	//
+	//    * SYSTEM - On-demand backup automatically created by DynamoDB.
+	//
+	//    * ALL - All types of on-demand backups (USER and SYSTEM).
+	BackupType BackupTypeFilter `type:"string" enum:"true"`
+
+	// LastEvaluatedBackupArn is the ARN of the backup last evaluated when the current
+	// page of results was returned, inclusive of the current page of results. This
+	// value may be specified as the ExclusiveStartBackupArn of a new ListBackups
+	// operation in order to fetch the next page of results.
 	ExclusiveStartBackupArn *string `min:"37" type:"string"`
 
 	// Maximum number of backups to return at once.
@@ -5728,7 +6148,17 @@ type ListBackupsOutput struct {
 	// List of BackupSummary objects.
 	BackupSummaries []BackupSummary `type:"list"`
 
-	// Last evaluated BackupARN.
+	// The ARN of the backup last evaluated when the current page of results was
+	// returned, inclusive of the current page of results. This value may be specified
+	// as the ExclusiveStartBackupArn of a new ListBackups operation in order to
+	// fetch the next page of results.
+	//
+	// If LastEvaluatedBackupArn is empty, then the last page of results has been
+	// processed and there are no more results to be retrieved.
+	//
+	// If LastEvaluatedBackupArn is not empty, this may or may not indicate there
+	// is more data to be returned. All results are guaranteed to have been returned
+	// if and only if no value for LastEvaluatedBackupArn is returned.
 	LastEvaluatedBackupArn *string `min:"37" type:"string"`
 }
 
@@ -7110,9 +7540,17 @@ type ReplicaGlobalSecondaryIndexSettingsDescription struct {
 	//    * ACTIVE - The global secondary index is ready for use.
 	IndexStatus IndexStatus `type:"string" enum:"true"`
 
+	// Autoscaling settings for a global secondary index replica's read capacity
+	// units.
+	ProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException.
 	ProvisionedReadCapacityUnits *int64 `min:"1" type:"long"`
+
+	// AutoScaling settings for a global secondary index replica's write capacity
+	// units.
+	ProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
 
 	// The maximum number of writes consumed per second before DynamoDB returns
 	// a ThrottlingException.
@@ -7140,6 +7578,10 @@ type ReplicaGlobalSecondaryIndexSettingsUpdate struct {
 	//
 	// IndexName is a required field
 	IndexName *string `min:"3" type:"string" required:"true"`
+
+	// Autoscaling settings for managing a global secondary index replica's read
+	// capacity units.
+	ProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
 
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException.
@@ -7169,6 +7611,11 @@ func (s *ReplicaGlobalSecondaryIndexSettingsUpdate) Validate() error {
 	if s.ProvisionedReadCapacityUnits != nil && *s.ProvisionedReadCapacityUnits < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProvisionedReadCapacityUnits", 1))
 	}
+	if s.ProvisionedReadCapacityAutoScalingSettingsUpdate != nil {
+		if err := s.ProvisionedReadCapacityAutoScalingSettingsUpdate.Validate(); err != nil {
+			invalidParams.AddNested("ProvisionedReadCapacityAutoScalingSettingsUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7189,11 +7636,17 @@ type ReplicaSettingsDescription struct {
 	// Replica global secondary index settings for the global table.
 	ReplicaGlobalSecondaryIndexSettings []ReplicaGlobalSecondaryIndexSettingsDescription `type:"list"`
 
+	// Autoscaling settings for a global table replica's read capacity units.
+	ReplicaProvisionedReadCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException. For more information, see Specifying
 	// Read and Write Requirements (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
 	// in the Amazon DynamoDB Developer Guide.
 	ReplicaProvisionedReadCapacityUnits *int64 `min:"1" type:"long"`
+
+	// AutoScaling settings for a global table replica's write capacity units.
+	ReplicaProvisionedWriteCapacityAutoScalingSettings *AutoScalingSettingsDescription `type:"structure"`
 
 	// The maximum number of writes consumed per second before DynamoDB returns
 	// a ThrottlingException. For more information, see Specifying Read and Write
@@ -7237,6 +7690,10 @@ type ReplicaSettingsUpdate struct {
 	// will be modified.
 	ReplicaGlobalSecondaryIndexSettingsUpdate []ReplicaGlobalSecondaryIndexSettingsUpdate `min:"1" type:"list"`
 
+	// Autoscaling settings for managing a global table replica's read capacity
+	// units.
+	ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
+
 	// The maximum number of strongly consistent reads consumed per second before
 	// DynamoDB returns a ThrottlingException. For more information, see Specifying
 	// Read and Write Requirements (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput)
@@ -7272,6 +7729,11 @@ func (s *ReplicaSettingsUpdate) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaGlobalSecondaryIndexSettingsUpdate", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate != nil {
+		if err := s.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate.Validate(); err != nil {
+			invalidParams.AddNested("ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7521,6 +7983,16 @@ func (s RestoreTableToPointInTimeOutput) SDKResponseMetadata() aws.Response {
 type SSEDescription struct {
 	_ struct{} `type:"structure"`
 
+	// The KMS master key ARN used for the KMS encryption.
+	KMSMasterKeyArn *string `type:"string"`
+
+	// Server-side encryption type:
+	//
+	//    * AES256 - Server-side encryption which uses the AES256 algorithm.
+	//
+	//    * KMS - Server-side encryption which uses AWS Key Management Service.
+	SSEType SSEType `type:"string" enum:"true"`
+
 	// The current state of server-side encryption:
 	//
 	//    * ENABLING - Server-side encryption is being enabled.
@@ -7530,6 +8002,8 @@ type SSEDescription struct {
 	//    * DISABLING - Server-side encryption is being disabled.
 	//
 	//    * DISABLED - Server-side encryption is disabled.
+	//
+	//    * UPDATING - Server-side encryption is being updated.
 	Status SSEStatus `type:"string" enum:"true"`
 }
 
@@ -7550,9 +8024,21 @@ type SSESpecification struct {
 
 	// Indicates whether server-side encryption is enabled (true) or disabled (false)
 	// on the table.
+	Enabled *bool `type:"boolean"`
+
+	// The KMS Master Key (CMK) which should be used for the KMS encryption. To
+	// specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or
+	// alias ARN. Note that you should only provide this parameter if the key is
+	// different from the default DynamoDB KMS Master Key alias/aws/dynamodb.
+	KMSMasterKeyId *string `type:"string"`
+
+	// Server-side encryption type:
 	//
-	// Enabled is a required field
-	Enabled *bool `type:"boolean" required:"true"`
+	//    * AES256 - Server-side encryption which uses the AES256 algorithm.
+	//
+	//    * KMS - Server-side encryption which uses AWS Key Management Service.
+	//    (default)
+	SSEType SSEType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7563,20 +8049,6 @@ func (s SSESpecification) String() string {
 // GoString returns the string representation
 func (s SSESpecification) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SSESpecification) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SSESpecification"}
-
-	if s.Enabled == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // Represents the input of a Scan operation.
@@ -8781,6 +9253,10 @@ type UpdateGlobalTableSettingsInput struct {
 	// GlobalTableName is a required field
 	GlobalTableName *string `min:"3" type:"string" required:"true"`
 
+	// AutoScaling settings for managing provisioned write capacity for the global
+	// table.
+	GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate *AutoScalingSettingsUpdate `type:"structure"`
+
 	// The maximum number of writes consumed per second before DynamoDB returns
 	// a ThrottlingException.
 	GlobalTableProvisionedWriteCapacityUnits *int64 `min:"1" type:"long"`
@@ -8823,6 +9299,11 @@ func (s *UpdateGlobalTableSettingsInput) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalTableGlobalSecondaryIndexSettingsUpdate", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate != nil {
+		if err := s.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate.Validate(); err != nil {
+			invalidParams.AddNested("GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ReplicaSettingsUpdate != nil {
@@ -9221,6 +9702,9 @@ type UpdateTableInput struct {
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *ProvisionedThroughput `type:"structure"`
 
+	// The new server-side encryption settings for the specified table.
+	SSESpecification *SSESpecification `type:"structure"`
+
 	// Represents the DynamoDB Streams configuration for the table.
 	//
 	// You will receive a ResourceInUseException if you attempt to enable a stream
@@ -9441,6 +9925,41 @@ func (enum BackupStatus) MarshalValue() (string, error) {
 }
 
 func (enum BackupStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type BackupType string
+
+// Enum values for BackupType
+const (
+	BackupTypeUser   BackupType = "USER"
+	BackupTypeSystem BackupType = "SYSTEM"
+)
+
+func (enum BackupType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type BackupTypeFilter string
+
+// Enum values for BackupTypeFilter
+const (
+	BackupTypeFilterUser   BackupTypeFilter = "USER"
+	BackupTypeFilterSystem BackupTypeFilter = "SYSTEM"
+	BackupTypeFilterAll    BackupTypeFilter = "ALL"
+)
+
+func (enum BackupTypeFilter) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupTypeFilter) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9694,6 +10213,7 @@ const (
 	SSEStatusEnabled   SSEStatus = "ENABLED"
 	SSEStatusDisabling SSEStatus = "DISABLING"
 	SSEStatusDisabled  SSEStatus = "DISABLED"
+	SSEStatusUpdating  SSEStatus = "UPDATING"
 )
 
 func (enum SSEStatus) MarshalValue() (string, error) {
@@ -9701,6 +10221,23 @@ func (enum SSEStatus) MarshalValue() (string, error) {
 }
 
 func (enum SSEStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SSEType string
+
+// Enum values for SSEType
+const (
+	SSETypeAes256 SSEType = "AES256"
+	SSETypeKms    SSEType = "KMS"
+)
+
+func (enum SSEType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SSEType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

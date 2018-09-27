@@ -100,11 +100,15 @@ type IoTAnalyticsAPI interface {
 
 	ListChannelsRequest(*iotanalytics.ListChannelsInput) iotanalytics.ListChannelsRequest
 
+	ListDatasetContentsRequest(*iotanalytics.ListDatasetContentsInput) iotanalytics.ListDatasetContentsRequest
+
 	ListDatasetsRequest(*iotanalytics.ListDatasetsInput) iotanalytics.ListDatasetsRequest
 
 	ListDatastoresRequest(*iotanalytics.ListDatastoresInput) iotanalytics.ListDatastoresRequest
 
 	ListPipelinesRequest(*iotanalytics.ListPipelinesInput) iotanalytics.ListPipelinesRequest
+
+	ListTagsForResourceRequest(*iotanalytics.ListTagsForResourceInput) iotanalytics.ListTagsForResourceRequest
 
 	PutLoggingOptionsRequest(*iotanalytics.PutLoggingOptionsInput) iotanalytics.PutLoggingOptionsRequest
 
@@ -113,6 +117,10 @@ type IoTAnalyticsAPI interface {
 	SampleChannelDataRequest(*iotanalytics.SampleChannelDataInput) iotanalytics.SampleChannelDataRequest
 
 	StartPipelineReprocessingRequest(*iotanalytics.StartPipelineReprocessingInput) iotanalytics.StartPipelineReprocessingRequest
+
+	TagResourceRequest(*iotanalytics.TagResourceInput) iotanalytics.TagResourceRequest
+
+	UntagResourceRequest(*iotanalytics.UntagResourceInput) iotanalytics.UntagResourceRequest
 
 	UpdateChannelRequest(*iotanalytics.UpdateChannelInput) iotanalytics.UpdateChannelRequest
 

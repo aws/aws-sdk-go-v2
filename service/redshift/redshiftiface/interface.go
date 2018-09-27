@@ -25,7 +25,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Redshift.
 //    func myFunc(svc redshiftiface.RedshiftAPI) bool {
-//        // Make svc.AuthorizeClusterSecurityGroupIngress request
+//        // Make svc.AcceptReservedNodeExchange request
 //    }
 //
 //    func main() {
@@ -45,7 +45,7 @@ import (
 //    type mockRedshiftClient struct {
 //        redshiftiface.RedshiftAPI
 //    }
-//    func (m *mockRedshiftClient) AuthorizeClusterSecurityGroupIngress(input *redshift.AuthorizeClusterSecurityGroupIngressInput) (*redshift.AuthorizeClusterSecurityGroupIngressOutput, error) {
+//    func (m *mockRedshiftClient) AcceptReservedNodeExchange(input *redshift.AcceptReservedNodeExchangeInput) (*redshift.AcceptReservedNodeExchangeOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -63,6 +63,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type RedshiftAPI interface {
+	AcceptReservedNodeExchangeRequest(*redshift.AcceptReservedNodeExchangeInput) redshift.AcceptReservedNodeExchangeRequest
+
 	AuthorizeClusterSecurityGroupIngressRequest(*redshift.AuthorizeClusterSecurityGroupIngressInput) redshift.AuthorizeClusterSecurityGroupIngressRequest
 
 	AuthorizeSnapshotAccessRequest(*redshift.AuthorizeSnapshotAccessInput) redshift.AuthorizeSnapshotAccessRequest
@@ -109,6 +111,8 @@ type RedshiftAPI interface {
 
 	DeleteTagsRequest(*redshift.DeleteTagsInput) redshift.DeleteTagsRequest
 
+	DescribeClusterDbRevisionsRequest(*redshift.DescribeClusterDbRevisionsInput) redshift.DescribeClusterDbRevisionsRequest
+
 	DescribeClusterParameterGroupsRequest(*redshift.DescribeClusterParameterGroupsInput) redshift.DescribeClusterParameterGroupsRequest
 
 	DescribeClusterParametersRequest(*redshift.DescribeClusterParametersInput) redshift.DescribeClusterParametersRequest
@@ -118,6 +122,8 @@ type RedshiftAPI interface {
 	DescribeClusterSnapshotsRequest(*redshift.DescribeClusterSnapshotsInput) redshift.DescribeClusterSnapshotsRequest
 
 	DescribeClusterSubnetGroupsRequest(*redshift.DescribeClusterSubnetGroupsInput) redshift.DescribeClusterSubnetGroupsRequest
+
+	DescribeClusterTracksRequest(*redshift.DescribeClusterTracksInput) redshift.DescribeClusterTracksRequest
 
 	DescribeClusterVersionsRequest(*redshift.DescribeClusterVersionsInput) redshift.DescribeClusterVersionsRequest
 
@@ -161,7 +167,11 @@ type RedshiftAPI interface {
 
 	GetClusterCredentialsRequest(*redshift.GetClusterCredentialsInput) redshift.GetClusterCredentialsRequest
 
+	GetReservedNodeExchangeOfferingsRequest(*redshift.GetReservedNodeExchangeOfferingsInput) redshift.GetReservedNodeExchangeOfferingsRequest
+
 	ModifyClusterRequest(*redshift.ModifyClusterInput) redshift.ModifyClusterRequest
+
+	ModifyClusterDbRevisionRequest(*redshift.ModifyClusterDbRevisionInput) redshift.ModifyClusterDbRevisionRequest
 
 	ModifyClusterIamRolesRequest(*redshift.ModifyClusterIamRolesInput) redshift.ModifyClusterIamRolesRequest
 
@@ -178,6 +188,8 @@ type RedshiftAPI interface {
 	RebootClusterRequest(*redshift.RebootClusterInput) redshift.RebootClusterRequest
 
 	ResetClusterParameterGroupRequest(*redshift.ResetClusterParameterGroupInput) redshift.ResetClusterParameterGroupRequest
+
+	ResizeClusterRequest(*redshift.ResizeClusterInput) redshift.ResizeClusterRequest
 
 	RestoreFromClusterSnapshotRequest(*redshift.RestoreFromClusterSnapshotInput) redshift.RestoreFromClusterSnapshotRequest
 

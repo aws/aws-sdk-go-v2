@@ -87,6 +87,8 @@ type AppStreamAPI interface {
 
 	DeleteImageBuilderRequest(*appstream.DeleteImageBuilderInput) appstream.DeleteImageBuilderRequest
 
+	DeleteImagePermissionsRequest(*appstream.DeleteImagePermissionsInput) appstream.DeleteImagePermissionsRequest
+
 	DeleteStackRequest(*appstream.DeleteStackInput) appstream.DeleteStackRequest
 
 	DescribeDirectoryConfigsRequest(*appstream.DescribeDirectoryConfigsInput) appstream.DescribeDirectoryConfigsRequest
@@ -94,6 +96,8 @@ type AppStreamAPI interface {
 	DescribeFleetsRequest(*appstream.DescribeFleetsInput) appstream.DescribeFleetsRequest
 
 	DescribeImageBuildersRequest(*appstream.DescribeImageBuildersInput) appstream.DescribeImageBuildersRequest
+
+	DescribeImagePermissionsRequest(*appstream.DescribeImagePermissionsInput) appstream.DescribeImagePermissionsRequest
 
 	DescribeImagesRequest(*appstream.DescribeImagesInput) appstream.DescribeImagesRequest
 
@@ -126,6 +130,8 @@ type AppStreamAPI interface {
 	UpdateDirectoryConfigRequest(*appstream.UpdateDirectoryConfigInput) appstream.UpdateDirectoryConfigRequest
 
 	UpdateFleetRequest(*appstream.UpdateFleetInput) appstream.UpdateFleetRequest
+
+	UpdateImagePermissionsRequest(*appstream.UpdateImagePermissionsInput) appstream.UpdateImagePermissionsRequest
 
 	UpdateStackRequest(*appstream.UpdateStackInput) appstream.UpdateStackRequest
 

@@ -1055,6 +1055,13 @@ type Build struct {
 	// The current build phase.
 	CurrentPhase *string `locationName:"currentPhase" type:"string"`
 
+	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be
+	// used for encrypting the build output artifacts.
+	//
+	// This is expressed either as the CMK's Amazon Resource Name (ARN) or, if specified,
+	// the CMK's alias (using the format alias/alias-name).
+	EncryptionKey *string `locationName:"encryptionKey" min:"1" type:"string"`
+
 	// When the build process ended, expressed in Unix time format.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
@@ -1088,6 +1095,33 @@ type Build struct {
 
 	// The name of the AWS CodeBuild project.
 	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
+
+	// An array of ProjectArtifacts objects.
+	SecondaryArtifacts []BuildArtifacts `locationName:"secondaryArtifacts" type:"list"`
+
+	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must
+	// be one of:
+	//
+	//    * For AWS CodeCommit: the commit ID to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID will be used. If not specified, the default branch's HEAD commit
+	//    ID will be used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID will be used. If not specified,
+	//    the default branch's HEAD commit ID will be used.
+	//
+	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
+	//    object representing the build input ZIP file to use.
+	SecondarySourceVersions []ProjectSourceVersion `locationName:"secondarySourceVersions" type:"list"`
+
+	// An array of ProjectSource objects.
+	SecondarySources []ProjectSource `locationName:"secondarySources" type:"list"`
 
 	// The name of a service role used for this build.
 	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
@@ -1127,6 +1161,12 @@ func (s Build) GoString() string {
 type BuildArtifacts struct {
 	_ struct{} `type:"structure"`
 
+	// An identifier for this artifact definition.
+	ArtifactIdentifier *string `locationName:"artifactIdentifier" type:"string"`
+
+	// Information that tells you if encryption for build artifacts is disabled.
+	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
+
 	// Information about the location of the build artifacts.
 	Location *string `locationName:"location" type:"string"`
 
@@ -1138,6 +1178,12 @@ type BuildArtifacts struct {
 	// This value is available only if the build project's packaging value is set
 	// to ZIP.
 	Md5sum *string `locationName:"md5sum" type:"string"`
+
+	// If this flag is set, a name specified in the buildspec file overrides the
+	// artifact name. The name specified in a buildspec file is calculated at build
+	// time and uses the Shell Command Language. For example, you can append a date
+	// and time to your artifact name so that it is always unique.
+	OverrideArtifactName *bool `locationName:"overrideArtifactName" type:"boolean"`
 
 	// The SHA-256 hash of the build artifact.
 	//
@@ -1250,6 +1296,53 @@ func (s BuildPhase) GoString() string {
 	return s.String()
 }
 
+// Information about Amazon CloudWatch Logs for a build project.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CloudWatchLogsConfig
+type CloudWatchLogsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The group name of the Amazon CloudWatch Logs. For more information, see Working
+	// with Log Groups and Log Streams (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
+	GroupName *string `locationName:"groupName" type:"string"`
+
+	// The current status of the Amazon CloudWatch Logs for a build project. Valid
+	// values are:
+	//
+	//    * ENABLED: Amazon CloudWatch Logs are enabled for this build project.
+	//
+	//    * DISABLED: Amazon CloudWatch Logs are not enabled for this build project.
+	//
+	// Status is a required field
+	Status LogsConfigStatusType `locationName:"status" type:"string" required:"true" enum:"true"`
+
+	// The prefix of the stream name of the Amazon CloudWatch Logs. For more information,
+	// see Working with Log Groups and Log Streams (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
+	StreamName *string `locationName:"streamName" type:"string"`
+}
+
+// String returns the string representation
+func (s CloudWatchLogsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CloudWatchLogsConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CloudWatchLogsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchLogsConfig"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput
 type CreateProjectInput struct {
 	_ struct{} `type:"structure"`
@@ -1282,15 +1375,27 @@ type CreateProjectInput struct {
 	// Environment is a required field
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure" required:"true"`
 
+	// Information about logs for the build project. Logs can be Amazon CloudWatch
+	// Logs, uploaded to a specified S3 bucket, or both.
+	LogsConfig *LogsConfig `locationName:"logsConfig" type:"structure"`
+
 	// The name of the build project.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"2" type:"string" required:"true"`
 
+	// An array of ProjectArtifacts objects.
+	SecondaryArtifacts []ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
+
+	// An array of ProjectSource objects.
+	SecondarySources []ProjectSource `locationName:"secondarySources" type:"list"`
+
 	// The ARN of the AWS Identity and Access Management (IAM) role that enables
 	// AWS CodeBuild to interact with dependent AWS services on behalf of the AWS
 	// account.
-	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
+	//
+	// ServiceRole is a required field
+	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string" required:"true"`
 
 	// Information about the build input source code for the build project.
 	//
@@ -1343,6 +1448,10 @@ func (s *CreateProjectInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
+
+	if s.ServiceRole == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRole"))
+	}
 	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ServiceRole", 1))
 	}
@@ -1366,6 +1475,25 @@ func (s *CreateProjectInput) Validate() error {
 	if s.Environment != nil {
 		if err := s.Environment.Validate(); err != nil {
 			invalidParams.AddNested("Environment", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.LogsConfig != nil {
+		if err := s.LogsConfig.Validate(); err != nil {
+			invalidParams.AddNested("LogsConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SecondaryArtifacts != nil {
+		for i, v := range s.SecondaryArtifacts {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondaryArtifacts", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySources != nil {
+		for i, v := range s.SecondarySources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySources", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 	if s.Source != nil {
@@ -2072,16 +2200,70 @@ func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Information about logs for a build project. Logs can be Amazon CloudWatch
+// Logs, built in a specified S3 bucket, or both.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsConfig
+type LogsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch
+	// Logs are enabled by default.
+	CloudWatchLogs *CloudWatchLogsConfig `locationName:"cloudWatchLogs" type:"structure"`
+
+	// Information about logs built to an S3 bucket for a build project. S3 logs
+	// are not enabled by default.
+	S3Logs *S3LogsConfig `locationName:"s3Logs" type:"structure"`
+}
+
+// String returns the string representation
+func (s LogsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogsConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LogsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LogsConfig"}
+	if s.CloudWatchLogs != nil {
+		if err := s.CloudWatchLogs.Validate(); err != nil {
+			invalidParams.AddNested("CloudWatchLogs", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.S3Logs != nil {
+		if err := s.S3Logs.Validate(); err != nil {
+			invalidParams.AddNested("S3Logs", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Information about build logs in Amazon CloudWatch Logs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsLocation
 type LogsLocation struct {
 	_ struct{} `type:"structure"`
+
+	// Information about Amazon CloudWatch Logs for a build project.
+	CloudWatchLogs *CloudWatchLogsConfig `locationName:"cloudWatchLogs" type:"structure"`
 
 	// The URL to an individual build log in Amazon CloudWatch Logs.
 	DeepLink *string `locationName:"deepLink" type:"string"`
 
 	// The name of the Amazon CloudWatch Logs group for the build logs.
 	GroupName *string `locationName:"groupName" type:"string"`
+
+	// The URL to an individual build log in an S3 bucket.
+	S3DeepLink *string `locationName:"s3DeepLink" type:"string"`
+
+	// Information about S3 logs for a build project.
+	S3Logs *S3LogsConfig `locationName:"s3Logs" type:"structure"`
 
 	// The name of the Amazon CloudWatch Logs stream for the build logs.
 	StreamName *string `locationName:"streamName" type:"string"`
@@ -2180,8 +2362,18 @@ type Project struct {
 	// format.
 	LastModified *time.Time `locationName:"lastModified" type:"timestamp" timestampFormat:"unix"`
 
+	// Information about logs for the build project. A project can create Amazon
+	// CloudWatch Logs, logs in an S3 bucket, or both.
+	LogsConfig *LogsConfig `locationName:"logsConfig" type:"structure"`
+
 	// The name of the build project.
 	Name *string `locationName:"name" min:"2" type:"string"`
+
+	// An array of ProjectArtifacts objects.
+	SecondaryArtifacts []ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
+
+	// An array of ProjectSource objects.
+	SecondarySources []ProjectSource `locationName:"secondarySources" type:"list"`
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that enables
 	// AWS CodeBuild to interact with dependent AWS services on behalf of the AWS
@@ -2224,6 +2416,14 @@ func (s Project) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts
 type ProjectArtifacts struct {
 	_ struct{} `type:"structure"`
+
+	// An identifier for this artifact definition.
+	ArtifactIdentifier *string `locationName:"artifactIdentifier" type:"string"`
+
+	// Set to true if you do not want your output artifacts encrypted. This option
+	// is only valid if your artifacts type is Amazon S3. If this is set with another
+	// artifacts type, an invalidInputException will be thrown.
+	EncryptionDisabled *bool `locationName:"encryptionDisabled" type:"boolean"`
 
 	// Information about the build output artifact location, as follows:
 	//
@@ -2286,6 +2486,12 @@ type ProjectArtifacts struct {
 	// and name is set to MyArtifact.zip, then the output artifact would be stored
 	// in MyArtifacts/build-ID/MyArtifact.zip.
 	NamespaceType ArtifactNamespace `locationName:"namespaceType" type:"string" enum:"true"`
+
+	// If this flag is set, a name specified in the buildspec file overrides the
+	// artifact name. The name specified in a buildspec file is calculated at build
+	// time and uses the Shell Command Language. For example, you can append a date
+	// and time to your artifact name so that it is always unique.
+	OverrideArtifactName *bool `locationName:"overrideArtifactName" type:"boolean"`
 
 	// The type of build output artifact to create, as follows:
 	//
@@ -2468,8 +2674,17 @@ type ProjectEnvironment struct {
 	// build commands. (Do not run the following build commands if the specified
 	// build environment image is provided by AWS CodeBuild with Docker support.)
 	//
+	// If the operating system's base image is Ubuntu Linux:
+	//
 	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
-	// --storage-driver=overlay& - timeout -t 15 sh -c "until docker info; do echo
+	// --storage-driver=overlay& - timeout 15 sh -c "until docker info; do echo
+	// .; sleep 1; done"
+	//
+	// If the operating system's base image is Alpine Linux, add the -t argument
+	// to timeout:
+	//
+	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
+	// --storage-driver=overlay& - timeout 15 -t sh -c "until docker info; do echo
 	// .; sleep 1; done"
 	PrivilegedMode *bool `locationName:"privilegedMode" type:"boolean"`
 
@@ -2586,6 +2801,15 @@ type ProjectSource struct {
 	//    source object, set the auth object's type value to OAUTH.
 	Location *string `locationName:"location" type:"string"`
 
+	// Set to true to report the status of a build's start and finish to your source
+	// provider. This option is only valid when your source provider is GitHub.
+	// If this is set and you use a different source provider, an invalidInputException
+	// is thrown.
+	ReportBuildStatus *bool `locationName:"reportBuildStatus" type:"boolean"`
+
+	// An identifier for this project source.
+	SourceIdentifier *string `locationName:"sourceIdentifier" type:"string"`
+
 	// The type of repository that contains the source code to be built. Valid values
 	// include:
 	//
@@ -2597,6 +2821,8 @@ type ProjectSource struct {
 	//    of a pipeline in AWS CodePipeline.
 	//
 	//    * GITHUB: The source code is in a GitHub repository.
+	//
+	//    * NO_SOURCE: The project does not have input source code.
 	//
 	//    * S3: The source code is in an Amazon Simple Storage Service (Amazon S3)
 	//    input bucket.
@@ -2625,6 +2851,111 @@ func (s *ProjectSource) Validate() error {
 		if err := s.Auth.Validate(); err != nil {
 			invalidParams.AddNested("Auth", err.(aws.ErrInvalidParams))
 		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A source identifier and its corresponding version.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSourceVersion
+type ProjectSourceVersion struct {
+	_ struct{} `type:"structure"`
+
+	// An identifier for a source in the build project.
+	//
+	// SourceIdentifier is a required field
+	SourceIdentifier *string `locationName:"sourceIdentifier" type:"string" required:"true"`
+
+	// The source version for the corresponding source identifier. If specified,
+	// must be one of:
+	//
+	//    * For AWS CodeCommit: the commit ID to use.
+	//
+	//    * For GitHub: the commit ID, pull request ID, branch name, or tag name
+	//    that corresponds to the version of the source code you want to build.
+	//    If a pull request ID is specified, it must use the format pr/pull-request-ID
+	//    (for example pr/25). If a branch name is specified, the branch's HEAD
+	//    commit ID will be used. If not specified, the default branch's HEAD commit
+	//    ID will be used.
+	//
+	//    * For Bitbucket: the commit ID, branch name, or tag name that corresponds
+	//    to the version of the source code you want to build. If a branch name
+	//    is specified, the branch's HEAD commit ID will be used. If not specified,
+	//    the default branch's HEAD commit ID will be used.
+	//
+	//    * For Amazon Simple Storage Service (Amazon S3): the version ID of the
+	//    object representing the build input ZIP file to use.
+	//
+	// SourceVersion is a required field
+	SourceVersion *string `locationName:"sourceVersion" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ProjectSourceVersion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ProjectSourceVersion) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProjectSourceVersion) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProjectSourceVersion"}
+
+	if s.SourceIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
+	}
+
+	if s.SourceVersion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceVersion"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about S3 logs for a build project.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3LogsConfig
+type S3LogsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3
+	// bucket name is my-bucket, and your path prefix is build-log, then acceptable
+	// formats are my-bucket/build-log or aws:s3:::my-bucket/build-log.
+	Location *string `locationName:"location" type:"string"`
+
+	// The current status of the S3 build logs. Valid values are:
+	//
+	//    * ENABLED: S3 build logs are enabled for this build project.
+	//
+	//    * DISABLED: S3 build logs are not enabled for this build project.
+	//
+	// Status is a required field
+	Status LogsConfigStatusType `locationName:"status" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s S3LogsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s S3LogsConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3LogsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3LogsConfig"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2729,6 +3060,10 @@ type StartBuildInput struct {
 	// only if the build's source is GitHub Enterprise.
 	InsecureSslOverride *bool `locationName:"insecureSslOverride" type:"boolean"`
 
+	// Log settings for this build that override the log settings defined in the
+	// build project.
+	LogsConfigOverride *LogsConfig `locationName:"logsConfigOverride" type:"structure"`
+
 	// Enable this flag to override privileged mode in the build project.
 	PrivilegedModeOverride *bool `locationName:"privilegedModeOverride" type:"boolean"`
 
@@ -2736,6 +3071,21 @@ type StartBuildInput struct {
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
+
+	// Set to true to report to your source provider the status of a build's start
+	// and completion. If you use this option with a source provider other than
+	// GitHub, an invalidInputException is thrown.
+	ReportBuildStatusOverride *bool `locationName:"reportBuildStatusOverride" type:"boolean"`
+
+	// An array of ProjectArtifacts objects.
+	SecondaryArtifactsOverride []ProjectArtifacts `locationName:"secondaryArtifactsOverride" type:"list"`
+
+	// An array of ProjectSource objects.
+	SecondarySourcesOverride []ProjectSource `locationName:"secondarySourcesOverride" type:"list"`
+
+	// An array of ProjectSourceVersion objects that specify one or more versions
+	// of the project's secondary sources to be used for this build only.
+	SecondarySourcesVersionOverride []ProjectSourceVersion `locationName:"secondarySourcesVersionOverride" type:"list"`
 
 	// The name of a service role for this build that overrides the one specified
 	// in the build project.
@@ -2751,7 +3101,7 @@ type StartBuildInput struct {
 	SourceLocationOverride *string `locationName:"sourceLocationOverride" type:"string"`
 
 	// A source input type for this build that overrides the source input defined
-	// in the build project
+	// in the build project.
 	SourceTypeOverride SourceType `locationName:"sourceTypeOverride" type:"string" enum:"true"`
 
 	// A version of the build input to be built, for this build only. If not specified,
@@ -2823,6 +3173,32 @@ func (s *StartBuildInput) Validate() error {
 		for i, v := range s.EnvironmentVariablesOverride {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.LogsConfigOverride != nil {
+		if err := s.LogsConfigOverride.Validate(); err != nil {
+			invalidParams.AddNested("LogsConfigOverride", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SecondaryArtifactsOverride != nil {
+		for i, v := range s.SecondaryArtifactsOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondaryArtifactsOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySourcesOverride != nil {
+		for i, v := range s.SecondarySourcesOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySourcesOverride", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySourcesVersionOverride != nil {
+		for i, v := range s.SecondarySourcesVersionOverride {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySourcesVersionOverride", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2994,12 +3370,22 @@ type UpdateProjectInput struct {
 	// Information to be changed about the build environment for the build project.
 	Environment *ProjectEnvironment `locationName:"environment" type:"structure"`
 
+	// Information about logs for the build project. A project can create Amazon
+	// CloudWatch Logs, logs in an S3 bucket, or both.
+	LogsConfig *LogsConfig `locationName:"logsConfig" type:"structure"`
+
 	// The name of the build project.
 	//
 	// You cannot change a build project's name.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// An array of ProjectSource objects.
+	SecondaryArtifacts []ProjectArtifacts `locationName:"secondaryArtifacts" type:"list"`
+
+	// An array of ProjectSource objects.
+	SecondarySources []ProjectSource `locationName:"secondarySources" type:"list"`
 
 	// The replacement ARN of the AWS Identity and Access Management (IAM) role
 	// that enables AWS CodeBuild to interact with dependent AWS services on behalf
@@ -3066,6 +3452,25 @@ func (s *UpdateProjectInput) Validate() error {
 	if s.Environment != nil {
 		if err := s.Environment.Validate(); err != nil {
 			invalidParams.AddNested("Environment", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.LogsConfig != nil {
+		if err := s.LogsConfig.Validate(); err != nil {
+			invalidParams.AddNested("LogsConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SecondaryArtifacts != nil {
+		for i, v := range s.SecondaryArtifacts {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondaryArtifacts", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SecondarySources != nil {
+		for i, v := range s.SecondarySources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SecondarySources", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 	if s.Source != nil {
@@ -3433,6 +3838,23 @@ func (enum LanguageType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type LogsConfigStatusType string
+
+// Enum values for LogsConfigStatusType
+const (
+	LogsConfigStatusTypeEnabled  LogsConfigStatusType = "ENABLED"
+	LogsConfigStatusTypeDisabled LogsConfigStatusType = "DISABLED"
+)
+
+func (enum LogsConfigStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LogsConfigStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
@@ -3513,6 +3935,7 @@ const (
 	SourceTypeS3               SourceType = "S3"
 	SourceTypeBitbucket        SourceType = "BITBUCKET"
 	SourceTypeGithubEnterprise SourceType = "GITHUB_ENTERPRISE"
+	SourceTypeNoSource         SourceType = "NO_SOURCE"
 )
 
 func (enum SourceType) MarshalValue() (string, error) {

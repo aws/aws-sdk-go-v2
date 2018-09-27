@@ -196,6 +196,8 @@ func ExampleSnowball_CreateClusterRequest_shared00() {
 				fmt.Println(snowball.ErrCodeKMSRequestFailedException, aerr.Error())
 			case snowball.ErrCodeInvalidInputCombinationException:
 				fmt.Println(snowball.ErrCodeInvalidInputCombinationException, aerr.Error())
+			case snowball.ErrCodeEc2RequestFailedException:
+				fmt.Println(snowball.ErrCodeEc2RequestFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -258,6 +260,8 @@ func ExampleSnowball_CreateJobRequest_shared00() {
 				fmt.Println(snowball.ErrCodeInvalidInputCombinationException, aerr.Error())
 			case snowball.ErrCodeClusterLimitExceededException:
 				fmt.Println(snowball.ErrCodeClusterLimitExceededException, aerr.Error())
+			case snowball.ErrCodeEc2RequestFailedException:
+				fmt.Println(snowball.ErrCodeEc2RequestFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -692,6 +696,8 @@ func ExampleSnowball_UpdateClusterRequest_shared00() {
 				fmt.Println(snowball.ErrCodeKMSRequestFailedException, aerr.Error())
 			case snowball.ErrCodeInvalidInputCombinationException:
 				fmt.Println(snowball.ErrCodeInvalidInputCombinationException, aerr.Error())
+			case snowball.ErrCodeEc2RequestFailedException:
+				fmt.Println(snowball.ErrCodeEc2RequestFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -741,6 +747,8 @@ func ExampleSnowball_UpdateJobRequest_shared00() {
 				fmt.Println(snowball.ErrCodeInvalidInputCombinationException, aerr.Error())
 			case snowball.ErrCodeClusterLimitExceededException:
 				fmt.Println(snowball.ErrCodeClusterLimitExceededException, aerr.Error())
+			case snowball.ErrCodeEc2RequestFailedException:
+				fmt.Println(snowball.ErrCodeEc2RequestFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

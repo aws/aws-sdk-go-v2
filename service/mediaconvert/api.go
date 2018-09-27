@@ -876,6 +876,158 @@ func (c *MediaConvert) ListQueuesRequest(input *ListQueuesInput) ListQueuesReque
 	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS Elemental MediaConvert.
+//
+// Retrieve the tags for a MediaConvert resource.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResource
+func (c *MediaConvert) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-08-29/tags/{arn}",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS Elemental MediaConvert.
+//
+// Add tags to a MediaConvert queue, preset, or job template. For information
+// about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResource
+func (c *MediaConvert) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2017-08-29/tags",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS Elemental MediaConvert.
+//
+// Remove tags from a MediaConvert queue, preset, or job template. For information
+// about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResource
+func (c *MediaConvert) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2017-08-29/tags/{arn}",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
 const opUpdateJobTemplate = "UpdateJobTemplate"
 
 // UpdateJobTemplateRequest is a API request type for the UpdateJobTemplate API operation.
@@ -1060,9 +1212,7 @@ type AacSettings struct {
 	// Mix)" setting receives a stereo description plus control track and emits
 	// a mono AAC encode of the description track, with control data emitted in
 	// the PES header as per ETSI TS 101 154 Annex E.
-	//
-	// CodingMode is a required field
-	CodingMode AacCodingMode `locationName:"codingMode" type:"string" required:"true" enum:"true"`
+	CodingMode AacCodingMode `locationName:"codingMode" type:"string" enum:"true"`
 
 	// Rate Control Mode.
 	RateControlMode AacRateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
@@ -1072,9 +1222,7 @@ type AacSettings struct {
 	RawFormat AacRawFormat `locationName:"rawFormat" type:"string" enum:"true"`
 
 	// Sample rate in Hz. Valid values depend on rate control mode and profile.
-	//
-	// SampleRate is a required field
-	SampleRate *int64 `locationName:"sampleRate" min:"8000" type:"integer" required:"true"`
+	SampleRate *int64 `locationName:"sampleRate" min:"8000" type:"integer"`
 
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
 	// containers.
@@ -1099,13 +1247,6 @@ func (s *AacSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AacSettings"}
 	if s.Bitrate != nil && *s.Bitrate < 6000 {
 		invalidParams.Add(aws.NewErrParamMinValue("Bitrate", 6000))
-	}
-	if len(s.CodingMode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("CodingMode"))
-	}
-
-	if s.SampleRate == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SampleRate"))
 	}
 	if s.SampleRate != nil && *s.SampleRate < 8000 {
 		invalidParams.Add(aws.NewErrParamMinValue("SampleRate", 8000))
@@ -1438,9 +1579,7 @@ type AudioCodecSettings struct {
 	AiffSettings *AiffSettings `locationName:"aiffSettings" type:"structure"`
 
 	// Type of Audio codec.
-	//
-	// Codec is a required field
-	Codec AudioCodec `locationName:"codec" type:"string" required:"true" enum:"true"`
+	Codec AudioCodec `locationName:"codec" type:"string" enum:"true"`
 
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to
 	// the value EAC3.
@@ -1468,9 +1607,6 @@ func (s AudioCodecSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AudioCodecSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AudioCodecSettings"}
-	if len(s.Codec) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Codec"))
-	}
 	if s.AacSettings != nil {
 		if err := s.AacSettings.Validate(); err != nil {
 			invalidParams.AddNested("AacSettings", err.(aws.ErrInvalidParams))
@@ -1594,9 +1730,14 @@ type AudioDescription struct {
 	// enum you choose, define the corresponding settings object. The following
 	// lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings
 	// * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings
-	//
-	// CodecSettings is a required field
-	CodecSettings *AudioCodecSettings `locationName:"codecSettings" type:"structure" required:"true"`
+	CodecSettings *AudioCodecSettings `locationName:"codecSettings" type:"structure"`
+
+	// Specify the language for this audio output track, using the ISO 639-2 or
+	// ISO 639-3 three-letter language code. The language specified will be used
+	// when 'Follow Input Language Code' is not selected or when 'Follow Input Language
+	// Code' is selected but there is no ISO 639 language code specified by the
+	// input.
+	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
 
 	// Indicates the language of the audio output track. The ISO 639 language specified
 	// in the 'Language Code' drop down will be used when 'Follow Input Language
@@ -1632,9 +1773,8 @@ func (s AudioDescription) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AudioDescription) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AudioDescription"}
-
-	if s.CodecSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CodecSettings"))
+	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
 	}
 	if s.AudioNormalizationSettings != nil {
 		if err := s.AudioNormalizationSettings.Validate(); err != nil {
@@ -1689,6 +1829,12 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "codecSettings", v, metadata)
+	}
+	if s.CustomLanguageCode != nil {
+		v := *s.CustomLanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customLanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
@@ -1818,6 +1964,10 @@ func (s AudioNormalizationSettings) MarshalFields(e protocol.FieldEncoder) error
 type AudioSelector struct {
 	_ struct{} `type:"structure"`
 
+	// Selects a specific language code from within an audio source, using the ISO
+	// 639-2 or ISO 639-3 three-letter language code
+	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+
 	// Enable this setting on one audio selector to set it as the default for the
 	// job. The service uses this default for outputs where it can't find the specified
 	// input audio. If you don't set a default, those outputs have no audio.
@@ -1878,6 +2028,9 @@ func (s AudioSelector) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AudioSelector) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AudioSelector"}
+	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
+	}
 	if s.Offset != nil && *s.Offset < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("Offset", -2.147483648e+09))
 	}
@@ -1895,6 +2048,12 @@ func (s *AudioSelector) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomLanguageCode != nil {
+		v := *s.CustomLanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customLanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.DefaultSelection) > 0 {
 		v := s.DefaultSelection
 
@@ -1973,9 +2132,7 @@ type AudioSelectorGroup struct {
 	// Audio selector names are standardized, based on their order within the input
 	// (e.g., "Audio Selector 1"). The audio selector name parameter can be repeated
 	// to add any number of audio selectors to the group.
-	//
-	// AudioSelectorNames is a required field
-	AudioSelectorNames []string `locationName:"audioSelectorNames" type:"list" required:"true"`
+	AudioSelectorNames []string `locationName:"audioSelectorNames" type:"list"`
 }
 
 // String returns the string representation
@@ -1986,20 +2143,6 @@ func (s AudioSelectorGroup) String() string {
 // GoString returns the string representation
 func (s AudioSelectorGroup) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *AudioSelectorGroup) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "AudioSelectorGroup"}
-
-	if s.AudioSelectorNames == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AudioSelectorNames"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -2076,9 +2219,7 @@ type BurninDestinationSettings struct {
 	// This option is not valid for source captions that are STL, 608/embedded or
 	// teletext. These source settings are already pre-defined by the caption stream.
 	// All burn-in and DVB-Sub font settings must match.
-	//
-	// Alignment is a required field
-	Alignment BurninSubtitleAlignment `locationName:"alignment" type:"string" required:"true" enum:"true"`
+	Alignment BurninSubtitleAlignment `locationName:"alignment" type:"string" enum:"true"`
 
 	// Specifies the color of the rectangle behind the captions.All burn-in and
 	// DVB-Sub font settings must match.
@@ -2097,9 +2238,7 @@ type BurninDestinationSettings struct {
 
 	// Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.All
 	// burn-in and DVB-Sub font settings must match.
-	//
-	// FontOpacity is a required field
-	FontOpacity *int64 `locationName:"fontOpacity" type:"integer" required:"true"`
+	FontOpacity *int64 `locationName:"fontOpacity" type:"integer"`
 
 	// Font resolution in DPI (dots per inch); default is 96 dpi.All burn-in and
 	// DVB-Sub font settings must match.
@@ -2114,17 +2253,13 @@ type BurninDestinationSettings struct {
 	// that are either 608/embedded or teletext. These source settings are already
 	// pre-defined by the caption stream. All burn-in and DVB-Sub font settings
 	// must match.
-	//
-	// OutlineColor is a required field
-	OutlineColor BurninSubtitleOutlineColor `locationName:"outlineColor" type:"string" required:"true" enum:"true"`
+	OutlineColor BurninSubtitleOutlineColor `locationName:"outlineColor" type:"string" enum:"true"`
 
 	// Specifies font outline size in pixels. This option is not valid for source
 	// captions that are either 608/embedded or teletext. These source settings
 	// are already pre-defined by the caption stream. All burn-in and DVB-Sub font
 	// settings must match.
-	//
-	// OutlineSize is a required field
-	OutlineSize *int64 `locationName:"outlineSize" type:"integer" required:"true"`
+	OutlineSize *int64 `locationName:"outlineSize" type:"integer"`
 
 	// Specifies the color of the shadow cast by the captions.All burn-in and DVB-Sub
 	// font settings must match.
@@ -2184,22 +2319,8 @@ func (s BurninDestinationSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BurninDestinationSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BurninDestinationSettings"}
-	if len(s.Alignment) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Alignment"))
-	}
-
-	if s.FontOpacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FontOpacity"))
-	}
 	if s.FontResolution != nil && *s.FontResolution < 96 {
 		invalidParams.Add(aws.NewErrParamMinValue("FontResolution", 96))
-	}
-	if len(s.OutlineColor) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("OutlineColor"))
-	}
-
-	if s.OutlineSize == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutlineSize"))
 	}
 	if s.ShadowXOffset != nil && *s.ShadowXOffset < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("ShadowXOffset", -2.147483648e+09))
@@ -2400,22 +2521,19 @@ type CaptionDescription struct {
 	// input when generating captions. The name should be of the format "Caption
 	// Selector ", which denotes that the Nth Caption Selector will be used from
 	// each input.
-	//
-	// CaptionSelectorName is a required field
-	CaptionSelectorName *string `locationName:"captionSelectorName" min:"1" type:"string" required:"true"`
+	CaptionSelectorName *string `locationName:"captionSelectorName" min:"1" type:"string"`
+
+	// Indicates the language of the caption output track, using the ISO 639-2 or
+	// ISO 639-3 three-letter language code
+	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
 
 	// Specific settings required by destination type. Note that burnin_destination_settings
 	// are not available if the source of the caption data is Embedded or Teletext.
-	//
-	// DestinationSettings is a required field
-	DestinationSettings *CaptionDestinationSettings `locationName:"destinationSettings" type:"structure" required:"true"`
+	DestinationSettings *CaptionDestinationSettings `locationName:"destinationSettings" type:"structure"`
 
 	// Indicates the language of the caption output track.
 	LanguageCode LanguageCode `locationName:"languageCode" type:"string" enum:"true"`
 
-	// Human readable information to indicate captions available for players (eg.
-	// English, or Spanish). Alphanumeric characters, spaces, and underscore are
-	// legal.
 	LanguageDescription *string `locationName:"languageDescription" type:"string"`
 }
 
@@ -2432,16 +2550,11 @@ func (s CaptionDescription) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionDescription) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionDescription"}
-
-	if s.CaptionSelectorName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CaptionSelectorName"))
-	}
 	if s.CaptionSelectorName != nil && len(*s.CaptionSelectorName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CaptionSelectorName", 1))
 	}
-
-	if s.DestinationSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationSettings"))
+	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
 	}
 	if s.DestinationSettings != nil {
 		if err := s.DestinationSettings.Validate(); err != nil {
@@ -2462,6 +2575,12 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "captionSelectorName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CustomLanguageCode != nil {
+		v := *s.CustomLanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customLanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DestinationSettings != nil {
 		v := s.DestinationSettings
@@ -2489,11 +2608,13 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 type CaptionDescriptionPreset struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates the language of the caption output track, using the ISO 639-2 or
+	// ISO 639-3 three-letter language code
+	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+
 	// Specific settings required by destination type. Note that burnin_destination_settings
 	// are not available if the source of the caption data is Embedded or Teletext.
-	//
-	// DestinationSettings is a required field
-	DestinationSettings *CaptionDestinationSettings `locationName:"destinationSettings" type:"structure" required:"true"`
+	DestinationSettings *CaptionDestinationSettings `locationName:"destinationSettings" type:"structure"`
 
 	// Indicates the language of the caption output track.
 	LanguageCode LanguageCode `locationName:"languageCode" type:"string" enum:"true"`
@@ -2517,9 +2638,8 @@ func (s CaptionDescriptionPreset) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionDescriptionPreset) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionDescriptionPreset"}
-
-	if s.DestinationSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationSettings"))
+	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
 	}
 	if s.DestinationSettings != nil {
 		if err := s.DestinationSettings.Validate(); err != nil {
@@ -2535,6 +2655,12 @@ func (s *CaptionDescriptionPreset) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CaptionDescriptionPreset) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomLanguageCode != nil {
+		v := *s.CustomLanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customLanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.DestinationSettings != nil {
 		v := s.DestinationSettings
 
@@ -2567,9 +2693,7 @@ type CaptionDestinationSettings struct {
 
 	// Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT,
 	// DVB-Sub, Teletext.
-	//
-	// DestinationType is a required field
-	DestinationType CaptionDestinationType `locationName:"destinationType" type:"string" required:"true" enum:"true"`
+	DestinationType CaptionDestinationType `locationName:"destinationType" type:"string" enum:"true"`
 
 	// DVB-Sub Destination Settings
 	DvbSubDestinationSettings *DvbSubDestinationSettings `locationName:"dvbSubDestinationSettings" type:"structure"`
@@ -2598,9 +2722,6 @@ func (s CaptionDestinationSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionDestinationSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionDestinationSettings"}
-	if len(s.DestinationType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("DestinationType"))
-	}
 	if s.BurninDestinationSettings != nil {
 		if err := s.BurninDestinationSettings.Validate(); err != nil {
 			invalidParams.AddNested("BurninDestinationSettings", err.(aws.ErrInvalidParams))
@@ -2669,6 +2790,15 @@ func (s CaptionDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 type CaptionSelector struct {
 	_ struct{} `type:"structure"`
 
+	// The specific language to extract from source, using the ISO 639-2 or ISO
+	// 639-3 three-letter language code. If input is SCTE-27, complete this field
+	// and/or PID to select the caption language to extract. If input is DVB-Sub
+	// and output is Burn-in or SMPTE-TT, complete this field and/or PID to select
+	// the caption language to extract. If input is DVB-Sub that is being passed
+	// through, omit this field (and PID field); there is no way to extract a specific
+	// language with pass-through captions.
+	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+
 	// The specific language to extract from source. If input is SCTE-27, complete
 	// this field and/or PID to select the caption language to extract. If input
 	// is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or
@@ -2679,9 +2809,7 @@ type CaptionSelector struct {
 
 	// Source settings (SourceSettings) contains the group of settings for captions
 	// in the input.
-	//
-	// SourceSettings is a required field
-	SourceSettings *CaptionSourceSettings `locationName:"sourceSettings" type:"structure" required:"true"`
+	SourceSettings *CaptionSourceSettings `locationName:"sourceSettings" type:"structure"`
 }
 
 // String returns the string representation
@@ -2697,9 +2825,8 @@ func (s CaptionSelector) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionSelector) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionSelector"}
-
-	if s.SourceSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceSettings"))
+	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
 	}
 	if s.SourceSettings != nil {
 		if err := s.SourceSettings.Validate(); err != nil {
@@ -2715,6 +2842,12 @@ func (s *CaptionSelector) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CaptionSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomLanguageCode != nil {
+		v := *s.CustomLanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customLanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 
@@ -2750,9 +2883,7 @@ type CaptionSourceSettings struct {
 
 	// Use Source (SourceType) to identify the format of your input captions. The
 	// service cannot auto-detect caption format.
-	//
-	// SourceType is a required field
-	SourceType CaptionSourceType `locationName:"sourceType" type:"string" required:"true" enum:"true"`
+	SourceType CaptionSourceType `locationName:"sourceType" type:"string" enum:"true"`
 
 	// Settings specific to Teletext caption sources, including Page number.
 	TeletextSourceSettings *TeletextSourceSettings `locationName:"teletextSourceSettings" type:"structure"`
@@ -2771,9 +2902,6 @@ func (s CaptionSourceSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CaptionSourceSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CaptionSourceSettings"}
-	if len(s.SourceType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("SourceType"))
-	}
 	if s.AncillarySourceSettings != nil {
 		if err := s.AncillarySourceSettings.Validate(); err != nil {
 			invalidParams.AddNested("AncillarySourceSettings", err.(aws.ErrInvalidParams))
@@ -2856,9 +2984,7 @@ type ChannelMapping struct {
 	_ struct{} `type:"structure"`
 
 	// List of output channels
-	//
-	// OutputChannels is a required field
-	OutputChannels []OutputChannelMapping `locationName:"outputChannels" type:"list" required:"true"`
+	OutputChannels []OutputChannelMapping `locationName:"outputChannels" type:"list"`
 }
 
 // String returns the string representation
@@ -2869,27 +2995,6 @@ func (s ChannelMapping) String() string {
 // GoString returns the string representation
 func (s ChannelMapping) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ChannelMapping) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ChannelMapping"}
-
-	if s.OutputChannels == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputChannels"))
-	}
-	if s.OutputChannels != nil {
-		for i, v := range s.OutputChannels {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputChannels", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -2929,14 +3034,10 @@ type CmafEncryptionSettings struct {
 	InitializationVectorInManifest CmafInitializationVectorInManifest `locationName:"initializationVectorInManifest" type:"string" enum:"true"`
 
 	// Settings for use with a SPEKE key provider.
-	//
-	// StaticKeyProvider is a required field
-	StaticKeyProvider *StaticKeyProvider `locationName:"staticKeyProvider" type:"structure" required:"true"`
+	StaticKeyProvider *StaticKeyProvider `locationName:"staticKeyProvider" type:"structure"`
 
 	// Indicates which type of key provider is used for encryption.
-	//
-	// Type is a required field
-	Type CmafKeyProviderType `locationName:"type" type:"string" required:"true" enum:"true"`
+	Type CmafKeyProviderType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2954,18 +3055,6 @@ func (s *CmafEncryptionSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CmafEncryptionSettings"}
 	if s.ConstantInitializationVector != nil && len(*s.ConstantInitializationVector) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConstantInitializationVector", 32))
-	}
-
-	if s.StaticKeyProvider == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticKeyProvider"))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-	if s.StaticKeyProvider != nil {
-		if err := s.StaticKeyProvider.Validate(); err != nil {
-			invalidParams.AddNested("StaticKeyProvider", err.(aws.ErrInvalidParams))
-		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3010,7 +3099,8 @@ func (s CmafEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
-// CMAF_GROUP_SETTINGS.
+// CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain
+// a single video, audio, or caption output.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafGroupSettings
 type CmafGroupSettings struct {
 	_ struct{} `type:"structure"`
@@ -3044,9 +3134,7 @@ type CmafGroupSettings struct {
 	// Emit Single File is checked, the fragmentation is internal to a single output
 	// file and it does not cause the creation of many output files as in other
 	// output types.
-	//
-	// FragmentLength is a required field
-	FragmentLength *int64 `locationName:"fragmentLength" min:"1" type:"integer" required:"true"`
+	FragmentLength *int64 `locationName:"fragmentLength" min:"1" type:"integer"`
 
 	// When set to GZIP, compresses HLS playlist.
 	ManifestCompression CmafManifestCompression `locationName:"manifestCompression" type:"string" enum:"true"`
@@ -3058,6 +3146,19 @@ type CmafGroupSettings struct {
 	// Minimum time of initially buffered media that is needed to ensure smooth
 	// playout.
 	MinBufferTime *int64 `locationName:"minBufferTime" type:"integer"`
+
+	// Keep this setting at the default value of 0, unless you are troubleshooting
+	// a problem with how devices play back the end of your video asset. If you
+	// know that player devices are hanging on the final segment of your video because
+	// the length of your final segment is too short, use this setting to specify
+	// a minimum final segment length, in seconds. Choose a value that is greater
+	// than or equal to 1 and less than your segment length. When you specify a
+	// value for this setting, the encoder will combine any final segment that is
+	// shorter than the length that you specify with the previous segment. For example,
+	// your segment length is 3 seconds and your final segment is .5 seconds without
+	// a minimum final segment length; when you set the minimum final segment length
+	// to 1, your final segment is 3.5 seconds.
+	MinFinalSegmentLength *float64 `locationName:"minFinalSegmentLength" type:"double"`
 
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES,
@@ -3072,9 +3173,7 @@ type CmafGroupSettings struct {
 	// puts the content of each output in a single file that has metadata that marks
 	// these segments. If you set it to segmented files, the service creates multiple
 	// files for each output, each with the content of one segment.
-	//
-	// SegmentLength is a required field
-	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer" required:"true"`
+	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
 
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag
 	// of variant manifest.
@@ -3100,16 +3199,8 @@ func (s CmafGroupSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CmafGroupSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CmafGroupSettings"}
-
-	if s.FragmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FragmentLength"))
-	}
 	if s.FragmentLength != nil && *s.FragmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FragmentLength", 1))
-	}
-
-	if s.SegmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentLength"))
 	}
 	if s.SegmentLength != nil && *s.SegmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("SegmentLength", 1))
@@ -3181,6 +3272,12 @@ func (s CmafGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minBufferTime", protocol.Int64Value(v), metadata)
+	}
+	if s.MinFinalSegmentLength != nil {
+		v := *s.MinFinalSegmentLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minFinalSegmentLength", protocol.Float64Value(v), metadata)
 	}
 	if len(s.SegmentControl) > 0 {
 		v := s.SegmentControl
@@ -3274,11 +3371,6 @@ func (s *ColorCorrector) Validate() error {
 	if s.Saturation != nil && *s.Saturation < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Saturation", 1))
 	}
-	if s.Hdr10Metadata != nil {
-		if err := s.Hdr10Metadata.Validate(); err != nil {
-			invalidParams.AddNested("Hdr10Metadata", err.(aws.ErrInvalidParams))
-		}
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3334,9 +3426,7 @@ type ContainerSettings struct {
 
 	// Container for this output. Some containers require a container settings object.
 	// If not specified, the default object will be created.
-	//
-	// Container is a required field
-	Container ContainerType `locationName:"container" type:"string" required:"true" enum:"true"`
+	Container ContainerType `locationName:"container" type:"string" enum:"true"`
 
 	// Settings for F4v container
 	F4vSettings *F4vSettings `locationName:"f4vSettings" type:"structure"`
@@ -3367,9 +3457,6 @@ func (s ContainerSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerSettings"}
-	if len(s.Container) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Container"))
-	}
 	if s.M2tsSettings != nil {
 		if err := s.M2tsSettings.Validate(); err != nil {
 			invalidParams.AddNested("M2tsSettings", err.(aws.ErrInvalidParams))
@@ -3433,6 +3520,13 @@ func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobRequest
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
+
+	// Optional. Choose a tag type that AWS Billing and Cost Management will use
+	// to sort your AWS Elemental MediaConvert costs on any billing report that
+	// you set up. Any transcoding outputs that don't have an associated tag will
+	// appear in your billing report unsorted. If you don't choose a valid value
+	// for this field, your job outputs will appear on the billing report unsorted.
+	BillingTagsSource BillingTagsSource `locationName:"billingTagsSource" type:"string" enum:"true"`
 
 	// Idempotency token for CreateJob operation.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
@@ -3499,6 +3593,12 @@ func (s *CreateJobInput) Validate() error {
 func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if len(s.BillingTagsSource) > 0 {
+		v := s.BillingTagsSource
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingTagsSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	var ClientRequestToken string
 	if s.ClientRequestToken != nil {
 		ClientRequestToken = *s.ClientRequestToken
@@ -3615,6 +3715,10 @@ type CreateJobTemplateInput struct {
 	//
 	// Settings is a required field
 	Settings *JobTemplateSettings `locationName:"settings" type:"structure" required:"true"`
+
+	// The tags that you want to add to the resource. You can tag resources with
+	// a key-value pair or with only a key.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -3684,6 +3788,18 @@ func (s CreateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
@@ -3746,6 +3862,10 @@ type CreatePresetInput struct {
 	//
 	// Settings is a required field
 	Settings *PresetSettings `locationName:"settings" type:"structure" required:"true"`
+
+	// The tags that you want to add to the resource. You can tag resources with
+	// a key-value pair or with only a key.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -3809,6 +3929,18 @@ func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "settings", v, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
@@ -3855,13 +3987,29 @@ func (s CreatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateQueueInput struct {
 	_ struct{} `type:"structure"`
 
-	// Optional. A description of the queue you are creating.
+	// Optional. A description of the queue that you are creating.
 	Description *string `locationName:"description" type:"string"`
 
-	// The name of the queue you are creating.
+	// The name of the queue that you are creating.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// Optional; default is on-demand. Specifies whether the pricing plan for the
+	// queue is on-demand or reserved. The pricing plan for the queue determines
+	// whether you pay on-demand or reserved pricing for the transcoding jobs you
+	// run through the queue. For reserved queue pricing, you must set up a contract.
+	// You can create a reserved queue contract through the AWS Elemental MediaConvert
+	// console.
+	PricingPlan PricingPlan `locationName:"pricingPlan" type:"string" enum:"true"`
+
+	// Details about the pricing plan for your reserved queue. Required for reserved
+	// queues and not applicable to on-demand queues.
+	ReservationPlanSettings *ReservationPlanSettings `locationName:"reservationPlanSettings" type:"structure"`
+
+	// The tags that you want to add to the resource. You can tag resources with
+	// a key-value pair or with only a key.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -3880,6 +4028,11 @@ func (s *CreateQueueInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.ReservationPlanSettings != nil {
+		if err := s.ReservationPlanSettings.Validate(); err != nil {
+			invalidParams.AddNested("ReservationPlanSettings", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3904,10 +4057,34 @@ func (s CreateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.PricingPlan) > 0 {
+		v := s.PricingPlan
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pricingPlan", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ReservationPlanSettings != nil {
+		v := s.ReservationPlanSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "reservationPlanSettings", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
-// Successful create queue requests will return the name of the queue you just
+// Successful create queue requests return the name of the queue that you just
 // created and information about it.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueueResponse
 type CreateQueueOutput struct {
@@ -3915,9 +4092,10 @@ type CreateQueueOutput struct {
 
 	responseMetadata aws.Response
 
-	// MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs
-	// are submitted to a built-in default queue. User can create additional queues
-	// to separate the jobs of different categories or priority.
+	// You can use queues to manage the resources that are available to your AWS
+	// account for running multiple transcoding jobs at the same time. If you don't
+	// specify a queue, the service sends all jobs through the default queue. For
+	// more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
 	Queue *Queue `locationName:"queue" type:"structure"`
 }
 
@@ -3953,9 +4131,7 @@ type DashIsoEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
 	// Settings for use with a SPEKE key provider
-	//
-	// SpekeKeyProvider is a required field
-	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure" required:"true"`
+	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 }
 
 // String returns the string representation
@@ -3966,25 +4142,6 @@ func (s DashIsoEncryptionSettings) String() string {
 // GoString returns the string representation
 func (s DashIsoEncryptionSettings) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DashIsoEncryptionSettings) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DashIsoEncryptionSettings"}
-
-	if s.SpekeKeyProvider == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpekeKeyProvider"))
-	}
-	if s.SpekeKeyProvider != nil {
-		if err := s.SpekeKeyProvider.Validate(); err != nil {
-			invalidParams.AddNested("SpekeKeyProvider", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -4025,9 +4182,7 @@ type DashIsoGroupSettings struct {
 	// Emit Single File is checked, the fragmentation is internal to a single output
 	// file and it does not cause the creation of many output files as in other
 	// output types.
-	//
-	// FragmentLength is a required field
-	FragmentLength *int64 `locationName:"fragmentLength" min:"1" type:"integer" required:"true"`
+	FragmentLength *int64 `locationName:"fragmentLength" min:"1" type:"integer"`
 
 	// Supports HbbTV specification as indicated
 	HbbtvCompliance DashIsoHbbtvCompliance `locationName:"hbbtvCompliance" type:"string" enum:"true"`
@@ -4046,9 +4201,11 @@ type DashIsoGroupSettings struct {
 	// may be longer. When Emit Single File is checked, the segmentation is internal
 	// to a single output file and it does not cause the creation of many output
 	// files as in other output types.
-	//
-	// SegmentLength is a required field
-	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer" required:"true"`
+	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
+
+	// When ENABLED, segment durations are indicated in the manifest using SegmentTimeline
+	// and SegmentTimeline will be promoted down into Representation from AdaptationSet.
+	WriteSegmentTimelineInRepresentation DashIsoWriteSegmentTimelineInRepresentation `locationName:"writeSegmentTimelineInRepresentation" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -4064,24 +4221,11 @@ func (s DashIsoGroupSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DashIsoGroupSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DashIsoGroupSettings"}
-
-	if s.FragmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FragmentLength"))
-	}
 	if s.FragmentLength != nil && *s.FragmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FragmentLength", 1))
 	}
-
-	if s.SegmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentLength"))
-	}
 	if s.SegmentLength != nil && *s.SegmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("SegmentLength", 1))
-	}
-	if s.Encryption != nil {
-		if err := s.Encryption.Validate(); err != nil {
-			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
-		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4139,6 +4283,12 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "segmentLength", protocol.Int64Value(v), metadata)
+	}
+	if len(s.WriteSegmentTimelineInRepresentation) > 0 {
+		v := s.WriteSegmentTimelineInRepresentation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "writeSegmentTimelineInRepresentation", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -4359,7 +4509,7 @@ func (s DeletePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Delete a queue by sending a request with the queue name
+// Delete a queue by sending a request with the queue name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteQueueRequest
 type DeleteQueueInput struct {
 	_ struct{} `type:"structure"`
@@ -4407,8 +4557,8 @@ func (s DeleteQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Delete queue requests will return an OK message or error message with an
-// empty body.
+// Delete queue requests return an OK message or error message with an empty
+// body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DeleteQueueResponse
 type DeleteQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -4446,6 +4596,12 @@ type DescribeEndpointsInput struct {
 	// one time.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
+	// Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to
+	// return your endpoints if any exist, or to create an endpoint for you and
+	// return it if one doesn't already exist. Specify GET_ONLY to return your endpoints
+	// if any exist, or an empty list if none exist.
+	Mode DescribeEndpointsMode `locationName:"mode" type:"string" enum:"true"`
+
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of endpoints.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -4470,6 +4626,12 @@ func (s DescribeEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Mode) > 0 {
+		v := s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
@@ -4539,21 +4701,15 @@ type DvbNitSettings struct {
 	_ struct{} `type:"structure"`
 
 	// The numeric value placed in the Network Information Table (NIT).
-	//
-	// NetworkId is a required field
-	NetworkId *int64 `locationName:"networkId" type:"integer" required:"true"`
+	NetworkId *int64 `locationName:"networkId" type:"integer"`
 
 	// The network name text placed in the network_name_descriptor inside the Network
 	// Information Table. Maximum length is 256 characters.
-	//
-	// NetworkName is a required field
-	NetworkName *string `locationName:"networkName" min:"1" type:"string" required:"true"`
+	NetworkName *string `locationName:"networkName" min:"1" type:"string"`
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	//
-	// NitInterval is a required field
-	NitInterval *int64 `locationName:"nitInterval" min:"25" type:"integer" required:"true"`
+	NitInterval *int64 `locationName:"nitInterval" min:"25" type:"integer"`
 }
 
 // String returns the string representation
@@ -4569,20 +4725,8 @@ func (s DvbNitSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DvbNitSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DvbNitSettings"}
-
-	if s.NetworkId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkId"))
-	}
-
-	if s.NetworkName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NetworkName"))
-	}
 	if s.NetworkName != nil && len(*s.NetworkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NetworkName", 1))
-	}
-
-	if s.NitInterval == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NitInterval"))
 	}
 	if s.NitInterval != nil && *s.NitInterval < 25 {
 		invalidParams.Add(aws.NewErrParamMinValue("NitInterval", 25))
@@ -4715,9 +4859,7 @@ type DvbSubDestinationSettings struct {
 	// This option is not valid for source captions that are STL, 608/embedded or
 	// teletext. These source settings are already pre-defined by the caption stream.
 	// All burn-in and DVB-Sub font settings must match.
-	//
-	// Alignment is a required field
-	Alignment DvbSubtitleAlignment `locationName:"alignment" type:"string" required:"true" enum:"true"`
+	Alignment DvbSubtitleAlignment `locationName:"alignment" type:"string" enum:"true"`
 
 	// Specifies the color of the rectangle behind the captions.All burn-in and
 	// DVB-Sub font settings must match.
@@ -4736,9 +4878,7 @@ type DvbSubDestinationSettings struct {
 
 	// Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.All
 	// burn-in and DVB-Sub font settings must match.
-	//
-	// FontOpacity is a required field
-	FontOpacity *int64 `locationName:"fontOpacity" type:"integer" required:"true"`
+	FontOpacity *int64 `locationName:"fontOpacity" type:"integer"`
 
 	// Font resolution in DPI (dots per inch); default is 96 dpi.All burn-in and
 	// DVB-Sub font settings must match.
@@ -4753,17 +4893,13 @@ type DvbSubDestinationSettings struct {
 	// that are either 608/embedded or teletext. These source settings are already
 	// pre-defined by the caption stream. All burn-in and DVB-Sub font settings
 	// must match.
-	//
-	// OutlineColor is a required field
-	OutlineColor DvbSubtitleOutlineColor `locationName:"outlineColor" type:"string" required:"true" enum:"true"`
+	OutlineColor DvbSubtitleOutlineColor `locationName:"outlineColor" type:"string" enum:"true"`
 
 	// Specifies font outline size in pixels. This option is not valid for source
 	// captions that are either 608/embedded or teletext. These source settings
 	// are already pre-defined by the caption stream. All burn-in and DVB-Sub font
 	// settings must match.
-	//
-	// OutlineSize is a required field
-	OutlineSize *int64 `locationName:"outlineSize" type:"integer" required:"true"`
+	OutlineSize *int64 `locationName:"outlineSize" type:"integer"`
 
 	// Specifies the color of the shadow cast by the captions.All burn-in and DVB-Sub
 	// font settings must match.
@@ -4823,22 +4959,8 @@ func (s DvbSubDestinationSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DvbSubDestinationSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DvbSubDestinationSettings"}
-	if len(s.Alignment) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Alignment"))
-	}
-
-	if s.FontOpacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FontOpacity"))
-	}
 	if s.FontResolution != nil && *s.FontResolution < 96 {
 		invalidParams.Add(aws.NewErrParamMinValue("FontResolution", 96))
-	}
-	if len(s.OutlineColor) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("OutlineColor"))
-	}
-
-	if s.OutlineSize == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutlineSize"))
 	}
 	if s.ShadowXOffset != nil && *s.ShadowXOffset < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("ShadowXOffset", -2.147483648e+09))
@@ -5006,9 +5128,7 @@ type DvbTdtSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
-	//
-	// TdtInterval is a required field
-	TdtInterval *int64 `locationName:"tdtInterval" min:"1000" type:"integer" required:"true"`
+	TdtInterval *int64 `locationName:"tdtInterval" min:"1000" type:"integer"`
 }
 
 // String returns the string representation
@@ -5024,10 +5144,6 @@ func (s DvbTdtSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DvbTdtSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DvbTdtSettings"}
-
-	if s.TdtInterval == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TdtInterval"))
-	}
 	if s.TdtInterval != nil && *s.TdtInterval < 1000 {
 		invalidParams.Add(aws.NewErrParamMinValue("TdtInterval", 1000))
 	}
@@ -5365,7 +5481,7 @@ func (s EmbeddedSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes account specific API endpoint
+// Describes an account-specific API endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Endpoint
 type Endpoint struct {
 	_ struct{} `type:"structure"`
@@ -5474,9 +5590,7 @@ type FileSourceSettings struct {
 
 	// External caption file used for loading captions. Accepted file extensions
 	// are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'.
-	//
-	// SourceFile is a required field
-	SourceFile *string `locationName:"sourceFile" min:"14" type:"string" required:"true"`
+	SourceFile *string `locationName:"sourceFile" min:"14" type:"string"`
 
 	// Specifies a time delta in seconds to offset the captions from the source
 	// file.
@@ -5496,10 +5610,6 @@ func (s FileSourceSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FileSourceSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FileSourceSettings"}
-
-	if s.SourceFile == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SourceFile"))
-	}
 	if s.SourceFile != nil && len(*s.SourceFile) < 14 {
 		invalidParams.Add(aws.NewErrParamMinLen("SourceFile", 14))
 	}
@@ -5885,12 +5995,12 @@ func (s GetPresetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Query a queue by sending a request with the queue name.
+// Get information about a queue by sending a request with the queue name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueRequest
 type GetQueueInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the queue.
+	// The name of the queue that you want information about.
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
@@ -5933,16 +6043,18 @@ func (s GetQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Successful get queue requests will return an OK message and the queue JSON.
+// Successful get queue requests return an OK message and information about
+// the queue in JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueueResponse
 type GetQueueOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs
-	// are submitted to a built-in default queue. User can create additional queues
-	// to separate the jobs of different categories or priority.
+	// You can use queues to manage the resources that are available to your AWS
+	// account for running multiple transcoding jobs at the same time. If you don't
+	// specify a queue, the service sends all jobs through the default queue. For
+	// more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
 	Queue *Queue `locationName:"queue" type:"structure"`
 }
 
@@ -5972,6 +6084,73 @@ func (s GetQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings for quality-defined variable bitrate encoding with the H.264 codec.
+// Required when you set Rate control mode to QVBR. Not valid when you set Rate
+// control mode to a value other than QVBR, or when you don't define Rate control
+// mode.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H264QvbrSettings
+type H264QvbrSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Use this setting only when Rate control mode is QVBR and Quality tuning level
+	// is Multi-pass HQ. For Max average bitrate values suited to the complexity
+	// of your input video, the service limits the average bitrate of the video
+	// part of this output to the value you choose. That is, the total size of the
+	// video element is less than or equal to the value you set multiplied by the
+	// number of seconds of encoded output.
+	MaxAverageBitrate *int64 `locationName:"maxAverageBitrate" min:"1000" type:"integer"`
+
+	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
+	// within h264Settings. Specify the target quality level for this output, from
+	// 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly
+	// lossless compression. The quality level for most broadcast-quality transcodes
+	// is between 6 and 9.
+	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s H264QvbrSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s H264QvbrSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *H264QvbrSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "H264QvbrSettings"}
+	if s.MaxAverageBitrate != nil && *s.MaxAverageBitrate < 1000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxAverageBitrate", 1000))
+	}
+	if s.QvbrQualityLevel != nil && *s.QvbrQualityLevel < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("QvbrQualityLevel", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H264QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxAverageBitrate != nil {
+		v := *s.MaxAverageBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxAverageBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevel != nil {
+		v := *s.QvbrQualityLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 // the value H_264.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H264Settings
@@ -5992,6 +6171,13 @@ type H264Settings struct {
 	// H.264 Profile. High 4:2:2 and 10-bit profiles are only available with the
 	// AVC-I License.
 	CodecProfile H264CodecProfile `locationName:"codecProfile" type:"string" enum:"true"`
+
+	// Choose Adaptive to improve subjective video quality for high-motion content.
+	// This will cause the service to use fewer B-frames (which infer information
+	// based on other frames) for high-motion portions of the video and more B-frames
+	// for low-motion portions. The maximum number of B-frames is limited by the
+	// value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+	DynamicSubGop H264DynamicSubGop `locationName:"dynamicSubGop" type:"string" enum:"true"`
 
 	// Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
 	EntropyEncoding H264EntropyEncoding `locationName:"entropyEncoding" type:"string" enum:"true"`
@@ -6068,7 +6254,7 @@ type H264Settings struct {
 	InterlaceMode H264InterlaceMode `locationName:"interlaceMode" type:"string" enum:"true"`
 
 	// Maximum bitrate in bits/second. For example, enter five megabits per second
-	// as 5000000.
+	// as 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
 
 	// Enforces separation between repeated (cadence) I-frames and I-frames inserted
@@ -6103,8 +6289,14 @@ type H264Settings struct {
 	// video encoding.
 	QualityTuningLevel H264QualityTuningLevel `locationName:"qualityTuningLevel" type:"string" enum:"true"`
 
-	// Use this setting to specify whether this output has a variable bitrate (VBR)
-	// or constant bitrate (CBR).
+	// Settings for quality-defined variable bitrate encoding with the H.264 codec.
+	// Required when you set Rate control mode to QVBR. Not valid when you set Rate
+	// control mode to a value other than QVBR, or when you don't define Rate control
+	// mode.
+	QvbrSettings *H264QvbrSettings `locationName:"qvbrSettings" type:"structure"`
+
+	// Use this setting to specify whether this output has a variable bitrate (VBR),
+	// constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
 	RateControlMode H264RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
 
 	// Places a PPS header on each encoded picture, even if repeated.
@@ -6187,6 +6379,11 @@ func (s *H264Settings) Validate() error {
 	if s.Slices != nil && *s.Slices < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Slices", 1))
 	}
+	if s.QvbrSettings != nil {
+		if err := s.QvbrSettings.Validate(); err != nil {
+			invalidParams.AddNested("QvbrSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6219,6 +6416,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.DynamicSubGop) > 0 {
+		v := s.DynamicSubGop
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dynamicSubGop", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.EntropyEncoding) > 0 {
 		v := s.EntropyEncoding
@@ -6352,6 +6555,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.QvbrSettings != nil {
+		v := s.QvbrSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "qvbrSettings", v, metadata)
+	}
 	if len(s.RateControlMode) > 0 {
 		v := s.RateControlMode
 
@@ -6421,6 +6630,73 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings for quality-defined variable bitrate encoding with the H.265 codec.
+// Required when you set Rate control mode to QVBR. Not valid when you set Rate
+// control mode to a value other than QVBR, or when you don't define Rate control
+// mode.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265QvbrSettings
+type H265QvbrSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Use this setting only when Rate control mode is QVBR and Quality tuning level
+	// is Multi-pass HQ. For Max average bitrate values suited to the complexity
+	// of your input video, the service limits the average bitrate of the video
+	// part of this output to the value you choose. That is, the total size of the
+	// video element is less than or equal to the value you set multiplied by the
+	// number of seconds of encoded output.
+	MaxAverageBitrate *int64 `locationName:"maxAverageBitrate" min:"1000" type:"integer"`
+
+	// Required when you use QVBR rate control mode. That is, when you specify qvbrSettings
+	// within h265Settings. Specify the target quality level for this output, from
+	// 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly
+	// lossless compression. The quality level for most broadcast-quality transcodes
+	// is between 6 and 9.
+	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s H265QvbrSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s H265QvbrSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *H265QvbrSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "H265QvbrSettings"}
+	if s.MaxAverageBitrate != nil && *s.MaxAverageBitrate < 1000 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxAverageBitrate", 1000))
+	}
+	if s.QvbrQualityLevel != nil && *s.QvbrQualityLevel < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("QvbrQualityLevel", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s H265QvbrSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxAverageBitrate != nil {
+		v := *s.MaxAverageBitrate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxAverageBitrate", protocol.Int64Value(v), metadata)
+	}
+	if s.QvbrQualityLevel != nil {
+		v := *s.QvbrQualityLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "qvbrQualityLevel", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Settings for H265 codec
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265Settings
 type H265Settings struct {
@@ -6445,6 +6721,13 @@ type H265Settings struct {
 	// are grouped as [Profile] / [Tier], so "Main/High" represents Main Profile
 	// with High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License.
 	CodecProfile H265CodecProfile `locationName:"codecProfile" type:"string" enum:"true"`
+
+	// Choose Adaptive to improve subjective video quality for high-motion content.
+	// This will cause the service to use fewer B-frames (which infer information
+	// based on other frames) for high-motion portions of the video and more B-frames
+	// for low-motion portions. The maximum number of B-frames is limited by the
+	// value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+	DynamicSubGop H265DynamicSubGop `locationName:"dynamicSubGop" type:"string" enum:"true"`
 
 	// Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
 	FlickerAdaptiveQuantization H265FlickerAdaptiveQuantization `locationName:"flickerAdaptiveQuantization" type:"string" enum:"true"`
@@ -6509,7 +6792,8 @@ type H265Settings struct {
 	// on which of the Follow options you chose.
 	InterlaceMode H265InterlaceMode `locationName:"interlaceMode" type:"string" enum:"true"`
 
-	// Maximum bitrate in bits/second.
+	// Maximum bitrate in bits/second. For example, enter five megabits per second
+	// as 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
 
 	// Enforces separation between repeated (cadence) I-frames and I-frames inserted
@@ -6544,8 +6828,14 @@ type H265Settings struct {
 	// video encoding.
 	QualityTuningLevel H265QualityTuningLevel `locationName:"qualityTuningLevel" type:"string" enum:"true"`
 
-	// Use this setting to specify whether this output has a variable bitrate (VBR)
-	// or constant bitrate (CBR).
+	// Settings for quality-defined variable bitrate encoding with the H.265 codec.
+	// Required when you set Rate control mode to QVBR. Not valid when you set Rate
+	// control mode to a value other than QVBR, or when you don't define Rate control
+	// mode.
+	QvbrSettings *H265QvbrSettings `locationName:"qvbrSettings" type:"structure"`
+
+	// Use this setting to specify whether this output has a variable bitrate (VBR),
+	// constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
 	RateControlMode H265RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
 
 	// Specify Sample Adaptive Offset (SAO) filter strength. Adaptive mode dynamically
@@ -6642,6 +6932,11 @@ func (s *H265Settings) Validate() error {
 	if s.Slices != nil && *s.Slices < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Slices", 1))
 	}
+	if s.QvbrSettings != nil {
+		if err := s.QvbrSettings.Validate(); err != nil {
+			invalidParams.AddNested("QvbrSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6680,6 +6975,12 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.DynamicSubGop) > 0 {
+		v := s.DynamicSubGop
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dynamicSubGop", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FlickerAdaptiveQuantization) > 0 {
 		v := s.FlickerAdaptiveQuantization
@@ -6801,6 +7102,12 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.QvbrSettings != nil {
+		v := s.QvbrSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "qvbrSettings", v, metadata)
+	}
 	if len(s.RateControlMode) > 0 {
 		v := s.RateControlMode
 
@@ -6909,15 +7216,11 @@ type Hdr10Metadata struct {
 
 	// Maximum light level among all samples in the coded video sequence, in units
 	// of candelas per square meter.
-	//
-	// MaxContentLightLevel is a required field
-	MaxContentLightLevel *int64 `locationName:"maxContentLightLevel" type:"integer" required:"true"`
+	MaxContentLightLevel *int64 `locationName:"maxContentLightLevel" type:"integer"`
 
 	// Maximum average light level of any frame in the coded video sequence, in
 	// units of candelas per square meter.
-	//
-	// MaxFrameAverageLightLevel is a required field
-	MaxFrameAverageLightLevel *int64 `locationName:"maxFrameAverageLightLevel" type:"integer" required:"true"`
+	MaxFrameAverageLightLevel *int64 `locationName:"maxFrameAverageLightLevel" type:"integer"`
 
 	// Nominal maximum mastering display luminance in units of of 0.0001 candelas
 	// per square meter.
@@ -6956,24 +7259,6 @@ func (s Hdr10Metadata) String() string {
 // GoString returns the string representation
 func (s Hdr10Metadata) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *Hdr10Metadata) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "Hdr10Metadata"}
-
-	if s.MaxContentLightLevel == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxContentLightLevel"))
-	}
-
-	if s.MaxFrameAverageLightLevel == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MaxFrameAverageLightLevel"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -7061,8 +7346,11 @@ type HlsCaptionLanguageMapping struct {
 	// Caption channel.
 	CaptionChannel *int64 `locationName:"captionChannel" type:"integer"`
 
-	// Code to specify the language, following the specification "ISO 639-2 three-digit
-	// code":http://www.loc.gov/standards/iso639-2/
+	// Specify the language for this caption channel, using the ISO 639-2 or ISO
+	// 639-3 three-letter language code
+	CustomLanguageCode *string `locationName:"customLanguageCode" min:"3" type:"string"`
+
+	// Specify the language, using the ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php.
 	LanguageCode LanguageCode `locationName:"languageCode" type:"string" enum:"true"`
 
 	// Caption language description.
@@ -7085,6 +7373,9 @@ func (s *HlsCaptionLanguageMapping) Validate() error {
 	if s.CaptionChannel != nil && *s.CaptionChannel < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("CaptionChannel", -2.147483648e+09))
 	}
+	if s.CustomLanguageCode != nil && len(*s.CustomLanguageCode) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("CustomLanguageCode", 3))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7099,6 +7390,12 @@ func (s HlsCaptionLanguageMapping) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "captionChannel", protocol.Int64Value(v), metadata)
+	}
+	if s.CustomLanguageCode != nil {
+		v := *s.CustomLanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customLanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
@@ -7141,9 +7438,7 @@ type HlsEncryptionSettings struct {
 	StaticKeyProvider *StaticKeyProvider `locationName:"staticKeyProvider" type:"structure"`
 
 	// Indicates which type of key provider is used for encryption.
-	//
-	// Type is a required field
-	Type HlsKeyProviderType `locationName:"type" type:"string" required:"true" enum:"true"`
+	Type HlsKeyProviderType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -7161,19 +7456,6 @@ func (s *HlsEncryptionSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HlsEncryptionSettings"}
 	if s.ConstantInitializationVector != nil && len(*s.ConstantInitializationVector) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConstantInitializationVector", 32))
-	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
-	if s.SpekeKeyProvider != nil {
-		if err := s.SpekeKeyProvider.Validate(); err != nil {
-			invalidParams.AddNested("SpekeKeyProvider", err.(aws.ErrInvalidParams))
-		}
-	}
-	if s.StaticKeyProvider != nil {
-		if err := s.StaticKeyProvider.Validate(); err != nil {
-			invalidParams.AddNested("StaticKeyProvider", err.(aws.ErrInvalidParams))
-		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7280,12 +7562,23 @@ type HlsGroupSettings struct {
 	// segment duration.
 	ManifestDurationFormat HlsManifestDurationFormat `locationName:"manifestDurationFormat" type:"string" enum:"true"`
 
+	// Keep this setting at the default value of 0, unless you are troubleshooting
+	// a problem with how devices play back the end of your video asset. If you
+	// know that player devices are hanging on the final segment of your video because
+	// the length of your final segment is too short, use this setting to specify
+	// a minimum final segment length, in seconds. Choose a value that is greater
+	// than or equal to 1 and less than your segment length. When you specify a
+	// value for this setting, the encoder will combine any final segment that is
+	// shorter than the length that you specify with the previous segment. For example,
+	// your segment length is 3 seconds and your final segment is .5 seconds without
+	// a minimum final segment length; when you set the minimum final segment length
+	// to 1, your final segment is 3.5 seconds.
+	MinFinalSegmentLength *float64 `locationName:"minFinalSegmentLength" type:"double"`
+
 	// When set, Minimum Segment Size is enforced by looking ahead and back within
 	// the specified range for a nearby avail and extending the segment size if
 	// needed.
-	//
-	// MinSegmentLength is a required field
-	MinSegmentLength *int64 `locationName:"minSegmentLength" type:"integer" required:"true"`
+	MinSegmentLength *int64 `locationName:"minSegmentLength" type:"integer"`
 
 	// Indicates whether the .m3u8 manifest file should be generated for this HLS
 	// output group.
@@ -7307,9 +7600,7 @@ type HlsGroupSettings struct {
 	// Length of MPEG-2 Transport Stream segments to create (in seconds). Note that
 	// segments will end on the next keyframe after this number of seconds, so actual
 	// segment length may be longer.
-	//
-	// SegmentLength is a required field
-	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer" required:"true"`
+	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
 
 	// Number of segments to write to a subdirectory before starting a new one.
 	// directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
@@ -7342,14 +7633,6 @@ func (s HlsGroupSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HlsGroupSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HlsGroupSettings"}
-
-	if s.MinSegmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MinSegmentLength"))
-	}
-
-	if s.SegmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SegmentLength"))
-	}
 	if s.SegmentLength != nil && *s.SegmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("SegmentLength", 1))
 	}
@@ -7460,6 +7743,12 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "manifestDurationFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.MinFinalSegmentLength != nil {
+		v := *s.MinFinalSegmentLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minFinalSegmentLength", protocol.Float64Value(v), metadata)
 	}
 	if s.MinSegmentLength != nil {
 		v := *s.MinSegmentLength
@@ -7617,14 +7906,10 @@ type Id3Insertion struct {
 	_ struct{} `type:"structure"`
 
 	// Use ID3 tag (Id3) to provide a tag value in base64-encode format.
-	//
-	// Id3 is a required field
-	Id3 *string `locationName:"id3" type:"string" required:"true"`
+	Id3 *string `locationName:"id3" type:"string"`
 
 	// Provide a Timecode (TimeCode) in HH:MM:SS:FF or HH:MM:SS;FF format.
-	//
-	// Timecode is a required field
-	Timecode *string `locationName:"timecode" type:"string" required:"true"`
+	Timecode *string `locationName:"timecode" type:"string"`
 }
 
 // String returns the string representation
@@ -7635,24 +7920,6 @@ func (s Id3Insertion) String() string {
 // GoString returns the string representation
 func (s Id3Insertion) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *Id3Insertion) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "Id3Insertion"}
-
-	if s.Id3 == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id3"))
-	}
-
-	if s.Timecode == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Timecode"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -7681,9 +7948,7 @@ type ImageInserter struct {
 
 	// Image to insert. Must be 32 bit windows BMP, PNG, or TGA file. Must not be
 	// larger than the output frames.
-	//
-	// InsertableImages is a required field
-	InsertableImages []InsertableImage `locationName:"insertableImages" type:"list" required:"true"`
+	InsertableImages []InsertableImage `locationName:"insertableImages" type:"list"`
 }
 
 // String returns the string representation
@@ -7699,10 +7964,6 @@ func (s ImageInserter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImageInserter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImageInserter"}
-
-	if s.InsertableImages == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InsertableImages"))
-	}
 	if s.InsertableImages != nil {
 		for i, v := range s.InsertableImages {
 			if err := v.Validate(); err != nil {
@@ -7767,9 +8028,7 @@ type Input struct {
 	// Use Input (fileInput) to define the source file used in the transcode job.
 	// There can be multiple inputs in a job. These inputs are concantenated, in
 	// the order they are specified in the job, to create the output.
-	//
-	// FileInput is a required field
-	FileInput *string `locationName:"fileInput" type:"string" required:"true"`
+	FileInput *string `locationName:"fileInput" type:"string"`
 
 	// Use Filter enable (InputFilterEnable) to specify how the transcoding service
 	// applies the denoise and deblock filters. You must also enable the filters
@@ -7829,22 +8088,11 @@ func (s Input) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Input) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Input"}
-
-	if s.FileInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FileInput"))
-	}
 	if s.FilterStrength != nil && *s.FilterStrength < -5 {
 		invalidParams.Add(aws.NewErrParamMinValue("FilterStrength", -5))
 	}
 	if s.ProgramNumber != nil && *s.ProgramNumber < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProgramNumber", 1))
-	}
-	if s.AudioSelectorGroups != nil {
-		for i, v := range s.AudioSelectorGroups {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AudioSelectorGroups", i), err.(aws.ErrInvalidParams))
-			}
-		}
 	}
 	if s.AudioSelectors != nil {
 		for i, v := range s.AudioSelectors {
@@ -8129,13 +8377,6 @@ func (s *InputTemplate) Validate() error {
 	if s.ProgramNumber != nil && *s.ProgramNumber < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProgramNumber", 1))
 	}
-	if s.AudioSelectorGroups != nil {
-		for i, v := range s.AudioSelectorGroups {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AudioSelectorGroups", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
 	if s.AudioSelectors != nil {
 		for i, v := range s.AudioSelectors {
 			if err := v.Validate(); err != nil {
@@ -8290,35 +8531,25 @@ type InsertableImage struct {
 	// Use Image location (imageInserterInput) to specify the Amazon S3 location
 	// of the image to be inserted into the output. Use a 32 bit BMP, PNG, or TGA
 	// file that fits inside the video frame.
-	//
-	// ImageInserterInput is a required field
-	ImageInserterInput *string `locationName:"imageInserterInput" min:"14" type:"string" required:"true"`
+	ImageInserterInput *string `locationName:"imageInserterInput" min:"14" type:"string"`
 
 	// Use Left (ImageX) to set the distance, in pixels, between the inserted image
 	// and the left edge of the frame. Required for BMP, PNG and TGA input.
-	//
-	// ImageX is a required field
-	ImageX *int64 `locationName:"imageX" type:"integer" required:"true"`
+	ImageX *int64 `locationName:"imageX" type:"integer"`
 
 	// Use Top (ImageY) to set the distance, in pixels, between the inserted image
 	// and the top edge of the video frame. Required for BMP, PNG and TGA input.
-	//
-	// ImageY is a required field
-	ImageY *int64 `locationName:"imageY" type:"integer" required:"true"`
+	ImageY *int64 `locationName:"imageY" type:"integer"`
 
 	// Use Layer (Layer) to specify how overlapping inserted images appear. Images
 	// with higher values of layer appear on top of images with lower values of
 	// layer.
-	//
-	// Layer is a required field
-	Layer *int64 `locationName:"layer" type:"integer" required:"true"`
+	Layer *int64 `locationName:"layer" type:"integer"`
 
 	// Use Opacity (Opacity) to specify how much of the underlying video shows through
 	// the inserted image. 0 is transparent and 100 is fully opaque. Default is
 	// 50.
-	//
-	// Opacity is a required field
-	Opacity *int64 `locationName:"opacity" type:"integer" required:"true"`
+	Opacity *int64 `locationName:"opacity" type:"integer"`
 
 	// Use Start time (StartTime) to specify the video timecode when the image is
 	// inserted in the output. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF)
@@ -8356,34 +8587,14 @@ func (s *InsertableImage) Validate() error {
 	if s.Height != nil && *s.Height < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("Height", -2.147483648e+09))
 	}
-
-	if s.ImageInserterInput == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageInserterInput"))
-	}
 	if s.ImageInserterInput != nil && len(*s.ImageInserterInput) < 14 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageInserterInput", 14))
-	}
-
-	if s.ImageX == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageX"))
 	}
 	if s.ImageX != nil && *s.ImageX < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("ImageX", -2.147483648e+09))
 	}
-
-	if s.ImageY == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ImageY"))
-	}
 	if s.ImageY != nil && *s.ImageY < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("ImageY", -2.147483648e+09))
-	}
-
-	if s.Layer == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Layer"))
-	}
-
-	if s.Opacity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Opacity"))
 	}
 	if s.Width != nil && *s.Width < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("Width", -2.147483648e+09))
@@ -8475,6 +8686,13 @@ type Job struct {
 	// An identifier for this resource that is unique within all of AWS.
 	Arn *string `locationName:"arn" type:"string"`
 
+	// Optional. Choose a tag type that AWS Billing and Cost Management will use
+	// to sort your AWS Elemental MediaConvert costs on any billing report that
+	// you set up. Any transcoding outputs that don't have an associated tag will
+	// appear in your billing report unsorted. If you don't choose a valid value
+	// for this field, your job outputs will appear on the billing report unsorted.
+	BillingTagsSource BillingTagsSource `locationName:"billingTagsSource" type:"string" enum:"true"`
+
 	// The time, in Unix epoch format in seconds, when the job got created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
@@ -8540,6 +8758,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.BillingTagsSource) > 0 {
+		v := s.BillingTagsSource
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingTagsSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
@@ -8644,9 +8868,7 @@ type JobSettings struct {
 	// Use Inputs (inputs) to define source file used in the transcode job. There
 	// can be multiple inputs add in a job. These inputs will be concantenated together
 	// to create the output.
-	//
-	// Inputs is a required field
-	Inputs []Input `locationName:"inputs" type:"list" required:"true"`
+	Inputs []Input `locationName:"inputs" type:"list"`
 
 	// Settings for Nielsen Configuration
 	NielsenConfiguration *NielsenConfiguration `locationName:"nielsenConfiguration" type:"structure"`
@@ -8660,9 +8882,7 @@ type JobSettings struct {
 	// * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings
 	// * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS,
 	// CmafGroupSettings
-	//
-	// OutputGroups is a required field
-	OutputGroups []OutputGroup `locationName:"outputGroups" type:"list" required:"true"`
+	OutputGroups []OutputGroup `locationName:"outputGroups" type:"list"`
 
 	// Contains settings used to acquire and adjust timecode information from inputs.
 	TimecodeConfig *TimecodeConfig `locationName:"timecodeConfig" type:"structure"`
@@ -8690,14 +8910,6 @@ func (s *JobSettings) Validate() error {
 	if s.AdAvailOffset != nil && *s.AdAvailOffset < -1000 {
 		invalidParams.Add(aws.NewErrParamMinValue("AdAvailOffset", -1000))
 	}
-
-	if s.Inputs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Inputs"))
-	}
-
-	if s.OutputGroups == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputGroups"))
-	}
 	if s.AvailBlanking != nil {
 		if err := s.AvailBlanking.Validate(); err != nil {
 			invalidParams.AddNested("AvailBlanking", err.(aws.ErrInvalidParams))
@@ -8715,11 +8927,6 @@ func (s *JobSettings) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputGroups", i), err.(aws.ErrInvalidParams))
 			}
-		}
-	}
-	if s.TimedMetadataInsertion != nil {
-		if err := s.TimedMetadataInsertion.Validate(); err != nil {
-			invalidParams.AddNested("TimedMetadataInsertion", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8930,9 +9137,7 @@ type JobTemplateSettings struct {
 	// * HLS_GROUP_SETTINGS, HlsGroupSettings * DASH_ISO_GROUP_SETTINGS, DashIsoGroupSettings
 	// * MS_SMOOTH_GROUP_SETTINGS, MsSmoothGroupSettings * CMAF_GROUP_SETTINGS,
 	// CmafGroupSettings
-	//
-	// OutputGroups is a required field
-	OutputGroups []OutputGroup `locationName:"outputGroups" type:"list" required:"true"`
+	OutputGroups []OutputGroup `locationName:"outputGroups" type:"list"`
 
 	// Contains settings used to acquire and adjust timecode information from inputs.
 	TimecodeConfig *TimecodeConfig `locationName:"timecodeConfig" type:"structure"`
@@ -8960,10 +9165,6 @@ func (s *JobTemplateSettings) Validate() error {
 	if s.AdAvailOffset != nil && *s.AdAvailOffset < -1000 {
 		invalidParams.Add(aws.NewErrParamMinValue("AdAvailOffset", -1000))
 	}
-
-	if s.OutputGroups == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputGroups"))
-	}
 	if s.AvailBlanking != nil {
 		if err := s.AvailBlanking.Validate(); err != nil {
 			invalidParams.AddNested("AvailBlanking", err.(aws.ErrInvalidParams))
@@ -8981,11 +9182,6 @@ func (s *JobTemplateSettings) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputGroups", i), err.(aws.ErrInvalidParams))
 			}
-		}
-	}
-	if s.TimedMetadataInsertion != nil {
-		if err := s.TimedMetadataInsertion.Validate(); err != nil {
-			invalidParams.AddNested("TimedMetadataInsertion", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9073,7 +9269,7 @@ type ListJobTemplatesInput struct {
 
 	// Optional. Number of job templates, up to twenty, that will be returned at
 	// one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of job templates.
@@ -9092,6 +9288,19 @@ func (s ListJobTemplatesInput) String() string {
 // GoString returns the string representation
 func (s ListJobTemplatesInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListJobTemplatesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobTemplatesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -9132,7 +9341,7 @@ func (s ListJobTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Successful list job templates requests return a JSON array of job templates.
-// If you do not specify how they are ordered, you will receive them in alphabetical
+// If you don't specify how they are ordered, you will receive them in alphabetical
 // order by name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobTemplatesResponse
 type ListJobTemplatesOutput struct {
@@ -9194,7 +9403,7 @@ type ListJobsInput struct {
 	_ struct{} `type:"structure"`
 
 	// Optional. Number of jobs, up to twenty, that will be returned at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of jobs.
@@ -9219,6 +9428,19 @@ func (s ListJobsInput) String() string {
 // GoString returns the string representation
 func (s ListJobsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -9258,9 +9480,8 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Successful list jobs requests return a JSON array of jobs. If you do not
-// specify how they are ordered, you will receive the most recently created
-// first.
+// Successful list jobs requests return a JSON array of jobs. If you don't specify
+// how they are ordered, you will receive the most recently created first.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListJobsResponse
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9330,7 +9551,7 @@ type ListPresetsInput struct {
 	ListBy PresetListBy `location:"querystring" locationName:"listBy" type:"string" enum:"true"`
 
 	// Optional. Number of presets, up to twenty, that will be returned at one time
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of presets.
@@ -9349,6 +9570,19 @@ func (s ListPresetsInput) String() string {
 // GoString returns the string representation
 func (s ListPresetsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListPresetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListPresetsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -9388,9 +9622,8 @@ func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Successful list presets requests return a JSON array of presets. If you do
-// not specify how they are ordered, you will receive them alphabetically by
-// name.
+// Successful list presets requests return a JSON array of presets. If you don't
+// specify how they are ordered, you will receive them alphabetically by name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListPresetsResponse
 type ListPresetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -9454,7 +9687,7 @@ type ListQueuesInput struct {
 	ListBy QueueListBy `location:"querystring" locationName:"listBy" type:"string" enum:"true"`
 
 	// Optional. Number of queues, up to twenty, that will be returned at one time.
-	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of queues.
@@ -9473,6 +9706,19 @@ func (s ListQueuesInput) String() string {
 // GoString returns the string representation
 func (s ListQueuesInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListQueuesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListQueuesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -9506,7 +9752,7 @@ func (s ListQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Successful list queues return a JSON array of queues. If you do not specify
+// Successful list queues return a JSON array of queues. If you don't specify
 // how they are ordered, you will receive them alphabetically by name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueuesResponse
 type ListQueuesOutput struct {
@@ -9517,7 +9763,7 @@ type ListQueuesOutput struct {
 	// Use this string to request the next batch of queues.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// List of queues
+	// List of queues.
 	Queues []Queue `locationName:"queues" type:"list"`
 }
 
@@ -9555,6 +9801,96 @@ func (s ListQueuesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// List the tags for your AWS Elemental MediaConvert resource by sending a request
+// with the Amazon Resource Name (ARN) of the resource. To get the ARN, send
+// a GET request with the resource name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to list tags
+	// for. To get the ARN, send a GET request with the resource name.
+	//
+	// Arn is a required field
+	Arn *string `location:"uri" locationName:"arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A successful request to list the tags for a resource returns a JSON map of
+// tags.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
+	// resource.
+	ResourceTags *ResourceTags `locationName:"resourceTags" type:"structure"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ResourceTags != nil {
+		v := s.ResourceTags
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resourceTags", v, metadata)
 	}
 	return nil
 }
@@ -10436,6 +10772,13 @@ type Mpeg2Settings struct {
 	// Use Profile (Mpeg2CodecProfile) to set the MPEG-2 profile for the video output.
 	CodecProfile Mpeg2CodecProfile `locationName:"codecProfile" type:"string" enum:"true"`
 
+	// Choose Adaptive to improve subjective video quality for high-motion content.
+	// This will cause the service to use fewer B-frames (which infer information
+	// based on other frames) for high-motion portions of the video and more B-frames
+	// for low-motion portions. The maximum number of B-frames is limited by the
+	// value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+	DynamicSubGop Mpeg2DynamicSubGop `locationName:"dynamicSubGop" type:"string" enum:"true"`
+
 	// If you are using the console, use the Framerate setting to specify the framerate
 	// for this output. If you want to keep the same framerate as the input video,
 	// choose Follow source. If you want to do framerate conversion, choose a framerate
@@ -10626,6 +10969,12 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if len(s.DynamicSubGop) > 0 {
+		v := s.DynamicSubGop
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dynamicSubGop", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.FramerateControl) > 0 {
 		v := s.FramerateControl
 
@@ -10792,9 +11141,7 @@ type MsSmoothEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
 	// Settings for use with a SPEKE key provider
-	//
-	// SpekeKeyProvider is a required field
-	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure" required:"true"`
+	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 }
 
 // String returns the string representation
@@ -10805,25 +11152,6 @@ func (s MsSmoothEncryptionSettings) String() string {
 // GoString returns the string representation
 func (s MsSmoothEncryptionSettings) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *MsSmoothEncryptionSettings) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "MsSmoothEncryptionSettings"}
-
-	if s.SpekeKeyProvider == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpekeKeyProvider"))
-	}
-	if s.SpekeKeyProvider != nil {
-		if err := s.SpekeKeyProvider.Validate(); err != nil {
-			invalidParams.AddNested("SpekeKeyProvider", err.(aws.ErrInvalidParams))
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -10860,9 +11188,7 @@ type MsSmoothGroupSettings struct {
 
 	// Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in
 	// seconds. Fragment length must be compatible with GOP size and framerate.
-	//
-	// FragmentLength is a required field
-	FragmentLength *int64 `locationName:"fragmentLength" min:"1" type:"integer" required:"true"`
+	FragmentLength *int64 `locationName:"fragmentLength" min:"1" type:"integer"`
 
 	// Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding
 	// format for the server and client manifest. Valid options are utf8 and utf16.
@@ -10882,17 +11208,8 @@ func (s MsSmoothGroupSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MsSmoothGroupSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MsSmoothGroupSettings"}
-
-	if s.FragmentLength == nil {
-		invalidParams.Add(aws.NewErrParamRequired("FragmentLength"))
-	}
 	if s.FragmentLength != nil && *s.FragmentLength < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FragmentLength", 1))
-	}
-	if s.Encryption != nil {
-		if err := s.Encryption.Validate(); err != nil {
-			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
-		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10992,9 +11309,7 @@ type NoiseReducer struct {
 	// filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution
 	// filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain
 	// filter based on JND principles.
-	//
-	// Filter is a required field
-	Filter NoiseReducerFilter `locationName:"filter" type:"string" required:"true" enum:"true"`
+	Filter NoiseReducerFilter `locationName:"filter" type:"string" enum:"true"`
 
 	// Settings for a noise reducer filter
 	FilterSettings *NoiseReducerFilterSettings `locationName:"filterSettings" type:"structure"`
@@ -11016,9 +11331,6 @@ func (s NoiseReducer) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NoiseReducer) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NoiseReducer"}
-	if len(s.Filter) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Filter"))
-	}
 	if s.SpatialFilterSettings != nil {
 		if err := s.SpatialFilterSettings.Validate(); err != nil {
 			invalidParams.AddNested("SpatialFilterSettings", err.(aws.ErrInvalidParams))
@@ -11316,9 +11628,7 @@ type OutputChannelMapping struct {
 	_ struct{} `type:"structure"`
 
 	// List of input channels
-	//
-	// InputChannels is a required field
-	InputChannels []int64 `locationName:"inputChannels" type:"list" required:"true"`
+	InputChannels []int64 `locationName:"inputChannels" type:"list"`
 }
 
 // String returns the string representation
@@ -11329,20 +11639,6 @@ func (s OutputChannelMapping) String() string {
 // GoString returns the string representation
 func (s OutputChannelMapping) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *OutputChannelMapping) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "OutputChannelMapping"}
-
-	if s.InputChannels == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputChannels"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -11416,15 +11712,11 @@ type OutputGroup struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// Output Group settings, including type
-	//
-	// OutputGroupSettings is a required field
-	OutputGroupSettings *OutputGroupSettings `locationName:"outputGroupSettings" type:"structure" required:"true"`
+	OutputGroupSettings *OutputGroupSettings `locationName:"outputGroupSettings" type:"structure"`
 
 	// This object holds groups of encoding settings, one group of settings per
 	// output.
-	//
-	// Outputs is a required field
-	Outputs []Output `locationName:"outputs" type:"list" required:"true"`
+	Outputs []Output `locationName:"outputs" type:"list"`
 }
 
 // String returns the string representation
@@ -11440,14 +11732,6 @@ func (s OutputGroup) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OutputGroup) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OutputGroup"}
-
-	if s.OutputGroupSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("OutputGroupSettings"))
-	}
-
-	if s.Outputs == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Outputs"))
-	}
 	if s.OutputGroupSettings != nil {
 		if err := s.OutputGroupSettings.Validate(); err != nil {
 			invalidParams.AddNested("OutputGroupSettings", err.(aws.ErrInvalidParams))
@@ -11544,7 +11828,8 @@ type OutputGroupSettings struct {
 	_ struct{} `type:"structure"`
 
 	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
-	// CMAF_GROUP_SETTINGS.
+	// CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain
+	// a single video, audio, or caption output.
 	CmafGroupSettings *CmafGroupSettings `locationName:"cmafGroupSettings" type:"structure"`
 
 	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
@@ -11565,9 +11850,7 @@ type OutputGroupSettings struct {
 
 	// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming,
 	// CMAF)
-	//
-	// Type is a required field
-	Type OutputGroupType `locationName:"type" type:"string" required:"true" enum:"true"`
+	Type OutputGroupType `locationName:"type" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -11583,9 +11866,6 @@ func (s OutputGroupSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OutputGroupSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OutputGroupSettings"}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
-	}
 	if s.CmafGroupSettings != nil {
 		if err := s.CmafGroupSettings.Validate(); err != nil {
 			invalidParams.AddNested("CmafGroupSettings", err.(aws.ErrInvalidParams))
@@ -12066,9 +12346,10 @@ func (s ProresSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs
-// are submitted to a built-in default queue. User can create additional queues
-// to separate the jobs of different categories or priority.
+// You can use queues to manage the resources that are available to your AWS
+// account for running multiple transcoding jobs at the same time. If you don't
+// specify a queue, the service sends all jobs through the default queue. For
+// more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Queue
 type Queue struct {
 	_ struct{} `type:"structure"`
@@ -12076,27 +12357,46 @@ type Queue struct {
 	// An identifier for this resource that is unique within all of AWS.
 	Arn *string `locationName:"arn" type:"string"`
 
-	// The timestamp in epoch seconds for queue creation.
+	// The time stamp in epoch seconds for queue creation.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
-	// An optional description you create for each queue.
+	// An optional description that you create for each queue.
 	Description *string `locationName:"description" type:"string"`
 
-	// The timestamp in epoch seconds when the queue was last updated.
+	// The time stamp in epoch seconds when the queue was last updated.
 	LastUpdated *time.Time `locationName:"lastUpdated" type:"timestamp" timestampFormat:"unix"`
 
-	// A name you create for each queue. Each name must be unique within your account.
+	// A name that you create for each queue. Each name must be unique within your
+	// account.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue
-	// will not begin. Jobs running when a queue is paused continue to run until
-	// they finish or error out.
+	// Specifies whether the pricing plan for the queue is On-demand or Reserved.
+	// The pricing plan for the queue determines whether you pay On-demand or Reserved
+	// pricing for the transcoding jobs that you run through the queue. For Reserved
+	// queue pricing, you must set up a contract. You can create a Reserved queue
+	// contract through the AWS Elemental MediaConvert console.
+	PricingPlan PricingPlan `locationName:"pricingPlan" type:"string" enum:"true"`
+
+	// The estimated number of jobs with a PROGRESSING status.
+	ProgressingJobsCount *int64 `locationName:"progressingJobsCount" type:"integer"`
+
+	// Details about the pricing plan for your reserved queue. Required for reserved
+	// queues and not applicable to on-demand queues.
+	ReservationPlan *ReservationPlan `locationName:"reservationPlan" type:"structure"`
+
+	// Queues can be ACTIVE or PAUSED. If you pause a queue, the service won't begin
+	// processing jobs in that queue. Jobs that are running when you pause the queue
+	// continue to run until they finish or result in an error.
 	Status QueueStatus `locationName:"status" type:"string" enum:"true"`
 
-	// A queue can be of two types: system or custom. System or built-in queues
-	// can't be modified or deleted by the user.
+	// The estimated number of jobs with a SUBMITTED status.
+	SubmittedJobsCount *int64 `locationName:"submittedJobsCount" type:"integer"`
+
+	// Specifies whether this queue is system or custom. System queues are built
+	// in. You can't modify or delete system queues. You can create and modify custom
+	// queues.
 	Type Type `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -12142,11 +12442,35 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.PricingPlan) > 0 {
+		v := s.PricingPlan
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pricingPlan", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ProgressingJobsCount != nil {
+		v := *s.ProgressingJobsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "progressingJobsCount", protocol.Int64Value(v), metadata)
+	}
+	if s.ReservationPlan != nil {
+		v := s.ReservationPlan
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "reservationPlan", v, metadata)
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SubmittedJobsCount != nil {
+		v := *s.SubmittedJobsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "submittedJobsCount", protocol.Int64Value(v), metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
@@ -12162,27 +12486,19 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 type Rectangle struct {
 	_ struct{} `type:"structure"`
 
-	// Height of rectangle in pixels.
-	//
-	// Height is a required field
-	Height *int64 `locationName:"height" type:"integer" required:"true"`
+	// Height of rectangle in pixels. Specify only even numbers.
+	Height *int64 `locationName:"height" min:"2" type:"integer"`
 
-	// Width of rectangle in pixels.
-	//
-	// Width is a required field
-	Width *int64 `locationName:"width" type:"integer" required:"true"`
+	// Width of rectangle in pixels. Specify only even numbers.
+	Width *int64 `locationName:"width" min:"2" type:"integer"`
 
 	// The distance, in pixels, between the rectangle and the left edge of the video
-	// frame.
-	//
-	// X is a required field
-	X *int64 `locationName:"x" type:"integer" required:"true"`
+	// frame. Specify only even numbers.
+	X *int64 `locationName:"x" type:"integer"`
 
 	// The distance, in pixels, between the rectangle and the top edge of the video
-	// frame.
-	//
-	// Y is a required field
-	Y *int64 `locationName:"y" type:"integer" required:"true"`
+	// frame. Specify only even numbers.
+	Y *int64 `locationName:"y" type:"integer"`
 }
 
 // String returns the string representation
@@ -12198,33 +12514,11 @@ func (s Rectangle) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Rectangle) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Rectangle"}
-
-	if s.Height == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Height"))
+	if s.Height != nil && *s.Height < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("Height", 2))
 	}
-	if s.Height != nil && *s.Height < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("Height", -2.147483648e+09))
-	}
-
-	if s.Width == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Width"))
-	}
-	if s.Width != nil && *s.Width < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("Width", -2.147483648e+09))
-	}
-
-	if s.X == nil {
-		invalidParams.Add(aws.NewErrParamRequired("X"))
-	}
-	if s.X != nil && *s.X < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("X", -2.147483648e+09))
-	}
-
-	if s.Y == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Y"))
-	}
-	if s.Y != nil && *s.Y < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("Y", -2.147483648e+09))
+	if s.Width != nil && *s.Width < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("Width", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12273,22 +12567,16 @@ type RemixSettings struct {
 	// remixing value for each channel. Units are in dB. Acceptable values are within
 	// the range from -60 (mute) through 6. A setting of 0 passes the input channel
 	// unchanged to the output channel (no attenuation or amplification).
-	//
-	// ChannelMapping is a required field
-	ChannelMapping *ChannelMapping `locationName:"channelMapping" type:"structure" required:"true"`
+	ChannelMapping *ChannelMapping `locationName:"channelMapping" type:"structure"`
 
 	// Specify the number of audio channels from your input that you want to use
 	// in your output. With remixing, you might combine or split the data in these
 	// channels, so the number of channels in your final output might be different.
-	//
-	// ChannelsIn is a required field
-	ChannelsIn *int64 `locationName:"channelsIn" min:"1" type:"integer" required:"true"`
+	ChannelsIn *int64 `locationName:"channelsIn" min:"1" type:"integer"`
 
 	// Specify the number of channels in this output after remixing. Valid values:
 	// 1, 2, 4, 6, 8
-	//
-	// ChannelsOut is a required field
-	ChannelsOut *int64 `locationName:"channelsOut" min:"1" type:"integer" required:"true"`
+	ChannelsOut *int64 `locationName:"channelsOut" min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -12304,28 +12592,11 @@ func (s RemixSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemixSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemixSettings"}
-
-	if s.ChannelMapping == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelMapping"))
-	}
-
-	if s.ChannelsIn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelsIn"))
-	}
 	if s.ChannelsIn != nil && *s.ChannelsIn < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ChannelsIn", 1))
 	}
-
-	if s.ChannelsOut == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ChannelsOut"))
-	}
 	if s.ChannelsOut != nil && *s.ChannelsOut < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ChannelsOut", 1))
-	}
-	if s.ChannelMapping != nil {
-		if err := s.ChannelMapping.Validate(); err != nil {
-			invalidParams.AddNested("ChannelMapping", err.(aws.ErrInvalidParams))
-		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12353,6 +12624,215 @@ func (s RemixSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelsOut", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Details about the pricing plan for your reserved queue. Required for reserved
+// queues and not applicable to on-demand queues.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ReservationPlan
+type ReservationPlan struct {
+	_ struct{} `type:"structure"`
+
+	// The length of time that you commit to when you set up a pricing plan contract
+	// for a reserved queue.
+	Commitment Commitment `locationName:"commitment" type:"string" enum:"true"`
+
+	// The time stamp, in epoch seconds, for when the pricing plan for this reserved
+	// queue expires.
+	ExpiresAt *time.Time `locationName:"expiresAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The time stamp in epoch seconds when the reserved queue's reservation plan
+	// was created.
+	PurchasedAt *time.Time `locationName:"purchasedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// Specifies whether the pricing plan contract for your reserved queue automatically
+	// renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+	RenewalType RenewalType `locationName:"renewalType" type:"string" enum:"true"`
+
+	// Specifies the number of reserved transcode slots (RTSs) for this queue. The
+	// number of RTS determines how many jobs the queue can process in parallel;
+	// each RTS can process one job at a time. To increase this number, create a
+	// replacement contract through the AWS Elemental MediaConvert console.
+	ReservedSlots *int64 `locationName:"reservedSlots" type:"integer"`
+
+	// Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
+	Status ReservationPlanStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ReservationPlan) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReservationPlan) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReservationPlan) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Commitment) > 0 {
+		v := s.Commitment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "commitment", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ExpiresAt != nil {
+		v := *s.ExpiresAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expiresAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.PurchasedAt != nil {
+		v := *s.PurchasedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "purchasedAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.RenewalType) > 0 {
+		v := s.RenewalType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "renewalType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ReservedSlots != nil {
+		v := *s.ReservedSlots
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reservedSlots", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Details about the pricing plan for your reserved queue. Required for reserved
+// queues and not applicable to on-demand queues.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ReservationPlanSettings
+type ReservationPlanSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The length of time that you commit to when you set up a pricing plan contract
+	// for a reserved queue.
+	//
+	// Commitment is a required field
+	Commitment Commitment `locationName:"commitment" type:"string" required:"true" enum:"true"`
+
+	// Specifies whether the pricing plan contract for your reserved queue automatically
+	// renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+	//
+	// RenewalType is a required field
+	RenewalType RenewalType `locationName:"renewalType" type:"string" required:"true" enum:"true"`
+
+	// Specifies the number of reserved transcode slots (RTSs) for this queue. The
+	// number of RTS determines how many jobs the queue can process in parallel;
+	// each RTS can process one job at a time. To increase this number, create a
+	// replacement contract through the AWS Elemental MediaConvert console.
+	//
+	// ReservedSlots is a required field
+	ReservedSlots *int64 `locationName:"reservedSlots" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ReservationPlanSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReservationPlanSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReservationPlanSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReservationPlanSettings"}
+	if len(s.Commitment) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Commitment"))
+	}
+	if len(s.RenewalType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RenewalType"))
+	}
+
+	if s.ReservedSlots == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservedSlots"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReservationPlanSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Commitment) > 0 {
+		v := s.Commitment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "commitment", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.RenewalType) > 0 {
+		v := s.RenewalType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "renewalType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ReservedSlots != nil {
+		v := *s.ReservedSlots
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reservedSlots", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
+// resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ResourceTags
+type ResourceTags struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The tags for the resource.
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s ResourceTags) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceTags) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceTags) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -12397,21 +12877,15 @@ type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
 	// The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
-	//
-	// ResourceId is a required field
-	ResourceId *string `locationName:"resourceId" type:"string" required:"true"`
+	ResourceId *string `locationName:"resourceId" type:"string"`
 
 	// Relates to SPEKE implementation. DRM system identifiers. DASH output groups
 	// support a max of two system ids. Other group types support one system id.
-	//
-	// SystemIds is a required field
-	SystemIds []string `locationName:"systemIds" type:"list" required:"true"`
+	SystemIds []string `locationName:"systemIds" type:"list"`
 
 	// Use URL (Url) to specify the SPEKE-compliant server that will provide keys
 	// for content.
-	//
-	// Url is a required field
-	Url *string `locationName:"url" type:"string" required:"true"`
+	Url *string `locationName:"url" type:"string"`
 }
 
 // String returns the string representation
@@ -12422,28 +12896,6 @@ func (s SpekeKeyProvider) String() string {
 // GoString returns the string representation
 func (s SpekeKeyProvider) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *SpekeKeyProvider) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "SpekeKeyProvider"}
-
-	if s.ResourceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
-	}
-
-	if s.SystemIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SystemIds"))
-	}
-
-	if s.Url == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Url"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -12491,15 +12943,11 @@ type StaticKeyProvider struct {
 
 	// Relates to DRM implementation. Use a 32-character hexidecimal string to specify
 	// Key Value (StaticKeyValue).
-	//
-	// StaticKeyValue is a required field
-	StaticKeyValue *string `locationName:"staticKeyValue" type:"string" required:"true"`
+	StaticKeyValue *string `locationName:"staticKeyValue" type:"string"`
 
 	// Relates to DRM implementation. The location of the license server used for
 	// protecting content.
-	//
-	// Url is a required field
-	Url *string `locationName:"url" type:"string" required:"true"`
+	Url *string `locationName:"url" type:"string"`
 }
 
 // String returns the string representation
@@ -12510,24 +12958,6 @@ func (s StaticKeyProvider) String() string {
 // GoString returns the string representation
 func (s StaticKeyProvider) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *StaticKeyProvider) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "StaticKeyProvider"}
-
-	if s.StaticKeyValue == nil {
-		invalidParams.Add(aws.NewErrParamRequired("StaticKeyValue"))
-	}
-
-	if s.Url == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Url"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -12556,6 +12986,107 @@ func (s StaticKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+// To add tags to a queue, preset, or job template, send a request with the
+// Amazon Resource Name (ARN) of the resource and the tags that you want to
+// add.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to tag. To get
+	// the ARN, send a GET request with the resource name.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// The tags that you want to add to the resource. You can tag resources with
+	// a key-value pair or with only a key.
+	//
+	// Tags is a required field
+	Tags map[string]string `locationName:"tags" type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// A successful request to add tags to a resource returns an OK message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceResponse
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -12812,8 +13343,8 @@ func (s TimecodeConfig) MarshalFields(e protocol.FieldEncoder) error {
 type TimedMetadataInsertion struct {
 	_ struct{} `type:"structure"`
 
-	// Id3Insertions is a required field
-	Id3Insertions []Id3Insertion `locationName:"id3Insertions" type:"list" required:"true"`
+	// Id3Insertions contains the array of Id3Insertion instances.
+	Id3Insertions []Id3Insertion `locationName:"id3Insertions" type:"list"`
 }
 
 // String returns the string representation
@@ -12824,27 +13355,6 @@ func (s TimedMetadataInsertion) String() string {
 // GoString returns the string representation
 func (s TimedMetadataInsertion) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *TimedMetadataInsertion) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "TimedMetadataInsertion"}
-
-	if s.Id3Insertions == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id3Insertions"))
-	}
-	if s.Id3Insertions != nil {
-		for i, v := range s.Id3Insertions {
-			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Id3Insertions", i), err.(aws.ErrInvalidParams))
-			}
-		}
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -12942,6 +13452,99 @@ func (s TtmlDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stylePassthrough", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	return nil
+}
+
+// To remove tags from a resource, send a request with the Amazon Resource Name
+// (ARN) of the resource and the keys of the tags that you want to remove.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource that you want to remove tags
+	// from. To get the ARN, send a GET request with the resource name.
+	//
+	// Arn is a required field
+	Arn *string `location:"uri" locationName:"arn" type:"string" required:"true"`
+
+	// The keys of the tags that you want to remove from the resource.
+	TagKeys []string `locationName:"tagKeys" type:"list"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A successful request to remove tags from a resource returns an OK message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceResponse
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -13196,9 +13799,8 @@ func (s UpdatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Modify a queue by sending a request with the queue name and any of the following
-// that you wish to change - description, status. You pause or activate a queue
-// by changing its status between ACTIVE and PAUSED.
+// Modify a queue by sending a request with the queue name and any changes to
+// the queue.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueRequest
 type UpdateQueueInput struct {
 	_ struct{} `type:"structure"`
@@ -13206,14 +13808,19 @@ type UpdateQueueInput struct {
 	// The new description for the queue, if you are changing it.
 	Description *string `locationName:"description" type:"string"`
 
-	// The name of the queue you are modifying.
+	// The name of the queue that you are modifying.
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
 
-	// Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue
-	// will not begin. Jobs running when a queue is paused continue to run until
-	// they finish or error out.
+	// Details about the pricing plan for your reserved queue. Required for reserved
+	// queues and not applicable to on-demand queues.
+	ReservationPlanSettings *ReservationPlanSettings `locationName:"reservationPlanSettings" type:"structure"`
+
+	// Pause or activate a queue by changing its status between ACTIVE and PAUSED.
+	// If you pause a queue, jobs in that queue won't begin. Jobs that are running
+	// when you pause the queue continue to run until they finish or result in an
+	// error.
 	Status QueueStatus `locationName:"status" type:"string" enum:"true"`
 }
 
@@ -13234,6 +13841,11 @@ func (s *UpdateQueueInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+	if s.ReservationPlanSettings != nil {
+		if err := s.ReservationPlanSettings.Validate(); err != nil {
+			invalidParams.AddNested("ReservationPlanSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -13251,6 +13863,12 @@ func (s UpdateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ReservationPlanSettings != nil {
+		v := s.ReservationPlanSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "reservationPlanSettings", v, metadata)
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -13266,16 +13884,17 @@ func (s UpdateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Successful update queue requests will return the new queue JSON.
+// Successful update queue requests return the new queue information in JSON.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueueResponse
 type UpdateQueueOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// MediaConvert jobs are submitted to a queue. Unless specified otherwise jobs
-	// are submitted to a built-in default queue. User can create additional queues
-	// to separate the jobs of different categories or priority.
+	// You can use queues to manage the resources that are available to your AWS
+	// account for running multiple transcoding jobs at the same time. If you don't
+	// specify a queue, the service sends all jobs through the default queue. For
+	// more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/about-resource-allocation-and-job-prioritization.html.
 	Queue *Queue `locationName:"queue" type:"structure"`
 }
 
@@ -13317,9 +13936,7 @@ type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
 
 	// Type of video codec
-	//
-	// Codec is a required field
-	Codec VideoCodec `locationName:"codec" type:"string" required:"true" enum:"true"`
+	Codec VideoCodec `locationName:"codec" type:"string" enum:"true"`
 
 	// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
 	// the value FRAME_CAPTURE.
@@ -13354,9 +13971,6 @@ func (s VideoCodecSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VideoCodecSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VideoCodecSettings"}
-	if len(s.Codec) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Codec"))
-	}
 	if s.FrameCaptureSettings != nil {
 		if err := s.FrameCaptureSettings.Validate(); err != nil {
 			invalidParams.AddNested("FrameCaptureSettings", err.(aws.ErrInvalidParams))
@@ -13455,9 +14069,7 @@ type VideoDescription struct {
 	// lists the codec enum, settings object pairs. * H_264, H264Settings * H_265,
 	// H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE,
 	// FrameCaptureSettings
-	//
-	// CodecSettings is a required field
-	CodecSettings *VideoCodecSettings `locationName:"codecSettings" type:"structure" required:"true"`
+	CodecSettings *VideoCodecSettings `locationName:"codecSettings" type:"structure"`
 
 	// Enable Insert color metadata (ColorMetadata) to include color metadata in
 	// this output. This setting is enabled by default.
@@ -13552,10 +14164,6 @@ func (s VideoDescription) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VideoDescription) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VideoDescription"}
-
-	if s.CodecSettings == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CodecSettings"))
-	}
 	if s.Height != nil && *s.Height < 32 {
 		invalidParams.Add(aws.NewErrParamMinValue("Height", 32))
 	}
@@ -13891,11 +14499,6 @@ func (s *VideoSelector) Validate() error {
 	}
 	if s.ProgramNumber != nil && *s.ProgramNumber < -2.147483648e+09 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProgramNumber", -2.147483648e+09))
-	}
-	if s.Hdr10Metadata != nil {
-		if err := s.Hdr10Metadata.Validate(); err != nil {
-			invalidParams.AddNested("Hdr10Metadata", err.(aws.ErrInvalidParams))
-		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14494,6 +15097,29 @@ func (enum AudioTypeControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Optional. Choose a tag type that AWS Billing and Cost Management will use
+// to sort your AWS Elemental MediaConvert costs on any billing report that
+// you set up. Any transcoding outputs that don't have an associated tag will
+// appear in your billing report unsorted. If you don't choose a valid value
+// for this field, your job outputs will appear on the billing report unsorted.
+type BillingTagsSource string
+
+// Enum values for BillingTagsSource
+const (
+	BillingTagsSourceQueue       BillingTagsSource = "QUEUE"
+	BillingTagsSourcePreset      BillingTagsSource = "PRESET"
+	BillingTagsSourceJobTemplate BillingTagsSource = "JOB_TEMPLATE"
+)
+
+func (enum BillingTagsSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BillingTagsSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // If no explicit x_position or y_position is provided, setting alignment to
 // centered will place the captions at the bottom center of the output. Similarly,
 // setting a left alignment will align captions to the bottom left of the output.
@@ -14983,6 +15609,24 @@ func (enum ColorSpaceUsage) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The length of time that you commit to when you set up a pricing plan contract
+// for a reserved queue.
+type Commitment string
+
+// Enum values for Commitment
+const (
+	CommitmentOneYear Commitment = "ONE_YEAR"
+)
+
+func (enum Commitment) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Commitment) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Container for this output. Some containers require a container settings object.
 // If not specified, the default object will be created.
 type ContainerType string
@@ -15044,6 +15688,25 @@ func (enum DashIsoSegmentControl) MarshalValue() (string, error) {
 }
 
 func (enum DashIsoSegmentControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// When ENABLED, segment durations are indicated in the manifest using SegmentTimeline
+// and SegmentTimeline will be promoted down into Representation from AdaptationSet.
+type DashIsoWriteSegmentTimelineInRepresentation string
+
+// Enum values for DashIsoWriteSegmentTimelineInRepresentation
+const (
+	DashIsoWriteSegmentTimelineInRepresentationEnabled  DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"
+	DashIsoWriteSegmentTimelineInRepresentationDisabled DashIsoWriteSegmentTimelineInRepresentation = "DISABLED"
+)
+
+func (enum DashIsoWriteSegmentTimelineInRepresentation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DashIsoWriteSegmentTimelineInRepresentation) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -15115,6 +15778,27 @@ func (enum DeinterlacerMode) MarshalValue() (string, error) {
 }
 
 func (enum DeinterlacerMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to
+// return your endpoints if any exist, or to create an endpoint for you and
+// return it if one doesn't already exist. Specify GET_ONLY to return your endpoints
+// if any exist, or an empty list if none exist.
+type DescribeEndpointsMode string
+
+// Enum values for DescribeEndpointsMode
+const (
+	DescribeEndpointsModeDefault DescribeEndpointsMode = "DEFAULT"
+	DescribeEndpointsModeGetOnly DescribeEndpointsMode = "GET_ONLY"
+)
+
+func (enum DescribeEndpointsMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DescribeEndpointsMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -15697,6 +16381,28 @@ func (enum H264CodecProfile) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Choose Adaptive to improve subjective video quality for high-motion content.
+// This will cause the service to use fewer B-frames (which infer information
+// based on other frames) for high-motion portions of the video and more B-frames
+// for low-motion portions. The maximum number of B-frames is limited by the
+// value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+type H264DynamicSubGop string
+
+// Enum values for H264DynamicSubGop
+const (
+	H264DynamicSubGopAdaptive H264DynamicSubGop = "ADAPTIVE"
+	H264DynamicSubGopStatic   H264DynamicSubGop = "STATIC"
+)
+
+func (enum H264DynamicSubGop) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H264DynamicSubGop) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
 type H264EntropyEncoding string
 
@@ -15907,14 +16613,15 @@ func (enum H264QualityTuningLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use this setting to specify whether this output has a variable bitrate (VBR)
-// or constant bitrate (CBR).
+// Use this setting to specify whether this output has a variable bitrate (VBR),
+// constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
 type H264RateControlMode string
 
 // Enum values for H264RateControlMode
 const (
-	H264RateControlModeVbr H264RateControlMode = "VBR"
-	H264RateControlModeCbr H264RateControlMode = "CBR"
+	H264RateControlModeVbr  H264RateControlMode = "VBR"
+	H264RateControlModeCbr  H264RateControlMode = "CBR"
+	H264RateControlModeQvbr H264RateControlMode = "QVBR"
 )
 
 func (enum H264RateControlMode) MarshalValue() (string, error) {
@@ -16178,6 +16885,28 @@ func (enum H265CodecProfile) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Choose Adaptive to improve subjective video quality for high-motion content.
+// This will cause the service to use fewer B-frames (which infer information
+// based on other frames) for high-motion portions of the video and more B-frames
+// for low-motion portions. The maximum number of B-frames is limited by the
+// value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+type H265DynamicSubGop string
+
+// Enum values for H265DynamicSubGop
+const (
+	H265DynamicSubGopAdaptive H265DynamicSubGop = "ADAPTIVE"
+	H265DynamicSubGopStatic   H265DynamicSubGop = "STATIC"
+)
+
+func (enum H265DynamicSubGop) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H265DynamicSubGop) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
 type H265FlickerAdaptiveQuantization string
 
@@ -16352,14 +17081,15 @@ func (enum H265QualityTuningLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use this setting to specify whether this output has a variable bitrate (VBR)
-// or constant bitrate (CBR).
+// Use this setting to specify whether this output has a variable bitrate (VBR),
+// constant bitrate (CBR) or quality-defined variable bitrate (QVBR).
 type H265RateControlMode string
 
 // Enum values for H265RateControlMode
 const (
-	H265RateControlModeVbr H265RateControlMode = "VBR"
-	H265RateControlModeCbr H265RateControlMode = "CBR"
+	H265RateControlModeVbr  H265RateControlMode = "VBR"
+	H265RateControlModeCbr  H265RateControlMode = "CBR"
+	H265RateControlModeQvbr H265RateControlMode = "QVBR"
 )
 
 func (enum H265RateControlMode) MarshalValue() (string, error) {
@@ -17066,8 +17796,7 @@ func (enum JobTemplateListBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Code to specify the language, following the specification "ISO 639-2 three-digit
-// code":http://www.loc.gov/standards/iso639-2/
+// Specify the language, using the ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php.
 type LanguageCode string
 
 // Enum values for LanguageCode
@@ -17783,6 +18512,28 @@ func (enum Mpeg2CodecProfile) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Choose Adaptive to improve subjective video quality for high-motion content.
+// This will cause the service to use fewer B-frames (which infer information
+// based on other frames) for high-motion portions of the video and more B-frames
+// for low-motion portions. The maximum number of B-frames is limited by the
+// value you provide for the setting B frames between reference frames (numberBFramesBetweenReferenceFrames).
+type Mpeg2DynamicSubGop string
+
+// Enum values for Mpeg2DynamicSubGop
+const (
+	Mpeg2DynamicSubGopAdaptive Mpeg2DynamicSubGop = "ADAPTIVE"
+	Mpeg2DynamicSubGopStatic   Mpeg2DynamicSubGop = "STATIC"
+)
+
+func (enum Mpeg2DynamicSubGop) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Mpeg2DynamicSubGop) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // If you are using the console, use the Framerate setting to specify the framerate
 // for this output. If you want to keep the same framerate as the input video,
 // choose Follow source. If you want to do framerate conversion, choose a framerate
@@ -18229,6 +18980,28 @@ func (enum PresetListBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Specifies whether the pricing plan for the queue is On-demand or Reserved.
+// The pricing plan for the queue determines whether you pay On-demand or Reserved
+// pricing for the transcoding jobs that you run through the queue. For Reserved
+// queue pricing, you must set up a contract. You can create a Reserved queue
+// contract through the AWS Elemental MediaConvert console.
+type PricingPlan string
+
+// Enum values for PricingPlan
+const (
+	PricingPlanOnDemand PricingPlan = "ON_DEMAND"
+	PricingPlanReserved PricingPlan = "RESERVED"
+)
+
+func (enum PricingPlan) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PricingPlan) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec
 // to use for this output.
 type ProresCodecProfile string
@@ -18410,8 +19183,8 @@ func (enum QueueListBy) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that queue
-// will not begin. Jobs running when a queue is paused continue to run until
-// they finish or error out.
+// won't begin. Jobs that are running when you pause a queue continue to run
+// until they finish or result in an error.
 type QueueStatus string
 
 // Enum values for QueueStatus
@@ -18425,6 +19198,43 @@ func (enum QueueStatus) MarshalValue() (string, error) {
 }
 
 func (enum QueueStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specifies whether the pricing plan contract for your reserved queue automatically
+// renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
+type RenewalType string
+
+// Enum values for RenewalType
+const (
+	RenewalTypeAutoRenew RenewalType = "AUTO_RENEW"
+	RenewalTypeExpire    RenewalType = "EXPIRE"
+)
+
+func (enum RenewalType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RenewalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specifies whether the pricing plan for your reserved queue is ACTIVE or EXPIRED.
+type ReservationPlanStatus string
+
+// Enum values for ReservationPlanStatus
+const (
+	ReservationPlanStatusActive  ReservationPlanStatus = "ACTIVE"
+	ReservationPlanStatusExpired ReservationPlanStatus = "EXPIRED"
+)
+
+func (enum ReservationPlanStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReservationPlanStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
