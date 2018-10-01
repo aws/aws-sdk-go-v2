@@ -30,6 +30,8 @@ This example shows how you can use the v2 SDK to make an API request using the S
 package main
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
