@@ -24,7 +24,9 @@ func main() {
 	flag.Parse()
 
 	config, err := external.LoadDefaultAWSConfig()
-	exitErrorf("loading default config", err)
+	if err != nil {
+		exitErrorf("loading default config", err)
+	}
 
 	// assume role
 	svc := sts.New(config)
