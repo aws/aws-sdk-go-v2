@@ -12,6 +12,7 @@ import (
 	"reflect"
 	"runtime"
 	"strconv"
+	"strings"
 	"testing"
 	"time"
 
@@ -375,7 +376,7 @@ func TestRequestUserAgent(t *testing.T) {
 
 	expectUA := fmt.Sprintf("foo/bar %s/%s (%s; %s; %s)",
 		aws.SDKName, aws.SDKVersion, runtime.Version(), runtime.GOOS, runtime.GOARCH)
-	if e, a := expectUA, req.HTTPRequest.Header.Get("User-Agent"); e != a {
+	if e, a := expectUA, req.HTTPRequest.Header.Get("User-Agent"); !strings.HasPrefix(a, e) {
 		t.Errorf("expect %q user agent, got %q", e, a)
 	}
 }
@@ -788,7 +789,7 @@ func (d *testRetryer) ShouldRetry(r *aws.Request) bool {
 
 func TestEnforceShouldRetryCheck(t *testing.T) {
 	tp := &http.Transport{
-		Proxy: http.ProxyFromEnvironment,
+		Proxy:                 http.ProxyFromEnvironment,
 		ResponseHeaderTimeout: 1 * time.Millisecond,
 	}
 
