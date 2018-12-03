@@ -9,7 +9,7 @@ Release v0.6.0 (2018-12-03)
 	* General Availability (GA). This allows the SDK to be used with Go 1.11 modules. Post GA, v2 SDK's release tagging version will most likely follow a `v1.<x>.<y>` patter.
 	* Fixes [#221](https://github.com/aws/aws-sdk-go-v2/issues/221)
 
-Release v2.0.0-preview.5 (2018-09-19)
+Release v0.5.0 (2018-09-19)
 ===
 
 ### Services
@@ -34,7 +34,7 @@ Release v2.0.0-preview.5 (2018-09-19)
 * `internal/ini`: Add custom INI parser for shared config/credentials file (#209)
 	* Related to: aws/aws-sdk-go#2024
 
-Release v2.0.0-preview.4 (2018-05-25)
+Release v0.4.0 (2018-05-25)
 ===
 
 ### Services
@@ -61,7 +61,7 @@ Release v2.0.0-preview.4 (2018-05-25)
 	* Fixes [#155](https://github.com/aws/aws-sdk-go-v2/issues/155)
 
 
-Release v2.0.0-preview.3 (2018-03-08)
+Release v0.3.0 (2018-03-08)
 ===
 
 ### Services
@@ -103,7 +103,7 @@ Release v2.0.0-preview.3 (2018-03-08)
 * Add code of conduct ([#138](https://github.com/aws/aws-sdk-go-v2/pull/138))
 * Update SDK README dep usage ([#140](https://github.com/aws/aws-sdk-go-v2/pull/140))
 
-Release v2.0.0-preview.2 (2018-01-15)
+Release v0.2.0 (2018-01-15)
 ===
 
 ### Services
@@ -116,7 +116,7 @@ Release v2.0.0-preview.2 (2018-01-15)
 	* Fixes [#84](https://github.com/aws/aws-sdk-go-v2/issues/84)
 
 
-Release v2.0.0-preview.1 (2017-12-21)
+Release v0.1.0 (2017-12-21)
 ===
 
 ## What has changed?
