@@ -1127,14 +1127,6 @@
         "ApiStage$throttle": "<p>Map containing method level throttling information for API stage in a usage plan.</p>"
       }
     },
-    "MapOfHeaderValues": {
-      "base": null,
-      "refs": {
-        "TestInvokeAuthorizerRequest$headers": "<p>[Required] A key-value map of headers to simulate an incoming invocation request. This is where the incoming authorization token, or identity source, should be specified.</p>",
-        "TestInvokeMethodRequest$headers": "<p>A key-value map of headers to simulate an incoming invocation request.</p>",
-        "TestInvokeMethodResponse$headers": "<p>The headers of the HTTP response.</p>"
-      }
-    },
     "MapOfIntegrationResponse": {
       "base": null,
       "refs": {
@@ -1183,7 +1175,10 @@
     "MapOfStringToList": {
       "base": null,
       "refs": {
-        "TestInvokeAuthorizerResponse$authorization": null
+        "TestInvokeAuthorizerRequest$multiValueHeaders": "<p>[Optional] The headers as a map from string to list of values to simulate an incoming invocation request. This is where the incoming authorization token, or identity source, may be specified.</p>",
+        "TestInvokeAuthorizerResponse$authorization": null,
+        "TestInvokeMethodRequest$multiValueHeaders": "<p>The headers as a map from string to list of values to simulate an incoming invocation request.</p>",
+        "TestInvokeMethodResponse$multiValueHeaders": "<p>The headers of the HTTP response as a map from string to list of values.</p>"
       }
     },
     "MapOfStringToString": {
@@ -1218,10 +1213,13 @@
         "Stage$tags": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
         "TagResourceRequest$tags": "<p>[Required] The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>",
         "Tags$tags": "<p>The collection of tags. Each tag element is associated with a given resource.</p>",
+        "TestInvokeAuthorizerRequest$headers": "<p>[Required] A key-value map of headers to simulate an incoming invocation request. This is where the incoming authorization token, or identity source, should be specified.</p>",
         "TestInvokeAuthorizerRequest$stageVariables": "<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>",
         "TestInvokeAuthorizerRequest$additionalContext": "<p>[Optional] A key-value map of additional context variables.</p>",
         "TestInvokeAuthorizerResponse$claims": "<p>The <a href=\"https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims\">open identity claims</a>, with any supported custom attributes, returned from the Cognito Your User Pool configured for the API.</p>",
-        "TestInvokeMethodRequest$stageVariables": "<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>"
+        "TestInvokeMethodRequest$headers": "<p>A key-value map of headers to simulate an incoming invocation request.</p>",
+        "TestInvokeMethodRequest$stageVariables": "<p>A key-value map of stage variables to simulate an invocation on a deployed <a>Stage</a>.</p>",
+        "TestInvokeMethodResponse$headers": "<p>The headers of the HTTP response.</p>"
       }
     },
     "Method": {
@@ -1738,8 +1736,6 @@
         "LimitExceededException$message": null,
         "ListOfString$member": null,
         "MapOfApiStageThrottleSettings$key": null,
-        "MapOfHeaderValues$key": null,
-        "MapOfHeaderValues$value": null,
         "MapOfIntegrationResponse$key": null,
         "MapOfKeyUsages$key": null,
         "MapOfMethod$key": null,
@@ -1824,6 +1820,7 @@
         "Stage$stageName": "<p>The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway.</p>",
         "Stage$description": "<p>The stage's description.</p>",
         "Stage$documentationVersion": "<p>The version of the associated API documentation.</p>",
+        "Stage$webAclArn": "<p>The ARN of the WebAcl associated with the <a>Stage</a>.</p>",
         "StageKey$restApiId": "<p>The string identifier of the associated <a>RestApi</a>.</p>",
         "StageKey$stageName": "<p>The stage name associated with the stage key.</p>",
         "TagResourceRequest$resourceArn": "<p>[Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded. At present, <a>Stage</a> is the only taggable resource.</p>",

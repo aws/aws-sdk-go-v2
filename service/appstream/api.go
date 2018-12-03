@@ -60,6 +60,108 @@ func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) AssociateF
 	return AssociateFleetRequest{Request: req, Input: input, Copy: c.AssociateFleetRequest}
 }
 
+const opBatchAssociateUserStack = "BatchAssociateUserStack"
+
+// BatchAssociateUserStackRequest is a API request type for the BatchAssociateUserStack API operation.
+type BatchAssociateUserStackRequest struct {
+	*aws.Request
+	Input *BatchAssociateUserStackInput
+	Copy  func(*BatchAssociateUserStackInput) BatchAssociateUserStackRequest
+}
+
+// Send marshals and sends the BatchAssociateUserStack API request.
+func (r BatchAssociateUserStackRequest) Send() (*BatchAssociateUserStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchAssociateUserStackOutput), nil
+}
+
+// BatchAssociateUserStackRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Associates the specified users with the specified stacks. Users in a user
+// pool cannot be assigned to stacks with fleets that are joined to an Active
+// Directory domain.
+//
+//    // Example sending a request using the BatchAssociateUserStackRequest method.
+//    req := client.BatchAssociateUserStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStack
+func (c *AppStream) BatchAssociateUserStackRequest(input *BatchAssociateUserStackInput) BatchAssociateUserStackRequest {
+	op := &aws.Operation{
+		Name:       opBatchAssociateUserStack,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchAssociateUserStackInput{}
+	}
+
+	output := &BatchAssociateUserStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchAssociateUserStackRequest{Request: req, Input: input, Copy: c.BatchAssociateUserStackRequest}
+}
+
+const opBatchDisassociateUserStack = "BatchDisassociateUserStack"
+
+// BatchDisassociateUserStackRequest is a API request type for the BatchDisassociateUserStack API operation.
+type BatchDisassociateUserStackRequest struct {
+	*aws.Request
+	Input *BatchDisassociateUserStackInput
+	Copy  func(*BatchDisassociateUserStackInput) BatchDisassociateUserStackRequest
+}
+
+// Send marshals and sends the BatchDisassociateUserStack API request.
+func (r BatchDisassociateUserStackRequest) Send() (*BatchDisassociateUserStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDisassociateUserStackOutput), nil
+}
+
+// BatchDisassociateUserStackRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Disassociates the specified users from the specified stacks.
+//
+//    // Example sending a request using the BatchDisassociateUserStackRequest method.
+//    req := client.BatchDisassociateUserStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStack
+func (c *AppStream) BatchDisassociateUserStackRequest(input *BatchDisassociateUserStackInput) BatchDisassociateUserStackRequest {
+	op := &aws.Operation{
+		Name:       opBatchDisassociateUserStack,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchDisassociateUserStackInput{}
+	}
+
+	output := &BatchDisassociateUserStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchDisassociateUserStackRequest{Request: req, Input: input, Copy: c.BatchDisassociateUserStackRequest}
+}
+
 const opCopyImage = "CopyImage"
 
 // CopyImageRequest is a API request type for the CopyImage API operation.
@@ -421,6 +523,56 @@ func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) Cr
 	return CreateStreamingURLRequest{Request: req, Input: input, Copy: c.CreateStreamingURLRequest}
 }
 
+const opCreateUser = "CreateUser"
+
+// CreateUserRequest is a API request type for the CreateUser API operation.
+type CreateUserRequest struct {
+	*aws.Request
+	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
+}
+
+// Send marshals and sends the CreateUser API request.
+func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUserOutput), nil
+}
+
+// CreateUserRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Creates a new user in the user pool.
+//
+//    // Example sending a request using the CreateUserRequest method.
+//    req := client.CreateUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUser
+func (c *AppStream) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
+	op := &aws.Operation{
+		Name:       opCreateUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateUserInput{}
+	}
+
+	output := &CreateUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
+}
+
 const opDeleteDirectoryConfig = "DeleteDirectoryConfig"
 
 // DeleteDirectoryConfigRequest is a API request type for the DeleteDirectoryConfig API operation.
@@ -727,6 +879,56 @@ func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) DeleteStackReque
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteStackRequest{Request: req, Input: input, Copy: c.DeleteStackRequest}
+}
+
+const opDeleteUser = "DeleteUser"
+
+// DeleteUserRequest is a API request type for the DeleteUser API operation.
+type DeleteUserRequest struct {
+	*aws.Request
+	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
+}
+
+// Send marshals and sends the DeleteUser API request.
+func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserOutput), nil
+}
+
+// DeleteUserRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Deletes a user from the user pool.
+//
+//    // Example sending a request using the DeleteUserRequest method.
+//    req := client.DeleteUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUser
+func (c *AppStream) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
+	op := &aws.Operation{
+		Name:       opDeleteUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteUserInput{}
+	}
+
+	output := &DeleteUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDescribeDirectoryConfigs = "DescribeDirectoryConfigs"
@@ -1200,6 +1402,164 @@ func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) DescribeSt
 	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 
+const opDescribeUserStackAssociations = "DescribeUserStackAssociations"
+
+// DescribeUserStackAssociationsRequest is a API request type for the DescribeUserStackAssociations API operation.
+type DescribeUserStackAssociationsRequest struct {
+	*aws.Request
+	Input *DescribeUserStackAssociationsInput
+	Copy  func(*DescribeUserStackAssociationsInput) DescribeUserStackAssociationsRequest
+}
+
+// Send marshals and sends the DescribeUserStackAssociations API request.
+func (r DescribeUserStackAssociationsRequest) Send() (*DescribeUserStackAssociationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUserStackAssociationsOutput), nil
+}
+
+// DescribeUserStackAssociationsRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Retrieves a list that describes the UserStackAssociation objects. You must
+// specify either or both of the following:
+//
+//    * The stack name
+//
+//    * The user name (email address of the user associated with the stack)
+//    and the authentication type for the user
+//
+//    // Example sending a request using the DescribeUserStackAssociationsRequest method.
+//    req := client.DescribeUserStackAssociationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociations
+func (c *AppStream) DescribeUserStackAssociationsRequest(input *DescribeUserStackAssociationsInput) DescribeUserStackAssociationsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeUserStackAssociations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeUserStackAssociationsInput{}
+	}
+
+	output := &DescribeUserStackAssociationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeUserStackAssociationsRequest{Request: req, Input: input, Copy: c.DescribeUserStackAssociationsRequest}
+}
+
+const opDescribeUsers = "DescribeUsers"
+
+// DescribeUsersRequest is a API request type for the DescribeUsers API operation.
+type DescribeUsersRequest struct {
+	*aws.Request
+	Input *DescribeUsersInput
+	Copy  func(*DescribeUsersInput) DescribeUsersRequest
+}
+
+// Send marshals and sends the DescribeUsers API request.
+func (r DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUsersOutput), nil
+}
+
+// DescribeUsersRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Retrieves a list that describes one or more specified users in the user pool,
+// if user names are provided. Otherwise, all users in the user pool are described.
+//
+//    // Example sending a request using the DescribeUsersRequest method.
+//    req := client.DescribeUsersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsers
+func (c *AppStream) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsersRequest {
+	op := &aws.Operation{
+		Name:       opDescribeUsers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeUsersInput{}
+	}
+
+	output := &DescribeUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeUsersRequest{Request: req, Input: input, Copy: c.DescribeUsersRequest}
+}
+
+const opDisableUser = "DisableUser"
+
+// DisableUserRequest is a API request type for the DisableUser API operation.
+type DisableUserRequest struct {
+	*aws.Request
+	Input *DisableUserInput
+	Copy  func(*DisableUserInput) DisableUserRequest
+}
+
+// Send marshals and sends the DisableUser API request.
+func (r DisableUserRequest) Send() (*DisableUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableUserOutput), nil
+}
+
+// DisableUserRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Disables the specified user in the user pool. Users can't sign in to AppStream
+// 2.0 until they are re-enabled. This action does not delete the user.
+//
+//    // Example sending a request using the DisableUserRequest method.
+//    req := client.DisableUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUser
+func (c *AppStream) DisableUserRequest(input *DisableUserInput) DisableUserRequest {
+	op := &aws.Operation{
+		Name:       opDisableUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisableUserInput{}
+	}
+
+	output := &DisableUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisableUserRequest{Request: req, Input: input, Copy: c.DisableUserRequest}
+}
+
 const opDisassociateFleet = "DisassociateFleet"
 
 // DisassociateFleetRequest is a API request type for the DisassociateFleet API operation.
@@ -1248,6 +1608,57 @@ func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) Disa
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DisassociateFleetRequest{Request: req, Input: input, Copy: c.DisassociateFleetRequest}
+}
+
+const opEnableUser = "EnableUser"
+
+// EnableUserRequest is a API request type for the EnableUser API operation.
+type EnableUserRequest struct {
+	*aws.Request
+	Input *EnableUserInput
+	Copy  func(*EnableUserInput) EnableUserRequest
+}
+
+// Send marshals and sends the EnableUser API request.
+func (r EnableUserRequest) Send() (*EnableUserOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableUserOutput), nil
+}
+
+// EnableUserRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Enables a user in the user pool. After being enabled, users can sign in to
+// AppStream 2.0 and open applications from the stacks to which they are assigned.
+//
+//    // Example sending a request using the EnableUserRequest method.
+//    req := client.EnableUserRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUser
+func (c *AppStream) EnableUserRequest(input *EnableUserInput) EnableUserRequest {
+	op := &aws.Operation{
+		Name:       opEnableUser,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &EnableUserInput{}
+	}
+
+	output := &EnableUserOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return EnableUserRequest{Request: req, Input: input, Copy: c.EnableUserRequest}
 }
 
 const opExpireSession = "ExpireSession"
@@ -2157,6 +2568,138 @@ func (s AssociateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStackRequest
+type BatchAssociateUserStackInput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of UserStackAssociation objects.
+	//
+	// UserStackAssociations is a required field
+	UserStackAssociations []UserStackAssociation `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchAssociateUserStackInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchAssociateUserStackInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchAssociateUserStackInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchAssociateUserStackInput"}
+
+	if s.UserStackAssociations == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserStackAssociations"))
+	}
+	if s.UserStackAssociations != nil {
+		for i, v := range s.UserStackAssociations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserStackAssociations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchAssociateUserStackResult
+type BatchAssociateUserStackOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The list of UserStackAssociationError objects.
+	Errors []UserStackAssociationError `locationName:"errors" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchAssociateUserStackOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchAssociateUserStackOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchAssociateUserStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStackRequest
+type BatchDisassociateUserStackInput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of UserStackAssociation objects.
+	//
+	// UserStackAssociations is a required field
+	UserStackAssociations []UserStackAssociation `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchDisassociateUserStackInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchDisassociateUserStackInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchDisassociateUserStackInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDisassociateUserStackInput"}
+
+	if s.UserStackAssociations == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserStackAssociations"))
+	}
+	if s.UserStackAssociations != nil {
+		for i, v := range s.UserStackAssociations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserStackAssociations", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/BatchDisassociateUserStackResult
+type BatchDisassociateUserStackOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The list of UserStackAssociationError objects.
+	Errors []UserStackAssociationError `locationName:"errors" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchDisassociateUserStackOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchDisassociateUserStackOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDisassociateUserStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Describes the capacity for a fleet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacity
 type ComputeCapacity struct {
@@ -2944,6 +3487,89 @@ func (s CreateStreamingURLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUserRequest
+type CreateUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// The first name, or given name, of the user.
+	FirstName *string `type:"string"`
+
+	// The last name, or surname, of the user.
+	LastName *string `type:"string"`
+
+	// The action to take for the welcome email that is sent to a user after the
+	// user is created in the user pool. If you specify SUPPRESS, no email is sent.
+	// If you specify RESEND, do not specify the first name or last name of the
+	// user. If the value is null, the email is sent.
+	//
+	// The temporary password in the welcome email is valid for only 7 days. If
+	// users don’t set their passwords within 7 days, you must send them a new welcome
+	// email.
+	MessageAction MessageAction `type:"string" enum:"true"`
+
+	// The email address of the user.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
+	if len(s.AuthenticationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUserResult
+type CreateUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s CreateUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigRequest
 type DeleteDirectoryConfigInput struct {
 	_ struct{} `type:"structure"`
@@ -3301,6 +3927,73 @@ func (s DeleteStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUserRequest
+type DeleteUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// The email address of the user.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
+	if len(s.AuthenticationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteUserResult
+type DeleteUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsRequest
 type DescribeDirectoryConfigsInput struct {
 	_ struct{} `type:"structure"`
@@ -3505,7 +4198,7 @@ func (s DescribeImageBuildersOutput) SDKResponseMetadata() aws.Response {
 type DescribeImagePermissionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum size of each results page.
+	// The maximum size of each page of results.
 	MaxResults *int64 `type:"integer"`
 
 	// The name of the private image for which to describe permissions. The image
@@ -3514,8 +4207,8 @@ type DescribeImagePermissionsInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// The pagination token to use to retrieve the next page of results. If this
-	// value is empty, only the first page is retrieved.
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string `min:"1" type:"string"`
 
 	// The 12-digit ID of one or more AWS accounts with which the image is shared.
@@ -3561,8 +4254,8 @@ type DescribeImagePermissionsOutput struct {
 	// The name of the private image.
 	Name *string `type:"string"`
 
-	// The pagination token to use to retrieve the next page of results. If this
-	// value is empty, only the first page is retrieved.
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string `min:"1" type:"string"`
 
 	// The permissions for a private image that you own.
@@ -3597,8 +4290,8 @@ type DescribeImagesInput struct {
 	// The names of the public or private images to describe.
 	Names []string `type:"list"`
 
-	// The pagination token to use to retrieve the next page of results. If this
-	// value is empty, only the first page is retrieved.
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string `min:"1" type:"string"`
 
 	// The type of image (public, private, or shared) to describe.
@@ -3637,8 +4330,8 @@ type DescribeImagesOutput struct {
 	// Information about the images.
 	Images []Image `type:"list"`
 
-	// The pagination token to use to retrieve the next page of results. If there
-	// are no more pages, this value is null.
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -3821,6 +4514,159 @@ func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociationsRequest
+type DescribeUserStackAssociationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the user who is associated with the stack. You
+	// must specify USERPOOL.
+	AuthenticationType AuthenticationType `type:"string" enum:"true"`
+
+	// The maximum size of each page of results.
+	MaxResults *int64 `type:"integer"`
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
+	NextToken *string `min:"1" type:"string"`
+
+	// The name of the stack that is associated with the user.
+	StackName *string `min:"1" type:"string"`
+
+	// The email address of the user who is associated with the stack.
+	UserName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeUserStackAssociationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserStackAssociationsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUserStackAssociationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserStackAssociationsInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.StackName != nil && len(*s.StackName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUserStackAssociationsResult
+type DescribeUserStackAssociationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
+	NextToken *string `min:"1" type:"string"`
+
+	// The UserStackAssociation objects.
+	UserStackAssociations []UserStackAssociation `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeUserStackAssociationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUserStackAssociationsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUserStackAssociationsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsersRequest
+type DescribeUsersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the users in the user pool to describe. You must
+	// specify USERPOOL.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// The maximum size of each page of results.
+	MaxResults *int64 `type:"integer"`
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeUsersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUsersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUsersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUsersInput"}
+	if len(s.AuthenticationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeUsersResult
+type DescribeUsersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
+	NextToken *string `min:"1" type:"string"`
+
+	// Information about users in the user pool.
+	Users []User `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeUsersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUsersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Configuration information for the directory used to join domains.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DirectoryConfig
 type DirectoryConfig struct {
@@ -3850,6 +4696,73 @@ func (s DirectoryConfig) String() string {
 // GoString returns the string representation
 func (s DirectoryConfig) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUserRequest
+type DisableUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// The email address of the user.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisableUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisableUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisableUserInput"}
+	if len(s.AuthenticationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisableUserResult
+type DisableUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisableUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisableUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisableUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetRequest
@@ -3943,6 +4856,73 @@ func (s DomainJoinInfo) String() string {
 // GoString returns the string representation
 func (s DomainJoinInfo) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserRequest
+type EnableUserInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// The email address of the user.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EnableUserInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableUserInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EnableUserInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EnableUserInput"}
+	if len(s.AuthenticationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserResult
+type EnableUserOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s EnableUserOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableUserOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s EnableUserOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionRequest
@@ -5614,6 +6594,58 @@ func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Describes a user in the user pool.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/User
+type User struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the user.
+	Arn *string `type:"string"`
+
+	// The authentication type for the user.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// The date and time the user was created in the user pool.
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Specifies whether the user in the user pool is enabled.
+	Enabled *bool `type:"boolean"`
+
+	// The first name, or given name, of the user.
+	FirstName *string `type:"string"`
+
+	// The last name, or surname, of the user.
+	LastName *string `type:"string"`
+
+	// The status of the user in the user pool. The status can be one of the following:
+	//
+	//    * UNCONFIRMED – The user is created but not confirmed.
+	//
+	//    * CONFIRMED – The user is confirmed.
+	//
+	//    * ARCHIVED – The user is no longer active.
+	//
+	//    * COMPROMISED – The user is disabled because of a potential security threat.
+	//
+	//    * UNKNOWN – The user status is not known.
+	Status *string `min:"1" type:"string"`
+
+	// The email address of the user.
+	UserName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s User) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s User) GoString() string {
+	return s.String()
+}
+
 // Describes an action and whether the action is enabled or disabled for users
 // during their streaming sessions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting
@@ -5655,6 +6687,96 @@ func (s *UserSetting) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Describes a user in the user pool and the associated stack.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserStackAssociation
+type UserStackAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The authentication type for the user.
+	//
+	// AuthenticationType is a required field
+	AuthenticationType AuthenticationType `type:"string" required:"true" enum:"true"`
+
+	// Specifies whether a welcome email is sent to a user after the user is created
+	// in the user pool.
+	SendEmailNotification *bool `type:"boolean"`
+
+	// The name of the stack that is associated with the user.
+	//
+	// StackName is a required field
+	StackName *string `min:"1" type:"string" required:"true"`
+
+	// The email address of the user who is associated with the stack.
+	//
+	// UserName is a required field
+	UserName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UserStackAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserStackAssociation) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserStackAssociation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserStackAssociation"}
+	if len(s.AuthenticationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationType"))
+	}
+
+	if s.StackName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
+	}
+	if s.StackName != nil && len(*s.StackName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
+	}
+
+	if s.UserName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserName"))
+	}
+	if s.UserName != nil && len(*s.UserName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes the error that is returned when a user can’t be associated with
+// or disassociated from a stack.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserStackAssociationError
+type UserStackAssociationError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code for the error that is returned when a user can’t be associated
+	// with or disassociated from a stack.
+	ErrorCode UserStackAssociationErrorCode `type:"string" enum:"true"`
+
+	// The error message for the error that is returned when a user can’t be associated
+	// with or disassociated from a stack.
+	ErrorMessage *string `min:"1" type:"string"`
+
+	// Information about the user and associated stack.
+	UserStackAssociation *UserStackAssociation `type:"structure"`
+}
+
+// String returns the string representation
+func (s UserStackAssociationError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserStackAssociationError) GoString() string {
+	return s.String()
 }
 
 // Describes VPC configuration information.
@@ -5892,6 +7014,23 @@ func (enum ImageStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+type MessageAction string
+
+// Enum values for MessageAction
+const (
+	MessageActionSuppress MessageAction = "SUPPRESS"
+	MessageActionResend   MessageAction = "RESEND"
+)
+
+func (enum MessageAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Permission string
 
 // Enum values for Permission
@@ -5999,6 +7138,24 @@ func (enum StorageConnectorType) MarshalValue() (string, error) {
 }
 
 func (enum StorageConnectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UserStackAssociationErrorCode string
+
+// Enum values for UserStackAssociationErrorCode
+const (
+	UserStackAssociationErrorCodeStackNotFound    UserStackAssociationErrorCode = "STACK_NOT_FOUND"
+	UserStackAssociationErrorCodeUserNameNotFound UserStackAssociationErrorCode = "USER_NAME_NOT_FOUND"
+	UserStackAssociationErrorCodeInternalError    UserStackAssociationErrorCode = "INTERNAL_ERROR"
+)
+
+func (enum UserStackAssociationErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserStackAssociationErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

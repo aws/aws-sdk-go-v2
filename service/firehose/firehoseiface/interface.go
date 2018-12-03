@@ -76,6 +76,10 @@ type FirehoseAPI interface {
 
 	PutRecordBatchRequest(*firehose.PutRecordBatchInput) firehose.PutRecordBatchRequest
 
+	StartDeliveryStreamEncryptionRequest(*firehose.StartDeliveryStreamEncryptionInput) firehose.StartDeliveryStreamEncryptionRequest
+
+	StopDeliveryStreamEncryptionRequest(*firehose.StopDeliveryStreamEncryptionInput) firehose.StopDeliveryStreamEncryptionRequest
+
 	TagDeliveryStreamRequest(*firehose.TagDeliveryStreamInput) firehose.TagDeliveryStreamRequest
 
 	UntagDeliveryStreamRequest(*firehose.UntagDeliveryStreamInput) firehose.UntagDeliveryStreamRequest

@@ -16739,6 +16739,11 @@ type TestInvokeAuthorizerInput struct {
 	// should be specified.
 	Headers map[string]string `locationName:"headers" type:"map"`
 
+	// [Optional] The headers as a map from string to list of values to simulate
+	// an incoming invocation request. This is where the incoming authorization
+	// token, or identity source, may be specified.
+	MultiValueHeaders map[string][]string `locationName:"multiValueHeaders" type:"map"`
+
 	// [Optional] The URI path, including query string, of the simulated invocation
 	// request. Use this to specify path parameters and query string parameters.
 	PathWithQueryString *string `locationName:"pathWithQueryString" type:"string"`
@@ -16810,6 +16815,23 @@ func (s TestInvokeAuthorizerInput) MarshalFields(e protocol.FieldEncoder) error 
 		ms0.Start()
 		for k1, v1 := range v {
 			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if len(s.MultiValueHeaders) > 0 {
+		v := s.MultiValueHeaders
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "multiValueHeaders", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
+			}
+			ls1.End()
 		}
 		ms0.End()
 
@@ -16976,6 +16998,10 @@ type TestInvokeMethodInput struct {
 	// HttpMethod is a required field
 	HttpMethod *string `location:"uri" locationName:"http_method" type:"string" required:"true"`
 
+	// The headers as a map from string to list of values to simulate an incoming
+	// invocation request.
+	MultiValueHeaders map[string][]string `locationName:"multiValueHeaders" type:"map"`
+
 	// The URI path, including query string, of the simulated invocation request.
 	// Use this to specify path parameters and query string parameters.
 	PathWithQueryString *string `locationName:"pathWithQueryString" type:"string"`
@@ -17054,6 +17080,23 @@ func (s TestInvokeMethodInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if len(s.MultiValueHeaders) > 0 {
+		v := s.MultiValueHeaders
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "multiValueHeaders", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
+			}
+			ls1.End()
+		}
+		ms0.End()
+
+	}
 	if s.PathWithQueryString != nil {
 		v := *s.PathWithQueryString
 
@@ -17113,6 +17156,9 @@ type TestInvokeMethodOutput struct {
 	// The API Gateway execution log for the test invoke request.
 	Log *string `locationName:"log" type:"string"`
 
+	// The headers of the HTTP response as a map from string to list of values.
+	MultiValueHeaders map[string][]string `locationName:"multiValueHeaders" type:"map"`
+
 	// The HTTP status code.
 	Status *int64 `locationName:"status" type:"integer"`
 }
@@ -17163,6 +17209,23 @@ func (s TestInvokeMethodOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "log", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.MultiValueHeaders) > 0 {
+		v := s.MultiValueHeaders
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "multiValueHeaders", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
+			}
+			ls1.End()
+		}
+		ms0.End()
+
 	}
 	if s.Status != nil {
 		v := *s.Status
@@ -21169,6 +21232,9 @@ type UpdateStageOutput struct {
 	// can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]string `locationName:"variables" type:"map"`
+
+	// The ARN of the WebAcl associated with the Stage.
+	WebAclArn *string `locationName:"webAclArn" type:"string"`
 }
 
 // String returns the string representation
@@ -21301,6 +21367,12 @@ func (s UpdateStageOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.WebAclArn != nil {
+		v := *s.WebAclArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "webAclArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -70,6 +70,8 @@ type AutoScalingPlansAPI interface {
 
 	DescribeScalingPlansRequest(*autoscalingplans.DescribeScalingPlansInput) autoscalingplans.DescribeScalingPlansRequest
 
+	GetScalingPlanResourceForecastDataRequest(*autoscalingplans.GetScalingPlanResourceForecastDataInput) autoscalingplans.GetScalingPlanResourceForecastDataRequest
+
 	UpdateScalingPlanRequest(*autoscalingplans.UpdateScalingPlanInput) autoscalingplans.UpdateScalingPlanRequest
 }
 

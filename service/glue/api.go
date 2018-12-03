@@ -1336,6 +1336,56 @@ func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) DeletePartiti
 	return DeletePartitionRequest{Request: req, Input: input, Copy: c.DeletePartitionRequest}
 }
 
+const opDeleteResourcePolicy = "DeleteResourcePolicy"
+
+// DeleteResourcePolicyRequest is a API request type for the DeleteResourcePolicy API operation.
+type DeleteResourcePolicyRequest struct {
+	*aws.Request
+	Input *DeleteResourcePolicyInput
+	Copy  func(*DeleteResourcePolicyInput) DeleteResourcePolicyRequest
+}
+
+// Send marshals and sends the DeleteResourcePolicy API request.
+func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteResourcePolicyOutput), nil
+}
+
+// DeleteResourcePolicyRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Deletes a specified policy.
+//
+//    // Example sending a request using the DeleteResourcePolicyRequest method.
+//    req := client.DeleteResourcePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicy
+func (c *Glue) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) DeleteResourcePolicyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteResourcePolicyInput{}
+	}
+
+	output := &DeleteResourcePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteResourcePolicyRequest{Request: req, Input: input, Copy: c.DeleteResourcePolicyRequest}
+}
+
 const opDeleteSecurityConfiguration = "DeleteSecurityConfiguration"
 
 // DeleteSecurityConfigurationRequest is a API request type for the DeleteSecurityConfiguration API operation.
@@ -2480,6 +2530,11 @@ func (r GetDevEndpointRequest) Send() (*GetDevEndpointOutput, error) {
 //
 // Retrieves information about a specified DevEndpoint.
 //
+// When you create a development endpoint in a virtual private cloud (VPC),
+// AWS Glue returns only a private IP address, and the public IP address field
+// is not populated. When you create a non-VPC development endpoint, AWS Glue
+// returns only a public IP address.
+//
 //    // Example sending a request using the GetDevEndpointRequest method.
 //    req := client.GetDevEndpointRequest(params)
 //    resp, err := req.Send()
@@ -2529,6 +2584,11 @@ func (r GetDevEndpointsRequest) Send() (*GetDevEndpointsOutput, error) {
 // AWS Glue.
 //
 // Retrieves all the DevEndpoints in this AWS account.
+//
+// When you create a development endpoint in a virtual private cloud (VPC),
+// AWS Glue returns only a private IP address and the public IP address field
+// is not populated. When you create a non-VPC development endpoint, AWS Glue
+// returns only a public IP address.
 //
 //    // Example sending a request using the GetDevEndpointsRequest method.
 //    req := client.GetDevEndpointsRequest(params)
@@ -3162,6 +3222,56 @@ func (c *Glue) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetPlanRequest{Request: req, Input: input, Copy: c.GetPlanRequest}
+}
+
+const opGetResourcePolicy = "GetResourcePolicy"
+
+// GetResourcePolicyRequest is a API request type for the GetResourcePolicy API operation.
+type GetResourcePolicyRequest struct {
+	*aws.Request
+	Input *GetResourcePolicyInput
+	Copy  func(*GetResourcePolicyInput) GetResourcePolicyRequest
+}
+
+// Send marshals and sends the GetResourcePolicy API request.
+func (r GetResourcePolicyRequest) Send() (*GetResourcePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourcePolicyOutput), nil
+}
+
+// GetResourcePolicyRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Retrieves a specified resource policy.
+//
+//    // Example sending a request using the GetResourcePolicyRequest method.
+//    req := client.GetResourcePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicy
+func (c *Glue) GetResourcePolicyRequest(input *GetResourcePolicyInput) GetResourcePolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetResourcePolicyInput{}
+	}
+
+	output := &GetResourcePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetResourcePolicyRequest{Request: req, Input: input, Copy: c.GetResourcePolicyRequest}
 }
 
 const opGetSecurityConfiguration = "GetSecurityConfiguration"
@@ -3973,6 +4083,56 @@ func (c *Glue) PutDataCatalogEncryptionSettingsRequest(input *PutDataCatalogEncr
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutDataCatalogEncryptionSettingsRequest{Request: req, Input: input, Copy: c.PutDataCatalogEncryptionSettingsRequest}
+}
+
+const opPutResourcePolicy = "PutResourcePolicy"
+
+// PutResourcePolicyRequest is a API request type for the PutResourcePolicy API operation.
+type PutResourcePolicyRequest struct {
+	*aws.Request
+	Input *PutResourcePolicyInput
+	Copy  func(*PutResourcePolicyInput) PutResourcePolicyRequest
+}
+
+// Send marshals and sends the PutResourcePolicy API request.
+func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutResourcePolicyOutput), nil
+}
+
+// PutResourcePolicyRequest returns a request value for making API operation for
+// AWS Glue.
+//
+// Sets the Data Catalog resource policy for access control.
+//
+//    // Example sending a request using the PutResourcePolicyRequest method.
+//    req := client.PutResourcePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicy
+func (c *Glue) PutResourcePolicyRequest(input *PutResourcePolicyInput) PutResourcePolicyRequest {
+	op := &aws.Operation{
+		Name:       opPutResourcePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutResourcePolicyInput{}
+	}
+
+	output := &PutResourcePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutResourcePolicyRequest{Request: req, Input: input, Copy: c.PutResourcePolicyRequest}
 }
 
 const opResetJobBookmark = "ResetJobBookmark"
@@ -5362,7 +5522,8 @@ type BatchDeleteTableVersionInput struct {
 	// TableName is a required field
 	TableName *string `min:"1" type:"string" required:"true"`
 
-	// A list of the IDs of versions to be deleted.
+	// A list of the IDs of versions to be deleted. A VersionId is a string representation
+	// of an integer. Each version is incremented by 1.
 	//
 	// VersionIds is a required field
 	VersionIds []string `type:"list" required:"true"`
@@ -6053,7 +6214,8 @@ type Connection struct {
 	//    * PORT - The port number, between 1024 and 65535, of the port on which
 	//    the database host is listening for database connections.
 	//
-	//    * USER_NAME - The name under which to log in to the database.
+	//    * USER_NAME - The name under which to log in to the database. The value
+	//    string for USER_NAME is "USERNAME".
 	//
 	//    * PASSWORD - A password, if one is used, for the user name.
 	//
@@ -6215,15 +6377,8 @@ type Crawler struct {
 	Classifiers []string `type:"list"`
 
 	// Crawler configuration information. This versioned JSON string allows users
-	// to specify aspects of a Crawler's behavior.
-	//
-	// You can use this field to force partitions to inherit metadata such as classification,
-	// input format, output format, serde information, and schema from their parent
-	// table, rather than detect this information separately for each partition.
-	// Use the following JSON string to specify that behavior:
-	//
-	// Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior":
-	// "InheritFromTable" } } }'
+	// to specify aspects of a crawler's behavior. For more information, see Configuring
+	// a Crawler (http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string `type:"string"`
 
 	// If the crawler is running, contains the total time elapsed since the last
@@ -6500,15 +6655,8 @@ type CreateCrawlerInput struct {
 	Classifiers []string `type:"list"`
 
 	// Crawler configuration information. This versioned JSON string allows users
-	// to specify aspects of a Crawler's behavior.
-	//
-	// You can use this field to force partitions to inherit metadata such as classification,
-	// input format, output format, serde information, and schema from their parent
-	// table, rather than detect this information separately for each partition.
-	// Use the following JSON string to specify that behavior:
-	//
-	// Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior":
-	// "InheritFromTable" } } }'
+	// to specify aspects of a crawler's behavior. For more information, see Configuring
+	// a Crawler (http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string `type:"string"`
 
 	// The name of the SecurityConfiguration structure to be used by this Crawler.
@@ -8230,6 +8378,59 @@ func (s DeletePartitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyRequest
+type DeleteResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The hash value returned when this policy was set.
+	PolicyHashCondition *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteResourcePolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourcePolicyInput"}
+	if s.PolicyHashCondition != nil && len(*s.PolicyHashCondition) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyHashCondition", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteResourcePolicyResponse
+type DeleteResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteResourcePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteResourcePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSecurityConfigurationRequest
 type DeleteSecurityConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -8388,7 +8589,8 @@ type DeleteTableVersionInput struct {
 	// TableName is a required field
 	TableName *string `min:"1" type:"string" required:"true"`
 
-	// The ID of the table version to be deleted.
+	// The ID of the table version to be deleted. A VersionID is a string representation
+	// of an integer. Each version is incremented by 1.
 	//
 	// VersionId is a required field
 	VersionId *string `min:"1" type:"string" required:"true"`
@@ -8642,11 +8844,13 @@ type DevEndpoint struct {
 	// The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`
 
-	// A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint
-	// is created within one.
+	// A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint
+	// is created within one. The PrivateAddress field is present only when you
+	// create the DevEndpoint within your virtual private cloud (VPC).
 	PrivateAddress *string `type:"string"`
 
-	// The public VPC address used by this DevEndpoint.
+	// The public IP address used by this DevEndpoint. The PublicAddress field is
+	// present only when you create a non-VPC (virtual private cloud) DevEndpoint.
 	PublicAddress *string `type:"string"`
 
 	// The public key to be used by this DevEndpoint for authentication. This attribute
@@ -10225,6 +10429,76 @@ type GetPartitionsInput struct {
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
 	// An expression filtering the partitions to be returned.
+	//
+	// The expression uses SQL syntax similar to the SQL WHERE filter clause. The
+	// SQL statement parser JSQLParser (http://jsqlparser.sourceforge.net/home.php)
+	// parses the expression.
+	//
+	// Operators: The following are the operators that you can use in the Expression
+	// API call:
+	//
+	// =Checks if the values of the two operands are equal or not; if yes, then
+	// the condition becomes true.
+	//
+	// Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+	//
+	// (a = b) is not true.
+	//
+	// < >Checks if the values of two operands are equal or not; if the values are
+	// not equal, then the condition becomes true.
+	//
+	// Example: (a < > b) is true.
+	//
+	// >Checks if the value of the left operand is greater than the value of the
+	// right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a > b) is not true.
+	//
+	// <Checks if the value of the left operand is less than the value of the right
+	// operand; if yes, then the condition becomes true.
+	//
+	// Example: (a < b) is true.
+	//
+	// >=Checks if the value of the left operand is greater than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a >= b) is not true.
+	//
+	// <=Checks if the value of the left operand is less than or equal to the value
+	// of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a <= b) is true.
+	//
+	// AND, OR, IN, BETWEEN, LIKE, NOT, IS NULLLogical operators.
+	//
+	// Supported Partition Key Types: The following are the the supported partition
+	// keys.
+	//
+	//    * string
+	//
+	//    * date
+	//
+	//    * timestamp
+	//
+	//    * int
+	//
+	//    * bigint
+	//
+	//    * long
+	//
+	//    * tinyint
+	//
+	//    * smallint
+	//
+	//    * decimal
+	//
+	// If an invalid type is encountered, an exception is thrown.
+	//
+	// The following list shows the valid operators on each type. When you define
+	// a crawler, the partitionKey type is created as a STRING, to be compatible
+	// with the catalog partitions.
+	//
+	// Sample API Call:
 	Expression *string `type:"string"`
 
 	// The maximum number of partitions to return in a single response.
@@ -10410,6 +10684,55 @@ func (s GetPlanOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicyRequest
+type GetResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetResourcePolicyResponse
+type GetResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The date and time at which the policy was created.
+	CreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Contains the hash value associated with this policy.
+	PolicyHash *string `min:"1" type:"string"`
+
+	// Contains the requested policy document, in JSON format.
+	PolicyInJson *string `min:"2" type:"string"`
+
+	// The date and time at which the policy was last updated.
+	UpdateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s GetResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourcePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourcePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -10639,7 +10962,8 @@ type GetTableVersionInput struct {
 	// TableName is a required field
 	TableName *string `min:"1" type:"string" required:"true"`
 
-	// The ID value of the table version to be retrieved.
+	// The ID value of the table version to be retrieved. A VersionID is a string
+	// representation of an integer. Each version is incremented by 1.
 	VersionId *string `min:"1" type:"string"`
 }
 
@@ -12223,6 +12547,82 @@ func (s PutDataCatalogEncryptionSettingsOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicyRequest
+type PutResourcePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is
+	// used to create a new policy. If a value of NONE or a null value is used,
+	// the call will not depend on the existence of a policy.
+	PolicyExistsCondition ExistCondition `type:"string" enum:"true"`
+
+	// This is the hash value returned when the previous policy was set using PutResourcePolicy.
+	// Its purpose is to prevent concurrent modifications of a policy. Do not use
+	// this parameter if no previous policy has been set.
+	PolicyHashCondition *string `min:"1" type:"string"`
+
+	// Contains the policy document to set, in JSON format.
+	//
+	// PolicyInJson is a required field
+	PolicyInJson *string `min:"2" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutResourcePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutResourcePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutResourcePolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutResourcePolicyInput"}
+	if s.PolicyHashCondition != nil && len(*s.PolicyHashCondition) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyHashCondition", 1))
+	}
+
+	if s.PolicyInJson == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PolicyInJson"))
+	}
+	if s.PolicyInJson != nil && len(*s.PolicyInJson) < 2 {
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyInJson", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PutResourcePolicyResponse
+type PutResourcePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A hash of the policy that has just been set. This must be included in a subsequent
+	// call that overwrites or updates this policy.
+	PolicyHash *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s PutResourcePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutResourcePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutResourcePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmarkRequest
 type ResetJobBookmarkInput struct {
 	_ struct{} `type:"structure"`
@@ -13302,7 +13702,8 @@ type TableVersion struct {
 	// The table in question
 	Table *Table `type:"structure"`
 
-	// The ID value that identifies this table version.
+	// The ID value that identifies this table version. A VersionId is a string
+	// representation of an integer. Each version is incremented by 1.
 	VersionId *string `min:"1" type:"string"`
 }
 
@@ -13327,7 +13728,8 @@ type TableVersionError struct {
 	// The name of the table in question.
 	TableName *string `min:"1" type:"string"`
 
-	// The ID value of the version in question.
+	// The ID value of the version in question. A VersionID is a string representation
+	// of an integer. Each version is incremented by 1.
 	VersionId *string `min:"1" type:"string"`
 }
 
@@ -13605,15 +14007,8 @@ type UpdateCrawlerInput struct {
 	Classifiers []string `type:"list"`
 
 	// Crawler configuration information. This versioned JSON string allows users
-	// to specify aspects of a Crawler's behavior.
-	//
-	// You can use this field to force partitions to inherit metadata such as classification,
-	// input format, output format, serde information, and schema from their parent
-	// table, rather than detect this information separately for each partition.
-	// Use the following JSON string to specify that behavior:
-	//
-	// Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior":
-	// "InheritFromTable" } } }'
+	// to specify aspects of a crawler's behavior. For more information, see Configuring
+	// a Crawler (http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string `type:"string"`
 
 	// The name of the SecurityConfiguration structure to be used by this Crawler.
@@ -14734,6 +15129,24 @@ func (enum DeleteBehavior) MarshalValue() (string, error) {
 }
 
 func (enum DeleteBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ExistCondition string
+
+// Enum values for ExistCondition
+const (
+	ExistConditionMustExist ExistCondition = "MUST_EXIST"
+	ExistConditionNotExist  ExistCondition = "NOT_EXIST"
+	ExistConditionNone      ExistCondition = "NONE"
+)
+
+func (enum ExistCondition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExistCondition) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

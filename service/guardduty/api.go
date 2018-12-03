@@ -2509,10 +2509,14 @@ type AcceptInvitationInput struct {
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// This value is used to validate the master account to the member account.
-	InvitationId *string `locationName:"invitationId" type:"string"`
+	//
+	// InvitationId is a required field
+	InvitationId *string `locationName:"invitationId" type:"string" required:"true"`
 
 	// The account ID of the master GuardDuty account whose invitation you're accepting.
-	MasterId *string `locationName:"masterId" type:"string"`
+	//
+	// MasterId is a required field
+	MasterId *string `locationName:"masterId" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2531,6 +2535,14 @@ func (s *AcceptInvitationInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.InvitationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InvitationId"))
+	}
+
+	if s.MasterId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MasterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2785,7 +2797,9 @@ type ArchiveFindingsInput struct {
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// IDs of the findings that you want to archive.
-	FindingIds []string `locationName:"findingIds" type:"list"`
+	//
+	// FindingIds is a required field
+	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2804,6 +2818,10 @@ func (s *ArchiveFindingsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FindingIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FindingIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3098,8 +3116,16 @@ func (s Country) MarshalFields(e protocol.FieldEncoder) error {
 type CreateDetectorInput struct {
 	_ struct{} `type:"structure"`
 
+	// The idempotency token for the create request.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
+
 	// A boolean value that specifies whether the detector is to be enabled.
-	Enable *bool `locationName:"enable" type:"boolean"`
+	//
+	// Enable is a required field
+	Enable *bool `locationName:"enable" type:"boolean" required:"true"`
+
+	// A enum value that specifies how frequently customer got Finding updates published.
+	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3112,15 +3138,47 @@ func (s CreateDetectorInput) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateDetectorInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDetectorInput"}
+
+	if s.Enable == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enable"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Enable != nil {
 		v := *s.Enable
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enable", protocol.BoolValue(v), metadata)
+	}
+	if len(s.FindingPublishingFrequency) > 0 {
+		v := s.FindingPublishingFrequency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "findingPublishingFrequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -3181,10 +3239,14 @@ type CreateFilterInput struct {
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// Represents the criteria to be used in the filter for querying findings.
-	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
+	//
+	// FindingCriteria is a required field
+	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure" required:"true"`
 
 	// The name of the filter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
@@ -3207,6 +3269,14 @@ func (s *CreateFilterInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FindingCriteria == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FindingCriteria"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3314,21 +3384,32 @@ type CreateIPSetInput struct {
 
 	// A boolean value that indicates whether GuardDuty is to start using the uploaded
 	// IPSet.
-	Activate *bool `locationName:"activate" type:"boolean"`
+	//
+	// Activate is a required field
+	Activate *bool `locationName:"activate" type:"boolean" required:"true"`
+
+	// The idempotency token for the create request.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// The format of the file that contains the IPSet.
-	Format IpSetFormat `locationName:"format" type:"string" enum:"true"`
+	//
+	// Format is a required field
+	Format IpSetFormat `locationName:"format" type:"string" required:"true" enum:"true"`
 
 	// The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
-	Location *string `locationName:"location" type:"string"`
+	//
+	// Location is a required field
+	Location *string `locationName:"location" type:"string" required:"true"`
 
 	// The user friendly name to identify the IPSet. This name is displayed in all
 	// findings that are triggered by activity that involves IP addresses included
 	// in this IPSet.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3345,8 +3426,23 @@ func (s CreateIPSetInput) GoString() string {
 func (s *CreateIPSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIPSetInput"}
 
+	if s.Activate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Activate"))
+	}
+
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if len(s.Format) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
+	}
+
+	if s.Location == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3364,6 +3460,18 @@ func (s CreateIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
+	}
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Format) > 0 {
 		v := s.Format
@@ -3436,7 +3544,9 @@ type CreateMembersInput struct {
 
 	// A list of account ID and email address pairs of the accounts that you want
 	// to associate with the master GuardDuty account.
-	AccountDetails []AccountDetail `locationName:"accountDetails" type:"list"`
+	//
+	// AccountDetails is a required field
+	AccountDetails []AccountDetail `locationName:"accountDetails" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -3455,6 +3565,10 @@ func (s CreateMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMembersInput"}
+
+	if s.AccountDetails == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountDetails"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -3637,20 +3751,31 @@ type CreateThreatIntelSetInput struct {
 
 	// A boolean value that indicates whether GuardDuty is to start using the uploaded
 	// ThreatIntelSet.
-	Activate *bool `locationName:"activate" type:"boolean"`
+	//
+	// Activate is a required field
+	Activate *bool `locationName:"activate" type:"boolean" required:"true"`
+
+	// The idempotency token for the create request.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// The format of the file that contains the ThreatIntelSet.
-	Format ThreatIntelSetFormat `locationName:"format" type:"string" enum:"true"`
+	//
+	// Format is a required field
+	Format ThreatIntelSetFormat `locationName:"format" type:"string" required:"true" enum:"true"`
 
 	// The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
-	Location *string `locationName:"location" type:"string"`
+	//
+	// Location is a required field
+	Location *string `locationName:"location" type:"string" required:"true"`
 
 	// A user-friendly ThreatIntelSet name that is displayed in all finding generated
 	// by activity that involves IP addresses included in this ThreatIntelSet.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3667,8 +3792,23 @@ func (s CreateThreatIntelSetInput) GoString() string {
 func (s *CreateThreatIntelSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateThreatIntelSetInput"}
 
+	if s.Activate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Activate"))
+	}
+
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if len(s.Format) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
+	}
+
+	if s.Location == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3686,6 +3826,18 @@ func (s CreateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
+	}
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Format) > 0 {
 		v := s.Format
@@ -3758,7 +3910,9 @@ type DeclineInvitationsInput struct {
 
 	// A list of account IDs of the AWS accounts that sent invitations to the current
 	// member account that you want to decline invitations from.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3769,6 +3923,20 @@ func (s DeclineInvitationsInput) String() string {
 // GoString returns the string representation
 func (s DeclineInvitationsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeclineInvitationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeclineInvitationsInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -4083,7 +4251,9 @@ type DeleteInvitationsInput struct {
 
 	// A list of account IDs of the AWS accounts that sent invitations to the current
 	// member account that you want to delete invitations from.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -4094,6 +4264,20 @@ func (s DeleteInvitationsInput) String() string {
 // GoString returns the string representation
 func (s DeleteInvitationsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteInvitationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInvitationsInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -4165,7 +4349,9 @@ type DeleteMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account IDs of the GuardDuty member accounts that you want to delete.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -4184,6 +4370,10 @@ func (s DeleteMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMembersInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -4428,7 +4618,9 @@ type DisassociateMembersInput struct {
 
 	// A list of account IDs of the GuardDuty member accounts that you want to disassociate
 	// from master.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -4447,6 +4639,10 @@ func (s DisassociateMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateMembersInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -4924,6 +5120,9 @@ type GetDetectorOutput struct {
 	// The first time a resource was created. The format will be ISO-8601.
 	CreatedAt *string `locationName:"createdAt" type:"string"`
 
+	// A enum value that specifies how frequently customer got Finding updates published.
+	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
+
 	// Customer serviceRole name or ARN for accessing customer resources
 	ServiceRole *string `locationName:"serviceRole" type:"string"`
 
@@ -4956,6 +5155,12 @@ func (s GetDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.FindingPublishingFrequency) > 0 {
+		v := s.FindingPublishingFrequency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "findingPublishingFrequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ServiceRole != nil {
 		v := *s.ServiceRole
@@ -5120,7 +5325,9 @@ type GetFindingsInput struct {
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// IDs of the findings that you want to retrieve.
-	FindingIds []string `locationName:"findingIds" type:"list"`
+	//
+	// FindingIds is a required field
+	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
 
 	// Represents the criteria used for sorting findings.
 	SortCriteria *SortCriteria `locationName:"sortCriteria" type:"structure"`
@@ -5142,6 +5349,10 @@ func (s *GetFindingsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FindingIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FindingIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5236,7 +5447,9 @@ type GetFindingsStatisticsInput struct {
 	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
 
 	// Types of finding statistics to retrieve.
-	FindingStatisticTypes []FindingStatisticType `locationName:"findingStatisticTypes" type:"list"`
+	//
+	// FindingStatisticTypes is a required field
+	FindingStatisticTypes []FindingStatisticType `locationName:"findingStatisticTypes" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -5255,6 +5468,10 @@ func (s *GetFindingsStatisticsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FindingStatisticTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FindingStatisticTypes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5602,7 +5819,9 @@ type GetMembersInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of account IDs of the GuardDuty member accounts that you want to describe.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -5621,6 +5840,10 @@ func (s GetMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMembersInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -6090,7 +6313,9 @@ type InviteMembersInput struct {
 
 	// A list of account IDs of the accounts that you want to invite to GuardDuty
 	// as members.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -6117,6 +6342,10 @@ func (s InviteMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InviteMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InviteMembersInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -8020,7 +8249,9 @@ type StartMonitoringMembersInput struct {
 
 	// A list of account IDs of the GuardDuty member accounts whose findings you
 	// want the master account to monitor.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -8039,6 +8270,10 @@ func (s StartMonitoringMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartMonitoringMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartMonitoringMembersInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -8126,7 +8361,9 @@ type StopMonitoringMembersInput struct {
 
 	// A list of account IDs of the GuardDuty member accounts whose findings you
 	// want the master account to stop monitoring.
-	AccountIds []string `locationName:"accountIds" type:"list"`
+	//
+	// AccountIds is a required field
+	AccountIds []string `locationName:"accountIds" type:"list" required:"true"`
 
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
@@ -8145,6 +8382,10 @@ func (s StopMonitoringMembersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopMonitoringMembersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopMonitoringMembersInput"}
+
+	if s.AccountIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountIds"))
+	}
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
@@ -8273,7 +8514,9 @@ type UnarchiveFindingsInput struct {
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// IDs of the findings that you want to unarchive.
-	FindingIds []string `locationName:"findingIds" type:"list"`
+	//
+	// FindingIds is a required field
+	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8292,6 +8535,10 @@ func (s *UnarchiveFindingsInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FindingIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FindingIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8407,6 +8654,9 @@ type UpdateDetectorInput struct {
 	// Updated boolean value for the detector that specifies whether the detector
 	// is enabled.
 	Enable *bool `locationName:"enable" type:"boolean"`
+
+	// A enum value that specifies how frequently customer got Finding updates published.
+	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -8442,6 +8692,12 @@ func (s UpdateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enable", protocol.BoolValue(v), metadata)
+	}
+	if len(s.FindingPublishingFrequency) > 0 {
+		v := s.FindingPublishingFrequency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "findingPublishingFrequency", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DetectorId != nil {
 		v := *s.DetectorId
@@ -8625,10 +8881,14 @@ type UpdateFindingsFeedbackInput struct {
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
 	// Valid values: USEFUL | NOT_USEFUL
-	Feedback Feedback `locationName:"feedback" type:"string" enum:"true"`
+	//
+	// Feedback is a required field
+	Feedback Feedback `locationName:"feedback" type:"string" required:"true" enum:"true"`
 
 	// IDs of the findings that you want to mark as useful or not useful.
-	FindingIds []string `locationName:"findingIds" type:"list"`
+	//
+	// FindingIds is a required field
+	FindingIds []string `locationName:"findingIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -8647,6 +8907,13 @@ func (s *UpdateFindingsFeedbackInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if len(s.Feedback) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Feedback"))
+	}
+
+	if s.FindingIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FindingIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8997,6 +9264,25 @@ func (enum FilterAction) MarshalValue() (string, error) {
 }
 
 func (enum FilterAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// A enum value that specifies how frequently customer got Finding updates published.
+type FindingPublishingFrequency string
+
+// Enum values for FindingPublishingFrequency
+const (
+	FindingPublishingFrequencyFifteenMinutes FindingPublishingFrequency = "FIFTEEN_MINUTES"
+	FindingPublishingFrequencyOneHour        FindingPublishingFrequency = "ONE_HOUR"
+	FindingPublishingFrequencySixHours       FindingPublishingFrequency = "SIX_HOURS"
+)
+
+func (enum FindingPublishingFrequency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FindingPublishingFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

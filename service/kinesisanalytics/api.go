@@ -202,19 +202,19 @@ func (r AddApplicationOutputRequest) Send() (*AddApplicationOutputOutput, error)
 //
 // If you want Amazon Kinesis Analytics to deliver data from an in-application
 // stream within your application to an external destination (such as an Amazon
-// Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an Amazon
-// Lambda function), you add the relevant configuration to your application
-// using this operation. You can configure one or more outputs for your application.
-// Each output configuration maps an in-application stream and an external destination.
+// Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda
+// function), you add the relevant configuration to your application using this
+// operation. You can configure one or more outputs for your application. Each
+// output configuration maps an in-application stream and an external destination.
 //
 // You can use one of the output configurations to deliver data from your in-application
 // error stream to an external destination so that you can analyze the errors.
-// For conceptual information, see Understanding Application Output (Destination)
+// For more information, see Understanding Application Output (Destination)
 // (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html).
 //
-// Note that any configuration update, including adding a streaming source using
-// this operation, results in a new version of the application. You can use
-// the DescribeApplication operation to find the current application version.
+// Any configuration update, including adding a streaming source using this
+// operation, results in a new version of the application. You can use the DescribeApplication
+// operation to find the current application version.
 //
 // For the limits on the number of application inputs and outputs you can configure,
 // see Limits (http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html).
@@ -1310,7 +1310,7 @@ type AddApplicationOutputInput struct {
 	// An array of objects, each describing one output configuration. In the output
 	// configuration, you specify the name of an in-application stream, a destination
 	// (that is, an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream,
-	// or an Amazon Lambda function), and record the formation to use when writing
+	// or an AWS Lambda function), and record the formation to use when writing
 	// to the destination.
 	//
 	// Output is a required field
@@ -1650,7 +1650,7 @@ func (s *ApplicationUpdate) Validate() error {
 //
 // "name1", "address1"
 //
-// "name2, "address2"
+// "name2", "address2"
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CSVMappingParameters
 type CSVMappingParameters struct {
 	_ struct{} `type:"structure"`
@@ -1894,7 +1894,7 @@ type CreateApplicationInput struct {
 	// streams to up to three destinations.
 	//
 	// These destinations can be Amazon Kinesis streams, Amazon Kinesis Firehose
-	// delivery streams, Amazon Lambda destinations, or any combination of the three.
+	// delivery streams, AWS Lambda destinations, or any combination of the three.
 	//
 	// In the configuration, you specify the in-application stream name, the destination
 	// stream or Lambda function Amazon Resource Name (ARN), and the format to use
@@ -2477,7 +2477,9 @@ type DestinationSchema struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the format of the records on the output stream.
-	RecordFormatType RecordFormatType `type:"string" enum:"true"`
+	//
+	// RecordFormatType is a required field
+	RecordFormatType RecordFormatType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2488,6 +2490,19 @@ func (s DestinationSchema) String() string {
 // GoString returns the string representation
 func (s DestinationSchema) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DestinationSchema) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DestinationSchema"}
+	if len(s.RecordFormatType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RecordFormatType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchemaRequest
@@ -2509,7 +2524,7 @@ type DiscoverInputSchemaInput struct {
 	// stream on your behalf.
 	RoleARN *string `min:"1" type:"string"`
 
-	// Specify this parameter to discover a schema from data in an S3 object.
+	// Specify this parameter to discover a schema from data in an Amazon S3 object.
 	S3Configuration *S3Configuration `type:"structure"`
 }
 
@@ -3314,8 +3329,8 @@ type KinesisFirehoseInput struct {
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
-	// stream on your behalf. You need to make sure the role has necessary permissions
-	// to access the stream.
+	// stream on your behalf. You need to make sure that the role has the necessary
+	// permissions to access the stream.
 	//
 	// RoleARN is a required field
 	RoleARN *string `min:"1" type:"string" required:"true"`
@@ -3389,7 +3404,8 @@ type KinesisFirehoseInputUpdate struct {
 	ResourceARNUpdate *string `min:"1" type:"string"`
 
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
-	// stream on your behalf. You need to grant necessary permissions to this role.
+	// stream on your behalf. You need to grant the necessary permissions to this
+	// role.
 	RoleARNUpdate *string `min:"1" type:"string"`
 }
 
@@ -3510,7 +3526,8 @@ type KinesisFirehoseOutputUpdate struct {
 	ResourceARNUpdate *string `min:"1" type:"string"`
 
 	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
-	// stream on your behalf. You need to grant necessary permissions to this role.
+	// stream on your behalf. You need to grant the necessary permissions to this
+	// role.
 	RoleARNUpdate *string `min:"1" type:"string"`
 }
 
@@ -4075,6 +4092,11 @@ func (s *Output) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.DestinationSchema != nil {
+		if err := s.DestinationSchema.Validate(); err != nil {
+			invalidParams.AddNested("DestinationSchema", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.KinesisFirehoseOutput != nil {
 		if err := s.KinesisFirehoseOutput.Validate(); err != nil {
 			invalidParams.AddNested("KinesisFirehoseOutput", err.(aws.ErrInvalidParams))
@@ -4187,6 +4209,11 @@ func (s *OutputUpdate) Validate() error {
 	}
 	if s.OutputId != nil && len(*s.OutputId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OutputId", 1))
+	}
+	if s.DestinationSchemaUpdate != nil {
+		if err := s.DestinationSchemaUpdate.Validate(); err != nil {
+			invalidParams.AddNested("DestinationSchemaUpdate", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.KinesisFirehoseOutputUpdate != nil {
 		if err := s.KinesisFirehoseOutputUpdate.Validate(); err != nil {
@@ -4490,7 +4517,8 @@ func (s *ReferenceDataSourceUpdate) Validate() error {
 
 // Provides a description of an Amazon S3 data source, including the Amazon
 // Resource Name (ARN) of the S3 bucket, the ARN of the IAM role that is used
-// to access the bucket, and the name of the S3 object that contains the data.
+// to access the bucket, and the name of the Amazon S3 object that contains
+// the data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3Configuration
 type S3Configuration struct {
 	_ struct{} `type:"structure"`

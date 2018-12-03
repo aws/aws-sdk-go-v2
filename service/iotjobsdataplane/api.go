@@ -440,6 +440,10 @@ func (s GetPendingJobExecutionsOutput) MarshalFields(e protocol.FieldEncoder) er
 type JobExecution struct {
 	_ struct{} `type:"structure"`
 
+	// The estimated number of seconds that remain before the job execution status
+	// will be changed to TIMED_OUT.
+	ApproximateSecondsBeforeTimedOut *int64 `locationName:"approximateSecondsBeforeTimedOut" type:"long"`
+
 	// A number that identifies a particular job execution on a particular device.
 	// It can be used later in commands that return or update job execution information.
 	ExecutionNumber *int64 `locationName:"executionNumber" type:"long"`
@@ -487,6 +491,12 @@ func (s JobExecution) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApproximateSecondsBeforeTimedOut != nil {
+		v := *s.ApproximateSecondsBeforeTimedOut
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "approximateSecondsBeforeTimedOut", protocol.Int64Value(v), metadata)
+	}
 	if s.ExecutionNumber != nil {
 		v := *s.ExecutionNumber
 
@@ -697,6 +707,16 @@ type StartNextPendingJobExecutionInput struct {
 	// If not specified, the statusDetails are unchanged.
 	StatusDetails map[string]string `locationName:"statusDetails" type:"map"`
 
+	// Specifies the amount of time this device has to finish execution of this
+	// job. If the job execution status is not set to a terminal state before this
+	// timer expires, or before the timer is reset (by calling UpdateJobExecution,
+	// setting the status to IN_PROGRESS and specifying a new timeout value in field
+	// stepTimeoutInMinutes) the job execution status will be automatically set
+	// to TIMED_OUT. Note that setting this timeout has no effect on that job execution
+	// timeout which may have been specified when the job was created (CreateJob
+	// using field timeoutConfig).
+	StepTimeoutInMinutes *int64 `locationName:"stepTimeoutInMinutes" type:"long"`
+
 	// The name of the thing associated with the device.
 	//
 	// ThingName is a required field
@@ -744,6 +764,12 @@ func (s StartNextPendingJobExecutionInput) MarshalFields(e protocol.FieldEncoder
 		}
 		ms0.End()
 
+	}
+	if s.StepTimeoutInMinutes != nil {
+		v := *s.StepTimeoutInMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stepTimeoutInMinutes", protocol.Int64Value(v), metadata)
 	}
 	if s.ThingName != nil {
 		v := *s.ThingName
@@ -829,6 +855,16 @@ type UpdateJobExecutionInput struct {
 	// Optional. A collection of name/value pairs that describe the status of the
 	// job execution. If not specified, the statusDetails are unchanged.
 	StatusDetails map[string]string `locationName:"statusDetails" type:"map"`
+
+	// Specifies the amount of time this device has to finish execution of this
+	// job. If the job execution status is not set to a terminal state before this
+	// timer expires, or before the timer is reset (by again calling UpdateJobExecution,
+	// setting the status to IN_PROGRESS and specifying a new timeout value in this
+	// field) the job execution status will be automatically set to TIMED_OUT. Note
+	// that setting or resetting this timeout has no effect on that job execution
+	// timeout which may have been specified when the job was created (CreateJob
+	// using field timeoutConfig).
+	StepTimeoutInMinutes *int64 `locationName:"stepTimeoutInMinutes" type:"long"`
 
 	// The name of the thing associated with the device.
 	//
@@ -918,6 +954,12 @@ func (s UpdateJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if s.StepTimeoutInMinutes != nil {
+		v := *s.StepTimeoutInMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stepTimeoutInMinutes", protocol.Int64Value(v), metadata)
+	}
 	if s.JobId != nil {
 		v := *s.JobId
 
@@ -986,6 +1028,7 @@ const (
 	JobExecutionStatusInProgress JobExecutionStatus = "IN_PROGRESS"
 	JobExecutionStatusSucceeded  JobExecutionStatus = "SUCCEEDED"
 	JobExecutionStatusFailed     JobExecutionStatus = "FAILED"
+	JobExecutionStatusTimedOut   JobExecutionStatus = "TIMED_OUT"
 	JobExecutionStatusRejected   JobExecutionStatus = "REJECTED"
 	JobExecutionStatusRemoved    JobExecutionStatus = "REMOVED"
 	JobExecutionStatusCanceled   JobExecutionStatus = "CANCELED"

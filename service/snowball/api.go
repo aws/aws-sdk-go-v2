@@ -841,9 +841,9 @@ func (r ListCompatibleImagesRequest) Send() (*ListCompatibleImagesOutput, error)
 //
 // This action returns a list of the different Amazon EC2 Amazon Machine Images
 // (AMIs) that are owned by your AWS account that would be supported for use
-// on a Snowball Edge device. Currently, supported AMIs are based on the CentOS
-// 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu
-// 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+// on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible
+// AMIs, see Using Amazon EC2 Compute Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
+// in the AWS Snowball Developer Guide.
 //
 //    // Example sending a request using the ListCompatibleImagesRequest method.
 //    req := client.ListCompatibleImagesRequest(params)
@@ -1392,25 +1392,25 @@ type ClusterMetadata struct {
 	RoleARN *string `type:"string"`
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
-	// how soon you'll get each Snowball Edge device, rather it represents how quickly
-	// each device moves to its destination while in transit. Regional shipping
-	// speeds are as follows:
+	// how soon you'll get each device, rather it represents how quickly each device
+	// moves to its destination while in transit. Regional shipping speeds are as
+	// follows:
 	//
 	//    * In Australia, you have access to express shipping. Typically, devices
 	//    shipped express are delivered in about a day.
 	//
 	//    * In the European Union (EU), you have access to express shipping. Typically,
-	//    Snowball Edges shipped express are delivered in about a day. In addition,
-	//    most countries in the EU have access to standard shipping, which typically
+	//    devices shipped express are delivered in about a day. In addition, most
+	//    countries in the EU have access to standard shipping, which typically
 	//    takes less than a week, one way.
 	//
-	//    * In India, Snowball Edges are delivered in one to seven days.
+	//    * In India, devices are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster. The only supported
+	// device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1425,9 +1425,9 @@ func (s ClusterMetadata) GoString() string {
 }
 
 // A JSON-formatted object that describes a compatible Amazon Machine Image
-// (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible
-// with the device's physical hardware requirements, and it should be able to
-// be run in an SBE1 instance on the device.
+// (AMI). For more information on compatible AMIs, see Using Amazon EC2 Compute
+// Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
+// in the AWS Snowball Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CompatibleImage
 type CompatibleImage struct {
 	_ struct{} `type:"structure"`
@@ -1573,15 +1573,15 @@ type CreateClusterInput struct {
 	//    most countries in the EU have access to standard shipping, which typically
 	//    takes less than a week, one way.
 	//
-	//    * In India, Snowball Edges are delivered in one to seven days.
+	//    * In India, devices are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// ShippingOption is a required field
 	ShippingOption ShippingOption `type:"string" required:"true" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster. The only supported
+	// device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1733,8 +1733,8 @@ type CreateJobInput struct {
 	// Snowballs come with 80 TB in storage capacity.
 	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this job. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this job. The only supported device
+	// types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -2106,7 +2106,7 @@ type Ec2AmiResource struct {
 	// AmiId is a required field
 	AmiId *string `min:"12" type:"string" required:"true"`
 
-	// The ID of the AMI on the Snowball Edge device.
+	// The ID of the AMI on the supported device.
 	SnowballAmiId *string `min:"1" type:"string"`
 }
 
@@ -2775,7 +2775,7 @@ type ListCompatibleImagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of results for the list of compatible images. Currently,
-	// a Snowball Edge device can store 10 AMIs.
+	// each supported device can store 10 AMIs.
 	MaxResults *int64 `type:"integer"`
 
 	// HTTP requests are stateless. To identify what object comes "next" in the
@@ -2813,8 +2813,7 @@ type ListCompatibleImagesOutput struct {
 
 	responseMetadata aws.Response
 
-	// A JSON-formatted object that describes a compatible AMI, including the ID
-	// and name for a Snowball Edge AMI.
+	// A JSON-formatted object that describes a compatible AMI.
 	CompatibleImages []CompatibleImage `type:"list"`
 
 	// Because HTTP requests are stateless, this is the starting point for your
@@ -3263,6 +3262,7 @@ const (
 	CapacityT50          Capacity = "T50"
 	CapacityT80          Capacity = "T80"
 	CapacityT100         Capacity = "T100"
+	CapacityT42          Capacity = "T42"
 	CapacityNoPreference Capacity = "NoPreference"
 )
 
@@ -3366,6 +3366,8 @@ type Type string
 const (
 	TypeStandard Type = "STANDARD"
 	TypeEdge     Type = "EDGE"
+	TypeEdgeC    Type = "EDGE_C"
+	TypeEdgeCg   Type = "EDGE_CG"
 )
 
 func (enum Type) MarshalValue() (string, error) {

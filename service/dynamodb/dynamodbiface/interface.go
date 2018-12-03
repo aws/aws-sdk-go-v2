@@ -117,6 +117,10 @@ type DynamoDBAPI interface {
 
 	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
 
+	TransactGetItemsRequest(*dynamodb.TransactGetItemsInput) dynamodb.TransactGetItemsRequest
+
+	TransactWriteItemsRequest(*dynamodb.TransactWriteItemsInput) dynamodb.TransactWriteItemsRequest
+
 	UntagResourceRequest(*dynamodb.UntagResourceInput) dynamodb.UntagResourceRequest
 
 	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest

@@ -1114,8 +1114,8 @@ func (s DeleteNamedQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// If query results are encrypted in Amazon S3, indicates the Amazon S3 encryption
-// option used.
+// If query results are encrypted in Amazon S3, indicates the encryption option
+// used (for example, SSE-KMS or CSE-KMS) and key information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EncryptionConfiguration
 type EncryptionConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -1324,6 +1324,9 @@ type GetQueryResultsOutput struct {
 
 	// The results of the query execution.
 	ResultSet *ResultSet `type:"structure"`
+
+	// The number of rows inserted with a CREATE TABLE AS SELECT statement.
+	UpdateCount *int64 `type:"long"`
 }
 
 // String returns the string representation
@@ -1497,8 +1500,14 @@ type QueryExecution struct {
 	// option, if any, used for query results.
 	ResultConfiguration *ResultConfiguration `type:"structure"`
 
+	// The type of query statement that was run. DDL indicates DDL query statements.
+	// DML indicates DML (Data Manipulation Language) query statements, such as
+	// CREATE TABLE AS SELECT. UTILITY indicates query statements other than DDL
+	// and DML, such as SHOW CREATE TABLE, or DESCRIBE <table>.
+	StatementType StatementType `type:"string" enum:"true"`
+
 	// The amount of data scanned during the query execution and the amount of time
-	// that it took to execute.
+	// that it took to execute, and the type of statement that was run.
 	Statistics *QueryExecutionStatistics `type:"structure"`
 
 	// The completion date, current state, submission time, and state change reason
@@ -1549,7 +1558,7 @@ func (s *QueryExecutionContext) Validate() error {
 }
 
 // The amount of data scanned during the query execution and the amount of time
-// that it took to execute.
+// that it took to execute, and the type of statement that was run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatistics
 type QueryExecutionStatistics struct {
 	_ struct{} `type:"structure"`
@@ -1580,11 +1589,12 @@ type QueryExecutionStatus struct {
 	// The date and time that the query completed.
 	CompletionDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The state of query execution. SUBMITTED indicates that the query is queued
-	// for execution. RUNNING indicates that the query is scanning data and returning
-	// results. SUCCEEDED indicates that the query completed without error. FAILED
-	// indicates that the query experienced an error and did not complete processing.
-	// CANCELLED indicates that user input interrupted query execution.
+	// The state of query execution. QUEUED state is listed but is not used by Athena
+	// and is reserved for future use. RUNNING indicates that the query has been
+	// submitted to the service, and Athena will execute the query as soon as resources
+	// are available. SUCCEEDED indicates that the query completed without error.
+	// FAILED indicates that the query experienced an error and did not complete
+	// processing.CANCELLED indicates that user input interrupted query execution.
 	State QueryExecutionState `type:"string" enum:"true"`
 
 	// Further detail about the status of the query.
@@ -1610,11 +1620,12 @@ func (s QueryExecutionStatus) GoString() string {
 type ResultConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// If query results are encrypted in S3, indicates the S3 encryption option
-	// used (for example, SSE-KMS or CSE-KMS and key information.
+	// If query results are encrypted in Amazon S3, indicates the encryption option
+	// used (for example, SSE-KMS or CSE-KMS) and key information.
 	EncryptionConfiguration *EncryptionConfiguration `type:"structure"`
 
-	// The location in S3 where query results are stored.
+	// The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/.
+	// For more information, see Queries and Query Result Files.  (http://docs.aws.amazon.com/athena/latest/ug/querying.html)
 	//
 	// OutputLocation is a required field
 	OutputLocation *string `type:"string" required:"true"`
@@ -1679,7 +1690,7 @@ func (s ResultSet) GoString() string {
 type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the columns in a query execution result.
+	// Information about the columns returned in a query result metadata.
 	ColumnInfo []ColumnInfo `type:"list"`
 }
 
@@ -1975,6 +1986,26 @@ func (enum QueryExecutionState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type StatementType string
+
+// Enum values for StatementType
+const (
+	StatementTypeDdl     StatementType = "DDL"
+	StatementTypeDml     StatementType = "DML"
+	StatementTypeUtility StatementType = "UTILITY"
+)
+
+func (enum StatementType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatementType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The reason for the query throttling, for example, when it exceeds the concurrent
+// query limit.
 type ThrottleReason string
 
 // Enum values for ThrottleReason

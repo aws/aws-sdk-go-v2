@@ -66,6 +66,8 @@ type MarketplaceMeteringAPI interface {
 
 	MeterUsageRequest(*marketplacemetering.MeterUsageInput) marketplacemetering.MeterUsageRequest
 
+	RegisterUsageRequest(*marketplacemetering.RegisterUsageInput) marketplacemetering.RegisterUsageRequest
+
 	ResolveCustomerRequest(*marketplacemetering.ResolveCustomerInput) marketplacemetering.ResolveCustomerRequest
 }
 

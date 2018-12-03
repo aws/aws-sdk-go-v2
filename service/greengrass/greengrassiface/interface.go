@@ -66,6 +66,10 @@ type GreengrassAPI interface {
 
 	AssociateServiceRoleToAccountRequest(*greengrass.AssociateServiceRoleToAccountInput) greengrass.AssociateServiceRoleToAccountRequest
 
+	CreateConnectorDefinitionRequest(*greengrass.CreateConnectorDefinitionInput) greengrass.CreateConnectorDefinitionRequest
+
+	CreateConnectorDefinitionVersionRequest(*greengrass.CreateConnectorDefinitionVersionInput) greengrass.CreateConnectorDefinitionVersionRequest
+
 	CreateCoreDefinitionRequest(*greengrass.CreateCoreDefinitionInput) greengrass.CreateCoreDefinitionRequest
 
 	CreateCoreDefinitionVersionRequest(*greengrass.CreateCoreDefinitionVersionInput) greengrass.CreateCoreDefinitionVersionRequest
@@ -100,6 +104,8 @@ type GreengrassAPI interface {
 
 	CreateSubscriptionDefinitionVersionRequest(*greengrass.CreateSubscriptionDefinitionVersionInput) greengrass.CreateSubscriptionDefinitionVersionRequest
 
+	DeleteConnectorDefinitionRequest(*greengrass.DeleteConnectorDefinitionInput) greengrass.DeleteConnectorDefinitionRequest
+
 	DeleteCoreDefinitionRequest(*greengrass.DeleteCoreDefinitionInput) greengrass.DeleteCoreDefinitionRequest
 
 	DeleteDeviceDefinitionRequest(*greengrass.DeleteDeviceDefinitionInput) greengrass.DeleteDeviceDefinitionRequest
@@ -120,7 +126,13 @@ type GreengrassAPI interface {
 
 	GetAssociatedRoleRequest(*greengrass.GetAssociatedRoleInput) greengrass.GetAssociatedRoleRequest
 
+	GetBulkDeploymentStatusRequest(*greengrass.GetBulkDeploymentStatusInput) greengrass.GetBulkDeploymentStatusRequest
+
 	GetConnectivityInfoRequest(*greengrass.GetConnectivityInfoInput) greengrass.GetConnectivityInfoRequest
+
+	GetConnectorDefinitionRequest(*greengrass.GetConnectorDefinitionInput) greengrass.GetConnectorDefinitionRequest
+
+	GetConnectorDefinitionVersionRequest(*greengrass.GetConnectorDefinitionVersionInput) greengrass.GetConnectorDefinitionVersionRequest
 
 	GetCoreDefinitionRequest(*greengrass.GetCoreDefinitionInput) greengrass.GetCoreDefinitionRequest
 
@@ -158,6 +170,14 @@ type GreengrassAPI interface {
 
 	GetSubscriptionDefinitionVersionRequest(*greengrass.GetSubscriptionDefinitionVersionInput) greengrass.GetSubscriptionDefinitionVersionRequest
 
+	ListBulkDeploymentDetailedReportsRequest(*greengrass.ListBulkDeploymentDetailedReportsInput) greengrass.ListBulkDeploymentDetailedReportsRequest
+
+	ListBulkDeploymentsRequest(*greengrass.ListBulkDeploymentsInput) greengrass.ListBulkDeploymentsRequest
+
+	ListConnectorDefinitionVersionsRequest(*greengrass.ListConnectorDefinitionVersionsInput) greengrass.ListConnectorDefinitionVersionsRequest
+
+	ListConnectorDefinitionsRequest(*greengrass.ListConnectorDefinitionsInput) greengrass.ListConnectorDefinitionsRequest
+
 	ListCoreDefinitionVersionsRequest(*greengrass.ListCoreDefinitionVersionsInput) greengrass.ListCoreDefinitionVersionsRequest
 
 	ListCoreDefinitionsRequest(*greengrass.ListCoreDefinitionsInput) greengrass.ListCoreDefinitionsRequest
@@ -192,7 +212,13 @@ type GreengrassAPI interface {
 
 	ResetDeploymentsRequest(*greengrass.ResetDeploymentsInput) greengrass.ResetDeploymentsRequest
 
+	StartBulkDeploymentRequest(*greengrass.StartBulkDeploymentInput) greengrass.StartBulkDeploymentRequest
+
+	StopBulkDeploymentRequest(*greengrass.StopBulkDeploymentInput) greengrass.StopBulkDeploymentRequest
+
 	UpdateConnectivityInfoRequest(*greengrass.UpdateConnectivityInfoInput) greengrass.UpdateConnectivityInfoRequest
+
+	UpdateConnectorDefinitionRequest(*greengrass.UpdateConnectorDefinitionInput) greengrass.UpdateConnectorDefinitionRequest
 
 	UpdateCoreDefinitionRequest(*greengrass.UpdateCoreDefinitionInput) greengrass.UpdateCoreDefinitionRequest
 

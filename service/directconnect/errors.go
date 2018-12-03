@@ -7,8 +7,7 @@ const (
 	// ErrCodeClientException for service response error code
 	// "ClientException".
 	//
-	// The API was called with invalid parameters. The error message will contain
-	// additional details about the cause.
+	// One or more parameters are not valid.
 	ErrCodeClientException = "ClientException"
 
 	// ErrCodeDuplicateTagKeysException for service response error code
@@ -20,14 +19,12 @@ const (
 	// ErrCodeServerException for service response error code
 	// "ServerException".
 	//
-	// A server-side error occurred during the API call. The error message will
-	// contain additional details about the cause.
+	// A server-side error occurred.
 	ErrCodeServerException = "ServerException"
 
 	// ErrCodeTooManyTagsException for service response error code
 	// "TooManyTagsException".
 	//
-	// You have reached the limit on the number of tags that can be assigned to
-	// a Direct Connect resource.
+	// You have reached the limit on the number of tags that can be assigned.
 	ErrCodeTooManyTagsException = "TooManyTagsException"
 )

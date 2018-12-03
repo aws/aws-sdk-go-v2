@@ -95,6 +95,8 @@ type ELBV2API interface {
 
 	DescribeLoadBalancersRequest(*elbv2.DescribeLoadBalancersInput) elbv2.DescribeLoadBalancersRequest
 
+	DescribeProvisionedCapacityRequest(*elbv2.DescribeProvisionedCapacityInput) elbv2.DescribeProvisionedCapacityRequest
+
 	DescribeRulesRequest(*elbv2.DescribeRulesInput) elbv2.DescribeRulesRequest
 
 	DescribeSSLPoliciesRequest(*elbv2.DescribeSSLPoliciesInput) elbv2.DescribeSSLPoliciesRequest
@@ -110,6 +112,8 @@ type ELBV2API interface {
 	ModifyListenerRequest(*elbv2.ModifyListenerInput) elbv2.ModifyListenerRequest
 
 	ModifyLoadBalancerAttributesRequest(*elbv2.ModifyLoadBalancerAttributesInput) elbv2.ModifyLoadBalancerAttributesRequest
+
+	ModifyProvisionedCapacityRequest(*elbv2.ModifyProvisionedCapacityInput) elbv2.ModifyProvisionedCapacityRequest
 
 	ModifyRuleRequest(*elbv2.ModifyRuleInput) elbv2.ModifyRuleRequest
 

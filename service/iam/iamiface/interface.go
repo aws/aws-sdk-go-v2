@@ -239,6 +239,8 @@ type IAMAPI interface {
 
 	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) iam.ListRolePoliciesRequest
 
+	ListRoleTagsRequest(*iam.ListRoleTagsInput) iam.ListRoleTagsRequest
+
 	ListRolesRequest(*iam.ListRolesInput) iam.ListRolesRequest
 
 	ListSAMLProvidersRequest(*iam.ListSAMLProvidersInput) iam.ListSAMLProvidersRequest
@@ -252,6 +254,8 @@ type IAMAPI interface {
 	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
 
 	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) iam.ListUserPoliciesRequest
+
+	ListUserTagsRequest(*iam.ListUserTagsInput) iam.ListUserTagsRequest
 
 	ListUsersRequest(*iam.ListUsersInput) iam.ListUsersRequest
 
@@ -282,6 +286,14 @@ type IAMAPI interface {
 	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
 
 	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
+
+	TagRoleRequest(*iam.TagRoleInput) iam.TagRoleRequest
+
+	TagUserRequest(*iam.TagUserInput) iam.TagUserRequest
+
+	UntagRoleRequest(*iam.UntagRoleInput) iam.UntagRoleRequest
+
+	UntagUserRequest(*iam.UntagUserInput) iam.UntagUserRequest
 
 	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
 

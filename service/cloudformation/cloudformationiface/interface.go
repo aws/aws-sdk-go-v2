@@ -87,11 +87,15 @@ type CloudFormationAPI interface {
 
 	DescribeChangeSetRequest(*cloudformation.DescribeChangeSetInput) cloudformation.DescribeChangeSetRequest
 
+	DescribeStackDriftDetectionStatusRequest(*cloudformation.DescribeStackDriftDetectionStatusInput) cloudformation.DescribeStackDriftDetectionStatusRequest
+
 	DescribeStackEventsRequest(*cloudformation.DescribeStackEventsInput) cloudformation.DescribeStackEventsRequest
 
 	DescribeStackInstanceRequest(*cloudformation.DescribeStackInstanceInput) cloudformation.DescribeStackInstanceRequest
 
 	DescribeStackResourceRequest(*cloudformation.DescribeStackResourceInput) cloudformation.DescribeStackResourceRequest
+
+	DescribeStackResourceDriftsRequest(*cloudformation.DescribeStackResourceDriftsInput) cloudformation.DescribeStackResourceDriftsRequest
 
 	DescribeStackResourcesRequest(*cloudformation.DescribeStackResourcesInput) cloudformation.DescribeStackResourcesRequest
 
@@ -100,6 +104,10 @@ type CloudFormationAPI interface {
 	DescribeStackSetOperationRequest(*cloudformation.DescribeStackSetOperationInput) cloudformation.DescribeStackSetOperationRequest
 
 	DescribeStacksRequest(*cloudformation.DescribeStacksInput) cloudformation.DescribeStacksRequest
+
+	DetectStackDriftRequest(*cloudformation.DetectStackDriftInput) cloudformation.DetectStackDriftRequest
+
+	DetectStackResourceDriftRequest(*cloudformation.DetectStackResourceDriftInput) cloudformation.DetectStackResourceDriftRequest
 
 	EstimateTemplateCostRequest(*cloudformation.EstimateTemplateCostInput) cloudformation.EstimateTemplateCostRequest
 

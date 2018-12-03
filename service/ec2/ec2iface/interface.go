@@ -65,9 +65,13 @@ import (
 type EC2API interface {
 	AcceptReservedInstancesExchangeQuoteRequest(*ec2.AcceptReservedInstancesExchangeQuoteInput) ec2.AcceptReservedInstancesExchangeQuoteRequest
 
+	AcceptTransitGatewayVpcAttachmentRequest(*ec2.AcceptTransitGatewayVpcAttachmentInput) ec2.AcceptTransitGatewayVpcAttachmentRequest
+
 	AcceptVpcEndpointConnectionsRequest(*ec2.AcceptVpcEndpointConnectionsInput) ec2.AcceptVpcEndpointConnectionsRequest
 
 	AcceptVpcPeeringConnectionRequest(*ec2.AcceptVpcPeeringConnectionInput) ec2.AcceptVpcPeeringConnectionRequest
+
+	AdvertiseByoipCidrRequest(*ec2.AdvertiseByoipCidrInput) ec2.AdvertiseByoipCidrRequest
 
 	AllocateAddressRequest(*ec2.AllocateAddressInput) ec2.AllocateAddressRequest
 
@@ -86,6 +90,8 @@ type EC2API interface {
 	AssociateRouteTableRequest(*ec2.AssociateRouteTableInput) ec2.AssociateRouteTableRequest
 
 	AssociateSubnetCidrBlockRequest(*ec2.AssociateSubnetCidrBlockInput) ec2.AssociateSubnetCidrBlockRequest
+
+	AssociateTransitGatewayRouteTableRequest(*ec2.AssociateTransitGatewayRouteTableInput) ec2.AssociateTransitGatewayRouteTableRequest
 
 	AssociateVpcCidrBlockRequest(*ec2.AssociateVpcCidrBlockInput) ec2.AssociateVpcCidrBlockRequest
 
@@ -107,6 +113,8 @@ type EC2API interface {
 
 	CancelBundleTaskRequest(*ec2.CancelBundleTaskInput) ec2.CancelBundleTaskRequest
 
+	CancelCapacityReservationRequest(*ec2.CancelCapacityReservationInput) ec2.CancelCapacityReservationRequest
+
 	CancelConversionTaskRequest(*ec2.CancelConversionTaskInput) ec2.CancelConversionTaskRequest
 
 	CancelExportTaskRequest(*ec2.CancelExportTaskInput) ec2.CancelExportTaskRequest
@@ -126,6 +134,8 @@ type EC2API interface {
 	CopyImageRequest(*ec2.CopyImageInput) ec2.CopyImageRequest
 
 	CopySnapshotRequest(*ec2.CopySnapshotInput) ec2.CopySnapshotRequest
+
+	CreateCapacityReservationRequest(*ec2.CreateCapacityReservationInput) ec2.CreateCapacityReservationRequest
 
 	CreateCustomerGatewayRequest(*ec2.CreateCustomerGatewayInput) ec2.CreateCustomerGatewayRequest
 
@@ -182,6 +192,14 @@ type EC2API interface {
 	CreateSubnetRequest(*ec2.CreateSubnetInput) ec2.CreateSubnetRequest
 
 	CreateTagsRequest(*ec2.CreateTagsInput) ec2.CreateTagsRequest
+
+	CreateTransitGatewayRequest(*ec2.CreateTransitGatewayInput) ec2.CreateTransitGatewayRequest
+
+	CreateTransitGatewayRouteRequest(*ec2.CreateTransitGatewayRouteInput) ec2.CreateTransitGatewayRouteRequest
+
+	CreateTransitGatewayRouteTableRequest(*ec2.CreateTransitGatewayRouteTableInput) ec2.CreateTransitGatewayRouteTableRequest
+
+	CreateTransitGatewayVpcAttachmentRequest(*ec2.CreateTransitGatewayVpcAttachmentInput) ec2.CreateTransitGatewayVpcAttachmentRequest
 
 	CreateVolumeRequest(*ec2.CreateVolumeInput) ec2.CreateVolumeRequest
 
@@ -247,6 +265,14 @@ type EC2API interface {
 
 	DeleteTagsRequest(*ec2.DeleteTagsInput) ec2.DeleteTagsRequest
 
+	DeleteTransitGatewayRequest(*ec2.DeleteTransitGatewayInput) ec2.DeleteTransitGatewayRequest
+
+	DeleteTransitGatewayRouteRequest(*ec2.DeleteTransitGatewayRouteInput) ec2.DeleteTransitGatewayRouteRequest
+
+	DeleteTransitGatewayRouteTableRequest(*ec2.DeleteTransitGatewayRouteTableInput) ec2.DeleteTransitGatewayRouteTableRequest
+
+	DeleteTransitGatewayVpcAttachmentRequest(*ec2.DeleteTransitGatewayVpcAttachmentInput) ec2.DeleteTransitGatewayVpcAttachmentRequest
+
 	DeleteVolumeRequest(*ec2.DeleteVolumeInput) ec2.DeleteVolumeRequest
 
 	DeleteVpcRequest(*ec2.DeleteVpcInput) ec2.DeleteVpcRequest
@@ -265,6 +291,8 @@ type EC2API interface {
 
 	DeleteVpnGatewayRequest(*ec2.DeleteVpnGatewayInput) ec2.DeleteVpnGatewayRequest
 
+	DeprovisionByoipCidrRequest(*ec2.DeprovisionByoipCidrInput) ec2.DeprovisionByoipCidrRequest
+
 	DeregisterImageRequest(*ec2.DeregisterImageInput) ec2.DeregisterImageRequest
 
 	DescribeAccountAttributesRequest(*ec2.DescribeAccountAttributesInput) ec2.DescribeAccountAttributesRequest
@@ -276,6 +304,10 @@ type EC2API interface {
 	DescribeAvailabilityZonesRequest(*ec2.DescribeAvailabilityZonesInput) ec2.DescribeAvailabilityZonesRequest
 
 	DescribeBundleTasksRequest(*ec2.DescribeBundleTasksInput) ec2.DescribeBundleTasksRequest
+
+	DescribeByoipCidrsRequest(*ec2.DescribeByoipCidrsInput) ec2.DescribeByoipCidrsRequest
+
+	DescribeCapacityReservationsRequest(*ec2.DescribeCapacityReservationsInput) ec2.DescribeCapacityReservationsRequest
 
 	DescribeClassicLinkInstancesRequest(*ec2.DescribeClassicLinkInstancesInput) ec2.DescribeClassicLinkInstancesRequest
 
@@ -357,6 +389,8 @@ type EC2API interface {
 
 	DescribePrincipalIdFormatRequest(*ec2.DescribePrincipalIdFormatInput) ec2.DescribePrincipalIdFormatRequest
 
+	DescribePublicIpv4PoolsRequest(*ec2.DescribePublicIpv4PoolsInput) ec2.DescribePublicIpv4PoolsRequest
+
 	DescribeRegionsRequest(*ec2.DescribeRegionsInput) ec2.DescribeRegionsRequest
 
 	DescribeReservedInstancesRequest(*ec2.DescribeReservedInstancesInput) ec2.DescribeReservedInstancesRequest
@@ -398,6 +432,14 @@ type EC2API interface {
 	DescribeSubnetsRequest(*ec2.DescribeSubnetsInput) ec2.DescribeSubnetsRequest
 
 	DescribeTagsRequest(*ec2.DescribeTagsInput) ec2.DescribeTagsRequest
+
+	DescribeTransitGatewayAttachmentsRequest(*ec2.DescribeTransitGatewayAttachmentsInput) ec2.DescribeTransitGatewayAttachmentsRequest
+
+	DescribeTransitGatewayRouteTablesRequest(*ec2.DescribeTransitGatewayRouteTablesInput) ec2.DescribeTransitGatewayRouteTablesRequest
+
+	DescribeTransitGatewayVpcAttachmentsRequest(*ec2.DescribeTransitGatewayVpcAttachmentsInput) ec2.DescribeTransitGatewayVpcAttachmentsRequest
+
+	DescribeTransitGatewaysRequest(*ec2.DescribeTransitGatewaysInput) ec2.DescribeTransitGatewaysRequest
 
 	DescribeVolumeAttributeRequest(*ec2.DescribeVolumeAttributeInput) ec2.DescribeVolumeAttributeRequest
 
@@ -443,6 +485,8 @@ type EC2API interface {
 
 	DetachVpnGatewayRequest(*ec2.DetachVpnGatewayInput) ec2.DetachVpnGatewayRequest
 
+	DisableTransitGatewayRouteTablePropagationRequest(*ec2.DisableTransitGatewayRouteTablePropagationInput) ec2.DisableTransitGatewayRouteTablePropagationRequest
+
 	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
 
 	DisableVpcClassicLinkRequest(*ec2.DisableVpcClassicLinkInput) ec2.DisableVpcClassicLinkRequest
@@ -457,7 +501,11 @@ type EC2API interface {
 
 	DisassociateSubnetCidrBlockRequest(*ec2.DisassociateSubnetCidrBlockInput) ec2.DisassociateSubnetCidrBlockRequest
 
+	DisassociateTransitGatewayRouteTableRequest(*ec2.DisassociateTransitGatewayRouteTableInput) ec2.DisassociateTransitGatewayRouteTableRequest
+
 	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
+
+	EnableTransitGatewayRouteTablePropagationRequest(*ec2.EnableTransitGatewayRouteTablePropagationInput) ec2.EnableTransitGatewayRouteTablePropagationRequest
 
 	EnableVgwRoutePropagationRequest(*ec2.EnableVgwRoutePropagationInput) ec2.EnableVgwRoutePropagationRequest
 
@@ -466,6 +514,8 @@ type EC2API interface {
 	EnableVpcClassicLinkRequest(*ec2.EnableVpcClassicLinkInput) ec2.EnableVpcClassicLinkRequest
 
 	EnableVpcClassicLinkDnsSupportRequest(*ec2.EnableVpcClassicLinkDnsSupportInput) ec2.EnableVpcClassicLinkDnsSupportRequest
+
+	ExportTransitGatewayRoutesRequest(*ec2.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
 
 	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
 
@@ -479,6 +529,12 @@ type EC2API interface {
 
 	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
 
+	GetTransitGatewayAttachmentPropagationsRequest(*ec2.GetTransitGatewayAttachmentPropagationsInput) ec2.GetTransitGatewayAttachmentPropagationsRequest
+
+	GetTransitGatewayRouteTableAssociationsRequest(*ec2.GetTransitGatewayRouteTableAssociationsInput) ec2.GetTransitGatewayRouteTableAssociationsRequest
+
+	GetTransitGatewayRouteTablePropagationsRequest(*ec2.GetTransitGatewayRouteTablePropagationsInput) ec2.GetTransitGatewayRouteTablePropagationsRequest
+
 	ImportImageRequest(*ec2.ImportImageInput) ec2.ImportImageRequest
 
 	ImportInstanceRequest(*ec2.ImportInstanceInput) ec2.ImportInstanceRequest
@@ -488,6 +544,8 @@ type EC2API interface {
 	ImportSnapshotRequest(*ec2.ImportSnapshotInput) ec2.ImportSnapshotRequest
 
 	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
+
+	ModifyCapacityReservationRequest(*ec2.ModifyCapacityReservationInput) ec2.ModifyCapacityReservationRequest
 
 	ModifyFleetRequest(*ec2.ModifyFleetInput) ec2.ModifyFleetRequest
 
@@ -502,6 +560,8 @@ type EC2API interface {
 	ModifyImageAttributeRequest(*ec2.ModifyImageAttributeInput) ec2.ModifyImageAttributeRequest
 
 	ModifyInstanceAttributeRequest(*ec2.ModifyInstanceAttributeInput) ec2.ModifyInstanceAttributeRequest
+
+	ModifyInstanceCapacityReservationAttributesRequest(*ec2.ModifyInstanceCapacityReservationAttributesInput) ec2.ModifyInstanceCapacityReservationAttributesRequest
 
 	ModifyInstanceCreditSpecificationRequest(*ec2.ModifyInstanceCreditSpecificationInput) ec2.ModifyInstanceCreditSpecificationRequest
 
@@ -518,6 +578,8 @@ type EC2API interface {
 	ModifySpotFleetRequestRequest(*ec2.ModifySpotFleetRequestInput) ec2.ModifySpotFleetRequestRequest
 
 	ModifySubnetAttributeRequest(*ec2.ModifySubnetAttributeInput) ec2.ModifySubnetAttributeRequest
+
+	ModifyTransitGatewayVpcAttachmentRequest(*ec2.ModifyTransitGatewayVpcAttachmentInput) ec2.ModifyTransitGatewayVpcAttachmentRequest
 
 	ModifyVolumeRequest(*ec2.ModifyVolumeInput) ec2.ModifyVolumeRequest
 
@@ -541,6 +603,8 @@ type EC2API interface {
 
 	MoveAddressToVpcRequest(*ec2.MoveAddressToVpcInput) ec2.MoveAddressToVpcRequest
 
+	ProvisionByoipCidrRequest(*ec2.ProvisionByoipCidrInput) ec2.ProvisionByoipCidrRequest
+
 	PurchaseHostReservationRequest(*ec2.PurchaseHostReservationInput) ec2.PurchaseHostReservationRequest
 
 	PurchaseReservedInstancesOfferingRequest(*ec2.PurchaseReservedInstancesOfferingInput) ec2.PurchaseReservedInstancesOfferingRequest
@@ -550,6 +614,8 @@ type EC2API interface {
 	RebootInstancesRequest(*ec2.RebootInstancesInput) ec2.RebootInstancesRequest
 
 	RegisterImageRequest(*ec2.RegisterImageInput) ec2.RegisterImageRequest
+
+	RejectTransitGatewayVpcAttachmentRequest(*ec2.RejectTransitGatewayVpcAttachmentInput) ec2.RejectTransitGatewayVpcAttachmentRequest
 
 	RejectVpcEndpointConnectionsRequest(*ec2.RejectVpcEndpointConnectionsInput) ec2.RejectVpcEndpointConnectionsRequest
 
@@ -568,6 +634,8 @@ type EC2API interface {
 	ReplaceRouteRequest(*ec2.ReplaceRouteInput) ec2.ReplaceRouteRequest
 
 	ReplaceRouteTableAssociationRequest(*ec2.ReplaceRouteTableAssociationInput) ec2.ReplaceRouteTableAssociationRequest
+
+	ReplaceTransitGatewayRouteRequest(*ec2.ReplaceTransitGatewayRouteInput) ec2.ReplaceTransitGatewayRouteRequest
 
 	ReportInstanceStatusRequest(*ec2.ReportInstanceStatusInput) ec2.ReportInstanceStatusRequest
 
@@ -595,6 +663,8 @@ type EC2API interface {
 
 	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
 
+	SearchTransitGatewayRoutesRequest(*ec2.SearchTransitGatewayRoutesInput) ec2.SearchTransitGatewayRoutesRequest
+
 	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
 
 	StopInstancesRequest(*ec2.StopInstancesInput) ec2.StopInstancesRequest
@@ -610,6 +680,8 @@ type EC2API interface {
 	UpdateSecurityGroupRuleDescriptionsEgressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsEgressInput) ec2.UpdateSecurityGroupRuleDescriptionsEgressRequest
 
 	UpdateSecurityGroupRuleDescriptionsIngressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsIngressInput) ec2.UpdateSecurityGroupRuleDescriptionsIngressRequest
+
+	WithdrawByoipCidrRequest(*ec2.WithdrawByoipCidrInput) ec2.WithdrawByoipCidrRequest
 
 	WaitUntilBundleTaskComplete(*ec2.DescribeBundleTasksInput) error
 	WaitUntilBundleTaskCompleteWithContext(aws.Context, *ec2.DescribeBundleTasksInput, ...aws.WaiterOption) error

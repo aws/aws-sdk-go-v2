@@ -2050,6 +2050,9 @@ type ActionDeclaration struct {
 	// build artifact.
 	OutputArtifacts []OutputArtifact `locationName:"outputArtifacts" type:"list"`
 
+	// The action declaration's AWS Region, such as us-east-1.
+	Region *string `locationName:"region" min:"4" type:"string"`
+
 	// The ARN of the IAM service role that will perform the declared action. This
 	// is assumed through the roleArn for the pipeline.
 	RoleArn *string `locationName:"roleArn" type:"string"`
@@ -2081,6 +2084,9 @@ func (s *ActionDeclaration) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Region != nil && len(*s.Region) < 4 {
+		invalidParams.Add(aws.NewErrParamMinLen("Region", 4))
 	}
 	if s.RunOrder != nil && *s.RunOrder < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RunOrder", 1))
@@ -4503,9 +4509,15 @@ type PipelineDeclaration struct {
 
 	// Represents information about the Amazon S3 bucket where artifacts are stored
 	// for the pipeline.
+	ArtifactStore *ArtifactStore `locationName:"artifactStore" type:"structure"`
+
+	// A mapping of artifactStore objects and their corresponding regions. There
+	// must be an artifact store for the pipeline region and for each cross-region
+	// action within the pipeline. You can only use either artifactStore or artifactStores,
+	// not both.
 	//
-	// ArtifactStore is a required field
-	ArtifactStore *ArtifactStore `locationName:"artifactStore" type:"structure" required:"true"`
+	// If you create a cross-region action in your pipeline, you must use artifactStores.
+	ArtifactStores map[string]ArtifactStore `locationName:"artifactStores" type:"map"`
 
 	// The name of the action to be performed.
 	//
@@ -4543,10 +4555,6 @@ func (s PipelineDeclaration) GoString() string {
 func (s *PipelineDeclaration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PipelineDeclaration"}
 
-	if s.ArtifactStore == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ArtifactStore"))
-	}
-
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4567,6 +4575,13 @@ func (s *PipelineDeclaration) Validate() error {
 	if s.ArtifactStore != nil {
 		if err := s.ArtifactStore.Validate(); err != nil {
 			invalidParams.AddNested("ArtifactStore", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ArtifactStores != nil {
+		for i, v := range s.ArtifactStores {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ArtifactStores", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 	if s.Stages != nil {
@@ -4636,6 +4651,7 @@ type PipelineExecutionSummary struct {
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
 
+	// A list of the source artifact revisions that initiated a pipeline execution.
 	SourceRevisions []SourceRevision `locationName:"sourceRevisions" type:"list"`
 
 	// The date and time when the pipeline execution began, in timestamp format.
@@ -5681,17 +5697,30 @@ func (s S3ArtifactLocation) GoString() string {
 	return s.String()
 }
 
+// Information about the version (or revision) of a source artifact that initiated
+// a pipeline execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevision
 type SourceRevision struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the action that processed the revision to the source artifact.
+	//
 	// ActionName is a required field
 	ActionName *string `locationName:"actionName" min:"1" type:"string" required:"true"`
 
+	// The system-generated unique ID that identifies the revision number of the
+	// artifact.
 	RevisionId *string `locationName:"revisionId" min:"1" type:"string"`
 
+	// Summary information about the most recent revision of the artifact. For GitHub
+	// and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets
+	// or actions, the user-provided content of a codepipeline-artifact-revision-summary
+	// key specified in the object metadata.
 	RevisionSummary *string `locationName:"revisionSummary" min:"1" type:"string"`
 
+	// The commit ID for the artifact revision. For artifacts stored in GitHub or
+	// AWS CodeCommit repositories, the commit ID is linked to a commit details
+	// page.
 	RevisionUrl *string `locationName:"revisionUrl" min:"1" type:"string"`
 }
 
@@ -5849,6 +5878,9 @@ func (s StageState) GoString() string {
 type StartPipelineExecutionInput struct {
 	_ struct{} `type:"structure"`
 
+	// The system-generated unique ID used to identify a unique execution request.
+	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string" idempotencyToken:"true"`
+
 	// The name of the pipeline to start.
 	//
 	// Name is a required field
@@ -5868,6 +5900,9 @@ func (s StartPipelineExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartPipelineExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartPipelineExecutionInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -6107,12 +6142,18 @@ func (s UpdatePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The authentication applied to incoming webhook trigger requests.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookAuthConfiguration
 type WebhookAuthConfiguration struct {
 	_ struct{} `type:"structure"`
 
+	// The property used to configure acceptance of webhooks within a specific IP
+	// range. For IP, only the AllowedIPRange property must be set, and this property
+	// must be set to a valid CIDR range.
 	AllowedIPRange *string `min:"1" type:"string"`
 
+	// The property used to configure GitHub authentication. For GITHUB_HMAC, only
+	// the SecretToken property must be set.
 	SecretToken *string `min:"1" type:"string"`
 }
 

@@ -31,12 +31,12 @@ func (r CreateActivityRequest) Send() (*CreateActivityOutput, error) {
 // CreateActivityRequest returns a request value for making API operation for
 // AWS Step Functions.
 //
-// Creates an activity. An activity is a task which you write in any programming
-// language and host on any machine which has access to AWS Step Functions.
-// Activities must poll Step Functions using the GetActivityTask API action
-// and respond using SendTask* API actions. This function lets Step Functions
-// know the existence of your activity and returns an identifier for use in
-// a state machine and when polling from the activity.
+// Creates an activity. An activity is a task that you write in any programming
+// language and host on any machine that has access to AWS Step Functions. Activities
+// must poll Step Functions using the GetActivityTask API action and respond
+// using SendTask* API actions. This function lets Step Functions know the existence
+// of your activity and returns an identifier for use in a state machine and
+// when polling from the activity.
 //
 //    // Example sending a request using the CreateActivityRequest method.
 //    req := client.CreateActivityRequest(params)
@@ -246,6 +246,9 @@ func (r DescribeActivityRequest) Send() (*DescribeActivityOutput, error) {
 //
 // Describes an activity.
 //
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
+//
 //    // Example sending a request using the DescribeActivityRequest method.
 //    req := client.DescribeActivityRequest(params)
 //    resp, err := req.Send()
@@ -295,6 +298,9 @@ func (r DescribeExecutionRequest) Send() (*DescribeExecutionOutput, error) {
 // AWS Step Functions.
 //
 // Describes an execution.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 //
 //    // Example sending a request using the DescribeExecutionRequest method.
 //    req := client.DescribeExecutionRequest(params)
@@ -346,6 +352,9 @@ func (r DescribeStateMachineRequest) Send() (*DescribeStateMachineOutput, error)
 //
 // Describes a state machine.
 //
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
+//
 //    // Example sending a request using the DescribeStateMachineRequest method.
 //    req := client.DescribeStateMachineRequest(params)
 //    resp, err := req.Send()
@@ -395,6 +404,9 @@ func (r DescribeStateMachineForExecutionRequest) Send() (*DescribeStateMachineFo
 // AWS Step Functions.
 //
 // Describes the state machine associated with a specific execution.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 //
 //    // Example sending a request using the DescribeStateMachineForExecutionRequest method.
 //    req := client.DescribeStateMachineForExecutionRequest(params)
@@ -455,6 +467,10 @@ func (r GetActivityTaskRequest) Send() (*GetActivityTaskOutput, error) {
 // Workers should set their client side socket timeout to at least 65 seconds
 // (5 seconds higher than the maximum time the service may hold the poll request).
 //
+// Polling with GetActivityTask can cause latency in some implementations. See
+// Avoid Latency When Polling for Activity Tasks (http://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html)
+// in the Step Functions Developer Guide.
+//
 //    // Example sending a request using the GetActivityTaskRequest method.
 //    req := client.GetActivityTaskRequest(params)
 //    resp, err := req.Send()
@@ -507,9 +523,11 @@ func (r GetExecutionHistoryRequest) Send() (*GetExecutionHistoryOutput, error) {
 // the results are returned in ascending order of the timeStamp of the events.
 // Use the reverseOrder parameter to get the latest events first.
 //
-// If a nextToken is returned by a previous call, there are more results available.
-// To retrieve the next page of results, make the call again using the returned
-// token in nextToken. Keep all other arguments unchanged.
+// If nextToken is returned, there are more results available. The value of
+// nextToken is a unique pagination token for each page. Make the call again
+// using the returned token to retrieve the next page. Keep all other arguments
+// unchanged. Each pagination token expires after 60 seconds. Using an expired
+// pagination token will return an HTTP 400 InvalidToken error.
 //
 //    // Example sending a request using the GetExecutionHistoryRequest method.
 //    req := client.GetExecutionHistoryRequest(params)
@@ -613,9 +631,14 @@ func (r ListActivitiesRequest) Send() (*ListActivitiesOutput, error) {
 //
 // Lists the existing activities.
 //
-// If a nextToken is returned by a previous call, there are more results available.
-// To retrieve the next page of results, make the call again using the returned
-// token in nextToken. Keep all other arguments unchanged.
+// If nextToken is returned, there are more results available. The value of
+// nextToken is a unique pagination token for each page. Make the call again
+// using the returned token to retrieve the next page. Keep all other arguments
+// unchanged. Each pagination token expires after 60 seconds. Using an expired
+// pagination token will return an HTTP 400 InvalidToken error.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 //
 //    // Example sending a request using the ListActivitiesRequest method.
 //    req := client.ListActivitiesRequest(params)
@@ -718,10 +741,16 @@ func (r ListExecutionsRequest) Send() (*ListExecutionsOutput, error) {
 // AWS Step Functions.
 //
 // Lists the executions of a state machine that meet the filtering criteria.
+// Results are sorted by time, with the most recent execution first.
 //
-// If a nextToken is returned by a previous call, there are more results available.
-// To retrieve the next page of results, make the call again using the returned
-// token in nextToken. Keep all other arguments unchanged.
+// If nextToken is returned, there are more results available. The value of
+// nextToken is a unique pagination token for each page. Make the call again
+// using the returned token to retrieve the next page. Keep all other arguments
+// unchanged. Each pagination token expires after 60 seconds. Using an expired
+// pagination token will return an HTTP 400 InvalidToken error.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 //
 //    // Example sending a request using the ListExecutionsRequest method.
 //    req := client.ListExecutionsRequest(params)
@@ -825,9 +854,14 @@ func (r ListStateMachinesRequest) Send() (*ListStateMachinesOutput, error) {
 //
 // Lists the existing state machines.
 //
-// If a nextToken is returned by a previous call, there are more results available.
-// To retrieve the next page of results, make the call again using the returned
-// token in nextToken. Keep all other arguments unchanged.
+// If nextToken is returned, there are more results available. The value of
+// nextToken is a unique pagination token for each page. Make the call again
+// using the returned token to retrieve the next page. Keep all other arguments
+// unchanged. Each pagination token expires after 60 seconds. Using an expired
+// pagination token will return an HTTP 400 InvalidToken error.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 //
 //    // Example sending a request using the ListStateMachinesRequest method.
 //    req := client.ListStateMachinesRequest(params)
@@ -1094,6 +1128,12 @@ func (r StartExecutionRequest) Send() (*StartExecutionOutput, error) {
 //
 // Starts a state machine execution.
 //
+// StartExecution is idempotent. If StartExecution is called with the same name
+// and input as a running execution, the call will succeed and return the same
+// response as the original request. If the execution is closed or if the input
+// is different, it will return a 400 ExecutionAlreadyExists error. Names can
+// be reused after 90 days.
+//
 //    // Example sending a request using the StartExecutionRequest method.
 //    req := client.StartExecutionRequest(params)
 //    resp, err := req.Send()
@@ -1194,12 +1234,12 @@ func (r UpdateStateMachineRequest) Send() (*UpdateStateMachineOutput, error) {
 //
 // Updates an existing state machine by modifying its definition and/or roleArn.
 // Running executions will continue to use the previous definition and roleArn.
+// You must include at least one of definition or roleArn or you will receive
+// a MissingRequiredParameter error.
 //
 // All StartExecution calls within a few seconds will use the updated definition
 // and roleArn. Executions started immediately after calling UpdateStateMachine
-// may use the previous state machine definition and roleArn. You must include
-// at least one of definition or roleArn or you will receive a MissingRequiredParameter
-// error.
+// may use the previous state machine definition and roleArn.
 //
 //    // Example sending a request using the UpdateStateMachineRequest method.
 //    req := client.UpdateStateMachineRequest(params)
@@ -1227,7 +1267,7 @@ func (c *SFN) UpdateStateMachineRequest(input *UpdateStateMachineInput) UpdateSt
 	return UpdateStateMachineRequest{Request: req, Input: input, Copy: c.UpdateStateMachineRequest}
 }
 
-// Contains details about an activity which failed during an execution.
+// Contains details about an activity that failed during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityFailedEventDetails
 type ActivityFailedEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -1292,7 +1332,7 @@ func (s ActivityListItem) GoString() string {
 	return s.String()
 }
 
-// Contains details about an activity schedule failure which occurred during
+// Contains details about an activity schedule failure that occurred during
 // an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduleFailedEventDetails
 type ActivityScheduleFailedEventDetails struct {
@@ -1365,7 +1405,7 @@ func (s ActivityStartedEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about an activity which successfully terminated during an
+// Contains details about an activity that successfully terminated during an
 // execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivitySucceededEventDetails
 type ActivitySucceededEventDetails struct {
@@ -1385,7 +1425,7 @@ func (s ActivitySucceededEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about an activity timeout which occurred during an execution.
+// Contains details about an activity timeout that occurred during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityTimedOutEventDetails
 type ActivityTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -1495,15 +1535,13 @@ func (s CreateActivityOutput) SDKResponseMetadata() aws.Response {
 type CreateStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon States Language definition of the state machine.
+	// The Amazon States Language definition of the state machine. See Amazon States
+	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
 
-	// The name of the state machine. This name must be unique for your AWS account
-	// and region for 90 days. For more information, see  Limits Related to State
-	// Machine Executions (http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
-	// in the AWS Step Functions Developer Guide.
+	// The name of the state machine.
 	//
 	// A name must not contain:
 	//
@@ -1955,7 +1993,8 @@ type DescribeStateMachineForExecutionOutput struct {
 
 	responseMetadata aws.Response
 
-	// The Amazon States Language definition of the state machine.
+	// The Amazon States Language definition of the state machine. See Amazon States
+	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
@@ -2046,7 +2085,8 @@ type DescribeStateMachineOutput struct {
 	// CreationDate is a required field
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix" required:"true"`
 
-	// The Amazon States Language definition of the state machine.
+	// The Amazon States Language definition of the state machine. See Amazon States
+	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
@@ -2241,7 +2281,7 @@ func (s ExecutionSucceededEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about the execution timeout which occurred during the execution.
+// Contains details about the execution timeout that occurred during the execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionTimedOutEventDetails
 type ExecutionTimedOutEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -2350,18 +2390,17 @@ type GetExecutionHistoryInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 100. A value of 0 uses the default.
+	// page size is 1000. A value of 0 uses the default.
 	//
 	// This is only an upper limit. The actual number of results returned per call
 	// might be fewer than the specified maximum.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// Lists events in descending order of their timeStamp.
@@ -2409,12 +2448,11 @@ type GetExecutionHistoryOutput struct {
 	// Events is a required field
 	Events []HistoryEvent `locationName:"events" type:"list" required:"true"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
@@ -2438,11 +2476,10 @@ func (s GetExecutionHistoryOutput) SDKResponseMetadata() aws.Response {
 type HistoryEvent struct {
 	_ struct{} `type:"structure"`
 
-	// Contains details about an activity which failed during an execution.
+	// Contains details about an activity that failed during an execution.
 	ActivityFailedEventDetails *ActivityFailedEventDetails `locationName:"activityFailedEventDetails" type:"structure"`
 
-	// Contains details about an activity schedule event which failed during an
-	// execution.
+	// Contains details about an activity schedule event that failed during an execution.
 	ActivityScheduleFailedEventDetails *ActivityScheduleFailedEventDetails `locationName:"activityScheduleFailedEventDetails" type:"structure"`
 
 	// Contains details about an activity scheduled during an execution.
@@ -2451,11 +2488,11 @@ type HistoryEvent struct {
 	// Contains details about the start of an activity during an execution.
 	ActivityStartedEventDetails *ActivityStartedEventDetails `locationName:"activityStartedEventDetails" type:"structure"`
 
-	// Contains details about an activity which successfully terminated during an
+	// Contains details about an activity that successfully terminated during an
 	// execution.
 	ActivitySucceededEventDetails *ActivitySucceededEventDetails `locationName:"activitySucceededEventDetails" type:"structure"`
 
-	// Contains details about an activity timeout which occurred during an execution.
+	// Contains details about an activity timeout that occurred during an execution.
 	ActivityTimedOutEventDetails *ActivityTimedOutEventDetails `locationName:"activityTimedOutEventDetails" type:"structure"`
 
 	// Contains details about an abort of an execution.
@@ -2470,7 +2507,7 @@ type HistoryEvent struct {
 	// Contains details about the successful termination of the execution.
 	ExecutionSucceededEventDetails *ExecutionSucceededEventDetails `locationName:"executionSucceededEventDetails" type:"structure"`
 
-	// Contains details about the execution timeout which occurred during the execution.
+	// Contains details about the execution timeout that occurred during the execution.
 	ExecutionTimedOutEventDetails *ExecutionTimedOutEventDetails `locationName:"executionTimedOutEventDetails" type:"structure"`
 
 	// The id of the event. Events are numbered sequentially, starting at one.
@@ -2478,25 +2515,24 @@ type HistoryEvent struct {
 	// Id is a required field
 	Id *int64 `locationName:"id" type:"long" required:"true"`
 
-	// Contains details about a lambda function which failed during an execution.
+	// Contains details about a lambda function that failed during an execution.
 	LambdaFunctionFailedEventDetails *LambdaFunctionFailedEventDetails `locationName:"lambdaFunctionFailedEventDetails" type:"structure"`
 
-	// Contains details about a failed lambda function schedule event which occurred
+	// Contains details about a failed lambda function schedule event that occurred
 	// during an execution.
 	LambdaFunctionScheduleFailedEventDetails *LambdaFunctionScheduleFailedEventDetails `locationName:"lambdaFunctionScheduleFailedEventDetails" type:"structure"`
 
 	// Contains details about a lambda function scheduled during an execution.
 	LambdaFunctionScheduledEventDetails *LambdaFunctionScheduledEventDetails `locationName:"lambdaFunctionScheduledEventDetails" type:"structure"`
 
-	// Contains details about a lambda function which failed to start during an
-	// execution.
+	// Contains details about a lambda function that failed to start during an execution.
 	LambdaFunctionStartFailedEventDetails *LambdaFunctionStartFailedEventDetails `locationName:"lambdaFunctionStartFailedEventDetails" type:"structure"`
 
-	// Contains details about a lambda function which terminated successfully during
+	// Contains details about a lambda function that terminated successfully during
 	// an execution.
 	LambdaFunctionSucceededEventDetails *LambdaFunctionSucceededEventDetails `locationName:"lambdaFunctionSucceededEventDetails" type:"structure"`
 
-	// Contains details about a lambda function timeout which occurred during an
+	// Contains details about a lambda function timeout that occurred during an
 	// execution.
 	LambdaFunctionTimedOutEventDetails *LambdaFunctionTimedOutEventDetails `locationName:"lambdaFunctionTimedOutEventDetails" type:"structure"`
 
@@ -2509,7 +2545,30 @@ type HistoryEvent struct {
 	// Contains details about an exit from a state during an execution.
 	StateExitedEventDetails *StateExitedEventDetails `locationName:"stateExitedEventDetails" type:"structure"`
 
-	// The date the event occurred.
+	// Contains details about a task failure event.
+	TaskFailedEventDetails *TaskFailedEventDetails `locationName:"taskFailedEventDetails" type:"structure"`
+
+	// Contains details about a task scheduled during an execution.
+	TaskScheduledEventDetails *TaskScheduledEventDetails `locationName:"taskScheduledEventDetails" type:"structure"`
+
+	// Contains details about a task that failed to start during an execution.
+	TaskStartFailedEventDetails *TaskStartFailedEventDetails `locationName:"taskStartFailedEventDetails" type:"structure"`
+
+	// Contains details about the start of a task during an execution.
+	TaskStartedEventDetails *TaskStartedEventDetails `locationName:"taskStartedEventDetails" type:"structure"`
+
+	TaskSubmitFailedEventDetails *TaskSubmitFailedEventDetails `locationName:"taskSubmitFailedEventDetails" type:"structure"`
+
+	TaskSubmittedEventDetails *TaskSubmittedEventDetails `locationName:"taskSubmittedEventDetails" type:"structure"`
+
+	// Contains details about the start of connected service by a task state.
+	TaskSucceededEventDetails *TaskSucceededEventDetails `locationName:"taskSucceededEventDetails" type:"structure"`
+
+	// Contains details about a connected service timeout that occured during an
+	// execution.
+	TaskTimedOutEventDetails *TaskTimedOutEventDetails `locationName:"taskTimedOutEventDetails" type:"structure"`
+
+	// The date and time the event occurred.
 	//
 	// Timestamp is a required field
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix" required:"true"`
@@ -2530,7 +2589,7 @@ func (s HistoryEvent) GoString() string {
 	return s.String()
 }
 
-// Contains details about a lambda function which failed during an execution.
+// Contains details about a lambda function that failed during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionFailedEventDetails
 type LambdaFunctionFailedEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -2552,7 +2611,7 @@ func (s LambdaFunctionFailedEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about a failed lambda function schedule event which occurred
+// Contains details about a failed lambda function schedule event that occurred
 // during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduleFailedEventDetails
 type LambdaFunctionScheduleFailedEventDetails struct {
@@ -2602,8 +2661,7 @@ func (s LambdaFunctionScheduledEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about a lambda function which failed to start during an
-// execution.
+// Contains details about a lambda function that failed to start during an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionStartFailedEventDetails
 type LambdaFunctionStartFailedEventDetails struct {
 	_ struct{} `type:"structure"`
@@ -2625,7 +2683,7 @@ func (s LambdaFunctionStartFailedEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about a lambda function which successfully terminated during
+// Contains details about a lambda function that successfully terminated during
 // an execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionSucceededEventDetails
 type LambdaFunctionSucceededEventDetails struct {
@@ -2645,7 +2703,7 @@ func (s LambdaFunctionSucceededEventDetails) GoString() string {
 	return s.String()
 }
 
-// Contains details about a lambda function timeout which occurred during an
+// Contains details about a lambda function timeout that occurred during an
 // execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionTimedOutEventDetails
 type LambdaFunctionTimedOutEventDetails struct {
@@ -2674,18 +2732,17 @@ type ListActivitiesInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 100. A value of 0 uses the default.
+	// page size is 1000. A value of 0 uses the default.
 	//
 	// This is only an upper limit. The actual number of results returned per call
 	// might be fewer than the specified maximum.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
@@ -2723,12 +2780,11 @@ type ListActivitiesOutput struct {
 	// Activities is a required field
 	Activities []ActivityListItem `locationName:"activities" type:"list" required:"true"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
@@ -2753,18 +2809,17 @@ type ListExecutionsInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 100. A value of 0 uses the default.
+	// page size is 1000. A value of 0 uses the default.
 	//
 	// This is only an upper limit. The actual number of results returned per call
 	// might be fewer than the specified maximum.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
@@ -2818,12 +2873,11 @@ type ListExecutionsOutput struct {
 	// Executions is a required field
 	Executions []ExecutionListItem `locationName:"executions" type:"list" required:"true"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
@@ -2848,18 +2902,17 @@ type ListStateMachinesInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 100. A value of 0 uses the default.
+	// page size is 1000. A value of 0 uses the default.
 	//
 	// This is only an upper limit. The actual number of results returned per call
 	// might be fewer than the specified maximum.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 }
 
@@ -2892,12 +2945,11 @@ type ListStateMachinesOutput struct {
 
 	responseMetadata aws.Response
 
-	// If a nextToken is returned by a previous call, there are more results available.
-	// To retrieve the next page of results, make the call again using the returned
-	// token in nextToken. Keep all other arguments unchanged.
-	//
-	// The configured maxResults determines how many results can be returned in
-	// a single call.
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// StateMachines is a required field
@@ -2926,7 +2978,7 @@ type SendTaskFailureInput struct {
 	// A more detailed explanation of the cause of the failure.
 	Cause *string `locationName:"cause" type:"string"`
 
-	// An arbitrary error code that identifies the cause of the failure.
+	// The error code of the failure.
 	Error *string `locationName:"error" type:"string"`
 
 	// The token that represents this task. Task tokens are generated by the service
@@ -3131,20 +3183,6 @@ type StartExecutionInput struct {
 	// Machine Executions (http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the AWS Step Functions Developer Guide.
 	//
-	// An execution can't use the name of another execution for 90 days.
-	//
-	// When you make multiple StartExecution calls with the same name, the new execution
-	// doesn't run and the following rules apply:
-	//
-	// When the original execution is open and the execution input from the new
-	// call is different, the ExecutionAlreadyExists message is returned.
-	//
-	// When the original execution is open and the execution input from the new
-	// call is identical, the Success message is returned.
-	//
-	// When the original execution is closed, the ExecutionAlreadyExists message
-	// is returned regardless of input.
-	//
 	// A name must not contain:
 	//
 	//    * whitespace
@@ -3333,10 +3371,10 @@ func (s StateMachineListItem) GoString() string {
 type StopExecutionInput struct {
 	_ struct{} `type:"structure"`
 
-	// A more detailed explanation of the cause of the termination.
+	// A more detailed explanation of the cause of the failure.
 	Cause *string `locationName:"cause" type:"string"`
 
-	// An arbitrary error code that identifies the cause of the termination.
+	// The error code of the failure.
 	Error *string `locationName:"error" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the execution to stop.
@@ -3399,11 +3437,261 @@ func (s StopExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Contains details about a task failure event.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskFailedEventDetails
+type TaskFailedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A more detailed explanation of the cause of the failure.
+	Cause *string `locationName:"cause" type:"string"`
+
+	// The error code of the failure.
+	Error *string `locationName:"error" type:"string"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskFailedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskFailedEventDetails) GoString() string {
+	return s.String()
+}
+
+// Contains details about a task scheduled during an execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskScheduledEventDetails
+type TaskScheduledEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The JSON data passed to the connected service referenced in a task state.
+	//
+	// Parameters is a required field
+	Parameters *string `locationName:"parameters" type:"string" required:"true"`
+
+	// Region is a required field
+	Region *string `locationName:"region" min:"1" type:"string" required:"true"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+
+	// The maximum allowed duration of the task.
+	TimeoutInSeconds *int64 `locationName:"timeoutInSeconds" type:"long"`
+}
+
+// String returns the string representation
+func (s TaskScheduledEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskScheduledEventDetails) GoString() string {
+	return s.String()
+}
+
+// Contains details about a task that failed to start during an execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartFailedEventDetails
+type TaskStartFailedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A more detailed explanation of the cause of the failure.
+	Cause *string `locationName:"cause" type:"string"`
+
+	// The error code of the failure.
+	Error *string `locationName:"error" type:"string"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskStartFailedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskStartFailedEventDetails) GoString() string {
+	return s.String()
+}
+
+// Contains details about the start of a task during an execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskStartedEventDetails
+type TaskStartedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskStartedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskStartedEventDetails) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmitFailedEventDetails
+type TaskSubmitFailedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A more detailed explanation of the cause of the failure.
+	Cause *string `locationName:"cause" type:"string"`
+
+	// The error code of the failure.
+	Error *string `locationName:"error" type:"string"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskSubmitFailedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskSubmitFailedEventDetails) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSubmittedEventDetails
+type TaskSubmittedEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The response from a connected service when a task has started.
+	Output *string `locationName:"output" type:"string"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskSubmittedEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskSubmittedEventDetails) GoString() string {
+	return s.String()
+}
+
+// Contains details about the start of connected service by a task state.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskSucceededEventDetails
+type TaskSucceededEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The full JSON response from a connected service when a task has succeeded.
+	// This response becomes the output of the related task.
+	Output *string `locationName:"output" type:"string"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskSucceededEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskSucceededEventDetails) GoString() string {
+	return s.String()
+}
+
+// Contains details about a connected service timeout that occured during an
+// execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TaskTimedOutEventDetails
+type TaskTimedOutEventDetails struct {
+	_ struct{} `type:"structure"`
+
+	// A more detailed explanation of the cause of the failure.
+	Cause *string `locationName:"cause" type:"string"`
+
+	// The error code of the failure.
+	Error *string `locationName:"error" type:"string"`
+
+	// The service name of the connected service in a task state.
+	//
+	// Resource is a required field
+	Resource *string `locationName:"resource" min:"1" type:"string" required:"true"`
+
+	// The action of the connected service called by a task state.
+	//
+	// ResourceType is a required field
+	ResourceType *string `locationName:"resourceType" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TaskTimedOutEventDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TaskTimedOutEventDetails) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput
 type UpdateStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon States Language definition of the state machine.
+	// The Amazon States Language definition of the state machine. See Amazon States
+	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	Definition *string `locationName:"definition" min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
@@ -3507,6 +3795,14 @@ const (
 	HistoryEventTypeActivityTimedOut             HistoryEventType = "ActivityTimedOut"
 	HistoryEventTypeChoiceStateEntered           HistoryEventType = "ChoiceStateEntered"
 	HistoryEventTypeChoiceStateExited            HistoryEventType = "ChoiceStateExited"
+	HistoryEventTypeTaskFailed                   HistoryEventType = "TaskFailed"
+	HistoryEventTypeTaskScheduled                HistoryEventType = "TaskScheduled"
+	HistoryEventTypeTaskStartFailed              HistoryEventType = "TaskStartFailed"
+	HistoryEventTypeTaskStarted                  HistoryEventType = "TaskStarted"
+	HistoryEventTypeTaskSubmitFailed             HistoryEventType = "TaskSubmitFailed"
+	HistoryEventTypeTaskSubmitted                HistoryEventType = "TaskSubmitted"
+	HistoryEventTypeTaskSucceeded                HistoryEventType = "TaskSucceeded"
+	HistoryEventTypeTaskTimedOut                 HistoryEventType = "TaskTimedOut"
 	HistoryEventTypeExecutionFailed              HistoryEventType = "ExecutionFailed"
 	HistoryEventTypeExecutionStarted             HistoryEventType = "ExecutionStarted"
 	HistoryEventTypeExecutionSucceeded           HistoryEventType = "ExecutionSucceeded"

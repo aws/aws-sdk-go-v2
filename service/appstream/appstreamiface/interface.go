@@ -65,6 +65,10 @@ import (
 type AppStreamAPI interface {
 	AssociateFleetRequest(*appstream.AssociateFleetInput) appstream.AssociateFleetRequest
 
+	BatchAssociateUserStackRequest(*appstream.BatchAssociateUserStackInput) appstream.BatchAssociateUserStackRequest
+
+	BatchDisassociateUserStackRequest(*appstream.BatchDisassociateUserStackInput) appstream.BatchDisassociateUserStackRequest
+
 	CopyImageRequest(*appstream.CopyImageInput) appstream.CopyImageRequest
 
 	CreateDirectoryConfigRequest(*appstream.CreateDirectoryConfigInput) appstream.CreateDirectoryConfigRequest
@@ -79,6 +83,8 @@ type AppStreamAPI interface {
 
 	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) appstream.CreateStreamingURLRequest
 
+	CreateUserRequest(*appstream.CreateUserInput) appstream.CreateUserRequest
+
 	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) appstream.DeleteDirectoryConfigRequest
 
 	DeleteFleetRequest(*appstream.DeleteFleetInput) appstream.DeleteFleetRequest
@@ -90,6 +96,8 @@ type AppStreamAPI interface {
 	DeleteImagePermissionsRequest(*appstream.DeleteImagePermissionsInput) appstream.DeleteImagePermissionsRequest
 
 	DeleteStackRequest(*appstream.DeleteStackInput) appstream.DeleteStackRequest
+
+	DeleteUserRequest(*appstream.DeleteUserInput) appstream.DeleteUserRequest
 
 	DescribeDirectoryConfigsRequest(*appstream.DescribeDirectoryConfigsInput) appstream.DescribeDirectoryConfigsRequest
 
@@ -105,7 +113,15 @@ type AppStreamAPI interface {
 
 	DescribeStacksRequest(*appstream.DescribeStacksInput) appstream.DescribeStacksRequest
 
+	DescribeUserStackAssociationsRequest(*appstream.DescribeUserStackAssociationsInput) appstream.DescribeUserStackAssociationsRequest
+
+	DescribeUsersRequest(*appstream.DescribeUsersInput) appstream.DescribeUsersRequest
+
+	DisableUserRequest(*appstream.DisableUserInput) appstream.DisableUserRequest
+
 	DisassociateFleetRequest(*appstream.DisassociateFleetInput) appstream.DisassociateFleetRequest
+
+	EnableUserRequest(*appstream.EnableUserInput) appstream.EnableUserRequest
 
 	ExpireSessionRequest(*appstream.ExpireSessionInput) appstream.ExpireSessionRequest
 

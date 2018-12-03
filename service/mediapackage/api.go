@@ -3293,6 +3293,11 @@ func (s RotateIngestEndpointCredentialsOutput) MarshalFields(e protocol.FieldEnc
 type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
+	// An Amazon Resource Name (ARN) of a Certificate Manager certificatethat MediaPackage
+	// will use for enforcing secure end-to-end datatransfer with the key provider
+	// service.
+	CertificateArn *string `locationName:"certificateArn" type:"string"`
+
 	// The resource ID to include in key requests.
 	//
 	// ResourceId is a required field
@@ -3353,6 +3358,12 @@ func (s *SpekeKeyProvider) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.ResourceId != nil {
 		v := *s.ResourceId
 

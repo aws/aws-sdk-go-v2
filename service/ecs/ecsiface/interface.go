@@ -67,6 +67,8 @@ type ECSAPI interface {
 
 	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
 
+	DeleteAccountSettingRequest(*ecs.DeleteAccountSettingInput) ecs.DeleteAccountSettingRequest
+
 	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
 
 	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
@@ -89,6 +91,8 @@ type ECSAPI interface {
 
 	DiscoverPollEndpointRequest(*ecs.DiscoverPollEndpointInput) ecs.DiscoverPollEndpointRequest
 
+	ListAccountSettingsRequest(*ecs.ListAccountSettingsInput) ecs.ListAccountSettingsRequest
+
 	ListAttributesRequest(*ecs.ListAttributesInput) ecs.ListAttributesRequest
 
 	ListClustersRequest(*ecs.ListClustersInput) ecs.ListClustersRequest
@@ -97,11 +101,15 @@ type ECSAPI interface {
 
 	ListServicesRequest(*ecs.ListServicesInput) ecs.ListServicesRequest
 
+	ListTagsForResourceRequest(*ecs.ListTagsForResourceInput) ecs.ListTagsForResourceRequest
+
 	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
 
 	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
 
 	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
+
+	PutAccountSettingRequest(*ecs.PutAccountSettingInput) ecs.PutAccountSettingRequest
 
 	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
 
@@ -118,6 +126,10 @@ type ECSAPI interface {
 	SubmitContainerStateChangeRequest(*ecs.SubmitContainerStateChangeInput) ecs.SubmitContainerStateChangeRequest
 
 	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest
+
+	TagResourceRequest(*ecs.TagResourceInput) ecs.TagResourceRequest
+
+	UntagResourceRequest(*ecs.UntagResourceInput) ecs.UntagResourceRequest
 
 	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
 

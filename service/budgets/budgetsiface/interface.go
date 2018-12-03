@@ -76,6 +76,8 @@ type BudgetsAPI interface {
 
 	DescribeBudgetRequest(*budgets.DescribeBudgetInput) budgets.DescribeBudgetRequest
 
+	DescribeBudgetPerformanceHistoryRequest(*budgets.DescribeBudgetPerformanceHistoryInput) budgets.DescribeBudgetPerformanceHistoryRequest
+
 	DescribeBudgetsRequest(*budgets.DescribeBudgetsInput) budgets.DescribeBudgetsRequest
 
 	DescribeNotificationsForBudgetRequest(*budgets.DescribeNotificationsForBudgetInput) budgets.DescribeNotificationsForBudgetRequest

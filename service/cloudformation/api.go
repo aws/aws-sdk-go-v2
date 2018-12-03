@@ -668,6 +668,68 @@ func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput)
 	return DescribeChangeSetRequest{Request: req, Input: input, Copy: c.DescribeChangeSetRequest}
 }
 
+const opDescribeStackDriftDetectionStatus = "DescribeStackDriftDetectionStatus"
+
+// DescribeStackDriftDetectionStatusRequest is a API request type for the DescribeStackDriftDetectionStatus API operation.
+type DescribeStackDriftDetectionStatusRequest struct {
+	*aws.Request
+	Input *DescribeStackDriftDetectionStatusInput
+	Copy  func(*DescribeStackDriftDetectionStatusInput) DescribeStackDriftDetectionStatusRequest
+}
+
+// Send marshals and sends the DescribeStackDriftDetectionStatus API request.
+func (r DescribeStackDriftDetectionStatusRequest) Send() (*DescribeStackDriftDetectionStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackDriftDetectionStatusOutput), nil
+}
+
+// DescribeStackDriftDetectionStatusRequest returns a request value for making API operation for
+// AWS CloudFormation.
+//
+// Returns information about a stack drift detection operation. A stack drift
+// detection operation detects whether a stack's actual configuration differs,
+// or has drifted, from it's expected configuration, as defined in the stack
+// template and any values specified as template parameters. A stack is considered
+// to have drifted if one or more of its resources have drifted. For more information
+// on stack and resource drift, see Detecting Unregulated Configuration Changes
+// to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+//
+// Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift
+// returns a StackDriftDetectionId you can use to monitor the progress of the
+// operation using DescribeStackDriftDetectionStatus. Once the drift detection
+// operation has completed, use DescribeStackResourceDrifts to return drift
+// information about the stack and its resources.
+//
+//    // Example sending a request using the DescribeStackDriftDetectionStatusRequest method.
+//    req := client.DescribeStackDriftDetectionStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackDriftDetectionStatus
+func (c *CloudFormation) DescribeStackDriftDetectionStatusRequest(input *DescribeStackDriftDetectionStatusInput) DescribeStackDriftDetectionStatusRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStackDriftDetectionStatus,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeStackDriftDetectionStatusInput{}
+	}
+
+	output := &DescribeStackDriftDetectionStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeStackDriftDetectionStatusRequest{Request: req, Input: input, Copy: c.DescribeStackDriftDetectionStatusRequest}
+}
+
 const opDescribeStackEvents = "DescribeStackEvents"
 
 // DescribeStackEventsRequest is a API request type for the DescribeStackEvents API operation.
@@ -880,6 +942,119 @@ func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResour
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeStackResourceRequest{Request: req, Input: input, Copy: c.DescribeStackResourceRequest}
+}
+
+const opDescribeStackResourceDrifts = "DescribeStackResourceDrifts"
+
+// DescribeStackResourceDriftsRequest is a API request type for the DescribeStackResourceDrifts API operation.
+type DescribeStackResourceDriftsRequest struct {
+	*aws.Request
+	Input *DescribeStackResourceDriftsInput
+	Copy  func(*DescribeStackResourceDriftsInput) DescribeStackResourceDriftsRequest
+}
+
+// Send marshals and sends the DescribeStackResourceDrifts API request.
+func (r DescribeStackResourceDriftsRequest) Send() (*DescribeStackResourceDriftsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackResourceDriftsOutput), nil
+}
+
+// DescribeStackResourceDriftsRequest returns a request value for making API operation for
+// AWS CloudFormation.
+//
+// Returns drift information for the resources that have been checked for drift
+// in the specified stack. This includes actual and expected configuration values
+// for resources where AWS CloudFormation detects configuration drift.
+//
+// For a given stack, there will be one StackResourceDrift for each stack resource
+// that has been checked for drift. Resources that have not yet been checked
+// for drift are not included. Resources that do not currently support drift
+// detection are not checked, and so not included. For a list of resources that
+// support drift detection, see Resources that Support Drift Detection (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+//
+// Use DetectStackResourceDrift to detect drift on individual resources, or
+// DetectStackDrift to detect drift on all supported resources for a given stack.
+//
+//    // Example sending a request using the DescribeStackResourceDriftsRequest method.
+//    req := client.DescribeStackResourceDriftsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDrifts
+func (c *CloudFormation) DescribeStackResourceDriftsRequest(input *DescribeStackResourceDriftsInput) DescribeStackResourceDriftsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStackResourceDrifts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeStackResourceDriftsInput{}
+	}
+
+	output := &DescribeStackResourceDriftsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeStackResourceDriftsRequest{Request: req, Input: input, Copy: c.DescribeStackResourceDriftsRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeStackResourceDriftsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeStackResourceDrifts operation.
+//		req := client.DescribeStackResourceDriftsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeStackResourceDriftsRequest) Paginate(opts ...aws.Option) DescribeStackResourceDriftsPager {
+	return DescribeStackResourceDriftsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeStackResourceDriftsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeStackResourceDriftsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeStackResourceDriftsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeStackResourceDriftsPager) CurrentPage() *DescribeStackResourceDriftsOutput {
+	return p.Pager.CurrentPage().(*DescribeStackResourceDriftsOutput)
 }
 
 const opDescribeStackResources = "DescribeStackResources"
@@ -1152,6 +1327,144 @@ type DescribeStacksPager struct {
 
 func (p *DescribeStacksPager) CurrentPage() *DescribeStacksOutput {
 	return p.Pager.CurrentPage().(*DescribeStacksOutput)
+}
+
+const opDetectStackDrift = "DetectStackDrift"
+
+// DetectStackDriftRequest is a API request type for the DetectStackDrift API operation.
+type DetectStackDriftRequest struct {
+	*aws.Request
+	Input *DetectStackDriftInput
+	Copy  func(*DetectStackDriftInput) DetectStackDriftRequest
+}
+
+// Send marshals and sends the DetectStackDrift API request.
+func (r DetectStackDriftRequest) Send() (*DetectStackDriftOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetectStackDriftOutput), nil
+}
+
+// DetectStackDriftRequest returns a request value for making API operation for
+// AWS CloudFormation.
+//
+// Detects whether a stack's actual configuration differs, or has drifted, from
+// it's expected configuration, as defined in the stack template and any values
+// specified as template parameters. For each resource in the stack that supports
+// drift detection, AWS CloudFormation compares the actual configuration of
+// the resource with its expected template configuration. Only resource properties
+// explicitly defined in the stack template are checked for drift. A stack is
+// considered to have drifted if one or more of its resources differ from their
+// expected template configurations. For more information, see Detecting Unregulated
+// Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+//
+// Use DetectStackDrift to detect drift on all supported resources for a given
+// stack, or DetectStackResourceDrift to detect drift on individual resources.
+//
+// For a list of stack resources that currently support drift detection, see
+// Resources that Support Drift Detection (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+//
+// DetectStackDrift can take up to several minutes, depending on the number
+// of resources contained within the stack. Use DescribeStackDriftDetectionStatus
+// to monitor the progress of a detect stack drift operation. Once the drift
+// detection operation has completed, use DescribeStackResourceDrifts to return
+// drift information about the stack and its resources.
+//
+// When detecting drift on a stack, AWS CloudFormation does not detect drift
+// on any nested stacks belonging to that stack. Perform DetectStackDrift directly
+// on the nested stack itself.
+//
+//    // Example sending a request using the DetectStackDriftRequest method.
+//    req := client.DetectStackDriftRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDrift
+func (c *CloudFormation) DetectStackDriftRequest(input *DetectStackDriftInput) DetectStackDriftRequest {
+	op := &aws.Operation{
+		Name:       opDetectStackDrift,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DetectStackDriftInput{}
+	}
+
+	output := &DetectStackDriftOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DetectStackDriftRequest{Request: req, Input: input, Copy: c.DetectStackDriftRequest}
+}
+
+const opDetectStackResourceDrift = "DetectStackResourceDrift"
+
+// DetectStackResourceDriftRequest is a API request type for the DetectStackResourceDrift API operation.
+type DetectStackResourceDriftRequest struct {
+	*aws.Request
+	Input *DetectStackResourceDriftInput
+	Copy  func(*DetectStackResourceDriftInput) DetectStackResourceDriftRequest
+}
+
+// Send marshals and sends the DetectStackResourceDrift API request.
+func (r DetectStackResourceDriftRequest) Send() (*DetectStackResourceDriftOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetectStackResourceDriftOutput), nil
+}
+
+// DetectStackResourceDriftRequest returns a request value for making API operation for
+// AWS CloudFormation.
+//
+// Returns information about whether a resource's actual configuration differs,
+// or has drifted, from it's expected configuration, as defined in the stack
+// template and any values specified as template parameters. This information
+// includes actual and expected property values for resources in which AWS CloudFormation
+// detects drift. Only resource properties explicitly defined in the stack template
+// are checked for drift. For more information about stack and resource drift,
+// see Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+//
+// Use DetectStackResourceDrift to detect drift on individual resources, or
+// DetectStackDrift to detect drift on all resources in a given stack that support
+// drift detection.
+//
+// Resources that do not currently support drift detection cannot be checked.
+// For a list of resources that support drift detection, see Resources that
+// Support Drift Detection (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+//
+//    // Example sending a request using the DetectStackResourceDriftRequest method.
+//    req := client.DetectStackResourceDriftRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDrift
+func (c *CloudFormation) DetectStackResourceDriftRequest(input *DetectStackResourceDriftInput) DetectStackResourceDriftRequest {
+	op := &aws.Operation{
+		Name:       opDetectStackResourceDrift,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DetectStackResourceDriftInput{}
+	}
+
+	output := &DetectStackResourceDriftOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DetectStackResourceDriftRequest{Request: req, Input: input, Copy: c.DetectStackResourceDriftRequest}
 }
 
 const opEstimateTemplateCost = "EstimateTemplateCost"
@@ -2482,10 +2795,10 @@ func (r UpdateTerminationProtectionRequest) Send() (*UpdateTerminationProtection
 // Updates termination protection for the specified stack. If a user attempts
 // to delete a stack with termination protection enabled, the operation fails
 // and the stack remains unchanged. For more information, see Protecting a Stack
-// From Being Deleted (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
+// From Being Deleted (AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
 // in the AWS CloudFormation User Guide.
 //
-// For nested stacks (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
+// For nested stacks (AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
 // termination protection is set on the root stack and cannot be changed directly
 // on the nested stack.
 //
@@ -2989,8 +3302,7 @@ type CreateChangeSetInput struct {
 	NotificationARNs []string `type:"list"`
 
 	// A list of Parameter structures that specify input parameters for the change
-	// set. For more information, see the Parameter (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
-	// data type.
+	// set. For more information, see the Parameter data type.
 	Parameters []Parameter `type:"list"`
 
 	// The template resource types that you have permissions to work with if you
@@ -3150,30 +3462,74 @@ func (s CreateChangeSetOutput) SDKResponseMetadata() aws.Response {
 type CreateStackInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of values that you must specify before AWS CloudFormation can create
-	// certain stacks. Some stack templates might include resources that can affect
-	// permissions in your AWS account, for example, by creating new AWS Identity
-	// and Access Management (IAM) users. For those stacks, you must explicitly
-	// acknowledge their capabilities by specifying this parameter.
+	// In some cases, you must explicity acknowledge that your stack template contains
+	// certain capabilities in order for AWS CloudFormation to create the stack.
 	//
-	// The only valid values are CAPABILITY_IAM and CAPABILITY_NAMED_IAM. The following
-	// resources require you to specify this parameter:  AWS::IAM::AccessKey (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html),
-	//  AWS::IAM::Group (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html),
-	//  AWS::IAM::InstanceProfile (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html),
-	//  AWS::IAM::Policy (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html),
-	//  AWS::IAM::Role (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html),
-	//  AWS::IAM::User (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html),
-	// and  AWS::IAM::UserToGroupAddition (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html).
+	//    * CAPABILITY_IAM and CAPABILITY_NAMED_IAM
+	//
+	// Some stack templates might include resources that can affect permissions
+	//    in your AWS account; for example, by creating new AWS Identity and Access
+	//    Management (IAM) users. For those stacks, you must explicitly acknowledge
+	//    this by specifying one of these capabilities.
+	//
+	// The following IAM resources require you to specify either the CAPABILITY_IAM
+	//    or CAPABILITY_NAMED_IAM capability.
+	//
+	// If you have IAM resources, you can specify either capability.
+	//
+	// If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.
+	//
+	//
+	// If you don't specify either of these capabilities, AWS CloudFormation returns
+	//    an InsufficientCapabilities error.
+	//
 	// If your stack template contains these resources, we recommend that you review
-	// all permissions associated with them and edit their permissions if necessary.
+	//    all permissions associated with them and edit their permissions if necessary.
 	//
-	// If you have IAM resources, you can specify either capability. If you have
-	// IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM. If
-	// you don't specify this parameter, this action returns an InsufficientCapabilities
-	// error.
+	//  AWS::IAM::AccessKey (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
+	//
+	//  AWS::IAM::Group (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
+	//
+	//  AWS::IAM::InstanceProfile (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
+	//
+	//  AWS::IAM::Policy (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
+	//
+	//  AWS::IAM::Role (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
+	//
+	//  AWS::IAM::User (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
+	//
+	//  AWS::IAM::UserToGroupAddition (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
-	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
+	//    Templates (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
+	//
+	//    * CAPABILITY_AUTO_EXPAND
+	//
+	// Some template contain macros. Macros perform custom processing on templates;
+	//    this can include simple actions like find-and-replace operations, all
+	//    the way to extensive transformations of entire templates. Because of this,
+	//    users typically create a change set from the processed template, so that
+	//    they can review the changes resulting from the macros before actually
+	//    creating the stack. If your stack template contains one or more macros,
+	//    and you choose to create a stack directly from the processed template,
+	//    without first reviewing the resulting changes in a change set, you must
+	//    acknowledge this capability. This includes the AWS::Include (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
+	//    and AWS::Serverless (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
+	//    transforms, which are macros hosted by AWS CloudFormation.
+	//
+	// Change sets do not currently support nested stacks. If you want to create
+	//    a stack from a stack template that contains macros and nested stacks,
+	//    you must create the stack directly from the template using this capability.
+	//
+	// You should only create stacks directly from a stack template that contains
+	//    macros if you know what processing the macro performs.
+	//
+	// Each macro relies on an underlying Lambda service function for processing
+	//    stack templates. Be aware that the Lambda function owner can update the
+	//    function operation without AWS CloudFormation being notified.
+	//
+	// For more information, see Using AWS CloudFormation Macros to Perform Custom
+	//    Processing on Templates (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []Capability `type:"list"`
 
 	// A unique identifier for this CreateStack request. Specify this token if you
@@ -4259,6 +4615,131 @@ func (s DescribeChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackDriftDetectionStatusInput
+type DescribeStackDriftDetectionStatusInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the drift detection results of this operation.
+	//
+	// AWS CloudFormation generates new results, with a new drift detection ID,
+	// each time this operation is run. However, the number of drift results AWS
+	// CloudFormation retains for any given stack, and for how long, may vary.
+	//
+	// StackDriftDetectionId is a required field
+	StackDriftDetectionId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeStackDriftDetectionStatusInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStackDriftDetectionStatusInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeStackDriftDetectionStatusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackDriftDetectionStatusInput"}
+
+	if s.StackDriftDetectionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StackDriftDetectionId"))
+	}
+	if s.StackDriftDetectionId != nil && len(*s.StackDriftDetectionId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackDriftDetectionId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackDriftDetectionStatusOutput
+type DescribeStackDriftDetectionStatusOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The status of the stack drift detection operation.
+	//
+	//    * DETECTION_COMPLETE: The stack drift detection operation has successfully
+	//    completed for all resources in the stack that support drift detection.
+	//    (Resources that do not currently support stack detection remain unchecked.)
+	//
+	// If you specified logical resource IDs for AWS CloudFormation to use as a
+	//    filter for the stack drift detection operation, only the resources with
+	//    those logical IDs are checked for drift.
+	//
+	//    * DETECTION_FAILED: The stack drift detection operation has failed for
+	//    at least one resource in the stack. Results will be available for resources
+	//    on which AWS CloudFormation successfully completed drift detection.
+	//
+	//    * DETECTION_IN_PROGRESS: The stack drift detection operation is currently
+	//    in progress.
+	//
+	// DetectionStatus is a required field
+	DetectionStatus StackDriftDetectionStatus `type:"string" required:"true" enum:"true"`
+
+	// The reason the stack drift detection operation has its current status.
+	DetectionStatusReason *string `type:"string"`
+
+	// Total number of stack resources that have drifted. This is NULL until the
+	// drift detection operation reaches a status of DETECTION_COMPLETE. This value
+	// will be 0 for stacks whose drift status is IN_SYNC.
+	DriftedStackResourceCount *int64 `type:"integer"`
+
+	// The ID of the drift detection results of this operation.
+	//
+	// AWS CloudFormation generates new results, with a new drift detection ID,
+	// each time this operation is run. However, the number of reports AWS CloudFormation
+	// retains for any given stack, and for how long, may vary.
+	//
+	// StackDriftDetectionId is a required field
+	StackDriftDetectionId *string `min:"1" type:"string" required:"true"`
+
+	// Status of the stack's actual configuration compared to its expected configuration.
+	//
+	//    * DRIFTED: The stack differs from its expected template configuration.
+	//    A stack is considered to have drifted if one or more of its resources
+	//    have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the stack differs
+	//    from its expected template configuration.
+	//
+	//    * IN_SYNC: The stack's actual configuration matches its expected template
+	//    configuration.
+	//
+	//    * UNKNOWN: This value is reserved for future use.
+	StackDriftStatus StackDriftStatus `type:"string" enum:"true"`
+
+	// The ID of the stack.
+	//
+	// StackId is a required field
+	StackId *string `type:"string" required:"true"`
+
+	// Time at which the stack drift detection operation was initiated.
+	//
+	// Timestamp is a required field
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeStackDriftDetectionStatusOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStackDriftDetectionStatusOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackDriftDetectionStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // The input for DescribeStackEvents action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsInput
 type DescribeStackEventsInput struct {
@@ -4407,6 +4888,117 @@ func (s DescribeStackInstanceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDriftsInput
+type DescribeStackResourceDriftsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next
+	// set of results.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string that identifies the next page of stack resource drift results.
+	NextToken *string `min:"1" type:"string"`
+
+	// The name of the stack for which you want drift information.
+	//
+	// StackName is a required field
+	StackName *string `min:"1" type:"string" required:"true"`
+
+	// The resource drift status values to use as filters for the resource drift
+	// results returned.
+	//
+	//    * DELETED: The resource differs from its expected template configuration
+	//    in that the resource has been deleted.
+	//
+	//    * MODIFIED: One or more resource properties differ from their expected
+	//    template values.
+	//
+	//    * IN_SYNC: The resources's actual configuration matches its expected template
+	//    configuration.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation does not currently return this value.
+	StackResourceDriftStatusFilters []StackResourceDriftStatus `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeStackResourceDriftsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStackResourceDriftsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeStackResourceDriftsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackResourceDriftsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.StackName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
+	}
+	if s.StackName != nil && len(*s.StackName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
+	}
+	if s.StackResourceDriftStatusFilters != nil && len(s.StackResourceDriftStatusFilters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackResourceDriftStatusFilters", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceDriftsOutput
+type DescribeStackResourceDriftsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the request doesn't return all of the remaining results, NextToken is
+	// set to a token. To retrieve the next set of results, call DescribeStackResourceDrifts
+	// again and assign that token to the request object's NextToken parameter.
+	// If the request returns all results, NextToken is set to null.
+	NextToken *string `min:"1" type:"string"`
+
+	// Drift information for the resources that have been checked for drift in the
+	// specified stack. This includes actual and expected configuration values for
+	// resources where AWS CloudFormation detects drift.
+	//
+	// For a given stack, there will be one StackResourceDrift for each stack resource
+	// that has been checked for drift. Resources that have not yet been checked
+	// for drift are not included. Resources that do not currently support drift
+	// detection are not checked, and so not included. For a list of resources that
+	// support drift detection, see Resources that Support Drift Detection (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+	//
+	// StackResourceDrifts is a required field
+	StackResourceDrifts []StackResourceDrift `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeStackResourceDriftsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStackResourceDriftsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStackResourceDriftsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4766,6 +5358,155 @@ func (s DescribeStacksOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDriftInput
+type DetectStackDriftInput struct {
+	_ struct{} `type:"structure"`
+
+	// The logical names of any resources you want to use as filters.
+	LogicalResourceIds []string `min:"1" type:"list"`
+
+	// The name of the stack for which you want to detect drift.
+	//
+	// StackName is a required field
+	StackName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DetectStackDriftInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DetectStackDriftInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DetectStackDriftInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DetectStackDriftInput"}
+	if s.LogicalResourceIds != nil && len(s.LogicalResourceIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogicalResourceIds", 1))
+	}
+
+	if s.StackName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
+	}
+	if s.StackName != nil && len(*s.StackName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackDriftOutput
+type DetectStackDriftOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the drift detection results of this operation.
+	//
+	// AWS CloudFormation generates new results, with a new drift detection ID,
+	// each time this operation is run. However, the number of drift results AWS
+	// CloudFormation retains for any given stack, and for how long, may vary.
+	//
+	// StackDriftDetectionId is a required field
+	StackDriftDetectionId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DetectStackDriftOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DetectStackDriftOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetectStackDriftOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDriftInput
+type DetectStackResourceDriftInput struct {
+	_ struct{} `type:"structure"`
+
+	// The logical name of the resource for which to return drift information.
+	//
+	// LogicalResourceId is a required field
+	LogicalResourceId *string `type:"string" required:"true"`
+
+	// The name of the stack to which the resource belongs.
+	//
+	// StackName is a required field
+	StackName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DetectStackResourceDriftInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DetectStackResourceDriftInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DetectStackResourceDriftInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DetectStackResourceDriftInput"}
+
+	if s.LogicalResourceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
+	}
+
+	if s.StackName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
+	}
+	if s.StackName != nil && len(*s.StackName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DetectStackResourceDriftOutput
+type DetectStackResourceDriftOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about whether the resource's actual configuration has drifted
+	// from its expected template configuration, including actual and expected property
+	// values and any differences detected.
+	//
+	// StackResourceDrift is a required field
+	StackResourceDrift *StackResourceDrift `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DetectStackResourceDriftOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DetectStackResourceDriftOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DetectStackResourceDriftOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6068,6 +6809,86 @@ func (s ParameterDeclaration) GoString() string {
 	return s.String()
 }
 
+// Context information that enables AWS CloudFormation to uniquely identify
+// a resource. AWS CloudFormation uses context key-value pairs in cases where
+// a resource's logical and physical IDs are not enough to uniquely identify
+// that resource. Each context key-value pair specifies a resource that contains
+// the targeted resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PhysicalResourceIdContextKeyValuePair
+type PhysicalResourceIdContextKeyValuePair struct {
+	_ struct{} `type:"structure"`
+
+	// The resource context key.
+	//
+	// Key is a required field
+	Key *string `type:"string" required:"true"`
+
+	// The resource context value.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PhysicalResourceIdContextKeyValuePair) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PhysicalResourceIdContextKeyValuePair) GoString() string {
+	return s.String()
+}
+
+// Information about a resource property whose actual value differs from its
+// expected value, as defined in the stack template and any values specified
+// as template parameters. These will be present only for resources whose StackResourceDriftStatus
+// is MODIFIED. For more information, see Detecting Unregulated Configuration
+// Changes to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/PropertyDifference
+type PropertyDifference struct {
+	_ struct{} `type:"structure"`
+
+	// The actual property value of the resource property.
+	//
+	// ActualValue is a required field
+	ActualValue *string `type:"string" required:"true"`
+
+	// The type of property difference.
+	//
+	//    * ADD: A value has been added to a resource property that is an array
+	//    or list data type.
+	//
+	//    * REMOVE: The property has been removed from the current resource configuration.
+	//
+	//    * NOT_EQUAL: The current property value differs from its expected value
+	//    (as defined in the stack template and any values specified as template
+	//    parameters).
+	//
+	// DifferenceType is a required field
+	DifferenceType DifferenceType `type:"string" required:"true" enum:"true"`
+
+	// The expected property value of the resource property, as defined in the stack
+	// template and any values specified as template parameters.
+	//
+	// ExpectedValue is a required field
+	ExpectedValue *string `type:"string" required:"true"`
+
+	// The fully-qualified path to the resource property.
+	//
+	// PropertyPath is a required field
+	PropertyPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PropertyDifference) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PropertyDifference) GoString() string {
+	return s.String()
+}
+
 // The ResourceChange structure describes the resource and the action that AWS
 // CloudFormation will perform on it if you execute this change set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange
@@ -6558,6 +7379,12 @@ type Stack struct {
 	//    * false: enable rollback
 	DisableRollback *bool `type:"boolean"`
 
+	// Information on whether a stack's actual configuration differs, or has drifted,
+	// from it's expected configuration, as defined in the stack template and any
+	// values specified as template parameters. For more information, see Detecting
+	// Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+	DriftInformation *StackDriftInformation `type:"structure"`
+
 	// Whether termination protection is enabled for the stack.
 	//
 	// For nested stacks (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html),
@@ -6634,6 +7461,88 @@ func (s Stack) String() string {
 
 // GoString returns the string representation
 func (s Stack) GoString() string {
+	return s.String()
+}
+
+// Contains information about whether the stack's actual configuration differs,
+// or has drifted, from its expected configuration, as defined in the stack
+// template and any values specified as template parameters. A stack is considered
+// to have drifted if one or more of its resources have drifted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackDriftInformation
+type StackDriftInformation struct {
+	_ struct{} `type:"structure"`
+
+	// Most recent time when a drift detection operation was initiated on the stack,
+	// or any of its individual resources that support drift detection.
+	LastCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// Status of the stack's actual configuration compared to its expected template
+	// configuration.
+	//
+	//    * DRIFTED: The stack differs from its expected template configuration.
+	//    A stack is considered to have drifted if one or more of its resources
+	//    have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the stack differs
+	//    from its expected template configuration.
+	//
+	//    * IN_SYNC: The stack's actual configuration matches its expected template
+	//    configuration.
+	//
+	//    * UNKNOWN: This value is reserved for future use.
+	//
+	// StackDriftStatus is a required field
+	StackDriftStatus StackDriftStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StackDriftInformation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StackDriftInformation) GoString() string {
+	return s.String()
+}
+
+// Contains information about whether the stack's actual configuration differs,
+// or has drifted, from its expected configuration, as defined in the stack
+// template and any values specified as template parameters. A stack is considered
+// to have drifted if one or more of its resources have drifted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackDriftInformationSummary
+type StackDriftInformationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Most recent time when a drift detection operation was initiated on the stack,
+	// or any of its individual resources that support drift detection.
+	LastCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// Status of the stack's actual configuration compared to its expected template
+	// configuration.
+	//
+	//    * DRIFTED: The stack differs from its expected template configuration.
+	//    A stack is considered to have drifted if one or more of its resources
+	//    have drifted.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the stack differs
+	//    from its expected template configuration.
+	//
+	//    * IN_SYNC: The stack's actual configuration matches its expected template
+	//    configuration.
+	//
+	//    * UNKNOWN: This value is reserved for future use.
+	//
+	// StackDriftStatus is a required field
+	StackDriftStatus StackDriftStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StackDriftInformationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StackDriftInformationSummary) GoString() string {
 	return s.String()
 }
 
@@ -6831,6 +7740,12 @@ type StackResource struct {
 	// User defined description associated with the resource.
 	Description *string `min:"1" type:"string"`
 
+	// Information about whether the resource's actual configuration differs, or
+	// has drifted, from its expected configuration, as defined in the stack template
+	// and any values specified as template parameters. For more information, see
+	// Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+	DriftInformation *StackResourceDriftInformation `type:"structure"`
+
 	// The logical name of the resource specified in the template.
 	//
 	// LogicalResourceId is a required field
@@ -6885,6 +7800,12 @@ type StackResourceDetail struct {
 	// User defined description associated with the resource.
 	Description *string `min:"1" type:"string"`
 
+	// Information about whether the resource's actual configuration differs, or
+	// has drifted, from its expected configuration, as defined in the stack template
+	// and any values specified as template parameters. For more information, see
+	// Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+	DriftInformation *StackResourceDriftInformation `type:"structure"`
+
 	// Time the status was updated.
 	//
 	// LastUpdatedTimestamp is a required field
@@ -6936,10 +7857,196 @@ func (s StackResourceDetail) GoString() string {
 	return s.String()
 }
 
+// Contains the drift information for a resource that has been checked for drift.
+// This includes actual and expected property values for resources in which
+// AWS CloudFormation has detected drift. Only resource properties explicitly
+// defined in the stack template are checked for drift. For more information,
+// see Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+//
+// Resources that do not currently support drift detection cannot be checked.
+// For a list of resources that support drift detection, see Resources that
+// Support Drift Detection (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+//
+// Use DetectStackResourceDrift to detect drift on individual resources, or
+// DetectStackDrift to detect drift on all resources in a given stack that support
+// drift detection.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDrift
+type StackResourceDrift struct {
+	_ struct{} `type:"structure"`
+
+	// A JSON structure containing the actual property values of the stack resource.
+	//
+	// For resources whose StackResourceDriftStatus is DELETED, this structure will
+	// not be present.
+	ActualProperties *string `type:"string"`
+
+	// A JSON structure containing the expected property values of the stack resource,
+	// as defined in the stack template and any values specified as template parameters.
+	//
+	// For resources whose StackResourceDriftStatus is DELETED, this structure will
+	// not be present.
+	ExpectedProperties *string `type:"string"`
+
+	// The logical name of the resource specified in the template.
+	//
+	// LogicalResourceId is a required field
+	LogicalResourceId *string `type:"string" required:"true"`
+
+	// The name or unique identifier that corresponds to a physical instance ID
+	// of a resource supported by AWS CloudFormation.
+	PhysicalResourceId *string `type:"string"`
+
+	// Context information that enables AWS CloudFormation to uniquely identify
+	// a resource. AWS CloudFormation uses context key-value pairs in cases where
+	// a resource's logical and physical IDs are not enough to uniquely identify
+	// that resource. Each context key-value pair specifies a unique resource that
+	// contains the targeted resource.
+	PhysicalResourceIdContext []PhysicalResourceIdContextKeyValuePair `type:"list"`
+
+	// A collection of the resource properties whose actual values differ from their
+	// expected values. These will be present only for resources whose StackResourceDriftStatus
+	// is MODIFIED.
+	PropertyDifferences []PropertyDifference `type:"list"`
+
+	// The type of the resource.
+	//
+	// ResourceType is a required field
+	ResourceType *string `min:"1" type:"string" required:"true"`
+
+	// The ID of the stack.
+	//
+	// StackId is a required field
+	StackId *string `type:"string" required:"true"`
+
+	// Status of the resource's actual configuration compared to its expected configuration
+	//
+	//    * DELETED: The resource differs from its expected template configuration
+	//    because the resource has been deleted.
+	//
+	//    * MODIFIED: One or more resource properties differ from their expected
+	//    values (as defined in the stack template and any values specified as template
+	//    parameters).
+	//
+	//    * IN_SYNC: The resources's actual configuration matches its expected template
+	//    configuration.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation does not currently return this value.
+	//
+	// StackResourceDriftStatus is a required field
+	StackResourceDriftStatus StackResourceDriftStatus `type:"string" required:"true" enum:"true"`
+
+	// Time at which AWS CloudFormation performed drift detection on the stack resource.
+	//
+	// Timestamp is a required field
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s StackResourceDrift) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StackResourceDrift) GoString() string {
+	return s.String()
+}
+
+// Contains information about whether the resource's actual configuration differs,
+// or has drifted, from its expected configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDriftInformation
+type StackResourceDriftInformation struct {
+	_ struct{} `type:"structure"`
+
+	// When AWS CloudFormation last checked if the resource had drifted from its
+	// expected configuration.
+	LastCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// Status of the resource's actual configuration compared to its expected configuration
+	//
+	//    * DELETED: The resource differs from its expected configuration in that
+	//    it has been deleted.
+	//
+	//    * MODIFIED: The resource differs from its expected configuration.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the resource differs
+	//    from its expected configuration.
+	//
+	// Any resources that do not currently support drift detection have a status
+	//    of NOT_CHECKED. For more information, see Resources that Support Drift
+	//    Detection (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+	//
+	//
+	//    * IN_SYNC: The resources's actual configuration matches its expected configuration.
+	//
+	// StackResourceDriftStatus is a required field
+	StackResourceDriftStatus StackResourceDriftStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StackResourceDriftInformation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StackResourceDriftInformation) GoString() string {
+	return s.String()
+}
+
+// Summarizes information about whether the resource's actual configuration
+// differs, or has drifted, from its expected configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDriftInformationSummary
+type StackResourceDriftInformationSummary struct {
+	_ struct{} `type:"structure"`
+
+	// When AWS CloudFormation last checked if the resource had drifted from its
+	// expected configuration.
+	LastCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// Status of the resource's actual configuration compared to its expected configuration
+	//
+	//    * DELETED: The resource differs from its expected configuration in that
+	//    it has been deleted.
+	//
+	//    * MODIFIED: The resource differs from its expected configuration.
+	//
+	//    * NOT_CHECKED: AWS CloudFormation has not checked if the resource differs
+	//    from its expected configuration.
+	//
+	// Any resources that do not currently support drift detection have a status
+	//    of NOT_CHECKED. For more information, see Resources that Support Drift
+	//    Detection (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
+	//    If you performed an ContinueUpdateRollback operation on a stack, any resources
+	//    included in ResourcesToSkip will also have a status of NOT_CHECKED. For
+	//    more information on skipping resources during rollback operations, see
+	//    Continue Rolling Back an Update (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html)
+	//    in the AWS CloudFormation User Guide.
+	//
+	//    * IN_SYNC: The resources's actual configuration matches its expected configuration.
+	//
+	// StackResourceDriftStatus is a required field
+	StackResourceDriftStatus StackResourceDriftStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StackResourceDriftInformationSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StackResourceDriftInformationSummary) GoString() string {
+	return s.String()
+}
+
 // Contains high-level information about the specified stack resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary
 type StackResourceSummary struct {
 	_ struct{} `type:"structure"`
+
+	// Information about whether the resource's actual configuration differs, or
+	// has drifted, from its expected configuration, as defined in the stack template
+	// and any values specified as template parameters. For more information, see
+	// Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+	DriftInformation *StackResourceDriftInformationSummary `type:"structure"`
 
 	// Time the status was updated.
 	//
@@ -7376,6 +8483,12 @@ type StackSummary struct {
 	// The time the stack was deleted.
 	DeletionTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
+	// Summarizes information on whether a stack's actual configuration differs,
+	// or has drifted, from it's expected configuration, as defined in the stack
+	// template and any values specified as template parameters. For more information,
+	// see Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html).
+	DriftInformation *StackDriftInformationSummary `type:"structure"`
+
 	// The time the stack was last updated. This field will only be returned if
 	// the stack has been updated at least once.
 	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -7582,30 +8695,74 @@ func (s TemplateParameter) GoString() string {
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of values that you must specify before AWS CloudFormation can update
-	// certain stacks. Some stack templates might include resources that can affect
-	// permissions in your AWS account, for example, by creating new AWS Identity
-	// and Access Management (IAM) users. For those stacks, you must explicitly
-	// acknowledge their capabilities by specifying this parameter.
+	// In some cases, you must explicity acknowledge that your stack template contains
+	// certain capabilities in order for AWS CloudFormation to update the stack.
 	//
-	// The only valid values are CAPABILITY_IAM and CAPABILITY_NAMED_IAM. The following
-	// resources require you to specify this parameter:  AWS::IAM::AccessKey (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html),
-	//  AWS::IAM::Group (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html),
-	//  AWS::IAM::InstanceProfile (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html),
-	//  AWS::IAM::Policy (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html),
-	//  AWS::IAM::Role (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html),
-	//  AWS::IAM::User (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html),
-	// and  AWS::IAM::UserToGroupAddition (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html).
+	//    * CAPABILITY_IAM and CAPABILITY_NAMED_IAM
+	//
+	// Some stack templates might include resources that can affect permissions
+	//    in your AWS account; for example, by creating new AWS Identity and Access
+	//    Management (IAM) users. For those stacks, you must explicitly acknowledge
+	//    this by specifying one of these capabilities.
+	//
+	// The following IAM resources require you to specify either the CAPABILITY_IAM
+	//    or CAPABILITY_NAMED_IAM capability.
+	//
+	// If you have IAM resources, you can specify either capability.
+	//
+	// If you have IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM.
+	//
+	//
+	// If you don't specify either of these capabilities, AWS CloudFormation returns
+	//    an InsufficientCapabilities error.
+	//
 	// If your stack template contains these resources, we recommend that you review
-	// all permissions associated with them and edit their permissions if necessary.
+	//    all permissions associated with them and edit their permissions if necessary.
 	//
-	// If you have IAM resources, you can specify either capability. If you have
-	// IAM resources with custom names, you must specify CAPABILITY_NAMED_IAM. If
-	// you don't specify this parameter, this action returns an InsufficientCapabilities
-	// error.
+	//  AWS::IAM::AccessKey (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
+	//
+	//  AWS::IAM::Group (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
+	//
+	//  AWS::IAM::InstanceProfile (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
+	//
+	//  AWS::IAM::Policy (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
+	//
+	//  AWS::IAM::Role (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
+	//
+	//  AWS::IAM::User (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
+	//
+	//  AWS::IAM::UserToGroupAddition (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//
 	// For more information, see Acknowledging IAM Resources in AWS CloudFormation
-	// Templates (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
+	//    Templates (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
+	//
+	//    * CAPABILITY_AUTO_EXPAND
+	//
+	// Some template contain macros. Macros perform custom processing on templates;
+	//    this can include simple actions like find-and-replace operations, all
+	//    the way to extensive transformations of entire templates. Because of this,
+	//    users typically create a change set from the processed template, so that
+	//    they can review the changes resulting from the macros before actually
+	//    updating the stack. If your stack template contains one or more macros,
+	//    and you choose to update a stack directly from the processed template,
+	//    without first reviewing the resulting changes in a change set, you must
+	//    acknowledge this capability. This includes the AWS::Include (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
+	//    and AWS::Serverless (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
+	//    transforms, which are macros hosted by AWS CloudFormation.
+	//
+	// Change sets do not currently support nested stacks. If you want to update
+	//    a stack from a stack template that contains macros and nested stacks,
+	//    you must update the stack directly from the template using this capability.
+	//
+	// You should only update stacks directly from a stack template that contains
+	//    macros if you know what processing the macro performs.
+	//
+	// Each macro relies on an underlying Lambda service function for processing
+	//    stack templates. Be aware that the Lambda function owner can update the
+	//    function operation without AWS CloudFormation being notified.
+	//
+	// For more information, see Using AWS CloudFormation Macros to Perform Custom
+	//    Processing on Templates (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []Capability `type:"list"`
 
 	// A unique identifier for this UpdateStack request. Specify this token if you
@@ -8420,8 +9577,9 @@ type Capability string
 
 // Enum values for Capability
 const (
-	CapabilityCapabilityIam      Capability = "CAPABILITY_IAM"
-	CapabilityCapabilityNamedIam Capability = "CAPABILITY_NAMED_IAM"
+	CapabilityCapabilityIam        Capability = "CAPABILITY_IAM"
+	CapabilityCapabilityNamedIam   Capability = "CAPABILITY_NAMED_IAM"
+	CapabilityCapabilityAutoExpand Capability = "CAPABILITY_AUTO_EXPAND"
 )
 
 func (enum Capability) MarshalValue() (string, error) {
@@ -8520,6 +9678,24 @@ func (enum ChangeType) MarshalValue() (string, error) {
 }
 
 func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DifferenceType string
+
+// Enum values for DifferenceType
+const (
+	DifferenceTypeAdd      DifferenceType = "ADD"
+	DifferenceTypeRemove   DifferenceType = "REMOVE"
+	DifferenceTypeNotEqual DifferenceType = "NOT_EQUAL"
+)
+
+func (enum DifferenceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DifferenceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -8679,6 +9855,43 @@ func (enum ResourceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type StackDriftDetectionStatus string
+
+// Enum values for StackDriftDetectionStatus
+const (
+	StackDriftDetectionStatusDetectionInProgress StackDriftDetectionStatus = "DETECTION_IN_PROGRESS"
+	StackDriftDetectionStatusDetectionFailed     StackDriftDetectionStatus = "DETECTION_FAILED"
+	StackDriftDetectionStatusDetectionComplete   StackDriftDetectionStatus = "DETECTION_COMPLETE"
+)
+
+func (enum StackDriftDetectionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackDriftDetectionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StackDriftStatus string
+
+// Enum values for StackDriftStatus
+const (
+	StackDriftStatusDrifted    StackDriftStatus = "DRIFTED"
+	StackDriftStatusInSync     StackDriftStatus = "IN_SYNC"
+	StackDriftStatusUnknown    StackDriftStatus = "UNKNOWN"
+	StackDriftStatusNotChecked StackDriftStatus = "NOT_CHECKED"
+)
+
+func (enum StackDriftStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackDriftStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackInstanceStatus string
 
 // Enum values for StackInstanceStatus
@@ -8693,6 +9906,25 @@ func (enum StackInstanceStatus) MarshalValue() (string, error) {
 }
 
 func (enum StackInstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StackResourceDriftStatus string
+
+// Enum values for StackResourceDriftStatus
+const (
+	StackResourceDriftStatusInSync     StackResourceDriftStatus = "IN_SYNC"
+	StackResourceDriftStatusModified   StackResourceDriftStatus = "MODIFIED"
+	StackResourceDriftStatusDeleted    StackResourceDriftStatus = "DELETED"
+	StackResourceDriftStatusNotChecked StackResourceDriftStatus = "NOT_CHECKED"
+)
+
+func (enum StackResourceDriftStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackResourceDriftStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

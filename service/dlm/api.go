@@ -1080,6 +1080,8 @@ func (s RetainRule) MarshalFields(e protocol.FieldEncoder) error {
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
+	CopyTags *bool `type:"boolean"`
+
 	// The create rule.
 	CreateRule *CreateRule `type:"structure"`
 
@@ -1133,6 +1135,12 @@ func (s *Schedule) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CopyTags != nil {
+		v := *s.CopyTags
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CopyTags", protocol.BoolValue(v), metadata)
+	}
 	if s.CreateRule != nil {
 		v := s.CreateRule
 

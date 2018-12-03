@@ -2951,6 +2951,8 @@ type CreateDatasetInput struct {
 	// Actions is a required field
 	Actions []DatasetAction `locationName:"actions" min:"1" type:"list" required:"true"`
 
+	ContentDeliveryRules []DatasetContentDeliveryRule `locationName:"contentDeliveryRules" type:"list"`
+
 	// The name of the data set.
 	//
 	// DatasetName is a required field
@@ -3008,6 +3010,13 @@ func (s *CreateDatasetInput) Validate() error {
 			}
 		}
 	}
+	if s.ContentDeliveryRules != nil {
+		for i, v := range s.ContentDeliveryRules {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContentDeliveryRules", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
 			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
@@ -3042,6 +3051,18 @@ func (s CreateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "actions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.ContentDeliveryRules) > 0 {
+		v := s.ContentDeliveryRules
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "contentDeliveryRules", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
@@ -3451,6 +3472,8 @@ type Dataset struct {
 	// The ARN of the data set.
 	Arn *string `locationName:"arn" type:"string"`
 
+	ContentDeliveryRules []DatasetContentDeliveryRule `locationName:"contentDeliveryRules" type:"list"`
+
 	// When the data set was created.
 	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
 
@@ -3500,6 +3523,18 @@ func (s Dataset) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ContentDeliveryRules) > 0 {
+		v := s.ContentDeliveryRules
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "contentDeliveryRules", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.CreationTime != nil {
 		v := *s.CreationTime
@@ -3655,6 +3690,105 @@ func (s DatasetActionSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "actionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentDeliveryDestination
+type DatasetContentDeliveryDestination struct {
+	_ struct{} `type:"structure"`
+
+	IotEventsDestinationConfiguration *IotEventsDestinationConfiguration `locationName:"iotEventsDestinationConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s DatasetContentDeliveryDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DatasetContentDeliveryDestination) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DatasetContentDeliveryDestination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DatasetContentDeliveryDestination"}
+	if s.IotEventsDestinationConfiguration != nil {
+		if err := s.IotEventsDestinationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("IotEventsDestinationConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatasetContentDeliveryDestination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IotEventsDestinationConfiguration != nil {
+		v := s.IotEventsDestinationConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "iotEventsDestinationConfiguration", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/DatasetContentDeliveryRule
+type DatasetContentDeliveryRule struct {
+	_ struct{} `type:"structure"`
+
+	// Destination is a required field
+	Destination *DatasetContentDeliveryDestination `locationName:"destination" type:"structure" required:"true"`
+
+	EntryName *string `locationName:"entryName" type:"string"`
+}
+
+// String returns the string representation
+func (s DatasetContentDeliveryRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DatasetContentDeliveryRule) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DatasetContentDeliveryRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DatasetContentDeliveryRule"}
+
+	if s.Destination == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
+	}
+	if s.Destination != nil {
+		if err := s.Destination.Validate(); err != nil {
+			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DatasetContentDeliveryRule) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Destination != nil {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "destination", v, metadata)
+	}
+	if s.EntryName != nil {
+		v := *s.EntryName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "entryName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5596,6 +5730,68 @@ func (s GetDatasetContentOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iotanalytics-2017-11-27/IotEventsDestinationConfiguration
+type IotEventsDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// InputName is a required field
+	InputName *string `locationName:"inputName" min:"1" type:"string" required:"true"`
+
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s IotEventsDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IotEventsDestinationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IotEventsDestinationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IotEventsDestinationConfiguration"}
+
+	if s.InputName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputName"))
+	}
+	if s.InputName != nil && len(*s.InputName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InputName", 1))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IotEventsDestinationConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InputName != nil {
+		v := *s.InputName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8305,6 +8501,8 @@ type UpdateDatasetInput struct {
 	// Actions is a required field
 	Actions []DatasetAction `locationName:"actions" min:"1" type:"list" required:"true"`
 
+	ContentDeliveryRules []DatasetContentDeliveryRule `locationName:"contentDeliveryRules" type:"list"`
+
 	// The name of the data set to update.
 	//
 	// DatasetName is a required field
@@ -8352,6 +8550,13 @@ func (s *UpdateDatasetInput) Validate() error {
 			}
 		}
 	}
+	if s.ContentDeliveryRules != nil {
+		for i, v := range s.ContentDeliveryRules {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContentDeliveryRules", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 	if s.RetentionPeriod != nil {
 		if err := s.RetentionPeriod.Validate(); err != nil {
 			invalidParams.AddNested("RetentionPeriod", err.(aws.ErrInvalidParams))
@@ -8379,6 +8584,18 @@ func (s UpdateDatasetInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "actions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.ContentDeliveryRules) > 0 {
+		v := s.ContentDeliveryRules
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "contentDeliveryRules", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)

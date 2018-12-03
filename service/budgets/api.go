@@ -180,8 +180,8 @@ func (r DeleteBudgetRequest) Send() (*DeleteBudgetOutput, error) {
 //
 // Deletes a budget. You can delete your budget at any time.
 //
-// Deleting a budget also deletes the notifications and subscribers associated
-// with that budget.
+// Deleting a budget also deletes the notifications and subscribers that are
+// associated with that budget.
 //
 //    // Example sending a request using the DeleteBudgetRequest method.
 //    req := client.DeleteBudgetRequest(params)
@@ -231,8 +231,8 @@ func (r DeleteNotificationRequest) Send() (*DeleteNotificationOutput, error) {
 //
 // Deletes a notification.
 //
-// Deleting a notification also deletes the subscribers associated with the
-// notification.
+// Deleting a notification also deletes the subscribers that are associated
+// with the notification.
 //
 //    // Example sending a request using the DeleteNotificationRequest method.
 //    req := client.DeleteNotificationRequest(params)
@@ -356,6 +356,55 @@ func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudg
 	return DescribeBudgetRequest{Request: req, Input: input, Copy: c.DescribeBudgetRequest}
 }
 
+const opDescribeBudgetPerformanceHistory = "DescribeBudgetPerformanceHistory"
+
+// DescribeBudgetPerformanceHistoryRequest is a API request type for the DescribeBudgetPerformanceHistory API operation.
+type DescribeBudgetPerformanceHistoryRequest struct {
+	*aws.Request
+	Input *DescribeBudgetPerformanceHistoryInput
+	Copy  func(*DescribeBudgetPerformanceHistoryInput) DescribeBudgetPerformanceHistoryRequest
+}
+
+// Send marshals and sends the DescribeBudgetPerformanceHistory API request.
+func (r DescribeBudgetPerformanceHistoryRequest) Send() (*DescribeBudgetPerformanceHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBudgetPerformanceHistoryOutput), nil
+}
+
+// DescribeBudgetPerformanceHistoryRequest returns a request value for making API operation for
+// AWS Budgets.
+//
+// Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history
+// isn't available for ANNUAL budgets.
+//
+//    // Example sending a request using the DescribeBudgetPerformanceHistoryRequest method.
+//    req := client.DescribeBudgetPerformanceHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Budgets) DescribeBudgetPerformanceHistoryRequest(input *DescribeBudgetPerformanceHistoryInput) DescribeBudgetPerformanceHistoryRequest {
+	op := &aws.Operation{
+		Name:       opDescribeBudgetPerformanceHistory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeBudgetPerformanceHistoryInput{}
+	}
+
+	output := &DescribeBudgetPerformanceHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeBudgetPerformanceHistoryRequest{Request: req, Input: input, Copy: c.DescribeBudgetPerformanceHistoryRequest}
+}
+
 const opDescribeBudgets = "DescribeBudgets"
 
 // DescribeBudgetsRequest is a API request type for the DescribeBudgets API operation.
@@ -378,7 +427,7 @@ func (r DescribeBudgetsRequest) Send() (*DescribeBudgetsOutput, error) {
 // DescribeBudgetsRequest returns a request value for making API operation for
 // AWS Budgets.
 //
-// Lists the budgets associated with an account.
+// Lists the budgets that are associated with an account.
 //
 //    // Example sending a request using the DescribeBudgetsRequest method.
 //    req := client.DescribeBudgetsRequest(params)
@@ -426,7 +475,7 @@ func (r DescribeNotificationsForBudgetRequest) Send() (*DescribeNotificationsFor
 // DescribeNotificationsForBudgetRequest returns a request value for making API operation for
 // AWS Budgets.
 //
-// Lists the notifications associated with a budget.
+// Lists the notifications that are associated with a budget.
 //
 //    // Example sending a request using the DescribeNotificationsForBudgetRequest method.
 //    req := client.DescribeNotificationsForBudgetRequest(params)
@@ -474,7 +523,7 @@ func (r DescribeSubscribersForNotificationRequest) Send() (*DescribeSubscribersF
 // DescribeSubscribersForNotificationRequest returns a request value for making API operation for
 // AWS Budgets.
 //
-// Lists the subscribers associated with a notification.
+// Lists the subscribers that are associated with a notification.
 //
 //    // Example sending a request using the DescribeSubscribersForNotificationRequest method.
 //    req := client.DescribeSubscribersForNotificationRequest(params)
@@ -523,7 +572,7 @@ func (r UpdateBudgetRequest) Send() (*UpdateBudgetOutput, error) {
 // AWS Budgets.
 //
 // Updates a budget. You can change every part of a budget except for the budgetName
-// and the calculatedSpend. When a budget is modified, the calculatedSpend drops
+// and the calculatedSpend. When you modify a budget, the calculatedSpend drops
 // to zero until AWS has new usage data to use for forecasting.
 //
 //    // Example sending a request using the UpdateBudgetRequest method.
@@ -648,52 +697,71 @@ func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSu
 
 // Represents the output of the CreateBudget operation. The content consists
 // of the detailed metadata and data file information, and the current status
-// of the budget.
+// of the budget object.
 //
-// The ARN pattern for a budget is: arn:aws:budgetservice::AccountId:budget/budgetName
+// This is the ARN pattern for a budget:
+//
+// arn:aws:budgetservice::AccountId:budget/budgetName
 type Budget struct {
 	_ struct{} `type:"structure"`
 
-	// The total amount of cost, usage, or RI utilization that you want to track
-	// with your budget.
+	// The total amount of cost, usage, RI utilization, or RI coverage that you
+	// want to track with your budget.
 	//
 	// BudgetLimit is required for cost or usage budgets, but optional for RI utilization
-	// budgets. RI utilization budgets default to the only valid value for RI utilization
-	// budgets, which is 100.
+	// or coverage budgets. RI utilization or coverage budgets default to 100, which
+	// is the only valid value for RI utilization or coverage budgets.
 	BudgetLimit *Spend `type:"structure"`
 
-	// The name of a budget. Unique within accounts. : and \ characters are not
-	// allowed in the BudgetName.
+	// The name of a budget. The name must be unique within accounts. The : and
+	// \ characters aren't allowed in BudgetName.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// Whether this budget tracks monetary costs, usage, or RI utilization.
+	// Whether this budget tracks monetary costs, usage, RI utilization, or RI coverage.
 	//
 	// BudgetType is a required field
 	BudgetType BudgetType `type:"string" required:"true" enum:"true"`
 
-	// The actual and forecasted cost or usage being tracked by a budget.
+	// The actual and forecasted cost or usage that the budget tracks.
 	CalculatedSpend *CalculatedSpend `type:"structure"`
 
-	// The cost filters applied to a budget, such as service or region.
+	// The cost filters, such as service or region, that are applied to a budget.
+	//
+	// AWS Budgets supports the following services as a filter for RI budgets:
+	//
+	//    * Amazon Elastic Compute Cloud - Compute
+	//
+	//    * Amazon Redshift
+	//
+	//    * Amazon Relational Database Service
+	//
+	//    * Amazon ElastiCache
+	//
+	//    * Amazon Elasticsearch Service
 	CostFilters map[string][]string `type:"map"`
 
-	// The types of costs included in this budget.
+	// The types of costs that are included in this COST budget.
+	//
+	// USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
 	CostTypes *CostTypes `type:"structure"`
 
-	// The period of time covered by a budget. Has a start date and an end date.
-	// The start date must come before the end date. There are no restrictions on
-	// the end date.
+	// The last time that you updated this budget.
+	LastUpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The period of time that is covered by a budget. The period has a start date
+	// and an end date. The start date must come before the end date. The end date
+	// must come before 06/15/87 00:00 UTC.
 	//
-	// If you created your budget and didn't specify a start date, AWS defaults
-	// to the start of your chosen time period (i.e. DAILY, MONTHLY, QUARTERLY,
-	// ANNUALLY). For example, if you created your budget on January 24th 2018,
-	// chose DAILY, and didn't set a start date, AWS set your start date to 01/24/18
-	// 00:00 UTC. If you chose MONTHLY, AWS set your start date to 01/01/18 00:00
-	// UTC. If you didn't specify an end date, AWS set your end date to 06/15/87
-	// 00:00 UTC. The defaults are the same for the AWS Billing and Cost Management
-	// console and the API.
+	// If you create your budget and don't specify a start date, AWS defaults to
+	// the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY).
+	// For example, if you created your budget on January 24, 2018, chose DAILY,
+	// and didn't set a start date, AWS set your start date to 01/24/18 00:00 UTC.
+	// If you chose MONTHLY, AWS set your start date to 01/01/18 00:00 UTC. If you
+	// didn't specify an end date, AWS set your end date to 06/15/87 00:00 UTC.
+	// The defaults are the same for the AWS Billing and Cost Management console
+	// and the API.
 	//
 	// You can change either date with the UpdateBudget operation.
 	//
@@ -702,6 +770,7 @@ type Budget struct {
 	TimePeriod *TimePeriod `type:"structure"`
 
 	// The length of time until a budget resets the actual and forecasted spend.
+	// DAILY is available only for RI_UTILIZATION and RI_COVERAGE budgets.
 	//
 	// TimeUnit is a required field
 	TimeUnit TimeUnit `type:"string" required:"true" enum:"true"`
@@ -723,6 +792,9 @@ func (s *Budget) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 	if len(s.BudgetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetType"))
@@ -747,8 +819,71 @@ func (s *Budget) Validate() error {
 	return nil
 }
 
-// The spend objects associated with this budget. The actualSpend tracks how
-// much you've used, cost, usage, or RI units, and the forecastedSpend tracks
+// A history of the state of a budget at the end of the budget's specified time
+// period.
+type BudgetPerformanceHistory struct {
+	_ struct{} `type:"structure"`
+
+	// A string that represents the budget name. The ":" and "\" characters aren't
+	// allowed.
+	BudgetName *string `min:"1" type:"string"`
+
+	// The type of a budget. It must be one of the following types:
+	//
+	// COST, USAGE, RI_UTILIZATION, or RI_COVERAGE.
+	BudgetType BudgetType `type:"string" enum:"true"`
+
+	// A list of amounts of cost or usage that you created budgets for, compared
+	// to your actual costs or usage.
+	BudgetedAndActualAmountsList []BudgetedAndActualAmounts `type:"list"`
+
+	// The history of the cost filters for a budget during the specified time period.
+	CostFilters map[string][]string `type:"map"`
+
+	// The history of the cost types for a budget during the specified time period.
+	CostTypes *CostTypes `type:"structure"`
+
+	// The time unit of the budget, such as MONTHLY or QUARTERLY.
+	TimeUnit TimeUnit `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s BudgetPerformanceHistory) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BudgetPerformanceHistory) GoString() string {
+	return s.String()
+}
+
+// The amount of cost or usage that you created the budget for, compared to
+// your actual costs or usage.
+type BudgetedAndActualAmounts struct {
+	_ struct{} `type:"structure"`
+
+	// Your actual costs or usage for a budget period.
+	ActualAmount *Spend `type:"structure"`
+
+	// The amount of cost or usage that you created the budget for.
+	BudgetedAmount *Spend `type:"structure"`
+
+	// The time period covered by this budget comparison.
+	TimePeriod *TimePeriod `type:"structure"`
+}
+
+// String returns the string representation
+func (s BudgetedAndActualAmounts) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BudgetedAndActualAmounts) GoString() string {
+	return s.String()
+}
+
+// The spend objects that are associated with this budget. The actualSpend tracks
+// how much you've used, cost, usage, or RI units, and the forecastedSpend tracks
 // how much you are predicted to spend if your current usage remains steady.
 //
 // For example, if it is the 20th of the month and you have spent 50 dollars
@@ -800,7 +935,9 @@ func (s *CalculatedSpend) Validate() error {
 	return nil
 }
 
-// The types of cost included in a budget, such as tax and subscriptions.
+// The types of cost that are included in a COST budget, such as tax and subscriptions.
+//
+// USAGE, RI_UTILIZATION, and RI_COVERAGE budgets do not have CostTypes.
 type CostTypes struct {
 	_ struct{} `type:"structure"`
 
@@ -854,7 +991,7 @@ type CostTypes struct {
 	// The default value is false.
 	UseAmortized *bool `type:"boolean"`
 
-	// Specifies whether a budget uses blended rate.
+	// Specifies whether a budget uses a blended rate.
 	//
 	// The default value is false.
 	UseBlended *bool `type:"boolean"`
@@ -886,7 +1023,7 @@ type CreateBudgetInput struct {
 
 	// A notification that you want to associate with a budget. A budget can have
 	// up to five notifications, and each notification can have one SNS subscriber
-	// and up to ten email subscribers. If you include notifications and subscribers
+	// and up to 10 email subscribers. If you include notifications and subscribers
 	// in your CreateBudget call, AWS creates the notifications and subscribers
 	// for you.
 	NotificationsWithSubscribers []NotificationWithSubscribers `type:"list"`
@@ -967,11 +1104,11 @@ type CreateNotificationInput struct {
 	// AccountId is a required field
 	AccountId *string `min:"12" type:"string" required:"true"`
 
-	// The name of the budget that you want AWS to notified you about. Budget names
+	// The name of the budget that you want AWS to notify you about. Budget names
 	// must be unique within an account.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// The notification that you want to create.
 	//
@@ -979,7 +1116,7 @@ type CreateNotificationInput struct {
 	Notification *Notification `type:"structure" required:"true"`
 
 	// A list of subscribers that you want to associate with the notification. Each
-	// notification can have one SNS subscriber and up to ten email subscribers.
+	// notification can have one SNS subscriber and up to 10 email subscribers.
 	//
 	// Subscribers is a required field
 	Subscribers []Subscriber `min:"1" type:"list" required:"true"`
@@ -1008,6 +1145,9 @@ func (s *CreateNotificationInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if s.Notification == nil {
@@ -1065,8 +1205,8 @@ func (s CreateNotificationOutput) SDKResponseMetadata() aws.Response {
 type CreateSubscriberInput struct {
 	_ struct{} `type:"structure"`
 
-	// The accountId associated with the budget that you want to create a subscriber
-	// for.
+	// The accountId that is associated with the budget that you want to create
+	// a subscriber for.
 	//
 	// AccountId is a required field
 	AccountId *string `min:"12" type:"string" required:"true"`
@@ -1075,7 +1215,7 @@ type CreateSubscriberInput struct {
 	// unique within an account.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// The notification that you want to create a subscriber for.
 	//
@@ -1111,6 +1251,9 @@ func (s *CreateSubscriberInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if s.Notification == nil {
@@ -1171,7 +1314,7 @@ type DeleteBudgetInput struct {
 	// The name of the budget that you want to delete.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1197,6 +1340,9 @@ func (s *DeleteBudgetInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1240,7 +1386,7 @@ type DeleteNotificationInput struct {
 	// The name of the budget whose notification you want to delete.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// The notification that you want to delete.
 	//
@@ -1271,6 +1417,9 @@ func (s *DeleteNotificationInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if s.Notification == nil {
@@ -1323,7 +1472,7 @@ type DeleteSubscriberInput struct {
 	// The name of the budget whose subscriber you want to delete.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// The notification whose subscriber you want to delete.
 	//
@@ -1359,6 +1508,9 @@ func (s *DeleteSubscriberInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if s.Notification == nil {
@@ -1420,7 +1572,7 @@ type DescribeBudgetInput struct {
 	// The name of the budget that you want a description of.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1446,6 +1598,9 @@ func (s *DescribeBudgetInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1479,6 +1634,101 @@ func (s DescribeBudgetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+type DescribeBudgetPerformanceHistoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID of the user. It should be a 12-digit number.
+	//
+	// AccountId is a required field
+	AccountId *string `min:"12" type:"string" required:"true"`
+
+	// A string that represents the budget name. The ":" and "\" characters aren't
+	// allowed.
+	//
+	// BudgetName is a required field
+	BudgetName *string `min:"1" type:"string" required:"true"`
+
+	// An integer that represents how many entries a paginated response contains.
+	// The maximum is 100.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+
+	// Retrieves how often the budget went into an ALARM state for the specified
+	// time period.
+	TimePeriod *TimePeriod `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeBudgetPerformanceHistoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBudgetPerformanceHistoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBudgetPerformanceHistoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetPerformanceHistoryInput"}
+
+	if s.AccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
+	}
+	if s.AccountId != nil && len(*s.AccountId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
+	}
+
+	if s.BudgetName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+type DescribeBudgetPerformanceHistoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The history of how often the budget has gone into an ALARM state.
+	//
+	// For DAILY budgets, the history saves the state of the budget for the last
+	// 60 days. For MONTHLY budgets, the history saves the state of the budget for
+	// the current month plus the last 12 months. For QUARTERLY budgets, the history
+	// saves the state of the budget for the last four quarters.
+	BudgetPerformanceHistory *BudgetPerformanceHistory `type:"structure"`
+
+	// A generic string.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeBudgetPerformanceHistoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBudgetPerformanceHistoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBudgetPerformanceHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Request of DescribeBudgets
 type DescribeBudgetsInput struct {
 	_ struct{} `type:"structure"`
@@ -1489,10 +1739,12 @@ type DescribeBudgetsInput struct {
 	// AccountId is a required field
 	AccountId *string `min:"12" type:"string" required:"true"`
 
-	// Optional integer. Specifies the maximum number of results to return in response.
+	// An optional integer that represents how many entries a paginated response
+	// contains. The maximum is 100.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The pagination token that indicates the next set of results to retrieve.
+	// The pagination token that you include in your request to indicate the next
+	// set of results that you want to retrieve.
 	NextToken *string `type:"string"`
 }
 
@@ -1535,8 +1787,8 @@ type DescribeBudgetsOutput struct {
 	// A list of budgets.
 	Budgets []Budget `type:"list"`
 
-	// The pagination token that indicates the next set of results that you can
-	// retrieve.
+	// The pagination token in the service response that indicates the next set
+	// of results that you can retrieve.
 	NextToken *string `type:"string"`
 }
 
@@ -1568,12 +1820,14 @@ type DescribeNotificationsForBudgetInput struct {
 	// The name of the budget whose notifications you want descriptions of.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// Optional integer. Specifies the maximum number of results to return in response.
+	// An optional integer that represents how many entries a paginated response
+	// contains. The maximum is 100.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The pagination token that indicates the next set of results to retrieve.
+	// The pagination token that you include in your request to indicate the next
+	// set of results that you want to retrieve.
 	NextToken *string `type:"string"`
 }
 
@@ -1601,6 +1855,9 @@ func (s *DescribeNotificationsForBudgetInput) Validate() error {
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
+	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
@@ -1617,11 +1874,11 @@ type DescribeNotificationsForBudgetOutput struct {
 
 	responseMetadata aws.Response
 
-	// The pagination token that indicates the next set of results that you can
-	// retrieve.
+	// The pagination token in the service response that indicates the next set
+	// of results that you can retrieve.
 	NextToken *string `type:"string"`
 
-	// A list of notifications associated with a budget.
+	// A list of notifications that are associated with a budget.
 	Notifications []Notification `type:"list"`
 }
 
@@ -1653,12 +1910,14 @@ type DescribeSubscribersForNotificationInput struct {
 	// The name of the budget whose subscribers you want descriptions of.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// Optional integer. Specifies the maximum number of results to return in response.
+	// An optional integer that represents how many entries a paginated response
+	// contains. The maximum is 100.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// The pagination token that indicates the next set of results to retrieve.
+	// The pagination token that you include in your request to indicate the next
+	// set of results that you want to retrieve.
 	NextToken *string `type:"string"`
 
 	// The notification whose subscribers you want to list.
@@ -1691,6 +1950,9 @@ func (s *DescribeSubscribersForNotificationInput) Validate() error {
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
+	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
@@ -1716,11 +1978,11 @@ type DescribeSubscribersForNotificationOutput struct {
 
 	responseMetadata aws.Response
 
-	// The pagination token that indicates the next set of results that you can
-	// retrieve.
+	// The pagination token in the service response that indicates the next set
+	// of results that you can retrieve.
 	NextToken *string `type:"string"`
 
-	// A list of subscribers associated with a notification.
+	// A list of subscribers that are associated with a notification.
 	Subscribers []Subscriber `min:"1" type:"list"`
 }
 
@@ -1739,15 +2001,18 @@ func (s DescribeSubscribersForNotificationOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// A notification associated with a budget. A budget can have up to five notifications.
+// A notification that is associated with a budget. A budget can have up to
+// five notifications.
 //
 // Each notification must have at least one subscriber. A notification can have
-// one SNS subscriber and up to ten email subscribers, for a total of 11 subscribers.
+// one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.
 //
 // For example, if you have a budget for 200 dollars and you want to be notified
 // when you go over 160 dollars, create a notification with the following parameters:
 //
 //    * A notificationType of ACTUAL
+//
+//    * A thresholdType of PERCENTAGE
 //
 //    * A comparisonOperator of GREATER_THAN
 //
@@ -1755,25 +2020,33 @@ func (s DescribeSubscribersForNotificationOutput) SDKResponseMetadata() aws.Resp
 type Notification struct {
 	_ struct{} `type:"structure"`
 
-	// The comparison used for this notification.
+	// The comparison that is used for this notification.
 	//
 	// ComparisonOperator is a required field
 	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
+	// Whether this notification is in alarm. If a budget notification is in the
+	// ALARM state, you have passed the set threshold for the budget.
+	NotificationState NotificationState `type:"string" enum:"true"`
+
 	// Whether the notification is for how much you have spent (ACTUAL) or for how
-	// much you are forecasted to spend (FORECASTED).
+	// much you're forecasted to spend (FORECASTED).
 	//
 	// NotificationType is a required field
 	NotificationType NotificationType `type:"string" required:"true" enum:"true"`
 
-	// The threshold associated with a notification. Thresholds are always a percentage.
+	// The threshold that is associated with a notification. Thresholds are always
+	// a percentage.
 	//
 	// Threshold is a required field
-	Threshold *float64 `min:"0.1" type:"double" required:"true"`
+	Threshold *float64 `type:"double" required:"true"`
 
-	// The type of threshold for a notification. For ACTUAL thresholds, AWS notifies
-	// you when you go over the threshold, and for FORECASTED thresholds AWS notifies
-	// you when you are forecasted to go over the threshold.
+	// The type of threshold for a notification. For ABSOLUTE_VALUE thresholds,
+	// AWS notifies you when you go over or are forecasted to go over your total
+	// cost threshold. For PERCENTAGE thresholds, AWS notifies you when you go over
+	// or are forecasted to go over a certain percentage of your forecasted spend.
+	// For example, if you have a budget for 200 dollars and you have a PERCENTAGE
+	// threshold of 80%, AWS notifies you when you go over 160 dollars.
 	ThresholdType ThresholdType `type:"string" enum:"true"`
 }
 
@@ -1800,9 +2073,6 @@ func (s *Notification) Validate() error {
 	if s.Threshold == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
-	if s.Threshold != nil && *s.Threshold < 0.1 {
-		invalidParams.Add(aws.NewErrParamMinValue("Threshold", 0.1))
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1811,11 +2081,11 @@ func (s *Notification) Validate() error {
 }
 
 // A notification with subscribers. A notification can have one SNS subscriber
-// and up to ten email subscribers, for a total of 11 subscribers.
+// and up to 10 email subscribers, for a total of 11 subscribers.
 type NotificationWithSubscribers struct {
 	_ struct{} `type:"structure"`
 
-	// The notification associated with a budget.
+	// The notification that is associated with a budget.
 	//
 	// Notification is a required field
 	Notification *Notification `type:"structure" required:"true"`
@@ -1869,7 +2139,7 @@ func (s *NotificationWithSubscribers) Validate() error {
 	return nil
 }
 
-// The amount of cost or usage being measured for a budget.
+// The amount of cost or usage that is measured for a budget.
 //
 // For example, a Spend for 3 GB of S3 usage would have the following parameters:
 //
@@ -1879,14 +2149,14 @@ func (s *NotificationWithSubscribers) Validate() error {
 type Spend struct {
 	_ struct{} `type:"structure"`
 
-	// The cost or usage amount associated with a budget forecast, actual spend,
-	// or budget threshold.
+	// The cost or usage amount that is associated with a budget forecast, actual
+	// spend, or budget threshold.
 	//
 	// Amount is a required field
-	Amount *string `type:"string" required:"true"`
+	Amount *string `min:"1" type:"string" required:"true"`
 
-	// The unit of measurement used for the budget forecast, actual spend, or budget
-	// threshold, such as dollars or GB.
+	// The unit of measurement that is used for the budget forecast, actual spend,
+	// or budget threshold, such as dollars or GB.
 	//
 	// Unit is a required field
 	Unit *string `min:"1" type:"string" required:"true"`
@@ -1909,6 +2179,9 @@ func (s *Spend) Validate() error {
 	if s.Amount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Amount"))
 	}
+	if s.Amount != nil && len(*s.Amount) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Amount", 1))
+	}
 
 	if s.Unit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Unit"))
@@ -1924,7 +2197,7 @@ func (s *Spend) Validate() error {
 }
 
 // The subscriber to a budget notification. The subscriber consists of a subscription
-// type and either an Amazon Simple Notification Service topic or an email address.
+// type and either an Amazon SNS topic or an email address.
 //
 // For example, an email subscriber would have the following parameters:
 //
@@ -1976,9 +2249,9 @@ func (s *Subscriber) Validate() error {
 	return nil
 }
 
-// The period of time covered by a budget. Has a start date and an end date.
-// The start date must come before the end date. There are no restrictions on
-// the end date.
+// The period of time that is covered by a budget. The period has a start date
+// and an end date. The start date must come before the end date. There are
+// no restrictions on the end date.
 type TimePeriod struct {
 	_ struct{} `type:"structure"`
 
@@ -1991,9 +2264,9 @@ type TimePeriod struct {
 	End *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The start date for a budget. If you created your budget and didn't specify
-	// a start date, AWS defaults to the start of your chosen time period (i.e.
-	// DAILY, MONTHLY, QUARTERLY, ANNUALLY). For example, if you created your budget
-	// on January 24th 2018, chose DAILY, and didn't set a start date, AWS set your
+	// a start date, AWS defaults to the start of your chosen time period (DAILY,
+	// MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget
+	// on January 24, 2018, chose DAILY, and didn't set a start date, AWS set your
 	// start date to 01/24/18 00:00 UTC. If you chose MONTHLY, AWS set your start
 	// date to 01/01/18 00:00 UTC. The defaults are the same for the AWS Billing
 	// and Cost Management console and the API.
@@ -2098,14 +2371,14 @@ type UpdateNotificationInput struct {
 	// The name of the budget whose notification you want to update.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
 	// The updated notification to be associated with a budget.
 	//
 	// NewNotification is a required field
 	NewNotification *Notification `type:"structure" required:"true"`
 
-	// The previous notification associated with a budget.
+	// The previous notification that is associated with a budget.
 	//
 	// OldNotification is a required field
 	OldNotification *Notification `type:"structure" required:"true"`
@@ -2134,6 +2407,9 @@ func (s *UpdateNotificationInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if s.NewNotification == nil {
@@ -2195,9 +2471,9 @@ type UpdateSubscriberInput struct {
 	// The name of the budget whose subscriber you want to update.
 	//
 	// BudgetName is a required field
-	BudgetName *string `type:"string" required:"true"`
+	BudgetName *string `min:"1" type:"string" required:"true"`
 
-	// The updated subscriber associated with a budget notification.
+	// The updated subscriber that is associated with a budget notification.
 	//
 	// NewSubscriber is a required field
 	NewSubscriber *Subscriber `type:"structure" required:"true"`
@@ -2207,7 +2483,7 @@ type UpdateSubscriberInput struct {
 	// Notification is a required field
 	Notification *Notification `type:"structure" required:"true"`
 
-	// The previous subscriber associated with a budget notification.
+	// The previous subscriber that is associated with a budget notification.
 	//
 	// OldSubscriber is a required field
 	OldSubscriber *Subscriber `type:"structure" required:"true"`
@@ -2236,6 +2512,9 @@ func (s *UpdateSubscriberInput) Validate() error {
 
 	if s.BudgetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
+	}
+	if s.BudgetName != nil && len(*s.BudgetName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BudgetName", 1))
 	}
 
 	if s.NewSubscriber == nil {
@@ -2293,7 +2572,9 @@ func (s UpdateSubscriberOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// The type of a budget. It should be COST, USAGE, or RI_UTILIZATION.
+// The type of a budget. It must be one of the following types:
+//
+// COST, USAGE, RI_UTILIZATION, or RI_COVERAGE.
 type BudgetType string
 
 // Enum values for BudgetType
@@ -2313,8 +2594,10 @@ func (enum BudgetType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The comparison operator of a notification. Currently we support less than,
-// equal to and greater than.
+// The comparison operator of a notification. Currently the service supports
+// the following operators:
+//
+// GREATER_THAN, LESS_THAN, EQUAL_TO
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -2333,7 +2616,24 @@ func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The type of a notification. It should be ACTUAL or FORECASTED.
+type NotificationState string
+
+// Enum values for NotificationState
+const (
+	NotificationStateOk    NotificationState = "OK"
+	NotificationStateAlarm NotificationState = "ALARM"
+)
+
+func (enum NotificationState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The type of a notification. It must be ACTUAL or FORECASTED.
 type NotificationType string
 
 // Enum values for NotificationType
@@ -2387,7 +2687,7 @@ func (enum ThresholdType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
+// The time unit of the budget, such as MONTHLY or QUARTERLY.
 type TimeUnit string
 
 // Enum values for TimeUnit

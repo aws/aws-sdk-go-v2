@@ -235,8 +235,12 @@ func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstances
 // BatchGetDeploymentInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Gets information about one or more instance that are part of a deployment
-// group.
+// This method works, but is considered deprecated. Use BatchGetDeploymentTargets
+// instead.
+//
+// Returns an array of instances associated with a deployment. This method works
+// with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets
+// works with all compute platforms.
 //
 //    // Example sending a request using the BatchGetDeploymentInstancesRequest method.
 //    req := client.BatchGetDeploymentInstancesRequest(params)
@@ -247,6 +251,9 @@ func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstances
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
 func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, BatchGetDeploymentInstances, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opBatchGetDeploymentInstances,
 		HTTPMethod: "POST",
@@ -262,6 +269,65 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 	output.responseMetadata = aws.Response{Request: req}
 
 	return BatchGetDeploymentInstancesRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentInstancesRequest}
+}
+
+const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
+
+// BatchGetDeploymentTargetsRequest is a API request type for the BatchGetDeploymentTargets API operation.
+type BatchGetDeploymentTargetsRequest struct {
+	*aws.Request
+	Input *BatchGetDeploymentTargetsInput
+	Copy  func(*BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest
+}
+
+// Send marshals and sends the BatchGetDeploymentTargets API request.
+func (r BatchGetDeploymentTargetsRequest) Send() (*BatchGetDeploymentTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetDeploymentTargetsOutput), nil
+}
+
+// BatchGetDeploymentTargetsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Returns an array of targets associated with a deployment. This method works
+// with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.
+//
+// The type of targets returned depends on the deployment's compute platform:
+//
+//    * EC2/On-premises - Information about EC2 instance targets.
+//
+//    * AWS Lambda - Information about Lambda functions targets.
+//
+//    * Amazon ECS - Information about ECS service targets.
+//
+//    // Example sending a request using the BatchGetDeploymentTargetsRequest method.
+//    req := client.BatchGetDeploymentTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargets
+func (c *CodeDeploy) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetDeploymentTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetDeploymentTargetsInput{}
+	}
+
+	output := &BatchGetDeploymentTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetDeploymentTargetsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentTargetsRequest}
 }
 
 const opBatchGetDeployments = "BatchGetDeployments"
@@ -1163,6 +1229,9 @@ func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, erro
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
 func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) GetDeploymentInstanceRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetDeploymentInstance, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opGetDeploymentInstance,
 		HTTPMethod: "POST",
@@ -1178,6 +1247,56 @@ func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceIn
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetDeploymentInstanceRequest{Request: req, Input: input, Copy: c.GetDeploymentInstanceRequest}
+}
+
+const opGetDeploymentTarget = "GetDeploymentTarget"
+
+// GetDeploymentTargetRequest is a API request type for the GetDeploymentTarget API operation.
+type GetDeploymentTargetRequest struct {
+	*aws.Request
+	Input *GetDeploymentTargetInput
+	Copy  func(*GetDeploymentTargetInput) GetDeploymentTargetRequest
+}
+
+// Send marshals and sends the GetDeploymentTarget API request.
+func (r GetDeploymentTargetRequest) Send() (*GetDeploymentTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentTargetOutput), nil
+}
+
+// GetDeploymentTargetRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Returns information about a deployment target.
+//
+//    // Example sending a request using the GetDeploymentTargetRequest method.
+//    req := client.GetDeploymentTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTarget
+func (c *CodeDeploy) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) GetDeploymentTargetRequest {
+	op := &aws.Operation{
+		Name:       opGetDeploymentTarget,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetDeploymentTargetInput{}
+	}
+
+	output := &GetDeploymentTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetDeploymentTargetRequest{Request: req, Input: input, Copy: c.GetDeploymentTargetRequest}
 }
 
 const opGetOnPremisesInstance = "GetOnPremisesInstance"
@@ -1661,6 +1780,10 @@ func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, 
 // ListDeploymentInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
+// The newer BatchGetDeploymentTargets should be used instead because it works
+// with all compute types. ListDeploymentInstances throws an exception if it
+// is used with a compute platform other than EC2/On-premises or AWS Lambda.
+//
 // Lists the instance for a deployment associated with the applicable IAM user
 // or AWS account.
 //
@@ -1673,6 +1796,9 @@ func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, 
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
 func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) ListDeploymentInstancesRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListDeploymentInstances, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opListDeploymentInstances,
 		HTTPMethod: "POST",
@@ -1740,6 +1866,56 @@ type ListDeploymentInstancesPager struct {
 
 func (p *ListDeploymentInstancesPager) CurrentPage() *ListDeploymentInstancesOutput {
 	return p.Pager.CurrentPage().(*ListDeploymentInstancesOutput)
+}
+
+const opListDeploymentTargets = "ListDeploymentTargets"
+
+// ListDeploymentTargetsRequest is a API request type for the ListDeploymentTargets API operation.
+type ListDeploymentTargetsRequest struct {
+	*aws.Request
+	Input *ListDeploymentTargetsInput
+	Copy  func(*ListDeploymentTargetsInput) ListDeploymentTargetsRequest
+}
+
+// Send marshals and sends the ListDeploymentTargets API request.
+func (r ListDeploymentTargetsRequest) Send() (*ListDeploymentTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentTargetsOutput), nil
+}
+
+// ListDeploymentTargetsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Returns an array of target IDs that are associated a deployment.
+//
+//    // Example sending a request using the ListDeploymentTargetsRequest method.
+//    req := client.ListDeploymentTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargets
+func (c *CodeDeploy) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput) ListDeploymentTargetsRequest {
+	op := &aws.Operation{
+		Name:       opListDeploymentTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListDeploymentTargetsInput{}
+	}
+
+	output := &ListDeploymentTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDeploymentTargetsRequest{Request: req, Input: input, Copy: c.ListDeploymentTargetsRequest}
 }
 
 const opListDeployments = "ListDeployments"
@@ -2194,6 +2370,9 @@ func (r SkipWaitTimeForInstanceTerminationRequest) Send() (*SkipWaitTimeForInsta
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
 func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SkipWaitTimeForInstanceTermination, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opSkipWaitTimeForInstanceTermination,
 		HTTPMethod: "POST",
@@ -2485,6 +2664,42 @@ func (s AlarmConfiguration) String() string {
 
 // GoString returns the string representation
 func (s AlarmConfiguration) GoString() string {
+	return s.String()
+}
+
+// A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted
+// or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the
+// revision is the same as the AppSpec file. This method replaces the deprecated
+// RawString data type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AppSpecContent
+type AppSpecContent struct {
+	_ struct{} `type:"structure"`
+
+	// The YAML-formatted or JSON-formatted revision string.
+	//
+	// For an AWS Lambda deployment the content includes a Lambda function name,
+	// the alias for its original version, and the alias for its replacement version.
+	// The deployment shifts traffic from the original version of the Lambda function
+	// to the replacement version.
+	//
+	// For an Amazon ECS deployment the content includes the task name, information
+	// about the load balancer that serves traffic to the container, and more.
+	//
+	// For both types of deployments, the content can specify Lambda functions that
+	// run at specified hooks, such as BeforeInstall, during a deployment.
+	Content *string `locationName:"content" type:"string"`
+
+	// The SHA256 hash value of the revision content.
+	Sha256 *string `locationName:"sha256" type:"string"`
+}
+
+// String returns the string representation
+func (s AppSpecContent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AppSpecContent) GoString() string {
 	return s.String()
 }
 
@@ -2797,7 +3012,7 @@ type BatchGetDeploymentInstancesInput struct {
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
-	// The unique IDs of instances in the deployment group.
+	// The unique IDs of instances of the deployment.
 	//
 	// InstanceIds is a required field
 	InstanceIds []string `locationName:"instanceIds" type:"list" required:"true"`
@@ -2857,6 +3072,75 @@ func (s BatchGetDeploymentInstancesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargetsInput
+type BatchGetDeploymentTargetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The unique IDs of the deployment targets. The compute platform of the deployment
+	// determines the type of the targets and their formats.
+	//
+	//    *  For deployments that use the EC2/On-premises compute platform, the
+	//    target IDs are EC2 or on-premises instances IDs and their target type
+	//    is instanceTarget.
+	//
+	//    *  For deployments that use the AWS Lambda compute platform, the target
+	//    IDs are the names of Lambda functions and their target type is instanceTarget.
+	//
+	//
+	//    *  For deployments that use the Amazon ECS compute platform, the target
+	//    IDs are pairs of Amazon ECS clusters and services specified using the
+	//    format <clustername>:<servicename>. Their target type is ecsTarget.
+	TargetIds []string `locationName:"targetIds" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetDeploymentTargetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetDeploymentTargetsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargetsOutput
+type BatchGetDeploymentTargetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of target objects for a deployment. Each target object contains details
+	// about the target, such as its status and lifecycle events. The type of the
+	// target objects depends on the deployment' compute platform.
+	//
+	//    * EC2/On-premises - Each target object is an EC2 or on-premises instance.
+	//
+	//
+	//    * AWS Lambda - The target object is a specific version of an AWS Lambda
+	//    function.
+	//
+	//    * Amazon ECS - The target object is an Amazon ECS service.
+	DeploymentTargets []DeploymentTarget `locationName:"deploymentTargets" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetDeploymentTargetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetDeploymentTargetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetDeploymentTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -3045,9 +3329,14 @@ func (s BlueInstanceTerminationOption) GoString() string {
 type ContinueDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The deployment ID of the blue/green deployment for which you want to start
-	// rerouting traffic to the replacement environment.
+	// The unique ID of a blue/green deployment for which you want to start rerouting
+	// traffic to the replacement environment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The status of the deployment's waiting period. READY_WAIT indicates the deployment
+	// is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic
+	// is shifted, but the original target is not terminated.
+	DeploymentWaitType DeploymentWaitType `locationName:"deploymentWaitType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3299,6 +3588,12 @@ type CreateDeploymentGroupInput struct {
 	// be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
+	// The target ECS services in the deployment group. This only applies to deployment
+	// groups that use the Amazon ECS compute platform. A target ECS service is
+	// specified as an Amazon ECS cluster and service name pair using the format
+	// <clustername>:<servicename>.
+	EcsServices []ECSService `locationName:"ecsServices" type:"list"`
+
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *LoadBalancerInfo `locationName:"loadBalancerInfo" type:"structure"`
 
@@ -3499,7 +3794,7 @@ type CreateDeploymentOutput struct {
 
 	responseMetadata aws.Response
 
-	// A unique deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
 
@@ -3848,6 +4143,12 @@ type DeploymentGroupInfo struct {
 	// be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
+	// The target ECS services in the deployment group. This only applies to deployment
+	// groups that use the Amazon ECS compute platform. A target ECS service is
+	// specified as an Amazon ECS cluster and service name pair using the format
+	// <clustername>:<servicename>.
+	EcsServices []ECSService `locationName:"ecsServices" type:"list"`
+
 	// Information about the most recent attempted deployment to the deployment
 	// group.
 	LastAttemptedDeployment *LastDeploymentInfo `locationName:"lastAttemptedDeployment" type:"structure"`
@@ -3932,7 +4233,7 @@ type DeploymentInfo struct {
 	// The deployment group name.
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string"`
 
-	// The deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// A summary of the deployment status of the instances in the deployment.
@@ -4120,6 +4421,37 @@ func (s DeploymentStyle) GoString() string {
 	return s.String()
 }
 
+// Information about the deployment target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTarget
+type DeploymentTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The deployment type which is specific to the deployment's compute platform.
+	DeploymentTargetType DeploymentTargetType `locationName:"deploymentTargetType" type:"string" enum:"true"`
+
+	// Information about the target for a deployment that uses the Amazon ECS compute
+	// platform.
+	EcsTarget *ECSTarget `locationName:"ecsTarget" type:"structure"`
+
+	// Information about the target for a deployment that uses the EC2/On-premises
+	// compute platform.
+	InstanceTarget *InstanceTarget `locationName:"instanceTarget" type:"structure"`
+
+	// Information about the target for a deployment that uses the AWS Lambda compute
+	// platform.
+	LambdaTarget *LambdaTarget `locationName:"lambdaTarget" type:"structure"`
+}
+
+// String returns the string representation
+func (s DeploymentTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeploymentTarget) GoString() string {
+	return s.String()
+}
+
 // Represents the input of a DeregisterOnPremisesInstance operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstanceInput
 type DeregisterOnPremisesInstanceInput struct {
@@ -4271,6 +4603,129 @@ func (s EC2TagSet) String() string {
 
 // GoString returns the string representation
 func (s EC2TagSet) GoString() string {
+	return s.String()
+}
+
+// Contains the service and cluster names used to identify an Amazon ECS deployment's
+// target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSService
+type ECSService struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the cluster that the ECS service is associated with.
+	ClusterName *string `locationName:"clusterName" type:"string"`
+
+	// The name of the target ECS service.
+	ServiceName *string `locationName:"serviceName" type:"string"`
+}
+
+// String returns the string representation
+func (s ECSService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ECSService) GoString() string {
+	return s.String()
+}
+
+// Information about the target of an Amazon ECS deployment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSTarget
+type ECSTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The date and time when the target Amazon ECS application was updated by a
+	// deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The lifecycle events of the deployment to this target Amazon ECS application.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The status an Amazon ECS deployment's target ECS application.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The ARN of the target.
+	TargetArn *string `locationName:"targetArn" type:"string"`
+
+	// The unique ID of a deployment target that has a type of ecsTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+
+	// The ECSTaskSet objects associated with the ECS target.
+	TaskSetsInfo []ECSTaskSet `locationName:"taskSetsInfo" type:"list"`
+}
+
+// String returns the string representation
+func (s ECSTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ECSTarget) GoString() string {
+	return s.String()
+}
+
+// A set of Amazon ECS tasks. A task set runs a specified number of instances
+// of a task definition simultaneously inside an Amazon ECS service. Information
+// about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon
+// ECS task set includes details such as the desired number of tasks, how many
+// tasks are running, and whether the task set serves production traffic or
+// not.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSTaskSet
+type ECSTaskSet struct {
+	_ struct{} `type:"structure"`
+
+	// The number of tasks in a task set. During a deployment that uses the Amazon
+	// ECS compute type, CodeDeploy asks Amazon ECS to create a new task set and
+	// uses this value to determine how many tasks to create. After the updated
+	// task set is created, CodeDeploy shifts traffic to the new task set.
+	DesiredCount *int64 `locationName:"desiredCount" type:"long"`
+
+	// A unique ID of an ECSTaskSet.
+	Identifer *string `locationName:"identifer" type:"string"`
+
+	// The number of tasks in the task set that are in the PENDING status during
+	// an Amazon ECS deployment. A task in the PENDING state is preparing to enter
+	// the RUNNING state. A task set enters the PENDING status when it launches
+	// for the first time, or when it is restarted after being in the STOPPED state.
+	PendingCount *int64 `locationName:"pendingCount" type:"long"`
+
+	// The number of tasks in the task set that are in the RUNNING status during
+	// an Amazon ECS deployment. A task in the RUNNING state is running and ready
+	// for use.
+	RunningCount *int64 `locationName:"runningCount" type:"long"`
+
+	// The status of the task set. There are three valid task set statuses:
+	//
+	//    * PRIMARY - indicates the task set is serving production traffic.
+	//
+	//    * ACTIVE - indicates the task set is not serving production traffic.
+	//
+	//    * DRAINING - indicates the tasks in the task set are being stopped and
+	//    their corresponding targets are being deregistered from their target group.
+	Status *string `locationName:"status" type:"string"`
+
+	// The target group associated with the task set. The target group is used by
+	// AWS CodeDeploy to manage traffic to a task set.
+	TargetGroup *TargetGroupInfo `locationName:"targetGroup" type:"structure"`
+
+	// A label that identifies whether the ECS task set is an original target (BLUE)
+	// or a replacement target (GREEN).
+	TaskSetLabel TargetLabel `locationName:"taskSetLabel" type:"string" enum:"true"`
+
+	// The percentage of traffic served by this task set.
+	TrafficWeight *float64 `locationName:"trafficWeight" type:"double"`
+}
+
+// String returns the string representation
+func (s ECSTaskSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ECSTaskSet) GoString() string {
 	return s.String()
 }
 
@@ -4683,7 +5138,8 @@ func (s GetDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
 type GetDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// A deployment ID associated with the applicable IAM user or AWS account.
+	// The unique ID of a deployment associated with the applicable IAM user or
+	// AWS account.
 	//
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
@@ -4765,7 +5221,7 @@ type GetDeploymentInstanceOutput struct {
 	responseMetadata aws.Response
 
 	// Information about the instance.
-	InstanceSummary *InstanceSummary `locationName:"instanceSummary" type:"structure"`
+	InstanceSummary *InstanceSummary `locationName:"instanceSummary" deprecated:"true" type:"structure"`
 }
 
 // String returns the string representation
@@ -4806,6 +5262,55 @@ func (s GetDeploymentOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTargetInput
+type GetDeploymentTargetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The unique ID of a deployment target.
+	TargetId *string `locationName:"targetId" type:"string"`
+}
+
+// String returns the string representation
+func (s GetDeploymentTargetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeploymentTargetInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTargetOutput
+type GetDeploymentTargetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A deployment target that contains information about a deployment such as
+	// its status, lifecyle events, and when it was updated last. It also contains
+	// metadata about the deployment target. The deployment target metadata depends
+	// on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget).
+	DeploymentTarget *DeploymentTarget `locationName:"deploymentTarget" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetDeploymentTargetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeploymentTargetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4963,9 +5468,9 @@ func (s InstanceInfo) GoString() string {
 // Information about an instance in a deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceSummary
 type InstanceSummary struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
-	// The deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// The instance ID.
@@ -4998,7 +5503,7 @@ type InstanceSummary struct {
 	//    * Skipped: The deployment has been skipped for this instance.
 	//
 	//    * Unknown: The deployment status is unknown for this instance.
-	Status InstanceStatus `locationName:"status" type:"string" enum:"true"`
+	Status InstanceStatus `locationName:"status" deprecated:"true" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5008,6 +5513,79 @@ func (s InstanceSummary) String() string {
 
 // GoString returns the string representation
 func (s InstanceSummary) GoString() string {
+	return s.String()
+}
+
+// A target Amazon EC2 or on-premises instance during a deployment that uses
+// the EC2/On-premises compute platform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceTarget
+type InstanceTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// A label that identifies whether the instance is an original target (BLUE)
+	// or a replacement target (GREEN).
+	InstanceLabel TargetLabel `locationName:"instanceLabel" type:"string" enum:"true"`
+
+	// The date and time when the target instance was updated by a deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The lifecycle events of the deployment to this target instance.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The status an EC2/On-premises deployment's target instance.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The ARN of the target.
+	TargetArn *string `locationName:"targetArn" type:"string"`
+
+	// The unique ID of a deployment target that has a type of instanceTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstanceTarget) GoString() string {
+	return s.String()
+}
+
+// Information about the target AWS Lambda function during an AWS Lambda deployment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaTarget
+type LambdaTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The date and time when the target Lambda function was updated by a deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The lifecycle events of the deployment to this target Lambda function.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The status an AWS Lambda deployment's target Lambda function.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The ARN of the target.
+	TargetArn *string `locationName:"targetArn" type:"string"`
+
+	// The unique ID of a deployment target that has a type of lambdaTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+}
+
+// String returns the string representation
+func (s LambdaTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LambdaTarget) GoString() string {
 	return s.String()
 }
 
@@ -5021,7 +5599,7 @@ type LastDeploymentInfo struct {
 	// group started.
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// A timestamp indicating when the most recent deployment to the deployment
@@ -5108,13 +5686,13 @@ type ListApplicationRevisionsInput struct {
 	//    * ignore: List all revisions.
 	Deployed ListStateFilterAction `locationName:"deployed" type:"string" enum:"true"`
 
-	// An identifier returned from the previous list application revisions call.
-	// It can be used to return the next set of applications in the list.
+	// An identifier returned from the previous ListApplicationRevisions call. It
+	// can be used to return the next set of applications in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// An Amazon S3 bucket name to limit the search for revisions.
 	//
-	// If set to null, all of the user's buckets will be searched.
+	// If set to null, all of the user's buckets are searched.
 	S3Bucket *string `locationName:"s3Bucket" type:"string"`
 
 	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
@@ -5259,9 +5837,8 @@ func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
 type ListDeploymentConfigsInput struct {
 	_ struct{} `type:"structure"`
 
-	// An identifier returned from the previous list deployment configurations call.
-	// It can be used to return the next set of deployment configurations in the
-	// list.
+	// An identifier returned from the previous ListDeploymentConfigs call. It can
+	// be used to return the next set of deployment configurations in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -5471,6 +6048,61 @@ func (s ListDeploymentInstancesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargetsInput
+type ListDeploymentTargetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// A token identifier returned from the previous ListDeploymentTargets call.
+	// It can be used to return the next set of deployment targets in the list.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// A key used to filter the returned targets.
+	TargetFilters map[string][]string `locationName:"targetFilters" type:"map"`
+}
+
+// String returns the string representation
+func (s ListDeploymentTargetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeploymentTargetsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargetsOutput
+type ListDeploymentTargetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If a large amount of information is returned, a token identifier will also
+	// be returned. It can be used in a subsequent ListDeploymentTargets call to
+	// return the next set of deployment targets in the list.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The unique IDs of deployment targets.
+	TargetIds []string `locationName:"targetIds" type:"list"`
+}
+
+// String returns the string representation
+func (s ListDeploymentTargetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeploymentTargetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5700,6 +6332,10 @@ type LoadBalancerInfo struct {
 	//
 	// Adding more than one target group to the array is not supported.
 	TargetGroupInfoList []TargetGroupInfo `locationName:"targetGroupInfoList" type:"list"`
+
+	// The target group pair information. This is an array of TargeGroupPairInfo
+	// objects with a maximum size of one.
+	TargetGroupPairInfoList []TargetGroupPairInfo `locationName:"targetGroupPairInfoList" type:"list"`
 }
 
 // String returns the string representation
@@ -5784,7 +6420,7 @@ func (s OnPremisesTagSet) GoString() string {
 type PutLifecycleEventHookExecutionStatusInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the deployment. Pass this ID to a Lambda function that validates
+	// The unique ID of a deployment. Pass this ID to a Lambda function that validates
 	// a deployment lifecycle event.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
@@ -5838,14 +6474,14 @@ func (s PutLifecycleEventHookExecutionStatusOutput) SDKResponseMetadata() aws.Re
 // file.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RawString
 type RawString struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
 	// The YAML-formatted or JSON-formatted revision string. It includes information
 	// about which Lambda function to update and optional Lambda functions that
 	// validate deployment lifecycle events.
 	Content *string `locationName:"content" type:"string"`
 
-	// The SHA256 hash value of the revision that is specified as a RawString.
+	// The SHA256 hash value of the revision content.
 	Sha256 *string `locationName:"sha256" type:"string"`
 }
 
@@ -6090,6 +6726,10 @@ func (s RevisionInfo) GoString() string {
 type RevisionLocation struct {
 	_ struct{} `type:"structure"`
 
+	// The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment.
+	// The content is formatted as JSON or YAML and stored as a RawString.
+	AppSpecContent *AppSpecContent `locationName:"appSpecContent" type:"structure"`
+
 	// Information about the location of application artifacts stored in GitHub.
 	GitHubLocation *GitHubLocation `locationName:"gitHubLocation" type:"structure"`
 
@@ -6109,7 +6749,7 @@ type RevisionLocation struct {
 
 	// Information about the location of an AWS Lambda deployment revision stored
 	// as a RawString.
-	String_ *RawString `locationName:"string" type:"structure"`
+	String_ *RawString `locationName:"string" deprecated:"true" type:"structure"`
 }
 
 // String returns the string representation
@@ -6200,7 +6840,7 @@ func (s S3Location) GoString() string {
 type SkipWaitTimeForInstanceTerminationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the blue/green deployment for which you want to skip the instance
+	// The unique ID of a blue/green deployment for which you want to skip the instance
 	// termination wait time.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
@@ -6388,6 +7028,37 @@ func (s TargetGroupInfo) GoString() string {
 	return s.String()
 }
 
+// Information about two target groups and how traffic routes during an Amazon
+// ECS deployment. An optional test traffic route can be specified.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupPairInfo
+type TargetGroupPairInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The path used by a load balancer to route production traffic when an Amazon
+	// ECS deployment is complete.
+	ProdTrafficRoute *TrafficRoute `locationName:"prodTrafficRoute" type:"structure"`
+
+	// One pair of target groups. One is associated with the original task set.
+	// The second target is associated with the task set that serves traffic after
+	// the deployment completes.
+	TargetGroups []TargetGroupInfo `locationName:"targetGroups" type:"list"`
+
+	// An optional path used by a load balancer to route test traffic after an Amazon
+	// ECS deployment. Validation can happen while test traffic is served during
+	// a deployment.
+	TestTrafficRoute *TrafficRoute `locationName:"testTrafficRoute" type:"structure"`
+}
+
+// String returns the string representation
+func (s TargetGroupPairInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TargetGroupPairInfo) GoString() string {
+	return s.String()
+}
+
 // Information about the instances to be used in the replacement environment
 // in a blue/green deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetInstances
@@ -6495,6 +7166,28 @@ func (s TimeRange) String() string {
 
 // GoString returns the string representation
 func (s TimeRange) GoString() string {
+	return s.String()
+}
+
+// Information about a listener. The listener contains the path used to route
+// traffic that is received from the load balancer to a target group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoute
+type TrafficRoute struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of one listener. The listener identifies the route between a target
+	// group and a load balancer. This is an array of strings with a maximum size
+	// of one.
+	ListenerArns []string `locationName:"listenerArns" type:"list"`
+}
+
+// String returns the string representation
+func (s TrafficRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TrafficRoute) GoString() string {
 	return s.String()
 }
 
@@ -6665,6 +7358,12 @@ type UpdateDeploymentGroupInput struct {
 	// group will include only EC2 instances identified by all the tag groups.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
+	// The target ECS services in the deployment group. This only applies to deployment
+	// groups that use the Amazon ECS compute platform. A target ECS service is
+	// specified as an Amazon ECS cluster and service name pair using the format
+	// <clustername>:<servicename>.
+	EcsServices []ECSService `locationName:"ecsServices" type:"list"`
+
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *LoadBalancerInfo `locationName:"loadBalancerInfo" type:"structure"`
 
@@ -6821,6 +7520,7 @@ type ComputePlatform string
 const (
 	ComputePlatformServer ComputePlatform = "Server"
 	ComputePlatformLambda ComputePlatform = "Lambda"
+	ComputePlatformEcs    ComputePlatform = "ECS"
 )
 
 func (enum ComputePlatform) MarshalValue() (string, error) {
@@ -6906,6 +7606,24 @@ func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DeploymentTargetType string
+
+// Enum values for DeploymentTargetType
+const (
+	DeploymentTargetTypeInstanceTarget DeploymentTargetType = "InstanceTarget"
+	DeploymentTargetTypeLambdaTarget   DeploymentTargetType = "LambdaTarget"
+	DeploymentTargetTypeEcstarget      DeploymentTargetType = "ECSTarget"
+)
+
+func (enum DeploymentTargetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentTargetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentType string
 
 // Enum values for DeploymentType
@@ -6919,6 +7637,23 @@ func (enum DeploymentType) MarshalValue() (string, error) {
 }
 
 func (enum DeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeploymentWaitType string
+
+// Enum values for DeploymentWaitType
+const (
+	DeploymentWaitTypeReadyWait       DeploymentWaitType = "READY_WAIT"
+	DeploymentWaitTypeTerminationWait DeploymentWaitType = "TERMINATION_WAIT"
+)
+
+func (enum DeploymentWaitType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentWaitType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -6971,6 +7706,10 @@ const (
 	ErrorCodeInvalidLambdaConfiguration              ErrorCode = "INVALID_LAMBDA_CONFIGURATION"
 	ErrorCodeInvalidLambdaFunction                   ErrorCode = "INVALID_LAMBDA_FUNCTION"
 	ErrorCodeHookExecutionFailure                    ErrorCode = "HOOK_EXECUTION_FAILURE"
+	ErrorCodeAutoscalingValidationError              ErrorCode = "AUTOSCALING_VALIDATION_ERROR"
+	ErrorCodeInvalidEcsService                       ErrorCode = "INVALID_ECS_SERVICE"
+	ErrorCodeEcsUpdateError                          ErrorCode = "ECS_UPDATE_ERROR"
+	ErrorCodeInvalidRevision                         ErrorCode = "INVALID_REVISION"
 )
 
 func (enum ErrorCode) MarshalValue() (string, error) {
@@ -7171,9 +7910,10 @@ type RevisionLocationType string
 
 // Enum values for RevisionLocationType
 const (
-	RevisionLocationTypeS3     RevisionLocationType = "S3"
-	RevisionLocationTypeGitHub RevisionLocationType = "GitHub"
-	RevisionLocationTypeString RevisionLocationType = "String"
+	RevisionLocationTypeS3             RevisionLocationType = "S3"
+	RevisionLocationTypeGitHub         RevisionLocationType = "GitHub"
+	RevisionLocationTypeString         RevisionLocationType = "String"
+	RevisionLocationTypeAppSpecContent RevisionLocationType = "AppSpecContent"
 )
 
 func (enum RevisionLocationType) MarshalValue() (string, error) {
@@ -7233,6 +7973,62 @@ func (enum TagFilterType) MarshalValue() (string, error) {
 }
 
 func (enum TagFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetFilterName string
+
+// Enum values for TargetFilterName
+const (
+	TargetFilterNameTargetStatus        TargetFilterName = "TargetStatus"
+	TargetFilterNameServerInstanceLabel TargetFilterName = "ServerInstanceLabel"
+)
+
+func (enum TargetFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetLabel string
+
+// Enum values for TargetLabel
+const (
+	TargetLabelBlue  TargetLabel = "Blue"
+	TargetLabelGreen TargetLabel = "Green"
+)
+
+func (enum TargetLabel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetLabel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetStatus string
+
+// Enum values for TargetStatus
+const (
+	TargetStatusPending    TargetStatus = "Pending"
+	TargetStatusInProgress TargetStatus = "InProgress"
+	TargetStatusSucceeded  TargetStatus = "Succeeded"
+	TargetStatusFailed     TargetStatus = "Failed"
+	TargetStatusSkipped    TargetStatus = "Skipped"
+	TargetStatusUnknown    TargetStatus = "Unknown"
+	TargetStatusReady      TargetStatus = "Ready"
+)
+
+func (enum TargetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

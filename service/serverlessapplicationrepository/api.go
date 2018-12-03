@@ -162,6 +162,56 @@ func (c *ServerlessApplicationRepository) CreateCloudFormationChangeSetRequest(i
 	return CreateCloudFormationChangeSetRequest{Request: req, Input: input, Copy: c.CreateCloudFormationChangeSetRequest}
 }
 
+const opCreateCloudFormationTemplate = "CreateCloudFormationTemplate"
+
+// CreateCloudFormationTemplateRequest is a API request type for the CreateCloudFormationTemplate API operation.
+type CreateCloudFormationTemplateRequest struct {
+	*aws.Request
+	Input *CreateCloudFormationTemplateInput
+	Copy  func(*CreateCloudFormationTemplateInput) CreateCloudFormationTemplateRequest
+}
+
+// Send marshals and sends the CreateCloudFormationTemplate API request.
+func (r CreateCloudFormationTemplateRequest) Send() (*CreateCloudFormationTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCloudFormationTemplateOutput), nil
+}
+
+// CreateCloudFormationTemplateRequest returns a request value for making API operation for
+// AWSServerlessApplicationRepository.
+//
+// Creates an AWS CloudFormation template.
+//
+//    // Example sending a request using the CreateCloudFormationTemplateRequest method.
+//    req := client.CreateCloudFormationTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationTemplate
+func (c *ServerlessApplicationRepository) CreateCloudFormationTemplateRequest(input *CreateCloudFormationTemplateInput) CreateCloudFormationTemplateRequest {
+	op := &aws.Operation{
+		Name:       opCreateCloudFormationTemplate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/applications/{applicationId}/templates",
+	}
+
+	if input == nil {
+		input = &CreateCloudFormationTemplateInput{}
+	}
+
+	output := &CreateCloudFormationTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateCloudFormationTemplateRequest{Request: req, Input: input, Copy: c.CreateCloudFormationTemplateRequest}
+}
+
 const opDeleteApplication = "DeleteApplication"
 
 // DeleteApplicationRequest is a API request type for the DeleteApplication API operation.
@@ -312,6 +362,158 @@ func (c *ServerlessApplicationRepository) GetApplicationPolicyRequest(input *Get
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetApplicationPolicyRequest{Request: req, Input: input, Copy: c.GetApplicationPolicyRequest}
+}
+
+const opGetCloudFormationTemplate = "GetCloudFormationTemplate"
+
+// GetCloudFormationTemplateRequest is a API request type for the GetCloudFormationTemplate API operation.
+type GetCloudFormationTemplateRequest struct {
+	*aws.Request
+	Input *GetCloudFormationTemplateInput
+	Copy  func(*GetCloudFormationTemplateInput) GetCloudFormationTemplateRequest
+}
+
+// Send marshals and sends the GetCloudFormationTemplate API request.
+func (r GetCloudFormationTemplateRequest) Send() (*GetCloudFormationTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCloudFormationTemplateOutput), nil
+}
+
+// GetCloudFormationTemplateRequest returns a request value for making API operation for
+// AWSServerlessApplicationRepository.
+//
+// Gets the specified AWS CloudFormation template.
+//
+//    // Example sending a request using the GetCloudFormationTemplateRequest method.
+//    req := client.GetCloudFormationTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplate
+func (c *ServerlessApplicationRepository) GetCloudFormationTemplateRequest(input *GetCloudFormationTemplateInput) GetCloudFormationTemplateRequest {
+	op := &aws.Operation{
+		Name:       opGetCloudFormationTemplate,
+		HTTPMethod: "GET",
+		HTTPPath:   "/applications/{applicationId}/templates/{templateId}",
+	}
+
+	if input == nil {
+		input = &GetCloudFormationTemplateInput{}
+	}
+
+	output := &GetCloudFormationTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetCloudFormationTemplateRequest{Request: req, Input: input, Copy: c.GetCloudFormationTemplateRequest}
+}
+
+const opListApplicationDependencies = "ListApplicationDependencies"
+
+// ListApplicationDependenciesRequest is a API request type for the ListApplicationDependencies API operation.
+type ListApplicationDependenciesRequest struct {
+	*aws.Request
+	Input *ListApplicationDependenciesInput
+	Copy  func(*ListApplicationDependenciesInput) ListApplicationDependenciesRequest
+}
+
+// Send marshals and sends the ListApplicationDependencies API request.
+func (r ListApplicationDependenciesRequest) Send() (*ListApplicationDependenciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListApplicationDependenciesOutput), nil
+}
+
+// ListApplicationDependenciesRequest returns a request value for making API operation for
+// AWSServerlessApplicationRepository.
+//
+// Retrieves the list of applications nested in the containing application.
+//
+//    // Example sending a request using the ListApplicationDependenciesRequest method.
+//    req := client.ListApplicationDependenciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependencies
+func (c *ServerlessApplicationRepository) ListApplicationDependenciesRequest(input *ListApplicationDependenciesInput) ListApplicationDependenciesRequest {
+	op := &aws.Operation{
+		Name:       opListApplicationDependencies,
+		HTTPMethod: "GET",
+		HTTPPath:   "/applications/{applicationId}/dependencies",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListApplicationDependenciesInput{}
+	}
+
+	output := &ListApplicationDependenciesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListApplicationDependenciesRequest{Request: req, Input: input, Copy: c.ListApplicationDependenciesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListApplicationDependenciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListApplicationDependencies operation.
+//		req := client.ListApplicationDependenciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListApplicationDependenciesRequest) Paginate(opts ...aws.Option) ListApplicationDependenciesPager {
+	return ListApplicationDependenciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListApplicationDependenciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListApplicationDependenciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListApplicationDependenciesPager struct {
+	aws.Pager
+}
+
+func (p *ListApplicationDependenciesPager) CurrentPage() *ListApplicationDependenciesOutput {
+	return p.Pager.CurrentPage().(*ListApplicationDependenciesOutput)
 }
 
 const opListApplicationVersions = "ListApplicationVersions"
@@ -540,9 +742,9 @@ func (r PutApplicationPolicyRequest) Send() (*PutApplicationPolicyOutput, error)
 // PutApplicationPolicyRequest returns a request value for making API operation for
 // AWSServerlessApplicationRepository.
 //
-// Sets the permission policy for an application. See Application Permissions
-// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
-// for the list of supported actions that can be used with this operation.
+// Sets the permission policy for an application. For the list of actions supported
+// for this operation, see Application Permissions (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
+// .
 //
 //    // Example sending a request using the PutApplicationPolicyRequest method.
 //    req := client.PutApplicationPolicyRequest(params)
@@ -620,13 +822,56 @@ func (c *ServerlessApplicationRepository) UpdateApplicationRequest(input *Update
 	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
+// A nested application summary.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationDependencySummary
+type ApplicationDependencySummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the nested application.
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `locationName:"applicationId" type:"string" required:"true"`
+
+	// The semantic version of the nested application.
+	//
+	// SemanticVersion is a required field
+	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ApplicationDependencySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ApplicationDependencySummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ApplicationDependencySummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Policy statement applied to the application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationPolicyStatement
 type ApplicationPolicyStatement struct {
 	_ struct{} `type:"structure"`
 
-	// See Application Permissions (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions)
-	// for the list of supported actions.
+	// For the list of actions supported for this operation, see Application Permissions
+	// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions).
 	//
 	// Actions is a required field
 	Actions []string `locationName:"actions" type:"list" required:"true"`
@@ -1206,6 +1451,10 @@ type CreateApplicationVersionOutput struct {
 
 	ParameterDefinitions []ParameterDefinition `locationName:"parameterDefinitions" type:"list"`
 
+	RequiredCapabilities []Capability `locationName:"requiredCapabilities" type:"list"`
+
+	ResourcesSupported *bool `locationName:"resourcesSupported" type:"boolean"`
+
 	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
 
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
@@ -1254,6 +1503,24 @@ func (s CreateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) e
 		ls0.End()
 
 	}
+	if len(s.RequiredCapabilities) > 0 {
+		v := s.RequiredCapabilities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "requiredCapabilities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ResourcesSupported != nil {
+		v := *s.ResourcesSupported
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourcesSupported", protocol.BoolValue(v), metadata)
+	}
 	if s.SemanticVersion != nil {
 		v := *s.SemanticVersion
 
@@ -1282,12 +1549,33 @@ type CreateCloudFormationChangeSetInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
 
+	Capabilities []string `locationName:"capabilities" type:"list"`
+
+	ChangeSetName *string `locationName:"changeSetName" type:"string"`
+
+	ClientToken *string `locationName:"clientToken" type:"string"`
+
+	Description *string `locationName:"description" type:"string"`
+
+	NotificationArns []string `locationName:"notificationArns" type:"list"`
+
 	ParameterOverrides []ParameterValue `locationName:"parameterOverrides" type:"list"`
+
+	ResourceTypes []string `locationName:"resourceTypes" type:"list"`
+
+	// This property corresponds to the AWS CloudFormation RollbackConfiguration
+	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+	// Data Type.
+	RollbackConfiguration *RollbackConfiguration `locationName:"rollbackConfiguration" type:"structure"`
 
 	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
 
 	// StackName is a required field
 	StackName *string `locationName:"stackName" type:"string" required:"true"`
+
+	Tags []Tag `locationName:"tags" type:"list"`
+
+	TemplateId *string `locationName:"templateId" type:"string"`
 }
 
 // String returns the string representation
@@ -1318,6 +1606,18 @@ func (s *CreateCloudFormationChangeSetInput) Validate() error {
 			}
 		}
 	}
+	if s.RollbackConfiguration != nil {
+		if err := s.RollbackConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("RollbackConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1329,6 +1629,48 @@ func (s *CreateCloudFormationChangeSetInput) Validate() error {
 func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if len(s.Capabilities) > 0 {
+		v := s.Capabilities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "capabilities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ChangeSetName != nil {
+		v := *s.ChangeSetName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "changeSetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ClientToken != nil {
+		v := *s.ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.NotificationArns) > 0 {
+		v := s.NotificationArns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "notificationArns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
 	if len(s.ParameterOverrides) > 0 {
 		v := s.ParameterOverrides
 
@@ -1341,6 +1683,24 @@ func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncode
 		ls0.End()
 
 	}
+	if len(s.ResourceTypes) > 0 {
+		v := s.ResourceTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resourceTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.RollbackConfiguration != nil {
+		v := s.RollbackConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rollbackConfiguration", v, metadata)
+	}
 	if s.SemanticVersion != nil {
 		v := *s.SemanticVersion
 
@@ -1352,6 +1712,24 @@ func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncode
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stackName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.TemplateId != nil {
+		v := *s.TemplateId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ApplicationId != nil {
 		v := *s.ApplicationId
@@ -1417,6 +1795,142 @@ func (s CreateCloudFormationChangeSetOutput) MarshalFields(e protocol.FieldEncod
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "stackId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationTemplateRequest
+type CreateCloudFormationTemplateInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
+
+	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateCloudFormationTemplateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCloudFormationTemplateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateCloudFormationTemplateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCloudFormationTemplateInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCloudFormationTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationTemplateResponse
+type CreateCloudFormationTemplateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	ApplicationId *string `locationName:"applicationId" type:"string"`
+
+	CreationTime *string `locationName:"creationTime" type:"string"`
+
+	ExpirationTime *string `locationName:"expirationTime" type:"string"`
+
+	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
+
+	Status Status `locationName:"status" type:"string" enum:"true"`
+
+	TemplateId *string `locationName:"templateId" type:"string"`
+
+	TemplateUrl *string `locationName:"templateUrl" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateCloudFormationTemplateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCloudFormationTemplateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCloudFormationTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCloudFormationTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExpirationTime != nil {
+		v := *s.ExpirationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expirationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TemplateId != nil {
+		v := *s.TemplateId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateUrl != nil {
+		v := *s.TemplateUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1750,6 +2264,268 @@ func (s GetApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplateRequest
+type GetCloudFormationTemplateInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
+
+	// TemplateId is a required field
+	TemplateId *string `location:"uri" locationName:"templateId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetCloudFormationTemplateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCloudFormationTemplateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetCloudFormationTemplateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetCloudFormationTemplateInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.TemplateId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TemplateId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCloudFormationTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateId != nil {
+		v := *s.TemplateId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "templateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplateResponse
+type GetCloudFormationTemplateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	ApplicationId *string `locationName:"applicationId" type:"string"`
+
+	CreationTime *string `locationName:"creationTime" type:"string"`
+
+	ExpirationTime *string `locationName:"expirationTime" type:"string"`
+
+	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
+
+	Status Status `locationName:"status" type:"string" enum:"true"`
+
+	TemplateId *string `locationName:"templateId" type:"string"`
+
+	TemplateUrl *string `locationName:"templateUrl" type:"string"`
+}
+
+// String returns the string representation
+func (s GetCloudFormationTemplateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCloudFormationTemplateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCloudFormationTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCloudFormationTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExpirationTime != nil {
+		v := *s.ExpirationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expirationTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TemplateId != nil {
+		v := *s.TemplateId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateUrl != nil {
+		v := *s.TemplateUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesRequest
+type ListApplicationDependenciesInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
+
+	MaxItems *int64 `location:"querystring" locationName:"maxItems" min:"1" type:"integer"`
+
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	SemanticVersion *string `location:"querystring" locationName:"semanticVersion" type:"string"`
+}
+
+// String returns the string representation
+func (s ListApplicationDependenciesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListApplicationDependenciesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListApplicationDependenciesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationDependenciesInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+	if s.MaxItems != nil && *s.MaxItems < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApplicationDependenciesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "semanticVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesResponse
+type ListApplicationDependenciesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Dependencies []ApplicationDependencySummary `locationName:"dependencies" type:"list"`
+
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListApplicationDependenciesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListApplicationDependenciesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListApplicationDependenciesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApplicationDependenciesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Dependencies) > 0 {
+		v := s.Dependencies
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dependencies", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2343,6 +3119,206 @@ func (s PutApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
+// This property corresponds to the AWS CloudFormation RollbackConfiguration
+// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+// Data Type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackConfiguration
+type RollbackConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// This property corresponds to the content of the same name for the AWS CloudFormation
+	// RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+	// Data Type.
+	MonitoringTimeInMinutes *int64 `locationName:"monitoringTimeInMinutes" type:"integer"`
+
+	// This property corresponds to the content of the same name for the AWS CloudFormation
+	// RollbackConfiguration (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration)
+	// Data Type.
+	RollbackTriggers []RollbackTrigger `locationName:"rollbackTriggers" type:"list"`
+}
+
+// String returns the string representation
+func (s RollbackConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RollbackConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RollbackConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RollbackConfiguration"}
+	if s.RollbackTriggers != nil {
+		for i, v := range s.RollbackTriggers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RollbackTriggers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RollbackConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MonitoringTimeInMinutes != nil {
+		v := *s.MonitoringTimeInMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "monitoringTimeInMinutes", protocol.Int64Value(v), metadata)
+	}
+	if len(s.RollbackTriggers) > 0 {
+		v := s.RollbackTriggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "rollbackTriggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// This property corresponds to the AWS CloudFormation RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
+// Data Type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackTrigger
+type RollbackTrigger struct {
+	_ struct{} `type:"structure"`
+
+	// This property corresponds to the content of the same name for the AWS CloudFormation
+	// RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
+	// Data Type.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// This property corresponds to the content of the same name for the AWS CloudFormation
+	// RollbackTrigger (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger)
+	// Data Type.
+	//
+	// Type is a required field
+	Type *string `locationName:"type" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RollbackTrigger) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RollbackTrigger) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RollbackTrigger) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RollbackTrigger"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if s.Type == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RollbackTrigger) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// This property corresponds to the AWS CloudFormation Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
+// Data Type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// This property corresponds to the content of the same name for the AWS CloudFormation
+	// Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
+	// Data Type.
+	//
+	// Key is a required field
+	Key *string `locationName:"key" type:"string" required:"true"`
+
+	// This property corresponds to the content of the same name for the AWS CloudFormation
+	//  Tag (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag)
+	// Data Type.
+	//
+	// Value is a required field
+	Value *string `locationName:"value" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UpdateApplicationRequest
 type UpdateApplicationInput struct {
 	_ struct{} `type:"structure"`
@@ -2584,6 +3560,47 @@ type Version struct {
 	// ParameterDefinitions is a required field
 	ParameterDefinitions []ParameterDefinition `locationName:"parameterDefinitions" type:"list" required:"true"`
 
+	// A list of values that you must specify before you can deploy certain applications.
+	// Some applications might include resources that can affect permissions in
+	// your AWS account, for example, by creating new AWS Identity and Access Management
+	// (IAM) users. For those applications, you must explicitly acknowledge their
+	// capabilities by specifying this parameter.
+	//
+	// The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM, and CAPABILITY_RESOURCE_POLICY.
+	//
+	// The following resources require you to specify CAPABILITY_IAM or CAPABILITY_NAMED_IAM:
+	// AWS::IAM::Group (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html),
+	// AWS::IAM::InstanceProfile (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html),
+	// AWS::IAM::Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html),
+	// and AWS::IAM::Role (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html).
+	// If the application contains IAM resources, you can specify either CAPABILITY_IAM
+	// or CAPABILITY_NAMED_IAM. If the application contains IAM resources with custom
+	// names, you must specify CAPABILITY_NAMED_IAM.
+	//
+	// The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+	// AWS::Lambda::Permission (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html),
+	// AWS::IAM:Policy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html),
+	// AWS::ApplicationAutoScaling::ScalingPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html),
+	// AWS::S3::BucketPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html),
+	// AWS::SQS::QueuePolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html),
+	// and AWS::SNS::TopicPolicy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html).
+	//
+	// If your application template contains any of the above resources, we recommend
+	// that you review all permissions associated with the application before deploying.
+	// If you don't specify this parameter for an application that requires capabilities,
+	// the call will fail.
+	//
+	// Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
+	//
+	// RequiredCapabilities is a required field
+	RequiredCapabilities []Capability `locationName:"requiredCapabilities" type:"list" required:"true"`
+
+	// Whether all of the AWS resources contained in this application are supported
+	// in the region in which it is being retrieved.
+	//
+	// ResourcesSupported is a required field
+	ResourcesSupported *bool `locationName:"resourcesSupported" type:"boolean" required:"true"`
+
 	// The semantic version of the application:
 	//
 	// https://semver.org/ (https://semver.org/)
@@ -2635,6 +3652,24 @@ func (s Version) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if len(s.RequiredCapabilities) > 0 {
+		v := s.RequiredCapabilities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "requiredCapabilities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ResourcesSupported != nil {
+		v := *s.ResourcesSupported
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourcesSupported", protocol.BoolValue(v), metadata)
 	}
 	if s.SemanticVersion != nil {
 		v := *s.SemanticVersion
@@ -2720,4 +3755,42 @@ func (s VersionSummary) MarshalFields(e protocol.FieldEncoder) error {
 		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
+}
+
+// Values that must be specified in order to deploy some applications.
+type Capability string
+
+// Enum values for Capability
+const (
+	CapabilityCapabilityIam            Capability = "CAPABILITY_IAM"
+	CapabilityCapabilityNamedIam       Capability = "CAPABILITY_NAMED_IAM"
+	CapabilityCapabilityAutoExpand     Capability = "CAPABILITY_AUTO_EXPAND"
+	CapabilityCapabilityResourcePolicy Capability = "CAPABILITY_RESOURCE_POLICY"
+)
+
+func (enum Capability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Capability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusPreparing Status = "PREPARING"
+	StatusActive    Status = "ACTIVE"
+	StatusExpired   Status = "EXPIRED"
+)
+
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }

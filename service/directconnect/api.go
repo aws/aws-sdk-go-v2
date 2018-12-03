@@ -32,14 +32,14 @@ func (r AllocateConnectionOnInterconnectRequest) Send() (*DisassociateConnection
 // AllocateConnectionOnInterconnectRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deprecated in favor of AllocateHostedConnection.
+// Deprecated. Use AllocateHostedConnection instead.
 //
 // Creates a hosted connection on an interconnect.
 //
 // Allocates a VLAN number and a specified amount of bandwidth for use by a
-// hosted connection on the given interconnect.
+// hosted connection on the specified interconnect.
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the AllocateConnectionOnInterconnectRequest method.
 //    req := client.AllocateConnectionOnInterconnectRequest(params)
@@ -92,13 +92,13 @@ func (r AllocateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagO
 // AllocateHostedConnectionRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a hosted connection on an interconnect or a link aggregation group
-// (LAG).
+// Creates a hosted connection on the specified interconnect or a link aggregation
+// group (LAG).
 //
 // Allocates a VLAN number and a specified amount of bandwidth for use by a
-// hosted connection on the given interconnect or LAG.
+// hosted connection on the specified interconnect or LAG.
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the AllocateHostedConnectionRequest method.
 //    req := client.AllocateHostedConnectionRequest(params)
@@ -136,24 +136,23 @@ type AllocatePrivateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the AllocatePrivateVirtualInterface API request.
-func (r AllocatePrivateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+func (r AllocatePrivateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+	return r.Request.Data.(*UpdateVirtualInterfaceAttributesOutput), nil
 }
 
 // AllocatePrivateVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Provisions a private virtual interface to be owned by another AWS customer.
+// Provisions a private virtual interface to be owned by the specified AWS account.
 //
-// Virtual interfaces created using this action must be confirmed by the virtual
-// interface owner by using the ConfirmPrivateVirtualInterface action. Until
-// then, the virtual interface will be in 'Confirming' state, and will not be
-// available for handling traffic.
+// Virtual interfaces created using this action must be confirmed by the owner
+// using ConfirmPrivateVirtualInterface. Until then, the virtual interface is
+// in the Confirming state and is not available to handle traffic.
 //
 //    // Example sending a request using the AllocatePrivateVirtualInterfaceRequest method.
 //    req := client.AllocatePrivateVirtualInterfaceRequest(params)
@@ -174,7 +173,7 @@ func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePr
 		input = &AllocatePrivateVirtualInterfaceInput{}
 	}
 
-	output := &CreatePublicVirtualInterfaceOutput{}
+	output := &UpdateVirtualInterfaceAttributesOutput{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -191,31 +190,31 @@ type AllocatePublicVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the AllocatePublicVirtualInterface API request.
-func (r AllocatePublicVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+func (r AllocatePublicVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+	return r.Request.Data.(*UpdateVirtualInterfaceAttributesOutput), nil
 }
 
 // AllocatePublicVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Provisions a public virtual interface to be owned by a different customer.
+// Provisions a public virtual interface to be owned by the specified AWS account.
 //
 // The owner of a connection calls this function to provision a public virtual
-// interface which will be owned by another AWS customer.
+// interface to be owned by the specified AWS account.
 //
-// Virtual interfaces created using this function must be confirmed by the virtual
-// interface owner by calling ConfirmPublicVirtualInterface. Until this step
-// has been completed, the virtual interface will be in 'Confirming' state,
-// and will not be available for handling traffic.
+// Virtual interfaces created using this function must be confirmed by the owner
+// using ConfirmPublicVirtualInterface. Until this step has been completed,
+// the virtual interface is in the confirming state and is not available to
+// handle traffic.
 //
-// When creating an IPv6 public virtual interface (addressFamily is 'ipv6'),
-// the customer and amazon address fields should be left blank to use auto-assigned
-// IPv6 space. Custom IPv6 Addresses are currently not supported.
+// When creating an IPv6 public virtual interface, omit the Amazon address and
+// customer address. IPv6 addresses are automatically assigned from the Amazon
+// pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
 //
 //    // Example sending a request using the AllocatePublicVirtualInterfaceRequest method.
 //    req := client.AllocatePublicVirtualInterfaceRequest(params)
@@ -236,7 +235,7 @@ func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePub
 		input = &AllocatePublicVirtualInterfaceInput{}
 	}
 
-	output := &CreatePublicVirtualInterfaceOutput{}
+	output := &UpdateVirtualInterfaceAttributesOutput{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -267,12 +266,12 @@ func (r AssociateConnectionWithLagRequest) Send() (*DisassociateConnectionFromLa
 //
 // Associates an existing connection with a link aggregation group (LAG). The
 // connection is interrupted and re-established as a member of the LAG (connectivity
-// to AWS will be interrupted). The connection must be hosted on the same AWS
-// Direct Connect endpoint as the LAG, and its bandwidth must match the bandwidth
-// for the LAG. You can reassociate a connection that's currently associated
-// with a different LAG; however, if removing the connection will cause the
-// original LAG to fall below its setting for minimum number of operational
-// connections, the request fails.
+// to AWS is interrupted). The connection must be hosted on the same AWS Direct
+// Connect endpoint as the LAG, and its bandwidth must match the bandwidth for
+// the LAG. You can re-associate a connection that's currently associated with
+// a different LAG; however, if removing the connection would cause the original
+// LAG to fall below its setting for minimum number of operational connections,
+// the request fails.
 //
 // Any virtual interfaces that are directly associated with the connection are
 // automatically re-associated with the LAG. If the connection was originally
@@ -337,7 +336,7 @@ func (r AssociateHostedConnectionRequest) Send() (*DisassociateConnectionFromLag
 // fails. This action temporarily interrupts the hosted connection's connectivity
 // to AWS as it is being migrated.
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the AssociateHostedConnectionRequest method.
 //    req := client.AssociateHostedConnectionRequest(params)
@@ -375,13 +374,13 @@ type AssociateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the AssociateVirtualInterface API request.
-func (r AssociateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+func (r AssociateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+	return r.Request.Data.(*UpdateVirtualInterfaceAttributesOutput), nil
 }
 
 // AssociateVirtualInterfaceRequest returns a request value for making API operation for
@@ -397,11 +396,10 @@ func (r AssociateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceO
 // with a LAG; hosted connections must be migrated along with their virtual
 // interfaces using AssociateHostedConnection.
 //
-// In order to reassociate a virtual interface to a new connection or LAG, the
-// requester must own either the virtual interface itself or the connection
-// to which the virtual interface is currently associated. Additionally, the
-// requester must own the connection or LAG to which the virtual interface will
-// be newly associated.
+// To reassociate a virtual interface to a new connection or LAG, the requester
+// must own either the virtual interface itself or the connection to which the
+// virtual interface is currently associated. Additionally, the requester must
+// own the connection or LAG for the association.
 //
 //    // Example sending a request using the AssociateVirtualInterfaceRequest method.
 //    req := client.AssociateVirtualInterfaceRequest(params)
@@ -422,7 +420,7 @@ func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtual
 		input = &AssociateVirtualInterfaceInput{}
 	}
 
-	output := &CreatePublicVirtualInterfaceOutput{}
+	output := &UpdateVirtualInterfaceAttributesOutput{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -451,11 +449,11 @@ func (r ConfirmConnectionRequest) Send() (*ConfirmConnectionOutput, error) {
 // ConfirmConnectionRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Confirm the creation of a hosted connection on an interconnect.
+// Confirms the creation of the specified hosted connection on an interconnect.
 //
-// Upon creation, the hosted connection is initially in the 'Ordering' state,
-// and will remain in this state until the owner calls ConfirmConnection to
-// confirm creation of the hosted connection.
+// Upon creation, the hosted connection is initially in the Ordering state,
+// and remains in this state until the owner confirms creation of the hosted
+// connection.
 //
 //    // Example sending a request using the ConfirmConnectionRequest method.
 //    req := client.ConfirmConnectionRequest(params)
@@ -505,11 +503,11 @@ func (r ConfirmPrivateVirtualInterfaceRequest) Send() (*ConfirmPrivateVirtualInt
 // ConfirmPrivateVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Accept ownership of a private virtual interface created by another customer.
+// Accepts ownership of a private virtual interface created by another AWS account.
 //
-// After the virtual interface owner calls this function, the virtual interface
-// will be created and attached to the given virtual private gateway or direct
-// connect gateway, and will be available for handling traffic.
+// After the virtual interface owner makes this call, the virtual interface
+// is created and attached to the specified virtual private gateway or Direct
+// Connect gateway, and is made available to handle traffic.
 //
 //    // Example sending a request using the ConfirmPrivateVirtualInterfaceRequest method.
 //    req := client.ConfirmPrivateVirtualInterfaceRequest(params)
@@ -559,10 +557,10 @@ func (r ConfirmPublicVirtualInterfaceRequest) Send() (*ConfirmPublicVirtualInter
 // ConfirmPublicVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Accept ownership of a public virtual interface created by another customer.
+// Accepts ownership of a public virtual interface created by another AWS account.
 //
-// After the virtual interface owner calls this function, the specified virtual
-// interface will be created and made available for handling traffic.
+// After the virtual interface owner makes this call, the specified virtual
+// interface is created and made available to handle traffic.
 //
 //    // Example sending a request using the ConfirmPublicVirtualInterfaceRequest method.
 //    req := client.ConfirmPublicVirtualInterfaceRequest(params)
@@ -612,16 +610,18 @@ func (r CreateBGPPeerRequest) Send() (*CreateBGPPeerOutput, error) {
 // CreateBGPPeerRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new BGP peer on a specified virtual interface. The BGP peer cannot
-// be in the same address family (IPv4/IPv6) of an existing BGP peer on the
-// virtual interface.
+// Creates a BGP peer on the specified virtual interface.
 //
-// You must create a BGP peer for the corresponding address family in order
-// to access AWS resources that also use that address family.
+// You must create a BGP peer for the corresponding address family (IPv4/IPv6)
+// in order to access AWS resources that also use that address family.
 //
-// When creating a IPv6 BGP peer, the Amazon address and customer address fields
-// must be left blank. IPv6 addresses are automatically assigned from Amazon's
-// pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
+// If logical redundancy is not supported by the connection, interconnect, or
+// LAG, the BGP peer cannot be in the same address family as an existing BGP
+// peer on the virtual interface.
+//
+// When creating a IPv6 BGP peer, omit the Amazon address and customer address.
+// IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses;
+// you cannot specify custom IPv6 addresses.
 //
 // For a public virtual interface, the Autonomous System Number (ASN) must be
 // private or already whitelisted for the virtual interface.
@@ -674,24 +674,20 @@ func (r CreateConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, e
 // CreateConnectionRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new connection between the customer network and a specific AWS
-// Direct Connect location.
+// Creates a connection between a customer network and a specific AWS Direct
+// Connect location.
 //
 // A connection links your internal network to an AWS Direct Connect location
-// over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic cable. One end
-// of the cable is connected to your router, the other to an AWS Direct Connect
-// router. An AWS Direct Connect location provides access to Amazon Web Services
-// in the region it is associated with. You can establish connections with AWS
-// Direct Connect locations in multiple regions, but a connection in one region
-// does not provide connectivity to other regions.
+// over a standard Ethernet fiber-optic cable. One end of the cable is connected
+// to your router, the other to an AWS Direct Connect router.
 //
-// To find the locations for your region, use DescribeLocations.
+// To find the locations for your Region, use DescribeLocations.
 //
 // You can automatically add the new connection to a link aggregation group
 // (LAG) by specifying a LAG ID in the request. This ensures that the new connection
 // is allocated on the same AWS Direct Connect endpoint that hosts the specified
 // LAG. If there are no available ports on the endpoint, the request fails and
-// no connection will be created.
+// no connection is created.
 //
 //    // Example sending a request using the CreateConnectionRequest method.
 //    req := client.CreateConnectionRequest(params)
@@ -741,14 +737,13 @@ func (r CreateDirectConnectGatewayRequest) Send() (*CreateDirectConnectGatewayOu
 // CreateDirectConnectGatewayRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new direct connect gateway. A direct connect gateway is an intermediate
-// object that enables you to connect a set of virtual interfaces and virtual
-// private gateways. direct connect gateways are global and visible in any AWS
-// region after they are created. The virtual interfaces and virtual private
-// gateways that are connected through a direct connect gateway can be in different
-// regions. This enables you to connect to a VPC in any region, regardless of
-// the region in which the virtual interfaces are located, and pass traffic
-// between them.
+// Creates a Direct Connect gateway, which is an intermediate object that enables
+// you to connect a set of virtual interfaces and virtual private gateways.
+// A Direct Connect gateway is global and visible in any AWS Region after it
+// is created. The virtual interfaces and virtual private gateways that are
+// connected through a Direct Connect gateway can be in different AWS Regions.
+// This enables you to connect to a VPC in any Region, regardless of the Region
+// in which the virtual interfaces are located, and pass traffic between them.
 //
 //    // Example sending a request using the CreateDirectConnectGatewayRequest method.
 //    req := client.CreateDirectConnectGatewayRequest(params)
@@ -798,9 +793,9 @@ func (r CreateDirectConnectGatewayAssociationRequest) Send() (*CreateDirectConne
 // CreateDirectConnectGatewayAssociationRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates an association between a direct connect gateway and a virtual private
-// gateway (VGW). The VGW must be attached to a VPC and must not be associated
-// with another direct connect gateway.
+// Creates an association between a Direct Connect gateway and a virtual private
+// gateway. The virtual private gateway must be attached to a VPC and must not
+// be associated with another Direct Connect gateway.
 //
 //    // Example sending a request using the CreateDirectConnectGatewayAssociationRequest method.
 //    req := client.CreateDirectConnectGatewayAssociationRequest(params)
@@ -850,30 +845,29 @@ func (r CreateInterconnectRequest) Send() (*CreateInterconnectOutput, error) {
 // CreateInterconnectRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new interconnect between a AWS Direct Connect partner's network
-// and a specific AWS Direct Connect location.
+// Creates an interconnect between an AWS Direct Connect partner's network and
+// a specific AWS Direct Connect location.
 //
 // An interconnect is a connection which is capable of hosting other connections.
-// The AWS Direct Connect partner can use an interconnect to provide sub-1Gbps
-// AWS Direct Connect service to tier 2 customers who do not have their own
-// connections. Like a standard connection, an interconnect links the AWS Direct
-// Connect partner's network to an AWS Direct Connect location over a standard
-// 1 Gbps or 10 Gbps Ethernet fiber-optic cable. One end is connected to the
-// partner's router, the other to an AWS Direct Connect router.
+// The partner can use an interconnect to provide sub-1Gbps AWS Direct Connect
+// service to tier 2 customers who do not have their own connections. Like a
+// standard connection, an interconnect links the partner's network to an AWS
+// Direct Connect location over a standard Ethernet fiber-optic cable. One end
+// is connected to the partner's router, the other to an AWS Direct Connect
+// router.
 //
 // You can automatically add the new interconnect to a link aggregation group
 // (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect
 // is allocated on the same AWS Direct Connect endpoint that hosts the specified
 // LAG. If there are no available ports on the endpoint, the request fails and
-// no interconnect will be created.
+// no interconnect is created.
 //
 // For each end customer, the AWS Direct Connect partner provisions a connection
 // on their interconnect by calling AllocateConnectionOnInterconnect. The end
 // customer can then connect to AWS resources by creating a virtual interface
-// on their connection, using the VLAN assigned to them by the AWS Direct Connect
-// partner.
+// on their connection, using the VLAN assigned to them by the partner.
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the CreateInterconnectRequest method.
 //    req := client.CreateInterconnectRequest(params)
@@ -923,14 +917,14 @@ func (r CreateLagRequest) Send() (*UpdateLagOutput, error) {
 // CreateLagRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new link aggregation group (LAG) with the specified number of bundled
+// Creates a link aggregation group (LAG) with the specified number of bundled
 // physical connections between the customer network and a specific AWS Direct
 // Connect location. A LAG is a logical interface that uses the Link Aggregation
-// Control Protocol (LACP) to aggregate multiple 1 gigabit or 10 gigabit interfaces,
-// allowing you to treat them as a single interface.
+// Control Protocol (LACP) to aggregate multiple interfaces, enabling you to
+// treat them as a single interface.
 //
-// All connections in a LAG must use the same bandwidth (for example, 10 Gbps),
-// and must terminate at the same AWS Direct Connect endpoint.
+// All connections in a LAG must use the same bandwidth and must terminate at
+// the same AWS Direct Connect endpoint.
 //
 // You can have up to 10 connections per LAG. Regardless of this limit, if you
 // request more connections for the LAG than AWS Direct Connect can allocate
@@ -985,21 +979,25 @@ type CreatePrivateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the CreatePrivateVirtualInterface API request.
-func (r CreatePrivateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+func (r CreatePrivateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+	return r.Request.Data.(*UpdateVirtualInterfaceAttributesOutput), nil
 }
 
 // CreatePrivateVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new private virtual interface. A virtual interface is the VLAN
-// that transports AWS Direct Connect traffic. A private virtual interface supports
-// sending traffic to a single virtual private cloud (VPC).
+// Creates a private virtual interface. A virtual interface is the VLAN that
+// transports AWS Direct Connect traffic. A private virtual interface can be
+// connected to either a Direct Connect gateway or a Virtual Private Gateway
+// (VGW). Connecting the private virtual interface to a Direct Connect gateway
+// enables the possibility for connecting to multiple VPCs, including VPCs in
+// different AWS Regions. Connecting the private virtual interface to a VGW
+// only provides access to a single VPC within the same Region.
 //
 //    // Example sending a request using the CreatePrivateVirtualInterfaceRequest method.
 //    req := client.CreatePrivateVirtualInterfaceRequest(params)
@@ -1020,7 +1018,7 @@ func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivat
 		input = &CreatePrivateVirtualInterfaceInput{}
 	}
 
-	output := &CreatePublicVirtualInterfaceOutput{}
+	output := &UpdateVirtualInterfaceAttributesOutput{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -1037,26 +1035,25 @@ type CreatePublicVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the CreatePublicVirtualInterface API request.
-func (r CreatePublicVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+func (r CreatePublicVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+	return r.Request.Data.(*UpdateVirtualInterfaceAttributesOutput), nil
 }
 
 // CreatePublicVirtualInterfaceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Creates a new public virtual interface. A virtual interface is the VLAN that
+// Creates a public virtual interface. A virtual interface is the VLAN that
 // transports AWS Direct Connect traffic. A public virtual interface supports
-// sending traffic to public services of AWS such as Amazon Simple Storage Service
-// (Amazon S3).
+// sending traffic to public services of AWS such as Amazon S3.
 //
-// When creating an IPv6 public virtual interface (addressFamily is 'ipv6'),
-// the customer and amazon address fields should be left blank to use auto-assigned
-// IPv6 space. Custom IPv6 Addresses are currently not supported.
+// When creating an IPv6 public virtual interface (addressFamily is ipv6), leave
+// the customer and amazon address fields blank to use auto-assigned IPv6 space.
+// Custom IPv6 addresses are not supported.
 //
 //    // Example sending a request using the CreatePublicVirtualInterfaceRequest method.
 //    req := client.CreatePublicVirtualInterfaceRequest(params)
@@ -1077,7 +1074,7 @@ func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicV
 		input = &CreatePublicVirtualInterfaceInput{}
 	}
 
-	output := &CreatePublicVirtualInterfaceOutput{}
+	output := &UpdateVirtualInterfaceAttributesOutput{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -1106,9 +1103,10 @@ func (r DeleteBGPPeerRequest) Send() (*DeleteBGPPeerOutput, error) {
 // DeleteBGPPeerRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deletes a BGP peer on the specified virtual interface that matches the specified
-// customer address and ASN. You cannot delete the last BGP peer from a virtual
-// interface.
+// Deletes the specified BGP peer on the specified virtual interface with the
+// specified customer address and ASN.
+//
+// You cannot delete the last BGP peer from a virtual interface.
 //
 //    // Example sending a request using the DeleteBGPPeerRequest method.
 //    req := client.DeleteBGPPeerRequest(params)
@@ -1158,12 +1156,12 @@ func (r DeleteConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, e
 // DeleteConnectionRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deletes the connection.
+// Deletes the specified connection.
 //
 // Deleting a connection only stops the AWS Direct Connect port hour and data
-// transfer charges. You need to cancel separately with the providers any services
-// or charges for cross-connects or network circuits that connect you to the
-// AWS Direct Connect location.
+// transfer charges. If you are partnering with any third parties to connect
+// with the AWS Direct Connect location, you must cancel your service with them
+// separately.
 //
 //    // Example sending a request using the DeleteConnectionRequest method.
 //    req := client.DeleteConnectionRequest(params)
@@ -1213,9 +1211,10 @@ func (r DeleteDirectConnectGatewayRequest) Send() (*DeleteDirectConnectGatewayOu
 // DeleteDirectConnectGatewayRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deletes a direct connect gateway. You must first delete all virtual interfaces
-// that are attached to the direct connect gateway and disassociate all virtual
-// private gateways that are associated with the direct connect gateway.
+// Deletes the specified Direct Connect gateway. You must first delete all virtual
+// interfaces that are attached to the Direct Connect gateway and disassociate
+// all virtual private gateways that are associated with the Direct Connect
+// gateway.
 //
 //    // Example sending a request using the DeleteDirectConnectGatewayRequest method.
 //    req := client.DeleteDirectConnectGatewayRequest(params)
@@ -1265,8 +1264,8 @@ func (r DeleteDirectConnectGatewayAssociationRequest) Send() (*DeleteDirectConne
 // DeleteDirectConnectGatewayAssociationRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deletes the association between a direct connect gateway and a virtual private
-// gateway.
+// Deletes the association between the specified Direct Connect gateway and
+// virtual private gateway.
 //
 //    // Example sending a request using the DeleteDirectConnectGatewayAssociationRequest method.
 //    req := client.DeleteDirectConnectGatewayAssociationRequest(params)
@@ -1318,7 +1317,7 @@ func (r DeleteInterconnectRequest) Send() (*DeleteInterconnectOutput, error) {
 //
 // Deletes the specified interconnect.
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the DeleteInterconnectRequest method.
 //    req := client.DeleteInterconnectRequest(params)
@@ -1368,8 +1367,8 @@ func (r DeleteLagRequest) Send() (*UpdateLagOutput, error) {
 // DeleteLagRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deletes a link aggregation group (LAG). You cannot delete a LAG if it has
-// active virtual interfaces or hosted connections.
+// Deletes the specified link aggregation group (LAG). You cannot delete a LAG
+// if it has active virtual interfaces or hosted connections.
 //
 //    // Example sending a request using the DeleteLagRequest method.
 //    req := client.DeleteLagRequest(params)
@@ -1469,15 +1468,15 @@ func (r DescribeConnectionLoaRequest) Send() (*DescribeConnectionLoaOutput, erro
 // DescribeConnectionLoaRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deprecated in favor of DescribeLoa.
+// Deprecated. Use DescribeLoa instead.
 //
-// Returns the LOA-CFA for a Connection.
+// Gets the LOA-CFA for a connection.
 //
 // The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
 // a document that your APN partner or service provider uses when establishing
 // your cross connect to AWS at the colocation facility. For more information,
 // see Requesting Cross Connects at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the AWS Direct Connect user guide.
+// in the AWS Direct Connect User Guide.
 //
 //    // Example sending a request using the DescribeConnectionLoaRequest method.
 //    req := client.DescribeConnectionLoaRequest(params)
@@ -1530,9 +1529,7 @@ func (r DescribeConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, er
 // DescribeConnectionsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Displays all connections in this region.
-//
-// If a connection ID is provided, the call returns only that particular connection.
+// Displays the specified connection or all connections in this Region.
 //
 //    // Example sending a request using the DescribeConnectionsRequest method.
 //    req := client.DescribeConnectionsRequest(params)
@@ -1582,11 +1579,11 @@ func (r DescribeConnectionsOnInterconnectRequest) Send() (*DescribeHostedConnect
 // DescribeConnectionsOnInterconnectRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deprecated in favor of DescribeHostedConnections.
+// Deprecated. Use DescribeHostedConnections instead.
 //
-// Returns a list of connections that have been provisioned on the given interconnect.
+// Lists the connections that have been provisioned on the specified interconnect.
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the DescribeConnectionsOnInterconnectRequest method.
 //    req := client.DescribeConnectionsOnInterconnectRequest(params)
@@ -1639,13 +1636,14 @@ func (r DescribeDirectConnectGatewayAssociationsRequest) Send() (*DescribeDirect
 // DescribeDirectConnectGatewayAssociationsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns a list of all direct connect gateway and virtual private gateway
-// (VGW) associations. Either a direct connect gateway ID or a VGW ID must be
-// provided in the request. If a direct connect gateway ID is provided, the
-// response returns all VGWs associated with the direct connect gateway. If
-// a VGW ID is provided, the response returns all direct connect gateways associated
-// with the VGW. If both are provided, the response only returns the association
-// that matches both the direct connect gateway and the VGW.
+// Lists the associations between your Direct Connect gateways and virtual private
+// gateways. You must specify a Direct Connect gateway, a virtual private gateway,
+// or both. If you specify a Direct Connect gateway, the response contains all
+// virtual private gateways associated with the Direct Connect gateway. If you
+// specify a virtual private gateway, the response contains all Direct Connect
+// gateways associated with the virtual private gateway. If you specify both,
+// the response contains the association between the Direct Connect gateway
+// and the virtual private gateway.
 //
 //    // Example sending a request using the DescribeDirectConnectGatewayAssociationsRequest method.
 //    req := client.DescribeDirectConnectGatewayAssociationsRequest(params)
@@ -1695,13 +1693,13 @@ func (r DescribeDirectConnectGatewayAttachmentsRequest) Send() (*DescribeDirectC
 // DescribeDirectConnectGatewayAttachmentsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns a list of all direct connect gateway and virtual interface (VIF)
-// attachments. Either a direct connect gateway ID or a VIF ID must be provided
-// in the request. If a direct connect gateway ID is provided, the response
-// returns all VIFs attached to the direct connect gateway. If a VIF ID is provided,
-// the response returns all direct connect gateways attached to the VIF. If
-// both are provided, the response only returns the attachment that matches
-// both the direct connect gateway and the VIF.
+// Lists the attachments between your Direct Connect gateways and virtual interfaces.
+// You must specify a Direct Connect gateway, a virtual interface, or both.
+// If you specify a Direct Connect gateway, the response contains all virtual
+// interfaces attached to the Direct Connect gateway. If you specify a virtual
+// interface, the response contains all Direct Connect gateways attached to
+// the virtual interface. If you specify both, the response contains the attachment
+// between the Direct Connect gateway and the virtual interface.
 //
 //    // Example sending a request using the DescribeDirectConnectGatewayAttachmentsRequest method.
 //    req := client.DescribeDirectConnectGatewayAttachmentsRequest(params)
@@ -1751,11 +1749,8 @@ func (r DescribeDirectConnectGatewaysRequest) Send() (*DescribeDirectConnectGate
 // DescribeDirectConnectGatewaysRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns a list of direct connect gateways in your account. Deleted direct
-// connect gateways are not returned. You can provide a direct connect gateway
-// ID in the request to return information about the specific direct connect
-// gateway only. Otherwise, if a direct connect gateway ID is not provided,
-// information about all of your direct connect gateways is returned.
+// Lists all your Direct Connect gateways or only the specified Direct Connect
+// gateway. Deleted Direct Connect gateways are not returned.
 //
 //    // Example sending a request using the DescribeDirectConnectGatewaysRequest method.
 //    req := client.DescribeDirectConnectGatewaysRequest(params)
@@ -1805,10 +1800,10 @@ func (r DescribeHostedConnectionsRequest) Send() (*DescribeHostedConnectionsOutp
 // DescribeHostedConnectionsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns a list of hosted connections that have been provisioned on the given
+// Lists the hosted connections that have been provisioned on the specified
 // interconnect or link aggregation group (LAG).
 //
-// This is intended for use by AWS Direct Connect partners only.
+// Intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the DescribeHostedConnectionsRequest method.
 //    req := client.DescribeHostedConnectionsRequest(params)
@@ -1858,15 +1853,15 @@ func (r DescribeInterconnectLoaRequest) Send() (*DescribeInterconnectLoaOutput, 
 // DescribeInterconnectLoaRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Deprecated in favor of DescribeLoa.
+// Deprecated. Use DescribeLoa instead.
 //
-// Returns the LOA-CFA for an Interconnect.
+// Gets the LOA-CFA for the specified interconnect.
 //
 // The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
 // a document that is used when establishing your cross connect to AWS at the
 // colocation facility. For more information, see Requesting Cross Connects
 // at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the AWS Direct Connect user guide.
+// in the AWS Direct Connect User Guide.
 //
 //    // Example sending a request using the DescribeInterconnectLoaRequest method.
 //    req := client.DescribeInterconnectLoaRequest(params)
@@ -1919,9 +1914,7 @@ func (r DescribeInterconnectsRequest) Send() (*DescribeInterconnectsOutput, erro
 // DescribeInterconnectsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns a list of interconnects owned by the AWS account.
-//
-// If an interconnect ID is provided, it will only return this particular interconnect.
+// Lists the interconnects owned by the AWS account or only the specified interconnect.
 //
 //    // Example sending a request using the DescribeInterconnectsRequest method.
 //    req := client.DescribeInterconnectsRequest(params)
@@ -1971,9 +1964,7 @@ func (r DescribeLagsRequest) Send() (*DescribeLagsOutput, error) {
 // DescribeLagsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Describes the link aggregation groups (LAGs) in your account.
-//
-// If a LAG ID is provided, only information about the specified LAG is returned.
+// Describes all your link aggregation groups (LAG) or the specified LAG.
 //
 //    // Example sending a request using the DescribeLagsRequest method.
 //    req := client.DescribeLagsRequest(params)
@@ -2023,14 +2014,14 @@ func (r DescribeLoaRequest) Send() (*DescribeLoaOutput, error) {
 // DescribeLoaRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns the LOA-CFA for a connection, interconnect, or link aggregation group
+// Gets the LOA-CFA for a connection, interconnect, or link aggregation group
 // (LAG).
 //
 // The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
 // a document that is used when establishing your cross connect to AWS at the
 // colocation facility. For more information, see Requesting Cross Connects
 // at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the AWS Direct Connect user guide.
+// in the AWS Direct Connect User Guide.
 //
 //    // Example sending a request using the DescribeLoaRequest method.
 //    req := client.DescribeLoaRequest(params)
@@ -2080,9 +2071,8 @@ func (r DescribeLocationsRequest) Send() (*DescribeLocationsOutput, error) {
 // DescribeLocationsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns the list of AWS Direct Connect locations in the current AWS region.
-// These are the locations that may be selected when calling CreateConnection
-// or CreateInterconnect.
+// Lists the AWS Direct Connect locations in the current AWS Region. These are
+// the locations that can be selected when calling CreateConnection or CreateInterconnect.
 //
 //    // Example sending a request using the DescribeLocationsRequest method.
 //    req := client.DescribeLocationsRequest(params)
@@ -2132,7 +2122,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 // DescribeTagsRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Describes the tags associated with the specified Direct Connect resources.
+// Describes the tags associated with the specified AWS Direct Connect resources.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
@@ -2182,13 +2172,10 @@ func (r DescribeVirtualGatewaysRequest) Send() (*DescribeVirtualGatewaysOutput, 
 // DescribeVirtualGatewaysRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Returns a list of virtual private gateways owned by the AWS account.
+// Lists the virtual private gateways owned by the AWS account.
 //
 // You can create one or more AWS Direct Connect private virtual interfaces
-// linking to a virtual private gateway. A virtual private gateway can be managed
-// via Amazon Virtual Private Cloud (VPC) console or the EC2 CreateVpnGateway
-// (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html)
-// action.
+// linked to a virtual private gateway.
 //
 //    // Example sending a request using the DescribeVirtualGatewaysRequest method.
 //    req := client.DescribeVirtualGatewaysRequest(params)
@@ -2245,7 +2232,7 @@ func (r DescribeVirtualInterfacesRequest) Send() (*DescribeVirtualInterfacesOutp
 // a single virtual interface is returned.
 //
 // A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
-// location and the customer.
+// location and the customer network.
 //
 //    // Example sending a request using the DescribeVirtualInterfacesRequest method.
 //    req := client.DescribeVirtualInterfacesRequest(params)
@@ -2302,7 +2289,7 @@ func (r DisassociateConnectionFromLagRequest) Send() (*DisassociateConnectionFro
 // remain associated with the LAG. A disassociated connection owned by an AWS
 // Direct Connect partner is automatically converted to an interconnect.
 //
-// If disassociating the connection will cause the LAG to fall below its setting
+// If disassociating the connection would cause the LAG to fall below its setting
 // for minimum number of operational connections, the request fails, except
 // when it's the last member of the LAG. If all connections are disassociated,
 // the LAG continues to exist as an empty LAG with no physical connections.
@@ -2355,12 +2342,11 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 // TagResourceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Adds the specified tags to the specified Direct Connect resource. Each Direct
-// Connect resource can have a maximum of 50 tags.
+// Adds the specified tags to the specified AWS Direct Connect resource. Each
+// resource can have a maximum of 50 tags.
 //
 // Each tag consists of a key and an optional value. If a tag with the same
-// key is already associated with the Direct Connect resource, this action updates
-// its value.
+// key is already associated with the resource, this action updates its value.
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
@@ -2410,7 +2396,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 // UntagResourceRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Removes one or more tags from the specified Direct Connect resource.
+// Removes one or more tags from the specified AWS Direct Connect resource.
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
@@ -2460,7 +2446,7 @@ func (r UpdateLagRequest) Send() (*UpdateLagOutput, error) {
 // UpdateLagRequest returns a request value for making API operation for
 // AWS Direct Connect.
 //
-// Updates the attributes of a link aggregation group (LAG).
+// Updates the attributes of the specified link aggregation group (LAG).
 //
 // You can update the following attributes:
 //
@@ -2470,11 +2456,11 @@ func (r UpdateLagRequest) Send() (*UpdateLagOutput, error) {
 //    for the LAG itself to be operational.
 //
 // When you create a LAG, the default value for the minimum number of operational
-// connections is zero (0). If you update this value, and the number of operational
-// connections falls below the specified value, the LAG will automatically go
-// down to avoid overutilization of the remaining connections. Adjusting this
-// value should be done with care as it could force the LAG down if the value
-// is set higher than the current number of operational connections.
+// connections is zero (0). If you update this value and the number of operational
+// connections falls below the specified value, the LAG automatically goes down
+// to avoid over-utilization of the remaining connections. Adjust this value
+// with care, as it could force the LAG down if it is set higher than the current
+// number of operational connections.
 //
 //    // Example sending a request using the UpdateLagRequest method.
 //    req := client.UpdateLagRequest(params)
@@ -2502,54 +2488,91 @@ func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest
 	return UpdateLagRequest{Request: req, Input: input, Copy: c.UpdateLagRequest}
 }
 
-// Container for the parameters to the AllocateConnectionOnInterconnect operation.
+const opUpdateVirtualInterfaceAttributes = "UpdateVirtualInterfaceAttributes"
+
+// UpdateVirtualInterfaceAttributesRequest is a API request type for the UpdateVirtualInterfaceAttributes API operation.
+type UpdateVirtualInterfaceAttributesRequest struct {
+	*aws.Request
+	Input *UpdateVirtualInterfaceAttributesInput
+	Copy  func(*UpdateVirtualInterfaceAttributesInput) UpdateVirtualInterfaceAttributesRequest
+}
+
+// Send marshals and sends the UpdateVirtualInterfaceAttributes API request.
+func (r UpdateVirtualInterfaceAttributesRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVirtualInterfaceAttributesOutput), nil
+}
+
+// UpdateVirtualInterfaceAttributesRequest returns a request value for making API operation for
+// AWS Direct Connect.
+//
+// Updates the specified attributes of the specified virtual private interface.
+//
+// Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an
+// update to the underlying physical connection if it wasn't updated to support
+// jumbo frames. Updating the connection disrupts network connectivity for all
+// virtual interfaces associated with the connection for up to 30 seconds. To
+// check whether your connection supports jumbo frames, call DescribeConnections.
+// To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
+//
+//    // Example sending a request using the UpdateVirtualInterfaceAttributesRequest method.
+//    req := client.UpdateVirtualInterfaceAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributes
+func (c *DirectConnect) UpdateVirtualInterfaceAttributesRequest(input *UpdateVirtualInterfaceAttributesInput) UpdateVirtualInterfaceAttributesRequest {
+	op := &aws.Operation{
+		Name:       opUpdateVirtualInterfaceAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateVirtualInterfaceAttributesInput{}
+	}
+
+	output := &UpdateVirtualInterfaceAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateVirtualInterfaceAttributesRequest{Request: req, Input: input, Copy: c.UpdateVirtualInterfaceAttributesRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnectRequest
 type AllocateConnectionOnInterconnectInput struct {
 	_ struct{} `type:"structure"`
 
-	// Bandwidth of the connection.
-	//
-	// Example: "500Mbps"
-	//
-	// Default: None
-	//
-	// Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps
+	// The bandwidth of the connection, in Mbps. The possible values are 50Mbps,
+	// 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
 	//
 	// Bandwidth is a required field
 	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
 
-	// Name of the provisioned connection.
-	//
-	// Example: "500M Connection to AWS"
-	//
-	// Default: None
+	// The name of the provisioned connection.
 	//
 	// ConnectionName is a required field
 	ConnectionName *string `locationName:"connectionName" type:"string" required:"true"`
 
-	// ID of the interconnect on which the connection will be provisioned.
-	//
-	// Example: dxcon-456abc78
-	//
-	// Default: None
+	// The ID of the interconnect on which the connection will be provisioned. For
+	// example, dxcon-456abc78.
 	//
 	// InterconnectId is a required field
 	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
 
-	// Numeric account Id of the customer for whom the connection will be provisioned.
-	//
-	// Example: 123443215678
-	//
-	// Default: None
+	// The ID of the AWS account of the customer for whom the connection will be
+	// provisioned.
 	//
 	// OwnerAccount is a required field
 	OwnerAccount *string `locationName:"ownerAccount" type:"string" required:"true"`
 
 	// The dedicated VLAN provisioned to the connection.
-	//
-	// Example: 101
-	//
-	// Default: None
 	//
 	// Vlan is a required field
 	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
@@ -2595,54 +2618,32 @@ func (s *AllocateConnectionOnInterconnectInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to theHostedConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnectionRequest
 type AllocateHostedConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The bandwidth of the connection.
-	//
-	// Example: 500Mbps
-	//
-	// Default: None
-	//
-	// Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps
+	// The bandwidth of the hosted connection, in Mbps. The possible values are
+	// 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
 	//
 	// Bandwidth is a required field
 	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
 
-	// The ID of the interconnect or LAG on which the connection will be provisioned.
-	//
-	// Example: dxcon-456abc78 or dxlag-abc123
-	//
-	// Default: None
+	// The ID of the interconnect or LAG.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// The name of the provisioned connection.
-	//
-	// Example: "500M Connection to AWS"
-	//
-	// Default: None
+	// The name of the hosted connection.
 	//
 	// ConnectionName is a required field
 	ConnectionName *string `locationName:"connectionName" type:"string" required:"true"`
 
-	// The numeric account ID of the customer for whom the connection will be provisioned.
-	//
-	// Example: 123443215678
-	//
-	// Default: None
+	// The ID of the AWS account ID of the customer for the connection.
 	//
 	// OwnerAccount is a required field
 	OwnerAccount *string `locationName:"ownerAccount" type:"string" required:"true"`
 
 	// The dedicated VLAN provisioned to the hosted connection.
-	//
-	// Example: 101
-	//
-	// Default: None
 	//
 	// Vlan is a required field
 	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
@@ -2688,28 +2689,21 @@ func (s *AllocateHostedConnectionInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the AllocatePrivateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterfaceRequest
 type AllocatePrivateVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The connection ID on which the private virtual interface is provisioned.
-	//
-	// Default: None
+	// The ID of the connection on which the private virtual interface is provisioned.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// Detailed information for the private virtual interface to be provisioned.
-	//
-	// Default: None
+	// Information about the private virtual interface.
 	//
 	// NewPrivateVirtualInterfaceAllocation is a required field
 	NewPrivateVirtualInterfaceAllocation *NewPrivateVirtualInterfaceAllocation `locationName:"newPrivateVirtualInterfaceAllocation" type:"structure" required:"true"`
 
-	// The AWS account that will own the new private virtual interface.
-	//
-	// Default: None
+	// The ID of the AWS account that owns the virtual private interface.
 	//
 	// OwnerAccount is a required field
 	OwnerAccount *string `locationName:"ownerAccount" type:"string" required:"true"`
@@ -2752,28 +2746,21 @@ func (s *AllocatePrivateVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the AllocatePublicVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterfaceRequest
 type AllocatePublicVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The connection ID on which the public virtual interface is provisioned.
-	//
-	// Default: None
+	// The ID of the connection on which the public virtual interface is provisioned.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// Detailed information for the public virtual interface to be provisioned.
-	//
-	// Default: None
+	// Information about the public virtual interface.
 	//
 	// NewPublicVirtualInterfaceAllocation is a required field
 	NewPublicVirtualInterfaceAllocation *NewPublicVirtualInterfaceAllocation `locationName:"newPublicVirtualInterfaceAllocation" type:"structure" required:"true"`
 
-	// The AWS account that will own the new public virtual interface.
-	//
-	// Default: None
+	// The ID of the AWS account that owns the public virtual interface.
 	//
 	// OwnerAccount is a required field
 	OwnerAccount *string `locationName:"ownerAccount" type:"string" required:"true"`
@@ -2816,25 +2803,16 @@ func (s *AllocatePublicVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the AssociateConnectionWithLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLagRequest
 type AssociateConnectionWithLagInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection.
-	//
-	// Example: dxcon-abc123
-	//
-	// Default: None
+	// The ID of the connection. For example, dxcon-abc123.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// The ID of the LAG with which to associate the connection.
-	//
-	// Example: dxlag-abc123
-	//
-	// Default: None
+	// The ID of the LAG with which to associate the connection. For example, dxlag-abc123.
 	//
 	// LagId is a required field
 	LagId *string `locationName:"lagId" type:"string" required:"true"`
@@ -2868,25 +2846,16 @@ func (s *AssociateConnectionWithLagInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the AssociateHostedConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnectionRequest
 type AssociateHostedConnectionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the hosted connection.
 	//
-	// Example: dxcon-abc123
-	//
-	// Default: None
-	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
 	// The ID of the interconnect or the LAG.
-	//
-	// Example: dxcon-abc123 or dxlag-abc123
-	//
-	// Default: None
 	//
 	// ParentConnectionId is a required field
 	ParentConnectionId *string `locationName:"parentConnectionId" type:"string" required:"true"`
@@ -2920,25 +2889,16 @@ func (s *AssociateHostedConnectionInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the AssociateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterfaceRequest
 type AssociateVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the LAG or connection with which to associate the virtual interface.
-	//
-	// Example: dxlag-abc123 or dxcon-abc123
-	//
-	// Default: None
+	// The ID of the LAG or connection.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
 	//
 	// VirtualInterfaceId is a required field
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
@@ -2972,65 +2932,57 @@ func (s *AssociateVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// A structure containing information about a BGP peer.
+// Information about a BGP peer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer
 type BGPPeer struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
+	// The address family for the BGP peer.
 	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	Asn *int64 `locationName:"asn" type:"integer"`
 
 	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
-	// The Direct Connection endpoint which the BGP peer terminates on.
+	// The Direct Connect endpoint on which the BGP peer terminates.
 	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
-	// The state of the BGP peer.
+	// The ID of the BGP peer.
+	BgpPeerId *string `locationName:"bgpPeerId" type:"string"`
+
+	// The state of the BGP peer. The following are the possible values:
 	//
-	//    * Verifying: The BGP peering addresses or ASN require validation before
-	//    the BGP peer can be created. This state only applies to BGP peers on a
-	//    public virtual interface.
+	//    * verifying: The BGP peering addresses or ASN require validation before
+	//    the BGP peer can be created. This state applies only to public virtual
+	//    interfaces.
 	//
-	//    * Pending: The BGP peer has been created, and is in this state until it
+	//    * pending: The BGP peer is created, and remains in this state until it
 	//    is ready to be established.
 	//
-	//    * Available: The BGP peer can be established.
+	//    * available: The BGP peer is ready to be established.
 	//
-	//    * Deleting: The BGP peer is in the process of being deleted.
+	//    * deleting: The BGP peer is being deleted.
 	//
-	//    * Deleted: The BGP peer has been deleted and cannot be established.
+	//    * deleted: The BGP peer is deleted and cannot be established.
 	BgpPeerState BGPPeerState `locationName:"bgpPeerState" type:"string" enum:"true"`
 
-	// The Up/Down state of the BGP peer.
+	// The status of the BGP peer. The following are the possible values:
 	//
-	//    * Up: The BGP peer is established.
+	//    * up: The BGP peer is established. This state does not indicate the state
+	//    of the routing function. Ensure that you are receiving routes over the
+	//    BGP session.
 	//
-	// A state of up does not indicate the state of the routing function. Ensure
-	//    that you are receiving routes over the BGP session.
+	//    * down: The BGP peer is down.
 	//
-	//    * Down: The BGP peer is down.
+	//    * unknown: The BGP peer status is unknown.
 	BgpStatus BGPStatus `locationName:"bgpStatus" type:"string" enum:"true"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 }
 
@@ -3044,17 +2996,11 @@ func (s BGPPeer) GoString() string {
 	return s.String()
 }
 
-// Container for the parameters to the ConfirmConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionRequest
 type ConfirmConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the hosted connection.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
@@ -3084,35 +3030,34 @@ func (s *ConfirmConnectionInput) Validate() error {
 	return nil
 }
 
-// The response received when ConfirmConnection is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionResponse
 type ConfirmConnectionOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// State of the connection.
+	// The state of the connection. The following are the possible values:
 	//
-	//    * Ordering: The initial state of a hosted connection provisioned on an
+	//    * ordering: The initial state of a hosted connection provisioned on an
 	//    interconnect. The connection stays in the ordering state until the owner
 	//    of the hosted connection confirms or declines the connection order.
 	//
-	//    * Requested: The initial state of a standard connection. The connection
+	//    * requested: The initial state of a standard connection. The connection
 	//    stays in the requested state until the Letter of Authorization (LOA) is
 	//    sent to the customer.
 	//
-	//    * Pending: The connection has been approved, and is being initialized.
+	//    * pending: The connection has been approved and is being initialized.
 	//
-	//    * Available: The network link is up, and the connection is ready for use.
+	//    * available: The network link is up and the connection is ready for use.
 	//
-	//    * Down: The network link is down.
+	//    * down: The network link is down.
 	//
-	//    * Deleting: The connection is in the process of being deleted.
+	//    * deleting: The connection is being deleted.
 	//
-	//    * Deleted: The connection has been deleted.
+	//    * deleted: The connection has been deleted.
 	//
-	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
-	//    'Rejected' state if it is deleted by the end customer.
+	//    * rejected: A hosted connection in the ordering state enters the rejected
+	//    state if it is deleted by the customer.
 	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
 }
 
@@ -3131,33 +3076,17 @@ func (s ConfirmConnectionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the ConfirmPrivateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceRequest
 type ConfirmPrivateVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
-	// ID of the direct connect gateway that will be attached to the virtual interface.
-	//
-	// A direct connect gateway can be managed via the AWS Direct Connect console
-	// or the CreateDirectConnectGateway action.
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// ID of the virtual private gateway that will be attached to the virtual interface.
-	//
-	// A virtual private gateway can be managed via the Amazon Virtual Private Cloud
-	// (VPC) console or the EC2 CreateVpnGateway (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html)
-	// action.
-	//
-	// Default: None
+	// The ID of the virtual private gateway.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
 	//
 	// VirtualInterfaceId is a required field
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
@@ -3187,40 +3116,39 @@ func (s *ConfirmPrivateVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// The response received when ConfirmPrivateVirtualInterface is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceResponse
 type ConfirmPrivateVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// State of the virtual interface.
+	// The state of the virtual interface. The following are the possible values:
 	//
-	//    * Confirming: The creation of the virtual interface is pending confirmation
+	//    * confirming: The creation of the virtual interface is pending confirmation
 	//    from the virtual interface owner. If the owner of the virtual interface
 	//    is different from the owner of the connection on which it is provisioned,
 	//    then the virtual interface will remain in this state until it is confirmed
 	//    by the virtual interface owner.
 	//
-	//    * Verifying: This state only applies to public virtual interfaces. Each
+	//    * verifying: This state only applies to public virtual interfaces. Each
 	//    public virtual interface needs validation before the virtual interface
 	//    can be created.
 	//
-	//    * Pending: A virtual interface is in this state from the time that it
+	//    * pending: A virtual interface is in this state from the time that it
 	//    is created until the virtual interface is ready to forward traffic.
 	//
-	//    * Available: A virtual interface that is able to forward traffic.
+	//    * available: A virtual interface that is able to forward traffic.
 	//
-	//    * Down: A virtual interface that is BGP down.
+	//    * down: A virtual interface that is BGP down.
 	//
-	//    * Deleting: A virtual interface is in this state immediately after calling
+	//    * deleting: A virtual interface is in this state immediately after calling
 	//    DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//    * Deleted: A virtual interface that cannot forward traffic.
+	//    * deleted: A virtual interface that cannot forward traffic.
 	//
-	//    * Rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the 'Confirming' state is deleted
-	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
+	//    * rejected: The virtual interface owner has declined creation of the virtual
+	//    interface. If a virtual interface in the Confirming state is deleted by
+	//    the virtual interface owner, the virtual interface enters the Rejected
 	//    state.
 	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 }
@@ -3240,16 +3168,11 @@ func (s ConfirmPrivateVirtualInterfaceOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// Container for the parameters to the ConfirmPublicVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceRequest
 type ConfirmPublicVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
 	//
 	// VirtualInterfaceId is a required field
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
@@ -3279,40 +3202,39 @@ func (s *ConfirmPublicVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// The response received when ConfirmPublicVirtualInterface is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceResponse
 type ConfirmPublicVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// State of the virtual interface.
+	// The state of the virtual interface. The following are the possible values:
 	//
-	//    * Confirming: The creation of the virtual interface is pending confirmation
+	//    * confirming: The creation of the virtual interface is pending confirmation
 	//    from the virtual interface owner. If the owner of the virtual interface
 	//    is different from the owner of the connection on which it is provisioned,
 	//    then the virtual interface will remain in this state until it is confirmed
 	//    by the virtual interface owner.
 	//
-	//    * Verifying: This state only applies to public virtual interfaces. Each
+	//    * verifying: This state only applies to public virtual interfaces. Each
 	//    public virtual interface needs validation before the virtual interface
 	//    can be created.
 	//
-	//    * Pending: A virtual interface is in this state from the time that it
+	//    * pending: A virtual interface is in this state from the time that it
 	//    is created until the virtual interface is ready to forward traffic.
 	//
-	//    * Available: A virtual interface that is able to forward traffic.
+	//    * available: A virtual interface that is able to forward traffic.
 	//
-	//    * Down: A virtual interface that is BGP down.
+	//    * down: A virtual interface that is BGP down.
 	//
-	//    * Deleting: A virtual interface is in this state immediately after calling
+	//    * deleting: A virtual interface is in this state immediately after calling
 	//    DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//    * Deleted: A virtual interface that cannot forward traffic.
+	//    * deleted: A virtual interface that cannot forward traffic.
 	//
-	//    * Rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the 'Confirming' state is deleted
-	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
+	//    * rejected: The virtual interface owner has declined creation of the virtual
+	//    interface. If a virtual interface in the Confirming state is deleted by
+	//    the virtual interface owner, the virtual interface enters the Rejected
 	//    state.
 	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 }
@@ -3332,21 +3254,14 @@ func (s ConfirmPublicVirtualInterfaceOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// Container for the parameters to the CreateBGPPeer operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerRequest
 type CreateBGPPeerInput struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed information for the BGP peer to be created.
-	//
-	// Default: None
+	// Information about the BGP peer.
 	NewBGPPeer *NewBGPPeer `locationName:"newBGPPeer" type:"structure"`
 
-	// The ID of the virtual interface on which the BGP peer will be provisioned.
-	//
-	// Example: dxvif-456abc78
-	//
-	// Default: None
+	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 }
 
@@ -3360,16 +3275,14 @@ func (s CreateBGPPeerInput) GoString() string {
 	return s.String()
 }
 
-// The response received when CreateBGPPeer is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerResponse
 type CreateBGPPeerOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
-	// location and the customer.
-	VirtualInterface *CreatePublicVirtualInterfaceOutput `locationName:"virtualInterface" type:"structure"`
+	// The virtual interface.
+	VirtualInterface *UpdateVirtualInterfaceAttributesOutput `locationName:"virtualInterface" type:"structure"`
 }
 
 // String returns the string representation
@@ -3387,39 +3300,24 @@ func (s CreateBGPPeerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the CreateConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest
 type CreateConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Bandwidth of the connection.
-	//
-	// Example: 1Gbps
-	//
-	// Default: None
+	// The bandwidth of the connection.
 	//
 	// Bandwidth is a required field
 	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
 
 	// The name of the connection.
 	//
-	// Example: "My Connection to AWS"
-	//
-	// Default: None
-	//
 	// ConnectionName is a required field
 	ConnectionName *string `locationName:"connectionName" type:"string" required:"true"`
 
 	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
 	LagId *string `locationName:"lagId" type:"string"`
 
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
+	// The location of the connection.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" type:"string" required:"true"`
@@ -3457,26 +3355,16 @@ func (s *CreateConnectionInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the CreateDirectConnectGatewayAssociation
-// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationRequest
 type CreateDirectConnectGatewayAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	//
 	// DirectConnectGatewayId is a required field
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
 
 	// The ID of the virtual private gateway.
-	//
-	// Example: "vgw-abc123ef"
-	//
-	// Default: None
 	//
 	// VirtualGatewayId is a required field
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string" required:"true"`
@@ -3510,15 +3398,13 @@ func (s *CreateDirectConnectGatewayAssociationInput) Validate() error {
 	return nil
 }
 
-// Container for the response from the CreateDirectConnectGatewayAssociation
-// API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayAssociationResult
 type CreateDirectConnectGatewayAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// The direct connect gateway association to be created.
+	// The association to be created.
 	DirectConnectGatewayAssociation *GatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
 }
 
@@ -3537,25 +3423,17 @@ func (s CreateDirectConnectGatewayAssociationOutput) SDKResponseMetadata() aws.R
 	return s.responseMetadata
 }
 
-// Container for the parameters to the CreateDirectConnectGateway operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayRequest
 type CreateDirectConnectGatewayInput struct {
 	_ struct{} `type:"structure"`
 
 	// The autonomous system number (ASN) for Border Gateway Protocol (BGP) to be
 	// configured on the Amazon side of the connection. The ASN must be in the private
-	// range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294
-	//
-	// Example: 65200
-	//
-	// Default: 64512
+	// range of 64,512 to 65,534 or 4,200,000,000 to 4,294,967,294. The default
+	// is 64512.
 	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
 
-	// The name of the direct connect gateway.
-	//
-	// Example: "My direct connect gateway"
-	//
-	// Default: None
+	// The name of the Direct Connect gateway.
 	//
 	// DirectConnectGatewayName is a required field
 	DirectConnectGatewayName *string `locationName:"directConnectGatewayName" type:"string" required:"true"`
@@ -3585,14 +3463,13 @@ func (s *CreateDirectConnectGatewayInput) Validate() error {
 	return nil
 }
 
-// Container for the response from the CreateDirectConnectGateway API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateDirectConnectGatewayResult
 type CreateDirectConnectGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// The direct connect gateway to be created.
+	// The Direct Connect gateway.
 	DirectConnectGateway *Gateway `locationName:"directConnectGateway" type:"structure"`
 }
 
@@ -3611,41 +3488,24 @@ func (s CreateDirectConnectGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the CreateInterconnect operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnectRequest
 type CreateInterconnectInput struct {
 	_ struct{} `type:"structure"`
 
-	// The port bandwidth
-	//
-	// Example: 1Gbps
-	//
-	// Default: None
-	//
-	// Available values: 1Gbps,10Gbps
+	// The port bandwidth, in Gbps. The possible values are 1 and 10.
 	//
 	// Bandwidth is a required field
 	Bandwidth *string `locationName:"bandwidth" type:"string" required:"true"`
 
 	// The name of the interconnect.
 	//
-	// Example: "1G Interconnect to AWS"
-	//
-	// Default: None
-	//
 	// InterconnectName is a required field
 	InterconnectName *string `locationName:"interconnectName" type:"string" required:"true"`
 
 	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
 	LagId *string `locationName:"lagId" type:"string"`
 
-	// Where the interconnect is located
-	//
-	// Example: EqSV5
-	//
-	// Default: None
+	// The location of the interconnect.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" type:"string" required:"true"`
@@ -3683,87 +3543,63 @@ func (s *CreateInterconnectInput) Validate() error {
 	return nil
 }
 
-// An interconnect is a connection that can host other connections.
-//
-// Like a standard AWS Direct Connect connection, an interconnect represents
-// the physical connection between an AWS Direct Connect partner's network and
-// a specific Direct Connect location. An AWS Direct Connect partner who owns
-// an interconnect can provision hosted connections on the interconnect for
-// their end customers, thereby providing the end customers with connectivity
-// to AWS services.
-//
-// The resources of the interconnect, including bandwidth and VLAN numbers,
-// are shared by all of the hosted connections on the interconnect, and the
-// owner of the interconnect determines how these resources are assigned.
+// Information about an interconnect.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect
 type CreateInterconnectOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Deprecated in favor of awsDeviceV2.
-	//
-	// The Direct Connection endpoint which the physical connection terminates on.
+	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
 
-	// The Direct Connection endpoint which the physical connection terminates on.
+	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
-	// Bandwidth of the connection.
-	//
-	// Example: 1Gbps
-	//
-	// Default: None
+	// The bandwidth of the connection.
 	Bandwidth *string `locationName:"bandwidth" type:"string"`
 
+	// Indicates whether the interconnect supports a secondary BGP in the same address
+	// family (IPv4/IPv6).
+	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
+
 	// The ID of the interconnect.
-	//
-	// Example: dxcon-abc123
 	InterconnectId *string `locationName:"interconnectId" type:"string"`
 
 	// The name of the interconnect.
-	//
-	// Example: "1G Interconnect to AWS"
 	InterconnectName *string `locationName:"interconnectName" type:"string"`
 
-	// State of the interconnect.
+	// The state of the interconnect. The following are the possible values:
 	//
-	//    * Requested: The initial state of an interconnect. The interconnect stays
+	//    * requested: The initial state of an interconnect. The interconnect stays
 	//    in the requested state until the Letter of Authorization (LOA) is sent
 	//    to the customer.
 	//
-	//    * Pending: The interconnect has been approved, and is being initialized.
+	//    * pending: The interconnect is approved, and is being initialized.
 	//
-	//    * Available: The network link is up, and the interconnect is ready for
+	//    * available: The network link is up, and the interconnect is ready for
 	//    use.
 	//
-	//    * Down: The network link is down.
+	//    * down: The network link is down.
 	//
-	//    * Deleting: The interconnect is in the process of being deleted.
+	//    * deleting: The interconnect is being deleted.
 	//
-	//    * Deleted: The interconnect has been deleted.
+	//    * deleted: The interconnect is deleted.
 	InterconnectState InterconnectState `locationName:"interconnectState" type:"string" enum:"true"`
 
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
+
 	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
 	LagId *string `locationName:"lagId" type:"string"`
 
-	// The time of the most recent call to DescribeInterconnectLoa for this Interconnect.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp" timestampFormat:"unix"`
 
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
+	// The location of the connection.
 	Location *string `locationName:"location" type:"string"`
 
-	// The AWS region where the connection is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
+	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 }
 
@@ -3782,47 +3618,31 @@ func (s CreateInterconnectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the CreateLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest
 type CreateLagInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of an existing connection to migrate to the LAG.
-	//
-	// Default: None
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 
 	// The bandwidth of the individual physical connections bundled by the LAG.
-	//
-	// Default: None
-	//
-	// Available values: 1Gbps, 10Gbps
+	// The possible values are 1Gbps and 10Gbps.
 	//
 	// ConnectionsBandwidth is a required field
 	ConnectionsBandwidth *string `locationName:"connectionsBandwidth" type:"string" required:"true"`
 
 	// The name of the LAG.
 	//
-	// Example: "3x10G LAG to AWS"
-	//
-	// Default: None
-	//
 	// LagName is a required field
 	LagName *string `locationName:"lagName" type:"string" required:"true"`
 
-	// The AWS Direct Connect location in which the LAG should be allocated.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
+	// The location for the LAG.
 	//
 	// Location is a required field
 	Location *string `locationName:"location" type:"string" required:"true"`
 
 	// The number of physical connections initially provisioned and bundled by the
 	// LAG.
-	//
-	// Default: None
 	//
 	// NumberOfConnections is a required field
 	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer" required:"true"`
@@ -3864,24 +3684,16 @@ func (s *CreateLagInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the CreatePrivateVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterfaceRequest
 type CreatePrivateVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// Detailed information for the private virtual interface to be created.
-	//
-	// Default: None
+	// Information about the private virtual interface.
 	//
 	// NewPrivateVirtualInterface is a required field
 	NewPrivateVirtualInterface *NewPrivateVirtualInterface `locationName:"newPrivateVirtualInterface" type:"structure" required:"true"`
@@ -3920,24 +3732,16 @@ func (s *CreatePrivateVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the CreatePublicVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterfaceRequest
 type CreatePublicVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// Detailed information for the public virtual interface to be created.
-	//
-	// Default: None
+	// Information about the public virtual interface.
 	//
 	// NewPublicVirtualInterface is a required field
 	NewPublicVirtualInterface *NewPublicVirtualInterface `locationName:"newPublicVirtualInterface" type:"structure" required:"true"`
@@ -3976,182 +3780,20 @@ func (s *CreatePublicVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
-// location and the customer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterfaceOutput
-type CreatePublicVirtualInterfaceOutput struct {
-	_ struct{} `type:"structure"`
-
-	responseMetadata aws.Response
-
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
-
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
-	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
-
-	// The autonomous system number (ASN) for the Amazon side of the connection.
-	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
-	Asn *int64 `locationName:"asn" type:"integer"`
-
-	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
-	AuthKey *string `locationName:"authKey" type:"string"`
-
-	// The Direct Connection endpoint which the virtual interface terminates on.
-	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
-
-	// A list of the BGP peers configured on this virtual interface.
-	BgpPeers []BGPPeer `locationName:"bgpPeers" type:"list"`
-
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
-	CustomerAddress *string `locationName:"customerAddress" type:"string"`
-
-	// Information for generating the customer router configuration.
-	CustomerRouterConfig *string `locationName:"customerRouterConfig" type:"string"`
-
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
-
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
-	Location *string `locationName:"location" type:"string"`
-
-	// The AWS account that will own the new virtual interface.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The AWS region where the virtual interface is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
-	Region *string `locationName:"region" type:"string"`
-
-	// A list of routes to be advertised to the AWS network in this region (public
-	// virtual interface).
-	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
-
-	// The ID of the virtual private gateway to a VPC. This only applies to private
-	// virtual interfaces.
-	//
-	// Example: vgw-123er56
-	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
-
-	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
-
-	// The name of the virtual interface assigned by the customer.
-	//
-	// Example: "My VPC"
-	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
-
-	// State of the virtual interface.
-	//
-	//    * Confirming: The creation of the virtual interface is pending confirmation
-	//    from the virtual interface owner. If the owner of the virtual interface
-	//    is different from the owner of the connection on which it is provisioned,
-	//    then the virtual interface will remain in this state until it is confirmed
-	//    by the virtual interface owner.
-	//
-	//    * Verifying: This state only applies to public virtual interfaces. Each
-	//    public virtual interface needs validation before the virtual interface
-	//    can be created.
-	//
-	//    * Pending: A virtual interface is in this state from the time that it
-	//    is created until the virtual interface is ready to forward traffic.
-	//
-	//    * Available: A virtual interface that is able to forward traffic.
-	//
-	//    * Down: A virtual interface that is BGP down.
-	//
-	//    * Deleting: A virtual interface is in this state immediately after calling
-	//    DeleteVirtualInterface until it can no longer forward traffic.
-	//
-	//    * Deleted: A virtual interface that cannot forward traffic.
-	//
-	//    * Rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the 'Confirming' state is deleted
-	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
-	//    state.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
-
-	// The type of virtual interface.
-	//
-	// Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, and
-	// so on.)
-	VirtualInterfaceType *string `locationName:"virtualInterfaceType" type:"string"`
-
-	// The VLAN ID.
-	//
-	// Example: 101
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s CreatePublicVirtualInterfaceOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s CreatePublicVirtualInterfaceOutput) GoString() string {
-	return s.String()
-}
-
-// SDKResponseMetdata return sthe response metadata for the API.
-func (s CreatePublicVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
-	return s.responseMetadata
-}
-
-// Container for the parameters to the DeleteBGPPeer operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerRequest
 type DeleteBGPPeerInput struct {
 	_ struct{} `type:"structure"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	Asn *int64 `locationName:"asn" type:"integer"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The ID of the BGP peer.
+	BgpPeerId *string `locationName:"bgpPeerId" type:"string"`
+
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
-	// The ID of the virtual interface from which the BGP peer will be deleted.
-	//
-	// Example: dxvif-456abc78
-	//
-	// Default: None
+	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 }
 
@@ -4165,16 +3807,14 @@ func (s DeleteBGPPeerInput) GoString() string {
 	return s.String()
 }
 
-// The response received when DeleteBGPPeer is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerResponse
 type DeleteBGPPeerOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
-	// location and the customer.
-	VirtualInterface *CreatePublicVirtualInterfaceOutput `locationName:"virtualInterface" type:"structure"`
+	// The virtual interface.
+	VirtualInterface *UpdateVirtualInterfaceAttributesOutput `locationName:"virtualInterface" type:"structure"`
 }
 
 // String returns the string representation
@@ -4192,17 +3832,11 @@ func (s DeleteBGPPeerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DeleteConnection operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnectionRequest
 type DeleteConnectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
@@ -4232,26 +3866,16 @@ func (s *DeleteConnectionInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the DeleteDirectConnectGatewayAssociation
-// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationRequest
 type DeleteDirectConnectGatewayAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	//
 	// DirectConnectGatewayId is a required field
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
 
 	// The ID of the virtual private gateway.
-	//
-	// Example: "vgw-abc123ef"
-	//
-	// Default: None
 	//
 	// VirtualGatewayId is a required field
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string" required:"true"`
@@ -4285,15 +3909,13 @@ func (s *DeleteDirectConnectGatewayAssociationInput) Validate() error {
 	return nil
 }
 
-// Container for the response from the DeleteDirectConnectGatewayAssociation
-// API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayAssociationResult
 type DeleteDirectConnectGatewayAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// The direct connect gateway association to be deleted.
+	// The association to be deleted.
 	DirectConnectGatewayAssociation *GatewayAssociation `locationName:"directConnectGatewayAssociation" type:"structure"`
 }
 
@@ -4312,16 +3934,11 @@ func (s DeleteDirectConnectGatewayAssociationOutput) SDKResponseMetadata() aws.R
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DeleteDirectConnectGateway operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayRequest
 type DeleteDirectConnectGatewayInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	//
 	// DirectConnectGatewayId is a required field
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string" required:"true"`
@@ -4351,14 +3968,13 @@ func (s *DeleteDirectConnectGatewayInput) Validate() error {
 	return nil
 }
 
-// Container for the response from the DeleteDirectConnectGateway API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteDirectConnectGatewayResult
 type DeleteDirectConnectGatewayOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// The direct connect gateway to be deleted.
+	// The Direct Connect gateway.
 	DirectConnectGateway *Gateway `locationName:"directConnectGateway" type:"structure"`
 }
 
@@ -4377,14 +3993,11 @@ func (s DeleteDirectConnectGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DeleteInterconnect operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnectRequest
 type DeleteInterconnectInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the interconnect.
-	//
-	// Example: dxcon-abc123
 	//
 	// InterconnectId is a required field
 	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
@@ -4414,29 +4027,28 @@ func (s *DeleteInterconnectInput) Validate() error {
 	return nil
 }
 
-// The response received when DeleteInterconnect is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnectResponse
 type DeleteInterconnectOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// State of the interconnect.
+	// The state of the interconnect. The following are the possible values:
 	//
-	//    * Requested: The initial state of an interconnect. The interconnect stays
+	//    * requested: The initial state of an interconnect. The interconnect stays
 	//    in the requested state until the Letter of Authorization (LOA) is sent
 	//    to the customer.
 	//
-	//    * Pending: The interconnect has been approved, and is being initialized.
+	//    * pending: The interconnect is approved, and is being initialized.
 	//
-	//    * Available: The network link is up, and the interconnect is ready for
+	//    * available: The network link is up, and the interconnect is ready for
 	//    use.
 	//
-	//    * Down: The network link is down.
+	//    * down: The network link is down.
 	//
-	//    * Deleting: The interconnect is in the process of being deleted.
+	//    * deleting: The interconnect is being deleted.
 	//
-	//    * Deleted: The interconnect has been deleted.
+	//    * deleted: The interconnect is deleted.
 	InterconnectState InterconnectState `locationName:"interconnectState" type:"string" enum:"true"`
 }
 
@@ -4455,16 +4067,11 @@ func (s DeleteInterconnectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DeleteLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLagRequest
 type DeleteLagInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the LAG to delete.
-	//
-	// Example: dxlag-abc123
-	//
-	// Default: None
+	// The ID of the LAG.
 	//
 	// LagId is a required field
 	LagId *string `locationName:"lagId" type:"string" required:"true"`
@@ -4494,16 +4101,11 @@ func (s *DeleteLagInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the DeleteVirtualInterface operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceRequest
 type DeleteVirtualInterfaceInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
 	//
 	// VirtualInterfaceId is a required field
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
@@ -4533,40 +4135,39 @@ func (s *DeleteVirtualInterfaceInput) Validate() error {
 	return nil
 }
 
-// The response received when DeleteVirtualInterface is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceResponse
 type DeleteVirtualInterfaceOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// State of the virtual interface.
+	// The state of the virtual interface. The following are the possible values:
 	//
-	//    * Confirming: The creation of the virtual interface is pending confirmation
+	//    * confirming: The creation of the virtual interface is pending confirmation
 	//    from the virtual interface owner. If the owner of the virtual interface
 	//    is different from the owner of the connection on which it is provisioned,
 	//    then the virtual interface will remain in this state until it is confirmed
 	//    by the virtual interface owner.
 	//
-	//    * Verifying: This state only applies to public virtual interfaces. Each
+	//    * verifying: This state only applies to public virtual interfaces. Each
 	//    public virtual interface needs validation before the virtual interface
 	//    can be created.
 	//
-	//    * Pending: A virtual interface is in this state from the time that it
+	//    * pending: A virtual interface is in this state from the time that it
 	//    is created until the virtual interface is ready to forward traffic.
 	//
-	//    * Available: A virtual interface that is able to forward traffic.
+	//    * available: A virtual interface that is able to forward traffic.
 	//
-	//    * Down: A virtual interface that is BGP down.
+	//    * down: A virtual interface that is BGP down.
 	//
-	//    * Deleting: A virtual interface is in this state immediately after calling
+	//    * deleting: A virtual interface is in this state immediately after calling
 	//    DeleteVirtualInterface until it can no longer forward traffic.
 	//
-	//    * Deleted: A virtual interface that cannot forward traffic.
+	//    * deleted: A virtual interface that cannot forward traffic.
 	//
-	//    * Rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the 'Confirming' state is deleted
-	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
+	//    * rejected: The virtual interface owner has declined creation of the virtual
+	//    interface. If a virtual interface in the Confirming state is deleted by
+	//    the virtual interface owner, the virtual interface enters the Rejected
 	//    state.
 	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
 }
@@ -4586,32 +4187,22 @@ func (s DeleteVirtualInterfaceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeConnectionLoa operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoaRequest
 type DescribeConnectionLoaInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// A standard media type indicating the content type of the LOA-CFA document.
-	// Currently, the only supported value is "application/pdf".
-	//
-	// Default: application/pdf
+	// The standard media type for the LOA-CFA document. The only supported value
+	// is application/pdf.
 	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 
 	// The name of the APN partner or service provider who establishes connectivity
-	// on your behalf. If you supply this parameter, the LOA-CFA lists the provider
+	// on your behalf. If you specify this parameter, the LOA-CFA lists the provider
 	// name alongside your company name as the requester of the cross connect.
-	//
-	// Default: None
 	ProviderName *string `locationName:"providerName" type:"string"`
 }
 
@@ -4639,15 +4230,13 @@ func (s *DescribeConnectionLoaInput) Validate() error {
 	return nil
 }
 
-// The response received when DescribeConnectionLoa is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoaResponse
 type DescribeConnectionLoaOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A structure containing the Letter of Authorization - Connecting Facility
-	// Assignment (LOA-CFA) for a connection.
+	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
 	Loa *DescribeLoaOutput `locationName:"loa" type:"structure"`
 }
 
@@ -4666,17 +4255,11 @@ func (s DescribeConnectionLoaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeConnections operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsRequest
 type DescribeConnectionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 }
 
@@ -4690,16 +4273,11 @@ func (s DescribeConnectionsInput) GoString() string {
 	return s.String()
 }
 
-// Container for the parameters to the DescribeConnectionsOnInterconnect operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnectRequest
 type DescribeConnectionsOnInterconnectInput struct {
 	_ struct{} `type:"structure"`
 
-	// ID of the interconnect on which a list of connection is provisioned.
-	//
-	// Example: dxcon-abc123
-	//
-	// Default: None
+	// The ID of the interconnect.
 	//
 	// InterconnectId is a required field
 	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
@@ -4729,37 +4307,20 @@ func (s *DescribeConnectionsOnInterconnectInput) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the DescribeDirectConnectGatewayAssociations
-// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsRequest
 type DescribeDirectConnectGatewayAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// The maximum number of direct connect gateway associations to return per page.
-	//
-	// Example: 15
-	//
-	// Default: None
+	// The maximum number of associations to return per page.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// The token provided in the previous describe result to retrieve the next page
-	// of the result.
-	//
-	// Default: None
+	// The token provided in the previous call to retrieve the next page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the virtual private gateway.
-	//
-	// Example: "vgw-abc123ef"
-	//
-	// Default: None
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 }
 
@@ -4773,18 +4334,16 @@ func (s DescribeDirectConnectGatewayAssociationsInput) GoString() string {
 	return s.String()
 }
 
-// Container for the response from the DescribeDirectConnectGatewayAssociations
-// API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAssociationsResult
 type DescribeDirectConnectGatewayAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Information about the direct connect gateway associations.
+	// The associations.
 	DirectConnectGatewayAssociations []GatewayAssociation `locationName:"directConnectGatewayAssociations" type:"list"`
 
-	// Token to retrieve the next page of the result.
+	// The token to retrieve the next page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -4803,37 +4362,20 @@ func (s DescribeDirectConnectGatewayAssociationsOutput) SDKResponseMetadata() aw
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeDirectConnectGatewayAttachments
-// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAttachmentsRequest
 type DescribeDirectConnectGatewayAttachmentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// The maximum number of direct connect gateway attachments to return per page.
-	//
-	// Example: 15
-	//
-	// Default: None
+	// The maximum number of attachments to return per page.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// The token provided in the previous describe result to retrieve the next page
-	// of the result.
-	//
-	// Default: None
+	// The token provided in the previous call to retrieve the next page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: "dxvif-abc123ef"
-	//
-	// Default: None
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 }
 
@@ -4847,18 +4389,16 @@ func (s DescribeDirectConnectGatewayAttachmentsInput) GoString() string {
 	return s.String()
 }
 
-// Container for the response from the DescribeDirectConnectGatewayAttachments
-// API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewayAttachmentsResult
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Information about the direct connect gateway attachments.
+	// The attachments.
 	DirectConnectGatewayAttachments []GatewayAttachment `locationName:"directConnectGatewayAttachments" type:"list"`
 
-	// Token to retrieve the next page of the result.
+	// The token to retrieve the next page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -4877,29 +4417,17 @@ func (s DescribeDirectConnectGatewayAttachmentsOutput) SDKResponseMetadata() aws
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeDirectConnectGateways operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewaysRequest
 type DescribeDirectConnectGatewaysInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
-	//
-	// Default: None
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// The maximum number of direct connect gateways to return per page.
-	//
-	// Example: 15
-	//
-	// Default: None
+	// The maximum number of Direct Connect gateways to return per page.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// The token provided in the previous describe result to retrieve the next page
-	// of the result.
-	//
-	// Default: None
+	// The token provided in the previous call to retrieve the next page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -4913,17 +4441,16 @@ func (s DescribeDirectConnectGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// Container for the response from the DescribeDirectConnectGateways API call
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeDirectConnectGatewaysResult
 type DescribeDirectConnectGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Information about the direct connect gateways.
+	// The Direct Connect gateways.
 	DirectConnectGateways []Gateway `locationName:"directConnectGateways" type:"list"`
 
-	// Token to retrieve the next page of the result.
+	// The token to retrieve the next page.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -4942,16 +4469,11 @@ func (s DescribeDirectConnectGatewaysOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeHostedConnections operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnectionsRequest
 type DescribeHostedConnectionsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the interconnect or LAG on which the hosted connections are provisioned.
-	//
-	// Example: dxcon-abc123 or dxlag-abc123
-	//
-	// Default: None
+	// The ID of the interconnect or LAG.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
@@ -4981,14 +4503,13 @@ func (s *DescribeHostedConnectionsInput) Validate() error {
 	return nil
 }
 
-// A structure containing a list of connections.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnectOutput
 type DescribeHostedConnectionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A list of connections.
+	// The connections.
 	Connections []DisassociateConnectionFromLagOutput `locationName:"connections" type:"list"`
 }
 
@@ -5007,29 +4528,22 @@ func (s DescribeHostedConnectionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeInterconnectLoa operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoaRequest
 type DescribeInterconnectLoaInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the interconnect.
 	//
-	// Example: dxcon-abc123
-	//
 	// InterconnectId is a required field
 	InterconnectId *string `locationName:"interconnectId" type:"string" required:"true"`
 
-	// A standard media type indicating the content type of the LOA-CFA document.
-	// Currently, the only supported value is "application/pdf".
-	//
-	// Default: application/pdf
+	// The standard media type for the LOA-CFA document. The only supported value
+	// is application/pdf.
 	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 
 	// The name of the service provider who establishes connectivity on your behalf.
 	// If you supply this parameter, the LOA-CFA lists the provider name alongside
 	// your company name as the requester of the cross connect.
-	//
-	// Default: None
 	ProviderName *string `locationName:"providerName" type:"string"`
 }
 
@@ -5057,15 +4571,13 @@ func (s *DescribeInterconnectLoaInput) Validate() error {
 	return nil
 }
 
-// The response received when DescribeInterconnectLoa is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoaResponse
 type DescribeInterconnectLoaOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A structure containing the Letter of Authorization - Connecting Facility
-	// Assignment (LOA-CFA) for a connection.
+	// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA).
 	Loa *DescribeLoaOutput `locationName:"loa" type:"structure"`
 }
 
@@ -5084,14 +4596,11 @@ func (s DescribeInterconnectLoaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeInterconnects operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectsRequest
 type DescribeInterconnectsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the interconnect.
-	//
-	// Example: dxcon-abc123
 	InterconnectId *string `locationName:"interconnectId" type:"string"`
 }
 
@@ -5105,14 +4614,13 @@ func (s DescribeInterconnectsInput) GoString() string {
 	return s.String()
 }
 
-// A structure containing a list of interconnects.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnects
 type DescribeInterconnectsOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A list of interconnects.
+	// The interconnects.
 	Interconnects []CreateInterconnectOutput `locationName:"interconnects" type:"list"`
 }
 
@@ -5131,16 +4639,11 @@ func (s DescribeInterconnectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeLags operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLagsRequest
 type DescribeLagsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the LAG.
-	//
-	// Example: dxlag-abc123
-	//
-	// Default: None
 	LagId *string `locationName:"lagId" type:"string"`
 }
 
@@ -5154,14 +4657,13 @@ func (s DescribeLagsInput) GoString() string {
 	return s.String()
 }
 
-// A structure containing a list of LAGs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lags
 type DescribeLagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A list of LAGs.
+	// The LAGs.
 	Lags []UpdateLagOutput `locationName:"lags" type:"list"`
 }
 
@@ -5180,32 +4682,22 @@ func (s DescribeLagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeLoa operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoaRequest
 type DescribeLoaInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of a connection, LAG, or interconnect for which to get the LOA-CFA
-	// information.
-	//
-	// Example: dxcon-abc123 or dxlag-abc123
-	//
-	// Default: None
+	// The ID of a connection, LAG, or interconnect.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// A standard media type indicating the content type of the LOA-CFA document.
-	// Currently, the only supported value is "application/pdf".
-	//
-	// Default: application/pdf
+	// The standard media type for the LOA-CFA document. The only supported value
+	// is application/pdf.
 	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 
 	// The name of the service provider who establishes connectivity on your behalf.
-	// If you supply this parameter, the LOA-CFA lists the provider name alongside
+	// If you specify this parameter, the LOA-CFA lists the provider name alongside
 	// your company name as the requester of the cross connect.
-	//
-	// Default: None
 	ProviderName *string `locationName:"providerName" type:"string"`
 }
 
@@ -5233,8 +4725,8 @@ func (s *DescribeLoaInput) Validate() error {
 	return nil
 }
 
-// A structure containing the Letter of Authorization - Connecting Facility
-// Assignment (LOA-CFA) for a connection.
+// Information about a Letter of Authorization - Connecting Facility Assignment
+// (LOA-CFA) for a connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Loa
 type DescribeLoaOutput struct {
 	_ struct{} `type:"structure"`
@@ -5246,10 +4738,8 @@ type DescribeLoaOutput struct {
 	// LoaContent is automatically base64 encoded/decoded by the SDK.
 	LoaContent []byte `locationName:"loaContent" type:"blob"`
 
-	// A standard media type indicating the content type of the LOA-CFA document.
-	// Currently, the only supported value is "application/pdf".
-	//
-	// Default: application/pdf
+	// The standard media type for the LOA-CFA document. The only supported value
+	// is application/pdf.
 	LoaContentType LoaContentType `locationName:"loaContentType" type:"string" enum:"true"`
 }
 
@@ -5283,18 +4773,13 @@ func (s DescribeLocationsInput) GoString() string {
 	return s.String()
 }
 
-// A location is a network facility where AWS Direct Connect routers are available
-// to be connected. Generally, these are colocation hubs where many network
-// providers have equipment, and where cross connects can be delivered. Locations
-// include a name and facility code, and must be provided when creating a connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Locations
 type DescribeLocationsOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A list of colocation hubs where network providers have equipment. Most regions
-	// have multiple locations available.
+	// The locations.
 	Locations []Location `locationName:"locations" type:"list"`
 }
 
@@ -5313,12 +4798,11 @@ func (s DescribeLocationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeTags operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTagsRequest
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Names (ARNs) of the Direct Connect resources.
+	// The Amazon Resource Names (ARNs) of the resources.
 	//
 	// ResourceArns is a required field
 	ResourceArns []string `locationName:"resourceArns" type:"list" required:"true"`
@@ -5348,7 +4832,6 @@ func (s *DescribeTagsInput) Validate() error {
 	return nil
 }
 
-// The response received when DescribeTags is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTagsResponse
 type DescribeTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5389,14 +4872,13 @@ func (s DescribeVirtualGatewaysInput) GoString() string {
 	return s.String()
 }
 
-// A structure containing a list of virtual private gateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualGateways
 type DescribeVirtualGatewaysOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A list of virtual private gateways.
+	// The virtual private gateways.
 	VirtualGateways []VirtualGateway `locationName:"virtualGateways" type:"list"`
 }
 
@@ -5415,24 +4897,14 @@ func (s DescribeVirtualGatewaysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DescribeVirtualInterfaces operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfacesRequest
 type DescribeVirtualInterfacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 }
 
@@ -5446,15 +4918,14 @@ func (s DescribeVirtualInterfacesInput) GoString() string {
 	return s.String()
 }
 
-// A structure containing a list of virtual interfaces.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterfaces
 type DescribeVirtualInterfacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// A list of virtual interfaces.
-	VirtualInterfaces []CreatePublicVirtualInterfaceOutput `locationName:"virtualInterfaces" type:"list"`
+	// The virtual interfaces
+	VirtualInterfaces []UpdateVirtualInterfaceAttributesOutput `locationName:"virtualInterfaces" type:"list"`
 }
 
 // String returns the string representation
@@ -5472,25 +4943,16 @@ func (s DescribeVirtualInterfacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the DisassociateConnectionFromLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLagRequest
 type DisassociateConnectionFromLagInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the connection to disassociate from the LAG.
-	//
-	// Example: dxcon-abc123
-	//
-	// Default: None
+	// The ID of the connection. For example, dxcon-abc123.
 	//
 	// ConnectionId is a required field
 	ConnectionId *string `locationName:"connectionId" type:"string" required:"true"`
 
-	// The ID of the LAG.
-	//
-	// Example: dxlag-abc123
-	//
-	// Default: None
+	// The ID of the LAG. For example, dxlag-abc123.
 	//
 	// LagId is a required field
 	LagId *string `locationName:"lagId" type:"string" required:"true"`
@@ -5524,99 +4986,78 @@ func (s *DisassociateConnectionFromLagInput) Validate() error {
 	return nil
 }
 
-// A connection represents the physical network connection between the AWS Direct
-// Connect location and the customer.
+// Information about an AWS Direct Connect connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnectionOutput
 type DisassociateConnectionFromLagOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Deprecated in favor of awsDeviceV2.
-	//
-	// The Direct Connection endpoint which the physical connection terminates on.
+	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
 
-	// The Direct Connection endpoint which the physical connection terminates on.
+	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
-	// Bandwidth of the connection.
-	//
-	// Example: 1Gbps (for regular connections), or 500Mbps (for hosted connections)
-	//
-	// Default: None
+	// The bandwidth of the connection.
 	Bandwidth *string `locationName:"bandwidth" type:"string"`
 
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
+	// The ID of the connection.
 	ConnectionId *string `locationName:"connectionId" type:"string"`
 
 	// The name of the connection.
-	//
-	// Example: "My Connection to AWS"
-	//
-	// Default: None
 	ConnectionName *string `locationName:"connectionName" type:"string"`
 
-	// State of the connection.
+	// The state of the connection. The following are the possible values:
 	//
-	//    * Ordering: The initial state of a hosted connection provisioned on an
+	//    * ordering: The initial state of a hosted connection provisioned on an
 	//    interconnect. The connection stays in the ordering state until the owner
 	//    of the hosted connection confirms or declines the connection order.
 	//
-	//    * Requested: The initial state of a standard connection. The connection
+	//    * requested: The initial state of a standard connection. The connection
 	//    stays in the requested state until the Letter of Authorization (LOA) is
 	//    sent to the customer.
 	//
-	//    * Pending: The connection has been approved, and is being initialized.
+	//    * pending: The connection has been approved and is being initialized.
 	//
-	//    * Available: The network link is up, and the connection is ready for use.
+	//    * available: The network link is up and the connection is ready for use.
 	//
-	//    * Down: The network link is down.
+	//    * down: The network link is down.
 	//
-	//    * Deleting: The connection is in the process of being deleted.
+	//    * deleting: The connection is being deleted.
 	//
-	//    * Deleted: The connection has been deleted.
+	//    * deleted: The connection has been deleted.
 	//
-	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
-	//    'Rejected' state if it is deleted by the end customer.
+	//    * rejected: A hosted connection in the ordering state enters the rejected
+	//    state if it is deleted by the customer.
 	ConnectionState ConnectionState `locationName:"connectionState" type:"string" enum:"true"`
 
+	// Indicates whether the connection supports a secondary BGP peer in the same
+	// address family (IPv4/IPv6).
+	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
+
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
+
 	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
 	LagId *string `locationName:"lagId" type:"string"`
 
 	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp" timestampFormat:"unix"`
 
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
+	// The location of the connection.
 	Location *string `locationName:"location" type:"string"`
 
-	// The AWS account that will own the new connection.
+	// The ID of the AWS account that owns the connection.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
 	// The name of the AWS Direct Connect service provider associated with the connection.
 	PartnerName *string `locationName:"partnerName" type:"string"`
 
-	// The AWS region where the connection is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
+	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 
-	// The VLAN ID.
-	//
-	// Example: 101
+	// The ID of the VLAN.
 	Vlan *int64 `locationName:"vlan" type:"integer"`
 }
 
@@ -5635,7 +5076,7 @@ func (s DisassociateConnectionFromLagOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// A direct connect gateway is an intermediate object that enables you to connect
+// Information about a Direct Connect gateway, which enables you to connect
 // virtual interfaces and virtual private gateways.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGateway
 type Gateway struct {
@@ -5644,33 +5085,27 @@ type Gateway struct {
 	// The autonomous system number (ASN) for the Amazon side of the connection.
 	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// The name of the direct connect gateway.
-	//
-	// Example: "My direct connect gateway"
-	//
-	// Default: None
+	// The name of the Direct Connect gateway.
 	DirectConnectGatewayName *string `locationName:"directConnectGatewayName" type:"string"`
 
-	// State of the direct connect gateway.
+	// The state of the Direct Connect gateway. The following are the possible values:
 	//
-	//    * Pending: The initial state after calling CreateDirectConnectGateway.
+	//    * pending: The initial state after calling CreateDirectConnectGateway.
 	//
-	//    * Available: The direct connect gateway is ready for use.
+	//    * available: The Direct Connect gateway is ready for use.
 	//
-	//    * Deleting: The initial state after calling DeleteDirectConnectGateway.
+	//    * deleting: The initial state after calling DeleteDirectConnectGateway.
 	//
-	//    * Deleted: The direct connect gateway is deleted and cannot pass traffic.
+	//    * deleted: The Direct Connect gateway is deleted and cannot pass traffic.
 	DirectConnectGatewayState GatewayState `locationName:"directConnectGatewayState" type:"string" enum:"true"`
 
-	// The AWS account ID of the owner of the direct connect gateway.
+	// The ID of the AWS account that owns the Direct Connect gateway.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
-	// Error message when the state of an object fails to advance.
+	// The error message if the state of an object failed to advance.
 	StateChangeError *string `locationName:"stateChangeError" type:"string"`
 }
 
@@ -5684,45 +5119,39 @@ func (s Gateway) GoString() string {
 	return s.String()
 }
 
-// The association between a direct connect gateway and virtual private gateway.
+// Information about an association between a Direct Connect gateway and a virtual
+// private gateway.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAssociation
 type GatewayAssociation struct {
 	_ struct{} `type:"structure"`
 
-	// State of the direct connect gateway association.
+	// The state of the association. The following are the possible values:
 	//
-	//    * Associating: The initial state after calling CreateDirectConnectGatewayAssociation.
+	//    * associating: The initial state after calling CreateDirectConnectGatewayAssociation.
 	//
-	//    * Associated: The direct connect gateway and virtual private gateway are
+	//    * associated: The Direct Connect gateway and virtual private gateway are
 	//    successfully associated and ready to pass traffic.
 	//
-	//    * Disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.
+	//    * disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.
 	//
-	//    * Disassociated: The virtual private gateway is successfully disassociated
-	//    from the direct connect gateway. Traffic flow between the direct connect
-	//    gateway and virtual private gateway stops.
+	//    * disassociated: The virtual private gateway is disassociated from the
+	//    Direct Connect gateway. Traffic flow between the Direct Connect gateway
+	//    and virtual private gateway is stopped.
 	AssociationState GatewayAssociationState `locationName:"associationState" type:"string" enum:"true"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// Error message when the state of an object fails to advance.
+	// The error message if the state of an object failed to advance.
 	StateChangeError *string `locationName:"stateChangeError" type:"string"`
 
-	// The ID of the virtual private gateway to a VPC. This only applies to private
-	// virtual interfaces.
-	//
-	// Example: vgw-123er56
+	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
-	// The AWS account ID of the owner of the virtual private gateway.
+	// The ID of the AWS account that owns the virtual private gateway.
 	VirtualGatewayOwnerAccount *string `locationName:"virtualGatewayOwnerAccount" type:"string"`
 
-	// The region in which the virtual private gateway is located.
-	//
-	// Example: us-east-1
+	// The AWS Region where the virtual private gateway is located.
 	VirtualGatewayRegion *string `locationName:"virtualGatewayRegion" type:"string"`
 }
 
@@ -5736,48 +5165,40 @@ func (s GatewayAssociation) GoString() string {
 	return s.String()
 }
 
-// The association between a direct connect gateway and virtual interface.
+// Information about an attachment between a Direct Connect gateway and a virtual
+// interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DirectConnectGatewayAttachment
 type GatewayAttachment struct {
 	_ struct{} `type:"structure"`
 
-	// State of the direct connect gateway attachment.
+	// The state of the attachment. The following are the possible values:
 	//
-	//    * Attaching: The initial state after a virtual interface is created using
-	//    the direct connect gateway.
+	//    * attaching: The initial state after a virtual interface is created using
+	//    the Direct Connect gateway.
 	//
-	//    * Attached: The direct connect gateway and virtual interface are successfully
-	//    attached and ready to pass traffic.
+	//    * attached: The Direct Connect gateway and virtual interface are attached
+	//    and ready to pass traffic.
 	//
-	//    * Detaching: The initial state after calling DeleteVirtualInterface on
-	//    a virtual interface that is attached to a direct connect gateway.
+	//    * detaching: The initial state after calling DeleteVirtualInterface.
 	//
-	//    * Detached: The virtual interface is successfully detached from the direct
-	//    connect gateway. Traffic flow between the direct connect gateway and virtual
-	//    interface stops.
+	//    * detached: The virtual interface is detached from the Direct Connect
+	//    gateway. Traffic flow between the Direct Connect gateway and virtual interface
+	//    is stopped.
 	AttachmentState GatewayAttachmentState `locationName:"attachmentState" type:"string" enum:"true"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// Error message when the state of an object fails to advance.
+	// The error message if the state of an object failed to advance.
 	StateChangeError *string `locationName:"stateChangeError" type:"string"`
 
 	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 
-	// The AWS account ID of the owner of the virtual interface.
+	// The ID of the AWS account that owns the virtual interface.
 	VirtualInterfaceOwnerAccount *string `locationName:"virtualInterfaceOwnerAccount" type:"string"`
 
-	// The region in which the virtual interface is located.
-	//
-	// Example: us-east-1
+	// The AWS Region where the virtual interface is located.
 	VirtualInterfaceRegion *string `locationName:"virtualInterfaceRegion" type:"string"`
 }
 
@@ -5791,24 +5212,19 @@ func (s GatewayAttachment) GoString() string {
 	return s.String()
 }
 
-// An AWS Direct Connect location where connections and interconnects can be
-// requested.
+// Information about an AWS Direct Connect location.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location
 type Location struct {
 	_ struct{} `type:"structure"`
 
-	// The code used to indicate the AWS Direct Connect location.
+	// The code for the location.
 	LocationCode *string `locationName:"locationCode" type:"string"`
 
-	// The name of the AWS Direct Connect location. The name includes the colocation
-	// partner name and the physical site of the lit building.
+	// The name of the location. This includes the name of the colocation partner
+	// and the physical site of the building.
 	LocationName *string `locationName:"locationName" type:"string"`
 
-	// The AWS region where the AWS Direct connect location is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
+	// The AWS Region for the location.
 	Region *string `locationName:"region" type:"string"`
 }
 
@@ -5822,36 +5238,24 @@ func (s Location) GoString() string {
 	return s.String()
 }
 
-// A structure containing information about a new BGP peer.
+// Information about a new BGP peer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewBGPPeer
 type NewBGPPeer struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
+	// The address family for the BGP peer.
 	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	Asn *int64 `locationName:"asn" type:"integer"`
 
 	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 }
 
@@ -5865,61 +5269,44 @@ func (s NewBGPPeer) GoString() string {
 	return s.String()
 }
 
-// A structure containing information about a new private virtual interface.
+// Information about a private virtual interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterface
 type NewPrivateVirtualInterface struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
+	// The address family for the BGP peer.
 	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
 	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
-	// The ID of the direct connect gateway.
-	//
-	// Example: "abcd1234-dcba-5678-be23-cdef9876ab45"
+	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
 
-	// The ID of the virtual private gateway to a VPC. This only applies to private
-	// virtual interfaces.
-	//
-	// Example: vgw-123er56
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
+	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// The ID of the virtual private gateway.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
-	// The name of the virtual interface assigned by the customer.
-	//
-	// Example: "My VPC"
+	// The name of the virtual interface assigned by the customer network.
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
 
-	// The VLAN ID.
-	//
-	// Example: 101
+	// The ID of the VLAN.
 	//
 	// Vlan is a required field
 	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
@@ -5957,51 +5344,38 @@ func (s *NewPrivateVirtualInterface) Validate() error {
 	return nil
 }
 
-// A structure containing information about a private virtual interface that
-// will be provisioned on a connection.
+// Information about a private virtual interface to be provisioned on a connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterfaceAllocation
 type NewPrivateVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
+	// The address family for the BGP peer.
 	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
 	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
-	// The name of the virtual interface assigned by the customer.
-	//
-	// Example: "My VPC"
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
+	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// The name of the virtual interface assigned by the customer network.
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
 
-	// The VLAN ID.
-	//
-	// Example: 101
+	// The ID of the VLAN.
 	//
 	// Vlan is a required field
 	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
@@ -6039,54 +5413,38 @@ func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
 	return nil
 }
 
-// A structure containing information about a new public virtual interface.
+// Information about a public virtual interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterface
 type NewPublicVirtualInterface struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
+	// The address family for the BGP peer.
 	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
 	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
-	// A list of routes to be advertised to the AWS network in this region (public
-	// virtual interface).
+	// The routes to be advertised to the AWS network in this Region. Applies to
+	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
 
-	// The name of the virtual interface assigned by the customer.
-	//
-	// Example: "My VPC"
+	// The name of the virtual interface assigned by the customer network.
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
 
-	// The VLAN ID.
-	//
-	// Example: 101
+	// The ID of the VLAN.
 	//
 	// Vlan is a required field
 	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
@@ -6124,55 +5482,38 @@ func (s *NewPublicVirtualInterface) Validate() error {
 	return nil
 }
 
-// A structure containing information about a public virtual interface that
-// will be provisioned on a connection.
+// Information about a public virtual interface to be provisioned on a connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterfaceAllocation
 type NewPublicVirtualInterfaceAllocation struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
+	// The address family for the BGP peer.
 	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
 
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
 	//
 	// Asn is a required field
 	Asn *int64 `locationName:"asn" type:"integer" required:"true"`
 
 	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
 	AuthKey *string `locationName:"authKey" type:"string"`
 
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	// The IP address assigned to the customer interface.
 	CustomerAddress *string `locationName:"customerAddress" type:"string"`
 
-	// A list of routes to be advertised to the AWS network in this region (public
-	// virtual interface).
+	// The routes to be advertised to the AWS network in this Region. Applies to
+	// public virtual interfaces.
 	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
 
-	// The name of the virtual interface assigned by the customer.
-	//
-	// Example: "My VPC"
+	// The name of the virtual interface assigned by the customer network.
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
 
-	// The VLAN ID.
-	//
-	// Example: 101
+	// The ID of the VLAN.
 	//
 	// Vlan is a required field
 	Vlan *int64 `locationName:"vlan" type:"integer" required:"true"`
@@ -6210,12 +5551,12 @@ func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
 	return nil
 }
 
-// The tags associated with a Direct Connect resource.
+// Information about a tag associated with an AWS Direct Connect resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResourceTag
 type ResourceTag struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the Direct Connect resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string `locationName:"resourceArn" type:"string"`
 
 	// The tags.
@@ -6232,18 +5573,14 @@ func (s ResourceTag) GoString() string {
 	return s.String()
 }
 
-// A route filter prefix that the customer can advertise through Border Gateway
-// Protocol (BGP) over a public virtual interface.
+// Information about a route filter prefix that a customer can advertise through
+// Border Gateway Protocol (BGP) over a public virtual interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/RouteFilterPrefix
 type RouteFilterPrefix struct {
 	_ struct{} `type:"structure"`
 
-	// CIDR notation for the advertised route. Multiple routes are separated by
-	// commas.
-	//
-	// IPv6 CIDRs must be at least a /64 or shorter
-	//
-	// Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64
+	// The CIDR block for the advertised route. Separate multiple routes using commas.
+	// An IPv6 CIDR must use /64 or shorter.
 	Cidr *string `locationName:"cidr" type:"string"`
 }
 
@@ -6262,12 +5599,12 @@ func (s RouteFilterPrefix) GoString() string {
 type Tag struct {
 	_ struct{} `type:"structure"`
 
-	// The key of the tag.
+	// The key.
 	//
 	// Key is a required field
 	Key *string `locationName:"key" min:"1" type:"string" required:"true"`
 
-	// The value of the tag.
+	// The value.
 	Value *string `locationName:"value" type:"string"`
 }
 
@@ -6298,19 +5635,16 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// Container for the parameters to the TagResource operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the Direct Connect resource.
-	//
-	// Example: arn:aws:directconnect:us-east-1:123456789012:dxcon/dxcon-fg5678gh
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
 
-	// The list of tags to add.
+	// The tags to add.
 	//
 	// Tags is a required field
 	Tags []Tag `locationName:"tags" min:"1" type:"list" required:"true"`
@@ -6354,7 +5688,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// The response received when TagResource is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6377,17 +5710,16 @@ func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the UntagResource operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the Direct Connect resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
 
-	// The list of tag keys to remove.
+	// The tag keys of the tags to remove.
 	//
 	// TagKeys is a required field
 	TagKeys []string `locationName:"tagKeys" type:"list" required:"true"`
@@ -6421,7 +5753,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// The response received when UntagResource is called.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -6444,31 +5775,20 @@ func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Container for the parameters to the UpdateLag operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLagRequest
 type UpdateLagInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the LAG to update.
-	//
-	// Example: dxlag-abc123
-	//
-	// Default: None
+	// The ID of the LAG.
 	//
 	// LagId is a required field
 	LagId *string `locationName:"lagId" type:"string" required:"true"`
 
-	// The name for the LAG.
-	//
-	// Example: "3x10G LAG to AWS"
-	//
-	// Default: None
+	// The name of the LAG.
 	LagName *string `locationName:"lagName" type:"string"`
 
 	// The minimum number of physical connections that must be operational for the
 	// LAG itself to be operational.
-	//
-	// Default: None
 	MinimumLinks *int64 `locationName:"minimumLinks" type:"integer"`
 }
 
@@ -6496,11 +5816,7 @@ func (s *UpdateLagInput) Validate() error {
 	return nil
 }
 
-// Describes a link aggregation group (LAG). A LAG is a connection that uses
-// the Link Aggregation Control Protocol (LACP) to logically aggregate a bundle
-// of physical connections. Like an interconnect, it can host other connections.
-// All connections in a LAG must terminate on the same physical AWS Direct Connect
-// endpoint, and must be the same bandwidth.
+// Information about a link aggregation group (LAG).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLagOutput
 type UpdateLagOutput struct {
 	_ struct{} `type:"structure"`
@@ -6508,77 +5824,66 @@ type UpdateLagOutput struct {
 	responseMetadata aws.Response
 
 	// Indicates whether the LAG can host other connections.
-	//
-	// This is intended for use by AWS Direct Connect partners only.
 	AllowsHostedConnections *bool `locationName:"allowsHostedConnections" type:"boolean"`
 
-	// Deprecated in favor of awsDeviceV2.
-	//
-	// The AWS Direct Connection endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	AwsDevice *string `locationName:"awsDevice" deprecated:"true" type:"string"`
 
-	// The AWS Direct Connection endpoint that hosts the LAG.
+	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
 
-	// A list of connections bundled by this LAG.
+	// The connections bundled by the LAG.
 	Connections []DisassociateConnectionFromLagOutput `locationName:"connections" type:"list"`
 
 	// The individual bandwidth of the physical connections bundled by the LAG.
-	//
-	// Available values: 1Gbps, 10Gbps
+	// The possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string `locationName:"connectionsBandwidth" type:"string"`
 
+	// Indicates whether the LAG supports a secondary BGP peer in the same address
+	// family (IPv4/IPv6).
+	HasLogicalRedundancy HasLogicalRedundancy `locationName:"hasLogicalRedundancy" type:"string" enum:"true"`
+
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
+
 	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
 	LagId *string `locationName:"lagId" type:"string"`
 
 	// The name of the LAG.
 	LagName *string `locationName:"lagName" type:"string"`
 
-	// The state of the LAG.
+	// The state of the LAG. The following are the possible values:
 	//
-	//    * Requested: The initial state of a LAG. The LAG stays in the requested
+	//    * requested: The initial state of a LAG. The LAG stays in the requested
 	//    state until the Letter of Authorization (LOA) is available.
 	//
-	//    * Pending: The LAG has been approved, and is being initialized.
+	//    * pending: The LAG has been approved and is being initialized.
 	//
-	//    * Available: The network link is established, and the LAG is ready for
+	//    * available: The network link is established and the LAG is ready for
 	//    use.
 	//
-	//    * Down: The network link is down.
+	//    * down: The network link is down.
 	//
-	//    * Deleting: The LAG is in the process of being deleted.
+	//    * deleting: The LAG is being deleted.
 	//
-	//    * Deleted: The LAG has been deleted.
+	//    * deleted: The LAG is deleted.
 	LagState LagState `locationName:"lagState" type:"string" enum:"true"`
 
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
+	// The location of the LAG.
 	Location *string `locationName:"location" type:"string"`
 
 	// The minimum number of physical connections that must be operational for the
-	// LAG itself to be operational. If the number of operational connections drops
-	// below this setting, the LAG state changes to down. This value can help to
-	// ensure that a LAG is not overutilized if a significant number of its bundled
-	// connections go down.
+	// LAG itself to be operational.
 	MinimumLinks *int64 `locationName:"minimumLinks" type:"integer"`
 
 	// The number of physical connections bundled by the LAG, up to a maximum of
 	// 10.
 	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer"`
 
-	// The owner of the LAG.
+	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
 
-	// The AWS region where the connection is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
+	// The AWS Region where the connection is located.
 	Region *string `locationName:"region" type:"string"`
 }
 
@@ -6597,31 +5902,184 @@ func (s UpdateLagOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// You can create one or more AWS Direct Connect private virtual interfaces
-// linking to your virtual private gateway.
-//
-// Virtual private gateways can be managed using the Amazon Virtual Private
-// Cloud (Amazon VPC) console or the Amazon EC2 CreateVpnGateway action (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateVirtualInterfaceAttributesRequest
+type UpdateVirtualInterfaceAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
+	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// The ID of the virtual private interface.
+	//
+	// VirtualInterfaceId is a required field
+	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVirtualInterfaceAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVirtualInterfaceAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateVirtualInterfaceAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVirtualInterfaceAttributesInput"}
+
+	if s.VirtualInterfaceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about a virtual interface.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterfaceOutput
+type UpdateVirtualInterfaceAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string" enum:"true"`
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
+
+	// The autonomous system number (ASN) for the Amazon side of the connection.
+	AmazonSideAsn *int64 `locationName:"amazonSideAsn" type:"long"`
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	Asn *int64 `locationName:"asn" type:"integer"`
+
+	// The authentication key for BGP configuration.
+	AuthKey *string `locationName:"authKey" type:"string"`
+
+	// The Direct Connect endpoint on which the virtual interface terminates.
+	AwsDeviceV2 *string `locationName:"awsDeviceV2" type:"string"`
+
+	// The BGP peers configured on this virtual interface.
+	BgpPeers []BGPPeer `locationName:"bgpPeers" type:"list"`
+
+	// The ID of the connection.
+	ConnectionId *string `locationName:"connectionId" type:"string"`
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string `locationName:"customerAddress" type:"string"`
+
+	// The customer router configuration.
+	CustomerRouterConfig *string `locationName:"customerRouterConfig" type:"string"`
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string `locationName:"directConnectGatewayId" type:"string"`
+
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool `locationName:"jumboFrameCapable" type:"boolean"`
+
+	// The location of the connection.
+	Location *string `locationName:"location" type:"string"`
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
+	// and 9001. The default value is 1500.
+	Mtu *int64 `locationName:"mtu" type:"integer"`
+
+	// The ID of the AWS account that owns the virtual interface.
+	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
+
+	// The AWS Region where the virtual interface is located.
+	Region *string `locationName:"region" type:"string"`
+
+	// The routes to be advertised to the AWS network in this Region. Applies to
+	// public virtual interfaces.
+	RouteFilterPrefixes []RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
+
+	// The ID of the virtual private gateway. Applies only to private virtual interfaces.
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
+
+	// The ID of the virtual interface.
+	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
+
+	// The name of the virtual interface assigned by the customer network.
+	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
+
+	// The state of the virtual interface. The following are the possible values:
+	//
+	//    * confirming: The creation of the virtual interface is pending confirmation
+	//    from the virtual interface owner. If the owner of the virtual interface
+	//    is different from the owner of the connection on which it is provisioned,
+	//    then the virtual interface will remain in this state until it is confirmed
+	//    by the virtual interface owner.
+	//
+	//    * verifying: This state only applies to public virtual interfaces. Each
+	//    public virtual interface needs validation before the virtual interface
+	//    can be created.
+	//
+	//    * pending: A virtual interface is in this state from the time that it
+	//    is created until the virtual interface is ready to forward traffic.
+	//
+	//    * available: A virtual interface that is able to forward traffic.
+	//
+	//    * down: A virtual interface that is BGP down.
+	//
+	//    * deleting: A virtual interface is in this state immediately after calling
+	//    DeleteVirtualInterface until it can no longer forward traffic.
+	//
+	//    * deleted: A virtual interface that cannot forward traffic.
+	//
+	//    * rejected: The virtual interface owner has declined creation of the virtual
+	//    interface. If a virtual interface in the Confirming state is deleted by
+	//    the virtual interface owner, the virtual interface enters the Rejected
+	//    state.
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string" enum:"true"`
+
+	// The type of virtual interface. The possible values are private and public.
+	VirtualInterfaceType *string `locationName:"virtualInterfaceType" type:"string"`
+
+	// The ID of the VLAN.
+	Vlan *int64 `locationName:"vlan" type:"integer"`
+}
+
+// String returns the string representation
+func (s UpdateVirtualInterfaceAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVirtualInterfaceAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVirtualInterfaceAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Information about a virtual private gateway for a private virtual interface.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualGateway
 type VirtualGateway struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the virtual private gateway to a VPC. This only applies to private
-	// virtual interfaces.
-	//
-	// Example: vgw-123er56
+	// The ID of the virtual private gateway.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
-	// State of the virtual private gateway.
+	// The state of the virtual private gateway. The following are the possible
+	// values:
 	//
-	//    * Pending: This is the initial state after calling CreateVpnGateway.
+	//    * pending: Initial state after creating the virtual private gateway.
 	//
-	//    * Available: Ready for use by a private virtual interface.
+	//    * available: Ready for use by a private virtual interface.
 	//
-	//    * Deleting: This is the initial state after calling DeleteVpnGateway.
+	//    * deleting: Initial state after deleting the virtual private gateway.
 	//
-	//    * Deleted: In this state, a private virtual interface is unable to send
-	//    traffic over this gateway.
+	//    * deleted: The virtual private gateway is deleted. The private virtual
+	//    interface is unable to send traffic over this gateway.
 	VirtualGatewayState *string `locationName:"virtualGatewayState" type:"string"`
 }
 
@@ -6635,11 +6093,6 @@ func (s VirtualGateway) GoString() string {
 	return s.String()
 }
 
-// Indicates the address family for the BGP peer.
-//
-//    * ipv4: IPv4 address family
-//
-//    * ipv6: IPv6 address family
 type AddressFamily string
 
 // Enum values for AddressFamily
@@ -6657,20 +6110,6 @@ func (enum AddressFamily) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The state of the BGP peer.
-//
-//    * Verifying: The BGP peering addresses or ASN require validation before
-//    the BGP peer can be created. This state only applies to BGP peers on a
-//    public virtual interface.
-//
-//    * Pending: The BGP peer has been created, and is in this state until it
-//    is ready to be established.
-//
-//    * Available: The BGP peer can be established.
-//
-//    * Deleting: The BGP peer is in the process of being deleted.
-//
-//    * Deleted: The BGP peer has been deleted and cannot be established.
 type BGPPeerState string
 
 // Enum values for BGPPeerState
@@ -6691,14 +6130,6 @@ func (enum BGPPeerState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The Up/Down state of the BGP peer.
-//
-//    * Up: The BGP peer is established.
-//
-// A state of up does not indicate the state of the routing function. Ensure
-//    that you are receiving routes over the BGP session.
-//
-//    * Down: The BGP peer is down.
 type BGPStatus string
 
 // Enum values for BGPStatus
@@ -6716,28 +6147,6 @@ func (enum BGPStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// State of the connection.
-//
-//    * Ordering: The initial state of a hosted connection provisioned on an
-//    interconnect. The connection stays in the ordering state until the owner
-//    of the hosted connection confirms or declines the connection order.
-//
-//    * Requested: The initial state of a standard connection. The connection
-//    stays in the requested state until the Letter of Authorization (LOA) is
-//    sent to the customer.
-//
-//    * Pending: The connection has been approved, and is being initialized.
-//
-//    * Available: The network link is up, and the connection is ready for use.
-//
-//    * Down: The network link is down.
-//
-//    * Deleting: The connection is in the process of being deleted.
-//
-//    * Deleted: The connection has been deleted.
-//
-//    * Rejected: A hosted connection in the 'Ordering' state will enter the
-//    'Rejected' state if it is deleted by the end customer.
 type ConnectionState string
 
 // Enum values for ConnectionState
@@ -6761,18 +6170,6 @@ func (enum ConnectionState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// State of the direct connect gateway association.
-//
-//    * Associating: The initial state after calling CreateDirectConnectGatewayAssociation.
-//
-//    * Associated: The direct connect gateway and virtual private gateway are
-//    successfully associated and ready to pass traffic.
-//
-//    * Disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.
-//
-//    * Disassociated: The virtual private gateway is successfully disassociated
-//    from the direct connect gateway. Traffic flow between the direct connect
-//    gateway and virtual private gateway stops.
 type GatewayAssociationState string
 
 // Enum values for GatewayAssociationState
@@ -6792,20 +6189,6 @@ func (enum GatewayAssociationState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// State of the direct connect gateway attachment.
-//
-//    * Attaching: The initial state after a virtual interface is created using
-//    the direct connect gateway.
-//
-//    * Attached: The direct connect gateway and virtual interface are successfully
-//    attached and ready to pass traffic.
-//
-//    * Detaching: The initial state after calling DeleteVirtualInterface on
-//    a virtual interface that is attached to a direct connect gateway.
-//
-//    * Detached: The virtual interface is successfully detached from the direct
-//    connect gateway. Traffic flow between the direct connect gateway and virtual
-//    interface stops.
 type GatewayAttachmentState string
 
 // Enum values for GatewayAttachmentState
@@ -6825,15 +6208,6 @@ func (enum GatewayAttachmentState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// State of the direct connect gateway.
-//
-//    * Pending: The initial state after calling CreateDirectConnectGateway.
-//
-//    * Available: The direct connect gateway is ready for use.
-//
-//    * Deleting: The initial state after calling DeleteDirectConnectGateway.
-//
-//    * Deleted: The direct connect gateway is deleted and cannot pass traffic.
 type GatewayState string
 
 // Enum values for GatewayState
@@ -6853,22 +6227,24 @@ func (enum GatewayState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// State of the interconnect.
-//
-//    * Requested: The initial state of an interconnect. The interconnect stays
-//    in the requested state until the Letter of Authorization (LOA) is sent
-//    to the customer.
-//
-//    * Pending: The interconnect has been approved, and is being initialized.
-//
-//    * Available: The network link is up, and the interconnect is ready for
-//    use.
-//
-//    * Down: The network link is down.
-//
-//    * Deleting: The interconnect is in the process of being deleted.
-//
-//    * Deleted: The interconnect has been deleted.
+type HasLogicalRedundancy string
+
+// Enum values for HasLogicalRedundancy
+const (
+	HasLogicalRedundancyUnknown HasLogicalRedundancy = "unknown"
+	HasLogicalRedundancyYes     HasLogicalRedundancy = "yes"
+	HasLogicalRedundancyNo      HasLogicalRedundancy = "no"
+)
+
+func (enum HasLogicalRedundancy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HasLogicalRedundancy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InterconnectState string
 
 // Enum values for InterconnectState
@@ -6890,21 +6266,6 @@ func (enum InterconnectState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The state of the LAG.
-//
-//    * Requested: The initial state of a LAG. The LAG stays in the requested
-//    state until the Letter of Authorization (LOA) is available.
-//
-//    * Pending: The LAG has been approved, and is being initialized.
-//
-//    * Available: The network link is established, and the LAG is ready for
-//    use.
-//
-//    * Down: The network link is down.
-//
-//    * Deleting: The LAG is in the process of being deleted.
-//
-//    * Deleted: The LAG has been deleted.
 type LagState string
 
 // Enum values for LagState
@@ -6926,10 +6287,6 @@ func (enum LagState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// A standard media type indicating the content type of the LOA-CFA document.
-// Currently, the only supported value is "application/pdf".
-//
-// Default: application/pdf
 type LoaContentType string
 
 // Enum values for LoaContentType
@@ -6946,34 +6303,6 @@ func (enum LoaContentType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// State of the virtual interface.
-//
-//    * Confirming: The creation of the virtual interface is pending confirmation
-//    from the virtual interface owner. If the owner of the virtual interface
-//    is different from the owner of the connection on which it is provisioned,
-//    then the virtual interface will remain in this state until it is confirmed
-//    by the virtual interface owner.
-//
-//    * Verifying: This state only applies to public virtual interfaces. Each
-//    public virtual interface needs validation before the virtual interface
-//    can be created.
-//
-//    * Pending: A virtual interface is in this state from the time that it
-//    is created until the virtual interface is ready to forward traffic.
-//
-//    * Available: A virtual interface that is able to forward traffic.
-//
-//    * Down: A virtual interface that is BGP down.
-//
-//    * Deleting: A virtual interface is in this state immediately after calling
-//    DeleteVirtualInterface until it can no longer forward traffic.
-//
-//    * Deleted: A virtual interface that cannot forward traffic.
-//
-//    * Rejected: The virtual interface owner has declined creation of the virtual
-//    interface. If a virtual interface in the 'Confirming' state is deleted
-//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
-//    state.
 type VirtualInterfaceState string
 
 // Enum values for VirtualInterfaceState
