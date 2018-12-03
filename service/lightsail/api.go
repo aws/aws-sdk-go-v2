@@ -3,6 +3,7 @@
 package lightsail
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -84,6 +85,10 @@ func (r AttachDiskRequest) Send() (*AttachDiskOutput, error) {
 // Attaches a block storage disk to a running or stopped Lightsail instance
 // and exposes it to the instance with the specified disk name.
 //
+// The attach disk operation supports tag-based access control via resource
+// tags applied to the resource identified by diskName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the AttachDiskRequest method.
 //    req := client.AttachDiskRequest(params)
 //    resp, err := req.Send()
@@ -136,6 +141,10 @@ func (r AttachInstancesToLoadBalancerRequest) Send() (*AttachInstancesToLoadBala
 //
 // After some time, the instances are attached to the load balancer and the
 // health check status is available.
+//
+// The attach instances to load balancer operation supports tag-based access
+// control via resource tags applied to the resource identified by loadBalancerName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the AttachInstancesToLoadBalancerRequest method.
 //    req := client.AttachInstancesToLoadBalancerRequest(params)
@@ -193,6 +202,10 @@ func (r AttachLoadBalancerTlsCertificateRequest) Send() (*AttachLoadBalancerTlsC
 // account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached
 // certificate, and it will replace the existing one and become the attached
 // certificate.
+//
+// The attach load balancer tls certificate operation supports tag-based access
+// control via resource tags applied to the resource identified by loadBalancerName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the AttachLoadBalancerTlsCertificateRequest method.
 //    req := client.AttachLoadBalancerTlsCertificateRequest(params)
@@ -294,6 +307,10 @@ func (r CloseInstancePublicPortsRequest) Send() (*CloseInstancePublicPortsOutput
 //
 // Closes the public ports on a specific Amazon Lightsail instance.
 //
+// The close instance public ports operation supports tag-based access control
+// via resource tags applied to the resource identified by instanceName. For
+// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CloseInstancePublicPortsRequest method.
 //    req := client.CloseInstancePublicPortsRequest(params)
 //    resp, err := req.Send()
@@ -318,6 +335,115 @@ func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPo
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CloseInstancePublicPortsRequest{Request: req, Input: input, Copy: c.CloseInstancePublicPortsRequest}
+}
+
+const opCopySnapshot = "CopySnapshot"
+
+// CopySnapshotRequest is a API request type for the CopySnapshot API operation.
+type CopySnapshotRequest struct {
+	*aws.Request
+	Input *CopySnapshotInput
+	Copy  func(*CopySnapshotInput) CopySnapshotRequest
+}
+
+// Send marshals and sends the CopySnapshot API request.
+func (r CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopySnapshotOutput), nil
+}
+
+// CopySnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Copies an instance or disk snapshot from one AWS Region to another in Amazon
+// Lightsail.
+//
+//    // Example sending a request using the CopySnapshotRequest method.
+//    req := client.CopySnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshot
+func (c *Lightsail) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCopySnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CopySnapshotInput{}
+	}
+
+	output := &CopySnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CopySnapshotRequest{Request: req, Input: input, Copy: c.CopySnapshotRequest}
+}
+
+const opCreateCloudFormationStack = "CreateCloudFormationStack"
+
+// CreateCloudFormationStackRequest is a API request type for the CreateCloudFormationStack API operation.
+type CreateCloudFormationStackRequest struct {
+	*aws.Request
+	Input *CreateCloudFormationStackInput
+	Copy  func(*CreateCloudFormationStackInput) CreateCloudFormationStackRequest
+}
+
+// Send marshals and sends the CreateCloudFormationStack API request.
+func (r CreateCloudFormationStackRequest) Send() (*CreateCloudFormationStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCloudFormationStackOutput), nil
+}
+
+// CreateCloudFormationStackRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance
+// from an exported Amazon Lightsail snapshot. This operation results in a CloudFormation
+// stack record that can be used to track the AWS CloudFormation stack created.
+// Use the get cloud formation stack records operation to get a list of the
+// CloudFormation stacks created.
+//
+// Wait until after your new Amazon EC2 instance is created before running the
+// create cloud formation stack operation again with the same export snapshot
+// record.
+//
+//    // Example sending a request using the CreateCloudFormationStackRequest method.
+//    req := client.CreateCloudFormationStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCloudFormationStack
+func (c *Lightsail) CreateCloudFormationStackRequest(input *CreateCloudFormationStackInput) CreateCloudFormationStackRequest {
+	op := &aws.Operation{
+		Name:       opCreateCloudFormationStack,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateCloudFormationStackInput{}
+	}
+
+	output := &CreateCloudFormationStackOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateCloudFormationStackRequest{Request: req, Input: input, Copy: c.CreateCloudFormationStackRequest}
 }
 
 const opCreateDisk = "CreateDisk"
@@ -346,6 +472,9 @@ func (r CreateDiskRequest) Send() (*CreateDiskOutput, error) {
 // in the same Availability Zone (e.g., us-east-2a). The disk is created in
 // the regional endpoint that you send the HTTP request to. For more information,
 // see Regions and Availability Zones in Lightsail (https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail).
+//
+// The create disk operation supports tag-based access control via request tags.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the CreateDiskRequest method.
 //    req := client.CreateDiskRequest(params)
@@ -399,6 +528,10 @@ func (r CreateDiskFromSnapshotRequest) Send() (*CreateDiskFromSnapshotOutput, er
 // a Lightsail instance in the same Availability Zone (e.g., us-east-2a). The
 // disk is created in the regional endpoint that you send the HTTP request to.
 // For more information, see Regions and Availability Zones in Lightsail (https://lightsail.aws.amazon.com/ls/docs/overview/article/understanding-regions-and-availability-zones-in-amazon-lightsail).
+//
+// The create disk from snapshot operation supports tag-based access control
+// via request tags and resource tags applied to the resource identified by
+// diskSnapshotName. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the CreateDiskFromSnapshotRequest method.
 //    req := client.CreateDiskFromSnapshotRequest(params)
@@ -463,6 +596,9 @@ func (r CreateDiskSnapshotRequest) Send() (*CreateDiskSnapshotOutput, error) {
 // snapshot. You may remount and use your disk while the snapshot status is
 // pending.
 //
+// The create disk snapshot operation supports tag-based access control via
+// request tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CreateDiskSnapshotRequest method.
 //    req := client.CreateDiskSnapshotRequest(params)
 //    resp, err := req.Send()
@@ -512,6 +648,9 @@ func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
 // Amazon Lightsail.
 //
 // Creates a domain resource for the specified domain (e.g., example.com).
+//
+// The create domain operation supports tag-based access control via request
+// tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the CreateDomainRequest method.
 //    req := client.CreateDomainRequest(params)
@@ -564,6 +703,10 @@ func (r CreateDomainEntryRequest) Send() (*CreateDomainEntryOutput, error) {
 // Creates one of the following entry records associated with the domain: A
 // record, CNAME record, TXT record, or MX record.
 //
+// The create domain entry operation supports tag-based access control via resource
+// tags applied to the resource identified by domainName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CreateDomainEntryRequest method.
 //    req := client.CreateDomainEntryRequest(params)
 //    resp, err := req.Send()
@@ -615,6 +758,9 @@ func (r CreateInstanceSnapshotRequest) Send() (*CreateInstanceSnapshotOutput, er
 // Creates a snapshot of a specific virtual private server, or instance. You
 // can use a snapshot to create a new instance that is based on that snapshot.
 //
+// The create instance snapshot operation supports tag-based access control
+// via request tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CreateInstanceSnapshotRequest method.
 //    req := client.CreateInstanceSnapshotRequest(params)
 //    resp, err := req.Send()
@@ -664,6 +810,14 @@ func (r CreateInstancesRequest) Send() (*CreateInstancesOutput, error) {
 // Amazon Lightsail.
 //
 // Creates one or more Amazon Lightsail virtual private servers, or instances.
+// Create instances using active blueprints. Inactive blueprints are listed
+// to support customers with existing instances but are not necessarily available
+// for launch of new instances. Blueprints are marked inactive when they become
+// outdated due to operating system updates or new application releases. Use
+// the get blueprints operation to return a list of available blueprints.
+//
+// The create instances operation supports tag-based access control via request
+// tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the CreateInstancesRequest method.
 //    req := client.CreateInstancesRequest(params)
@@ -716,6 +870,10 @@ func (r CreateInstancesFromSnapshotRequest) Send() (*CreateInstancesFromSnapshot
 // Uses a specific snapshot as a blueprint for creating one or more new instances
 // that are based on that identical configuration.
 //
+// The create instances from snapshot operation supports tag-based access control
+// via request tags and resource tags applied to the resource identified by
+// instanceSnapshotName. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CreateInstancesFromSnapshotRequest method.
 //    req := client.CreateInstancesFromSnapshotRequest(params)
 //    resp, err := req.Send()
@@ -764,7 +922,10 @@ func (r CreateKeyPairRequest) Send() (*CreateKeyPairOutput, error) {
 // CreateKeyPairRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Creates sn SSH key pair.
+// Creates an SSH key pair.
+//
+// The create key pair operation supports tag-based access control via request
+// tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the CreateKeyPairRequest method.
 //    req := client.CreateKeyPairRequest(params)
@@ -823,6 +984,9 @@ func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
 // To change additional load balancer settings, use the UpdateLoadBalancerAttribute
 // operation.
 //
+// The create load balancer operation supports tag-based access control via
+// request tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CreateLoadBalancerRequest method.
 //    req := client.CreateLoadBalancerRequest(params)
 //    resp, err := req.Send()
@@ -875,6 +1039,10 @@ func (r CreateLoadBalancerTlsCertificateRequest) Send() (*CreateLoadBalancerTlsC
 //
 // TLS is just an updated, more secure version of Secure Socket Layer (SSL).
 //
+// The create load balancer tls certificate operation supports tag-based access
+// control via resource tags applied to the resource identified by loadBalancerName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the CreateLoadBalancerTlsCertificateRequest method.
 //    req := client.CreateLoadBalancerTlsCertificateRequest(params)
 //    resp, err := req.Send()
@@ -899,6 +1067,174 @@ func (c *Lightsail) CreateLoadBalancerTlsCertificateRequest(input *CreateLoadBal
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerTlsCertificateRequest}
+}
+
+const opCreateRelationalDatabase = "CreateRelationalDatabase"
+
+// CreateRelationalDatabaseRequest is a API request type for the CreateRelationalDatabase API operation.
+type CreateRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *CreateRelationalDatabaseInput
+	Copy  func(*CreateRelationalDatabaseInput) CreateRelationalDatabaseRequest
+}
+
+// Send marshals and sends the CreateRelationalDatabase API request.
+func (r CreateRelationalDatabaseRequest) Send() (*CreateRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRelationalDatabaseOutput), nil
+}
+
+// CreateRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Creates a new database in Amazon Lightsail.
+//
+// The create relational database operation supports tag-based access control
+// via request tags. For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the CreateRelationalDatabaseRequest method.
+//    req := client.CreateRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabase
+func (c *Lightsail) CreateRelationalDatabaseRequest(input *CreateRelationalDatabaseInput) CreateRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opCreateRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateRelationalDatabaseInput{}
+	}
+
+	output := &CreateRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateRelationalDatabaseRequest{Request: req, Input: input, Copy: c.CreateRelationalDatabaseRequest}
+}
+
+const opCreateRelationalDatabaseFromSnapshot = "CreateRelationalDatabaseFromSnapshot"
+
+// CreateRelationalDatabaseFromSnapshotRequest is a API request type for the CreateRelationalDatabaseFromSnapshot API operation.
+type CreateRelationalDatabaseFromSnapshotRequest struct {
+	*aws.Request
+	Input *CreateRelationalDatabaseFromSnapshotInput
+	Copy  func(*CreateRelationalDatabaseFromSnapshotInput) CreateRelationalDatabaseFromSnapshotRequest
+}
+
+// Send marshals and sends the CreateRelationalDatabaseFromSnapshot API request.
+func (r CreateRelationalDatabaseFromSnapshotRequest) Send() (*CreateRelationalDatabaseFromSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRelationalDatabaseFromSnapshotOutput), nil
+}
+
+// CreateRelationalDatabaseFromSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Creates a new database from an existing database snapshot in Amazon Lightsail.
+//
+// You can create a new database from a snapshot in if something goes wrong
+// with your original database, or to change it to a different plan, such as
+// a high availability or standard plan.
+//
+// The create relational database from snapshot operation supports tag-based
+// access control via request tags and resource tags applied to the resource
+// identified by relationalDatabaseSnapshotName. For more information, see the
+// Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the CreateRelationalDatabaseFromSnapshotRequest method.
+//    req := client.CreateRelationalDatabaseFromSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseFromSnapshot
+func (c *Lightsail) CreateRelationalDatabaseFromSnapshotRequest(input *CreateRelationalDatabaseFromSnapshotInput) CreateRelationalDatabaseFromSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCreateRelationalDatabaseFromSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateRelationalDatabaseFromSnapshotInput{}
+	}
+
+	output := &CreateRelationalDatabaseFromSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateRelationalDatabaseFromSnapshotRequest{Request: req, Input: input, Copy: c.CreateRelationalDatabaseFromSnapshotRequest}
+}
+
+const opCreateRelationalDatabaseSnapshot = "CreateRelationalDatabaseSnapshot"
+
+// CreateRelationalDatabaseSnapshotRequest is a API request type for the CreateRelationalDatabaseSnapshot API operation.
+type CreateRelationalDatabaseSnapshotRequest struct {
+	*aws.Request
+	Input *CreateRelationalDatabaseSnapshotInput
+	Copy  func(*CreateRelationalDatabaseSnapshotInput) CreateRelationalDatabaseSnapshotRequest
+}
+
+// Send marshals and sends the CreateRelationalDatabaseSnapshot API request.
+func (r CreateRelationalDatabaseSnapshotRequest) Send() (*CreateRelationalDatabaseSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRelationalDatabaseSnapshotOutput), nil
+}
+
+// CreateRelationalDatabaseSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Creates a snapshot of your database in Amazon Lightsail. You can use snapshots
+// for backups, to make copies of a database, and to save data before deleting
+// a database.
+//
+// The create relational database snapshot operation supports tag-based access
+// control via request tags. For more information, see the Lightsail Dev Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the CreateRelationalDatabaseSnapshotRequest method.
+//    req := client.CreateRelationalDatabaseSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshot
+func (c *Lightsail) CreateRelationalDatabaseSnapshotRequest(input *CreateRelationalDatabaseSnapshotInput) CreateRelationalDatabaseSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCreateRelationalDatabaseSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateRelationalDatabaseSnapshotInput{}
+	}
+
+	output := &CreateRelationalDatabaseSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.CreateRelationalDatabaseSnapshotRequest}
 }
 
 const opDeleteDisk = "DeleteDisk"
@@ -927,6 +1263,10 @@ func (r DeleteDiskRequest) Send() (*DeleteDiskOutput, error) {
 // state (not attached to a Lightsail instance).
 //
 // The disk may remain in the deleting state for several minutes.
+//
+// The delete disk operation supports tag-based access control via resource
+// tags applied to the resource identified by diskName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the DeleteDiskRequest method.
 //    req := client.DeleteDiskRequest(params)
@@ -985,6 +1325,10 @@ func (r DeleteDiskSnapshotRequest) Send() (*DeleteDiskSnapshotOutput, error) {
 // snapshots have been deleted, all active snapshots will have access to all
 // the information needed to restore the disk.
 //
+// The delete disk snapshot operation supports tag-based access control via
+// resource tags applied to the resource identified by diskSnapshotName. For
+// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the DeleteDiskSnapshotRequest method.
 //    req := client.DeleteDiskSnapshotRequest(params)
 //    resp, err := req.Send()
@@ -1034,6 +1378,10 @@ func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
 // Amazon Lightsail.
 //
 // Deletes the specified domain recordset and all of its domain records.
+//
+// The delete domain operation supports tag-based access control via resource
+// tags applied to the resource identified by domainName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the DeleteDomainRequest method.
 //    req := client.DeleteDomainRequest(params)
@@ -1085,6 +1433,10 @@ func (r DeleteDomainEntryRequest) Send() (*DeleteDomainEntryOutput, error) {
 //
 // Deletes a specific domain entry.
 //
+// The delete domain entry operation supports tag-based access control via resource
+// tags applied to the resource identified by domainName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the DeleteDomainEntryRequest method.
 //    req := client.DeleteDomainEntryRequest(params)
 //    resp, err := req.Send()
@@ -1134,6 +1486,10 @@ func (r DeleteInstanceRequest) Send() (*DeleteInstanceOutput, error) {
 // Amazon Lightsail.
 //
 // Deletes a specific Amazon Lightsail virtual private server, or instance.
+//
+// The delete instance operation supports tag-based access control via resource
+// tags applied to the resource identified by instanceName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the DeleteInstanceRequest method.
 //    req := client.DeleteInstanceRequest(params)
@@ -1185,6 +1541,10 @@ func (r DeleteInstanceSnapshotRequest) Send() (*DeleteInstanceSnapshotOutput, er
 //
 // Deletes a specific snapshot of a virtual private server (or instance).
 //
+// The delete instance snapshot operation supports tag-based access control
+// via resource tags applied to the resource identified by instanceSnapshotName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the DeleteInstanceSnapshotRequest method.
 //    req := client.DeleteInstanceSnapshotRequest(params)
 //    resp, err := req.Send()
@@ -1234,6 +1594,10 @@ func (r DeleteKeyPairRequest) Send() (*DeleteKeyPairOutput, error) {
 // Amazon Lightsail.
 //
 // Deletes a specific SSH key pair.
+//
+// The delete key pair operation supports tag-based access control via resource
+// tags applied to the resource identified by keyPairName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the DeleteKeyPairRequest method.
 //    req := client.DeleteKeyPairRequest(params)
@@ -1287,6 +1651,10 @@ func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
 // Once the load balancer is deleted, you will need to create a new load balancer,
 // create a new certificate, and verify domain ownership again.
 //
+// The delete load balancer operation supports tag-based access control via
+// resource tags applied to the resource identified by loadBalancerName. For
+// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the DeleteLoadBalancerRequest method.
 //    req := client.DeleteLoadBalancerRequest(params)
 //    resp, err := req.Send()
@@ -1337,6 +1705,10 @@ func (r DeleteLoadBalancerTlsCertificateRequest) Send() (*DeleteLoadBalancerTlsC
 //
 // Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
 //
+// The delete load balancer tls certificate operation supports tag-based access
+// control via resource tags applied to the resource identified by loadBalancerName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the DeleteLoadBalancerTlsCertificateRequest method.
 //    req := client.DeleteLoadBalancerTlsCertificateRequest(params)
 //    resp, err := req.Send()
@@ -1361,6 +1733,114 @@ func (c *Lightsail) DeleteLoadBalancerTlsCertificateRequest(input *DeleteLoadBal
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerTlsCertificateRequest}
+}
+
+const opDeleteRelationalDatabase = "DeleteRelationalDatabase"
+
+// DeleteRelationalDatabaseRequest is a API request type for the DeleteRelationalDatabase API operation.
+type DeleteRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *DeleteRelationalDatabaseInput
+	Copy  func(*DeleteRelationalDatabaseInput) DeleteRelationalDatabaseRequest
+}
+
+// Send marshals and sends the DeleteRelationalDatabase API request.
+func (r DeleteRelationalDatabaseRequest) Send() (*DeleteRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRelationalDatabaseOutput), nil
+}
+
+// DeleteRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Deletes a database in Amazon Lightsail.
+//
+// The delete relational database operation supports tag-based access control
+// via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the DeleteRelationalDatabaseRequest method.
+//    req := client.DeleteRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabase
+func (c *Lightsail) DeleteRelationalDatabaseRequest(input *DeleteRelationalDatabaseInput) DeleteRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRelationalDatabaseInput{}
+	}
+
+	output := &DeleteRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRelationalDatabaseRequest{Request: req, Input: input, Copy: c.DeleteRelationalDatabaseRequest}
+}
+
+const opDeleteRelationalDatabaseSnapshot = "DeleteRelationalDatabaseSnapshot"
+
+// DeleteRelationalDatabaseSnapshotRequest is a API request type for the DeleteRelationalDatabaseSnapshot API operation.
+type DeleteRelationalDatabaseSnapshotRequest struct {
+	*aws.Request
+	Input *DeleteRelationalDatabaseSnapshotInput
+	Copy  func(*DeleteRelationalDatabaseSnapshotInput) DeleteRelationalDatabaseSnapshotRequest
+}
+
+// Send marshals and sends the DeleteRelationalDatabaseSnapshot API request.
+func (r DeleteRelationalDatabaseSnapshotRequest) Send() (*DeleteRelationalDatabaseSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRelationalDatabaseSnapshotOutput), nil
+}
+
+// DeleteRelationalDatabaseSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Deletes a database snapshot in Amazon Lightsail.
+//
+// The delete relational database snapshot operation supports tag-based access
+// control via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the DeleteRelationalDatabaseSnapshotRequest method.
+//    req := client.DeleteRelationalDatabaseSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseSnapshot
+func (c *Lightsail) DeleteRelationalDatabaseSnapshotRequest(input *DeleteRelationalDatabaseSnapshotInput) DeleteRelationalDatabaseSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRelationalDatabaseSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRelationalDatabaseSnapshotInput{}
+	}
+
+	output := &DeleteRelationalDatabaseSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.DeleteRelationalDatabaseSnapshotRequest}
 }
 
 const opDetachDisk = "DetachDisk"
@@ -1388,6 +1868,10 @@ func (r DetachDiskRequest) Send() (*DetachDiskOutput, error) {
 // Detaches a stopped block storage disk from a Lightsail instance. Make sure
 // to unmount any file systems on the device within your operating system before
 // stopping the instance and detaching the disk.
+//
+// The detach disk operation supports tag-based access control via resource
+// tags applied to the resource identified by diskName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the DetachDiskRequest method.
 //    req := client.DetachDiskRequest(params)
@@ -1441,6 +1925,10 @@ func (r DetachInstancesFromLoadBalancerRequest) Send() (*DetachInstancesFromLoad
 //
 // This operation waits until the instances are no longer needed before they
 // are detached from the load balancer.
+//
+// The detach instances from load balancer operation supports tag-based access
+// control via resource tags applied to the resource identified by loadBalancerName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the DetachInstancesFromLoadBalancerRequest method.
 //    req := client.DetachInstancesFromLoadBalancerRequest(params)
@@ -1566,6 +2054,72 @@ func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairI
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DownloadDefaultKeyPairRequest{Request: req, Input: input, Copy: c.DownloadDefaultKeyPairRequest}
+}
+
+const opExportSnapshot = "ExportSnapshot"
+
+// ExportSnapshotRequest is a API request type for the ExportSnapshot API operation.
+type ExportSnapshotRequest struct {
+	*aws.Request
+	Input *ExportSnapshotInput
+	Copy  func(*ExportSnapshotInput) ExportSnapshotRequest
+}
+
+// Send marshals and sends the ExportSnapshot API request.
+func (r ExportSnapshotRequest) Send() (*ExportSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExportSnapshotOutput), nil
+}
+
+// ExportSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Exports a Amazon Lightsail instance or block storage disk snapshot to Amazon
+// Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot
+// record that can be used with the create cloud formation stack operation to
+// create new Amazon EC2 instances.
+//
+// Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images
+// (AMIs), and the instance system disk appears as an Amazon Elastic Block Store
+// (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon
+// EBS volumes. Snapshots are exported to the same Amazon Web Services Region
+// in Amazon EC2 as the source Lightsail snapshot.
+//
+// The export snapshotoperation supports tag-based access control via resource tags applied to
+// the resource identified by sourceSnapshotName. For more information, see
+// the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+// Use the get instance snapshots or get disk snapshots operations to get a
+// list of snapshots that you can export to Amazon EC2.
+//
+//    // Example sending a request using the ExportSnapshotRequest method.
+//    req := client.ExportSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshot
+func (c *Lightsail) ExportSnapshotRequest(input *ExportSnapshotInput) ExportSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opExportSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ExportSnapshotInput{}
+	}
+
+	output := &ExportSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ExportSnapshotRequest{Request: req, Input: input, Copy: c.ExportSnapshotRequest}
 }
 
 const opGetActiveNames = "GetActiveNames"
@@ -1720,6 +2274,60 @@ func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest 
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetBundlesRequest{Request: req, Input: input, Copy: c.GetBundlesRequest}
+}
+
+const opGetCloudFormationStackRecords = "GetCloudFormationStackRecords"
+
+// GetCloudFormationStackRecordsRequest is a API request type for the GetCloudFormationStackRecords API operation.
+type GetCloudFormationStackRecordsRequest struct {
+	*aws.Request
+	Input *GetCloudFormationStackRecordsInput
+	Copy  func(*GetCloudFormationStackRecordsInput) GetCloudFormationStackRecordsRequest
+}
+
+// Send marshals and sends the GetCloudFormationStackRecords API request.
+func (r GetCloudFormationStackRecordsRequest) Send() (*GetCloudFormationStackRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCloudFormationStackRecordsOutput), nil
+}
+
+// GetCloudFormationStackRecordsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns the CloudFormation stack record created as a result of the create
+// cloud formation stack operation.
+//
+// An AWS CloudFormation stack is used to create a new Amazon EC2 instance from
+// an exported Lightsail snapshot.
+//
+//    // Example sending a request using the GetCloudFormationStackRecordsRequest method.
+//    req := client.GetCloudFormationStackRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecords
+func (c *Lightsail) GetCloudFormationStackRecordsRequest(input *GetCloudFormationStackRecordsInput) GetCloudFormationStackRecordsRequest {
+	op := &aws.Operation{
+		Name:       opGetCloudFormationStackRecords,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetCloudFormationStackRecordsInput{}
+	}
+
+	output := &GetCloudFormationStackRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetCloudFormationStackRecordsRequest{Request: req, Input: input, Copy: c.GetCloudFormationStackRecordsRequest}
 }
 
 const opGetDisk = "GetDisk"
@@ -2032,6 +2640,60 @@ func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest 
 	return GetDomainsRequest{Request: req, Input: input, Copy: c.GetDomainsRequest}
 }
 
+const opGetExportSnapshotRecords = "GetExportSnapshotRecords"
+
+// GetExportSnapshotRecordsRequest is a API request type for the GetExportSnapshotRecords API operation.
+type GetExportSnapshotRecordsRequest struct {
+	*aws.Request
+	Input *GetExportSnapshotRecordsInput
+	Copy  func(*GetExportSnapshotRecordsInput) GetExportSnapshotRecordsRequest
+}
+
+// Send marshals and sends the GetExportSnapshotRecords API request.
+func (r GetExportSnapshotRecordsRequest) Send() (*GetExportSnapshotRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetExportSnapshotRecordsOutput), nil
+}
+
+// GetExportSnapshotRecordsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns the export snapshot record created as a result of the export snapshot
+// operation.
+//
+// An export snapshot record can be used to create a new Amazon EC2 instance
+// and its related resources with the create cloud formation stack operation.
+//
+//    // Example sending a request using the GetExportSnapshotRecordsRequest method.
+//    req := client.GetExportSnapshotRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecords
+func (c *Lightsail) GetExportSnapshotRecordsRequest(input *GetExportSnapshotRecordsInput) GetExportSnapshotRecordsRequest {
+	op := &aws.Operation{
+		Name:       opGetExportSnapshotRecords,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetExportSnapshotRecordsInput{}
+	}
+
+	output := &GetExportSnapshotRecordsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetExportSnapshotRecordsRequest{Request: req, Input: input, Copy: c.GetExportSnapshotRecordsRequest}
+}
+
 const opGetInstance = "GetInstance"
 
 // GetInstanceRequest is a API request type for the GetInstance API operation.
@@ -2107,6 +2769,10 @@ func (r GetInstanceAccessDetailsRequest) Send() (*GetInstanceAccessDetailsOutput
 //
 // Returns temporary SSH keys you can use to connect to a specific virtual private
 // server, or instance.
+//
+// The get instance access details operation supports tag-based access control
+// via resource tags applied to the resource identified by instanceName. For
+// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the GetInstanceAccessDetailsRequest method.
 //    req := client.GetInstanceAccessDetailsRequest(params)
@@ -2925,7 +3591,7 @@ func (r GetRegionsRequest) Send() (*GetRegionsOutput, error) {
 // Amazon Lightsail.
 //
 // Returns a list of all valid regions for Amazon Lightsail. Use the include
-// availability zones parameter to also return the availability zones in a region.
+// availability zones parameter to also return the Availability Zones in a region.
 //
 //    // Example sending a request using the GetRegionsRequest method.
 //    req := client.GetRegionsRequest(params)
@@ -2951,6 +3617,626 @@ func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) GetRegionsRequest 
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetRegionsRequest{Request: req, Input: input, Copy: c.GetRegionsRequest}
+}
+
+const opGetRelationalDatabase = "GetRelationalDatabase"
+
+// GetRelationalDatabaseRequest is a API request type for the GetRelationalDatabase API operation.
+type GetRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseInput
+	Copy  func(*GetRelationalDatabaseInput) GetRelationalDatabaseRequest
+}
+
+// Send marshals and sends the GetRelationalDatabase API request.
+func (r GetRelationalDatabaseRequest) Send() (*GetRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseOutput), nil
+}
+
+// GetRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns information about a specific database in Amazon Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseRequest method.
+//    req := client.GetRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabase
+func (c *Lightsail) GetRelationalDatabaseRequest(input *GetRelationalDatabaseInput) GetRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseInput{}
+	}
+
+	output := &GetRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseRequest}
+}
+
+const opGetRelationalDatabaseBlueprints = "GetRelationalDatabaseBlueprints"
+
+// GetRelationalDatabaseBlueprintsRequest is a API request type for the GetRelationalDatabaseBlueprints API operation.
+type GetRelationalDatabaseBlueprintsRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseBlueprintsInput
+	Copy  func(*GetRelationalDatabaseBlueprintsInput) GetRelationalDatabaseBlueprintsRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseBlueprints API request.
+func (r GetRelationalDatabaseBlueprintsRequest) Send() (*GetRelationalDatabaseBlueprintsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseBlueprintsOutput), nil
+}
+
+// GetRelationalDatabaseBlueprintsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns a list of available database blueprints in Amazon Lightsail. A blueprint
+// describes the major engine version of a database.
+//
+// You can use a blueprint ID to create a new database that runs a specific
+// database engine.
+//
+//    // Example sending a request using the GetRelationalDatabaseBlueprintsRequest method.
+//    req := client.GetRelationalDatabaseBlueprintsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprints
+func (c *Lightsail) GetRelationalDatabaseBlueprintsRequest(input *GetRelationalDatabaseBlueprintsInput) GetRelationalDatabaseBlueprintsRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseBlueprints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseBlueprintsInput{}
+	}
+
+	output := &GetRelationalDatabaseBlueprintsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseBlueprintsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseBlueprintsRequest}
+}
+
+const opGetRelationalDatabaseBundles = "GetRelationalDatabaseBundles"
+
+// GetRelationalDatabaseBundlesRequest is a API request type for the GetRelationalDatabaseBundles API operation.
+type GetRelationalDatabaseBundlesRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseBundlesInput
+	Copy  func(*GetRelationalDatabaseBundlesInput) GetRelationalDatabaseBundlesRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseBundles API request.
+func (r GetRelationalDatabaseBundlesRequest) Send() (*GetRelationalDatabaseBundlesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseBundlesOutput), nil
+}
+
+// GetRelationalDatabaseBundlesRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns the list of bundles that are available in Amazon Lightsail. A bundle
+// describes the performance specifications for a database.
+//
+// You can use a bundle ID to create a new database with explicit performance
+// specifications.
+//
+//    // Example sending a request using the GetRelationalDatabaseBundlesRequest method.
+//    req := client.GetRelationalDatabaseBundlesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundles
+func (c *Lightsail) GetRelationalDatabaseBundlesRequest(input *GetRelationalDatabaseBundlesInput) GetRelationalDatabaseBundlesRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseBundles,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseBundlesInput{}
+	}
+
+	output := &GetRelationalDatabaseBundlesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseBundlesRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseBundlesRequest}
+}
+
+const opGetRelationalDatabaseEvents = "GetRelationalDatabaseEvents"
+
+// GetRelationalDatabaseEventsRequest is a API request type for the GetRelationalDatabaseEvents API operation.
+type GetRelationalDatabaseEventsRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseEventsInput
+	Copy  func(*GetRelationalDatabaseEventsInput) GetRelationalDatabaseEventsRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseEvents API request.
+func (r GetRelationalDatabaseEventsRequest) Send() (*GetRelationalDatabaseEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseEventsOutput), nil
+}
+
+// GetRelationalDatabaseEventsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns a list of events for a specific database in Amazon Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseEventsRequest method.
+//    req := client.GetRelationalDatabaseEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEvents
+func (c *Lightsail) GetRelationalDatabaseEventsRequest(input *GetRelationalDatabaseEventsInput) GetRelationalDatabaseEventsRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseEventsInput{}
+	}
+
+	output := &GetRelationalDatabaseEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseEventsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseEventsRequest}
+}
+
+const opGetRelationalDatabaseLogEvents = "GetRelationalDatabaseLogEvents"
+
+// GetRelationalDatabaseLogEventsRequest is a API request type for the GetRelationalDatabaseLogEvents API operation.
+type GetRelationalDatabaseLogEventsRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseLogEventsInput
+	Copy  func(*GetRelationalDatabaseLogEventsInput) GetRelationalDatabaseLogEventsRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseLogEvents API request.
+func (r GetRelationalDatabaseLogEventsRequest) Send() (*GetRelationalDatabaseLogEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseLogEventsOutput), nil
+}
+
+// GetRelationalDatabaseLogEventsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns a list of log events for a database in Amazon Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseLogEventsRequest method.
+//    req := client.GetRelationalDatabaseLogEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogEvents
+func (c *Lightsail) GetRelationalDatabaseLogEventsRequest(input *GetRelationalDatabaseLogEventsInput) GetRelationalDatabaseLogEventsRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseLogEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseLogEventsInput{}
+	}
+
+	output := &GetRelationalDatabaseLogEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseLogEventsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseLogEventsRequest}
+}
+
+const opGetRelationalDatabaseLogStreams = "GetRelationalDatabaseLogStreams"
+
+// GetRelationalDatabaseLogStreamsRequest is a API request type for the GetRelationalDatabaseLogStreams API operation.
+type GetRelationalDatabaseLogStreamsRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseLogStreamsInput
+	Copy  func(*GetRelationalDatabaseLogStreamsInput) GetRelationalDatabaseLogStreamsRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseLogStreams API request.
+func (r GetRelationalDatabaseLogStreamsRequest) Send() (*GetRelationalDatabaseLogStreamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseLogStreamsOutput), nil
+}
+
+// GetRelationalDatabaseLogStreamsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns a list of available log streams for a specific database in Amazon
+// Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseLogStreamsRequest method.
+//    req := client.GetRelationalDatabaseLogStreamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogStreams
+func (c *Lightsail) GetRelationalDatabaseLogStreamsRequest(input *GetRelationalDatabaseLogStreamsInput) GetRelationalDatabaseLogStreamsRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseLogStreams,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseLogStreamsInput{}
+	}
+
+	output := &GetRelationalDatabaseLogStreamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseLogStreamsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseLogStreamsRequest}
+}
+
+const opGetRelationalDatabaseMasterUserPassword = "GetRelationalDatabaseMasterUserPassword"
+
+// GetRelationalDatabaseMasterUserPasswordRequest is a API request type for the GetRelationalDatabaseMasterUserPassword API operation.
+type GetRelationalDatabaseMasterUserPasswordRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseMasterUserPasswordInput
+	Copy  func(*GetRelationalDatabaseMasterUserPasswordInput) GetRelationalDatabaseMasterUserPasswordRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseMasterUserPassword API request.
+func (r GetRelationalDatabaseMasterUserPasswordRequest) Send() (*GetRelationalDatabaseMasterUserPasswordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseMasterUserPasswordOutput), nil
+}
+
+// GetRelationalDatabaseMasterUserPasswordRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns the current, previous, or pending versions of the master user password
+// for a Lightsail database.
+//
+// The asdf operation GetRelationalDatabaseMasterUserPassword supports tag-based
+// access control via resource tags applied to the resource identified by relationalDatabaseName.
+//
+//    // Example sending a request using the GetRelationalDatabaseMasterUserPasswordRequest method.
+//    req := client.GetRelationalDatabaseMasterUserPasswordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPassword
+func (c *Lightsail) GetRelationalDatabaseMasterUserPasswordRequest(input *GetRelationalDatabaseMasterUserPasswordInput) GetRelationalDatabaseMasterUserPasswordRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseMasterUserPassword,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseMasterUserPasswordInput{}
+	}
+
+	output := &GetRelationalDatabaseMasterUserPasswordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseMasterUserPasswordRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseMasterUserPasswordRequest}
+}
+
+const opGetRelationalDatabaseMetricData = "GetRelationalDatabaseMetricData"
+
+// GetRelationalDatabaseMetricDataRequest is a API request type for the GetRelationalDatabaseMetricData API operation.
+type GetRelationalDatabaseMetricDataRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseMetricDataInput
+	Copy  func(*GetRelationalDatabaseMetricDataInput) GetRelationalDatabaseMetricDataRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseMetricData API request.
+func (r GetRelationalDatabaseMetricDataRequest) Send() (*GetRelationalDatabaseMetricDataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseMetricDataOutput), nil
+}
+
+// GetRelationalDatabaseMetricDataRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns the data points of the specified metric for a database in Amazon
+// Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseMetricDataRequest method.
+//    req := client.GetRelationalDatabaseMetricDataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricData
+func (c *Lightsail) GetRelationalDatabaseMetricDataRequest(input *GetRelationalDatabaseMetricDataInput) GetRelationalDatabaseMetricDataRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseMetricData,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseMetricDataInput{}
+	}
+
+	output := &GetRelationalDatabaseMetricDataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseMetricDataRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseMetricDataRequest}
+}
+
+const opGetRelationalDatabaseParameters = "GetRelationalDatabaseParameters"
+
+// GetRelationalDatabaseParametersRequest is a API request type for the GetRelationalDatabaseParameters API operation.
+type GetRelationalDatabaseParametersRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseParametersInput
+	Copy  func(*GetRelationalDatabaseParametersInput) GetRelationalDatabaseParametersRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseParameters API request.
+func (r GetRelationalDatabaseParametersRequest) Send() (*GetRelationalDatabaseParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseParametersOutput), nil
+}
+
+// GetRelationalDatabaseParametersRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns all of the runtime parameters offered by the underlying database
+// software, or engine, for a specific database in Amazon Lightsail.
+//
+// In addition to the parameter names and values, this operation returns other
+// information about each parameter. This information includes whether changes
+// require a reboot, whether the parameter is modifiable, the allowed values,
+// and the data types.
+//
+//    // Example sending a request using the GetRelationalDatabaseParametersRequest method.
+//    req := client.GetRelationalDatabaseParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParameters
+func (c *Lightsail) GetRelationalDatabaseParametersRequest(input *GetRelationalDatabaseParametersInput) GetRelationalDatabaseParametersRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseParameters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseParametersInput{}
+	}
+
+	output := &GetRelationalDatabaseParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseParametersRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseParametersRequest}
+}
+
+const opGetRelationalDatabaseSnapshot = "GetRelationalDatabaseSnapshot"
+
+// GetRelationalDatabaseSnapshotRequest is a API request type for the GetRelationalDatabaseSnapshot API operation.
+type GetRelationalDatabaseSnapshotRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseSnapshotInput
+	Copy  func(*GetRelationalDatabaseSnapshotInput) GetRelationalDatabaseSnapshotRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseSnapshot API request.
+func (r GetRelationalDatabaseSnapshotRequest) Send() (*GetRelationalDatabaseSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseSnapshotOutput), nil
+}
+
+// GetRelationalDatabaseSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns information about a specific database snapshot in Amazon Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseSnapshotRequest method.
+//    req := client.GetRelationalDatabaseSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshot
+func (c *Lightsail) GetRelationalDatabaseSnapshotRequest(input *GetRelationalDatabaseSnapshotInput) GetRelationalDatabaseSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseSnapshotInput{}
+	}
+
+	output := &GetRelationalDatabaseSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseSnapshotRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseSnapshotRequest}
+}
+
+const opGetRelationalDatabaseSnapshots = "GetRelationalDatabaseSnapshots"
+
+// GetRelationalDatabaseSnapshotsRequest is a API request type for the GetRelationalDatabaseSnapshots API operation.
+type GetRelationalDatabaseSnapshotsRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabaseSnapshotsInput
+	Copy  func(*GetRelationalDatabaseSnapshotsInput) GetRelationalDatabaseSnapshotsRequest
+}
+
+// Send marshals and sends the GetRelationalDatabaseSnapshots API request.
+func (r GetRelationalDatabaseSnapshotsRequest) Send() (*GetRelationalDatabaseSnapshotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabaseSnapshotsOutput), nil
+}
+
+// GetRelationalDatabaseSnapshotsRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns information about all of your database snapshots in Amazon Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabaseSnapshotsRequest method.
+//    req := client.GetRelationalDatabaseSnapshotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshots
+func (c *Lightsail) GetRelationalDatabaseSnapshotsRequest(input *GetRelationalDatabaseSnapshotsInput) GetRelationalDatabaseSnapshotsRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabaseSnapshots,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabaseSnapshotsInput{}
+	}
+
+	output := &GetRelationalDatabaseSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabaseSnapshotsRequest{Request: req, Input: input, Copy: c.GetRelationalDatabaseSnapshotsRequest}
+}
+
+const opGetRelationalDatabases = "GetRelationalDatabases"
+
+// GetRelationalDatabasesRequest is a API request type for the GetRelationalDatabases API operation.
+type GetRelationalDatabasesRequest struct {
+	*aws.Request
+	Input *GetRelationalDatabasesInput
+	Copy  func(*GetRelationalDatabasesInput) GetRelationalDatabasesRequest
+}
+
+// Send marshals and sends the GetRelationalDatabases API request.
+func (r GetRelationalDatabasesRequest) Send() (*GetRelationalDatabasesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRelationalDatabasesOutput), nil
+}
+
+// GetRelationalDatabasesRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Returns information about all of your databases in Amazon Lightsail.
+//
+//    // Example sending a request using the GetRelationalDatabasesRequest method.
+//    req := client.GetRelationalDatabasesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabases
+func (c *Lightsail) GetRelationalDatabasesRequest(input *GetRelationalDatabasesInput) GetRelationalDatabasesRequest {
+	op := &aws.Operation{
+		Name:       opGetRelationalDatabases,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetRelationalDatabasesInput{}
+	}
+
+	output := &GetRelationalDatabasesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetRelationalDatabasesRequest{Request: req, Input: input, Copy: c.GetRelationalDatabasesRequest}
 }
 
 const opGetStaticIp = "GetStaticIp"
@@ -3177,6 +4463,10 @@ func (r OpenInstancePublicPortsRequest) Send() (*OpenInstancePublicPortsOutput, 
 //
 // Adds public ports to an Amazon Lightsail instance.
 //
+// The open instance public ports operation supports tag-based access control
+// via resource tags applied to the resource identified by instanceName. For
+// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the OpenInstancePublicPortsRequest method.
 //    req := client.OpenInstancePublicPortsRequest(params)
 //    resp, err := req.Send()
@@ -3278,6 +4568,10 @@ func (r PutInstancePublicPortsRequest) Send() (*PutInstancePublicPortsOutput, er
 // Sets the specified open ports for an Amazon Lightsail instance, and closes
 // all ports for every protocol not included in the current request.
 //
+// The put instance public ports operation supports tag-based access control
+// via resource tags applied to the resource identified by instanceName. For
+// more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the PutInstancePublicPortsRequest method.
 //    req := client.PutInstancePublicPortsRequest(params)
 //    resp, err := req.Send()
@@ -3331,6 +4625,10 @@ func (r RebootInstanceRequest) Send() (*RebootInstanceOutput, error) {
 // address after restarting, create a static IP address and attach it to the
 // instance.
 //
+// The reboot instance operation supports tag-based access control via resource
+// tags applied to the resource identified by instanceName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the RebootInstanceRequest method.
 //    req := client.RebootInstanceRequest(params)
 //    resp, err := req.Send()
@@ -3355,6 +4653,60 @@ func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) RebootInst
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RebootInstanceRequest{Request: req, Input: input, Copy: c.RebootInstanceRequest}
+}
+
+const opRebootRelationalDatabase = "RebootRelationalDatabase"
+
+// RebootRelationalDatabaseRequest is a API request type for the RebootRelationalDatabase API operation.
+type RebootRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *RebootRelationalDatabaseInput
+	Copy  func(*RebootRelationalDatabaseInput) RebootRelationalDatabaseRequest
+}
+
+// Send marshals and sends the RebootRelationalDatabase API request.
+func (r RebootRelationalDatabaseRequest) Send() (*RebootRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootRelationalDatabaseOutput), nil
+}
+
+// RebootRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Restarts a specific database in Amazon Lightsail.
+//
+// The reboot relational database operation supports tag-based access control
+// via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the RebootRelationalDatabaseRequest method.
+//    req := client.RebootRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootRelationalDatabase
+func (c *Lightsail) RebootRelationalDatabaseRequest(input *RebootRelationalDatabaseInput) RebootRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opRebootRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RebootRelationalDatabaseInput{}
+	}
+
+	output := &RebootRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RebootRelationalDatabaseRequest{Request: req, Input: input, Copy: c.RebootRelationalDatabaseRequest}
 }
 
 const opReleaseStaticIp = "ReleaseStaticIp"
@@ -3432,6 +4784,10 @@ func (r StartInstanceRequest) Send() (*StartInstanceOutput, error) {
 // Starts a specific Amazon Lightsail instance from a stopped state. To restart
 // an instance, use the reboot instance operation.
 //
+// The start instance operation supports tag-based access control via resource
+// tags applied to the resource identified by instanceName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the StartInstanceRequest method.
 //    req := client.StartInstanceRequest(params)
 //    resp, err := req.Send()
@@ -3458,6 +4814,61 @@ func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) StartInstanc
 	return StartInstanceRequest{Request: req, Input: input, Copy: c.StartInstanceRequest}
 }
 
+const opStartRelationalDatabase = "StartRelationalDatabase"
+
+// StartRelationalDatabaseRequest is a API request type for the StartRelationalDatabase API operation.
+type StartRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *StartRelationalDatabaseInput
+	Copy  func(*StartRelationalDatabaseInput) StartRelationalDatabaseRequest
+}
+
+// Send marshals and sends the StartRelationalDatabase API request.
+func (r StartRelationalDatabaseRequest) Send() (*StartRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartRelationalDatabaseOutput), nil
+}
+
+// StartRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Starts a specific database from a stopped state in Amazon Lightsail. To restart
+// a database, use the reboot relational database operation.
+//
+// The start relational database operation supports tag-based access control
+// via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the StartRelationalDatabaseRequest method.
+//    req := client.StartRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartRelationalDatabase
+func (c *Lightsail) StartRelationalDatabaseRequest(input *StartRelationalDatabaseInput) StartRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opStartRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartRelationalDatabaseInput{}
+	}
+
+	output := &StartRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartRelationalDatabaseRequest{Request: req, Input: input, Copy: c.StartRelationalDatabaseRequest}
+}
+
 const opStopInstance = "StopInstance"
 
 // StopInstanceRequest is a API request type for the StopInstance API operation.
@@ -3481,6 +4892,10 @@ func (r StopInstanceRequest) Send() (*StopInstanceOutput, error) {
 // Amazon Lightsail.
 //
 // Stops a specific Amazon Lightsail instance that is currently running.
+//
+// The stop instance operation supports tag-based access control via resource
+// tags applied to the resource identified by instanceName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the StopInstanceRequest method.
 //    req := client.StopInstanceRequest(params)
@@ -3506,6 +4921,117 @@ func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) StopInstanceRe
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StopInstanceRequest{Request: req, Input: input, Copy: c.StopInstanceRequest}
+}
+
+const opStopRelationalDatabase = "StopRelationalDatabase"
+
+// StopRelationalDatabaseRequest is a API request type for the StopRelationalDatabase API operation.
+type StopRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *StopRelationalDatabaseInput
+	Copy  func(*StopRelationalDatabaseInput) StopRelationalDatabaseRequest
+}
+
+// Send marshals and sends the StopRelationalDatabase API request.
+func (r StopRelationalDatabaseRequest) Send() (*StopRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopRelationalDatabaseOutput), nil
+}
+
+// StopRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Stops a specific database that is currently running in Amazon Lightsail.
+//
+// The stop relational database operation supports tag-based access control
+// via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the StopRelationalDatabaseRequest method.
+//    req := client.StopRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopRelationalDatabase
+func (c *Lightsail) StopRelationalDatabaseRequest(input *StopRelationalDatabaseInput) StopRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opStopRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopRelationalDatabaseInput{}
+	}
+
+	output := &StopRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopRelationalDatabaseRequest{Request: req, Input: input, Copy: c.StopRelationalDatabaseRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Adds one or more tags to the specified Amazon Lightsail resource. Each resource
+// can have a maximum of 50 tags. Each tag consists of a key and an optional
+// value. Tag keys must be unique per resource. For more information about tags,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+//
+// The tag resource operation supports tag-based access control via request
+// tags and resource tags applied to the resource identified by resourceName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TagResource
+func (c *Lightsail) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUnpeerVpc = "UnpeerVpc"
@@ -3558,6 +5084,61 @@ func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
 	return UnpeerVpcRequest{Request: req, Input: input, Copy: c.UnpeerVpcRequest}
 }
 
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Deletes the specified set of tag keys and their values from the specified
+// Amazon Lightsail resource.
+//
+// The untag resource operation supports tag-based access control via request
+// tags and resource tags applied to the resource identified by resourceName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UntagResource
+func (c *Lightsail) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
 const opUpdateDomainEntry = "UpdateDomainEntry"
 
 // UpdateDomainEntryRequest is a API request type for the UpdateDomainEntry API operation.
@@ -3581,6 +5162,10 @@ func (r UpdateDomainEntryRequest) Send() (*UpdateDomainEntryOutput, error) {
 // Amazon Lightsail.
 //
 // Updates a domain recordset after it is created.
+//
+// The update domain entry operation supports tag-based access control via resource
+// tags applied to the resource identified by domainName. For more information,
+// see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
 //
 //    // Example sending a request using the UpdateDomainEntryRequest method.
 //    req := client.UpdateDomainEntryRequest(params)
@@ -3633,6 +5218,10 @@ func (r UpdateLoadBalancerAttributeRequest) Send() (*UpdateLoadBalancerAttribute
 // Updates the specified attribute for a load balancer. You can only update
 // one attribute at a time.
 //
+// The update load balancer attribute operation supports tag-based access control
+// via resource tags applied to the resource identified by loadBalancerName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
 //    // Example sending a request using the UpdateLoadBalancerAttributeRequest method.
 //    req := client.UpdateLoadBalancerAttributeRequest(params)
 //    resp, err := req.Send()
@@ -3657,6 +5246,124 @@ func (c *Lightsail) UpdateLoadBalancerAttributeRequest(input *UpdateLoadBalancer
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateLoadBalancerAttributeRequest{Request: req, Input: input, Copy: c.UpdateLoadBalancerAttributeRequest}
+}
+
+const opUpdateRelationalDatabase = "UpdateRelationalDatabase"
+
+// UpdateRelationalDatabaseRequest is a API request type for the UpdateRelationalDatabase API operation.
+type UpdateRelationalDatabaseRequest struct {
+	*aws.Request
+	Input *UpdateRelationalDatabaseInput
+	Copy  func(*UpdateRelationalDatabaseInput) UpdateRelationalDatabaseRequest
+}
+
+// Send marshals and sends the UpdateRelationalDatabase API request.
+func (r UpdateRelationalDatabaseRequest) Send() (*UpdateRelationalDatabaseOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRelationalDatabaseOutput), nil
+}
+
+// UpdateRelationalDatabaseRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Allows the update of one or more attributes of a database in Amazon Lightsail.
+//
+// Updates are applied immediately, or in cases where the updates could result
+// in an outage, are applied during the database's predefined maintenance window.
+//
+// The update relational database operation supports tag-based access control
+// via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the UpdateRelationalDatabaseRequest method.
+//    req := client.UpdateRelationalDatabaseRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabase
+func (c *Lightsail) UpdateRelationalDatabaseRequest(input *UpdateRelationalDatabaseInput) UpdateRelationalDatabaseRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRelationalDatabase,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRelationalDatabaseInput{}
+	}
+
+	output := &UpdateRelationalDatabaseOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRelationalDatabaseRequest{Request: req, Input: input, Copy: c.UpdateRelationalDatabaseRequest}
+}
+
+const opUpdateRelationalDatabaseParameters = "UpdateRelationalDatabaseParameters"
+
+// UpdateRelationalDatabaseParametersRequest is a API request type for the UpdateRelationalDatabaseParameters API operation.
+type UpdateRelationalDatabaseParametersRequest struct {
+	*aws.Request
+	Input *UpdateRelationalDatabaseParametersInput
+	Copy  func(*UpdateRelationalDatabaseParametersInput) UpdateRelationalDatabaseParametersRequest
+}
+
+// Send marshals and sends the UpdateRelationalDatabaseParameters API request.
+func (r UpdateRelationalDatabaseParametersRequest) Send() (*UpdateRelationalDatabaseParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRelationalDatabaseParametersOutput), nil
+}
+
+// UpdateRelationalDatabaseParametersRequest returns a request value for making API operation for
+// Amazon Lightsail.
+//
+// Allows the update of one or more parameters of a database in Amazon Lightsail.
+//
+// Parameter updates don't cause outages; therefore, their application is not
+// subject to the preferred maintenance window. However, there are two ways
+// in which paramater updates are applied: dynamic or pending-reboot. Parameters
+// marked with a dynamic apply type are applied immediately. Parameters marked
+// with a pending-reboot apply type are applied only after the database is rebooted
+// using the reboot relational database operation.
+//
+// The update relational database parameters operation supports tag-based access
+// control via resource tags applied to the resource identified by relationalDatabaseName.
+// For more information, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags).
+//
+//    // Example sending a request using the UpdateRelationalDatabaseParametersRequest method.
+//    req := client.UpdateRelationalDatabaseParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseParameters
+func (c *Lightsail) UpdateRelationalDatabaseParametersRequest(input *UpdateRelationalDatabaseParametersInput) UpdateRelationalDatabaseParametersRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRelationalDatabaseParameters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRelationalDatabaseParametersInput{}
+	}
+
+	output := &UpdateRelationalDatabaseParametersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRelationalDatabaseParametersRequest{Request: req, Input: input, Copy: c.UpdateRelationalDatabaseParametersRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIpRequest
@@ -4048,9 +5755,10 @@ type Blueprint struct {
 	// The group name of the blueprint (e.g., amazon-linux).
 	Group *string `locationName:"group" type:"string"`
 
-	// A Boolean value indicating whether the blueprint is active. When you update
-	// your blueprints, you will inactivate old blueprints and keep the most recent
-	// versions active.
+	// A Boolean value indicating whether the blueprint is active. Inactive blueprints
+	// are listed to support customers with existing instances but are not necessarily
+	// available for launch of new instances. Blueprints are marked inactive when
+	// they become outdated due to operating system updates or new application releases.
 	IsActive *bool `locationName:"isActive" type:"boolean"`
 
 	// The end-user license agreement URL for the image or blueprint.
@@ -4218,6 +5926,225 @@ func (s CloseInstancePublicPortsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Describes a CloudFormation stack record created as a result of the create
+// cloud formation stack operation.
+//
+// A CloudFormation stack record provides information about the AWS CloudFormation
+// stack used to create a new Amazon Elastic Compute Cloud instance from an
+// exported Lightsail instance snapshot.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloudFormationStackRecord
+type CloudFormationStackRecord struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the CloudFormation stack record.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date when the CloudFormation stack record was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// A list of objects describing the destination service, which is AWS CloudFormation,
+	// and the Amazon Resource Name (ARN) of the AWS CloudFormation stack.
+	DestinationInfo *DestinationInfo `locationName:"destinationInfo" type:"structure"`
+
+	// A list of objects describing the Availability Zone and AWS Region of the
+	// CloudFormation stack record.
+	Location *ResourceLocation `locationName:"location" type:"structure"`
+
+	// The name of the CloudFormation stack record. It starts with CloudFormationStackRecord
+	// followed by a GUID.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Lightsail resource type (e.g., CloudFormationStackRecord).
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// A list of objects describing the source of the CloudFormation stack record.
+	SourceInfo []CloudFormationStackRecordSourceInfo `locationName:"sourceInfo" type:"list"`
+
+	// The current state of the CloudFormation stack record.
+	State RecordState `locationName:"state" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CloudFormationStackRecord) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CloudFormationStackRecord) GoString() string {
+	return s.String()
+}
+
+// Describes the source of a CloudFormation stack record (i.e., the export snapshot
+// record).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloudFormationStackRecordSourceInfo
+type CloudFormationStackRecordSourceInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the export snapshot record.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The name of the record.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Lightsail resource type (e.g., ExportSnapshotRecord).
+	ResourceType CloudFormationStackRecordSourceType `locationName:"resourceType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CloudFormationStackRecordSourceInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CloudFormationStackRecordSourceInfo) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotRequest
+type CopySnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Region where the source snapshot is located.
+	//
+	// SourceRegion is a required field
+	SourceRegion RegionName `locationName:"sourceRegion" type:"string" required:"true" enum:"true"`
+
+	// The name of the source instance or disk snapshot to be copied.
+	//
+	// SourceSnapshotName is a required field
+	SourceSnapshotName *string `locationName:"sourceSnapshotName" type:"string" required:"true"`
+
+	// The name of the new instance or disk snapshot to be created as a copy.
+	//
+	// TargetSnapshotName is a required field
+	TargetSnapshotName *string `locationName:"targetSnapshotName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CopySnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CopySnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CopySnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CopySnapshotInput"}
+	if len(s.SourceRegion) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("SourceRegion"))
+	}
+
+	if s.SourceSnapshotName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotName"))
+	}
+
+	if s.TargetSnapshotName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotResult
+type CopySnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the API operation.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s CopySnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CopySnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopySnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCloudFormationStackRequest
+type CreateCloudFormationStackInput struct {
+	_ struct{} `type:"structure"`
+
+	// An array of parameters that will be used to create the new Amazon EC2 instance.
+	// You can only pass one instance entry at a time in this array. You will get
+	// an invalid parameter error if you pass more than one instance entry in this
+	// array.
+	//
+	// Instances is a required field
+	Instances []InstanceEntry `locationName:"instances" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateCloudFormationStackInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCloudFormationStackInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateCloudFormationStackInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCloudFormationStackInput"}
+
+	if s.Instances == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Instances"))
+	}
+	if s.Instances != nil {
+		for i, v := range s.Instances {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Instances", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateCloudFormationStackResult
+type CreateCloudFormationStackOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the API operation.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateCloudFormationStackOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCloudFormationStackOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCloudFormationStackOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDiskFromSnapshotRequest
 type CreateDiskFromSnapshotInput struct {
 	_ struct{} `type:"structure"`
@@ -4247,6 +6174,11 @@ type CreateDiskFromSnapshotInput struct {
 	//
 	// SizeInGb is a required field
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -4333,6 +6265,11 @@ type CreateDiskInput struct {
 	//
 	// SizeInGb is a required field
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -4406,6 +6343,11 @@ type CreateDiskSnapshotInput struct {
 	//
 	// DiskSnapshotName is a required field
 	DiskSnapshotName *string `locationName:"diskSnapshotName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -4544,6 +6486,11 @@ type CreateDomainInput struct {
 	//
 	// DomainName is a required field
 	DomainName *string `locationName:"domainName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -4609,6 +6556,11 @@ type CreateInstanceSnapshotInput struct {
 	//
 	// InstanceSnapshotName is a required field
 	InstanceSnapshotName *string `locationName:"instanceSnapshotName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -4673,9 +6625,9 @@ type CreateInstancesFromSnapshotInput struct {
 	AttachedDiskMapping map[string][]DiskMap `locationName:"attachedDiskMapping" type:"map"`
 
 	// The Availability Zone where you want to create your instances. Use the following
-	// formatting: us-east-2a (case sensitive). You can get a list of availability
-	// zones by using the get regions (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
-	// operation. Be sure to add the include availability zones parameter to your
+	// formatting: us-east-2a (case sensitive). You can get a list of Availability
+	// Zones by using the get regions (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
+	// operation. Be sure to add the include Availability Zones parameter to your
 	// request.
 	//
 	// AvailabilityZone is a required field
@@ -4702,13 +6654,18 @@ type CreateInstancesFromSnapshotInput struct {
 	// The name for your key pair.
 	KeyPairName *string `locationName:"keyPairName" type:"string"`
 
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// You can create a launch script that configures a server with additional user
 	// data. For example, apt-get -y update.
 	//
 	// Depending on the machine image you choose, the command to get software on
 	// your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu
 	// use apt-get, and FreeBSD uses pkg. For a complete list, see the Dev Guide
-	// (http://lightsail.aws.amazon.com/ls/docs/getting-started/articles/pre-installed-apps).
+	// (https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image).
 	UserData *string `locationName:"userData" type:"string"`
 }
 
@@ -4779,9 +6736,9 @@ type CreateInstancesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zone in which to create your instance. Use the following
-	// format: us-east-2a (case sensitive). You can get a list of availability zones
+	// format: us-east-2a (case sensitive). You can get a list of Availability Zones
 	// by using the get regions (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
-	// operation. Be sure to add the include availability zones parameter to your
+	// operation. Be sure to add the include Availability Zones parameter to your
 	// request.
 	//
 	// AvailabilityZone is a required field
@@ -4814,6 +6771,11 @@ type CreateInstancesInput struct {
 
 	// The name of your key pair.
 	KeyPairName *string `locationName:"keyPairName" type:"string"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// A launch script you can create that configures a server with additional user
 	// data. For example, you might want to run apt-get -y update.
@@ -4895,6 +6857,11 @@ type CreateKeyPairInput struct {
 	//
 	// KeyPairName is a required field
 	KeyPairName *string `locationName:"keyPairName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -4995,6 +6962,11 @@ type CreateLoadBalancerInput struct {
 	//
 	// LoadBalancerName is a required field
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -5079,6 +7051,11 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	//
 	// LoadBalancerName is a required field
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -5135,6 +7112,406 @@ func (s CreateLoadBalancerTlsCertificateOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLoadBalancerTlsCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseFromSnapshotRequest
+type CreateRelationalDatabaseFromSnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone in which to create your new database. Use the us-east-2a
+	// case-sensitive format.
+	//
+	// You can get a list of Availability Zones by using the get regions operation.
+	// Be sure to add the include relational database Availability Zones parameter
+	// to your request.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// Specifies the accessibility options for your new database. A value of true
+	// specifies a database that is available to resources outside of your Lightsail
+	// account. A value of false specifies a database that is available only to
+	// your Lightsail resources in the same region as your database.
+	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
+
+	// The bundle ID for your new database. A bundle describes the performance specifications
+	// for your database.
+	//
+	// You can get a list of database bundle IDs by using the get relational database
+	// bundles operation.
+	//
+	// When creating a new database from a snapshot, you cannot choose a bundle
+	// that is smaller than the bundle of the source database.
+	RelationalDatabaseBundleId *string `locationName:"relationalDatabaseBundleId" type:"string"`
+
+	// The name to use for your new database.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//
+	//    * The first and last character must be a letter or number.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// The name of the database snapshot from which to create your new database.
+	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string"`
+
+	// The date and time to restore your database from.
+	//
+	// Constraints:
+	//
+	//    * Must be before the latest restorable time for the database.
+	//
+	//    * Cannot be specified if the use latest restorable time parameter is true.
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Specified in the Unix time format.
+	//
+	// For example, if you wish to use a restore time of October 1, 2018, at 8 PM
+	//    UTC, then you input 1538424000 as the restore time.
+	RestoreTime *time.Time `locationName:"restoreTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the source database.
+	SourceRelationalDatabaseName *string `locationName:"sourceRelationalDatabaseName" type:"string"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
+
+	// Specifies whether your database is restored from the latest backup time.
+	// A value of true restores from the latest backup time.
+	//
+	// Default: false
+	//
+	// Constraints: Cannot be specified if the restore time parameter is provided.
+	UseLatestRestorableTime *bool `locationName:"useLatestRestorableTime" type:"boolean"`
+}
+
+// String returns the string representation
+func (s CreateRelationalDatabaseFromSnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRelationalDatabaseFromSnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRelationalDatabaseFromSnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRelationalDatabaseFromSnapshotInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseFromSnapshotResult
+type CreateRelationalDatabaseFromSnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your create relational database from snapshot
+	// request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateRelationalDatabaseFromSnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRelationalDatabaseFromSnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRelationalDatabaseFromSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseRequest
+type CreateRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone in which to create your new database. Use the us-east-2a
+	// case-sensitive format.
+	//
+	// You can get a list of Availability Zones by using the get regions operation.
+	// Be sure to add the include relational database Availability Zones parameter
+	// to your request.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The name of the master database created when the Lightsail database resource
+	// is created.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 1 to 64 alphanumeric characters.
+	//
+	//    * Cannot be a word reserved by the specified database engine
+	//
+	// MasterDatabaseName is a required field
+	MasterDatabaseName *string `locationName:"masterDatabaseName" type:"string" required:"true"`
+
+	// The password for the master user of your new database. The password can include
+	// any printable ASCII character except "/", """, or "@".
+	//
+	// Constraints: Must contain 8 to 41 characters.
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+
+	// The master user name for your new database.
+	//
+	// Constraints:
+	//
+	//    * Master user name is required.
+	//
+	//    * Must contain from 1 to 16 alphanumeric characters.
+	//
+	//    * The first character must be a letter.
+	//
+	//    * Cannot be a reserved word for the database engine you choose.
+	//
+	// For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords
+	//    and Reserved Words articles for MySQL 5.6 (https://dev.mysql.com/doc/refman/5.6/en/keywords.html)
+	//    or MySQL 5.7 (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) respectively.
+	//
+	// MasterUsername is a required field
+	MasterUsername *string `locationName:"masterUsername" type:"string" required:"true"`
+
+	// The daily time range during which automated backups are created for your
+	// new database if automated backups are enabled.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block
+	// of time for each AWS Region. For more information about the preferred backup
+	// window time blocks for each region, see the Working With Backups (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
+	// guide in the Amazon Relational Database Service (Amazon RDS) documentation.
+	//
+	// Constraints:
+	//
+	//    * Must be in the hh24:mi-hh24:mi format.
+	//
+	// Example: 16:00-16:30
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Must not conflict with the preferred maintenance window.
+	//
+	//    * Must be at least 30 minutes.
+	PreferredBackupWindow *string `locationName:"preferredBackupWindow" type:"string"`
+
+	// The weekly time range during which system maintenance can occur on your new
+	// database.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block
+	// of time for each AWS Region, occurring on a random day of the week.
+	//
+	// Constraints:
+	//
+	//    * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	//
+	//    * Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//
+	//    * Must be at least 30 minutes.
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Example: Tue:17:00-Tue:17:30
+	PreferredMaintenanceWindow *string `locationName:"preferredMaintenanceWindow" type:"string"`
+
+	// Specifies the accessibility options for your new database. A value of true
+	// specifies a database that is available to resources outside of your Lightsail
+	// account. A value of false specifies a database that is available only to
+	// your Lightsail resources in the same region as your database.
+	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
+
+	// The blueprint ID for your new database. A blueprint describes the major engine
+	// version of a database.
+	//
+	// You can get a list of database blueprints IDs by using the get relational
+	// database blueprints operation.
+	//
+	// RelationalDatabaseBlueprintId is a required field
+	RelationalDatabaseBlueprintId *string `locationName:"relationalDatabaseBlueprintId" type:"string" required:"true"`
+
+	// The bundle ID for your new database. A bundle describes the performance specifications
+	// for your database.
+	//
+	// You can get a list of database bundle IDs by using the get relational database
+	// bundles operation.
+	//
+	// RelationalDatabaseBundleId is a required field
+	RelationalDatabaseBundleId *string `locationName:"relationalDatabaseBundleId" type:"string" required:"true"`
+
+	// The name to use for your new database.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//
+	//    * The first and last character must be a letter or number.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRelationalDatabaseInput"}
+
+	if s.MasterDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MasterDatabaseName"))
+	}
+
+	if s.MasterUsername == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
+	}
+
+	if s.RelationalDatabaseBlueprintId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseBlueprintId"))
+	}
+
+	if s.RelationalDatabaseBundleId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseBundleId"))
+	}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseResult
+type CreateRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your create relational database request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshotRequest
+type CreateRelationalDatabaseSnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database on which to base your new snapshot.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// The name for your new database snapshot.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//
+	//    * The first and last character must be a letter or number.
+	//
+	// RelationalDatabaseSnapshotName is a required field
+	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string" required:"true"`
+
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// To tag a resource after it has been created, see the tag resource operation.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateRelationalDatabaseSnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRelationalDatabaseSnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateRelationalDatabaseSnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRelationalDatabaseSnapshotInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if s.RelationalDatabaseSnapshotName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseSnapshotName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateRelationalDatabaseSnapshotResult
+type CreateRelationalDatabaseSnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your create relational database snapshot
+	// request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateRelationalDatabaseSnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateRelationalDatabaseSnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateRelationalDatabaseSnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5699,6 +8076,170 @@ func (s DeleteLoadBalancerTlsCertificateOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseRequest
+type DeleteRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database snapshot created if skip final snapshot is false,
+	// which is the default value for that parameter.
+	//
+	// Specifying this parameter and also specifying the skip final snapshot parameter
+	// to true results in an error.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//
+	//    * The first and last character must be a letter or number.
+	FinalRelationalDatabaseSnapshotName *string `locationName:"finalRelationalDatabaseSnapshotName" type:"string"`
+
+	// The name of the database that you are deleting.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// Determines whether a final database snapshot is created before your database
+	// is deleted. If true is specified, no database snapshot is created. If false
+	// is specified, a database snapshot is created before your database is deleted.
+	//
+	// You must specify the final relational database snapshot name parameter if
+	// the skip final snapshot parameter is false.
+	//
+	// Default: false
+	SkipFinalSnapshot *bool `locationName:"skipFinalSnapshot" type:"boolean"`
+}
+
+// String returns the string representation
+func (s DeleteRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRelationalDatabaseInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseResult
+type DeleteRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your delete relational database request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s DeleteRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseSnapshotRequest
+type DeleteRelationalDatabaseSnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database snapshot that you are deleting.
+	//
+	// RelationalDatabaseSnapshotName is a required field
+	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRelationalDatabaseSnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRelationalDatabaseSnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRelationalDatabaseSnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRelationalDatabaseSnapshotInput"}
+
+	if s.RelationalDatabaseSnapshotName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseSnapshotName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteRelationalDatabaseSnapshotResult
+type DeleteRelationalDatabaseSnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your delete relational database snapshot
+	// request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s DeleteRelationalDatabaseSnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRelationalDatabaseSnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRelationalDatabaseSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Describes the destination of a record.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DestinationInfo
+type DestinationInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the resource created at the destination.
+	Id *string `locationName:"id" type:"string"`
+
+	// The destination service of the record.
+	Service *string `locationName:"service" type:"string"`
+}
+
+// String returns the string representation
+func (s DestinationInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DestinationInfo) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDiskRequest
 type DetachDiskInput struct {
 	_ struct{} `type:"structure"`
@@ -5947,6 +8488,10 @@ type Disk struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -5956,6 +8501,35 @@ func (s Disk) String() string {
 
 // GoString returns the string representation
 func (s Disk) GoString() string {
+	return s.String()
+}
+
+// Describes a disk.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskInfo
+type DiskInfo struct {
+	_ struct{} `type:"structure"`
+
+	// A Boolean value indicating whether this disk is a system disk (has an operating
+	// system loaded on it).
+	IsSystemDisk *bool `locationName:"isSystemDisk" type:"boolean"`
+
+	// The disk name.
+	Name *string `locationName:"name" type:"string"`
+
+	// The disk path.
+	Path *string `locationName:"path" type:"string"`
+
+	// The size of the disk in GB (e.g., 32).
+	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
+}
+
+// String returns the string representation
+func (s DiskInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DiskInfo) GoString() string {
 	return s.String()
 }
 
@@ -6021,6 +8595,10 @@ type DiskSnapshot struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -6030,6 +8608,25 @@ func (s DiskSnapshot) String() string {
 
 // GoString returns the string representation
 func (s DiskSnapshot) GoString() string {
+	return s.String()
+}
+
+// Describes a disk snapshot.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DiskSnapshotInfo
+type DiskSnapshotInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The size of the disk in GB (e.g., 32).
+	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
+}
+
+// String returns the string representation
+func (s DiskSnapshotInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DiskSnapshotInfo) GoString() string {
 	return s.String()
 }
 
@@ -6060,6 +8657,10 @@ type Domain struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -6157,6 +8758,146 @@ func (s DownloadDefaultKeyPairOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DownloadDefaultKeyPairOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotRequest
+type ExportSnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the instance or disk snapshot to be exported to Amazon EC2.
+	//
+	// SourceSnapshotName is a required field
+	SourceSnapshotName *string `locationName:"sourceSnapshotName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ExportSnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportSnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExportSnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExportSnapshotInput"}
+
+	if s.SourceSnapshotName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotResult
+type ExportSnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the API operation.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s ExportSnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportSnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExportSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Describes an export snapshot record.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotRecord
+type ExportSnapshotRecord struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the export snapshot record.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date when the export snapshot record was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// A list of objects describing the destination of the export snapshot record.
+	DestinationInfo *DestinationInfo `locationName:"destinationInfo" type:"structure"`
+
+	// The AWS Region and Availability Zone where the export snapshot record is
+	// located.
+	Location *ResourceLocation `locationName:"location" type:"structure"`
+
+	// The export snapshot record name.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Lightsail resource type (e.g., ExportSnapshotRecord).
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// A list of objects describing the source of the export snapshot record.
+	SourceInfo *ExportSnapshotRecordSourceInfo `locationName:"sourceInfo" type:"structure"`
+
+	// The state of the export snapshot record.
+	State RecordState `locationName:"state" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ExportSnapshotRecord) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportSnapshotRecord) GoString() string {
+	return s.String()
+}
+
+// Describes the source of an export snapshot record.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ExportSnapshotRecordSourceInfo
+type ExportSnapshotRecordSourceInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the source instance or disk snapshot.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date when the source instance or disk snapshot was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// A list of objects describing a disk snapshot.
+	DiskSnapshotInfo *DiskSnapshotInfo `locationName:"diskSnapshotInfo" type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
+	FromResourceArn *string `locationName:"fromResourceArn" type:"string"`
+
+	// The name of the snapshot's source instance or disk.
+	FromResourceName *string `locationName:"fromResourceName" type:"string"`
+
+	// A list of objects describing an instance snapshot.
+	InstanceSnapshotInfo *InstanceSnapshotInfo `locationName:"instanceSnapshotInfo" type:"structure"`
+
+	// The name of the source instance or disk snapshot.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Lightsail resource type (e.g., InstanceSnapshot or DiskSnapshot).
+	ResourceType ExportSnapshotRecordSourceType `locationName:"resourceType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ExportSnapshotRecordSourceInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportSnapshotRecordSourceInfo) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNamesRequest
@@ -6308,6 +9049,54 @@ func (s GetBundlesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetBundlesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecordsRequest
+type GetCloudFormationStackRecordsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get cloud
+	// formation stack records request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetCloudFormationStackRecordsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCloudFormationStackRecordsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCloudFormationStackRecordsResult
+type GetCloudFormationStackRecordsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the CloudFormation stack records.
+	CloudFormationStackRecords []CloudFormationStackRecord `locationName:"cloudFormationStackRecords" type:"list"`
+
+	// A token used for advancing to the next page of results of your get relational
+	// database bundles request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetCloudFormationStackRecordsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCloudFormationStackRecordsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCloudFormationStackRecordsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6634,6 +9423,54 @@ func (s GetDomainsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecordsRequest
+type GetExportSnapshotRecordsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get export
+	// snapshot records request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetExportSnapshotRecordsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetExportSnapshotRecordsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetExportSnapshotRecordsResult
+type GetExportSnapshotRecordsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the export snapshot records.
+	ExportSnapshotRecords []ExportSnapshotRecord `locationName:"exportSnapshotRecords" type:"list"`
+
+	// A token used for advancing to the next page of results of your get relational
+	// database bundles request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetExportSnapshotRecordsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetExportSnapshotRecordsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetExportSnapshotRecordsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetailsRequest
 type GetInstanceAccessDetailsInput struct {
 	_ struct{} `type:"structure"`
@@ -6750,7 +9587,7 @@ type GetInstanceMetricDataInput struct {
 	// MetricName is a required field
 	MetricName InstanceMetricName `locationName:"metricName" type:"string" required:"true" enum:"true"`
 
-	// The time period for which you are requesting data.
+	// The granularity, in seconds, of the returned data points.
 	//
 	// Period is a required field
 	Period *int64 `locationName:"period" min:"60" type:"integer" required:"true"`
@@ -7389,7 +10226,7 @@ type GetLoadBalancerMetricDataInput struct {
 	// MetricName is a required field
 	MetricName LoadBalancerMetricName `locationName:"metricName" type:"string" required:"true" enum:"true"`
 
-	// The time period duration for your health data request.
+	// The granularity, in seconds, of the returned data points.
 	//
 	// Period is a required field
 	Period *int64 `locationName:"period" min:"60" type:"integer" required:"true"`
@@ -7824,7 +10661,7 @@ type GetOperationsForResourceOutput struct {
 	// (Deprecated) Returns the number of pages of results that remain.
 	//
 	// In releases prior to June 12, 2017, this parameter returned null by the API.
-	// It is now deprecated, and the API returns the nextPageToken parameter instead.
+	// It is now deprecated, and the API returns the next page token parameter instead.
 	NextPageCount *string `locationName:"nextPageCount" deprecated:"true" type:"string"`
 
 	// An identifier that was returned from the previous call to this operation,
@@ -7908,6 +10745,11 @@ type GetRegionsInput struct {
 	// your get regions request. Availability Zones are indicated with a letter:
 	// e.g., us-east-2a.
 	IncludeAvailabilityZones *bool `locationName:"includeAvailabilityZones" type:"boolean"`
+
+	// >A Boolean value indicating whether to also include Availability Zones for
+	// databases in your get regions request. Availability Zones are indicated with
+	// a letter (e.g., us-east-2a).
+	IncludeRelationalDatabaseAvailabilityZones *bool `locationName:"includeRelationalDatabaseAvailabilityZones" type:"boolean"`
 }
 
 // String returns the string representation
@@ -7943,6 +10785,845 @@ func (s GetRegionsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRegionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprintsRequest
+type GetRelationalDatabaseBlueprintsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get relational
+	// database blueprints request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseBlueprintsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseBlueprintsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBlueprintsResult
+type GetRelationalDatabaseBlueprintsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your get relational database blueprints
+	// request.
+	Blueprints []RelationalDatabaseBlueprint `locationName:"blueprints" type:"list"`
+
+	// A token used for advancing to the next page of results of your get relational
+	// database blueprints request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseBlueprintsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseBlueprintsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseBlueprintsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundlesRequest
+type GetRelationalDatabaseBundlesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get relational
+	// database bundles request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseBundlesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseBundlesInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundlesResult
+type GetRelationalDatabaseBundlesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your get relational database bundles request.
+	Bundles []RelationalDatabaseBundle `locationName:"bundles" type:"list"`
+
+	// A token used for advancing to the next page of results of your get relational
+	// database bundles request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseBundlesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseBundlesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseBundlesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEventsRequest
+type GetRelationalDatabaseEventsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The number of minutes in the past from which to retrieve events. For example,
+	// to get all events from the past 2 hours, enter 120.
+	//
+	// Default: 60
+	//
+	// The minimum is 1 and the maximum is 14 days (20160 minutes).
+	DurationInMinutes *int64 `locationName:"durationInMinutes" type:"integer"`
+
+	// A token used for advancing to a specific page of results from for get relational
+	// database events request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+
+	// The name of the database from which to get events.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseEventsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseEventsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseEventsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseEventsInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseEventsResult
+type GetRelationalDatabaseEventsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A token used for advancing to the next page of results from your get relational
+	// database events request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+
+	// An object describing the result of your get relational database events request.
+	RelationalDatabaseEvents []RelationalDatabaseEvent `locationName:"relationalDatabaseEvents" type:"list"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseEventsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseEventsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseRequest
+type GetRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database that you are looking up.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogEventsRequest
+type GetRelationalDatabaseLogEventsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the time interval from which to get log events.
+	//
+	// Constraints:
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Specified in the Unix time format.
+	//
+	// For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC,
+	//    then you input 1538424000 as the end time.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the log stream.
+	//
+	// Use the get relational database log streams operation to get a list of available
+	// log streams.
+	//
+	// LogStreamName is a required field
+	LogStreamName *string `locationName:"logStreamName" type:"string" required:"true"`
+
+	// A token used for advancing to a specific page of results for your get relational
+	// database log events request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+
+	// The name of your database for which to get log events.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// Parameter to specify if the log should start from head or tail. If true is
+	// specified, the log event starts from the head of the log. If false is specified,
+	// the log event starts from the tail of the log.
+	//
+	// Default: false
+	StartFromHead *bool `locationName:"startFromHead" type:"boolean"`
+
+	// The start of the time interval from which to get log events.
+	//
+	// Constraints:
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Specified in the Unix time format.
+	//
+	// For example, if you wish to use a start time of October 1, 2018, at 8 PM
+	//    UTC, then you input 1538424000 as the start time.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseLogEventsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseLogEventsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseLogEventsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseLogEventsInput"}
+
+	if s.LogStreamName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
+	}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogEventsResult
+type GetRelationalDatabaseLogEventsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A token used for advancing to the previous page of results from your get
+	// relational database log events request.
+	NextBackwardToken *string `locationName:"nextBackwardToken" type:"string"`
+
+	// A token used for advancing to the next page of results from your get relational
+	// database log events request.
+	NextForwardToken *string `locationName:"nextForwardToken" type:"string"`
+
+	// An object describing the result of your get relational database log events
+	// request.
+	ResourceLogEvents []LogEvent `locationName:"resourceLogEvents" type:"list"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseLogEventsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseLogEventsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseLogEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogStreamsRequest
+type GetRelationalDatabaseLogStreamsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of your database for which to get log streams.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseLogStreamsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseLogStreamsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseLogStreamsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseLogStreamsInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseLogStreamsResult
+type GetRelationalDatabaseLogStreamsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your get relational database log streams
+	// request.
+	LogStreams []string `locationName:"logStreams" type:"list"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseLogStreamsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseLogStreamsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseLogStreamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPasswordRequest
+type GetRelationalDatabaseMasterUserPasswordInput struct {
+	_ struct{} `type:"structure"`
+
+	// The password version to return.
+	//
+	// Specifying CURRENT or PREVIOUS returns the current or previous passwords
+	// respectively. Specifying PENDING returns the newest version of the password
+	// that will rotate to CURRENT. After the PENDING password rotates to CURRENT,
+	// the PENDING password is no longer available.
+	//
+	// Default: CURRENT
+	PasswordVersion RelationalDatabasePasswordVersion `locationName:"passwordVersion" type:"string" enum:"true"`
+
+	// The name of your database for which to get the master user password.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseMasterUserPasswordInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseMasterUserPasswordInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseMasterUserPasswordInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseMasterUserPasswordInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMasterUserPasswordResult
+type GetRelationalDatabaseMasterUserPasswordOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The timestamp when the specified version of the master user password was
+	// created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The master user password for the password version specified.
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseMasterUserPasswordOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseMasterUserPasswordOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseMasterUserPasswordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricDataRequest
+type GetRelationalDatabaseMetricDataInput struct {
+	_ struct{} `type:"structure"`
+
+	// The end of the time interval from which to get metric data.
+	//
+	// Constraints:
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Specified in the Unix time format.
+	//
+	// For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC,
+	//    then you input 1538424000 as the end time.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The name of the metric data to return.
+	//
+	// MetricName is a required field
+	MetricName RelationalDatabaseMetricName `locationName:"metricName" type:"string" required:"true" enum:"true"`
+
+	// The granularity, in seconds, of the returned data points.
+	//
+	// Period is a required field
+	Period *int64 `locationName:"period" min:"60" type:"integer" required:"true"`
+
+	// The name of your database from which to get metric data.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// The start of the time interval from which to get metric data.
+	//
+	// Constraints:
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Specified in the Unix time format.
+	//
+	// For example, if you wish to use a start time of October 1, 2018, at 8 PM
+	//    UTC, then you input 1538424000 as the start time.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The array of statistics for your metric data request.
+	//
+	// Statistics is a required field
+	Statistics []MetricStatistic `locationName:"statistics" type:"list" required:"true"`
+
+	// The unit for the metric data request.
+	//
+	// Unit is a required field
+	Unit MetricUnit `locationName:"unit" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseMetricDataInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseMetricDataInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseMetricDataInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseMetricDataInput"}
+
+	if s.EndTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
+	}
+	if len(s.MetricName) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
+	}
+
+	if s.Period == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Period"))
+	}
+	if s.Period != nil && *s.Period < 60 {
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 60))
+	}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if s.StartTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
+	}
+
+	if s.Statistics == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Statistics"))
+	}
+	if len(s.Unit) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Unit"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseMetricDataResult
+type GetRelationalDatabaseMetricDataOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your get relational database metric data
+	// request.
+	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
+
+	// The name of the metric.
+	MetricName RelationalDatabaseMetricName `locationName:"metricName" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseMetricDataOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseMetricDataOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseMetricDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseResult
+type GetRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the specified database.
+	RelationalDatabase *RelationalDatabase `locationName:"relationalDatabase" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParametersRequest
+type GetRelationalDatabaseParametersInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get relational
+	// database parameters request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+
+	// The name of your database for which to get parameters.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseParametersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseParametersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseParametersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseParametersInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseParametersResult
+type GetRelationalDatabaseParametersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A token used for advancing to the next page of results from your get static
+	// IPs request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+
+	// An object describing the result of your get relational database parameters
+	// request.
+	Parameters []RelationalDatabaseParameter `locationName:"parameters" type:"list"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseParametersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseParametersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshotRequest
+type GetRelationalDatabaseSnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the database snapshot for which to get information.
+	//
+	// RelationalDatabaseSnapshotName is a required field
+	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseSnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseSnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetRelationalDatabaseSnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetRelationalDatabaseSnapshotInput"}
+
+	if s.RelationalDatabaseSnapshotName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseSnapshotName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshotResult
+type GetRelationalDatabaseSnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the specified database snapshot.
+	RelationalDatabaseSnapshot *RelationalDatabaseSnapshot `locationName:"relationalDatabaseSnapshot" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseSnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseSnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshotsRequest
+type GetRelationalDatabaseSnapshotsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get relational
+	// database snapshots request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseSnapshotsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseSnapshotsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseSnapshotsResult
+type GetRelationalDatabaseSnapshotsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A token used for advancing to the next page of results from your get relational
+	// database snapshots request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+
+	// An object describing the result of your get relational database snapshots
+	// request.
+	RelationalDatabaseSnapshots []RelationalDatabaseSnapshot `locationName:"relationalDatabaseSnapshots" type:"list"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabaseSnapshotsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabaseSnapshotsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabaseSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabasesRequest
+type GetRelationalDatabasesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token used for advancing to a specific page of results for your get relational
+	// database request.
+	PageToken *string `locationName:"pageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabasesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabasesInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabasesResult
+type GetRelationalDatabasesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A token used for advancing to the next page of results from your get relational
+	// databases request.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+
+	// An object describing the result of your get relational databases request.
+	RelationalDatabases []RelationalDatabase `locationName:"relationalDatabases" type:"list"`
+}
+
+// String returns the string representation
+func (s GetRelationalDatabasesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetRelationalDatabasesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetRelationalDatabasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -8153,7 +11834,7 @@ type Instance struct {
 	// to it.
 	IsStaticIp *bool `locationName:"isStaticIp" type:"boolean"`
 
-	// The region name and availability zone where the instance is located.
+	// The region name and Availability Zone where the instance is located.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
 
 	// The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
@@ -8182,6 +11863,10 @@ type Instance struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The user name for connecting to the instance (e.g., ec2-user).
 	Username *string `locationName:"username" type:"string"`
@@ -8255,6 +11940,88 @@ func (s InstanceAccessDetails) String() string {
 // GoString returns the string representation
 func (s InstanceAccessDetails) GoString() string {
 	return s.String()
+}
+
+// Describes the Amazon Elastic Compute Cloud instance and related resources
+// to be created using the create cloud formation stack operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceEntry
+type InstanceEntry struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone for the new Amazon EC2 instance.
+	//
+	// AvailabilityZone is a required field
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string" required:"true"`
+
+	// The instance type (e.g., t2.micro) to use for the new Amazon EC2 instance.
+	//
+	// InstanceType is a required field
+	InstanceType *string `locationName:"instanceType" type:"string" required:"true"`
+
+	// The port configuration to use for the new Amazon EC2 instance.
+	//
+	// The following configuration options are available:
+	//
+	//    * DEFAULT — Use the default firewall settings from the image.
+	//
+	//    * INSTANCE — Use the firewall settings from the source Lightsail instance.
+	//
+	//    * NONE — Default to Amazon EC2.
+	//
+	// PortInfoSource is a required field
+	PortInfoSource PortInfoSourceType `locationName:"portInfoSource" type:"string" required:"true" enum:"true"`
+
+	// The name of the export snapshot record, which contains the exported Lightsail
+	// instance snapshot that will be used as the source of the new Amazon EC2 instance.
+	//
+	// Use the get export snapshot records operation to get a list of export snapshot
+	// records that you can use to create a CloudFormation stack.
+	//
+	// SourceName is a required field
+	SourceName *string `locationName:"sourceName" type:"string" required:"true"`
+
+	// A launch script you can create that configures a server with additional user
+	// data. For example, you might want to run apt-get -y update.
+	//
+	// Depending on the machine image you choose, the command to get software on
+	// your instance varies. Amazon Linux and CentOS use yum, Debian and Ubuntu
+	// use apt-get, and FreeBSD uses pkg.
+	UserData *string `locationName:"userData" type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstanceEntry) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InstanceEntry) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceEntry"}
+
+	if s.AvailabilityZone == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
+	}
+
+	if s.InstanceType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
+	}
+	if len(s.PortInfoSource) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("PortInfoSource"))
+	}
+
+	if s.SourceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Describes the hardware for the instance.
@@ -8505,7 +12272,7 @@ type InstanceSnapshot struct {
 	// The instance from which the snapshot was created.
 	FromInstanceName *string `locationName:"fromInstanceName" type:"string"`
 
-	// The region name and availability zone where you created the snapshot.
+	// The region name and Availability Zone where you created the snapshot.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
 
 	// The name of the snapshot.
@@ -8527,6 +12294,10 @@ type InstanceSnapshot struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -8536,6 +12307,31 @@ func (s InstanceSnapshot) String() string {
 
 // GoString returns the string representation
 func (s InstanceSnapshot) GoString() string {
+	return s.String()
+}
+
+// Describes an instance snapshot.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceSnapshotInfo
+type InstanceSnapshotInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The blueprint ID from which the source instance (e.g., os_debian_8_3).
+	FromBlueprintId *string `locationName:"fromBlueprintId" type:"string"`
+
+	// The bundle ID from which the source instance was created (e.g., micro_1_0).
+	FromBundleId *string `locationName:"fromBundleId" type:"string"`
+
+	// A list of objects describing the disks that were attached to the source instance.
+	FromDiskInfo []DiskInfo `locationName:"fromDiskInfo" type:"list"`
+}
+
+// String returns the string representation
+func (s InstanceSnapshotInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstanceSnapshotInfo) GoString() string {
 	return s.String()
 }
 
@@ -8628,6 +12424,10 @@ type KeyPair struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -8696,6 +12496,10 @@ type LoadBalancer struct {
 	// questions about your Lightsail load balancer. This code enables our support
 	// team to look up your Lightsail information more easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// An array of LoadBalancerTlsCertificateSummary objects that provide additional
 	// information about the SSL/TLS certificates. For example, if true, the certificate
@@ -8823,6 +12627,10 @@ type LoadBalancerTlsCertificate struct {
 	// code enables our support team to look up your Lightsail information more
 	// easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -8934,6 +12742,28 @@ func (s LoadBalancerTlsCertificateSummary) String() string {
 
 // GoString returns the string representation
 func (s LoadBalancerTlsCertificateSummary) GoString() string {
+	return s.String()
+}
+
+// Describes a database log event.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LogEvent
+type LogEvent struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp when the database log event was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The message of the database log event.
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s LogEvent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogEvent) GoString() string {
 	return s.String()
 }
 
@@ -9195,6 +13025,56 @@ func (s PeerVpcOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Describes a pending database maintenance action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PendingMaintenanceAction
+type PendingMaintenanceAction struct {
+	_ struct{} `type:"structure"`
+
+	// The type of pending database maintenance action.
+	Action *string `locationName:"action" type:"string"`
+
+	// The effective date of the pending database maintenance action.
+	CurrentApplyDate *time.Time `locationName:"currentApplyDate" type:"timestamp" timestampFormat:"unix"`
+
+	// Additional detail about the pending database maintenance action.
+	Description *string `locationName:"description" type:"string"`
+}
+
+// String returns the string representation
+func (s PendingMaintenanceAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PendingMaintenanceAction) GoString() string {
+	return s.String()
+}
+
+// Describes a pending database value modification.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PendingModifiedRelationalDatabaseValues
+type PendingModifiedRelationalDatabaseValues struct {
+	_ struct{} `type:"structure"`
+
+	// A Boolean value indicating whether automated backup retention is enabled.
+	BackupRetentionEnabled *bool `locationName:"backupRetentionEnabled" type:"boolean"`
+
+	// The database engine version.
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// The password for the master user of the database.
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+}
+
+// String returns the string representation
+func (s PendingModifiedRelationalDatabaseValues) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PendingModifiedRelationalDatabaseValues) GoString() string {
+	return s.String()
+}
+
 // Describes information about the ports on your virtual private server (or
 // instance).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PortInfo
@@ -9348,6 +13228,65 @@ func (s RebootInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootRelationalDatabaseRequest
+type RebootRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of your database to reboot.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RebootRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RebootRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RebootRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RebootRelationalDatabaseInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootRelationalDatabaseResult
+type RebootRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your reboot relational database request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s RebootRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RebootRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Describes the AWS Region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Region
 type Region struct {
@@ -9368,6 +13307,9 @@ type Region struct {
 
 	// The region name (e.g., us-east-2).
 	Name RegionName `locationName:"name" type:"string" enum:"true"`
+
+	// The Availability Zones for databases. Follows the format us-east-2a (case-sensitive).
+	RelationalDatabaseAvailabilityZones []AvailabilityZone `locationName:"relationalDatabaseAvailabilityZones" type:"list"`
 }
 
 // String returns the string representation
@@ -9377,6 +13319,375 @@ func (s Region) String() string {
 
 // GoString returns the string representation
 func (s Region) GoString() string {
+	return s.String()
+}
+
+// Describes a database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabase
+type RelationalDatabase struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the database.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// A Boolean value indicating whether automated backup retention is enabled
+	// for the database.
+	BackupRetentionEnabled *bool `locationName:"backupRetentionEnabled" type:"boolean"`
+
+	// The timestamp when the database was created. Formatted in Unix time.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The database software (for example, MySQL).
+	Engine *string `locationName:"engine" type:"string"`
+
+	// The database engine version (for example, 5.7.23).
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// Describes the hardware of the database.
+	Hardware *RelationalDatabaseHardware `locationName:"hardware" type:"structure"`
+
+	// The latest point in time to which the database can be restored. Formatted
+	// in Unix time.
+	LatestRestorableTime *time.Time `locationName:"latestRestorableTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The Region name and Availability Zone where the database is located.
+	Location *ResourceLocation `locationName:"location" type:"structure"`
+
+	// The name of the master database created when the Lightsail database resource
+	// is created.
+	MasterDatabaseName *string `locationName:"masterDatabaseName" type:"string"`
+
+	// The master endpoint for the database.
+	MasterEndpoint *RelationalDatabaseEndpoint `locationName:"masterEndpoint" type:"structure"`
+
+	// The master user name of the database.
+	MasterUsername *string `locationName:"masterUsername" type:"string"`
+
+	// The unique name of the database resource in Lightsail.
+	Name *string `locationName:"name" type:"string"`
+
+	// The status of parameter updates for the database.
+	ParameterApplyStatus *string `locationName:"parameterApplyStatus" type:"string"`
+
+	// Describes the pending maintenance actions for the database.
+	PendingMaintenanceActions []PendingMaintenanceAction `locationName:"pendingMaintenanceActions" type:"list"`
+
+	// Describes pending database value modifications.
+	PendingModifiedValues *PendingModifiedRelationalDatabaseValues `locationName:"pendingModifiedValues" type:"structure"`
+
+	// The daily time range during which automated backups are created for the database
+	// (for example, 16:00-16:30).
+	PreferredBackupWindow *string `locationName:"preferredBackupWindow" type:"string"`
+
+	// The weekly time range during which system maintenance can occur on the database.
+	//
+	// In the format ddd:hh24:mi-ddd:hh24:mi. For example, Tue:17:00-Tue:17:30.
+	PreferredMaintenanceWindow *string `locationName:"preferredMaintenanceWindow" type:"string"`
+
+	// A Boolean value indicating whether the database is publicly accessible.
+	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
+
+	// The blueprint ID for the database. A blueprint describes the major engine
+	// version of a database.
+	RelationalDatabaseBlueprintId *string `locationName:"relationalDatabaseBlueprintId" type:"string"`
+
+	// The bundle ID for the database. A bundle describes the performance specifications
+	// for your database.
+	RelationalDatabaseBundleId *string `locationName:"relationalDatabaseBundleId" type:"string"`
+
+	// The Lightsail resource type for the database (for example, RelationalDatabase).
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// Describes the secondary Availability Zone of a high availability database.
+	//
+	// The secondary database is used for failover support of a high availability
+	// database.
+	SecondaryAvailabilityZone *string `locationName:"secondaryAvailabilityZone" type:"string"`
+
+	// Describes the current state of the database.
+	State *string `locationName:"state" type:"string"`
+
+	// The support code for the database. Include this code in your email to support
+	// when you have questions about a database in Lightsail. This code enables
+	// our support team to look up your Lightsail information more easily.
+	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s RelationalDatabase) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabase) GoString() string {
+	return s.String()
+}
+
+// Describes a database image, or blueprint. A blueprint describes the major
+// engine version of a database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseBlueprint
+type RelationalDatabaseBlueprint struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the database blueprint.
+	BlueprintId *string `locationName:"blueprintId" type:"string"`
+
+	// The database software of the database blueprint (for example, MySQL).
+	Engine RelationalDatabaseEngine `locationName:"engine" type:"string" enum:"true"`
+
+	// The description of the database engine for the database blueprint.
+	EngineDescription *string `locationName:"engineDescription" type:"string"`
+
+	// The database engine version for the database blueprint (for example, 5.7.23).
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// The description of the database engine version for the database blueprint.
+	EngineVersionDescription *string `locationName:"engineVersionDescription" type:"string"`
+
+	// A Boolean value indicating whether the engine version is the default for
+	// the database blueprint.
+	IsEngineDefault *bool `locationName:"isEngineDefault" type:"boolean"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseBlueprint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseBlueprint) GoString() string {
+	return s.String()
+}
+
+// Describes a database bundle. A bundle describes the performance specifications
+// of the database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseBundle
+type RelationalDatabaseBundle struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the database bundle.
+	BundleId *string `locationName:"bundleId" type:"string"`
+
+	// The number of virtual CPUs (vCPUs) for the database bundle.
+	CpuCount *int64 `locationName:"cpuCount" type:"integer"`
+
+	// The size of the disk for the database bundle.
+	DiskSizeInGb *int64 `locationName:"diskSizeInGb" type:"integer"`
+
+	// A Boolean value indicating whether the database bundle is active.
+	IsActive *bool `locationName:"isActive" type:"boolean"`
+
+	// A Boolean value indicating whether the database bundle is encrypted.
+	IsEncrypted *bool `locationName:"isEncrypted" type:"boolean"`
+
+	// The name for the database bundle.
+	Name *string `locationName:"name" type:"string"`
+
+	// The cost of the database bundle in US currency.
+	Price *float64 `locationName:"price" type:"float"`
+
+	// The amount of RAM in GB (for example, 2.0) for the database bundle.
+	RamSizeInGb *float64 `locationName:"ramSizeInGb" type:"float"`
+
+	// The data transfer rate per month in GB for the database bundle.
+	TransferPerMonthInGb *int64 `locationName:"transferPerMonthInGb" type:"integer"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseBundle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseBundle) GoString() string {
+	return s.String()
+}
+
+// Describes an endpoint for a database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseEndpoint
+type RelationalDatabaseEndpoint struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the DNS address of the database.
+	Address *string `locationName:"address" type:"string"`
+
+	// Specifies the port that the database is listening on.
+	Port *int64 `locationName:"port" type:"integer"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseEndpoint) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseEndpoint) GoString() string {
+	return s.String()
+}
+
+// Describes an event for a database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseEvent
+type RelationalDatabaseEvent struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp when the database event was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The category that the database event belongs to.
+	EventCategories []string `locationName:"eventCategories" type:"list"`
+
+	// The message of the database event.
+	Message *string `locationName:"message" type:"string"`
+
+	// The database that the database event relates to.
+	Resource *string `locationName:"resource" type:"string"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseEvent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseEvent) GoString() string {
+	return s.String()
+}
+
+// Describes the hardware of a database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseHardware
+type RelationalDatabaseHardware struct {
+	_ struct{} `type:"structure"`
+
+	// The number of vCPUs for the database.
+	CpuCount *int64 `locationName:"cpuCount" type:"integer"`
+
+	// The size of the disk for the database.
+	DiskSizeInGb *int64 `locationName:"diskSizeInGb" type:"integer"`
+
+	// The amount of RAM in GB for the database.
+	RamSizeInGb *float64 `locationName:"ramSizeInGb" type:"float"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseHardware) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseHardware) GoString() string {
+	return s.String()
+}
+
+// Describes the parameters of a database.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseParameter
+type RelationalDatabaseParameter struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the valid range of values for the parameter.
+	AllowedValues *string `locationName:"allowedValues" type:"string"`
+
+	// Indicates when parameter updates are applied.
+	//
+	// Can be immediate or pending-reboot.
+	ApplyMethod *string `locationName:"applyMethod" type:"string"`
+
+	// Specifies the engine-specific parameter type.
+	ApplyType *string `locationName:"applyType" type:"string"`
+
+	// Specifies the valid data type for the parameter.
+	DataType *string `locationName:"dataType" type:"string"`
+
+	// Provides a description of the parameter.
+	Description *string `locationName:"description" type:"string"`
+
+	// A Boolean value indicating whether the parameter can be modified.
+	IsModifiable *bool `locationName:"isModifiable" type:"boolean"`
+
+	// Specifies the name of the parameter.
+	ParameterName *string `locationName:"parameterName" type:"string"`
+
+	// Specifies the value of the parameter.
+	ParameterValue *string `locationName:"parameterValue" type:"string"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseParameter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseParameter) GoString() string {
+	return s.String()
+}
+
+// Describes a database snapshot.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RelationalDatabaseSnapshot
+type RelationalDatabaseSnapshot struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the database snapshot.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The timestamp when the database snapshot was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The software of the database snapshot (for example, MySQL)
+	Engine *string `locationName:"engine" type:"string"`
+
+	// The database engine version for the database snapshot (for example, 5.7.23).
+	EngineVersion *string `locationName:"engineVersion" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the database from which the database snapshot
+	// was created.
+	FromRelationalDatabaseArn *string `locationName:"fromRelationalDatabaseArn" type:"string"`
+
+	// The blueprint ID of the database from which the database snapshot was created.
+	// A blueprint describes the major engine version of a database.
+	FromRelationalDatabaseBlueprintId *string `locationName:"fromRelationalDatabaseBlueprintId" type:"string"`
+
+	// The bundle ID of the database from which the database snapshot was created.
+	FromRelationalDatabaseBundleId *string `locationName:"fromRelationalDatabaseBundleId" type:"string"`
+
+	// The name of the source database from which the database snapshot was created.
+	FromRelationalDatabaseName *string `locationName:"fromRelationalDatabaseName" type:"string"`
+
+	// The Region name and Availability Zone where the database snapshot is located.
+	Location *ResourceLocation `locationName:"location" type:"structure"`
+
+	// The name of the database snapshot.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Lightsail resource type.
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// The size of the disk in GB (for example, 32) for the database snapshot.
+	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
+
+	// The state of the database snapshot.
+	State *string `locationName:"state" type:"string"`
+
+	// The support code for the database snapshot. Include this code in your email
+	// to support when you have questions about a database snapshot in Lightsail.
+	// This code enables our support team to look up your Lightsail information
+	// more easily.
+	SupportCode *string `locationName:"supportCode" type:"string"`
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseSnapshot) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseSnapshot) GoString() string {
 	return s.String()
 }
 
@@ -9520,6 +13831,65 @@ func (s StartInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartRelationalDatabaseRequest
+type StartRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of your database to start.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StartRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartRelationalDatabaseInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartRelationalDatabaseResult
+type StartRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your start relational database request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s StartRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Describes the static IP.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StaticIp
 type StaticIp struct {
@@ -9632,6 +14002,168 @@ func (s StopInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopRelationalDatabaseRequest
+type StopRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of your database to stop.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// The name of your new database snapshot to be created before stopping your
+	// database.
+	RelationalDatabaseSnapshotName *string `locationName:"relationalDatabaseSnapshotName" type:"string"`
+}
+
+// String returns the string representation
+func (s StopRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopRelationalDatabaseInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopRelationalDatabaseResult
+type StopRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your stop relational database request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s StopRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Describes a tag key and optional value assigned to an Amazon Lightsail resource.
+//
+// For more information about tags in Lightsail, see the Lightsail Dev Guide
+// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the tag.
+	//
+	// Constraints: Tag keys accept a maximum of 128 letters, numbers, spaces in
+	// UTF-8, or the following characters: + - = . _ : / @
+	Key *string `locationName:"key" type:"string"`
+
+	// The value of the tag.
+	//
+	// Constraints: Tag values accept a maximum of 256 letters, numbers, spaces
+	// in UTF-8, or the following characters: + - = . _ : / @
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the resource to which you are adding tags.
+	//
+	// ResourceName is a required field
+	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
+
+	// The tag key and optional value.
+	//
+	// Tags is a required field
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/TagResourceResult
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the API operation.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpcRequest
 type UnpeerVpcInput struct {
 	_ struct{} `type:"structure"`
@@ -9669,6 +14201,74 @@ func (s UnpeerVpcOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UnpeerVpcOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the resource from which you are removing a tag.
+	//
+	// ResourceName is a required field
+	ResourceName *string `locationName:"resourceName" type:"string" required:"true"`
+
+	// The tag keys to delete from the specified resource.
+	//
+	// TagKeys is a required field
+	TagKeys []string `locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UntagResourceResult
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of objects describing the API operation.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -9819,6 +14419,209 @@ func (s UpdateLoadBalancerAttributeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseRequest
+type UpdateRelationalDatabaseInput struct {
+	_ struct{} `type:"structure"`
+
+	// When true, applies changes immediately. When false, applies changes during
+	// the preferred maintenance window. Some changes may cause an outage.
+	//
+	// Default: false
+	ApplyImmediately *bool `locationName:"applyImmediately" type:"boolean"`
+
+	// When true, disables automated backup retention for your database.
+	//
+	// Disabling backup retention deletes all automated database backups. Before
+	// disabling this, you may want to create a snapshot of your database using
+	// the create relational database snapshot operation.
+	//
+	// Updates are applied during the next maintenance window because this can result
+	// in an outage.
+	DisableBackupRetention *bool `locationName:"disableBackupRetention" type:"boolean"`
+
+	// When true, enables automated backup retention for your database.
+	//
+	// Updates are applied during the next maintenance window because this can result
+	// in an outage.
+	EnableBackupRetention *bool `locationName:"enableBackupRetention" type:"boolean"`
+
+	// The password for the master user of your database. The password can include
+	// any printable ASCII character except "/", """, or "@".
+	//
+	// Constraints: Must contain 8 to 41 characters.
+	MasterUserPassword *string `locationName:"masterUserPassword" type:"string"`
+
+	// The daily time range during which automated backups are created for your
+	// database if automated backups are enabled.
+	//
+	// Constraints:
+	//
+	//    * Must be in the hh24:mi-hh24:mi format.
+	//
+	// Example: 16:00-16:30
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Must not conflict with the preferred maintenance window.
+	//
+	//    * Must be at least 30 minutes.
+	PreferredBackupWindow *string `locationName:"preferredBackupWindow" type:"string"`
+
+	// The weekly time range during which system maintenance can occur on your database.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block
+	// of time for each AWS Region, occurring on a random day of the week.
+	//
+	// Constraints:
+	//
+	//    * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	//
+	//    * Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//
+	//    * Must be at least 30 minutes.
+	//
+	//    * Specified in Universal Coordinated Time (UTC).
+	//
+	//    * Example: Tue:17:00-Tue:17:30
+	PreferredMaintenanceWindow *string `locationName:"preferredMaintenanceWindow" type:"string"`
+
+	// Specifies the accessibility options for your database. A value of true specifies
+	// a database that is available to resources outside of your Lightsail account.
+	// A value of false specifies a database that is available only to your Lightsail
+	// resources in the same region as your database.
+	PubliclyAccessible *bool `locationName:"publiclyAccessible" type:"boolean"`
+
+	// The name of your database to update.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+
+	// When true, the master user password is changed to a new strong password generated
+	// by Lightsail.
+	//
+	// Use the get relational database master user password operation to get the
+	// new password.
+	RotateMasterUserPassword *bool `locationName:"rotateMasterUserPassword" type:"boolean"`
+}
+
+// String returns the string representation
+func (s UpdateRelationalDatabaseInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRelationalDatabaseInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRelationalDatabaseInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRelationalDatabaseInput"}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseResult
+type UpdateRelationalDatabaseOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your update relational database request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateRelationalDatabaseOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRelationalDatabaseOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRelationalDatabaseOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseParametersRequest
+type UpdateRelationalDatabaseParametersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The database parameters to update.
+	//
+	// Parameters is a required field
+	Parameters []RelationalDatabaseParameter `locationName:"parameters" type:"list" required:"true"`
+
+	// The name of your database for which to update parameters.
+	//
+	// RelationalDatabaseName is a required field
+	RelationalDatabaseName *string `locationName:"relationalDatabaseName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRelationalDatabaseParametersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRelationalDatabaseParametersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRelationalDatabaseParametersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRelationalDatabaseParametersInput"}
+
+	if s.Parameters == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
+	}
+
+	if s.RelationalDatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RelationalDatabaseName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateRelationalDatabaseParametersResult
+type UpdateRelationalDatabaseParametersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object describing the result of your update relational database parameters
+	// request.
+	Operations []Operation `locationName:"operations" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateRelationalDatabaseParametersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRelationalDatabaseParametersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRelationalDatabaseParametersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 type AccessDirection string
 
 // Enum values for AccessDirection
@@ -9849,6 +14652,22 @@ func (enum BlueprintType) MarshalValue() (string, error) {
 }
 
 func (enum BlueprintType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CloudFormationStackRecordSourceType string
+
+// Enum values for CloudFormationStackRecordSourceType
+const (
+	CloudFormationStackRecordSourceTypeExportSnapshotRecord CloudFormationStackRecordSourceType = "ExportSnapshotRecord"
+)
+
+func (enum CloudFormationStackRecordSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudFormationStackRecordSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9888,6 +14707,23 @@ func (enum DiskState) MarshalValue() (string, error) {
 }
 
 func (enum DiskState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ExportSnapshotRecordSourceType string
+
+// Enum values for ExportSnapshotRecordSourceType
+const (
+	ExportSnapshotRecordSourceTypeInstanceSnapshot ExportSnapshotRecordSourceType = "InstanceSnapshot"
+	ExportSnapshotRecordSourceTypeDiskSnapshot     ExportSnapshotRecordSourceType = "DiskSnapshot"
+)
+
+func (enum ExportSnapshotRecordSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExportSnapshotRecordSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -10303,40 +15139,50 @@ type OperationType string
 
 // Enum values for OperationType
 const (
-	OperationTypeDeleteInstance                   OperationType = "DeleteInstance"
-	OperationTypeCreateInstance                   OperationType = "CreateInstance"
-	OperationTypeStopInstance                     OperationType = "StopInstance"
-	OperationTypeStartInstance                    OperationType = "StartInstance"
-	OperationTypeRebootInstance                   OperationType = "RebootInstance"
-	OperationTypeOpenInstancePublicPorts          OperationType = "OpenInstancePublicPorts"
-	OperationTypePutInstancePublicPorts           OperationType = "PutInstancePublicPorts"
-	OperationTypeCloseInstancePublicPorts         OperationType = "CloseInstancePublicPorts"
-	OperationTypeAllocateStaticIp                 OperationType = "AllocateStaticIp"
-	OperationTypeReleaseStaticIp                  OperationType = "ReleaseStaticIp"
-	OperationTypeAttachStaticIp                   OperationType = "AttachStaticIp"
-	OperationTypeDetachStaticIp                   OperationType = "DetachStaticIp"
-	OperationTypeUpdateDomainEntry                OperationType = "UpdateDomainEntry"
-	OperationTypeDeleteDomainEntry                OperationType = "DeleteDomainEntry"
-	OperationTypeCreateDomain                     OperationType = "CreateDomain"
-	OperationTypeDeleteDomain                     OperationType = "DeleteDomain"
-	OperationTypeCreateInstanceSnapshot           OperationType = "CreateInstanceSnapshot"
-	OperationTypeDeleteInstanceSnapshot           OperationType = "DeleteInstanceSnapshot"
-	OperationTypeCreateInstancesFromSnapshot      OperationType = "CreateInstancesFromSnapshot"
-	OperationTypeCreateLoadBalancer               OperationType = "CreateLoadBalancer"
-	OperationTypeDeleteLoadBalancer               OperationType = "DeleteLoadBalancer"
-	OperationTypeAttachInstancesToLoadBalancer    OperationType = "AttachInstancesToLoadBalancer"
-	OperationTypeDetachInstancesFromLoadBalancer  OperationType = "DetachInstancesFromLoadBalancer"
-	OperationTypeUpdateLoadBalancerAttribute      OperationType = "UpdateLoadBalancerAttribute"
-	OperationTypeCreateLoadBalancerTlsCertificate OperationType = "CreateLoadBalancerTlsCertificate"
-	OperationTypeDeleteLoadBalancerTlsCertificate OperationType = "DeleteLoadBalancerTlsCertificate"
-	OperationTypeAttachLoadBalancerTlsCertificate OperationType = "AttachLoadBalancerTlsCertificate"
-	OperationTypeCreateDisk                       OperationType = "CreateDisk"
-	OperationTypeDeleteDisk                       OperationType = "DeleteDisk"
-	OperationTypeAttachDisk                       OperationType = "AttachDisk"
-	OperationTypeDetachDisk                       OperationType = "DetachDisk"
-	OperationTypeCreateDiskSnapshot               OperationType = "CreateDiskSnapshot"
-	OperationTypeDeleteDiskSnapshot               OperationType = "DeleteDiskSnapshot"
-	OperationTypeCreateDiskFromSnapshot           OperationType = "CreateDiskFromSnapshot"
+	OperationTypeDeleteInstance                       OperationType = "DeleteInstance"
+	OperationTypeCreateInstance                       OperationType = "CreateInstance"
+	OperationTypeStopInstance                         OperationType = "StopInstance"
+	OperationTypeStartInstance                        OperationType = "StartInstance"
+	OperationTypeRebootInstance                       OperationType = "RebootInstance"
+	OperationTypeOpenInstancePublicPorts              OperationType = "OpenInstancePublicPorts"
+	OperationTypePutInstancePublicPorts               OperationType = "PutInstancePublicPorts"
+	OperationTypeCloseInstancePublicPorts             OperationType = "CloseInstancePublicPorts"
+	OperationTypeAllocateStaticIp                     OperationType = "AllocateStaticIp"
+	OperationTypeReleaseStaticIp                      OperationType = "ReleaseStaticIp"
+	OperationTypeAttachStaticIp                       OperationType = "AttachStaticIp"
+	OperationTypeDetachStaticIp                       OperationType = "DetachStaticIp"
+	OperationTypeUpdateDomainEntry                    OperationType = "UpdateDomainEntry"
+	OperationTypeDeleteDomainEntry                    OperationType = "DeleteDomainEntry"
+	OperationTypeCreateDomain                         OperationType = "CreateDomain"
+	OperationTypeDeleteDomain                         OperationType = "DeleteDomain"
+	OperationTypeCreateInstanceSnapshot               OperationType = "CreateInstanceSnapshot"
+	OperationTypeDeleteInstanceSnapshot               OperationType = "DeleteInstanceSnapshot"
+	OperationTypeCreateInstancesFromSnapshot          OperationType = "CreateInstancesFromSnapshot"
+	OperationTypeCreateLoadBalancer                   OperationType = "CreateLoadBalancer"
+	OperationTypeDeleteLoadBalancer                   OperationType = "DeleteLoadBalancer"
+	OperationTypeAttachInstancesToLoadBalancer        OperationType = "AttachInstancesToLoadBalancer"
+	OperationTypeDetachInstancesFromLoadBalancer      OperationType = "DetachInstancesFromLoadBalancer"
+	OperationTypeUpdateLoadBalancerAttribute          OperationType = "UpdateLoadBalancerAttribute"
+	OperationTypeCreateLoadBalancerTlsCertificate     OperationType = "CreateLoadBalancerTlsCertificate"
+	OperationTypeDeleteLoadBalancerTlsCertificate     OperationType = "DeleteLoadBalancerTlsCertificate"
+	OperationTypeAttachLoadBalancerTlsCertificate     OperationType = "AttachLoadBalancerTlsCertificate"
+	OperationTypeCreateDisk                           OperationType = "CreateDisk"
+	OperationTypeDeleteDisk                           OperationType = "DeleteDisk"
+	OperationTypeAttachDisk                           OperationType = "AttachDisk"
+	OperationTypeDetachDisk                           OperationType = "DetachDisk"
+	OperationTypeCreateDiskSnapshot                   OperationType = "CreateDiskSnapshot"
+	OperationTypeDeleteDiskSnapshot                   OperationType = "DeleteDiskSnapshot"
+	OperationTypeCreateDiskFromSnapshot               OperationType = "CreateDiskFromSnapshot"
+	OperationTypeCreateRelationalDatabase             OperationType = "CreateRelationalDatabase"
+	OperationTypeUpdateRelationalDatabase             OperationType = "UpdateRelationalDatabase"
+	OperationTypeDeleteRelationalDatabase             OperationType = "DeleteRelationalDatabase"
+	OperationTypeCreateRelationalDatabaseFromSnapshot OperationType = "CreateRelationalDatabaseFromSnapshot"
+	OperationTypeCreateRelationalDatabaseSnapshot     OperationType = "CreateRelationalDatabaseSnapshot"
+	OperationTypeDeleteRelationalDatabaseSnapshot     OperationType = "DeleteRelationalDatabaseSnapshot"
+	OperationTypeUpdateRelationalDatabaseParameters   OperationType = "UpdateRelationalDatabaseParameters"
+	OperationTypeStartRelationalDatabase              OperationType = "StartRelationalDatabase"
+	OperationTypeRebootRelationalDatabase             OperationType = "RebootRelationalDatabase"
+	OperationTypeStopRelationalDatabase               OperationType = "StopRelationalDatabase"
 )
 
 func (enum OperationType) MarshalValue() (string, error) {
@@ -10365,6 +15211,24 @@ func (enum PortAccessType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PortInfoSourceType string
+
+// Enum values for PortInfoSourceType
+const (
+	PortInfoSourceTypeDefault  PortInfoSourceType = "DEFAULT"
+	PortInfoSourceTypeInstance PortInfoSourceType = "INSTANCE"
+	PortInfoSourceTypeNone     PortInfoSourceType = "NONE"
+)
+
+func (enum PortInfoSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PortInfoSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PortState string
 
 // Enum values for PortState
@@ -10382,6 +15246,24 @@ func (enum PortState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type RecordState string
+
+// Enum values for RecordState
+const (
+	RecordStateStarted   RecordState = "Started"
+	RecordStateSucceeded RecordState = "Succeeded"
+	RecordStateFailed    RecordState = "Failed"
+)
+
+func (enum RecordState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RegionName string
 
 // Enum values for RegionName
@@ -10390,9 +15272,11 @@ const (
 	RegionNameUsEast2      RegionName = "us-east-2"
 	RegionNameUsWest1      RegionName = "us-west-1"
 	RegionNameUsWest2      RegionName = "us-west-2"
-	RegionNameEuCentral1   RegionName = "eu-central-1"
 	RegionNameEuWest1      RegionName = "eu-west-1"
 	RegionNameEuWest2      RegionName = "eu-west-2"
+	RegionNameEuWest3      RegionName = "eu-west-3"
+	RegionNameEuCentral1   RegionName = "eu-central-1"
+	RegionNameCaCentral1   RegionName = "ca-central-1"
 	RegionNameApSouth1     RegionName = "ap-south-1"
 	RegionNameApSoutheast1 RegionName = "ap-southeast-1"
 	RegionNameApSoutheast2 RegionName = "ap-southeast-2"
@@ -10405,6 +15289,61 @@ func (enum RegionName) MarshalValue() (string, error) {
 }
 
 func (enum RegionName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RelationalDatabaseEngine string
+
+// Enum values for RelationalDatabaseEngine
+const (
+	RelationalDatabaseEngineMysql RelationalDatabaseEngine = "mysql"
+)
+
+func (enum RelationalDatabaseEngine) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RelationalDatabaseEngine) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RelationalDatabaseMetricName string
+
+// Enum values for RelationalDatabaseMetricName
+const (
+	RelationalDatabaseMetricNameCpuutilization            RelationalDatabaseMetricName = "CPUUtilization"
+	RelationalDatabaseMetricNameDatabaseConnections       RelationalDatabaseMetricName = "DatabaseConnections"
+	RelationalDatabaseMetricNameDiskQueueDepth            RelationalDatabaseMetricName = "DiskQueueDepth"
+	RelationalDatabaseMetricNameFreeStorageSpace          RelationalDatabaseMetricName = "FreeStorageSpace"
+	RelationalDatabaseMetricNameNetworkReceiveThroughput  RelationalDatabaseMetricName = "NetworkReceiveThroughput"
+	RelationalDatabaseMetricNameNetworkTransmitThroughput RelationalDatabaseMetricName = "NetworkTransmitThroughput"
+)
+
+func (enum RelationalDatabaseMetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RelationalDatabaseMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RelationalDatabasePasswordVersion string
+
+// Enum values for RelationalDatabasePasswordVersion
+const (
+	RelationalDatabasePasswordVersionCurrent  RelationalDatabasePasswordVersion = "CURRENT"
+	RelationalDatabasePasswordVersionPrevious RelationalDatabasePasswordVersion = "PREVIOUS"
+	RelationalDatabasePasswordVersionPending  RelationalDatabasePasswordVersion = "PENDING"
+)
+
+func (enum RelationalDatabasePasswordVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RelationalDatabasePasswordVersion) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -10423,6 +15362,10 @@ const (
 	ResourceTypeLoadBalancerTlsCertificate ResourceType = "LoadBalancerTlsCertificate"
 	ResourceTypeDisk                       ResourceType = "Disk"
 	ResourceTypeDiskSnapshot               ResourceType = "DiskSnapshot"
+	ResourceTypeRelationalDatabase         ResourceType = "RelationalDatabase"
+	ResourceTypeRelationalDatabaseSnapshot ResourceType = "RelationalDatabaseSnapshot"
+	ResourceTypeExportSnapshotRecord       ResourceType = "ExportSnapshotRecord"
+	ResourceTypeCloudFormationStackRecord  ResourceType = "CloudFormationStackRecord"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {

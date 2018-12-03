@@ -1058,7 +1058,7 @@ type AssociateDRTRoleInput struct {
 	// IAM Policies ( https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
 	//
 	// RoleArn is a required field
-	RoleArn *string `type:"string" required:"true"`
+	RoleArn *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1077,6 +1077,9 @@ func (s *AssociateDRTRoleInput) Validate() error {
 
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1312,7 +1315,7 @@ type CreateProtectionInput struct {
 	//
 	//    * For AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id
 	//
-	//    * For Amazon Route 53: arn:aws:route53::account-id:hostedzone/hosted-zone-id
+	//    * For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
 	//
 	//    * For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id
 	//
@@ -1600,7 +1603,7 @@ type DescribeDRTAccessOutput struct {
 
 	// The Amazon Resource Name (ARN) of the role the DRT used to access your AWS
 	// account.
-	RoleArn *string `type:"string"`
+	RoleArn *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -1866,7 +1869,7 @@ type EmergencyContact struct {
 	// An email address that the DRT can use to contact you during a suspected attack.
 	//
 	// EmailAddress is a required field
-	EmailAddress *string `type:"string" required:"true"`
+	EmailAddress *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1885,6 +1888,9 @@ func (s *EmergencyContact) Validate() error {
 
 	if s.EmailAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
+	}
+	if s.EmailAddress != nil && len(*s.EmailAddress) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1969,6 +1975,12 @@ type ListAttacksInput struct {
 
 	// The maximum number of AttackSummary objects to be returned. If this is left
 	// blank, the first 20 results will be returned.
+	//
+	// This is a maximum value; it is possible that AWS WAF will return the results
+	// in smaller batches. That is, the number of AttackSummary objects returned
+	// could be less than MaxResults, even if there are still more AttackSummary
+	// objects yet to return. If there are more AttackSummary objects to return,
+	// AWS WAF will always also return a NextToken.
 	MaxResults *int64 `type:"integer"`
 
 	// The ListAttacksRequest.NextMarker value from a previous call to ListAttacksRequest.
@@ -2022,6 +2034,10 @@ type ListAttacksOutput struct {
 	// available. If not null, more results are available. Pass this value for the
 	// NextMarker parameter in a subsequent call to ListAttacks to retrieve the
 	// next set of items.
+	//
+	// AWS WAF might return the list of AttackSummary objects in batches smaller
+	// than the number specified by MaxResults. If there are more AttackSummary
+	// objects to return, AWS WAF will always also return a NextToken.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -2046,6 +2062,12 @@ type ListProtectionsInput struct {
 
 	// The maximum number of Protection objects to be returned. If this is left
 	// blank the first 20 results will be returned.
+	//
+	// This is a maximum value; it is possible that AWS WAF will return the results
+	// in smaller batches. That is, the number of Protection objects returned could
+	// be less than MaxResults, even if there are still more Protection objects
+	// yet to return. If there are more Protection objects to return, AWS WAF will
+	// always also return a NextToken.
 	MaxResults *int64 `type:"integer"`
 
 	// The ListProtectionsRequest.NextToken value from a previous call to ListProtections.
@@ -2087,6 +2109,10 @@ type ListProtectionsOutput struct {
 	// the response that allows you to list another group of Protections. For the
 	// second and subsequent ListProtections requests, specify the value of NextToken
 	// from the previous response to get information about another batch of Protections.
+	//
+	// AWS WAF might return the list of Protection objects in batches smaller than
+	// the number specified by MaxResults. If there are more Protection objects
+	// to return, AWS WAF will always also return a NextToken.
 	NextToken *string `min:"1" type:"string"`
 
 	// The array of enabled Protection objects.

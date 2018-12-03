@@ -41,6 +41,12 @@ func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
 // When you delete a rule, incoming events might continue to match to the deleted
 // rule. Allow a short period of time for changes to take effect.
 //
+// Managed rules are rules created and managed by another AWS service on your
+// behalf. These rules are created by those other AWS services to support functionality
+// in those services. You can delete these rules using the Force option, but
+// you should do so only if you are sure the other service is not still using
+// that rule.
+//
 //    // Example sending a request using the DeleteRuleRequest method.
 //    req := client.DeleteRuleRequest(params)
 //    resp, err := req.Send()
@@ -514,16 +520,26 @@ func (r PutPermissionRequest) Send() (*PutPermissionOutput, error) {
 // PutPermissionRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Running PutPermission permits the specified AWS account to put events to
-// your account's default event bus. CloudWatch Events rules in your account
-// are triggered by these events arriving to your default event bus.
+// Running PutPermission permits the specified AWS account or AWS organization
+// to put events to your account's default event bus. CloudWatch Events rules
+// in your account are triggered by these events arriving to your default event
+// bus.
 //
 // For another account to send events to your account, that external account
 // must have a CloudWatch Events rule with your account's default event bus
 // as a target.
 //
 // To enable multiple AWS accounts to put events to your default event bus,
-// run PutPermission once for each of these accounts.
+// run PutPermission once for each of these accounts. Or, if all the accounts
+// are members of the same AWS organization, you can run PutPermission once
+// specifying Principal as "*" and specifying the AWS organization ID in Condition,
+// to grant permissions to all accounts in that organization.
+//
+// If you grant permissions using an organization, then accounts in that organization
+// must specify a RoleArn with proper permissions when they use PutTarget to
+// add your account's event bus as a target. For more information, see Sending
+// and Receiving Events Between AWS Accounts (http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html)
+// in the Amazon CloudWatch Events User Guide.
 //
 // The permission policy on the default event bus cannot exceed 10 KB in size.
 //
@@ -599,6 +615,20 @@ func (r PutRuleRequest) Send() (*PutRuleOutput, error) {
 // Names (ARNs). However, CloudWatch Events uses an exact match in event patterns
 // and rules. Be sure to use the correct ARN characters when creating event
 // patterns so that they match the ARN syntax in the event you want to match.
+//
+// In CloudWatch Events, it is possible to create rules that lead to infinite
+// loops, where a rule is fired repeatedly. For example, a rule might detect
+// that ACLs have changed on an S3 bucket, and trigger software to change them
+// to the desired state. If the rule is not written carefully, the subsequent
+// change to the ACLs fires the rule again, creating an infinite loop.
+//
+// To prevent this, write the rules so that the triggered actions do not re-fire
+// the same rule. For example, your rule could fire only if ACLs are found to
+// be in a bad state, instead of after any change.
+//
+// An infinite loop can quickly cause higher than expected charges. We recommend
+// that you use budgeting, which alerts you when charges exceed your specified
+// limit. For more information, see Managing Your Costs with Budgets (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/budgets-managing-costs.html).
 //
 //    // Example sending a request using the PutRuleRequest method.
 //    req := client.PutRuleRequest(params)
@@ -711,6 +741,13 @@ func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
 // account is charged for each sent event. Each event sent to another account
 // is charged as a custom event. The account receiving the event is not charged.
 // For more information, see Amazon CloudWatch Pricing (https://aws.amazon.com/cloudwatch/pricing/).
+//
+// If you are setting the event bus of another account as the target, and that
+// account granted permission to your account through an organization instead
+// of directly by the account ID, then you must specify a RoleArn with proper
+// permissions in the Target structure. For more information, see Sending and
+// Receiving Events Between AWS Accounts (http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html)
+// in the Amazon CloudWatch Events User Guide.
 //
 // For more information about enabling cross-account events, see PutPermission.
 //
@@ -1093,9 +1130,76 @@ func (s BatchRetryStrategy) GoString() string {
 	return s.String()
 }
 
+// A JSON string which you can use to limit the event bus permissions you are
+// granting to only accounts that fulfill the condition. Currently, the only
+// supported condition is membership in a certain AWS organization. The string
+// must contain Type, Key, and Value fields. The Value field specifies the ID
+// of the AWS organization. Following is an example value for Condition:
+//
+// '{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}'
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Condition
+type Condition struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the key for the condition. Currently the only supported key is
+	// aws:PrincipalOrgID.
+	//
+	// Key is a required field
+	Key *string `type:"string" required:"true"`
+
+	// Specifies the type of condition. Currently the only supported value is StringEquals.
+	//
+	// Type is a required field
+	Type *string `type:"string" required:"true"`
+
+	// Specifies the value for the key. Currently, this must be the ID of the organization.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Condition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Condition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Condition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Condition"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+
+	if s.Type == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest
 type DeleteRuleInput struct {
 	_ struct{} `type:"structure"`
+
+	// If this is a managed rule, created by an AWS service on your behalf, you
+	// must specify Force as True to delete the rule. This parameter is ignored
+	// for rules that are not managed rules. You can check whether a rule is a managed
+	// rule by using DescribeRule or ListRules and checking the ManagedBy field
+	// of the response.
+	Force *bool `type:"boolean"`
 
 	// The name of the rule.
 	//
@@ -1251,6 +1355,10 @@ type DescribeRuleOutput struct {
 	// The event pattern. For more information, see Events and Event Patterns (http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)
 	// in the Amazon CloudWatch Events User Guide.
 	EventPattern *string `type:"string"`
+
+	// If this is a managed rule, created by an AWS service on your behalf, this
+	// field displays the principal name of the AWS service that created the rule.
+	ManagedBy *string `min:"1" type:"string"`
 
 	// The name of the rule.
 	Name *string `min:"1" type:"string"`
@@ -2003,15 +2111,28 @@ type PutPermissionInput struct {
 	// Action is a required field
 	Action *string `min:"1" type:"string" required:"true"`
 
+	// This parameter enables you to limit the permission to accounts that fulfill
+	// a certain condition, such as being a member of a certain AWS organization.
+	// For more information about AWS Organizations, see What Is AWS Organizations
+	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
+	// in the AWS Organizations User Guide.
+	//
+	// If you specify Condition with an AWS organization ID, and specify "*" as
+	// the value for Principal, you grant permission to all the accounts in the
+	// named organization.
+	//
+	// The Condition is a JSON string which must contain Type, Key, and Value fields.
+	Condition *Condition `type:"structure"`
+
 	// The 12-digit AWS account ID that you are permitting to put events to your
 	// default event bus. Specify "*" to permit any account to put events to your
 	// default event bus.
 	//
-	// If you specify "*", avoid creating rules that may match undesirable events.
-	// To create more secure rules, make sure that the event pattern for each rule
-	// contains an account field with a specific account ID from which to receive
-	// events. Rules with an account field do not match any events sent from other
-	// accounts.
+	// If you specify "*" without specifying Condition, avoid creating rules that
+	// may match undesirable events. To create more secure rules, make sure that
+	// the event pattern for each rule contains an account field with a specific
+	// account ID from which to receive events. Rules with an account field do not
+	// match any events sent from other accounts.
 	//
 	// Principal is a required field
 	Principal *string `min:"1" type:"string" required:"true"`
@@ -2057,6 +2178,11 @@ func (s *PutPermissionInput) Validate() error {
 	}
 	if s.StatementId != nil && len(*s.StatementId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StatementId", 1))
+	}
+	if s.Condition != nil {
+		if err := s.Condition.Validate(); err != nil {
+			invalidParams.AddNested("Condition", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2343,6 +2469,13 @@ func (s RemovePermissionOutput) SDKResponseMetadata() aws.Response {
 type RemoveTargetsInput struct {
 	_ struct{} `type:"structure"`
 
+	// If this is a managed rule, created by an AWS service on your behalf, you
+	// must specify Force as True to remove targets. This parameter is ignored for
+	// rules that are not managed rules. You can check whether a rule is a managed
+	// rule by using DescribeRule or ListRules and checking the ManagedBy field
+	// of the response.
+	Force *bool `type:"boolean"`
+
 	// The IDs of the targets to remove from the rule.
 	//
 	// Ids is a required field
@@ -2458,6 +2591,10 @@ type Rule struct {
 	// Patterns (http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html)
 	// in the Amazon CloudWatch Events User Guide.
 	EventPattern *string `type:"string"`
+
+	// If the rule was created on behalf of your account by an AWS service, this
+	// field displays the principal name of the service that created the rule.
+	ManagedBy *string `min:"1" type:"string"`
 
 	// The name of the rule.
 	Name *string `min:"1" type:"string"`
@@ -2604,6 +2741,13 @@ func (s SqsParameters) GoString() string {
 
 // Targets are the resources to be invoked when a rule is triggered. For a complete
 // list of services and resources that can be set as a target, see PutTargets.
+//
+// If you are setting the event bus of another account as the target, and that
+// account granted permission to your account through an organization instead
+// of directly by the account ID, then you must specify a RoleArn with proper
+// permissions in the Target structure. For more information, see Sending and
+// Receiving Events Between AWS Accounts (http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEvents-CrossAccountEventDelivery.html)
+// in the Amazon CloudWatch Events User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target
 type Target struct {
 	_ struct{} `type:"structure"`

@@ -35,13 +35,20 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 // Amazon SageMaker Service.
 //
 // Adds or overwrites one or more tags for the specified Amazon SageMaker resource.
-// You can add tags to notebook instances, training jobs, models, endpoint configurations,
-// and endpoints.
+// You can add tags to notebook instances, training jobs, hyperparameter tuning
+// jobs, models, endpoint configurations, and endpoints.
 //
 // Each tag consists of a key and an optional value. Tag keys must be unique
-// per resource. For more information about tags, see Using Cost Allocation
-// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-// in the AWS Billing and Cost Management User Guide.
+// per resource. For more information about tags, see For more information,
+// see AWS Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+//
+// Tags that you add to a hyperparameter tuning job by calling this API are
+// also added to any training jobs that the hyperparameter tuning job launches
+// after you call this API, but not to training jobs that the hyperparameter
+// tuning job launched before you called this API. To make sure that the tags
+// associated with a hyperparameter tuning job are also added to all training
+// jobs that the hyperparameter tuning job launches, add the tags when you first
+// create the tuning job by specifying them in the Tags parameter of CreateHyperParameterTuningJob
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
@@ -67,6 +74,192 @@ func (c *SageMaker) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
+}
+
+const opCreateAlgorithm = "CreateAlgorithm"
+
+// CreateAlgorithmRequest is a API request type for the CreateAlgorithm API operation.
+type CreateAlgorithmRequest struct {
+	*aws.Request
+	Input *CreateAlgorithmInput
+	Copy  func(*CreateAlgorithmInput) CreateAlgorithmRequest
+}
+
+// Send marshals and sends the CreateAlgorithm API request.
+func (r CreateAlgorithmRequest) Send() (*CreateAlgorithmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAlgorithmOutput), nil
+}
+
+// CreateAlgorithmRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Create a machine learning algorithm that you can use in Amazon SageMaker
+// and list in the AWS Marketplace.
+//
+//    // Example sending a request using the CreateAlgorithmRequest method.
+//    req := client.CreateAlgorithmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithm
+func (c *SageMaker) CreateAlgorithmRequest(input *CreateAlgorithmInput) CreateAlgorithmRequest {
+	op := &aws.Operation{
+		Name:       opCreateAlgorithm,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateAlgorithmInput{}
+	}
+
+	output := &CreateAlgorithmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateAlgorithmRequest{Request: req, Input: input, Copy: c.CreateAlgorithmRequest}
+}
+
+const opCreateCodeRepository = "CreateCodeRepository"
+
+// CreateCodeRepositoryRequest is a API request type for the CreateCodeRepository API operation.
+type CreateCodeRepositoryRequest struct {
+	*aws.Request
+	Input *CreateCodeRepositoryInput
+	Copy  func(*CreateCodeRepositoryInput) CreateCodeRepositoryRequest
+}
+
+// Send marshals and sends the CreateCodeRepository API request.
+func (r CreateCodeRepositoryRequest) Send() (*CreateCodeRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCodeRepositoryOutput), nil
+}
+
+// CreateCodeRepositoryRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Create a git repository as a resource in your Amazon SageMaker account. You
+// can associate the repository with notebook instances so that you can use
+// git source control for the notebooks you create. The git repository is a
+// resource in your Amazon SageMaker account, so it can be associated with more
+// than one notebook instance, and it persists independently from the lifecycle
+// of any notebook instances it is associated with.
+//
+// The repository can be hosted either in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+// or in any other git repository.
+//
+//    // Example sending a request using the CreateCodeRepositoryRequest method.
+//    req := client.CreateCodeRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCodeRepository
+func (c *SageMaker) CreateCodeRepositoryRequest(input *CreateCodeRepositoryInput) CreateCodeRepositoryRequest {
+	op := &aws.Operation{
+		Name:       opCreateCodeRepository,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateCodeRepositoryInput{}
+	}
+
+	output := &CreateCodeRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateCodeRepositoryRequest{Request: req, Input: input, Copy: c.CreateCodeRepositoryRequest}
+}
+
+const opCreateCompilationJob = "CreateCompilationJob"
+
+// CreateCompilationJobRequest is a API request type for the CreateCompilationJob API operation.
+type CreateCompilationJobRequest struct {
+	*aws.Request
+	Input *CreateCompilationJobInput
+	Copy  func(*CreateCompilationJobInput) CreateCompilationJobRequest
+}
+
+// Send marshals and sends the CreateCompilationJob API request.
+func (r CreateCompilationJobRequest) Send() (*CreateCompilationJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCompilationJobOutput), nil
+}
+
+// CreateCompilationJobRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Starts a model compilation job. After the model has been compiled, Amazon
+// SageMaker saves the resulting model artifacts to an Amazon Simple Storage
+// Service (Amazon S3) bucket that you specify.
+//
+// If you choose to host your model using Amazon SageMaker hosting services,
+// you can use the resulting model artifacts as part of the model. You can also
+// use the artifacts with AWS IoT Greengrass. In that case, deploy them as an
+// ML resource.
+//
+// In the request body, you provide the following:
+//
+//    * A name for the compilation job
+//
+//    *  Information about the input model artifacts
+//
+//    * The output location for the compiled model and the device (target) that
+//    the model runs on
+//
+//    * The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+//    assumes to perform the model compilation job
+//
+// You can also provide a Tag to track the model compilation job's resource
+// use and costs. The response body contains the CompilationJobArn for the compiled
+// job.
+//
+// To stop a model compilation job, use StopCompilationJob. To get information
+// about a particular model compilation job, use DescribeCompilationJob. To
+// get information about multiple model compilation jobs, use ListCompilationJobs.
+//
+//    // Example sending a request using the CreateCompilationJobRequest method.
+//    req := client.CreateCompilationJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJob
+func (c *SageMaker) CreateCompilationJobRequest(input *CreateCompilationJobInput) CreateCompilationJobRequest {
+	op := &aws.Operation{
+		Name:       opCreateCompilationJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateCompilationJobInput{}
+	}
+
+	output := &CreateCompilationJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateCompilationJobRequest{Request: req, Input: input, Copy: c.CreateCompilationJobRequest}
 }
 
 const opCreateEndpoint = "CreateEndpoint"
@@ -236,7 +429,11 @@ func (r CreateHyperParameterTuningJobRequest) Send() (*CreateHyperParameterTunin
 // CreateHyperParameterTuningJobRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Starts a hyperparameter tuning job.
+// Starts a hyperparameter tuning job. A hyperparameter tuning job finds the
+// best version of a model by running many training jobs on your dataset using
+// the algorithm you choose and values for hyperparameters within ranges that
+// you specify. It then chooses the hyperparameter values that result in a model
+// that performs the best, as measured by an objective metric that you choose.
 //
 //    // Example sending a request using the CreateHyperParameterTuningJobRequest method.
 //    req := client.CreateHyperParameterTuningJobRequest(params)
@@ -262,6 +459,83 @@ func (c *SageMaker) CreateHyperParameterTuningJobRequest(input *CreateHyperParam
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.CreateHyperParameterTuningJobRequest}
+}
+
+const opCreateLabelingJob = "CreateLabelingJob"
+
+// CreateLabelingJobRequest is a API request type for the CreateLabelingJob API operation.
+type CreateLabelingJobRequest struct {
+	*aws.Request
+	Input *CreateLabelingJobInput
+	Copy  func(*CreateLabelingJobInput) CreateLabelingJobRequest
+}
+
+// Send marshals and sends the CreateLabelingJob API request.
+func (r CreateLabelingJobRequest) Send() (*CreateLabelingJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLabelingJobOutput), nil
+}
+
+// CreateLabelingJobRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Creates a job that uses human workers to label the data objects in your input
+// dataset. You can use the labeled data to train machine learning models
+//
+// You can select your workforce from one of three providers:
+//
+//    * A private workforce that you create. It can include employees, contractors,
+//    and outside experts. Use a private workforce when the data is highly confidential
+//    or a specific set of skills is required.
+//
+//    * One or more vendors that you select from the Amazon Marketplace. Vendors
+//    provide expertise in specific areas. Vendors are selected by AWS and meet
+//    a minimum standard of data security requirements.
+//
+//    * The Amazon Mechanical Turk workforce. This is the largest workforce,
+//    but it should only be used for public data or data that has been stripped
+//    of any personally identifiable information.
+//
+// You can also use automated data labeling to reduce the number of data objects
+// that need to be labeled by a human. Automated data labeling uses active learning
+// to determine if a data object can be labeled by machine or if it needs to
+// be sent to a human worker.
+//
+// The data objects to be labeled are contained in an Amazon S3 bucket. You
+// create a manifest file that describes the location of each object. For more
+// information, see Using Input and Output Data (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-data.html).
+//
+// The output can be used as the manifest file for another labeling job or as
+// training data for your machine learning models.
+//
+//    // Example sending a request using the CreateLabelingJobRequest method.
+//    req := client.CreateLabelingJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJob
+func (c *SageMaker) CreateLabelingJobRequest(input *CreateLabelingJobInput) CreateLabelingJobRequest {
+	op := &aws.Operation{
+		Name:       opCreateLabelingJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateLabelingJobInput{}
+	}
+
+	output := &CreateLabelingJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateLabelingJobRequest{Request: req, Input: input, Copy: c.CreateLabelingJobRequest}
 }
 
 const opCreateModel = "CreateModel"
@@ -338,6 +612,58 @@ func (c *SageMaker) CreateModelRequest(input *CreateModelInput) CreateModelReque
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateModelRequest{Request: req, Input: input, Copy: c.CreateModelRequest}
+}
+
+const opCreateModelPackage = "CreateModelPackage"
+
+// CreateModelPackageRequest is a API request type for the CreateModelPackage API operation.
+type CreateModelPackageRequest struct {
+	*aws.Request
+	Input *CreateModelPackageInput
+	Copy  func(*CreateModelPackageInput) CreateModelPackageRequest
+}
+
+// Send marshals and sends the CreateModelPackage API request.
+func (r CreateModelPackageRequest) Send() (*CreateModelPackageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateModelPackageOutput), nil
+}
+
+// CreateModelPackageRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Creates a model package that you can use to create Amazon SageMaker models
+// or list on AWS Marketplace. Buyers can subscribe to model packages listed
+// on AWS Marketplace to create models in Amazon SageMaker.
+//
+//    // Example sending a request using the CreateModelPackageRequest method.
+//    req := client.CreateModelPackageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackage
+func (c *SageMaker) CreateModelPackageRequest(input *CreateModelPackageInput) CreateModelPackageRequest {
+	op := &aws.Operation{
+		Name:       opCreateModelPackage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateModelPackageInput{}
+	}
+
+	output := &CreateModelPackageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateModelPackageRequest{Request: req, Input: input, Copy: c.CreateModelPackageRequest}
 }
 
 const opCreateNotebookInstance = "CreateNotebookInstance"
@@ -464,7 +790,8 @@ func (r CreateNotebookInstanceLifecycleConfigRequest) Send() (*CreateNotebookIns
 // a script runs for longer than 5 minutes, it fails and the notebook instance
 // is not created or started.
 //
-// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+// For information about notebook instance lifestyle configurations, see Step
+// 2.1: (Optional) Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 //
 //    // Example sending a request using the CreateNotebookInstanceLifecycleConfigRequest method.
 //    req := client.CreateNotebookInstanceLifecycleConfigRequest(params)
@@ -527,7 +854,7 @@ func (r CreatePresignedNotebookInstanceUrlRequest) Send() (*CreatePresignedNoteb
 // or role used to access the notebook instance. Use the NotIpAddress condition
 // operator and the aws:SourceIP condition context key to specify the list of
 // IP addresses that you want to have access to the notebook instance. For more
-// information, see nbi-ip-filter.
+// information, see Limit Access to a Notebook Instance by IP Address (http://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/howitworks-access-ws.html#nbi-ip-filter).
 //
 //    // Example sending a request using the CreatePresignedNotebookInstanceUrlRequest method.
 //    req := client.CreatePresignedNotebookInstanceUrlRequest(params)
@@ -715,6 +1042,164 @@ func (c *SageMaker) CreateTransformJobRequest(input *CreateTransformJobInput) Cr
 	return CreateTransformJobRequest{Request: req, Input: input, Copy: c.CreateTransformJobRequest}
 }
 
+const opCreateWorkteam = "CreateWorkteam"
+
+// CreateWorkteamRequest is a API request type for the CreateWorkteam API operation.
+type CreateWorkteamRequest struct {
+	*aws.Request
+	Input *CreateWorkteamInput
+	Copy  func(*CreateWorkteamInput) CreateWorkteamRequest
+}
+
+// Send marshals and sends the CreateWorkteam API request.
+func (r CreateWorkteamRequest) Send() (*CreateWorkteamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateWorkteamOutput), nil
+}
+
+// CreateWorkteamRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Creates a new work team for labeling your data. A work team is defined by
+// one or more Amazon Cognito user pools. You must first create the user pools
+// before you can create a work team.
+//
+// You cannot create more than 25 work teams in an account and region.
+//
+//    // Example sending a request using the CreateWorkteamRequest method.
+//    req := client.CreateWorkteamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkteam
+func (c *SageMaker) CreateWorkteamRequest(input *CreateWorkteamInput) CreateWorkteamRequest {
+	op := &aws.Operation{
+		Name:       opCreateWorkteam,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateWorkteamInput{}
+	}
+
+	output := &CreateWorkteamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateWorkteamRequest{Request: req, Input: input, Copy: c.CreateWorkteamRequest}
+}
+
+const opDeleteAlgorithm = "DeleteAlgorithm"
+
+// DeleteAlgorithmRequest is a API request type for the DeleteAlgorithm API operation.
+type DeleteAlgorithmRequest struct {
+	*aws.Request
+	Input *DeleteAlgorithmInput
+	Copy  func(*DeleteAlgorithmInput) DeleteAlgorithmRequest
+}
+
+// Send marshals and sends the DeleteAlgorithm API request.
+func (r DeleteAlgorithmRequest) Send() (*DeleteAlgorithmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAlgorithmOutput), nil
+}
+
+// DeleteAlgorithmRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Removes the specified algorithm from your account.
+//
+//    // Example sending a request using the DeleteAlgorithmRequest method.
+//    req := client.DeleteAlgorithmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAlgorithm
+func (c *SageMaker) DeleteAlgorithmRequest(input *DeleteAlgorithmInput) DeleteAlgorithmRequest {
+	op := &aws.Operation{
+		Name:       opDeleteAlgorithm,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteAlgorithmInput{}
+	}
+
+	output := &DeleteAlgorithmOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteAlgorithmRequest{Request: req, Input: input, Copy: c.DeleteAlgorithmRequest}
+}
+
+const opDeleteCodeRepository = "DeleteCodeRepository"
+
+// DeleteCodeRepositoryRequest is a API request type for the DeleteCodeRepository API operation.
+type DeleteCodeRepositoryRequest struct {
+	*aws.Request
+	Input *DeleteCodeRepositoryInput
+	Copy  func(*DeleteCodeRepositoryInput) DeleteCodeRepositoryRequest
+}
+
+// Send marshals and sends the DeleteCodeRepository API request.
+func (r DeleteCodeRepositoryRequest) Send() (*DeleteCodeRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCodeRepositoryOutput), nil
+}
+
+// DeleteCodeRepositoryRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Deletes the specified git repository from your account.
+//
+//    // Example sending a request using the DeleteCodeRepositoryRequest method.
+//    req := client.DeleteCodeRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCodeRepository
+func (c *SageMaker) DeleteCodeRepositoryRequest(input *DeleteCodeRepositoryInput) DeleteCodeRepositoryRequest {
+	op := &aws.Operation{
+		Name:       opDeleteCodeRepository,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteCodeRepositoryInput{}
+	}
+
+	output := &DeleteCodeRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteCodeRepositoryRequest{Request: req, Input: input, Copy: c.DeleteCodeRepositoryRequest}
+}
+
 const opDeleteEndpoint = "DeleteEndpoint"
 
 // DeleteEndpointRequest is a API request type for the DeleteEndpoint API operation.
@@ -881,6 +1366,62 @@ func (c *SageMaker) DeleteModelRequest(input *DeleteModelInput) DeleteModelReque
 	return DeleteModelRequest{Request: req, Input: input, Copy: c.DeleteModelRequest}
 }
 
+const opDeleteModelPackage = "DeleteModelPackage"
+
+// DeleteModelPackageRequest is a API request type for the DeleteModelPackage API operation.
+type DeleteModelPackageRequest struct {
+	*aws.Request
+	Input *DeleteModelPackageInput
+	Copy  func(*DeleteModelPackageInput) DeleteModelPackageRequest
+}
+
+// Send marshals and sends the DeleteModelPackage API request.
+func (r DeleteModelPackageRequest) Send() (*DeleteModelPackageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteModelPackageOutput), nil
+}
+
+// DeleteModelPackageRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Deletes a model package.
+//
+// A model package is used to create Amazon SageMaker models or list on AWS
+// Marketplace. Buyers can subscribe to model packages listed on AWS Marketplace
+// to create models in Amazon SageMaker.
+//
+//    // Example sending a request using the DeleteModelPackageRequest method.
+//    req := client.DeleteModelPackageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackage
+func (c *SageMaker) DeleteModelPackageRequest(input *DeleteModelPackageInput) DeleteModelPackageRequest {
+	op := &aws.Operation{
+		Name:       opDeleteModelPackage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteModelPackageInput{}
+	}
+
+	output := &DeleteModelPackageOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteModelPackageRequest{Request: req, Input: input, Copy: c.DeleteModelPackageRequest}
+}
+
 const opDeleteNotebookInstance = "DeleteNotebookInstance"
 
 // DeleteNotebookInstanceRequest is a API request type for the DeleteNotebookInstance API operation.
@@ -1016,6 +1557,10 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 // To list a resource's tags, use the ListTags API.
 //
+// When you call this API to delete tags from a hyperparameter tuning job, the
+// deleted tags are not removed from training jobs that the hyperparameter tuning
+// job launched before you called this API.
+//
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
 //    resp, err := req.Send()
@@ -1040,6 +1585,209 @@ func (c *SageMaker) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest 
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
+}
+
+const opDeleteWorkteam = "DeleteWorkteam"
+
+// DeleteWorkteamRequest is a API request type for the DeleteWorkteam API operation.
+type DeleteWorkteamRequest struct {
+	*aws.Request
+	Input *DeleteWorkteamInput
+	Copy  func(*DeleteWorkteamInput) DeleteWorkteamRequest
+}
+
+// Send marshals and sends the DeleteWorkteam API request.
+func (r DeleteWorkteamRequest) Send() (*DeleteWorkteamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteWorkteamOutput), nil
+}
+
+// DeleteWorkteamRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Deletes an existing work team. This operation can't be undone.
+//
+//    // Example sending a request using the DeleteWorkteamRequest method.
+//    req := client.DeleteWorkteamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkteam
+func (c *SageMaker) DeleteWorkteamRequest(input *DeleteWorkteamInput) DeleteWorkteamRequest {
+	op := &aws.Operation{
+		Name:       opDeleteWorkteam,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteWorkteamInput{}
+	}
+
+	output := &DeleteWorkteamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteWorkteamRequest{Request: req, Input: input, Copy: c.DeleteWorkteamRequest}
+}
+
+const opDescribeAlgorithm = "DescribeAlgorithm"
+
+// DescribeAlgorithmRequest is a API request type for the DescribeAlgorithm API operation.
+type DescribeAlgorithmRequest struct {
+	*aws.Request
+	Input *DescribeAlgorithmInput
+	Copy  func(*DescribeAlgorithmInput) DescribeAlgorithmRequest
+}
+
+// Send marshals and sends the DescribeAlgorithm API request.
+func (r DescribeAlgorithmRequest) Send() (*DescribeAlgorithmOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAlgorithmOutput), nil
+}
+
+// DescribeAlgorithmRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Returns a description of the specified algorithm that is in your account.
+//
+//    // Example sending a request using the DescribeAlgorithmRequest method.
+//    req := client.DescribeAlgorithmRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithm
+func (c *SageMaker) DescribeAlgorithmRequest(input *DescribeAlgorithmInput) DescribeAlgorithmRequest {
+	op := &aws.Operation{
+		Name:       opDescribeAlgorithm,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeAlgorithmInput{}
+	}
+
+	output := &DescribeAlgorithmOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeAlgorithmRequest{Request: req, Input: input, Copy: c.DescribeAlgorithmRequest}
+}
+
+const opDescribeCodeRepository = "DescribeCodeRepository"
+
+// DescribeCodeRepositoryRequest is a API request type for the DescribeCodeRepository API operation.
+type DescribeCodeRepositoryRequest struct {
+	*aws.Request
+	Input *DescribeCodeRepositoryInput
+	Copy  func(*DescribeCodeRepositoryInput) DescribeCodeRepositoryRequest
+}
+
+// Send marshals and sends the DescribeCodeRepository API request.
+func (r DescribeCodeRepositoryRequest) Send() (*DescribeCodeRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCodeRepositoryOutput), nil
+}
+
+// DescribeCodeRepositoryRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets details about the specified git repository.
+//
+//    // Example sending a request using the DescribeCodeRepositoryRequest method.
+//    req := client.DescribeCodeRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepository
+func (c *SageMaker) DescribeCodeRepositoryRequest(input *DescribeCodeRepositoryInput) DescribeCodeRepositoryRequest {
+	op := &aws.Operation{
+		Name:       opDescribeCodeRepository,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeCodeRepositoryInput{}
+	}
+
+	output := &DescribeCodeRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeCodeRepositoryRequest{Request: req, Input: input, Copy: c.DescribeCodeRepositoryRequest}
+}
+
+const opDescribeCompilationJob = "DescribeCompilationJob"
+
+// DescribeCompilationJobRequest is a API request type for the DescribeCompilationJob API operation.
+type DescribeCompilationJobRequest struct {
+	*aws.Request
+	Input *DescribeCompilationJobInput
+	Copy  func(*DescribeCompilationJobInput) DescribeCompilationJobRequest
+}
+
+// Send marshals and sends the DescribeCompilationJob API request.
+func (r DescribeCompilationJobRequest) Send() (*DescribeCompilationJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCompilationJobOutput), nil
+}
+
+// DescribeCompilationJobRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Returns information about a model compilation job.
+//
+// To create a model compilation job, use CreateCompilationJob. To get information
+// about multiple model compilation jobs, use ListCompilationJobs.
+//
+//    // Example sending a request using the DescribeCompilationJobRequest method.
+//    req := client.DescribeCompilationJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob
+func (c *SageMaker) DescribeCompilationJobRequest(input *DescribeCompilationJobInput) DescribeCompilationJobRequest {
+	op := &aws.Operation{
+		Name:       opDescribeCompilationJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeCompilationJobInput{}
+	}
+
+	output := &DescribeCompilationJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeCompilationJobRequest{Request: req, Input: input, Copy: c.DescribeCompilationJobRequest}
 }
 
 const opDescribeEndpoint = "DescribeEndpoint"
@@ -1193,6 +1941,56 @@ func (c *SageMaker) DescribeHyperParameterTuningJobRequest(input *DescribeHyperP
 	return DescribeHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.DescribeHyperParameterTuningJobRequest}
 }
 
+const opDescribeLabelingJob = "DescribeLabelingJob"
+
+// DescribeLabelingJobRequest is a API request type for the DescribeLabelingJob API operation.
+type DescribeLabelingJobRequest struct {
+	*aws.Request
+	Input *DescribeLabelingJobInput
+	Copy  func(*DescribeLabelingJobInput) DescribeLabelingJobRequest
+}
+
+// Send marshals and sends the DescribeLabelingJob API request.
+func (r DescribeLabelingJobRequest) Send() (*DescribeLabelingJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLabelingJobOutput), nil
+}
+
+// DescribeLabelingJobRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets information about a labeling job.
+//
+//    // Example sending a request using the DescribeLabelingJobRequest method.
+//    req := client.DescribeLabelingJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLabelingJob
+func (c *SageMaker) DescribeLabelingJobRequest(input *DescribeLabelingJobInput) DescribeLabelingJobRequest {
+	op := &aws.Operation{
+		Name:       opDescribeLabelingJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeLabelingJobInput{}
+	}
+
+	output := &DescribeLabelingJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeLabelingJobRequest{Request: req, Input: input, Copy: c.DescribeLabelingJobRequest}
+}
+
 const opDescribeModel = "DescribeModel"
 
 // DescribeModelRequest is a API request type for the DescribeModel API operation.
@@ -1241,6 +2039,60 @@ func (c *SageMaker) DescribeModelRequest(input *DescribeModelInput) DescribeMode
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeModelRequest{Request: req, Input: input, Copy: c.DescribeModelRequest}
+}
+
+const opDescribeModelPackage = "DescribeModelPackage"
+
+// DescribeModelPackageRequest is a API request type for the DescribeModelPackage API operation.
+type DescribeModelPackageRequest struct {
+	*aws.Request
+	Input *DescribeModelPackageInput
+	Copy  func(*DescribeModelPackageInput) DescribeModelPackageRequest
+}
+
+// Send marshals and sends the DescribeModelPackage API request.
+func (r DescribeModelPackageRequest) Send() (*DescribeModelPackageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeModelPackageOutput), nil
+}
+
+// DescribeModelPackageRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Returns a description of the specified model package, which is used to create
+// Amazon SageMaker models or list on AWS Marketplace.
+//
+// Buyers can subscribe to model packages listed on AWS Marketplace to create
+// models in Amazon SageMaker.
+//
+//    // Example sending a request using the DescribeModelPackageRequest method.
+//    req := client.DescribeModelPackageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackage
+func (c *SageMaker) DescribeModelPackageRequest(input *DescribeModelPackageInput) DescribeModelPackageRequest {
+	op := &aws.Operation{
+		Name:       opDescribeModelPackage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeModelPackageInput{}
+	}
+
+	output := &DescribeModelPackageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeModelPackageRequest{Request: req, Input: input, Copy: c.DescribeModelPackageRequest}
 }
 
 const opDescribeNotebookInstance = "DescribeNotebookInstance"
@@ -1317,7 +2169,8 @@ func (r DescribeNotebookInstanceLifecycleConfigRequest) Send() (*DescribeNoteboo
 //
 // Returns a description of a notebook instance lifecycle configuration.
 //
-// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+// For information about notebook instance lifestyle configurations, see Step
+// 2.1: (Optional) Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 //
 //    // Example sending a request using the DescribeNotebookInstanceLifecycleConfigRequest method.
 //    req := client.DescribeNotebookInstanceLifecycleConfigRequest(params)
@@ -1343,6 +2196,57 @@ func (c *SageMaker) DescribeNotebookInstanceLifecycleConfigRequest(input *Descri
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceLifecycleConfigRequest}
+}
+
+const opDescribeSubscribedWorkteam = "DescribeSubscribedWorkteam"
+
+// DescribeSubscribedWorkteamRequest is a API request type for the DescribeSubscribedWorkteam API operation.
+type DescribeSubscribedWorkteamRequest struct {
+	*aws.Request
+	Input *DescribeSubscribedWorkteamInput
+	Copy  func(*DescribeSubscribedWorkteamInput) DescribeSubscribedWorkteamRequest
+}
+
+// Send marshals and sends the DescribeSubscribedWorkteam API request.
+func (r DescribeSubscribedWorkteamRequest) Send() (*DescribeSubscribedWorkteamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSubscribedWorkteamOutput), nil
+}
+
+// DescribeSubscribedWorkteamRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets information about a work team provided by a vendor. It returns details
+// about the subscription with a vendor in the AWS Marketplace.
+//
+//    // Example sending a request using the DescribeSubscribedWorkteamRequest method.
+//    req := client.DescribeSubscribedWorkteamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSubscribedWorkteam
+func (c *SageMaker) DescribeSubscribedWorkteamRequest(input *DescribeSubscribedWorkteamInput) DescribeSubscribedWorkteamRequest {
+	op := &aws.Operation{
+		Name:       opDescribeSubscribedWorkteam,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeSubscribedWorkteamInput{}
+	}
+
+	output := &DescribeSubscribedWorkteamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeSubscribedWorkteamRequest{Request: req, Input: input, Copy: c.DescribeSubscribedWorkteamRequest}
 }
 
 const opDescribeTrainingJob = "DescribeTrainingJob"
@@ -1443,6 +2347,314 @@ func (c *SageMaker) DescribeTransformJobRequest(input *DescribeTransformJobInput
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeTransformJobRequest{Request: req, Input: input, Copy: c.DescribeTransformJobRequest}
+}
+
+const opDescribeWorkteam = "DescribeWorkteam"
+
+// DescribeWorkteamRequest is a API request type for the DescribeWorkteam API operation.
+type DescribeWorkteamRequest struct {
+	*aws.Request
+	Input *DescribeWorkteamInput
+	Copy  func(*DescribeWorkteamInput) DescribeWorkteamRequest
+}
+
+// Send marshals and sends the DescribeWorkteam API request.
+func (r DescribeWorkteamRequest) Send() (*DescribeWorkteamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkteamOutput), nil
+}
+
+// DescribeWorkteamRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets information about a specific work team. You can see information such
+// as the create date, the last updated date, membership information, and the
+// work team's Amazon Resource Name (ARN).
+//
+//    // Example sending a request using the DescribeWorkteamRequest method.
+//    req := client.DescribeWorkteamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteam
+func (c *SageMaker) DescribeWorkteamRequest(input *DescribeWorkteamInput) DescribeWorkteamRequest {
+	op := &aws.Operation{
+		Name:       opDescribeWorkteam,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeWorkteamInput{}
+	}
+
+	output := &DescribeWorkteamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeWorkteamRequest{Request: req, Input: input, Copy: c.DescribeWorkteamRequest}
+}
+
+const opGetSearchSuggestions = "GetSearchSuggestions"
+
+// GetSearchSuggestionsRequest is a API request type for the GetSearchSuggestions API operation.
+type GetSearchSuggestionsRequest struct {
+	*aws.Request
+	Input *GetSearchSuggestionsInput
+	Copy  func(*GetSearchSuggestionsInput) GetSearchSuggestionsRequest
+}
+
+// Send marshals and sends the GetSearchSuggestions API request.
+func (r GetSearchSuggestionsRequest) Send() (*GetSearchSuggestionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSearchSuggestionsOutput), nil
+}
+
+// GetSearchSuggestionsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Returns suggestions for the property name to use in Search queries. Provides
+// suggestions for HyperParameters, Tags, and Metrics.
+//
+//    // Example sending a request using the GetSearchSuggestionsRequest method.
+//    req := client.GetSearchSuggestionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSearchSuggestions
+func (c *SageMaker) GetSearchSuggestionsRequest(input *GetSearchSuggestionsInput) GetSearchSuggestionsRequest {
+	op := &aws.Operation{
+		Name:       opGetSearchSuggestions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetSearchSuggestionsInput{}
+	}
+
+	output := &GetSearchSuggestionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSearchSuggestionsRequest{Request: req, Input: input, Copy: c.GetSearchSuggestionsRequest}
+}
+
+const opListAlgorithms = "ListAlgorithms"
+
+// ListAlgorithmsRequest is a API request type for the ListAlgorithms API operation.
+type ListAlgorithmsRequest struct {
+	*aws.Request
+	Input *ListAlgorithmsInput
+	Copy  func(*ListAlgorithmsInput) ListAlgorithmsRequest
+}
+
+// Send marshals and sends the ListAlgorithms API request.
+func (r ListAlgorithmsRequest) Send() (*ListAlgorithmsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAlgorithmsOutput), nil
+}
+
+// ListAlgorithmsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Lists the machine learning algorithms that have been created.
+//
+//    // Example sending a request using the ListAlgorithmsRequest method.
+//    req := client.ListAlgorithmsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAlgorithms
+func (c *SageMaker) ListAlgorithmsRequest(input *ListAlgorithmsInput) ListAlgorithmsRequest {
+	op := &aws.Operation{
+		Name:       opListAlgorithms,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListAlgorithmsInput{}
+	}
+
+	output := &ListAlgorithmsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListAlgorithmsRequest{Request: req, Input: input, Copy: c.ListAlgorithmsRequest}
+}
+
+const opListCodeRepositories = "ListCodeRepositories"
+
+// ListCodeRepositoriesRequest is a API request type for the ListCodeRepositories API operation.
+type ListCodeRepositoriesRequest struct {
+	*aws.Request
+	Input *ListCodeRepositoriesInput
+	Copy  func(*ListCodeRepositoriesInput) ListCodeRepositoriesRequest
+}
+
+// Send marshals and sends the ListCodeRepositories API request.
+func (r ListCodeRepositoriesRequest) Send() (*ListCodeRepositoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCodeRepositoriesOutput), nil
+}
+
+// ListCodeRepositoriesRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets a list of the git repositories in your account.
+//
+//    // Example sending a request using the ListCodeRepositoriesRequest method.
+//    req := client.ListCodeRepositoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositories
+func (c *SageMaker) ListCodeRepositoriesRequest(input *ListCodeRepositoriesInput) ListCodeRepositoriesRequest {
+	op := &aws.Operation{
+		Name:       opListCodeRepositories,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListCodeRepositoriesInput{}
+	}
+
+	output := &ListCodeRepositoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListCodeRepositoriesRequest{Request: req, Input: input, Copy: c.ListCodeRepositoriesRequest}
+}
+
+const opListCompilationJobs = "ListCompilationJobs"
+
+// ListCompilationJobsRequest is a API request type for the ListCompilationJobs API operation.
+type ListCompilationJobsRequest struct {
+	*aws.Request
+	Input *ListCompilationJobsInput
+	Copy  func(*ListCompilationJobsInput) ListCompilationJobsRequest
+}
+
+// Send marshals and sends the ListCompilationJobs API request.
+func (r ListCompilationJobsRequest) Send() (*ListCompilationJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCompilationJobsOutput), nil
+}
+
+// ListCompilationJobsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Lists model compilation jobs that satisfy various filters.
+//
+// To create a model compilation job, use CreateCompilationJob. To get information
+// about a particular model compilation job you have created, use DescribeCompilationJob.
+//
+//    // Example sending a request using the ListCompilationJobsRequest method.
+//    req := client.ListCompilationJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobs
+func (c *SageMaker) ListCompilationJobsRequest(input *ListCompilationJobsInput) ListCompilationJobsRequest {
+	op := &aws.Operation{
+		Name:       opListCompilationJobs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListCompilationJobsInput{}
+	}
+
+	output := &ListCompilationJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListCompilationJobsRequest{Request: req, Input: input, Copy: c.ListCompilationJobsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListCompilationJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListCompilationJobs operation.
+//		req := client.ListCompilationJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCompilationJobsRequest) Paginate(opts ...aws.Option) ListCompilationJobsPager {
+	return ListCompilationJobsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCompilationJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListCompilationJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCompilationJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListCompilationJobsPager) CurrentPage() *ListCompilationJobsOutput {
+	return p.Pager.CurrentPage().(*ListCompilationJobsOutput)
 }
 
 const opListEndpointConfigs = "ListEndpointConfigs"
@@ -1752,6 +2964,260 @@ func (p *ListHyperParameterTuningJobsPager) CurrentPage() *ListHyperParameterTun
 	return p.Pager.CurrentPage().(*ListHyperParameterTuningJobsOutput)
 }
 
+const opListLabelingJobs = "ListLabelingJobs"
+
+// ListLabelingJobsRequest is a API request type for the ListLabelingJobs API operation.
+type ListLabelingJobsRequest struct {
+	*aws.Request
+	Input *ListLabelingJobsInput
+	Copy  func(*ListLabelingJobsInput) ListLabelingJobsRequest
+}
+
+// Send marshals and sends the ListLabelingJobs API request.
+func (r ListLabelingJobsRequest) Send() (*ListLabelingJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLabelingJobsOutput), nil
+}
+
+// ListLabelingJobsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets a list of labeling jobs.
+//
+//    // Example sending a request using the ListLabelingJobsRequest method.
+//    req := client.ListLabelingJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobs
+func (c *SageMaker) ListLabelingJobsRequest(input *ListLabelingJobsInput) ListLabelingJobsRequest {
+	op := &aws.Operation{
+		Name:       opListLabelingJobs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListLabelingJobsInput{}
+	}
+
+	output := &ListLabelingJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListLabelingJobsRequest{Request: req, Input: input, Copy: c.ListLabelingJobsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListLabelingJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListLabelingJobs operation.
+//		req := client.ListLabelingJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListLabelingJobsRequest) Paginate(opts ...aws.Option) ListLabelingJobsPager {
+	return ListLabelingJobsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListLabelingJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListLabelingJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListLabelingJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListLabelingJobsPager) CurrentPage() *ListLabelingJobsOutput {
+	return p.Pager.CurrentPage().(*ListLabelingJobsOutput)
+}
+
+const opListLabelingJobsForWorkteam = "ListLabelingJobsForWorkteam"
+
+// ListLabelingJobsForWorkteamRequest is a API request type for the ListLabelingJobsForWorkteam API operation.
+type ListLabelingJobsForWorkteamRequest struct {
+	*aws.Request
+	Input *ListLabelingJobsForWorkteamInput
+	Copy  func(*ListLabelingJobsForWorkteamInput) ListLabelingJobsForWorkteamRequest
+}
+
+// Send marshals and sends the ListLabelingJobsForWorkteam API request.
+func (r ListLabelingJobsForWorkteamRequest) Send() (*ListLabelingJobsForWorkteamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLabelingJobsForWorkteamOutput), nil
+}
+
+// ListLabelingJobsForWorkteamRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets a list of labeling jobs assigned to a specified work team.
+//
+//    // Example sending a request using the ListLabelingJobsForWorkteamRequest method.
+//    req := client.ListLabelingJobsForWorkteamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteam
+func (c *SageMaker) ListLabelingJobsForWorkteamRequest(input *ListLabelingJobsForWorkteamInput) ListLabelingJobsForWorkteamRequest {
+	op := &aws.Operation{
+		Name:       opListLabelingJobsForWorkteam,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListLabelingJobsForWorkteamInput{}
+	}
+
+	output := &ListLabelingJobsForWorkteamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListLabelingJobsForWorkteamRequest{Request: req, Input: input, Copy: c.ListLabelingJobsForWorkteamRequest}
+}
+
+// Paginate pages iterates over the pages of a ListLabelingJobsForWorkteamRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListLabelingJobsForWorkteam operation.
+//		req := client.ListLabelingJobsForWorkteamRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListLabelingJobsForWorkteamRequest) Paginate(opts ...aws.Option) ListLabelingJobsForWorkteamPager {
+	return ListLabelingJobsForWorkteamPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListLabelingJobsForWorkteamInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListLabelingJobsForWorkteamPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListLabelingJobsForWorkteamPager struct {
+	aws.Pager
+}
+
+func (p *ListLabelingJobsForWorkteamPager) CurrentPage() *ListLabelingJobsForWorkteamOutput {
+	return p.Pager.CurrentPage().(*ListLabelingJobsForWorkteamOutput)
+}
+
+const opListModelPackages = "ListModelPackages"
+
+// ListModelPackagesRequest is a API request type for the ListModelPackages API operation.
+type ListModelPackagesRequest struct {
+	*aws.Request
+	Input *ListModelPackagesInput
+	Copy  func(*ListModelPackagesInput) ListModelPackagesRequest
+}
+
+// Send marshals and sends the ListModelPackages API request.
+func (r ListModelPackagesRequest) Send() (*ListModelPackagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListModelPackagesOutput), nil
+}
+
+// ListModelPackagesRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Lists the model packages that have been created.
+//
+//    // Example sending a request using the ListModelPackagesRequest method.
+//    req := client.ListModelPackagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackages
+func (c *SageMaker) ListModelPackagesRequest(input *ListModelPackagesInput) ListModelPackagesRequest {
+	op := &aws.Operation{
+		Name:       opListModelPackages,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListModelPackagesInput{}
+	}
+
+	output := &ListModelPackagesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListModelPackagesRequest{Request: req, Input: input, Copy: c.ListModelPackagesRequest}
+}
+
 const opListModels = "ListModels"
 
 // ListModelsRequest is a API request type for the ListModels API operation.
@@ -2059,6 +3525,110 @@ type ListNotebookInstancesPager struct {
 
 func (p *ListNotebookInstancesPager) CurrentPage() *ListNotebookInstancesOutput {
 	return p.Pager.CurrentPage().(*ListNotebookInstancesOutput)
+}
+
+const opListSubscribedWorkteams = "ListSubscribedWorkteams"
+
+// ListSubscribedWorkteamsRequest is a API request type for the ListSubscribedWorkteams API operation.
+type ListSubscribedWorkteamsRequest struct {
+	*aws.Request
+	Input *ListSubscribedWorkteamsInput
+	Copy  func(*ListSubscribedWorkteamsInput) ListSubscribedWorkteamsRequest
+}
+
+// Send marshals and sends the ListSubscribedWorkteams API request.
+func (r ListSubscribedWorkteamsRequest) Send() (*ListSubscribedWorkteamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSubscribedWorkteamsOutput), nil
+}
+
+// ListSubscribedWorkteamsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets a list of the work teams that you are subscribed to in the AWS Marketplace.
+// The list may be empty if no work team satisfies the filter specified in the
+// NameContains parameter.
+//
+//    // Example sending a request using the ListSubscribedWorkteamsRequest method.
+//    req := client.ListSubscribedWorkteamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSubscribedWorkteams
+func (c *SageMaker) ListSubscribedWorkteamsRequest(input *ListSubscribedWorkteamsInput) ListSubscribedWorkteamsRequest {
+	op := &aws.Operation{
+		Name:       opListSubscribedWorkteams,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSubscribedWorkteamsInput{}
+	}
+
+	output := &ListSubscribedWorkteamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSubscribedWorkteamsRequest{Request: req, Input: input, Copy: c.ListSubscribedWorkteamsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListSubscribedWorkteamsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListSubscribedWorkteams operation.
+//		req := client.ListSubscribedWorkteamsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSubscribedWorkteamsRequest) Paginate(opts ...aws.Option) ListSubscribedWorkteamsPager {
+	return ListSubscribedWorkteamsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSubscribedWorkteamsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListSubscribedWorkteamsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSubscribedWorkteamsPager struct {
+	aws.Pager
+}
+
+func (p *ListSubscribedWorkteamsPager) CurrentPage() *ListSubscribedWorkteamsOutput {
+	return p.Pager.CurrentPage().(*ListSubscribedWorkteamsOutput)
 }
 
 const opListTags = "ListTags"
@@ -2470,6 +4040,268 @@ func (p *ListTransformJobsPager) CurrentPage() *ListTransformJobsOutput {
 	return p.Pager.CurrentPage().(*ListTransformJobsOutput)
 }
 
+const opListWorkteams = "ListWorkteams"
+
+// ListWorkteamsRequest is a API request type for the ListWorkteams API operation.
+type ListWorkteamsRequest struct {
+	*aws.Request
+	Input *ListWorkteamsInput
+	Copy  func(*ListWorkteamsInput) ListWorkteamsRequest
+}
+
+// Send marshals and sends the ListWorkteams API request.
+func (r ListWorkteamsRequest) Send() (*ListWorkteamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListWorkteamsOutput), nil
+}
+
+// ListWorkteamsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Gets a list of work teams that you have defined in a region. The list may
+// be empty if no work team satisfies the filter specified in the NameContains
+// parameter.
+//
+//    // Example sending a request using the ListWorkteamsRequest method.
+//    req := client.ListWorkteamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteams
+func (c *SageMaker) ListWorkteamsRequest(input *ListWorkteamsInput) ListWorkteamsRequest {
+	op := &aws.Operation{
+		Name:       opListWorkteams,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListWorkteamsInput{}
+	}
+
+	output := &ListWorkteamsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListWorkteamsRequest{Request: req, Input: input, Copy: c.ListWorkteamsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListWorkteamsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListWorkteams operation.
+//		req := client.ListWorkteamsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListWorkteamsRequest) Paginate(opts ...aws.Option) ListWorkteamsPager {
+	return ListWorkteamsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListWorkteamsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListWorkteamsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListWorkteamsPager struct {
+	aws.Pager
+}
+
+func (p *ListWorkteamsPager) CurrentPage() *ListWorkteamsOutput {
+	return p.Pager.CurrentPage().(*ListWorkteamsOutput)
+}
+
+const opRenderUiTemplate = "RenderUiTemplate"
+
+// RenderUiTemplateRequest is a API request type for the RenderUiTemplate API operation.
+type RenderUiTemplateRequest struct {
+	*aws.Request
+	Input *RenderUiTemplateInput
+	Copy  func(*RenderUiTemplateInput) RenderUiTemplateRequest
+}
+
+// Send marshals and sends the RenderUiTemplate API request.
+func (r RenderUiTemplateRequest) Send() (*RenderUiTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RenderUiTemplateOutput), nil
+}
+
+// RenderUiTemplateRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Renders the UI template so that you can preview the worker's experience.
+//
+//    // Example sending a request using the RenderUiTemplateRequest method.
+//    req := client.RenderUiTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplate
+func (c *SageMaker) RenderUiTemplateRequest(input *RenderUiTemplateInput) RenderUiTemplateRequest {
+	op := &aws.Operation{
+		Name:       opRenderUiTemplate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RenderUiTemplateInput{}
+	}
+
+	output := &RenderUiTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RenderUiTemplateRequest{Request: req, Input: input, Copy: c.RenderUiTemplateRequest}
+}
+
+const opSearch = "Search"
+
+// SearchRequest is a API request type for the Search API operation.
+type SearchRequest struct {
+	*aws.Request
+	Input *SearchInput
+	Copy  func(*SearchInput) SearchRequest
+}
+
+// Send marshals and sends the Search API request.
+func (r SearchRequest) Send() (*SearchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchOutput), nil
+}
+
+// SearchRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Finds Amazon SageMaker resources that match a search query. Matching resource
+// objects are returned as a list of SearchResult objects in the response. The
+// search results can be sorted by any resrouce property in a ascending or descending
+// order.
+//
+// You can query against the following value types: numerical, text, Booleans,
+// and timestamps.
+//
+//    // Example sending a request using the SearchRequest method.
+//    req := client.SearchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Search
+func (c *SageMaker) SearchRequest(input *SearchInput) SearchRequest {
+	op := &aws.Operation{
+		Name:       opSearch,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &SearchInput{}
+	}
+
+	output := &SearchOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SearchRequest{Request: req, Input: input, Copy: c.SearchRequest}
+}
+
+// Paginate pages iterates over the pages of a SearchRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a Search operation.
+//		req := client.SearchRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchRequest) Paginate(opts ...aws.Option) SearchPager {
+	return SearchPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// SearchPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchPager struct {
+	aws.Pager
+}
+
+func (p *SearchPager) CurrentPage() *SearchOutput {
+	return p.Pager.CurrentPage().(*SearchOutput)
+}
+
 const opStartNotebookInstance = "StartNotebookInstance"
 
 // StartNotebookInstanceRequest is a API request type for the StartNotebookInstance API operation.
@@ -2524,6 +4356,67 @@ func (c *SageMaker) StartNotebookInstanceRequest(input *StartNotebookInstanceInp
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StartNotebookInstanceRequest{Request: req, Input: input, Copy: c.StartNotebookInstanceRequest}
+}
+
+const opStopCompilationJob = "StopCompilationJob"
+
+// StopCompilationJobRequest is a API request type for the StopCompilationJob API operation.
+type StopCompilationJobRequest struct {
+	*aws.Request
+	Input *StopCompilationJobInput
+	Copy  func(*StopCompilationJobInput) StopCompilationJobRequest
+}
+
+// Send marshals and sends the StopCompilationJob API request.
+func (r StopCompilationJobRequest) Send() (*StopCompilationJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopCompilationJobOutput), nil
+}
+
+// StopCompilationJobRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Stops a model compilation job.
+//
+// To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal. This
+// gracefully shuts the job down. If the job hasn’t stopped, it sends the SIGKILL
+// signal.
+//
+// When it receives a StopCompilationJob request, Amazon SageMaker changes the
+// CompilationJobSummary$CompilationJobStatus of the job to Stopping. After
+// Amazon SageMaker stops the job, it sets the CompilationJobSummary$CompilationJobStatus
+// to Stopped.
+//
+//    // Example sending a request using the StopCompilationJobRequest method.
+//    req := client.StopCompilationJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopCompilationJob
+func (c *SageMaker) StopCompilationJobRequest(input *StopCompilationJobInput) StopCompilationJobRequest {
+	op := &aws.Operation{
+		Name:       opStopCompilationJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopCompilationJobInput{}
+	}
+
+	output := &StopCompilationJobOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopCompilationJobRequest{Request: req, Input: input, Copy: c.StopCompilationJobRequest}
 }
 
 const opStopHyperParameterTuningJob = "StopHyperParameterTuningJob"
@@ -2582,6 +4475,60 @@ func (c *SageMaker) StopHyperParameterTuningJobRequest(input *StopHyperParameter
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StopHyperParameterTuningJobRequest{Request: req, Input: input, Copy: c.StopHyperParameterTuningJobRequest}
+}
+
+const opStopLabelingJob = "StopLabelingJob"
+
+// StopLabelingJobRequest is a API request type for the StopLabelingJob API operation.
+type StopLabelingJobRequest struct {
+	*aws.Request
+	Input *StopLabelingJobInput
+	Copy  func(*StopLabelingJobInput) StopLabelingJobRequest
+}
+
+// Send marshals and sends the StopLabelingJob API request.
+func (r StopLabelingJobRequest) Send() (*StopLabelingJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopLabelingJobOutput), nil
+}
+
+// StopLabelingJobRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Stops a running labeling job. A job that is stopped cannot be restarted.
+// Any results obtained before the job is stopped are placed in the Amazon S3
+// output bucket.
+//
+//    // Example sending a request using the StopLabelingJobRequest method.
+//    req := client.StopLabelingJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJob
+func (c *SageMaker) StopLabelingJobRequest(input *StopLabelingJobInput) StopLabelingJobRequest {
+	op := &aws.Operation{
+		Name:       opStopLabelingJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopLabelingJobInput{}
+	}
+
+	output := &StopLabelingJobOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopLabelingJobRequest{Request: req, Input: input, Copy: c.StopLabelingJobRequest}
 }
 
 const opStopNotebookInstance = "StopNotebookInstance"
@@ -2762,6 +4709,56 @@ func (c *SageMaker) StopTransformJobRequest(input *StopTransformJobInput) StopTr
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StopTransformJobRequest{Request: req, Input: input, Copy: c.StopTransformJobRequest}
+}
+
+const opUpdateCodeRepository = "UpdateCodeRepository"
+
+// UpdateCodeRepositoryRequest is a API request type for the UpdateCodeRepository API operation.
+type UpdateCodeRepositoryRequest struct {
+	*aws.Request
+	Input *UpdateCodeRepositoryInput
+	Copy  func(*UpdateCodeRepositoryInput) UpdateCodeRepositoryRequest
+}
+
+// Send marshals and sends the UpdateCodeRepository API request.
+func (r UpdateCodeRepositoryRequest) Send() (*UpdateCodeRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCodeRepositoryOutput), nil
+}
+
+// UpdateCodeRepositoryRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Updates the specified git repository with the specified values.
+//
+//    // Example sending a request using the UpdateCodeRepositoryRequest method.
+//    req := client.UpdateCodeRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepository
+func (c *SageMaker) UpdateCodeRepositoryRequest(input *UpdateCodeRepositoryInput) UpdateCodeRepositoryRequest {
+	op := &aws.Operation{
+		Name:       opUpdateCodeRepository,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateCodeRepositoryInput{}
+	}
+
+	output := &UpdateCodeRepositoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateCodeRepositoryRequest{Request: req, Input: input, Copy: c.UpdateCodeRepositoryRequest}
 }
 
 const opUpdateEndpoint = "UpdateEndpoint"
@@ -2983,6 +4980,56 @@ func (c *SageMaker) UpdateNotebookInstanceLifecycleConfigRequest(input *UpdateNo
 	return UpdateNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.UpdateNotebookInstanceLifecycleConfigRequest}
 }
 
+const opUpdateWorkteam = "UpdateWorkteam"
+
+// UpdateWorkteamRequest is a API request type for the UpdateWorkteam API operation.
+type UpdateWorkteamRequest struct {
+	*aws.Request
+	Input *UpdateWorkteamInput
+	Copy  func(*UpdateWorkteamInput) UpdateWorkteamRequest
+}
+
+// Send marshals and sends the UpdateWorkteam API request.
+func (r UpdateWorkteamRequest) Send() (*UpdateWorkteamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateWorkteamOutput), nil
+}
+
+// UpdateWorkteamRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Updates an existing work team with new member definitions or description.
+//
+//    // Example sending a request using the UpdateWorkteamRequest method.
+//    req := client.UpdateWorkteamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteam
+func (c *SageMaker) UpdateWorkteamRequest(input *UpdateWorkteamInput) UpdateWorkteamRequest {
+	op := &aws.Operation{
+		Name:       opUpdateWorkteam,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateWorkteamInput{}
+	}
+
+	output := &UpdateWorkteamOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateWorkteamRequest{Request: req, Input: input, Copy: c.UpdateWorkteamRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsInput
 type AddTagsInput struct {
 	_ struct{} `type:"structure"`
@@ -3065,17 +5112,27 @@ func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
 //
 // For more information about algorithms provided by Amazon SageMaker, see Algorithms
 // (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). For information
-// about using your own algorithms, see your-algorithms.
+// about using your own algorithms, see Using Your Own Algorithms with Amazon
+// SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification
 type AlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the algorithm resource to use for the training job. This must
+	// be an algorithm resource that you created or subscribe to on AWS Marketplace.
+	// If you specify a value for this parameter, you can't specify a value for
+	// TrainingImage.
+	AlgorithmName *string `min:"1" type:"string"`
+
+	// A list of metric definition objects. Each object specifies the metric name
+	// and regular expressions used to parse algorithm logs. Amazon SageMaker publishes
+	// each metric to Amazon CloudWatch.
+	MetricDefinitions []MetricDefinition `type:"list"`
+
 	// The registry path of the Docker image that contains the training algorithm.
 	// For information about docker registry paths for built-in algorithms, see
-	// sagemaker-algo-docker-registry-paths.
-	//
-	// TrainingImage is a required field
-	TrainingImage *string `type:"string" required:"true"`
+	// Algorithms Provided by Amazon SageMaker: Common Parameters (http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
+	TrainingImage *string `type:"string"`
 
 	// The input mode that the algorithm supports. For the input modes that Amazon
 	// SageMaker algorithms support, see Algorithms (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
@@ -3114,12 +5171,293 @@ func (s AlgorithmSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AlgorithmSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AlgorithmSpecification"}
-
-	if s.TrainingImage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrainingImage"))
+	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
 	}
 	if len(s.TrainingInputMode) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TrainingInputMode"))
+	}
+	if s.MetricDefinitions != nil {
+		for i, v := range s.MetricDefinitions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricDefinitions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies the validation and image scan statuses of the algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusDetails
+type AlgorithmStatusDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the scan of the algorithm's Docker image container.
+	ImageScanStatuses []AlgorithmStatusItem `type:"list"`
+
+	// The status of the validation of the algorithm.
+	ValidationStatuses []AlgorithmStatusItem `type:"list"`
+}
+
+// String returns the string representation
+func (s AlgorithmStatusDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AlgorithmStatusDetails) GoString() string {
+	return s.String()
+}
+
+// Represents the overall status of an algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmStatusItem
+type AlgorithmStatusItem struct {
+	_ struct{} `type:"structure"`
+
+	// The reason for failure, if the overall status is a failed state.
+	FailureReason *string `type:"string"`
+
+	// The name of the algorithm for which the overall status is being repoorted.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The current status.
+	//
+	// Status is a required field
+	Status DetailedAlgorithmStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s AlgorithmStatusItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AlgorithmStatusItem) GoString() string {
+	return s.String()
+}
+
+// Provides summary information about an algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSummary
+type AlgorithmSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the algorithm.
+	//
+	// AlgorithmArn is a required field
+	AlgorithmArn *string `min:"1" type:"string" required:"true"`
+
+	// A brief statement describing the algorithm.
+	AlgorithmDescription *string `type:"string"`
+
+	// The name of the algorithm which is described by the summary.
+	//
+	// AlgorithmName is a required field
+	AlgorithmName *string `min:"1" type:"string" required:"true"`
+
+	// The overall status of the algorithm.
+	//
+	// AlgorithmStatus is a required field
+	AlgorithmStatus AlgorithmStatus `type:"string" required:"true" enum:"true"`
+
+	// A timestamp that shows when the algorithm was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+}
+
+// String returns the string representation
+func (s AlgorithmSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AlgorithmSummary) GoString() string {
+	return s.String()
+}
+
+// Defines a training job and a batch transform job that Amazon SageMaker runs
+// to validate your algorithm.
+//
+// The data provided in the validation profile is made available to your buyers
+// on AWS Marketplace.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationProfile
+type AlgorithmValidationProfile struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the profile for the algorithm. The name must have 1 to 63 characters.
+	// Valid characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// ProfileName is a required field
+	ProfileName *string `min:"1" type:"string" required:"true"`
+
+	// The TrainingJobDefinition object that describes the training job that Amazon
+	// SageMaker runs to validate your algorithm.
+	//
+	// TrainingJobDefinition is a required field
+	TrainingJobDefinition *TrainingJobDefinition `type:"structure" required:"true"`
+
+	// The TransformJobDefinition object that describes the transform job that Amazon
+	// SageMaker runs to validate your algorithm.
+	TransformJobDefinition *TransformJobDefinition `type:"structure"`
+}
+
+// String returns the string representation
+func (s AlgorithmValidationProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AlgorithmValidationProfile) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AlgorithmValidationProfile) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AlgorithmValidationProfile"}
+
+	if s.ProfileName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProfileName"))
+	}
+	if s.ProfileName != nil && len(*s.ProfileName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 1))
+	}
+
+	if s.TrainingJobDefinition == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingJobDefinition"))
+	}
+	if s.TrainingJobDefinition != nil {
+		if err := s.TrainingJobDefinition.Validate(); err != nil {
+			invalidParams.AddNested("TrainingJobDefinition", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TransformJobDefinition != nil {
+		if err := s.TransformJobDefinition.Validate(); err != nil {
+			invalidParams.AddNested("TransformJobDefinition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies configurations for one or more training jobs that Amazon SageMaker
+// runs to test the algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationSpecification
+type AlgorithmValidationSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// An array of AlgorithmValidationProfile objects, each of which specifies a
+	// training job and batch transform job that Amazon SageMaker runs to validate
+	// your algorithm.
+	//
+	// ValidationProfiles is a required field
+	ValidationProfiles []AlgorithmValidationProfile `min:"1" type:"list" required:"true"`
+
+	// The IAM roles that Amazon SageMaker uses to run the training jobs.
+	//
+	// ValidationRole is a required field
+	ValidationRole *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AlgorithmValidationSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AlgorithmValidationSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AlgorithmValidationSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AlgorithmValidationSpecification"}
+
+	if s.ValidationProfiles == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ValidationProfiles"))
+	}
+	if s.ValidationProfiles != nil && len(s.ValidationProfiles) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ValidationProfiles", 1))
+	}
+
+	if s.ValidationRole == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ValidationRole"))
+	}
+	if s.ValidationRole != nil && len(*s.ValidationRole) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ValidationRole", 20))
+	}
+	if s.ValidationProfiles != nil {
+		for i, v := range s.ValidationProfiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationProfiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configures how labels are consolidated across human workers.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AnnotationConsolidationConfig
+type AnnotationConsolidationConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of a Lambda function implements the logic
+	// for annotation consolidation.
+	//
+	// Amazon SageMaker Ground Truth provides three annotation consolidation functions
+	// that you can choose to use. They are:
+	//
+	//    * Bounding box - Finds the most similar boxes from different workers based
+	//    on the Jaccard index of the boxes.
+	//
+	// arn:aws:lambda:region:432418664414:function:ACS-BoundingBox
+	//
+	//    * Image classification - Uses a variant of the Expectation Maximization
+	//    approach to estimate the true class of an image based on annotations from
+	//    individual workers.
+	//
+	// arn:aws:lambda:region:432418664414:function:ACS-ImageMultiClass
+	//
+	//    * Text classification - Uses a variant of the Expectation Maximization
+	//    approach to estimate the true class of text based on annotations from
+	//    individual workers.
+	//
+	// arn:aws:lambda:region:432418664414:function:ACS-TextMultiClass
+	//
+	// For more information, see Annotation Consolidation (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
+	//
+	// AnnotationConsolidationLambdaArn is a required field
+	AnnotationConsolidationLambdaArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AnnotationConsolidationConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AnnotationConsolidationConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AnnotationConsolidationConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AnnotationConsolidationConfig"}
+
+	if s.AnnotationConsolidationLambdaArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AnnotationConsolidationLambdaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3175,6 +5513,44 @@ func (s *CategoricalParameterRange) Validate() error {
 	return nil
 }
 
+// Defines the possible values for a categorical hyperparameter.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CategoricalParameterRangeSpecification
+type CategoricalParameterRangeSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The allowed categories for the hyperparameter.
+	//
+	// Values is a required field
+	Values []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s CategoricalParameterRangeSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CategoricalParameterRangeSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CategoricalParameterRangeSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CategoricalParameterRangeSpecification"}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A channel is a named input source that training algorithms can consume.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Channel
 type Channel struct {
@@ -3198,12 +5574,41 @@ type Channel struct {
 	// DataSource is a required field
 	DataSource *DataSource `type:"structure" required:"true"`
 
+	// (Optional) The input mode to use for the data channel in a training job.
+	// If you don't set a value for InputMode, Amazon SageMaker uses the value set
+	// for TrainingInputMode. Use this parameter to override the TrainingInputMode
+	// setting in a AlgorithmSpecification request when you have a channel that
+	// needs a different input mode from the training job's general setting. To
+	// download the data from Amazon Simple Storage Service (Amazon S3) to the provisioned
+	// ML storage volume, and mount the directory to a Docker volume, use File input
+	// mode. To stream data directly from Amazon S3 to the container, choose Pipe
+	// input mode.
+	//
+	// To use a model for incremental training, choose File input model.
+	InputMode TrainingInputMode `type:"string" enum:"true"`
+
 	// Specify RecordIO as the value when input data is in raw format but the training
-	// algorithm requires the RecordIO format, in which case, Amazon SageMaker wraps
+	// algorithm requires the RecordIO format. In this case, Amazon SageMaker wraps
 	// each individual S3 object in a RecordIO record. If the input data is already
 	// in RecordIO format, you don't need to set this attribute. For more information,
 	// see Create a Dataset Using RecordIO (https://mxnet.incubator.apache.org/architecture/note_data_loading.html#data-format)
 	RecordWrapperType RecordWrapper `type:"string" enum:"true"`
+
+	// A configuration for a shuffle option for input data in a channel. If you
+	// use S3Prefix for S3DataType, this shuffles the results of the S3 key prefix
+	// matches. If you use ManifestFile, the order of the S3 object references in
+	// the ManifestFile is shuffled. If you use AugmentedManifestFile, the order
+	// of the JSON lines in the AugmentedManifestFile is shuffled. The shuffling
+	// order is determined using the Seed value.
+	//
+	// For Pipe input mode, shuffling is done at the start of every epoch. With
+	// large datasets this ensures that the order of the training data is different
+	// for each epoch, it helps reduce bias and possible overfitting. In a multi-node
+	// training job when ShuffleConfig is combined with S3DataDistributionType of
+	// ShardedByS3Key, the data is shuffled across nodes so that the content sent
+	// to a particular node on the first epoch might be sent to a different node
+	// on the second epoch.
+	ShuffleConfig *ShuffleConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -3235,11 +5640,244 @@ func (s *Channel) Validate() error {
 			invalidParams.AddNested("DataSource", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.ShuffleConfig != nil {
+		if err := s.ShuffleConfig.Validate(); err != nil {
+			invalidParams.AddNested("ShuffleConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
+}
+
+// Defines a named input source, called a channel, to be used by an algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ChannelSpecification
+type ChannelSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// A brief description of the channel.
+	Description *string `type:"string"`
+
+	// Indicates whether the channel is required by the algorithm.
+	IsRequired *bool `type:"boolean"`
+
+	// The name of the channel./sagemaker/eia
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The allowed compression types, if data compression is used.
+	SupportedCompressionTypes []CompressionType `type:"list"`
+
+	// The supported MIME types for the data.
+	//
+	// SupportedContentTypes is a required field
+	SupportedContentTypes []string `type:"list" required:"true"`
+
+	// The allowed input mode, either FILE or PIPE.
+	//
+	// In FILE mode, Amazon SageMaker copies the data from the input source onto
+	// the local Amazon Elastic Block Store (Amazon EBS) volumes before starting
+	// your training algorithm. This is the most commonly used input mode.
+	//
+	// In PIPE mode, Amazon SageMaker streams input data from the source directly
+	// to your algorithm without using the EBS volume.
+	//
+	// SupportedInputModes is a required field
+	SupportedInputModes []TrainingInputMode `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ChannelSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ChannelSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ChannelSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ChannelSpecification"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.SupportedContentTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedContentTypes"))
+	}
+
+	if s.SupportedInputModes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedInputModes"))
+	}
+	if s.SupportedInputModes != nil && len(s.SupportedInputModes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SupportedInputModes", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies summary information about a git repository.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CodeRepositorySummary
+type CodeRepositorySummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the git repository.
+	//
+	// CodeRepositoryArn is a required field
+	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
+
+	// The name of the git repository.
+	//
+	// CodeRepositoryName is a required field
+	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
+
+	// The date and time that the git repository was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Configuration details for the git repository, including the URL where it
+	// is located and the ARN of the AWS Secrets Manager secret that contains the
+	// credentials used to access the repository.
+	GitConfig *GitConfig `type:"structure"`
+
+	// The date and time that the git repository was last modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+}
+
+// String returns the string representation
+func (s CodeRepositorySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CodeRepositorySummary) GoString() string {
+	return s.String()
+}
+
+// Identifies a Amazon Cognito user group. A user group can be used in on or
+// more work teams.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CognitoMemberDefinition
+type CognitoMemberDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// An identifier for an application client. You must create the app client ID
+	// using Amazon Cognito.
+	//
+	// ClientId is a required field
+	ClientId *string `min:"1" type:"string" required:"true"`
+
+	// An identifier for a user group.
+	//
+	// UserGroup is a required field
+	UserGroup *string `min:"1" type:"string" required:"true"`
+
+	// An identifier for a user pool. The user pool must be in the same region as
+	// the service that you are calling.
+	//
+	// UserPool is a required field
+	UserPool *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CognitoMemberDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CognitoMemberDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CognitoMemberDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CognitoMemberDefinition"}
+
+	if s.ClientId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
+	}
+	if s.ClientId != nil && len(*s.ClientId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
+	}
+
+	if s.UserGroup == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserGroup"))
+	}
+	if s.UserGroup != nil && len(*s.UserGroup) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserGroup", 1))
+	}
+
+	if s.UserPool == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPool"))
+	}
+	if s.UserPool != nil && len(*s.UserPool) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPool", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A summary of a model compilation job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CompilationJobSummary
+type CompilationJobSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The time when the model compilation job completed.
+	CompilationEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the model compilation job.
+	//
+	// CompilationJobArn is a required field
+	CompilationJobArn *string `type:"string" required:"true"`
+
+	// The name of the model compilation job that you want a summary for.
+	//
+	// CompilationJobName is a required field
+	CompilationJobName *string `min:"1" type:"string" required:"true"`
+
+	// The status of the model compilation job.
+	//
+	// CompilationJobStatus is a required field
+	CompilationJobStatus CompilationJobStatus `type:"string" required:"true" enum:"true"`
+
+	// The type of device that the model will run on after compilation has completed.
+	//
+	// CompilationTargetDevice is a required field
+	CompilationTargetDevice TargetDevice `type:"string" required:"true" enum:"true"`
+
+	// The time when the model compilation job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The time when the model compilation job was last modified.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s CompilationJobSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CompilationJobSummary) GoString() string {
+	return s.String()
 }
 
 // Describes the container, as part of model definition.
@@ -3261,9 +5899,7 @@ type ContainerDefinition struct {
 	// requirements. Amazon SageMaker supports both registry/repository[:tag] and
 	// registry/repository[@digest] image path formats. For more information, see
 	// Using Your Own Algorithms with Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html)
-	//
-	// Image is a required field
-	Image *string `type:"string" required:"true"`
+	Image *string `type:"string"`
 
 	// The S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive
@@ -3277,6 +5913,9 @@ type ContainerDefinition struct {
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
 	// in the AWS Identity and Access Management User Guide.
 	ModelDataUrl *string `type:"string"`
+
+	// The name of the model package in this container.
+	ModelPackageName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -3292,9 +5931,8 @@ func (s ContainerDefinition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerDefinition"}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
+	if s.ModelPackageName != nil && len(*s.ModelPackageName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ModelPackageName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3356,6 +5994,401 @@ func (s *ContinuousParameterRange) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Defines the possible values for a continuous hyperparameter.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContinuousParameterRangeSpecification
+type ContinuousParameterRangeSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum floating-point value allowed.
+	//
+	// MaxValue is a required field
+	MaxValue *string `type:"string" required:"true"`
+
+	// The minimum floating-point value allowed.
+	//
+	// MinValue is a required field
+	MinValue *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ContinuousParameterRangeSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContinuousParameterRangeSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContinuousParameterRangeSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContinuousParameterRangeSpecification"}
+
+	if s.MaxValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxValue"))
+	}
+
+	if s.MinValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithmInput
+type CreateAlgorithmInput struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the algorithm.
+	AlgorithmDescription *string `type:"string"`
+
+	// The name of the algorithm. The name must have 1 to 63 characters. Valid characters
+	// are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// AlgorithmName is a required field
+	AlgorithmName *string `min:"1" type:"string" required:"true"`
+
+	// Whether to certify the algorithm so that it can be listed in AWS Marektplace.
+	CertifyForMarketplace *bool `type:"boolean"`
+
+	// Specifies details about inference jobs that the algorithm runs, including
+	// the following:
+	//
+	//    * The Amazon ECR paths of containers that contain the inference code and
+	//    model artifacts.
+	//
+	//    * The instance types that the algorithm supports for transform jobs and
+	//    real-time endpoints used for inference.
+	//
+	//    * The input and output content formats that the algorithm supports for
+	//    inference.
+	InferenceSpecification *InferenceSpecification `type:"structure"`
+
+	// Specifies details about training jobs run by this algorithm, including the
+	// following:
+	//
+	//    * The Amazon ECR path of the container and the version digest of the algorithm.
+	//
+	//    * The hyperparameters that the algorithm supports.
+	//
+	//    * The instance types that the algorithm supports for training.
+	//
+	//    * Whether the algorithm supports distributed training.
+	//
+	//    * The metrics that the algorithm emits to Amazon CloudWatch.
+	//
+	//    * Which metrics that the algorithm emits can be used as the objective
+	//    metric for hyperparameter tuning jobs.
+	//
+	//    * The input channels that the algorithm supports for training data. For
+	//    example, an algorithm might support train, validation, and test channels.
+	//
+	// TrainingSpecification is a required field
+	TrainingSpecification *TrainingSpecification `type:"structure" required:"true"`
+
+	// Specifies configurations for one or more training jobs and that Amazon SageMaker
+	// runs to test the algorithm's training code and, optionally, one or more batch
+	// transform jobs that Amazon SageMaker runs to test the algorithm's inference
+	// code.
+	ValidationSpecification *AlgorithmValidationSpecification `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateAlgorithmInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateAlgorithmInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateAlgorithmInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAlgorithmInput"}
+
+	if s.AlgorithmName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
+	}
+	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
+	}
+
+	if s.TrainingSpecification == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingSpecification"))
+	}
+	if s.InferenceSpecification != nil {
+		if err := s.InferenceSpecification.Validate(); err != nil {
+			invalidParams.AddNested("InferenceSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TrainingSpecification != nil {
+		if err := s.TrainingSpecification.Validate(); err != nil {
+			invalidParams.AddNested("TrainingSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ValidationSpecification != nil {
+		if err := s.ValidationSpecification.Validate(); err != nil {
+			invalidParams.AddNested("ValidationSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateAlgorithmOutput
+type CreateAlgorithmOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the new algorithm.
+	//
+	// AlgorithmArn is a required field
+	AlgorithmArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateAlgorithmOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateAlgorithmOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAlgorithmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCodeRepositoryInput
+type CreateCodeRepositoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the git repository. The name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// CodeRepositoryName is a required field
+	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
+
+	// Specifies details about the repository, including the URL where the repository
+	// is located, the default branch, and credentials to use to access the repository.
+	//
+	// GitConfig is a required field
+	GitConfig *GitConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateCodeRepositoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCodeRepositoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateCodeRepositoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCodeRepositoryInput"}
+
+	if s.CodeRepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
+	}
+
+	if s.GitConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GitConfig"))
+	}
+	if s.GitConfig != nil {
+		if err := s.GitConfig.Validate(); err != nil {
+			invalidParams.AddNested("GitConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCodeRepositoryOutput
+type CreateCodeRepositoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the new repository.
+	//
+	// CodeRepositoryArn is a required field
+	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateCodeRepositoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCodeRepositoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCodeRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJobRequest
+type CreateCompilationJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// A name for the model compilation job. The name must be unique within the
+	// AWS Region and within your AWS account.
+	//
+	// CompilationJobName is a required field
+	CompilationJobName *string `min:"1" type:"string" required:"true"`
+
+	// Provides information about the location of input model artifacts, the name
+	// and shape of the expected data inputs, and the framework in which the model
+	// was trained.
+	//
+	// InputConfig is a required field
+	InputConfig *InputConfig `type:"structure" required:"true"`
+
+	// Provides information about the output location for the compiled model and
+	// the target device the model runs on.
+	//
+	// OutputConfig is a required field
+	OutputConfig *OutputConfig `type:"structure" required:"true"`
+
+	// The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon SageMaker
+	// to perform tasks on your behalf.
+	//
+	// During model compilation, Amazon SageMaker needs your permission to:
+	//
+	//    * Read input data from an S3 bucket
+	//
+	//    * Write model artifacts to an S3 bucket
+	//
+	//    * Write logs to Amazon CloudWatch Logs
+	//
+	//    * Publish metrics to Amazon CloudWatch
+	//
+	// You grant permissions for all of these tasks to an IAM role. To pass this
+	// role to Amazon SageMaker, the caller of this API must have the iam:PassRole
+	// permission. For more information, see Amazon SageMaker Roles. (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// The duration allowed for model compilation.
+	//
+	// StoppingCondition is a required field
+	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateCompilationJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCompilationJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateCompilationJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCompilationJobInput"}
+
+	if s.CompilationJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CompilationJobName"))
+	}
+	if s.CompilationJobName != nil && len(*s.CompilationJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CompilationJobName", 1))
+	}
+
+	if s.InputConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputConfig"))
+	}
+
+	if s.OutputConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutputConfig"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+
+	if s.StoppingCondition == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StoppingCondition"))
+	}
+	if s.InputConfig != nil {
+		if err := s.InputConfig.Validate(); err != nil {
+			invalidParams.AddNested("InputConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OutputConfig != nil {
+		if err := s.OutputConfig.Validate(); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.StoppingCondition != nil {
+		if err := s.StoppingCondition.Validate(); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateCompilationJobResponse
+type CreateCompilationJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the action is successful, the service sends back an HTTP 200 response.
+	// Amazon SageMaker returns the following data in JSON format:
+	//
+	//    * CompilationJobArn: The Amazon Resource Name (ARN) of the compiled job.
+	//
+	// CompilationJobArn is a required field
+	CompilationJobArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateCompilationJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateCompilationJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateCompilationJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput
@@ -3547,24 +6580,28 @@ type CreateHyperParameterTuningJobInput struct {
 	_ struct{} `type:"structure"`
 
 	// The HyperParameterTuningJobConfig object that describes the tuning job, including
-	// the search strategy, metric used to evaluate training jobs, ranges of parameters
-	// to search, and resource limits for the tuning job.
+	// the search strategy, the objective metric used to evaluate training jobs,
+	// ranges of parameters to search, and resource limits for the tuning job. For
+	// more information, see automatic-model-tuning
 	//
 	// HyperParameterTuningJobConfig is a required field
 	HyperParameterTuningJobConfig *HyperParameterTuningJobConfig `type:"structure" required:"true"`
 
 	// The name of the tuning job. This name is the prefix for the names of all
 	// training jobs that this tuning job launches. The name must be unique within
-	// the same AWS account and AWS Region. Names are not case sensitive, and must
-	// be between 1-32 characters.
+	// the same AWS account and AWS Region. The name must have { } to { } characters.
+	// Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name
+	// is not case sensitive.
 	//
 	// HyperParameterTuningJobName is a required field
 	HyperParameterTuningJobName *string `min:"1" type:"string" required:"true"`
 
 	// An array of key-value pairs. You can use tags to categorize your AWS resources
 	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see Using Cost Allocation Tags (http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
+	// information, see AWS Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+	//
+	// Tags that you specify for the tuning job are also added to all training jobs
+	// that the tuning job launches.
 	Tags []Tag `type:"list"`
 
 	// The HyperParameterTrainingJobDefinition object that describes the training
@@ -3574,6 +6611,24 @@ type CreateHyperParameterTuningJobInput struct {
 	//
 	// TrainingJobDefinition is a required field
 	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure" required:"true"`
+
+	// Specifies configuration for starting the hyperparameter tuning job using
+	// one or more previous tuning jobs as a starting point. The results of previous
+	// tuning jobs are used to inform which combinations of hyperparameters to search
+	// over in the new tuning job.
+	//
+	// All training jobs launched by the new hyperparameter tuning job are evaluated
+	// by using the objective metric. If you specify IDENTICAL_DATA_AND_ALGORITHM
+	// as the WarmStartType for the warm start configuration, the training job that
+	// performs the best in the new tuning job is compared to the best training
+	// jobs from the parent tuning jobs. From these, the training job that performs
+	// the best as measured by the objective metric is returned as the overall best
+	// training job.
+	//
+	// All training jobs launched by parent hyperparameter tuning jobs and the new
+	// hyperparameter tuning jobs count against the limit of training jobs for the
+	// tuning job.
+	WarmStartConfig *HyperParameterTuningJobWarmStartConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -3621,6 +6676,11 @@ func (s *CreateHyperParameterTuningJobInput) Validate() error {
 			invalidParams.AddNested("TrainingJobDefinition", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.WarmStartConfig != nil {
+		if err := s.WarmStartConfig.Validate(); err != nil {
+			invalidParams.AddNested("WarmStartConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3634,7 +6694,8 @@ type CreateHyperParameterTuningJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// The Amazon Resource Name (ARN) of the tuning job.
+	// The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker assigns
+	// an ARN to a hyperparameter tuning job when you create it.
 	//
 	// HyperParameterTuningJobArn is a required field
 	HyperParameterTuningJobArn *string `type:"string" required:"true"`
@@ -3655,9 +6716,191 @@ func (s CreateHyperParameterTuningJobOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJobRequest
+type CreateLabelingJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// Configures the information required for human workers to complete a labeling
+	// task.
+	//
+	// HumanTaskConfig is a required field
+	HumanTaskConfig *HumanTaskConfig `type:"structure" required:"true"`
+
+	// Input data for the labeling job, such as the Amazon S3 location of the data
+	// objects and the location of the manifest file that describes the data objects.
+	//
+	// InputConfig is a required field
+	InputConfig *LabelingJobInputConfig `type:"structure" required:"true"`
+
+	// The attribute name to use for the label in the output manifest file. This
+	// is the key for the key/value pair formed with the label that a worker assigns
+	// to the object. The name can't end with "-metadata" or "-ref".
+	//
+	// LabelAttributeName is a required field
+	LabelAttributeName *string `min:"1" type:"string" required:"true"`
+
+	// The S3 URL of the file that defines the categories used to label the data
+	// objects.
+	LabelCategoryConfigS3Uri *string `type:"string"`
+
+	// Configures the information required to perform automated data labeling.
+	LabelingJobAlgorithmsConfig *LabelingJobAlgorithmsConfig `type:"structure"`
+
+	// The name of the labeling job. This name is used to identify the job in a
+	// list of labeling jobs.
+	//
+	// LabelingJobName is a required field
+	LabelingJobName *string `min:"1" type:"string" required:"true"`
+
+	// The location of the output data and the AWS Key Management Service key ID
+	// for the key used to encrypt the output data, if any.
+	//
+	// OutputConfig is a required field
+	OutputConfig *LabelingJobOutputConfig `type:"structure" required:"true"`
+
+	// The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform
+	// tasks on your behalf during data labeling. You must grant this role the necessary
+	// permissions so that Amazon SageMaker can successfully complete data labeling.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// A set of conditions for stopping the labeling job. If any of the conditions
+	// are met, the job is automatically stopped. You can use these conditions to
+	// control the cost of data labeling.
+	StoppingConditions *LabelingJobStoppingConditions `type:"structure"`
+
+	// An array of key/value pairs. For more information, see Using Cost Allocation
+	// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []Tag `type:"list"`
+}
+
+// String returns the string representation
+func (s CreateLabelingJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateLabelingJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateLabelingJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLabelingJobInput"}
+
+	if s.HumanTaskConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HumanTaskConfig"))
+	}
+
+	if s.InputConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputConfig"))
+	}
+
+	if s.LabelAttributeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LabelAttributeName"))
+	}
+	if s.LabelAttributeName != nil && len(*s.LabelAttributeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LabelAttributeName", 1))
+	}
+
+	if s.LabelingJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LabelingJobName"))
+	}
+	if s.LabelingJobName != nil && len(*s.LabelingJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LabelingJobName", 1))
+	}
+
+	if s.OutputConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutputConfig"))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+	if s.HumanTaskConfig != nil {
+		if err := s.HumanTaskConfig.Validate(); err != nil {
+			invalidParams.AddNested("HumanTaskConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.InputConfig != nil {
+		if err := s.InputConfig.Validate(); err != nil {
+			invalidParams.AddNested("InputConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.LabelingJobAlgorithmsConfig != nil {
+		if err := s.LabelingJobAlgorithmsConfig.Validate(); err != nil {
+			invalidParams.AddNested("LabelingJobAlgorithmsConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OutputConfig != nil {
+		if err := s.OutputConfig.Validate(); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.StoppingConditions != nil {
+		if err := s.StoppingConditions.Validate(); err != nil {
+			invalidParams.AddNested("StoppingConditions", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateLabelingJobResponse
+type CreateLabelingJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the labeling job. You use this ARN to identify
+	// the labeling job.
+	//
+	// LabelingJobArn is a required field
+	LabelingJobArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateLabelingJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateLabelingJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateLabelingJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput
 type CreateModelInput struct {
 	_ struct{} `type:"structure"`
+
+	// Specifies the containers in the inference pipeline.
+	Containers []ContainerDefinition `type:"list"`
+
+	// Isolates the model container. No inbound or outbound network calls can be
+	// made to or from the model container.
+	//
+	// The Semantic Segmentation built-in algorithm does not support network isolation.
+	EnableNetworkIsolation *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can
 	// assume to access model artifacts and docker image for deployment on ML compute
@@ -3679,9 +6922,7 @@ type CreateModelInput struct {
 	// The location of the primary docker image containing inference code, associated
 	// artifacts, and custom environment map that the inference code uses when the
 	// model is deployed for predictions.
-	//
-	// PrimaryContainer is a required field
-	PrimaryContainer *ContainerDefinition `type:"structure" required:"true"`
+	PrimaryContainer *ContainerDefinition `type:"structure"`
 
 	// An array of key-value pairs. For more information, see Using Cost Allocation
 	// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
@@ -3690,8 +6931,10 @@ type CreateModelInput struct {
 
 	// A VpcConfig object that specifies the VPC that you want your model to connect
 	// to. Control access to and from your model container by configuring the VPC.
-	// VpcConfig is currently used in hosting services but not in batch transform.
-	// For more information, see host-vpc.
+	// VpcConfig is used in hosting services and in batch transform. For more information,
+	// see Protect Endpoints by Using an Amazon Virtual Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+	// and Protect Data in Batch Transform Jobs by Using an Amazon Virtual Private
+	// Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -3719,9 +6962,12 @@ func (s *CreateModelInput) Validate() error {
 	if s.ModelName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelName"))
 	}
-
-	if s.PrimaryContainer == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PrimaryContainer"))
+	if s.Containers != nil {
+		for i, v := range s.Containers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Containers", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.PrimaryContainer != nil {
 		if err := s.PrimaryContainer.Validate(); err != nil {
@@ -3774,9 +7020,138 @@ func (s CreateModelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput
+type CreateModelPackageInput struct {
+	_ struct{} `type:"structure"`
+
+	// Whether to certify the model package for listing on AWS Marketplace.
+	CertifyForMarketplace *bool `type:"boolean"`
+
+	// Specifies details about inference jobs that can be run with models based
+	// on this model package, including the following:
+	//
+	//    * The Amazon ECR paths of containers that contain the inference code and
+	//    model artifacts.
+	//
+	//    * The instance types that the model package supports for transform jobs
+	//    and real-time endpoints used for inference.
+	//
+	//    * The input and output content formats that the model package supports
+	//    for inference.
+	InferenceSpecification *InferenceSpecification `type:"structure"`
+
+	// A description of the model package.
+	ModelPackageDescription *string `type:"string"`
+
+	// The name of the model package. The name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// ModelPackageName is a required field
+	ModelPackageName *string `min:"1" type:"string" required:"true"`
+
+	// Details about the algorithm that was used to create the model package.
+	SourceAlgorithmSpecification *SourceAlgorithmSpecification `type:"structure"`
+
+	// Specifies configurations for one or more transform jobs that Amazon SageMaker
+	// runs to test the model package.
+	ValidationSpecification *ModelPackageValidationSpecification `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateModelPackageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateModelPackageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateModelPackageInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateModelPackageInput"}
+
+	if s.ModelPackageName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ModelPackageName"))
+	}
+	if s.ModelPackageName != nil && len(*s.ModelPackageName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ModelPackageName", 1))
+	}
+	if s.InferenceSpecification != nil {
+		if err := s.InferenceSpecification.Validate(); err != nil {
+			invalidParams.AddNested("InferenceSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SourceAlgorithmSpecification != nil {
+		if err := s.SourceAlgorithmSpecification.Validate(); err != nil {
+			invalidParams.AddNested("SourceAlgorithmSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ValidationSpecification != nil {
+		if err := s.ValidationSpecification.Validate(); err != nil {
+			invalidParams.AddNested("ValidationSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageOutput
+type CreateModelPackageOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the new model package.
+	//
+	// ModelPackageArn is a required field
+	ModelPackageArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateModelPackageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateModelPackageOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateModelPackageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput
 type CreateNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
+
+	// A list of Elastic Inference (EI) instance types to associate with this notebook
+	// instance. Currently, only one instance type can be associated with a notebook
+	// intance. For more information, see Using Elastic Inference in Amazon SageMaker
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	AcceleratorTypes []NotebookInstanceAcceleratorType `type:"list"`
+
+	// An array of up to 3 git repositories to associate with the notebook instance.
+	// These can be either the names of git repositories stored as resources in
+	// your account, or the URL of git repositories in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository. These repositories are cloned at the same
+	// level as the default repository of your notebook instance. For more information,
+	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	AdditionalCodeRepositories []string `type:"list"`
+
+	// A git repository to associate with the notebook instance as its default code
+	// repository. This can be either the name of a git repository stored as a resource
+	// in your account, or the URL of a git repository in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository. When you open a notebook instance, it opens
+	// in the directory that contains this repository. For more information, see
+	// Associating Git Repositories with Amazon SageMaker Notebook Instances (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	DefaultCodeRepository *string `min:"1" type:"string"`
 
 	// Sets whether Amazon SageMaker provides internet access to the notebook instance.
 	// If you set this to Disabled this notebook instance will be able to access
@@ -3784,9 +7159,10 @@ type CreateNotebookInstanceInput struct {
 	// training and endpoint services unless your configure a NAT Gateway in your
 	// VPC.
 	//
-	// For more information, see appendix-notebook-and-internet-access. You can
-	// set the value of this parameter to Disabled only if you set a value for the
-	// SubnetId parameter.
+	// For more information, see Notebook Instances Are Internet-Enabled by Default
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access).
+	// You can set the value of this parameter to Disabled only if you set a value
+	// for the SubnetId parameter.
 	DirectInternetAccess DirectInternetAccess `type:"string" enum:"true"`
 
 	// The type of ML compute instance to launch for the notebook instance.
@@ -3799,7 +7175,8 @@ type CreateNotebookInstanceInput struct {
 	KmsKeyId *string `type:"string"`
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
-	// For information about lifestyle configurations, see notebook-lifecycle-config.
+	// For information about lifestyle configurations, see Step 2.1: (Optional)
+	// Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 	LifecycleConfigName *string `type:"string"`
 
 	// The name of the new notebook instance.
@@ -3831,6 +7208,10 @@ type CreateNotebookInstanceInput struct {
 	// A list of tags to associate with the notebook instance. You can add tags
 	// later by using the CreateTags API.
 	Tags []Tag `type:"list"`
+
+	// The size, in GB, of the ML storage volume to attach to the notebook instance.
+	// The default value is 5 GB.
+	VolumeSizeInGB *int64 `min:"5" type:"integer"`
 }
 
 // String returns the string representation
@@ -3846,6 +7227,9 @@ func (s CreateNotebookInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNotebookInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNotebookInstanceInput"}
+	if s.DefaultCodeRepository != nil && len(*s.DefaultCodeRepository) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultCodeRepository", 1))
+	}
 	if len(s.InstanceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
@@ -3859,6 +7243,9 @@ func (s *CreateNotebookInstanceInput) Validate() error {
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+	if s.VolumeSizeInGB != nil && *s.VolumeSizeInGB < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("VolumeSizeInGB", 5))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -3884,10 +7271,12 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
 
 	// A shell script that runs only once, when you create a notebook instance.
+	// The shell script must be a base64-encoded string.
 	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
 
 	// A shell script that runs every time you start a notebook instance, including
-	// when you create the notebook instance.
+	// when you create the notebook instance. The shell script must be a base64-encoded
+	// string.
 	OnStart []NotebookInstanceLifecycleHook `type:"list"`
 }
 
@@ -4051,10 +7440,21 @@ type CreateTrainingJobInput struct {
 	// The registry path of the Docker image that contains the training algorithm
 	// and algorithm-specific metadata, including the input mode. For more information
 	// about algorithms provided by Amazon SageMaker, see Algorithms (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
-	// For information about providing your own algorithms, see your-algorithms.
+	// For information about providing your own algorithms, see Using Your Own Algorithms
+	// with Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
 	//
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure" required:"true"`
+
+	// Isolates the training container. No inbound or outbound network calls can
+	// be made, except for calls between peers within a training cluster for distributed
+	// training. If network isolation is used for training jobs that are configured
+	// to use a VPC, Amazon SageMaker downloads and uploads customer data and model
+	// artifacts through the specifed VPC, but the training container does not have
+	// network access.
+	//
+	// The Semantic Segmentation built-in algorithm does not support network isolation.
+	EnableNetworkIsolation *bool `type:"boolean"`
 
 	// Algorithm-specific parameters that influence the quality of the model. You
 	// set hyperparameters before you start the learning process. For a list of
@@ -4078,9 +7478,7 @@ type CreateTrainingJobInput struct {
 	// Depending on the input mode that the algorithm supports, Amazon SageMaker
 	// either copies input data files from an S3 bucket to a local directory in
 	// the Docker container, or makes it available as input streams.
-	//
-	// InputDataConfig is a required field
-	InputDataConfig []Channel `min:"1" type:"list" required:"true"`
+	InputDataConfig []Channel `min:"1" type:"list"`
 
 	// Specifies the path to the S3 bucket where you want to store model artifacts.
 	// Amazon SageMaker creates subfolders for the artifacts.
@@ -4100,7 +7498,7 @@ type CreateTrainingJobInput struct {
 	// ResourceConfig is a required field
 	ResourceConfig *ResourceConfig `type:"structure" required:"true"`
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker assumes
 	// to perform tasks on your behalf.
 	//
 	// During model training, Amazon SageMaker needs your permission to read input
@@ -4142,7 +7540,8 @@ type CreateTrainingJobInput struct {
 
 	// A VpcConfig object that specifies the VPC that you want your training job
 	// to connect to. Control access to and from your training container by configuring
-	// the VPC. For more information, see train-vpc
+	// the VPC. For more information, see Protect Training Jobs by Using an Amazon
+	// Virtual Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -4162,10 +7561,6 @@ func (s *CreateTrainingJobInput) Validate() error {
 
 	if s.AlgorithmSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlgorithmSpecification"))
-	}
-
-	if s.InputDataConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputDataConfig"))
 	}
 	if s.InputDataConfig != nil && len(s.InputDataConfig) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputDataConfig", 1))
@@ -4299,10 +7694,14 @@ type CreateTransformJobInput struct {
 	// a record (without metadata). The value in MaxPayloadInMB must be greater
 	// or equal to the size of a single record. You can approximate the size of
 	// a record by dividing the size of your dataset by the number of records. Then
-	// multiply this value by the number of records you want in a mini-batch. It
-	// is recommended to enter a value slightly larger than this to ensure the records
-	// fit within the maximum payload size. The default value is 6 MB. For an unlimited
-	// payload size, set the value to 0.
+	// multiply this value by the number of records you want in a mini-batch. We
+	// recommend to enter a slightly larger value than this to ensure the records
+	// fit within the maximum payload size. The default value is 6 MB.
+	//
+	// For cases where the payload might be arbitrarily large and is transmitted
+	// using HTTP chunked encoding, set the value to 0. This feature only works
+	// in supported algorithms. Currently, Amazon SageMaker built-in algorithms
+	// do not support this feature.
 	MaxPayloadInMB *int64 `type:"integer"`
 
 	// The name of the model that you want to use for the transform job. ModelName
@@ -4432,6 +7831,114 @@ func (s CreateTransformJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkteamRequest
+type CreateWorkteamInput struct {
+	_ struct{} `type:"structure"`
+
+	// A description of the work team.
+	//
+	// Description is a required field
+	Description *string `min:"1" type:"string" required:"true"`
+
+	// A list of MemberDefinition objects that contains objects that identify the
+	// Amazon Cognito user pool that makes up the work team. For more information,
+	// see Amazon Cognito User Pools (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html).
+	//
+	// All of the CognitoMemberDefinition objects that make up the member definition
+	// must have the same ClientId and UserPool values.
+	//
+	// MemberDefinitions is a required field
+	MemberDefinitions []MemberDefinition `min:"1" type:"list" required:"true"`
+
+	Tags []Tag `type:"list"`
+
+	// The name of the work team. Use this name to identify the work team.
+	//
+	// WorkteamName is a required field
+	WorkteamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateWorkteamInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateWorkteamInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateWorkteamInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkteamInput"}
+
+	if s.Description == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
+	}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	}
+
+	if s.MemberDefinitions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MemberDefinitions"))
+	}
+	if s.MemberDefinitions != nil && len(s.MemberDefinitions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MemberDefinitions", 1))
+	}
+
+	if s.WorkteamName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamName"))
+	}
+	if s.WorkteamName != nil && len(*s.WorkteamName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WorkteamName", 1))
+	}
+	if s.MemberDefinitions != nil {
+		for i, v := range s.MemberDefinitions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MemberDefinitions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateWorkteamResponse
+type CreateWorkteamOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the work team. You can use this ARN to
+	// identify the work team.
+	WorkteamArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateWorkteamOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateWorkteamOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateWorkteamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Describes the location of the channel data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataSource
 type DataSource struct {
@@ -4470,6 +7977,124 @@ func (s *DataSource) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAlgorithmInput
+type DeleteAlgorithmInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the algorithm to delete.
+	//
+	// AlgorithmName is a required field
+	AlgorithmName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteAlgorithmInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAlgorithmInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteAlgorithmInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAlgorithmInput"}
+
+	if s.AlgorithmName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
+	}
+	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteAlgorithmOutput
+type DeleteAlgorithmOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteAlgorithmOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAlgorithmOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAlgorithmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCodeRepositoryInput
+type DeleteCodeRepositoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the git repository to delete.
+	//
+	// CodeRepositoryName is a required field
+	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteCodeRepositoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteCodeRepositoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteCodeRepositoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCodeRepositoryInput"}
+
+	if s.CodeRepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteCodeRepositoryOutput
+type DeleteCodeRepositoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteCodeRepositoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteCodeRepositoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCodeRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteEndpointConfigInput
@@ -4637,6 +8262,66 @@ func (s DeleteModelOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackageInput
+type DeleteModelPackageInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the model package. The name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// ModelPackageName is a required field
+	ModelPackageName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteModelPackageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteModelPackageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteModelPackageInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteModelPackageInput"}
+
+	if s.ModelPackageName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ModelPackageName"))
+	}
+	if s.ModelPackageName != nil && len(*s.ModelPackageName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ModelPackageName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteModelPackageOutput
+type DeleteModelPackageOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteModelPackageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteModelPackageOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteModelPackageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4820,10 +8505,75 @@ func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkteamRequest
+type DeleteWorkteamInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the work team to delete.
+	//
+	// WorkteamName is a required field
+	WorkteamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteWorkteamInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteWorkteamInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteWorkteamInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkteamInput"}
+
+	if s.WorkteamName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamName"))
+	}
+	if s.WorkteamName != nil && len(*s.WorkteamName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WorkteamName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteWorkteamResponse
+type DeleteWorkteamOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Returns true if the work team was successfully deleted; otherwise, returns
+	// false.
+	//
+	// Success is a required field
+	Success *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteWorkteamOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteWorkteamOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteWorkteamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Gets the Amazon EC2 Container Registry path of the docker image of the model
 // that is hosted in this ProductionVariant.
 //
-// If you used the registry/repository[:tag] form to to specify the image path
+// If you used the registry/repository[:tag] form to specify the image path
 // of the primary container when you created the model hosted in this ProductionVariant,
 // the path resolves to a path of the form registry/repository[@digest]. A digest
 // is a hash value that identifies a specific version of an image. For information
@@ -4851,6 +8601,330 @@ func (s DeployedImage) String() string {
 // GoString returns the string representation
 func (s DeployedImage) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithmInput
+type DescribeAlgorithmInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the algorithm to describe.
+	//
+	// AlgorithmName is a required field
+	AlgorithmName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeAlgorithmInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAlgorithmInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeAlgorithmInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlgorithmInput"}
+
+	if s.AlgorithmName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
+	}
+	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAlgorithmOutput
+type DescribeAlgorithmOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the algorithm.>
+	//
+	// AlgorithmArn is a required field
+	AlgorithmArn *string `min:"1" type:"string" required:"true"`
+
+	// A brief summary about the algorithm.
+	AlgorithmDescription *string `type:"string"`
+
+	// The name of the algorithm being described.
+	//
+	// AlgorithmName is a required field
+	AlgorithmName *string `min:"1" type:"string" required:"true"`
+
+	// The current status of the algorithm.
+	//
+	// AlgorithmStatus is a required field
+	AlgorithmStatus AlgorithmStatus `type:"string" required:"true" enum:"true"`
+
+	// Details about the current status of the algorithm.
+	//
+	// AlgorithmStatusDetails is a required field
+	AlgorithmStatusDetails *AlgorithmStatusDetails `type:"structure" required:"true"`
+
+	// Whether the algorithm is certified to be listed in AWS Marektplace.
+	CertifyForMarketplace *bool `type:"boolean"`
+
+	// A timestamp specifying when the algorithm was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Details about inference jobs that the algorithm runs.
+	InferenceSpecification *InferenceSpecification `type:"structure"`
+
+	// The product identifier of the algorithm.
+	ProductId *string `type:"string"`
+
+	// Details about training jobs run by this algorithm.
+	//
+	// TrainingSpecification is a required field
+	TrainingSpecification *TrainingSpecification `type:"structure" required:"true"`
+
+	// Details about configurations for one or more training jobs that Amazon SageMaker
+	// runs to test the algorithm.
+	ValidationSpecification *AlgorithmValidationSpecification `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeAlgorithmOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAlgorithmOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAlgorithmOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepositoryInput
+type DescribeCodeRepositoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the git repository to describe.
+	//
+	// CodeRepositoryName is a required field
+	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeCodeRepositoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeCodeRepositoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeCodeRepositoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCodeRepositoryInput"}
+
+	if s.CodeRepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCodeRepositoryOutput
+type DescribeCodeRepositoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the git repository.
+	//
+	// CodeRepositoryArn is a required field
+	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
+
+	// The name of the git repository.
+	//
+	// CodeRepositoryName is a required field
+	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
+
+	// The date and time that the repository was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Configuration details about the repository, including the URL where the repository
+	// is located, the default branch, and the Amazon Resource Name (ARN) of the
+	// AWS Secrets Manager secret that contains the credentials used to access the
+	// repository.
+	GitConfig *GitConfig `type:"structure"`
+
+	// The date and time that the repository was last changed.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeCodeRepositoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeCodeRepositoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCodeRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobRequest
+type DescribeCompilationJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the model compilation job that you want information about.
+	//
+	// CompilationJobName is a required field
+	CompilationJobName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeCompilationJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeCompilationJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeCompilationJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCompilationJobInput"}
+
+	if s.CompilationJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CompilationJobName"))
+	}
+	if s.CompilationJobName != nil && len(*s.CompilationJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CompilationJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJobResponse
+type DescribeCompilationJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The time when the model compilation job on a compilation job instance ended.
+	// For a successful or stopped job, this is when the job's model artifacts have
+	// finished uploading. For a failed job, this is when Amazon SageMaker detected
+	// that the job failed.
+	CompilationEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker assumes
+	// to perform the model compilation job.
+	//
+	// CompilationJobArn is a required field
+	CompilationJobArn *string `type:"string" required:"true"`
+
+	// The name of the model compilation job.
+	//
+	// CompilationJobName is a required field
+	CompilationJobName *string `min:"1" type:"string" required:"true"`
+
+	// The status of the model compilation job.
+	//
+	// CompilationJobStatus is a required field
+	CompilationJobStatus CompilationJobStatus `type:"string" required:"true" enum:"true"`
+
+	// The time when the model compilation job started the CompilationJob instances.
+	//
+	// You are billed for the time between this timestamp and the timestamp in the
+	// DescribeCompilationJobResponse$CompilationEndTime field. In Amazon CloudWatch
+	// Logs, the start time might be later than this time. That's because it takes
+	// time to download the compilation job, which depends on the size of the compilation
+	// job container.
+	CompilationStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The time that the model compilation job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// If a model compilation job failed, the reason it failed.
+	//
+	// FailureReason is a required field
+	FailureReason *string `type:"string" required:"true"`
+
+	// Information about the location in Amazon S3 of the input model artifacts,
+	// the name and shape of the expected data inputs, and the framework in which
+	// the model was trained.
+	//
+	// InputConfig is a required field
+	InputConfig *InputConfig `type:"structure" required:"true"`
+
+	// The time that the status of the model compilation job was last modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Information about the location in Amazon S3 that has been configured for
+	// storing the model artifacts used in the compilation job.
+	//
+	// ModelArtifacts is a required field
+	ModelArtifacts *ModelArtifacts `type:"structure" required:"true"`
+
+	// Information about the output location for the compiled model and the target
+	// device that the model runs on.
+	//
+	// OutputConfig is a required field
+	OutputConfig *OutputConfig `type:"structure" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the model compilation job.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// The duration allowed for model compilation.
+	//
+	// StoppingCondition is a required field
+	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeCompilationJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeCompilationJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeCompilationJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfigInput
@@ -4996,6 +9070,33 @@ type DescribeEndpointOutput struct {
 
 	// The status of the endpoint.
 	//
+	//    * OutOfService: Endpoint is not available to take incoming requests.
+	//
+	//    * Creating: CreateEndpoint is executing.
+	//
+	//    * Updating: UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
+	//
+	//    * SystemUpdating: Endpoint is undergoing maintenance and cannot be updated
+	//    or deleted or re-scaled until it has completed. This maintenance operation
+	//    does not change any customer-specified values such as VPC config, KMS
+	//    encryption, model, instance type, or instance count.
+	//
+	//    * RollingBack: Endpoint fails to scale up or down or change its variant
+	//    weight and is in the process of rolling back to its previous configuration.
+	//    Once the rollback completes, endpoint returns to an InService status.
+	//    This transitional status only applies to an endpoint that has autoscaling
+	//    enabled and is undergoing variant weight or capacity changes as part of
+	//    an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities
+	//    operation is called explicitly.
+	//
+	//    * InService: Endpoint is available to process incoming requests.
+	//
+	//    * Deleting: DeleteEndpoint is executing.
+	//
+	//    * Failed: Endpoint could not be created, updated, or re-scaled. Use DescribeEndpointOutput$FailureReason
+	//    for information about the failure. DeleteEndpoint is the only operation
+	//    that can be performed on a failed endpoint.
+	//
 	// EndpointStatus is a required field
 	EndpointStatus EndpointStatus `type:"string" required:"true" enum:"true"`
 
@@ -5117,6 +9218,12 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// ObjectiveStatusCounters is a required field
 	ObjectiveStatusCounters *ObjectiveStatusCounters `type:"structure" required:"true"`
 
+	// If the hyperparameter tuning job is an warm start tuning job with a WarmStartType
+	// of IDENTICAL_DATA_AND_ALGORITHM, this is the TrainingJobSummary for the training
+	// job with the best objective metric value of all training jobs launched by
+	// this tuning job and all parent jobs specified for the warm start tuning job.
+	OverallBestTrainingJob *HyperParameterTrainingJobSummary `type:"structure"`
+
 	// The HyperParameterTrainingJobDefinition object that specifies the definition
 	// of the training jobs that this tuning job launches.
 	//
@@ -5128,6 +9235,12 @@ type DescribeHyperParameterTuningJobOutput struct {
 	//
 	// TrainingJobStatusCounters is a required field
 	TrainingJobStatusCounters *TrainingJobStatusCounters `type:"structure" required:"true"`
+
+	// The configuration for starting the hyperparameter parameter tuning job using
+	// one or more previous tuning jobs as a starting point. The results of previous
+	// tuning jobs are used to inform which combinations of hyperparameters to search
+	// over in the new tuning job.
+	WarmStartConfig *HyperParameterTuningJobWarmStartConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -5142,6 +9255,152 @@ func (s DescribeHyperParameterTuningJobOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeHyperParameterTuningJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLabelingJobRequest
+type DescribeLabelingJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the labeling job to return information for.
+	//
+	// LabelingJobName is a required field
+	LabelingJobName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeLabelingJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeLabelingJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeLabelingJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLabelingJobInput"}
+
+	if s.LabelingJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LabelingJobName"))
+	}
+	if s.LabelingJobName != nil && len(*s.LabelingJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LabelingJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeLabelingJobResponse
+type DescribeLabelingJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The date and time that the labeling job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// If the job failed, the reason that it failed.
+	FailureReason *string `type:"string"`
+
+	// Configuration information required for human workers to complete a labeling
+	// task.
+	//
+	// HumanTaskConfig is a required field
+	HumanTaskConfig *HumanTaskConfig `type:"structure" required:"true"`
+
+	// Input configuration information for the labeling job, such as the Amazon
+	// S3 location of the data objects and the location of the manifest file that
+	// describes the data objects.
+	//
+	// InputConfig is a required field
+	InputConfig *LabelingJobInputConfig `type:"structure" required:"true"`
+
+	// A unique identifier for work done as part of a labeling job.
+	//
+	// JobReferenceCode is a required field
+	JobReferenceCode *string `min:"1" type:"string" required:"true"`
+
+	// The attribute used as the label in the output manifest file.
+	LabelAttributeName *string `min:"1" type:"string"`
+
+	// The S3 location of the JSON file that defines the categories used to label
+	// data objects.
+	LabelCategoryConfigS3Uri *string `type:"string"`
+
+	// Provides a breakdown of the number of data objects labeled by humans, the
+	// number of objects labeled by machine, the number of objects than couldn't
+	// be labeled, and the total number of objects labeled.
+	//
+	// LabelCounters is a required field
+	LabelCounters *LabelCounters `type:"structure" required:"true"`
+
+	// Configuration information for automated data labeling.
+	LabelingJobAlgorithmsConfig *LabelingJobAlgorithmsConfig `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the labeling job.
+	//
+	// LabelingJobArn is a required field
+	LabelingJobArn *string `type:"string" required:"true"`
+
+	// The name assigned to the labeling job when it was created.
+	//
+	// LabelingJobName is a required field
+	LabelingJobName *string `min:"1" type:"string" required:"true"`
+
+	// The location of the output produced by the labeling job.
+	LabelingJobOutput *LabelingJobOutput `type:"structure"`
+
+	// The processing status of the labeling job.
+	//
+	// LabelingJobStatus is a required field
+	LabelingJobStatus LabelingJobStatus `type:"string" required:"true" enum:"true"`
+
+	// The date and time that the labeling job was last updated.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The location of the job's output data and the AWS Key Management Service
+	// key ID for the key used to encrypt the output data, if any.
+	//
+	// OutputConfig is a required field
+	OutputConfig *LabelingJobOutputConfig `type:"structure" required:"true"`
+
+	// The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks
+	// on your behalf during data labeling.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// A set of conditions for stopping a labeling job. If any of the conditions
+	// are met, the job is automatically stopped.
+	StoppingConditions *LabelingJobStoppingConditions `type:"structure"`
+
+	// An array of key/value pairs. For more information, see Using Cost Allocation
+	// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []Tag `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeLabelingJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeLabelingJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeLabelingJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5185,10 +9444,19 @@ type DescribeModelOutput struct {
 
 	responseMetadata aws.Response
 
+	// The containers in the inference pipeline.
+	Containers []ContainerDefinition `type:"list"`
+
 	// A timestamp that shows when the model was created.
 	//
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// If True, no inbound or outbound network calls can be made to or from the
+	// model container.
+	//
+	// The Semantic Segmentation built-in algorithm does not support network isolation.
+	EnableNetworkIsolation *bool `type:"boolean"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that you specified for the
 	// model.
@@ -5208,12 +9476,11 @@ type DescribeModelOutput struct {
 
 	// The location of the primary inference code, associated artifacts, and custom
 	// environment map that the inference code uses when it is deployed in production.
-	//
-	// PrimaryContainer is a required field
-	PrimaryContainer *ContainerDefinition `type:"structure" required:"true"`
+	PrimaryContainer *ContainerDefinition `type:"structure"`
 
 	// A VpcConfig object that specifies the VPC that this model has access to.
-	// For more information, see host-vpc
+	// For more information, see Protect Endpoints by Using an Amazon Virtual Private
+	// Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -5229,6 +9496,107 @@ func (s DescribeModelOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeModelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageInput
+type DescribeModelPackageInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the model package to describe.
+	//
+	// ModelPackageName is a required field
+	ModelPackageName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeModelPackageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeModelPackageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeModelPackageInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeModelPackageInput"}
+
+	if s.ModelPackageName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ModelPackageName"))
+	}
+	if s.ModelPackageName != nil && len(*s.ModelPackageName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ModelPackageName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput
+type DescribeModelPackageOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Whether the model package is certified for listing on AWS Marketplace.
+	CertifyForMarketplace *bool `type:"boolean"`
+
+	// A timestamp specifying when the model package was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Details about inference jobs that can be run with models based on this model
+	// package.
+	InferenceSpecification *InferenceSpecification `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the model package.
+	//
+	// ModelPackageArn is a required field
+	ModelPackageArn *string `min:"1" type:"string" required:"true"`
+
+	// A brief summary about the model package.
+	ModelPackageDescription *string `type:"string"`
+
+	// The name of the model package being described.
+	//
+	// ModelPackageName is a required field
+	ModelPackageName *string `min:"1" type:"string" required:"true"`
+
+	// The current status of the model package.
+	//
+	// ModelPackageStatus is a required field
+	ModelPackageStatus ModelPackageStatus `type:"string" required:"true" enum:"true"`
+
+	// Details about the current status of the model package.
+	//
+	// ModelPackageStatusDetails is a required field
+	ModelPackageStatusDetails *ModelPackageStatusDetails `type:"structure" required:"true"`
+
+	// Details about the algorithm that was used to create the model package.
+	SourceAlgorithmSpecification *SourceAlgorithmSpecification `type:"structure"`
+
+	// Configurations for one or more transform jobs that Amazon SageMaker runs
+	// to test the model package.
+	ValidationSpecification *ModelPackageValidationSpecification `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeModelPackageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeModelPackageOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeModelPackageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5347,16 +9715,40 @@ type DescribeNotebookInstanceOutput struct {
 
 	responseMetadata aws.Response
 
+	// A list of the Elastic Inference (EI) instance types associated with this
+	// notebook instance. Currently only one EI instance type can be associated
+	// with a notebook instance. For more information, see Using Elastic Inference
+	// in Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	AcceleratorTypes []NotebookInstanceAcceleratorType `type:"list"`
+
+	// An array of up to 3 git repositories associated with the notebook instance.
+	// These can be either the names of git repositories stored as resources in
+	// your account, or the URL of git repositories in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository. These repositories are cloned at the same
+	// level as the default repository of your notebook instance. For more information,
+	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	AdditionalCodeRepositories []string `type:"list"`
+
 	// A timestamp. Use this parameter to return the time when the notebook instance
 	// was created
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The git repository associated with the notebook instance as its default code
+	// repository. This can be either the name of a git repository stored as a resource
+	// in your account, or the URL of a git repository in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository. When you open a notebook instance, it opens
+	// in the directory that contains this repository. For more information, see
+	// Associating Git Repositories with Amazon SageMaker Notebook Instances (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	DefaultCodeRepository *string `min:"1" type:"string"`
 
 	// Describes whether Amazon SageMaker provides internet access to the notebook
 	// instance. If this value is set to Disabled, he notebook instance does not
 	// have internet access, and cannot connect to Amazon SageMaker training and
 	// endpoint services.
 	//
-	// For more information, see appendix-notebook-and-internet-access.
+	// For more information, see Notebook Instances Are Internet-Enabled by Default
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access).
 	DirectInternetAccess DirectInternetAccess `type:"string" enum:"true"`
 
 	// If status is failed, the reason it failed.
@@ -5382,7 +9774,8 @@ type DescribeNotebookInstanceOutput struct {
 
 	// Returns the name of a notebook instance lifecycle configuration.
 	//
-	// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+	// For information about notebook instance lifestyle configurations, see Step
+	// 2.1: (Optional) Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
 	NotebookInstanceLifecycleConfigName *string `type:"string"`
 
 	// Name of the Amazon SageMaker notebook instance.
@@ -5403,6 +9796,9 @@ type DescribeNotebookInstanceOutput struct {
 	// The URL that you use to connect to the Jupyter notebook that is running in
 	// your notebook instance.
 	Url *string `type:"string"`
+
+	// The size, in GB, of the ML storage volume attached to the notebook instance.
+	VolumeSizeInGB *int64 `min:"5" type:"integer"`
 }
 
 // String returns the string representation
@@ -5417,6 +9813,67 @@ func (s DescribeNotebookInstanceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNotebookInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSubscribedWorkteamRequest
+type DescribeSubscribedWorkteamInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the subscribed work team to describe.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeSubscribedWorkteamInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSubscribedWorkteamInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeSubscribedWorkteamInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubscribedWorkteamInput"}
+
+	if s.WorkteamArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeSubscribedWorkteamResponse
+type DescribeSubscribedWorkteamOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A Workteam instance that contains information about the work team.
+	//
+	// SubscribedWorkteam is a required field
+	SubscribedWorkteam *SubscribedWorkteam `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeSubscribedWorkteamOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSubscribedWorkteamOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSubscribedWorkteamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5473,16 +9930,31 @@ type DescribeTrainingJobOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
 
+	// If True, inbound or outbound network calls can be made, except for calls
+	// between peers within a training cluster for distributed training. If network
+	// isolation is used for training jobs that are configured to use a VPC, Amazon
+	// SageMaker downloads and uploads customer data and model artifacts through
+	// the specifed VPC, but the training container does not have network access.
+	//
+	// The Semantic Segmentation built-in algorithm does not support network isolation.
+	EnableNetworkIsolation *bool `type:"boolean"`
+
 	// If the training job failed, the reason it failed.
 	FailureReason *string `type:"string"`
+
+	// A collection of MetricData objects that specify the names, values, and dates
+	// and times that the training algorithm emitted to Amazon CloudWatch.
+	FinalMetricDataList []MetricData `type:"list"`
 
 	// Algorithm-specific parameters.
 	HyperParameters map[string]string `type:"map"`
 
 	// An array of Channel objects that describes each data input channel.
-	//
-	// InputDataConfig is a required field
-	InputDataConfig []Channel `min:"1" type:"list" required:"true"`
+	InputDataConfig []Channel `min:"1" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling
+	// job that created the transform or training job.
+	LabelingJobArn *string `type:"string"`
 
 	// A timestamp that indicates when the status of the training job was last modified.
 	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -5507,37 +9979,51 @@ type DescribeTrainingJobOutput struct {
 	// job.
 	RoleArn *string `min:"20" type:"string"`
 
-	// Provides granular information about the system state. For more information,
-	// see TrainingJobStatus.
+	// Provides detailed information about the state of the training job. For detailed
+	// information on the secondary status of the training job, see StatusMessage
+	// under SecondaryStatusTransition.
 	//
-	//    * Starting - starting the training job.
+	// Amazon SageMaker provides primary statuses and secondary statuses that apply
+	// to each of them:
 	//
-	//    * Downloading - downloading the input data.
+	// InProgressStarting - Starting the training job.
 	//
-	//    * Training - model training is in progress.
+	// Downloading - An optional stage for algorithms that support File training
+	// input mode. It indicates that data is being downloaded to the ML storage
+	// volumes.
 	//
-	//    * Uploading - uploading the trained model.
+	// Training - Training is in progress.
 	//
-	//    * Stopping - stopping the training job.
+	// Uploading - Training is complete and the model artifacts are being uploaded
+	// to the S3 location.
 	//
-	//    * Stopped - the training job has stopped.
+	// CompletedCompleted - The training job has completed.
 	//
-	//    * MaxRuntimeExceeded - the training job exceeded the specified max run
-	//    time and has been stopped.
+	// FailedFailed - The training job has failed. The reason for the failure is
+	// returned in the FailureReason field of DescribeTrainingJobResponse.
 	//
-	//    * Completed - the training job has completed.
+	// StoppedMaxRuntimeExceeded - The job stopped because it exceeded the maximum
+	// allowed runtime.
 	//
-	//    * Failed - the training job has failed. The failure reason is stored in
-	//    the FailureReason field of DescribeTrainingJobResponse.
+	// Stopped - The training job has stopped.
 	//
-	// The valid values for SecondaryStatus are subject to change. They primarily
-	// provide information on the progress of the training job.
+	// StoppingStopping - Stopping the training job.
+	//
+	// Valid values for SecondaryStatus are subject to change.
+	//
+	// We no longer support the following secondary statuses:
+	//
+	//    * LaunchingMLInstances
+	//
+	//    * PreparingTrainingStack
+	//
+	//    * DownloadingTrainingImage
 	//
 	// SecondaryStatus is a required field
 	SecondaryStatus SecondaryStatus `type:"string" required:"true" enum:"true"`
 
-	// To give an overview of the training job lifecycle, SecondaryStatusTransitions
-	// is a log of time-ordered secondary statuses that a training job has transitioned.
+	// A history of all of the secondary statuses that the training job has transitioned
+	// through.
 	SecondaryStatusTransitions []SecondaryStatusTransition `type:"list"`
 
 	// The condition under which to stop the training job.
@@ -5564,22 +10050,21 @@ type DescribeTrainingJobOutput struct {
 
 	// The status of the training job.
 	//
-	// For the InProgress status, Amazon SageMaker can return these secondary statuses:
+	// Amazon SageMaker provides the following training job statuses:
 	//
-	//    * Starting - Preparing for training.
+	//    * InProgress - The training is in progress.
 	//
-	//    * Downloading - Optional stage for algorithms that support File training
-	//    input mode. It indicates data is being downloaded to ML storage volumes.
+	//    * Completed - The training job has completed.
 	//
-	//    * Training - Training is in progress.
+	//    * Failed - The training job has failed. To see the reason for the failure,
+	//    see the FailureReason field in the response to a DescribeTrainingJobResponse
+	//    call.
 	//
-	//    * Uploading - Training is complete and model upload is in progress.
+	//    * Stopping - The training job is stopping.
 	//
-	// For the Stopped training status, Amazon SageMaker can return these secondary
-	// statuses:
+	//    * Stopped - The training job has stopped.
 	//
-	//    * MaxRuntimeExceeded - Job stopped as a result of maximum allowed runtime
-	//    exceeded.
+	// For more detailed information, see SecondaryStatus.
 	//
 	// TrainingJobStatus is a required field
 	TrainingJobStatus TrainingJobStatus `type:"string" required:"true" enum:"true"`
@@ -5596,7 +10081,8 @@ type DescribeTrainingJobOutput struct {
 	TuningJobArn *string `type:"string"`
 
 	// A VpcConfig object that specifies the VPC that this training job has access
-	// to. For more information, see train-vpc.
+	// to. For more information, see Protect Training Jobs by Using an Amazon Virtual
+	// Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -5673,6 +10159,10 @@ type DescribeTransformJobOutput struct {
 	// If the transform job failed, the reason that it failed.
 	FailureReason *string `type:"string"`
 
+	// The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth labeling
+	// job that created the transform or training job.
+	LabelingJobArn *string `type:"string"`
+
 	// The maximum number of parallel requests on each instance node that can be
 	// launched in a transform job. The default value is 1.
 	MaxConcurrentTransforms *int64 `type:"integer"`
@@ -5738,6 +10228,70 @@ func (s DescribeTransformJobOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTransformJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteamRequest
+type DescribeWorkteamInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the work team to return a description of.
+	//
+	// WorkteamName is a required field
+	WorkteamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeWorkteamInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeWorkteamInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeWorkteamInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkteamInput"}
+
+	if s.WorkteamName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamName"))
+	}
+	if s.WorkteamName != nil && len(*s.WorkteamName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WorkteamName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkteamResponse
+type DescribeWorkteamOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A Workteam instance that contains information about the work team.
+	//
+	// Workteam is a required field
+	Workteam *Workteam `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeWorkteamOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeWorkteamOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeWorkteamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5838,6 +10392,36 @@ type EndpointSummary struct {
 
 	// The status of the endpoint.
 	//
+	//    * OutOfService: Endpoint is not available to take incoming requests.
+	//
+	//    * Creating: CreateEndpoint is executing.
+	//
+	//    * Updating: UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.
+	//
+	//    * SystemUpdating: Endpoint is undergoing maintenance and cannot be updated
+	//    or deleted or re-scaled until it has completed. This mainenance operation
+	//    does not change any customer-specified values such as VPC config, KMS
+	//    encryption, model, instance type, or instance count.
+	//
+	//    * RollingBack: Endpoint fails to scale up or down or change its variant
+	//    weight and is in the process of rolling back to its previous configuration.
+	//    Once the rollback completes, endpoint returns to an InService status.
+	//    This transitional status only applies to an endpoint that has autoscaling
+	//    enabled and is undergoing variant weight or capacity changes as part of
+	//    an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities
+	//    operation is called explicitly.
+	//
+	//    * InService: Endpoint is available to process incoming requests.
+	//
+	//    * Deleting: DeleteEndpoint is executing.
+	//
+	//    * Failed: Endpoint could not be created, updated, or re-scaled. Use DescribeEndpointOutput$FailureReason
+	//    for information about the failure. DeleteEndpoint is the only operation
+	//    that can be performed on a failed endpoint.
+	//
+	// To get a list of endpoints with a specified status, use the ListEndpointsInput$StatusEquals
+	// filter.
+	//
 	// EndpointStatus is a required field
 	EndpointStatus EndpointStatus `type:"string" required:"true" enum:"true"`
 
@@ -5855,6 +10439,121 @@ func (s EndpointSummary) String() string {
 // GoString returns the string representation
 func (s EndpointSummary) GoString() string {
 	return s.String()
+}
+
+// A conditional statement for a search expression that includes a Boolean operator,
+// a resource property, and a value.
+//
+// If you don't specify an Operator and a Value, the filter searches for only
+// the specified property. For example, defining a Filter for the FailureReason
+// for the TrainingJobResource searches for training job objects that have a
+// value in the FailureReason field.
+//
+// If you specify a Value, but not an Operator, Amazon SageMaker uses the equals
+// operator as a default.
+//
+// In search, there are several property types:
+//
+// MetricsTo define a metric filter, enter a value using the form "Metrics.<name>",
+// where <name> is a metric name. For example, the following filter searches
+// for training jobs with an "accuracy" metric greater than "0.9":
+//
+// {
+//
+// "Name": "Metrics.accuracy",
+//
+// "Operator": "GREATER_THAN",
+//
+// "Value": "0.9"
+//
+// }
+//
+// HyperParametersTo define a hyperparameter filter, enter a value with the
+// form "HyperParamters.<name>". Decimal hyperparameter values are treated as
+// a decimal in a comparison if the specified Value is also a decimal value.
+// If the specified Value is an integer, the decimal hyperparameter values are
+// treated as integers. For example, the following filter is satisfied by training
+// jobs with a "learning_rate" hyperparameter that is less than "0.5":
+//
+//  {
+//
+//  "Name": "HyperParameters.learning_rate",
+//
+//  "Operator": "LESS_THAN",
+//
+//  "Value": "0.5"
+//
+//  }
+//
+// TagsTo define a tag filter, enter a value with the form "Tags.<key>".
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Filter
+type Filter struct {
+	_ struct{} `type:"structure"`
+
+	// A property name. For example, TrainingJobName. See TrainingJob properties
+	// for the list of valid property names for each supported resource.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A Boolean binary operator that is used to evaluate the filter. The operator
+	// field contains one of the following values:
+	//
+	// EqualsThe specified resource in Name equals the specified Value.
+	//
+	// NotEqualsThe specified resource in Name does not equal the specified Value.
+	//
+	// GreaterThanThe specified resource in Name is greater than the specified Value.
+	// Not supported for text-based properties.
+	//
+	// GreaterThanOrEqualToThe specified resource in Name is greater than or equal
+	// to the specified Value. Not supported for text-based properties.
+	//
+	// LessThanThe specified resource in Name is less than the specified Value.
+	// Not supported for text-based properties.
+	//
+	// LessThanOrEqualToThe specified resource in Name is less than or equal to
+	// the specified Value. Not supported for text-based properties.
+	//
+	// ContainsOnly supported for text-based properties. The word-list of the property
+	// contains the specified Value.
+	Operator Operator `type:"string" enum:"true"`
+
+	// A value used with Resource and Operator to determin if objects statisfy the
+	// filter's condition. For numerical properties, Value must be an integer or
+	// floating-point decimal. For timestamp properties, Value must be an ISO 8601
+	// date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS.
+	Value *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Filter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Filter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Filter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Value != nil && len(*s.Value) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Shows the final value for the objective metric for a training job that was
@@ -5889,11 +10588,317 @@ func (s FinalHyperParameterTuningJobObjectiveMetric) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSearchSuggestionsRequest
+type GetSearchSuggestionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon SageMaker resource to Search for. The only valid Resource
+	// value is TrainingJob.
+	//
+	// Resource is a required field
+	Resource ResourceType `type:"string" required:"true" enum:"true"`
+
+	// Limits the property names that are included in the response.
+	SuggestionQuery *SuggestionQuery `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetSearchSuggestionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSearchSuggestionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSearchSuggestionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSearchSuggestionsInput"}
+	if len(s.Resource) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
+	}
+	if s.SuggestionQuery != nil {
+		if err := s.SuggestionQuery.Validate(); err != nil {
+			invalidParams.AddNested("SuggestionQuery", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GetSearchSuggestionsResponse
+type GetSearchSuggestionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of property names for a Resource that match a SuggestionQuery.
+	PropertyNameSuggestions []PropertyNameSuggestion `type:"list"`
+}
+
+// String returns the string representation
+func (s GetSearchSuggestionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSearchSuggestionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSearchSuggestionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Specifies configuration details for a git repository in your AWS account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfig
+type GitConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The default brach for the git repository.
+	Branch *string `min:"1" type:"string"`
+
+	// The URL where the git repository is located.
+	//
+	// RepositoryUrl is a required field
+	RepositoryUrl *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
+	// the credentials used to access the git repository. The secret must have a
+	// staging label of AWSCURRENT and must be in the following format:
+	//
+	// {"username": UserName, "password": Password}
+	SecretArn *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GitConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GitConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GitConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GitConfig"}
+	if s.Branch != nil && len(*s.Branch) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Branch", 1))
+	}
+
+	if s.RepositoryUrl == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryUrl"))
+	}
+	if s.SecretArn != nil && len(*s.SecretArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies configuration details for a git repository when the repository
+// is updated.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/GitConfigForUpdate
+type GitConfigForUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains
+	// the credentials used to access the git repository. The secret must have a
+	// staging label of AWSCURRENT and must be in the following format:
+	//
+	// {"username": UserName, "password": Password}
+	SecretArn *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GitConfigForUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GitConfigForUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GitConfigForUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GitConfigForUpdate"}
+	if s.SecretArn != nil && len(*s.SecretArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecretArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information required for human workers to complete a labeling task.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HumanTaskConfig
+type HumanTaskConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Configures how labels are consolidated across human workers.
+	//
+	// AnnotationConsolidationConfig is a required field
+	AnnotationConsolidationConfig *AnnotationConsolidationConfig `type:"structure" required:"true"`
+
+	// Defines the maximum number of data objects that can be labeled by human workers
+	// at the same time. Each object may have more than one worker at one time.
+	MaxConcurrentTaskCount *int64 `min:"1" type:"integer"`
+
+	// The number of human workers that will label an object.
+	//
+	// NumberOfHumanWorkersPerDataObject is a required field
+	NumberOfHumanWorkersPerDataObject *int64 `min:"1" type:"integer" required:"true"`
+
+	// The Amazon Resource Name (ARN) of a Lambda function that is run before a
+	// data object is sent to a human worker. Use this function to provide input
+	// to a custom labeling job.
+	//
+	// PreHumanTaskLambdaArn is a required field
+	PreHumanTaskLambdaArn *string `type:"string" required:"true"`
+
+	// The price that you pay for each task performed by a public worker.
+	PublicWorkforceTaskPrice *PublicWorkforceTaskPrice `type:"structure"`
+
+	// The length of time that a task remains available for labelling by human workers.
+	TaskAvailabilityLifetimeInSeconds *int64 `min:"1" type:"integer"`
+
+	// A description of the task for your human workers.
+	//
+	// TaskDescription is a required field
+	TaskDescription *string `min:"1" type:"string" required:"true"`
+
+	// Keywords used to describe the task so that workers on Amazon Mechanical Turk
+	// can discover the task.
+	TaskKeywords []string `min:"1" type:"list"`
+
+	// The amount of time that a worker has to complete a task.
+	//
+	// TaskTimeLimitInSeconds is a required field
+	TaskTimeLimitInSeconds *int64 `min:"1" type:"integer" required:"true"`
+
+	// A title for the task for your human workers.
+	//
+	// TaskTitle is a required field
+	TaskTitle *string `min:"1" type:"string" required:"true"`
+
+	// Information about the user interface that workers use to complete the labeling
+	// task.
+	//
+	// UiConfig is a required field
+	UiConfig *UiConfig `type:"structure" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the work team assigned to complete the
+	// tasks.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HumanTaskConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HumanTaskConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HumanTaskConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HumanTaskConfig"}
+
+	if s.AnnotationConsolidationConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AnnotationConsolidationConfig"))
+	}
+	if s.MaxConcurrentTaskCount != nil && *s.MaxConcurrentTaskCount < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxConcurrentTaskCount", 1))
+	}
+
+	if s.NumberOfHumanWorkersPerDataObject == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfHumanWorkersPerDataObject"))
+	}
+	if s.NumberOfHumanWorkersPerDataObject != nil && *s.NumberOfHumanWorkersPerDataObject < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfHumanWorkersPerDataObject", 1))
+	}
+
+	if s.PreHumanTaskLambdaArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PreHumanTaskLambdaArn"))
+	}
+	if s.TaskAvailabilityLifetimeInSeconds != nil && *s.TaskAvailabilityLifetimeInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskAvailabilityLifetimeInSeconds", 1))
+	}
+
+	if s.TaskDescription == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskDescription"))
+	}
+	if s.TaskDescription != nil && len(*s.TaskDescription) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskDescription", 1))
+	}
+	if s.TaskKeywords != nil && len(s.TaskKeywords) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskKeywords", 1))
+	}
+
+	if s.TaskTimeLimitInSeconds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskTimeLimitInSeconds"))
+	}
+	if s.TaskTimeLimitInSeconds != nil && *s.TaskTimeLimitInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("TaskTimeLimitInSeconds", 1))
+	}
+
+	if s.TaskTitle == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TaskTitle"))
+	}
+	if s.TaskTitle != nil && len(*s.TaskTitle) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TaskTitle", 1))
+	}
+
+	if s.UiConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UiConfig"))
+	}
+
+	if s.WorkteamArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamArn"))
+	}
+	if s.AnnotationConsolidationConfig != nil {
+		if err := s.AnnotationConsolidationConfig.Validate(); err != nil {
+			invalidParams.AddNested("AnnotationConsolidationConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UiConfig != nil {
+		if err := s.UiConfig.Validate(); err != nil {
+			invalidParams.AddNested("UiConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies which training algorithm to use for training jobs that a hyperparameter
 // tuning job launches and the metrics to monitor.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterAlgorithmSpecification
 type HyperParameterAlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
+
+	// The name of the resource algorithm to use for the hyperparameter tuning job.
+	// If you specify a value for this parameter, do not specify a value for TrainingImage.
+	AlgorithmName *string `min:"1" type:"string"`
 
 	// An array of MetricDefinition objects that specify the metrics that the algorithm
 	// emits.
@@ -5901,10 +10906,8 @@ type HyperParameterAlgorithmSpecification struct {
 
 	// The registry path of the Docker image that contains the training algorithm.
 	// For information about Docker registry paths for built-in algorithms, see
-	// sagemaker-algo-docker-registry-paths.
-	//
-	// TrainingImage is a required field
-	TrainingImage *string `type:"string" required:"true"`
+	// Algorithms Provided by Amazon SageMaker: Common Parameters (http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html).
+	TrainingImage *string `type:"string"`
 
 	// The input mode that the algorithm supports: File or Pipe. In File input mode,
 	// Amazon SageMaker downloads the training data from Amazon S3 to the storage
@@ -5936,9 +10939,8 @@ func (s HyperParameterAlgorithmSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HyperParameterAlgorithmSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HyperParameterAlgorithmSpecification"}
-
-	if s.TrainingImage == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TrainingImage"))
+	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
 	}
 	if len(s.TrainingInputMode) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TrainingInputMode"))
@@ -5948,6 +10950,72 @@ func (s *HyperParameterAlgorithmSpecification) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricDefinitions", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a hyperparameter to be used by an algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterSpecification
+type HyperParameterSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The default value for this hyperparameter. If a default value is specified,
+	// a hyperparameter cannot be required.
+	DefaultValue *string `type:"string"`
+
+	// A brief description of the hyperparameter.
+	Description *string `type:"string"`
+
+	// Indicates whether this hyperparameter is required.
+	IsRequired *bool `type:"boolean"`
+
+	// Indicates whether this hyperparameter is tunable in a hyperparameter tuning
+	// job.
+	IsTunable *bool `type:"boolean"`
+
+	// The name of this hyperparameter. The name must be unique.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The allowed range for this hyperparameter.
+	Range *ParameterRange `type:"structure"`
+
+	// The type of this hyperparameter. The valid types are Integer, Continuous,
+	// Categorical, and FreeText.
+	//
+	// Type is a required field
+	Type ParameterType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s HyperParameterSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HyperParameterSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HyperParameterSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HyperParameterSpecification"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+	if s.Range != nil {
+		if err := s.Range.Validate(); err != nil {
+			invalidParams.AddNested("Range", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5968,11 +11036,19 @@ type HyperParameterTrainingJobDefinition struct {
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *HyperParameterAlgorithmSpecification `type:"structure" required:"true"`
 
+	// Isolates the training container. No inbound or outbound network calls can
+	// be made, except for calls between peers within a training cluster for distributed
+	// training. If network isolation is used for training jobs that are configured
+	// to use a VPC, Amazon SageMaker downloads and uploads customer data and model
+	// artifacts through the specifed VPC, but the training container does not have
+	// network access.
+	//
+	// The Semantic Segmentation built-in algorithm does not support network isolation.
+	EnableNetworkIsolation *bool `type:"boolean"`
+
 	// An array of Channel objects that specify the input for the training jobs
 	// that the tuning job launches.
-	//
-	// InputDataConfig is a required field
-	InputDataConfig []Channel `min:"1" type:"list" required:"true"`
+	InputDataConfig []Channel `min:"1" type:"list"`
 
 	// Specifies the path to the Amazon S3 bucket where you store model artifacts
 	// from the training jobs that the tuning job launches.
@@ -6019,7 +11095,7 @@ type HyperParameterTrainingJobDefinition struct {
 	// The VpcConfig object that specifies the VPC that you want the training jobs
 	// that this hyperparameter tuning job launches to connect to. Control access
 	// to and from your training container by configuring the VPC. For more information,
-	// see train-vpc.
+	// see Protect Training Jobs by Using an Amazon Virtual Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -6039,10 +11115,6 @@ func (s *HyperParameterTrainingJobDefinition) Validate() error {
 
 	if s.AlgorithmSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlgorithmSpecification"))
-	}
-
-	if s.InputDataConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("InputDataConfig"))
 	}
 	if s.InputDataConfig != nil && len(s.InputDataConfig) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputDataConfig", 1))
@@ -6162,6 +11234,9 @@ type HyperParameterTrainingJobSummary struct {
 	//
 	// TunedHyperParameters is a required field
 	TunedHyperParameters map[string]string `type:"map" required:"true"`
+
+	// The name of the hyperparameter tuning job that launched this training job.
+	TuningJobName *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -6368,6 +11443,269 @@ func (s HyperParameterTuningJobSummary) GoString() string {
 	return s.String()
 }
 
+// Specifies the configuration for a hyperparameter tuning job that uses one
+// or more previous hyperparameter tuning jobs as a starting point. The results
+// of previous tuning jobs are used to inform which combinations of hyperparameters
+// to search over in the new tuning job.
+//
+// All training jobs launched by the new hyperparameter tuning job are evaluated
+// by using the objective metric, and the training job that performs the best
+// is compared to the best training jobs from the parent tuning jobs. From these,
+// the training job that performs the best as measured by the objective metric
+// is returned as the overall best training job.
+//
+// All training jobs launched by parent hyperparameter tuning jobs and the new
+// hyperparameter tuning jobs count against the limit of training jobs for the
+// tuning job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobWarmStartConfig
+type HyperParameterTuningJobWarmStartConfig struct {
+	_ struct{} `type:"structure"`
+
+	// An array of hyperparameter tuning jobs that are used as the starting point
+	// for the new hyperparameter tuning job. For more information about warm starting
+	// a hyperparameter tuning job, see Using a Previous Hyperparameter Tuning Job
+	// as a Starting Point (http://docs.aws.amazon.com/automatic-model-tuning-incremental).
+	//
+	// Hyperparameter tuning jobs created before October 1, 2018 cannot be used
+	// as parent jobs for warm start tuning jobs.
+	//
+	// ParentHyperParameterTuningJobs is a required field
+	ParentHyperParameterTuningJobs []ParentHyperParameterTuningJob `min:"1" type:"list" required:"true"`
+
+	// Specifies one of the following:
+	//
+	// IDENTICAL_DATA_AND_ALGORITHMThe new hyperparameter tuning job uses the same
+	// input data and training image as the parent tuning jobs. You can change the
+	// hyperparameter ranges to search and the maximum number of training jobs that
+	// the hyperparameter tuning job launches. You cannot use a new version of the
+	// training algorithm, unless the changes in the new version do not affect the
+	// algorithm itself. For example, changes that improve logging or adding support
+	// for a different data format are allowed. You can also change hyperparameters
+	// from tunable to static, and from static to tunable, but the total number
+	// of static plus tunable hyperparameters must remain the same as it is in all
+	// parent jobs. The objective metric for the new tuning job must be the same
+	// as for all parent jobs.
+	//
+	// TRANSFER_LEARNINGThe new hyperparameter tuning job can include input data,
+	// hyperparameter ranges, maximum number of concurrent training jobs, and maximum
+	// number of training jobs that are different than those of its parent hyperparameter
+	// tuning jobs. The training image can also be a different version from the
+	// version used in the parent hyperparameter tuning job. You can also change
+	// hyperparameters from tunable to static, and from static to tunable, but the
+	// total number of static plus tunable hyperparameters must remain the same
+	// as it is in all parent jobs. The objective metric for the new tuning job
+	// must be the same as for all parent jobs.
+	//
+	// WarmStartType is a required field
+	WarmStartType HyperParameterTuningJobWarmStartType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s HyperParameterTuningJobWarmStartConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HyperParameterTuningJobWarmStartConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HyperParameterTuningJobWarmStartConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HyperParameterTuningJobWarmStartConfig"}
+
+	if s.ParentHyperParameterTuningJobs == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ParentHyperParameterTuningJobs"))
+	}
+	if s.ParentHyperParameterTuningJobs != nil && len(s.ParentHyperParameterTuningJobs) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ParentHyperParameterTuningJobs", 1))
+	}
+	if len(s.WarmStartType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("WarmStartType"))
+	}
+	if s.ParentHyperParameterTuningJobs != nil {
+		for i, v := range s.ParentHyperParameterTuningJobs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParentHyperParameterTuningJobs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines how to perform inference generation after a training job is run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceSpecification
+type InferenceSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon ECR registry path of the Docker image that contains the inference
+	// code.
+	//
+	// Containers is a required field
+	Containers []ModelPackageContainerDefinition `min:"1" type:"list" required:"true"`
+
+	// The supported MIME types for the input data.
+	//
+	// SupportedContentTypes is a required field
+	SupportedContentTypes []string `type:"list" required:"true"`
+
+	// A list of the instance types that are used to generate inferences in real-time.
+	//
+	// SupportedRealtimeInferenceInstanceTypes is a required field
+	SupportedRealtimeInferenceInstanceTypes []ProductionVariantInstanceType `type:"list" required:"true"`
+
+	// The supported MIME types for the output data.
+	//
+	// SupportedResponseMIMETypes is a required field
+	SupportedResponseMIMETypes []string `type:"list" required:"true"`
+
+	// A list of the instance types on which a transformation job can be run or
+	// on which an endpoint can be deployed.
+	//
+	// SupportedTransformInstanceTypes is a required field
+	SupportedTransformInstanceTypes []TransformInstanceType `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s InferenceSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InferenceSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InferenceSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InferenceSpecification"}
+
+	if s.Containers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Containers"))
+	}
+	if s.Containers != nil && len(s.Containers) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Containers", 1))
+	}
+
+	if s.SupportedContentTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedContentTypes"))
+	}
+
+	if s.SupportedRealtimeInferenceInstanceTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedRealtimeInferenceInstanceTypes"))
+	}
+
+	if s.SupportedResponseMIMETypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedResponseMIMETypes"))
+	}
+
+	if s.SupportedTransformInstanceTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedTransformInstanceTypes"))
+	}
+	if s.SupportedTransformInstanceTypes != nil && len(s.SupportedTransformInstanceTypes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SupportedTransformInstanceTypes", 1))
+	}
+	if s.Containers != nil {
+		for i, v := range s.Containers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Containers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Contains information about the location of input model artifacts, the name
+// and shape of the expected data inputs, and the framework in which the model
+// was trained.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InputConfig
+type InputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the name and shape of the expected data inputs for your trained
+	// model with a JSON dictionary form. The data inputs are InputConfig$Framework
+	// specific.
+	//
+	//    * TENSORFLOW, MXNET and ONNX: You must specify the name and shape of the
+	//    expected data inputs in order using a dictionary format for your trained
+	//    model.
+	//
+	// Example of one input: {‘data’:[1,3,1024,1024]}}
+	//
+	// Example for two inputs: {‘var1’: [1,1,28,28], ‘var2’:[1,1,28,28]}
+	//
+	//    * PYTORCH: You can either specify the name and shape of expected data
+	//    inputs in order using a dictionary format for your trained model or you
+	//    can specify the shape only using a list format.
+	//
+	// Example of one input in dictionary format: {‘input0’:[1,3,224,234]}
+	//
+	// Example of one input in list format: [1,3,224,224]
+	//
+	// Example of two inputs in dictionary format: {‘input0’:[1,3,224,234], 'input1':[1,3,224,224]}
+	//
+	// Example of two inputs in list format: [[1,3,224,224], [1,3,224,224]]
+	//
+	//    * XGBOOST: input data name and shape are not needed.
+	//
+	// DataInputConfig is a required field
+	DataInputConfig *string `min:"1" type:"string" required:"true"`
+
+	// Identifies the framework in which the model was trained. For example: TENSORFLOW.
+	//
+	// Framework is a required field
+	Framework Framework `type:"string" required:"true" enum:"true"`
+
+	// The S3 path where the model artifacts, which result from model training,
+	// are stored. This path must point to a single gzip compressed tar archive
+	// (.tar.gz suffix).
+	//
+	// S3Uri is a required field
+	S3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s InputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InputConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputConfig"}
+
+	if s.DataInputConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataInputConfig"))
+	}
+	if s.DataInputConfig != nil && len(*s.DataInputConfig) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DataInputConfig", 1))
+	}
+	if len(s.Framework) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Framework"))
+	}
+
+	if s.S3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // For a hyperparameter of the integer type, specifies the range that a hyperparameter
 // tuning job searches.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRange
@@ -6420,6 +11758,825 @@ func (s *IntegerParameterRange) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Defines the possible values for an integer hyperparameter.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRangeSpecification
+type IntegerParameterRangeSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum integer value allowed.
+	//
+	// MaxValue is a required field
+	MaxValue *string `type:"string" required:"true"`
+
+	// The minimum integer value allowed.
+	//
+	// MinValue is a required field
+	MinValue *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s IntegerParameterRangeSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IntegerParameterRangeSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IntegerParameterRangeSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IntegerParameterRangeSpecification"}
+
+	if s.MaxValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaxValue"))
+	}
+
+	if s.MinValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides a breakdown of the number of objects labeled.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelCounters
+type LabelCounters struct {
+	_ struct{} `type:"structure"`
+
+	// The total number of objects that could not be labeled due to an error.
+	FailedNonRetryableError *int64 `type:"integer"`
+
+	// The total number of objects labeled by a human worker.
+	HumanLabeled *int64 `type:"integer"`
+
+	// The total number of objects labeled by automated data labeling.
+	MachineLabeled *int64 `type:"integer"`
+
+	// The total number of objects labeled.
+	TotalLabeled *int64 `type:"integer"`
+
+	// The total number of objects not yet labeled.
+	Unlabeled *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s LabelCounters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelCounters) GoString() string {
+	return s.String()
+}
+
+// Provides counts for human-labeled tasks in the labeling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelCountersForWorkteam
+type LabelCountersForWorkteam struct {
+	_ struct{} `type:"structure"`
+
+	// The total number of data objects labeled by a human worker.
+	HumanLabeled *int64 `type:"integer"`
+
+	// The total number of data objects that need to be labeled by a human worker.
+	PendingHuman *int64 `type:"integer"`
+
+	// The total number of tasks in the labeling job.
+	Total *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s LabelCountersForWorkteam) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelCountersForWorkteam) GoString() string {
+	return s.String()
+}
+
+// Provides configuration information for auto-labeling of your data objects.
+// A LabelingJobAlgorithmsConfig object must be supplied in order to use auto-labeling.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobAlgorithmsConfig
+type LabelingJobAlgorithmsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// At the end of an auto-label job Amazon SageMaker Ground Truth sends the Amazon
+	// Resource Nam (ARN) of the final model used for auto-labeling. You can use
+	// this model as the starting point for subsequent similar jobs by providing
+	// the ARN of the model here.
+	InitialActiveLearningModelArn *string `min:"20" type:"string"`
+
+	// Specifies the Amazon Resource Name (ARN) of the algorithm used for auto-labeling.
+	// You must select one of the following ARNs:
+	//
+	//    * Image classification
+	//
+	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/image-classification
+	//
+	//    * Text classification
+	//
+	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/text-classification
+	//
+	//    * Object detection
+	//
+	// arn:aws:sagemaker:region:027400017018:labeling-job-algorithm-specification/object-detection
+	//
+	// LabelingJobAlgorithmSpecificationArn is a required field
+	LabelingJobAlgorithmSpecificationArn *string `type:"string" required:"true"`
+
+	// Provides configuration information for a labeling job.
+	LabelingJobResourceConfig *LabelingJobResourceConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s LabelingJobAlgorithmsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobAlgorithmsConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LabelingJobAlgorithmsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LabelingJobAlgorithmsConfig"}
+	if s.InitialActiveLearningModelArn != nil && len(*s.InitialActiveLearningModelArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("InitialActiveLearningModelArn", 20))
+	}
+
+	if s.LabelingJobAlgorithmSpecificationArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LabelingJobAlgorithmSpecificationArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Attributes of the data specified by the customer. Use these to describe the
+// data to be labeled.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataAttributes
+type LabelingJobDataAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// Declares that your content is free of personally identifiable information
+	// or adult content. Amazon SageMaker may restrict the Amazon Mechanical Turk
+	// workers that can view your task based on this information.
+	ContentClassifiers []ContentClassifier `type:"list"`
+}
+
+// String returns the string representation
+func (s LabelingJobDataAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobDataAttributes) GoString() string {
+	return s.String()
+}
+
+// Provides information about the location of input data.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobDataSource
+type LabelingJobDataSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 location of the input data objects.
+	//
+	// S3DataSource is a required field
+	S3DataSource *LabelingJobS3DataSource `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobDataSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobDataSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LabelingJobDataSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LabelingJobDataSource"}
+
+	if s.S3DataSource == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3DataSource"))
+	}
+	if s.S3DataSource != nil {
+		if err := s.S3DataSource.Validate(); err != nil {
+			invalidParams.AddNested("S3DataSource", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides summary information for a work team.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobForWorkteamSummary
+type LabelingJobForWorkteamSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time that the labeling job was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// A unique identifier for a labeling job. You can use this to refer to a specific
+	// labeling job.
+	//
+	// JobReferenceCode is a required field
+	JobReferenceCode *string `min:"1" type:"string" required:"true"`
+
+	// Provides information about the progress of a labeling job.
+	LabelCounters *LabelCountersForWorkteam `type:"structure"`
+
+	// The name of the labeling job that the work team is assigned to.
+	LabelingJobName *string `min:"1" type:"string"`
+
+	// WorkRequesterAccountId is a required field
+	WorkRequesterAccountId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobForWorkteamSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobForWorkteamSummary) GoString() string {
+	return s.String()
+}
+
+// Input configuration information for a labeling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobInputConfig
+type LabelingJobInputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Attributes of the data specified by the customer.
+	DataAttributes *LabelingJobDataAttributes `type:"structure"`
+
+	// The location of the input data.
+	//
+	// DataSource is a required field
+	DataSource *LabelingJobDataSource `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobInputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobInputConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LabelingJobInputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LabelingJobInputConfig"}
+
+	if s.DataSource == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataSource"))
+	}
+	if s.DataSource != nil {
+		if err := s.DataSource.Validate(); err != nil {
+			invalidParams.AddNested("DataSource", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies the location of the output produced by the labeling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutput
+type LabelingJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the most recent Amazon SageMaker model
+	// trained as part of automated data labeling.
+	FinalActiveLearningModelArn *string `min:"20" type:"string"`
+
+	// The Amazon S3 bucket location of the manifest file for labeled data.
+	//
+	// OutputDatasetS3Uri is a required field
+	OutputDatasetS3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobOutput) GoString() string {
+	return s.String()
+}
+
+// Output configuration information for a labeling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutputConfig
+type LabelingJobOutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Key Management Service ID of the key used to encrypt the output data,
+	// if any.
+	KmsKeyId *string `type:"string"`
+
+	// The Amazon S3 location to write output data.
+	//
+	// S3OutputPath is a required field
+	S3OutputPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobOutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobOutputConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LabelingJobOutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LabelingJobOutputConfig"}
+
+	if s.S3OutputPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3OutputPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides configuration information for labeling jobs.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobResourceConfig
+type LabelingJobResourceConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS Key Management Service key ID for the key used to encrypt the output
+	// data, if any.
+	VolumeKmsKeyId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LabelingJobResourceConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobResourceConfig) GoString() string {
+	return s.String()
+}
+
+// The Amazon S3 location of the input data objects.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobS3DataSource
+type LabelingJobS3DataSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 location of the manifest file that describes the input data
+	// objects.
+	//
+	// ManifestS3Uri is a required field
+	ManifestS3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobS3DataSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobS3DataSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LabelingJobS3DataSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LabelingJobS3DataSource"}
+
+	if s.ManifestS3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ManifestS3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A set of conditions for stopping a labeling job. If any of the conditions
+// are met, the job is automatically stopped. You can use these conditions to
+// control the cost of data labeling.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobStoppingConditions
+type LabelingJobStoppingConditions struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of objects that can be labeled by human workers.
+	MaxHumanLabeledObjectCount *int64 `min:"1" type:"integer"`
+
+	// The maximum number of input data objects that should be labeled.
+	MaxPercentageOfInputDatasetLabeled *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s LabelingJobStoppingConditions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobStoppingConditions) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LabelingJobStoppingConditions) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LabelingJobStoppingConditions"}
+	if s.MaxHumanLabeledObjectCount != nil && *s.MaxHumanLabeledObjectCount < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxHumanLabeledObjectCount", 1))
+	}
+	if s.MaxPercentageOfInputDatasetLabeled != nil && *s.MaxPercentageOfInputDatasetLabeled < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxPercentageOfInputDatasetLabeled", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides summary information about a labeling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobSummary
+type LabelingJobSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Lambda function used to consolidate
+	// the annotations from individual workers into a label for a data object. For
+	// more information, see Annotation Consolidation (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
+	AnnotationConsolidationLambdaArn *string `type:"string"`
+
+	// The date and time that the job was created (timestamp).
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// If the LabelingJobStatus field is Failed, this field contains a description
+	// of the error.
+	FailureReason *string `type:"string"`
+
+	// Input configuration for the labeling job.
+	InputConfig *LabelingJobInputConfig `type:"structure"`
+
+	// Counts showing the progress of the labeling job.
+	//
+	// LabelCounters is a required field
+	LabelCounters *LabelCounters `type:"structure" required:"true"`
+
+	// The Amazon Resource Name (ARN) assigned to the labeling job when it was created.
+	//
+	// LabelingJobArn is a required field
+	LabelingJobArn *string `type:"string" required:"true"`
+
+	// The name of the labeling job.
+	//
+	// LabelingJobName is a required field
+	LabelingJobName *string `min:"1" type:"string" required:"true"`
+
+	// The location of the output produced by the labeling job.
+	LabelingJobOutput *LabelingJobOutput `type:"structure"`
+
+	// The current status of the labeling job.
+	//
+	// LabelingJobStatus is a required field
+	LabelingJobStatus LabelingJobStatus `type:"string" required:"true" enum:"true"`
+
+	// The date and time that the job was last modified (timestamp).
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The Amazon Resource Name (ARN) of a Lambda function. The function is run
+	// before each data object is sent to a worker.
+	//
+	// PreHumanTaskLambdaArn is a required field
+	PreHumanTaskLambdaArn *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the work team assigned to the job.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s LabelingJobSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LabelingJobSummary) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAlgorithmsInput
+type ListAlgorithmsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns only algorithms created after the specified time (timestamp).
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only algorithms created before the specified time (timestamp).
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of algorithms to return in the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the algorithm name. This filter returns only algorithms whose
+	// name contains the specified string.
+	NameContains *string `type:"string"`
+
+	// If the response to a previous ListAlgorithms request was truncated, the response
+	// includes a NextToken. To retrieve the next set of algorithms, use the token
+	// in the next request.
+	NextToken *string `type:"string"`
+
+	// The parameter by which to sort the results. The default is CreationTime.
+	SortBy AlgorithmSortBy `type:"string" enum:"true"`
+
+	// The sort order for the results. The default is Ascending.
+	SortOrder SortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListAlgorithmsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAlgorithmsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListAlgorithmsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListAlgorithmsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListAlgorithmsOutput
+type ListAlgorithmsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// >An array of AlgorithmSummary objects, each of which lists an algorithm.
+	//
+	// AlgorithmSummaryList is a required field
+	AlgorithmSummaryList []AlgorithmSummary `type:"list" required:"true"`
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of algorithms, use it in the subsequent request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListAlgorithmsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAlgorithmsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAlgorithmsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositoriesInput
+type ListCodeRepositoriesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns only git repositories that were created after the specified
+	// time.
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only git repositories that were created before the
+	// specified time.
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only git repositories that were last modified after
+	// the specified time.
+	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only git repositories that were last modified before
+	// the specified time.
+	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of git repositories to return in the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the git repositories name. This filter returns only repositories
+	// whose name contains the specified string.
+	NameContains *string `type:"string"`
+
+	// If the result of a ListCodeRepositoriesOutput request was truncated, the
+	// response includes a NextToken. To get the next set of git repositories, use
+	// the token in the next request.
+	NextToken *string `type:"string"`
+
+	// The field to sort results by. The default is Name.
+	SortBy CodeRepositorySortBy `type:"string" enum:"true"`
+
+	// The sort order for results. The default is Ascending.
+	SortOrder CodeRepositorySortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListCodeRepositoriesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCodeRepositoriesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListCodeRepositoriesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListCodeRepositoriesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCodeRepositoriesOutput
+type ListCodeRepositoriesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Gets a list of summaries of the git repositories. Each summary specifies
+	// the following values for the repository:
+	//
+	//    * Name
+	//
+	//    * Amazon Resource Name (ARN)
+	//
+	//    * Creation time
+	//
+	//    * Last modified time
+	//
+	//    * Configuration information, including the URL location of the repository
+	//    and the ARN of the AWS Secrets Manager secret that contains the credentials
+	//    used to access the repository.
+	//
+	//    *
+	//
+	// CodeRepositorySummaryList is a required field
+	CodeRepositorySummaryList []CodeRepositorySummary `type:"list" required:"true"`
+
+	// If the result of a ListCodeRepositoriesOutput request was truncated, the
+	// response includes a NextToken. To get the next set of git repositories, use
+	// the token in the next request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListCodeRepositoriesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCodeRepositoriesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCodeRepositoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobsRequest
+type ListCompilationJobsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns the model compilation jobs that were created after
+	// a specified time.
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns the model compilation jobs that were created before
+	// a specified time.
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns the model compilation jobs that were modified after
+	// a specified time.
+	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns the model compilation jobs that were modified before
+	// a specified time.
+	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of model compilation jobs to return in the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A filter that returns the model compilation jobs whose name contains a specified
+	// string.
+	NameContains *string `type:"string"`
+
+	// If the result of the previous ListCompilationJobs request was truncated,
+	// the response includes a NextToken. To retrieve the next set of model compilation
+	// jobs, use the token in the next request.
+	NextToken *string `type:"string"`
+
+	// A filter that retrieves model compilation jobs with a specific DescribeCompilationJobResponse$CompilationJobStatus
+	// status.
+	StatusEquals CompilationJobStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListCompilationJobsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCompilationJobsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListCompilationJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListCompilationJobsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListCompilationJobsResponse
+type ListCompilationJobsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of CompilationJobSummary objects, each describing a model compilation
+	// job.
+	//
+	// CompilationJobSummaries is a required field
+	CompilationJobSummaries []CompilationJobSummary `type:"list" required:"true"`
+
+	// If the response is truncated, Amazon SageMaker returns this NextToken. To
+	// retrieve the next set of model compilation jobs, use this token in the next
+	// request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListCompilationJobsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListCompilationJobsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListCompilationJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListEndpointConfigsInput
@@ -6701,6 +12858,283 @@ func (s ListHyperParameterTuningJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteamRequest
+type ListLabelingJobsForWorkteamInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns only labeling jobs created after the specified time
+	// (timestamp).
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only labeling jobs created before the specified time
+	// (timestamp).
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter the limits jobs to only the ones whose job reference code contains
+	// the specified string.
+	JobReferenceCodeContains *string `min:"1" type:"string"`
+
+	// The maximum number of labeling jobs to return in each page of the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If the result of the previous ListLabelingJobsForWorkteam request was truncated,
+	// the response includes a NextToken. To retrieve the next set of labeling jobs,
+	// use the token in the next request.
+	NextToken *string `type:"string"`
+
+	// The field to sort results by. The default is CreationTime.
+	SortBy ListLabelingJobsForWorkteamSortByOptions `type:"string" enum:"true"`
+
+	// The sort order for results. The default is Ascending.
+	SortOrder SortOrder `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the work team for which you want to see
+	// labeling jobs for.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListLabelingJobsForWorkteamInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListLabelingJobsForWorkteamInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListLabelingJobsForWorkteamInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListLabelingJobsForWorkteamInput"}
+	if s.JobReferenceCodeContains != nil && len(*s.JobReferenceCodeContains) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobReferenceCodeContains", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if s.WorkteamArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsForWorkteamResponse
+type ListLabelingJobsForWorkteamOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of LabelingJobSummary objects, each describing a labeling job.
+	//
+	// LabelingJobSummaryList is a required field
+	LabelingJobSummaryList []LabelingJobForWorkteamSummary `type:"list" required:"true"`
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of labeling jobs, use it in the subsequent request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListLabelingJobsForWorkteamOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListLabelingJobsForWorkteamOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLabelingJobsForWorkteamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsRequest
+type ListLabelingJobsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns only labeling jobs created after the specified time
+	// (timestamp).
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only labeling jobs created before the specified time
+	// (timestamp).
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only labeling jobs modified after the specified time
+	// (timestamp).
+	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only labeling jobs modified before the specified time
+	// (timestamp).
+	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of labeling jobs to return in each page of the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the labeling job name. This filter returns only labeling jobs
+	// whose name contains the specified string.
+	NameContains *string `type:"string"`
+
+	// If the result of the previous ListLabelingJobs request was truncated, the
+	// response includes a NextToken. To retrieve the next set of labeling jobs,
+	// use the token in the next request.
+	NextToken *string `type:"string"`
+
+	// The field to sort results by. The default is CreationTime.
+	SortBy SortBy `type:"string" enum:"true"`
+
+	// The sort order for results. The default is Ascending.
+	SortOrder SortOrder `type:"string" enum:"true"`
+
+	// A filter that retrieves only labeling jobs with a specific status.
+	StatusEquals LabelingJobStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListLabelingJobsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListLabelingJobsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListLabelingJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListLabelingJobsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListLabelingJobsResponse
+type ListLabelingJobsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of LabelingJobSummary objects, each describing a labeling job.
+	LabelingJobSummaryList []LabelingJobSummary `type:"list"`
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of labeling jobs, use it in the subsequent request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListLabelingJobsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListLabelingJobsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListLabelingJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackagesInput
+type ListModelPackagesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns only model packages created after the specified time
+	// (timestamp).
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only model packages created before the specified time
+	// (timestamp).
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of model packages to return in the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the model package name. This filter returns only model packages
+	// whose name contains the specified string.
+	NameContains *string `type:"string"`
+
+	// If the response to a previous ListModelPackages request was truncated, the
+	// response includes a NextToken. To retrieve the next set of model packages,
+	// use the token in the next request.
+	NextToken *string `type:"string"`
+
+	// The parameter by which to sort the results. The default is CreationTime.
+	SortBy ModelPackageSortBy `type:"string" enum:"true"`
+
+	// The sort order for the results. The default is Ascending.
+	SortOrder SortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListModelPackagesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListModelPackagesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListModelPackagesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListModelPackagesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackagesOutput
+type ListModelPackagesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An array of ModelPackageSummary objects, each of which lists a model package.
+	//
+	// ModelPackageSummaryList is a required field
+	ModelPackageSummaryList []ModelPackageSummary `type:"list" required:"true"`
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of model packages, use it in the subsequent request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListModelPackagesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListModelPackagesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListModelPackagesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsInput
 type ListModelsInput struct {
 	_ struct{} `type:"structure"`
@@ -6880,6 +13314,10 @@ func (s ListNotebookInstanceLifecycleConfigsOutput) SDKResponseMetadata() aws.Re
 type ListNotebookInstancesInput struct {
 	_ struct{} `type:"structure"`
 
+	// A filter that returns only notebook instances with associated with the specified
+	// git respository.
+	AdditionalCodeRepositoryEquals *string `min:"1" type:"string"`
+
 	// A filter that returns only notebook instances that were created after the
 	// specified time (timestamp).
 	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -6887,6 +13325,11 @@ type ListNotebookInstancesInput struct {
 	// A filter that returns only notebook instances that were created before the
 	// specified time (timestamp).
 	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A string in the name or URL of a git repository associated with this notebook
+	// instance. This filter returns only notebook instances associated with a git
+	// repository with a name that contains the specified string.
+	DefaultCodeRepositoryContains *string `type:"string"`
 
 	// A filter that returns only notebook instances that were modified after the
 	// specified time (timestamp).
@@ -6941,6 +13384,9 @@ func (s ListNotebookInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListNotebookInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListNotebookInstancesInput"}
+	if s.AdditionalCodeRepositoryEquals != nil && len(*s.AdditionalCodeRepositoryEquals) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AdditionalCodeRepositoryEquals", 1))
+	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
@@ -6978,6 +13424,80 @@ func (s ListNotebookInstancesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListNotebookInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSubscribedWorkteamsRequest
+type ListSubscribedWorkteamsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of work teams to return in each page of the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the work team name. This filter returns only work teams whose
+	// name contains the specified string.
+	NameContains *string `min:"1" type:"string"`
+
+	// If the result of the previous ListSubscribedWorkteams request was truncated,
+	// the response includes a NextToken. To retrieve the next set of labeling jobs,
+	// use the token in the next request.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListSubscribedWorkteamsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSubscribedWorkteamsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSubscribedWorkteamsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSubscribedWorkteamsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NameContains != nil && len(*s.NameContains) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListSubscribedWorkteamsResponse
+type ListSubscribedWorkteamsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of work teams, use it in the subsequent request.
+	NextToken *string `type:"string"`
+
+	// An array of Workteam objects, each describing a work team.
+	//
+	// SubscribedWorkteams is a required field
+	SubscribedWorkteams []SubscribedWorkteam `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ListSubscribedWorkteamsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSubscribedWorkteamsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSubscribedWorkteamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7337,8 +13857,148 @@ func (s ListTransformJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteamsRequest
+type ListWorkteamsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of work teams to return in each page of the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the work team's name. This filter returns only work teams whose
+	// name contains the specified string.
+	NameContains *string `min:"1" type:"string"`
+
+	// If the result of the previous ListWorkteams request was truncated, the response
+	// includes a NextToken. To retrieve the next set of labeling jobs, use the
+	// token in the next request.
+	NextToken *string `type:"string"`
+
+	// The field to sort results by. The default is CreationTime.
+	SortBy ListWorkteamsSortByOptions `type:"string" enum:"true"`
+
+	// The sort order for results. The default is Ascending.
+	SortOrder SortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListWorkteamsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWorkteamsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListWorkteamsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListWorkteamsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NameContains != nil && len(*s.NameContains) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListWorkteamsResponse
+type ListWorkteamsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of work teams, use it in the subsequent request.
+	NextToken *string `type:"string"`
+
+	// An array of Workteam objects, each describing a work team.
+	//
+	// Workteams is a required field
+	Workteams []Workteam `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ListWorkteamsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWorkteamsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWorkteamsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Defines the Amazon Cognito user group that is part of a work team.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MemberDefinition
+type MemberDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Cognito user group that is part of the work team.
+	CognitoMemberDefinition *CognitoMemberDefinition `type:"structure"`
+}
+
+// String returns the string representation
+func (s MemberDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MemberDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MemberDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MemberDefinition"}
+	if s.CognitoMemberDefinition != nil {
+		if err := s.CognitoMemberDefinition.Validate(); err != nil {
+			invalidParams.AddNested("CognitoMemberDefinition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The name, value, and date and time of a metric that was emitted to Amazon
+// CloudWatch.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricData
+type MetricData struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the metric.
+	MetricName *string `min:"1" type:"string"`
+
+	// The date and time that the algorithm emitted the metric.
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The value of the metric.
+	Value *float64 `type:"float"`
+}
+
+// String returns the string representation
+func (s MetricData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MetricData) GoString() string {
+	return s.String()
+}
+
 // Specifies a metric that the training algorithm writes to stderr or stdout.
-// Amazon SageMakerHyperparamter tuning captures all defined metrics. You specify
+// Amazon SageMakerhyperparameter tuning captures all defined metrics. You specify
 // one metric that a hyperparameter tuning job uses as its objective metric
 // to choose the best training job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition
@@ -7352,7 +14012,7 @@ type MetricDefinition struct {
 
 	// A regular expression that searches the output of a training job and gets
 	// the value of the metric. For more information about using regular expressions
-	// to define metrics, see automatic-model-tuning-define-metrics.
+	// to define metrics, see Defining Objective Metrics (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html).
 	//
 	// Regex is a required field
 	Regex *string `min:"1" type:"string" required:"true"`
@@ -7415,6 +14075,270 @@ func (s ModelArtifacts) GoString() string {
 	return s.String()
 }
 
+// Describes the Docker container for the model package.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageContainerDefinition
+type ModelPackageContainerDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// The DNS host name for the Docker container.
+	ContainerHostname *string `type:"string"`
+
+	// The Amazon EC2 Container Registry path where inference code is stored.
+	//
+	// If you are using your own custom algorithm instead of an algorithm provided
+	// by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements.
+	// Amazon SageMaker supports both registry/repository[:tag] and registry/repository[@digest]
+	// image path formats. For more information, see Using Your Own Algorithms with
+	// Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html).
+	//
+	// Image is a required field
+	Image *string `type:"string" required:"true"`
+
+	// An MD5 hash of the training algorithm that identifies the Docker image used
+	// for training.
+	ImageDigest *string `type:"string"`
+
+	// The Amazon S3 path where the model artifacts, which result from model training,
+	// are stored. This path must point to a single gzip compressed tar archive
+	// (.tar.gz suffix).
+	ModelDataUrl *string `type:"string"`
+
+	// The ID of the model package.
+	ProductId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ModelPackageContainerDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModelPackageContainerDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModelPackageContainerDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModelPackageContainerDefinition"}
+
+	if s.Image == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies the validation and image scan statuses of the model package.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusDetails
+type ModelPackageStatusDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The status of the scan of the Docker image container for the model package.
+	ImageScanStatuses []ModelPackageStatusItem `type:"list"`
+
+	// The status of the validation of the model package.
+	//
+	// ValidationStatuses is a required field
+	ValidationStatuses []ModelPackageStatusItem `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ModelPackageStatusDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModelPackageStatusDetails) GoString() string {
+	return s.String()
+}
+
+// Represents the overall status of a model package.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageStatusItem
+type ModelPackageStatusItem struct {
+	_ struct{} `type:"structure"`
+
+	// The reason for failure, if the overall status is a failed state.
+	FailureReason *string `type:"string"`
+
+	// The name of the model package for which the overall status is being repoorted.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The current status.
+	//
+	// Status is a required field
+	Status DetailedModelPackageStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ModelPackageStatusItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModelPackageStatusItem) GoString() string {
+	return s.String()
+}
+
+// Provides summary information about a model package.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageSummary
+type ModelPackageSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp that shows when the model package was created.
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the model package.
+	//
+	// ModelPackageArn is a required field
+	ModelPackageArn *string `min:"1" type:"string" required:"true"`
+
+	// A brief statement describing the model package.
+	ModelPackageDescription *string `type:"string"`
+
+	// The name of the model package.
+	//
+	// ModelPackageName is a required field
+	ModelPackageName *string `min:"1" type:"string" required:"true"`
+
+	// The overall status of the model package.
+	//
+	// ModelPackageStatus is a required field
+	ModelPackageStatus ModelPackageStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ModelPackageSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModelPackageSummary) GoString() string {
+	return s.String()
+}
+
+// Contains data such as the inputs and targeted instance types that are used
+// in the process of validating the model package.
+//
+// The data provided in the validation profile is made available to your buyers
+// on AWS Marketplace.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationProfile
+type ModelPackageValidationProfile struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the profile for the model package.
+	//
+	// ProfileName is a required field
+	ProfileName *string `min:"1" type:"string" required:"true"`
+
+	// The TransformJobDefinition object that describes the transform job used for
+	// the validation of the model package.
+	//
+	// TransformJobDefinition is a required field
+	TransformJobDefinition *TransformJobDefinition `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ModelPackageValidationProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModelPackageValidationProfile) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModelPackageValidationProfile) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModelPackageValidationProfile"}
+
+	if s.ProfileName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProfileName"))
+	}
+	if s.ProfileName != nil && len(*s.ProfileName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProfileName", 1))
+	}
+
+	if s.TransformJobDefinition == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TransformJobDefinition"))
+	}
+	if s.TransformJobDefinition != nil {
+		if err := s.TransformJobDefinition.Validate(); err != nil {
+			invalidParams.AddNested("TransformJobDefinition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies batch transform jobs that Amazon SageMaker runs to validate your
+// model package.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationSpecification
+type ModelPackageValidationSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// An array of ModelPackageValidationProfile objects, each of which specifies
+	// a batch transform job that Amazon SageMaker runs to validate your model package.
+	//
+	// ValidationProfiles is a required field
+	ValidationProfiles []ModelPackageValidationProfile `min:"1" type:"list" required:"true"`
+
+	// The IAM roles to be used for the validation of a model package.
+	//
+	// ValidationRole is a required field
+	ValidationRole *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ModelPackageValidationSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModelPackageValidationSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModelPackageValidationSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModelPackageValidationSpecification"}
+
+	if s.ValidationProfiles == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ValidationProfiles"))
+	}
+	if s.ValidationProfiles != nil && len(s.ValidationProfiles) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ValidationProfiles", 1))
+	}
+
+	if s.ValidationRole == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ValidationRole"))
+	}
+	if s.ValidationRole != nil && len(*s.ValidationRole) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ValidationRole", 20))
+	}
+	if s.ValidationProfiles != nil {
+		for i, v := range s.ValidationProfiles {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationProfiles", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Provides summary information about a model.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelSummary
 type ModelSummary struct {
@@ -7444,6 +14368,79 @@ func (s ModelSummary) String() string {
 // GoString returns the string representation
 func (s ModelSummary) GoString() string {
 	return s.String()
+}
+
+// A NestedFilter is defined by using a resource name under NestedPropertyName,
+// which entries in a list that properties must match to be included in the
+// results. To satisfy the conditions specified in the NestedFilters call, each
+// object in the list must satisfy the conditions of all of the filters.
+//
+// For example, a NestedFilters could be defined using the training job's InputDataConfig
+// property, this would be defined as a list of Channel objects.
+//
+// A NestedFilters object contains multiple filters. For example, to find all
+// training jobs that have train in their name, and have cat/data in theirS3Uri(under InputDataConfig), you need to create a NestedFiltersobject that specfies the InputDataConfigproperty with the following Filterobjects:
+//
+// '{Name:"InputDataConfig.ChannelName", "Operator":"EQUALS", "Value":"train"}',
+//
+//    * '{Name:"InputDataConfig.DataSource.S3DataSource.S3Uri", "Operator":"CONTAINS",
+//    "Value":"cat/data"}'
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NestedFilters
+type NestedFilters struct {
+	_ struct{} `type:"structure"`
+
+	// A list of filters. Each filter acts on a property. For example, a NestedFilters
+	// call might include a filter on the PropertyName parameter fof the InputDataConfig
+	// property: InputDataConfig.DataSource.S3DataSource.S3Uri.
+	//
+	// Filters is a required field
+	Filters []Filter `min:"1" type:"list" required:"true"`
+
+	// .The name of the property used in the nested filters.
+	//
+	// NestedPropertyName is a required field
+	NestedPropertyName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s NestedFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NestedFilters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NestedFilters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NestedFilters"}
+
+	if s.Filters == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Filters"))
+	}
+	if s.Filters != nil && len(s.Filters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
+	}
+
+	if s.NestedPropertyName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NestedPropertyName"))
+	}
+	if s.NestedPropertyName != nil && len(*s.NestedPropertyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NestedPropertyName", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Provides a summary of a notebook instance lifecycle configuration.
@@ -7492,7 +14489,8 @@ func (s NotebookInstanceLifecycleConfigSummary) GoString() string {
 // a script runs for longer than 5 minutes, it fails and the notebook instance
 // is not created or started.
 //
-// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+// For information about notebook instance lifestyle configurations, see Step
+// 2.1: (Optional) Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleHook
 type NotebookInstanceLifecycleHook struct {
 	_ struct{} `type:"structure"`
@@ -7530,8 +14528,25 @@ func (s *NotebookInstanceLifecycleHook) Validate() error {
 type NotebookInstanceSummary struct {
 	_ struct{} `type:"structure"`
 
+	// An array of up to 3 git repositories associated with the notebook instance.
+	// These can be either the names of git repositories stored as resources in
+	// your account, or the URL of git repositories in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository. These repositories are cloned at the same
+	// level as the default repository of your notebook instance. For more information,
+	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	AdditionalCodeRepositories []string `type:"list"`
+
 	// A timestamp that shows when the notebook instance was created.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The git repository associated with the notebook instance as its default code
+	// repository. This can be either the name of a git repository stored as a resource
+	// in your account, or the URL of a git repository in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository. When you open a notebook instance, it opens
+	// in the directory that contains this repository. For more information, see
+	// Associating Git Repositories with Amazon SageMaker Notebook Instances (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	DefaultCodeRepository *string `min:"1" type:"string"`
 
 	// The type of ML compute instance that the notebook instance is running on.
 	InstanceType InstanceType `type:"string" enum:"true"`
@@ -7547,7 +14562,8 @@ type NotebookInstanceSummary struct {
 	// The name of a notebook instance lifecycle configuration associated with this
 	// notebook instance.
 	//
-	// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+	// For information about notebook instance lifestyle configurations, see Step
+	// 2.1: (Optional) Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 	NotebookInstanceLifecycleConfigName *string `type:"string"`
 
 	// The name of the notebook instance that you want a summary for.
@@ -7606,6 +14622,52 @@ func (s ObjectiveStatusCounters) GoString() string {
 	return s.String()
 }
 
+// Contains information about the output location for the compiled model and
+// the device (target) that the model runs on.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputConfig
+type OutputConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Identifies the S3 path where you want Amazon SageMaker to store the model
+	// artifacts. For example, s3://bucket-name/key-name-prefix.
+	//
+	// S3OutputLocation is a required field
+	S3OutputLocation *string `type:"string" required:"true"`
+
+	// Identifies the device that you want to run your model on after it has been
+	// compiled. For example: ml_c5.
+	//
+	// TargetDevice is a required field
+	TargetDevice TargetDevice `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s OutputConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OutputConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OutputConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OutputConfig"}
+
+	if s.S3OutputLocation == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3OutputLocation"))
+	}
+	if len(s.TargetDevice) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TargetDevice"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Provides information about how to store model training results (model artifacts).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig
 type OutputDataConfig struct {
@@ -7613,14 +14675,31 @@ type OutputDataConfig struct {
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// The KmsKeyId can be any of the following formats:
+	//
+	//    * // KMS Key ID
+	//
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key
+	//
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // KMS Key Alias
+	//
+	// "alias/ExampleAlias"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key Alias
+	//
+	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
 	// If you don't provide the KMS key ID, Amazon SageMaker uses the default KMS
 	// key for Amazon S3 for your role's account. For more information, see KMS-Managed
 	// Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
-	// in Amazon Simple Storage Service developer guide.
+	// in Amazon Simple Storage Service Developer Guide.
 	//
-	// The KMS key policy must grant permission to the IAM role you specify in your
-	// CreateTrainingJob request. Using Key Policies in AWS KMS (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+	// The KMS key policy must grant permission to the IAM role that you specify
+	// in your CreateTrainingJob request. Using Key Policies in AWS KMS (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
 	// in the AWS Key Management Service Developer Guide.
 	KmsKeyId *string `type:"string"`
 
@@ -7655,8 +14734,70 @@ func (s *OutputDataConfig) Validate() error {
 	return nil
 }
 
+// Defines the possible values for categorical, continous, and integer hyperparameters
+// to be used by an algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRange
+type ParameterRange struct {
+	_ struct{} `type:"structure"`
+
+	// A CategoricalParameterRangeSpecification object that defines the possible
+	// values for a categorical hyperparameter.
+	CategoricalParameterRangeSpecification *CategoricalParameterRangeSpecification `type:"structure"`
+
+	// A ContinuousParameterRangeSpecification object that defines the possible
+	// values for a continuous hyperparameter.
+	ContinuousParameterRangeSpecification *ContinuousParameterRangeSpecification `type:"structure"`
+
+	// A IntegerParameterRangeSpecification object that defines the possible values
+	// for an integer hyperparameter.
+	IntegerParameterRangeSpecification *IntegerParameterRangeSpecification `type:"structure"`
+}
+
+// String returns the string representation
+func (s ParameterRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ParameterRange) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ParameterRange) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ParameterRange"}
+	if s.CategoricalParameterRangeSpecification != nil {
+		if err := s.CategoricalParameterRangeSpecification.Validate(); err != nil {
+			invalidParams.AddNested("CategoricalParameterRangeSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ContinuousParameterRangeSpecification != nil {
+		if err := s.ContinuousParameterRangeSpecification.Validate(); err != nil {
+			invalidParams.AddNested("ContinuousParameterRangeSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.IntegerParameterRangeSpecification != nil {
+		if err := s.IntegerParameterRangeSpecification.Validate(); err != nil {
+			invalidParams.AddNested("IntegerParameterRangeSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies ranges of integer, continuous, and categorical hyperparameters
-// that a hyperparameter tuning job searches.
+// that a hyperparameter tuning job searches. The hyperparameter tuning job
+// launches training jobs with hyperparameter values within these ranges to
+// find the combination of values that result in the training job with the best
+// performance as measured by the objective metric of the hyperparameter tuning
+// job.
+//
+// You can specify a maximum of 20 hyperparameters that a hyperparameter tuning
+// job can search over. Every possible value of a categorical parameter range
+// counts against this limit.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRanges
 type ParameterRanges struct {
 	_ struct{} `type:"structure"`
@@ -7715,12 +14856,52 @@ func (s *ParameterRanges) Validate() error {
 	return nil
 }
 
+// A previously completed or stopped hyperparameter tuning job to be used as
+// a starting point for a new hyperparameter tuning job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParentHyperParameterTuningJob
+type ParentHyperParameterTuningJob struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the hyperparameter tuning job to be used as a starting point
+	// for a new hyperparameter tuning job.
+	HyperParameterTuningJobName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ParentHyperParameterTuningJob) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ParentHyperParameterTuningJob) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ParentHyperParameterTuningJob) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ParentHyperParameterTuningJob"}
+	if s.HyperParameterTuningJobName != nil && len(*s.HyperParameterTuningJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HyperParameterTuningJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Identifies a model that you want to host and the resources to deploy for
 // hosting it. If you are deploying multiple models, tell Amazon SageMaker how
 // to distribute traffic among the models by specifying variant weights.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant
 type ProductionVariant struct {
 	_ struct{} `type:"structure"`
+
+	// The size of the Elastic Inference (EI) instance to use for the production
+	// variant. EI instances provide on-demand GPU computing for inference. For
+	// more information, see Using Elastic Inference in Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	// For more information, see Using Elastic Inference in Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	AcceleratorType ProductionVariantAcceleratorType `type:"string" enum:"true"`
 
 	// Number of instances to launch initially.
 	//
@@ -7830,6 +15011,249 @@ func (s ProductionVariantSummary) GoString() string {
 	return s.String()
 }
 
+// A suggestion query for retrieving property names.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameQuery
+type PropertyNameQuery struct {
+	_ struct{} `type:"structure"`
+
+	// The hyperparameter, metric, and tag key property names that begin with the
+	// specified hint.
+	//
+	// PropertyNameHint is a required field
+	PropertyNameHint *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PropertyNameQuery) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PropertyNameQuery) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PropertyNameQuery) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PropertyNameQuery"}
+
+	if s.PropertyNameHint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PropertyNameHint"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A property name returned from a GetSearchSuggestions call that specifies
+// a value in the PropertyNameQuery field.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameSuggestion
+type PropertyNameSuggestion struct {
+	_ struct{} `type:"structure"`
+
+	// A suggested property name.
+	PropertyName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s PropertyNameSuggestion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PropertyNameSuggestion) GoString() string {
+	return s.String()
+}
+
+// Defines the amount of money paid to an Amazon Mechanical Turk worker for
+// each task performed. For more information, see  Public Workforce Task Price
+// (http://docs.aws.amazon.com/sagemaker/latest/dg/sms-public-payment.html).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PublicWorkforceTaskPrice
+type PublicWorkforceTaskPrice struct {
+	_ struct{} `type:"structure"`
+
+	// Defines the amount of money paid to a worker in United States dollars.
+	AmountInUsd *USD `type:"structure"`
+}
+
+// String returns the string representation
+func (s PublicWorkforceTaskPrice) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PublicWorkforceTaskPrice) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplateRequest
+type RenderUiTemplateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) that has access to the S3 objects that are
+	// used by the template.
+	//
+	// RoleArn is a required field
+	RoleArn *string `min:"20" type:"string" required:"true"`
+
+	// A RenderableTask object containing a representative task to render.
+	//
+	// Task is a required field
+	Task *RenderableTask `type:"structure" required:"true"`
+
+	// A Tempateobject containing the worker UI template to render.
+	//
+	// UiTemplate is a required field
+	UiTemplate *UiTemplate `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s RenderUiTemplateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RenderUiTemplateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RenderUiTemplateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RenderUiTemplateInput"}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+
+	if s.Task == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Task"))
+	}
+
+	if s.UiTemplate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UiTemplate"))
+	}
+	if s.Task != nil {
+		if err := s.Task.Validate(); err != nil {
+			invalidParams.AddNested("Task", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.UiTemplate != nil {
+		if err := s.UiTemplate.Validate(); err != nil {
+			invalidParams.AddNested("UiTemplate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderUiTemplateResponse
+type RenderUiTemplateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of one or more RenderingError objects if any were encountered while
+	// rendering the template. If there were no errors, the list is empty.
+	//
+	// Errors is a required field
+	Errors []RenderingError `type:"list" required:"true"`
+
+	// A Liquid template that renders the HTML for the worker UI.
+	//
+	// RenderedContent is a required field
+	RenderedContent *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RenderUiTemplateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RenderUiTemplateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RenderUiTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Contains input values for a task.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderableTask
+type RenderableTask struct {
+	_ struct{} `type:"structure"`
+
+	// A JSON object that contains values for the variables defined in the template.
+	// It is made available to the template under the substitution variable task.input.
+	// For example, if you define a variable task.input.text in your template, you
+	// can supply the variable in the JSON object as "text": "sample text".
+	//
+	// Input is a required field
+	Input *string `min:"2" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RenderableTask) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RenderableTask) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RenderableTask) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RenderableTask"}
+
+	if s.Input == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Input"))
+	}
+	if s.Input != nil && len(*s.Input) < 2 {
+		invalidParams.Add(aws.NewErrParamMinLen("Input", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A description of an error that occurred while rendering the template.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RenderingError
+type RenderingError struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for a specific class of errors.
+	//
+	// Code is a required field
+	Code *string `type:"string" required:"true"`
+
+	// A human-readable message describing the error.
+	//
+	// Message is a required field
+	Message *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RenderingError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RenderingError) GoString() string {
+	return s.String()
+}
+
 // Describes the resources, including ML compute instances and ML storage volumes,
 // to use for model training.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig
@@ -7847,9 +15271,18 @@ type ResourceConfig struct {
 	// InstanceType is a required field
 	InstanceType TrainingInstanceType `type:"string" required:"true" enum:"true"`
 
-	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
-	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
-	// instance(s) that run the training job.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt data on the storage volume attached to the ML compute instance(s)
+	// that run the training job. The VolumeKmsKeyId can be any of the following
+	// formats:
+	//
+	//    * // KMS Key ID
+	//
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key
+	//
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
 
 	// The size of the ML storage volume that you want to provision.
@@ -7963,6 +15396,10 @@ func (s *ResourceLimits) Validate() error {
 type S3DataSource struct {
 	_ struct{} `type:"structure"`
 
+	// A list of one or more attribute names to use that are found in a specified
+	// augmented manifest file.
+	AttributeNames []string `type:"list"`
+
 	// If you want Amazon SageMaker to replicate the entire dataset on each ML compute
 	// instance that is launched for model training, specify FullyReplicated.
 	//
@@ -7974,7 +15411,7 @@ type S3DataSource struct {
 	//
 	// Don't choose more ML compute instances for training than available S3 objects.
 	// If you do, some nodes won't get any data and you will pay for nodes that
-	// aren't getting any training data. This applies in both FILE and PIPE modes.
+	// aren't getting any training data. This applies in both File and Pipemodes.
 	// Keep this in mind when developing algorithms.
 	//
 	// In distributed training, where you use multiple ML compute EC2 instances,
@@ -7984,11 +15421,16 @@ type S3DataSource struct {
 	S3DataDistributionType S3DataDistribution `type:"string" enum:"true"`
 
 	// If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker
-	// uses all objects with the specified key name prefix for model training.
+	// uses all objects that match the specified key name prefix for model training.
 	//
 	// If you choose ManifestFile, S3Uri identifies an object that is a manifest
 	// file containing a list of object keys that you want Amazon SageMaker to use
 	// for model training.
+	//
+	// If you choose AugmentedManifestFile, S3Uri identifies an object that is an
+	// augmented manifest file in JSON lines format. This file contains the data
+	// you want to use for model training. AugmentedManifestFile can only be used
+	// if the Channel's input mode is Pipe.
 	//
 	// S3DataType is a required field
 	S3DataType S3DataType `type:"string" required:"true" enum:"true"`
@@ -8024,10 +15466,9 @@ type S3DataSource struct {
 	//
 	// ...
 	//
-	//  The complete set of s3uris in this manifest constitutes the input data for
-	//    the channel for this datasource. The object that each s3uris points to
-	//    must readable by the IAM role that Amazon SageMaker uses to perform tasks
-	//    on your behalf.
+	// The complete set of s3uris in this manifest is the input data for the channel
+	//    for this datasource. The object that each s3uris points to must be readable
+	//    by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.
 	//
 	// S3Uri is a required field
 	S3Uri *string `type:"string" required:"true"`
@@ -8060,33 +15501,297 @@ func (s *S3DataSource) Validate() error {
 	return nil
 }
 
-// Specifies a secondary status the job has transitioned into. It includes a
-// start timestamp and later an end timestamp. The end timestamp is added either
-// after the job transitions to a different secondary status or after the job
-// has ended.
+// A multi-expression that searches for the specified resource or resources.
+// All resource objects that satisfy the expression's condition are included
+// in the search results.
+//
+// A SearchExpression contains the following components:
+//
+//    * A list of Filter objects. Each filter defines a simple Boolean expression
+//    comprised of a resource property name, Boolean operator, and value.
+//
+//    * A list of NestedFilter objects. Each nested filter defines a list of
+//    Boolean expressions using a list of resource properties. A nested filter
+//    is satisfied if a single object in the list satisfies all Boolean expressions.
+//
+//    * A list of SearchExpression objects.
+//
+//    * A Boolean operator: And or Or.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchExpression
+type SearchExpression struct {
+	_ struct{} `type:"structure"`
+
+	// A list of filter objects.
+	Filters []Filter `min:"1" type:"list"`
+
+	// A list of nested filter objects.
+	NestedFilters []NestedFilters `min:"1" type:"list"`
+
+	// A Boolean operator used to evaluate the search expression. If you want every
+	// conditional statement in all lists to be satisfied for the entire search
+	// expression to be true, specify And. If only a single conditional statement
+	// needs to be true for the entire search expression to be true, specify Or.
+	Operator BooleanOperator `type:"string" enum:"true"`
+
+	// A list of search expression objects.
+	SubExpressions []SearchExpression `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s SearchExpression) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchExpression) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchExpression) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SearchExpression"}
+	if s.Filters != nil && len(s.Filters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
+	}
+	if s.NestedFilters != nil && len(s.NestedFilters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NestedFilters", 1))
+	}
+	if s.SubExpressions != nil && len(s.SubExpressions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SubExpressions", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.NestedFilters != nil {
+		for i, v := range s.NestedFilters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NestedFilters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SubExpressions != nil {
+		for i, v := range s.SubExpressions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SubExpressions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRequest
+type SearchInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to return in a SearchResponse.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If more than MaxResults resource objects match the specified SearchExpression,
+	// the SearchResponse includes a NextToken. The NextToken can be passed to the
+	// next SearchRequest to continue retrieving results for the specified SearchExpression
+	// and Sort parameters.
+	NextToken *string `type:"string"`
+
+	// The name of the Amazon SageMaker resource to search for. Currently, the only
+	// valid Resource value is TrainingJob.
+	//
+	// Resource is a required field
+	Resource ResourceType `type:"string" required:"true" enum:"true"`
+
+	// A Boolean conditional statement. Resource objects must satisfy this condition
+	// to be included in search results.
+	SearchExpression *SearchExpression `type:"structure"`
+
+	// The name of the resource property used to sort the SearchResults.
+	SortBy *string `min:"1" type:"string"`
+
+	// How SearchResults are ordered. Valid values are Ascending or Descending.
+	SortOrder SearchSortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SearchInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SearchInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if len(s.Resource) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
+	}
+	if s.SortBy != nil && len(*s.SortBy) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SortBy", 1))
+	}
+	if s.SearchExpression != nil {
+		if err := s.SearchExpression.Validate(); err != nil {
+			invalidParams.AddNested("SearchExpression", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchResponse
+type SearchOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the result of the previous Search request was truncated, the response
+	// includes a NextToken. To retrieve the next set of results, use the token
+	// in the next request.
+	NextToken *string `type:"string"`
+
+	// A list of SearchResult objects.
+	Results []SearchRecord `type:"list"`
+}
+
+// String returns the string representation
+func (s SearchOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// An individual search result record that contains a single resource object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord
+type SearchRecord struct {
+	_ struct{} `type:"structure"`
+
+	// A TrainingJob object that is returned as part of a Search request.
+	TrainingJob *TrainingJob `type:"structure"`
+}
+
+// String returns the string representation
+func (s SearchRecord) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchRecord) GoString() string {
+	return s.String()
+}
+
+// An array element of DescribeTrainingJobResponse$SecondaryStatusTransitions.
+// It provides additional details about a status that the training job has transitioned
+// through. A training job can be in one of several states, for example, starting,
+// downloading, training, or uploading. Within each state, there are a number
+// of intermediate states. For example, within the starting state, Amazon SageMaker
+// could be starting the training job or launching the ML instances. These transitional
+// states are referred to as the job's secondary status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SecondaryStatusTransition
 type SecondaryStatusTransition struct {
 	_ struct{} `type:"structure"`
 
-	// A timestamp that shows when the secondary status has ended and the job has
-	// transitioned into another secondary status. The EndTime timestamp is also
-	// set after the training job has ended.
+	// A timestamp that shows when the training job transitioned out of this secondary
+	// status state into another secondary status state or when the training job
+	// has ended.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// A timestamp that shows when the training job has entered this secondary status.
+	// A timestamp that shows when the training job transitioned to the current
+	// secondary status state.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
 
-	// Provides granular information about the system state. For more information,
-	// see SecondaryStatus under the DescribeTrainingJob response elements.
+	// Contains a secondary status information from a training job.
+	//
+	// Status might be one of the following secondary statuses:
+	//
+	// InProgressStarting - Starting the training job.
+	//
+	// Downloading - An optional stage for algorithms that support File training
+	// input mode. It indicates that data is being downloaded to the ML storage
+	// volumes.
+	//
+	// Training - Training is in progress.
+	//
+	// Uploading - Training is complete and the model artifacts are being uploaded
+	// to the S3 location.
+	//
+	// CompletedCompleted - The training job has completed.
+	//
+	// FailedFailed - The training job has failed. The reason for the failure is
+	// returned in the FailureReason field of DescribeTrainingJobResponse.
+	//
+	// StoppedMaxRuntimeExceeded - The job stopped because it exceeded the maximum
+	// allowed runtime.
+	//
+	// Stopped - The training job has stopped.
+	//
+	// StoppingStopping - Stopping the training job.
+	//
+	// We no longer support the following secondary statuses:
+	//
+	//    * LaunchingMLInstances
+	//
+	//    * PreparingTrainingStack
+	//
+	//    * DownloadingTrainingImage
 	//
 	// Status is a required field
 	Status SecondaryStatus `type:"string" required:"true" enum:"true"`
 
-	// Shows a brief description and other information about the secondary status.
-	// For example, the LaunchingMLInstances secondary status could show a status
-	// message of "Insufficent capacity error while launching instances".
+	// A detailed description of the progress within a secondary status.
+	//
+	// Amazon SageMaker provides secondary statuses and status messages that apply
+	// to each of them:
+	//
+	// StartingStarting the training job.
+	//
+	// Launching requested ML instances.
+	//
+	// Insufficient capacity error from EC2 while launching instances, retrying!
+	//
+	// Launched instance was unhealthy, replacing it!
+	//
+	// Preparing the instances for training.
+	//
+	// TrainingDownloading the training image.
+	//
+	// Training image download completed. Training in progress.
+	//
+	// Status messages are subject to change. Therefore, we recommend not including
+	// them in code that programmatically initiates actions. For examples, don't
+	// use status messages in if statements.
+	//
+	// To have an overview of your training job's progress, view TrainingJobStatus
+	// and SecondaryStatus in DescribeTrainingJobResponse, and StatusMessage together.
+	// For example, at the start of a training job, you might see the following:
+	//
+	//    * TrainingJobStatus - InProgress
+	//
+	//    * SecondaryStatus - Training
+	//
+	//    * StatusMessage - Downloading the training image
 	StatusMessage *string `type:"string"`
 }
 
@@ -8098,6 +15803,146 @@ func (s SecondaryStatusTransition) String() string {
 // GoString returns the string representation
 func (s SecondaryStatusTransition) GoString() string {
 	return s.String()
+}
+
+// A configuration for a shuffle option for input data in a channel. If you
+// use S3Prefix for S3DataType, the results of the S3 key prefix matches are
+// shuffled. If you use ManifestFile, the order of the S3 object references
+// in the ManifestFile is shuffled. If you use AugmentedManifestFile, the order
+// of the JSON lines in the AugmentedManifestFile is shuffled. The shuffling
+// order is determined using the Seed value.
+//
+// For Pipe input mode, shuffling is done at the start of every epoch. With
+// large datasets, this ensures that the order of the training data is different
+// for each epoch, and it helps reduce bias and possible overfitting. In a multi-node
+// training job when ShuffleConfig is combined with S3DataDistributionType of
+// ShardedByS3Key, the data is shuffled across nodes so that the content sent
+// to a particular node on the first epoch might be sent to a different node
+// on the second epoch.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ShuffleConfig
+type ShuffleConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines the shuffling order in ShuffleConfig. value.
+	//
+	// Seed is a required field
+	Seed *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s ShuffleConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ShuffleConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ShuffleConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ShuffleConfig"}
+
+	if s.Seed == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Seed"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Specifies an algorithm that was used to create the model package. The algorithm
+// must be either an algorithm resource in your Amazon SageMaker account or
+// an algorithm in AWS Marketplace that you are subscribed to.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithm
+type SourceAlgorithm struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an algorithm that was used to create the model package. The algorithm
+	// must be either an algorithm resource in your Amazon SageMaker account or
+	// an algorithm in AWS Marketplace that you are subscribed to.
+	//
+	// AlgorithmName is a required field
+	AlgorithmName *string `min:"1" type:"string" required:"true"`
+
+	// The Amazon S3 path where the model artifacts, which result from model training,
+	// are stored. This path must point to a single gzip compressed tar archive
+	// (.tar.gz suffix).
+	ModelDataUrl *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SourceAlgorithm) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceAlgorithm) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SourceAlgorithm) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SourceAlgorithm"}
+
+	if s.AlgorithmName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AlgorithmName"))
+	}
+	if s.AlgorithmName != nil && len(*s.AlgorithmName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlgorithmName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A list of algorithms that were used to create a model package.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithmSpecification
+type SourceAlgorithmSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the algorithms that were used to create a model package.
+	//
+	// SourceAlgorithms is a required field
+	SourceAlgorithms []SourceAlgorithm `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s SourceAlgorithmSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceAlgorithmSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SourceAlgorithmSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SourceAlgorithmSpecification"}
+
+	if s.SourceAlgorithms == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceAlgorithms"))
+	}
+	if s.SourceAlgorithms != nil && len(s.SourceAlgorithms) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SourceAlgorithms", 1))
+	}
+	if s.SourceAlgorithms != nil {
+		for i, v := range s.SourceAlgorithms {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SourceAlgorithms", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartNotebookInstanceInput
@@ -8153,6 +15998,65 @@ func (s StartNotebookInstanceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartNotebookInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopCompilationJobRequest
+type StopCompilationJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the model compilation job to stop.
+	//
+	// CompilationJobName is a required field
+	CompilationJobName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopCompilationJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopCompilationJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopCompilationJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopCompilationJobInput"}
+
+	if s.CompilationJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CompilationJobName"))
+	}
+	if s.CompilationJobName != nil && len(*s.CompilationJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CompilationJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopCompilationJobOutput
+type StopCompilationJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopCompilationJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopCompilationJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopCompilationJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -8212,6 +16116,65 @@ func (s StopHyperParameterTuningJobOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopHyperParameterTuningJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJobRequest
+type StopLabelingJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the labeling job to stop.
+	//
+	// LabelingJobName is a required field
+	LabelingJobName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopLabelingJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopLabelingJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopLabelingJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopLabelingJobInput"}
+
+	if s.LabelingJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LabelingJobName"))
+	}
+	if s.LabelingJobName != nil && len(*s.LabelingJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LabelingJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopLabelingJobOutput
+type StopLabelingJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopLabelingJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopLabelingJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopLabelingJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -8389,12 +16352,12 @@ func (s StopTransformJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Specifies how long model training can run. When model training reaches the
-// limit, Amazon SageMaker ends the training job. Use this API to cap model
-// training cost.
+// Specifies how long a model training or compilation job can run. When the
+// job reaches the limit, Amazon SageMaker ends the training job. Use this API
+// to cap model processing cost.
 //
 // To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which
-// delays job termination for120 seconds. Algorithms might use this 120-second
+// delays job termination for 120 seconds. Algorithms might use this 120-second
 // window to save the model artifacts, so the results of training is not lost.
 //
 // Training algorithms provided by Amazon SageMaker automatically saves the
@@ -8406,10 +16369,10 @@ func (s StopTransformJobOutput) SDKResponseMetadata() aws.Response {
 type StoppingCondition struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum length of time, in seconds, that the training job can run. If
-	// model training does not complete during this time, Amazon SageMaker ends
-	// the job. If value is not specified, default value is 1 day. Maximum value
-	// is 5 days.
+	// The maximum length of time, in seconds, that the training or compilation
+	// job can run. If the job does not complete during this time, Amazon SageMaker
+	// ends the job. If value is not specified, default value is 1 day. Maximum
+	// value is 5 days.
 	MaxRuntimeInSeconds *int64 `min:"1" type:"integer"`
 }
 
@@ -8428,6 +16391,73 @@ func (s *StoppingCondition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StoppingCondition"}
 	if s.MaxRuntimeInSeconds != nil && *s.MaxRuntimeInSeconds < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxRuntimeInSeconds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes a work team of a vendor that does the a labelling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SubscribedWorkteam
+type SubscribedWorkteam struct {
+	_ struct{} `type:"structure"`
+
+	ListingId *string `type:"string"`
+
+	// The description of the vendor from the Amazon Marketplace.
+	MarketplaceDescription *string `min:"1" type:"string"`
+
+	// The title of the service provided by the vendor in the Amazon Marketplace.
+	MarketplaceTitle *string `min:"1" type:"string"`
+
+	// The name of the vendor in the Amazon Marketplace.
+	SellerName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the vendor that you have subscribed.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s SubscribedWorkteam) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SubscribedWorkteam) GoString() string {
+	return s.String()
+}
+
+// Limits the property names that are included in the response.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SuggestionQuery
+type SuggestionQuery struct {
+	_ struct{} `type:"structure"`
+
+	// Defines a property name hint. Only property names that match the specified
+	// hint are included in the response.
+	PropertyNameQuery *PropertyNameQuery `type:"structure"`
+}
+
+// String returns the string representation
+func (s SuggestionQuery) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SuggestionQuery) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SuggestionQuery) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SuggestionQuery"}
+	if s.PropertyNameQuery != nil {
+		if err := s.PropertyNameQuery.Validate(); err != nil {
+			invalidParams.AddNested("PropertyNameQuery", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8483,13 +16513,287 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
+// Contains information about a training job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJob
+type TrainingJob struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the algorithm used for training, and algorithm metadata.
+	AlgorithmSpecification *AlgorithmSpecification `type:"structure"`
+
+	// A timestamp that indicates when the training job was created.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// If the TrainingJob was created with network isolation, the value is set to
+	// true. If network isolation is enabled, nodes can't communicate beyond the
+	// VPC they run in.
+	EnableNetworkIsolation *bool `type:"boolean"`
+
+	// If the training job failed, the reason it failed.
+	FailureReason *string `type:"string"`
+
+	// A list of final metric values that are set when the Training Job completes.
+	// Used only if the training job was configured to use metrics.
+	FinalMetricDataList []MetricData `type:"list"`
+
+	// Algorithm-specific parameters.
+	HyperParameters map[string]string `type:"map"`
+
+	// An array of Channel objects that describes each data input channel.
+	InputDataConfig []Channel `min:"1" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the labeling job.
+	LabelingJobArn *string `type:"string"`
+
+	// A timestamp that indicates when the status of the training job was last modified.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Information about the Amazon S3 location that is configured for storing model
+	// artifacts.
+	ModelArtifacts *ModelArtifacts `type:"structure"`
+
+	// The S3 path where model artifacts that you configured when creating the job
+	// are stored. Amazon SageMaker creates subfolders for model artifacts.
+	OutputDataConfig *OutputDataConfig `type:"structure"`
+
+	// Resources, including ML compute instances and ML storage volumes, that are
+	// configured for model training.
+	ResourceConfig *ResourceConfig `type:"structure"`
+
+	// The AWS Identity and Access Management (IAM) role configured for the training
+	// job.
+	RoleArn *string `min:"20" type:"string"`
+
+	// Provides detailed information about the state of the training job. For detailed
+	// information about the secondary status of the training job, see StatusMessage
+	// under SecondaryStatusTransition.
+	//
+	// Amazon SageMaker provides primary statuses and secondary statuses that apply
+	// to each of them:
+	//
+	// InProgressStarting - Starting the training job.
+	//
+	// Downloading - An optional stage for algorithms that support File training
+	// input mode. It indicates that data is being downloaded to the ML storage
+	// volumes.
+	//
+	// Training - Training is in progress.
+	//
+	// Uploading - Training is complete and the model artifacts are being uploaded
+	// to the S3 location.
+	//
+	// CompletedCompleted - The training job has completed.
+	//
+	// FailedFailed - The training job has failed. The reason for the failure is
+	// returned in the FailureReason field of DescribeTrainingJobResponse.
+	//
+	// StoppedMaxRuntimeExceeded - The job stopped because it exceeded the maximum
+	// allowed runtime.
+	//
+	// Stopped - The training job has stopped.
+	//
+	// StoppingStopping - Stopping the training job.
+	//
+	// Valid values for SecondaryStatus are subject to change.
+	//
+	// We no longer support the following secondary statuses:
+	//
+	//    * LaunchingMLInstances
+	//
+	//    * PreparingTrainingStack
+	//
+	//    * DownloadingTrainingImage
+	SecondaryStatus SecondaryStatus `type:"string" enum:"true"`
+
+	// A history of all of the secondary statuses that the training job has transitioned
+	// through.
+	SecondaryStatusTransitions []SecondaryStatusTransition `type:"list"`
+
+	// The condition under which to stop the training job.
+	StoppingCondition *StoppingCondition `type:"structure"`
+
+	// An array of key-value pairs. For more information, see Using Cost Allocation
+	// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []Tag `type:"list"`
+
+	// Indicates the time when the training job ends on training instances. You
+	// are billed for the time interval between the value of TrainingStartTime and
+	// this time. For successful jobs and stopped jobs, this is the time after model
+	// artifacts are uploaded. For failed jobs, this is the time when Amazon SageMaker
+	// detects a job failure.
+	TrainingEndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the training job.
+	TrainingJobArn *string `type:"string"`
+
+	// The name of the training job.
+	TrainingJobName *string `min:"1" type:"string"`
+
+	// The status of the training job.
+	//
+	// Training job statuses are:
+	//
+	//    * InProgress - The training is in progress.
+	//
+	//    * Completed - The training job has completed.
+	//
+	//    * Failed - The training job has failed. To see the reason for the failure,
+	//    see the FailureReason field in the response to a DescribeTrainingJobResponse
+	//    call.
+	//
+	//    * Stopping - The training job is stopping.
+	//
+	//    * Stopped - The training job has stopped.
+	//
+	// For more detailed information, see SecondaryStatus.
+	TrainingJobStatus TrainingJobStatus `type:"string" enum:"true"`
+
+	// Indicates the time when the training job starts on training instances. You
+	// are billed for the time interval between this time and the value of TrainingEndTime.
+	// The start time in CloudWatch Logs might be later than this time. The difference
+	// is due to the time it takes to download the training data and to the size
+	// of the training container.
+	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the associated hyperparameter tuning job
+	// if the training job was launched by a hyperparameter tuning job.
+	TuningJobArn *string `type:"string"`
+
+	// A VpcConfig object that specifies the VPC that this training job has access
+	// to. For more information, see Protect Training Jobs by Using an Amazon Virtual
+	// Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
+	VpcConfig *VpcConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s TrainingJob) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TrainingJob) GoString() string {
+	return s.String()
+}
+
+// Defines the input needed to run a training job using the algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobDefinition
+type TrainingJobDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// The hyperparameters used for the training job.
+	HyperParameters map[string]string `type:"map"`
+
+	// An array of Channel objects, each of which specifies an input source.
+	//
+	// InputDataConfig is a required field
+	InputDataConfig []Channel `min:"1" type:"list" required:"true"`
+
+	// the path to the S3 bucket where you want to store model artifacts. Amazon
+	// SageMaker creates subfolders for the artifacts.
+	//
+	// OutputDataConfig is a required field
+	OutputDataConfig *OutputDataConfig `type:"structure" required:"true"`
+
+	// The resources, including the ML compute instances and ML storage volumes,
+	// to use for model training.
+	//
+	// ResourceConfig is a required field
+	ResourceConfig *ResourceConfig `type:"structure" required:"true"`
+
+	// Sets a duration for training. Use this parameter to cap model training costs.
+	//
+	// To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which
+	// delays job termination for 120 seconds. Algorithms might use this 120-second
+	// window to save the model artifacts.
+	//
+	// StoppingCondition is a required field
+	StoppingCondition *StoppingCondition `type:"structure" required:"true"`
+
+	// The input mode used by the algorithm for the training job. For the input
+	// modes that Amazon SageMaker algorithms support, see Algorithms (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
+	//
+	// If an algorithm supports the File input mode, Amazon SageMaker downloads
+	// the training data from S3 to the provisioned ML storage Volume, and mounts
+	// the directory to docker volume for training container. If an algorithm supports
+	// the Pipe input mode, Amazon SageMaker streams data directly from S3 to the
+	// container.
+	//
+	// TrainingInputMode is a required field
+	TrainingInputMode TrainingInputMode `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s TrainingJobDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TrainingJobDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TrainingJobDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TrainingJobDefinition"}
+
+	if s.InputDataConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputDataConfig"))
+	}
+	if s.InputDataConfig != nil && len(s.InputDataConfig) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InputDataConfig", 1))
+	}
+
+	if s.OutputDataConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OutputDataConfig"))
+	}
+
+	if s.ResourceConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceConfig"))
+	}
+
+	if s.StoppingCondition == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StoppingCondition"))
+	}
+	if len(s.TrainingInputMode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingInputMode"))
+	}
+	if s.InputDataConfig != nil {
+		for i, v := range s.InputDataConfig {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputDataConfig", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.OutputDataConfig != nil {
+		if err := s.OutputDataConfig.Validate(); err != nil {
+			invalidParams.AddNested("OutputDataConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ResourceConfig != nil {
+		if err := s.ResourceConfig.Validate(); err != nil {
+			invalidParams.AddNested("ResourceConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.StoppingCondition != nil {
+		if err := s.StoppingCondition.Validate(); err != nil {
+			invalidParams.AddNested("StoppingCondition", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The numbers of training jobs launched by a hyperparameter tuning job, categorized
 // by status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobStatusCounters
 type TrainingJobStatusCounters struct {
 	_ struct{} `type:"structure"`
 
-	// The number of completed training jobs launched by a hyperparameter tuning
+	// The number of completed training jobs launched by the hyperparameter tuning
 	// job.
 	Completed *int64 `type:"integer"`
 
@@ -8564,6 +16868,113 @@ func (s TrainingJobSummary) GoString() string {
 	return s.String()
 }
 
+// Defines how the algorithm is used for a training job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingSpecification
+type TrainingSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// A list of MetricDefinition objects, which are used for parsing metrics generated
+	// by the algorithm.
+	MetricDefinitions []MetricDefinition `type:"list"`
+
+	// A list of the HyperParameterSpecification objects, that define the supported
+	// hyperparameters. This is required if the algorithm supports automatic model
+	// tuning.>
+	SupportedHyperParameters []HyperParameterSpecification `type:"list"`
+
+	// A list of the instance types that this algorithm can use for training.
+	//
+	// SupportedTrainingInstanceTypes is a required field
+	SupportedTrainingInstanceTypes []TrainingInstanceType `type:"list" required:"true"`
+
+	// A list of the metrics that the alogorithm emits that can be used as the objective
+	// metric in a hyperparameter tuning job.
+	SupportedTuningJobObjectiveMetrics []HyperParameterTuningJobObjective `type:"list"`
+
+	// Indicates whether the algorithm supports distributed training. If set to
+	// false, buyers can’t request more than one instance during training.
+	SupportsDistributedTraining *bool `type:"boolean"`
+
+	// A list of ChannelSpecification objects, which specify the input sources to
+	// be used by the algorithm.
+	//
+	// TrainingChannels is a required field
+	TrainingChannels []ChannelSpecification `min:"1" type:"list" required:"true"`
+
+	// The Amazon Amazon ECR registry path of the Docker image that contains the
+	// training algorithm.
+	//
+	// TrainingImage is a required field
+	TrainingImage *string `type:"string" required:"true"`
+
+	// An MD5 hash of the training algorithm that identifies the Docker image used
+	// for training.
+	TrainingImageDigest *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TrainingSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TrainingSpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TrainingSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TrainingSpecification"}
+
+	if s.SupportedTrainingInstanceTypes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SupportedTrainingInstanceTypes"))
+	}
+
+	if s.TrainingChannels == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingChannels"))
+	}
+	if s.TrainingChannels != nil && len(s.TrainingChannels) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TrainingChannels", 1))
+	}
+
+	if s.TrainingImage == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingImage"))
+	}
+	if s.MetricDefinitions != nil {
+		for i, v := range s.MetricDefinitions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricDefinitions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SupportedHyperParameters != nil {
+		for i, v := range s.SupportedHyperParameters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SupportedHyperParameters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SupportedTuningJobObjectiveMetrics != nil {
+		for i, v := range s.SupportedTuningJobObjectiveMetrics {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SupportedTuningJobObjectiveMetrics", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TrainingChannels != nil {
+		for i, v := range s.TrainingChannels {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TrainingChannels", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes the location of the channel data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformDataSource
 type TransformDataSource struct {
@@ -8611,7 +17022,7 @@ type TransformInput struct {
 	_ struct{} `type:"structure"`
 
 	// Compressing data helps save on storage space. If your transform data is compressed,
-	// specify the compression type.and Amazon SageMaker will automatically decompress
+	// specify the compression type. Amazon SageMaker automatically decompresses
 	// the data for the transform job accordingly. The default value is None.
 	CompressionType CompressionType `type:"string" enum:"true"`
 
@@ -8668,8 +17079,98 @@ func (s *TransformInput) Validate() error {
 	return nil
 }
 
-// Provides a summary information for a transform job. Multiple TransformJobSummary
-// objects are returned as a list after calling ListTransformJobs.
+// Defines the input needed to run a transform job using the inference specification
+// specified in the algorithm.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJobDefinition
+type TransformJobDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// A string that determines the number of records included in a single mini-batch.
+	//
+	// SingleRecord means only one record is used per mini-batch. MultiRecord means
+	// a mini-batch is set to contain as many records that can fit within the MaxPayloadInMB
+	// limit.
+	BatchStrategy BatchStrategy `type:"string" enum:"true"`
+
+	// The environment variables to set in the Docker container. We support up to
+	// 16 key and values entries in the map.
+	Environment map[string]string `type:"map"`
+
+	// The maximum number of parallel requests that can be sent to each instance
+	// in a transform job. The default value is 1.
+	MaxConcurrentTransforms *int64 `type:"integer"`
+
+	// The maximum payload size allowed, in MB. A payload is the data portion of
+	// a record (without metadata).
+	MaxPayloadInMB *int64 `type:"integer"`
+
+	// A description of the input source and the way the transform job consumes
+	// it.
+	//
+	// TransformInput is a required field
+	TransformInput *TransformInput `type:"structure" required:"true"`
+
+	// Identifies the Amazon S3 location where you want Amazon SageMaker to save
+	// the results from the transform job.
+	//
+	// TransformOutput is a required field
+	TransformOutput *TransformOutput `type:"structure" required:"true"`
+
+	// Identifies the ML compute instances for the transform job.
+	//
+	// TransformResources is a required field
+	TransformResources *TransformResources `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s TransformJobDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TransformJobDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TransformJobDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TransformJobDefinition"}
+
+	if s.TransformInput == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TransformInput"))
+	}
+
+	if s.TransformOutput == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TransformOutput"))
+	}
+
+	if s.TransformResources == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TransformResources"))
+	}
+	if s.TransformInput != nil {
+		if err := s.TransformInput.Validate(); err != nil {
+			invalidParams.AddNested("TransformInput", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TransformOutput != nil {
+		if err := s.TransformOutput.Validate(); err != nil {
+			invalidParams.AddNested("TransformOutput", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TransformResources != nil {
+		if err := s.TransformResources.Validate(); err != nil {
+			invalidParams.AddNested("TransformResources", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides a summary of a transform job. Multiple TransformJobSummary objects
+// are returned as a list after calling ListTransformJobs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformJobSummary
 type TransformJobSummary struct {
 	_ struct{} `type:"structure"`
@@ -8729,14 +17230,28 @@ type TransformOutput struct {
 	// Defines how to assemble the results of the transform job as a single S3 object.
 	// You should select a format that is most convenient to you. To concatenate
 	// the results in binary format, specify None. To add a newline character at
-	// the end of every transformed record, specify Line. To assemble the output
-	// in RecordIO format, specify RecordIO. The default value is None.
-	//
-	// For information about the RecordIO format, see Data Format (http://mxnet.io/architecture/note_data_loading.html#data-format).
+	// the end of every transformed record, specify Line.
 	AssembleWith AssemblyType `type:"string" enum:"true"`
 
-	// The AWS Key Management Service (AWS KMS) key for Amazon S3 server-side encryption
-	// that Amazon SageMaker uses to encrypt the transformed data.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+	// The KmsKeyId can be any of the following formats:
+	//
+	//    * // KMS Key ID
+	//
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key
+	//
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // KMS Key Alias
+	//
+	// "alias/ExampleAlias"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key Alias
+	//
+	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
 	// If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS
 	// key for Amazon S3 for your role's account. For more information, see KMS-Managed
@@ -8806,9 +17321,18 @@ type TransformResources struct {
 	// InstanceType is a required field
 	InstanceType TransformInstanceType `type:"string" required:"true" enum:"true"`
 
-	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
-	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
-	// instance(s) that run the batch transform job.
+	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
+	// encrypt data on the storage volume attached to the ML compute instance(s)
+	// that run the batch transform job. The VolumeKmsKeyId can be any of the following
+	// formats:
+	//
+	//    * // KMS Key ID
+	//
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//    * // Amazon Resource Name (ARN) of a KMS Key
+	//
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string `type:"string"`
 }
 
@@ -8922,6 +17446,181 @@ func (s *TransformS3DataSource) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Represents an amount of money in United States dollars/
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/USD
+type USD struct {
+	_ struct{} `type:"structure"`
+
+	// The fractional portion, in cents, of the amount.
+	Cents *int64 `type:"integer"`
+
+	// The whole number of dollars in the amount.
+	Dollars *int64 `type:"integer"`
+
+	// Fractions of a cent, in tenths.
+	TenthFractionsOfACent *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s USD) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s USD) GoString() string {
+	return s.String()
+}
+
+// Provided configuration information for the worker UI for a labeling job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiConfig
+type UiConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 bucket location of the UI template.
+	//
+	// UiTemplateS3Uri is a required field
+	UiTemplateS3Uri *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UiConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UiConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UiConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UiConfig"}
+
+	if s.UiTemplateS3Uri == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UiTemplateS3Uri"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The Liquid template for the worker user interface.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UiTemplate
+type UiTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the Liquid template for the worker user interface.
+	//
+	// Content is a required field
+	Content *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UiTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UiTemplate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UiTemplate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UiTemplate"}
+
+	if s.Content == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
+	}
+	if s.Content != nil && len(*s.Content) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryInput
+type UpdateCodeRepositoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the git repository to update.
+	//
+	// CodeRepositoryName is a required field
+	CodeRepositoryName *string `min:"1" type:"string" required:"true"`
+
+	// The configuration of the git repository, including the URL and the Amazon
+	// Resource Name (ARN) of the AWS Secrets Manager secret that contains the credentials
+	// used to access the repository. The secret must have a staging label of AWSCURRENT
+	// and must be in the following format:
+	//
+	// {"username": UserName, "password": Password}
+	GitConfig *GitConfigForUpdate `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateCodeRepositoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateCodeRepositoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateCodeRepositoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCodeRepositoryInput"}
+
+	if s.CodeRepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CodeRepositoryName"))
+	}
+	if s.CodeRepositoryName != nil && len(*s.CodeRepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CodeRepositoryName", 1))
+	}
+	if s.GitConfig != nil {
+		if err := s.GitConfig.Validate(); err != nil {
+			invalidParams.AddNested("GitConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateCodeRepositoryOutput
+type UpdateCodeRepositoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the git repository.
+	//
+	// CodeRepositoryArn is a required field
+	CodeRepositoryArn *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateCodeRepositoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateCodeRepositoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCodeRepositoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput
@@ -9078,6 +17777,42 @@ func (s UpdateEndpointWeightsAndCapacitiesOutput) SDKResponseMetadata() aws.Resp
 type UpdateNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of the Elastic Inference (EI) instance types to associate with this
+	// notebook instance. Currently only one EI instance type can be associated
+	// with a notebook instance. For more information, see Using Elastic Inference
+	// in Amazon SageMaker (http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
+	AcceleratorTypes []NotebookInstanceAcceleratorType `type:"list"`
+
+	// An array of up to 3 git repositories to associate with the notebook instance.
+	// These can be either the names of git repositories stored as resources in
+	// your account, or the URL of git repositories in AWS CodeCommit (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
+	// or in any other git repository.. These repositories are cloned at the same
+	// level as the default repository of your notebook instance. For more information,
+	// see Associating Git Repositories with Amazon SageMaker Notebook Instances
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	AdditionalCodeRepositories []string `type:"list"`
+
+	// The git repository to associate with the notebook instance as its default
+	// code repository. This can be either the name of a git repository stored as
+	// a resource in your account, or the URL of a git repository in AWS CodeCommit
+	// (http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or
+	// in any other git repository. When you open a notebook instance, it opens
+	// in the directory that contains this repository. For more information, see
+	// Associating Git Repositories with Amazon SageMaker Notebook Instances (http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html).
+	DefaultCodeRepository *string `min:"1" type:"string"`
+
+	// A list of the Elastic Inference (EI) instance types to remove from this notebook
+	// instance.
+	DisassociateAcceleratorTypes *bool `type:"boolean"`
+
+	// A list of names or URLs of the default git repositories to remove from this
+	// notebook instance.
+	DisassociateAdditionalCodeRepositories *bool `type:"boolean"`
+
+	// The name or URL of the default git repository to remove from this notebook
+	// instance.
+	DisassociateDefaultCodeRepository *bool `type:"boolean"`
+
 	// Set to true to remove the notebook instance lifecycle configuration currently
 	// associated with the notebook instance.
 	DisassociateLifecycleConfig *bool `type:"boolean"`
@@ -9086,7 +17821,8 @@ type UpdateNotebookInstanceInput struct {
 	InstanceType InstanceType `type:"string" enum:"true"`
 
 	// The name of a lifecycle configuration to associate with the notebook instance.
-	// For information about lifestyle configurations, see notebook-lifecycle-config.
+	// For information about lifestyle configurations, see Step 2.1: (Optional)
+	// Customize a Notebook Instance (http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 	LifecycleConfigName *string `type:"string"`
 
 	// The name of the notebook instance to update.
@@ -9101,6 +17837,10 @@ type UpdateNotebookInstanceInput struct {
 	// To be able to pass this role to Amazon SageMaker, the caller of this API
 	// must have the iam:PassRole permission.
 	RoleArn *string `min:"20" type:"string"`
+
+	// The size, in GB, of the ML storage volume to attach to the notebook instance.
+	// The default value is 5 GB.
+	VolumeSizeInGB *int64 `min:"5" type:"integer"`
 }
 
 // String returns the string representation
@@ -9116,12 +17856,18 @@ func (s UpdateNotebookInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNotebookInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotebookInstanceInput"}
+	if s.DefaultCodeRepository != nil && len(*s.DefaultCodeRepository) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultCodeRepository", 1))
+	}
 
 	if s.NotebookInstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceName"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+	if s.VolumeSizeInGB != nil && *s.VolumeSizeInGB < 5 {
+		invalidParams.Add(aws.NewErrParamMinValue("VolumeSizeInGB", 5))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9229,9 +17975,94 @@ func (s UpdateNotebookInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteamRequest
+type UpdateWorkteamInput struct {
+	_ struct{} `type:"structure"`
+
+	// An updated description for the work team.
+	Description *string `min:"1" type:"string"`
+
+	// A list of MemberDefinition objects that contain the updated work team members.
+	MemberDefinitions []MemberDefinition `min:"1" type:"list"`
+
+	// The name of the work team to update.
+	//
+	// WorkteamName is a required field
+	WorkteamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateWorkteamInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateWorkteamInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateWorkteamInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateWorkteamInput"}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	}
+	if s.MemberDefinitions != nil && len(s.MemberDefinitions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MemberDefinitions", 1))
+	}
+
+	if s.WorkteamName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkteamName"))
+	}
+	if s.WorkteamName != nil && len(*s.WorkteamName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WorkteamName", 1))
+	}
+	if s.MemberDefinitions != nil {
+		for i, v := range s.MemberDefinitions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MemberDefinitions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkteamResponse
+type UpdateWorkteamOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A Workteam object that describes the updated work team.
+	//
+	// Workteam is a required field
+	Workteam *Workteam `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateWorkteamOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateWorkteamOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateWorkteamOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Specifies a VPC that your training jobs and hosted models have access to.
 // Control access to and from your training and model containers by configuring
-// the VPC. For more information, see host-vpc and train-vpc.
+// the VPC. For more information, see Protect Endpoints by Using an Amazon Virtual
+// Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
+// and Protect Training Jobs by Using an Amazon Virtual Private Cloud (http://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VpcConfig
 type VpcConfig struct {
 	_ struct{} `type:"structure"`
@@ -9283,6 +18114,92 @@ func (s *VpcConfig) Validate() error {
 	return nil
 }
 
+// Provides details about a labeling work team.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workteam
+type Workteam struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time that the work team was created (timestamp).
+	CreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A description of the work team.
+	//
+	// Description is a required field
+	Description *string `min:"1" type:"string" required:"true"`
+
+	// The date and time that the work team was last updated (timestamp).
+	LastUpdatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Cognito user groups that make up the work team.
+	//
+	// MemberDefinitions is a required field
+	MemberDefinitions []MemberDefinition `min:"1" type:"list" required:"true"`
+
+	// The Amazon Marketplace identifier for a vendor's work team.
+	ProductListingIds []string `type:"list"`
+
+	// The URI of the labeling job's user interface. Workers open this URI to start
+	// labeling your data objects.
+	SubDomain *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) that identifies the work team.
+	//
+	// WorkteamArn is a required field
+	WorkteamArn *string `type:"string" required:"true"`
+
+	// The name of the work team.
+	//
+	// WorkteamName is a required field
+	WorkteamName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Workteam) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Workteam) GoString() string {
+	return s.String()
+}
+
+type AlgorithmSortBy string
+
+// Enum values for AlgorithmSortBy
+const (
+	AlgorithmSortByName         AlgorithmSortBy = "Name"
+	AlgorithmSortByCreationTime AlgorithmSortBy = "CreationTime"
+)
+
+func (enum AlgorithmSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlgorithmSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AlgorithmStatus string
+
+// Enum values for AlgorithmStatus
+const (
+	AlgorithmStatusPending    AlgorithmStatus = "Pending"
+	AlgorithmStatusInProgress AlgorithmStatus = "InProgress"
+	AlgorithmStatusCompleted  AlgorithmStatus = "Completed"
+	AlgorithmStatusFailed     AlgorithmStatus = "Failed"
+	AlgorithmStatusDeleting   AlgorithmStatus = "Deleting"
+)
+
+func (enum AlgorithmStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlgorithmStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssemblyType string
 
 // Enum values for AssemblyType
@@ -9317,6 +18234,79 @@ func (enum BatchStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type BooleanOperator string
+
+// Enum values for BooleanOperator
+const (
+	BooleanOperatorAnd BooleanOperator = "And"
+	BooleanOperatorOr  BooleanOperator = "Or"
+)
+
+func (enum BooleanOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BooleanOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CodeRepositorySortBy string
+
+// Enum values for CodeRepositorySortBy
+const (
+	CodeRepositorySortByName             CodeRepositorySortBy = "Name"
+	CodeRepositorySortByCreationTime     CodeRepositorySortBy = "CreationTime"
+	CodeRepositorySortByLastModifiedTime CodeRepositorySortBy = "LastModifiedTime"
+)
+
+func (enum CodeRepositorySortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CodeRepositorySortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CodeRepositorySortOrder string
+
+// Enum values for CodeRepositorySortOrder
+const (
+	CodeRepositorySortOrderAscending  CodeRepositorySortOrder = "Ascending"
+	CodeRepositorySortOrderDescending CodeRepositorySortOrder = "Descending"
+)
+
+func (enum CodeRepositorySortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CodeRepositorySortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CompilationJobStatus string
+
+// Enum values for CompilationJobStatus
+const (
+	CompilationJobStatusInprogress CompilationJobStatus = "INPROGRESS"
+	CompilationJobStatusCompleted  CompilationJobStatus = "COMPLETED"
+	CompilationJobStatusFailed     CompilationJobStatus = "FAILED"
+	CompilationJobStatusStarting   CompilationJobStatus = "STARTING"
+	CompilationJobStatusStopping   CompilationJobStatus = "STOPPING"
+	CompilationJobStatusStopped    CompilationJobStatus = "STOPPED"
+)
+
+func (enum CompilationJobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CompilationJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CompressionType string
 
 // Enum values for CompressionType
@@ -9330,6 +18320,61 @@ func (enum CompressionType) MarshalValue() (string, error) {
 }
 
 func (enum CompressionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ContentClassifier string
+
+// Enum values for ContentClassifier
+const (
+	ContentClassifierFreeOfPersonallyIdentifiableInformation ContentClassifier = "FreeOfPersonallyIdentifiableInformation"
+	ContentClassifierFreeOfAdultContent                      ContentClassifier = "FreeOfAdultContent"
+)
+
+func (enum ContentClassifier) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContentClassifier) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DetailedAlgorithmStatus string
+
+// Enum values for DetailedAlgorithmStatus
+const (
+	DetailedAlgorithmStatusNotStarted DetailedAlgorithmStatus = "NotStarted"
+	DetailedAlgorithmStatusInProgress DetailedAlgorithmStatus = "InProgress"
+	DetailedAlgorithmStatusCompleted  DetailedAlgorithmStatus = "Completed"
+	DetailedAlgorithmStatusFailed     DetailedAlgorithmStatus = "Failed"
+)
+
+func (enum DetailedAlgorithmStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DetailedAlgorithmStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DetailedModelPackageStatus string
+
+// Enum values for DetailedModelPackageStatus
+const (
+	DetailedModelPackageStatusNotStarted DetailedModelPackageStatus = "NotStarted"
+	DetailedModelPackageStatusInProgress DetailedModelPackageStatus = "InProgress"
+	DetailedModelPackageStatusCompleted  DetailedModelPackageStatus = "Completed"
+	DetailedModelPackageStatusFailed     DetailedModelPackageStatus = "Failed"
+)
+
+func (enum DetailedModelPackageStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DetailedModelPackageStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9409,6 +18454,26 @@ func (enum EndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Framework string
+
+// Enum values for Framework
+const (
+	FrameworkTensorflow Framework = "TENSORFLOW"
+	FrameworkMxnet      Framework = "MXNET"
+	FrameworkOnnx       Framework = "ONNX"
+	FrameworkPytorch    Framework = "PYTORCH"
+	FrameworkXgboost    Framework = "XGBOOST"
+)
+
+func (enum Framework) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Framework) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HyperParameterTuningJobObjectiveType string
 
 // Enum values for HyperParameterTuningJobObjectiveType
@@ -9482,25 +18547,65 @@ func (enum HyperParameterTuningJobStrategyType) MarshalValueBuf(b []byte) ([]byt
 	return append(b, enum...), nil
 }
 
+type HyperParameterTuningJobWarmStartType string
+
+// Enum values for HyperParameterTuningJobWarmStartType
+const (
+	HyperParameterTuningJobWarmStartTypeIdenticalDataAndAlgorithm HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"
+	HyperParameterTuningJobWarmStartTypeTransferLearning          HyperParameterTuningJobWarmStartType = "TransferLearning"
+)
+
+func (enum HyperParameterTuningJobWarmStartType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HyperParameterTuningJobWarmStartType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeMlT2Medium   InstanceType = "ml.t2.medium"
-	InstanceTypeMlT2Large    InstanceType = "ml.t2.large"
-	InstanceTypeMlT2Xlarge   InstanceType = "ml.t2.xlarge"
-	InstanceTypeMlT22xlarge  InstanceType = "ml.t2.2xlarge"
-	InstanceTypeMlM4Xlarge   InstanceType = "ml.m4.xlarge"
-	InstanceTypeMlM42xlarge  InstanceType = "ml.m4.2xlarge"
-	InstanceTypeMlM44xlarge  InstanceType = "ml.m4.4xlarge"
-	InstanceTypeMlM410xlarge InstanceType = "ml.m4.10xlarge"
-	InstanceTypeMlM416xlarge InstanceType = "ml.m4.16xlarge"
-	InstanceTypeMlP2Xlarge   InstanceType = "ml.p2.xlarge"
-	InstanceTypeMlP28xlarge  InstanceType = "ml.p2.8xlarge"
-	InstanceTypeMlP216xlarge InstanceType = "ml.p2.16xlarge"
-	InstanceTypeMlP32xlarge  InstanceType = "ml.p3.2xlarge"
-	InstanceTypeMlP38xlarge  InstanceType = "ml.p3.8xlarge"
-	InstanceTypeMlP316xlarge InstanceType = "ml.p3.16xlarge"
+	InstanceTypeMlT2Medium    InstanceType = "ml.t2.medium"
+	InstanceTypeMlT2Large     InstanceType = "ml.t2.large"
+	InstanceTypeMlT2Xlarge    InstanceType = "ml.t2.xlarge"
+	InstanceTypeMlT22xlarge   InstanceType = "ml.t2.2xlarge"
+	InstanceTypeMlT3Medium    InstanceType = "ml.t3.medium"
+	InstanceTypeMlT3Large     InstanceType = "ml.t3.large"
+	InstanceTypeMlT3Xlarge    InstanceType = "ml.t3.xlarge"
+	InstanceTypeMlT32xlarge   InstanceType = "ml.t3.2xlarge"
+	InstanceTypeMlM4Xlarge    InstanceType = "ml.m4.xlarge"
+	InstanceTypeMlM42xlarge   InstanceType = "ml.m4.2xlarge"
+	InstanceTypeMlM44xlarge   InstanceType = "ml.m4.4xlarge"
+	InstanceTypeMlM410xlarge  InstanceType = "ml.m4.10xlarge"
+	InstanceTypeMlM416xlarge  InstanceType = "ml.m4.16xlarge"
+	InstanceTypeMlM5Xlarge    InstanceType = "ml.m5.xlarge"
+	InstanceTypeMlM52xlarge   InstanceType = "ml.m5.2xlarge"
+	InstanceTypeMlM54xlarge   InstanceType = "ml.m5.4xlarge"
+	InstanceTypeMlM512xlarge  InstanceType = "ml.m5.12xlarge"
+	InstanceTypeMlM524xlarge  InstanceType = "ml.m5.24xlarge"
+	InstanceTypeMlC4Xlarge    InstanceType = "ml.c4.xlarge"
+	InstanceTypeMlC42xlarge   InstanceType = "ml.c4.2xlarge"
+	InstanceTypeMlC44xlarge   InstanceType = "ml.c4.4xlarge"
+	InstanceTypeMlC48xlarge   InstanceType = "ml.c4.8xlarge"
+	InstanceTypeMlC5Xlarge    InstanceType = "ml.c5.xlarge"
+	InstanceTypeMlC52xlarge   InstanceType = "ml.c5.2xlarge"
+	InstanceTypeMlC54xlarge   InstanceType = "ml.c5.4xlarge"
+	InstanceTypeMlC59xlarge   InstanceType = "ml.c5.9xlarge"
+	InstanceTypeMlC518xlarge  InstanceType = "ml.c5.18xlarge"
+	InstanceTypeMlC5dXlarge   InstanceType = "ml.c5d.xlarge"
+	InstanceTypeMlC5d2xlarge  InstanceType = "ml.c5d.2xlarge"
+	InstanceTypeMlC5d4xlarge  InstanceType = "ml.c5d.4xlarge"
+	InstanceTypeMlC5d9xlarge  InstanceType = "ml.c5d.9xlarge"
+	InstanceTypeMlC5d18xlarge InstanceType = "ml.c5d.18xlarge"
+	InstanceTypeMlP2Xlarge    InstanceType = "ml.p2.xlarge"
+	InstanceTypeMlP28xlarge   InstanceType = "ml.p2.8xlarge"
+	InstanceTypeMlP216xlarge  InstanceType = "ml.p2.16xlarge"
+	InstanceTypeMlP32xlarge   InstanceType = "ml.p3.2xlarge"
+	InstanceTypeMlP38xlarge   InstanceType = "ml.p3.8xlarge"
+	InstanceTypeMlP316xlarge  InstanceType = "ml.p3.16xlarge"
 )
 
 func (enum InstanceType) MarshalValue() (string, error) {
@@ -9508,6 +18613,96 @@ func (enum InstanceType) MarshalValue() (string, error) {
 }
 
 func (enum InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type LabelingJobStatus string
+
+// Enum values for LabelingJobStatus
+const (
+	LabelingJobStatusInProgress LabelingJobStatus = "InProgress"
+	LabelingJobStatusCompleted  LabelingJobStatus = "Completed"
+	LabelingJobStatusFailed     LabelingJobStatus = "Failed"
+	LabelingJobStatusStopping   LabelingJobStatus = "Stopping"
+	LabelingJobStatusStopped    LabelingJobStatus = "Stopped"
+)
+
+func (enum LabelingJobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LabelingJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ListLabelingJobsForWorkteamSortByOptions string
+
+// Enum values for ListLabelingJobsForWorkteamSortByOptions
+const (
+	ListLabelingJobsForWorkteamSortByOptionsCreationTime ListLabelingJobsForWorkteamSortByOptions = "CreationTime"
+)
+
+func (enum ListLabelingJobsForWorkteamSortByOptions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListLabelingJobsForWorkteamSortByOptions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ListWorkteamsSortByOptions string
+
+// Enum values for ListWorkteamsSortByOptions
+const (
+	ListWorkteamsSortByOptionsName       ListWorkteamsSortByOptions = "Name"
+	ListWorkteamsSortByOptionsCreateDate ListWorkteamsSortByOptions = "CreateDate"
+)
+
+func (enum ListWorkteamsSortByOptions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListWorkteamsSortByOptions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ModelPackageSortBy string
+
+// Enum values for ModelPackageSortBy
+const (
+	ModelPackageSortByName         ModelPackageSortBy = "Name"
+	ModelPackageSortByCreationTime ModelPackageSortBy = "CreationTime"
+)
+
+func (enum ModelPackageSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ModelPackageSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ModelPackageStatus string
+
+// Enum values for ModelPackageStatus
+const (
+	ModelPackageStatusPending    ModelPackageStatus = "Pending"
+	ModelPackageStatusInProgress ModelPackageStatus = "InProgress"
+	ModelPackageStatusCompleted  ModelPackageStatus = "Completed"
+	ModelPackageStatusFailed     ModelPackageStatus = "Failed"
+	ModelPackageStatusDeleting   ModelPackageStatus = "Deleting"
+)
+
+func (enum ModelPackageStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ModelPackageStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9525,6 +18720,24 @@ func (enum ModelSortKey) MarshalValue() (string, error) {
 }
 
 func (enum ModelSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NotebookInstanceAcceleratorType string
+
+// Enum values for NotebookInstanceAcceleratorType
+const (
+	NotebookInstanceAcceleratorTypeMlEia1Medium NotebookInstanceAcceleratorType = "ml.eia1.medium"
+	NotebookInstanceAcceleratorTypeMlEia1Large  NotebookInstanceAcceleratorType = "ml.eia1.large"
+	NotebookInstanceAcceleratorTypeMlEia1Xlarge NotebookInstanceAcceleratorType = "ml.eia1.xlarge"
+)
+
+func (enum NotebookInstanceAcceleratorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookInstanceAcceleratorType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9639,6 +18852,28 @@ func (enum ObjectiveStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Operator string
+
+// Enum values for Operator
+const (
+	OperatorEquals               Operator = "Equals"
+	OperatorNotEquals            Operator = "NotEquals"
+	OperatorGreaterThan          Operator = "GreaterThan"
+	OperatorGreaterThanOrEqualTo Operator = "GreaterThanOrEqualTo"
+	OperatorLessThan             Operator = "LessThan"
+	OperatorLessThanOrEqualTo    Operator = "LessThanOrEqualTo"
+	OperatorContains             Operator = "Contains"
+)
+
+func (enum Operator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Operator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderKey string
 
 // Enum values for OrderKey
@@ -9652,6 +18887,43 @@ func (enum OrderKey) MarshalValue() (string, error) {
 }
 
 func (enum OrderKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ParameterType string
+
+// Enum values for ParameterType
+const (
+	ParameterTypeInteger     ParameterType = "Integer"
+	ParameterTypeContinuous  ParameterType = "Continuous"
+	ParameterTypeCategorical ParameterType = "Categorical"
+	ParameterTypeFreeText    ParameterType = "FreeText"
+)
+
+func (enum ParameterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProductionVariantAcceleratorType string
+
+// Enum values for ProductionVariantAcceleratorType
+const (
+	ProductionVariantAcceleratorTypeMlEia1Medium ProductionVariantAcceleratorType = "ml.eia1.medium"
+	ProductionVariantAcceleratorTypeMlEia1Large  ProductionVariantAcceleratorType = "ml.eia1.large"
+	ProductionVariantAcceleratorTypeMlEia1Xlarge ProductionVariantAcceleratorType = "ml.eia1.xlarge"
+)
+
+func (enum ProductionVariantAcceleratorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductionVariantAcceleratorType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9720,6 +18992,22 @@ func (enum RecordWrapper) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeTrainingJob ResourceType = "TrainingJob"
+)
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type S3DataDistribution string
 
 // Enum values for S3DataDistribution
@@ -9741,8 +19029,9 @@ type S3DataType string
 
 // Enum values for S3DataType
 const (
-	S3DataTypeManifestFile S3DataType = "ManifestFile"
-	S3DataTypeS3prefix     S3DataType = "S3Prefix"
+	S3DataTypeManifestFile          S3DataType = "ManifestFile"
+	S3DataTypeS3prefix              S3DataType = "S3Prefix"
+	S3DataTypeAugmentedManifestFile S3DataType = "AugmentedManifestFile"
 )
 
 func (enum S3DataType) MarshalValue() (string, error) {
@@ -9750,6 +19039,23 @@ func (enum S3DataType) MarshalValue() (string, error) {
 }
 
 func (enum S3DataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SearchSortOrder string
+
+// Enum values for SearchSortOrder
+const (
+	SearchSortOrderAscending  SearchSortOrder = "Ascending"
+	SearchSortOrderDescending SearchSortOrder = "Descending"
+)
+
+func (enum SearchSortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SearchSortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9830,6 +19136,31 @@ func (enum SplitType) MarshalValue() (string, error) {
 }
 
 func (enum SplitType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetDevice string
+
+// Enum values for TargetDevice
+const (
+	TargetDeviceMlM4      TargetDevice = "ml_m4"
+	TargetDeviceMlM5      TargetDevice = "ml_m5"
+	TargetDeviceMlC4      TargetDevice = "ml_c4"
+	TargetDeviceMlC5      TargetDevice = "ml_c5"
+	TargetDeviceMlP2      TargetDevice = "ml_p2"
+	TargetDeviceMlP3      TargetDevice = "ml_p3"
+	TargetDeviceJetsonTx1 TargetDevice = "jetson_tx1"
+	TargetDeviceJetsonTx2 TargetDevice = "jetson_tx2"
+	TargetDeviceRasp3b    TargetDevice = "rasp3b"
+	TargetDeviceDeeplens  TargetDevice = "deeplens"
+)
+
+func (enum TargetDevice) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetDevice) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

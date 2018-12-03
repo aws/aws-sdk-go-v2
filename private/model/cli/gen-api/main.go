@@ -207,6 +207,10 @@ func writeServiceFiles(g *generateInfo, filename string) {
 	Must(writeWaitersFile(g))
 	Must(writeAPIErrorsFile(g))
 	Must(writeExamplesFile(g))
+
+	if g.API.PackageName() == "s3" {
+		Must(writeS3ManagerUploadInputFile(g))
+	}
 }
 
 // Must will panic if the error passed in is not nil.
@@ -309,5 +313,14 @@ func writeAPIErrorsFile(g *generateInfo) error {
 		"",
 		g.API.PackageName(),
 		g.API.APIErrorsGoCode(),
+	)
+}
+
+func writeS3ManagerUploadInputFile(g *generateInfo) error {
+	return writeGoFile(filepath.Join(g.PackageDir, "s3manager", "upload_input.go"),
+		codeLayout,
+		"",
+		"s3manager",
+		api.S3ManagerUploadInputGoCode(g.API),
 	)
 }

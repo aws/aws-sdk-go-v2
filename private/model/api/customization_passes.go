@@ -43,6 +43,7 @@ func (a *API) EnableSelectGeneratedMarshalers() {
 func (a *API) customizationPasses() {
 	var svcCustomizations = map[string]func(*API){
 		"s3":         s3Customizations,
+		"s3control":  s3ControlCustomizations,
 		"cloudfront": cloudfrontCustomizations,
 		"rds":        rdsCustomizations,
 	}
@@ -99,6 +100,21 @@ func s3Customizations(a *API) {
 		}
 	}
 	s3CustRemoveHeadObjectModeledErrors(a)
+}
+
+// S3 Control service operations with an AccountId need accessors to be
+// generated for them so the fields can be dynamically accessed without
+// reflection.
+func s3ControlCustomizations(a *API) {
+	for _, op := range a.Operations {
+		// Add moving AccountId into the hostname instead of header.
+		if _, ok := op.InputRef.Shape.MemberRefs["AccountId"]; ok {
+			op.CustomBuildHandlers = append(op.CustomBuildHandlers,
+				`buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId))`,
+				`buildRemoveHeaderHandler("X-Amz-Account-Id")`,
+			)
+		}
+	}
 }
 
 // S3 HeadObject API call incorrect models NoSuchKey as valid

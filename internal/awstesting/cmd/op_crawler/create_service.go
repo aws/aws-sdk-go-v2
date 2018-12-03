@@ -7,9 +7,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/acm"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness"
+	"github.com/aws/aws-sdk-go-v2/service/amplify"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh"
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
 	"github.com/aws/aws-sdk-go-v2/service/appsync"
 	"github.com/aws/aws-sdk-go-v2/service/athena"
@@ -17,6 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans"
 	"github.com/aws/aws-sdk-go-v2/service/batch"
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
+	"github.com/aws/aws-sdk-go-v2/service/chime"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
@@ -38,12 +41,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical"
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
 	"github.com/aws/aws-sdk-go-v2/service/connect"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
+	"github.com/aws/aws-sdk-go-v2/service/datasync"
 	"github.com/aws/aws-sdk-go-v2/service/dax"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect"
@@ -65,8 +70,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/emr"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
 	"github.com/aws/aws-sdk-go-v2/service/fms"
+	"github.com/aws/aws-sdk-go-v2/service/fsx"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator"
 	"github.com/aws/aws-sdk-go-v2/service/glue"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty"
@@ -79,8 +86,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane"
+	"github.com/aws/aws-sdk-go-v2/service/kafka"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia"
@@ -88,12 +97,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 	"github.com/aws/aws-sdk-go-v2/service/macie"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconvert"
 	"github.com/aws/aws-sdk-go-v2/service/medialive"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage"
@@ -111,19 +122,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
 	"github.com/aws/aws-sdk-go-v2/service/pi"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice"
 	"github.com/aws/aws-sdk-go-v2/service/polly"
 	"github.com/aws/aws-sdk-go-v2/service/pricing"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight"
+	"github.com/aws/aws-sdk-go-v2/service/ram"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdataservice"
 	"github.com/aws/aws-sdk-go-v2/service/redshift"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi"
+	"github.com/aws/aws-sdk-go-v2/service/robomaker"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3control"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
@@ -142,6 +162,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/support"
 	"github.com/aws/aws-sdk-go-v2/service/swf"
 	"github.com/aws/aws-sdk-go-v2/service/transcribeservice"
+	"github.com/aws/aws-sdk-go-v2/service/transfer"
 	"github.com/aws/aws-sdk-go-v2/service/translate"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional"
@@ -166,9 +187,11 @@ func createServices(cfg aws.Config) []service {
 		{name: "acm", value: reflect.ValueOf(acm.New(cfg))},
 		{name: "acmpca", value: reflect.ValueOf(acmpca.New(cfg))},
 		{name: "alexaforbusiness", value: reflect.ValueOf(alexaforbusiness.New(cfg))},
+		{name: "amplify", value: reflect.ValueOf(amplify.New(cfg))},
 		{name: "apigateway", value: reflect.ValueOf(apigateway.New(cfg))},
 		{name: "applicationautoscaling", value: reflect.ValueOf(applicationautoscaling.New(cfg))},
 		{name: "applicationdiscoveryservice", value: reflect.ValueOf(applicationdiscoveryservice.New(cfg))},
+		{name: "appmesh", value: reflect.ValueOf(appmesh.New(cfg))},
 		{name: "appstream", value: reflect.ValueOf(appstream.New(cfg))},
 		{name: "appsync", value: reflect.ValueOf(appsync.New(cfg))},
 		{name: "athena", value: reflect.ValueOf(athena.New(cfg))},
@@ -176,6 +199,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "autoscalingplans", value: reflect.ValueOf(autoscalingplans.New(cfg))},
 		{name: "batch", value: reflect.ValueOf(batch.New(cfg))},
 		{name: "budgets", value: reflect.ValueOf(budgets.New(cfg))},
+		{name: "chime", value: reflect.ValueOf(chime.New(cfg))},
 		{name: "cloud9", value: reflect.ValueOf(cloud9.New(cfg))},
 		{name: "clouddirectory", value: reflect.ValueOf(clouddirectory.New(cfg))},
 		{name: "cloudformation", value: reflect.ValueOf(cloudformation.New(cfg))},
@@ -197,12 +221,14 @@ func createServices(cfg aws.Config) []service {
 		{name: "cognitoidentityprovider", value: reflect.ValueOf(cognitoidentityprovider.New(cfg))},
 		{name: "cognitosync", value: reflect.ValueOf(cognitosync.New(cfg))},
 		{name: "comprehend", value: reflect.ValueOf(comprehend.New(cfg))},
+		{name: "comprehendmedical", value: reflect.ValueOf(comprehendmedical.New(cfg))},
 		{name: "configservice", value: reflect.ValueOf(configservice.New(cfg))},
 		{name: "connect", value: reflect.ValueOf(connect.New(cfg))},
 		{name: "costandusagereportservice", value: reflect.ValueOf(costandusagereportservice.New(cfg))},
 		{name: "costexplorer", value: reflect.ValueOf(costexplorer.New(cfg))},
 		{name: "databasemigrationservice", value: reflect.ValueOf(databasemigrationservice.New(cfg))},
 		{name: "datapipeline", value: reflect.ValueOf(datapipeline.New(cfg))},
+		{name: "datasync", value: reflect.ValueOf(datasync.New(cfg))},
 		{name: "dax", value: reflect.ValueOf(dax.New(cfg))},
 		{name: "devicefarm", value: reflect.ValueOf(devicefarm.New(cfg))},
 		{name: "directconnect", value: reflect.ValueOf(directconnect.New(cfg))},
@@ -224,8 +250,10 @@ func createServices(cfg aws.Config) []service {
 		{name: "emr", value: reflect.ValueOf(emr.New(cfg))},
 		{name: "firehose", value: reflect.ValueOf(firehose.New(cfg))},
 		{name: "fms", value: reflect.ValueOf(fms.New(cfg))},
+		{name: "fsx", value: reflect.ValueOf(fsx.New(cfg))},
 		{name: "gamelift", value: reflect.ValueOf(gamelift.New(cfg))},
 		{name: "glacier", value: reflect.ValueOf(glacier.New(cfg))},
+		{name: "globalaccelerator", value: reflect.ValueOf(globalaccelerator.New(cfg))},
 		{name: "glue", value: reflect.ValueOf(glue.New(cfg))},
 		{name: "greengrass", value: reflect.ValueOf(greengrass.New(cfg))},
 		{name: "guardduty", value: reflect.ValueOf(guardduty.New(cfg))},
@@ -238,8 +266,10 @@ func createServices(cfg aws.Config) []service {
 		{name: "iotanalytics", value: reflect.ValueOf(iotanalytics.New(cfg))},
 		{name: "iotdataplane", value: reflect.ValueOf(iotdataplane.New(cfg))},
 		{name: "iotjobsdataplane", value: reflect.ValueOf(iotjobsdataplane.New(cfg))},
+		{name: "kafka", value: reflect.ValueOf(kafka.New(cfg))},
 		{name: "kinesis", value: reflect.ValueOf(kinesis.New(cfg))},
 		{name: "kinesisanalytics", value: reflect.ValueOf(kinesisanalytics.New(cfg))},
+		{name: "kinesisanalyticsv2", value: reflect.ValueOf(kinesisanalyticsv2.New(cfg))},
 		{name: "kinesisvideo", value: reflect.ValueOf(kinesisvideo.New(cfg))},
 		{name: "kinesisvideoarchivedmedia", value: reflect.ValueOf(kinesisvideoarchivedmedia.New(cfg))},
 		{name: "kinesisvideomedia", value: reflect.ValueOf(kinesisvideomedia.New(cfg))},
@@ -247,12 +277,14 @@ func createServices(cfg aws.Config) []service {
 		{name: "lambda", value: reflect.ValueOf(lambda.New(cfg))},
 		{name: "lexmodelbuildingservice", value: reflect.ValueOf(lexmodelbuildingservice.New(cfg))},
 		{name: "lexruntimeservice", value: reflect.ValueOf(lexruntimeservice.New(cfg))},
+		{name: "licensemanager", value: reflect.ValueOf(licensemanager.New(cfg))},
 		{name: "lightsail", value: reflect.ValueOf(lightsail.New(cfg))},
 		{name: "machinelearning", value: reflect.ValueOf(machinelearning.New(cfg))},
 		{name: "macie", value: reflect.ValueOf(macie.New(cfg))},
 		{name: "marketplacecommerceanalytics", value: reflect.ValueOf(marketplacecommerceanalytics.New(cfg))},
 		{name: "marketplaceentitlementservice", value: reflect.ValueOf(marketplaceentitlementservice.New(cfg))},
 		{name: "marketplacemetering", value: reflect.ValueOf(marketplacemetering.New(cfg))},
+		{name: "mediaconnect", value: reflect.ValueOf(mediaconnect.New(cfg))},
 		{name: "mediaconvert", value: reflect.ValueOf(mediaconvert.New(cfg))},
 		{name: "medialive", value: reflect.ValueOf(medialive.New(cfg))},
 		{name: "mediapackage", value: reflect.ValueOf(mediapackage.New(cfg))},
@@ -270,19 +302,28 @@ func createServices(cfg aws.Config) []service {
 		{name: "organizations", value: reflect.ValueOf(organizations.New(cfg))},
 		{name: "pi", value: reflect.ValueOf(pi.New(cfg))},
 		{name: "pinpoint", value: reflect.ValueOf(pinpoint.New(cfg))},
+		{name: "pinpointemail", value: reflect.ValueOf(pinpointemail.New(cfg))},
+		{name: "pinpointsmsvoice", value: reflect.ValueOf(pinpointsmsvoice.New(cfg))},
 		{name: "polly", value: reflect.ValueOf(polly.New(cfg))},
 		{name: "pricing", value: reflect.ValueOf(pricing.New(cfg))},
+		{name: "quicksight", value: reflect.ValueOf(quicksight.New(cfg))},
+		{name: "ram", value: reflect.ValueOf(ram.New(cfg))},
 		{name: "rds", value: reflect.ValueOf(rds.New(cfg))},
+		{name: "rdsdataservice", value: reflect.ValueOf(rdsdataservice.New(cfg))},
 		{name: "redshift", value: reflect.ValueOf(redshift.New(cfg))},
 		{name: "rekognition", value: reflect.ValueOf(rekognition.New(cfg))},
 		{name: "resourcegroups", value: reflect.ValueOf(resourcegroups.New(cfg))},
 		{name: "resourcegroupstaggingapi", value: reflect.ValueOf(resourcegroupstaggingapi.New(cfg))},
+		{name: "robomaker", value: reflect.ValueOf(robomaker.New(cfg))},
 		{name: "route53", value: reflect.ValueOf(route53.New(cfg))},
 		{name: "route53domains", value: reflect.ValueOf(route53domains.New(cfg))},
+		{name: "route53resolver", value: reflect.ValueOf(route53resolver.New(cfg))},
 		{name: "s3", value: reflect.ValueOf(s3Client)},
+		{name: "s3control", value: reflect.ValueOf(s3control.New(cfg))},
 		{name: "sagemaker", value: reflect.ValueOf(sagemaker.New(cfg))},
 		{name: "sagemakerruntime", value: reflect.ValueOf(sagemakerruntime.New(cfg))},
 		{name: "secretsmanager", value: reflect.ValueOf(secretsmanager.New(cfg))},
+		{name: "securityhub", value: reflect.ValueOf(securityhub.New(cfg))},
 		{name: "serverlessapplicationrepository", value: reflect.ValueOf(serverlessapplicationrepository.New(cfg))},
 		{name: "servicecatalog", value: reflect.ValueOf(servicecatalog.New(cfg))},
 		{name: "servicediscovery", value: reflect.ValueOf(servicediscovery.New(cfg))},
@@ -301,6 +342,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "support", value: reflect.ValueOf(support.New(cfg))},
 		{name: "swf", value: reflect.ValueOf(swf.New(cfg))},
 		{name: "transcribeservice", value: reflect.ValueOf(transcribeservice.New(cfg))},
+		{name: "transfer", value: reflect.ValueOf(transfer.New(cfg))},
 		{name: "translate", value: reflect.ValueOf(translate.New(cfg))},
 		{name: "waf", value: reflect.ValueOf(waf.New(cfg))},
 		{name: "wafregional", value: reflect.ValueOf(wafregional.New(cfg))},

@@ -64,6 +64,56 @@ func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) AddTagsReques
 	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
+const opCancelElasticsearchServiceSoftwareUpdate = "CancelElasticsearchServiceSoftwareUpdate"
+
+// CancelElasticsearchServiceSoftwareUpdateRequest is a API request type for the CancelElasticsearchServiceSoftwareUpdate API operation.
+type CancelElasticsearchServiceSoftwareUpdateRequest struct {
+	*aws.Request
+	Input *CancelElasticsearchServiceSoftwareUpdateInput
+	Copy  func(*CancelElasticsearchServiceSoftwareUpdateInput) CancelElasticsearchServiceSoftwareUpdateRequest
+}
+
+// Send marshals and sends the CancelElasticsearchServiceSoftwareUpdate API request.
+func (r CancelElasticsearchServiceSoftwareUpdateRequest) Send() (*CancelElasticsearchServiceSoftwareUpdateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelElasticsearchServiceSoftwareUpdateOutput), nil
+}
+
+// CancelElasticsearchServiceSoftwareUpdateRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Cancels a scheduled service software update for an Amazon ES domain. You
+// can only perform this operation before the AutomatedUpdateDate and when the
+// UpdateStatus is in the PENDING_UPDATE state.
+//
+//    // Example sending a request using the CancelElasticsearchServiceSoftwareUpdateRequest method.
+//    req := client.CancelElasticsearchServiceSoftwareUpdateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) CancelElasticsearchServiceSoftwareUpdateRequest(input *CancelElasticsearchServiceSoftwareUpdateInput) CancelElasticsearchServiceSoftwareUpdateRequest {
+	op := &aws.Operation{
+		Name:       opCancelElasticsearchServiceSoftwareUpdate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-01-01/es/serviceSoftwareUpdate/cancel",
+	}
+
+	if input == nil {
+		input = &CancelElasticsearchServiceSoftwareUpdateInput{}
+	}
+
+	output := &CancelElasticsearchServiceSoftwareUpdateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CancelElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.CancelElasticsearchServiceSoftwareUpdateRequest}
+}
+
 const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
 
 // CreateElasticsearchDomainRequest is a API request type for the CreateElasticsearchDomain API operation.
@@ -1210,6 +1260,54 @@ func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) RemoveT
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
+const opStartElasticsearchServiceSoftwareUpdate = "StartElasticsearchServiceSoftwareUpdate"
+
+// StartElasticsearchServiceSoftwareUpdateRequest is a API request type for the StartElasticsearchServiceSoftwareUpdate API operation.
+type StartElasticsearchServiceSoftwareUpdateRequest struct {
+	*aws.Request
+	Input *StartElasticsearchServiceSoftwareUpdateInput
+	Copy  func(*StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest
+}
+
+// Send marshals and sends the StartElasticsearchServiceSoftwareUpdate API request.
+func (r StartElasticsearchServiceSoftwareUpdateRequest) Send() (*StartElasticsearchServiceSoftwareUpdateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartElasticsearchServiceSoftwareUpdateOutput), nil
+}
+
+// StartElasticsearchServiceSoftwareUpdateRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Schedules a service software update for an Amazon ES domain.
+//
+//    // Example sending a request using the StartElasticsearchServiceSoftwareUpdateRequest method.
+//    req := client.StartElasticsearchServiceSoftwareUpdateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) StartElasticsearchServiceSoftwareUpdateRequest(input *StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest {
+	op := &aws.Operation{
+		Name:       opStartElasticsearchServiceSoftwareUpdate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-01-01/es/serviceSoftwareUpdate/start",
+	}
+
+	if input == nil {
+		input = &StartElasticsearchServiceSoftwareUpdateInput{}
+	}
+
+	output := &StartElasticsearchServiceSoftwareUpdateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.StartElasticsearchServiceSoftwareUpdateRequest}
+}
+
 const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
 
 // UpdateElasticsearchDomainConfigRequest is a API request type for the UpdateElasticsearchDomainConfig API operation.
@@ -1561,6 +1659,95 @@ func (s AdvancedOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Container for the parameters to the CancelElasticsearchServiceSoftwareUpdate
+// operation. Specifies the name of the Elasticsearch domain that you wish to
+// cancel a service software update on.
+type CancelElasticsearchServiceSoftwareUpdateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that you want to stop the latest service software
+	// update on.
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CancelElasticsearchServiceSoftwareUpdateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CancelElasticsearchServiceSoftwareUpdateInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelElasticsearchServiceSoftwareUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The result of a CancelElasticsearchServiceSoftwareUpdate operation. Contains
+// the status of the update.
+type CancelElasticsearchServiceSoftwareUpdateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The current status of the Elasticsearch service software update.
+	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
+}
+
+// String returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServiceSoftwareOptions != nil {
+		v := s.ServiceSoftwareOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
 	}
 	return nil
 }
@@ -3137,6 +3324,9 @@ type ElasticsearchDomainStatus struct {
 	// active.
 	Processing *bool `type:"boolean"`
 
+	// The current status of the Elasticsearch domain's service software.
+	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
+
 	// Specifies the status of the SnapshotOptions
 	SnapshotOptions *SnapshotOptions `type:"structure"`
 
@@ -3280,6 +3470,12 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Processing", protocol.BoolValue(v), metadata)
+	}
+	if s.ServiceSoftwareOptions != nil {
+		v := s.ServiceSoftwareOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
 	}
 	if s.SnapshotOptions != nil {
 		v := s.SnapshotOptions
@@ -5029,6 +5225,93 @@ func (s ReservedElasticsearchInstanceOffering) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
+// The current options of an Elasticsearch domain service software options.
+type ServiceSoftwareOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Timestamp, in Epoch time, until which you can manually request a service
+	// software update. After this date, we automatically update your service software.
+	AutomatedUpdateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// True if you are able to cancel your service software version update. False
+	// if you are not able to cancel your service software version.
+	Cancellable *bool `type:"boolean"`
+
+	// The current service software version that is present on the domain.
+	CurrentVersion *string `type:"string"`
+
+	// The description of the UpdateStatus.
+	Description *string `type:"string"`
+
+	// The new service software version if one is available.
+	NewVersion *string `type:"string"`
+
+	// True if you are able to update you service software version. False if you
+	// are not able to update your service software version.
+	UpdateAvailable *bool `type:"boolean"`
+
+	// The status of your service software update. This field can take the following
+	// values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
+	UpdateStatus DeploymentStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ServiceSoftwareOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServiceSoftwareOptions) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceSoftwareOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutomatedUpdateDate != nil {
+		v := *s.AutomatedUpdateDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AutomatedUpdateDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Cancellable != nil {
+		v := *s.Cancellable
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Cancellable", protocol.BoolValue(v), metadata)
+	}
+	if s.CurrentVersion != nil {
+		v := *s.CurrentVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NewVersion != nil {
+		v := *s.NewVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NewVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdateAvailable != nil {
+		v := *s.UpdateAvailable
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateAvailable", protocol.BoolValue(v), metadata)
+	}
+	if len(s.UpdateStatus) > 0 {
+		v := s.UpdateStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Specifies the time, in UTC format, when the service takes a daily automated
 // snapshot of the specified Elasticsearch domain. Default value is 0 hours.
 type SnapshotOptions struct {
@@ -5098,6 +5381,94 @@ func (s SnapshotOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Container for the parameters to the StartElasticsearchServiceSoftwareUpdate
+// operation. Specifies the name of the Elasticsearch domain that you wish to
+// schedule a service software update on.
+type StartElasticsearchServiceSoftwareUpdateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that you want to update to the latest service software.
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartElasticsearchServiceSoftwareUpdateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartElasticsearchServiceSoftwareUpdateInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartElasticsearchServiceSoftwareUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains
+// the status of the update.
+type StartElasticsearchServiceSoftwareUpdateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The current status of the Elasticsearch service software update.
+	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
+}
+
+// String returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartElasticsearchServiceSoftwareUpdateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartElasticsearchServiceSoftwareUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServiceSoftwareOptions != nil {
+		v := s.ServiceSoftwareOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
 	}
 	return nil
 }
@@ -5913,6 +6284,26 @@ func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 	}
 	return nil
+}
+
+type DeploymentStatus string
+
+// Enum values for DeploymentStatus
+const (
+	DeploymentStatusPendingUpdate DeploymentStatus = "PENDING_UPDATE"
+	DeploymentStatusInProgress    DeploymentStatus = "IN_PROGRESS"
+	DeploymentStatusCompleted     DeploymentStatus = "COMPLETED"
+	DeploymentStatusNotEligible   DeploymentStatus = "NOT_ELIGIBLE"
+	DeploymentStatusEligible      DeploymentStatus = "ELIGIBLE"
+)
+
+func (enum DeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type ESPartitionInstanceType string

@@ -3,9 +3,224 @@
 package translate
 
 import (
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
+
+const opDeleteTerminology = "DeleteTerminology"
+
+// DeleteTerminologyRequest is a API request type for the DeleteTerminology API operation.
+type DeleteTerminologyRequest struct {
+	*aws.Request
+	Input *DeleteTerminologyInput
+	Copy  func(*DeleteTerminologyInput) DeleteTerminologyRequest
+}
+
+// Send marshals and sends the DeleteTerminology API request.
+func (r DeleteTerminologyRequest) Send() (*DeleteTerminologyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTerminologyOutput), nil
+}
+
+// DeleteTerminologyRequest returns a request value for making API operation for
+// Amazon Translate.
+//
+// A synchronous action that deletes a custom terminology.
+//
+//    // Example sending a request using the DeleteTerminologyRequest method.
+//    req := client.DeleteTerminologyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminology
+func (c *Translate) DeleteTerminologyRequest(input *DeleteTerminologyInput) DeleteTerminologyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteTerminology,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteTerminologyInput{}
+	}
+
+	output := &DeleteTerminologyOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteTerminologyRequest{Request: req, Input: input, Copy: c.DeleteTerminologyRequest}
+}
+
+const opGetTerminology = "GetTerminology"
+
+// GetTerminologyRequest is a API request type for the GetTerminology API operation.
+type GetTerminologyRequest struct {
+	*aws.Request
+	Input *GetTerminologyInput
+	Copy  func(*GetTerminologyInput) GetTerminologyRequest
+}
+
+// Send marshals and sends the GetTerminology API request.
+func (r GetTerminologyRequest) Send() (*GetTerminologyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTerminologyOutput), nil
+}
+
+// GetTerminologyRequest returns a request value for making API operation for
+// Amazon Translate.
+//
+// Retrieves a custom terminology.
+//
+//    // Example sending a request using the GetTerminologyRequest method.
+//    req := client.GetTerminologyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminology
+func (c *Translate) GetTerminologyRequest(input *GetTerminologyInput) GetTerminologyRequest {
+	op := &aws.Operation{
+		Name:       opGetTerminology,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetTerminologyInput{}
+	}
+
+	output := &GetTerminologyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetTerminologyRequest{Request: req, Input: input, Copy: c.GetTerminologyRequest}
+}
+
+const opImportTerminology = "ImportTerminology"
+
+// ImportTerminologyRequest is a API request type for the ImportTerminology API operation.
+type ImportTerminologyRequest struct {
+	*aws.Request
+	Input *ImportTerminologyInput
+	Copy  func(*ImportTerminologyInput) ImportTerminologyRequest
+}
+
+// Send marshals and sends the ImportTerminology API request.
+func (r ImportTerminologyRequest) Send() (*ImportTerminologyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportTerminologyOutput), nil
+}
+
+// ImportTerminologyRequest returns a request value for making API operation for
+// Amazon Translate.
+//
+// Creates or updates a custom terminology, depending on whether or not one
+// already exists for the given terminology name. Importing a terminology with
+// the same name as an existing one will merge the terminologies based on the
+// chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE,
+// and so the imported terminology will overwrite an existing terminology of
+// the same name.
+//
+// If you import a terminology that overwrites an existing one, the new terminology
+// take up to 10 minutes to fully propagate and be available for use in a translation
+// due to cache policies with the DataPlane service that performs the translations.
+//
+//    // Example sending a request using the ImportTerminologyRequest method.
+//    req := client.ImportTerminologyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminology
+func (c *Translate) ImportTerminologyRequest(input *ImportTerminologyInput) ImportTerminologyRequest {
+	op := &aws.Operation{
+		Name:       opImportTerminology,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ImportTerminologyInput{}
+	}
+
+	output := &ImportTerminologyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ImportTerminologyRequest{Request: req, Input: input, Copy: c.ImportTerminologyRequest}
+}
+
+const opListTerminologies = "ListTerminologies"
+
+// ListTerminologiesRequest is a API request type for the ListTerminologies API operation.
+type ListTerminologiesRequest struct {
+	*aws.Request
+	Input *ListTerminologiesInput
+	Copy  func(*ListTerminologiesInput) ListTerminologiesRequest
+}
+
+// Send marshals and sends the ListTerminologies API request.
+func (r ListTerminologiesRequest) Send() (*ListTerminologiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTerminologiesOutput), nil
+}
+
+// ListTerminologiesRequest returns a request value for making API operation for
+// Amazon Translate.
+//
+// Provides a list of custom terminologies associated with your account.
+//
+//    // Example sending a request using the ListTerminologiesRequest method.
+//    req := client.ListTerminologiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologies
+func (c *Translate) ListTerminologiesRequest(input *ListTerminologiesInput) ListTerminologiesRequest {
+	op := &aws.Operation{
+		Name:       opListTerminologies,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTerminologiesInput{}
+	}
+
+	output := &ListTerminologiesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTerminologiesRequest{Request: req, Input: input, Copy: c.ListTerminologiesRequest}
+}
 
 const opText = "TranslateText"
 
@@ -29,21 +244,52 @@ func (r TextRequest) Send() (*TextOutput, error) {
 // TextRequest returns a request value for making API operation for
 // Amazon Translate.
 //
-// Translates input text from the source language to the target language. You
-// can translate between English (en) and one of the following languages, or
-// between one of the following languages and English.
+// Translates input text from the source language to the target language. It
+// is not necessary to use English (en) as either the source or the target language
+// but not all language combinations are supported by Amazon Translate. For
+// more information, see Supported Language Pairs (http://docs.aws.amazon.com/translate/latest/dg/pairs.html).
 //
 //    * Arabic (ar)
 //
 //    * Chinese (Simplified) (zh)
 //
+//    * Chinese (Traditional) (zh-TW)
+//
+//    * Czech (cs)
+//
+//    * Danish (da)
+//
+//    * Dutch (nl)
+//
+//    * English (en)
+//
+//    * Finnish (fi)
+//
 //    * French (fr)
 //
 //    * German (de)
 //
+//    * Hebrew (he)
+//
+//    * Indonesian (id)
+//
+//    * Italian (it)
+//
+//    * Japanese (ja)
+//
+//    * Korean (ko)
+//
+//    * Polish (pl)
+//
 //    * Portuguese (pt)
 //
+//    * Russian (ru)
+//
 //    * Spanish (es)
+//
+//    * Swedish (sv)
+//
+//    * Turkish (tr)
 //
 // To have Amazon Translate determine the source language of your text, you
 // can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
@@ -75,12 +321,525 @@ func (c *Translate) TextRequest(input *TextInput) TextRequest {
 	return TextRequest{Request: req, Input: input, Copy: c.TextRequest}
 }
 
+// The custom terminology applied to the input text by Amazon Translate for
+// the translated text response. This is optional in the response and will only
+// be present if you specified terminology input in the request. Currently,
+// only one terminology can be applied per TranslateText request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/AppliedTerminology
+type AppliedTerminology struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the custom terminology applied to the input text by Amazon Translate
+	// for the translated text response.
+	Name *string `min:"1" type:"string"`
+
+	// The specific terms of the custom terminology applied to the input text by
+	// Amazon Translate for the translated text response. A maximum of 250 terms
+	// will be returned, and the specific terms applied will be the first 250 terms
+	// in the source text.
+	Terms []Term `type:"list"`
+}
+
+// String returns the string representation
+func (s AppliedTerminology) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AppliedTerminology) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminologyRequest
+type DeleteTerminologyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the custom terminology being deleted.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteTerminologyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTerminologyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteTerminologyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTerminologyInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DeleteTerminologyOutput
+type DeleteTerminologyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteTerminologyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTerminologyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTerminologyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// The encryption key used to encrypt the custom terminologies used by Amazon
+// Translate.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/EncryptionKey
+type EncryptionKey struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the encryption key being used to encrypt
+	// the custom terminology.
+	//
+	// Id is a required field
+	Id *string `min:"1" type:"string" required:"true"`
+
+	// The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+	//
+	// Type is a required field
+	Type EncryptionKeyType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s EncryptionKey) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EncryptionKey) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EncryptionKey) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptionKey"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminologyRequest
+type GetTerminologyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the custom terminology being retrieved.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The data format of the custom terminology being retrieved, either CSV or
+	// TMX.
+	//
+	// TerminologyDataFormat is a required field
+	TerminologyDataFormat TerminologyDataFormat `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetTerminologyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetTerminologyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetTerminologyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetTerminologyInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if len(s.TerminologyDataFormat) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TerminologyDataFormat"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/GetTerminologyResponse
+type GetTerminologyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The data location of the custom terminology being retrieved. The custom terminology
+	// file is returned in a presigned url that has a 30 minute expiration.
+	TerminologyDataLocation *TerminologyDataLocation `type:"structure"`
+
+	// The properties of the custom terminology being retrieved.
+	TerminologyProperties *TerminologyProperties `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetTerminologyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetTerminologyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetTerminologyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminologyRequest
+type ImportTerminologyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the custom terminology being imported.
+	Description *string `type:"string"`
+
+	// The encryption key for the custom terminology being imported.
+	EncryptionKey *EncryptionKey `type:"structure"`
+
+	// The merge strategy of the custom terminology being imported. Currently, only
+	// the OVERWRITE merge strategy is supported. In this case, the imported terminology
+	// will overwrite an existing terminology of the same name.
+	//
+	// MergeStrategy is a required field
+	MergeStrategy MergeStrategy `type:"string" required:"true" enum:"true"`
+
+	// The name of the custom terminology being imported.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The terminology data for the custom terminology being imported.
+	//
+	// TerminologyData is a required field
+	TerminologyData *TerminologyData `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ImportTerminologyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ImportTerminologyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ImportTerminologyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ImportTerminologyInput"}
+	if len(s.MergeStrategy) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("MergeStrategy"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.TerminologyData == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TerminologyData"))
+	}
+	if s.EncryptionKey != nil {
+		if err := s.EncryptionKey.Validate(); err != nil {
+			invalidParams.AddNested("EncryptionKey", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TerminologyData != nil {
+		if err := s.TerminologyData.Validate(); err != nil {
+			invalidParams.AddNested("TerminologyData", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ImportTerminologyResponse
+type ImportTerminologyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The properties of the custom terminology being imported.
+	TerminologyProperties *TerminologyProperties `type:"structure"`
+}
+
+// String returns the string representation
+func (s ImportTerminologyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ImportTerminologyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportTerminologyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologiesRequest
+type ListTerminologiesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of custom terminologies returned per list request.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// If the result of the request to ListTerminologies was truncated, include
+	// the NextToken to fetch the next group of custom terminologies.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListTerminologiesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTerminologiesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTerminologiesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTerminologiesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/ListTerminologiesResponse
+type ListTerminologiesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the response to the ListTerminologies was truncated, the NextToken fetches
+	// the next group of custom terminologies.
+	NextToken *string `type:"string"`
+
+	// The properties list of the custom terminologies returned on the list request.
+	TerminologyPropertiesList []TerminologyProperties `type:"list"`
+}
+
+// String returns the string representation
+func (s ListTerminologiesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTerminologiesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTerminologiesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// The term being translated by the custom terminology.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/Term
+type Term struct {
+	_ struct{} `type:"structure"`
+
+	// The source text of the term being translated by the custom terminology.
+	SourceText *string `type:"string"`
+
+	// The target text of the term being translated by the custom terminology.
+	TargetText *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Term) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Term) GoString() string {
+	return s.String()
+}
+
+// The data associated with the custom terminology.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyData
+type TerminologyData struct {
+	_ struct{} `type:"structure"`
+
+	// The file containing the custom terminology data.
+	//
+	// File is automatically base64 encoded/decoded by the SDK.
+	//
+	// File is a required field
+	File []byte `type:"blob" required:"true"`
+
+	// The data format of the custom terminology. Either CSV or TMX.
+	//
+	// Format is a required field
+	Format TerminologyDataFormat `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s TerminologyData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TerminologyData) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TerminologyData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TerminologyData"}
+
+	if s.File == nil {
+		invalidParams.Add(aws.NewErrParamRequired("File"))
+	}
+	if len(s.Format) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The location of the custom terminology data.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyDataLocation
+type TerminologyDataLocation struct {
+	_ struct{} `type:"structure"`
+
+	// The location of the custom terminology data.
+	//
+	// Location is a required field
+	Location *string `type:"string" required:"true"`
+
+	// The repository type for the custom terminology data.
+	//
+	// RepositoryType is a required field
+	RepositoryType *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s TerminologyDataLocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TerminologyDataLocation) GoString() string {
+	return s.String()
+}
+
+// The properties of the custom terminology.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TerminologyProperties
+type TerminologyProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the custom terminology.
+	Arn *string `type:"string"`
+
+	// The time at which the custom terminology was created, based on the timestamp.
+	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The description of the custom terminology properties.
+	Description *string `type:"string"`
+
+	// The encryption key for the custom terminology.
+	EncryptionKey *EncryptionKey `type:"structure"`
+
+	// The time at which the custom terminology was last update, based on the timestamp.
+	LastUpdatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the custom terminology.
+	Name *string `min:"1" type:"string"`
+
+	// The size of the file used when importing a custom terminology.
+	SizeBytes *int64 `type:"integer"`
+
+	// The language code for the source text of the translation request for which
+	// the custom terminology is being used.
+	SourceLanguageCode *string `min:"2" type:"string"`
+
+	// The language codes for the target languages available with the custom terminology
+	// file. All possible target languages are returned in array.
+	TargetLanguageCodes []string `type:"list"`
+
+	// The number of terms included in the custom terminology.
+	TermCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s TerminologyProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TerminologyProperties) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TextRequest
 type TextInput struct {
 	_ struct{} `type:"structure"`
 
-	// One of the supported language codes for the source text. If the TargetLanguageCode
-	// is not "en", the SourceLanguageCode must be "en".
+	// The language code for the language of the source text. The language must
+	// be a language supported by Amazon Translate.
 	//
 	// To have Amazon Translate determine the source language of your text, you
 	// can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
@@ -89,13 +848,18 @@ type TextInput struct {
 	// SourceLanguageCode is a required field
 	SourceLanguageCode *string `min:"2" type:"string" required:"true"`
 
-	// One of the supported language codes for the target text. If the SourceLanguageCode
-	// is not "en", the TargetLanguageCode must be "en".
+	// The language code requested for the language of the target text. The language
+	// must be a language supported by Amazon Translate.
 	//
 	// TargetLanguageCode is a required field
 	TargetLanguageCode *string `min:"2" type:"string" required:"true"`
 
-	// The text to translate.
+	// The TerminologyNames list that is taken as input to the TranslateText request.
+	// This has a minimum length of 0 and a maximum length of 1.
+	TerminologyNames []string `type:"list"`
+
+	// The text to translate. The text string can be a maximum of 5,000 bytes long.
+	// Depending on your character set, this may be fewer than 5,000 characters.
 	//
 	// Text is a required field
 	Text *string `min:"1" type:"string" required:"true"`
@@ -148,20 +912,24 @@ type TextOutput struct {
 
 	responseMetadata aws.Response
 
-	// The language code for the language of the input text.
+	// The names of the custom terminologies applied to the input text by Amazon
+	// Translate for the translated text response.
+	AppliedTerminologies []AppliedTerminology `type:"list"`
+
+	// The language code for the language of the source text.
 	//
 	// SourceLanguageCode is a required field
 	SourceLanguageCode *string `min:"2" type:"string" required:"true"`
 
-	// The language code for the language of the translated text.
+	// The language code for the language of the target text.
 	//
 	// TargetLanguageCode is a required field
 	TargetLanguageCode *string `min:"2" type:"string" required:"true"`
 
-	// The text translated into the target language.
+	// The the translated text. The maximum length of this text is 5kb.
 	//
 	// TranslatedText is a required field
-	TranslatedText *string `min:"1" type:"string" required:"true"`
+	TranslatedText *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -177,4 +945,53 @@ func (s TextOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TextOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+type EncryptionKeyType string
+
+// Enum values for EncryptionKeyType
+const (
+	EncryptionKeyTypeKms EncryptionKeyType = "KMS"
+)
+
+func (enum EncryptionKeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MergeStrategy string
+
+// Enum values for MergeStrategy
+const (
+	MergeStrategyOverwrite MergeStrategy = "OVERWRITE"
+)
+
+func (enum MergeStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MergeStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TerminologyDataFormat string
+
+// Enum values for TerminologyDataFormat
+const (
+	TerminologyDataFormatCsv TerminologyDataFormat = "CSV"
+	TerminologyDataFormatTmx TerminologyDataFormat = "TMX"
+)
+
+func (enum TerminologyDataFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TerminologyDataFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }

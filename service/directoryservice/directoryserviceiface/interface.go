@@ -158,6 +158,8 @@ type DirectoryServiceAPI interface {
 
 	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) directoryservice.UpdateRadiusRequest
 
+	UpdateTrustRequest(*directoryservice.UpdateTrustInput) directoryservice.UpdateTrustRequest
+
 	VerifyTrustRequest(*directoryservice.VerifyTrustInput) directoryservice.VerifyTrustRequest
 }
 

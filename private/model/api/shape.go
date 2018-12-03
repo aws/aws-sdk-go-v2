@@ -31,10 +31,23 @@ type ShapeRef struct {
 	IdempotencyToken bool `json:"idempotencyToken"`
 	JSONValue        bool `json:"jsonvalue"`
 	Deprecated       bool `json:"deprecated"`
+	HostLabel        bool `json:"hostLabel"`
 
 	OrigShapeName string `json:"-"`
 
 	GenerateGetter bool
+}
+
+// CanBeEmpty returns if the shape value can sent request as an empty value.
+// String, blob, list, and map are types must not be empty when the member is
+// decorated with HostLabel.
+func (ref *ShapeRef) CanBeEmpty() bool {
+	switch ref.Shape.Type {
+	case "string":
+		return !ref.HostLabel
+	default:
+		return true
+	}
 }
 
 // ErrorInfo represents the error block of a shape's structure
@@ -560,11 +573,26 @@ func (s *Shape) NestedShape() *Shape {
 	return nestedShape
 }
 
-var structShapeTmpl = template.Must(template.New("StructShape").Funcs(template.FuncMap{
-	"GetCrosslinkURL":      GetCrosslinkURL,
-	"MarshalShapeGoCode":   MarshalShapeGoCode,
-	"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
-}).Parse(`
+var structShapeTmpl = func() *template.Template {
+	shapeTmpl := template.Must(
+		template.New("structShapeTmpl").
+			Funcs(template.FuncMap{
+				"GetCrosslinkURL":      GetCrosslinkURL,
+				"MarshalShapeGoCode":   MarshalShapeGoCode,
+				"UnmarshalShapeGoCode": UnmarshalShapeGoCode,
+			}).Parse(structShapeTmplDef),
+	)
+
+	template.Must(
+		shapeTmpl.AddParseTree(
+			"hostLabelsShapeTmpl",
+			hostLabelsShapeTmpl.Tree),
+	)
+
+	return shapeTmpl
+}()
+
+const structShapeTmplDef = `
 {{ .Docstring }}
 {{ if ne $.OrigShapeName "" -}}
 {{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.OrigShapeName -}}
@@ -655,7 +683,11 @@ func (s *{{ $builderShapeName }}) get{{ $name }}() (v {{ $context.GoStructValueT
 {{ if not $.API.NoGenUnmarshalers -}}
 {{ UnmarshalShapeGoCode $ }}
 {{- end }}
-`))
+
+{{ if $.HasHostLabelMembers }}
+	{{ template "hostLabelsShapeTmpl" $ }}
+{{ end }}
+`
 
 var enumShapeTmpl = template.Must(template.New("EnumShape").Funcs(template.FuncMap{
 	"MarshalEnumGoCode": marshalEnumGoCode,
@@ -702,6 +734,16 @@ func (s *Shape) IsEnum() bool {
 
 // IsRequired returns if member is a required field.
 func (s *Shape) IsRequired(member string) bool {
+	ref, ok := s.MemberRefs[member]
+	if !ok {
+		panic(fmt.Sprintf(
+			"attemped to check required for unknown member, %s.%s",
+			s.ShapeName, member,
+		))
+	}
+	if ref.HostLabel {
+		return true
+	}
 	for _, n := range s.Required {
 		if n == member {
 			return true

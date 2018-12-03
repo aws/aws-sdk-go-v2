@@ -89,13 +89,16 @@ func (r CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput
 // Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED
 // compute environments.
 //
-// In a managed compute environment, AWS Batch manages the compute resources
-// within the environment, based on the compute resources that you specify.
-// Instances launched into a managed compute environment use a recent, approved
-// version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2
-// On-Demand Instances in your managed compute environment, or you can use Amazon
-// EC2 Spot Instances that only launch when the Spot bid price is below a specified
-// percentage of the On-Demand price.
+// In a managed compute environment, AWS Batch manages the capacity and instance
+// types of the compute resources within the environment. This is based on the
+// compute resource specification that you define or the launch template (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
+// that you specify when you create the compute environment. You can choose
+// to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute
+// environment. You can optionally set a maximum price so that Spot Instances
+// only launch when the Spot Instance price is below a specified percentage
+// of the On-Demand price.
+//
+// Multi-node parallel jobs are not supported on Spot Instances.
 //
 // In an unmanaged compute environment, you can manage your own compute resources.
 // This provides more compute resource configuration options, such as using
@@ -104,10 +107,25 @@ func (r CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput
 // AMIs (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html)
 // in the Amazon Elastic Container Service Developer Guide. After you have created
 // your unmanaged compute environment, you can use the DescribeComputeEnvironments
-// operation to find the Amazon ECS cluster that is associated with it and then
+// operation to find the Amazon ECS cluster that is associated with it. Then,
 // manually launch your container instances into that Amazon ECS cluster. For
 // more information, see Launching an Amazon ECS Container Instance (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)
 // in the Amazon Elastic Container Service Developer Guide.
+//
+// AWS Batch does not upgrade the AMIs in a compute environment after it is
+// created (for example, when a newer version of the Amazon ECS-optimized AMI
+// is available). You are responsible for the management of the guest operating
+// system (including updates and security patches) and any additional application
+// software or utilities that you install on the compute resources. To use a
+// new AMI for your AWS Batch jobs:
+//
+// Create a new compute environment with the new AMI.
+//
+// Add the compute environment to an existing job queue.
+//
+// Remove the old compute environment from your job queue.
+//
+// Delete the old compute environment.
 //
 //    // Example sending a request using the CreateComputeEnvironmentRequest method.
 //    req := client.CreateComputeEnvironmentRequest(params)
@@ -579,9 +597,18 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 // ListJobsRequest returns a request value for making API operation for
 // AWS Batch.
 //
-// Returns a list of task jobs for a specified job queue. You can filter the
-// results by job status with the jobStatus parameter. If you do not specify
-// a status, only RUNNING jobs are returned.
+// Returns a list of AWS Batch jobs.
+//
+// You must specify only one of the following:
+//
+//    * a job queue ID to return a list of jobs in that job queue
+//
+//    * a multi-node parallel job ID to return a list of that job's nodes
+//
+//    * an array job ID to return a list of that job's children
+//
+// You can filter the results by job status with the jobStatus parameter. If
+// you do not specify a status, only RUNNING jobs are returned.
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
@@ -1005,6 +1032,9 @@ type AttemptContainerDetail struct {
 	// receives a log stream name when they reach the RUNNING status.
 	LogStreamName *string `locationName:"logStreamName" type:"string"`
 
+	// The network interfaces associated with the job attempt.
+	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaces" type:"list"`
+
 	// A short (255 max characters) human-readable string to provide additional
 	// details about a running or stopped container.
 	Reason *string `locationName:"reason" type:"string"`
@@ -1045,6 +1075,18 @@ func (s AttemptContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "logStreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.NetworkInterfaces) > 0 {
+		v := s.NetworkInterfaces
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "networkInterfaces", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Reason != nil {
 		v := *s.Reason
 
@@ -1068,7 +1110,7 @@ type AttemptDetail struct {
 	// Details about the container in this job attempt.
 	Container *AttemptContainerDetail `locationName:"container" type:"structure"`
 
-	// The Unix time stamp (in seconds and milliseconds) for when the attempt was
+	// The Unix timestamp (in seconds and milliseconds) for when the attempt was
 	// started (when the attempt transitioned from the STARTING state to the RUNNING
 	// state).
 	StartedAt *int64 `locationName:"startedAt" type:"long"`
@@ -1077,7 +1119,7 @@ type AttemptDetail struct {
 	// status of the job attempt.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
-	// The Unix time stamp (in seconds and milliseconds) for when the attempt was
+	// The Unix timestamp (in seconds and milliseconds) for when the attempt was
 	// stopped (when the attempt transitioned from the RUNNING state to a terminal
 	// state, such as SUCCEEDED or FAILED).
 	StoppedAt *int64 `locationName:"stoppedAt" type:"long"`
@@ -1242,8 +1284,17 @@ type ComputeEnvironmentDetail struct {
 	ServiceRole *string `locationName:"serviceRole" type:"string"`
 
 	// The state of the compute environment. The valid values are ENABLED or DISABLED.
-	// An ENABLED state indicates that you can register instances with the compute
-	// environment and that the associated instances can accept jobs.
+	//
+	// If the state is ENABLED, then the AWS Batch scheduler can attempt to place
+	// jobs from an associated job queue on the compute resources within the environment.
+	// If the compute environment is managed, then it can scale its instances out
+	// or in automatically, based on the job queue demand.
+	//
+	// If the state is DISABLED, then the AWS Batch scheduler does not attempt to
+	// place jobs within the environment. Jobs in a STARTING or RUNNING state continue
+	// to progress normally. Managed compute environments in the DISABLED state
+	// do not scale out. However, they scale in to minvCpus value after instances
+	// become idle.
 	State CEState `locationName:"state" type:"string" enum:"true"`
 
 	// The current status of the compute environment (for example, CREATING or VALID).
@@ -1395,10 +1446,13 @@ func (s ComputeEnvironmentOrder) MarshalFields(e protocol.FieldEncoder) error {
 type ComputeResource struct {
 	_ struct{} `type:"structure"`
 
-	// The minimum percentage that a Spot Instance price must be when compared with
+	// The maximum percentage that a Spot Instance price can be when compared with
 	// the On-Demand price for that instance type before instances are launched.
-	// For example, if your bid percentage is 20%, then the Spot price must be below
-	// 20% of the current On-Demand price for that EC2 instance.
+	// For example, if your maximum percentage is 20%, then the Spot price must
+	// be below 20% of the current On-Demand price for that EC2 instance. You always
+	// pay the lowest (market) price and never more than your maximum percentage.
+	// If you leave this field empty, the default value is 100% of the On-Demand
+	// price.
 	BidPercentage *int64 `locationName:"bidPercentage" type:"integer"`
 
 	// The desired number of EC2 vCPUS in the compute environment.
@@ -1429,21 +1483,35 @@ type ComputeResource struct {
 	// InstanceTypes is a required field
 	InstanceTypes []string `locationName:"instanceTypes" type:"list" required:"true"`
 
+	// The launch template to use for your compute resources. Any other compute
+	// resource parameters that you specify in a CreateComputeEnvironment API operation
+	// override the same parameters in the launch template. You must specify either
+	// the launch template ID or launch template name in the request, but not both.
+	LaunchTemplate *LaunchTemplateSpecification `locationName:"launchTemplate" type:"structure"`
+
 	// The maximum number of EC2 vCPUs that an environment can reach.
 	//
 	// MaxvCpus is a required field
 	MaxvCpus *int64 `locationName:"maxvCpus" type:"integer" required:"true"`
 
-	// The minimum number of EC2 vCPUs that an environment should maintain.
+	// The minimum number of EC2 vCPUs that an environment should maintain (even
+	// if the compute environment is DISABLED).
 	//
 	// MinvCpus is a required field
 	MinvCpus *int64 `locationName:"minvCpus" type:"integer" required:"true"`
 
+	// The Amazon EC2 placement group to associate with your compute resources.
+	// If you intend to submit multi-node parallel jobs to your compute environment,
+	// you should consider creating a cluster placement group and associate it with
+	// your compute resources. This keeps your multi-node parallel job on a logical
+	// grouping of instances within a single Availability Zone with high network
+	// flow potential. For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
+	PlacementGroup *string `locationName:"placementGroup" type:"string"`
+
 	// The EC2 security group that is associated with instances launched in the
 	// compute environment.
-	//
-	// SecurityGroupIds is a required field
-	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list" required:"true"`
+	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied
 	// to a SPOT compute environment.
@@ -1492,10 +1560,6 @@ func (s *ComputeResource) Validate() error {
 
 	if s.MinvCpus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinvCpus"))
-	}
-
-	if s.SecurityGroupIds == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
 
 	if s.Subnets == nil {
@@ -1555,6 +1619,12 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.LaunchTemplate != nil {
+		v := s.LaunchTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "launchTemplate", v, metadata)
+	}
 	if s.MaxvCpus != nil {
 		v := *s.MaxvCpus
 
@@ -1566,6 +1636,12 @@ func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minvCpus", protocol.Int64Value(v), metadata)
+	}
+	if s.PlacementGroup != nil {
+		v := *s.PlacementGroup
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "placementGroup", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SecurityGroupIds) > 0 {
 		v := s.SecurityGroupIds
@@ -1691,6 +1767,10 @@ type ContainerDetail struct {
 	// The image used to start the container.
 	Image *string `locationName:"image" type:"string"`
 
+	// The instance type of the underlying host infrastructure of a multi-node parallel
+	// job.
+	InstanceType *string `locationName:"instanceType" type:"string"`
+
 	// The Amazon Resource Name (ARN) associated with the job upon execution.
 	JobRoleArn *string `locationName:"jobRoleArn" type:"string"`
 
@@ -1704,6 +1784,9 @@ type ContainerDetail struct {
 
 	// The mount points for data volumes in your container.
 	MountPoints []MountPoint `locationName:"mountPoints" type:"list"`
+
+	// The network interfaces associated with the job.
+	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaces" type:"list"`
 
 	// When this parameter is true, the container is given elevated privileges on
 	// the host container instance (similar to the root user).
@@ -1789,6 +1872,12 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "image", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.JobRoleArn != nil {
 		v := *s.JobRoleArn
 
@@ -1812,6 +1901,18 @@ func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "mountPoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.NetworkInterfaces) > 0 {
+		v := s.NetworkInterfaces
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "networkInterfaces", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
@@ -1899,6 +2000,10 @@ type ContainerOverrides struct {
 	// is reserved for variables that are set by the AWS Batch service.
 	Environment []KeyValuePair `locationName:"environment" type:"list"`
 
+	// The instance type to use for a multi-node parallel job. This parameter is
+	// not valid for single-node container jobs.
+	InstanceType *string `locationName:"instanceType" type:"string"`
+
 	// The number of MiB of memory reserved for the job. This value overrides the
 	// value set in the job definition.
 	Memory *int64 `locationName:"memory" type:"integer"`
@@ -1943,6 +2048,12 @@ func (s ContainerOverrides) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Memory != nil {
 		v := *s.Memory
@@ -2006,9 +2117,12 @@ type ContainerProperties struct {
 	//
 	//    * Images in other online repositories are qualified further by a domain
 	//    name (for example, quay.io/assemblyline/ubuntu).
-	//
-	// Image is a required field
-	Image *string `locationName:"image" type:"string" required:"true"`
+	Image *string `locationName:"image" type:"string"`
+
+	// The instance type to use for a multi-node parallel job. Currently all node
+	// groups in a multi-node parallel job must use the same instance type. This
+	// parameter is not valid for single-node container jobs.
+	InstanceType *string `locationName:"instanceType" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that the container can assume
 	// for AWS permissions.
@@ -2025,9 +2139,7 @@ type ContainerProperties struct {
 	// jobs as much memory as possible for a particular instance type, see Memory
 	// Management (http://docs.aws.amazon.com/batch/latest/userguide/memory-management.html)
 	// in the AWS Batch User Guide.
-	//
-	// Memory is a required field
-	Memory *int64 `locationName:"memory" type:"integer" required:"true"`
+	Memory *int64 `locationName:"memory" type:"integer"`
 
 	// The mount points for data volumes in your container. This parameter maps
 	// to Volumes in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container)
@@ -2067,9 +2179,7 @@ type ContainerProperties struct {
 	// and the --cpu-shares option to docker run (https://docs.docker.com/engine/reference/run/).
 	// Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one
 	// vCPU.
-	//
-	// Vcpus is a required field
-	Vcpus *int64 `locationName:"vcpus" type:"integer" required:"true"`
+	Vcpus *int64 `locationName:"vcpus" type:"integer"`
 
 	// A list of data volumes used in a job.
 	Volumes []Volume `locationName:"volumes" type:"list"`
@@ -2088,18 +2198,6 @@ func (s ContainerProperties) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerProperties) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ContainerProperties"}
-
-	if s.Image == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Image"))
-	}
-
-	if s.Memory == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Memory"))
-	}
-
-	if s.Vcpus == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Vcpus"))
-	}
 	if s.Ulimits != nil {
 		for i, v := range s.Ulimits {
 			if err := v.Validate(); err != nil {
@@ -2145,6 +2243,12 @@ func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "image", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.JobRoleArn != nil {
 		v := *s.JobRoleArn
@@ -2296,7 +2400,9 @@ type CreateComputeEnvironmentInput struct {
 	// on queues.
 	State CEState `locationName:"state" type:"string" enum:"true"`
 
-	// The type of the compute environment.
+	// The type of the compute environment. For more information, see Compute Environments
+	// (http://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
+	// in the AWS Batch User Guide.
 	//
 	// Type is a required field
 	Type CEType `locationName:"type" type:"string" required:"true" enum:"true"`
@@ -2440,7 +2546,7 @@ type CreateJobQueueInput struct {
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
-	// with same compute environment. Priority is determined in descending order,
+	// with the same compute environment. Priority is determined in descending order,
 	// for example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1.
 	//
@@ -3341,6 +3447,9 @@ type JobDefinition struct {
 	// JobDefinitionName is a required field
 	JobDefinitionName *string `locationName:"jobDefinitionName" type:"string" required:"true"`
 
+	// An object with various properties specific to multi-node parallel jobs.
+	NodeProperties *NodeProperties `locationName:"nodeProperties" type:"structure"`
+
 	// Default parameters or parameter substitution placeholders that are set in
 	// the job definition. Parameters are specified as a key-value pair mapping.
 	// Parameters in a SubmitJob request override any corresponding parameter defaults
@@ -3399,6 +3508,12 @@ func (s JobDefinition) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodeProperties != nil {
+		v := s.NodeProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
 	if len(s.Parameters) > 0 {
 		v := s.Parameters
@@ -3499,7 +3614,7 @@ type JobDetail struct {
 	// the job.
 	Container *ContainerDetail `locationName:"container" type:"structure"`
 
-	// The Unix time stamp (in seconds and milliseconds) for when the job was created.
+	// The Unix timestamp (in seconds and milliseconds) for when the job was created.
 	// For non-array jobs and parent array jobs, this is when the job entered the
 	// SUBMITTED state (at the time SubmitJob was called). For array child jobs,
 	// this is when the child job was spawned by its parent and entered the PENDING
@@ -3529,6 +3644,13 @@ type JobDetail struct {
 	// JobQueue is a required field
 	JobQueue *string `locationName:"jobQueue" type:"string" required:"true"`
 
+	// An object representing the details of a node that is associated with a multi-node
+	// parallel job.
+	NodeDetails *NodeDetails `locationName:"nodeDetails" type:"structure"`
+
+	// An object representing the node properties of a multi-node parallel job.
+	NodeProperties *NodeProperties `locationName:"nodeProperties" type:"structure"`
+
 	// Additional parameters passed to the job that replace parameter substitution
 	// placeholders or override any corresponding parameter defaults from the job
 	// definition.
@@ -3537,13 +3659,16 @@ type JobDetail struct {
 	// The retry strategy to use for this job if an attempt fails.
 	RetryStrategy *RetryStrategy `locationName:"retryStrategy" type:"structure"`
 
-	// The Unix time stamp (in seconds and milliseconds) for when the job was started
+	// The Unix timestamp (in seconds and milliseconds) for when the job was started
 	// (when the job transitioned from the STARTING state to the RUNNING state).
 	//
 	// StartedAt is a required field
 	StartedAt *int64 `locationName:"startedAt" type:"long" required:"true"`
 
 	// The current status for the job.
+	//
+	// If your jobs do not progress to STARTING, see Jobs Stuck in  (http://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable)RUNNABLE
+	// Status in the troubleshooting section of the AWS Batch User Guide.
 	//
 	// Status is a required field
 	Status JobStatus `locationName:"status" type:"string" required:"true" enum:"true"`
@@ -3552,7 +3677,7 @@ type JobDetail struct {
 	// status of the job.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
-	// The Unix time stamp (in seconds and milliseconds) for when the job was stopped
+	// The Unix timestamp (in seconds and milliseconds) for when the job was stopped
 	// (when the job transitioned from the RUNNING state to a terminal state, such
 	// as SUCCEEDED or FAILED).
 	StoppedAt *int64 `locationName:"stoppedAt" type:"long"`
@@ -3638,6 +3763,18 @@ func (s JobDetail) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodeDetails != nil {
+		v := s.NodeDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nodeDetails", v, metadata)
+	}
+	if s.NodeProperties != nil {
+		v := s.NodeProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
 	if len(s.Parameters) > 0 {
 		v := s.Parameters
@@ -3805,10 +3942,10 @@ type JobSummary struct {
 	// the job.
 	Container *ContainerSummary `locationName:"container" type:"structure"`
 
-	// The Unix time stamp for when the job was created. For non-array jobs and
-	// parent array jobs, this is when the job entered the SUBMITTED state (at the
-	// time SubmitJob was called). For array child jobs, this is when the child
-	// job was spawned by its parent and entered the PENDING state.
+	// The Unix timestamp for when the job was created. For non-array jobs and parent
+	// array jobs, this is when the job entered the SUBMITTED state (at the time
+	// SubmitJob was called). For array child jobs, this is when the child job was
+	// spawned by its parent and entered the PENDING state.
 	CreatedAt *int64 `locationName:"createdAt" type:"long"`
 
 	// The ID of the job.
@@ -3821,7 +3958,10 @@ type JobSummary struct {
 	// JobName is a required field
 	JobName *string `locationName:"jobName" type:"string" required:"true"`
 
-	// The Unix time stamp for when the job was started (when the job transitioned
+	// The node properties for a single node in a job summary list.
+	NodeProperties *NodePropertiesSummary `locationName:"nodeProperties" type:"structure"`
+
+	// The Unix timestamp for when the job was started (when the job transitioned
 	// from the STARTING state to the RUNNING state).
 	StartedAt *int64 `locationName:"startedAt" type:"long"`
 
@@ -3832,7 +3972,7 @@ type JobSummary struct {
 	// status of the job.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
-	// The Unix time stamp for when the job was stopped (when the job transitioned
+	// The Unix timestamp for when the job was stopped (when the job transitioned
 	// from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
 	StoppedAt *int64 `locationName:"stoppedAt" type:"long"`
 }
@@ -3878,6 +4018,12 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodeProperties != nil {
+		v := s.NodeProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
 	if s.StartedAt != nil {
 		v := *s.StartedAt
@@ -3978,6 +4124,58 @@ func (s KeyValuePair) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing a launch template associated with a compute resource.
+// You must specify either the launch template ID or launch template name in
+// the request, but not both.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/LaunchTemplateSpecification
+type LaunchTemplateSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the launch template.
+	LaunchTemplateId *string `locationName:"launchTemplateId" type:"string"`
+
+	// The name of the launch template.
+	LaunchTemplateName *string `locationName:"launchTemplateName" type:"string"`
+
+	// The version number of the launch template.
+	//
+	// Default: The default version of the launch template.
+	Version *string `locationName:"version" type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchTemplateSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchTemplateSpecification) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LaunchTemplateSpecification) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LaunchTemplateId != nil {
+		v := *s.LaunchTemplateId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "launchTemplateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LaunchTemplateName != nil {
+		v := *s.LaunchTemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "launchTemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest
 type ListJobsInput struct {
 	_ struct{} `type:"structure"`
@@ -4002,6 +4200,11 @@ type ListJobsInput struct {
 	// is not used, then ListJobs returns up to 100 results and a nextToken value
 	// if applicable.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+
+	// The job ID for a multi-node parallel job. Specifying a multi-node parallel
+	// job ID with this parameter lists all nodes that are associated with the specified
+	// job.
+	MultiNodeJobId *string `locationName:"multiNodeJobId" type:"string"`
 
 	// The nextToken value returned from a previous paginated ListJobs request where
 	// maxResults was used and the results exceeded the value of that parameter.
@@ -4050,6 +4253,12 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.MultiNodeJobId != nil {
+		v := *s.MultiNodeJobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "multiNodeJobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
@@ -4166,12 +4375,427 @@ func (s MountPoint) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object representing the elastic network interface for a multi-node parallel
+// job node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NetworkInterface
+type NetworkInterface struct {
+	_ struct{} `type:"structure"`
+
+	// The attachment ID for the network interface.
+	AttachmentId *string `locationName:"attachmentId" type:"string"`
+
+	// The private IPv6 address for the network interface.
+	Ipv6Address *string `locationName:"ipv6Address" type:"string"`
+
+	// The private IPv4 address for the network interface.
+	PrivateIpv4Address *string `locationName:"privateIpv4Address" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NetworkInterface) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttachmentId != nil {
+		v := *s.AttachmentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "attachmentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Ipv6Address != nil {
+		v := *s.Ipv6Address
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipv6Address", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateIpv4Address != nil {
+		v := *s.PrivateIpv4Address
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateIpv4Address", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the details of a multi-node parallel job node.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeDetails
+type NodeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether the current node is the main node for a multi-node parallel
+	// job.
+	IsMainNode *bool `locationName:"isMainNode" type:"boolean"`
+
+	// The node index for the node. Node index numbering begins at zero. This index
+	// is also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
+	// variable.
+	NodeIndex *int64 `locationName:"nodeIndex" type:"integer"`
+}
+
+// String returns the string representation
+func (s NodeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeDetails) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsMainNode != nil {
+		v := *s.IsMainNode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "isMainNode", protocol.BoolValue(v), metadata)
+	}
+	if s.NodeIndex != nil {
+		v := *s.NodeIndex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nodeIndex", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Object representing any node overrides to a job definition that is used in
+// a SubmitJob API operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeOverrides
+type NodeOverrides struct {
+	_ struct{} `type:"structure"`
+
+	// The node property overrides for the job.
+	NodePropertyOverrides []NodePropertyOverride `locationName:"nodePropertyOverrides" type:"list"`
+}
+
+// String returns the string representation
+func (s NodeOverrides) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeOverrides) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NodeOverrides) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NodeOverrides"}
+	if s.NodePropertyOverrides != nil {
+		for i, v := range s.NodePropertyOverrides {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NodePropertyOverrides", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeOverrides) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.NodePropertyOverrides) > 0 {
+		v := s.NodePropertyOverrides
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "nodePropertyOverrides", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object representing the node properties of a multi-node parallel job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeProperties
+type NodeProperties struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the node index for the main node of a multi-node parallel job.
+	//
+	// MainNode is a required field
+	MainNode *int64 `locationName:"mainNode" type:"integer" required:"true"`
+
+	// A list of node ranges and their properties associated with a multi-node parallel
+	// job.
+	//
+	// NodeRangeProperties is a required field
+	NodeRangeProperties []NodeRangeProperty `locationName:"nodeRangeProperties" type:"list" required:"true"`
+
+	// The number of nodes associated with a multi-node parallel job.
+	//
+	// NumNodes is a required field
+	NumNodes *int64 `locationName:"numNodes" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s NodeProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeProperties) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NodeProperties) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NodeProperties"}
+
+	if s.MainNode == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MainNode"))
+	}
+
+	if s.NodeRangeProperties == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NodeRangeProperties"))
+	}
+
+	if s.NumNodes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumNodes"))
+	}
+	if s.NodeRangeProperties != nil {
+		for i, v := range s.NodeRangeProperties {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NodeRangeProperties", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MainNode != nil {
+		v := *s.MainNode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mainNode", protocol.Int64Value(v), metadata)
+	}
+	if len(s.NodeRangeProperties) > 0 {
+		v := s.NodeRangeProperties
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "nodeRangeProperties", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NumNodes != nil {
+		v := *s.NumNodes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numNodes", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// An object representing the properties of a node that is associated with a
+// multi-node parallel job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodePropertiesSummary
+type NodePropertiesSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether the current node is the main node for a multi-node parallel
+	// job.
+	IsMainNode *bool `locationName:"isMainNode" type:"boolean"`
+
+	// The node index for the node. Node index numbering begins at zero. This index
+	// is also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
+	// variable.
+	NodeIndex *int64 `locationName:"nodeIndex" type:"integer"`
+
+	// The number of nodes associated with a multi-node parallel job.
+	NumNodes *int64 `locationName:"numNodes" type:"integer"`
+}
+
+// String returns the string representation
+func (s NodePropertiesSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodePropertiesSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodePropertiesSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsMainNode != nil {
+		v := *s.IsMainNode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "isMainNode", protocol.BoolValue(v), metadata)
+	}
+	if s.NodeIndex != nil {
+		v := *s.NodeIndex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nodeIndex", protocol.Int64Value(v), metadata)
+	}
+	if s.NumNodes != nil {
+		v := *s.NumNodes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numNodes", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Object representing any node overrides to a job definition that is used in
+// a SubmitJob API operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodePropertyOverride
+type NodePropertyOverride struct {
+	_ struct{} `type:"structure"`
+
+	// The overrides that should be sent to a node range.
+	ContainerOverrides *ContainerOverrides `locationName:"containerOverrides" type:"structure"`
+
+	// The range of nodes, using node index values, with which to override. A range
+	// of 0:3 indicates nodes with index values of 0 through 3. If the starting
+	// range value is omitted (:n), then 0 is used to start the range. If the ending
+	// range value is omitted (n:), then the highest possible node index is used
+	// to end the range.
+	//
+	// TargetNodes is a required field
+	TargetNodes *string `locationName:"targetNodes" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s NodePropertyOverride) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodePropertyOverride) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NodePropertyOverride) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NodePropertyOverride"}
+
+	if s.TargetNodes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetNodes"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodePropertyOverride) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContainerOverrides != nil {
+		v := s.ContainerOverrides
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "containerOverrides", v, metadata)
+	}
+	if s.TargetNodes != nil {
+		v := *s.TargetNodes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "targetNodes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object representing the properties of the node range for a multi-node
+// parallel job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/NodeRangeProperty
+type NodeRangeProperty struct {
+	_ struct{} `type:"structure"`
+
+	// The container details for the node range.
+	Container *ContainerProperties `locationName:"container" type:"structure"`
+
+	// The range of nodes, using node index values. A range of 0:3 indicates nodes
+	// with index values of 0 through 3. If the starting range value is omitted
+	// (:n), then 0 is used to start the range. If the ending range value is omitted
+	// (n:), then the highest possible node index is used to end the range. Your
+	// accumulative node ranges must account for all nodes (0:n). You may nest node
+	// ranges, for example 0:10 and 4:5, in which case the 4:5 range properties
+	// override the 0:10 properties.
+	//
+	// TargetNodes is a required field
+	TargetNodes *string `locationName:"targetNodes" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s NodeRangeProperty) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NodeRangeProperty) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NodeRangeProperty) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NodeRangeProperty"}
+
+	if s.TargetNodes == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetNodes"))
+	}
+	if s.Container != nil {
+		if err := s.Container.Validate(); err != nil {
+			invalidParams.AddNested("Container", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NodeRangeProperty) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Container != nil {
+		v := s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "container", v, metadata)
+	}
+	if s.TargetNodes != nil {
+		v := *s.TargetNodes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "targetNodes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest
 type RegisterJobDefinitionInput struct {
 	_ struct{} `type:"structure"`
 
-	// An object with various properties specific for container-based jobs. This
-	// parameter is required if the type parameter is container.
+	// An object with various properties specific to single-node container-based
+	// jobs. If the job definition's type parameter is container, then you must
+	// specify either containerProperties or nodeProperties.
 	ContainerProperties *ContainerProperties `locationName:"containerProperties" type:"structure"`
 
 	// The name of the job definition to register. Up to 128 letters (uppercase
@@ -4179,6 +4803,13 @@ type RegisterJobDefinitionInput struct {
 	//
 	// JobDefinitionName is a required field
 	JobDefinitionName *string `locationName:"jobDefinitionName" type:"string" required:"true"`
+
+	// An object with various properties specific to multi-node parallel jobs. If
+	// you specify node properties for a job, it becomes a multi-node parallel job.
+	// For more information, see Multi-node Parallel Jobs (http://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html)
+	// in the AWS Batch User Guide. If the job definition's type parameter is container,
+	// then you must specify either containerProperties or nodeProperties.
+	NodeProperties *NodeProperties `locationName:"nodeProperties" type:"structure"`
 
 	// Default parameter substitution placeholders to set in the job definition.
 	// Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob
@@ -4231,6 +4862,11 @@ func (s *RegisterJobDefinitionInput) Validate() error {
 			invalidParams.AddNested("ContainerProperties", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.NodeProperties != nil {
+		if err := s.NodeProperties.Validate(); err != nil {
+			invalidParams.AddNested("NodeProperties", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4253,6 +4889,12 @@ func (s RegisterJobDefinitionInput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodeProperties != nil {
+		v := s.NodeProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nodeProperties", v, metadata)
 	}
 	if len(s.Parameters) > 0 {
 		v := s.Parameters
@@ -4354,7 +4996,7 @@ type RetryStrategy struct {
 
 	// The number of times to move a job to the RUNNABLE status. You may specify
 	// between 1 and 10 attempts. If the value of attempts is greater than one,
-	// the job is retried if it fails until it has moved to RUNNABLE that many times.
+	// the job is retried on failure the same number of attempts as the value.
 	Attempts *int64 `locationName:"attempts" type:"integer"`
 }
 
@@ -4403,8 +5045,9 @@ type SubmitJobInput struct {
 	// jobs. You can specify a SEQUENTIAL type dependency without specifying a job
 	// ID for array jobs so that each child array job completes sequentially, starting
 	// at index 0. You can also specify an N_TO_N type dependency with a job ID
-	// for array jobs so that each index child of this job must wait for the corresponding
-	// index child of each dependency to complete before it can begin.
+	// for array jobs. In that case, each index child of this job must wait for
+	// the corresponding index child of each dependency to complete before it can
+	// begin.
 	DependsOn []JobDependency `locationName:"dependsOn" type:"list"`
 
 	// The job definition used by this job. This value can be either a name:revision
@@ -4425,6 +5068,10 @@ type SubmitJobInput struct {
 	//
 	// JobQueue is a required field
 	JobQueue *string `locationName:"jobQueue" type:"string" required:"true"`
+
+	// A list of node overrides in JSON format that specify the node range to target
+	// and the container overrides for that node range.
+	NodeOverrides *NodeOverrides `locationName:"nodeOverrides" type:"structure"`
 
 	// Additional parameters passed to the job that replace parameter substitution
 	// placeholders that are set in the job definition. Parameters are specified
@@ -4472,6 +5119,11 @@ func (s *SubmitJobInput) Validate() error {
 
 	if s.JobQueue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
+	}
+	if s.NodeOverrides != nil {
+		if err := s.NodeOverrides.Validate(); err != nil {
+			invalidParams.AddNested("NodeOverrides", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4525,6 +5177,12 @@ func (s SubmitJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NodeOverrides != nil {
+		v := s.NodeOverrides
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "nodeOverrides", v, metadata)
 	}
 	if len(s.Parameters) > 0 {
 		v := s.Parameters
@@ -4867,7 +5525,7 @@ type UpdateComputeEnvironmentOutput struct {
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string `locationName:"computeEnvironmentArn" type:"string"`
 
-	// The name of compute environment.
+	// The name of the compute environment.
 	ComputeEnvironmentName *string `locationName:"computeEnvironmentName" type:"string"`
 }
 
@@ -4919,7 +5577,7 @@ type UpdateJobQueueInput struct {
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
-	// with same compute environment. Priority is determined in descending order,
+	// with the same compute environment. Priority is determined in descending order,
 	// for example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1.
 	Priority *int64 `locationName:"priority" type:"integer"`
@@ -5218,6 +5876,7 @@ type JobDefinitionType string
 // Enum values for JobDefinitionType
 const (
 	JobDefinitionTypeContainer JobDefinitionType = "container"
+	JobDefinitionTypeMultinode JobDefinitionType = "multinode"
 )
 
 func (enum JobDefinitionType) MarshalValue() (string, error) {

@@ -10,6 +10,58 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+const opApproveSkill = "ApproveSkill"
+
+// ApproveSkillRequest is a API request type for the ApproveSkill API operation.
+type ApproveSkillRequest struct {
+	*aws.Request
+	Input *ApproveSkillInput
+	Copy  func(*ApproveSkillInput) ApproveSkillRequest
+}
+
+// Send marshals and sends the ApproveSkill API request.
+func (r ApproveSkillRequest) Send() (*ApproveSkillOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ApproveSkillOutput), nil
+}
+
+// ApproveSkillRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Associates a skill with the organization under the customer's AWS account.
+// If a skill is private, the user implicitly accepts access to this skill during
+// enablement.
+//
+//    // Example sending a request using the ApproveSkillRequest method.
+//    req := client.ApproveSkillRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkill
+func (c *AlexaForBusiness) ApproveSkillRequest(input *ApproveSkillInput) ApproveSkillRequest {
+	op := &aws.Operation{
+		Name:       opApproveSkill,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ApproveSkillInput{}
+	}
+
+	output := &ApproveSkillOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ApproveSkillRequest{Request: req, Input: input, Copy: c.ApproveSkillRequest}
+}
+
 const opAssociateContactWithAddressBook = "AssociateContactWithAddressBook"
 
 // AssociateContactWithAddressBookRequest is a API request type for the AssociateContactWithAddressBook API operation.
@@ -164,6 +216,56 @@ func (c *AlexaForBusiness) AssociateSkillGroupWithRoomRequest(input *AssociateSk
 	return AssociateSkillGroupWithRoomRequest{Request: req, Input: input, Copy: c.AssociateSkillGroupWithRoomRequest}
 }
 
+const opAssociateSkillWithSkillGroup = "AssociateSkillWithSkillGroup"
+
+// AssociateSkillWithSkillGroupRequest is a API request type for the AssociateSkillWithSkillGroup API operation.
+type AssociateSkillWithSkillGroupRequest struct {
+	*aws.Request
+	Input *AssociateSkillWithSkillGroupInput
+	Copy  func(*AssociateSkillWithSkillGroupInput) AssociateSkillWithSkillGroupRequest
+}
+
+// Send marshals and sends the AssociateSkillWithSkillGroup API request.
+func (r AssociateSkillWithSkillGroupRequest) Send() (*AssociateSkillWithSkillGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateSkillWithSkillGroupOutput), nil
+}
+
+// AssociateSkillWithSkillGroupRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Associates a skill with a skill group.
+//
+//    // Example sending a request using the AssociateSkillWithSkillGroupRequest method.
+//    req := client.AssociateSkillWithSkillGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroup
+func (c *AlexaForBusiness) AssociateSkillWithSkillGroupRequest(input *AssociateSkillWithSkillGroupInput) AssociateSkillWithSkillGroupRequest {
+	op := &aws.Operation{
+		Name:       opAssociateSkillWithSkillGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateSkillWithSkillGroupInput{}
+	}
+
+	output := &AssociateSkillWithSkillGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociateSkillWithSkillGroupRequest{Request: req, Input: input, Copy: c.AssociateSkillWithSkillGroupRequest}
+}
+
 const opCreateAddressBook = "CreateAddressBook"
 
 // CreateAddressBookRequest is a API request type for the CreateAddressBook API operation.
@@ -212,6 +314,56 @@ func (c *AlexaForBusiness) CreateAddressBookRequest(input *CreateAddressBookInpu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateAddressBookRequest{Request: req, Input: input, Copy: c.CreateAddressBookRequest}
+}
+
+const opCreateConferenceProvider = "CreateConferenceProvider"
+
+// CreateConferenceProviderRequest is a API request type for the CreateConferenceProvider API operation.
+type CreateConferenceProviderRequest struct {
+	*aws.Request
+	Input *CreateConferenceProviderInput
+	Copy  func(*CreateConferenceProviderInput) CreateConferenceProviderRequest
+}
+
+// Send marshals and sends the CreateConferenceProvider API request.
+func (r CreateConferenceProviderRequest) Send() (*CreateConferenceProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateConferenceProviderOutput), nil
+}
+
+// CreateConferenceProviderRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Adds a new conference provider under the user's AWS account.
+//
+//    // Example sending a request using the CreateConferenceProviderRequest method.
+//    req := client.CreateConferenceProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProvider
+func (c *AlexaForBusiness) CreateConferenceProviderRequest(input *CreateConferenceProviderInput) CreateConferenceProviderRequest {
+	op := &aws.Operation{
+		Name:       opCreateConferenceProvider,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateConferenceProviderInput{}
+	}
+
+	output := &CreateConferenceProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateConferenceProviderRequest{Request: req, Input: input, Copy: c.CreateConferenceProviderRequest}
 }
 
 const opCreateContact = "CreateContact"
@@ -514,6 +666,56 @@ func (c *AlexaForBusiness) DeleteAddressBookRequest(input *DeleteAddressBookInpu
 	return DeleteAddressBookRequest{Request: req, Input: input, Copy: c.DeleteAddressBookRequest}
 }
 
+const opDeleteConferenceProvider = "DeleteConferenceProvider"
+
+// DeleteConferenceProviderRequest is a API request type for the DeleteConferenceProvider API operation.
+type DeleteConferenceProviderRequest struct {
+	*aws.Request
+	Input *DeleteConferenceProviderInput
+	Copy  func(*DeleteConferenceProviderInput) DeleteConferenceProviderRequest
+}
+
+// Send marshals and sends the DeleteConferenceProvider API request.
+func (r DeleteConferenceProviderRequest) Send() (*DeleteConferenceProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteConferenceProviderOutput), nil
+}
+
+// DeleteConferenceProviderRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Deletes a conference provider.
+//
+//    // Example sending a request using the DeleteConferenceProviderRequest method.
+//    req := client.DeleteConferenceProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProvider
+func (c *AlexaForBusiness) DeleteConferenceProviderRequest(input *DeleteConferenceProviderInput) DeleteConferenceProviderRequest {
+	op := &aws.Operation{
+		Name:       opDeleteConferenceProvider,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteConferenceProviderInput{}
+	}
+
+	output := &DeleteConferenceProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteConferenceProviderRequest{Request: req, Input: input, Copy: c.DeleteConferenceProviderRequest}
+}
+
 const opDeleteContact = "DeleteContact"
 
 // DeleteContactRequest is a API request type for the DeleteContact API operation.
@@ -562,6 +764,56 @@ func (c *AlexaForBusiness) DeleteContactRequest(input *DeleteContactInput) Delet
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteContactRequest{Request: req, Input: input, Copy: c.DeleteContactRequest}
+}
+
+const opDeleteDevice = "DeleteDevice"
+
+// DeleteDeviceRequest is a API request type for the DeleteDevice API operation.
+type DeleteDeviceRequest struct {
+	*aws.Request
+	Input *DeleteDeviceInput
+	Copy  func(*DeleteDeviceInput) DeleteDeviceRequest
+}
+
+// Send marshals and sends the DeleteDevice API request.
+func (r DeleteDeviceRequest) Send() (*DeleteDeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDeviceOutput), nil
+}
+
+// DeleteDeviceRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Removes a device from Alexa For Business.
+//
+//    // Example sending a request using the DeleteDeviceRequest method.
+//    req := client.DeleteDeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDevice
+func (c *AlexaForBusiness) DeleteDeviceRequest(input *DeleteDeviceInput) DeleteDeviceRequest {
+	op := &aws.Operation{
+		Name:       opDeleteDevice,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteDeviceInput{}
+	}
+
+	output := &DeleteDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteDeviceRequest{Request: req, Input: input, Copy: c.DeleteDeviceRequest}
 }
 
 const opDeleteProfile = "DeleteProfile"
@@ -712,6 +964,56 @@ func (c *AlexaForBusiness) DeleteRoomSkillParameterRequest(input *DeleteRoomSkil
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteRoomSkillParameterRequest{Request: req, Input: input, Copy: c.DeleteRoomSkillParameterRequest}
+}
+
+const opDeleteSkillAuthorization = "DeleteSkillAuthorization"
+
+// DeleteSkillAuthorizationRequest is a API request type for the DeleteSkillAuthorization API operation.
+type DeleteSkillAuthorizationRequest struct {
+	*aws.Request
+	Input *DeleteSkillAuthorizationInput
+	Copy  func(*DeleteSkillAuthorizationInput) DeleteSkillAuthorizationRequest
+}
+
+// Send marshals and sends the DeleteSkillAuthorization API request.
+func (r DeleteSkillAuthorizationRequest) Send() (*DeleteSkillAuthorizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSkillAuthorizationOutput), nil
+}
+
+// DeleteSkillAuthorizationRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Unlinks a third-party account from a skill.
+//
+//    // Example sending a request using the DeleteSkillAuthorizationRequest method.
+//    req := client.DeleteSkillAuthorizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorization
+func (c *AlexaForBusiness) DeleteSkillAuthorizationRequest(input *DeleteSkillAuthorizationInput) DeleteSkillAuthorizationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSkillAuthorization,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteSkillAuthorizationInput{}
+	}
+
+	output := &DeleteSkillAuthorizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteSkillAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteSkillAuthorizationRequest}
 }
 
 const opDeleteSkillGroup = "DeleteSkillGroup"
@@ -916,6 +1218,56 @@ func (c *AlexaForBusiness) DisassociateDeviceFromRoomRequest(input *Disassociate
 	return DisassociateDeviceFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateDeviceFromRoomRequest}
 }
 
+const opDisassociateSkillFromSkillGroup = "DisassociateSkillFromSkillGroup"
+
+// DisassociateSkillFromSkillGroupRequest is a API request type for the DisassociateSkillFromSkillGroup API operation.
+type DisassociateSkillFromSkillGroupRequest struct {
+	*aws.Request
+	Input *DisassociateSkillFromSkillGroupInput
+	Copy  func(*DisassociateSkillFromSkillGroupInput) DisassociateSkillFromSkillGroupRequest
+}
+
+// Send marshals and sends the DisassociateSkillFromSkillGroup API request.
+func (r DisassociateSkillFromSkillGroupRequest) Send() (*DisassociateSkillFromSkillGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateSkillFromSkillGroupOutput), nil
+}
+
+// DisassociateSkillFromSkillGroupRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Disassociates a skill from a skill group.
+//
+//    // Example sending a request using the DisassociateSkillFromSkillGroupRequest method.
+//    req := client.DisassociateSkillFromSkillGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroup
+func (c *AlexaForBusiness) DisassociateSkillFromSkillGroupRequest(input *DisassociateSkillFromSkillGroupInput) DisassociateSkillFromSkillGroupRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateSkillFromSkillGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateSkillFromSkillGroupInput{}
+	}
+
+	output := &DisassociateSkillFromSkillGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociateSkillFromSkillGroupRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromSkillGroupRequest}
+}
+
 const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
 
 // DisassociateSkillGroupFromRoomRequest is a API request type for the DisassociateSkillGroupFromRoom API operation.
@@ -967,6 +1319,56 @@ func (c *AlexaForBusiness) DisassociateSkillGroupFromRoomRequest(input *Disassoc
 	return DisassociateSkillGroupFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateSkillGroupFromRoomRequest}
 }
 
+const opForgetSmartHomeAppliances = "ForgetSmartHomeAppliances"
+
+// ForgetSmartHomeAppliancesRequest is a API request type for the ForgetSmartHomeAppliances API operation.
+type ForgetSmartHomeAppliancesRequest struct {
+	*aws.Request
+	Input *ForgetSmartHomeAppliancesInput
+	Copy  func(*ForgetSmartHomeAppliancesInput) ForgetSmartHomeAppliancesRequest
+}
+
+// Send marshals and sends the ForgetSmartHomeAppliances API request.
+func (r ForgetSmartHomeAppliancesRequest) Send() (*ForgetSmartHomeAppliancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ForgetSmartHomeAppliancesOutput), nil
+}
+
+// ForgetSmartHomeAppliancesRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Forgets smart home appliances associated to a room.
+//
+//    // Example sending a request using the ForgetSmartHomeAppliancesRequest method.
+//    req := client.ForgetSmartHomeAppliancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliances
+func (c *AlexaForBusiness) ForgetSmartHomeAppliancesRequest(input *ForgetSmartHomeAppliancesInput) ForgetSmartHomeAppliancesRequest {
+	op := &aws.Operation{
+		Name:       opForgetSmartHomeAppliances,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ForgetSmartHomeAppliancesInput{}
+	}
+
+	output := &ForgetSmartHomeAppliancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ForgetSmartHomeAppliancesRequest{Request: req, Input: input, Copy: c.ForgetSmartHomeAppliancesRequest}
+}
+
 const opGetAddressBook = "GetAddressBook"
 
 // GetAddressBookRequest is a API request type for the GetAddressBook API operation.
@@ -1015,6 +1417,106 @@ func (c *AlexaForBusiness) GetAddressBookRequest(input *GetAddressBookInput) Get
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetAddressBookRequest{Request: req, Input: input, Copy: c.GetAddressBookRequest}
+}
+
+const opGetConferencePreference = "GetConferencePreference"
+
+// GetConferencePreferenceRequest is a API request type for the GetConferencePreference API operation.
+type GetConferencePreferenceRequest struct {
+	*aws.Request
+	Input *GetConferencePreferenceInput
+	Copy  func(*GetConferencePreferenceInput) GetConferencePreferenceRequest
+}
+
+// Send marshals and sends the GetConferencePreference API request.
+func (r GetConferencePreferenceRequest) Send() (*GetConferencePreferenceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConferencePreferenceOutput), nil
+}
+
+// GetConferencePreferenceRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Retrieves the existing conference preferences.
+//
+//    // Example sending a request using the GetConferencePreferenceRequest method.
+//    req := client.GetConferencePreferenceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreference
+func (c *AlexaForBusiness) GetConferencePreferenceRequest(input *GetConferencePreferenceInput) GetConferencePreferenceRequest {
+	op := &aws.Operation{
+		Name:       opGetConferencePreference,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetConferencePreferenceInput{}
+	}
+
+	output := &GetConferencePreferenceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetConferencePreferenceRequest{Request: req, Input: input, Copy: c.GetConferencePreferenceRequest}
+}
+
+const opGetConferenceProvider = "GetConferenceProvider"
+
+// GetConferenceProviderRequest is a API request type for the GetConferenceProvider API operation.
+type GetConferenceProviderRequest struct {
+	*aws.Request
+	Input *GetConferenceProviderInput
+	Copy  func(*GetConferenceProviderInput) GetConferenceProviderRequest
+}
+
+// Send marshals and sends the GetConferenceProvider API request.
+func (r GetConferenceProviderRequest) Send() (*GetConferenceProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetConferenceProviderOutput), nil
+}
+
+// GetConferenceProviderRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Gets details about a specific conference provider.
+//
+//    // Example sending a request using the GetConferenceProviderRequest method.
+//    req := client.GetConferenceProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProvider
+func (c *AlexaForBusiness) GetConferenceProviderRequest(input *GetConferenceProviderInput) GetConferenceProviderRequest {
+	op := &aws.Operation{
+		Name:       opGetConferenceProvider,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetConferenceProviderInput{}
+	}
+
+	output := &GetConferenceProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetConferenceProviderRequest{Request: req, Input: input, Copy: c.GetConferenceProviderRequest}
 }
 
 const opGetContact = "GetContact"
@@ -1317,6 +1819,108 @@ func (c *AlexaForBusiness) GetSkillGroupRequest(input *GetSkillGroupInput) GetSk
 	return GetSkillGroupRequest{Request: req, Input: input, Copy: c.GetSkillGroupRequest}
 }
 
+const opListConferenceProviders = "ListConferenceProviders"
+
+// ListConferenceProvidersRequest is a API request type for the ListConferenceProviders API operation.
+type ListConferenceProvidersRequest struct {
+	*aws.Request
+	Input *ListConferenceProvidersInput
+	Copy  func(*ListConferenceProvidersInput) ListConferenceProvidersRequest
+}
+
+// Send marshals and sends the ListConferenceProviders API request.
+func (r ListConferenceProvidersRequest) Send() (*ListConferenceProvidersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListConferenceProvidersOutput), nil
+}
+
+// ListConferenceProvidersRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Lists conference providers under a specific AWS account.
+//
+//    // Example sending a request using the ListConferenceProvidersRequest method.
+//    req := client.ListConferenceProvidersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProviders
+func (c *AlexaForBusiness) ListConferenceProvidersRequest(input *ListConferenceProvidersInput) ListConferenceProvidersRequest {
+	op := &aws.Operation{
+		Name:       opListConferenceProviders,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListConferenceProvidersInput{}
+	}
+
+	output := &ListConferenceProvidersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListConferenceProvidersRequest{Request: req, Input: input, Copy: c.ListConferenceProvidersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListConferenceProvidersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListConferenceProviders operation.
+//		req := client.ListConferenceProvidersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListConferenceProvidersRequest) Paginate(opts ...aws.Option) ListConferenceProvidersPager {
+	return ListConferenceProvidersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListConferenceProvidersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListConferenceProvidersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListConferenceProvidersPager struct {
+	aws.Pager
+}
+
+func (p *ListConferenceProvidersPager) CurrentPage() *ListConferenceProvidersOutput {
+	return p.Pager.CurrentPage().(*ListConferenceProvidersOutput)
+}
+
 const opListDeviceEvents = "ListDeviceEvents"
 
 // ListDeviceEventsRequest is a API request type for the ListDeviceEvents API operation.
@@ -1522,6 +2126,312 @@ func (p *ListSkillsPager) CurrentPage() *ListSkillsOutput {
 	return p.Pager.CurrentPage().(*ListSkillsOutput)
 }
 
+const opListSkillsStoreCategories = "ListSkillsStoreCategories"
+
+// ListSkillsStoreCategoriesRequest is a API request type for the ListSkillsStoreCategories API operation.
+type ListSkillsStoreCategoriesRequest struct {
+	*aws.Request
+	Input *ListSkillsStoreCategoriesInput
+	Copy  func(*ListSkillsStoreCategoriesInput) ListSkillsStoreCategoriesRequest
+}
+
+// Send marshals and sends the ListSkillsStoreCategories API request.
+func (r ListSkillsStoreCategoriesRequest) Send() (*ListSkillsStoreCategoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSkillsStoreCategoriesOutput), nil
+}
+
+// ListSkillsStoreCategoriesRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Lists all categories in the Alexa skill store.
+//
+//    // Example sending a request using the ListSkillsStoreCategoriesRequest method.
+//    req := client.ListSkillsStoreCategoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategories
+func (c *AlexaForBusiness) ListSkillsStoreCategoriesRequest(input *ListSkillsStoreCategoriesInput) ListSkillsStoreCategoriesRequest {
+	op := &aws.Operation{
+		Name:       opListSkillsStoreCategories,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSkillsStoreCategoriesInput{}
+	}
+
+	output := &ListSkillsStoreCategoriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSkillsStoreCategoriesRequest{Request: req, Input: input, Copy: c.ListSkillsStoreCategoriesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListSkillsStoreCategoriesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListSkillsStoreCategories operation.
+//		req := client.ListSkillsStoreCategoriesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSkillsStoreCategoriesRequest) Paginate(opts ...aws.Option) ListSkillsStoreCategoriesPager {
+	return ListSkillsStoreCategoriesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSkillsStoreCategoriesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListSkillsStoreCategoriesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSkillsStoreCategoriesPager struct {
+	aws.Pager
+}
+
+func (p *ListSkillsStoreCategoriesPager) CurrentPage() *ListSkillsStoreCategoriesOutput {
+	return p.Pager.CurrentPage().(*ListSkillsStoreCategoriesOutput)
+}
+
+const opListSkillsStoreSkillsByCategory = "ListSkillsStoreSkillsByCategory"
+
+// ListSkillsStoreSkillsByCategoryRequest is a API request type for the ListSkillsStoreSkillsByCategory API operation.
+type ListSkillsStoreSkillsByCategoryRequest struct {
+	*aws.Request
+	Input *ListSkillsStoreSkillsByCategoryInput
+	Copy  func(*ListSkillsStoreSkillsByCategoryInput) ListSkillsStoreSkillsByCategoryRequest
+}
+
+// Send marshals and sends the ListSkillsStoreSkillsByCategory API request.
+func (r ListSkillsStoreSkillsByCategoryRequest) Send() (*ListSkillsStoreSkillsByCategoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSkillsStoreSkillsByCategoryOutput), nil
+}
+
+// ListSkillsStoreSkillsByCategoryRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Lists all skills in the Alexa skill store by category.
+//
+//    // Example sending a request using the ListSkillsStoreSkillsByCategoryRequest method.
+//    req := client.ListSkillsStoreSkillsByCategoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategory
+func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryRequest(input *ListSkillsStoreSkillsByCategoryInput) ListSkillsStoreSkillsByCategoryRequest {
+	op := &aws.Operation{
+		Name:       opListSkillsStoreSkillsByCategory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSkillsStoreSkillsByCategoryInput{}
+	}
+
+	output := &ListSkillsStoreSkillsByCategoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSkillsStoreSkillsByCategoryRequest{Request: req, Input: input, Copy: c.ListSkillsStoreSkillsByCategoryRequest}
+}
+
+// Paginate pages iterates over the pages of a ListSkillsStoreSkillsByCategoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListSkillsStoreSkillsByCategory operation.
+//		req := client.ListSkillsStoreSkillsByCategoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSkillsStoreSkillsByCategoryRequest) Paginate(opts ...aws.Option) ListSkillsStoreSkillsByCategoryPager {
+	return ListSkillsStoreSkillsByCategoryPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSkillsStoreSkillsByCategoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListSkillsStoreSkillsByCategoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSkillsStoreSkillsByCategoryPager struct {
+	aws.Pager
+}
+
+func (p *ListSkillsStoreSkillsByCategoryPager) CurrentPage() *ListSkillsStoreSkillsByCategoryOutput {
+	return p.Pager.CurrentPage().(*ListSkillsStoreSkillsByCategoryOutput)
+}
+
+const opListSmartHomeAppliances = "ListSmartHomeAppliances"
+
+// ListSmartHomeAppliancesRequest is a API request type for the ListSmartHomeAppliances API operation.
+type ListSmartHomeAppliancesRequest struct {
+	*aws.Request
+	Input *ListSmartHomeAppliancesInput
+	Copy  func(*ListSmartHomeAppliancesInput) ListSmartHomeAppliancesRequest
+}
+
+// Send marshals and sends the ListSmartHomeAppliances API request.
+func (r ListSmartHomeAppliancesRequest) Send() (*ListSmartHomeAppliancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSmartHomeAppliancesOutput), nil
+}
+
+// ListSmartHomeAppliancesRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Lists all of the smart home appliances associated with a room.
+//
+//    // Example sending a request using the ListSmartHomeAppliancesRequest method.
+//    req := client.ListSmartHomeAppliancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliances
+func (c *AlexaForBusiness) ListSmartHomeAppliancesRequest(input *ListSmartHomeAppliancesInput) ListSmartHomeAppliancesRequest {
+	op := &aws.Operation{
+		Name:       opListSmartHomeAppliances,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListSmartHomeAppliancesInput{}
+	}
+
+	output := &ListSmartHomeAppliancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSmartHomeAppliancesRequest{Request: req, Input: input, Copy: c.ListSmartHomeAppliancesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListSmartHomeAppliancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListSmartHomeAppliances operation.
+//		req := client.ListSmartHomeAppliancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSmartHomeAppliancesRequest) Paginate(opts ...aws.Option) ListSmartHomeAppliancesPager {
+	return ListSmartHomeAppliancesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSmartHomeAppliancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListSmartHomeAppliancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSmartHomeAppliancesPager struct {
+	aws.Pager
+}
+
+func (p *ListSmartHomeAppliancesPager) CurrentPage() *ListSmartHomeAppliancesOutput {
+	return p.Pager.CurrentPage().(*ListSmartHomeAppliancesOutput)
+}
+
 const opListTags = "ListTags"
 
 // ListTagsRequest is a API request type for the ListTags API operation.
@@ -1624,6 +2534,57 @@ func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
 	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
+const opPutConferencePreference = "PutConferencePreference"
+
+// PutConferencePreferenceRequest is a API request type for the PutConferencePreference API operation.
+type PutConferencePreferenceRequest struct {
+	*aws.Request
+	Input *PutConferencePreferenceInput
+	Copy  func(*PutConferencePreferenceInput) PutConferencePreferenceRequest
+}
+
+// Send marshals and sends the PutConferencePreference API request.
+func (r PutConferencePreferenceRequest) Send() (*PutConferencePreferenceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutConferencePreferenceOutput), nil
+}
+
+// PutConferencePreferenceRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Sets the conference preferences on a specific conference provider at the
+// account level.
+//
+//    // Example sending a request using the PutConferencePreferenceRequest method.
+//    req := client.PutConferencePreferenceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreference
+func (c *AlexaForBusiness) PutConferencePreferenceRequest(input *PutConferencePreferenceInput) PutConferencePreferenceRequest {
+	op := &aws.Operation{
+		Name:       opPutConferencePreference,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutConferencePreferenceInput{}
+	}
+
+	output := &PutConferencePreferenceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutConferencePreferenceRequest{Request: req, Input: input, Copy: c.PutConferencePreferenceRequest}
+}
+
 const opPutRoomSkillParameter = "PutRoomSkillParameter"
 
 // PutRoomSkillParameterRequest is a API request type for the PutRoomSkillParameter API operation.
@@ -1673,6 +2634,163 @@ func (c *AlexaForBusiness) PutRoomSkillParameterRequest(input *PutRoomSkillParam
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutRoomSkillParameterRequest{Request: req, Input: input, Copy: c.PutRoomSkillParameterRequest}
+}
+
+const opPutSkillAuthorization = "PutSkillAuthorization"
+
+// PutSkillAuthorizationRequest is a API request type for the PutSkillAuthorization API operation.
+type PutSkillAuthorizationRequest struct {
+	*aws.Request
+	Input *PutSkillAuthorizationInput
+	Copy  func(*PutSkillAuthorizationInput) PutSkillAuthorizationRequest
+}
+
+// Send marshals and sends the PutSkillAuthorization API request.
+func (r PutSkillAuthorizationRequest) Send() (*PutSkillAuthorizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutSkillAuthorizationOutput), nil
+}
+
+// PutSkillAuthorizationRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Links a user's account to a third-party skill provider. If this API operation
+// is called by an assumed IAM role, the skill being linked must be a private
+// skill. Also, the skill must be owned by the AWS account that assumed the
+// IAM role.
+//
+//    // Example sending a request using the PutSkillAuthorizationRequest method.
+//    req := client.PutSkillAuthorizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorization
+func (c *AlexaForBusiness) PutSkillAuthorizationRequest(input *PutSkillAuthorizationInput) PutSkillAuthorizationRequest {
+	op := &aws.Operation{
+		Name:       opPutSkillAuthorization,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutSkillAuthorizationInput{}
+	}
+
+	output := &PutSkillAuthorizationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutSkillAuthorizationRequest{Request: req, Input: input, Copy: c.PutSkillAuthorizationRequest}
+}
+
+const opRegisterAVSDevice = "RegisterAVSDevice"
+
+// RegisterAVSDeviceRequest is a API request type for the RegisterAVSDevice API operation.
+type RegisterAVSDeviceRequest struct {
+	*aws.Request
+	Input *RegisterAVSDeviceInput
+	Copy  func(*RegisterAVSDeviceInput) RegisterAVSDeviceRequest
+}
+
+// Send marshals and sends the RegisterAVSDevice API request.
+func (r RegisterAVSDeviceRequest) Send() (*RegisterAVSDeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterAVSDeviceOutput), nil
+}
+
+// RegisterAVSDeviceRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Registers an Alexa-enabled device built by an Original Equipment Manufacturer
+// (OEM) using Alexa Voice Service (AVS).
+//
+//    // Example sending a request using the RegisterAVSDeviceRequest method.
+//    req := client.RegisterAVSDeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDevice
+func (c *AlexaForBusiness) RegisterAVSDeviceRequest(input *RegisterAVSDeviceInput) RegisterAVSDeviceRequest {
+	op := &aws.Operation{
+		Name:       opRegisterAVSDevice,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RegisterAVSDeviceInput{}
+	}
+
+	output := &RegisterAVSDeviceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RegisterAVSDeviceRequest{Request: req, Input: input, Copy: c.RegisterAVSDeviceRequest}
+}
+
+const opRejectSkill = "RejectSkill"
+
+// RejectSkillRequest is a API request type for the RejectSkill API operation.
+type RejectSkillRequest struct {
+	*aws.Request
+	Input *RejectSkillInput
+	Copy  func(*RejectSkillInput) RejectSkillRequest
+}
+
+// Send marshals and sends the RejectSkill API request.
+func (r RejectSkillRequest) Send() (*RejectSkillOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RejectSkillOutput), nil
+}
+
+// RejectSkillRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Disassociates a skill from the organization under a user's AWS account. If
+// the skill is a private skill, it moves to an AcceptStatus of PENDING. Any
+// private or public skill that is rejected can be added later by calling the
+// ApproveSkill API.
+//
+//    // Example sending a request using the RejectSkillRequest method.
+//    req := client.RejectSkillRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkill
+func (c *AlexaForBusiness) RejectSkillRequest(input *RejectSkillInput) RejectSkillRequest {
+	op := &aws.Operation{
+		Name:       opRejectSkill,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RejectSkillInput{}
+	}
+
+	output := &RejectSkillOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RejectSkillRequest{Request: req, Input: input, Copy: c.RejectSkillRequest}
 }
 
 const opResolveRoom = "ResolveRoom"
@@ -2594,6 +3712,57 @@ func (c *AlexaForBusiness) StartDeviceSyncRequest(input *StartDeviceSyncInput) S
 	return StartDeviceSyncRequest{Request: req, Input: input, Copy: c.StartDeviceSyncRequest}
 }
 
+const opStartSmartHomeApplianceDiscovery = "StartSmartHomeApplianceDiscovery"
+
+// StartSmartHomeApplianceDiscoveryRequest is a API request type for the StartSmartHomeApplianceDiscovery API operation.
+type StartSmartHomeApplianceDiscoveryRequest struct {
+	*aws.Request
+	Input *StartSmartHomeApplianceDiscoveryInput
+	Copy  func(*StartSmartHomeApplianceDiscoveryInput) StartSmartHomeApplianceDiscoveryRequest
+}
+
+// Send marshals and sends the StartSmartHomeApplianceDiscovery API request.
+func (r StartSmartHomeApplianceDiscoveryRequest) Send() (*StartSmartHomeApplianceDiscoveryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartSmartHomeApplianceDiscoveryOutput), nil
+}
+
+// StartSmartHomeApplianceDiscoveryRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Initiates the discovery of any smart home appliances associated with the
+// room.
+//
+//    // Example sending a request using the StartSmartHomeApplianceDiscoveryRequest method.
+//    req := client.StartSmartHomeApplianceDiscoveryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscovery
+func (c *AlexaForBusiness) StartSmartHomeApplianceDiscoveryRequest(input *StartSmartHomeApplianceDiscoveryInput) StartSmartHomeApplianceDiscoveryRequest {
+	op := &aws.Operation{
+		Name:       opStartSmartHomeApplianceDiscovery,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartSmartHomeApplianceDiscoveryInput{}
+	}
+
+	output := &StartSmartHomeApplianceDiscoveryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartSmartHomeApplianceDiscoveryRequest{Request: req, Input: input, Copy: c.StartSmartHomeApplianceDiscoveryRequest}
+}
+
 const opTagResource = "TagResource"
 
 // TagResourceRequest is a API request type for the TagResource API operation.
@@ -2742,6 +3911,56 @@ func (c *AlexaForBusiness) UpdateAddressBookRequest(input *UpdateAddressBookInpu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateAddressBookRequest{Request: req, Input: input, Copy: c.UpdateAddressBookRequest}
+}
+
+const opUpdateConferenceProvider = "UpdateConferenceProvider"
+
+// UpdateConferenceProviderRequest is a API request type for the UpdateConferenceProvider API operation.
+type UpdateConferenceProviderRequest struct {
+	*aws.Request
+	Input *UpdateConferenceProviderInput
+	Copy  func(*UpdateConferenceProviderInput) UpdateConferenceProviderRequest
+}
+
+// Send marshals and sends the UpdateConferenceProvider API request.
+func (r UpdateConferenceProviderRequest) Send() (*UpdateConferenceProviderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateConferenceProviderOutput), nil
+}
+
+// UpdateConferenceProviderRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Updates an existing conference provider's settings.
+//
+//    // Example sending a request using the UpdateConferenceProviderRequest method.
+//    req := client.UpdateConferenceProviderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProvider
+func (c *AlexaForBusiness) UpdateConferenceProviderRequest(input *UpdateConferenceProviderInput) UpdateConferenceProviderRequest {
+	op := &aws.Operation{
+		Name:       opUpdateConferenceProvider,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateConferenceProviderInput{}
+	}
+
+	output := &UpdateConferenceProviderOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateConferenceProviderRequest{Request: req, Input: input, Copy: c.UpdateConferenceProviderRequest}
 }
 
 const opUpdateContact = "UpdateContact"
@@ -3044,6 +4263,62 @@ func (s AddressBookData) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkillRequest
+type ApproveSkillInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of the skill.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ApproveSkillInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ApproveSkillInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ApproveSkillInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ApproveSkillInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkillResponse
+type ApproveSkillOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s ApproveSkillOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ApproveSkillOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ApproveSkillOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookRequest
 type AssociateContactWithAddressBookInput struct {
 	_ struct{} `type:"structure"`
@@ -3195,6 +4470,145 @@ func (s AssociateSkillGroupWithRoomOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroupRequest
+type AssociateSkillWithSkillGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the skill group to associate the skill to. Required.
+	SkillGroupArn *string `type:"string"`
+
+	// The unique identifier of the skill.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociateSkillWithSkillGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateSkillWithSkillGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateSkillWithSkillGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateSkillWithSkillGroupInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroupResponse
+type AssociateSkillWithSkillGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AssociateSkillWithSkillGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateSkillWithSkillGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateSkillWithSkillGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// The skill store category that is shown. Alexa skills are assigned a specific
+// skill category during creation, such as News, Social, and Sports.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Category
+type Category struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the skill store category.
+	CategoryId *int64 `min:"1" type:"long"`
+
+	// The name of the skill store category.
+	CategoryName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Category) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Category) GoString() string {
+	return s.String()
+}
+
+// The default conference provider that is used if no other scheduled meetings
+// are detected.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConferencePreference
+type ConferencePreference struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the default conference provider.
+	DefaultConferenceProviderArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ConferencePreference) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ConferencePreference) GoString() string {
+	return s.String()
+}
+
+// An entity that provides a conferencing solution. Alexa for Business acts
+// as the voice interface and mediator that connects users to their preferred
+// conference provider. Examples of conference providers include Amazon Chime,
+// Zoom, Cisco, and Polycom.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ConferenceProvider
+type ConferenceProvider struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the newly created conference provider.
+	Arn *string `type:"string"`
+
+	// The IP endpoint and protocol for calling.
+	IPDialIn *IPDialIn `type:"structure"`
+
+	// The meeting settings for the conference provider.
+	MeetingSetting *MeetingSetting `type:"structure"`
+
+	// The name of the conference provider.
+	Name *string `min:"1" type:"string"`
+
+	// The information for PSTN conferencing.
+	PSTNDialIn *PSTNDialIn `type:"structure"`
+
+	// The type of conference providers.
+	Type ConferenceProviderType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ConferenceProvider) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ConferenceProvider) GoString() string {
+	return s.String()
+}
+
 // A contact with attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Contact
 type Contact struct {
@@ -3328,6 +4742,112 @@ func (s CreateAddressBookOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderRequest
+type CreateConferenceProviderInput struct {
+	_ struct{} `type:"structure"`
+
+	// The request token of the client.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The name of the conference provider.
+	//
+	// ConferenceProviderName is a required field
+	ConferenceProviderName *string `min:"1" type:"string" required:"true"`
+
+	// Represents a type within a list of predefined types.
+	//
+	// ConferenceProviderType is a required field
+	ConferenceProviderType ConferenceProviderType `type:"string" required:"true" enum:"true"`
+
+	// The IP endpoint and protocol for calling.
+	IPDialIn *IPDialIn `type:"structure"`
+
+	// The meeting settings for the conference provider.
+	//
+	// MeetingSetting is a required field
+	MeetingSetting *MeetingSetting `type:"structure" required:"true"`
+
+	// The information for PSTN conferencing.
+	PSTNDialIn *PSTNDialIn `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateConferenceProviderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateConferenceProviderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateConferenceProviderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConferenceProviderInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+
+	if s.ConferenceProviderName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderName"))
+	}
+	if s.ConferenceProviderName != nil && len(*s.ConferenceProviderName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConferenceProviderName", 1))
+	}
+	if len(s.ConferenceProviderType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderType"))
+	}
+
+	if s.MeetingSetting == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeetingSetting"))
+	}
+	if s.IPDialIn != nil {
+		if err := s.IPDialIn.Validate(); err != nil {
+			invalidParams.AddNested("IPDialIn", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MeetingSetting != nil {
+		if err := s.MeetingSetting.Validate(); err != nil {
+			invalidParams.AddNested("MeetingSetting", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PSTNDialIn != nil {
+		if err := s.PSTNDialIn.Validate(); err != nil {
+			invalidParams.AddNested("PSTNDialIn", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderResponse
+type CreateConferenceProviderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the newly-created conference provider.
+	ConferenceProviderArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateConferenceProviderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateConferenceProviderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateConferenceProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -3855,6 +5375,62 @@ func (s DeleteAddressBookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProviderRequest
+type DeleteConferenceProviderInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the conference provider.
+	//
+	// ConferenceProviderArn is a required field
+	ConferenceProviderArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteConferenceProviderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteConferenceProviderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteConferenceProviderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConferenceProviderInput"}
+
+	if s.ConferenceProviderArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProviderResponse
+type DeleteConferenceProviderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteConferenceProviderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteConferenceProviderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteConferenceProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContactRequest
 type DeleteContactInput struct {
 	_ struct{} `type:"structure"`
@@ -3908,6 +5484,62 @@ func (s DeleteContactOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteContactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceRequest
+type DeleteDeviceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the device for which to request details.
+	//
+	// DeviceArn is a required field
+	DeviceArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteDeviceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteDeviceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteDeviceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeviceInput"}
+
+	if s.DeviceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeviceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceResponse
+type DeleteDeviceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteDeviceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteDeviceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4062,6 +5694,65 @@ func (s DeleteRoomSkillParameterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorizationRequest
+type DeleteSkillAuthorizationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The room that the skill is authorized for.
+	RoomArn *string `type:"string"`
+
+	// The unique identifier of a skill.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteSkillAuthorizationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSkillAuthorizationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteSkillAuthorizationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSkillAuthorizationInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorizationResponse
+type DeleteSkillAuthorizationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteSkillAuthorizationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSkillAuthorizationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSkillAuthorizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillGroupRequest
 type DeleteSkillGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -4159,6 +5850,34 @@ func (s DeleteUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// The details about the developer that published the skill.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeveloperInfo
+type DeveloperInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the developer.
+	DeveloperName *string `type:"string"`
+
+	// The email of the developer.
+	Email *string `min:"1" type:"string"`
+
+	// The URL of the privacy policy.
+	PrivacyPolicy *string `type:"string"`
+
+	// The website of the developer.
+	Url *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DeveloperInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeveloperInfo) GoString() string {
+	return s.String()
 }
 
 // A device with attributes.
@@ -4422,6 +6141,65 @@ func (s DisassociateDeviceFromRoomOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroupRequest
+type DisassociateSkillFromSkillGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of a skill. Required.
+	SkillGroupArn *string `type:"string"`
+
+	// The ARN of a skill group to associate to a skill.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociateSkillFromSkillGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateSkillFromSkillGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateSkillFromSkillGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateSkillFromSkillGroupInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroupResponse
+type DisassociateSkillFromSkillGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisassociateSkillFromSkillGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateSkillFromSkillGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateSkillFromSkillGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillGroupFromRoomRequest
 type DisassociateSkillGroupFromRoomInput struct {
 	_ struct{} `type:"structure"`
@@ -4513,6 +6291,62 @@ func (s *Filter) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliancesRequest
+type ForgetSmartHomeAppliancesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The room that the appliances are associated with.
+	//
+	// RoomArn is a required field
+	RoomArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ForgetSmartHomeAppliancesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ForgetSmartHomeAppliancesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ForgetSmartHomeAppliancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ForgetSmartHomeAppliancesInput"}
+
+	if s.RoomArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoomArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliancesResponse
+type ForgetSmartHomeAppliancesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s ForgetSmartHomeAppliancesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ForgetSmartHomeAppliancesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ForgetSmartHomeAppliancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBookRequest
 type GetAddressBookInput struct {
 	_ struct{} `type:"structure"`
@@ -4569,6 +6403,105 @@ func (s GetAddressBookOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreferenceRequest
+type GetConferencePreferenceInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetConferencePreferenceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetConferencePreferenceInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreferenceResponse
+type GetConferencePreferenceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The conference preference.
+	Preference *ConferencePreference `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetConferencePreferenceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetConferencePreferenceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConferencePreferenceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProviderRequest
+type GetConferenceProviderInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the newly created conference provider.
+	//
+	// ConferenceProviderArn is a required field
+	ConferenceProviderArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetConferenceProviderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetConferenceProviderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetConferenceProviderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetConferenceProviderInput"}
+
+	if s.ConferenceProviderArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProviderResponse
+type GetConferenceProviderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The conference provider.
+	ConferenceProvider *ConferenceProvider `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetConferenceProviderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetConferenceProviderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetConferenceProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4878,6 +6811,118 @@ func (s GetSkillGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The IP endpoint and protocol for calling.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/IPDialIn
+type IPDialIn struct {
+	_ struct{} `type:"structure"`
+
+	// The protocol, including SIP, SIPS, and H323.
+	//
+	// CommsProtocol is a required field
+	CommsProtocol CommsProtocol `type:"string" required:"true" enum:"true"`
+
+	// The IP address.
+	//
+	// Endpoint is a required field
+	Endpoint *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s IPDialIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IPDialIn) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IPDialIn) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IPDialIn"}
+	if len(s.CommsProtocol) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("CommsProtocol"))
+	}
+
+	if s.Endpoint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Endpoint"))
+	}
+	if s.Endpoint != nil && len(*s.Endpoint) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Endpoint", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProvidersRequest
+type ListConferenceProvidersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of conference providers to be returned, per paginated
+	// calls.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListConferenceProvidersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListConferenceProvidersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListConferenceProvidersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListConferenceProvidersInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProvidersResponse
+type ListConferenceProvidersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The conference providers.
+	ConferenceProviders []ConferenceProvider `type:"list"`
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListConferenceProvidersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListConferenceProvidersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListConferenceProvidersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsRequest
 type ListDeviceEventsInput struct {
 	_ struct{} `type:"structure"`
@@ -4967,6 +7012,10 @@ func (s ListDeviceEventsOutput) SDKResponseMetadata() aws.Response {
 type ListSkillsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Whether the skill is enabled under the user's account, or if it requires
+	// linking to be used.
+	EnablementType EnablementTypeFilter `type:"string" enum:"true"`
+
 	// The maximum number of results to include in the response. If more results
 	// exist than the specified MaxResults value, a token is included in the response
 	// so that the remaining results can be retrieved. Required.
@@ -4980,6 +7029,9 @@ type ListSkillsInput struct {
 
 	// The ARN of the skill group for which to list enabled skills. Required.
 	SkillGroupArn *string `type:"string"`
+
+	// Whether the skill is publicly available or is a private skill.
+	SkillType SkillTypeFilter `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5033,6 +7085,222 @@ func (s ListSkillsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSkillsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategoriesRequest
+type ListSkillsStoreCategoriesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of categories returned, per paginated calls.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSkillsStoreCategoriesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSkillsStoreCategoriesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSkillsStoreCategoriesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSkillsStoreCategoriesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategoriesResponse
+type ListSkillsStoreCategoriesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The list of categories.
+	CategoryList []Category `type:"list"`
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSkillsStoreCategoriesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSkillsStoreCategoriesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSkillsStoreCategoriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategoryRequest
+type ListSkillsStoreSkillsByCategoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The category ID for which the skills are being retrieved from the skill store.
+	//
+	// CategoryId is a required field
+	CategoryId *int64 `min:"1" type:"long" required:"true"`
+
+	// The maximum number of skills returned per paginated calls.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListSkillsStoreSkillsByCategoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSkillsStoreSkillsByCategoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSkillsStoreSkillsByCategoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSkillsStoreSkillsByCategoryInput"}
+
+	if s.CategoryId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CategoryId"))
+	}
+	if s.CategoryId != nil && *s.CategoryId < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("CategoryId", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategoryResponse
+type ListSkillsStoreSkillsByCategoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+
+	// The skill store skills.
+	SkillsStoreSkills []SkillsStoreSkill `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSkillsStoreSkillsByCategoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSkillsStoreSkillsByCategoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSkillsStoreSkillsByCategoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliancesRequest
+type ListSmartHomeAppliancesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of appliances to be returned, per paginated calls.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+
+	// The room that the appliances are associated with.
+	//
+	// RoomArn is a required field
+	RoomArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListSmartHomeAppliancesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSmartHomeAppliancesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListSmartHomeAppliancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListSmartHomeAppliancesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.RoomArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoomArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliancesResponse
+type ListSmartHomeAppliancesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The tokens used for pagination.
+	NextToken *string `min:"1" type:"string"`
+
+	// The smart home appliances.
+	SmartHomeAppliances []SmartHomeAppliance `type:"list"`
+}
+
+// String returns the string representation
+func (s ListSmartHomeAppliancesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSmartHomeAppliancesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSmartHomeAppliancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5114,6 +7382,120 @@ func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The values that indicate whether a pin is always required (YES), never required
+// (NO), or OPTIONAL.
+//
+//    * If YES, Alexa will always ask for a meeting pin.
+//
+//    * If NO, Alexa will never ask for a meeting pin.
+//
+//    * If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer
+//    responds with yes, it will ask for the meeting pin.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/MeetingSetting
+type MeetingSetting struct {
+	_ struct{} `type:"structure"`
+
+	// The values that indicate whether the pin is always required.
+	//
+	// RequirePin is a required field
+	RequirePin RequirePin `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s MeetingSetting) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MeetingSetting) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MeetingSetting) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MeetingSetting"}
+	if len(s.RequirePin) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("RequirePin"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The information for public switched telephone network (PSTN) conferencing.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PSTNDialIn
+type PSTNDialIn struct {
+	_ struct{} `type:"structure"`
+
+	// The zip code.
+	//
+	// CountryCode is a required field
+	CountryCode *string `type:"string" required:"true"`
+
+	// The delay duration before Alexa enters the conference ID with dual-tone multi-frequency
+	// (DTMF). Each number on the dial pad corresponds to a DTMF tone, which is
+	// how we send data over the telephone network.
+	//
+	// OneClickIdDelay is a required field
+	OneClickIdDelay *string `min:"1" type:"string" required:"true"`
+
+	// The delay duration before Alexa enters the conference pin with dual-tone
+	// multi-frequency (DTMF). Each number on the dial pad corresponds to a DTMF
+	// tone, which is how we send data over the telephone network.
+	//
+	// OneClickPinDelay is a required field
+	OneClickPinDelay *string `min:"1" type:"string" required:"true"`
+
+	// The phone number to call to join the conference.
+	//
+	// PhoneNumber is a required field
+	PhoneNumber *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PSTNDialIn) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PSTNDialIn) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PSTNDialIn) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PSTNDialIn"}
+
+	if s.CountryCode == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CountryCode"))
+	}
+
+	if s.OneClickIdDelay == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OneClickIdDelay"))
+	}
+	if s.OneClickIdDelay != nil && len(*s.OneClickIdDelay) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OneClickIdDelay", 1))
+	}
+
+	if s.OneClickPinDelay == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OneClickPinDelay"))
+	}
+	if s.OneClickPinDelay != nil && len(*s.OneClickPinDelay) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OneClickPinDelay", 1))
+	}
+
+	if s.PhoneNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A room profile with attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Profile
 type Profile struct {
@@ -5122,8 +7504,14 @@ type Profile struct {
 	// The address of a room profile.
 	Address *string `min:"1" type:"string"`
 
+	// The ARN of the address book.
+	AddressBookArn *string `type:"string"`
+
 	// The distance unit of a room profile.
 	DistanceUnit DistanceUnit `type:"string" enum:"true"`
+
+	// Retrieves if the profile is default or not.
+	IsDefault *bool `type:"boolean"`
 
 	// The max volume limit of a room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
@@ -5171,6 +7559,9 @@ type ProfileData struct {
 	// The distance unit of a room profile.
 	DistanceUnit DistanceUnit `type:"string" enum:"true"`
 
+	// Retrieves if the profile data is default or not.
+	IsDefault *bool `type:"boolean"`
+
 	// The ARN of a room profile.
 	ProfileArn *string `type:"string"`
 
@@ -5195,6 +7586,62 @@ func (s ProfileData) String() string {
 // GoString returns the string representation
 func (s ProfileData) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreferenceRequest
+type PutConferencePreferenceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The conference preference of a specific conference provider.
+	//
+	// ConferencePreference is a required field
+	ConferencePreference *ConferencePreference `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s PutConferencePreferenceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutConferencePreferenceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutConferencePreferenceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutConferencePreferenceInput"}
+
+	if s.ConferencePreference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConferencePreference"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreferenceResponse
+type PutConferencePreferenceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutConferencePreferenceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutConferencePreferenceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutConferencePreferenceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutRoomSkillParameterRequest
@@ -5267,6 +7714,234 @@ func (s PutRoomSkillParameterOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRoomSkillParameterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorizationRequest
+type PutSkillAuthorizationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The authorization result specific to OAUTH code grant output. "Code” must
+	// be populated in the AuthorizationResult map to establish the authorization.
+	//
+	// AuthorizationResult is a required field
+	AuthorizationResult map[string]string `type:"map" required:"true"`
+
+	// The room that the skill is authorized for.
+	RoomArn *string `type:"string"`
+
+	// The unique identifier of a skill.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutSkillAuthorizationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutSkillAuthorizationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutSkillAuthorizationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutSkillAuthorizationInput"}
+
+	if s.AuthorizationResult == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizationResult"))
+	}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorizationResponse
+type PutSkillAuthorizationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutSkillAuthorizationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutSkillAuthorizationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutSkillAuthorizationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDeviceRequest
+type RegisterAVSDeviceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The device type ID for your AVS device generated by Amazon when the OEM creates
+	// a new product on Amazon's Developer Console.
+	//
+	// AmazonId is a required field
+	AmazonId *string `type:"string" required:"true"`
+
+	// The client ID of the OEM used for code-based linking authorization on an
+	// AVS device.
+	//
+	// ClientId is a required field
+	ClientId *string `type:"string" required:"true"`
+
+	// The key generated by the OEM that uniquely identifies a specified instance
+	// of your AVS device.
+	//
+	// DeviceSerialNumber is a required field
+	DeviceSerialNumber *string `type:"string" required:"true"`
+
+	// The product ID used to identify your AVS device during authorization.
+	//
+	// ProductId is a required field
+	ProductId *string `type:"string" required:"true"`
+
+	// The code that is obtained after your AVS device has made a POST request to
+	// LWA as a part of the Device Authorization Request component of the OAuth
+	// code-based linking specification.
+	//
+	// UserCode is a required field
+	UserCode *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RegisterAVSDeviceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegisterAVSDeviceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisterAVSDeviceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterAVSDeviceInput"}
+
+	if s.AmazonId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AmazonId"))
+	}
+
+	if s.ClientId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
+	}
+
+	if s.DeviceSerialNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeviceSerialNumber"))
+	}
+
+	if s.ProductId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
+	}
+
+	if s.UserCode == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserCode"))
+	}
+	if s.UserCode != nil && len(*s.UserCode) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserCode", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDeviceResponse
+type RegisterAVSDeviceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the device.
+	DeviceArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RegisterAVSDeviceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegisterAVSDeviceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterAVSDeviceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkillRequest
+type RejectSkillInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier of the skill.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RejectSkillInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RejectSkillInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RejectSkillInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RejectSkillInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkillResponse
+type RejectSkillOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s RejectSkillOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RejectSkillOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RejectSkillOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6206,6 +8881,53 @@ func (s SendInvitationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Granular information about the skill.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillDetails
+type SkillDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The details about what the skill supports organized as bullet points.
+	BulletPoints []string `type:"list"`
+
+	// The details about the developer that published the skill.
+	DeveloperInfo *DeveloperInfo `type:"structure"`
+
+	// The URL of the end user license agreement.
+	EndUserLicenseAgreement *string `type:"string"`
+
+	// The generic keywords associated with the skill that can be used to find a
+	// skill.
+	GenericKeywords []string `type:"list"`
+
+	// The phrase used to trigger the skill.
+	InvocationPhrase *string `type:"string"`
+
+	// The updates added in bullet points.
+	NewInThisVersionBulletPoints []string `type:"list"`
+
+	// The description of the product.
+	ProductDescription *string `type:"string"`
+
+	// The date when the skill was released.
+	ReleaseDate *string `type:"string"`
+
+	// The list of reviews for the skill, including Key and Value pair.
+	Reviews map[string]string `type:"map"`
+
+	// The types of skills.
+	SkillTypes []string `type:"list"`
+}
+
+// String returns the string representation
+func (s SkillDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SkillDetails) GoString() string {
+	return s.String()
+}
+
 // A skill group with attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillGroup
 type SkillGroup struct {
@@ -6261,11 +8983,18 @@ func (s SkillGroupData) GoString() string {
 type SkillSummary struct {
 	_ struct{} `type:"structure"`
 
+	// Whether the skill is enabled under the user's account, or if it requires
+	// linking to be used.
+	EnablementType EnablementType `type:"string" enum:"true"`
+
 	// The ARN of the skill summary.
 	SkillId *string `type:"string"`
 
 	// The name of the skill.
 	SkillName *string `min:"1" type:"string"`
+
+	// Whether the skill is publicly available or is a private skill.
+	SkillType SkillType `min:"1" type:"string" enum:"true"`
 
 	// Linking support for a skill.
 	SupportsLinking *bool `type:"boolean"`
@@ -6278,6 +9007,69 @@ func (s SkillSummary) String() string {
 
 // GoString returns the string representation
 func (s SkillSummary) GoString() string {
+	return s.String()
+}
+
+// The detailed information about an Alexa skill.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SkillsStoreSkill
+type SkillsStoreSkill struct {
+	_ struct{} `type:"structure"`
+
+	// The URL where the skill icon resides.
+	IconUrl *string `type:"string"`
+
+	// Sample utterances that interact with the skill.
+	SampleUtterances []string `type:"list"`
+
+	// Short description about the skill.
+	ShortDescription *string `type:"string"`
+
+	// Information about the skill.
+	SkillDetails *SkillDetails `type:"structure"`
+
+	// The ARN of the skill.
+	SkillId *string `type:"string"`
+
+	// The name of the skill.
+	SkillName *string `min:"1" type:"string"`
+
+	// Linking support for a skill.
+	SupportsLinking *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s SkillsStoreSkill) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SkillsStoreSkill) GoString() string {
+	return s.String()
+}
+
+// A smart home appliance that can connect to a central system. Any domestic
+// device can be a smart appliance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SmartHomeAppliance
+type SmartHomeAppliance struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the smart home appliance.
+	Description *string `type:"string"`
+
+	// The friendly name of the smart home appliance.
+	FriendlyName *string `type:"string"`
+
+	// The name of the manufacturer of the smart home appliance.
+	ManufacturerName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SmartHomeAppliance) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SmartHomeAppliance) GoString() string {
 	return s.String()
 }
 
@@ -6389,16 +9181,76 @@ func (s StartDeviceSyncOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscoveryRequest
+type StartSmartHomeApplianceDiscoveryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The room where smart home appliance discovery was initiated.
+	//
+	// RoomArn is a required field
+	RoomArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StartSmartHomeApplianceDiscoveryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartSmartHomeApplianceDiscoveryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartSmartHomeApplianceDiscoveryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartSmartHomeApplianceDiscoveryInput"}
+
+	if s.RoomArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoomArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscoveryResponse
+type StartSmartHomeApplianceDiscoveryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StartSmartHomeApplianceDiscoveryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartSmartHomeApplianceDiscoveryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartSmartHomeApplianceDiscoveryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // A key-value pair that can be associated with a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
 	// The key of a tag. Tag keys are case-sensitive.
-	Key *string `min:"1" type:"string"`
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
 
 	// The value of a tag. Tag values are case-sensitive and can be null.
-	Value *string `type:"string"`
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6414,8 +9266,16 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6631,6 +9491,100 @@ func (s UpdateAddressBookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProviderRequest
+type UpdateConferenceProviderInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the conference provider.
+	//
+	// ConferenceProviderArn is a required field
+	ConferenceProviderArn *string `type:"string" required:"true"`
+
+	// The type of the conference provider.
+	//
+	// ConferenceProviderType is a required field
+	ConferenceProviderType ConferenceProviderType `type:"string" required:"true" enum:"true"`
+
+	// The IP endpoint and protocol for calling.
+	IPDialIn *IPDialIn `type:"structure"`
+
+	// The meeting settings for the conference provider.
+	//
+	// MeetingSetting is a required field
+	MeetingSetting *MeetingSetting `type:"structure" required:"true"`
+
+	// The information for PSTN conferencing.
+	PSTNDialIn *PSTNDialIn `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateConferenceProviderInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateConferenceProviderInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateConferenceProviderInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConferenceProviderInput"}
+
+	if s.ConferenceProviderArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderArn"))
+	}
+	if len(s.ConferenceProviderType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ConferenceProviderType"))
+	}
+
+	if s.MeetingSetting == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MeetingSetting"))
+	}
+	if s.IPDialIn != nil {
+		if err := s.IPDialIn.Validate(); err != nil {
+			invalidParams.AddNested("IPDialIn", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MeetingSetting != nil {
+		if err := s.MeetingSetting.Validate(); err != nil {
+			invalidParams.AddNested("MeetingSetting", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PSTNDialIn != nil {
+		if err := s.PSTNDialIn.Validate(); err != nil {
+			invalidParams.AddNested("PSTNDialIn", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProviderResponse
+type UpdateConferenceProviderOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateConferenceProviderOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateConferenceProviderOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateConferenceProviderOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContactRequest
 type UpdateContactInput struct {
 	_ struct{} `type:"structure"`
@@ -6773,6 +9727,10 @@ type UpdateProfileInput struct {
 
 	// The updated distance unit for the room profile.
 	DistanceUnit DistanceUnit `type:"string" enum:"true"`
+
+	// Sets the profile as default if selected. If this is missing, no update is
+	// done to the default status.
+	IsDefault *bool `type:"boolean"`
 
 	// The updated maximum volume limit for the room profile.
 	MaxVolumeLimit *int64 `type:"integer"`
@@ -7014,6 +9972,49 @@ func (s UserData) GoString() string {
 	return s.String()
 }
 
+type CommsProtocol string
+
+// Enum values for CommsProtocol
+const (
+	CommsProtocolSip  CommsProtocol = "SIP"
+	CommsProtocolSips CommsProtocol = "SIPS"
+	CommsProtocolH323 CommsProtocol = "H323"
+)
+
+func (enum CommsProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CommsProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ConferenceProviderType string
+
+// Enum values for ConferenceProviderType
+const (
+	ConferenceProviderTypeChime            ConferenceProviderType = "CHIME"
+	ConferenceProviderTypeBluejeans        ConferenceProviderType = "BLUEJEANS"
+	ConferenceProviderTypeFuze             ConferenceProviderType = "FUZE"
+	ConferenceProviderTypeGoogleHangouts   ConferenceProviderType = "GOOGLE_HANGOUTS"
+	ConferenceProviderTypePolycom          ConferenceProviderType = "POLYCOM"
+	ConferenceProviderTypeRingcentral      ConferenceProviderType = "RINGCENTRAL"
+	ConferenceProviderTypeSkypeForBusiness ConferenceProviderType = "SKYPE_FOR_BUSINESS"
+	ConferenceProviderTypeWebex            ConferenceProviderType = "WEBEX"
+	ConferenceProviderTypeZoom             ConferenceProviderType = "ZOOM"
+	ConferenceProviderTypeCustom           ConferenceProviderType = "CUSTOM"
+)
+
+func (enum ConferenceProviderType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConferenceProviderType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConnectionStatus string
 
 // Enum values for ConnectionStatus
@@ -7101,6 +10102,40 @@ func (enum DistanceUnit) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EnablementType string
+
+// Enum values for EnablementType
+const (
+	EnablementTypeEnabled EnablementType = "ENABLED"
+	EnablementTypePending EnablementType = "PENDING"
+)
+
+func (enum EnablementType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnablementType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EnablementTypeFilter string
+
+// Enum values for EnablementTypeFilter
+const (
+	EnablementTypeFilterEnabled EnablementTypeFilter = "ENABLED"
+	EnablementTypeFilterPending EnablementTypeFilter = "PENDING"
+)
+
+func (enum EnablementTypeFilter) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnablementTypeFilter) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnrollmentStatus string
 
 // Enum values for EnrollmentStatus
@@ -7138,6 +10173,59 @@ func (enum Feature) MarshalValue() (string, error) {
 }
 
 func (enum Feature) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RequirePin string
+
+// Enum values for RequirePin
+const (
+	RequirePinYes      RequirePin = "YES"
+	RequirePinNo       RequirePin = "NO"
+	RequirePinOptional RequirePin = "OPTIONAL"
+)
+
+func (enum RequirePin) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RequirePin) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SkillType string
+
+// Enum values for SkillType
+const (
+	SkillTypePublic  SkillType = "PUBLIC"
+	SkillTypePrivate SkillType = "PRIVATE"
+)
+
+func (enum SkillType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SkillType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SkillTypeFilter string
+
+// Enum values for SkillTypeFilter
+const (
+	SkillTypeFilterPublic  SkillTypeFilter = "PUBLIC"
+	SkillTypeFilterPrivate SkillTypeFilter = "PRIVATE"
+	SkillTypeFilterAll     SkillTypeFilter = "ALL"
+)
+
+func (enum SkillTypeFilter) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SkillTypeFilter) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -69,6 +69,12 @@ type RedshiftAPI interface {
 
 	AuthorizeSnapshotAccessRequest(*redshift.AuthorizeSnapshotAccessInput) redshift.AuthorizeSnapshotAccessRequest
 
+	BatchDeleteClusterSnapshotsRequest(*redshift.BatchDeleteClusterSnapshotsInput) redshift.BatchDeleteClusterSnapshotsRequest
+
+	BatchModifyClusterSnapshotsRequest(*redshift.BatchModifyClusterSnapshotsInput) redshift.BatchModifyClusterSnapshotsRequest
+
+	CancelResizeRequest(*redshift.CancelResizeInput) redshift.CancelResizeRequest
+
 	CopyClusterSnapshotRequest(*redshift.CopyClusterSnapshotInput) redshift.CopyClusterSnapshotRequest
 
 	CreateClusterRequest(*redshift.CreateClusterInput) redshift.CreateClusterRequest
@@ -88,6 +94,8 @@ type RedshiftAPI interface {
 	CreateHsmConfigurationRequest(*redshift.CreateHsmConfigurationInput) redshift.CreateHsmConfigurationRequest
 
 	CreateSnapshotCopyGrantRequest(*redshift.CreateSnapshotCopyGrantInput) redshift.CreateSnapshotCopyGrantRequest
+
+	CreateSnapshotScheduleRequest(*redshift.CreateSnapshotScheduleInput) redshift.CreateSnapshotScheduleRequest
 
 	CreateTagsRequest(*redshift.CreateTagsInput) redshift.CreateTagsRequest
 
@@ -109,7 +117,11 @@ type RedshiftAPI interface {
 
 	DeleteSnapshotCopyGrantRequest(*redshift.DeleteSnapshotCopyGrantInput) redshift.DeleteSnapshotCopyGrantRequest
 
+	DeleteSnapshotScheduleRequest(*redshift.DeleteSnapshotScheduleInput) redshift.DeleteSnapshotScheduleRequest
+
 	DeleteTagsRequest(*redshift.DeleteTagsInput) redshift.DeleteTagsRequest
+
+	DescribeAccountAttributesRequest(*redshift.DescribeAccountAttributesInput) redshift.DescribeAccountAttributesRequest
 
 	DescribeClusterDbRevisionsRequest(*redshift.DescribeClusterDbRevisionsInput) redshift.DescribeClusterDbRevisionsRequest
 
@@ -153,6 +165,10 @@ type RedshiftAPI interface {
 
 	DescribeSnapshotCopyGrantsRequest(*redshift.DescribeSnapshotCopyGrantsInput) redshift.DescribeSnapshotCopyGrantsRequest
 
+	DescribeSnapshotSchedulesRequest(*redshift.DescribeSnapshotSchedulesInput) redshift.DescribeSnapshotSchedulesRequest
+
+	DescribeStorageRequest(*redshift.DescribeStorageInput) redshift.DescribeStorageRequest
+
 	DescribeTableRestoreStatusRequest(*redshift.DescribeTableRestoreStatusInput) redshift.DescribeTableRestoreStatusRequest
 
 	DescribeTagsRequest(*redshift.DescribeTagsInput) redshift.DescribeTagsRequest
@@ -175,13 +191,21 @@ type RedshiftAPI interface {
 
 	ModifyClusterIamRolesRequest(*redshift.ModifyClusterIamRolesInput) redshift.ModifyClusterIamRolesRequest
 
+	ModifyClusterMaintenanceRequest(*redshift.ModifyClusterMaintenanceInput) redshift.ModifyClusterMaintenanceRequest
+
 	ModifyClusterParameterGroupRequest(*redshift.ModifyClusterParameterGroupInput) redshift.ModifyClusterParameterGroupRequest
+
+	ModifyClusterSnapshotRequest(*redshift.ModifyClusterSnapshotInput) redshift.ModifyClusterSnapshotRequest
+
+	ModifyClusterSnapshotScheduleRequest(*redshift.ModifyClusterSnapshotScheduleInput) redshift.ModifyClusterSnapshotScheduleRequest
 
 	ModifyClusterSubnetGroupRequest(*redshift.ModifyClusterSubnetGroupInput) redshift.ModifyClusterSubnetGroupRequest
 
 	ModifyEventSubscriptionRequest(*redshift.ModifyEventSubscriptionInput) redshift.ModifyEventSubscriptionRequest
 
 	ModifySnapshotCopyRetentionPeriodRequest(*redshift.ModifySnapshotCopyRetentionPeriodInput) redshift.ModifySnapshotCopyRetentionPeriodRequest
+
+	ModifySnapshotScheduleRequest(*redshift.ModifySnapshotScheduleInput) redshift.ModifySnapshotScheduleRequest
 
 	PurchaseReservedNodeOfferingRequest(*redshift.PurchaseReservedNodeOfferingInput) redshift.PurchaseReservedNodeOfferingRequest
 

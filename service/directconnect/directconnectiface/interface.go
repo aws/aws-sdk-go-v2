@@ -149,6 +149,8 @@ type DirectConnectAPI interface {
 	UntagResourceRequest(*directconnect.UntagResourceInput) directconnect.UntagResourceRequest
 
 	UpdateLagRequest(*directconnect.UpdateLagInput) directconnect.UpdateLagRequest
+
+	UpdateVirtualInterfaceAttributesRequest(*directconnect.UpdateVirtualInterfaceAttributesInput) directconnect.UpdateVirtualInterfaceAttributesRequest
 }
 
 var _ DirectConnectAPI = (*directconnect.DirectConnect)(nil)

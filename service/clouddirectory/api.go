@@ -293,7 +293,7 @@ func (r AttachTypedLinkRequest) Send() (*AttachTypedLinkOutput, error) {
 // Amazon CloudDirectory.
 //
 // Attaches a typed link to a specified source and target object. For more information,
-// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the AttachTypedLinkRequest method.
 //    req := client.AttachTypedLinkRequest(params)
@@ -447,6 +447,10 @@ func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
 // Creates a Directory by copying the published schema into the directory. A
 // directory cannot be created without a schema.
 //
+// You can also quickly create a directory using a managed schema, called the
+// QuickStartSchema. For more information, see Managed Schema (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html)
+// in the Amazon Cloud Directory Developer Guide.
+//
 //    // Example sending a request using the CreateDirectoryRequest method.
 //    req := client.CreateDirectoryRequest(params)
 //    resp, err := req.Send()
@@ -546,7 +550,7 @@ func (r CreateIndexRequest) Send() (*CreateIndexOutput, error) {
 // CreateIndexRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html)
 // for more information.
 //
 //    // Example sending a request using the CreateIndexRequest method.
@@ -712,7 +716,7 @@ func (r CreateTypedLinkFacetRequest) Send() (*CreateTypedLinkFacetOutput, error)
 // CreateTypedLinkFacetRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Creates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// Creates a TypedLinkFacet. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the CreateTypedLinkFacetRequest method.
 //    req := client.CreateTypedLinkFacetRequest(params)
@@ -865,7 +869,9 @@ func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
 // Amazon CloudDirectory.
 //
 // Deletes an object and its associated attributes. Only objects with no children
-// and no parents can be deleted.
+// and no parents can be deleted. The maximum number of attributes that can
+// be deleted during an object deletion is 30. For more information, see Amazon
+// Cloud Directory Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
 //
 //    // Example sending a request using the DeleteObjectRequest method.
 //    req := client.DeleteObjectRequest(params)
@@ -966,7 +972,7 @@ func (r DeleteTypedLinkFacetRequest) Send() (*DeleteTypedLinkFacetOutput, error)
 // DeleteTypedLinkFacetRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Deletes a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// Deletes a TypedLinkFacet. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the DeleteTypedLinkFacetRequest method.
 //    req := client.DeleteTypedLinkFacetRequest(params)
@@ -1168,7 +1174,7 @@ func (r DetachTypedLinkRequest) Send() (*DetachTypedLinkOutput, error) {
 // Amazon CloudDirectory.
 //
 // Detaches a typed link from a specified source and target object. For more
-// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the DetachTypedLinkRequest method.
 //    req := client.DetachTypedLinkRequest(params)
@@ -1626,7 +1632,7 @@ func (r GetSchemaAsJsonRequest) Send() (*GetSchemaAsJsonOutput, error) {
 // GetSchemaAsJsonRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Retrieves a JSON representation of the schema. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
+// Retrieves a JSON representation of the schema. See JSON Schema Format (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
 // for more information.
 //
 //    // Example sending a request using the GetSchemaAsJsonRequest method.
@@ -1678,7 +1684,7 @@ func (r GetTypedLinkFacetInformationRequest) Send() (*GetTypedLinkFacetInformati
 // Amazon CloudDirectory.
 //
 // Returns the identity attribute order for a specific TypedLinkFacet. For more
-// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the GetTypedLinkFacetInformationRequest method.
 //    req := client.GetTypedLinkFacetInformationRequest(params)
@@ -2343,7 +2349,7 @@ func (r ListIncomingTypedLinksRequest) Send() (*ListIncomingTypedLinksOutput, er
 //
 // Returns a paginated list of all the incoming TypedLinkSpecifier information
 // for an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListIncomingTypedLinksRequest method.
 //    req := client.ListIncomingTypedLinksRequest(params)
@@ -2806,7 +2812,7 @@ func (r ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, erro
 //
 // Retrieves all available parent paths for any object type such as node, leaf
 // node, policy node, and index node objects. For more information about objects,
-// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
+// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 //
 // Use this API to evaluate all parents for an object. The call returns all
 // objects from the root of the directory up to the requested object. The API
@@ -3123,7 +3129,7 @@ func (r ListOutgoingTypedLinksRequest) Send() (*ListOutgoingTypedLinksOutput, er
 //
 // Returns a paginated list of all the outgoing TypedLinkSpecifier information
 // for an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListOutgoingTypedLinksRequest method.
 //    req := client.ListOutgoingTypedLinksRequest(params)
@@ -3484,7 +3490,7 @@ func (r ListTypedLinkFacetAttributesRequest) Send() (*ListTypedLinkFacetAttribut
 // Amazon CloudDirectory.
 //
 // Returns a paginated list of all attribute definitions for a particular TypedLinkFacet.
-// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListTypedLinkFacetAttributesRequest method.
 //    req := client.ListTypedLinkFacetAttributesRequest(params)
@@ -3587,7 +3593,7 @@ func (r ListTypedLinkFacetNamesRequest) Send() (*ListTypedLinkFacetNamesOutput, 
 // Amazon CloudDirectory.
 //
 // Returns a paginated list of TypedLink facet names for a particular schema.
-// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListTypedLinkFacetNamesRequest method.
 //    req := client.ListTypedLinkFacetNamesRequest(params)
@@ -3695,7 +3701,7 @@ func (r LookupPolicyRequest) Send() (*LookupPolicyOutput, error) {
 // the ObjectIdentifier for such objects. If policies are present, it returns
 // ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
 // root from the target object are ignored. For more information, see Policies
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 //
 //    // Example sending a request using the LookupPolicyRequest method.
 //    req := client.LookupPolicyRequest(params)
@@ -3849,7 +3855,7 @@ func (r PutSchemaFromJsonRequest) Send() (*PutSchemaFromJsonOutput, error) {
 // Amazon CloudDirectory.
 //
 // Allows a schema to be updated using JSON upload. Only available for development
-// schemas. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
+// schemas. See JSON Schema Format (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
 // for more information.
 //
 //    // Example sending a request using the PutSchemaFromJsonRequest method.
@@ -4258,7 +4264,7 @@ func (r UpdateTypedLinkFacetRequest) Send() (*UpdateTypedLinkFacetOutput, error)
 // UpdateTypedLinkFacetRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Updates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// Updates a TypedLinkFacet. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the UpdateTypedLinkFacetRequest method.
 //    req := client.UpdateTypedLinkFacetRequest(params)
@@ -5902,7 +5908,7 @@ func (s BatchAttachTypedLinkResponse) MarshalFields(e protocol.FieldEncoder) err
 type BatchCreateIndex struct {
 	_ struct{} `type:"structure"`
 
-	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
+	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string `type:"string"`
 
@@ -6039,7 +6045,7 @@ func (s BatchCreateIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
 type BatchCreateObject struct {
 	_ struct{} `type:"structure"`
 
-	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
+	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string `type:"string"`
 
@@ -6348,7 +6354,7 @@ func (s BatchDetachFromIndexResponse) MarshalFields(e protocol.FieldEncoder) err
 type BatchDetachObject struct {
 	_ struct{} `type:"structure"`
 
-	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
+	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string `type:"string"`
 
@@ -7689,6 +7695,112 @@ func (s BatchListObjectParentPathsResponse) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParents
+type BatchListObjectParents struct {
+	_ struct{} `type:"structure"`
+
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	NextToken *string `type:"string"`
+
+	// The reference that identifies an object.
+	//
+	// ObjectReference is a required field
+	ObjectReference *ObjectReference `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchListObjectParents) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchListObjectParents) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchListObjectParents) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListObjectParents"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if s.ObjectReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchListObjectParents) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ObjectReference != nil {
+		v := s.ObjectReference
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParentsResponse
+type BatchListObjectParentsResponse struct {
+	_ struct{} `type:"structure"`
+
+	NextToken *string `type:"string"`
+
+	ParentLinks []ObjectIdentifierAndLinkNameTuple `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchListObjectParentsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchListObjectParentsResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchListObjectParentsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ParentLinks) > 0 {
+		v := s.ParentLinks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ParentLinks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Returns policies attached to an object in pagination fashion inside a BatchRead
 // operation. For more information, see ListObjectPolicies and BatchReadRequest$Operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectPolicies
@@ -8148,7 +8260,7 @@ type BatchLookupPolicyResponse struct {
 	NextToken *string `type:"string"`
 
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
-	// and PolicyType. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// and PolicyType. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	PolicyToPathList []PolicyToPath `type:"list"`
 }
 
@@ -8329,7 +8441,7 @@ type BatchReadOperation struct {
 
 	// Returns a paginated list of all the incoming TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListIncomingTypedLinks *BatchListIncomingTypedLinks `type:"structure"`
 
 	// Lists objects attached to the specified index.
@@ -8344,15 +8456,17 @@ type BatchReadOperation struct {
 
 	// Retrieves all available parent paths for any object type such as node, leaf
 	// node, policy node, and index node objects. For more information about objects,
-	// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
+	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPaths `type:"structure"`
+
+	ListObjectParents *BatchListObjectParents `type:"structure"`
 
 	// Returns policies attached to an object in pagination fashion.
 	ListObjectPolicies *BatchListObjectPolicies `type:"structure"`
 
 	// Returns a paginated list of all the outgoing TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListOutgoingTypedLinks *BatchListOutgoingTypedLinks `type:"structure"`
 
 	// Returns all of the ObjectIdentifiers to which a given policy is attached.
@@ -8364,7 +8478,7 @@ type BatchReadOperation struct {
 	// the ObjectIdentifier for such objects. If policies are present, it returns
 	// ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
 	// root from the target object are ignored. For more information, see Policies
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	LookupPolicy *BatchLookupPolicy `type:"structure"`
 }
 
@@ -8424,6 +8538,11 @@ func (s *BatchReadOperation) Validate() error {
 	if s.ListObjectParentPaths != nil {
 		if err := s.ListObjectParentPaths.Validate(); err != nil {
 			invalidParams.AddNested("ListObjectParentPaths", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ListObjectParents != nil {
+		if err := s.ListObjectParents.Validate(); err != nil {
+			invalidParams.AddNested("ListObjectParents", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListObjectPolicies != nil {
@@ -8508,6 +8627,12 @@ func (s BatchReadOperation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ListObjectParentPaths", v, metadata)
+	}
+	if s.ListObjectParents != nil {
+		v := s.ListObjectParents
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ListObjectParents", v, metadata)
 	}
 	if s.ListObjectPolicies != nil {
 		v := s.ListObjectPolicies
@@ -8636,7 +8761,7 @@ type BatchReadSuccessfulResponse struct {
 
 	// Returns a paginated list of all the incoming TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListIncomingTypedLinks *BatchListIncomingTypedLinksResponse `type:"structure"`
 
 	// Lists objects attached to the specified index.
@@ -8651,15 +8776,17 @@ type BatchReadSuccessfulResponse struct {
 
 	// Retrieves all available parent paths for any object type such as node, leaf
 	// node, policy node, and index node objects. For more information about objects,
-	// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
+	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPathsResponse `type:"structure"`
+
+	ListObjectParents *BatchListObjectParentsResponse `type:"structure"`
 
 	// Returns policies attached to an object in pagination fashion.
 	ListObjectPolicies *BatchListObjectPoliciesResponse `type:"structure"`
 
 	// Returns a paginated list of all the outgoing TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListOutgoingTypedLinks *BatchListOutgoingTypedLinksResponse `type:"structure"`
 
 	// Returns all of the ObjectIdentifiers to which a given policy is attached.
@@ -8671,7 +8798,7 @@ type BatchReadSuccessfulResponse struct {
 	// the ObjectIdentifier for such objects. If policies are present, it returns
 	// ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
 	// root from the target object are ignored. For more information, see Policies
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	LookupPolicy *BatchLookupPolicyResponse `type:"structure"`
 }
 
@@ -8740,6 +8867,12 @@ func (s BatchReadSuccessfulResponse) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ListObjectParentPaths", v, metadata)
+	}
+	if s.ListObjectParents != nil {
+		v := s.ListObjectParents
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ListObjectParents", v, metadata)
 	}
 	if s.ListObjectPolicies != nil {
 		v := s.ListObjectPolicies
@@ -9156,10 +9289,10 @@ type BatchWriteOperation struct {
 	AttachToIndex *BatchAttachToIndex `type:"structure"`
 
 	// Attaches a typed link to a specified source and target object. For more information,
-	// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	AttachTypedLink *BatchAttachTypedLink `type:"structure"`
 
-	// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+	// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm)
 	// for more information.
 	CreateIndex *BatchCreateIndex `type:"structure"`
 
@@ -9179,7 +9312,7 @@ type BatchWriteOperation struct {
 	DetachPolicy *BatchDetachPolicy `type:"structure"`
 
 	// Detaches a typed link from a specified source and target object. For more
-	// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	DetachTypedLink *BatchDetachTypedLink `type:"structure"`
 
 	// A batch operation that removes a facet from an object.
@@ -9401,10 +9534,10 @@ type BatchWriteOperationResponse struct {
 	AttachToIndex *BatchAttachToIndexResponse `type:"structure"`
 
 	// Attaches a typed link to a specified source and target object. For more information,
-	// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	AttachTypedLink *BatchAttachTypedLinkResponse `type:"structure"`
 
-	// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+	// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm)
 	// for more information.
 	CreateIndex *BatchCreateIndexResponse `type:"structure"`
 
@@ -9424,7 +9557,7 @@ type BatchWriteOperationResponse struct {
 	DetachPolicy *BatchDetachPolicyResponse `type:"structure"`
 
 	// Detaches a typed link from a specified source and target object. For more
-	// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	DetachTypedLink *BatchDetachTypedLinkResponse `type:"structure"`
 
 	// The result of a batch remove facet from object operation.
@@ -9748,7 +9881,7 @@ type CreateFacetInput struct {
 	//    * Leaf node: Cannot have children but can have multiple parents.
 	//
 	//    * Policy: Allows you to store a policy document and policy type. For more
-	//    information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	//    information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	//
 	//    * Index: Can be created with the Index API.
 	ObjectType ObjectType `type:"string" enum:"true"`
@@ -11445,7 +11578,7 @@ func (s EnableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A structure that contains Name, ARN, Attributes, Rules, and ObjectTypes.
-// See Facets (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html)
+// See Facets (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_whatarefacets.html)
 // for more information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/Facet
 type Facet struct {
@@ -11503,12 +11636,12 @@ type FacetAttribute struct {
 	_ struct{} `type:"structure"`
 
 	// A facet attribute consists of either a definition or a reference. This structure
-	// contains the attribute definition. See Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// contains the attribute definition. See Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	AttributeDefinition *FacetAttributeDefinition `type:"structure"`
 
 	// An attribute reference that is associated with the attribute. See Attribute
-	// References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	AttributeReference *FacetAttributeReference `type:"structure"`
 
@@ -11587,7 +11720,7 @@ func (s FacetAttribute) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A facet attribute definition. See Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+// A facet attribute definition. See Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 // for more information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttributeDefinition
 type FacetAttributeDefinition struct {
@@ -11673,14 +11806,14 @@ type FacetAttributeReference struct {
 	_ struct{} `type:"structure"`
 
 	// The target attribute name that is associated with the facet reference. See
-	// Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	//
 	// TargetAttributeName is a required field
 	TargetAttributeName *string `min:"1" type:"string" required:"true"`
 
 	// The target facet name that is associated with the facet reference. See Attribute
-	// References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	//
 	// TargetFacetName is a required field
@@ -12073,7 +12206,7 @@ type GetLinkAttributesInput struct {
 	ConsistencyLevel ConsistencyLevel `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the typed link resides. For more information, see arns or Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// the typed link resides. For more information, see arns or Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// DirectoryArn is a required field
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
@@ -12643,7 +12776,7 @@ type GetTypedLinkFacetInformationOutput struct {
 	// Any attributes that do not have a range specified are presumed to match the
 	// entire range. Filters are interpreted in the order of the attributes on the
 	// typed link facet, not the order in which they are supplied to any API calls.
-	// For more information about identity attributes, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// For more information about identity attributes, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	IdentityAttributeOrder []string `type:"list"`
 }
 
@@ -13765,8 +13898,8 @@ type ListIndexInput struct {
 	IndexReference *ObjectReference `type:"structure" required:"true"`
 
 	// The maximum number of objects in a single page to retrieve from the index
-	// during a request. For more information, see AWS Directory Service Limits
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd).
+	// during a request. For more information, see Amazon Cloud Directory Limits
+	// (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The pagination token.
@@ -14482,6 +14615,10 @@ type ListObjectParentsInput struct {
 	// DirectoryArn is a required field
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 
+	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There
+	// could be multiple links between a parent-child pair.
+	IncludeAllLinksToEachParent *bool `type:"boolean"`
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -14530,6 +14667,12 @@ func (s *ListObjectParentsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListObjectParentsInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.IncludeAllLinksToEachParent != nil {
+		v := *s.IncludeAllLinksToEachParent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IncludeAllLinksToEachParent", protocol.BoolValue(v), metadata)
+	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
 
@@ -14572,6 +14715,9 @@ type ListObjectParentsOutput struct {
 	// The pagination token.
 	NextToken *string `type:"string"`
 
+	// Returns a list of parent reference and LinkName Tuples.
+	ParentLinks []ObjectIdentifierAndLinkNameTuple `type:"list"`
+
 	// The parent structure, which is a map with key as the ObjectIdentifier and
 	// LinkName as the value.
 	Parents map[string]string `type:"map"`
@@ -14599,6 +14745,18 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ParentLinks) > 0 {
+		v := s.ParentLinks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ParentLinks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.Parents) > 0 {
 		v := s.Parents
@@ -15670,7 +15828,7 @@ type LookupPolicyOutput struct {
 	NextToken *string `type:"string"`
 
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
-	// and PolicyType. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// and PolicyType. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	PolicyToPathList []PolicyToPath `type:"list"`
 }
 
@@ -15864,6 +16022,45 @@ func (s ObjectAttributeUpdate) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A pair of ObjectIdentifier and LinkName.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectIdentifierAndLinkNameTuple
+type ObjectIdentifierAndLinkNameTuple struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the link between the parent and the child object.
+	LinkName *string `min:"1" type:"string"`
+
+	// The ID that is associated with the object.
+	ObjectIdentifier *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ObjectIdentifierAndLinkNameTuple) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ObjectIdentifierAndLinkNameTuple) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ObjectIdentifierAndLinkNameTuple) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LinkName != nil {
+		v := *s.LinkName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ObjectIdentifier != nil {
+		v := *s.ObjectIdentifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The reference that identifies an object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectReference
 type ObjectReference struct {
@@ -15873,7 +16070,7 @@ type ObjectReference struct {
 	// links leading to it from the directory root. Use the link names from each
 	// parent/child link to construct the path. Path selectors start with a slash
 	// (/) and link names are separated by slashes. For more information about paths,
-	// see Accessing Objects (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects).
+	// see Access Objects (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html).
 	// You can identify an object in one of the following ways:
 	//
 	//    * $ObjectIdentifier - An object identifier is an opaque string provided
@@ -15955,7 +16152,7 @@ func (s PathToObjectIdentifiers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the PolicyType, PolicyId, and the ObjectIdentifier to which it is
-// attached. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+// attached. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PolicyAttachment
 type PolicyAttachment struct {
 	_ struct{} `type:"structure"`
@@ -16440,7 +16637,7 @@ type SchemaFacet struct {
 	FacetName *string `min:"1" type:"string"`
 
 	// The ARN of the schema that contains the facet with no minor component. See
-	// arns and In-Place Schema Upgrade (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html)
+	// arns and In-Place Schema Upgrade (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html)
 	// for a description of when to provide minor versions.
 	SchemaArn *string `type:"string"`
 }
@@ -16689,7 +16886,7 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A range of attribute values. For more information, see Range Filters (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters).
+// A range of attribute values. For more information, see Range Filters (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedAttributeValueRange
 type TypedAttributeValueRange struct {
 	_ struct{} `type:"structure"`
@@ -17514,8 +17711,8 @@ type UpdateLinkAttributesInput struct {
 	AttributeUpdates []LinkAttributeUpdate `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the updated typed link resides. For more information, see arns or Typed link
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// the updated typed link resides. For more information, see arns or Typed Links
+	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// DirectoryArn is a required field
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
@@ -17871,7 +18068,7 @@ type UpdateTypedLinkFacetInput struct {
 	// Any attributes that do not have a range specified are presumed to match the
 	// entire range. Filters are interpreted in the order of the attributes on the
 	// typed link facet, not the order in which they are supplied to any API calls.
-	// For more information about identity attributes, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// For more information about identity attributes, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// IdentityAttributeOrder is a required field
 	IdentityAttributeOrder []string `type:"list" required:"true"`

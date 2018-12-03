@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Translate.
 //    func myFunc(svc translateiface.TranslateAPI) bool {
-//        // Make svc.Text request
+//        // Make svc.DeleteTerminology request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockTranslateClient struct {
 //        translateiface.TranslateAPI
 //    }
-//    func (m *mockTranslateClient) Text(input *translate.TextInput) (*translate.TextOutput, error) {
+//    func (m *mockTranslateClient) DeleteTerminology(input *translate.DeleteTerminologyInput) (*translate.DeleteTerminologyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,14 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type TranslateAPI interface {
+	DeleteTerminologyRequest(*translate.DeleteTerminologyInput) translate.DeleteTerminologyRequest
+
+	GetTerminologyRequest(*translate.GetTerminologyInput) translate.GetTerminologyRequest
+
+	ImportTerminologyRequest(*translate.ImportTerminologyInput) translate.ImportTerminologyRequest
+
+	ListTerminologiesRequest(*translate.ListTerminologiesInput) translate.ListTerminologiesRequest
+
 	TextRequest(*translate.TextInput) translate.TextRequest
 }
 

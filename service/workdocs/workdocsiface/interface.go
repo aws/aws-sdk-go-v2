@@ -128,6 +128,8 @@ type WorkDocsAPI interface {
 
 	GetFolderPathRequest(*workdocs.GetFolderPathInput) workdocs.GetFolderPathRequest
 
+	GetResourcesRequest(*workdocs.GetResourcesInput) workdocs.GetResourcesRequest
+
 	InitiateDocumentVersionUploadRequest(*workdocs.InitiateDocumentVersionUploadInput) workdocs.InitiateDocumentVersionUploadRequest
 
 	RemoveAllResourcePermissionsRequest(*workdocs.RemoveAllResourcePermissionsInput) workdocs.RemoveAllResourcePermissionsRequest

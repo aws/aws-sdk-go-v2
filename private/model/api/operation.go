@@ -13,18 +13,28 @@ import (
 
 // An Operation defines a specific API Operation.
 type Operation struct {
-	API           *API `json:"-"`
-	ExportedName  string
-	Name          string
-	Documentation string
-	HTTP          HTTPInfo
-	InputRef      ShapeRef   `json:"input"`
-	OutputRef     ShapeRef   `json:"output"`
-	ErrorRefs     []ShapeRef `json:"errors"`
-	Paginator     *Paginator
-	Deprecated    bool   `json:"deprecated"`
-	AuthType      string `json:"authtype"`
-	imports       map[string]bool
+	API                 *API `json:"-"`
+	ExportedName        string
+	Name                string
+	Documentation       string
+	HTTP                HTTPInfo
+	InputRef            ShapeRef   `json:"input"`
+	OutputRef           ShapeRef   `json:"output"`
+	ErrorRefs           []ShapeRef `json:"errors"`
+	Paginator           *Paginator
+	Deprecated          bool   `json:"deprecated"`
+	AuthType            string `json:"authtype"`
+	imports             map[string]bool
+	CustomBuildHandlers []string       `json:"-"`
+	Endpoint            *EndpointTrait `json:"endpoint"`
+}
+
+// EndpointTrait provides the structure of the modeled enpdoint trait, and its
+// properties.
+type EndpointTrait struct {
+	// Specifies the hostPrefix template to prepend to the operation's request
+	// endpoint host.
+	HostPrefix string `json:"hostPrefix"`
 }
 
 // A HTTPInfo defines the method of HTTP request for the Operation.
@@ -65,8 +75,8 @@ func (o *Operation) GetSigner() string {
 	return buf.String()
 }
 
-// tplOperation defines a template for rendering an API Operation
-var tplOperation = template.Must(template.New("operation").Funcs(template.FuncMap{
+// operationTmpl defines a template for rendering an API Operation
+var operationTmpl = template.Must(template.New("operation").Funcs(template.FuncMap{
 	"GetCrosslinkURL": GetCrosslinkURL,
 }).Parse(`
 {{ $reqType := printf "%sRequest" .ExportedName -}}
@@ -142,6 +152,9 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 	output.responseMetadata = aws.Response{Request:req}
 
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
+	{{- range $_, $handler := $.CustomBuildHandlers -}}
+		req.Handlers.Build.PushBackNamed({{ $handler }})
+	{{ end -}}
 
 	return {{ $reqType}}{Request: req, Input: input, Copy: c.{{ $reqType }} }
 }
@@ -198,8 +211,12 @@ func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
 
 // GoCode returns a string of rendered GoCode for this Operation
 func (o *Operation) GoCode() string {
+	if o.Endpoint != nil && len(o.Endpoint.HostPrefix) != 0 {
+		setupEndpointHostPrefix(o)
+	}
+
 	var buf bytes.Buffer
-	err := tplOperation.Execute(&buf, o)
+	err := operationTmpl.Execute(&buf, o)
 	if err != nil {
 		panic(err)
 	}

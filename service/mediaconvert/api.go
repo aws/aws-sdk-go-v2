@@ -11,6 +11,57 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
+const opAssociateCertificate = "AssociateCertificate"
+
+// AssociateCertificateRequest is a API request type for the AssociateCertificate API operation.
+type AssociateCertificateRequest struct {
+	*aws.Request
+	Input *AssociateCertificateInput
+	Copy  func(*AssociateCertificateInput) AssociateCertificateRequest
+}
+
+// Send marshals and sends the AssociateCertificate API request.
+func (r AssociateCertificateRequest) Send() (*AssociateCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateCertificateOutput), nil
+}
+
+// AssociateCertificateRequest returns a request value for making API operation for
+// AWS Elemental MediaConvert.
+//
+// Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with
+// AWS Elemental MediaConvert.
+//
+//    // Example sending a request using the AssociateCertificateRequest method.
+//    req := client.AssociateCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificate
+func (c *MediaConvert) AssociateCertificateRequest(input *AssociateCertificateInput) AssociateCertificateRequest {
+	op := &aws.Operation{
+		Name:       opAssociateCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2017-08-29/certificates",
+	}
+
+	if input == nil {
+		input = &AssociateCertificateInput{}
+	}
+
+	output := &AssociateCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociateCertificateRequest{Request: req, Input: input, Copy: c.AssociateCertificateRequest}
+}
+
 const opCancelJob = "CancelJob"
 
 // CancelJobRequest is a API request type for the CancelJob API operation.
@@ -454,6 +505,12 @@ func (c *MediaConvert) DescribeEndpointsRequest(input *DescribeEndpointsInput) D
 		Name:       opDescribeEndpoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-08-29/endpoints",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -465,6 +522,103 @@ func (c *MediaConvert) DescribeEndpointsRequest(input *DescribeEndpointsInput) D
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeEndpointsRequest{Request: req, Input: input, Copy: c.DescribeEndpointsRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeEndpointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeEndpoints operation.
+//		req := client.DescribeEndpointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpointsPager {
+	return DescribeEndpointsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEndpointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeEndpointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEndpointsPager) CurrentPage() *DescribeEndpointsOutput {
+	return p.Pager.CurrentPage().(*DescribeEndpointsOutput)
+}
+
+const opDisassociateCertificate = "DisassociateCertificate"
+
+// DisassociateCertificateRequest is a API request type for the DisassociateCertificate API operation.
+type DisassociateCertificateRequest struct {
+	*aws.Request
+	Input *DisassociateCertificateInput
+	Copy  func(*DisassociateCertificateInput) DisassociateCertificateRequest
+}
+
+// Send marshals and sends the DisassociateCertificate API request.
+func (r DisassociateCertificateRequest) Send() (*DisassociateCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateCertificateOutput), nil
+}
+
+// DisassociateCertificateRequest returns a request value for making API operation for
+// AWS Elemental MediaConvert.
+//
+// Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate
+// Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
+//
+//    // Example sending a request using the DisassociateCertificateRequest method.
+//    req := client.DisassociateCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificate
+func (c *MediaConvert) DisassociateCertificateRequest(input *DisassociateCertificateInput) DisassociateCertificateRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateCertificate,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-08-29/certificates/{arn}",
+	}
+
+	if input == nil {
+		input = &DisassociateCertificateInput{}
+	}
+
+	output := &DisassociateCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociateCertificateRequest{Request: req, Input: input, Copy: c.DisassociateCertificateRequest}
 }
 
 const opGetJob = "GetJob"
@@ -706,6 +860,12 @@ func (c *MediaConvert) ListJobTemplatesRequest(input *ListJobTemplatesInput) Lis
 		Name:       opListJobTemplates,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-08-29/jobTemplates",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -717,6 +877,52 @@ func (c *MediaConvert) ListJobTemplatesRequest(input *ListJobTemplatesInput) Lis
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListJobTemplatesRequest{Request: req, Input: input, Copy: c.ListJobTemplatesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListJobTemplatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListJobTemplates operation.
+//		req := client.ListJobTemplatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListJobTemplatesRequest) Paginate(opts ...aws.Option) ListJobTemplatesPager {
+	return ListJobTemplatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobTemplatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListJobTemplatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListJobTemplatesPager struct {
+	aws.Pager
+}
+
+func (p *ListJobTemplatesPager) CurrentPage() *ListJobTemplatesOutput {
+	return p.Pager.CurrentPage().(*ListJobTemplatesOutput)
 }
 
 const opListJobs = "ListJobs"
@@ -759,6 +965,12 @@ func (c *MediaConvert) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 		Name:       opListJobs,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-08-29/jobs",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -770,6 +982,52 @@ func (c *MediaConvert) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListJobs operation.
+//		req := client.ListJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
+	return ListJobsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListJobsPager) CurrentPage() *ListJobsOutput {
+	return p.Pager.CurrentPage().(*ListJobsOutput)
 }
 
 const opListPresets = "ListPresets"
@@ -811,6 +1069,12 @@ func (c *MediaConvert) ListPresetsRequest(input *ListPresetsInput) ListPresetsRe
 		Name:       opListPresets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-08-29/presets",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -822,6 +1086,52 @@ func (c *MediaConvert) ListPresetsRequest(input *ListPresetsInput) ListPresetsRe
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListPresetsRequest{Request: req, Input: input, Copy: c.ListPresetsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListPresetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListPresets operation.
+//		req := client.ListPresetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
+	return ListPresetsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPresetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListPresetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPresetsPager struct {
+	aws.Pager
+}
+
+func (p *ListPresetsPager) CurrentPage() *ListPresetsOutput {
+	return p.Pager.CurrentPage().(*ListPresetsOutput)
 }
 
 const opListQueues = "ListQueues"
@@ -863,6 +1173,12 @@ func (c *MediaConvert) ListQueuesRequest(input *ListQueuesInput) ListQueuesReque
 		Name:       opListQueues,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-08-29/queues",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -874,6 +1190,52 @@ func (c *MediaConvert) ListQueuesRequest(input *ListQueuesInput) ListQueuesReque
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListQueuesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListQueues operation.
+//		req := client.ListQueuesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListQueuesRequest) Paginate(opts ...aws.Option) ListQueuesPager {
+	return ListQueuesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListQueuesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListQueuesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListQueuesPager struct {
+	aws.Pager
+}
+
+func (p *ListQueuesPager) CurrentPage() *ListQueuesOutput {
+	return p.Pager.CurrentPage().(*ListQueuesOutput)
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -1548,6 +1910,85 @@ func (s AncillarySourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "sourceAncillaryChannelNumber", protocol.Int64Value(v), metadata)
 	}
+	return nil
+}
+
+// Associates the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM)
+// certificate with an AWS Elemental MediaConvert resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificateRequest
+type AssociateCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the ACM certificate that you want to associate with your MediaConvert
+	// resource.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociateCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateCertificateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateCertificateInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociateCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Successful association of Certificate Manager Amazon Resource Name (ARN)
+// with Mediaconvert returns an OK message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AssociateCertificateResponse
+type AssociateCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AssociateCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociateCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -2534,6 +2975,9 @@ type CaptionDescription struct {
 	// Indicates the language of the caption output track.
 	LanguageCode LanguageCode `locationName:"languageCode" type:"string" enum:"true"`
 
+	// Human readable information to indicate captions available for players (eg.
+	// English, or Spanish). Alphanumeric characters, spaces, and underscore are
+	// legal.
 	LanguageDescription *string `locationName:"languageDescription" type:"string"`
 }
 
@@ -2691,8 +3135,8 @@ type CaptionDestinationSettings struct {
 	// Burn-In Destination Settings.
 	BurninDestinationSettings *BurninDestinationSettings `locationName:"burninDestinationSettings" type:"structure"`
 
-	// Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT,
-	// DVB-Sub, Teletext.
+	// Type of Caption output, including Burn-In, Embedded (with or without SCTE20),
+	// SCC, SMI, SRT, TTML, WebVTT, DVB-Sub, Teletext.
 	DestinationType CaptionDestinationType `locationName:"destinationType" type:"string" enum:"true"`
 
 	// DVB-Sub Destination Settings
@@ -3033,7 +3477,7 @@ type CmafEncryptionSettings struct {
 	// in the manifest. Otherwise Initialization Vector is not in the manifest.
 	InitializationVectorInManifest CmafInitializationVectorInManifest `locationName:"initializationVectorInManifest" type:"string" enum:"true"`
 
-	// Settings for use with a SPEKE key provider.
+	// Use these settings to set up encryption with a static key provider.
 	StaticKeyProvider *StaticKeyProvider `locationName:"staticKeyProvider" type:"structure"`
 
 	// Indicates which type of key provider is used for encryption.
@@ -4203,8 +4647,12 @@ type DashIsoGroupSettings struct {
 	// files as in other output types.
 	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
 
-	// When ENABLED, segment durations are indicated in the manifest using SegmentTimeline
-	// and SegmentTimeline will be promoted down into Representation from AdaptationSet.
+	// When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation),
+	// your DASH manifest shows precise segment durations. The segment duration
+	// information appears inside the SegmentTimeline element, inside SegmentTemplate
+	// at the Representation level. When this feature isn't enabled, the segment
+	// durations in your DASH manifest are approximate. The segment duration information
+	// appears in the duration attribute of the SegmentTemplate element.
 	WriteSegmentTimelineInRepresentation DashIsoWriteSegmentTimelineInRepresentation `locationName:"writeSegmentTimelineInRepresentation" type:"string" enum:"true"`
 }
 
@@ -4691,6 +5139,85 @@ func (s DescribeEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+// Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate
+// Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateRequest
+type DisassociateCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the ACM certificate that you want to disassociate from your MediaConvert
+	// resource.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociateCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateCertificateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateCertificateInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateCertificateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Successful disassociation of Certificate Manager Amazon Resource Name (ARN)
+// with Mediaconvert returns an OK message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DisassociateCertificateResponse
+type DisassociateCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisassociateCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -7434,7 +7961,7 @@ type HlsEncryptionSettings struct {
 	// Settings for use with a SPEKE key provider
 	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure"`
 
-	// Settings for use with a SPEKE key provider.
+	// Use these settings to set up encryption with a static key provider.
 	StaticKeyProvider *StaticKeyProvider `locationName:"staticKeyProvider" type:"structure"`
 
 	// Indicates which type of key provider is used for encryption.
@@ -7940,14 +8467,14 @@ func (s Id3Insertion) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Enable the Image inserter (ImageInserter) feature to include a graphic overlay
-// on your video. Enable or disable this feature for each output individually.
+// on your video. Enable or disable this feature for each input or output individually.
 // This setting is disabled by default.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ImageInserter
 type ImageInserter struct {
 	_ struct{} `type:"structure"`
 
-	// Image to insert. Must be 32 bit windows BMP, PNG, or TGA file. Must not be
-	// larger than the output frames.
+	// Specify the images that you want to overlay on your video. The images must
+	// be PNG or TGA files.
 	InsertableImages []InsertableImage `locationName:"insertableImages" type:"list"`
 }
 
@@ -8020,6 +8547,10 @@ type Input struct {
 	// video inputs.
 	DeblockFilter InputDeblockFilter `locationName:"deblockFilter" type:"string" enum:"true"`
 
+	// If the input file is encrypted, decryption settings to decrypt the media
+	// file
+	DecryptionSettings *InputDecryptionSettings `locationName:"decryptionSettings" type:"structure"`
+
 	// Enable Denoise (InputDenoiseFilter) to filter noise from the input. Default
 	// is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video
 	// inputs.
@@ -8042,6 +8573,11 @@ type Input struct {
 	// Use Filter strength (FilterStrength) to adjust the magnitude the input filter
 	// settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
 	FilterStrength *int64 `locationName:"filterStrength" type:"integer"`
+
+	// Enable the Image inserter (ImageInserter) feature to include a graphic overlay
+	// on your video. Enable or disable this feature for each input individually.
+	// This setting is disabled by default.
+	ImageInserter *ImageInserter `locationName:"imageInserter" type:"structure"`
 
 	// (InputClippings) contains sets of start and end times that together specify
 	// a portion of the input to be used in the outputs. If you provide only a start
@@ -8108,6 +8644,16 @@ func (s *Input) Validate() error {
 			}
 		}
 	}
+	if s.DecryptionSettings != nil {
+		if err := s.DecryptionSettings.Validate(); err != nil {
+			invalidParams.AddNested("DecryptionSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ImageInserter != nil {
+		if err := s.ImageInserter.Validate(); err != nil {
+			invalidParams.AddNested("ImageInserter", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.VideoSelector != nil {
 		if err := s.VideoSelector.Validate(); err != nil {
 			invalidParams.AddNested("VideoSelector", err.(aws.ErrInvalidParams))
@@ -8164,6 +8710,12 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "deblockFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.DecryptionSettings != nil {
+		v := s.DecryptionSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "decryptionSettings", v, metadata)
+	}
 	if len(s.DenoiseFilter) > 0 {
 		v := s.DenoiseFilter
 
@@ -8187,6 +8739,12 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "filterStrength", protocol.Int64Value(v), metadata)
+	}
+	if s.ImageInserter != nil {
+		v := s.ImageInserter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "imageInserter", v, metadata)
 	}
 	if len(s.InputClippings) > 0 {
 		v := s.InputClippings
@@ -8283,6 +8841,82 @@ func (s InputClipping) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specify the decryption settings used to decrypt encrypted input
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputDecryptionSettings
+type InputDecryptionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// This specifies how the encrypted file needs to be decrypted.
+	DecryptionMode DecryptionMode `locationName:"decryptionMode" type:"string" enum:"true"`
+
+	// Decryption key either 128 or 192 or 256 bits encrypted with KMS
+	EncryptedDecryptionKey *string `locationName:"encryptedDecryptionKey" min:"24" type:"string"`
+
+	// Initialization Vector 96 bits (CTR/GCM mode only) or 128 bits.
+	InitializationVector *string `locationName:"initializationVector" min:"16" type:"string"`
+
+	// The AWS region in which decryption key was encrypted with KMS
+	KmsKeyRegion *string `locationName:"kmsKeyRegion" min:"9" type:"string"`
+}
+
+// String returns the string representation
+func (s InputDecryptionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InputDecryptionSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputDecryptionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputDecryptionSettings"}
+	if s.EncryptedDecryptionKey != nil && len(*s.EncryptedDecryptionKey) < 24 {
+		invalidParams.Add(aws.NewErrParamMinLen("EncryptedDecryptionKey", 24))
+	}
+	if s.InitializationVector != nil && len(*s.InitializationVector) < 16 {
+		invalidParams.Add(aws.NewErrParamMinLen("InitializationVector", 16))
+	}
+	if s.KmsKeyRegion != nil && len(*s.KmsKeyRegion) < 9 {
+		invalidParams.Add(aws.NewErrParamMinLen("KmsKeyRegion", 9))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputDecryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DecryptionMode) > 0 {
+		v := s.DecryptionMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "decryptionMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.EncryptedDecryptionKey != nil {
+		v := *s.EncryptedDecryptionKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "encryptedDecryptionKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "initializationVector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyRegion != nil {
+		v := *s.KmsKeyRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsKeyRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specified video input in a template.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputTemplate
 type InputTemplate struct {
@@ -8325,6 +8959,11 @@ type InputTemplate struct {
 	// Use Filter strength (FilterStrength) to adjust the magnitude the input filter
 	// settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
 	FilterStrength *int64 `locationName:"filterStrength" type:"integer"`
+
+	// Enable the Image inserter (ImageInserter) feature to include a graphic overlay
+	// on your video. Enable or disable this feature for each input individually.
+	// This setting is disabled by default.
+	ImageInserter *ImageInserter `locationName:"imageInserter" type:"structure"`
 
 	// (InputClippings) contains sets of start and end times that together specify
 	// a portion of the input to be used in the outputs. If you provide only a start
@@ -8389,6 +9028,11 @@ func (s *InputTemplate) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CaptionSelectors", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.ImageInserter != nil {
+		if err := s.ImageInserter.Validate(); err != nil {
+			invalidParams.AddNested("ImageInserter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VideoSelector != nil {
@@ -8465,6 +9109,12 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "filterStrength", protocol.Int64Value(v), metadata)
 	}
+	if s.ImageInserter != nil {
+		v := s.ImageInserter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "imageInserter", v, metadata)
+	}
 	if len(s.InputClippings) > 0 {
 		v := s.InputClippings
 
@@ -8504,46 +9154,50 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings for Insertable Image
+// Settings that specify how your overlay appears.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InsertableImage
 type InsertableImage struct {
 	_ struct{} `type:"structure"`
 
-	// Use Duration (Duration) to set the time, in milliseconds, for the image to
-	// remain on the output video.
+	// Set the time, in milliseconds, for the image to remain on the output video.
 	Duration *int64 `locationName:"duration" type:"integer"`
 
-	// Use Fade in (FadeIut) to set the length, in milliseconds, of the inserted
-	// image fade in. If you don't specify a value for Fade in, the image will appear
-	// abruptly at the Start time.
+	// Set the length of time, in milliseconds, between the Start time that you
+	// specify for the image insertion and the time that the image appears at full
+	// opacity. Full opacity is the level that you specify for the opacity setting.
+	// If you don't specify a value for Fade-in, the image will appear abruptly
+	// at the overlay start time.
 	FadeIn *int64 `locationName:"fadeIn" type:"integer"`
 
-	// Use Fade out (FadeOut) to set the length, in milliseconds, of the inserted
-	// image fade out. If you don't specify a value for Fade out, the image will
-	// disappear abruptly at the end of the inserted image duration.
+	// Specify the length of time, in milliseconds, between the end of the time
+	// that you have specified for the image overlay Duration and when the overlaid
+	// image has faded to total transparency. If you don't specify a value for Fade-out,
+	// the image will disappear abruptly at the end of the inserted image duration.
 	FadeOut *int64 `locationName:"fadeOut" type:"integer"`
 
-	// Specify the Height (Height) of the inserted image. Use a value that is less
-	// than or equal to the video resolution height. Leave this setting blank to
-	// use the native height of the image.
+	// Specify the height of the inserted image in pixels. If you specify a value
+	// that's larger than the video resolution height, the service will crop your
+	// overlaid image to fit. To use the native height of the image, keep this setting
+	// blank.
 	Height *int64 `locationName:"height" type:"integer"`
 
 	// Use Image location (imageInserterInput) to specify the Amazon S3 location
-	// of the image to be inserted into the output. Use a 32 bit BMP, PNG, or TGA
-	// file that fits inside the video frame.
+	// of the image to be inserted into the output. Use a PNG or TGA file that fits
+	// inside the video frame.
 	ImageInserterInput *string `locationName:"imageInserterInput" min:"14" type:"string"`
 
 	// Use Left (ImageX) to set the distance, in pixels, between the inserted image
-	// and the left edge of the frame. Required for BMP, PNG and TGA input.
+	// and the left edge of the video frame. Required for any image overlay that
+	// you specify.
 	ImageX *int64 `locationName:"imageX" type:"integer"`
 
-	// Use Top (ImageY) to set the distance, in pixels, between the inserted image
-	// and the top edge of the video frame. Required for BMP, PNG and TGA input.
+	// Use Top (ImageY) to set the distance, in pixels, between the overlaid image
+	// and the top edge of the video frame. Required for any image overlay that
+	// you specify.
 	ImageY *int64 `locationName:"imageY" type:"integer"`
 
-	// Use Layer (Layer) to specify how overlapping inserted images appear. Images
-	// with higher values of layer appear on top of images with lower values of
-	// layer.
+	// Specify how overlapping inserted images appear. Images with higher values
+	// for Layer appear on top of images with lower values for Layer.
 	Layer *int64 `locationName:"layer" type:"integer"`
 
 	// Use Opacity (Opacity) to specify how much of the underlying video shows through
@@ -8556,9 +9210,10 @@ type InsertableImage struct {
 	// format.
 	StartTime *string `locationName:"startTime" type:"string"`
 
-	// Specify the Width (Width) of the inserted image. Use a value that is less
-	// than or equal to the video resolution width. Leave this setting blank to
-	// use the native width of the image.
+	// Specify the width of the inserted image in pixels. If you specify a value
+	// that's larger than the video resolution width, the service will crop your
+	// overlaid image to fit. To use the native width of the image, keep this setting
+	// blank.
 	Width *int64 `locationName:"width" type:"integer"`
 }
 
@@ -8575,29 +9230,8 @@ func (s InsertableImage) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InsertableImage) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InsertableImage"}
-	if s.Duration != nil && *s.Duration < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("Duration", -2.147483648e+09))
-	}
-	if s.FadeIn != nil && *s.FadeIn < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("FadeIn", -2.147483648e+09))
-	}
-	if s.FadeOut != nil && *s.FadeOut < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("FadeOut", -2.147483648e+09))
-	}
-	if s.Height != nil && *s.Height < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("Height", -2.147483648e+09))
-	}
 	if s.ImageInserterInput != nil && len(*s.ImageInserterInput) < 14 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageInserterInput", 14))
-	}
-	if s.ImageX != nil && *s.ImageX < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("ImageX", -2.147483648e+09))
-	}
-	if s.ImageY != nil && *s.ImageY < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("ImageY", -2.147483648e+09))
-	}
-	if s.Width != nil && *s.Width < -2.147483648e+09 {
-		invalidParams.Add(aws.NewErrParamMinValue("Width", -2.147483648e+09))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8870,6 +9504,10 @@ type JobSettings struct {
 	// to create the output.
 	Inputs []Input `locationName:"inputs" type:"list"`
 
+	// Overlay motion graphics on top of your video. The motion graphics that you
+	// specify here appear on all outputs in all output groups.
+	MotionImageInserter *MotionImageInserter `locationName:"motionImageInserter" type:"structure"`
+
 	// Settings for Nielsen Configuration
 	NielsenConfiguration *NielsenConfiguration `locationName:"nielsenConfiguration" type:"structure"`
 
@@ -8922,6 +9560,11 @@ func (s *JobSettings) Validate() error {
 			}
 		}
 	}
+	if s.MotionImageInserter != nil {
+		if err := s.MotionImageInserter.Validate(); err != nil {
+			invalidParams.AddNested("MotionImageInserter", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.OutputGroups != nil {
 		for i, v := range s.OutputGroups {
 			if err := v.Validate(); err != nil {
@@ -8961,6 +9604,12 @@ func (s JobSettings) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.MotionImageInserter != nil {
+		v := s.MotionImageInserter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "motionImageInserter", v, metadata)
 	}
 	if s.NielsenConfiguration != nil {
 		v := s.NielsenConfiguration
@@ -9125,6 +9774,10 @@ type JobTemplateSettings struct {
 	// multiple inputs when referencing a job template.
 	Inputs []InputTemplate `locationName:"inputs" type:"list"`
 
+	// Overlay motion graphics on top of your video. The motion graphics that you
+	// specify here appear on all outputs in all output groups.
+	MotionImageInserter *MotionImageInserter `locationName:"motionImageInserter" type:"structure"`
+
 	// Settings for Nielsen Configuration
 	NielsenConfiguration *NielsenConfiguration `locationName:"nielsenConfiguration" type:"structure"`
 
@@ -9177,6 +9830,11 @@ func (s *JobTemplateSettings) Validate() error {
 			}
 		}
 	}
+	if s.MotionImageInserter != nil {
+		if err := s.MotionImageInserter.Validate(); err != nil {
+			invalidParams.AddNested("MotionImageInserter", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.OutputGroups != nil {
 		for i, v := range s.OutputGroups {
 			if err := v.Validate(); err != nil {
@@ -9216,6 +9874,12 @@ func (s JobTemplateSettings) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.MotionImageInserter != nil {
+		v := s.MotionImageInserter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "motionImageInserter", v, metadata)
 	}
 	if s.NielsenConfiguration != nil {
 		v := s.NielsenConfiguration
@@ -10541,6 +11205,233 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "videoPid", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Overlay motion graphics on top of your video at the time that you specify.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInserter
+type MotionImageInserter struct {
+	_ struct{} `type:"structure"`
+
+	// If your motion graphic asset is a .mov file, keep this setting unspecified.
+	// If your motion graphic asset is a series of .png files, specify the framerate
+	// of the overlay in frames per second, as a fraction. For example, specify
+	// 24 fps as 24/1. Make sure that the number of images in your series matches
+	// the framerate and your intended overlay duration. For example, if you want
+	// a 30-second overlay at 30 fps, you should have 900 .png images. This overlay
+	// framerate doesn't need to match the framerate of the underlying video.
+	Framerate *MotionImageInsertionFramerate `locationName:"framerate" type:"structure"`
+
+	// Specify the .mov file or series of .png files that you want to overlay on
+	// your video. For .png files, provide the file name of the first file in the
+	// series. Make sure that the names of the .png files end with sequential numbers
+	// that specify the order that they are played in. For example, overlay_000.png,
+	// overlay_001.png, overlay_002.png, and so on. The sequence must start at zero,
+	// and each image file name must have the same number of digits. Pad your initial
+	// file names with enough zeros to complete the sequence. For example, if the
+	// first image is overlay_0.png, there can be only 10 images in the sequence,
+	// with the last image being overlay_9.png. But if the first image is overlay_00.png,
+	// there can be 100 images in the sequence.
+	Input *string `locationName:"input" min:"14" type:"string"`
+
+	// Choose the type of motion graphic asset that you are providing for your overlay.
+	// You can choose either a .mov file or a series of .png files.
+	InsertionMode MotionImageInsertionMode `locationName:"insertionMode" type:"string" enum:"true"`
+
+	// Use Offset to specify the placement of your motion graphic overlay on the
+	// video frame. Specify in pixels, from the upper-left corner of the frame.
+	// If you don't specify an offset, the service scales your overlay to the full
+	// size of the frame. Otherwise, the service inserts the overlay at its native
+	// resolution and scales the size up or down with any video scaling.
+	Offset *MotionImageInsertionOffset `locationName:"offset" type:"structure"`
+
+	// Specify whether your motion graphic overlay repeats on a loop or plays only
+	// once.
+	Playback MotionImagePlayback `locationName:"playback" type:"string" enum:"true"`
+
+	// Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF
+	// or HH:MM:SS;FF). Make sure that the timecode you provide here takes into
+	// account how you have set up your timecode configuration under both job settings
+	// and input settings. The simplest way to do that is to set both to start at
+	// 0. If you need to set up your job to follow timecodes embedded in your source
+	// that don't start at zero, make sure that you specify a start time that is
+	// after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html
+	// Find job-wide and input timecode configuration settings in your JSON job
+	// settings specification at settings>timecodeConfig>source and settings>inputs>timecodeSource.
+	StartTime *string `locationName:"startTime" min:"11" type:"string"`
+}
+
+// String returns the string representation
+func (s MotionImageInserter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MotionImageInserter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MotionImageInserter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MotionImageInserter"}
+	if s.Input != nil && len(*s.Input) < 14 {
+		invalidParams.Add(aws.NewErrParamMinLen("Input", 14))
+	}
+	if s.StartTime != nil && len(*s.StartTime) < 11 {
+		invalidParams.Add(aws.NewErrParamMinLen("StartTime", 11))
+	}
+	if s.Framerate != nil {
+		if err := s.Framerate.Validate(); err != nil {
+			invalidParams.AddNested("Framerate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MotionImageInserter) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Framerate != nil {
+		v := s.Framerate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "framerate", v, metadata)
+	}
+	if s.Input != nil {
+		v := *s.Input
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "input", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.InsertionMode) > 0 {
+		v := s.InsertionMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "insertionMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Offset != nil {
+		v := s.Offset
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "offset", v, metadata)
+	}
+	if len(s.Playback) > 0 {
+		v := s.Playback
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playback", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// For motion overlays that don't have a built-in framerate, specify the framerate
+// of the overlay in frames per second, as a fraction. For example, specify
+// 24 fps as 24/1. The overlay framerate doesn't need to match the framerate
+// of the underlying video.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInsertionFramerate
+type MotionImageInsertionFramerate struct {
+	_ struct{} `type:"structure"`
+
+	// The bottom of the fraction that expresses your overlay framerate. For example,
+	// if your framerate is 24 fps, set this value to 1.
+	FramerateDenominator *int64 `locationName:"framerateDenominator" min:"1" type:"integer"`
+
+	// The top of the fraction that expresses your overlay framerate. For example,
+	// if your framerate is 24 fps, set this value to 24.
+	FramerateNumerator *int64 `locationName:"framerateNumerator" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s MotionImageInsertionFramerate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MotionImageInsertionFramerate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MotionImageInsertionFramerate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MotionImageInsertionFramerate"}
+	if s.FramerateDenominator != nil && *s.FramerateDenominator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateDenominator", 1))
+	}
+	if s.FramerateNumerator != nil && *s.FramerateNumerator < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FramerateNumerator", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MotionImageInsertionFramerate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FramerateDenominator != nil {
+		v := *s.FramerateDenominator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateDenominator", protocol.Int64Value(v), metadata)
+	}
+	if s.FramerateNumerator != nil {
+		v := *s.FramerateNumerator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "framerateNumerator", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Specify the offset between the upper-left corner of the video frame and the
+// top left corner of the overlay.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MotionImageInsertionOffset
+type MotionImageInsertionOffset struct {
+	_ struct{} `type:"structure"`
+
+	// Set the distance, in pixels, between the overlay and the left edge of the
+	// video frame.
+	ImageX *int64 `locationName:"imageX" type:"integer"`
+
+	// Set the distance, in pixels, between the overlay and the top edge of the
+	// video frame.
+	ImageY *int64 `locationName:"imageY" type:"integer"`
+}
+
+// String returns the string representation
+func (s MotionImageInsertionOffset) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MotionImageInsertionOffset) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MotionImageInsertionOffset) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ImageX != nil {
+		v := *s.ImageX
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "imageX", protocol.Int64Value(v), metadata)
+	}
+	if s.ImageY != nil {
+		v := *s.ImageY
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "imageY", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -12650,7 +13541,7 @@ type ReservationPlan struct {
 	// renews (AUTO_RENEW) or expires (EXPIRE) at the end of the contract period.
 	RenewalType RenewalType `locationName:"renewalType" type:"string" enum:"true"`
 
-	// Specifies the number of reserved transcode slots (RTSs) for this queue. The
+	// Specifies the number of reserved transcode slots (RTS) for this queue. The
 	// number of RTS determines how many jobs the queue can process in parallel;
 	// each RTS can process one job at a time. To increase this number, create a
 	// replacement contract through the AWS Elemental MediaConvert console.
@@ -12729,7 +13620,7 @@ type ReservationPlanSettings struct {
 	// RenewalType is a required field
 	RenewalType RenewalType `locationName:"renewalType" type:"string" required:"true" enum:"true"`
 
-	// Specifies the number of reserved transcode slots (RTSs) for this queue. The
+	// Specifies the number of reserved transcode slots (RTS) for this queue. The
 	// number of RTS determines how many jobs the queue can process in parallel;
 	// each RTS can process one job at a time. To increase this number, create a
 	// replacement contract through the AWS Elemental MediaConvert console.
@@ -12876,6 +13767,11 @@ func (s SccDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 type SpekeKeyProvider struct {
 	_ struct{} `type:"structure"`
 
+	// Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider.
+	// The certificate holds a key used by the keyprovider to encrypt the keys in
+	// its response.
+	CertificateArn *string `locationName:"certificateArn" type:"string"`
+
 	// The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
 	ResourceId *string `locationName:"resourceId" type:"string"`
 
@@ -12900,6 +13796,12 @@ func (s SpekeKeyProvider) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.ResourceId != nil {
 		v := *s.ResourceId
 
@@ -12927,7 +13829,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings for use with a SPEKE key provider.
+// Use these settings to set up encryption with a static key provider.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/StaticKeyProvider
 type StaticKeyProvider struct {
 	_ struct{} `type:"structure"`
@@ -13935,7 +14837,8 @@ func (s UpdateQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
 type VideoCodecSettings struct {
 	_ struct{} `type:"structure"`
 
-	// Type of video codec
+	// Specifies the video codec. This must be equal to one of the enum values defined
+	// by the object VideoCodec.
 	Codec VideoCodec `locationName:"codec" type:"string" enum:"true"`
 
 	// Required when you set (Codec) under (VideoDescription)>(CodecSettings) to
@@ -14049,12 +14952,12 @@ func (s VideoCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 type VideoDescription struct {
 	_ struct{} `type:"structure"`
 
-	// This setting only applies to H.264 and MPEG2 outputs. Use Insert AFD signaling
-	// (AfdSignaling) to specify whether the service includes AFD values in the
-	// output video data and what those values are. * Choose None to remove all
-	// AFD values from this output. * Choose Fixed to ignore input AFD values and
-	// instead encode the value specified in the job. * Choose Auto to calculate
-	// output AFD values based on the input AFD scaler data.
+	// This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert
+	// AFD signaling (AfdSignaling) to specify whether the service includes AFD
+	// values in the output video data and what those values are. * Choose None
+	// to remove all AFD values from this output. * Choose Fixed to ignore input
+	// AFD values and instead encode the value specified in the job. * Choose Auto
+	// to calculate output AFD values based on the input AFD scaler data.
 	AfdSignaling AfdSignaling `locationName:"afdSignaling" type:"string" enum:"true"`
 
 	// Enable Anti-alias (AntiAlias) to enhance sharp edges in video output when
@@ -14873,12 +15776,12 @@ func (enum Ac3MetadataControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// This setting only applies to H.264 and MPEG2 outputs. Use Insert AFD signaling
-// (AfdSignaling) to specify whether the service includes AFD values in the
-// output video data and what those values are. * Choose None to remove all
-// AFD values from this output. * Choose Fixed to ignore input AFD values and
-// instead encode the value specified in the job. * Choose Auto to calculate
-// output AFD values based on the input AFD scaler data.
+// This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert
+// AFD signaling (AfdSignaling) to specify whether the service includes AFD
+// values in the output video data and what those values are. * Choose None
+// to remove all AFD values from this output. * Choose Fixed to ignore input
+// AFD values and instead encode the value specified in the job. * Choose Auto
+// to calculate output AFD values based on the input AFD scaler data.
 type AfdSignaling string
 
 // Enum values for AfdSignaling
@@ -15257,20 +16160,23 @@ func (enum BurninSubtitleTeletextSpacing) MarshalValueBuf(b []byte) ([]byte, err
 	return append(b, enum...), nil
 }
 
-// Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT,
-// DVB-Sub, Teletext.
+// Type of Caption output, including Burn-In, Embedded (with or without SCTE20),
+// SCC, SMI, SRT, TTML, WebVTT, DVB-Sub, Teletext.
 type CaptionDestinationType string
 
 // Enum values for CaptionDestinationType
 const (
-	CaptionDestinationTypeBurnIn   CaptionDestinationType = "BURN_IN"
-	CaptionDestinationTypeDvbSub   CaptionDestinationType = "DVB_SUB"
-	CaptionDestinationTypeEmbedded CaptionDestinationType = "EMBEDDED"
-	CaptionDestinationTypeScc      CaptionDestinationType = "SCC"
-	CaptionDestinationTypeSrt      CaptionDestinationType = "SRT"
-	CaptionDestinationTypeTeletext CaptionDestinationType = "TELETEXT"
-	CaptionDestinationTypeTtml     CaptionDestinationType = "TTML"
-	CaptionDestinationTypeWebvtt   CaptionDestinationType = "WEBVTT"
+	CaptionDestinationTypeBurnIn             CaptionDestinationType = "BURN_IN"
+	CaptionDestinationTypeDvbSub             CaptionDestinationType = "DVB_SUB"
+	CaptionDestinationTypeEmbedded           CaptionDestinationType = "EMBEDDED"
+	CaptionDestinationTypeEmbeddedPlusScte20 CaptionDestinationType = "EMBEDDED_PLUS_SCTE20"
+	CaptionDestinationTypeScte20PlusEmbedded CaptionDestinationType = "SCTE20_PLUS_EMBEDDED"
+	CaptionDestinationTypeScc                CaptionDestinationType = "SCC"
+	CaptionDestinationTypeSrt                CaptionDestinationType = "SRT"
+	CaptionDestinationTypeSmi                CaptionDestinationType = "SMI"
+	CaptionDestinationTypeTeletext           CaptionDestinationType = "TELETEXT"
+	CaptionDestinationTypeTtml               CaptionDestinationType = "TTML"
+	CaptionDestinationTypeWebvtt             CaptionDestinationType = "WEBVTT"
 )
 
 func (enum CaptionDestinationType) MarshalValue() (string, error) {
@@ -15291,10 +16197,12 @@ const (
 	CaptionSourceTypeAncillary  CaptionSourceType = "ANCILLARY"
 	CaptionSourceTypeDvbSub     CaptionSourceType = "DVB_SUB"
 	CaptionSourceTypeEmbedded   CaptionSourceType = "EMBEDDED"
+	CaptionSourceTypeScte20     CaptionSourceType = "SCTE20"
 	CaptionSourceTypeScc        CaptionSourceType = "SCC"
 	CaptionSourceTypeTtml       CaptionSourceType = "TTML"
 	CaptionSourceTypeStl        CaptionSourceType = "STL"
 	CaptionSourceTypeSrt        CaptionSourceType = "SRT"
+	CaptionSourceTypeSmi        CaptionSourceType = "SMI"
 	CaptionSourceTypeTeletext   CaptionSourceType = "TELETEXT"
 	CaptionSourceTypeNullSource CaptionSourceType = "NULL_SOURCE"
 )
@@ -15692,8 +16600,12 @@ func (enum DashIsoSegmentControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When ENABLED, segment durations are indicated in the manifest using SegmentTimeline
-// and SegmentTimeline will be promoted down into Representation from AdaptationSet.
+// When you enable Precise segment duration in manifests (writeSegmentTimelineInRepresentation),
+// your DASH manifest shows precise segment durations. The segment duration
+// information appears inside the SegmentTimeline element, inside SegmentTemplate
+// at the Representation level. When this feature isn't enabled, the segment
+// durations in your DASH manifest are approximate. The segment duration information
+// appears in the duration attribute of the SegmentTemplate element.
 type DashIsoWriteSegmentTimelineInRepresentation string
 
 // Enum values for DashIsoWriteSegmentTimelineInRepresentation
@@ -15707,6 +16619,25 @@ func (enum DashIsoWriteSegmentTimelineInRepresentation) MarshalValue() (string, 
 }
 
 func (enum DashIsoWriteSegmentTimelineInRepresentation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// This specifies how the encrypted file needs to be decrypted.
+type DecryptionMode string
+
+// Enum values for DecryptionMode
+const (
+	DecryptionModeAesCtr DecryptionMode = "AES_CTR"
+	DecryptionModeAesCbc DecryptionMode = "AES_CBC"
+	DecryptionModeAesGcm DecryptionMode = "AES_GCM"
+)
+
+func (enum DecryptionMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DecryptionMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -18291,6 +19222,44 @@ func (enum M3u8Scte35Source) MarshalValue() (string, error) {
 }
 
 func (enum M3u8Scte35Source) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Choose the type of motion graphic asset that you are providing for your overlay.
+// You can choose either a .mov file or a series of .png files.
+type MotionImageInsertionMode string
+
+// Enum values for MotionImageInsertionMode
+const (
+	MotionImageInsertionModeMov MotionImageInsertionMode = "MOV"
+	MotionImageInsertionModePng MotionImageInsertionMode = "PNG"
+)
+
+func (enum MotionImageInsertionMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MotionImageInsertionMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Specify whether your motion graphic overlay repeats on a loop or plays only
+// once.
+type MotionImagePlayback string
+
+// Enum values for MotionImagePlayback
+const (
+	MotionImagePlaybackOnce   MotionImagePlayback = "ONCE"
+	MotionImagePlaybackRepeat MotionImagePlayback = "REPEAT"
+)
+
+func (enum MotionImagePlayback) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MotionImagePlayback) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

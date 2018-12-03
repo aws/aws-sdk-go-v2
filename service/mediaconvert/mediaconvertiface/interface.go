@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Elemental MediaConvert.
 //    func myFunc(svc mediaconvertiface.MediaConvertAPI) bool {
-//        // Make svc.CancelJob request
+//        // Make svc.AssociateCertificate request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockMediaConvertClient struct {
 //        mediaconvertiface.MediaConvertAPI
 //    }
-//    func (m *mockMediaConvertClient) CancelJob(input *mediaconvert.CancelJobInput) (*mediaconvert.CancelJobOutput, error) {
+//    func (m *mockMediaConvertClient) AssociateCertificate(input *mediaconvert.AssociateCertificateInput) (*mediaconvert.AssociateCertificateOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MediaConvertAPI interface {
+	AssociateCertificateRequest(*mediaconvert.AssociateCertificateInput) mediaconvert.AssociateCertificateRequest
+
 	CancelJobRequest(*mediaconvert.CancelJobInput) mediaconvert.CancelJobRequest
 
 	CreateJobRequest(*mediaconvert.CreateJobInput) mediaconvert.CreateJobRequest
@@ -79,6 +81,8 @@ type MediaConvertAPI interface {
 	DeleteQueueRequest(*mediaconvert.DeleteQueueInput) mediaconvert.DeleteQueueRequest
 
 	DescribeEndpointsRequest(*mediaconvert.DescribeEndpointsInput) mediaconvert.DescribeEndpointsRequest
+
+	DisassociateCertificateRequest(*mediaconvert.DisassociateCertificateInput) mediaconvert.DisassociateCertificateRequest
 
 	GetJobRequest(*mediaconvert.GetJobInput) mediaconvert.GetJobRequest
 

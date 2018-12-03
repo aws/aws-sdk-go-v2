@@ -76,6 +76,14 @@ type WorkSpacesAPI interface {
 
 	DeleteTagsRequest(*workspaces.DeleteTagsInput) workspaces.DeleteTagsRequest
 
+	DeleteWorkspaceImageRequest(*workspaces.DeleteWorkspaceImageInput) workspaces.DeleteWorkspaceImageRequest
+
+	DescribeAccountRequest(*workspaces.DescribeAccountInput) workspaces.DescribeAccountRequest
+
+	DescribeAccountModificationsRequest(*workspaces.DescribeAccountModificationsInput) workspaces.DescribeAccountModificationsRequest
+
+	DescribeClientPropertiesRequest(*workspaces.DescribeClientPropertiesInput) workspaces.DescribeClientPropertiesRequest
+
 	DescribeIpGroupsRequest(*workspaces.DescribeIpGroupsInput) workspaces.DescribeIpGroupsRequest
 
 	DescribeTagsRequest(*workspaces.DescribeTagsInput) workspaces.DescribeTagsRequest
@@ -84,11 +92,21 @@ type WorkSpacesAPI interface {
 
 	DescribeWorkspaceDirectoriesRequest(*workspaces.DescribeWorkspaceDirectoriesInput) workspaces.DescribeWorkspaceDirectoriesRequest
 
+	DescribeWorkspaceImagesRequest(*workspaces.DescribeWorkspaceImagesInput) workspaces.DescribeWorkspaceImagesRequest
+
 	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) workspaces.DescribeWorkspacesRequest
 
 	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) workspaces.DescribeWorkspacesConnectionStatusRequest
 
 	DisassociateIpGroupsRequest(*workspaces.DisassociateIpGroupsInput) workspaces.DisassociateIpGroupsRequest
+
+	ImportWorkspaceImageRequest(*workspaces.ImportWorkspaceImageInput) workspaces.ImportWorkspaceImageRequest
+
+	ListAvailableManagementCidrRangesRequest(*workspaces.ListAvailableManagementCidrRangesInput) workspaces.ListAvailableManagementCidrRangesRequest
+
+	ModifyAccountRequest(*workspaces.ModifyAccountInput) workspaces.ModifyAccountRequest
+
+	ModifyClientPropertiesRequest(*workspaces.ModifyClientPropertiesInput) workspaces.ModifyClientPropertiesRequest
 
 	ModifyWorkspacePropertiesRequest(*workspaces.ModifyWorkspacePropertiesInput) workspaces.ModifyWorkspacePropertiesRequest
 

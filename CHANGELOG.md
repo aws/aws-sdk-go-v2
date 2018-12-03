@@ -1,3 +1,14 @@
+Release v0.6.0 (2018-12-03)
+===
+
+### Services
+* Synced the V2 SDK with latests AWS service API definitions.
+
+### SDK Bugs
+* Updates the SDK's release tagging scheme to use `v0` until the v2 SDK reaches
+	* General Availability (GA). This allows the SDK to be used with Go 1.11 modules. Post GA, v2 SDK's release tagging version will most likely follow a `v1.<x>.<y>` patter.
+	* Fixes [#221](https://github.com/aws/aws-sdk-go-v2/issues/221)
+
 Release v2.0.0-preview.5 (2018-09-19)
 ===
 

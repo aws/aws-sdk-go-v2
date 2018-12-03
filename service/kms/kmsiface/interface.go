@@ -64,7 +64,11 @@ import (
 type KMSAPI interface {
 	CancelKeyDeletionRequest(*kms.CancelKeyDeletionInput) kms.CancelKeyDeletionRequest
 
+	ConnectCustomKeyStoreRequest(*kms.ConnectCustomKeyStoreInput) kms.ConnectCustomKeyStoreRequest
+
 	CreateAliasRequest(*kms.CreateAliasInput) kms.CreateAliasRequest
+
+	CreateCustomKeyStoreRequest(*kms.CreateCustomKeyStoreInput) kms.CreateCustomKeyStoreRequest
 
 	CreateGrantRequest(*kms.CreateGrantInput) kms.CreateGrantRequest
 
@@ -74,13 +78,19 @@ type KMSAPI interface {
 
 	DeleteAliasRequest(*kms.DeleteAliasInput) kms.DeleteAliasRequest
 
+	DeleteCustomKeyStoreRequest(*kms.DeleteCustomKeyStoreInput) kms.DeleteCustomKeyStoreRequest
+
 	DeleteImportedKeyMaterialRequest(*kms.DeleteImportedKeyMaterialInput) kms.DeleteImportedKeyMaterialRequest
+
+	DescribeCustomKeyStoresRequest(*kms.DescribeCustomKeyStoresInput) kms.DescribeCustomKeyStoresRequest
 
 	DescribeKeyRequest(*kms.DescribeKeyInput) kms.DescribeKeyRequest
 
 	DisableKeyRequest(*kms.DisableKeyInput) kms.DisableKeyRequest
 
 	DisableKeyRotationRequest(*kms.DisableKeyRotationInput) kms.DisableKeyRotationRequest
+
+	DisconnectCustomKeyStoreRequest(*kms.DisconnectCustomKeyStoreInput) kms.DisconnectCustomKeyStoreRequest
 
 	EnableKeyRequest(*kms.EnableKeyInput) kms.EnableKeyRequest
 
@@ -129,6 +139,8 @@ type KMSAPI interface {
 	UntagResourceRequest(*kms.UntagResourceInput) kms.UntagResourceRequest
 
 	UpdateAliasRequest(*kms.UpdateAliasInput) kms.UpdateAliasRequest
+
+	UpdateCustomKeyStoreRequest(*kms.UpdateCustomKeyStoreInput) kms.UpdateCustomKeyStoreRequest
 
 	UpdateKeyDescriptionRequest(*kms.UpdateKeyDescriptionInput) kms.UpdateKeyDescriptionRequest
 }

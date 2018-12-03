@@ -3145,10 +3145,17 @@ type AssetAttributes struct {
 	// The list of IP v4 addresses of the EC2 instance where the finding is generated.
 	Ipv4Addresses []string `locationName:"ipv4Addresses" type:"list"`
 
+	// An array of the network interfaces interacting with the EC2 instance where
+	// the finding is generated.
+	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaces" type:"list"`
+
 	// The schema version of this data type.
 	//
 	// SchemaVersion is a required field
 	SchemaVersion *int64 `locationName:"schemaVersion" type:"integer" required:"true"`
+
+	// The tags related to the EC2 instance where the finding is generated.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -5596,6 +5603,56 @@ func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Contains information about the network interfaces interacting with an EC2
+// instance. This data type is used as one of the elements of the AssetAttributes
+// data type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/NetworkInterface
+type NetworkInterface struct {
+	_ struct{} `type:"structure"`
+
+	// The IP addresses associated with the network interface.
+	Ipv6Addresses []string `locationName:"ipv6Addresses" type:"list"`
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
+	// The name of a private DNS associated with the network interface.
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
+
+	// The private IP address associated with the network interface.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+
+	// A list of the private IP addresses associated with the network interface.
+	// Includes the privateDnsName and privateIpAddress.
+	PrivateIpAddresses []PrivateIp `locationName:"privateIpAddresses" type:"list"`
+
+	// The name of a public DNS associated with the network interface.
+	PublicDnsName *string `locationName:"publicDnsName" type:"string"`
+
+	// The public IP address from which the network interface is reachable.
+	PublicIp *string `locationName:"publicIp" type:"string"`
+
+	// A list of the security groups associated with the network interface. Includes
+	// the groupId and groupName.
+	SecurityGroups []SecurityGroup `locationName:"securityGroups" type:"list"`
+
+	// The ID of a subnet associated with the network interface.
+	SubnetId *string `locationName:"subnetId" type:"string"`
+
+	// The ID of a VPC associated with the network interface.
+	VpcId *string `locationName:"vpcId" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NetworkInterface) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgentsRequest
 type PreviewAgentsInput struct {
 	_ struct{} `type:"structure"`
@@ -5677,6 +5734,30 @@ func (s PreviewAgentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PreviewAgentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Contains information about a private IP address associated with a network
+// interface. This data type is used as a response element in the DescribeFindings
+// action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PrivateIp
+type PrivateIp struct {
+	_ struct{} `type:"structure"`
+
+	// The DNS name of the private IP address.
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
+
+	// The full IP address of the network inteface.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+}
+
+// String returns the string representation
+func (s PrivateIp) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PrivateIp) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleRequest
@@ -5951,6 +6032,30 @@ func (s Scope) String() string {
 
 // GoString returns the string representation
 func (s Scope) GoString() string {
+	return s.String()
+}
+
+// Contains information about a security group associated with a network interface.
+// This data type is used as one of the elements of the NetworkInterface data
+// type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SecurityGroup
+type SecurityGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the security group.
+	GroupId *string `locationName:"groupId" type:"string"`
+
+	// The name of the security group.
+	GroupName *string `locationName:"groupName" type:"string"`
+}
+
+// String returns the string representation
+func (s SecurityGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SecurityGroup) GoString() string {
 	return s.String()
 }
 

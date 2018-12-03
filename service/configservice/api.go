@@ -12,6 +12,64 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
+const opBatchGetAggregateResourceConfig = "BatchGetAggregateResourceConfig"
+
+// BatchGetAggregateResourceConfigRequest is a API request type for the BatchGetAggregateResourceConfig API operation.
+type BatchGetAggregateResourceConfigRequest struct {
+	*aws.Request
+	Input *BatchGetAggregateResourceConfigInput
+	Copy  func(*BatchGetAggregateResourceConfigInput) BatchGetAggregateResourceConfigRequest
+}
+
+// Send marshals and sends the BatchGetAggregateResourceConfig API request.
+func (r BatchGetAggregateResourceConfigRequest) Send() (*BatchGetAggregateResourceConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetAggregateResourceConfigOutput), nil
+}
+
+// BatchGetAggregateResourceConfigRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Returns the current configuration items for resources that are present in
+// your AWS Config aggregator. The operation also returns a list of resources
+// that are not processed in the current request. If there are no unprocessed
+// resources, the operation returns an empty unprocessedResourceIdentifiers
+// list.
+//
+// The API does not return results for deleted resources.
+//
+//  The API does not return tags and relationships.
+//
+//    // Example sending a request using the BatchGetAggregateResourceConfigRequest method.
+//    req := client.BatchGetAggregateResourceConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfig
+func (c *ConfigService) BatchGetAggregateResourceConfigRequest(input *BatchGetAggregateResourceConfigInput) BatchGetAggregateResourceConfigRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetAggregateResourceConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetAggregateResourceConfigInput{}
+	}
+
+	output := &BatchGetAggregateResourceConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetAggregateResourceConfigRequest{Request: req, Input: input, Copy: c.BatchGetAggregateResourceConfigRequest}
+}
+
 const opBatchGetResourceConfig = "BatchGetResourceConfig"
 
 // BatchGetResourceConfigRequest is a API request type for the BatchGetResourceConfig API operation.
@@ -1460,6 +1518,115 @@ func (c *ConfigService) GetAggregateConfigRuleComplianceSummaryRequest(input *Ge
 	return GetAggregateConfigRuleComplianceSummaryRequest{Request: req, Input: input, Copy: c.GetAggregateConfigRuleComplianceSummaryRequest}
 }
 
+const opGetAggregateDiscoveredResourceCounts = "GetAggregateDiscoveredResourceCounts"
+
+// GetAggregateDiscoveredResourceCountsRequest is a API request type for the GetAggregateDiscoveredResourceCounts API operation.
+type GetAggregateDiscoveredResourceCountsRequest struct {
+	*aws.Request
+	Input *GetAggregateDiscoveredResourceCountsInput
+	Copy  func(*GetAggregateDiscoveredResourceCountsInput) GetAggregateDiscoveredResourceCountsRequest
+}
+
+// Send marshals and sends the GetAggregateDiscoveredResourceCounts API request.
+func (r GetAggregateDiscoveredResourceCountsRequest) Send() (*GetAggregateDiscoveredResourceCountsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAggregateDiscoveredResourceCountsOutput), nil
+}
+
+// GetAggregateDiscoveredResourceCountsRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Returns the resource counts across accounts and regions that are present
+// in your AWS Config aggregator. You can request the resource counts by providing
+// filters and GroupByKey.
+//
+// For example, if the input contains accountID 12345678910 and region us-east-1
+// in filters, the API returns the count of resources in account ID 12345678910
+// and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the
+// API returns resource counts for all source accounts that are present in your
+// aggregator.
+//
+//    // Example sending a request using the GetAggregateDiscoveredResourceCountsRequest method.
+//    req := client.GetAggregateDiscoveredResourceCountsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCounts
+func (c *ConfigService) GetAggregateDiscoveredResourceCountsRequest(input *GetAggregateDiscoveredResourceCountsInput) GetAggregateDiscoveredResourceCountsRequest {
+	op := &aws.Operation{
+		Name:       opGetAggregateDiscoveredResourceCounts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetAggregateDiscoveredResourceCountsInput{}
+	}
+
+	output := &GetAggregateDiscoveredResourceCountsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAggregateDiscoveredResourceCountsRequest{Request: req, Input: input, Copy: c.GetAggregateDiscoveredResourceCountsRequest}
+}
+
+const opGetAggregateResourceConfig = "GetAggregateResourceConfig"
+
+// GetAggregateResourceConfigRequest is a API request type for the GetAggregateResourceConfig API operation.
+type GetAggregateResourceConfigRequest struct {
+	*aws.Request
+	Input *GetAggregateResourceConfigInput
+	Copy  func(*GetAggregateResourceConfigInput) GetAggregateResourceConfigRequest
+}
+
+// Send marshals and sends the GetAggregateResourceConfig API request.
+func (r GetAggregateResourceConfigRequest) Send() (*GetAggregateResourceConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAggregateResourceConfigOutput), nil
+}
+
+// GetAggregateResourceConfigRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Returns configuration item that is aggregated for your specific resource
+// in a specific source account and region.
+//
+//    // Example sending a request using the GetAggregateResourceConfigRequest method.
+//    req := client.GetAggregateResourceConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfig
+func (c *ConfigService) GetAggregateResourceConfigRequest(input *GetAggregateResourceConfigInput) GetAggregateResourceConfigRequest {
+	op := &aws.Operation{
+		Name:       opGetAggregateResourceConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetAggregateResourceConfigInput{}
+	}
+
+	output := &GetAggregateResourceConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAggregateResourceConfigRequest{Request: req, Input: input, Copy: c.GetAggregateResourceConfigRequest}
+}
+
 const opGetComplianceDetailsByConfigRule = "GetComplianceDetailsByConfigRule"
 
 // GetComplianceDetailsByConfigRuleRequest is a API request type for the GetComplianceDetailsByConfigRule API operation.
@@ -1863,6 +2030,65 @@ type GetResourceConfigHistoryPager struct {
 
 func (p *GetResourceConfigHistoryPager) CurrentPage() *GetResourceConfigHistoryOutput {
 	return p.Pager.CurrentPage().(*GetResourceConfigHistoryOutput)
+}
+
+const opListAggregateDiscoveredResources = "ListAggregateDiscoveredResources"
+
+// ListAggregateDiscoveredResourcesRequest is a API request type for the ListAggregateDiscoveredResources API operation.
+type ListAggregateDiscoveredResourcesRequest struct {
+	*aws.Request
+	Input *ListAggregateDiscoveredResourcesInput
+	Copy  func(*ListAggregateDiscoveredResourcesInput) ListAggregateDiscoveredResourcesRequest
+}
+
+// Send marshals and sends the ListAggregateDiscoveredResources API request.
+func (r ListAggregateDiscoveredResourcesRequest) Send() (*ListAggregateDiscoveredResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAggregateDiscoveredResourcesOutput), nil
+}
+
+// ListAggregateDiscoveredResourcesRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Accepts a resource type and returns a list of resource identifiers that are
+// aggregated for a specific resource type across accounts and regions. A resource
+// identifier includes the resource type, ID, (if available) the custom resource
+// name, source account, and source region. You can narrow the results to include
+// only resources that have specific resource IDs, or a resource name, or source
+// account ID, or source region.
+//
+// For example, if the input consists of accountID 12345678910 and the region
+// is us-east-1 for resource type AWS::EC2::Instance then the API returns all
+// the EC2 instance identifiers of accountID 12345678910 and region us-east-1.
+//
+//    // Example sending a request using the ListAggregateDiscoveredResourcesRequest method.
+//    req := client.ListAggregateDiscoveredResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResources
+func (c *ConfigService) ListAggregateDiscoveredResourcesRequest(input *ListAggregateDiscoveredResourcesInput) ListAggregateDiscoveredResourcesRequest {
+	op := &aws.Operation{
+		Name:       opListAggregateDiscoveredResources,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListAggregateDiscoveredResourcesInput{}
+	}
+
+	output := &ListAggregateDiscoveredResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListAggregateDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListAggregateDiscoveredResourcesRequest}
 }
 
 const opListDiscoveredResources = "ListDiscoveredResources"
@@ -2696,6 +2922,78 @@ func (s AggregateEvaluationResult) GoString() string {
 	return s.String()
 }
 
+// The details that identify a resource that is collected by AWS Config aggregator,
+// including the resource type, ID, (if available) the custom resource name,
+// the source account, and source region.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateResourceIdentifier
+type AggregateResourceIdentifier struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the AWS resource.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"1" type:"string" required:"true"`
+
+	// The name of the AWS resource.
+	ResourceName *string `type:"string"`
+
+	// The type of the AWS resource.
+	//
+	// ResourceType is a required field
+	ResourceType ResourceType `type:"string" required:"true" enum:"true"`
+
+	// The 12-digit account ID of the source account.
+	//
+	// SourceAccountId is a required field
+	SourceAccountId *string `type:"string" required:"true"`
+
+	// The source region where data is aggregated.
+	//
+	// SourceRegion is a required field
+	SourceRegion *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AggregateResourceIdentifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AggregateResourceIdentifier) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AggregateResourceIdentifier) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AggregateResourceIdentifier"}
+
+	if s.ResourceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
+	}
+	if len(s.ResourceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+
+	if s.SourceAccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceAccountId"))
+	}
+
+	if s.SourceRegion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceRegion"))
+	}
+	if s.SourceRegion != nil && len(*s.SourceRegion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SourceRegion", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The current sync status between the source and the aggregator account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregatedSourceStatus
 type AggregatedSourceStatus struct {
@@ -2775,7 +3073,7 @@ func (s AggregationAuthorization) GoString() string {
 type BaseConfigurationItem struct {
 	_ struct{} `type:"structure"`
 
-	// The 12 digit AWS account ID associated with the resource.
+	// The 12-digit AWS account ID associated with the resource.
 	AccountId *string `locationName:"accountId" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the resource.
@@ -2828,6 +3126,91 @@ func (s BaseConfigurationItem) String() string {
 // GoString returns the string representation
 func (s BaseConfigurationItem) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfigRequest
+type BatchGetAggregateResourceConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the configuration aggregator.
+	//
+	// ConfigurationAggregatorName is a required field
+	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
+
+	// A list of aggregate ResourceIdentifiers objects.
+	//
+	// ResourceIdentifiers is a required field
+	ResourceIdentifiers []AggregateResourceIdentifier `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetAggregateResourceConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetAggregateResourceConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetAggregateResourceConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetAggregateResourceConfigInput"}
+
+	if s.ConfigurationAggregatorName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
+	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
+	}
+
+	if s.ResourceIdentifiers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceIdentifiers"))
+	}
+	if s.ResourceIdentifiers != nil && len(s.ResourceIdentifiers) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIdentifiers", 1))
+	}
+	if s.ResourceIdentifiers != nil {
+		for i, v := range s.ResourceIdentifiers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceIdentifiers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetAggregateResourceConfigResponse
+type BatchGetAggregateResourceConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list that contains the current configuration of one or more resources.
+	BaseConfigurationItems []BaseConfigurationItem `type:"list"`
+
+	// A list of resource identifiers that were not processed with current scope.
+	// The list is empty if all the resources are processed.
+	UnprocessedResourceIdentifiers []AggregateResourceIdentifier `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetAggregateResourceConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetAggregateResourceConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetAggregateResourceConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetResourceConfigRequest
@@ -5542,6 +5925,178 @@ func (s GetAggregateConfigRuleComplianceSummaryOutput) SDKResponseMetadata() aws
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCountsRequest
+type GetAggregateDiscoveredResourceCountsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the configuration aggregator.
+	//
+	// ConfigurationAggregatorName is a required field
+	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
+
+	// Filters the results based on the ResourceCountFilters object.
+	Filters *ResourceCountFilters `type:"structure"`
+
+	// The key to group the resource counts.
+	GroupByKey ResourceCountGroupKey `type:"string" enum:"true"`
+
+	// The maximum number of GroupedResourceCount objects returned on each page.
+	// The default is 1000. You cannot specify a number greater than 1000. If you
+	// specify 0, AWS Config uses the default.
+	Limit *int64 `type:"integer"`
+
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetAggregateDiscoveredResourceCountsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAggregateDiscoveredResourceCountsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetAggregateDiscoveredResourceCountsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetAggregateDiscoveredResourceCountsInput"}
+
+	if s.ConfigurationAggregatorName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
+	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
+	}
+	if s.Filters != nil {
+		if err := s.Filters.Validate(); err != nil {
+			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateDiscoveredResourceCountsResponse
+type GetAggregateDiscoveredResourceCountsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The key passed into the request object. If GroupByKey is not provided, the
+	// result will be empty.
+	GroupByKey *string `min:"1" type:"string"`
+
+	// Returns a list of GroupedResourceCount objects.
+	GroupedResourceCounts []GroupedResourceCount `type:"list"`
+
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
+	NextToken *string `type:"string"`
+
+	// The total number of resources that are present in an aggregator with the
+	// filters that you provide.
+	//
+	// TotalDiscoveredResources is a required field
+	TotalDiscoveredResources *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s GetAggregateDiscoveredResourceCountsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAggregateDiscoveredResourceCountsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAggregateDiscoveredResourceCountsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfigRequest
+type GetAggregateResourceConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the configuration aggregator.
+	//
+	// ConfigurationAggregatorName is a required field
+	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
+
+	// An object that identifies aggregate resource.
+	//
+	// ResourceIdentifier is a required field
+	ResourceIdentifier *AggregateResourceIdentifier `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetAggregateResourceConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAggregateResourceConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetAggregateResourceConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetAggregateResourceConfigInput"}
+
+	if s.ConfigurationAggregatorName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
+	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
+	}
+
+	if s.ResourceIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if s.ResourceIdentifier != nil {
+		if err := s.ResourceIdentifier.Validate(); err != nil {
+			invalidParams.AddNested("ResourceIdentifier", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateResourceConfigResponse
+type GetAggregateResourceConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Returns a ConfigurationItem object.
+	ConfigurationItem *ConfigurationItem `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetAggregateResourceConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAggregateResourceConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAggregateResourceConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRuleRequest
 type GetComplianceDetailsByConfigRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -5977,6 +6532,124 @@ func (s GetResourceConfigHistoryOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetResourceConfigHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// The count of resources that are grouped by the group name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GroupedResourceCount
+type GroupedResourceCount struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the group that can be region, account ID, or resource type. For
+	// example, region1, region2 if the region was chosen as GroupByKey.
+	//
+	// GroupName is a required field
+	GroupName *string `min:"1" type:"string" required:"true"`
+
+	// The number of resources in the group.
+	//
+	// ResourceCount is a required field
+	ResourceCount *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s GroupedResourceCount) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GroupedResourceCount) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResourcesRequest
+type ListAggregateDiscoveredResourcesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the configuration aggregator.
+	//
+	// ConfigurationAggregatorName is a required field
+	ConfigurationAggregatorName *string `min:"1" type:"string" required:"true"`
+
+	// Filters the results based on the ResourceFilters object.
+	Filters *ResourceFilters `type:"structure"`
+
+	// The maximum number of resource identifiers returned on each page. The default
+	// is 100. You cannot specify a number greater than 100. If you specify 0, AWS
+	// Config uses the default.
+	Limit *int64 `type:"integer"`
+
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
+	NextToken *string `type:"string"`
+
+	// The type of resources that you want AWS Config to list in the response.
+	//
+	// ResourceType is a required field
+	ResourceType ResourceType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListAggregateDiscoveredResourcesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAggregateDiscoveredResourcesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListAggregateDiscoveredResourcesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListAggregateDiscoveredResourcesInput"}
+
+	if s.ConfigurationAggregatorName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
+	if s.ConfigurationAggregatorName != nil && len(*s.ConfigurationAggregatorName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationAggregatorName", 1))
+	}
+	if len(s.ResourceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+	if s.Filters != nil {
+		if err := s.Filters.Validate(); err != nil {
+			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListAggregateDiscoveredResourcesResponse
+type ListAggregateDiscoveredResourcesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
+	NextToken *string `type:"string"`
+
+	// Returns a list of ResourceIdentifiers objects.
+	ResourceIdentifiers []AggregateResourceIdentifier `type:"list"`
+}
+
+// String returns the string representation
+func (s ListAggregateDiscoveredResourcesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAggregateDiscoveredResourcesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAggregateDiscoveredResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6751,6 +7424,89 @@ func (s ResourceCount) GoString() string {
 	return s.String()
 }
 
+// Filters the resource count based on account ID, region, and resource type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceCountFilters
+type ResourceCountFilters struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit ID of the account.
+	AccountId *string `type:"string"`
+
+	// The region where the account is located.
+	Region *string `min:"1" type:"string"`
+
+	// The type of the AWS resource.
+	ResourceType ResourceType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ResourceCountFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceCountFilters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceCountFilters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceCountFilters"}
+	if s.Region != nil && len(*s.Region) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Filters the results by resource account ID, region, resource ID, and resource
+// name.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceFilters
+type ResourceFilters struct {
+	_ struct{} `type:"structure"`
+
+	// The 12-digit source account ID.
+	AccountId *string `type:"string"`
+
+	// The source region.
+	Region *string `min:"1" type:"string"`
+
+	// The ID of the resource.
+	ResourceId *string `min:"1" type:"string"`
+
+	// The name of the resource.
+	ResourceName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceFilters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ResourceFilters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceFilters"}
+	if s.Region != nil && len(*s.Region) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The details that identify a resource that is discovered by AWS Config, including
 // the resource type, ID, and (if available) the custom resource name.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceIdentifier
@@ -7443,6 +8199,24 @@ func (enum RecorderStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ResourceCountGroupKey string
+
+// Enum values for ResourceCountGroupKey
+const (
+	ResourceCountGroupKeyResourceType ResourceCountGroupKey = "RESOURCE_TYPE"
+	ResourceCountGroupKeyAccountId    ResourceCountGroupKey = "ACCOUNT_ID"
+	ResourceCountGroupKeyAwsRegion    ResourceCountGroupKey = "AWS_REGION"
+)
+
+func (enum ResourceCountGroupKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceCountGroupKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -7505,6 +8279,12 @@ const (
 	ResourceTypeAwsElasticBeanstalkEnvironment        ResourceType = "AWS::ElasticBeanstalk::Environment"
 	ResourceTypeAwsElasticLoadBalancingLoadBalancer   ResourceType = "AWS::ElasticLoadBalancing::LoadBalancer"
 	ResourceTypeAwsXrayEncryptionConfig               ResourceType = "AWS::XRay::EncryptionConfig"
+	ResourceTypeAwsSsmAssociationCompliance           ResourceType = "AWS::SSM::AssociationCompliance"
+	ResourceTypeAwsSsmPatchCompliance                 ResourceType = "AWS::SSM::PatchCompliance"
+	ResourceTypeAwsShieldProtection                   ResourceType = "AWS::Shield::Protection"
+	ResourceTypeAwsShieldRegionalProtection           ResourceType = "AWS::ShieldRegional::Protection"
+	ResourceTypeAwsConfigResourceCompliance           ResourceType = "AWS::Config::ResourceCompliance"
+	ResourceTypeAwsCodePipelinePipeline               ResourceType = "AWS::CodePipeline::Pipeline"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {

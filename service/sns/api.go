@@ -2343,6 +2343,20 @@ func (s CreatePlatformEndpointOutput) SDKResponseMetadata() aws.Response {
 type CreateTopicInput struct {
 	_ struct{} `type:"structure"`
 
+	// A map of attributes with their corresponding values.
+	//
+	// The following lists the names, descriptions, and values of the special request
+	// parameters that the CreateTopic action uses:
+	//
+	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
+	//    deliveries to HTTP/S endpoints.
+	//
+	//    * DisplayName – The display name to use for a topic with SMS subscriptions.
+	//
+	//    * Policy – The policy that defines who can access your topic. By default,
+	//    only the topic owner can publish or subscribe to the topic.
+	Attributes map[string]string `type:"map"`
+
 	// The name of the topic you want to create.
 	//
 	// Constraints: Topic names must be made up of only uppercase and lowercase
@@ -2639,16 +2653,16 @@ type GetEndpointAttributesOutput struct {
 
 	// Attributes include the following:
 	//
-	//    * CustomUserData -- arbitrary user data to associate with the endpoint.
+	//    * CustomUserData – arbitrary user data to associate with the endpoint.
 	//    Amazon SNS does not use this data. The data must be in UTF-8 format and
 	//    less than 2KB.
 	//
-	//    * Enabled -- flag that enables/disables delivery to the endpoint. Amazon
+	//    * Enabled – flag that enables/disables delivery to the endpoint. Amazon
 	//    SNS will set this to false when a notification service indicates to Amazon
 	//    SNS that the endpoint is invalid. Users can set it back to true, typically
 	//    after updating Token.
 	//
-	//    * Token -- device token, also referred to as a registration id, for an
+	//    * Token – device token, also referred to as a registration id, for an
 	//    app and mobile device. This is returned from the notification service
 	//    when an app and mobile device are registered with the notification service.
 	Attributes map[string]string `type:"map"`
@@ -2713,16 +2727,16 @@ type GetPlatformApplicationAttributesOutput struct {
 
 	// Attributes include the following:
 	//
-	//    * EventEndpointCreated -- Topic ARN to which EndpointCreated event notifications
+	//    * EventEndpointCreated – Topic ARN to which EndpointCreated event notifications
 	//    should be sent.
 	//
-	//    * EventEndpointDeleted -- Topic ARN to which EndpointDeleted event notifications
+	//    * EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications
 	//    should be sent.
 	//
-	//    * EventEndpointUpdated -- Topic ARN to which EndpointUpdate event notifications
+	//    * EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications
 	//    should be sent.
 	//
-	//    * EventDeliveryFailure -- Topic ARN to which DeliveryFailure event notifications
+	//    * EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications
 	//    should be sent upon Direct Publish delivery failure (permanent) to one
 	//    of the application's endpoints.
 	Attributes map[string]string `type:"map"`
@@ -2838,31 +2852,31 @@ type GetSubscriptionAttributesOutput struct {
 	// A map of the subscription's attributes. Attributes in this map include the
 	// following:
 	//
-	//    * ConfirmationWasAuthenticated -- true if the subscription confirmation
+	//    * ConfirmationWasAuthenticated – true if the subscription confirmation
 	//    request was authenticated.
 	//
-	//    * DeliveryPolicy -- The JSON serialization of the subscription's delivery
+	//    * DeliveryPolicy – The JSON serialization of the subscription's delivery
 	//    policy.
 	//
-	//    * EffectiveDeliveryPolicy -- The JSON serialization of the effective delivery
+	//    * EffectiveDeliveryPolicy – The JSON serialization of the effective delivery
 	//    policy that takes into account the topic delivery policy and account system
 	//    defaults.
 	//
-	//    * FilterPolicy -- The filter policy JSON that is assigned to the subscription.
+	//    * FilterPolicy – The filter policy JSON that is assigned to the subscription.
 	//
-	//    * Owner -- The AWS account ID of the subscription's owner.
+	//    * Owner – The AWS account ID of the subscription's owner.
 	//
-	//    * PendingConfirmation -- true if the subscription hasn't been confirmed.
+	//    * PendingConfirmation – true if the subscription hasn't been confirmed.
 	//    To confirm a pending subscription, call the ConfirmSubscription action
 	//    with a confirmation token.
 	//
-	//    * RawMessageDelivery -- true if raw message delivery is enabled for the
+	//    * RawMessageDelivery – true if raw message delivery is enabled for the
 	//    subscription. Raw messages are free of JSON formatting and can be sent
 	//    to HTTP/S and Amazon SQS endpoints.
 	//
-	//    * SubscriptionArn -- The subscription's ARN.
+	//    * SubscriptionArn – The subscription's ARN.
 	//
-	//    * TopicArn -- The topic ARN that the subscription is associated with.
+	//    * TopicArn – The topic ARN that the subscription is associated with.
 	Attributes map[string]string `type:"map"`
 }
 
@@ -2925,27 +2939,26 @@ type GetTopicAttributesOutput struct {
 
 	// A map of the topic's attributes. Attributes in this map include the following:
 	//
-	//    * TopicArn -- the topic's ARN
+	//    * TopicArn – the topic's ARN
 	//
-	//    * Owner -- the AWS account ID of the topic's owner
+	//    * Owner – the AWS account ID of the topic's owner
 	//
-	//    * Policy -- the JSON serialization of the topic's access control policy
+	//    * Policy – the JSON serialization of the topic's access control policy
 	//
-	//    * DisplayName -- the human-readable name used in the "From" field for
-	//    notifications to email and email-json endpoints
+	//    * DisplayName – the human-readable name used in the "From" field for notifications
+	//    to email and email-json endpoints
 	//
-	//    * SubscriptionsPending -- the number of subscriptions pending confirmation
+	//    * SubscriptionsPending – the number of subscriptions pending confirmation
 	//    on this topic
 	//
-	//    * SubscriptionsConfirmed -- the number of confirmed subscriptions on this
+	//    * SubscriptionsConfirmed – the number of confirmed subscriptions on this
 	//    topic
 	//
-	//    * SubscriptionsDeleted -- the number of deleted subscriptions on this
-	//    topic
+	//    * SubscriptionsDeleted – the number of deleted subscriptions on this topic
 	//
-	//    * DeliveryPolicy -- the JSON serialization of the topic's delivery policy
+	//    * DeliveryPolicy – the JSON serialization of the topic's delivery policy
 	//
-	//    * EffectiveDeliveryPolicy -- the JSON serialization of the effective delivery
+	//    * EffectiveDeliveryPolicy – the JSON serialization of the effective delivery
 	//    policy that takes into account system defaults
 	Attributes map[string]string `type:"map"`
 }
@@ -3444,6 +3457,9 @@ type PublishInput struct {
 
 	// The message you want to send.
 	//
+	// The Message parameter is always a string. If you set MessageStructure to
+	// json, you must string-encode the Message parameter.
+	//
 	// If you are publishing to a topic and you want to send the same message to
 	// all transport protocols, include the text of the message as a String value.
 	// If you want to send different messages for each transport protocol, set the
@@ -3453,15 +3469,17 @@ type PublishInput struct {
 	// Constraints:
 	//
 	// With the exception of SMS, messages must be UTF-8 encoded strings and at
-	// most 256 KB in size (262144 bytes, not 262144 characters).
+	// most 256 KB in size (262,144 bytes, not 262,144 characters).
 	//
-	//    * For SMS, each message can contain up to 140 bytes, and the character
-	//    limit depends on the encoding scheme. For example, an SMS message can
+	//    * For SMS, each message can contain up to 140 characters. This character
+	//    limit depends on the encoding schema. For example, an SMS message can
 	//    contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters.
-	//    If you publish a message that exceeds the size limit, Amazon SNS sends
-	//    it as multiple messages, each fitting within the size limit. Messages
-	//    are not cut off in the middle of a word but on whole-word boundaries.
-	//    The total size limit for a single SMS publish action is 1600 bytes.
+	//
+	//    * If you publish a message that exceeds this size limit, Amazon SNS sends
+	//    the message as multiple messages, each fitting within the size limit.
+	//    Messages aren't truncated mid-word but are cut off at whole-word boundaries.
+	//
+	//    * The total size limit for a single SMS Publish action is 1,600 characters.
 	//
 	// JSON-specific constraints:
 	//
@@ -3675,16 +3693,16 @@ type SetEndpointAttributesInput struct {
 
 	// A map of the endpoint attributes. Attributes in this map include the following:
 	//
-	//    * CustomUserData -- arbitrary user data to associate with the endpoint.
+	//    * CustomUserData – arbitrary user data to associate with the endpoint.
 	//    Amazon SNS does not use this data. The data must be in UTF-8 format and
 	//    less than 2KB.
 	//
-	//    * Enabled -- flag that enables/disables delivery to the endpoint. Amazon
+	//    * Enabled – flag that enables/disables delivery to the endpoint. Amazon
 	//    SNS will set this to false when a notification service indicates to Amazon
 	//    SNS that the endpoint is invalid. Users can set it back to true, typically
 	//    after updating Token.
 	//
-	//    * Token -- device token, also referred to as a registration id, for an
+	//    * Token – device token, also referred to as a registration id, for an
 	//    app and mobile device. This is returned from the notification service
 	//    when an app and mobile device are registered with the notification service.
 	//
@@ -3755,36 +3773,35 @@ type SetPlatformApplicationAttributesInput struct {
 	// A map of the platform application attributes. Attributes in this map include
 	// the following:
 	//
-	//    * PlatformCredential -- The credential received from the notification
-	//    service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For
-	//    GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client
-	//    secret".
+	//    * PlatformCredential – The credential received from the notification service.
+	//    For APNS/APNS_SANDBOX, PlatformCredential is private key. For GCM, PlatformCredential
+	//    is "API key". For ADM, PlatformCredential is "client secret".
 	//
-	//    * PlatformPrincipal -- The principal received from the notification service.
+	//    * PlatformPrincipal – The principal received from the notification service.
 	//    For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM,
 	//    PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client
 	//    id".
 	//
-	//    * EventEndpointCreated -- Topic ARN to which EndpointCreated event notifications
+	//    * EventEndpointCreated – Topic ARN to which EndpointCreated event notifications
 	//    should be sent.
 	//
-	//    * EventEndpointDeleted -- Topic ARN to which EndpointDeleted event notifications
+	//    * EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications
 	//    should be sent.
 	//
-	//    * EventEndpointUpdated -- Topic ARN to which EndpointUpdate event notifications
+	//    * EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications
 	//    should be sent.
 	//
-	//    * EventDeliveryFailure -- Topic ARN to which DeliveryFailure event notifications
+	//    * EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications
 	//    should be sent upon Direct Publish delivery failure (permanent) to one
 	//    of the application's endpoints.
 	//
-	//    * SuccessFeedbackRoleArn -- IAM role ARN used to give Amazon SNS write
+	//    * SuccessFeedbackRoleArn – IAM role ARN used to give Amazon SNS write
 	//    access to use CloudWatch Logs on your behalf.
 	//
-	//    * FailureFeedbackRoleArn -- IAM role ARN used to give Amazon SNS write
+	//    * FailureFeedbackRoleArn – IAM role ARN used to give Amazon SNS write
 	//    access to use CloudWatch Logs on your behalf.
 	//
-	//    * SuccessFeedbackSampleRate -- Sample rate percentage (0-100) of successfully
+	//    * SuccessFeedbackSampleRate – Sample rate percentage (0-100) of successfully
 	//    delivered messages.
 	//
 	// Attributes is a required field
@@ -3982,10 +3999,22 @@ func (s SetSMSAttributesOutput) SDKResponseMetadata() aws.Response {
 type SetSubscriptionAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the attribute you want to set. Only a subset of the subscriptions
-	// attributes are mutable.
+	// A map of attributes with their corresponding values.
 	//
-	// Valid values: DeliveryPolicy | FilterPolicy | RawMessageDelivery
+	// The following lists the names, descriptions, and values of the special request
+	// parameters that the SetTopicAttributes action uses:
+	//
+	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
+	//    deliveries to HTTP/S endpoints.
+	//
+	//    * FilterPolicy – The simple JSON object that lets your subscriber receive
+	//    only a subset of messages, rather than receiving every message published
+	//    to the topic.
+	//
+	//    * RawMessageDelivery – When set to true, enables raw message delivery
+	//    to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints
+	//    to process JSON formatting, which is otherwise created for Amazon SNS
+	//    metadata.
 	//
 	// AttributeName is a required field
 	AttributeName *string `type:"string" required:"true"`
@@ -4054,10 +4083,18 @@ func (s SetSubscriptionAttributesOutput) SDKResponseMetadata() aws.Response {
 type SetTopicAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the attribute you want to set. Only a subset of the topic's attributes
-	// are mutable.
+	// A map of attributes with their corresponding values.
 	//
-	// Valid values: Policy | DisplayName | DeliveryPolicy
+	// The following lists the names, descriptions, and values of the special request
+	// parameters that the SetTopicAttributes action uses:
+	//
+	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
+	//    deliveries to HTTP/S endpoints.
+	//
+	//    * DisplayName – The display name to use for a topic with SMS subscriptions.
+	//
+	//    * Policy – The policy that defines who can access your topic. By default,
+	//    only the topic owner can publish or subscribe to the topic.
 	//
 	// AttributeName is a required field
 	AttributeName *string `type:"string" required:"true"`
@@ -4126,8 +4163,22 @@ func (s SetTopicAttributesOutput) SDKResponseMetadata() aws.Response {
 type SubscribeInput struct {
 	_ struct{} `type:"structure"`
 
-	// Assigns attributes to the subscription as a map of key-value pairs. You can
-	// assign any attribute that is supported by the SetSubscriptionAttributes action.
+	// A map of attributes with their corresponding values.
+	//
+	// The following lists the names, descriptions, and values of the special request
+	// parameters that the SetTopicAttributes action uses:
+	//
+	//    * DeliveryPolicy – The policy that defines how Amazon SNS retries failed
+	//    deliveries to HTTP/S endpoints.
+	//
+	//    * FilterPolicy – The simple JSON object that lets your subscriber receive
+	//    only a subset of messages, rather than receiving every message published
+	//    to the topic.
+	//
+	//    * RawMessageDelivery – When set to true, enables raw message delivery
+	//    to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints
+	//    to process JSON formatting, which is otherwise created for Amazon SNS
+	//    metadata.
 	Attributes map[string]string `type:"map"`
 
 	// The endpoint that you want to receive notifications. Endpoints vary by protocol:
@@ -4153,22 +4204,22 @@ type SubscribeInput struct {
 
 	// The protocol you want to use. Supported protocols include:
 	//
-	//    * http -- delivery of JSON-encoded message via HTTP POST
+	//    * http – delivery of JSON-encoded message via HTTP POST
 	//
-	//    * https -- delivery of JSON-encoded message via HTTPS POST
+	//    * https – delivery of JSON-encoded message via HTTPS POST
 	//
-	//    * email -- delivery of message via SMTP
+	//    * email – delivery of message via SMTP
 	//
-	//    * email-json -- delivery of JSON-encoded message via SMTP
+	//    * email-json – delivery of JSON-encoded message via SMTP
 	//
-	//    * sms -- delivery of message via SMS
+	//    * sms – delivery of message via SMS
 	//
-	//    * sqs -- delivery of JSON-encoded message to an Amazon SQS queue
+	//    * sqs – delivery of JSON-encoded message to an Amazon SQS queue
 	//
-	//    * application -- delivery of JSON-encoded message to an EndpointArn for
+	//    * application – delivery of JSON-encoded message to an EndpointArn for
 	//    a mobile app and device.
 	//
-	//    * lambda -- delivery of JSON-encoded message to an AWS Lambda function.
+	//    * lambda – delivery of JSON-encoded message to an AWS Lambda function.
 	//
 	// Protocol is a required field
 	Protocol *string `type:"string" required:"true"`

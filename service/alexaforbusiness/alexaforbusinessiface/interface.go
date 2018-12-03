@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Alexa For Business.
 //    func myFunc(svc alexaforbusinessiface.AlexaForBusinessAPI) bool {
-//        // Make svc.AssociateContactWithAddressBook request
+//        // Make svc.ApproveSkill request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockAlexaForBusinessClient struct {
 //        alexaforbusinessiface.AlexaForBusinessAPI
 //    }
-//    func (m *mockAlexaForBusinessClient) AssociateContactWithAddressBook(input *alexaforbusiness.AssociateContactWithAddressBookInput) (*alexaforbusiness.AssociateContactWithAddressBookOutput, error) {
+//    func (m *mockAlexaForBusinessClient) ApproveSkill(input *alexaforbusiness.ApproveSkillInput) (*alexaforbusiness.ApproveSkillOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,13 +62,19 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type AlexaForBusinessAPI interface {
+	ApproveSkillRequest(*alexaforbusiness.ApproveSkillInput) alexaforbusiness.ApproveSkillRequest
+
 	AssociateContactWithAddressBookRequest(*alexaforbusiness.AssociateContactWithAddressBookInput) alexaforbusiness.AssociateContactWithAddressBookRequest
 
 	AssociateDeviceWithRoomRequest(*alexaforbusiness.AssociateDeviceWithRoomInput) alexaforbusiness.AssociateDeviceWithRoomRequest
 
 	AssociateSkillGroupWithRoomRequest(*alexaforbusiness.AssociateSkillGroupWithRoomInput) alexaforbusiness.AssociateSkillGroupWithRoomRequest
 
+	AssociateSkillWithSkillGroupRequest(*alexaforbusiness.AssociateSkillWithSkillGroupInput) alexaforbusiness.AssociateSkillWithSkillGroupRequest
+
 	CreateAddressBookRequest(*alexaforbusiness.CreateAddressBookInput) alexaforbusiness.CreateAddressBookRequest
+
+	CreateConferenceProviderRequest(*alexaforbusiness.CreateConferenceProviderInput) alexaforbusiness.CreateConferenceProviderRequest
 
 	CreateContactRequest(*alexaforbusiness.CreateContactInput) alexaforbusiness.CreateContactRequest
 
@@ -82,13 +88,19 @@ type AlexaForBusinessAPI interface {
 
 	DeleteAddressBookRequest(*alexaforbusiness.DeleteAddressBookInput) alexaforbusiness.DeleteAddressBookRequest
 
+	DeleteConferenceProviderRequest(*alexaforbusiness.DeleteConferenceProviderInput) alexaforbusiness.DeleteConferenceProviderRequest
+
 	DeleteContactRequest(*alexaforbusiness.DeleteContactInput) alexaforbusiness.DeleteContactRequest
+
+	DeleteDeviceRequest(*alexaforbusiness.DeleteDeviceInput) alexaforbusiness.DeleteDeviceRequest
 
 	DeleteProfileRequest(*alexaforbusiness.DeleteProfileInput) alexaforbusiness.DeleteProfileRequest
 
 	DeleteRoomRequest(*alexaforbusiness.DeleteRoomInput) alexaforbusiness.DeleteRoomRequest
 
 	DeleteRoomSkillParameterRequest(*alexaforbusiness.DeleteRoomSkillParameterInput) alexaforbusiness.DeleteRoomSkillParameterRequest
+
+	DeleteSkillAuthorizationRequest(*alexaforbusiness.DeleteSkillAuthorizationInput) alexaforbusiness.DeleteSkillAuthorizationRequest
 
 	DeleteSkillGroupRequest(*alexaforbusiness.DeleteSkillGroupInput) alexaforbusiness.DeleteSkillGroupRequest
 
@@ -98,9 +110,17 @@ type AlexaForBusinessAPI interface {
 
 	DisassociateDeviceFromRoomRequest(*alexaforbusiness.DisassociateDeviceFromRoomInput) alexaforbusiness.DisassociateDeviceFromRoomRequest
 
+	DisassociateSkillFromSkillGroupRequest(*alexaforbusiness.DisassociateSkillFromSkillGroupInput) alexaforbusiness.DisassociateSkillFromSkillGroupRequest
+
 	DisassociateSkillGroupFromRoomRequest(*alexaforbusiness.DisassociateSkillGroupFromRoomInput) alexaforbusiness.DisassociateSkillGroupFromRoomRequest
 
+	ForgetSmartHomeAppliancesRequest(*alexaforbusiness.ForgetSmartHomeAppliancesInput) alexaforbusiness.ForgetSmartHomeAppliancesRequest
+
 	GetAddressBookRequest(*alexaforbusiness.GetAddressBookInput) alexaforbusiness.GetAddressBookRequest
+
+	GetConferencePreferenceRequest(*alexaforbusiness.GetConferencePreferenceInput) alexaforbusiness.GetConferencePreferenceRequest
+
+	GetConferenceProviderRequest(*alexaforbusiness.GetConferenceProviderInput) alexaforbusiness.GetConferenceProviderRequest
 
 	GetContactRequest(*alexaforbusiness.GetContactInput) alexaforbusiness.GetContactRequest
 
@@ -114,13 +134,29 @@ type AlexaForBusinessAPI interface {
 
 	GetSkillGroupRequest(*alexaforbusiness.GetSkillGroupInput) alexaforbusiness.GetSkillGroupRequest
 
+	ListConferenceProvidersRequest(*alexaforbusiness.ListConferenceProvidersInput) alexaforbusiness.ListConferenceProvidersRequest
+
 	ListDeviceEventsRequest(*alexaforbusiness.ListDeviceEventsInput) alexaforbusiness.ListDeviceEventsRequest
 
 	ListSkillsRequest(*alexaforbusiness.ListSkillsInput) alexaforbusiness.ListSkillsRequest
 
+	ListSkillsStoreCategoriesRequest(*alexaforbusiness.ListSkillsStoreCategoriesInput) alexaforbusiness.ListSkillsStoreCategoriesRequest
+
+	ListSkillsStoreSkillsByCategoryRequest(*alexaforbusiness.ListSkillsStoreSkillsByCategoryInput) alexaforbusiness.ListSkillsStoreSkillsByCategoryRequest
+
+	ListSmartHomeAppliancesRequest(*alexaforbusiness.ListSmartHomeAppliancesInput) alexaforbusiness.ListSmartHomeAppliancesRequest
+
 	ListTagsRequest(*alexaforbusiness.ListTagsInput) alexaforbusiness.ListTagsRequest
 
+	PutConferencePreferenceRequest(*alexaforbusiness.PutConferencePreferenceInput) alexaforbusiness.PutConferencePreferenceRequest
+
 	PutRoomSkillParameterRequest(*alexaforbusiness.PutRoomSkillParameterInput) alexaforbusiness.PutRoomSkillParameterRequest
+
+	PutSkillAuthorizationRequest(*alexaforbusiness.PutSkillAuthorizationInput) alexaforbusiness.PutSkillAuthorizationRequest
+
+	RegisterAVSDeviceRequest(*alexaforbusiness.RegisterAVSDeviceInput) alexaforbusiness.RegisterAVSDeviceRequest
+
+	RejectSkillRequest(*alexaforbusiness.RejectSkillInput) alexaforbusiness.RejectSkillRequest
 
 	ResolveRoomRequest(*alexaforbusiness.ResolveRoomInput) alexaforbusiness.ResolveRoomRequest
 
@@ -144,11 +180,15 @@ type AlexaForBusinessAPI interface {
 
 	StartDeviceSyncRequest(*alexaforbusiness.StartDeviceSyncInput) alexaforbusiness.StartDeviceSyncRequest
 
+	StartSmartHomeApplianceDiscoveryRequest(*alexaforbusiness.StartSmartHomeApplianceDiscoveryInput) alexaforbusiness.StartSmartHomeApplianceDiscoveryRequest
+
 	TagResourceRequest(*alexaforbusiness.TagResourceInput) alexaforbusiness.TagResourceRequest
 
 	UntagResourceRequest(*alexaforbusiness.UntagResourceInput) alexaforbusiness.UntagResourceRequest
 
 	UpdateAddressBookRequest(*alexaforbusiness.UpdateAddressBookInput) alexaforbusiness.UpdateAddressBookRequest
+
+	UpdateConferenceProviderRequest(*alexaforbusiness.UpdateConferenceProviderInput) alexaforbusiness.UpdateConferenceProviderRequest
 
 	UpdateContactRequest(*alexaforbusiness.UpdateContactInput) alexaforbusiness.UpdateContactRequest
 

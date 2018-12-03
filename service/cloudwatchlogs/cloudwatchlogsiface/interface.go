@@ -96,6 +96,8 @@ type CloudWatchLogsAPI interface {
 
 	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
 
+	DescribeQueriesRequest(*cloudwatchlogs.DescribeQueriesInput) cloudwatchlogs.DescribeQueriesRequest
+
 	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
 
 	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) cloudwatchlogs.DescribeSubscriptionFiltersRequest
@@ -105,6 +107,12 @@ type CloudWatchLogsAPI interface {
 	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) cloudwatchlogs.FilterLogEventsRequest
 
 	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) cloudwatchlogs.GetLogEventsRequest
+
+	GetLogGroupFieldsRequest(*cloudwatchlogs.GetLogGroupFieldsInput) cloudwatchlogs.GetLogGroupFieldsRequest
+
+	GetLogRecordRequest(*cloudwatchlogs.GetLogRecordInput) cloudwatchlogs.GetLogRecordRequest
+
+	GetQueryResultsRequest(*cloudwatchlogs.GetQueryResultsInput) cloudwatchlogs.GetQueryResultsRequest
 
 	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) cloudwatchlogs.ListTagsLogGroupRequest
 
@@ -121,6 +129,10 @@ type CloudWatchLogsAPI interface {
 	PutRetentionPolicyRequest(*cloudwatchlogs.PutRetentionPolicyInput) cloudwatchlogs.PutRetentionPolicyRequest
 
 	PutSubscriptionFilterRequest(*cloudwatchlogs.PutSubscriptionFilterInput) cloudwatchlogs.PutSubscriptionFilterRequest
+
+	StartQueryRequest(*cloudwatchlogs.StartQueryInput) cloudwatchlogs.StartQueryRequest
+
+	StopQueryRequest(*cloudwatchlogs.StopQueryInput) cloudwatchlogs.StopQueryRequest
 
 	TagLogGroupRequest(*cloudwatchlogs.TagLogGroupInput) cloudwatchlogs.TagLogGroupRequest
 

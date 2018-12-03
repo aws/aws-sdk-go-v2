@@ -109,6 +109,59 @@ func (c *AppSync) CreateDataSourceRequest(input *CreateDataSourceInput) CreateDa
 	return CreateDataSourceRequest{Request: req, Input: input, Copy: c.CreateDataSourceRequest}
 }
 
+const opCreateFunction = "CreateFunction"
+
+// CreateFunctionRequest is a API request type for the CreateFunction API operation.
+type CreateFunctionRequest struct {
+	*aws.Request
+	Input *CreateFunctionInput
+	Copy  func(*CreateFunctionInput) CreateFunctionRequest
+}
+
+// Send marshals and sends the CreateFunction API request.
+func (r CreateFunctionRequest) Send() (*CreateFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFunctionOutput), nil
+}
+
+// CreateFunctionRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// Creates a Function object.
+//
+// A function is a reusable entity. Multiple functions can be used to compose
+// the resolver logic.
+//
+//    // Example sending a request using the CreateFunctionRequest method.
+//    req := client.CreateFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunction
+func (c *AppSync) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctionRequest {
+	op := &aws.Operation{
+		Name:       opCreateFunction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/apis/{apiId}/functions",
+	}
+
+	if input == nil {
+		input = &CreateFunctionInput{}
+	}
+
+	output := &CreateFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateFunctionRequest{Request: req, Input: input, Copy: c.CreateFunctionRequest}
+}
+
 const opCreateGraphqlApi = "CreateGraphqlApi"
 
 // CreateGraphqlApiRequest is a API request type for the CreateGraphqlApi API operation.
@@ -362,6 +415,56 @@ func (c *AppSync) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDa
 	return DeleteDataSourceRequest{Request: req, Input: input, Copy: c.DeleteDataSourceRequest}
 }
 
+const opDeleteFunction = "DeleteFunction"
+
+// DeleteFunctionRequest is a API request type for the DeleteFunction API operation.
+type DeleteFunctionRequest struct {
+	*aws.Request
+	Input *DeleteFunctionInput
+	Copy  func(*DeleteFunctionInput) DeleteFunctionRequest
+}
+
+// Send marshals and sends the DeleteFunction API request.
+func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFunctionOutput), nil
+}
+
+// DeleteFunctionRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// Deletes a Function.
+//
+//    // Example sending a request using the DeleteFunctionRequest method.
+//    req := client.DeleteFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunction
+func (c *AppSync) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFunction,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/v1/apis/{apiId}/functions/{functionId}",
+	}
+
+	if input == nil {
+		input = &DeleteFunctionInput{}
+	}
+
+	output := &DeleteFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFunctionRequest{Request: req, Input: input, Copy: c.DeleteFunctionRequest}
+}
+
 const opDeleteGraphqlApi = "DeleteGraphqlApi"
 
 // DeleteGraphqlApiRequest is a API request type for the DeleteGraphqlApi API operation.
@@ -560,6 +663,56 @@ func (c *AppSync) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceR
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetDataSourceRequest{Request: req, Input: input, Copy: c.GetDataSourceRequest}
+}
+
+const opGetFunction = "GetFunction"
+
+// GetFunctionRequest is a API request type for the GetFunction API operation.
+type GetFunctionRequest struct {
+	*aws.Request
+	Input *GetFunctionInput
+	Copy  func(*GetFunctionInput) GetFunctionRequest
+}
+
+// Send marshals and sends the GetFunction API request.
+func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFunctionOutput), nil
+}
+
+// GetFunctionRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// Get a Function.
+//
+//    // Example sending a request using the GetFunctionRequest method.
+//    req := client.GetFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunction
+func (c *AppSync) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest {
+	op := &aws.Operation{
+		Name:       opGetFunction,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apis/{apiId}/functions/{functionId}",
+	}
+
+	if input == nil {
+		input = &GetFunctionInput{}
+	}
+
+	output := &GetFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFunctionRequest{Request: req, Input: input, Copy: c.GetFunctionRequest}
 }
 
 const opGetGraphqlApi = "GetGraphqlApi"
@@ -917,6 +1070,56 @@ func (c *AppSync) ListDataSourcesRequest(input *ListDataSourcesInput) ListDataSo
 	return ListDataSourcesRequest{Request: req, Input: input, Copy: c.ListDataSourcesRequest}
 }
 
+const opListFunctions = "ListFunctions"
+
+// ListFunctionsRequest is a API request type for the ListFunctions API operation.
+type ListFunctionsRequest struct {
+	*aws.Request
+	Input *ListFunctionsInput
+	Copy  func(*ListFunctionsInput) ListFunctionsRequest
+}
+
+// Send marshals and sends the ListFunctions API request.
+func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFunctionsOutput), nil
+}
+
+// ListFunctionsRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// List multiple functions.
+//
+//    // Example sending a request using the ListFunctionsRequest method.
+//    req := client.ListFunctionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctions
+func (c *AppSync) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRequest {
+	op := &aws.Operation{
+		Name:       opListFunctions,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apis/{apiId}/functions",
+	}
+
+	if input == nil {
+		input = &ListFunctionsInput{}
+	}
+
+	output := &ListFunctionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListFunctionsRequest{Request: req, Input: input, Copy: c.ListFunctionsRequest}
+}
+
 const opListGraphqlApis = "ListGraphqlApis"
 
 // ListGraphqlApisRequest is a API request type for the ListGraphqlApis API operation.
@@ -1015,6 +1218,56 @@ func (c *AppSync) ListResolversRequest(input *ListResolversInput) ListResolversR
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListResolversRequest{Request: req, Input: input, Copy: c.ListResolversRequest}
+}
+
+const opListResolversByFunction = "ListResolversByFunction"
+
+// ListResolversByFunctionRequest is a API request type for the ListResolversByFunction API operation.
+type ListResolversByFunctionRequest struct {
+	*aws.Request
+	Input *ListResolversByFunctionInput
+	Copy  func(*ListResolversByFunctionInput) ListResolversByFunctionRequest
+}
+
+// Send marshals and sends the ListResolversByFunction API request.
+func (r ListResolversByFunctionRequest) Send() (*ListResolversByFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResolversByFunctionOutput), nil
+}
+
+// ListResolversByFunctionRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// List the resolvers that are associated with a specific function.
+//
+//    // Example sending a request using the ListResolversByFunctionRequest method.
+//    req := client.ListResolversByFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction
+func (c *AppSync) ListResolversByFunctionRequest(input *ListResolversByFunctionInput) ListResolversByFunctionRequest {
+	op := &aws.Operation{
+		Name:       opListResolversByFunction,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apis/{apiId}/functions/{functionId}/resolvers",
+	}
+
+	if input == nil {
+		input = &ListResolversByFunctionInput{}
+	}
+
+	output := &ListResolversByFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListResolversByFunctionRequest{Request: req, Input: input, Copy: c.ListResolversByFunctionRequest}
 }
 
 const opListTypes = "ListTypes"
@@ -1219,6 +1472,56 @@ func (c *AppSync) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDa
 	return UpdateDataSourceRequest{Request: req, Input: input, Copy: c.UpdateDataSourceRequest}
 }
 
+const opUpdateFunction = "UpdateFunction"
+
+// UpdateFunctionRequest is a API request type for the UpdateFunction API operation.
+type UpdateFunctionRequest struct {
+	*aws.Request
+	Input *UpdateFunctionInput
+	Copy  func(*UpdateFunctionInput) UpdateFunctionRequest
+}
+
+// Send marshals and sends the UpdateFunction API request.
+func (r UpdateFunctionRequest) Send() (*UpdateFunctionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFunctionOutput), nil
+}
+
+// UpdateFunctionRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// Updates a Function object.
+//
+//    // Example sending a request using the UpdateFunctionRequest method.
+//    req := client.UpdateFunctionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunction
+func (c *AppSync) UpdateFunctionRequest(input *UpdateFunctionInput) UpdateFunctionRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFunction,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/apis/{apiId}/functions/{functionId}",
+	}
+
+	if input == nil {
+		input = &UpdateFunctionInput{}
+	}
+
+	output := &UpdateFunctionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateFunctionRequest{Request: req, Input: input, Copy: c.UpdateFunctionRequest}
+}
+
 const opUpdateGraphqlApi = "UpdateGraphqlApi"
 
 // UpdateGraphqlApiRequest is a API request type for the UpdateGraphqlApi API operation.
@@ -1371,13 +1674,13 @@ func (c *AppSync) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 
 // Describes an API key.
 //
-// Customers invoke AWS AppSync GraphQL APIs with API keys as an identity mechanism.
-// There are two key versions:
+// Customers invoke AWS AppSync GraphQL API operations with API keys as an identity
+// mechanism. There are two key versions:
 //
 // da1: This version was introduced at launch in November 2017. These keys always
-// expire after 7 days. Key expiration is managed by DynamoDB TTL. The keys
-// will cease to be valid after Feb 21, 2018 and should not be used after that
-// date.
+// expire after 7 days. Key expiration is managed by Amazon DynamoDB TTL. The
+// keys ceased to be valid after February 21, 2018 and should not be used after
+// that date.
 //
 //    * ListApiKeys returns the expiration time in milliseconds.
 //
@@ -1387,10 +1690,10 @@ func (c *AppSync) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 //
 //    * DeleteApiKey deletes the item from the table.
 //
-//    * Expiration is stored in DynamoDB as milliseconds. This results in a
-//    bug where keys are not automatically deleted because DynamoDB expects
+//    * Expiration is stored in Amazon DynamoDB as milliseconds. This results
+//    in a bug where keys are not automatically deleted because DynamoDB expects
 //    the TTL to be stored in seconds. As a one-time action, we will delete
-//    these keys from the table after Feb 21, 2018.
+//    these keys from the table after February 21, 2018.
 //
 // da2: This version was introduced in February 2018 when AppSync added support
 // to extend key expiration.
@@ -1406,7 +1709,7 @@ func (c *AppSync) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 //
 //    * DeleteApiKey deletes the item from the table.
 //
-//    * Expiration is stored in DynamoDB as seconds.
+//    * Expiration is stored in Amazon DynamoDB as seconds.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKey
 type ApiKey struct {
 	_ struct{} `type:"structure"`
@@ -1451,6 +1754,101 @@ func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The authorization config in case the HTTP endpoint requires authorization.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AuthorizationConfig
+type AuthorizationConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The authorization type required by the HTTP endpoint.
+	//
+	//    * AWS_IAM: The authorization type is Sigv4.
+	//
+	// AuthorizationType is a required field
+	AuthorizationType AuthorizationType `locationName:"authorizationType" type:"string" required:"true" enum:"true"`
+
+	// The AWS IAM settings.
+	AwsIamConfig *AwsIamConfig `locationName:"awsIamConfig" type:"structure"`
+}
+
+// String returns the string representation
+func (s AuthorizationConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AuthorizationConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuthorizationConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AuthorizationConfig"}
+	if len(s.AuthorizationType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizationType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AuthorizationConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AuthorizationType) > 0 {
+		v := s.AuthorizationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authorizationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.AwsIamConfig != nil {
+		v := s.AwsIamConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsIamConfig", v, metadata)
+	}
+	return nil
+}
+
+// The AWS IAM configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/AwsIamConfig
+type AwsIamConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The signing region for AWS IAM authorization.
+	SigningRegion *string `locationName:"signingRegion" type:"string"`
+
+	// The signing service name for AWS IAM authorization.
+	SigningServiceName *string `locationName:"signingServiceName" type:"string"`
+}
+
+// String returns the string representation
+func (s AwsIamConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AwsIamConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsIamConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SigningRegion != nil {
+		v := *s.SigningRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "signingRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SigningServiceName != nil {
+		v := *s.SigningServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "signingServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1571,13 +1969,13 @@ type CreateDataSourceInput struct {
 	// A description of the DataSource.
 	Description *string `locationName:"description" type:"string"`
 
-	// DynamoDB settings.
+	// Amazon DynamoDB settings.
 	DynamodbConfig *DynamodbDataSourceConfig `locationName:"dynamodbConfig" type:"structure"`
 
-	// Amazon Elasticsearch settings.
+	// Amazon Elasticsearch Service settings.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig `locationName:"elasticsearchConfig" type:"structure"`
 
-	// Http endpoint settings.
+	// HTTP endpoint settings.
 	HttpConfig *HttpDataSourceConfig `locationName:"httpConfig" type:"structure"`
 
 	// AWS Lambda settings.
@@ -1588,8 +1986,11 @@ type CreateDataSourceInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// The IAM service role ARN for the data source. The system assumes this role
-	// when accessing the data source.
+	// Relational database settings.
+	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig `locationName:"relationalDatabaseConfig" type:"structure"`
+
+	// The AWS IAM service role ARN for the data source. The system assumes this
+	// role when accessing the data source.
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
 	// The type of the DataSource.
@@ -1630,6 +2031,11 @@ func (s *CreateDataSourceInput) Validate() error {
 	if s.ElasticsearchConfig != nil {
 		if err := s.ElasticsearchConfig.Validate(); err != nil {
 			invalidParams.AddNested("ElasticsearchConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HttpConfig != nil {
+		if err := s.HttpConfig.Validate(); err != nil {
+			invalidParams.AddNested("HttpConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaConfig != nil {
@@ -1683,6 +2089,12 @@ func (s CreateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RelationalDatabaseConfig != nil {
+		v := s.RelationalDatabaseConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "relationalDatabaseConfig", v, metadata)
 	}
 	if s.ServiceRoleArn != nil {
 		v := *s.ServiceRoleArn
@@ -1741,16 +2153,185 @@ func (s CreateDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionRequest
+type CreateFunctionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The GraphQL API ID.
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// The FunctionDataSource name.
+	//
+	// DataSourceName is a required field
+	DataSourceName *string `locationName:"dataSourceName" type:"string" required:"true"`
+
+	// The Function description.
+	Description *string `locationName:"description" type:"string"`
+
+	// The version of the request mapping template. Currently the supported value
+	// is 2018-05-29.
+	//
+	// FunctionVersion is a required field
+	FunctionVersion *string `locationName:"functionVersion" type:"string" required:"true"`
+
+	// The Function name. The function name does not have to be unique.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// The Function request mapping template. Functions support only the 2018-05-29
+	// version of the request mapping template.
+	//
+	// RequestMappingTemplate is a required field
+	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string" required:"true"`
+
+	// The Function response mapping template.
+	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateFunctionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFunctionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateFunctionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if s.DataSourceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
+	}
+
+	if s.FunctionVersion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionVersion"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.RequestMappingTemplate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RequestMappingTemplate"))
+	}
+	if s.RequestMappingTemplate != nil && len(*s.RequestMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RequestMappingTemplate", 1))
+	}
+	if s.ResponseMappingTemplate != nil && len(*s.ResponseMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseMappingTemplate", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DataSourceName != nil {
+		v := *s.DataSourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionVersion != nil {
+		v := *s.FunctionVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "functionVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestMappingTemplate != nil {
+		v := *s.RequestMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseMappingTemplate != nil {
+		v := *s.ResponseMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionResponse
+type CreateFunctionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Function object.
+	FunctionConfiguration *FunctionConfiguration `locationName:"functionConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateFunctionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFunctionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FunctionConfiguration != nil {
+		v := s.FunctionConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "functionConfiguration", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest
 type CreateGraphqlApiInput struct {
 	_ struct{} `type:"structure"`
 
-	// The authentication type: API key, IAM, or Amazon Cognito User Pools.
+	// The authentication type: API key, AWS IAM, or Amazon Cognito user pools.
 	//
 	// AuthenticationType is a required field
 	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" required:"true" enum:"true"`
 
-	// The Amazon CloudWatch logs configuration.
+	// The Amazon CloudWatch Logs configuration.
 	LogConfig *LogConfig `locationName:"logConfig" type:"structure"`
 
 	// A user-supplied name for the GraphqlApi.
@@ -1758,10 +2339,10 @@ type CreateGraphqlApiInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// The Open Id Connect configuration configuration.
+	// The OpenID Connect configuration.
 	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
-	// The Amazon Cognito User Pool configuration.
+	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
 }
 
@@ -1890,14 +2471,26 @@ type CreateResolverInput struct {
 	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
 
 	// The name of the data source for which the resolver is being created.
-	//
-	// DataSourceName is a required field
-	DataSourceName *string `locationName:"dataSourceName" type:"string" required:"true"`
+	DataSourceName *string `locationName:"dataSourceName" type:"string"`
 
 	// The name of the field to attach the resolver to.
 	//
 	// FieldName is a required field
 	FieldName *string `locationName:"fieldName" type:"string" required:"true"`
+
+	// The resolver type.
+	//
+	//    * UNIT: A UNIT resolver type. A UNIT resolver is the default resolver
+	//    type. A UNIT resolver enables you to execute a GraphQL query against a
+	//    single data source.
+	//
+	//    * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you
+	//    to execute a series of Function in a serial manner. You can use a pipeline
+	//    resolver to execute a GraphQL query against multiple data sources.
+	Kind ResolverKind `locationName:"kind" type:"string" enum:"true"`
+
+	// The PipelineConfig.
+	PipelineConfig *PipelineConfig `locationName:"pipelineConfig" type:"structure"`
 
 	// The mapping template to be used for requests.
 	//
@@ -1933,10 +2526,6 @@ func (s *CreateResolverInput) Validate() error {
 
 	if s.ApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.DataSourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
 	}
 
 	if s.FieldName == nil {
@@ -1978,6 +2567,18 @@ func (s CreateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "fieldName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Kind) > 0 {
+		v := s.Kind
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kind", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PipelineConfig != nil {
+		v := s.PipelineConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "pipelineConfig", v, metadata)
 	}
 	if s.RequestMappingTemplate != nil {
 		v := *s.RequestMappingTemplate
@@ -2167,23 +2768,26 @@ type DataSource struct {
 	// The description of the data source.
 	Description *string `locationName:"description" type:"string"`
 
-	// DynamoDB settings.
+	// Amazon DynamoDB settings.
 	DynamodbConfig *DynamodbDataSourceConfig `locationName:"dynamodbConfig" type:"structure"`
 
-	// Amazon Elasticsearch settings.
+	// Amazon Elasticsearch Service settings.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig `locationName:"elasticsearchConfig" type:"structure"`
 
-	// Http endpoint settings.
+	// HTTP endpoint settings.
 	HttpConfig *HttpDataSourceConfig `locationName:"httpConfig" type:"structure"`
 
-	// Lambda settings.
+	// AWS Lambda settings.
 	LambdaConfig *LambdaDataSourceConfig `locationName:"lambdaConfig" type:"structure"`
 
 	// The name of the data source.
 	Name *string `locationName:"name" type:"string"`
 
-	// The IAM service role ARN for the data source. The system assumes this role
-	// when accessing the data source.
+	// Relational database settings.
+	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig `locationName:"relationalDatabaseConfig" type:"structure"`
+
+	// The AWS IAM service role ARN for the data source. The system assumes this
+	// role when accessing the data source.
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
 	// The type of the data source.
@@ -2195,12 +2799,14 @@ type DataSource struct {
 	//
 	//    * AWS_LAMBDA: The data source is an AWS Lambda function.
 	//
-	//    * NONE: There is no data source. This type is used when when you wish
-	//    to invoke a GraphQL operation without connecting to a data source, such
-	//    as performing data transformation with resolvers or triggering a subscription
-	//    to be invoked from a mutation.
+	//    * NONE: There is no data source. This type is used when you wish to invoke
+	//    a GraphQL operation without connecting to a data source, such as performing
+	//    data transformation with resolvers or triggering a subscription to be
+	//    invoked from a mutation.
 	//
 	//    * HTTP: The data source is an HTTP endpoint.
+	//
+	//    * RELATIONAL_DATABASE: The data source is a relational database.
 	Type DataSourceType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -2257,6 +2863,12 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RelationalDatabaseConfig != nil {
+		v := s.RelationalDatabaseConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "relationalDatabaseConfig", v, metadata)
 	}
 	if s.ServiceRoleArn != nil {
 		v := *s.ServiceRoleArn
@@ -2448,6 +3060,95 @@ func (s DeleteDataSourceOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunctionRequest
+type DeleteFunctionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The GraphQL API ID.
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// The Function ID.
+	//
+	// FunctionId is a required field
+	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFunctionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFunctionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFunctionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if s.FunctionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionId != nil {
+		v := *s.FunctionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteFunctionResponse
+type DeleteFunctionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteFunctionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFunctionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -2718,12 +3419,12 @@ func (s DeleteTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes a DynamoDB data source configuration.
+// Describes an Amazon DynamoDB data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DynamodbDataSourceConfig
 type DynamodbDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS region.
+	// The AWS Region.
 	//
 	// AwsRegion is a required field
 	AwsRegion *string `locationName:"awsRegion" type:"string" required:"true"`
@@ -2793,7 +3494,7 @@ func (s DynamodbDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 type ElasticsearchDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS region.
+	// The AWS Region.
 	//
 	// AwsRegion is a required field
 	AwsRegion *string `locationName:"awsRegion" type:"string" required:"true"`
@@ -2845,6 +3546,102 @@ func (s ElasticsearchDataSourceConfig) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A function is a reusable entity. Multiple functions can be used to compose
+// the resolver logic.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FunctionConfiguration
+type FunctionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the DataSource.
+	DataSourceName *string `locationName:"dataSourceName" type:"string"`
+
+	// The Function description.
+	Description *string `locationName:"description" type:"string"`
+
+	// The ARN of the Function object.
+	FunctionArn *string `locationName:"functionArn" type:"string"`
+
+	// A unique ID representing the Function object.
+	FunctionId *string `locationName:"functionId" type:"string"`
+
+	// The version of the request mapping template. Currently only the 2018-05-29
+	// version of the template is supported.
+	FunctionVersion *string `locationName:"functionVersion" type:"string"`
+
+	// The name of the Function object.
+	Name *string `locationName:"name" type:"string"`
+
+	// The Function request mapping template. Functions support only the 2018-05-29
+	// version of the request mapping template.
+	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string"`
+
+	// The Function response mapping template.
+	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s FunctionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FunctionConfiguration) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSourceName != nil {
+		v := *s.DataSourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionArn != nil {
+		v := *s.FunctionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "functionArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionId != nil {
+		v := *s.FunctionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionVersion != nil {
+		v := *s.FunctionVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "functionVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestMappingTemplate != nil {
+		v := *s.RequestMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseMappingTemplate != nil {
+		v := *s.ResponseMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2943,6 +3740,104 @@ func (s GetDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "dataSource", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunctionRequest
+type GetFunctionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The GraphQL API ID.
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// The Function ID.
+	//
+	// FunctionId is a required field
+	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFunctionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFunctionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFunctionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if s.FunctionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionId != nil {
+		v := *s.FunctionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunctionResponse
+type GetFunctionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Function object.
+	FunctionConfiguration *FunctionConfiguration `locationName:"functionConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetFunctionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFunctionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FunctionConfiguration != nil {
+		v := s.FunctionConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "functionConfiguration", v, metadata)
 	}
 	return nil
 }
@@ -3467,13 +4362,13 @@ type GraphqlApi struct {
 	// The API name.
 	Name *string `locationName:"name" type:"string"`
 
-	// The Open Id Connect configuration.
+	// The OpenID Connect configuration.
 	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
 	// The URIs.
 	Uris map[string]string `locationName:"uris" type:"map"`
 
-	// The Amazon Cognito User Pool configuration.
+	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
 }
 
@@ -3546,15 +4441,18 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes a Http data source configuration.
+// Describes an HTTP data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/HttpDataSourceConfig
 type HttpDataSourceConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The Http url endpoint. You can either specify the domain name or ip and port
-	// combination and the url scheme must be http(s). If the port is not specified,
-	// AWS AppSync will use the default port 80 for http endpoint and port 443 for
-	// https endpoints.
+	// The authorization config in case the HTTP endpoint requires authorization.
+	AuthorizationConfig *AuthorizationConfig `locationName:"authorizationConfig" type:"structure"`
+
+	// The HTTP URL endpoint. You can either specify the domain name or IP, and
+	// port combination, and the URL scheme must be HTTP or HTTPS. If the port is
+	// not specified, AWS AppSync uses the default port 80 for the HTTP endpoint
+	// and port 443 for HTTPS endpoints.
 	Endpoint *string `locationName:"endpoint" type:"string"`
 }
 
@@ -3568,8 +4466,29 @@ func (s HttpDataSourceConfig) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpDataSourceConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpDataSourceConfig"}
+	if s.AuthorizationConfig != nil {
+		if err := s.AuthorizationConfig.Validate(); err != nil {
+			invalidParams.AddNested("AuthorizationConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s HttpDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AuthorizationConfig != nil {
+		v := s.AuthorizationConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorizationConfig", v, metadata)
+	}
 	if s.Endpoint != nil {
 		v := *s.Endpoint
 
@@ -3579,7 +4498,7 @@ func (s HttpDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes a Lambda data source configuration.
+// Describes an AWS Lambda data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaDataSourceConfig
 type LambdaDataSourceConfig struct {
 	_ struct{} `type:"structure"`
@@ -3861,6 +4780,124 @@ func (s ListDataSourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctionsRequest
+type ListFunctionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The GraphQL API ID.
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// The maximum number of results you want the request to return.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListFunctionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFunctionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListFunctionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListFunctionsInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFunctionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctionsResponse
+type ListFunctionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of Function objects.
+	Functions []FunctionConfiguration `locationName:"functions" type:"list"`
+
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListFunctionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFunctionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFunctionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFunctionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Functions) > 0 {
+		v := s.Functions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "functions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApisRequest
 type ListGraphqlApisInput struct {
 	_ struct{} `type:"structure"`
@@ -3950,6 +4987,138 @@ func (s ListGraphqlApisOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunctionRequest
+type ListResolversByFunctionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The API ID.
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// The Function ID.
+	//
+	// FunctionId is a required field
+	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
+
+	// The maximum number of results you want the request to return.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+
+	// An identifier that was returned from the previous call to this operation,
+	// which you can use to return the next set of items in the list.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListResolversByFunctionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListResolversByFunctionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListResolversByFunctionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListResolversByFunctionInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if s.FunctionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResolversByFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionId != nil {
+		v := *s.FunctionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunctionResponse
+type ListResolversByFunctionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An identifier that can be used to return the next set of items in the list.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of resolvers.
+	Resolvers []Resolver `locationName:"resolvers" type:"list"`
+}
+
+// String returns the string representation
+func (s ListResolversByFunctionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListResolversByFunctionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResolversByFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResolversByFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Resolvers) > 0 {
+		v := s.Resolvers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resolvers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -4230,7 +5399,7 @@ type LogConfig struct {
 	// CloudWatchLogsRoleArn is a required field
 	CloudWatchLogsRoleArn *string `locationName:"cloudWatchLogsRoleArn" type:"string" required:"true"`
 
-	// The field logging level. Values can be NONE, ERROR, ALL.
+	// The field logging level. Values can be NONE, ERROR, or ALL.
 	//
 	//    * NONE: No field-level logs are captured.
 	//
@@ -4297,7 +5466,7 @@ func (s LogConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes an Open Id Connect configuration.
+// Describes an OpenID Connect configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/OpenIDConnectConfig
 type OpenIDConnectConfig struct {
 	_ struct{} `type:"structure"`
@@ -4305,17 +5474,17 @@ type OpenIDConnectConfig struct {
 	// The number of milliseconds a token is valid after being authenticated.
 	AuthTTL *int64 `locationName:"authTTL" type:"long"`
 
-	// The client identifier of the Relying party at the OpenID Provider. This identifier
-	// is typically obtained when the Relying party is registered with the OpenID
-	// Provider. You can specify a regular expression so the AWS AppSync can validate
-	// against multiple client identifiers at a time
+	// The client identifier of the Relying party at the OpenID identity provider.
+	// This identifier is typically obtained when the Relying party is registered
+	// with the OpenID identity provider. You can specify a regular expression so
+	// the AWS AppSync can validate against multiple client identifiers at a time.
 	ClientId *string `locationName:"clientId" type:"string"`
 
 	// The number of milliseconds a token is valid after being issued to a user.
 	IatTTL *int64 `locationName:"iatTTL" type:"long"`
 
-	// The issuer for the open id connect configuration. The issuer returned by
-	// discovery MUST exactly match the value of iss in the ID Token.
+	// The issuer for the OpenID Connect configuration. The issuer returned by discovery
+	// must exactly match the value of iss in the ID token.
 	//
 	// Issuer is a required field
 	Issuer *string `locationName:"issuer" type:"string" required:"true"`
@@ -4374,6 +5543,150 @@ func (s OpenIDConnectConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The pipeline configuration for a resolver of kind PIPELINE.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PipelineConfig
+type PipelineConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A list of Function objects.
+	Functions []string `locationName:"functions" type:"list"`
+}
+
+// String returns the string representation
+func (s PipelineConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PipelineConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PipelineConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Functions) > 0 {
+		v := s.Functions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "functions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// The Amazon RDS HTTP endpoint configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RdsHttpEndpointConfig
+type RdsHttpEndpointConfig struct {
+	_ struct{} `type:"structure"`
+
+	// AWS Region for RDS HTTP endpoint.
+	AwsRegion *string `locationName:"awsRegion" type:"string"`
+
+	// AWS secret store ARN for database credentials.
+	AwsSecretStoreArn *string `locationName:"awsSecretStoreArn" type:"string"`
+
+	// Logical database name.
+	DatabaseName *string `locationName:"databaseName" type:"string"`
+
+	// Amazon RDS cluster identifier.
+	DbClusterIdentifier *string `locationName:"dbClusterIdentifier" type:"string"`
+
+	// Logical schema name.
+	Schema *string `locationName:"schema" type:"string"`
+}
+
+// String returns the string representation
+func (s RdsHttpEndpointConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RdsHttpEndpointConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RdsHttpEndpointConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AwsRegion != nil {
+		v := *s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "awsRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AwsSecretStoreArn != nil {
+		v := *s.AwsSecretStoreArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "awsSecretStoreArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DatabaseName != nil {
+		v := *s.DatabaseName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "databaseName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DbClusterIdentifier != nil {
+		v := *s.DbClusterIdentifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dbClusterIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Schema != nil {
+		v := *s.Schema
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "schema", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Describes a relational database data source configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/RelationalDatabaseDataSourceConfig
+type RelationalDatabaseDataSourceConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Amazon RDS HTTP endpoint settings.
+	RdsHttpEndpointConfig *RdsHttpEndpointConfig `locationName:"rdsHttpEndpointConfig" type:"structure"`
+
+	// Source type for the relational database.
+	//
+	//    * RDS_HTTP_ENDPOINT: The relational database source type is an Amazon
+	//    RDS HTTP endpoint.
+	RelationalDatabaseSourceType RelationalDatabaseSourceType `locationName:"relationalDatabaseSourceType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s RelationalDatabaseDataSourceConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RelationalDatabaseDataSourceConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RelationalDatabaseDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RdsHttpEndpointConfig != nil {
+		v := s.RdsHttpEndpointConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rdsHttpEndpointConfig", v, metadata)
+	}
+	if len(s.RelationalDatabaseSourceType) > 0 {
+		v := s.RelationalDatabaseSourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "relationalDatabaseSourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Describes a resolver.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver
 type Resolver struct {
@@ -4384,6 +5697,20 @@ type Resolver struct {
 
 	// The resolver field name.
 	FieldName *string `locationName:"fieldName" type:"string"`
+
+	// The resolver type.
+	//
+	//    * UNIT: A UNIT resolver type. A UNIT resolver is the default resolver
+	//    type. A UNIT resolver enables you to execute a GraphQL query against a
+	//    single data source.
+	//
+	//    * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you
+	//    to execute a series of Function in a serial manner. You can use a pipeline
+	//    resolver to execute a GraphQL query against multiple data sources.
+	Kind ResolverKind `locationName:"kind" type:"string" enum:"true"`
+
+	// The PipelineConfig.
+	PipelineConfig *PipelineConfig `locationName:"pipelineConfig" type:"structure"`
 
 	// The request mapping template.
 	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string"`
@@ -4421,6 +5748,18 @@ func (s Resolver) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "fieldName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Kind) > 0 {
+		v := s.Kind
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kind", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PipelineConfig != nil {
+		v := s.PipelineConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "pipelineConfig", v, metadata)
 	}
 	if s.RequestMappingTemplate != nil {
 		v := *s.RequestMappingTemplate
@@ -4519,7 +5858,7 @@ type StartSchemaCreationOutput struct {
 
 	responseMetadata aws.Response
 
-	// The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the
+	// The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the
 	// schema is in the ACTIVE state, you can add data.
 	Status SchemaStatus `locationName:"status" type:"string" enum:"true"`
 }
@@ -4620,7 +5959,7 @@ func (s Type) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateApiKeyInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID for the GraphQL API
+	// The ID for the GraphQL API.
 	//
 	// ApiId is a required field
 	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
@@ -4745,22 +6084,25 @@ type UpdateDataSourceInput struct {
 	// The new description for the data source.
 	Description *string `locationName:"description" type:"string"`
 
-	// The new DynamoDB configuration.
+	// The new Amazon DynamoDB configuration.
 	DynamodbConfig *DynamodbDataSourceConfig `locationName:"dynamodbConfig" type:"structure"`
 
-	// The new Elasticsearch configuration.
+	// The new Elasticsearch Service configuration.
 	ElasticsearchConfig *ElasticsearchDataSourceConfig `locationName:"elasticsearchConfig" type:"structure"`
 
-	// The new http endpoint configuration
+	// The new HTTP endpoint configuration.
 	HttpConfig *HttpDataSourceConfig `locationName:"httpConfig" type:"structure"`
 
-	// The new Lambda configuration.
+	// The new AWS Lambda configuration.
 	LambdaConfig *LambdaDataSourceConfig `locationName:"lambdaConfig" type:"structure"`
 
 	// The new name for the data source.
 	//
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+
+	// The new relational database configuration.
+	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig `locationName:"relationalDatabaseConfig" type:"structure"`
 
 	// The new service role ARN for the data source.
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
@@ -4803,6 +6145,11 @@ func (s *UpdateDataSourceInput) Validate() error {
 	if s.ElasticsearchConfig != nil {
 		if err := s.ElasticsearchConfig.Validate(); err != nil {
 			invalidParams.AddNested("ElasticsearchConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HttpConfig != nil {
+		if err := s.HttpConfig.Validate(); err != nil {
+			invalidParams.AddNested("HttpConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaConfig != nil {
@@ -4850,6 +6197,12 @@ func (s UpdateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "lambdaConfig", v, metadata)
+	}
+	if s.RelationalDatabaseConfig != nil {
+		v := s.RelationalDatabaseConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "relationalDatabaseConfig", v, metadata)
 	}
 	if s.ServiceRoleArn != nil {
 		v := *s.ServiceRoleArn
@@ -4914,6 +6267,190 @@ func (s UpdateDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionRequest
+type UpdateFunctionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The GraphQL API ID.
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// The FunctionDataSource name.
+	//
+	// DataSourceName is a required field
+	DataSourceName *string `locationName:"dataSourceName" type:"string" required:"true"`
+
+	// The Function description.
+	Description *string `locationName:"description" type:"string"`
+
+	// The function ID.
+	//
+	// FunctionId is a required field
+	FunctionId *string `location:"uri" locationName:"functionId" type:"string" required:"true"`
+
+	// The version of the request mapping template. Currently the supported value
+	// is 2018-05-29.
+	//
+	// FunctionVersion is a required field
+	FunctionVersion *string `locationName:"functionVersion" type:"string" required:"true"`
+
+	// The Function name.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// The Function request mapping template. Functions support only the 2018-05-29
+	// version of the request mapping template.
+	//
+	// RequestMappingTemplate is a required field
+	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string" required:"true"`
+
+	// The Function request mapping template.
+	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateFunctionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFunctionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateFunctionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if s.DataSourceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
+	}
+
+	if s.FunctionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionId"))
+	}
+
+	if s.FunctionVersion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FunctionVersion"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.RequestMappingTemplate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RequestMappingTemplate"))
+	}
+	if s.RequestMappingTemplate != nil && len(*s.RequestMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RequestMappingTemplate", 1))
+	}
+	if s.ResponseMappingTemplate != nil && len(*s.ResponseMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseMappingTemplate", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DataSourceName != nil {
+		v := *s.DataSourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionVersion != nil {
+		v := *s.FunctionVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "functionVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestMappingTemplate != nil {
+		v := *s.RequestMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseMappingTemplate != nil {
+		v := *s.ResponseMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionId != nil {
+		v := *s.FunctionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "functionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionResponse
+type UpdateFunctionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Function object.
+	FunctionConfiguration *FunctionConfiguration `locationName:"functionConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateFunctionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFunctionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFunctionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FunctionConfiguration != nil {
+		v := s.FunctionConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "functionConfiguration", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest
 type UpdateGraphqlApiInput struct {
 	_ struct{} `type:"structure"`
@@ -4926,7 +6463,7 @@ type UpdateGraphqlApiInput struct {
 	// The new authentication type for the GraphqlApi object.
 	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" enum:"true"`
 
-	// The Amazon CloudWatch logs configuration for the GraphqlApi object.
+	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
 	LogConfig *LogConfig `locationName:"logConfig" type:"structure"`
 
 	// The new name for the GraphqlApi object.
@@ -4934,10 +6471,10 @@ type UpdateGraphqlApiInput struct {
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// The Open Id Connect configuration configuration for the GraphqlApi object.
+	// The OpenID Connect configuration for the GraphqlApi object.
 	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
-	// The new Amazon Cognito User Pool configuration for the GraphqlApi object.
+	// The new Amazon Cognito user pool configuration for the GraphqlApi object.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
 }
 
@@ -5073,14 +6610,26 @@ type UpdateResolverInput struct {
 	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
 
 	// The new data source name.
-	//
-	// DataSourceName is a required field
-	DataSourceName *string `locationName:"dataSourceName" type:"string" required:"true"`
+	DataSourceName *string `locationName:"dataSourceName" type:"string"`
 
 	// The new field name.
 	//
 	// FieldName is a required field
 	FieldName *string `location:"uri" locationName:"fieldName" type:"string" required:"true"`
+
+	// The resolver type.
+	//
+	//    * UNIT: A UNIT resolver type. A UNIT resolver is the default resolver
+	//    type. A UNIT resolver enables you to execute a GraphQL query against a
+	//    single data source.
+	//
+	//    * PIPELINE: A PIPELINE resolver type. A PIPELINE resolver enables you
+	//    to execute a series of Function in a serial manner. You can use a pipeline
+	//    resolver to execute a GraphQL query against multiple data sources.
+	Kind ResolverKind `locationName:"kind" type:"string" enum:"true"`
+
+	// The PipelineConfig.
+	PipelineConfig *PipelineConfig `locationName:"pipelineConfig" type:"structure"`
 
 	// The new request mapping template.
 	//
@@ -5112,10 +6661,6 @@ func (s *UpdateResolverInput) Validate() error {
 
 	if s.ApiId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
-	}
-
-	if s.DataSourceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
 	}
 
 	if s.FieldName == nil {
@@ -5151,6 +6696,18 @@ func (s UpdateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Kind) > 0 {
+		v := s.Kind
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kind", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PipelineConfig != nil {
+		v := s.PipelineConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "pipelineConfig", v, metadata)
 	}
 	if s.RequestMappingTemplate != nil {
 		v := *s.RequestMappingTemplate
@@ -5342,23 +6899,23 @@ func (s UpdateTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Describes an Amazon Cognito User Pool configuration.
+// Describes an Amazon Cognito user pool configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UserPoolConfig
 type UserPoolConfig struct {
 	_ struct{} `type:"structure"`
 
-	// A regular expression for validating the incoming Amazon Cognito User Pool
+	// A regular expression for validating the incoming Amazon Cognito user pool
 	// app client ID.
 	AppIdClientRegex *string `locationName:"appIdClientRegex" type:"string"`
 
-	// The AWS region in which the user pool was created.
+	// The AWS Region in which the user pool was created.
 	//
 	// AwsRegion is a required field
 	AwsRegion *string `locationName:"awsRegion" type:"string" required:"true"`
 
 	// The action that you want your GraphQL API to take when a request that uses
-	// Amazon Cognito User Pool authentication doesn't match the Amazon Cognito
-	// User Pool configuration.
+	// Amazon Cognito user pool authentication doesn't match the Amazon Cognito
+	// user pool configuration.
 	//
 	// DefaultAction is a required field
 	DefaultAction DefaultAction `locationName:"defaultAction" type:"string" required:"true" enum:"true"`
@@ -5448,6 +7005,22 @@ func (enum AuthenticationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AuthorizationType string
+
+// Enum values for AuthorizationType
+const (
+	AuthorizationTypeAwsIam AuthorizationType = "AWS_IAM"
+)
+
+func (enum AuthorizationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthorizationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DataSourceType string
 
 // Enum values for DataSourceType
@@ -5457,6 +7030,7 @@ const (
 	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
 	DataSourceTypeNone                DataSourceType = "NONE"
 	DataSourceTypeHttp                DataSourceType = "HTTP"
+	DataSourceTypeRelationalDatabase  DataSourceType = "RELATIONAL_DATABASE"
 )
 
 func (enum DataSourceType) MarshalValue() (string, error) {
@@ -5516,6 +7090,39 @@ func (enum OutputType) MarshalValue() (string, error) {
 }
 
 func (enum OutputType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RelationalDatabaseSourceType string
+
+// Enum values for RelationalDatabaseSourceType
+const (
+	RelationalDatabaseSourceTypeRdsHttpEndpoint RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"
+)
+
+func (enum RelationalDatabaseSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RelationalDatabaseSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResolverKind string
+
+// Enum values for ResolverKind
+const (
+	ResolverKindUnit     ResolverKind = "UNIT"
+	ResolverKindPipeline ResolverKind = "PIPELINE"
+)
+
+func (enum ResolverKind) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResolverKind) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

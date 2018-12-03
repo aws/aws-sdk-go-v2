@@ -64,6 +64,8 @@ import (
 type CostExplorerAPI interface {
 	GetCostAndUsageRequest(*costexplorer.GetCostAndUsageInput) costexplorer.GetCostAndUsageRequest
 
+	GetCostForecastRequest(*costexplorer.GetCostForecastInput) costexplorer.GetCostForecastRequest
+
 	GetDimensionValuesRequest(*costexplorer.GetDimensionValuesInput) costexplorer.GetDimensionValuesRequest
 
 	GetReservationCoverageRequest(*costexplorer.GetReservationCoverageInput) costexplorer.GetReservationCoverageRequest

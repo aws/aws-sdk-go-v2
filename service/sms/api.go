@@ -9,6 +9,57 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+const opCreateApp = "CreateApp"
+
+// CreateAppRequest is a API request type for the CreateApp API operation.
+type CreateAppRequest struct {
+	*aws.Request
+	Input *CreateAppInput
+	Copy  func(*CreateAppInput) CreateAppRequest
+}
+
+// Send marshals and sends the CreateApp API request.
+func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAppOutput), nil
+}
+
+// CreateAppRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Creates an application. An application consists of one or more server groups.
+// Each server group contain one or more servers.
+//
+//    // Example sending a request using the CreateAppRequest method.
+//    req := client.CreateAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateApp
+func (c *SMS) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
+	op := &aws.Operation{
+		Name:       opCreateApp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateAppInput{}
+	}
+
+	output := &CreateAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateAppRequest{Request: req, Input: input, Copy: c.CreateAppRequest}
+}
+
 const opCreateReplicationJob = "CreateReplicationJob"
 
 // CreateReplicationJobRequest is a API request type for the CreateReplicationJob API operation.
@@ -31,10 +82,9 @@ func (r CreateReplicationJobRequest) Send() (*CreateReplicationJobOutput, error)
 // CreateReplicationJobRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The CreateReplicationJob API is used to create a ReplicationJob to replicate
-// a server on AWS. Call this API to first create a ReplicationJob, which will
-// then schedule periodic ReplicationRuns to replicate your server to AWS. Each
-// ReplicationRun will result in the creation of an AWS AMI.
+// Creates a replication job. The replication job schedules periodic replication
+// runs to replicate your server to AWS. Each replication run creates an Amazon
+// Machine Image (AMI).
 //
 //    // Example sending a request using the CreateReplicationJobRequest method.
 //    req := client.CreateReplicationJobRequest(params)
@@ -62,6 +112,158 @@ func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) Crea
 	return CreateReplicationJobRequest{Request: req, Input: input, Copy: c.CreateReplicationJobRequest}
 }
 
+const opDeleteApp = "DeleteApp"
+
+// DeleteAppRequest is a API request type for the DeleteApp API operation.
+type DeleteAppRequest struct {
+	*aws.Request
+	Input *DeleteAppInput
+	Copy  func(*DeleteAppInput) DeleteAppRequest
+}
+
+// Send marshals and sends the DeleteApp API request.
+func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAppOutput), nil
+}
+
+// DeleteAppRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Deletes an existing application. Optionally deletes the launched stack associated
+// with the application and all AWS SMS replication jobs for servers in the
+// application.
+//
+//    // Example sending a request using the DeleteAppRequest method.
+//    req := client.DeleteAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteApp
+func (c *SMS) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
+	op := &aws.Operation{
+		Name:       opDeleteApp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteAppInput{}
+	}
+
+	output := &DeleteAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteAppRequest{Request: req, Input: input, Copy: c.DeleteAppRequest}
+}
+
+const opDeleteAppLaunchConfiguration = "DeleteAppLaunchConfiguration"
+
+// DeleteAppLaunchConfigurationRequest is a API request type for the DeleteAppLaunchConfiguration API operation.
+type DeleteAppLaunchConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteAppLaunchConfigurationInput
+	Copy  func(*DeleteAppLaunchConfigurationInput) DeleteAppLaunchConfigurationRequest
+}
+
+// Send marshals and sends the DeleteAppLaunchConfiguration API request.
+func (r DeleteAppLaunchConfigurationRequest) Send() (*DeleteAppLaunchConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAppLaunchConfigurationOutput), nil
+}
+
+// DeleteAppLaunchConfigurationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Deletes existing launch configuration for an application.
+//
+//    // Example sending a request using the DeleteAppLaunchConfigurationRequest method.
+//    req := client.DeleteAppLaunchConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppLaunchConfiguration
+func (c *SMS) DeleteAppLaunchConfigurationRequest(input *DeleteAppLaunchConfigurationInput) DeleteAppLaunchConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteAppLaunchConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteAppLaunchConfigurationInput{}
+	}
+
+	output := &DeleteAppLaunchConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAppLaunchConfigurationRequest}
+}
+
+const opDeleteAppReplicationConfiguration = "DeleteAppReplicationConfiguration"
+
+// DeleteAppReplicationConfigurationRequest is a API request type for the DeleteAppReplicationConfiguration API operation.
+type DeleteAppReplicationConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteAppReplicationConfigurationInput
+	Copy  func(*DeleteAppReplicationConfigurationInput) DeleteAppReplicationConfigurationRequest
+}
+
+// Send marshals and sends the DeleteAppReplicationConfiguration API request.
+func (r DeleteAppReplicationConfigurationRequest) Send() (*DeleteAppReplicationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAppReplicationConfigurationOutput), nil
+}
+
+// DeleteAppReplicationConfigurationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Deletes existing replication configuration for an application.
+//
+//    // Example sending a request using the DeleteAppReplicationConfigurationRequest method.
+//    req := client.DeleteAppReplicationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppReplicationConfiguration
+func (c *SMS) DeleteAppReplicationConfigurationRequest(input *DeleteAppReplicationConfigurationInput) DeleteAppReplicationConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteAppReplicationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteAppReplicationConfigurationInput{}
+	}
+
+	output := &DeleteAppReplicationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteAppReplicationConfigurationRequest}
+}
+
 const opDeleteReplicationJob = "DeleteReplicationJob"
 
 // DeleteReplicationJobRequest is a API request type for the DeleteReplicationJob API operation.
@@ -84,10 +286,11 @@ func (r DeleteReplicationJobRequest) Send() (*DeleteReplicationJobOutput, error)
 // DeleteReplicationJobRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The DeleteReplicationJob API is used to delete a ReplicationJob, resulting
-// in no further ReplicationRuns. This will delete the contents of the S3 bucket
-// used to store SMS artifacts, but will not delete any AMIs created by the
-// SMS service.
+// Deletes the specified replication job.
+//
+// After you delete a replication job, there are no further replication runs.
+// AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts.
+// The AMIs created by the replication runs are not deleted.
 //
 //    // Example sending a request using the DeleteReplicationJobRequest method.
 //    req := client.DeleteReplicationJobRequest(params)
@@ -137,9 +340,7 @@ func (r DeleteServerCatalogRequest) Send() (*DeleteServerCatalogOutput, error) {
 // DeleteServerCatalogRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The DeleteServerCatalog API clears all servers from your server catalog.
-// This means that these servers will no longer be accessible to the Server
-// Migration Service.
+// Deletes all servers from your server catalog.
 //
 //    // Example sending a request using the DeleteServerCatalogRequest method.
 //    req := client.DeleteServerCatalogRequest(params)
@@ -189,8 +390,10 @@ func (r DisassociateConnectorRequest) Send() (*DisassociateConnectorOutput, erro
 // DisassociateConnectorRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The DisassociateConnector API will disassociate a connector from the Server
-// Migration Service, rendering it unavailable to support replication jobs.
+// Disassociates the specified connector from AWS SMS.
+//
+// After you disassociate a connector, it is no longer available to support
+// replication jobs.
 //
 //    // Example sending a request using the DisassociateConnectorRequest method.
 //    req := client.DisassociateConnectorRequest(params)
@@ -218,6 +421,258 @@ func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) Di
 	return DisassociateConnectorRequest{Request: req, Input: input, Copy: c.DisassociateConnectorRequest}
 }
 
+const opGenerateChangeSet = "GenerateChangeSet"
+
+// GenerateChangeSetRequest is a API request type for the GenerateChangeSet API operation.
+type GenerateChangeSetRequest struct {
+	*aws.Request
+	Input *GenerateChangeSetInput
+	Copy  func(*GenerateChangeSetInput) GenerateChangeSetRequest
+}
+
+// Send marshals and sends the GenerateChangeSet API request.
+func (r GenerateChangeSetRequest) Send() (*GenerateChangeSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateChangeSetOutput), nil
+}
+
+// GenerateChangeSetRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Generates a target change set for a currently launched stack and writes it
+// to an Amazon S3 object in the customer’s Amazon S3 bucket.
+//
+//    // Example sending a request using the GenerateChangeSetRequest method.
+//    req := client.GenerateChangeSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateChangeSet
+func (c *SMS) GenerateChangeSetRequest(input *GenerateChangeSetInput) GenerateChangeSetRequest {
+	op := &aws.Operation{
+		Name:       opGenerateChangeSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GenerateChangeSetInput{}
+	}
+
+	output := &GenerateChangeSetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GenerateChangeSetRequest{Request: req, Input: input, Copy: c.GenerateChangeSetRequest}
+}
+
+const opGenerateTemplate = "GenerateTemplate"
+
+// GenerateTemplateRequest is a API request type for the GenerateTemplate API operation.
+type GenerateTemplateRequest struct {
+	*aws.Request
+	Input *GenerateTemplateInput
+	Copy  func(*GenerateTemplateInput) GenerateTemplateRequest
+}
+
+// Send marshals and sends the GenerateTemplate API request.
+func (r GenerateTemplateRequest) Send() (*GenerateTemplateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateTemplateOutput), nil
+}
+
+// GenerateTemplateRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Generates an Amazon CloudFormation template based on the current launch configuration
+// and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+//
+//    // Example sending a request using the GenerateTemplateRequest method.
+//    req := client.GenerateTemplateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateTemplate
+func (c *SMS) GenerateTemplateRequest(input *GenerateTemplateInput) GenerateTemplateRequest {
+	op := &aws.Operation{
+		Name:       opGenerateTemplate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GenerateTemplateInput{}
+	}
+
+	output := &GenerateTemplateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GenerateTemplateRequest{Request: req, Input: input, Copy: c.GenerateTemplateRequest}
+}
+
+const opGetApp = "GetApp"
+
+// GetAppRequest is a API request type for the GetApp API operation.
+type GetAppRequest struct {
+	*aws.Request
+	Input *GetAppInput
+	Copy  func(*GetAppInput) GetAppRequest
+}
+
+// Send marshals and sends the GetApp API request.
+func (r GetAppRequest) Send() (*GetAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAppOutput), nil
+}
+
+// GetAppRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Retrieve information about an application.
+//
+//    // Example sending a request using the GetAppRequest method.
+//    req := client.GetAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetApp
+func (c *SMS) GetAppRequest(input *GetAppInput) GetAppRequest {
+	op := &aws.Operation{
+		Name:       opGetApp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetAppInput{}
+	}
+
+	output := &GetAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAppRequest{Request: req, Input: input, Copy: c.GetAppRequest}
+}
+
+const opGetAppLaunchConfiguration = "GetAppLaunchConfiguration"
+
+// GetAppLaunchConfigurationRequest is a API request type for the GetAppLaunchConfiguration API operation.
+type GetAppLaunchConfigurationRequest struct {
+	*aws.Request
+	Input *GetAppLaunchConfigurationInput
+	Copy  func(*GetAppLaunchConfigurationInput) GetAppLaunchConfigurationRequest
+}
+
+// Send marshals and sends the GetAppLaunchConfiguration API request.
+func (r GetAppLaunchConfigurationRequest) Send() (*GetAppLaunchConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAppLaunchConfigurationOutput), nil
+}
+
+// GetAppLaunchConfigurationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Retrieves the application launch configuration associated with an application.
+//
+//    // Example sending a request using the GetAppLaunchConfigurationRequest method.
+//    req := client.GetAppLaunchConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppLaunchConfiguration
+func (c *SMS) GetAppLaunchConfigurationRequest(input *GetAppLaunchConfigurationInput) GetAppLaunchConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opGetAppLaunchConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetAppLaunchConfigurationInput{}
+	}
+
+	output := &GetAppLaunchConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.GetAppLaunchConfigurationRequest}
+}
+
+const opGetAppReplicationConfiguration = "GetAppReplicationConfiguration"
+
+// GetAppReplicationConfigurationRequest is a API request type for the GetAppReplicationConfiguration API operation.
+type GetAppReplicationConfigurationRequest struct {
+	*aws.Request
+	Input *GetAppReplicationConfigurationInput
+	Copy  func(*GetAppReplicationConfigurationInput) GetAppReplicationConfigurationRequest
+}
+
+// Send marshals and sends the GetAppReplicationConfiguration API request.
+func (r GetAppReplicationConfigurationRequest) Send() (*GetAppReplicationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAppReplicationConfigurationOutput), nil
+}
+
+// GetAppReplicationConfigurationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Retrieves an application replication configuration associatd with an application.
+//
+//    // Example sending a request using the GetAppReplicationConfigurationRequest method.
+//    req := client.GetAppReplicationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppReplicationConfiguration
+func (c *SMS) GetAppReplicationConfigurationRequest(input *GetAppReplicationConfigurationInput) GetAppReplicationConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opGetAppReplicationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetAppReplicationConfigurationInput{}
+	}
+
+	output := &GetAppReplicationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.GetAppReplicationConfigurationRequest}
+}
+
 const opGetConnectors = "GetConnectors"
 
 // GetConnectorsRequest is a API request type for the GetConnectors API operation.
@@ -240,8 +695,7 @@ func (r GetConnectorsRequest) Send() (*GetConnectorsOutput, error) {
 // GetConnectorsRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The GetConnectors API returns a list of connectors that are registered with
-// the Server Migration Service.
+// Describes the connectors registered with the AWS SMS.
 //
 //    // Example sending a request using the GetConnectorsRequest method.
 //    req := client.GetConnectorsRequest(params)
@@ -343,9 +797,7 @@ func (r GetReplicationJobsRequest) Send() (*GetReplicationJobsOutput, error) {
 // GetReplicationJobsRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The GetReplicationJobs API will return all of your ReplicationJobs and their
-// details. This API returns a paginated list, that may be consecutively called
-// with nextToken to retrieve all ReplicationJobs.
+// Describes the specified replication job or all of your replication jobs.
 //
 //    // Example sending a request using the GetReplicationJobsRequest method.
 //    req := client.GetReplicationJobsRequest(params)
@@ -447,9 +899,7 @@ func (r GetReplicationRunsRequest) Send() (*GetReplicationRunsOutput, error) {
 // GetReplicationRunsRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The GetReplicationRuns API will return all ReplicationRuns for a given ReplicationJob.
-// This API returns a paginated list, that may be consecutively called with
-// nextToken to retrieve all ReplicationRuns for a ReplicationJob.
+// Describes the replication runs for the specified replication job.
 //
 //    // Example sending a request using the GetReplicationRunsRequest method.
 //    req := client.GetReplicationRunsRequest(params)
@@ -551,8 +1001,9 @@ func (r GetServersRequest) Send() (*GetServersOutput, error) {
 // GetServersRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The GetServers API returns a list of all servers in your server catalog.
-// For this call to succeed, you must previously have called ImportServerCatalog.
+// Describes the servers in your server catalog.
+//
+// Before you can describe your servers, you must import them using ImportServerCatalog.
 //
 //    // Example sending a request using the GetServersRequest method.
 //    req := client.GetServersRequest(params)
@@ -654,10 +1105,11 @@ func (r ImportServerCatalogRequest) Send() (*ImportServerCatalogOutput, error) {
 // ImportServerCatalogRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The ImportServerCatalog API is used to gather the complete list of on-premises
-// servers on your premises. This API call requires connectors to be installed
-// and monitoring all servers you would like imported. This API call returns
-// immediately, but may take some time to retrieve all of the servers.
+// Gathers a complete list of on-premises servers. Connectors must be installed
+// and monitoring all servers that you want to import.
+//
+// This call returns immediately, but might take additional time to retrieve
+// all the servers.
 //
 //    // Example sending a request using the ImportServerCatalogRequest method.
 //    req := client.ImportServerCatalogRequest(params)
@@ -685,6 +1137,256 @@ func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) Import
 	return ImportServerCatalogRequest{Request: req, Input: input, Copy: c.ImportServerCatalogRequest}
 }
 
+const opLaunchApp = "LaunchApp"
+
+// LaunchAppRequest is a API request type for the LaunchApp API operation.
+type LaunchAppRequest struct {
+	*aws.Request
+	Input *LaunchAppInput
+	Copy  func(*LaunchAppInput) LaunchAppRequest
+}
+
+// Send marshals and sends the LaunchApp API request.
+func (r LaunchAppRequest) Send() (*LaunchAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*LaunchAppOutput), nil
+}
+
+// LaunchAppRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Launches an application stack.
+//
+//    // Example sending a request using the LaunchAppRequest method.
+//    req := client.LaunchAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/LaunchApp
+func (c *SMS) LaunchAppRequest(input *LaunchAppInput) LaunchAppRequest {
+	op := &aws.Operation{
+		Name:       opLaunchApp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &LaunchAppInput{}
+	}
+
+	output := &LaunchAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return LaunchAppRequest{Request: req, Input: input, Copy: c.LaunchAppRequest}
+}
+
+const opListApps = "ListApps"
+
+// ListAppsRequest is a API request type for the ListApps API operation.
+type ListAppsRequest struct {
+	*aws.Request
+	Input *ListAppsInput
+	Copy  func(*ListAppsInput) ListAppsRequest
+}
+
+// Send marshals and sends the ListApps API request.
+func (r ListAppsRequest) Send() (*ListAppsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAppsOutput), nil
+}
+
+// ListAppsRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Returns a list of summaries for all applications.
+//
+//    // Example sending a request using the ListAppsRequest method.
+//    req := client.ListAppsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ListApps
+func (c *SMS) ListAppsRequest(input *ListAppsInput) ListAppsRequest {
+	op := &aws.Operation{
+		Name:       opListApps,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListAppsInput{}
+	}
+
+	output := &ListAppsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListAppsRequest{Request: req, Input: input, Copy: c.ListAppsRequest}
+}
+
+const opPutAppLaunchConfiguration = "PutAppLaunchConfiguration"
+
+// PutAppLaunchConfigurationRequest is a API request type for the PutAppLaunchConfiguration API operation.
+type PutAppLaunchConfigurationRequest struct {
+	*aws.Request
+	Input *PutAppLaunchConfigurationInput
+	Copy  func(*PutAppLaunchConfigurationInput) PutAppLaunchConfigurationRequest
+}
+
+// Send marshals and sends the PutAppLaunchConfiguration API request.
+func (r PutAppLaunchConfigurationRequest) Send() (*PutAppLaunchConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutAppLaunchConfigurationOutput), nil
+}
+
+// PutAppLaunchConfigurationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Creates a launch configuration for an application.
+//
+//    // Example sending a request using the PutAppLaunchConfigurationRequest method.
+//    req := client.PutAppLaunchConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppLaunchConfiguration
+func (c *SMS) PutAppLaunchConfigurationRequest(input *PutAppLaunchConfigurationInput) PutAppLaunchConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opPutAppLaunchConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutAppLaunchConfigurationInput{}
+	}
+
+	output := &PutAppLaunchConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutAppLaunchConfigurationRequest{Request: req, Input: input, Copy: c.PutAppLaunchConfigurationRequest}
+}
+
+const opPutAppReplicationConfiguration = "PutAppReplicationConfiguration"
+
+// PutAppReplicationConfigurationRequest is a API request type for the PutAppReplicationConfiguration API operation.
+type PutAppReplicationConfigurationRequest struct {
+	*aws.Request
+	Input *PutAppReplicationConfigurationInput
+	Copy  func(*PutAppReplicationConfigurationInput) PutAppReplicationConfigurationRequest
+}
+
+// Send marshals and sends the PutAppReplicationConfiguration API request.
+func (r PutAppReplicationConfigurationRequest) Send() (*PutAppReplicationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutAppReplicationConfigurationOutput), nil
+}
+
+// PutAppReplicationConfigurationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Creates or updates a replication configuration for an application.
+//
+//    // Example sending a request using the PutAppReplicationConfigurationRequest method.
+//    req := client.PutAppReplicationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppReplicationConfiguration
+func (c *SMS) PutAppReplicationConfigurationRequest(input *PutAppReplicationConfigurationInput) PutAppReplicationConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opPutAppReplicationConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutAppReplicationConfigurationInput{}
+	}
+
+	output := &PutAppReplicationConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutAppReplicationConfigurationRequest{Request: req, Input: input, Copy: c.PutAppReplicationConfigurationRequest}
+}
+
+const opStartAppReplication = "StartAppReplication"
+
+// StartAppReplicationRequest is a API request type for the StartAppReplication API operation.
+type StartAppReplicationRequest struct {
+	*aws.Request
+	Input *StartAppReplicationInput
+	Copy  func(*StartAppReplicationInput) StartAppReplicationRequest
+}
+
+// Send marshals and sends the StartAppReplication API request.
+func (r StartAppReplicationRequest) Send() (*StartAppReplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartAppReplicationOutput), nil
+}
+
+// StartAppReplicationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Starts replicating an application.
+//
+//    // Example sending a request using the StartAppReplicationRequest method.
+//    req := client.StartAppReplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartAppReplication
+func (c *SMS) StartAppReplicationRequest(input *StartAppReplicationInput) StartAppReplicationRequest {
+	op := &aws.Operation{
+		Name:       opStartAppReplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartAppReplicationInput{}
+	}
+
+	output := &StartAppReplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartAppReplicationRequest{Request: req, Input: input, Copy: c.StartAppReplicationRequest}
+}
+
 const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 
 // StartOnDemandReplicationRunRequest is a API request type for the StartOnDemandReplicationRun API operation.
@@ -707,11 +1409,12 @@ func (r StartOnDemandReplicationRunRequest) Send() (*StartOnDemandReplicationRun
 // StartOnDemandReplicationRunRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The StartOnDemandReplicationRun API is used to start a ReplicationRun on
-// demand (in addition to those that are scheduled based on your frequency).
-// This ReplicationRun will start immediately. StartOnDemandReplicationRun is
-// subject to limits on how many on demand ReplicationRuns you may call per
-// 24-hour period.
+// Starts an on-demand replication run for the specified replication job. This
+// replication run starts immediately. This replication run is in addition to
+// the ones already scheduled.
+//
+// There is a limit on the number of on-demand replications runs you can request
+// in a 24-hour period.
 //
 //    // Example sending a request using the StartOnDemandReplicationRunRequest method.
 //    req := client.StartOnDemandReplicationRunRequest(params)
@@ -739,6 +1442,156 @@ func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplication
 	return StartOnDemandReplicationRunRequest{Request: req, Input: input, Copy: c.StartOnDemandReplicationRunRequest}
 }
 
+const opStopAppReplication = "StopAppReplication"
+
+// StopAppReplicationRequest is a API request type for the StopAppReplication API operation.
+type StopAppReplicationRequest struct {
+	*aws.Request
+	Input *StopAppReplicationInput
+	Copy  func(*StopAppReplicationInput) StopAppReplicationRequest
+}
+
+// Send marshals and sends the StopAppReplication API request.
+func (r StopAppReplicationRequest) Send() (*StopAppReplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopAppReplicationOutput), nil
+}
+
+// StopAppReplicationRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Stops replicating an application.
+//
+//    // Example sending a request using the StopAppReplicationRequest method.
+//    req := client.StopAppReplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StopAppReplication
+func (c *SMS) StopAppReplicationRequest(input *StopAppReplicationInput) StopAppReplicationRequest {
+	op := &aws.Operation{
+		Name:       opStopAppReplication,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopAppReplicationInput{}
+	}
+
+	output := &StopAppReplicationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopAppReplicationRequest{Request: req, Input: input, Copy: c.StopAppReplicationRequest}
+}
+
+const opTerminateApp = "TerminateApp"
+
+// TerminateAppRequest is a API request type for the TerminateApp API operation.
+type TerminateAppRequest struct {
+	*aws.Request
+	Input *TerminateAppInput
+	Copy  func(*TerminateAppInput) TerminateAppRequest
+}
+
+// Send marshals and sends the TerminateApp API request.
+func (r TerminateAppRequest) Send() (*TerminateAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateAppOutput), nil
+}
+
+// TerminateAppRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Terminates the stack for an application.
+//
+//    // Example sending a request using the TerminateAppRequest method.
+//    req := client.TerminateAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/TerminateApp
+func (c *SMS) TerminateAppRequest(input *TerminateAppInput) TerminateAppRequest {
+	op := &aws.Operation{
+		Name:       opTerminateApp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TerminateAppInput{}
+	}
+
+	output := &TerminateAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TerminateAppRequest{Request: req, Input: input, Copy: c.TerminateAppRequest}
+}
+
+const opUpdateApp = "UpdateApp"
+
+// UpdateAppRequest is a API request type for the UpdateApp API operation.
+type UpdateAppRequest struct {
+	*aws.Request
+	Input *UpdateAppInput
+	Copy  func(*UpdateAppInput) UpdateAppRequest
+}
+
+// Send marshals and sends the UpdateApp API request.
+func (r UpdateAppRequest) Send() (*UpdateAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAppOutput), nil
+}
+
+// UpdateAppRequest returns a request value for making API operation for
+// AWS Server Migration Service.
+//
+// Updates an application.
+//
+//    // Example sending a request using the UpdateAppRequest method.
+//    req := client.UpdateAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateApp
+func (c *SMS) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
+	op := &aws.Operation{
+		Name:       opUpdateApp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateAppInput{}
+	}
+
+	output := &UpdateAppOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateAppRequest{Request: req, Input: input, Copy: c.UpdateAppRequest}
+}
+
 const opUpdateReplicationJob = "UpdateReplicationJob"
 
 // UpdateReplicationJobRequest is a API request type for the UpdateReplicationJob API operation.
@@ -761,9 +1614,7 @@ func (r UpdateReplicationJobRequest) Send() (*UpdateReplicationJobOutput, error)
 // UpdateReplicationJobRequest returns a request value for making API operation for
 // AWS Server Migration Service.
 //
-// The UpdateReplicationJob API is used to change the settings of your existing
-// ReplicationJob created using CreateReplicationJob. Calling this API will
-// affect the next scheduled ReplicationRun.
+// Updates the specified settings for the specified replication job.
 //
 //    // Example sending a request using the UpdateReplicationJobRequest method.
 //    req := client.UpdateReplicationJobRequest(params)
@@ -791,39 +1642,103 @@ func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) Upda
 	return UpdateReplicationJobRequest{Request: req, Input: input, Copy: c.UpdateReplicationJobRequest}
 }
 
-// Object representing a Connector
+// Information about the application.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/AppSummary
+type AppSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Unique ID of the application.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// Time of creation of this application.
+	CreationTime *time.Time `locationName:"creationTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Description of the application.
+	Description *string `locationName:"description" type:"string"`
+
+	// Timestamp of the application's creation.
+	LastModified *time.Time `locationName:"lastModified" type:"timestamp" timestampFormat:"unix"`
+
+	// Timestamp of the application's most recent successful replication.
+	LatestReplicationTime *time.Time `locationName:"latestReplicationTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Details about the latest launch of the application.
+	LaunchDetails *LaunchDetails `locationName:"launchDetails" type:"structure"`
+
+	// Launch status of the application.
+	LaunchStatus AppLaunchStatus `locationName:"launchStatus" type:"string" enum:"true"`
+
+	// A message related to the launch status of the application.
+	LaunchStatusMessage *string `locationName:"launchStatusMessage" type:"string"`
+
+	// Name of the application.
+	Name *string `locationName:"name" type:"string"`
+
+	// Replication status of the application.
+	ReplicationStatus AppReplicationStatus `locationName:"replicationStatus" type:"string" enum:"true"`
+
+	// A message related to the replication status of the application.
+	ReplicationStatusMessage *string `locationName:"replicationStatusMessage" type:"string"`
+
+	// Name of the service role in the customer's account used by AWS SMS.
+	RoleName *string `locationName:"roleName" type:"string"`
+
+	// Status of the application.
+	Status AppStatus `locationName:"status" type:"string" enum:"true"`
+
+	// A message related to the status of the application
+	StatusMessage *string `locationName:"statusMessage" type:"string"`
+
+	// Number of server groups present in the application.
+	TotalServerGroups *int64 `locationName:"totalServerGroups" type:"integer"`
+
+	// Number of servers present in the application.
+	TotalServers *int64 `locationName:"totalServers" type:"integer"`
+}
+
+// String returns the string representation
+func (s AppSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AppSummary) GoString() string {
+	return s.String()
+}
+
+// Represents a connector.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Connector
 type Connector struct {
 	_ struct{} `type:"structure"`
 
-	// Timestamp of an operation
+	// The time the connector was associated.
 	AssociatedOn *time.Time `locationName:"associatedOn" type:"timestamp" timestampFormat:"unix"`
 
-	// List of Connector Capabilities
-	CapabilityList []ConnectorCapability `locationName:"capabilityList" locationNameList:"item" type:"list"`
+	// The capabilities of the connector.
+	CapabilityList []ConnectorCapability `locationName:"capabilityList" type:"list"`
 
-	// Unique Identifier for Connector
+	// The identifier of the connector.
 	ConnectorId *string `locationName:"connectorId" type:"string"`
 
-	// Internet Protocol (IP) Address
+	// The IP address of the connector.
 	IpAddress *string `locationName:"ipAddress" type:"string"`
 
-	// Hardware (MAC) address
+	// The MAC address of the connector.
 	MacAddress *string `locationName:"macAddress" type:"string"`
 
-	// Status of on-premises Connector
+	// The status of the connector.
 	Status ConnectorStatus `locationName:"status" type:"string" enum:"true"`
 
-	// Connector version string
+	// The connector version.
 	Version *string `locationName:"version" type:"string"`
 
-	// Unique Identifier for VM Manager
+	// The identifier of the VM manager.
 	VmManagerId *string `locationName:"vmManagerId" type:"string"`
 
-	// VM Manager Name
+	// The name of the VM manager.
 	VmManagerName *string `locationName:"vmManagerName" type:"string"`
 
-	// VM Management Product
+	// The VM management product.
 	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string" enum:"true"`
 }
 
@@ -837,32 +1752,119 @@ func (s Connector) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateAppRequest
+type CreateAppInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique, case-sensitive identifier you provide to ensure idempotency of
+	// application creation.
+	ClientToken *string `locationName:"clientToken" type:"string"`
+
+	// Description of the new application
+	Description *string `locationName:"description" type:"string"`
+
+	// Name of the new application.
+	Name *string `locationName:"name" type:"string"`
+
+	// Name of service role in customer's account to be used by AWS SMS.
+	RoleName *string `locationName:"roleName" type:"string"`
+
+	// List of server groups to include in the application.
+	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
+
+	// List of tags to be associated with the application.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateAppInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateAppInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateAppResponse
+type CreateAppOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Summary description of the application.
+	AppSummary *AppSummary `locationName:"appSummary" type:"structure"`
+
+	// List of server groups included in the application.
+	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
+
+	// List of taags associated with the application.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateAppOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateAppOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJobRequest
 type CreateReplicationJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for a Replication Job/Run.
+	// The description of the replication job.
 	Description *string `locationName:"description" type:"string"`
 
-	// Interval between Replication Runs. This value is specified in hours, and
-	// represents the time between consecutive Replication Runs.
-	//
-	// Frequency is a required field
-	Frequency *int64 `locationName:"frequency" type:"integer" required:"true"`
+	// When true, the replication job produces encrypted AMIs. See also KmsKeyId
+	// below.
+	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
-	// The license type to be used for the Amazon Machine Image (AMI) created after
-	// a successful ReplicationRun.
+	// The time between consecutive replication runs, in hours.
+	Frequency *int64 `locationName:"frequency" type:"integer"`
+
+	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of
+	// the following:
+	//
+	//    * KMS key ID
+	//
+	//    * KMS key alias
+	//
+	//    * ARN referring to KMS key ID
+	//
+	//    * ARN referring to KMS key alias
+	//
+	// If encrypted is true but a KMS key id is not specified, the customer's default
+	// KMS key for EBS is used.
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
+
+	// The license type to be used for the AMI created by a successful replication
+	// run.
 	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
-	// Name of service role in customer's account to be used by SMS service.
+	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
+	// once the maximum number is reached and a new AMI is created.
+	NumberOfRecentAmisToKeep *int64 `locationName:"numberOfRecentAmisToKeep" type:"integer"`
+
+	// The name of the IAM role to be used by the AWS SMS.
 	RoleName *string `locationName:"roleName" type:"string"`
 
-	// Timestamp of an operation
+	RunOnce *bool `locationName:"runOnce" type:"boolean"`
+
+	// The seed replication time.
 	//
 	// SeedReplicationTime is a required field
 	SeedReplicationTime *time.Time `locationName:"seedReplicationTime" type:"timestamp" timestampFormat:"unix" required:"true"`
 
-	// Unique Identifier for a server
+	// The identifier of the server.
 	//
 	// ServerId is a required field
 	ServerId *string `locationName:"serverId" type:"string" required:"true"`
@@ -881,10 +1883,6 @@ func (s CreateReplicationJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationJobInput"}
-
-	if s.Frequency == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Frequency"))
-	}
 
 	if s.SeedReplicationTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SeedReplicationTime"))
@@ -906,7 +1904,7 @@ type CreateReplicationJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// The unique identifier for a Replication Job.
+	// The unique identifier of the replication job.
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
 }
 
@@ -925,11 +1923,139 @@ func (s CreateReplicationJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppRequest
+type DeleteAppInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application to delete.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// While deleting the application, stop all replication jobs corresponding to
+	// the servers in the application.
+	ForceStopAppReplication *bool `locationName:"forceStopAppReplication" type:"boolean"`
+
+	// While deleting the application, terminate the stack corresponding to the
+	// application.
+	ForceTerminateApp *bool `locationName:"forceTerminateApp" type:"boolean"`
+}
+
+// String returns the string representation
+func (s DeleteAppInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAppInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppLaunchConfigurationRequest
+type DeleteAppLaunchConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application associated with the launch configuration.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteAppLaunchConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAppLaunchConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppLaunchConfigurationResponse
+type DeleteAppLaunchConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteAppLaunchConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAppLaunchConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAppLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppResponse
+type DeleteAppOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteAppOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAppOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppReplicationConfigurationRequest
+type DeleteAppReplicationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application associated with the replication configuration.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteAppReplicationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAppReplicationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteAppReplicationConfigurationResponse
+type DeleteAppReplicationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteAppReplicationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAppReplicationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAppReplicationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJobRequest
 type DeleteReplicationJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for a Replication Job.
+	// The identifier of the replication job.
 	//
 	// ReplicationJobId is a required field
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
@@ -1022,7 +2148,7 @@ func (s DeleteServerCatalogOutput) SDKResponseMetadata() aws.Response {
 type DisassociateConnectorInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Identifier for Connector
+	// The identifier of the connector.
 	//
 	// ConnectorId is a required field
 	ConnectorId *string `locationName:"connectorId" type:"string" required:"true"`
@@ -1074,15 +2200,250 @@ func (s DisassociateConnectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateChangeSetRequest
+type GenerateChangeSetInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application associated with the change set.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// Format for the change set.
+	ChangesetFormat OutputFormat `locationName:"changesetFormat" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GenerateChangeSetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GenerateChangeSetInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateChangeSetResponse
+type GenerateChangeSetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Location of the Amazon S3 object.
+	S3Location *S3Location `locationName:"s3Location" type:"structure"`
+}
+
+// String returns the string representation
+func (s GenerateChangeSetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GenerateChangeSetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateChangeSetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateTemplateRequest
+type GenerateTemplateInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application associated with the Amazon CloudFormation template.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// Format for generating the Amazon CloudFormation template.
+	TemplateFormat OutputFormat `locationName:"templateFormat" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GenerateTemplateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GenerateTemplateInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GenerateTemplateResponse
+type GenerateTemplateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Location of the Amazon S3 object.
+	S3Location *S3Location `locationName:"s3Location" type:"structure"`
+}
+
+// String returns the string representation
+func (s GenerateTemplateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GenerateTemplateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GenerateTemplateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppRequest
+type GetAppInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application whose information is being retrieved.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s GetAppInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppLaunchConfigurationRequest
+type GetAppLaunchConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application launch configuration.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s GetAppLaunchConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppLaunchConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppLaunchConfigurationResponse
+type GetAppLaunchConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// ID of the application associated with the launch configuration.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// Name of the service role in the customer's account that Amazon CloudFormation
+	// uses to launch the application.
+	RoleName *string `locationName:"roleName" type:"string"`
+
+	// List of launch configurations for server groups in this application.
+	ServerGroupLaunchConfigurations []ServerGroupLaunchConfiguration `locationName:"serverGroupLaunchConfigurations" type:"list"`
+}
+
+// String returns the string representation
+func (s GetAppLaunchConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppLaunchConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAppLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppResponse
+type GetAppOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the application.
+	AppSummary *AppSummary `locationName:"appSummary" type:"structure"`
+
+	// List of server groups belonging to the application.
+	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
+
+	// List of tags associated with the application.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s GetAppOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppReplicationConfigurationRequest
+type GetAppReplicationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application associated with the replication configuration.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s GetAppReplicationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppReplicationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetAppReplicationConfigurationResponse
+type GetAppReplicationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Replication configurations associated with server groups in this application.
+	ServerGroupReplicationConfigurations []ServerGroupReplicationConfiguration `locationName:"serverGroupReplicationConfigurations" type:"list"`
+}
+
+// String returns the string representation
+func (s GetAppReplicationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAppReplicationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAppReplicationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectorsRequest
 type GetConnectorsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results to return in one API call. If left empty, this
-	// will default to 50.
+	// The maximum number of results to return in a single call. The default value
+	// is 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// Pagination token to pass as input to API call
+	// The token for the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -1102,10 +2463,11 @@ type GetConnectorsOutput struct {
 
 	responseMetadata aws.Response
 
-	// List of connectors
-	ConnectorList []Connector `locationName:"connectorList" locationNameList:"item" type:"list"`
+	// Information about the registered connectors.
+	ConnectorList []Connector `locationName:"connectorList" type:"list"`
 
-	// Pagination token to pass as input to API call
+	// The token required to retrieve the next set of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -1128,14 +2490,15 @@ func (s GetConnectorsOutput) SDKResponseMetadata() aws.Response {
 type GetReplicationJobsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results to return in one API call. If left empty, this
-	// will default to 50.
+	// The maximum number of results to return in a single call. The default value
+	// is 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// Pagination token to pass as input to API call
+	// The token for the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The unique identifier for a Replication Job.
+	// The identifier of the replication job.
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
 }
 
@@ -1155,11 +2518,12 @@ type GetReplicationJobsOutput struct {
 
 	responseMetadata aws.Response
 
-	// Pagination token to pass as input to API call
+	// The token required to retrieve the next set of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// List of Replication Jobs
-	ReplicationJobList []ReplicationJob `locationName:"replicationJobList" locationNameList:"item" type:"list"`
+	// Information about the replication jobs.
+	ReplicationJobList []ReplicationJob `locationName:"replicationJobList" type:"list"`
 }
 
 // String returns the string representation
@@ -1181,14 +2545,15 @@ func (s GetReplicationJobsOutput) SDKResponseMetadata() aws.Response {
 type GetReplicationRunsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results to return in one API call. If left empty, this
-	// will default to 50.
+	// The maximum number of results to return in a single call. The default value
+	// is 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// Pagination token to pass as input to API call
+	// The token for the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The unique identifier for a Replication Job.
+	// The identifier of the replication job.
 	//
 	// ReplicationJobId is a required field
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
@@ -1224,14 +2589,15 @@ type GetReplicationRunsOutput struct {
 
 	responseMetadata aws.Response
 
-	// Pagination token to pass as input to API call
+	// The token required to retrieve the next set of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// Object representing a Replication Job
+	// Information about the replication job.
 	ReplicationJob *ReplicationJob `locationName:"replicationJob" type:"structure"`
 
-	// List of Replication Runs
-	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" locationNameList:"item" type:"list"`
+	// Information about the replication runs.
+	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" type:"list"`
 }
 
 // String returns the string representation
@@ -1253,12 +2619,16 @@ func (s GetReplicationRunsOutput) SDKResponseMetadata() aws.Response {
 type GetServersInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of results to return in one API call. If left empty, this
-	// will default to 50.
+	// The maximum number of results to return in a single call. The default value
+	// is 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// Pagination token to pass as input to API call
+	// The token for the next set of results.
 	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// List of VmServerAddress objects
+	VmServerAddressList []VmServerAddress `locationName:"vmServerAddressList" type:"list"`
 }
 
 // String returns the string representation
@@ -1277,17 +2647,18 @@ type GetServersOutput struct {
 
 	responseMetadata aws.Response
 
-	// Timestamp of an operation
+	// The time when the server was last modified.
 	LastModifiedOn *time.Time `locationName:"lastModifiedOn" type:"timestamp" timestampFormat:"unix"`
 
-	// Pagination token to pass as input to API call
+	// The token required to retrieve the next set of results. This value is null
+	// when there are no more results to return.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// Status of Server catalog
+	// The status of the server catalog.
 	ServerCatalogStatus ServerCatalogStatus `locationName:"serverCatalogStatus" type:"string" enum:"true"`
 
-	// List of servers from catalog
-	ServerList []Server `locationName:"serverList" locationNameList:"item" type:"list"`
+	// Information about the servers.
+	ServerList []Server `locationName:"serverList" type:"list"`
 }
 
 // String returns the string representation
@@ -1342,53 +2713,286 @@ func (s ImportServerCatalogOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Object representing a Replication Job
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/LaunchAppRequest
+type LaunchAppInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application to launch.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchAppInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchAppInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/LaunchAppResponse
+type LaunchAppOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s LaunchAppOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchAppOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s LaunchAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Details about the latest launch of an application.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/LaunchDetails
+type LaunchDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Latest time this application was launched successfully.
+	LatestLaunchTime *time.Time `locationName:"latestLaunchTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Identifier of the latest stack launched for this application.
+	StackId *string `locationName:"stackId" type:"string"`
+
+	// Name of the latest stack launched for this application.
+	StackName *string `locationName:"stackName" type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchDetails) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ListAppsRequest
+type ListAppsInput struct {
+	_ struct{} `type:"structure"`
+
+	AppIds []string `locationName:"appIds" type:"list"`
+
+	// The maximum number of results to return in a single call. The default value
+	// is 50. To retrieve the remaining results, make another call with the returned
+	// NextToken value.
+	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+
+	// The token for the next set of results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListAppsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAppsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ListAppsResponse
+type ListAppsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of application summaries.
+	Apps []AppSummary `locationName:"apps" type:"list"`
+
+	// The token required to retrieve the next set of results. This value is null
+	// when there are no more results to return.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListAppsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListAppsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListAppsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppLaunchConfigurationRequest
+type PutAppLaunchConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application associated with the launch configuration.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// Name of service role in the customer's account that Amazon CloudFormation
+	// uses to launch the application.
+	RoleName *string `locationName:"roleName" type:"string"`
+
+	// Launch configurations for server groups in the application.
+	ServerGroupLaunchConfigurations []ServerGroupLaunchConfiguration `locationName:"serverGroupLaunchConfigurations" type:"list"`
+}
+
+// String returns the string representation
+func (s PutAppLaunchConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutAppLaunchConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppLaunchConfigurationResponse
+type PutAppLaunchConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutAppLaunchConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutAppLaunchConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutAppLaunchConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppReplicationConfigurationRequest
+type PutAppReplicationConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application tassociated with the replication configuration.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// Replication configurations for server groups in the application.
+	ServerGroupReplicationConfigurations []ServerGroupReplicationConfiguration `locationName:"serverGroupReplicationConfigurations" type:"list"`
+}
+
+// String returns the string representation
+func (s PutAppReplicationConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutAppReplicationConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/PutAppReplicationConfigurationResponse
+type PutAppReplicationConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutAppReplicationConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutAppReplicationConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutAppReplicationConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Represents a replication job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationJob
 type ReplicationJob struct {
 	_ struct{} `type:"structure"`
 
-	// The description for a Replication Job/Run.
+	// The description of the replication job.
 	Description *string `locationName:"description" type:"string"`
 
-	// Interval between Replication Runs. This value is specified in hours, and
-	// represents the time between consecutive Replication Runs.
+	// Whether the replication job should produce encrypted AMIs or not. See also
+	// KmsKeyId below.
+	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// The time between consecutive replication runs, in hours.
 	Frequency *int64 `locationName:"frequency" type:"integer"`
 
-	// The AMI id for the image resulting from a Replication Run.
+	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of
+	// the following:
+	//
+	//    * KMS key ID
+	//
+	//    * KMS key alias
+	//
+	//    * ARN referring to KMS key ID
+	//
+	//    * ARN referring to KMS key alias
+	//
+	// If encrypted is true but a KMS key id is not specified, the customer's default
+	// KMS key for EBS is used.
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
+
+	// The ID of the latest Amazon Machine Image (AMI).
 	LatestAmiId *string `locationName:"latestAmiId" type:"string"`
 
-	// The license type to be used for the Amazon Machine Image (AMI) created after
-	// a successful ReplicationRun.
+	// The license type to be used for the AMI created by a successful replication
+	// run.
 	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
-	// Timestamp of an operation
+	// The start time of the next replication run.
 	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The unique identifier for a Replication Job.
+	// Number of recent AMIs to keep in the customer's account for a replication
+	// job. By default the value is set to zero, meaning that all AMIs are kept.
+	NumberOfRecentAmisToKeep *int64 `locationName:"numberOfRecentAmisToKeep" type:"integer"`
+
+	// The identifier of the replication job.
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
 
-	// List of Replication Runs
-	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" locationNameList:"item" type:"list"`
+	// Information about the replication runs.
+	ReplicationRunList []ReplicationRun `locationName:"replicationRunList" type:"list"`
 
-	// Name of service role in customer's account to be used by SMS service.
+	// The name of the IAM role to be used by the Server Migration Service.
 	RoleName *string `locationName:"roleName" type:"string"`
 
-	// Timestamp of an operation
+	RunOnce *bool `locationName:"runOnce" type:"boolean"`
+
+	// The seed replication time.
 	SeedReplicationTime *time.Time `locationName:"seedReplicationTime" type:"timestamp" timestampFormat:"unix"`
 
-	// Unique Identifier for a server
+	// The identifier of the server.
 	ServerId *string `locationName:"serverId" type:"string"`
 
-	// Type of server.
+	// The type of server.
 	ServerType ServerType `locationName:"serverType" type:"string" enum:"true"`
 
-	// Current state of Replication Job
+	// The state of the replication job.
 	State ReplicationJobState `locationName:"state" type:"string" enum:"true"`
 
-	// String describing current status of Replication Job
+	// The description of the current status of the replication job.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
-	// Object representing a VM server
+	// Information about the VM server.
 	VmServer *VmServer `locationName:"vmServer" type:"structure"`
 }
 
@@ -1402,33 +3006,55 @@ func (s ReplicationJob) GoString() string {
 	return s.String()
 }
 
-// Object representing a Replication Run
+// Represents a replication run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationRun
 type ReplicationRun struct {
 	_ struct{} `type:"structure"`
 
-	// The AMI id for the image resulting from a Replication Run.
+	// The identifier of the Amazon Machine Image (AMI) from the replication run.
 	AmiId *string `locationName:"amiId" type:"string"`
 
-	// Timestamp of an operation
+	// The completion time of the last replication run.
 	CompletedTime *time.Time `locationName:"completedTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The description for a Replication Job/Run.
+	// The description of the replication run.
 	Description *string `locationName:"description" type:"string"`
 
-	// The unique identifier for a Replication Run.
+	// Whether the replication run should produce encrypted AMI or not. See also
+	// KmsKeyId below.
+	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of
+	// the following:
+	//
+	//    * KMS key ID
+	//
+	//    * KMS key alias
+	//
+	//    * ARN referring to KMS key ID
+	//
+	//    * ARN referring to KMS key alias
+	//
+	// If encrypted is true but a KMS key id is not specified, the customer's default
+	// KMS key for EBS is used.
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
+
+	// The identifier of the replication run.
 	ReplicationRunId *string `locationName:"replicationRunId" type:"string"`
 
-	// Timestamp of an operation
+	// The start time of the next replication run.
 	ScheduledStartTime *time.Time `locationName:"scheduledStartTime" type:"timestamp" timestampFormat:"unix"`
 
-	// Current state of Replication Run
+	// Details of the current stage of the replication run.
+	StageDetails *ReplicationRunStageDetails `locationName:"stageDetails" type:"structure"`
+
+	// The state of the replication run.
 	State ReplicationRunState `locationName:"state" type:"string" enum:"true"`
 
-	// String describing current status of Replication Run
+	// The description of the current status of the replication job.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
-	// Type of Replication Run
+	// The type of replication run.
 	Type ReplicationRunType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -1442,24 +3068,68 @@ func (s ReplicationRun) GoString() string {
 	return s.String()
 }
 
-// Object representing a server
+// Details of the current stage of a replication run.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationRunStageDetails
+type ReplicationRunStageDetails struct {
+	_ struct{} `type:"structure"`
+
+	// String describing the current stage of a replication run.
+	Stage *string `locationName:"stage" type:"string"`
+
+	// String describing the progress of the current stage of a replication run.
+	StageProgress *string `locationName:"stageProgress" type:"string"`
+}
+
+// String returns the string representation
+func (s ReplicationRunStageDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReplicationRunStageDetails) GoString() string {
+	return s.String()
+}
+
+// Location of the Amazon S3 object in the customer's account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/S3Location
+type S3Location struct {
+	_ struct{} `type:"structure"`
+
+	// Amazon S3 bucket name.
+	Bucket *string `locationName:"bucket" type:"string"`
+
+	// Amazon S3 bucket key.
+	Key *string `locationName:"key" type:"string"`
+}
+
+// String returns the string representation
+func (s S3Location) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s S3Location) GoString() string {
+	return s.String()
+}
+
+// Represents a server.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Server
 type Server struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for a Replication Job.
+	// The identifier of the replication job.
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string"`
 
-	// An indicator of the Replication Job being deleted or failed.
+	// Indicates whether the replication job is deleted or failed.
 	ReplicationJobTerminated *bool `locationName:"replicationJobTerminated" type:"boolean"`
 
-	// Unique Identifier for a server
+	// The identifier of the server.
 	ServerId *string `locationName:"serverId" type:"string"`
 
-	// Type of server.
+	// The type of server.
 	ServerType ServerType `locationName:"serverType" type:"string" enum:"true"`
 
-	// Object representing a VM server
+	// Information about the VM server.
 	VmServer *VmServer `locationName:"vmServer" type:"structure"`
 }
 
@@ -1473,14 +3143,240 @@ func (s Server) GoString() string {
 	return s.String()
 }
 
+// A logical grouping of servers.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerGroup
+type ServerGroup struct {
+	_ struct{} `type:"structure"`
+
+	// Name of a server group.
+	Name *string `locationName:"name" type:"string"`
+
+	// Identifier of a server group.
+	ServerGroupId *string `locationName:"serverGroupId" type:"string"`
+
+	// List of servers belonging to a server group.
+	ServerList []Server `locationName:"serverList" type:"list"`
+}
+
+// String returns the string representation
+func (s ServerGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerGroup) GoString() string {
+	return s.String()
+}
+
+// Launch configuration for a server group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerGroupLaunchConfiguration
+type ServerGroupLaunchConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Launch order of servers in the server group.
+	LaunchOrder *int64 `locationName:"launchOrder" type:"integer"`
+
+	// Identifier of the server group the launch configuration is associated with.
+	ServerGroupId *string `locationName:"serverGroupId" type:"string"`
+
+	// Launch configuration for servers in the server group.
+	ServerLaunchConfigurations []ServerLaunchConfiguration `locationName:"serverLaunchConfigurations" type:"list"`
+}
+
+// String returns the string representation
+func (s ServerGroupLaunchConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerGroupLaunchConfiguration) GoString() string {
+	return s.String()
+}
+
+// Replication configuration for a server group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerGroupReplicationConfiguration
+type ServerGroupReplicationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier of the server group this replication configuration is associated
+	// with.
+	ServerGroupId *string `locationName:"serverGroupId" type:"string"`
+
+	// Replication configuration for servers in the server group.
+	ServerReplicationConfigurations []ServerReplicationConfiguration `locationName:"serverReplicationConfigurations" type:"list"`
+}
+
+// String returns the string representation
+func (s ServerGroupReplicationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerGroupReplicationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Launch configuration for a server.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerLaunchConfiguration
+type ServerLaunchConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// If true, a publicly accessible IP address is created when launching the server.
+	AssociatePublicIpAddress *bool `locationName:"associatePublicIpAddress" type:"boolean"`
+
+	// Name of the EC2 SSH Key to be used for connecting to the launched server.
+	Ec2KeyName *string `locationName:"ec2KeyName" type:"string"`
+
+	// Instance type to be used for launching the server.
+	InstanceType *string `locationName:"instanceType" type:"string"`
+
+	// Logical ID of the server in the Amazon CloudFormation template.
+	LogicalId *string `locationName:"logicalId" type:"string"`
+
+	// Identifier of the security group that applies to the launched server.
+	SecurityGroup *string `locationName:"securityGroup" type:"string"`
+
+	// Identifier of the server the launch configuration is associated with.
+	Server *Server `locationName:"server" type:"structure"`
+
+	// Identifier of the subnet the server should be launched into.
+	Subnet *string `locationName:"subnet" type:"string"`
+
+	// Location of the user-data script to be executed when launching the server.
+	UserData *UserData `locationName:"userData" type:"structure"`
+
+	// Identifier of the VPC the server should be launched into.
+	Vpc *string `locationName:"vpc" type:"string"`
+}
+
+// String returns the string representation
+func (s ServerLaunchConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerLaunchConfiguration) GoString() string {
+	return s.String()
+}
+
+// Replication configuration of a server.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerReplicationConfiguration
+type ServerReplicationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Identifier of the server this replication configuration is associated with.
+	Server *Server `locationName:"server" type:"structure"`
+
+	// Parameters for replicating the server.
+	ServerReplicationParameters *ServerReplicationParameters `locationName:"serverReplicationParameters" type:"structure"`
+}
+
+// String returns the string representation
+func (s ServerReplicationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerReplicationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Replication parameters for replicating a server.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ServerReplicationParameters
+type ServerReplicationParameters struct {
+	_ struct{} `type:"structure"`
+
+	// When true, the replication job produces encrypted AMIs. See also KmsKeyId
+	// below.
+	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// Frequency of creating replication jobs for the server.
+	Frequency *int64 `locationName:"frequency" type:"integer"`
+
+	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of
+	// the following:
+	//
+	// KMS key ID
+	//
+	//    * KMS key alias
+	//
+	//    * ARN referring to KMS key ID
+	//
+	//    * ARN referring to KMS key alias
+	//
+	//  If encrypted is true
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
+
+	// License type for creating a replication job for the server.
+	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
+
+	// Number of recent AMIs to keep when creating a replication job for this server.
+	NumberOfRecentAmisToKeep *int64 `locationName:"numberOfRecentAmisToKeep" type:"integer"`
+
+	RunOnce *bool `locationName:"runOnce" type:"boolean"`
+
+	// Seed time for creating a replication job for the server.
+	SeedTime *time.Time `locationName:"seedTime" type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s ServerReplicationParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServerReplicationParameters) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartAppReplicationRequest
+type StartAppReplicationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application to replicate.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s StartAppReplicationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartAppReplicationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartAppReplicationResponse
+type StartAppReplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StartAppReplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartAppReplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartAppReplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRunRequest
 type StartOnDemandReplicationRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for a Replication Job/Run.
+	// The description of the replication run.
 	Description *string `locationName:"description" type:"string"`
 
-	// The unique identifier for a Replication Job.
+	// The identifier of the replication job.
 	//
 	// ReplicationJobId is a required field
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
@@ -1516,7 +3412,7 @@ type StartOnDemandReplicationRunOutput struct {
 
 	responseMetadata aws.Response
 
-	// The unique identifier for a Replication Run.
+	// The identifier of the replication run.
 	ReplicationRunId *string `locationName:"replicationRunId" type:"string"`
 }
 
@@ -1535,30 +3431,217 @@ func (s StartOnDemandReplicationRunOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StopAppReplicationRequest
+type StopAppReplicationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application to stop replicating.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s StopAppReplicationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopAppReplicationInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StopAppReplicationResponse
+type StopAppReplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopAppReplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopAppReplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopAppReplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// A label that can be assigned to an application.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Tag
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// Tag key.
+	Key *string `locationName:"key" type:"string"`
+
+	// Tag value.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/TerminateAppRequest
+type TerminateAppInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application to terminate.
+	AppId *string `locationName:"appId" type:"string"`
+}
+
+// String returns the string representation
+func (s TerminateAppInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TerminateAppInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/TerminateAppResponse
+type TerminateAppOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TerminateAppOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TerminateAppOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TerminateAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateAppRequest
+type UpdateAppInput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the application to update.
+	AppId *string `locationName:"appId" type:"string"`
+
+	// New description of the application.
+	Description *string `locationName:"description" type:"string"`
+
+	// New name of the application.
+	Name *string `locationName:"name" type:"string"`
+
+	// Name of the service role in the customer's account used by AWS SMS.
+	RoleName *string `locationName:"roleName" type:"string"`
+
+	// List of server groups in the application to update.
+	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
+
+	// List of tags to associate with the application.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateAppInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAppInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateAppResponse
+type UpdateAppOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Summary description of the application.
+	AppSummary *AppSummary `locationName:"appSummary" type:"structure"`
+
+	// List of updated server groups in the application.
+	ServerGroups []ServerGroup `locationName:"serverGroups" type:"list"`
+
+	// List of tags associated with the application.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateAppOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAppOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAppOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJobRequest
 type UpdateReplicationJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description for a Replication Job/Run.
+	// The description of the replication job.
 	Description *string `locationName:"description" type:"string"`
 
-	// Interval between Replication Runs. This value is specified in hours, and
-	// represents the time between consecutive Replication Runs.
+	// When true, the replication job produces encrypted AMIs . See also KmsKeyId
+	// below.
+	Encrypted *bool `locationName:"encrypted" type:"boolean"`
+
+	// The time between consecutive replication runs, in hours.
 	Frequency *int64 `locationName:"frequency" type:"integer"`
 
-	// The license type to be used for the Amazon Machine Image (AMI) created after
-	// a successful ReplicationRun.
+	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of
+	// the following:
+	//
+	// KMS key ID
+	//
+	//    * KMS key alias
+	//
+	//    * ARN referring to KMS key ID
+	//
+	//    * ARN referring to KMS key alias
+	//
+	//  If encrypted is true
+	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
+
+	// The license type to be used for the AMI created by a successful replication
+	// run.
 	LicenseType LicenseType `locationName:"licenseType" type:"string" enum:"true"`
 
-	// Timestamp of an operation
+	// The start time of the next replication run.
 	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The unique identifier for a Replication Job.
+	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
+	// once the maximum number is reached and a new AMI is created.
+	NumberOfRecentAmisToKeep *int64 `locationName:"numberOfRecentAmisToKeep" type:"integer"`
+
+	// The identifier of the replication job.
 	//
 	// ReplicationJobId is a required field
 	ReplicationJobId *string `locationName:"replicationJobId" type:"string" required:"true"`
 
-	// Name of service role in customer's account to be used by SMS service.
+	// The name of the IAM role to be used by AWS SMS.
 	RoleName *string `locationName:"roleName" type:"string"`
 }
 
@@ -1608,24 +3691,44 @@ func (s UpdateReplicationJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Object representing a VM server
+// A script that runs on first launch of an Amazon EC2 instance. Used for configuring
+// the server during launch.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UserData
+type UserData struct {
+	_ struct{} `type:"structure"`
+
+	// Amazon S3 location of the user-data script.
+	S3Location *S3Location `locationName:"s3Location" type:"structure"`
+}
+
+// String returns the string representation
+func (s UserData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserData) GoString() string {
+	return s.String()
+}
+
+// Represents a VM server.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/VmServer
 type VmServer struct {
 	_ struct{} `type:"structure"`
 
-	// VM Manager Name
+	// The name of the VM manager.
 	VmManagerName *string `locationName:"vmManagerName" type:"string"`
 
-	// VM Management Product
+	// The type of VM management product.
 	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string" enum:"true"`
 
-	// Name of Virtual Machine
+	// The name of the VM.
 	VmName *string `locationName:"vmName" type:"string"`
 
-	// Path to VM
+	// The VM folder path in the vCenter Server virtual machine inventory tree.
 	VmPath *string `locationName:"vmPath" type:"string"`
 
-	// Object representing a server's location
+	// Information about the VM server location.
 	VmServerAddress *VmServerAddress `locationName:"vmServerAddress" type:"structure"`
 }
 
@@ -1639,15 +3742,15 @@ func (s VmServer) GoString() string {
 	return s.String()
 }
 
-// Object representing a server's location
+// Represents a VM server location.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/VmServerAddress
 type VmServerAddress struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Identifier for a VM
+	// The identifier of the VM.
 	VmId *string `locationName:"vmId" type:"string"`
 
-	// Unique Identifier for VM Manager
+	// The identifier of the VM manager.
 	VmManagerId *string `locationName:"vmManagerId" type:"string"`
 }
 
@@ -1661,12 +3764,94 @@ func (s VmServerAddress) GoString() string {
 	return s.String()
 }
 
-// Capabilities for a Connector
+type AppLaunchStatus string
+
+// Enum values for AppLaunchStatus
+const (
+	AppLaunchStatusReadyForConfiguration   AppLaunchStatus = "READY_FOR_CONFIGURATION"
+	AppLaunchStatusConfigurationInProgress AppLaunchStatus = "CONFIGURATION_IN_PROGRESS"
+	AppLaunchStatusConfigurationInvalid    AppLaunchStatus = "CONFIGURATION_INVALID"
+	AppLaunchStatusReadyForLaunch          AppLaunchStatus = "READY_FOR_LAUNCH"
+	AppLaunchStatusValidationInProgress    AppLaunchStatus = "VALIDATION_IN_PROGRESS"
+	AppLaunchStatusLaunchPending           AppLaunchStatus = "LAUNCH_PENDING"
+	AppLaunchStatusLaunchInProgress        AppLaunchStatus = "LAUNCH_IN_PROGRESS"
+	AppLaunchStatusLaunched                AppLaunchStatus = "LAUNCHED"
+	AppLaunchStatusDeltaLaunchInProgress   AppLaunchStatus = "DELTA_LAUNCH_IN_PROGRESS"
+	AppLaunchStatusDeltaLaunchFailed       AppLaunchStatus = "DELTA_LAUNCH_FAILED"
+	AppLaunchStatusLaunchFailed            AppLaunchStatus = "LAUNCH_FAILED"
+	AppLaunchStatusTerminateInProgress     AppLaunchStatus = "TERMINATE_IN_PROGRESS"
+	AppLaunchStatusTerminateFailed         AppLaunchStatus = "TERMINATE_FAILED"
+	AppLaunchStatusTerminated              AppLaunchStatus = "TERMINATED"
+)
+
+func (enum AppLaunchStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppLaunchStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AppReplicationStatus string
+
+// Enum values for AppReplicationStatus
+const (
+	AppReplicationStatusReadyForConfiguration      AppReplicationStatus = "READY_FOR_CONFIGURATION"
+	AppReplicationStatusConfigurationInProgress    AppReplicationStatus = "CONFIGURATION_IN_PROGRESS"
+	AppReplicationStatusConfigurationInvalid       AppReplicationStatus = "CONFIGURATION_INVALID"
+	AppReplicationStatusReadyForReplication        AppReplicationStatus = "READY_FOR_REPLICATION"
+	AppReplicationStatusValidationInProgress       AppReplicationStatus = "VALIDATION_IN_PROGRESS"
+	AppReplicationStatusReplicationPending         AppReplicationStatus = "REPLICATION_PENDING"
+	AppReplicationStatusReplicationInProgress      AppReplicationStatus = "REPLICATION_IN_PROGRESS"
+	AppReplicationStatusReplicated                 AppReplicationStatus = "REPLICATED"
+	AppReplicationStatusDeltaReplicationInProgress AppReplicationStatus = "DELTA_REPLICATION_IN_PROGRESS"
+	AppReplicationStatusDeltaReplicated            AppReplicationStatus = "DELTA_REPLICATED"
+	AppReplicationStatusDeltaReplicationFailed     AppReplicationStatus = "DELTA_REPLICATION_FAILED"
+	AppReplicationStatusReplicationFailed          AppReplicationStatus = "REPLICATION_FAILED"
+	AppReplicationStatusReplicationStopping        AppReplicationStatus = "REPLICATION_STOPPING"
+	AppReplicationStatusReplicationStopFailed      AppReplicationStatus = "REPLICATION_STOP_FAILED"
+	AppReplicationStatusReplicationStopped         AppReplicationStatus = "REPLICATION_STOPPED"
+)
+
+func (enum AppReplicationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppReplicationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AppStatus string
+
+// Enum values for AppStatus
+const (
+	AppStatusCreating     AppStatus = "CREATING"
+	AppStatusActive       AppStatus = "ACTIVE"
+	AppStatusUpdating     AppStatus = "UPDATING"
+	AppStatusDeleting     AppStatus = "DELETING"
+	AppStatusDeleted      AppStatus = "DELETED"
+	AppStatusDeleteFailed AppStatus = "DELETE_FAILED"
+)
+
+func (enum AppStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConnectorCapability string
 
 // Enum values for ConnectorCapability
 const (
-	ConnectorCapabilityVsphere ConnectorCapability = "VSPHERE"
+	ConnectorCapabilityVsphere          ConnectorCapability = "VSPHERE"
+	ConnectorCapabilityScvmm            ConnectorCapability = "SCVMM"
+	ConnectorCapabilityHypervManager    ConnectorCapability = "HYPERV-MANAGER"
+	ConnectorCapabilitySnapshotBatching ConnectorCapability = "SNAPSHOT_BATCHING"
 )
 
 func (enum ConnectorCapability) MarshalValue() (string, error) {
@@ -1678,7 +3863,6 @@ func (enum ConnectorCapability) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Status of on-premises Connector
 type ConnectorStatus string
 
 // Enum values for ConnectorStatus
@@ -1696,8 +3880,6 @@ func (enum ConnectorStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The license type to be used for the Amazon Machine Image (AMI) created after
-// a successful ReplicationRun.
 type LicenseType string
 
 // Enum values for LicenseType
@@ -1715,16 +3897,35 @@ func (enum LicenseType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Current state of Replication Job
+type OutputFormat string
+
+// Enum values for OutputFormat
+const (
+	OutputFormatJson OutputFormat = "JSON"
+	OutputFormatYaml OutputFormat = "YAML"
+)
+
+func (enum OutputFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReplicationJobState string
 
 // Enum values for ReplicationJobState
 const (
-	ReplicationJobStatePending  ReplicationJobState = "PENDING"
-	ReplicationJobStateActive   ReplicationJobState = "ACTIVE"
-	ReplicationJobStateFailed   ReplicationJobState = "FAILED"
-	ReplicationJobStateDeleting ReplicationJobState = "DELETING"
-	ReplicationJobStateDeleted  ReplicationJobState = "DELETED"
+	ReplicationJobStatePending         ReplicationJobState = "PENDING"
+	ReplicationJobStateActive          ReplicationJobState = "ACTIVE"
+	ReplicationJobStateFailed          ReplicationJobState = "FAILED"
+	ReplicationJobStateDeleting        ReplicationJobState = "DELETING"
+	ReplicationJobStateDeleted         ReplicationJobState = "DELETED"
+	ReplicationJobStateCompleted       ReplicationJobState = "COMPLETED"
+	ReplicationJobStatePausedOnFailure ReplicationJobState = "PAUSED_ON_FAILURE"
+	ReplicationJobStateFailing         ReplicationJobState = "FAILING"
 )
 
 func (enum ReplicationJobState) MarshalValue() (string, error) {
@@ -1736,7 +3937,6 @@ func (enum ReplicationJobState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Current state of Replication Run
 type ReplicationRunState string
 
 // Enum values for ReplicationRunState
@@ -1759,7 +3959,6 @@ func (enum ReplicationRunState) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Type of Replication Run
 type ReplicationRunType string
 
 // Enum values for ReplicationRunType
@@ -1777,7 +3976,6 @@ func (enum ReplicationRunType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Status of Server catalog
 type ServerCatalogStatus string
 
 // Enum values for ServerCatalogStatus
@@ -1798,7 +3996,6 @@ func (enum ServerCatalogStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Type of server.
 type ServerType string
 
 // Enum values for ServerType
@@ -1815,12 +4012,13 @@ func (enum ServerType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// VM Management Product
 type VmManagerType string
 
 // Enum values for VmManagerType
 const (
-	VmManagerTypeVsphere VmManagerType = "VSPHERE"
+	VmManagerTypeVsphere       VmManagerType = "VSPHERE"
+	VmManagerTypeScvmm         VmManagerType = "SCVMM"
+	VmManagerTypeHypervManager VmManagerType = "HYPERV-MANAGER"
 )
 
 func (enum VmManagerType) MarshalValue() (string, error) {

@@ -34,7 +34,10 @@ func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
 // Amazon Transcribe Service.
 //
 // Creates a new custom vocabulary that you can use to change the way Amazon
-// Transcribe handles transcription of an audio file.
+// Transcribe handles transcription of an audio file. Note that vocabularies
+// for en-AU, en-UK, and fr-CA languages that are in preview are not available.
+// In the console, the vocabulary section will be greyed-out and SDK will return
+// error message.
 //
 //    // Example sending a request using the CreateVocabularyRequest method.
 //    req := client.CreateVocabularyRequest(params)
@@ -60,6 +63,59 @@ func (c *TranscribeService) CreateVocabularyRequest(input *CreateVocabularyInput
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateVocabularyRequest{Request: req, Input: input, Copy: c.CreateVocabularyRequest}
+}
+
+const opDeleteTranscriptionJob = "DeleteTranscriptionJob"
+
+// DeleteTranscriptionJobRequest is a API request type for the DeleteTranscriptionJob API operation.
+type DeleteTranscriptionJobRequest struct {
+	*aws.Request
+	Input *DeleteTranscriptionJobInput
+	Copy  func(*DeleteTranscriptionJobInput) DeleteTranscriptionJobRequest
+}
+
+// Send marshals and sends the DeleteTranscriptionJob API request.
+func (r DeleteTranscriptionJobRequest) Send() (*DeleteTranscriptionJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTranscriptionJobOutput), nil
+}
+
+// DeleteTranscriptionJobRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Deletes a previously submitted transcription job along with any other generated
+// results such as the transcription, models, and so on.
+//
+//    // Example sending a request using the DeleteTranscriptionJobRequest method.
+//    req := client.DeleteTranscriptionJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJob
+func (c *TranscribeService) DeleteTranscriptionJobRequest(input *DeleteTranscriptionJobInput) DeleteTranscriptionJobRequest {
+	op := &aws.Operation{
+		Name:       opDeleteTranscriptionJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteTranscriptionJobInput{}
+	}
+
+	output := &DeleteTranscriptionJobOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteTranscriptionJobRequest{Request: req, Input: input, Copy: c.DeleteTranscriptionJobRequest}
 }
 
 const opDeleteVocabulary = "DeleteVocabulary"
@@ -189,7 +245,9 @@ func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
 // GetVocabularyRequest returns a request value for making API operation for
 // Amazon Transcribe Service.
 //
-// Gets information about a vocabulary.
+// Gets information about a vocabulary. Note that vocabularies for en-AU, en-UK,
+// and fr-CA languages that are in preview are not available. In the console,
+// the vocabulary section will be greyed-out and SDK will return error message.
 //
 //    // Example sending a request using the GetVocabularyRequest method.
 //    req := client.GetVocabularyRequest(params)
@@ -444,7 +502,9 @@ func (r StartTranscriptionJobRequest) Send() (*StartTranscriptionJobOutput, erro
 // StartTranscriptionJobRequest returns a request value for making API operation for
 // Amazon Transcribe Service.
 //
-// Starts an asynchronous job to transcribe speech to text.
+// Starts an asynchronous job to transcribe speech to text. Note that en-AU,
+// en-UK, and fr-CA languages are in preview and are only available to whitelisted
+// customers.
 //
 //    // Example sending a request using the StartTranscriptionJobRequest method.
 //    req := client.StartTranscriptionJobRequest(params)
@@ -496,7 +556,9 @@ func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
 //
 // Updates an existing vocabulary with new values. The UpdateVocabulary operation
 // overwrites all of the existing information with the values that you provide
-// in the request.
+// in the request. Note that vocabularies for en-AU, en-UK, and fr-CA languages
+// that are in preview are not available. In the console, the vocabulary section
+// will be greyed-out and SDK will return error message.
 //
 //    // Example sending a request using the UpdateVocabularyRequest method.
 //    req := client.UpdateVocabularyRequest(params)
@@ -615,6 +677,65 @@ func (s CreateVocabularyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVocabularyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJobRequest
+type DeleteTranscriptionJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the transcription job to be deleted.
+	//
+	// TranscriptionJobName is a required field
+	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteTranscriptionJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTranscriptionJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteTranscriptionJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTranscriptionJobInput"}
+
+	if s.TranscriptionJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TranscriptionJobName"))
+	}
+	if s.TranscriptionJobName != nil && len(*s.TranscriptionJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TranscriptionJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJobOutput
+type DeleteTranscriptionJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteTranscriptionJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTranscriptionJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTranscriptionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -1129,8 +1250,8 @@ type StartTranscriptionJobInput struct {
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *Settings `type:"structure"`
 
-	// The name of the job. You can't use the strings "." or ".." in the job name.
-	// The name must be unique within an AWS account.
+	// The name of the job. Note that you can't use the strings "." or ".." by themselves
+	// as the job name. The name must also be unique within an AWS account.
 	//
 	// TranscriptionJobName is a required field
 	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
@@ -1236,7 +1357,8 @@ func (s Transcript) GoString() string {
 }
 
 // Describes an asynchronous transcription job that was created with the StartTranscriptionJob
-// operation.
+// operation. Note that en-AU, en-UK, and fr-CA languages are in preview and
+// are only available to whitelisted customers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob
 type TranscriptionJob struct {
 	_ struct{} `type:"structure"`
@@ -1289,7 +1411,9 @@ func (s TranscriptionJob) GoString() string {
 	return s.String()
 }
 
-// Provides a summary of information about a transcription job.
+// Provides a summary of information about a transcription job. Note that en-AU,
+// en-UK, and fr-CA languages are in preview and are only available to whitelisted
+// customers.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary
 type TranscriptionJobSummary struct {
 	_ struct{} `type:"structure"`
@@ -1424,7 +1548,10 @@ func (s UpdateVocabularyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Provides information about a custom vocabulary.
+// Provides information about a custom vocabulary. Note that vocabularies for
+// en-AU, en-UK, and fr-CA languages that are in preview are not available.
+// In the console, the vocabulary section will be greyed-out and SDK will return
+// error message.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyInfo
 type VocabularyInfo struct {
 	_ struct{} `type:"structure"`
@@ -1459,6 +1586,12 @@ type LanguageCode string
 const (
 	LanguageCodeEnUs LanguageCode = "en-US"
 	LanguageCodeEsUs LanguageCode = "es-US"
+	LanguageCodeEnAu LanguageCode = "en-AU"
+	LanguageCodeFrCa LanguageCode = "fr-CA"
+	LanguageCodeEnGb LanguageCode = "en-GB"
+	LanguageCodeDeDe LanguageCode = "de-DE"
+	LanguageCodePtBr LanguageCode = "pt-BR"
+	LanguageCodeFrFr LanguageCode = "fr-FR"
 )
 
 func (enum LanguageCode) MarshalValue() (string, error) {

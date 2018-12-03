@@ -2096,6 +2096,7 @@ const (
 	LanguageCodeEnIn    LanguageCode = "en-IN"
 	LanguageCodeEnUs    LanguageCode = "en-US"
 	LanguageCodeEsEs    LanguageCode = "es-ES"
+	LanguageCodeEsMx    LanguageCode = "es-MX"
 	LanguageCodeEsUs    LanguageCode = "es-US"
 	LanguageCodeFrCa    LanguageCode = "fr-CA"
 	LanguageCodeFrFr    LanguageCode = "fr-FR"
@@ -2256,6 +2257,9 @@ const (
 	VoiceIdSeoyeon   VoiceId = "Seoyeon"
 	VoiceIdAditi     VoiceId = "Aditi"
 	VoiceIdZhiyu     VoiceId = "Zhiyu"
+	VoiceIdBianca    VoiceId = "Bianca"
+	VoiceIdLucia     VoiceId = "Lucia"
+	VoiceIdMia       VoiceId = "Mia"
 )
 
 func (enum VoiceId) MarshalValue() (string, error) {

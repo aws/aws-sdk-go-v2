@@ -390,11 +390,11 @@ func (r CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscr
 // CreateNotificationSubscriptionRequest returns a request value for making API operation for
 // Amazon WorkDocs.
 //
-// Configure WorkDocs to use Amazon SNS notifications.
+// Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives
+// a confirmation message, and must confirm the subscription.
 //
-// The endpoint receives a confirmation message, and must confirm the subscription.
-// For more information, see Confirm the Subscription (http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.confirm)
-// in the Amazon Simple Notification Service Developer Guide.
+// For more information, see Subscribe to Notifications (http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html)
+// in the Amazon WorkDocs Developer Guide.
 //
 //    // Example sending a request using the CreateNotificationSubscriptionRequest method.
 //    req := client.CreateNotificationSubscriptionRequest(params)
@@ -1272,7 +1272,8 @@ func (r DescribeGroupsRequest) Send() (*DescribeGroupsOutput, error) {
 // DescribeGroupsRequest returns a request value for making API operation for
 // Amazon WorkDocs.
 //
-// Describes the groups specified by query.
+// Describes the groups specified by the query. Groups are defined by the underlying
+// Active Directory.
 //
 //    // Example sending a request using the DescribeGroupsRequest method.
 //    req := client.DescribeGroupsRequest(params)
@@ -1426,6 +1427,11 @@ func (r DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
 // RootFolder is the root of user's files and folders and RecycleBin is the
 // root of recycled items. This is not a valid action for SigV4 (administrative
 // API) clients.
+//
+// This action requires an authentication token. To get an authentication token,
+// register an application with Amazon WorkDocs. For more information, see Authentication
+// and Access Control for User Applications (http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// in the Amazon WorkDocs Developer Guide.
 //
 //    // Example sending a request using the DescribeRootFoldersRequest method.
 //    req := client.DescribeRootFoldersRequest(params)
@@ -1871,6 +1877,57 @@ func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPath
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetFolderPathRequest{Request: req, Input: input, Copy: c.GetFolderPathRequest}
+}
+
+const opGetResources = "GetResources"
+
+// GetResourcesRequest is a API request type for the GetResources API operation.
+type GetResourcesRequest struct {
+	*aws.Request
+	Input *GetResourcesInput
+	Copy  func(*GetResourcesInput) GetResourcesRequest
+}
+
+// Send marshals and sends the GetResources API request.
+func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourcesOutput), nil
+}
+
+// GetResourcesRequest returns a request value for making API operation for
+// Amazon WorkDocs.
+//
+// Retrieves a collection of resources, including folders and documents. The
+// only CollectionType supported is SHARED_WITH_ME.
+//
+//    // Example sending a request using the GetResourcesRequest method.
+//    req := client.GetResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResources
+func (c *WorkDocs) GetResourcesRequest(input *GetResourcesInput) GetResourcesRequest {
+	op := &aws.Operation{
+		Name:       opGetResources,
+		HTTPMethod: "GET",
+		HTTPPath:   "/api/v1/resources",
+	}
+
+	if input == nil {
+		input = &GetResourcesInput{}
+	}
+
+	output := &GetResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetResourcesRequest{Request: req, Input: input, Copy: c.GetResourcesRequest}
 }
 
 const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
@@ -2466,6 +2523,12 @@ type Activity struct {
 	// The user who performed the action.
 	Initiator *UserMetadata `type:"structure"`
 
+	// Indicates whether an activity is indirect or direct. An indirect activity
+	// results from a direct activity performed on a parent resource. For example,
+	// sharing a parent folder (the direct activity) shares all of the subfolders
+	// and documents within the parent folder (the indirect activity).
+	IsIndirectActivity *bool `type:"boolean"`
+
 	// The ID of the organization.
 	OrganizationId *string `min:"1" type:"string"`
 
@@ -2511,6 +2574,12 @@ func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Initiator", v, metadata)
+	}
+	if s.IsIndirectActivity != nil {
+		v := *s.IsIndirectActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsIndirectActivity", protocol.BoolValue(v), metadata)
 	}
 	if s.OrganizationId != nil {
 		v := *s.OrganizationId
@@ -4644,6 +4713,10 @@ func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeActivitiesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies which activity types to include in the response. If this field
+	// is left empty, all activity types are returned.
+	ActivityTypes *string `location:"querystring" locationName:"activityTypes" min:"1" type:"string"`
+
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
@@ -4651,6 +4724,12 @@ type DescribeActivitiesInput struct {
 	// The timestamp that determines the end time of the activities. The response
 	// includes the activities performed before the specified timestamp.
 	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Includes indirect activities. An indirect activity results from a direct
+	// activity performed on a parent resource. For example, sharing a parent folder
+	// (the direct activity) shares all of the subfolders and documents within the
+	// parent folder (the indirect activity).
+	IncludeIndirectActivities *bool `location:"querystring" locationName:"includeIndirectActivities" type:"boolean"`
 
 	// The maximum number of items to return.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
@@ -4661,6 +4740,9 @@ type DescribeActivitiesInput struct {
 	// The ID of the organization. This is a mandatory parameter when using administrative
 	// API (SigV4) requests.
 	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
+
+	// The document or folder ID for which to describe activity types.
+	ResourceId *string `location:"querystring" locationName:"resourceId" min:"1" type:"string"`
 
 	// The timestamp that determines the starting time of the activities. The response
 	// includes the activities performed after the specified timestamp.
@@ -4685,6 +4767,9 @@ func (s DescribeActivitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivitiesInput"}
+	if s.ActivityTypes != nil && len(*s.ActivityTypes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityTypes", 1))
+	}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
@@ -4696,6 +4781,9 @@ func (s *DescribeActivitiesInput) Validate() error {
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
@@ -4717,11 +4805,23 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ActivityTypes != nil {
+		v := *s.ActivityTypes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "activityTypes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+	}
+	if s.IncludeIndirectActivities != nil {
+		v := *s.IncludeIndirectActivities
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "includeIndirectActivities", protocol.BoolValue(v), metadata)
 	}
 	if s.Limit != nil {
 		v := *s.Limit
@@ -4740,6 +4840,12 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "organizationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StartTime != nil {
 		v := *s.StartTime
@@ -7224,6 +7330,165 @@ func (s GetFolderPathOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesRequest
+type GetResourcesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon WorkDocs authentication token. Do not set this field when using
+	// administrative API actions, as in accessing the API operation using AWS credentials.
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+
+	// The collection type.
+	CollectionType ResourceCollectionType `location:"querystring" locationName:"collectionType" type:"string" enum:"true"`
+
+	// The maximum number of resources to return.
+	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
+
+	// The marker for the next set of results. This marker was received from a previous
+	// call.
+	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
+
+	// The user ID for the resource collection. This is a required field for accessing
+	// the API operation using IAM credentials.
+	UserId *string `location:"querystring" locationName:"userId" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetResourcesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourcesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetResourcesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
+	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+	if s.Marker != nil && len(*s.Marker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
+	}
+	if s.UserId != nil && len(*s.UserId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.AuthenticationToken != nil {
+		v := *s.AuthenticationToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CollectionType) > 0 {
+		v := s.CollectionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "collectionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Limit != nil {
+		v := *s.Limit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesResponse
+type GetResourcesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The documents in the specified collection.
+	Documents []DocumentMetadata `type:"list"`
+
+	// The folders in the specified folder.
+	Folders []FolderMetadata `type:"list"`
+
+	// The marker to use when requesting the next set of results. If there are no
+	// additional results, the string is empty.
+	Marker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetResourcesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourcesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Documents) > 0 {
+		v := s.Documents
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Documents", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Folders) > 0 {
+		v := s.Folders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Folders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Describes the metadata of a user group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GroupMetadata
 type GroupMetadata struct {
@@ -8066,6 +8331,9 @@ func (s SharePrincipal) MarshalFields(e protocol.FieldEncoder) error {
 type ShareResult struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the invited user.
+	InviteePrincipalId *string `min:"1" type:"string"`
+
 	// The ID of the principal.
 	PrincipalId *string `min:"1" type:"string"`
 
@@ -8094,6 +8362,12 @@ func (s ShareResult) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ShareResult) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InviteePrincipalId != nil {
+		v := *s.InviteePrincipalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InviteePrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PrincipalId != nil {
 		v := *s.PrincipalId
 
@@ -9064,6 +9338,8 @@ const (
 	ActivityTypeDocumentRenamed                        ActivityType = "DOCUMENT_RENAMED"
 	ActivityTypeDocumentVersionUploaded                ActivityType = "DOCUMENT_VERSION_UPLOADED"
 	ActivityTypeDocumentVersionDeleted                 ActivityType = "DOCUMENT_VERSION_DELETED"
+	ActivityTypeDocumentVersionViewed                  ActivityType = "DOCUMENT_VERSION_VIEWED"
+	ActivityTypeDocumentVersionDownloaded              ActivityType = "DOCUMENT_VERSION_DOWNLOADED"
 	ActivityTypeDocumentRecycled                       ActivityType = "DOCUMENT_RECYCLED"
 	ActivityTypeDocumentRestored                       ActivityType = "DOCUMENT_RESTORED"
 	ActivityTypeDocumentReverted                       ActivityType = "DOCUMENT_REVERTED"
@@ -9298,6 +9574,22 @@ func (enum PrincipalType) MarshalValue() (string, error) {
 }
 
 func (enum PrincipalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResourceCollectionType string
+
+// Enum values for ResourceCollectionType
+const (
+	ResourceCollectionTypeSharedWithMe ResourceCollectionType = "SHARED_WITH_ME"
+)
+
+func (enum ResourceCollectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceCollectionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

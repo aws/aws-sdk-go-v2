@@ -115,6 +115,56 @@ func (p *BatchGetTracesPager) CurrentPage() *BatchGetTracesOutput {
 	return p.Pager.CurrentPage().(*BatchGetTracesOutput)
 }
 
+const opCreateGroup = "CreateGroup"
+
+// CreateGroupRequest is a API request type for the CreateGroup API operation.
+type CreateGroupRequest struct {
+	*aws.Request
+	Input *CreateGroupInput
+	Copy  func(*CreateGroupInput) CreateGroupRequest
+}
+
+// Send marshals and sends the CreateGroup API request.
+func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGroupOutput), nil
+}
+
+// CreateGroupRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Creates a group resource with a name and a filter expression.
+//
+//    // Example sending a request using the CreateGroupRequest method.
+//    req := client.CreateGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroup
+func (c *XRay) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/CreateGroup",
+	}
+
+	if input == nil {
+		input = &CreateGroupInput{}
+	}
+
+	output := &CreateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
+}
+
 const opCreateSamplingRule = "CreateSamplingRule"
 
 // CreateSamplingRuleRequest is a API request type for the CreateSamplingRule API operation.
@@ -169,6 +219,56 @@ func (c *XRay) CreateSamplingRuleRequest(input *CreateSamplingRuleInput) CreateS
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateSamplingRuleRequest{Request: req, Input: input, Copy: c.CreateSamplingRuleRequest}
+}
+
+const opDeleteGroup = "DeleteGroup"
+
+// DeleteGroupRequest is a API request type for the DeleteGroup API operation.
+type DeleteGroupRequest struct {
+	*aws.Request
+	Input *DeleteGroupInput
+	Copy  func(*DeleteGroupInput) DeleteGroupRequest
+}
+
+// Send marshals and sends the DeleteGroup API request.
+func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGroupOutput), nil
+}
+
+// DeleteGroupRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Deletes a group resource.
+//
+//    // Example sending a request using the DeleteGroupRequest method.
+//    req := client.DeleteGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroup
+func (c *XRay) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/DeleteGroup",
+	}
+
+	if input == nil {
+		input = &DeleteGroupInput{}
+	}
+
+	output := &DeleteGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
 const opDeleteSamplingRule = "DeleteSamplingRule"
@@ -269,6 +369,106 @@ func (c *XRay) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) GetEn
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetEncryptionConfigRequest}
+}
+
+const opGetGroup = "GetGroup"
+
+// GetGroupRequest is a API request type for the GetGroup API operation.
+type GetGroupRequest struct {
+	*aws.Request
+	Input *GetGroupInput
+	Copy  func(*GetGroupInput) GetGroupRequest
+}
+
+// Send marshals and sends the GetGroup API request.
+func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupOutput), nil
+}
+
+// GetGroupRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Retrieves group resource details.
+//
+//    // Example sending a request using the GetGroupRequest method.
+//    req := client.GetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroup
+func (c *XRay) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
+	op := &aws.Operation{
+		Name:       opGetGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/GetGroup",
+	}
+
+	if input == nil {
+		input = &GetGroupInput{}
+	}
+
+	output := &GetGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
+}
+
+const opGetGroups = "GetGroups"
+
+// GetGroupsRequest is a API request type for the GetGroups API operation.
+type GetGroupsRequest struct {
+	*aws.Request
+	Input *GetGroupsInput
+	Copy  func(*GetGroupsInput) GetGroupsRequest
+}
+
+// Send marshals and sends the GetGroups API request.
+func (r GetGroupsRequest) Send() (*GetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGroupsOutput), nil
+}
+
+// GetGroupsRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Retrieves all active group details.
+//
+//    // Example sending a request using the GetGroupsRequest method.
+//    req := client.GetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroups
+func (c *XRay) GetGroupsRequest(input *GetGroupsInput) GetGroupsRequest {
+	op := &aws.Operation{
+		Name:       opGetGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/Groups",
+	}
+
+	if input == nil {
+		input = &GetGroupsInput{}
+	}
+
+	output := &GetGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetGroupsRequest{Request: req, Input: input, Copy: c.GetGroupsRequest}
 }
 
 const opGetSamplingRules = "GetSamplingRules"
@@ -942,6 +1142,56 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceSeg
 	return PutTraceSegmentsRequest{Request: req, Input: input, Copy: c.PutTraceSegmentsRequest}
 }
 
+const opUpdateGroup = "UpdateGroup"
+
+// UpdateGroupRequest is a API request type for the UpdateGroup API operation.
+type UpdateGroupRequest struct {
+	*aws.Request
+	Input *UpdateGroupInput
+	Copy  func(*UpdateGroupInput) UpdateGroupRequest
+}
+
+// Send marshals and sends the UpdateGroup API request.
+func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGroupOutput), nil
+}
+
+// UpdateGroupRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Updates a group resource.
+//
+//    // Example sending a request using the UpdateGroupRequest method.
+//    req := client.UpdateGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroup
+func (c *XRay) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/UpdateGroup",
+	}
+
+	if input == nil {
+		input = &UpdateGroupInput{}
+	}
+
+	output := &UpdateGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
+}
+
 const opUpdateSamplingRule = "UpdateSamplingRule"
 
 // UpdateSamplingRuleRequest is a API request type for the UpdateSamplingRule API operation.
@@ -1091,6 +1341,36 @@ func (s AnnotationValue) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StringValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A list of availability zones corresponding to the segments in a trace.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AvailabilityZoneDetail
+type AvailabilityZoneDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The name of a corresponding availability zone.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AvailabilityZoneDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AvailabilityZoneDetail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AvailabilityZoneDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1290,6 +1570,106 @@ func (s BatchGetTracesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupRequest
+type CreateGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The filter expression defining criteria by which to group traces.
+	FilterExpression *string `min:"1" type:"string"`
+
+	// The case-sensitive name of the new group. Default is a reserved name and
+	// names must be unique.
+	//
+	// GroupName is a required field
+	GroupName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
+	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
+	}
+
+	if s.GroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FilterExpression != nil {
+		v := *s.FilterExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FilterExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateGroupResult
+type CreateGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The group that was created. Contains the name of the group that was created,
+	// the ARN of the group that was generated based on the group name, and the
+	// filter expression that was assigned to the group.
+	Group *Group `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CreateSamplingRuleRequest
 type CreateSamplingRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -1374,6 +1754,88 @@ func (s CreateSamplingRuleOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SamplingRuleRecord", v, metadata)
 	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroupRequest
+type DeleteGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the group that was generated on creation.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The case-sensitive name of the group.
+	GroupName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupInput"}
+	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupARN != nil {
+		v := *s.GroupARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/DeleteGroupResult
+type DeleteGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -1657,6 +2119,185 @@ func (s EncryptionConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The root cause of a trace summary error.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCause
+type ErrorRootCause struct {
+	_ struct{} `type:"structure"`
+
+	// A list of services corresponding to an error. A service identifies a segment
+	// and it contains a name, account ID, type, and inferred flag.
+	Services []ErrorRootCauseService `type:"list"`
+}
+
+// String returns the string representation
+func (s ErrorRootCause) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ErrorRootCause) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorRootCause) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Services) > 0 {
+		v := s.Services
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Services", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// A collection of segments and corresponding subsegments associated to a trace
+// summary error.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCauseEntity
+type ErrorRootCauseEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The types and messages of the exceptions.
+	Exceptions []RootCauseException `type:"list"`
+
+	// The name of the entity.
+	Name *string `type:"string"`
+
+	// A flag that denotes a remote subsegment.
+	Remote *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ErrorRootCauseEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ErrorRootCauseEntity) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorRootCauseEntity) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Exceptions) > 0 {
+		v := s.Exceptions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Exceptions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Remote != nil {
+		v := *s.Remote
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Remote", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A collection of fields identifying the services in a trace summary error.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorRootCauseService
+type ErrorRootCauseService struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID associated to the service.
+	AccountId *string `type:"string"`
+
+	// The path of root cause entities found on the service.
+	EntityPath []ErrorRootCauseEntity `type:"list"`
+
+	// A Boolean value indicating if the service is inferred from the trace.
+	Inferred *bool `type:"boolean"`
+
+	// The service name.
+	Name *string `type:"string"`
+
+	// A collection of associated service names.
+	Names []string `type:"list"`
+
+	// The type associated to the service.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ErrorRootCauseService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ErrorRootCauseService) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorRootCauseService) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EntityPath) > 0 {
+		v := s.EntityPath
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "EntityPath", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Inferred != nil {
+		v := *s.Inferred
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Inferred", protocol.BoolValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Names) > 0 {
+		v := s.Names
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Names", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about requests that failed with a 4xx Client Error status code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorStatistics
 type ErrorStatistics struct {
@@ -1702,6 +2343,185 @@ func (s ErrorStatistics) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TotalCount", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The root cause information for a trace summary fault.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCause
+type FaultRootCause struct {
+	_ struct{} `type:"structure"`
+
+	// A list of corresponding services. A service identifies a segment and it contains
+	// a name, account ID, type, and inferred flag.
+	Services []FaultRootCauseService `type:"list"`
+}
+
+// String returns the string representation
+func (s FaultRootCause) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FaultRootCause) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FaultRootCause) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Services) > 0 {
+		v := s.Services
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Services", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// A collection of segments and corresponding subsegments associated to a trace
+// summary fault error.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCauseEntity
+type FaultRootCauseEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The types and messages of the exceptions.
+	Exceptions []RootCauseException `type:"list"`
+
+	// The name of the entity.
+	Name *string `type:"string"`
+
+	// A flag that denotes a remote subsegment.
+	Remote *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s FaultRootCauseEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FaultRootCauseEntity) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FaultRootCauseEntity) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Exceptions) > 0 {
+		v := s.Exceptions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Exceptions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Remote != nil {
+		v := *s.Remote
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Remote", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A collection of fields identifying the services in a trace summary fault.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultRootCauseService
+type FaultRootCauseService struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID associated to the service.
+	AccountId *string `type:"string"`
+
+	// The path of root cause entities found on the service.
+	EntityPath []FaultRootCauseEntity `type:"list"`
+
+	// A Boolean value indicating if the service is inferred from the trace.
+	Inferred *bool `type:"boolean"`
+
+	// The service name.
+	Name *string `type:"string"`
+
+	// A collection of associated service names.
+	Names []string `type:"list"`
+
+	// The type associated to the service.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s FaultRootCauseService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FaultRootCauseService) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FaultRootCauseService) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EntityPath) > 0 {
+		v := s.EntityPath
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "EntityPath", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Inferred != nil {
+		v := *s.Inferred
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Inferred", protocol.BoolValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Names) > 0 {
+		v := s.Names
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Names", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1799,6 +2619,192 @@ func (s GetEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "EncryptionConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupRequest
+type GetGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the group that was generated on creation.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The case-sensitive name of the group.
+	GroupName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
+	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupARN != nil {
+		v := *s.GroupARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupResult
+type GetGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The group that was requested. Contains the name of the group, the ARN of
+	// the group, and the filter expression that assigned to the group.
+	Group *Group `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsRequest
+type GetGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Pagination token. Not used.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupsInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsResult
+type GetGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The collection of all active groups.
+	Groups []GroupSummary `type:"list"`
+
+	// Pagination token. Not used.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2096,10 +3102,16 @@ func (s GetSamplingTargetsOutput) MarshalFields(e protocol.FieldEncoder) error {
 type GetServiceGraphInput struct {
 	_ struct{} `type:"structure"`
 
-	// The end of the time frame for which to generate a graph.
+	// The end of the timeframe for which to generate a graph.
 	//
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The ARN of a group to generate a graph based on.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The name of a group to generate a graph based on.
+	GroupName *string `min:"1" type:"string"`
 
 	// Pagination token. Not used.
 	NextToken *string `type:"string"`
@@ -2127,6 +3139,12 @@ func (s *GetServiceGraphInput) Validate() error {
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
+	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
+	}
 
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
@@ -2146,6 +3164,18 @@ func (s GetServiceGraphInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EndTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.GroupARN != nil {
+		v := *s.GroupARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
@@ -2167,6 +3197,11 @@ type GetServiceGraphOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
+
+	// A flag indicating whether the group's filter expression has been consistent,
+	// or if the returned service graph may show traces from an older version of
+	// the group's filter expression.
+	ContainsOldGroupVersions *bool `type:"boolean"`
 
 	// The end of the time frame for which the graph was generated.
 	EndTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -2199,6 +3234,12 @@ func (s GetServiceGraphOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetServiceGraphOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContainsOldGroupVersions != nil {
+		v := *s.ContainsOldGroupVersions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContainsOldGroupVersions", protocol.BoolValue(v), metadata)
+	}
 	if s.EndTime != nil {
 		v := *s.EndTime
 
@@ -2509,6 +3550,102 @@ func (s GetTraceSummariesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Details and metadata for a group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Group
+type Group struct {
+	_ struct{} `type:"structure"`
+
+	// The filter expression defining the parameters to include traces.
+	FilterExpression *string `type:"string"`
+
+	// The ARN of the group generated based on the GroupName.
+	GroupARN *string `type:"string"`
+
+	// The unique case-sensitive name of the group.
+	GroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Group) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Group) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Group) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FilterExpression != nil {
+		v := *s.FilterExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FilterExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupARN != nil {
+		v := *s.GroupARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details for a group without metadata.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GroupSummary
+type GroupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The filter expression defining the parameters to include traces.
+	FilterExpression *string `type:"string"`
+
+	// The ARN of the group generated based on the GroupName.
+	GroupARN *string `type:"string"`
+
+	// The unique case-sensitive name of the group.
+	GroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GroupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GroupSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FilterExpression != nil {
+		v := *s.FilterExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FilterExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupARN != nil {
+		v := *s.GroupARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An entry in a histogram for a statistic. A histogram maps the range of observed
 // values on the X axis, and the prevalence of each value on the Y axis.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/HistogramEntry
@@ -2611,6 +3748,36 @@ func (s Http) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UserAgent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A list of EC2 instance IDs corresponding to the segments in a trace.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/InstanceIdDetail
+type InstanceIdDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of a corresponding EC2 instance.
+	Id *string `type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceIdDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstanceIdDetail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InstanceIdDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2917,6 +4084,248 @@ func (s PutTraceSegmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// A list of resources ARNs corresponding to the segments in a trace.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResourceARNDetail
+type ResourceARNDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of a corresponding resource.
+	ARN *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceARNDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceARNDetail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceARNDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ARN != nil {
+		v := *s.ARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The root cause information for a response time warning.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCause
+type ResponseTimeRootCause struct {
+	_ struct{} `type:"structure"`
+
+	// A list of corresponding services. A service identifies a segment and contains
+	// a name, account ID, type, and inferred flag.
+	Services []ResponseTimeRootCauseService `type:"list"`
+}
+
+// String returns the string representation
+func (s ResponseTimeRootCause) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResponseTimeRootCause) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResponseTimeRootCause) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Services) > 0 {
+		v := s.Services
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Services", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// A collection of segments and corresponding subsegments associated to a response
+// time warning.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCauseEntity
+type ResponseTimeRootCauseEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The types and messages of the exceptions.
+	Coverage *float64 `type:"double"`
+
+	// The name of the entity.
+	Name *string `type:"string"`
+
+	// A flag that denotes a remote subsegment.
+	Remote *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s ResponseTimeRootCauseEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResponseTimeRootCauseEntity) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResponseTimeRootCauseEntity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Coverage != nil {
+		v := *s.Coverage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Coverage", protocol.Float64Value(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Remote != nil {
+		v := *s.Remote
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Remote", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A collection of fields identifying the service in a response time warning.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ResponseTimeRootCauseService
+type ResponseTimeRootCauseService struct {
+	_ struct{} `type:"structure"`
+
+	// The account ID associated to the service.
+	AccountId *string `type:"string"`
+
+	// The path of root cause entities found on the service.
+	EntityPath []ResponseTimeRootCauseEntity `type:"list"`
+
+	// A Boolean value indicating if the service is inferred from the trace.
+	Inferred *bool `type:"boolean"`
+
+	// The service name.
+	Name *string `type:"string"`
+
+	// A collection of associated service names.
+	Names []string `type:"list"`
+
+	// The type associated to the service.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResponseTimeRootCauseService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResponseTimeRootCauseService) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResponseTimeRootCauseService) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EntityPath) > 0 {
+		v := s.EntityPath
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "EntityPath", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Inferred != nil {
+		v := *s.Inferred
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Inferred", protocol.BoolValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Names) > 0 {
+		v := s.Names
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Names", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The exception associated with a root cause.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/RootCauseException
+type RootCauseException struct {
+	_ struct{} `type:"structure"`
+
+	// The message of the exception.
+	Message *string `type:"string"`
+
+	// The name of the exception.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RootCauseException) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RootCauseException) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RootCauseException) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4104,9 +5513,22 @@ type TraceSummary struct {
 	// Annotations from the trace's segment documents.
 	Annotations map[string][]ValueWithServiceIds `type:"map"`
 
+	// A list of availability zones for any zone corresponding to the trace segments.
+	AvailabilityZones []AvailabilityZoneDetail `type:"list"`
+
 	// The length of time in seconds between the start time of the root segment
 	// and the end time of the last segment that completed.
 	Duration *float64 `type:"double"`
+
+	// The root of a trace.
+	EntryPoint *ServiceId `type:"structure"`
+
+	// A collection of ErrorRootCause structures corresponding to the trace segments.
+	ErrorRootCauses []ErrorRootCause `type:"list"`
+
+	// A collection of FaultRootCause structures corresponding to the the trace
+	// segments.
+	FaultRootCauses []FaultRootCause `type:"list"`
 
 	// One or more of the segment documents has a 400 series error.
 	HasError *bool `type:"boolean"`
@@ -4124,14 +5546,27 @@ type TraceSummary struct {
 	// and subsegments.
 	Id *string `min:"1" type:"string"`
 
+	// A list of EC2 instance IDs for any instance corresponding to the trace segments.
+	InstanceIds []InstanceIdDetail `type:"list"`
+
 	// One or more of the segment documents is in progress.
 	IsPartial *bool `type:"boolean"`
+
+	// A list of resource ARNs for any resource corresponding to the trace segments.
+	ResourceARNs []ResourceARNDetail `type:"list"`
 
 	// The length of time in seconds between the start and end times of the root
 	// segment. If the service performs work asynchronously, the response time measures
 	// the time before the response is sent to the user, while the duration measures
 	// the amount of time before the last traced activity completes.
 	ResponseTime *float64 `type:"double"`
+
+	// A collection of ResponseTimeRootCause structures corresponding to the trace
+	// segments.
+	ResponseTimeRootCauses []ResponseTimeRootCause `type:"list"`
+
+	// The revision number of a trace.
+	Revision *int64 `type:"integer"`
 
 	// Service IDs from the trace's segment documents.
 	ServiceIds []ServiceId `type:"list"`
@@ -4169,11 +5604,53 @@ func (s TraceSummary) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if len(s.AvailabilityZones) > 0 {
+		v := s.AvailabilityZones
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AvailabilityZones", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Duration != nil {
 		v := *s.Duration
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Duration", protocol.Float64Value(v), metadata)
+	}
+	if s.EntryPoint != nil {
+		v := s.EntryPoint
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EntryPoint", v, metadata)
+	}
+	if len(s.ErrorRootCauses) > 0 {
+		v := s.ErrorRootCauses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ErrorRootCauses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.FaultRootCauses) > 0 {
+		v := s.FaultRootCauses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "FaultRootCauses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.HasError != nil {
 		v := *s.HasError
@@ -4205,17 +5682,59 @@ func (s TraceSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.InstanceIds) > 0 {
+		v := s.InstanceIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "InstanceIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.IsPartial != nil {
 		v := *s.IsPartial
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IsPartial", protocol.BoolValue(v), metadata)
 	}
+	if len(s.ResourceARNs) > 0 {
+		v := s.ResourceARNs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ResourceARNs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.ResponseTime != nil {
 		v := *s.ResponseTime
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ResponseTime", protocol.Float64Value(v), metadata)
+	}
+	if len(s.ResponseTimeRootCauses) > 0 {
+		v := s.ResponseTimeRootCauses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ResponseTimeRootCauses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Revision", protocol.Int64Value(v), metadata)
 	}
 	if len(s.ServiceIds) > 0 {
 		v := s.ServiceIds
@@ -4382,6 +5901,111 @@ func (s UnprocessedTraceSegment) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupRequest
+type UpdateGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The updated filter expression defining criteria by which to group traces.
+	FilterExpression *string `min:"1" type:"string"`
+
+	// The ARN that was generated upon creation.
+	GroupARN *string `min:"1" type:"string"`
+
+	// The case-sensitive name of the group.
+	GroupName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
+	if s.FilterExpression != nil && len(*s.FilterExpression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FilterExpression", 1))
+	}
+	if s.GroupARN != nil && len(*s.GroupARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupARN", 1))
+	}
+	if s.GroupName != nil && len(*s.GroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FilterExpression != nil {
+		v := *s.FilterExpression
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FilterExpression", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupARN != nil {
+		v := *s.GroupARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateGroupResult
+type UpdateGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The group that was updated. Contains the name of the group that was updated,
+	// the ARN of the group that was updated, and the updated filter expression
+	// assigned to the group.
+	Group *Group `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
 	}
 	return nil
 }

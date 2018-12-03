@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Server Migration Service.
 //    func myFunc(svc smsiface.SMSAPI) bool {
-//        // Make svc.CreateReplicationJob request
+//        // Make svc.CreateApp request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockSMSClient struct {
 //        smsiface.SMSAPI
 //    }
-//    func (m *mockSMSClient) CreateReplicationJob(input *sms.CreateReplicationJobInput) (*sms.CreateReplicationJobOutput, error) {
+//    func (m *mockSMSClient) CreateApp(input *sms.CreateAppInput) (*sms.CreateAppOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,13 +62,31 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SMSAPI interface {
+	CreateAppRequest(*sms.CreateAppInput) sms.CreateAppRequest
+
 	CreateReplicationJobRequest(*sms.CreateReplicationJobInput) sms.CreateReplicationJobRequest
+
+	DeleteAppRequest(*sms.DeleteAppInput) sms.DeleteAppRequest
+
+	DeleteAppLaunchConfigurationRequest(*sms.DeleteAppLaunchConfigurationInput) sms.DeleteAppLaunchConfigurationRequest
+
+	DeleteAppReplicationConfigurationRequest(*sms.DeleteAppReplicationConfigurationInput) sms.DeleteAppReplicationConfigurationRequest
 
 	DeleteReplicationJobRequest(*sms.DeleteReplicationJobInput) sms.DeleteReplicationJobRequest
 
 	DeleteServerCatalogRequest(*sms.DeleteServerCatalogInput) sms.DeleteServerCatalogRequest
 
 	DisassociateConnectorRequest(*sms.DisassociateConnectorInput) sms.DisassociateConnectorRequest
+
+	GenerateChangeSetRequest(*sms.GenerateChangeSetInput) sms.GenerateChangeSetRequest
+
+	GenerateTemplateRequest(*sms.GenerateTemplateInput) sms.GenerateTemplateRequest
+
+	GetAppRequest(*sms.GetAppInput) sms.GetAppRequest
+
+	GetAppLaunchConfigurationRequest(*sms.GetAppLaunchConfigurationInput) sms.GetAppLaunchConfigurationRequest
+
+	GetAppReplicationConfigurationRequest(*sms.GetAppReplicationConfigurationInput) sms.GetAppReplicationConfigurationRequest
 
 	GetConnectorsRequest(*sms.GetConnectorsInput) sms.GetConnectorsRequest
 
@@ -80,7 +98,23 @@ type SMSAPI interface {
 
 	ImportServerCatalogRequest(*sms.ImportServerCatalogInput) sms.ImportServerCatalogRequest
 
+	LaunchAppRequest(*sms.LaunchAppInput) sms.LaunchAppRequest
+
+	ListAppsRequest(*sms.ListAppsInput) sms.ListAppsRequest
+
+	PutAppLaunchConfigurationRequest(*sms.PutAppLaunchConfigurationInput) sms.PutAppLaunchConfigurationRequest
+
+	PutAppReplicationConfigurationRequest(*sms.PutAppReplicationConfigurationInput) sms.PutAppReplicationConfigurationRequest
+
+	StartAppReplicationRequest(*sms.StartAppReplicationInput) sms.StartAppReplicationRequest
+
 	StartOnDemandReplicationRunRequest(*sms.StartOnDemandReplicationRunInput) sms.StartOnDemandReplicationRunRequest
+
+	StopAppReplicationRequest(*sms.StopAppReplicationInput) sms.StopAppReplicationRequest
+
+	TerminateAppRequest(*sms.TerminateAppInput) sms.TerminateAppRequest
+
+	UpdateAppRequest(*sms.UpdateAppInput) sms.UpdateAppRequest
 
 	UpdateReplicationJobRequest(*sms.UpdateReplicationJobInput) sms.UpdateReplicationJobRequest
 }

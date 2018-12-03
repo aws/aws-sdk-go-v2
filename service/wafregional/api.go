@@ -3679,16 +3679,14 @@ func (r PutLoggingConfigurationRequest) Send() (*PutLoggingConfigurationOutput, 
 // You can access information about all traffic that AWS WAF inspects using
 // the following steps:
 //
-// Create an Amazon Kinesis Data Firehose delivery stream. For more information,
-// see Creating an Amazon Kinesis Data Firehose Delivery Stream (https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html).
+// Create an Amazon Kinesis Data Firehose .
 //
-// Associate that delivery stream to your web ACL using a PutLoggingConfiguration
-// request.
+// Associate that firehose to your web ACL using a PutLoggingConfiguration request.
 //
 // When you successfully enable logging using a PutLoggingConfiguration request,
 // AWS WAF will create a service linked role with the necessary permissions
-// to write logs to the Amazon Kinesis Data Firehose delivery stream. For more
-// information, see Logging Web ACL Traffic Information (http://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
+// to write logs to the Amazon Kinesis Data Firehose. For more information,
+// see Logging Web ACL Traffic Information (http://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
 // in the AWS WAF Developer Guide.
 //
 //    // Example sending a request using the PutLoggingConfigurationRequest method.
@@ -8962,6 +8960,10 @@ func (s ListRegexPatternSetsOutput) SDKResponseMetadata() aws.Response {
 type ListResourcesForWebACLInput struct {
 	_ struct{} `type:"structure"`
 
+	// The type of resource to list, either and application load balancer or Amazon
+	// API Gateway.
+	ResourceType ResourceType `type:"string" enum:"true"`
+
 	// The unique identifier (ID) of the web ACL for which to list the associated
 	// resources.
 	//
@@ -9540,9 +9542,9 @@ func (s ListXssMatchSetsOutput) SDKResponseMetadata() aws.Response {
 type PutLoggingConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Kinesis Data Firehose delivery streams that contains the inspected
-	// traffic information, the redacted fields details, and the Amazon Resource
-	// Name (ARN) of the web ACL to monitor.
+	// The Amazon Kinesis Data Firehose that contains the inspected traffic information,
+	// the redacted fields details, and the Amazon Resource Name (ARN) of the web
+	// ACL to monitor.
 	//
 	// LoggingConfiguration is a required field
 	LoggingConfiguration *waf.LoggingConfiguration `type:"structure" required:"true"`
@@ -11394,6 +11396,23 @@ func (enum RateKey) MarshalValue() (string, error) {
 }
 
 func (enum RateKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeApplicationLoadBalancer ResourceType = "APPLICATION_LOAD_BALANCER"
+	ResourceTypeApiGateway              ResourceType = "API_GATEWAY"
+)
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
