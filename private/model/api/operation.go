@@ -13,18 +13,19 @@ import (
 
 // An Operation defines a specific API Operation.
 type Operation struct {
-	API           *API `json:"-"`
-	ExportedName  string
-	Name          string
-	Documentation string
-	HTTP          HTTPInfo
-	InputRef      ShapeRef   `json:"input"`
-	OutputRef     ShapeRef   `json:"output"`
-	ErrorRefs     []ShapeRef `json:"errors"`
-	Paginator     *Paginator
-	Deprecated    bool   `json:"deprecated"`
-	AuthType      string `json:"authtype"`
-	imports       map[string]bool
+	API                 *API `json:"-"`
+	ExportedName        string
+	Name                string
+	Documentation       string
+	HTTP                HTTPInfo
+	InputRef            ShapeRef   `json:"input"`
+	OutputRef           ShapeRef   `json:"output"`
+	ErrorRefs           []ShapeRef `json:"errors"`
+	Paginator           *Paginator
+	Deprecated          bool   `json:"deprecated"`
+	AuthType            string `json:"authtype"`
+	imports             map[string]bool
+	CustomBuildHandlers []string
 }
 
 // A HTTPInfo defines the method of HTTP request for the Operation.
@@ -142,6 +143,9 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 	output.responseMetadata = aws.Response{Request:req}
 
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
+	{{- range $_, $handler := $.CustomBuildHandlers -}}
+		req.Handlers.Build.PushBackNamed({{ $handler }})
+	{{ end -}}
 
 	return {{ $reqType}}{Request: req, Input: input, Copy: c.{{ $reqType }} }
 }

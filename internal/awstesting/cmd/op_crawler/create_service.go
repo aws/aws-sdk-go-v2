@@ -121,6 +121,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/route53"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"github.com/aws/aws-sdk-go-v2/service/s3control"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
@@ -280,6 +281,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "route53", value: reflect.ValueOf(route53.New(cfg))},
 		{name: "route53domains", value: reflect.ValueOf(route53domains.New(cfg))},
 		{name: "s3", value: reflect.ValueOf(s3Client)},
+		{name: "s3control", value: reflect.ValueOf(s3control.New(cfg))},
 		{name: "sagemaker", value: reflect.ValueOf(sagemaker.New(cfg))},
 		{name: "sagemakerruntime", value: reflect.ValueOf(sagemakerruntime.New(cfg))},
 		{name: "secretsmanager", value: reflect.ValueOf(secretsmanager.New(cfg))},
