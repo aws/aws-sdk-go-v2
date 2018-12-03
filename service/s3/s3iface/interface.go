@@ -101,6 +101,8 @@ type S3API interface {
 
 	DeleteObjectsRequest(*s3.DeleteObjectsInput) s3.DeleteObjectsRequest
 
+	DeletePublicAccessBlockRequest(*s3.DeletePublicAccessBlockInput) s3.DeletePublicAccessBlockRequest
+
 	GetBucketAccelerateConfigurationRequest(*s3.GetBucketAccelerateConfigurationInput) s3.GetBucketAccelerateConfigurationRequest
 
 	GetBucketAclRequest(*s3.GetBucketAclInput) s3.GetBucketAclRequest
@@ -129,6 +131,8 @@ type S3API interface {
 
 	GetBucketPolicyRequest(*s3.GetBucketPolicyInput) s3.GetBucketPolicyRequest
 
+	GetBucketPolicyStatusRequest(*s3.GetBucketPolicyStatusInput) s3.GetBucketPolicyStatusRequest
+
 	GetBucketReplicationRequest(*s3.GetBucketReplicationInput) s3.GetBucketReplicationRequest
 
 	GetBucketRequestPaymentRequest(*s3.GetBucketRequestPaymentInput) s3.GetBucketRequestPaymentRequest
@@ -143,9 +147,17 @@ type S3API interface {
 
 	GetObjectAclRequest(*s3.GetObjectAclInput) s3.GetObjectAclRequest
 
+	GetObjectLegalHoldRequest(*s3.GetObjectLegalHoldInput) s3.GetObjectLegalHoldRequest
+
+	GetObjectLockConfigurationRequest(*s3.GetObjectLockConfigurationInput) s3.GetObjectLockConfigurationRequest
+
+	GetObjectRetentionRequest(*s3.GetObjectRetentionInput) s3.GetObjectRetentionRequest
+
 	GetObjectTaggingRequest(*s3.GetObjectTaggingInput) s3.GetObjectTaggingRequest
 
 	GetObjectTorrentRequest(*s3.GetObjectTorrentInput) s3.GetObjectTorrentRequest
+
+	GetPublicAccessBlockRequest(*s3.GetPublicAccessBlockInput) s3.GetPublicAccessBlockRequest
 
 	HeadBucketRequest(*s3.HeadBucketInput) s3.HeadBucketRequest
 
@@ -209,7 +221,15 @@ type S3API interface {
 
 	PutObjectAclRequest(*s3.PutObjectAclInput) s3.PutObjectAclRequest
 
+	PutObjectLegalHoldRequest(*s3.PutObjectLegalHoldInput) s3.PutObjectLegalHoldRequest
+
+	PutObjectLockConfigurationRequest(*s3.PutObjectLockConfigurationInput) s3.PutObjectLockConfigurationRequest
+
+	PutObjectRetentionRequest(*s3.PutObjectRetentionInput) s3.PutObjectRetentionRequest
+
 	PutObjectTaggingRequest(*s3.PutObjectTaggingInput) s3.PutObjectTaggingRequest
+
+	PutPublicAccessBlockRequest(*s3.PutPublicAccessBlockInput) s3.PutPublicAccessBlockRequest
 
 	RestoreObjectRequest(*s3.RestoreObjectInput) s3.RestoreObjectRequest
 

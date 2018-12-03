@@ -60,7 +60,7 @@ func setup() error {
 
 	err = svc.WaitUntilBucketExists(&s3.HeadBucketInput{Bucket: bucketName})
 	if err != nil {
-		return fmt.Errorf("failed to wait for bucket %q to exist, %v", bucketName, err)
+		return fmt.Errorf("failed to wait for bucket %q to exist, %v", *bucketName, err)
 	}
 
 	return nil
@@ -72,7 +72,7 @@ func teardown() error {
 
 	objs, err := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName}).Send()
 	if err != nil {
-		return fmt.Errorf("failed to list bucket %q objects, %v", bucketName, err)
+		return fmt.Errorf("failed to list bucket %q objects, %v", *bucketName, err)
 	}
 
 	for _, o := range objs.Contents {
@@ -81,7 +81,7 @@ func teardown() error {
 
 	uploads, err := svc.ListMultipartUploadsRequest(&s3.ListMultipartUploadsInput{Bucket: bucketName}).Send()
 	if err != nil {
-		return fmt.Errorf("failed to list bucket %q multipart objects, %v", bucketName, err)
+		return fmt.Errorf("failed to list bucket %q multipart objects, %v", *bucketName, err)
 	}
 
 	for _, u := range uploads.Uploads {
@@ -94,7 +94,7 @@ func teardown() error {
 
 	_, err = svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send()
 	if err != nil {
-		return fmt.Errorf("failed to delete bucket %q, %v", bucketName, err)
+		return fmt.Errorf("failed to delete bucket %q, %v", *bucketName, err)
 	}
 
 	return nil
