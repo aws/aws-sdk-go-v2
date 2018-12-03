@@ -10,7 +10,7 @@ We'll be expanding out the [Issues] and [Projects] sections with additional chan
 
 ## Getting started
 
-The best way to get started working with the SDK is to use `go get` to add the SDK to your Go Workspace or application using Go modeuls.
+The best way to get started working with the SDK is to use `go get` to add the SDK to your Go Workspace or application using Go modules.
 
 ```sh
 go get github.com/aws/aws-sdk-go-v2
