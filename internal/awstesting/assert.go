@@ -15,6 +15,8 @@ import (
 // Match is a testing helper to test for testing error by comparing expected
 // with a regular expression.
 func Match(t *testing.T, regex, expected string) {
+	t.Helper()
+
 	if !regexp.MustCompile(regex).Match([]byte(expected)) {
 		t.Errorf("%q\n\tdoes not match /%s/", expected, regex)
 	}
@@ -22,6 +24,8 @@ func Match(t *testing.T, regex, expected string) {
 
 // AssertURL verifies the expected URL is matches the actual.
 func AssertURL(t *testing.T, expect, actual string, msgAndArgs ...interface{}) bool {
+	t.Helper()
+
 	expectURL, err := url.Parse(expect)
 	if err != nil {
 		t.Errorf(errMsg("unable to parse expected URL", err, msgAndArgs))
@@ -44,6 +48,8 @@ var queryMapKey = regexp.MustCompile("(.*?)\\.[0-9]+\\.key")
 
 // AssertQuery verifies the expect HTTP query string matches the actual.
 func AssertQuery(t *testing.T, expect, actual string, msgAndArgs ...interface{}) bool {
+	t.Helper()
+
 	expectQ, err := url.ParseQuery(expect)
 	if err != nil {
 		t.Errorf(errMsg("unable to parse expected Query", err, msgAndArgs))
@@ -96,6 +102,8 @@ func AssertQuery(t *testing.T, expect, actual string, msgAndArgs ...interface{})
 
 // AssertJSON verifies that the expect json string matches the actual.
 func AssertJSON(t *testing.T, expect, actual string, msgAndArgs ...interface{}) bool {
+	t.Helper()
+
 	expectVal := map[string]interface{}{}
 	if err := json.Unmarshal([]byte(expect), &expectVal); err != nil {
 		t.Errorf(errMsg("unable to parse expected JSON", err, msgAndArgs...))
@@ -164,6 +172,8 @@ func objectsAreEqual(expected, actual interface{}) bool {
 // Based on github.com/stretchr/testify/assert.Equal
 // Copied locally to prevent non-test build dependencies on testify
 func equal(t *testing.T, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+	t.Helper()
+
 	if !objectsAreEqual(expected, actual) {
 		t.Errorf("%s\n%s", messageFromMsgAndArgs(msgAndArgs),
 			SprintExpectActual(expected, actual))

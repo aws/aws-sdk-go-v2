@@ -25,7 +25,16 @@ type Operation struct {
 	Deprecated          bool   `json:"deprecated"`
 	AuthType            string `json:"authtype"`
 	imports             map[string]bool
-	CustomBuildHandlers []string
+	CustomBuildHandlers []string       `json:"-"`
+	Endpoint            *EndpointTrait `json:"endpoint"`
+}
+
+// EndpointTrait provides the structure of the modeled enpdoint trait, and its
+// properties.
+type EndpointTrait struct {
+	// Specifies the hostPrefix template to prepend to the operation's request
+	// endpoint host.
+	HostPrefix string `json:"hostPrefix"`
 }
 
 // A HTTPInfo defines the method of HTTP request for the Operation.
@@ -66,8 +75,8 @@ func (o *Operation) GetSigner() string {
 	return buf.String()
 }
 
-// tplOperation defines a template for rendering an API Operation
-var tplOperation = template.Must(template.New("operation").Funcs(template.FuncMap{
+// operationTmpl defines a template for rendering an API Operation
+var operationTmpl = template.Must(template.New("operation").Funcs(template.FuncMap{
 	"GetCrosslinkURL": GetCrosslinkURL,
 }).Parse(`
 {{ $reqType := printf "%sRequest" .ExportedName -}}
@@ -202,8 +211,12 @@ func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
 
 // GoCode returns a string of rendered GoCode for this Operation
 func (o *Operation) GoCode() string {
+	if o.Endpoint != nil && len(o.Endpoint.HostPrefix) != 0 {
+		setupEndpointHostPrefix(o)
+	}
+
 	var buf bytes.Buffer
-	err := tplOperation.Execute(&buf, o)
+	err := operationTmpl.Execute(&buf, o)
 	if err != nil {
 		panic(err)
 	}

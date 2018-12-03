@@ -4788,6 +4788,253 @@ func (enum InputService25TestShapeEnumType) MarshalValueBuf(b []byte) ([]byte, e
 	return append(b, enum...), nil
 }
 
+// InputService26ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// InputService26ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService26ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the InputService26ProtocolTest client with a config.
+//
+// Example:
+//     // Create a InputService26ProtocolTest client from just a config.
+//     svc := inputservice26protocoltest.New(myConfig)
+func NewInputService26ProtocolTest(config aws.Config) *InputService26ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &InputService26ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "inputservice26protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "2014-01-01",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restxml.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restxml.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restxml.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a InputService26ProtocolTest operation and runs any
+// custom request initialization.
+func (c *InputService26ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opInputService26TestCaseOperation1 = "StaticOp"
+
+// InputService26TestCaseOperation1Request is a API request type for the InputService26TestCaseOperation1 API operation.
+type InputService26TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService26TestShapeInputService26TestCaseOperation1Input
+	Copy  func(*InputService26TestShapeInputService26TestCaseOperation1Input) InputService26TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService26TestCaseOperation1 API request.
+func (r InputService26TestCaseOperation1Request) Send() (*InputService26TestShapeInputService26TestCaseOperation1Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService26TestShapeInputService26TestCaseOperation1Output), nil
+}
+
+// InputService26TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService26TestCaseOperation1Request method.
+//    req := client.InputService26TestCaseOperation1Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService26ProtocolTest) InputService26TestCaseOperation1Request(input *InputService26TestShapeInputService26TestCaseOperation1Input) InputService26TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService26TestCaseOperation1,
+		HTTPMethod: "POST",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &InputService26TestShapeInputService26TestCaseOperation1Input{}
+	}
+
+	output := &InputService26TestShapeInputService26TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return InputService26TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService26TestCaseOperation1Request}
+}
+
+const opInputService26TestCaseOperation2 = "MemberRefOp"
+
+// InputService26TestCaseOperation2Request is a API request type for the InputService26TestCaseOperation2 API operation.
+type InputService26TestCaseOperation2Request struct {
+	*aws.Request
+	Input *InputService26TestShapeInputService26TestCaseOperation2Input
+	Copy  func(*InputService26TestShapeInputService26TestCaseOperation2Input) InputService26TestCaseOperation2Request
+}
+
+// Send marshals and sends the InputService26TestCaseOperation2 API request.
+func (r InputService26TestCaseOperation2Request) Send() (*InputService26TestShapeInputService26TestCaseOperation2Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService26TestShapeInputService26TestCaseOperation2Output), nil
+}
+
+// InputService26TestCaseOperation2Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService26TestCaseOperation2Request method.
+//    req := client.InputService26TestCaseOperation2Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService26ProtocolTest) InputService26TestCaseOperation2Request(input *InputService26TestShapeInputService26TestCaseOperation2Input) InputService26TestCaseOperation2Request {
+	op := &aws.Operation{
+		Name:       opInputService26TestCaseOperation2,
+		HTTPMethod: "POST",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &InputService26TestShapeInputService26TestCaseOperation2Input{}
+	}
+
+	output := &InputService26TestShapeInputService26TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("foo-{Name}.", input.hostLabels))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return InputService26TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService26TestCaseOperation2Request}
+}
+
+type InputService26TestShapeInputService26TestCaseOperation1Input struct {
+	_ struct{} `locationName:"StaticOpRequest" type:"structure"`
+
+	Name *string `type:"string"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService26TestShapeInputService26TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	e.SetFields(protocol.BodyTarget, "StaticOpRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
+		if s.Name != nil {
+			v := *s.Name
+
+			metadata := protocol.Metadata{}
+			e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+		}
+		return nil
+	}), protocol.Metadata{})
+	return nil
+}
+
+type InputService26TestShapeInputService26TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService26TestShapeInputService26TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService26TestShapeInputService26TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type InputService26TestShapeInputService26TestCaseOperation2Input struct {
+	_ struct{} `locationName:"MemberRefOpRequest" type:"structure"`
+
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputService26TestShapeInputService26TestCaseOperation2Input) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputService26TestShapeInputService26TestCaseOperation2Input"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService26TestShapeInputService26TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	e.SetFields(protocol.BodyTarget, "MemberRefOpRequest", protocol.FieldMarshalerFunc(func(e protocol.FieldEncoder) error {
+		if s.Name != nil {
+			v := *s.Name
+
+			metadata := protocol.Metadata{}
+			e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+		}
+		return nil
+	}), protocol.Metadata{})
+	return nil
+}
+
+func (s *InputService26TestShapeInputService26TestCaseOperation2Input) hostLabels() map[string]string {
+	return map[string]string{
+		"Name": aws.StringValue(s.Name),
+	}
+}
+
+type InputService26TestShapeInputService26TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService26TestShapeInputService26TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService26TestShapeInputService26TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 //
 // Tests begin here
 //
@@ -4806,7 +5053,7 @@ func TestInputService1ProtocolTestBasicXMLSerializationCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4839,7 +5086,7 @@ func TestInputService1ProtocolTestBasicXMLSerializationCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4869,7 +5116,7 @@ func TestInputService1ProtocolTestBasicXMLSerializationCase3(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4897,7 +5144,7 @@ func TestInputService2ProtocolTestSerializeOtherScalarTypesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4933,7 +5180,7 @@ func TestInputService3ProtocolTestNestedStructuresCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4968,7 +5215,7 @@ func TestInputService3ProtocolTestNestedStructuresCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5001,7 +5248,7 @@ func TestInputService4ProtocolTestNestedStructuresCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5037,7 +5284,7 @@ func TestInputService5ProtocolTestNonFlattenedListsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5073,7 +5320,7 @@ func TestInputService6ProtocolTestNonFlattenedListsWithLocationNameCase1(t *test
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5109,7 +5356,7 @@ func TestInputService7ProtocolTestFlattenedListsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5145,7 +5392,7 @@ func TestInputService8ProtocolTestFlattenedListsWithLocationNameCase1(t *testing
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5187,7 +5434,7 @@ func TestInputService9ProtocolTestListOfStructuresCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5222,7 +5469,7 @@ func TestInputService10ProtocolTestBlobAndTimestampShapesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5257,7 +5504,7 @@ func TestInputService11ProtocolTestHeaderMapsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5291,7 +5538,7 @@ func TestInputService12ProtocolTestQuerystringListOfStringsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5320,7 +5567,7 @@ func TestInputService13ProtocolTestStringToStringMapsInQuerystringCase1(t *testi
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5355,7 +5602,7 @@ func TestInputService14ProtocolTestStringToStringListMapsInQuerystringCase1(t *t
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5380,7 +5627,7 @@ func TestInputService15ProtocolTestBooleanInQuerystringCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5405,7 +5652,7 @@ func TestInputService15ProtocolTestBooleanInQuerystringCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5430,7 +5677,7 @@ func TestInputService16ProtocolTestStringPayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5464,7 +5711,7 @@ func TestInputService17ProtocolTestBlobPayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5496,7 +5743,7 @@ func TestInputService17ProtocolTestBlobPayloadCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5523,7 +5770,7 @@ func TestInputService18ProtocolTestStructurePayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5553,7 +5800,7 @@ func TestInputService18ProtocolTestStructurePayloadCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5578,7 +5825,7 @@ func TestInputService18ProtocolTestStructurePayloadCase3(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5608,7 +5855,7 @@ func TestInputService18ProtocolTestStructurePayloadCase4(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5638,7 +5885,7 @@ func TestInputService19ProtocolTestXMLAttributeCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5671,7 +5918,7 @@ func TestInputService20ProtocolTestGreedyKeysCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5694,7 +5941,7 @@ func TestInputService21ProtocolTestOmitsNullQueryParamsButSerializesEmptyStrings
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5719,7 +5966,7 @@ func TestInputService21ProtocolTestOmitsNullQueryParamsButSerializesEmptyStrings
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5746,7 +5993,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5782,7 +6029,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5822,7 +6069,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase3(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5863,7 +6110,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5906,7 +6153,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5947,7 +6194,7 @@ func TestInputService22ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5979,7 +6226,7 @@ func TestInputService23ProtocolTestTimestampInHeaderCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -6007,7 +6254,7 @@ func TestInputService24ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -6037,7 +6284,7 @@ func TestInputService24ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -6081,7 +6328,7 @@ func TestInputService25ProtocolTestEnumCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -6114,13 +6361,77 @@ func TestInputService25ProtocolTestEnumCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restxml.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
+
+	// assert headers
+
+}
+
+func TestInputService26ProtocolTestEndpointHostTraitCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://service.region.amazonaws.com")
+
+	svc := NewInputService26ProtocolTest(cfg)
+	input := &InputService26TestShapeInputService26TestCaseOperation1Input{
+		Name: aws.String("myname"),
+	}
+
+	req := svc.InputService26TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body := util.SortXML(r.Body)
+	awstesting.AssertXML(t, `<StaticOpRequest><Name>myname</Name></StaticOpRequest>`, util.Trim(string(body)), InputService26TestShapeInputService26TestCaseOperation1Input{})
+
+	// assert URL
+	awstesting.AssertURL(t, "https://data-service.region.amazonaws.com/path", r.URL.String())
+
+	// assert headers
+
+}
+
+func TestInputService26ProtocolTestEndpointHostTraitCase2(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://service.region.amazonaws.com")
+
+	svc := NewInputService26ProtocolTest(cfg)
+	input := &InputService26TestShapeInputService26TestCaseOperation2Input{
+		Name: aws.String("myname"),
+	}
+
+	req := svc.InputService26TestCaseOperation2Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body := util.SortXML(r.Body)
+	awstesting.AssertXML(t, `<MemberRefOpRequest><Name>myname</Name></MemberRefOpRequest>`, util.Trim(string(body)), InputService26TestShapeInputService26TestCaseOperation2Input{})
+
+	// assert URL
+	awstesting.AssertURL(t, "https://foo-myname.service.region.amazonaws.com/path", r.URL.String())
 
 	// assert headers
 
