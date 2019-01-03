@@ -266,6 +266,56 @@ func (c *Connect) DescribeUserHierarchyStructureRequest(input *DescribeUserHiera
 	return DescribeUserHierarchyStructureRequest{Request: req, Input: input, Copy: c.DescribeUserHierarchyStructureRequest}
 }
 
+const opGetContactAttributes = "GetContactAttributes"
+
+// GetContactAttributesRequest is a API request type for the GetContactAttributes API operation.
+type GetContactAttributesRequest struct {
+	*aws.Request
+	Input *GetContactAttributesInput
+	Copy  func(*GetContactAttributesInput) GetContactAttributesRequest
+}
+
+// Send marshals and sends the GetContactAttributes API request.
+func (r GetContactAttributesRequest) Send() (*GetContactAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetContactAttributesOutput), nil
+}
+
+// GetContactAttributesRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Retrieves the contact attributes associated with a contact.
+//
+//    // Example sending a request using the GetContactAttributesRequest method.
+//    req := client.GetContactAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributes
+func (c *Connect) GetContactAttributesRequest(input *GetContactAttributesInput) GetContactAttributesRequest {
+	op := &aws.Operation{
+		Name:       opGetContactAttributes,
+		HTTPMethod: "GET",
+		HTTPPath:   "/contact/attributes/{InstanceId}/{InitialContactId}",
+	}
+
+	if input == nil {
+		input = &GetContactAttributesInput{}
+	}
+
+	output := &GetContactAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetContactAttributesRequest{Request: req, Input: input, Copy: c.GetContactAttributesRequest}
+}
+
 const opGetCurrentMetricData = "GetCurrentMetricData"
 
 // GetCurrentMetricDataRequest is a API request type for the GetCurrentMetricData API operation.
@@ -760,6 +810,9 @@ func (r StartOutboundVoiceContactRequest) Send() (*StartOutboundVoiceContactOutp
 // If you are using an IAM account, it must have permission to the connect:StartOutboundVoiceContact
 // action.
 //
+// There is a 60 second dialing timeout for this operation. If the call is not
+// connected after 60 seconds, the call fails.
+//
 //    // Example sending a request using the StartOutboundVoiceContactRequest method.
 //    req := client.StartOutboundVoiceContactRequest(params)
 //    resp, err := req.Send()
@@ -1227,7 +1280,9 @@ type CreateUserInput struct {
 	// SecurityProfileIds is a required field
 	SecurityProfileIds []string `min:"1" type:"list" required:"true"`
 
-	// The user name in Amazon Connect for the account to create.
+	// The user name in Amazon Connect for the account to create. If you are using
+	// SAML for identity management in your Amazon Connect, the value for Username
+	// can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true"`
@@ -2086,12 +2141,124 @@ func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesRequest
+type GetContactAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the initial contact in Amazon Connect associated with the attributes
+	// to update.
+	//
+	// InitialContactId is a required field
+	InitialContactId *string `location:"uri" locationName:"InitialContactId" min:"1" type:"string" required:"true"`
+
+	// The instance ID for the instance from which to retrieve contact attributes.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetContactAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContactAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetContactAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetContactAttributesInput"}
+
+	if s.InitialContactId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InitialContactId"))
+	}
+	if s.InitialContactId != nil && len(*s.InitialContactId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InitialContactId", 1))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetContactAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InitialContactId != nil {
+		v := *s.InitialContactId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InitialContactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesResponse
+type GetContactAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The attributes to update.
+	Attributes map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s GetContactAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContactAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetContactAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetContactAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest
 type GetCurrentMetricDataInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of CurrentMetric objects for the metrics to retrieve. Each CurrentMetric
-	// includes a name of a metric to retrieve and the unit to use for it.
+	// includes a name of a metric to retrieve and the unit to use for it. You must
+	// list each metric to retrieve data for in the request.
 	//
 	// The following metrics are available:
 	//
@@ -2474,8 +2641,8 @@ type GetMetricDataInput struct {
 	// A HistoricalMetric object contains: HistoricalMetricName, Statistic, Threshold,
 	// and Unit.
 	//
-	// For each historical metric you include in the request, you must include a
-	// Unit and a Statistic.
+	// You must list each metric to retrieve data for in the request. For each historical
+	// metric you include in the request, you must include a Unit and a Statistic.
 	//
 	// The following historical metrics are available:
 	//
@@ -3118,13 +3285,13 @@ type HistoricalMetric struct {
 	// The name of the historical metric.
 	Name HistoricalMetricName `type:"string" enum:"true"`
 
-	// The statistic for the metric: SUM, MAX, or SUM.
+	// The statistic for the metric.
 	Statistic Statistic `type:"string" enum:"true"`
 
 	// The threshold for the metric, used with service level metrics.
 	Threshold *Threshold `type:"structure"`
 
-	// The unit for the metric: COUNT, PERCENT, or SECONDS.
+	// The unit for the metric.
 	Unit Unit `type:"string" enum:"true"`
 }
 
@@ -3915,8 +4082,8 @@ type StartOutboundVoiceContactInput struct {
 	// standard Amazon Connect attributes, and can be accessed in contact flows
 	// just like any other contact attributes.
 	//
-	// There can be up to 32,768 UTF-8 bytes across all key-value pairs. Attribute
-	// keys can include only alphanumeric, dash, and underscore characters.
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	//
 	// For example, if you want play a greeting when the customer answers the call,
 	// you can pass the customer name in attributes similar to the following:
@@ -4244,7 +4411,12 @@ func (s Threshold) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateContactAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The key-value pairs for the attribute to update.
+	// Specify a custom key-value pair using an attribute map. The attributes are
+	// standard Amazon Connect attributes, and can be accessed in contact flows
+	// just like any other contact attributes.
+	//
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	//
 	// Attributes is a required field
 	Attributes map[string]string `type:"map" required:"true"`

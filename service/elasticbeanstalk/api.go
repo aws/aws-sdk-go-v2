@@ -5162,7 +5162,11 @@ type EnvironmentInfoDescription struct {
 	// The type of information retrieved.
 	InfoType EnvironmentInfoType `type:"string" enum:"true"`
 
-	// The retrieved information.
+	// The retrieved information. Currently contains a presigned Amazon S3 URL.
+	// The files are deleted after 15 minutes.
+	//
+	// Anyone in possession of this URL can access the files before they are deleted.
+	// Make the URL available only to trusted parties.
 	Message *string `type:"string"`
 
 	// The time stamp when this information was retrieved.
@@ -5222,6 +5226,9 @@ type EnvironmentResourceDescription struct {
 	// The Auto Scaling launch configurations in use by this environment.
 	LaunchConfigurations []LaunchConfiguration `type:"list"`
 
+	// The Amazon EC2 launch templates in use by this environment.
+	LaunchTemplates []LaunchTemplate `type:"list"`
+
 	// The LoadBalancers in use by this environment.
 	LoadBalancers []LoadBalancer `type:"list"`
 
@@ -5268,9 +5275,21 @@ type EnvironmentTier struct {
 	_ struct{} `type:"structure"`
 
 	// The name of this environment tier.
+	//
+	// Valid values:
+	//
+	//    * For Web server tier – WebServer
+	//
+	//    * For Worker tier – Worker
 	Name *string `type:"string"`
 
 	// The type of this environment tier.
+	//
+	// Valid values:
+	//
+	//    * For Web server tier – Standard
+	//
+	//    * For Worker tier – SQS/HTTP
 	Type *string `type:"string"`
 
 	// The version of this environment tier. When you don't set a value to it, Elastic
@@ -5465,6 +5484,25 @@ func (s LaunchConfiguration) String() string {
 
 // GoString returns the string representation
 func (s LaunchConfiguration) GoString() string {
+	return s.String()
+}
+
+// Describes an Amazon EC2 launch template.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchTemplate
+type LaunchTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the launch template.
+	Id *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchTemplate) GoString() string {
 	return s.String()
 }
 
@@ -7507,7 +7545,7 @@ type UpdateEnvironmentOutput struct {
 	//
 	//    * Grey: Default health for a new environment. The environment is not fully
 	//    launched and health checks have not started or health checks are suspended
-	//    during an UpdateEnvironment or RestartEnvironement request.
+	//    during an UpdateEnvironment or RestartEnvironment request.
 	//
 	// Default: Grey
 	Health EnvironmentHealth `type:"string" enum:"true"`

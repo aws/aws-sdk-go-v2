@@ -272,6 +272,16 @@ type DashConfiguration struct {
 	// The URL that is used to initiate a playback session for devices that support
 	// DASH.
 	ManifestEndpointPrefix *string `type:"string"`
+
+	// The setting that controls whether MediaTailor includes the Location tag in
+	// DASH Manifests. MediaTailor populates the Location tag with the URL for manifest
+	// update requests, to be used by players that don't support sticky redirects.
+	// Disable this if you have CDN routing rules set up for accessing MediaTailor
+	// manifests and you are either using client-side reporting or your players
+	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT.
+	// The EMT_DEFAULT setting enables the inclusion of the tag and is the default
+	// value.
+	MpdLocation *string `type:"string"`
 }
 
 // String returns the string representation
@@ -291,6 +301,40 @@ func (s DashConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ManifestEndpointPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MpdLocation != nil {
+		v := *s.MpdLocation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MpdLocation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut
+type DashConfigurationForPut struct {
+	_ struct{} `type:"structure"`
+
+	MpdLocation *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DashConfigurationForPut) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DashConfigurationForPut) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashConfigurationForPut) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MpdLocation != nil {
+		v := *s.MpdLocation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MpdLocation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -757,6 +801,8 @@ type PutPlaybackConfigurationInput struct {
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
+	DashConfiguration *DashConfigurationForPut `type:"structure"`
+
 	// The identifier for the configuration.
 	Name *string `type:"string"`
 
@@ -803,6 +849,12 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CdnConfiguration", v, metadata)
+	}
+	if s.DashConfiguration != nil {
+		v := s.DashConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DashConfiguration", v, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name

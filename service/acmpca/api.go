@@ -237,8 +237,8 @@ func (r DescribeCertificateAuthorityRequest) Send() (*DescribeCertificateAuthori
 //    CA can never return to the pending state. You must create a new CA.
 //
 //    * DELETED - Your private CA is within the restoration period, after which
-//    it will be permanently deleted. The length of time remaining in the CA's
-//    restoration period will also be included in this operation's output.
+//    it is permanently deleted. The length of time remaining in the CA's restoration
+//    period is also included in this operation's output.
 //
 //    // Example sending a request using the DescribeCertificateAuthorityRequest method.
 //    req := client.DescribeCertificateAuthorityRequest(params)
@@ -645,6 +645,12 @@ func (c *ACMPCA) ListCertificateAuthoritiesRequest(input *ListCertificateAuthori
 		Name:       opListCertificateAuthorities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -656,6 +662,52 @@ func (c *ACMPCA) ListCertificateAuthoritiesRequest(input *ListCertificateAuthori
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListCertificateAuthoritiesRequest{Request: req, Input: input, Copy: c.ListCertificateAuthoritiesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListCertificateAuthoritiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListCertificateAuthorities operation.
+//		req := client.ListCertificateAuthoritiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCertificateAuthoritiesRequest) Paginate(opts ...aws.Option) ListCertificateAuthoritiesPager {
+	return ListCertificateAuthoritiesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCertificateAuthoritiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListCertificateAuthoritiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCertificateAuthoritiesPager struct {
+	aws.Pager
+}
+
+func (p *ListCertificateAuthoritiesPager) CurrentPage() *ListCertificateAuthoritiesOutput {
+	return p.Pager.CurrentPage().(*ListCertificateAuthoritiesOutput)
 }
 
 const opListTags = "ListTags"

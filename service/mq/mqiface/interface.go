@@ -66,9 +66,13 @@ type MQAPI interface {
 
 	CreateConfigurationRequest(*mq.CreateConfigurationInput) mq.CreateConfigurationRequest
 
+	CreateTagsRequest(*mq.CreateTagsInput) mq.CreateTagsRequest
+
 	CreateUserRequest(*mq.CreateUserInput) mq.CreateUserRequest
 
 	DeleteBrokerRequest(*mq.DeleteBrokerInput) mq.DeleteBrokerRequest
+
+	DeleteTagsRequest(*mq.DeleteTagsInput) mq.DeleteTagsRequest
 
 	DeleteUserRequest(*mq.DeleteUserInput) mq.DeleteUserRequest
 
@@ -85,6 +89,8 @@ type MQAPI interface {
 	ListConfigurationRevisionsRequest(*mq.ListConfigurationRevisionsInput) mq.ListConfigurationRevisionsRequest
 
 	ListConfigurationsRequest(*mq.ListConfigurationsInput) mq.ListConfigurationsRequest
+
+	ListTagsRequest(*mq.ListTagsInput) mq.ListTagsRequest
 
 	ListUsersRequest(*mq.ListUsersInput) mq.ListUsersRequest
 

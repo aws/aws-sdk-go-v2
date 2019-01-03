@@ -396,7 +396,7 @@ func (s CallInstructionsMessageType) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// An object that contains information about a event destination that sends
+// An object that contains information about an event destination that sends
 // data to Amazon CloudWatch Logs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/CloudWatchLogsDestination
 type CloudWatchLogsDestination struct {
@@ -755,7 +755,7 @@ func (s DeleteConfigurationSetOutput) MarshalFields(e protocol.FieldEncoder) err
 type EventDestination struct {
 	_ struct{} `type:"structure"`
 
-	// An object that contains information about a event destination that sends
+	// An object that contains information about an event destination that sends
 	// data to Amazon CloudWatch Logs.
 	CloudWatchLogsDestination *CloudWatchLogsDestination `type:"structure"`
 
@@ -764,7 +764,7 @@ type EventDestination struct {
 	// destination.
 	Enabled *bool `type:"boolean"`
 
-	// An object that contains information about a event destination that sends
+	// An object that contains information about an event destination that sends
 	// data to Amazon Kinesis Data Firehose.
 	KinesisFirehoseDestination *KinesisFirehoseDestination `type:"structure"`
 
@@ -774,6 +774,10 @@ type EventDestination struct {
 
 	// A name that identifies the event destination configuration.
 	Name *string `type:"string"`
+
+	// An object that contains information about an event destination that sends
+	// data to Amazon SNS.
+	SnsDestination *SnsDestination `type:"structure"`
 }
 
 // String returns the string representation
@@ -824,6 +828,12 @@ func (s EventDestination) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.SnsDestination != nil {
+		v := s.SnsDestination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SnsDestination", v, metadata)
+	}
 	return nil
 }
 
@@ -832,7 +842,7 @@ func (s EventDestination) MarshalFields(e protocol.FieldEncoder) error {
 type EventDestinationDefinition struct {
 	_ struct{} `type:"structure"`
 
-	// An object that contains information about a event destination that sends
+	// An object that contains information about an event destination that sends
 	// data to Amazon CloudWatch Logs.
 	CloudWatchLogsDestination *CloudWatchLogsDestination `type:"structure"`
 
@@ -841,13 +851,17 @@ type EventDestinationDefinition struct {
 	// destination.
 	Enabled *bool `type:"boolean"`
 
-	// An object that contains information about a event destination that sends
+	// An object that contains information about an event destination that sends
 	// data to Amazon Kinesis Data Firehose.
 	KinesisFirehoseDestination *KinesisFirehoseDestination `type:"structure"`
 
 	// An array of EventDestination objects. Each EventDestination object includes
 	// ARNs and other information that define an event destination.
 	MatchingEventTypes []EventType `type:"list"`
+
+	// An object that contains information about an event destination that sends
+	// data to Amazon SNS.
+	SnsDestination *SnsDestination `type:"structure"`
 }
 
 // String returns the string representation
@@ -891,6 +905,12 @@ func (s EventDestinationDefinition) MarshalFields(e protocol.FieldEncoder) error
 		}
 		ls0.End()
 
+	}
+	if s.SnsDestination != nil {
+		v := s.SnsDestination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SnsDestination", v, metadata)
 	}
 	return nil
 }
@@ -984,7 +1004,7 @@ func (s GetConfigurationSetEventDestinationsOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-// An object that contains information about a event destination that sends
+// An object that contains information about an event destination that sends
 // data to Amazon Kinesis Data Firehose.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/KinesisFirehoseDestination
 type KinesisFirehoseDestination struct {
@@ -1038,6 +1058,8 @@ type PlainTextMessageType struct {
 	// The plain (not SSML-formatted) text to deliver to the recipient.
 	Text *string `type:"string"`
 
+	// The name of the voice that you want to use to deliver the message. For a
+	// complete list of supported voices, see the Amazon Polly Developer Guide.
 	VoiceId *string `type:"string"`
 }
 
@@ -1231,6 +1253,38 @@ func (s SendVoiceMessageOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MessageId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that contains information about an event destination that sends
+// data to Amazon SNS.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/SnsDestination
+type SnsDestination struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
+	// events to.
+	TopicArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SnsDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SnsDestination) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SnsDestination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TopicArn != nil {
+		v := *s.TopicArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TopicArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -88,6 +88,8 @@ type SFNAPI interface {
 
 	ListStateMachinesRequest(*sfn.ListStateMachinesInput) sfn.ListStateMachinesRequest
 
+	ListTagsForResourceRequest(*sfn.ListTagsForResourceInput) sfn.ListTagsForResourceRequest
+
 	SendTaskFailureRequest(*sfn.SendTaskFailureInput) sfn.SendTaskFailureRequest
 
 	SendTaskHeartbeatRequest(*sfn.SendTaskHeartbeatInput) sfn.SendTaskHeartbeatRequest
@@ -97,6 +99,10 @@ type SFNAPI interface {
 	StartExecutionRequest(*sfn.StartExecutionInput) sfn.StartExecutionRequest
 
 	StopExecutionRequest(*sfn.StopExecutionInput) sfn.StopExecutionRequest
+
+	TagResourceRequest(*sfn.TagResourceInput) sfn.TagResourceRequest
+
+	UntagResourceRequest(*sfn.UntagResourceInput) sfn.UntagResourceRequest
 
 	UpdateStateMachineRequest(*sfn.UpdateStateMachineInput) sfn.UpdateStateMachineRequest
 }

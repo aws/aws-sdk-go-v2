@@ -74,7 +74,11 @@ type CodeBuildAPI interface {
 
 	DeleteProjectRequest(*codebuild.DeleteProjectInput) codebuild.DeleteProjectRequest
 
+	DeleteSourceCredentialsRequest(*codebuild.DeleteSourceCredentialsInput) codebuild.DeleteSourceCredentialsRequest
+
 	DeleteWebhookRequest(*codebuild.DeleteWebhookInput) codebuild.DeleteWebhookRequest
+
+	ImportSourceCredentialsRequest(*codebuild.ImportSourceCredentialsInput) codebuild.ImportSourceCredentialsRequest
 
 	InvalidateProjectCacheRequest(*codebuild.InvalidateProjectCacheInput) codebuild.InvalidateProjectCacheRequest
 
@@ -85,6 +89,8 @@ type CodeBuildAPI interface {
 	ListCuratedEnvironmentImagesRequest(*codebuild.ListCuratedEnvironmentImagesInput) codebuild.ListCuratedEnvironmentImagesRequest
 
 	ListProjectsRequest(*codebuild.ListProjectsInput) codebuild.ListProjectsRequest
+
+	ListSourceCredentialsRequest(*codebuild.ListSourceCredentialsInput) codebuild.ListSourceCredentialsRequest
 
 	StartBuildRequest(*codebuild.StartBuildInput) codebuild.StartBuildRequest
 

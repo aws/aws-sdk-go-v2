@@ -4442,9 +4442,13 @@ type CreateInputInput struct {
 
 	InputSecurityGroups []string `locationName:"inputSecurityGroups" type:"list"`
 
+	MediaConnectFlows []MediaConnectFlowRequest `locationName:"mediaConnectFlows" type:"list"`
+
 	Name *string `locationName:"name" type:"string"`
 
 	RequestId *string `locationName:"requestId" type:"string" idempotencyToken:"true"`
+
+	RoleArn *string `locationName:"roleArn" type:"string"`
 
 	Sources []InputSourceRequest `locationName:"sources" type:"list"`
 
@@ -4489,6 +4493,18 @@ func (s CreateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if len(s.MediaConnectFlows) > 0 {
+		v := s.MediaConnectFlows
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -4506,6 +4522,12 @@ func (s CreateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "requestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Sources) > 0 {
 		v := s.Sources
@@ -5424,7 +5446,11 @@ type DescribeInputOutput struct {
 
 	Id *string `locationName:"id" type:"string"`
 
+	MediaConnectFlows []MediaConnectFlow `locationName:"mediaConnectFlows" type:"list"`
+
 	Name *string `locationName:"name" type:"string"`
+
+	RoleArn *string `locationName:"roleArn" type:"string"`
 
 	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 
@@ -5488,11 +5514,29 @@ func (s DescribeInputOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.MediaConnectFlows) > 0 {
+		v := s.MediaConnectFlows
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SecurityGroups) > 0 {
 		v := s.SecurityGroups
@@ -7470,8 +7514,9 @@ type H264Settings struct {
 	// be the value configured in the fixedAfd parameter.
 	AfdSignaling AfdSignaling `locationName:"afdSignaling" type:"string" enum:"true"`
 
-	// Average bitrate in bits/second. Required for VBR, CBR, and ABR. For MS Smooth
-	// outputs, bitrates must be unique when rounded down to the nearest multiple
+	// Average bitrate in bits/second. Required when the rate control mode is VBR
+	// or CBR. Not used for QVBR. In an MS Smooth output group, each output must
+	// have a unique value when its bitrate is rounded down to the nearest multiple
 	// of 1000.
 	Bitrate *int64 `locationName:"bitrate" min:"1000" type:"integer"`
 
@@ -7536,8 +7581,8 @@ type H264Settings struct {
 	// while high can produce better quality for certain content.
 	LookAheadRateControl H264LookAheadRateControl `locationName:"lookAheadRateControl" type:"string" enum:"true"`
 
-	// Maximum bitrate in bits/second (for VBR and QVBR modes only).Required when
-	// rateControlMode is "qvbr".
+	// For QVBR: See the tooltip for Quality level For VBR: Set the maximum bitrate
+	// in order to accommodate expected spikes in the complexity of the video.
 	MaxBitrate *int64 `locationName:"maxBitrate" min:"1000" type:"integer"`
 
 	// Only meaningful if sceneChangeDetect is set to enabled. Enforces separation
@@ -7569,16 +7614,21 @@ type H264Settings struct {
 	// H.264 Profile.
 	Profile H264Profile `locationName:"profile" type:"string" enum:"true"`
 
-	// Target quality value. Applicable only to QVBR mode. 1 is the lowest quality
-	// and 10 is thehighest and approaches lossless. Typical levels for content
-	// distribution are between 6 and 8.
+	// Controls the target quality for the video encode. Applies only when the rate
+	// control mode is QVBR. Set values for the QVBR quality level field and Max
+	// bitrate field that suit your most important viewing devices. Recommended
+	// values are:- Primary screen: Quality level: 8 to 10. Max bitrate: 4M- PC
+	// or tablet: Quality level: 7. Max bitrate: 1.5M to 3M- Smartphone: Quality
+	// level: 6. Max bitrate: 1M to 1.5M
 	QvbrQualityLevel *int64 `locationName:"qvbrQualityLevel" min:"1" type:"integer"`
 
-	// Rate control mode. - CBR: Constant Bit Rate- VBR: Variable Bit Rate- QVBR:
-	// Encoder dynamically controls the bitrate to meet the desired quality (specifiedthrough
-	// the qvbrQualityLevel field). The bitrate will not exceed the bitrate specified
-	// inthe maxBitrate field and will not fall below the bitrate required to meet
-	// the desiredquality level.
+	// Rate control mode. QVBR: Quality will match the specified quality level except
+	// when it is constrained by themaximum bitrate. Recommended if you or your
+	// viewers pay for bandwidth.VBR: Quality and bitrate vary, depending on the
+	// video complexity. Recommended instead of QVBRif you want to maintain a specific
+	// average bitrate over the duration of the channel.CBR: Quality varies, depending
+	// on the video complexity. Recommended only if you distributeyour assets to
+	// devices that cannot handle variable bitrates.
 	RateControlMode H264RateControlMode `locationName:"rateControlMode" type:"string" enum:"true"`
 
 	// Sets the scan type of the output to progressive or top-field-first interlaced.
@@ -7602,6 +7652,10 @@ type H264Settings struct {
 	// If set to enabled, adjust quantization within each frame based on spatial
 	// variation of content complexity.
 	SpatialAq H264SpatialAq `locationName:"spatialAq" type:"string" enum:"true"`
+
+	// If set to fixed, use gopNumBFrames B-frames per sub-GOP. If set to dynamic,
+	// optimize the number of B-frames used for each sub-GOP to improve visual quality.
+	SubgopLength H264SubGopLength `locationName:"subgopLength" type:"string" enum:"true"`
 
 	// Produces a bitstream compliant with SMPTE RP-2027.
 	Syntax H264Syntax `locationName:"syntax" type:"string" enum:"true"`
@@ -7853,6 +7907,12 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "spatialAq", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.SubgopLength) > 0 {
+		v := s.SubgopLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subgopLength", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Syntax) > 0 {
 		v := s.Syntax
@@ -8213,8 +8273,8 @@ type HlsGroupSettings struct {
 	// segment length may be longer.
 	SegmentLength *int64 `locationName:"segmentLength" min:"1" type:"integer"`
 
-	// When set to useInputSegmentation, the output segment or fragment points are
-	// set by the RAI markers from the input streams.
+	// useInputSegmentation has been deprecated. The configured segment size is
+	// always used.
 	SegmentationMode HlsSegmentationMode `locationName:"segmentationMode" type:"string" enum:"true"`
 
 	// Number of segments to write to a subdirectory before starting a new one.
@@ -8786,6 +8846,52 @@ func (s HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Settings for the action to emit HLS metadata
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsTimedMetadataScheduleActionSettings
+type HlsTimedMetadataScheduleActionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure
+	//
+	// Id3 is a required field
+	Id3 *string `locationName:"id3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HlsTimedMetadataScheduleActionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HlsTimedMetadataScheduleActionSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HlsTimedMetadataScheduleActionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HlsTimedMetadataScheduleActionSettings"}
+
+	if s.Id3 == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id3"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsTimedMetadataScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id3 != nil {
+		v := *s.Id3
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id3", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsWebdavSettings
 type HlsWebdavSettings struct {
 	_ struct{} `type:"structure"`
@@ -8871,8 +8977,15 @@ type Input struct {
 	// The generated ID of the input (unique for user account, immutable).
 	Id *string `locationName:"id" type:"string"`
 
+	// A list of MediaConnect Flows for this input.
+	MediaConnectFlows []MediaConnectFlow `locationName:"mediaConnectFlows" type:"list"`
+
 	// The user-assigned name (This is a mutable value).
 	Name *string `locationName:"name" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the role this input assumes during and
+	// after creation.
+	RoleArn *string `locationName:"roleArn" type:"string"`
 
 	// A list of IDs for all the security groups attached to the input.
 	SecurityGroups []string `locationName:"securityGroups" type:"list"`
@@ -8933,11 +9046,29 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.MediaConnectFlows) > 0 {
+		v := s.MediaConnectFlows
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SecurityGroups) > 0 {
 		v := s.SecurityGroups
@@ -11201,6 +11332,66 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The settings for a MediaConnect Flow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlow
+type MediaConnectFlow struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ARN of the MediaConnect Flow being used as a source.
+	FlowArn *string `locationName:"flowArn" type:"string"`
+}
+
+// String returns the string representation
+func (s MediaConnectFlow) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MediaConnectFlow) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MediaConnectFlow) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FlowArn != nil {
+		v := *s.FlowArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The settings for a MediaConnect Flow.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectFlowRequest
+type MediaConnectFlowRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the MediaConnect Flow that you want to use as a source.
+	FlowArn *string `locationName:"flowArn" type:"string"`
+}
+
+// String returns the string representation
+func (s MediaConnectFlowRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MediaConnectFlowRequest) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MediaConnectFlowRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FlowArn != nil {
+		v := *s.FlowArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "flowArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Mp2Settings
 type Mp2Settings struct {
 	_ struct{} `type:"structure"`
@@ -11310,8 +11501,8 @@ type MsSmoothGroupSettings struct {
 	// to exhausting the numRetries on one segment, or exceeding filecacheDuration.
 	RestartDelay *int64 `locationName:"restartDelay" type:"integer"`
 
-	// When set to useInputSegmentation, the output segment or fragment points are
-	// set by the RAI markers from the input streams.
+	// useInputSegmentation has been deprecated. The configured segment size is
+	// always used.
 	SegmentationMode SmoothGroupSegmentationMode `locationName:"segmentationMode" type:"string" enum:"true"`
 
 	// Number of milliseconds to delay the output from the second pipeline.
@@ -12959,6 +13150,9 @@ func (s ScheduleAction) MarshalFields(e protocol.FieldEncoder) error {
 type ScheduleActionSettings struct {
 	_ struct{} `type:"structure"`
 
+	// Settings to emit HLS metadata
+	HlsTimedMetadataSettings *HlsTimedMetadataScheduleActionSettings `locationName:"hlsTimedMetadataSettings" type:"structure"`
+
 	// Settings to switch an input
 	InputSwitchSettings *InputSwitchScheduleActionSettings `locationName:"inputSwitchSettings" type:"structure"`
 
@@ -12991,6 +13185,11 @@ func (s ScheduleActionSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleActionSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduleActionSettings"}
+	if s.HlsTimedMetadataSettings != nil {
+		if err := s.HlsTimedMetadataSettings.Validate(); err != nil {
+			invalidParams.AddNested("HlsTimedMetadataSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.InputSwitchSettings != nil {
 		if err := s.InputSwitchSettings.Validate(); err != nil {
 			invalidParams.AddNested("InputSwitchSettings", err.(aws.ErrInvalidParams))
@@ -13025,6 +13224,12 @@ func (s *ScheduleActionSettings) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HlsTimedMetadataSettings != nil {
+		v := s.HlsTimedMetadataSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsTimedMetadataSettings", v, metadata)
+	}
 	if s.InputSwitchSettings != nil {
 		v := s.InputSwitchSettings
 
@@ -15127,7 +15332,11 @@ type UpdateInputInput struct {
 
 	InputSecurityGroups []string `locationName:"inputSecurityGroups" type:"list"`
 
+	MediaConnectFlows []MediaConnectFlowRequest `locationName:"mediaConnectFlows" type:"list"`
+
 	Name *string `locationName:"name" type:"string"`
+
+	RoleArn *string `locationName:"roleArn" type:"string"`
 
 	Sources []InputSourceRequest `locationName:"sources" type:"list"`
 }
@@ -15184,11 +15393,29 @@ func (s UpdateInputInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if len(s.MediaConnectFlows) > 0 {
+		v := s.MediaConnectFlows
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "mediaConnectFlows", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Sources) > 0 {
 		v := s.Sources
@@ -17084,6 +17311,23 @@ func (enum H264SpatialAq) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type H264SubGopLength string
+
+// Enum values for H264SubGopLength
+const (
+	H264SubGopLengthDynamic H264SubGopLength = "DYNAMIC"
+	H264SubGopLengthFixed   H264SubGopLength = "FIXED"
+)
+
+func (enum H264SubGopLength) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum H264SubGopLength) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type H264Syntax string
 
 // Enum values for H264Syntax
@@ -17751,12 +17995,13 @@ type InputType string
 
 // Enum values for InputType
 const (
-	InputTypeUdpPush  InputType = "UDP_PUSH"
-	InputTypeRtpPush  InputType = "RTP_PUSH"
-	InputTypeRtmpPush InputType = "RTMP_PUSH"
-	InputTypeRtmpPull InputType = "RTMP_PULL"
-	InputTypeUrlPull  InputType = "URL_PULL"
-	InputTypeMp4File  InputType = "MP4_FILE"
+	InputTypeUdpPush      InputType = "UDP_PUSH"
+	InputTypeRtpPush      InputType = "RTP_PUSH"
+	InputTypeRtmpPush     InputType = "RTMP_PUSH"
+	InputTypeRtmpPull     InputType = "RTMP_PULL"
+	InputTypeUrlPull      InputType = "URL_PULL"
+	InputTypeMp4File      InputType = "MP4_FILE"
+	InputTypeMediaconnect InputType = "MEDIACONNECT"
 )
 
 func (enum InputType) MarshalValue() (string, error) {

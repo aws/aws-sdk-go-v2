@@ -72,7 +72,11 @@ type AlexaForBusinessAPI interface {
 
 	AssociateSkillWithSkillGroupRequest(*alexaforbusiness.AssociateSkillWithSkillGroupInput) alexaforbusiness.AssociateSkillWithSkillGroupRequest
 
+	AssociateSkillWithUsersRequest(*alexaforbusiness.AssociateSkillWithUsersInput) alexaforbusiness.AssociateSkillWithUsersRequest
+
 	CreateAddressBookRequest(*alexaforbusiness.CreateAddressBookInput) alexaforbusiness.CreateAddressBookRequest
+
+	CreateBusinessReportScheduleRequest(*alexaforbusiness.CreateBusinessReportScheduleInput) alexaforbusiness.CreateBusinessReportScheduleRequest
 
 	CreateConferenceProviderRequest(*alexaforbusiness.CreateConferenceProviderInput) alexaforbusiness.CreateConferenceProviderRequest
 
@@ -87,6 +91,8 @@ type AlexaForBusinessAPI interface {
 	CreateUserRequest(*alexaforbusiness.CreateUserInput) alexaforbusiness.CreateUserRequest
 
 	DeleteAddressBookRequest(*alexaforbusiness.DeleteAddressBookInput) alexaforbusiness.DeleteAddressBookRequest
+
+	DeleteBusinessReportScheduleRequest(*alexaforbusiness.DeleteBusinessReportScheduleInput) alexaforbusiness.DeleteBusinessReportScheduleRequest
 
 	DeleteConferenceProviderRequest(*alexaforbusiness.DeleteConferenceProviderInput) alexaforbusiness.DeleteConferenceProviderRequest
 
@@ -112,6 +118,8 @@ type AlexaForBusinessAPI interface {
 
 	DisassociateSkillFromSkillGroupRequest(*alexaforbusiness.DisassociateSkillFromSkillGroupInput) alexaforbusiness.DisassociateSkillFromSkillGroupRequest
 
+	DisassociateSkillFromUsersRequest(*alexaforbusiness.DisassociateSkillFromUsersInput) alexaforbusiness.DisassociateSkillFromUsersRequest
+
 	DisassociateSkillGroupFromRoomRequest(*alexaforbusiness.DisassociateSkillGroupFromRoomInput) alexaforbusiness.DisassociateSkillGroupFromRoomRequest
 
 	ForgetSmartHomeAppliancesRequest(*alexaforbusiness.ForgetSmartHomeAppliancesInput) alexaforbusiness.ForgetSmartHomeAppliancesRequest
@@ -133,6 +141,8 @@ type AlexaForBusinessAPI interface {
 	GetRoomSkillParameterRequest(*alexaforbusiness.GetRoomSkillParameterInput) alexaforbusiness.GetRoomSkillParameterRequest
 
 	GetSkillGroupRequest(*alexaforbusiness.GetSkillGroupInput) alexaforbusiness.GetSkillGroupRequest
+
+	ListBusinessReportSchedulesRequest(*alexaforbusiness.ListBusinessReportSchedulesInput) alexaforbusiness.ListBusinessReportSchedulesRequest
 
 	ListConferenceProvidersRequest(*alexaforbusiness.ListConferenceProvidersInput) alexaforbusiness.ListConferenceProvidersRequest
 
@@ -187,6 +197,8 @@ type AlexaForBusinessAPI interface {
 	UntagResourceRequest(*alexaforbusiness.UntagResourceInput) alexaforbusiness.UntagResourceRequest
 
 	UpdateAddressBookRequest(*alexaforbusiness.UpdateAddressBookInput) alexaforbusiness.UpdateAddressBookRequest
+
+	UpdateBusinessReportScheduleRequest(*alexaforbusiness.UpdateBusinessReportScheduleInput) alexaforbusiness.UpdateBusinessReportScheduleRequest
 
 	UpdateConferenceProviderRequest(*alexaforbusiness.UpdateConferenceProviderInput) alexaforbusiness.UpdateConferenceProviderRequest
 

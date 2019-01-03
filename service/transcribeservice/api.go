@@ -34,10 +34,7 @@ func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
 // Amazon Transcribe Service.
 //
 // Creates a new custom vocabulary that you can use to change the way Amazon
-// Transcribe handles transcription of an audio file. Note that vocabularies
-// for en-AU, en-UK, and fr-CA languages that are in preview are not available.
-// In the console, the vocabulary section will be greyed-out and SDK will return
-// error message.
+// Transcribe handles transcription of an audio file.
 //
 //    // Example sending a request using the CreateVocabularyRequest method.
 //    req := client.CreateVocabularyRequest(params)
@@ -245,9 +242,7 @@ func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
 // GetVocabularyRequest returns a request value for making API operation for
 // Amazon Transcribe Service.
 //
-// Gets information about a vocabulary. Note that vocabularies for en-AU, en-UK,
-// and fr-CA languages that are in preview are not available. In the console,
-// the vocabulary section will be greyed-out and SDK will return error message.
+// Gets information about a vocabulary.
 //
 //    // Example sending a request using the GetVocabularyRequest method.
 //    req := client.GetVocabularyRequest(params)
@@ -502,9 +497,7 @@ func (r StartTranscriptionJobRequest) Send() (*StartTranscriptionJobOutput, erro
 // StartTranscriptionJobRequest returns a request value for making API operation for
 // Amazon Transcribe Service.
 //
-// Starts an asynchronous job to transcribe speech to text. Note that en-AU,
-// en-UK, and fr-CA languages are in preview and are only available to whitelisted
-// customers.
+// Starts an asynchronous job to transcribe speech to text.
 //
 //    // Example sending a request using the StartTranscriptionJobRequest method.
 //    req := client.StartTranscriptionJobRequest(params)
@@ -556,9 +549,7 @@ func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
 //
 // Updates an existing vocabulary with new values. The UpdateVocabulary operation
 // overwrites all of the existing information with the values that you provide
-// in the request. Note that vocabularies for en-AU, en-UK, and fr-CA languages
-// that are in preview are not available. In the console, the vocabulary section
-// will be greyed-out and SDK will return error message.
+// in the request.
 //
 //    // Example sending a request using the UpdateVocabularyRequest method.
 //    req := client.UpdateVocabularyRequest(params)
@@ -956,6 +947,9 @@ type ListTranscriptionJobsInput struct {
 	NextToken *string `type:"string"`
 
 	// When specified, returns only transcription jobs with the specified status.
+	// Jobs are ordered by creation date, with the newest jobs returned first. If
+	// you don’t specify a status, Amazon Transcribe returns all transcription jobs
+	// ordered by creation date.
 	Status TranscriptionJobStatus `type:"string" enum:"true"`
 }
 
@@ -1113,7 +1107,7 @@ type Media struct {
 	// The S3 location of the input media file. The URI must be in the same region
 	// as the API endpoint that you are calling. The general form is:
 	//
-	// https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+	// https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
 	//
 	// For example:
 	//
@@ -1357,8 +1351,7 @@ func (s Transcript) GoString() string {
 }
 
 // Describes an asynchronous transcription job that was created with the StartTranscriptionJob
-// operation. Note that en-AU, en-UK, and fr-CA languages are in preview and
-// are only available to whitelisted customers.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob
 type TranscriptionJob struct {
 	_ struct{} `type:"structure"`
@@ -1411,9 +1404,7 @@ func (s TranscriptionJob) GoString() string {
 	return s.String()
 }
 
-// Provides a summary of information about a transcription job. Note that en-AU,
-// en-UK, and fr-CA languages are in preview and are only available to whitelisted
-// customers.
+// Provides a summary of information about a transcription job. .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary
 type TranscriptionJobSummary struct {
 	_ struct{} `type:"structure"`
@@ -1548,10 +1539,7 @@ func (s UpdateVocabularyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Provides information about a custom vocabulary. Note that vocabularies for
-// en-AU, en-UK, and fr-CA languages that are in preview are not available.
-// In the console, the vocabulary section will be greyed-out and SDK will return
-// error message.
+// Provides information about a custom vocabulary.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyInfo
 type VocabularyInfo struct {
 	_ struct{} `type:"structure"`
@@ -1592,6 +1580,7 @@ const (
 	LanguageCodeDeDe LanguageCode = "de-DE"
 	LanguageCodePtBr LanguageCode = "pt-BR"
 	LanguageCodeFrFr LanguageCode = "fr-FR"
+	LanguageCodeItIt LanguageCode = "it-IT"
 )
 
 func (enum LanguageCode) MarshalValue() (string, error) {

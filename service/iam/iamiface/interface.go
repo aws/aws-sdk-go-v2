@@ -163,6 +163,8 @@ type IAMAPI interface {
 
 	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
 
+	GenerateServiceLastAccessedDetailsRequest(*iam.GenerateServiceLastAccessedDetailsInput) iam.GenerateServiceLastAccessedDetailsRequest
+
 	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
 
 	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
@@ -201,6 +203,10 @@ type IAMAPI interface {
 
 	GetServerCertificateRequest(*iam.GetServerCertificateInput) iam.GetServerCertificateRequest
 
+	GetServiceLastAccessedDetailsRequest(*iam.GetServiceLastAccessedDetailsInput) iam.GetServiceLastAccessedDetailsRequest
+
+	GetServiceLastAccessedDetailsWithEntitiesRequest(*iam.GetServiceLastAccessedDetailsWithEntitiesInput) iam.GetServiceLastAccessedDetailsWithEntitiesRequest
+
 	GetServiceLinkedRoleDeletionStatusRequest(*iam.GetServiceLinkedRoleDeletionStatusInput) iam.GetServiceLinkedRoleDeletionStatusRequest
 
 	GetUserRequest(*iam.GetUserInput) iam.GetUserRequest
@@ -234,6 +240,8 @@ type IAMAPI interface {
 	ListOpenIDConnectProvidersRequest(*iam.ListOpenIDConnectProvidersInput) iam.ListOpenIDConnectProvidersRequest
 
 	ListPoliciesRequest(*iam.ListPoliciesInput) iam.ListPoliciesRequest
+
+	ListPoliciesGrantingServiceAccessRequest(*iam.ListPoliciesGrantingServiceAccessInput) iam.ListPoliciesGrantingServiceAccessRequest
 
 	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
 

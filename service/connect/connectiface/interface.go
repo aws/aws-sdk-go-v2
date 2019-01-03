@@ -72,6 +72,8 @@ type ConnectAPI interface {
 
 	DescribeUserHierarchyStructureRequest(*connect.DescribeUserHierarchyStructureInput) connect.DescribeUserHierarchyStructureRequest
 
+	GetContactAttributesRequest(*connect.GetContactAttributesInput) connect.GetContactAttributesRequest
+
 	GetCurrentMetricDataRequest(*connect.GetCurrentMetricDataInput) connect.GetCurrentMetricDataRequest
 
 	GetFederationTokenRequest(*connect.GetFederationTokenInput) connect.GetFederationTokenRequest

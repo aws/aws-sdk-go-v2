@@ -24153,8 +24153,9 @@ type InventoryFormat string
 
 // Enum values for InventoryFormat
 const (
-	InventoryFormatCsv InventoryFormat = "CSV"
-	InventoryFormatOrc InventoryFormat = "ORC"
+	InventoryFormatCsv     InventoryFormat = "CSV"
+	InventoryFormatOrc     InventoryFormat = "ORC"
+	InventoryFormatParquet InventoryFormat = "Parquet"
 )
 
 func (enum InventoryFormat) MarshalValue() (string, error) {

@@ -3827,8 +3827,11 @@ type AliasTarget struct {
 	//
 	// AWS Management Console: Go to the EC2 page, choose Load Balancers in the
 	// navigation pane, choose the load balancer, choose the Description tab, and
-	// get the value of the DNS name field. (If you're routing traffic to a Classic
-	// Load Balancer, get the value that begins with dualstack.)
+	// get the value of the DNS name field.
+	//
+	// If you're routing traffic to a Classic Load Balancer, get the value that
+	// begins with dualstack. If you're routing traffic to another type of load
+	// balancer, get the value that applies to the record type, A or AAAA.
 	//
 	// Elastic Load Balancing API: Use DescribeLoadBalancers to get the value of
 	// DNSName. For more information, see the applicable guide:
@@ -3846,7 +3849,7 @@ type AliasTarget struct {
 	//
 	// Amazon S3 bucket that is configured as a static websiteSpecify the domain
 	// name of the Amazon S3 website endpoint that you created the bucket in, for
-	// example, s3-website-us-east-2.amazonaws.com. For more information about valid
+	// example, s3-website.us-east-2.amazonaws.com. For more information about valid
 	// values, see the table Amazon Simple Storage Service (S3) Website Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the
 	// Amazon Web Services General Reference. For more information about using S3
@@ -14269,6 +14272,7 @@ const (
 	CloudWatchRegionApNortheast1 CloudWatchRegion = "ap-northeast-1"
 	CloudWatchRegionApNortheast2 CloudWatchRegion = "ap-northeast-2"
 	CloudWatchRegionApNortheast3 CloudWatchRegion = "ap-northeast-3"
+	CloudWatchRegionEuNorth1     CloudWatchRegion = "eu-north-1"
 	CloudWatchRegionSaEast1      CloudWatchRegion = "sa-east-1"
 )
 
@@ -14461,6 +14465,7 @@ const (
 	ResourceRecordSetRegionApNortheast1 ResourceRecordSetRegion = "ap-northeast-1"
 	ResourceRecordSetRegionApNortheast2 ResourceRecordSetRegion = "ap-northeast-2"
 	ResourceRecordSetRegionApNortheast3 ResourceRecordSetRegion = "ap-northeast-3"
+	ResourceRecordSetRegionEuNorth1     ResourceRecordSetRegion = "eu-north-1"
 	ResourceRecordSetRegionSaEast1      ResourceRecordSetRegion = "sa-east-1"
 	ResourceRecordSetRegionCnNorth1     ResourceRecordSetRegion = "cn-north-1"
 	ResourceRecordSetRegionCnNorthwest1 ResourceRecordSetRegion = "cn-northwest-1"
@@ -14547,6 +14552,7 @@ const (
 	VPCRegionApNortheast1 VPCRegion = "ap-northeast-1"
 	VPCRegionApNortheast2 VPCRegion = "ap-northeast-2"
 	VPCRegionApNortheast3 VPCRegion = "ap-northeast-3"
+	VPCRegionEuNorth1     VPCRegion = "eu-north-1"
 	VPCRegionSaEast1      VPCRegion = "sa-east-1"
 	VPCRegionCaCentral1   VPCRegion = "ca-central-1"
 	VPCRegionCnNorth1     VPCRegion = "cn-north-1"
