@@ -1,3 +1,17 @@
+Release v0.7.0 (2019-01-03)
+===
+
+### Services
+* Synced the V2 SDK with latests AWS service API definitions.
+
+### SDK Enhancements
+* deps: Update SDK to latest go-jmespath ([#254](https://github.com/aws/aws-sdk-go-v2/pull/254))
+
+### SDK Bugs
+* `internal/ini`: Fix bug on trimming rhs spaces closes ([#260](https://github.com/aws/aws-sdk-go-v2/pull/260))
+  * Fixes a bug trimming RHS spaces not being read correctly from the ini file.
+  * Fix [#259](https://github.com/aws/aws-sdk-go-v2/pull/259)
+
 Release v0.6.0 (2018-12-03)
 ===
 
