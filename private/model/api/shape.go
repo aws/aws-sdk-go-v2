@@ -84,7 +84,6 @@ type Shape struct {
 	IdempotencyToken bool `json:"idempotencyToken"`
 	XMLNamespace     XMLInfo
 	Min              float64 // optional Minimum length (string, list) or value (number)
-	Max              float64 // optional Maximum length (string, list) or value (number)
 
 	IsEventStream bool `json:"eventstream"`
 

@@ -9708,7 +9708,7 @@ type TransactWriteItemsInput struct {
 	// If you submit a request with the same client token but a change in other
 	// parameters within the 10 minute idempotency window, DynamoDB returns an IdempotentParameterMismatch
 	// exception.
-	ClientRequestToken *string `type:"string" idempotencyToken:"true"`
+	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
 	// Determines the level of detail about provisioned throughput consumption that
 	// is returned in the response:
@@ -9755,6 +9755,9 @@ func (s TransactWriteItemsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TransactWriteItemsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TransactWriteItemsInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
+	}
 
 	if s.TransactItems == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TransactItems"))

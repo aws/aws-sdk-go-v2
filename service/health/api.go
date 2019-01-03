@@ -556,6 +556,8 @@ type AffectedEntity struct {
 	// Example: arn:aws:health:us-east-1:111222333444:entity/AVh5GGT7ul1arKr1sE1K
 	EntityArn *string `locationName:"entityArn" type:"string"`
 
+	EntityUrl *string `locationName:"entityUrl" type:"string"`
+
 	// The ID of the affected entity.
 	EntityValue *string `locationName:"entityValue" type:"string"`
 

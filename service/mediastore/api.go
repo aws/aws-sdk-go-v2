@@ -3,6 +3,7 @@
 package mediastore
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -217,6 +218,56 @@ func (c *MediaStore) DeleteCorsPolicyRequest(input *DeleteCorsPolicyInput) Delet
 	return DeleteCorsPolicyRequest{Request: req, Input: input, Copy: c.DeleteCorsPolicyRequest}
 }
 
+const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
+
+// DeleteLifecyclePolicyRequest is a API request type for the DeleteLifecyclePolicy API operation.
+type DeleteLifecyclePolicyRequest struct {
+	*aws.Request
+	Input *DeleteLifecyclePolicyInput
+	Copy  func(*DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
+}
+
+// Send marshals and sends the DeleteLifecyclePolicy API request.
+func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLifecyclePolicyOutput), nil
+}
+
+// DeleteLifecyclePolicyRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Removes an object lifecycle policy from a container.
+//
+//    // Example sending a request using the DeleteLifecyclePolicyRequest method.
+//    req := client.DeleteLifecyclePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicy
+func (c *MediaStore) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteLifecyclePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteLifecyclePolicyInput{}
+	}
+
+	output := &DeleteLifecyclePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteLifecyclePolicyRequest{Request: req, Input: input, Copy: c.DeleteLifecyclePolicyRequest}
+}
+
 const opDescribeContainer = "DescribeContainer"
 
 // DescribeContainerRequest is a API request type for the DescribeContainer API operation.
@@ -377,6 +428,56 @@ func (c *MediaStore) GetCorsPolicyRequest(input *GetCorsPolicyInput) GetCorsPoli
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetCorsPolicyRequest{Request: req, Input: input, Copy: c.GetCorsPolicyRequest}
+}
+
+const opGetLifecyclePolicy = "GetLifecyclePolicy"
+
+// GetLifecyclePolicyRequest is a API request type for the GetLifecyclePolicy API operation.
+type GetLifecyclePolicyRequest struct {
+	*aws.Request
+	Input *GetLifecyclePolicyInput
+	Copy  func(*GetLifecyclePolicyInput) GetLifecyclePolicyRequest
+}
+
+// Send marshals and sends the GetLifecyclePolicy API request.
+func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLifecyclePolicyOutput), nil
+}
+
+// GetLifecyclePolicyRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Retrieves the object lifecycle policy that is assigned to a container.
+//
+//    // Example sending a request using the GetLifecyclePolicyRequest method.
+//    req := client.GetLifecyclePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicy
+func (c *MediaStore) GetLifecyclePolicyRequest(input *GetLifecyclePolicyInput) GetLifecyclePolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetLifecyclePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetLifecyclePolicyInput{}
+	}
+
+	output := &GetLifecyclePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetLifecyclePolicyRequest{Request: req, Input: input, Copy: c.GetLifecyclePolicyRequest}
 }
 
 const opListContainers = "ListContainers"
@@ -555,6 +656,58 @@ func (c *MediaStore) PutCorsPolicyRequest(input *PutCorsPolicyInput) PutCorsPoli
 	return PutCorsPolicyRequest{Request: req, Input: input, Copy: c.PutCorsPolicyRequest}
 }
 
+const opPutLifecyclePolicy = "PutLifecyclePolicy"
+
+// PutLifecyclePolicyRequest is a API request type for the PutLifecyclePolicy API operation.
+type PutLifecyclePolicyRequest struct {
+	*aws.Request
+	Input *PutLifecyclePolicyInput
+	Copy  func(*PutLifecyclePolicyInput) PutLifecyclePolicyRequest
+}
+
+// Send marshals and sends the PutLifecyclePolicy API request.
+func (r PutLifecyclePolicyRequest) Send() (*PutLifecyclePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutLifecyclePolicyOutput), nil
+}
+
+// PutLifecyclePolicyRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Writes an object lifecycle policy to a container. If the container already
+// has an object lifecycle policy, the service replaces the existing policy
+// with the new policy.
+//
+//    // Example sending a request using the PutLifecyclePolicyRequest method.
+//    req := client.PutLifecyclePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicy
+func (c *MediaStore) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) PutLifecyclePolicyRequest {
+	op := &aws.Operation{
+		Name:       opPutLifecyclePolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutLifecyclePolicyInput{}
+	}
+
+	output := &PutLifecyclePolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutLifecyclePolicyRequest{Request: req, Input: input, Copy: c.PutLifecyclePolicyRequest}
+}
+
 // This section describes operations that you can perform on an AWS Elemental
 // MediaStore container.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Container
@@ -610,23 +763,27 @@ type CorsRule struct {
 	// rule. Only the headers that were requested are sent back.
 	//
 	// This element can contain only one wildcard character (*).
-	AllowedHeaders []string `type:"list"`
+	//
+	// AllowedHeaders is a required field
+	AllowedHeaders []string `type:"list" required:"true"`
 
 	// Identifies an HTTP method that the origin that is specified in the rule is
 	// allowed to execute.
 	//
-	// Each CORS rule must contain at least one AllowedMethod and one AllowedOrigin
+	// Each CORS rule must contain at least one AllowedMethods and one AllowedOrigins
 	// element.
-	AllowedMethods []MethodName `type:"list"`
+	AllowedMethods []MethodName `min:"1" type:"list"`
 
 	// One or more response headers that you want users to be able to access from
 	// their applications (for example, from a JavaScript XMLHttpRequest object).
 	//
-	// Each CORS rule must have at least one AllowedOrigin element. The string value
-	// can include only one wildcard character (*), for example, http://*.example.com.
+	// Each CORS rule must have at least one AllowedOrigins element. The string
+	// value can include only one wildcard character (*), for example, http://*.example.com.
 	// Additionally, you can specify only one wildcard character to allow cross-origin
 	// access for all origins.
-	AllowedOrigins []string `type:"list"`
+	//
+	// AllowedOrigins is a required field
+	AllowedOrigins []string `min:"1" type:"list" required:"true"`
 
 	// One or more headers in the response that you want users to be able to access
 	// from their applications (for example, from a JavaScript XMLHttpRequest object).
@@ -649,6 +806,30 @@ func (s CorsRule) String() string {
 // GoString returns the string representation
 func (s CorsRule) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CorsRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CorsRule"}
+
+	if s.AllowedHeaders == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AllowedHeaders"))
+	}
+	if s.AllowedMethods != nil && len(s.AllowedMethods) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AllowedMethods", 1))
+	}
+
+	if s.AllowedOrigins == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AllowedOrigins"))
+	}
+	if s.AllowedOrigins != nil && len(s.AllowedOrigins) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AllowedOrigins", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CreateContainerInput
@@ -909,6 +1090,65 @@ func (s DeleteCorsPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicyInput
+type DeleteLifecyclePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that holds the object lifecycle policy.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteLifecyclePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteLifecyclePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteLifecyclePolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLifecyclePolicyInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteLifecyclePolicyOutput
+type DeleteLifecyclePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteLifecyclePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteLifecyclePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainerInput
 type DescribeContainerInput struct {
 	_ struct{} `type:"structure"`
@@ -1072,7 +1312,7 @@ type GetCorsPolicyOutput struct {
 
 	responseMetadata aws.Response
 
-	// The CORS policy of the container.
+	// The CORS policy assigned to the container.
 	//
 	// CorsPolicy is a required field
 	CorsPolicy []CorsRule `min:"1" type:"list" required:"true"`
@@ -1090,6 +1330,70 @@ func (s GetCorsPolicyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCorsPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicyInput
+type GetLifecyclePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that the object lifecycle policy is assigned to.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetLifecyclePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLifecyclePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetLifecyclePolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetLifecyclePolicyInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetLifecyclePolicyOutput
+type GetLifecyclePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The object lifecycle policy that is assigned to the container.
+	//
+	// LifecyclePolicy is a required field
+	LifecyclePolicy *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetLifecyclePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLifecyclePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -1283,6 +1587,13 @@ func (s *PutCorsPolicyInput) Validate() error {
 	if s.CorsPolicy != nil && len(s.CorsPolicy) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CorsPolicy", 1))
 	}
+	if s.CorsPolicy != nil {
+		for i, v := range s.CorsPolicy {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CorsPolicy", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1309,6 +1620,75 @@ func (s PutCorsPolicyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutCorsPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicyInput
+type PutLifecyclePolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that you want to assign the object lifecycle policy
+	// to.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+
+	// The object lifecycle policy to apply to the container.
+	//
+	// LifecyclePolicy is a required field
+	LifecyclePolicy *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutLifecyclePolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutLifecyclePolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutLifecyclePolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutLifecyclePolicyInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if s.LifecyclePolicy == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LifecyclePolicy"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutLifecyclePolicyOutput
+type PutLifecyclePolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutLifecyclePolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutLifecyclePolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 

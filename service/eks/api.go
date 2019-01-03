@@ -196,6 +196,60 @@ func (c *EKS) DescribeClusterRequest(input *DescribeClusterInput) DescribeCluste
 	return DescribeClusterRequest{Request: req, Input: input, Copy: c.DescribeClusterRequest}
 }
 
+const opDescribeUpdate = "DescribeUpdate"
+
+// DescribeUpdateRequest is a API request type for the DescribeUpdate API operation.
+type DescribeUpdateRequest struct {
+	*aws.Request
+	Input *DescribeUpdateInput
+	Copy  func(*DescribeUpdateInput) DescribeUpdateRequest
+}
+
+// Send marshals and sends the DescribeUpdate API request.
+func (r DescribeUpdateRequest) Send() (*DescribeUpdateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUpdateOutput), nil
+}
+
+// DescribeUpdateRequest returns a request value for making API operation for
+// Amazon Elastic Container Service for Kubernetes.
+//
+// Returns descriptive information about an update against your Amazon EKS cluster.
+//
+// When the status of the update is Succeeded, the update is complete. If an
+// update fails, the status is Failed, and an error detail explains the reason
+// for the failure.
+//
+//    // Example sending a request using the DescribeUpdateRequest method.
+//    req := client.DescribeUpdateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdate
+func (c *EKS) DescribeUpdateRequest(input *DescribeUpdateInput) DescribeUpdateRequest {
+	op := &aws.Operation{
+		Name:       opDescribeUpdate,
+		HTTPMethod: "GET",
+		HTTPPath:   "/clusters/{name}/updates/{updateId}",
+	}
+
+	if input == nil {
+		input = &DescribeUpdateInput{}
+	}
+
+	output := &DescribeUpdateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeUpdateRequest{Request: req, Input: input, Copy: c.DescribeUpdateRequest}
+}
+
 const opListClusters = "ListClusters"
 
 // ListClustersRequest is a API request type for the ListClusters API operation.
@@ -246,6 +300,115 @@ func (c *EKS) ListClustersRequest(input *ListClustersInput) ListClustersRequest 
 	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
+const opListUpdates = "ListUpdates"
+
+// ListUpdatesRequest is a API request type for the ListUpdates API operation.
+type ListUpdatesRequest struct {
+	*aws.Request
+	Input *ListUpdatesInput
+	Copy  func(*ListUpdatesInput) ListUpdatesRequest
+}
+
+// Send marshals and sends the ListUpdates API request.
+func (r ListUpdatesRequest) Send() (*ListUpdatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListUpdatesOutput), nil
+}
+
+// ListUpdatesRequest returns a request value for making API operation for
+// Amazon Elastic Container Service for Kubernetes.
+//
+// Lists the updates associated with an Amazon EKS cluster in your AWS account,
+// in the specified Region.
+//
+//    // Example sending a request using the ListUpdatesRequest method.
+//    req := client.ListUpdatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdates
+func (c *EKS) ListUpdatesRequest(input *ListUpdatesInput) ListUpdatesRequest {
+	op := &aws.Operation{
+		Name:       opListUpdates,
+		HTTPMethod: "GET",
+		HTTPPath:   "/clusters/{name}/updates",
+	}
+
+	if input == nil {
+		input = &ListUpdatesInput{}
+	}
+
+	output := &ListUpdatesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListUpdatesRequest{Request: req, Input: input, Copy: c.ListUpdatesRequest}
+}
+
+const opUpdateClusterVersion = "UpdateClusterVersion"
+
+// UpdateClusterVersionRequest is a API request type for the UpdateClusterVersion API operation.
+type UpdateClusterVersionRequest struct {
+	*aws.Request
+	Input *UpdateClusterVersionInput
+	Copy  func(*UpdateClusterVersionInput) UpdateClusterVersionRequest
+}
+
+// Send marshals and sends the UpdateClusterVersion API request.
+func (r UpdateClusterVersionRequest) Send() (*UpdateClusterVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateClusterVersionOutput), nil
+}
+
+// UpdateClusterVersionRequest returns a request value for making API operation for
+// Amazon Elastic Container Service for Kubernetes.
+//
+// Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster
+// continues to function during the update. The response output includes an
+// update ID that you can use to track the status of your cluster update with
+// the DescribeUpdate API operation.
+//
+// Cluster updates are asynchronous, and they should finish within a few minutes.
+// During an update, the cluster status moves to UPDATING (this status transition
+// is eventually consistent). When the update is complete (either Failed or
+// Successful), the cluster status moves to Active.
+//
+//    // Example sending a request using the UpdateClusterVersionRequest method.
+//    req := client.UpdateClusterVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersion
+func (c *EKS) UpdateClusterVersionRequest(input *UpdateClusterVersionInput) UpdateClusterVersionRequest {
+	op := &aws.Operation{
+		Name:       opUpdateClusterVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/clusters/{name}/updates",
+	}
+
+	if input == nil {
+		input = &UpdateClusterVersionInput{}
+	}
+
+	output := &UpdateClusterVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateClusterVersionRequest{Request: req, Input: input, Copy: c.UpdateClusterVersionRequest}
+}
+
 // An object representing the certificate-authority-data for your cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Certificate
 type Certificate struct {
@@ -289,11 +452,11 @@ type Cluster struct {
 	// The certificate-authority-data for your cluster.
 	CertificateAuthority *Certificate `locationName:"certificateAuthority" type:"structure"`
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string"`
 
-	// The Unix epoch time stamp in seconds for when the cluster was created.
+	// The Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The endpoint for your Kubernetes API server.
@@ -303,8 +466,8 @@ type Cluster struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The platform version of your Amazon EKS cluster. For more information, see
-	// Platform Versions (eks/latest/userguide/platform-versions.html) in the Amazon
-	// EKS User Guide.
+	// Platform Versions (http://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
+	// in the Amazon EKS User Guide.
 	PlatformVersion *string `locationName:"platformVersion" type:"string"`
 
 	// The VPC subnets and security groups used by the cluster control plane. Amazon
@@ -411,8 +574,8 @@ func (s Cluster) MarshalFields(e protocol.FieldEncoder) error {
 type CreateClusterInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of
-	// the request.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
 
 	// The unique name to give to your cluster.
@@ -425,7 +588,7 @@ type CreateClusterInput struct {
 	// For more information, see Cluster VPC Considerations (http://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
 	// and Cluster Security Group Considerations (http://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
 	// in the Amazon EKS User Guide. You must specify at least two subnets. You
-	// may specify up to 5 security groups, but we recommend that you use a dedicated
+	// may specify up to five security groups, but we recommend that you use a dedicated
 	// security group for your cluster control plane.
 	//
 	// ResourcesVpcConfig is a required field
@@ -729,6 +892,177 @@ func (s DescribeClusterOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateRequest
+type DescribeUpdateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon EKS cluster to update.
+	//
+	// Name is a required field
+	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+
+	// The ID of the update to describe.
+	//
+	// UpdateId is a required field
+	UpdateId *string `location:"uri" locationName:"updateId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeUpdateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUpdateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeUpdateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUpdateInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.UpdateId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UpdateId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdateId != nil {
+		v := *s.UpdateId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "updateId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeUpdateResponse
+type DescribeUpdateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The full description of the specified update.
+	Update *Update `locationName:"update" type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeUpdateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeUpdateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeUpdateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Update != nil {
+		v := s.Update
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "update", v, metadata)
+	}
+	return nil
+}
+
+// An object representing an error when an asynchronous operation fails.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ErrorDetail
+type ErrorDetail struct {
+	_ struct{} `type:"structure"`
+
+	// A brief description of the error.
+	//
+	//    * SubnetNotFound: One of the subnets associated with the cluster could
+	//    not be found.
+	//
+	//    * SecurityGroupNotFound: One of the security groups associated with the
+	//    cluster could not be found.
+	//
+	//    * EniLimitReached: You have reached the elastic network interface limit
+	//    for your account.
+	//
+	//    * IpNotAvailable: A subnet associated with the cluster does not have any
+	//    free IP addresses.
+	//
+	//    * AccessDenied: You do not have permissions to perform the specified operation.
+	//
+	//    * OperationNotPermitted: The service role associated with the cluster
+	//    does not have the required access permissions for Amazon EKS.
+	//
+	//    * VpcIdNotFound: The VPC associated with the cluster could not be found.
+	ErrorCode ErrorCode `locationName:"errorCode" type:"string" enum:"true"`
+
+	// A more complete description of the error.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// An optional field that contains the resource IDs associated with the error.
+	ResourceIds []string `locationName:"resourceIds" type:"list"`
+}
+
+// String returns the string representation
+func (s ErrorDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ErrorDetail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ErrorCode) > 0 {
+		v := s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ResourceIds) > 0 {
+		v := s.ResourceIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resourceIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListClustersRequest
 type ListClustersInput struct {
 	_ struct{} `type:"structure"`
@@ -848,6 +1182,377 @@ func (s ListClustersOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesRequest
+type ListUpdatesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of update results returned by ListUpdates in paginated
+	// output. When this parameter is used, ListUpdates only returns maxResults
+	// results in a single page along with a nextToken response element. The remaining
+	// results of the initial request can be seen by sending another ListUpdates
+	// request with the returned nextToken value. This value can be between 1 and
+	// 100. If this parameter is not used, then ListUpdates returns up to 100 results
+	// and a nextToken value if applicable.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The name of the Amazon EKS cluster for which to list updates.
+	//
+	// Name is a required field
+	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+
+	// The nextToken value returned from a previous paginated ListUpdates request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListUpdatesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListUpdatesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListUpdatesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListUpdatesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUpdatesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListUpdatesResponse
+type ListUpdatesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The nextToken value to include in a future ListUpdates request. When the
+	// results of a ListUpdates request exceed maxResults, this value can be used
+	// to retrieve the next page of results. This value is null when there are no
+	// more results to return.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// A list of all the updates for the specified cluster and Region.
+	UpdateIds []string `locationName:"updateIds" type:"list"`
+}
+
+// String returns the string representation
+func (s ListUpdatesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListUpdatesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListUpdatesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUpdatesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.UpdateIds) > 0 {
+		v := s.UpdateIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "updateIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object representing an asynchronous update.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Update
+type Update struct {
+	_ struct{} `type:"structure"`
+
+	// The Unix epoch timestamp in seconds for when the update was created.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
+
+	// Any errors associated with a Failed update.
+	Errors []ErrorDetail `locationName:"errors" type:"list"`
+
+	// A UUID that is used to track the update.
+	Id *string `locationName:"id" type:"string"`
+
+	// A key-value map that contains the parameters associated with the update.
+	Params []UpdateParam `locationName:"params" type:"list"`
+
+	// The current status of the update.
+	Status UpdateStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The type of the update.
+	Type UpdateType `locationName:"type" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s Update) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Update) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Update) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.Errors) > 0 {
+		v := s.Errors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "errors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Params) > 0 {
+		v := s.Params
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "params", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersionRequest
+type UpdateClusterVersionInput struct {
+	_ struct{} `type:"structure"`
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientRequestToken *string `locationName:"clientRequestToken" type:"string" idempotencyToken:"true"`
+
+	// The name of the Amazon EKS cluster to update.
+	//
+	// Name is a required field
+	Name *string `location:"uri" locationName:"name" type:"string" required:"true"`
+
+	// The desired Kubernetes version following a successful update.
+	//
+	// Version is a required field
+	Version *string `locationName:"version" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateClusterVersionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateClusterVersionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateClusterVersionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterVersionInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Version == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateClusterVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	var ClientRequestToken string
+	if s.ClientRequestToken != nil {
+		ClientRequestToken = *s.ClientRequestToken
+	} else {
+		ClientRequestToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientRequestToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateClusterVersionResponse
+type UpdateClusterVersionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The full description of the specified update
+	Update *Update `locationName:"update" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateClusterVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateClusterVersionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateClusterVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateClusterVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Update != nil {
+		v := s.Update
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "update", v, metadata)
+	}
+	return nil
+}
+
+// An object representing the details of an update request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateParam
+type UpdateParam struct {
+	_ struct{} `type:"structure"`
+
+	// The keys associated with an update request.
+	Type UpdateParamType `locationName:"type" type:"string" enum:"true"`
+
+	// The value of the keys submitted as part of an update request.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateParam) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateParam) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateParam) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing an Amazon EKS cluster VPC configuration request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest
 type VpcConfigRequest struct {
@@ -855,7 +1560,8 @@ type VpcConfigRequest struct {
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between
-	// your worker nodes and the Kubernetes control plane.
+	// your worker nodes and the Kubernetes control plane. If you do not specify
+	// a security group, the default security group for your VPC is used.
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
 	// Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account
@@ -996,6 +1702,81 @@ func (enum ClusterStatus) MarshalValue() (string, error) {
 }
 
 func (enum ClusterStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ErrorCode string
+
+// Enum values for ErrorCode
+const (
+	ErrorCodeSubnetNotFound        ErrorCode = "SubnetNotFound"
+	ErrorCodeSecurityGroupNotFound ErrorCode = "SecurityGroupNotFound"
+	ErrorCodeEniLimitReached       ErrorCode = "EniLimitReached"
+	ErrorCodeIpNotAvailable        ErrorCode = "IpNotAvailable"
+	ErrorCodeAccessDenied          ErrorCode = "AccessDenied"
+	ErrorCodeOperationNotPermitted ErrorCode = "OperationNotPermitted"
+	ErrorCodeVpcIdNotFound         ErrorCode = "VpcIdNotFound"
+	ErrorCodeUnknown               ErrorCode = "Unknown"
+)
+
+func (enum ErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UpdateParamType string
+
+// Enum values for UpdateParamType
+const (
+	UpdateParamTypeVersion         UpdateParamType = "Version"
+	UpdateParamTypePlatformVersion UpdateParamType = "PlatformVersion"
+)
+
+func (enum UpdateParamType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateParamType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UpdateStatus string
+
+// Enum values for UpdateStatus
+const (
+	UpdateStatusInProgress UpdateStatus = "InProgress"
+	UpdateStatusFailed     UpdateStatus = "Failed"
+	UpdateStatusCancelled  UpdateStatus = "Cancelled"
+	UpdateStatusSuccessful UpdateStatus = "Successful"
+)
+
+func (enum UpdateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type UpdateType string
+
+// Enum values for UpdateType
+const (
+	UpdateTypeVersionUpdate UpdateType = "VersionUpdate"
+)
+
+func (enum UpdateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

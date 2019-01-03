@@ -248,6 +248,8 @@ type CognitoIdentityProviderAPI interface {
 
 	UpdateUserPoolClientRequest(*cognitoidentityprovider.UpdateUserPoolClientInput) cognitoidentityprovider.UpdateUserPoolClientRequest
 
+	UpdateUserPoolDomainRequest(*cognitoidentityprovider.UpdateUserPoolDomainInput) cognitoidentityprovider.UpdateUserPoolDomainRequest
+
 	VerifySoftwareTokenRequest(*cognitoidentityprovider.VerifySoftwareTokenInput) cognitoidentityprovider.VerifySoftwareTokenRequest
 
 	VerifyUserAttributeRequest(*cognitoidentityprovider.VerifyUserAttributeInput) cognitoidentityprovider.VerifyUserAttributeRequest

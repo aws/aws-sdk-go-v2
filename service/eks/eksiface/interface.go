@@ -69,7 +69,13 @@ type EKSAPI interface {
 
 	DescribeClusterRequest(*eks.DescribeClusterInput) eks.DescribeClusterRequest
 
+	DescribeUpdateRequest(*eks.DescribeUpdateInput) eks.DescribeUpdateRequest
+
 	ListClustersRequest(*eks.ListClustersInput) eks.ListClustersRequest
+
+	ListUpdatesRequest(*eks.ListUpdatesInput) eks.ListUpdatesRequest
+
+	UpdateClusterVersionRequest(*eks.UpdateClusterVersionInput) eks.UpdateClusterVersionRequest
 
 	WaitUntilClusterActive(*eks.DescribeClusterInput) error
 	WaitUntilClusterActiveWithContext(aws.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error

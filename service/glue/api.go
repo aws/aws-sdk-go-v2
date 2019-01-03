@@ -6219,6 +6219,10 @@ type Connection struct {
 	//
 	//    * PASSWORD - A password, if one is used, for the user name.
 	//
+	//    * ENCRYPTED_PASSWORD - When you enable connection password protection
+	//    by setting ConnectionPasswordEncryption in the Data Catalog encryption
+	//    settings, this field stores the key you designate to encrypt the password.
+	//
 	//    * JDBC_DRIVER_JAR_URI - The S3 path of the a jar file that contains the
 	//    JDBC driver to use.
 	//
@@ -6339,6 +6343,68 @@ func (s *ConnectionInput) Validate() error {
 		if err := s.PhysicalConnectionRequirements.Validate(); err != nil {
 			invalidParams.AddNested("PhysicalConnectionRequirements", err.(aws.ErrInvalidParams))
 		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The data structure used by the Data Catalog to encrypt the password as part
+// of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD
+// field in the connection properties. You can enable catalog encryption or
+// only password encryption.
+//
+// When a CreationConnection request arrives containing a password, the Data
+// Catalog first encrypts the password using your KMS key, and then encrypts
+// the whole connection object again if catalog encryption is also enabled.
+//
+// This encryption requires that you set KMS key permissions to enable or restrict
+// access on the password key according to your security requirements. For example,
+// you may want only admin users to have decrypt permission on the password
+// key.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionPasswordEncryption
+type ConnectionPasswordEncryption struct {
+	_ struct{} `type:"structure"`
+
+	// A KMS key used to protect access to the JDBC source.
+	//
+	// All users in your account should be granted the kms:encrypt permission to
+	// encrypt passwords before storing them in the Data Catalog (through the AWS
+	// Glue CreateConnection operation).
+	//
+	// The decrypt permission should be granted only to KMS key admins and IAM roles
+	// designated for AWS Glue crawlers.
+	AwsKmsKeyId *string `min:"1" type:"string"`
+
+	// When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords
+	// remain encrypted in the responses of GetConnection and GetConnections. This
+	// encryption takes effect independently from catalog encryption.
+	//
+	// ReturnConnectionPasswordEncrypted is a required field
+	ReturnConnectionPasswordEncrypted *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s ConnectionPasswordEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ConnectionPasswordEncryption) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ConnectionPasswordEncryption) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ConnectionPasswordEncryption"}
+	if s.AwsKmsKeyId != nil && len(*s.AwsKmsKeyId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AwsKmsKeyId", 1))
+	}
+
+	if s.ReturnConnectionPasswordEncrypted == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReturnConnectionPasswordEncrypted"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7807,6 +7873,12 @@ func (s *CreateXMLClassifierRequest) Validate() error {
 type DataCatalogEncryptionSettings struct {
 	_ struct{} `type:"structure"`
 
+	// When password protection is enabled, the Data Catalog uses a customer-provided
+	// key to encrypt the password as part of CreateConnection or UpdateConnection
+	// and store it in the ENCRYPTED_PASSWORD field in the connection properties.
+	// You can enable catalog encryption or only password encryption.
+	ConnectionPasswordEncryption *ConnectionPasswordEncryption `type:"structure"`
+
 	// Specifies encryption-at-rest configuration for the Data Catalog.
 	EncryptionAtRest *EncryptionAtRest `type:"structure"`
 }
@@ -7824,6 +7896,11 @@ func (s DataCatalogEncryptionSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DataCatalogEncryptionSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DataCatalogEncryptionSettings"}
+	if s.ConnectionPasswordEncryption != nil {
+		if err := s.ConnectionPasswordEncryption.Validate(); err != nil {
+			invalidParams.AddNested("ConnectionPasswordEncryption", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.EncryptionAtRest != nil {
 		if err := s.EncryptionAtRest.Validate(); err != nil {
 			invalidParams.AddNested("EncryptionAtRest", err.(aws.ErrInvalidParams))
@@ -9251,6 +9328,14 @@ type GetConnectionInput struct {
 	// the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
+	// Allow you to retrieve the connection metadata without displaying the password.
+	// For instance, the AWS Glue console uses this flag to retrieve connections,
+	// since the console does not display passwords. Set this parameter where the
+	// caller may not have permission to use the KMS key to decrypt the password,
+	// but does have permission to access the rest of the connection metadata (that
+	// is, the other connection properties).
+	HidePassword *bool `type:"boolean"`
+
 	// The name of the connection definition to retrieve.
 	//
 	// Name is a required field
@@ -9346,6 +9431,14 @@ type GetConnectionsInput struct {
 
 	// A filter that controls which connections will be returned.
 	Filter *GetConnectionsFilter `type:"structure"`
+
+	// Allow you to retrieve the connection metadata without displaying the password.
+	// For instance, the AWS Glue console uses this flag to retrieve connections,
+	// since the console does not display passwords. Set this parameter where the
+	// caller may not have permission to use the KMS key to decrypt the password,
+	// but does have permission to access the rest of the connection metadata (that
+	// is, the other connection properties).
+	HidePassword *bool `type:"boolean"`
 
 	// The maximum number of connections to return in one response.
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -13551,6 +13644,11 @@ type Table struct {
 
 	// A list of columns by which the table is partitioned. Only primitive types
 	// are supported as partition keys.
+	//
+	// When creating a table used by Athena, and you do not specify any partitionKeys,
+	// you must at least set the value of partitionKeys to an empty list. For example:
+	//
+	// "PartitionKeys": []
 	PartitionKeys []Column `type:"list"`
 
 	// Retention time for this table.
@@ -13633,6 +13731,11 @@ type TableInput struct {
 
 	// A list of columns by which the table is partitioned. Only primitive types
 	// are supported as partition keys.
+	//
+	// When creating a table used by Athena, and you do not specify any partitionKeys,
+	// you must at least set the value of partitionKeys to an empty list. For example:
+	//
+	// "PartitionKeys": []
 	PartitionKeys []Column `type:"list"`
 
 	// Retention time for this table.
@@ -15061,6 +15164,7 @@ const (
 	ConnectionPropertyKeyPort                ConnectionPropertyKey = "PORT"
 	ConnectionPropertyKeyUsername            ConnectionPropertyKey = "USERNAME"
 	ConnectionPropertyKeyPassword            ConnectionPropertyKey = "PASSWORD"
+	ConnectionPropertyKeyEncryptedPassword   ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
 	ConnectionPropertyKeyJdbcDriverJarUri    ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
 	ConnectionPropertyKeyJdbcDriverClassName ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
 	ConnectionPropertyKeyJdbcEngine          ConnectionPropertyKey = "JDBC_ENGINE"

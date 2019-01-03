@@ -36,6 +36,11 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 // The response is a group object.
 //
+// CLI Sample:
+//
+// aws quicksight create-group --aws-account-id=111122223333 --namespace=default
+// --group-name="Sales-Management" --description="Sales Management - Forecasting"
+//
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
 //    resp, err := req.Send()
@@ -94,6 +99,11 @@ func (r CreateGroupMembershipRequest) Send() (*CreateGroupMembershipOutput, erro
 //
 // The response is the group member object.
 //
+// CLI Sample:
+//
+// aws quicksight create-group-membership --aws-account-id=111122223333 --namespace=default
+// --group-name=Sales --member-name=Pat
+//
 //    // Example sending a request using the CreateGroupMembershipRequest method.
 //    req := client.CreateGroupMembershipRequest(params)
 //    resp, err := req.Send()
@@ -145,6 +155,11 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 // Removes a user group from Amazon QuickSight.
 //
 // The permissions resource is arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>.
+//
+// CLI Sample:
+//
+// aws quicksight delete-group -\-aws-account-id=111122223333 -\-namespace=default
+// -\-group-name=Sales-Management
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
@@ -203,6 +218,11 @@ func (r DeleteGroupMembershipRequest) Send() (*DeleteGroupMembershipOutput, erro
 //
 // The condition key is quicksight:UserName.
 //
+// CLI Sample:
+//
+// aws quicksight delete-group-membership --aws-account-id=111122223333 --namespace=default
+// --group-name=Sales-Management --member-name=Charlie
+//
 //    // Example sending a request using the DeleteGroupMembershipRequest method.
 //    req := client.DeleteGroupMembershipRequest(params)
 //    resp, err := req.Send()
@@ -257,6 +277,11 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 // The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>
 // .
+//
+// CLI Sample:
+//
+// aws quicksight delete-user --aws-account-id=111122223333 --namespace=default
+// --user-name=Pat
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
@@ -313,6 +338,11 @@ func (r DescribeGroupRequest) Send() (*DescribeGroupOutput, error) {
 //
 // The response is the group object.
 //
+// CLI Sample:
+//
+// aws quicksight describe-group -\-aws-account-id=11112222333 -\-namespace=default
+// -\-group-name=Sales
+//
 //    // Example sending a request using the DescribeGroupRequest method.
 //    req := client.DescribeGroupRequest(params)
 //    resp, err := req.Send()
@@ -368,6 +398,11 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 // The response is a user object that contains the user's Amazon Resource Name
 // (ARN), AWS Identity and Access Management (IAM) role, and email address.
 //
+// CLI Sample:
+//
+// aws quicksight describe-user --aws-account-id=111122223333 --namespace=default
+// --user-name=Pat
+//
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
 //    resp, err := req.Send()
@@ -416,8 +451,33 @@ func (r GetDashboardEmbedUrlRequest) Send() (*GetDashboardEmbedUrlOutput, error)
 // GetDashboardEmbedUrlRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Generates an embedded URL and authorization code. Before this can work properly,
-// you need to configure the dashboards and user permissions first.
+// Generates a server-side embeddable URL and authorization code. Before this
+// can work properly, first you need to configure the dashboards and user permissions.
+// For more information, see  Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/en_us/quicksight/latest/user/embedding.html).
+//
+// Currently, you can use GetDashboardEmbedURL only from the server, not from
+// the user’s browser.
+//
+// CLI Sample:
+//
+// Assume the role with permissions enabled for actions: quickSight:RegisterUser
+// and quicksight:GetDashboardEmbedURL. You can use assume-role, assume-role-with-web-identity,
+// or assume-role-with-saml.
+//
+// aws sts assume-role --role-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role"
+// --role-session-name embeddingsession
+//
+// If the user does not exist in QuickSight, register the user:
+//
+// aws quicksight register-user --aws-account-id 111122223333 --namespace default
+// --identity-type IAM --iam-arn "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role"
+// --user-role READER --session-name "embeddingsession" --email user123@example.com
+// --region us-east-1
+//
+// Get the URL for the embedded dashboard
+//
+// aws quicksight get-dashboard-embed-url --aws-account-id 111122223333 --dashboard-id
+// 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type IAM
 //
 //    // Example sending a request using the GetDashboardEmbedUrlRequest method.
 //    req := client.GetDashboardEmbedUrlRequest(params)
@@ -473,6 +533,10 @@ func (r ListGroupMembershipsRequest) Send() (*ListGroupMembershipsOutput, error)
 //
 // The response is a list of group member objects.
 //
+// CLI Sample:
+//
+// aws quicksight list-group-memberships -\-aws-account-id=111122223333 -\-namespace=default
+//
 //    // Example sending a request using the ListGroupMembershipsRequest method.
 //    req := client.ListGroupMembershipsRequest(params)
 //    resp, err := req.Send()
@@ -527,6 +591,10 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 // The response is a list of group objects.
 //
+// CLI Sample:
+//
+// aws quicksight list-groups -\-aws-account-id=111122223333 -\-namespace=default
+//
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
 //    resp, err := req.Send()
@@ -575,7 +643,17 @@ func (r ListUserGroupsRequest) Send() (*ListUserGroupsOutput, error) {
 // ListUserGroupsRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Lists the Amazon QuickSight groups that a user is part of.
+// Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member
+// of.
+//
+// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>.
+//
+// The response is a one or more group objects.
+//
+// CLI Sample:
+//
+// aws quicksight list-user-groups -\-user-name=Pat -\-aws-account-id=111122223333
+// -\-namespace=default -\-region=us-east-1
 //
 //    // Example sending a request using the ListUserGroupsRequest method.
 //    req := client.ListUserGroupsRequest(params)
@@ -631,6 +709,10 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 // The response is a list of user objects, containing each user's Amazon Resource
 // Name (ARN), AWS Identity and Access Management (IAM) role, and email address.
+//
+// CLI Sample:
+//
+// aws quicksight list-users --aws-account-id=111122223333 --namespace=default
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
@@ -691,6 +773,11 @@ func (r RegisterUserRequest) Send() (*RegisterUserOutput, error) {
 //
 // The condition keys are quicksight:IamArn and quicksight:SessionName.
 //
+// CLI Sample:
+//
+// aws quicksight register-user -\-aws-account-id=111122223333 -\-namespace=default
+// -\-email=pat@example.com -\-identity-type=IAM -\-user-role=AUTHOR -\-iam-arn=arn:aws:iam::111122223333:user/Pat
+//
 //    // Example sending a request using the RegisterUserRequest method.
 //    req := client.RegisterUserRequest(params)
 //    resp, err := req.Send()
@@ -745,6 +832,11 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 // The response is a group object.
 //
+// CLI Sample:
+//
+// aws quicksight update-group --aws-account-id=111122223333 --namespace=default
+// --group-name=Sales --description="Sales BI Dashboards"
+//
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
 //    resp, err := req.Send()
@@ -794,6 +886,17 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 // Amazon QuickSight.
 //
 // Updates an Amazon QuickSight user.
+//
+// The permission resource is arn:aws:quicksight:us-east-1:<aws-account-id>:user/default/<user-name>.
+//
+// The response is a user object that contains the user's Amazon QuickSight
+// user name, email address, active or inactive status in Amazon QuickSight,
+// Amazon QuickSight role, and Amazon Resource Name (ARN).
+//
+// CLI Sample:
+//
+// aws quicksight update-user --user-name=Pat --role=ADMIN --email=new_address@amazon.com
+// --aws-account-id=111122223333 --namespace=default --region=us-east-1
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
@@ -1789,7 +1892,7 @@ type GetDashboardEmbedUrlInput struct {
 	// DashboardId is a required field
 	DashboardId *string `location:"uri" locationName:"DashboardId" type:"string" required:"true"`
 
-	// The authentication method the user uses to sign in (IAM or QUICKSIGHT).
+	// The authentication method the user uses to sign in (IAM only).
 	//
 	// IdentityType is a required field
 	IdentityType IdentityType `location:"querystring" locationName:"creds-type" type:"string" required:"true" enum:"true"`
@@ -1893,10 +1996,10 @@ type GetDashboardEmbedUrlOutput struct {
 
 	responseMetadata aws.Response
 
-	// Call the GetDashboardEmbedUrl API to get the URL that you can embed in your
-	// dashboard. This URL is valid for 5 minutes, and the resulting session is
-	// valid for 10 hours. The API provides the URL with an auth_code that enables
-	// a single-signon session.
+	// URL that you can put into your server-side webpage to embed your dashboard.
+	// This URL is valid for 5 minutes, and the resulting session is valid for 10
+	// hours. The API provides the URL with an auth_code that enables a single-signon
+	// session.
 	EmbedUrl *string `type:"string"`
 
 	// The AWS request ID for this operation.
@@ -2353,8 +2456,8 @@ func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
 type ListUserGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS Account ID that the user is in. Currently, use the AWS Account ID
-	// which contains your Amazon QuickSight account.
+	// The AWS Account ID that the user is in. Currently, you use the ID for the
+	// AWS account that contains your Amazon QuickSight account.
 	//
 	// AwsAccountId is a required field
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
@@ -2370,7 +2473,7 @@ type ListUserGroupsInput struct {
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string `location:"querystring" locationName:"next-token" type:"string"`
 
-	// The name of the user that you want to list groups for.
+	// The Amazon QuickSight user name that you want to list group memberships for.
 	//
 	// UserName is a required field
 	UserName *string `location:"uri" locationName:"UserName" min:"1" type:"string" required:"true"`
@@ -2469,7 +2572,7 @@ type ListUserGroupsOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string `type:"string"`
 
-	// The http status of the request.
+	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 }
 
@@ -2841,6 +2944,10 @@ type RegisterUserOutput struct {
 
 	// The user name.
 	User *User `type:"structure"`
+
+	// The URL the user visits to complete registration and provide a password.
+	// This is returned only for users with an identity type of QUICKSIGHT.
+	UserInvitationUrl *string `type:"string"`
 }
 
 // String returns the string representation
@@ -2871,6 +2978,12 @@ func (s RegisterUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "User", v, metadata)
+	}
+	if s.UserInvitationUrl != nil {
+		v := *s.UserInvitationUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserInvitationUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	// ignoring invalid encode state, StatusCode. Status
 	return nil

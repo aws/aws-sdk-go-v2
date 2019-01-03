@@ -68,6 +68,8 @@ type PinpointEmailAPI interface {
 
 	CreateDedicatedIpPoolRequest(*pinpointemail.CreateDedicatedIpPoolInput) pinpointemail.CreateDedicatedIpPoolRequest
 
+	CreateDeliverabilityTestReportRequest(*pinpointemail.CreateDeliverabilityTestReportInput) pinpointemail.CreateDeliverabilityTestReportRequest
+
 	CreateEmailIdentityRequest(*pinpointemail.CreateEmailIdentityInput) pinpointemail.CreateEmailIdentityRequest
 
 	DeleteConfigurationSetRequest(*pinpointemail.DeleteConfigurationSetInput) pinpointemail.DeleteConfigurationSetRequest
@@ -80,6 +82,8 @@ type PinpointEmailAPI interface {
 
 	GetAccountRequest(*pinpointemail.GetAccountInput) pinpointemail.GetAccountRequest
 
+	GetBlacklistReportsRequest(*pinpointemail.GetBlacklistReportsInput) pinpointemail.GetBlacklistReportsRequest
+
 	GetConfigurationSetRequest(*pinpointemail.GetConfigurationSetInput) pinpointemail.GetConfigurationSetRequest
 
 	GetConfigurationSetEventDestinationsRequest(*pinpointemail.GetConfigurationSetEventDestinationsInput) pinpointemail.GetConfigurationSetEventDestinationsRequest
@@ -88,11 +92,19 @@ type PinpointEmailAPI interface {
 
 	GetDedicatedIpsRequest(*pinpointemail.GetDedicatedIpsInput) pinpointemail.GetDedicatedIpsRequest
 
+	GetDeliverabilityDashboardOptionsRequest(*pinpointemail.GetDeliverabilityDashboardOptionsInput) pinpointemail.GetDeliverabilityDashboardOptionsRequest
+
+	GetDeliverabilityTestReportRequest(*pinpointemail.GetDeliverabilityTestReportInput) pinpointemail.GetDeliverabilityTestReportRequest
+
+	GetDomainStatisticsReportRequest(*pinpointemail.GetDomainStatisticsReportInput) pinpointemail.GetDomainStatisticsReportRequest
+
 	GetEmailIdentityRequest(*pinpointemail.GetEmailIdentityInput) pinpointemail.GetEmailIdentityRequest
 
 	ListConfigurationSetsRequest(*pinpointemail.ListConfigurationSetsInput) pinpointemail.ListConfigurationSetsRequest
 
 	ListDedicatedIpPoolsRequest(*pinpointemail.ListDedicatedIpPoolsInput) pinpointemail.ListDedicatedIpPoolsRequest
+
+	ListDeliverabilityTestReportsRequest(*pinpointemail.ListDeliverabilityTestReportsInput) pinpointemail.ListDeliverabilityTestReportsRequest
 
 	ListEmailIdentitiesRequest(*pinpointemail.ListEmailIdentitiesInput) pinpointemail.ListEmailIdentitiesRequest
 
@@ -111,6 +123,8 @@ type PinpointEmailAPI interface {
 	PutDedicatedIpInPoolRequest(*pinpointemail.PutDedicatedIpInPoolInput) pinpointemail.PutDedicatedIpInPoolRequest
 
 	PutDedicatedIpWarmupAttributesRequest(*pinpointemail.PutDedicatedIpWarmupAttributesInput) pinpointemail.PutDedicatedIpWarmupAttributesRequest
+
+	PutDeliverabilityDashboardOptionRequest(*pinpointemail.PutDeliverabilityDashboardOptionInput) pinpointemail.PutDeliverabilityDashboardOptionRequest
 
 	PutEmailIdentityDkimAttributesRequest(*pinpointemail.PutEmailIdentityDkimAttributesInput) pinpointemail.PutEmailIdentityDkimAttributesRequest
 

@@ -1027,54 +1027,6 @@ func (p *DescribeLoadBalancersPager) CurrentPage() *DescribeLoadBalancersOutput 
 	return p.Pager.CurrentPage().(*DescribeLoadBalancersOutput)
 }
 
-const opDescribeProvisionedCapacity = "DescribeProvisionedCapacity"
-
-// DescribeProvisionedCapacityRequest is a API request type for the DescribeProvisionedCapacity API operation.
-type DescribeProvisionedCapacityRequest struct {
-	*aws.Request
-	Input *DescribeProvisionedCapacityInput
-	Copy  func(*DescribeProvisionedCapacityInput) DescribeProvisionedCapacityRequest
-}
-
-// Send marshals and sends the DescribeProvisionedCapacity API request.
-func (r DescribeProvisionedCapacityRequest) Send() (*DescribeProvisionedCapacityOutput, error) {
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	return r.Request.Data.(*DescribeProvisionedCapacityOutput), nil
-}
-
-// DescribeProvisionedCapacityRequest returns a request value for making API operation for
-// Elastic Load Balancing.
-//
-//    // Example sending a request using the DescribeProvisionedCapacityRequest method.
-//    req := client.DescribeProvisionedCapacityRequest(params)
-//    resp, err := req.Send()
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacity
-func (c *ELBV2) DescribeProvisionedCapacityRequest(input *DescribeProvisionedCapacityInput) DescribeProvisionedCapacityRequest {
-	op := &aws.Operation{
-		Name:       opDescribeProvisionedCapacity,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeProvisionedCapacityInput{}
-	}
-
-	output := &DescribeProvisionedCapacityOutput{}
-	req := c.newRequest(op, input, output)
-	output.responseMetadata = aws.Response{Request: req}
-
-	return DescribeProvisionedCapacityRequest{Request: req, Input: input, Copy: c.DescribeProvisionedCapacityRequest}
-}
-
 const opDescribeRules = "DescribeRules"
 
 // DescribeRulesRequest is a API request type for the DescribeRules API operation.
@@ -1551,54 +1503,6 @@ func (c *ELBV2) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAtt
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.ModifyLoadBalancerAttributesRequest}
-}
-
-const opModifyProvisionedCapacity = "ModifyProvisionedCapacity"
-
-// ModifyProvisionedCapacityRequest is a API request type for the ModifyProvisionedCapacity API operation.
-type ModifyProvisionedCapacityRequest struct {
-	*aws.Request
-	Input *ModifyProvisionedCapacityInput
-	Copy  func(*ModifyProvisionedCapacityInput) ModifyProvisionedCapacityRequest
-}
-
-// Send marshals and sends the ModifyProvisionedCapacity API request.
-func (r ModifyProvisionedCapacityRequest) Send() (*ModifyProvisionedCapacityOutput, error) {
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	return r.Request.Data.(*ModifyProvisionedCapacityOutput), nil
-}
-
-// ModifyProvisionedCapacityRequest returns a request value for making API operation for
-// Elastic Load Balancing.
-//
-//    // Example sending a request using the ModifyProvisionedCapacityRequest method.
-//    req := client.ModifyProvisionedCapacityRequest(params)
-//    resp, err := req.Send()
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacity
-func (c *ELBV2) ModifyProvisionedCapacityRequest(input *ModifyProvisionedCapacityInput) ModifyProvisionedCapacityRequest {
-	op := &aws.Operation{
-		Name:       opModifyProvisionedCapacity,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyProvisionedCapacityInput{}
-	}
-
-	output := &ModifyProvisionedCapacityOutput{}
-	req := c.newRequest(op, input, output)
-	output.responseMetadata = aws.Response{Request: req}
-
-	return ModifyProvisionedCapacityRequest{Request: req, Input: input, Copy: c.ModifyProvisionedCapacityRequest}
 }
 
 const opModifyRule = "ModifyRule"
@@ -2477,7 +2381,9 @@ type AuthenticateOidcActionConfig struct {
 	ClientId *string `type:"string" required:"true"`
 
 	// The OAuth 2.0 client secret.
-	ClientSecret *string `type:"string"`
+	//
+	// ClientSecret is a required field
+	ClientSecret *string `type:"string" required:"true"`
 
 	// The OIDC issuer identifier of the IdP. This must be a full URL, including
 	// the HTTPS protocol, the domain, and the path.
@@ -2515,8 +2421,6 @@ type AuthenticateOidcActionConfig struct {
 	// TokenEndpoint is a required field
 	TokenEndpoint *string `type:"string" required:"true"`
 
-	UseExistingClientSecret *bool `type:"boolean"`
-
 	// The user info endpoint of the IdP. This must be a full URL, including the
 	// HTTPS protocol, the domain, and the path.
 	//
@@ -2546,6 +2450,10 @@ func (s *AuthenticateOidcActionConfig) Validate() error {
 		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 
+	if s.ClientSecret == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientSecret"))
+	}
+
 	if s.Issuer == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Issuer"))
 	}
@@ -2571,8 +2479,6 @@ type AvailabilityZone struct {
 
 	// [Network Load Balancers] The static IP address.
 	LoadBalancerAddresses []LoadBalancerAddress `type:"list"`
-
-	StaticIp *bool `type:"boolean"`
 
 	// The ID of the subnet.
 	SubnetId *string `type:"string"`
@@ -3825,62 +3731,6 @@ func (s DescribeLoadBalancersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacityInput
-type DescribeProvisionedCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// LoadBalancerArn is a required field
-	LoadBalancerArn *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s DescribeProvisionedCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s DescribeProvisionedCapacityInput) GoString() string {
-	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *DescribeProvisionedCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisionedCapacityInput"}
-
-	if s.LoadBalancerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeProvisionedCapacityOutput
-type DescribeProvisionedCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	responseMetadata aws.Response
-
-	ProvisionedCapacity *ProvisionedCapacity `type:"structure"`
-}
-
-// String returns the string representation
-func (s DescribeProvisionedCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s DescribeProvisionedCapacityOutput) GoString() string {
-	return s.String()
-}
-
-// SDKResponseMetdata return sthe response metadata for the API.
-func (s DescribeProvisionedCapacityOutput) SDKResponseMetadata() aws.Response {
-	return s.responseMetadata
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRulesInput
 type DescribeRulesInput struct {
 	_ struct{} `type:"structure"`
@@ -4320,59 +4170,6 @@ func (s *FixedResponseActionConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HostHeaderConditionConfig
-type HostHeaderConditionConfig struct {
-	_ struct{} `type:"structure"`
-
-	Values []string `type:"list"`
-}
-
-// String returns the string representation
-func (s HostHeaderConditionConfig) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s HostHeaderConditionConfig) GoString() string {
-	return s.String()
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpHeaderConditionConfig
-type HttpHeaderConditionConfig struct {
-	_ struct{} `type:"structure"`
-
-	HttpHeaderName *string `type:"string"`
-
-	Values []string `type:"list"`
-}
-
-// String returns the string representation
-func (s HttpHeaderConditionConfig) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s HttpHeaderConditionConfig) GoString() string {
-	return s.String()
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HttpRequestMethodConditionConfig
-type HttpRequestMethodConditionConfig struct {
-	_ struct{} `type:"structure"`
-
-	Values []HttpRequestMethodEnum `type:"list"`
-}
-
-// String returns the string representation
-func (s HttpRequestMethodConditionConfig) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s HttpRequestMethodConditionConfig) GoString() string {
-	return s.String()
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
@@ -4832,69 +4629,6 @@ func (s ModifyLoadBalancerAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacityInput
-type ModifyProvisionedCapacityInput struct {
-	_ struct{} `type:"structure"`
-
-	// LoadBalancerArn is a required field
-	LoadBalancerArn *string `type:"string" required:"true"`
-
-	// MinimumLBCapacityUnits is a required field
-	MinimumLBCapacityUnits *int64 `type:"integer" required:"true"`
-}
-
-// String returns the string representation
-func (s ModifyProvisionedCapacityInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ModifyProvisionedCapacityInput) GoString() string {
-	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ModifyProvisionedCapacityInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ModifyProvisionedCapacityInput"}
-
-	if s.LoadBalancerArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
-	}
-
-	if s.MinimumLBCapacityUnits == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MinimumLBCapacityUnits"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyProvisionedCapacityOutput
-type ModifyProvisionedCapacityOutput struct {
-	_ struct{} `type:"structure"`
-
-	responseMetadata aws.Response
-
-	ProvisionedCapacity *ProvisionedCapacity `type:"structure"`
-}
-
-// String returns the string representation
-func (s ModifyProvisionedCapacityOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ModifyProvisionedCapacityOutput) GoString() string {
-	return s.String()
-}
-
-// SDKResponseMetdata return sthe response metadata for the API.
-func (s ModifyProvisionedCapacityOutput) SDKResponseMetadata() aws.Response {
-	return s.responseMetadata
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput
 type ModifyRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -5201,63 +4935,6 @@ func (s ModifyTargetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifyTargetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PathPatternConditionConfig
-type PathPatternConditionConfig struct {
-	_ struct{} `type:"structure"`
-
-	Values []string `type:"list"`
-}
-
-// String returns the string representation
-func (s PathPatternConditionConfig) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s PathPatternConditionConfig) GoString() string {
-	return s.String()
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ProvisionedCapacity
-type ProvisionedCapacity struct {
-	_ struct{} `type:"structure"`
-
-	DecreasesRemaining *int64 `type:"integer"`
-
-	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
-
-	MinimumLBCapacityUnits *int64 `type:"integer"`
-
-	Status ProvisionedCapacityStatus `type:"string" enum:"true"`
-}
-
-// String returns the string representation
-func (s ProvisionedCapacity) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ProvisionedCapacity) GoString() string {
-	return s.String()
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/QueryStringConditionConfig
-type QueryStringConditionConfig struct {
-	_ struct{} `type:"structure"`
-
-	Values []string `type:"list"`
-}
-
-// String returns the string representation
-func (s QueryStringConditionConfig) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s QueryStringConditionConfig) GoString() string {
-	return s.String()
 }
 
 // Information about a redirect action.
@@ -5587,16 +5264,6 @@ type RuleCondition struct {
 
 	// The name of the field. The possible values are host-header and path-pattern.
 	Field *string `type:"string"`
-
-	HostHeaderConfig *HostHeaderConditionConfig `type:"structure"`
-
-	HttpHeaderConfig *HttpHeaderConditionConfig `type:"structure"`
-
-	HttpRequestMethodConfig *HttpRequestMethodConditionConfig `type:"structure"`
-
-	PathPatternConfig *PathPatternConditionConfig `type:"structure"`
-
-	QueryStringConfig *QueryStringConditionConfig `type:"structure"`
 
 	// The condition value.
 	//
@@ -5982,8 +5649,6 @@ type SubnetMapping struct {
 	// [Network Load Balancers] The allocation ID of the Elastic IP address.
 	AllocationId *string `type:"string"`
 
-	StaticIp *bool `type:"boolean"`
-
 	// The ID of the subnet.
 	SubnetId *string `type:"string"`
 }
@@ -6368,8 +6033,8 @@ type ActionTypeEnum string
 const (
 	ActionTypeEnumForward             ActionTypeEnum = "forward"
 	ActionTypeEnumAuthenticateOidc    ActionTypeEnum = "authenticate-oidc"
-	ActionTypeEnumRedirect            ActionTypeEnum = "redirect"
 	ActionTypeEnumAuthenticateCognito ActionTypeEnum = "authenticate-cognito"
+	ActionTypeEnumRedirect            ActionTypeEnum = "redirect"
 	ActionTypeEnumFixedResponse       ActionTypeEnum = "fixed-response"
 )
 
@@ -6414,30 +6079,6 @@ func (enum AuthenticateOidcActionConditionalBehaviorEnum) MarshalValue() (string
 }
 
 func (enum AuthenticateOidcActionConditionalBehaviorEnum) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
-}
-
-type HttpRequestMethodEnum string
-
-// Enum values for HttpRequestMethodEnum
-const (
-	HttpRequestMethodEnumGet     HttpRequestMethodEnum = "GET"
-	HttpRequestMethodEnumHead    HttpRequestMethodEnum = "HEAD"
-	HttpRequestMethodEnumPost    HttpRequestMethodEnum = "POST"
-	HttpRequestMethodEnumPut     HttpRequestMethodEnum = "PUT"
-	HttpRequestMethodEnumDelete  HttpRequestMethodEnum = "DELETE"
-	HttpRequestMethodEnumConnect HttpRequestMethodEnum = "CONNECT"
-	HttpRequestMethodEnumOptions HttpRequestMethodEnum = "OPTIONS"
-	HttpRequestMethodEnumTrace   HttpRequestMethodEnum = "TRACE"
-	HttpRequestMethodEnumPatch   HttpRequestMethodEnum = "PATCH"
-)
-
-func (enum HttpRequestMethodEnum) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum HttpRequestMethodEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -6519,8 +6160,6 @@ const (
 	ProtocolEnumHttp  ProtocolEnum = "HTTP"
 	ProtocolEnumHttps ProtocolEnum = "HTTPS"
 	ProtocolEnumTcp   ProtocolEnum = "TCP"
-	ProtocolEnumTls   ProtocolEnum = "TLS"
-	ProtocolEnumUdp   ProtocolEnum = "UDP"
 )
 
 func (enum ProtocolEnum) MarshalValue() (string, error) {
@@ -6528,25 +6167,6 @@ func (enum ProtocolEnum) MarshalValue() (string, error) {
 }
 
 func (enum ProtocolEnum) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
-}
-
-type ProvisionedCapacityStatus string
-
-// Enum values for ProvisionedCapacityStatus
-const (
-	ProvisionedCapacityStatusDisabled    ProvisionedCapacityStatus = "disabled"
-	ProvisionedCapacityStatusPending     ProvisionedCapacityStatus = "pending"
-	ProvisionedCapacityStatusProvisioned ProvisionedCapacityStatus = "provisioned"
-	ProvisionedCapacityStatusPreWarmed   ProvisionedCapacityStatus = "pre-warmed"
-)
-
-func (enum ProvisionedCapacityStatus) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum ProvisionedCapacityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -70,17 +70,23 @@ type MediaStoreAPI interface {
 
 	DeleteCorsPolicyRequest(*mediastore.DeleteCorsPolicyInput) mediastore.DeleteCorsPolicyRequest
 
+	DeleteLifecyclePolicyRequest(*mediastore.DeleteLifecyclePolicyInput) mediastore.DeleteLifecyclePolicyRequest
+
 	DescribeContainerRequest(*mediastore.DescribeContainerInput) mediastore.DescribeContainerRequest
 
 	GetContainerPolicyRequest(*mediastore.GetContainerPolicyInput) mediastore.GetContainerPolicyRequest
 
 	GetCorsPolicyRequest(*mediastore.GetCorsPolicyInput) mediastore.GetCorsPolicyRequest
 
+	GetLifecyclePolicyRequest(*mediastore.GetLifecyclePolicyInput) mediastore.GetLifecyclePolicyRequest
+
 	ListContainersRequest(*mediastore.ListContainersInput) mediastore.ListContainersRequest
 
 	PutContainerPolicyRequest(*mediastore.PutContainerPolicyInput) mediastore.PutContainerPolicyRequest
 
 	PutCorsPolicyRequest(*mediastore.PutCorsPolicyInput) mediastore.PutCorsPolicyRequest
+
+	PutLifecyclePolicyRequest(*mediastore.PutLifecyclePolicyInput) mediastore.PutLifecyclePolicyRequest
 }
 
 var _ MediaStoreAPI = (*mediastore.MediaStore)(nil)

@@ -266,6 +266,56 @@ func (c *AlexaForBusiness) AssociateSkillWithSkillGroupRequest(input *AssociateS
 	return AssociateSkillWithSkillGroupRequest{Request: req, Input: input, Copy: c.AssociateSkillWithSkillGroupRequest}
 }
 
+const opAssociateSkillWithUsers = "AssociateSkillWithUsers"
+
+// AssociateSkillWithUsersRequest is a API request type for the AssociateSkillWithUsers API operation.
+type AssociateSkillWithUsersRequest struct {
+	*aws.Request
+	Input *AssociateSkillWithUsersInput
+	Copy  func(*AssociateSkillWithUsersInput) AssociateSkillWithUsersRequest
+}
+
+// Send marshals and sends the AssociateSkillWithUsers API request.
+func (r AssociateSkillWithUsersRequest) Send() (*AssociateSkillWithUsersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateSkillWithUsersOutput), nil
+}
+
+// AssociateSkillWithUsersRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Makes a private skill available for enrolled users to enable on their devices.
+//
+//    // Example sending a request using the AssociateSkillWithUsersRequest method.
+//    req := client.AssociateSkillWithUsersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsers
+func (c *AlexaForBusiness) AssociateSkillWithUsersRequest(input *AssociateSkillWithUsersInput) AssociateSkillWithUsersRequest {
+	op := &aws.Operation{
+		Name:       opAssociateSkillWithUsers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateSkillWithUsersInput{}
+	}
+
+	output := &AssociateSkillWithUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociateSkillWithUsersRequest{Request: req, Input: input, Copy: c.AssociateSkillWithUsersRequest}
+}
+
 const opCreateAddressBook = "CreateAddressBook"
 
 // CreateAddressBookRequest is a API request type for the CreateAddressBook API operation.
@@ -314,6 +364,57 @@ func (c *AlexaForBusiness) CreateAddressBookRequest(input *CreateAddressBookInpu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateAddressBookRequest{Request: req, Input: input, Copy: c.CreateAddressBookRequest}
+}
+
+const opCreateBusinessReportSchedule = "CreateBusinessReportSchedule"
+
+// CreateBusinessReportScheduleRequest is a API request type for the CreateBusinessReportSchedule API operation.
+type CreateBusinessReportScheduleRequest struct {
+	*aws.Request
+	Input *CreateBusinessReportScheduleInput
+	Copy  func(*CreateBusinessReportScheduleInput) CreateBusinessReportScheduleRequest
+}
+
+// Send marshals and sends the CreateBusinessReportSchedule API request.
+func (r CreateBusinessReportScheduleRequest) Send() (*CreateBusinessReportScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBusinessReportScheduleOutput), nil
+}
+
+// CreateBusinessReportScheduleRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Creates a recurring schedule for usage reports to deliver to the specified
+// S3 location with a specified daily or weekly interval.
+//
+//    // Example sending a request using the CreateBusinessReportScheduleRequest method.
+//    req := client.CreateBusinessReportScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportSchedule
+func (c *AlexaForBusiness) CreateBusinessReportScheduleRequest(input *CreateBusinessReportScheduleInput) CreateBusinessReportScheduleRequest {
+	op := &aws.Operation{
+		Name:       opCreateBusinessReportSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateBusinessReportScheduleInput{}
+	}
+
+	output := &CreateBusinessReportScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.CreateBusinessReportScheduleRequest}
 }
 
 const opCreateConferenceProvider = "CreateConferenceProvider"
@@ -664,6 +765,57 @@ func (c *AlexaForBusiness) DeleteAddressBookRequest(input *DeleteAddressBookInpu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteAddressBookRequest{Request: req, Input: input, Copy: c.DeleteAddressBookRequest}
+}
+
+const opDeleteBusinessReportSchedule = "DeleteBusinessReportSchedule"
+
+// DeleteBusinessReportScheduleRequest is a API request type for the DeleteBusinessReportSchedule API operation.
+type DeleteBusinessReportScheduleRequest struct {
+	*aws.Request
+	Input *DeleteBusinessReportScheduleInput
+	Copy  func(*DeleteBusinessReportScheduleInput) DeleteBusinessReportScheduleRequest
+}
+
+// Send marshals and sends the DeleteBusinessReportSchedule API request.
+func (r DeleteBusinessReportScheduleRequest) Send() (*DeleteBusinessReportScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBusinessReportScheduleOutput), nil
+}
+
+// DeleteBusinessReportScheduleRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Deletes the recurring report delivery schedule with the specified schedule
+// ARN.
+//
+//    // Example sending a request using the DeleteBusinessReportScheduleRequest method.
+//    req := client.DeleteBusinessReportScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportSchedule
+func (c *AlexaForBusiness) DeleteBusinessReportScheduleRequest(input *DeleteBusinessReportScheduleInput) DeleteBusinessReportScheduleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBusinessReportSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteBusinessReportScheduleInput{}
+	}
+
+	output := &DeleteBusinessReportScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.DeleteBusinessReportScheduleRequest}
 }
 
 const opDeleteConferenceProvider = "DeleteConferenceProvider"
@@ -1268,6 +1420,57 @@ func (c *AlexaForBusiness) DisassociateSkillFromSkillGroupRequest(input *Disasso
 	return DisassociateSkillFromSkillGroupRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromSkillGroupRequest}
 }
 
+const opDisassociateSkillFromUsers = "DisassociateSkillFromUsers"
+
+// DisassociateSkillFromUsersRequest is a API request type for the DisassociateSkillFromUsers API operation.
+type DisassociateSkillFromUsersRequest struct {
+	*aws.Request
+	Input *DisassociateSkillFromUsersInput
+	Copy  func(*DisassociateSkillFromUsersInput) DisassociateSkillFromUsersRequest
+}
+
+// Send marshals and sends the DisassociateSkillFromUsers API request.
+func (r DisassociateSkillFromUsersRequest) Send() (*DisassociateSkillFromUsersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateSkillFromUsersOutput), nil
+}
+
+// DisassociateSkillFromUsersRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Makes a private skill unavailable for enrolled users and prevents them from
+// enabling it on their devices.
+//
+//    // Example sending a request using the DisassociateSkillFromUsersRequest method.
+//    req := client.DisassociateSkillFromUsersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsers
+func (c *AlexaForBusiness) DisassociateSkillFromUsersRequest(input *DisassociateSkillFromUsersInput) DisassociateSkillFromUsersRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateSkillFromUsers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateSkillFromUsersInput{}
+	}
+
+	output := &DisassociateSkillFromUsersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociateSkillFromUsersRequest{Request: req, Input: input, Copy: c.DisassociateSkillFromUsersRequest}
+}
+
 const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
 
 // DisassociateSkillGroupFromRoomRequest is a API request type for the DisassociateSkillGroupFromRoom API operation.
@@ -1817,6 +2020,108 @@ func (c *AlexaForBusiness) GetSkillGroupRequest(input *GetSkillGroupInput) GetSk
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetSkillGroupRequest{Request: req, Input: input, Copy: c.GetSkillGroupRequest}
+}
+
+const opListBusinessReportSchedules = "ListBusinessReportSchedules"
+
+// ListBusinessReportSchedulesRequest is a API request type for the ListBusinessReportSchedules API operation.
+type ListBusinessReportSchedulesRequest struct {
+	*aws.Request
+	Input *ListBusinessReportSchedulesInput
+	Copy  func(*ListBusinessReportSchedulesInput) ListBusinessReportSchedulesRequest
+}
+
+// Send marshals and sends the ListBusinessReportSchedules API request.
+func (r ListBusinessReportSchedulesRequest) Send() (*ListBusinessReportSchedulesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBusinessReportSchedulesOutput), nil
+}
+
+// ListBusinessReportSchedulesRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Lists the details of the schedules that a user configured.
+//
+//    // Example sending a request using the ListBusinessReportSchedulesRequest method.
+//    req := client.ListBusinessReportSchedulesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedules
+func (c *AlexaForBusiness) ListBusinessReportSchedulesRequest(input *ListBusinessReportSchedulesInput) ListBusinessReportSchedulesRequest {
+	op := &aws.Operation{
+		Name:       opListBusinessReportSchedules,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListBusinessReportSchedulesInput{}
+	}
+
+	output := &ListBusinessReportSchedulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListBusinessReportSchedulesRequest{Request: req, Input: input, Copy: c.ListBusinessReportSchedulesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListBusinessReportSchedulesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListBusinessReportSchedules operation.
+//		req := client.ListBusinessReportSchedulesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListBusinessReportSchedulesRequest) Paginate(opts ...aws.Option) ListBusinessReportSchedulesPager {
+	return ListBusinessReportSchedulesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListBusinessReportSchedulesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListBusinessReportSchedulesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListBusinessReportSchedulesPager struct {
+	aws.Pager
+}
+
+func (p *ListBusinessReportSchedulesPager) CurrentPage() *ListBusinessReportSchedulesOutput {
+	return p.Pager.CurrentPage().(*ListBusinessReportSchedulesOutput)
 }
 
 const opListConferenceProviders = "ListConferenceProviders"
@@ -3913,6 +4218,57 @@ func (c *AlexaForBusiness) UpdateAddressBookRequest(input *UpdateAddressBookInpu
 	return UpdateAddressBookRequest{Request: req, Input: input, Copy: c.UpdateAddressBookRequest}
 }
 
+const opUpdateBusinessReportSchedule = "UpdateBusinessReportSchedule"
+
+// UpdateBusinessReportScheduleRequest is a API request type for the UpdateBusinessReportSchedule API operation.
+type UpdateBusinessReportScheduleRequest struct {
+	*aws.Request
+	Input *UpdateBusinessReportScheduleInput
+	Copy  func(*UpdateBusinessReportScheduleInput) UpdateBusinessReportScheduleRequest
+}
+
+// Send marshals and sends the UpdateBusinessReportSchedule API request.
+func (r UpdateBusinessReportScheduleRequest) Send() (*UpdateBusinessReportScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBusinessReportScheduleOutput), nil
+}
+
+// UpdateBusinessReportScheduleRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Updates the configuration of the report delivery schedule with the specified
+// schedule ARN.
+//
+//    // Example sending a request using the UpdateBusinessReportScheduleRequest method.
+//    req := client.UpdateBusinessReportScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportSchedule
+func (c *AlexaForBusiness) UpdateBusinessReportScheduleRequest(input *UpdateBusinessReportScheduleInput) UpdateBusinessReportScheduleRequest {
+	op := &aws.Operation{
+		Name:       opUpdateBusinessReportSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateBusinessReportScheduleInput{}
+	}
+
+	output := &UpdateBusinessReportScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateBusinessReportScheduleRequest{Request: req, Input: input, Copy: c.UpdateBusinessReportScheduleRequest}
+}
+
 const opUpdateConferenceProvider = "UpdateConferenceProvider"
 
 // UpdateConferenceProviderRequest is a API request type for the UpdateConferenceProvider API operation.
@@ -4529,6 +4885,197 @@ func (s AssociateSkillWithSkillGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsersRequest
+type AssociateSkillWithUsersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the organization.
+	OrganizationArn *string `type:"string"`
+
+	// The private skill ID you want to make available to enrolled users.>
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociateSkillWithUsersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateSkillWithUsersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateSkillWithUsersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateSkillWithUsersInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsersResponse
+type AssociateSkillWithUsersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AssociateSkillWithUsersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateSkillWithUsersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateSkillWithUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Usage report with specified parameters.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReport
+type BusinessReport struct {
+	_ struct{} `type:"structure"`
+
+	// The time of report delivery.
+	DeliveryTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The download link where a user can download the report.
+	DownloadUrl *string `type:"string"`
+
+	// The failure code.
+	FailureCode BusinessReportFailureCode `type:"string" enum:"true"`
+
+	// The S3 location of the output reports.
+	S3Location *BusinessReportS3Location `type:"structure"`
+
+	// The status of the report generation execution (RUNNING, SUCCEEDED, or FAILED).
+	Status BusinessReportStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s BusinessReport) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BusinessReport) GoString() string {
+	return s.String()
+}
+
+// The content range of the report.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportContentRange
+type BusinessReportContentRange struct {
+	_ struct{} `type:"structure"`
+
+	// The interval of the content range.
+	Interval BusinessReportInterval `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s BusinessReportContentRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BusinessReportContentRange) GoString() string {
+	return s.String()
+}
+
+// The recurrence of the reports.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportRecurrence
+type BusinessReportRecurrence struct {
+	_ struct{} `type:"structure"`
+
+	// The start date.
+	StartDate *string `type:"string"`
+}
+
+// String returns the string representation
+func (s BusinessReportRecurrence) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BusinessReportRecurrence) GoString() string {
+	return s.String()
+}
+
+// The S3 location of the output reports.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportS3Location
+type BusinessReportS3Location struct {
+	_ struct{} `type:"structure"`
+
+	// The S3 bucket name of the output reports.
+	BucketName *string `type:"string"`
+
+	// The path of the business report.
+	Path *string `type:"string"`
+}
+
+// String returns the string representation
+func (s BusinessReportS3Location) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BusinessReportS3Location) GoString() string {
+	return s.String()
+}
+
+// The schedule of the usage report.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/BusinessReportSchedule
+type BusinessReportSchedule struct {
+	_ struct{} `type:"structure"`
+
+	// The content range of the reports.
+	ContentRange *BusinessReportContentRange `type:"structure"`
+
+	// The format of the generated report (individual CSV files or zipped files
+	// of individual files).
+	Format BusinessReportFormat `type:"string" enum:"true"`
+
+	// The details of the last business report delivery for a specified time interval.
+	LastBusinessReport *BusinessReport `type:"structure"`
+
+	// The recurrence of the reports.
+	Recurrence *BusinessReportRecurrence `type:"structure"`
+
+	// The S3 bucket name of the output reports.
+	S3BucketName *string `type:"string"`
+
+	// The S3 key where the report is delivered.
+	S3KeyPrefix *string `type:"string"`
+
+	// The ARN of the business report schedule.
+	ScheduleArn *string `type:"string"`
+
+	// The name identifier of the schedule.
+	ScheduleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s BusinessReportSchedule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BusinessReportSchedule) GoString() string {
+	return s.String()
+}
+
 // The skill store category that is shown. Alexa skills are assigned a specific
 // skill category during creation, such as News, Social, and Sports.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Category
@@ -4745,6 +5292,92 @@ func (s CreateAddressBookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportScheduleRequest
+type CreateBusinessReportScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The client request token.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The content range of the reports.
+	//
+	// ContentRange is a required field
+	ContentRange *BusinessReportContentRange `type:"structure" required:"true"`
+
+	// The format of the generated report (individual CSV files or zipped files
+	// of individual files).
+	//
+	// Format is a required field
+	Format BusinessReportFormat `type:"string" required:"true" enum:"true"`
+
+	// The recurrence of the reports.
+	Recurrence *BusinessReportRecurrence `type:"structure"`
+
+	// The S3 bucket name of the output reports.
+	S3BucketName *string `type:"string"`
+
+	// The S3 key where the report is delivered.
+	S3KeyPrefix *string `type:"string"`
+
+	// The name identifier of the schedule.
+	ScheduleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateBusinessReportScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateBusinessReportScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateBusinessReportScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBusinessReportScheduleInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+
+	if s.ContentRange == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentRange"))
+	}
+	if len(s.Format) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportScheduleResponse
+type CreateBusinessReportScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the business report schedule.
+	ScheduleArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateBusinessReportScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateBusinessReportScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBusinessReportScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProviderRequest
 type CreateConferenceProviderInput struct {
 	_ struct{} `type:"structure"`
@@ -4870,9 +5503,7 @@ type CreateContactInput struct {
 	LastName *string `min:"1" type:"string"`
 
 	// The phone number of the contact in E.164 format.
-	//
-	// PhoneNumber is a required field
-	PhoneNumber *string `type:"string" required:"true"`
+	PhoneNumber *string `type:"string"`
 }
 
 // String returns the string representation
@@ -4903,10 +5534,6 @@ func (s *CreateContactInput) Validate() error {
 	}
 	if s.LastName != nil && len(*s.LastName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LastName", 1))
-	}
-
-	if s.PhoneNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5372,6 +5999,62 @@ func (s DeleteAddressBookOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportScheduleRequest
+type DeleteBusinessReportScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the business report schedule.
+	//
+	// ScheduleArn is a required field
+	ScheduleArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteBusinessReportScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBusinessReportScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBusinessReportScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBusinessReportScheduleInput"}
+
+	if s.ScheduleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportScheduleResponse
+type DeleteBusinessReportScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteBusinessReportScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBusinessReportScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBusinessReportScheduleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -6200,6 +6883,65 @@ func (s DisassociateSkillFromSkillGroupOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsersRequest
+type DisassociateSkillFromUsersInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the organization.
+	OrganizationArn *string `type:"string"`
+
+	// The private skill ID you want to make unavailable for enrolled users.
+	//
+	// SkillId is a required field
+	SkillId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociateSkillFromUsersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateSkillFromUsersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateSkillFromUsersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateSkillFromUsersInput"}
+
+	if s.SkillId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SkillId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsersResponse
+type DisassociateSkillFromUsersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisassociateSkillFromUsersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateSkillFromUsersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateSkillFromUsersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillGroupFromRoomRequest
 type DisassociateSkillGroupFromRoomInput struct {
 	_ struct{} `type:"structure"`
@@ -6857,6 +7599,71 @@ func (s *IPDialIn) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedulesRequest
+type ListBusinessReportSchedulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of schedules listed in the call.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token used to list the remaining schedules from the previous API call.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListBusinessReportSchedulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListBusinessReportSchedulesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListBusinessReportSchedulesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListBusinessReportSchedulesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedulesResponse
+type ListBusinessReportSchedulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The schedule of the reports.
+	BusinessReportSchedules []BusinessReportSchedule `type:"list"`
+
+	// The token used to list the remaining schedules from the previous API call.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListBusinessReportSchedulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListBusinessReportSchedulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBusinessReportSchedulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProvidersRequest
 type ListConferenceProvidersInput struct {
 	_ struct{} `type:"structure"`
@@ -7018,16 +7825,15 @@ type ListSkillsInput struct {
 
 	// The maximum number of results to include in the response. If more results
 	// exist than the specified MaxResults value, a token is included in the response
-	// so that the remaining results can be retrieved. Required.
+	// so that the remaining results can be retrieved.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
-	// Required.
 	NextToken *string `min:"1" type:"string"`
 
-	// The ARN of the skill group for which to list enabled skills. Required.
+	// The ARN of the skill group for which to list enabled skills.
 	SkillGroupArn *string `type:"string"`
 
 	// Whether the skill is publicly available or is a private skill.
@@ -9491,6 +10297,78 @@ func (s UpdateAddressBookOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportScheduleRequest
+type UpdateBusinessReportScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The format of the generated report (individual CSV files or zipped files
+	// of individual files).
+	Format BusinessReportFormat `type:"string" enum:"true"`
+
+	// The recurrence of the reports.
+	Recurrence *BusinessReportRecurrence `type:"structure"`
+
+	// The S3 location of the output reports.
+	S3BucketName *string `type:"string"`
+
+	// The S3 key where the report is delivered.
+	S3KeyPrefix *string `type:"string"`
+
+	// The ARN of the business report schedule.
+	//
+	// ScheduleArn is a required field
+	ScheduleArn *string `type:"string" required:"true"`
+
+	// The name identifier of the schedule.
+	ScheduleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateBusinessReportScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateBusinessReportScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateBusinessReportScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBusinessReportScheduleInput"}
+
+	if s.ScheduleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportScheduleResponse
+type UpdateBusinessReportScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateBusinessReportScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateBusinessReportScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBusinessReportScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProviderRequest
 type UpdateConferenceProviderInput struct {
 	_ struct{} `type:"structure"`
@@ -9970,6 +10848,76 @@ func (s UserData) String() string {
 // GoString returns the string representation
 func (s UserData) GoString() string {
 	return s.String()
+}
+
+type BusinessReportFailureCode string
+
+// Enum values for BusinessReportFailureCode
+const (
+	BusinessReportFailureCodeAccessDenied    BusinessReportFailureCode = "ACCESS_DENIED"
+	BusinessReportFailureCodeNoSuchBucket    BusinessReportFailureCode = "NO_SUCH_BUCKET"
+	BusinessReportFailureCodeInternalFailure BusinessReportFailureCode = "INTERNAL_FAILURE"
+)
+
+func (enum BusinessReportFailureCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BusinessReportFailureCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type BusinessReportFormat string
+
+// Enum values for BusinessReportFormat
+const (
+	BusinessReportFormatCsv    BusinessReportFormat = "CSV"
+	BusinessReportFormatCsvZip BusinessReportFormat = "CSV_ZIP"
+)
+
+func (enum BusinessReportFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BusinessReportFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type BusinessReportInterval string
+
+// Enum values for BusinessReportInterval
+const (
+	BusinessReportIntervalOneDay  BusinessReportInterval = "ONE_DAY"
+	BusinessReportIntervalOneWeek BusinessReportInterval = "ONE_WEEK"
+)
+
+func (enum BusinessReportInterval) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BusinessReportInterval) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type BusinessReportStatus string
+
+// Enum values for BusinessReportStatus
+const (
+	BusinessReportStatusRunning   BusinessReportStatus = "RUNNING"
+	BusinessReportStatusSucceeded BusinessReportStatus = "SUCCEEDED"
+	BusinessReportStatusFailed    BusinessReportStatus = "FAILED"
+)
+
+func (enum BusinessReportStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BusinessReportStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type CommsProtocol string

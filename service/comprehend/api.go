@@ -292,6 +292,7 @@ func (r CreateDocumentClassifierRequest) Send() (*CreateDocumentClassifierOutput
 // To create a classifier you provide a set of training documents that labeled
 // with the categories that you want to use. After the classifier is trained
 // you can use it to categorize a set of labeled documents into the categories.
+// For more information, see how-document-classification.
 //
 //    // Example sending a request using the CreateDocumentClassifierRequest method.
 //    req := client.CreateDocumentClassifierRequest(params)
@@ -2370,6 +2371,118 @@ func (c *Comprehend) StopSentimentDetectionJobRequest(input *StopSentimentDetect
 	return StopSentimentDetectionJobRequest{Request: req, Input: input, Copy: c.StopSentimentDetectionJobRequest}
 }
 
+const opStopTrainingDocumentClassifier = "StopTrainingDocumentClassifier"
+
+// StopTrainingDocumentClassifierRequest is a API request type for the StopTrainingDocumentClassifier API operation.
+type StopTrainingDocumentClassifierRequest struct {
+	*aws.Request
+	Input *StopTrainingDocumentClassifierInput
+	Copy  func(*StopTrainingDocumentClassifierInput) StopTrainingDocumentClassifierRequest
+}
+
+// Send marshals and sends the StopTrainingDocumentClassifier API request.
+func (r StopTrainingDocumentClassifierRequest) Send() (*StopTrainingDocumentClassifierOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopTrainingDocumentClassifierOutput), nil
+}
+
+// StopTrainingDocumentClassifierRequest returns a request value for making API operation for
+// Amazon Comprehend.
+//
+// Stops a document classifier training job while in progress.
+//
+// If the training job state is TRAINING, the job is marked for termination
+// and put into the STOP_REQUESTED state. If the training job completes before
+// it can be stopped, it is put into the TRAINED; otherwise the training job
+// is stopped and put into the STOPPED state and the service sends back an HTTP
+// 200 response with an empty HTTP body.
+//
+//    // Example sending a request using the StopTrainingDocumentClassifierRequest method.
+//    req := client.StopTrainingDocumentClassifierRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifier
+func (c *Comprehend) StopTrainingDocumentClassifierRequest(input *StopTrainingDocumentClassifierInput) StopTrainingDocumentClassifierRequest {
+	op := &aws.Operation{
+		Name:       opStopTrainingDocumentClassifier,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopTrainingDocumentClassifierInput{}
+	}
+
+	output := &StopTrainingDocumentClassifierOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopTrainingDocumentClassifierRequest{Request: req, Input: input, Copy: c.StopTrainingDocumentClassifierRequest}
+}
+
+const opStopTrainingEntityRecognizer = "StopTrainingEntityRecognizer"
+
+// StopTrainingEntityRecognizerRequest is a API request type for the StopTrainingEntityRecognizer API operation.
+type StopTrainingEntityRecognizerRequest struct {
+	*aws.Request
+	Input *StopTrainingEntityRecognizerInput
+	Copy  func(*StopTrainingEntityRecognizerInput) StopTrainingEntityRecognizerRequest
+}
+
+// Send marshals and sends the StopTrainingEntityRecognizer API request.
+func (r StopTrainingEntityRecognizerRequest) Send() (*StopTrainingEntityRecognizerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopTrainingEntityRecognizerOutput), nil
+}
+
+// StopTrainingEntityRecognizerRequest returns a request value for making API operation for
+// Amazon Comprehend.
+//
+// Stops an entity recognizer training job while in progress.
+//
+// If the training job state is TRAINING, the job is marked for termination
+// and put into the STOP_REQUESTED state. If the training job completes before
+// it can be stopped, it is put into the TRAINED; otherwise the training job
+// is stopped and putted into the STOPPED state and the service sends back an
+// HTTP 200 response with an empty HTTP body.
+//
+//    // Example sending a request using the StopTrainingEntityRecognizerRequest method.
+//    req := client.StopTrainingEntityRecognizerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizer
+func (c *Comprehend) StopTrainingEntityRecognizerRequest(input *StopTrainingEntityRecognizerInput) StopTrainingEntityRecognizerRequest {
+	op := &aws.Operation{
+		Name:       opStopTrainingEntityRecognizer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopTrainingEntityRecognizerInput{}
+	}
+
+	output := &StopTrainingEntityRecognizerOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopTrainingEntityRecognizerRequest{Request: req, Input: input, Copy: c.StopTrainingEntityRecognizerRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguageRequest
 type BatchDetectDominantLanguageInput struct {
 	_ struct{} `type:"structure"`
@@ -4383,7 +4496,7 @@ type DocumentClassifierProperties struct {
 	// Additional information about the status of the classifier.
 	Message *string `type:"string"`
 
-	// The status of the document classifier. The the status is TRAINED the classifier
+	// The status of the document classifier. If the status is TRAINED the classifier
 	// is ready to use. If the status is FAILED you can see additional information
 	// about why the classifier wasn't trained in the Message field.
 	Status ModelStatus `type:"string" enum:"true"`
@@ -7059,6 +7172,120 @@ func (s StopSentimentDetectionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifierRequest
+type StopTrainingDocumentClassifierInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) that identifies the document classifier currently
+	// being trained.
+	//
+	// DocumentClassifierArn is a required field
+	DocumentClassifierArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopTrainingDocumentClassifierInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopTrainingDocumentClassifierInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopTrainingDocumentClassifierInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopTrainingDocumentClassifierInput"}
+
+	if s.DocumentClassifierArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DocumentClassifierArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingDocumentClassifierResponse
+type StopTrainingDocumentClassifierOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopTrainingDocumentClassifierOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopTrainingDocumentClassifierOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopTrainingDocumentClassifierOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizerRequest
+type StopTrainingEntityRecognizerInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) that identifies the entity recognizer currently
+	// being trained.
+	//
+	// EntityRecognizerArn is a required field
+	EntityRecognizerArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopTrainingEntityRecognizerInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopTrainingEntityRecognizerInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopTrainingEntityRecognizerInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopTrainingEntityRecognizerInput"}
+
+	if s.EntityRecognizerArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EntityRecognizerArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTrainingEntityRecognizerResponse
+type StopTrainingEntityRecognizerOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopTrainingEntityRecognizerOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopTrainingEntityRecognizerOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopTrainingEntityRecognizerOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents a work in the input text that was recognized and assigned a part
 // of speech. There is one syntax token record for each word in the source text.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/SyntaxToken
@@ -7275,11 +7502,13 @@ type ModelStatus string
 
 // Enum values for ModelStatus
 const (
-	ModelStatusSubmitted ModelStatus = "SUBMITTED"
-	ModelStatusTraining  ModelStatus = "TRAINING"
-	ModelStatusDeleting  ModelStatus = "DELETING"
-	ModelStatusInError   ModelStatus = "IN_ERROR"
-	ModelStatusTrained   ModelStatus = "TRAINED"
+	ModelStatusSubmitted     ModelStatus = "SUBMITTED"
+	ModelStatusTraining      ModelStatus = "TRAINING"
+	ModelStatusDeleting      ModelStatus = "DELETING"
+	ModelStatusStopRequested ModelStatus = "STOP_REQUESTED"
+	ModelStatusStopped       ModelStatus = "STOPPED"
+	ModelStatusInError       ModelStatus = "IN_ERROR"
+	ModelStatusTrained       ModelStatus = "TRAINED"
 )
 
 func (enum ModelStatus) MarshalValue() (string, error) {

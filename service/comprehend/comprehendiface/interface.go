@@ -141,6 +141,10 @@ type ComprehendAPI interface {
 	StopKeyPhrasesDetectionJobRequest(*comprehend.StopKeyPhrasesDetectionJobInput) comprehend.StopKeyPhrasesDetectionJobRequest
 
 	StopSentimentDetectionJobRequest(*comprehend.StopSentimentDetectionJobInput) comprehend.StopSentimentDetectionJobRequest
+
+	StopTrainingDocumentClassifierRequest(*comprehend.StopTrainingDocumentClassifierInput) comprehend.StopTrainingDocumentClassifierRequest
+
+	StopTrainingEntityRecognizerRequest(*comprehend.StopTrainingEntityRecognizerInput) comprehend.StopTrainingEntityRecognizerRequest
 }
 
 var _ ComprehendAPI = (*comprehend.Comprehend)(nil)

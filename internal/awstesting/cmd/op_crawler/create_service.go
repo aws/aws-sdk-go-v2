@@ -9,6 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness"
 	"github.com/aws/aws-sdk-go-v2/service/amplify"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh"
@@ -189,6 +191,8 @@ func createServices(cfg aws.Config) []service {
 		{name: "alexaforbusiness", value: reflect.ValueOf(alexaforbusiness.New(cfg))},
 		{name: "amplify", value: reflect.ValueOf(amplify.New(cfg))},
 		{name: "apigateway", value: reflect.ValueOf(apigateway.New(cfg))},
+		{name: "apigatewaymanagementapi", value: reflect.ValueOf(apigatewaymanagementapi.New(cfg))},
+		{name: "apigatewayv2", value: reflect.ValueOf(apigatewayv2.New(cfg))},
 		{name: "applicationautoscaling", value: reflect.ValueOf(applicationautoscaling.New(cfg))},
 		{name: "applicationdiscoveryservice", value: reflect.ValueOf(applicationdiscoveryservice.New(cfg))},
 		{name: "appmesh", value: reflect.ValueOf(appmesh.New(cfg))},

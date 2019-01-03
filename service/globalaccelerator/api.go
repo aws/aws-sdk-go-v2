@@ -87,9 +87,9 @@ func (r CreateEndpointGroupRequest) Send() (*CreateEndpointGroupOutput, error) {
 // CreateEndpointGroupRequest returns a request value for making API operation for
 // AWS Global Accelerator.
 //
-// Create an endpoint group for the specified accelerator. An endpoint group
-// is a collection of endpoints in one AWS Region. To see an AWS CLI example
-// of creating an endpoint group, scroll down to Example.
+// Create an endpoint group for the specified listener. An endpoint group is
+// a collection of endpoints in one AWS Region. To see an AWS CLI example of
+// creating an endpoint group, scroll down to Example.
 //
 //    // Example sending a request using the CreateEndpointGroupRequest method.
 //    req := client.CreateEndpointGroupRequest(params)
@@ -193,7 +193,7 @@ func (r DeleteAcceleratorRequest) Send() (*DeleteAcceleratorOutput, error) {
 // AWS Global Accelerator.
 //
 // Delete an accelerator. Note: before you can delete an accelerator, you must
-// disable it.
+// disable it and remove all dependent resources (listeners and endpoint groups).
 //
 //    // Example sending a request using the DeleteAcceleratorRequest method.
 //    req := client.DeleteAcceleratorRequest(params)
@@ -933,18 +933,21 @@ func (s Accelerator) GoString() string {
 type AcceleratorAttributes struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether flow logs are enabled. The value is true or false. The
-	// default value is false. If the value is true, FlowLogsS3Bucket and FlowLogsS3Prefix
-	// must be specified.
+	// Indicates whether flow logs are enabled. The default value is false. If the
+	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.
+	//
+	// For more information, see Flow Logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
+	// in the AWS Global Accelerator Developer Guide.
 	FlowLogsEnabled *bool `type:"boolean"`
 
-	// The name of the Amazon S3 bucket for the flow logs. This attribute is required
-	// if flow logs are enabled. The bucket must exist and have a bucket policy
+	// The name of the Amazon S3 bucket for the flow logs. Attribute is required
+	// if FlowLogsEnabled is true. The bucket must exist and have a bucket policy
 	// that grants AWS Global Accelerator permission to write to the bucket.
 	FlowLogsS3Bucket *string `type:"string"`
 
-	// The prefix for the location in the Amazon S3 bucket for the flow logs. If
-	// you don’t specify a prefix, the flow logs are stored in the root of the bucket.
+	// The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute
+	// is required if FlowLogsEnabled is true. If you don’t specify a prefix, the
+	// flow logs are stored in the root of the bucket.
 	FlowLogsS3Prefix *string `type:"string"`
 }
 
@@ -1053,8 +1056,8 @@ type CreateEndpointGroupInput struct {
 	// EndpointGroupRegion is a required field
 	EndpointGroupRegion *string `type:"string" required:"true"`
 
-	// The time, in seconds, between each health check for an endpoint. The default
-	// value is 30.
+	// The time—10 seconds or 30 seconds—between each health check for an endpoint.
+	// The default value is 30.
 	HealthCheckIntervalSeconds *int64 `min:"10" type:"integer"`
 
 	// If the protocol is HTTP/S, then this specifies the path that is the destination
@@ -1180,17 +1183,16 @@ type CreateListenerInput struct {
 	//
 	// AWS Global Accelerator uses a consistent-flow hashing algorithm to choose
 	// the optimal endpoint for a connection. If client affinity is NONE, Global
-	// Accelerator uses the "five-tuple" (5-tuple) properties—client IP address,
-	// client port, destination IP address, destination port, and protocol—to select
+	// Accelerator uses the "five-tuple" (5-tuple) properties—source IP address,
+	// source port, destination IP address, destination port, and protocol—to select
 	// the hash value, and then chooses the best endpoint. However, with this setting,
 	// if someone uses different ports to connect to Global Accelerator, their connections
 	// might not be always routed to the same endpoint because the hash value changes.
 	//
 	// If you want a given client to always be routed to the same endpoint, set
-	// client affinity to CLIENT_IP instead. When you use the CLIENT_IP setting,
-	// Global Accelerator uses the "two-tuple" (2-tuple) properties— client IP address
-	// and destination IP address—to select the hash value. For UDP, Global Accelerator
-	// always uses two-tuple properties to select the hash value.
+	// client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting,
+	// Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client)
+	// IP address and destination IP address—to select the hash value.
 	//
 	// The default value is NONE.
 	ClientAffinity ClientAffinity `type:"string" enum:"true"`
@@ -1455,7 +1457,7 @@ type DescribeAcceleratorAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the accelerator with the attributes that
-	// you want to describe.
+	// you want to describe. Value is required.
 	AcceleratorArn *string `type:"string"`
 }
 
@@ -1688,7 +1690,7 @@ type EndpointConfiguration struct {
 	// 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is
 	// routed to the first endpoint, 5/20 is routed both to the second and third
 	// endpoints, and 6/20 is routed to the last endpoint. For more information,
-	// see Endpoint Weights (https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
+	// see Endpoint Weights (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
 	// in the AWS Global Accelerator Developer Guide.
 	Weight *int64 `type:"integer"`
 }
@@ -1746,7 +1748,7 @@ type EndpointDescription struct {
 	// 5, and 6 (sum=20). The result is that 4/20 of your traffic, on average, is
 	// routed to the first endpoint, 5/20 is routed both to the second and third
 	// endpoints, and 6/20 is routed to the last endpoint. For more information,
-	// see Endpoint Weights (https://docs.awa.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
+	// see Endpoint Weights (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
 	// in the AWS Global Accelerator Developer Guide.
 	Weight *int64 `type:"integer"`
 }
@@ -1776,8 +1778,8 @@ type EndpointGroup struct {
 	// The AWS Region that this endpoint group belongs.
 	EndpointGroupRegion *string `type:"string"`
 
-	// The elapsed time, in seconds, between health checks for each endpoint. The
-	// default value is 30.
+	// The time—10 seconds or 30 seconds—between health checks for each endpoint.
+	// The default value is 30.
 	HealthCheckIntervalSeconds *int64 `min:"10" type:"integer"`
 
 	// If the protocol is HTTP/S, then this value provides the ping path that Global
@@ -2065,8 +2067,24 @@ func (s ListListenersOutput) SDKResponseMetadata() aws.Response {
 type Listener struct {
 	_ struct{} `type:"structure"`
 
-	// The client properties that Global Accelerator uses to select an endpoint
-	// so that you can choose to route traffic from users to their original endpoint.
+	// Client affinity lets you direct all requests from a user to the same endpoint,
+	// if you have stateful applications, regardless of the port and protocol of
+	// the client request. Clienty affinity gives you control over whether to always
+	// route each client to the same specific endpoint.
+	//
+	// AWS Global Accelerator uses a consistent-flow hashing algorithm to choose
+	// the optimal endpoint for a connection. If client affinity is NONE, Global
+	// Accelerator uses the "five-tuple" (5-tuple) properties—source IP address,
+	// source port, destination IP address, destination port, and protocol—to select
+	// the hash value, and then chooses the best endpoint. However, with this setting,
+	// if someone uses different ports to connect to Global Accelerator, their connections
+	// might not be always routed to the same endpoint because the hash value changes.
+	//
+	// If you want a given client to always be routed to the same endpoint, set
+	// client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting,
+	// Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client)
+	// IP address and destination IP address—to select the hash value.
+	//
 	// The default value is NONE.
 	ClientAffinity ClientAffinity `type:"string" enum:"true"`
 
@@ -2133,15 +2151,24 @@ type UpdateAcceleratorAttributesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the accelerator that you want to update.
+	// Attribute is required.
 	AcceleratorArn *string `type:"string"`
 
-	// Update whether flow logs are enabled.
+	// Update whether flow logs are enabled. The default value is false. If the
+	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.
+	//
+	// For more information, see Flow Logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
+	// in the AWS Global Accelerator Developer Guide.
 	FlowLogsEnabled *bool `type:"boolean"`
 
-	// Update the name of the Amazon S3 bucket for the flow logs.
+	// The name of the Amazon S3 bucket for the flow logs. Attribute is required
+	// if FlowLogsEnabled is true. The bucket must exist and have a bucket policy
+	// that grants AWS Global Accelerator permission to write to the bucket.
 	FlowLogsS3Bucket *string `type:"string"`
 
 	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
+	// Attribute is required if FlowLogsEnabled is true. If you don’t specify a
+	// prefix, the flow logs are stored in the root of the bucket.
 	FlowLogsS3Prefix *string `type:"string"`
 }
 
@@ -2266,8 +2293,8 @@ type UpdateEndpointGroupInput struct {
 	// EndpointGroupArn is a required field
 	EndpointGroupArn *string `type:"string" required:"true"`
 
-	// The time, in seconds, between each health check for an endpoint. The default
-	// value is 30.
+	// The time—10 seconds or 30 seconds—between each health check for an endpoint.
+	// The default value is 30.
 	HealthCheckIntervalSeconds *int64 `min:"10" type:"integer"`
 
 	// If the protocol is HTTP/S, then this specifies the path that is the destination
@@ -2363,9 +2390,22 @@ type UpdateListenerInput struct {
 	_ struct{} `type:"structure"`
 
 	// Client affinity lets you direct all requests from a user to the same endpoint,
-	// if you have stateful applications, regardless of the source port and protocol
-	// of the user request. This gives you control over whether and how to maintain
-	// client affinity to a given endpoint.
+	// if you have stateful applications, regardless of the port and protocol of
+	// the client request. Clienty affinity gives you control over whether to always
+	// route each client to the same specific endpoint.
+	//
+	// AWS Global Accelerator uses a consistent-flow hashing algorithm to choose
+	// the optimal endpoint for a connection. If client affinity is NONE, Global
+	// Accelerator uses the "five-tuple" (5-tuple) properties—source IP address,
+	// source port, destination IP address, destination port, and protocol—to select
+	// the hash value, and then chooses the best endpoint. However, with this setting,
+	// if someone uses different ports to connect to Global Accelerator, their connections
+	// might not be always routed to the same endpoint because the hash value changes.
+	//
+	// If you want a given client to always be routed to the same endpoint, set
+	// client affinity to SOURCE_IP instead. When you use the SOURCE_IP setting,
+	// Global Accelerator uses the "two-tuple" (2-tuple) properties— source (client)
+	// IP address and destination IP address—to select the hash value.
 	//
 	// The default value is NONE.
 	ClientAffinity ClientAffinity `type:"string" enum:"true"`

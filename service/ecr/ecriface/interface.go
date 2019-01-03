@@ -96,6 +96,8 @@ type ECRAPI interface {
 
 	ListImagesRequest(*ecr.ListImagesInput) ecr.ListImagesRequest
 
+	ListTagsForResourceRequest(*ecr.ListTagsForResourceInput) ecr.ListTagsForResourceRequest
+
 	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 
 	PutLifecyclePolicyRequest(*ecr.PutLifecyclePolicyInput) ecr.PutLifecyclePolicyRequest
@@ -103,6 +105,10 @@ type ECRAPI interface {
 	SetRepositoryPolicyRequest(*ecr.SetRepositoryPolicyInput) ecr.SetRepositoryPolicyRequest
 
 	StartLifecyclePolicyPreviewRequest(*ecr.StartLifecyclePolicyPreviewInput) ecr.StartLifecyclePolicyPreviewRequest
+
+	TagResourceRequest(*ecr.TagResourceInput) ecr.TagResourceRequest
+
+	UntagResourceRequest(*ecr.UntagResourceInput) ecr.UntagResourceRequest
 
 	UploadLayerPartRequest(*ecr.UploadLayerPartInput) ecr.UploadLayerPartRequest
 }

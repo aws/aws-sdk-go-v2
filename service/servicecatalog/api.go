@@ -2244,8 +2244,9 @@ func (r EnableAWSOrganizationsAccessRequest) Send() (*EnableAWSOrganizationsAcce
 // sync your shares with the current structure. This API can only be called
 // by the master account in the organization.
 //
-// By calling this API Service Catalog will use FAS credentials to call organizations:EnableAWSServiceAccess
-// so that your shares can be in sync with any changes in your AWS Organizations.
+// By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess
+// on your behalf so that your shares can be in sync with any changes in your
+// AWS Organizations structure.
 //
 //    // Example sending a request using the EnableAWSOrganizationsAccessRequest method.
 //    req := client.EnableAWSOrganizationsAccessRequest(params)
@@ -5385,6 +5386,8 @@ type ConstraintDetail struct {
 	//
 	//    * NOTIFICATION
 	//
+	//    * STACKSET
+	//
 	//    * TEMPLATE
 	Type *string `min:"1" type:"string"`
 }
@@ -5412,6 +5415,8 @@ type ConstraintSummary struct {
 	//    * LAUNCH
 	//
 	//    * NOTIFICATION
+	//
+	//    * STACKSET
 	//
 	//    * TEMPLATE
 	Type *string `min:"1" type:"string"`
@@ -10163,12 +10168,15 @@ func (s ListTagOptionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Information about the organization node.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OrganizationNode
 type OrganizationNode struct {
 	_ struct{} `type:"structure"`
 
+	// The organization node type.
 	Type OrganizationNodeType `type:"string" enum:"true"`
 
+	// The identifier of the organization node.
 	Value *string `type:"string"`
 }
 

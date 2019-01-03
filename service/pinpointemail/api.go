@@ -176,6 +176,63 @@ func (c *PinpointEmail) CreateDedicatedIpPoolRequest(input *CreateDedicatedIpPoo
 	return CreateDedicatedIpPoolRequest{Request: req, Input: input, Copy: c.CreateDedicatedIpPoolRequest}
 }
 
+const opCreateDeliverabilityTestReport = "CreateDeliverabilityTestReport"
+
+// CreateDeliverabilityTestReportRequest is a API request type for the CreateDeliverabilityTestReport API operation.
+type CreateDeliverabilityTestReportRequest struct {
+	*aws.Request
+	Input *CreateDeliverabilityTestReportInput
+	Copy  func(*CreateDeliverabilityTestReportInput) CreateDeliverabilityTestReportRequest
+}
+
+// Send marshals and sends the CreateDeliverabilityTestReport API request.
+func (r CreateDeliverabilityTestReportRequest) Send() (*CreateDeliverabilityTestReportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeliverabilityTestReportOutput), nil
+}
+
+// CreateDeliverabilityTestReportRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Create a new predictive inbox placement test. Predictive inbox placement
+// tests can help you predict how your messages will be handled by various email
+// providers around the world. When you perform a predictive inbox placement
+// test, you provide a sample message that contains the content that you plan
+// to send to your customers. Amazon Pinpoint then sends that message to special
+// email addresses spread across several major email providers. After about
+// 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport
+// operation to view the results of the test.
+//
+//    // Example sending a request using the CreateDeliverabilityTestReportRequest method.
+//    req := client.CreateDeliverabilityTestReportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReport
+func (c *PinpointEmail) CreateDeliverabilityTestReportRequest(input *CreateDeliverabilityTestReportInput) CreateDeliverabilityTestReportRequest {
+	op := &aws.Operation{
+		Name:       opCreateDeliverabilityTestReport,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/email/deliverability-dashboard/test",
+	}
+
+	if input == nil {
+		input = &CreateDeliverabilityTestReportInput{}
+	}
+
+	output := &CreateDeliverabilityTestReportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateDeliverabilityTestReportRequest{Request: req, Input: input, Copy: c.CreateDeliverabilityTestReportRequest}
+}
+
 const opCreateEmailIdentity = "CreateEmailIdentity"
 
 // CreateEmailIdentityRequest is a API request type for the CreateEmailIdentity API operation.
@@ -506,6 +563,57 @@ func (c *PinpointEmail) GetAccountRequest(input *GetAccountInput) GetAccountRequ
 	return GetAccountRequest{Request: req, Input: input, Copy: c.GetAccountRequest}
 }
 
+const opGetBlacklistReports = "GetBlacklistReports"
+
+// GetBlacklistReportsRequest is a API request type for the GetBlacklistReports API operation.
+type GetBlacklistReportsRequest struct {
+	*aws.Request
+	Input *GetBlacklistReportsInput
+	Copy  func(*GetBlacklistReportsInput) GetBlacklistReportsRequest
+}
+
+// Send marshals and sends the GetBlacklistReports API request.
+func (r GetBlacklistReportsRequest) Send() (*GetBlacklistReportsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBlacklistReportsOutput), nil
+}
+
+// GetBlacklistReportsRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Retrieve a list of the blacklists that your dedicated IP addresses appear
+// on.
+//
+//    // Example sending a request using the GetBlacklistReportsRequest method.
+//    req := client.GetBlacklistReportsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReports
+func (c *PinpointEmail) GetBlacklistReportsRequest(input *GetBlacklistReportsInput) GetBlacklistReportsRequest {
+	op := &aws.Operation{
+		Name:       opGetBlacklistReports,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/email/deliverability-dashboard/blacklist-report",
+	}
+
+	if input == nil {
+		input = &GetBlacklistReportsInput{}
+	}
+
+	output := &GetBlacklistReportsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetBlacklistReportsRequest{Request: req, Input: input, Copy: c.GetBlacklistReportsRequest}
+}
+
 const opGetConfigurationSet = "GetConfigurationSet"
 
 // GetConfigurationSetRequest is a API request type for the GetConfigurationSet API operation.
@@ -777,6 +885,166 @@ func (p *GetDedicatedIpsPager) CurrentPage() *GetDedicatedIpsOutput {
 	return p.Pager.CurrentPage().(*GetDedicatedIpsOutput)
 }
 
+const opGetDeliverabilityDashboardOptions = "GetDeliverabilityDashboardOptions"
+
+// GetDeliverabilityDashboardOptionsRequest is a API request type for the GetDeliverabilityDashboardOptions API operation.
+type GetDeliverabilityDashboardOptionsRequest struct {
+	*aws.Request
+	Input *GetDeliverabilityDashboardOptionsInput
+	Copy  func(*GetDeliverabilityDashboardOptionsInput) GetDeliverabilityDashboardOptionsRequest
+}
+
+// Send marshals and sends the GetDeliverabilityDashboardOptions API request.
+func (r GetDeliverabilityDashboardOptionsRequest) Send() (*GetDeliverabilityDashboardOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeliverabilityDashboardOptionsOutput), nil
+}
+
+// GetDeliverabilityDashboardOptionsRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Show the status of the Deliverability dashboard. When the Deliverability
+// dashboard is enabled, you gain access to reputation metrics for the domains
+// that you use to send email using Amazon Pinpoint. You also gain the ability
+// to perform predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00,
+// in addition to any other fees that you accrue by using Amazon Pinpoint. If
+// you enable the Deliverability dashboard after the first day of a calendar
+// month, AWS prorates the monthly charge based on how many days have elapsed
+// in the current calendar month.
+//
+//    // Example sending a request using the GetDeliverabilityDashboardOptionsRequest method.
+//    req := client.GetDeliverabilityDashboardOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptions
+func (c *PinpointEmail) GetDeliverabilityDashboardOptionsRequest(input *GetDeliverabilityDashboardOptionsInput) GetDeliverabilityDashboardOptionsRequest {
+	op := &aws.Operation{
+		Name:       opGetDeliverabilityDashboardOptions,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/email/deliverability-dashboard",
+	}
+
+	if input == nil {
+		input = &GetDeliverabilityDashboardOptionsInput{}
+	}
+
+	output := &GetDeliverabilityDashboardOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetDeliverabilityDashboardOptionsRequest{Request: req, Input: input, Copy: c.GetDeliverabilityDashboardOptionsRequest}
+}
+
+const opGetDeliverabilityTestReport = "GetDeliverabilityTestReport"
+
+// GetDeliverabilityTestReportRequest is a API request type for the GetDeliverabilityTestReport API operation.
+type GetDeliverabilityTestReportRequest struct {
+	*aws.Request
+	Input *GetDeliverabilityTestReportInput
+	Copy  func(*GetDeliverabilityTestReportInput) GetDeliverabilityTestReportRequest
+}
+
+// Send marshals and sends the GetDeliverabilityTestReport API request.
+func (r GetDeliverabilityTestReportRequest) Send() (*GetDeliverabilityTestReportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeliverabilityTestReportOutput), nil
+}
+
+// GetDeliverabilityTestReportRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Retrieve the results of a predictive inbox placement test.
+//
+//    // Example sending a request using the GetDeliverabilityTestReportRequest method.
+//    req := client.GetDeliverabilityTestReportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReport
+func (c *PinpointEmail) GetDeliverabilityTestReportRequest(input *GetDeliverabilityTestReportInput) GetDeliverabilityTestReportRequest {
+	op := &aws.Operation{
+		Name:       opGetDeliverabilityTestReport,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/email/deliverability-dashboard/test-reports/{ReportId}",
+	}
+
+	if input == nil {
+		input = &GetDeliverabilityTestReportInput{}
+	}
+
+	output := &GetDeliverabilityTestReportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetDeliverabilityTestReportRequest{Request: req, Input: input, Copy: c.GetDeliverabilityTestReportRequest}
+}
+
+const opGetDomainStatisticsReport = "GetDomainStatisticsReport"
+
+// GetDomainStatisticsReportRequest is a API request type for the GetDomainStatisticsReport API operation.
+type GetDomainStatisticsReportRequest struct {
+	*aws.Request
+	Input *GetDomainStatisticsReportInput
+	Copy  func(*GetDomainStatisticsReportInput) GetDomainStatisticsReportRequest
+}
+
+// Send marshals and sends the GetDomainStatisticsReport API request.
+func (r GetDomainStatisticsReportRequest) Send() (*GetDomainStatisticsReportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDomainStatisticsReportOutput), nil
+}
+
+// GetDomainStatisticsReportRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Retrieve inbox placement and engagement rates for the domains that you use
+// to send email.
+//
+//    // Example sending a request using the GetDomainStatisticsReportRequest method.
+//    req := client.GetDomainStatisticsReportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReport
+func (c *PinpointEmail) GetDomainStatisticsReportRequest(input *GetDomainStatisticsReportInput) GetDomainStatisticsReportRequest {
+	op := &aws.Operation{
+		Name:       opGetDomainStatisticsReport,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/email/deliverability-dashboard/statistics-report/{Domain}",
+	}
+
+	if input == nil {
+		input = &GetDomainStatisticsReportInput{}
+	}
+
+	output := &GetDomainStatisticsReportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetDomainStatisticsReportRequest{Request: req, Input: input, Copy: c.GetDomainStatisticsReportRequest}
+}
+
 const opGetEmailIdentity = "GetEmailIdentity"
 
 // GetEmailIdentityRequest is a API request type for the GetEmailIdentity API operation.
@@ -1039,6 +1307,111 @@ type ListDedicatedIpPoolsPager struct {
 
 func (p *ListDedicatedIpPoolsPager) CurrentPage() *ListDedicatedIpPoolsOutput {
 	return p.Pager.CurrentPage().(*ListDedicatedIpPoolsOutput)
+}
+
+const opListDeliverabilityTestReports = "ListDeliverabilityTestReports"
+
+// ListDeliverabilityTestReportsRequest is a API request type for the ListDeliverabilityTestReports API operation.
+type ListDeliverabilityTestReportsRequest struct {
+	*aws.Request
+	Input *ListDeliverabilityTestReportsInput
+	Copy  func(*ListDeliverabilityTestReportsInput) ListDeliverabilityTestReportsRequest
+}
+
+// Send marshals and sends the ListDeliverabilityTestReports API request.
+func (r ListDeliverabilityTestReportsRequest) Send() (*ListDeliverabilityTestReportsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeliverabilityTestReportsOutput), nil
+}
+
+// ListDeliverabilityTestReportsRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Show a list of the predictive inbox placement tests that you've performed,
+// regardless of their statuses. For predictive inbox placement tests that are
+// complete, you can use the GetDeliverabilityTestReport operation to view the
+// results.
+//
+//    // Example sending a request using the ListDeliverabilityTestReportsRequest method.
+//    req := client.ListDeliverabilityTestReportsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReports
+func (c *PinpointEmail) ListDeliverabilityTestReportsRequest(input *ListDeliverabilityTestReportsInput) ListDeliverabilityTestReportsRequest {
+	op := &aws.Operation{
+		Name:       opListDeliverabilityTestReports,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/email/deliverability-dashboard/test-reports",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "PageSize",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListDeliverabilityTestReportsInput{}
+	}
+
+	output := &ListDeliverabilityTestReportsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDeliverabilityTestReportsRequest{Request: req, Input: input, Copy: c.ListDeliverabilityTestReportsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListDeliverabilityTestReportsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListDeliverabilityTestReports operation.
+//		req := client.ListDeliverabilityTestReportsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDeliverabilityTestReportsRequest) Paginate(opts ...aws.Option) ListDeliverabilityTestReportsPager {
+	return ListDeliverabilityTestReportsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDeliverabilityTestReportsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListDeliverabilityTestReportsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDeliverabilityTestReportsPager struct {
+	aws.Pager
+}
+
+func (p *ListDeliverabilityTestReportsPager) CurrentPage() *ListDeliverabilityTestReportsOutput {
+	return p.Pager.CurrentPage().(*ListDeliverabilityTestReportsOutput)
 }
 
 const opListEmailIdentities = "ListEmailIdentities"
@@ -1555,6 +1928,65 @@ func (c *PinpointEmail) PutDedicatedIpWarmupAttributesRequest(input *PutDedicate
 	return PutDedicatedIpWarmupAttributesRequest{Request: req, Input: input, Copy: c.PutDedicatedIpWarmupAttributesRequest}
 }
 
+const opPutDeliverabilityDashboardOption = "PutDeliverabilityDashboardOption"
+
+// PutDeliverabilityDashboardOptionRequest is a API request type for the PutDeliverabilityDashboardOption API operation.
+type PutDeliverabilityDashboardOptionRequest struct {
+	*aws.Request
+	Input *PutDeliverabilityDashboardOptionInput
+	Copy  func(*PutDeliverabilityDashboardOptionInput) PutDeliverabilityDashboardOptionRequest
+}
+
+// Send marshals and sends the PutDeliverabilityDashboardOption API request.
+func (r PutDeliverabilityDashboardOptionRequest) Send() (*PutDeliverabilityDashboardOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutDeliverabilityDashboardOptionOutput), nil
+}
+
+// PutDeliverabilityDashboardOptionRequest returns a request value for making API operation for
+// Amazon Pinpoint Email Service.
+//
+// Enable or disable the Deliverability dashboard. When you enable the Deliverability
+// dashboard, you gain access to reputation metrics for the domains that you
+// use to send email using Amazon Pinpoint. You also gain the ability to perform
+// predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00,
+// in addition to any other fees that you accrue by using Amazon Pinpoint. If
+// you enable the Deliverability dashboard after the first day of a calendar
+// month, we prorate the monthly charge based on how many days have elapsed
+// in the current calendar month.
+//
+//    // Example sending a request using the PutDeliverabilityDashboardOptionRequest method.
+//    req := client.PutDeliverabilityDashboardOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOption
+func (c *PinpointEmail) PutDeliverabilityDashboardOptionRequest(input *PutDeliverabilityDashboardOptionInput) PutDeliverabilityDashboardOptionRequest {
+	op := &aws.Operation{
+		Name:       opPutDeliverabilityDashboardOption,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v1/email/deliverability-dashboard",
+	}
+
+	if input == nil {
+		input = &PutDeliverabilityDashboardOptionInput{}
+	}
+
+	output := &PutDeliverabilityDashboardOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutDeliverabilityDashboardOptionRequest{Request: req, Input: input, Copy: c.PutDeliverabilityDashboardOptionRequest}
+}
+
 const opPutEmailIdentityDkimAttributes = "PutEmailIdentityDkimAttributes"
 
 // PutEmailIdentityDkimAttributesRequest is a API request type for the PutEmailIdentityDkimAttributes API operation.
@@ -1835,6 +2267,56 @@ func (c *PinpointEmail) UpdateConfigurationSetEventDestinationRequest(input *Upd
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetEventDestinationRequest}
+}
+
+// An object that contains information about a blacklisting event that impacts
+// one of the dedicated IP addresses that is associated with your account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/BlacklistEntry
+type BlacklistEntry struct {
+	_ struct{} `type:"structure"`
+
+	// Additional information about the blacklisting event, as provided by the blacklist
+	// maintainer.
+	Description *string `type:"string"`
+
+	// The time when the blacklisting event occurred, shown in Unix time format.
+	ListingTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the blacklist that the IP address appears on.
+	RblName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s BlacklistEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BlacklistEntry) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BlacklistEntry) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ListingTime != nil {
+		v := *s.ListingTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ListingTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.RblName != nil {
+		v := *s.RblName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RblName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Represents the body of the email message.
@@ -2421,6 +2903,147 @@ func (s CreateDedicatedIpPoolOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
+// A request to perform a predictive inbox placement test. Predictive inbox
+// placement tests can help you predict how your messages will be handled by
+// various email providers around the world. When you perform a predictive inbox
+// placement test, you provide a sample message that contains the content that
+// you plan to send to your customers. Amazon Pinpoint then sends that message
+// to special email addresses spread across several major email providers. After
+// about 24 hours, the test is complete, and you can use the GetDeliverabilityTestReport
+// operation to view the results of the test.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportRequest
+type CreateDeliverabilityTestReportInput struct {
+	_ struct{} `type:"structure"`
+
+	// The HTML body of the message that you sent when you performed the predictive
+	// inbox placement test.
+	//
+	// Content is a required field
+	Content *EmailContent `type:"structure" required:"true"`
+
+	// The email address that the predictive inbox placement test email was sent
+	// from.
+	//
+	// FromEmailAddress is a required field
+	FromEmailAddress *string `type:"string" required:"true"`
+
+	// A unique name that helps you to identify the predictive inbox placement test
+	// when you retrieve the results.
+	ReportName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateDeliverabilityTestReportInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateDeliverabilityTestReportInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateDeliverabilityTestReportInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeliverabilityTestReportInput"}
+
+	if s.Content == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
+	}
+
+	if s.FromEmailAddress == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FromEmailAddress"))
+	}
+	if s.Content != nil {
+		if err := s.Content.Validate(); err != nil {
+			invalidParams.AddNested("Content", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeliverabilityTestReportInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Content != nil {
+		v := s.Content
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Content", v, metadata)
+	}
+	if s.FromEmailAddress != nil {
+		v := *s.FromEmailAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FromEmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReportName != nil {
+		v := *s.ReportName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReportName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about the predictive inbox placement test that you created.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateDeliverabilityTestReportResponse
+type CreateDeliverabilityTestReportOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
+	// then the predictive inbox placement test is currently running. Predictive
+	// inbox placement tests are usually complete within 24 hours of creating the
+	// test. If the status is COMPLETE, then the test is finished, and you can use
+	// the GetDeliverabilityTestReport to view the results of the test.
+	//
+	// DeliverabilityTestStatus is a required field
+	DeliverabilityTestStatus DeliverabilityTestStatus `type:"string" required:"true" enum:"true"`
+
+	// A unique string that identifies the predictive inbox placement test.
+	//
+	// ReportId is a required field
+	ReportId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateDeliverabilityTestReportOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateDeliverabilityTestReportOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDeliverabilityTestReportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeliverabilityTestReportOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DeliverabilityTestStatus) > 0 {
+		v := s.DeliverabilityTestStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeliverabilityTestStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ReportId != nil {
+		v := *s.ReportId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReportId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A request to begin the verification process for an email identity (an email
 // address or domain).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/CreateEmailIdentityRequest
@@ -2529,6 +3152,63 @@ func (s CreateEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VerifiedForSendingStatus", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// An object that contains information about the volume of email sent on each
+// day of the analysis period.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DailyVolume
+type DailyVolume struct {
+	_ struct{} `type:"structure"`
+
+	// An object that contains inbox placement metrics for a specifid day in the
+	// analysis period, broken out by the recipient's email provider.
+	DomainIspPlacements []DomainIspPlacement `type:"list"`
+
+	// The date that the DailyVolume metrics apply to, in Unix time.
+	StartDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// An object that contains inbox placement metrics for a specific day in the
+	// analysis period.
+	VolumeStatistics *VolumeStatistics `type:"structure"`
+}
+
+// String returns the string representation
+func (s DailyVolume) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DailyVolume) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DailyVolume) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DomainIspPlacements) > 0 {
+		v := s.DomainIspPlacements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "DomainIspPlacements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.StartDate != nil {
+		v := *s.StartDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.VolumeStatistics != nil {
+		v := s.VolumeStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VolumeStatistics", v, metadata)
 	}
 	return nil
 }
@@ -2934,6 +3614,89 @@ func (s DeleteEmailIdentityOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// An object that contains metadata related to a predictive inbox placement
+// test.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliverabilityTestReport
+type DeliverabilityTestReport struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time when the predictive inbox placement test was created, in
+	// Unix time format.
+	CreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
+	// then the predictive inbox placement test is currently running. Predictive
+	// inbox placement tests are usually complete within 24 hours of creating the
+	// test. If the status is COMPLETE, then the test is finished, and you can use
+	// the GetDeliverabilityTestReport to view the results of the test.
+	DeliverabilityTestStatus DeliverabilityTestStatus `type:"string" enum:"true"`
+
+	// The sender address that you specified for the predictive inbox placement
+	// test.
+	FromEmailAddress *string `type:"string"`
+
+	// A unique string that identifies the predictive inbox placement test.
+	ReportId *string `type:"string"`
+
+	// A name that helps you identify a predictive inbox placement test report.
+	ReportName *string `type:"string"`
+
+	// The subject line for an email that you submitted in a predictive inbox placement
+	// test.
+	Subject *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DeliverabilityTestReport) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeliverabilityTestReport) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeliverabilityTestReport) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreateDate != nil {
+		v := *s.CreateDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreateDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.DeliverabilityTestStatus) > 0 {
+		v := s.DeliverabilityTestStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeliverabilityTestStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FromEmailAddress != nil {
+		v := *s.FromEmailAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FromEmailAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReportId != nil {
+		v := *s.ReportId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReportId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReportName != nil {
+		v := *s.ReportName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReportName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Subject != nil {
+		v := *s.Subject
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Used to associate a configuration set with a dedicated IP pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DeliveryOptions
 type DeliveryOptions struct {
@@ -3109,6 +3872,77 @@ func (s DkimAttributes) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// An object that contains inbox placement data for email sent from one of your
+// email domains to a specific email provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/DomainIspPlacement
+type DomainIspPlacement struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of messages that were sent from the selected domain to the
+	// specified email provider that arrived in recipients' inboxes.
+	InboxPercentage *float64 `type:"double"`
+
+	// The total number of messages that were sent from the selected domain to the
+	// specified email provider that arrived in recipients' inboxes.
+	InboxRawCount *int64 `type:"long"`
+
+	// The name of the email provider that the inbox placement data applies to.
+	IspName *string `type:"string"`
+
+	// The percentage of messages that were sent from the selected domain to the
+	// specified email provider that arrived in recipients' spam or junk mail folders.
+	SpamPercentage *float64 `type:"double"`
+
+	// The total number of messages that were sent from the selected domain to the
+	// specified email provider that arrived in recipients' spam or junk mail folders.
+	SpamRawCount *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s DomainIspPlacement) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DomainIspPlacement) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainIspPlacement) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InboxPercentage != nil {
+		v := *s.InboxPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboxPercentage", protocol.Float64Value(v), metadata)
+	}
+	if s.InboxRawCount != nil {
+		v := *s.InboxRawCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboxRawCount", protocol.Int64Value(v), metadata)
+	}
+	if s.IspName != nil {
+		v := *s.IspName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IspName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SpamPercentage != nil {
+		v := *s.SpamPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SpamPercentage", protocol.Float64Value(v), metadata)
+	}
+	if s.SpamRawCount != nil {
+		v := *s.SpamRawCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SpamRawCount", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -3553,6 +4387,114 @@ func (s GetAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A request to retrieve a list of the blacklists that your dedicated IP addresses
+// appear on.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReportsRequest
+type GetBlacklistReportsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of IP addresses that you want to retrieve blacklist information about.
+	// You can only specify the dedicated IP addresses that you use to send email
+	// using Amazon Pinpoint or Amazon SES.
+	//
+	// BlacklistItemNames is a required field
+	BlacklistItemNames []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s GetBlacklistReportsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetBlacklistReportsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetBlacklistReportsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetBlacklistReportsInput"}
+
+	if s.BlacklistItemNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BlacklistItemNames"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetBlacklistReportsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.BlacklistItemNames) > 0 {
+		v := s.BlacklistItemNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "BlacklistItemNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object that contains information about blacklist events.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetBlacklistReportsResponse
+type GetBlacklistReportsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that contains information about a blacklist that one of your dedicated
+	// IP addresses appears on.
+	//
+	// BlacklistReport is a required field
+	BlacklistReport map[string][]BlacklistEntry `type:"map" required:"true"`
+}
+
+// String returns the string representation
+func (s GetBlacklistReportsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetBlacklistReportsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetBlacklistReportsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetBlacklistReportsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BlacklistReport) > 0 {
+		v := s.BlacklistReport
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "BlacklistReport", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddFields(v2)
+			}
+			ls1.End()
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // A request to obtain information about the event destinations for a configuration
 // set.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetConfigurationSetEventDestinationsRequest
@@ -3969,6 +4911,350 @@ func (s GetDedicatedIpsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A request to retrieve the status of the Deliverability dashboard for your
+// account. When the Deliverability dashboard is enabled, you gain access to
+// reputation metrics for the domains that you use to send email using Amazon
+// Pinpoint. You also gain the ability to perform predictive inbox placement
+// tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00,
+// in addition to any other fees that you accrue by using Amazon Pinpoint. If
+// you enable the Deliverability dashboard after the first day of a calendar
+// month, AWS prorates the monthly charge based on how many days have elapsed
+// in the current calendar month.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptionsRequest
+type GetDeliverabilityDashboardOptionsInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetDeliverabilityDashboardOptionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeliverabilityDashboardOptionsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeliverabilityDashboardOptionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	return nil
+}
+
+// An object that shows the status of the Deliverability dashboard for your
+// Amazon Pinpoint account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityDashboardOptionsResponse
+type GetDeliverabilityDashboardOptionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Indicates whether the Deliverability dashboard is enabled. If the value is
+	// true, then the dashboard is enabled.
+	//
+	// DashboardEnabled is a required field
+	DashboardEnabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s GetDeliverabilityDashboardOptionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeliverabilityDashboardOptionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeliverabilityDashboardOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeliverabilityDashboardOptionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DashboardEnabled != nil {
+		v := *s.DashboardEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DashboardEnabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A request to retrieve the results of a predictive inbox placement test.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReportRequest
+type GetDeliverabilityTestReportInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique string that identifies the predictive inbox placement test.
+	//
+	// ReportId is a required field
+	ReportId *string `location:"uri" locationName:"ReportId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetDeliverabilityTestReportInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeliverabilityTestReportInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetDeliverabilityTestReportInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeliverabilityTestReportInput"}
+
+	if s.ReportId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReportId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeliverabilityTestReportInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ReportId != nil {
+		v := *s.ReportId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ReportId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The results of the predictive inbox placement test.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDeliverabilityTestReportResponse
+type GetDeliverabilityTestReportOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that contains the results of the predictive inbox placement test.
+	//
+	// DeliverabilityTestReport is a required field
+	DeliverabilityTestReport *DeliverabilityTestReport `type:"structure" required:"true"`
+
+	// An object that describes how the test email was handled by several email
+	// providers, including Gmail, Hotmail, Yahoo, AOL, and others.
+	//
+	// IspPlacements is a required field
+	IspPlacements []IspPlacement `type:"list" required:"true"`
+
+	// An object that contains the message that you sent when you performed this
+	// predictive inbox placement test.
+	Message *string `type:"string"`
+
+	// An object that specifies how many test messages that were sent during the
+	// predictive inbox placement test were delivered to recipients' inboxes, how
+	// many were sent to recipients' spam folders, and how many weren't delivered.
+	//
+	// OverallPlacement is a required field
+	OverallPlacement *PlacementStatistics `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetDeliverabilityTestReportOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeliverabilityTestReportOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeliverabilityTestReportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeliverabilityTestReportOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeliverabilityTestReport != nil {
+		v := s.DeliverabilityTestReport
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DeliverabilityTestReport", v, metadata)
+	}
+	if len(s.IspPlacements) > 0 {
+		v := s.IspPlacements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "IspPlacements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OverallPlacement != nil {
+		v := s.OverallPlacement
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OverallPlacement", v, metadata)
+	}
+	return nil
+}
+
+// A request to obtain deliverability metrics for a domain.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReportRequest
+type GetDomainStatisticsReportInput struct {
+	_ struct{} `type:"structure"`
+
+	// The domain that you want to obtain deliverability metrics for.
+	//
+	// Domain is a required field
+	Domain *string `location:"uri" locationName:"Domain" type:"string" required:"true"`
+
+	// The last day (in Unix time) that you want to obtain domain deliverability
+	// metrics for. The EndDate that you specify has to be less than or equal to
+	// 30 days after the StartDate.
+	//
+	// EndDate is a required field
+	EndDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// The first day (in Unix time) that you want to obtain domain deliverability
+	// metrics for.
+	//
+	// StartDate is a required field
+	StartDate *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+}
+
+// String returns the string representation
+func (s GetDomainStatisticsReportInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDomainStatisticsReportInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetDomainStatisticsReportInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetDomainStatisticsReportInput"}
+
+	if s.Domain == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
+	}
+
+	if s.EndDate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndDate"))
+	}
+
+	if s.StartDate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartDate"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDomainStatisticsReportInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.EndDate != nil {
+		v := *s.EndDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.StartDate != nil {
+		v := *s.StartDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Domain != nil {
+		v := *s.Domain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Domain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that includes statistics that are related to the domain that you
+// specified.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetDomainStatisticsReportResponse
+type GetDomainStatisticsReportOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that contains deliverability metrics for the domain that you specified.
+	// This object contains data for each day, starting on the StartDate and ending
+	// on the EndDate.
+	//
+	// DailyVolumes is a required field
+	DailyVolumes []DailyVolume `type:"list" required:"true"`
+
+	// An object that contains deliverability metrics for the domain that you specified.
+	// The data in this object is a summary of all of the data that was collected
+	// from the StartDate to the EndDate.
+	//
+	// OverallVolume is a required field
+	OverallVolume *OverallVolume `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetDomainStatisticsReportOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDomainStatisticsReportOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDomainStatisticsReportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDomainStatisticsReportOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DailyVolumes) > 0 {
+		v := s.DailyVolumes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "DailyVolumes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.OverallVolume != nil {
+		v := s.OverallVolume
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OverallVolume", v, metadata)
+	}
+	return nil
+}
+
 // A request to return details about an email identity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/GetEmailIdentityRequest
 type GetEmailIdentityInput struct {
@@ -4162,6 +5448,46 @@ func (s IdentityInfo) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SendingEnabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// An object that describes how email sent during the predictive inbox placement
+// test was handled by a certain email provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/IspPlacement
+type IspPlacement struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the email provider that the inbox placement data applies to.
+	IspName *string `type:"string"`
+
+	// An object that contains inbox placement metrics for a specific email provider.
+	PlacementStatistics *PlacementStatistics `type:"structure"`
+}
+
+// String returns the string representation
+func (s IspPlacement) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IspPlacement) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IspPlacement) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IspName != nil {
+		v := *s.IspName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IspName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PlacementStatistics != nil {
+		v := s.PlacementStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PlacementStatistics", v, metadata)
 	}
 	return nil
 }
@@ -4420,6 +5746,113 @@ func (s ListDedicatedIpPoolsOutput) MarshalFields(e protocol.FieldEncoder) error
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A request to list all of the predictive inbox placement tests that you've
+// performed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReportsRequest
+type ListDeliverabilityTestReportsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A token returned from a previous call to ListDeliverabilityTestReports to
+	// indicate the position in the list of predictive inbox placement tests.
+	NextToken *string `type:"string"`
+
+	// The number of results to show in a single call to ListDeliverabilityTestReports.
+	// If the number of results is larger than the number you specified in this
+	// parameter, then the response includes a NextToken element, which you can
+	// use to obtain additional results.
+	//
+	// The value you specify has to be at least 0, and can be no more than 1000.
+	PageSize *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s ListDeliverabilityTestReportsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeliverabilityTestReportsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeliverabilityTestReportsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PageSize != nil {
+		v := *s.PageSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PageSize", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// A list of the predictive inbox placement test reports that are available
+// for your account, regardless of whether or not those tests are complete.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/ListDeliverabilityTestReportsResponse
+type ListDeliverabilityTestReportsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that contains a lists of predictive inbox placement tests that
+	// you've performed.
+	//
+	// DeliverabilityTestReports is a required field
+	DeliverabilityTestReports []DeliverabilityTestReport `type:"list" required:"true"`
+
+	// A token that indicates that there are additional predictive inbox placement
+	// tests to list. To view additional predictive inbox placement tests, issue
+	// another request to ListDeliverabilityTestReports, and pass this token in
+	// the NextToken parameter.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListDeliverabilityTestReportsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeliverabilityTestReportsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeliverabilityTestReportsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeliverabilityTestReportsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DeliverabilityTestReports) > 0 {
+		v := s.DeliverabilityTestReports
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "DeliverabilityTestReports", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
 		}
 		ls0.End()
 
@@ -4762,6 +6195,64 @@ func (s MessageTag) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that contains information about email that was sent from the selected
+// domain.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/OverallVolume
+type OverallVolume struct {
+	_ struct{} `type:"structure"`
+
+	// An object that contains inbox and junk mail placement metrics for individual
+	// email providers.
+	DomainIspPlacements []DomainIspPlacement `type:"list"`
+
+	// The percentage of emails that were sent from the domain that were read by
+	// their recipients.
+	ReadRatePercent *float64 `type:"double"`
+
+	// An object that contains information about the numbers of messages that arrived
+	// in recipients' inboxes and junk mail folders.
+	VolumeStatistics *VolumeStatistics `type:"structure"`
+}
+
+// String returns the string representation
+func (s OverallVolume) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OverallVolume) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OverallVolume) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DomainIspPlacements) > 0 {
+		v := s.DomainIspPlacements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "DomainIspPlacements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ReadRatePercent != nil {
+		v := *s.ReadRatePercent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReadRatePercent", protocol.Float64Value(v), metadata)
+	}
+	if s.VolumeStatistics != nil {
+		v := s.VolumeStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VolumeStatistics", v, metadata)
+	}
+	return nil
+}
+
 // An object that defines a Amazon Pinpoint destination for email events. You
 // can use Amazon Pinpoint events to create attributes in Amazon Pinpoint projects.
 // You can use these attributes to create segments for your campaigns.
@@ -4791,6 +6282,77 @@ func (s PinpointDestination) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that contains inbox placement data for an email provider.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PlacementStatistics
+type PlacementStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of emails that were authenticated by using DomainKeys Identified
+	// Mail (DKIM) during the predictive inbox placement test.
+	DkimPercentage *float64 `type:"double"`
+
+	// The percentage of emails that arrived in recipients' inboxes during the predictive
+	// inbox placement test.
+	InboxPercentage *float64 `type:"double"`
+
+	// The percentage of emails that didn't arrive in recipients' inboxes at all
+	// during the predictive inbox placement test.
+	MissingPercentage *float64 `type:"double"`
+
+	// The percentage of emails that arrived in recipients' spam or junk mail folders
+	// during the predictive inbox placement test.
+	SpamPercentage *float64 `type:"double"`
+
+	// The percentage of emails that were authenticated by using Sender Policy Framework
+	// (SPF) during the predictive inbox placement test.
+	SpfPercentage *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s PlacementStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PlacementStatistics) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PlacementStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DkimPercentage != nil {
+		v := *s.DkimPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DkimPercentage", protocol.Float64Value(v), metadata)
+	}
+	if s.InboxPercentage != nil {
+		v := *s.InboxPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboxPercentage", protocol.Float64Value(v), metadata)
+	}
+	if s.MissingPercentage != nil {
+		v := *s.MissingPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MissingPercentage", protocol.Float64Value(v), metadata)
+	}
+	if s.SpamPercentage != nil {
+		v := *s.SpamPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SpamPercentage", protocol.Float64Value(v), metadata)
+	}
+	if s.SpfPercentage != nil {
+		v := *s.SpfPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SpfPercentage", protocol.Float64Value(v), metadata)
 	}
 	return nil
 }
@@ -5345,6 +6907,8 @@ func (s PutDedicatedIpInPoolInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDedicatedIpInPoolResponse
 type PutDedicatedIpInPoolOutput struct {
 	_ struct{} `type:"structure"`
@@ -5463,6 +7027,93 @@ func (s PutDedicatedIpWarmupAttributesOutput) SDKResponseMetadata() aws.Response
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s PutDedicatedIpWarmupAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// A request to enable or disable the Deliverability dashboard. When you enable
+// the Deliverability dashboard, you gain access to reputation metrics for the
+// domains that you use to send email using Amazon Pinpoint. You also gain the
+// ability to perform predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00,
+// in addition to any other fees that you accrue by using Amazon Pinpoint. If
+// you enable the Deliverability dashboard after the first day of a calendar
+// month, we prorate the monthly charge based on how many days have elapsed
+// in the current calendar month.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionRequest
+type PutDeliverabilityDashboardOptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether the Deliverability dashboard is enabled. If the value is
+	// true, then the dashboard is enabled.
+	//
+	// DashboardEnabled is a required field
+	DashboardEnabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s PutDeliverabilityDashboardOptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutDeliverabilityDashboardOptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutDeliverabilityDashboardOptionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutDeliverabilityDashboardOptionInput"}
+
+	if s.DashboardEnabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DashboardEnabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutDeliverabilityDashboardOptionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DashboardEnabled != nil {
+		v := *s.DashboardEnabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DashboardEnabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// A response that indicates whether the Deliverability dashboard is enabled
+// for your Amazon Pinpoint account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/PutDeliverabilityDashboardOptionResponse
+type PutDeliverabilityDashboardOptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutDeliverabilityDashboardOptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutDeliverabilityDashboardOptionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutDeliverabilityDashboardOptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutDeliverabilityDashboardOptionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -5841,9 +7492,9 @@ func (s RawMessage) MarshalFields(e protocol.FieldEncoder) error {
 type ReputationOptions struct {
 	_ struct{} `type:"structure"`
 
-	// The date and time when the reputation metrics were last given a fresh start.
-	// When your account is given a fresh start, your reputation metrics are calculated
-	// starting from the date of the fresh start.
+	// The date and time (in Unix time) when the reputation metrics were last given
+	// a fresh start. When your account is given a fresh start, your reputation
+	// metrics are calculated starting from the date of the fresh start.
 	LastFreshStart *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// If true, tracking of reputation metrics is enabled for the configuration
@@ -6363,6 +8014,67 @@ func (s UpdateConfigurationSetEventDestinationOutput) MarshalFields(e protocol.F
 	return nil
 }
 
+// An object that contains information about the amount of email that was delivered
+// to recipients.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-email-2018-07-26/VolumeStatistics
+type VolumeStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The total number of emails that arrived in recipients' inboxes.
+	InboxRawCount *int64 `type:"long"`
+
+	// An estimate of the percentage of emails sent from the current domain that
+	// will arrive in recipients' inboxes.
+	ProjectedInbox *int64 `type:"long"`
+
+	// An estimate of the percentage of emails sent from the current domain that
+	// will arrive in recipients' spam or junk mail folders.
+	ProjectedSpam *int64 `type:"long"`
+
+	// The total number of emails that arrived in recipients' spam or junk mail
+	// folders.
+	SpamRawCount *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s VolumeStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VolumeStatistics) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VolumeStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InboxRawCount != nil {
+		v := *s.InboxRawCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InboxRawCount", protocol.Int64Value(v), metadata)
+	}
+	if s.ProjectedInbox != nil {
+		v := *s.ProjectedInbox
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProjectedInbox", protocol.Int64Value(v), metadata)
+	}
+	if s.ProjectedSpam != nil {
+		v := *s.ProjectedSpam
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProjectedSpam", protocol.Int64Value(v), metadata)
+	}
+	if s.SpamRawCount != nil {
+		v := *s.SpamRawCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SpamRawCount", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The action that you want Amazon Pinpoint to take if it can't read the required
 // MX record for a custom MAIL FROM domain. When you set this value to UseDefaultValue,
 // Amazon Pinpoint uses amazonses.com as the MAIL FROM domain. When you set
@@ -6384,6 +8096,28 @@ func (enum BehaviorOnMxFailure) MarshalValue() (string, error) {
 }
 
 func (enum BehaviorOnMxFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The status of a predictive inbox placement test. If the status is IN_PROGRESS,
+// then the predictive inbox placement test is currently running. Predictive
+// inbox placement tests are usually complete within 24 hours of creating the
+// test. If the status is COMPLETE, then the test is finished, and you can use
+// the GetDeliverabilityTestReport operation to view the results of the test.
+type DeliverabilityTestStatus string
+
+// Enum values for DeliverabilityTestStatus
+const (
+	DeliverabilityTestStatusInProgress DeliverabilityTestStatus = "IN_PROGRESS"
+	DeliverabilityTestStatusCompleted  DeliverabilityTestStatus = "COMPLETED"
+)
+
+func (enum DeliverabilityTestStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliverabilityTestStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -321,6 +321,56 @@ func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjec
 	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
+const opDeleteSourceCredentials = "DeleteSourceCredentials"
+
+// DeleteSourceCredentialsRequest is a API request type for the DeleteSourceCredentials API operation.
+type DeleteSourceCredentialsRequest struct {
+	*aws.Request
+	Input *DeleteSourceCredentialsInput
+	Copy  func(*DeleteSourceCredentialsInput) DeleteSourceCredentialsRequest
+}
+
+// Send marshals and sends the DeleteSourceCredentials API request.
+func (r DeleteSourceCredentialsRequest) Send() (*DeleteSourceCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSourceCredentialsOutput), nil
+}
+
+// DeleteSourceCredentialsRequest returns a request value for making API operation for
+// AWS CodeBuild.
+//
+// Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.
+//
+//    // Example sending a request using the DeleteSourceCredentialsRequest method.
+//    req := client.DeleteSourceCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentials
+func (c *CodeBuild) DeleteSourceCredentialsRequest(input *DeleteSourceCredentialsInput) DeleteSourceCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSourceCredentials,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteSourceCredentialsInput{}
+	}
+
+	output := &DeleteSourceCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteSourceCredentialsRequest{Request: req, Input: input, Copy: c.DeleteSourceCredentialsRequest}
+}
+
 const opDeleteWebhook = "DeleteWebhook"
 
 // DeleteWebhookRequest is a API request type for the DeleteWebhook API operation.
@@ -371,6 +421,57 @@ func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhoo
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteWebhookRequest{Request: req, Input: input, Copy: c.DeleteWebhookRequest}
+}
+
+const opImportSourceCredentials = "ImportSourceCredentials"
+
+// ImportSourceCredentialsRequest is a API request type for the ImportSourceCredentials API operation.
+type ImportSourceCredentialsRequest struct {
+	*aws.Request
+	Input *ImportSourceCredentialsInput
+	Copy  func(*ImportSourceCredentialsInput) ImportSourceCredentialsRequest
+}
+
+// Send marshals and sends the ImportSourceCredentials API request.
+func (r ImportSourceCredentialsRequest) Send() (*ImportSourceCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportSourceCredentialsOutput), nil
+}
+
+// ImportSourceCredentialsRequest returns a request value for making API operation for
+// AWS CodeBuild.
+//
+// Imports the source repository credentials for an AWS CodeBuild project that
+// has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository.
+//
+//    // Example sending a request using the ImportSourceCredentialsRequest method.
+//    req := client.ImportSourceCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentials
+func (c *CodeBuild) ImportSourceCredentialsRequest(input *ImportSourceCredentialsInput) ImportSourceCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opImportSourceCredentials,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ImportSourceCredentialsInput{}
+	}
+
+	output := &ImportSourceCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ImportSourceCredentialsRequest{Request: req, Input: input, Copy: c.ImportSourceCredentialsRequest}
 }
 
 const opInvalidateProjectCache = "InvalidateProjectCache"
@@ -623,6 +724,56 @@ func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) ListProjectsRe
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
+}
+
+const opListSourceCredentials = "ListSourceCredentials"
+
+// ListSourceCredentialsRequest is a API request type for the ListSourceCredentials API operation.
+type ListSourceCredentialsRequest struct {
+	*aws.Request
+	Input *ListSourceCredentialsInput
+	Copy  func(*ListSourceCredentialsInput) ListSourceCredentialsRequest
+}
+
+// Send marshals and sends the ListSourceCredentials API request.
+func (r ListSourceCredentialsRequest) Send() (*ListSourceCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListSourceCredentialsOutput), nil
+}
+
+// ListSourceCredentialsRequest returns a request value for making API operation for
+// AWS CodeBuild.
+//
+// Returns a list of SourceCredentialsInfo objects.
+//
+//    // Example sending a request using the ListSourceCredentialsRequest method.
+//    req := client.ListSourceCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentials
+func (c *CodeBuild) ListSourceCredentialsRequest(input *ListSourceCredentialsInput) ListSourceCredentialsRequest {
+	op := &aws.Operation{
+		Name:       opListSourceCredentials,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListSourceCredentialsInput{}
+	}
+
+	output := &ListSourceCredentialsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListSourceCredentialsRequest{Request: req, Input: input, Copy: c.ListSourceCredentialsRequest}
 }
 
 const opStartBuild = "StartBuild"
@@ -1701,6 +1852,68 @@ func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentialsInput
+type DeleteSourceCredentialsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the token.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteSourceCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSourceCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteSourceCredentialsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSourceCredentialsInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteSourceCredentialsOutput
+type DeleteSourceCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the token.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteSourceCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSourceCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSourceCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookInput
 type DeleteWebhookInput struct {
 	_ struct{} `type:"structure"`
@@ -1889,6 +2102,94 @@ func (s *EnvironmentVariable) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsInput
+type ImportSourceCredentialsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The type of authentication used to connect to a GitHub, GitHub Enterprise,
+	// or Bitbucket repository. An OAUTH connection is not supported by the API
+	// and must be created using the AWS CodeBuild console.
+	//
+	// AuthType is a required field
+	AuthType AuthType `locationName:"authType" type:"string" required:"true" enum:"true"`
+
+	// The source provider used for this project.
+	//
+	// ServerType is a required field
+	ServerType ServerType `locationName:"serverType" type:"string" required:"true" enum:"true"`
+
+	// For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,
+	// this is the app password.
+	//
+	// Token is a required field
+	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
+
+	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is
+	// not valid for other types of source providers or connections.
+	Username *string `locationName:"username" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ImportSourceCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ImportSourceCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ImportSourceCredentialsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ImportSourceCredentialsInput"}
+	if len(s.AuthType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AuthType"))
+	}
+	if len(s.ServerType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ServerType"))
+	}
+
+	if s.Token == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Token"))
+	}
+	if s.Token != nil && len(*s.Token) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Token", 1))
+	}
+	if s.Username != nil && len(*s.Username) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ImportSourceCredentialsOutput
+type ImportSourceCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the token.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ImportSourceCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ImportSourceCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ImportSourceCredentialsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheInput
@@ -2223,6 +2524,48 @@ func (s ListProjectsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsInput
+type ListSourceCredentialsInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s ListSourceCredentialsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSourceCredentialsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsOutput
+type ListSourceCredentialsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object
+	// includes the authentication type, token ARN, and type of source provider
+	// for one set of credentials.
+	SourceCredentialsInfos []SourceCredentialsInfo `locationName:"sourceCredentialsInfos" type:"list"`
+}
+
+// String returns the string representation
+func (s ListSourceCredentialsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListSourceCredentialsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListSourceCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -2774,8 +3117,7 @@ type ProjectSource struct {
 	// the source code to be built.
 	//
 	// This information is for the AWS CodeBuild console's use only. Your code should
-	// not get or set this information directly (unless the build project's source
-	// type value is BITBUCKET or GITHUB).
+	// not get or set this information directly.
 	Auth *SourceAuth `locationName:"auth" type:"structure"`
 
 	// The build spec declaration to use for the builds in this build project.
@@ -3003,8 +3345,7 @@ func (s *S3LogsConfig) Validate() error {
 // the source code to be built.
 //
 // This information is for the AWS CodeBuild console's use only. Your code should
-// not get or set this information directly (unless the build project's source
-// type value is BITBUCKET or GITHUB).
+// not get or set this information directly.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceAuth
 type SourceAuth struct {
 	_ struct{} `type:"structure"`
@@ -3012,6 +3353,8 @@ type SourceAuth struct {
 	// The resource value that applies to the specified authorization type.
 	Resource *string `locationName:"resource" type:"string"`
 
+	// This data type is deprecated and is no longer accurate or used.
+	//
 	// The authorization type to use. The only valid value is OAUTH, which represents
 	// the OAuth authorization type.
 	//
@@ -3040,6 +3383,34 @@ func (s *SourceAuth) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket
+// repository.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo
+type SourceCredentialsInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the token.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// The type of authentication used by the credentials. Valid options are OAUTH,
+	// BASIC_AUTH, or PERSONAL_ACCESS_TOKEN.
+	AuthType AuthType `locationName:"authType" type:"string" enum:"true"`
+
+	// The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE,
+	// or BITBUCKET.
+	ServerType ServerType `locationName:"serverType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SourceCredentialsInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceCredentialsInfo) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput
@@ -3771,6 +4142,24 @@ func (enum ArtifactsType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AuthType string
+
+// Enum values for AuthType
+const (
+	AuthTypeOauth               AuthType = "OAUTH"
+	AuthTypeBasicAuth           AuthType = "BASIC_AUTH"
+	AuthTypePersonalAccessToken AuthType = "PERSONAL_ACCESS_TOKEN"
+)
+
+func (enum AuthType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BuildPhaseType string
 
 // Enum values for BuildPhaseType
@@ -3941,6 +4330,24 @@ func (enum ProjectSortByType) MarshalValue() (string, error) {
 }
 
 func (enum ProjectSortByType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ServerType string
+
+// Enum values for ServerType
+const (
+	ServerTypeGithub           ServerType = "GITHUB"
+	ServerTypeBitbucket        ServerType = "BITBUCKET"
+	ServerTypeGithubEnterprise ServerType = "GITHUB_ENTERPRISE"
+)
+
+func (enum ServerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

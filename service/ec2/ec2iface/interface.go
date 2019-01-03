@@ -77,11 +77,15 @@ type EC2API interface {
 
 	AllocateHostsRequest(*ec2.AllocateHostsInput) ec2.AllocateHostsRequest
 
+	ApplySecurityGroupsToClientVpnTargetNetworkRequest(*ec2.ApplySecurityGroupsToClientVpnTargetNetworkInput) ec2.ApplySecurityGroupsToClientVpnTargetNetworkRequest
+
 	AssignIpv6AddressesRequest(*ec2.AssignIpv6AddressesInput) ec2.AssignIpv6AddressesRequest
 
 	AssignPrivateIpAddressesRequest(*ec2.AssignPrivateIpAddressesInput) ec2.AssignPrivateIpAddressesRequest
 
 	AssociateAddressRequest(*ec2.AssociateAddressInput) ec2.AssociateAddressRequest
+
+	AssociateClientVpnTargetNetworkRequest(*ec2.AssociateClientVpnTargetNetworkInput) ec2.AssociateClientVpnTargetNetworkRequest
 
 	AssociateDhcpOptionsRequest(*ec2.AssociateDhcpOptionsInput) ec2.AssociateDhcpOptionsRequest
 
@@ -104,6 +108,8 @@ type EC2API interface {
 	AttachVolumeRequest(*ec2.AttachVolumeInput) ec2.AttachVolumeRequest
 
 	AttachVpnGatewayRequest(*ec2.AttachVpnGatewayInput) ec2.AttachVpnGatewayRequest
+
+	AuthorizeClientVpnIngressRequest(*ec2.AuthorizeClientVpnIngressInput) ec2.AuthorizeClientVpnIngressRequest
 
 	AuthorizeSecurityGroupEgressRequest(*ec2.AuthorizeSecurityGroupEgressInput) ec2.AuthorizeSecurityGroupEgressRequest
 
@@ -136,6 +142,10 @@ type EC2API interface {
 	CopySnapshotRequest(*ec2.CopySnapshotInput) ec2.CopySnapshotRequest
 
 	CreateCapacityReservationRequest(*ec2.CreateCapacityReservationInput) ec2.CreateCapacityReservationRequest
+
+	CreateClientVpnEndpointRequest(*ec2.CreateClientVpnEndpointInput) ec2.CreateClientVpnEndpointRequest
+
+	CreateClientVpnRouteRequest(*ec2.CreateClientVpnRouteInput) ec2.CreateClientVpnRouteRequest
 
 	CreateCustomerGatewayRequest(*ec2.CreateCustomerGatewayInput) ec2.CreateCustomerGatewayRequest
 
@@ -218,6 +228,10 @@ type EC2API interface {
 	CreateVpnConnectionRouteRequest(*ec2.CreateVpnConnectionRouteInput) ec2.CreateVpnConnectionRouteRequest
 
 	CreateVpnGatewayRequest(*ec2.CreateVpnGatewayInput) ec2.CreateVpnGatewayRequest
+
+	DeleteClientVpnEndpointRequest(*ec2.DeleteClientVpnEndpointInput) ec2.DeleteClientVpnEndpointRequest
+
+	DeleteClientVpnRouteRequest(*ec2.DeleteClientVpnRouteInput) ec2.DeleteClientVpnRouteRequest
 
 	DeleteCustomerGatewayRequest(*ec2.DeleteCustomerGatewayInput) ec2.DeleteCustomerGatewayRequest
 
@@ -310,6 +324,16 @@ type EC2API interface {
 	DescribeCapacityReservationsRequest(*ec2.DescribeCapacityReservationsInput) ec2.DescribeCapacityReservationsRequest
 
 	DescribeClassicLinkInstancesRequest(*ec2.DescribeClassicLinkInstancesInput) ec2.DescribeClassicLinkInstancesRequest
+
+	DescribeClientVpnAuthorizationRulesRequest(*ec2.DescribeClientVpnAuthorizationRulesInput) ec2.DescribeClientVpnAuthorizationRulesRequest
+
+	DescribeClientVpnConnectionsRequest(*ec2.DescribeClientVpnConnectionsInput) ec2.DescribeClientVpnConnectionsRequest
+
+	DescribeClientVpnEndpointsRequest(*ec2.DescribeClientVpnEndpointsInput) ec2.DescribeClientVpnEndpointsRequest
+
+	DescribeClientVpnRoutesRequest(*ec2.DescribeClientVpnRoutesInput) ec2.DescribeClientVpnRoutesRequest
+
+	DescribeClientVpnTargetNetworksRequest(*ec2.DescribeClientVpnTargetNetworksInput) ec2.DescribeClientVpnTargetNetworksRequest
 
 	DescribeConversionTasksRequest(*ec2.DescribeConversionTasksInput) ec2.DescribeConversionTasksRequest
 
@@ -495,6 +519,8 @@ type EC2API interface {
 
 	DisassociateAddressRequest(*ec2.DisassociateAddressInput) ec2.DisassociateAddressRequest
 
+	DisassociateClientVpnTargetNetworkRequest(*ec2.DisassociateClientVpnTargetNetworkInput) ec2.DisassociateClientVpnTargetNetworkRequest
+
 	DisassociateIamInstanceProfileRequest(*ec2.DisassociateIamInstanceProfileInput) ec2.DisassociateIamInstanceProfileRequest
 
 	DisassociateRouteTableRequest(*ec2.DisassociateRouteTableInput) ec2.DisassociateRouteTableRequest
@@ -514,6 +540,10 @@ type EC2API interface {
 	EnableVpcClassicLinkRequest(*ec2.EnableVpcClassicLinkInput) ec2.EnableVpcClassicLinkRequest
 
 	EnableVpcClassicLinkDnsSupportRequest(*ec2.EnableVpcClassicLinkDnsSupportInput) ec2.EnableVpcClassicLinkDnsSupportRequest
+
+	ExportClientVpnClientCertificateRevocationListRequest(*ec2.ExportClientVpnClientCertificateRevocationListInput) ec2.ExportClientVpnClientCertificateRevocationListRequest
+
+	ExportClientVpnClientConfigurationRequest(*ec2.ExportClientVpnClientConfigurationInput) ec2.ExportClientVpnClientConfigurationRequest
 
 	ExportTransitGatewayRoutesRequest(*ec2.ExportTransitGatewayRoutesInput) ec2.ExportTransitGatewayRoutesRequest
 
@@ -535,6 +565,8 @@ type EC2API interface {
 
 	GetTransitGatewayRouteTablePropagationsRequest(*ec2.GetTransitGatewayRouteTablePropagationsInput) ec2.GetTransitGatewayRouteTablePropagationsRequest
 
+	ImportClientVpnClientCertificateRevocationListRequest(*ec2.ImportClientVpnClientCertificateRevocationListInput) ec2.ImportClientVpnClientCertificateRevocationListRequest
+
 	ImportImageRequest(*ec2.ImportImageInput) ec2.ImportImageRequest
 
 	ImportInstanceRequest(*ec2.ImportInstanceInput) ec2.ImportInstanceRequest
@@ -546,6 +578,8 @@ type EC2API interface {
 	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
 
 	ModifyCapacityReservationRequest(*ec2.ModifyCapacityReservationInput) ec2.ModifyCapacityReservationRequest
+
+	ModifyClientVpnEndpointRequest(*ec2.ModifyClientVpnEndpointInput) ec2.ModifyClientVpnEndpointRequest
 
 	ModifyFleetRequest(*ec2.ModifyFleetInput) ec2.ModifyFleetRequest
 
@@ -655,6 +689,8 @@ type EC2API interface {
 
 	RestoreAddressToClassicRequest(*ec2.RestoreAddressToClassicInput) ec2.RestoreAddressToClassicRequest
 
+	RevokeClientVpnIngressRequest(*ec2.RevokeClientVpnIngressInput) ec2.RevokeClientVpnIngressRequest
+
 	RevokeSecurityGroupEgressRequest(*ec2.RevokeSecurityGroupEgressInput) ec2.RevokeSecurityGroupEgressRequest
 
 	RevokeSecurityGroupIngressRequest(*ec2.RevokeSecurityGroupIngressInput) ec2.RevokeSecurityGroupIngressRequest
@@ -668,6 +704,8 @@ type EC2API interface {
 	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
 
 	StopInstancesRequest(*ec2.StopInstancesInput) ec2.StopInstancesRequest
+
+	TerminateClientVpnConnectionsRequest(*ec2.TerminateClientVpnConnectionsInput) ec2.TerminateClientVpnConnectionsRequest
 
 	TerminateInstancesRequest(*ec2.TerminateInstancesInput) ec2.TerminateInstancesRequest
 
