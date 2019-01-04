@@ -121,18 +121,55 @@ func TestResolveEndpointCredentials(t *testing.T) {
 }
 
 func TestResolveEndpointCredentials_ValidateEndpoint(t *testing.T) {
-	configs := Configs{
-		WithCredentialsEndpoint("http://notvalid.com"),
-	}
-	cfg := unit.Config()
+	orgLookup := lookupHostFn
+	defer func() {
+		lookupHostFn = orgLookup
+	}()
 
-	err := ResolveEndpointCredentials(&cfg, configs)
-	if err == nil {
-		t.Fatalf("expect error")
+	cases := map[string]struct {
+		LookupFn func(string) ([]string, error)
+		Err      string
+	}{
+		"no addrs": {
+			LookupFn: func(h string) ([]string, error) {
+				return []string{}, nil
+			},
+			Err: "failed to resolve",
+		},
+		"lookup error": {
+			LookupFn: func(h string) ([]string, error) {
+				return []string{}, nil
+			},
+			Err: "failed to resolve",
+		},
+		"no local": {
+			LookupFn: func(h string) ([]string, error) {
+				return []string{"10.10.10.10"}, nil
+			},
+			Err: "failed to resolve",
+		},
 	}
 
-	if e, a := "invalid endpoint", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %q to be in %q", e, a)
+	lookupHostFn = func(h string) ([]string, error) {
+		return []string{}, nil
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			configs := Configs{
+				WithCredentialsEndpoint("http://notvalid.com"),
+			}
+			cfg := unit.Config()
+
+			err := ResolveEndpointCredentials(&cfg, configs)
+			if err == nil {
+				t.Fatalf("expect error")
+			}
+
+			if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
+				t.Errorf("expect %q to be in %q", e, a)
+			}
+		})
 	}
 }
 
