@@ -1,6 +1,7 @@
 package s3crypto
 
 import (
+	"context"
 	"encoding/hex"
 	"io"
 
@@ -61,12 +62,12 @@ func NewEncryptionClient(cfg aws.Config, builder ContentCipherBuilder, options .
 // Example:
 //  cfg, err := external.LoadDefaultAWSConfig()
 //	svc := s3crypto.New(cfg, s3crypto.AESGCMContentCipherBuilder(handler))
-//	req, out := svc.PutObjectRequest(&s3.PutObjectInput {
+//	req := svc.PutObjectRequest(&s3.PutObjectInput {
 //	  Key: aws.String("testKey"),
 //	  Bucket: aws.String("testBucket"),
 //	  Body: strings.NewReader("test data"),
 //	})
-//	err := req.Send()
+//	err := req.Send(context.Background())
 func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
 	req := c.S3Client.PutObjectRequest(input)
 
@@ -128,7 +129,7 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObje
 // PutObject is a wrapper for PutObjectRequest
 func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
 	req := c.PutObjectRequest(input)
-	return req.Send()
+	return req.Send(context.Background())
 }
 
 // PutObjectWithContext is a wrapper for PutObjectRequest with the additional
@@ -140,7 +141,6 @@ func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOut
 // this may create sub-contexts for individual underlying requests.
 func (c *EncryptionClient) PutObjectWithContext(ctx aws.Context, input *s3.PutObjectInput, opts ...request.Option) (*s3.PutObjectOutput, error) {
 	req := c.PutObjectRequest(input)
-	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
-	return req.Send()
+	return req.Send(ctx)
 }

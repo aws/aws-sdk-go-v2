@@ -3,6 +3,7 @@
 package defaults_test
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -33,7 +34,7 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 		t.Fatalf("expect %T request body, got %T", e, a)
 	}
 
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

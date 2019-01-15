@@ -312,6 +312,7 @@ var tplAPI = template.Must(template.New("api").Parse(`
 func (a *API) APIGoCode() string {
 	a.resetImports()
 	a.imports["github.com/aws/aws-sdk-go-v2/internal/awsutil"] = true
+	a.imports["context"] = true
 	if a.OperationHasOutputPlaceholder() {
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol/"+a.ProtocolPackage()] = true
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true

@@ -2,6 +2,7 @@ package machinelearning_test
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -28,7 +29,7 @@ func TestPredictEndpoint(t *testing.T) {
 		MLModelId:       aws.String("id"),
 		Record:          map[string]string{},
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)

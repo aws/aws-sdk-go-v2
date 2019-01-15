@@ -2,6 +2,7 @@ package stscreds
 
 import (
 	"fmt"
+	"net/http"
 	"testing"
 	"time"
 
@@ -22,10 +23,15 @@ func (s *stubSTS) AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRe
 	req := sts.AssumeRoleRequest{
 		Input: input,
 		Request: &aws.Request{
+			HTTPRequest: func() *http.Request {
+				r, _ := http.NewRequest("POST", "https://sts.amazonaws.com", nil)
+				return r
+			}(),
 			Handlers: func() aws.Handlers {
 				h := aws.Handlers{}
 
 				h.Send.PushBack(func(r *aws.Request) {
+					r.HTTPResponse = &http.Response{StatusCode: 200}
 					r.Data = &sts.AssumeRoleOutput{
 						Credentials: &sts.Credentials{
 							// Just reflect the role arn to the provider.

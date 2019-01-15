@@ -2,6 +2,7 @@ package s3crypto_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
@@ -72,7 +73,7 @@ func TestGetObjectGCM(t *testing.T) {
 		out.Metadata = make(map[string]string)
 		out.Metadata["x-amz-wrap-alg"] = s3crypto.KMSWrap
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -141,7 +142,7 @@ func TestGetObjectCBC(t *testing.T) {
 		out.Metadata = make(map[string]string)
 		out.Metadata["x-amz-wrap-alg"] = s3crypto.KMSWrap
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -206,7 +207,7 @@ func TestGetObjectCBC2(t *testing.T) {
 		out.Metadata = make(map[string]string)
 		out.Metadata["x-amz-wrap-alg"] = s3crypto.KMSWrap
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}

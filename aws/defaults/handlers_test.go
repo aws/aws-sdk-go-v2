@@ -356,7 +356,7 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 		Key:    aws.String("keyname"),
 	})
 
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(context.Background()); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
@@ -376,7 +376,7 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 
 	req.HTTPRequest.Header.Set("Content-Length", "-1")
 
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(context.Background()); err != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
 }
@@ -395,7 +395,7 @@ func TestBuildContentLength_WithBody(t *testing.T) {
 		Body:   bytes.NewReader(make([]byte, 1024)),
 	})
 
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(context.Background()); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }

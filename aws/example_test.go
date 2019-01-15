@@ -1,6 +1,7 @@
 package aws_test
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -36,7 +37,7 @@ func ExampleEndpointResolverFunc() {
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
-	objResp, err := objReq.Send()
+	objResp, err := objReq.Send(context.Background())
 	if err != nil {
 		panic("S3 Get Object error, " + err.Error())
 	}
@@ -51,7 +52,7 @@ func ExampleEndpointResolverFunc() {
 	msgReq := sqsSvc.ReceiveMessageRequest(&sqs.ReceiveMessageInput{
 		QueueUrl: aws.String("my-queue-url"),
 	})
-	msgResp, err := msgReq.Send()
+	msgResp, err := msgReq.Send(context.Background())
 	if err != nil {
 		panic("SQS Receive Message error, " + err.Error())
 	}

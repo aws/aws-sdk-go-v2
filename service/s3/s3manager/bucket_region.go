@@ -50,7 +50,6 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})
-	req.SetContext(ctx)
 
 	// Disable HTTP redirects to prevent an invalid 301 from eating the response
 	// because Go's HTTP client will fail, and drop the response if an 301 is
@@ -71,7 +70,7 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 
 	req.ApplyOptions(opts...)
 
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(ctx); err != nil {
 		return "", err
 	}
 

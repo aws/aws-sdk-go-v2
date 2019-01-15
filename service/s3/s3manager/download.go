@@ -418,9 +418,8 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
 		var resp *s3.GetObjectOutput
 		req := d.cfg.S3.GetObjectRequest(in)
-		req.SetContext(d.ctx)
 		req.ApplyOptions(d.cfg.RequestOptions...)
-		resp, err = req.Send()
+		resp, err = req.Send(d.ctx)
 		if err != nil {
 			return err
 		}

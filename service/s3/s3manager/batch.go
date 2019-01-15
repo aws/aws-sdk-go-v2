@@ -359,8 +359,7 @@ const (
 func deleteBatch(ctx aws.Context, d *BatchDelete, input *s3.DeleteObjectsInput, objects []BatchDeleteObject) []Error {
 	errs := []Error{}
 	req := d.Client.DeleteObjectsRequest(input)
-	req.SetContext(ctx)
-	if result, err := req.Send(); err != nil {
+	if result, err := req.Send(ctx); err != nil {
 		for i := 0; i < len(input.Delete.Objects); i++ {
 			errs = append(errs, newError(err, input.Bucket, input.Delete.Objects[i].Key))
 		}

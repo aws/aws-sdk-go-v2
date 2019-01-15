@@ -1,6 +1,7 @@
 package s3crypto
 
 import (
+	"context"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -118,7 +119,7 @@ func (c *DecryptionClient) GetObjectRequest(input *s3.GetObjectInput) s3.GetObje
 // GetObject is a wrapper for GetObjectRequest
 func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
-	return req.Send()
+	return req.Send(context.Background())
 }
 
 // GetObjectWithContext is a wrapper for GetObjectRequest with the additional
@@ -130,7 +131,6 @@ func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOut
 // this may create sub-contexts for individual underlying requests.
 func (c *DecryptionClient) GetObjectWithContext(ctx aws.Context, input *s3.GetObjectInput, opts ...request.Option) (*s3.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
-	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
-	return req.Send()
+	return req.Send(ctx)
 }

@@ -466,9 +466,8 @@ func (u *uploader) singlePart(buf io.ReadSeeker) (*UploadOutput, error) {
 	// Need to use request form because URL generated in request is
 	// used in return.
 	req := u.cfg.S3.PutObjectRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -512,9 +511,8 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 
 	// Create the multipart
 	req := u.cfg.S3.CreateMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -623,9 +621,8 @@ func (u *multiuploader) send(c chunk) error {
 		PartNumber:           &c.num,
 	}
 	req := u.cfg.S3.UploadPartRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return err
 	}
@@ -668,9 +665,8 @@ func (u *multiuploader) fail() {
 		UploadId: &u.uploadID,
 	}
 	req := u.cfg.S3.AbortMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(u.ctx); err != nil {
 		logMessage(u.cfg.S3, aws.LogDebug, fmt.Sprintf("failed to abort multipart upload, %v", err))
 	}
 }
@@ -692,9 +688,8 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 		MultipartUpload: &s3.CompletedMultipartUpload{Parts: u.parts},
 	}
 	req := u.cfg.S3.CompleteMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		u.seterr(err)
 		u.fail()
