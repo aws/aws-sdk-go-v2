@@ -3,6 +3,7 @@
 package elasticache
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -48,7 +50,7 @@ func (r AddTagsToResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) 
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -82,7 +84,8 @@ type AuthorizeCacheSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeCacheSecurityGroupIngress API request.
-func (r AuthorizeCacheSecurityGroupIngressRequest) Send() (*AuthorizeCacheSecurityGroupIngressOutput, error) {
+func (r AuthorizeCacheSecurityGroupIngressRequest) Send(ctx context.Context) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -103,7 +106,7 @@ func (r AuthorizeCacheSecurityGroupIngressRequest) Send() (*AuthorizeCacheSecuri
 //
 //    // Example sending a request using the AuthorizeCacheSecurityGroupIngressRequest method.
 //    req := client.AuthorizeCacheSecurityGroupIngressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -137,7 +140,8 @@ type CopySnapshotRequest struct {
 }
 
 // Send marshals and sends the CopySnapshot API request.
-func (r CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
+func (r CopySnapshotRequest) Send(ctx context.Context) (*CopySnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -217,7 +221,7 @@ func (r CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
 //
 //    // Example sending a request using the CopySnapshotRequest method.
 //    req := client.CopySnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -251,7 +255,8 @@ type CreateCacheClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCacheCluster API request.
-func (r CreateCacheClusterRequest) Send() (*CreateCacheClusterOutput, error) {
+func (r CreateCacheClusterRequest) Send(ctx context.Context) (*CreateCacheClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -270,7 +275,7 @@ func (r CreateCacheClusterRequest) Send() (*CreateCacheClusterOutput, error) {
 //
 //    // Example sending a request using the CreateCacheClusterRequest method.
 //    req := client.CreateCacheClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -304,7 +309,8 @@ type CreateCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateCacheParameterGroup API request.
-func (r CreateCacheParameterGroupRequest) Send() (*CreateCacheParameterGroupOutput, error) {
+func (r CreateCacheParameterGroupRequest) Send(ctx context.Context) (*CreateCacheParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -333,7 +339,7 @@ func (r CreateCacheParameterGroupRequest) Send() (*CreateCacheParameterGroupOutp
 //
 //    // Example sending a request using the CreateCacheParameterGroupRequest method.
 //    req := client.CreateCacheParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -367,7 +373,8 @@ type CreateCacheSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateCacheSecurityGroup API request.
-func (r CreateCacheSecurityGroupRequest) Send() (*CreateCacheSecurityGroupOutput, error) {
+func (r CreateCacheSecurityGroupRequest) Send(ctx context.Context) (*CreateCacheSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -389,7 +396,7 @@ func (r CreateCacheSecurityGroupRequest) Send() (*CreateCacheSecurityGroupOutput
 //
 //    // Example sending a request using the CreateCacheSecurityGroupRequest method.
 //    req := client.CreateCacheSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -423,7 +430,8 @@ type CreateCacheSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateCacheSubnetGroup API request.
-func (r CreateCacheSubnetGroupRequest) Send() (*CreateCacheSubnetGroupOutput, error) {
+func (r CreateCacheSubnetGroupRequest) Send(ctx context.Context) (*CreateCacheSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -442,7 +450,7 @@ func (r CreateCacheSubnetGroupRequest) Send() (*CreateCacheSubnetGroupOutput, er
 //
 //    // Example sending a request using the CreateCacheSubnetGroupRequest method.
 //    req := client.CreateCacheSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -476,7 +484,8 @@ type CreateReplicationGroupRequest struct {
 }
 
 // Send marshals and sends the CreateReplicationGroup API request.
-func (r CreateReplicationGroupRequest) Send() (*CreateReplicationGroupOutput, error) {
+func (r CreateReplicationGroupRequest) Send(ctx context.Context) (*CreateReplicationGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -514,7 +523,7 @@ func (r CreateReplicationGroupRequest) Send() (*CreateReplicationGroupOutput, er
 //
 //    // Example sending a request using the CreateReplicationGroupRequest method.
 //    req := client.CreateReplicationGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -548,7 +557,8 @@ type CreateSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshot API request.
-func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -567,7 +577,7 @@ func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
 //
 //    // Example sending a request using the CreateSnapshotRequest method.
 //    req := client.CreateSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -601,7 +611,8 @@ type DecreaseReplicaCountRequest struct {
 }
 
 // Send marshals and sends the DecreaseReplicaCount API request.
-func (r DecreaseReplicaCountRequest) Send() (*DecreaseReplicaCountOutput, error) {
+func (r DecreaseReplicaCountRequest) Send(ctx context.Context) (*DecreaseReplicaCountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,7 +631,7 @@ func (r DecreaseReplicaCountRequest) Send() (*DecreaseReplicaCountOutput, error)
 //
 //    // Example sending a request using the DecreaseReplicaCountRequest method.
 //    req := client.DecreaseReplicaCountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -654,7 +665,8 @@ type DeleteCacheClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheCluster API request.
-func (r DeleteCacheClusterRequest) Send() (*DeleteCacheClusterOutput, error) {
+func (r DeleteCacheClusterRequest) Send(ctx context.Context) (*DeleteCacheClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -679,7 +691,7 @@ func (r DeleteCacheClusterRequest) Send() (*DeleteCacheClusterOutput, error) {
 //
 //    // Example sending a request using the DeleteCacheClusterRequest method.
 //    req := client.DeleteCacheClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -713,7 +725,8 @@ type DeleteCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheParameterGroup API request.
-func (r DeleteCacheParameterGroupRequest) Send() (*DeleteCacheParameterGroupOutput, error) {
+func (r DeleteCacheParameterGroupRequest) Send(ctx context.Context) (*DeleteCacheParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -730,7 +743,7 @@ func (r DeleteCacheParameterGroupRequest) Send() (*DeleteCacheParameterGroupOutp
 //
 //    // Example sending a request using the DeleteCacheParameterGroupRequest method.
 //    req := client.DeleteCacheParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -766,7 +779,8 @@ type DeleteCacheSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheSecurityGroup API request.
-func (r DeleteCacheSecurityGroupRequest) Send() (*DeleteCacheSecurityGroupOutput, error) {
+func (r DeleteCacheSecurityGroupRequest) Send(ctx context.Context) (*DeleteCacheSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -784,7 +798,7 @@ func (r DeleteCacheSecurityGroupRequest) Send() (*DeleteCacheSecurityGroupOutput
 //
 //    // Example sending a request using the DeleteCacheSecurityGroupRequest method.
 //    req := client.DeleteCacheSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -820,7 +834,8 @@ type DeleteCacheSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheSubnetGroup API request.
-func (r DeleteCacheSubnetGroupRequest) Send() (*DeleteCacheSubnetGroupOutput, error) {
+func (r DeleteCacheSubnetGroupRequest) Send(ctx context.Context) (*DeleteCacheSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,7 +853,7 @@ func (r DeleteCacheSubnetGroupRequest) Send() (*DeleteCacheSubnetGroupOutput, er
 //
 //    // Example sending a request using the DeleteCacheSubnetGroupRequest method.
 //    req := client.DeleteCacheSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -874,7 +889,8 @@ type DeleteReplicationGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteReplicationGroup API request.
-func (r DeleteReplicationGroupRequest) Send() (*DeleteReplicationGroupOutput, error) {
+func (r DeleteReplicationGroupRequest) Send(ctx context.Context) (*DeleteReplicationGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -900,7 +916,7 @@ func (r DeleteReplicationGroupRequest) Send() (*DeleteReplicationGroupOutput, er
 //
 //    // Example sending a request using the DeleteReplicationGroupRequest method.
 //    req := client.DeleteReplicationGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -934,7 +950,8 @@ type DeleteSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
-func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
+func (r DeleteSnapshotRequest) Send(ctx context.Context) (*DeleteSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,7 +971,7 @@ func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
 //
 //    // Example sending a request using the DeleteSnapshotRequest method.
 //    req := client.DeleteSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -988,7 +1005,8 @@ type DescribeCacheClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheClusters API request.
-func (r DescribeCacheClustersRequest) Send() (*DescribeCacheClustersOutput, error) {
+func (r DescribeCacheClustersRequest) Send(ctx context.Context) (*DescribeCacheClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1025,7 +1043,7 @@ func (r DescribeCacheClustersRequest) Send() (*DescribeCacheClustersOutput, erro
 //
 //    // Example sending a request using the DescribeCacheClustersRequest method.
 //    req := client.DescribeCacheClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1111,7 +1129,8 @@ type DescribeCacheEngineVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheEngineVersions API request.
-func (r DescribeCacheEngineVersionsRequest) Send() (*DescribeCacheEngineVersionsOutput, error) {
+func (r DescribeCacheEngineVersionsRequest) Send(ctx context.Context) (*DescribeCacheEngineVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1127,7 +1146,7 @@ func (r DescribeCacheEngineVersionsRequest) Send() (*DescribeCacheEngineVersions
 //
 //    // Example sending a request using the DescribeCacheEngineVersionsRequest method.
 //    req := client.DescribeCacheEngineVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1213,7 +1232,8 @@ type DescribeCacheParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheParameterGroups API request.
-func (r DescribeCacheParameterGroupsRequest) Send() (*DescribeCacheParameterGroupsOutput, error) {
+func (r DescribeCacheParameterGroupsRequest) Send(ctx context.Context) (*DescribeCacheParameterGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1231,7 +1251,7 @@ func (r DescribeCacheParameterGroupsRequest) Send() (*DescribeCacheParameterGrou
 //
 //    // Example sending a request using the DescribeCacheParameterGroupsRequest method.
 //    req := client.DescribeCacheParameterGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1317,7 +1337,8 @@ type DescribeCacheParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheParameters API request.
-func (r DescribeCacheParametersRequest) Send() (*DescribeCacheParametersOutput, error) {
+func (r DescribeCacheParametersRequest) Send(ctx context.Context) (*DescribeCacheParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1333,7 +1354,7 @@ func (r DescribeCacheParametersRequest) Send() (*DescribeCacheParametersOutput, 
 //
 //    // Example sending a request using the DescribeCacheParametersRequest method.
 //    req := client.DescribeCacheParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1419,7 +1440,8 @@ type DescribeCacheSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheSecurityGroups API request.
-func (r DescribeCacheSecurityGroupsRequest) Send() (*DescribeCacheSecurityGroupsOutput, error) {
+func (r DescribeCacheSecurityGroupsRequest) Send(ctx context.Context) (*DescribeCacheSecurityGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1436,7 +1458,7 @@ func (r DescribeCacheSecurityGroupsRequest) Send() (*DescribeCacheSecurityGroups
 //
 //    // Example sending a request using the DescribeCacheSecurityGroupsRequest method.
 //    req := client.DescribeCacheSecurityGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1522,7 +1544,8 @@ type DescribeCacheSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheSubnetGroups API request.
-func (r DescribeCacheSubnetGroupsRequest) Send() (*DescribeCacheSubnetGroupsOutput, error) {
+func (r DescribeCacheSubnetGroupsRequest) Send(ctx context.Context) (*DescribeCacheSubnetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1539,7 +1562,7 @@ func (r DescribeCacheSubnetGroupsRequest) Send() (*DescribeCacheSubnetGroupsOutp
 //
 //    // Example sending a request using the DescribeCacheSubnetGroupsRequest method.
 //    req := client.DescribeCacheSubnetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1625,7 +1648,8 @@ type DescribeEngineDefaultParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
-func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+func (r DescribeEngineDefaultParametersRequest) Send(ctx context.Context) (*DescribeEngineDefaultParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1642,7 +1666,7 @@ func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultPa
 //
 //    // Example sending a request using the DescribeEngineDefaultParametersRequest method.
 //    req := client.DescribeEngineDefaultParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1728,7 +1752,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1749,7 +1774,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1835,7 +1860,8 @@ type DescribeReplicationGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeReplicationGroups API request.
-func (r DescribeReplicationGroupsRequest) Send() (*DescribeReplicationGroupsOutput, error) {
+func (r DescribeReplicationGroupsRequest) Send(ctx context.Context) (*DescribeReplicationGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1855,7 +1881,7 @@ func (r DescribeReplicationGroupsRequest) Send() (*DescribeReplicationGroupsOutp
 //
 //    // Example sending a request using the DescribeReplicationGroupsRequest method.
 //    req := client.DescribeReplicationGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1941,7 +1967,8 @@ type DescribeReservedCacheNodesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedCacheNodes API request.
-func (r DescribeReservedCacheNodesRequest) Send() (*DescribeReservedCacheNodesOutput, error) {
+func (r DescribeReservedCacheNodesRequest) Send(ctx context.Context) (*DescribeReservedCacheNodesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1958,7 +1985,7 @@ func (r DescribeReservedCacheNodesRequest) Send() (*DescribeReservedCacheNodesOu
 //
 //    // Example sending a request using the DescribeReservedCacheNodesRequest method.
 //    req := client.DescribeReservedCacheNodesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2044,7 +2071,8 @@ type DescribeReservedCacheNodesOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedCacheNodesOfferings API request.
-func (r DescribeReservedCacheNodesOfferingsRequest) Send() (*DescribeReservedCacheNodesOfferingsOutput, error) {
+func (r DescribeReservedCacheNodesOfferingsRequest) Send(ctx context.Context) (*DescribeReservedCacheNodesOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2060,7 +2088,7 @@ func (r DescribeReservedCacheNodesOfferingsRequest) Send() (*DescribeReservedCac
 //
 //    // Example sending a request using the DescribeReservedCacheNodesOfferingsRequest method.
 //    req := client.DescribeReservedCacheNodesOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2146,7 +2174,8 @@ type DescribeSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
-func (r DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
+func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2167,7 +2196,7 @@ func (r DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
 //
 //    // Example sending a request using the DescribeSnapshotsRequest method.
 //    req := client.DescribeSnapshotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2253,7 +2282,8 @@ type IncreaseReplicaCountRequest struct {
 }
 
 // Send marshals and sends the IncreaseReplicaCount API request.
-func (r IncreaseReplicaCountRequest) Send() (*IncreaseReplicaCountOutput, error) {
+func (r IncreaseReplicaCountRequest) Send(ctx context.Context) (*IncreaseReplicaCountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2272,7 +2302,7 @@ func (r IncreaseReplicaCountRequest) Send() (*IncreaseReplicaCountOutput, error)
 //
 //    // Example sending a request using the IncreaseReplicaCountRequest method.
 //    req := client.IncreaseReplicaCountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2306,7 +2336,8 @@ type ListAllowedNodeTypeModificationsRequest struct {
 }
 
 // Send marshals and sends the ListAllowedNodeTypeModifications API request.
-func (r ListAllowedNodeTypeModificationsRequest) Send() (*ListAllowedNodeTypeModificationsOutput, error) {
+func (r ListAllowedNodeTypeModificationsRequest) Send(ctx context.Context) (*ListAllowedNodeTypeModificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2327,7 +2358,7 @@ func (r ListAllowedNodeTypeModificationsRequest) Send() (*ListAllowedNodeTypeMod
 //
 //    // Example sending a request using the ListAllowedNodeTypeModificationsRequest method.
 //    req := client.ListAllowedNodeTypeModificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2361,7 +2392,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2386,7 +2418,7 @@ func (r ListTagsForResourceRequest) Send() (*RemoveTagsFromResourceOutput, error
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2420,7 +2452,8 @@ type ModifyCacheClusterRequest struct {
 }
 
 // Send marshals and sends the ModifyCacheCluster API request.
-func (r ModifyCacheClusterRequest) Send() (*ModifyCacheClusterOutput, error) {
+func (r ModifyCacheClusterRequest) Send(ctx context.Context) (*ModifyCacheClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2438,7 +2471,7 @@ func (r ModifyCacheClusterRequest) Send() (*ModifyCacheClusterOutput, error) {
 //
 //    // Example sending a request using the ModifyCacheClusterRequest method.
 //    req := client.ModifyCacheClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2472,7 +2505,8 @@ type ModifyCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyCacheParameterGroup API request.
-func (r ModifyCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+func (r ModifyCacheParameterGroupRequest) Send(ctx context.Context) (*ResetCacheParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2490,7 +2524,7 @@ func (r ModifyCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutpu
 //
 //    // Example sending a request using the ModifyCacheParameterGroupRequest method.
 //    req := client.ModifyCacheParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2524,7 +2558,8 @@ type ModifyCacheSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyCacheSubnetGroup API request.
-func (r ModifyCacheSubnetGroupRequest) Send() (*ModifyCacheSubnetGroupOutput, error) {
+func (r ModifyCacheSubnetGroupRequest) Send(ctx context.Context) (*ModifyCacheSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2540,7 +2575,7 @@ func (r ModifyCacheSubnetGroupRequest) Send() (*ModifyCacheSubnetGroupOutput, er
 //
 //    // Example sending a request using the ModifyCacheSubnetGroupRequest method.
 //    req := client.ModifyCacheSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2574,7 +2609,8 @@ type ModifyReplicationGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyReplicationGroup API request.
-func (r ModifyReplicationGroupRequest) Send() (*ModifyReplicationGroupOutput, error) {
+func (r ModifyReplicationGroupRequest) Send(ctx context.Context) (*ModifyReplicationGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2603,7 +2639,7 @@ func (r ModifyReplicationGroupRequest) Send() (*ModifyReplicationGroupOutput, er
 //
 //    // Example sending a request using the ModifyReplicationGroupRequest method.
 //    req := client.ModifyReplicationGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2637,7 +2673,8 @@ type ModifyReplicationGroupShardConfigurationRequest struct {
 }
 
 // Send marshals and sends the ModifyReplicationGroupShardConfiguration API request.
-func (r ModifyReplicationGroupShardConfigurationRequest) Send() (*ModifyReplicationGroupShardConfigurationOutput, error) {
+func (r ModifyReplicationGroupShardConfigurationRequest) Send(ctx context.Context) (*ModifyReplicationGroupShardConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2654,7 +2691,7 @@ func (r ModifyReplicationGroupShardConfigurationRequest) Send() (*ModifyReplicat
 //
 //    // Example sending a request using the ModifyReplicationGroupShardConfigurationRequest method.
 //    req := client.ModifyReplicationGroupShardConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2688,7 +2725,8 @@ type PurchaseReservedCacheNodesOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedCacheNodesOffering API request.
-func (r PurchaseReservedCacheNodesOfferingRequest) Send() (*PurchaseReservedCacheNodesOfferingOutput, error) {
+func (r PurchaseReservedCacheNodesOfferingRequest) Send(ctx context.Context) (*PurchaseReservedCacheNodesOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2704,7 +2742,7 @@ func (r PurchaseReservedCacheNodesOfferingRequest) Send() (*PurchaseReservedCach
 //
 //    // Example sending a request using the PurchaseReservedCacheNodesOfferingRequest method.
 //    req := client.PurchaseReservedCacheNodesOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2738,7 +2776,8 @@ type RebootCacheClusterRequest struct {
 }
 
 // Send marshals and sends the RebootCacheCluster API request.
-func (r RebootCacheClusterRequest) Send() (*RebootCacheClusterOutput, error) {
+func (r RebootCacheClusterRequest) Send(ctx context.Context) (*RebootCacheClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2770,7 +2809,7 @@ func (r RebootCacheClusterRequest) Send() (*RebootCacheClusterOutput, error) {
 //
 //    // Example sending a request using the RebootCacheClusterRequest method.
 //    req := client.RebootCacheClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2804,7 +2843,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2820,7 +2860,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2854,7 +2894,8 @@ type ResetCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetCacheParameterGroup API request.
-func (r ResetCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+func (r ResetCacheParameterGroupRequest) Send(ctx context.Context) (*ResetCacheParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2873,7 +2914,7 @@ func (r ResetCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput
 //
 //    // Example sending a request using the ResetCacheParameterGroupRequest method.
 //    req := client.ResetCacheParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2907,7 +2948,8 @@ type RevokeCacheSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the RevokeCacheSecurityGroupIngress API request.
-func (r RevokeCacheSecurityGroupIngressRequest) Send() (*RevokeCacheSecurityGroupIngressOutput, error) {
+func (r RevokeCacheSecurityGroupIngressRequest) Send(ctx context.Context) (*RevokeCacheSecurityGroupIngressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2924,7 +2966,7 @@ func (r RevokeCacheSecurityGroupIngressRequest) Send() (*RevokeCacheSecurityGrou
 //
 //    // Example sending a request using the RevokeCacheSecurityGroupIngressRequest method.
 //    req := client.RevokeCacheSecurityGroupIngressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2958,7 +3000,8 @@ type TestFailoverRequest struct {
 }
 
 // Send marshals and sends the TestFailover API request.
-func (r TestFailoverRequest) Send() (*TestFailoverOutput, error) {
+func (r TestFailoverRequest) Send(ctx context.Context) (*TestFailoverOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3017,7 +3060,7 @@ func (r TestFailoverRequest) Send() (*TestFailoverOutput, error) {
 //
 //    // Example sending a request using the TestFailoverRequest method.
 //    req := client.TestFailoverRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

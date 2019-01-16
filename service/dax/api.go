@@ -3,6 +3,7 @@
 package dax
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type CreateClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCluster API request.
-func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 //
 //    // Example sending a request using the CreateClusterRequest method.
 //    req := client.CreateClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type CreateParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateParameterGroup API request.
-func (r CreateParameterGroupRequest) Send() (*CreateParameterGroupOutput, error) {
+func (r CreateParameterGroupRequest) Send(ctx context.Context) (*CreateParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r CreateParameterGroupRequest) Send() (*CreateParameterGroupOutput, error)
 //
 //    // Example sending a request using the CreateParameterGroupRequest method.
 //    req := client.CreateParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +124,8 @@ type CreateSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateSubnetGroup API request.
-func (r CreateSubnetGroupRequest) Send() (*CreateSubnetGroupOutput, error) {
+func (r CreateSubnetGroupRequest) Send(ctx context.Context) (*CreateSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r CreateSubnetGroupRequest) Send() (*CreateSubnetGroupOutput, error) {
 //
 //    // Example sending a request using the CreateSubnetGroupRequest method.
 //    req := client.CreateSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type DecreaseReplicationFactorRequest struct {
 }
 
 // Send marshals and sends the DecreaseReplicationFactor API request.
-func (r DecreaseReplicationFactorRequest) Send() (*DecreaseReplicationFactorOutput, error) {
+func (r DecreaseReplicationFactorRequest) Send(ctx context.Context) (*DecreaseReplicationFactorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -190,7 +195,7 @@ func (r DecreaseReplicationFactorRequest) Send() (*DecreaseReplicationFactorOutp
 //
 //    // Example sending a request using the DecreaseReplicationFactorRequest method.
 //    req := client.DecreaseReplicationFactorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -224,7 +229,8 @@ type DeleteClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCluster API request.
-func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +249,7 @@ func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
 //
 //    // Example sending a request using the DeleteClusterRequest method.
 //    req := client.DeleteClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -277,7 +283,8 @@ type DeleteParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteParameterGroup API request.
-func (r DeleteParameterGroupRequest) Send() (*DeleteParameterGroupOutput, error) {
+func (r DeleteParameterGroupRequest) Send(ctx context.Context) (*DeleteParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +301,7 @@ func (r DeleteParameterGroupRequest) Send() (*DeleteParameterGroupOutput, error)
 //
 //    // Example sending a request using the DeleteParameterGroupRequest method.
 //    req := client.DeleteParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -328,7 +335,8 @@ type DeleteSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteSubnetGroup API request.
-func (r DeleteSubnetGroupRequest) Send() (*DeleteSubnetGroupOutput, error) {
+func (r DeleteSubnetGroupRequest) Send(ctx context.Context) (*DeleteSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -346,7 +354,7 @@ func (r DeleteSubnetGroupRequest) Send() (*DeleteSubnetGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteSubnetGroupRequest method.
 //    req := client.DeleteSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -380,7 +388,8 @@ type DescribeClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeClusters API request.
-func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -412,7 +421,7 @@ func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
 //
 //    // Example sending a request using the DescribeClustersRequest method.
 //    req := client.DescribeClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -446,7 +455,8 @@ type DescribeDefaultParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeDefaultParameters API request.
-func (r DescribeDefaultParametersRequest) Send() (*DescribeDefaultParametersOutput, error) {
+func (r DescribeDefaultParametersRequest) Send(ctx context.Context) (*DescribeDefaultParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,7 +472,7 @@ func (r DescribeDefaultParametersRequest) Send() (*DescribeDefaultParametersOutp
 //
 //    // Example sending a request using the DescribeDefaultParametersRequest method.
 //    req := client.DescribeDefaultParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -496,7 +506,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -517,7 +528,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -551,7 +562,8 @@ type DescribeParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeParameterGroups API request.
-func (r DescribeParameterGroupsRequest) Send() (*DescribeParameterGroupsOutput, error) {
+func (r DescribeParameterGroupsRequest) Send(ctx context.Context) (*DescribeParameterGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +580,7 @@ func (r DescribeParameterGroupsRequest) Send() (*DescribeParameterGroupsOutput, 
 //
 //    // Example sending a request using the DescribeParameterGroupsRequest method.
 //    req := client.DescribeParameterGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -602,7 +614,8 @@ type DescribeParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeParameters API request.
-func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+func (r DescribeParametersRequest) Send(ctx context.Context) (*DescribeParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -618,7 +631,7 @@ func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
 //
 //    // Example sending a request using the DescribeParametersRequest method.
 //    req := client.DescribeParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -652,7 +665,8 @@ type DescribeSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeSubnetGroups API request.
-func (r DescribeSubnetGroupsRequest) Send() (*DescribeSubnetGroupsOutput, error) {
+func (r DescribeSubnetGroupsRequest) Send(ctx context.Context) (*DescribeSubnetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -669,7 +683,7 @@ func (r DescribeSubnetGroupsRequest) Send() (*DescribeSubnetGroupsOutput, error)
 //
 //    // Example sending a request using the DescribeSubnetGroupsRequest method.
 //    req := client.DescribeSubnetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -703,7 +717,8 @@ type IncreaseReplicationFactorRequest struct {
 }
 
 // Send marshals and sends the IncreaseReplicationFactor API request.
-func (r IncreaseReplicationFactorRequest) Send() (*IncreaseReplicationFactorOutput, error) {
+func (r IncreaseReplicationFactorRequest) Send(ctx context.Context) (*IncreaseReplicationFactorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -719,7 +734,7 @@ func (r IncreaseReplicationFactorRequest) Send() (*IncreaseReplicationFactorOutp
 //
 //    // Example sending a request using the IncreaseReplicationFactorRequest method.
 //    req := client.IncreaseReplicationFactorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -753,7 +768,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -770,7 +786,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -804,7 +820,8 @@ type RebootNodeRequest struct {
 }
 
 // Send marshals and sends the RebootNode API request.
-func (r RebootNodeRequest) Send() (*RebootNodeOutput, error) {
+func (r RebootNodeRequest) Send(ctx context.Context) (*RebootNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -821,7 +838,7 @@ func (r RebootNodeRequest) Send() (*RebootNodeOutput, error) {
 //
 //    // Example sending a request using the RebootNodeRequest method.
 //    req := client.RebootNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -855,7 +872,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -872,7 +890,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -906,7 +924,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -923,7 +942,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -957,7 +976,8 @@ type UpdateClusterRequest struct {
 }
 
 // Send marshals and sends the UpdateCluster API request.
-func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
+func (r UpdateClusterRequest) Send(ctx context.Context) (*UpdateClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -975,7 +995,7 @@ func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
 //
 //    // Example sending a request using the UpdateClusterRequest method.
 //    req := client.UpdateClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1009,7 +1029,8 @@ type UpdateParameterGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateParameterGroup API request.
-func (r UpdateParameterGroupRequest) Send() (*UpdateParameterGroupOutput, error) {
+func (r UpdateParameterGroupRequest) Send(ctx context.Context) (*UpdateParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1026,7 +1047,7 @@ func (r UpdateParameterGroupRequest) Send() (*UpdateParameterGroupOutput, error)
 //
 //    // Example sending a request using the UpdateParameterGroupRequest method.
 //    req := client.UpdateParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1060,7 +1081,8 @@ type UpdateSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateSubnetGroup API request.
-func (r UpdateSubnetGroupRequest) Send() (*UpdateSubnetGroupOutput, error) {
+func (r UpdateSubnetGroupRequest) Send(ctx context.Context) (*UpdateSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1076,7 +1098,7 @@ func (r UpdateSubnetGroupRequest) Send() (*UpdateSubnetGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateSubnetGroupRequest method.
 //    req := client.UpdateSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package batch_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -41,7 +42,7 @@ func ExampleBatch_CancelJobRequest_shared00() {
 	}
 
 	req := svc.CancelJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -108,7 +109,7 @@ func ExampleBatch_CreateComputeEnvironmentRequest_shared00() {
 	}
 
 	req := svc.CreateComputeEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -174,7 +175,7 @@ func ExampleBatch_CreateComputeEnvironmentRequest_shared01() {
 	}
 
 	req := svc.CreateComputeEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -220,7 +221,7 @@ func ExampleBatch_CreateJobQueueRequest_shared00() {
 	}
 
 	req := svc.CreateJobQueueRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -271,7 +272,7 @@ func ExampleBatch_CreateJobQueueRequest_shared01() {
 	}
 
 	req := svc.CreateJobQueueRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -308,7 +309,7 @@ func ExampleBatch_DeleteComputeEnvironmentRequest_shared00() {
 	}
 
 	req := svc.DeleteComputeEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -345,7 +346,7 @@ func ExampleBatch_DeleteJobQueueRequest_shared00() {
 	}
 
 	req := svc.DeleteJobQueueRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -382,7 +383,7 @@ func ExampleBatch_DeregisterJobDefinitionRequest_shared00() {
 	}
 
 	req := svc.DeregisterJobDefinitionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -421,7 +422,7 @@ func ExampleBatch_DescribeComputeEnvironmentsRequest_shared00() {
 	}
 
 	req := svc.DescribeComputeEnvironmentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -458,7 +459,7 @@ func ExampleBatch_DescribeJobDefinitionsRequest_shared00() {
 	}
 
 	req := svc.DescribeJobDefinitionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -497,7 +498,7 @@ func ExampleBatch_DescribeJobQueuesRequest_shared00() {
 	}
 
 	req := svc.DescribeJobQueuesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -536,7 +537,7 @@ func ExampleBatch_DescribeJobsRequest_shared00() {
 	}
 
 	req := svc.DescribeJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -573,7 +574,7 @@ func ExampleBatch_ListJobsRequest_shared00() {
 	}
 
 	req := svc.ListJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -612,7 +613,7 @@ func ExampleBatch_ListJobsRequest_shared01() {
 	}
 
 	req := svc.ListJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -659,7 +660,7 @@ func ExampleBatch_RegisterJobDefinitionRequest_shared00() {
 	}
 
 	req := svc.RegisterJobDefinitionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -699,7 +700,7 @@ func ExampleBatch_SubmitJobRequest_shared00() {
 	}
 
 	req := svc.SubmitJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -737,7 +738,7 @@ func ExampleBatch_TerminateJobRequest_shared00() {
 	}
 
 	req := svc.TerminateJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -775,7 +776,7 @@ func ExampleBatch_UpdateComputeEnvironmentRequest_shared00() {
 	}
 
 	req := svc.UpdateComputeEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -813,7 +814,7 @@ func ExampleBatch_UpdateJobQueueRequest_shared00() {
 	}
 
 	req := svc.UpdateJobQueueRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -3,6 +3,7 @@
 package gamelift
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AcceptMatchRequest struct {
 }
 
 // Send marshals and sends the AcceptMatch API request.
-func (r AcceptMatchRequest) Send() (*AcceptMatchOutput, error) {
+func (r AcceptMatchRequest) Send(ctx context.Context) (*AcceptMatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,7 +73,7 @@ func (r AcceptMatchRequest) Send() (*AcceptMatchOutput, error) {
 //
 //    // Example sending a request using the AcceptMatchRequest method.
 //    req := client.AcceptMatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -105,7 +107,8 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -153,7 +156,7 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -187,7 +190,8 @@ type CreateBuildRequest struct {
 }
 
 // Send marshals and sends the CreateBuild API request.
-func (r CreateBuildRequest) Send() (*CreateBuildOutput, error) {
+func (r CreateBuildRequest) Send(ctx context.Context) (*CreateBuildOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -251,7 +255,7 @@ func (r CreateBuildRequest) Send() (*CreateBuildOutput, error) {
 //
 //    // Example sending a request using the CreateBuildRequest method.
 //    req := client.CreateBuildRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -285,7 +289,8 @@ type CreateFleetRequest struct {
 }
 
 // Send marshals and sends the CreateFleet API request.
-func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+func (r CreateFleetRequest) Send(ctx context.Context) (*CreateFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,7 +395,7 @@ func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
 //
 //    // Example sending a request using the CreateFleetRequest method.
 //    req := client.CreateFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -424,7 +429,8 @@ type CreateGameSessionRequest struct {
 }
 
 // Send marshals and sends the CreateGameSession API request.
-func (r CreateGameSessionRequest) Send() (*CreateGameSessionOutput, error) {
+func (r CreateGameSessionRequest) Send(ctx context.Context) (*CreateGameSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,7 +497,7 @@ func (r CreateGameSessionRequest) Send() (*CreateGameSessionOutput, error) {
 //
 //    // Example sending a request using the CreateGameSessionRequest method.
 //    req := client.CreateGameSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -525,7 +531,8 @@ type CreateGameSessionQueueRequest struct {
 }
 
 // Send marshals and sends the CreateGameSessionQueue API request.
-func (r CreateGameSessionQueueRequest) Send() (*CreateGameSessionQueueOutput, error) {
+func (r CreateGameSessionQueueRequest) Send(ctx context.Context) (*CreateGameSessionQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -580,7 +587,7 @@ func (r CreateGameSessionQueueRequest) Send() (*CreateGameSessionQueueOutput, er
 //
 //    // Example sending a request using the CreateGameSessionQueueRequest method.
 //    req := client.CreateGameSessionQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -614,7 +621,8 @@ type CreateMatchmakingConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateMatchmakingConfiguration API request.
-func (r CreateMatchmakingConfigurationRequest) Send() (*CreateMatchmakingConfigurationOutput, error) {
+func (r CreateMatchmakingConfigurationRequest) Send(ctx context.Context) (*CreateMatchmakingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -673,7 +681,7 @@ func (r CreateMatchmakingConfigurationRequest) Send() (*CreateMatchmakingConfigu
 //
 //    // Example sending a request using the CreateMatchmakingConfigurationRequest method.
 //    req := client.CreateMatchmakingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -707,7 +715,8 @@ type CreateMatchmakingRuleSetRequest struct {
 }
 
 // Send marshals and sends the CreateMatchmakingRuleSet API request.
-func (r CreateMatchmakingRuleSetRequest) Send() (*CreateMatchmakingRuleSetOutput, error) {
+func (r CreateMatchmakingRuleSetRequest) Send(ctx context.Context) (*CreateMatchmakingRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -759,7 +768,7 @@ func (r CreateMatchmakingRuleSetRequest) Send() (*CreateMatchmakingRuleSetOutput
 //
 //    // Example sending a request using the CreateMatchmakingRuleSetRequest method.
 //    req := client.CreateMatchmakingRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -793,7 +802,8 @@ type CreatePlayerSessionRequest struct {
 }
 
 // Send marshals and sends the CreatePlayerSession API request.
-func (r CreatePlayerSessionRequest) Send() (*CreatePlayerSessionOutput, error) {
+func (r CreatePlayerSessionRequest) Send(ctx context.Context) (*CreatePlayerSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -834,7 +844,7 @@ func (r CreatePlayerSessionRequest) Send() (*CreatePlayerSessionOutput, error) {
 //
 //    // Example sending a request using the CreatePlayerSessionRequest method.
 //    req := client.CreatePlayerSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -868,7 +878,8 @@ type CreatePlayerSessionsRequest struct {
 }
 
 // Send marshals and sends the CreatePlayerSessions API request.
-func (r CreatePlayerSessionsRequest) Send() (*CreatePlayerSessionsOutput, error) {
+func (r CreatePlayerSessionsRequest) Send(ctx context.Context) (*CreatePlayerSessionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -910,7 +921,7 @@ func (r CreatePlayerSessionsRequest) Send() (*CreatePlayerSessionsOutput, error)
 //
 //    // Example sending a request using the CreatePlayerSessionsRequest method.
 //    req := client.CreatePlayerSessionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -944,7 +955,8 @@ type CreateVpcPeeringAuthorizationRequest struct {
 }
 
 // Send marshals and sends the CreateVpcPeeringAuthorization API request.
-func (r CreateVpcPeeringAuthorizationRequest) Send() (*CreateVpcPeeringAuthorizationOutput, error) {
+func (r CreateVpcPeeringAuthorizationRequest) Send(ctx context.Context) (*CreateVpcPeeringAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1001,7 +1013,7 @@ func (r CreateVpcPeeringAuthorizationRequest) Send() (*CreateVpcPeeringAuthoriza
 //
 //    // Example sending a request using the CreateVpcPeeringAuthorizationRequest method.
 //    req := client.CreateVpcPeeringAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1035,7 +1047,8 @@ type CreateVpcPeeringConnectionRequest struct {
 }
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
-func (r CreateVpcPeeringConnectionRequest) Send() (*CreateVpcPeeringConnectionOutput, error) {
+func (r CreateVpcPeeringConnectionRequest) Send(ctx context.Context) (*CreateVpcPeeringConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1087,7 +1100,7 @@ func (r CreateVpcPeeringConnectionRequest) Send() (*CreateVpcPeeringConnectionOu
 //
 //    // Example sending a request using the CreateVpcPeeringConnectionRequest method.
 //    req := client.CreateVpcPeeringConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1121,7 +1134,8 @@ type DeleteAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAlias API request.
-func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1153,7 +1167,7 @@ func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteAliasRequest method.
 //    req := client.DeleteAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1189,7 +1203,8 @@ type DeleteBuildRequest struct {
 }
 
 // Send marshals and sends the DeleteBuild API request.
-func (r DeleteBuildRequest) Send() (*DeleteBuildOutput, error) {
+func (r DeleteBuildRequest) Send(ctx context.Context) (*DeleteBuildOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1222,7 +1237,7 @@ func (r DeleteBuildRequest) Send() (*DeleteBuildOutput, error) {
 //
 //    // Example sending a request using the DeleteBuildRequest method.
 //    req := client.DeleteBuildRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1258,7 +1273,8 @@ type DeleteFleetRequest struct {
 }
 
 // Send marshals and sends the DeleteFleet API request.
-func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
+func (r DeleteFleetRequest) Send(ctx context.Context) (*DeleteFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1318,7 +1334,7 @@ func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
 //
 //    // Example sending a request using the DeleteFleetRequest method.
 //    req := client.DeleteFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1354,7 +1370,8 @@ type DeleteGameSessionQueueRequest struct {
 }
 
 // Send marshals and sends the DeleteGameSessionQueue API request.
-func (r DeleteGameSessionQueueRequest) Send() (*DeleteGameSessionQueueOutput, error) {
+func (r DeleteGameSessionQueueRequest) Send(ctx context.Context) (*DeleteGameSessionQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1382,7 +1399,7 @@ func (r DeleteGameSessionQueueRequest) Send() (*DeleteGameSessionQueueOutput, er
 //
 //    // Example sending a request using the DeleteGameSessionQueueRequest method.
 //    req := client.DeleteGameSessionQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1416,7 +1433,8 @@ type DeleteMatchmakingConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteMatchmakingConfiguration API request.
-func (r DeleteMatchmakingConfigurationRequest) Send() (*DeleteMatchmakingConfigurationOutput, error) {
+func (r DeleteMatchmakingConfigurationRequest) Send(ctx context.Context) (*DeleteMatchmakingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1450,7 +1468,7 @@ func (r DeleteMatchmakingConfigurationRequest) Send() (*DeleteMatchmakingConfigu
 //
 //    // Example sending a request using the DeleteMatchmakingConfigurationRequest method.
 //    req := client.DeleteMatchmakingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1484,7 +1502,8 @@ type DeleteScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteScalingPolicy API request.
-func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+func (r DeleteScalingPolicyRequest) Send(ctx context.Context) (*DeleteScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1527,7 +1546,7 @@ func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteScalingPolicyRequest method.
 //    req := client.DeleteScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1563,7 +1582,8 @@ type DeleteVpcPeeringAuthorizationRequest struct {
 }
 
 // Send marshals and sends the DeleteVpcPeeringAuthorization API request.
-func (r DeleteVpcPeeringAuthorizationRequest) Send() (*DeleteVpcPeeringAuthorizationOutput, error) {
+func (r DeleteVpcPeeringAuthorizationRequest) Send(ctx context.Context) (*DeleteVpcPeeringAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1595,7 +1615,7 @@ func (r DeleteVpcPeeringAuthorizationRequest) Send() (*DeleteVpcPeeringAuthoriza
 //
 //    // Example sending a request using the DeleteVpcPeeringAuthorizationRequest method.
 //    req := client.DeleteVpcPeeringAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1629,7 +1649,8 @@ type DeleteVpcPeeringConnectionRequest struct {
 }
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
-func (r DeleteVpcPeeringConnectionRequest) Send() (*DeleteVpcPeeringConnectionOutput, error) {
+func (r DeleteVpcPeeringConnectionRequest) Send(ctx context.Context) (*DeleteVpcPeeringConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1667,7 +1688,7 @@ func (r DeleteVpcPeeringConnectionRequest) Send() (*DeleteVpcPeeringConnectionOu
 //
 //    // Example sending a request using the DeleteVpcPeeringConnectionRequest method.
 //    req := client.DeleteVpcPeeringConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1701,7 +1722,8 @@ type DescribeAliasRequest struct {
 }
 
 // Send marshals and sends the DescribeAlias API request.
-func (r DescribeAliasRequest) Send() (*DescribeAliasOutput, error) {
+func (r DescribeAliasRequest) Send(ctx context.Context) (*DescribeAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1735,7 +1757,7 @@ func (r DescribeAliasRequest) Send() (*DescribeAliasOutput, error) {
 //
 //    // Example sending a request using the DescribeAliasRequest method.
 //    req := client.DescribeAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1769,7 +1791,8 @@ type DescribeBuildRequest struct {
 }
 
 // Send marshals and sends the DescribeBuild API request.
-func (r DescribeBuildRequest) Send() (*DescribeBuildOutput, error) {
+func (r DescribeBuildRequest) Send(ctx context.Context) (*DescribeBuildOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1798,7 +1821,7 @@ func (r DescribeBuildRequest) Send() (*DescribeBuildOutput, error) {
 //
 //    // Example sending a request using the DescribeBuildRequest method.
 //    req := client.DescribeBuildRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1832,7 +1855,8 @@ type DescribeEC2InstanceLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeEC2InstanceLimits API request.
-func (r DescribeEC2InstanceLimitsRequest) Send() (*DescribeEC2InstanceLimitsOutput, error) {
+func (r DescribeEC2InstanceLimitsRequest) Send(ctx context.Context) (*DescribeEC2InstanceLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1896,7 +1920,7 @@ func (r DescribeEC2InstanceLimitsRequest) Send() (*DescribeEC2InstanceLimitsOutp
 //
 //    // Example sending a request using the DescribeEC2InstanceLimitsRequest method.
 //    req := client.DescribeEC2InstanceLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1930,7 +1954,8 @@ type DescribeFleetAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeFleetAttributes API request.
-func (r DescribeFleetAttributesRequest) Send() (*DescribeFleetAttributesOutput, error) {
+func (r DescribeFleetAttributesRequest) Send(ctx context.Context) (*DescribeFleetAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1996,7 +2021,7 @@ func (r DescribeFleetAttributesRequest) Send() (*DescribeFleetAttributesOutput, 
 //
 //    // Example sending a request using the DescribeFleetAttributesRequest method.
 //    req := client.DescribeFleetAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2030,7 +2055,8 @@ type DescribeFleetCapacityRequest struct {
 }
 
 // Send marshals and sends the DescribeFleetCapacity API request.
-func (r DescribeFleetCapacityRequest) Send() (*DescribeFleetCapacityOutput, error) {
+func (r DescribeFleetCapacityRequest) Send(ctx context.Context) (*DescribeFleetCapacityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2097,7 +2123,7 @@ func (r DescribeFleetCapacityRequest) Send() (*DescribeFleetCapacityOutput, erro
 //
 //    // Example sending a request using the DescribeFleetCapacityRequest method.
 //    req := client.DescribeFleetCapacityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2131,7 +2157,8 @@ type DescribeFleetEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeFleetEvents API request.
-func (r DescribeFleetEventsRequest) Send() (*DescribeFleetEventsOutput, error) {
+func (r DescribeFleetEventsRequest) Send(ctx context.Context) (*DescribeFleetEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2190,7 +2217,7 @@ func (r DescribeFleetEventsRequest) Send() (*DescribeFleetEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeFleetEventsRequest method.
 //    req := client.DescribeFleetEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2224,7 +2251,8 @@ type DescribeFleetPortSettingsRequest struct {
 }
 
 // Send marshals and sends the DescribeFleetPortSettings API request.
-func (r DescribeFleetPortSettingsRequest) Send() (*DescribeFleetPortSettingsOutput, error) {
+func (r DescribeFleetPortSettingsRequest) Send(ctx context.Context) (*DescribeFleetPortSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2285,7 +2313,7 @@ func (r DescribeFleetPortSettingsRequest) Send() (*DescribeFleetPortSettingsOutp
 //
 //    // Example sending a request using the DescribeFleetPortSettingsRequest method.
 //    req := client.DescribeFleetPortSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2319,7 +2347,8 @@ type DescribeFleetUtilizationRequest struct {
 }
 
 // Send marshals and sends the DescribeFleetUtilization API request.
-func (r DescribeFleetUtilizationRequest) Send() (*DescribeFleetUtilizationOutput, error) {
+func (r DescribeFleetUtilizationRequest) Send(ctx context.Context) (*DescribeFleetUtilizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2384,7 +2413,7 @@ func (r DescribeFleetUtilizationRequest) Send() (*DescribeFleetUtilizationOutput
 //
 //    // Example sending a request using the DescribeFleetUtilizationRequest method.
 //    req := client.DescribeFleetUtilizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2418,7 +2447,8 @@ type DescribeGameSessionDetailsRequest struct {
 }
 
 // Send marshals and sends the DescribeGameSessionDetails API request.
-func (r DescribeGameSessionDetailsRequest) Send() (*DescribeGameSessionDetailsOutput, error) {
+func (r DescribeGameSessionDetailsRequest) Send(ctx context.Context) (*DescribeGameSessionDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2466,7 +2496,7 @@ func (r DescribeGameSessionDetailsRequest) Send() (*DescribeGameSessionDetailsOu
 //
 //    // Example sending a request using the DescribeGameSessionDetailsRequest method.
 //    req := client.DescribeGameSessionDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2500,7 +2530,8 @@ type DescribeGameSessionPlacementRequest struct {
 }
 
 // Send marshals and sends the DescribeGameSessionPlacement API request.
-func (r DescribeGameSessionPlacementRequest) Send() (*DescribeGameSessionPlacementOutput, error) {
+func (r DescribeGameSessionPlacementRequest) Send(ctx context.Context) (*DescribeGameSessionPlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2540,7 +2571,7 @@ func (r DescribeGameSessionPlacementRequest) Send() (*DescribeGameSessionPlaceme
 //
 //    // Example sending a request using the DescribeGameSessionPlacementRequest method.
 //    req := client.DescribeGameSessionPlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2574,7 +2605,8 @@ type DescribeGameSessionQueuesRequest struct {
 }
 
 // Send marshals and sends the DescribeGameSessionQueues API request.
-func (r DescribeGameSessionQueuesRequest) Send() (*DescribeGameSessionQueuesOutput, error) {
+func (r DescribeGameSessionQueuesRequest) Send(ctx context.Context) (*DescribeGameSessionQueuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2604,7 +2636,7 @@ func (r DescribeGameSessionQueuesRequest) Send() (*DescribeGameSessionQueuesOutp
 //
 //    // Example sending a request using the DescribeGameSessionQueuesRequest method.
 //    req := client.DescribeGameSessionQueuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2638,7 +2670,8 @@ type DescribeGameSessionsRequest struct {
 }
 
 // Send marshals and sends the DescribeGameSessions API request.
-func (r DescribeGameSessionsRequest) Send() (*DescribeGameSessionsOutput, error) {
+func (r DescribeGameSessionsRequest) Send(ctx context.Context) (*DescribeGameSessionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2687,7 +2720,7 @@ func (r DescribeGameSessionsRequest) Send() (*DescribeGameSessionsOutput, error)
 //
 //    // Example sending a request using the DescribeGameSessionsRequest method.
 //    req := client.DescribeGameSessionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2721,7 +2754,8 @@ type DescribeInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstances API request.
-func (r DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
+func (r DescribeInstancesRequest) Send(ctx context.Context) (*DescribeInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2744,7 +2778,7 @@ func (r DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
 //
 //    // Example sending a request using the DescribeInstancesRequest method.
 //    req := client.DescribeInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2778,7 +2812,8 @@ type DescribeMatchmakingRequest struct {
 }
 
 // Send marshals and sends the DescribeMatchmaking API request.
-func (r DescribeMatchmakingRequest) Send() (*DescribeMatchmakingOutput, error) {
+func (r DescribeMatchmakingRequest) Send(ctx context.Context) (*DescribeMatchmakingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2817,7 +2852,7 @@ func (r DescribeMatchmakingRequest) Send() (*DescribeMatchmakingOutput, error) {
 //
 //    // Example sending a request using the DescribeMatchmakingRequest method.
 //    req := client.DescribeMatchmakingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2851,7 +2886,8 @@ type DescribeMatchmakingConfigurationsRequest struct {
 }
 
 // Send marshals and sends the DescribeMatchmakingConfigurations API request.
-func (r DescribeMatchmakingConfigurationsRequest) Send() (*DescribeMatchmakingConfigurationsOutput, error) {
+func (r DescribeMatchmakingConfigurationsRequest) Send(ctx context.Context) (*DescribeMatchmakingConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2890,7 +2926,7 @@ func (r DescribeMatchmakingConfigurationsRequest) Send() (*DescribeMatchmakingCo
 //
 //    // Example sending a request using the DescribeMatchmakingConfigurationsRequest method.
 //    req := client.DescribeMatchmakingConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2924,7 +2960,8 @@ type DescribeMatchmakingRuleSetsRequest struct {
 }
 
 // Send marshals and sends the DescribeMatchmakingRuleSets API request.
-func (r DescribeMatchmakingRuleSetsRequest) Send() (*DescribeMatchmakingRuleSetsOutput, error) {
+func (r DescribeMatchmakingRuleSetsRequest) Send(ctx context.Context) (*DescribeMatchmakingRuleSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2960,7 +2997,7 @@ func (r DescribeMatchmakingRuleSetsRequest) Send() (*DescribeMatchmakingRuleSets
 //
 //    // Example sending a request using the DescribeMatchmakingRuleSetsRequest method.
 //    req := client.DescribeMatchmakingRuleSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2994,7 +3031,8 @@ type DescribePlayerSessionsRequest struct {
 }
 
 // Send marshals and sends the DescribePlayerSessions API request.
-func (r DescribePlayerSessionsRequest) Send() (*DescribePlayerSessionsOutput, error) {
+func (r DescribePlayerSessionsRequest) Send(ctx context.Context) (*DescribePlayerSessionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3038,7 +3076,7 @@ func (r DescribePlayerSessionsRequest) Send() (*DescribePlayerSessionsOutput, er
 //
 //    // Example sending a request using the DescribePlayerSessionsRequest method.
 //    req := client.DescribePlayerSessionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3072,7 +3110,8 @@ type DescribeRuntimeConfigurationRequest struct {
 }
 
 // Send marshals and sends the DescribeRuntimeConfiguration API request.
-func (r DescribeRuntimeConfigurationRequest) Send() (*DescribeRuntimeConfigurationOutput, error) {
+func (r DescribeRuntimeConfigurationRequest) Send(ctx context.Context) (*DescribeRuntimeConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3130,7 +3169,7 @@ func (r DescribeRuntimeConfigurationRequest) Send() (*DescribeRuntimeConfigurati
 //
 //    // Example sending a request using the DescribeRuntimeConfigurationRequest method.
 //    req := client.DescribeRuntimeConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3164,7 +3203,8 @@ type DescribeScalingPoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingPolicies API request.
-func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+func (r DescribeScalingPoliciesRequest) Send(ctx context.Context) (*DescribeScalingPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3212,7 +3252,7 @@ func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, 
 //
 //    // Example sending a request using the DescribeScalingPoliciesRequest method.
 //    req := client.DescribeScalingPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3246,7 +3286,8 @@ type DescribeVpcPeeringAuthorizationsRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcPeeringAuthorizations API request.
-func (r DescribeVpcPeeringAuthorizationsRequest) Send() (*DescribeVpcPeeringAuthorizationsOutput, error) {
+func (r DescribeVpcPeeringAuthorizationsRequest) Send(ctx context.Context) (*DescribeVpcPeeringAuthorizationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3278,7 +3319,7 @@ func (r DescribeVpcPeeringAuthorizationsRequest) Send() (*DescribeVpcPeeringAuth
 //
 //    // Example sending a request using the DescribeVpcPeeringAuthorizationsRequest method.
 //    req := client.DescribeVpcPeeringAuthorizationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3312,7 +3353,8 @@ type DescribeVpcPeeringConnectionsRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcPeeringConnections API request.
-func (r DescribeVpcPeeringConnectionsRequest) Send() (*DescribeVpcPeeringConnectionsOutput, error) {
+func (r DescribeVpcPeeringConnectionsRequest) Send(ctx context.Context) (*DescribeVpcPeeringConnectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3349,7 +3391,7 @@ func (r DescribeVpcPeeringConnectionsRequest) Send() (*DescribeVpcPeeringConnect
 //
 //    // Example sending a request using the DescribeVpcPeeringConnectionsRequest method.
 //    req := client.DescribeVpcPeeringConnectionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3383,7 +3425,8 @@ type GetGameSessionLogUrlRequest struct {
 }
 
 // Send marshals and sends the GetGameSessionLogUrl API request.
-func (r GetGameSessionLogUrlRequest) Send() (*GetGameSessionLogUrlOutput, error) {
+func (r GetGameSessionLogUrlRequest) Send(ctx context.Context) (*GetGameSessionLogUrlOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3428,7 +3471,7 @@ func (r GetGameSessionLogUrlRequest) Send() (*GetGameSessionLogUrlOutput, error)
 //
 //    // Example sending a request using the GetGameSessionLogUrlRequest method.
 //    req := client.GetGameSessionLogUrlRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3462,7 +3505,8 @@ type GetInstanceAccessRequest struct {
 }
 
 // Send marshals and sends the GetInstanceAccess API request.
-func (r GetInstanceAccessRequest) Send() (*GetInstanceAccessOutput, error) {
+func (r GetInstanceAccessRequest) Send(ctx context.Context) (*GetInstanceAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3493,7 +3537,7 @@ func (r GetInstanceAccessRequest) Send() (*GetInstanceAccessOutput, error) {
 //
 //    // Example sending a request using the GetInstanceAccessRequest method.
 //    req := client.GetInstanceAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3527,7 +3571,8 @@ type ListAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAliases API request.
-func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3561,7 +3606,7 @@ func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 //
 //    // Example sending a request using the ListAliasesRequest method.
 //    req := client.ListAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3595,7 +3640,8 @@ type ListBuildsRequest struct {
 }
 
 // Send marshals and sends the ListBuilds API request.
-func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
+func (r ListBuildsRequest) Send(ctx context.Context) (*ListBuildsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3628,7 +3674,7 @@ func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
 //
 //    // Example sending a request using the ListBuildsRequest method.
 //    req := client.ListBuildsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3662,7 +3708,8 @@ type ListFleetsRequest struct {
 }
 
 // Send marshals and sends the ListFleets API request.
-func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
+func (r ListFleetsRequest) Send(ctx context.Context) (*ListFleetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3722,7 +3769,7 @@ func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
 //
 //    // Example sending a request using the ListFleetsRequest method.
 //    req := client.ListFleetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3756,7 +3803,8 @@ type PutScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
-func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+func (r PutScalingPolicyRequest) Send(ctx context.Context) (*PutScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3867,7 +3915,7 @@ func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
 //
 //    // Example sending a request using the PutScalingPolicyRequest method.
 //    req := client.PutScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3901,7 +3949,8 @@ type RequestUploadCredentialsRequest struct {
 }
 
 // Send marshals and sends the RequestUploadCredentials API request.
-func (r RequestUploadCredentialsRequest) Send() (*RequestUploadCredentialsOutput, error) {
+func (r RequestUploadCredentialsRequest) Send(ctx context.Context) (*RequestUploadCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3923,7 +3972,7 @@ func (r RequestUploadCredentialsRequest) Send() (*RequestUploadCredentialsOutput
 //
 //    // Example sending a request using the RequestUploadCredentialsRequest method.
 //    req := client.RequestUploadCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3957,7 +4006,8 @@ type ResolveAliasRequest struct {
 }
 
 // Send marshals and sends the ResolveAlias API request.
-func (r ResolveAliasRequest) Send() (*ResolveAliasOutput, error) {
+func (r ResolveAliasRequest) Send(ctx context.Context) (*ResolveAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3987,7 +4037,7 @@ func (r ResolveAliasRequest) Send() (*ResolveAliasOutput, error) {
 //
 //    // Example sending a request using the ResolveAliasRequest method.
 //    req := client.ResolveAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4021,7 +4071,8 @@ type SearchGameSessionsRequest struct {
 }
 
 // Send marshals and sends the SearchGameSessions API request.
-func (r SearchGameSessionsRequest) Send() (*SearchGameSessionsOutput, error) {
+func (r SearchGameSessionsRequest) Send(ctx context.Context) (*SearchGameSessionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4107,7 +4158,7 @@ func (r SearchGameSessionsRequest) Send() (*SearchGameSessionsOutput, error) {
 //
 //    // Example sending a request using the SearchGameSessionsRequest method.
 //    req := client.SearchGameSessionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4141,7 +4192,8 @@ type StartFleetActionsRequest struct {
 }
 
 // Send marshals and sends the StartFleetActions API request.
-func (r StartFleetActionsRequest) Send() (*StartFleetActionsOutput, error) {
+func (r StartFleetActionsRequest) Send(ctx context.Context) (*StartFleetActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4186,7 +4238,7 @@ func (r StartFleetActionsRequest) Send() (*StartFleetActionsOutput, error) {
 //
 //    // Example sending a request using the StartFleetActionsRequest method.
 //    req := client.StartFleetActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4220,7 +4272,8 @@ type StartGameSessionPlacementRequest struct {
 }
 
 // Send marshals and sends the StartGameSessionPlacement API request.
-func (r StartGameSessionPlacementRequest) Send() (*StartGameSessionPlacementOutput, error) {
+func (r StartGameSessionPlacementRequest) Send(ctx context.Context) (*StartGameSessionPlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4298,7 +4351,7 @@ func (r StartGameSessionPlacementRequest) Send() (*StartGameSessionPlacementOutp
 //
 //    // Example sending a request using the StartGameSessionPlacementRequest method.
 //    req := client.StartGameSessionPlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4332,7 +4385,8 @@ type StartMatchBackfillRequest struct {
 }
 
 // Send marshals and sends the StartMatchBackfill API request.
-func (r StartMatchBackfillRequest) Send() (*StartMatchBackfillOutput, error) {
+func (r StartMatchBackfillRequest) Send(ctx context.Context) (*StartMatchBackfillOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4384,7 +4438,7 @@ func (r StartMatchBackfillRequest) Send() (*StartMatchBackfillOutput, error) {
 //
 //    // Example sending a request using the StartMatchBackfillRequest method.
 //    req := client.StartMatchBackfillRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4418,7 +4472,8 @@ type StartMatchmakingRequest struct {
 }
 
 // Send marshals and sends the StartMatchmaking API request.
-func (r StartMatchmakingRequest) Send() (*StartMatchmakingOutput, error) {
+func (r StartMatchmakingRequest) Send(ctx context.Context) (*StartMatchmakingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4506,7 +4561,7 @@ func (r StartMatchmakingRequest) Send() (*StartMatchmakingOutput, error) {
 //
 //    // Example sending a request using the StartMatchmakingRequest method.
 //    req := client.StartMatchmakingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4540,7 +4595,8 @@ type StopFleetActionsRequest struct {
 }
 
 // Send marshals and sends the StopFleetActions API request.
-func (r StopFleetActionsRequest) Send() (*StopFleetActionsOutput, error) {
+func (r StopFleetActionsRequest) Send(ctx context.Context) (*StopFleetActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4565,7 +4621,7 @@ func (r StopFleetActionsRequest) Send() (*StopFleetActionsOutput, error) {
 //
 //    // Example sending a request using the StopFleetActionsRequest method.
 //    req := client.StopFleetActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4599,7 +4655,8 @@ type StopGameSessionPlacementRequest struct {
 }
 
 // Send marshals and sends the StopGameSessionPlacement API request.
-func (r StopGameSessionPlacementRequest) Send() (*StopGameSessionPlacementOutput, error) {
+func (r StopGameSessionPlacementRequest) Send(ctx context.Context) (*StopGameSessionPlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4639,7 +4696,7 @@ func (r StopGameSessionPlacementRequest) Send() (*StopGameSessionPlacementOutput
 //
 //    // Example sending a request using the StopGameSessionPlacementRequest method.
 //    req := client.StopGameSessionPlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4673,7 +4730,8 @@ type StopMatchmakingRequest struct {
 }
 
 // Send marshals and sends the StopMatchmaking API request.
-func (r StopMatchmakingRequest) Send() (*StopMatchmakingOutput, error) {
+func (r StopMatchmakingRequest) Send(ctx context.Context) (*StopMatchmakingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4703,7 +4761,7 @@ func (r StopMatchmakingRequest) Send() (*StopMatchmakingOutput, error) {
 //
 //    // Example sending a request using the StopMatchmakingRequest method.
 //    req := client.StopMatchmakingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4737,7 +4795,8 @@ type UpdateAliasRequest struct {
 }
 
 // Send marshals and sends the UpdateAlias API request.
-func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4770,7 +4829,7 @@ func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 //
 //    // Example sending a request using the UpdateAliasRequest method.
 //    req := client.UpdateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4804,7 +4863,8 @@ type UpdateBuildRequest struct {
 }
 
 // Send marshals and sends the UpdateBuild API request.
-func (r UpdateBuildRequest) Send() (*UpdateBuildOutput, error) {
+func (r UpdateBuildRequest) Send(ctx context.Context) (*UpdateBuildOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4835,7 +4895,7 @@ func (r UpdateBuildRequest) Send() (*UpdateBuildOutput, error) {
 //
 //    // Example sending a request using the UpdateBuildRequest method.
 //    req := client.UpdateBuildRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4869,7 +4929,8 @@ type UpdateFleetAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateFleetAttributes API request.
-func (r UpdateFleetAttributesRequest) Send() (*UpdateFleetAttributesOutput, error) {
+func (r UpdateFleetAttributesRequest) Send(ctx context.Context) (*UpdateFleetAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4927,7 +4988,7 @@ func (r UpdateFleetAttributesRequest) Send() (*UpdateFleetAttributesOutput, erro
 //
 //    // Example sending a request using the UpdateFleetAttributesRequest method.
 //    req := client.UpdateFleetAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4961,7 +5022,8 @@ type UpdateFleetCapacityRequest struct {
 }
 
 // Send marshals and sends the UpdateFleetCapacity API request.
-func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
+func (r UpdateFleetCapacityRequest) Send(ctx context.Context) (*UpdateFleetCapacityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5032,7 +5094,7 @@ func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
 //
 //    // Example sending a request using the UpdateFleetCapacityRequest method.
 //    req := client.UpdateFleetCapacityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5066,7 +5128,8 @@ type UpdateFleetPortSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateFleetPortSettings API request.
-func (r UpdateFleetPortSettingsRequest) Send() (*UpdateFleetPortSettingsOutput, error) {
+func (r UpdateFleetPortSettingsRequest) Send(ctx context.Context) (*UpdateFleetPortSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5127,7 +5190,7 @@ func (r UpdateFleetPortSettingsRequest) Send() (*UpdateFleetPortSettingsOutput, 
 //
 //    // Example sending a request using the UpdateFleetPortSettingsRequest method.
 //    req := client.UpdateFleetPortSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5161,7 +5224,8 @@ type UpdateGameSessionRequest struct {
 }
 
 // Send marshals and sends the UpdateGameSession API request.
-func (r UpdateGameSessionRequest) Send() (*UpdateGameSessionOutput, error) {
+func (r UpdateGameSessionRequest) Send(ctx context.Context) (*UpdateGameSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5205,7 +5269,7 @@ func (r UpdateGameSessionRequest) Send() (*UpdateGameSessionOutput, error) {
 //
 //    // Example sending a request using the UpdateGameSessionRequest method.
 //    req := client.UpdateGameSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5239,7 +5303,8 @@ type UpdateGameSessionQueueRequest struct {
 }
 
 // Send marshals and sends the UpdateGameSessionQueue API request.
-func (r UpdateGameSessionQueueRequest) Send() (*UpdateGameSessionQueueOutput, error) {
+func (r UpdateGameSessionQueueRequest) Send(ctx context.Context) (*UpdateGameSessionQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5268,7 +5333,7 @@ func (r UpdateGameSessionQueueRequest) Send() (*UpdateGameSessionQueueOutput, er
 //
 //    // Example sending a request using the UpdateGameSessionQueueRequest method.
 //    req := client.UpdateGameSessionQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5302,7 +5367,8 @@ type UpdateMatchmakingConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateMatchmakingConfiguration API request.
-func (r UpdateMatchmakingConfigurationRequest) Send() (*UpdateMatchmakingConfigurationOutput, error) {
+func (r UpdateMatchmakingConfigurationRequest) Send(ctx context.Context) (*UpdateMatchmakingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5335,7 +5401,7 @@ func (r UpdateMatchmakingConfigurationRequest) Send() (*UpdateMatchmakingConfigu
 //
 //    // Example sending a request using the UpdateMatchmakingConfigurationRequest method.
 //    req := client.UpdateMatchmakingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5369,7 +5435,8 @@ type UpdateRuntimeConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateRuntimeConfiguration API request.
-func (r UpdateRuntimeConfigurationRequest) Send() (*UpdateRuntimeConfigurationOutput, error) {
+func (r UpdateRuntimeConfigurationRequest) Send(ctx context.Context) (*UpdateRuntimeConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5440,7 +5507,7 @@ func (r UpdateRuntimeConfigurationRequest) Send() (*UpdateRuntimeConfigurationOu
 //
 //    // Example sending a request using the UpdateRuntimeConfigurationRequest method.
 //    req := client.UpdateRuntimeConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5474,7 +5541,8 @@ type ValidateMatchmakingRuleSetRequest struct {
 }
 
 // Send marshals and sends the ValidateMatchmakingRuleSet API request.
-func (r ValidateMatchmakingRuleSetRequest) Send() (*ValidateMatchmakingRuleSetOutput, error) {
+func (r ValidateMatchmakingRuleSetRequest) Send(ctx context.Context) (*ValidateMatchmakingRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5508,7 +5576,7 @@ func (r ValidateMatchmakingRuleSetRequest) Send() (*ValidateMatchmakingRuleSetOu
 //
 //    // Example sending a request using the ValidateMatchmakingRuleSetRequest method.
 //    req := client.ValidateMatchmakingRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

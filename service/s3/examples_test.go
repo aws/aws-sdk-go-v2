@@ -3,6 +3,7 @@
 package s3_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExampleS3_AbortMultipartUploadRequest_shared00() {
 	}
 
 	req := svc.AbortMultipartUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -91,7 +92,7 @@ func ExampleS3_CompleteMultipartUploadRequest_shared00() {
 	}
 
 	req := svc.CompleteMultipartUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -126,7 +127,7 @@ func ExampleS3_CopyObjectRequest_shared00() {
 	}
 
 	req := svc.CopyObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -161,7 +162,7 @@ func ExampleS3_CreateBucketRequest_shared00() {
 	}
 
 	req := svc.CreateBucketRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -202,7 +203,7 @@ func ExampleS3_CreateBucketRequest_shared01() {
 	}
 
 	req := svc.CreateBucketRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -240,7 +241,7 @@ func ExampleS3_CreateMultipartUploadRequest_shared00() {
 	}
 
 	req := svc.CreateMultipartUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -273,7 +274,7 @@ func ExampleS3_DeleteBucketRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -306,7 +307,7 @@ func ExampleS3_DeleteBucketCorsRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketCorsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -339,7 +340,7 @@ func ExampleS3_DeleteBucketLifecycleRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketLifecycleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -372,7 +373,7 @@ func ExampleS3_DeleteBucketPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -405,7 +406,7 @@ func ExampleS3_DeleteBucketReplicationRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketReplicationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -438,7 +439,7 @@ func ExampleS3_DeleteBucketTaggingRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -471,7 +472,7 @@ func ExampleS3_DeleteBucketWebsiteRequest_shared00() {
 	}
 
 	req := svc.DeleteBucketWebsiteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -505,7 +506,7 @@ func ExampleS3_DeleteObjectRequest_shared00() {
 	}
 
 	req := svc.DeleteObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -539,7 +540,7 @@ func ExampleS3_DeleteObjectRequest_shared01() {
 	}
 
 	req := svc.DeleteObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -575,7 +576,7 @@ func ExampleS3_DeleteObjectTaggingRequest_shared00() {
 	}
 
 	req := svc.DeleteObjectTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -611,7 +612,7 @@ func ExampleS3_DeleteObjectTaggingRequest_shared01() {
 	}
 
 	req := svc.DeleteObjectTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -657,7 +658,7 @@ func ExampleS3_DeleteObjectsRequest_shared00() {
 	}
 
 	req := svc.DeleteObjectsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -705,7 +706,7 @@ func ExampleS3_DeleteObjectsRequest_shared01() {
 	}
 
 	req := svc.DeleteObjectsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -739,7 +740,7 @@ func ExampleS3_GetBucketCorsRequest_shared00() {
 	}
 
 	req := svc.GetBucketCorsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -772,7 +773,7 @@ func ExampleS3_GetBucketLifecycleRequest_shared00() {
 	}
 
 	req := svc.GetBucketLifecycleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -805,7 +806,7 @@ func ExampleS3_GetBucketLifecycleConfigurationRequest_shared00() {
 	}
 
 	req := svc.GetBucketLifecycleConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +839,7 @@ func ExampleS3_GetBucketLocationRequest_shared00() {
 	}
 
 	req := svc.GetBucketLocationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -871,7 +872,7 @@ func ExampleS3_GetBucketNotificationRequest_shared00() {
 	}
 
 	req := svc.GetBucketNotificationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -904,7 +905,7 @@ func ExampleS3_GetBucketNotificationRequest_shared01() {
 	}
 
 	req := svc.GetBucketNotificationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -937,7 +938,7 @@ func ExampleS3_GetBucketPolicyRequest_shared00() {
 	}
 
 	req := svc.GetBucketPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -970,7 +971,7 @@ func ExampleS3_GetBucketReplicationRequest_shared00() {
 	}
 
 	req := svc.GetBucketReplicationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1003,7 +1004,7 @@ func ExampleS3_GetBucketRequestPaymentRequest_shared00() {
 	}
 
 	req := svc.GetBucketRequestPaymentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1036,7 +1037,7 @@ func ExampleS3_GetBucketTaggingRequest_shared00() {
 	}
 
 	req := svc.GetBucketTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1069,7 +1070,7 @@ func ExampleS3_GetBucketVersioningRequest_shared00() {
 	}
 
 	req := svc.GetBucketVersioningRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1102,7 +1103,7 @@ func ExampleS3_GetBucketWebsiteRequest_shared00() {
 	}
 
 	req := svc.GetBucketWebsiteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1136,7 +1137,7 @@ func ExampleS3_GetObjectRequest_shared00() {
 	}
 
 	req := svc.GetObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1174,7 +1175,7 @@ func ExampleS3_GetObjectRequest_shared01() {
 	}
 
 	req := svc.GetObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1210,7 +1211,7 @@ func ExampleS3_GetObjectAclRequest_shared00() {
 	}
 
 	req := svc.GetObjectAclRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1248,7 +1249,7 @@ func ExampleS3_GetObjectTaggingRequest_shared00() {
 	}
 
 	req := svc.GetObjectTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1282,7 +1283,7 @@ func ExampleS3_GetObjectTaggingRequest_shared01() {
 	}
 
 	req := svc.GetObjectTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1316,7 +1317,7 @@ func ExampleS3_GetObjectTorrentRequest_shared00() {
 	}
 
 	req := svc.GetObjectTorrentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1349,7 +1350,7 @@ func ExampleS3_HeadBucketRequest_shared00() {
 	}
 
 	req := svc.HeadBucketRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1385,7 +1386,7 @@ func ExampleS3_HeadObjectRequest_shared00() {
 	}
 
 	req := svc.HeadObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1419,7 +1420,7 @@ func ExampleS3_ListBucketsRequest_shared00() {
 	input := &s3.ListBucketsInput{}
 
 	req := svc.ListBucketsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1452,7 +1453,7 @@ func ExampleS3_ListMultipartUploadsRequest_shared00() {
 	}
 
 	req := svc.ListMultipartUploadsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1489,7 +1490,7 @@ func ExampleS3_ListMultipartUploadsRequest_shared01() {
 	}
 
 	req := svc.ListMultipartUploadsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1526,7 +1527,7 @@ func ExampleS3_ListObjectVersionsRequest_shared00() {
 	}
 
 	req := svc.ListObjectVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1560,7 +1561,7 @@ func ExampleS3_ListObjectsRequest_shared00() {
 	}
 
 	req := svc.ListObjectsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1597,7 +1598,7 @@ func ExampleS3_ListObjectsV2Request_shared00() {
 	}
 
 	req := svc.ListObjectsV2Request(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1634,7 +1635,7 @@ func ExampleS3_ListPartsRequest_shared00() {
 	}
 
 	req := svc.ListPartsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1672,7 +1673,7 @@ func ExampleS3_PutBucketAclRequest_shared00() {
 	}
 
 	req := svc.PutBucketAclRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1739,7 +1740,7 @@ func ExampleS3_PutBucketCorsRequest_shared00() {
 	}
 
 	req := svc.PutBucketCorsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1787,7 +1788,7 @@ func ExampleS3_PutBucketLifecycleConfigurationRequest_shared00() {
 	}
 
 	req := svc.PutBucketLifecycleConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1833,7 +1834,7 @@ func ExampleS3_PutBucketLoggingRequest_shared00() {
 	}
 
 	req := svc.PutBucketLoggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1877,7 +1878,7 @@ func ExampleS3_PutBucketNotificationConfigurationRequest_shared00() {
 	}
 
 	req := svc.PutBucketNotificationConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1911,7 +1912,7 @@ func ExampleS3_PutBucketPolicyRequest_shared00() {
 	}
 
 	req := svc.PutBucketPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1953,7 +1954,7 @@ func ExampleS3_PutBucketReplicationRequest_shared00() {
 	}
 
 	req := svc.PutBucketReplicationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1990,7 +1991,7 @@ func ExampleS3_PutBucketRequestPaymentRequest_shared00() {
 	}
 
 	req := svc.PutBucketRequestPaymentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2035,7 +2036,7 @@ func ExampleS3_PutBucketTaggingRequest_shared00() {
 	}
 
 	req := svc.PutBucketTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2073,7 +2074,7 @@ func ExampleS3_PutBucketVersioningRequest_shared00() {
 	}
 
 	req := svc.PutBucketVersioningRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2114,7 +2115,7 @@ func ExampleS3_PutBucketWebsiteRequest_shared00() {
 	}
 
 	req := svc.PutBucketWebsiteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2150,7 +2151,7 @@ func ExampleS3_PutObjectRequest_shared00() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2187,7 +2188,7 @@ func ExampleS3_PutObjectRequest_shared01() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2226,7 +2227,7 @@ func ExampleS3_PutObjectRequest_shared02() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2266,7 +2267,7 @@ func ExampleS3_PutObjectRequest_shared03() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2303,7 +2304,7 @@ func ExampleS3_PutObjectRequest_shared04() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2341,7 +2342,7 @@ func ExampleS3_PutObjectRequest_shared05() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2379,7 +2380,7 @@ func ExampleS3_PutObjectRequest_shared06() {
 	}
 
 	req := svc.PutObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2417,7 +2418,7 @@ func ExampleS3_PutObjectAclRequest_shared00() {
 	}
 
 	req := svc.PutObjectAclRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2465,7 +2466,7 @@ func ExampleS3_PutObjectTaggingRequest_shared00() {
 	}
 
 	req := svc.PutObjectTaggingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2506,7 +2507,7 @@ func ExampleS3_RestoreObjectRequest_shared00() {
 	}
 
 	req := svc.RestoreObjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2547,7 +2548,7 @@ func ExampleS3_UploadPartRequest_shared00() {
 	}
 
 	req := svc.UploadPartRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2586,7 +2587,7 @@ func ExampleS3_UploadPartCopyRequest_shared00() {
 	}
 
 	req := svc.UploadPartCopyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2624,7 +2625,7 @@ func ExampleS3_UploadPartCopyRequest_shared01() {
 	}
 
 	req := svc.UploadPartCopyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

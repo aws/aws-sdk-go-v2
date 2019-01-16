@@ -3,6 +3,7 @@
 package elasticsearchservice
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -74,7 +76,8 @@ type CancelElasticsearchServiceSoftwareUpdateRequest struct {
 }
 
 // Send marshals and sends the CancelElasticsearchServiceSoftwareUpdate API request.
-func (r CancelElasticsearchServiceSoftwareUpdateRequest) Send() (*CancelElasticsearchServiceSoftwareUpdateOutput, error) {
+func (r CancelElasticsearchServiceSoftwareUpdateRequest) Send(ctx context.Context) (*CancelElasticsearchServiceSoftwareUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,7 @@ func (r CancelElasticsearchServiceSoftwareUpdateRequest) Send() (*CancelElastics
 //
 //    // Example sending a request using the CancelElasticsearchServiceSoftwareUpdateRequest method.
 //    req := client.CancelElasticsearchServiceSoftwareUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +127,8 @@ type CreateElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the CreateElasticsearchDomain API request.
-func (r CreateElasticsearchDomainRequest) Send() (*CreateElasticsearchDomainOutput, error) {
+func (r CreateElasticsearchDomainRequest) Send(ctx context.Context) (*CreateElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +146,7 @@ func (r CreateElasticsearchDomainRequest) Send() (*CreateElasticsearchDomainOutp
 //
 //    // Example sending a request using the CreateElasticsearchDomainRequest method.
 //    req := client.CreateElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +178,8 @@ type DeleteElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteElasticsearchDomain API request.
-func (r DeleteElasticsearchDomainRequest) Send() (*DeleteElasticsearchDomainOutput, error) {
+func (r DeleteElasticsearchDomainRequest) Send(ctx context.Context) (*DeleteElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +196,7 @@ func (r DeleteElasticsearchDomainRequest) Send() (*DeleteElasticsearchDomainOutp
 //
 //    // Example sending a request using the DeleteElasticsearchDomainRequest method.
 //    req := client.DeleteElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -223,7 +228,8 @@ type DeleteElasticsearchServiceRoleRequest struct {
 }
 
 // Send marshals and sends the DeleteElasticsearchServiceRole API request.
-func (r DeleteElasticsearchServiceRoleRequest) Send() (*DeleteElasticsearchServiceRoleOutput, error) {
+func (r DeleteElasticsearchServiceRoleRequest) Send(ctx context.Context) (*DeleteElasticsearchServiceRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +249,7 @@ func (r DeleteElasticsearchServiceRoleRequest) Send() (*DeleteElasticsearchServi
 //
 //    // Example sending a request using the DeleteElasticsearchServiceRoleRequest method.
 //    req := client.DeleteElasticsearchServiceRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -277,7 +283,8 @@ type DescribeElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchDomain API request.
-func (r DescribeElasticsearchDomainRequest) Send() (*DescribeElasticsearchDomainOutput, error) {
+func (r DescribeElasticsearchDomainRequest) Send(ctx context.Context) (*DescribeElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +301,7 @@ func (r DescribeElasticsearchDomainRequest) Send() (*DescribeElasticsearchDomain
 //
 //    // Example sending a request using the DescribeElasticsearchDomainRequest method.
 //    req := client.DescribeElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -326,7 +333,8 @@ type DescribeElasticsearchDomainConfigRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchDomainConfig API request.
-func (r DescribeElasticsearchDomainConfigRequest) Send() (*DescribeElasticsearchDomainConfigOutput, error) {
+func (r DescribeElasticsearchDomainConfigRequest) Send(ctx context.Context) (*DescribeElasticsearchDomainConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -344,7 +352,7 @@ func (r DescribeElasticsearchDomainConfigRequest) Send() (*DescribeElasticsearch
 //
 //    // Example sending a request using the DescribeElasticsearchDomainConfigRequest method.
 //    req := client.DescribeElasticsearchDomainConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -376,7 +384,8 @@ type DescribeElasticsearchDomainsRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchDomains API request.
-func (r DescribeElasticsearchDomainsRequest) Send() (*DescribeElasticsearchDomainsOutput, error) {
+func (r DescribeElasticsearchDomainsRequest) Send(ctx context.Context) (*DescribeElasticsearchDomainsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,7 +402,7 @@ func (r DescribeElasticsearchDomainsRequest) Send() (*DescribeElasticsearchDomai
 //
 //    // Example sending a request using the DescribeElasticsearchDomainsRequest method.
 //    req := client.DescribeElasticsearchDomainsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -425,7 +434,8 @@ type DescribeElasticsearchInstanceTypeLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchInstanceTypeLimits API request.
-func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send() (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send(ctx context.Context) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +453,7 @@ func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send() (*DescribeElastic
 //
 //    // Example sending a request using the DescribeElasticsearchInstanceTypeLimitsRequest method.
 //    req := client.DescribeElasticsearchInstanceTypeLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -475,7 +485,8 @@ type DescribeReservedElasticsearchInstanceOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedElasticsearchInstanceOfferings API request.
-func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send() (*DescribeReservedElasticsearchInstanceOfferingsOutput, error) {
+func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send(ctx context.Context) (*DescribeReservedElasticsearchInstanceOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,7 +502,7 @@ func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send() (*Describe
 //
 //    // Example sending a request using the DescribeReservedElasticsearchInstanceOfferingsRequest method.
 //    req := client.DescribeReservedElasticsearchInstanceOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -575,7 +586,8 @@ type DescribeReservedElasticsearchInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedElasticsearchInstances API request.
-func (r DescribeReservedElasticsearchInstancesRequest) Send() (*DescribeReservedElasticsearchInstancesOutput, error) {
+func (r DescribeReservedElasticsearchInstancesRequest) Send(ctx context.Context) (*DescribeReservedElasticsearchInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,7 +603,7 @@ func (r DescribeReservedElasticsearchInstancesRequest) Send() (*DescribeReserved
 //
 //    // Example sending a request using the DescribeReservedElasticsearchInstancesRequest method.
 //    req := client.DescribeReservedElasticsearchInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -675,7 +687,8 @@ type GetCompatibleElasticsearchVersionsRequest struct {
 }
 
 // Send marshals and sends the GetCompatibleElasticsearchVersions API request.
-func (r GetCompatibleElasticsearchVersionsRequest) Send() (*GetCompatibleElasticsearchVersionsOutput, error) {
+func (r GetCompatibleElasticsearchVersionsRequest) Send(ctx context.Context) (*GetCompatibleElasticsearchVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -693,7 +706,7 @@ func (r GetCompatibleElasticsearchVersionsRequest) Send() (*GetCompatibleElastic
 //
 //    // Example sending a request using the GetCompatibleElasticsearchVersionsRequest method.
 //    req := client.GetCompatibleElasticsearchVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -725,7 +738,8 @@ type GetUpgradeHistoryRequest struct {
 }
 
 // Send marshals and sends the GetUpgradeHistory API request.
-func (r GetUpgradeHistoryRequest) Send() (*GetUpgradeHistoryOutput, error) {
+func (r GetUpgradeHistoryRequest) Send(ctx context.Context) (*GetUpgradeHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -742,7 +756,7 @@ func (r GetUpgradeHistoryRequest) Send() (*GetUpgradeHistoryOutput, error) {
 //
 //    // Example sending a request using the GetUpgradeHistoryRequest method.
 //    req := client.GetUpgradeHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -826,7 +840,8 @@ type GetUpgradeStatusRequest struct {
 }
 
 // Send marshals and sends the GetUpgradeStatus API request.
-func (r GetUpgradeStatusRequest) Send() (*GetUpgradeStatusOutput, error) {
+func (r GetUpgradeStatusRequest) Send(ctx context.Context) (*GetUpgradeStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -843,7 +858,7 @@ func (r GetUpgradeStatusRequest) Send() (*GetUpgradeStatusOutput, error) {
 //
 //    // Example sending a request using the GetUpgradeStatusRequest method.
 //    req := client.GetUpgradeStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -875,7 +890,8 @@ type ListDomainNamesRequest struct {
 }
 
 // Send marshals and sends the ListDomainNames API request.
-func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
+func (r ListDomainNamesRequest) Send(ctx context.Context) (*ListDomainNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -892,7 +908,7 @@ func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
 //
 //    // Example sending a request using the ListDomainNamesRequest method.
 //    req := client.ListDomainNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -924,7 +940,8 @@ type ListElasticsearchInstanceTypesRequest struct {
 }
 
 // Send marshals and sends the ListElasticsearchInstanceTypes API request.
-func (r ListElasticsearchInstanceTypesRequest) Send() (*ListElasticsearchInstanceTypesOutput, error) {
+func (r ListElasticsearchInstanceTypesRequest) Send(ctx context.Context) (*ListElasticsearchInstanceTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -940,7 +957,7 @@ func (r ListElasticsearchInstanceTypesRequest) Send() (*ListElasticsearchInstanc
 //
 //    // Example sending a request using the ListElasticsearchInstanceTypesRequest method.
 //    req := client.ListElasticsearchInstanceTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1024,7 +1041,8 @@ type ListElasticsearchVersionsRequest struct {
 }
 
 // Send marshals and sends the ListElasticsearchVersions API request.
-func (r ListElasticsearchVersionsRequest) Send() (*ListElasticsearchVersionsOutput, error) {
+func (r ListElasticsearchVersionsRequest) Send(ctx context.Context) (*ListElasticsearchVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1040,7 +1058,7 @@ func (r ListElasticsearchVersionsRequest) Send() (*ListElasticsearchVersionsOutp
 //
 //    // Example sending a request using the ListElasticsearchVersionsRequest method.
 //    req := client.ListElasticsearchVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1124,7 +1142,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1140,7 +1159,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1172,7 +1191,8 @@ type PurchaseReservedElasticsearchInstanceOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedElasticsearchInstanceOffering API request.
-func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send() (*PurchaseReservedElasticsearchInstanceOfferingOutput, error) {
+func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send(ctx context.Context) (*PurchaseReservedElasticsearchInstanceOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1188,7 +1208,7 @@ func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send() (*PurchaseR
 //
 //    // Example sending a request using the PurchaseReservedElasticsearchInstanceOfferingRequest method.
 //    req := client.PurchaseReservedElasticsearchInstanceOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1220,7 +1240,8 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1236,7 +1257,7 @@ func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsRequest method.
 //    req := client.RemoveTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1270,7 +1291,8 @@ type StartElasticsearchServiceSoftwareUpdateRequest struct {
 }
 
 // Send marshals and sends the StartElasticsearchServiceSoftwareUpdate API request.
-func (r StartElasticsearchServiceSoftwareUpdateRequest) Send() (*StartElasticsearchServiceSoftwareUpdateOutput, error) {
+func (r StartElasticsearchServiceSoftwareUpdateRequest) Send(ctx context.Context) (*StartElasticsearchServiceSoftwareUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1286,7 +1308,7 @@ func (r StartElasticsearchServiceSoftwareUpdateRequest) Send() (*StartElasticsea
 //
 //    // Example sending a request using the StartElasticsearchServiceSoftwareUpdateRequest method.
 //    req := client.StartElasticsearchServiceSoftwareUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1318,7 +1340,8 @@ type UpdateElasticsearchDomainConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateElasticsearchDomainConfig API request.
-func (r UpdateElasticsearchDomainConfigRequest) Send() (*UpdateElasticsearchDomainConfigOutput, error) {
+func (r UpdateElasticsearchDomainConfigRequest) Send(ctx context.Context) (*UpdateElasticsearchDomainConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1335,7 +1358,7 @@ func (r UpdateElasticsearchDomainConfigRequest) Send() (*UpdateElasticsearchDoma
 //
 //    // Example sending a request using the UpdateElasticsearchDomainConfigRequest method.
 //    req := client.UpdateElasticsearchDomainConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1367,7 +1390,8 @@ type UpgradeElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the UpgradeElasticsearchDomain API request.
-func (r UpgradeElasticsearchDomainRequest) Send() (*UpgradeElasticsearchDomainOutput, error) {
+func (r UpgradeElasticsearchDomainRequest) Send(ctx context.Context) (*UpgradeElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1384,7 +1408,7 @@ func (r UpgradeElasticsearchDomainRequest) Send() (*UpgradeElasticsearchDomainOu
 //
 //    // Example sending a request using the UpgradeElasticsearchDomainRequest method.
 //    req := client.UpgradeElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

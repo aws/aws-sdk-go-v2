@@ -3,6 +3,7 @@
 package machinelearning
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type CreateBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the CreateBatchPrediction API request.
-func (r CreateBatchPredictionRequest) Send() (*CreateBatchPredictionOutput, error) {
+func (r CreateBatchPredictionRequest) Send(ctx context.Context) (*CreateBatchPredictionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,7 +102,7 @@ func (r CreateBatchPredictionRequest) Send() (*CreateBatchPredictionOutput, erro
 //
 //    // Example sending a request using the CreateBatchPredictionRequest method.
 //    req := client.CreateBatchPredictionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -131,7 +134,8 @@ type CreateDataSourceFromRDSRequest struct {
 }
 
 // Send marshals and sends the CreateDataSourceFromRDS API request.
-func (r CreateDataSourceFromRDSRequest) Send() (*CreateDataSourceFromRDSOutput, error) {
+func (r CreateDataSourceFromRDSRequest) Send(ctx context.Context) (*CreateDataSourceFromRDSOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +164,7 @@ func (r CreateDataSourceFromRDSRequest) Send() (*CreateDataSourceFromRDSOutput, 
 //
 //    // Example sending a request using the CreateDataSourceFromRDSRequest method.
 //    req := client.CreateDataSourceFromRDSRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -192,7 +196,8 @@ type CreateDataSourceFromRedshiftRequest struct {
 }
 
 // Send marshals and sends the CreateDataSourceFromRedshift API request.
-func (r CreateDataSourceFromRedshiftRequest) Send() (*CreateDataSourceFromRedshiftOutput, error) {
+func (r CreateDataSourceFromRedshiftRequest) Send(ctx context.Context) (*CreateDataSourceFromRedshiftOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -240,7 +245,7 @@ func (r CreateDataSourceFromRedshiftRequest) Send() (*CreateDataSourceFromRedshi
 //
 //    // Example sending a request using the CreateDataSourceFromRedshiftRequest method.
 //    req := client.CreateDataSourceFromRedshiftRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -272,7 +277,8 @@ type CreateDataSourceFromS3Request struct {
 }
 
 // Send marshals and sends the CreateDataSourceFromS3 API request.
-func (r CreateDataSourceFromS3Request) Send() (*CreateDataSourceFromS3Output, error) {
+func (r CreateDataSourceFromS3Request) Send(ctx context.Context) (*CreateDataSourceFromS3Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -315,7 +321,7 @@ func (r CreateDataSourceFromS3Request) Send() (*CreateDataSourceFromS3Output, er
 //
 //    // Example sending a request using the CreateDataSourceFromS3Request method.
 //    req := client.CreateDataSourceFromS3Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -347,7 +353,8 @@ type CreateEvaluationRequest struct {
 }
 
 // Send marshals and sends the CreateEvaluation API request.
-func (r CreateEvaluationRequest) Send() (*CreateEvaluationOutput, error) {
+func (r CreateEvaluationRequest) Send(ctx context.Context) (*CreateEvaluationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -378,7 +385,7 @@ func (r CreateEvaluationRequest) Send() (*CreateEvaluationOutput, error) {
 //
 //    // Example sending a request using the CreateEvaluationRequest method.
 //    req := client.CreateEvaluationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -410,7 +417,8 @@ type CreateMLModelRequest struct {
 }
 
 // Send marshals and sends the CreateMLModel API request.
-func (r CreateMLModelRequest) Send() (*CreateMLModelOutput, error) {
+func (r CreateMLModelRequest) Send(ctx context.Context) (*CreateMLModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -442,7 +450,7 @@ func (r CreateMLModelRequest) Send() (*CreateMLModelOutput, error) {
 //
 //    // Example sending a request using the CreateMLModelRequest method.
 //    req := client.CreateMLModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -474,7 +482,8 @@ type CreateRealtimeEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateRealtimeEndpoint API request.
-func (r CreateRealtimeEndpointRequest) Send() (*CreateRealtimeEndpointOutput, error) {
+func (r CreateRealtimeEndpointRequest) Send(ctx context.Context) (*CreateRealtimeEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -492,7 +501,7 @@ func (r CreateRealtimeEndpointRequest) Send() (*CreateRealtimeEndpointOutput, er
 //
 //    // Example sending a request using the CreateRealtimeEndpointRequest method.
 //    req := client.CreateRealtimeEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -524,7 +533,8 @@ type DeleteBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the DeleteBatchPrediction API request.
-func (r DeleteBatchPredictionRequest) Send() (*DeleteBatchPredictionOutput, error) {
+func (r DeleteBatchPredictionRequest) Send(ctx context.Context) (*DeleteBatchPredictionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -545,7 +555,7 @@ func (r DeleteBatchPredictionRequest) Send() (*DeleteBatchPredictionOutput, erro
 //
 //    // Example sending a request using the DeleteBatchPredictionRequest method.
 //    req := client.DeleteBatchPredictionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -577,7 +587,8 @@ type DeleteDataSourceRequest struct {
 }
 
 // Send marshals and sends the DeleteDataSource API request.
-func (r DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
+func (r DeleteDataSourceRequest) Send(ctx context.Context) (*DeleteDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -598,7 +609,7 @@ func (r DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
 //
 //    // Example sending a request using the DeleteDataSourceRequest method.
 //    req := client.DeleteDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -630,7 +641,8 @@ type DeleteEvaluationRequest struct {
 }
 
 // Send marshals and sends the DeleteEvaluation API request.
-func (r DeleteEvaluationRequest) Send() (*DeleteEvaluationOutput, error) {
+func (r DeleteEvaluationRequest) Send(ctx context.Context) (*DeleteEvaluationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,7 +663,7 @@ func (r DeleteEvaluationRequest) Send() (*DeleteEvaluationOutput, error) {
 //
 //    // Example sending a request using the DeleteEvaluationRequest method.
 //    req := client.DeleteEvaluationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -683,7 +695,8 @@ type DeleteMLModelRequest struct {
 }
 
 // Send marshals and sends the DeleteMLModel API request.
-func (r DeleteMLModelRequest) Send() (*DeleteMLModelOutput, error) {
+func (r DeleteMLModelRequest) Send(ctx context.Context) (*DeleteMLModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -704,7 +717,7 @@ func (r DeleteMLModelRequest) Send() (*DeleteMLModelOutput, error) {
 //
 //    // Example sending a request using the DeleteMLModelRequest method.
 //    req := client.DeleteMLModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -736,7 +749,8 @@ type DeleteRealtimeEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteRealtimeEndpoint API request.
-func (r DeleteRealtimeEndpointRequest) Send() (*DeleteRealtimeEndpointOutput, error) {
+func (r DeleteRealtimeEndpointRequest) Send(ctx context.Context) (*DeleteRealtimeEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -752,7 +766,7 @@ func (r DeleteRealtimeEndpointRequest) Send() (*DeleteRealtimeEndpointOutput, er
 //
 //    // Example sending a request using the DeleteRealtimeEndpointRequest method.
 //    req := client.DeleteRealtimeEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -784,7 +798,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -803,7 +818,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -835,7 +850,8 @@ type DescribeBatchPredictionsRequest struct {
 }
 
 // Send marshals and sends the DescribeBatchPredictions API request.
-func (r DescribeBatchPredictionsRequest) Send() (*DescribeBatchPredictionsOutput, error) {
+func (r DescribeBatchPredictionsRequest) Send(ctx context.Context) (*DescribeBatchPredictionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -852,7 +868,7 @@ func (r DescribeBatchPredictionsRequest) Send() (*DescribeBatchPredictionsOutput
 //
 //    // Example sending a request using the DescribeBatchPredictionsRequest method.
 //    req := client.DescribeBatchPredictionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -936,7 +952,8 @@ type DescribeDataSourcesRequest struct {
 }
 
 // Send marshals and sends the DescribeDataSources API request.
-func (r DescribeDataSourcesRequest) Send() (*DescribeDataSourcesOutput, error) {
+func (r DescribeDataSourcesRequest) Send(ctx context.Context) (*DescribeDataSourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -952,7 +969,7 @@ func (r DescribeDataSourcesRequest) Send() (*DescribeDataSourcesOutput, error) {
 //
 //    // Example sending a request using the DescribeDataSourcesRequest method.
 //    req := client.DescribeDataSourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1036,7 +1053,8 @@ type DescribeEvaluationsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvaluations API request.
-func (r DescribeEvaluationsRequest) Send() (*DescribeEvaluationsOutput, error) {
+func (r DescribeEvaluationsRequest) Send(ctx context.Context) (*DescribeEvaluationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1053,7 +1071,7 @@ func (r DescribeEvaluationsRequest) Send() (*DescribeEvaluationsOutput, error) {
 //
 //    // Example sending a request using the DescribeEvaluationsRequest method.
 //    req := client.DescribeEvaluationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1137,7 +1155,8 @@ type DescribeMLModelsRequest struct {
 }
 
 // Send marshals and sends the DescribeMLModels API request.
-func (r DescribeMLModelsRequest) Send() (*DescribeMLModelsOutput, error) {
+func (r DescribeMLModelsRequest) Send(ctx context.Context) (*DescribeMLModelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1153,7 +1172,7 @@ func (r DescribeMLModelsRequest) Send() (*DescribeMLModelsOutput, error) {
 //
 //    // Example sending a request using the DescribeMLModelsRequest method.
 //    req := client.DescribeMLModelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1237,7 +1256,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1253,7 +1273,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1285,7 +1305,8 @@ type GetBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the GetBatchPrediction API request.
-func (r GetBatchPredictionRequest) Send() (*GetBatchPredictionOutput, error) {
+func (r GetBatchPredictionRequest) Send(ctx context.Context) (*GetBatchPredictionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1302,7 +1323,7 @@ func (r GetBatchPredictionRequest) Send() (*GetBatchPredictionOutput, error) {
 //
 //    // Example sending a request using the GetBatchPredictionRequest method.
 //    req := client.GetBatchPredictionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1334,7 +1355,8 @@ type GetDataSourceRequest struct {
 }
 
 // Send marshals and sends the GetDataSource API request.
-func (r GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
+func (r GetDataSourceRequest) Send(ctx context.Context) (*GetDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1355,7 +1377,7 @@ func (r GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
 //
 //    // Example sending a request using the GetDataSourceRequest method.
 //    req := client.GetDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1387,7 +1409,8 @@ type GetEvaluationRequest struct {
 }
 
 // Send marshals and sends the GetEvaluation API request.
-func (r GetEvaluationRequest) Send() (*GetEvaluationOutput, error) {
+func (r GetEvaluationRequest) Send(ctx context.Context) (*GetEvaluationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1404,7 +1427,7 @@ func (r GetEvaluationRequest) Send() (*GetEvaluationOutput, error) {
 //
 //    // Example sending a request using the GetEvaluationRequest method.
 //    req := client.GetEvaluationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1436,7 +1459,8 @@ type GetMLModelRequest struct {
 }
 
 // Send marshals and sends the GetMLModel API request.
-func (r GetMLModelRequest) Send() (*GetMLModelOutput, error) {
+func (r GetMLModelRequest) Send(ctx context.Context) (*GetMLModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1455,7 +1479,7 @@ func (r GetMLModelRequest) Send() (*GetMLModelOutput, error) {
 //
 //    // Example sending a request using the GetMLModelRequest method.
 //    req := client.GetMLModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1487,7 +1511,8 @@ type PredictRequest struct {
 }
 
 // Send marshals and sends the Predict API request.
-func (r PredictRequest) Send() (*PredictOutput, error) {
+func (r PredictRequest) Send(ctx context.Context) (*PredictOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1506,7 +1531,7 @@ func (r PredictRequest) Send() (*PredictOutput, error) {
 //
 //    // Example sending a request using the PredictRequest method.
 //    req := client.PredictRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1538,7 +1563,8 @@ type UpdateBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the UpdateBatchPrediction API request.
-func (r UpdateBatchPredictionRequest) Send() (*UpdateBatchPredictionOutput, error) {
+func (r UpdateBatchPredictionRequest) Send(ctx context.Context) (*UpdateBatchPredictionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1557,7 +1583,7 @@ func (r UpdateBatchPredictionRequest) Send() (*UpdateBatchPredictionOutput, erro
 //
 //    // Example sending a request using the UpdateBatchPredictionRequest method.
 //    req := client.UpdateBatchPredictionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1589,7 +1615,8 @@ type UpdateDataSourceRequest struct {
 }
 
 // Send marshals and sends the UpdateDataSource API request.
-func (r UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
+func (r UpdateDataSourceRequest) Send(ctx context.Context) (*UpdateDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1608,7 +1635,7 @@ func (r UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
 //
 //    // Example sending a request using the UpdateDataSourceRequest method.
 //    req := client.UpdateDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1640,7 +1667,8 @@ type UpdateEvaluationRequest struct {
 }
 
 // Send marshals and sends the UpdateEvaluation API request.
-func (r UpdateEvaluationRequest) Send() (*UpdateEvaluationOutput, error) {
+func (r UpdateEvaluationRequest) Send(ctx context.Context) (*UpdateEvaluationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1659,7 +1687,7 @@ func (r UpdateEvaluationRequest) Send() (*UpdateEvaluationOutput, error) {
 //
 //    // Example sending a request using the UpdateEvaluationRequest method.
 //    req := client.UpdateEvaluationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1691,7 +1719,8 @@ type UpdateMLModelRequest struct {
 }
 
 // Send marshals and sends the UpdateMLModel API request.
-func (r UpdateMLModelRequest) Send() (*UpdateMLModelOutput, error) {
+func (r UpdateMLModelRequest) Send(ctx context.Context) (*UpdateMLModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1710,7 +1739,7 @@ func (r UpdateMLModelRequest) Send() (*UpdateMLModelOutput, error) {
 //
 //    // Example sending a request using the UpdateMLModelRequest method.
 //    req := client.UpdateMLModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

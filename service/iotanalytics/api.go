@@ -3,6 +3,7 @@
 package iotanalytics
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type BatchPutMessageRequest struct {
 }
 
 // Send marshals and sends the BatchPutMessage API request.
-func (r BatchPutMessageRequest) Send() (*BatchPutMessageOutput, error) {
+func (r BatchPutMessageRequest) Send(ctx context.Context) (*BatchPutMessageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r BatchPutMessageRequest) Send() (*BatchPutMessageOutput, error) {
 //
 //    // Example sending a request using the BatchPutMessageRequest method.
 //    req := client.BatchPutMessageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type CancelPipelineReprocessingRequest struct {
 }
 
 // Send marshals and sends the CancelPipelineReprocessing API request.
-func (r CancelPipelineReprocessingRequest) Send() (*CancelPipelineReprocessingOutput, error) {
+func (r CancelPipelineReprocessingRequest) Send(ctx context.Context) (*CancelPipelineReprocessingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r CancelPipelineReprocessingRequest) Send() (*CancelPipelineReprocessingOu
 //
 //    // Example sending a request using the CancelPipelineReprocessingRequest method.
 //    req := client.CancelPipelineReprocessingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type CreateChannelRequest struct {
 }
 
 // Send marshals and sends the CreateChannel API request.
-func (r CreateChannelRequest) Send() (*CreateChannelOutput, error) {
+func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +143,7 @@ func (r CreateChannelRequest) Send() (*CreateChannelOutput, error) {
 //
 //    // Example sending a request using the CreateChannelRequest method.
 //    req := client.CreateChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +177,8 @@ type CreateDatasetRequest struct {
 }
 
 // Send marshals and sends the CreateDataset API request.
-func (r CreateDatasetRequest) Send() (*CreateDatasetOutput, error) {
+func (r CreateDatasetRequest) Send(ctx context.Context) (*CreateDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +198,7 @@ func (r CreateDatasetRequest) Send() (*CreateDatasetOutput, error) {
 //
 //    // Example sending a request using the CreateDatasetRequest method.
 //    req := client.CreateDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -227,7 +232,8 @@ type CreateDatasetContentRequest struct {
 }
 
 // Send marshals and sends the CreateDatasetContent API request.
-func (r CreateDatasetContentRequest) Send() (*CreateDatasetContentOutput, error) {
+func (r CreateDatasetContentRequest) Send(ctx context.Context) (*CreateDatasetContentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +249,7 @@ func (r CreateDatasetContentRequest) Send() (*CreateDatasetContentOutput, error)
 //
 //    // Example sending a request using the CreateDatasetContentRequest method.
 //    req := client.CreateDatasetContentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -277,7 +283,8 @@ type CreateDatastoreRequest struct {
 }
 
 // Send marshals and sends the CreateDatastore API request.
-func (r CreateDatastoreRequest) Send() (*CreateDatastoreOutput, error) {
+func (r CreateDatastoreRequest) Send(ctx context.Context) (*CreateDatastoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -293,7 +300,7 @@ func (r CreateDatastoreRequest) Send() (*CreateDatastoreOutput, error) {
 //
 //    // Example sending a request using the CreateDatastoreRequest method.
 //    req := client.CreateDatastoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -327,7 +334,8 @@ type CreatePipelineRequest struct {
 }
 
 // Send marshals and sends the CreatePipeline API request.
-func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -344,7 +352,7 @@ func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
 //
 //    // Example sending a request using the CreatePipelineRequest method.
 //    req := client.CreatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -378,7 +386,8 @@ type DeleteChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteChannel API request.
-func (r DeleteChannelRequest) Send() (*DeleteChannelOutput, error) {
+func (r DeleteChannelRequest) Send(ctx context.Context) (*DeleteChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -394,7 +403,7 @@ func (r DeleteChannelRequest) Send() (*DeleteChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteChannelRequest method.
 //    req := client.DeleteChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -430,7 +439,8 @@ type DeleteDatasetRequest struct {
 }
 
 // Send marshals and sends the DeleteDataset API request.
-func (r DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
+func (r DeleteDatasetRequest) Send(ctx context.Context) (*DeleteDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -449,7 +459,7 @@ func (r DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
 //
 //    // Example sending a request using the DeleteDatasetRequest method.
 //    req := client.DeleteDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -485,7 +495,8 @@ type DeleteDatasetContentRequest struct {
 }
 
 // Send marshals and sends the DeleteDatasetContent API request.
-func (r DeleteDatasetContentRequest) Send() (*DeleteDatasetContentOutput, error) {
+func (r DeleteDatasetContentRequest) Send(ctx context.Context) (*DeleteDatasetContentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +512,7 @@ func (r DeleteDatasetContentRequest) Send() (*DeleteDatasetContentOutput, error)
 //
 //    // Example sending a request using the DeleteDatasetContentRequest method.
 //    req := client.DeleteDatasetContentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -537,7 +548,8 @@ type DeleteDatastoreRequest struct {
 }
 
 // Send marshals and sends the DeleteDatastore API request.
-func (r DeleteDatastoreRequest) Send() (*DeleteDatastoreOutput, error) {
+func (r DeleteDatastoreRequest) Send(ctx context.Context) (*DeleteDatastoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -553,7 +565,7 @@ func (r DeleteDatastoreRequest) Send() (*DeleteDatastoreOutput, error) {
 //
 //    // Example sending a request using the DeleteDatastoreRequest method.
 //    req := client.DeleteDatastoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -589,7 +601,8 @@ type DeletePipelineRequest struct {
 }
 
 // Send marshals and sends the DeletePipeline API request.
-func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -605,7 +618,7 @@ func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
 //
 //    // Example sending a request using the DeletePipelineRequest method.
 //    req := client.DeletePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -641,7 +654,8 @@ type DescribeChannelRequest struct {
 }
 
 // Send marshals and sends the DescribeChannel API request.
-func (r DescribeChannelRequest) Send() (*DescribeChannelOutput, error) {
+func (r DescribeChannelRequest) Send(ctx context.Context) (*DescribeChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -657,7 +671,7 @@ func (r DescribeChannelRequest) Send() (*DescribeChannelOutput, error) {
 //
 //    // Example sending a request using the DescribeChannelRequest method.
 //    req := client.DescribeChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -691,7 +705,8 @@ type DescribeDatasetRequest struct {
 }
 
 // Send marshals and sends the DescribeDataset API request.
-func (r DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
+func (r DescribeDatasetRequest) Send(ctx context.Context) (*DescribeDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -707,7 +722,7 @@ func (r DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
 //
 //    // Example sending a request using the DescribeDatasetRequest method.
 //    req := client.DescribeDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -741,7 +756,8 @@ type DescribeDatastoreRequest struct {
 }
 
 // Send marshals and sends the DescribeDatastore API request.
-func (r DescribeDatastoreRequest) Send() (*DescribeDatastoreOutput, error) {
+func (r DescribeDatastoreRequest) Send(ctx context.Context) (*DescribeDatastoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -757,7 +773,7 @@ func (r DescribeDatastoreRequest) Send() (*DescribeDatastoreOutput, error) {
 //
 //    // Example sending a request using the DescribeDatastoreRequest method.
 //    req := client.DescribeDatastoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -791,7 +807,8 @@ type DescribeLoggingOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeLoggingOptions API request.
-func (r DescribeLoggingOptionsRequest) Send() (*DescribeLoggingOptionsOutput, error) {
+func (r DescribeLoggingOptionsRequest) Send(ctx context.Context) (*DescribeLoggingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -807,7 +824,7 @@ func (r DescribeLoggingOptionsRequest) Send() (*DescribeLoggingOptionsOutput, er
 //
 //    // Example sending a request using the DescribeLoggingOptionsRequest method.
 //    req := client.DescribeLoggingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -841,7 +858,8 @@ type DescribePipelineRequest struct {
 }
 
 // Send marshals and sends the DescribePipeline API request.
-func (r DescribePipelineRequest) Send() (*DescribePipelineOutput, error) {
+func (r DescribePipelineRequest) Send(ctx context.Context) (*DescribePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -857,7 +875,7 @@ func (r DescribePipelineRequest) Send() (*DescribePipelineOutput, error) {
 //
 //    // Example sending a request using the DescribePipelineRequest method.
 //    req := client.DescribePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -891,7 +909,8 @@ type GetDatasetContentRequest struct {
 }
 
 // Send marshals and sends the GetDatasetContent API request.
-func (r GetDatasetContentRequest) Send() (*GetDatasetContentOutput, error) {
+func (r GetDatasetContentRequest) Send(ctx context.Context) (*GetDatasetContentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -907,7 +926,7 @@ func (r GetDatasetContentRequest) Send() (*GetDatasetContentOutput, error) {
 //
 //    // Example sending a request using the GetDatasetContentRequest method.
 //    req := client.GetDatasetContentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -941,7 +960,8 @@ type ListChannelsRequest struct {
 }
 
 // Send marshals and sends the ListChannels API request.
-func (r ListChannelsRequest) Send() (*ListChannelsOutput, error) {
+func (r ListChannelsRequest) Send(ctx context.Context) (*ListChannelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -957,7 +977,7 @@ func (r ListChannelsRequest) Send() (*ListChannelsOutput, error) {
 //
 //    // Example sending a request using the ListChannelsRequest method.
 //    req := client.ListChannelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1043,7 +1063,8 @@ type ListDatasetContentsRequest struct {
 }
 
 // Send marshals and sends the ListDatasetContents API request.
-func (r ListDatasetContentsRequest) Send() (*ListDatasetContentsOutput, error) {
+func (r ListDatasetContentsRequest) Send(ctx context.Context) (*ListDatasetContentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1059,7 +1080,7 @@ func (r ListDatasetContentsRequest) Send() (*ListDatasetContentsOutput, error) {
 //
 //    // Example sending a request using the ListDatasetContentsRequest method.
 //    req := client.ListDatasetContentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1145,7 +1166,8 @@ type ListDatasetsRequest struct {
 }
 
 // Send marshals and sends the ListDatasets API request.
-func (r ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
+func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,7 +1183,7 @@ func (r ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
 //
 //    // Example sending a request using the ListDatasetsRequest method.
 //    req := client.ListDatasetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1247,7 +1269,8 @@ type ListDatastoresRequest struct {
 }
 
 // Send marshals and sends the ListDatastores API request.
-func (r ListDatastoresRequest) Send() (*ListDatastoresOutput, error) {
+func (r ListDatastoresRequest) Send(ctx context.Context) (*ListDatastoresOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1263,7 +1286,7 @@ func (r ListDatastoresRequest) Send() (*ListDatastoresOutput, error) {
 //
 //    // Example sending a request using the ListDatastoresRequest method.
 //    req := client.ListDatastoresRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1349,7 +1372,8 @@ type ListPipelinesRequest struct {
 }
 
 // Send marshals and sends the ListPipelines API request.
-func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1365,7 +1389,7 @@ func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
 //
 //    // Example sending a request using the ListPipelinesRequest method.
 //    req := client.ListPipelinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1451,7 +1475,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1467,7 +1492,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1501,7 +1526,8 @@ type PutLoggingOptionsRequest struct {
 }
 
 // Send marshals and sends the PutLoggingOptions API request.
-func (r PutLoggingOptionsRequest) Send() (*PutLoggingOptionsOutput, error) {
+func (r PutLoggingOptionsRequest) Send(ctx context.Context) (*PutLoggingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1523,7 +1549,7 @@ func (r PutLoggingOptionsRequest) Send() (*PutLoggingOptionsOutput, error) {
 //
 //    // Example sending a request using the PutLoggingOptionsRequest method.
 //    req := client.PutLoggingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1559,7 +1585,8 @@ type RunPipelineActivityRequest struct {
 }
 
 // Send marshals and sends the RunPipelineActivity API request.
-func (r RunPipelineActivityRequest) Send() (*RunPipelineActivityOutput, error) {
+func (r RunPipelineActivityRequest) Send(ctx context.Context) (*RunPipelineActivityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1575,7 +1602,7 @@ func (r RunPipelineActivityRequest) Send() (*RunPipelineActivityOutput, error) {
 //
 //    // Example sending a request using the RunPipelineActivityRequest method.
 //    req := client.RunPipelineActivityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1609,7 +1636,8 @@ type SampleChannelDataRequest struct {
 }
 
 // Send marshals and sends the SampleChannelData API request.
-func (r SampleChannelDataRequest) Send() (*SampleChannelDataOutput, error) {
+func (r SampleChannelDataRequest) Send(ctx context.Context) (*SampleChannelDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1626,7 +1654,7 @@ func (r SampleChannelDataRequest) Send() (*SampleChannelDataOutput, error) {
 //
 //    // Example sending a request using the SampleChannelDataRequest method.
 //    req := client.SampleChannelDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1660,7 +1688,8 @@ type StartPipelineReprocessingRequest struct {
 }
 
 // Send marshals and sends the StartPipelineReprocessing API request.
-func (r StartPipelineReprocessingRequest) Send() (*StartPipelineReprocessingOutput, error) {
+func (r StartPipelineReprocessingRequest) Send(ctx context.Context) (*StartPipelineReprocessingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1676,7 +1705,7 @@ func (r StartPipelineReprocessingRequest) Send() (*StartPipelineReprocessingOutp
 //
 //    // Example sending a request using the StartPipelineReprocessingRequest method.
 //    req := client.StartPipelineReprocessingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1710,7 +1739,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1727,7 +1757,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1761,7 +1791,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1777,7 +1808,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1811,7 +1842,8 @@ type UpdateChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateChannel API request.
-func (r UpdateChannelRequest) Send() (*UpdateChannelOutput, error) {
+func (r UpdateChannelRequest) Send(ctx context.Context) (*UpdateChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1827,7 +1859,7 @@ func (r UpdateChannelRequest) Send() (*UpdateChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateChannelRequest method.
 //    req := client.UpdateChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1863,7 +1895,8 @@ type UpdateDatasetRequest struct {
 }
 
 // Send marshals and sends the UpdateDataset API request.
-func (r UpdateDatasetRequest) Send() (*UpdateDatasetOutput, error) {
+func (r UpdateDatasetRequest) Send(ctx context.Context) (*UpdateDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1879,7 +1912,7 @@ func (r UpdateDatasetRequest) Send() (*UpdateDatasetOutput, error) {
 //
 //    // Example sending a request using the UpdateDatasetRequest method.
 //    req := client.UpdateDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1915,7 +1948,8 @@ type UpdateDatastoreRequest struct {
 }
 
 // Send marshals and sends the UpdateDatastore API request.
-func (r UpdateDatastoreRequest) Send() (*UpdateDatastoreOutput, error) {
+func (r UpdateDatastoreRequest) Send(ctx context.Context) (*UpdateDatastoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1931,7 +1965,7 @@ func (r UpdateDatastoreRequest) Send() (*UpdateDatastoreOutput, error) {
 //
 //    // Example sending a request using the UpdateDatastoreRequest method.
 //    req := client.UpdateDatastoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1967,7 +2001,8 @@ type UpdatePipelineRequest struct {
 }
 
 // Send marshals and sends the UpdatePipeline API request.
-func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1983,7 +2018,7 @@ func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
 //
 //    // Example sending a request using the UpdatePipelineRequest method.
 //    req := client.UpdatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

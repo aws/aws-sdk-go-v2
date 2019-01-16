@@ -3,6 +3,7 @@
 package opsworkscm
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type AssociateNodeRequest struct {
 }
 
 // Send marshals and sends the AssociateNode API request.
-func (r AssociateNodeRequest) Send() (*AssociateNodeOutput, error) {
+func (r AssociateNodeRequest) Send(ctx context.Context) (*AssociateNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -55,7 +57,7 @@ func (r AssociateNodeRequest) Send() (*AssociateNodeOutput, error) {
 //
 //    // Example sending a request using the AssociateNodeRequest method.
 //    req := client.AssociateNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -89,7 +91,8 @@ type CreateBackupRequest struct {
 }
 
 // Send marshals and sends the CreateBackup API request.
-func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -118,7 +121,7 @@ func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
 //
 //    // Example sending a request using the CreateBackupRequest method.
 //    req := client.CreateBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -152,7 +155,8 @@ type CreateServerRequest struct {
 }
 
 // Send marshals and sends the CreateServer API request.
-func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
+func (r CreateServerRequest) Send(ctx context.Context) (*CreateServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,7 +198,7 @@ func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
 //
 //    // Example sending a request using the CreateServerRequest method.
 //    req := client.CreateServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +232,8 @@ type DeleteBackupRequest struct {
 }
 
 // Send marshals and sends the DeleteBackup API request.
-func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +254,7 @@ func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
 //
 //    // Example sending a request using the DeleteBackupRequest method.
 //    req := client.DeleteBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -283,7 +288,8 @@ type DeleteServerRequest struct {
 }
 
 // Send marshals and sends the DeleteServer API request.
-func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
+func (r DeleteServerRequest) Send(ctx context.Context) (*DeleteServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -309,7 +315,7 @@ func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
 //
 //    // Example sending a request using the DeleteServerRequest method.
 //    req := client.DeleteServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -343,7 +349,8 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAccountAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -362,7 +369,7 @@ func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutp
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
 //    req := client.DescribeAccountAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -396,7 +403,8 @@ type DescribeBackupsRequest struct {
 }
 
 // Send marshals and sends the DescribeBackups API request.
-func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -418,7 +426,7 @@ func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
 //
 //    // Example sending a request using the DescribeBackupsRequest method.
 //    req := client.DescribeBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -452,7 +460,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +483,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -508,7 +517,8 @@ type DescribeNodeAssociationStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeNodeAssociationStatus API request.
-func (r DescribeNodeAssociationStatusRequest) Send() (*DescribeNodeAssociationStatusOutput, error) {
+func (r DescribeNodeAssociationStatusRequest) Send(ctx context.Context) (*DescribeNodeAssociationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -528,7 +538,7 @@ func (r DescribeNodeAssociationStatusRequest) Send() (*DescribeNodeAssociationSt
 //
 //    // Example sending a request using the DescribeNodeAssociationStatusRequest method.
 //    req := client.DescribeNodeAssociationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -562,7 +572,8 @@ type DescribeServersRequest struct {
 }
 
 // Send marshals and sends the DescribeServers API request.
-func (r DescribeServersRequest) Send() (*DescribeServersOutput, error) {
+func (r DescribeServersRequest) Send(ctx context.Context) (*DescribeServersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -585,7 +596,7 @@ func (r DescribeServersRequest) Send() (*DescribeServersOutput, error) {
 //
 //    // Example sending a request using the DescribeServersRequest method.
 //    req := client.DescribeServersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -619,7 +630,8 @@ type DisassociateNodeRequest struct {
 }
 
 // Send marshals and sends the DisassociateNode API request.
-func (r DisassociateNodeRequest) Send() (*DisassociateNodeOutput, error) {
+func (r DisassociateNodeRequest) Send(ctx context.Context) (*DisassociateNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -643,7 +655,7 @@ func (r DisassociateNodeRequest) Send() (*DisassociateNodeOutput, error) {
 //
 //    // Example sending a request using the DisassociateNodeRequest method.
 //    req := client.DisassociateNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -677,7 +689,8 @@ type ExportServerEngineAttributeRequest struct {
 }
 
 // Send marshals and sends the ExportServerEngineAttribute API request.
-func (r ExportServerEngineAttributeRequest) Send() (*ExportServerEngineAttributeOutput, error) {
+func (r ExportServerEngineAttributeRequest) Send(ctx context.Context) (*ExportServerEngineAttributeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -702,7 +715,7 @@ func (r ExportServerEngineAttributeRequest) Send() (*ExportServerEngineAttribute
 //
 //    // Example sending a request using the ExportServerEngineAttributeRequest method.
 //    req := client.ExportServerEngineAttributeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -736,7 +749,8 @@ type RestoreServerRequest struct {
 }
 
 // Send marshals and sends the RestoreServer API request.
-func (r RestoreServerRequest) Send() (*RestoreServerOutput, error) {
+func (r RestoreServerRequest) Send(ctx context.Context) (*RestoreServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -762,7 +776,7 @@ func (r RestoreServerRequest) Send() (*RestoreServerOutput, error) {
 //
 //    // Example sending a request using the RestoreServerRequest method.
 //    req := client.RestoreServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +810,8 @@ type StartMaintenanceRequest struct {
 }
 
 // Send marshals and sends the StartMaintenance API request.
-func (r StartMaintenanceRequest) Send() (*StartMaintenanceOutput, error) {
+func (r StartMaintenanceRequest) Send(ctx context.Context) (*StartMaintenanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -820,7 +835,7 @@ func (r StartMaintenanceRequest) Send() (*StartMaintenanceOutput, error) {
 //
 //    // Example sending a request using the StartMaintenanceRequest method.
 //    req := client.StartMaintenanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -854,7 +869,8 @@ type UpdateServerRequest struct {
 }
 
 // Send marshals and sends the UpdateServer API request.
-func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
+func (r UpdateServerRequest) Send(ctx context.Context) (*UpdateServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -872,7 +888,7 @@ func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
 //
 //    // Example sending a request using the UpdateServerRequest method.
 //    req := client.UpdateServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -906,7 +922,8 @@ type UpdateServerEngineAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateServerEngineAttributes API request.
-func (r UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttributesOutput, error) {
+func (r UpdateServerEngineAttributesRequest) Send(ctx context.Context) (*UpdateServerEngineAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -932,7 +949,7 @@ func (r UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttribut
 //
 //    // Example sending a request using the UpdateServerEngineAttributesRequest method.
 //    req := client.UpdateServerEngineAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

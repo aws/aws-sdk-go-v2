@@ -3,6 +3,7 @@
 package securityhub
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type AcceptInvitationRequest struct {
 }
 
 // Send marshals and sends the AcceptInvitation API request.
-func (r AcceptInvitationRequest) Send() (*AcceptInvitationOutput, error) {
+func (r AcceptInvitationRequest) Send(ctx context.Context) (*AcceptInvitationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r AcceptInvitationRequest) Send() (*AcceptInvitationOutput, error) {
 //
 //    // Example sending a request using the AcceptInvitationRequest method.
 //    req := client.AcceptInvitationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type BatchDisableStandardsRequest struct {
 }
 
 // Send marshals and sends the BatchDisableStandards API request.
-func (r BatchDisableStandardsRequest) Send() (*BatchDisableStandardsOutput, error) {
+func (r BatchDisableStandardsRequest) Send(ctx context.Context) (*BatchDisableStandardsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -90,7 +93,7 @@ func (r BatchDisableStandardsRequest) Send() (*BatchDisableStandardsOutput, erro
 //
 //    // Example sending a request using the BatchDisableStandardsRequest method.
 //    req := client.BatchDisableStandardsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +127,8 @@ type BatchEnableStandardsRequest struct {
 }
 
 // Send marshals and sends the BatchEnableStandards API request.
-func (r BatchEnableStandardsRequest) Send() (*BatchEnableStandardsOutput, error) {
+func (r BatchEnableStandardsRequest) Send(ctx context.Context) (*BatchEnableStandardsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r BatchEnableStandardsRequest) Send() (*BatchEnableStandardsOutput, error)
 //
 //    // Example sending a request using the BatchEnableStandardsRequest method.
 //    req := client.BatchEnableStandardsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type BatchImportFindingsRequest struct {
 }
 
 // Send marshals and sends the BatchImportFindings API request.
-func (r BatchImportFindingsRequest) Send() (*BatchImportFindingsOutput, error) {
+func (r BatchImportFindingsRequest) Send(ctx context.Context) (*BatchImportFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,7 +199,7 @@ func (r BatchImportFindingsRequest) Send() (*BatchImportFindingsOutput, error) {
 //
 //    // Example sending a request using the BatchImportFindingsRequest method.
 //    req := client.BatchImportFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +233,8 @@ type CreateInsightRequest struct {
 }
 
 // Send marshals and sends the CreateInsight API request.
-func (r CreateInsightRequest) Send() (*CreateInsightOutput, error) {
+func (r CreateInsightRequest) Send(ctx context.Context) (*CreateInsightOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -245,7 +251,7 @@ func (r CreateInsightRequest) Send() (*CreateInsightOutput, error) {
 //
 //    // Example sending a request using the CreateInsightRequest method.
 //    req := client.CreateInsightRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -279,7 +285,8 @@ type CreateMembersRequest struct {
 }
 
 // Send marshals and sends the CreateMembers API request.
-func (r CreateMembersRequest) Send() (*CreateMembersOutput, error) {
+func (r CreateMembersRequest) Send(ctx context.Context) (*CreateMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +303,7 @@ func (r CreateMembersRequest) Send() (*CreateMembersOutput, error) {
 //
 //    // Example sending a request using the CreateMembersRequest method.
 //    req := client.CreateMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -330,7 +337,8 @@ type DeclineInvitationsRequest struct {
 }
 
 // Send marshals and sends the DeclineInvitations API request.
-func (r DeclineInvitationsRequest) Send() (*DeclineInvitationsOutput, error) {
+func (r DeclineInvitationsRequest) Send(ctx context.Context) (*DeclineInvitationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +355,7 @@ func (r DeclineInvitationsRequest) Send() (*DeclineInvitationsOutput, error) {
 //
 //    // Example sending a request using the DeclineInvitationsRequest method.
 //    req := client.DeclineInvitationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -381,7 +389,8 @@ type DeleteInsightRequest struct {
 }
 
 // Send marshals and sends the DeleteInsight API request.
-func (r DeleteInsightRequest) Send() (*DeleteInsightOutput, error) {
+func (r DeleteInsightRequest) Send(ctx context.Context) (*DeleteInsightOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -397,7 +406,7 @@ func (r DeleteInsightRequest) Send() (*DeleteInsightOutput, error) {
 //
 //    // Example sending a request using the DeleteInsightRequest method.
 //    req := client.DeleteInsightRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -431,7 +440,8 @@ type DeleteInvitationsRequest struct {
 }
 
 // Send marshals and sends the DeleteInvitations API request.
-func (r DeleteInvitationsRequest) Send() (*DeleteInvitationsOutput, error) {
+func (r DeleteInvitationsRequest) Send(ctx context.Context) (*DeleteInvitationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +458,7 @@ func (r DeleteInvitationsRequest) Send() (*DeleteInvitationsOutput, error) {
 //
 //    // Example sending a request using the DeleteInvitationsRequest method.
 //    req := client.DeleteInvitationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -482,7 +492,8 @@ type DeleteMembersRequest struct {
 }
 
 // Send marshals and sends the DeleteMembers API request.
-func (r DeleteMembersRequest) Send() (*DeleteMembersOutput, error) {
+func (r DeleteMembersRequest) Send(ctx context.Context) (*DeleteMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -499,7 +510,7 @@ func (r DeleteMembersRequest) Send() (*DeleteMembersOutput, error) {
 //
 //    // Example sending a request using the DeleteMembersRequest method.
 //    req := client.DeleteMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -533,7 +544,8 @@ type DisableImportFindingsForProductRequest struct {
 }
 
 // Send marshals and sends the DisableImportFindingsForProduct API request.
-func (r DisableImportFindingsForProductRequest) Send() (*DisableImportFindingsForProductOutput, error) {
+func (r DisableImportFindingsForProductRequest) Send(ctx context.Context) (*DisableImportFindingsForProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -550,7 +562,7 @@ func (r DisableImportFindingsForProductRequest) Send() (*DisableImportFindingsFo
 //
 //    // Example sending a request using the DisableImportFindingsForProductRequest method.
 //    req := client.DisableImportFindingsForProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -584,7 +596,8 @@ type DisableSecurityHubRequest struct {
 }
 
 // Send marshals and sends the DisableSecurityHub API request.
-func (r DisableSecurityHubRequest) Send() (*DisableSecurityHubOutput, error) {
+func (r DisableSecurityHubRequest) Send(ctx context.Context) (*DisableSecurityHubOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -600,7 +613,7 @@ func (r DisableSecurityHubRequest) Send() (*DisableSecurityHubOutput, error) {
 //
 //    // Example sending a request using the DisableSecurityHubRequest method.
 //    req := client.DisableSecurityHubRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -634,7 +647,8 @@ type DisassociateFromMasterAccountRequest struct {
 }
 
 // Send marshals and sends the DisassociateFromMasterAccount API request.
-func (r DisassociateFromMasterAccountRequest) Send() (*DisassociateFromMasterAccountOutput, error) {
+func (r DisassociateFromMasterAccountRequest) Send(ctx context.Context) (*DisassociateFromMasterAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -650,7 +664,7 @@ func (r DisassociateFromMasterAccountRequest) Send() (*DisassociateFromMasterAcc
 //
 //    // Example sending a request using the DisassociateFromMasterAccountRequest method.
 //    req := client.DisassociateFromMasterAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -684,7 +698,8 @@ type DisassociateMembersRequest struct {
 }
 
 // Send marshals and sends the DisassociateMembers API request.
-func (r DisassociateMembersRequest) Send() (*DisassociateMembersOutput, error) {
+func (r DisassociateMembersRequest) Send(ctx context.Context) (*DisassociateMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -701,7 +716,7 @@ func (r DisassociateMembersRequest) Send() (*DisassociateMembersOutput, error) {
 //
 //    // Example sending a request using the DisassociateMembersRequest method.
 //    req := client.DisassociateMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -735,7 +750,8 @@ type EnableImportFindingsForProductRequest struct {
 }
 
 // Send marshals and sends the EnableImportFindingsForProduct API request.
-func (r EnableImportFindingsForProductRequest) Send() (*EnableImportFindingsForProductOutput, error) {
+func (r EnableImportFindingsForProductRequest) Send(ctx context.Context) (*EnableImportFindingsForProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -752,7 +768,7 @@ func (r EnableImportFindingsForProductRequest) Send() (*EnableImportFindingsForP
 //
 //    // Example sending a request using the EnableImportFindingsForProductRequest method.
 //    req := client.EnableImportFindingsForProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -786,7 +802,8 @@ type EnableSecurityHubRequest struct {
 }
 
 // Send marshals and sends the EnableSecurityHub API request.
-func (r EnableSecurityHubRequest) Send() (*EnableSecurityHubOutput, error) {
+func (r EnableSecurityHubRequest) Send(ctx context.Context) (*EnableSecurityHubOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -802,7 +819,7 @@ func (r EnableSecurityHubRequest) Send() (*EnableSecurityHubOutput, error) {
 //
 //    // Example sending a request using the EnableSecurityHubRequest method.
 //    req := client.EnableSecurityHubRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -836,7 +853,8 @@ type GetEnabledStandardsRequest struct {
 }
 
 // Send marshals and sends the GetEnabledStandards API request.
-func (r GetEnabledStandardsRequest) Send() (*GetEnabledStandardsOutput, error) {
+func (r GetEnabledStandardsRequest) Send(ctx context.Context) (*GetEnabledStandardsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -852,7 +870,7 @@ func (r GetEnabledStandardsRequest) Send() (*GetEnabledStandardsOutput, error) {
 //
 //    // Example sending a request using the GetEnabledStandardsRequest method.
 //    req := client.GetEnabledStandardsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -886,7 +904,8 @@ type GetFindingsRequest struct {
 }
 
 // Send marshals and sends the GetFindings API request.
-func (r GetFindingsRequest) Send() (*GetFindingsOutput, error) {
+func (r GetFindingsRequest) Send(ctx context.Context) (*GetFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -903,7 +922,7 @@ func (r GetFindingsRequest) Send() (*GetFindingsOutput, error) {
 //
 //    // Example sending a request using the GetFindingsRequest method.
 //    req := client.GetFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -989,7 +1008,8 @@ type GetInsightResultsRequest struct {
 }
 
 // Send marshals and sends the GetInsightResults API request.
-func (r GetInsightResultsRequest) Send() (*GetInsightResultsOutput, error) {
+func (r GetInsightResultsRequest) Send(ctx context.Context) (*GetInsightResultsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1005,7 +1025,7 @@ func (r GetInsightResultsRequest) Send() (*GetInsightResultsOutput, error) {
 //
 //    // Example sending a request using the GetInsightResultsRequest method.
 //    req := client.GetInsightResultsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1039,7 +1059,8 @@ type GetInsightsRequest struct {
 }
 
 // Send marshals and sends the GetInsights API request.
-func (r GetInsightsRequest) Send() (*GetInsightsOutput, error) {
+func (r GetInsightsRequest) Send(ctx context.Context) (*GetInsightsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1055,7 +1076,7 @@ func (r GetInsightsRequest) Send() (*GetInsightsOutput, error) {
 //
 //    // Example sending a request using the GetInsightsRequest method.
 //    req := client.GetInsightsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1141,7 +1162,8 @@ type GetInvitationsCountRequest struct {
 }
 
 // Send marshals and sends the GetInvitationsCount API request.
-func (r GetInvitationsCountRequest) Send() (*GetInvitationsCountOutput, error) {
+func (r GetInvitationsCountRequest) Send(ctx context.Context) (*GetInvitationsCountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1158,7 +1180,7 @@ func (r GetInvitationsCountRequest) Send() (*GetInvitationsCountOutput, error) {
 //
 //    // Example sending a request using the GetInvitationsCountRequest method.
 //    req := client.GetInvitationsCountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1192,7 +1214,8 @@ type GetMasterAccountRequest struct {
 }
 
 // Send marshals and sends the GetMasterAccount API request.
-func (r GetMasterAccountRequest) Send() (*GetMasterAccountOutput, error) {
+func (r GetMasterAccountRequest) Send(ctx context.Context) (*GetMasterAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1209,7 +1232,7 @@ func (r GetMasterAccountRequest) Send() (*GetMasterAccountOutput, error) {
 //
 //    // Example sending a request using the GetMasterAccountRequest method.
 //    req := client.GetMasterAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1243,7 +1266,8 @@ type GetMembersRequest struct {
 }
 
 // Send marshals and sends the GetMembers API request.
-func (r GetMembersRequest) Send() (*GetMembersOutput, error) {
+func (r GetMembersRequest) Send(ctx context.Context) (*GetMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1260,7 +1284,7 @@ func (r GetMembersRequest) Send() (*GetMembersOutput, error) {
 //
 //    // Example sending a request using the GetMembersRequest method.
 //    req := client.GetMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1294,7 +1318,8 @@ type InviteMembersRequest struct {
 }
 
 // Send marshals and sends the InviteMembers API request.
-func (r InviteMembersRequest) Send() (*InviteMembersOutput, error) {
+func (r InviteMembersRequest) Send(ctx context.Context) (*InviteMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1313,7 +1338,7 @@ func (r InviteMembersRequest) Send() (*InviteMembersOutput, error) {
 //
 //    // Example sending a request using the InviteMembersRequest method.
 //    req := client.InviteMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1347,7 +1372,8 @@ type ListEnabledProductsForImportRequest struct {
 }
 
 // Send marshals and sends the ListEnabledProductsForImport API request.
-func (r ListEnabledProductsForImportRequest) Send() (*ListEnabledProductsForImportOutput, error) {
+func (r ListEnabledProductsForImportRequest) Send(ctx context.Context) (*ListEnabledProductsForImportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1363,7 +1389,7 @@ func (r ListEnabledProductsForImportRequest) Send() (*ListEnabledProductsForImpo
 //
 //    // Example sending a request using the ListEnabledProductsForImportRequest method.
 //    req := client.ListEnabledProductsForImportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1449,7 +1475,8 @@ type ListInvitationsRequest struct {
 }
 
 // Send marshals and sends the ListInvitations API request.
-func (r ListInvitationsRequest) Send() (*ListInvitationsOutput, error) {
+func (r ListInvitationsRequest) Send(ctx context.Context) (*ListInvitationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1466,7 +1493,7 @@ func (r ListInvitationsRequest) Send() (*ListInvitationsOutput, error) {
 //
 //    // Example sending a request using the ListInvitationsRequest method.
 //    req := client.ListInvitationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1500,7 +1527,8 @@ type ListMembersRequest struct {
 }
 
 // Send marshals and sends the ListMembers API request.
-func (r ListMembersRequest) Send() (*ListMembersOutput, error) {
+func (r ListMembersRequest) Send(ctx context.Context) (*ListMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1517,7 +1545,7 @@ func (r ListMembersRequest) Send() (*ListMembersOutput, error) {
 //
 //    // Example sending a request using the ListMembersRequest method.
 //    req := client.ListMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1551,7 +1579,8 @@ type UpdateFindingsRequest struct {
 }
 
 // Send marshals and sends the UpdateFindings API request.
-func (r UpdateFindingsRequest) Send() (*UpdateFindingsOutput, error) {
+func (r UpdateFindingsRequest) Send(ctx context.Context) (*UpdateFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1568,7 +1597,7 @@ func (r UpdateFindingsRequest) Send() (*UpdateFindingsOutput, error) {
 //
 //    // Example sending a request using the UpdateFindingsRequest method.
 //    req := client.UpdateFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1602,7 +1631,8 @@ type UpdateInsightRequest struct {
 }
 
 // Send marshals and sends the UpdateInsight API request.
-func (r UpdateInsightRequest) Send() (*UpdateInsightOutput, error) {
+func (r UpdateInsightRequest) Send(ctx context.Context) (*UpdateInsightOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1618,7 +1648,7 @@ func (r UpdateInsightRequest) Send() (*UpdateInsightOutput, error) {
 //
 //    // Example sending a request using the UpdateInsightRequest method.
 //    req := client.UpdateInsightRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package appmesh
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type CreateMeshRequest struct {
 }
 
 // Send marshals and sends the CreateMesh API request.
-func (r CreateMeshRequest) Send() (*CreateMeshOutput, error) {
+func (r CreateMeshRequest) Send(ctx context.Context) (*CreateMeshOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +44,7 @@ func (r CreateMeshRequest) Send() (*CreateMeshOutput, error) {
 //
 //    // Example sending a request using the CreateMeshRequest method.
 //    req := client.CreateMeshRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +78,8 @@ type CreateRouteRequest struct {
 }
 
 // Send marshals and sends the CreateRoute API request.
-func (r CreateRouteRequest) Send() (*CreateRouteOutput, error) {
+func (r CreateRouteRequest) Send(ctx context.Context) (*CreateRouteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -100,7 +103,7 @@ func (r CreateRouteRequest) Send() (*CreateRouteOutput, error) {
 //
 //    // Example sending a request using the CreateRouteRequest method.
 //    req := client.CreateRouteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -134,7 +137,8 @@ type CreateVirtualNodeRequest struct {
 }
 
 // Send marshals and sends the CreateVirtualNode API request.
-func (r CreateVirtualNodeRequest) Send() (*CreateVirtualNodeOutput, error) {
+func (r CreateVirtualNodeRequest) Send(ctx context.Context) (*CreateVirtualNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -169,7 +173,7 @@ func (r CreateVirtualNodeRequest) Send() (*CreateVirtualNodeOutput, error) {
 //
 //    // Example sending a request using the CreateVirtualNodeRequest method.
 //    req := client.CreateVirtualNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -203,7 +207,8 @@ type CreateVirtualRouterRequest struct {
 }
 
 // Send marshals and sends the CreateVirtualRouter API request.
-func (r CreateVirtualRouterRequest) Send() (*CreateVirtualRouterOutput, error) {
+func (r CreateVirtualRouterRequest) Send(ctx context.Context) (*CreateVirtualRouterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -223,7 +228,7 @@ func (r CreateVirtualRouterRequest) Send() (*CreateVirtualRouterOutput, error) {
 //
 //    // Example sending a request using the CreateVirtualRouterRequest method.
 //    req := client.CreateVirtualRouterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -257,7 +262,8 @@ type DeleteMeshRequest struct {
 }
 
 // Send marshals and sends the DeleteMesh API request.
-func (r DeleteMeshRequest) Send() (*DeleteMeshOutput, error) {
+func (r DeleteMeshRequest) Send(ctx context.Context) (*DeleteMeshOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -276,7 +282,7 @@ func (r DeleteMeshRequest) Send() (*DeleteMeshOutput, error) {
 //
 //    // Example sending a request using the DeleteMeshRequest method.
 //    req := client.DeleteMeshRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -310,7 +316,8 @@ type DeleteRouteRequest struct {
 }
 
 // Send marshals and sends the DeleteRoute API request.
-func (r DeleteRouteRequest) Send() (*DeleteRouteOutput, error) {
+func (r DeleteRouteRequest) Send(ctx context.Context) (*DeleteRouteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,7 +333,7 @@ func (r DeleteRouteRequest) Send() (*DeleteRouteOutput, error) {
 //
 //    // Example sending a request using the DeleteRouteRequest method.
 //    req := client.DeleteRouteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -360,7 +367,8 @@ type DeleteVirtualNodeRequest struct {
 }
 
 // Send marshals and sends the DeleteVirtualNode API request.
-func (r DeleteVirtualNodeRequest) Send() (*DeleteVirtualNodeOutput, error) {
+func (r DeleteVirtualNodeRequest) Send(ctx context.Context) (*DeleteVirtualNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -376,7 +384,7 @@ func (r DeleteVirtualNodeRequest) Send() (*DeleteVirtualNodeOutput, error) {
 //
 //    // Example sending a request using the DeleteVirtualNodeRequest method.
 //    req := client.DeleteVirtualNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -410,7 +418,8 @@ type DeleteVirtualRouterRequest struct {
 }
 
 // Send marshals and sends the DeleteVirtualRouter API request.
-func (r DeleteVirtualRouterRequest) Send() (*DeleteVirtualRouterOutput, error) {
+func (r DeleteVirtualRouterRequest) Send(ctx context.Context) (*DeleteVirtualRouterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -429,7 +438,7 @@ func (r DeleteVirtualRouterRequest) Send() (*DeleteVirtualRouterOutput, error) {
 //
 //    // Example sending a request using the DeleteVirtualRouterRequest method.
 //    req := client.DeleteVirtualRouterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -463,7 +472,8 @@ type DescribeMeshRequest struct {
 }
 
 // Send marshals and sends the DescribeMesh API request.
-func (r DescribeMeshRequest) Send() (*DescribeMeshOutput, error) {
+func (r DescribeMeshRequest) Send(ctx context.Context) (*DescribeMeshOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -479,7 +489,7 @@ func (r DescribeMeshRequest) Send() (*DescribeMeshOutput, error) {
 //
 //    // Example sending a request using the DescribeMeshRequest method.
 //    req := client.DescribeMeshRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -513,7 +523,8 @@ type DescribeRouteRequest struct {
 }
 
 // Send marshals and sends the DescribeRoute API request.
-func (r DescribeRouteRequest) Send() (*DescribeRouteOutput, error) {
+func (r DescribeRouteRequest) Send(ctx context.Context) (*DescribeRouteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -529,7 +540,7 @@ func (r DescribeRouteRequest) Send() (*DescribeRouteOutput, error) {
 //
 //    // Example sending a request using the DescribeRouteRequest method.
 //    req := client.DescribeRouteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -563,7 +574,8 @@ type DescribeVirtualNodeRequest struct {
 }
 
 // Send marshals and sends the DescribeVirtualNode API request.
-func (r DescribeVirtualNodeRequest) Send() (*DescribeVirtualNodeOutput, error) {
+func (r DescribeVirtualNodeRequest) Send(ctx context.Context) (*DescribeVirtualNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -579,7 +591,7 @@ func (r DescribeVirtualNodeRequest) Send() (*DescribeVirtualNodeOutput, error) {
 //
 //    // Example sending a request using the DescribeVirtualNodeRequest method.
 //    req := client.DescribeVirtualNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -613,7 +625,8 @@ type DescribeVirtualRouterRequest struct {
 }
 
 // Send marshals and sends the DescribeVirtualRouter API request.
-func (r DescribeVirtualRouterRequest) Send() (*DescribeVirtualRouterOutput, error) {
+func (r DescribeVirtualRouterRequest) Send(ctx context.Context) (*DescribeVirtualRouterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -629,7 +642,7 @@ func (r DescribeVirtualRouterRequest) Send() (*DescribeVirtualRouterOutput, erro
 //
 //    // Example sending a request using the DescribeVirtualRouterRequest method.
 //    req := client.DescribeVirtualRouterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -663,7 +676,8 @@ type ListMeshesRequest struct {
 }
 
 // Send marshals and sends the ListMeshes API request.
-func (r ListMeshesRequest) Send() (*ListMeshesOutput, error) {
+func (r ListMeshesRequest) Send(ctx context.Context) (*ListMeshesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -679,7 +693,7 @@ func (r ListMeshesRequest) Send() (*ListMeshesOutput, error) {
 //
 //    // Example sending a request using the ListMeshesRequest method.
 //    req := client.ListMeshesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -765,7 +779,8 @@ type ListRoutesRequest struct {
 }
 
 // Send marshals and sends the ListRoutes API request.
-func (r ListRoutesRequest) Send() (*ListRoutesOutput, error) {
+func (r ListRoutesRequest) Send(ctx context.Context) (*ListRoutesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -781,7 +796,7 @@ func (r ListRoutesRequest) Send() (*ListRoutesOutput, error) {
 //
 //    // Example sending a request using the ListRoutesRequest method.
 //    req := client.ListRoutesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -867,7 +882,8 @@ type ListVirtualNodesRequest struct {
 }
 
 // Send marshals and sends the ListVirtualNodes API request.
-func (r ListVirtualNodesRequest) Send() (*ListVirtualNodesOutput, error) {
+func (r ListVirtualNodesRequest) Send(ctx context.Context) (*ListVirtualNodesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -883,7 +899,7 @@ func (r ListVirtualNodesRequest) Send() (*ListVirtualNodesOutput, error) {
 //
 //    // Example sending a request using the ListVirtualNodesRequest method.
 //    req := client.ListVirtualNodesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -969,7 +985,8 @@ type ListVirtualRoutersRequest struct {
 }
 
 // Send marshals and sends the ListVirtualRouters API request.
-func (r ListVirtualRoutersRequest) Send() (*ListVirtualRoutersOutput, error) {
+func (r ListVirtualRoutersRequest) Send(ctx context.Context) (*ListVirtualRoutersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -985,7 +1002,7 @@ func (r ListVirtualRoutersRequest) Send() (*ListVirtualRoutersOutput, error) {
 //
 //    // Example sending a request using the ListVirtualRoutersRequest method.
 //    req := client.ListVirtualRoutersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1071,7 +1088,8 @@ type UpdateRouteRequest struct {
 }
 
 // Send marshals and sends the UpdateRoute API request.
-func (r UpdateRouteRequest) Send() (*UpdateRouteOutput, error) {
+func (r UpdateRouteRequest) Send(ctx context.Context) (*UpdateRouteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1087,7 +1105,7 @@ func (r UpdateRouteRequest) Send() (*UpdateRouteOutput, error) {
 //
 //    // Example sending a request using the UpdateRouteRequest method.
 //    req := client.UpdateRouteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1121,7 +1139,8 @@ type UpdateVirtualNodeRequest struct {
 }
 
 // Send marshals and sends the UpdateVirtualNode API request.
-func (r UpdateVirtualNodeRequest) Send() (*UpdateVirtualNodeOutput, error) {
+func (r UpdateVirtualNodeRequest) Send(ctx context.Context) (*UpdateVirtualNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1137,7 +1156,7 @@ func (r UpdateVirtualNodeRequest) Send() (*UpdateVirtualNodeOutput, error) {
 //
 //    // Example sending a request using the UpdateVirtualNodeRequest method.
 //    req := client.UpdateVirtualNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1171,7 +1190,8 @@ type UpdateVirtualRouterRequest struct {
 }
 
 // Send marshals and sends the UpdateVirtualRouter API request.
-func (r UpdateVirtualRouterRequest) Send() (*UpdateVirtualRouterOutput, error) {
+func (r UpdateVirtualRouterRequest) Send(ctx context.Context) (*UpdateVirtualRouterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1187,7 +1207,7 @@ func (r UpdateVirtualRouterRequest) Send() (*UpdateVirtualRouterOutput, error) {
 //
 //    // Example sending a request using the UpdateVirtualRouterRequest method.
 //    req := client.UpdateVirtualRouterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

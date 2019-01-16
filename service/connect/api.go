@@ -3,6 +3,7 @@
 package connect
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -140,7 +144,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +178,8 @@ type DescribeUserHierarchyGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeUserHierarchyGroup API request.
-func (r DescribeUserHierarchyGroupRequest) Send() (*DescribeUserHierarchyGroupOutput, error) {
+func (r DescribeUserHierarchyGroupRequest) Send(ctx context.Context) (*DescribeUserHierarchyGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +196,7 @@ func (r DescribeUserHierarchyGroupRequest) Send() (*DescribeUserHierarchyGroupOu
 //
 //    // Example sending a request using the DescribeUserHierarchyGroupRequest method.
 //    req := client.DescribeUserHierarchyGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +230,8 @@ type DescribeUserHierarchyStructureRequest struct {
 }
 
 // Send marshals and sends the DescribeUserHierarchyStructure API request.
-func (r DescribeUserHierarchyStructureRequest) Send() (*DescribeUserHierarchyStructureOutput, error) {
+func (r DescribeUserHierarchyStructureRequest) Send(ctx context.Context) (*DescribeUserHierarchyStructureOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +248,7 @@ func (r DescribeUserHierarchyStructureRequest) Send() (*DescribeUserHierarchyStr
 //
 //    // Example sending a request using the DescribeUserHierarchyStructureRequest method.
 //    req := client.DescribeUserHierarchyStructureRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +282,8 @@ type GetContactAttributesRequest struct {
 }
 
 // Send marshals and sends the GetContactAttributes API request.
-func (r GetContactAttributesRequest) Send() (*GetContactAttributesOutput, error) {
+func (r GetContactAttributesRequest) Send(ctx context.Context) (*GetContactAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -292,7 +299,7 @@ func (r GetContactAttributesRequest) Send() (*GetContactAttributesOutput, error)
 //
 //    // Example sending a request using the GetContactAttributesRequest method.
 //    req := client.GetContactAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -326,7 +333,8 @@ type GetCurrentMetricDataRequest struct {
 }
 
 // Send marshals and sends the GetCurrentMetricData API request.
-func (r GetCurrentMetricDataRequest) Send() (*GetCurrentMetricDataOutput, error) {
+func (r GetCurrentMetricDataRequest) Send(ctx context.Context) (*GetCurrentMetricDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -346,7 +354,7 @@ func (r GetCurrentMetricDataRequest) Send() (*GetCurrentMetricDataOutput, error)
 //
 //    // Example sending a request using the GetCurrentMetricDataRequest method.
 //    req := client.GetCurrentMetricDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +440,8 @@ type GetFederationTokenRequest struct {
 }
 
 // Send marshals and sends the GetFederationToken API request.
-func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+func (r GetFederationTokenRequest) Send(ctx context.Context) (*GetFederationTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +457,7 @@ func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
 //
 //    // Example sending a request using the GetFederationTokenRequest method.
 //    req := client.GetFederationTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -482,7 +491,8 @@ type GetMetricDataRequest struct {
 }
 
 // Send marshals and sends the GetMetricData API request.
-func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
+func (r GetMetricDataRequest) Send(ctx context.Context) (*GetMetricDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -502,7 +512,7 @@ func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
 //
 //    // Example sending a request using the GetMetricDataRequest method.
 //    req := client.GetMetricDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -588,7 +598,8 @@ type ListRoutingProfilesRequest struct {
 }
 
 // Send marshals and sends the ListRoutingProfiles API request.
-func (r ListRoutingProfilesRequest) Send() (*ListRoutingProfilesOutput, error) {
+func (r ListRoutingProfilesRequest) Send(ctx context.Context) (*ListRoutingProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -605,7 +616,7 @@ func (r ListRoutingProfilesRequest) Send() (*ListRoutingProfilesOutput, error) {
 //
 //    // Example sending a request using the ListRoutingProfilesRequest method.
 //    req := client.ListRoutingProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -639,7 +650,8 @@ type ListSecurityProfilesRequest struct {
 }
 
 // Send marshals and sends the ListSecurityProfiles API request.
-func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error) {
+func (r ListSecurityProfilesRequest) Send(ctx context.Context) (*ListSecurityProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -657,7 +669,7 @@ func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error)
 //
 //    // Example sending a request using the ListSecurityProfilesRequest method.
 //    req := client.ListSecurityProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -691,7 +703,8 @@ type ListUserHierarchyGroupsRequest struct {
 }
 
 // Send marshals and sends the ListUserHierarchyGroups API request.
-func (r ListUserHierarchyGroupsRequest) Send() (*ListUserHierarchyGroupsOutput, error) {
+func (r ListUserHierarchyGroupsRequest) Send(ctx context.Context) (*ListUserHierarchyGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -708,7 +721,7 @@ func (r ListUserHierarchyGroupsRequest) Send() (*ListUserHierarchyGroupsOutput, 
 //
 //    // Example sending a request using the ListUserHierarchyGroupsRequest method.
 //    req := client.ListUserHierarchyGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -742,7 +755,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +772,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -792,7 +806,8 @@ type StartOutboundVoiceContactRequest struct {
 }
 
 // Send marshals and sends the StartOutboundVoiceContact API request.
-func (r StartOutboundVoiceContactRequest) Send() (*StartOutboundVoiceContactOutput, error) {
+func (r StartOutboundVoiceContactRequest) Send(ctx context.Context) (*StartOutboundVoiceContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,7 +830,7 @@ func (r StartOutboundVoiceContactRequest) Send() (*StartOutboundVoiceContactOutp
 //
 //    // Example sending a request using the StartOutboundVoiceContactRequest method.
 //    req := client.StartOutboundVoiceContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -849,7 +864,8 @@ type StopContactRequest struct {
 }
 
 // Send marshals and sends the StopContact API request.
-func (r StopContactRequest) Send() (*StopContactOutput, error) {
+func (r StopContactRequest) Send(ctx context.Context) (*StopContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -868,7 +884,7 @@ func (r StopContactRequest) Send() (*StopContactOutput, error) {
 //
 //    // Example sending a request using the StopContactRequest method.
 //    req := client.StopContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -902,7 +918,8 @@ type UpdateContactAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateContactAttributes API request.
-func (r UpdateContactAttributesRequest) Send() (*UpdateContactAttributesOutput, error) {
+func (r UpdateContactAttributesRequest) Send(ctx context.Context) (*UpdateContactAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -940,7 +957,7 @@ func (r UpdateContactAttributesRequest) Send() (*UpdateContactAttributesOutput, 
 //
 //    // Example sending a request using the UpdateContactAttributesRequest method.
 //    req := client.UpdateContactAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -974,7 +991,8 @@ type UpdateUserHierarchyRequest struct {
 }
 
 // Send marshals and sends the UpdateUserHierarchy API request.
-func (r UpdateUserHierarchyRequest) Send() (*UpdateUserHierarchyOutput, error) {
+func (r UpdateUserHierarchyRequest) Send(ctx context.Context) (*UpdateUserHierarchyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -990,7 +1008,7 @@ func (r UpdateUserHierarchyRequest) Send() (*UpdateUserHierarchyOutput, error) {
 //
 //    // Example sending a request using the UpdateUserHierarchyRequest method.
 //    req := client.UpdateUserHierarchyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1026,7 +1044,8 @@ type UpdateUserIdentityInfoRequest struct {
 }
 
 // Send marshals and sends the UpdateUserIdentityInfo API request.
-func (r UpdateUserIdentityInfoRequest) Send() (*UpdateUserIdentityInfoOutput, error) {
+func (r UpdateUserIdentityInfoRequest) Send(ctx context.Context) (*UpdateUserIdentityInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1043,7 +1062,7 @@ func (r UpdateUserIdentityInfoRequest) Send() (*UpdateUserIdentityInfoOutput, er
 //
 //    // Example sending a request using the UpdateUserIdentityInfoRequest method.
 //    req := client.UpdateUserIdentityInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1079,7 +1098,8 @@ type UpdateUserPhoneConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateUserPhoneConfig API request.
-func (r UpdateUserPhoneConfigRequest) Send() (*UpdateUserPhoneConfigOutput, error) {
+func (r UpdateUserPhoneConfigRequest) Send(ctx context.Context) (*UpdateUserPhoneConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1096,7 +1116,7 @@ func (r UpdateUserPhoneConfigRequest) Send() (*UpdateUserPhoneConfigOutput, erro
 //
 //    // Example sending a request using the UpdateUserPhoneConfigRequest method.
 //    req := client.UpdateUserPhoneConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1132,7 +1152,8 @@ type UpdateUserRoutingProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateUserRoutingProfile API request.
-func (r UpdateUserRoutingProfileRequest) Send() (*UpdateUserRoutingProfileOutput, error) {
+func (r UpdateUserRoutingProfileRequest) Send(ctx context.Context) (*UpdateUserRoutingProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1148,7 +1169,7 @@ func (r UpdateUserRoutingProfileRequest) Send() (*UpdateUserRoutingProfileOutput
 //
 //    // Example sending a request using the UpdateUserRoutingProfileRequest method.
 //    req := client.UpdateUserRoutingProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1184,7 +1205,8 @@ type UpdateUserSecurityProfilesRequest struct {
 }
 
 // Send marshals and sends the UpdateUserSecurityProfiles API request.
-func (r UpdateUserSecurityProfilesRequest) Send() (*UpdateUserSecurityProfilesOutput, error) {
+func (r UpdateUserSecurityProfilesRequest) Send(ctx context.Context) (*UpdateUserSecurityProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1200,7 +1222,7 @@ func (r UpdateUserSecurityProfilesRequest) Send() (*UpdateUserSecurityProfilesOu
 //
 //    // Example sending a request using the UpdateUserSecurityProfilesRequest method.
 //    req := client.UpdateUserSecurityProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

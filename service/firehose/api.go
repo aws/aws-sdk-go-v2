@@ -3,6 +3,7 @@
 package firehose
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the CreateDeliveryStream API request.
-func (r CreateDeliveryStreamRequest) Send() (*CreateDeliveryStreamOutput, error) {
+func (r CreateDeliveryStreamRequest) Send(ctx context.Context) (*CreateDeliveryStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +91,7 @@ func (r CreateDeliveryStreamRequest) Send() (*CreateDeliveryStreamOutput, error)
 //
 //    // Example sending a request using the CreateDeliveryStreamRequest method.
 //    req := client.CreateDeliveryStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +125,8 @@ type DeleteDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteDeliveryStream API request.
-func (r DeleteDeliveryStreamRequest) Send() (*DeleteDeliveryStreamOutput, error) {
+func (r DeleteDeliveryStreamRequest) Send(ctx context.Context) (*DeleteDeliveryStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -150,7 +153,7 @@ func (r DeleteDeliveryStreamRequest) Send() (*DeleteDeliveryStreamOutput, error)
 //
 //    // Example sending a request using the DeleteDeliveryStreamRequest method.
 //    req := client.DeleteDeliveryStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -184,7 +187,8 @@ type DescribeDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeDeliveryStream API request.
-func (r DescribeDeliveryStreamRequest) Send() (*DescribeDeliveryStreamOutput, error) {
+func (r DescribeDeliveryStreamRequest) Send(ctx context.Context) (*DescribeDeliveryStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,7 +207,7 @@ func (r DescribeDeliveryStreamRequest) Send() (*DescribeDeliveryStreamOutput, er
 //
 //    // Example sending a request using the DescribeDeliveryStreamRequest method.
 //    req := client.DescribeDeliveryStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -237,7 +241,8 @@ type ListDeliveryStreamsRequest struct {
 }
 
 // Send marshals and sends the ListDeliveryStreams API request.
-func (r ListDeliveryStreamsRequest) Send() (*ListDeliveryStreamsOutput, error) {
+func (r ListDeliveryStreamsRequest) Send(ctx context.Context) (*ListDeliveryStreamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -261,7 +266,7 @@ func (r ListDeliveryStreamsRequest) Send() (*ListDeliveryStreamsOutput, error) {
 //
 //    // Example sending a request using the ListDeliveryStreamsRequest method.
 //    req := client.ListDeliveryStreamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -295,7 +300,8 @@ type ListTagsForDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the ListTagsForDeliveryStream API request.
-func (r ListTagsForDeliveryStreamRequest) Send() (*ListTagsForDeliveryStreamOutput, error) {
+func (r ListTagsForDeliveryStreamRequest) Send(ctx context.Context) (*ListTagsForDeliveryStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -312,7 +318,7 @@ func (r ListTagsForDeliveryStreamRequest) Send() (*ListTagsForDeliveryStreamOutp
 //
 //    // Example sending a request using the ListTagsForDeliveryStreamRequest method.
 //    req := client.ListTagsForDeliveryStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -346,7 +352,8 @@ type PutRecordRequest struct {
 }
 
 // Send marshals and sends the PutRecord API request.
-func (r PutRecordRequest) Send() (*PutRecordOutput, error) {
+func (r PutRecordRequest) Send(ctx context.Context) (*PutRecordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +405,7 @@ func (r PutRecordRequest) Send() (*PutRecordOutput, error) {
 //
 //    // Example sending a request using the PutRecordRequest method.
 //    req := client.PutRecordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +439,8 @@ type PutRecordBatchRequest struct {
 }
 
 // Send marshals and sends the PutRecordBatch API request.
-func (r PutRecordBatchRequest) Send() (*PutRecordBatchOutput, error) {
+func (r PutRecordBatchRequest) Send(ctx context.Context) (*PutRecordBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -510,7 +518,7 @@ func (r PutRecordBatchRequest) Send() (*PutRecordBatchOutput, error) {
 //
 //    // Example sending a request using the PutRecordBatchRequest method.
 //    req := client.PutRecordBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -544,7 +552,8 @@ type StartDeliveryStreamEncryptionRequest struct {
 }
 
 // Send marshals and sends the StartDeliveryStreamEncryption API request.
-func (r StartDeliveryStreamEncryptionRequest) Send() (*StartDeliveryStreamEncryptionOutput, error) {
+func (r StartDeliveryStreamEncryptionRequest) Send(ctx context.Context) (*StartDeliveryStreamEncryptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -580,7 +589,7 @@ func (r StartDeliveryStreamEncryptionRequest) Send() (*StartDeliveryStreamEncryp
 //
 //    // Example sending a request using the StartDeliveryStreamEncryptionRequest method.
 //    req := client.StartDeliveryStreamEncryptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -614,7 +623,8 @@ type StopDeliveryStreamEncryptionRequest struct {
 }
 
 // Send marshals and sends the StopDeliveryStreamEncryption API request.
-func (r StopDeliveryStreamEncryptionRequest) Send() (*StopDeliveryStreamEncryptionOutput, error) {
+func (r StopDeliveryStreamEncryptionRequest) Send(ctx context.Context) (*StopDeliveryStreamEncryptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +657,7 @@ func (r StopDeliveryStreamEncryptionRequest) Send() (*StopDeliveryStreamEncrypti
 //
 //    // Example sending a request using the StopDeliveryStreamEncryptionRequest method.
 //    req := client.StopDeliveryStreamEncryptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -681,7 +691,8 @@ type TagDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the TagDeliveryStream API request.
-func (r TagDeliveryStreamRequest) Send() (*TagDeliveryStreamOutput, error) {
+func (r TagDeliveryStreamRequest) Send(ctx context.Context) (*TagDeliveryStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -708,7 +719,7 @@ func (r TagDeliveryStreamRequest) Send() (*TagDeliveryStreamOutput, error) {
 //
 //    // Example sending a request using the TagDeliveryStreamRequest method.
 //    req := client.TagDeliveryStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -742,7 +753,8 @@ type UntagDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the UntagDeliveryStream API request.
-func (r UntagDeliveryStreamRequest) Send() (*UntagDeliveryStreamOutput, error) {
+func (r UntagDeliveryStreamRequest) Send(ctx context.Context) (*UntagDeliveryStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -763,7 +775,7 @@ func (r UntagDeliveryStreamRequest) Send() (*UntagDeliveryStreamOutput, error) {
 //
 //    // Example sending a request using the UntagDeliveryStreamRequest method.
 //    req := client.UntagDeliveryStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -797,7 +809,8 @@ type UpdateDestinationRequest struct {
 }
 
 // Send marshals and sends the UpdateDestination API request.
-func (r UpdateDestinationRequest) Send() (*UpdateDestinationOutput, error) {
+func (r UpdateDestinationRequest) Send(ctx context.Context) (*UpdateDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -842,7 +855,7 @@ func (r UpdateDestinationRequest) Send() (*UpdateDestinationOutput, error) {
 //
 //    // Example sending a request using the UpdateDestinationRequest method.
 //    req := client.UpdateDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package workspaces
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AssociateIpGroupsRequest struct {
 }
 
 // Send marshals and sends the AssociateIpGroups API request.
-func (r AssociateIpGroupsRequest) Send() (*AssociateIpGroupsOutput, error) {
+func (r AssociateIpGroupsRequest) Send(ctx context.Context) (*AssociateIpGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r AssociateIpGroupsRequest) Send() (*AssociateIpGroupsOutput, error) {
 //
 //    // Example sending a request using the AssociateIpGroupsRequest method.
 //    req := client.AssociateIpGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type AuthorizeIpRulesRequest struct {
 }
 
 // Send marshals and sends the AuthorizeIpRules API request.
-func (r AuthorizeIpRulesRequest) Send() (*AuthorizeIpRulesOutput, error) {
+func (r AuthorizeIpRulesRequest) Send(ctx context.Context) (*AuthorizeIpRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r AuthorizeIpRulesRequest) Send() (*AuthorizeIpRulesOutput, error) {
 //
 //    // Example sending a request using the AuthorizeIpRulesRequest method.
 //    req := client.AuthorizeIpRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type CreateIpGroupRequest struct {
 }
 
 // Send marshals and sends the CreateIpGroup API request.
-func (r CreateIpGroupRequest) Send() (*CreateIpGroupOutput, error) {
+func (r CreateIpGroupRequest) Send(ctx context.Context) (*CreateIpGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -151,7 +155,7 @@ func (r CreateIpGroupRequest) Send() (*CreateIpGroupOutput, error) {
 //
 //    // Example sending a request using the CreateIpGroupRequest method.
 //    req := client.CreateIpGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -185,7 +189,8 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +206,7 @@ func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 //
 //    // Example sending a request using the CreateTagsRequest method.
 //    req := client.CreateTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -235,7 +240,8 @@ type CreateWorkspacesRequest struct {
 }
 
 // Send marshals and sends the CreateWorkspaces API request.
-func (r CreateWorkspacesRequest) Send() (*CreateWorkspacesOutput, error) {
+func (r CreateWorkspacesRequest) Send(ctx context.Context) (*CreateWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -253,7 +259,7 @@ func (r CreateWorkspacesRequest) Send() (*CreateWorkspacesOutput, error) {
 //
 //    // Example sending a request using the CreateWorkspacesRequest method.
 //    req := client.CreateWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -287,7 +293,8 @@ type DeleteIpGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteIpGroup API request.
-func (r DeleteIpGroupRequest) Send() (*DeleteIpGroupOutput, error) {
+func (r DeleteIpGroupRequest) Send(ctx context.Context) (*DeleteIpGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -305,7 +312,7 @@ func (r DeleteIpGroupRequest) Send() (*DeleteIpGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteIpGroupRequest method.
 //    req := client.DeleteIpGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -339,7 +346,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -355,7 +363,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -389,7 +397,8 @@ type DeleteWorkspaceImageRequest struct {
 }
 
 // Send marshals and sends the DeleteWorkspaceImage API request.
-func (r DeleteWorkspaceImageRequest) Send() (*DeleteWorkspaceImageOutput, error) {
+func (r DeleteWorkspaceImageRequest) Send(ctx context.Context) (*DeleteWorkspaceImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,7 +415,7 @@ func (r DeleteWorkspaceImageRequest) Send() (*DeleteWorkspaceImageOutput, error)
 //
 //    // Example sending a request using the DeleteWorkspaceImageRequest method.
 //    req := client.DeleteWorkspaceImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -440,7 +449,8 @@ type DescribeAccountRequest struct {
 }
 
 // Send marshals and sends the DescribeAccount API request.
-func (r DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
+func (r DescribeAccountRequest) Send(ctx context.Context) (*DescribeAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -457,7 +467,7 @@ func (r DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
 //
 //    // Example sending a request using the DescribeAccountRequest method.
 //    req := client.DescribeAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -491,7 +501,8 @@ type DescribeAccountModificationsRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountModifications API request.
-func (r DescribeAccountModificationsRequest) Send() (*DescribeAccountModificationsOutput, error) {
+func (r DescribeAccountModificationsRequest) Send(ctx context.Context) (*DescribeAccountModificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -508,7 +519,7 @@ func (r DescribeAccountModificationsRequest) Send() (*DescribeAccountModificatio
 //
 //    // Example sending a request using the DescribeAccountModificationsRequest method.
 //    req := client.DescribeAccountModificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -542,7 +553,8 @@ type DescribeClientPropertiesRequest struct {
 }
 
 // Send marshals and sends the DescribeClientProperties API request.
-func (r DescribeClientPropertiesRequest) Send() (*DescribeClientPropertiesOutput, error) {
+func (r DescribeClientPropertiesRequest) Send(ctx context.Context) (*DescribeClientPropertiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -558,7 +570,7 @@ func (r DescribeClientPropertiesRequest) Send() (*DescribeClientPropertiesOutput
 //
 //    // Example sending a request using the DescribeClientPropertiesRequest method.
 //    req := client.DescribeClientPropertiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -592,7 +604,8 @@ type DescribeIpGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeIpGroups API request.
-func (r DescribeIpGroupsRequest) Send() (*DescribeIpGroupsOutput, error) {
+func (r DescribeIpGroupsRequest) Send(ctx context.Context) (*DescribeIpGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -608,7 +621,7 @@ func (r DescribeIpGroupsRequest) Send() (*DescribeIpGroupsOutput, error) {
 //
 //    // Example sending a request using the DescribeIpGroupsRequest method.
 //    req := client.DescribeIpGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -642,7 +655,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -658,7 +672,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -692,7 +706,8 @@ type DescribeWorkspaceBundlesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaceBundles API request.
-func (r DescribeWorkspaceBundlesRequest) Send() (*DescribeWorkspaceBundlesOutput, error) {
+func (r DescribeWorkspaceBundlesRequest) Send(ctx context.Context) (*DescribeWorkspaceBundlesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,7 +725,7 @@ func (r DescribeWorkspaceBundlesRequest) Send() (*DescribeWorkspaceBundlesOutput
 //
 //    // Example sending a request using the DescribeWorkspaceBundlesRequest method.
 //    req := client.DescribeWorkspaceBundlesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +811,8 @@ type DescribeWorkspaceDirectoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaceDirectories API request.
-func (r DescribeWorkspaceDirectoriesRequest) Send() (*DescribeWorkspaceDirectoriesOutput, error) {
+func (r DescribeWorkspaceDirectoriesRequest) Send(ctx context.Context) (*DescribeWorkspaceDirectoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -813,7 +829,7 @@ func (r DescribeWorkspaceDirectoriesRequest) Send() (*DescribeWorkspaceDirectori
 //
 //    // Example sending a request using the DescribeWorkspaceDirectoriesRequest method.
 //    req := client.DescribeWorkspaceDirectoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -899,7 +915,8 @@ type DescribeWorkspaceImagesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaceImages API request.
-func (r DescribeWorkspaceImagesRequest) Send() (*DescribeWorkspaceImagesOutput, error) {
+func (r DescribeWorkspaceImagesRequest) Send(ctx context.Context) (*DescribeWorkspaceImagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -916,7 +933,7 @@ func (r DescribeWorkspaceImagesRequest) Send() (*DescribeWorkspaceImagesOutput, 
 //
 //    // Example sending a request using the DescribeWorkspaceImagesRequest method.
 //    req := client.DescribeWorkspaceImagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -950,7 +967,8 @@ type DescribeWorkspacesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaces API request.
-func (r DescribeWorkspacesRequest) Send() (*DescribeWorkspacesOutput, error) {
+func (r DescribeWorkspacesRequest) Send(ctx context.Context) (*DescribeWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -969,7 +987,7 @@ func (r DescribeWorkspacesRequest) Send() (*DescribeWorkspacesOutput, error) {
 //
 //    // Example sending a request using the DescribeWorkspacesRequest method.
 //    req := client.DescribeWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1055,7 +1073,8 @@ type DescribeWorkspacesConnectionStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspacesConnectionStatus API request.
-func (r DescribeWorkspacesConnectionStatusRequest) Send() (*DescribeWorkspacesConnectionStatusOutput, error) {
+func (r DescribeWorkspacesConnectionStatusRequest) Send(ctx context.Context) (*DescribeWorkspacesConnectionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1071,7 +1090,7 @@ func (r DescribeWorkspacesConnectionStatusRequest) Send() (*DescribeWorkspacesCo
 //
 //    // Example sending a request using the DescribeWorkspacesConnectionStatusRequest method.
 //    req := client.DescribeWorkspacesConnectionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1105,7 +1124,8 @@ type DisassociateIpGroupsRequest struct {
 }
 
 // Send marshals and sends the DisassociateIpGroups API request.
-func (r DisassociateIpGroupsRequest) Send() (*DisassociateIpGroupsOutput, error) {
+func (r DisassociateIpGroupsRequest) Send(ctx context.Context) (*DisassociateIpGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1121,7 +1141,7 @@ func (r DisassociateIpGroupsRequest) Send() (*DisassociateIpGroupsOutput, error)
 //
 //    // Example sending a request using the DisassociateIpGroupsRequest method.
 //    req := client.DisassociateIpGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1155,7 +1175,8 @@ type ImportWorkspaceImageRequest struct {
 }
 
 // Send marshals and sends the ImportWorkspaceImage API request.
-func (r ImportWorkspaceImageRequest) Send() (*ImportWorkspaceImageOutput, error) {
+func (r ImportWorkspaceImageRequest) Send(ctx context.Context) (*ImportWorkspaceImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1173,7 +1194,7 @@ func (r ImportWorkspaceImageRequest) Send() (*ImportWorkspaceImageOutput, error)
 //
 //    // Example sending a request using the ImportWorkspaceImageRequest method.
 //    req := client.ImportWorkspaceImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1207,7 +1228,8 @@ type ListAvailableManagementCidrRangesRequest struct {
 }
 
 // Send marshals and sends the ListAvailableManagementCidrRanges API request.
-func (r ListAvailableManagementCidrRangesRequest) Send() (*ListAvailableManagementCidrRangesOutput, error) {
+func (r ListAvailableManagementCidrRangesRequest) Send(ctx context.Context) (*ListAvailableManagementCidrRangesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1230,7 +1252,7 @@ func (r ListAvailableManagementCidrRangesRequest) Send() (*ListAvailableManageme
 //
 //    // Example sending a request using the ListAvailableManagementCidrRangesRequest method.
 //    req := client.ListAvailableManagementCidrRangesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1264,7 +1286,8 @@ type ModifyAccountRequest struct {
 }
 
 // Send marshals and sends the ModifyAccount API request.
-func (r ModifyAccountRequest) Send() (*ModifyAccountOutput, error) {
+func (r ModifyAccountRequest) Send(ctx context.Context) (*ModifyAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1281,7 +1304,7 @@ func (r ModifyAccountRequest) Send() (*ModifyAccountOutput, error) {
 //
 //    // Example sending a request using the ModifyAccountRequest method.
 //    req := client.ModifyAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1315,7 +1338,8 @@ type ModifyClientPropertiesRequest struct {
 }
 
 // Send marshals and sends the ModifyClientProperties API request.
-func (r ModifyClientPropertiesRequest) Send() (*ModifyClientPropertiesOutput, error) {
+func (r ModifyClientPropertiesRequest) Send(ctx context.Context) (*ModifyClientPropertiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1331,7 +1355,7 @@ func (r ModifyClientPropertiesRequest) Send() (*ModifyClientPropertiesOutput, er
 //
 //    // Example sending a request using the ModifyClientPropertiesRequest method.
 //    req := client.ModifyClientPropertiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1365,7 +1389,8 @@ type ModifyWorkspacePropertiesRequest struct {
 }
 
 // Send marshals and sends the ModifyWorkspaceProperties API request.
-func (r ModifyWorkspacePropertiesRequest) Send() (*ModifyWorkspacePropertiesOutput, error) {
+func (r ModifyWorkspacePropertiesRequest) Send(ctx context.Context) (*ModifyWorkspacePropertiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1381,7 +1406,7 @@ func (r ModifyWorkspacePropertiesRequest) Send() (*ModifyWorkspacePropertiesOutp
 //
 //    // Example sending a request using the ModifyWorkspacePropertiesRequest method.
 //    req := client.ModifyWorkspacePropertiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1415,7 +1440,8 @@ type ModifyWorkspaceStateRequest struct {
 }
 
 // Send marshals and sends the ModifyWorkspaceState API request.
-func (r ModifyWorkspaceStateRequest) Send() (*ModifyWorkspaceStateOutput, error) {
+func (r ModifyWorkspaceStateRequest) Send(ctx context.Context) (*ModifyWorkspaceStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1436,7 +1462,7 @@ func (r ModifyWorkspaceStateRequest) Send() (*ModifyWorkspaceStateOutput, error)
 //
 //    // Example sending a request using the ModifyWorkspaceStateRequest method.
 //    req := client.ModifyWorkspaceStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1470,7 +1496,8 @@ type RebootWorkspacesRequest struct {
 }
 
 // Send marshals and sends the RebootWorkspaces API request.
-func (r RebootWorkspacesRequest) Send() (*RebootWorkspacesOutput, error) {
+func (r RebootWorkspacesRequest) Send(ctx context.Context) (*RebootWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1490,7 +1517,7 @@ func (r RebootWorkspacesRequest) Send() (*RebootWorkspacesOutput, error) {
 //
 //    // Example sending a request using the RebootWorkspacesRequest method.
 //    req := client.RebootWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1524,7 +1551,8 @@ type RebuildWorkspacesRequest struct {
 }
 
 // Send marshals and sends the RebuildWorkspaces API request.
-func (r RebuildWorkspacesRequest) Send() (*RebuildWorkspacesOutput, error) {
+func (r RebuildWorkspacesRequest) Send(ctx context.Context) (*RebuildWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1548,7 +1576,7 @@ func (r RebuildWorkspacesRequest) Send() (*RebuildWorkspacesOutput, error) {
 //
 //    // Example sending a request using the RebuildWorkspacesRequest method.
 //    req := client.RebuildWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1582,7 +1610,8 @@ type RevokeIpRulesRequest struct {
 }
 
 // Send marshals and sends the RevokeIpRules API request.
-func (r RevokeIpRulesRequest) Send() (*RevokeIpRulesOutput, error) {
+func (r RevokeIpRulesRequest) Send(ctx context.Context) (*RevokeIpRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1598,7 +1627,7 @@ func (r RevokeIpRulesRequest) Send() (*RevokeIpRulesOutput, error) {
 //
 //    // Example sending a request using the RevokeIpRulesRequest method.
 //    req := client.RevokeIpRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1632,7 +1661,8 @@ type StartWorkspacesRequest struct {
 }
 
 // Send marshals and sends the StartWorkspaces API request.
-func (r StartWorkspacesRequest) Send() (*StartWorkspacesOutput, error) {
+func (r StartWorkspacesRequest) Send(ctx context.Context) (*StartWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1651,7 +1681,7 @@ func (r StartWorkspacesRequest) Send() (*StartWorkspacesOutput, error) {
 //
 //    // Example sending a request using the StartWorkspacesRequest method.
 //    req := client.StartWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1685,7 +1715,8 @@ type StopWorkspacesRequest struct {
 }
 
 // Send marshals and sends the StopWorkspaces API request.
-func (r StopWorkspacesRequest) Send() (*StopWorkspacesOutput, error) {
+func (r StopWorkspacesRequest) Send(ctx context.Context) (*StopWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1704,7 +1735,7 @@ func (r StopWorkspacesRequest) Send() (*StopWorkspacesOutput, error) {
 //
 //    // Example sending a request using the StopWorkspacesRequest method.
 //    req := client.StopWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1738,7 +1769,8 @@ type TerminateWorkspacesRequest struct {
 }
 
 // Send marshals and sends the TerminateWorkspaces API request.
-func (r TerminateWorkspacesRequest) Send() (*TerminateWorkspacesOutput, error) {
+func (r TerminateWorkspacesRequest) Send(ctx context.Context) (*TerminateWorkspacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1763,7 +1795,7 @@ func (r TerminateWorkspacesRequest) Send() (*TerminateWorkspacesOutput, error) {
 //
 //    // Example sending a request using the TerminateWorkspacesRequest method.
 //    req := client.TerminateWorkspacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1797,7 +1829,8 @@ type UpdateRulesOfIpGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateRulesOfIpGroup API request.
-func (r UpdateRulesOfIpGroupRequest) Send() (*UpdateRulesOfIpGroupOutput, error) {
+func (r UpdateRulesOfIpGroupRequest) Send(ctx context.Context) (*UpdateRulesOfIpGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1814,7 +1847,7 @@ func (r UpdateRulesOfIpGroupRequest) Send() (*UpdateRulesOfIpGroupOutput, error)
 //
 //    // Example sending a request using the UpdateRulesOfIpGroupRequest method.
 //    req := client.UpdateRulesOfIpGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

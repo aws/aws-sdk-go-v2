@@ -3,6 +3,7 @@
 package pricing
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type DescribeServicesRequest struct {
 }
 
 // Send marshals and sends the DescribeServices API request.
-func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
 //
 //    // Example sending a request using the DescribeServicesRequest method.
 //    req := client.DescribeServicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +128,8 @@ type GetAttributeValuesRequest struct {
 }
 
 // Send marshals and sends the GetAttributeValues API request.
-func (r GetAttributeValuesRequest) Send() (*GetAttributeValuesOutput, error) {
+func (r GetAttributeValuesRequest) Send(ctx context.Context) (*GetAttributeValuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -145,7 +148,7 @@ func (r GetAttributeValuesRequest) Send() (*GetAttributeValuesOutput, error) {
 //
 //    // Example sending a request using the GetAttributeValuesRequest method.
 //    req := client.GetAttributeValuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -231,7 +234,8 @@ type GetProductsRequest struct {
 }
 
 // Send marshals and sends the GetProducts API request.
-func (r GetProductsRequest) Send() (*GetProductsOutput, error) {
+func (r GetProductsRequest) Send(ctx context.Context) (*GetProductsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -247,7 +251,7 @@ func (r GetProductsRequest) Send() (*GetProductsOutput, error) {
 //
 //    // Example sending a request using the GetProductsRequest method.
 //    req := client.GetProductsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

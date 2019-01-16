@@ -3,6 +3,7 @@
 package iot1clickdevicesservice
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type ClaimDevicesByClaimCodeRequest struct {
 }
 
 // Send marshals and sends the ClaimDevicesByClaimCode API request.
-func (r ClaimDevicesByClaimCodeRequest) Send() (*ClaimDevicesByClaimCodeOutput, error) {
+func (r ClaimDevicesByClaimCodeRequest) Send(ctx context.Context) (*ClaimDevicesByClaimCodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r ClaimDevicesByClaimCodeRequest) Send() (*ClaimDevicesByClaimCodeOutput, 
 //
 //    // Example sending a request using the ClaimDevicesByClaimCodeRequest method.
 //    req := client.ClaimDevicesByClaimCodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type DescribeDeviceRequest struct {
 }
 
 // Send marshals and sends the DescribeDevice API request.
-func (r DescribeDeviceRequest) Send() (*DescribeDeviceOutput, error) {
+func (r DescribeDeviceRequest) Send(ctx context.Context) (*DescribeDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r DescribeDeviceRequest) Send() (*DescribeDeviceOutput, error) {
 //
 //    // Example sending a request using the DescribeDeviceRequest method.
 //    req := client.DescribeDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type FinalizeDeviceClaimRequest struct {
 }
 
 // Send marshals and sends the FinalizeDeviceClaim API request.
-func (r FinalizeDeviceClaimRequest) Send() (*FinalizeDeviceClaimOutput, error) {
+func (r FinalizeDeviceClaimRequest) Send(ctx context.Context) (*FinalizeDeviceClaimOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +146,7 @@ func (r FinalizeDeviceClaimRequest) Send() (*FinalizeDeviceClaimOutput, error) {
 //
 //    // Example sending a request using the FinalizeDeviceClaimRequest method.
 //    req := client.FinalizeDeviceClaimRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -176,7 +180,8 @@ type GetDeviceMethodsRequest struct {
 }
 
 // Send marshals and sends the GetDeviceMethods API request.
-func (r GetDeviceMethodsRequest) Send() (*GetDeviceMethodsOutput, error) {
+func (r GetDeviceMethodsRequest) Send(ctx context.Context) (*GetDeviceMethodsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (r GetDeviceMethodsRequest) Send() (*GetDeviceMethodsOutput, error) {
 //
 //    // Example sending a request using the GetDeviceMethodsRequest method.
 //    req := client.GetDeviceMethodsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -226,7 +231,8 @@ type InitiateDeviceClaimRequest struct {
 }
 
 // Send marshals and sends the InitiateDeviceClaim API request.
-func (r InitiateDeviceClaimRequest) Send() (*InitiateDeviceClaimOutput, error) {
+func (r InitiateDeviceClaimRequest) Send(ctx context.Context) (*InitiateDeviceClaimOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,7 +252,7 @@ func (r InitiateDeviceClaimRequest) Send() (*InitiateDeviceClaimOutput, error) {
 //
 //    // Example sending a request using the InitiateDeviceClaimRequest method.
 //    req := client.InitiateDeviceClaimRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -280,7 +286,8 @@ type InvokeDeviceMethodRequest struct {
 }
 
 // Send marshals and sends the InvokeDeviceMethod API request.
-func (r InvokeDeviceMethodRequest) Send() (*InvokeDeviceMethodOutput, error) {
+func (r InvokeDeviceMethodRequest) Send(ctx context.Context) (*InvokeDeviceMethodOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,7 +304,7 @@ func (r InvokeDeviceMethodRequest) Send() (*InvokeDeviceMethodOutput, error) {
 //
 //    // Example sending a request using the InvokeDeviceMethodRequest method.
 //    req := client.InvokeDeviceMethodRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -331,7 +338,8 @@ type ListDeviceEventsRequest struct {
 }
 
 // Send marshals and sends the ListDeviceEvents API request.
-func (r ListDeviceEventsRequest) Send() (*ListDeviceEventsOutput, error) {
+func (r ListDeviceEventsRequest) Send(ctx context.Context) (*ListDeviceEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -348,7 +356,7 @@ func (r ListDeviceEventsRequest) Send() (*ListDeviceEventsOutput, error) {
 //
 //    // Example sending a request using the ListDeviceEventsRequest method.
 //    req := client.ListDeviceEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -382,7 +390,8 @@ type ListDevicesRequest struct {
 }
 
 // Send marshals and sends the ListDevices API request.
-func (r ListDevicesRequest) Send() (*ListDevicesOutput, error) {
+func (r ListDevicesRequest) Send(ctx context.Context) (*ListDevicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +407,7 @@ func (r ListDevicesRequest) Send() (*ListDevicesOutput, error) {
 //
 //    // Example sending a request using the ListDevicesRequest method.
 //    req := client.ListDevicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +441,8 @@ type UnclaimDeviceRequest struct {
 }
 
 // Send marshals and sends the UnclaimDevice API request.
-func (r UnclaimDeviceRequest) Send() (*UnclaimDeviceOutput, error) {
+func (r UnclaimDeviceRequest) Send(ctx context.Context) (*UnclaimDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +458,7 @@ func (r UnclaimDeviceRequest) Send() (*UnclaimDeviceOutput, error) {
 //
 //    // Example sending a request using the UnclaimDeviceRequest method.
 //    req := client.UnclaimDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -482,7 +492,8 @@ type UpdateDeviceStateRequest struct {
 }
 
 // Send marshals and sends the UpdateDeviceState API request.
-func (r UpdateDeviceStateRequest) Send() (*UpdateDeviceStateOutput, error) {
+func (r UpdateDeviceStateRequest) Send(ctx context.Context) (*UpdateDeviceStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -499,7 +510,7 @@ func (r UpdateDeviceStateRequest) Send() (*UpdateDeviceStateOutput, error) {
 //
 //    // Example sending a request using the UpdateDeviceStateRequest method.
 //    req := client.UpdateDeviceStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

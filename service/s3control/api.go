@@ -3,6 +3,8 @@
 package s3control
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -19,7 +21,8 @@ type DeletePublicAccessBlockRequest struct {
 }
 
 // Send marshals and sends the DeletePublicAccessBlock API request.
-func (r DeletePublicAccessBlockRequest) Send() (*DeletePublicAccessBlockOutput, error) {
+func (r DeletePublicAccessBlockRequest) Send(ctx context.Context) (*DeletePublicAccessBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +39,7 @@ func (r DeletePublicAccessBlockRequest) Send() (*DeletePublicAccessBlockOutput, 
 //
 //    // Example sending a request using the DeletePublicAccessBlockRequest method.
 //    req := client.DeletePublicAccessBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -74,7 +77,8 @@ type GetPublicAccessBlockRequest struct {
 }
 
 // Send marshals and sends the GetPublicAccessBlock API request.
-func (r GetPublicAccessBlockRequest) Send() (*GetPublicAccessBlockOutput, error) {
+func (r GetPublicAccessBlockRequest) Send(ctx context.Context) (*GetPublicAccessBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -91,7 +95,7 @@ func (r GetPublicAccessBlockRequest) Send() (*GetPublicAccessBlockOutput, error)
 //
 //    // Example sending a request using the GetPublicAccessBlockRequest method.
 //    req := client.GetPublicAccessBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +131,8 @@ type PutPublicAccessBlockRequest struct {
 }
 
 // Send marshals and sends the PutPublicAccessBlock API request.
-func (r PutPublicAccessBlockRequest) Send() (*PutPublicAccessBlockOutput, error) {
+func (r PutPublicAccessBlockRequest) Send(ctx context.Context) (*PutPublicAccessBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -144,7 +149,7 @@ func (r PutPublicAccessBlockRequest) Send() (*PutPublicAccessBlockOutput, error)
 //
 //    // Example sending a request using the PutPublicAccessBlockRequest method.
 //    req := client.PutPublicAccessBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package cloudsearchdomain
 
 import (
+	"context"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type SearchRequest struct {
 }
 
 // Send marshals and sends the Search API request.
-func (r SearchRequest) Send() (*SearchOutput, error) {
+func (r SearchRequest) Send(ctx context.Context) (*SearchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -56,7 +58,7 @@ func (r SearchRequest) Send() (*SearchOutput, error) {
 //
 //    // Example sending a request using the SearchRequest method.
 //    req := client.SearchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -88,7 +90,8 @@ type SuggestRequest struct {
 }
 
 // Send marshals and sends the Suggest API request.
-func (r SuggestRequest) Send() (*SuggestOutput, error) {
+func (r SuggestRequest) Send(ctx context.Context) (*SuggestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -120,7 +123,7 @@ func (r SuggestRequest) Send() (*SuggestOutput, error) {
 //
 //    // Example sending a request using the SuggestRequest method.
 //    req := client.SuggestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -152,7 +155,8 @@ type UploadDocumentsRequest struct {
 }
 
 // Send marshals and sends the UploadDocuments API request.
-func (r UploadDocumentsRequest) Send() (*UploadDocumentsOutput, error) {
+func (r UploadDocumentsRequest) Send(ctx context.Context) (*UploadDocumentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -189,7 +193,7 @@ func (r UploadDocumentsRequest) Send() (*UploadDocumentsOutput, error) {
 //
 //    // Example sending a request using the UploadDocumentsRequest method.
 //    req := client.UploadDocumentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

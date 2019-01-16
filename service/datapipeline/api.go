@@ -3,6 +3,7 @@
 package datapipeline
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type ActivatePipelineRequest struct {
 }
 
 // Send marshals and sends the ActivatePipeline API request.
-func (r ActivatePipelineRequest) Send() (*ActivatePipelineOutput, error) {
+func (r ActivatePipelineRequest) Send(ctx context.Context) (*ActivatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -45,7 +47,7 @@ func (r ActivatePipelineRequest) Send() (*ActivatePipelineOutput, error) {
 //
 //    // Example sending a request using the ActivatePipelineRequest method.
 //    req := client.ActivatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -79,7 +81,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -95,7 +98,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -129,7 +132,8 @@ type CreatePipelineRequest struct {
 }
 
 // Send marshals and sends the CreatePipeline API request.
-func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -146,7 +150,7 @@ func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
 //
 //    // Example sending a request using the CreatePipelineRequest method.
 //    req := client.CreatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -180,7 +184,8 @@ type DeactivatePipelineRequest struct {
 }
 
 // Send marshals and sends the DeactivatePipeline API request.
-func (r DeactivatePipelineRequest) Send() (*DeactivatePipelineOutput, error) {
+func (r DeactivatePipelineRequest) Send(ctx context.Context) (*DeactivatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +206,7 @@ func (r DeactivatePipelineRequest) Send() (*DeactivatePipelineOutput, error) {
 //
 //    // Example sending a request using the DeactivatePipelineRequest method.
 //    req := client.DeactivatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -235,7 +240,8 @@ type DeletePipelineRequest struct {
 }
 
 // Send marshals and sends the DeletePipeline API request.
-func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -258,7 +264,7 @@ func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
 //
 //    // Example sending a request using the DeletePipelineRequest method.
 //    req := client.DeletePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -294,7 +300,8 @@ type DescribeObjectsRequest struct {
 }
 
 // Send marshals and sends the DescribeObjects API request.
-func (r DescribeObjectsRequest) Send() (*DescribeObjectsOutput, error) {
+func (r DescribeObjectsRequest) Send(ctx context.Context) (*DescribeObjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -312,7 +319,7 @@ func (r DescribeObjectsRequest) Send() (*DescribeObjectsOutput, error) {
 //
 //    // Example sending a request using the DescribeObjectsRequest method.
 //    req := client.DescribeObjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -398,7 +405,8 @@ type DescribePipelinesRequest struct {
 }
 
 // Send marshals and sends the DescribePipelines API request.
-func (r DescribePipelinesRequest) Send() (*DescribePipelinesOutput, error) {
+func (r DescribePipelinesRequest) Send(ctx context.Context) (*DescribePipelinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -422,7 +430,7 @@ func (r DescribePipelinesRequest) Send() (*DescribePipelinesOutput, error) {
 //
 //    // Example sending a request using the DescribePipelinesRequest method.
 //    req := client.DescribePipelinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -456,7 +464,8 @@ type EvaluateExpressionRequest struct {
 }
 
 // Send marshals and sends the EvaluateExpression API request.
-func (r EvaluateExpressionRequest) Send() (*EvaluateExpressionOutput, error) {
+func (r EvaluateExpressionRequest) Send(ctx context.Context) (*EvaluateExpressionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +483,7 @@ func (r EvaluateExpressionRequest) Send() (*EvaluateExpressionOutput, error) {
 //
 //    // Example sending a request using the EvaluateExpressionRequest method.
 //    req := client.EvaluateExpressionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -508,7 +517,8 @@ type GetPipelineDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetPipelineDefinition API request.
-func (r GetPipelineDefinitionRequest) Send() (*GetPipelineDefinitionOutput, error) {
+func (r GetPipelineDefinitionRequest) Send(ctx context.Context) (*GetPipelineDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -525,7 +535,7 @@ func (r GetPipelineDefinitionRequest) Send() (*GetPipelineDefinitionOutput, erro
 //
 //    // Example sending a request using the GetPipelineDefinitionRequest method.
 //    req := client.GetPipelineDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -559,7 +569,8 @@ type ListPipelinesRequest struct {
 }
 
 // Send marshals and sends the ListPipelines API request.
-func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -576,7 +587,7 @@ func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
 //
 //    // Example sending a request using the ListPipelinesRequest method.
 //    req := client.ListPipelinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -662,7 +673,8 @@ type PollForTaskRequest struct {
 }
 
 // Send marshals and sends the PollForTask API request.
-func (r PollForTaskRequest) Send() (*PollForTaskOutput, error) {
+func (r PollForTaskRequest) Send(ctx context.Context) (*PollForTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -691,7 +703,7 @@ func (r PollForTaskRequest) Send() (*PollForTaskOutput, error) {
 //
 //    // Example sending a request using the PollForTaskRequest method.
 //    req := client.PollForTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -725,7 +737,8 @@ type PutPipelineDefinitionRequest struct {
 }
 
 // Send marshals and sends the PutPipelineDefinition API request.
-func (r PutPipelineDefinitionRequest) Send() (*PutPipelineDefinitionOutput, error) {
+func (r PutPipelineDefinitionRequest) Send(ctx context.Context) (*PutPipelineDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -754,7 +767,7 @@ func (r PutPipelineDefinitionRequest) Send() (*PutPipelineDefinitionOutput, erro
 //
 //    // Example sending a request using the PutPipelineDefinitionRequest method.
 //    req := client.PutPipelineDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -788,7 +801,8 @@ type QueryObjectsRequest struct {
 }
 
 // Send marshals and sends the QueryObjects API request.
-func (r QueryObjectsRequest) Send() (*QueryObjectsOutput, error) {
+func (r QueryObjectsRequest) Send(ctx context.Context) (*QueryObjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -805,7 +819,7 @@ func (r QueryObjectsRequest) Send() (*QueryObjectsOutput, error) {
 //
 //    // Example sending a request using the QueryObjectsRequest method.
 //    req := client.QueryObjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -891,7 +905,8 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -907,7 +922,7 @@ func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsRequest method.
 //    req := client.RemoveTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -941,7 +956,8 @@ type ReportTaskProgressRequest struct {
 }
 
 // Send marshals and sends the ReportTaskProgress API request.
-func (r ReportTaskProgressRequest) Send() (*ReportTaskProgressOutput, error) {
+func (r ReportTaskProgressRequest) Send(ctx context.Context) (*ReportTaskProgressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -968,7 +984,7 @@ func (r ReportTaskProgressRequest) Send() (*ReportTaskProgressOutput, error) {
 //
 //    // Example sending a request using the ReportTaskProgressRequest method.
 //    req := client.ReportTaskProgressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1002,7 +1018,8 @@ type ReportTaskRunnerHeartbeatRequest struct {
 }
 
 // Send marshals and sends the ReportTaskRunnerHeartbeat API request.
-func (r ReportTaskRunnerHeartbeatRequest) Send() (*ReportTaskRunnerHeartbeatOutput, error) {
+func (r ReportTaskRunnerHeartbeatRequest) Send(ctx context.Context) (*ReportTaskRunnerHeartbeatOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1022,7 +1039,7 @@ func (r ReportTaskRunnerHeartbeatRequest) Send() (*ReportTaskRunnerHeartbeatOutp
 //
 //    // Example sending a request using the ReportTaskRunnerHeartbeatRequest method.
 //    req := client.ReportTaskRunnerHeartbeatRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1056,7 +1073,8 @@ type SetStatusRequest struct {
 }
 
 // Send marshals and sends the SetStatus API request.
-func (r SetStatusRequest) Send() (*SetStatusOutput, error) {
+func (r SetStatusRequest) Send(ctx context.Context) (*SetStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1076,7 +1094,7 @@ func (r SetStatusRequest) Send() (*SetStatusOutput, error) {
 //
 //    // Example sending a request using the SetStatusRequest method.
 //    req := client.SetStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1112,7 +1130,8 @@ type SetTaskStatusRequest struct {
 }
 
 // Send marshals and sends the SetTaskStatus API request.
-func (r SetTaskStatusRequest) Send() (*SetTaskStatusOutput, error) {
+func (r SetTaskStatusRequest) Send(ctx context.Context) (*SetTaskStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1132,7 +1151,7 @@ func (r SetTaskStatusRequest) Send() (*SetTaskStatusOutput, error) {
 //
 //    // Example sending a request using the SetTaskStatusRequest method.
 //    req := client.SetTaskStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1166,7 +1185,8 @@ type ValidatePipelineDefinitionRequest struct {
 }
 
 // Send marshals and sends the ValidatePipelineDefinition API request.
-func (r ValidatePipelineDefinitionRequest) Send() (*ValidatePipelineDefinitionOutput, error) {
+func (r ValidatePipelineDefinitionRequest) Send(ctx context.Context) (*ValidatePipelineDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1183,7 +1203,7 @@ func (r ValidatePipelineDefinitionRequest) Send() (*ValidatePipelineDefinitionOu
 //
 //    // Example sending a request using the ValidatePipelineDefinitionRequest method.
 //    req := client.ValidatePipelineDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

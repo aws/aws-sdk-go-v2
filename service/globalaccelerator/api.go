@@ -3,6 +3,7 @@
 package globalaccelerator
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateAcceleratorRequest struct {
 }
 
 // Send marshals and sends the CreateAccelerator API request.
-func (r CreateAcceleratorRequest) Send() (*CreateAcceleratorOutput, error) {
+func (r CreateAcceleratorRequest) Send(ctx context.Context) (*CreateAcceleratorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r CreateAcceleratorRequest) Send() (*CreateAcceleratorOutput, error) {
 //
 //    // Example sending a request using the CreateAcceleratorRequest method.
 //    req := client.CreateAcceleratorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type CreateEndpointGroupRequest struct {
 }
 
 // Send marshals and sends the CreateEndpointGroup API request.
-func (r CreateEndpointGroupRequest) Send() (*CreateEndpointGroupOutput, error) {
+func (r CreateEndpointGroupRequest) Send(ctx context.Context) (*CreateEndpointGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r CreateEndpointGroupRequest) Send() (*CreateEndpointGroupOutput, error) {
 //
 //    // Example sending a request using the CreateEndpointGroupRequest method.
 //    req := client.CreateEndpointGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type CreateListenerRequest struct {
 }
 
 // Send marshals and sends the CreateListener API request.
-func (r CreateListenerRequest) Send() (*CreateListenerOutput, error) {
+func (r CreateListenerRequest) Send(ctx context.Context) (*CreateListenerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -146,7 +150,7 @@ func (r CreateListenerRequest) Send() (*CreateListenerOutput, error) {
 //
 //    // Example sending a request using the CreateListenerRequest method.
 //    req := client.CreateListenerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -180,7 +184,8 @@ type DeleteAcceleratorRequest struct {
 }
 
 // Send marshals and sends the DeleteAccelerator API request.
-func (r DeleteAcceleratorRequest) Send() (*DeleteAcceleratorOutput, error) {
+func (r DeleteAcceleratorRequest) Send(ctx context.Context) (*DeleteAcceleratorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -197,7 +202,7 @@ func (r DeleteAcceleratorRequest) Send() (*DeleteAcceleratorOutput, error) {
 //
 //    // Example sending a request using the DeleteAcceleratorRequest method.
 //    req := client.DeleteAcceleratorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -233,7 +238,8 @@ type DeleteEndpointGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteEndpointGroup API request.
-func (r DeleteEndpointGroupRequest) Send() (*DeleteEndpointGroupOutput, error) {
+func (r DeleteEndpointGroupRequest) Send(ctx context.Context) (*DeleteEndpointGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +255,7 @@ func (r DeleteEndpointGroupRequest) Send() (*DeleteEndpointGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteEndpointGroupRequest method.
 //    req := client.DeleteEndpointGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -285,7 +291,8 @@ type DeleteListenerRequest struct {
 }
 
 // Send marshals and sends the DeleteListener API request.
-func (r DeleteListenerRequest) Send() (*DeleteListenerOutput, error) {
+func (r DeleteListenerRequest) Send(ctx context.Context) (*DeleteListenerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -301,7 +308,7 @@ func (r DeleteListenerRequest) Send() (*DeleteListenerOutput, error) {
 //
 //    // Example sending a request using the DeleteListenerRequest method.
 //    req := client.DeleteListenerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -337,7 +344,8 @@ type DescribeAcceleratorRequest struct {
 }
 
 // Send marshals and sends the DescribeAccelerator API request.
-func (r DescribeAcceleratorRequest) Send() (*DescribeAcceleratorOutput, error) {
+func (r DescribeAcceleratorRequest) Send(ctx context.Context) (*DescribeAcceleratorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -354,7 +362,7 @@ func (r DescribeAcceleratorRequest) Send() (*DescribeAcceleratorOutput, error) {
 //
 //    // Example sending a request using the DescribeAcceleratorRequest method.
 //    req := client.DescribeAcceleratorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -388,7 +396,8 @@ type DescribeAcceleratorAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAcceleratorAttributes API request.
-func (r DescribeAcceleratorAttributesRequest) Send() (*DescribeAcceleratorAttributesOutput, error) {
+func (r DescribeAcceleratorAttributesRequest) Send(ctx context.Context) (*DescribeAcceleratorAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -404,7 +413,7 @@ func (r DescribeAcceleratorAttributesRequest) Send() (*DescribeAcceleratorAttrib
 //
 //    // Example sending a request using the DescribeAcceleratorAttributesRequest method.
 //    req := client.DescribeAcceleratorAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -438,7 +447,8 @@ type DescribeEndpointGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpointGroup API request.
-func (r DescribeEndpointGroupRequest) Send() (*DescribeEndpointGroupOutput, error) {
+func (r DescribeEndpointGroupRequest) Send(ctx context.Context) (*DescribeEndpointGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -454,7 +464,7 @@ func (r DescribeEndpointGroupRequest) Send() (*DescribeEndpointGroupOutput, erro
 //
 //    // Example sending a request using the DescribeEndpointGroupRequest method.
 //    req := client.DescribeEndpointGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -488,7 +498,8 @@ type DescribeListenerRequest struct {
 }
 
 // Send marshals and sends the DescribeListener API request.
-func (r DescribeListenerRequest) Send() (*DescribeListenerOutput, error) {
+func (r DescribeListenerRequest) Send(ctx context.Context) (*DescribeListenerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -504,7 +515,7 @@ func (r DescribeListenerRequest) Send() (*DescribeListenerOutput, error) {
 //
 //    // Example sending a request using the DescribeListenerRequest method.
 //    req := client.DescribeListenerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -538,7 +549,8 @@ type ListAcceleratorsRequest struct {
 }
 
 // Send marshals and sends the ListAccelerators API request.
-func (r ListAcceleratorsRequest) Send() (*ListAcceleratorsOutput, error) {
+func (r ListAcceleratorsRequest) Send(ctx context.Context) (*ListAcceleratorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -554,7 +566,7 @@ func (r ListAcceleratorsRequest) Send() (*ListAcceleratorsOutput, error) {
 //
 //    // Example sending a request using the ListAcceleratorsRequest method.
 //    req := client.ListAcceleratorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -588,7 +600,8 @@ type ListEndpointGroupsRequest struct {
 }
 
 // Send marshals and sends the ListEndpointGroups API request.
-func (r ListEndpointGroupsRequest) Send() (*ListEndpointGroupsOutput, error) {
+func (r ListEndpointGroupsRequest) Send(ctx context.Context) (*ListEndpointGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -604,7 +617,7 @@ func (r ListEndpointGroupsRequest) Send() (*ListEndpointGroupsOutput, error) {
 //
 //    // Example sending a request using the ListEndpointGroupsRequest method.
 //    req := client.ListEndpointGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -638,7 +651,8 @@ type ListListenersRequest struct {
 }
 
 // Send marshals and sends the ListListeners API request.
-func (r ListListenersRequest) Send() (*ListListenersOutput, error) {
+func (r ListListenersRequest) Send(ctx context.Context) (*ListListenersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -654,7 +668,7 @@ func (r ListListenersRequest) Send() (*ListListenersOutput, error) {
 //
 //    // Example sending a request using the ListListenersRequest method.
 //    req := client.ListListenersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -688,7 +702,8 @@ type UpdateAcceleratorRequest struct {
 }
 
 // Send marshals and sends the UpdateAccelerator API request.
-func (r UpdateAcceleratorRequest) Send() (*UpdateAcceleratorOutput, error) {
+func (r UpdateAcceleratorRequest) Send(ctx context.Context) (*UpdateAcceleratorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -704,7 +719,7 @@ func (r UpdateAcceleratorRequest) Send() (*UpdateAcceleratorOutput, error) {
 //
 //    // Example sending a request using the UpdateAcceleratorRequest method.
 //    req := client.UpdateAcceleratorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -738,7 +753,8 @@ type UpdateAcceleratorAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateAcceleratorAttributes API request.
-func (r UpdateAcceleratorAttributesRequest) Send() (*UpdateAcceleratorAttributesOutput, error) {
+func (r UpdateAcceleratorAttributesRequest) Send(ctx context.Context) (*UpdateAcceleratorAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -755,7 +771,7 @@ func (r UpdateAcceleratorAttributesRequest) Send() (*UpdateAcceleratorAttributes
 //
 //    // Example sending a request using the UpdateAcceleratorAttributesRequest method.
 //    req := client.UpdateAcceleratorAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -789,7 +805,8 @@ type UpdateEndpointGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpointGroup API request.
-func (r UpdateEndpointGroupRequest) Send() (*UpdateEndpointGroupOutput, error) {
+func (r UpdateEndpointGroupRequest) Send(ctx context.Context) (*UpdateEndpointGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -806,7 +823,7 @@ func (r UpdateEndpointGroupRequest) Send() (*UpdateEndpointGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateEndpointGroupRequest method.
 //    req := client.UpdateEndpointGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -840,7 +857,8 @@ type UpdateListenerRequest struct {
 }
 
 // Send marshals and sends the UpdateListener API request.
-func (r UpdateListenerRequest) Send() (*UpdateListenerOutput, error) {
+func (r UpdateListenerRequest) Send(ctx context.Context) (*UpdateListenerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -856,7 +874,7 @@ func (r UpdateListenerRequest) Send() (*UpdateListenerOutput, error) {
 //
 //    // Example sending a request using the UpdateListenerRequest method.
 //    req := client.UpdateListenerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

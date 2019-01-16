@@ -3,6 +3,7 @@
 package fms
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AssociateAdminAccountRequest struct {
 }
 
 // Send marshals and sends the AssociateAdminAccount API request.
-func (r AssociateAdminAccountRequest) Send() (*AssociateAdminAccountOutput, error) {
+func (r AssociateAdminAccountRequest) Send(ctx context.Context) (*AssociateAdminAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -45,7 +47,7 @@ func (r AssociateAdminAccountRequest) Send() (*AssociateAdminAccountOutput, erro
 //
 //    // Example sending a request using the AssociateAdminAccountRequest method.
 //    req := client.AssociateAdminAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -81,7 +83,8 @@ type DeleteNotificationChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteNotificationChannel API request.
-func (r DeleteNotificationChannelRequest) Send() (*DeleteNotificationChannelOutput, error) {
+func (r DeleteNotificationChannelRequest) Send(ctx context.Context) (*DeleteNotificationChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,7 +102,7 @@ func (r DeleteNotificationChannelRequest) Send() (*DeleteNotificationChannelOutp
 //
 //    // Example sending a request using the DeleteNotificationChannelRequest method.
 //    req := client.DeleteNotificationChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -135,7 +138,8 @@ type DeletePolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePolicy API request.
-func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -151,7 +155,7 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyRequest method.
 //    req := client.DeletePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -187,7 +191,8 @@ type DisassociateAdminAccountRequest struct {
 }
 
 // Send marshals and sends the DisassociateAdminAccount API request.
-func (r DisassociateAdminAccountRequest) Send() (*DisassociateAdminAccountOutput, error) {
+func (r DisassociateAdminAccountRequest) Send(ctx context.Context) (*DisassociateAdminAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -205,7 +210,7 @@ func (r DisassociateAdminAccountRequest) Send() (*DisassociateAdminAccountOutput
 //
 //    // Example sending a request using the DisassociateAdminAccountRequest method.
 //    req := client.DisassociateAdminAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -241,7 +246,8 @@ type GetAdminAccountRequest struct {
 }
 
 // Send marshals and sends the GetAdminAccount API request.
-func (r GetAdminAccountRequest) Send() (*GetAdminAccountOutput, error) {
+func (r GetAdminAccountRequest) Send(ctx context.Context) (*GetAdminAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -258,7 +264,7 @@ func (r GetAdminAccountRequest) Send() (*GetAdminAccountOutput, error) {
 //
 //    // Example sending a request using the GetAdminAccountRequest method.
 //    req := client.GetAdminAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -292,7 +298,8 @@ type GetComplianceDetailRequest struct {
 }
 
 // Send marshals and sends the GetComplianceDetail API request.
-func (r GetComplianceDetailRequest) Send() (*GetComplianceDetailOutput, error) {
+func (r GetComplianceDetailRequest) Send(ctx context.Context) (*GetComplianceDetailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -311,7 +318,7 @@ func (r GetComplianceDetailRequest) Send() (*GetComplianceDetailOutput, error) {
 //
 //    // Example sending a request using the GetComplianceDetailRequest method.
 //    req := client.GetComplianceDetailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -345,7 +352,8 @@ type GetNotificationChannelRequest struct {
 }
 
 // Send marshals and sends the GetNotificationChannel API request.
-func (r GetNotificationChannelRequest) Send() (*GetNotificationChannelOutput, error) {
+func (r GetNotificationChannelRequest) Send(ctx context.Context) (*GetNotificationChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -362,7 +370,7 @@ func (r GetNotificationChannelRequest) Send() (*GetNotificationChannelOutput, er
 //
 //    // Example sending a request using the GetNotificationChannelRequest method.
 //    req := client.GetNotificationChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -396,7 +404,8 @@ type GetPolicyRequest struct {
 }
 
 // Send marshals and sends the GetPolicy API request.
-func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -412,7 +421,7 @@ func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
 //
 //    // Example sending a request using the GetPolicyRequest method.
 //    req := client.GetPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -446,7 +455,8 @@ type ListComplianceStatusRequest struct {
 }
 
 // Send marshals and sends the ListComplianceStatus API request.
-func (r ListComplianceStatusRequest) Send() (*ListComplianceStatusOutput, error) {
+func (r ListComplianceStatusRequest) Send(ctx context.Context) (*ListComplianceStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -464,7 +474,7 @@ func (r ListComplianceStatusRequest) Send() (*ListComplianceStatusOutput, error)
 //
 //    // Example sending a request using the ListComplianceStatusRequest method.
 //    req := client.ListComplianceStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -498,7 +508,8 @@ type ListMemberAccountsRequest struct {
 }
 
 // Send marshals and sends the ListMemberAccounts API request.
-func (r ListMemberAccountsRequest) Send() (*ListMemberAccountsOutput, error) {
+func (r ListMemberAccountsRequest) Send(ctx context.Context) (*ListMemberAccountsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -518,7 +529,7 @@ func (r ListMemberAccountsRequest) Send() (*ListMemberAccountsOutput, error) {
 //
 //    // Example sending a request using the ListMemberAccountsRequest method.
 //    req := client.ListMemberAccountsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -552,7 +563,8 @@ type ListPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListPolicies API request.
-func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+func (r ListPoliciesRequest) Send(ctx context.Context) (*ListPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +580,7 @@ func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListPoliciesRequest method.
 //    req := client.ListPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -602,7 +614,8 @@ type PutNotificationChannelRequest struct {
 }
 
 // Send marshals and sends the PutNotificationChannel API request.
-func (r PutNotificationChannelRequest) Send() (*PutNotificationChannelOutput, error) {
+func (r PutNotificationChannelRequest) Send(ctx context.Context) (*PutNotificationChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,7 +632,7 @@ func (r PutNotificationChannelRequest) Send() (*PutNotificationChannelOutput, er
 //
 //    // Example sending a request using the PutNotificationChannelRequest method.
 //    req := client.PutNotificationChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -655,7 +668,8 @@ type PutPolicyRequest struct {
 }
 
 // Send marshals and sends the PutPolicy API request.
-func (r PutPolicyRequest) Send() (*PutPolicyOutput, error) {
+func (r PutPolicyRequest) Send(ctx context.Context) (*PutPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -671,7 +685,7 @@ func (r PutPolicyRequest) Send() (*PutPolicyOutput, error) {
 //
 //    // Example sending a request using the PutPolicyRequest method.
 //    req := client.PutPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

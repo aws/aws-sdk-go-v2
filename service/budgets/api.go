@@ -3,6 +3,7 @@
 package budgets
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateBudgetRequest struct {
 }
 
 // Send marshals and sends the CreateBudget API request.
-func (r CreateBudgetRequest) Send() (*CreateBudgetOutput, error) {
+func (r CreateBudgetRequest) Send(ctx context.Context) (*CreateBudgetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateBudgetRequest) Send() (*CreateBudgetOutput, error) {
 //
 //    // Example sending a request using the CreateBudgetRequest method.
 //    req := client.CreateBudgetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -68,7 +70,8 @@ type CreateNotificationRequest struct {
 }
 
 // Send marshals and sends the CreateNotification API request.
-func (r CreateNotificationRequest) Send() (*CreateNotificationOutput, error) {
+func (r CreateNotificationRequest) Send(ctx context.Context) (*CreateNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -85,7 +88,7 @@ func (r CreateNotificationRequest) Send() (*CreateNotificationOutput, error) {
 //
 //    // Example sending a request using the CreateNotificationRequest method.
 //    req := client.CreateNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -117,7 +120,8 @@ type CreateSubscriberRequest struct {
 }
 
 // Send marshals and sends the CreateSubscriber API request.
-func (r CreateSubscriberRequest) Send() (*CreateSubscriberOutput, error) {
+func (r CreateSubscriberRequest) Send(ctx context.Context) (*CreateSubscriberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -134,7 +138,7 @@ func (r CreateSubscriberRequest) Send() (*CreateSubscriberOutput, error) {
 //
 //    // Example sending a request using the CreateSubscriberRequest method.
 //    req := client.CreateSubscriberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -166,7 +170,8 @@ type DeleteBudgetRequest struct {
 }
 
 // Send marshals and sends the DeleteBudget API request.
-func (r DeleteBudgetRequest) Send() (*DeleteBudgetOutput, error) {
+func (r DeleteBudgetRequest) Send(ctx context.Context) (*DeleteBudgetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -185,7 +190,7 @@ func (r DeleteBudgetRequest) Send() (*DeleteBudgetOutput, error) {
 //
 //    // Example sending a request using the DeleteBudgetRequest method.
 //    req := client.DeleteBudgetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -217,7 +222,8 @@ type DeleteNotificationRequest struct {
 }
 
 // Send marshals and sends the DeleteNotification API request.
-func (r DeleteNotificationRequest) Send() (*DeleteNotificationOutput, error) {
+func (r DeleteNotificationRequest) Send(ctx context.Context) (*DeleteNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,7 +242,7 @@ func (r DeleteNotificationRequest) Send() (*DeleteNotificationOutput, error) {
 //
 //    // Example sending a request using the DeleteNotificationRequest method.
 //    req := client.DeleteNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -268,7 +274,8 @@ type DeleteSubscriberRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscriber API request.
-func (r DeleteSubscriberRequest) Send() (*DeleteSubscriberOutput, error) {
+func (r DeleteSubscriberRequest) Send(ctx context.Context) (*DeleteSubscriberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +293,7 @@ func (r DeleteSubscriberRequest) Send() (*DeleteSubscriberOutput, error) {
 //
 //    // Example sending a request using the DeleteSubscriberRequest method.
 //    req := client.DeleteSubscriberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -318,7 +325,8 @@ type DescribeBudgetRequest struct {
 }
 
 // Send marshals and sends the DescribeBudget API request.
-func (r DescribeBudgetRequest) Send() (*DescribeBudgetOutput, error) {
+func (r DescribeBudgetRequest) Send(ctx context.Context) (*DescribeBudgetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -334,7 +342,7 @@ func (r DescribeBudgetRequest) Send() (*DescribeBudgetOutput, error) {
 //
 //    // Example sending a request using the DescribeBudgetRequest method.
 //    req := client.DescribeBudgetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -366,7 +374,8 @@ type DescribeBudgetPerformanceHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeBudgetPerformanceHistory API request.
-func (r DescribeBudgetPerformanceHistoryRequest) Send() (*DescribeBudgetPerformanceHistoryOutput, error) {
+func (r DescribeBudgetPerformanceHistoryRequest) Send(ctx context.Context) (*DescribeBudgetPerformanceHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -383,7 +392,7 @@ func (r DescribeBudgetPerformanceHistoryRequest) Send() (*DescribeBudgetPerforma
 //
 //    // Example sending a request using the DescribeBudgetPerformanceHistoryRequest method.
 //    req := client.DescribeBudgetPerformanceHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -415,7 +424,8 @@ type DescribeBudgetsRequest struct {
 }
 
 // Send marshals and sends the DescribeBudgets API request.
-func (r DescribeBudgetsRequest) Send() (*DescribeBudgetsOutput, error) {
+func (r DescribeBudgetsRequest) Send(ctx context.Context) (*DescribeBudgetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -431,7 +441,7 @@ func (r DescribeBudgetsRequest) Send() (*DescribeBudgetsOutput, error) {
 //
 //    // Example sending a request using the DescribeBudgetsRequest method.
 //    req := client.DescribeBudgetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -463,7 +473,8 @@ type DescribeNotificationsForBudgetRequest struct {
 }
 
 // Send marshals and sends the DescribeNotificationsForBudget API request.
-func (r DescribeNotificationsForBudgetRequest) Send() (*DescribeNotificationsForBudgetOutput, error) {
+func (r DescribeNotificationsForBudgetRequest) Send(ctx context.Context) (*DescribeNotificationsForBudgetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -479,7 +490,7 @@ func (r DescribeNotificationsForBudgetRequest) Send() (*DescribeNotificationsFor
 //
 //    // Example sending a request using the DescribeNotificationsForBudgetRequest method.
 //    req := client.DescribeNotificationsForBudgetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -511,7 +522,8 @@ type DescribeSubscribersForNotificationRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscribersForNotification API request.
-func (r DescribeSubscribersForNotificationRequest) Send() (*DescribeSubscribersForNotificationOutput, error) {
+func (r DescribeSubscribersForNotificationRequest) Send(ctx context.Context) (*DescribeSubscribersForNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -527,7 +539,7 @@ func (r DescribeSubscribersForNotificationRequest) Send() (*DescribeSubscribersF
 //
 //    // Example sending a request using the DescribeSubscribersForNotificationRequest method.
 //    req := client.DescribeSubscribersForNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -559,7 +571,8 @@ type UpdateBudgetRequest struct {
 }
 
 // Send marshals and sends the UpdateBudget API request.
-func (r UpdateBudgetRequest) Send() (*UpdateBudgetOutput, error) {
+func (r UpdateBudgetRequest) Send(ctx context.Context) (*UpdateBudgetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -577,7 +590,7 @@ func (r UpdateBudgetRequest) Send() (*UpdateBudgetOutput, error) {
 //
 //    // Example sending a request using the UpdateBudgetRequest method.
 //    req := client.UpdateBudgetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -609,7 +622,8 @@ type UpdateNotificationRequest struct {
 }
 
 // Send marshals and sends the UpdateNotification API request.
-func (r UpdateNotificationRequest) Send() (*UpdateNotificationOutput, error) {
+func (r UpdateNotificationRequest) Send(ctx context.Context) (*UpdateNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -625,7 +639,7 @@ func (r UpdateNotificationRequest) Send() (*UpdateNotificationOutput, error) {
 //
 //    // Example sending a request using the UpdateNotificationRequest method.
 //    req := client.UpdateNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -657,7 +671,8 @@ type UpdateSubscriberRequest struct {
 }
 
 // Send marshals and sends the UpdateSubscriber API request.
-func (r UpdateSubscriberRequest) Send() (*UpdateSubscriberOutput, error) {
+func (r UpdateSubscriberRequest) Send(ctx context.Context) (*UpdateSubscriberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -673,7 +688,7 @@ func (r UpdateSubscriberRequest) Send() (*UpdateSubscriberOutput, error) {
 //
 //    // Example sending a request using the UpdateSubscriberRequest method.
 //    req := client.UpdateSubscriberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

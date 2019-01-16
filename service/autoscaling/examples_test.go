@@ -3,6 +3,7 @@
 package autoscaling_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -43,7 +44,7 @@ func ExampleAutoScaling_AttachInstancesRequest_shared00() {
 	}
 
 	req := svc.AttachInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -83,7 +84,7 @@ func ExampleAutoScaling_AttachLoadBalancerTargetGroupsRequest_shared00() {
 	}
 
 	req := svc.AttachLoadBalancerTargetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -123,7 +124,7 @@ func ExampleAutoScaling_AttachLoadBalancersRequest_shared00() {
 	}
 
 	req := svc.AttachLoadBalancersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -164,7 +165,7 @@ func ExampleAutoScaling_CompleteLifecycleActionRequest_shared00() {
 	}
 
 	req := svc.CompleteLifecycleActionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -203,7 +204,7 @@ func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared00() {
 	}
 
 	req := svc.CreateAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -256,7 +257,7 @@ func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared01() {
 	}
 
 	req := svc.CreateAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -306,7 +307,7 @@ func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared02() {
 	}
 
 	req := svc.CreateAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -353,7 +354,7 @@ func ExampleAutoScaling_CreateLaunchConfigurationRequest_shared00() {
 	}
 
 	req := svc.CreateLaunchConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -407,7 +408,7 @@ func ExampleAutoScaling_CreateOrUpdateTagsRequest_shared00() {
 	}
 
 	req := svc.CreateOrUpdateTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -448,7 +449,7 @@ func ExampleAutoScaling_DeleteAutoScalingGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -488,7 +489,7 @@ func ExampleAutoScaling_DeleteAutoScalingGroupRequest_shared01() {
 	}
 
 	req := svc.DeleteAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -527,7 +528,7 @@ func ExampleAutoScaling_DeleteLaunchConfigurationRequest_shared00() {
 	}
 
 	req := svc.DeleteLaunchConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -565,7 +566,7 @@ func ExampleAutoScaling_DeleteLifecycleHookRequest_shared00() {
 	}
 
 	req := svc.DeleteLifecycleHookRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -601,7 +602,7 @@ func ExampleAutoScaling_DeleteNotificationConfigurationRequest_shared00() {
 	}
 
 	req := svc.DeleteNotificationConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -637,7 +638,7 @@ func ExampleAutoScaling_DeletePolicyRequest_shared00() {
 	}
 
 	req := svc.DeletePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -676,7 +677,7 @@ func ExampleAutoScaling_DeleteScheduledActionRequest_shared00() {
 	}
 
 	req := svc.DeleteScheduledActionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -718,7 +719,7 @@ func ExampleAutoScaling_DeleteTagsRequest_shared00() {
 	}
 
 	req := svc.DeleteTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -753,7 +754,7 @@ func ExampleAutoScaling_DescribeAccountLimitsRequest_shared00() {
 	input := &autoscaling.DescribeAccountLimitsInput{}
 
 	req := svc.DescribeAccountLimitsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -786,7 +787,7 @@ func ExampleAutoScaling_DescribeAdjustmentTypesRequest_shared00() {
 	input := &autoscaling.DescribeAdjustmentTypesInput{}
 
 	req := svc.DescribeAdjustmentTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -823,7 +824,7 @@ func ExampleAutoScaling_DescribeAutoScalingGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeAutoScalingGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -862,7 +863,7 @@ func ExampleAutoScaling_DescribeAutoScalingInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeAutoScalingInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -897,7 +898,7 @@ func ExampleAutoScaling_DescribeAutoScalingNotificationTypesRequest_shared00() {
 	input := &autoscaling.DescribeAutoScalingNotificationTypesInput{}
 
 	req := svc.DescribeAutoScalingNotificationTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -934,7 +935,7 @@ func ExampleAutoScaling_DescribeLaunchConfigurationsRequest_shared00() {
 	}
 
 	req := svc.DescribeLaunchConfigurationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -969,7 +970,7 @@ func ExampleAutoScaling_DescribeLifecycleHookTypesRequest_shared00() {
 	input := &autoscaling.DescribeLifecycleHookTypesInput{}
 
 	req := svc.DescribeLifecycleHookTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1004,7 +1005,7 @@ func ExampleAutoScaling_DescribeLifecycleHooksRequest_shared00() {
 	}
 
 	req := svc.DescribeLifecycleHooksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1039,7 +1040,7 @@ func ExampleAutoScaling_DescribeLoadBalancerTargetGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancerTargetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1075,7 +1076,7 @@ func ExampleAutoScaling_DescribeLoadBalancersRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1108,7 +1109,7 @@ func ExampleAutoScaling_DescribeMetricCollectionTypesRequest_shared00() {
 	input := &autoscaling.DescribeMetricCollectionTypesInput{}
 
 	req := svc.DescribeMetricCollectionTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1146,7 +1147,7 @@ func ExampleAutoScaling_DescribeNotificationConfigurationsRequest_shared00() {
 	}
 
 	req := svc.DescribeNotificationConfigurationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1183,7 +1184,7 @@ func ExampleAutoScaling_DescribePoliciesRequest_shared00() {
 	}
 
 	req := svc.DescribePoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1222,7 +1223,7 @@ func ExampleAutoScaling_DescribeScalingActivitiesRequest_shared00() {
 	}
 
 	req := svc.DescribeScalingActivitiesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1257,7 +1258,7 @@ func ExampleAutoScaling_DescribeScalingProcessTypesRequest_shared00() {
 	input := &autoscaling.DescribeScalingProcessTypesInput{}
 
 	req := svc.DescribeScalingProcessTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1292,7 +1293,7 @@ func ExampleAutoScaling_DescribeScheduledActionsRequest_shared00() {
 	}
 
 	req := svc.DescribeScheduledActionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1336,7 +1337,7 @@ func ExampleAutoScaling_DescribeTagsRequest_shared00() {
 	}
 
 	req := svc.DescribeTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1371,7 +1372,7 @@ func ExampleAutoScaling_DescribeTerminationPolicyTypesRequest_shared00() {
 	input := &autoscaling.DescribeTerminationPolicyTypesInput{}
 
 	req := svc.DescribeTerminationPolicyTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1410,7 +1411,7 @@ func ExampleAutoScaling_DetachInstancesRequest_shared00() {
 	}
 
 	req := svc.DetachInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1449,7 +1450,7 @@ func ExampleAutoScaling_DetachLoadBalancerTargetGroupsRequest_shared00() {
 	}
 
 	req := svc.DetachLoadBalancerTargetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1488,7 +1489,7 @@ func ExampleAutoScaling_DetachLoadBalancersRequest_shared00() {
 	}
 
 	req := svc.DetachLoadBalancersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1527,7 +1528,7 @@ func ExampleAutoScaling_DisableMetricsCollectionRequest_shared00() {
 	}
 
 	req := svc.DisableMetricsCollectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1563,7 +1564,7 @@ func ExampleAutoScaling_EnableMetricsCollectionRequest_shared00() {
 	}
 
 	req := svc.EnableMetricsCollectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1602,7 +1603,7 @@ func ExampleAutoScaling_EnterStandbyRequest_shared00() {
 	}
 
 	req := svc.EnterStandbyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1640,7 +1641,7 @@ func ExampleAutoScaling_ExecutePolicyRequest_shared00() {
 	}
 
 	req := svc.ExecutePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1680,7 +1681,7 @@ func ExampleAutoScaling_ExitStandbyRequest_shared00() {
 	}
 
 	req := svc.ExitStandbyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1719,7 +1720,7 @@ func ExampleAutoScaling_PutLifecycleHookRequest_shared00() {
 	}
 
 	req := svc.PutLifecycleHookRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1760,7 +1761,7 @@ func ExampleAutoScaling_PutNotificationConfigurationRequest_shared00() {
 	}
 
 	req := svc.PutNotificationConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1802,7 +1803,7 @@ func ExampleAutoScaling_PutScalingPolicyRequest_shared00() {
 	}
 
 	req := svc.PutScalingPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1847,7 +1848,7 @@ func ExampleAutoScaling_PutScheduledUpdateGroupActionRequest_shared00() {
 	}
 
 	req := svc.PutScheduledUpdateGroupActionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1889,7 +1890,7 @@ func ExampleAutoScaling_RecordLifecycleActionHeartbeatRequest_shared00() {
 	}
 
 	req := svc.RecordLifecycleActionHeartbeatRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1928,7 +1929,7 @@ func ExampleAutoScaling_ResumeProcessesRequest_shared00() {
 	}
 
 	req := svc.ResumeProcessesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1967,7 +1968,7 @@ func ExampleAutoScaling_SetDesiredCapacityRequest_shared00() {
 	}
 
 	req := svc.SetDesiredCapacityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2005,7 +2006,7 @@ func ExampleAutoScaling_SetInstanceHealthRequest_shared00() {
 	}
 
 	req := svc.SetInstanceHealthRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2044,7 +2045,7 @@ func ExampleAutoScaling_SetInstanceProtectionRequest_shared00() {
 	}
 
 	req := svc.SetInstanceProtectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2085,7 +2086,7 @@ func ExampleAutoScaling_SetInstanceProtectionRequest_shared01() {
 	}
 
 	req := svc.SetInstanceProtectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2126,7 +2127,7 @@ func ExampleAutoScaling_SuspendProcessesRequest_shared00() {
 	}
 
 	req := svc.SuspendProcessesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2166,7 +2167,7 @@ func ExampleAutoScaling_TerminateInstanceInAutoScalingGroupRequest_shared00() {
 	}
 
 	req := svc.TerminateInstanceInAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2204,7 +2205,7 @@ func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared00() {
 	}
 
 	req := svc.UpdateAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2246,7 +2247,7 @@ func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared01() {
 	}
 
 	req := svc.UpdateAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2286,7 +2287,7 @@ func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared02() {
 	}
 
 	req := svc.UpdateAutoScalingGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

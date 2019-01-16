@@ -3,6 +3,7 @@
 package resourcegroupstaggingapi
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type GetResourcesRequest struct {
 }
 
 // Send marshals and sends the GetResources API request.
-func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
+func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
 //
 //    // Example sending a request using the GetResourcesRequest method.
 //    req := client.GetResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +128,8 @@ type GetTagKeysRequest struct {
 }
 
 // Send marshals and sends the GetTagKeys API request.
-func (r GetTagKeysRequest) Send() (*GetTagKeysOutput, error) {
+func (r GetTagKeysRequest) Send(ctx context.Context) (*GetTagKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +145,7 @@ func (r GetTagKeysRequest) Send() (*GetTagKeysOutput, error) {
 //
 //    // Example sending a request using the GetTagKeysRequest method.
 //    req := client.GetTagKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +231,8 @@ type GetTagValuesRequest struct {
 }
 
 // Send marshals and sends the GetTagValues API request.
-func (r GetTagValuesRequest) Send() (*GetTagValuesOutput, error) {
+func (r GetTagValuesRequest) Send(ctx context.Context) (*GetTagValuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -245,7 +249,7 @@ func (r GetTagValuesRequest) Send() (*GetTagValuesOutput, error) {
 //
 //    // Example sending a request using the GetTagValuesRequest method.
 //    req := client.GetTagValuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -331,7 +335,8 @@ type TagResourcesRequest struct {
 }
 
 // Send marshals and sends the TagResources API request.
-func (r TagResourcesRequest) Send() (*TagResourcesOutput, error) {
+func (r TagResourcesRequest) Send(ctx context.Context) (*TagResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -363,7 +368,7 @@ func (r TagResourcesRequest) Send() (*TagResourcesOutput, error) {
 //
 //    // Example sending a request using the TagResourcesRequest method.
 //    req := client.TagResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -397,7 +402,8 @@ type UntagResourcesRequest struct {
 }
 
 // Send marshals and sends the UntagResources API request.
-func (r UntagResourcesRequest) Send() (*UntagResourcesOutput, error) {
+func (r UntagResourcesRequest) Send(ctx context.Context) (*UntagResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -424,7 +430,7 @@ func (r UntagResourcesRequest) Send() (*UntagResourcesOutput, error) {
 //
 //    // Example sending a request using the UntagResourcesRequest method.
 //    req := client.UntagResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

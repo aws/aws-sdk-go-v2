@@ -3,6 +3,7 @@
 package iam_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExampleIAM_AddClientIDToOpenIDConnectProviderRequest_shared00() {
 	}
 
 	req := svc.AddClientIDToOpenIDConnectProviderRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -85,7 +86,7 @@ func ExampleIAM_AddRoleToInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.AddRoleToInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -129,7 +130,7 @@ func ExampleIAM_AddUserToGroupRequest_shared00() {
 	}
 
 	req := svc.AddUserToGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -170,7 +171,7 @@ func ExampleIAM_AttachGroupPolicyRequest_shared00() {
 	}
 
 	req := svc.AttachGroupPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -215,7 +216,7 @@ func ExampleIAM_AttachRolePolicyRequest_shared00() {
 	}
 
 	req := svc.AttachRolePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -262,7 +263,7 @@ func ExampleIAM_AttachUserPolicyRequest_shared00() {
 	}
 
 	req := svc.AttachUserPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -306,7 +307,7 @@ func ExampleIAM_ChangePasswordRequest_shared00() {
 	}
 
 	req := svc.ChangePasswordRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -352,7 +353,7 @@ func ExampleIAM_CreateAccessKeyRequest_shared00() {
 	}
 
 	req := svc.CreateAccessKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -391,7 +392,7 @@ func ExampleIAM_CreateAccountAliasRequest_shared00() {
 	}
 
 	req := svc.CreateAccountAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -430,7 +431,7 @@ func ExampleIAM_CreateGroupRequest_shared00() {
 	}
 
 	req := svc.CreateGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -472,7 +473,7 @@ func ExampleIAM_CreateInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.CreateInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -514,7 +515,7 @@ func ExampleIAM_CreateLoginProfileRequest_shared00() {
 	}
 
 	req := svc.CreateLoginProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -564,7 +565,7 @@ func ExampleIAM_CreateOpenIDConnectProviderRequest_shared00() {
 	}
 
 	req := svc.CreateOpenIDConnectProviderRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -608,7 +609,7 @@ func ExampleIAM_CreateRoleRequest_shared00() {
 	}
 
 	req := svc.CreateRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -653,7 +654,7 @@ func ExampleIAM_CreateUserRequest_shared00() {
 	}
 
 	req := svc.CreateUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -700,7 +701,7 @@ func ExampleIAM_DeleteAccessKeyRequest_shared00() {
 	}
 
 	req := svc.DeleteAccessKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -739,7 +740,7 @@ func ExampleIAM_DeleteAccountAliasRequest_shared00() {
 	}
 
 	req := svc.DeleteAccountAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -776,7 +777,7 @@ func ExampleIAM_DeleteAccountPasswordPolicyRequest_shared00() {
 	input := &iam.DeleteAccountPasswordPolicyInput{}
 
 	req := svc.DeleteAccountPasswordPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -817,7 +818,7 @@ func ExampleIAM_DeleteGroupPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteGroupPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -856,7 +857,7 @@ func ExampleIAM_DeleteInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.DeleteInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -897,7 +898,7 @@ func ExampleIAM_DeleteLoginProfileRequest_shared00() {
 	}
 
 	req := svc.DeleteLoginProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -938,7 +939,7 @@ func ExampleIAM_DeleteRoleRequest_shared00() {
 	}
 
 	req := svc.DeleteRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -985,7 +986,7 @@ func ExampleIAM_DeleteRolePolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteRolePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1028,7 +1029,7 @@ func ExampleIAM_DeleteSigningCertificateRequest_shared00() {
 	}
 
 	req := svc.DeleteSigningCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1067,7 +1068,7 @@ func ExampleIAM_DeleteUserRequest_shared00() {
 	}
 
 	req := svc.DeleteUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1112,7 +1113,7 @@ func ExampleIAM_DeleteUserPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteUserPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1152,7 +1153,7 @@ func ExampleIAM_DeleteVirtualMFADeviceRequest_shared00() {
 	}
 
 	req := svc.DeleteVirtualMFADeviceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1193,7 +1194,7 @@ func ExampleIAM_GenerateServiceLastAccessedDetailsRequest_shared00() {
 	}
 
 	req := svc.GenerateServiceLastAccessedDetailsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1229,7 +1230,7 @@ func ExampleIAM_GetAccountPasswordPolicyRequest_shared00() {
 	input := &iam.GetAccountPasswordPolicyInput{}
 
 	req := svc.GetAccountPasswordPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1265,7 +1266,7 @@ func ExampleIAM_GetAccountSummaryRequest_shared00() {
 	input := &iam.GetAccountSummaryInput{}
 
 	req := svc.GetAccountSummaryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1300,7 +1301,7 @@ func ExampleIAM_GetInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.GetInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1338,7 +1339,7 @@ func ExampleIAM_GetLoginProfileRequest_shared00() {
 	}
 
 	req := svc.GetLoginProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1375,7 +1376,7 @@ func ExampleIAM_GetRoleRequest_shared00() {
 	}
 
 	req := svc.GetRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1412,7 +1413,7 @@ func ExampleIAM_GetServiceLastAccessedDetailsRequest_shared00() {
 	}
 
 	req := svc.GetServiceLastAccessedDetailsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1451,7 +1452,7 @@ func ExampleIAM_GetServiceLastAccessedDetailsWithEntitiesRequest_shared00() {
 	}
 
 	req := svc.GetServiceLastAccessedDetailsWithEntitiesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1488,7 +1489,7 @@ func ExampleIAM_GetUserRequest_shared00() {
 	}
 
 	req := svc.GetUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1525,7 +1526,7 @@ func ExampleIAM_ListAccessKeysRequest_shared00() {
 	}
 
 	req := svc.ListAccessKeysRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1560,7 +1561,7 @@ func ExampleIAM_ListAccountAliasesRequest_shared00() {
 	input := &iam.ListAccountAliasesInput{}
 
 	req := svc.ListAccountAliasesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1596,7 +1597,7 @@ func ExampleIAM_ListGroupPoliciesRequest_shared00() {
 	}
 
 	req := svc.ListGroupPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1631,7 +1632,7 @@ func ExampleIAM_ListGroupsRequest_shared00() {
 	input := &iam.ListGroupsInput{}
 
 	req := svc.ListGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1666,7 +1667,7 @@ func ExampleIAM_ListGroupsForUserRequest_shared00() {
 	}
 
 	req := svc.ListGroupsForUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1708,7 +1709,7 @@ func ExampleIAM_ListPoliciesGrantingServiceAccessRequest_shared00() {
 	}
 
 	req := svc.ListPoliciesGrantingServiceAccessRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1745,7 +1746,7 @@ func ExampleIAM_ListRoleTagsRequest_shared00() {
 	}
 
 	req := svc.ListRoleTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1782,7 +1783,7 @@ func ExampleIAM_ListSigningCertificatesRequest_shared00() {
 	}
 
 	req := svc.ListSigningCertificatesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1819,7 +1820,7 @@ func ExampleIAM_ListUserTagsRequest_shared00() {
 	}
 
 	req := svc.ListUserTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1854,7 +1855,7 @@ func ExampleIAM_ListUsersRequest_shared00() {
 	input := &iam.ListUsersInput{}
 
 	req := svc.ListUsersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1888,7 +1889,7 @@ func ExampleIAM_ListVirtualMFADevicesRequest_shared00() {
 	input := &iam.ListVirtualMFADevicesInput{}
 
 	req := svc.ListVirtualMFADevicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1923,7 +1924,7 @@ func ExampleIAM_PutGroupPolicyRequest_shared00() {
 	}
 
 	req := svc.PutGroupPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1966,7 +1967,7 @@ func ExampleIAM_PutRolePolicyRequest_shared00() {
 	}
 
 	req := svc.PutRolePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2011,7 +2012,7 @@ func ExampleIAM_PutUserPolicyRequest_shared00() {
 	}
 
 	req := svc.PutUserPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2054,7 +2055,7 @@ func ExampleIAM_RemoveRoleFromInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.RemoveRoleFromInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2096,7 +2097,7 @@ func ExampleIAM_RemoveUserFromGroupRequest_shared00() {
 	}
 
 	req := svc.RemoveUserFromGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2145,7 +2146,7 @@ func ExampleIAM_TagRoleRequest_shared00() {
 	}
 
 	req := svc.TagRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2198,7 +2199,7 @@ func ExampleIAM_TagUserRequest_shared00() {
 	}
 
 	req := svc.TagUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2245,7 +2246,7 @@ func ExampleIAM_UntagRoleRequest_shared00() {
 	}
 
 	req := svc.UntagRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2288,7 +2289,7 @@ func ExampleIAM_UntagUserRequest_shared00() {
 	}
 
 	req := svc.UntagUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2330,7 +2331,7 @@ func ExampleIAM_UpdateAccessKeyRequest_shared00() {
 	}
 
 	req := svc.UpdateAccessKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2371,7 +2372,7 @@ func ExampleIAM_UpdateAccountPasswordPolicyRequest_shared00() {
 	}
 
 	req := svc.UpdateAccountPasswordPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2413,7 +2414,7 @@ func ExampleIAM_UpdateAssumeRolePolicyRequest_shared00() {
 	}
 
 	req := svc.UpdateAssumeRolePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2457,7 +2458,7 @@ func ExampleIAM_UpdateGroupRequest_shared00() {
 	}
 
 	req := svc.UpdateGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2499,7 +2500,7 @@ func ExampleIAM_UpdateLoginProfileRequest_shared00() {
 	}
 
 	req := svc.UpdateLoginProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2545,7 +2546,7 @@ func ExampleIAM_UpdateSigningCertificateRequest_shared00() {
 	}
 
 	req := svc.UpdateSigningCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2586,7 +2587,7 @@ func ExampleIAM_UpdateUserRequest_shared00() {
 	}
 
 	req := svc.UpdateUserRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2635,7 +2636,7 @@ func ExampleIAM_UploadServerCertificateRequest_shared00() {
 	}
 
 	req := svc.UploadServerCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2679,7 +2680,7 @@ func ExampleIAM_UploadSigningCertificateRequest_shared00() {
 	}
 
 	req := svc.UploadSigningCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

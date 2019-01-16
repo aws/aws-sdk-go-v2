@@ -3,6 +3,7 @@
 package servicediscovery
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateHttpNamespaceRequest struct {
 }
 
 // Send marshals and sends the CreateHttpNamespace API request.
-func (r CreateHttpNamespaceRequest) Send() (*CreateHttpNamespaceOutput, error) {
+func (r CreateHttpNamespaceRequest) Send(ctx context.Context) (*CreateHttpNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -44,7 +46,7 @@ func (r CreateHttpNamespaceRequest) Send() (*CreateHttpNamespaceOutput, error) {
 //
 //    // Example sending a request using the CreateHttpNamespaceRequest method.
 //    req := client.CreateHttpNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +80,8 @@ type CreatePrivateDnsNamespaceRequest struct {
 }
 
 // Send marshals and sends the CreatePrivateDnsNamespace API request.
-func (r CreatePrivateDnsNamespaceRequest) Send() (*CreatePrivateDnsNamespaceOutput, error) {
+func (r CreatePrivateDnsNamespaceRequest) Send(ctx context.Context) (*CreatePrivateDnsNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -100,7 +103,7 @@ func (r CreatePrivateDnsNamespaceRequest) Send() (*CreatePrivateDnsNamespaceOutp
 //
 //    // Example sending a request using the CreatePrivateDnsNamespaceRequest method.
 //    req := client.CreatePrivateDnsNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -134,7 +137,8 @@ type CreatePublicDnsNamespaceRequest struct {
 }
 
 // Send marshals and sends the CreatePublicDnsNamespace API request.
-func (r CreatePublicDnsNamespaceRequest) Send() (*CreatePublicDnsNamespaceOutput, error) {
+func (r CreatePublicDnsNamespaceRequest) Send(ctx context.Context) (*CreatePublicDnsNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +160,7 @@ func (r CreatePublicDnsNamespaceRequest) Send() (*CreatePublicDnsNamespaceOutput
 //
 //    // Example sending a request using the CreatePublicDnsNamespaceRequest method.
 //    req := client.CreatePublicDnsNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -190,7 +194,8 @@ type CreateServiceRequest struct {
 }
 
 // Send marshals and sends the CreateService API request.
-func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
+func (r CreateServiceRequest) Send(ctx context.Context) (*CreateServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -229,7 +234,7 @@ func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
 //
 //    // Example sending a request using the CreateServiceRequest method.
 //    req := client.CreateServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -263,7 +268,8 @@ type DeleteNamespaceRequest struct {
 }
 
 // Send marshals and sends the DeleteNamespace API request.
-func (r DeleteNamespaceRequest) Send() (*DeleteNamespaceOutput, error) {
+func (r DeleteNamespaceRequest) Send(ctx context.Context) (*DeleteNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -280,7 +286,7 @@ func (r DeleteNamespaceRequest) Send() (*DeleteNamespaceOutput, error) {
 //
 //    // Example sending a request using the DeleteNamespaceRequest method.
 //    req := client.DeleteNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -314,7 +320,8 @@ type DeleteServiceRequest struct {
 }
 
 // Send marshals and sends the DeleteService API request.
-func (r DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
+func (r DeleteServiceRequest) Send(ctx context.Context) (*DeleteServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -331,7 +338,7 @@ func (r DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
 //
 //    // Example sending a request using the DeleteServiceRequest method.
 //    req := client.DeleteServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -365,7 +372,8 @@ type DeregisterInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterInstance API request.
-func (r DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
+func (r DeregisterInstanceRequest) Send(ctx context.Context) (*DeregisterInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -382,7 +390,7 @@ func (r DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
 //
 //    // Example sending a request using the DeregisterInstanceRequest method.
 //    req := client.DeregisterInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -416,7 +424,8 @@ type DiscoverInstancesRequest struct {
 }
 
 // Send marshals and sends the DiscoverInstances API request.
-func (r DiscoverInstancesRequest) Send() (*DiscoverInstancesOutput, error) {
+func (r DiscoverInstancesRequest) Send(ctx context.Context) (*DiscoverInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -432,7 +441,7 @@ func (r DiscoverInstancesRequest) Send() (*DiscoverInstancesOutput, error) {
 //
 //    // Example sending a request using the DiscoverInstancesRequest method.
 //    req := client.DiscoverInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -468,7 +477,8 @@ type GetInstanceRequest struct {
 }
 
 // Send marshals and sends the GetInstance API request.
-func (r GetInstanceRequest) Send() (*GetInstanceOutput, error) {
+func (r GetInstanceRequest) Send(ctx context.Context) (*GetInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -484,7 +494,7 @@ func (r GetInstanceRequest) Send() (*GetInstanceOutput, error) {
 //
 //    // Example sending a request using the GetInstanceRequest method.
 //    req := client.GetInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -518,7 +528,8 @@ type GetInstancesHealthStatusRequest struct {
 }
 
 // Send marshals and sends the GetInstancesHealthStatus API request.
-func (r GetInstancesHealthStatusRequest) Send() (*GetInstancesHealthStatusOutput, error) {
+func (r GetInstancesHealthStatusRequest) Send(ctx context.Context) (*GetInstancesHealthStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -538,7 +549,7 @@ func (r GetInstancesHealthStatusRequest) Send() (*GetInstancesHealthStatusOutput
 //
 //    // Example sending a request using the GetInstancesHealthStatusRequest method.
 //    req := client.GetInstancesHealthStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -624,7 +635,8 @@ type GetNamespaceRequest struct {
 }
 
 // Send marshals and sends the GetNamespace API request.
-func (r GetNamespaceRequest) Send() (*GetNamespaceOutput, error) {
+func (r GetNamespaceRequest) Send(ctx context.Context) (*GetNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -640,7 +652,7 @@ func (r GetNamespaceRequest) Send() (*GetNamespaceOutput, error) {
 //
 //    // Example sending a request using the GetNamespaceRequest method.
 //    req := client.GetNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -674,7 +686,8 @@ type GetOperationRequest struct {
 }
 
 // Send marshals and sends the GetOperation API request.
-func (r GetOperationRequest) Send() (*GetOperationOutput, error) {
+func (r GetOperationRequest) Send(ctx context.Context) (*GetOperationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -693,7 +706,7 @@ func (r GetOperationRequest) Send() (*GetOperationOutput, error) {
 //
 //    // Example sending a request using the GetOperationRequest method.
 //    req := client.GetOperationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -727,7 +740,8 @@ type GetServiceRequest struct {
 }
 
 // Send marshals and sends the GetService API request.
-func (r GetServiceRequest) Send() (*GetServiceOutput, error) {
+func (r GetServiceRequest) Send(ctx context.Context) (*GetServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -743,7 +757,7 @@ func (r GetServiceRequest) Send() (*GetServiceOutput, error) {
 //
 //    // Example sending a request using the GetServiceRequest method.
 //    req := client.GetServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -777,7 +791,8 @@ type ListInstancesRequest struct {
 }
 
 // Send marshals and sends the ListInstances API request.
-func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
+func (r ListInstancesRequest) Send(ctx context.Context) (*ListInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,7 +809,7 @@ func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
 //
 //    // Example sending a request using the ListInstancesRequest method.
 //    req := client.ListInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -880,7 +895,8 @@ type ListNamespacesRequest struct {
 }
 
 // Send marshals and sends the ListNamespaces API request.
-func (r ListNamespacesRequest) Send() (*ListNamespacesOutput, error) {
+func (r ListNamespacesRequest) Send(ctx context.Context) (*ListNamespacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -897,7 +913,7 @@ func (r ListNamespacesRequest) Send() (*ListNamespacesOutput, error) {
 //
 //    // Example sending a request using the ListNamespacesRequest method.
 //    req := client.ListNamespacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -983,7 +999,8 @@ type ListOperationsRequest struct {
 }
 
 // Send marshals and sends the ListOperations API request.
-func (r ListOperationsRequest) Send() (*ListOperationsOutput, error) {
+func (r ListOperationsRequest) Send(ctx context.Context) (*ListOperationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -999,7 +1016,7 @@ func (r ListOperationsRequest) Send() (*ListOperationsOutput, error) {
 //
 //    // Example sending a request using the ListOperationsRequest method.
 //    req := client.ListOperationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1085,7 +1102,8 @@ type ListServicesRequest struct {
 }
 
 // Send marshals and sends the ListServices API request.
-func (r ListServicesRequest) Send() (*ListServicesOutput, error) {
+func (r ListServicesRequest) Send(ctx context.Context) (*ListServicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1102,7 +1120,7 @@ func (r ListServicesRequest) Send() (*ListServicesOutput, error) {
 //
 //    // Example sending a request using the ListServicesRequest method.
 //    req := client.ListServicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1188,7 +1206,8 @@ type RegisterInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterInstance API request.
-func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
+func (r RegisterInstanceRequest) Send(ctx context.Context) (*RegisterInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1236,7 +1255,7 @@ func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
 //
 //    // Example sending a request using the RegisterInstanceRequest method.
 //    req := client.RegisterInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1270,7 +1289,8 @@ type UpdateInstanceCustomHealthStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateInstanceCustomHealthStatus API request.
-func (r UpdateInstanceCustomHealthStatusRequest) Send() (*UpdateInstanceCustomHealthStatusOutput, error) {
+func (r UpdateInstanceCustomHealthStatusRequest) Send(ctx context.Context) (*UpdateInstanceCustomHealthStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1294,7 +1314,7 @@ func (r UpdateInstanceCustomHealthStatusRequest) Send() (*UpdateInstanceCustomHe
 //
 //    // Example sending a request using the UpdateInstanceCustomHealthStatusRequest method.
 //    req := client.UpdateInstanceCustomHealthStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1330,7 +1350,8 @@ type UpdateServiceRequest struct {
 }
 
 // Send marshals and sends the UpdateService API request.
-func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
+func (r UpdateServiceRequest) Send(ctx context.Context) (*UpdateServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1361,7 +1382,7 @@ func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
 //
 //    // Example sending a request using the UpdateServiceRequest method.
 //    req := client.UpdateServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

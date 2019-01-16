@@ -3,6 +3,7 @@
 package sns
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AddPermissionRequest struct {
 }
 
 // Send marshals and sends the AddPermission API request.
-func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+func (r AddPermissionRequest) Send(ctx context.Context) (*AddPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
 //
 //    // Example sending a request using the AddPermissionRequest method.
 //    req := client.AddPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -74,7 +76,8 @@ type CheckIfPhoneNumberIsOptedOutRequest struct {
 }
 
 // Send marshals and sends the CheckIfPhoneNumberIsOptedOut API request.
-func (r CheckIfPhoneNumberIsOptedOutRequest) Send() (*CheckIfPhoneNumberIsOptedOutOutput, error) {
+func (r CheckIfPhoneNumberIsOptedOutRequest) Send(ctx context.Context) (*CheckIfPhoneNumberIsOptedOutOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -95,7 +98,7 @@ func (r CheckIfPhoneNumberIsOptedOutRequest) Send() (*CheckIfPhoneNumberIsOptedO
 //
 //    // Example sending a request using the CheckIfPhoneNumberIsOptedOutRequest method.
 //    req := client.CheckIfPhoneNumberIsOptedOutRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -129,7 +132,8 @@ type ConfirmSubscriptionRequest struct {
 }
 
 // Send marshals and sends the ConfirmSubscription API request.
-func (r ConfirmSubscriptionRequest) Send() (*ConfirmSubscriptionOutput, error) {
+func (r ConfirmSubscriptionRequest) Send(ctx context.Context) (*ConfirmSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -149,7 +153,7 @@ func (r ConfirmSubscriptionRequest) Send() (*ConfirmSubscriptionOutput, error) {
 //
 //    // Example sending a request using the ConfirmSubscriptionRequest method.
 //    req := client.ConfirmSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -183,7 +187,8 @@ type CreatePlatformApplicationRequest struct {
 }
 
 // Send marshals and sends the CreatePlatformApplication API request.
-func (r CreatePlatformApplicationRequest) Send() (*CreatePlatformApplicationOutput, error) {
+func (r CreatePlatformApplicationRequest) Send(ctx context.Context) (*CreatePlatformApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -224,7 +229,7 @@ func (r CreatePlatformApplicationRequest) Send() (*CreatePlatformApplicationOutp
 //
 //    // Example sending a request using the CreatePlatformApplicationRequest method.
 //    req := client.CreatePlatformApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -258,7 +263,8 @@ type CreatePlatformEndpointRequest struct {
 }
 
 // Send marshals and sends the CreatePlatformEndpoint API request.
-func (r CreatePlatformEndpointRequest) Send() (*CreatePlatformEndpointOutput, error) {
+func (r CreatePlatformEndpointRequest) Send(ctx context.Context) (*CreatePlatformEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +293,7 @@ func (r CreatePlatformEndpointRequest) Send() (*CreatePlatformEndpointOutput, er
 //
 //    // Example sending a request using the CreatePlatformEndpointRequest method.
 //    req := client.CreatePlatformEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -321,7 +327,8 @@ type CreateTopicRequest struct {
 }
 
 // Send marshals and sends the CreateTopic API request.
-func (r CreateTopicRequest) Send() (*CreateTopicOutput, error) {
+func (r CreateTopicRequest) Send(ctx context.Context) (*CreateTopicOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,7 +348,7 @@ func (r CreateTopicRequest) Send() (*CreateTopicOutput, error) {
 //
 //    // Example sending a request using the CreateTopicRequest method.
 //    req := client.CreateTopicRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -375,7 +382,8 @@ type DeleteEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
-func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+func (r DeleteEndpointRequest) Send(ctx context.Context) (*DeleteEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -396,7 +404,7 @@ func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
 //
 //    // Example sending a request using the DeleteEndpointRequest method.
 //    req := client.DeleteEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +440,8 @@ type DeletePlatformApplicationRequest struct {
 }
 
 // Send marshals and sends the DeletePlatformApplication API request.
-func (r DeletePlatformApplicationRequest) Send() (*DeletePlatformApplicationOutput, error) {
+func (r DeletePlatformApplicationRequest) Send(ctx context.Context) (*DeletePlatformApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +459,7 @@ func (r DeletePlatformApplicationRequest) Send() (*DeletePlatformApplicationOutp
 //
 //    // Example sending a request using the DeletePlatformApplicationRequest method.
 //    req := client.DeletePlatformApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -486,7 +495,8 @@ type DeleteTopicRequest struct {
 }
 
 // Send marshals and sends the DeleteTopic API request.
-func (r DeleteTopicRequest) Send() (*DeleteTopicOutput, error) {
+func (r DeleteTopicRequest) Send(ctx context.Context) (*DeleteTopicOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -505,7 +515,7 @@ func (r DeleteTopicRequest) Send() (*DeleteTopicOutput, error) {
 //
 //    // Example sending a request using the DeleteTopicRequest method.
 //    req := client.DeleteTopicRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -541,7 +551,8 @@ type GetEndpointAttributesRequest struct {
 }
 
 // Send marshals and sends the GetEndpointAttributes API request.
-func (r GetEndpointAttributesRequest) Send() (*GetEndpointAttributesOutput, error) {
+func (r GetEndpointAttributesRequest) Send(ctx context.Context) (*GetEndpointAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -559,7 +570,7 @@ func (r GetEndpointAttributesRequest) Send() (*GetEndpointAttributesOutput, erro
 //
 //    // Example sending a request using the GetEndpointAttributesRequest method.
 //    req := client.GetEndpointAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -593,7 +604,8 @@ type GetPlatformApplicationAttributesRequest struct {
 }
 
 // Send marshals and sends the GetPlatformApplicationAttributes API request.
-func (r GetPlatformApplicationAttributesRequest) Send() (*GetPlatformApplicationAttributesOutput, error) {
+func (r GetPlatformApplicationAttributesRequest) Send(ctx context.Context) (*GetPlatformApplicationAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -611,7 +623,7 @@ func (r GetPlatformApplicationAttributesRequest) Send() (*GetPlatformApplication
 //
 //    // Example sending a request using the GetPlatformApplicationAttributesRequest method.
 //    req := client.GetPlatformApplicationAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -645,7 +657,8 @@ type GetSMSAttributesRequest struct {
 }
 
 // Send marshals and sends the GetSMSAttributes API request.
-func (r GetSMSAttributesRequest) Send() (*GetSMSAttributesOutput, error) {
+func (r GetSMSAttributesRequest) Send(ctx context.Context) (*GetSMSAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -663,7 +676,7 @@ func (r GetSMSAttributesRequest) Send() (*GetSMSAttributesOutput, error) {
 //
 //    // Example sending a request using the GetSMSAttributesRequest method.
 //    req := client.GetSMSAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -697,7 +710,8 @@ type GetSubscriptionAttributesRequest struct {
 }
 
 // Send marshals and sends the GetSubscriptionAttributes API request.
-func (r GetSubscriptionAttributesRequest) Send() (*GetSubscriptionAttributesOutput, error) {
+func (r GetSubscriptionAttributesRequest) Send(ctx context.Context) (*GetSubscriptionAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -713,7 +727,7 @@ func (r GetSubscriptionAttributesRequest) Send() (*GetSubscriptionAttributesOutp
 //
 //    // Example sending a request using the GetSubscriptionAttributesRequest method.
 //    req := client.GetSubscriptionAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -747,7 +761,8 @@ type GetTopicAttributesRequest struct {
 }
 
 // Send marshals and sends the GetTopicAttributes API request.
-func (r GetTopicAttributesRequest) Send() (*GetTopicAttributesOutput, error) {
+func (r GetTopicAttributesRequest) Send(ctx context.Context) (*GetTopicAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -764,7 +779,7 @@ func (r GetTopicAttributesRequest) Send() (*GetTopicAttributesOutput, error) {
 //
 //    // Example sending a request using the GetTopicAttributesRequest method.
 //    req := client.GetTopicAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -798,7 +813,8 @@ type ListEndpointsByPlatformApplicationRequest struct {
 }
 
 // Send marshals and sends the ListEndpointsByPlatformApplication API request.
-func (r ListEndpointsByPlatformApplicationRequest) Send() (*ListEndpointsByPlatformApplicationOutput, error) {
+func (r ListEndpointsByPlatformApplicationRequest) Send(ctx context.Context) (*ListEndpointsByPlatformApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -823,7 +839,7 @@ func (r ListEndpointsByPlatformApplicationRequest) Send() (*ListEndpointsByPlatf
 //
 //    // Example sending a request using the ListEndpointsByPlatformApplicationRequest method.
 //    req := client.ListEndpointsByPlatformApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -909,7 +925,8 @@ type ListPhoneNumbersOptedOutRequest struct {
 }
 
 // Send marshals and sends the ListPhoneNumbersOptedOut API request.
-func (r ListPhoneNumbersOptedOutRequest) Send() (*ListPhoneNumbersOptedOutOutput, error) {
+func (r ListPhoneNumbersOptedOutRequest) Send(ctx context.Context) (*ListPhoneNumbersOptedOutOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -933,7 +950,7 @@ func (r ListPhoneNumbersOptedOutRequest) Send() (*ListPhoneNumbersOptedOutOutput
 //
 //    // Example sending a request using the ListPhoneNumbersOptedOutRequest method.
 //    req := client.ListPhoneNumbersOptedOutRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -967,7 +984,8 @@ type ListPlatformApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListPlatformApplications API request.
-func (r ListPlatformApplicationsRequest) Send() (*ListPlatformApplicationsOutput, error) {
+func (r ListPlatformApplicationsRequest) Send(ctx context.Context) (*ListPlatformApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,7 +1010,7 @@ func (r ListPlatformApplicationsRequest) Send() (*ListPlatformApplicationsOutput
 //
 //    // Example sending a request using the ListPlatformApplicationsRequest method.
 //    req := client.ListPlatformApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1078,7 +1096,8 @@ type ListSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the ListSubscriptions API request.
-func (r ListSubscriptionsRequest) Send() (*ListSubscriptionsOutput, error) {
+func (r ListSubscriptionsRequest) Send(ctx context.Context) (*ListSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1099,7 +1118,7 @@ func (r ListSubscriptionsRequest) Send() (*ListSubscriptionsOutput, error) {
 //
 //    // Example sending a request using the ListSubscriptionsRequest method.
 //    req := client.ListSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1185,7 +1204,8 @@ type ListSubscriptionsByTopicRequest struct {
 }
 
 // Send marshals and sends the ListSubscriptionsByTopic API request.
-func (r ListSubscriptionsByTopicRequest) Send() (*ListSubscriptionsByTopicOutput, error) {
+func (r ListSubscriptionsByTopicRequest) Send(ctx context.Context) (*ListSubscriptionsByTopicOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1206,7 +1226,7 @@ func (r ListSubscriptionsByTopicRequest) Send() (*ListSubscriptionsByTopicOutput
 //
 //    // Example sending a request using the ListSubscriptionsByTopicRequest method.
 //    req := client.ListSubscriptionsByTopicRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1292,7 +1312,8 @@ type ListTopicsRequest struct {
 }
 
 // Send marshals and sends the ListTopics API request.
-func (r ListTopicsRequest) Send() (*ListTopicsOutput, error) {
+func (r ListTopicsRequest) Send(ctx context.Context) (*ListTopicsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1312,7 +1333,7 @@ func (r ListTopicsRequest) Send() (*ListTopicsOutput, error) {
 //
 //    // Example sending a request using the ListTopicsRequest method.
 //    req := client.ListTopicsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1398,7 +1419,8 @@ type OptInPhoneNumberRequest struct {
 }
 
 // Send marshals and sends the OptInPhoneNumber API request.
-func (r OptInPhoneNumberRequest) Send() (*OptInPhoneNumberOutput, error) {
+func (r OptInPhoneNumberRequest) Send(ctx context.Context) (*OptInPhoneNumberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1417,7 +1439,7 @@ func (r OptInPhoneNumberRequest) Send() (*OptInPhoneNumberOutput, error) {
 //
 //    // Example sending a request using the OptInPhoneNumberRequest method.
 //    req := client.OptInPhoneNumberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1451,7 +1473,8 @@ type PublishRequest struct {
 }
 
 // Send marshals and sends the Publish API request.
-func (r PublishRequest) Send() (*PublishOutput, error) {
+func (r PublishRequest) Send(ctx context.Context) (*PublishOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1483,7 +1506,7 @@ func (r PublishRequest) Send() (*PublishOutput, error) {
 //
 //    // Example sending a request using the PublishRequest method.
 //    req := client.PublishRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1517,7 +1540,8 @@ type RemovePermissionRequest struct {
 }
 
 // Send marshals and sends the RemovePermission API request.
-func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+func (r RemovePermissionRequest) Send(ctx context.Context) (*RemovePermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1533,7 +1557,7 @@ func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
 //
 //    // Example sending a request using the RemovePermissionRequest method.
 //    req := client.RemovePermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1569,7 +1593,8 @@ type SetEndpointAttributesRequest struct {
 }
 
 // Send marshals and sends the SetEndpointAttributes API request.
-func (r SetEndpointAttributesRequest) Send() (*SetEndpointAttributesOutput, error) {
+func (r SetEndpointAttributesRequest) Send(ctx context.Context) (*SetEndpointAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1587,7 +1612,7 @@ func (r SetEndpointAttributesRequest) Send() (*SetEndpointAttributesOutput, erro
 //
 //    // Example sending a request using the SetEndpointAttributesRequest method.
 //    req := client.SetEndpointAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1623,7 +1648,8 @@ type SetPlatformApplicationAttributesRequest struct {
 }
 
 // Send marshals and sends the SetPlatformApplicationAttributes API request.
-func (r SetPlatformApplicationAttributesRequest) Send() (*SetPlatformApplicationAttributesOutput, error) {
+func (r SetPlatformApplicationAttributesRequest) Send(ctx context.Context) (*SetPlatformApplicationAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1643,7 +1669,7 @@ func (r SetPlatformApplicationAttributesRequest) Send() (*SetPlatformApplication
 //
 //    // Example sending a request using the SetPlatformApplicationAttributesRequest method.
 //    req := client.SetPlatformApplicationAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1679,7 +1705,8 @@ type SetSMSAttributesRequest struct {
 }
 
 // Send marshals and sends the SetSMSAttributes API request.
-func (r SetSMSAttributesRequest) Send() (*SetSMSAttributesOutput, error) {
+func (r SetSMSAttributesRequest) Send(ctx context.Context) (*SetSMSAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1701,7 +1728,7 @@ func (r SetSMSAttributesRequest) Send() (*SetSMSAttributesOutput, error) {
 //
 //    // Example sending a request using the SetSMSAttributesRequest method.
 //    req := client.SetSMSAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1735,7 +1762,8 @@ type SetSubscriptionAttributesRequest struct {
 }
 
 // Send marshals and sends the SetSubscriptionAttributes API request.
-func (r SetSubscriptionAttributesRequest) Send() (*SetSubscriptionAttributesOutput, error) {
+func (r SetSubscriptionAttributesRequest) Send(ctx context.Context) (*SetSubscriptionAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1752,7 +1780,7 @@ func (r SetSubscriptionAttributesRequest) Send() (*SetSubscriptionAttributesOutp
 //
 //    // Example sending a request using the SetSubscriptionAttributesRequest method.
 //    req := client.SetSubscriptionAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1788,7 +1816,8 @@ type SetTopicAttributesRequest struct {
 }
 
 // Send marshals and sends the SetTopicAttributes API request.
-func (r SetTopicAttributesRequest) Send() (*SetTopicAttributesOutput, error) {
+func (r SetTopicAttributesRequest) Send(ctx context.Context) (*SetTopicAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1804,7 +1833,7 @@ func (r SetTopicAttributesRequest) Send() (*SetTopicAttributesOutput, error) {
 //
 //    // Example sending a request using the SetTopicAttributesRequest method.
 //    req := client.SetTopicAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1840,7 +1869,8 @@ type SubscribeRequest struct {
 }
 
 // Send marshals and sends the Subscribe API request.
-func (r SubscribeRequest) Send() (*SubscribeOutput, error) {
+func (r SubscribeRequest) Send(ctx context.Context) (*SubscribeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1861,7 +1891,7 @@ func (r SubscribeRequest) Send() (*SubscribeOutput, error) {
 //
 //    // Example sending a request using the SubscribeRequest method.
 //    req := client.SubscribeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1895,7 +1925,8 @@ type UnsubscribeRequest struct {
 }
 
 // Send marshals and sends the Unsubscribe API request.
-func (r UnsubscribeRequest) Send() (*UnsubscribeOutput, error) {
+func (r UnsubscribeRequest) Send(ctx context.Context) (*UnsubscribeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1918,7 +1949,7 @@ func (r UnsubscribeRequest) Send() (*UnsubscribeOutput, error) {
 //
 //    // Example sending a request using the UnsubscribeRequest method.
 //    req := client.UnsubscribeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

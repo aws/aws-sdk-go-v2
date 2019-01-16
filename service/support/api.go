@@ -3,6 +3,8 @@
 package support
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
@@ -17,7 +19,8 @@ type AddAttachmentsToSetRequest struct {
 }
 
 // Send marshals and sends the AddAttachmentsToSet API request.
-func (r AddAttachmentsToSetRequest) Send() (*AddAttachmentsToSetOutput, error) {
+func (r AddAttachmentsToSetRequest) Send(ctx context.Context) (*AddAttachmentsToSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +45,7 @@ func (r AddAttachmentsToSetRequest) Send() (*AddAttachmentsToSetOutput, error) {
 //
 //    // Example sending a request using the AddAttachmentsToSetRequest method.
 //    req := client.AddAttachmentsToSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +79,8 @@ type AddCommunicationToCaseRequest struct {
 }
 
 // Send marshals and sends the AddCommunicationToCase API request.
-func (r AddCommunicationToCaseRequest) Send() (*AddCommunicationToCaseOutput, error) {
+func (r AddCommunicationToCaseRequest) Send(ctx context.Context) (*AddCommunicationToCaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,7 +103,7 @@ func (r AddCommunicationToCaseRequest) Send() (*AddCommunicationToCaseOutput, er
 //
 //    // Example sending a request using the AddCommunicationToCaseRequest method.
 //    req := client.AddCommunicationToCaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -133,7 +137,8 @@ type CreateCaseRequest struct {
 }
 
 // Send marshals and sends the CreateCase API request.
-func (r CreateCaseRequest) Send() (*CreateCaseOutput, error) {
+func (r CreateCaseRequest) Send(ctx context.Context) (*CreateCaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (r CreateCaseRequest) Send() (*CreateCaseOutput, error) {
 //
 //    // Example sending a request using the CreateCaseRequest method.
 //    req := client.CreateCaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -226,7 +231,8 @@ type DescribeAttachmentRequest struct {
 }
 
 // Send marshals and sends the DescribeAttachment API request.
-func (r DescribeAttachmentRequest) Send() (*DescribeAttachmentOutput, error) {
+func (r DescribeAttachmentRequest) Send(ctx context.Context) (*DescribeAttachmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -245,7 +251,7 @@ func (r DescribeAttachmentRequest) Send() (*DescribeAttachmentOutput, error) {
 //
 //    // Example sending a request using the DescribeAttachmentRequest method.
 //    req := client.DescribeAttachmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -279,7 +285,8 @@ type DescribeCasesRequest struct {
 }
 
 // Send marshals and sends the DescribeCases API request.
-func (r DescribeCasesRequest) Send() (*DescribeCasesOutput, error) {
+func (r DescribeCasesRequest) Send(ctx context.Context) (*DescribeCasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -309,7 +316,7 @@ func (r DescribeCasesRequest) Send() (*DescribeCasesOutput, error) {
 //
 //    // Example sending a request using the DescribeCasesRequest method.
 //    req := client.DescribeCasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -395,7 +402,8 @@ type DescribeCommunicationsRequest struct {
 }
 
 // Send marshals and sends the DescribeCommunications API request.
-func (r DescribeCommunicationsRequest) Send() (*DescribeCommunicationsOutput, error) {
+func (r DescribeCommunicationsRequest) Send(ctx context.Context) (*DescribeCommunicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -420,7 +428,7 @@ func (r DescribeCommunicationsRequest) Send() (*DescribeCommunicationsOutput, er
 //
 //    // Example sending a request using the DescribeCommunicationsRequest method.
 //    req := client.DescribeCommunicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -506,7 +514,8 @@ type DescribeServicesRequest struct {
 }
 
 // Send marshals and sends the DescribeServices API request.
-func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -532,7 +541,7 @@ func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
 //
 //    // Example sending a request using the DescribeServicesRequest method.
 //    req := client.DescribeServicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -566,7 +575,8 @@ type DescribeSeverityLevelsRequest struct {
 }
 
 // Send marshals and sends the DescribeSeverityLevels API request.
-func (r DescribeSeverityLevelsRequest) Send() (*DescribeSeverityLevelsOutput, error) {
+func (r DescribeSeverityLevelsRequest) Send(ctx context.Context) (*DescribeSeverityLevelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -584,7 +594,7 @@ func (r DescribeSeverityLevelsRequest) Send() (*DescribeSeverityLevelsOutput, er
 //
 //    // Example sending a request using the DescribeSeverityLevelsRequest method.
 //    req := client.DescribeSeverityLevelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -618,7 +628,8 @@ type DescribeTrustedAdvisorCheckRefreshStatusesRequest struct {
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckRefreshStatuses API request.
-func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send() (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
+func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send(ctx context.Context) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -639,7 +650,7 @@ func (r DescribeTrustedAdvisorCheckRefreshStatusesRequest) Send() (*DescribeTrus
 //
 //    // Example sending a request using the DescribeTrustedAdvisorCheckRefreshStatusesRequest method.
 //    req := client.DescribeTrustedAdvisorCheckRefreshStatusesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -673,7 +684,8 @@ type DescribeTrustedAdvisorCheckResultRequest struct {
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckResult API request.
-func (r DescribeTrustedAdvisorCheckResultRequest) Send() (*DescribeTrustedAdvisorCheckResultOutput, error) {
+func (r DescribeTrustedAdvisorCheckResultRequest) Send(ctx context.Context) (*DescribeTrustedAdvisorCheckResultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -708,7 +720,7 @@ func (r DescribeTrustedAdvisorCheckResultRequest) Send() (*DescribeTrustedAdviso
 //
 //    // Example sending a request using the DescribeTrustedAdvisorCheckResultRequest method.
 //    req := client.DescribeTrustedAdvisorCheckResultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -742,7 +754,8 @@ type DescribeTrustedAdvisorCheckSummariesRequest struct {
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckSummaries API request.
-func (r DescribeTrustedAdvisorCheckSummariesRequest) Send() (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
+func (r DescribeTrustedAdvisorCheckSummariesRequest) Send(ctx context.Context) (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -761,7 +774,7 @@ func (r DescribeTrustedAdvisorCheckSummariesRequest) Send() (*DescribeTrustedAdv
 //
 //    // Example sending a request using the DescribeTrustedAdvisorCheckSummariesRequest method.
 //    req := client.DescribeTrustedAdvisorCheckSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -795,7 +808,8 @@ type DescribeTrustedAdvisorChecksRequest struct {
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorChecks API request.
-func (r DescribeTrustedAdvisorChecksRequest) Send() (*DescribeTrustedAdvisorChecksOutput, error) {
+func (r DescribeTrustedAdvisorChecksRequest) Send(ctx context.Context) (*DescribeTrustedAdvisorChecksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -814,7 +828,7 @@ func (r DescribeTrustedAdvisorChecksRequest) Send() (*DescribeTrustedAdvisorChec
 //
 //    // Example sending a request using the DescribeTrustedAdvisorChecksRequest method.
 //    req := client.DescribeTrustedAdvisorChecksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -848,7 +862,8 @@ type RefreshTrustedAdvisorCheckRequest struct {
 }
 
 // Send marshals and sends the RefreshTrustedAdvisorCheck API request.
-func (r RefreshTrustedAdvisorCheckRequest) Send() (*RefreshTrustedAdvisorCheckOutput, error) {
+func (r RefreshTrustedAdvisorCheckRequest) Send(ctx context.Context) (*RefreshTrustedAdvisorCheckOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -880,7 +895,7 @@ func (r RefreshTrustedAdvisorCheckRequest) Send() (*RefreshTrustedAdvisorCheckOu
 //
 //    // Example sending a request using the RefreshTrustedAdvisorCheckRequest method.
 //    req := client.RefreshTrustedAdvisorCheckRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -914,7 +929,8 @@ type ResolveCaseRequest struct {
 }
 
 // Send marshals and sends the ResolveCase API request.
-func (r ResolveCaseRequest) Send() (*ResolveCaseOutput, error) {
+func (r ResolveCaseRequest) Send(ctx context.Context) (*ResolveCaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -931,7 +947,7 @@ func (r ResolveCaseRequest) Send() (*ResolveCaseOutput, error) {
 //
 //    // Example sending a request using the ResolveCaseRequest method.
 //    req := client.ResolveCaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

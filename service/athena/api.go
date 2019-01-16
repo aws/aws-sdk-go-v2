@@ -3,6 +3,7 @@
 package athena
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type BatchGetNamedQueryRequest struct {
 }
 
 // Send marshals and sends the BatchGetNamedQuery API request.
-func (r BatchGetNamedQueryRequest) Send() (*BatchGetNamedQueryOutput, error) {
+func (r BatchGetNamedQueryRequest) Send(ctx context.Context) (*BatchGetNamedQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r BatchGetNamedQueryRequest) Send() (*BatchGetNamedQueryOutput, error) {
 //
 //    // Example sending a request using the BatchGetNamedQueryRequest method.
 //    req := client.BatchGetNamedQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type BatchGetQueryExecutionRequest struct {
 }
 
 // Send marshals and sends the BatchGetQueryExecution API request.
-func (r BatchGetQueryExecutionRequest) Send() (*BatchGetQueryExecutionOutput, error) {
+func (r BatchGetQueryExecutionRequest) Send(ctx context.Context) (*BatchGetQueryExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -95,7 +98,7 @@ func (r BatchGetQueryExecutionRequest) Send() (*BatchGetQueryExecutionOutput, er
 //
 //    // Example sending a request using the BatchGetQueryExecutionRequest method.
 //    req := client.BatchGetQueryExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -129,7 +132,8 @@ type CreateNamedQueryRequest struct {
 }
 
 // Send marshals and sends the CreateNamedQuery API request.
-func (r CreateNamedQueryRequest) Send() (*CreateNamedQueryOutput, error) {
+func (r CreateNamedQueryRequest) Send(ctx context.Context) (*CreateNamedQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -149,7 +153,7 @@ func (r CreateNamedQueryRequest) Send() (*CreateNamedQueryOutput, error) {
 //
 //    // Example sending a request using the CreateNamedQueryRequest method.
 //    req := client.CreateNamedQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -183,7 +187,8 @@ type DeleteNamedQueryRequest struct {
 }
 
 // Send marshals and sends the DeleteNamedQuery API request.
-func (r DeleteNamedQueryRequest) Send() (*DeleteNamedQueryOutput, error) {
+func (r DeleteNamedQueryRequest) Send(ctx context.Context) (*DeleteNamedQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,7 +208,7 @@ func (r DeleteNamedQueryRequest) Send() (*DeleteNamedQueryOutput, error) {
 //
 //    // Example sending a request using the DeleteNamedQueryRequest method.
 //    req := client.DeleteNamedQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -237,7 +242,8 @@ type GetNamedQueryRequest struct {
 }
 
 // Send marshals and sends the GetNamedQuery API request.
-func (r GetNamedQueryRequest) Send() (*GetNamedQueryOutput, error) {
+func (r GetNamedQueryRequest) Send(ctx context.Context) (*GetNamedQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -253,7 +259,7 @@ func (r GetNamedQueryRequest) Send() (*GetNamedQueryOutput, error) {
 //
 //    // Example sending a request using the GetNamedQueryRequest method.
 //    req := client.GetNamedQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -287,7 +293,8 @@ type GetQueryExecutionRequest struct {
 }
 
 // Send marshals and sends the GetQueryExecution API request.
-func (r GetQueryExecutionRequest) Send() (*GetQueryExecutionOutput, error) {
+func (r GetQueryExecutionRequest) Send(ctx context.Context) (*GetQueryExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -304,7 +311,7 @@ func (r GetQueryExecutionRequest) Send() (*GetQueryExecutionOutput, error) {
 //
 //    // Example sending a request using the GetQueryExecutionRequest method.
 //    req := client.GetQueryExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -338,7 +345,8 @@ type GetQueryResultsRequest struct {
 }
 
 // Send marshals and sends the GetQueryResults API request.
-func (r GetQueryResultsRequest) Send() (*GetQueryResultsOutput, error) {
+func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,7 +364,7 @@ func (r GetQueryResultsRequest) Send() (*GetQueryResultsOutput, error) {
 //
 //    // Example sending a request using the GetQueryResultsRequest method.
 //    req := client.GetQueryResultsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -442,7 +450,8 @@ type ListNamedQueriesRequest struct {
 }
 
 // Send marshals and sends the ListNamedQueries API request.
-func (r ListNamedQueriesRequest) Send() (*ListNamedQueriesOutput, error) {
+func (r ListNamedQueriesRequest) Send(ctx context.Context) (*ListNamedQueriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,7 +471,7 @@ func (r ListNamedQueriesRequest) Send() (*ListNamedQueriesOutput, error) {
 //
 //    // Example sending a request using the ListNamedQueriesRequest method.
 //    req := client.ListNamedQueriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -548,7 +557,8 @@ type ListQueryExecutionsRequest struct {
 }
 
 // Send marshals and sends the ListQueryExecutions API request.
-func (r ListQueryExecutionsRequest) Send() (*ListQueryExecutionsOutput, error) {
+func (r ListQueryExecutionsRequest) Send(ctx context.Context) (*ListQueryExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +578,7 @@ func (r ListQueryExecutionsRequest) Send() (*ListQueryExecutionsOutput, error) {
 //
 //    // Example sending a request using the ListQueryExecutionsRequest method.
 //    req := client.ListQueryExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -654,7 +664,8 @@ type StartQueryExecutionRequest struct {
 }
 
 // Send marshals and sends the StartQueryExecution API request.
-func (r StartQueryExecutionRequest) Send() (*StartQueryExecutionOutput, error) {
+func (r StartQueryExecutionRequest) Send(ctx context.Context) (*StartQueryExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -674,7 +685,7 @@ func (r StartQueryExecutionRequest) Send() (*StartQueryExecutionOutput, error) {
 //
 //    // Example sending a request using the StartQueryExecutionRequest method.
 //    req := client.StartQueryExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -708,7 +719,8 @@ type StopQueryExecutionRequest struct {
 }
 
 // Send marshals and sends the StopQueryExecution API request.
-func (r StopQueryExecutionRequest) Send() (*StopQueryExecutionOutput, error) {
+func (r StopQueryExecutionRequest) Send(ctx context.Context) (*StopQueryExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -728,7 +740,7 @@ func (r StopQueryExecutionRequest) Send() (*StopQueryExecutionOutput, error) {
 //
 //    // Example sending a request using the StopQueryExecutionRequest method.
 //    req := client.StopQueryExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

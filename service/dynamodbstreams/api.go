@@ -3,6 +3,7 @@
 package dynamodbstreams
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type DescribeStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeStream API request.
-func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -46,7 +48,7 @@ func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
 //
 //    // Example sending a request using the DescribeStreamRequest method.
 //    req := client.DescribeStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -80,7 +82,8 @@ type GetRecordsRequest struct {
 }
 
 // Send marshals and sends the GetRecords API request.
-func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+func (r GetRecordsRequest) Send(ctx context.Context) (*GetRecordsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -106,7 +109,7 @@ func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 //
 //    // Example sending a request using the GetRecordsRequest method.
 //    req := client.GetRecordsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -140,7 +143,8 @@ type GetShardIteratorRequest struct {
 }
 
 // Send marshals and sends the GetShardIterator API request.
-func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+func (r GetShardIteratorRequest) Send(ctx context.Context) (*GetShardIteratorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +164,7 @@ func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
 //
 //    // Example sending a request using the GetShardIteratorRequest method.
 //    req := client.GetShardIteratorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -194,7 +198,8 @@ type ListStreamsRequest struct {
 }
 
 // Send marshals and sends the ListStreams API request.
-func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -214,7 +219,7 @@ func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
 //
 //    // Example sending a request using the ListStreamsRequest method.
 //    req := client.ListStreamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

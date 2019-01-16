@@ -3,6 +3,7 @@
 package comprehend
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type BatchDetectDominantLanguageRequest struct {
 }
 
 // Send marshals and sends the BatchDetectDominantLanguage API request.
-func (r BatchDetectDominantLanguageRequest) Send() (*BatchDetectDominantLanguageOutput, error) {
+func (r BatchDetectDominantLanguageRequest) Send(ctx context.Context) (*BatchDetectDominantLanguageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r BatchDetectDominantLanguageRequest) Send() (*BatchDetectDominantLanguage
 //
 //    // Example sending a request using the BatchDetectDominantLanguageRequest method.
 //    req := client.BatchDetectDominantLanguageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type BatchDetectEntitiesRequest struct {
 }
 
 // Send marshals and sends the BatchDetectEntities API request.
-func (r BatchDetectEntitiesRequest) Send() (*BatchDetectEntitiesOutput, error) {
+func (r BatchDetectEntitiesRequest) Send(ctx context.Context) (*BatchDetectEntitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r BatchDetectEntitiesRequest) Send() (*BatchDetectEntitiesOutput, error) {
 //
 //    // Example sending a request using the BatchDetectEntitiesRequest method.
 //    req := client.BatchDetectEntitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type BatchDetectKeyPhrasesRequest struct {
 }
 
 // Send marshals and sends the BatchDetectKeyPhrases API request.
-func (r BatchDetectKeyPhrasesRequest) Send() (*BatchDetectKeyPhrasesOutput, error) {
+func (r BatchDetectKeyPhrasesRequest) Send(ctx context.Context) (*BatchDetectKeyPhrasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +143,7 @@ func (r BatchDetectKeyPhrasesRequest) Send() (*BatchDetectKeyPhrasesOutput, erro
 //
 //    // Example sending a request using the BatchDetectKeyPhrasesRequest method.
 //    req := client.BatchDetectKeyPhrasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +177,8 @@ type BatchDetectSentimentRequest struct {
 }
 
 // Send marshals and sends the BatchDetectSentiment API request.
-func (r BatchDetectSentimentRequest) Send() (*BatchDetectSentimentOutput, error) {
+func (r BatchDetectSentimentRequest) Send(ctx context.Context) (*BatchDetectSentimentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -190,7 +195,7 @@ func (r BatchDetectSentimentRequest) Send() (*BatchDetectSentimentOutput, error)
 //
 //    // Example sending a request using the BatchDetectSentimentRequest method.
 //    req := client.BatchDetectSentimentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -224,7 +229,8 @@ type BatchDetectSyntaxRequest struct {
 }
 
 // Send marshals and sends the BatchDetectSyntax API request.
-func (r BatchDetectSyntaxRequest) Send() (*BatchDetectSyntaxOutput, error) {
+func (r BatchDetectSyntaxRequest) Send(ctx context.Context) (*BatchDetectSyntaxOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +248,7 @@ func (r BatchDetectSyntaxRequest) Send() (*BatchDetectSyntaxOutput, error) {
 //
 //    // Example sending a request using the BatchDetectSyntaxRequest method.
 //    req := client.BatchDetectSyntaxRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +282,8 @@ type CreateDocumentClassifierRequest struct {
 }
 
 // Send marshals and sends the CreateDocumentClassifier API request.
-func (r CreateDocumentClassifierRequest) Send() (*CreateDocumentClassifierOutput, error) {
+func (r CreateDocumentClassifierRequest) Send(ctx context.Context) (*CreateDocumentClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +303,7 @@ func (r CreateDocumentClassifierRequest) Send() (*CreateDocumentClassifierOutput
 //
 //    // Example sending a request using the CreateDocumentClassifierRequest method.
 //    req := client.CreateDocumentClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -330,7 +337,8 @@ type CreateEntityRecognizerRequest struct {
 }
 
 // Send marshals and sends the CreateEntityRecognizer API request.
-func (r CreateEntityRecognizerRequest) Send() (*CreateEntityRecognizerOutput, error) {
+func (r CreateEntityRecognizerRequest) Send(ctx context.Context) (*CreateEntityRecognizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +355,7 @@ func (r CreateEntityRecognizerRequest) Send() (*CreateEntityRecognizerOutput, er
 //
 //    // Example sending a request using the CreateEntityRecognizerRequest method.
 //    req := client.CreateEntityRecognizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -381,7 +389,8 @@ type DeleteDocumentClassifierRequest struct {
 }
 
 // Send marshals and sends the DeleteDocumentClassifier API request.
-func (r DeleteDocumentClassifierRequest) Send() (*DeleteDocumentClassifierOutput, error) {
+func (r DeleteDocumentClassifierRequest) Send(ctx context.Context) (*DeleteDocumentClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -405,7 +414,7 @@ func (r DeleteDocumentClassifierRequest) Send() (*DeleteDocumentClassifierOutput
 //
 //    // Example sending a request using the DeleteDocumentClassifierRequest method.
 //    req := client.DeleteDocumentClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -439,7 +448,8 @@ type DeleteEntityRecognizerRequest struct {
 }
 
 // Send marshals and sends the DeleteEntityRecognizer API request.
-func (r DeleteEntityRecognizerRequest) Send() (*DeleteEntityRecognizerOutput, error) {
+func (r DeleteEntityRecognizerRequest) Send(ctx context.Context) (*DeleteEntityRecognizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -463,7 +473,7 @@ func (r DeleteEntityRecognizerRequest) Send() (*DeleteEntityRecognizerOutput, er
 //
 //    // Example sending a request using the DeleteEntityRecognizerRequest method.
 //    req := client.DeleteEntityRecognizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -497,7 +507,8 @@ type DescribeDocumentClassificationJobRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentClassificationJob API request.
-func (r DescribeDocumentClassificationJobRequest) Send() (*DescribeDocumentClassificationJobOutput, error) {
+func (r DescribeDocumentClassificationJobRequest) Send(ctx context.Context) (*DescribeDocumentClassificationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -514,7 +525,7 @@ func (r DescribeDocumentClassificationJobRequest) Send() (*DescribeDocumentClass
 //
 //    // Example sending a request using the DescribeDocumentClassificationJobRequest method.
 //    req := client.DescribeDocumentClassificationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -548,7 +559,8 @@ type DescribeDocumentClassifierRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentClassifier API request.
-func (r DescribeDocumentClassifierRequest) Send() (*DescribeDocumentClassifierOutput, error) {
+func (r DescribeDocumentClassifierRequest) Send(ctx context.Context) (*DescribeDocumentClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -564,7 +576,7 @@ func (r DescribeDocumentClassifierRequest) Send() (*DescribeDocumentClassifierOu
 //
 //    // Example sending a request using the DescribeDocumentClassifierRequest method.
 //    req := client.DescribeDocumentClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -598,7 +610,8 @@ type DescribeDominantLanguageDetectionJobRequest struct {
 }
 
 // Send marshals and sends the DescribeDominantLanguageDetectionJob API request.
-func (r DescribeDominantLanguageDetectionJobRequest) Send() (*DescribeDominantLanguageDetectionJobOutput, error) {
+func (r DescribeDominantLanguageDetectionJobRequest) Send(ctx context.Context) (*DescribeDominantLanguageDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -615,7 +628,7 @@ func (r DescribeDominantLanguageDetectionJobRequest) Send() (*DescribeDominantLa
 //
 //    // Example sending a request using the DescribeDominantLanguageDetectionJobRequest method.
 //    req := client.DescribeDominantLanguageDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -649,7 +662,8 @@ type DescribeEntitiesDetectionJobRequest struct {
 }
 
 // Send marshals and sends the DescribeEntitiesDetectionJob API request.
-func (r DescribeEntitiesDetectionJobRequest) Send() (*DescribeEntitiesDetectionJobOutput, error) {
+func (r DescribeEntitiesDetectionJobRequest) Send(ctx context.Context) (*DescribeEntitiesDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,7 +680,7 @@ func (r DescribeEntitiesDetectionJobRequest) Send() (*DescribeEntitiesDetectionJ
 //
 //    // Example sending a request using the DescribeEntitiesDetectionJobRequest method.
 //    req := client.DescribeEntitiesDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -700,7 +714,8 @@ type DescribeEntityRecognizerRequest struct {
 }
 
 // Send marshals and sends the DescribeEntityRecognizer API request.
-func (r DescribeEntityRecognizerRequest) Send() (*DescribeEntityRecognizerOutput, error) {
+func (r DescribeEntityRecognizerRequest) Send(ctx context.Context) (*DescribeEntityRecognizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -717,7 +732,7 @@ func (r DescribeEntityRecognizerRequest) Send() (*DescribeEntityRecognizerOutput
 //
 //    // Example sending a request using the DescribeEntityRecognizerRequest method.
 //    req := client.DescribeEntityRecognizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -751,7 +766,8 @@ type DescribeKeyPhrasesDetectionJobRequest struct {
 }
 
 // Send marshals and sends the DescribeKeyPhrasesDetectionJob API request.
-func (r DescribeKeyPhrasesDetectionJobRequest) Send() (*DescribeKeyPhrasesDetectionJobOutput, error) {
+func (r DescribeKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*DescribeKeyPhrasesDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -768,7 +784,7 @@ func (r DescribeKeyPhrasesDetectionJobRequest) Send() (*DescribeKeyPhrasesDetect
 //
 //    // Example sending a request using the DescribeKeyPhrasesDetectionJobRequest method.
 //    req := client.DescribeKeyPhrasesDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -802,7 +818,8 @@ type DescribeSentimentDetectionJobRequest struct {
 }
 
 // Send marshals and sends the DescribeSentimentDetectionJob API request.
-func (r DescribeSentimentDetectionJobRequest) Send() (*DescribeSentimentDetectionJobOutput, error) {
+func (r DescribeSentimentDetectionJobRequest) Send(ctx context.Context) (*DescribeSentimentDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -819,7 +836,7 @@ func (r DescribeSentimentDetectionJobRequest) Send() (*DescribeSentimentDetectio
 //
 //    // Example sending a request using the DescribeSentimentDetectionJobRequest method.
 //    req := client.DescribeSentimentDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -853,7 +870,8 @@ type DescribeTopicsDetectionJobRequest struct {
 }
 
 // Send marshals and sends the DescribeTopicsDetectionJob API request.
-func (r DescribeTopicsDetectionJobRequest) Send() (*DescribeTopicsDetectionJobOutput, error) {
+func (r DescribeTopicsDetectionJobRequest) Send(ctx context.Context) (*DescribeTopicsDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -870,7 +888,7 @@ func (r DescribeTopicsDetectionJobRequest) Send() (*DescribeTopicsDetectionJobOu
 //
 //    // Example sending a request using the DescribeTopicsDetectionJobRequest method.
 //    req := client.DescribeTopicsDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -904,7 +922,8 @@ type DetectDominantLanguageRequest struct {
 }
 
 // Send marshals and sends the DetectDominantLanguage API request.
-func (r DetectDominantLanguageRequest) Send() (*DetectDominantLanguageOutput, error) {
+func (r DetectDominantLanguageRequest) Send(ctx context.Context) (*DetectDominantLanguageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -922,7 +941,7 @@ func (r DetectDominantLanguageRequest) Send() (*DetectDominantLanguageOutput, er
 //
 //    // Example sending a request using the DetectDominantLanguageRequest method.
 //    req := client.DetectDominantLanguageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -956,7 +975,8 @@ type DetectEntitiesRequest struct {
 }
 
 // Send marshals and sends the DetectEntities API request.
-func (r DetectEntitiesRequest) Send() (*DetectEntitiesOutput, error) {
+func (r DetectEntitiesRequest) Send(ctx context.Context) (*DetectEntitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -973,7 +993,7 @@ func (r DetectEntitiesRequest) Send() (*DetectEntitiesOutput, error) {
 //
 //    // Example sending a request using the DetectEntitiesRequest method.
 //    req := client.DetectEntitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1007,7 +1027,8 @@ type DetectKeyPhrasesRequest struct {
 }
 
 // Send marshals and sends the DetectKeyPhrases API request.
-func (r DetectKeyPhrasesRequest) Send() (*DetectKeyPhrasesOutput, error) {
+func (r DetectKeyPhrasesRequest) Send(ctx context.Context) (*DetectKeyPhrasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1023,7 +1044,7 @@ func (r DetectKeyPhrasesRequest) Send() (*DetectKeyPhrasesOutput, error) {
 //
 //    // Example sending a request using the DetectKeyPhrasesRequest method.
 //    req := client.DetectKeyPhrasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1057,7 +1078,8 @@ type DetectSentimentRequest struct {
 }
 
 // Send marshals and sends the DetectSentiment API request.
-func (r DetectSentimentRequest) Send() (*DetectSentimentOutput, error) {
+func (r DetectSentimentRequest) Send(ctx context.Context) (*DetectSentimentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1074,7 +1096,7 @@ func (r DetectSentimentRequest) Send() (*DetectSentimentOutput, error) {
 //
 //    // Example sending a request using the DetectSentimentRequest method.
 //    req := client.DetectSentimentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1108,7 +1130,8 @@ type DetectSyntaxRequest struct {
 }
 
 // Send marshals and sends the DetectSyntax API request.
-func (r DetectSyntaxRequest) Send() (*DetectSyntaxOutput, error) {
+func (r DetectSyntaxRequest) Send(ctx context.Context) (*DetectSyntaxOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1125,7 +1148,7 @@ func (r DetectSyntaxRequest) Send() (*DetectSyntaxOutput, error) {
 //
 //    // Example sending a request using the DetectSyntaxRequest method.
 //    req := client.DetectSyntaxRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1159,7 +1182,8 @@ type ListDocumentClassificationJobsRequest struct {
 }
 
 // Send marshals and sends the ListDocumentClassificationJobs API request.
-func (r ListDocumentClassificationJobsRequest) Send() (*ListDocumentClassificationJobsOutput, error) {
+func (r ListDocumentClassificationJobsRequest) Send(ctx context.Context) (*ListDocumentClassificationJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1175,7 +1199,7 @@ func (r ListDocumentClassificationJobsRequest) Send() (*ListDocumentClassificati
 //
 //    // Example sending a request using the ListDocumentClassificationJobsRequest method.
 //    req := client.ListDocumentClassificationJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1209,7 +1233,8 @@ type ListDocumentClassifiersRequest struct {
 }
 
 // Send marshals and sends the ListDocumentClassifiers API request.
-func (r ListDocumentClassifiersRequest) Send() (*ListDocumentClassifiersOutput, error) {
+func (r ListDocumentClassifiersRequest) Send(ctx context.Context) (*ListDocumentClassifiersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1225,7 +1250,7 @@ func (r ListDocumentClassifiersRequest) Send() (*ListDocumentClassifiersOutput, 
 //
 //    // Example sending a request using the ListDocumentClassifiersRequest method.
 //    req := client.ListDocumentClassifiersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1259,7 +1284,8 @@ type ListDominantLanguageDetectionJobsRequest struct {
 }
 
 // Send marshals and sends the ListDominantLanguageDetectionJobs API request.
-func (r ListDominantLanguageDetectionJobsRequest) Send() (*ListDominantLanguageDetectionJobsOutput, error) {
+func (r ListDominantLanguageDetectionJobsRequest) Send(ctx context.Context) (*ListDominantLanguageDetectionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1275,7 +1301,7 @@ func (r ListDominantLanguageDetectionJobsRequest) Send() (*ListDominantLanguageD
 //
 //    // Example sending a request using the ListDominantLanguageDetectionJobsRequest method.
 //    req := client.ListDominantLanguageDetectionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1361,7 +1387,8 @@ type ListEntitiesDetectionJobsRequest struct {
 }
 
 // Send marshals and sends the ListEntitiesDetectionJobs API request.
-func (r ListEntitiesDetectionJobsRequest) Send() (*ListEntitiesDetectionJobsOutput, error) {
+func (r ListEntitiesDetectionJobsRequest) Send(ctx context.Context) (*ListEntitiesDetectionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1377,7 +1404,7 @@ func (r ListEntitiesDetectionJobsRequest) Send() (*ListEntitiesDetectionJobsOutp
 //
 //    // Example sending a request using the ListEntitiesDetectionJobsRequest method.
 //    req := client.ListEntitiesDetectionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1463,7 +1490,8 @@ type ListEntityRecognizersRequest struct {
 }
 
 // Send marshals and sends the ListEntityRecognizers API request.
-func (r ListEntityRecognizersRequest) Send() (*ListEntityRecognizersOutput, error) {
+func (r ListEntityRecognizersRequest) Send(ctx context.Context) (*ListEntityRecognizersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1486,7 +1514,7 @@ func (r ListEntityRecognizersRequest) Send() (*ListEntityRecognizersOutput, erro
 //
 //    // Example sending a request using the ListEntityRecognizersRequest method.
 //    req := client.ListEntityRecognizersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1520,7 +1548,8 @@ type ListKeyPhrasesDetectionJobsRequest struct {
 }
 
 // Send marshals and sends the ListKeyPhrasesDetectionJobs API request.
-func (r ListKeyPhrasesDetectionJobsRequest) Send() (*ListKeyPhrasesDetectionJobsOutput, error) {
+func (r ListKeyPhrasesDetectionJobsRequest) Send(ctx context.Context) (*ListKeyPhrasesDetectionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1536,7 +1565,7 @@ func (r ListKeyPhrasesDetectionJobsRequest) Send() (*ListKeyPhrasesDetectionJobs
 //
 //    // Example sending a request using the ListKeyPhrasesDetectionJobsRequest method.
 //    req := client.ListKeyPhrasesDetectionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1622,7 +1651,8 @@ type ListSentimentDetectionJobsRequest struct {
 }
 
 // Send marshals and sends the ListSentimentDetectionJobs API request.
-func (r ListSentimentDetectionJobsRequest) Send() (*ListSentimentDetectionJobsOutput, error) {
+func (r ListSentimentDetectionJobsRequest) Send(ctx context.Context) (*ListSentimentDetectionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1638,7 +1668,7 @@ func (r ListSentimentDetectionJobsRequest) Send() (*ListSentimentDetectionJobsOu
 //
 //    // Example sending a request using the ListSentimentDetectionJobsRequest method.
 //    req := client.ListSentimentDetectionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1724,7 +1754,8 @@ type ListTopicsDetectionJobsRequest struct {
 }
 
 // Send marshals and sends the ListTopicsDetectionJobs API request.
-func (r ListTopicsDetectionJobsRequest) Send() (*ListTopicsDetectionJobsOutput, error) {
+func (r ListTopicsDetectionJobsRequest) Send(ctx context.Context) (*ListTopicsDetectionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1740,7 +1771,7 @@ func (r ListTopicsDetectionJobsRequest) Send() (*ListTopicsDetectionJobsOutput, 
 //
 //    // Example sending a request using the ListTopicsDetectionJobsRequest method.
 //    req := client.ListTopicsDetectionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1826,7 +1857,8 @@ type StartDocumentClassificationJobRequest struct {
 }
 
 // Send marshals and sends the StartDocumentClassificationJob API request.
-func (r StartDocumentClassificationJobRequest) Send() (*StartDocumentClassificationJobOutput, error) {
+func (r StartDocumentClassificationJobRequest) Send(ctx context.Context) (*StartDocumentClassificationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1843,7 +1875,7 @@ func (r StartDocumentClassificationJobRequest) Send() (*StartDocumentClassificat
 //
 //    // Example sending a request using the StartDocumentClassificationJobRequest method.
 //    req := client.StartDocumentClassificationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1877,7 +1909,8 @@ type StartDominantLanguageDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StartDominantLanguageDetectionJob API request.
-func (r StartDominantLanguageDetectionJobRequest) Send() (*StartDominantLanguageDetectionJobOutput, error) {
+func (r StartDominantLanguageDetectionJobRequest) Send(ctx context.Context) (*StartDominantLanguageDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1894,7 +1927,7 @@ func (r StartDominantLanguageDetectionJobRequest) Send() (*StartDominantLanguage
 //
 //    // Example sending a request using the StartDominantLanguageDetectionJobRequest method.
 //    req := client.StartDominantLanguageDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1928,7 +1961,8 @@ type StartEntitiesDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StartEntitiesDetectionJob API request.
-func (r StartEntitiesDetectionJobRequest) Send() (*StartEntitiesDetectionJobOutput, error) {
+func (r StartEntitiesDetectionJobRequest) Send(ctx context.Context) (*StartEntitiesDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1950,7 +1984,7 @@ func (r StartEntitiesDetectionJobRequest) Send() (*StartEntitiesDetectionJobOutp
 //
 //    // Example sending a request using the StartEntitiesDetectionJobRequest method.
 //    req := client.StartEntitiesDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1984,7 +2018,8 @@ type StartKeyPhrasesDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StartKeyPhrasesDetectionJob API request.
-func (r StartKeyPhrasesDetectionJobRequest) Send() (*StartKeyPhrasesDetectionJobOutput, error) {
+func (r StartKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*StartKeyPhrasesDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2001,7 +2036,7 @@ func (r StartKeyPhrasesDetectionJobRequest) Send() (*StartKeyPhrasesDetectionJob
 //
 //    // Example sending a request using the StartKeyPhrasesDetectionJobRequest method.
 //    req := client.StartKeyPhrasesDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2035,7 +2070,8 @@ type StartSentimentDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StartSentimentDetectionJob API request.
-func (r StartSentimentDetectionJobRequest) Send() (*StartSentimentDetectionJobOutput, error) {
+func (r StartSentimentDetectionJobRequest) Send(ctx context.Context) (*StartSentimentDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2052,7 +2088,7 @@ func (r StartSentimentDetectionJobRequest) Send() (*StartSentimentDetectionJobOu
 //
 //    // Example sending a request using the StartSentimentDetectionJobRequest method.
 //    req := client.StartSentimentDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2086,7 +2122,8 @@ type StartTopicsDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StartTopicsDetectionJob API request.
-func (r StartTopicsDetectionJobRequest) Send() (*StartTopicsDetectionJobOutput, error) {
+func (r StartTopicsDetectionJobRequest) Send(ctx context.Context) (*StartTopicsDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2103,7 +2140,7 @@ func (r StartTopicsDetectionJobRequest) Send() (*StartTopicsDetectionJobOutput, 
 //
 //    // Example sending a request using the StartTopicsDetectionJobRequest method.
 //    req := client.StartTopicsDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2137,7 +2174,8 @@ type StopDominantLanguageDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StopDominantLanguageDetectionJob API request.
-func (r StopDominantLanguageDetectionJobRequest) Send() (*StopDominantLanguageDetectionJobOutput, error) {
+func (r StopDominantLanguageDetectionJobRequest) Send(ctx context.Context) (*StopDominantLanguageDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2164,7 +2202,7 @@ func (r StopDominantLanguageDetectionJobRequest) Send() (*StopDominantLanguageDe
 //
 //    // Example sending a request using the StopDominantLanguageDetectionJobRequest method.
 //    req := client.StopDominantLanguageDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2198,7 +2236,8 @@ type StopEntitiesDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StopEntitiesDetectionJob API request.
-func (r StopEntitiesDetectionJobRequest) Send() (*StopEntitiesDetectionJobOutput, error) {
+func (r StopEntitiesDetectionJobRequest) Send(ctx context.Context) (*StopEntitiesDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2225,7 +2264,7 @@ func (r StopEntitiesDetectionJobRequest) Send() (*StopEntitiesDetectionJobOutput
 //
 //    // Example sending a request using the StopEntitiesDetectionJobRequest method.
 //    req := client.StopEntitiesDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2259,7 +2298,8 @@ type StopKeyPhrasesDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StopKeyPhrasesDetectionJob API request.
-func (r StopKeyPhrasesDetectionJobRequest) Send() (*StopKeyPhrasesDetectionJobOutput, error) {
+func (r StopKeyPhrasesDetectionJobRequest) Send(ctx context.Context) (*StopKeyPhrasesDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2286,7 +2326,7 @@ func (r StopKeyPhrasesDetectionJobRequest) Send() (*StopKeyPhrasesDetectionJobOu
 //
 //    // Example sending a request using the StopKeyPhrasesDetectionJobRequest method.
 //    req := client.StopKeyPhrasesDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2320,7 +2360,8 @@ type StopSentimentDetectionJobRequest struct {
 }
 
 // Send marshals and sends the StopSentimentDetectionJob API request.
-func (r StopSentimentDetectionJobRequest) Send() (*StopSentimentDetectionJobOutput, error) {
+func (r StopSentimentDetectionJobRequest) Send(ctx context.Context) (*StopSentimentDetectionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2347,7 +2388,7 @@ func (r StopSentimentDetectionJobRequest) Send() (*StopSentimentDetectionJobOutp
 //
 //    // Example sending a request using the StopSentimentDetectionJobRequest method.
 //    req := client.StopSentimentDetectionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2381,7 +2422,8 @@ type StopTrainingDocumentClassifierRequest struct {
 }
 
 // Send marshals and sends the StopTrainingDocumentClassifier API request.
-func (r StopTrainingDocumentClassifierRequest) Send() (*StopTrainingDocumentClassifierOutput, error) {
+func (r StopTrainingDocumentClassifierRequest) Send(ctx context.Context) (*StopTrainingDocumentClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2403,7 +2445,7 @@ func (r StopTrainingDocumentClassifierRequest) Send() (*StopTrainingDocumentClas
 //
 //    // Example sending a request using the StopTrainingDocumentClassifierRequest method.
 //    req := client.StopTrainingDocumentClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2437,7 +2479,8 @@ type StopTrainingEntityRecognizerRequest struct {
 }
 
 // Send marshals and sends the StopTrainingEntityRecognizer API request.
-func (r StopTrainingEntityRecognizerRequest) Send() (*StopTrainingEntityRecognizerOutput, error) {
+func (r StopTrainingEntityRecognizerRequest) Send(ctx context.Context) (*StopTrainingEntityRecognizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2459,7 +2502,7 @@ func (r StopTrainingEntityRecognizerRequest) Send() (*StopTrainingEntityRecogniz
 //
 //    // Example sending a request using the StopTrainingEntityRecognizerRequest method.
 //    req := client.StopTrainingEntityRecognizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

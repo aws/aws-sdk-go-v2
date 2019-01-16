@@ -3,6 +3,8 @@
 package iotjobsdataplane
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type DescribeJobExecutionRequest struct {
 }
 
 // Send marshals and sends the DescribeJobExecution API request.
-func (r DescribeJobExecutionRequest) Send() (*DescribeJobExecutionOutput, error) {
+func (r DescribeJobExecutionRequest) Send(ctx context.Context) (*DescribeJobExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -34,7 +37,7 @@ func (r DescribeJobExecutionRequest) Send() (*DescribeJobExecutionOutput, error)
 //
 //    // Example sending a request using the DescribeJobExecutionRequest method.
 //    req := client.DescribeJobExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -68,7 +71,8 @@ type GetPendingJobExecutionsRequest struct {
 }
 
 // Send marshals and sends the GetPendingJobExecutions API request.
-func (r GetPendingJobExecutionsRequest) Send() (*GetPendingJobExecutionsOutput, error) {
+func (r GetPendingJobExecutionsRequest) Send(ctx context.Context) (*GetPendingJobExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -84,7 +88,7 @@ func (r GetPendingJobExecutionsRequest) Send() (*GetPendingJobExecutionsOutput, 
 //
 //    // Example sending a request using the GetPendingJobExecutionsRequest method.
 //    req := client.GetPendingJobExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -118,7 +122,8 @@ type StartNextPendingJobExecutionRequest struct {
 }
 
 // Send marshals and sends the StartNextPendingJobExecution API request.
-func (r StartNextPendingJobExecutionRequest) Send() (*StartNextPendingJobExecutionOutput, error) {
+func (r StartNextPendingJobExecutionRequest) Send(ctx context.Context) (*StartNextPendingJobExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -135,7 +140,7 @@ func (r StartNextPendingJobExecutionRequest) Send() (*StartNextPendingJobExecuti
 //
 //    // Example sending a request using the StartNextPendingJobExecutionRequest method.
 //    req := client.StartNextPendingJobExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -169,7 +174,8 @@ type UpdateJobExecutionRequest struct {
 }
 
 // Send marshals and sends the UpdateJobExecution API request.
-func (r UpdateJobExecutionRequest) Send() (*UpdateJobExecutionOutput, error) {
+func (r UpdateJobExecutionRequest) Send(ctx context.Context) (*UpdateJobExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -185,7 +191,7 @@ func (r UpdateJobExecutionRequest) Send() (*UpdateJobExecutionOutput, error) {
 //
 //    // Example sending a request using the UpdateJobExecutionRequest method.
 //    req := client.UpdateJobExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

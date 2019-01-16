@@ -3,6 +3,7 @@
 package ecr_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -46,7 +47,7 @@ func ExampleECR_BatchDeleteImageRequest_shared00() {
 	}
 
 	req := svc.BatchDeleteImageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -91,7 +92,7 @@ func ExampleECR_BatchGetImageRequest_shared00() {
 	}
 
 	req := svc.BatchGetImageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -131,7 +132,7 @@ func ExampleECR_CreateRepositoryRequest_shared00() {
 	}
 
 	req := svc.CreateRepositoryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -178,7 +179,7 @@ func ExampleECR_DeleteRepositoryRequest_shared00() {
 	}
 
 	req := svc.DeleteRepositoryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -220,7 +221,7 @@ func ExampleECR_DeleteRepositoryPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteRepositoryPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -260,7 +261,7 @@ func ExampleECR_DescribeRepositoriesRequest_shared00() {
 	input := &ecr.DescribeRepositoriesInput{}
 
 	req := svc.DescribeRepositoriesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -297,7 +298,7 @@ func ExampleECR_GetAuthorizationTokenRequest_shared00() {
 	input := &ecr.GetAuthorizationTokenInput{}
 
 	req := svc.GetAuthorizationTokenRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -334,7 +335,7 @@ func ExampleECR_GetRepositoryPolicyRequest_shared00() {
 	}
 
 	req := svc.GetRepositoryPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -376,7 +377,7 @@ func ExampleECR_ListImagesRequest_shared00() {
 	}
 
 	req := svc.ListImagesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -3,6 +3,7 @@
 package batch
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 //
 //    // Example sending a request using the CancelJobRequest method.
 //    req := client.CancelJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -74,7 +76,8 @@ type CreateComputeEnvironmentRequest struct {
 }
 
 // Send marshals and sends the CreateComputeEnvironment API request.
-func (r CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput, error) {
+func (r CreateComputeEnvironmentRequest) Send(ctx context.Context) (*CreateComputeEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -129,7 +132,7 @@ func (r CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput
 //
 //    // Example sending a request using the CreateComputeEnvironmentRequest method.
 //    req := client.CreateComputeEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -163,7 +166,8 @@ type CreateJobQueueRequest struct {
 }
 
 // Send marshals and sends the CreateJobQueue API request.
-func (r CreateJobQueueRequest) Send() (*CreateJobQueueOutput, error) {
+func (r CreateJobQueueRequest) Send(ctx context.Context) (*CreateJobQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +191,7 @@ func (r CreateJobQueueRequest) Send() (*CreateJobQueueOutput, error) {
 //
 //    // Example sending a request using the CreateJobQueueRequest method.
 //    req := client.CreateJobQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +225,8 @@ type DeleteComputeEnvironmentRequest struct {
 }
 
 // Send marshals and sends the DeleteComputeEnvironment API request.
-func (r DeleteComputeEnvironmentRequest) Send() (*DeleteComputeEnvironmentOutput, error) {
+func (r DeleteComputeEnvironmentRequest) Send(ctx context.Context) (*DeleteComputeEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -241,7 +246,7 @@ func (r DeleteComputeEnvironmentRequest) Send() (*DeleteComputeEnvironmentOutput
 //
 //    // Example sending a request using the DeleteComputeEnvironmentRequest method.
 //    req := client.DeleteComputeEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -275,7 +280,8 @@ type DeleteJobQueueRequest struct {
 }
 
 // Send marshals and sends the DeleteJobQueue API request.
-func (r DeleteJobQueueRequest) Send() (*DeleteJobQueueOutput, error) {
+func (r DeleteJobQueueRequest) Send(ctx context.Context) (*DeleteJobQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +302,7 @@ func (r DeleteJobQueueRequest) Send() (*DeleteJobQueueOutput, error) {
 //
 //    // Example sending a request using the DeleteJobQueueRequest method.
 //    req := client.DeleteJobQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -330,7 +336,8 @@ type DeregisterJobDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeregisterJobDefinition API request.
-func (r DeregisterJobDefinitionRequest) Send() (*DeregisterJobDefinitionOutput, error) {
+func (r DeregisterJobDefinitionRequest) Send(ctx context.Context) (*DeregisterJobDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -346,7 +353,7 @@ func (r DeregisterJobDefinitionRequest) Send() (*DeregisterJobDefinitionOutput, 
 //
 //    // Example sending a request using the DeregisterJobDefinitionRequest method.
 //    req := client.DeregisterJobDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -380,7 +387,8 @@ type DescribeComputeEnvironmentsRequest struct {
 }
 
 // Send marshals and sends the DescribeComputeEnvironments API request.
-func (r DescribeComputeEnvironmentsRequest) Send() (*DescribeComputeEnvironmentsOutput, error) {
+func (r DescribeComputeEnvironmentsRequest) Send(ctx context.Context) (*DescribeComputeEnvironmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,7 +408,7 @@ func (r DescribeComputeEnvironmentsRequest) Send() (*DescribeComputeEnvironments
 //
 //    // Example sending a request using the DescribeComputeEnvironmentsRequest method.
 //    req := client.DescribeComputeEnvironmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -434,7 +442,8 @@ type DescribeJobDefinitionsRequest struct {
 }
 
 // Send marshals and sends the DescribeJobDefinitions API request.
-func (r DescribeJobDefinitionsRequest) Send() (*DescribeJobDefinitionsOutput, error) {
+func (r DescribeJobDefinitionsRequest) Send(ctx context.Context) (*DescribeJobDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -451,7 +460,7 @@ func (r DescribeJobDefinitionsRequest) Send() (*DescribeJobDefinitionsOutput, er
 //
 //    // Example sending a request using the DescribeJobDefinitionsRequest method.
 //    req := client.DescribeJobDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -485,7 +494,8 @@ type DescribeJobQueuesRequest struct {
 }
 
 // Send marshals and sends the DescribeJobQueues API request.
-func (r DescribeJobQueuesRequest) Send() (*DescribeJobQueuesOutput, error) {
+func (r DescribeJobQueuesRequest) Send(ctx context.Context) (*DescribeJobQueuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +511,7 @@ func (r DescribeJobQueuesRequest) Send() (*DescribeJobQueuesOutput, error) {
 //
 //    // Example sending a request using the DescribeJobQueuesRequest method.
 //    req := client.DescribeJobQueuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -535,7 +545,8 @@ type DescribeJobsRequest struct {
 }
 
 // Send marshals and sends the DescribeJobs API request.
-func (r DescribeJobsRequest) Send() (*DescribeJobsOutput, error) {
+func (r DescribeJobsRequest) Send(ctx context.Context) (*DescribeJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -551,7 +562,7 @@ func (r DescribeJobsRequest) Send() (*DescribeJobsOutput, error) {
 //
 //    // Example sending a request using the DescribeJobsRequest method.
 //    req := client.DescribeJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -585,7 +596,8 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -612,7 +624,7 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -646,7 +658,8 @@ type RegisterJobDefinitionRequest struct {
 }
 
 // Send marshals and sends the RegisterJobDefinition API request.
-func (r RegisterJobDefinitionRequest) Send() (*RegisterJobDefinitionOutput, error) {
+func (r RegisterJobDefinitionRequest) Send(ctx context.Context) (*RegisterJobDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -662,7 +675,7 @@ func (r RegisterJobDefinitionRequest) Send() (*RegisterJobDefinitionOutput, erro
 //
 //    // Example sending a request using the RegisterJobDefinitionRequest method.
 //    req := client.RegisterJobDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -696,7 +709,8 @@ type SubmitJobRequest struct {
 }
 
 // Send marshals and sends the SubmitJob API request.
-func (r SubmitJobRequest) Send() (*SubmitJobOutput, error) {
+func (r SubmitJobRequest) Send(ctx context.Context) (*SubmitJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -713,7 +727,7 @@ func (r SubmitJobRequest) Send() (*SubmitJobOutput, error) {
 //
 //    // Example sending a request using the SubmitJobRequest method.
 //    req := client.SubmitJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -747,7 +761,8 @@ type TerminateJobRequest struct {
 }
 
 // Send marshals and sends the TerminateJob API request.
-func (r TerminateJobRequest) Send() (*TerminateJobOutput, error) {
+func (r TerminateJobRequest) Send(ctx context.Context) (*TerminateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -765,7 +780,7 @@ func (r TerminateJobRequest) Send() (*TerminateJobOutput, error) {
 //
 //    // Example sending a request using the TerminateJobRequest method.
 //    req := client.TerminateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -799,7 +814,8 @@ type UpdateComputeEnvironmentRequest struct {
 }
 
 // Send marshals and sends the UpdateComputeEnvironment API request.
-func (r UpdateComputeEnvironmentRequest) Send() (*UpdateComputeEnvironmentOutput, error) {
+func (r UpdateComputeEnvironmentRequest) Send(ctx context.Context) (*UpdateComputeEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,7 +831,7 @@ func (r UpdateComputeEnvironmentRequest) Send() (*UpdateComputeEnvironmentOutput
 //
 //    // Example sending a request using the UpdateComputeEnvironmentRequest method.
 //    req := client.UpdateComputeEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -849,7 +865,8 @@ type UpdateJobQueueRequest struct {
 }
 
 // Send marshals and sends the UpdateJobQueue API request.
-func (r UpdateJobQueueRequest) Send() (*UpdateJobQueueOutput, error) {
+func (r UpdateJobQueueRequest) Send(ctx context.Context) (*UpdateJobQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -865,7 +882,7 @@ func (r UpdateJobQueueRequest) Send() (*UpdateJobQueueOutput, error) {
 //
 //    // Example sending a request using the UpdateJobQueueRequest method.
 //    req := client.UpdateJobQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

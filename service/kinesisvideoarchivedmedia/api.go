@@ -3,6 +3,7 @@
 package kinesisvideoarchivedmedia
 
 import (
+	"context"
 	"io"
 	"time"
 
@@ -21,7 +22,8 @@ type GetHLSStreamingSessionURLRequest struct {
 }
 
 // Send marshals and sends the GetHLSStreamingSessionURL API request.
-func (r GetHLSStreamingSessionURLRequest) Send() (*GetHLSStreamingSessionURLOutput, error) {
+func (r GetHLSStreamingSessionURLRequest) Send(ctx context.Context) (*GetHLSStreamingSessionURLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -146,7 +148,7 @@ func (r GetHLSStreamingSessionURLRequest) Send() (*GetHLSStreamingSessionURLOutp
 //
 //    // Example sending a request using the GetHLSStreamingSessionURLRequest method.
 //    req := client.GetHLSStreamingSessionURLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -180,7 +182,8 @@ type GetMediaForFragmentListRequest struct {
 }
 
 // Send marshals and sends the GetMediaForFragmentList API request.
-func (r GetMediaForFragmentListRequest) Send() (*GetMediaForFragmentListOutput, error) {
+func (r GetMediaForFragmentListRequest) Send(ctx context.Context) (*GetMediaForFragmentListOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -206,7 +209,7 @@ func (r GetMediaForFragmentListRequest) Send() (*GetMediaForFragmentListOutput, 
 //
 //    // Example sending a request using the GetMediaForFragmentListRequest method.
 //    req := client.GetMediaForFragmentListRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -240,7 +243,8 @@ type ListFragmentsRequest struct {
 }
 
 // Send marshals and sends the ListFragments API request.
-func (r ListFragmentsRequest) Send() (*ListFragmentsOutput, error) {
+func (r ListFragmentsRequest) Send(ctx context.Context) (*ListFragmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -257,7 +261,7 @@ func (r ListFragmentsRequest) Send() (*ListFragmentsOutput, error) {
 //
 //    // Example sending a request using the ListFragmentsRequest method.
 //    req := client.ListFragmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

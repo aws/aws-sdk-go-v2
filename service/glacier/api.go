@@ -3,6 +3,7 @@
 package glacier
 
 import (
+	"context"
 	"fmt"
 	"io"
 
@@ -22,7 +23,8 @@ type AbortMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the AbortMultipartUpload API request.
-func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
+func (r AbortMultipartUploadRequest) Send(ctx context.Context) (*AbortMultipartUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -57,7 +59,7 @@ func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error)
 //
 //    // Example sending a request using the AbortMultipartUploadRequest method.
 //    req := client.AbortMultipartUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -91,7 +93,8 @@ type AbortVaultLockRequest struct {
 }
 
 // Send marshals and sends the AbortVaultLock API request.
-func (r AbortVaultLockRequest) Send() (*AbortVaultLockOutput, error) {
+func (r AbortVaultLockRequest) Send(ctx context.Context) (*AbortVaultLockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -122,7 +125,7 @@ func (r AbortVaultLockRequest) Send() (*AbortVaultLockOutput, error) {
 //
 //    // Example sending a request using the AbortVaultLockRequest method.
 //    req := client.AbortVaultLockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -156,7 +159,8 @@ type AddTagsToVaultRequest struct {
 }
 
 // Send marshals and sends the AddTagsToVault API request.
-func (r AddTagsToVaultRequest) Send() (*AddTagsToVaultOutput, error) {
+func (r AddTagsToVaultRequest) Send(ctx context.Context) (*AddTagsToVaultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,7 +181,7 @@ func (r AddTagsToVaultRequest) Send() (*AddTagsToVaultOutput, error) {
 //
 //    // Example sending a request using the AddTagsToVaultRequest method.
 //    req := client.AddTagsToVaultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -211,7 +215,8 @@ type CompleteMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the CompleteMultipartUpload API request.
-func (r CompleteMultipartUploadRequest) Send() (*UploadArchiveOutput, error) {
+func (r CompleteMultipartUploadRequest) Send(ctx context.Context) (*UploadArchiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -270,7 +275,7 @@ func (r CompleteMultipartUploadRequest) Send() (*UploadArchiveOutput, error) {
 //
 //    // Example sending a request using the CompleteMultipartUploadRequest method.
 //    req := client.CompleteMultipartUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -302,7 +307,8 @@ type CompleteVaultLockRequest struct {
 }
 
 // Send marshals and sends the CompleteVaultLock API request.
-func (r CompleteVaultLockRequest) Send() (*CompleteVaultLockOutput, error) {
+func (r CompleteVaultLockRequest) Send(ctx context.Context) (*CompleteVaultLockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -332,7 +338,7 @@ func (r CompleteVaultLockRequest) Send() (*CompleteVaultLockOutput, error) {
 //
 //    // Example sending a request using the CompleteVaultLockRequest method.
 //    req := client.CompleteVaultLockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -366,7 +372,8 @@ type CreateVaultRequest struct {
 }
 
 // Send marshals and sends the CreateVault API request.
-func (r CreateVaultRequest) Send() (*CreateVaultOutput, error) {
+func (r CreateVaultRequest) Send(ctx context.Context) (*CreateVaultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -405,7 +412,7 @@ func (r CreateVaultRequest) Send() (*CreateVaultOutput, error) {
 //
 //    // Example sending a request using the CreateVaultRequest method.
 //    req := client.CreateVaultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -437,7 +444,8 @@ type DeleteArchiveRequest struct {
 }
 
 // Send marshals and sends the DeleteArchive API request.
-func (r DeleteArchiveRequest) Send() (*DeleteArchiveOutput, error) {
+func (r DeleteArchiveRequest) Send(ctx context.Context) (*DeleteArchiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -477,7 +485,7 @@ func (r DeleteArchiveRequest) Send() (*DeleteArchiveOutput, error) {
 //
 //    // Example sending a request using the DeleteArchiveRequest method.
 //    req := client.DeleteArchiveRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -511,7 +519,8 @@ type DeleteVaultRequest struct {
 }
 
 // Send marshals and sends the DeleteVault API request.
-func (r DeleteVaultRequest) Send() (*DeleteVaultOutput, error) {
+func (r DeleteVaultRequest) Send(ctx context.Context) (*DeleteVaultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -549,7 +558,7 @@ func (r DeleteVaultRequest) Send() (*DeleteVaultOutput, error) {
 //
 //    // Example sending a request using the DeleteVaultRequest method.
 //    req := client.DeleteVaultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -583,7 +592,8 @@ type DeleteVaultAccessPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteVaultAccessPolicy API request.
-func (r DeleteVaultAccessPolicyRequest) Send() (*DeleteVaultAccessPolicyOutput, error) {
+func (r DeleteVaultAccessPolicyRequest) Send(ctx context.Context) (*DeleteVaultAccessPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -608,7 +618,7 @@ func (r DeleteVaultAccessPolicyRequest) Send() (*DeleteVaultAccessPolicyOutput, 
 //
 //    // Example sending a request using the DeleteVaultAccessPolicyRequest method.
 //    req := client.DeleteVaultAccessPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -642,7 +652,8 @@ type DeleteVaultNotificationsRequest struct {
 }
 
 // Send marshals and sends the DeleteVaultNotifications API request.
-func (r DeleteVaultNotificationsRequest) Send() (*DeleteVaultNotificationsOutput, error) {
+func (r DeleteVaultNotificationsRequest) Send(ctx context.Context) (*DeleteVaultNotificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -672,7 +683,7 @@ func (r DeleteVaultNotificationsRequest) Send() (*DeleteVaultNotificationsOutput
 //
 //    // Example sending a request using the DeleteVaultNotificationsRequest method.
 //    req := client.DeleteVaultNotificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -706,7 +717,8 @@ type DescribeJobRequest struct {
 }
 
 // Send marshals and sends the DescribeJob API request.
-func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+func (r DescribeJobRequest) Send(ctx context.Context) (*DescribeJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -743,7 +755,7 @@ func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
 //
 //    // Example sending a request using the DescribeJobRequest method.
 //    req := client.DescribeJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -775,7 +787,8 @@ type DescribeVaultRequest struct {
 }
 
 // Send marshals and sends the DescribeVault API request.
-func (r DescribeVaultRequest) Send() (*DescribeVaultOutput, error) {
+func (r DescribeVaultRequest) Send(ctx context.Context) (*DescribeVaultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +823,7 @@ func (r DescribeVaultRequest) Send() (*DescribeVaultOutput, error) {
 //
 //    // Example sending a request using the DescribeVaultRequest method.
 //    req := client.DescribeVaultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -842,7 +855,8 @@ type GetDataRetrievalPolicyRequest struct {
 }
 
 // Send marshals and sends the GetDataRetrievalPolicy API request.
-func (r GetDataRetrievalPolicyRequest) Send() (*GetDataRetrievalPolicyOutput, error) {
+func (r GetDataRetrievalPolicyRequest) Send(ctx context.Context) (*GetDataRetrievalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -860,7 +874,7 @@ func (r GetDataRetrievalPolicyRequest) Send() (*GetDataRetrievalPolicyOutput, er
 //
 //    // Example sending a request using the GetDataRetrievalPolicyRequest method.
 //    req := client.GetDataRetrievalPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -892,7 +906,8 @@ type GetJobOutputRequest struct {
 }
 
 // Send marshals and sends the GetJobOutput API request.
-func (r GetJobOutputRequest) Send() (*GetJobOutputOutput, error) {
+func (r GetJobOutputRequest) Send(ctx context.Context) (*GetJobOutputOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -951,7 +966,7 @@ func (r GetJobOutputRequest) Send() (*GetJobOutputOutput, error) {
 //
 //    // Example sending a request using the GetJobOutputRequest method.
 //    req := client.GetJobOutputRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -983,7 +998,8 @@ type GetVaultAccessPolicyRequest struct {
 }
 
 // Send marshals and sends the GetVaultAccessPolicy API request.
-func (r GetVaultAccessPolicyRequest) Send() (*GetVaultAccessPolicyOutput, error) {
+func (r GetVaultAccessPolicyRequest) Send(ctx context.Context) (*GetVaultAccessPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1004,7 +1020,7 @@ func (r GetVaultAccessPolicyRequest) Send() (*GetVaultAccessPolicyOutput, error)
 //
 //    // Example sending a request using the GetVaultAccessPolicyRequest method.
 //    req := client.GetVaultAccessPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1036,7 +1052,8 @@ type GetVaultLockRequest struct {
 }
 
 // Send marshals and sends the GetVaultLock API request.
-func (r GetVaultLockRequest) Send() (*GetVaultLockOutput, error) {
+func (r GetVaultLockRequest) Send(ctx context.Context) (*GetVaultLockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1071,7 +1088,7 @@ func (r GetVaultLockRequest) Send() (*GetVaultLockOutput, error) {
 //
 //    // Example sending a request using the GetVaultLockRequest method.
 //    req := client.GetVaultLockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1103,7 +1120,8 @@ type GetVaultNotificationsRequest struct {
 }
 
 // Send marshals and sends the GetVaultNotifications API request.
-func (r GetVaultNotificationsRequest) Send() (*GetVaultNotificationsOutput, error) {
+func (r GetVaultNotificationsRequest) Send(ctx context.Context) (*GetVaultNotificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1137,7 +1155,7 @@ func (r GetVaultNotificationsRequest) Send() (*GetVaultNotificationsOutput, erro
 //
 //    // Example sending a request using the GetVaultNotificationsRequest method.
 //    req := client.GetVaultNotificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1169,7 +1187,8 @@ type InitiateJobRequest struct {
 }
 
 // Send marshals and sends the InitiateJob API request.
-func (r InitiateJobRequest) Send() (*InitiateJobOutput, error) {
+func (r InitiateJobRequest) Send(ctx context.Context) (*InitiateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1188,7 +1207,7 @@ func (r InitiateJobRequest) Send() (*InitiateJobOutput, error) {
 //
 //    // Example sending a request using the InitiateJobRequest method.
 //    req := client.InitiateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1220,7 +1239,8 @@ type InitiateMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the InitiateMultipartUpload API request.
-func (r InitiateMultipartUploadRequest) Send() (*InitiateMultipartUploadOutput, error) {
+func (r InitiateMultipartUploadRequest) Send(ctx context.Context) (*InitiateMultipartUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1270,7 +1290,7 @@ func (r InitiateMultipartUploadRequest) Send() (*InitiateMultipartUploadOutput, 
 //
 //    // Example sending a request using the InitiateMultipartUploadRequest method.
 //    req := client.InitiateMultipartUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1302,7 +1322,8 @@ type InitiateVaultLockRequest struct {
 }
 
 // Send marshals and sends the InitiateVaultLock API request.
-func (r InitiateVaultLockRequest) Send() (*InitiateVaultLockOutput, error) {
+func (r InitiateVaultLockRequest) Send(ctx context.Context) (*InitiateVaultLockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1346,7 +1367,7 @@ func (r InitiateVaultLockRequest) Send() (*InitiateVaultLockOutput, error) {
 //
 //    // Example sending a request using the InitiateVaultLockRequest method.
 //    req := client.InitiateVaultLockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1378,7 +1399,8 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1429,7 +1451,7 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1513,7 +1535,8 @@ type ListMultipartUploadsRequest struct {
 }
 
 // Send marshals and sends the ListMultipartUploads API request.
-func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
+func (r ListMultipartUploadsRequest) Send(ctx context.Context) (*ListMultipartUploadsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1558,7 +1581,7 @@ func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error)
 //
 //    // Example sending a request using the ListMultipartUploadsRequest method.
 //    req := client.ListMultipartUploadsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1642,7 +1665,8 @@ type ListPartsRequest struct {
 }
 
 // Send marshals and sends the ListParts API request.
-func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
+func (r ListPartsRequest) Send(ctx context.Context) (*ListPartsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1681,7 +1705,7 @@ func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
 //
 //    // Example sending a request using the ListPartsRequest method.
 //    req := client.ListPartsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1765,7 +1789,8 @@ type ListProvisionedCapacityRequest struct {
 }
 
 // Send marshals and sends the ListProvisionedCapacity API request.
-func (r ListProvisionedCapacityRequest) Send() (*ListProvisionedCapacityOutput, error) {
+func (r ListProvisionedCapacityRequest) Send(ctx context.Context) (*ListProvisionedCapacityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1782,7 +1807,7 @@ func (r ListProvisionedCapacityRequest) Send() (*ListProvisionedCapacityOutput, 
 //
 //    // Example sending a request using the ListProvisionedCapacityRequest method.
 //    req := client.ListProvisionedCapacityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1814,7 +1839,8 @@ type ListTagsForVaultRequest struct {
 }
 
 // Send marshals and sends the ListTagsForVault API request.
-func (r ListTagsForVaultRequest) Send() (*ListTagsForVaultOutput, error) {
+func (r ListTagsForVaultRequest) Send(ctx context.Context) (*ListTagsForVaultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1832,7 +1858,7 @@ func (r ListTagsForVaultRequest) Send() (*ListTagsForVaultOutput, error) {
 //
 //    // Example sending a request using the ListTagsForVaultRequest method.
 //    req := client.ListTagsForVaultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1864,7 +1890,8 @@ type ListVaultsRequest struct {
 }
 
 // Send marshals and sends the ListVaults API request.
-func (r ListVaultsRequest) Send() (*ListVaultsOutput, error) {
+func (r ListVaultsRequest) Send(ctx context.Context) (*ListVaultsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1900,7 +1927,7 @@ func (r ListVaultsRequest) Send() (*ListVaultsOutput, error) {
 //
 //    // Example sending a request using the ListVaultsRequest method.
 //    req := client.ListVaultsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1984,7 +2011,8 @@ type PurchaseProvisionedCapacityRequest struct {
 }
 
 // Send marshals and sends the PurchaseProvisionedCapacity API request.
-func (r PurchaseProvisionedCapacityRequest) Send() (*PurchaseProvisionedCapacityOutput, error) {
+func (r PurchaseProvisionedCapacityRequest) Send(ctx context.Context) (*PurchaseProvisionedCapacityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2000,7 +2028,7 @@ func (r PurchaseProvisionedCapacityRequest) Send() (*PurchaseProvisionedCapacity
 //
 //    // Example sending a request using the PurchaseProvisionedCapacityRequest method.
 //    req := client.PurchaseProvisionedCapacityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2032,7 +2060,8 @@ type RemoveTagsFromVaultRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromVault API request.
-func (r RemoveTagsFromVaultRequest) Send() (*RemoveTagsFromVaultOutput, error) {
+func (r RemoveTagsFromVaultRequest) Send(ctx context.Context) (*RemoveTagsFromVaultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2052,7 +2081,7 @@ func (r RemoveTagsFromVaultRequest) Send() (*RemoveTagsFromVaultOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsFromVaultRequest method.
 //    req := client.RemoveTagsFromVaultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2086,7 +2115,8 @@ type SetDataRetrievalPolicyRequest struct {
 }
 
 // Send marshals and sends the SetDataRetrievalPolicy API request.
-func (r SetDataRetrievalPolicyRequest) Send() (*SetDataRetrievalPolicyOutput, error) {
+func (r SetDataRetrievalPolicyRequest) Send(ctx context.Context) (*SetDataRetrievalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2108,7 +2138,7 @@ func (r SetDataRetrievalPolicyRequest) Send() (*SetDataRetrievalPolicyOutput, er
 //
 //    // Example sending a request using the SetDataRetrievalPolicyRequest method.
 //    req := client.SetDataRetrievalPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2142,7 +2172,8 @@ type SetVaultAccessPolicyRequest struct {
 }
 
 // Send marshals and sends the SetVaultAccessPolicy API request.
-func (r SetVaultAccessPolicyRequest) Send() (*SetVaultAccessPolicyOutput, error) {
+func (r SetVaultAccessPolicyRequest) Send(ctx context.Context) (*SetVaultAccessPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2164,7 +2195,7 @@ func (r SetVaultAccessPolicyRequest) Send() (*SetVaultAccessPolicyOutput, error)
 //
 //    // Example sending a request using the SetVaultAccessPolicyRequest method.
 //    req := client.SetVaultAccessPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2198,7 +2229,8 @@ type SetVaultNotificationsRequest struct {
 }
 
 // Send marshals and sends the SetVaultNotifications API request.
-func (r SetVaultNotificationsRequest) Send() (*SetVaultNotificationsOutput, error) {
+func (r SetVaultNotificationsRequest) Send(ctx context.Context) (*SetVaultNotificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2245,7 +2277,7 @@ func (r SetVaultNotificationsRequest) Send() (*SetVaultNotificationsOutput, erro
 //
 //    // Example sending a request using the SetVaultNotificationsRequest method.
 //    req := client.SetVaultNotificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2279,7 +2311,8 @@ type UploadArchiveRequest struct {
 }
 
 // Send marshals and sends the UploadArchive API request.
-func (r UploadArchiveRequest) Send() (*UploadArchiveOutput, error) {
+func (r UploadArchiveRequest) Send(ctx context.Context) (*UploadArchiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2330,7 +2363,7 @@ func (r UploadArchiveRequest) Send() (*UploadArchiveOutput, error) {
 //
 //    // Example sending a request using the UploadArchiveRequest method.
 //    req := client.UploadArchiveRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2362,7 +2395,8 @@ type UploadMultipartPartRequest struct {
 }
 
 // Send marshals and sends the UploadMultipartPart API request.
-func (r UploadMultipartPartRequest) Send() (*UploadMultipartPartOutput, error) {
+func (r UploadMultipartPartRequest) Send(ctx context.Context) (*UploadMultipartPartOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2423,7 +2457,7 @@ func (r UploadMultipartPartRequest) Send() (*UploadMultipartPartOutput, error) {
 //
 //    // Example sending a request using the UploadMultipartPartRequest method.
 //    req := client.UploadMultipartPartRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

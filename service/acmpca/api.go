@@ -3,6 +3,7 @@
 package acmpca
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the CreateCertificateAuthority API request.
-func (r CreateCertificateAuthorityRequest) Send() (*CreateCertificateAuthorityOutput, error) {
+func (r CreateCertificateAuthorityRequest) Send(ctx context.Context) (*CreateCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -47,7 +49,7 @@ func (r CreateCertificateAuthorityRequest) Send() (*CreateCertificateAuthorityOu
 //
 //    // Example sending a request using the CreateCertificateAuthorityRequest method.
 //    req := client.CreateCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -81,7 +83,8 @@ type CreateCertificateAuthorityAuditReportRequest struct {
 }
 
 // Send marshals and sends the CreateCertificateAuthorityAuditReport API request.
-func (r CreateCertificateAuthorityAuditReportRequest) Send() (*CreateCertificateAuthorityAuditReportOutput, error) {
+func (r CreateCertificateAuthorityAuditReportRequest) Send(ctx context.Context) (*CreateCertificateAuthorityAuditReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -100,7 +103,7 @@ func (r CreateCertificateAuthorityAuditReportRequest) Send() (*CreateCertificate
 //
 //    // Example sending a request using the CreateCertificateAuthorityAuditReportRequest method.
 //    req := client.CreateCertificateAuthorityAuditReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -134,7 +137,8 @@ type DeleteCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the DeleteCertificateAuthority API request.
-func (r DeleteCertificateAuthorityRequest) Send() (*DeleteCertificateAuthorityOutput, error) {
+func (r DeleteCertificateAuthorityRequest) Send(ctx context.Context) (*DeleteCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -168,7 +172,7 @@ func (r DeleteCertificateAuthorityRequest) Send() (*DeleteCertificateAuthorityOu
 //
 //    // Example sending a request using the DeleteCertificateAuthorityRequest method.
 //    req := client.DeleteCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -204,7 +208,8 @@ type DescribeCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificateAuthority API request.
-func (r DescribeCertificateAuthorityRequest) Send() (*DescribeCertificateAuthorityOutput, error) {
+func (r DescribeCertificateAuthorityRequest) Send(ctx context.Context) (*DescribeCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +247,7 @@ func (r DescribeCertificateAuthorityRequest) Send() (*DescribeCertificateAuthori
 //
 //    // Example sending a request using the DescribeCertificateAuthorityRequest method.
 //    req := client.DescribeCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +281,8 @@ type DescribeCertificateAuthorityAuditReportRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificateAuthorityAuditReport API request.
-func (r DescribeCertificateAuthorityAuditReportRequest) Send() (*DescribeCertificateAuthorityAuditReportOutput, error) {
+func (r DescribeCertificateAuthorityAuditReportRequest) Send(ctx context.Context) (*DescribeCertificateAuthorityAuditReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -295,7 +301,7 @@ func (r DescribeCertificateAuthorityAuditReportRequest) Send() (*DescribeCertifi
 //
 //    // Example sending a request using the DescribeCertificateAuthorityAuditReportRequest method.
 //    req := client.DescribeCertificateAuthorityAuditReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -329,7 +335,8 @@ type GetCertificateRequest struct {
 }
 
 // Send marshals and sends the GetCertificate API request.
-func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
+func (r GetCertificateRequest) Send(ctx context.Context) (*GetCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -351,7 +358,7 @@ func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
 //
 //    // Example sending a request using the GetCertificateRequest method.
 //    req := client.GetCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -385,7 +392,8 @@ type GetCertificateAuthorityCertificateRequest struct {
 }
 
 // Send marshals and sends the GetCertificateAuthorityCertificate API request.
-func (r GetCertificateAuthorityCertificateRequest) Send() (*GetCertificateAuthorityCertificateOutput, error) {
+func (r GetCertificateAuthorityCertificateRequest) Send(ctx context.Context) (*GetCertificateAuthorityCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -404,7 +412,7 @@ func (r GetCertificateAuthorityCertificateRequest) Send() (*GetCertificateAuthor
 //
 //    // Example sending a request using the GetCertificateAuthorityCertificateRequest method.
 //    req := client.GetCertificateAuthorityCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -438,7 +446,8 @@ type GetCertificateAuthorityCsrRequest struct {
 }
 
 // Send marshals and sends the GetCertificateAuthorityCsr API request.
-func (r GetCertificateAuthorityCsrRequest) Send() (*GetCertificateAuthorityCsrOutput, error) {
+func (r GetCertificateAuthorityCsrRequest) Send(ctx context.Context) (*GetCertificateAuthorityCsrOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -459,7 +468,7 @@ func (r GetCertificateAuthorityCsrRequest) Send() (*GetCertificateAuthorityCsrOu
 //
 //    // Example sending a request using the GetCertificateAuthorityCsrRequest method.
 //    req := client.GetCertificateAuthorityCsrRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -493,7 +502,8 @@ type ImportCertificateAuthorityCertificateRequest struct {
 }
 
 // Send marshals and sends the ImportCertificateAuthorityCertificate API request.
-func (r ImportCertificateAuthorityCertificateRequest) Send() (*ImportCertificateAuthorityCertificateOutput, error) {
+func (r ImportCertificateAuthorityCertificateRequest) Send(ctx context.Context) (*ImportCertificateAuthorityCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -525,7 +535,7 @@ func (r ImportCertificateAuthorityCertificateRequest) Send() (*ImportCertificate
 //
 //    // Example sending a request using the ImportCertificateAuthorityCertificateRequest method.
 //    req := client.ImportCertificateAuthorityCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -561,7 +571,8 @@ type IssueCertificateRequest struct {
 }
 
 // Send marshals and sends the IssueCertificate API request.
-func (r IssueCertificateRequest) Send() (*IssueCertificateOutput, error) {
+func (r IssueCertificateRequest) Send(ctx context.Context) (*IssueCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -583,7 +594,7 @@ func (r IssueCertificateRequest) Send() (*IssueCertificateOutput, error) {
 //
 //    // Example sending a request using the IssueCertificateRequest method.
 //    req := client.IssueCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -617,7 +628,8 @@ type ListCertificateAuthoritiesRequest struct {
 }
 
 // Send marshals and sends the ListCertificateAuthorities API request.
-func (r ListCertificateAuthoritiesRequest) Send() (*ListCertificateAuthoritiesOutput, error) {
+func (r ListCertificateAuthoritiesRequest) Send(ctx context.Context) (*ListCertificateAuthoritiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -634,7 +646,7 @@ func (r ListCertificateAuthoritiesRequest) Send() (*ListCertificateAuthoritiesOu
 //
 //    // Example sending a request using the ListCertificateAuthoritiesRequest method.
 //    req := client.ListCertificateAuthoritiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -720,7 +732,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -740,7 +753,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -774,7 +787,8 @@ type RestoreCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the RestoreCertificateAuthority API request.
-func (r RestoreCertificateAuthorityRequest) Send() (*RestoreCertificateAuthorityOutput, error) {
+func (r RestoreCertificateAuthorityRequest) Send(ctx context.Context) (*RestoreCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -803,7 +817,7 @@ func (r RestoreCertificateAuthorityRequest) Send() (*RestoreCertificateAuthority
 //
 //    // Example sending a request using the RestoreCertificateAuthorityRequest method.
 //    req := client.RestoreCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -839,7 +853,8 @@ type RevokeCertificateRequest struct {
 }
 
 // Send marshals and sends the RevokeCertificate API request.
-func (r RevokeCertificateRequest) Send() (*RevokeCertificateOutput, error) {
+func (r RevokeCertificateRequest) Send(ctx context.Context) (*RevokeCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -861,7 +876,7 @@ func (r RevokeCertificateRequest) Send() (*RevokeCertificateOutput, error) {
 //
 //    // Example sending a request using the RevokeCertificateRequest method.
 //    req := client.RevokeCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -897,7 +912,8 @@ type TagCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the TagCertificateAuthority API request.
-func (r TagCertificateAuthorityRequest) Send() (*TagCertificateAuthorityOutput, error) {
+func (r TagCertificateAuthorityRequest) Send(ctx context.Context) (*TagCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -921,7 +937,7 @@ func (r TagCertificateAuthorityRequest) Send() (*TagCertificateAuthorityOutput, 
 //
 //    // Example sending a request using the TagCertificateAuthorityRequest method.
 //    req := client.TagCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -957,7 +973,8 @@ type UntagCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the UntagCertificateAuthority API request.
-func (r UntagCertificateAuthorityRequest) Send() (*UntagCertificateAuthorityOutput, error) {
+func (r UntagCertificateAuthorityRequest) Send(ctx context.Context) (*UntagCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -978,7 +995,7 @@ func (r UntagCertificateAuthorityRequest) Send() (*UntagCertificateAuthorityOutp
 //
 //    // Example sending a request using the UntagCertificateAuthorityRequest method.
 //    req := client.UntagCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1014,7 +1031,8 @@ type UpdateCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the UpdateCertificateAuthority API request.
-func (r UpdateCertificateAuthorityRequest) Send() (*UpdateCertificateAuthorityOutput, error) {
+func (r UpdateCertificateAuthorityRequest) Send(ctx context.Context) (*UpdateCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1033,7 +1051,7 @@ func (r UpdateCertificateAuthorityRequest) Send() (*UpdateCertificateAuthorityOu
 //
 //    // Example sending a request using the UpdateCertificateAuthorityRequest method.
 //    req := client.UpdateCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

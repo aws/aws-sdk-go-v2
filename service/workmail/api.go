@@ -3,6 +3,7 @@
 package workmail
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type AssociateDelegateToResourceRequest struct {
 }
 
 // Send marshals and sends the AssociateDelegateToResource API request.
-func (r AssociateDelegateToResourceRequest) Send() (*AssociateDelegateToResourceOutput, error) {
+func (r AssociateDelegateToResourceRequest) Send(ctx context.Context) (*AssociateDelegateToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +37,7 @@ func (r AssociateDelegateToResourceRequest) Send() (*AssociateDelegateToResource
 //
 //    // Example sending a request using the AssociateDelegateToResourceRequest method.
 //    req := client.AssociateDelegateToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -69,7 +71,8 @@ type AssociateMemberToGroupRequest struct {
 }
 
 // Send marshals and sends the AssociateMemberToGroup API request.
-func (r AssociateMemberToGroupRequest) Send() (*AssociateMemberToGroupOutput, error) {
+func (r AssociateMemberToGroupRequest) Send(ctx context.Context) (*AssociateMemberToGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -85,7 +88,7 @@ func (r AssociateMemberToGroupRequest) Send() (*AssociateMemberToGroupOutput, er
 //
 //    // Example sending a request using the AssociateMemberToGroupRequest method.
 //    req := client.AssociateMemberToGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -119,7 +122,8 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -135,7 +139,7 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -169,7 +173,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -186,7 +191,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -220,7 +225,8 @@ type CreateResourceRequest struct {
 }
 
 // Send marshals and sends the CreateResource API request.
-func (r CreateResourceRequest) Send() (*CreateResourceOutput, error) {
+func (r CreateResourceRequest) Send(ctx context.Context) (*CreateResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +243,7 @@ func (r CreateResourceRequest) Send() (*CreateResourceOutput, error) {
 //
 //    // Example sending a request using the CreateResourceRequest method.
 //    req := client.CreateResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +277,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -288,7 +295,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -322,7 +329,8 @@ type DeleteAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAlias API request.
-func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -338,7 +346,7 @@ func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteAliasRequest method.
 //    req := client.DeleteAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -372,7 +380,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -388,7 +397,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -422,7 +431,8 @@ type DeleteMailboxPermissionsRequest struct {
 }
 
 // Send marshals and sends the DeleteMailboxPermissions API request.
-func (r DeleteMailboxPermissionsRequest) Send() (*DeleteMailboxPermissionsOutput, error) {
+func (r DeleteMailboxPermissionsRequest) Send(ctx context.Context) (*DeleteMailboxPermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -438,7 +448,7 @@ func (r DeleteMailboxPermissionsRequest) Send() (*DeleteMailboxPermissionsOutput
 //
 //    // Example sending a request using the DeleteMailboxPermissionsRequest method.
 //    req := client.DeleteMailboxPermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -472,7 +482,8 @@ type DeleteResourceRequest struct {
 }
 
 // Send marshals and sends the DeleteResource API request.
-func (r DeleteResourceRequest) Send() (*DeleteResourceOutput, error) {
+func (r DeleteResourceRequest) Send(ctx context.Context) (*DeleteResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,7 +499,7 @@ func (r DeleteResourceRequest) Send() (*DeleteResourceOutput, error) {
 //
 //    // Example sending a request using the DeleteResourceRequest method.
 //    req := client.DeleteResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -522,7 +533,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +552,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -574,7 +586,8 @@ type DeregisterFromWorkMailRequest struct {
 }
 
 // Send marshals and sends the DeregisterFromWorkMail API request.
-func (r DeregisterFromWorkMailRequest) Send() (*DeregisterFromWorkMailOutput, error) {
+func (r DeregisterFromWorkMailRequest) Send(ctx context.Context) (*DeregisterFromWorkMailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -593,7 +606,7 @@ func (r DeregisterFromWorkMailRequest) Send() (*DeregisterFromWorkMailOutput, er
 //
 //    // Example sending a request using the DeregisterFromWorkMailRequest method.
 //    req := client.DeregisterFromWorkMailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -627,7 +640,8 @@ type DescribeGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeGroup API request.
-func (r DescribeGroupRequest) Send() (*DescribeGroupOutput, error) {
+func (r DescribeGroupRequest) Send(ctx context.Context) (*DescribeGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -643,7 +657,7 @@ func (r DescribeGroupRequest) Send() (*DescribeGroupOutput, error) {
 //
 //    // Example sending a request using the DescribeGroupRequest method.
 //    req := client.DescribeGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -677,7 +691,8 @@ type DescribeOrganizationRequest struct {
 }
 
 // Send marshals and sends the DescribeOrganization API request.
-func (r DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error) {
+func (r DescribeOrganizationRequest) Send(ctx context.Context) (*DescribeOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -693,7 +708,7 @@ func (r DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error)
 //
 //    // Example sending a request using the DescribeOrganizationRequest method.
 //    req := client.DescribeOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -727,7 +742,8 @@ type DescribeResourceRequest struct {
 }
 
 // Send marshals and sends the DescribeResource API request.
-func (r DescribeResourceRequest) Send() (*DescribeResourceOutput, error) {
+func (r DescribeResourceRequest) Send(ctx context.Context) (*DescribeResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -743,7 +759,7 @@ func (r DescribeResourceRequest) Send() (*DescribeResourceOutput, error) {
 //
 //    // Example sending a request using the DescribeResourceRequest method.
 //    req := client.DescribeResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -777,7 +793,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,7 +810,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -827,7 +844,8 @@ type DisassociateDelegateFromResourceRequest struct {
 }
 
 // Send marshals and sends the DisassociateDelegateFromResource API request.
-func (r DisassociateDelegateFromResourceRequest) Send() (*DisassociateDelegateFromResourceOutput, error) {
+func (r DisassociateDelegateFromResourceRequest) Send(ctx context.Context) (*DisassociateDelegateFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -843,7 +861,7 @@ func (r DisassociateDelegateFromResourceRequest) Send() (*DisassociateDelegateFr
 //
 //    // Example sending a request using the DisassociateDelegateFromResourceRequest method.
 //    req := client.DisassociateDelegateFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -877,7 +895,8 @@ type DisassociateMemberFromGroupRequest struct {
 }
 
 // Send marshals and sends the DisassociateMemberFromGroup API request.
-func (r DisassociateMemberFromGroupRequest) Send() (*DisassociateMemberFromGroupOutput, error) {
+func (r DisassociateMemberFromGroupRequest) Send(ctx context.Context) (*DisassociateMemberFromGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -893,7 +912,7 @@ func (r DisassociateMemberFromGroupRequest) Send() (*DisassociateMemberFromGroup
 //
 //    // Example sending a request using the DisassociateMemberFromGroupRequest method.
 //    req := client.DisassociateMemberFromGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -927,7 +946,8 @@ type ListAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAliases API request.
-func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -943,7 +963,7 @@ func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 //
 //    // Example sending a request using the ListAliasesRequest method.
 //    req := client.ListAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1029,7 +1049,8 @@ type ListGroupMembersRequest struct {
 }
 
 // Send marshals and sends the ListGroupMembers API request.
-func (r ListGroupMembersRequest) Send() (*ListGroupMembersOutput, error) {
+func (r ListGroupMembersRequest) Send(ctx context.Context) (*ListGroupMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1045,7 +1066,7 @@ func (r ListGroupMembersRequest) Send() (*ListGroupMembersOutput, error) {
 //
 //    // Example sending a request using the ListGroupMembersRequest method.
 //    req := client.ListGroupMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1131,7 +1152,8 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1147,7 +1169,7 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1233,7 +1255,8 @@ type ListMailboxPermissionsRequest struct {
 }
 
 // Send marshals and sends the ListMailboxPermissions API request.
-func (r ListMailboxPermissionsRequest) Send() (*ListMailboxPermissionsOutput, error) {
+func (r ListMailboxPermissionsRequest) Send(ctx context.Context) (*ListMailboxPermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1249,7 +1272,7 @@ func (r ListMailboxPermissionsRequest) Send() (*ListMailboxPermissionsOutput, er
 //
 //    // Example sending a request using the ListMailboxPermissionsRequest method.
 //    req := client.ListMailboxPermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1335,7 +1358,8 @@ type ListOrganizationsRequest struct {
 }
 
 // Send marshals and sends the ListOrganizations API request.
-func (r ListOrganizationsRequest) Send() (*ListOrganizationsOutput, error) {
+func (r ListOrganizationsRequest) Send(ctx context.Context) (*ListOrganizationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1351,7 +1375,7 @@ func (r ListOrganizationsRequest) Send() (*ListOrganizationsOutput, error) {
 //
 //    // Example sending a request using the ListOrganizationsRequest method.
 //    req := client.ListOrganizationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1437,7 +1461,8 @@ type ListResourceDelegatesRequest struct {
 }
 
 // Send marshals and sends the ListResourceDelegates API request.
-func (r ListResourceDelegatesRequest) Send() (*ListResourceDelegatesOutput, error) {
+func (r ListResourceDelegatesRequest) Send(ctx context.Context) (*ListResourceDelegatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1454,7 +1479,7 @@ func (r ListResourceDelegatesRequest) Send() (*ListResourceDelegatesOutput, erro
 //
 //    // Example sending a request using the ListResourceDelegatesRequest method.
 //    req := client.ListResourceDelegatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1488,7 +1513,8 @@ type ListResourcesRequest struct {
 }
 
 // Send marshals and sends the ListResources API request.
-func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
+func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1504,7 +1530,7 @@ func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
 //
 //    // Example sending a request using the ListResourcesRequest method.
 //    req := client.ListResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1590,7 +1616,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1606,7 +1633,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1692,7 +1719,8 @@ type PutMailboxPermissionsRequest struct {
 }
 
 // Send marshals and sends the PutMailboxPermissions API request.
-func (r PutMailboxPermissionsRequest) Send() (*PutMailboxPermissionsOutput, error) {
+func (r PutMailboxPermissionsRequest) Send(ctx context.Context) (*PutMailboxPermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1709,7 +1737,7 @@ func (r PutMailboxPermissionsRequest) Send() (*PutMailboxPermissionsOutput, erro
 //
 //    // Example sending a request using the PutMailboxPermissionsRequest method.
 //    req := client.PutMailboxPermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1743,7 +1771,8 @@ type RegisterToWorkMailRequest struct {
 }
 
 // Send marshals and sends the RegisterToWorkMail API request.
-func (r RegisterToWorkMailRequest) Send() (*RegisterToWorkMailOutput, error) {
+func (r RegisterToWorkMailRequest) Send(ctx context.Context) (*RegisterToWorkMailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1766,7 +1795,7 @@ func (r RegisterToWorkMailRequest) Send() (*RegisterToWorkMailOutput, error) {
 //
 //    // Example sending a request using the RegisterToWorkMailRequest method.
 //    req := client.RegisterToWorkMailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1800,7 +1829,8 @@ type ResetPasswordRequest struct {
 }
 
 // Send marshals and sends the ResetPassword API request.
-func (r ResetPasswordRequest) Send() (*ResetPasswordOutput, error) {
+func (r ResetPasswordRequest) Send(ctx context.Context) (*ResetPasswordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1816,7 +1846,7 @@ func (r ResetPasswordRequest) Send() (*ResetPasswordOutput, error) {
 //
 //    // Example sending a request using the ResetPasswordRequest method.
 //    req := client.ResetPasswordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1850,7 +1880,8 @@ type UpdatePrimaryEmailAddressRequest struct {
 }
 
 // Send marshals and sends the UpdatePrimaryEmailAddress API request.
-func (r UpdatePrimaryEmailAddressRequest) Send() (*UpdatePrimaryEmailAddressOutput, error) {
+func (r UpdatePrimaryEmailAddressRequest) Send(ctx context.Context) (*UpdatePrimaryEmailAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1868,7 +1899,7 @@ func (r UpdatePrimaryEmailAddressRequest) Send() (*UpdatePrimaryEmailAddressOutp
 //
 //    // Example sending a request using the UpdatePrimaryEmailAddressRequest method.
 //    req := client.UpdatePrimaryEmailAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1902,7 +1933,8 @@ type UpdateResourceRequest struct {
 }
 
 // Send marshals and sends the UpdateResource API request.
-func (r UpdateResourceRequest) Send() (*UpdateResourceOutput, error) {
+func (r UpdateResourceRequest) Send(ctx context.Context) (*UpdateResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1920,7 +1952,7 @@ func (r UpdateResourceRequest) Send() (*UpdateResourceOutput, error) {
 //
 //    // Example sending a request using the UpdateResourceRequest method.
 //    req := client.UpdateResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package transcribeservice
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CreateVocabularyRequest struct {
 }
 
 // Send marshals and sends the CreateVocabulary API request.
-func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
+func (r CreateVocabularyRequest) Send(ctx context.Context) (*CreateVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
 //
 //    // Example sending a request using the CreateVocabularyRequest method.
 //    req := client.CreateVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type DeleteTranscriptionJobRequest struct {
 }
 
 // Send marshals and sends the DeleteTranscriptionJob API request.
-func (r DeleteTranscriptionJobRequest) Send() (*DeleteTranscriptionJobOutput, error) {
+func (r DeleteTranscriptionJobRequest) Send(ctx context.Context) (*DeleteTranscriptionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r DeleteTranscriptionJobRequest) Send() (*DeleteTranscriptionJobOutput, er
 //
 //    // Example sending a request using the DeleteTranscriptionJobRequest method.
 //    req := client.DeleteTranscriptionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -125,7 +128,8 @@ type DeleteVocabularyRequest struct {
 }
 
 // Send marshals and sends the DeleteVocabulary API request.
-func (r DeleteVocabularyRequest) Send() (*DeleteVocabularyOutput, error) {
+func (r DeleteVocabularyRequest) Send(ctx context.Context) (*DeleteVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +145,7 @@ func (r DeleteVocabularyRequest) Send() (*DeleteVocabularyOutput, error) {
 //
 //    // Example sending a request using the DeleteVocabularyRequest method.
 //    req := client.DeleteVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type GetTranscriptionJobRequest struct {
 }
 
 // Send marshals and sends the GetTranscriptionJob API request.
-func (r GetTranscriptionJobRequest) Send() (*GetTranscriptionJobOutput, error) {
+func (r GetTranscriptionJobRequest) Send(ctx context.Context) (*GetTranscriptionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -196,7 +201,7 @@ func (r GetTranscriptionJobRequest) Send() (*GetTranscriptionJobOutput, error) {
 //
 //    // Example sending a request using the GetTranscriptionJobRequest method.
 //    req := client.GetTranscriptionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -230,7 +235,8 @@ type GetVocabularyRequest struct {
 }
 
 // Send marshals and sends the GetVocabulary API request.
-func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
+func (r GetVocabularyRequest) Send(ctx context.Context) (*GetVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,7 +252,7 @@ func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
 //
 //    // Example sending a request using the GetVocabularyRequest method.
 //    req := client.GetVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -280,7 +286,8 @@ type ListTranscriptionJobsRequest struct {
 }
 
 // Send marshals and sends the ListTranscriptionJobs API request.
-func (r ListTranscriptionJobsRequest) Send() (*ListTranscriptionJobsOutput, error) {
+func (r ListTranscriptionJobsRequest) Send(ctx context.Context) (*ListTranscriptionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +303,7 @@ func (r ListTranscriptionJobsRequest) Send() (*ListTranscriptionJobsOutput, erro
 //
 //    // Example sending a request using the ListTranscriptionJobsRequest method.
 //    req := client.ListTranscriptionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -382,7 +389,8 @@ type ListVocabulariesRequest struct {
 }
 
 // Send marshals and sends the ListVocabularies API request.
-func (r ListVocabulariesRequest) Send() (*ListVocabulariesOutput, error) {
+func (r ListVocabulariesRequest) Send(ctx context.Context) (*ListVocabulariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,7 +407,7 @@ func (r ListVocabulariesRequest) Send() (*ListVocabulariesOutput, error) {
 //
 //    // Example sending a request using the ListVocabulariesRequest method.
 //    req := client.ListVocabulariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -485,7 +493,8 @@ type StartTranscriptionJobRequest struct {
 }
 
 // Send marshals and sends the StartTranscriptionJob API request.
-func (r StartTranscriptionJobRequest) Send() (*StartTranscriptionJobOutput, error) {
+func (r StartTranscriptionJobRequest) Send(ctx context.Context) (*StartTranscriptionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +510,7 @@ func (r StartTranscriptionJobRequest) Send() (*StartTranscriptionJobOutput, erro
 //
 //    // Example sending a request using the StartTranscriptionJobRequest method.
 //    req := client.StartTranscriptionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -535,7 +544,8 @@ type UpdateVocabularyRequest struct {
 }
 
 // Send marshals and sends the UpdateVocabulary API request.
-func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
+func (r UpdateVocabularyRequest) Send(ctx context.Context) (*UpdateVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -553,7 +563,7 @@ func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
 //
 //    // Example sending a request using the UpdateVocabularyRequest method.
 //    req := client.UpdateVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

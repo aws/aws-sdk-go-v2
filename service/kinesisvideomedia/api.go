@@ -3,6 +3,7 @@
 package kinesisvideomedia
 
 import (
+	"context"
 	"io"
 	"time"
 
@@ -21,7 +22,8 @@ type GetMediaRequest struct {
 }
 
 // Send marshals and sends the GetMedia API request.
-func (r GetMediaRequest) Send() (*GetMediaOutput, error) {
+func (r GetMediaRequest) Send(ctx context.Context) (*GetMediaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -55,7 +57,7 @@ func (r GetMediaRequest) Send() (*GetMediaOutput, error) {
 //
 //    // Example sending a request using the GetMediaRequest method.
 //    req := client.GetMediaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

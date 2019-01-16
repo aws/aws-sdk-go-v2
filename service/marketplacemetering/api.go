@@ -3,6 +3,7 @@
 package marketplacemetering
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type BatchMeterUsageRequest struct {
 }
 
 // Send marshals and sends the BatchMeterUsage API request.
-func (r BatchMeterUsageRequest) Send() (*BatchMeterUsageOutput, error) {
+func (r BatchMeterUsageRequest) Send(ctx context.Context) (*BatchMeterUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -45,7 +47,7 @@ func (r BatchMeterUsageRequest) Send() (*BatchMeterUsageOutput, error) {
 //
 //    // Example sending a request using the BatchMeterUsageRequest method.
 //    req := client.BatchMeterUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -79,7 +81,8 @@ type MeterUsageRequest struct {
 }
 
 // Send marshals and sends the MeterUsage API request.
-func (r MeterUsageRequest) Send() (*MeterUsageOutput, error) {
+func (r MeterUsageRequest) Send(ctx context.Context) (*MeterUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,7 +102,7 @@ func (r MeterUsageRequest) Send() (*MeterUsageOutput, error) {
 //
 //    // Example sending a request using the MeterUsageRequest method.
 //    req := client.MeterUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -133,7 +136,8 @@ type RegisterUsageRequest struct {
 }
 
 // Send marshals and sends the RegisterUsage API request.
-func (r RegisterUsageRequest) Send() (*RegisterUsageOutput, error) {
+func (r RegisterUsageRequest) Send(ctx context.Context) (*RegisterUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -179,7 +183,7 @@ func (r RegisterUsageRequest) Send() (*RegisterUsageOutput, error) {
 //
 //    // Example sending a request using the RegisterUsageRequest method.
 //    req := client.RegisterUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -213,7 +217,8 @@ type ResolveCustomerRequest struct {
 }
 
 // Send marshals and sends the ResolveCustomer API request.
-func (r ResolveCustomerRequest) Send() (*ResolveCustomerOutput, error) {
+func (r ResolveCustomerRequest) Send(ctx context.Context) (*ResolveCustomerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -232,7 +237,7 @@ func (r ResolveCustomerRequest) Send() (*ResolveCustomerOutput, error) {
 //
 //    // Example sending a request using the ResolveCustomerRequest method.
 //    req := client.ResolveCustomerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

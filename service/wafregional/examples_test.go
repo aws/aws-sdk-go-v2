@@ -3,6 +3,7 @@
 package wafregional_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExampleWAFRegional_CreateIPSetRequest_shared00() {
 	}
 
 	req := svc.CreateIPSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -89,7 +90,7 @@ func ExampleWAFRegional_CreateRuleRequest_shared00() {
 	}
 
 	req := svc.CreateRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -133,7 +134,7 @@ func ExampleWAFRegional_CreateSizeConstraintSetRequest_shared00() {
 	}
 
 	req := svc.CreateSizeConstraintSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -179,7 +180,7 @@ func ExampleWAFRegional_CreateSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	req := svc.CreateSqlInjectionMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -229,7 +230,7 @@ func ExampleWAFRegional_CreateWebACLRequest_shared00() {
 	}
 
 	req := svc.CreateWebACLRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -275,7 +276,7 @@ func ExampleWAFRegional_CreateXssMatchSetRequest_shared00() {
 	}
 
 	req := svc.CreateXssMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -321,7 +322,7 @@ func ExampleWAFRegional_DeleteByteMatchSetRequest_shared00() {
 	}
 
 	req := svc.DeleteByteMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -367,7 +368,7 @@ func ExampleWAFRegional_DeleteIPSetRequest_shared00() {
 	}
 
 	req := svc.DeleteIPSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -413,7 +414,7 @@ func ExampleWAFRegional_DeleteRuleRequest_shared00() {
 	}
 
 	req := svc.DeleteRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -459,7 +460,7 @@ func ExampleWAFRegional_DeleteSizeConstraintSetRequest_shared00() {
 	}
 
 	req := svc.DeleteSizeConstraintSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -505,7 +506,7 @@ func ExampleWAFRegional_DeleteSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	req := svc.DeleteSqlInjectionMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -551,7 +552,7 @@ func ExampleWAFRegional_DeleteWebACLRequest_shared00() {
 	}
 
 	req := svc.DeleteWebACLRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -597,7 +598,7 @@ func ExampleWAFRegional_DeleteXssMatchSetRequest_shared00() {
 	}
 
 	req := svc.DeleteXssMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -642,7 +643,7 @@ func ExampleWAFRegional_GetByteMatchSetRequest_shared00() {
 	}
 
 	req := svc.GetByteMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -680,7 +681,7 @@ func ExampleWAFRegional_GetChangeTokenRequest_shared00() {
 	input := &wafregional.GetChangeTokenInput{}
 
 	req := svc.GetChangeTokenRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -715,7 +716,7 @@ func ExampleWAFRegional_GetChangeTokenStatusRequest_shared00() {
 	}
 
 	req := svc.GetChangeTokenStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -752,7 +753,7 @@ func ExampleWAFRegional_GetIPSetRequest_shared00() {
 	}
 
 	req := svc.GetIPSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -791,7 +792,7 @@ func ExampleWAFRegional_GetRuleRequest_shared00() {
 	}
 
 	req := svc.GetRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +839,7 @@ func ExampleWAFRegional_GetSampledRequestsRequest_shared00() {
 	}
 
 	req := svc.GetSampledRequestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -876,7 +877,7 @@ func ExampleWAFRegional_GetSizeConstraintSetRequest_shared00() {
 	}
 
 	req := svc.GetSizeConstraintSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -916,7 +917,7 @@ func ExampleWAFRegional_GetSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	req := svc.GetSqlInjectionMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -955,7 +956,7 @@ func ExampleWAFRegional_GetWebACLRequest_shared00() {
 	}
 
 	req := svc.GetWebACLRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -994,7 +995,7 @@ func ExampleWAFRegional_GetXssMatchSetRequest_shared00() {
 	}
 
 	req := svc.GetXssMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1033,7 +1034,7 @@ func ExampleWAFRegional_ListIPSetsRequest_shared00() {
 	}
 
 	req := svc.ListIPSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1070,7 +1071,7 @@ func ExampleWAFRegional_ListRulesRequest_shared00() {
 	}
 
 	req := svc.ListRulesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1107,7 +1108,7 @@ func ExampleWAFRegional_ListSizeConstraintSetsRequest_shared00() {
 	}
 
 	req := svc.ListSizeConstraintSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1144,7 +1145,7 @@ func ExampleWAFRegional_ListSqlInjectionMatchSetsRequest_shared00() {
 	}
 
 	req := svc.ListSqlInjectionMatchSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1181,7 +1182,7 @@ func ExampleWAFRegional_ListWebACLsRequest_shared00() {
 	}
 
 	req := svc.ListWebACLsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1218,7 +1219,7 @@ func ExampleWAFRegional_ListXssMatchSetsRequest_shared00() {
 	}
 
 	req := svc.ListXssMatchSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1262,7 +1263,7 @@ func ExampleWAFRegional_UpdateByteMatchSetRequest_shared00() {
 	}
 
 	req := svc.UpdateByteMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1318,7 +1319,7 @@ func ExampleWAFRegional_UpdateIPSetRequest_shared00() {
 	}
 
 	req := svc.UpdateIPSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1375,7 +1376,7 @@ func ExampleWAFRegional_UpdateRuleRequest_shared00() {
 	}
 
 	req := svc.UpdateRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1433,7 +1434,7 @@ func ExampleWAFRegional_UpdateSizeConstraintSetRequest_shared00() {
 	}
 
 	req := svc.UpdateSizeConstraintSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1491,7 +1492,7 @@ func ExampleWAFRegional_UpdateSqlInjectionMatchSetRequest_shared00() {
 	}
 
 	req := svc.UpdateSqlInjectionMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1549,7 +1550,7 @@ func ExampleWAFRegional_UpdateWebACLRequest_shared00() {
 	}
 
 	req := svc.UpdateWebACLRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1609,7 +1610,7 @@ func ExampleWAFRegional_UpdateXssMatchSetRequest_shared00() {
 	}
 
 	req := svc.UpdateXssMatchSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

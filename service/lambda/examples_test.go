@@ -3,6 +3,7 @@
 package lambda_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -45,7 +46,7 @@ func ExampleLambda_AddPermissionRequest_shared00() {
 	}
 
 	req := svc.AddPermissionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -101,7 +102,7 @@ func ExampleLambda_CreateFunctionRequest_shared00() {
 	}
 
 	req := svc.CreateFunctionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -147,7 +148,7 @@ func ExampleLambda_DeleteAliasRequest_shared00() {
 	}
 
 	req := svc.DeleteAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -186,7 +187,7 @@ func ExampleLambda_DeleteEventSourceMappingRequest_shared00() {
 	}
 
 	req := svc.DeleteEventSourceMappingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -230,7 +231,7 @@ func ExampleLambda_DeleteFunctionRequest_shared00() {
 	}
 
 	req := svc.DeleteFunctionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -271,7 +272,7 @@ func ExampleLambda_GetAccountSettingsRequest_shared00() {
 	input := &lambda.GetAccountSettingsInput{}
 
 	req := svc.GetAccountSettingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -309,7 +310,7 @@ func ExampleLambda_GetAliasRequest_shared00() {
 	}
 
 	req := svc.GetAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -350,7 +351,7 @@ func ExampleLambda_GetEventSourceMappingRequest_shared00() {
 	}
 
 	req := svc.GetEventSourceMappingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -392,7 +393,7 @@ func ExampleLambda_GetFunctionRequest_shared00() {
 	}
 
 	req := svc.GetFunctionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -434,7 +435,7 @@ func ExampleLambda_GetFunctionConfigurationRequest_shared00() {
 	}
 
 	req := svc.GetFunctionConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -476,7 +477,7 @@ func ExampleLambda_GetPolicyRequest_shared00() {
 	}
 
 	req := svc.GetPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -522,7 +523,7 @@ func ExampleLambda_InvokeRequest_shared00() {
 	}
 
 	req := svc.InvokeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -596,7 +597,7 @@ func ExampleLambda_InvokeAsyncRequest_shared00() {
 	}
 
 	req := svc.InvokeAsyncRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -640,7 +641,7 @@ func ExampleLambda_ListAliasesRequest_shared00() {
 	}
 
 	req := svc.ListAliasesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -682,7 +683,7 @@ func ExampleLambda_ListFunctionsRequest_shared00() {
 	}
 
 	req := svc.ListFunctionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -723,7 +724,7 @@ func ExampleLambda_ListVersionsByFunctionRequest_shared00() {
 	}
 
 	req := svc.ListVersionsByFunctionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -766,7 +767,7 @@ func ExampleLambda_PublishVersionRequest_shared00() {
 	}
 
 	req := svc.PublishVersionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -813,7 +814,7 @@ func ExampleLambda_RemovePermissionRequest_shared00() {
 	}
 
 	req := svc.RemovePermissionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -859,7 +860,7 @@ func ExampleLambda_UpdateAliasRequest_shared00() {
 	}
 
 	req := svc.UpdateAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -905,7 +906,7 @@ func ExampleLambda_UpdateEventSourceMappingRequest_shared00() {
 	}
 
 	req := svc.UpdateEventSourceMappingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -955,7 +956,7 @@ func ExampleLambda_UpdateFunctionCodeRequest_shared00() {
 	}
 
 	req := svc.UpdateFunctionCodeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1007,7 +1008,7 @@ func ExampleLambda_UpdateFunctionConfigurationRequest_shared00() {
 	}
 
 	req := svc.UpdateFunctionConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

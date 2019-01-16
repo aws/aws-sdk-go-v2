@@ -3,6 +3,7 @@
 package waf
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateByteMatchSet API request.
-func (r CreateByteMatchSetRequest) Send() (*CreateByteMatchSetOutput, error) {
+func (r CreateByteMatchSetRequest) Send(ctx context.Context) (*CreateByteMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -57,7 +59,7 @@ func (r CreateByteMatchSetRequest) Send() (*CreateByteMatchSetOutput, error) {
 //
 //    // Example sending a request using the CreateByteMatchSetRequest method.
 //    req := client.CreateByteMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -91,7 +93,8 @@ type CreateGeoMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateGeoMatchSet API request.
-func (r CreateGeoMatchSetRequest) Send() (*CreateGeoMatchSetOutput, error) {
+func (r CreateGeoMatchSetRequest) Send(ctx context.Context) (*CreateGeoMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -127,7 +130,7 @@ func (r CreateGeoMatchSetRequest) Send() (*CreateGeoMatchSetOutput, error) {
 //
 //    // Example sending a request using the CreateGeoMatchSetRequest method.
 //    req := client.CreateGeoMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -161,7 +164,8 @@ type CreateIPSetRequest struct {
 }
 
 // Send marshals and sends the CreateIPSet API request.
-func (r CreateIPSetRequest) Send() (*CreateIPSetOutput, error) {
+func (r CreateIPSetRequest) Send(ctx context.Context) (*CreateIPSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -198,7 +202,7 @@ func (r CreateIPSetRequest) Send() (*CreateIPSetOutput, error) {
 //
 //    // Example sending a request using the CreateIPSetRequest method.
 //    req := client.CreateIPSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -232,7 +236,8 @@ type CreateRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the CreateRateBasedRule API request.
-func (r CreateRateBasedRuleRequest) Send() (*CreateRateBasedRuleOutput, error) {
+func (r CreateRateBasedRuleRequest) Send(ctx context.Context) (*CreateRateBasedRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,7 +313,7 @@ func (r CreateRateBasedRuleRequest) Send() (*CreateRateBasedRuleOutput, error) {
 //
 //    // Example sending a request using the CreateRateBasedRuleRequest method.
 //    req := client.CreateRateBasedRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -342,7 +347,8 @@ type CreateRegexMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateRegexMatchSet API request.
-func (r CreateRegexMatchSetRequest) Send() (*CreateRegexMatchSetOutput, error) {
+func (r CreateRegexMatchSetRequest) Send(ctx context.Context) (*CreateRegexMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -380,7 +386,7 @@ func (r CreateRegexMatchSetRequest) Send() (*CreateRegexMatchSetOutput, error) {
 //
 //    // Example sending a request using the CreateRegexMatchSetRequest method.
 //    req := client.CreateRegexMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -414,7 +420,8 @@ type CreateRegexPatternSetRequest struct {
 }
 
 // Send marshals and sends the CreateRegexPatternSet API request.
-func (r CreateRegexPatternSetRequest) Send() (*CreateRegexPatternSetOutput, error) {
+func (r CreateRegexPatternSetRequest) Send(ctx context.Context) (*CreateRegexPatternSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +455,7 @@ func (r CreateRegexPatternSetRequest) Send() (*CreateRegexPatternSetOutput, erro
 //
 //    // Example sending a request using the CreateRegexPatternSetRequest method.
 //    req := client.CreateRegexPatternSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -482,7 +489,8 @@ type CreateRuleRequest struct {
 }
 
 // Send marshals and sends the CreateRule API request.
-func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
+func (r CreateRuleRequest) Send(ctx context.Context) (*CreateRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -533,7 +541,7 @@ func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
 //
 //    // Example sending a request using the CreateRuleRequest method.
 //    req := client.CreateRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -567,7 +575,8 @@ type CreateRuleGroupRequest struct {
 }
 
 // Send marshals and sends the CreateRuleGroup API request.
-func (r CreateRuleGroupRequest) Send() (*CreateRuleGroupOutput, error) {
+func (r CreateRuleGroupRequest) Send(ctx context.Context) (*CreateRuleGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -596,7 +605,7 @@ func (r CreateRuleGroupRequest) Send() (*CreateRuleGroupOutput, error) {
 //
 //    // Example sending a request using the CreateRuleGroupRequest method.
 //    req := client.CreateRuleGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -630,7 +639,8 @@ type CreateSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the CreateSizeConstraintSet API request.
-func (r CreateSizeConstraintSetRequest) Send() (*CreateSizeConstraintSetOutput, error) {
+func (r CreateSizeConstraintSetRequest) Send(ctx context.Context) (*CreateSizeConstraintSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -668,7 +678,7 @@ func (r CreateSizeConstraintSetRequest) Send() (*CreateSizeConstraintSetOutput, 
 //
 //    // Example sending a request using the CreateSizeConstraintSetRequest method.
 //    req := client.CreateSizeConstraintSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -702,7 +712,8 @@ type CreateSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateSqlInjectionMatchSet API request.
-func (r CreateSqlInjectionMatchSetRequest) Send() (*CreateSqlInjectionMatchSetOutput, error) {
+func (r CreateSqlInjectionMatchSetRequest) Send(ctx context.Context) (*CreateSqlInjectionMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -736,7 +747,7 @@ func (r CreateSqlInjectionMatchSetRequest) Send() (*CreateSqlInjectionMatchSetOu
 //
 //    // Example sending a request using the CreateSqlInjectionMatchSetRequest method.
 //    req := client.CreateSqlInjectionMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -770,7 +781,8 @@ type CreateWebACLRequest struct {
 }
 
 // Send marshals and sends the CreateWebACL API request.
-func (r CreateWebACLRequest) Send() (*CreateWebACLOutput, error) {
+func (r CreateWebACLRequest) Send(ctx context.Context) (*CreateWebACLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -816,7 +828,7 @@ func (r CreateWebACLRequest) Send() (*CreateWebACLOutput, error) {
 //
 //    // Example sending a request using the CreateWebACLRequest method.
 //    req := client.CreateWebACLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -850,7 +862,8 @@ type CreateXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateXssMatchSet API request.
-func (r CreateXssMatchSetRequest) Send() (*CreateXssMatchSetOutput, error) {
+func (r CreateXssMatchSetRequest) Send(ctx context.Context) (*CreateXssMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -885,7 +898,7 @@ func (r CreateXssMatchSetRequest) Send() (*CreateXssMatchSetOutput, error) {
 //
 //    // Example sending a request using the CreateXssMatchSetRequest method.
 //    req := client.CreateXssMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -919,7 +932,8 @@ type DeleteByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteByteMatchSet API request.
-func (r DeleteByteMatchSetRequest) Send() (*DeleteByteMatchSetOutput, error) {
+func (r DeleteByteMatchSetRequest) Send(ctx context.Context) (*DeleteByteMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -949,7 +963,7 @@ func (r DeleteByteMatchSetRequest) Send() (*DeleteByteMatchSetOutput, error) {
 //
 //    // Example sending a request using the DeleteByteMatchSetRequest method.
 //    req := client.DeleteByteMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -983,7 +997,8 @@ type DeleteGeoMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteGeoMatchSet API request.
-func (r DeleteGeoMatchSetRequest) Send() (*DeleteGeoMatchSetOutput, error) {
+func (r DeleteGeoMatchSetRequest) Send(ctx context.Context) (*DeleteGeoMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1012,7 +1027,7 @@ func (r DeleteGeoMatchSetRequest) Send() (*DeleteGeoMatchSetOutput, error) {
 //
 //    // Example sending a request using the DeleteGeoMatchSetRequest method.
 //    req := client.DeleteGeoMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1046,7 +1061,8 @@ type DeleteIPSetRequest struct {
 }
 
 // Send marshals and sends the DeleteIPSet API request.
-func (r DeleteIPSetRequest) Send() (*DeleteIPSetOutput, error) {
+func (r DeleteIPSetRequest) Send(ctx context.Context) (*DeleteIPSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1075,7 +1091,7 @@ func (r DeleteIPSetRequest) Send() (*DeleteIPSetOutput, error) {
 //
 //    // Example sending a request using the DeleteIPSetRequest method.
 //    req := client.DeleteIPSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1109,7 +1125,8 @@ type DeleteLoggingConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteLoggingConfiguration API request.
-func (r DeleteLoggingConfigurationRequest) Send() (*DeleteLoggingConfigurationOutput, error) {
+func (r DeleteLoggingConfigurationRequest) Send(ctx context.Context) (*DeleteLoggingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1125,7 +1142,7 @@ func (r DeleteLoggingConfigurationRequest) Send() (*DeleteLoggingConfigurationOu
 //
 //    // Example sending a request using the DeleteLoggingConfigurationRequest method.
 //    req := client.DeleteLoggingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1159,7 +1176,8 @@ type DeletePermissionPolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePermissionPolicy API request.
-func (r DeletePermissionPolicyRequest) Send() (*DeletePermissionPolicyOutput, error) {
+func (r DeletePermissionPolicyRequest) Send(ctx context.Context) (*DeletePermissionPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1177,7 +1195,7 @@ func (r DeletePermissionPolicyRequest) Send() (*DeletePermissionPolicyOutput, er
 //
 //    // Example sending a request using the DeletePermissionPolicyRequest method.
 //    req := client.DeletePermissionPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1211,7 +1229,8 @@ type DeleteRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteRateBasedRule API request.
-func (r DeleteRateBasedRuleRequest) Send() (*DeleteRateBasedRuleOutput, error) {
+func (r DeleteRateBasedRuleRequest) Send(ctx context.Context) (*DeleteRateBasedRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1242,7 +1261,7 @@ func (r DeleteRateBasedRuleRequest) Send() (*DeleteRateBasedRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteRateBasedRuleRequest method.
 //    req := client.DeleteRateBasedRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1276,7 +1295,8 @@ type DeleteRegexMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteRegexMatchSet API request.
-func (r DeleteRegexMatchSetRequest) Send() (*DeleteRegexMatchSetOutput, error) {
+func (r DeleteRegexMatchSetRequest) Send(ctx context.Context) (*DeleteRegexMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1306,7 +1326,7 @@ func (r DeleteRegexMatchSetRequest) Send() (*DeleteRegexMatchSetOutput, error) {
 //
 //    // Example sending a request using the DeleteRegexMatchSetRequest method.
 //    req := client.DeleteRegexMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1340,7 +1360,8 @@ type DeleteRegexPatternSetRequest struct {
 }
 
 // Send marshals and sends the DeleteRegexPatternSet API request.
-func (r DeleteRegexPatternSetRequest) Send() (*DeleteRegexPatternSetOutput, error) {
+func (r DeleteRegexPatternSetRequest) Send(ctx context.Context) (*DeleteRegexPatternSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1358,7 +1379,7 @@ func (r DeleteRegexPatternSetRequest) Send() (*DeleteRegexPatternSetOutput, erro
 //
 //    // Example sending a request using the DeleteRegexPatternSetRequest method.
 //    req := client.DeleteRegexPatternSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1392,7 +1413,8 @@ type DeleteRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteRule API request.
-func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+func (r DeleteRuleRequest) Send(ctx context.Context) (*DeleteRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1421,7 +1443,7 @@ func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteRuleRequest method.
 //    req := client.DeleteRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1455,7 +1477,8 @@ type DeleteRuleGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteRuleGroup API request.
-func (r DeleteRuleGroupRequest) Send() (*DeleteRuleGroupOutput, error) {
+func (r DeleteRuleGroupRequest) Send(ctx context.Context) (*DeleteRuleGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1483,7 +1506,7 @@ func (r DeleteRuleGroupRequest) Send() (*DeleteRuleGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteRuleGroupRequest method.
 //    req := client.DeleteRuleGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1517,7 +1540,8 @@ type DeleteSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the DeleteSizeConstraintSet API request.
-func (r DeleteSizeConstraintSetRequest) Send() (*DeleteSizeConstraintSetOutput, error) {
+func (r DeleteSizeConstraintSetRequest) Send(ctx context.Context) (*DeleteSizeConstraintSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1547,7 +1571,7 @@ func (r DeleteSizeConstraintSetRequest) Send() (*DeleteSizeConstraintSetOutput, 
 //
 //    // Example sending a request using the DeleteSizeConstraintSetRequest method.
 //    req := client.DeleteSizeConstraintSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1581,7 +1605,8 @@ type DeleteSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteSqlInjectionMatchSet API request.
-func (r DeleteSqlInjectionMatchSetRequest) Send() (*DeleteSqlInjectionMatchSetOutput, error) {
+func (r DeleteSqlInjectionMatchSetRequest) Send(ctx context.Context) (*DeleteSqlInjectionMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1612,7 +1637,7 @@ func (r DeleteSqlInjectionMatchSetRequest) Send() (*DeleteSqlInjectionMatchSetOu
 //
 //    // Example sending a request using the DeleteSqlInjectionMatchSetRequest method.
 //    req := client.DeleteSqlInjectionMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1646,7 +1671,8 @@ type DeleteWebACLRequest struct {
 }
 
 // Send marshals and sends the DeleteWebACL API request.
-func (r DeleteWebACLRequest) Send() (*DeleteWebACLOutput, error) {
+func (r DeleteWebACLRequest) Send(ctx context.Context) (*DeleteWebACLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1672,7 +1698,7 @@ func (r DeleteWebACLRequest) Send() (*DeleteWebACLOutput, error) {
 //
 //    // Example sending a request using the DeleteWebACLRequest method.
 //    req := client.DeleteWebACLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1706,7 +1732,8 @@ type DeleteXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteXssMatchSet API request.
-func (r DeleteXssMatchSetRequest) Send() (*DeleteXssMatchSetOutput, error) {
+func (r DeleteXssMatchSetRequest) Send(ctx context.Context) (*DeleteXssMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1736,7 +1763,7 @@ func (r DeleteXssMatchSetRequest) Send() (*DeleteXssMatchSetOutput, error) {
 //
 //    // Example sending a request using the DeleteXssMatchSetRequest method.
 //    req := client.DeleteXssMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1770,7 +1797,8 @@ type GetByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetByteMatchSet API request.
-func (r GetByteMatchSetRequest) Send() (*GetByteMatchSetOutput, error) {
+func (r GetByteMatchSetRequest) Send(ctx context.Context) (*GetByteMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1786,7 +1814,7 @@ func (r GetByteMatchSetRequest) Send() (*GetByteMatchSetOutput, error) {
 //
 //    // Example sending a request using the GetByteMatchSetRequest method.
 //    req := client.GetByteMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1820,7 +1848,8 @@ type GetChangeTokenRequest struct {
 }
 
 // Send marshals and sends the GetChangeToken API request.
-func (r GetChangeTokenRequest) Send() (*GetChangeTokenOutput, error) {
+func (r GetChangeTokenRequest) Send(ctx context.Context) (*GetChangeTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1850,7 +1879,7 @@ func (r GetChangeTokenRequest) Send() (*GetChangeTokenOutput, error) {
 //
 //    // Example sending a request using the GetChangeTokenRequest method.
 //    req := client.GetChangeTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1884,7 +1913,8 @@ type GetChangeTokenStatusRequest struct {
 }
 
 // Send marshals and sends the GetChangeTokenStatus API request.
-func (r GetChangeTokenStatusRequest) Send() (*GetChangeTokenStatusOutput, error) {
+func (r GetChangeTokenStatusRequest) Send(ctx context.Context) (*GetChangeTokenStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1910,7 +1940,7 @@ func (r GetChangeTokenStatusRequest) Send() (*GetChangeTokenStatusOutput, error)
 //
 //    // Example sending a request using the GetChangeTokenStatusRequest method.
 //    req := client.GetChangeTokenStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1944,7 +1974,8 @@ type GetGeoMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetGeoMatchSet API request.
-func (r GetGeoMatchSetRequest) Send() (*GetGeoMatchSetOutput, error) {
+func (r GetGeoMatchSetRequest) Send(ctx context.Context) (*GetGeoMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1960,7 +1991,7 @@ func (r GetGeoMatchSetRequest) Send() (*GetGeoMatchSetOutput, error) {
 //
 //    // Example sending a request using the GetGeoMatchSetRequest method.
 //    req := client.GetGeoMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1994,7 +2025,8 @@ type GetIPSetRequest struct {
 }
 
 // Send marshals and sends the GetIPSet API request.
-func (r GetIPSetRequest) Send() (*GetIPSetOutput, error) {
+func (r GetIPSetRequest) Send(ctx context.Context) (*GetIPSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2010,7 +2042,7 @@ func (r GetIPSetRequest) Send() (*GetIPSetOutput, error) {
 //
 //    // Example sending a request using the GetIPSetRequest method.
 //    req := client.GetIPSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2044,7 +2076,8 @@ type GetLoggingConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetLoggingConfiguration API request.
-func (r GetLoggingConfigurationRequest) Send() (*GetLoggingConfigurationOutput, error) {
+func (r GetLoggingConfigurationRequest) Send(ctx context.Context) (*GetLoggingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2060,7 +2093,7 @@ func (r GetLoggingConfigurationRequest) Send() (*GetLoggingConfigurationOutput, 
 //
 //    // Example sending a request using the GetLoggingConfigurationRequest method.
 //    req := client.GetLoggingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2094,7 +2127,8 @@ type GetPermissionPolicyRequest struct {
 }
 
 // Send marshals and sends the GetPermissionPolicy API request.
-func (r GetPermissionPolicyRequest) Send() (*GetPermissionPolicyOutput, error) {
+func (r GetPermissionPolicyRequest) Send(ctx context.Context) (*GetPermissionPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2110,7 +2144,7 @@ func (r GetPermissionPolicyRequest) Send() (*GetPermissionPolicyOutput, error) {
 //
 //    // Example sending a request using the GetPermissionPolicyRequest method.
 //    req := client.GetPermissionPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2144,7 +2178,8 @@ type GetRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the GetRateBasedRule API request.
-func (r GetRateBasedRuleRequest) Send() (*GetRateBasedRuleOutput, error) {
+func (r GetRateBasedRuleRequest) Send(ctx context.Context) (*GetRateBasedRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2161,7 +2196,7 @@ func (r GetRateBasedRuleRequest) Send() (*GetRateBasedRuleOutput, error) {
 //
 //    // Example sending a request using the GetRateBasedRuleRequest method.
 //    req := client.GetRateBasedRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2195,7 +2230,8 @@ type GetRateBasedRuleManagedKeysRequest struct {
 }
 
 // Send marshals and sends the GetRateBasedRuleManagedKeys API request.
-func (r GetRateBasedRuleManagedKeysRequest) Send() (*GetRateBasedRuleManagedKeysOutput, error) {
+func (r GetRateBasedRuleManagedKeysRequest) Send(ctx context.Context) (*GetRateBasedRuleManagedKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2214,7 +2250,7 @@ func (r GetRateBasedRuleManagedKeysRequest) Send() (*GetRateBasedRuleManagedKeys
 //
 //    // Example sending a request using the GetRateBasedRuleManagedKeysRequest method.
 //    req := client.GetRateBasedRuleManagedKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2248,7 +2284,8 @@ type GetRegexMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetRegexMatchSet API request.
-func (r GetRegexMatchSetRequest) Send() (*GetRegexMatchSetOutput, error) {
+func (r GetRegexMatchSetRequest) Send(ctx context.Context) (*GetRegexMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2264,7 +2301,7 @@ func (r GetRegexMatchSetRequest) Send() (*GetRegexMatchSetOutput, error) {
 //
 //    // Example sending a request using the GetRegexMatchSetRequest method.
 //    req := client.GetRegexMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2298,7 +2335,8 @@ type GetRegexPatternSetRequest struct {
 }
 
 // Send marshals and sends the GetRegexPatternSet API request.
-func (r GetRegexPatternSetRequest) Send() (*GetRegexPatternSetOutput, error) {
+func (r GetRegexPatternSetRequest) Send(ctx context.Context) (*GetRegexPatternSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2314,7 +2352,7 @@ func (r GetRegexPatternSetRequest) Send() (*GetRegexPatternSetOutput, error) {
 //
 //    // Example sending a request using the GetRegexPatternSetRequest method.
 //    req := client.GetRegexPatternSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2348,7 +2386,8 @@ type GetRuleRequest struct {
 }
 
 // Send marshals and sends the GetRule API request.
-func (r GetRuleRequest) Send() (*GetRuleOutput, error) {
+func (r GetRuleRequest) Send(ctx context.Context) (*GetRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2365,7 +2404,7 @@ func (r GetRuleRequest) Send() (*GetRuleOutput, error) {
 //
 //    // Example sending a request using the GetRuleRequest method.
 //    req := client.GetRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2399,7 +2438,8 @@ type GetRuleGroupRequest struct {
 }
 
 // Send marshals and sends the GetRuleGroup API request.
-func (r GetRuleGroupRequest) Send() (*GetRuleGroupOutput, error) {
+func (r GetRuleGroupRequest) Send(ctx context.Context) (*GetRuleGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2418,7 +2458,7 @@ func (r GetRuleGroupRequest) Send() (*GetRuleGroupOutput, error) {
 //
 //    // Example sending a request using the GetRuleGroupRequest method.
 //    req := client.GetRuleGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2452,7 +2492,8 @@ type GetSampledRequestsRequest struct {
 }
 
 // Send marshals and sends the GetSampledRequests API request.
-func (r GetSampledRequestsRequest) Send() (*GetSampledRequestsOutput, error) {
+func (r GetSampledRequestsRequest) Send(ctx context.Context) (*GetSampledRequestsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2478,7 +2519,7 @@ func (r GetSampledRequestsRequest) Send() (*GetSampledRequestsOutput, error) {
 //
 //    // Example sending a request using the GetSampledRequestsRequest method.
 //    req := client.GetSampledRequestsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2512,7 +2553,8 @@ type GetSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the GetSizeConstraintSet API request.
-func (r GetSizeConstraintSetRequest) Send() (*GetSizeConstraintSetOutput, error) {
+func (r GetSizeConstraintSetRequest) Send(ctx context.Context) (*GetSizeConstraintSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2528,7 +2570,7 @@ func (r GetSizeConstraintSetRequest) Send() (*GetSizeConstraintSetOutput, error)
 //
 //    // Example sending a request using the GetSizeConstraintSetRequest method.
 //    req := client.GetSizeConstraintSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2562,7 +2604,8 @@ type GetSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetSqlInjectionMatchSet API request.
-func (r GetSqlInjectionMatchSetRequest) Send() (*GetSqlInjectionMatchSetOutput, error) {
+func (r GetSqlInjectionMatchSetRequest) Send(ctx context.Context) (*GetSqlInjectionMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2578,7 +2621,7 @@ func (r GetSqlInjectionMatchSetRequest) Send() (*GetSqlInjectionMatchSetOutput, 
 //
 //    // Example sending a request using the GetSqlInjectionMatchSetRequest method.
 //    req := client.GetSqlInjectionMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2612,7 +2655,8 @@ type GetWebACLRequest struct {
 }
 
 // Send marshals and sends the GetWebACL API request.
-func (r GetWebACLRequest) Send() (*GetWebACLOutput, error) {
+func (r GetWebACLRequest) Send(ctx context.Context) (*GetWebACLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2628,7 +2672,7 @@ func (r GetWebACLRequest) Send() (*GetWebACLOutput, error) {
 //
 //    // Example sending a request using the GetWebACLRequest method.
 //    req := client.GetWebACLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2662,7 +2706,8 @@ type GetXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetXssMatchSet API request.
-func (r GetXssMatchSetRequest) Send() (*GetXssMatchSetOutput, error) {
+func (r GetXssMatchSetRequest) Send(ctx context.Context) (*GetXssMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2678,7 +2723,7 @@ func (r GetXssMatchSetRequest) Send() (*GetXssMatchSetOutput, error) {
 //
 //    // Example sending a request using the GetXssMatchSetRequest method.
 //    req := client.GetXssMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2712,7 +2757,8 @@ type ListActivatedRulesInRuleGroupRequest struct {
 }
 
 // Send marshals and sends the ListActivatedRulesInRuleGroup API request.
-func (r ListActivatedRulesInRuleGroupRequest) Send() (*ListActivatedRulesInRuleGroupOutput, error) {
+func (r ListActivatedRulesInRuleGroupRequest) Send(ctx context.Context) (*ListActivatedRulesInRuleGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2728,7 +2774,7 @@ func (r ListActivatedRulesInRuleGroupRequest) Send() (*ListActivatedRulesInRuleG
 //
 //    // Example sending a request using the ListActivatedRulesInRuleGroupRequest method.
 //    req := client.ListActivatedRulesInRuleGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2762,7 +2808,8 @@ type ListByteMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListByteMatchSets API request.
-func (r ListByteMatchSetsRequest) Send() (*ListByteMatchSetsOutput, error) {
+func (r ListByteMatchSetsRequest) Send(ctx context.Context) (*ListByteMatchSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2778,7 +2825,7 @@ func (r ListByteMatchSetsRequest) Send() (*ListByteMatchSetsOutput, error) {
 //
 //    // Example sending a request using the ListByteMatchSetsRequest method.
 //    req := client.ListByteMatchSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2812,7 +2859,8 @@ type ListGeoMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListGeoMatchSets API request.
-func (r ListGeoMatchSetsRequest) Send() (*ListGeoMatchSetsOutput, error) {
+func (r ListGeoMatchSetsRequest) Send(ctx context.Context) (*ListGeoMatchSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2828,7 +2876,7 @@ func (r ListGeoMatchSetsRequest) Send() (*ListGeoMatchSetsOutput, error) {
 //
 //    // Example sending a request using the ListGeoMatchSetsRequest method.
 //    req := client.ListGeoMatchSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2862,7 +2910,8 @@ type ListIPSetsRequest struct {
 }
 
 // Send marshals and sends the ListIPSets API request.
-func (r ListIPSetsRequest) Send() (*ListIPSetsOutput, error) {
+func (r ListIPSetsRequest) Send(ctx context.Context) (*ListIPSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2878,7 +2927,7 @@ func (r ListIPSetsRequest) Send() (*ListIPSetsOutput, error) {
 //
 //    // Example sending a request using the ListIPSetsRequest method.
 //    req := client.ListIPSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2912,7 +2961,8 @@ type ListLoggingConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListLoggingConfigurations API request.
-func (r ListLoggingConfigurationsRequest) Send() (*ListLoggingConfigurationsOutput, error) {
+func (r ListLoggingConfigurationsRequest) Send(ctx context.Context) (*ListLoggingConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2928,7 +2978,7 @@ func (r ListLoggingConfigurationsRequest) Send() (*ListLoggingConfigurationsOutp
 //
 //    // Example sending a request using the ListLoggingConfigurationsRequest method.
 //    req := client.ListLoggingConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2962,7 +3012,8 @@ type ListRateBasedRulesRequest struct {
 }
 
 // Send marshals and sends the ListRateBasedRules API request.
-func (r ListRateBasedRulesRequest) Send() (*ListRateBasedRulesOutput, error) {
+func (r ListRateBasedRulesRequest) Send(ctx context.Context) (*ListRateBasedRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2978,7 +3029,7 @@ func (r ListRateBasedRulesRequest) Send() (*ListRateBasedRulesOutput, error) {
 //
 //    // Example sending a request using the ListRateBasedRulesRequest method.
 //    req := client.ListRateBasedRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3012,7 +3063,8 @@ type ListRegexMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListRegexMatchSets API request.
-func (r ListRegexMatchSetsRequest) Send() (*ListRegexMatchSetsOutput, error) {
+func (r ListRegexMatchSetsRequest) Send(ctx context.Context) (*ListRegexMatchSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3028,7 +3080,7 @@ func (r ListRegexMatchSetsRequest) Send() (*ListRegexMatchSetsOutput, error) {
 //
 //    // Example sending a request using the ListRegexMatchSetsRequest method.
 //    req := client.ListRegexMatchSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3062,7 +3114,8 @@ type ListRegexPatternSetsRequest struct {
 }
 
 // Send marshals and sends the ListRegexPatternSets API request.
-func (r ListRegexPatternSetsRequest) Send() (*ListRegexPatternSetsOutput, error) {
+func (r ListRegexPatternSetsRequest) Send(ctx context.Context) (*ListRegexPatternSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3078,7 +3131,7 @@ func (r ListRegexPatternSetsRequest) Send() (*ListRegexPatternSetsOutput, error)
 //
 //    // Example sending a request using the ListRegexPatternSetsRequest method.
 //    req := client.ListRegexPatternSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3112,7 +3165,8 @@ type ListRuleGroupsRequest struct {
 }
 
 // Send marshals and sends the ListRuleGroups API request.
-func (r ListRuleGroupsRequest) Send() (*ListRuleGroupsOutput, error) {
+func (r ListRuleGroupsRequest) Send(ctx context.Context) (*ListRuleGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3128,7 +3182,7 @@ func (r ListRuleGroupsRequest) Send() (*ListRuleGroupsOutput, error) {
 //
 //    // Example sending a request using the ListRuleGroupsRequest method.
 //    req := client.ListRuleGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3162,7 +3216,8 @@ type ListRulesRequest struct {
 }
 
 // Send marshals and sends the ListRules API request.
-func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
+func (r ListRulesRequest) Send(ctx context.Context) (*ListRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3178,7 +3233,7 @@ func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
 //
 //    // Example sending a request using the ListRulesRequest method.
 //    req := client.ListRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3212,7 +3267,8 @@ type ListSizeConstraintSetsRequest struct {
 }
 
 // Send marshals and sends the ListSizeConstraintSets API request.
-func (r ListSizeConstraintSetsRequest) Send() (*ListSizeConstraintSetsOutput, error) {
+func (r ListSizeConstraintSetsRequest) Send(ctx context.Context) (*ListSizeConstraintSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3228,7 +3284,7 @@ func (r ListSizeConstraintSetsRequest) Send() (*ListSizeConstraintSetsOutput, er
 //
 //    // Example sending a request using the ListSizeConstraintSetsRequest method.
 //    req := client.ListSizeConstraintSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3262,7 +3318,8 @@ type ListSqlInjectionMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListSqlInjectionMatchSets API request.
-func (r ListSqlInjectionMatchSetsRequest) Send() (*ListSqlInjectionMatchSetsOutput, error) {
+func (r ListSqlInjectionMatchSetsRequest) Send(ctx context.Context) (*ListSqlInjectionMatchSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3278,7 +3335,7 @@ func (r ListSqlInjectionMatchSetsRequest) Send() (*ListSqlInjectionMatchSetsOutp
 //
 //    // Example sending a request using the ListSqlInjectionMatchSetsRequest method.
 //    req := client.ListSqlInjectionMatchSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3312,7 +3369,8 @@ type ListSubscribedRuleGroupsRequest struct {
 }
 
 // Send marshals and sends the ListSubscribedRuleGroups API request.
-func (r ListSubscribedRuleGroupsRequest) Send() (*ListSubscribedRuleGroupsOutput, error) {
+func (r ListSubscribedRuleGroupsRequest) Send(ctx context.Context) (*ListSubscribedRuleGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3328,7 +3386,7 @@ func (r ListSubscribedRuleGroupsRequest) Send() (*ListSubscribedRuleGroupsOutput
 //
 //    // Example sending a request using the ListSubscribedRuleGroupsRequest method.
 //    req := client.ListSubscribedRuleGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3362,7 +3420,8 @@ type ListWebACLsRequest struct {
 }
 
 // Send marshals and sends the ListWebACLs API request.
-func (r ListWebACLsRequest) Send() (*ListWebACLsOutput, error) {
+func (r ListWebACLsRequest) Send(ctx context.Context) (*ListWebACLsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3378,7 +3437,7 @@ func (r ListWebACLsRequest) Send() (*ListWebACLsOutput, error) {
 //
 //    // Example sending a request using the ListWebACLsRequest method.
 //    req := client.ListWebACLsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3412,7 +3471,8 @@ type ListXssMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListXssMatchSets API request.
-func (r ListXssMatchSetsRequest) Send() (*ListXssMatchSetsOutput, error) {
+func (r ListXssMatchSetsRequest) Send(ctx context.Context) (*ListXssMatchSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3428,7 +3488,7 @@ func (r ListXssMatchSetsRequest) Send() (*ListXssMatchSetsOutput, error) {
 //
 //    // Example sending a request using the ListXssMatchSetsRequest method.
 //    req := client.ListXssMatchSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3462,7 +3522,8 @@ type PutLoggingConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutLoggingConfiguration API request.
-func (r PutLoggingConfigurationRequest) Send() (*PutLoggingConfigurationOutput, error) {
+func (r PutLoggingConfigurationRequest) Send(ctx context.Context) (*PutLoggingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3491,7 +3552,7 @@ func (r PutLoggingConfigurationRequest) Send() (*PutLoggingConfigurationOutput, 
 //
 //    // Example sending a request using the PutLoggingConfigurationRequest method.
 //    req := client.PutLoggingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3525,7 +3586,8 @@ type PutPermissionPolicyRequest struct {
 }
 
 // Send marshals and sends the PutPermissionPolicy API request.
-func (r PutPermissionPolicyRequest) Send() (*PutPermissionPolicyOutput, error) {
+func (r PutPermissionPolicyRequest) Send(ctx context.Context) (*PutPermissionPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3567,7 +3629,7 @@ func (r PutPermissionPolicyRequest) Send() (*PutPermissionPolicyOutput, error) {
 //
 //    // Example sending a request using the PutPermissionPolicyRequest method.
 //    req := client.PutPermissionPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3601,7 +3663,8 @@ type UpdateByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateByteMatchSet API request.
-func (r UpdateByteMatchSetRequest) Send() (*UpdateByteMatchSetOutput, error) {
+func (r UpdateByteMatchSetRequest) Send(ctx context.Context) (*UpdateByteMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3653,7 +3716,7 @@ func (r UpdateByteMatchSetRequest) Send() (*UpdateByteMatchSetOutput, error) {
 //
 //    // Example sending a request using the UpdateByteMatchSetRequest method.
 //    req := client.UpdateByteMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3687,7 +3750,8 @@ type UpdateGeoMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateGeoMatchSet API request.
-func (r UpdateGeoMatchSetRequest) Send() (*UpdateGeoMatchSetOutput, error) {
+func (r UpdateGeoMatchSetRequest) Send(ctx context.Context) (*UpdateGeoMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3730,7 +3794,7 @@ func (r UpdateGeoMatchSetRequest) Send() (*UpdateGeoMatchSetOutput, error) {
 //
 //    // Example sending a request using the UpdateGeoMatchSetRequest method.
 //    req := client.UpdateGeoMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3764,7 +3828,8 @@ type UpdateIPSetRequest struct {
 }
 
 // Send marshals and sends the UpdateIPSet API request.
-func (r UpdateIPSetRequest) Send() (*UpdateIPSetOutput, error) {
+func (r UpdateIPSetRequest) Send(ctx context.Context) (*UpdateIPSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3831,7 +3896,7 @@ func (r UpdateIPSetRequest) Send() (*UpdateIPSetOutput, error) {
 //
 //    // Example sending a request using the UpdateIPSetRequest method.
 //    req := client.UpdateIPSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3865,7 +3930,8 @@ type UpdateRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateRateBasedRule API request.
-func (r UpdateRateBasedRuleRequest) Send() (*UpdateRateBasedRuleOutput, error) {
+func (r UpdateRateBasedRuleRequest) Send(ctx context.Context) (*UpdateRateBasedRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3918,7 +3984,7 @@ func (r UpdateRateBasedRuleRequest) Send() (*UpdateRateBasedRuleOutput, error) {
 //
 //    // Example sending a request using the UpdateRateBasedRuleRequest method.
 //    req := client.UpdateRateBasedRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3952,7 +4018,8 @@ type UpdateRegexMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateRegexMatchSet API request.
-func (r UpdateRegexMatchSetRequest) Send() (*UpdateRegexMatchSetOutput, error) {
+func (r UpdateRegexMatchSetRequest) Send(ctx context.Context) (*UpdateRegexMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4001,7 +4068,7 @@ func (r UpdateRegexMatchSetRequest) Send() (*UpdateRegexMatchSetOutput, error) {
 //
 //    // Example sending a request using the UpdateRegexMatchSetRequest method.
 //    req := client.UpdateRegexMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4035,7 +4102,8 @@ type UpdateRegexPatternSetRequest struct {
 }
 
 // Send marshals and sends the UpdateRegexPatternSet API request.
-func (r UpdateRegexPatternSetRequest) Send() (*UpdateRegexPatternSetOutput, error) {
+func (r UpdateRegexPatternSetRequest) Send(ctx context.Context) (*UpdateRegexPatternSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4081,7 +4149,7 @@ func (r UpdateRegexPatternSetRequest) Send() (*UpdateRegexPatternSetOutput, erro
 //
 //    // Example sending a request using the UpdateRegexPatternSetRequest method.
 //    req := client.UpdateRegexPatternSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4115,7 +4183,8 @@ type UpdateRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateRule API request.
-func (r UpdateRuleRequest) Send() (*UpdateRuleOutput, error) {
+func (r UpdateRuleRequest) Send(ctx context.Context) (*UpdateRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4164,7 +4233,7 @@ func (r UpdateRuleRequest) Send() (*UpdateRuleOutput, error) {
 //
 //    // Example sending a request using the UpdateRuleRequest method.
 //    req := client.UpdateRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4198,7 +4267,8 @@ type UpdateRuleGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateRuleGroup API request.
-func (r UpdateRuleGroupRequest) Send() (*UpdateRuleGroupOutput, error) {
+func (r UpdateRuleGroupRequest) Send(ctx context.Context) (*UpdateRuleGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4236,7 +4306,7 @@ func (r UpdateRuleGroupRequest) Send() (*UpdateRuleGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateRuleGroupRequest method.
 //    req := client.UpdateRuleGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4270,7 +4340,8 @@ type UpdateSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the UpdateSizeConstraintSet API request.
-func (r UpdateSizeConstraintSetRequest) Send() (*UpdateSizeConstraintSetOutput, error) {
+func (r UpdateSizeConstraintSetRequest) Send(ctx context.Context) (*UpdateSizeConstraintSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4326,7 +4397,7 @@ func (r UpdateSizeConstraintSetRequest) Send() (*UpdateSizeConstraintSetOutput, 
 //
 //    // Example sending a request using the UpdateSizeConstraintSetRequest method.
 //    req := client.UpdateSizeConstraintSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4360,7 +4431,8 @@ type UpdateSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateSqlInjectionMatchSet API request.
-func (r UpdateSqlInjectionMatchSetRequest) Send() (*UpdateSqlInjectionMatchSetOutput, error) {
+func (r UpdateSqlInjectionMatchSetRequest) Send(ctx context.Context) (*UpdateSqlInjectionMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4410,7 +4482,7 @@ func (r UpdateSqlInjectionMatchSetRequest) Send() (*UpdateSqlInjectionMatchSetOu
 //
 //    // Example sending a request using the UpdateSqlInjectionMatchSetRequest method.
 //    req := client.UpdateSqlInjectionMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4444,7 +4516,8 @@ type UpdateWebACLRequest struct {
 }
 
 // Send marshals and sends the UpdateWebACL API request.
-func (r UpdateWebACLRequest) Send() (*UpdateWebACLOutput, error) {
+func (r UpdateWebACLRequest) Send(ctx context.Context) (*UpdateWebACLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4515,7 +4588,7 @@ func (r UpdateWebACLRequest) Send() (*UpdateWebACLOutput, error) {
 //
 //    // Example sending a request using the UpdateWebACLRequest method.
 //    req := client.UpdateWebACLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4549,7 +4622,8 @@ type UpdateXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateXssMatchSet API request.
-func (r UpdateXssMatchSetRequest) Send() (*UpdateXssMatchSetOutput, error) {
+func (r UpdateXssMatchSetRequest) Send(ctx context.Context) (*UpdateXssMatchSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4599,7 +4673,7 @@ func (r UpdateXssMatchSetRequest) Send() (*UpdateXssMatchSetOutput, error) {
 //
 //    // Example sending a request using the UpdateXssMatchSetRequest method.
 //    req := client.UpdateXssMatchSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

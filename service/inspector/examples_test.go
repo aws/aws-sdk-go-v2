@@ -3,6 +3,7 @@
 package inspector_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -49,7 +50,7 @@ func ExampleInspector_AddAttributesToFindingsRequest_shared00() {
 	}
 
 	req := svc.AddAttributesToFindingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -95,7 +96,7 @@ func ExampleInspector_CreateAssessmentTargetRequest_shared00() {
 	}
 
 	req := svc.CreateAssessmentTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -154,7 +155,7 @@ func ExampleInspector_CreateAssessmentTemplateRequest_shared00() {
 	}
 
 	req := svc.CreateAssessmentTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -207,7 +208,7 @@ func ExampleInspector_CreateResourceGroupRequest_shared00() {
 	}
 
 	req := svc.CreateResourceGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -250,7 +251,7 @@ func ExampleInspector_DeleteAssessmentRunRequest_shared00() {
 	}
 
 	req := svc.DeleteAssessmentRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -295,7 +296,7 @@ func ExampleInspector_DeleteAssessmentTargetRequest_shared00() {
 	}
 
 	req := svc.DeleteAssessmentTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -340,7 +341,7 @@ func ExampleInspector_DeleteAssessmentTemplateRequest_shared00() {
 	}
 
 	req := svc.DeleteAssessmentTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -387,7 +388,7 @@ func ExampleInspector_DescribeAssessmentRunsRequest_shared00() {
 	}
 
 	req := svc.DescribeAssessmentRunsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -427,7 +428,7 @@ func ExampleInspector_DescribeAssessmentTargetsRequest_shared00() {
 	}
 
 	req := svc.DescribeAssessmentTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -467,7 +468,7 @@ func ExampleInspector_DescribeAssessmentTemplatesRequest_shared00() {
 	}
 
 	req := svc.DescribeAssessmentTemplatesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -502,7 +503,7 @@ func ExampleInspector_DescribeCrossAccountAccessRoleRequest_shared00() {
 	input := &inspector.DescribeCrossAccountAccessRoleInput{}
 
 	req := svc.DescribeCrossAccountAccessRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -539,7 +540,7 @@ func ExampleInspector_DescribeFindingsRequest_shared00() {
 	}
 
 	req := svc.DescribeFindingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -578,7 +579,7 @@ func ExampleInspector_DescribeResourceGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeResourceGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -617,7 +618,7 @@ func ExampleInspector_DescribeRulesPackagesRequest_shared00() {
 	}
 
 	req := svc.DescribeRulesPackagesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -654,7 +655,7 @@ func ExampleInspector_GetTelemetryMetadataRequest_shared00() {
 	}
 
 	req := svc.GetTelemetryMetadataRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -697,7 +698,7 @@ func ExampleInspector_ListAssessmentRunAgentsRequest_shared00() {
 	}
 
 	req := svc.ListAssessmentRunAgentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -742,7 +743,7 @@ func ExampleInspector_ListAssessmentRunsRequest_shared00() {
 	}
 
 	req := svc.ListAssessmentRunsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -783,7 +784,7 @@ func ExampleInspector_ListAssessmentTargetsRequest_shared00() {
 	}
 
 	req := svc.ListAssessmentTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -826,7 +827,7 @@ func ExampleInspector_ListAssessmentTemplatesRequest_shared00() {
 	}
 
 	req := svc.ListAssessmentTemplatesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -869,7 +870,7 @@ func ExampleInspector_ListEventSubscriptionsRequest_shared00() {
 	}
 
 	req := svc.ListEventSubscriptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -914,7 +915,7 @@ func ExampleInspector_ListFindingsRequest_shared00() {
 	}
 
 	req := svc.ListFindingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -955,7 +956,7 @@ func ExampleInspector_ListRulesPackagesRequest_shared00() {
 	}
 
 	req := svc.ListRulesPackagesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -994,7 +995,7 @@ func ExampleInspector_ListTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ListTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1037,7 +1038,7 @@ func ExampleInspector_PreviewAgentsRequest_shared00() {
 	}
 
 	req := svc.PreviewAgentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1081,7 +1082,7 @@ func ExampleInspector_RegisterCrossAccountAccessRoleRequest_shared00() {
 	}
 
 	req := svc.RegisterCrossAccountAccessRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1130,7 +1131,7 @@ func ExampleInspector_RemoveAttributesFromFindingsRequest_shared00() {
 	}
 
 	req := svc.RemoveAttributesFromFindingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1180,7 +1181,7 @@ func ExampleInspector_SetTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.SetTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1226,7 +1227,7 @@ func ExampleInspector_StartAssessmentRunRequest_shared00() {
 	}
 
 	req := svc.StartAssessmentRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1275,7 +1276,7 @@ func ExampleInspector_StopAssessmentRunRequest_shared00() {
 	}
 
 	req := svc.StopAssessmentRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1321,7 +1322,7 @@ func ExampleInspector_SubscribeToEventRequest_shared00() {
 	}
 
 	req := svc.SubscribeToEventRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1369,7 +1370,7 @@ func ExampleInspector_UnsubscribeFromEventRequest_shared00() {
 	}
 
 	req := svc.UnsubscribeFromEventRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1414,7 +1415,7 @@ func ExampleInspector_UpdateAssessmentTargetRequest_shared00() {
 	}
 
 	req := svc.UpdateAssessmentTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

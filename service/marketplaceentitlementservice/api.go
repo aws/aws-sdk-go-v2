@@ -3,6 +3,7 @@
 package marketplaceentitlementservice
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type GetEntitlementsRequest struct {
 }
 
 // Send marshals and sends the GetEntitlements API request.
-func (r GetEntitlementsRequest) Send() (*GetEntitlementsOutput, error) {
+func (r GetEntitlementsRequest) Send(ctx context.Context) (*GetEntitlementsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r GetEntitlementsRequest) Send() (*GetEntitlementsOutput, error) {
 //
 //    // Example sending a request using the GetEntitlementsRequest method.
 //    req := client.GetEntitlementsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

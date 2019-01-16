@@ -3,6 +3,7 @@
 package glacier_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExampleGlacier_AbortMultipartUploadRequest_shared00() {
 	}
 
 	req := svc.AbortMultipartUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -85,7 +86,7 @@ func ExampleGlacier_AbortVaultLockRequest_shared00() {
 	}
 
 	req := svc.AbortVaultLockRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -131,7 +132,7 @@ func ExampleGlacier_AddTagsToVaultRequest_shared00() {
 	}
 
 	req := svc.AddTagsToVaultRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -178,7 +179,7 @@ func ExampleGlacier_CompleteMultipartUploadRequest_shared00() {
 	}
 
 	req := svc.CompleteMultipartUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -222,7 +223,7 @@ func ExampleGlacier_CompleteVaultLockRequest_shared00() {
 	}
 
 	req := svc.CompleteVaultLockRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -264,7 +265,7 @@ func ExampleGlacier_CreateVaultRequest_shared00() {
 	}
 
 	req := svc.CreateVaultRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -307,7 +308,7 @@ func ExampleGlacier_DeleteArchiveRequest_shared00() {
 	}
 
 	req := svc.DeleteArchiveRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -349,7 +350,7 @@ func ExampleGlacier_DeleteVaultRequest_shared00() {
 	}
 
 	req := svc.DeleteVaultRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -391,7 +392,7 @@ func ExampleGlacier_DeleteVaultAccessPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteVaultAccessPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -433,7 +434,7 @@ func ExampleGlacier_DeleteVaultNotificationsRequest_shared00() {
 	}
 
 	req := svc.DeleteVaultNotificationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -477,7 +478,7 @@ func ExampleGlacier_DescribeJobRequest_shared00() {
 	}
 
 	req := svc.DescribeJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -519,7 +520,7 @@ func ExampleGlacier_DescribeVaultRequest_shared00() {
 	}
 
 	req := svc.DescribeVaultRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -560,7 +561,7 @@ func ExampleGlacier_GetDataRetrievalPolicyRequest_shared00() {
 	}
 
 	req := svc.GetDataRetrievalPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -603,7 +604,7 @@ func ExampleGlacier_GetJobOutputRequest_shared00() {
 	}
 
 	req := svc.GetJobOutputRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -645,7 +646,7 @@ func ExampleGlacier_GetVaultAccessPolicyRequest_shared00() {
 	}
 
 	req := svc.GetVaultAccessPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -688,7 +689,7 @@ func ExampleGlacier_GetVaultLockRequest_shared00() {
 	}
 
 	req := svc.GetVaultLockRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -730,7 +731,7 @@ func ExampleGlacier_GetVaultNotificationsRequest_shared00() {
 	}
 
 	req := svc.GetVaultNotificationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -778,7 +779,7 @@ func ExampleGlacier_InitiateJobRequest_shared00() {
 	}
 
 	req := svc.InitiateJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -826,7 +827,7 @@ func ExampleGlacier_InitiateMultipartUploadRequest_shared00() {
 	}
 
 	req := svc.InitiateMultipartUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -871,7 +872,7 @@ func ExampleGlacier_InitiateVaultLockRequest_shared00() {
 	}
 
 	req := svc.InitiateVaultLockRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -913,7 +914,7 @@ func ExampleGlacier_ListJobsRequest_shared00() {
 	}
 
 	req := svc.ListJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -955,7 +956,7 @@ func ExampleGlacier_ListMultipartUploadsRequest_shared00() {
 	}
 
 	req := svc.ListMultipartUploadsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -998,7 +999,7 @@ func ExampleGlacier_ListPartsRequest_shared00() {
 	}
 
 	req := svc.ListPartsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1039,7 +1040,7 @@ func ExampleGlacier_ListProvisionedCapacityRequest_shared00() {
 	}
 
 	req := svc.ListProvisionedCapacityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1079,7 +1080,7 @@ func ExampleGlacier_ListTagsForVaultRequest_shared00() {
 	}
 
 	req := svc.ListTagsForVaultRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1122,7 +1123,7 @@ func ExampleGlacier_ListVaultsRequest_shared00() {
 	}
 
 	req := svc.ListVaultsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1163,7 +1164,7 @@ func ExampleGlacier_PurchaseProvisionedCapacityRequest_shared00() {
 	}
 
 	req := svc.PurchaseProvisionedCapacityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1209,7 +1210,7 @@ func ExampleGlacier_RemoveTagsFromVaultRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsFromVaultRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1258,7 +1259,7 @@ func ExampleGlacier_SetDataRetrievalPolicyRequest_shared00() {
 	}
 
 	req := svc.SetDataRetrievalPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1301,7 +1302,7 @@ func ExampleGlacier_SetVaultAccessPolicyRequest_shared00() {
 	}
 
 	req := svc.SetVaultAccessPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1350,7 +1351,7 @@ func ExampleGlacier_SetVaultNotificationsRequest_shared00() {
 	}
 
 	req := svc.SetVaultNotificationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1395,7 +1396,7 @@ func ExampleGlacier_UploadArchiveRequest_shared00() {
 	}
 
 	req := svc.UploadArchiveRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1443,7 +1444,7 @@ func ExampleGlacier_UploadMultipartPartRequest_shared00() {
 	}
 
 	req := svc.UploadMultipartPartRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

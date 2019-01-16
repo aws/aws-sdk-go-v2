@@ -3,6 +3,7 @@
 package dlm
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type CreateLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the CreateLifecyclePolicy API request.
-func (r CreateLifecyclePolicyRequest) Send() (*CreateLifecyclePolicyOutput, error) {
+func (r CreateLifecyclePolicyRequest) Send(ctx context.Context) (*CreateLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r CreateLifecyclePolicyRequest) Send() (*CreateLifecyclePolicyOutput, erro
 //
 //    // Example sending a request using the CreateLifecyclePolicyRequest method.
 //    req := client.CreateLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type DeleteLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
-func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, error) {
+func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, erro
 //
 //    // Example sending a request using the DeleteLifecyclePolicyRequest method.
 //    req := client.DeleteLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type GetLifecyclePoliciesRequest struct {
 }
 
 // Send marshals and sends the GetLifecyclePolicies API request.
-func (r GetLifecyclePoliciesRequest) Send() (*GetLifecyclePoliciesOutput, error) {
+func (r GetLifecyclePoliciesRequest) Send(ctx context.Context) (*GetLifecyclePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +145,7 @@ func (r GetLifecyclePoliciesRequest) Send() (*GetLifecyclePoliciesOutput, error)
 //
 //    // Example sending a request using the GetLifecyclePoliciesRequest method.
 //    req := client.GetLifecyclePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +179,8 @@ type GetLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the GetLifecyclePolicy API request.
-func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
+func (r GetLifecyclePolicyRequest) Send(ctx context.Context) (*GetLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +196,7 @@ func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
 //
 //    // Example sending a request using the GetLifecyclePolicyRequest method.
 //    req := client.GetLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +230,8 @@ type UpdateLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the UpdateLifecyclePolicy API request.
-func (r UpdateLifecyclePolicyRequest) Send() (*UpdateLifecyclePolicyOutput, error) {
+func (r UpdateLifecyclePolicyRequest) Send(ctx context.Context) (*UpdateLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -241,7 +247,7 @@ func (r UpdateLifecyclePolicyRequest) Send() (*UpdateLifecyclePolicyOutput, erro
 //
 //    // Example sending a request using the UpdateLifecyclePolicyRequest method.
 //    req := client.UpdateLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package applicationautoscaling_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -44,7 +45,7 @@ func ExampleApplicationAutoScaling_DeleteScalingPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteScalingPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -88,7 +89,7 @@ func ExampleApplicationAutoScaling_DeregisterScalableTargetRequest_shared00() {
 	}
 
 	req := svc.DeregisterScalableTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -129,7 +130,7 @@ func ExampleApplicationAutoScaling_DescribeScalableTargetsRequest_shared00() {
 	}
 
 	req := svc.DescribeScalableTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -173,7 +174,7 @@ func ExampleApplicationAutoScaling_DescribeScalingActivitiesRequest_shared00() {
 	}
 
 	req := svc.DescribeScalingActivitiesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -214,7 +215,7 @@ func ExampleApplicationAutoScaling_DescribeScalingPoliciesRequest_shared00() {
 	}
 
 	req := svc.DescribeScalingPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -273,7 +274,7 @@ func ExampleApplicationAutoScaling_PutScalingPolicyRequest_shared00() {
 	}
 
 	req := svc.PutScalingPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -335,7 +336,7 @@ func ExampleApplicationAutoScaling_PutScalingPolicyRequest_shared01() {
 	}
 
 	req := svc.PutScalingPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -387,7 +388,7 @@ func ExampleApplicationAutoScaling_RegisterScalableTargetRequest_shared00() {
 	}
 
 	req := svc.RegisterScalableTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -434,7 +435,7 @@ func ExampleApplicationAutoScaling_RegisterScalableTargetRequest_shared01() {
 	}
 
 	req := svc.RegisterScalableTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

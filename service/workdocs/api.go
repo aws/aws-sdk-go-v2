@@ -3,6 +3,7 @@
 package workdocs
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AbortDocumentVersionUploadRequest struct {
 }
 
 // Send marshals and sends the AbortDocumentVersionUpload API request.
-func (r AbortDocumentVersionUploadRequest) Send() (*AbortDocumentVersionUploadOutput, error) {
+func (r AbortDocumentVersionUploadRequest) Send(ctx context.Context) (*AbortDocumentVersionUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r AbortDocumentVersionUploadRequest) Send() (*AbortDocumentVersionUploadOu
 //
 //    // Example sending a request using the AbortDocumentVersionUploadRequest method.
 //    req := client.AbortDocumentVersionUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +78,8 @@ type ActivateUserRequest struct {
 }
 
 // Send marshals and sends the ActivateUser API request.
-func (r ActivateUserRequest) Send() (*ActivateUserOutput, error) {
+func (r ActivateUserRequest) Send(ctx context.Context) (*ActivateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,7 @@ func (r ActivateUserRequest) Send() (*ActivateUserOutput, error) {
 //
 //    // Example sending a request using the ActivateUserRequest method.
 //    req := client.ActivateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +129,8 @@ type AddResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the AddResourcePermissions API request.
-func (r AddResourcePermissionsRequest) Send() (*AddResourcePermissionsOutput, error) {
+func (r AddResourcePermissionsRequest) Send(ctx context.Context) (*AddResourcePermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r AddResourcePermissionsRequest) Send() (*AddResourcePermissionsOutput, er
 //
 //    // Example sending a request using the AddResourcePermissionsRequest method.
 //    req := client.AddResourcePermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type CreateCommentRequest struct {
 }
 
 // Send marshals and sends the CreateComment API request.
-func (r CreateCommentRequest) Send() (*CreateCommentOutput, error) {
+func (r CreateCommentRequest) Send(ctx context.Context) (*CreateCommentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +198,7 @@ func (r CreateCommentRequest) Send() (*CreateCommentOutput, error) {
 //
 //    // Example sending a request using the CreateCommentRequest method.
 //    req := client.CreateCommentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -227,7 +232,8 @@ type CreateCustomMetadataRequest struct {
 }
 
 // Send marshals and sends the CreateCustomMetadata API request.
-func (r CreateCustomMetadataRequest) Send() (*CreateCustomMetadataOutput, error) {
+func (r CreateCustomMetadataRequest) Send(ctx context.Context) (*CreateCustomMetadataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +250,7 @@ func (r CreateCustomMetadataRequest) Send() (*CreateCustomMetadataOutput, error)
 //
 //    // Example sending a request using the CreateCustomMetadataRequest method.
 //    req := client.CreateCustomMetadataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -278,7 +284,8 @@ type CreateFolderRequest struct {
 }
 
 // Send marshals and sends the CreateFolder API request.
-func (r CreateFolderRequest) Send() (*CreateFolderOutput, error) {
+func (r CreateFolderRequest) Send(ctx context.Context) (*CreateFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +301,7 @@ func (r CreateFolderRequest) Send() (*CreateFolderOutput, error) {
 //
 //    // Example sending a request using the CreateFolderRequest method.
 //    req := client.CreateFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -328,7 +335,8 @@ type CreateLabelsRequest struct {
 }
 
 // Send marshals and sends the CreateLabels API request.
-func (r CreateLabelsRequest) Send() (*CreateLabelsOutput, error) {
+func (r CreateLabelsRequest) Send(ctx context.Context) (*CreateLabelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -344,7 +352,7 @@ func (r CreateLabelsRequest) Send() (*CreateLabelsOutput, error) {
 //
 //    // Example sending a request using the CreateLabelsRequest method.
 //    req := client.CreateLabelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -378,7 +386,8 @@ type CreateNotificationSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateNotificationSubscription API request.
-func (r CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscriptionOutput, error) {
+func (r CreateNotificationSubscriptionRequest) Send(ctx context.Context) (*CreateNotificationSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +407,7 @@ func (r CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscr
 //
 //    // Example sending a request using the CreateNotificationSubscriptionRequest method.
 //    req := client.CreateNotificationSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +441,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -449,7 +459,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -483,7 +493,8 @@ type DeactivateUserRequest struct {
 }
 
 // Send marshals and sends the DeactivateUser API request.
-func (r DeactivateUserRequest) Send() (*DeactivateUserOutput, error) {
+func (r DeactivateUserRequest) Send(ctx context.Context) (*DeactivateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -500,7 +511,7 @@ func (r DeactivateUserRequest) Send() (*DeactivateUserOutput, error) {
 //
 //    // Example sending a request using the DeactivateUserRequest method.
 //    req := client.DeactivateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -536,7 +547,8 @@ type DeleteCommentRequest struct {
 }
 
 // Send marshals and sends the DeleteComment API request.
-func (r DeleteCommentRequest) Send() (*DeleteCommentOutput, error) {
+func (r DeleteCommentRequest) Send(ctx context.Context) (*DeleteCommentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -552,7 +564,7 @@ func (r DeleteCommentRequest) Send() (*DeleteCommentOutput, error) {
 //
 //    // Example sending a request using the DeleteCommentRequest method.
 //    req := client.DeleteCommentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -588,7 +600,8 @@ type DeleteCustomMetadataRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomMetadata API request.
-func (r DeleteCustomMetadataRequest) Send() (*DeleteCustomMetadataOutput, error) {
+func (r DeleteCustomMetadataRequest) Send(ctx context.Context) (*DeleteCustomMetadataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -604,7 +617,7 @@ func (r DeleteCustomMetadataRequest) Send() (*DeleteCustomMetadataOutput, error)
 //
 //    // Example sending a request using the DeleteCustomMetadataRequest method.
 //    req := client.DeleteCustomMetadataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -638,7 +651,8 @@ type DeleteDocumentRequest struct {
 }
 
 // Send marshals and sends the DeleteDocument API request.
-func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -654,7 +668,7 @@ func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
 //
 //    // Example sending a request using the DeleteDocumentRequest method.
 //    req := client.DeleteDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -690,7 +704,8 @@ type DeleteFolderRequest struct {
 }
 
 // Send marshals and sends the DeleteFolder API request.
-func (r DeleteFolderRequest) Send() (*DeleteFolderOutput, error) {
+func (r DeleteFolderRequest) Send(ctx context.Context) (*DeleteFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +721,7 @@ func (r DeleteFolderRequest) Send() (*DeleteFolderOutput, error) {
 //
 //    // Example sending a request using the DeleteFolderRequest method.
 //    req := client.DeleteFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -742,7 +757,8 @@ type DeleteFolderContentsRequest struct {
 }
 
 // Send marshals and sends the DeleteFolderContents API request.
-func (r DeleteFolderContentsRequest) Send() (*DeleteFolderContentsOutput, error) {
+func (r DeleteFolderContentsRequest) Send(ctx context.Context) (*DeleteFolderContentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +774,7 @@ func (r DeleteFolderContentsRequest) Send() (*DeleteFolderContentsOutput, error)
 //
 //    // Example sending a request using the DeleteFolderContentsRequest method.
 //    req := client.DeleteFolderContentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -794,7 +810,8 @@ type DeleteLabelsRequest struct {
 }
 
 // Send marshals and sends the DeleteLabels API request.
-func (r DeleteLabelsRequest) Send() (*DeleteLabelsOutput, error) {
+func (r DeleteLabelsRequest) Send(ctx context.Context) (*DeleteLabelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +827,7 @@ func (r DeleteLabelsRequest) Send() (*DeleteLabelsOutput, error) {
 //
 //    // Example sending a request using the DeleteLabelsRequest method.
 //    req := client.DeleteLabelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -844,7 +861,8 @@ type DeleteNotificationSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteNotificationSubscription API request.
-func (r DeleteNotificationSubscriptionRequest) Send() (*DeleteNotificationSubscriptionOutput, error) {
+func (r DeleteNotificationSubscriptionRequest) Send(ctx context.Context) (*DeleteNotificationSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -860,7 +878,7 @@ func (r DeleteNotificationSubscriptionRequest) Send() (*DeleteNotificationSubscr
 //
 //    // Example sending a request using the DeleteNotificationSubscriptionRequest method.
 //    req := client.DeleteNotificationSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -896,7 +914,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -912,7 +931,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -948,7 +967,8 @@ type DescribeActivitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeActivities API request.
-func (r DescribeActivitiesRequest) Send() (*DescribeActivitiesOutput, error) {
+func (r DescribeActivitiesRequest) Send(ctx context.Context) (*DescribeActivitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -964,7 +984,7 @@ func (r DescribeActivitiesRequest) Send() (*DescribeActivitiesOutput, error) {
 //
 //    // Example sending a request using the DescribeActivitiesRequest method.
 //    req := client.DescribeActivitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -998,7 +1018,8 @@ type DescribeCommentsRequest struct {
 }
 
 // Send marshals and sends the DescribeComments API request.
-func (r DescribeCommentsRequest) Send() (*DescribeCommentsOutput, error) {
+func (r DescribeCommentsRequest) Send(ctx context.Context) (*DescribeCommentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1014,7 +1035,7 @@ func (r DescribeCommentsRequest) Send() (*DescribeCommentsOutput, error) {
 //
 //    // Example sending a request using the DescribeCommentsRequest method.
 //    req := client.DescribeCommentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1048,7 +1069,8 @@ type DescribeDocumentVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentVersions API request.
-func (r DescribeDocumentVersionsRequest) Send() (*DescribeDocumentVersionsOutput, error) {
+func (r DescribeDocumentVersionsRequest) Send(ctx context.Context) (*DescribeDocumentVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1066,7 +1088,7 @@ func (r DescribeDocumentVersionsRequest) Send() (*DescribeDocumentVersionsOutput
 //
 //    // Example sending a request using the DescribeDocumentVersionsRequest method.
 //    req := client.DescribeDocumentVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1152,7 +1174,8 @@ type DescribeFolderContentsRequest struct {
 }
 
 // Send marshals and sends the DescribeFolderContents API request.
-func (r DescribeFolderContentsRequest) Send() (*DescribeFolderContentsOutput, error) {
+func (r DescribeFolderContentsRequest) Send(ctx context.Context) (*DescribeFolderContentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1174,7 +1197,7 @@ func (r DescribeFolderContentsRequest) Send() (*DescribeFolderContentsOutput, er
 //
 //    // Example sending a request using the DescribeFolderContentsRequest method.
 //    req := client.DescribeFolderContentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1260,7 +1283,8 @@ type DescribeGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeGroups API request.
-func (r DescribeGroupsRequest) Send() (*DescribeGroupsOutput, error) {
+func (r DescribeGroupsRequest) Send(ctx context.Context) (*DescribeGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1277,7 +1301,7 @@ func (r DescribeGroupsRequest) Send() (*DescribeGroupsOutput, error) {
 //
 //    // Example sending a request using the DescribeGroupsRequest method.
 //    req := client.DescribeGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1311,7 +1335,8 @@ type DescribeNotificationSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeNotificationSubscriptions API request.
-func (r DescribeNotificationSubscriptionsRequest) Send() (*DescribeNotificationSubscriptionsOutput, error) {
+func (r DescribeNotificationSubscriptionsRequest) Send(ctx context.Context) (*DescribeNotificationSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1327,7 +1352,7 @@ func (r DescribeNotificationSubscriptionsRequest) Send() (*DescribeNotificationS
 //
 //    // Example sending a request using the DescribeNotificationSubscriptionsRequest method.
 //    req := client.DescribeNotificationSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1361,7 +1386,8 @@ type DescribeResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the DescribeResourcePermissions API request.
-func (r DescribeResourcePermissionsRequest) Send() (*DescribeResourcePermissionsOutput, error) {
+func (r DescribeResourcePermissionsRequest) Send(ctx context.Context) (*DescribeResourcePermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1377,7 +1403,7 @@ func (r DescribeResourcePermissionsRequest) Send() (*DescribeResourcePermissions
 //
 //    // Example sending a request using the DescribeResourcePermissionsRequest method.
 //    req := client.DescribeResourcePermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1411,7 +1437,8 @@ type DescribeRootFoldersRequest struct {
 }
 
 // Send marshals and sends the DescribeRootFolders API request.
-func (r DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
+func (r DescribeRootFoldersRequest) Send(ctx context.Context) (*DescribeRootFoldersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1435,7 +1462,7 @@ func (r DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
 //
 //    // Example sending a request using the DescribeRootFoldersRequest method.
 //    req := client.DescribeRootFoldersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1469,7 +1496,8 @@ type DescribeUsersRequest struct {
 }
 
 // Send marshals and sends the DescribeUsers API request.
-func (r DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
+func (r DescribeUsersRequest) Send(ctx context.Context) (*DescribeUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1490,7 +1518,7 @@ func (r DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
 //
 //    // Example sending a request using the DescribeUsersRequest method.
 //    req := client.DescribeUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1576,7 +1604,8 @@ type GetCurrentUserRequest struct {
 }
 
 // Send marshals and sends the GetCurrentUser API request.
-func (r GetCurrentUserRequest) Send() (*GetCurrentUserOutput, error) {
+func (r GetCurrentUserRequest) Send(ctx context.Context) (*GetCurrentUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1593,7 +1622,7 @@ func (r GetCurrentUserRequest) Send() (*GetCurrentUserOutput, error) {
 //
 //    // Example sending a request using the GetCurrentUserRequest method.
 //    req := client.GetCurrentUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1627,7 +1656,8 @@ type GetDocumentRequest struct {
 }
 
 // Send marshals and sends the GetDocument API request.
-func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+func (r GetDocumentRequest) Send(ctx context.Context) (*GetDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1643,7 +1673,7 @@ func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
 //
 //    // Example sending a request using the GetDocumentRequest method.
 //    req := client.GetDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1677,7 +1707,8 @@ type GetDocumentPathRequest struct {
 }
 
 // Send marshals and sends the GetDocumentPath API request.
-func (r GetDocumentPathRequest) Send() (*GetDocumentPathOutput, error) {
+func (r GetDocumentPathRequest) Send(ctx context.Context) (*GetDocumentPathOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1699,7 +1730,7 @@ func (r GetDocumentPathRequest) Send() (*GetDocumentPathOutput, error) {
 //
 //    // Example sending a request using the GetDocumentPathRequest method.
 //    req := client.GetDocumentPathRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1733,7 +1764,8 @@ type GetDocumentVersionRequest struct {
 }
 
 // Send marshals and sends the GetDocumentVersion API request.
-func (r GetDocumentVersionRequest) Send() (*GetDocumentVersionOutput, error) {
+func (r GetDocumentVersionRequest) Send(ctx context.Context) (*GetDocumentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1749,7 +1781,7 @@ func (r GetDocumentVersionRequest) Send() (*GetDocumentVersionOutput, error) {
 //
 //    // Example sending a request using the GetDocumentVersionRequest method.
 //    req := client.GetDocumentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1783,7 +1815,8 @@ type GetFolderRequest struct {
 }
 
 // Send marshals and sends the GetFolder API request.
-func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
+func (r GetFolderRequest) Send(ctx context.Context) (*GetFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1799,7 +1832,7 @@ func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
 //
 //    // Example sending a request using the GetFolderRequest method.
 //    req := client.GetFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1833,7 +1866,8 @@ type GetFolderPathRequest struct {
 }
 
 // Send marshals and sends the GetFolderPath API request.
-func (r GetFolderPathRequest) Send() (*GetFolderPathOutput, error) {
+func (r GetFolderPathRequest) Send(ctx context.Context) (*GetFolderPathOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1855,7 +1889,7 @@ func (r GetFolderPathRequest) Send() (*GetFolderPathOutput, error) {
 //
 //    // Example sending a request using the GetFolderPathRequest method.
 //    req := client.GetFolderPathRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1889,7 +1923,8 @@ type GetResourcesRequest struct {
 }
 
 // Send marshals and sends the GetResources API request.
-func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
+func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1906,7 +1941,7 @@ func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
 //
 //    // Example sending a request using the GetResourcesRequest method.
 //    req := client.GetResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1940,7 +1975,8 @@ type InitiateDocumentVersionUploadRequest struct {
 }
 
 // Send marshals and sends the InitiateDocumentVersionUpload API request.
-func (r InitiateDocumentVersionUploadRequest) Send() (*InitiateDocumentVersionUploadOutput, error) {
+func (r InitiateDocumentVersionUploadRequest) Send(ctx context.Context) (*InitiateDocumentVersionUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1963,7 +1999,7 @@ func (r InitiateDocumentVersionUploadRequest) Send() (*InitiateDocumentVersionUp
 //
 //    // Example sending a request using the InitiateDocumentVersionUploadRequest method.
 //    req := client.InitiateDocumentVersionUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1997,7 +2033,8 @@ type RemoveAllResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the RemoveAllResourcePermissions API request.
-func (r RemoveAllResourcePermissionsRequest) Send() (*RemoveAllResourcePermissionsOutput, error) {
+func (r RemoveAllResourcePermissionsRequest) Send(ctx context.Context) (*RemoveAllResourcePermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2013,7 +2050,7 @@ func (r RemoveAllResourcePermissionsRequest) Send() (*RemoveAllResourcePermissio
 //
 //    // Example sending a request using the RemoveAllResourcePermissionsRequest method.
 //    req := client.RemoveAllResourcePermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2049,7 +2086,8 @@ type RemoveResourcePermissionRequest struct {
 }
 
 // Send marshals and sends the RemoveResourcePermission API request.
-func (r RemoveResourcePermissionRequest) Send() (*RemoveResourcePermissionOutput, error) {
+func (r RemoveResourcePermissionRequest) Send(ctx context.Context) (*RemoveResourcePermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2065,7 +2103,7 @@ func (r RemoveResourcePermissionRequest) Send() (*RemoveResourcePermissionOutput
 //
 //    // Example sending a request using the RemoveResourcePermissionRequest method.
 //    req := client.RemoveResourcePermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2101,7 +2139,8 @@ type UpdateDocumentRequest struct {
 }
 
 // Send marshals and sends the UpdateDocument API request.
-func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+func (r UpdateDocumentRequest) Send(ctx context.Context) (*UpdateDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2118,7 +2157,7 @@ func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
 //
 //    // Example sending a request using the UpdateDocumentRequest method.
 //    req := client.UpdateDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2154,7 +2193,8 @@ type UpdateDocumentVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentVersion API request.
-func (r UpdateDocumentVersionRequest) Send() (*UpdateDocumentVersionOutput, error) {
+func (r UpdateDocumentVersionRequest) Send(ctx context.Context) (*UpdateDocumentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2174,7 +2214,7 @@ func (r UpdateDocumentVersionRequest) Send() (*UpdateDocumentVersionOutput, erro
 //
 //    // Example sending a request using the UpdateDocumentVersionRequest method.
 //    req := client.UpdateDocumentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2210,7 +2250,8 @@ type UpdateFolderRequest struct {
 }
 
 // Send marshals and sends the UpdateFolder API request.
-func (r UpdateFolderRequest) Send() (*UpdateFolderOutput, error) {
+func (r UpdateFolderRequest) Send(ctx context.Context) (*UpdateFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2227,7 +2268,7 @@ func (r UpdateFolderRequest) Send() (*UpdateFolderOutput, error) {
 //
 //    // Example sending a request using the UpdateFolderRequest method.
 //    req := client.UpdateFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2263,7 +2304,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2280,7 +2322,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

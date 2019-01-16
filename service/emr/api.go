@@ -3,6 +3,7 @@
 package emr
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddInstanceFleetRequest struct {
 }
 
 // Send marshals and sends the AddInstanceFleet API request.
-func (r AddInstanceFleetRequest) Send() (*AddInstanceFleetOutput, error) {
+func (r AddInstanceFleetRequest) Send(ctx context.Context) (*AddInstanceFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r AddInstanceFleetRequest) Send() (*AddInstanceFleetOutput, error) {
 //
 //    // Example sending a request using the AddInstanceFleetRequest method.
 //    req := client.AddInstanceFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type AddInstanceGroupsRequest struct {
 }
 
 // Send marshals and sends the AddInstanceGroups API request.
-func (r AddInstanceGroupsRequest) Send() (*AddInstanceGroupsOutput, error) {
+func (r AddInstanceGroupsRequest) Send(ctx context.Context) (*AddInstanceGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -91,7 +94,7 @@ func (r AddInstanceGroupsRequest) Send() (*AddInstanceGroupsOutput, error) {
 //
 //    // Example sending a request using the AddInstanceGroupsRequest method.
 //    req := client.AddInstanceGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -125,7 +128,8 @@ type AddJobFlowStepsRequest struct {
 }
 
 // Send marshals and sends the AddJobFlowSteps API request.
-func (r AddJobFlowStepsRequest) Send() (*AddJobFlowStepsOutput, error) {
+func (r AddJobFlowStepsRequest) Send(ctx context.Context) (*AddJobFlowStepsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -163,7 +167,7 @@ func (r AddJobFlowStepsRequest) Send() (*AddJobFlowStepsOutput, error) {
 //
 //    // Example sending a request using the AddJobFlowStepsRequest method.
 //    req := client.AddJobFlowStepsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -197,7 +201,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -215,7 +220,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -249,7 +254,8 @@ type CancelStepsRequest struct {
 }
 
 // Send marshals and sends the CancelSteps API request.
-func (r CancelStepsRequest) Send() (*CancelStepsOutput, error) {
+func (r CancelStepsRequest) Send(ctx context.Context) (*CancelStepsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -269,7 +275,7 @@ func (r CancelStepsRequest) Send() (*CancelStepsOutput, error) {
 //
 //    // Example sending a request using the CancelStepsRequest method.
 //    req := client.CancelStepsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -303,7 +309,8 @@ type CreateSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateSecurityConfiguration API request.
-func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfigurationOutput, error) {
+func (r CreateSecurityConfigurationRequest) Send(ctx context.Context) (*CreateSecurityConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -320,7 +327,7 @@ func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfiguration
 //
 //    // Example sending a request using the CreateSecurityConfigurationRequest method.
 //    req := client.CreateSecurityConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -354,7 +361,8 @@ type DeleteSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteSecurityConfiguration API request.
-func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfigurationOutput, error) {
+func (r DeleteSecurityConfigurationRequest) Send(ctx context.Context) (*DeleteSecurityConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -370,7 +378,7 @@ func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfiguration
 //
 //    // Example sending a request using the DeleteSecurityConfigurationRequest method.
 //    req := client.DeleteSecurityConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -404,7 +412,8 @@ type DescribeClusterRequest struct {
 }
 
 // Send marshals and sends the DescribeCluster API request.
-func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+func (r DescribeClusterRequest) Send(ctx context.Context) (*DescribeClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -421,7 +430,7 @@ func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
 //
 //    // Example sending a request using the DescribeClusterRequest method.
 //    req := client.DescribeClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -455,7 +464,8 @@ type DescribeJobFlowsRequest struct {
 }
 
 // Send marshals and sends the DescribeJobFlows API request.
-func (r DescribeJobFlowsRequest) Send() (*DescribeJobFlowsOutput, error) {
+func (r DescribeJobFlowsRequest) Send(ctx context.Context) (*DescribeJobFlowsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -490,7 +500,7 @@ func (r DescribeJobFlowsRequest) Send() (*DescribeJobFlowsOutput, error) {
 //
 //    // Example sending a request using the DescribeJobFlowsRequest method.
 //    req := client.DescribeJobFlowsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -527,7 +537,8 @@ type DescribeSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the DescribeSecurityConfiguration API request.
-func (r DescribeSecurityConfigurationRequest) Send() (*DescribeSecurityConfigurationOutput, error) {
+func (r DescribeSecurityConfigurationRequest) Send(ctx context.Context) (*DescribeSecurityConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -544,7 +555,7 @@ func (r DescribeSecurityConfigurationRequest) Send() (*DescribeSecurityConfigura
 //
 //    // Example sending a request using the DescribeSecurityConfigurationRequest method.
 //    req := client.DescribeSecurityConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -578,7 +589,8 @@ type DescribeStepRequest struct {
 }
 
 // Send marshals and sends the DescribeStep API request.
-func (r DescribeStepRequest) Send() (*DescribeStepOutput, error) {
+func (r DescribeStepRequest) Send(ctx context.Context) (*DescribeStepOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -594,7 +606,7 @@ func (r DescribeStepRequest) Send() (*DescribeStepOutput, error) {
 //
 //    // Example sending a request using the DescribeStepRequest method.
 //    req := client.DescribeStepRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -628,7 +640,8 @@ type ListBootstrapActionsRequest struct {
 }
 
 // Send marshals and sends the ListBootstrapActions API request.
-func (r ListBootstrapActionsRequest) Send() (*ListBootstrapActionsOutput, error) {
+func (r ListBootstrapActionsRequest) Send(ctx context.Context) (*ListBootstrapActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -644,7 +657,7 @@ func (r ListBootstrapActionsRequest) Send() (*ListBootstrapActionsOutput, error)
 //
 //    // Example sending a request using the ListBootstrapActionsRequest method.
 //    req := client.ListBootstrapActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -730,7 +743,8 @@ type ListClustersRequest struct {
 }
 
 // Send marshals and sends the ListClusters API request.
-func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
+func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -750,7 +764,7 @@ func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
 //
 //    // Example sending a request using the ListClustersRequest method.
 //    req := client.ListClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -836,7 +850,8 @@ type ListInstanceFleetsRequest struct {
 }
 
 // Send marshals and sends the ListInstanceFleets API request.
-func (r ListInstanceFleetsRequest) Send() (*ListInstanceFleetsOutput, error) {
+func (r ListInstanceFleetsRequest) Send(ctx context.Context) (*ListInstanceFleetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -855,7 +870,7 @@ func (r ListInstanceFleetsRequest) Send() (*ListInstanceFleetsOutput, error) {
 //
 //    // Example sending a request using the ListInstanceFleetsRequest method.
 //    req := client.ListInstanceFleetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -941,7 +956,8 @@ type ListInstanceGroupsRequest struct {
 }
 
 // Send marshals and sends the ListInstanceGroups API request.
-func (r ListInstanceGroupsRequest) Send() (*ListInstanceGroupsOutput, error) {
+func (r ListInstanceGroupsRequest) Send(ctx context.Context) (*ListInstanceGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -957,7 +973,7 @@ func (r ListInstanceGroupsRequest) Send() (*ListInstanceGroupsOutput, error) {
 //
 //    // Example sending a request using the ListInstanceGroupsRequest method.
 //    req := client.ListInstanceGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1043,7 +1059,8 @@ type ListInstancesRequest struct {
 }
 
 // Send marshals and sends the ListInstances API request.
-func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
+func (r ListInstancesRequest) Send(ctx context.Context) (*ListInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1062,7 +1079,7 @@ func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
 //
 //    // Example sending a request using the ListInstancesRequest method.
 //    req := client.ListInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1148,7 +1165,8 @@ type ListSecurityConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListSecurityConfigurations API request.
-func (r ListSecurityConfigurationsRequest) Send() (*ListSecurityConfigurationsOutput, error) {
+func (r ListSecurityConfigurationsRequest) Send(ctx context.Context) (*ListSecurityConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1167,7 +1185,7 @@ func (r ListSecurityConfigurationsRequest) Send() (*ListSecurityConfigurationsOu
 //
 //    // Example sending a request using the ListSecurityConfigurationsRequest method.
 //    req := client.ListSecurityConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1201,7 +1219,8 @@ type ListStepsRequest struct {
 }
 
 // Send marshals and sends the ListSteps API request.
-func (r ListStepsRequest) Send() (*ListStepsOutput, error) {
+func (r ListStepsRequest) Send(ctx context.Context) (*ListStepsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1218,7 +1237,7 @@ func (r ListStepsRequest) Send() (*ListStepsOutput, error) {
 //
 //    // Example sending a request using the ListStepsRequest method.
 //    req := client.ListStepsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1304,7 +1323,8 @@ type ModifyInstanceFleetRequest struct {
 }
 
 // Send marshals and sends the ModifyInstanceFleet API request.
-func (r ModifyInstanceFleetRequest) Send() (*ModifyInstanceFleetOutput, error) {
+func (r ModifyInstanceFleetRequest) Send(ctx context.Context) (*ModifyInstanceFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1325,7 +1345,7 @@ func (r ModifyInstanceFleetRequest) Send() (*ModifyInstanceFleetOutput, error) {
 //
 //    // Example sending a request using the ModifyInstanceFleetRequest method.
 //    req := client.ModifyInstanceFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1361,7 +1381,8 @@ type ModifyInstanceGroupsRequest struct {
 }
 
 // Send marshals and sends the ModifyInstanceGroups API request.
-func (r ModifyInstanceGroupsRequest) Send() (*ModifyInstanceGroupsOutput, error) {
+func (r ModifyInstanceGroupsRequest) Send(ctx context.Context) (*ModifyInstanceGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1380,7 +1401,7 @@ func (r ModifyInstanceGroupsRequest) Send() (*ModifyInstanceGroupsOutput, error)
 //
 //    // Example sending a request using the ModifyInstanceGroupsRequest method.
 //    req := client.ModifyInstanceGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1416,7 +1437,8 @@ type PutAutoScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the PutAutoScalingPolicy API request.
-func (r PutAutoScalingPolicyRequest) Send() (*PutAutoScalingPolicyOutput, error) {
+func (r PutAutoScalingPolicyRequest) Send(ctx context.Context) (*PutAutoScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1435,7 +1457,7 @@ func (r PutAutoScalingPolicyRequest) Send() (*PutAutoScalingPolicyOutput, error)
 //
 //    // Example sending a request using the PutAutoScalingPolicyRequest method.
 //    req := client.PutAutoScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1469,7 +1491,8 @@ type RemoveAutoScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the RemoveAutoScalingPolicy API request.
-func (r RemoveAutoScalingPolicyRequest) Send() (*RemoveAutoScalingPolicyOutput, error) {
+func (r RemoveAutoScalingPolicyRequest) Send(ctx context.Context) (*RemoveAutoScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1486,7 +1509,7 @@ func (r RemoveAutoScalingPolicyRequest) Send() (*RemoveAutoScalingPolicyOutput, 
 //
 //    // Example sending a request using the RemoveAutoScalingPolicyRequest method.
 //    req := client.RemoveAutoScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1520,7 +1543,8 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1540,7 +1564,7 @@ func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsRequest method.
 //    req := client.RemoveTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1574,7 +1598,8 @@ type RunJobFlowRequest struct {
 }
 
 // Send marshals and sends the RunJobFlow API request.
-func (r RunJobFlowRequest) Send() (*RunJobFlowOutput, error) {
+func (r RunJobFlowRequest) Send(ctx context.Context) (*RunJobFlowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1616,7 +1641,7 @@ func (r RunJobFlowRequest) Send() (*RunJobFlowOutput, error) {
 //
 //    // Example sending a request using the RunJobFlowRequest method.
 //    req := client.RunJobFlowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1650,7 +1675,8 @@ type SetTerminationProtectionRequest struct {
 }
 
 // Send marshals and sends the SetTerminationProtection API request.
-func (r SetTerminationProtectionRequest) Send() (*SetTerminationProtectionOutput, error) {
+func (r SetTerminationProtectionRequest) Send(ctx context.Context) (*SetTerminationProtectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1682,7 +1708,7 @@ func (r SetTerminationProtectionRequest) Send() (*SetTerminationProtectionOutput
 //
 //    // Example sending a request using the SetTerminationProtectionRequest method.
 //    req := client.SetTerminationProtectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1718,7 +1744,8 @@ type SetVisibleToAllUsersRequest struct {
 }
 
 // Send marshals and sends the SetVisibleToAllUsers API request.
-func (r SetVisibleToAllUsersRequest) Send() (*SetVisibleToAllUsersOutput, error) {
+func (r SetVisibleToAllUsersRequest) Send(ctx context.Context) (*SetVisibleToAllUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1739,7 +1766,7 @@ func (r SetVisibleToAllUsersRequest) Send() (*SetVisibleToAllUsersOutput, error)
 //
 //    // Example sending a request using the SetVisibleToAllUsersRequest method.
 //    req := client.SetVisibleToAllUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1775,7 +1802,8 @@ type TerminateJobFlowsRequest struct {
 }
 
 // Send marshals and sends the TerminateJobFlows API request.
-func (r TerminateJobFlowsRequest) Send() (*TerminateJobFlowsOutput, error) {
+func (r TerminateJobFlowsRequest) Send(ctx context.Context) (*TerminateJobFlowsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1800,7 +1828,7 @@ func (r TerminateJobFlowsRequest) Send() (*TerminateJobFlowsOutput, error) {
 //
 //    // Example sending a request using the TerminateJobFlowsRequest method.
 //    req := client.TerminateJobFlowsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package cloudwatch
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type DeleteAlarmsRequest struct {
 }
 
 // Send marshals and sends the DeleteAlarms API request.
-func (r DeleteAlarmsRequest) Send() (*DeleteAlarmsOutput, error) {
+func (r DeleteAlarmsRequest) Send(ctx context.Context) (*DeleteAlarmsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r DeleteAlarmsRequest) Send() (*DeleteAlarmsOutput, error) {
 //
 //    // Example sending a request using the DeleteAlarmsRequest method.
 //    req := client.DeleteAlarmsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -74,7 +76,8 @@ type DeleteDashboardsRequest struct {
 }
 
 // Send marshals and sends the DeleteDashboards API request.
-func (r DeleteDashboardsRequest) Send() (*DeleteDashboardsOutput, error) {
+func (r DeleteDashboardsRequest) Send(ctx context.Context) (*DeleteDashboardsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -91,7 +94,7 @@ func (r DeleteDashboardsRequest) Send() (*DeleteDashboardsOutput, error) {
 //
 //    // Example sending a request using the DeleteDashboardsRequest method.
 //    req := client.DeleteDashboardsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -125,7 +128,8 @@ type DescribeAlarmHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeAlarmHistory API request.
-func (r DescribeAlarmHistoryRequest) Send() (*DescribeAlarmHistoryOutput, error) {
+func (r DescribeAlarmHistoryRequest) Send(ctx context.Context) (*DescribeAlarmHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -145,7 +149,7 @@ func (r DescribeAlarmHistoryRequest) Send() (*DescribeAlarmHistoryOutput, error)
 //
 //    // Example sending a request using the DescribeAlarmHistoryRequest method.
 //    req := client.DescribeAlarmHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -231,7 +235,8 @@ type DescribeAlarmsRequest struct {
 }
 
 // Send marshals and sends the DescribeAlarms API request.
-func (r DescribeAlarmsRequest) Send() (*DescribeAlarmsOutput, error) {
+func (r DescribeAlarmsRequest) Send(ctx context.Context) (*DescribeAlarmsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +254,7 @@ func (r DescribeAlarmsRequest) Send() (*DescribeAlarmsOutput, error) {
 //
 //    // Example sending a request using the DescribeAlarmsRequest method.
 //    req := client.DescribeAlarmsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -335,7 +340,8 @@ type DescribeAlarmsForMetricRequest struct {
 }
 
 // Send marshals and sends the DescribeAlarmsForMetric API request.
-func (r DescribeAlarmsForMetricRequest) Send() (*DescribeAlarmsForMetricOutput, error) {
+func (r DescribeAlarmsForMetricRequest) Send(ctx context.Context) (*DescribeAlarmsForMetricOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -352,7 +358,7 @@ func (r DescribeAlarmsForMetricRequest) Send() (*DescribeAlarmsForMetricOutput, 
 //
 //    // Example sending a request using the DescribeAlarmsForMetricRequest method.
 //    req := client.DescribeAlarmsForMetricRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -386,7 +392,8 @@ type DisableAlarmActionsRequest struct {
 }
 
 // Send marshals and sends the DisableAlarmActions API request.
-func (r DisableAlarmActionsRequest) Send() (*DisableAlarmActionsOutput, error) {
+func (r DisableAlarmActionsRequest) Send(ctx context.Context) (*DisableAlarmActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -403,7 +410,7 @@ func (r DisableAlarmActionsRequest) Send() (*DisableAlarmActionsOutput, error) {
 //
 //    // Example sending a request using the DisableAlarmActionsRequest method.
 //    req := client.DisableAlarmActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -439,7 +446,8 @@ type EnableAlarmActionsRequest struct {
 }
 
 // Send marshals and sends the EnableAlarmActions API request.
-func (r EnableAlarmActionsRequest) Send() (*EnableAlarmActionsOutput, error) {
+func (r EnableAlarmActionsRequest) Send(ctx context.Context) (*EnableAlarmActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -455,7 +463,7 @@ func (r EnableAlarmActionsRequest) Send() (*EnableAlarmActionsOutput, error) {
 //
 //    // Example sending a request using the EnableAlarmActionsRequest method.
 //    req := client.EnableAlarmActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -491,7 +499,8 @@ type GetDashboardRequest struct {
 }
 
 // Send marshals and sends the GetDashboard API request.
-func (r GetDashboardRequest) Send() (*GetDashboardOutput, error) {
+func (r GetDashboardRequest) Send(ctx context.Context) (*GetDashboardOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -511,7 +520,7 @@ func (r GetDashboardRequest) Send() (*GetDashboardOutput, error) {
 //
 //    // Example sending a request using the GetDashboardRequest method.
 //    req := client.GetDashboardRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -545,7 +554,8 @@ type GetMetricDataRequest struct {
 }
 
 // Send marshals and sends the GetMetricData API request.
-func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
+func (r GetMetricDataRequest) Send(ctx context.Context) (*GetMetricDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -595,7 +605,7 @@ func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
 //
 //    // Example sending a request using the GetMetricDataRequest method.
 //    req := client.GetMetricDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -629,7 +639,8 @@ type GetMetricStatisticsRequest struct {
 }
 
 // Send marshals and sends the GetMetricStatistics API request.
-func (r GetMetricStatisticsRequest) Send() (*GetMetricStatisticsOutput, error) {
+func (r GetMetricStatisticsRequest) Send(ctx context.Context) (*GetMetricStatisticsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -698,7 +709,7 @@ func (r GetMetricStatisticsRequest) Send() (*GetMetricStatisticsOutput, error) {
 //
 //    // Example sending a request using the GetMetricStatisticsRequest method.
 //    req := client.GetMetricStatisticsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -732,7 +743,8 @@ type GetMetricWidgetImageRequest struct {
 }
 
 // Send marshals and sends the GetMetricWidgetImage API request.
-func (r GetMetricWidgetImageRequest) Send() (*GetMetricWidgetImageOutput, error) {
+func (r GetMetricWidgetImageRequest) Send(ctx context.Context) (*GetMetricWidgetImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -762,7 +774,7 @@ func (r GetMetricWidgetImageRequest) Send() (*GetMetricWidgetImageOutput, error)
 //
 //    // Example sending a request using the GetMetricWidgetImageRequest method.
 //    req := client.GetMetricWidgetImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +808,8 @@ type ListDashboardsRequest struct {
 }
 
 // Send marshals and sends the ListDashboards API request.
-func (r ListDashboardsRequest) Send() (*ListDashboardsOutput, error) {
+func (r ListDashboardsRequest) Send(ctx context.Context) (*ListDashboardsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -818,7 +831,7 @@ func (r ListDashboardsRequest) Send() (*ListDashboardsOutput, error) {
 //
 //    // Example sending a request using the ListDashboardsRequest method.
 //    req := client.ListDashboardsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -852,7 +865,8 @@ type ListMetricsRequest struct {
 }
 
 // Send marshals and sends the ListMetrics API request.
-func (r ListMetricsRequest) Send() (*ListMetricsOutput, error) {
+func (r ListMetricsRequest) Send(ctx context.Context) (*ListMetricsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -876,7 +890,7 @@ func (r ListMetricsRequest) Send() (*ListMetricsOutput, error) {
 //
 //    // Example sending a request using the ListMetricsRequest method.
 //    req := client.ListMetricsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -962,7 +976,8 @@ type PutDashboardRequest struct {
 }
 
 // Send marshals and sends the PutDashboard API request.
-func (r PutDashboardRequest) Send() (*PutDashboardOutput, error) {
+func (r PutDashboardRequest) Send(ctx context.Context) (*PutDashboardOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -996,7 +1011,7 @@ func (r PutDashboardRequest) Send() (*PutDashboardOutput, error) {
 //
 //    // Example sending a request using the PutDashboardRequest method.
 //    req := client.PutDashboardRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1030,7 +1045,8 @@ type PutMetricAlarmRequest struct {
 }
 
 // Send marshals and sends the PutMetricAlarm API request.
-func (r PutMetricAlarmRequest) Send() (*PutMetricAlarmOutput, error) {
+func (r PutMetricAlarmRequest) Send(ctx context.Context) (*PutMetricAlarmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1087,7 +1103,7 @@ func (r PutMetricAlarmRequest) Send() (*PutMetricAlarmOutput, error) {
 //
 //    // Example sending a request using the PutMetricAlarmRequest method.
 //    req := client.PutMetricAlarmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1123,7 +1139,8 @@ type PutMetricDataRequest struct {
 }
 
 // Send marshals and sends the PutMetricData API request.
-func (r PutMetricDataRequest) Send() (*PutMetricDataOutput, error) {
+func (r PutMetricDataRequest) Send(ctx context.Context) (*PutMetricDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1177,7 +1194,7 @@ func (r PutMetricDataRequest) Send() (*PutMetricDataOutput, error) {
 //
 //    // Example sending a request using the PutMetricDataRequest method.
 //    req := client.PutMetricDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1213,7 +1230,8 @@ type SetAlarmStateRequest struct {
 }
 
 // Send marshals and sends the SetAlarmState API request.
-func (r SetAlarmStateRequest) Send() (*SetAlarmStateOutput, error) {
+func (r SetAlarmStateRequest) Send(ctx context.Context) (*SetAlarmStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1236,7 +1254,7 @@ func (r SetAlarmStateRequest) Send() (*SetAlarmStateOutput, error) {
 //
 //    // Example sending a request using the SetAlarmStateRequest method.
 //    req := client.SetAlarmStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

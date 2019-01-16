@@ -3,6 +3,7 @@
 package marketplacecommerceanalytics
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type GenerateDataSetRequest struct {
 }
 
 // Send marshals and sends the GenerateDataSet API request.
-func (r GenerateDataSetRequest) Send() (*GenerateDataSetOutput, error) {
+func (r GenerateDataSetRequest) Send(ctx context.Context) (*GenerateDataSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -44,7 +46,7 @@ func (r GenerateDataSetRequest) Send() (*GenerateDataSetOutput, error) {
 //
 //    // Example sending a request using the GenerateDataSetRequest method.
 //    req := client.GenerateDataSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +80,8 @@ type StartSupportDataExportRequest struct {
 }
 
 // Send marshals and sends the StartSupportDataExport API request.
-func (r StartSupportDataExportRequest) Send() (*StartSupportDataExportOutput, error) {
+func (r StartSupportDataExportRequest) Send(ctx context.Context) (*StartSupportDataExportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -104,7 +107,7 @@ func (r StartSupportDataExportRequest) Send() (*StartSupportDataExportOutput, er
 //
 //    // Example sending a request using the StartSupportDataExportRequest method.
 //    req := client.StartSupportDataExportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

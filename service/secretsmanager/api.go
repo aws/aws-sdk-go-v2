@@ -3,6 +3,7 @@
 package secretsmanager
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CancelRotateSecretRequest struct {
 }
 
 // Send marshals and sends the CancelRotateSecret API request.
-func (r CancelRotateSecretRequest) Send() (*CancelRotateSecretOutput, error) {
+func (r CancelRotateSecretRequest) Send(ctx context.Context) (*CancelRotateSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -79,7 +81,7 @@ func (r CancelRotateSecretRequest) Send() (*CancelRotateSecretOutput, error) {
 //
 //    // Example sending a request using the CancelRotateSecretRequest method.
 //    req := client.CancelRotateSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -113,7 +115,8 @@ type CreateSecretRequest struct {
 }
 
 // Send marshals and sends the CreateSecret API request.
-func (r CreateSecretRequest) Send() (*CreateSecretOutput, error) {
+func (r CreateSecretRequest) Send(ctx context.Context) (*CreateSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +204,7 @@ func (r CreateSecretRequest) Send() (*CreateSecretOutput, error) {
 //
 //    // Example sending a request using the CreateSecretRequest method.
 //    req := client.CreateSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -235,7 +238,8 @@ type DeleteResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
-func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
+func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,7 +270,7 @@ func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error)
 //
 //    // Example sending a request using the DeleteResourcePolicyRequest method.
 //    req := client.DeleteResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -300,7 +304,8 @@ type DeleteSecretRequest struct {
 }
 
 // Send marshals and sends the DeleteSecret API request.
-func (r DeleteSecretRequest) Send() (*DeleteSecretOutput, error) {
+func (r DeleteSecretRequest) Send(ctx context.Context) (*DeleteSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -351,7 +356,7 @@ func (r DeleteSecretRequest) Send() (*DeleteSecretOutput, error) {
 //
 //    // Example sending a request using the DeleteSecretRequest method.
 //    req := client.DeleteSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -385,7 +390,8 @@ type DescribeSecretRequest struct {
 }
 
 // Send marshals and sends the DescribeSecret API request.
-func (r DescribeSecretRequest) Send() (*DescribeSecretOutput, error) {
+func (r DescribeSecretRequest) Send(ctx context.Context) (*DescribeSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -419,7 +425,7 @@ func (r DescribeSecretRequest) Send() (*DescribeSecretOutput, error) {
 //
 //    // Example sending a request using the DescribeSecretRequest method.
 //    req := client.DescribeSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -453,7 +459,8 @@ type GetRandomPasswordRequest struct {
 }
 
 // Send marshals and sends the GetRandomPassword API request.
-func (r GetRandomPasswordRequest) Send() (*GetRandomPasswordOutput, error) {
+func (r GetRandomPasswordRequest) Send(ctx context.Context) (*GetRandomPasswordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -478,7 +485,7 @@ func (r GetRandomPasswordRequest) Send() (*GetRandomPasswordOutput, error) {
 //
 //    // Example sending a request using the GetRandomPasswordRequest method.
 //    req := client.GetRandomPasswordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -512,7 +519,8 @@ type GetResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the GetResourcePolicy API request.
-func (r GetResourcePolicyRequest) Send() (*GetResourcePolicyOutput, error) {
+func (r GetResourcePolicyRequest) Send(ctx context.Context) (*GetResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -546,7 +554,7 @@ func (r GetResourcePolicyRequest) Send() (*GetResourcePolicyOutput, error) {
 //
 //    // Example sending a request using the GetResourcePolicyRequest method.
 //    req := client.GetResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -580,7 +588,8 @@ type GetSecretValueRequest struct {
 }
 
 // Send marshals and sends the GetSecretValue API request.
-func (r GetSecretValueRequest) Send() (*GetSecretValueOutput, error) {
+func (r GetSecretValueRequest) Send(ctx context.Context) (*GetSecretValueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -614,7 +623,7 @@ func (r GetSecretValueRequest) Send() (*GetSecretValueOutput, error) {
 //
 //    // Example sending a request using the GetSecretValueRequest method.
 //    req := client.GetSecretValueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -648,7 +657,8 @@ type ListSecretVersionIdsRequest struct {
 }
 
 // Send marshals and sends the ListSecretVersionIds API request.
-func (r ListSecretVersionIdsRequest) Send() (*ListSecretVersionIdsOutput, error) {
+func (r ListSecretVersionIdsRequest) Send(ctx context.Context) (*ListSecretVersionIdsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -683,7 +693,7 @@ func (r ListSecretVersionIdsRequest) Send() (*ListSecretVersionIdsOutput, error)
 //
 //    // Example sending a request using the ListSecretVersionIdsRequest method.
 //    req := client.ListSecretVersionIdsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -769,7 +779,8 @@ type ListSecretsRequest struct {
 }
 
 // Send marshals and sends the ListSecrets API request.
-func (r ListSecretsRequest) Send() (*ListSecretsOutput, error) {
+func (r ListSecretsRequest) Send(ctx context.Context) (*ListSecretsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -804,7 +815,7 @@ func (r ListSecretsRequest) Send() (*ListSecretsOutput, error) {
 //
 //    // Example sending a request using the ListSecretsRequest method.
 //    req := client.ListSecretsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -890,7 +901,8 @@ type PutResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the PutResourcePolicy API request.
-func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
+func (r PutResourcePolicyRequest) Send(ctx context.Context) (*PutResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -931,7 +943,7 @@ func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
 //
 //    // Example sending a request using the PutResourcePolicyRequest method.
 //    req := client.PutResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -965,7 +977,8 @@ type PutSecretValueRequest struct {
 }
 
 // Send marshals and sends the PutSecretValue API request.
-func (r PutSecretValueRequest) Send() (*PutSecretValueOutput, error) {
+func (r PutSecretValueRequest) Send(ctx context.Context) (*PutSecretValueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1050,7 +1063,7 @@ func (r PutSecretValueRequest) Send() (*PutSecretValueOutput, error) {
 //
 //    // Example sending a request using the PutSecretValueRequest method.
 //    req := client.PutSecretValueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1084,7 +1097,8 @@ type RestoreSecretRequest struct {
 }
 
 // Send marshals and sends the RestoreSecret API request.
-func (r RestoreSecretRequest) Send() (*RestoreSecretOutput, error) {
+func (r RestoreSecretRequest) Send(ctx context.Context) (*RestoreSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1111,7 +1125,7 @@ func (r RestoreSecretRequest) Send() (*RestoreSecretOutput, error) {
 //
 //    // Example sending a request using the RestoreSecretRequest method.
 //    req := client.RestoreSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1145,7 +1159,8 @@ type RotateSecretRequest struct {
 }
 
 // Send marshals and sends the RotateSecret API request.
-func (r RotateSecretRequest) Send() (*RotateSecretOutput, error) {
+func (r RotateSecretRequest) Send(ctx context.Context) (*RotateSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1216,7 +1231,7 @@ func (r RotateSecretRequest) Send() (*RotateSecretOutput, error) {
 //
 //    // Example sending a request using the RotateSecretRequest method.
 //    req := client.RotateSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1250,7 +1265,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1308,7 +1324,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1344,7 +1360,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1381,7 +1398,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1417,7 +1434,8 @@ type UpdateSecretRequest struct {
 }
 
 // Send marshals and sends the UpdateSecret API request.
-func (r UpdateSecretRequest) Send() (*UpdateSecretOutput, error) {
+func (r UpdateSecretRequest) Send(ctx context.Context) (*UpdateSecretOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1496,7 +1514,7 @@ func (r UpdateSecretRequest) Send() (*UpdateSecretOutput, error) {
 //
 //    // Example sending a request using the UpdateSecretRequest method.
 //    req := client.UpdateSecretRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1530,7 +1548,8 @@ type UpdateSecretVersionStageRequest struct {
 }
 
 // Send marshals and sends the UpdateSecretVersionStage API request.
-func (r UpdateSecretVersionStageRequest) Send() (*UpdateSecretVersionStageOutput, error) {
+func (r UpdateSecretVersionStageRequest) Send(ctx context.Context) (*UpdateSecretVersionStageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1578,7 +1597,7 @@ func (r UpdateSecretVersionStageRequest) Send() (*UpdateSecretVersionStageOutput
 //
 //    // Example sending a request using the UpdateSecretVersionStageRequest method.
 //    req := client.UpdateSecretVersionStageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package pinpointemail
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type CreateConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
-func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, error) {
+func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, er
 //
 //    // Example sending a request using the CreateConfigurationSetRequest method.
 //    req := client.CreateConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type CreateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
-func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurationSetEventDestinationOutput, error) {
+func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*CreateConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -98,7 +101,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurat
 //
 //    // Example sending a request using the CreateConfigurationSetEventDestinationRequest method.
 //    req := client.CreateConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -132,7 +135,8 @@ type CreateDedicatedIpPoolRequest struct {
 }
 
 // Send marshals and sends the CreateDedicatedIpPool API request.
-func (r CreateDedicatedIpPoolRequest) Send() (*CreateDedicatedIpPoolOutput, error) {
+func (r CreateDedicatedIpPoolRequest) Send(ctx context.Context) (*CreateDedicatedIpPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -152,7 +156,7 @@ func (r CreateDedicatedIpPoolRequest) Send() (*CreateDedicatedIpPoolOutput, erro
 //
 //    // Example sending a request using the CreateDedicatedIpPoolRequest method.
 //    req := client.CreateDedicatedIpPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -186,7 +190,8 @@ type CreateDeliverabilityTestReportRequest struct {
 }
 
 // Send marshals and sends the CreateDeliverabilityTestReport API request.
-func (r CreateDeliverabilityTestReportRequest) Send() (*CreateDeliverabilityTestReportOutput, error) {
+func (r CreateDeliverabilityTestReportRequest) Send(ctx context.Context) (*CreateDeliverabilityTestReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -209,7 +214,7 @@ func (r CreateDeliverabilityTestReportRequest) Send() (*CreateDeliverabilityTest
 //
 //    // Example sending a request using the CreateDeliverabilityTestReportRequest method.
 //    req := client.CreateDeliverabilityTestReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -243,7 +248,8 @@ type CreateEmailIdentityRequest struct {
 }
 
 // Send marshals and sends the CreateEmailIdentity API request.
-func (r CreateEmailIdentityRequest) Send() (*CreateEmailIdentityOutput, error) {
+func (r CreateEmailIdentityRequest) Send(ctx context.Context) (*CreateEmailIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -274,7 +280,7 @@ func (r CreateEmailIdentityRequest) Send() (*CreateEmailIdentityOutput, error) {
 //
 //    // Example sending a request using the CreateEmailIdentityRequest method.
 //    req := client.CreateEmailIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -308,7 +314,8 @@ type DeleteConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
-func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, error) {
+func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -330,7 +337,7 @@ func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, er
 //
 //    // Example sending a request using the DeleteConfigurationSetRequest method.
 //    req := client.DeleteConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -364,7 +371,8 @@ type DeleteConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
-func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurationSetEventDestinationOutput, error) {
+func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*DeleteConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -387,7 +395,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurat
 //
 //    // Example sending a request using the DeleteConfigurationSetEventDestinationRequest method.
 //    req := client.DeleteConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -421,7 +429,8 @@ type DeleteDedicatedIpPoolRequest struct {
 }
 
 // Send marshals and sends the DeleteDedicatedIpPool API request.
-func (r DeleteDedicatedIpPoolRequest) Send() (*DeleteDedicatedIpPoolOutput, error) {
+func (r DeleteDedicatedIpPoolRequest) Send(ctx context.Context) (*DeleteDedicatedIpPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +446,7 @@ func (r DeleteDedicatedIpPoolRequest) Send() (*DeleteDedicatedIpPoolOutput, erro
 //
 //    // Example sending a request using the DeleteDedicatedIpPoolRequest method.
 //    req := client.DeleteDedicatedIpPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +480,8 @@ type DeleteEmailIdentityRequest struct {
 }
 
 // Send marshals and sends the DeleteEmailIdentity API request.
-func (r DeleteEmailIdentityRequest) Send() (*DeleteEmailIdentityOutput, error) {
+func (r DeleteEmailIdentityRequest) Send(ctx context.Context) (*DeleteEmailIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,7 +498,7 @@ func (r DeleteEmailIdentityRequest) Send() (*DeleteEmailIdentityOutput, error) {
 //
 //    // Example sending a request using the DeleteEmailIdentityRequest method.
 //    req := client.DeleteEmailIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -522,7 +532,8 @@ type GetAccountRequest struct {
 }
 
 // Send marshals and sends the GetAccount API request.
-func (r GetAccountRequest) Send() (*GetAccountOutput, error) {
+func (r GetAccountRequest) Send(ctx context.Context) (*GetAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -539,7 +550,7 @@ func (r GetAccountRequest) Send() (*GetAccountOutput, error) {
 //
 //    // Example sending a request using the GetAccountRequest method.
 //    req := client.GetAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -573,7 +584,8 @@ type GetBlacklistReportsRequest struct {
 }
 
 // Send marshals and sends the GetBlacklistReports API request.
-func (r GetBlacklistReportsRequest) Send() (*GetBlacklistReportsOutput, error) {
+func (r GetBlacklistReportsRequest) Send(ctx context.Context) (*GetBlacklistReportsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -590,7 +602,7 @@ func (r GetBlacklistReportsRequest) Send() (*GetBlacklistReportsOutput, error) {
 //
 //    // Example sending a request using the GetBlacklistReportsRequest method.
 //    req := client.GetBlacklistReportsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -624,7 +636,8 @@ type GetConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the GetConfigurationSet API request.
-func (r GetConfigurationSetRequest) Send() (*GetConfigurationSetOutput, error) {
+func (r GetConfigurationSetRequest) Send(ctx context.Context) (*GetConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,7 +661,7 @@ func (r GetConfigurationSetRequest) Send() (*GetConfigurationSetOutput, error) {
 //
 //    // Example sending a request using the GetConfigurationSetRequest method.
 //    req := client.GetConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -682,7 +695,8 @@ type GetConfigurationSetEventDestinationsRequest struct {
 }
 
 // Send marshals and sends the GetConfigurationSetEventDestinations API request.
-func (r GetConfigurationSetEventDestinationsRequest) Send() (*GetConfigurationSetEventDestinationsOutput, error) {
+func (r GetConfigurationSetEventDestinationsRequest) Send(ctx context.Context) (*GetConfigurationSetEventDestinationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +720,7 @@ func (r GetConfigurationSetEventDestinationsRequest) Send() (*GetConfigurationSe
 //
 //    // Example sending a request using the GetConfigurationSetEventDestinationsRequest method.
 //    req := client.GetConfigurationSetEventDestinationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -740,7 +754,8 @@ type GetDedicatedIpRequest struct {
 }
 
 // Send marshals and sends the GetDedicatedIp API request.
-func (r GetDedicatedIpRequest) Send() (*GetDedicatedIpOutput, error) {
+func (r GetDedicatedIpRequest) Send(ctx context.Context) (*GetDedicatedIpOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +773,7 @@ func (r GetDedicatedIpRequest) Send() (*GetDedicatedIpOutput, error) {
 //
 //    // Example sending a request using the GetDedicatedIpRequest method.
 //    req := client.GetDedicatedIpRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -792,7 +807,8 @@ type GetDedicatedIpsRequest struct {
 }
 
 // Send marshals and sends the GetDedicatedIps API request.
-func (r GetDedicatedIpsRequest) Send() (*GetDedicatedIpsOutput, error) {
+func (r GetDedicatedIpsRequest) Send(ctx context.Context) (*GetDedicatedIpsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -809,7 +825,7 @@ func (r GetDedicatedIpsRequest) Send() (*GetDedicatedIpsOutput, error) {
 //
 //    // Example sending a request using the GetDedicatedIpsRequest method.
 //    req := client.GetDedicatedIpsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -895,7 +911,8 @@ type GetDeliverabilityDashboardOptionsRequest struct {
 }
 
 // Send marshals and sends the GetDeliverabilityDashboardOptions API request.
-func (r GetDeliverabilityDashboardOptionsRequest) Send() (*GetDeliverabilityDashboardOptionsOutput, error) {
+func (r GetDeliverabilityDashboardOptionsRequest) Send(ctx context.Context) (*GetDeliverabilityDashboardOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -920,7 +937,7 @@ func (r GetDeliverabilityDashboardOptionsRequest) Send() (*GetDeliverabilityDash
 //
 //    // Example sending a request using the GetDeliverabilityDashboardOptionsRequest method.
 //    req := client.GetDeliverabilityDashboardOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -954,7 +971,8 @@ type GetDeliverabilityTestReportRequest struct {
 }
 
 // Send marshals and sends the GetDeliverabilityTestReport API request.
-func (r GetDeliverabilityTestReportRequest) Send() (*GetDeliverabilityTestReportOutput, error) {
+func (r GetDeliverabilityTestReportRequest) Send(ctx context.Context) (*GetDeliverabilityTestReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -970,7 +988,7 @@ func (r GetDeliverabilityTestReportRequest) Send() (*GetDeliverabilityTestReport
 //
 //    // Example sending a request using the GetDeliverabilityTestReportRequest method.
 //    req := client.GetDeliverabilityTestReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1004,7 +1022,8 @@ type GetDomainStatisticsReportRequest struct {
 }
 
 // Send marshals and sends the GetDomainStatisticsReport API request.
-func (r GetDomainStatisticsReportRequest) Send() (*GetDomainStatisticsReportOutput, error) {
+func (r GetDomainStatisticsReportRequest) Send(ctx context.Context) (*GetDomainStatisticsReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1021,7 +1040,7 @@ func (r GetDomainStatisticsReportRequest) Send() (*GetDomainStatisticsReportOutp
 //
 //    // Example sending a request using the GetDomainStatisticsReportRequest method.
 //    req := client.GetDomainStatisticsReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1055,7 +1074,8 @@ type GetEmailIdentityRequest struct {
 }
 
 // Send marshals and sends the GetEmailIdentity API request.
-func (r GetEmailIdentityRequest) Send() (*GetEmailIdentityOutput, error) {
+func (r GetEmailIdentityRequest) Send(ctx context.Context) (*GetEmailIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1073,7 +1093,7 @@ func (r GetEmailIdentityRequest) Send() (*GetEmailIdentityOutput, error) {
 //
 //    // Example sending a request using the GetEmailIdentityRequest method.
 //    req := client.GetEmailIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1107,7 +1127,8 @@ type ListConfigurationSetsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurationSets API request.
-func (r ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, error) {
+func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurationSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1130,7 +1151,7 @@ func (r ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, erro
 //
 //    // Example sending a request using the ListConfigurationSetsRequest method.
 //    req := client.ListConfigurationSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1216,7 +1237,8 @@ type ListDedicatedIpPoolsRequest struct {
 }
 
 // Send marshals and sends the ListDedicatedIpPools API request.
-func (r ListDedicatedIpPoolsRequest) Send() (*ListDedicatedIpPoolsOutput, error) {
+func (r ListDedicatedIpPoolsRequest) Send(ctx context.Context) (*ListDedicatedIpPoolsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1233,7 +1255,7 @@ func (r ListDedicatedIpPoolsRequest) Send() (*ListDedicatedIpPoolsOutput, error)
 //
 //    // Example sending a request using the ListDedicatedIpPoolsRequest method.
 //    req := client.ListDedicatedIpPoolsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1319,7 +1341,8 @@ type ListDeliverabilityTestReportsRequest struct {
 }
 
 // Send marshals and sends the ListDeliverabilityTestReports API request.
-func (r ListDeliverabilityTestReportsRequest) Send() (*ListDeliverabilityTestReportsOutput, error) {
+func (r ListDeliverabilityTestReportsRequest) Send(ctx context.Context) (*ListDeliverabilityTestReportsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1338,7 +1361,7 @@ func (r ListDeliverabilityTestReportsRequest) Send() (*ListDeliverabilityTestRep
 //
 //    // Example sending a request using the ListDeliverabilityTestReportsRequest method.
 //    req := client.ListDeliverabilityTestReportsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1424,7 +1447,8 @@ type ListEmailIdentitiesRequest struct {
 }
 
 // Send marshals and sends the ListEmailIdentities API request.
-func (r ListEmailIdentitiesRequest) Send() (*ListEmailIdentitiesOutput, error) {
+func (r ListEmailIdentitiesRequest) Send(ctx context.Context) (*ListEmailIdentitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1443,7 +1467,7 @@ func (r ListEmailIdentitiesRequest) Send() (*ListEmailIdentitiesOutput, error) {
 //
 //    // Example sending a request using the ListEmailIdentitiesRequest method.
 //    req := client.ListEmailIdentitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1529,7 +1553,8 @@ type PutAccountDedicatedIpWarmupAttributesRequest struct {
 }
 
 // Send marshals and sends the PutAccountDedicatedIpWarmupAttributes API request.
-func (r PutAccountDedicatedIpWarmupAttributesRequest) Send() (*PutAccountDedicatedIpWarmupAttributesOutput, error) {
+func (r PutAccountDedicatedIpWarmupAttributesRequest) Send(ctx context.Context) (*PutAccountDedicatedIpWarmupAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1545,7 +1570,7 @@ func (r PutAccountDedicatedIpWarmupAttributesRequest) Send() (*PutAccountDedicat
 //
 //    // Example sending a request using the PutAccountDedicatedIpWarmupAttributesRequest method.
 //    req := client.PutAccountDedicatedIpWarmupAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1579,7 +1604,8 @@ type PutAccountSendingAttributesRequest struct {
 }
 
 // Send marshals and sends the PutAccountSendingAttributes API request.
-func (r PutAccountSendingAttributesRequest) Send() (*PutAccountSendingAttributesOutput, error) {
+func (r PutAccountSendingAttributesRequest) Send(ctx context.Context) (*PutAccountSendingAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1595,7 +1621,7 @@ func (r PutAccountSendingAttributesRequest) Send() (*PutAccountSendingAttributes
 //
 //    // Example sending a request using the PutAccountSendingAttributesRequest method.
 //    req := client.PutAccountSendingAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1629,7 +1655,8 @@ type PutConfigurationSetDeliveryOptionsRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationSetDeliveryOptions API request.
-func (r PutConfigurationSetDeliveryOptionsRequest) Send() (*PutConfigurationSetDeliveryOptionsOutput, error) {
+func (r PutConfigurationSetDeliveryOptionsRequest) Send(ctx context.Context) (*PutConfigurationSetDeliveryOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1647,7 +1674,7 @@ func (r PutConfigurationSetDeliveryOptionsRequest) Send() (*PutConfigurationSetD
 //
 //    // Example sending a request using the PutConfigurationSetDeliveryOptionsRequest method.
 //    req := client.PutConfigurationSetDeliveryOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1681,7 +1708,8 @@ type PutConfigurationSetReputationOptionsRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationSetReputationOptions API request.
-func (r PutConfigurationSetReputationOptionsRequest) Send() (*PutConfigurationSetReputationOptionsOutput, error) {
+func (r PutConfigurationSetReputationOptionsRequest) Send(ctx context.Context) (*PutConfigurationSetReputationOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1698,7 +1726,7 @@ func (r PutConfigurationSetReputationOptionsRequest) Send() (*PutConfigurationSe
 //
 //    // Example sending a request using the PutConfigurationSetReputationOptionsRequest method.
 //    req := client.PutConfigurationSetReputationOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1732,7 +1760,8 @@ type PutConfigurationSetSendingOptionsRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationSetSendingOptions API request.
-func (r PutConfigurationSetSendingOptionsRequest) Send() (*PutConfigurationSetSendingOptionsOutput, error) {
+func (r PutConfigurationSetSendingOptionsRequest) Send(ctx context.Context) (*PutConfigurationSetSendingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1749,7 +1778,7 @@ func (r PutConfigurationSetSendingOptionsRequest) Send() (*PutConfigurationSetSe
 //
 //    // Example sending a request using the PutConfigurationSetSendingOptionsRequest method.
 //    req := client.PutConfigurationSetSendingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1783,7 +1812,8 @@ type PutConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationSetTrackingOptions API request.
-func (r PutConfigurationSetTrackingOptionsRequest) Send() (*PutConfigurationSetTrackingOptionsOutput, error) {
+func (r PutConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) (*PutConfigurationSetTrackingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1800,7 +1830,7 @@ func (r PutConfigurationSetTrackingOptionsRequest) Send() (*PutConfigurationSetT
 //
 //    // Example sending a request using the PutConfigurationSetTrackingOptionsRequest method.
 //    req := client.PutConfigurationSetTrackingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1834,7 +1864,8 @@ type PutDedicatedIpInPoolRequest struct {
 }
 
 // Send marshals and sends the PutDedicatedIpInPool API request.
-func (r PutDedicatedIpInPoolRequest) Send() (*PutDedicatedIpInPoolOutput, error) {
+func (r PutDedicatedIpInPoolRequest) Send(ctx context.Context) (*PutDedicatedIpInPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1856,7 +1887,7 @@ func (r PutDedicatedIpInPoolRequest) Send() (*PutDedicatedIpInPoolOutput, error)
 //
 //    // Example sending a request using the PutDedicatedIpInPoolRequest method.
 //    req := client.PutDedicatedIpInPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1890,7 +1921,8 @@ type PutDedicatedIpWarmupAttributesRequest struct {
 }
 
 // Send marshals and sends the PutDedicatedIpWarmupAttributes API request.
-func (r PutDedicatedIpWarmupAttributesRequest) Send() (*PutDedicatedIpWarmupAttributesOutput, error) {
+func (r PutDedicatedIpWarmupAttributesRequest) Send(ctx context.Context) (*PutDedicatedIpWarmupAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1904,7 +1936,7 @@ func (r PutDedicatedIpWarmupAttributesRequest) Send() (*PutDedicatedIpWarmupAttr
 //
 //    // Example sending a request using the PutDedicatedIpWarmupAttributesRequest method.
 //    req := client.PutDedicatedIpWarmupAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1938,7 +1970,8 @@ type PutDeliverabilityDashboardOptionRequest struct {
 }
 
 // Send marshals and sends the PutDeliverabilityDashboardOption API request.
-func (r PutDeliverabilityDashboardOptionRequest) Send() (*PutDeliverabilityDashboardOptionOutput, error) {
+func (r PutDeliverabilityDashboardOptionRequest) Send(ctx context.Context) (*PutDeliverabilityDashboardOptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1963,7 +1996,7 @@ func (r PutDeliverabilityDashboardOptionRequest) Send() (*PutDeliverabilityDashb
 //
 //    // Example sending a request using the PutDeliverabilityDashboardOptionRequest method.
 //    req := client.PutDeliverabilityDashboardOptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1997,7 +2030,8 @@ type PutEmailIdentityDkimAttributesRequest struct {
 }
 
 // Send marshals and sends the PutEmailIdentityDkimAttributes API request.
-func (r PutEmailIdentityDkimAttributesRequest) Send() (*PutEmailIdentityDkimAttributesOutput, error) {
+func (r PutEmailIdentityDkimAttributesRequest) Send(ctx context.Context) (*PutEmailIdentityDkimAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2013,7 +2047,7 @@ func (r PutEmailIdentityDkimAttributesRequest) Send() (*PutEmailIdentityDkimAttr
 //
 //    // Example sending a request using the PutEmailIdentityDkimAttributesRequest method.
 //    req := client.PutEmailIdentityDkimAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2047,7 +2081,8 @@ type PutEmailIdentityFeedbackAttributesRequest struct {
 }
 
 // Send marshals and sends the PutEmailIdentityFeedbackAttributes API request.
-func (r PutEmailIdentityFeedbackAttributesRequest) Send() (*PutEmailIdentityFeedbackAttributesOutput, error) {
+func (r PutEmailIdentityFeedbackAttributesRequest) Send(ctx context.Context) (*PutEmailIdentityFeedbackAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2077,7 +2112,7 @@ func (r PutEmailIdentityFeedbackAttributesRequest) Send() (*PutEmailIdentityFeed
 //
 //    // Example sending a request using the PutEmailIdentityFeedbackAttributesRequest method.
 //    req := client.PutEmailIdentityFeedbackAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2111,7 +2146,8 @@ type PutEmailIdentityMailFromAttributesRequest struct {
 }
 
 // Send marshals and sends the PutEmailIdentityMailFromAttributes API request.
-func (r PutEmailIdentityMailFromAttributesRequest) Send() (*PutEmailIdentityMailFromAttributesOutput, error) {
+func (r PutEmailIdentityMailFromAttributesRequest) Send(ctx context.Context) (*PutEmailIdentityMailFromAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2128,7 +2164,7 @@ func (r PutEmailIdentityMailFromAttributesRequest) Send() (*PutEmailIdentityMail
 //
 //    // Example sending a request using the PutEmailIdentityMailFromAttributesRequest method.
 //    req := client.PutEmailIdentityMailFromAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2162,7 +2198,8 @@ type SendEmailRequest struct {
 }
 
 // Send marshals and sends the SendEmail API request.
-func (r SendEmailRequest) Send() (*SendEmailOutput, error) {
+func (r SendEmailRequest) Send(ctx context.Context) (*SendEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2188,7 +2225,7 @@ func (r SendEmailRequest) Send() (*SendEmailOutput, error) {
 //
 //    // Example sending a request using the SendEmailRequest method.
 //    req := client.SendEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2222,7 +2259,8 @@ type UpdateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
-func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurationSetEventDestinationOutput, error) {
+func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*UpdateConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2245,7 +2283,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurat
 //
 //    // Example sending a request using the UpdateConfigurationSetEventDestinationRequest method.
 //    req := client.UpdateConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

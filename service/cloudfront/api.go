@@ -3,6 +3,7 @@
 package cloudfront
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateCloudFrontOriginAccessIdentityRequest struct {
 }
 
 // Send marshals and sends the CreateCloudFrontOriginAccessIdentity API request.
-func (r CreateCloudFrontOriginAccessIdentityRequest) Send() (*CreateCloudFrontOriginAccessIdentityOutput, error) {
+func (r CreateCloudFrontOriginAccessIdentityRequest) Send(ctx context.Context) (*CreateCloudFrontOriginAccessIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r CreateCloudFrontOriginAccessIdentityRequest) Send() (*CreateCloudFrontOr
 //
 //    // Example sending a request using the CreateCloudFrontOriginAccessIdentityRequest method.
 //    req := client.CreateCloudFrontOriginAccessIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type CreateDistributionRequest struct {
 }
 
 // Send marshals and sends the CreateDistribution API request.
-func (r CreateDistributionRequest) Send() (*CreateDistributionOutput, error) {
+func (r CreateDistributionRequest) Send(ctx context.Context) (*CreateDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -107,7 +110,7 @@ func (r CreateDistributionRequest) Send() (*CreateDistributionOutput, error) {
 //
 //    // Example sending a request using the CreateDistributionRequest method.
 //    req := client.CreateDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -141,7 +144,8 @@ type CreateDistributionWithTagsRequest struct {
 }
 
 // Send marshals and sends the CreateDistributionWithTags API request.
-func (r CreateDistributionWithTagsRequest) Send() (*CreateDistributionWithTagsOutput, error) {
+func (r CreateDistributionWithTagsRequest) Send(ctx context.Context) (*CreateDistributionWithTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -157,7 +161,7 @@ func (r CreateDistributionWithTagsRequest) Send() (*CreateDistributionWithTagsOu
 //
 //    // Example sending a request using the CreateDistributionWithTagsRequest method.
 //    req := client.CreateDistributionWithTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -191,7 +195,8 @@ type CreateFieldLevelEncryptionConfigRequest struct {
 }
 
 // Send marshals and sends the CreateFieldLevelEncryptionConfig API request.
-func (r CreateFieldLevelEncryptionConfigRequest) Send() (*CreateFieldLevelEncryptionConfigOutput, error) {
+func (r CreateFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*CreateFieldLevelEncryptionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -207,7 +212,7 @@ func (r CreateFieldLevelEncryptionConfigRequest) Send() (*CreateFieldLevelEncryp
 //
 //    // Example sending a request using the CreateFieldLevelEncryptionConfigRequest method.
 //    req := client.CreateFieldLevelEncryptionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -241,7 +246,8 @@ type CreateFieldLevelEncryptionProfileRequest struct {
 }
 
 // Send marshals and sends the CreateFieldLevelEncryptionProfile API request.
-func (r CreateFieldLevelEncryptionProfileRequest) Send() (*CreateFieldLevelEncryptionProfileOutput, error) {
+func (r CreateFieldLevelEncryptionProfileRequest) Send(ctx context.Context) (*CreateFieldLevelEncryptionProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -257,7 +263,7 @@ func (r CreateFieldLevelEncryptionProfileRequest) Send() (*CreateFieldLevelEncry
 //
 //    // Example sending a request using the CreateFieldLevelEncryptionProfileRequest method.
 //    req := client.CreateFieldLevelEncryptionProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -291,7 +297,8 @@ type CreateInvalidationRequest struct {
 }
 
 // Send marshals and sends the CreateInvalidation API request.
-func (r CreateInvalidationRequest) Send() (*CreateInvalidationOutput, error) {
+func (r CreateInvalidationRequest) Send(ctx context.Context) (*CreateInvalidationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -307,7 +314,7 @@ func (r CreateInvalidationRequest) Send() (*CreateInvalidationOutput, error) {
 //
 //    // Example sending a request using the CreateInvalidationRequest method.
 //    req := client.CreateInvalidationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -341,7 +348,8 @@ type CreatePublicKeyRequest struct {
 }
 
 // Send marshals and sends the CreatePublicKey API request.
-func (r CreatePublicKeyRequest) Send() (*CreatePublicKeyOutput, error) {
+func (r CreatePublicKeyRequest) Send(ctx context.Context) (*CreatePublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -358,7 +366,7 @@ func (r CreatePublicKeyRequest) Send() (*CreatePublicKeyOutput, error) {
 //
 //    // Example sending a request using the CreatePublicKeyRequest method.
 //    req := client.CreatePublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -392,7 +400,8 @@ type CreateStreamingDistributionRequest struct {
 }
 
 // Send marshals and sends the CreateStreamingDistribution API request.
-func (r CreateStreamingDistributionRequest) Send() (*CreateStreamingDistributionOutput, error) {
+func (r CreateStreamingDistributionRequest) Send(ctx context.Context) (*CreateStreamingDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -435,7 +444,7 @@ func (r CreateStreamingDistributionRequest) Send() (*CreateStreamingDistribution
 //
 //    // Example sending a request using the CreateStreamingDistributionRequest method.
 //    req := client.CreateStreamingDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -469,7 +478,8 @@ type CreateStreamingDistributionWithTagsRequest struct {
 }
 
 // Send marshals and sends the CreateStreamingDistributionWithTags API request.
-func (r CreateStreamingDistributionWithTagsRequest) Send() (*CreateStreamingDistributionWithTagsOutput, error) {
+func (r CreateStreamingDistributionWithTagsRequest) Send(ctx context.Context) (*CreateStreamingDistributionWithTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -485,7 +495,7 @@ func (r CreateStreamingDistributionWithTagsRequest) Send() (*CreateStreamingDist
 //
 //    // Example sending a request using the CreateStreamingDistributionWithTagsRequest method.
 //    req := client.CreateStreamingDistributionWithTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -519,7 +529,8 @@ type DeleteCloudFrontOriginAccessIdentityRequest struct {
 }
 
 // Send marshals and sends the DeleteCloudFrontOriginAccessIdentity API request.
-func (r DeleteCloudFrontOriginAccessIdentityRequest) Send() (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
+func (r DeleteCloudFrontOriginAccessIdentityRequest) Send(ctx context.Context) (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -535,7 +546,7 @@ func (r DeleteCloudFrontOriginAccessIdentityRequest) Send() (*DeleteCloudFrontOr
 //
 //    // Example sending a request using the DeleteCloudFrontOriginAccessIdentityRequest method.
 //    req := client.DeleteCloudFrontOriginAccessIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -571,7 +582,8 @@ type DeleteDistributionRequest struct {
 }
 
 // Send marshals and sends the DeleteDistribution API request.
-func (r DeleteDistributionRequest) Send() (*DeleteDistributionOutput, error) {
+func (r DeleteDistributionRequest) Send(ctx context.Context) (*DeleteDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -587,7 +599,7 @@ func (r DeleteDistributionRequest) Send() (*DeleteDistributionOutput, error) {
 //
 //    // Example sending a request using the DeleteDistributionRequest method.
 //    req := client.DeleteDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -623,7 +635,8 @@ type DeleteFieldLevelEncryptionConfigRequest struct {
 }
 
 // Send marshals and sends the DeleteFieldLevelEncryptionConfig API request.
-func (r DeleteFieldLevelEncryptionConfigRequest) Send() (*DeleteFieldLevelEncryptionConfigOutput, error) {
+func (r DeleteFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*DeleteFieldLevelEncryptionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -639,7 +652,7 @@ func (r DeleteFieldLevelEncryptionConfigRequest) Send() (*DeleteFieldLevelEncryp
 //
 //    // Example sending a request using the DeleteFieldLevelEncryptionConfigRequest method.
 //    req := client.DeleteFieldLevelEncryptionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -675,7 +688,8 @@ type DeleteFieldLevelEncryptionProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteFieldLevelEncryptionProfile API request.
-func (r DeleteFieldLevelEncryptionProfileRequest) Send() (*DeleteFieldLevelEncryptionProfileOutput, error) {
+func (r DeleteFieldLevelEncryptionProfileRequest) Send(ctx context.Context) (*DeleteFieldLevelEncryptionProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -691,7 +705,7 @@ func (r DeleteFieldLevelEncryptionProfileRequest) Send() (*DeleteFieldLevelEncry
 //
 //    // Example sending a request using the DeleteFieldLevelEncryptionProfileRequest method.
 //    req := client.DeleteFieldLevelEncryptionProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -727,7 +741,8 @@ type DeletePublicKeyRequest struct {
 }
 
 // Send marshals and sends the DeletePublicKey API request.
-func (r DeletePublicKeyRequest) Send() (*DeletePublicKeyOutput, error) {
+func (r DeletePublicKeyRequest) Send(ctx context.Context) (*DeletePublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -743,7 +758,7 @@ func (r DeletePublicKeyRequest) Send() (*DeletePublicKeyOutput, error) {
 //
 //    // Example sending a request using the DeletePublicKeyRequest method.
 //    req := client.DeletePublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -779,7 +794,8 @@ type DeleteStreamingDistributionRequest struct {
 }
 
 // Send marshals and sends the DeleteStreamingDistribution API request.
-func (r DeleteStreamingDistributionRequest) Send() (*DeleteStreamingDistributionOutput, error) {
+func (r DeleteStreamingDistributionRequest) Send(ctx context.Context) (*DeleteStreamingDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -830,7 +846,7 @@ func (r DeleteStreamingDistributionRequest) Send() (*DeleteStreamingDistribution
 //
 //    // Example sending a request using the DeleteStreamingDistributionRequest method.
 //    req := client.DeleteStreamingDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -866,7 +882,8 @@ type GetCloudFrontOriginAccessIdentityRequest struct {
 }
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentity API request.
-func (r GetCloudFrontOriginAccessIdentityRequest) Send() (*GetCloudFrontOriginAccessIdentityOutput, error) {
+func (r GetCloudFrontOriginAccessIdentityRequest) Send(ctx context.Context) (*GetCloudFrontOriginAccessIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -882,7 +899,7 @@ func (r GetCloudFrontOriginAccessIdentityRequest) Send() (*GetCloudFrontOriginAc
 //
 //    // Example sending a request using the GetCloudFrontOriginAccessIdentityRequest method.
 //    req := client.GetCloudFrontOriginAccessIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -916,7 +933,8 @@ type GetCloudFrontOriginAccessIdentityConfigRequest struct {
 }
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentityConfig API request.
-func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send() (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
+func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send(ctx context.Context) (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -932,7 +950,7 @@ func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send() (*GetCloudFrontOr
 //
 //    // Example sending a request using the GetCloudFrontOriginAccessIdentityConfigRequest method.
 //    req := client.GetCloudFrontOriginAccessIdentityConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -966,7 +984,8 @@ type GetDistributionRequest struct {
 }
 
 // Send marshals and sends the GetDistribution API request.
-func (r GetDistributionRequest) Send() (*GetDistributionOutput, error) {
+func (r GetDistributionRequest) Send(ctx context.Context) (*GetDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -982,7 +1001,7 @@ func (r GetDistributionRequest) Send() (*GetDistributionOutput, error) {
 //
 //    // Example sending a request using the GetDistributionRequest method.
 //    req := client.GetDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1016,7 +1035,8 @@ type GetDistributionConfigRequest struct {
 }
 
 // Send marshals and sends the GetDistributionConfig API request.
-func (r GetDistributionConfigRequest) Send() (*GetDistributionConfigOutput, error) {
+func (r GetDistributionConfigRequest) Send(ctx context.Context) (*GetDistributionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1032,7 +1052,7 @@ func (r GetDistributionConfigRequest) Send() (*GetDistributionConfigOutput, erro
 //
 //    // Example sending a request using the GetDistributionConfigRequest method.
 //    req := client.GetDistributionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1066,7 +1086,8 @@ type GetFieldLevelEncryptionRequest struct {
 }
 
 // Send marshals and sends the GetFieldLevelEncryption API request.
-func (r GetFieldLevelEncryptionRequest) Send() (*GetFieldLevelEncryptionOutput, error) {
+func (r GetFieldLevelEncryptionRequest) Send(ctx context.Context) (*GetFieldLevelEncryptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1082,7 +1103,7 @@ func (r GetFieldLevelEncryptionRequest) Send() (*GetFieldLevelEncryptionOutput, 
 //
 //    // Example sending a request using the GetFieldLevelEncryptionRequest method.
 //    req := client.GetFieldLevelEncryptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1116,7 +1137,8 @@ type GetFieldLevelEncryptionConfigRequest struct {
 }
 
 // Send marshals and sends the GetFieldLevelEncryptionConfig API request.
-func (r GetFieldLevelEncryptionConfigRequest) Send() (*GetFieldLevelEncryptionConfigOutput, error) {
+func (r GetFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*GetFieldLevelEncryptionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1132,7 +1154,7 @@ func (r GetFieldLevelEncryptionConfigRequest) Send() (*GetFieldLevelEncryptionCo
 //
 //    // Example sending a request using the GetFieldLevelEncryptionConfigRequest method.
 //    req := client.GetFieldLevelEncryptionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1166,7 +1188,8 @@ type GetFieldLevelEncryptionProfileRequest struct {
 }
 
 // Send marshals and sends the GetFieldLevelEncryptionProfile API request.
-func (r GetFieldLevelEncryptionProfileRequest) Send() (*GetFieldLevelEncryptionProfileOutput, error) {
+func (r GetFieldLevelEncryptionProfileRequest) Send(ctx context.Context) (*GetFieldLevelEncryptionProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1182,7 +1205,7 @@ func (r GetFieldLevelEncryptionProfileRequest) Send() (*GetFieldLevelEncryptionP
 //
 //    // Example sending a request using the GetFieldLevelEncryptionProfileRequest method.
 //    req := client.GetFieldLevelEncryptionProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1216,7 +1239,8 @@ type GetFieldLevelEncryptionProfileConfigRequest struct {
 }
 
 // Send marshals and sends the GetFieldLevelEncryptionProfileConfig API request.
-func (r GetFieldLevelEncryptionProfileConfigRequest) Send() (*GetFieldLevelEncryptionProfileConfigOutput, error) {
+func (r GetFieldLevelEncryptionProfileConfigRequest) Send(ctx context.Context) (*GetFieldLevelEncryptionProfileConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1232,7 +1256,7 @@ func (r GetFieldLevelEncryptionProfileConfigRequest) Send() (*GetFieldLevelEncry
 //
 //    // Example sending a request using the GetFieldLevelEncryptionProfileConfigRequest method.
 //    req := client.GetFieldLevelEncryptionProfileConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1266,7 +1290,8 @@ type GetInvalidationRequest struct {
 }
 
 // Send marshals and sends the GetInvalidation API request.
-func (r GetInvalidationRequest) Send() (*GetInvalidationOutput, error) {
+func (r GetInvalidationRequest) Send(ctx context.Context) (*GetInvalidationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1282,7 +1307,7 @@ func (r GetInvalidationRequest) Send() (*GetInvalidationOutput, error) {
 //
 //    // Example sending a request using the GetInvalidationRequest method.
 //    req := client.GetInvalidationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1316,7 +1341,8 @@ type GetPublicKeyRequest struct {
 }
 
 // Send marshals and sends the GetPublicKey API request.
-func (r GetPublicKeyRequest) Send() (*GetPublicKeyOutput, error) {
+func (r GetPublicKeyRequest) Send(ctx context.Context) (*GetPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1332,7 +1358,7 @@ func (r GetPublicKeyRequest) Send() (*GetPublicKeyOutput, error) {
 //
 //    // Example sending a request using the GetPublicKeyRequest method.
 //    req := client.GetPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1366,7 +1392,8 @@ type GetPublicKeyConfigRequest struct {
 }
 
 // Send marshals and sends the GetPublicKeyConfig API request.
-func (r GetPublicKeyConfigRequest) Send() (*GetPublicKeyConfigOutput, error) {
+func (r GetPublicKeyConfigRequest) Send(ctx context.Context) (*GetPublicKeyConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1382,7 +1409,7 @@ func (r GetPublicKeyConfigRequest) Send() (*GetPublicKeyConfigOutput, error) {
 //
 //    // Example sending a request using the GetPublicKeyConfigRequest method.
 //    req := client.GetPublicKeyConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1416,7 +1443,8 @@ type GetStreamingDistributionRequest struct {
 }
 
 // Send marshals and sends the GetStreamingDistribution API request.
-func (r GetStreamingDistributionRequest) Send() (*GetStreamingDistributionOutput, error) {
+func (r GetStreamingDistributionRequest) Send(ctx context.Context) (*GetStreamingDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1433,7 +1461,7 @@ func (r GetStreamingDistributionRequest) Send() (*GetStreamingDistributionOutput
 //
 //    // Example sending a request using the GetStreamingDistributionRequest method.
 //    req := client.GetStreamingDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1467,7 +1495,8 @@ type GetStreamingDistributionConfigRequest struct {
 }
 
 // Send marshals and sends the GetStreamingDistributionConfig API request.
-func (r GetStreamingDistributionConfigRequest) Send() (*GetStreamingDistributionConfigOutput, error) {
+func (r GetStreamingDistributionConfigRequest) Send(ctx context.Context) (*GetStreamingDistributionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1483,7 +1512,7 @@ func (r GetStreamingDistributionConfigRequest) Send() (*GetStreamingDistribution
 //
 //    // Example sending a request using the GetStreamingDistributionConfigRequest method.
 //    req := client.GetStreamingDistributionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1517,7 +1546,8 @@ type ListCloudFrontOriginAccessIdentitiesRequest struct {
 }
 
 // Send marshals and sends the ListCloudFrontOriginAccessIdentities API request.
-func (r ListCloudFrontOriginAccessIdentitiesRequest) Send() (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
+func (r ListCloudFrontOriginAccessIdentitiesRequest) Send(ctx context.Context) (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1533,7 +1563,7 @@ func (r ListCloudFrontOriginAccessIdentitiesRequest) Send() (*ListCloudFrontOrig
 //
 //    // Example sending a request using the ListCloudFrontOriginAccessIdentitiesRequest method.
 //    req := client.ListCloudFrontOriginAccessIdentitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1619,7 +1649,8 @@ type ListDistributionsRequest struct {
 }
 
 // Send marshals and sends the ListDistributions API request.
-func (r ListDistributionsRequest) Send() (*ListDistributionsOutput, error) {
+func (r ListDistributionsRequest) Send(ctx context.Context) (*ListDistributionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1635,7 +1666,7 @@ func (r ListDistributionsRequest) Send() (*ListDistributionsOutput, error) {
 //
 //    // Example sending a request using the ListDistributionsRequest method.
 //    req := client.ListDistributionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1721,7 +1752,8 @@ type ListDistributionsByWebACLIdRequest struct {
 }
 
 // Send marshals and sends the ListDistributionsByWebACLId API request.
-func (r ListDistributionsByWebACLIdRequest) Send() (*ListDistributionsByWebACLIdOutput, error) {
+func (r ListDistributionsByWebACLIdRequest) Send(ctx context.Context) (*ListDistributionsByWebACLIdOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1737,7 +1769,7 @@ func (r ListDistributionsByWebACLIdRequest) Send() (*ListDistributionsByWebACLId
 //
 //    // Example sending a request using the ListDistributionsByWebACLIdRequest method.
 //    req := client.ListDistributionsByWebACLIdRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1771,7 +1803,8 @@ type ListFieldLevelEncryptionConfigsRequest struct {
 }
 
 // Send marshals and sends the ListFieldLevelEncryptionConfigs API request.
-func (r ListFieldLevelEncryptionConfigsRequest) Send() (*ListFieldLevelEncryptionConfigsOutput, error) {
+func (r ListFieldLevelEncryptionConfigsRequest) Send(ctx context.Context) (*ListFieldLevelEncryptionConfigsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1788,7 +1821,7 @@ func (r ListFieldLevelEncryptionConfigsRequest) Send() (*ListFieldLevelEncryptio
 //
 //    // Example sending a request using the ListFieldLevelEncryptionConfigsRequest method.
 //    req := client.ListFieldLevelEncryptionConfigsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1822,7 +1855,8 @@ type ListFieldLevelEncryptionProfilesRequest struct {
 }
 
 // Send marshals and sends the ListFieldLevelEncryptionProfiles API request.
-func (r ListFieldLevelEncryptionProfilesRequest) Send() (*ListFieldLevelEncryptionProfilesOutput, error) {
+func (r ListFieldLevelEncryptionProfilesRequest) Send(ctx context.Context) (*ListFieldLevelEncryptionProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1839,7 +1873,7 @@ func (r ListFieldLevelEncryptionProfilesRequest) Send() (*ListFieldLevelEncrypti
 //
 //    // Example sending a request using the ListFieldLevelEncryptionProfilesRequest method.
 //    req := client.ListFieldLevelEncryptionProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1873,7 +1907,8 @@ type ListInvalidationsRequest struct {
 }
 
 // Send marshals and sends the ListInvalidations API request.
-func (r ListInvalidationsRequest) Send() (*ListInvalidationsOutput, error) {
+func (r ListInvalidationsRequest) Send(ctx context.Context) (*ListInvalidationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1889,7 +1924,7 @@ func (r ListInvalidationsRequest) Send() (*ListInvalidationsOutput, error) {
 //
 //    // Example sending a request using the ListInvalidationsRequest method.
 //    req := client.ListInvalidationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1975,7 +2010,8 @@ type ListPublicKeysRequest struct {
 }
 
 // Send marshals and sends the ListPublicKeys API request.
-func (r ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
+func (r ListPublicKeysRequest) Send(ctx context.Context) (*ListPublicKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1991,7 +2027,7 @@ func (r ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
 //
 //    // Example sending a request using the ListPublicKeysRequest method.
 //    req := client.ListPublicKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2025,7 +2061,8 @@ type ListStreamingDistributionsRequest struct {
 }
 
 // Send marshals and sends the ListStreamingDistributions API request.
-func (r ListStreamingDistributionsRequest) Send() (*ListStreamingDistributionsOutput, error) {
+func (r ListStreamingDistributionsRequest) Send(ctx context.Context) (*ListStreamingDistributionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2041,7 +2078,7 @@ func (r ListStreamingDistributionsRequest) Send() (*ListStreamingDistributionsOu
 //
 //    // Example sending a request using the ListStreamingDistributionsRequest method.
 //    req := client.ListStreamingDistributionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2127,7 +2164,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2143,7 +2181,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2177,7 +2215,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2193,7 +2232,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2229,7 +2268,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2245,7 +2285,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2281,7 +2321,8 @@ type UpdateCloudFrontOriginAccessIdentityRequest struct {
 }
 
 // Send marshals and sends the UpdateCloudFrontOriginAccessIdentity API request.
-func (r UpdateCloudFrontOriginAccessIdentityRequest) Send() (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
+func (r UpdateCloudFrontOriginAccessIdentityRequest) Send(ctx context.Context) (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2297,7 +2338,7 @@ func (r UpdateCloudFrontOriginAccessIdentityRequest) Send() (*UpdateCloudFrontOr
 //
 //    // Example sending a request using the UpdateCloudFrontOriginAccessIdentityRequest method.
 //    req := client.UpdateCloudFrontOriginAccessIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2331,7 +2372,8 @@ type UpdateDistributionRequest struct {
 }
 
 // Send marshals and sends the UpdateDistribution API request.
-func (r UpdateDistributionRequest) Send() (*UpdateDistributionOutput, error) {
+func (r UpdateDistributionRequest) Send(ctx context.Context) (*UpdateDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2408,7 +2450,7 @@ func (r UpdateDistributionRequest) Send() (*UpdateDistributionOutput, error) {
 //
 //    // Example sending a request using the UpdateDistributionRequest method.
 //    req := client.UpdateDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2442,7 +2484,8 @@ type UpdateFieldLevelEncryptionConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateFieldLevelEncryptionConfig API request.
-func (r UpdateFieldLevelEncryptionConfigRequest) Send() (*UpdateFieldLevelEncryptionConfigOutput, error) {
+func (r UpdateFieldLevelEncryptionConfigRequest) Send(ctx context.Context) (*UpdateFieldLevelEncryptionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2458,7 +2501,7 @@ func (r UpdateFieldLevelEncryptionConfigRequest) Send() (*UpdateFieldLevelEncryp
 //
 //    // Example sending a request using the UpdateFieldLevelEncryptionConfigRequest method.
 //    req := client.UpdateFieldLevelEncryptionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2492,7 +2535,8 @@ type UpdateFieldLevelEncryptionProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateFieldLevelEncryptionProfile API request.
-func (r UpdateFieldLevelEncryptionProfileRequest) Send() (*UpdateFieldLevelEncryptionProfileOutput, error) {
+func (r UpdateFieldLevelEncryptionProfileRequest) Send(ctx context.Context) (*UpdateFieldLevelEncryptionProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2508,7 +2552,7 @@ func (r UpdateFieldLevelEncryptionProfileRequest) Send() (*UpdateFieldLevelEncry
 //
 //    // Example sending a request using the UpdateFieldLevelEncryptionProfileRequest method.
 //    req := client.UpdateFieldLevelEncryptionProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2542,7 +2586,8 @@ type UpdatePublicKeyRequest struct {
 }
 
 // Send marshals and sends the UpdatePublicKey API request.
-func (r UpdatePublicKeyRequest) Send() (*UpdatePublicKeyOutput, error) {
+func (r UpdatePublicKeyRequest) Send(ctx context.Context) (*UpdatePublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2559,7 +2604,7 @@ func (r UpdatePublicKeyRequest) Send() (*UpdatePublicKeyOutput, error) {
 //
 //    // Example sending a request using the UpdatePublicKeyRequest method.
 //    req := client.UpdatePublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2593,7 +2638,8 @@ type UpdateStreamingDistributionRequest struct {
 }
 
 // Send marshals and sends the UpdateStreamingDistribution API request.
-func (r UpdateStreamingDistributionRequest) Send() (*UpdateStreamingDistributionOutput, error) {
+func (r UpdateStreamingDistributionRequest) Send(ctx context.Context) (*UpdateStreamingDistributionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2609,7 +2655,7 @@ func (r UpdateStreamingDistributionRequest) Send() (*UpdateStreamingDistribution
 //
 //    // Example sending a request using the UpdateStreamingDistributionRequest method.
 //    req := client.UpdateStreamingDistributionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

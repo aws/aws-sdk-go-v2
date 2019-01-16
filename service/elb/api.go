@@ -3,6 +3,7 @@
 package elb
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type ApplySecurityGroupsToLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the ApplySecurityGroupsToLoadBalancer API request.
-func (r ApplySecurityGroupsToLoadBalancerRequest) Send() (*ApplySecurityGroupsToLoadBalancerOutput, error) {
+func (r ApplySecurityGroupsToLoadBalancerRequest) Send(ctx context.Context) (*ApplySecurityGroupsToLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -98,7 +101,7 @@ func (r ApplySecurityGroupsToLoadBalancerRequest) Send() (*ApplySecurityGroupsTo
 //
 //    // Example sending a request using the ApplySecurityGroupsToLoadBalancerRequest method.
 //    req := client.ApplySecurityGroupsToLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -132,7 +135,8 @@ type AttachLoadBalancerToSubnetsRequest struct {
 }
 
 // Send marshals and sends the AttachLoadBalancerToSubnets API request.
-func (r AttachLoadBalancerToSubnetsRequest) Send() (*AttachLoadBalancerToSubnetsOutput, error) {
+func (r AttachLoadBalancerToSubnetsRequest) Send(ctx context.Context) (*AttachLoadBalancerToSubnetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -154,7 +158,7 @@ func (r AttachLoadBalancerToSubnetsRequest) Send() (*AttachLoadBalancerToSubnets
 //
 //    // Example sending a request using the AttachLoadBalancerToSubnetsRequest method.
 //    req := client.AttachLoadBalancerToSubnetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -188,7 +192,8 @@ type ConfigureHealthCheckRequest struct {
 }
 
 // Send marshals and sends the ConfigureHealthCheck API request.
-func (r ConfigureHealthCheckRequest) Send() (*ConfigureHealthCheckOutput, error) {
+func (r ConfigureHealthCheckRequest) Send(ctx context.Context) (*ConfigureHealthCheckOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -209,7 +214,7 @@ func (r ConfigureHealthCheckRequest) Send() (*ConfigureHealthCheckOutput, error)
 //
 //    // Example sending a request using the ConfigureHealthCheckRequest method.
 //    req := client.ConfigureHealthCheckRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -243,7 +248,8 @@ type CreateAppCookieStickinessPolicyRequest struct {
 }
 
 // Send marshals and sends the CreateAppCookieStickinessPolicy API request.
-func (r CreateAppCookieStickinessPolicyRequest) Send() (*CreateAppCookieStickinessPolicyOutput, error) {
+func (r CreateAppCookieStickinessPolicyRequest) Send(ctx context.Context) (*CreateAppCookieStickinessPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -273,7 +279,7 @@ func (r CreateAppCookieStickinessPolicyRequest) Send() (*CreateAppCookieStickine
 //
 //    // Example sending a request using the CreateAppCookieStickinessPolicyRequest method.
 //    req := client.CreateAppCookieStickinessPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -307,7 +313,8 @@ type CreateLBCookieStickinessPolicyRequest struct {
 }
 
 // Send marshals and sends the CreateLBCookieStickinessPolicy API request.
-func (r CreateLBCookieStickinessPolicyRequest) Send() (*CreateLBCookieStickinessPolicyOutput, error) {
+func (r CreateLBCookieStickinessPolicyRequest) Send(ctx context.Context) (*CreateLBCookieStickinessPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -339,7 +346,7 @@ func (r CreateLBCookieStickinessPolicyRequest) Send() (*CreateLBCookieStickiness
 //
 //    // Example sending a request using the CreateLBCookieStickinessPolicyRequest method.
 //    req := client.CreateLBCookieStickinessPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -373,7 +380,8 @@ type CreateLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
-func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
+func (r CreateLoadBalancerRequest) Send(ctx context.Context) (*CreateLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -401,7 +409,7 @@ func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
 //
 //    // Example sending a request using the CreateLoadBalancerRequest method.
 //    req := client.CreateLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -435,7 +443,8 @@ type CreateLoadBalancerListenersRequest struct {
 }
 
 // Send marshals and sends the CreateLoadBalancerListeners API request.
-func (r CreateLoadBalancerListenersRequest) Send() (*CreateLoadBalancerListenersOutput, error) {
+func (r CreateLoadBalancerListenersRequest) Send(ctx context.Context) (*CreateLoadBalancerListenersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -457,7 +466,7 @@ func (r CreateLoadBalancerListenersRequest) Send() (*CreateLoadBalancerListeners
 //
 //    // Example sending a request using the CreateLoadBalancerListenersRequest method.
 //    req := client.CreateLoadBalancerListenersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -491,7 +500,8 @@ type CreateLoadBalancerPolicyRequest struct {
 }
 
 // Send marshals and sends the CreateLoadBalancerPolicy API request.
-func (r CreateLoadBalancerPolicyRequest) Send() (*CreateLoadBalancerPolicyOutput, error) {
+func (r CreateLoadBalancerPolicyRequest) Send(ctx context.Context) (*CreateLoadBalancerPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -511,7 +521,7 @@ func (r CreateLoadBalancerPolicyRequest) Send() (*CreateLoadBalancerPolicyOutput
 //
 //    // Example sending a request using the CreateLoadBalancerPolicyRequest method.
 //    req := client.CreateLoadBalancerPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -545,7 +555,8 @@ type DeleteLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DeleteLoadBalancer API request.
-func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
+func (r DeleteLoadBalancerRequest) Send(ctx context.Context) (*DeleteLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -570,7 +581,7 @@ func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
 //
 //    // Example sending a request using the DeleteLoadBalancerRequest method.
 //    req := client.DeleteLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -604,7 +615,8 @@ type DeleteLoadBalancerListenersRequest struct {
 }
 
 // Send marshals and sends the DeleteLoadBalancerListeners API request.
-func (r DeleteLoadBalancerListenersRequest) Send() (*DeleteLoadBalancerListenersOutput, error) {
+func (r DeleteLoadBalancerListenersRequest) Send(ctx context.Context) (*DeleteLoadBalancerListenersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,7 +632,7 @@ func (r DeleteLoadBalancerListenersRequest) Send() (*DeleteLoadBalancerListeners
 //
 //    // Example sending a request using the DeleteLoadBalancerListenersRequest method.
 //    req := client.DeleteLoadBalancerListenersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -654,7 +666,8 @@ type DeleteLoadBalancerPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteLoadBalancerPolicy API request.
-func (r DeleteLoadBalancerPolicyRequest) Send() (*DeleteLoadBalancerPolicyOutput, error) {
+func (r DeleteLoadBalancerPolicyRequest) Send(ctx context.Context) (*DeleteLoadBalancerPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -671,7 +684,7 @@ func (r DeleteLoadBalancerPolicyRequest) Send() (*DeleteLoadBalancerPolicyOutput
 //
 //    // Example sending a request using the DeleteLoadBalancerPolicyRequest method.
 //    req := client.DeleteLoadBalancerPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -705,7 +718,8 @@ type DeregisterInstancesFromLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DeregisterInstancesFromLoadBalancer API request.
-func (r DeregisterInstancesFromLoadBalancerRequest) Send() (*DeregisterInstancesFromLoadBalancerOutput, error) {
+func (r DeregisterInstancesFromLoadBalancerRequest) Send(ctx context.Context) (*DeregisterInstancesFromLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -729,7 +743,7 @@ func (r DeregisterInstancesFromLoadBalancerRequest) Send() (*DeregisterInstances
 //
 //    // Example sending a request using the DeregisterInstancesFromLoadBalancerRequest method.
 //    req := client.DeregisterInstancesFromLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -763,7 +777,8 @@ type DescribeAccountLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
-func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccountLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -783,7 +798,7 @@ func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, erro
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
 //    req := client.DescribeAccountLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -817,7 +832,8 @@ type DescribeInstanceHealthRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceHealth API request.
-func (r DescribeInstanceHealthRequest) Send() (*DescribeInstanceHealthOutput, error) {
+func (r DescribeInstanceHealthRequest) Send(ctx context.Context) (*DescribeInstanceHealthOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,7 +854,7 @@ func (r DescribeInstanceHealthRequest) Send() (*DescribeInstanceHealthOutput, er
 //
 //    // Example sending a request using the DescribeInstanceHealthRequest method.
 //    req := client.DescribeInstanceHealthRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -872,7 +888,8 @@ type DescribeLoadBalancerAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerAttributes API request.
-func (r DescribeLoadBalancerAttributesRequest) Send() (*DescribeLoadBalancerAttributesOutput, error) {
+func (r DescribeLoadBalancerAttributesRequest) Send(ctx context.Context) (*DescribeLoadBalancerAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -888,7 +905,7 @@ func (r DescribeLoadBalancerAttributesRequest) Send() (*DescribeLoadBalancerAttr
 //
 //    // Example sending a request using the DescribeLoadBalancerAttributesRequest method.
 //    req := client.DescribeLoadBalancerAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -922,7 +939,8 @@ type DescribeLoadBalancerPoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicies API request.
-func (r DescribeLoadBalancerPoliciesRequest) Send() (*DescribeLoadBalancerPoliciesOutput, error) {
+func (r DescribeLoadBalancerPoliciesRequest) Send(ctx context.Context) (*DescribeLoadBalancerPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -945,7 +963,7 @@ func (r DescribeLoadBalancerPoliciesRequest) Send() (*DescribeLoadBalancerPolici
 //
 //    // Example sending a request using the DescribeLoadBalancerPoliciesRequest method.
 //    req := client.DescribeLoadBalancerPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -979,7 +997,8 @@ type DescribeLoadBalancerPolicyTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicyTypes API request.
-func (r DescribeLoadBalancerPolicyTypesRequest) Send() (*DescribeLoadBalancerPolicyTypesOutput, error) {
+func (r DescribeLoadBalancerPolicyTypesRequest) Send(ctx context.Context) (*DescribeLoadBalancerPolicyTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,7 +1025,7 @@ func (r DescribeLoadBalancerPolicyTypesRequest) Send() (*DescribeLoadBalancerPol
 //
 //    // Example sending a request using the DescribeLoadBalancerPolicyTypesRequest method.
 //    req := client.DescribeLoadBalancerPolicyTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1040,7 +1059,8 @@ type DescribeLoadBalancersRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
-func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+func (r DescribeLoadBalancersRequest) Send(ctx context.Context) (*DescribeLoadBalancersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1057,7 +1077,7 @@ func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, erro
 //
 //    // Example sending a request using the DescribeLoadBalancersRequest method.
 //    req := client.DescribeLoadBalancersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1143,7 +1163,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1159,7 +1180,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1193,7 +1214,8 @@ type DetachLoadBalancerFromSubnetsRequest struct {
 }
 
 // Send marshals and sends the DetachLoadBalancerFromSubnets API request.
-func (r DetachLoadBalancerFromSubnetsRequest) Send() (*DetachLoadBalancerFromSubnetsOutput, error) {
+func (r DetachLoadBalancerFromSubnetsRequest) Send(ctx context.Context) (*DetachLoadBalancerFromSubnetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1214,7 +1236,7 @@ func (r DetachLoadBalancerFromSubnetsRequest) Send() (*DetachLoadBalancerFromSub
 //
 //    // Example sending a request using the DetachLoadBalancerFromSubnetsRequest method.
 //    req := client.DetachLoadBalancerFromSubnetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1248,7 +1270,8 @@ type DisableAvailabilityZonesForLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DisableAvailabilityZonesForLoadBalancer API request.
-func (r DisableAvailabilityZonesForLoadBalancerRequest) Send() (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
+func (r DisableAvailabilityZonesForLoadBalancerRequest) Send(ctx context.Context) (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1276,7 +1299,7 @@ func (r DisableAvailabilityZonesForLoadBalancerRequest) Send() (*DisableAvailabi
 //
 //    // Example sending a request using the DisableAvailabilityZonesForLoadBalancerRequest method.
 //    req := client.DisableAvailabilityZonesForLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1310,7 +1333,8 @@ type EnableAvailabilityZonesForLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the EnableAvailabilityZonesForLoadBalancer API request.
-func (r EnableAvailabilityZonesForLoadBalancerRequest) Send() (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
+func (r EnableAvailabilityZonesForLoadBalancerRequest) Send(ctx context.Context) (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1334,7 +1358,7 @@ func (r EnableAvailabilityZonesForLoadBalancerRequest) Send() (*EnableAvailabili
 //
 //    // Example sending a request using the EnableAvailabilityZonesForLoadBalancerRequest method.
 //    req := client.EnableAvailabilityZonesForLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1368,7 +1392,8 @@ type ModifyLoadBalancerAttributesRequest struct {
 }
 
 // Send marshals and sends the ModifyLoadBalancerAttributes API request.
-func (r ModifyLoadBalancerAttributesRequest) Send() (*ModifyLoadBalancerAttributesOutput, error) {
+func (r ModifyLoadBalancerAttributesRequest) Send(ctx context.Context) (*ModifyLoadBalancerAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1399,7 +1424,7 @@ func (r ModifyLoadBalancerAttributesRequest) Send() (*ModifyLoadBalancerAttribut
 //
 //    // Example sending a request using the ModifyLoadBalancerAttributesRequest method.
 //    req := client.ModifyLoadBalancerAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1433,7 +1458,8 @@ type RegisterInstancesWithLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the RegisterInstancesWithLoadBalancer API request.
-func (r RegisterInstancesWithLoadBalancerRequest) Send() (*RegisterInstancesWithLoadBalancerOutput, error) {
+func (r RegisterInstancesWithLoadBalancerRequest) Send(ctx context.Context) (*RegisterInstancesWithLoadBalancerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1471,7 +1497,7 @@ func (r RegisterInstancesWithLoadBalancerRequest) Send() (*RegisterInstancesWith
 //
 //    // Example sending a request using the RegisterInstancesWithLoadBalancerRequest method.
 //    req := client.RegisterInstancesWithLoadBalancerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1505,7 +1531,8 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1521,7 +1548,7 @@ func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsRequest method.
 //    req := client.RemoveTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1555,7 +1582,8 @@ type SetLoadBalancerListenerSSLCertificateRequest struct {
 }
 
 // Send marshals and sends the SetLoadBalancerListenerSSLCertificate API request.
-func (r SetLoadBalancerListenerSSLCertificateRequest) Send() (*SetLoadBalancerListenerSSLCertificateOutput, error) {
+func (r SetLoadBalancerListenerSSLCertificateRequest) Send(ctx context.Context) (*SetLoadBalancerListenerSSLCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1577,7 +1605,7 @@ func (r SetLoadBalancerListenerSSLCertificateRequest) Send() (*SetLoadBalancerLi
 //
 //    // Example sending a request using the SetLoadBalancerListenerSSLCertificateRequest method.
 //    req := client.SetLoadBalancerListenerSSLCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1611,7 +1639,8 @@ type SetLoadBalancerPoliciesForBackendServerRequest struct {
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesForBackendServer API request.
-func (r SetLoadBalancerPoliciesForBackendServerRequest) Send() (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
+func (r SetLoadBalancerPoliciesForBackendServerRequest) Send(ctx context.Context) (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1642,7 +1671,7 @@ func (r SetLoadBalancerPoliciesForBackendServerRequest) Send() (*SetLoadBalancer
 //
 //    // Example sending a request using the SetLoadBalancerPoliciesForBackendServerRequest method.
 //    req := client.SetLoadBalancerPoliciesForBackendServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1676,7 +1705,8 @@ type SetLoadBalancerPoliciesOfListenerRequest struct {
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesOfListener API request.
-func (r SetLoadBalancerPoliciesOfListenerRequest) Send() (*SetLoadBalancerPoliciesOfListenerOutput, error) {
+func (r SetLoadBalancerPoliciesOfListenerRequest) Send(ctx context.Context) (*SetLoadBalancerPoliciesOfListenerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1701,7 +1731,7 @@ func (r SetLoadBalancerPoliciesOfListenerRequest) Send() (*SetLoadBalancerPolici
 //
 //    // Example sending a request using the SetLoadBalancerPoliciesOfListenerRequest method.
 //    req := client.SetLoadBalancerPoliciesOfListenerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

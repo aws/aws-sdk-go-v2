@@ -3,6 +3,7 @@
 package xray
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type BatchGetTracesRequest struct {
 }
 
 // Send marshals and sends the BatchGetTraces API request.
-func (r BatchGetTracesRequest) Send() (*BatchGetTracesOutput, error) {
+func (r BatchGetTracesRequest) Send(ctx context.Context) (*BatchGetTracesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r BatchGetTracesRequest) Send() (*BatchGetTracesOutput, error) {
 //
 //    // Example sending a request using the BatchGetTracesRequest method.
 //    req := client.BatchGetTracesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -125,7 +127,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +144,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +178,8 @@ type CreateSamplingRuleRequest struct {
 }
 
 // Send marshals and sends the CreateSamplingRule API request.
-func (r CreateSamplingRuleRequest) Send() (*CreateSamplingRuleOutput, error) {
+func (r CreateSamplingRuleRequest) Send(ctx context.Context) (*CreateSamplingRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -197,7 +201,7 @@ func (r CreateSamplingRuleRequest) Send() (*CreateSamplingRuleOutput, error) {
 //
 //    // Example sending a request using the CreateSamplingRuleRequest method.
 //    req := client.CreateSamplingRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -231,7 +235,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -247,7 +252,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -281,7 +286,8 @@ type DeleteSamplingRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteSamplingRule API request.
-func (r DeleteSamplingRuleRequest) Send() (*DeleteSamplingRuleOutput, error) {
+func (r DeleteSamplingRuleRequest) Send(ctx context.Context) (*DeleteSamplingRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,7 +303,7 @@ func (r DeleteSamplingRuleRequest) Send() (*DeleteSamplingRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteSamplingRuleRequest method.
 //    req := client.DeleteSamplingRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -331,7 +337,8 @@ type GetEncryptionConfigRequest struct {
 }
 
 // Send marshals and sends the GetEncryptionConfig API request.
-func (r GetEncryptionConfigRequest) Send() (*GetEncryptionConfigOutput, error) {
+func (r GetEncryptionConfigRequest) Send(ctx context.Context) (*GetEncryptionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +354,7 @@ func (r GetEncryptionConfigRequest) Send() (*GetEncryptionConfigOutput, error) {
 //
 //    // Example sending a request using the GetEncryptionConfigRequest method.
 //    req := client.GetEncryptionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -381,7 +388,8 @@ type GetGroupRequest struct {
 }
 
 // Send marshals and sends the GetGroup API request.
-func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -397,7 +405,7 @@ func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
 //
 //    // Example sending a request using the GetGroupRequest method.
 //    req := client.GetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -431,7 +439,8 @@ type GetGroupsRequest struct {
 }
 
 // Send marshals and sends the GetGroups API request.
-func (r GetGroupsRequest) Send() (*GetGroupsOutput, error) {
+func (r GetGroupsRequest) Send(ctx context.Context) (*GetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +456,7 @@ func (r GetGroupsRequest) Send() (*GetGroupsOutput, error) {
 //
 //    // Example sending a request using the GetGroupsRequest method.
 //    req := client.GetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -481,7 +490,8 @@ type GetSamplingRulesRequest struct {
 }
 
 // Send marshals and sends the GetSamplingRules API request.
-func (r GetSamplingRulesRequest) Send() (*GetSamplingRulesOutput, error) {
+func (r GetSamplingRulesRequest) Send(ctx context.Context) (*GetSamplingRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -497,7 +507,7 @@ func (r GetSamplingRulesRequest) Send() (*GetSamplingRulesOutput, error) {
 //
 //    // Example sending a request using the GetSamplingRulesRequest method.
 //    req := client.GetSamplingRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -531,7 +541,8 @@ type GetSamplingStatisticSummariesRequest struct {
 }
 
 // Send marshals and sends the GetSamplingStatisticSummaries API request.
-func (r GetSamplingStatisticSummariesRequest) Send() (*GetSamplingStatisticSummariesOutput, error) {
+func (r GetSamplingStatisticSummariesRequest) Send(ctx context.Context) (*GetSamplingStatisticSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +558,7 @@ func (r GetSamplingStatisticSummariesRequest) Send() (*GetSamplingStatisticSumma
 //
 //    // Example sending a request using the GetSamplingStatisticSummariesRequest method.
 //    req := client.GetSamplingStatisticSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +592,8 @@ type GetSamplingTargetsRequest struct {
 }
 
 // Send marshals and sends the GetSamplingTargets API request.
-func (r GetSamplingTargetsRequest) Send() (*GetSamplingTargetsOutput, error) {
+func (r GetSamplingTargetsRequest) Send(ctx context.Context) (*GetSamplingTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +609,7 @@ func (r GetSamplingTargetsRequest) Send() (*GetSamplingTargetsOutput, error) {
 //
 //    // Example sending a request using the GetSamplingTargetsRequest method.
 //    req := client.GetSamplingTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +643,8 @@ type GetServiceGraphRequest struct {
 }
 
 // Send marshals and sends the GetServiceGraph API request.
-func (r GetServiceGraphRequest) Send() (*GetServiceGraphOutput, error) {
+func (r GetServiceGraphRequest) Send(ctx context.Context) (*GetServiceGraphOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,7 +664,7 @@ func (r GetServiceGraphRequest) Send() (*GetServiceGraphOutput, error) {
 //
 //    // Example sending a request using the GetServiceGraphRequest method.
 //    req := client.GetServiceGraphRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -737,7 +750,8 @@ type GetTraceGraphRequest struct {
 }
 
 // Send marshals and sends the GetTraceGraph API request.
-func (r GetTraceGraphRequest) Send() (*GetTraceGraphOutput, error) {
+func (r GetTraceGraphRequest) Send(ctx context.Context) (*GetTraceGraphOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -753,7 +767,7 @@ func (r GetTraceGraphRequest) Send() (*GetTraceGraphOutput, error) {
 //
 //    // Example sending a request using the GetTraceGraphRequest method.
 //    req := client.GetTraceGraphRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -839,7 +853,8 @@ type GetTraceSummariesRequest struct {
 }
 
 // Send marshals and sends the GetTraceSummaries API request.
-func (r GetTraceSummariesRequest) Send() (*GetTraceSummariesOutput, error) {
+func (r GetTraceSummariesRequest) Send(ctx context.Context) (*GetTraceSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -871,7 +886,7 @@ func (r GetTraceSummariesRequest) Send() (*GetTraceSummariesOutput, error) {
 //
 //    // Example sending a request using the GetTraceSummariesRequest method.
 //    req := client.GetTraceSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -957,7 +972,8 @@ type PutEncryptionConfigRequest struct {
 }
 
 // Send marshals and sends the PutEncryptionConfig API request.
-func (r PutEncryptionConfigRequest) Send() (*PutEncryptionConfigOutput, error) {
+func (r PutEncryptionConfigRequest) Send(ctx context.Context) (*PutEncryptionConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -973,7 +989,7 @@ func (r PutEncryptionConfigRequest) Send() (*PutEncryptionConfigOutput, error) {
 //
 //    // Example sending a request using the PutEncryptionConfigRequest method.
 //    req := client.PutEncryptionConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1007,7 +1023,8 @@ type PutTelemetryRecordsRequest struct {
 }
 
 // Send marshals and sends the PutTelemetryRecords API request.
-func (r PutTelemetryRecordsRequest) Send() (*PutTelemetryRecordsOutput, error) {
+func (r PutTelemetryRecordsRequest) Send(ctx context.Context) (*PutTelemetryRecordsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1023,7 +1040,7 @@ func (r PutTelemetryRecordsRequest) Send() (*PutTelemetryRecordsOutput, error) {
 //
 //    // Example sending a request using the PutTelemetryRecordsRequest method.
 //    req := client.PutTelemetryRecordsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1057,7 +1074,8 @@ type PutTraceSegmentsRequest struct {
 }
 
 // Send marshals and sends the PutTraceSegments API request.
-func (r PutTraceSegmentsRequest) Send() (*PutTraceSegmentsOutput, error) {
+func (r PutTraceSegmentsRequest) Send(ctx context.Context) (*PutTraceSegmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1118,7 +1136,7 @@ func (r PutTraceSegmentsRequest) Send() (*PutTraceSegmentsOutput, error) {
 //
 //    // Example sending a request using the PutTraceSegmentsRequest method.
 //    req := client.PutTraceSegmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1152,7 +1170,8 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1168,7 +1187,7 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1202,7 +1221,8 @@ type UpdateSamplingRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateSamplingRule API request.
-func (r UpdateSamplingRuleRequest) Send() (*UpdateSamplingRuleOutput, error) {
+func (r UpdateSamplingRuleRequest) Send(ctx context.Context) (*UpdateSamplingRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1218,7 +1238,7 @@ func (r UpdateSamplingRuleRequest) Send() (*UpdateSamplingRuleOutput, error) {
 //
 //    // Example sending a request using the UpdateSamplingRuleRequest method.
 //    req := client.UpdateSamplingRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

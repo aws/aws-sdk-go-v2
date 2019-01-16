@@ -3,6 +3,7 @@
 package translate
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type DeleteTerminologyRequest struct {
 }
 
 // Send marshals and sends the DeleteTerminology API request.
-func (r DeleteTerminologyRequest) Send() (*DeleteTerminologyOutput, error) {
+func (r DeleteTerminologyRequest) Send(ctx context.Context) (*DeleteTerminologyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r DeleteTerminologyRequest) Send() (*DeleteTerminologyOutput, error) {
 //
 //    // Example sending a request using the DeleteTerminologyRequest method.
 //    req := client.DeleteTerminologyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type GetTerminologyRequest struct {
 }
 
 // Send marshals and sends the GetTerminology API request.
-func (r GetTerminologyRequest) Send() (*GetTerminologyOutput, error) {
+func (r GetTerminologyRequest) Send(ctx context.Context) (*GetTerminologyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r GetTerminologyRequest) Send() (*GetTerminologyOutput, error) {
 //
 //    // Example sending a request using the GetTerminologyRequest method.
 //    req := client.GetTerminologyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type ImportTerminologyRequest struct {
 }
 
 // Send marshals and sends the ImportTerminology API request.
-func (r ImportTerminologyRequest) Send() (*ImportTerminologyOutput, error) {
+func (r ImportTerminologyRequest) Send(ctx context.Context) (*ImportTerminologyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -148,7 +152,7 @@ func (r ImportTerminologyRequest) Send() (*ImportTerminologyOutput, error) {
 //
 //    // Example sending a request using the ImportTerminologyRequest method.
 //    req := client.ImportTerminologyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -182,7 +186,8 @@ type ListTerminologiesRequest struct {
 }
 
 // Send marshals and sends the ListTerminologies API request.
-func (r ListTerminologiesRequest) Send() (*ListTerminologiesOutput, error) {
+func (r ListTerminologiesRequest) Send(ctx context.Context) (*ListTerminologiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -198,7 +203,7 @@ func (r ListTerminologiesRequest) Send() (*ListTerminologiesOutput, error) {
 //
 //    // Example sending a request using the ListTerminologiesRequest method.
 //    req := client.ListTerminologiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -232,7 +237,8 @@ type TextRequest struct {
 }
 
 // Send marshals and sends the Text API request.
-func (r TextRequest) Send() (*TextOutput, error) {
+func (r TextRequest) Send(ctx context.Context) (*TextOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,7 +303,7 @@ func (r TextRequest) Send() (*TextOutput, error) {
 //
 //    // Example sending a request using the TextRequest method.
 //    req := client.TextRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

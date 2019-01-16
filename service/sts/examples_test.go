@@ -3,6 +3,7 @@
 package sts_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -44,7 +45,7 @@ func ExampleSTS_AssumeRoleRequest_shared00() {
 	}
 
 	req := svc.AssumeRoleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -87,7 +88,7 @@ func ExampleSTS_AssumeRoleWithWebIdentityRequest_shared00() {
 	}
 
 	req := svc.AssumeRoleWithWebIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -134,7 +135,7 @@ func ExampleSTS_DecodeAuthorizationMessageRequest_shared00() {
 	}
 
 	req := svc.DecodeAuthorizationMessageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -168,7 +169,7 @@ func ExampleSTS_GetCallerIdentityRequest_shared00() {
 	input := &sts.GetCallerIdentityInput{}
 
 	req := svc.GetCallerIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -201,7 +202,7 @@ func ExampleSTS_GetCallerIdentityRequest_shared01() {
 	input := &sts.GetCallerIdentityInput{}
 
 	req := svc.GetCallerIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -233,7 +234,7 @@ func ExampleSTS_GetCallerIdentityRequest_shared02() {
 	input := &sts.GetCallerIdentityInput{}
 
 	req := svc.GetCallerIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -268,7 +269,7 @@ func ExampleSTS_GetFederationTokenRequest_shared00() {
 	}
 
 	req := svc.GetFederationTokenRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -309,7 +310,7 @@ func ExampleSTS_GetSessionTokenRequest_shared00() {
 	}
 
 	req := svc.GetSessionTokenRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

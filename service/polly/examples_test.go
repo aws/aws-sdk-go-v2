@@ -3,6 +3,7 @@
 package polly_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -40,7 +41,7 @@ func ExamplePolly_DeleteLexiconRequest_shared00() {
 	}
 
 	req := svc.DeleteLexiconRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -79,7 +80,7 @@ func ExamplePolly_DescribeVoicesRequest_shared00() {
 	}
 
 	req := svc.DescribeVoicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -116,7 +117,7 @@ func ExamplePolly_GetLexiconRequest_shared00() {
 	}
 
 	req := svc.GetLexiconRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -151,7 +152,7 @@ func ExamplePolly_ListLexiconsRequest_shared00() {
 	input := &polly.ListLexiconsInput{}
 
 	req := svc.ListLexiconsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -189,7 +190,7 @@ func ExamplePolly_PutLexiconRequest_shared00() {
 	}
 
 	req := svc.PutLexiconRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -243,7 +244,7 @@ func ExamplePolly_SynthesizeSpeechRequest_shared00() {
 	}
 
 	req := svc.SynthesizeSpeechRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -3,6 +3,7 @@
 package elasticache_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -50,7 +51,7 @@ func ExampleElastiCache_AddTagsToResourceRequest_shared00() {
 	}
 
 	req := svc.AddTagsToResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -95,7 +96,7 @@ func ExampleElastiCache_AuthorizeCacheSecurityGroupIngressRequest_shared00() {
 	}
 
 	req := svc.AuthorizeCacheSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -140,7 +141,7 @@ func ExampleElastiCache_CopySnapshotRequest_shared00() {
 	}
 
 	req := svc.CopySnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -192,7 +193,7 @@ func ExampleElastiCache_CreateCacheClusterRequest_shared00() {
 	}
 
 	req := svc.CreateCacheClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -262,7 +263,7 @@ func ExampleElastiCache_CreateCacheClusterRequest_shared01() {
 	}
 
 	req := svc.CreateCacheClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -325,7 +326,7 @@ func ExampleElastiCache_CreateCacheParameterGroupRequest_shared00() {
 	}
 
 	req := svc.CreateCacheParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -370,7 +371,7 @@ func ExampleElastiCache_CreateCacheSecurityGroupRequest_shared00() {
 	}
 
 	req := svc.CreateCacheSecurityGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -417,7 +418,7 @@ func ExampleElastiCache_CreateCacheSubnetGroupRequest_shared00() {
 	}
 
 	req := svc.CreateCacheSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -465,7 +466,7 @@ func ExampleElastiCache_CreateReplicationGroupRequest_shared00() {
 	}
 
 	req := svc.CreateReplicationGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -556,7 +557,7 @@ func ExampleElastiCache_CreateReplicationGroupRequest_shared01() {
 	}
 
 	req := svc.CreateReplicationGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -620,7 +621,7 @@ func ExampleElastiCache_CreateSnapshotRequest_shared00() {
 	}
 
 	req := svc.CreateSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -673,7 +674,7 @@ func ExampleElastiCache_CreateSnapshotRequest_shared01() {
 	}
 
 	req := svc.CreateSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -726,7 +727,7 @@ func ExampleElastiCache_CreateSnapshotRequest_shared02() {
 	}
 
 	req := svc.CreateSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -777,7 +778,7 @@ func ExampleElastiCache_DeleteCacheClusterRequest_shared00() {
 	}
 
 	req := svc.DeleteCacheClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -824,7 +825,7 @@ func ExampleElastiCache_DeleteCacheParameterGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteCacheParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -865,7 +866,7 @@ func ExampleElastiCache_DeleteCacheSecurityGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteCacheSecurityGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -906,7 +907,7 @@ func ExampleElastiCache_DeleteCacheSubnetGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteCacheSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -944,7 +945,7 @@ func ExampleElastiCache_DeleteReplicationGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteReplicationGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -991,7 +992,7 @@ func ExampleElastiCache_DeleteSnapshotRequest_shared00() {
 	}
 
 	req := svc.DeleteSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1032,7 +1033,7 @@ func ExampleElastiCache_DescribeCacheClustersRequest_shared00() {
 	}
 
 	req := svc.DescribeCacheClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1072,7 +1073,7 @@ func ExampleElastiCache_DescribeCacheClustersRequest_shared01() {
 	}
 
 	req := svc.DescribeCacheClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1109,7 +1110,7 @@ func ExampleElastiCache_DescribeCacheEngineVersionsRequest_shared00() {
 	input := &elasticache.DescribeCacheEngineVersionsInput{}
 
 	req := svc.DescribeCacheEngineVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1144,7 +1145,7 @@ func ExampleElastiCache_DescribeCacheEngineVersionsRequest_shared01() {
 	}
 
 	req := svc.DescribeCacheEngineVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1178,7 +1179,7 @@ func ExampleElastiCache_DescribeCacheParameterGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeCacheParameterGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1219,7 +1220,7 @@ func ExampleElastiCache_DescribeCacheParametersRequest_shared00() {
 	}
 
 	req := svc.DescribeCacheParametersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1259,7 +1260,7 @@ func ExampleElastiCache_DescribeCacheSecurityGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeCacheSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1298,7 +1299,7 @@ func ExampleElastiCache_DescribeCacheSubnetGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeCacheSubnetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1335,7 +1336,7 @@ func ExampleElastiCache_DescribeEngineDefaultParametersRequest_shared00() {
 	}
 
 	req := svc.DescribeEngineDefaultParametersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1373,7 +1374,7 @@ func ExampleElastiCache_DescribeEventsRequest_shared00() {
 	}
 
 	req := svc.DescribeEventsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1410,7 +1411,7 @@ func ExampleElastiCache_DescribeEventsRequest_shared01() {
 	}
 
 	req := svc.DescribeEventsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1445,7 +1446,7 @@ func ExampleElastiCache_DescribeReplicationGroupsRequest_shared00() {
 	input := &elasticache.DescribeReplicationGroupsInput{}
 
 	req := svc.DescribeReplicationGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1486,7 +1487,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesRequest_shared00() {
 	}
 
 	req := svc.DescribeReservedCacheNodesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1525,7 +1526,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferingsRequest_shared00() {
 	}
 
 	req := svc.DescribeReservedCacheNodesOfferingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1569,7 +1570,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferingsRequest_shared01() {
 	}
 
 	req := svc.DescribeReservedCacheNodesOfferingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1614,7 +1615,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferingsRequest_shared02() {
 	}
 
 	req := svc.DescribeReservedCacheNodesOfferingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1653,7 +1654,7 @@ func ExampleElastiCache_DescribeSnapshotsRequest_shared00() {
 	}
 
 	req := svc.DescribeSnapshotsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1695,7 +1696,7 @@ func ExampleElastiCache_ListAllowedNodeTypeModificationsRequest_shared00() {
 	}
 
 	req := svc.ListAllowedNodeTypeModificationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1737,7 +1738,7 @@ func ExampleElastiCache_ListAllowedNodeTypeModificationsRequest_shared01() {
 	}
 
 	req := svc.ListAllowedNodeTypeModificationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1780,7 +1781,7 @@ func ExampleElastiCache_ListTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ListTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1821,7 +1822,7 @@ func ExampleElastiCache_ModifyCacheClusterRequest_shared00() {
 	}
 
 	req := svc.ModifyCacheClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1887,7 +1888,7 @@ func ExampleElastiCache_ModifyCacheParameterGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyCacheParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1931,7 +1932,7 @@ func ExampleElastiCache_ModifyCacheSubnetGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyCacheSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1976,7 +1977,7 @@ func ExampleElastiCache_ModifyReplicationGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyReplicationGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2035,7 +2036,7 @@ func ExampleElastiCache_PurchaseReservedCacheNodesOfferingRequest_shared00() {
 	}
 
 	req := svc.PurchaseReservedCacheNodesOfferingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2082,7 +2083,7 @@ func ExampleElastiCache_RebootCacheClusterRequest_shared00() {
 	}
 
 	req := svc.RebootCacheClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2125,7 +2126,7 @@ func ExampleElastiCache_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsFromResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2168,7 +2169,7 @@ func ExampleElastiCache_ResetCacheParameterGroupRequest_shared00() {
 	}
 
 	req := svc.ResetCacheParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2212,7 +2213,7 @@ func ExampleElastiCache_RevokeCacheSecurityGroupIngressRequest_shared00() {
 	}
 
 	req := svc.RevokeCacheSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

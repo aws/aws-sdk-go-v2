@@ -3,6 +3,8 @@
 package quicksight
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +46,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +80,8 @@ type CreateGroupMembershipRequest struct {
 }
 
 // Send marshals and sends the CreateGroupMembership API request.
-func (r CreateGroupMembershipRequest) Send() (*CreateGroupMembershipOutput, error) {
+func (r CreateGroupMembershipRequest) Send(ctx context.Context) (*CreateGroupMembershipOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -106,7 +110,7 @@ func (r CreateGroupMembershipRequest) Send() (*CreateGroupMembershipOutput, erro
 //
 //    // Example sending a request using the CreateGroupMembershipRequest method.
 //    req := client.CreateGroupMembershipRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -140,7 +144,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -163,7 +168,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -197,7 +202,8 @@ type DeleteGroupMembershipRequest struct {
 }
 
 // Send marshals and sends the DeleteGroupMembership API request.
-func (r DeleteGroupMembershipRequest) Send() (*DeleteGroupMembershipOutput, error) {
+func (r DeleteGroupMembershipRequest) Send(ctx context.Context) (*DeleteGroupMembershipOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -225,7 +231,7 @@ func (r DeleteGroupMembershipRequest) Send() (*DeleteGroupMembershipOutput, erro
 //
 //    // Example sending a request using the DeleteGroupMembershipRequest method.
 //    req := client.DeleteGroupMembershipRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -259,7 +265,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -285,7 +292,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -319,7 +326,8 @@ type DescribeGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeGroup API request.
-func (r DescribeGroupRequest) Send() (*DescribeGroupOutput, error) {
+func (r DescribeGroupRequest) Send(ctx context.Context) (*DescribeGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -345,7 +353,7 @@ func (r DescribeGroupRequest) Send() (*DescribeGroupOutput, error) {
 //
 //    // Example sending a request using the DescribeGroupRequest method.
 //    req := client.DescribeGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -379,7 +387,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -405,7 +414,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -439,7 +448,8 @@ type GetDashboardEmbedUrlRequest struct {
 }
 
 // Send marshals and sends the GetDashboardEmbedUrl API request.
-func (r GetDashboardEmbedUrlRequest) Send() (*GetDashboardEmbedUrlOutput, error) {
+func (r GetDashboardEmbedUrlRequest) Send(ctx context.Context) (*GetDashboardEmbedUrlOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -481,7 +491,7 @@ func (r GetDashboardEmbedUrlRequest) Send() (*GetDashboardEmbedUrlOutput, error)
 //
 //    // Example sending a request using the GetDashboardEmbedUrlRequest method.
 //    req := client.GetDashboardEmbedUrlRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -515,7 +525,8 @@ type ListGroupMembershipsRequest struct {
 }
 
 // Send marshals and sends the ListGroupMemberships API request.
-func (r ListGroupMembershipsRequest) Send() (*ListGroupMembershipsOutput, error) {
+func (r ListGroupMembershipsRequest) Send(ctx context.Context) (*ListGroupMembershipsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -539,7 +550,7 @@ func (r ListGroupMembershipsRequest) Send() (*ListGroupMembershipsOutput, error)
 //
 //    // Example sending a request using the ListGroupMembershipsRequest method.
 //    req := client.ListGroupMembershipsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -573,7 +584,8 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +609,7 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +643,8 @@ type ListUserGroupsRequest struct {
 }
 
 // Send marshals and sends the ListUserGroups API request.
-func (r ListUserGroupsRequest) Send() (*ListUserGroupsOutput, error) {
+func (r ListUserGroupsRequest) Send(ctx context.Context) (*ListUserGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -657,7 +670,7 @@ func (r ListUserGroupsRequest) Send() (*ListUserGroupsOutput, error) {
 //
 //    // Example sending a request using the ListUserGroupsRequest method.
 //    req := client.ListUserGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -691,7 +704,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -716,7 +730,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -750,7 +764,8 @@ type RegisterUserRequest struct {
 }
 
 // Send marshals and sends the RegisterUser API request.
-func (r RegisterUserRequest) Send() (*RegisterUserOutput, error) {
+func (r RegisterUserRequest) Send(ctx context.Context) (*RegisterUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -780,7 +795,7 @@ func (r RegisterUserRequest) Send() (*RegisterUserOutput, error) {
 //
 //    // Example sending a request using the RegisterUserRequest method.
 //    req := client.RegisterUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -814,7 +829,8 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -839,7 +855,7 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -873,7 +889,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -900,7 +917,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

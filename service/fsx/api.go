@@ -3,6 +3,7 @@
 package fsx
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateBackupRequest struct {
 }
 
 // Send marshals and sends the CreateBackup API request.
-func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -62,7 +64,7 @@ func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
 //
 //    // Example sending a request using the CreateBackupRequest method.
 //    req := client.CreateBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -96,7 +98,8 @@ type CreateFileSystemRequest struct {
 }
 
 // Send marshals and sends the CreateFileSystem API request.
-func (r CreateFileSystemRequest) Send() (*CreateFileSystemOutput, error) {
+func (r CreateFileSystemRequest) Send(ctx context.Context) (*CreateFileSystemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -140,7 +143,7 @@ func (r CreateFileSystemRequest) Send() (*CreateFileSystemOutput, error) {
 //
 //    // Example sending a request using the CreateFileSystemRequest method.
 //    req := client.CreateFileSystemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +177,8 @@ type CreateFileSystemFromBackupRequest struct {
 }
 
 // Send marshals and sends the CreateFileSystemFromBackup API request.
-func (r CreateFileSystemFromBackupRequest) Send() (*CreateFileSystemFromBackupOutput, error) {
+func (r CreateFileSystemFromBackupRequest) Send(ctx context.Context) (*CreateFileSystemFromBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -220,7 +224,7 @@ func (r CreateFileSystemFromBackupRequest) Send() (*CreateFileSystemFromBackupOu
 //
 //    // Example sending a request using the CreateFileSystemFromBackupRequest method.
 //    req := client.CreateFileSystemFromBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -254,7 +258,8 @@ type DeleteBackupRequest struct {
 }
 
 // Send marshals and sends the DeleteBackup API request.
-func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -277,7 +282,7 @@ func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
 //
 //    // Example sending a request using the DeleteBackupRequest method.
 //    req := client.DeleteBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -311,7 +316,8 @@ type DeleteFileSystemRequest struct {
 }
 
 // Send marshals and sends the DeleteFileSystem API request.
-func (r DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
+func (r DeleteFileSystemRequest) Send(ctx context.Context) (*DeleteFileSystemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,7 +348,7 @@ func (r DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
 //
 //    // Example sending a request using the DeleteFileSystemRequest method.
 //    req := client.DeleteFileSystemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -376,7 +382,8 @@ type DescribeBackupsRequest struct {
 }
 
 // Send marshals and sends the DescribeBackups API request.
-func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -415,7 +422,7 @@ func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
 //
 //    // Example sending a request using the DescribeBackupsRequest method.
 //    req := client.DescribeBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -501,7 +508,8 @@ type DescribeFileSystemsRequest struct {
 }
 
 // Send marshals and sends the DescribeFileSystems API request.
-func (r DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
+func (r DescribeFileSystemsRequest) Send(ctx context.Context) (*DescribeFileSystemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +548,7 @@ func (r DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
 //
 //    // Example sending a request using the DescribeFileSystemsRequest method.
 //    req := client.DescribeFileSystemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -626,7 +634,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -663,7 +672,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -697,7 +706,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -713,7 +723,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -747,7 +757,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -763,7 +774,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -797,7 +808,8 @@ type UpdateFileSystemRequest struct {
 }
 
 // Send marshals and sends the UpdateFileSystem API request.
-func (r UpdateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
+func (r UpdateFileSystemRequest) Send(ctx context.Context) (*UpdateFileSystemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -813,7 +825,7 @@ func (r UpdateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
 //
 //    // Example sending a request using the UpdateFileSystemRequest method.
 //    req := client.UpdateFileSystemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

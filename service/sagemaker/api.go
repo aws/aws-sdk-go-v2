@@ -3,6 +3,7 @@
 package sagemaker
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -52,7 +54,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -86,7 +88,8 @@ type CreateAlgorithmRequest struct {
 }
 
 // Send marshals and sends the CreateAlgorithm API request.
-func (r CreateAlgorithmRequest) Send() (*CreateAlgorithmOutput, error) {
+func (r CreateAlgorithmRequest) Send(ctx context.Context) (*CreateAlgorithmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -103,7 +106,7 @@ func (r CreateAlgorithmRequest) Send() (*CreateAlgorithmOutput, error) {
 //
 //    // Example sending a request using the CreateAlgorithmRequest method.
 //    req := client.CreateAlgorithmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -137,7 +140,8 @@ type CreateCodeRepositoryRequest struct {
 }
 
 // Send marshals and sends the CreateCodeRepository API request.
-func (r CreateCodeRepositoryRequest) Send() (*CreateCodeRepositoryOutput, error) {
+func (r CreateCodeRepositoryRequest) Send(ctx context.Context) (*CreateCodeRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,7 +165,7 @@ func (r CreateCodeRepositoryRequest) Send() (*CreateCodeRepositoryOutput, error)
 //
 //    // Example sending a request using the CreateCodeRepositoryRequest method.
 //    req := client.CreateCodeRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -195,7 +199,8 @@ type CreateCompilationJobRequest struct {
 }
 
 // Send marshals and sends the CreateCompilationJob API request.
-func (r CreateCompilationJobRequest) Send() (*CreateCompilationJobOutput, error) {
+func (r CreateCompilationJobRequest) Send(ctx context.Context) (*CreateCompilationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +243,7 @@ func (r CreateCompilationJobRequest) Send() (*CreateCompilationJobOutput, error)
 //
 //    // Example sending a request using the CreateCompilationJobRequest method.
 //    req := client.CreateCompilationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -272,7 +277,8 @@ type CreateEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateEndpoint API request.
-func (r CreateEndpointRequest) Send() (*CreateEndpointOutput, error) {
+func (r CreateEndpointRequest) Send(ctx context.Context) (*CreateEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -315,7 +321,7 @@ func (r CreateEndpointRequest) Send() (*CreateEndpointOutput, error) {
 //
 //    // Example sending a request using the CreateEndpointRequest method.
 //    req := client.CreateEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -349,7 +355,8 @@ type CreateEndpointConfigRequest struct {
 }
 
 // Send marshals and sends the CreateEndpointConfig API request.
-func (r CreateEndpointConfigRequest) Send() (*CreateEndpointConfigOutput, error) {
+func (r CreateEndpointConfigRequest) Send(ctx context.Context) (*CreateEndpointConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -383,7 +390,7 @@ func (r CreateEndpointConfigRequest) Send() (*CreateEndpointConfigOutput, error)
 //
 //    // Example sending a request using the CreateEndpointConfigRequest method.
 //    req := client.CreateEndpointConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -417,7 +424,8 @@ type CreateHyperParameterTuningJobRequest struct {
 }
 
 // Send marshals and sends the CreateHyperParameterTuningJob API request.
-func (r CreateHyperParameterTuningJobRequest) Send() (*CreateHyperParameterTuningJobOutput, error) {
+func (r CreateHyperParameterTuningJobRequest) Send(ctx context.Context) (*CreateHyperParameterTuningJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +445,7 @@ func (r CreateHyperParameterTuningJobRequest) Send() (*CreateHyperParameterTunin
 //
 //    // Example sending a request using the CreateHyperParameterTuningJobRequest method.
 //    req := client.CreateHyperParameterTuningJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +479,8 @@ type CreateLabelingJobRequest struct {
 }
 
 // Send marshals and sends the CreateLabelingJob API request.
-func (r CreateLabelingJobRequest) Send() (*CreateLabelingJobOutput, error) {
+func (r CreateLabelingJobRequest) Send(ctx context.Context) (*CreateLabelingJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -514,7 +523,7 @@ func (r CreateLabelingJobRequest) Send() (*CreateLabelingJobOutput, error) {
 //
 //    // Example sending a request using the CreateLabelingJobRequest method.
 //    req := client.CreateLabelingJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -548,7 +557,8 @@ type CreateModelRequest struct {
 }
 
 // Send marshals and sends the CreateModel API request.
-func (r CreateModelRequest) Send() (*CreateModelOutput, error) {
+func (r CreateModelRequest) Send(ctx context.Context) (*CreateModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -590,7 +600,7 @@ func (r CreateModelRequest) Send() (*CreateModelOutput, error) {
 //
 //    // Example sending a request using the CreateModelRequest method.
 //    req := client.CreateModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -624,7 +634,8 @@ type CreateModelPackageRequest struct {
 }
 
 // Send marshals and sends the CreateModelPackage API request.
-func (r CreateModelPackageRequest) Send() (*CreateModelPackageOutput, error) {
+func (r CreateModelPackageRequest) Send(ctx context.Context) (*CreateModelPackageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,7 +659,7 @@ func (r CreateModelPackageRequest) Send() (*CreateModelPackageOutput, error) {
 //
 //    // Example sending a request using the CreateModelPackageRequest method.
 //    req := client.CreateModelPackageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -682,7 +693,8 @@ type CreateNotebookInstanceRequest struct {
 }
 
 // Send marshals and sends the CreateNotebookInstance API request.
-func (r CreateNotebookInstanceRequest) Send() (*CreateNotebookInstanceOutput, error) {
+func (r CreateNotebookInstanceRequest) Send(ctx context.Context) (*CreateNotebookInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -734,7 +746,7 @@ func (r CreateNotebookInstanceRequest) Send() (*CreateNotebookInstanceOutput, er
 //
 //    // Example sending a request using the CreateNotebookInstanceRequest method.
 //    req := client.CreateNotebookInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -768,7 +780,8 @@ type CreateNotebookInstanceLifecycleConfigRequest struct {
 }
 
 // Send marshals and sends the CreateNotebookInstanceLifecycleConfig API request.
-func (r CreateNotebookInstanceLifecycleConfigRequest) Send() (*CreateNotebookInstanceLifecycleConfigOutput, error) {
+func (r CreateNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) (*CreateNotebookInstanceLifecycleConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -801,7 +814,7 @@ func (r CreateNotebookInstanceLifecycleConfigRequest) Send() (*CreateNotebookIns
 //
 //    // Example sending a request using the CreateNotebookInstanceLifecycleConfigRequest method.
 //    req := client.CreateNotebookInstanceLifecycleConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -835,7 +848,8 @@ type CreatePresignedNotebookInstanceUrlRequest struct {
 }
 
 // Send marshals and sends the CreatePresignedNotebookInstanceUrl API request.
-func (r CreatePresignedNotebookInstanceUrlRequest) Send() (*CreatePresignedNotebookInstanceUrlOutput, error) {
+func (r CreatePresignedNotebookInstanceUrlRequest) Send(ctx context.Context) (*CreatePresignedNotebookInstanceUrlOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -864,7 +878,7 @@ func (r CreatePresignedNotebookInstanceUrlRequest) Send() (*CreatePresignedNoteb
 //
 //    // Example sending a request using the CreatePresignedNotebookInstanceUrlRequest method.
 //    req := client.CreatePresignedNotebookInstanceUrlRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -898,7 +912,8 @@ type CreateTrainingJobRequest struct {
 }
 
 // Send marshals and sends the CreateTrainingJob API request.
-func (r CreateTrainingJobRequest) Send() (*CreateTrainingJobOutput, error) {
+func (r CreateTrainingJobRequest) Send(ctx context.Context) (*CreateTrainingJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -949,7 +964,7 @@ func (r CreateTrainingJobRequest) Send() (*CreateTrainingJobOutput, error) {
 //
 //    // Example sending a request using the CreateTrainingJobRequest method.
 //    req := client.CreateTrainingJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -983,7 +998,8 @@ type CreateTransformJobRequest struct {
 }
 
 // Send marshals and sends the CreateTransformJob API request.
-func (r CreateTransformJobRequest) Send() (*CreateTransformJobOutput, error) {
+func (r CreateTransformJobRequest) Send(ctx context.Context) (*CreateTransformJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1024,7 +1040,7 @@ func (r CreateTransformJobRequest) Send() (*CreateTransformJobOutput, error) {
 //
 //    // Example sending a request using the CreateTransformJobRequest method.
 //    req := client.CreateTransformJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1058,7 +1074,8 @@ type CreateWorkteamRequest struct {
 }
 
 // Send marshals and sends the CreateWorkteam API request.
-func (r CreateWorkteamRequest) Send() (*CreateWorkteamOutput, error) {
+func (r CreateWorkteamRequest) Send(ctx context.Context) (*CreateWorkteamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1078,7 +1095,7 @@ func (r CreateWorkteamRequest) Send() (*CreateWorkteamOutput, error) {
 //
 //    // Example sending a request using the CreateWorkteamRequest method.
 //    req := client.CreateWorkteamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1112,7 +1129,8 @@ type DeleteAlgorithmRequest struct {
 }
 
 // Send marshals and sends the DeleteAlgorithm API request.
-func (r DeleteAlgorithmRequest) Send() (*DeleteAlgorithmOutput, error) {
+func (r DeleteAlgorithmRequest) Send(ctx context.Context) (*DeleteAlgorithmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1128,7 +1146,7 @@ func (r DeleteAlgorithmRequest) Send() (*DeleteAlgorithmOutput, error) {
 //
 //    // Example sending a request using the DeleteAlgorithmRequest method.
 //    req := client.DeleteAlgorithmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1164,7 +1182,8 @@ type DeleteCodeRepositoryRequest struct {
 }
 
 // Send marshals and sends the DeleteCodeRepository API request.
-func (r DeleteCodeRepositoryRequest) Send() (*DeleteCodeRepositoryOutput, error) {
+func (r DeleteCodeRepositoryRequest) Send(ctx context.Context) (*DeleteCodeRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1180,7 +1199,7 @@ func (r DeleteCodeRepositoryRequest) Send() (*DeleteCodeRepositoryOutput, error)
 //
 //    // Example sending a request using the DeleteCodeRepositoryRequest method.
 //    req := client.DeleteCodeRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1216,7 +1235,8 @@ type DeleteEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
-func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+func (r DeleteEndpointRequest) Send(ctx context.Context) (*DeleteEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1237,7 +1257,7 @@ func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
 //
 //    // Example sending a request using the DeleteEndpointRequest method.
 //    req := client.DeleteEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1273,7 +1293,8 @@ type DeleteEndpointConfigRequest struct {
 }
 
 // Send marshals and sends the DeleteEndpointConfig API request.
-func (r DeleteEndpointConfigRequest) Send() (*DeleteEndpointConfigOutput, error) {
+func (r DeleteEndpointConfigRequest) Send(ctx context.Context) (*DeleteEndpointConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1291,7 +1312,7 @@ func (r DeleteEndpointConfigRequest) Send() (*DeleteEndpointConfigOutput, error)
 //
 //    // Example sending a request using the DeleteEndpointConfigRequest method.
 //    req := client.DeleteEndpointConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1327,7 +1348,8 @@ type DeleteModelRequest struct {
 }
 
 // Send marshals and sends the DeleteModel API request.
-func (r DeleteModelRequest) Send() (*DeleteModelOutput, error) {
+func (r DeleteModelRequest) Send(ctx context.Context) (*DeleteModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1346,7 +1368,7 @@ func (r DeleteModelRequest) Send() (*DeleteModelOutput, error) {
 //
 //    // Example sending a request using the DeleteModelRequest method.
 //    req := client.DeleteModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1382,7 +1404,8 @@ type DeleteModelPackageRequest struct {
 }
 
 // Send marshals and sends the DeleteModelPackage API request.
-func (r DeleteModelPackageRequest) Send() (*DeleteModelPackageOutput, error) {
+func (r DeleteModelPackageRequest) Send(ctx context.Context) (*DeleteModelPackageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1402,7 +1425,7 @@ func (r DeleteModelPackageRequest) Send() (*DeleteModelPackageOutput, error) {
 //
 //    // Example sending a request using the DeleteModelPackageRequest method.
 //    req := client.DeleteModelPackageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1438,7 +1461,8 @@ type DeleteNotebookInstanceRequest struct {
 }
 
 // Send marshals and sends the DeleteNotebookInstance API request.
-func (r DeleteNotebookInstanceRequest) Send() (*DeleteNotebookInstanceOutput, error) {
+func (r DeleteNotebookInstanceRequest) Send(ctx context.Context) (*DeleteNotebookInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1459,7 +1483,7 @@ func (r DeleteNotebookInstanceRequest) Send() (*DeleteNotebookInstanceOutput, er
 //
 //    // Example sending a request using the DeleteNotebookInstanceRequest method.
 //    req := client.DeleteNotebookInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1495,7 +1519,8 @@ type DeleteNotebookInstanceLifecycleConfigRequest struct {
 }
 
 // Send marshals and sends the DeleteNotebookInstanceLifecycleConfig API request.
-func (r DeleteNotebookInstanceLifecycleConfigRequest) Send() (*DeleteNotebookInstanceLifecycleConfigOutput, error) {
+func (r DeleteNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) (*DeleteNotebookInstanceLifecycleConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1511,7 +1536,7 @@ func (r DeleteNotebookInstanceLifecycleConfigRequest) Send() (*DeleteNotebookIns
 //
 //    // Example sending a request using the DeleteNotebookInstanceLifecycleConfigRequest method.
 //    req := client.DeleteNotebookInstanceLifecycleConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1547,7 +1572,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1569,7 +1595,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1603,7 +1629,8 @@ type DeleteWorkteamRequest struct {
 }
 
 // Send marshals and sends the DeleteWorkteam API request.
-func (r DeleteWorkteamRequest) Send() (*DeleteWorkteamOutput, error) {
+func (r DeleteWorkteamRequest) Send(ctx context.Context) (*DeleteWorkteamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1619,7 +1646,7 @@ func (r DeleteWorkteamRequest) Send() (*DeleteWorkteamOutput, error) {
 //
 //    // Example sending a request using the DeleteWorkteamRequest method.
 //    req := client.DeleteWorkteamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1653,7 +1680,8 @@ type DescribeAlgorithmRequest struct {
 }
 
 // Send marshals and sends the DescribeAlgorithm API request.
-func (r DescribeAlgorithmRequest) Send() (*DescribeAlgorithmOutput, error) {
+func (r DescribeAlgorithmRequest) Send(ctx context.Context) (*DescribeAlgorithmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1669,7 +1697,7 @@ func (r DescribeAlgorithmRequest) Send() (*DescribeAlgorithmOutput, error) {
 //
 //    // Example sending a request using the DescribeAlgorithmRequest method.
 //    req := client.DescribeAlgorithmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1703,7 +1731,8 @@ type DescribeCodeRepositoryRequest struct {
 }
 
 // Send marshals and sends the DescribeCodeRepository API request.
-func (r DescribeCodeRepositoryRequest) Send() (*DescribeCodeRepositoryOutput, error) {
+func (r DescribeCodeRepositoryRequest) Send(ctx context.Context) (*DescribeCodeRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1719,7 +1748,7 @@ func (r DescribeCodeRepositoryRequest) Send() (*DescribeCodeRepositoryOutput, er
 //
 //    // Example sending a request using the DescribeCodeRepositoryRequest method.
 //    req := client.DescribeCodeRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1753,7 +1782,8 @@ type DescribeCompilationJobRequest struct {
 }
 
 // Send marshals and sends the DescribeCompilationJob API request.
-func (r DescribeCompilationJobRequest) Send() (*DescribeCompilationJobOutput, error) {
+func (r DescribeCompilationJobRequest) Send(ctx context.Context) (*DescribeCompilationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1772,7 +1802,7 @@ func (r DescribeCompilationJobRequest) Send() (*DescribeCompilationJobOutput, er
 //
 //    // Example sending a request using the DescribeCompilationJobRequest method.
 //    req := client.DescribeCompilationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1806,7 +1836,8 @@ type DescribeEndpointRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpoint API request.
-func (r DescribeEndpointRequest) Send() (*DescribeEndpointOutput, error) {
+func (r DescribeEndpointRequest) Send(ctx context.Context) (*DescribeEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1822,7 +1853,7 @@ func (r DescribeEndpointRequest) Send() (*DescribeEndpointOutput, error) {
 //
 //    // Example sending a request using the DescribeEndpointRequest method.
 //    req := client.DescribeEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1856,7 +1887,8 @@ type DescribeEndpointConfigRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpointConfig API request.
-func (r DescribeEndpointConfigRequest) Send() (*DescribeEndpointConfigOutput, error) {
+func (r DescribeEndpointConfigRequest) Send(ctx context.Context) (*DescribeEndpointConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1873,7 +1905,7 @@ func (r DescribeEndpointConfigRequest) Send() (*DescribeEndpointConfigOutput, er
 //
 //    // Example sending a request using the DescribeEndpointConfigRequest method.
 //    req := client.DescribeEndpointConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1907,7 +1939,8 @@ type DescribeHyperParameterTuningJobRequest struct {
 }
 
 // Send marshals and sends the DescribeHyperParameterTuningJob API request.
-func (r DescribeHyperParameterTuningJobRequest) Send() (*DescribeHyperParameterTuningJobOutput, error) {
+func (r DescribeHyperParameterTuningJobRequest) Send(ctx context.Context) (*DescribeHyperParameterTuningJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1923,7 +1956,7 @@ func (r DescribeHyperParameterTuningJobRequest) Send() (*DescribeHyperParameterT
 //
 //    // Example sending a request using the DescribeHyperParameterTuningJobRequest method.
 //    req := client.DescribeHyperParameterTuningJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1957,7 +1990,8 @@ type DescribeLabelingJobRequest struct {
 }
 
 // Send marshals and sends the DescribeLabelingJob API request.
-func (r DescribeLabelingJobRequest) Send() (*DescribeLabelingJobOutput, error) {
+func (r DescribeLabelingJobRequest) Send(ctx context.Context) (*DescribeLabelingJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1973,7 +2007,7 @@ func (r DescribeLabelingJobRequest) Send() (*DescribeLabelingJobOutput, error) {
 //
 //    // Example sending a request using the DescribeLabelingJobRequest method.
 //    req := client.DescribeLabelingJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2007,7 +2041,8 @@ type DescribeModelRequest struct {
 }
 
 // Send marshals and sends the DescribeModel API request.
-func (r DescribeModelRequest) Send() (*DescribeModelOutput, error) {
+func (r DescribeModelRequest) Send(ctx context.Context) (*DescribeModelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2023,7 +2058,7 @@ func (r DescribeModelRequest) Send() (*DescribeModelOutput, error) {
 //
 //    // Example sending a request using the DescribeModelRequest method.
 //    req := client.DescribeModelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2057,7 +2092,8 @@ type DescribeModelPackageRequest struct {
 }
 
 // Send marshals and sends the DescribeModelPackage API request.
-func (r DescribeModelPackageRequest) Send() (*DescribeModelPackageOutput, error) {
+func (r DescribeModelPackageRequest) Send(ctx context.Context) (*DescribeModelPackageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2077,7 +2113,7 @@ func (r DescribeModelPackageRequest) Send() (*DescribeModelPackageOutput, error)
 //
 //    // Example sending a request using the DescribeModelPackageRequest method.
 //    req := client.DescribeModelPackageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2111,7 +2147,8 @@ type DescribeNotebookInstanceRequest struct {
 }
 
 // Send marshals and sends the DescribeNotebookInstance API request.
-func (r DescribeNotebookInstanceRequest) Send() (*DescribeNotebookInstanceOutput, error) {
+func (r DescribeNotebookInstanceRequest) Send(ctx context.Context) (*DescribeNotebookInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2127,7 +2164,7 @@ func (r DescribeNotebookInstanceRequest) Send() (*DescribeNotebookInstanceOutput
 //
 //    // Example sending a request using the DescribeNotebookInstanceRequest method.
 //    req := client.DescribeNotebookInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2161,7 +2198,8 @@ type DescribeNotebookInstanceLifecycleConfigRequest struct {
 }
 
 // Send marshals and sends the DescribeNotebookInstanceLifecycleConfig API request.
-func (r DescribeNotebookInstanceLifecycleConfigRequest) Send() (*DescribeNotebookInstanceLifecycleConfigOutput, error) {
+func (r DescribeNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) (*DescribeNotebookInstanceLifecycleConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2180,7 +2218,7 @@ func (r DescribeNotebookInstanceLifecycleConfigRequest) Send() (*DescribeNoteboo
 //
 //    // Example sending a request using the DescribeNotebookInstanceLifecycleConfigRequest method.
 //    req := client.DescribeNotebookInstanceLifecycleConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2214,7 +2252,8 @@ type DescribeSubscribedWorkteamRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscribedWorkteam API request.
-func (r DescribeSubscribedWorkteamRequest) Send() (*DescribeSubscribedWorkteamOutput, error) {
+func (r DescribeSubscribedWorkteamRequest) Send(ctx context.Context) (*DescribeSubscribedWorkteamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2231,7 +2270,7 @@ func (r DescribeSubscribedWorkteamRequest) Send() (*DescribeSubscribedWorkteamOu
 //
 //    // Example sending a request using the DescribeSubscribedWorkteamRequest method.
 //    req := client.DescribeSubscribedWorkteamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2265,7 +2304,8 @@ type DescribeTrainingJobRequest struct {
 }
 
 // Send marshals and sends the DescribeTrainingJob API request.
-func (r DescribeTrainingJobRequest) Send() (*DescribeTrainingJobOutput, error) {
+func (r DescribeTrainingJobRequest) Send(ctx context.Context) (*DescribeTrainingJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2281,7 +2321,7 @@ func (r DescribeTrainingJobRequest) Send() (*DescribeTrainingJobOutput, error) {
 //
 //    // Example sending a request using the DescribeTrainingJobRequest method.
 //    req := client.DescribeTrainingJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2315,7 +2355,8 @@ type DescribeTransformJobRequest struct {
 }
 
 // Send marshals and sends the DescribeTransformJob API request.
-func (r DescribeTransformJobRequest) Send() (*DescribeTransformJobOutput, error) {
+func (r DescribeTransformJobRequest) Send(ctx context.Context) (*DescribeTransformJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2331,7 +2372,7 @@ func (r DescribeTransformJobRequest) Send() (*DescribeTransformJobOutput, error)
 //
 //    // Example sending a request using the DescribeTransformJobRequest method.
 //    req := client.DescribeTransformJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2365,7 +2406,8 @@ type DescribeWorkteamRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkteam API request.
-func (r DescribeWorkteamRequest) Send() (*DescribeWorkteamOutput, error) {
+func (r DescribeWorkteamRequest) Send(ctx context.Context) (*DescribeWorkteamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2383,7 +2425,7 @@ func (r DescribeWorkteamRequest) Send() (*DescribeWorkteamOutput, error) {
 //
 //    // Example sending a request using the DescribeWorkteamRequest method.
 //    req := client.DescribeWorkteamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2417,7 +2459,8 @@ type GetSearchSuggestionsRequest struct {
 }
 
 // Send marshals and sends the GetSearchSuggestions API request.
-func (r GetSearchSuggestionsRequest) Send() (*GetSearchSuggestionsOutput, error) {
+func (r GetSearchSuggestionsRequest) Send(ctx context.Context) (*GetSearchSuggestionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2436,7 +2479,7 @@ func (r GetSearchSuggestionsRequest) Send() (*GetSearchSuggestionsOutput, error)
 //
 //    // Example sending a request using the GetSearchSuggestionsRequest method.
 //    req := client.GetSearchSuggestionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2470,7 +2513,8 @@ type ListAlgorithmsRequest struct {
 }
 
 // Send marshals and sends the ListAlgorithms API request.
-func (r ListAlgorithmsRequest) Send() (*ListAlgorithmsOutput, error) {
+func (r ListAlgorithmsRequest) Send(ctx context.Context) (*ListAlgorithmsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2486,7 +2530,7 @@ func (r ListAlgorithmsRequest) Send() (*ListAlgorithmsOutput, error) {
 //
 //    // Example sending a request using the ListAlgorithmsRequest method.
 //    req := client.ListAlgorithmsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2520,7 +2564,8 @@ type ListCodeRepositoriesRequest struct {
 }
 
 // Send marshals and sends the ListCodeRepositories API request.
-func (r ListCodeRepositoriesRequest) Send() (*ListCodeRepositoriesOutput, error) {
+func (r ListCodeRepositoriesRequest) Send(ctx context.Context) (*ListCodeRepositoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2536,7 +2581,7 @@ func (r ListCodeRepositoriesRequest) Send() (*ListCodeRepositoriesOutput, error)
 //
 //    // Example sending a request using the ListCodeRepositoriesRequest method.
 //    req := client.ListCodeRepositoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2570,7 +2615,8 @@ type ListCompilationJobsRequest struct {
 }
 
 // Send marshals and sends the ListCompilationJobs API request.
-func (r ListCompilationJobsRequest) Send() (*ListCompilationJobsOutput, error) {
+func (r ListCompilationJobsRequest) Send(ctx context.Context) (*ListCompilationJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2589,7 +2635,7 @@ func (r ListCompilationJobsRequest) Send() (*ListCompilationJobsOutput, error) {
 //
 //    // Example sending a request using the ListCompilationJobsRequest method.
 //    req := client.ListCompilationJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2675,7 +2721,8 @@ type ListEndpointConfigsRequest struct {
 }
 
 // Send marshals and sends the ListEndpointConfigs API request.
-func (r ListEndpointConfigsRequest) Send() (*ListEndpointConfigsOutput, error) {
+func (r ListEndpointConfigsRequest) Send(ctx context.Context) (*ListEndpointConfigsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2691,7 +2738,7 @@ func (r ListEndpointConfigsRequest) Send() (*ListEndpointConfigsOutput, error) {
 //
 //    // Example sending a request using the ListEndpointConfigsRequest method.
 //    req := client.ListEndpointConfigsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2777,7 +2824,8 @@ type ListEndpointsRequest struct {
 }
 
 // Send marshals and sends the ListEndpoints API request.
-func (r ListEndpointsRequest) Send() (*ListEndpointsOutput, error) {
+func (r ListEndpointsRequest) Send(ctx context.Context) (*ListEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2793,7 +2841,7 @@ func (r ListEndpointsRequest) Send() (*ListEndpointsOutput, error) {
 //
 //    // Example sending a request using the ListEndpointsRequest method.
 //    req := client.ListEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2879,7 +2927,8 @@ type ListHyperParameterTuningJobsRequest struct {
 }
 
 // Send marshals and sends the ListHyperParameterTuningJobs API request.
-func (r ListHyperParameterTuningJobsRequest) Send() (*ListHyperParameterTuningJobsOutput, error) {
+func (r ListHyperParameterTuningJobsRequest) Send(ctx context.Context) (*ListHyperParameterTuningJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2896,7 +2945,7 @@ func (r ListHyperParameterTuningJobsRequest) Send() (*ListHyperParameterTuningJo
 //
 //    // Example sending a request using the ListHyperParameterTuningJobsRequest method.
 //    req := client.ListHyperParameterTuningJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2982,7 +3031,8 @@ type ListLabelingJobsRequest struct {
 }
 
 // Send marshals and sends the ListLabelingJobs API request.
-func (r ListLabelingJobsRequest) Send() (*ListLabelingJobsOutput, error) {
+func (r ListLabelingJobsRequest) Send(ctx context.Context) (*ListLabelingJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2998,7 +3048,7 @@ func (r ListLabelingJobsRequest) Send() (*ListLabelingJobsOutput, error) {
 //
 //    // Example sending a request using the ListLabelingJobsRequest method.
 //    req := client.ListLabelingJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3084,7 +3134,8 @@ type ListLabelingJobsForWorkteamRequest struct {
 }
 
 // Send marshals and sends the ListLabelingJobsForWorkteam API request.
-func (r ListLabelingJobsForWorkteamRequest) Send() (*ListLabelingJobsForWorkteamOutput, error) {
+func (r ListLabelingJobsForWorkteamRequest) Send(ctx context.Context) (*ListLabelingJobsForWorkteamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3100,7 +3151,7 @@ func (r ListLabelingJobsForWorkteamRequest) Send() (*ListLabelingJobsForWorkteam
 //
 //    // Example sending a request using the ListLabelingJobsForWorkteamRequest method.
 //    req := client.ListLabelingJobsForWorkteamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3186,7 +3237,8 @@ type ListModelPackagesRequest struct {
 }
 
 // Send marshals and sends the ListModelPackages API request.
-func (r ListModelPackagesRequest) Send() (*ListModelPackagesOutput, error) {
+func (r ListModelPackagesRequest) Send(ctx context.Context) (*ListModelPackagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3202,7 +3254,7 @@ func (r ListModelPackagesRequest) Send() (*ListModelPackagesOutput, error) {
 //
 //    // Example sending a request using the ListModelPackagesRequest method.
 //    req := client.ListModelPackagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3236,7 +3288,8 @@ type ListModelsRequest struct {
 }
 
 // Send marshals and sends the ListModels API request.
-func (r ListModelsRequest) Send() (*ListModelsOutput, error) {
+func (r ListModelsRequest) Send(ctx context.Context) (*ListModelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3253,7 +3306,7 @@ func (r ListModelsRequest) Send() (*ListModelsOutput, error) {
 //
 //    // Example sending a request using the ListModelsRequest method.
 //    req := client.ListModelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3339,7 +3392,8 @@ type ListNotebookInstanceLifecycleConfigsRequest struct {
 }
 
 // Send marshals and sends the ListNotebookInstanceLifecycleConfigs API request.
-func (r ListNotebookInstanceLifecycleConfigsRequest) Send() (*ListNotebookInstanceLifecycleConfigsOutput, error) {
+func (r ListNotebookInstanceLifecycleConfigsRequest) Send(ctx context.Context) (*ListNotebookInstanceLifecycleConfigsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3356,7 +3410,7 @@ func (r ListNotebookInstanceLifecycleConfigsRequest) Send() (*ListNotebookInstan
 //
 //    // Example sending a request using the ListNotebookInstanceLifecycleConfigsRequest method.
 //    req := client.ListNotebookInstanceLifecycleConfigsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3442,7 +3496,8 @@ type ListNotebookInstancesRequest struct {
 }
 
 // Send marshals and sends the ListNotebookInstances API request.
-func (r ListNotebookInstancesRequest) Send() (*ListNotebookInstancesOutput, error) {
+func (r ListNotebookInstancesRequest) Send(ctx context.Context) (*ListNotebookInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3459,7 +3514,7 @@ func (r ListNotebookInstancesRequest) Send() (*ListNotebookInstancesOutput, erro
 //
 //    // Example sending a request using the ListNotebookInstancesRequest method.
 //    req := client.ListNotebookInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3545,7 +3600,8 @@ type ListSubscribedWorkteamsRequest struct {
 }
 
 // Send marshals and sends the ListSubscribedWorkteams API request.
-func (r ListSubscribedWorkteamsRequest) Send() (*ListSubscribedWorkteamsOutput, error) {
+func (r ListSubscribedWorkteamsRequest) Send(ctx context.Context) (*ListSubscribedWorkteamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3563,7 +3619,7 @@ func (r ListSubscribedWorkteamsRequest) Send() (*ListSubscribedWorkteamsOutput, 
 //
 //    // Example sending a request using the ListSubscribedWorkteamsRequest method.
 //    req := client.ListSubscribedWorkteamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3649,7 +3705,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3665,7 +3722,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3751,7 +3808,8 @@ type ListTrainingJobsRequest struct {
 }
 
 // Send marshals and sends the ListTrainingJobs API request.
-func (r ListTrainingJobsRequest) Send() (*ListTrainingJobsOutput, error) {
+func (r ListTrainingJobsRequest) Send(ctx context.Context) (*ListTrainingJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3767,7 +3825,7 @@ func (r ListTrainingJobsRequest) Send() (*ListTrainingJobsOutput, error) {
 //
 //    // Example sending a request using the ListTrainingJobsRequest method.
 //    req := client.ListTrainingJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3853,7 +3911,8 @@ type ListTrainingJobsForHyperParameterTuningJobRequest struct {
 }
 
 // Send marshals and sends the ListTrainingJobsForHyperParameterTuningJob API request.
-func (r ListTrainingJobsForHyperParameterTuningJobRequest) Send() (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
+func (r ListTrainingJobsForHyperParameterTuningJobRequest) Send(ctx context.Context) (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3870,7 +3929,7 @@ func (r ListTrainingJobsForHyperParameterTuningJobRequest) Send() (*ListTraining
 //
 //    // Example sending a request using the ListTrainingJobsForHyperParameterTuningJobRequest method.
 //    req := client.ListTrainingJobsForHyperParameterTuningJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3956,7 +4015,8 @@ type ListTransformJobsRequest struct {
 }
 
 // Send marshals and sends the ListTransformJobs API request.
-func (r ListTransformJobsRequest) Send() (*ListTransformJobsOutput, error) {
+func (r ListTransformJobsRequest) Send(ctx context.Context) (*ListTransformJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3972,7 +4032,7 @@ func (r ListTransformJobsRequest) Send() (*ListTransformJobsOutput, error) {
 //
 //    // Example sending a request using the ListTransformJobsRequest method.
 //    req := client.ListTransformJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4058,7 +4118,8 @@ type ListWorkteamsRequest struct {
 }
 
 // Send marshals and sends the ListWorkteams API request.
-func (r ListWorkteamsRequest) Send() (*ListWorkteamsOutput, error) {
+func (r ListWorkteamsRequest) Send(ctx context.Context) (*ListWorkteamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4076,7 +4137,7 @@ func (r ListWorkteamsRequest) Send() (*ListWorkteamsOutput, error) {
 //
 //    // Example sending a request using the ListWorkteamsRequest method.
 //    req := client.ListWorkteamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4162,7 +4223,8 @@ type RenderUiTemplateRequest struct {
 }
 
 // Send marshals and sends the RenderUiTemplate API request.
-func (r RenderUiTemplateRequest) Send() (*RenderUiTemplateOutput, error) {
+func (r RenderUiTemplateRequest) Send(ctx context.Context) (*RenderUiTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4178,7 +4240,7 @@ func (r RenderUiTemplateRequest) Send() (*RenderUiTemplateOutput, error) {
 //
 //    // Example sending a request using the RenderUiTemplateRequest method.
 //    req := client.RenderUiTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4212,7 +4274,8 @@ type SearchRequest struct {
 }
 
 // Send marshals and sends the Search API request.
-func (r SearchRequest) Send() (*SearchOutput, error) {
+func (r SearchRequest) Send(ctx context.Context) (*SearchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4234,7 +4297,7 @@ func (r SearchRequest) Send() (*SearchOutput, error) {
 //
 //    // Example sending a request using the SearchRequest method.
 //    req := client.SearchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4320,7 +4383,8 @@ type StartNotebookInstanceRequest struct {
 }
 
 // Send marshals and sends the StartNotebookInstance API request.
-func (r StartNotebookInstanceRequest) Send() (*StartNotebookInstanceOutput, error) {
+func (r StartNotebookInstanceRequest) Send(ctx context.Context) (*StartNotebookInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4340,7 +4404,7 @@ func (r StartNotebookInstanceRequest) Send() (*StartNotebookInstanceOutput, erro
 //
 //    // Example sending a request using the StartNotebookInstanceRequest method.
 //    req := client.StartNotebookInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4376,7 +4440,8 @@ type StopCompilationJobRequest struct {
 }
 
 // Send marshals and sends the StopCompilationJob API request.
-func (r StopCompilationJobRequest) Send() (*StopCompilationJobOutput, error) {
+func (r StopCompilationJobRequest) Send(ctx context.Context) (*StopCompilationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4401,7 +4466,7 @@ func (r StopCompilationJobRequest) Send() (*StopCompilationJobOutput, error) {
 //
 //    // Example sending a request using the StopCompilationJobRequest method.
 //    req := client.StopCompilationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4437,7 +4502,8 @@ type StopHyperParameterTuningJobRequest struct {
 }
 
 // Send marshals and sends the StopHyperParameterTuningJob API request.
-func (r StopHyperParameterTuningJobRequest) Send() (*StopHyperParameterTuningJobOutput, error) {
+func (r StopHyperParameterTuningJobRequest) Send(ctx context.Context) (*StopHyperParameterTuningJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4459,7 +4525,7 @@ func (r StopHyperParameterTuningJobRequest) Send() (*StopHyperParameterTuningJob
 //
 //    // Example sending a request using the StopHyperParameterTuningJobRequest method.
 //    req := client.StopHyperParameterTuningJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4495,7 +4561,8 @@ type StopLabelingJobRequest struct {
 }
 
 // Send marshals and sends the StopLabelingJob API request.
-func (r StopLabelingJobRequest) Send() (*StopLabelingJobOutput, error) {
+func (r StopLabelingJobRequest) Send(ctx context.Context) (*StopLabelingJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4513,7 +4580,7 @@ func (r StopLabelingJobRequest) Send() (*StopLabelingJobOutput, error) {
 //
 //    // Example sending a request using the StopLabelingJobRequest method.
 //    req := client.StopLabelingJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4549,7 +4616,8 @@ type StopNotebookInstanceRequest struct {
 }
 
 // Send marshals and sends the StopNotebookInstance API request.
-func (r StopNotebookInstanceRequest) Send() (*StopNotebookInstanceOutput, error) {
+func (r StopNotebookInstanceRequest) Send(ctx context.Context) (*StopNotebookInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4572,7 +4640,7 @@ func (r StopNotebookInstanceRequest) Send() (*StopNotebookInstanceOutput, error)
 //
 //    // Example sending a request using the StopNotebookInstanceRequest method.
 //    req := client.StopNotebookInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4608,7 +4676,8 @@ type StopTrainingJobRequest struct {
 }
 
 // Send marshals and sends the StopTrainingJob API request.
-func (r StopTrainingJobRequest) Send() (*StopTrainingJobOutput, error) {
+func (r StopTrainingJobRequest) Send(ctx context.Context) (*StopTrainingJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4636,7 +4705,7 @@ func (r StopTrainingJobRequest) Send() (*StopTrainingJobOutput, error) {
 //
 //    // Example sending a request using the StopTrainingJobRequest method.
 //    req := client.StopTrainingJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4672,7 +4741,8 @@ type StopTransformJobRequest struct {
 }
 
 // Send marshals and sends the StopTransformJob API request.
-func (r StopTransformJobRequest) Send() (*StopTransformJobOutput, error) {
+func (r StopTransformJobRequest) Send(ctx context.Context) (*StopTransformJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4693,7 +4763,7 @@ func (r StopTransformJobRequest) Send() (*StopTransformJobOutput, error) {
 //
 //    // Example sending a request using the StopTransformJobRequest method.
 //    req := client.StopTransformJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4729,7 +4799,8 @@ type UpdateCodeRepositoryRequest struct {
 }
 
 // Send marshals and sends the UpdateCodeRepository API request.
-func (r UpdateCodeRepositoryRequest) Send() (*UpdateCodeRepositoryOutput, error) {
+func (r UpdateCodeRepositoryRequest) Send(ctx context.Context) (*UpdateCodeRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4745,7 +4816,7 @@ func (r UpdateCodeRepositoryRequest) Send() (*UpdateCodeRepositoryOutput, error)
 //
 //    // Example sending a request using the UpdateCodeRepositoryRequest method.
 //    req := client.UpdateCodeRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4779,7 +4850,8 @@ type UpdateEndpointRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpoint API request.
-func (r UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
+func (r UpdateEndpointRequest) Send(ctx context.Context) (*UpdateEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4805,7 +4877,7 @@ func (r UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
 //
 //    // Example sending a request using the UpdateEndpointRequest method.
 //    req := client.UpdateEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4839,7 +4911,8 @@ type UpdateEndpointWeightsAndCapacitiesRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpointWeightsAndCapacities API request.
-func (r UpdateEndpointWeightsAndCapacitiesRequest) Send() (*UpdateEndpointWeightsAndCapacitiesOutput, error) {
+func (r UpdateEndpointWeightsAndCapacitiesRequest) Send(ctx context.Context) (*UpdateEndpointWeightsAndCapacitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4860,7 +4933,7 @@ func (r UpdateEndpointWeightsAndCapacitiesRequest) Send() (*UpdateEndpointWeight
 //
 //    // Example sending a request using the UpdateEndpointWeightsAndCapacitiesRequest method.
 //    req := client.UpdateEndpointWeightsAndCapacitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4894,7 +4967,8 @@ type UpdateNotebookInstanceRequest struct {
 }
 
 // Send marshals and sends the UpdateNotebookInstance API request.
-func (r UpdateNotebookInstanceRequest) Send() (*UpdateNotebookInstanceOutput, error) {
+func (r UpdateNotebookInstanceRequest) Send(ctx context.Context) (*UpdateNotebookInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4913,7 +4987,7 @@ func (r UpdateNotebookInstanceRequest) Send() (*UpdateNotebookInstanceOutput, er
 //
 //    // Example sending a request using the UpdateNotebookInstanceRequest method.
 //    req := client.UpdateNotebookInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4947,7 +5021,8 @@ type UpdateNotebookInstanceLifecycleConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateNotebookInstanceLifecycleConfig API request.
-func (r UpdateNotebookInstanceLifecycleConfigRequest) Send() (*UpdateNotebookInstanceLifecycleConfigOutput, error) {
+func (r UpdateNotebookInstanceLifecycleConfigRequest) Send(ctx context.Context) (*UpdateNotebookInstanceLifecycleConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4964,7 +5039,7 @@ func (r UpdateNotebookInstanceLifecycleConfigRequest) Send() (*UpdateNotebookIns
 //
 //    // Example sending a request using the UpdateNotebookInstanceLifecycleConfigRequest method.
 //    req := client.UpdateNotebookInstanceLifecycleConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4998,7 +5073,8 @@ type UpdateWorkteamRequest struct {
 }
 
 // Send marshals and sends the UpdateWorkteam API request.
-func (r UpdateWorkteamRequest) Send() (*UpdateWorkteamOutput, error) {
+func (r UpdateWorkteamRequest) Send(ctx context.Context) (*UpdateWorkteamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5014,7 +5090,7 @@ func (r UpdateWorkteamRequest) Send() (*UpdateWorkteamOutput, error) {
 //
 //    // Example sending a request using the UpdateWorkteamRequest method.
 //    req := client.UpdateWorkteamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

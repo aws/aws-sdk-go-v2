@@ -3,6 +3,7 @@
 package mturk
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AcceptQualificationRequestRequest struct {
 }
 
 // Send marshals and sends the AcceptQualificationRequest API request.
-func (r AcceptQualificationRequestRequest) Send() (*AcceptQualificationRequestOutput, error) {
+func (r AcceptQualificationRequestRequest) Send(ctx context.Context) (*AcceptQualificationRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r AcceptQualificationRequestRequest) Send() (*AcceptQualificationRequestOu
 //
 //    // Example sending a request using the AcceptQualificationRequestRequest method.
 //    req := client.AcceptQualificationRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type ApproveAssignmentRequest struct {
 }
 
 // Send marshals and sends the ApproveAssignment API request.
-func (r ApproveAssignmentRequest) Send() (*ApproveAssignmentOutput, error) {
+func (r ApproveAssignmentRequest) Send(ctx context.Context) (*ApproveAssignmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,7 +114,7 @@ func (r ApproveAssignmentRequest) Send() (*ApproveAssignmentOutput, error) {
 //
 //    // Example sending a request using the ApproveAssignmentRequest method.
 //    req := client.ApproveAssignmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -145,7 +148,8 @@ type AssociateQualificationWithWorkerRequest struct {
 }
 
 // Send marshals and sends the AssociateQualificationWithWorker API request.
-func (r AssociateQualificationWithWorkerRequest) Send() (*AssociateQualificationWithWorkerOutput, error) {
+func (r AssociateQualificationWithWorkerRequest) Send(ctx context.Context) (*AssociateQualificationWithWorkerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -173,7 +177,7 @@ func (r AssociateQualificationWithWorkerRequest) Send() (*AssociateQualification
 //
 //    // Example sending a request using the AssociateQualificationWithWorkerRequest method.
 //    req := client.AssociateQualificationWithWorkerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -207,7 +211,8 @@ type CreateAdditionalAssignmentsForHITRequest struct {
 }
 
 // Send marshals and sends the CreateAdditionalAssignmentsForHIT API request.
-func (r CreateAdditionalAssignmentsForHITRequest) Send() (*CreateAdditionalAssignmentsForHITOutput, error) {
+func (r CreateAdditionalAssignmentsForHITRequest) Send(ctx context.Context) (*CreateAdditionalAssignmentsForHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +242,7 @@ func (r CreateAdditionalAssignmentsForHITRequest) Send() (*CreateAdditionalAssig
 //
 //    // Example sending a request using the CreateAdditionalAssignmentsForHITRequest method.
 //    req := client.CreateAdditionalAssignmentsForHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +276,8 @@ type CreateHITRequest struct {
 }
 
 // Send marshals and sends the CreateHIT API request.
-func (r CreateHITRequest) Send() (*CreateHITOutput, error) {
+func (r CreateHITRequest) Send(ctx context.Context) (*CreateHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,7 +314,7 @@ func (r CreateHITRequest) Send() (*CreateHITOutput, error) {
 //
 //    // Example sending a request using the CreateHITRequest method.
 //    req := client.CreateHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -342,7 +348,8 @@ type CreateHITTypeRequest struct {
 }
 
 // Send marshals and sends the CreateHITType API request.
-func (r CreateHITTypeRequest) Send() (*CreateHITTypeOutput, error) {
+func (r CreateHITTypeRequest) Send(ctx context.Context) (*CreateHITTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -361,7 +368,7 @@ func (r CreateHITTypeRequest) Send() (*CreateHITTypeOutput, error) {
 //
 //    // Example sending a request using the CreateHITTypeRequest method.
 //    req := client.CreateHITTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -395,7 +402,8 @@ type CreateHITWithHITTypeRequest struct {
 }
 
 // Send marshals and sends the CreateHITWithHITType API request.
-func (r CreateHITWithHITTypeRequest) Send() (*CreateHITWithHITTypeOutput, error) {
+func (r CreateHITWithHITTypeRequest) Send(ctx context.Context) (*CreateHITWithHITTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -423,7 +431,7 @@ func (r CreateHITWithHITTypeRequest) Send() (*CreateHITWithHITTypeOutput, error)
 //
 //    // Example sending a request using the CreateHITWithHITTypeRequest method.
 //    req := client.CreateHITWithHITTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -457,7 +465,8 @@ type CreateQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the CreateQualificationType API request.
-func (r CreateQualificationTypeRequest) Send() (*CreateQualificationTypeOutput, error) {
+func (r CreateQualificationTypeRequest) Send(ctx context.Context) (*CreateQualificationTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +483,7 @@ func (r CreateQualificationTypeRequest) Send() (*CreateQualificationTypeOutput, 
 //
 //    // Example sending a request using the CreateQualificationTypeRequest method.
 //    req := client.CreateQualificationTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -508,7 +517,8 @@ type CreateWorkerBlockRequest struct {
 }
 
 // Send marshals and sends the CreateWorkerBlock API request.
-func (r CreateWorkerBlockRequest) Send() (*CreateWorkerBlockOutput, error) {
+func (r CreateWorkerBlockRequest) Send(ctx context.Context) (*CreateWorkerBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -526,7 +536,7 @@ func (r CreateWorkerBlockRequest) Send() (*CreateWorkerBlockOutput, error) {
 //
 //    // Example sending a request using the CreateWorkerBlockRequest method.
 //    req := client.CreateWorkerBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -560,7 +570,8 @@ type DeleteHITRequest struct {
 }
 
 // Send marshals and sends the DeleteHIT API request.
-func (r DeleteHITRequest) Send() (*DeleteHITOutput, error) {
+func (r DeleteHITRequest) Send(ctx context.Context) (*DeleteHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -594,7 +605,7 @@ func (r DeleteHITRequest) Send() (*DeleteHITOutput, error) {
 //
 //    // Example sending a request using the DeleteHITRequest method.
 //    req := client.DeleteHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -628,7 +639,8 @@ type DeleteQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteQualificationType API request.
-func (r DeleteQualificationTypeRequest) Send() (*DeleteQualificationTypeOutput, error) {
+func (r DeleteQualificationTypeRequest) Send(ctx context.Context) (*DeleteQualificationTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -656,7 +668,7 @@ func (r DeleteQualificationTypeRequest) Send() (*DeleteQualificationTypeOutput, 
 //
 //    // Example sending a request using the DeleteQualificationTypeRequest method.
 //    req := client.DeleteQualificationTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -690,7 +702,8 @@ type DeleteWorkerBlockRequest struct {
 }
 
 // Send marshals and sends the DeleteWorkerBlock API request.
-func (r DeleteWorkerBlockRequest) Send() (*DeleteWorkerBlockOutput, error) {
+func (r DeleteWorkerBlockRequest) Send(ctx context.Context) (*DeleteWorkerBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -711,7 +724,7 @@ func (r DeleteWorkerBlockRequest) Send() (*DeleteWorkerBlockOutput, error) {
 //
 //    // Example sending a request using the DeleteWorkerBlockRequest method.
 //    req := client.DeleteWorkerBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -745,7 +758,8 @@ type DisassociateQualificationFromWorkerRequest struct {
 }
 
 // Send marshals and sends the DisassociateQualificationFromWorker API request.
-func (r DisassociateQualificationFromWorkerRequest) Send() (*DisassociateQualificationFromWorkerOutput, error) {
+func (r DisassociateQualificationFromWorkerRequest) Send(ctx context.Context) (*DisassociateQualificationFromWorkerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -765,7 +779,7 @@ func (r DisassociateQualificationFromWorkerRequest) Send() (*DisassociateQualifi
 //
 //    // Example sending a request using the DisassociateQualificationFromWorkerRequest method.
 //    req := client.DisassociateQualificationFromWorkerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -799,7 +813,8 @@ type GetAccountBalanceRequest struct {
 }
 
 // Send marshals and sends the GetAccountBalance API request.
-func (r GetAccountBalanceRequest) Send() (*GetAccountBalanceOutput, error) {
+func (r GetAccountBalanceRequest) Send(ctx context.Context) (*GetAccountBalanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -816,7 +831,7 @@ func (r GetAccountBalanceRequest) Send() (*GetAccountBalanceOutput, error) {
 //
 //    // Example sending a request using the GetAccountBalanceRequest method.
 //    req := client.GetAccountBalanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -850,7 +865,8 @@ type GetAssignmentRequest struct {
 }
 
 // Send marshals and sends the GetAssignment API request.
-func (r GetAssignmentRequest) Send() (*GetAssignmentOutput, error) {
+func (r GetAssignmentRequest) Send(ctx context.Context) (*GetAssignmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -866,7 +882,7 @@ func (r GetAssignmentRequest) Send() (*GetAssignmentOutput, error) {
 //
 //    // Example sending a request using the GetAssignmentRequest method.
 //    req := client.GetAssignmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -900,7 +916,8 @@ type GetFileUploadURLRequest struct {
 }
 
 // Send marshals and sends the GetFileUploadURL API request.
-func (r GetFileUploadURLRequest) Send() (*GetFileUploadURLOutput, error) {
+func (r GetFileUploadURLRequest) Send(ctx context.Context) (*GetFileUploadURLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -926,7 +943,7 @@ func (r GetFileUploadURLRequest) Send() (*GetFileUploadURLOutput, error) {
 //
 //    // Example sending a request using the GetFileUploadURLRequest method.
 //    req := client.GetFileUploadURLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -960,7 +977,8 @@ type GetHITRequest struct {
 }
 
 // Send marshals and sends the GetHIT API request.
-func (r GetHITRequest) Send() (*GetHITOutput, error) {
+func (r GetHITRequest) Send(ctx context.Context) (*GetHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -976,7 +994,7 @@ func (r GetHITRequest) Send() (*GetHITOutput, error) {
 //
 //    // Example sending a request using the GetHITRequest method.
 //    req := client.GetHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1010,7 +1028,8 @@ type GetQualificationScoreRequest struct {
 }
 
 // Send marshals and sends the GetQualificationScore API request.
-func (r GetQualificationScoreRequest) Send() (*GetQualificationScoreOutput, error) {
+func (r GetQualificationScoreRequest) Send(ctx context.Context) (*GetQualificationScoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1034,7 +1053,7 @@ func (r GetQualificationScoreRequest) Send() (*GetQualificationScoreOutput, erro
 //
 //    // Example sending a request using the GetQualificationScoreRequest method.
 //    req := client.GetQualificationScoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1068,7 +1087,8 @@ type GetQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the GetQualificationType API request.
-func (r GetQualificationTypeRequest) Send() (*GetQualificationTypeOutput, error) {
+func (r GetQualificationTypeRequest) Send(ctx context.Context) (*GetQualificationTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1085,7 +1105,7 @@ func (r GetQualificationTypeRequest) Send() (*GetQualificationTypeOutput, error)
 //
 //    // Example sending a request using the GetQualificationTypeRequest method.
 //    req := client.GetQualificationTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1119,7 +1139,8 @@ type ListAssignmentsForHITRequest struct {
 }
 
 // Send marshals and sends the ListAssignmentsForHIT API request.
-func (r ListAssignmentsForHITRequest) Send() (*ListAssignmentsForHITOutput, error) {
+func (r ListAssignmentsForHITRequest) Send(ctx context.Context) (*ListAssignmentsForHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1155,7 +1176,7 @@ func (r ListAssignmentsForHITRequest) Send() (*ListAssignmentsForHITOutput, erro
 //
 //    // Example sending a request using the ListAssignmentsForHITRequest method.
 //    req := client.ListAssignmentsForHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1241,7 +1262,8 @@ type ListBonusPaymentsRequest struct {
 }
 
 // Send marshals and sends the ListBonusPayments API request.
-func (r ListBonusPaymentsRequest) Send() (*ListBonusPaymentsOutput, error) {
+func (r ListBonusPaymentsRequest) Send(ctx context.Context) (*ListBonusPaymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1258,7 +1280,7 @@ func (r ListBonusPaymentsRequest) Send() (*ListBonusPaymentsOutput, error) {
 //
 //    // Example sending a request using the ListBonusPaymentsRequest method.
 //    req := client.ListBonusPaymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1344,7 +1366,8 @@ type ListHITsRequest struct {
 }
 
 // Send marshals and sends the ListHITs API request.
-func (r ListHITsRequest) Send() (*ListHITsOutput, error) {
+func (r ListHITsRequest) Send(ctx context.Context) (*ListHITsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1362,7 +1385,7 @@ func (r ListHITsRequest) Send() (*ListHITsOutput, error) {
 //
 //    // Example sending a request using the ListHITsRequest method.
 //    req := client.ListHITsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1448,7 +1471,8 @@ type ListHITsForQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the ListHITsForQualificationType API request.
-func (r ListHITsForQualificationTypeRequest) Send() (*ListHITsForQualificationTypeOutput, error) {
+func (r ListHITsForQualificationTypeRequest) Send(ctx context.Context) (*ListHITsForQualificationTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1467,7 +1491,7 @@ func (r ListHITsForQualificationTypeRequest) Send() (*ListHITsForQualificationTy
 //
 //    // Example sending a request using the ListHITsForQualificationTypeRequest method.
 //    req := client.ListHITsForQualificationTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1553,7 +1577,8 @@ type ListQualificationRequestsRequest struct {
 }
 
 // Send marshals and sends the ListQualificationRequests API request.
-func (r ListQualificationRequestsRequest) Send() (*ListQualificationRequestsOutput, error) {
+func (r ListQualificationRequestsRequest) Send(ctx context.Context) (*ListQualificationRequestsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1572,7 +1597,7 @@ func (r ListQualificationRequestsRequest) Send() (*ListQualificationRequestsOutp
 //
 //    // Example sending a request using the ListQualificationRequestsRequest method.
 //    req := client.ListQualificationRequestsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1658,7 +1683,8 @@ type ListQualificationTypesRequest struct {
 }
 
 // Send marshals and sends the ListQualificationTypes API request.
-func (r ListQualificationTypesRequest) Send() (*ListQualificationTypesOutput, error) {
+func (r ListQualificationTypesRequest) Send(ctx context.Context) (*ListQualificationTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1675,7 +1701,7 @@ func (r ListQualificationTypesRequest) Send() (*ListQualificationTypesOutput, er
 //
 //    // Example sending a request using the ListQualificationTypesRequest method.
 //    req := client.ListQualificationTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1761,7 +1787,8 @@ type ListReviewPolicyResultsForHITRequest struct {
 }
 
 // Send marshals and sends the ListReviewPolicyResultsForHIT API request.
-func (r ListReviewPolicyResultsForHITRequest) Send() (*ListReviewPolicyResultsForHITOutput, error) {
+func (r ListReviewPolicyResultsForHITRequest) Send(ctx context.Context) (*ListReviewPolicyResultsForHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1781,7 +1808,7 @@ func (r ListReviewPolicyResultsForHITRequest) Send() (*ListReviewPolicyResultsFo
 //
 //    // Example sending a request using the ListReviewPolicyResultsForHITRequest method.
 //    req := client.ListReviewPolicyResultsForHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1867,7 +1894,8 @@ type ListReviewableHITsRequest struct {
 }
 
 // Send marshals and sends the ListReviewableHITs API request.
-func (r ListReviewableHITsRequest) Send() (*ListReviewableHITsOutput, error) {
+func (r ListReviewableHITsRequest) Send(ctx context.Context) (*ListReviewableHITsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1885,7 +1913,7 @@ func (r ListReviewableHITsRequest) Send() (*ListReviewableHITsOutput, error) {
 //
 //    // Example sending a request using the ListReviewableHITsRequest method.
 //    req := client.ListReviewableHITsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1971,7 +1999,8 @@ type ListWorkerBlocksRequest struct {
 }
 
 // Send marshals and sends the ListWorkerBlocks API request.
-func (r ListWorkerBlocksRequest) Send() (*ListWorkerBlocksOutput, error) {
+func (r ListWorkerBlocksRequest) Send(ctx context.Context) (*ListWorkerBlocksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1988,7 +2017,7 @@ func (r ListWorkerBlocksRequest) Send() (*ListWorkerBlocksOutput, error) {
 //
 //    // Example sending a request using the ListWorkerBlocksRequest method.
 //    req := client.ListWorkerBlocksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2074,7 +2103,8 @@ type ListWorkersWithQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the ListWorkersWithQualificationType API request.
-func (r ListWorkersWithQualificationTypeRequest) Send() (*ListWorkersWithQualificationTypeOutput, error) {
+func (r ListWorkersWithQualificationTypeRequest) Send(ctx context.Context) (*ListWorkersWithQualificationTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2091,7 +2121,7 @@ func (r ListWorkersWithQualificationTypeRequest) Send() (*ListWorkersWithQualifi
 //
 //    // Example sending a request using the ListWorkersWithQualificationTypeRequest method.
 //    req := client.ListWorkersWithQualificationTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2177,7 +2207,8 @@ type NotifyWorkersRequest struct {
 }
 
 // Send marshals and sends the NotifyWorkers API request.
-func (r NotifyWorkersRequest) Send() (*NotifyWorkersOutput, error) {
+func (r NotifyWorkersRequest) Send(ctx context.Context) (*NotifyWorkersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2197,7 +2228,7 @@ func (r NotifyWorkersRequest) Send() (*NotifyWorkersOutput, error) {
 //
 //    // Example sending a request using the NotifyWorkersRequest method.
 //    req := client.NotifyWorkersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2231,7 +2262,8 @@ type RejectAssignmentRequest struct {
 }
 
 // Send marshals and sends the RejectAssignment API request.
-func (r RejectAssignmentRequest) Send() (*RejectAssignmentOutput, error) {
+func (r RejectAssignmentRequest) Send(ctx context.Context) (*RejectAssignmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2255,7 +2287,7 @@ func (r RejectAssignmentRequest) Send() (*RejectAssignmentOutput, error) {
 //
 //    // Example sending a request using the RejectAssignmentRequest method.
 //    req := client.RejectAssignmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2289,7 +2321,8 @@ type RejectQualificationRequestRequest struct {
 }
 
 // Send marshals and sends the RejectQualificationRequest API request.
-func (r RejectQualificationRequestRequest) Send() (*RejectQualificationRequestOutput, error) {
+func (r RejectQualificationRequestRequest) Send(ctx context.Context) (*RejectQualificationRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,7 +2341,7 @@ func (r RejectQualificationRequestRequest) Send() (*RejectQualificationRequestOu
 //
 //    // Example sending a request using the RejectQualificationRequestRequest method.
 //    req := client.RejectQualificationRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2342,7 +2375,8 @@ type SendBonusRequest struct {
 }
 
 // Send marshals and sends the SendBonus API request.
-func (r SendBonusRequest) Send() (*SendBonusOutput, error) {
+func (r SendBonusRequest) Send(ctx context.Context) (*SendBonusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2366,7 +2400,7 @@ func (r SendBonusRequest) Send() (*SendBonusOutput, error) {
 //
 //    // Example sending a request using the SendBonusRequest method.
 //    req := client.SendBonusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2400,7 +2434,8 @@ type SendTestEventNotificationRequest struct {
 }
 
 // Send marshals and sends the SendTestEventNotification API request.
-func (r SendTestEventNotificationRequest) Send() (*SendTestEventNotificationOutput, error) {
+func (r SendTestEventNotificationRequest) Send(ctx context.Context) (*SendTestEventNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2421,7 +2456,7 @@ func (r SendTestEventNotificationRequest) Send() (*SendTestEventNotificationOutp
 //
 //    // Example sending a request using the SendTestEventNotificationRequest method.
 //    req := client.SendTestEventNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2455,7 +2490,8 @@ type UpdateExpirationForHITRequest struct {
 }
 
 // Send marshals and sends the UpdateExpirationForHIT API request.
-func (r UpdateExpirationForHITRequest) Send() (*UpdateExpirationForHITOutput, error) {
+func (r UpdateExpirationForHITRequest) Send(ctx context.Context) (*UpdateExpirationForHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2473,7 +2509,7 @@ func (r UpdateExpirationForHITRequest) Send() (*UpdateExpirationForHITOutput, er
 //
 //    // Example sending a request using the UpdateExpirationForHITRequest method.
 //    req := client.UpdateExpirationForHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2507,7 +2543,8 @@ type UpdateHITReviewStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateHITReviewStatus API request.
-func (r UpdateHITReviewStatusRequest) Send() (*UpdateHITReviewStatusOutput, error) {
+func (r UpdateHITReviewStatusRequest) Send(ctx context.Context) (*UpdateHITReviewStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2525,7 +2562,7 @@ func (r UpdateHITReviewStatusRequest) Send() (*UpdateHITReviewStatusOutput, erro
 //
 //    // Example sending a request using the UpdateHITReviewStatusRequest method.
 //    req := client.UpdateHITReviewStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2559,7 +2596,8 @@ type UpdateHITTypeOfHITRequest struct {
 }
 
 // Send marshals and sends the UpdateHITTypeOfHIT API request.
-func (r UpdateHITTypeOfHITRequest) Send() (*UpdateHITTypeOfHITOutput, error) {
+func (r UpdateHITTypeOfHITRequest) Send(ctx context.Context) (*UpdateHITTypeOfHITOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2578,7 +2616,7 @@ func (r UpdateHITTypeOfHITRequest) Send() (*UpdateHITTypeOfHITOutput, error) {
 //
 //    // Example sending a request using the UpdateHITTypeOfHITRequest method.
 //    req := client.UpdateHITTypeOfHITRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2612,7 +2650,8 @@ type UpdateNotificationSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateNotificationSettings API request.
-func (r UpdateNotificationSettingsRequest) Send() (*UpdateNotificationSettingsOutput, error) {
+func (r UpdateNotificationSettingsRequest) Send(ctx context.Context) (*UpdateNotificationSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2637,7 +2676,7 @@ func (r UpdateNotificationSettingsRequest) Send() (*UpdateNotificationSettingsOu
 //
 //    // Example sending a request using the UpdateNotificationSettingsRequest method.
 //    req := client.UpdateNotificationSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2671,7 +2710,8 @@ type UpdateQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the UpdateQualificationType API request.
-func (r UpdateQualificationTypeRequest) Send() (*UpdateQualificationTypeOutput, error) {
+func (r UpdateQualificationTypeRequest) Send(ctx context.Context) (*UpdateQualificationTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2717,7 +2757,7 @@ func (r UpdateQualificationTypeRequest) Send() (*UpdateQualificationTypeOutput, 
 //
 //    // Example sending a request using the UpdateQualificationTypeRequest method.
 //    req := client.UpdateQualificationTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

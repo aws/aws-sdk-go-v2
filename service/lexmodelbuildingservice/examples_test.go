@@ -3,6 +3,7 @@
 package lexmodelbuildingservice_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -41,7 +42,7 @@ func ExampleLexModelBuildingService_GetBotRequest_shared00() {
 	}
 
 	req := svc.GetBotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -83,7 +84,7 @@ func ExampleLexModelBuildingService_GetBotsRequest_shared00() {
 	}
 
 	req := svc.GetBotsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -125,7 +126,7 @@ func ExampleLexModelBuildingService_GetIntentRequest_shared00() {
 	}
 
 	req := svc.GetIntentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -167,7 +168,7 @@ func ExampleLexModelBuildingService_GetIntentsRequest_shared00() {
 	}
 
 	req := svc.GetIntentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -209,7 +210,7 @@ func ExampleLexModelBuildingService_GetSlotTypeRequest_shared00() {
 	}
 
 	req := svc.GetSlotTypeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -251,7 +252,7 @@ func ExampleLexModelBuildingService_GetSlotTypesRequest_shared00() {
 	}
 
 	req := svc.GetSlotTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -328,7 +329,7 @@ func ExampleLexModelBuildingService_PutBotRequest_shared00() {
 	}
 
 	req := svc.PutBotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -454,7 +455,7 @@ func ExampleLexModelBuildingService_PutIntentRequest_shared00() {
 	}
 
 	req := svc.PutIntentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -506,7 +507,7 @@ func ExampleLexModelBuildingService_PutSlotTypeRequest_shared00() {
 	}
 
 	req := svc.PutSlotTypeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
