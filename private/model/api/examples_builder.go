@@ -199,7 +199,6 @@ func (builder defaultExamplesBuilder) BuildScalar(name, memName string, ref *Sha
 	default:
 		panic(fmt.Errorf("Unsupported scalar type: %v", reflect.TypeOf(v)))
 	}
-	return ""
 }
 
 func (builder defaultExamplesBuilder) BuildComplex(name, memName string, ref *ShapeRef, v map[string]interface{}, asValue bool) string {

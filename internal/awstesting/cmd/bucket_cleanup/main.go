@@ -70,7 +70,7 @@ func deleteBucket(svc *s3.S3, bucket string) error {
 	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName})
 	objs, err := listReq.Send()
 	if err != nil {
-		return fmt.Errorf("failed to list bucket %q objects, %v", bucketName, err)
+		return fmt.Errorf("failed to list bucket %q objects, %v", *bucketName, err)
 	}
 
 	for _, o := range objs.Contents {
@@ -81,7 +81,7 @@ func deleteBucket(svc *s3.S3, bucket string) error {
 	listMulReq := svc.ListMultipartUploadsRequest(&s3.ListMultipartUploadsInput{Bucket: bucketName})
 	uploads, err := listMulReq.Send()
 	if err != nil {
-		return fmt.Errorf("failed to list bucket %q multipart objects, %v", bucketName, err)
+		return fmt.Errorf("failed to list bucket %q multipart objects, %v", *bucketName, err)
 	}
 
 	for _, u := range uploads.Uploads {
@@ -95,7 +95,7 @@ func deleteBucket(svc *s3.S3, bucket string) error {
 
 	_, err = svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send()
 	if err != nil {
-		return fmt.Errorf("failed to delete bucket %q, %v", bucketName, err)
+		return fmt.Errorf("failed to delete bucket %q, %v", *bucketName, err)
 	}
 
 	return nil

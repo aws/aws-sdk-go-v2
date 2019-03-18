@@ -96,7 +96,6 @@ func (r *referenceResolver) resolveReference(ref *ShapeRef) {
 	shape, ok := r.API.Shapes[ref.ShapeName]
 	if !ok {
 		panic(fmt.Sprintf("unable resolve reference, %s", ref.ShapeName))
-		return
 	}
 
 	if ref.JSONValue {
