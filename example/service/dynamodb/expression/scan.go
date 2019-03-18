@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -61,7 +62,7 @@ func main() {
 
 	// Make the DynamoDB Query API call
 	req := svc.ScanRequest(params)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		exitErrorf("failed to make Query API call, %v", err)
 	}

@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"strings"
@@ -41,7 +42,7 @@ func main() {
 	}
 
 	req := svc.DescribeInstancesRequest(params)
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		exitErrorf("failed to describe instances, %s, %v", awsRegion, err)
 	}

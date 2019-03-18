@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -86,7 +87,7 @@ func main() {
 			},
 		},
 	})
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		exitErrorf("failed, %v", err)
 	}
