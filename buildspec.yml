@@ -10,9 +10,7 @@ phases:
       - mkdir -p /go/src/github.com/aws
       - ln -s $SDK_CB_ROOT $SDK_GO_ROOT
       - cd $SDK_GO_ROOT
-      - go get -u github.com/golang/dep/cmd/dep
-      - dep ensure
-      - make unit
+      - make get-deps unit
       - cd $SDK_CB_ROOT
   post_build:
     commands:
