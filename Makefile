@@ -77,31 +77,23 @@ unit-with-race-cover: verify
 #######################
 # Integration Testing #
 #######################
-integration: integ-custom smoke-tests
+integration: core-integ client-integ
 
-integ-custom:
-	go test -tags "integration" ./internal/awstesting/integration/customizations/...
+core-integ:
+	@echo "Integration Testing SDK core"
+	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ${SDK_CORE_PKGS}
 
-smoke-tests:
-	gucumber -go-tags "integration" ./internal/awstesting/integration/smoke
+client-integ:
+	@echo "Integration Testing SDK clients"
+	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ./service/...
 
-#integration: core-integ client-integ
-
-#core-integ:
-#	@echo "Integration Testing SDK core"
-#	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ./aws/... ./private/... ./internal/... ./awstesting/...
-#
-#client-integ:
-#	@echo "Integration Testing SDK clients"
-#	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ./service/...
-#
 #s3crypto-integ:
 #	@echo "Integration Testing S3 Cyrpto utility"
 #	AWS_REGION="" go test -count=1 -tags "s3crypto_integ integration" -v -run '^TestInteg_' ./service/s3/s3crypto
 
-cleanup-integ-buckets:
-	@echo "Cleaning up SDK integraiton resources"
-	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
+#cleanup-integ-buckets:
+#	@echo "Cleaning up SDK integraiton resources"
+#	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
 
 ###################
 # Sandbox Testing #

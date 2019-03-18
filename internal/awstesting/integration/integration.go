@@ -36,10 +36,6 @@ func init() {
 		logLevel = aws.LogLevel(aws.LogDebugWithSigning | aws.LogDebugWithHTTPBody)
 	}
 	config.LogLevel = logLevel
-
-	if config.Region == "" {
-		panic("AWS_REGION must be configured to run integration tests")
-	}
 }
 
 var config aws.Config
@@ -55,4 +51,15 @@ func UniqueID() string {
 	uuid := make([]byte, 16)
 	io.ReadFull(rand.Reader, uuid)
 	return fmt.Sprintf("%x", uuid)
+}
+
+// ConfigWithDefaultRegion returns a copy of the integration config with the
+// region set if one was not already provided.
+func ConfigWithDefaultRegion(region string) aws.Config {
+	cfg := Config()
+	if v := aws.StringValue(cfg.Region); len(v) == 0 {
+		cfg.Region = aws.String(region)
+	}
+
+	return cfg
 }

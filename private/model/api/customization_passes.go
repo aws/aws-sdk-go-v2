@@ -46,6 +46,10 @@ func (a *API) customizationPasses() {
 		"s3control":  s3ControlCustomizations,
 		"cloudfront": cloudfrontCustomizations,
 		"rds":        rdsCustomizations,
+
+		// MTurk smoke test is invalid. The service requires AWS account to be
+		// linked to Amazon Mechanical Turk Account.
+		"mturk": supressSmokeTest,
 	}
 
 	for k := range mergeServices {
@@ -57,6 +61,10 @@ func (a *API) customizationPasses() {
 	}
 
 	a.EnableSelectGeneratedMarshalers()
+}
+
+func supressSmokeTest(a *API) {
+	a.SmokeTests.TestCases = []SmokeTestCase{}
 }
 
 // s3Customizations customizes the API generation to replace values specific to S3.
