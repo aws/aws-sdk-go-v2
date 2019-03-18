@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -20,11 +20,7 @@ func (c *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObj
 	req := c.S3.ListObjectsRequest(input)
 	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
 		r := c.S3.ListObjectsRequest(v)
-		r.Handlers.Send.Clear()
-		r.Handlers.Unmarshal.Clear()
-		r.Handlers.UnmarshalMeta.Clear()
-		r.Handlers.UnmarshalError.Clear()
-		r.Handlers.ValidateResponse.Clear()
+		r.Handlers.Clear()
 		r.Handlers.Send.PushBack(func(r *aws.Request) {
 			object := c.objects[c.index]
 			r.Data = &object
@@ -76,7 +72,7 @@ func TestListObjectsPagination(t *testing.T) {
 		},
 	}
 
-	svc.S3 = s3.New(unit.Config())
+	svc.S3 = s3.New(defaults.Config())
 	svc.objects = objects
 
 	keys := getKeys(svc, "foo")
