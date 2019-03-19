@@ -107,6 +107,9 @@ var smokeTestTmpl = template.Must(template.New(`smokeTestTmpl`).Parse(`
 			if !ok {
 				t.Fatalf("expect awserr, was %T", err)
 			}
+			if len(aerr.Code()) == 0 {
+				t.Errorf("expect non-empty error code")
+			}
 			if v := aerr.Code(); v == aws.ErrCodeSerialization {
 				t.Errorf("expect API error code got serialization failure")
 			}
