@@ -29,7 +29,8 @@ all: generate unit
 ###################
 generate: cleanup-models gen-test gen-endpoints gen-services gen-tools
 
-gen-test: gen-protocol-test gen-codegen-test
+gen-test: gen-protocol-test
+#gen-test: gen-protocol-test gen-codegen-test
 
 #gen-codegen-test:
 #	@echo "Generating SDK API tests"

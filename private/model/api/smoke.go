@@ -77,6 +77,7 @@ func (a *API) APISmokeTestsGoCode() string {
 	}
 
 	ignoreImports := `
+	var _ aws.Config
 	var _ awserr.Error
 	`
 
@@ -93,9 +94,11 @@ var smokeTestTmpl = template.Must(template.New(`smokeTestTmpl`).Parse(`
 		cfg := integration.ConfigWithDefaultRegion("{{ $.DefaultRegion }}")
 		svc := {{ $.API.PackageName }}.New(cfg)
 		params := {{ $testCase.BuildInputShape $op.InputRef }}
-		req := svc.{{ $op.ExportedName }}WithContext(params)
-		req.WithContext(ctx)
-		err := req.Send()
+
+		req := svc.{{ $op.ExportedName }}Request(params)
+		req.SetContext(ctx)
+
+		_, err := req.Send()
 		{{- if $testCase.ExpectErr }}
 			if err == nil {
 				t.Fatalf("expect request to fail")

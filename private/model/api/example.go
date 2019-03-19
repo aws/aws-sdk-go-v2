@@ -64,8 +64,7 @@ func Example{{ .API.StructName }}_{{ .MethodName }}() {
 	}
 
 	svc := {{ .API.PackageName }}.New(cfg)
-	input := {{ generateExampleInput . -}}
-
+	input := {{ generateExampleInput . }}
 	req := svc.{{ .OperationName }}Request(input)
 	result, err := req.Send()
 	if err != nil {
@@ -134,7 +133,7 @@ func (ex Example) GoCode() string {
 
 func generateExampleInput(ex Example) string {
 	if ex.Operation.HasInput() {
-		return fmt.Sprintf("&%s{\n%s\n}",
+		return fmt.Sprintf("&%s{\n%s\n}\n",
 			ex.Builder.GoType(&ex.Operation.InputRef, true),
 			ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false, false),
 		)

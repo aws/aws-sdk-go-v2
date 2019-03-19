@@ -57,8 +57,8 @@ func UniqueID() string {
 // region set if one was not already provided.
 func ConfigWithDefaultRegion(region string) aws.Config {
 	cfg := Config()
-	if v := aws.StringValue(cfg.Region); len(v) == 0 {
-		cfg.Region = aws.String(region)
+	if v := cfg.Region; len(v) == 0 {
+		cfg.Region = region
 	}
 
 	return cfg
