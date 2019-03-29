@@ -2551,7 +2551,7 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedP
 func (p *ListAcceptedPortfolioSharesRequest) Paginate(opts ...aws.Option) ListAcceptedPortfolioSharesPager {
 	return ListAcceptedPortfolioSharesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAcceptedPortfolioSharesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2560,6 +2560,7 @@ func (p *ListAcceptedPortfolioSharesRequest) Paginate(opts ...aws.Option) ListAc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2654,7 +2655,7 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstrain
 func (p *ListConstraintsForPortfolioRequest) Paginate(opts ...aws.Option) ListConstraintsForPortfolioPager {
 	return ListConstraintsForPortfolioPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListConstraintsForPortfolioInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2663,6 +2664,7 @@ func (p *ListConstraintsForPortfolioRequest) Paginate(opts ...aws.Option) ListCo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2759,7 +2761,7 @@ func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) Lis
 func (p *ListLaunchPathsRequest) Paginate(opts ...aws.Option) ListLaunchPathsPager {
 	return ListLaunchPathsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListLaunchPathsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2768,6 +2770,7 @@ func (p *ListLaunchPathsRequest) Paginate(opts ...aws.Option) ListLaunchPathsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2863,7 +2866,7 @@ func (c *ServiceCatalog) ListOrganizationPortfolioAccessRequest(input *ListOrgan
 func (p *ListOrganizationPortfolioAccessRequest) Paginate(opts ...aws.Option) ListOrganizationPortfolioAccessPager {
 	return ListOrganizationPortfolioAccessPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOrganizationPortfolioAccessInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2872,6 +2875,7 @@ func (p *ListOrganizationPortfolioAccessRequest) Paginate(opts ...aws.Option) Li
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3017,7 +3021,7 @@ func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) ListP
 func (p *ListPortfoliosRequest) Paginate(opts ...aws.Option) ListPortfoliosPager {
 	return ListPortfoliosPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPortfoliosInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3026,6 +3030,7 @@ func (p *ListPortfoliosRequest) Paginate(opts ...aws.Option) ListPortfoliosPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3120,7 +3125,7 @@ func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosFo
 func (p *ListPortfoliosForProductRequest) Paginate(opts ...aws.Option) ListPortfoliosForProductPager {
 	return ListPortfoliosForProductPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPortfoliosForProductInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3129,6 +3134,7 @@ func (p *ListPortfoliosForProductRequest) Paginate(opts ...aws.Option) ListPortf
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3223,7 +3229,7 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipals
 func (p *ListPrincipalsForPortfolioRequest) Paginate(opts ...aws.Option) ListPrincipalsForPortfolioPager {
 	return ListPrincipalsForPortfolioPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPrincipalsForPortfolioInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3232,6 +3238,7 @@ func (p *ListPrincipalsForPortfolioRequest) Paginate(opts ...aws.Option) ListPri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3431,7 +3438,7 @@ func (c *ServiceCatalog) ListProvisioningArtifactsForServiceActionRequest(input 
 func (p *ListProvisioningArtifactsForServiceActionRequest) Paginate(opts ...aws.Option) ListProvisioningArtifactsForServiceActionPager {
 	return ListProvisioningArtifactsForServiceActionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListProvisioningArtifactsForServiceActionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3440,6 +3447,7 @@ func (p *ListProvisioningArtifactsForServiceActionRequest) Paginate(opts ...aws.
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3585,7 +3593,7 @@ func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesFo
 func (p *ListResourcesForTagOptionRequest) Paginate(opts ...aws.Option) ListResourcesForTagOptionPager {
 	return ListResourcesForTagOptionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResourcesForTagOptionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3594,6 +3602,7 @@ func (p *ListResourcesForTagOptionRequest) Paginate(opts ...aws.Option) ListReso
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3688,7 +3697,7 @@ func (c *ServiceCatalog) ListServiceActionsRequest(input *ListServiceActionsInpu
 func (p *ListServiceActionsRequest) Paginate(opts ...aws.Option) ListServiceActionsPager {
 	return ListServiceActionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServiceActionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3697,6 +3706,7 @@ func (p *ListServiceActionsRequest) Paginate(opts ...aws.Option) ListServiceActi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3792,7 +3802,7 @@ func (c *ServiceCatalog) ListServiceActionsForProvisioningArtifactRequest(input 
 func (p *ListServiceActionsForProvisioningArtifactRequest) Paginate(opts ...aws.Option) ListServiceActionsForProvisioningArtifactPager {
 	return ListServiceActionsForProvisioningArtifactPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServiceActionsForProvisioningArtifactInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3801,6 +3811,7 @@ func (p *ListServiceActionsForProvisioningArtifactRequest) Paginate(opts ...aws.
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3895,7 +3906,7 @@ func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) ListT
 func (p *ListTagOptionsRequest) Paginate(opts ...aws.Option) ListTagOptionsPager {
 	return ListTagOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3904,6 +3915,7 @@ func (p *ListTagOptionsRequest) Paginate(opts ...aws.Option) ListTagOptionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4163,7 +4175,7 @@ func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) Searc
 func (p *SearchProductsRequest) Paginate(opts ...aws.Option) SearchProductsPager {
 	return SearchProductsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProductsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4172,6 +4184,7 @@ func (p *SearchProductsRequest) Paginate(opts ...aws.Option) SearchProductsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4266,7 +4279,7 @@ func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdm
 func (p *SearchProductsAsAdminRequest) Paginate(opts ...aws.Option) SearchProductsAsAdminPager {
 	return SearchProductsAsAdminPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProductsAsAdminInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4275,6 +4288,7 @@ func (p *SearchProductsAsAdminRequest) Paginate(opts ...aws.Option) SearchProduc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4369,7 +4383,7 @@ func (c *ServiceCatalog) SearchProvisionedProductsRequest(input *SearchProvision
 func (p *SearchProvisionedProductsRequest) Paginate(opts ...aws.Option) SearchProvisionedProductsPager {
 	return SearchProvisionedProductsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProvisionedProductsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4378,6 +4392,7 @@ func (p *SearchProvisionedProductsRequest) Paginate(opts ...aws.Option) SearchPr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

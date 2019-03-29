@@ -696,7 +696,7 @@ func (c *ACMPCA) ListCertificateAuthoritiesRequest(input *ListCertificateAuthori
 func (p *ListCertificateAuthoritiesRequest) Paginate(opts ...aws.Option) ListCertificateAuthoritiesPager {
 	return ListCertificateAuthoritiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCertificateAuthoritiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -705,6 +705,7 @@ func (p *ListCertificateAuthoritiesRequest) Paginate(opts ...aws.Option) ListCer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

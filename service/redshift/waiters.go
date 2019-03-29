@@ -3,6 +3,7 @@
 package redshift
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeClusters to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Redshift) WaitUntilClusterAvailable(input *DescribeClustersInput) error {
-	return c.WaitUntilClusterAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilClusterAvailableWithContext is an extended version of WaitUntilClusterAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilClusterAvailableWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+func (c *Redshift) WaitUntilClusterAvailable(ctx context.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterAvailable",
 		MaxAttempts: 30,
@@ -61,26 +55,19 @@ func (c *Redshift) WaitUntilClusterAvailableWithContext(ctx aws.Context, input *
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilClusterDeleted uses the Amazon Redshift API operation
 // DescribeClusters to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Redshift) WaitUntilClusterDeleted(input *DescribeClustersInput) error {
-	return c.WaitUntilClusterDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilClusterDeletedWithContext is an extended version of WaitUntilClusterDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+func (c *Redshift) WaitUntilClusterDeleted(ctx context.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterDeleted",
 		MaxAttempts: 30,
@@ -117,26 +104,19 @@ func (c *Redshift) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilClusterRestored uses the Amazon Redshift API operation
 // DescribeClusters to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Redshift) WaitUntilClusterRestored(input *DescribeClustersInput) error {
-	return c.WaitUntilClusterRestoredWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilClusterRestoredWithContext is an extended version of WaitUntilClusterRestored.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilClusterRestoredWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+func (c *Redshift) WaitUntilClusterRestored(ctx context.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterRestored",
 		MaxAttempts: 30,
@@ -168,26 +148,19 @@ func (c *Redshift) WaitUntilClusterRestoredWithContext(ctx aws.Context, input *D
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilSnapshotAvailable uses the Amazon Redshift API operation
 // DescribeClusterSnapshots to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Redshift) WaitUntilSnapshotAvailable(input *DescribeClusterSnapshotsInput) error {
-	return c.WaitUntilSnapshotAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilSnapshotAvailableWithContext is an extended version of WaitUntilSnapshotAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilSnapshotAvailableWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *Redshift) WaitUntilSnapshotAvailable(ctx context.Context, input *DescribeClusterSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSnapshotAvailable",
 		MaxAttempts: 20,
@@ -224,5 +197,5 @@ func (c *Redshift) WaitUntilSnapshotAvailableWithContext(ctx aws.Context, input 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

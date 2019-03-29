@@ -555,7 +555,7 @@ func (c *MediaConvert) DescribeEndpointsRequest(input *DescribeEndpointsInput) D
 func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpointsPager {
 	return DescribeEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -564,6 +564,7 @@ func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpoint
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -916,7 +917,7 @@ func (c *MediaConvert) ListJobTemplatesRequest(input *ListJobTemplatesInput) Lis
 func (p *ListJobTemplatesRequest) Paginate(opts ...aws.Option) ListJobTemplatesPager {
 	return ListJobTemplatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobTemplatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -925,6 +926,7 @@ func (p *ListJobTemplatesRequest) Paginate(opts ...aws.Option) ListJobTemplatesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1022,7 +1024,7 @@ func (c *MediaConvert) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1031,6 +1033,7 @@ func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1127,7 +1130,7 @@ func (c *MediaConvert) ListPresetsRequest(input *ListPresetsInput) ListPresetsRe
 func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 	return ListPresetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPresetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1136,6 +1139,7 @@ func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1232,7 +1236,7 @@ func (c *MediaConvert) ListQueuesRequest(input *ListQueuesInput) ListQueuesReque
 func (p *ListQueuesRequest) Paginate(opts ...aws.Option) ListQueuesPager {
 	return ListQueuesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListQueuesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1241,6 +1245,7 @@ func (p *ListQueuesRequest) Paginate(opts ...aws.Option) ListQueuesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

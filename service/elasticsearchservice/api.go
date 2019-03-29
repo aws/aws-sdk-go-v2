@@ -550,7 +550,7 @@ func (c *ElasticsearchService) DescribeReservedElasticsearchInstanceOfferingsReq
 func (p *DescribeReservedElasticsearchInstanceOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedElasticsearchInstanceOfferingsPager {
 	return DescribeReservedElasticsearchInstanceOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedElasticsearchInstanceOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -559,6 +559,7 @@ func (p *DescribeReservedElasticsearchInstanceOfferingsRequest) Paginate(opts ..
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -651,7 +652,7 @@ func (c *ElasticsearchService) DescribeReservedElasticsearchInstancesRequest(inp
 func (p *DescribeReservedElasticsearchInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedElasticsearchInstancesPager {
 	return DescribeReservedElasticsearchInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedElasticsearchInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -660,6 +661,7 @@ func (p *DescribeReservedElasticsearchInstancesRequest) Paginate(opts ...aws.Opt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -804,7 +806,7 @@ func (c *ElasticsearchService) GetUpgradeHistoryRequest(input *GetUpgradeHistory
 func (p *GetUpgradeHistoryRequest) Paginate(opts ...aws.Option) GetUpgradeHistoryPager {
 	return GetUpgradeHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUpgradeHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -813,6 +815,7 @@ func (p *GetUpgradeHistoryRequest) Paginate(opts ...aws.Option) GetUpgradeHistor
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1005,7 +1008,7 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *List
 func (p *ListElasticsearchInstanceTypesRequest) Paginate(opts ...aws.Option) ListElasticsearchInstanceTypesPager {
 	return ListElasticsearchInstanceTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListElasticsearchInstanceTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1014,6 +1017,7 @@ func (p *ListElasticsearchInstanceTypesRequest) Paginate(opts ...aws.Option) Lis
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1106,7 +1110,7 @@ func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElast
 func (p *ListElasticsearchVersionsRequest) Paginate(opts ...aws.Option) ListElasticsearchVersionsPager {
 	return ListElasticsearchVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListElasticsearchVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1115,6 +1119,7 @@ func (p *ListElasticsearchVersionsRequest) Paginate(opts ...aws.Option) ListElas
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

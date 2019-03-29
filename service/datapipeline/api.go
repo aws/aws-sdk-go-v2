@@ -369,7 +369,7 @@ func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) Descr
 func (p *DescribeObjectsRequest) Paginate(opts ...aws.Option) DescribeObjectsPager {
 	return DescribeObjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeObjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -378,6 +378,7 @@ func (p *DescribeObjectsRequest) Paginate(opts ...aws.Option) DescribeObjectsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -637,7 +638,7 @@ func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 	return ListPipelinesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPipelinesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -646,6 +647,7 @@ func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -869,7 +871,7 @@ func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) QueryObject
 func (p *QueryObjectsRequest) Paginate(opts ...aws.Option) QueryObjectsPager {
 	return QueryObjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *QueryObjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -878,6 +880,7 @@ func (p *QueryObjectsRequest) Paginate(opts ...aws.Option) QueryObjectsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

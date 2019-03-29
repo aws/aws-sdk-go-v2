@@ -9,6 +9,8 @@
 package iamiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 )
@@ -337,11 +339,9 @@ type IAMAPI interface {
 
 	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
 
-	WaitUntilInstanceProfileExists(*iam.GetInstanceProfileInput) error
-	WaitUntilInstanceProfileExistsWithContext(aws.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
+	WaitUntilInstanceProfileExists(context.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
 
-	WaitUntilUserExists(*iam.GetUserInput) error
-	WaitUntilUserExistsWithContext(aws.Context, *iam.GetUserInput, ...aws.WaiterOption) error
+	WaitUntilUserExists(context.Context, *iam.GetUserInput, ...aws.WaiterOption) error
 }
 
 var _ IAMAPI = (*iam.IAM)(nil)

@@ -930,7 +930,7 @@ func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput
 func (p *GetBotAliasesRequest) Paginate(opts ...aws.Option) GetBotAliasesPager {
 	return GetBotAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -939,6 +939,7 @@ func (p *GetBotAliasesRequest) Paginate(opts ...aws.Option) GetBotAliasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1091,7 +1092,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBot
 func (p *GetBotChannelAssociationsRequest) Paginate(opts ...aws.Option) GetBotChannelAssociationsPager {
 	return GetBotChannelAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotChannelAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1100,6 +1101,7 @@ func (p *GetBotChannelAssociationsRequest) Paginate(opts ...aws.Option) GetBotCh
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1204,7 +1206,7 @@ func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInp
 func (p *GetBotVersionsRequest) Paginate(opts ...aws.Option) GetBotVersionsPager {
 	return GetBotVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1213,6 +1215,7 @@ func (p *GetBotVersionsRequest) Paginate(opts ...aws.Option) GetBotVersionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1316,7 +1319,7 @@ func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) GetBotsReq
 func (p *GetBotsRequest) Paginate(opts ...aws.Option) GetBotsPager {
 	return GetBotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1325,6 +1328,7 @@ func (p *GetBotsRequest) Paginate(opts ...aws.Option) GetBotsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1474,7 +1478,7 @@ func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinInte
 func (p *GetBuiltinIntentsRequest) Paginate(opts ...aws.Option) GetBuiltinIntentsPager {
 	return GetBuiltinIntentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBuiltinIntentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1483,6 +1487,7 @@ func (p *GetBuiltinIntentsRequest) Paginate(opts ...aws.Option) GetBuiltinIntent
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1582,7 +1587,7 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSl
 func (p *GetBuiltinSlotTypesRequest) Paginate(opts ...aws.Option) GetBuiltinSlotTypesPager {
 	return GetBuiltinSlotTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBuiltinSlotTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1591,6 +1596,7 @@ func (p *GetBuiltinSlotTypesRequest) Paginate(opts ...aws.Option) GetBuiltinSlot
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1851,7 +1857,7 @@ func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersi
 func (p *GetIntentVersionsRequest) Paginate(opts ...aws.Option) GetIntentVersionsPager {
 	return GetIntentVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetIntentVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1860,6 +1866,7 @@ func (p *GetIntentVersionsRequest) Paginate(opts ...aws.Option) GetIntentVersion
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1962,7 +1969,7 @@ func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) GetI
 func (p *GetIntentsRequest) Paginate(opts ...aws.Option) GetIntentsPager {
 	return GetIntentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetIntentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1971,6 +1978,7 @@ func (p *GetIntentsRequest) Paginate(opts ...aws.Option) GetIntentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2129,7 +2137,7 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeV
 func (p *GetSlotTypeVersionsRequest) Paginate(opts ...aws.Option) GetSlotTypeVersionsPager {
 	return GetSlotTypeVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetSlotTypeVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2138,6 +2146,7 @@ func (p *GetSlotTypeVersionsRequest) Paginate(opts ...aws.Option) GetSlotTypeVer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2240,7 +2249,7 @@ func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) 
 func (p *GetSlotTypesRequest) Paginate(opts ...aws.Option) GetSlotTypesPager {
 	return GetSlotTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetSlotTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2249,6 +2258,7 @@ func (p *GetSlotTypesRequest) Paginate(opts ...aws.Option) GetSlotTypesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -593,7 +593,7 @@ func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) GetExe
 func (p *GetExecutionHistoryRequest) Paginate(opts ...aws.Option) GetExecutionHistoryPager {
 	return GetExecutionHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetExecutionHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -602,6 +602,7 @@ func (p *GetExecutionHistoryRequest) Paginate(opts ...aws.Option) GetExecutionHi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -705,7 +706,7 @@ func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) ListActivitiesRe
 func (p *ListActivitiesRequest) Paginate(opts ...aws.Option) ListActivitiesPager {
 	return ListActivitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListActivitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -714,6 +715,7 @@ func (p *ListActivitiesRequest) Paginate(opts ...aws.Option) ListActivitiesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -818,7 +820,7 @@ func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) ListExecutionsRe
 func (p *ListExecutionsRequest) Paginate(opts ...aws.Option) ListExecutionsPager {
 	return ListExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -827,6 +829,7 @@ func (p *ListExecutionsRequest) Paginate(opts ...aws.Option) ListExecutionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -930,7 +933,7 @@ func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) ListStateM
 func (p *ListStateMachinesRequest) Paginate(opts ...aws.Option) ListStateMachinesPager {
 	return ListStateMachinesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStateMachinesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -939,6 +942,7 @@ func (p *ListStateMachinesRequest) Paginate(opts ...aws.Option) ListStateMachine
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -1027,7 +1027,7 @@ func (c *IoTAnalytics) ListChannelsRequest(input *ListChannelsInput) ListChannel
 func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 	return ListChannelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChannelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1036,6 +1036,7 @@ func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1130,7 +1131,7 @@ func (c *IoTAnalytics) ListDatasetContentsRequest(input *ListDatasetContentsInpu
 func (p *ListDatasetContentsRequest) Paginate(opts ...aws.Option) ListDatasetContentsPager {
 	return ListDatasetContentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDatasetContentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1139,6 +1140,7 @@ func (p *ListDatasetContentsRequest) Paginate(opts ...aws.Option) ListDatasetCon
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1233,7 +1235,7 @@ func (c *IoTAnalytics) ListDatasetsRequest(input *ListDatasetsInput) ListDataset
 func (p *ListDatasetsRequest) Paginate(opts ...aws.Option) ListDatasetsPager {
 	return ListDatasetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDatasetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1242,6 +1244,7 @@ func (p *ListDatasetsRequest) Paginate(opts ...aws.Option) ListDatasetsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1336,7 +1339,7 @@ func (c *IoTAnalytics) ListDatastoresRequest(input *ListDatastoresInput) ListDat
 func (p *ListDatastoresRequest) Paginate(opts ...aws.Option) ListDatastoresPager {
 	return ListDatastoresPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDatastoresInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1345,6 +1348,7 @@ func (p *ListDatastoresRequest) Paginate(opts ...aws.Option) ListDatastoresPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1439,7 +1443,7 @@ func (c *IoTAnalytics) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 	return ListPipelinesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPipelinesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1448,6 +1452,7 @@ func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

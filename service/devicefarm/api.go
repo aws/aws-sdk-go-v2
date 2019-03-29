@@ -1274,7 +1274,7 @@ func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) Get
 func (p *GetOfferingStatusRequest) Paginate(opts ...aws.Option) GetOfferingStatusPager {
 	return GetOfferingStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetOfferingStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1283,6 +1283,7 @@ func (p *GetOfferingStatusRequest) Paginate(opts ...aws.Option) GetOfferingStatu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1788,7 +1789,7 @@ func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) ListArtifac
 func (p *ListArtifactsRequest) Paginate(opts ...aws.Option) ListArtifactsPager {
 	return ListArtifactsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListArtifactsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1797,6 +1798,7 @@ func (p *ListArtifactsRequest) Paginate(opts ...aws.Option) ListArtifactsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1943,7 +1945,7 @@ func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDev
 func (p *ListDevicePoolsRequest) Paginate(opts ...aws.Option) ListDevicePoolsPager {
 	return ListDevicePoolsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDevicePoolsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1952,6 +1954,7 @@ func (p *ListDevicePoolsRequest) Paginate(opts ...aws.Option) ListDevicePoolsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2046,7 +2049,7 @@ func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequ
 func (p *ListDevicesRequest) Paginate(opts ...aws.Option) ListDevicesPager {
 	return ListDevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2055,6 +2058,7 @@ func (p *ListDevicesRequest) Paginate(opts ...aws.Option) ListDevicesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2200,7 +2204,7 @@ func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2209,6 +2213,7 @@ func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2414,7 +2419,7 @@ func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransact
 func (p *ListOfferingTransactionsRequest) Paginate(opts ...aws.Option) ListOfferingTransactionsPager {
 	return ListOfferingTransactionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOfferingTransactionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2423,6 +2428,7 @@ func (p *ListOfferingTransactionsRequest) Paginate(opts ...aws.Option) ListOffer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2522,7 +2528,7 @@ func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) ListOfferin
 func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 	return ListOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2531,6 +2537,7 @@ func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2625,7 +2632,7 @@ func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) ListProjectsR
 func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 	return ListProjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListProjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2634,6 +2641,7 @@ func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2779,7 +2787,7 @@ func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 func (p *ListRunsRequest) Paginate(opts ...aws.Option) ListRunsPager {
 	return ListRunsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRunsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2788,6 +2796,7 @@ func (p *ListRunsRequest) Paginate(opts ...aws.Option) ListRunsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2882,7 +2891,7 @@ func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) ListSamplesRequ
 func (p *ListSamplesRequest) Paginate(opts ...aws.Option) ListSamplesPager {
 	return ListSamplesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSamplesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2891,6 +2900,7 @@ func (p *ListSamplesRequest) Paginate(opts ...aws.Option) ListSamplesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2985,7 +2995,7 @@ func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest
 func (p *ListSuitesRequest) Paginate(opts ...aws.Option) ListSuitesPager {
 	return ListSuitesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSuitesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2994,6 +3004,7 @@ func (p *ListSuitesRequest) Paginate(opts ...aws.Option) ListSuitesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3088,7 +3099,7 @@ func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) ListTestsRequest {
 func (p *ListTestsRequest) Paginate(opts ...aws.Option) ListTestsPager {
 	return ListTestsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTestsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3097,6 +3108,7 @@ func (p *ListTestsRequest) Paginate(opts ...aws.Option) ListTestsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3191,7 +3203,7 @@ func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) L
 func (p *ListUniqueProblemsRequest) Paginate(opts ...aws.Option) ListUniqueProblemsPager {
 	return ListUniqueProblemsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUniqueProblemsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3200,6 +3212,7 @@ func (p *ListUniqueProblemsRequest) Paginate(opts ...aws.Option) ListUniqueProbl
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3294,7 +3307,7 @@ func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) ListUploadsRequ
 func (p *ListUploadsRequest) Paginate(opts ...aws.Option) ListUploadsPager {
 	return ListUploadsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUploadsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3303,6 +3316,7 @@ func (p *ListUploadsRequest) Paginate(opts ...aws.Option) ListUploadsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

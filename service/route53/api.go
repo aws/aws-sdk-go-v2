@@ -2429,7 +2429,7 @@ func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) ListHeal
 func (p *ListHealthChecksRequest) Paginate(opts ...aws.Option) ListHealthChecksPager {
 	return ListHealthChecksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHealthChecksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2438,6 +2438,7 @@ func (p *ListHealthChecksRequest) Paginate(opts ...aws.Option) ListHealthChecksP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2538,7 +2539,7 @@ func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) ListHosted
 func (p *ListHostedZonesRequest) Paginate(opts ...aws.Option) ListHostedZonesPager {
 	return ListHostedZonesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHostedZonesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2547,6 +2548,7 @@ func (p *ListHostedZonesRequest) Paginate(opts ...aws.Option) ListHostedZonesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2856,7 +2858,7 @@ func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInp
 func (p *ListResourceRecordSetsRequest) Paginate(opts ...aws.Option) ListResourceRecordSetsPager {
 	return ListResourceRecordSetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResourceRecordSetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2865,6 +2867,7 @@ func (p *ListResourceRecordSetsRequest) Paginate(opts ...aws.Option) ListResourc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

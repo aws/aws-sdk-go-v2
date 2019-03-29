@@ -2149,7 +2149,7 @@ func (c *APIGateway) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest
 func (p *GetApiKeysRequest) Paginate(opts ...aws.Option) GetApiKeysPager {
 	return GetApiKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetApiKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2158,6 +2158,7 @@ func (p *GetApiKeysRequest) Paginate(opts ...aws.Option) GetApiKeysPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2401,7 +2402,7 @@ func (c *APIGateway) GetBasePathMappingsRequest(input *GetBasePathMappingsInput)
 func (p *GetBasePathMappingsRequest) Paginate(opts ...aws.Option) GetBasePathMappingsPager {
 	return GetBasePathMappingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBasePathMappingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2410,6 +2411,7 @@ func (p *GetBasePathMappingsRequest) Paginate(opts ...aws.Option) GetBasePathMap
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2551,7 +2553,7 @@ func (c *APIGateway) GetClientCertificatesRequest(input *GetClientCertificatesIn
 func (p *GetClientCertificatesRequest) Paginate(opts ...aws.Option) GetClientCertificatesPager {
 	return GetClientCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetClientCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2560,6 +2562,7 @@ func (p *GetClientCertificatesRequest) Paginate(opts ...aws.Option) GetClientCer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2701,7 +2704,7 @@ func (c *APIGateway) GetDeploymentsRequest(input *GetDeploymentsInput) GetDeploy
 func (p *GetDeploymentsRequest) Paginate(opts ...aws.Option) GetDeploymentsPager {
 	return GetDeploymentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDeploymentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2710,6 +2713,7 @@ func (p *GetDeploymentsRequest) Paginate(opts ...aws.Option) GetDeploymentsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3040,7 +3044,7 @@ func (c *APIGateway) GetDomainNamesRequest(input *GetDomainNamesInput) GetDomain
 func (p *GetDomainNamesRequest) Paginate(opts ...aws.Option) GetDomainNamesPager {
 	return GetDomainNamesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDomainNamesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3049,6 +3053,7 @@ func (p *GetDomainNamesRequest) Paginate(opts ...aws.Option) GetDomainNamesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3586,7 +3591,7 @@ func (c *APIGateway) GetModelsRequest(input *GetModelsInput) GetModelsRequest {
 func (p *GetModelsRequest) Paginate(opts ...aws.Option) GetModelsPager {
 	return GetModelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetModelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3595,6 +3600,7 @@ func (p *GetModelsRequest) Paginate(opts ...aws.Option) GetModelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3834,7 +3840,7 @@ func (c *APIGateway) GetResourcesRequest(input *GetResourcesInput) GetResourcesR
 func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
 	return GetResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3843,6 +3849,7 @@ func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3984,7 +3991,7 @@ func (c *APIGateway) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequ
 func (p *GetRestApisRequest) Paginate(opts ...aws.Option) GetRestApisPager {
 	return GetRestApisPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetRestApisInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3993,6 +4000,7 @@ func (p *GetRestApisRequest) Paginate(opts ...aws.Option) GetRestApisPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4375,7 +4383,7 @@ func (c *APIGateway) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
 func (p *GetUsageRequest) Paginate(opts ...aws.Option) GetUsagePager {
 	return GetUsagePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUsageInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4384,6 +4392,7 @@ func (p *GetUsageRequest) Paginate(opts ...aws.Option) GetUsagePager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4575,7 +4584,7 @@ func (c *APIGateway) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUs
 func (p *GetUsagePlanKeysRequest) Paginate(opts ...aws.Option) GetUsagePlanKeysPager {
 	return GetUsagePlanKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUsagePlanKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4584,6 +4593,7 @@ func (p *GetUsagePlanKeysRequest) Paginate(opts ...aws.Option) GetUsagePlanKeysP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4676,7 +4686,7 @@ func (c *APIGateway) GetUsagePlansRequest(input *GetUsagePlansInput) GetUsagePla
 func (p *GetUsagePlansRequest) Paginate(opts ...aws.Option) GetUsagePlansPager {
 	return GetUsagePlansPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUsagePlansInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4685,6 +4695,7 @@ func (p *GetUsagePlansRequest) Paginate(opts ...aws.Option) GetUsagePlansPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4826,7 +4837,7 @@ func (c *APIGateway) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequ
 func (p *GetVpcLinksRequest) Paginate(opts ...aws.Option) GetVpcLinksPager {
 	return GetVpcLinksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetVpcLinksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4835,6 +4846,7 @@ func (p *GetVpcLinksRequest) Paginate(opts ...aws.Option) GetVpcLinksPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

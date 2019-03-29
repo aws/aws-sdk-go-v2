@@ -366,7 +366,7 @@ func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesR
 func (p *DescribeCasesRequest) Paginate(opts ...aws.Option) DescribeCasesPager {
 	return DescribeCasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -375,6 +375,7 @@ func (p *DescribeCasesRequest) Paginate(opts ...aws.Option) DescribeCasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -478,7 +479,7 @@ func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInp
 func (p *DescribeCommunicationsRequest) Paginate(opts ...aws.Option) DescribeCommunicationsPager {
 	return DescribeCommunicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCommunicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -487,6 +488,7 @@ func (p *DescribeCommunicationsRequest) Paginate(opts ...aws.Option) DescribeCom
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

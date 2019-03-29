@@ -258,7 +258,7 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeS
 func (p *DescribeScalableTargetsRequest) Paginate(opts ...aws.Option) DescribeScalableTargetsPager {
 	return DescribeScalableTargetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalableTargetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -267,6 +267,7 @@ func (p *DescribeScalableTargetsRequest) Paginate(opts ...aws.Option) DescribeSc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -369,7 +370,7 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *Describ
 func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
 	return DescribeScalingActivitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalingActivitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -378,6 +379,7 @@ func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -478,7 +480,7 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeS
 func (p *DescribeScalingPoliciesRequest) Paginate(opts ...aws.Option) DescribeScalingPoliciesPager {
 	return DescribeScalingPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalingPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -487,6 +489,7 @@ func (p *DescribeScalingPoliciesRequest) Paginate(opts ...aws.Option) DescribeSc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

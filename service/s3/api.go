@@ -2913,7 +2913,7 @@ func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListM
 func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
 	return ListMultipartUploadsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMultipartUploadsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2922,6 +2922,7 @@ func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipart
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3016,7 +3017,7 @@ func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListObjec
 func (p *ListObjectVersionsRequest) Paginate(opts ...aws.Option) ListObjectVersionsPager {
 	return ListObjectVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3025,6 +3026,7 @@ func (p *ListObjectVersionsRequest) Paginate(opts ...aws.Option) ListObjectVersi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3121,7 +3123,7 @@ func (c *S3) ListObjectsRequest(input *ListObjectsInput) ListObjectsRequest {
 func (p *ListObjectsRequest) Paginate(opts ...aws.Option) ListObjectsPager {
 	return ListObjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3130,6 +3132,7 @@ func (p *ListObjectsRequest) Paginate(opts ...aws.Option) ListObjectsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3227,7 +3230,7 @@ func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Reques
 func (p *ListObjectsV2Request) Paginate(opts ...aws.Option) ListObjectsV2Pager {
 	return ListObjectsV2Pager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectsV2Input
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3236,6 +3239,7 @@ func (p *ListObjectsV2Request) Paginate(opts ...aws.Option) ListObjectsV2Pager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3330,7 +3334,7 @@ func (c *S3) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 	return ListPartsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPartsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3339,6 +3343,7 @@ func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

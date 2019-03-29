@@ -1893,7 +1893,7 @@ func (c *KMS) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 	return ListAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1902,6 +1902,7 @@ func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1999,7 +2000,7 @@ func (c *KMS) ListGrantsRequest(input *ListGrantsInput) ListGrantsRequest {
 func (p *ListGrantsRequest) Paginate(opts ...aws.Option) ListGrantsPager {
 	return ListGrantsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGrantsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2008,6 +2009,7 @@ func (p *ListGrantsRequest) Paginate(opts ...aws.Option) ListGrantsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2105,7 +2107,7 @@ func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPolicie
 func (p *ListKeyPoliciesRequest) Paginate(opts ...aws.Option) ListKeyPoliciesPager {
 	return ListKeyPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListKeyPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2114,6 +2116,7 @@ func (p *ListKeyPoliciesRequest) Paginate(opts ...aws.Option) ListKeyPoliciesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2209,7 +2212,7 @@ func (c *KMS) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 func (p *ListKeysRequest) Paginate(opts ...aws.Option) ListKeysPager {
 	return ListKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2218,6 +2221,7 @@ func (p *ListKeysRequest) Paginate(opts ...aws.Option) ListKeysPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

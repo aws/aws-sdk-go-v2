@@ -9,6 +9,8 @@
 package appstreamiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
 )
@@ -151,11 +153,9 @@ type AppStreamAPI interface {
 
 	UpdateStackRequest(*appstream.UpdateStackInput) appstream.UpdateStackRequest
 
-	WaitUntilFleetStarted(*appstream.DescribeFleetsInput) error
-	WaitUntilFleetStartedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
+	WaitUntilFleetStarted(context.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
 
-	WaitUntilFleetStopped(*appstream.DescribeFleetsInput) error
-	WaitUntilFleetStoppedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
+	WaitUntilFleetStopped(context.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
 }
 
 var _ AppStreamAPI = (*appstream.AppStream)(nil)

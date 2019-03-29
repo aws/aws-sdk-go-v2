@@ -517,7 +517,7 @@ func (c *CodeCommit) DescribePullRequestEventsRequest(input *DescribePullRequest
 func (p *DescribePullRequestEventsRequest) Paginate(opts ...aws.Option) DescribePullRequestEventsPager {
 	return DescribePullRequestEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribePullRequestEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -526,6 +526,7 @@ func (p *DescribePullRequestEventsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -774,7 +775,7 @@ func (c *CodeCommit) GetCommentsForComparedCommitRequest(input *GetCommentsForCo
 func (p *GetCommentsForComparedCommitRequest) Paginate(opts ...aws.Option) GetCommentsForComparedCommitPager {
 	return GetCommentsForComparedCommitPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCommentsForComparedCommitInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -783,6 +784,7 @@ func (p *GetCommentsForComparedCommitRequest) Paginate(opts ...aws.Option) GetCo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -877,7 +879,7 @@ func (c *CodeCommit) GetCommentsForPullRequestRequest(input *GetCommentsForPullR
 func (p *GetCommentsForPullRequestRequest) Paginate(opts ...aws.Option) GetCommentsForPullRequestPager {
 	return GetCommentsForPullRequestPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCommentsForPullRequestInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -886,6 +888,7 @@ func (p *GetCommentsForPullRequestRequest) Paginate(opts ...aws.Option) GetComme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1034,7 +1037,7 @@ func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) GetDiffer
 func (p *GetDifferencesRequest) Paginate(opts ...aws.Option) GetDifferencesPager {
 	return GetDifferencesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDifferencesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1043,6 +1046,7 @@ func (p *GetDifferencesRequest) Paginate(opts ...aws.Option) GetDifferencesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1450,7 +1454,7 @@ func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) ListBranchesR
 func (p *ListBranchesRequest) Paginate(opts ...aws.Option) ListBranchesPager {
 	return ListBranchesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBranchesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1459,6 +1463,7 @@ func (p *ListBranchesRequest) Paginate(opts ...aws.Option) ListBranchesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1554,7 +1559,7 @@ func (c *CodeCommit) ListPullRequestsRequest(input *ListPullRequestsInput) ListP
 func (p *ListPullRequestsRequest) Paginate(opts ...aws.Option) ListPullRequestsPager {
 	return ListPullRequestsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPullRequestsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1563,6 +1568,7 @@ func (p *ListPullRequestsRequest) Paginate(opts ...aws.Option) ListPullRequestsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1657,7 +1663,7 @@ func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) ListR
 func (p *ListRepositoriesRequest) Paginate(opts ...aws.Option) ListRepositoriesPager {
 	return ListRepositoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRepositoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1666,6 +1672,7 @@ func (p *ListRepositoriesRequest) Paginate(opts ...aws.Option) ListRepositoriesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

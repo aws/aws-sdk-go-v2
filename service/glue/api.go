@@ -1858,7 +1858,7 @@ func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersR
 func (p *GetClassifiersRequest) Paginate(opts ...aws.Option) GetClassifiersPager {
 	return GetClassifiersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetClassifiersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1867,6 +1867,7 @@ func (p *GetClassifiersRequest) Paginate(opts ...aws.Option) GetClassifiersPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2012,7 +2013,7 @@ func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsR
 func (p *GetConnectionsRequest) Paginate(opts ...aws.Option) GetConnectionsPager {
 	return GetConnectionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetConnectionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2021,6 +2022,7 @@ func (p *GetConnectionsRequest) Paginate(opts ...aws.Option) GetConnectionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2166,7 +2168,7 @@ func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawle
 func (p *GetCrawlerMetricsRequest) Paginate(opts ...aws.Option) GetCrawlerMetricsPager {
 	return GetCrawlerMetricsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCrawlerMetricsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2175,6 +2177,7 @@ func (p *GetCrawlerMetricsRequest) Paginate(opts ...aws.Option) GetCrawlerMetric
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2269,7 +2272,7 @@ func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
 func (p *GetCrawlersRequest) Paginate(opts ...aws.Option) GetCrawlersPager {
 	return GetCrawlersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCrawlersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2278,6 +2281,7 @@ func (p *GetCrawlersRequest) Paginate(opts ...aws.Option) GetCrawlersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2474,7 +2478,7 @@ func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest
 func (p *GetDatabasesRequest) Paginate(opts ...aws.Option) GetDatabasesPager {
 	return GetDatabasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDatabasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2483,6 +2487,7 @@ func (p *GetDatabasesRequest) Paginate(opts ...aws.Option) GetDatabasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2689,7 +2694,7 @@ func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpoin
 func (p *GetDevEndpointsRequest) Paginate(opts ...aws.Option) GetDevEndpointsPager {
 	return GetDevEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDevEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2698,6 +2703,7 @@ func (p *GetDevEndpointsRequest) Paginate(opts ...aws.Option) GetDevEndpointsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2894,7 +2900,7 @@ func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 func (p *GetJobRunsRequest) Paginate(opts ...aws.Option) GetJobRunsPager {
 	return GetJobRunsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetJobRunsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2903,6 +2909,7 @@ func (p *GetJobRunsRequest) Paginate(opts ...aws.Option) GetJobRunsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2997,7 +3004,7 @@ func (c *Glue) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 func (p *GetJobsRequest) Paginate(opts ...aws.Option) GetJobsPager {
 	return GetJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3006,6 +3013,7 @@ func (p *GetJobsRequest) Paginate(opts ...aws.Option) GetJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3202,7 +3210,7 @@ func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRequ
 func (p *GetPartitionsRequest) Paginate(opts ...aws.Option) GetPartitionsPager {
 	return GetPartitionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetPartitionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3211,6 +3219,7 @@ func (p *GetPartitionsRequest) Paginate(opts ...aws.Option) GetPartitionsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3612,7 +3621,7 @@ func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVer
 func (p *GetTableVersionsRequest) Paginate(opts ...aws.Option) GetTableVersionsPager {
 	return GetTableVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTableVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3621,6 +3630,7 @@ func (p *GetTableVersionsRequest) Paginate(opts ...aws.Option) GetTableVersionsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3715,7 +3725,7 @@ func (c *Glue) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 func (p *GetTablesRequest) Paginate(opts ...aws.Option) GetTablesPager {
 	return GetTablesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTablesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3724,6 +3734,7 @@ func (p *GetTablesRequest) Paginate(opts ...aws.Option) GetTablesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3869,7 +3880,7 @@ func (c *Glue) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
 func (p *GetTriggersRequest) Paginate(opts ...aws.Option) GetTriggersPager {
 	return GetTriggersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTriggersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3878,6 +3889,7 @@ func (p *GetTriggersRequest) Paginate(opts ...aws.Option) GetTriggersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4023,7 +4035,7 @@ func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInpu
 func (p *GetUserDefinedFunctionsRequest) Paginate(opts ...aws.Option) GetUserDefinedFunctionsPager {
 	return GetUserDefinedFunctionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUserDefinedFunctionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4032,6 +4044,7 @@ func (p *GetUserDefinedFunctionsRequest) Paginate(opts ...aws.Option) GetUserDef
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

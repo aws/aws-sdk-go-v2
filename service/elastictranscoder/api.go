@@ -414,7 +414,7 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 func (p *ListJobsByPipelineRequest) Paginate(opts ...aws.Option) ListJobsByPipelinePager {
 	return ListJobsByPipelinePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsByPipelineInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -423,6 +423,7 @@ func (p *ListJobsByPipelineRequest) Paginate(opts ...aws.Option) ListJobsByPipel
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -517,7 +518,7 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 func (p *ListJobsByStatusRequest) Paginate(opts ...aws.Option) ListJobsByStatusPager {
 	return ListJobsByStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsByStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -526,6 +527,7 @@ func (p *ListJobsByStatusRequest) Paginate(opts ...aws.Option) ListJobsByStatusP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -619,7 +621,7 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) List
 func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 	return ListPipelinesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPipelinesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -628,6 +630,7 @@ func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -721,7 +724,7 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) ListPres
 func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 	return ListPresetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPresetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -730,6 +733,7 @@ func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -599,7 +599,7 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHe
 func (p *GetInstancesHealthStatusRequest) Paginate(opts ...aws.Option) GetInstancesHealthStatusPager {
 	return GetInstancesHealthStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetInstancesHealthStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -608,6 +608,7 @@ func (p *GetInstancesHealthStatusRequest) Paginate(opts ...aws.Option) GetInstan
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -859,7 +860,7 @@ func (c *ServiceDiscovery) ListInstancesRequest(input *ListInstancesInput) ListI
 func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 	return ListInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -868,6 +869,7 @@ func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -963,7 +965,7 @@ func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) Lis
 func (p *ListNamespacesRequest) Paginate(opts ...aws.Option) ListNamespacesPager {
 	return ListNamespacesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListNamespacesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -972,6 +974,7 @@ func (p *ListNamespacesRequest) Paginate(opts ...aws.Option) ListNamespacesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1066,7 +1069,7 @@ func (c *ServiceDiscovery) ListOperationsRequest(input *ListOperationsInput) Lis
 func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
 	return ListOperationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOperationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1075,6 +1078,7 @@ func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1170,7 +1174,7 @@ func (c *ServiceDiscovery) ListServicesRequest(input *ListServicesInput) ListSer
 func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 	return ListServicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1179,6 +1183,7 @@ func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

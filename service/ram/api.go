@@ -396,7 +396,7 @@ func (c *RAM) GetResourcePoliciesRequest(input *GetResourcePoliciesInput) GetRes
 func (p *GetResourcePoliciesRequest) Paginate(opts ...aws.Option) GetResourcePoliciesPager {
 	return GetResourcePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourcePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -405,6 +405,7 @@ func (p *GetResourcePoliciesRequest) Paginate(opts ...aws.Option) GetResourcePol
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -499,7 +500,7 @@ func (c *RAM) GetResourceShareAssociationsRequest(input *GetResourceShareAssocia
 func (p *GetResourceShareAssociationsRequest) Paginate(opts ...aws.Option) GetResourceShareAssociationsPager {
 	return GetResourceShareAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceShareAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -508,6 +509,7 @@ func (p *GetResourceShareAssociationsRequest) Paginate(opts ...aws.Option) GetRe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -602,7 +604,7 @@ func (c *RAM) GetResourceShareInvitationsRequest(input *GetResourceShareInvitati
 func (p *GetResourceShareInvitationsRequest) Paginate(opts ...aws.Option) GetResourceShareInvitationsPager {
 	return GetResourceShareInvitationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceShareInvitationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -611,6 +613,7 @@ func (p *GetResourceShareInvitationsRequest) Paginate(opts ...aws.Option) GetRes
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -705,7 +708,7 @@ func (c *RAM) GetResourceSharesRequest(input *GetResourceSharesInput) GetResourc
 func (p *GetResourceSharesRequest) Paginate(opts ...aws.Option) GetResourceSharesPager {
 	return GetResourceSharesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceSharesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -714,6 +717,7 @@ func (p *GetResourceSharesRequest) Paginate(opts ...aws.Option) GetResourceShare
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -808,7 +812,7 @@ func (c *RAM) ListPrincipalsRequest(input *ListPrincipalsInput) ListPrincipalsRe
 func (p *ListPrincipalsRequest) Paginate(opts ...aws.Option) ListPrincipalsPager {
 	return ListPrincipalsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPrincipalsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -817,6 +821,7 @@ func (p *ListPrincipalsRequest) Paginate(opts ...aws.Option) ListPrincipalsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -911,7 +916,7 @@ func (c *RAM) ListResourcesRequest(input *ListResourcesInput) ListResourcesReque
 func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 	return ListResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -920,6 +925,7 @@ func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

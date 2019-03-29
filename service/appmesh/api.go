@@ -743,7 +743,7 @@ func (c *AppMesh) ListMeshesRequest(input *ListMeshesInput) ListMeshesRequest {
 func (p *ListMeshesRequest) Paginate(opts ...aws.Option) ListMeshesPager {
 	return ListMeshesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMeshesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -752,6 +752,7 @@ func (p *ListMeshesRequest) Paginate(opts ...aws.Option) ListMeshesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -846,7 +847,7 @@ func (c *AppMesh) ListRoutesRequest(input *ListRoutesInput) ListRoutesRequest {
 func (p *ListRoutesRequest) Paginate(opts ...aws.Option) ListRoutesPager {
 	return ListRoutesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRoutesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -855,6 +856,7 @@ func (p *ListRoutesRequest) Paginate(opts ...aws.Option) ListRoutesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -949,7 +951,7 @@ func (c *AppMesh) ListVirtualNodesRequest(input *ListVirtualNodesInput) ListVirt
 func (p *ListVirtualNodesRequest) Paginate(opts ...aws.Option) ListVirtualNodesPager {
 	return ListVirtualNodesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVirtualNodesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -958,6 +960,7 @@ func (p *ListVirtualNodesRequest) Paginate(opts ...aws.Option) ListVirtualNodesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1052,7 +1055,7 @@ func (c *AppMesh) ListVirtualRoutersRequest(input *ListVirtualRoutersInput) List
 func (p *ListVirtualRoutersRequest) Paginate(opts ...aws.Option) ListVirtualRoutersPager {
 	return ListVirtualRoutersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVirtualRoutersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1061,6 +1064,7 @@ func (p *ListVirtualRoutersRequest) Paginate(opts ...aws.Option) ListVirtualRout
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

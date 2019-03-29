@@ -1055,7 +1055,7 @@ func (c *ECS) ListClustersRequest(input *ListClustersInput) ListClustersRequest 
 func (p *ListClustersRequest) Paginate(opts ...aws.Option) ListClustersPager {
 	return ListClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1064,6 +1064,7 @@ func (p *ListClustersRequest) Paginate(opts ...aws.Option) ListClustersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1162,7 +1163,7 @@ func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) 
 func (p *ListContainerInstancesRequest) Paginate(opts ...aws.Option) ListContainerInstancesPager {
 	return ListContainerInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListContainerInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1171,6 +1172,7 @@ func (p *ListContainerInstancesRequest) Paginate(opts ...aws.Option) ListContain
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1265,7 +1267,7 @@ func (c *ECS) ListServicesRequest(input *ListServicesInput) ListServicesRequest 
 func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 	return ListServicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1274,6 +1276,7 @@ func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1425,7 +1428,7 @@ func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamilie
 func (p *ListTaskDefinitionFamiliesRequest) Paginate(opts ...aws.Option) ListTaskDefinitionFamiliesPager {
 	return ListTaskDefinitionFamiliesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTaskDefinitionFamiliesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1434,6 +1437,7 @@ func (p *ListTaskDefinitionFamiliesRequest) Paginate(opts ...aws.Option) ListTas
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1530,7 +1534,7 @@ func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) ListTa
 func (p *ListTaskDefinitionsRequest) Paginate(opts ...aws.Option) ListTaskDefinitionsPager {
 	return ListTaskDefinitionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTaskDefinitionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1539,6 +1543,7 @@ func (p *ListTaskDefinitionsRequest) Paginate(opts ...aws.Option) ListTaskDefini
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1638,7 +1643,7 @@ func (c *ECS) ListTasksRequest(input *ListTasksInput) ListTasksRequest {
 func (p *ListTasksRequest) Paginate(opts ...aws.Option) ListTasksPager {
 	return ListTasksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTasksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1647,6 +1652,7 @@ func (p *ListTasksRequest) Paginate(opts ...aws.Option) ListTasksPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

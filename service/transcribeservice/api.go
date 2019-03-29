@@ -353,7 +353,7 @@ func (c *TranscribeService) ListTranscriptionJobsRequest(input *ListTranscriptio
 func (p *ListTranscriptionJobsRequest) Paginate(opts ...aws.Option) ListTranscriptionJobsPager {
 	return ListTranscriptionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTranscriptionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -362,6 +362,7 @@ func (p *ListTranscriptionJobsRequest) Paginate(opts ...aws.Option) ListTranscri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -457,7 +458,7 @@ func (c *TranscribeService) ListVocabulariesRequest(input *ListVocabulariesInput
 func (p *ListVocabulariesRequest) Paginate(opts ...aws.Option) ListVocabulariesPager {
 	return ListVocabulariesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVocabulariesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -466,6 +467,7 @@ func (p *ListVocabulariesRequest) Paginate(opts ...aws.Option) ListVocabulariesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

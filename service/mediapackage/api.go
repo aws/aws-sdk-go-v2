@@ -394,7 +394,7 @@ func (c *MediaPackage) ListChannelsRequest(input *ListChannelsInput) ListChannel
 func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 	return ListChannelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChannelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -403,6 +403,7 @@ func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -497,7 +498,7 @@ func (c *MediaPackage) ListOriginEndpointsRequest(input *ListOriginEndpointsInpu
 func (p *ListOriginEndpointsRequest) Paginate(opts ...aws.Option) ListOriginEndpointsPager {
 	return ListOriginEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOriginEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -506,6 +507,7 @@ func (p *ListOriginEndpointsRequest) Paginate(opts ...aws.Option) ListOriginEndp
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

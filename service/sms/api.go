@@ -764,7 +764,7 @@ func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsReque
 func (p *GetConnectorsRequest) Paginate(opts ...aws.Option) GetConnectorsPager {
 	return GetConnectorsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetConnectorsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -773,6 +773,7 @@ func (p *GetConnectorsRequest) Paginate(opts ...aws.Option) GetConnectorsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -867,7 +868,7 @@ func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRepli
 func (p *GetReplicationJobsRequest) Paginate(opts ...aws.Option) GetReplicationJobsPager {
 	return GetReplicationJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetReplicationJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -876,6 +877,7 @@ func (p *GetReplicationJobsRequest) Paginate(opts ...aws.Option) GetReplicationJ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -970,7 +972,7 @@ func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRepli
 func (p *GetReplicationRunsRequest) Paginate(opts ...aws.Option) GetReplicationRunsPager {
 	return GetReplicationRunsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetReplicationRunsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -979,6 +981,7 @@ func (p *GetReplicationRunsRequest) Paginate(opts ...aws.Option) GetReplicationR
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1075,7 +1078,7 @@ func (c *SMS) GetServersRequest(input *GetServersInput) GetServersRequest {
 func (p *GetServersRequest) Paginate(opts ...aws.Option) GetServersPager {
 	return GetServersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetServersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1084,6 +1087,7 @@ func (p *GetServersRequest) Paginate(opts ...aws.Option) GetServersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

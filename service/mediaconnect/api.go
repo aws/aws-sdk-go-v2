@@ -399,7 +399,7 @@ func (c *MediaConnect) ListFlowsRequest(input *ListFlowsInput) ListFlowsRequest 
 func (p *ListFlowsRequest) Paginate(opts ...aws.Option) ListFlowsPager {
 	return ListFlowsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFlowsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -408,6 +408,7 @@ func (p *ListFlowsRequest) Paginate(opts ...aws.Option) ListFlowsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

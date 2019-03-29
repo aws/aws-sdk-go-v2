@@ -743,7 +743,7 @@ func (c *SecretsManager) ListSecretVersionIdsRequest(input *ListSecretVersionIds
 func (p *ListSecretVersionIdsRequest) Paginate(opts ...aws.Option) ListSecretVersionIdsPager {
 	return ListSecretVersionIdsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSecretVersionIdsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -752,6 +752,7 @@ func (p *ListSecretVersionIdsRequest) Paginate(opts ...aws.Option) ListSecretVer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -865,7 +866,7 @@ func (c *SecretsManager) ListSecretsRequest(input *ListSecretsInput) ListSecrets
 func (p *ListSecretsRequest) Paginate(opts ...aws.Option) ListSecretsPager {
 	return ListSecretsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSecretsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -874,6 +875,7 @@ func (p *ListSecretsRequest) Paginate(opts ...aws.Option) ListSecretsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

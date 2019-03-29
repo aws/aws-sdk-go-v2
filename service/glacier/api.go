@@ -1499,7 +1499,7 @@ func (c *Glacier) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1508,6 +1508,7 @@ func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1629,7 +1630,7 @@ func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) 
 func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
 	return ListMultipartUploadsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMultipartUploadsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1638,6 +1639,7 @@ func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipart
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1753,7 +1755,7 @@ func (c *Glacier) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 	return ListPartsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPartsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1762,6 +1764,7 @@ func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1975,7 +1978,7 @@ func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) ListVaultsRequest {
 func (p *ListVaultsRequest) Paginate(opts ...aws.Option) ListVaultsPager {
 	return ListVaultsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVaultsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1984,6 +1987,7 @@ func (p *ListVaultsRequest) Paginate(opts ...aws.Option) ListVaultsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

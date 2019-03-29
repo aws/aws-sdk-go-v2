@@ -856,7 +856,7 @@ func (c *ELBV2) DescribeListenersRequest(input *DescribeListenersInput) Describe
 func (p *DescribeListenersRequest) Paginate(opts ...aws.Option) DescribeListenersPager {
 	return DescribeListenersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeListenersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -865,6 +865,7 @@ func (p *DescribeListenersRequest) Paginate(opts ...aws.Option) DescribeListener
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1018,7 +1019,7 @@ func (c *ELBV2) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) 
 func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoadBalancersPager {
 	return DescribeLoadBalancersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLoadBalancersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1027,6 +1028,7 @@ func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoad
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1341,7 +1343,7 @@ func (c *ELBV2) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) De
 func (p *DescribeTargetGroupsRequest) Paginate(opts ...aws.Option) DescribeTargetGroupsPager {
 	return DescribeTargetGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTargetGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1350,6 +1352,7 @@ func (p *DescribeTargetGroupsRequest) Paginate(opts ...aws.Option) DescribeTarge
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

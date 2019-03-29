@@ -972,7 +972,7 @@ func (c *SecurityHub) GetFindingsRequest(input *GetFindingsInput) GetFindingsReq
 func (p *GetFindingsRequest) Paginate(opts ...aws.Option) GetFindingsPager {
 	return GetFindingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetFindingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -981,6 +981,7 @@ func (p *GetFindingsRequest) Paginate(opts ...aws.Option) GetFindingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1126,7 +1127,7 @@ func (c *SecurityHub) GetInsightsRequest(input *GetInsightsInput) GetInsightsReq
 func (p *GetInsightsRequest) Paginate(opts ...aws.Option) GetInsightsPager {
 	return GetInsightsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetInsightsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1135,6 +1136,7 @@ func (p *GetInsightsRequest) Paginate(opts ...aws.Option) GetInsightsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1439,7 +1441,7 @@ func (c *SecurityHub) ListEnabledProductsForImportRequest(input *ListEnabledProd
 func (p *ListEnabledProductsForImportRequest) Paginate(opts ...aws.Option) ListEnabledProductsForImportPager {
 	return ListEnabledProductsForImportPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEnabledProductsForImportInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1448,6 +1450,7 @@ func (p *ListEnabledProductsForImportRequest) Paginate(opts ...aws.Option) ListE
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

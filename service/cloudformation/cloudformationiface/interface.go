@@ -9,6 +9,8 @@
 package cloudformationiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 )
@@ -153,20 +155,15 @@ type CloudFormationAPI interface {
 
 	ValidateTemplateRequest(*cloudformation.ValidateTemplateInput) cloudformation.ValidateTemplateRequest
 
-	WaitUntilChangeSetCreateComplete(*cloudformation.DescribeChangeSetInput) error
-	WaitUntilChangeSetCreateCompleteWithContext(aws.Context, *cloudformation.DescribeChangeSetInput, ...aws.WaiterOption) error
+	WaitUntilChangeSetCreateComplete(context.Context, *cloudformation.DescribeChangeSetInput, ...aws.WaiterOption) error
 
-	WaitUntilStackCreateComplete(*cloudformation.DescribeStacksInput) error
-	WaitUntilStackCreateCompleteWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+	WaitUntilStackCreateComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
-	WaitUntilStackDeleteComplete(*cloudformation.DescribeStacksInput) error
-	WaitUntilStackDeleteCompleteWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+	WaitUntilStackDeleteComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
-	WaitUntilStackExists(*cloudformation.DescribeStacksInput) error
-	WaitUntilStackExistsWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+	WaitUntilStackExists(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 
-	WaitUntilStackUpdateComplete(*cloudformation.DescribeStacksInput) error
-	WaitUntilStackUpdateCompleteWithContext(aws.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
+	WaitUntilStackUpdateComplete(context.Context, *cloudformation.DescribeStacksInput, ...aws.WaiterOption) error
 }
 
 var _ CloudFormationAPI = (*cloudformation.CloudFormation)(nil)

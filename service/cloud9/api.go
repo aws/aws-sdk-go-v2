@@ -295,7 +295,7 @@ func (c *Cloud9) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmen
 func (p *DescribeEnvironmentMembershipsRequest) Paginate(opts ...aws.Option) DescribeEnvironmentMembershipsPager {
 	return DescribeEnvironmentMembershipsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEnvironmentMembershipsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -304,6 +304,7 @@ func (p *DescribeEnvironmentMembershipsRequest) Paginate(opts ...aws.Option) Des
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -500,7 +501,7 @@ func (c *Cloud9) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvir
 func (p *ListEnvironmentsRequest) Paginate(opts ...aws.Option) ListEnvironmentsPager {
 	return ListEnvironmentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEnvironmentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -509,6 +510,7 @@ func (p *ListEnvironmentsRequest) Paginate(opts ...aws.Option) ListEnvironmentsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -889,7 +889,7 @@ func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPl
 func (p *ListEndpointsByPlatformApplicationRequest) Paginate(opts ...aws.Option) ListEndpointsByPlatformApplicationPager {
 	return ListEndpointsByPlatformApplicationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEndpointsByPlatformApplicationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -898,6 +898,7 @@ func (p *ListEndpointsByPlatformApplicationRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1060,7 +1061,7 @@ func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInp
 func (p *ListPlatformApplicationsRequest) Paginate(opts ...aws.Option) ListPlatformApplicationsPager {
 	return ListPlatformApplicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPlatformApplicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1069,6 +1070,7 @@ func (p *ListPlatformApplicationsRequest) Paginate(opts ...aws.Option) ListPlatf
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1168,7 +1170,7 @@ func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSubscr
 func (p *ListSubscriptionsRequest) Paginate(opts ...aws.Option) ListSubscriptionsPager {
 	return ListSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1177,6 +1179,7 @@ func (p *ListSubscriptionsRequest) Paginate(opts ...aws.Option) ListSubscription
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1276,7 +1279,7 @@ func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInp
 func (p *ListSubscriptionsByTopicRequest) Paginate(opts ...aws.Option) ListSubscriptionsByTopicPager {
 	return ListSubscriptionsByTopicPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSubscriptionsByTopicInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1285,6 +1288,7 @@ func (p *ListSubscriptionsByTopicRequest) Paginate(opts ...aws.Option) ListSubsc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1383,7 +1387,7 @@ func (c *SNS) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 func (p *ListTopicsRequest) Paginate(opts ...aws.Option) ListTopicsPager {
 	return ListTopicsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTopicsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1392,6 +1396,7 @@ func (p *ListTopicsRequest) Paginate(opts ...aws.Option) ListTopicsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

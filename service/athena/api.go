@@ -414,7 +414,7 @@ func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 func (p *GetQueryResultsRequest) Paginate(opts ...aws.Option) GetQueryResultsPager {
 	return GetQueryResultsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetQueryResultsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -423,6 +423,7 @@ func (p *GetQueryResultsRequest) Paginate(opts ...aws.Option) GetQueryResultsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -521,7 +522,7 @@ func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 func (p *ListNamedQueriesRequest) Paginate(opts ...aws.Option) ListNamedQueriesPager {
 	return ListNamedQueriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListNamedQueriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -530,6 +531,7 @@ func (p *ListNamedQueriesRequest) Paginate(opts ...aws.Option) ListNamedQueriesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -628,7 +630,7 @@ func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 func (p *ListQueryExecutionsRequest) Paginate(opts ...aws.Option) ListQueryExecutionsPager {
 	return ListQueryExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListQueryExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -637,6 +639,7 @@ func (p *ListQueryExecutionsRequest) Paginate(opts ...aws.Option) ListQueryExecu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

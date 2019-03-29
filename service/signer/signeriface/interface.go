@@ -9,6 +9,8 @@
 package signeriface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/signer"
 )
@@ -81,8 +83,7 @@ type SignerAPI interface {
 
 	StartSigningJobRequest(*signer.StartSigningJobInput) signer.StartSigningJobRequest
 
-	WaitUntilSuccessfulSigningJob(*signer.DescribeSigningJobInput) error
-	WaitUntilSuccessfulSigningJobWithContext(aws.Context, *signer.DescribeSigningJobInput, ...aws.WaiterOption) error
+	WaitUntilSuccessfulSigningJob(context.Context, *signer.DescribeSigningJobInput, ...aws.WaiterOption) error
 }
 
 var _ SignerAPI = (*signer.Signer)(nil)

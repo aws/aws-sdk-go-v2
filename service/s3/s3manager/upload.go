@@ -2,6 +2,7 @@ package s3manager
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"sort"
@@ -249,7 +250,7 @@ func NewUploaderWithClient(svc s3iface.S3API, options ...func(*Uploader)) *Uploa
 //          u.LeavePartsOnError = true    // Don't delete the parts if the upload fails.
 //     })
 func (u Uploader) Upload(input *UploadInput, options ...func(*Uploader)) (*UploadOutput, error) {
-	return u.UploadWithContext(aws.BackgroundContext(), input, options...)
+	return u.UploadWithContext(context.Background(), input, options...)
 }
 
 // UploadWithContext uploads an object to S3, intelligently buffering large
@@ -270,7 +271,7 @@ func (u Uploader) Upload(input *UploadInput, options ...func(*Uploader)) (*Uploa
 // options that will be applied to all API operations made with this uploader.
 //
 // It is safe to call this method concurrently across goroutines.
-func (u Uploader) UploadWithContext(ctx aws.Context, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
+func (u Uploader) UploadWithContext(ctx context.Context, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
 	i := uploader{in: input, cfg: u, ctx: ctx}
 
 	for _, opt := range opts {
@@ -298,10 +299,10 @@ func (u Uploader) UploadWithContext(ctx aws.Context, input *UploadInput, opts ..
 //	}
 //
 //	iter := &s3managee.UploadObjectsIterator{Objects: objects}
-//	if err := svc.UploadWithIterator(aws.BackgroundContext(), iter); err != nil {
+//	if err := svc.UploadWithIterator(context.Background(), iter); err != nil {
 //		return err
 //	}
-func (u Uploader) UploadWithIterator(ctx aws.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
+func (u Uploader) UploadWithIterator(ctx context.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
 	var errs []Error
 	for iter.Next() {
 		object := iter.UploadObject()
@@ -338,7 +339,7 @@ func (u Uploader) UploadWithIterator(ctx aws.Context, iter BatchUploadIterator, 
 
 // internal structure to manage an upload to S3.
 type uploader struct {
-	ctx aws.Context
+	ctx context.Context
 	cfg Uploader
 
 	in *UploadInput

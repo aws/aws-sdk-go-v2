@@ -129,7 +129,7 @@ func (c *DecryptionClient) GetObject(input *s3.GetObjectInput) (*s3.GetObjectOut
 // Context input parameters. The Context must not be nil. A nil Context will
 // cause a panic. Use the Context to add deadlining, timeouts, ect. In the future
 // this may create sub-contexts for individual underlying requests.
-func (c *DecryptionClient) GetObjectWithContext(ctx aws.Context, input *s3.GetObjectInput, opts ...request.Option) (*s3.GetObjectOutput, error) {
+func (c *DecryptionClient) GetObjectWithContext(ctx context.Context, input *s3.GetObjectInput, opts ...request.Option) (*s3.GetObjectOutput, error) {
 	req := c.GetObjectRequest(input)
 	req.ApplyOptions(opts...)
 	return req.Send(ctx)

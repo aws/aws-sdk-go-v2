@@ -9,6 +9,8 @@
 package rdsiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
 )
@@ -277,17 +279,13 @@ type RDSAPI interface {
 
 	StopDBInstanceRequest(*rds.StopDBInstanceInput) rds.StopDBInstanceRequest
 
-	WaitUntilDBInstanceAvailable(*rds.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceAvailableWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceAvailable(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceDeleted(*rds.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceDeletedWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceDeleted(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBSnapshotAvailable(*rds.DescribeDBSnapshotsInput) error
-	WaitUntilDBSnapshotAvailableWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBSnapshotAvailable(context.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilDBSnapshotDeleted(*rds.DescribeDBSnapshotsInput) error
-	WaitUntilDBSnapshotDeletedWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBSnapshotDeleted(context.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
 }
 
 var _ RDSAPI = (*rds.RDS)(nil)

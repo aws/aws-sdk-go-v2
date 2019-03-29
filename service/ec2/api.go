@@ -9376,7 +9376,7 @@ func (c *EC2) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInput) 
 func (p *DescribeInstanceStatusRequest) Paginate(opts ...aws.Option) DescribeInstanceStatusPager {
 	return DescribeInstanceStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeInstanceStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -9385,6 +9385,7 @@ func (p *DescribeInstanceStatusRequest) Paginate(opts ...aws.Option) DescribeIns
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -9494,7 +9495,7 @@ func (c *EC2) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeIn
 func (p *DescribeInstancesRequest) Paginate(opts ...aws.Option) DescribeInstancesPager {
 	return DescribeInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -9503,6 +9504,7 @@ func (p *DescribeInstancesRequest) Paginate(opts ...aws.Option) DescribeInstance
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -9858,7 +9860,7 @@ func (c *EC2) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) Descri
 func (p *DescribeNatGatewaysRequest) Paginate(opts ...aws.Option) DescribeNatGatewaysPager {
 	return DescribeNatGatewaysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeNatGatewaysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -9867,6 +9869,7 @@ func (p *DescribeNatGatewaysRequest) Paginate(opts ...aws.Option) DescribeNatGat
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -10118,7 +10121,7 @@ func (c *EC2) DescribeNetworkInterfacesRequest(input *DescribeNetworkInterfacesI
 func (p *DescribeNetworkInterfacesRequest) Paginate(opts ...aws.Option) DescribeNetworkInterfacesPager {
 	return DescribeNetworkInterfacesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeNetworkInterfacesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -10127,6 +10130,7 @@ func (p *DescribeNetworkInterfacesRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -10632,7 +10636,7 @@ func (c *EC2) DescribeReservedInstancesModificationsRequest(input *DescribeReser
 func (p *DescribeReservedInstancesModificationsRequest) Paginate(opts ...aws.Option) DescribeReservedInstancesModificationsPager {
 	return DescribeReservedInstancesModificationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedInstancesModificationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -10641,6 +10645,7 @@ func (p *DescribeReservedInstancesModificationsRequest) Paginate(opts ...aws.Opt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -10746,7 +10751,7 @@ func (c *EC2) DescribeReservedInstancesOfferingsRequest(input *DescribeReservedI
 func (p *DescribeReservedInstancesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedInstancesOfferingsPager {
 	return DescribeReservedInstancesOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedInstancesOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -10755,6 +10760,7 @@ func (p *DescribeReservedInstancesOfferingsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -10857,7 +10863,7 @@ func (c *EC2) DescribeRouteTablesRequest(input *DescribeRouteTablesInput) Descri
 func (p *DescribeRouteTablesRequest) Paginate(opts ...aws.Option) DescribeRouteTablesPager {
 	return DescribeRouteTablesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeRouteTablesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -10866,6 +10872,7 @@ func (p *DescribeRouteTablesRequest) Paginate(opts ...aws.Option) DescribeRouteT
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -11129,7 +11136,7 @@ func (c *EC2) DescribeSecurityGroupsRequest(input *DescribeSecurityGroupsInput) 
 func (p *DescribeSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeSecurityGroupsPager {
 	return DescribeSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -11138,6 +11145,7 @@ func (p *DescribeSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeSec
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -11332,7 +11340,7 @@ func (c *EC2) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSn
 func (p *DescribeSnapshotsRequest) Paginate(opts ...aws.Option) DescribeSnapshotsPager {
 	return DescribeSnapshotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSnapshotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -11341,6 +11349,7 @@ func (p *DescribeSnapshotsRequest) Paginate(opts ...aws.Option) DescribeSnapshot
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -11598,7 +11607,7 @@ func (c *EC2) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetRequestsI
 func (p *DescribeSpotFleetRequestsRequest) Paginate(opts ...aws.Option) DescribeSpotFleetRequestsPager {
 	return DescribeSpotFleetRequestsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSpotFleetRequestsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -11607,6 +11616,7 @@ func (p *DescribeSpotFleetRequestsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -11768,7 +11778,7 @@ func (c *EC2) DescribeSpotPriceHistoryRequest(input *DescribeSpotPriceHistoryInp
 func (p *DescribeSpotPriceHistoryRequest) Paginate(opts ...aws.Option) DescribeSpotPriceHistoryPager {
 	return DescribeSpotPriceHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSpotPriceHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -11777,6 +11787,7 @@ func (p *DescribeSpotPriceHistoryRequest) Paginate(opts ...aws.Option) DescribeS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -11982,7 +11993,7 @@ func (c *EC2) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 	return DescribeTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -11991,6 +12002,7 @@ func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -12385,7 +12397,7 @@ func (c *EC2) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) Desc
 func (p *DescribeVolumeStatusRequest) Paginate(opts ...aws.Option) DescribeVolumeStatusPager {
 	return DescribeVolumeStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeVolumeStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -12394,6 +12406,7 @@ func (p *DescribeVolumeStatusRequest) Paginate(opts ...aws.Option) DescribeVolum
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -12498,7 +12511,7 @@ func (c *EC2) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVolume
 func (p *DescribeVolumesRequest) Paginate(opts ...aws.Option) DescribeVolumesPager {
 	return DescribeVolumesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeVolumesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -12507,6 +12520,7 @@ func (p *DescribeVolumesRequest) Paginate(opts ...aws.Option) DescribeVolumesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

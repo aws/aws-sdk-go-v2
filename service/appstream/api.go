@@ -1191,7 +1191,7 @@ func (c *AppStream) DescribeImagePermissionsRequest(input *DescribeImagePermissi
 func (p *DescribeImagePermissionsRequest) Paginate(opts ...aws.Option) DescribeImagePermissionsPager {
 	return DescribeImagePermissionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeImagePermissionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1200,6 +1200,7 @@ func (p *DescribeImagePermissionsRequest) Paginate(opts ...aws.Option) DescribeI
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1296,7 +1297,7 @@ func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) DescribeIm
 func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager {
 	return DescribeImagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeImagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1305,6 +1306,7 @@ func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

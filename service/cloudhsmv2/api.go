@@ -409,7 +409,7 @@ func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) Describ
 func (p *DescribeBackupsRequest) Paginate(opts ...aws.Option) DescribeBackupsPager {
 	return DescribeBackupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeBackupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -418,6 +418,7 @@ func (p *DescribeBackupsRequest) Paginate(opts ...aws.Option) DescribeBackupsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -519,7 +520,7 @@ func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) Descr
 func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersPager {
 	return DescribeClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -528,6 +529,7 @@ func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -682,7 +684,7 @@ func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 	return ListTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -691,6 +693,7 @@ func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

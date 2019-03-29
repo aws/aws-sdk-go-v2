@@ -1460,7 +1460,7 @@ func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) Des
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1469,6 +1469,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

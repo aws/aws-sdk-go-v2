@@ -9,6 +9,8 @@
 package codedeployiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
 )
@@ -149,8 +151,7 @@ type CodeDeployAPI interface {
 
 	UpdateDeploymentGroupRequest(*codedeploy.UpdateDeploymentGroupInput) codedeploy.UpdateDeploymentGroupRequest
 
-	WaitUntilDeploymentSuccessful(*codedeploy.GetDeploymentInput) error
-	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
+	WaitUntilDeploymentSuccessful(context.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
 }
 
 var _ CodeDeployAPI = (*codedeploy.CodeDeploy)(nil)

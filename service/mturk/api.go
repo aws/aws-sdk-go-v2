@@ -1226,7 +1226,7 @@ func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) 
 func (p *ListAssignmentsForHITRequest) Paginate(opts ...aws.Option) ListAssignmentsForHITPager {
 	return ListAssignmentsForHITPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssignmentsForHITInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1235,6 +1235,7 @@ func (p *ListAssignmentsForHITRequest) Paginate(opts ...aws.Option) ListAssignme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1330,7 +1331,7 @@ func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) ListBonu
 func (p *ListBonusPaymentsRequest) Paginate(opts ...aws.Option) ListBonusPaymentsPager {
 	return ListBonusPaymentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBonusPaymentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1339,6 +1340,7 @@ func (p *ListBonusPaymentsRequest) Paginate(opts ...aws.Option) ListBonusPayment
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1435,7 +1437,7 @@ func (c *MTurk) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 func (p *ListHITsRequest) Paginate(opts ...aws.Option) ListHITsPager {
 	return ListHITsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHITsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1444,6 +1446,7 @@ func (p *ListHITsRequest) Paginate(opts ...aws.Option) ListHITsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1541,7 +1544,7 @@ func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificat
 func (p *ListHITsForQualificationTypeRequest) Paginate(opts ...aws.Option) ListHITsForQualificationTypePager {
 	return ListHITsForQualificationTypePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHITsForQualificationTypeInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1550,6 +1553,7 @@ func (p *ListHITsForQualificationTypeRequest) Paginate(opts ...aws.Option) ListH
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1647,7 +1651,7 @@ func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequest
 func (p *ListQualificationRequestsRequest) Paginate(opts ...aws.Option) ListQualificationRequestsPager {
 	return ListQualificationRequestsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListQualificationRequestsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1656,6 +1660,7 @@ func (p *ListQualificationRequestsRequest) Paginate(opts ...aws.Option) ListQual
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1751,7 +1756,7 @@ func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput
 func (p *ListQualificationTypesRequest) Paginate(opts ...aws.Option) ListQualificationTypesPager {
 	return ListQualificationTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListQualificationTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1760,6 +1765,7 @@ func (p *ListQualificationTypesRequest) Paginate(opts ...aws.Option) ListQualifi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1858,7 +1864,7 @@ func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResu
 func (p *ListReviewPolicyResultsForHITRequest) Paginate(opts ...aws.Option) ListReviewPolicyResultsForHITPager {
 	return ListReviewPolicyResultsForHITPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListReviewPolicyResultsForHITInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1867,6 +1873,7 @@ func (p *ListReviewPolicyResultsForHITRequest) Paginate(opts ...aws.Option) List
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1963,7 +1970,7 @@ func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) ListRe
 func (p *ListReviewableHITsRequest) Paginate(opts ...aws.Option) ListReviewableHITsPager {
 	return ListReviewableHITsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListReviewableHITsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1972,6 +1979,7 @@ func (p *ListReviewableHITsRequest) Paginate(opts ...aws.Option) ListReviewableH
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2067,7 +2075,7 @@ func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorker
 func (p *ListWorkerBlocksRequest) Paginate(opts ...aws.Option) ListWorkerBlocksPager {
 	return ListWorkerBlocksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListWorkerBlocksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2076,6 +2084,7 @@ func (p *ListWorkerBlocksRequest) Paginate(opts ...aws.Option) ListWorkerBlocksP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2171,7 +2180,7 @@ func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQu
 func (p *ListWorkersWithQualificationTypeRequest) Paginate(opts ...aws.Option) ListWorkersWithQualificationTypePager {
 	return ListWorkersWithQualificationTypePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListWorkersWithQualificationTypeInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2180,6 +2189,7 @@ func (p *ListWorkersWithQualificationTypeRequest) Paginate(opts ...aws.Option) L
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

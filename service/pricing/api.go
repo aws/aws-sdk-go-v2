@@ -92,7 +92,7 @@ func (c *Pricing) DescribeServicesRequest(input *DescribeServicesInput) Describe
 func (p *DescribeServicesRequest) Paginate(opts ...aws.Option) DescribeServicesPager {
 	return DescribeServicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeServicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -101,6 +101,7 @@ func (p *DescribeServicesRequest) Paginate(opts ...aws.Option) DescribeServicesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -198,7 +199,7 @@ func (c *Pricing) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetA
 func (p *GetAttributeValuesRequest) Paginate(opts ...aws.Option) GetAttributeValuesPager {
 	return GetAttributeValuesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetAttributeValuesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -207,6 +208,7 @@ func (p *GetAttributeValuesRequest) Paginate(opts ...aws.Option) GetAttributeVal
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -301,7 +303,7 @@ func (c *Pricing) GetProductsRequest(input *GetProductsInput) GetProductsRequest
 func (p *GetProductsRequest) Paginate(opts ...aws.Option) GetProductsPager {
 	return GetProductsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetProductsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -310,6 +312,7 @@ func (p *GetProductsRequest) Paginate(opts ...aws.Option) GetProductsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

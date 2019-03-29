@@ -371,7 +371,7 @@ func (c *Polly) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasksI
 func (p *ListSpeechSynthesisTasksRequest) Paginate(opts ...aws.Option) ListSpeechSynthesisTasksPager {
 	return ListSpeechSynthesisTasksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSpeechSynthesisTasksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -380,6 +380,7 @@ func (p *ListSpeechSynthesisTasksRequest) Paginate(opts ...aws.Option) ListSpeec
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

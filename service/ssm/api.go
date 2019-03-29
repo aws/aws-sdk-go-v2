@@ -1341,7 +1341,7 @@ func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) Descri
 func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActivationsPager {
 	return DescribeActivationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeActivationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1350,6 +1350,7 @@ func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActiva
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2024,7 +2025,7 @@ func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformat
 func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) DescribeInstanceInformationPager {
 	return DescribeInstanceInformationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeInstanceInformationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2033,6 +2034,7 @@ func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2753,7 +2755,7 @@ func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) Describe
 func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParametersPager {
 	return DescribeParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2762,6 +2764,7 @@ func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParamet
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3788,7 +3791,7 @@ func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetPar
 func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHistoryPager {
 	return GetParameterHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetParameterHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3797,6 +3800,7 @@ func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3955,7 +3959,7 @@ func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) GetPar
 func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersByPathPager {
 	return GetParametersByPathPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetParametersByPathInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3964,6 +3968,7 @@ func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersB
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4291,7 +4296,7 @@ func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) ListAssociat
 func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsPager {
 	return ListAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4300,6 +4305,7 @@ func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4398,7 +4404,7 @@ func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) 
 func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommandInvocationsPager {
 	return ListCommandInvocationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCommandInvocationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4407,6 +4413,7 @@ func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommand
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4501,7 +4508,7 @@ func (c *SSM) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest 
 func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
 	return ListCommandsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCommandsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4510,6 +4517,7 @@ func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4762,7 +4770,7 @@ func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsReque
 func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
 	return ListDocumentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDocumentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4771,6 +4779,7 @@ func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

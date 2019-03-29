@@ -305,7 +305,7 @@ func (c *Macie) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMe
 func (p *ListMemberAccountsRequest) Paginate(opts ...aws.Option) ListMemberAccountsPager {
 	return ListMemberAccountsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMemberAccountsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -314,6 +314,7 @@ func (p *ListMemberAccountsRequest) Paginate(opts ...aws.Option) ListMemberAccou
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -412,7 +413,7 @@ func (c *Macie) ListS3ResourcesRequest(input *ListS3ResourcesInput) ListS3Resour
 func (p *ListS3ResourcesRequest) Paginate(opts ...aws.Option) ListS3ResourcesPager {
 	return ListS3ResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListS3ResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -421,6 +422,7 @@ func (p *ListS3ResourcesRequest) Paginate(opts ...aws.Option) ListS3ResourcesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

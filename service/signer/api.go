@@ -304,7 +304,7 @@ func (c *Signer) ListSigningJobsRequest(input *ListSigningJobsInput) ListSigning
 func (p *ListSigningJobsRequest) Paginate(opts ...aws.Option) ListSigningJobsPager {
 	return ListSigningJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -313,6 +313,7 @@ func (p *ListSigningJobsRequest) Paginate(opts ...aws.Option) ListSigningJobsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -412,7 +413,7 @@ func (c *Signer) ListSigningPlatformsRequest(input *ListSigningPlatformsInput) L
 func (p *ListSigningPlatformsRequest) Paginate(opts ...aws.Option) ListSigningPlatformsPager {
 	return ListSigningPlatformsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningPlatformsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -421,6 +422,7 @@ func (p *ListSigningPlatformsRequest) Paginate(opts ...aws.Option) ListSigningPl
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -521,7 +523,7 @@ func (c *Signer) ListSigningProfilesRequest(input *ListSigningProfilesInput) Lis
 func (p *ListSigningProfilesRequest) Paginate(opts ...aws.Option) ListSigningProfilesPager {
 	return ListSigningProfilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningProfilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -530,6 +532,7 @@ func (p *ListSigningProfilesRequest) Paginate(opts ...aws.Option) ListSigningPro
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

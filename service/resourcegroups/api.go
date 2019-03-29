@@ -346,7 +346,7 @@ func (c *ResourceGroups) ListGroupResourcesRequest(input *ListGroupResourcesInpu
 func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResourcesPager {
 	return ListGroupResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -355,6 +355,7 @@ func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -449,7 +450,7 @@ func (c *ResourceGroups) ListGroupsRequest(input *ListGroupsInput) ListGroupsReq
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -458,6 +459,7 @@ func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -554,7 +556,7 @@ func (c *ResourceGroups) SearchResourcesRequest(input *SearchResourcesInput) Sea
 func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPager {
 	return SearchResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -563,6 +565,7 @@ func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

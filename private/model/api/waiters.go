@@ -46,6 +46,7 @@ type Waiter struct {
 func (a *API) WaitersGoCode() string {
 	var buf bytes.Buffer
 	buf.WriteString(`import (
+		"context"
 		"time"
 
 		"github.com/aws/aws-sdk-go-v2/aws"
@@ -115,20 +116,13 @@ var waiterTmpls = template.Must(template.New("waiterTmpls").Funcs(
 // {{ .OperationName }} to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}(input {{ .Operation.InputRef.GoType }}) error {
-	return c.WaitUntil{{ .Name }}WithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntil{{ .Name }}WithContext is an extended version of WaitUntil{{ .Name }}.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}WithContext(` +
-	`ctx aws.Context, input {{ .Operation.InputRef.GoType }}, opts ...aws.WaiterOption) error {
+func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}(` +
+	`ctx context.Context, input {{ .Operation.InputRef.GoType }}, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:    "WaitUntil{{ .Name }}",
 		MaxAttempts: {{ .MaxAttempts }},
@@ -157,19 +151,20 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}WithContext(` +
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 {{- end }}
 
 {{ define "waiter interface" }}
-WaitUntil{{ .Name }}({{ .Operation.InputRef.GoTypeWithPkgName }}) error
-WaitUntil{{ .Name }}WithContext(aws.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...aws.WaiterOption) error
+WaitUntil{{ .Name }}(context.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...aws.WaiterOption) error
 {{- end }}
 `))
 
 // InterfaceSignature returns a string representing the Waiter's interface
 // function signature.
 func (w *Waiter) InterfaceSignature() string {
+	w.Operation.API.imports["context"] = true
+
 	var buf bytes.Buffer
 	if err := waiterTmpls.ExecuteTemplate(&buf, "waiter interface", w); err != nil {
 		panic(err)

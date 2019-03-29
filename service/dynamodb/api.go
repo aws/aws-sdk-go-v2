@@ -138,7 +138,7 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemReq
 func (p *BatchGetItemRequest) Paginate(opts ...aws.Option) BatchGetItemPager {
 	return BatchGetItemPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *BatchGetItemInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -147,6 +147,7 @@ func (p *BatchGetItemRequest) Paginate(opts ...aws.Option) BatchGetItemPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1430,7 +1431,7 @@ func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 func (p *ListTablesRequest) Paginate(opts ...aws.Option) ListTablesPager {
 	return ListTablesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTablesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1439,6 +1440,7 @@ func (p *ListTablesRequest) Paginate(opts ...aws.Option) ListTablesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1729,7 +1731,7 @@ func (c *DynamoDB) QueryRequest(input *QueryInput) QueryRequest {
 func (p *QueryRequest) Paginate(opts ...aws.Option) QueryPager {
 	return QueryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *QueryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1738,6 +1740,7 @@ func (p *QueryRequest) Paginate(opts ...aws.Option) QueryPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2015,7 +2018,7 @@ func (c *DynamoDB) ScanRequest(input *ScanInput) ScanRequest {
 func (p *ScanRequest) Paginate(opts ...aws.Option) ScanPager {
 	return ScanPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ScanInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2024,6 +2027,7 @@ func (p *ScanRequest) Paginate(opts ...aws.Option) ScanPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

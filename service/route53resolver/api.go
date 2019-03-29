@@ -740,7 +740,7 @@ func (c *Route53Resolver) ListResolverEndpointIpAddressesRequest(input *ListReso
 func (p *ListResolverEndpointIpAddressesRequest) Paginate(opts ...aws.Option) ListResolverEndpointIpAddressesPager {
 	return ListResolverEndpointIpAddressesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverEndpointIpAddressesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -749,6 +749,7 @@ func (p *ListResolverEndpointIpAddressesRequest) Paginate(opts ...aws.Option) Li
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -844,7 +845,7 @@ func (c *Route53Resolver) ListResolverEndpointsRequest(input *ListResolverEndpoi
 func (p *ListResolverEndpointsRequest) Paginate(opts ...aws.Option) ListResolverEndpointsPager {
 	return ListResolverEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -853,6 +854,7 @@ func (p *ListResolverEndpointsRequest) Paginate(opts ...aws.Option) ListResolver
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -948,7 +950,7 @@ func (c *Route53Resolver) ListResolverRuleAssociationsRequest(input *ListResolve
 func (p *ListResolverRuleAssociationsRequest) Paginate(opts ...aws.Option) ListResolverRuleAssociationsPager {
 	return ListResolverRuleAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverRuleAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -957,6 +959,7 @@ func (p *ListResolverRuleAssociationsRequest) Paginate(opts ...aws.Option) ListR
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1051,7 +1054,7 @@ func (c *Route53Resolver) ListResolverRulesRequest(input *ListResolverRulesInput
 func (p *ListResolverRulesRequest) Paginate(opts ...aws.Option) ListResolverRulesPager {
 	return ListResolverRulesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverRulesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1060,6 +1063,7 @@ func (p *ListResolverRulesRequest) Paginate(opts ...aws.Option) ListResolverRule
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

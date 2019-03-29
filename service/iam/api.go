@@ -3236,7 +3236,7 @@ func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizati
 func (p *GetAccountAuthorizationDetailsRequest) Paginate(opts ...aws.Option) GetAccountAuthorizationDetailsPager {
 	return GetAccountAuthorizationDetailsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetAccountAuthorizationDetailsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3245,6 +3245,7 @@ func (p *GetAccountAuthorizationDetailsRequest) Paginate(opts ...aws.Option) Get
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3627,7 +3628,7 @@ func (c *IAM) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 func (p *GetGroupRequest) Paginate(opts ...aws.Option) GetGroupPager {
 	return GetGroupPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetGroupInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3636,6 +3637,7 @@ func (p *GetGroupRequest) Paginate(opts ...aws.Option) GetGroupPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4737,7 +4739,7 @@ func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKeysRe
 func (p *ListAccessKeysRequest) Paginate(opts ...aws.Option) ListAccessKeysPager {
 	return ListAccessKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccessKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4746,6 +4748,7 @@ func (p *ListAccessKeysRequest) Paginate(opts ...aws.Option) ListAccessKeysPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4843,7 +4846,7 @@ func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) ListAcco
 func (p *ListAccountAliasesRequest) Paginate(opts ...aws.Option) ListAccountAliasesPager {
 	return ListAccountAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4852,6 +4855,7 @@ func (p *ListAccountAliasesRequest) Paginate(opts ...aws.Option) ListAccountAlia
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4957,7 +4961,7 @@ func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesI
 func (p *ListAttachedGroupPoliciesRequest) Paginate(opts ...aws.Option) ListAttachedGroupPoliciesPager {
 	return ListAttachedGroupPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedGroupPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4966,6 +4970,7 @@ func (p *ListAttachedGroupPoliciesRequest) Paginate(opts ...aws.Option) ListAtta
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5071,7 +5076,7 @@ func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInp
 func (p *ListAttachedRolePoliciesRequest) Paginate(opts ...aws.Option) ListAttachedRolePoliciesPager {
 	return ListAttachedRolePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedRolePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5080,6 +5085,7 @@ func (p *ListAttachedRolePoliciesRequest) Paginate(opts ...aws.Option) ListAttac
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5185,7 +5191,7 @@ func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInp
 func (p *ListAttachedUserPoliciesRequest) Paginate(opts ...aws.Option) ListAttachedUserPoliciesPager {
 	return ListAttachedUserPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedUserPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5194,6 +5200,7 @@ func (p *ListAttachedUserPoliciesRequest) Paginate(opts ...aws.Option) ListAttac
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5296,7 +5303,7 @@ func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) Li
 func (p *ListEntitiesForPolicyRequest) Paginate(opts ...aws.Option) ListEntitiesForPolicyPager {
 	return ListEntitiesForPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEntitiesForPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5305,6 +5312,7 @@ func (p *ListEntitiesForPolicyRequest) Paginate(opts ...aws.Option) ListEntities
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5410,7 +5418,7 @@ func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) ListGroupP
 func (p *ListGroupPoliciesRequest) Paginate(opts ...aws.Option) ListGroupPoliciesPager {
 	return ListGroupPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5419,6 +5427,7 @@ func (p *ListGroupPoliciesRequest) Paginate(opts ...aws.Option) ListGroupPolicie
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5515,7 +5524,7 @@ func (c *IAM) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5524,6 +5533,7 @@ func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5620,7 +5630,7 @@ func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) ListGroups
 func (p *ListGroupsForUserRequest) Paginate(opts ...aws.Option) ListGroupsForUserPager {
 	return ListGroupsForUserPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsForUserInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5629,6 +5639,7 @@ func (p *ListGroupsForUserRequest) Paginate(opts ...aws.Option) ListGroupsForUse
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5727,7 +5738,7 @@ func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) List
 func (p *ListInstanceProfilesRequest) Paginate(opts ...aws.Option) ListInstanceProfilesPager {
 	return ListInstanceProfilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstanceProfilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5736,6 +5747,7 @@ func (p *ListInstanceProfilesRequest) Paginate(opts ...aws.Option) ListInstanceP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5834,7 +5846,7 @@ func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForR
 func (p *ListInstanceProfilesForRoleRequest) Paginate(opts ...aws.Option) ListInstanceProfilesForRolePager {
 	return ListInstanceProfilesForRolePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstanceProfilesForRoleInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5843,6 +5855,7 @@ func (p *ListInstanceProfilesForRoleRequest) Paginate(opts ...aws.Option) ListIn
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5942,7 +5955,7 @@ func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) ListMFADevicesRe
 func (p *ListMFADevicesRequest) Paginate(opts ...aws.Option) ListMFADevicesPager {
 	return ListMFADevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMFADevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5951,6 +5964,7 @@ func (p *ListMFADevicesRequest) Paginate(opts ...aws.Option) ListMFADevicesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6109,7 +6123,7 @@ func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 	return ListPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6118,6 +6132,7 @@ func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6302,7 +6317,7 @@ func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPoli
 func (p *ListPolicyVersionsRequest) Paginate(opts ...aws.Option) ListPolicyVersionsPager {
 	return ListPolicyVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPolicyVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6311,6 +6326,7 @@ func (p *ListPolicyVersionsRequest) Paginate(opts ...aws.Option) ListPolicyVersi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6415,7 +6431,7 @@ func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) ListRolePoli
 func (p *ListRolePoliciesRequest) Paginate(opts ...aws.Option) ListRolePoliciesPager {
 	return ListRolePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRolePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6424,6 +6440,7 @@ func (p *ListRolePoliciesRequest) Paginate(opts ...aws.Option) ListRolePoliciesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6576,7 +6593,7 @@ func (c *IAM) ListRolesRequest(input *ListRolesInput) ListRolesRequest {
 func (p *ListRolesRequest) Paginate(opts ...aws.Option) ListRolesPager {
 	return ListRolesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRolesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6585,6 +6602,7 @@ func (p *ListRolesRequest) Paginate(opts ...aws.Option) ListRolesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6742,7 +6760,7 @@ func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSHPub
 func (p *ListSSHPublicKeysRequest) Paginate(opts ...aws.Option) ListSSHPublicKeysPager {
 	return ListSSHPublicKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSSHPublicKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6751,6 +6769,7 @@ func (p *ListSSHPublicKeysRequest) Paginate(opts ...aws.Option) ListSSHPublicKey
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6853,7 +6872,7 @@ func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) 
 func (p *ListServerCertificatesRequest) Paginate(opts ...aws.Option) ListServerCertificatesPager {
 	return ListServerCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServerCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6862,6 +6881,7 @@ func (p *ListServerCertificatesRequest) Paginate(opts ...aws.Option) ListServerC
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7023,7 +7043,7 @@ func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput
 func (p *ListSigningCertificatesRequest) Paginate(opts ...aws.Option) ListSigningCertificatesPager {
 	return ListSigningCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7032,6 +7052,7 @@ func (p *ListSigningCertificatesRequest) Paginate(opts ...aws.Option) ListSignin
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7135,7 +7156,7 @@ func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) ListUserPoli
 func (p *ListUserPoliciesRequest) Paginate(opts ...aws.Option) ListUserPoliciesPager {
 	return ListUserPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUserPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7144,6 +7165,7 @@ func (p *ListUserPoliciesRequest) Paginate(opts ...aws.Option) ListUserPoliciesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7296,7 +7318,7 @@ func (c *IAM) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 	return ListUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7305,6 +7327,7 @@ func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7404,7 +7427,7 @@ func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) Li
 func (p *ListVirtualMFADevicesRequest) Paginate(opts ...aws.Option) ListVirtualMFADevicesPager {
 	return ListVirtualMFADevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVirtualMFADevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7413,6 +7436,7 @@ func (p *ListVirtualMFADevicesRequest) Paginate(opts ...aws.Option) ListVirtualM
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -8211,7 +8235,7 @@ func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) Simu
 func (p *SimulateCustomPolicyRequest) Paginate(opts ...aws.Option) SimulateCustomPolicyPager {
 	return SimulateCustomPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SimulateCustomPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -8220,6 +8244,7 @@ func (p *SimulateCustomPolicyRequest) Paginate(opts ...aws.Option) SimulateCusto
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -8340,7 +8365,7 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 func (p *SimulatePrincipalPolicyRequest) Paginate(opts ...aws.Option) SimulatePrincipalPolicyPager {
 	return SimulatePrincipalPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SimulatePrincipalPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -8349,6 +8374,7 @@ func (p *SimulatePrincipalPolicyRequest) Paginate(opts ...aws.Option) SimulatePr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

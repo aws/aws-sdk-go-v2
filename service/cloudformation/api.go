@@ -826,7 +826,7 @@ func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsIn
 func (p *DescribeStackEventsRequest) Paginate(opts ...aws.Option) DescribeStackEventsPager {
 	return DescribeStackEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStackEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -835,6 +835,7 @@ func (p *DescribeStackEventsRequest) Paginate(opts ...aws.Option) DescribeStackE
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1049,7 +1050,7 @@ func (c *CloudFormation) DescribeStackResourceDriftsRequest(input *DescribeStack
 func (p *DescribeStackResourceDriftsRequest) Paginate(opts ...aws.Option) DescribeStackResourceDriftsPager {
 	return DescribeStackResourceDriftsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStackResourceDriftsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1058,6 +1059,7 @@ func (p *DescribeStackResourceDriftsRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1325,7 +1327,7 @@ func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) Descr
 func (p *DescribeStacksRequest) Paginate(opts ...aws.Option) DescribeStacksPager {
 	return DescribeStacksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStacksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1334,6 +1336,7 @@ func (p *DescribeStacksRequest) Paginate(opts ...aws.Option) DescribeStacksPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1913,7 +1916,7 @@ func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) ListExports
 func (p *ListExportsRequest) Paginate(opts ...aws.Option) ListExportsPager {
 	return ListExportsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListExportsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1922,6 +1925,7 @@ func (p *ListExportsRequest) Paginate(opts ...aws.Option) ListExportsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2022,7 +2026,7 @@ func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) ListImports
 func (p *ListImportsRequest) Paginate(opts ...aws.Option) ListImportsPager {
 	return ListImportsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListImportsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2031,6 +2035,7 @@ func (p *ListImportsRequest) Paginate(opts ...aws.Option) ListImportsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2181,7 +2186,7 @@ func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInpu
 func (p *ListStackResourcesRequest) Paginate(opts ...aws.Option) ListStackResourcesPager {
 	return ListStackResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStackResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2190,6 +2195,7 @@ func (p *ListStackResourcesRequest) Paginate(opts ...aws.Option) ListStackResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2442,7 +2448,7 @@ func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) ListStacksReq
 func (p *ListStacksRequest) Paginate(opts ...aws.Option) ListStacksPager {
 	return ListStacksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStacksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2451,6 +2457,7 @@ func (p *ListStacksRequest) Paginate(opts ...aws.Option) ListStacksPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -1138,7 +1138,7 @@ func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersio
 func (p *DescribeDocumentVersionsRequest) Paginate(opts ...aws.Option) DescribeDocumentVersionsPager {
 	return DescribeDocumentVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDocumentVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1147,6 +1147,7 @@ func (p *DescribeDocumentVersionsRequest) Paginate(opts ...aws.Option) DescribeD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1247,7 +1248,7 @@ func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsIn
 func (p *DescribeFolderContentsRequest) Paginate(opts ...aws.Option) DescribeFolderContentsPager {
 	return DescribeFolderContentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeFolderContentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1256,6 +1257,7 @@ func (p *DescribeFolderContentsRequest) Paginate(opts ...aws.Option) DescribeFol
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1568,7 +1570,7 @@ func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsers
 func (p *DescribeUsersRequest) Paginate(opts ...aws.Option) DescribeUsersPager {
 	return DescribeUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1577,6 +1579,7 @@ func (p *DescribeUsersRequest) Paginate(opts ...aws.Option) DescribeUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -994,7 +994,7 @@ func (c *Rekognition) GetCelebrityRecognitionRequest(input *GetCelebrityRecognit
 func (p *GetCelebrityRecognitionRequest) Paginate(opts ...aws.Option) GetCelebrityRecognitionPager {
 	return GetCelebrityRecognitionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCelebrityRecognitionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1003,6 +1003,7 @@ func (p *GetCelebrityRecognitionRequest) Paginate(opts ...aws.Option) GetCelebri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1126,7 +1127,7 @@ func (c *Rekognition) GetContentModerationRequest(input *GetContentModerationInp
 func (p *GetContentModerationRequest) Paginate(opts ...aws.Option) GetContentModerationPager {
 	return GetContentModerationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetContentModerationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1135,6 +1136,7 @@ func (p *GetContentModerationRequest) Paginate(opts ...aws.Option) GetContentMod
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1247,7 +1249,7 @@ func (c *Rekognition) GetFaceDetectionRequest(input *GetFaceDetectionInput) GetF
 func (p *GetFaceDetectionRequest) Paginate(opts ...aws.Option) GetFaceDetectionPager {
 	return GetFaceDetectionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetFaceDetectionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1256,6 +1258,7 @@ func (p *GetFaceDetectionRequest) Paginate(opts ...aws.Option) GetFaceDetectionP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1376,7 +1379,7 @@ func (c *Rekognition) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSea
 func (p *GetFaceSearchRequest) Paginate(opts ...aws.Option) GetFaceSearchPager {
 	return GetFaceSearchPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetFaceSearchInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1385,6 +1388,7 @@ func (p *GetFaceSearchRequest) Paginate(opts ...aws.Option) GetFaceSearchPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1506,7 +1510,7 @@ func (c *Rekognition) GetLabelDetectionRequest(input *GetLabelDetectionInput) Ge
 func (p *GetLabelDetectionRequest) Paginate(opts ...aws.Option) GetLabelDetectionPager {
 	return GetLabelDetectionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetLabelDetectionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1515,6 +1519,7 @@ func (p *GetLabelDetectionRequest) Paginate(opts ...aws.Option) GetLabelDetectio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1638,7 +1643,7 @@ func (c *Rekognition) GetPersonTrackingRequest(input *GetPersonTrackingInput) Ge
 func (p *GetPersonTrackingRequest) Paginate(opts ...aws.Option) GetPersonTrackingPager {
 	return GetPersonTrackingPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetPersonTrackingInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1647,6 +1652,7 @@ func (p *GetPersonTrackingRequest) Paginate(opts ...aws.Option) GetPersonTrackin
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1885,7 +1891,7 @@ func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) ListCo
 func (p *ListCollectionsRequest) Paginate(opts ...aws.Option) ListCollectionsPager {
 	return ListCollectionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCollectionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1894,6 +1900,7 @@ func (p *ListCollectionsRequest) Paginate(opts ...aws.Option) ListCollectionsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1992,7 +1999,7 @@ func (c *Rekognition) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 func (p *ListFacesRequest) Paginate(opts ...aws.Option) ListFacesPager {
 	return ListFacesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFacesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2001,6 +2008,7 @@ func (p *ListFacesRequest) Paginate(opts ...aws.Option) ListFacesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2093,7 +2101,7 @@ func (c *Rekognition) ListStreamProcessorsRequest(input *ListStreamProcessorsInp
 func (p *ListStreamProcessorsRequest) Paginate(opts ...aws.Option) ListStreamProcessorsPager {
 	return ListStreamProcessorsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStreamProcessorsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2102,6 +2110,7 @@ func (p *ListStreamProcessorsRequest) Paginate(opts ...aws.Option) ListStreamPro
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

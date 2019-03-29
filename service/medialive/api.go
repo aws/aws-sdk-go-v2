@@ -751,7 +751,7 @@ func (c *MediaLive) DescribeScheduleRequest(input *DescribeScheduleInput) Descri
 func (p *DescribeScheduleRequest) Paginate(opts ...aws.Option) DescribeSchedulePager {
 	return DescribeSchedulePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScheduleInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -760,6 +760,7 @@ func (p *DescribeScheduleRequest) Paginate(opts ...aws.Option) DescribeScheduleP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -854,7 +855,7 @@ func (c *MediaLive) ListChannelsRequest(input *ListChannelsInput) ListChannelsRe
 func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 	return ListChannelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChannelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -863,6 +864,7 @@ func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -957,7 +959,7 @@ func (c *MediaLive) ListInputSecurityGroupsRequest(input *ListInputSecurityGroup
 func (p *ListInputSecurityGroupsRequest) Paginate(opts ...aws.Option) ListInputSecurityGroupsPager {
 	return ListInputSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInputSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -966,6 +968,7 @@ func (p *ListInputSecurityGroupsRequest) Paginate(opts ...aws.Option) ListInputS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1060,7 +1063,7 @@ func (c *MediaLive) ListInputsRequest(input *ListInputsInput) ListInputsRequest 
 func (p *ListInputsRequest) Paginate(opts ...aws.Option) ListInputsPager {
 	return ListInputsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInputsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1069,6 +1072,7 @@ func (p *ListInputsRequest) Paginate(opts ...aws.Option) ListInputsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1163,7 +1167,7 @@ func (c *MediaLive) ListOfferingsRequest(input *ListOfferingsInput) ListOffering
 func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 	return ListOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1172,6 +1176,7 @@ func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1266,7 +1271,7 @@ func (c *MediaLive) ListReservationsRequest(input *ListReservationsInput) ListRe
 func (p *ListReservationsRequest) Paginate(opts ...aws.Option) ListReservationsPager {
 	return ListReservationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListReservationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1275,6 +1280,7 @@ func (p *ListReservationsRequest) Paginate(opts ...aws.Option) ListReservationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

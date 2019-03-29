@@ -599,7 +599,7 @@ func (c *Chime) ListAccountsRequest(input *ListAccountsInput) ListAccountsReques
 func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 	return ListAccountsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -608,6 +608,7 @@ func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -704,7 +705,7 @@ func (c *Chime) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 	return ListUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -713,6 +714,7 @@ func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

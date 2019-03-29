@@ -544,7 +544,7 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) ListDomainsReques
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDomainsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -553,6 +553,7 @@ func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -736,7 +737,7 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) SelectRequest {
 func (p *SelectRequest) Paginate(opts ...aws.Option) SelectPager {
 	return SelectPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SelectInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -745,6 +746,7 @@ func (p *SelectRequest) Paginate(opts ...aws.Option) SelectPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

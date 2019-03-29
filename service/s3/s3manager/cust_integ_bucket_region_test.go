@@ -3,6 +3,7 @@
 package s3manager_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,9 +13,9 @@ import (
 func TestInteg_GetBucketRegion(t *testing.T) {
 	expectRegion := integCfg.Region
 
-	ctx := aws.BackgroundContext()
+	ctx := context.Background()
 	region, err := s3manager.GetBucketRegion(ctx, integCfg,
-		aws.StringValue(bucketName), expectRegion)
+		aws.StringValue(bucketName), integCfg.Region)
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)

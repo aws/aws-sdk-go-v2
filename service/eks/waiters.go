@@ -3,6 +3,7 @@
 package eks
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeCluster to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EKS) WaitUntilClusterActive(input *DescribeClusterInput) error {
-	return c.WaitUntilClusterActiveWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilClusterActiveWithContext is an extended version of WaitUntilClusterActive.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EKS) WaitUntilClusterActiveWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
+func (c *EKS) WaitUntilClusterActive(ctx context.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterActive",
 		MaxAttempts: 40,
@@ -61,26 +55,19 @@ func (c *EKS) WaitUntilClusterActiveWithContext(ctx aws.Context, input *Describe
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilClusterDeleted uses the Amazon EKS API operation
 // DescribeCluster to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EKS) WaitUntilClusterDeleted(input *DescribeClusterInput) error {
-	return c.WaitUntilClusterDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilClusterDeletedWithContext is an extended version of WaitUntilClusterDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EKS) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
+func (c *EKS) WaitUntilClusterDeleted(ctx context.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilClusterDeleted",
 		MaxAttempts: 40,
@@ -117,5 +104,5 @@ func (c *EKS) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *Describ
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

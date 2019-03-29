@@ -921,7 +921,7 @@ func (c *DataSync) ListAgentsRequest(input *ListAgentsInput) ListAgentsRequest {
 func (p *ListAgentsRequest) Paginate(opts ...aws.Option) ListAgentsPager {
 	return ListAgentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAgentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -930,6 +930,7 @@ func (p *ListAgentsRequest) Paginate(opts ...aws.Option) ListAgentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1029,7 +1030,7 @@ func (c *DataSync) ListLocationsRequest(input *ListLocationsInput) ListLocations
 func (p *ListLocationsRequest) Paginate(opts ...aws.Option) ListLocationsPager {
 	return ListLocationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListLocationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1038,6 +1039,7 @@ func (p *ListLocationsRequest) Paginate(opts ...aws.Option) ListLocationsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1132,7 +1134,7 @@ func (c *DataSync) ListTagsForResourceRequest(input *ListTagsForResourceInput) L
 func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForResourcePager {
 	return ListTagsForResourcePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsForResourceInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1141,6 +1143,7 @@ func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForRes
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1235,7 +1238,7 @@ func (c *DataSync) ListTaskExecutionsRequest(input *ListTaskExecutionsInput) Lis
 func (p *ListTaskExecutionsRequest) Paginate(opts ...aws.Option) ListTaskExecutionsPager {
 	return ListTaskExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTaskExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1244,6 +1247,7 @@ func (p *ListTaskExecutionsRequest) Paginate(opts ...aws.Option) ListTaskExecuti
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1338,7 +1342,7 @@ func (c *DataSync) ListTasksRequest(input *ListTasksInput) ListTasksRequest {
 func (p *ListTasksRequest) Paginate(opts ...aws.Option) ListTasksPager {
 	return ListTasksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTasksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1347,6 +1351,7 @@ func (p *ListTasksRequest) Paginate(opts ...aws.Option) ListTasksPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

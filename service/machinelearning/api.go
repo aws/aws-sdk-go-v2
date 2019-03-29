@@ -916,7 +916,7 @@ func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPr
 func (p *DescribeBatchPredictionsRequest) Paginate(opts ...aws.Option) DescribeBatchPredictionsPager {
 	return DescribeBatchPredictionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeBatchPredictionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -925,6 +925,7 @@ func (p *DescribeBatchPredictionsRequest) Paginate(opts ...aws.Option) DescribeB
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1017,7 +1018,7 @@ func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesI
 func (p *DescribeDataSourcesRequest) Paginate(opts ...aws.Option) DescribeDataSourcesPager {
 	return DescribeDataSourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDataSourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1026,6 +1027,7 @@ func (p *DescribeDataSourcesRequest) Paginate(opts ...aws.Option) DescribeDataSo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1119,7 +1121,7 @@ func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsI
 func (p *DescribeEvaluationsRequest) Paginate(opts ...aws.Option) DescribeEvaluationsPager {
 	return DescribeEvaluationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEvaluationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1128,6 +1130,7 @@ func (p *DescribeEvaluationsRequest) Paginate(opts ...aws.Option) DescribeEvalua
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1220,7 +1223,7 @@ func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) 
 func (p *DescribeMLModelsRequest) Paginate(opts ...aws.Option) DescribeMLModelsPager {
 	return DescribeMLModelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeMLModelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1229,6 +1232,7 @@ func (p *DescribeMLModelsRequest) Paginate(opts ...aws.Option) DescribeMLModelsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

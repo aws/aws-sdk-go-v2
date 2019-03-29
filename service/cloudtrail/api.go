@@ -558,7 +558,7 @@ func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) LookupEventsR
 func (p *LookupEventsRequest) Paginate(opts ...aws.Option) LookupEventsPager {
 	return LookupEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *LookupEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -567,6 +567,7 @@ func (p *LookupEventsRequest) Paginate(opts ...aws.Option) LookupEventsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

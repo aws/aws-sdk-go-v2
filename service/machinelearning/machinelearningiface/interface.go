@@ -9,6 +9,8 @@
 package machinelearningiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 )
@@ -119,17 +121,13 @@ type MachineLearningAPI interface {
 
 	UpdateMLModelRequest(*machinelearning.UpdateMLModelInput) machinelearning.UpdateMLModelRequest
 
-	WaitUntilBatchPredictionAvailable(*machinelearning.DescribeBatchPredictionsInput) error
-	WaitUntilBatchPredictionAvailableWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, ...aws.WaiterOption) error
+	WaitUntilBatchPredictionAvailable(context.Context, *machinelearning.DescribeBatchPredictionsInput, ...aws.WaiterOption) error
 
-	WaitUntilDataSourceAvailable(*machinelearning.DescribeDataSourcesInput) error
-	WaitUntilDataSourceAvailableWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, ...aws.WaiterOption) error
+	WaitUntilDataSourceAvailable(context.Context, *machinelearning.DescribeDataSourcesInput, ...aws.WaiterOption) error
 
-	WaitUntilEvaluationAvailable(*machinelearning.DescribeEvaluationsInput) error
-	WaitUntilEvaluationAvailableWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, ...aws.WaiterOption) error
+	WaitUntilEvaluationAvailable(context.Context, *machinelearning.DescribeEvaluationsInput, ...aws.WaiterOption) error
 
-	WaitUntilMLModelAvailable(*machinelearning.DescribeMLModelsInput) error
-	WaitUntilMLModelAvailableWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, ...aws.WaiterOption) error
+	WaitUntilMLModelAvailable(context.Context, *machinelearning.DescribeMLModelsInput, ...aws.WaiterOption) error
 }
 
 var _ MachineLearningAPI = (*machinelearning.MachineLearning)(nil)

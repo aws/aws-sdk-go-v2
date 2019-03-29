@@ -137,7 +137,7 @@ func (c *CostAndUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 func (p *DescribeReportDefinitionsRequest) Paginate(opts ...aws.Option) DescribeReportDefinitionsPager {
 	return DescribeReportDefinitionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReportDefinitionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -146,6 +146,7 @@ func (p *DescribeReportDefinitionsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

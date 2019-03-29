@@ -91,7 +91,7 @@ func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTracesR
 func (p *BatchGetTracesRequest) Paginate(opts ...aws.Option) BatchGetTracesPager {
 	return BatchGetTracesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *BatchGetTracesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -100,6 +100,7 @@ func (p *BatchGetTracesRequest) Paginate(opts ...aws.Option) BatchGetTracesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -714,7 +715,7 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceGra
 func (p *GetServiceGraphRequest) Paginate(opts ...aws.Option) GetServiceGraphPager {
 	return GetServiceGraphPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetServiceGraphInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -723,6 +724,7 @@ func (p *GetServiceGraphRequest) Paginate(opts ...aws.Option) GetServiceGraphPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -817,7 +819,7 @@ func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRequ
 func (p *GetTraceGraphRequest) Paginate(opts ...aws.Option) GetTraceGraphPager {
 	return GetTraceGraphPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTraceGraphInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -826,6 +828,7 @@ func (p *GetTraceGraphRequest) Paginate(opts ...aws.Option) GetTraceGraphPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -936,7 +939,7 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) GetTraceS
 func (p *GetTraceSummariesRequest) Paginate(opts ...aws.Option) GetTraceSummariesPager {
 	return GetTraceSummariesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTraceSummariesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -945,6 +948,7 @@ func (p *GetTraceSummariesRequest) Paginate(opts ...aws.Option) GetTraceSummarie
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

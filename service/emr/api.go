@@ -707,7 +707,7 @@ func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) List
 func (p *ListBootstrapActionsRequest) Paginate(opts ...aws.Option) ListBootstrapActionsPager {
 	return ListBootstrapActionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBootstrapActionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -716,6 +716,7 @@ func (p *ListBootstrapActionsRequest) Paginate(opts ...aws.Option) ListBootstrap
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -814,7 +815,7 @@ func (c *EMR) ListClustersRequest(input *ListClustersInput) ListClustersRequest 
 func (p *ListClustersRequest) Paginate(opts ...aws.Option) ListClustersPager {
 	return ListClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -823,6 +824,7 @@ func (p *ListClustersRequest) Paginate(opts ...aws.Option) ListClustersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -920,7 +922,7 @@ func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) ListInst
 func (p *ListInstanceFleetsRequest) Paginate(opts ...aws.Option) ListInstanceFleetsPager {
 	return ListInstanceFleetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstanceFleetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -929,6 +931,7 @@ func (p *ListInstanceFleetsRequest) Paginate(opts ...aws.Option) ListInstanceFle
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1023,7 +1026,7 @@ func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) ListInst
 func (p *ListInstanceGroupsRequest) Paginate(opts ...aws.Option) ListInstanceGroupsPager {
 	return ListInstanceGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstanceGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1032,6 +1035,7 @@ func (p *ListInstanceGroupsRequest) Paginate(opts ...aws.Option) ListInstanceGro
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1129,7 +1133,7 @@ func (c *EMR) ListInstancesRequest(input *ListInstancesInput) ListInstancesReque
 func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 	return ListInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1138,6 +1142,7 @@ func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1287,7 +1292,7 @@ func (c *EMR) ListStepsRequest(input *ListStepsInput) ListStepsRequest {
 func (p *ListStepsRequest) Paginate(opts ...aws.Option) ListStepsPager {
 	return ListStepsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStepsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1296,6 +1301,7 @@ func (p *ListStepsRequest) Paginate(opts ...aws.Option) ListStepsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

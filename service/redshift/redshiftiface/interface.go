@@ -9,6 +9,8 @@
 package redshiftiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/redshift"
 )
@@ -225,17 +227,13 @@ type RedshiftAPI interface {
 
 	RotateEncryptionKeyRequest(*redshift.RotateEncryptionKeyInput) redshift.RotateEncryptionKeyRequest
 
-	WaitUntilClusterAvailable(*redshift.DescribeClustersInput) error
-	WaitUntilClusterAvailableWithContext(aws.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+	WaitUntilClusterAvailable(context.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterDeleted(*redshift.DescribeClustersInput) error
-	WaitUntilClusterDeletedWithContext(aws.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+	WaitUntilClusterDeleted(context.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterRestored(*redshift.DescribeClustersInput) error
-	WaitUntilClusterRestoredWithContext(aws.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
+	WaitUntilClusterRestored(context.Context, *redshift.DescribeClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilSnapshotAvailable(*redshift.DescribeClusterSnapshotsInput) error
-	WaitUntilSnapshotAvailableWithContext(aws.Context, *redshift.DescribeClusterSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilSnapshotAvailable(context.Context, *redshift.DescribeClusterSnapshotsInput, ...aws.WaiterOption) error
 }
 
 var _ RedshiftAPI = (*redshift.Redshift)(nil)

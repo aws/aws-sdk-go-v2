@@ -471,7 +471,7 @@ func (c *ApplicationDiscoveryService) DescribeContinuousExportsRequest(input *De
 func (p *DescribeContinuousExportsRequest) Paginate(opts ...aws.Option) DescribeContinuousExportsPager {
 	return DescribeContinuousExportsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeContinuousExportsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -480,6 +480,7 @@ func (p *DescribeContinuousExportsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

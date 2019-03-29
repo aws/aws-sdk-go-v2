@@ -2042,7 +2042,7 @@ func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfig
 func (p *GetResourceConfigHistoryRequest) Paginate(opts ...aws.Option) GetResourceConfigHistoryPager {
 	return GetResourceConfigHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceConfigHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2051,6 +2051,7 @@ func (p *GetResourceConfigHistoryRequest) Paginate(opts ...aws.Option) GetResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

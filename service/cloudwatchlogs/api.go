@@ -790,7 +790,7 @@ func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinations
 func (p *DescribeDestinationsRequest) Paginate(opts ...aws.Option) DescribeDestinationsPager {
 	return DescribeDestinationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDestinationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -799,6 +799,7 @@ func (p *DescribeDestinationsRequest) Paginate(opts ...aws.Option) DescribeDesti
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -946,7 +947,7 @@ func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput)
 func (p *DescribeLogGroupsRequest) Paginate(opts ...aws.Option) DescribeLogGroupsPager {
 	return DescribeLogGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLogGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -955,6 +956,7 @@ func (p *DescribeLogGroupsRequest) Paginate(opts ...aws.Option) DescribeLogGroup
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1054,7 +1056,7 @@ func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInpu
 func (p *DescribeLogStreamsRequest) Paginate(opts ...aws.Option) DescribeLogStreamsPager {
 	return DescribeLogStreamsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLogStreamsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1063,6 +1065,7 @@ func (p *DescribeLogStreamsRequest) Paginate(opts ...aws.Option) DescribeLogStre
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1159,7 +1162,7 @@ func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFilte
 func (p *DescribeMetricFiltersRequest) Paginate(opts ...aws.Option) DescribeMetricFiltersPager {
 	return DescribeMetricFiltersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeMetricFiltersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1168,6 +1171,7 @@ func (p *DescribeMetricFiltersRequest) Paginate(opts ...aws.Option) DescribeMetr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1369,7 +1373,7 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubsc
 func (p *DescribeSubscriptionFiltersRequest) Paginate(opts ...aws.Option) DescribeSubscriptionFiltersPager {
 	return DescribeSubscriptionFiltersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSubscriptionFiltersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1378,6 +1382,7 @@ func (p *DescribeSubscriptionFiltersRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1541,7 +1546,7 @@ func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) Fil
 func (p *FilterLogEventsRequest) Paginate(opts ...aws.Option) FilterLogEventsPager {
 	return FilterLogEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *FilterLogEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1550,6 +1555,7 @@ func (p *FilterLogEventsRequest) Paginate(opts ...aws.Option) FilterLogEventsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1649,7 +1655,7 @@ func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) GetLogEve
 func (p *GetLogEventsRequest) Paginate(opts ...aws.Option) GetLogEventsPager {
 	return GetLogEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetLogEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1658,6 +1664,7 @@ func (p *GetLogEventsRequest) Paginate(opts ...aws.Option) GetLogEventsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

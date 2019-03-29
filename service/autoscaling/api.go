@@ -1135,7 +1135,7 @@ func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalin
 func (p *DescribeAutoScalingGroupsRequest) Paginate(opts ...aws.Option) DescribeAutoScalingGroupsPager {
 	return DescribeAutoScalingGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAutoScalingGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1144,6 +1144,7 @@ func (p *DescribeAutoScalingGroupsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1238,7 +1239,7 @@ func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoSca
 func (p *DescribeAutoScalingInstancesRequest) Paginate(opts ...aws.Option) DescribeAutoScalingInstancesPager {
 	return DescribeAutoScalingInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAutoScalingInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1247,6 +1248,7 @@ func (p *DescribeAutoScalingInstancesRequest) Paginate(opts ...aws.Option) Descr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1392,7 +1394,7 @@ func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchC
 func (p *DescribeLaunchConfigurationsRequest) Paginate(opts ...aws.Option) DescribeLaunchConfigurationsPager {
 	return DescribeLaunchConfigurationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLaunchConfigurationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1401,6 +1403,7 @@ func (p *DescribeLaunchConfigurationsRequest) Paginate(opts ...aws.Option) Descr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1763,7 +1766,7 @@ func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeN
 func (p *DescribeNotificationConfigurationsRequest) Paginate(opts ...aws.Option) DescribeNotificationConfigurationsPager {
 	return DescribeNotificationConfigurationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeNotificationConfigurationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1772,6 +1775,7 @@ func (p *DescribeNotificationConfigurationsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1866,7 +1870,7 @@ func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) Desc
 func (p *DescribePoliciesRequest) Paginate(opts ...aws.Option) DescribePoliciesPager {
 	return DescribePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1875,6 +1879,7 @@ func (p *DescribePoliciesRequest) Paginate(opts ...aws.Option) DescribePoliciesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1969,7 +1974,7 @@ func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingAct
 func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
 	return DescribeScalingActivitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalingActivitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1978,6 +1983,7 @@ func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2124,7 +2130,7 @@ func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledAc
 func (p *DescribeScheduledActionsRequest) Paginate(opts ...aws.Option) DescribeScheduledActionsPager {
 	return DescribeScheduledActionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScheduledActionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2133,6 +2139,7 @@ func (p *DescribeScheduledActionsRequest) Paginate(opts ...aws.Option) DescribeS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2236,7 +2243,7 @@ func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) DescribeTags
 func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 	return DescribeTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2245,6 +2252,7 @@ func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

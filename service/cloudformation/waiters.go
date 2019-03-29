@@ -3,6 +3,7 @@
 package cloudformation
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeChangeSet to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFormation) WaitUntilChangeSetCreateComplete(input *DescribeChangeSetInput) error {
-	return c.WaitUntilChangeSetCreateCompleteWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilChangeSetCreateCompleteWithContext is an extended version of WaitUntilChangeSetCreateComplete.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilChangeSetCreateCompleteWithContext(ctx aws.Context, input *DescribeChangeSetInput, opts ...aws.WaiterOption) error {
+func (c *CloudFormation) WaitUntilChangeSetCreateComplete(ctx context.Context, input *DescribeChangeSetInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilChangeSetCreateComplete",
 		MaxAttempts: 120,
@@ -61,26 +55,19 @@ func (c *CloudFormation) WaitUntilChangeSetCreateCompleteWithContext(ctx aws.Con
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilStackCreateComplete uses the AWS CloudFormation API operation
 // DescribeStacks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFormation) WaitUntilStackCreateComplete(input *DescribeStacksInput) error {
-	return c.WaitUntilStackCreateCompleteWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStackCreateCompleteWithContext is an extended version of WaitUntilStackCreateComplete.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackCreateCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+func (c *CloudFormation) WaitUntilStackCreateComplete(ctx context.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStackCreateComplete",
 		MaxAttempts: 120,
@@ -137,26 +124,19 @@ func (c *CloudFormation) WaitUntilStackCreateCompleteWithContext(ctx aws.Context
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilStackDeleteComplete uses the AWS CloudFormation API operation
 // DescribeStacks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFormation) WaitUntilStackDeleteComplete(input *DescribeStacksInput) error {
-	return c.WaitUntilStackDeleteCompleteWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStackDeleteCompleteWithContext is an extended version of WaitUntilStackDeleteComplete.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackDeleteCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+func (c *CloudFormation) WaitUntilStackDeleteComplete(ctx context.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStackDeleteComplete",
 		MaxAttempts: 120,
@@ -213,26 +193,19 @@ func (c *CloudFormation) WaitUntilStackDeleteCompleteWithContext(ctx aws.Context
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilStackExists uses the AWS CloudFormation API operation
 // DescribeStacks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFormation) WaitUntilStackExists(input *DescribeStacksInput) error {
-	return c.WaitUntilStackExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStackExistsWithContext is an extended version of WaitUntilStackExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackExistsWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+func (c *CloudFormation) WaitUntilStackExists(ctx context.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStackExists",
 		MaxAttempts: 20,
@@ -264,26 +237,19 @@ func (c *CloudFormation) WaitUntilStackExistsWithContext(ctx aws.Context, input 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilStackUpdateComplete uses the AWS CloudFormation API operation
 // DescribeStacks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFormation) WaitUntilStackUpdateComplete(input *DescribeStacksInput) error {
-	return c.WaitUntilStackUpdateCompleteWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStackUpdateCompleteWithContext is an extended version of WaitUntilStackUpdateComplete.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackUpdateCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+func (c *CloudFormation) WaitUntilStackUpdateComplete(ctx context.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStackUpdateComplete",
 		MaxAttempts: 120,
@@ -330,5 +296,5 @@ func (c *CloudFormation) WaitUntilStackUpdateCompleteWithContext(ctx aws.Context
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

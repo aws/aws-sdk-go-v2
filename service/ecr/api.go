@@ -522,7 +522,7 @@ func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager {
 	return DescribeImagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeImagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -531,6 +531,7 @@ func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -625,7 +626,7 @@ func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) Desc
 func (p *DescribeRepositoriesRequest) Paginate(opts ...aws.Option) DescribeRepositoriesPager {
 	return DescribeRepositoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeRepositoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -634,6 +635,7 @@ func (p *DescribeRepositoriesRequest) Paginate(opts ...aws.Option) DescribeRepos
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1056,7 +1058,7 @@ func (c *ECR) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 func (p *ListImagesRequest) Paginate(opts ...aws.Option) ListImagesPager {
 	return ListImagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListImagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1065,6 +1067,7 @@ func (p *ListImagesRequest) Paginate(opts ...aws.Option) ListImagesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

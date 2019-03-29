@@ -684,7 +684,7 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) ListDomains
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDomainsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -693,6 +693,7 @@ func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -787,7 +788,7 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) ListO
 func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
 	return ListOperationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOperationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -796,6 +797,7 @@ func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

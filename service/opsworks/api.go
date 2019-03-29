@@ -1571,7 +1571,7 @@ func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) D
 func (p *DescribeEcsClustersRequest) Paginate(opts ...aws.Option) DescribeEcsClustersPager {
 	return DescribeEcsClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEcsClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1580,6 +1580,7 @@ func (p *DescribeEcsClustersRequest) Paginate(opts ...aws.Option) DescribeEcsClu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

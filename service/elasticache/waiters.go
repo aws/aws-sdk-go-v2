@@ -3,6 +3,7 @@
 package elasticache
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeCacheClusters to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ElastiCache) WaitUntilCacheClusterAvailable(input *DescribeCacheClustersInput) error {
-	return c.WaitUntilCacheClusterAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilCacheClusterAvailableWithContext is an extended version of WaitUntilCacheClusterAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilCacheClusterAvailableWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
+func (c *ElastiCache) WaitUntilCacheClusterAvailable(ctx context.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCacheClusterAvailable",
 		MaxAttempts: 40,
@@ -71,26 +65,19 @@ func (c *ElastiCache) WaitUntilCacheClusterAvailableWithContext(ctx aws.Context,
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilCacheClusterDeleted uses the Amazon ElastiCache API operation
 // DescribeCacheClusters to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ElastiCache) WaitUntilCacheClusterDeleted(input *DescribeCacheClustersInput) error {
-	return c.WaitUntilCacheClusterDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilCacheClusterDeletedWithContext is an extended version of WaitUntilCacheClusterDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilCacheClusterDeletedWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
+func (c *ElastiCache) WaitUntilCacheClusterDeleted(ctx context.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCacheClusterDeleted",
 		MaxAttempts: 40,
@@ -152,26 +139,19 @@ func (c *ElastiCache) WaitUntilCacheClusterDeletedWithContext(ctx aws.Context, i
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationGroupAvailable uses the Amazon ElastiCache API operation
 // DescribeReplicationGroups to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ElastiCache) WaitUntilReplicationGroupAvailable(input *DescribeReplicationGroupsInput) error {
-	return c.WaitUntilReplicationGroupAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationGroupAvailableWithContext is an extended version of WaitUntilReplicationGroupAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilReplicationGroupAvailableWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
+func (c *ElastiCache) WaitUntilReplicationGroupAvailable(ctx context.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationGroupAvailable",
 		MaxAttempts: 40,
@@ -203,26 +183,19 @@ func (c *ElastiCache) WaitUntilReplicationGroupAvailableWithContext(ctx aws.Cont
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationGroupDeleted uses the Amazon ElastiCache API operation
 // DescribeReplicationGroups to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ElastiCache) WaitUntilReplicationGroupDeleted(input *DescribeReplicationGroupsInput) error {
-	return c.WaitUntilReplicationGroupDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationGroupDeletedWithContext is an extended version of WaitUntilReplicationGroupDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilReplicationGroupDeletedWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
+func (c *ElastiCache) WaitUntilReplicationGroupDeleted(ctx context.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationGroupDeleted",
 		MaxAttempts: 40,
@@ -259,5 +232,5 @@ func (c *ElastiCache) WaitUntilReplicationGroupDeletedWithContext(ctx aws.Contex
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

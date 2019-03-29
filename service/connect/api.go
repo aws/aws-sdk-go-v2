@@ -404,7 +404,7 @@ func (c *Connect) GetCurrentMetricDataRequest(input *GetCurrentMetricDataInput) 
 func (p *GetCurrentMetricDataRequest) Paginate(opts ...aws.Option) GetCurrentMetricDataPager {
 	return GetCurrentMetricDataPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCurrentMetricDataInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -413,6 +413,7 @@ func (p *GetCurrentMetricDataRequest) Paginate(opts ...aws.Option) GetCurrentMet
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -562,7 +563,7 @@ func (c *Connect) GetMetricDataRequest(input *GetMetricDataInput) GetMetricDataR
 func (p *GetMetricDataRequest) Paginate(opts ...aws.Option) GetMetricDataPager {
 	return GetMetricDataPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetMetricDataInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -571,6 +572,7 @@ func (p *GetMetricDataRequest) Paginate(opts ...aws.Option) GetMetricDataPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -1,6 +1,8 @@
 package s3manager
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -29,7 +31,7 @@ import (
 //    }
 //    fmt.Printf("Bucket %s is in %s region\n", bucket, region)
 //
-func GetBucketRegion(ctx aws.Context, cfg aws.Config, bucket, regionHint string, opts ...aws.Option) (string, error) {
+func GetBucketRegion(ctx context.Context, cfg aws.Config, bucket, regionHint string, opts ...aws.Option) (string, error) {
 	cfg = cfg.Copy()
 	cfg.Region = regionHint
 
@@ -46,7 +48,7 @@ const bucketRegionHeader = "X-Amz-Bucket-Region"
 // derived from the region the S3 service client was created in.
 //
 // See GetBucketRegion for more information.
-func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string, opts ...aws.Option) (string, error) {
+func GetBucketRegionWithClient(ctx context.Context, svc s3iface.S3API, bucket string, opts ...aws.Option) (string, error) {
 	req := svc.HeadBucketRequest(&s3.HeadBucketInput{
 		Bucket: aws.String(bucket),
 	})

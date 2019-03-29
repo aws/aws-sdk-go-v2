@@ -1,6 +1,7 @@
 package s3manager
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -36,7 +37,7 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 		cfg := unit.Config()
 		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
-		ctx := aws.BackgroundContext()
+		ctx := context.Background()
 		region, err := GetBucketRegion(ctx, cfg, "bucket", "region")
 		if err != nil {
 			t.Fatalf("%d, expect no error, got %v", i, err)
@@ -53,7 +54,7 @@ func TestGetBucketRegion_NotExists(t *testing.T) {
 	cfg := unit.Config()
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
-	ctx := aws.BackgroundContext()
+	ctx := context.Background()
 	region, err := GetBucketRegion(ctx, cfg, "bucket", "region")
 	if err == nil {
 		t.Fatalf("expect error, but did not get one")
@@ -78,7 +79,7 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 		svc := s3.New(cfg)
 		svc.ForcePathStyle = true
 
-		ctx := aws.BackgroundContext()
+		ctx := context.Background()
 
 		region, err := GetBucketRegionWithClient(ctx, svc, "bucket")
 		if err != nil {

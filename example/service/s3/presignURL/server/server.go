@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -53,7 +54,7 @@ func main() {
 	// to look in those partitions instead of AWS.
 	if len(region) == 0 {
 		var err error
-		region, err = s3manager.GetBucketRegion(aws.BackgroundContext(), cfg, bucket, endpoints.UsWest2RegionID)
+		region, err = s3manager.GetBucketRegion(context.Background(), cfg, bucket, endpoints.UsWest2RegionID)
 		if err != nil {
 			exitErrorf("failed to get bucket region, %v", err)
 		}

@@ -1613,7 +1613,7 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListClou
 func (p *ListCloudFrontOriginAccessIdentitiesRequest) Paginate(opts ...aws.Option) ListCloudFrontOriginAccessIdentitiesPager {
 	return ListCloudFrontOriginAccessIdentitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCloudFrontOriginAccessIdentitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1622,6 +1622,7 @@ func (p *ListCloudFrontOriginAccessIdentitiesRequest) Paginate(opts ...aws.Optio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1716,7 +1717,7 @@ func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) Lis
 func (p *ListDistributionsRequest) Paginate(opts ...aws.Option) ListDistributionsPager {
 	return ListDistributionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDistributionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1725,6 +1726,7 @@ func (p *ListDistributionsRequest) Paginate(opts ...aws.Option) ListDistribution
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1974,7 +1976,7 @@ func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) Lis
 func (p *ListInvalidationsRequest) Paginate(opts ...aws.Option) ListInvalidationsPager {
 	return ListInvalidationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInvalidationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1983,6 +1985,7 @@ func (p *ListInvalidationsRequest) Paginate(opts ...aws.Option) ListInvalidation
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2128,7 +2131,7 @@ func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistr
 func (p *ListStreamingDistributionsRequest) Paginate(opts ...aws.Option) ListStreamingDistributionsPager {
 	return ListStreamingDistributionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStreamingDistributionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2137,6 +2140,7 @@ func (p *ListStreamingDistributionsRequest) Paginate(opts ...aws.Option) ListStr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

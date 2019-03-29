@@ -1861,7 +1861,7 @@ func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterP
 func (p *DescribeClusterParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterParameterGroupsPager {
 	return DescribeClusterParameterGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterParameterGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1870,6 +1870,7 @@ func (p *DescribeClusterParameterGroupsRequest) Paginate(opts ...aws.Option) Des
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1975,7 +1976,7 @@ func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParame
 func (p *DescribeClusterParametersRequest) Paginate(opts ...aws.Option) DescribeClusterParametersPager {
 	return DescribeClusterParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1984,6 +1985,7 @@ func (p *DescribeClusterParametersRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2094,7 +2096,7 @@ func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSe
 func (p *DescribeClusterSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterSecurityGroupsPager {
 	return DescribeClusterSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2103,6 +2105,7 @@ func (p *DescribeClusterSecurityGroupsRequest) Paginate(opts ...aws.Option) Desc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2211,7 +2214,7 @@ func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapsho
 func (p *DescribeClusterSnapshotsRequest) Paginate(opts ...aws.Option) DescribeClusterSnapshotsPager {
 	return DescribeClusterSnapshotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterSnapshotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2220,6 +2223,7 @@ func (p *DescribeClusterSnapshotsRequest) Paginate(opts ...aws.Option) DescribeC
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2326,7 +2330,7 @@ func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubn
 func (p *DescribeClusterSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterSubnetGroupsPager {
 	return DescribeClusterSubnetGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterSubnetGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2335,6 +2339,7 @@ func (p *DescribeClusterSubnetGroupsRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2484,7 +2489,7 @@ func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersions
 func (p *DescribeClusterVersionsRequest) Paginate(opts ...aws.Option) DescribeClusterVersionsPager {
 	return DescribeClusterVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2493,6 +2498,7 @@ func (p *DescribeClusterVersionsRequest) Paginate(opts ...aws.Option) DescribeCl
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2600,7 +2606,7 @@ func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) Describ
 func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersPager {
 	return DescribeClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2609,6 +2615,7 @@ func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2707,7 +2714,7 @@ func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaul
 func (p *DescribeDefaultClusterParametersRequest) Paginate(opts ...aws.Option) DescribeDefaultClusterParametersPager {
 	return DescribeDefaultClusterParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDefaultClusterParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2716,6 +2723,7 @@ func (p *DescribeDefaultClusterParametersRequest) Paginate(opts ...aws.Option) D
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2875,7 +2883,7 @@ func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscri
 func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
 	return DescribeEventSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2884,6 +2892,7 @@ func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2981,7 +2990,7 @@ func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) DescribeEve
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2990,6 +2999,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3096,7 +3106,7 @@ func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClient
 func (p *DescribeHsmClientCertificatesRequest) Paginate(opts ...aws.Option) DescribeHsmClientCertificatesPager {
 	return DescribeHsmClientCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeHsmClientCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3105,6 +3115,7 @@ func (p *DescribeHsmClientCertificatesRequest) Paginate(opts ...aws.Option) Desc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3211,7 +3222,7 @@ func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurat
 func (p *DescribeHsmConfigurationsRequest) Paginate(opts ...aws.Option) DescribeHsmConfigurationsPager {
 	return DescribeHsmConfigurationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeHsmConfigurationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3220,6 +3231,7 @@ func (p *DescribeHsmConfigurationsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3374,7 +3386,7 @@ func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderab
 func (p *DescribeOrderableClusterOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableClusterOptionsPager {
 	return DescribeOrderableClusterOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOrderableClusterOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3383,6 +3395,7 @@ func (p *DescribeOrderableClusterOptionsRequest) Paginate(opts ...aws.Option) De
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3486,7 +3499,7 @@ func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedN
 func (p *DescribeReservedNodeOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedNodeOfferingsPager {
 	return DescribeReservedNodeOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedNodeOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3495,6 +3508,7 @@ func (p *DescribeReservedNodeOfferingsRequest) Paginate(opts ...aws.Option) Desc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3589,7 +3603,7 @@ func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInpu
 func (p *DescribeReservedNodesRequest) Paginate(opts ...aws.Option) DescribeReservedNodesPager {
 	return DescribeReservedNodesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedNodesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3598,6 +3612,7 @@ func (p *DescribeReservedNodesRequest) Paginate(opts ...aws.Option) DescribeRese
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

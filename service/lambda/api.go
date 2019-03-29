@@ -1285,7 +1285,7 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 func (p *ListEventSourceMappingsRequest) Paginate(opts ...aws.Option) ListEventSourceMappingsPager {
 	return ListEventSourceMappingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEventSourceMappingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1294,6 +1294,7 @@ func (p *ListEventSourceMappingsRequest) Paginate(opts ...aws.Option) ListEventS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1396,7 +1397,7 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 func (p *ListFunctionsRequest) Paginate(opts ...aws.Option) ListFunctionsPager {
 	return ListFunctionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFunctionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1405,6 +1406,7 @@ func (p *ListFunctionsRequest) Paginate(opts ...aws.Option) ListFunctionsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

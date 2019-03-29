@@ -2679,7 +2679,7 @@ func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) Describe
 func (p *DescribeDBClustersRequest) Paginate(opts ...aws.Option) DescribeDBClustersPager {
 	return DescribeDBClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2688,6 +2688,7 @@ func (p *DescribeDBClustersRequest) Paginate(opts ...aws.Option) DescribeDBClust
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2782,7 +2783,7 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 func (p *DescribeDBEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeDBEngineVersionsPager {
 	return DescribeDBEngineVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBEngineVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2791,6 +2792,7 @@ func (p *DescribeDBEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2891,7 +2893,7 @@ func (c *RDS) DescribeDBInstanceAutomatedBackupsRequest(input *DescribeDBInstanc
 func (p *DescribeDBInstanceAutomatedBackupsRequest) Paginate(opts ...aws.Option) DescribeDBInstanceAutomatedBackupsPager {
 	return DescribeDBInstanceAutomatedBackupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBInstanceAutomatedBackupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2900,6 +2902,7 @@ func (p *DescribeDBInstanceAutomatedBackupsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2994,7 +2997,7 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Descri
 func (p *DescribeDBInstancesRequest) Paginate(opts ...aws.Option) DescribeDBInstancesPager {
 	return DescribeDBInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3003,6 +3006,7 @@ func (p *DescribeDBInstancesRequest) Paginate(opts ...aws.Option) DescribeDBInst
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3097,7 +3101,7 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) Describe
 func (p *DescribeDBLogFilesRequest) Paginate(opts ...aws.Option) DescribeDBLogFilesPager {
 	return DescribeDBLogFilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBLogFilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3106,6 +3110,7 @@ func (p *DescribeDBLogFilesRequest) Paginate(opts ...aws.Option) DescribeDBLogFi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3202,7 +3207,7 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 func (p *DescribeDBParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeDBParameterGroupsPager {
 	return DescribeDBParameterGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBParameterGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3211,6 +3216,7 @@ func (p *DescribeDBParameterGroupsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3305,7 +3311,7 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) Desc
 func (p *DescribeDBParametersRequest) Paginate(opts ...aws.Option) DescribeDBParametersPager {
 	return DescribeDBParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3314,6 +3320,7 @@ func (p *DescribeDBParametersRequest) Paginate(opts ...aws.Option) DescribeDBPar
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3410,7 +3417,7 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 func (p *DescribeDBSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSecurityGroupsPager {
 	return DescribeDBSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3419,6 +3426,7 @@ func (p *DescribeDBSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3575,7 +3583,7 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) Descri
 func (p *DescribeDBSnapshotsRequest) Paginate(opts ...aws.Option) DescribeDBSnapshotsPager {
 	return DescribeDBSnapshotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBSnapshotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3584,6 +3592,7 @@ func (p *DescribeDBSnapshotsRequest) Paginate(opts ...aws.Option) DescribeDBSnap
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3681,7 +3690,7 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 func (p *DescribeDBSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSubnetGroupsPager {
 	return DescribeDBSubnetGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBSubnetGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3690,6 +3699,7 @@ func (p *DescribeDBSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeDBS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3840,7 +3850,7 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) DescribeEngineDefaultParametersPager {
 	return DescribeEngineDefaultParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEngineDefaultParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3849,6 +3859,7 @@ func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) De
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4001,7 +4012,7 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
 	return DescribeEventSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4010,6 +4021,7 @@ func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4108,7 +4120,7 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4117,6 +4129,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4215,7 +4228,7 @@ func (c *RDS) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInput) 
 func (p *DescribeGlobalClustersRequest) Paginate(opts ...aws.Option) DescribeGlobalClustersPager {
 	return DescribeGlobalClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeGlobalClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4224,6 +4237,7 @@ func (p *DescribeGlobalClustersRequest) Paginate(opts ...aws.Option) DescribeGlo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4318,7 +4332,7 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 func (p *DescribeOptionGroupOptionsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupOptionsPager {
 	return DescribeOptionGroupOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOptionGroupOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4327,6 +4341,7 @@ func (p *DescribeOptionGroupOptionsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4421,7 +4436,7 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) Desc
 func (p *DescribeOptionGroupsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupsPager {
 	return DescribeOptionGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOptionGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4430,6 +4445,7 @@ func (p *DescribeOptionGroupsRequest) Paginate(opts ...aws.Option) DescribeOptio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4524,7 +4540,7 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 func (p *DescribeOrderableDBInstanceOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableDBInstanceOptionsPager {
 	return DescribeOrderableDBInstanceOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOrderableDBInstanceOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4533,6 +4549,7 @@ func (p *DescribeOrderableDBInstanceOptionsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4680,7 +4697,7 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 func (p *DescribeReservedDBInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesPager {
 	return DescribeReservedDBInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedDBInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4689,6 +4706,7 @@ func (p *DescribeReservedDBInstancesRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4783,7 +4801,7 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 func (p *DescribeReservedDBInstancesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesOfferingsPager {
 	return DescribeReservedDBInstancesOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedDBInstancesOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4792,6 +4810,7 @@ func (p *DescribeReservedDBInstancesOfferingsRequest) Paginate(opts ...aws.Optio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4992,7 +5011,7 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 func (p *DownloadDBLogFilePortionRequest) Paginate(opts ...aws.Option) DownloadDBLogFilePortionPager {
 	return DownloadDBLogFilePortionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DownloadDBLogFilePortionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5001,6 +5020,7 @@ func (p *DownloadDBLogFilePortionRequest) Paginate(opts ...aws.Option) DownloadD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

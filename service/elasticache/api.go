@@ -1093,7 +1093,7 @@ func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersI
 func (p *DescribeCacheClustersRequest) Paginate(opts ...aws.Option) DescribeCacheClustersPager {
 	return DescribeCacheClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCacheClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1102,6 +1102,7 @@ func (p *DescribeCacheClustersRequest) Paginate(opts ...aws.Option) DescribeCach
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1196,7 +1197,7 @@ func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEng
 func (p *DescribeCacheEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeCacheEngineVersionsPager {
 	return DescribeCacheEngineVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCacheEngineVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1205,6 +1206,7 @@ func (p *DescribeCacheEngineVersionsRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1301,7 +1303,7 @@ func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCachePa
 func (p *DescribeCacheParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeCacheParameterGroupsPager {
 	return DescribeCacheParameterGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCacheParameterGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1310,6 +1312,7 @@ func (p *DescribeCacheParameterGroupsRequest) Paginate(opts ...aws.Option) Descr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1404,7 +1407,7 @@ func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParamet
 func (p *DescribeCacheParametersRequest) Paginate(opts ...aws.Option) DescribeCacheParametersPager {
 	return DescribeCacheParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCacheParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1413,6 +1416,7 @@ func (p *DescribeCacheParametersRequest) Paginate(opts ...aws.Option) DescribeCa
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1508,7 +1512,7 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSec
 func (p *DescribeCacheSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeCacheSecurityGroupsPager {
 	return DescribeCacheSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCacheSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1517,6 +1521,7 @@ func (p *DescribeCacheSecurityGroupsRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1612,7 +1617,7 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubne
 func (p *DescribeCacheSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeCacheSubnetGroupsPager {
 	return DescribeCacheSubnetGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeCacheSubnetGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1621,6 +1626,7 @@ func (p *DescribeCacheSubnetGroupsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1716,7 +1722,7 @@ func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngi
 func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) DescribeEngineDefaultParametersPager {
 	return DescribeEngineDefaultParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEngineDefaultParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1725,6 +1731,7 @@ func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) De
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1824,7 +1831,7 @@ func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) Describe
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1833,6 +1840,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1931,7 +1939,7 @@ func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicatio
 func (p *DescribeReplicationGroupsRequest) Paginate(opts ...aws.Option) DescribeReplicationGroupsPager {
 	return DescribeReplicationGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReplicationGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1940,6 +1948,7 @@ func (p *DescribeReplicationGroupsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2035,7 +2044,7 @@ func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedC
 func (p *DescribeReservedCacheNodesRequest) Paginate(opts ...aws.Option) DescribeReservedCacheNodesPager {
 	return DescribeReservedCacheNodesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedCacheNodesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2044,6 +2053,7 @@ func (p *DescribeReservedCacheNodesRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2138,7 +2148,7 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *Describe
 func (p *DescribeReservedCacheNodesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedCacheNodesOfferingsPager {
 	return DescribeReservedCacheNodesOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedCacheNodesOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2147,6 +2157,7 @@ func (p *DescribeReservedCacheNodesOfferingsRequest) Paginate(opts ...aws.Option
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2246,7 +2257,7 @@ func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) De
 func (p *DescribeSnapshotsRequest) Paginate(opts ...aws.Option) DescribeSnapshotsPager {
 	return DescribeSnapshotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSnapshotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2255,6 +2266,7 @@ func (p *DescribeSnapshotsRequest) Paginate(opts ...aws.Option) DescribeSnapshot
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

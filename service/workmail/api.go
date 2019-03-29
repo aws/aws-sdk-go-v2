@@ -1013,7 +1013,7 @@ func (c *WorkMail) ListAliasesRequest(input *ListAliasesInput) ListAliasesReques
 func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 	return ListAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1022,6 +1022,7 @@ func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1116,7 +1117,7 @@ func (c *WorkMail) ListGroupMembersRequest(input *ListGroupMembersInput) ListGro
 func (p *ListGroupMembersRequest) Paginate(opts ...aws.Option) ListGroupMembersPager {
 	return ListGroupMembersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupMembersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1125,6 +1126,7 @@ func (p *ListGroupMembersRequest) Paginate(opts ...aws.Option) ListGroupMembersP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1219,7 +1221,7 @@ func (c *WorkMail) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1228,6 +1230,7 @@ func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1322,7 +1325,7 @@ func (c *WorkMail) ListMailboxPermissionsRequest(input *ListMailboxPermissionsIn
 func (p *ListMailboxPermissionsRequest) Paginate(opts ...aws.Option) ListMailboxPermissionsPager {
 	return ListMailboxPermissionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMailboxPermissionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1331,6 +1334,7 @@ func (p *ListMailboxPermissionsRequest) Paginate(opts ...aws.Option) ListMailbox
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1425,7 +1429,7 @@ func (c *WorkMail) ListOrganizationsRequest(input *ListOrganizationsInput) ListO
 func (p *ListOrganizationsRequest) Paginate(opts ...aws.Option) ListOrganizationsPager {
 	return ListOrganizationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOrganizationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1434,6 +1438,7 @@ func (p *ListOrganizationsRequest) Paginate(opts ...aws.Option) ListOrganization
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1580,7 +1585,7 @@ func (c *WorkMail) ListResourcesRequest(input *ListResourcesInput) ListResources
 func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 	return ListResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1589,6 +1594,7 @@ func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1683,7 +1689,7 @@ func (c *WorkMail) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 	return ListUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1692,6 +1698,7 @@ func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

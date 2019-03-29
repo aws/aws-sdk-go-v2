@@ -1228,7 +1228,7 @@ func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomai
 func (p *DescribeDomainControllersRequest) Paginate(opts ...aws.Option) DescribeDomainControllersPager {
 	return DescribeDomainControllersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDomainControllersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1237,6 +1237,7 @@ func (p *DescribeDomainControllersRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

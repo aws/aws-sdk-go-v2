@@ -3,6 +3,7 @@
 package autoscaling
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeAutoScalingGroups to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *AutoScaling) WaitUntilGroupExists(input *DescribeAutoScalingGroupsInput) error {
-	return c.WaitUntilGroupExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilGroupExistsWithContext is an extended version of WaitUntilGroupExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AutoScaling) WaitUntilGroupExistsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+func (c *AutoScaling) WaitUntilGroupExists(ctx context.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilGroupExists",
 		MaxAttempts: 10,
@@ -56,26 +50,19 @@ func (c *AutoScaling) WaitUntilGroupExistsWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilGroupInService uses the Auto Scaling API operation
 // DescribeAutoScalingGroups to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *AutoScaling) WaitUntilGroupInService(input *DescribeAutoScalingGroupsInput) error {
-	return c.WaitUntilGroupInServiceWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilGroupInServiceWithContext is an extended version of WaitUntilGroupInService.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AutoScaling) WaitUntilGroupInServiceWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+func (c *AutoScaling) WaitUntilGroupInService(ctx context.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilGroupInService",
 		MaxAttempts: 40,
@@ -107,26 +94,19 @@ func (c *AutoScaling) WaitUntilGroupInServiceWithContext(ctx aws.Context, input 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilGroupNotExists uses the Auto Scaling API operation
 // DescribeAutoScalingGroups to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *AutoScaling) WaitUntilGroupNotExists(input *DescribeAutoScalingGroupsInput) error {
-	return c.WaitUntilGroupNotExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilGroupNotExistsWithContext is an extended version of WaitUntilGroupNotExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AutoScaling) WaitUntilGroupNotExistsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+func (c *AutoScaling) WaitUntilGroupNotExists(ctx context.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilGroupNotExists",
 		MaxAttempts: 40,
@@ -158,5 +138,5 @@ func (c *AutoScaling) WaitUntilGroupNotExistsWithContext(ctx aws.Context, input 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

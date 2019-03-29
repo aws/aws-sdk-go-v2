@@ -95,7 +95,7 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeAffectedEntitiesPager {
 	return DescribeAffectedEntitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAffectedEntitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -104,6 +104,7 @@ func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeA
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -253,7 +254,7 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEventAggregatesPager {
 	return DescribeEventAggregatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventAggregatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -262,6 +263,7 @@ func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEv
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -415,7 +417,7 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTypesPager {
 	return DescribeEventTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -424,6 +426,7 @@ func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTy
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -525,7 +528,7 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -534,6 +537,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

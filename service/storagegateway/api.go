@@ -2050,7 +2050,7 @@ func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchives
 func (p *DescribeTapeArchivesRequest) Paginate(opts ...aws.Option) DescribeTapeArchivesPager {
 	return DescribeTapeArchivesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTapeArchivesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2059,6 +2059,7 @@ func (p *DescribeTapeArchivesRequest) Paginate(opts ...aws.Option) DescribeTapeA
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2159,7 +2160,7 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRe
 func (p *DescribeTapeRecoveryPointsRequest) Paginate(opts ...aws.Option) DescribeTapeRecoveryPointsPager {
 	return DescribeTapeRecoveryPointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTapeRecoveryPointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2168,6 +2169,7 @@ func (p *DescribeTapeRecoveryPointsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2265,7 +2267,7 @@ func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) Describ
 func (p *DescribeTapesRequest) Paginate(opts ...aws.Option) DescribeTapesPager {
 	return DescribeTapesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTapesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2274,6 +2276,7 @@ func (p *DescribeTapesRequest) Paginate(opts ...aws.Option) DescribeTapesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2426,7 +2429,7 @@ func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInpu
 func (p *DescribeVTLDevicesRequest) Paginate(opts ...aws.Option) DescribeVTLDevicesPager {
 	return DescribeVTLDevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeVTLDevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2435,6 +2438,7 @@ func (p *DescribeVTLDevicesRequest) Paginate(opts ...aws.Option) DescribeVTLDevi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2761,7 +2765,7 @@ func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) ListGatew
 func (p *ListGatewaysRequest) Paginate(opts ...aws.Option) ListGatewaysPager {
 	return ListGatewaysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGatewaysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2770,6 +2774,7 @@ func (p *ListGatewaysRequest) Paginate(opts ...aws.Option) ListGatewaysPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3159,7 +3164,7 @@ func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) ListVolumes
 func (p *ListVolumesRequest) Paginate(opts ...aws.Option) ListVolumesPager {
 	return ListVolumesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVolumesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3168,6 +3173,7 @@ func (p *ListVolumesRequest) Paginate(opts ...aws.Option) ListVolumesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

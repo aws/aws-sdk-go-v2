@@ -1740,7 +1740,7 @@ func (c *Organizations) ListAWSServiceAccessForOrganizationRequest(input *ListAW
 func (p *ListAWSServiceAccessForOrganizationRequest) Paginate(opts ...aws.Option) ListAWSServiceAccessForOrganizationPager {
 	return ListAWSServiceAccessForOrganizationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAWSServiceAccessForOrganizationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1749,6 +1749,7 @@ func (p *ListAWSServiceAccessForOrganizationRequest) Paginate(opts ...aws.Option
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1852,7 +1853,7 @@ func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) ListAccoun
 func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 	return ListAccountsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1861,6 +1862,7 @@ func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1967,7 +1969,7 @@ func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParen
 func (p *ListAccountsForParentRequest) Paginate(opts ...aws.Option) ListAccountsForParentPager {
 	return ListAccountsForParentPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountsForParentInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1976,6 +1978,7 @@ func (p *ListAccountsForParentRequest) Paginate(opts ...aws.Option) ListAccounts
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2079,7 +2082,7 @@ func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) ListChildr
 func (p *ListChildrenRequest) Paginate(opts ...aws.Option) ListChildrenPager {
 	return ListChildrenPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChildrenInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2088,6 +2091,7 @@ func (p *ListChildrenRequest) Paginate(opts ...aws.Option) ListChildrenPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2190,7 +2194,7 @@ func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountS
 func (p *ListCreateAccountStatusRequest) Paginate(opts ...aws.Option) ListCreateAccountStatusPager {
 	return ListCreateAccountStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCreateAccountStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2199,6 +2203,7 @@ func (p *ListCreateAccountStatusRequest) Paginate(opts ...aws.Option) ListCreate
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2305,7 +2310,7 @@ func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesFor
 func (p *ListHandshakesForAccountRequest) Paginate(opts ...aws.Option) ListHandshakesForAccountPager {
 	return ListHandshakesForAccountPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHandshakesForAccountInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2314,6 +2319,7 @@ func (p *ListHandshakesForAccountRequest) Paginate(opts ...aws.Option) ListHands
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2422,7 +2428,7 @@ func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshak
 func (p *ListHandshakesForOrganizationRequest) Paginate(opts ...aws.Option) ListHandshakesForOrganizationPager {
 	return ListHandshakesForOrganizationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHandshakesForOrganizationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2431,6 +2437,7 @@ func (p *ListHandshakesForOrganizationRequest) Paginate(opts ...aws.Option) List
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2532,7 +2539,7 @@ func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrgan
 func (p *ListOrganizationalUnitsForParentRequest) Paginate(opts ...aws.Option) ListOrganizationalUnitsForParentPager {
 	return ListOrganizationalUnitsForParentPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOrganizationalUnitsForParentInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2541,6 +2548,7 @@ func (p *ListOrganizationalUnitsForParentRequest) Paginate(opts ...aws.Option) L
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2646,7 +2654,7 @@ func (c *Organizations) ListParentsRequest(input *ListParentsInput) ListParentsR
 func (p *ListParentsRequest) Paginate(opts ...aws.Option) ListParentsPager {
 	return ListParentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListParentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2655,6 +2663,7 @@ func (p *ListParentsRequest) Paginate(opts ...aws.Option) ListParentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2756,7 +2765,7 @@ func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) ListPolici
 func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 	return ListPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2765,6 +2774,7 @@ func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2868,7 +2878,7 @@ func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTarge
 func (p *ListPoliciesForTargetRequest) Paginate(opts ...aws.Option) ListPoliciesForTargetPager {
 	return ListPoliciesForTargetPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPoliciesForTargetInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2877,6 +2887,7 @@ func (p *ListPoliciesForTargetRequest) Paginate(opts ...aws.Option) ListPolicies
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2984,7 +2995,7 @@ func (c *Organizations) ListRootsRequest(input *ListRootsInput) ListRootsRequest
 func (p *ListRootsRequest) Paginate(opts ...aws.Option) ListRootsPager {
 	return ListRootsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRootsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2993,6 +3004,7 @@ func (p *ListRootsRequest) Paginate(opts ...aws.Option) ListRootsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3095,7 +3107,7 @@ func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyI
 func (p *ListTargetsForPolicyRequest) Paginate(opts ...aws.Option) ListTargetsForPolicyPager {
 	return ListTargetsForPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTargetsForPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3104,6 +3116,7 @@ func (p *ListTargetsForPolicyRequest) Paginate(opts ...aws.Option) ListTargetsFo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

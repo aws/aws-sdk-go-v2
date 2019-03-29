@@ -1453,7 +1453,7 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListApplicationRevisionsPager {
 	return ListApplicationRevisionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationRevisionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1462,6 +1462,7 @@ func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListAppli
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1556,7 +1557,7 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) ListA
 func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
 	return ListApplicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1565,6 +1566,7 @@ func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1659,7 +1661,7 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeploymentConfigsPager {
 	return ListDeploymentConfigsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentConfigsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1668,6 +1670,7 @@ func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeployme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1763,7 +1766,7 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymentGroupsPager {
 	return ListDeploymentGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1772,6 +1775,7 @@ func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymen
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1874,7 +1878,7 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploymentInstancesPager {
 	return ListDeploymentInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1883,6 +1887,7 @@ func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploy
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2029,7 +2034,7 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPager {
 	return ListDeploymentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2038,6 +2043,7 @@ func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

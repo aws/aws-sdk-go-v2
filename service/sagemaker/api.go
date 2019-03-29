@@ -2685,7 +2685,7 @@ func (c *SageMaker) ListCompilationJobsRequest(input *ListCompilationJobsInput) 
 func (p *ListCompilationJobsRequest) Paginate(opts ...aws.Option) ListCompilationJobsPager {
 	return ListCompilationJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCompilationJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2694,6 +2694,7 @@ func (p *ListCompilationJobsRequest) Paginate(opts ...aws.Option) ListCompilatio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2788,7 +2789,7 @@ func (c *SageMaker) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) 
 func (p *ListEndpointConfigsRequest) Paginate(opts ...aws.Option) ListEndpointConfigsPager {
 	return ListEndpointConfigsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEndpointConfigsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2797,6 +2798,7 @@ func (p *ListEndpointConfigsRequest) Paginate(opts ...aws.Option) ListEndpointCo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2891,7 +2893,7 @@ func (c *SageMaker) ListEndpointsRequest(input *ListEndpointsInput) ListEndpoint
 func (p *ListEndpointsRequest) Paginate(opts ...aws.Option) ListEndpointsPager {
 	return ListEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2900,6 +2902,7 @@ func (p *ListEndpointsRequest) Paginate(opts ...aws.Option) ListEndpointsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2995,7 +2998,7 @@ func (c *SageMaker) ListHyperParameterTuningJobsRequest(input *ListHyperParamete
 func (p *ListHyperParameterTuningJobsRequest) Paginate(opts ...aws.Option) ListHyperParameterTuningJobsPager {
 	return ListHyperParameterTuningJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHyperParameterTuningJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3004,6 +3007,7 @@ func (p *ListHyperParameterTuningJobsRequest) Paginate(opts ...aws.Option) ListH
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3098,7 +3102,7 @@ func (c *SageMaker) ListLabelingJobsRequest(input *ListLabelingJobsInput) ListLa
 func (p *ListLabelingJobsRequest) Paginate(opts ...aws.Option) ListLabelingJobsPager {
 	return ListLabelingJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListLabelingJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3107,6 +3111,7 @@ func (p *ListLabelingJobsRequest) Paginate(opts ...aws.Option) ListLabelingJobsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3201,7 +3206,7 @@ func (c *SageMaker) ListLabelingJobsForWorkteamRequest(input *ListLabelingJobsFo
 func (p *ListLabelingJobsForWorkteamRequest) Paginate(opts ...aws.Option) ListLabelingJobsForWorkteamPager {
 	return ListLabelingJobsForWorkteamPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListLabelingJobsForWorkteamInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3210,6 +3215,7 @@ func (p *ListLabelingJobsForWorkteamRequest) Paginate(opts ...aws.Option) ListLa
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3356,7 +3362,7 @@ func (c *SageMaker) ListModelsRequest(input *ListModelsInput) ListModelsRequest 
 func (p *ListModelsRequest) Paginate(opts ...aws.Option) ListModelsPager {
 	return ListModelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListModelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3365,6 +3371,7 @@ func (p *ListModelsRequest) Paginate(opts ...aws.Option) ListModelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3460,7 +3467,7 @@ func (c *SageMaker) ListNotebookInstanceLifecycleConfigsRequest(input *ListNoteb
 func (p *ListNotebookInstanceLifecycleConfigsRequest) Paginate(opts ...aws.Option) ListNotebookInstanceLifecycleConfigsPager {
 	return ListNotebookInstanceLifecycleConfigsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListNotebookInstanceLifecycleConfigsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3469,6 +3476,7 @@ func (p *ListNotebookInstanceLifecycleConfigsRequest) Paginate(opts ...aws.Optio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3564,7 +3572,7 @@ func (c *SageMaker) ListNotebookInstancesRequest(input *ListNotebookInstancesInp
 func (p *ListNotebookInstancesRequest) Paginate(opts ...aws.Option) ListNotebookInstancesPager {
 	return ListNotebookInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListNotebookInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3573,6 +3581,7 @@ func (p *ListNotebookInstancesRequest) Paginate(opts ...aws.Option) ListNotebook
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3669,7 +3678,7 @@ func (c *SageMaker) ListSubscribedWorkteamsRequest(input *ListSubscribedWorkteam
 func (p *ListSubscribedWorkteamsRequest) Paginate(opts ...aws.Option) ListSubscribedWorkteamsPager {
 	return ListSubscribedWorkteamsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSubscribedWorkteamsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3678,6 +3687,7 @@ func (p *ListSubscribedWorkteamsRequest) Paginate(opts ...aws.Option) ListSubscr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3772,7 +3782,7 @@ func (c *SageMaker) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 	return ListTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3781,6 +3791,7 @@ func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3875,7 +3886,7 @@ func (c *SageMaker) ListTrainingJobsRequest(input *ListTrainingJobsInput) ListTr
 func (p *ListTrainingJobsRequest) Paginate(opts ...aws.Option) ListTrainingJobsPager {
 	return ListTrainingJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTrainingJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3884,6 +3895,7 @@ func (p *ListTrainingJobsRequest) Paginate(opts ...aws.Option) ListTrainingJobsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3979,7 +3991,7 @@ func (c *SageMaker) ListTrainingJobsForHyperParameterTuningJobRequest(input *Lis
 func (p *ListTrainingJobsForHyperParameterTuningJobRequest) Paginate(opts ...aws.Option) ListTrainingJobsForHyperParameterTuningJobPager {
 	return ListTrainingJobsForHyperParameterTuningJobPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTrainingJobsForHyperParameterTuningJobInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3988,6 +4000,7 @@ func (p *ListTrainingJobsForHyperParameterTuningJobRequest) Paginate(opts ...aws
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4082,7 +4095,7 @@ func (c *SageMaker) ListTransformJobsRequest(input *ListTransformJobsInput) List
 func (p *ListTransformJobsRequest) Paginate(opts ...aws.Option) ListTransformJobsPager {
 	return ListTransformJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTransformJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4091,6 +4104,7 @@ func (p *ListTransformJobsRequest) Paginate(opts ...aws.Option) ListTransformJob
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4187,7 +4201,7 @@ func (c *SageMaker) ListWorkteamsRequest(input *ListWorkteamsInput) ListWorkteam
 func (p *ListWorkteamsRequest) Paginate(opts ...aws.Option) ListWorkteamsPager {
 	return ListWorkteamsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListWorkteamsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4196,6 +4210,7 @@ func (p *ListWorkteamsRequest) Paginate(opts ...aws.Option) ListWorkteamsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4347,7 +4362,7 @@ func (c *SageMaker) SearchRequest(input *SearchInput) SearchRequest {
 func (p *SearchRequest) Paginate(opts ...aws.Option) SearchPager {
 	return SearchPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4356,6 +4371,7 @@ func (p *SearchRequest) Paginate(opts ...aws.Option) SearchPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

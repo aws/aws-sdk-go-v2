@@ -410,7 +410,7 @@ func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) Descr
 func (p *DescribeAddressesRequest) Paginate(opts ...aws.Option) DescribeAddressesPager {
 	return DescribeAddressesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAddressesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -419,6 +419,7 @@ func (p *DescribeAddressesRequest) Paginate(opts ...aws.Option) DescribeAddresse
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -968,7 +969,7 @@ func (c *Snowball) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -977,6 +978,7 @@ func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

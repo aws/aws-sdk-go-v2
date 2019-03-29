@@ -875,7 +875,7 @@ func (c *PinpointEmail) GetDedicatedIpsRequest(input *GetDedicatedIpsInput) GetD
 func (p *GetDedicatedIpsRequest) Paginate(opts ...aws.Option) GetDedicatedIpsPager {
 	return GetDedicatedIpsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDedicatedIpsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -884,6 +884,7 @@ func (p *GetDedicatedIpsRequest) Paginate(opts ...aws.Option) GetDedicatedIpsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1201,7 +1202,7 @@ func (c *PinpointEmail) ListConfigurationSetsRequest(input *ListConfigurationSet
 func (p *ListConfigurationSetsRequest) Paginate(opts ...aws.Option) ListConfigurationSetsPager {
 	return ListConfigurationSetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListConfigurationSetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1210,6 +1211,7 @@ func (p *ListConfigurationSetsRequest) Paginate(opts ...aws.Option) ListConfigur
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1305,7 +1307,7 @@ func (c *PinpointEmail) ListDedicatedIpPoolsRequest(input *ListDedicatedIpPoolsI
 func (p *ListDedicatedIpPoolsRequest) Paginate(opts ...aws.Option) ListDedicatedIpPoolsPager {
 	return ListDedicatedIpPoolsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDedicatedIpPoolsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1314,6 +1316,7 @@ func (p *ListDedicatedIpPoolsRequest) Paginate(opts ...aws.Option) ListDedicated
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1411,7 +1414,7 @@ func (c *PinpointEmail) ListDeliverabilityTestReportsRequest(input *ListDelivera
 func (p *ListDeliverabilityTestReportsRequest) Paginate(opts ...aws.Option) ListDeliverabilityTestReportsPager {
 	return ListDeliverabilityTestReportsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeliverabilityTestReportsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1420,6 +1423,7 @@ func (p *ListDeliverabilityTestReportsRequest) Paginate(opts ...aws.Option) List
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1517,7 +1521,7 @@ func (c *PinpointEmail) ListEmailIdentitiesRequest(input *ListEmailIdentitiesInp
 func (p *ListEmailIdentitiesRequest) Paginate(opts ...aws.Option) ListEmailIdentitiesPager {
 	return ListEmailIdentitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEmailIdentitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1526,6 +1530,7 @@ func (p *ListEmailIdentitiesRequest) Paginate(opts ...aws.Option) ListEmailIdent
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

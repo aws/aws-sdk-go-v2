@@ -472,7 +472,7 @@ func (c *FSx) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBackup
 func (p *DescribeBackupsRequest) Paginate(opts ...aws.Option) DescribeBackupsPager {
 	return DescribeBackupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeBackupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -481,6 +481,7 @@ func (p *DescribeBackupsRequest) Paginate(opts ...aws.Option) DescribeBackupsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -598,7 +599,7 @@ func (c *FSx) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Descri
 func (p *DescribeFileSystemsRequest) Paginate(opts ...aws.Option) DescribeFileSystemsPager {
 	return DescribeFileSystemsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeFileSystemsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -607,6 +608,7 @@ func (p *DescribeFileSystemsRequest) Paginate(opts ...aws.Option) DescribeFileSy
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

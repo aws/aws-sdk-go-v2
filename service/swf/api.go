@@ -946,7 +946,7 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 func (p *GetWorkflowExecutionHistoryRequest) Paginate(opts ...aws.Option) GetWorkflowExecutionHistoryPager {
 	return GetWorkflowExecutionHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetWorkflowExecutionHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -955,6 +955,7 @@ func (p *GetWorkflowExecutionHistoryRequest) Paginate(opts ...aws.Option) GetWor
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1070,7 +1071,7 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivi
 func (p *ListActivityTypesRequest) Paginate(opts ...aws.Option) ListActivityTypesPager {
 	return ListActivityTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListActivityTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1079,6 +1080,7 @@ func (p *ListActivityTypesRequest) Paginate(opts ...aws.Option) ListActivityType
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1203,7 +1205,7 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 func (p *ListClosedWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListClosedWorkflowExecutionsPager {
 	return ListClosedWorkflowExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListClosedWorkflowExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1212,6 +1214,7 @@ func (p *ListClosedWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListC
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1329,7 +1332,7 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDomainsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1338,6 +1341,7 @@ func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1462,7 +1466,7 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 func (p *ListOpenWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListOpenWorkflowExecutionsPager {
 	return ListOpenWorkflowExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOpenWorkflowExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1471,6 +1475,7 @@ func (p *ListOpenWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListOpe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1584,7 +1589,7 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkfl
 func (p *ListWorkflowTypesRequest) Paginate(opts ...aws.Option) ListWorkflowTypesPager {
 	return ListWorkflowTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListWorkflowTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1593,6 +1598,7 @@ func (p *ListWorkflowTypesRequest) Paginate(opts ...aws.Option) ListWorkflowType
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1806,7 +1812,7 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollFo
 func (p *PollForDecisionTaskRequest) Paginate(opts ...aws.Option) PollForDecisionTaskPager {
 	return PollForDecisionTaskPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *PollForDecisionTaskInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1815,6 +1821,7 @@ func (p *PollForDecisionTaskRequest) Paginate(opts ...aws.Option) PollForDecisio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

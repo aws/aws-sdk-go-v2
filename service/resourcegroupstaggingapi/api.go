@@ -92,7 +92,7 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput)
 func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
 	return GetResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -101,6 +101,7 @@ func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -195,7 +196,7 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) Get
 func (p *GetTagKeysRequest) Paginate(opts ...aws.Option) GetTagKeysPager {
 	return GetTagKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTagKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -204,6 +205,7 @@ func (p *GetTagKeysRequest) Paginate(opts ...aws.Option) GetTagKeysPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -299,7 +301,7 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput)
 func (p *GetTagValuesRequest) Paginate(opts ...aws.Option) GetTagValuesPager {
 	return GetTagValuesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTagValuesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -308,6 +310,7 @@ func (p *GetTagValuesRequest) Paginate(opts ...aws.Option) GetTagValuesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

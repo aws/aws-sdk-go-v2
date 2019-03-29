@@ -3,6 +3,7 @@
 package elastictranscoder
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // ReadJob to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ElasticTranscoder) WaitUntilJobComplete(input *ReadJobInput) error {
-	return c.WaitUntilJobCompleteWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilJobCompleteWithContext is an extended version of WaitUntilJobComplete.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticTranscoder) WaitUntilJobCompleteWithContext(ctx aws.Context, input *ReadJobInput, opts ...aws.WaiterOption) error {
+func (c *ElasticTranscoder) WaitUntilJobComplete(ctx context.Context, input *ReadJobInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilJobComplete",
 		MaxAttempts: 120,
@@ -61,5 +55,5 @@ func (c *ElasticTranscoder) WaitUntilJobCompleteWithContext(ctx aws.Context, inp
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

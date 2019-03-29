@@ -1824,7 +1824,7 @@ func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaAr
 func (p *ListAppliedSchemaArnsRequest) Paginate(opts ...aws.Option) ListAppliedSchemaArnsPager {
 	return ListAppliedSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAppliedSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1833,6 +1833,7 @@ func (p *ListAppliedSchemaArnsRequest) Paginate(opts ...aws.Option) ListAppliedS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1927,7 +1928,7 @@ func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesIn
 func (p *ListAttachedIndicesRequest) Paginate(opts ...aws.Option) ListAttachedIndicesPager {
 	return ListAttachedIndicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedIndicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1936,6 +1937,7 @@ func (p *ListAttachedIndicesRequest) Paginate(opts ...aws.Option) ListAttachedIn
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2030,7 +2032,7 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopment
 func (p *ListDevelopmentSchemaArnsRequest) Paginate(opts ...aws.Option) ListDevelopmentSchemaArnsPager {
 	return ListDevelopmentSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDevelopmentSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2039,6 +2041,7 @@ func (p *ListDevelopmentSchemaArnsRequest) Paginate(opts ...aws.Option) ListDeve
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2133,7 +2136,7 @@ func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) Lis
 func (p *ListDirectoriesRequest) Paginate(opts ...aws.Option) ListDirectoriesPager {
 	return ListDirectoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDirectoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2142,6 +2145,7 @@ func (p *ListDirectoriesRequest) Paginate(opts ...aws.Option) ListDirectoriesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2236,7 +2240,7 @@ func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesIn
 func (p *ListFacetAttributesRequest) Paginate(opts ...aws.Option) ListFacetAttributesPager {
 	return ListFacetAttributesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFacetAttributesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2245,6 +2249,7 @@ func (p *ListFacetAttributesRequest) Paginate(opts ...aws.Option) ListFacetAttri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2339,7 +2344,7 @@ func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) ListF
 func (p *ListFacetNamesRequest) Paginate(opts ...aws.Option) ListFacetNamesPager {
 	return ListFacetNamesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFacetNamesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2348,6 +2353,7 @@ func (p *ListFacetNamesRequest) Paginate(opts ...aws.Option) ListFacetNamesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2495,7 +2501,7 @@ func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) ListIndexReques
 func (p *ListIndexRequest) Paginate(opts ...aws.Option) ListIndexPager {
 	return ListIndexPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListIndexInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2504,6 +2510,7 @@ func (p *ListIndexRequest) Paginate(opts ...aws.Option) ListIndexPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2600,7 +2607,7 @@ func (c *CloudDirectory) ListManagedSchemaArnsRequest(input *ListManagedSchemaAr
 func (p *ListManagedSchemaArnsRequest) Paginate(opts ...aws.Option) ListManagedSchemaArnsPager {
 	return ListManagedSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListManagedSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2609,6 +2616,7 @@ func (p *ListManagedSchemaArnsRequest) Paginate(opts ...aws.Option) ListManagedS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2703,7 +2711,7 @@ func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributes
 func (p *ListObjectAttributesRequest) Paginate(opts ...aws.Option) ListObjectAttributesPager {
 	return ListObjectAttributesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectAttributesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2712,6 +2720,7 @@ func (p *ListObjectAttributesRequest) Paginate(opts ...aws.Option) ListObjectAtt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2807,7 +2816,7 @@ func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInpu
 func (p *ListObjectChildrenRequest) Paginate(opts ...aws.Option) ListObjectChildrenPager {
 	return ListObjectChildrenPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectChildrenInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2816,6 +2825,7 @@ func (p *ListObjectChildrenRequest) Paginate(opts ...aws.Option) ListObjectChild
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2920,7 +2930,7 @@ func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPat
 func (p *ListObjectParentPathsRequest) Paginate(opts ...aws.Option) ListObjectParentPathsPager {
 	return ListObjectParentPathsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectParentPathsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2929,6 +2939,7 @@ func (p *ListObjectParentPathsRequest) Paginate(opts ...aws.Option) ListObjectPa
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3024,7 +3035,7 @@ func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput)
 func (p *ListObjectParentsRequest) Paginate(opts ...aws.Option) ListObjectParentsPager {
 	return ListObjectParentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectParentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3033,6 +3044,7 @@ func (p *ListObjectParentsRequest) Paginate(opts ...aws.Option) ListObjectParent
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3127,7 +3139,7 @@ func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInpu
 func (p *ListObjectPoliciesRequest) Paginate(opts ...aws.Option) ListObjectPoliciesPager {
 	return ListObjectPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3136,6 +3148,7 @@ func (p *ListObjectPoliciesRequest) Paginate(opts ...aws.Option) ListObjectPolic
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3283,7 +3296,7 @@ func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmen
 func (p *ListPolicyAttachmentsRequest) Paginate(opts ...aws.Option) ListPolicyAttachmentsPager {
 	return ListPolicyAttachmentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPolicyAttachmentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3292,6 +3305,7 @@ func (p *ListPolicyAttachmentsRequest) Paginate(opts ...aws.Option) ListPolicyAt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3388,7 +3402,7 @@ func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSche
 func (p *ListPublishedSchemaArnsRequest) Paginate(opts ...aws.Option) ListPublishedSchemaArnsPager {
 	return ListPublishedSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPublishedSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3397,6 +3411,7 @@ func (p *ListPublishedSchemaArnsRequest) Paginate(opts ...aws.Option) ListPublis
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3493,7 +3508,7 @@ func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceIn
 func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForResourcePager {
 	return ListTagsForResourcePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsForResourceInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3502,6 +3517,7 @@ func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForRes
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3597,7 +3613,7 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLin
 func (p *ListTypedLinkFacetAttributesRequest) Paginate(opts ...aws.Option) ListTypedLinkFacetAttributesPager {
 	return ListTypedLinkFacetAttributesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTypedLinkFacetAttributesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3606,6 +3622,7 @@ func (p *ListTypedLinkFacetAttributesRequest) Paginate(opts ...aws.Option) ListT
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3701,7 +3718,7 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFace
 func (p *ListTypedLinkFacetNamesRequest) Paginate(opts ...aws.Option) ListTypedLinkFacetNamesPager {
 	return ListTypedLinkFacetNamesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTypedLinkFacetNamesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3710,6 +3727,7 @@ func (p *ListTypedLinkFacetNamesRequest) Paginate(opts ...aws.Option) ListTypedL
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3810,7 +3828,7 @@ func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) LookupPol
 func (p *LookupPolicyRequest) Paginate(opts ...aws.Option) LookupPolicyPager {
 	return LookupPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *LookupPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3819,6 +3837,7 @@ func (p *LookupPolicyRequest) Paginate(opts ...aws.Option) LookupPolicyPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

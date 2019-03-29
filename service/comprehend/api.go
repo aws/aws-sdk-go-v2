@@ -1351,7 +1351,7 @@ func (c *Comprehend) ListDominantLanguageDetectionJobsRequest(input *ListDominan
 func (p *ListDominantLanguageDetectionJobsRequest) Paginate(opts ...aws.Option) ListDominantLanguageDetectionJobsPager {
 	return ListDominantLanguageDetectionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDominantLanguageDetectionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1360,6 +1360,7 @@ func (p *ListDominantLanguageDetectionJobsRequest) Paginate(opts ...aws.Option) 
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1454,7 +1455,7 @@ func (c *Comprehend) ListEntitiesDetectionJobsRequest(input *ListEntitiesDetecti
 func (p *ListEntitiesDetectionJobsRequest) Paginate(opts ...aws.Option) ListEntitiesDetectionJobsPager {
 	return ListEntitiesDetectionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEntitiesDetectionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1463,6 +1464,7 @@ func (p *ListEntitiesDetectionJobsRequest) Paginate(opts ...aws.Option) ListEnti
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1615,7 +1617,7 @@ func (c *Comprehend) ListKeyPhrasesDetectionJobsRequest(input *ListKeyPhrasesDet
 func (p *ListKeyPhrasesDetectionJobsRequest) Paginate(opts ...aws.Option) ListKeyPhrasesDetectionJobsPager {
 	return ListKeyPhrasesDetectionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListKeyPhrasesDetectionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1624,6 +1626,7 @@ func (p *ListKeyPhrasesDetectionJobsRequest) Paginate(opts ...aws.Option) ListKe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1718,7 +1721,7 @@ func (c *Comprehend) ListSentimentDetectionJobsRequest(input *ListSentimentDetec
 func (p *ListSentimentDetectionJobsRequest) Paginate(opts ...aws.Option) ListSentimentDetectionJobsPager {
 	return ListSentimentDetectionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSentimentDetectionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1727,6 +1730,7 @@ func (p *ListSentimentDetectionJobsRequest) Paginate(opts ...aws.Option) ListSen
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1821,7 +1825,7 @@ func (c *Comprehend) ListTopicsDetectionJobsRequest(input *ListTopicsDetectionJo
 func (p *ListTopicsDetectionJobsRequest) Paginate(opts ...aws.Option) ListTopicsDetectionJobsPager {
 	return ListTopicsDetectionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTopicsDetectionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1830,6 +1834,7 @@ func (p *ListTopicsDetectionJobsRequest) Paginate(opts ...aws.Option) ListTopics
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -9,6 +9,8 @@
 package cloudwatchiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 )
@@ -97,8 +99,7 @@ type CloudWatchAPI interface {
 
 	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
 
-	WaitUntilAlarmExists(*cloudwatch.DescribeAlarmsInput) error
-	WaitUntilAlarmExistsWithContext(aws.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
+	WaitUntilAlarmExists(context.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
 }
 
 var _ CloudWatchAPI = (*cloudwatch.CloudWatch)(nil)

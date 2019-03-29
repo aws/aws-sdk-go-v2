@@ -1127,7 +1127,7 @@ func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) De
 func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoadBalancersPager {
 	return DescribeLoadBalancersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLoadBalancersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1136,6 +1136,7 @@ func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoad
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

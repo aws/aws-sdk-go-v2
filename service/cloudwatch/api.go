@@ -199,7 +199,7 @@ func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInpu
 func (p *DescribeAlarmHistoryRequest) Paginate(opts ...aws.Option) DescribeAlarmHistoryPager {
 	return DescribeAlarmHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAlarmHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -208,6 +208,7 @@ func (p *DescribeAlarmHistoryRequest) Paginate(opts ...aws.Option) DescribeAlarm
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -304,7 +305,7 @@ func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeA
 func (p *DescribeAlarmsRequest) Paginate(opts ...aws.Option) DescribeAlarmsPager {
 	return DescribeAlarmsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAlarmsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -313,6 +314,7 @@ func (p *DescribeAlarmsRequest) Paginate(opts ...aws.Option) DescribeAlarmsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -940,7 +942,7 @@ func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequ
 func (p *ListMetricsRequest) Paginate(opts ...aws.Option) ListMetricsPager {
 	return ListMetricsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMetricsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -949,6 +951,7 @@ func (p *ListMetricsRequest) Paginate(opts ...aws.Option) ListMetricsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

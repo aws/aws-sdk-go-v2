@@ -500,7 +500,7 @@ func (c *ServerlessApplicationRepository) ListApplicationDependenciesRequest(inp
 func (p *ListApplicationDependenciesRequest) Paginate(opts ...aws.Option) ListApplicationDependenciesPager {
 	return ListApplicationDependenciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationDependenciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -509,6 +509,7 @@ func (p *ListApplicationDependenciesRequest) Paginate(opts ...aws.Option) ListAp
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -603,7 +604,7 @@ func (c *ServerlessApplicationRepository) ListApplicationVersionsRequest(input *
 func (p *ListApplicationVersionsRequest) Paginate(opts ...aws.Option) ListApplicationVersionsPager {
 	return ListApplicationVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -612,6 +613,7 @@ func (p *ListApplicationVersionsRequest) Paginate(opts ...aws.Option) ListApplic
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -706,7 +708,7 @@ func (c *ServerlessApplicationRepository) ListApplicationsRequest(input *ListApp
 func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
 	return ListApplicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -715,6 +717,7 @@ func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

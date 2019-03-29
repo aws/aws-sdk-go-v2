@@ -1483,7 +1483,7 @@ func (c *GuardDuty) ListDetectorsRequest(input *ListDetectorsInput) ListDetector
 func (p *ListDetectorsRequest) Paginate(opts ...aws.Option) ListDetectorsPager {
 	return ListDetectorsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDetectorsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1492,6 +1492,7 @@ func (p *ListDetectorsRequest) Paginate(opts ...aws.Option) ListDetectorsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1586,7 +1587,7 @@ func (c *GuardDuty) ListFiltersRequest(input *ListFiltersInput) ListFiltersReque
 func (p *ListFiltersRequest) Paginate(opts ...aws.Option) ListFiltersPager {
 	return ListFiltersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFiltersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1595,6 +1596,7 @@ func (p *ListFiltersRequest) Paginate(opts ...aws.Option) ListFiltersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1689,7 +1691,7 @@ func (c *GuardDuty) ListFindingsRequest(input *ListFindingsInput) ListFindingsRe
 func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 	return ListFindingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFindingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1698,6 +1700,7 @@ func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1792,7 +1795,7 @@ func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest 
 func (p *ListIPSetsRequest) Paginate(opts ...aws.Option) ListIPSetsPager {
 	return ListIPSetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListIPSetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1801,6 +1804,7 @@ func (p *ListIPSetsRequest) Paginate(opts ...aws.Option) ListIPSetsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1896,7 +1900,7 @@ func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) ListInvi
 func (p *ListInvitationsRequest) Paginate(opts ...aws.Option) ListInvitationsPager {
 	return ListInvitationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInvitationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1905,6 +1909,7 @@ func (p *ListInvitationsRequest) Paginate(opts ...aws.Option) ListInvitationsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2000,7 +2005,7 @@ func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) ListMembersReque
 func (p *ListMembersRequest) Paginate(opts ...aws.Option) ListMembersPager {
 	return ListMembersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMembersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2009,6 +2014,7 @@ func (p *ListMembersRequest) Paginate(opts ...aws.Option) ListMembersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2104,7 +2110,7 @@ func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) 
 func (p *ListThreatIntelSetsRequest) Paginate(opts ...aws.Option) ListThreatIntelSetsPager {
 	return ListThreatIntelSetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListThreatIntelSetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2113,6 +2119,7 @@ func (p *ListThreatIntelSetsRequest) Paginate(opts ...aws.Option) ListThreatInte
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

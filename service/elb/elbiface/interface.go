@@ -9,6 +9,8 @@
 package elbiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elb"
 )
@@ -121,14 +123,11 @@ type ELBAPI interface {
 
 	SetLoadBalancerPoliciesOfListenerRequest(*elb.SetLoadBalancerPoliciesOfListenerInput) elb.SetLoadBalancerPoliciesOfListenerRequest
 
-	WaitUntilAnyInstanceInService(*elb.DescribeInstanceHealthInput) error
-	WaitUntilAnyInstanceInServiceWithContext(aws.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
+	WaitUntilAnyInstanceInService(context.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceDeregistered(*elb.DescribeInstanceHealthInput) error
-	WaitUntilInstanceDeregisteredWithContext(aws.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
+	WaitUntilInstanceDeregistered(context.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceInService(*elb.DescribeInstanceHealthInput) error
-	WaitUntilInstanceInServiceWithContext(aws.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
+	WaitUntilInstanceInService(context.Context, *elb.DescribeInstanceHealthInput, ...aws.WaiterOption) error
 }
 
 var _ ELBAPI = (*elb.ELB)(nil)

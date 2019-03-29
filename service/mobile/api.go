@@ -397,7 +397,7 @@ func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 func (p *ListBundlesRequest) Paginate(opts ...aws.Option) ListBundlesPager {
 	return ListBundlesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBundlesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -406,6 +406,7 @@ func (p *ListBundlesRequest) Paginate(opts ...aws.Option) ListBundlesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -500,7 +501,7 @@ func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 	return ListProjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListProjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -509,6 +510,7 @@ func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

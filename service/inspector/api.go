@@ -992,7 +992,7 @@ func (c *Inspector) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput
 func (p *GetExclusionsPreviewRequest) Paginate(opts ...aws.Option) GetExclusionsPreviewPager {
 	return GetExclusionsPreviewPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetExclusionsPreviewInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1001,6 +1001,7 @@ func (p *GetExclusionsPreviewRequest) Paginate(opts ...aws.Option) GetExclusions
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1148,7 +1149,7 @@ func (c *Inspector) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgent
 func (p *ListAssessmentRunAgentsRequest) Paginate(opts ...aws.Option) ListAssessmentRunAgentsPager {
 	return ListAssessmentRunAgentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentRunAgentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1157,6 +1158,7 @@ func (p *ListAssessmentRunAgentsRequest) Paginate(opts ...aws.Option) ListAssess
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1252,7 +1254,7 @@ func (c *Inspector) ListAssessmentRunsRequest(input *ListAssessmentRunsInput) Li
 func (p *ListAssessmentRunsRequest) Paginate(opts ...aws.Option) ListAssessmentRunsPager {
 	return ListAssessmentRunsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentRunsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1261,6 +1263,7 @@ func (p *ListAssessmentRunsRequest) Paginate(opts ...aws.Option) ListAssessmentR
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1357,7 +1360,7 @@ func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInp
 func (p *ListAssessmentTargetsRequest) Paginate(opts ...aws.Option) ListAssessmentTargetsPager {
 	return ListAssessmentTargetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentTargetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1366,6 +1369,7 @@ func (p *ListAssessmentTargetsRequest) Paginate(opts ...aws.Option) ListAssessme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1461,7 +1465,7 @@ func (c *Inspector) ListAssessmentTemplatesRequest(input *ListAssessmentTemplate
 func (p *ListAssessmentTemplatesRequest) Paginate(opts ...aws.Option) ListAssessmentTemplatesPager {
 	return ListAssessmentTemplatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentTemplatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1470,6 +1474,7 @@ func (p *ListAssessmentTemplatesRequest) Paginate(opts ...aws.Option) ListAssess
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1566,7 +1571,7 @@ func (c *Inspector) ListEventSubscriptionsRequest(input *ListEventSubscriptionsI
 func (p *ListEventSubscriptionsRequest) Paginate(opts ...aws.Option) ListEventSubscriptionsPager {
 	return ListEventSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEventSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1575,6 +1580,7 @@ func (p *ListEventSubscriptionsRequest) Paginate(opts ...aws.Option) ListEventSu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1669,7 +1675,7 @@ func (c *Inspector) ListExclusionsRequest(input *ListExclusionsInput) ListExclus
 func (p *ListExclusionsRequest) Paginate(opts ...aws.Option) ListExclusionsPager {
 	return ListExclusionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListExclusionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1678,6 +1684,7 @@ func (p *ListExclusionsRequest) Paginate(opts ...aws.Option) ListExclusionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1773,7 +1780,7 @@ func (c *Inspector) ListFindingsRequest(input *ListFindingsInput) ListFindingsRe
 func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 	return ListFindingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFindingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1782,6 +1789,7 @@ func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1876,7 +1884,7 @@ func (c *Inspector) ListRulesPackagesRequest(input *ListRulesPackagesInput) List
 func (p *ListRulesPackagesRequest) Paginate(opts ...aws.Option) ListRulesPackagesPager {
 	return ListRulesPackagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRulesPackagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1885,6 +1893,7 @@ func (p *ListRulesPackagesRequest) Paginate(opts ...aws.Option) ListRulesPackage
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2031,7 +2040,7 @@ func (c *Inspector) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgent
 func (p *PreviewAgentsRequest) Paginate(opts ...aws.Option) PreviewAgentsPager {
 	return PreviewAgentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *PreviewAgentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2040,6 +2049,7 @@ func (p *PreviewAgentsRequest) Paginate(opts ...aws.Option) PreviewAgentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

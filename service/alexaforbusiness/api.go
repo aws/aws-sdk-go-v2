@@ -2140,7 +2140,7 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesRequest(input *ListBusines
 func (p *ListBusinessReportSchedulesRequest) Paginate(opts ...aws.Option) ListBusinessReportSchedulesPager {
 	return ListBusinessReportSchedulesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBusinessReportSchedulesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2149,6 +2149,7 @@ func (p *ListBusinessReportSchedulesRequest) Paginate(opts ...aws.Option) ListBu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2243,7 +2244,7 @@ func (c *AlexaForBusiness) ListConferenceProvidersRequest(input *ListConferenceP
 func (p *ListConferenceProvidersRequest) Paginate(opts ...aws.Option) ListConferenceProvidersPager {
 	return ListConferenceProvidersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListConferenceProvidersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2252,6 +2253,7 @@ func (p *ListConferenceProvidersRequest) Paginate(opts ...aws.Option) ListConfer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2347,7 +2349,7 @@ func (c *AlexaForBusiness) ListDeviceEventsRequest(input *ListDeviceEventsInput)
 func (p *ListDeviceEventsRequest) Paginate(opts ...aws.Option) ListDeviceEventsPager {
 	return ListDeviceEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeviceEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2356,6 +2358,7 @@ func (p *ListDeviceEventsRequest) Paginate(opts ...aws.Option) ListDeviceEventsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2450,7 +2453,7 @@ func (c *AlexaForBusiness) ListSkillsRequest(input *ListSkillsInput) ListSkillsR
 func (p *ListSkillsRequest) Paginate(opts ...aws.Option) ListSkillsPager {
 	return ListSkillsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSkillsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2459,6 +2462,7 @@ func (p *ListSkillsRequest) Paginate(opts ...aws.Option) ListSkillsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2553,7 +2557,7 @@ func (c *AlexaForBusiness) ListSkillsStoreCategoriesRequest(input *ListSkillsSto
 func (p *ListSkillsStoreCategoriesRequest) Paginate(opts ...aws.Option) ListSkillsStoreCategoriesPager {
 	return ListSkillsStoreCategoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSkillsStoreCategoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2562,6 +2566,7 @@ func (p *ListSkillsStoreCategoriesRequest) Paginate(opts ...aws.Option) ListSkil
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2656,7 +2661,7 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryRequest(input *ListSki
 func (p *ListSkillsStoreSkillsByCategoryRequest) Paginate(opts ...aws.Option) ListSkillsStoreSkillsByCategoryPager {
 	return ListSkillsStoreSkillsByCategoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSkillsStoreSkillsByCategoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2665,6 +2670,7 @@ func (p *ListSkillsStoreSkillsByCategoryRequest) Paginate(opts ...aws.Option) Li
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2759,7 +2765,7 @@ func (c *AlexaForBusiness) ListSmartHomeAppliancesRequest(input *ListSmartHomeAp
 func (p *ListSmartHomeAppliancesRequest) Paginate(opts ...aws.Option) ListSmartHomeAppliancesPager {
 	return ListSmartHomeAppliancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSmartHomeAppliancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2768,6 +2774,7 @@ func (p *ListSmartHomeAppliancesRequest) Paginate(opts ...aws.Option) ListSmartH
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2862,7 +2869,7 @@ func (c *AlexaForBusiness) ListTagsRequest(input *ListTagsInput) ListTagsRequest
 func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 	return ListTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2871,6 +2878,7 @@ func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3333,7 +3341,7 @@ func (c *AlexaForBusiness) SearchAddressBooksRequest(input *SearchAddressBooksIn
 func (p *SearchAddressBooksRequest) Paginate(opts ...aws.Option) SearchAddressBooksPager {
 	return SearchAddressBooksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchAddressBooksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3342,6 +3350,7 @@ func (p *SearchAddressBooksRequest) Paginate(opts ...aws.Option) SearchAddressBo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3436,7 +3445,7 @@ func (c *AlexaForBusiness) SearchContactsRequest(input *SearchContactsInput) Sea
 func (p *SearchContactsRequest) Paginate(opts ...aws.Option) SearchContactsPager {
 	return SearchContactsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchContactsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3445,6 +3454,7 @@ func (p *SearchContactsRequest) Paginate(opts ...aws.Option) SearchContactsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3539,7 +3549,7 @@ func (c *AlexaForBusiness) SearchDevicesRequest(input *SearchDevicesInput) Searc
 func (p *SearchDevicesRequest) Paginate(opts ...aws.Option) SearchDevicesPager {
 	return SearchDevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchDevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3548,6 +3558,7 @@ func (p *SearchDevicesRequest) Paginate(opts ...aws.Option) SearchDevicesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3642,7 +3653,7 @@ func (c *AlexaForBusiness) SearchProfilesRequest(input *SearchProfilesInput) Sea
 func (p *SearchProfilesRequest) Paginate(opts ...aws.Option) SearchProfilesPager {
 	return SearchProfilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProfilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3651,6 +3662,7 @@ func (p *SearchProfilesRequest) Paginate(opts ...aws.Option) SearchProfilesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3745,7 +3757,7 @@ func (c *AlexaForBusiness) SearchRoomsRequest(input *SearchRoomsInput) SearchRoo
 func (p *SearchRoomsRequest) Paginate(opts ...aws.Option) SearchRoomsPager {
 	return SearchRoomsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchRoomsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3754,6 +3766,7 @@ func (p *SearchRoomsRequest) Paginate(opts ...aws.Option) SearchRoomsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3849,7 +3862,7 @@ func (c *AlexaForBusiness) SearchSkillGroupsRequest(input *SearchSkillGroupsInpu
 func (p *SearchSkillGroupsRequest) Paginate(opts ...aws.Option) SearchSkillGroupsPager {
 	return SearchSkillGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchSkillGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3858,6 +3871,7 @@ func (p *SearchSkillGroupsRequest) Paginate(opts ...aws.Option) SearchSkillGroup
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3952,7 +3966,7 @@ func (c *AlexaForBusiness) SearchUsersRequest(input *SearchUsersInput) SearchUse
 func (p *SearchUsersRequest) Paginate(opts ...aws.Option) SearchUsersPager {
 	return SearchUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3961,6 +3975,7 @@ func (p *SearchUsersRequest) Paginate(opts ...aws.Option) SearchUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

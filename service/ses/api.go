@@ -2113,7 +2113,7 @@ func (c *SES) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVerif
 func (p *ListCustomVerificationEmailTemplatesRequest) Paginate(opts ...aws.Option) ListCustomVerificationEmailTemplatesPager {
 	return ListCustomVerificationEmailTemplatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCustomVerificationEmailTemplatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2122,6 +2122,7 @@ func (p *ListCustomVerificationEmailTemplatesRequest) Paginate(opts ...aws.Optio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2220,7 +2221,7 @@ func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRe
 func (p *ListIdentitiesRequest) Paginate(opts ...aws.Option) ListIdentitiesPager {
 	return ListIdentitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListIdentitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2229,6 +2230,7 @@ func (p *ListIdentitiesRequest) Paginate(opts ...aws.Option) ListIdentitiesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

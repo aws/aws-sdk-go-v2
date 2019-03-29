@@ -509,7 +509,7 @@ func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) DescribeStre
 func (p *DescribeStreamRequest) Paginate(opts ...aws.Option) DescribeStreamPager {
 	return DescribeStreamPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStreamInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -518,6 +518,7 @@ func (p *DescribeStreamRequest) Paginate(opts ...aws.Option) DescribeStreamPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1148,7 +1149,7 @@ func (c *Kinesis) ListStreamConsumersRequest(input *ListStreamConsumersInput) Li
 func (p *ListStreamConsumersRequest) Paginate(opts ...aws.Option) ListStreamConsumersPager {
 	return ListStreamConsumersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStreamConsumersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1157,6 +1158,7 @@ func (p *ListStreamConsumersRequest) Paginate(opts ...aws.Option) ListStreamCons
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1266,7 +1268,7 @@ func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest
 func (p *ListStreamsRequest) Paginate(opts ...aws.Option) ListStreamsPager {
 	return ListStreamsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStreamsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1275,6 +1277,7 @@ func (p *ListStreamsRequest) Paginate(opts ...aws.Option) ListStreamsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
