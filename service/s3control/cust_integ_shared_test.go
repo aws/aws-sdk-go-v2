@@ -34,7 +34,7 @@ func init() {
 	flag.BoolVar(&insecureTLS, "insecure-tls", false,
 		"Disables TLS validation on request endpoints.",
 	)
-	flag.BoolVar(&useDualstack, "dualstack", false,
+	flag.BoolVar(&useDualstack, "dualstack", true,
 		"Enables usage of dualstack endpoints.",
 	)
 	flag.StringVar(&accountID, "account", "",
@@ -68,7 +68,9 @@ func setup() {
 
 	if len(accountID) == 0 {
 		stsCfg := cfg.Copy()
-		stsCfg.EndpointResolver = aws.ResolveWithEndpointURL(stsEndpoint)
+		if len(stsEndpoint) != 0 {
+			stsCfg.EndpointResolver = aws.ResolveWithEndpointURL(stsEndpoint)
+		}
 
 		stsSvc := sts.New(stsCfg)
 		identity, err := stsSvc.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{}).Send()
@@ -79,6 +81,8 @@ func setup() {
 	}
 
 	s3CtrlCfg := cfg.Copy()
-	s3CtrlCfg.EndpointResolver = aws.ResolveWithEndpointURL(s3ControlEndpoint)
+	if len(s3ControlEndpoint) != 0 {
+		s3CtrlCfg.EndpointResolver = aws.ResolveWithEndpointURL(s3ControlEndpoint)
+	}
 	svc = s3control.New(s3CtrlCfg)
 }

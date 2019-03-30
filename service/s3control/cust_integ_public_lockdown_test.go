@@ -15,7 +15,10 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 		AccountId: aws.String(accountID),
 	}).Send()
 	if err != nil {
-		aerr := err.(awserr.RequestFailure)
+		aerr, ok := err.(awserr.RequestFailure)
+		if !ok {
+			t.Fatalf("unknown exception, %T, %v", err, err)
+		}
 		// Only no such configuration is valid error to receive.
 		if e, a := s3control.ErrCodeNoSuchPublicAccessBlockConfiguration, aerr.Code(); e != a {
 			t.Fatalf("expected no error, or no such configuration, got %v", err)
