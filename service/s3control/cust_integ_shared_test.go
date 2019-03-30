@@ -1,6 +1,6 @@
 // +build integration
 
-package s3control
+package s3control_test
 
 import (
 	"crypto/tls"
@@ -56,27 +56,22 @@ func setup() {
 		tlsCfg.InsecureSkipVerify = true
 	}
 
-	cfg := integration.Config()
+	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 	cfg.HTTPClient = &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: tlsCfg,
 		},
 	}
-	if useDualstack {
-		resolver := endpoints.NewDefaultResolver()
-		resolver.UseDualStack = useDualstack
-		cfg.EndpointResolver = resolver
-	}
+	resolver := endpoints.NewDefaultResolver()
+	resolver.UseDualStack = useDualstack
+	cfg.EndpointResolver = resolver
 
 	if len(accountID) == 0 {
 		stsCfg := cfg.Copy()
-		if len(stsEndpoint) != 0 {
-			stsCfg.EndpointResolver = aws.ResolveWithEndpointURL(stsEndpoint)
-		}
+		stsCfg.EndpointResolver = aws.ResolveWithEndpointURL(stsEndpoint)
+
 		stsSvc := sts.New(stsCfg)
-		identity, err := stsSvc.GetCallerIdentityRequest(
-			&sts.GetCallerIdentityInput{},
-		).Send()
+		identity, err := stsSvc.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{}).Send()
 		if err != nil {
 			panic(fmt.Sprintf("failed to get accountID, %v", err))
 		}
@@ -84,9 +79,6 @@ func setup() {
 	}
 
 	s3CtrlCfg := cfg.Copy()
-	if len(s3ControlEndpoint) != 0 {
-		s3CtrlCfg.EndpointResolver = aws.ResolveWithEndpointURL(s3ControlEndpoint)
-	}
-
+	s3CtrlCfg.EndpointResolver = aws.ResolveWithEndpointURL(s3ControlEndpoint)
 	svc = s3control.New(s3CtrlCfg)
 }
