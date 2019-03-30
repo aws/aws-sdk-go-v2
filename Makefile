@@ -16,9 +16,8 @@ SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 
 # SDK additional packages that are used for development of the SDK.
 SDK_EXAMPLES_PKGS=./example/...
-SDK_TESTING_PKGS=./internal/awstesting/...
 SDK_MODELS_PKGS=./models/...
-SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_TESTING_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
+SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
 
 SDK_V1_USAGE=$(shell go list -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end }}''' ./... | sort -u | grep '''/aws-sdk-go/''')
 
@@ -88,13 +87,13 @@ client-integ:
 	@echo "Integration Testing SDK clients"
 	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ./service/...
 
-#s3crypto-integ:
-#	@echo "Integration Testing S3 Cyrpto utility"
-#	AWS_REGION="" go test -count=1 -tags "s3crypto_integ integration" -v -run '^TestInteg_' ./service/s3/s3crypto
+s3crypto-integ:
+	@echo "Integration Testing S3 Cyrpto utility"
+	AWS_REGION="" go test -count=1 -tags "s3crypto_integ integration" -v -run '^TestInteg_' ./service/s3/s3crypto
 
-#cleanup-integ-buckets:
-#	@echo "Cleaning up SDK integraiton resources"
-#	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
+cleanup-integ-buckets:
+	@echo "Cleaning up SDK integraiton resources"
+	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
 
 ###################
 # Sandbox Testing #
