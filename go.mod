@@ -1,6 +1,7 @@
 module github.com/aws/aws-sdk-go-v2
 
 require (
+	github.com/aws/aws-sdk-go v1.19.6
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-sql-driver/mysql v1.4.0
 	github.com/gucumber/gucumber v0.0.0-20180127021336-7d5c79e832a2

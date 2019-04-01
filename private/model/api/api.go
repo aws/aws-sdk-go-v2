@@ -24,6 +24,7 @@ type API struct {
 	Waiters       []Waiter
 	Documentation string
 	Examples      Examples
+	SmokeTests    SmokeTestSuite
 
 	// Set to true to avoid removing unused shapes
 	NoRemoveUnusedShapes bool
