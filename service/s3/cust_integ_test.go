@@ -4,6 +4,7 @@ package s3_test
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"net/http"
 	"reflect"
@@ -19,7 +20,7 @@ func TestInteg_WriteToObject(t *testing.T) {
 		Bucket: bucketName,
 		Key:    aws.String("key name"),
 		Body:   bytes.NewReader([]byte("hello world")),
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -27,7 +28,7 @@ func TestInteg_WriteToObject(t *testing.T) {
 	getResp, err := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String("key name"),
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}

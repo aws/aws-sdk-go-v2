@@ -3,6 +3,7 @@
 package s3control_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -13,7 +14,7 @@ import (
 func TestInteg_PublicAccessBlock(t *testing.T) {
 	_, err := svc.GetPublicAccessBlockRequest(&s3control.GetPublicAccessBlockInput{
 		AccountId: aws.String(accountID),
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		aerr, ok := err.(awserr.RequestFailure)
 		if !ok {
@@ -30,14 +31,14 @@ func TestInteg_PublicAccessBlock(t *testing.T) {
 		PublicAccessBlockConfiguration: &s3control.PublicAccessBlockConfiguration{
 			IgnorePublicAcls: aws.Bool(true),
 		},
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
 	_, err = svc.DeletePublicAccessBlockRequest(&s3control.DeletePublicAccessBlockInput{
 		AccountId: aws.String(accountID),
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

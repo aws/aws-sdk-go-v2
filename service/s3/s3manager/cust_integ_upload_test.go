@@ -4,6 +4,7 @@ package s3manager_test
 
 import (
 	"bytes"
+	"context"
 	"crypto/md5"
 	"fmt"
 	"regexp"
@@ -81,7 +82,7 @@ func TestInteg_UploadFailCleanup(t *testing.T) {
 
 	_, err = svc.ListPartsRequest(&s3.ListPartsInput{
 		Bucket: bucketName, Key: &key, UploadId: &uploadID,
-	}).Send()
+	}).Send(context.Background())
 	if err == nil {
 		t.Errorf("expect error for list parts, but got none")
 	}

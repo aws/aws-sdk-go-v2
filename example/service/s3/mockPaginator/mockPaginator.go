@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -34,7 +35,7 @@ func getKeys(svc s3iface.S3API, bucket string) []string {
 	})
 	p := req.Paginate()
 	keys := []string{}
-	for p.Next() {
+	for p.Next(context.Background()) {
 		page := p.CurrentPage()
 		for _, obj := range page.Contents {
 			keys = append(keys, *obj.Key)
