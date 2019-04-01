@@ -223,7 +223,7 @@ func (r *Request) SetContext(ctx context.Context) {
 	if ctx == nil {
 		panic("context cannot be nil")
 	}
-	setRequestContext(r, ctx)
+	setRequestContext(ctx, r)
 }
 
 // WillRetry returns if the request's can be retried.

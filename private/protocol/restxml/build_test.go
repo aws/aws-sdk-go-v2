@@ -1869,7 +1869,7 @@ func (c *InputService11ProtocolTest) InputService11TestCaseOperation1Request(inp
 type InputService11TestShapeInputService11TestCaseOperation1Input struct {
 	_ struct{} `locationName:"OperationRequest" type:"structure" xmlURI:"https://foo/"`
 
-	Foo map[string]string `location:"headers" locationName:"foo" type:"map"`
+	Foo map[string]string `location:"headers" locationName:"x-foo-" type:"map"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1879,7 +1879,7 @@ func (s InputService11TestShapeInputService11TestCaseOperation1Input) MarshalFie
 		v := s.Foo
 
 		metadata := protocol.Metadata{}
-		ms0 := e.Map(protocol.HeadersTarget, "foo", metadata)
+		ms0 := e.Map(protocol.HeadersTarget, "x-foo-", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
 			ms0.MapSetValue(k1, protocol.StringValue(v1))
