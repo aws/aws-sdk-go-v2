@@ -27,9 +27,8 @@ func TestInteg_00_DescribeClusterVersions(t *testing.T) {
 	params := &redshift.DescribeClusterVersionsInput{}
 
 	req := svc.DescribeClusterVersionsRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_DescribeClusters(t *testing.T) {
 	}
 
 	req := svc.DescribeClustersRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

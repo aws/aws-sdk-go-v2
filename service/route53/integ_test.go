@@ -27,9 +27,8 @@ func TestInteg_00_ListHostedZones(t *testing.T) {
 	params := &route53.ListHostedZonesInput{}
 
 	req := svc.ListHostedZonesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_GetHostedZone(t *testing.T) {
 	}
 
 	req := svc.GetHostedZoneRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

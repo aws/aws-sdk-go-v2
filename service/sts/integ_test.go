@@ -27,9 +27,8 @@ func TestInteg_00_GetSessionToken(t *testing.T) {
 	params := &sts.GetSessionTokenInput{}
 
 	req := svc.GetSessionTokenRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -46,9 +45,8 @@ func TestInteg_01_GetFederationToken(t *testing.T) {
 	}
 
 	req := svc.GetFederationTokenRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

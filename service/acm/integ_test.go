@@ -27,9 +27,8 @@ func TestInteg_00_ListCertificates(t *testing.T) {
 	params := &acm.ListCertificatesInput{}
 
 	req := svc.ListCertificatesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_GetCertificate(t *testing.T) {
 	}
 
 	req := svc.GetCertificateRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

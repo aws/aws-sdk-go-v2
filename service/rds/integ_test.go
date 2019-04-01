@@ -27,9 +27,8 @@ func TestInteg_00_DescribeDBEngineVersions(t *testing.T) {
 	params := &rds.DescribeDBEngineVersionsInput{}
 
 	req := svc.DescribeDBEngineVersionsRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_DescribeDBInstances(t *testing.T) {
 	}
 
 	req := svc.DescribeDBInstancesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

@@ -27,9 +27,8 @@ func TestInteg_00_ListPresets(t *testing.T) {
 	params := &elastictranscoder.ListPresetsInput{}
 
 	req := svc.ListPresetsRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_ReadJob(t *testing.T) {
 	}
 
 	req := svc.ReadJobRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

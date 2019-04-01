@@ -27,9 +27,8 @@ func TestInteg_00_DescribeRepositories(t *testing.T) {
 	params := &ecr.DescribeRepositoriesInput{}
 
 	req := svc.DescribeRepositoriesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_ListImages(t *testing.T) {
 	}
 
 	req := svc.ListImagesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

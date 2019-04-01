@@ -29,9 +29,8 @@ func TestInteg_00_ListTables(t *testing.T) {
 	}
 
 	req := svc.ListTablesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -47,9 +46,8 @@ func TestInteg_01_DescribeTable(t *testing.T) {
 	}
 
 	req := svc.DescribeTableRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

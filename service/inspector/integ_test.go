@@ -27,9 +27,8 @@ func TestInteg_00_ListAssessmentTemplates(t *testing.T) {
 	params := &inspector.ListAssessmentTemplatesInput{}
 
 	req := svc.ListAssessmentTemplatesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_ListTagsForResource(t *testing.T) {
 	}
 
 	req := svc.ListTagsForResourceRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

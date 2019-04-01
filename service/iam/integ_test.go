@@ -27,9 +27,8 @@ func TestInteg_00_ListUsers(t *testing.T) {
 	params := &iam.ListUsersInput{}
 
 	req := svc.ListUsersRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_GetUser(t *testing.T) {
 	}
 
 	req := svc.GetUserRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

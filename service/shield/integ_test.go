@@ -27,9 +27,8 @@ func TestInteg_00_ListAttacks(t *testing.T) {
 	params := &shield.ListAttacksInput{}
 
 	req := svc.ListAttacksRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}

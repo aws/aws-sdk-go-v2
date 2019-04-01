@@ -27,9 +27,8 @@ func TestInteg_00_GetConnectors(t *testing.T) {
 	params := &sms.GetConnectorsInput{}
 
 	req := svc.GetConnectorsRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_DeleteReplicationJob(t *testing.T) {
 	}
 
 	req := svc.DeleteReplicationJobRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

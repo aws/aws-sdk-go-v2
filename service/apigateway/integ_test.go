@@ -27,9 +27,8 @@ func TestInteg_00_GetDomainNames(t *testing.T) {
 	params := &apigateway.GetDomainNamesInput{}
 
 	req := svc.GetDomainNamesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -47,9 +46,8 @@ func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
 	}
 
 	req := svc.CreateUsagePlanKeyRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

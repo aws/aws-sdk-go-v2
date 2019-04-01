@@ -27,9 +27,8 @@ func TestInteg_00_DescribeClusters(t *testing.T) {
 	params := &cloudhsmv2.DescribeClustersInput{}
 
 	req := svc.DescribeClustersRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_ListTags(t *testing.T) {
 	}
 
 	req := svc.ListTagsRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

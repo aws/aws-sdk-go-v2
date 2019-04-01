@@ -96,9 +96,8 @@ var smokeTestTmpl = template.Must(template.New(`smokeTestTmpl`).Parse(`
 		params := {{ $testCase.BuildInputShape $op.InputRef }}
 
 		req := svc.{{ $op.ExportedName }}Request(params)
-		req.SetContext(ctx)
 
-		_, err := req.Send()
+		_, err := req.Send(ctx)
 		{{- if $testCase.ExpectErr }}
 			if err == nil {
 				t.Fatalf("expect request to fail")

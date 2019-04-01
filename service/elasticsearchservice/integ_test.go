@@ -27,9 +27,8 @@ func TestInteg_00_ListDomainNames(t *testing.T) {
 	params := &elasticsearchservice.ListDomainNamesInput{}
 
 	req := svc.ListDomainNamesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_DescribeElasticsearchDomain(t *testing.T) {
 	}
 
 	req := svc.DescribeElasticsearchDomainRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

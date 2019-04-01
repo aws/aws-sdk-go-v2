@@ -27,9 +27,8 @@ func TestInteg_00_DescribeEvents(t *testing.T) {
 	params := &elasticache.DescribeEventsInput{}
 
 	req := svc.DescribeEventsRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_DescribeCacheClusters(t *testing.T) {
 	}
 
 	req := svc.DescribeCacheClustersRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

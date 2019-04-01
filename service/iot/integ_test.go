@@ -27,9 +27,8 @@ func TestInteg_00_ListPolicies(t *testing.T) {
 	params := &iot.ListPoliciesInput{}
 
 	req := svc.ListPoliciesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -45,9 +44,8 @@ func TestInteg_01_DescribeThing(t *testing.T) {
 	}
 
 	req := svc.DescribeThingRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

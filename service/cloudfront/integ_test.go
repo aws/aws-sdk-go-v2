@@ -29,9 +29,8 @@ func TestInteg_00_ListCloudFrontOriginAccessIdentities(t *testing.T) {
 	}
 
 	req := svc.ListCloudFrontOriginAccessIdentitiesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -47,9 +46,8 @@ func TestInteg_01_GetDistribution(t *testing.T) {
 	}
 
 	req := svc.GetDistributionRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}
