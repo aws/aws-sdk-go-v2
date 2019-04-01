@@ -146,9 +146,10 @@ verify: lint vet sdkv1check
 
 lint:
 	@echo "go lint SDK and vendor packages"
-	@lint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDOT} -e ${LINTIGNOREDOC} -e ${LINTIGNORECONST} -e ${LINTIGNORESTUTTER} -e ${LINTIGNOREINFLECT} -e ${LINTIGNOREDEPS} -e ${LINTIGNOREINFLECTS3UPLOAD} -e ${LINTIGNOREPKGCOMMENT} -e ${LINTIGNOREENDPOINTS}`; \
-	echo "$$lint"; \
-	if [ "$$lint" != "" ]; then exit 1; fi
+	@lint=`golint ./...`; \
+	dolint=`echo "$$lint" | grep -E -v -e ${LINTIGNOREDOC} -e ${LINTIGNORECONST} -e ${LINTIGNORESTUTTER} -e ${LINTIGNOREINFLECT} -e ${LINTIGNOREDEPS} -e ${LINTIGNOREINFLECTS3UPLOAD} -e ${LINTIGNOREPKGCOMMENT} -e ${LINTIGNOREENDPOINTS}`; \
+	echo "$$dolint"; \
+	if [ "$$dolint" != "" ]; then exit 1; fi
 
 vet:
 	go vet -tags "example codegen awsinclude integration" --all ${SDK_ALL_PKGS}
@@ -161,12 +162,11 @@ sdkv1check:
 # Dependencies #
 ################
 get-deps: get-deps-tests get-deps-x-tests get-deps-codegen get-deps-verify
+	go get github.com/jmespath/go-jmespath
 
 get-deps-tests:
 	@echo "go get SDK testing dependencies"
-	go get github.com/gucumber/gucumber/cmd/gucumber
 	go get github.com/stretchr/testify
-	go get github.com/smartystreets/goconvey
 	go get golang.org/x/net/html
 
 get-deps-x-tests:
