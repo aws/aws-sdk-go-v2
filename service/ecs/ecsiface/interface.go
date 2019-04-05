@@ -9,6 +9,8 @@
 package ecsiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 )
@@ -137,17 +139,13 @@ type ECSAPI interface {
 
 	UpdateServiceRequest(*ecs.UpdateServiceInput) ecs.UpdateServiceRequest
 
-	WaitUntilServicesInactive(*ecs.DescribeServicesInput) error
-	WaitUntilServicesInactiveWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+	WaitUntilServicesInactive(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
 
-	WaitUntilServicesStable(*ecs.DescribeServicesInput) error
-	WaitUntilServicesStableWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+	WaitUntilServicesStable(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
 
-	WaitUntilTasksRunning(*ecs.DescribeTasksInput) error
-	WaitUntilTasksRunningWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+	WaitUntilTasksRunning(context.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilTasksStopped(*ecs.DescribeTasksInput) error
-	WaitUntilTasksStoppedWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+	WaitUntilTasksStopped(context.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
 }
 
 var _ ECSAPI = (*ecs.ECS)(nil)

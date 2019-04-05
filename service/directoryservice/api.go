@@ -3,6 +3,7 @@
 package directoryservice
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AcceptSharedDirectoryRequest struct {
 }
 
 // Send marshals and sends the AcceptSharedDirectory API request.
-func (r AcceptSharedDirectoryRequest) Send() (*AcceptSharedDirectoryOutput, error) {
+func (r AcceptSharedDirectoryRequest) Send(ctx context.Context) (*AcceptSharedDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r AcceptSharedDirectoryRequest) Send() (*AcceptSharedDirectoryOutput, erro
 //
 //    // Example sending a request using the AcceptSharedDirectoryRequest method.
 //    req := client.AcceptSharedDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type AddIpRoutesRequest struct {
 }
 
 // Send marshals and sends the AddIpRoutes API request.
-func (r AddIpRoutesRequest) Send() (*AddIpRoutesOutput, error) {
+func (r AddIpRoutesRequest) Send(ctx context.Context) (*AddIpRoutesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -96,7 +99,7 @@ func (r AddIpRoutesRequest) Send() (*AddIpRoutesOutput, error) {
 //
 //    // Example sending a request using the AddIpRoutesRequest method.
 //    req := client.AddIpRoutesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -130,7 +133,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -148,7 +152,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -182,7 +186,8 @@ type CancelSchemaExtensionRequest struct {
 }
 
 // Send marshals and sends the CancelSchemaExtension API request.
-func (r CancelSchemaExtensionRequest) Send() (*CancelSchemaExtensionOutput, error) {
+func (r CancelSchemaExtensionRequest) Send(ctx context.Context) (*CancelSchemaExtensionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +206,7 @@ func (r CancelSchemaExtensionRequest) Send() (*CancelSchemaExtensionOutput, erro
 //
 //    // Example sending a request using the CancelSchemaExtensionRequest method.
 //    req := client.CancelSchemaExtensionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -235,7 +240,8 @@ type ConnectDirectoryRequest struct {
 }
 
 // Send marshals and sends the ConnectDirectory API request.
-func (r ConnectDirectoryRequest) Send() (*ConnectDirectoryOutput, error) {
+func (r ConnectDirectoryRequest) Send(ctx context.Context) (*ConnectDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -256,7 +262,7 @@ func (r ConnectDirectoryRequest) Send() (*ConnectDirectoryOutput, error) {
 //
 //    // Example sending a request using the ConnectDirectoryRequest method.
 //    req := client.ConnectDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -290,7 +296,8 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -311,7 +318,7 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -345,7 +352,8 @@ type CreateComputerRequest struct {
 }
 
 // Send marshals and sends the CreateComputer API request.
-func (r CreateComputerRequest) Send() (*CreateComputerOutput, error) {
+func (r CreateComputerRequest) Send(ctx context.Context) (*CreateComputerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -362,7 +370,7 @@ func (r CreateComputerRequest) Send() (*CreateComputerOutput, error) {
 //
 //    // Example sending a request using the CreateComputerRequest method.
 //    req := client.CreateComputerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -396,7 +404,8 @@ type CreateConditionalForwarderRequest struct {
 }
 
 // Send marshals and sends the CreateConditionalForwarder API request.
-func (r CreateConditionalForwarderRequest) Send() (*CreateConditionalForwarderOutput, error) {
+func (r CreateConditionalForwarderRequest) Send(ctx context.Context) (*CreateConditionalForwarderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -414,7 +423,7 @@ func (r CreateConditionalForwarderRequest) Send() (*CreateConditionalForwarderOu
 //
 //    // Example sending a request using the CreateConditionalForwarderRequest method.
 //    req := client.CreateConditionalForwarderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -448,7 +457,8 @@ type CreateDirectoryRequest struct {
 }
 
 // Send marshals and sends the CreateDirectory API request.
-func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
+func (r CreateDirectoryRequest) Send(ctx context.Context) (*CreateDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -469,7 +479,7 @@ func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
 //
 //    // Example sending a request using the CreateDirectoryRequest method.
 //    req := client.CreateDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -503,7 +513,8 @@ type CreateLogSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateLogSubscription API request.
-func (r CreateLogSubscriptionRequest) Send() (*CreateLogSubscriptionOutput, error) {
+func (r CreateLogSubscriptionRequest) Send(ctx context.Context) (*CreateLogSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +531,7 @@ func (r CreateLogSubscriptionRequest) Send() (*CreateLogSubscriptionOutput, erro
 //
 //    // Example sending a request using the CreateLogSubscriptionRequest method.
 //    req := client.CreateLogSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -554,7 +565,8 @@ type CreateMicrosoftADRequest struct {
 }
 
 // Send marshals and sends the CreateMicrosoftAD API request.
-func (r CreateMicrosoftADRequest) Send() (*CreateMicrosoftADOutput, error) {
+func (r CreateMicrosoftADRequest) Send(ctx context.Context) (*CreateMicrosoftADOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -575,7 +587,7 @@ func (r CreateMicrosoftADRequest) Send() (*CreateMicrosoftADOutput, error) {
 //
 //    // Example sending a request using the CreateMicrosoftADRequest method.
 //    req := client.CreateMicrosoftADRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -609,7 +621,8 @@ type CreateSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshot API request.
-func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -627,7 +640,7 @@ func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
 //
 //    // Example sending a request using the CreateSnapshotRequest method.
 //    req := client.CreateSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -661,7 +674,8 @@ type CreateTrustRequest struct {
 }
 
 // Send marshals and sends the CreateTrust API request.
-func (r CreateTrustRequest) Send() (*CreateTrustOutput, error) {
+func (r CreateTrustRequest) Send(ctx context.Context) (*CreateTrustOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -685,7 +699,7 @@ func (r CreateTrustRequest) Send() (*CreateTrustOutput, error) {
 //
 //    // Example sending a request using the CreateTrustRequest method.
 //    req := client.CreateTrustRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -719,7 +733,8 @@ type DeleteConditionalForwarderRequest struct {
 }
 
 // Send marshals and sends the DeleteConditionalForwarder API request.
-func (r DeleteConditionalForwarderRequest) Send() (*DeleteConditionalForwarderOutput, error) {
+func (r DeleteConditionalForwarderRequest) Send(ctx context.Context) (*DeleteConditionalForwarderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -735,7 +750,7 @@ func (r DeleteConditionalForwarderRequest) Send() (*DeleteConditionalForwarderOu
 //
 //    // Example sending a request using the DeleteConditionalForwarderRequest method.
 //    req := client.DeleteConditionalForwarderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -769,7 +784,8 @@ type DeleteDirectoryRequest struct {
 }
 
 // Send marshals and sends the DeleteDirectory API request.
-func (r DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
+func (r DeleteDirectoryRequest) Send(ctx context.Context) (*DeleteDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -790,7 +806,7 @@ func (r DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
 //
 //    // Example sending a request using the DeleteDirectoryRequest method.
 //    req := client.DeleteDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -824,7 +840,8 @@ type DeleteLogSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteLogSubscription API request.
-func (r DeleteLogSubscriptionRequest) Send() (*DeleteLogSubscriptionOutput, error) {
+func (r DeleteLogSubscriptionRequest) Send(ctx context.Context) (*DeleteLogSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -840,7 +857,7 @@ func (r DeleteLogSubscriptionRequest) Send() (*DeleteLogSubscriptionOutput, erro
 //
 //    // Example sending a request using the DeleteLogSubscriptionRequest method.
 //    req := client.DeleteLogSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -874,7 +891,8 @@ type DeleteSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
-func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
+func (r DeleteSnapshotRequest) Send(ctx context.Context) (*DeleteSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +908,7 @@ func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
 //
 //    // Example sending a request using the DeleteSnapshotRequest method.
 //    req := client.DeleteSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -924,7 +942,8 @@ type DeleteTrustRequest struct {
 }
 
 // Send marshals and sends the DeleteTrust API request.
-func (r DeleteTrustRequest) Send() (*DeleteTrustOutput, error) {
+func (r DeleteTrustRequest) Send(ctx context.Context) (*DeleteTrustOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -941,7 +960,7 @@ func (r DeleteTrustRequest) Send() (*DeleteTrustOutput, error) {
 //
 //    // Example sending a request using the DeleteTrustRequest method.
 //    req := client.DeleteTrustRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -975,7 +994,8 @@ type DeregisterEventTopicRequest struct {
 }
 
 // Send marshals and sends the DeregisterEventTopic API request.
-func (r DeregisterEventTopicRequest) Send() (*DeregisterEventTopicOutput, error) {
+func (r DeregisterEventTopicRequest) Send(ctx context.Context) (*DeregisterEventTopicOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -991,7 +1011,7 @@ func (r DeregisterEventTopicRequest) Send() (*DeregisterEventTopicOutput, error)
 //
 //    // Example sending a request using the DeregisterEventTopicRequest method.
 //    req := client.DeregisterEventTopicRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1025,7 +1045,8 @@ type DescribeConditionalForwardersRequest struct {
 }
 
 // Send marshals and sends the DescribeConditionalForwarders API request.
-func (r DescribeConditionalForwardersRequest) Send() (*DescribeConditionalForwardersOutput, error) {
+func (r DescribeConditionalForwardersRequest) Send(ctx context.Context) (*DescribeConditionalForwardersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1044,7 +1065,7 @@ func (r DescribeConditionalForwardersRequest) Send() (*DescribeConditionalForwar
 //
 //    // Example sending a request using the DescribeConditionalForwardersRequest method.
 //    req := client.DescribeConditionalForwardersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1078,7 +1099,8 @@ type DescribeDirectoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeDirectories API request.
-func (r DescribeDirectoriesRequest) Send() (*DescribeDirectoriesOutput, error) {
+func (r DescribeDirectoriesRequest) Send(ctx context.Context) (*DescribeDirectoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1105,7 +1127,7 @@ func (r DescribeDirectoriesRequest) Send() (*DescribeDirectoriesOutput, error) {
 //
 //    // Example sending a request using the DescribeDirectoriesRequest method.
 //    req := client.DescribeDirectoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1139,7 +1161,8 @@ type DescribeDomainControllersRequest struct {
 }
 
 // Send marshals and sends the DescribeDomainControllers API request.
-func (r DescribeDomainControllersRequest) Send() (*DescribeDomainControllersOutput, error) {
+func (r DescribeDomainControllersRequest) Send(ctx context.Context) (*DescribeDomainControllersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1155,7 +1178,7 @@ func (r DescribeDomainControllersRequest) Send() (*DescribeDomainControllersOutp
 //
 //    // Example sending a request using the DescribeDomainControllersRequest method.
 //    req := client.DescribeDomainControllersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1205,7 +1228,7 @@ func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomai
 func (p *DescribeDomainControllersRequest) Paginate(opts ...aws.Option) DescribeDomainControllersPager {
 	return DescribeDomainControllersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDomainControllersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1214,6 +1237,7 @@ func (p *DescribeDomainControllersRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1241,7 +1265,8 @@ type DescribeEventTopicsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventTopics API request.
-func (r DescribeEventTopicsRequest) Send() (*DescribeEventTopicsOutput, error) {
+func (r DescribeEventTopicsRequest) Send(ctx context.Context) (*DescribeEventTopicsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1261,7 +1286,7 @@ func (r DescribeEventTopicsRequest) Send() (*DescribeEventTopicsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventTopicsRequest method.
 //    req := client.DescribeEventTopicsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1295,7 +1320,8 @@ type DescribeSharedDirectoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeSharedDirectories API request.
-func (r DescribeSharedDirectoriesRequest) Send() (*DescribeSharedDirectoriesOutput, error) {
+func (r DescribeSharedDirectoriesRequest) Send(ctx context.Context) (*DescribeSharedDirectoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1311,7 +1337,7 @@ func (r DescribeSharedDirectoriesRequest) Send() (*DescribeSharedDirectoriesOutp
 //
 //    // Example sending a request using the DescribeSharedDirectoriesRequest method.
 //    req := client.DescribeSharedDirectoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1345,7 +1371,8 @@ type DescribeSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
-func (r DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
+func (r DescribeSnapshotsRequest) Send(ctx context.Context) (*DescribeSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1368,7 +1395,7 @@ func (r DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
 //
 //    // Example sending a request using the DescribeSnapshotsRequest method.
 //    req := client.DescribeSnapshotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1402,7 +1429,8 @@ type DescribeTrustsRequest struct {
 }
 
 // Send marshals and sends the DescribeTrusts API request.
-func (r DescribeTrustsRequest) Send() (*DescribeTrustsOutput, error) {
+func (r DescribeTrustsRequest) Send(ctx context.Context) (*DescribeTrustsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1421,7 +1449,7 @@ func (r DescribeTrustsRequest) Send() (*DescribeTrustsOutput, error) {
 //
 //    // Example sending a request using the DescribeTrustsRequest method.
 //    req := client.DescribeTrustsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1455,7 +1483,8 @@ type DisableRadiusRequest struct {
 }
 
 // Send marshals and sends the DisableRadius API request.
-func (r DisableRadiusRequest) Send() (*DisableRadiusOutput, error) {
+func (r DisableRadiusRequest) Send(ctx context.Context) (*DisableRadiusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1473,7 +1502,7 @@ func (r DisableRadiusRequest) Send() (*DisableRadiusOutput, error) {
 //
 //    // Example sending a request using the DisableRadiusRequest method.
 //    req := client.DisableRadiusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1507,7 +1536,8 @@ type DisableSsoRequest struct {
 }
 
 // Send marshals and sends the DisableSso API request.
-func (r DisableSsoRequest) Send() (*DisableSsoOutput, error) {
+func (r DisableSsoRequest) Send(ctx context.Context) (*DisableSsoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1523,7 +1553,7 @@ func (r DisableSsoRequest) Send() (*DisableSsoOutput, error) {
 //
 //    // Example sending a request using the DisableSsoRequest method.
 //    req := client.DisableSsoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1557,7 +1587,8 @@ type EnableRadiusRequest struct {
 }
 
 // Send marshals and sends the EnableRadius API request.
-func (r EnableRadiusRequest) Send() (*EnableRadiusOutput, error) {
+func (r EnableRadiusRequest) Send(ctx context.Context) (*EnableRadiusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1575,7 +1606,7 @@ func (r EnableRadiusRequest) Send() (*EnableRadiusOutput, error) {
 //
 //    // Example sending a request using the EnableRadiusRequest method.
 //    req := client.EnableRadiusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1609,7 +1640,8 @@ type EnableSsoRequest struct {
 }
 
 // Send marshals and sends the EnableSso API request.
-func (r EnableSsoRequest) Send() (*EnableSsoOutput, error) {
+func (r EnableSsoRequest) Send(ctx context.Context) (*EnableSsoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1625,7 +1657,7 @@ func (r EnableSsoRequest) Send() (*EnableSsoOutput, error) {
 //
 //    // Example sending a request using the EnableSsoRequest method.
 //    req := client.EnableSsoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1659,7 +1691,8 @@ type GetDirectoryLimitsRequest struct {
 }
 
 // Send marshals and sends the GetDirectoryLimits API request.
-func (r GetDirectoryLimitsRequest) Send() (*GetDirectoryLimitsOutput, error) {
+func (r GetDirectoryLimitsRequest) Send(ctx context.Context) (*GetDirectoryLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1675,7 +1708,7 @@ func (r GetDirectoryLimitsRequest) Send() (*GetDirectoryLimitsOutput, error) {
 //
 //    // Example sending a request using the GetDirectoryLimitsRequest method.
 //    req := client.GetDirectoryLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1709,7 +1742,8 @@ type GetSnapshotLimitsRequest struct {
 }
 
 // Send marshals and sends the GetSnapshotLimits API request.
-func (r GetSnapshotLimitsRequest) Send() (*GetSnapshotLimitsOutput, error) {
+func (r GetSnapshotLimitsRequest) Send(ctx context.Context) (*GetSnapshotLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1725,7 +1759,7 @@ func (r GetSnapshotLimitsRequest) Send() (*GetSnapshotLimitsOutput, error) {
 //
 //    // Example sending a request using the GetSnapshotLimitsRequest method.
 //    req := client.GetSnapshotLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1759,7 +1793,8 @@ type ListIpRoutesRequest struct {
 }
 
 // Send marshals and sends the ListIpRoutes API request.
-func (r ListIpRoutesRequest) Send() (*ListIpRoutesOutput, error) {
+func (r ListIpRoutesRequest) Send(ctx context.Context) (*ListIpRoutesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1775,7 +1810,7 @@ func (r ListIpRoutesRequest) Send() (*ListIpRoutesOutput, error) {
 //
 //    // Example sending a request using the ListIpRoutesRequest method.
 //    req := client.ListIpRoutesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1809,7 +1844,8 @@ type ListLogSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the ListLogSubscriptions API request.
-func (r ListLogSubscriptionsRequest) Send() (*ListLogSubscriptionsOutput, error) {
+func (r ListLogSubscriptionsRequest) Send(ctx context.Context) (*ListLogSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1825,7 +1861,7 @@ func (r ListLogSubscriptionsRequest) Send() (*ListLogSubscriptionsOutput, error)
 //
 //    // Example sending a request using the ListLogSubscriptionsRequest method.
 //    req := client.ListLogSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1859,7 +1895,8 @@ type ListSchemaExtensionsRequest struct {
 }
 
 // Send marshals and sends the ListSchemaExtensions API request.
-func (r ListSchemaExtensionsRequest) Send() (*ListSchemaExtensionsOutput, error) {
+func (r ListSchemaExtensionsRequest) Send(ctx context.Context) (*ListSchemaExtensionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1875,7 +1912,7 @@ func (r ListSchemaExtensionsRequest) Send() (*ListSchemaExtensionsOutput, error)
 //
 //    // Example sending a request using the ListSchemaExtensionsRequest method.
 //    req := client.ListSchemaExtensionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1909,7 +1946,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1925,7 +1963,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1959,7 +1997,8 @@ type RegisterEventTopicRequest struct {
 }
 
 // Send marshals and sends the RegisterEventTopic API request.
-func (r RegisterEventTopicRequest) Send() (*RegisterEventTopicOutput, error) {
+func (r RegisterEventTopicRequest) Send(ctx context.Context) (*RegisterEventTopicOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1980,7 +2019,7 @@ func (r RegisterEventTopicRequest) Send() (*RegisterEventTopicOutput, error) {
 //
 //    // Example sending a request using the RegisterEventTopicRequest method.
 //    req := client.RegisterEventTopicRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2014,7 +2053,8 @@ type RejectSharedDirectoryRequest struct {
 }
 
 // Send marshals and sends the RejectSharedDirectory API request.
-func (r RejectSharedDirectoryRequest) Send() (*RejectSharedDirectoryOutput, error) {
+func (r RejectSharedDirectoryRequest) Send(ctx context.Context) (*RejectSharedDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2031,7 +2071,7 @@ func (r RejectSharedDirectoryRequest) Send() (*RejectSharedDirectoryOutput, erro
 //
 //    // Example sending a request using the RejectSharedDirectoryRequest method.
 //    req := client.RejectSharedDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2065,7 +2105,8 @@ type RemoveIpRoutesRequest struct {
 }
 
 // Send marshals and sends the RemoveIpRoutes API request.
-func (r RemoveIpRoutesRequest) Send() (*RemoveIpRoutesOutput, error) {
+func (r RemoveIpRoutesRequest) Send(ctx context.Context) (*RemoveIpRoutesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2081,7 +2122,7 @@ func (r RemoveIpRoutesRequest) Send() (*RemoveIpRoutesOutput, error) {
 //
 //    // Example sending a request using the RemoveIpRoutesRequest method.
 //    req := client.RemoveIpRoutesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2115,7 +2156,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2131,7 +2173,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2165,7 +2207,8 @@ type ResetUserPasswordRequest struct {
 }
 
 // Send marshals and sends the ResetUserPassword API request.
-func (r ResetUserPasswordRequest) Send() (*ResetUserPasswordOutput, error) {
+func (r ResetUserPasswordRequest) Send(ctx context.Context) (*ResetUserPasswordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2182,7 +2225,7 @@ func (r ResetUserPasswordRequest) Send() (*ResetUserPasswordOutput, error) {
 //
 //    // Example sending a request using the ResetUserPasswordRequest method.
 //    req := client.ResetUserPasswordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2216,7 +2259,8 @@ type RestoreFromSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreFromSnapshot API request.
-func (r RestoreFromSnapshotRequest) Send() (*RestoreFromSnapshotOutput, error) {
+func (r RestoreFromSnapshotRequest) Send(ctx context.Context) (*RestoreFromSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2240,7 +2284,7 @@ func (r RestoreFromSnapshotRequest) Send() (*RestoreFromSnapshotOutput, error) {
 //
 //    // Example sending a request using the RestoreFromSnapshotRequest method.
 //    req := client.RestoreFromSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2274,7 +2318,8 @@ type ShareDirectoryRequest struct {
 }
 
 // Send marshals and sends the ShareDirectory API request.
-func (r ShareDirectoryRequest) Send() (*ShareDirectoryOutput, error) {
+func (r ShareDirectoryRequest) Send(ctx context.Context) (*ShareDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2307,7 +2352,7 @@ func (r ShareDirectoryRequest) Send() (*ShareDirectoryOutput, error) {
 //
 //    // Example sending a request using the ShareDirectoryRequest method.
 //    req := client.ShareDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2341,7 +2386,8 @@ type StartSchemaExtensionRequest struct {
 }
 
 // Send marshals and sends the StartSchemaExtension API request.
-func (r StartSchemaExtensionRequest) Send() (*StartSchemaExtensionOutput, error) {
+func (r StartSchemaExtensionRequest) Send(ctx context.Context) (*StartSchemaExtensionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2357,7 +2403,7 @@ func (r StartSchemaExtensionRequest) Send() (*StartSchemaExtensionOutput, error)
 //
 //    // Example sending a request using the StartSchemaExtensionRequest method.
 //    req := client.StartSchemaExtensionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2391,7 +2437,8 @@ type UnshareDirectoryRequest struct {
 }
 
 // Send marshals and sends the UnshareDirectory API request.
-func (r UnshareDirectoryRequest) Send() (*UnshareDirectoryOutput, error) {
+func (r UnshareDirectoryRequest) Send(ctx context.Context) (*UnshareDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2407,7 +2454,7 @@ func (r UnshareDirectoryRequest) Send() (*UnshareDirectoryOutput, error) {
 //
 //    // Example sending a request using the UnshareDirectoryRequest method.
 //    req := client.UnshareDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2441,7 +2488,8 @@ type UpdateConditionalForwarderRequest struct {
 }
 
 // Send marshals and sends the UpdateConditionalForwarder API request.
-func (r UpdateConditionalForwarderRequest) Send() (*UpdateConditionalForwarderOutput, error) {
+func (r UpdateConditionalForwarderRequest) Send(ctx context.Context) (*UpdateConditionalForwarderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2457,7 +2505,7 @@ func (r UpdateConditionalForwarderRequest) Send() (*UpdateConditionalForwarderOu
 //
 //    // Example sending a request using the UpdateConditionalForwarderRequest method.
 //    req := client.UpdateConditionalForwarderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2491,7 +2539,8 @@ type UpdateNumberOfDomainControllersRequest struct {
 }
 
 // Send marshals and sends the UpdateNumberOfDomainControllers API request.
-func (r UpdateNumberOfDomainControllersRequest) Send() (*UpdateNumberOfDomainControllersOutput, error) {
+func (r UpdateNumberOfDomainControllersRequest) Send(ctx context.Context) (*UpdateNumberOfDomainControllersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2512,7 +2561,7 @@ func (r UpdateNumberOfDomainControllersRequest) Send() (*UpdateNumberOfDomainCon
 //
 //    // Example sending a request using the UpdateNumberOfDomainControllersRequest method.
 //    req := client.UpdateNumberOfDomainControllersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2546,7 +2595,8 @@ type UpdateRadiusRequest struct {
 }
 
 // Send marshals and sends the UpdateRadius API request.
-func (r UpdateRadiusRequest) Send() (*UpdateRadiusOutput, error) {
+func (r UpdateRadiusRequest) Send(ctx context.Context) (*UpdateRadiusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2563,7 +2613,7 @@ func (r UpdateRadiusRequest) Send() (*UpdateRadiusOutput, error) {
 //
 //    // Example sending a request using the UpdateRadiusRequest method.
 //    req := client.UpdateRadiusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2597,7 +2647,8 @@ type UpdateTrustRequest struct {
 }
 
 // Send marshals and sends the UpdateTrust API request.
-func (r UpdateTrustRequest) Send() (*UpdateTrustOutput, error) {
+func (r UpdateTrustRequest) Send(ctx context.Context) (*UpdateTrustOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2614,7 +2665,7 @@ func (r UpdateTrustRequest) Send() (*UpdateTrustOutput, error) {
 //
 //    // Example sending a request using the UpdateTrustRequest method.
 //    req := client.UpdateTrustRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2648,7 +2699,8 @@ type VerifyTrustRequest struct {
 }
 
 // Send marshals and sends the VerifyTrust API request.
-func (r VerifyTrustRequest) Send() (*VerifyTrustOutput, error) {
+func (r VerifyTrustRequest) Send(ctx context.Context) (*VerifyTrustOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2668,7 +2720,7 @@ func (r VerifyTrustRequest) Send() (*VerifyTrustOutput, error) {
 //
 //    // Example sending a request using the VerifyTrustRequest method.
 //    req := client.VerifyTrustRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

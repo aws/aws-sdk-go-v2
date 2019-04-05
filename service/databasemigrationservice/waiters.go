@@ -3,6 +3,7 @@
 package databasemigrationservice
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeEndpoints to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilEndpointDeleted(input *DescribeEndpointsInput) error {
-	return c.WaitUntilEndpointDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilEndpointDeletedWithContext is an extended version of WaitUntilEndpointDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilEndpointDeletedWithContext(ctx aws.Context, input *DescribeEndpointsInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilEndpointDeleted(ctx context.Context, input *DescribeEndpointsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilEndpointDeleted",
 		MaxAttempts: 60,
@@ -61,26 +55,19 @@ func (c *DatabaseMigrationService) WaitUntilEndpointDeletedWithContext(ctx aws.C
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationInstanceAvailable uses the AWS Database Migration Service API operation
 // DescribeReplicationInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilReplicationInstanceAvailable(input *DescribeReplicationInstancesInput) error {
-	return c.WaitUntilReplicationInstanceAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationInstanceAvailableWithContext is an extended version of WaitUntilReplicationInstanceAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilReplicationInstanceAvailableWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilReplicationInstanceAvailable(ctx context.Context, input *DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationInstanceAvailable",
 		MaxAttempts: 60,
@@ -127,26 +114,19 @@ func (c *DatabaseMigrationService) WaitUntilReplicationInstanceAvailableWithCont
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationInstanceDeleted uses the AWS Database Migration Service API operation
 // DescribeReplicationInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilReplicationInstanceDeleted(input *DescribeReplicationInstancesInput) error {
-	return c.WaitUntilReplicationInstanceDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationInstanceDeletedWithContext is an extended version of WaitUntilReplicationInstanceDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilReplicationInstanceDeletedWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilReplicationInstanceDeleted(ctx context.Context, input *DescribeReplicationInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationInstanceDeleted",
 		MaxAttempts: 60,
@@ -178,26 +158,19 @@ func (c *DatabaseMigrationService) WaitUntilReplicationInstanceDeletedWithContex
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationTaskDeleted uses the AWS Database Migration Service API operation
 // DescribeReplicationTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskDeleted(input *DescribeReplicationTasksInput) error {
-	return c.WaitUntilReplicationTaskDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationTaskDeletedWithContext is an extended version of WaitUntilReplicationTaskDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskDeletedWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilReplicationTaskDeleted(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskDeleted",
 		MaxAttempts: 60,
@@ -249,26 +222,19 @@ func (c *DatabaseMigrationService) WaitUntilReplicationTaskDeletedWithContext(ct
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationTaskReady uses the AWS Database Migration Service API operation
 // DescribeReplicationTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskReady(input *DescribeReplicationTasksInput) error {
-	return c.WaitUntilReplicationTaskReadyWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationTaskReadyWithContext is an extended version of WaitUntilReplicationTaskReady.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskReadyWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilReplicationTaskReady(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskReady",
 		MaxAttempts: 60,
@@ -335,26 +301,19 @@ func (c *DatabaseMigrationService) WaitUntilReplicationTaskReadyWithContext(ctx 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationTaskRunning uses the AWS Database Migration Service API operation
 // DescribeReplicationTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskRunning(input *DescribeReplicationTasksInput) error {
-	return c.WaitUntilReplicationTaskRunningWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationTaskRunningWithContext is an extended version of WaitUntilReplicationTaskRunning.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskRunningWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilReplicationTaskRunning(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskRunning",
 		MaxAttempts: 60,
@@ -421,26 +380,19 @@ func (c *DatabaseMigrationService) WaitUntilReplicationTaskRunningWithContext(ct
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilReplicationTaskStopped uses the AWS Database Migration Service API operation
 // DescribeReplicationTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskStopped(input *DescribeReplicationTasksInput) error {
-	return c.WaitUntilReplicationTaskStoppedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilReplicationTaskStoppedWithContext is an extended version of WaitUntilReplicationTaskStopped.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilReplicationTaskStoppedWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilReplicationTaskStopped(ctx context.Context, input *DescribeReplicationTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilReplicationTaskStopped",
 		MaxAttempts: 60,
@@ -507,26 +459,19 @@ func (c *DatabaseMigrationService) WaitUntilReplicationTaskStoppedWithContext(ct
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilTestConnectionSucceeds uses the AWS Database Migration Service API operation
 // TestConnection to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceeds(input *TestConnectionInput) error {
-	return c.WaitUntilTestConnectionSucceedsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilTestConnectionSucceedsWithContext is an extended version of WaitUntilTestConnectionSucceeds.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceedsWithContext(ctx aws.Context, input *TestConnectionInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceeds(ctx context.Context, input *TestConnectionInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTestConnectionSucceeds",
 		MaxAttempts: 60,
@@ -558,5 +503,5 @@ func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceedsWithContext(ct
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

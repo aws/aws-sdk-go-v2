@@ -3,6 +3,7 @@
 package macie
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AssociateMemberAccountRequest struct {
 }
 
 // Send marshals and sends the AssociateMemberAccount API request.
-func (r AssociateMemberAccountRequest) Send() (*AssociateMemberAccountOutput, error) {
+func (r AssociateMemberAccountRequest) Send(ctx context.Context) (*AssociateMemberAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r AssociateMemberAccountRequest) Send() (*AssociateMemberAccountOutput, er
 //
 //    // Example sending a request using the AssociateMemberAccountRequest method.
 //    req := client.AssociateMemberAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type AssociateS3ResourcesRequest struct {
 }
 
 // Send marshals and sends the AssociateS3Resources API request.
-func (r AssociateS3ResourcesRequest) Send() (*AssociateS3ResourcesOutput, error) {
+func (r AssociateS3ResourcesRequest) Send(ctx context.Context) (*AssociateS3ResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r AssociateS3ResourcesRequest) Send() (*AssociateS3ResourcesOutput, error)
 //
 //    // Example sending a request using the AssociateS3ResourcesRequest method.
 //    req := client.AssociateS3ResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type DisassociateMemberAccountRequest struct {
 }
 
 // Send marshals and sends the DisassociateMemberAccount API request.
-func (r DisassociateMemberAccountRequest) Send() (*DisassociateMemberAccountOutput, error) {
+func (r DisassociateMemberAccountRequest) Send(ctx context.Context) (*DisassociateMemberAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r DisassociateMemberAccountRequest) Send() (*DisassociateMemberAccountOutp
 //
 //    // Example sending a request using the DisassociateMemberAccountRequest method.
 //    req := client.DisassociateMemberAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -179,7 +183,8 @@ type DisassociateS3ResourcesRequest struct {
 }
 
 // Send marshals and sends the DisassociateS3Resources API request.
-func (r DisassociateS3ResourcesRequest) Send() (*DisassociateS3ResourcesOutput, error) {
+func (r DisassociateS3ResourcesRequest) Send(ctx context.Context) (*DisassociateS3ResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -198,7 +203,7 @@ func (r DisassociateS3ResourcesRequest) Send() (*DisassociateS3ResourcesOutput, 
 //
 //    // Example sending a request using the DisassociateS3ResourcesRequest method.
 //    req := client.DisassociateS3ResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -232,7 +237,8 @@ type ListMemberAccountsRequest struct {
 }
 
 // Send marshals and sends the ListMemberAccounts API request.
-func (r ListMemberAccountsRequest) Send() (*ListMemberAccountsOutput, error) {
+func (r ListMemberAccountsRequest) Send(ctx context.Context) (*ListMemberAccountsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +255,7 @@ func (r ListMemberAccountsRequest) Send() (*ListMemberAccountsOutput, error) {
 //
 //    // Example sending a request using the ListMemberAccountsRequest method.
 //    req := client.ListMemberAccountsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -299,7 +305,7 @@ func (c *Macie) ListMemberAccountsRequest(input *ListMemberAccountsInput) ListMe
 func (p *ListMemberAccountsRequest) Paginate(opts ...aws.Option) ListMemberAccountsPager {
 	return ListMemberAccountsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMemberAccountsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -308,6 +314,7 @@ func (p *ListMemberAccountsRequest) Paginate(opts ...aws.Option) ListMemberAccou
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -335,7 +342,8 @@ type ListS3ResourcesRequest struct {
 }
 
 // Send marshals and sends the ListS3Resources API request.
-func (r ListS3ResourcesRequest) Send() (*ListS3ResourcesOutput, error) {
+func (r ListS3ResourcesRequest) Send(ctx context.Context) (*ListS3ResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -355,7 +363,7 @@ func (r ListS3ResourcesRequest) Send() (*ListS3ResourcesOutput, error) {
 //
 //    // Example sending a request using the ListS3ResourcesRequest method.
 //    req := client.ListS3ResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -405,7 +413,7 @@ func (c *Macie) ListS3ResourcesRequest(input *ListS3ResourcesInput) ListS3Resour
 func (p *ListS3ResourcesRequest) Paginate(opts ...aws.Option) ListS3ResourcesPager {
 	return ListS3ResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListS3ResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -414,6 +422,7 @@ func (p *ListS3ResourcesRequest) Paginate(opts ...aws.Option) ListS3ResourcesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -441,7 +450,8 @@ type UpdateS3ResourcesRequest struct {
 }
 
 // Send marshals and sends the UpdateS3Resources API request.
-func (r UpdateS3ResourcesRequest) Send() (*UpdateS3ResourcesOutput, error) {
+func (r UpdateS3ResourcesRequest) Send(ctx context.Context) (*UpdateS3ResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,7 +471,7 @@ func (r UpdateS3ResourcesRequest) Send() (*UpdateS3ResourcesOutput, error) {
 //
 //    // Example sending a request using the UpdateS3ResourcesRequest method.
 //    req := client.UpdateS3ResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

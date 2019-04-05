@@ -2,6 +2,7 @@ package s3manager
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"sort"
@@ -249,7 +250,7 @@ func NewUploaderWithClient(svc s3iface.S3API, options ...func(*Uploader)) *Uploa
 //          u.LeavePartsOnError = true    // Don't delete the parts if the upload fails.
 //     })
 func (u Uploader) Upload(input *UploadInput, options ...func(*Uploader)) (*UploadOutput, error) {
-	return u.UploadWithContext(aws.BackgroundContext(), input, options...)
+	return u.UploadWithContext(context.Background(), input, options...)
 }
 
 // UploadWithContext uploads an object to S3, intelligently buffering large
@@ -270,7 +271,7 @@ func (u Uploader) Upload(input *UploadInput, options ...func(*Uploader)) (*Uploa
 // options that will be applied to all API operations made with this uploader.
 //
 // It is safe to call this method concurrently across goroutines.
-func (u Uploader) UploadWithContext(ctx aws.Context, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
+func (u Uploader) UploadWithContext(ctx context.Context, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
 	i := uploader{in: input, cfg: u, ctx: ctx}
 
 	for _, opt := range opts {
@@ -298,10 +299,10 @@ func (u Uploader) UploadWithContext(ctx aws.Context, input *UploadInput, opts ..
 //	}
 //
 //	iter := &s3managee.UploadObjectsIterator{Objects: objects}
-//	if err := svc.UploadWithIterator(aws.BackgroundContext(), iter); err != nil {
+//	if err := svc.UploadWithIterator(context.Background(), iter); err != nil {
 //		return err
 //	}
-func (u Uploader) UploadWithIterator(ctx aws.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
+func (u Uploader) UploadWithIterator(ctx context.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
 	var errs []Error
 	for iter.Next() {
 		object := iter.UploadObject()
@@ -338,7 +339,7 @@ func (u Uploader) UploadWithIterator(ctx aws.Context, iter BatchUploadIterator, 
 
 // internal structure to manage an upload to S3.
 type uploader struct {
-	ctx aws.Context
+	ctx context.Context
 	cfg Uploader
 
 	in *UploadInput
@@ -466,9 +467,8 @@ func (u *uploader) singlePart(buf io.ReadSeeker) (*UploadOutput, error) {
 	// Need to use request form because URL generated in request is
 	// used in return.
 	req := u.cfg.S3.PutObjectRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -512,9 +512,8 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 
 	// Create the multipart
 	req := u.cfg.S3.CreateMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -623,9 +622,8 @@ func (u *multiuploader) send(c chunk) error {
 		PartNumber:           &c.num,
 	}
 	req := u.cfg.S3.UploadPartRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return err
 	}
@@ -668,9 +666,8 @@ func (u *multiuploader) fail() {
 		UploadId: &u.uploadID,
 	}
 	req := u.cfg.S3.AbortMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(u.ctx); err != nil {
 		logMessage(u.cfg.S3, aws.LogDebug, fmt.Sprintf("failed to abort multipart upload, %v", err))
 	}
 }
@@ -692,9 +689,8 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 		MultipartUpload: &s3.CompletedMultipartUpload{Parts: u.parts},
 	}
 	req := u.cfg.S3.CompleteMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		u.seterr(err)
 		u.fail()

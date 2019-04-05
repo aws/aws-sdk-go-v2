@@ -3,6 +3,7 @@
 package licensemanager
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateLicenseConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateLicenseConfiguration API request.
-func (r CreateLicenseConfigurationRequest) Send() (*CreateLicenseConfigurationOutput, error) {
+func (r CreateLicenseConfigurationRequest) Send(ctx context.Context) (*CreateLicenseConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +44,7 @@ func (r CreateLicenseConfigurationRequest) Send() (*CreateLicenseConfigurationOu
 //
 //    // Example sending a request using the CreateLicenseConfigurationRequest method.
 //    req := client.CreateLicenseConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +78,8 @@ type DeleteLicenseConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteLicenseConfiguration API request.
-func (r DeleteLicenseConfigurationRequest) Send() (*DeleteLicenseConfigurationOutput, error) {
+func (r DeleteLicenseConfigurationRequest) Send(ctx context.Context) (*DeleteLicenseConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r DeleteLicenseConfigurationRequest) Send() (*DeleteLicenseConfigurationOu
 //
 //    // Example sending a request using the DeleteLicenseConfigurationRequest method.
 //    req := client.DeleteLicenseConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type GetLicenseConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetLicenseConfiguration API request.
-func (r GetLicenseConfigurationRequest) Send() (*GetLicenseConfigurationOutput, error) {
+func (r GetLicenseConfigurationRequest) Send(ctx context.Context) (*GetLicenseConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r GetLicenseConfigurationRequest) Send() (*GetLicenseConfigurationOutput, 
 //
 //    // Example sending a request using the GetLicenseConfigurationRequest method.
 //    req := client.GetLicenseConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type GetServiceSettingsRequest struct {
 }
 
 // Send marshals and sends the GetServiceSettings API request.
-func (r GetServiceSettingsRequest) Send() (*GetServiceSettingsOutput, error) {
+func (r GetServiceSettingsRequest) Send(ctx context.Context) (*GetServiceSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,7 +199,7 @@ func (r GetServiceSettingsRequest) Send() (*GetServiceSettingsOutput, error) {
 //
 //    // Example sending a request using the GetServiceSettingsRequest method.
 //    req := client.GetServiceSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +233,8 @@ type ListAssociationsForLicenseConfigurationRequest struct {
 }
 
 // Send marshals and sends the ListAssociationsForLicenseConfiguration API request.
-func (r ListAssociationsForLicenseConfigurationRequest) Send() (*ListAssociationsForLicenseConfigurationOutput, error) {
+func (r ListAssociationsForLicenseConfigurationRequest) Send(ctx context.Context) (*ListAssociationsForLicenseConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -248,7 +254,7 @@ func (r ListAssociationsForLicenseConfigurationRequest) Send() (*ListAssociation
 //
 //    // Example sending a request using the ListAssociationsForLicenseConfigurationRequest method.
 //    req := client.ListAssociationsForLicenseConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -282,7 +288,8 @@ type ListLicenseConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListLicenseConfigurations API request.
-func (r ListLicenseConfigurationsRequest) Send() (*ListLicenseConfigurationsOutput, error) {
+func (r ListLicenseConfigurationsRequest) Send(ctx context.Context) (*ListLicenseConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -300,7 +307,7 @@ func (r ListLicenseConfigurationsRequest) Send() (*ListLicenseConfigurationsOutp
 //
 //    // Example sending a request using the ListLicenseConfigurationsRequest method.
 //    req := client.ListLicenseConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -334,7 +341,8 @@ type ListLicenseSpecificationsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListLicenseSpecificationsForResource API request.
-func (r ListLicenseSpecificationsForResourceRequest) Send() (*ListLicenseSpecificationsForResourceOutput, error) {
+func (r ListLicenseSpecificationsForResourceRequest) Send(ctx context.Context) (*ListLicenseSpecificationsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -350,7 +358,7 @@ func (r ListLicenseSpecificationsForResourceRequest) Send() (*ListLicenseSpecifi
 //
 //    // Example sending a request using the ListLicenseSpecificationsForResourceRequest method.
 //    req := client.ListLicenseSpecificationsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -384,7 +392,8 @@ type ListResourceInventoryRequest struct {
 }
 
 // Send marshals and sends the ListResourceInventory API request.
-func (r ListResourceInventoryRequest) Send() (*ListResourceInventoryOutput, error) {
+func (r ListResourceInventoryRequest) Send(ctx context.Context) (*ListResourceInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,7 +409,7 @@ func (r ListResourceInventoryRequest) Send() (*ListResourceInventoryOutput, erro
 //
 //    // Example sending a request using the ListResourceInventoryRequest method.
 //    req := client.ListResourceInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -434,7 +443,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +460,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -484,7 +494,8 @@ type ListUsageForLicenseConfigurationRequest struct {
 }
 
 // Send marshals and sends the ListUsageForLicenseConfiguration API request.
-func (r ListUsageForLicenseConfigurationRequest) Send() (*ListUsageForLicenseConfigurationOutput, error) {
+func (r ListUsageForLicenseConfigurationRequest) Send(ctx context.Context) (*ListUsageForLicenseConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -502,7 +513,7 @@ func (r ListUsageForLicenseConfigurationRequest) Send() (*ListUsageForLicenseCon
 //
 //    // Example sending a request using the ListUsageForLicenseConfigurationRequest method.
 //    req := client.ListUsageForLicenseConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -536,7 +547,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -552,7 +564,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -586,7 +598,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,7 +615,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -636,7 +649,8 @@ type UpdateLicenseConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateLicenseConfiguration API request.
-func (r UpdateLicenseConfigurationRequest) Send() (*UpdateLicenseConfigurationOutput, error) {
+func (r UpdateLicenseConfigurationRequest) Send(ctx context.Context) (*UpdateLicenseConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -657,7 +671,7 @@ func (r UpdateLicenseConfigurationRequest) Send() (*UpdateLicenseConfigurationOu
 //
 //    // Example sending a request using the UpdateLicenseConfigurationRequest method.
 //    req := client.UpdateLicenseConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -691,7 +705,8 @@ type UpdateLicenseSpecificationsForResourceRequest struct {
 }
 
 // Send marshals and sends the UpdateLicenseSpecificationsForResource API request.
-func (r UpdateLicenseSpecificationsForResourceRequest) Send() (*UpdateLicenseSpecificationsForResourceOutput, error) {
+func (r UpdateLicenseSpecificationsForResourceRequest) Send(ctx context.Context) (*UpdateLicenseSpecificationsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -711,7 +726,7 @@ func (r UpdateLicenseSpecificationsForResourceRequest) Send() (*UpdateLicenseSpe
 //
 //    // Example sending a request using the UpdateLicenseSpecificationsForResourceRequest method.
 //    req := client.UpdateLicenseSpecificationsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -745,7 +760,8 @@ type UpdateServiceSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateServiceSettings API request.
-func (r UpdateServiceSettingsRequest) Send() (*UpdateServiceSettingsOutput, error) {
+func (r UpdateServiceSettingsRequest) Send(ctx context.Context) (*UpdateServiceSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -761,7 +777,7 @@ func (r UpdateServiceSettingsRequest) Send() (*UpdateServiceSettingsOutput, erro
 //
 //    // Example sending a request using the UpdateServiceSettingsRequest method.
 //    req := client.UpdateServiceSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

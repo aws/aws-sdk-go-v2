@@ -9,6 +9,8 @@
 package kinesisiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
 )
@@ -117,11 +119,9 @@ type KinesisAPI interface {
 
 	UpdateShardCountRequest(*kinesis.UpdateShardCountInput) kinesis.UpdateShardCountRequest
 
-	WaitUntilStreamExists(*kinesis.DescribeStreamInput) error
-	WaitUntilStreamExistsWithContext(aws.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
+	WaitUntilStreamExists(context.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
 
-	WaitUntilStreamNotExists(*kinesis.DescribeStreamInput) error
-	WaitUntilStreamNotExistsWithContext(aws.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
+	WaitUntilStreamNotExists(context.Context, *kinesis.DescribeStreamInput, ...aws.WaiterOption) error
 }
 
 var _ KinesisAPI = (*kinesis.Kinesis)(nil)

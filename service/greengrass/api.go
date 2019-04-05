@@ -3,6 +3,8 @@
 package greengrass
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type AssociateRoleToGroupRequest struct {
 }
 
 // Send marshals and sends the AssociateRoleToGroup API request.
-func (r AssociateRoleToGroupRequest) Send() (*AssociateRoleToGroupOutput, error) {
+func (r AssociateRoleToGroupRequest) Send(ctx context.Context) (*AssociateRoleToGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +39,7 @@ func (r AssociateRoleToGroupRequest) Send() (*AssociateRoleToGroupOutput, error)
 //
 //    // Example sending a request using the AssociateRoleToGroupRequest method.
 //    req := client.AssociateRoleToGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +73,8 @@ type AssociateServiceRoleToAccountRequest struct {
 }
 
 // Send marshals and sends the AssociateServiceRoleToAccount API request.
-func (r AssociateServiceRoleToAccountRequest) Send() (*AssociateServiceRoleToAccountOutput, error) {
+func (r AssociateServiceRoleToAccountRequest) Send(ctx context.Context) (*AssociateServiceRoleToAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +93,7 @@ func (r AssociateServiceRoleToAccountRequest) Send() (*AssociateServiceRoleToAcc
 //
 //    // Example sending a request using the AssociateServiceRoleToAccountRequest method.
 //    req := client.AssociateServiceRoleToAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +127,8 @@ type CreateConnectorDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateConnectorDefinition API request.
-func (r CreateConnectorDefinitionRequest) Send() (*CreateConnectorDefinitionOutput, error) {
+func (r CreateConnectorDefinitionRequest) Send(ctx context.Context) (*CreateConnectorDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +146,7 @@ func (r CreateConnectorDefinitionRequest) Send() (*CreateConnectorDefinitionOutp
 //
 //    // Example sending a request using the CreateConnectorDefinitionRequest method.
 //    req := client.CreateConnectorDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +180,8 @@ type CreateConnectorDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateConnectorDefinitionVersion API request.
-func (r CreateConnectorDefinitionVersionRequest) Send() (*CreateConnectorDefinitionVersionOutput, error) {
+func (r CreateConnectorDefinitionVersionRequest) Send(ctx context.Context) (*CreateConnectorDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +197,7 @@ func (r CreateConnectorDefinitionVersionRequest) Send() (*CreateConnectorDefinit
 //
 //    // Example sending a request using the CreateConnectorDefinitionVersionRequest method.
 //    req := client.CreateConnectorDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +231,8 @@ type CreateCoreDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateCoreDefinition API request.
-func (r CreateCoreDefinitionRequest) Send() (*CreateCoreDefinitionOutput, error) {
+func (r CreateCoreDefinitionRequest) Send(ctx context.Context) (*CreateCoreDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +250,7 @@ func (r CreateCoreDefinitionRequest) Send() (*CreateCoreDefinitionOutput, error)
 //
 //    // Example sending a request using the CreateCoreDefinitionRequest method.
 //    req := client.CreateCoreDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -277,7 +284,8 @@ type CreateCoreDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateCoreDefinitionVersion API request.
-func (r CreateCoreDefinitionVersionRequest) Send() (*CreateCoreDefinitionVersionOutput, error) {
+func (r CreateCoreDefinitionVersionRequest) Send(ctx context.Context) (*CreateCoreDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +302,7 @@ func (r CreateCoreDefinitionVersionRequest) Send() (*CreateCoreDefinitionVersion
 //
 //    // Example sending a request using the CreateCoreDefinitionVersionRequest method.
 //    req := client.CreateCoreDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -328,7 +336,8 @@ type CreateDeploymentRequest struct {
 }
 
 // Send marshals and sends the CreateDeployment API request.
-func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -345,7 +354,7 @@ func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
 //
 //    // Example sending a request using the CreateDeploymentRequest method.
 //    req := client.CreateDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -379,7 +388,8 @@ type CreateDeviceDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateDeviceDefinition API request.
-func (r CreateDeviceDefinitionRequest) Send() (*CreateDeviceDefinitionOutput, error) {
+func (r CreateDeviceDefinitionRequest) Send(ctx context.Context) (*CreateDeviceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -396,7 +406,7 @@ func (r CreateDeviceDefinitionRequest) Send() (*CreateDeviceDefinitionOutput, er
 //
 //    // Example sending a request using the CreateDeviceDefinitionRequest method.
 //    req := client.CreateDeviceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -430,7 +440,8 @@ type CreateDeviceDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateDeviceDefinitionVersion API request.
-func (r CreateDeviceDefinitionVersionRequest) Send() (*CreateDeviceDefinitionVersionOutput, error) {
+func (r CreateDeviceDefinitionVersionRequest) Send(ctx context.Context) (*CreateDeviceDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -446,7 +457,7 @@ func (r CreateDeviceDefinitionVersionRequest) Send() (*CreateDeviceDefinitionVer
 //
 //    // Example sending a request using the CreateDeviceDefinitionVersionRequest method.
 //    req := client.CreateDeviceDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -480,7 +491,8 @@ type CreateFunctionDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateFunctionDefinition API request.
-func (r CreateFunctionDefinitionRequest) Send() (*CreateFunctionDefinitionOutput, error) {
+func (r CreateFunctionDefinitionRequest) Send(ctx context.Context) (*CreateFunctionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -499,7 +511,7 @@ func (r CreateFunctionDefinitionRequest) Send() (*CreateFunctionDefinitionOutput
 //
 //    // Example sending a request using the CreateFunctionDefinitionRequest method.
 //    req := client.CreateFunctionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -533,7 +545,8 @@ type CreateFunctionDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateFunctionDefinitionVersion API request.
-func (r CreateFunctionDefinitionVersionRequest) Send() (*CreateFunctionDefinitionVersionOutput, error) {
+func (r CreateFunctionDefinitionVersionRequest) Send(ctx context.Context) (*CreateFunctionDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -549,7 +562,7 @@ func (r CreateFunctionDefinitionVersionRequest) Send() (*CreateFunctionDefinitio
 //
 //    // Example sending a request using the CreateFunctionDefinitionVersionRequest method.
 //    req := client.CreateFunctionDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -583,7 +596,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,7 +616,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -636,7 +650,8 @@ type CreateGroupCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the CreateGroupCertificateAuthority API request.
-func (r CreateGroupCertificateAuthorityRequest) Send() (*CreateGroupCertificateAuthorityOutput, error) {
+func (r CreateGroupCertificateAuthorityRequest) Send(ctx context.Context) (*CreateGroupCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -653,7 +668,7 @@ func (r CreateGroupCertificateAuthorityRequest) Send() (*CreateGroupCertificateA
 //
 //    // Example sending a request using the CreateGroupCertificateAuthorityRequest method.
 //    req := client.CreateGroupCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -687,7 +702,8 @@ type CreateGroupVersionRequest struct {
 }
 
 // Send marshals and sends the CreateGroupVersion API request.
-func (r CreateGroupVersionRequest) Send() (*CreateGroupVersionOutput, error) {
+func (r CreateGroupVersionRequest) Send(ctx context.Context) (*CreateGroupVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -703,7 +719,7 @@ func (r CreateGroupVersionRequest) Send() (*CreateGroupVersionOutput, error) {
 //
 //    // Example sending a request using the CreateGroupVersionRequest method.
 //    req := client.CreateGroupVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -737,7 +753,8 @@ type CreateLoggerDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateLoggerDefinition API request.
-func (r CreateLoggerDefinitionRequest) Send() (*CreateLoggerDefinitionOutput, error) {
+func (r CreateLoggerDefinitionRequest) Send(ctx context.Context) (*CreateLoggerDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -754,7 +771,7 @@ func (r CreateLoggerDefinitionRequest) Send() (*CreateLoggerDefinitionOutput, er
 //
 //    // Example sending a request using the CreateLoggerDefinitionRequest method.
 //    req := client.CreateLoggerDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -788,7 +805,8 @@ type CreateLoggerDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateLoggerDefinitionVersion API request.
-func (r CreateLoggerDefinitionVersionRequest) Send() (*CreateLoggerDefinitionVersionOutput, error) {
+func (r CreateLoggerDefinitionVersionRequest) Send(ctx context.Context) (*CreateLoggerDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -804,7 +822,7 @@ func (r CreateLoggerDefinitionVersionRequest) Send() (*CreateLoggerDefinitionVer
 //
 //    // Example sending a request using the CreateLoggerDefinitionVersionRequest method.
 //    req := client.CreateLoggerDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -838,7 +856,8 @@ type CreateResourceDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateResourceDefinition API request.
-func (r CreateResourceDefinitionRequest) Send() (*CreateResourceDefinitionOutput, error) {
+func (r CreateResourceDefinitionRequest) Send(ctx context.Context) (*CreateResourceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -856,7 +875,7 @@ func (r CreateResourceDefinitionRequest) Send() (*CreateResourceDefinitionOutput
 //
 //    // Example sending a request using the CreateResourceDefinitionRequest method.
 //    req := client.CreateResourceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -890,7 +909,8 @@ type CreateResourceDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateResourceDefinitionVersion API request.
-func (r CreateResourceDefinitionVersionRequest) Send() (*CreateResourceDefinitionVersionOutput, error) {
+func (r CreateResourceDefinitionVersionRequest) Send(ctx context.Context) (*CreateResourceDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -906,7 +926,7 @@ func (r CreateResourceDefinitionVersionRequest) Send() (*CreateResourceDefinitio
 //
 //    // Example sending a request using the CreateResourceDefinitionVersionRequest method.
 //    req := client.CreateResourceDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -940,7 +960,8 @@ type CreateSoftwareUpdateJobRequest struct {
 }
 
 // Send marshals and sends the CreateSoftwareUpdateJob API request.
-func (r CreateSoftwareUpdateJobRequest) Send() (*CreateSoftwareUpdateJobOutput, error) {
+func (r CreateSoftwareUpdateJobRequest) Send(ctx context.Context) (*CreateSoftwareUpdateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -959,7 +980,7 @@ func (r CreateSoftwareUpdateJobRequest) Send() (*CreateSoftwareUpdateJobOutput, 
 //
 //    // Example sending a request using the CreateSoftwareUpdateJobRequest method.
 //    req := client.CreateSoftwareUpdateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -993,7 +1014,8 @@ type CreateSubscriptionDefinitionRequest struct {
 }
 
 // Send marshals and sends the CreateSubscriptionDefinition API request.
-func (r CreateSubscriptionDefinitionRequest) Send() (*CreateSubscriptionDefinitionOutput, error) {
+func (r CreateSubscriptionDefinitionRequest) Send(ctx context.Context) (*CreateSubscriptionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1011,7 +1033,7 @@ func (r CreateSubscriptionDefinitionRequest) Send() (*CreateSubscriptionDefiniti
 //
 //    // Example sending a request using the CreateSubscriptionDefinitionRequest method.
 //    req := client.CreateSubscriptionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1045,7 +1067,8 @@ type CreateSubscriptionDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the CreateSubscriptionDefinitionVersion API request.
-func (r CreateSubscriptionDefinitionVersionRequest) Send() (*CreateSubscriptionDefinitionVersionOutput, error) {
+func (r CreateSubscriptionDefinitionVersionRequest) Send(ctx context.Context) (*CreateSubscriptionDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1061,7 +1084,7 @@ func (r CreateSubscriptionDefinitionVersionRequest) Send() (*CreateSubscriptionD
 //
 //    // Example sending a request using the CreateSubscriptionDefinitionVersionRequest method.
 //    req := client.CreateSubscriptionDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1095,7 +1118,8 @@ type DeleteConnectorDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteConnectorDefinition API request.
-func (r DeleteConnectorDefinitionRequest) Send() (*DeleteConnectorDefinitionOutput, error) {
+func (r DeleteConnectorDefinitionRequest) Send(ctx context.Context) (*DeleteConnectorDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1111,7 +1135,7 @@ func (r DeleteConnectorDefinitionRequest) Send() (*DeleteConnectorDefinitionOutp
 //
 //    // Example sending a request using the DeleteConnectorDefinitionRequest method.
 //    req := client.DeleteConnectorDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1145,7 +1169,8 @@ type DeleteCoreDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteCoreDefinition API request.
-func (r DeleteCoreDefinitionRequest) Send() (*DeleteCoreDefinitionOutput, error) {
+func (r DeleteCoreDefinitionRequest) Send(ctx context.Context) (*DeleteCoreDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,7 +1186,7 @@ func (r DeleteCoreDefinitionRequest) Send() (*DeleteCoreDefinitionOutput, error)
 //
 //    // Example sending a request using the DeleteCoreDefinitionRequest method.
 //    req := client.DeleteCoreDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1195,7 +1220,8 @@ type DeleteDeviceDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteDeviceDefinition API request.
-func (r DeleteDeviceDefinitionRequest) Send() (*DeleteDeviceDefinitionOutput, error) {
+func (r DeleteDeviceDefinitionRequest) Send(ctx context.Context) (*DeleteDeviceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1211,7 +1237,7 @@ func (r DeleteDeviceDefinitionRequest) Send() (*DeleteDeviceDefinitionOutput, er
 //
 //    // Example sending a request using the DeleteDeviceDefinitionRequest method.
 //    req := client.DeleteDeviceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1245,7 +1271,8 @@ type DeleteFunctionDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteFunctionDefinition API request.
-func (r DeleteFunctionDefinitionRequest) Send() (*DeleteFunctionDefinitionOutput, error) {
+func (r DeleteFunctionDefinitionRequest) Send(ctx context.Context) (*DeleteFunctionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1261,7 +1288,7 @@ func (r DeleteFunctionDefinitionRequest) Send() (*DeleteFunctionDefinitionOutput
 //
 //    // Example sending a request using the DeleteFunctionDefinitionRequest method.
 //    req := client.DeleteFunctionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1295,7 +1322,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1311,7 +1339,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1345,7 +1373,8 @@ type DeleteLoggerDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteLoggerDefinition API request.
-func (r DeleteLoggerDefinitionRequest) Send() (*DeleteLoggerDefinitionOutput, error) {
+func (r DeleteLoggerDefinitionRequest) Send(ctx context.Context) (*DeleteLoggerDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1361,7 +1390,7 @@ func (r DeleteLoggerDefinitionRequest) Send() (*DeleteLoggerDefinitionOutput, er
 //
 //    // Example sending a request using the DeleteLoggerDefinitionRequest method.
 //    req := client.DeleteLoggerDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1395,7 +1424,8 @@ type DeleteResourceDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteResourceDefinition API request.
-func (r DeleteResourceDefinitionRequest) Send() (*DeleteResourceDefinitionOutput, error) {
+func (r DeleteResourceDefinitionRequest) Send(ctx context.Context) (*DeleteResourceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1411,7 +1441,7 @@ func (r DeleteResourceDefinitionRequest) Send() (*DeleteResourceDefinitionOutput
 //
 //    // Example sending a request using the DeleteResourceDefinitionRequest method.
 //    req := client.DeleteResourceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1445,7 +1475,8 @@ type DeleteSubscriptionDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscriptionDefinition API request.
-func (r DeleteSubscriptionDefinitionRequest) Send() (*DeleteSubscriptionDefinitionOutput, error) {
+func (r DeleteSubscriptionDefinitionRequest) Send(ctx context.Context) (*DeleteSubscriptionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1461,7 +1492,7 @@ func (r DeleteSubscriptionDefinitionRequest) Send() (*DeleteSubscriptionDefiniti
 //
 //    // Example sending a request using the DeleteSubscriptionDefinitionRequest method.
 //    req := client.DeleteSubscriptionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1495,7 +1526,8 @@ type DisassociateRoleFromGroupRequest struct {
 }
 
 // Send marshals and sends the DisassociateRoleFromGroup API request.
-func (r DisassociateRoleFromGroupRequest) Send() (*DisassociateRoleFromGroupOutput, error) {
+func (r DisassociateRoleFromGroupRequest) Send(ctx context.Context) (*DisassociateRoleFromGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1511,7 +1543,7 @@ func (r DisassociateRoleFromGroupRequest) Send() (*DisassociateRoleFromGroupOutp
 //
 //    // Example sending a request using the DisassociateRoleFromGroupRequest method.
 //    req := client.DisassociateRoleFromGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1545,7 +1577,8 @@ type DisassociateServiceRoleFromAccountRequest struct {
 }
 
 // Send marshals and sends the DisassociateServiceRoleFromAccount API request.
-func (r DisassociateServiceRoleFromAccountRequest) Send() (*DisassociateServiceRoleFromAccountOutput, error) {
+func (r DisassociateServiceRoleFromAccountRequest) Send(ctx context.Context) (*DisassociateServiceRoleFromAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1562,7 +1595,7 @@ func (r DisassociateServiceRoleFromAccountRequest) Send() (*DisassociateServiceR
 //
 //    // Example sending a request using the DisassociateServiceRoleFromAccountRequest method.
 //    req := client.DisassociateServiceRoleFromAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1596,7 +1629,8 @@ type GetAssociatedRoleRequest struct {
 }
 
 // Send marshals and sends the GetAssociatedRole API request.
-func (r GetAssociatedRoleRequest) Send() (*GetAssociatedRoleOutput, error) {
+func (r GetAssociatedRoleRequest) Send(ctx context.Context) (*GetAssociatedRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1612,7 +1646,7 @@ func (r GetAssociatedRoleRequest) Send() (*GetAssociatedRoleOutput, error) {
 //
 //    // Example sending a request using the GetAssociatedRoleRequest method.
 //    req := client.GetAssociatedRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1646,7 +1680,8 @@ type GetBulkDeploymentStatusRequest struct {
 }
 
 // Send marshals and sends the GetBulkDeploymentStatus API request.
-func (r GetBulkDeploymentStatusRequest) Send() (*GetBulkDeploymentStatusOutput, error) {
+func (r GetBulkDeploymentStatusRequest) Send(ctx context.Context) (*GetBulkDeploymentStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1662,7 +1697,7 @@ func (r GetBulkDeploymentStatusRequest) Send() (*GetBulkDeploymentStatusOutput, 
 //
 //    // Example sending a request using the GetBulkDeploymentStatusRequest method.
 //    req := client.GetBulkDeploymentStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1696,7 +1731,8 @@ type GetConnectivityInfoRequest struct {
 }
 
 // Send marshals and sends the GetConnectivityInfo API request.
-func (r GetConnectivityInfoRequest) Send() (*GetConnectivityInfoOutput, error) {
+func (r GetConnectivityInfoRequest) Send(ctx context.Context) (*GetConnectivityInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1712,7 +1748,7 @@ func (r GetConnectivityInfoRequest) Send() (*GetConnectivityInfoOutput, error) {
 //
 //    // Example sending a request using the GetConnectivityInfoRequest method.
 //    req := client.GetConnectivityInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1746,7 +1782,8 @@ type GetConnectorDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetConnectorDefinition API request.
-func (r GetConnectorDefinitionRequest) Send() (*GetConnectorDefinitionOutput, error) {
+func (r GetConnectorDefinitionRequest) Send(ctx context.Context) (*GetConnectorDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1762,7 +1799,7 @@ func (r GetConnectorDefinitionRequest) Send() (*GetConnectorDefinitionOutput, er
 //
 //    // Example sending a request using the GetConnectorDefinitionRequest method.
 //    req := client.GetConnectorDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1796,7 +1833,8 @@ type GetConnectorDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetConnectorDefinitionVersion API request.
-func (r GetConnectorDefinitionVersionRequest) Send() (*GetConnectorDefinitionVersionOutput, error) {
+func (r GetConnectorDefinitionVersionRequest) Send(ctx context.Context) (*GetConnectorDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1815,7 +1853,7 @@ func (r GetConnectorDefinitionVersionRequest) Send() (*GetConnectorDefinitionVer
 //
 //    // Example sending a request using the GetConnectorDefinitionVersionRequest method.
 //    req := client.GetConnectorDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1849,7 +1887,8 @@ type GetCoreDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetCoreDefinition API request.
-func (r GetCoreDefinitionRequest) Send() (*GetCoreDefinitionOutput, error) {
+func (r GetCoreDefinitionRequest) Send(ctx context.Context) (*GetCoreDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1865,7 +1904,7 @@ func (r GetCoreDefinitionRequest) Send() (*GetCoreDefinitionOutput, error) {
 //
 //    // Example sending a request using the GetCoreDefinitionRequest method.
 //    req := client.GetCoreDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1899,7 +1938,8 @@ type GetCoreDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetCoreDefinitionVersion API request.
-func (r GetCoreDefinitionVersionRequest) Send() (*GetCoreDefinitionVersionOutput, error) {
+func (r GetCoreDefinitionVersionRequest) Send(ctx context.Context) (*GetCoreDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1915,7 +1955,7 @@ func (r GetCoreDefinitionVersionRequest) Send() (*GetCoreDefinitionVersionOutput
 //
 //    // Example sending a request using the GetCoreDefinitionVersionRequest method.
 //    req := client.GetCoreDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1949,7 +1989,8 @@ type GetDeploymentStatusRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentStatus API request.
-func (r GetDeploymentStatusRequest) Send() (*GetDeploymentStatusOutput, error) {
+func (r GetDeploymentStatusRequest) Send(ctx context.Context) (*GetDeploymentStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1965,7 +2006,7 @@ func (r GetDeploymentStatusRequest) Send() (*GetDeploymentStatusOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentStatusRequest method.
 //    req := client.GetDeploymentStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1999,7 +2040,8 @@ type GetDeviceDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetDeviceDefinition API request.
-func (r GetDeviceDefinitionRequest) Send() (*GetDeviceDefinitionOutput, error) {
+func (r GetDeviceDefinitionRequest) Send(ctx context.Context) (*GetDeviceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2015,7 +2057,7 @@ func (r GetDeviceDefinitionRequest) Send() (*GetDeviceDefinitionOutput, error) {
 //
 //    // Example sending a request using the GetDeviceDefinitionRequest method.
 //    req := client.GetDeviceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2049,7 +2091,8 @@ type GetDeviceDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetDeviceDefinitionVersion API request.
-func (r GetDeviceDefinitionVersionRequest) Send() (*GetDeviceDefinitionVersionOutput, error) {
+func (r GetDeviceDefinitionVersionRequest) Send(ctx context.Context) (*GetDeviceDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2065,7 +2108,7 @@ func (r GetDeviceDefinitionVersionRequest) Send() (*GetDeviceDefinitionVersionOu
 //
 //    // Example sending a request using the GetDeviceDefinitionVersionRequest method.
 //    req := client.GetDeviceDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2099,7 +2142,8 @@ type GetFunctionDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetFunctionDefinition API request.
-func (r GetFunctionDefinitionRequest) Send() (*GetFunctionDefinitionOutput, error) {
+func (r GetFunctionDefinitionRequest) Send(ctx context.Context) (*GetFunctionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2116,7 +2160,7 @@ func (r GetFunctionDefinitionRequest) Send() (*GetFunctionDefinitionOutput, erro
 //
 //    // Example sending a request using the GetFunctionDefinitionRequest method.
 //    req := client.GetFunctionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2150,7 +2194,8 @@ type GetFunctionDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetFunctionDefinitionVersion API request.
-func (r GetFunctionDefinitionVersionRequest) Send() (*GetFunctionDefinitionVersionOutput, error) {
+func (r GetFunctionDefinitionVersionRequest) Send(ctx context.Context) (*GetFunctionDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2167,7 +2212,7 @@ func (r GetFunctionDefinitionVersionRequest) Send() (*GetFunctionDefinitionVersi
 //
 //    // Example sending a request using the GetFunctionDefinitionVersionRequest method.
 //    req := client.GetFunctionDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2201,7 +2246,8 @@ type GetGroupRequest struct {
 }
 
 // Send marshals and sends the GetGroup API request.
-func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2217,7 +2263,7 @@ func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
 //
 //    // Example sending a request using the GetGroupRequest method.
 //    req := client.GetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2251,7 +2297,8 @@ type GetGroupCertificateAuthorityRequest struct {
 }
 
 // Send marshals and sends the GetGroupCertificateAuthority API request.
-func (r GetGroupCertificateAuthorityRequest) Send() (*GetGroupCertificateAuthorityOutput, error) {
+func (r GetGroupCertificateAuthorityRequest) Send(ctx context.Context) (*GetGroupCertificateAuthorityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2267,7 +2314,7 @@ func (r GetGroupCertificateAuthorityRequest) Send() (*GetGroupCertificateAuthori
 //
 //    // Example sending a request using the GetGroupCertificateAuthorityRequest method.
 //    req := client.GetGroupCertificateAuthorityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2301,7 +2348,8 @@ type GetGroupCertificateConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetGroupCertificateConfiguration API request.
-func (r GetGroupCertificateConfigurationRequest) Send() (*GetGroupCertificateConfigurationOutput, error) {
+func (r GetGroupCertificateConfigurationRequest) Send(ctx context.Context) (*GetGroupCertificateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2317,7 +2365,7 @@ func (r GetGroupCertificateConfigurationRequest) Send() (*GetGroupCertificateCon
 //
 //    // Example sending a request using the GetGroupCertificateConfigurationRequest method.
 //    req := client.GetGroupCertificateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2351,7 +2399,8 @@ type GetGroupVersionRequest struct {
 }
 
 // Send marshals and sends the GetGroupVersion API request.
-func (r GetGroupVersionRequest) Send() (*GetGroupVersionOutput, error) {
+func (r GetGroupVersionRequest) Send(ctx context.Context) (*GetGroupVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2367,7 +2416,7 @@ func (r GetGroupVersionRequest) Send() (*GetGroupVersionOutput, error) {
 //
 //    // Example sending a request using the GetGroupVersionRequest method.
 //    req := client.GetGroupVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2401,7 +2450,8 @@ type GetLoggerDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetLoggerDefinition API request.
-func (r GetLoggerDefinitionRequest) Send() (*GetLoggerDefinitionOutput, error) {
+func (r GetLoggerDefinitionRequest) Send(ctx context.Context) (*GetLoggerDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2417,7 +2467,7 @@ func (r GetLoggerDefinitionRequest) Send() (*GetLoggerDefinitionOutput, error) {
 //
 //    // Example sending a request using the GetLoggerDefinitionRequest method.
 //    req := client.GetLoggerDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2451,7 +2501,8 @@ type GetLoggerDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetLoggerDefinitionVersion API request.
-func (r GetLoggerDefinitionVersionRequest) Send() (*GetLoggerDefinitionVersionOutput, error) {
+func (r GetLoggerDefinitionVersionRequest) Send(ctx context.Context) (*GetLoggerDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2467,7 +2518,7 @@ func (r GetLoggerDefinitionVersionRequest) Send() (*GetLoggerDefinitionVersionOu
 //
 //    // Example sending a request using the GetLoggerDefinitionVersionRequest method.
 //    req := client.GetLoggerDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2501,7 +2552,8 @@ type GetResourceDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetResourceDefinition API request.
-func (r GetResourceDefinitionRequest) Send() (*GetResourceDefinitionOutput, error) {
+func (r GetResourceDefinitionRequest) Send(ctx context.Context) (*GetResourceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2518,7 +2570,7 @@ func (r GetResourceDefinitionRequest) Send() (*GetResourceDefinitionOutput, erro
 //
 //    // Example sending a request using the GetResourceDefinitionRequest method.
 //    req := client.GetResourceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2552,7 +2604,8 @@ type GetResourceDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetResourceDefinitionVersion API request.
-func (r GetResourceDefinitionVersionRequest) Send() (*GetResourceDefinitionVersionOutput, error) {
+func (r GetResourceDefinitionVersionRequest) Send(ctx context.Context) (*GetResourceDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2569,7 +2622,7 @@ func (r GetResourceDefinitionVersionRequest) Send() (*GetResourceDefinitionVersi
 //
 //    // Example sending a request using the GetResourceDefinitionVersionRequest method.
 //    req := client.GetResourceDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2603,7 +2656,8 @@ type GetServiceRoleForAccountRequest struct {
 }
 
 // Send marshals and sends the GetServiceRoleForAccount API request.
-func (r GetServiceRoleForAccountRequest) Send() (*GetServiceRoleForAccountOutput, error) {
+func (r GetServiceRoleForAccountRequest) Send(ctx context.Context) (*GetServiceRoleForAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2619,7 +2673,7 @@ func (r GetServiceRoleForAccountRequest) Send() (*GetServiceRoleForAccountOutput
 //
 //    // Example sending a request using the GetServiceRoleForAccountRequest method.
 //    req := client.GetServiceRoleForAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2653,7 +2707,8 @@ type GetSubscriptionDefinitionRequest struct {
 }
 
 // Send marshals and sends the GetSubscriptionDefinition API request.
-func (r GetSubscriptionDefinitionRequest) Send() (*GetSubscriptionDefinitionOutput, error) {
+func (r GetSubscriptionDefinitionRequest) Send(ctx context.Context) (*GetSubscriptionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2669,7 +2724,7 @@ func (r GetSubscriptionDefinitionRequest) Send() (*GetSubscriptionDefinitionOutp
 //
 //    // Example sending a request using the GetSubscriptionDefinitionRequest method.
 //    req := client.GetSubscriptionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2703,7 +2758,8 @@ type GetSubscriptionDefinitionVersionRequest struct {
 }
 
 // Send marshals and sends the GetSubscriptionDefinitionVersion API request.
-func (r GetSubscriptionDefinitionVersionRequest) Send() (*GetSubscriptionDefinitionVersionOutput, error) {
+func (r GetSubscriptionDefinitionVersionRequest) Send(ctx context.Context) (*GetSubscriptionDefinitionVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2719,7 +2775,7 @@ func (r GetSubscriptionDefinitionVersionRequest) Send() (*GetSubscriptionDefinit
 //
 //    // Example sending a request using the GetSubscriptionDefinitionVersionRequest method.
 //    req := client.GetSubscriptionDefinitionVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2753,7 +2809,8 @@ type ListBulkDeploymentDetailedReportsRequest struct {
 }
 
 // Send marshals and sends the ListBulkDeploymentDetailedReports API request.
-func (r ListBulkDeploymentDetailedReportsRequest) Send() (*ListBulkDeploymentDetailedReportsOutput, error) {
+func (r ListBulkDeploymentDetailedReportsRequest) Send(ctx context.Context) (*ListBulkDeploymentDetailedReportsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2770,7 +2827,7 @@ func (r ListBulkDeploymentDetailedReportsRequest) Send() (*ListBulkDeploymentDet
 //
 //    // Example sending a request using the ListBulkDeploymentDetailedReportsRequest method.
 //    req := client.ListBulkDeploymentDetailedReportsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2804,7 +2861,8 @@ type ListBulkDeploymentsRequest struct {
 }
 
 // Send marshals and sends the ListBulkDeployments API request.
-func (r ListBulkDeploymentsRequest) Send() (*ListBulkDeploymentsOutput, error) {
+func (r ListBulkDeploymentsRequest) Send(ctx context.Context) (*ListBulkDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2820,7 +2878,7 @@ func (r ListBulkDeploymentsRequest) Send() (*ListBulkDeploymentsOutput, error) {
 //
 //    // Example sending a request using the ListBulkDeploymentsRequest method.
 //    req := client.ListBulkDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2854,7 +2912,8 @@ type ListConnectorDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListConnectorDefinitionVersions API request.
-func (r ListConnectorDefinitionVersionsRequest) Send() (*ListConnectorDefinitionVersionsOutput, error) {
+func (r ListConnectorDefinitionVersionsRequest) Send(ctx context.Context) (*ListConnectorDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2872,7 +2931,7 @@ func (r ListConnectorDefinitionVersionsRequest) Send() (*ListConnectorDefinition
 //
 //    // Example sending a request using the ListConnectorDefinitionVersionsRequest method.
 //    req := client.ListConnectorDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2906,7 +2965,8 @@ type ListConnectorDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListConnectorDefinitions API request.
-func (r ListConnectorDefinitionsRequest) Send() (*ListConnectorDefinitionsOutput, error) {
+func (r ListConnectorDefinitionsRequest) Send(ctx context.Context) (*ListConnectorDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2922,7 +2982,7 @@ func (r ListConnectorDefinitionsRequest) Send() (*ListConnectorDefinitionsOutput
 //
 //    // Example sending a request using the ListConnectorDefinitionsRequest method.
 //    req := client.ListConnectorDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2956,7 +3016,8 @@ type ListCoreDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListCoreDefinitionVersions API request.
-func (r ListCoreDefinitionVersionsRequest) Send() (*ListCoreDefinitionVersionsOutput, error) {
+func (r ListCoreDefinitionVersionsRequest) Send(ctx context.Context) (*ListCoreDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2972,7 +3033,7 @@ func (r ListCoreDefinitionVersionsRequest) Send() (*ListCoreDefinitionVersionsOu
 //
 //    // Example sending a request using the ListCoreDefinitionVersionsRequest method.
 //    req := client.ListCoreDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3006,7 +3067,8 @@ type ListCoreDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListCoreDefinitions API request.
-func (r ListCoreDefinitionsRequest) Send() (*ListCoreDefinitionsOutput, error) {
+func (r ListCoreDefinitionsRequest) Send(ctx context.Context) (*ListCoreDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3022,7 +3084,7 @@ func (r ListCoreDefinitionsRequest) Send() (*ListCoreDefinitionsOutput, error) {
 //
 //    // Example sending a request using the ListCoreDefinitionsRequest method.
 //    req := client.ListCoreDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3056,7 +3118,8 @@ type ListDeploymentsRequest struct {
 }
 
 // Send marshals and sends the ListDeployments API request.
-func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+func (r ListDeploymentsRequest) Send(ctx context.Context) (*ListDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3072,7 +3135,7 @@ func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
 //
 //    // Example sending a request using the ListDeploymentsRequest method.
 //    req := client.ListDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3106,7 +3169,8 @@ type ListDeviceDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListDeviceDefinitionVersions API request.
-func (r ListDeviceDefinitionVersionsRequest) Send() (*ListDeviceDefinitionVersionsOutput, error) {
+func (r ListDeviceDefinitionVersionsRequest) Send(ctx context.Context) (*ListDeviceDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3122,7 +3186,7 @@ func (r ListDeviceDefinitionVersionsRequest) Send() (*ListDeviceDefinitionVersio
 //
 //    // Example sending a request using the ListDeviceDefinitionVersionsRequest method.
 //    req := client.ListDeviceDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3156,7 +3220,8 @@ type ListDeviceDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListDeviceDefinitions API request.
-func (r ListDeviceDefinitionsRequest) Send() (*ListDeviceDefinitionsOutput, error) {
+func (r ListDeviceDefinitionsRequest) Send(ctx context.Context) (*ListDeviceDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3172,7 +3237,7 @@ func (r ListDeviceDefinitionsRequest) Send() (*ListDeviceDefinitionsOutput, erro
 //
 //    // Example sending a request using the ListDeviceDefinitionsRequest method.
 //    req := client.ListDeviceDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3206,7 +3271,8 @@ type ListFunctionDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListFunctionDefinitionVersions API request.
-func (r ListFunctionDefinitionVersionsRequest) Send() (*ListFunctionDefinitionVersionsOutput, error) {
+func (r ListFunctionDefinitionVersionsRequest) Send(ctx context.Context) (*ListFunctionDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3222,7 +3288,7 @@ func (r ListFunctionDefinitionVersionsRequest) Send() (*ListFunctionDefinitionVe
 //
 //    // Example sending a request using the ListFunctionDefinitionVersionsRequest method.
 //    req := client.ListFunctionDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3256,7 +3322,8 @@ type ListFunctionDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListFunctionDefinitions API request.
-func (r ListFunctionDefinitionsRequest) Send() (*ListFunctionDefinitionsOutput, error) {
+func (r ListFunctionDefinitionsRequest) Send(ctx context.Context) (*ListFunctionDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3272,7 +3339,7 @@ func (r ListFunctionDefinitionsRequest) Send() (*ListFunctionDefinitionsOutput, 
 //
 //    // Example sending a request using the ListFunctionDefinitionsRequest method.
 //    req := client.ListFunctionDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3306,7 +3373,8 @@ type ListGroupCertificateAuthoritiesRequest struct {
 }
 
 // Send marshals and sends the ListGroupCertificateAuthorities API request.
-func (r ListGroupCertificateAuthoritiesRequest) Send() (*ListGroupCertificateAuthoritiesOutput, error) {
+func (r ListGroupCertificateAuthoritiesRequest) Send(ctx context.Context) (*ListGroupCertificateAuthoritiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3322,7 +3390,7 @@ func (r ListGroupCertificateAuthoritiesRequest) Send() (*ListGroupCertificateAut
 //
 //    // Example sending a request using the ListGroupCertificateAuthoritiesRequest method.
 //    req := client.ListGroupCertificateAuthoritiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3356,7 +3424,8 @@ type ListGroupVersionsRequest struct {
 }
 
 // Send marshals and sends the ListGroupVersions API request.
-func (r ListGroupVersionsRequest) Send() (*ListGroupVersionsOutput, error) {
+func (r ListGroupVersionsRequest) Send(ctx context.Context) (*ListGroupVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3372,7 +3441,7 @@ func (r ListGroupVersionsRequest) Send() (*ListGroupVersionsOutput, error) {
 //
 //    // Example sending a request using the ListGroupVersionsRequest method.
 //    req := client.ListGroupVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3406,7 +3475,8 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3422,7 +3492,7 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3456,7 +3526,8 @@ type ListLoggerDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListLoggerDefinitionVersions API request.
-func (r ListLoggerDefinitionVersionsRequest) Send() (*ListLoggerDefinitionVersionsOutput, error) {
+func (r ListLoggerDefinitionVersionsRequest) Send(ctx context.Context) (*ListLoggerDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3472,7 +3543,7 @@ func (r ListLoggerDefinitionVersionsRequest) Send() (*ListLoggerDefinitionVersio
 //
 //    // Example sending a request using the ListLoggerDefinitionVersionsRequest method.
 //    req := client.ListLoggerDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3506,7 +3577,8 @@ type ListLoggerDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListLoggerDefinitions API request.
-func (r ListLoggerDefinitionsRequest) Send() (*ListLoggerDefinitionsOutput, error) {
+func (r ListLoggerDefinitionsRequest) Send(ctx context.Context) (*ListLoggerDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3522,7 +3594,7 @@ func (r ListLoggerDefinitionsRequest) Send() (*ListLoggerDefinitionsOutput, erro
 //
 //    // Example sending a request using the ListLoggerDefinitionsRequest method.
 //    req := client.ListLoggerDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3556,7 +3628,8 @@ type ListResourceDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListResourceDefinitionVersions API request.
-func (r ListResourceDefinitionVersionsRequest) Send() (*ListResourceDefinitionVersionsOutput, error) {
+func (r ListResourceDefinitionVersionsRequest) Send(ctx context.Context) (*ListResourceDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3572,7 +3645,7 @@ func (r ListResourceDefinitionVersionsRequest) Send() (*ListResourceDefinitionVe
 //
 //    // Example sending a request using the ListResourceDefinitionVersionsRequest method.
 //    req := client.ListResourceDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3606,7 +3679,8 @@ type ListResourceDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListResourceDefinitions API request.
-func (r ListResourceDefinitionsRequest) Send() (*ListResourceDefinitionsOutput, error) {
+func (r ListResourceDefinitionsRequest) Send(ctx context.Context) (*ListResourceDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3622,7 +3696,7 @@ func (r ListResourceDefinitionsRequest) Send() (*ListResourceDefinitionsOutput, 
 //
 //    // Example sending a request using the ListResourceDefinitionsRequest method.
 //    req := client.ListResourceDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3656,7 +3730,8 @@ type ListSubscriptionDefinitionVersionsRequest struct {
 }
 
 // Send marshals and sends the ListSubscriptionDefinitionVersions API request.
-func (r ListSubscriptionDefinitionVersionsRequest) Send() (*ListSubscriptionDefinitionVersionsOutput, error) {
+func (r ListSubscriptionDefinitionVersionsRequest) Send(ctx context.Context) (*ListSubscriptionDefinitionVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3672,7 +3747,7 @@ func (r ListSubscriptionDefinitionVersionsRequest) Send() (*ListSubscriptionDefi
 //
 //    // Example sending a request using the ListSubscriptionDefinitionVersionsRequest method.
 //    req := client.ListSubscriptionDefinitionVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3706,7 +3781,8 @@ type ListSubscriptionDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListSubscriptionDefinitions API request.
-func (r ListSubscriptionDefinitionsRequest) Send() (*ListSubscriptionDefinitionsOutput, error) {
+func (r ListSubscriptionDefinitionsRequest) Send(ctx context.Context) (*ListSubscriptionDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3722,7 +3798,7 @@ func (r ListSubscriptionDefinitionsRequest) Send() (*ListSubscriptionDefinitions
 //
 //    // Example sending a request using the ListSubscriptionDefinitionsRequest method.
 //    req := client.ListSubscriptionDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3756,7 +3832,8 @@ type ResetDeploymentsRequest struct {
 }
 
 // Send marshals and sends the ResetDeployments API request.
-func (r ResetDeploymentsRequest) Send() (*ResetDeploymentsOutput, error) {
+func (r ResetDeploymentsRequest) Send(ctx context.Context) (*ResetDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3772,7 +3849,7 @@ func (r ResetDeploymentsRequest) Send() (*ResetDeploymentsOutput, error) {
 //
 //    // Example sending a request using the ResetDeploymentsRequest method.
 //    req := client.ResetDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3806,7 +3883,8 @@ type StartBulkDeploymentRequest struct {
 }
 
 // Send marshals and sends the StartBulkDeployment API request.
-func (r StartBulkDeploymentRequest) Send() (*StartBulkDeploymentOutput, error) {
+func (r StartBulkDeploymentRequest) Send(ctx context.Context) (*StartBulkDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3827,7 +3905,7 @@ func (r StartBulkDeploymentRequest) Send() (*StartBulkDeploymentOutput, error) {
 //
 //    // Example sending a request using the StartBulkDeploymentRequest method.
 //    req := client.StartBulkDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3861,7 +3939,8 @@ type StopBulkDeploymentRequest struct {
 }
 
 // Send marshals and sends the StopBulkDeployment API request.
-func (r StopBulkDeploymentRequest) Send() (*StopBulkDeploymentOutput, error) {
+func (r StopBulkDeploymentRequest) Send(ctx context.Context) (*StopBulkDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3880,7 +3959,7 @@ func (r StopBulkDeploymentRequest) Send() (*StopBulkDeploymentOutput, error) {
 //
 //    // Example sending a request using the StopBulkDeploymentRequest method.
 //    req := client.StopBulkDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3914,7 +3993,8 @@ type UpdateConnectivityInfoRequest struct {
 }
 
 // Send marshals and sends the UpdateConnectivityInfo API request.
-func (r UpdateConnectivityInfoRequest) Send() (*UpdateConnectivityInfoOutput, error) {
+func (r UpdateConnectivityInfoRequest) Send(ctx context.Context) (*UpdateConnectivityInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3932,7 +4012,7 @@ func (r UpdateConnectivityInfoRequest) Send() (*UpdateConnectivityInfoOutput, er
 //
 //    // Example sending a request using the UpdateConnectivityInfoRequest method.
 //    req := client.UpdateConnectivityInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3966,7 +4046,8 @@ type UpdateConnectorDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateConnectorDefinition API request.
-func (r UpdateConnectorDefinitionRequest) Send() (*UpdateConnectorDefinitionOutput, error) {
+func (r UpdateConnectorDefinitionRequest) Send(ctx context.Context) (*UpdateConnectorDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3982,7 +4063,7 @@ func (r UpdateConnectorDefinitionRequest) Send() (*UpdateConnectorDefinitionOutp
 //
 //    // Example sending a request using the UpdateConnectorDefinitionRequest method.
 //    req := client.UpdateConnectorDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4016,7 +4097,8 @@ type UpdateCoreDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateCoreDefinition API request.
-func (r UpdateCoreDefinitionRequest) Send() (*UpdateCoreDefinitionOutput, error) {
+func (r UpdateCoreDefinitionRequest) Send(ctx context.Context) (*UpdateCoreDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4032,7 +4114,7 @@ func (r UpdateCoreDefinitionRequest) Send() (*UpdateCoreDefinitionOutput, error)
 //
 //    // Example sending a request using the UpdateCoreDefinitionRequest method.
 //    req := client.UpdateCoreDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4066,7 +4148,8 @@ type UpdateDeviceDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateDeviceDefinition API request.
-func (r UpdateDeviceDefinitionRequest) Send() (*UpdateDeviceDefinitionOutput, error) {
+func (r UpdateDeviceDefinitionRequest) Send(ctx context.Context) (*UpdateDeviceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4082,7 +4165,7 @@ func (r UpdateDeviceDefinitionRequest) Send() (*UpdateDeviceDefinitionOutput, er
 //
 //    // Example sending a request using the UpdateDeviceDefinitionRequest method.
 //    req := client.UpdateDeviceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4116,7 +4199,8 @@ type UpdateFunctionDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateFunctionDefinition API request.
-func (r UpdateFunctionDefinitionRequest) Send() (*UpdateFunctionDefinitionOutput, error) {
+func (r UpdateFunctionDefinitionRequest) Send(ctx context.Context) (*UpdateFunctionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4132,7 +4216,7 @@ func (r UpdateFunctionDefinitionRequest) Send() (*UpdateFunctionDefinitionOutput
 //
 //    // Example sending a request using the UpdateFunctionDefinitionRequest method.
 //    req := client.UpdateFunctionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4166,7 +4250,8 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4182,7 +4267,7 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4216,7 +4301,8 @@ type UpdateGroupCertificateConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateGroupCertificateConfiguration API request.
-func (r UpdateGroupCertificateConfigurationRequest) Send() (*UpdateGroupCertificateConfigurationOutput, error) {
+func (r UpdateGroupCertificateConfigurationRequest) Send(ctx context.Context) (*UpdateGroupCertificateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4232,7 +4318,7 @@ func (r UpdateGroupCertificateConfigurationRequest) Send() (*UpdateGroupCertific
 //
 //    // Example sending a request using the UpdateGroupCertificateConfigurationRequest method.
 //    req := client.UpdateGroupCertificateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4266,7 +4352,8 @@ type UpdateLoggerDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateLoggerDefinition API request.
-func (r UpdateLoggerDefinitionRequest) Send() (*UpdateLoggerDefinitionOutput, error) {
+func (r UpdateLoggerDefinitionRequest) Send(ctx context.Context) (*UpdateLoggerDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4282,7 +4369,7 @@ func (r UpdateLoggerDefinitionRequest) Send() (*UpdateLoggerDefinitionOutput, er
 //
 //    // Example sending a request using the UpdateLoggerDefinitionRequest method.
 //    req := client.UpdateLoggerDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4316,7 +4403,8 @@ type UpdateResourceDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateResourceDefinition API request.
-func (r UpdateResourceDefinitionRequest) Send() (*UpdateResourceDefinitionOutput, error) {
+func (r UpdateResourceDefinitionRequest) Send(ctx context.Context) (*UpdateResourceDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4332,7 +4420,7 @@ func (r UpdateResourceDefinitionRequest) Send() (*UpdateResourceDefinitionOutput
 //
 //    // Example sending a request using the UpdateResourceDefinitionRequest method.
 //    req := client.UpdateResourceDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4366,7 +4454,8 @@ type UpdateSubscriptionDefinitionRequest struct {
 }
 
 // Send marshals and sends the UpdateSubscriptionDefinition API request.
-func (r UpdateSubscriptionDefinitionRequest) Send() (*UpdateSubscriptionDefinitionOutput, error) {
+func (r UpdateSubscriptionDefinitionRequest) Send(ctx context.Context) (*UpdateSubscriptionDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4382,7 +4471,7 @@ func (r UpdateSubscriptionDefinitionRequest) Send() (*UpdateSubscriptionDefiniti
 //
 //    // Example sending a request using the UpdateSubscriptionDefinitionRequest method.
 //    req := client.UpdateSubscriptionDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

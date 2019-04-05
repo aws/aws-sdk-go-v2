@@ -1,6 +1,7 @@
 package kinesis
 
 import (
+	"context"
 	"io"
 	"net/http"
 	"testing"
@@ -52,7 +53,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 		retryCount++
 	})
 	req.ApplyOptions(request.WithResponseReadTimeout(time.Second))
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Errorf("Expected error, but received nil")
 	} else if v, ok := err.(awserr.Error); !ok {
@@ -84,7 +85,7 @@ func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 		r.HTTPResponse.Status = http.StatusText(r.HTTPResponse.StatusCode)
 	})
 	req.ApplyOptions(request.WithResponseReadTimeout(time.Second))
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("Expected no error, but received %v", err)
 	}

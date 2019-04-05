@@ -3,6 +3,7 @@
 package mediastoredata
 
 import (
+	"context"
 	"io"
 	"time"
 
@@ -22,7 +23,8 @@ type DeleteObjectRequest struct {
 }
 
 // Send marshals and sends the DeleteObject API request.
-func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
 //
 //    // Example sending a request using the DeleteObjectRequest method.
 //    req := client.DeleteObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type DescribeObjectRequest struct {
 }
 
 // Send marshals and sends the DescribeObject API request.
-func (r DescribeObjectRequest) Send() (*DescribeObjectOutput, error) {
+func (r DescribeObjectRequest) Send(ctx context.Context) (*DescribeObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r DescribeObjectRequest) Send() (*DescribeObjectOutput, error) {
 //
 //    // Example sending a request using the DescribeObjectRequest method.
 //    req := client.DescribeObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type GetObjectRequest struct {
 }
 
 // Send marshals and sends the GetObject API request.
-func (r GetObjectRequest) Send() (*GetObjectOutput, error) {
+func (r GetObjectRequest) Send(ctx context.Context) (*GetObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -138,7 +142,7 @@ func (r GetObjectRequest) Send() (*GetObjectOutput, error) {
 //
 //    // Example sending a request using the GetObjectRequest method.
 //    req := client.GetObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -172,7 +176,8 @@ type ListItemsRequest struct {
 }
 
 // Send marshals and sends the ListItems API request.
-func (r ListItemsRequest) Send() (*ListItemsOutput, error) {
+func (r ListItemsRequest) Send(ctx context.Context) (*ListItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -189,7 +194,7 @@ func (r ListItemsRequest) Send() (*ListItemsOutput, error) {
 //
 //    // Example sending a request using the ListItemsRequest method.
 //    req := client.ListItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -223,7 +228,8 @@ type PutObjectRequest struct {
 }
 
 // Send marshals and sends the PutObject API request.
-func (r PutObjectRequest) Send() (*PutObjectOutput, error) {
+func (r PutObjectRequest) Send(ctx context.Context) (*PutObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -239,7 +245,7 @@ func (r PutObjectRequest) Send() (*PutObjectOutput, error) {
 //
 //    // Example sending a request using the PutObjectRequest method.
 //    req := client.PutObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

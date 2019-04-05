@@ -3,6 +3,7 @@
 package lexruntimeservice
 
 import (
+	"context"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type PostContentRequest struct {
 }
 
 // Send marshals and sends the PostContent API request.
-func (r PostContentRequest) Send() (*PostContentOutput, error) {
+func (r PostContentRequest) Send(ctx context.Context) (*PostContentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -91,7 +93,7 @@ func (r PostContentRequest) Send() (*PostContentOutput, error) {
 //
 //    // Example sending a request using the PostContentRequest method.
 //    req := client.PostContentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -128,7 +130,8 @@ type PostTextRequest struct {
 }
 
 // Send marshals and sends the PostText API request.
-func (r PostTextRequest) Send() (*PostTextOutput, error) {
+func (r PostTextRequest) Send(ctx context.Context) (*PostTextOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +195,7 @@ func (r PostTextRequest) Send() (*PostTextOutput, error) {
 //
 //    // Example sending a request using the PostTextRequest method.
 //    req := client.PostTextRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

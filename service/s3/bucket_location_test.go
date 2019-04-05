@@ -2,6 +2,7 @@ package s3_test
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -31,7 +32,7 @@ func TestGetBucketLocation(t *testing.T) {
 		})
 
 		req := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{Bucket: aws.String("bucket")})
-		resp, err := req.Send()
+		resp, err := req.Send(context.Background())
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
 		}

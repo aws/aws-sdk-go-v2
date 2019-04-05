@@ -3,6 +3,7 @@
 package ecs_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -40,7 +41,7 @@ func ExampleECS_CreateClusterRequest_shared00() {
 	}
 
 	req := svc.CreateClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -83,7 +84,7 @@ func ExampleECS_CreateServiceRequest_shared00() {
 	}
 
 	req := svc.CreateServiceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -144,7 +145,7 @@ func ExampleECS_CreateServiceRequest_shared01() {
 	}
 
 	req := svc.CreateServiceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -193,7 +194,7 @@ func ExampleECS_DeleteClusterRequest_shared00() {
 	}
 
 	req := svc.DeleteClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -241,7 +242,7 @@ func ExampleECS_DeleteServiceRequest_shared00() {
 	}
 
 	req := svc.DeleteServiceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -288,7 +289,7 @@ func ExampleECS_DeregisterContainerInstanceRequest_shared00() {
 	}
 
 	req := svc.DeregisterContainerInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -331,7 +332,7 @@ func ExampleECS_DescribeClustersRequest_shared00() {
 	}
 
 	req := svc.DescribeClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -374,7 +375,7 @@ func ExampleECS_DescribeContainerInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeContainerInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -417,7 +418,7 @@ func ExampleECS_DescribeServicesRequest_shared00() {
 	}
 
 	req := svc.DescribeServicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -458,7 +459,7 @@ func ExampleECS_DescribeTaskDefinitionRequest_shared00() {
 	}
 
 	req := svc.DescribeTaskDefinitionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -500,7 +501,7 @@ func ExampleECS_DescribeTasksRequest_shared00() {
 	}
 
 	req := svc.DescribeTasksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -539,7 +540,7 @@ func ExampleECS_ListClustersRequest_shared00() {
 	input := &ecs.ListClustersInput{}
 
 	req := svc.ListClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -579,7 +580,7 @@ func ExampleECS_ListContainerInstancesRequest_shared00() {
 	}
 
 	req := svc.ListContainerInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -618,7 +619,7 @@ func ExampleECS_ListServicesRequest_shared00() {
 	input := &ecs.ListServicesInput{}
 
 	req := svc.ListServicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -659,7 +660,7 @@ func ExampleECS_ListTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ListTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -698,7 +699,7 @@ func ExampleECS_ListTaskDefinitionFamiliesRequest_shared00() {
 	input := &ecs.ListTaskDefinitionFamiliesInput{}
 
 	req := svc.ListTaskDefinitionFamiliesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -737,7 +738,7 @@ func ExampleECS_ListTaskDefinitionFamiliesRequest_shared01() {
 	}
 
 	req := svc.ListTaskDefinitionFamiliesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -774,7 +775,7 @@ func ExampleECS_ListTaskDefinitionsRequest_shared00() {
 	input := &ecs.ListTaskDefinitionsInput{}
 
 	req := svc.ListTaskDefinitionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -813,7 +814,7 @@ func ExampleECS_ListTaskDefinitionsRequest_shared01() {
 	}
 
 	req := svc.ListTaskDefinitionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -852,7 +853,7 @@ func ExampleECS_ListTasksRequest_shared00() {
 	}
 
 	req := svc.ListTasksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -897,7 +898,7 @@ func ExampleECS_ListTasksRequest_shared01() {
 	}
 
 	req := svc.ListTasksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -954,7 +955,7 @@ func ExampleECS_RegisterTaskDefinitionRequest_shared00() {
 	}
 
 	req := svc.RegisterTaskDefinitionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -994,7 +995,7 @@ func ExampleECS_RunTaskRequest_shared00() {
 	}
 
 	req := svc.RunTaskRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1051,7 +1052,7 @@ func ExampleECS_TagResourceRequest_shared00() {
 	}
 
 	req := svc.TagResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1097,7 +1098,7 @@ func ExampleECS_UntagResourceRequest_shared00() {
 	}
 
 	req := svc.UntagResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1142,7 +1143,7 @@ func ExampleECS_UpdateServiceRequest_shared00() {
 	}
 
 	req := svc.UpdateServiceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1194,7 +1195,7 @@ func ExampleECS_UpdateServiceRequest_shared01() {
 	}
 
 	req := svc.UpdateServiceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

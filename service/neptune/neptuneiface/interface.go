@@ -9,6 +9,8 @@
 package neptuneiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/neptune"
 )
@@ -177,11 +179,9 @@ type NeptuneAPI interface {
 
 	RestoreDBClusterToPointInTimeRequest(*neptune.RestoreDBClusterToPointInTimeInput) neptune.RestoreDBClusterToPointInTimeRequest
 
-	WaitUntilDBInstanceAvailable(*neptune.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceAvailableWithContext(aws.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceAvailable(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceDeleted(*neptune.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceDeletedWithContext(aws.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceDeleted(context.Context, *neptune.DescribeDBInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ NeptuneAPI = (*neptune.Neptune)(nil)

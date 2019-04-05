@@ -9,6 +9,8 @@
 package cloudfrontiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
 )
@@ -153,14 +155,11 @@ type CloudFrontAPI interface {
 
 	UpdateStreamingDistributionRequest(*cloudfront.UpdateStreamingDistributionInput) cloudfront.UpdateStreamingDistributionRequest
 
-	WaitUntilDistributionDeployed(*cloudfront.GetDistributionInput) error
-	WaitUntilDistributionDeployedWithContext(aws.Context, *cloudfront.GetDistributionInput, ...aws.WaiterOption) error
+	WaitUntilDistributionDeployed(context.Context, *cloudfront.GetDistributionInput, ...aws.WaiterOption) error
 
-	WaitUntilInvalidationCompleted(*cloudfront.GetInvalidationInput) error
-	WaitUntilInvalidationCompletedWithContext(aws.Context, *cloudfront.GetInvalidationInput, ...aws.WaiterOption) error
+	WaitUntilInvalidationCompleted(context.Context, *cloudfront.GetInvalidationInput, ...aws.WaiterOption) error
 
-	WaitUntilStreamingDistributionDeployed(*cloudfront.GetStreamingDistributionInput) error
-	WaitUntilStreamingDistributionDeployedWithContext(aws.Context, *cloudfront.GetStreamingDistributionInput, ...aws.WaiterOption) error
+	WaitUntilStreamingDistributionDeployed(context.Context, *cloudfront.GetStreamingDistributionInput, ...aws.WaiterOption) error
 }
 
 var _ CloudFrontAPI = (*cloudfront.CloudFront)(nil)

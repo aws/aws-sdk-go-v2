@@ -3,6 +3,7 @@
 package codepipeline
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AcknowledgeJobRequest struct {
 }
 
 // Send marshals and sends the AcknowledgeJob API request.
-func (r AcknowledgeJobRequest) Send() (*AcknowledgeJobOutput, error) {
+func (r AcknowledgeJobRequest) Send(ctx context.Context) (*AcknowledgeJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r AcknowledgeJobRequest) Send() (*AcknowledgeJobOutput, error) {
 //
 //    // Example sending a request using the AcknowledgeJobRequest method.
 //    req := client.AcknowledgeJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type AcknowledgeThirdPartyJobRequest struct {
 }
 
 // Send marshals and sends the AcknowledgeThirdPartyJob API request.
-func (r AcknowledgeThirdPartyJobRequest) Send() (*AcknowledgeThirdPartyJobOutput, error) {
+func (r AcknowledgeThirdPartyJobRequest) Send(ctx context.Context) (*AcknowledgeThirdPartyJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -90,7 +93,7 @@ func (r AcknowledgeThirdPartyJobRequest) Send() (*AcknowledgeThirdPartyJobOutput
 //
 //    // Example sending a request using the AcknowledgeThirdPartyJobRequest method.
 //    req := client.AcknowledgeThirdPartyJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +127,8 @@ type CreateCustomActionTypeRequest struct {
 }
 
 // Send marshals and sends the CreateCustomActionType API request.
-func (r CreateCustomActionTypeRequest) Send() (*CreateCustomActionTypeOutput, error) {
+func (r CreateCustomActionTypeRequest) Send(ctx context.Context) (*CreateCustomActionTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +145,7 @@ func (r CreateCustomActionTypeRequest) Send() (*CreateCustomActionTypeOutput, er
 //
 //    // Example sending a request using the CreateCustomActionTypeRequest method.
 //    req := client.CreateCustomActionTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +179,8 @@ type CreatePipelineRequest struct {
 }
 
 // Send marshals and sends the CreatePipeline API request.
-func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +196,7 @@ func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
 //
 //    // Example sending a request using the CreatePipelineRequest method.
 //    req := client.CreatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +230,8 @@ type DeleteCustomActionTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomActionType API request.
-func (r DeleteCustomActionTypeRequest) Send() (*DeleteCustomActionTypeOutput, error) {
+func (r DeleteCustomActionTypeRequest) Send(ctx context.Context) (*DeleteCustomActionTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -248,7 +254,7 @@ func (r DeleteCustomActionTypeRequest) Send() (*DeleteCustomActionTypeOutput, er
 //
 //    // Example sending a request using the DeleteCustomActionTypeRequest method.
 //    req := client.DeleteCustomActionTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -284,7 +290,8 @@ type DeletePipelineRequest struct {
 }
 
 // Send marshals and sends the DeletePipeline API request.
-func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -300,7 +307,7 @@ func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
 //
 //    // Example sending a request using the DeletePipelineRequest method.
 //    req := client.DeletePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -336,7 +343,8 @@ type DeleteWebhookRequest struct {
 }
 
 // Send marshals and sends the DeleteWebhook API request.
-func (r DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
+func (r DeleteWebhookRequest) Send(ctx context.Context) (*DeleteWebhookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,7 +364,7 @@ func (r DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
 //
 //    // Example sending a request using the DeleteWebhookRequest method.
 //    req := client.DeleteWebhookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -390,7 +398,8 @@ type DeregisterWebhookWithThirdPartyRequest struct {
 }
 
 // Send marshals and sends the DeregisterWebhookWithThirdParty API request.
-func (r DeregisterWebhookWithThirdPartyRequest) Send() (*DeregisterWebhookWithThirdPartyOutput, error) {
+func (r DeregisterWebhookWithThirdPartyRequest) Send(ctx context.Context) (*DeregisterWebhookWithThirdPartyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -408,7 +417,7 @@ func (r DeregisterWebhookWithThirdPartyRequest) Send() (*DeregisterWebhookWithTh
 //
 //    // Example sending a request using the DeregisterWebhookWithThirdPartyRequest method.
 //    req := client.DeregisterWebhookWithThirdPartyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -442,7 +451,8 @@ type DisableStageTransitionRequest struct {
 }
 
 // Send marshals and sends the DisableStageTransition API request.
-func (r DisableStageTransitionRequest) Send() (*DisableStageTransitionOutput, error) {
+func (r DisableStageTransitionRequest) Send(ctx context.Context) (*DisableStageTransitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -459,7 +469,7 @@ func (r DisableStageTransitionRequest) Send() (*DisableStageTransitionOutput, er
 //
 //    // Example sending a request using the DisableStageTransitionRequest method.
 //    req := client.DisableStageTransitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -495,7 +505,8 @@ type EnableStageTransitionRequest struct {
 }
 
 // Send marshals and sends the EnableStageTransition API request.
-func (r EnableStageTransitionRequest) Send() (*EnableStageTransitionOutput, error) {
+func (r EnableStageTransitionRequest) Send(ctx context.Context) (*EnableStageTransitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -511,7 +522,7 @@ func (r EnableStageTransitionRequest) Send() (*EnableStageTransitionOutput, erro
 //
 //    // Example sending a request using the EnableStageTransitionRequest method.
 //    req := client.EnableStageTransitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -547,7 +558,8 @@ type GetJobDetailsRequest struct {
 }
 
 // Send marshals and sends the GetJobDetails API request.
-func (r GetJobDetailsRequest) Send() (*GetJobDetailsOutput, error) {
+func (r GetJobDetailsRequest) Send(ctx context.Context) (*GetJobDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +580,7 @@ func (r GetJobDetailsRequest) Send() (*GetJobDetailsOutput, error) {
 //
 //    // Example sending a request using the GetJobDetailsRequest method.
 //    req := client.GetJobDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -602,7 +614,8 @@ type GetPipelineRequest struct {
 }
 
 // Send marshals and sends the GetPipeline API request.
-func (r GetPipelineRequest) Send() (*GetPipelineOutput, error) {
+func (r GetPipelineRequest) Send(ctx context.Context) (*GetPipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,7 +633,7 @@ func (r GetPipelineRequest) Send() (*GetPipelineOutput, error) {
 //
 //    // Example sending a request using the GetPipelineRequest method.
 //    req := client.GetPipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -654,7 +667,8 @@ type GetPipelineExecutionRequest struct {
 }
 
 // Send marshals and sends the GetPipelineExecution API request.
-func (r GetPipelineExecutionRequest) Send() (*GetPipelineExecutionOutput, error) {
+func (r GetPipelineExecutionRequest) Send(ctx context.Context) (*GetPipelineExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -672,7 +686,7 @@ func (r GetPipelineExecutionRequest) Send() (*GetPipelineExecutionOutput, error)
 //
 //    // Example sending a request using the GetPipelineExecutionRequest method.
 //    req := client.GetPipelineExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -706,7 +720,8 @@ type GetPipelineStateRequest struct {
 }
 
 // Send marshals and sends the GetPipelineState API request.
-func (r GetPipelineStateRequest) Send() (*GetPipelineStateOutput, error) {
+func (r GetPipelineStateRequest) Send(ctx context.Context) (*GetPipelineStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -723,7 +738,7 @@ func (r GetPipelineStateRequest) Send() (*GetPipelineStateOutput, error) {
 //
 //    // Example sending a request using the GetPipelineStateRequest method.
 //    req := client.GetPipelineStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -757,7 +772,8 @@ type GetThirdPartyJobDetailsRequest struct {
 }
 
 // Send marshals and sends the GetThirdPartyJobDetails API request.
-func (r GetThirdPartyJobDetailsRequest) Send() (*GetThirdPartyJobDetailsOutput, error) {
+func (r GetThirdPartyJobDetailsRequest) Send(ctx context.Context) (*GetThirdPartyJobDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,7 +795,7 @@ func (r GetThirdPartyJobDetailsRequest) Send() (*GetThirdPartyJobDetailsOutput, 
 //
 //    // Example sending a request using the GetThirdPartyJobDetailsRequest method.
 //    req := client.GetThirdPartyJobDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -813,7 +829,8 @@ type ListActionTypesRequest struct {
 }
 
 // Send marshals and sends the ListActionTypes API request.
-func (r ListActionTypesRequest) Send() (*ListActionTypesOutput, error) {
+func (r ListActionTypesRequest) Send(ctx context.Context) (*ListActionTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -830,7 +847,7 @@ func (r ListActionTypesRequest) Send() (*ListActionTypesOutput, error) {
 //
 //    // Example sending a request using the ListActionTypesRequest method.
 //    req := client.ListActionTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -864,7 +881,8 @@ type ListPipelineExecutionsRequest struct {
 }
 
 // Send marshals and sends the ListPipelineExecutions API request.
-func (r ListPipelineExecutionsRequest) Send() (*ListPipelineExecutionsOutput, error) {
+func (r ListPipelineExecutionsRequest) Send(ctx context.Context) (*ListPipelineExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -880,7 +898,7 @@ func (r ListPipelineExecutionsRequest) Send() (*ListPipelineExecutionsOutput, er
 //
 //    // Example sending a request using the ListPipelineExecutionsRequest method.
 //    req := client.ListPipelineExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -914,7 +932,8 @@ type ListPipelinesRequest struct {
 }
 
 // Send marshals and sends the ListPipelines API request.
-func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -930,7 +949,7 @@ func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
 //
 //    // Example sending a request using the ListPipelinesRequest method.
 //    req := client.ListPipelinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -964,7 +983,8 @@ type ListWebhooksRequest struct {
 }
 
 // Send marshals and sends the ListWebhooks API request.
-func (r ListWebhooksRequest) Send() (*ListWebhooksOutput, error) {
+func (r ListWebhooksRequest) Send(ctx context.Context) (*ListWebhooksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -982,7 +1002,7 @@ func (r ListWebhooksRequest) Send() (*ListWebhooksOutput, error) {
 //
 //    // Example sending a request using the ListWebhooksRequest method.
 //    req := client.ListWebhooksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1016,7 +1036,8 @@ type PollForJobsRequest struct {
 }
 
 // Send marshals and sends the PollForJobs API request.
-func (r PollForJobsRequest) Send() (*PollForJobsOutput, error) {
+func (r PollForJobsRequest) Send(ctx context.Context) (*PollForJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1040,7 +1061,7 @@ func (r PollForJobsRequest) Send() (*PollForJobsOutput, error) {
 //
 //    // Example sending a request using the PollForJobsRequest method.
 //    req := client.PollForJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1074,7 +1095,8 @@ type PollForThirdPartyJobsRequest struct {
 }
 
 // Send marshals and sends the PollForThirdPartyJobs API request.
-func (r PollForThirdPartyJobsRequest) Send() (*PollForThirdPartyJobsOutput, error) {
+func (r PollForThirdPartyJobsRequest) Send(ctx context.Context) (*PollForThirdPartyJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1095,7 +1117,7 @@ func (r PollForThirdPartyJobsRequest) Send() (*PollForThirdPartyJobsOutput, erro
 //
 //    // Example sending a request using the PollForThirdPartyJobsRequest method.
 //    req := client.PollForThirdPartyJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1129,7 +1151,8 @@ type PutActionRevisionRequest struct {
 }
 
 // Send marshals and sends the PutActionRevision API request.
-func (r PutActionRevisionRequest) Send() (*PutActionRevisionOutput, error) {
+func (r PutActionRevisionRequest) Send(ctx context.Context) (*PutActionRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1145,7 +1168,7 @@ func (r PutActionRevisionRequest) Send() (*PutActionRevisionOutput, error) {
 //
 //    // Example sending a request using the PutActionRevisionRequest method.
 //    req := client.PutActionRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1179,7 +1202,8 @@ type PutApprovalResultRequest struct {
 }
 
 // Send marshals and sends the PutApprovalResult API request.
-func (r PutApprovalResultRequest) Send() (*PutApprovalResultOutput, error) {
+func (r PutApprovalResultRequest) Send(ctx context.Context) (*PutApprovalResultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1196,7 +1220,7 @@ func (r PutApprovalResultRequest) Send() (*PutApprovalResultOutput, error) {
 //
 //    // Example sending a request using the PutApprovalResultRequest method.
 //    req := client.PutApprovalResultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1230,7 +1254,8 @@ type PutJobFailureResultRequest struct {
 }
 
 // Send marshals and sends the PutJobFailureResult API request.
-func (r PutJobFailureResultRequest) Send() (*PutJobFailureResultOutput, error) {
+func (r PutJobFailureResultRequest) Send(ctx context.Context) (*PutJobFailureResultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1247,7 +1272,7 @@ func (r PutJobFailureResultRequest) Send() (*PutJobFailureResultOutput, error) {
 //
 //    // Example sending a request using the PutJobFailureResultRequest method.
 //    req := client.PutJobFailureResultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1283,7 +1308,8 @@ type PutJobSuccessResultRequest struct {
 }
 
 // Send marshals and sends the PutJobSuccessResult API request.
-func (r PutJobSuccessResultRequest) Send() (*PutJobSuccessResultOutput, error) {
+func (r PutJobSuccessResultRequest) Send(ctx context.Context) (*PutJobSuccessResultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1300,7 +1326,7 @@ func (r PutJobSuccessResultRequest) Send() (*PutJobSuccessResultOutput, error) {
 //
 //    // Example sending a request using the PutJobSuccessResultRequest method.
 //    req := client.PutJobSuccessResultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1336,7 +1362,8 @@ type PutThirdPartyJobFailureResultRequest struct {
 }
 
 // Send marshals and sends the PutThirdPartyJobFailureResult API request.
-func (r PutThirdPartyJobFailureResultRequest) Send() (*PutThirdPartyJobFailureResultOutput, error) {
+func (r PutThirdPartyJobFailureResultRequest) Send(ctx context.Context) (*PutThirdPartyJobFailureResultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1353,7 +1380,7 @@ func (r PutThirdPartyJobFailureResultRequest) Send() (*PutThirdPartyJobFailureRe
 //
 //    // Example sending a request using the PutThirdPartyJobFailureResultRequest method.
 //    req := client.PutThirdPartyJobFailureResultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1389,7 +1416,8 @@ type PutThirdPartyJobSuccessResultRequest struct {
 }
 
 // Send marshals and sends the PutThirdPartyJobSuccessResult API request.
-func (r PutThirdPartyJobSuccessResultRequest) Send() (*PutThirdPartyJobSuccessResultOutput, error) {
+func (r PutThirdPartyJobSuccessResultRequest) Send(ctx context.Context) (*PutThirdPartyJobSuccessResultOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1406,7 +1434,7 @@ func (r PutThirdPartyJobSuccessResultRequest) Send() (*PutThirdPartyJobSuccessRe
 //
 //    // Example sending a request using the PutThirdPartyJobSuccessResultRequest method.
 //    req := client.PutThirdPartyJobSuccessResultRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1442,7 +1470,8 @@ type PutWebhookRequest struct {
 }
 
 // Send marshals and sends the PutWebhook API request.
-func (r PutWebhookRequest) Send() (*PutWebhookOutput, error) {
+func (r PutWebhookRequest) Send(ctx context.Context) (*PutWebhookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1465,7 +1494,7 @@ func (r PutWebhookRequest) Send() (*PutWebhookOutput, error) {
 //
 //    // Example sending a request using the PutWebhookRequest method.
 //    req := client.PutWebhookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1499,7 +1528,8 @@ type RegisterWebhookWithThirdPartyRequest struct {
 }
 
 // Send marshals and sends the RegisterWebhookWithThirdParty API request.
-func (r RegisterWebhookWithThirdPartyRequest) Send() (*RegisterWebhookWithThirdPartyOutput, error) {
+func (r RegisterWebhookWithThirdPartyRequest) Send(ctx context.Context) (*RegisterWebhookWithThirdPartyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1516,7 +1546,7 @@ func (r RegisterWebhookWithThirdPartyRequest) Send() (*RegisterWebhookWithThirdP
 //
 //    // Example sending a request using the RegisterWebhookWithThirdPartyRequest method.
 //    req := client.RegisterWebhookWithThirdPartyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1550,7 +1580,8 @@ type RetryStageExecutionRequest struct {
 }
 
 // Send marshals and sends the RetryStageExecution API request.
-func (r RetryStageExecutionRequest) Send() (*RetryStageExecutionOutput, error) {
+func (r RetryStageExecutionRequest) Send(ctx context.Context) (*RetryStageExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1566,7 +1597,7 @@ func (r RetryStageExecutionRequest) Send() (*RetryStageExecutionOutput, error) {
 //
 //    // Example sending a request using the RetryStageExecutionRequest method.
 //    req := client.RetryStageExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1600,7 +1631,8 @@ type StartPipelineExecutionRequest struct {
 }
 
 // Send marshals and sends the StartPipelineExecution API request.
-func (r StartPipelineExecutionRequest) Send() (*StartPipelineExecutionOutput, error) {
+func (r StartPipelineExecutionRequest) Send(ctx context.Context) (*StartPipelineExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1617,7 +1649,7 @@ func (r StartPipelineExecutionRequest) Send() (*StartPipelineExecutionOutput, er
 //
 //    // Example sending a request using the StartPipelineExecutionRequest method.
 //    req := client.StartPipelineExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1651,7 +1683,8 @@ type UpdatePipelineRequest struct {
 }
 
 // Send marshals and sends the UpdatePipeline API request.
-func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1670,7 +1703,7 @@ func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
 //
 //    // Example sending a request using the UpdatePipelineRequest method.
 //    req := client.UpdatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

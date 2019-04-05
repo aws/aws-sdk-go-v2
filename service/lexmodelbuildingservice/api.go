@@ -3,6 +3,7 @@
 package lexmodelbuildingservice
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateBotVersionRequest struct {
 }
 
 // Send marshals and sends the CreateBotVersion API request.
-func (r CreateBotVersionRequest) Send() (*CreateBotVersionOutput, error) {
+func (r CreateBotVersionRequest) Send(ctx context.Context) (*CreateBotVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -48,7 +50,7 @@ func (r CreateBotVersionRequest) Send() (*CreateBotVersionOutput, error) {
 //
 //    // Example sending a request using the CreateBotVersionRequest method.
 //    req := client.CreateBotVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -82,7 +84,8 @@ type CreateIntentVersionRequest struct {
 }
 
 // Send marshals and sends the CreateIntentVersion API request.
-func (r CreateIntentVersionRequest) Send() (*CreateIntentVersionOutput, error) {
+func (r CreateIntentVersionRequest) Send(ctx context.Context) (*CreateIntentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -110,7 +113,7 @@ func (r CreateIntentVersionRequest) Send() (*CreateIntentVersionOutput, error) {
 //
 //    // Example sending a request using the CreateIntentVersionRequest method.
 //    req := client.CreateIntentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -144,7 +147,8 @@ type CreateSlotTypeVersionRequest struct {
 }
 
 // Send marshals and sends the CreateSlotTypeVersion API request.
-func (r CreateSlotTypeVersionRequest) Send() (*CreateSlotTypeVersionOutput, error) {
+func (r CreateSlotTypeVersionRequest) Send(ctx context.Context) (*CreateSlotTypeVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,7 +175,7 @@ func (r CreateSlotTypeVersionRequest) Send() (*CreateSlotTypeVersionOutput, erro
 //
 //    // Example sending a request using the CreateSlotTypeVersionRequest method.
 //    req := client.CreateSlotTypeVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -205,7 +209,8 @@ type DeleteBotRequest struct {
 }
 
 // Send marshals and sends the DeleteBot API request.
-func (r DeleteBotRequest) Send() (*DeleteBotOutput, error) {
+func (r DeleteBotRequest) Send(ctx context.Context) (*DeleteBotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -230,7 +235,7 @@ func (r DeleteBotRequest) Send() (*DeleteBotOutput, error) {
 //
 //    // Example sending a request using the DeleteBotRequest method.
 //    req := client.DeleteBotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -266,7 +271,8 @@ type DeleteBotAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteBotAlias API request.
-func (r DeleteBotAliasRequest) Send() (*DeleteBotAliasOutput, error) {
+func (r DeleteBotAliasRequest) Send(ctx context.Context) (*DeleteBotAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,7 +296,7 @@ func (r DeleteBotAliasRequest) Send() (*DeleteBotAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteBotAliasRequest method.
 //    req := client.DeleteBotAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -326,7 +332,8 @@ type DeleteBotChannelAssociationRequest struct {
 }
 
 // Send marshals and sends the DeleteBotChannelAssociation API request.
-func (r DeleteBotChannelAssociationRequest) Send() (*DeleteBotChannelAssociationOutput, error) {
+func (r DeleteBotChannelAssociationRequest) Send(ctx context.Context) (*DeleteBotChannelAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -345,7 +352,7 @@ func (r DeleteBotChannelAssociationRequest) Send() (*DeleteBotChannelAssociation
 //
 //    // Example sending a request using the DeleteBotChannelAssociationRequest method.
 //    req := client.DeleteBotChannelAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -381,7 +388,8 @@ type DeleteBotVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteBotVersion API request.
-func (r DeleteBotVersionRequest) Send() (*DeleteBotVersionOutput, error) {
+func (r DeleteBotVersionRequest) Send(ctx context.Context) (*DeleteBotVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,7 +408,7 @@ func (r DeleteBotVersionRequest) Send() (*DeleteBotVersionOutput, error) {
 //
 //    // Example sending a request using the DeleteBotVersionRequest method.
 //    req := client.DeleteBotVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -436,7 +444,8 @@ type DeleteIntentRequest struct {
 }
 
 // Send marshals and sends the DeleteIntent API request.
-func (r DeleteIntentRequest) Send() (*DeleteIntentOutput, error) {
+func (r DeleteIntentRequest) Send(ctx context.Context) (*DeleteIntentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -465,7 +474,7 @@ func (r DeleteIntentRequest) Send() (*DeleteIntentOutput, error) {
 //
 //    // Example sending a request using the DeleteIntentRequest method.
 //    req := client.DeleteIntentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -501,7 +510,8 @@ type DeleteIntentVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteIntentVersion API request.
-func (r DeleteIntentVersionRequest) Send() (*DeleteIntentVersionOutput, error) {
+func (r DeleteIntentVersionRequest) Send(ctx context.Context) (*DeleteIntentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +530,7 @@ func (r DeleteIntentVersionRequest) Send() (*DeleteIntentVersionOutput, error) {
 //
 //    // Example sending a request using the DeleteIntentVersionRequest method.
 //    req := client.DeleteIntentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -556,7 +566,8 @@ type DeleteSlotTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteSlotType API request.
-func (r DeleteSlotTypeRequest) Send() (*DeleteSlotTypeOutput, error) {
+func (r DeleteSlotTypeRequest) Send(ctx context.Context) (*DeleteSlotTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -587,7 +598,7 @@ func (r DeleteSlotTypeRequest) Send() (*DeleteSlotTypeOutput, error) {
 //
 //    // Example sending a request using the DeleteSlotTypeRequest method.
 //    req := client.DeleteSlotTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -623,7 +634,8 @@ type DeleteSlotTypeVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteSlotTypeVersion API request.
-func (r DeleteSlotTypeVersionRequest) Send() (*DeleteSlotTypeVersionOutput, error) {
+func (r DeleteSlotTypeVersionRequest) Send(ctx context.Context) (*DeleteSlotTypeVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -642,7 +654,7 @@ func (r DeleteSlotTypeVersionRequest) Send() (*DeleteSlotTypeVersionOutput, erro
 //
 //    // Example sending a request using the DeleteSlotTypeVersionRequest method.
 //    req := client.DeleteSlotTypeVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -678,7 +690,8 @@ type DeleteUtterancesRequest struct {
 }
 
 // Send marshals and sends the DeleteUtterances API request.
-func (r DeleteUtterancesRequest) Send() (*DeleteUtterancesOutput, error) {
+func (r DeleteUtterancesRequest) Send(ctx context.Context) (*DeleteUtterancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -704,7 +717,7 @@ func (r DeleteUtterancesRequest) Send() (*DeleteUtterancesOutput, error) {
 //
 //    // Example sending a request using the DeleteUtterancesRequest method.
 //    req := client.DeleteUtterancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -740,7 +753,8 @@ type GetBotRequest struct {
 }
 
 // Send marshals and sends the GetBot API request.
-func (r GetBotRequest) Send() (*GetBotOutput, error) {
+func (r GetBotRequest) Send(ctx context.Context) (*GetBotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -759,7 +773,7 @@ func (r GetBotRequest) Send() (*GetBotOutput, error) {
 //
 //    // Example sending a request using the GetBotRequest method.
 //    req := client.GetBotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -793,7 +807,8 @@ type GetBotAliasRequest struct {
 }
 
 // Send marshals and sends the GetBotAlias API request.
-func (r GetBotAliasRequest) Send() (*GetBotAliasOutput, error) {
+func (r GetBotAliasRequest) Send(ctx context.Context) (*GetBotAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -812,7 +827,7 @@ func (r GetBotAliasRequest) Send() (*GetBotAliasOutput, error) {
 //
 //    // Example sending a request using the GetBotAliasRequest method.
 //    req := client.GetBotAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -846,7 +861,8 @@ type GetBotAliasesRequest struct {
 }
 
 // Send marshals and sends the GetBotAliases API request.
-func (r GetBotAliasesRequest) Send() (*GetBotAliasesOutput, error) {
+func (r GetBotAliasesRequest) Send(ctx context.Context) (*GetBotAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -864,7 +880,7 @@ func (r GetBotAliasesRequest) Send() (*GetBotAliasesOutput, error) {
 //
 //    // Example sending a request using the GetBotAliasesRequest method.
 //    req := client.GetBotAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -914,7 +930,7 @@ func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput
 func (p *GetBotAliasesRequest) Paginate(opts ...aws.Option) GetBotAliasesPager {
 	return GetBotAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -923,6 +939,7 @@ func (p *GetBotAliasesRequest) Paginate(opts ...aws.Option) GetBotAliasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -950,7 +967,8 @@ type GetBotChannelAssociationRequest struct {
 }
 
 // Send marshals and sends the GetBotChannelAssociation API request.
-func (r GetBotChannelAssociationRequest) Send() (*GetBotChannelAssociationOutput, error) {
+func (r GetBotChannelAssociationRequest) Send(ctx context.Context) (*GetBotChannelAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -970,7 +988,7 @@ func (r GetBotChannelAssociationRequest) Send() (*GetBotChannelAssociationOutput
 //
 //    // Example sending a request using the GetBotChannelAssociationRequest method.
 //    req := client.GetBotChannelAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1004,7 +1022,8 @@ type GetBotChannelAssociationsRequest struct {
 }
 
 // Send marshals and sends the GetBotChannelAssociations API request.
-func (r GetBotChannelAssociationsRequest) Send() (*GetBotChannelAssociationsOutput, error) {
+func (r GetBotChannelAssociationsRequest) Send(ctx context.Context) (*GetBotChannelAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1023,7 +1042,7 @@ func (r GetBotChannelAssociationsRequest) Send() (*GetBotChannelAssociationsOutp
 //
 //    // Example sending a request using the GetBotChannelAssociationsRequest method.
 //    req := client.GetBotChannelAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1073,7 +1092,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBot
 func (p *GetBotChannelAssociationsRequest) Paginate(opts ...aws.Option) GetBotChannelAssociationsPager {
 	return GetBotChannelAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotChannelAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1082,6 +1101,7 @@ func (p *GetBotChannelAssociationsRequest) Paginate(opts ...aws.Option) GetBotCh
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1109,7 +1129,8 @@ type GetBotVersionsRequest struct {
 }
 
 // Send marshals and sends the GetBotVersions API request.
-func (r GetBotVersionsRequest) Send() (*GetBotVersionsOutput, error) {
+func (r GetBotVersionsRequest) Send(ctx context.Context) (*GetBotVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1135,7 +1156,7 @@ func (r GetBotVersionsRequest) Send() (*GetBotVersionsOutput, error) {
 //
 //    // Example sending a request using the GetBotVersionsRequest method.
 //    req := client.GetBotVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1185,7 +1206,7 @@ func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInp
 func (p *GetBotVersionsRequest) Paginate(opts ...aws.Option) GetBotVersionsPager {
 	return GetBotVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1194,6 +1215,7 @@ func (p *GetBotVersionsRequest) Paginate(opts ...aws.Option) GetBotVersionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1221,7 +1243,8 @@ type GetBotsRequest struct {
 }
 
 // Send marshals and sends the GetBots API request.
-func (r GetBotsRequest) Send() (*GetBotsOutput, error) {
+func (r GetBotsRequest) Send(ctx context.Context) (*GetBotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1246,7 +1269,7 @@ func (r GetBotsRequest) Send() (*GetBotsOutput, error) {
 //
 //    // Example sending a request using the GetBotsRequest method.
 //    req := client.GetBotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1296,7 +1319,7 @@ func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) GetBotsReq
 func (p *GetBotsRequest) Paginate(opts ...aws.Option) GetBotsPager {
 	return GetBotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1305,6 +1328,7 @@ func (p *GetBotsRequest) Paginate(opts ...aws.Option) GetBotsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1332,7 +1356,8 @@ type GetBuiltinIntentRequest struct {
 }
 
 // Send marshals and sends the GetBuiltinIntent API request.
-func (r GetBuiltinIntentRequest) Send() (*GetBuiltinIntentOutput, error) {
+func (r GetBuiltinIntentRequest) Send(ctx context.Context) (*GetBuiltinIntentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1350,7 +1375,7 @@ func (r GetBuiltinIntentRequest) Send() (*GetBuiltinIntentOutput, error) {
 //
 //    // Example sending a request using the GetBuiltinIntentRequest method.
 //    req := client.GetBuiltinIntentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1384,7 +1409,8 @@ type GetBuiltinIntentsRequest struct {
 }
 
 // Send marshals and sends the GetBuiltinIntents API request.
-func (r GetBuiltinIntentsRequest) Send() (*GetBuiltinIntentsOutput, error) {
+func (r GetBuiltinIntentsRequest) Send(ctx context.Context) (*GetBuiltinIntentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1402,7 +1428,7 @@ func (r GetBuiltinIntentsRequest) Send() (*GetBuiltinIntentsOutput, error) {
 //
 //    // Example sending a request using the GetBuiltinIntentsRequest method.
 //    req := client.GetBuiltinIntentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1452,7 +1478,7 @@ func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinInte
 func (p *GetBuiltinIntentsRequest) Paginate(opts ...aws.Option) GetBuiltinIntentsPager {
 	return GetBuiltinIntentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBuiltinIntentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1461,6 +1487,7 @@ func (p *GetBuiltinIntentsRequest) Paginate(opts ...aws.Option) GetBuiltinIntent
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1488,7 +1515,8 @@ type GetBuiltinSlotTypesRequest struct {
 }
 
 // Send marshals and sends the GetBuiltinSlotTypes API request.
-func (r GetBuiltinSlotTypesRequest) Send() (*GetBuiltinSlotTypesOutput, error) {
+func (r GetBuiltinSlotTypesRequest) Send(ctx context.Context) (*GetBuiltinSlotTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1509,7 +1537,7 @@ func (r GetBuiltinSlotTypesRequest) Send() (*GetBuiltinSlotTypesOutput, error) {
 //
 //    // Example sending a request using the GetBuiltinSlotTypesRequest method.
 //    req := client.GetBuiltinSlotTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1559,7 +1587,7 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSl
 func (p *GetBuiltinSlotTypesRequest) Paginate(opts ...aws.Option) GetBuiltinSlotTypesPager {
 	return GetBuiltinSlotTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetBuiltinSlotTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1568,6 +1596,7 @@ func (p *GetBuiltinSlotTypesRequest) Paginate(opts ...aws.Option) GetBuiltinSlot
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1595,7 +1624,8 @@ type GetExportRequest struct {
 }
 
 // Send marshals and sends the GetExport API request.
-func (r GetExportRequest) Send() (*GetExportOutput, error) {
+func (r GetExportRequest) Send(ctx context.Context) (*GetExportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1611,7 +1641,7 @@ func (r GetExportRequest) Send() (*GetExportOutput, error) {
 //
 //    // Example sending a request using the GetExportRequest method.
 //    req := client.GetExportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1645,7 +1675,8 @@ type GetImportRequest struct {
 }
 
 // Send marshals and sends the GetImport API request.
-func (r GetImportRequest) Send() (*GetImportOutput, error) {
+func (r GetImportRequest) Send(ctx context.Context) (*GetImportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1661,7 +1692,7 @@ func (r GetImportRequest) Send() (*GetImportOutput, error) {
 //
 //    // Example sending a request using the GetImportRequest method.
 //    req := client.GetImportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1695,7 +1726,8 @@ type GetIntentRequest struct {
 }
 
 // Send marshals and sends the GetIntent API request.
-func (r GetIntentRequest) Send() (*GetIntentOutput, error) {
+func (r GetIntentRequest) Send(ctx context.Context) (*GetIntentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1714,7 +1746,7 @@ func (r GetIntentRequest) Send() (*GetIntentOutput, error) {
 //
 //    // Example sending a request using the GetIntentRequest method.
 //    req := client.GetIntentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1748,7 +1780,8 @@ type GetIntentVersionsRequest struct {
 }
 
 // Send marshals and sends the GetIntentVersions API request.
-func (r GetIntentVersionsRequest) Send() (*GetIntentVersionsOutput, error) {
+func (r GetIntentVersionsRequest) Send(ctx context.Context) (*GetIntentVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1774,7 +1807,7 @@ func (r GetIntentVersionsRequest) Send() (*GetIntentVersionsOutput, error) {
 //
 //    // Example sending a request using the GetIntentVersionsRequest method.
 //    req := client.GetIntentVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1824,7 +1857,7 @@ func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersi
 func (p *GetIntentVersionsRequest) Paginate(opts ...aws.Option) GetIntentVersionsPager {
 	return GetIntentVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetIntentVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1833,6 +1866,7 @@ func (p *GetIntentVersionsRequest) Paginate(opts ...aws.Option) GetIntentVersion
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1860,7 +1894,8 @@ type GetIntentsRequest struct {
 }
 
 // Send marshals and sends the GetIntents API request.
-func (r GetIntentsRequest) Send() (*GetIntentsOutput, error) {
+func (r GetIntentsRequest) Send(ctx context.Context) (*GetIntentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1884,7 +1919,7 @@ func (r GetIntentsRequest) Send() (*GetIntentsOutput, error) {
 //
 //    // Example sending a request using the GetIntentsRequest method.
 //    req := client.GetIntentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1934,7 +1969,7 @@ func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) GetI
 func (p *GetIntentsRequest) Paginate(opts ...aws.Option) GetIntentsPager {
 	return GetIntentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetIntentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1943,6 +1978,7 @@ func (p *GetIntentsRequest) Paginate(opts ...aws.Option) GetIntentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1970,7 +2006,8 @@ type GetSlotTypeRequest struct {
 }
 
 // Send marshals and sends the GetSlotType API request.
-func (r GetSlotTypeRequest) Send() (*GetSlotTypeOutput, error) {
+func (r GetSlotTypeRequest) Send(ctx context.Context) (*GetSlotTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1989,7 +2026,7 @@ func (r GetSlotTypeRequest) Send() (*GetSlotTypeOutput, error) {
 //
 //    // Example sending a request using the GetSlotTypeRequest method.
 //    req := client.GetSlotTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2023,7 +2060,8 @@ type GetSlotTypeVersionsRequest struct {
 }
 
 // Send marshals and sends the GetSlotTypeVersions API request.
-func (r GetSlotTypeVersionsRequest) Send() (*GetSlotTypeVersionsOutput, error) {
+func (r GetSlotTypeVersionsRequest) Send(ctx context.Context) (*GetSlotTypeVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2049,7 +2087,7 @@ func (r GetSlotTypeVersionsRequest) Send() (*GetSlotTypeVersionsOutput, error) {
 //
 //    // Example sending a request using the GetSlotTypeVersionsRequest method.
 //    req := client.GetSlotTypeVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2099,7 +2137,7 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeV
 func (p *GetSlotTypeVersionsRequest) Paginate(opts ...aws.Option) GetSlotTypeVersionsPager {
 	return GetSlotTypeVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetSlotTypeVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2108,6 +2146,7 @@ func (p *GetSlotTypeVersionsRequest) Paginate(opts ...aws.Option) GetSlotTypeVer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2135,7 +2174,8 @@ type GetSlotTypesRequest struct {
 }
 
 // Send marshals and sends the GetSlotTypes API request.
-func (r GetSlotTypesRequest) Send() (*GetSlotTypesOutput, error) {
+func (r GetSlotTypesRequest) Send(ctx context.Context) (*GetSlotTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2159,7 +2199,7 @@ func (r GetSlotTypesRequest) Send() (*GetSlotTypesOutput, error) {
 //
 //    // Example sending a request using the GetSlotTypesRequest method.
 //    req := client.GetSlotTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2209,7 +2249,7 @@ func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) 
 func (p *GetSlotTypesRequest) Paginate(opts ...aws.Option) GetSlotTypesPager {
 	return GetSlotTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetSlotTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2218,6 +2258,7 @@ func (p *GetSlotTypesRequest) Paginate(opts ...aws.Option) GetSlotTypesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2245,7 +2286,8 @@ type GetUtterancesViewRequest struct {
 }
 
 // Send marshals and sends the GetUtterancesView API request.
-func (r GetUtterancesViewRequest) Send() (*GetUtterancesViewOutput, error) {
+func (r GetUtterancesViewRequest) Send(ctx context.Context) (*GetUtterancesViewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2281,7 +2323,7 @@ func (r GetUtterancesViewRequest) Send() (*GetUtterancesViewOutput, error) {
 //
 //    // Example sending a request using the GetUtterancesViewRequest method.
 //    req := client.GetUtterancesViewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2315,7 +2357,8 @@ type PutBotRequest struct {
 }
 
 // Send marshals and sends the PutBot API request.
-func (r PutBotRequest) Send() (*PutBotOutput, error) {
+func (r PutBotRequest) Send(ctx context.Context) (*PutBotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2344,7 +2387,7 @@ func (r PutBotRequest) Send() (*PutBotOutput, error) {
 //
 //    // Example sending a request using the PutBotRequest method.
 //    req := client.PutBotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2378,7 +2421,8 @@ type PutBotAliasRequest struct {
 }
 
 // Send marshals and sends the PutBotAlias API request.
-func (r PutBotAliasRequest) Send() (*PutBotAliasOutput, error) {
+func (r PutBotAliasRequest) Send(ctx context.Context) (*PutBotAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2398,7 +2442,7 @@ func (r PutBotAliasRequest) Send() (*PutBotAliasOutput, error) {
 //
 //    // Example sending a request using the PutBotAliasRequest method.
 //    req := client.PutBotAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2432,7 +2476,8 @@ type PutIntentRequest struct {
 }
 
 // Send marshals and sends the PutIntent API request.
-func (r PutIntentRequest) Send() (*PutIntentOutput, error) {
+func (r PutIntentRequest) Send(ctx context.Context) (*PutIntentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2493,7 +2538,7 @@ func (r PutIntentRequest) Send() (*PutIntentOutput, error) {
 //
 //    // Example sending a request using the PutIntentRequest method.
 //    req := client.PutIntentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2527,7 +2572,8 @@ type PutSlotTypeRequest struct {
 }
 
 // Send marshals and sends the PutSlotType API request.
-func (r PutSlotTypeRequest) Send() (*PutSlotTypeOutput, error) {
+func (r PutSlotTypeRequest) Send(ctx context.Context) (*PutSlotTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2556,7 +2602,7 @@ func (r PutSlotTypeRequest) Send() (*PutSlotTypeOutput, error) {
 //
 //    // Example sending a request using the PutSlotTypeRequest method.
 //    req := client.PutSlotTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2590,7 +2636,8 @@ type StartImportRequest struct {
 }
 
 // Send marshals and sends the StartImport API request.
-func (r StartImportRequest) Send() (*StartImportOutput, error) {
+func (r StartImportRequest) Send(ctx context.Context) (*StartImportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2606,7 +2653,7 @@ func (r StartImportRequest) Send() (*StartImportOutput, error) {
 //
 //    // Example sending a request using the StartImportRequest method.
 //    req := client.StartImportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

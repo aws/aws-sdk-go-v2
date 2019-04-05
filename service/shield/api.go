@@ -3,6 +3,7 @@
 package shield
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AssociateDRTLogBucketRequest struct {
 }
 
 // Send marshals and sends the AssociateDRTLogBucket API request.
-func (r AssociateDRTLogBucketRequest) Send() (*AssociateDRTLogBucketOutput, error) {
+func (r AssociateDRTLogBucketRequest) Send(ctx context.Context) (*AssociateDRTLogBucketOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +44,7 @@ func (r AssociateDRTLogBucketRequest) Send() (*AssociateDRTLogBucketOutput, erro
 //
 //    // Example sending a request using the AssociateDRTLogBucketRequest method.
 //    req := client.AssociateDRTLogBucketRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +78,8 @@ type AssociateDRTRoleRequest struct {
 }
 
 // Send marshals and sends the AssociateDRTRole API request.
-func (r AssociateDRTRoleRequest) Send() (*AssociateDRTRoleOutput, error) {
+func (r AssociateDRTRoleRequest) Send(ctx context.Context) (*AssociateDRTRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -119,7 +122,7 @@ func (r AssociateDRTRoleRequest) Send() (*AssociateDRTRoleOutput, error) {
 //
 //    // Example sending a request using the AssociateDRTRoleRequest method.
 //    req := client.AssociateDRTRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -153,7 +156,8 @@ type CreateProtectionRequest struct {
 }
 
 // Send marshals and sends the CreateProtection API request.
-func (r CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
+func (r CreateProtectionRequest) Send(ctx context.Context) (*CreateProtectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,7 +181,7 @@ func (r CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
 //
 //    // Example sending a request using the CreateProtectionRequest method.
 //    req := client.CreateProtectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -211,7 +215,8 @@ type CreateSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateSubscription API request.
-func (r CreateSubscriptionRequest) Send() (*CreateSubscriptionOutput, error) {
+func (r CreateSubscriptionRequest) Send(ctx context.Context) (*CreateSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,7 +241,7 @@ func (r CreateSubscriptionRequest) Send() (*CreateSubscriptionOutput, error) {
 //
 //    // Example sending a request using the CreateSubscriptionRequest method.
 //    req := client.CreateSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -270,7 +275,8 @@ type DeleteProtectionRequest struct {
 }
 
 // Send marshals and sends the DeleteProtection API request.
-func (r DeleteProtectionRequest) Send() (*DeleteProtectionOutput, error) {
+func (r DeleteProtectionRequest) Send(ctx context.Context) (*DeleteProtectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +292,7 @@ func (r DeleteProtectionRequest) Send() (*DeleteProtectionOutput, error) {
 //
 //    // Example sending a request using the DeleteProtectionRequest method.
 //    req := client.DeleteProtectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -320,7 +326,8 @@ type DeleteSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscription API request.
-func (r DeleteSubscriptionRequest) Send() (*DeleteSubscriptionOutput, error) {
+func (r DeleteSubscriptionRequest) Send(ctx context.Context) (*DeleteSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -338,7 +345,7 @@ func (r DeleteSubscriptionRequest) Send() (*DeleteSubscriptionOutput, error) {
 //
 //    // Example sending a request using the DeleteSubscriptionRequest method.
 //    req := client.DeleteSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -375,7 +382,8 @@ type DescribeAttackRequest struct {
 }
 
 // Send marshals and sends the DescribeAttack API request.
-func (r DescribeAttackRequest) Send() (*DescribeAttackOutput, error) {
+func (r DescribeAttackRequest) Send(ctx context.Context) (*DescribeAttackOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -391,7 +399,7 @@ func (r DescribeAttackRequest) Send() (*DescribeAttackOutput, error) {
 //
 //    // Example sending a request using the DescribeAttackRequest method.
 //    req := client.DescribeAttackRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -425,7 +433,8 @@ type DescribeDRTAccessRequest struct {
 }
 
 // Send marshals and sends the DescribeDRTAccess API request.
-func (r DescribeDRTAccessRequest) Send() (*DescribeDRTAccessOutput, error) {
+func (r DescribeDRTAccessRequest) Send(ctx context.Context) (*DescribeDRTAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +452,7 @@ func (r DescribeDRTAccessRequest) Send() (*DescribeDRTAccessOutput, error) {
 //
 //    // Example sending a request using the DescribeDRTAccessRequest method.
 //    req := client.DescribeDRTAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -477,7 +486,8 @@ type DescribeEmergencyContactSettingsRequest struct {
 }
 
 // Send marshals and sends the DescribeEmergencyContactSettings API request.
-func (r DescribeEmergencyContactSettingsRequest) Send() (*DescribeEmergencyContactSettingsOutput, error) {
+func (r DescribeEmergencyContactSettingsRequest) Send(ctx context.Context) (*DescribeEmergencyContactSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -494,7 +504,7 @@ func (r DescribeEmergencyContactSettingsRequest) Send() (*DescribeEmergencyConta
 //
 //    // Example sending a request using the DescribeEmergencyContactSettingsRequest method.
 //    req := client.DescribeEmergencyContactSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -528,7 +538,8 @@ type DescribeProtectionRequest struct {
 }
 
 // Send marshals and sends the DescribeProtection API request.
-func (r DescribeProtectionRequest) Send() (*DescribeProtectionOutput, error) {
+func (r DescribeProtectionRequest) Send(ctx context.Context) (*DescribeProtectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -544,7 +555,7 @@ func (r DescribeProtectionRequest) Send() (*DescribeProtectionOutput, error) {
 //
 //    // Example sending a request using the DescribeProtectionRequest method.
 //    req := client.DescribeProtectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -578,7 +589,8 @@ type DescribeSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscription API request.
-func (r DescribeSubscriptionRequest) Send() (*DescribeSubscriptionOutput, error) {
+func (r DescribeSubscriptionRequest) Send(ctx context.Context) (*DescribeSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -594,7 +606,7 @@ func (r DescribeSubscriptionRequest) Send() (*DescribeSubscriptionOutput, error)
 //
 //    // Example sending a request using the DescribeSubscriptionRequest method.
 //    req := client.DescribeSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -628,7 +640,8 @@ type DisassociateDRTLogBucketRequest struct {
 }
 
 // Send marshals and sends the DisassociateDRTLogBucket API request.
-func (r DisassociateDRTLogBucketRequest) Send() (*DisassociateDRTLogBucketOutput, error) {
+func (r DisassociateDRTLogBucketRequest) Send(ctx context.Context) (*DisassociateDRTLogBucketOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -652,7 +665,7 @@ func (r DisassociateDRTLogBucketRequest) Send() (*DisassociateDRTLogBucketOutput
 //
 //    // Example sending a request using the DisassociateDRTLogBucketRequest method.
 //    req := client.DisassociateDRTLogBucketRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -686,7 +699,8 @@ type DisassociateDRTRoleRequest struct {
 }
 
 // Send marshals and sends the DisassociateDRTRole API request.
-func (r DisassociateDRTRoleRequest) Send() (*DisassociateDRTRoleOutput, error) {
+func (r DisassociateDRTRoleRequest) Send(ctx context.Context) (*DisassociateDRTRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -709,7 +723,7 @@ func (r DisassociateDRTRoleRequest) Send() (*DisassociateDRTRoleOutput, error) {
 //
 //    // Example sending a request using the DisassociateDRTRoleRequest method.
 //    req := client.DisassociateDRTRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -743,7 +757,8 @@ type GetSubscriptionStateRequest struct {
 }
 
 // Send marshals and sends the GetSubscriptionState API request.
-func (r GetSubscriptionStateRequest) Send() (*GetSubscriptionStateOutput, error) {
+func (r GetSubscriptionStateRequest) Send(ctx context.Context) (*GetSubscriptionStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -759,7 +774,7 @@ func (r GetSubscriptionStateRequest) Send() (*GetSubscriptionStateOutput, error)
 //
 //    // Example sending a request using the GetSubscriptionStateRequest method.
 //    req := client.GetSubscriptionStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -793,7 +808,8 @@ type ListAttacksRequest struct {
 }
 
 // Send marshals and sends the ListAttacks API request.
-func (r ListAttacksRequest) Send() (*ListAttacksOutput, error) {
+func (r ListAttacksRequest) Send(ctx context.Context) (*ListAttacksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +826,7 @@ func (r ListAttacksRequest) Send() (*ListAttacksOutput, error) {
 //
 //    // Example sending a request using the ListAttacksRequest method.
 //    req := client.ListAttacksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -844,7 +860,8 @@ type ListProtectionsRequest struct {
 }
 
 // Send marshals and sends the ListProtections API request.
-func (r ListProtectionsRequest) Send() (*ListProtectionsOutput, error) {
+func (r ListProtectionsRequest) Send(ctx context.Context) (*ListProtectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -860,7 +877,7 @@ func (r ListProtectionsRequest) Send() (*ListProtectionsOutput, error) {
 //
 //    // Example sending a request using the ListProtectionsRequest method.
 //    req := client.ListProtectionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -894,7 +911,8 @@ type UpdateEmergencyContactSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateEmergencyContactSettings API request.
-func (r UpdateEmergencyContactSettingsRequest) Send() (*UpdateEmergencyContactSettingsOutput, error) {
+func (r UpdateEmergencyContactSettingsRequest) Send(ctx context.Context) (*UpdateEmergencyContactSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -911,7 +929,7 @@ func (r UpdateEmergencyContactSettingsRequest) Send() (*UpdateEmergencyContactSe
 //
 //    // Example sending a request using the UpdateEmergencyContactSettingsRequest method.
 //    req := client.UpdateEmergencyContactSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -945,7 +963,8 @@ type UpdateSubscriptionRequest struct {
 }
 
 // Send marshals and sends the UpdateSubscription API request.
-func (r UpdateSubscriptionRequest) Send() (*UpdateSubscriptionOutput, error) {
+func (r UpdateSubscriptionRequest) Send(ctx context.Context) (*UpdateSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -962,7 +981,7 @@ func (r UpdateSubscriptionRequest) Send() (*UpdateSubscriptionOutput, error) {
 //
 //    // Example sending a request using the UpdateSubscriptionRequest method.
 //    req := client.UpdateSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

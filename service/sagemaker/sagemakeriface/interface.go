@@ -9,6 +9,8 @@
 package sagemakeriface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
 )
@@ -213,26 +215,19 @@ type SageMakerAPI interface {
 
 	UpdateWorkteamRequest(*sagemaker.UpdateWorkteamInput) sagemaker.UpdateWorkteamRequest
 
-	WaitUntilEndpointDeleted(*sagemaker.DescribeEndpointInput) error
-	WaitUntilEndpointDeletedWithContext(aws.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error
+	WaitUntilEndpointDeleted(context.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error
 
-	WaitUntilEndpointInService(*sagemaker.DescribeEndpointInput) error
-	WaitUntilEndpointInServiceWithContext(aws.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error
+	WaitUntilEndpointInService(context.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error
 
-	WaitUntilNotebookInstanceDeleted(*sagemaker.DescribeNotebookInstanceInput) error
-	WaitUntilNotebookInstanceDeletedWithContext(aws.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+	WaitUntilNotebookInstanceDeleted(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
-	WaitUntilNotebookInstanceInService(*sagemaker.DescribeNotebookInstanceInput) error
-	WaitUntilNotebookInstanceInServiceWithContext(aws.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+	WaitUntilNotebookInstanceInService(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
-	WaitUntilNotebookInstanceStopped(*sagemaker.DescribeNotebookInstanceInput) error
-	WaitUntilNotebookInstanceStoppedWithContext(aws.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
+	WaitUntilNotebookInstanceStopped(context.Context, *sagemaker.DescribeNotebookInstanceInput, ...aws.WaiterOption) error
 
-	WaitUntilTrainingJobCompletedOrStopped(*sagemaker.DescribeTrainingJobInput) error
-	WaitUntilTrainingJobCompletedOrStoppedWithContext(aws.Context, *sagemaker.DescribeTrainingJobInput, ...aws.WaiterOption) error
+	WaitUntilTrainingJobCompletedOrStopped(context.Context, *sagemaker.DescribeTrainingJobInput, ...aws.WaiterOption) error
 
-	WaitUntilTransformJobCompletedOrStopped(*sagemaker.DescribeTransformJobInput) error
-	WaitUntilTransformJobCompletedOrStoppedWithContext(aws.Context, *sagemaker.DescribeTransformJobInput, ...aws.WaiterOption) error
+	WaitUntilTransformJobCompletedOrStopped(context.Context, *sagemaker.DescribeTransformJobInput, ...aws.WaiterOption) error
 }
 
 var _ SageMakerAPI = (*sagemaker.SageMaker)(nil)

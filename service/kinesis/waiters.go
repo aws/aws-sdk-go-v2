@@ -3,6 +3,7 @@
 package kinesis
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeStream to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Kinesis) WaitUntilStreamExists(input *DescribeStreamInput) error {
-	return c.WaitUntilStreamExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStreamExistsWithContext is an extended version of WaitUntilStreamExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) WaitUntilStreamExistsWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
+func (c *Kinesis) WaitUntilStreamExists(ctx context.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStreamExists",
 		MaxAttempts: 18,
@@ -51,26 +45,19 @@ func (c *Kinesis) WaitUntilStreamExistsWithContext(ctx aws.Context, input *Descr
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilStreamNotExists uses the Kinesis API operation
 // DescribeStream to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Kinesis) WaitUntilStreamNotExists(input *DescribeStreamInput) error {
-	return c.WaitUntilStreamNotExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStreamNotExistsWithContext is an extended version of WaitUntilStreamNotExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) WaitUntilStreamNotExistsWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
+func (c *Kinesis) WaitUntilStreamNotExists(ctx context.Context, input *DescribeStreamInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStreamNotExists",
 		MaxAttempts: 18,
@@ -97,5 +84,5 @@ func (c *Kinesis) WaitUntilStreamNotExistsWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

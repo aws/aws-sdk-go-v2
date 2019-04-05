@@ -3,6 +3,8 @@
 package apigatewaymanagementapi
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -19,7 +21,8 @@ type PostToConnectionRequest struct {
 }
 
 // Send marshals and sends the PostToConnection API request.
-func (r PostToConnectionRequest) Send() (*PostToConnectionOutput, error) {
+func (r PostToConnectionRequest) Send(ctx context.Context) (*PostToConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r PostToConnectionRequest) Send() (*PostToConnectionOutput, error) {
 //
 //    // Example sending a request using the PostToConnectionRequest method.
 //    req := client.PostToConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

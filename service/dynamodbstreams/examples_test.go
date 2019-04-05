@@ -3,6 +3,7 @@
 package dynamodbstreams_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -40,7 +41,7 @@ func ExampleDynamoDBStreams_DescribeStreamRequest_shared00() {
 	}
 
 	req := svc.DescribeStreamRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -77,7 +78,7 @@ func ExampleDynamoDBStreams_GetRecordsRequest_shared00() {
 	}
 
 	req := svc.GetRecordsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -123,7 +124,7 @@ func ExampleDynamoDBStreams_GetShardIteratorRequest_shared00() {
 	}
 
 	req := svc.GetShardIteratorRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -160,7 +161,7 @@ func ExampleDynamoDBStreams_ListStreamsRequest_shared00() {
 	input := &dynamodbstreams.ListStreamsInput{}
 
 	req := svc.ListStreamsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

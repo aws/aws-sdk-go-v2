@@ -3,6 +3,7 @@
 package autoscalingplans
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateScalingPlanRequest struct {
 }
 
 // Send marshals and sends the CreateScalingPlan API request.
-func (r CreateScalingPlanRequest) Send() (*CreateScalingPlanOutput, error) {
+func (r CreateScalingPlanRequest) Send(ctx context.Context) (*CreateScalingPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateScalingPlanRequest) Send() (*CreateScalingPlanOutput, error) {
 //
 //    // Example sending a request using the CreateScalingPlanRequest method.
 //    req := client.CreateScalingPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type DeleteScalingPlanRequest struct {
 }
 
 // Send marshals and sends the DeleteScalingPlan API request.
-func (r DeleteScalingPlanRequest) Send() (*DeleteScalingPlanOutput, error) {
+func (r DeleteScalingPlanRequest) Send(ctx context.Context) (*DeleteScalingPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,7 @@ func (r DeleteScalingPlanRequest) Send() (*DeleteScalingPlanOutput, error) {
 //
 //    // Example sending a request using the DeleteScalingPlanRequest method.
 //    req := client.DeleteScalingPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +129,8 @@ type DescribeScalingPlanResourcesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingPlanResources API request.
-func (r DescribeScalingPlanResourcesRequest) Send() (*DescribeScalingPlanResourcesOutput, error) {
+func (r DescribeScalingPlanResourcesRequest) Send(ctx context.Context) (*DescribeScalingPlanResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +146,7 @@ func (r DescribeScalingPlanResourcesRequest) Send() (*DescribeScalingPlanResourc
 //
 //    // Example sending a request using the DescribeScalingPlanResourcesRequest method.
 //    req := client.DescribeScalingPlanResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -176,7 +180,8 @@ type DescribeScalingPlansRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingPlans API request.
-func (r DescribeScalingPlansRequest) Send() (*DescribeScalingPlansOutput, error) {
+func (r DescribeScalingPlansRequest) Send(ctx context.Context) (*DescribeScalingPlansOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (r DescribeScalingPlansRequest) Send() (*DescribeScalingPlansOutput, error)
 //
 //    // Example sending a request using the DescribeScalingPlansRequest method.
 //    req := client.DescribeScalingPlansRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -226,7 +231,8 @@ type GetScalingPlanResourceForecastDataRequest struct {
 }
 
 // Send marshals and sends the GetScalingPlanResourceForecastData API request.
-func (r GetScalingPlanResourceForecastDataRequest) Send() (*GetScalingPlanResourceForecastDataOutput, error) {
+func (r GetScalingPlanResourceForecastDataRequest) Send(ctx context.Context) (*GetScalingPlanResourceForecastDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,7 +252,7 @@ func (r GetScalingPlanResourceForecastDataRequest) Send() (*GetScalingPlanResour
 //
 //    // Example sending a request using the GetScalingPlanResourceForecastDataRequest method.
 //    req := client.GetScalingPlanResourceForecastDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -280,7 +286,8 @@ type UpdateScalingPlanRequest struct {
 }
 
 // Send marshals and sends the UpdateScalingPlan API request.
-func (r UpdateScalingPlanRequest) Send() (*UpdateScalingPlanOutput, error) {
+func (r UpdateScalingPlanRequest) Send(ctx context.Context) (*UpdateScalingPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -299,7 +306,7 @@ func (r UpdateScalingPlanRequest) Send() (*UpdateScalingPlanOutput, error) {
 //
 //    // Example sending a request using the UpdateScalingPlanRequest method.
 //    req := client.UpdateScalingPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

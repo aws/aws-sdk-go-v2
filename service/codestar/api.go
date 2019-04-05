@@ -3,6 +3,7 @@
 package codestar
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AssociateTeamMemberRequest struct {
 }
 
 // Send marshals and sends the AssociateTeamMember API request.
-func (r AssociateTeamMemberRequest) Send() (*AssociateTeamMemberOutput, error) {
+func (r AssociateTeamMemberRequest) Send(ctx context.Context) (*AssociateTeamMemberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r AssociateTeamMemberRequest) Send() (*AssociateTeamMemberOutput, error) {
 //
 //    // Example sending a request using the AssociateTeamMemberRequest method.
 //    req := client.AssociateTeamMemberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 //
 //    // Example sending a request using the CreateProjectRequest method.
 //    req := client.CreateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type CreateUserProfileRequest struct {
 }
 
 // Send marshals and sends the CreateUserProfile API request.
-func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
+func (r CreateUserProfileRequest) Send(ctx context.Context) (*CreateUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
 //
 //    // Example sending a request using the CreateUserProfileRequest method.
 //    req := client.CreateUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -195,7 +200,7 @@ func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 //
 //    // Example sending a request using the DeleteProjectRequest method.
 //    req := client.DeleteProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -229,7 +234,8 @@ type DeleteUserProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteUserProfile API request.
-func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
+func (r DeleteUserProfileRequest) Send(ctx context.Context) (*DeleteUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -248,7 +254,7 @@ func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
 //
 //    // Example sending a request using the DeleteUserProfileRequest method.
 //    req := client.DeleteUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -282,7 +288,8 @@ type DescribeProjectRequest struct {
 }
 
 // Send marshals and sends the DescribeProject API request.
-func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+func (r DescribeProjectRequest) Send(ctx context.Context) (*DescribeProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -298,7 +305,7 @@ func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
 //
 //    // Example sending a request using the DescribeProjectRequest method.
 //    req := client.DescribeProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -332,7 +339,8 @@ type DescribeUserProfileRequest struct {
 }
 
 // Send marshals and sends the DescribeUserProfile API request.
-func (r DescribeUserProfileRequest) Send() (*DescribeUserProfileOutput, error) {
+func (r DescribeUserProfileRequest) Send(ctx context.Context) (*DescribeUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -348,7 +356,7 @@ func (r DescribeUserProfileRequest) Send() (*DescribeUserProfileOutput, error) {
 //
 //    // Example sending a request using the DescribeUserProfileRequest method.
 //    req := client.DescribeUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -382,7 +390,8 @@ type DisassociateTeamMemberRequest struct {
 }
 
 // Send marshals and sends the DisassociateTeamMember API request.
-func (r DisassociateTeamMemberRequest) Send() (*DisassociateTeamMemberOutput, error) {
+func (r DisassociateTeamMemberRequest) Send(ctx context.Context) (*DisassociateTeamMemberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -401,7 +410,7 @@ func (r DisassociateTeamMemberRequest) Send() (*DisassociateTeamMemberOutput, er
 //
 //    // Example sending a request using the DisassociateTeamMemberRequest method.
 //    req := client.DisassociateTeamMemberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -435,7 +444,8 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -451,7 +461,7 @@ func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 //
 //    // Example sending a request using the ListProjectsRequest method.
 //    req := client.ListProjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -485,7 +495,8 @@ type ListResourcesRequest struct {
 }
 
 // Send marshals and sends the ListResources API request.
-func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
+func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +512,7 @@ func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
 //
 //    // Example sending a request using the ListResourcesRequest method.
 //    req := client.ListResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -535,7 +546,8 @@ type ListTagsForProjectRequest struct {
 }
 
 // Send marshals and sends the ListTagsForProject API request.
-func (r ListTagsForProjectRequest) Send() (*ListTagsForProjectOutput, error) {
+func (r ListTagsForProjectRequest) Send(ctx context.Context) (*ListTagsForProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -551,7 +563,7 @@ func (r ListTagsForProjectRequest) Send() (*ListTagsForProjectOutput, error) {
 //
 //    // Example sending a request using the ListTagsForProjectRequest method.
 //    req := client.ListTagsForProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -585,7 +597,8 @@ type ListTeamMembersRequest struct {
 }
 
 // Send marshals and sends the ListTeamMembers API request.
-func (r ListTeamMembersRequest) Send() (*ListTeamMembersOutput, error) {
+func (r ListTeamMembersRequest) Send(ctx context.Context) (*ListTeamMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -601,7 +614,7 @@ func (r ListTeamMembersRequest) Send() (*ListTeamMembersOutput, error) {
 //
 //    // Example sending a request using the ListTeamMembersRequest method.
 //    req := client.ListTeamMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -635,7 +648,8 @@ type ListUserProfilesRequest struct {
 }
 
 // Send marshals and sends the ListUserProfiles API request.
-func (r ListUserProfilesRequest) Send() (*ListUserProfilesOutput, error) {
+func (r ListUserProfilesRequest) Send(ctx context.Context) (*ListUserProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,7 +665,7 @@ func (r ListUserProfilesRequest) Send() (*ListUserProfilesOutput, error) {
 //
 //    // Example sending a request using the ListUserProfilesRequest method.
 //    req := client.ListUserProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -685,7 +699,8 @@ type TagProjectRequest struct {
 }
 
 // Send marshals and sends the TagProject API request.
-func (r TagProjectRequest) Send() (*TagProjectOutput, error) {
+func (r TagProjectRequest) Send(ctx context.Context) (*TagProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -701,7 +716,7 @@ func (r TagProjectRequest) Send() (*TagProjectOutput, error) {
 //
 //    // Example sending a request using the TagProjectRequest method.
 //    req := client.TagProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -735,7 +750,8 @@ type UntagProjectRequest struct {
 }
 
 // Send marshals and sends the UntagProject API request.
-func (r UntagProjectRequest) Send() (*UntagProjectOutput, error) {
+func (r UntagProjectRequest) Send(ctx context.Context) (*UntagProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -751,7 +767,7 @@ func (r UntagProjectRequest) Send() (*UntagProjectOutput, error) {
 //
 //    // Example sending a request using the UntagProjectRequest method.
 //    req := client.UntagProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -785,7 +801,8 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -801,7 +818,7 @@ func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 //
 //    // Example sending a request using the UpdateProjectRequest method.
 //    req := client.UpdateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -835,7 +852,8 @@ type UpdateTeamMemberRequest struct {
 }
 
 // Send marshals and sends the UpdateTeamMember API request.
-func (r UpdateTeamMemberRequest) Send() (*UpdateTeamMemberOutput, error) {
+func (r UpdateTeamMemberRequest) Send(ctx context.Context) (*UpdateTeamMemberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -853,7 +871,7 @@ func (r UpdateTeamMemberRequest) Send() (*UpdateTeamMemberOutput, error) {
 //
 //    // Example sending a request using the UpdateTeamMemberRequest method.
 //    req := client.UpdateTeamMemberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -887,7 +905,8 @@ type UpdateUserProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateUserProfile API request.
-func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
+func (r UpdateUserProfileRequest) Send(ctx context.Context) (*UpdateUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -905,7 +924,7 @@ func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
 //
 //    // Example sending a request using the UpdateUserProfileRequest method.
 //    req := client.UpdateUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

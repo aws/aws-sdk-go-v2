@@ -3,6 +3,7 @@
 package organizations
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AcceptHandshakeRequest struct {
 }
 
 // Send marshals and sends the AcceptHandshake API request.
-func (r AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
+func (r AcceptHandshakeRequest) Send(ctx context.Context) (*AcceptHandshakeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -64,7 +66,7 @@ func (r AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
 //
 //    // Example sending a request using the AcceptHandshakeRequest method.
 //    req := client.AcceptHandshakeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -98,7 +100,8 @@ type AttachPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachPolicy API request.
-func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -152,7 +155,7 @@ func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
 //
 //    // Example sending a request using the AttachPolicyRequest method.
 //    req := client.AttachPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -188,7 +191,8 @@ type CancelHandshakeRequest struct {
 }
 
 // Send marshals and sends the CancelHandshake API request.
-func (r CancelHandshakeRequest) Send() (*CancelHandshakeOutput, error) {
+func (r CancelHandshakeRequest) Send(ctx context.Context) (*CancelHandshakeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -212,7 +216,7 @@ func (r CancelHandshakeRequest) Send() (*CancelHandshakeOutput, error) {
 //
 //    // Example sending a request using the CancelHandshakeRequest method.
 //    req := client.CancelHandshakeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -246,7 +250,8 @@ type CreateAccountRequest struct {
 }
 
 // Send marshals and sends the CreateAccount API request.
-func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
+func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -320,7 +325,7 @@ func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 //
 //    // Example sending a request using the CreateAccountRequest method.
 //    req := client.CreateAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -354,7 +359,8 @@ type CreateOrganizationRequest struct {
 }
 
 // Send marshals and sends the CreateOrganization API request.
-func (r CreateOrganizationRequest) Send() (*CreateOrganizationOutput, error) {
+func (r CreateOrganizationRequest) Send(ctx context.Context) (*CreateOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -383,7 +389,7 @@ func (r CreateOrganizationRequest) Send() (*CreateOrganizationOutput, error) {
 //
 //    // Example sending a request using the CreateOrganizationRequest method.
 //    req := client.CreateOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -417,7 +423,8 @@ type CreateOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the CreateOrganizationalUnit API request.
-func (r CreateOrganizationalUnitRequest) Send() (*CreateOrganizationalUnitOutput, error) {
+func (r CreateOrganizationalUnitRequest) Send(ctx context.Context) (*CreateOrganizationalUnitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -442,7 +449,7 @@ func (r CreateOrganizationalUnitRequest) Send() (*CreateOrganizationalUnitOutput
 //
 //    // Example sending a request using the CreateOrganizationalUnitRequest method.
 //    req := client.CreateOrganizationalUnitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -476,7 +483,8 @@ type CreatePolicyRequest struct {
 }
 
 // Send marshals and sends the CreatePolicy API request.
-func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+func (r CreatePolicyRequest) Send(ctx context.Context) (*CreatePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -498,7 +506,7 @@ func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
 //
 //    // Example sending a request using the CreatePolicyRequest method.
 //    req := client.CreatePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -532,7 +540,8 @@ type DeclineHandshakeRequest struct {
 }
 
 // Send marshals and sends the DeclineHandshake API request.
-func (r DeclineHandshakeRequest) Send() (*DeclineHandshakeOutput, error) {
+func (r DeclineHandshakeRequest) Send(ctx context.Context) (*DeclineHandshakeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -557,7 +566,7 @@ func (r DeclineHandshakeRequest) Send() (*DeclineHandshakeOutput, error) {
 //
 //    // Example sending a request using the DeclineHandshakeRequest method.
 //    req := client.DeclineHandshakeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -591,7 +600,8 @@ type DeleteOrganizationRequest struct {
 }
 
 // Send marshals and sends the DeleteOrganization API request.
-func (r DeleteOrganizationRequest) Send() (*DeleteOrganizationOutput, error) {
+func (r DeleteOrganizationRequest) Send(ctx context.Context) (*DeleteOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -608,7 +618,7 @@ func (r DeleteOrganizationRequest) Send() (*DeleteOrganizationOutput, error) {
 //
 //    // Example sending a request using the DeleteOrganizationRequest method.
 //    req := client.DeleteOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -644,7 +654,8 @@ type DeleteOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the DeleteOrganizationalUnit API request.
-func (r DeleteOrganizationalUnitRequest) Send() (*DeleteOrganizationalUnitOutput, error) {
+func (r DeleteOrganizationalUnitRequest) Send(ctx context.Context) (*DeleteOrganizationalUnitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -663,7 +674,7 @@ func (r DeleteOrganizationalUnitRequest) Send() (*DeleteOrganizationalUnitOutput
 //
 //    // Example sending a request using the DeleteOrganizationalUnitRequest method.
 //    req := client.DeleteOrganizationalUnitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -699,7 +710,8 @@ type DeletePolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePolicy API request.
-func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -719,7 +731,7 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyRequest method.
 //    req := client.DeletePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -755,7 +767,8 @@ type DescribeAccountRequest struct {
 }
 
 // Send marshals and sends the DescribeAccount API request.
-func (r DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
+func (r DescribeAccountRequest) Send(ctx context.Context) (*DescribeAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -773,7 +786,7 @@ func (r DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
 //
 //    // Example sending a request using the DescribeAccountRequest method.
 //    req := client.DescribeAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -807,7 +820,8 @@ type DescribeCreateAccountStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeCreateAccountStatus API request.
-func (r DescribeCreateAccountStatusRequest) Send() (*DescribeCreateAccountStatusOutput, error) {
+func (r DescribeCreateAccountStatusRequest) Send(ctx context.Context) (*DescribeCreateAccountStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -825,7 +839,7 @@ func (r DescribeCreateAccountStatusRequest) Send() (*DescribeCreateAccountStatus
 //
 //    // Example sending a request using the DescribeCreateAccountStatusRequest method.
 //    req := client.DescribeCreateAccountStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -859,7 +873,8 @@ type DescribeHandshakeRequest struct {
 }
 
 // Send marshals and sends the DescribeHandshake API request.
-func (r DescribeHandshakeRequest) Send() (*DescribeHandshakeOutput, error) {
+func (r DescribeHandshakeRequest) Send(ctx context.Context) (*DescribeHandshakeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -883,7 +898,7 @@ func (r DescribeHandshakeRequest) Send() (*DescribeHandshakeOutput, error) {
 //
 //    // Example sending a request using the DescribeHandshakeRequest method.
 //    req := client.DescribeHandshakeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -917,7 +932,8 @@ type DescribeOrganizationRequest struct {
 }
 
 // Send marshals and sends the DescribeOrganization API request.
-func (r DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error) {
+func (r DescribeOrganizationRequest) Send(ctx context.Context) (*DescribeOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -940,7 +956,7 @@ func (r DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error)
 //
 //    // Example sending a request using the DescribeOrganizationRequest method.
 //    req := client.DescribeOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -974,7 +990,8 @@ type DescribeOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the DescribeOrganizationalUnit API request.
-func (r DescribeOrganizationalUnitRequest) Send() (*DescribeOrganizationalUnitOutput, error) {
+func (r DescribeOrganizationalUnitRequest) Send(ctx context.Context) (*DescribeOrganizationalUnitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,7 +1009,7 @@ func (r DescribeOrganizationalUnitRequest) Send() (*DescribeOrganizationalUnitOu
 //
 //    // Example sending a request using the DescribeOrganizationalUnitRequest method.
 //    req := client.DescribeOrganizationalUnitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1026,7 +1043,8 @@ type DescribePolicyRequest struct {
 }
 
 // Send marshals and sends the DescribePolicy API request.
-func (r DescribePolicyRequest) Send() (*DescribePolicyOutput, error) {
+func (r DescribePolicyRequest) Send(ctx context.Context) (*DescribePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1044,7 +1062,7 @@ func (r DescribePolicyRequest) Send() (*DescribePolicyOutput, error) {
 //
 //    // Example sending a request using the DescribePolicyRequest method.
 //    req := client.DescribePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1078,7 +1096,8 @@ type DetachPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachPolicy API request.
-func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+func (r DetachPolicyRequest) Send(ctx context.Context) (*DetachPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1108,7 +1127,7 @@ func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
 //
 //    // Example sending a request using the DetachPolicyRequest method.
 //    req := client.DetachPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1144,7 +1163,8 @@ type DisableAWSServiceAccessRequest struct {
 }
 
 // Send marshals and sends the DisableAWSServiceAccess API request.
-func (r DisableAWSServiceAccessRequest) Send() (*DisableAWSServiceAccessOutput, error) {
+func (r DisableAWSServiceAccessRequest) Send(ctx context.Context) (*DisableAWSServiceAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1182,7 +1202,7 @@ func (r DisableAWSServiceAccessRequest) Send() (*DisableAWSServiceAccessOutput, 
 //
 //    // Example sending a request using the DisableAWSServiceAccessRequest method.
 //    req := client.DisableAWSServiceAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1218,7 +1238,8 @@ type DisablePolicyTypeRequest struct {
 }
 
 // Send marshals and sends the DisablePolicyType API request.
-func (r DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
+func (r DisablePolicyTypeRequest) Send(ctx context.Context) (*DisablePolicyTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1245,7 +1266,7 @@ func (r DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
 //
 //    // Example sending a request using the DisablePolicyTypeRequest method.
 //    req := client.DisablePolicyTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1279,7 +1300,8 @@ type EnableAWSServiceAccessRequest struct {
 }
 
 // Send marshals and sends the EnableAWSServiceAccess API request.
-func (r EnableAWSServiceAccessRequest) Send() (*EnableAWSServiceAccessOutput, error) {
+func (r EnableAWSServiceAccessRequest) Send(ctx context.Context) (*EnableAWSServiceAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1314,7 +1336,7 @@ func (r EnableAWSServiceAccessRequest) Send() (*EnableAWSServiceAccessOutput, er
 //
 //    // Example sending a request using the EnableAWSServiceAccessRequest method.
 //    req := client.EnableAWSServiceAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1350,7 +1372,8 @@ type EnableAllFeaturesRequest struct {
 }
 
 // Send marshals and sends the EnableAllFeatures API request.
-func (r EnableAllFeaturesRequest) Send() (*EnableAllFeaturesOutput, error) {
+func (r EnableAllFeaturesRequest) Send(ctx context.Context) (*EnableAllFeaturesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1395,7 +1418,7 @@ func (r EnableAllFeaturesRequest) Send() (*EnableAllFeaturesOutput, error) {
 //
 //    // Example sending a request using the EnableAllFeaturesRequest method.
 //    req := client.EnableAllFeaturesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1429,7 +1452,8 @@ type EnablePolicyTypeRequest struct {
 }
 
 // Send marshals and sends the EnablePolicyType API request.
-func (r EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
+func (r EnablePolicyTypeRequest) Send(ctx context.Context) (*EnablePolicyTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1456,7 +1480,7 @@ func (r EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
 //
 //    // Example sending a request using the EnablePolicyTypeRequest method.
 //    req := client.EnablePolicyTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1490,7 +1514,8 @@ type InviteAccountToOrganizationRequest struct {
 }
 
 // Send marshals and sends the InviteAccountToOrganization API request.
-func (r InviteAccountToOrganizationRequest) Send() (*InviteAccountToOrganizationOutput, error) {
+func (r InviteAccountToOrganizationRequest) Send(ctx context.Context) (*InviteAccountToOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1523,7 +1548,7 @@ func (r InviteAccountToOrganizationRequest) Send() (*InviteAccountToOrganization
 //
 //    // Example sending a request using the InviteAccountToOrganizationRequest method.
 //    req := client.InviteAccountToOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1557,7 +1582,8 @@ type LeaveOrganizationRequest struct {
 }
 
 // Send marshals and sends the LeaveOrganization API request.
-func (r LeaveOrganizationRequest) Send() (*LeaveOrganizationOutput, error) {
+func (r LeaveOrganizationRequest) Send(ctx context.Context) (*LeaveOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1601,7 +1627,7 @@ func (r LeaveOrganizationRequest) Send() (*LeaveOrganizationOutput, error) {
 //
 //    // Example sending a request using the LeaveOrganizationRequest method.
 //    req := client.LeaveOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1637,7 +1663,8 @@ type ListAWSServiceAccessForOrganizationRequest struct {
 }
 
 // Send marshals and sends the ListAWSServiceAccessForOrganization API request.
-func (r ListAWSServiceAccessForOrganizationRequest) Send() (*ListAWSServiceAccessForOrganizationOutput, error) {
+func (r ListAWSServiceAccessForOrganizationRequest) Send(ctx context.Context) (*ListAWSServiceAccessForOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1663,7 +1690,7 @@ func (r ListAWSServiceAccessForOrganizationRequest) Send() (*ListAWSServiceAcces
 //
 //    // Example sending a request using the ListAWSServiceAccessForOrganizationRequest method.
 //    req := client.ListAWSServiceAccessForOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1713,7 +1740,7 @@ func (c *Organizations) ListAWSServiceAccessForOrganizationRequest(input *ListAW
 func (p *ListAWSServiceAccessForOrganizationRequest) Paginate(opts ...aws.Option) ListAWSServiceAccessForOrganizationPager {
 	return ListAWSServiceAccessForOrganizationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAWSServiceAccessForOrganizationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1722,6 +1749,7 @@ func (p *ListAWSServiceAccessForOrganizationRequest) Paginate(opts ...aws.Option
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1749,7 +1777,8 @@ type ListAccountsRequest struct {
 }
 
 // Send marshals and sends the ListAccounts API request.
-func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
+func (r ListAccountsRequest) Send(ctx context.Context) (*ListAccountsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1774,7 +1803,7 @@ func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
 //
 //    // Example sending a request using the ListAccountsRequest method.
 //    req := client.ListAccountsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1824,7 +1853,7 @@ func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) ListAccoun
 func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 	return ListAccountsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1833,6 +1862,7 @@ func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1860,7 +1890,8 @@ type ListAccountsForParentRequest struct {
 }
 
 // Send marshals and sends the ListAccountsForParent API request.
-func (r ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, error) {
+func (r ListAccountsForParentRequest) Send(ctx context.Context) (*ListAccountsForParentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1888,7 +1919,7 @@ func (r ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, erro
 //
 //    // Example sending a request using the ListAccountsForParentRequest method.
 //    req := client.ListAccountsForParentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1938,7 +1969,7 @@ func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParen
 func (p *ListAccountsForParentRequest) Paginate(opts ...aws.Option) ListAccountsForParentPager {
 	return ListAccountsForParentPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountsForParentInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1947,6 +1978,7 @@ func (p *ListAccountsForParentRequest) Paginate(opts ...aws.Option) ListAccounts
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1974,7 +2006,8 @@ type ListChildrenRequest struct {
 }
 
 // Send marshals and sends the ListChildren API request.
-func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
+func (r ListChildrenRequest) Send(ctx context.Context) (*ListChildrenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1999,7 +2032,7 @@ func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
 //
 //    // Example sending a request using the ListChildrenRequest method.
 //    req := client.ListChildrenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2049,7 +2082,7 @@ func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) ListChildr
 func (p *ListChildrenRequest) Paginate(opts ...aws.Option) ListChildrenPager {
 	return ListChildrenPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChildrenInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2058,6 +2091,7 @@ func (p *ListChildrenRequest) Paginate(opts ...aws.Option) ListChildrenPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2085,7 +2119,8 @@ type ListCreateAccountStatusRequest struct {
 }
 
 // Send marshals and sends the ListCreateAccountStatus API request.
-func (r ListCreateAccountStatusRequest) Send() (*ListCreateAccountStatusOutput, error) {
+func (r ListCreateAccountStatusRequest) Send(ctx context.Context) (*ListCreateAccountStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2109,7 +2144,7 @@ func (r ListCreateAccountStatusRequest) Send() (*ListCreateAccountStatusOutput, 
 //
 //    // Example sending a request using the ListCreateAccountStatusRequest method.
 //    req := client.ListCreateAccountStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2159,7 +2194,7 @@ func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountS
 func (p *ListCreateAccountStatusRequest) Paginate(opts ...aws.Option) ListCreateAccountStatusPager {
 	return ListCreateAccountStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCreateAccountStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2168,6 +2203,7 @@ func (p *ListCreateAccountStatusRequest) Paginate(opts ...aws.Option) ListCreate
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2195,7 +2231,8 @@ type ListHandshakesForAccountRequest struct {
 }
 
 // Send marshals and sends the ListHandshakesForAccount API request.
-func (r ListHandshakesForAccountRequest) Send() (*ListHandshakesForAccountOutput, error) {
+func (r ListHandshakesForAccountRequest) Send(ctx context.Context) (*ListHandshakesForAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2223,7 +2260,7 @@ func (r ListHandshakesForAccountRequest) Send() (*ListHandshakesForAccountOutput
 //
 //    // Example sending a request using the ListHandshakesForAccountRequest method.
 //    req := client.ListHandshakesForAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2273,7 +2310,7 @@ func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesFor
 func (p *ListHandshakesForAccountRequest) Paginate(opts ...aws.Option) ListHandshakesForAccountPager {
 	return ListHandshakesForAccountPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHandshakesForAccountInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2282,6 +2319,7 @@ func (p *ListHandshakesForAccountRequest) Paginate(opts ...aws.Option) ListHands
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2309,7 +2347,8 @@ type ListHandshakesForOrganizationRequest struct {
 }
 
 // Send marshals and sends the ListHandshakesForOrganization API request.
-func (r ListHandshakesForOrganizationRequest) Send() (*ListHandshakesForOrganizationOutput, error) {
+func (r ListHandshakesForOrganizationRequest) Send(ctx context.Context) (*ListHandshakesForOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2339,7 +2378,7 @@ func (r ListHandshakesForOrganizationRequest) Send() (*ListHandshakesForOrganiza
 //
 //    // Example sending a request using the ListHandshakesForOrganizationRequest method.
 //    req := client.ListHandshakesForOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2389,7 +2428,7 @@ func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshak
 func (p *ListHandshakesForOrganizationRequest) Paginate(opts ...aws.Option) ListHandshakesForOrganizationPager {
 	return ListHandshakesForOrganizationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListHandshakesForOrganizationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2398,6 +2437,7 @@ func (p *ListHandshakesForOrganizationRequest) Paginate(opts ...aws.Option) List
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2425,7 +2465,8 @@ type ListOrganizationalUnitsForParentRequest struct {
 }
 
 // Send marshals and sends the ListOrganizationalUnitsForParent API request.
-func (r ListOrganizationalUnitsForParentRequest) Send() (*ListOrganizationalUnitsForParentOutput, error) {
+func (r ListOrganizationalUnitsForParentRequest) Send(ctx context.Context) (*ListOrganizationalUnitsForParentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2448,7 +2489,7 @@ func (r ListOrganizationalUnitsForParentRequest) Send() (*ListOrganizationalUnit
 //
 //    // Example sending a request using the ListOrganizationalUnitsForParentRequest method.
 //    req := client.ListOrganizationalUnitsForParentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2498,7 +2539,7 @@ func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrgan
 func (p *ListOrganizationalUnitsForParentRequest) Paginate(opts ...aws.Option) ListOrganizationalUnitsForParentPager {
 	return ListOrganizationalUnitsForParentPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOrganizationalUnitsForParentInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2507,6 +2548,7 @@ func (p *ListOrganizationalUnitsForParentRequest) Paginate(opts ...aws.Option) L
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2534,7 +2576,8 @@ type ListParentsRequest struct {
 }
 
 // Send marshals and sends the ListParents API request.
-func (r ListParentsRequest) Send() (*ListParentsOutput, error) {
+func (r ListParentsRequest) Send(ctx context.Context) (*ListParentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2561,7 +2604,7 @@ func (r ListParentsRequest) Send() (*ListParentsOutput, error) {
 //
 //    // Example sending a request using the ListParentsRequest method.
 //    req := client.ListParentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2611,7 +2654,7 @@ func (c *Organizations) ListParentsRequest(input *ListParentsInput) ListParentsR
 func (p *ListParentsRequest) Paginate(opts ...aws.Option) ListParentsPager {
 	return ListParentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListParentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2620,6 +2663,7 @@ func (p *ListParentsRequest) Paginate(opts ...aws.Option) ListParentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2647,7 +2691,8 @@ type ListPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListPolicies API request.
-func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+func (r ListPoliciesRequest) Send(ctx context.Context) (*ListPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2670,7 +2715,7 @@ func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListPoliciesRequest method.
 //    req := client.ListPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2720,7 +2765,7 @@ func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) ListPolici
 func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 	return ListPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2729,6 +2774,7 @@ func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2756,7 +2802,8 @@ type ListPoliciesForTargetRequest struct {
 }
 
 // Send marshals and sends the ListPoliciesForTarget API request.
-func (r ListPoliciesForTargetRequest) Send() (*ListPoliciesForTargetOutput, error) {
+func (r ListPoliciesForTargetRequest) Send(ctx context.Context) (*ListPoliciesForTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2781,7 +2828,7 @@ func (r ListPoliciesForTargetRequest) Send() (*ListPoliciesForTargetOutput, erro
 //
 //    // Example sending a request using the ListPoliciesForTargetRequest method.
 //    req := client.ListPoliciesForTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2831,7 +2878,7 @@ func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTarge
 func (p *ListPoliciesForTargetRequest) Paginate(opts ...aws.Option) ListPoliciesForTargetPager {
 	return ListPoliciesForTargetPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPoliciesForTargetInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2840,6 +2887,7 @@ func (p *ListPoliciesForTargetRequest) Paginate(opts ...aws.Option) ListPolicies
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2867,7 +2915,8 @@ type ListRootsRequest struct {
 }
 
 // Send marshals and sends the ListRoots API request.
-func (r ListRootsRequest) Send() (*ListRootsOutput, error) {
+func (r ListRootsRequest) Send(ctx context.Context) (*ListRootsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2896,7 +2945,7 @@ func (r ListRootsRequest) Send() (*ListRootsOutput, error) {
 //
 //    // Example sending a request using the ListRootsRequest method.
 //    req := client.ListRootsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2946,7 +2995,7 @@ func (c *Organizations) ListRootsRequest(input *ListRootsInput) ListRootsRequest
 func (p *ListRootsRequest) Paginate(opts ...aws.Option) ListRootsPager {
 	return ListRootsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRootsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2955,6 +3004,7 @@ func (p *ListRootsRequest) Paginate(opts ...aws.Option) ListRootsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2982,7 +3032,8 @@ type ListTargetsForPolicyRequest struct {
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
-func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error) {
+func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3006,7 +3057,7 @@ func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error)
 //
 //    // Example sending a request using the ListTargetsForPolicyRequest method.
 //    req := client.ListTargetsForPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3056,7 +3107,7 @@ func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyI
 func (p *ListTargetsForPolicyRequest) Paginate(opts ...aws.Option) ListTargetsForPolicyPager {
 	return ListTargetsForPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTargetsForPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3065,6 +3116,7 @@ func (p *ListTargetsForPolicyRequest) Paginate(opts ...aws.Option) ListTargetsFo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3092,7 +3144,8 @@ type MoveAccountRequest struct {
 }
 
 // Send marshals and sends the MoveAccount API request.
-func (r MoveAccountRequest) Send() (*MoveAccountOutput, error) {
+func (r MoveAccountRequest) Send(ctx context.Context) (*MoveAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3111,7 +3164,7 @@ func (r MoveAccountRequest) Send() (*MoveAccountOutput, error) {
 //
 //    // Example sending a request using the MoveAccountRequest method.
 //    req := client.MoveAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3147,7 +3200,8 @@ type RemoveAccountFromOrganizationRequest struct {
 }
 
 // Send marshals and sends the RemoveAccountFromOrganization API request.
-func (r RemoveAccountFromOrganizationRequest) Send() (*RemoveAccountFromOrganizationOutput, error) {
+func (r RemoveAccountFromOrganizationRequest) Send(ctx context.Context) (*RemoveAccountFromOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3187,7 +3241,7 @@ func (r RemoveAccountFromOrganizationRequest) Send() (*RemoveAccountFromOrganiza
 //
 //    // Example sending a request using the RemoveAccountFromOrganizationRequest method.
 //    req := client.RemoveAccountFromOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3223,7 +3277,8 @@ type UpdateOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the UpdateOrganizationalUnit API request.
-func (r UpdateOrganizationalUnitRequest) Send() (*UpdateOrganizationalUnitOutput, error) {
+func (r UpdateOrganizationalUnitRequest) Send(ctx context.Context) (*UpdateOrganizationalUnitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3243,7 +3298,7 @@ func (r UpdateOrganizationalUnitRequest) Send() (*UpdateOrganizationalUnitOutput
 //
 //    // Example sending a request using the UpdateOrganizationalUnitRequest method.
 //    req := client.UpdateOrganizationalUnitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3277,7 +3332,8 @@ type UpdatePolicyRequest struct {
 }
 
 // Send marshals and sends the UpdatePolicy API request.
-func (r UpdatePolicyRequest) Send() (*UpdatePolicyOutput, error) {
+func (r UpdatePolicyRequest) Send(ctx context.Context) (*UpdatePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3297,7 +3353,7 @@ func (r UpdatePolicyRequest) Send() (*UpdatePolicyOutput, error) {
 //
 //    // Example sending a request using the UpdatePolicyRequest method.
 //    req := client.UpdatePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

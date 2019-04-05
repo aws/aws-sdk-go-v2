@@ -3,6 +3,7 @@
 package dynamodb
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type BatchGetItemRequest struct {
 }
 
 // Send marshals and sends the BatchGetItem API request.
-func (r BatchGetItemRequest) Send() (*BatchGetItemOutput, error) {
+func (r BatchGetItemRequest) Send(ctx context.Context) (*BatchGetItemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +88,7 @@ func (r BatchGetItemRequest) Send() (*BatchGetItemOutput, error) {
 //
 //    // Example sending a request using the BatchGetItemRequest method.
 //    req := client.BatchGetItemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -136,7 +138,7 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemReq
 func (p *BatchGetItemRequest) Paginate(opts ...aws.Option) BatchGetItemPager {
 	return BatchGetItemPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *BatchGetItemInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -145,6 +147,7 @@ func (p *BatchGetItemRequest) Paginate(opts ...aws.Option) BatchGetItemPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -172,7 +175,8 @@ type BatchWriteItemRequest struct {
 }
 
 // Send marshals and sends the BatchWriteItem API request.
-func (r BatchWriteItemRequest) Send() (*BatchWriteItemOutput, error) {
+func (r BatchWriteItemRequest) Send(ctx context.Context) (*BatchWriteItemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -259,7 +263,7 @@ func (r BatchWriteItemRequest) Send() (*BatchWriteItemOutput, error) {
 //
 //    // Example sending a request using the BatchWriteItemRequest method.
 //    req := client.BatchWriteItemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -293,7 +297,8 @@ type CreateBackupRequest struct {
 }
 
 // Send marshals and sends the CreateBackup API request.
-func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -338,7 +343,7 @@ func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
 //
 //    // Example sending a request using the CreateBackupRequest method.
 //    req := client.CreateBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -372,7 +377,8 @@ type CreateGlobalTableRequest struct {
 }
 
 // Send marshals and sends the CreateGlobalTable API request.
-func (r CreateGlobalTableRequest) Send() (*CreateGlobalTableOutput, error) {
+func (r CreateGlobalTableRequest) Send(ctx context.Context) (*CreateGlobalTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -420,7 +426,7 @@ func (r CreateGlobalTableRequest) Send() (*CreateGlobalTableOutput, error) {
 //
 //    // Example sending a request using the CreateGlobalTableRequest method.
 //    req := client.CreateGlobalTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -454,7 +460,8 @@ type CreateTableRequest struct {
 }
 
 // Send marshals and sends the CreateTable API request.
-func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
+func (r CreateTableRequest) Send(ctx context.Context) (*CreateTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -484,7 +491,7 @@ func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
 //
 //    // Example sending a request using the CreateTableRequest method.
 //    req := client.CreateTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -518,7 +525,8 @@ type DeleteBackupRequest struct {
 }
 
 // Send marshals and sends the DeleteBackup API request.
-func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -536,7 +544,7 @@ func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
 //
 //    // Example sending a request using the DeleteBackupRequest method.
 //    req := client.DeleteBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -570,7 +578,8 @@ type DeleteItemRequest struct {
 }
 
 // Send marshals and sends the DeleteItem API request.
-func (r DeleteItemRequest) Send() (*DeleteItemOutput, error) {
+func (r DeleteItemRequest) Send(ctx context.Context) (*DeleteItemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -599,7 +608,7 @@ func (r DeleteItemRequest) Send() (*DeleteItemOutput, error) {
 //
 //    // Example sending a request using the DeleteItemRequest method.
 //    req := client.DeleteItemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -633,7 +642,8 @@ type DeleteTableRequest struct {
 }
 
 // Send marshals and sends the DeleteTable API request.
-func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
+func (r DeleteTableRequest) Send(ctx context.Context) (*DeleteTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,7 +676,7 @@ func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
 //
 //    // Example sending a request using the DeleteTableRequest method.
 //    req := client.DeleteTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -700,7 +710,8 @@ type DescribeBackupRequest struct {
 }
 
 // Send marshals and sends the DescribeBackup API request.
-func (r DescribeBackupRequest) Send() (*DescribeBackupOutput, error) {
+func (r DescribeBackupRequest) Send(ctx context.Context) (*DescribeBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -718,7 +729,7 @@ func (r DescribeBackupRequest) Send() (*DescribeBackupOutput, error) {
 //
 //    // Example sending a request using the DescribeBackupRequest method.
 //    req := client.DescribeBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -752,7 +763,8 @@ type DescribeContinuousBackupsRequest struct {
 }
 
 // Send marshals and sends the DescribeContinuousBackups API request.
-func (r DescribeContinuousBackupsRequest) Send() (*DescribeContinuousBackupsOutput, error) {
+func (r DescribeContinuousBackupsRequest) Send(ctx context.Context) (*DescribeContinuousBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -780,7 +792,7 @@ func (r DescribeContinuousBackupsRequest) Send() (*DescribeContinuousBackupsOutp
 //
 //    // Example sending a request using the DescribeContinuousBackupsRequest method.
 //    req := client.DescribeContinuousBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -814,7 +826,8 @@ type DescribeEndpointsRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
-func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
+func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -828,7 +841,7 @@ func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
 //
 //    // Example sending a request using the DescribeEndpointsRequest method.
 //    req := client.DescribeEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -862,7 +875,8 @@ type DescribeGlobalTableRequest struct {
 }
 
 // Send marshals and sends the DescribeGlobalTable API request.
-func (r DescribeGlobalTableRequest) Send() (*DescribeGlobalTableOutput, error) {
+func (r DescribeGlobalTableRequest) Send(ctx context.Context) (*DescribeGlobalTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -878,7 +892,7 @@ func (r DescribeGlobalTableRequest) Send() (*DescribeGlobalTableOutput, error) {
 //
 //    // Example sending a request using the DescribeGlobalTableRequest method.
 //    req := client.DescribeGlobalTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -912,7 +926,8 @@ type DescribeGlobalTableSettingsRequest struct {
 }
 
 // Send marshals and sends the DescribeGlobalTableSettings API request.
-func (r DescribeGlobalTableSettingsRequest) Send() (*DescribeGlobalTableSettingsOutput, error) {
+func (r DescribeGlobalTableSettingsRequest) Send(ctx context.Context) (*DescribeGlobalTableSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -928,7 +943,7 @@ func (r DescribeGlobalTableSettingsRequest) Send() (*DescribeGlobalTableSettings
 //
 //    // Example sending a request using the DescribeGlobalTableSettingsRequest method.
 //    req := client.DescribeGlobalTableSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -962,7 +977,8 @@ type DescribeLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeLimits API request.
-func (r DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
+func (r DescribeLimitsRequest) Send(ctx context.Context) (*DescribeLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1034,7 +1050,7 @@ func (r DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
 //
 //    // Example sending a request using the DescribeLimitsRequest method.
 //    req := client.DescribeLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1068,7 +1084,8 @@ type DescribeTableRequest struct {
 }
 
 // Send marshals and sends the DescribeTable API request.
-func (r DescribeTableRequest) Send() (*DescribeTableOutput, error) {
+func (r DescribeTableRequest) Send(ctx context.Context) (*DescribeTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1092,7 +1109,7 @@ func (r DescribeTableRequest) Send() (*DescribeTableOutput, error) {
 //
 //    // Example sending a request using the DescribeTableRequest method.
 //    req := client.DescribeTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1126,7 +1143,8 @@ type DescribeTimeToLiveRequest struct {
 }
 
 // Send marshals and sends the DescribeTimeToLive API request.
-func (r DescribeTimeToLiveRequest) Send() (*DescribeTimeToLiveOutput, error) {
+func (r DescribeTimeToLiveRequest) Send(ctx context.Context) (*DescribeTimeToLiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1142,7 +1160,7 @@ func (r DescribeTimeToLiveRequest) Send() (*DescribeTimeToLiveOutput, error) {
 //
 //    // Example sending a request using the DescribeTimeToLiveRequest method.
 //    req := client.DescribeTimeToLiveRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1176,7 +1194,8 @@ type GetItemRequest struct {
 }
 
 // Send marshals and sends the GetItem API request.
-func (r GetItemRequest) Send() (*GetItemOutput, error) {
+func (r GetItemRequest) Send(ctx context.Context) (*GetItemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1199,7 +1218,7 @@ func (r GetItemRequest) Send() (*GetItemOutput, error) {
 //
 //    // Example sending a request using the GetItemRequest method.
 //    req := client.GetItemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1233,7 +1252,8 @@ type ListBackupsRequest struct {
 }
 
 // Send marshals and sends the ListBackups API request.
-func (r ListBackupsRequest) Send() (*ListBackupsOutput, error) {
+func (r ListBackupsRequest) Send(ctx context.Context) (*ListBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1257,7 +1277,7 @@ func (r ListBackupsRequest) Send() (*ListBackupsOutput, error) {
 //
 //    // Example sending a request using the ListBackupsRequest method.
 //    req := client.ListBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1291,7 +1311,8 @@ type ListGlobalTablesRequest struct {
 }
 
 // Send marshals and sends the ListGlobalTables API request.
-func (r ListGlobalTablesRequest) Send() (*ListGlobalTablesOutput, error) {
+func (r ListGlobalTablesRequest) Send(ctx context.Context) (*ListGlobalTablesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1307,7 +1328,7 @@ func (r ListGlobalTablesRequest) Send() (*ListGlobalTablesOutput, error) {
 //
 //    // Example sending a request using the ListGlobalTablesRequest method.
 //    req := client.ListGlobalTablesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1341,7 +1362,8 @@ type ListTablesRequest struct {
 }
 
 // Send marshals and sends the ListTables API request.
-func (r ListTablesRequest) Send() (*ListTablesOutput, error) {
+func (r ListTablesRequest) Send(ctx context.Context) (*ListTablesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1359,7 +1381,7 @@ func (r ListTablesRequest) Send() (*ListTablesOutput, error) {
 //
 //    // Example sending a request using the ListTablesRequest method.
 //    req := client.ListTablesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1409,7 +1431,7 @@ func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 func (p *ListTablesRequest) Paginate(opts ...aws.Option) ListTablesPager {
 	return ListTablesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTablesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1418,6 +1440,7 @@ func (p *ListTablesRequest) Paginate(opts ...aws.Option) ListTablesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1445,7 +1468,8 @@ type ListTagsOfResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsOfResource API request.
-func (r ListTagsOfResourceRequest) Send() (*ListTagsOfResourceOutput, error) {
+func (r ListTagsOfResourceRequest) Send(ctx context.Context) (*ListTagsOfResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1465,7 +1489,7 @@ func (r ListTagsOfResourceRequest) Send() (*ListTagsOfResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsOfResourceRequest method.
 //    req := client.ListTagsOfResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1499,7 +1523,8 @@ type PutItemRequest struct {
 }
 
 // Send marshals and sends the PutItem API request.
-func (r PutItemRequest) Send() (*PutItemOutput, error) {
+func (r PutItemRequest) Send(ctx context.Context) (*PutItemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1558,7 +1583,7 @@ func (r PutItemRequest) Send() (*PutItemOutput, error) {
 //
 //    // Example sending a request using the PutItemRequest method.
 //    req := client.PutItemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1592,7 +1617,8 @@ type QueryRequest struct {
 }
 
 // Send marshals and sends the Query API request.
-func (r QueryRequest) Send() (*QueryOutput, error) {
+func (r QueryRequest) Send(ctx context.Context) (*QueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1655,7 +1681,7 @@ func (r QueryRequest) Send() (*QueryOutput, error) {
 //
 //    // Example sending a request using the QueryRequest method.
 //    req := client.QueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1705,7 +1731,7 @@ func (c *DynamoDB) QueryRequest(input *QueryInput) QueryRequest {
 func (p *QueryRequest) Paginate(opts ...aws.Option) QueryPager {
 	return QueryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *QueryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1714,6 +1740,7 @@ func (p *QueryRequest) Paginate(opts ...aws.Option) QueryPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1741,7 +1768,8 @@ type RestoreTableFromBackupRequest struct {
 }
 
 // Send marshals and sends the RestoreTableFromBackup API request.
-func (r RestoreTableFromBackupRequest) Send() (*RestoreTableFromBackupOutput, error) {
+func (r RestoreTableFromBackupRequest) Send(ctx context.Context) (*RestoreTableFromBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1774,7 +1802,7 @@ func (r RestoreTableFromBackupRequest) Send() (*RestoreTableFromBackupOutput, er
 //
 //    // Example sending a request using the RestoreTableFromBackupRequest method.
 //    req := client.RestoreTableFromBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1808,7 +1836,8 @@ type RestoreTableToPointInTimeRequest struct {
 }
 
 // Send marshals and sends the RestoreTableToPointInTime API request.
-func (r RestoreTableToPointInTimeRequest) Send() (*RestoreTableToPointInTimeOutput, error) {
+func (r RestoreTableToPointInTimeRequest) Send(ctx context.Context) (*RestoreTableToPointInTimeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1861,7 +1890,7 @@ func (r RestoreTableToPointInTimeRequest) Send() (*RestoreTableToPointInTimeOutp
 //
 //    // Example sending a request using the RestoreTableToPointInTimeRequest method.
 //    req := client.RestoreTableToPointInTimeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1895,7 +1924,8 @@ type ScanRequest struct {
 }
 
 // Send marshals and sends the Scan API request.
-func (r ScanRequest) Send() (*ScanOutput, error) {
+func (r ScanRequest) Send(ctx context.Context) (*ScanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1938,7 +1968,7 @@ func (r ScanRequest) Send() (*ScanOutput, error) {
 //
 //    // Example sending a request using the ScanRequest method.
 //    req := client.ScanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1988,7 +2018,7 @@ func (c *DynamoDB) ScanRequest(input *ScanInput) ScanRequest {
 func (p *ScanRequest) Paginate(opts ...aws.Option) ScanPager {
 	return ScanPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ScanInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1997,6 +2027,7 @@ func (p *ScanRequest) Paginate(opts ...aws.Option) ScanPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2024,7 +2055,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2046,7 +2078,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2082,7 +2114,8 @@ type TransactGetItemsRequest struct {
 }
 
 // Send marshals and sends the TransactGetItems API request.
-func (r TransactGetItemsRequest) Send() (*TransactGetItemsOutput, error) {
+func (r TransactGetItemsRequest) Send(ctx context.Context) (*TransactGetItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2114,7 +2147,7 @@ func (r TransactGetItemsRequest) Send() (*TransactGetItemsOutput, error) {
 //
 //    // Example sending a request using the TransactGetItemsRequest method.
 //    req := client.TransactGetItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2148,7 +2181,8 @@ type TransactWriteItemsRequest struct {
 }
 
 // Send marshals and sends the TransactWriteItems API request.
-func (r TransactWriteItemsRequest) Send() (*TransactWriteItemsOutput, error) {
+func (r TransactWriteItemsRequest) Send(ctx context.Context) (*TransactWriteItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2215,7 +2249,7 @@ func (r TransactWriteItemsRequest) Send() (*TransactWriteItemsOutput, error) {
 //
 //    // Example sending a request using the TransactWriteItemsRequest method.
 //    req := client.TransactWriteItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2249,7 +2283,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2269,7 +2304,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2305,7 +2340,8 @@ type UpdateContinuousBackupsRequest struct {
 }
 
 // Send marshals and sends the UpdateContinuousBackups API request.
-func (r UpdateContinuousBackupsRequest) Send() (*UpdateContinuousBackupsOutput, error) {
+func (r UpdateContinuousBackupsRequest) Send(ctx context.Context) (*UpdateContinuousBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2331,7 +2367,7 @@ func (r UpdateContinuousBackupsRequest) Send() (*UpdateContinuousBackupsOutput, 
 //
 //    // Example sending a request using the UpdateContinuousBackupsRequest method.
 //    req := client.UpdateContinuousBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2365,7 +2401,8 @@ type UpdateGlobalTableRequest struct {
 }
 
 // Send marshals and sends the UpdateGlobalTable API request.
-func (r UpdateGlobalTableRequest) Send() (*UpdateGlobalTableOutput, error) {
+func (r UpdateGlobalTableRequest) Send(ctx context.Context) (*UpdateGlobalTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2400,7 +2437,7 @@ func (r UpdateGlobalTableRequest) Send() (*UpdateGlobalTableOutput, error) {
 //
 //    // Example sending a request using the UpdateGlobalTableRequest method.
 //    req := client.UpdateGlobalTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2434,7 +2471,8 @@ type UpdateGlobalTableSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateGlobalTableSettings API request.
-func (r UpdateGlobalTableSettingsRequest) Send() (*UpdateGlobalTableSettingsOutput, error) {
+func (r UpdateGlobalTableSettingsRequest) Send(ctx context.Context) (*UpdateGlobalTableSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2450,7 +2488,7 @@ func (r UpdateGlobalTableSettingsRequest) Send() (*UpdateGlobalTableSettingsOutp
 //
 //    // Example sending a request using the UpdateGlobalTableSettingsRequest method.
 //    req := client.UpdateGlobalTableSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2484,7 +2522,8 @@ type UpdateItemRequest struct {
 }
 
 // Send marshals and sends the UpdateItem API request.
-func (r UpdateItemRequest) Send() (*UpdateItemOutput, error) {
+func (r UpdateItemRequest) Send(ctx context.Context) (*UpdateItemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2507,7 +2546,7 @@ func (r UpdateItemRequest) Send() (*UpdateItemOutput, error) {
 //
 //    // Example sending a request using the UpdateItemRequest method.
 //    req := client.UpdateItemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2541,7 +2580,8 @@ type UpdateTableRequest struct {
 }
 
 // Send marshals and sends the UpdateTable API request.
-func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
+func (r UpdateTableRequest) Send(ctx context.Context) (*UpdateTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2574,7 +2614,7 @@ func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
 //
 //    // Example sending a request using the UpdateTableRequest method.
 //    req := client.UpdateTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2608,7 +2648,8 @@ type UpdateTimeToLiveRequest struct {
 }
 
 // Send marshals and sends the UpdateTimeToLive API request.
-func (r UpdateTimeToLiveRequest) Send() (*UpdateTimeToLiveOutput, error) {
+func (r UpdateTimeToLiveRequest) Send(ctx context.Context) (*UpdateTimeToLiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2651,7 +2692,7 @@ func (r UpdateTimeToLiveRequest) Send() (*UpdateTimeToLiveOutput, error) {
 //
 //    // Example sending a request using the UpdateTimeToLiveRequest method.
 //    req := client.UpdateTimeToLiveRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

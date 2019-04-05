@@ -3,6 +3,7 @@
 package eks
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CreateClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCluster API request.
-func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -57,7 +59,7 @@ func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 //
 //    // Example sending a request using the CreateClusterRequest method.
 //    req := client.CreateClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -91,7 +93,8 @@ type DeleteClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCluster API request.
-func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -114,7 +117,7 @@ func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
 //
 //    // Example sending a request using the DeleteClusterRequest method.
 //    req := client.DeleteClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -148,7 +151,8 @@ type DescribeClusterRequest struct {
 }
 
 // Send marshals and sends the DescribeCluster API request.
-func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+func (r DescribeClusterRequest) Send(ctx context.Context) (*DescribeClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -172,7 +176,7 @@ func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
 //
 //    // Example sending a request using the DescribeClusterRequest method.
 //    req := client.DescribeClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -206,7 +210,8 @@ type DescribeUpdateRequest struct {
 }
 
 // Send marshals and sends the DescribeUpdate API request.
-func (r DescribeUpdateRequest) Send() (*DescribeUpdateOutput, error) {
+func (r DescribeUpdateRequest) Send(ctx context.Context) (*DescribeUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -226,7 +231,7 @@ func (r DescribeUpdateRequest) Send() (*DescribeUpdateOutput, error) {
 //
 //    // Example sending a request using the DescribeUpdateRequest method.
 //    req := client.DescribeUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -260,7 +265,8 @@ type ListClustersRequest struct {
 }
 
 // Send marshals and sends the ListClusters API request.
-func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
+func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -276,7 +282,7 @@ func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
 //
 //    // Example sending a request using the ListClustersRequest method.
 //    req := client.ListClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -310,7 +316,8 @@ type ListUpdatesRequest struct {
 }
 
 // Send marshals and sends the ListUpdates API request.
-func (r ListUpdatesRequest) Send() (*ListUpdatesOutput, error) {
+func (r ListUpdatesRequest) Send(ctx context.Context) (*ListUpdatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -327,7 +334,7 @@ func (r ListUpdatesRequest) Send() (*ListUpdatesOutput, error) {
 //
 //    // Example sending a request using the ListUpdatesRequest method.
 //    req := client.ListUpdatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -361,7 +368,8 @@ type UpdateClusterVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateClusterVersion API request.
-func (r UpdateClusterVersionRequest) Send() (*UpdateClusterVersionOutput, error) {
+func (r UpdateClusterVersionRequest) Send(ctx context.Context) (*UpdateClusterVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -385,7 +393,7 @@ func (r UpdateClusterVersionRequest) Send() (*UpdateClusterVersionOutput, error)
 //
 //    // Example sending a request using the UpdateClusterVersionRequest method.
 //    req := client.UpdateClusterVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package codecommit
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type BatchGetRepositoriesRequest struct {
 }
 
 // Send marshals and sends the BatchGetRepositories API request.
-func (r BatchGetRepositoriesRequest) Send() (*BatchGetRepositoriesOutput, error) {
+func (r BatchGetRepositoriesRequest) Send(ctx context.Context) (*BatchGetRepositoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -44,7 +46,7 @@ func (r BatchGetRepositoriesRequest) Send() (*BatchGetRepositoriesOutput, error)
 //
 //    // Example sending a request using the BatchGetRepositoriesRequest method.
 //    req := client.BatchGetRepositoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +80,8 @@ type CreateBranchRequest struct {
 }
 
 // Send marshals and sends the CreateBranch API request.
-func (r CreateBranchRequest) Send() (*CreateBranchOutput, error) {
+func (r CreateBranchRequest) Send(ctx context.Context) (*CreateBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -97,7 +100,7 @@ func (r CreateBranchRequest) Send() (*CreateBranchOutput, error) {
 //
 //    // Example sending a request using the CreateBranchRequest method.
 //    req := client.CreateBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -133,7 +136,8 @@ type CreatePullRequestRequest struct {
 }
 
 // Send marshals and sends the CreatePullRequest API request.
-func (r CreatePullRequestRequest) Send() (*CreatePullRequestOutput, error) {
+func (r CreatePullRequestRequest) Send(ctx context.Context) (*CreatePullRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -149,7 +153,7 @@ func (r CreatePullRequestRequest) Send() (*CreatePullRequestOutput, error) {
 //
 //    // Example sending a request using the CreatePullRequestRequest method.
 //    req := client.CreatePullRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -183,7 +187,8 @@ type CreateRepositoryRequest struct {
 }
 
 // Send marshals and sends the CreateRepository API request.
-func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
+func (r CreateRepositoryRequest) Send(ctx context.Context) (*CreateRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -199,7 +204,7 @@ func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
 //
 //    // Example sending a request using the CreateRepositoryRequest method.
 //    req := client.CreateRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -233,7 +238,8 @@ type DeleteBranchRequest struct {
 }
 
 // Send marshals and sends the DeleteBranch API request.
-func (r DeleteBranchRequest) Send() (*DeleteBranchOutput, error) {
+func (r DeleteBranchRequest) Send(ctx context.Context) (*DeleteBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,7 +256,7 @@ func (r DeleteBranchRequest) Send() (*DeleteBranchOutput, error) {
 //
 //    // Example sending a request using the DeleteBranchRequest method.
 //    req := client.DeleteBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -284,7 +290,8 @@ type DeleteCommentContentRequest struct {
 }
 
 // Send marshals and sends the DeleteCommentContent API request.
-func (r DeleteCommentContentRequest) Send() (*DeleteCommentContentOutput, error) {
+func (r DeleteCommentContentRequest) Send(ctx context.Context) (*DeleteCommentContentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -300,7 +307,7 @@ func (r DeleteCommentContentRequest) Send() (*DeleteCommentContentOutput, error)
 //
 //    // Example sending a request using the DeleteCommentContentRequest method.
 //    req := client.DeleteCommentContentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -334,7 +341,8 @@ type DeleteFileRequest struct {
 }
 
 // Send marshals and sends the DeleteFile API request.
-func (r DeleteFileRequest) Send() (*DeleteFileOutput, error) {
+func (r DeleteFileRequest) Send(ctx context.Context) (*DeleteFileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -352,7 +360,7 @@ func (r DeleteFileRequest) Send() (*DeleteFileOutput, error) {
 //
 //    // Example sending a request using the DeleteFileRequest method.
 //    req := client.DeleteFileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -386,7 +394,8 @@ type DeleteRepositoryRequest struct {
 }
 
 // Send marshals and sends the DeleteRepository API request.
-func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
+func (r DeleteRepositoryRequest) Send(ctx context.Context) (*DeleteRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -407,7 +416,7 @@ func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
 //
 //    // Example sending a request using the DeleteRepositoryRequest method.
 //    req := client.DeleteRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -441,7 +450,8 @@ type DescribePullRequestEventsRequest struct {
 }
 
 // Send marshals and sends the DescribePullRequestEvents API request.
-func (r DescribePullRequestEventsRequest) Send() (*DescribePullRequestEventsOutput, error) {
+func (r DescribePullRequestEventsRequest) Send(ctx context.Context) (*DescribePullRequestEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -457,7 +467,7 @@ func (r DescribePullRequestEventsRequest) Send() (*DescribePullRequestEventsOutp
 //
 //    // Example sending a request using the DescribePullRequestEventsRequest method.
 //    req := client.DescribePullRequestEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -507,7 +517,7 @@ func (c *CodeCommit) DescribePullRequestEventsRequest(input *DescribePullRequest
 func (p *DescribePullRequestEventsRequest) Paginate(opts ...aws.Option) DescribePullRequestEventsPager {
 	return DescribePullRequestEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribePullRequestEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -516,6 +526,7 @@ func (p *DescribePullRequestEventsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -543,7 +554,8 @@ type GetBlobRequest struct {
 }
 
 // Send marshals and sends the GetBlob API request.
-func (r GetBlobRequest) Send() (*GetBlobOutput, error) {
+func (r GetBlobRequest) Send(ctx context.Context) (*GetBlobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -559,7 +571,7 @@ func (r GetBlobRequest) Send() (*GetBlobOutput, error) {
 //
 //    // Example sending a request using the GetBlobRequest method.
 //    req := client.GetBlobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -593,7 +605,8 @@ type GetBranchRequest struct {
 }
 
 // Send marshals and sends the GetBranch API request.
-func (r GetBranchRequest) Send() (*GetBranchOutput, error) {
+func (r GetBranchRequest) Send(ctx context.Context) (*GetBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -610,7 +623,7 @@ func (r GetBranchRequest) Send() (*GetBranchOutput, error) {
 //
 //    // Example sending a request using the GetBranchRequest method.
 //    req := client.GetBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -644,7 +657,8 @@ type GetCommentRequest struct {
 }
 
 // Send marshals and sends the GetComment API request.
-func (r GetCommentRequest) Send() (*GetCommentOutput, error) {
+func (r GetCommentRequest) Send(ctx context.Context) (*GetCommentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -660,7 +674,7 @@ func (r GetCommentRequest) Send() (*GetCommentOutput, error) {
 //
 //    // Example sending a request using the GetCommentRequest method.
 //    req := client.GetCommentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -694,7 +708,8 @@ type GetCommentsForComparedCommitRequest struct {
 }
 
 // Send marshals and sends the GetCommentsForComparedCommit API request.
-func (r GetCommentsForComparedCommitRequest) Send() (*GetCommentsForComparedCommitOutput, error) {
+func (r GetCommentsForComparedCommitRequest) Send(ctx context.Context) (*GetCommentsForComparedCommitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,7 +725,7 @@ func (r GetCommentsForComparedCommitRequest) Send() (*GetCommentsForComparedComm
 //
 //    // Example sending a request using the GetCommentsForComparedCommitRequest method.
 //    req := client.GetCommentsForComparedCommitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -760,7 +775,7 @@ func (c *CodeCommit) GetCommentsForComparedCommitRequest(input *GetCommentsForCo
 func (p *GetCommentsForComparedCommitRequest) Paginate(opts ...aws.Option) GetCommentsForComparedCommitPager {
 	return GetCommentsForComparedCommitPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCommentsForComparedCommitInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -769,6 +784,7 @@ func (p *GetCommentsForComparedCommitRequest) Paginate(opts ...aws.Option) GetCo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -796,7 +812,8 @@ type GetCommentsForPullRequestRequest struct {
 }
 
 // Send marshals and sends the GetCommentsForPullRequest API request.
-func (r GetCommentsForPullRequestRequest) Send() (*GetCommentsForPullRequestOutput, error) {
+func (r GetCommentsForPullRequestRequest) Send(ctx context.Context) (*GetCommentsForPullRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -812,7 +829,7 @@ func (r GetCommentsForPullRequestRequest) Send() (*GetCommentsForPullRequestOutp
 //
 //    // Example sending a request using the GetCommentsForPullRequestRequest method.
 //    req := client.GetCommentsForPullRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -862,7 +879,7 @@ func (c *CodeCommit) GetCommentsForPullRequestRequest(input *GetCommentsForPullR
 func (p *GetCommentsForPullRequestRequest) Paginate(opts ...aws.Option) GetCommentsForPullRequestPager {
 	return GetCommentsForPullRequestPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCommentsForPullRequestInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -871,6 +888,7 @@ func (p *GetCommentsForPullRequestRequest) Paginate(opts ...aws.Option) GetComme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -898,7 +916,8 @@ type GetCommitRequest struct {
 }
 
 // Send marshals and sends the GetCommit API request.
-func (r GetCommitRequest) Send() (*GetCommitOutput, error) {
+func (r GetCommitRequest) Send(ctx context.Context) (*GetCommitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -915,7 +934,7 @@ func (r GetCommitRequest) Send() (*GetCommitOutput, error) {
 //
 //    // Example sending a request using the GetCommitRequest method.
 //    req := client.GetCommitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -949,7 +968,8 @@ type GetDifferencesRequest struct {
 }
 
 // Send marshals and sends the GetDifferences API request.
-func (r GetDifferencesRequest) Send() (*GetDifferencesOutput, error) {
+func (r GetDifferencesRequest) Send(ctx context.Context) (*GetDifferencesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -967,7 +987,7 @@ func (r GetDifferencesRequest) Send() (*GetDifferencesOutput, error) {
 //
 //    // Example sending a request using the GetDifferencesRequest method.
 //    req := client.GetDifferencesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1017,7 +1037,7 @@ func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) GetDiffer
 func (p *GetDifferencesRequest) Paginate(opts ...aws.Option) GetDifferencesPager {
 	return GetDifferencesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDifferencesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1026,6 +1046,7 @@ func (p *GetDifferencesRequest) Paginate(opts ...aws.Option) GetDifferencesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1053,7 +1074,8 @@ type GetFileRequest struct {
 }
 
 // Send marshals and sends the GetFile API request.
-func (r GetFileRequest) Send() (*GetFileOutput, error) {
+func (r GetFileRequest) Send(ctx context.Context) (*GetFileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1069,7 +1091,7 @@ func (r GetFileRequest) Send() (*GetFileOutput, error) {
 //
 //    // Example sending a request using the GetFileRequest method.
 //    req := client.GetFileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1103,7 +1125,8 @@ type GetFolderRequest struct {
 }
 
 // Send marshals and sends the GetFolder API request.
-func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
+func (r GetFolderRequest) Send(ctx context.Context) (*GetFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1119,7 +1142,7 @@ func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
 //
 //    // Example sending a request using the GetFolderRequest method.
 //    req := client.GetFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1153,7 +1176,8 @@ type GetMergeConflictsRequest struct {
 }
 
 // Send marshals and sends the GetMergeConflicts API request.
-func (r GetMergeConflictsRequest) Send() (*GetMergeConflictsOutput, error) {
+func (r GetMergeConflictsRequest) Send(ctx context.Context) (*GetMergeConflictsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1170,7 +1194,7 @@ func (r GetMergeConflictsRequest) Send() (*GetMergeConflictsOutput, error) {
 //
 //    // Example sending a request using the GetMergeConflictsRequest method.
 //    req := client.GetMergeConflictsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1204,7 +1228,8 @@ type GetPullRequestRequest struct {
 }
 
 // Send marshals and sends the GetPullRequest API request.
-func (r GetPullRequestRequest) Send() (*GetPullRequestOutput, error) {
+func (r GetPullRequestRequest) Send(ctx context.Context) (*GetPullRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1220,7 +1245,7 @@ func (r GetPullRequestRequest) Send() (*GetPullRequestOutput, error) {
 //
 //    // Example sending a request using the GetPullRequestRequest method.
 //    req := client.GetPullRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1254,7 +1279,8 @@ type GetRepositoryRequest struct {
 }
 
 // Send marshals and sends the GetRepository API request.
-func (r GetRepositoryRequest) Send() (*GetRepositoryOutput, error) {
+func (r GetRepositoryRequest) Send(ctx context.Context) (*GetRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1276,7 +1302,7 @@ func (r GetRepositoryRequest) Send() (*GetRepositoryOutput, error) {
 //
 //    // Example sending a request using the GetRepositoryRequest method.
 //    req := client.GetRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1310,7 +1336,8 @@ type GetRepositoryTriggersRequest struct {
 }
 
 // Send marshals and sends the GetRepositoryTriggers API request.
-func (r GetRepositoryTriggersRequest) Send() (*GetRepositoryTriggersOutput, error) {
+func (r GetRepositoryTriggersRequest) Send(ctx context.Context) (*GetRepositoryTriggersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1326,7 +1353,7 @@ func (r GetRepositoryTriggersRequest) Send() (*GetRepositoryTriggersOutput, erro
 //
 //    // Example sending a request using the GetRepositoryTriggersRequest method.
 //    req := client.GetRepositoryTriggersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1360,7 +1387,8 @@ type ListBranchesRequest struct {
 }
 
 // Send marshals and sends the ListBranches API request.
-func (r ListBranchesRequest) Send() (*ListBranchesOutput, error) {
+func (r ListBranchesRequest) Send(ctx context.Context) (*ListBranchesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1376,7 +1404,7 @@ func (r ListBranchesRequest) Send() (*ListBranchesOutput, error) {
 //
 //    // Example sending a request using the ListBranchesRequest method.
 //    req := client.ListBranchesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1426,7 +1454,7 @@ func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) ListBranchesR
 func (p *ListBranchesRequest) Paginate(opts ...aws.Option) ListBranchesPager {
 	return ListBranchesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBranchesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1435,6 +1463,7 @@ func (p *ListBranchesRequest) Paginate(opts ...aws.Option) ListBranchesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1462,7 +1491,8 @@ type ListPullRequestsRequest struct {
 }
 
 // Send marshals and sends the ListPullRequests API request.
-func (r ListPullRequestsRequest) Send() (*ListPullRequestsOutput, error) {
+func (r ListPullRequestsRequest) Send(ctx context.Context) (*ListPullRequestsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1479,7 +1509,7 @@ func (r ListPullRequestsRequest) Send() (*ListPullRequestsOutput, error) {
 //
 //    // Example sending a request using the ListPullRequestsRequest method.
 //    req := client.ListPullRequestsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1529,7 +1559,7 @@ func (c *CodeCommit) ListPullRequestsRequest(input *ListPullRequestsInput) ListP
 func (p *ListPullRequestsRequest) Paginate(opts ...aws.Option) ListPullRequestsPager {
 	return ListPullRequestsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPullRequestsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1538,6 +1568,7 @@ func (p *ListPullRequestsRequest) Paginate(opts ...aws.Option) ListPullRequestsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1565,7 +1596,8 @@ type ListRepositoriesRequest struct {
 }
 
 // Send marshals and sends the ListRepositories API request.
-func (r ListRepositoriesRequest) Send() (*ListRepositoriesOutput, error) {
+func (r ListRepositoriesRequest) Send(ctx context.Context) (*ListRepositoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1581,7 +1613,7 @@ func (r ListRepositoriesRequest) Send() (*ListRepositoriesOutput, error) {
 //
 //    // Example sending a request using the ListRepositoriesRequest method.
 //    req := client.ListRepositoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1631,7 +1663,7 @@ func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) ListR
 func (p *ListRepositoriesRequest) Paginate(opts ...aws.Option) ListRepositoriesPager {
 	return ListRepositoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRepositoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1640,6 +1672,7 @@ func (p *ListRepositoriesRequest) Paginate(opts ...aws.Option) ListRepositoriesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1667,7 +1700,8 @@ type MergePullRequestByFastForwardRequest struct {
 }
 
 // Send marshals and sends the MergePullRequestByFastForward API request.
-func (r MergePullRequestByFastForwardRequest) Send() (*MergePullRequestByFastForwardOutput, error) {
+func (r MergePullRequestByFastForwardRequest) Send(ctx context.Context) (*MergePullRequestByFastForwardOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1685,7 +1719,7 @@ func (r MergePullRequestByFastForwardRequest) Send() (*MergePullRequestByFastFor
 //
 //    // Example sending a request using the MergePullRequestByFastForwardRequest method.
 //    req := client.MergePullRequestByFastForwardRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1719,7 +1753,8 @@ type PostCommentForComparedCommitRequest struct {
 }
 
 // Send marshals and sends the PostCommentForComparedCommit API request.
-func (r PostCommentForComparedCommitRequest) Send() (*PostCommentForComparedCommitOutput, error) {
+func (r PostCommentForComparedCommitRequest) Send(ctx context.Context) (*PostCommentForComparedCommitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1735,7 +1770,7 @@ func (r PostCommentForComparedCommitRequest) Send() (*PostCommentForComparedComm
 //
 //    // Example sending a request using the PostCommentForComparedCommitRequest method.
 //    req := client.PostCommentForComparedCommitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1769,7 +1804,8 @@ type PostCommentForPullRequestRequest struct {
 }
 
 // Send marshals and sends the PostCommentForPullRequest API request.
-func (r PostCommentForPullRequestRequest) Send() (*PostCommentForPullRequestOutput, error) {
+func (r PostCommentForPullRequestRequest) Send(ctx context.Context) (*PostCommentForPullRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1785,7 +1821,7 @@ func (r PostCommentForPullRequestRequest) Send() (*PostCommentForPullRequestOutp
 //
 //    // Example sending a request using the PostCommentForPullRequestRequest method.
 //    req := client.PostCommentForPullRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1819,7 +1855,8 @@ type PostCommentReplyRequest struct {
 }
 
 // Send marshals and sends the PostCommentReply API request.
-func (r PostCommentReplyRequest) Send() (*PostCommentReplyOutput, error) {
+func (r PostCommentReplyRequest) Send(ctx context.Context) (*PostCommentReplyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1836,7 +1873,7 @@ func (r PostCommentReplyRequest) Send() (*PostCommentReplyOutput, error) {
 //
 //    // Example sending a request using the PostCommentReplyRequest method.
 //    req := client.PostCommentReplyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1870,7 +1907,8 @@ type PutFileRequest struct {
 }
 
 // Send marshals and sends the PutFile API request.
-func (r PutFileRequest) Send() (*PutFileOutput, error) {
+func (r PutFileRequest) Send(ctx context.Context) (*PutFileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1887,7 +1925,7 @@ func (r PutFileRequest) Send() (*PutFileOutput, error) {
 //
 //    // Example sending a request using the PutFileRequest method.
 //    req := client.PutFileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1921,7 +1959,8 @@ type PutRepositoryTriggersRequest struct {
 }
 
 // Send marshals and sends the PutRepositoryTriggers API request.
-func (r PutRepositoryTriggersRequest) Send() (*PutRepositoryTriggersOutput, error) {
+func (r PutRepositoryTriggersRequest) Send(ctx context.Context) (*PutRepositoryTriggersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1938,7 +1977,7 @@ func (r PutRepositoryTriggersRequest) Send() (*PutRepositoryTriggersOutput, erro
 //
 //    // Example sending a request using the PutRepositoryTriggersRequest method.
 //    req := client.PutRepositoryTriggersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1972,7 +2011,8 @@ type TestRepositoryTriggersRequest struct {
 }
 
 // Send marshals and sends the TestRepositoryTriggers API request.
-func (r TestRepositoryTriggersRequest) Send() (*TestRepositoryTriggersOutput, error) {
+func (r TestRepositoryTriggersRequest) Send(ctx context.Context) (*TestRepositoryTriggersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1991,7 +2031,7 @@ func (r TestRepositoryTriggersRequest) Send() (*TestRepositoryTriggersOutput, er
 //
 //    // Example sending a request using the TestRepositoryTriggersRequest method.
 //    req := client.TestRepositoryTriggersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2025,7 +2065,8 @@ type UpdateCommentRequest struct {
 }
 
 // Send marshals and sends the UpdateComment API request.
-func (r UpdateCommentRequest) Send() (*UpdateCommentOutput, error) {
+func (r UpdateCommentRequest) Send(ctx context.Context) (*UpdateCommentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2041,7 +2082,7 @@ func (r UpdateCommentRequest) Send() (*UpdateCommentOutput, error) {
 //
 //    // Example sending a request using the UpdateCommentRequest method.
 //    req := client.UpdateCommentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2075,7 +2116,8 @@ type UpdateDefaultBranchRequest struct {
 }
 
 // Send marshals and sends the UpdateDefaultBranch API request.
-func (r UpdateDefaultBranchRequest) Send() (*UpdateDefaultBranchOutput, error) {
+func (r UpdateDefaultBranchRequest) Send(ctx context.Context) (*UpdateDefaultBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2095,7 +2137,7 @@ func (r UpdateDefaultBranchRequest) Send() (*UpdateDefaultBranchOutput, error) {
 //
 //    // Example sending a request using the UpdateDefaultBranchRequest method.
 //    req := client.UpdateDefaultBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2131,7 +2173,8 @@ type UpdatePullRequestDescriptionRequest struct {
 }
 
 // Send marshals and sends the UpdatePullRequestDescription API request.
-func (r UpdatePullRequestDescriptionRequest) Send() (*UpdatePullRequestDescriptionOutput, error) {
+func (r UpdatePullRequestDescriptionRequest) Send(ctx context.Context) (*UpdatePullRequestDescriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2147,7 +2190,7 @@ func (r UpdatePullRequestDescriptionRequest) Send() (*UpdatePullRequestDescripti
 //
 //    // Example sending a request using the UpdatePullRequestDescriptionRequest method.
 //    req := client.UpdatePullRequestDescriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2181,7 +2224,8 @@ type UpdatePullRequestStatusRequest struct {
 }
 
 // Send marshals and sends the UpdatePullRequestStatus API request.
-func (r UpdatePullRequestStatusRequest) Send() (*UpdatePullRequestStatusOutput, error) {
+func (r UpdatePullRequestStatusRequest) Send(ctx context.Context) (*UpdatePullRequestStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2197,7 +2241,7 @@ func (r UpdatePullRequestStatusRequest) Send() (*UpdatePullRequestStatusOutput, 
 //
 //    // Example sending a request using the UpdatePullRequestStatusRequest method.
 //    req := client.UpdatePullRequestStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2231,7 +2275,8 @@ type UpdatePullRequestTitleRequest struct {
 }
 
 // Send marshals and sends the UpdatePullRequestTitle API request.
-func (r UpdatePullRequestTitleRequest) Send() (*UpdatePullRequestTitleOutput, error) {
+func (r UpdatePullRequestTitleRequest) Send(ctx context.Context) (*UpdatePullRequestTitleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2247,7 +2292,7 @@ func (r UpdatePullRequestTitleRequest) Send() (*UpdatePullRequestTitleOutput, er
 //
 //    // Example sending a request using the UpdatePullRequestTitleRequest method.
 //    req := client.UpdatePullRequestTitleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2281,7 +2326,8 @@ type UpdateRepositoryDescriptionRequest struct {
 }
 
 // Send marshals and sends the UpdateRepositoryDescription API request.
-func (r UpdateRepositoryDescriptionRequest) Send() (*UpdateRepositoryDescriptionOutput, error) {
+func (r UpdateRepositoryDescriptionRequest) Send(ctx context.Context) (*UpdateRepositoryDescriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2303,7 +2349,7 @@ func (r UpdateRepositoryDescriptionRequest) Send() (*UpdateRepositoryDescription
 //
 //    // Example sending a request using the UpdateRepositoryDescriptionRequest method.
 //    req := client.UpdateRepositoryDescriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2339,7 +2385,8 @@ type UpdateRepositoryNameRequest struct {
 }
 
 // Send marshals and sends the UpdateRepositoryName API request.
-func (r UpdateRepositoryNameRequest) Send() (*UpdateRepositoryNameOutput, error) {
+func (r UpdateRepositoryNameRequest) Send(ctx context.Context) (*UpdateRepositoryNameOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2360,7 +2407,7 @@ func (r UpdateRepositoryNameRequest) Send() (*UpdateRepositoryNameOutput, error)
 //
 //    // Example sending a request using the UpdateRepositoryNameRequest method.
 //    req := client.UpdateRepositoryNameRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

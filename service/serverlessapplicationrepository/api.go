@@ -3,6 +3,7 @@
 package serverlessapplicationrepository
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CreateApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateApplication API request.
-func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
 //
 //    // Example sending a request using the CreateApplicationRequest method.
 //    req := client.CreateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type CreateApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
-func (r CreateApplicationVersionRequest) Send() (*CreateApplicationVersionOutput, error) {
+func (r CreateApplicationVersionRequest) Send(ctx context.Context) (*CreateApplicationVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r CreateApplicationVersionRequest) Send() (*CreateApplicationVersionOutput
 //
 //    // Example sending a request using the CreateApplicationVersionRequest method.
 //    req := client.CreateApplicationVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type CreateCloudFormationChangeSetRequest struct {
 }
 
 // Send marshals and sends the CreateCloudFormationChangeSet API request.
-func (r CreateCloudFormationChangeSetRequest) Send() (*CreateCloudFormationChangeSetOutput, error) {
+func (r CreateCloudFormationChangeSetRequest) Send(ctx context.Context) (*CreateCloudFormationChangeSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -138,7 +142,7 @@ func (r CreateCloudFormationChangeSetRequest) Send() (*CreateCloudFormationChang
 //
 //    // Example sending a request using the CreateCloudFormationChangeSetRequest method.
 //    req := client.CreateCloudFormationChangeSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -172,7 +176,8 @@ type CreateCloudFormationTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateCloudFormationTemplate API request.
-func (r CreateCloudFormationTemplateRequest) Send() (*CreateCloudFormationTemplateOutput, error) {
+func (r CreateCloudFormationTemplateRequest) Send(ctx context.Context) (*CreateCloudFormationTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -188,7 +193,7 @@ func (r CreateCloudFormationTemplateRequest) Send() (*CreateCloudFormationTempla
 //
 //    // Example sending a request using the CreateCloudFormationTemplateRequest method.
 //    req := client.CreateCloudFormationTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -222,7 +227,8 @@ type DeleteApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplication API request.
-func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+func (r DeleteApplicationRequest) Send(ctx context.Context) (*DeleteApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +244,7 @@ func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
 //    req := client.DeleteApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -274,7 +280,8 @@ type GetApplicationRequest struct {
 }
 
 // Send marshals and sends the GetApplication API request.
-func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
+func (r GetApplicationRequest) Send(ctx context.Context) (*GetApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,7 +297,7 @@ func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
 //
 //    // Example sending a request using the GetApplicationRequest method.
 //    req := client.GetApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -324,7 +331,8 @@ type GetApplicationPolicyRequest struct {
 }
 
 // Send marshals and sends the GetApplicationPolicy API request.
-func (r GetApplicationPolicyRequest) Send() (*GetApplicationPolicyOutput, error) {
+func (r GetApplicationPolicyRequest) Send(ctx context.Context) (*GetApplicationPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +348,7 @@ func (r GetApplicationPolicyRequest) Send() (*GetApplicationPolicyOutput, error)
 //
 //    // Example sending a request using the GetApplicationPolicyRequest method.
 //    req := client.GetApplicationPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -374,7 +382,8 @@ type GetCloudFormationTemplateRequest struct {
 }
 
 // Send marshals and sends the GetCloudFormationTemplate API request.
-func (r GetCloudFormationTemplateRequest) Send() (*GetCloudFormationTemplateOutput, error) {
+func (r GetCloudFormationTemplateRequest) Send(ctx context.Context) (*GetCloudFormationTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,7 +399,7 @@ func (r GetCloudFormationTemplateRequest) Send() (*GetCloudFormationTemplateOutp
 //
 //    // Example sending a request using the GetCloudFormationTemplateRequest method.
 //    req := client.GetCloudFormationTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -424,7 +433,8 @@ type ListApplicationDependenciesRequest struct {
 }
 
 // Send marshals and sends the ListApplicationDependencies API request.
-func (r ListApplicationDependenciesRequest) Send() (*ListApplicationDependenciesOutput, error) {
+func (r ListApplicationDependenciesRequest) Send(ctx context.Context) (*ListApplicationDependenciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -440,7 +450,7 @@ func (r ListApplicationDependenciesRequest) Send() (*ListApplicationDependencies
 //
 //    // Example sending a request using the ListApplicationDependenciesRequest method.
 //    req := client.ListApplicationDependenciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -490,7 +500,7 @@ func (c *ServerlessApplicationRepository) ListApplicationDependenciesRequest(inp
 func (p *ListApplicationDependenciesRequest) Paginate(opts ...aws.Option) ListApplicationDependenciesPager {
 	return ListApplicationDependenciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationDependenciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -499,6 +509,7 @@ func (p *ListApplicationDependenciesRequest) Paginate(opts ...aws.Option) ListAp
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -526,7 +537,8 @@ type ListApplicationVersionsRequest struct {
 }
 
 // Send marshals and sends the ListApplicationVersions API request.
-func (r ListApplicationVersionsRequest) Send() (*ListApplicationVersionsOutput, error) {
+func (r ListApplicationVersionsRequest) Send(ctx context.Context) (*ListApplicationVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -542,7 +554,7 @@ func (r ListApplicationVersionsRequest) Send() (*ListApplicationVersionsOutput, 
 //
 //    // Example sending a request using the ListApplicationVersionsRequest method.
 //    req := client.ListApplicationVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -592,7 +604,7 @@ func (c *ServerlessApplicationRepository) ListApplicationVersionsRequest(input *
 func (p *ListApplicationVersionsRequest) Paginate(opts ...aws.Option) ListApplicationVersionsPager {
 	return ListApplicationVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -601,6 +613,7 @@ func (p *ListApplicationVersionsRequest) Paginate(opts ...aws.Option) ListApplic
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -628,7 +641,8 @@ type ListApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListApplications API request.
-func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
+func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -644,7 +658,7 @@ func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
 //
 //    // Example sending a request using the ListApplicationsRequest method.
 //    req := client.ListApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -694,7 +708,7 @@ func (c *ServerlessApplicationRepository) ListApplicationsRequest(input *ListApp
 func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
 	return ListApplicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -703,6 +717,7 @@ func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -730,7 +745,8 @@ type PutApplicationPolicyRequest struct {
 }
 
 // Send marshals and sends the PutApplicationPolicy API request.
-func (r PutApplicationPolicyRequest) Send() (*PutApplicationPolicyOutput, error) {
+func (r PutApplicationPolicyRequest) Send(ctx context.Context) (*PutApplicationPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -748,7 +764,7 @@ func (r PutApplicationPolicyRequest) Send() (*PutApplicationPolicyOutput, error)
 //
 //    // Example sending a request using the PutApplicationPolicyRequest method.
 //    req := client.PutApplicationPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -782,7 +798,8 @@ type UpdateApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateApplication API request.
-func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r UpdateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -798,7 +815,7 @@ func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
 //    req := client.UpdateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package configservice
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type BatchGetAggregateResourceConfigRequest struct {
 }
 
 // Send marshals and sends the BatchGetAggregateResourceConfig API request.
-func (r BatchGetAggregateResourceConfigRequest) Send() (*BatchGetAggregateResourceConfigOutput, error) {
+func (r BatchGetAggregateResourceConfigRequest) Send(ctx context.Context) (*BatchGetAggregateResourceConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -46,7 +48,7 @@ func (r BatchGetAggregateResourceConfigRequest) Send() (*BatchGetAggregateResour
 //
 //    // Example sending a request using the BatchGetAggregateResourceConfigRequest method.
 //    req := client.BatchGetAggregateResourceConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -80,7 +82,8 @@ type BatchGetResourceConfigRequest struct {
 }
 
 // Send marshals and sends the BatchGetResourceConfig API request.
-func (r BatchGetResourceConfigRequest) Send() (*BatchGetResourceConfigOutput, error) {
+func (r BatchGetResourceConfigRequest) Send(ctx context.Context) (*BatchGetResourceConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -104,7 +107,7 @@ func (r BatchGetResourceConfigRequest) Send() (*BatchGetResourceConfigOutput, er
 //
 //    // Example sending a request using the BatchGetResourceConfigRequest method.
 //    req := client.BatchGetResourceConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -138,7 +141,8 @@ type DeleteAggregationAuthorizationRequest struct {
 }
 
 // Send marshals and sends the DeleteAggregationAuthorization API request.
-func (r DeleteAggregationAuthorizationRequest) Send() (*DeleteAggregationAuthorizationOutput, error) {
+func (r DeleteAggregationAuthorizationRequest) Send(ctx context.Context) (*DeleteAggregationAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -155,7 +159,7 @@ func (r DeleteAggregationAuthorizationRequest) Send() (*DeleteAggregationAuthori
 //
 //    // Example sending a request using the DeleteAggregationAuthorizationRequest method.
 //    req := client.DeleteAggregationAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -191,7 +195,8 @@ type DeleteConfigRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigRule API request.
-func (r DeleteConfigRuleRequest) Send() (*DeleteConfigRuleOutput, error) {
+func (r DeleteConfigRuleRequest) Send(ctx context.Context) (*DeleteConfigRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,7 +218,7 @@ func (r DeleteConfigRuleRequest) Send() (*DeleteConfigRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteConfigRuleRequest method.
 //    req := client.DeleteConfigRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -249,7 +254,8 @@ type DeleteConfigurationAggregatorRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationAggregator API request.
-func (r DeleteConfigurationAggregatorRequest) Send() (*DeleteConfigurationAggregatorOutput, error) {
+func (r DeleteConfigurationAggregatorRequest) Send(ctx context.Context) (*DeleteConfigurationAggregatorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,7 +272,7 @@ func (r DeleteConfigurationAggregatorRequest) Send() (*DeleteConfigurationAggreg
 //
 //    // Example sending a request using the DeleteConfigurationAggregatorRequest method.
 //    req := client.DeleteConfigurationAggregatorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -302,7 +308,8 @@ type DeleteConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationRecorder API request.
-func (r DeleteConfigurationRecorderRequest) Send() (*DeleteConfigurationRecorderOutput, error) {
+func (r DeleteConfigurationRecorderRequest) Send(ctx context.Context) (*DeleteConfigurationRecorderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -327,7 +334,7 @@ func (r DeleteConfigurationRecorderRequest) Send() (*DeleteConfigurationRecorder
 //
 //    // Example sending a request using the DeleteConfigurationRecorderRequest method.
 //    req := client.DeleteConfigurationRecorderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -363,7 +370,8 @@ type DeleteDeliveryChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteDeliveryChannel API request.
-func (r DeleteDeliveryChannelRequest) Send() (*DeleteDeliveryChannelOutput, error) {
+func (r DeleteDeliveryChannelRequest) Send(ctx context.Context) (*DeleteDeliveryChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -382,7 +390,7 @@ func (r DeleteDeliveryChannelRequest) Send() (*DeleteDeliveryChannelOutput, erro
 //
 //    // Example sending a request using the DeleteDeliveryChannelRequest method.
 //    req := client.DeleteDeliveryChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -418,7 +426,8 @@ type DeleteEvaluationResultsRequest struct {
 }
 
 // Send marshals and sends the DeleteEvaluationResults API request.
-func (r DeleteEvaluationResultsRequest) Send() (*DeleteEvaluationResultsOutput, error) {
+func (r DeleteEvaluationResultsRequest) Send(ctx context.Context) (*DeleteEvaluationResultsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +446,7 @@ func (r DeleteEvaluationResultsRequest) Send() (*DeleteEvaluationResultsOutput, 
 //
 //    // Example sending a request using the DeleteEvaluationResultsRequest method.
 //    req := client.DeleteEvaluationResultsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +480,8 @@ type DeletePendingAggregationRequestRequest struct {
 }
 
 // Send marshals and sends the DeletePendingAggregationRequest API request.
-func (r DeletePendingAggregationRequestRequest) Send() (*DeletePendingAggregationRequestOutput, error) {
+func (r DeletePendingAggregationRequestRequest) Send(ctx context.Context) (*DeletePendingAggregationRequestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,7 +498,7 @@ func (r DeletePendingAggregationRequestRequest) Send() (*DeletePendingAggregatio
 //
 //    // Example sending a request using the DeletePendingAggregationRequestRequest method.
 //    req := client.DeletePendingAggregationRequestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -524,7 +534,8 @@ type DeleteRetentionConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteRetentionConfiguration API request.
-func (r DeleteRetentionConfigurationRequest) Send() (*DeleteRetentionConfigurationOutput, error) {
+func (r DeleteRetentionConfigurationRequest) Send(ctx context.Context) (*DeleteRetentionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +551,7 @@ func (r DeleteRetentionConfigurationRequest) Send() (*DeleteRetentionConfigurati
 //
 //    // Example sending a request using the DeleteRetentionConfigurationRequest method.
 //    req := client.DeleteRetentionConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -576,7 +587,8 @@ type DeliverConfigSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeliverConfigSnapshot API request.
-func (r DeliverConfigSnapshotRequest) Send() (*DeliverConfigSnapshotOutput, error) {
+func (r DeliverConfigSnapshotRequest) Send(ctx context.Context) (*DeliverConfigSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,7 +614,7 @@ func (r DeliverConfigSnapshotRequest) Send() (*DeliverConfigSnapshotOutput, erro
 //
 //    // Example sending a request using the DeliverConfigSnapshotRequest method.
 //    req := client.DeliverConfigSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -636,7 +648,8 @@ type DescribeAggregateComplianceByConfigRulesRequest struct {
 }
 
 // Send marshals and sends the DescribeAggregateComplianceByConfigRules API request.
-func (r DescribeAggregateComplianceByConfigRulesRequest) Send() (*DescribeAggregateComplianceByConfigRulesOutput, error) {
+func (r DescribeAggregateComplianceByConfigRulesRequest) Send(ctx context.Context) (*DescribeAggregateComplianceByConfigRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -656,7 +669,7 @@ func (r DescribeAggregateComplianceByConfigRulesRequest) Send() (*DescribeAggreg
 //
 //    // Example sending a request using the DescribeAggregateComplianceByConfigRulesRequest method.
 //    req := client.DescribeAggregateComplianceByConfigRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -690,7 +703,8 @@ type DescribeAggregationAuthorizationsRequest struct {
 }
 
 // Send marshals and sends the DescribeAggregationAuthorizations API request.
-func (r DescribeAggregationAuthorizationsRequest) Send() (*DescribeAggregationAuthorizationsOutput, error) {
+func (r DescribeAggregationAuthorizationsRequest) Send(ctx context.Context) (*DescribeAggregationAuthorizationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -707,7 +721,7 @@ func (r DescribeAggregationAuthorizationsRequest) Send() (*DescribeAggregationAu
 //
 //    // Example sending a request using the DescribeAggregationAuthorizationsRequest method.
 //    req := client.DescribeAggregationAuthorizationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -741,7 +755,8 @@ type DescribeComplianceByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the DescribeComplianceByConfigRule API request.
-func (r DescribeComplianceByConfigRuleRequest) Send() (*DescribeComplianceByConfigRuleOutput, error) {
+func (r DescribeComplianceByConfigRuleRequest) Send(ctx context.Context) (*DescribeComplianceByConfigRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,7 +794,7 @@ func (r DescribeComplianceByConfigRuleRequest) Send() (*DescribeComplianceByConf
 //
 //    // Example sending a request using the DescribeComplianceByConfigRuleRequest method.
 //    req := client.DescribeComplianceByConfigRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -813,7 +828,8 @@ type DescribeComplianceByResourceRequest struct {
 }
 
 // Send marshals and sends the DescribeComplianceByResource API request.
-func (r DescribeComplianceByResourceRequest) Send() (*DescribeComplianceByResourceOutput, error) {
+func (r DescribeComplianceByResourceRequest) Send(ctx context.Context) (*DescribeComplianceByResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -853,7 +869,7 @@ func (r DescribeComplianceByResourceRequest) Send() (*DescribeComplianceByResour
 //
 //    // Example sending a request using the DescribeComplianceByResourceRequest method.
 //    req := client.DescribeComplianceByResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -887,7 +903,8 @@ type DescribeConfigRuleEvaluationStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigRuleEvaluationStatus API request.
-func (r DescribeConfigRuleEvaluationStatusRequest) Send() (*DescribeConfigRuleEvaluationStatusOutput, error) {
+func (r DescribeConfigRuleEvaluationStatusRequest) Send(ctx context.Context) (*DescribeConfigRuleEvaluationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -906,7 +923,7 @@ func (r DescribeConfigRuleEvaluationStatusRequest) Send() (*DescribeConfigRuleEv
 //
 //    // Example sending a request using the DescribeConfigRuleEvaluationStatusRequest method.
 //    req := client.DescribeConfigRuleEvaluationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -940,7 +957,8 @@ type DescribeConfigRulesRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigRules API request.
-func (r DescribeConfigRulesRequest) Send() (*DescribeConfigRulesOutput, error) {
+func (r DescribeConfigRulesRequest) Send(ctx context.Context) (*DescribeConfigRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -956,7 +974,7 @@ func (r DescribeConfigRulesRequest) Send() (*DescribeConfigRulesOutput, error) {
 //
 //    // Example sending a request using the DescribeConfigRulesRequest method.
 //    req := client.DescribeConfigRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -990,7 +1008,8 @@ type DescribeConfigurationAggregatorSourcesStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationAggregatorSourcesStatus API request.
-func (r DescribeConfigurationAggregatorSourcesStatusRequest) Send() (*DescribeConfigurationAggregatorSourcesStatusOutput, error) {
+func (r DescribeConfigurationAggregatorSourcesStatusRequest) Send(ctx context.Context) (*DescribeConfigurationAggregatorSourcesStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1009,7 +1028,7 @@ func (r DescribeConfigurationAggregatorSourcesStatusRequest) Send() (*DescribeCo
 //
 //    // Example sending a request using the DescribeConfigurationAggregatorSourcesStatusRequest method.
 //    req := client.DescribeConfigurationAggregatorSourcesStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1043,7 +1062,8 @@ type DescribeConfigurationAggregatorsRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationAggregators API request.
-func (r DescribeConfigurationAggregatorsRequest) Send() (*DescribeConfigurationAggregatorsOutput, error) {
+func (r DescribeConfigurationAggregatorsRequest) Send(ctx context.Context) (*DescribeConfigurationAggregatorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1061,7 +1081,7 @@ func (r DescribeConfigurationAggregatorsRequest) Send() (*DescribeConfigurationA
 //
 //    // Example sending a request using the DescribeConfigurationAggregatorsRequest method.
 //    req := client.DescribeConfigurationAggregatorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1095,7 +1115,8 @@ type DescribeConfigurationRecorderStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationRecorderStatus API request.
-func (r DescribeConfigurationRecorderStatusRequest) Send() (*DescribeConfigurationRecorderStatusOutput, error) {
+func (r DescribeConfigurationRecorderStatusRequest) Send(ctx context.Context) (*DescribeConfigurationRecorderStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1116,7 +1137,7 @@ func (r DescribeConfigurationRecorderStatusRequest) Send() (*DescribeConfigurati
 //
 //    // Example sending a request using the DescribeConfigurationRecorderStatusRequest method.
 //    req := client.DescribeConfigurationRecorderStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1150,7 +1171,8 @@ type DescribeConfigurationRecordersRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationRecorders API request.
-func (r DescribeConfigurationRecordersRequest) Send() (*DescribeConfigurationRecordersOutput, error) {
+func (r DescribeConfigurationRecordersRequest) Send(ctx context.Context) (*DescribeConfigurationRecordersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1171,7 +1193,7 @@ func (r DescribeConfigurationRecordersRequest) Send() (*DescribeConfigurationRec
 //
 //    // Example sending a request using the DescribeConfigurationRecordersRequest method.
 //    req := client.DescribeConfigurationRecordersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1205,7 +1227,8 @@ type DescribeDeliveryChannelStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeDeliveryChannelStatus API request.
-func (r DescribeDeliveryChannelStatusRequest) Send() (*DescribeDeliveryChannelStatusOutput, error) {
+func (r DescribeDeliveryChannelStatusRequest) Send(ctx context.Context) (*DescribeDeliveryChannelStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1225,7 +1248,7 @@ func (r DescribeDeliveryChannelStatusRequest) Send() (*DescribeDeliveryChannelSt
 //
 //    // Example sending a request using the DescribeDeliveryChannelStatusRequest method.
 //    req := client.DescribeDeliveryChannelStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1259,7 +1282,8 @@ type DescribeDeliveryChannelsRequest struct {
 }
 
 // Send marshals and sends the DescribeDeliveryChannels API request.
-func (r DescribeDeliveryChannelsRequest) Send() (*DescribeDeliveryChannelsOutput, error) {
+func (r DescribeDeliveryChannelsRequest) Send(ctx context.Context) (*DescribeDeliveryChannelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1279,7 +1303,7 @@ func (r DescribeDeliveryChannelsRequest) Send() (*DescribeDeliveryChannelsOutput
 //
 //    // Example sending a request using the DescribeDeliveryChannelsRequest method.
 //    req := client.DescribeDeliveryChannelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1313,7 +1337,8 @@ type DescribePendingAggregationRequestsRequest struct {
 }
 
 // Send marshals and sends the DescribePendingAggregationRequests API request.
-func (r DescribePendingAggregationRequestsRequest) Send() (*DescribePendingAggregationRequestsOutput, error) {
+func (r DescribePendingAggregationRequestsRequest) Send(ctx context.Context) (*DescribePendingAggregationRequestsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1329,7 +1354,7 @@ func (r DescribePendingAggregationRequestsRequest) Send() (*DescribePendingAggre
 //
 //    // Example sending a request using the DescribePendingAggregationRequestsRequest method.
 //    req := client.DescribePendingAggregationRequestsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1363,7 +1388,8 @@ type DescribeRetentionConfigurationsRequest struct {
 }
 
 // Send marshals and sends the DescribeRetentionConfigurations API request.
-func (r DescribeRetentionConfigurationsRequest) Send() (*DescribeRetentionConfigurationsOutput, error) {
+func (r DescribeRetentionConfigurationsRequest) Send(ctx context.Context) (*DescribeRetentionConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1384,7 +1410,7 @@ func (r DescribeRetentionConfigurationsRequest) Send() (*DescribeRetentionConfig
 //
 //    // Example sending a request using the DescribeRetentionConfigurationsRequest method.
 //    req := client.DescribeRetentionConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1418,7 +1444,8 @@ type GetAggregateComplianceDetailsByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the GetAggregateComplianceDetailsByConfigRule API request.
-func (r GetAggregateComplianceDetailsByConfigRuleRequest) Send() (*GetAggregateComplianceDetailsByConfigRuleOutput, error) {
+func (r GetAggregateComplianceDetailsByConfigRuleRequest) Send(ctx context.Context) (*GetAggregateComplianceDetailsByConfigRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1440,7 +1467,7 @@ func (r GetAggregateComplianceDetailsByConfigRuleRequest) Send() (*GetAggregateC
 //
 //    // Example sending a request using the GetAggregateComplianceDetailsByConfigRuleRequest method.
 //    req := client.GetAggregateComplianceDetailsByConfigRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1474,7 +1501,8 @@ type GetAggregateConfigRuleComplianceSummaryRequest struct {
 }
 
 // Send marshals and sends the GetAggregateConfigRuleComplianceSummary API request.
-func (r GetAggregateConfigRuleComplianceSummaryRequest) Send() (*GetAggregateConfigRuleComplianceSummaryOutput, error) {
+func (r GetAggregateConfigRuleComplianceSummaryRequest) Send(ctx context.Context) (*GetAggregateConfigRuleComplianceSummaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1494,7 +1522,7 @@ func (r GetAggregateConfigRuleComplianceSummaryRequest) Send() (*GetAggregateCon
 //
 //    // Example sending a request using the GetAggregateConfigRuleComplianceSummaryRequest method.
 //    req := client.GetAggregateConfigRuleComplianceSummaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1528,7 +1556,8 @@ type GetAggregateDiscoveredResourceCountsRequest struct {
 }
 
 // Send marshals and sends the GetAggregateDiscoveredResourceCounts API request.
-func (r GetAggregateDiscoveredResourceCountsRequest) Send() (*GetAggregateDiscoveredResourceCountsOutput, error) {
+func (r GetAggregateDiscoveredResourceCountsRequest) Send(ctx context.Context) (*GetAggregateDiscoveredResourceCountsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1552,7 +1581,7 @@ func (r GetAggregateDiscoveredResourceCountsRequest) Send() (*GetAggregateDiscov
 //
 //    // Example sending a request using the GetAggregateDiscoveredResourceCountsRequest method.
 //    req := client.GetAggregateDiscoveredResourceCountsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1586,7 +1615,8 @@ type GetAggregateResourceConfigRequest struct {
 }
 
 // Send marshals and sends the GetAggregateResourceConfig API request.
-func (r GetAggregateResourceConfigRequest) Send() (*GetAggregateResourceConfigOutput, error) {
+func (r GetAggregateResourceConfigRequest) Send(ctx context.Context) (*GetAggregateResourceConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1603,7 +1633,7 @@ func (r GetAggregateResourceConfigRequest) Send() (*GetAggregateResourceConfigOu
 //
 //    // Example sending a request using the GetAggregateResourceConfigRequest method.
 //    req := client.GetAggregateResourceConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1637,7 +1667,8 @@ type GetComplianceDetailsByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the GetComplianceDetailsByConfigRule API request.
-func (r GetComplianceDetailsByConfigRuleRequest) Send() (*GetComplianceDetailsByConfigRuleOutput, error) {
+func (r GetComplianceDetailsByConfigRuleRequest) Send(ctx context.Context) (*GetComplianceDetailsByConfigRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1655,7 +1686,7 @@ func (r GetComplianceDetailsByConfigRuleRequest) Send() (*GetComplianceDetailsBy
 //
 //    // Example sending a request using the GetComplianceDetailsByConfigRuleRequest method.
 //    req := client.GetComplianceDetailsByConfigRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1689,7 +1720,8 @@ type GetComplianceDetailsByResourceRequest struct {
 }
 
 // Send marshals and sends the GetComplianceDetailsByResource API request.
-func (r GetComplianceDetailsByResourceRequest) Send() (*GetComplianceDetailsByResourceOutput, error) {
+func (r GetComplianceDetailsByResourceRequest) Send(ctx context.Context) (*GetComplianceDetailsByResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1707,7 +1739,7 @@ func (r GetComplianceDetailsByResourceRequest) Send() (*GetComplianceDetailsByRe
 //
 //    // Example sending a request using the GetComplianceDetailsByResourceRequest method.
 //    req := client.GetComplianceDetailsByResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1741,7 +1773,8 @@ type GetComplianceSummaryByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the GetComplianceSummaryByConfigRule API request.
-func (r GetComplianceSummaryByConfigRuleRequest) Send() (*GetComplianceSummaryByConfigRuleOutput, error) {
+func (r GetComplianceSummaryByConfigRuleRequest) Send(ctx context.Context) (*GetComplianceSummaryByConfigRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1758,7 +1791,7 @@ func (r GetComplianceSummaryByConfigRuleRequest) Send() (*GetComplianceSummaryBy
 //
 //    // Example sending a request using the GetComplianceSummaryByConfigRuleRequest method.
 //    req := client.GetComplianceSummaryByConfigRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1792,7 +1825,8 @@ type GetComplianceSummaryByResourceTypeRequest struct {
 }
 
 // Send marshals and sends the GetComplianceSummaryByResourceType API request.
-func (r GetComplianceSummaryByResourceTypeRequest) Send() (*GetComplianceSummaryByResourceTypeOutput, error) {
+func (r GetComplianceSummaryByResourceTypeRequest) Send(ctx context.Context) (*GetComplianceSummaryByResourceTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1810,7 +1844,7 @@ func (r GetComplianceSummaryByResourceTypeRequest) Send() (*GetComplianceSummary
 //
 //    // Example sending a request using the GetComplianceSummaryByResourceTypeRequest method.
 //    req := client.GetComplianceSummaryByResourceTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1844,7 +1878,8 @@ type GetDiscoveredResourceCountsRequest struct {
 }
 
 // Send marshals and sends the GetDiscoveredResourceCounts API request.
-func (r GetDiscoveredResourceCountsRequest) Send() (*GetDiscoveredResourceCountsOutput, error) {
+func (r GetDiscoveredResourceCountsRequest) Send(ctx context.Context) (*GetDiscoveredResourceCountsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1893,7 +1928,7 @@ func (r GetDiscoveredResourceCountsRequest) Send() (*GetDiscoveredResourceCounts
 //
 //    // Example sending a request using the GetDiscoveredResourceCountsRequest method.
 //    req := client.GetDiscoveredResourceCountsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1927,7 +1962,8 @@ type GetResourceConfigHistoryRequest struct {
 }
 
 // Send marshals and sends the GetResourceConfigHistory API request.
-func (r GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput, error) {
+func (r GetResourceConfigHistoryRequest) Send(ctx context.Context) (*GetResourceConfigHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1956,7 +1992,7 @@ func (r GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput
 //
 //    // Example sending a request using the GetResourceConfigHistoryRequest method.
 //    req := client.GetResourceConfigHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2006,7 +2042,7 @@ func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfig
 func (p *GetResourceConfigHistoryRequest) Paginate(opts ...aws.Option) GetResourceConfigHistoryPager {
 	return GetResourceConfigHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceConfigHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2015,6 +2051,7 @@ func (p *GetResourceConfigHistoryRequest) Paginate(opts ...aws.Option) GetResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2042,7 +2079,8 @@ type ListAggregateDiscoveredResourcesRequest struct {
 }
 
 // Send marshals and sends the ListAggregateDiscoveredResources API request.
-func (r ListAggregateDiscoveredResourcesRequest) Send() (*ListAggregateDiscoveredResourcesOutput, error) {
+func (r ListAggregateDiscoveredResourcesRequest) Send(ctx context.Context) (*ListAggregateDiscoveredResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2067,7 +2105,7 @@ func (r ListAggregateDiscoveredResourcesRequest) Send() (*ListAggregateDiscovere
 //
 //    // Example sending a request using the ListAggregateDiscoveredResourcesRequest method.
 //    req := client.ListAggregateDiscoveredResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2101,7 +2139,8 @@ type ListDiscoveredResourcesRequest struct {
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
-func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+func (r ListDiscoveredResourcesRequest) Send(ctx context.Context) (*ListDiscoveredResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2130,7 +2169,7 @@ func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, 
 //
 //    // Example sending a request using the ListDiscoveredResourcesRequest method.
 //    req := client.ListDiscoveredResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2164,7 +2203,8 @@ type PutAggregationAuthorizationRequest struct {
 }
 
 // Send marshals and sends the PutAggregationAuthorization API request.
-func (r PutAggregationAuthorizationRequest) Send() (*PutAggregationAuthorizationOutput, error) {
+func (r PutAggregationAuthorizationRequest) Send(ctx context.Context) (*PutAggregationAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2181,7 +2221,7 @@ func (r PutAggregationAuthorizationRequest) Send() (*PutAggregationAuthorization
 //
 //    // Example sending a request using the PutAggregationAuthorizationRequest method.
 //    req := client.PutAggregationAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2215,7 +2255,8 @@ type PutConfigRuleRequest struct {
 }
 
 // Send marshals and sends the PutConfigRule API request.
-func (r PutConfigRuleRequest) Send() (*PutConfigRuleOutput, error) {
+func (r PutConfigRuleRequest) Send(ctx context.Context) (*PutConfigRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2266,7 +2307,7 @@ func (r PutConfigRuleRequest) Send() (*PutConfigRuleOutput, error) {
 //
 //    // Example sending a request using the PutConfigRuleRequest method.
 //    req := client.PutConfigRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2302,7 +2343,8 @@ type PutConfigurationAggregatorRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationAggregator API request.
-func (r PutConfigurationAggregatorRequest) Send() (*PutConfigurationAggregatorOutput, error) {
+func (r PutConfigurationAggregatorRequest) Send(ctx context.Context) (*PutConfigurationAggregatorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2327,7 +2369,7 @@ func (r PutConfigurationAggregatorRequest) Send() (*PutConfigurationAggregatorOu
 //
 //    // Example sending a request using the PutConfigurationAggregatorRequest method.
 //    req := client.PutConfigurationAggregatorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2361,7 +2403,8 @@ type PutConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationRecorder API request.
-func (r PutConfigurationRecorderRequest) Send() (*PutConfigurationRecorderOutput, error) {
+func (r PutConfigurationRecorderRequest) Send(ctx context.Context) (*PutConfigurationRecorderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2387,7 +2430,7 @@ func (r PutConfigurationRecorderRequest) Send() (*PutConfigurationRecorderOutput
 //
 //    // Example sending a request using the PutConfigurationRecorderRequest method.
 //    req := client.PutConfigurationRecorderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2423,7 +2466,8 @@ type PutDeliveryChannelRequest struct {
 }
 
 // Send marshals and sends the PutDeliveryChannel API request.
-func (r PutDeliveryChannelRequest) Send() (*PutDeliveryChannelOutput, error) {
+func (r PutDeliveryChannelRequest) Send(ctx context.Context) (*PutDeliveryChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2452,7 +2496,7 @@ func (r PutDeliveryChannelRequest) Send() (*PutDeliveryChannelOutput, error) {
 //
 //    // Example sending a request using the PutDeliveryChannelRequest method.
 //    req := client.PutDeliveryChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2488,7 +2532,8 @@ type PutEvaluationsRequest struct {
 }
 
 // Send marshals and sends the PutEvaluations API request.
-func (r PutEvaluationsRequest) Send() (*PutEvaluationsOutput, error) {
+func (r PutEvaluationsRequest) Send(ctx context.Context) (*PutEvaluationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2506,7 +2551,7 @@ func (r PutEvaluationsRequest) Send() (*PutEvaluationsOutput, error) {
 //
 //    // Example sending a request using the PutEvaluationsRequest method.
 //    req := client.PutEvaluationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2540,7 +2585,8 @@ type PutRetentionConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutRetentionConfiguration API request.
-func (r PutRetentionConfigurationRequest) Send() (*PutRetentionConfigurationOutput, error) {
+func (r PutRetentionConfigurationRequest) Send(ctx context.Context) (*PutRetentionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2563,7 +2609,7 @@ func (r PutRetentionConfigurationRequest) Send() (*PutRetentionConfigurationOutp
 //
 //    // Example sending a request using the PutRetentionConfigurationRequest method.
 //    req := client.PutRetentionConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2597,7 +2643,8 @@ type StartConfigRulesEvaluationRequest struct {
 }
 
 // Send marshals and sends the StartConfigRulesEvaluation API request.
-func (r StartConfigRulesEvaluationRequest) Send() (*StartConfigRulesEvaluationOutput, error) {
+func (r StartConfigRulesEvaluationRequest) Send(ctx context.Context) (*StartConfigRulesEvaluationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2642,7 +2689,7 @@ func (r StartConfigRulesEvaluationRequest) Send() (*StartConfigRulesEvaluationOu
 //
 //    // Example sending a request using the StartConfigRulesEvaluationRequest method.
 //    req := client.StartConfigRulesEvaluationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2676,7 +2723,8 @@ type StartConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the StartConfigurationRecorder API request.
-func (r StartConfigurationRecorderRequest) Send() (*StartConfigurationRecorderOutput, error) {
+func (r StartConfigurationRecorderRequest) Send(ctx context.Context) (*StartConfigurationRecorderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2696,7 +2744,7 @@ func (r StartConfigurationRecorderRequest) Send() (*StartConfigurationRecorderOu
 //
 //    // Example sending a request using the StartConfigurationRecorderRequest method.
 //    req := client.StartConfigurationRecorderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2732,7 +2780,8 @@ type StopConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the StopConfigurationRecorder API request.
-func (r StopConfigurationRecorderRequest) Send() (*StopConfigurationRecorderOutput, error) {
+func (r StopConfigurationRecorderRequest) Send(ctx context.Context) (*StopConfigurationRecorderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2749,7 +2798,7 @@ func (r StopConfigurationRecorderRequest) Send() (*StopConfigurationRecorderOutp
 //
 //    // Example sending a request using the StopConfigurationRecorderRequest method.
 //    req := client.StopConfigurationRecorderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

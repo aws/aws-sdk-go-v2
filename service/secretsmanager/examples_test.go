@@ -3,6 +3,7 @@
 package secretsmanager_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExampleSecretsManager_CancelRotateSecretRequest_shared00() {
 	}
 
 	req := svc.CancelRotateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -87,7 +88,7 @@ func ExampleSecretsManager_CreateSecretRequest_shared00() {
 	}
 
 	req := svc.CreateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -139,7 +140,7 @@ func ExampleSecretsManager_DeleteResourcePolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteResourcePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -182,7 +183,7 @@ func ExampleSecretsManager_DeleteSecretRequest_shared00() {
 	}
 
 	req := svc.DeleteSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -223,7 +224,7 @@ func ExampleSecretsManager_DescribeSecretRequest_shared00() {
 	}
 
 	req := svc.DescribeSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -264,7 +265,7 @@ func ExampleSecretsManager_GetRandomPasswordRequest_shared00() {
 	}
 
 	req := svc.GetRandomPasswordRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -304,7 +305,7 @@ func ExampleSecretsManager_GetResourcePolicyRequest_shared00() {
 	}
 
 	req := svc.GetResourcePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -347,7 +348,7 @@ func ExampleSecretsManager_GetSecretValueRequest_shared00() {
 	}
 
 	req := svc.GetSecretValueRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -392,7 +393,7 @@ func ExampleSecretsManager_ListSecretVersionIdsRequest_shared00() {
 	}
 
 	req := svc.ListSecretVersionIdsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -429,7 +430,7 @@ func ExampleSecretsManager_ListSecretsRequest_shared00() {
 	input := &secretsmanager.ListSecretsInput{}
 
 	req := svc.ListSecretsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -469,7 +470,7 @@ func ExampleSecretsManager_PutResourcePolicyRequest_shared00() {
 	}
 
 	req := svc.PutResourcePolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -515,7 +516,7 @@ func ExampleSecretsManager_PutSecretValueRequest_shared00() {
 	}
 
 	req := svc.PutSecretValueRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -563,7 +564,7 @@ func ExampleSecretsManager_RestoreSecretRequest_shared00() {
 	}
 
 	req := svc.RestoreSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -611,7 +612,7 @@ func ExampleSecretsManager_RotateSecretRequest_shared00() {
 	}
 
 	req := svc.RotateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -654,7 +655,7 @@ func ExampleSecretsManager_RotateSecretRequest_shared01() {
 	}
 
 	req := svc.RotateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -707,7 +708,7 @@ func ExampleSecretsManager_TagResourceRequest_shared00() {
 	}
 
 	req := svc.TagResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -754,7 +755,7 @@ func ExampleSecretsManager_UntagResourceRequest_shared00() {
 	}
 
 	req := svc.UntagResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -797,7 +798,7 @@ func ExampleSecretsManager_UpdateSecretRequest_shared00() {
 	}
 
 	req := svc.UpdateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -850,7 +851,7 @@ func ExampleSecretsManager_UpdateSecretRequest_shared01() {
 	}
 
 	req := svc.UpdateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -903,7 +904,7 @@ func ExampleSecretsManager_UpdateSecretRequest_shared02() {
 	}
 
 	req := svc.UpdateSecretRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -958,7 +959,7 @@ func ExampleSecretsManager_UpdateSecretVersionStageRequest_shared00() {
 	}
 
 	req := svc.UpdateSecretVersionStageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1005,7 +1006,7 @@ func ExampleSecretsManager_UpdateSecretVersionStageRequest_shared01() {
 	}
 
 	req := svc.UpdateSecretVersionStageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1054,7 +1055,7 @@ func ExampleSecretsManager_UpdateSecretVersionStageRequest_shared02() {
 	}
 
 	req := svc.UpdateSecretVersionStageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

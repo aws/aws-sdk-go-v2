@@ -3,6 +3,7 @@
 package cognitosync
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type BulkPublishRequest struct {
 }
 
 // Send marshals and sends the BulkPublish API request.
-func (r BulkPublishRequest) Send() (*BulkPublishOutput, error) {
+func (r BulkPublishRequest) Send(ctx context.Context) (*BulkPublishOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -44,7 +46,7 @@ func (r BulkPublishRequest) Send() (*BulkPublishOutput, error) {
 //
 //    // Example sending a request using the BulkPublishRequest method.
 //    req := client.BulkPublishRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +80,8 @@ type DeleteDatasetRequest struct {
 }
 
 // Send marshals and sends the DeleteDataset API request.
-func (r DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
+func (r DeleteDatasetRequest) Send(ctx context.Context) (*DeleteDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -100,7 +103,7 @@ func (r DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
 //
 //    // Example sending a request using the DeleteDatasetRequest method.
 //    req := client.DeleteDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -134,7 +137,8 @@ type DescribeDatasetRequest struct {
 }
 
 // Send marshals and sends the DescribeDataset API request.
-func (r DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
+func (r DescribeDatasetRequest) Send(ctx context.Context) (*DescribeDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +160,7 @@ func (r DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
 //
 //    // Example sending a request using the DescribeDatasetRequest method.
 //    req := client.DescribeDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -190,7 +194,8 @@ type DescribeIdentityPoolUsageRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityPoolUsage API request.
-func (r DescribeIdentityPoolUsageRequest) Send() (*DescribeIdentityPoolUsageOutput, error) {
+func (r DescribeIdentityPoolUsageRequest) Send(ctx context.Context) (*DescribeIdentityPoolUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -210,7 +215,7 @@ func (r DescribeIdentityPoolUsageRequest) Send() (*DescribeIdentityPoolUsageOutp
 //
 //    // Example sending a request using the DescribeIdentityPoolUsageRequest method.
 //    req := client.DescribeIdentityPoolUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -244,7 +249,8 @@ type DescribeIdentityUsageRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityUsage API request.
-func (r DescribeIdentityUsageRequest) Send() (*DescribeIdentityUsageOutput, error) {
+func (r DescribeIdentityUsageRequest) Send(ctx context.Context) (*DescribeIdentityUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -264,7 +270,7 @@ func (r DescribeIdentityUsageRequest) Send() (*DescribeIdentityUsageOutput, erro
 //
 //    // Example sending a request using the DescribeIdentityUsageRequest method.
 //    req := client.DescribeIdentityUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -298,7 +304,8 @@ type GetBulkPublishDetailsRequest struct {
 }
 
 // Send marshals and sends the GetBulkPublishDetails API request.
-func (r GetBulkPublishDetailsRequest) Send() (*GetBulkPublishDetailsOutput, error) {
+func (r GetBulkPublishDetailsRequest) Send(ctx context.Context) (*GetBulkPublishDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -317,7 +324,7 @@ func (r GetBulkPublishDetailsRequest) Send() (*GetBulkPublishDetailsOutput, erro
 //
 //    // Example sending a request using the GetBulkPublishDetailsRequest method.
 //    req := client.GetBulkPublishDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -351,7 +358,8 @@ type GetCognitoEventsRequest struct {
 }
 
 // Send marshals and sends the GetCognitoEvents API request.
-func (r GetCognitoEventsRequest) Send() (*GetCognitoEventsOutput, error) {
+func (r GetCognitoEventsRequest) Send(ctx context.Context) (*GetCognitoEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -371,7 +379,7 @@ func (r GetCognitoEventsRequest) Send() (*GetCognitoEventsOutput, error) {
 //
 //    // Example sending a request using the GetCognitoEventsRequest method.
 //    req := client.GetCognitoEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -405,7 +413,8 @@ type GetIdentityPoolConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetIdentityPoolConfiguration API request.
-func (r GetIdentityPoolConfigurationRequest) Send() (*GetIdentityPoolConfigurationOutput, error) {
+func (r GetIdentityPoolConfigurationRequest) Send(ctx context.Context) (*GetIdentityPoolConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -424,7 +433,7 @@ func (r GetIdentityPoolConfigurationRequest) Send() (*GetIdentityPoolConfigurati
 //
 //    // Example sending a request using the GetIdentityPoolConfigurationRequest method.
 //    req := client.GetIdentityPoolConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -458,7 +467,8 @@ type ListDatasetsRequest struct {
 }
 
 // Send marshals and sends the ListDatasets API request.
-func (r ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
+func (r ListDatasetsRequest) Send(ctx context.Context) (*ListDatasetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -480,7 +490,7 @@ func (r ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
 //
 //    // Example sending a request using the ListDatasetsRequest method.
 //    req := client.ListDatasetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -514,7 +524,8 @@ type ListIdentityPoolUsageRequest struct {
 }
 
 // Send marshals and sends the ListIdentityPoolUsage API request.
-func (r ListIdentityPoolUsageRequest) Send() (*ListIdentityPoolUsageOutput, error) {
+func (r ListIdentityPoolUsageRequest) Send(ctx context.Context) (*ListIdentityPoolUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -534,7 +545,7 @@ func (r ListIdentityPoolUsageRequest) Send() (*ListIdentityPoolUsageOutput, erro
 //
 //    // Example sending a request using the ListIdentityPoolUsageRequest method.
 //    req := client.ListIdentityPoolUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -568,7 +579,8 @@ type ListRecordsRequest struct {
 }
 
 // Send marshals and sends the ListRecords API request.
-func (r ListRecordsRequest) Send() (*ListRecordsOutput, error) {
+func (r ListRecordsRequest) Send(ctx context.Context) (*ListRecordsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,7 +603,7 @@ func (r ListRecordsRequest) Send() (*ListRecordsOutput, error) {
 //
 //    // Example sending a request using the ListRecordsRequest method.
 //    req := client.ListRecordsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -625,7 +637,8 @@ type RegisterDeviceRequest struct {
 }
 
 // Send marshals and sends the RegisterDevice API request.
-func (r RegisterDeviceRequest) Send() (*RegisterDeviceOutput, error) {
+func (r RegisterDeviceRequest) Send(ctx context.Context) (*RegisterDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -644,7 +657,7 @@ func (r RegisterDeviceRequest) Send() (*RegisterDeviceOutput, error) {
 //
 //    // Example sending a request using the RegisterDeviceRequest method.
 //    req := client.RegisterDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -678,7 +691,8 @@ type SetCognitoEventsRequest struct {
 }
 
 // Send marshals and sends the SetCognitoEvents API request.
-func (r SetCognitoEventsRequest) Send() (*SetCognitoEventsOutput, error) {
+func (r SetCognitoEventsRequest) Send(ctx context.Context) (*SetCognitoEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -700,7 +714,7 @@ func (r SetCognitoEventsRequest) Send() (*SetCognitoEventsOutput, error) {
 //
 //    // Example sending a request using the SetCognitoEventsRequest method.
 //    req := client.SetCognitoEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -736,7 +750,8 @@ type SetIdentityPoolConfigurationRequest struct {
 }
 
 // Send marshals and sends the SetIdentityPoolConfiguration API request.
-func (r SetIdentityPoolConfigurationRequest) Send() (*SetIdentityPoolConfigurationOutput, error) {
+func (r SetIdentityPoolConfigurationRequest) Send(ctx context.Context) (*SetIdentityPoolConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -755,7 +770,7 @@ func (r SetIdentityPoolConfigurationRequest) Send() (*SetIdentityPoolConfigurati
 //
 //    // Example sending a request using the SetIdentityPoolConfigurationRequest method.
 //    req := client.SetIdentityPoolConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -789,7 +804,8 @@ type SubscribeToDatasetRequest struct {
 }
 
 // Send marshals and sends the SubscribeToDataset API request.
-func (r SubscribeToDatasetRequest) Send() (*SubscribeToDatasetOutput, error) {
+func (r SubscribeToDatasetRequest) Send(ctx context.Context) (*SubscribeToDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -809,7 +825,7 @@ func (r SubscribeToDatasetRequest) Send() (*SubscribeToDatasetOutput, error) {
 //
 //    // Example sending a request using the SubscribeToDatasetRequest method.
 //    req := client.SubscribeToDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -843,7 +859,8 @@ type UnsubscribeFromDatasetRequest struct {
 }
 
 // Send marshals and sends the UnsubscribeFromDataset API request.
-func (r UnsubscribeFromDatasetRequest) Send() (*UnsubscribeFromDatasetOutput, error) {
+func (r UnsubscribeFromDatasetRequest) Send(ctx context.Context) (*UnsubscribeFromDatasetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -863,7 +880,7 @@ func (r UnsubscribeFromDatasetRequest) Send() (*UnsubscribeFromDatasetOutput, er
 //
 //    // Example sending a request using the UnsubscribeFromDatasetRequest method.
 //    req := client.UnsubscribeFromDatasetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -897,7 +914,8 @@ type UpdateRecordsRequest struct {
 }
 
 // Send marshals and sends the UpdateRecords API request.
-func (r UpdateRecordsRequest) Send() (*UpdateRecordsOutput, error) {
+func (r UpdateRecordsRequest) Send(ctx context.Context) (*UpdateRecordsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -928,7 +946,7 @@ func (r UpdateRecordsRequest) Send() (*UpdateRecordsOutput, error) {
 //
 //    // Example sending a request using the UpdateRecordsRequest method.
 //    req := client.UpdateRecordsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

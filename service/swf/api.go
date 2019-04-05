@@ -3,6 +3,7 @@
 package swf
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CountClosedWorkflowExecutionsRequest struct {
 }
 
 // Send marshals and sends the CountClosedWorkflowExecutions API request.
-func (r CountClosedWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutionsOutput, error) {
+func (r CountClosedWorkflowExecutionsRequest) Send(ctx context.Context) (*CountOpenWorkflowExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,7 +70,7 @@ func (r CountClosedWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutio
 //
 //    // Example sending a request using the CountClosedWorkflowExecutionsRequest method.
 //    req := client.CountClosedWorkflowExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -100,7 +102,8 @@ type CountOpenWorkflowExecutionsRequest struct {
 }
 
 // Send marshals and sends the CountOpenWorkflowExecutions API request.
-func (r CountOpenWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutionsOutput, error) {
+func (r CountOpenWorkflowExecutionsRequest) Send(ctx context.Context) (*CountOpenWorkflowExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -146,7 +149,7 @@ func (r CountOpenWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutions
 //
 //    // Example sending a request using the CountOpenWorkflowExecutionsRequest method.
 //    req := client.CountOpenWorkflowExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -178,7 +181,8 @@ type CountPendingActivityTasksRequest struct {
 }
 
 // Send marshals and sends the CountPendingActivityTasks API request.
-func (r CountPendingActivityTasksRequest) Send() (*CountPendingDecisionTasksOutput, error) {
+func (r CountPendingActivityTasksRequest) Send(ctx context.Context) (*CountPendingDecisionTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -218,7 +222,7 @@ func (r CountPendingActivityTasksRequest) Send() (*CountPendingDecisionTasksOutp
 //
 //    // Example sending a request using the CountPendingActivityTasksRequest method.
 //    req := client.CountPendingActivityTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -250,7 +254,8 @@ type CountPendingDecisionTasksRequest struct {
 }
 
 // Send marshals and sends the CountPendingDecisionTasks API request.
-func (r CountPendingDecisionTasksRequest) Send() (*CountPendingDecisionTasksOutput, error) {
+func (r CountPendingDecisionTasksRequest) Send(ctx context.Context) (*CountPendingDecisionTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,7 +295,7 @@ func (r CountPendingDecisionTasksRequest) Send() (*CountPendingDecisionTasksOutp
 //
 //    // Example sending a request using the CountPendingDecisionTasksRequest method.
 //    req := client.CountPendingDecisionTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -322,7 +327,8 @@ type DeprecateActivityTypeRequest struct {
 }
 
 // Send marshals and sends the DeprecateActivityType API request.
-func (r DeprecateActivityTypeRequest) Send() (*DeprecateActivityTypeOutput, error) {
+func (r DeprecateActivityTypeRequest) Send(ctx context.Context) (*DeprecateActivityTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -367,7 +373,7 @@ func (r DeprecateActivityTypeRequest) Send() (*DeprecateActivityTypeOutput, erro
 //
 //    // Example sending a request using the DeprecateActivityTypeRequest method.
 //    req := client.DeprecateActivityTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -401,7 +407,8 @@ type DeprecateDomainRequest struct {
 }
 
 // Send marshals and sends the DeprecateDomain API request.
-func (r DeprecateDomainRequest) Send() (*DeprecateDomainOutput, error) {
+func (r DeprecateDomainRequest) Send(ctx context.Context) (*DeprecateDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -444,7 +451,7 @@ func (r DeprecateDomainRequest) Send() (*DeprecateDomainOutput, error) {
 //
 //    // Example sending a request using the DeprecateDomainRequest method.
 //    req := client.DeprecateDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -478,7 +485,8 @@ type DeprecateWorkflowTypeRequest struct {
 }
 
 // Send marshals and sends the DeprecateWorkflowType API request.
-func (r DeprecateWorkflowTypeRequest) Send() (*DeprecateWorkflowTypeOutput, error) {
+func (r DeprecateWorkflowTypeRequest) Send(ctx context.Context) (*DeprecateWorkflowTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -524,7 +532,7 @@ func (r DeprecateWorkflowTypeRequest) Send() (*DeprecateWorkflowTypeOutput, erro
 //
 //    // Example sending a request using the DeprecateWorkflowTypeRequest method.
 //    req := client.DeprecateWorkflowTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -558,7 +566,8 @@ type DescribeActivityTypeRequest struct {
 }
 
 // Send marshals and sends the DescribeActivityType API request.
-func (r DescribeActivityTypeRequest) Send() (*DescribeActivityTypeOutput, error) {
+func (r DescribeActivityTypeRequest) Send(ctx context.Context) (*DescribeActivityTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -600,7 +609,7 @@ func (r DescribeActivityTypeRequest) Send() (*DescribeActivityTypeOutput, error)
 //
 //    // Example sending a request using the DescribeActivityTypeRequest method.
 //    req := client.DescribeActivityTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -632,7 +641,8 @@ type DescribeDomainRequest struct {
 }
 
 // Send marshals and sends the DescribeDomain API request.
-func (r DescribeDomainRequest) Send() (*DescribeDomainOutput, error) {
+func (r DescribeDomainRequest) Send(ctx context.Context) (*DescribeDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -668,7 +678,7 @@ func (r DescribeDomainRequest) Send() (*DescribeDomainOutput, error) {
 //
 //    // Example sending a request using the DescribeDomainRequest method.
 //    req := client.DescribeDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -700,7 +710,8 @@ type DescribeWorkflowExecutionRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkflowExecution API request.
-func (r DescribeWorkflowExecutionRequest) Send() (*DescribeWorkflowExecutionOutput, error) {
+func (r DescribeWorkflowExecutionRequest) Send(ctx context.Context) (*DescribeWorkflowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -739,7 +750,7 @@ func (r DescribeWorkflowExecutionRequest) Send() (*DescribeWorkflowExecutionOutp
 //
 //    // Example sending a request using the DescribeWorkflowExecutionRequest method.
 //    req := client.DescribeWorkflowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -771,7 +782,8 @@ type DescribeWorkflowTypeRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkflowType API request.
-func (r DescribeWorkflowTypeRequest) Send() (*DescribeWorkflowTypeOutput, error) {
+func (r DescribeWorkflowTypeRequest) Send(ctx context.Context) (*DescribeWorkflowTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -813,7 +825,7 @@ func (r DescribeWorkflowTypeRequest) Send() (*DescribeWorkflowTypeOutput, error)
 //
 //    // Example sending a request using the DescribeWorkflowTypeRequest method.
 //    req := client.DescribeWorkflowTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -845,7 +857,8 @@ type GetWorkflowExecutionHistoryRequest struct {
 }
 
 // Send marshals and sends the GetWorkflowExecutionHistory API request.
-func (r GetWorkflowExecutionHistoryRequest) Send() (*GetWorkflowExecutionHistoryOutput, error) {
+func (r GetWorkflowExecutionHistoryRequest) Send(ctx context.Context) (*GetWorkflowExecutionHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -885,7 +898,7 @@ func (r GetWorkflowExecutionHistoryRequest) Send() (*GetWorkflowExecutionHistory
 //
 //    // Example sending a request using the GetWorkflowExecutionHistoryRequest method.
 //    req := client.GetWorkflowExecutionHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -933,7 +946,7 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 func (p *GetWorkflowExecutionHistoryRequest) Paginate(opts ...aws.Option) GetWorkflowExecutionHistoryPager {
 	return GetWorkflowExecutionHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetWorkflowExecutionHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -942,6 +955,7 @@ func (p *GetWorkflowExecutionHistoryRequest) Paginate(opts ...aws.Option) GetWor
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -969,7 +983,8 @@ type ListActivityTypesRequest struct {
 }
 
 // Send marshals and sends the ListActivityTypes API request.
-func (r ListActivityTypesRequest) Send() (*ListActivityTypesOutput, error) {
+func (r ListActivityTypesRequest) Send(ctx context.Context) (*ListActivityTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1008,7 +1023,7 @@ func (r ListActivityTypesRequest) Send() (*ListActivityTypesOutput, error) {
 //
 //    // Example sending a request using the ListActivityTypesRequest method.
 //    req := client.ListActivityTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1056,7 +1071,7 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivi
 func (p *ListActivityTypesRequest) Paginate(opts ...aws.Option) ListActivityTypesPager {
 	return ListActivityTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListActivityTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1065,6 +1080,7 @@ func (p *ListActivityTypesRequest) Paginate(opts ...aws.Option) ListActivityType
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1092,7 +1108,8 @@ type ListClosedWorkflowExecutionsRequest struct {
 }
 
 // Send marshals and sends the ListClosedWorkflowExecutions API request.
-func (r ListClosedWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOutput, error) {
+func (r ListClosedWorkflowExecutionsRequest) Send(ctx context.Context) (*ListOpenWorkflowExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1140,7 +1157,7 @@ func (r ListClosedWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutions
 //
 //    // Example sending a request using the ListClosedWorkflowExecutionsRequest method.
 //    req := client.ListClosedWorkflowExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1188,7 +1205,7 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 func (p *ListClosedWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListClosedWorkflowExecutionsPager {
 	return ListClosedWorkflowExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListClosedWorkflowExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1197,6 +1214,7 @@ func (p *ListClosedWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListC
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1224,7 +1242,8 @@ type ListDomainsRequest struct {
 }
 
 // Send marshals and sends the ListDomains API request.
-func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+func (r ListDomainsRequest) Send(ctx context.Context) (*ListDomainsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1265,7 +1284,7 @@ func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
 //
 //    // Example sending a request using the ListDomainsRequest method.
 //    req := client.ListDomainsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1313,7 +1332,7 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDomainsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1322,6 +1341,7 @@ func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1349,7 +1369,8 @@ type ListOpenWorkflowExecutionsRequest struct {
 }
 
 // Send marshals and sends the ListOpenWorkflowExecutions API request.
-func (r ListOpenWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOutput, error) {
+func (r ListOpenWorkflowExecutionsRequest) Send(ctx context.Context) (*ListOpenWorkflowExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1397,7 +1418,7 @@ func (r ListOpenWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOu
 //
 //    // Example sending a request using the ListOpenWorkflowExecutionsRequest method.
 //    req := client.ListOpenWorkflowExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1445,7 +1466,7 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 func (p *ListOpenWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListOpenWorkflowExecutionsPager {
 	return ListOpenWorkflowExecutionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOpenWorkflowExecutionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1454,6 +1475,7 @@ func (p *ListOpenWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListOpe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1481,7 +1503,8 @@ type ListWorkflowTypesRequest struct {
 }
 
 // Send marshals and sends the ListWorkflowTypes API request.
-func (r ListWorkflowTypesRequest) Send() (*ListWorkflowTypesOutput, error) {
+func (r ListWorkflowTypesRequest) Send(ctx context.Context) (*ListWorkflowTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1518,7 +1541,7 @@ func (r ListWorkflowTypesRequest) Send() (*ListWorkflowTypesOutput, error) {
 //
 //    // Example sending a request using the ListWorkflowTypesRequest method.
 //    req := client.ListWorkflowTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1566,7 +1589,7 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkfl
 func (p *ListWorkflowTypesRequest) Paginate(opts ...aws.Option) ListWorkflowTypesPager {
 	return ListWorkflowTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListWorkflowTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1575,6 +1598,7 @@ func (p *ListWorkflowTypesRequest) Paginate(opts ...aws.Option) ListWorkflowType
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1602,7 +1626,8 @@ type PollForActivityTaskRequest struct {
 }
 
 // Send marshals and sends the PollForActivityTask API request.
-func (r PollForActivityTaskRequest) Send() (*PollForActivityTaskOutput, error) {
+func (r PollForActivityTaskRequest) Send(ctx context.Context) (*PollForActivityTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1649,7 +1674,7 @@ func (r PollForActivityTaskRequest) Send() (*PollForActivityTaskOutput, error) {
 //
 //    // Example sending a request using the PollForActivityTaskRequest method.
 //    req := client.PollForActivityTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1681,7 +1706,8 @@ type PollForDecisionTaskRequest struct {
 }
 
 // Send marshals and sends the PollForDecisionTask API request.
-func (r PollForDecisionTaskRequest) Send() (*PollForDecisionTaskOutput, error) {
+func (r PollForDecisionTaskRequest) Send(ctx context.Context) (*PollForDecisionTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1738,7 +1764,7 @@ func (r PollForDecisionTaskRequest) Send() (*PollForDecisionTaskOutput, error) {
 //
 //    // Example sending a request using the PollForDecisionTaskRequest method.
 //    req := client.PollForDecisionTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1786,7 +1812,7 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollFo
 func (p *PollForDecisionTaskRequest) Paginate(opts ...aws.Option) PollForDecisionTaskPager {
 	return PollForDecisionTaskPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *PollForDecisionTaskInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1795,6 +1821,7 @@ func (p *PollForDecisionTaskRequest) Paginate(opts ...aws.Option) PollForDecisio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1822,7 +1849,8 @@ type RecordActivityTaskHeartbeatRequest struct {
 }
 
 // Send marshals and sends the RecordActivityTaskHeartbeat API request.
-func (r RecordActivityTaskHeartbeatRequest) Send() (*RecordActivityTaskHeartbeatOutput, error) {
+func (r RecordActivityTaskHeartbeatRequest) Send(ctx context.Context) (*RecordActivityTaskHeartbeatOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1882,7 +1910,7 @@ func (r RecordActivityTaskHeartbeatRequest) Send() (*RecordActivityTaskHeartbeat
 //
 //    // Example sending a request using the RecordActivityTaskHeartbeatRequest method.
 //    req := client.RecordActivityTaskHeartbeatRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1914,7 +1942,8 @@ type RegisterActivityTypeRequest struct {
 }
 
 // Send marshals and sends the RegisterActivityType API request.
-func (r RegisterActivityTypeRequest) Send() (*RegisterActivityTypeOutput, error) {
+func (r RegisterActivityTypeRequest) Send(ctx context.Context) (*RegisterActivityTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1961,7 +1990,7 @@ func (r RegisterActivityTypeRequest) Send() (*RegisterActivityTypeOutput, error)
 //
 //    // Example sending a request using the RegisterActivityTypeRequest method.
 //    req := client.RegisterActivityTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1995,7 +2024,8 @@ type RegisterDomainRequest struct {
 }
 
 // Send marshals and sends the RegisterDomain API request.
-func (r RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
+func (r RegisterDomainRequest) Send(ctx context.Context) (*RegisterDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2031,7 +2061,7 @@ func (r RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
 //
 //    // Example sending a request using the RegisterDomainRequest method.
 //    req := client.RegisterDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2065,7 +2095,8 @@ type RegisterWorkflowTypeRequest struct {
 }
 
 // Send marshals and sends the RegisterWorkflowType API request.
-func (r RegisterWorkflowTypeRequest) Send() (*RegisterWorkflowTypeOutput, error) {
+func (r RegisterWorkflowTypeRequest) Send(ctx context.Context) (*RegisterWorkflowTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2115,7 +2146,7 @@ func (r RegisterWorkflowTypeRequest) Send() (*RegisterWorkflowTypeOutput, error)
 //
 //    // Example sending a request using the RegisterWorkflowTypeRequest method.
 //    req := client.RegisterWorkflowTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2149,7 +2180,8 @@ type RequestCancelWorkflowExecutionRequest struct {
 }
 
 // Send marshals and sends the RequestCancelWorkflowExecution API request.
-func (r RequestCancelWorkflowExecutionRequest) Send() (*RequestCancelWorkflowExecutionOutput, error) {
+func (r RequestCancelWorkflowExecutionRequest) Send(ctx context.Context) (*RequestCancelWorkflowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2195,7 +2227,7 @@ func (r RequestCancelWorkflowExecutionRequest) Send() (*RequestCancelWorkflowExe
 //
 //    // Example sending a request using the RequestCancelWorkflowExecutionRequest method.
 //    req := client.RequestCancelWorkflowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2229,7 +2261,8 @@ type RespondActivityTaskCanceledRequest struct {
 }
 
 // Send marshals and sends the RespondActivityTaskCanceled API request.
-func (r RespondActivityTaskCanceledRequest) Send() (*RespondActivityTaskCanceledOutput, error) {
+func (r RespondActivityTaskCanceledRequest) Send(ctx context.Context) (*RespondActivityTaskCanceledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2278,7 +2311,7 @@ func (r RespondActivityTaskCanceledRequest) Send() (*RespondActivityTaskCanceled
 //
 //    // Example sending a request using the RespondActivityTaskCanceledRequest method.
 //    req := client.RespondActivityTaskCanceledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2312,7 +2345,8 @@ type RespondActivityTaskCompletedRequest struct {
 }
 
 // Send marshals and sends the RespondActivityTaskCompleted API request.
-func (r RespondActivityTaskCompletedRequest) Send() (*RespondActivityTaskCompletedOutput, error) {
+func (r RespondActivityTaskCompletedRequest) Send(ctx context.Context) (*RespondActivityTaskCompletedOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2360,7 +2394,7 @@ func (r RespondActivityTaskCompletedRequest) Send() (*RespondActivityTaskComplet
 //
 //    // Example sending a request using the RespondActivityTaskCompletedRequest method.
 //    req := client.RespondActivityTaskCompletedRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2394,7 +2428,8 @@ type RespondActivityTaskFailedRequest struct {
 }
 
 // Send marshals and sends the RespondActivityTaskFailed API request.
-func (r RespondActivityTaskFailedRequest) Send() (*RespondActivityTaskFailedOutput, error) {
+func (r RespondActivityTaskFailedRequest) Send(ctx context.Context) (*RespondActivityTaskFailedOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2437,7 +2472,7 @@ func (r RespondActivityTaskFailedRequest) Send() (*RespondActivityTaskFailedOutp
 //
 //    // Example sending a request using the RespondActivityTaskFailedRequest method.
 //    req := client.RespondActivityTaskFailedRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2471,7 +2506,8 @@ type RespondDecisionTaskCompletedRequest struct {
 }
 
 // Send marshals and sends the RespondDecisionTaskCompleted API request.
-func (r RespondDecisionTaskCompletedRequest) Send() (*RespondDecisionTaskCompletedOutput, error) {
+func (r RespondDecisionTaskCompletedRequest) Send(ctx context.Context) (*RespondDecisionTaskCompletedOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2503,7 +2539,7 @@ func (r RespondDecisionTaskCompletedRequest) Send() (*RespondDecisionTaskComplet
 //
 //    // Example sending a request using the RespondDecisionTaskCompletedRequest method.
 //    req := client.RespondDecisionTaskCompletedRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2537,7 +2573,8 @@ type SignalWorkflowExecutionRequest struct {
 }
 
 // Send marshals and sends the SignalWorkflowExecution API request.
-func (r SignalWorkflowExecutionRequest) Send() (*SignalWorkflowExecutionOutput, error) {
+func (r SignalWorkflowExecutionRequest) Send(ctx context.Context) (*SignalWorkflowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2581,7 +2618,7 @@ func (r SignalWorkflowExecutionRequest) Send() (*SignalWorkflowExecutionOutput, 
 //
 //    // Example sending a request using the SignalWorkflowExecutionRequest method.
 //    req := client.SignalWorkflowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2615,7 +2652,8 @@ type StartWorkflowExecutionRequest struct {
 }
 
 // Send marshals and sends the StartWorkflowExecution API request.
-func (r StartWorkflowExecutionRequest) Send() (*StartWorkflowExecutionOutput, error) {
+func (r StartWorkflowExecutionRequest) Send(ctx context.Context) (*StartWorkflowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2670,7 +2708,7 @@ func (r StartWorkflowExecutionRequest) Send() (*StartWorkflowExecutionOutput, er
 //
 //    // Example sending a request using the StartWorkflowExecutionRequest method.
 //    req := client.StartWorkflowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2702,7 +2740,8 @@ type TerminateWorkflowExecutionRequest struct {
 }
 
 // Send marshals and sends the TerminateWorkflowExecution API request.
-func (r TerminateWorkflowExecutionRequest) Send() (*TerminateWorkflowExecutionOutput, error) {
+func (r TerminateWorkflowExecutionRequest) Send(ctx context.Context) (*TerminateWorkflowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2751,7 +2790,7 @@ func (r TerminateWorkflowExecutionRequest) Send() (*TerminateWorkflowExecutionOu
 //
 //    // Example sending a request using the TerminateWorkflowExecutionRequest method.
 //    req := client.TerminateWorkflowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

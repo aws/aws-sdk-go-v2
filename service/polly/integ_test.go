@@ -27,9 +27,8 @@ func TestInteg_00_DescribeVoices(t *testing.T) {
 	params := &polly.DescribeVoicesInput{}
 
 	req := svc.DescribeVoicesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}

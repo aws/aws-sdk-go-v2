@@ -2,6 +2,7 @@ package s3manager
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"io/ioutil"
 	"net/http"
@@ -296,7 +297,7 @@ func TestBatchDelete(t *testing.T) {
 			BatchSize: c.size,
 		}
 
-		if err := batcher.Delete(aws.BackgroundContext(), &DeleteObjectsIterator{Objects: c.objects}); err != nil {
+		if err := batcher.Delete(context.Background(), &DeleteObjectsIterator{Objects: c.objects}); err != nil {
 			t.Errorf("expected no error, but received %v", err)
 		}
 
@@ -383,7 +384,7 @@ func TestBatchDeleteList(t *testing.T) {
 		Paginator: req.Paginate(),
 	}
 
-	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {
+	if err := batcher.Delete(context.Background(), iter); err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
 
@@ -438,7 +439,7 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 		Paginator: req.Paginate(),
 	}
 
-	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {
+	if err := batcher.Delete(context.Background(), iter); err != nil {
 		t.Error(err)
 	}
 	if count != 1 {
@@ -521,7 +522,7 @@ func TestBatchDownload(t *testing.T) {
 	}
 
 	iter := &DownloadObjectsIterator{Objects: objects}
-	if err := svc.DownloadWithIterator(aws.BackgroundContext(), iter); err != nil {
+	if err := svc.DownloadWithIterator(context.Background(), iter); err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
 
@@ -640,7 +641,7 @@ func TestBatchUpload(t *testing.T) {
 	}
 
 	iter := &UploadObjectsIterator{Objects: objects}
-	if err := svc.UploadWithIterator(aws.BackgroundContext(), iter); err != nil {
+	if err := svc.UploadWithIterator(context.Background(), iter); err != nil {
 		panic(err)
 	}
 
@@ -777,7 +778,7 @@ func TestBatchError(t *testing.T) {
 	}
 
 	iter := &UploadObjectsIterator{Objects: objects}
-	if err := uploader.UploadWithIterator(aws.BackgroundContext(), iter); err != nil {
+	if err := uploader.UploadWithIterator(context.Background(), iter); err != nil {
 		if bErr, ok := err.(*BatchError); !ok {
 			t.Error("Expected BatchError, but received other")
 		} else {
@@ -952,15 +953,15 @@ func TestAfter(t *testing.T) {
 	downloadIter := &testAfterDownloadIter{}
 	uploadIter := &testAfterUploadIter{}
 
-	if err := uploader.UploadWithIterator(aws.BackgroundContext(), uploadIter); err != nil {
+	if err := uploader.UploadWithIterator(context.Background(), uploadIter); err != nil {
 		t.Error(err)
 	}
 
-	if err := downloader.DownloadWithIterator(aws.BackgroundContext(), downloadIter); err != nil {
+	if err := downloader.DownloadWithIterator(context.Background(), downloadIter); err != nil {
 		t.Error(err)
 	}
 
-	if err := deleter.Delete(aws.BackgroundContext(), deleteIter); err != nil {
+	if err := deleter.Delete(context.Background(), deleteIter); err != nil {
 		t.Error(err)
 	}
 
@@ -1046,7 +1047,7 @@ func TestBatchDeleteError(t *testing.T) {
 			BatchSize: c.size,
 		}
 
-		err := batcher.Delete(aws.BackgroundContext(), &DeleteObjectsIterator{Objects: c.objects})
+		err := batcher.Delete(context.Background(), &DeleteObjectsIterator{Objects: c.objects})
 		if err == nil {
 			t.Errorf("expected error, but received none")
 		}

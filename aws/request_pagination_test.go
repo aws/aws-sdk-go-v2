@@ -1,6 +1,8 @@
 package aws_test
 
 import (
+	"context"
+	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -72,7 +74,7 @@ func TestPagination(t *testing.T) {
 		inValues := []string{}
 		reqNum := 0
 		p := aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				h := defaults.Handlers()
 
 				var inCpy *mockInput
@@ -99,14 +101,14 @@ func TestPagination(t *testing.T) {
 						inValues = append(inValues, *in.Foo)
 					}
 				})
-				req.SetContext(aws.BackgroundContext())
+				req.SetContext(ctx)
 
 				return req, nil
 			},
 		}
 
 		results := []*string{}
-		for p.Next() {
+		for p.Next(context.Background()) {
 			page := p.CurrentPage()
 			output := page.(*mockOutput)
 			results = append(results, output.Bar)
@@ -195,7 +197,7 @@ func TestPaginationTruncation(t *testing.T) {
 	}
 
 	p := aws.Pager{
-		NewRequest: func() (*aws.Request, error) {
+		NewRequest: func(ctx context.Context) (*aws.Request, error) {
 			h := defaults.Handlers()
 
 			tmp := input
@@ -213,14 +215,14 @@ func TestPaginationTruncation(t *testing.T) {
 				r.Data = output
 				reqNum++
 			})
-			req.SetContext(aws.BackgroundContext())
+			req.SetContext(ctx)
 
 			return req, nil
 		},
 	}
 
 	results := []string{}
-	for p.Next() {
+	for p.Next(context.Background()) {
 		page := p.CurrentPage()
 		output := page.(*mockOutput)
 		results = append(results, *output.Bar)
@@ -280,7 +282,7 @@ func BenchmarkPagination(b *testing.B) {
 
 	reqNum := 0
 	p := aws.Pager{
-		NewRequest: func() (*aws.Request, error) {
+		NewRequest: func(ctx context.Context) (*aws.Request, error) {
 			h := defaults.Handlers()
 
 			var inCpy *mockInput
@@ -299,13 +301,104 @@ func BenchmarkPagination(b *testing.B) {
 				r.Data = resps[reqNum]
 				reqNum++
 			})
-			req.SetContext(aws.BackgroundContext())
+			req.SetContext(ctx)
 
 			return req, nil
 		},
 	}
 
-	for p.Next() {
+	for p.Next(context.Background()) {
 		p.CurrentPage()
+	}
+}
+
+func TestPaginationWithContextCancel(t *testing.T) {
+	type mockInput struct {
+		Foo *string
+	}
+
+	type mockOutput struct {
+		Bar       *string
+		NextToken *string
+	}
+
+	cases := []struct {
+		input *mockInput
+		resps []*mockOutput
+	}{
+		{
+			input: &mockInput{
+				Foo: aws.String("foo"),
+			},
+			resps: []*mockOutput{
+				{aws.String("1"), aws.String("token")},
+				{aws.String("2"), aws.String("token")},
+				{aws.String("3"), aws.String("")},
+				{aws.String("4"), aws.String("token")},
+			},
+		},
+	}
+
+	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
+	op := aws.Operation{
+		Name: "Operation",
+		Paginator: &aws.Paginator{
+			InputTokens:  []string{"NextToken"},
+			OutputTokens: []string{"NextToken"},
+		},
+	}
+
+	for _, c := range cases {
+		input := c.input
+		inValues := []string{}
+		p := aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				h := defaults.Handlers()
+
+				var inCpy *mockInput
+				var tmp mockInput
+				if input != nil {
+					tmp = *input
+					inCpy = &tmp
+				}
+				var output mockOutput
+				req := aws.New(unit.Config(), aws.Metadata{}, h, retryer, &op, inCpy, &output)
+				req.Handlers.Build.PushBack(func(r *aws.Request) {
+					in := r.Params.(*mockInput)
+					if in == nil {
+						inValues = append(inValues, "")
+					} else if in.Foo != nil {
+						inValues = append(inValues, *in.Foo)
+					}
+				})
+				req.SetContext(ctx)
+
+				return req, nil
+			},
+		}
+
+		ctx, cancelFn := context.WithCancel(context.Background())
+		cancelFn()
+
+		results := []*string{}
+		for p.Next(ctx) {
+			page := p.CurrentPage()
+			output := page.(*mockOutput)
+			results = append(results, output.Bar)
+		}
+
+		err := p.Err()
+		if err == nil {
+			t.Fatalf("expect error, got none")
+		}
+
+		if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
+			t.Errorf("expect %v, to be in %v", e, a)
+		}
+
+		if a := len(results); a != 0 {
+			t.Errorf("expect ao results, got %v", a)
+		}
+
 	}
 }

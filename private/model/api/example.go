@@ -66,7 +66,7 @@ func Example{{ .API.StructName }}_{{ .MethodName }}() {
 	svc := {{ .API.PackageName }}.New(cfg)
 	input := {{ generateExampleInput . }}
 	req := svc.{{ .OperationName }}Request(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

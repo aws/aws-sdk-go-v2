@@ -9,6 +9,8 @@
 package emriface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
 )
@@ -117,14 +119,11 @@ type EMRAPI interface {
 
 	TerminateJobFlowsRequest(*emr.TerminateJobFlowsInput) emr.TerminateJobFlowsRequest
 
-	WaitUntilClusterRunning(*emr.DescribeClusterInput) error
-	WaitUntilClusterRunningWithContext(aws.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
+	WaitUntilClusterRunning(context.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterTerminated(*emr.DescribeClusterInput) error
-	WaitUntilClusterTerminatedWithContext(aws.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
+	WaitUntilClusterTerminated(context.Context, *emr.DescribeClusterInput, ...aws.WaiterOption) error
 
-	WaitUntilStepComplete(*emr.DescribeStepInput) error
-	WaitUntilStepCompleteWithContext(aws.Context, *emr.DescribeStepInput, ...aws.WaiterOption) error
+	WaitUntilStepComplete(context.Context, *emr.DescribeStepInput, ...aws.WaiterOption) error
 }
 
 var _ EMRAPI = (*emr.EMR)(nil)

@@ -2,6 +2,7 @@ package s3_test
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -155,7 +156,7 @@ func TestUnmarshalError(t *testing.T) {
 		req := s.PutBucketAclRequest(&s3.PutBucketAclInput{
 			Bucket: aws.String("bucket"), ACL: s3.BucketCannedACLPublicRead,
 		})
-		_, err := req.Send()
+		_, err := req.Send(context.Background())
 
 		if err == nil {
 			t.Fatalf("%d, expected error, got nil", i)
@@ -205,7 +206,7 @@ func Test200NoErrorUnmarshalError(t *testing.T) {
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -236,7 +237,7 @@ func Test200WithErrorUnmarshalError(t *testing.T) {
 			{ETag: aws.String("etag"), PartNumber: aws.Int64(1)},
 		}},
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 
 	if err == nil {
 		t.Fatalf("expected error, got nil")

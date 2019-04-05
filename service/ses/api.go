@@ -3,6 +3,7 @@
 package ses
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CloneReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the CloneReceiptRuleSet API request.
-func (r CloneReceiptRuleSetRequest) Send() (*CloneReceiptRuleSetOutput, error) {
+func (r CloneReceiptRuleSetRequest) Send(ctx context.Context) (*CloneReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -45,7 +47,7 @@ func (r CloneReceiptRuleSetRequest) Send() (*CloneReceiptRuleSetOutput, error) {
 //
 //    // Example sending a request using the CloneReceiptRuleSetRequest method.
 //    req := client.CloneReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -79,7 +81,8 @@ type CreateConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
-func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, error) {
+func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -100,7 +103,7 @@ func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, er
 //
 //    // Example sending a request using the CreateConfigurationSetRequest method.
 //    req := client.CreateConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -134,7 +137,8 @@ type CreateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
-func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurationSetEventDestinationOutput, error) {
+func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*CreateConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +164,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurat
 //
 //    // Example sending a request using the CreateConfigurationSetEventDestinationRequest method.
 //    req := client.CreateConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -194,7 +198,8 @@ type CreateConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSetTrackingOptions API request.
-func (r CreateConfigurationSetTrackingOptionsRequest) Send() (*CreateConfigurationSetTrackingOptionsOutput, error) {
+func (r CreateConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) (*CreateConfigurationSetTrackingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -216,7 +221,7 @@ func (r CreateConfigurationSetTrackingOptionsRequest) Send() (*CreateConfigurati
 //
 //    // Example sending a request using the CreateConfigurationSetTrackingOptionsRequest method.
 //    req := client.CreateConfigurationSetTrackingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -250,7 +255,8 @@ type CreateCustomVerificationEmailTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateCustomVerificationEmailTemplate API request.
-func (r CreateCustomVerificationEmailTemplateRequest) Send() (*CreateCustomVerificationEmailTemplateOutput, error) {
+func (r CreateCustomVerificationEmailTemplateRequest) Send(ctx context.Context) (*CreateCustomVerificationEmailTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -272,7 +278,7 @@ func (r CreateCustomVerificationEmailTemplateRequest) Send() (*CreateCustomVerif
 //
 //    // Example sending a request using the CreateCustomVerificationEmailTemplateRequest method.
 //    req := client.CreateCustomVerificationEmailTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -308,7 +314,8 @@ type CreateReceiptFilterRequest struct {
 }
 
 // Send marshals and sends the CreateReceiptFilter API request.
-func (r CreateReceiptFilterRequest) Send() (*CreateReceiptFilterOutput, error) {
+func (r CreateReceiptFilterRequest) Send(ctx context.Context) (*CreateReceiptFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -329,7 +336,7 @@ func (r CreateReceiptFilterRequest) Send() (*CreateReceiptFilterOutput, error) {
 //
 //    // Example sending a request using the CreateReceiptFilterRequest method.
 //    req := client.CreateReceiptFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -363,7 +370,8 @@ type CreateReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the CreateReceiptRule API request.
-func (r CreateReceiptRuleRequest) Send() (*CreateReceiptRuleOutput, error) {
+func (r CreateReceiptRuleRequest) Send(ctx context.Context) (*CreateReceiptRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,7 +392,7 @@ func (r CreateReceiptRuleRequest) Send() (*CreateReceiptRuleOutput, error) {
 //
 //    // Example sending a request using the CreateReceiptRuleRequest method.
 //    req := client.CreateReceiptRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -418,7 +426,8 @@ type CreateReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the CreateReceiptRuleSet API request.
-func (r CreateReceiptRuleSetRequest) Send() (*CreateReceiptRuleSetOutput, error) {
+func (r CreateReceiptRuleSetRequest) Send(ctx context.Context) (*CreateReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -439,7 +448,7 @@ func (r CreateReceiptRuleSetRequest) Send() (*CreateReceiptRuleSetOutput, error)
 //
 //    // Example sending a request using the CreateReceiptRuleSetRequest method.
 //    req := client.CreateReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -473,7 +482,8 @@ type CreateTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateTemplate API request.
-func (r CreateTemplateRequest) Send() (*CreateTemplateOutput, error) {
+func (r CreateTemplateRequest) Send(ctx context.Context) (*CreateTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,7 +503,7 @@ func (r CreateTemplateRequest) Send() (*CreateTemplateOutput, error) {
 //
 //    // Example sending a request using the CreateTemplateRequest method.
 //    req := client.CreateTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -527,7 +537,8 @@ type DeleteConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
-func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, error) {
+func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +558,7 @@ func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, er
 //
 //    // Example sending a request using the DeleteConfigurationSetRequest method.
 //    req := client.DeleteConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +592,8 @@ type DeleteConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
-func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurationSetEventDestinationOutput, error) {
+func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*DeleteConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,7 +614,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurat
 //
 //    // Example sending a request using the DeleteConfigurationSetEventDestinationRequest method.
 //    req := client.DeleteConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -636,7 +648,8 @@ type DeleteConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSetTrackingOptions API request.
-func (r DeleteConfigurationSetTrackingOptionsRequest) Send() (*DeleteConfigurationSetTrackingOptionsOutput, error) {
+func (r DeleteConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) (*DeleteConfigurationSetTrackingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -662,7 +675,7 @@ func (r DeleteConfigurationSetTrackingOptionsRequest) Send() (*DeleteConfigurati
 //
 //    // Example sending a request using the DeleteConfigurationSetTrackingOptionsRequest method.
 //    req := client.DeleteConfigurationSetTrackingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -696,7 +709,8 @@ type DeleteCustomVerificationEmailTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomVerificationEmailTemplate API request.
-func (r DeleteCustomVerificationEmailTemplateRequest) Send() (*DeleteCustomVerificationEmailTemplateOutput, error) {
+func (r DeleteCustomVerificationEmailTemplateRequest) Send(ctx context.Context) (*DeleteCustomVerificationEmailTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -718,7 +732,7 @@ func (r DeleteCustomVerificationEmailTemplateRequest) Send() (*DeleteCustomVerif
 //
 //    // Example sending a request using the DeleteCustomVerificationEmailTemplateRequest method.
 //    req := client.DeleteCustomVerificationEmailTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -754,7 +768,8 @@ type DeleteIdentityRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentity API request.
-func (r DeleteIdentityRequest) Send() (*DeleteIdentityOutput, error) {
+func (r DeleteIdentityRequest) Send(ctx context.Context) (*DeleteIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -773,7 +788,7 @@ func (r DeleteIdentityRequest) Send() (*DeleteIdentityOutput, error) {
 //
 //    // Example sending a request using the DeleteIdentityRequest method.
 //    req := client.DeleteIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -807,7 +822,8 @@ type DeleteIdentityPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentityPolicy API request.
-func (r DeleteIdentityPolicyRequest) Send() (*DeleteIdentityPolicyOutput, error) {
+func (r DeleteIdentityPolicyRequest) Send(ctx context.Context) (*DeleteIdentityPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -834,7 +850,7 @@ func (r DeleteIdentityPolicyRequest) Send() (*DeleteIdentityPolicyOutput, error)
 //
 //    // Example sending a request using the DeleteIdentityPolicyRequest method.
 //    req := client.DeleteIdentityPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -868,7 +884,8 @@ type DeleteReceiptFilterRequest struct {
 }
 
 // Send marshals and sends the DeleteReceiptFilter API request.
-func (r DeleteReceiptFilterRequest) Send() (*DeleteReceiptFilterOutput, error) {
+func (r DeleteReceiptFilterRequest) Send(ctx context.Context) (*DeleteReceiptFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -889,7 +906,7 @@ func (r DeleteReceiptFilterRequest) Send() (*DeleteReceiptFilterOutput, error) {
 //
 //    // Example sending a request using the DeleteReceiptFilterRequest method.
 //    req := client.DeleteReceiptFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -923,7 +940,8 @@ type DeleteReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteReceiptRule API request.
-func (r DeleteReceiptRuleRequest) Send() (*DeleteReceiptRuleOutput, error) {
+func (r DeleteReceiptRuleRequest) Send(ctx context.Context) (*DeleteReceiptRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,7 +962,7 @@ func (r DeleteReceiptRuleRequest) Send() (*DeleteReceiptRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteReceiptRuleRequest method.
 //    req := client.DeleteReceiptRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -978,7 +996,8 @@ type DeleteReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the DeleteReceiptRuleSet API request.
-func (r DeleteReceiptRuleSetRequest) Send() (*DeleteReceiptRuleSetOutput, error) {
+func (r DeleteReceiptRuleSetRequest) Send(ctx context.Context) (*DeleteReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1001,7 +1020,7 @@ func (r DeleteReceiptRuleSetRequest) Send() (*DeleteReceiptRuleSetOutput, error)
 //
 //    // Example sending a request using the DeleteReceiptRuleSetRequest method.
 //    req := client.DeleteReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1035,7 +1054,8 @@ type DeleteTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteTemplate API request.
-func (r DeleteTemplateRequest) Send() (*DeleteTemplateOutput, error) {
+func (r DeleteTemplateRequest) Send(ctx context.Context) (*DeleteTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1053,7 +1073,7 @@ func (r DeleteTemplateRequest) Send() (*DeleteTemplateOutput, error) {
 //
 //    // Example sending a request using the DeleteTemplateRequest method.
 //    req := client.DeleteTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1087,7 +1107,8 @@ type DeleteVerifiedEmailAddressRequest struct {
 }
 
 // Send marshals and sends the DeleteVerifiedEmailAddress API request.
-func (r DeleteVerifiedEmailAddressRequest) Send() (*DeleteVerifiedEmailAddressOutput, error) {
+func (r DeleteVerifiedEmailAddressRequest) Send(ctx context.Context) (*DeleteVerifiedEmailAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1104,7 +1125,7 @@ func (r DeleteVerifiedEmailAddressRequest) Send() (*DeleteVerifiedEmailAddressOu
 //
 //    // Example sending a request using the DeleteVerifiedEmailAddressRequest method.
 //    req := client.DeleteVerifiedEmailAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1140,7 +1161,8 @@ type DescribeActiveReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the DescribeActiveReceiptRuleSet API request.
-func (r DescribeActiveReceiptRuleSetRequest) Send() (*DescribeActiveReceiptRuleSetOutput, error) {
+func (r DescribeActiveReceiptRuleSetRequest) Send(ctx context.Context) (*DescribeActiveReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1162,7 +1184,7 @@ func (r DescribeActiveReceiptRuleSetRequest) Send() (*DescribeActiveReceiptRuleS
 //
 //    // Example sending a request using the DescribeActiveReceiptRuleSetRequest method.
 //    req := client.DescribeActiveReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1196,7 +1218,8 @@ type DescribeConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationSet API request.
-func (r DescribeConfigurationSetRequest) Send() (*DescribeConfigurationSetOutput, error) {
+func (r DescribeConfigurationSetRequest) Send(ctx context.Context) (*DescribeConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1215,7 +1238,7 @@ func (r DescribeConfigurationSetRequest) Send() (*DescribeConfigurationSetOutput
 //
 //    // Example sending a request using the DescribeConfigurationSetRequest method.
 //    req := client.DescribeConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1249,7 +1272,8 @@ type DescribeReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the DescribeReceiptRule API request.
-func (r DescribeReceiptRuleRequest) Send() (*DescribeReceiptRuleOutput, error) {
+func (r DescribeReceiptRuleRequest) Send(ctx context.Context) (*DescribeReceiptRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1270,7 +1294,7 @@ func (r DescribeReceiptRuleRequest) Send() (*DescribeReceiptRuleOutput, error) {
 //
 //    // Example sending a request using the DescribeReceiptRuleRequest method.
 //    req := client.DescribeReceiptRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1304,7 +1328,8 @@ type DescribeReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the DescribeReceiptRuleSet API request.
-func (r DescribeReceiptRuleSetRequest) Send() (*DescribeReceiptRuleSetOutput, error) {
+func (r DescribeReceiptRuleSetRequest) Send(ctx context.Context) (*DescribeReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1325,7 +1350,7 @@ func (r DescribeReceiptRuleSetRequest) Send() (*DescribeReceiptRuleSetOutput, er
 //
 //    // Example sending a request using the DescribeReceiptRuleSetRequest method.
 //    req := client.DescribeReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1359,7 +1384,8 @@ type GetAccountSendingEnabledRequest struct {
 }
 
 // Send marshals and sends the GetAccountSendingEnabled API request.
-func (r GetAccountSendingEnabledRequest) Send() (*GetAccountSendingEnabledOutput, error) {
+func (r GetAccountSendingEnabledRequest) Send(ctx context.Context) (*GetAccountSendingEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1378,7 +1404,7 @@ func (r GetAccountSendingEnabledRequest) Send() (*GetAccountSendingEnabledOutput
 //
 //    // Example sending a request using the GetAccountSendingEnabledRequest method.
 //    req := client.GetAccountSendingEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1412,7 +1438,8 @@ type GetCustomVerificationEmailTemplateRequest struct {
 }
 
 // Send marshals and sends the GetCustomVerificationEmailTemplate API request.
-func (r GetCustomVerificationEmailTemplateRequest) Send() (*GetCustomVerificationEmailTemplateOutput, error) {
+func (r GetCustomVerificationEmailTemplateRequest) Send(ctx context.Context) (*GetCustomVerificationEmailTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1435,7 +1462,7 @@ func (r GetCustomVerificationEmailTemplateRequest) Send() (*GetCustomVerificatio
 //
 //    // Example sending a request using the GetCustomVerificationEmailTemplateRequest method.
 //    req := client.GetCustomVerificationEmailTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1469,7 +1496,8 @@ type GetIdentityDkimAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityDkimAttributes API request.
-func (r GetIdentityDkimAttributesRequest) Send() (*GetIdentityDkimAttributesOutput, error) {
+func (r GetIdentityDkimAttributesRequest) Send(ctx context.Context) (*GetIdentityDkimAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1506,7 +1534,7 @@ func (r GetIdentityDkimAttributesRequest) Send() (*GetIdentityDkimAttributesOutp
 //
 //    // Example sending a request using the GetIdentityDkimAttributesRequest method.
 //    req := client.GetIdentityDkimAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1540,7 +1568,8 @@ type GetIdentityMailFromDomainAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityMailFromDomainAttributes API request.
-func (r GetIdentityMailFromDomainAttributesRequest) Send() (*GetIdentityMailFromDomainAttributesOutput, error) {
+func (r GetIdentityMailFromDomainAttributesRequest) Send(ctx context.Context) (*GetIdentityMailFromDomainAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1560,7 +1589,7 @@ func (r GetIdentityMailFromDomainAttributesRequest) Send() (*GetIdentityMailFrom
 //
 //    // Example sending a request using the GetIdentityMailFromDomainAttributesRequest method.
 //    req := client.GetIdentityMailFromDomainAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1594,7 +1623,8 @@ type GetIdentityNotificationAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityNotificationAttributes API request.
-func (r GetIdentityNotificationAttributesRequest) Send() (*GetIdentityNotificationAttributesOutput, error) {
+func (r GetIdentityNotificationAttributesRequest) Send(ctx context.Context) (*GetIdentityNotificationAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1617,7 +1647,7 @@ func (r GetIdentityNotificationAttributesRequest) Send() (*GetIdentityNotificati
 //
 //    // Example sending a request using the GetIdentityNotificationAttributesRequest method.
 //    req := client.GetIdentityNotificationAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1651,7 +1681,8 @@ type GetIdentityPoliciesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityPolicies API request.
-func (r GetIdentityPoliciesRequest) Send() (*GetIdentityPoliciesOutput, error) {
+func (r GetIdentityPoliciesRequest) Send(ctx context.Context) (*GetIdentityPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1679,7 +1710,7 @@ func (r GetIdentityPoliciesRequest) Send() (*GetIdentityPoliciesOutput, error) {
 //
 //    // Example sending a request using the GetIdentityPoliciesRequest method.
 //    req := client.GetIdentityPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1713,7 +1744,8 @@ type GetIdentityVerificationAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityVerificationAttributes API request.
-func (r GetIdentityVerificationAttributesRequest) Send() (*GetIdentityVerificationAttributesOutput, error) {
+func (r GetIdentityVerificationAttributesRequest) Send(ctx context.Context) (*GetIdentityVerificationAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1750,7 +1782,7 @@ func (r GetIdentityVerificationAttributesRequest) Send() (*GetIdentityVerificati
 //
 //    // Example sending a request using the GetIdentityVerificationAttributesRequest method.
 //    req := client.GetIdentityVerificationAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1784,7 +1816,8 @@ type GetSendQuotaRequest struct {
 }
 
 // Send marshals and sends the GetSendQuota API request.
-func (r GetSendQuotaRequest) Send() (*GetSendQuotaOutput, error) {
+func (r GetSendQuotaRequest) Send(ctx context.Context) (*GetSendQuotaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1802,7 +1835,7 @@ func (r GetSendQuotaRequest) Send() (*GetSendQuotaOutput, error) {
 //
 //    // Example sending a request using the GetSendQuotaRequest method.
 //    req := client.GetSendQuotaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1836,7 +1869,8 @@ type GetSendStatisticsRequest struct {
 }
 
 // Send marshals and sends the GetSendStatistics API request.
-func (r GetSendStatisticsRequest) Send() (*GetSendStatisticsOutput, error) {
+func (r GetSendStatisticsRequest) Send(ctx context.Context) (*GetSendStatisticsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1856,7 +1890,7 @@ func (r GetSendStatisticsRequest) Send() (*GetSendStatisticsOutput, error) {
 //
 //    // Example sending a request using the GetSendStatisticsRequest method.
 //    req := client.GetSendStatisticsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1890,7 +1924,8 @@ type GetTemplateRequest struct {
 }
 
 // Send marshals and sends the GetTemplate API request.
-func (r GetTemplateRequest) Send() (*GetTemplateOutput, error) {
+func (r GetTemplateRequest) Send(ctx context.Context) (*GetTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1909,7 +1944,7 @@ func (r GetTemplateRequest) Send() (*GetTemplateOutput, error) {
 //
 //    // Example sending a request using the GetTemplateRequest method.
 //    req := client.GetTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1943,7 +1978,8 @@ type ListConfigurationSetsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurationSets API request.
-func (r ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, error) {
+func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurationSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1969,7 +2005,7 @@ func (r ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, erro
 //
 //    // Example sending a request using the ListConfigurationSetsRequest method.
 //    req := client.ListConfigurationSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2003,7 +2039,8 @@ type ListCustomVerificationEmailTemplatesRequest struct {
 }
 
 // Send marshals and sends the ListCustomVerificationEmailTemplates API request.
-func (r ListCustomVerificationEmailTemplatesRequest) Send() (*ListCustomVerificationEmailTemplatesOutput, error) {
+func (r ListCustomVerificationEmailTemplatesRequest) Send(ctx context.Context) (*ListCustomVerificationEmailTemplatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2026,7 +2063,7 @@ func (r ListCustomVerificationEmailTemplatesRequest) Send() (*ListCustomVerifica
 //
 //    // Example sending a request using the ListCustomVerificationEmailTemplatesRequest method.
 //    req := client.ListCustomVerificationEmailTemplatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2076,7 +2113,7 @@ func (c *SES) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVerif
 func (p *ListCustomVerificationEmailTemplatesRequest) Paginate(opts ...aws.Option) ListCustomVerificationEmailTemplatesPager {
 	return ListCustomVerificationEmailTemplatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCustomVerificationEmailTemplatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2085,6 +2122,7 @@ func (p *ListCustomVerificationEmailTemplatesRequest) Paginate(opts ...aws.Optio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2112,7 +2150,8 @@ type ListIdentitiesRequest struct {
 }
 
 // Send marshals and sends the ListIdentities API request.
-func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
+func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2132,7 +2171,7 @@ func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
 //
 //    // Example sending a request using the ListIdentitiesRequest method.
 //    req := client.ListIdentitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2182,7 +2221,7 @@ func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRe
 func (p *ListIdentitiesRequest) Paginate(opts ...aws.Option) ListIdentitiesPager {
 	return ListIdentitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListIdentitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2191,6 +2230,7 @@ func (p *ListIdentitiesRequest) Paginate(opts ...aws.Option) ListIdentitiesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2218,7 +2258,8 @@ type ListIdentityPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListIdentityPolicies API request.
-func (r ListIdentityPoliciesRequest) Send() (*ListIdentityPoliciesOutput, error) {
+func (r ListIdentityPoliciesRequest) Send(ctx context.Context) (*ListIdentityPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2245,7 +2286,7 @@ func (r ListIdentityPoliciesRequest) Send() (*ListIdentityPoliciesOutput, error)
 //
 //    // Example sending a request using the ListIdentityPoliciesRequest method.
 //    req := client.ListIdentityPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2279,7 +2320,8 @@ type ListReceiptFiltersRequest struct {
 }
 
 // Send marshals and sends the ListReceiptFilters API request.
-func (r ListReceiptFiltersRequest) Send() (*ListReceiptFiltersOutput, error) {
+func (r ListReceiptFiltersRequest) Send(ctx context.Context) (*ListReceiptFiltersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2301,7 +2343,7 @@ func (r ListReceiptFiltersRequest) Send() (*ListReceiptFiltersOutput, error) {
 //
 //    // Example sending a request using the ListReceiptFiltersRequest method.
 //    req := client.ListReceiptFiltersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2335,7 +2377,8 @@ type ListReceiptRuleSetsRequest struct {
 }
 
 // Send marshals and sends the ListReceiptRuleSets API request.
-func (r ListReceiptRuleSetsRequest) Send() (*ListReceiptRuleSetsOutput, error) {
+func (r ListReceiptRuleSetsRequest) Send(ctx context.Context) (*ListReceiptRuleSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2359,7 +2402,7 @@ func (r ListReceiptRuleSetsRequest) Send() (*ListReceiptRuleSetsOutput, error) {
 //
 //    // Example sending a request using the ListReceiptRuleSetsRequest method.
 //    req := client.ListReceiptRuleSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2393,7 +2436,8 @@ type ListTemplatesRequest struct {
 }
 
 // Send marshals and sends the ListTemplates API request.
-func (r ListTemplatesRequest) Send() (*ListTemplatesOutput, error) {
+func (r ListTemplatesRequest) Send(ctx context.Context) (*ListTemplatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2412,7 +2456,7 @@ func (r ListTemplatesRequest) Send() (*ListTemplatesOutput, error) {
 //
 //    // Example sending a request using the ListTemplatesRequest method.
 //    req := client.ListTemplatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2446,7 +2490,8 @@ type ListVerifiedEmailAddressesRequest struct {
 }
 
 // Send marshals and sends the ListVerifiedEmailAddresses API request.
-func (r ListVerifiedEmailAddressesRequest) Send() (*ListVerifiedEmailAddressesOutput, error) {
+func (r ListVerifiedEmailAddressesRequest) Send(ctx context.Context) (*ListVerifiedEmailAddressesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2463,7 +2508,7 @@ func (r ListVerifiedEmailAddressesRequest) Send() (*ListVerifiedEmailAddressesOu
 //
 //    // Example sending a request using the ListVerifiedEmailAddressesRequest method.
 //    req := client.ListVerifiedEmailAddressesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2497,7 +2542,8 @@ type PutIdentityPolicyRequest struct {
 }
 
 // Send marshals and sends the PutIdentityPolicy API request.
-func (r PutIdentityPolicyRequest) Send() (*PutIdentityPolicyOutput, error) {
+func (r PutIdentityPolicyRequest) Send(ctx context.Context) (*PutIdentityPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2523,7 +2569,7 @@ func (r PutIdentityPolicyRequest) Send() (*PutIdentityPolicyOutput, error) {
 //
 //    // Example sending a request using the PutIdentityPolicyRequest method.
 //    req := client.PutIdentityPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2557,7 +2603,8 @@ type ReorderReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the ReorderReceiptRuleSet API request.
-func (r ReorderReceiptRuleSetRequest) Send() (*ReorderReceiptRuleSetOutput, error) {
+func (r ReorderReceiptRuleSetRequest) Send(ctx context.Context) (*ReorderReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2582,7 +2629,7 @@ func (r ReorderReceiptRuleSetRequest) Send() (*ReorderReceiptRuleSetOutput, erro
 //
 //    // Example sending a request using the ReorderReceiptRuleSetRequest method.
 //    req := client.ReorderReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2616,7 +2663,8 @@ type SendBounceRequest struct {
 }
 
 // Send marshals and sends the SendBounce API request.
-func (r SendBounceRequest) Send() (*SendBounceOutput, error) {
+func (r SendBounceRequest) Send(ctx context.Context) (*SendBounceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2642,7 +2690,7 @@ func (r SendBounceRequest) Send() (*SendBounceOutput, error) {
 //
 //    // Example sending a request using the SendBounceRequest method.
 //    req := client.SendBounceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2676,7 +2724,8 @@ type SendBulkTemplatedEmailRequest struct {
 }
 
 // Send marshals and sends the SendBulkTemplatedEmail API request.
-func (r SendBulkTemplatedEmailRequest) Send() (*SendBulkTemplatedEmailOutput, error) {
+func (r SendBulkTemplatedEmailRequest) Send(ctx context.Context) (*SendBulkTemplatedEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2725,7 +2774,7 @@ func (r SendBulkTemplatedEmailRequest) Send() (*SendBulkTemplatedEmailOutput, er
 //
 //    // Example sending a request using the SendBulkTemplatedEmailRequest method.
 //    req := client.SendBulkTemplatedEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2759,7 +2808,8 @@ type SendCustomVerificationEmailRequest struct {
 }
 
 // Send marshals and sends the SendCustomVerificationEmail API request.
-func (r SendCustomVerificationEmailRequest) Send() (*SendCustomVerificationEmailOutput, error) {
+func (r SendCustomVerificationEmailRequest) Send(ctx context.Context) (*SendCustomVerificationEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2785,7 +2835,7 @@ func (r SendCustomVerificationEmailRequest) Send() (*SendCustomVerificationEmail
 //
 //    // Example sending a request using the SendCustomVerificationEmailRequest method.
 //    req := client.SendCustomVerificationEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2819,7 +2869,8 @@ type SendEmailRequest struct {
 }
 
 // Send marshals and sends the SendEmail API request.
-func (r SendEmailRequest) Send() (*SendEmailOutput, error) {
+func (r SendEmailRequest) Send(ctx context.Context) (*SendEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2868,7 +2919,7 @@ func (r SendEmailRequest) Send() (*SendEmailOutput, error) {
 //
 //    // Example sending a request using the SendEmailRequest method.
 //    req := client.SendEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2902,7 +2953,8 @@ type SendRawEmailRequest struct {
 }
 
 // Send marshals and sends the SendRawEmail API request.
-func (r SendRawEmailRequest) Send() (*SendRawEmailOutput, error) {
+func (r SendRawEmailRequest) Send(ctx context.Context) (*SendRawEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2999,7 +3051,7 @@ func (r SendRawEmailRequest) Send() (*SendRawEmailOutput, error) {
 //
 //    // Example sending a request using the SendRawEmailRequest method.
 //    req := client.SendRawEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3033,7 +3085,8 @@ type SendTemplatedEmailRequest struct {
 }
 
 // Send marshals and sends the SendTemplatedEmail API request.
-func (r SendTemplatedEmailRequest) Send() (*SendTemplatedEmailOutput, error) {
+func (r SendTemplatedEmailRequest) Send(ctx context.Context) (*SendTemplatedEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3089,7 +3142,7 @@ func (r SendTemplatedEmailRequest) Send() (*SendTemplatedEmailOutput, error) {
 //
 //    // Example sending a request using the SendTemplatedEmailRequest method.
 //    req := client.SendTemplatedEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3123,7 +3176,8 @@ type SetActiveReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the SetActiveReceiptRuleSet API request.
-func (r SetActiveReceiptRuleSetRequest) Send() (*SetActiveReceiptRuleSetOutput, error) {
+func (r SetActiveReceiptRuleSetRequest) Send(ctx context.Context) (*SetActiveReceiptRuleSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3147,7 +3201,7 @@ func (r SetActiveReceiptRuleSetRequest) Send() (*SetActiveReceiptRuleSetOutput, 
 //
 //    // Example sending a request using the SetActiveReceiptRuleSetRequest method.
 //    req := client.SetActiveReceiptRuleSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3181,7 +3235,8 @@ type SetIdentityDkimEnabledRequest struct {
 }
 
 // Send marshals and sends the SetIdentityDkimEnabled API request.
-func (r SetIdentityDkimEnabledRequest) Send() (*SetIdentityDkimEnabledOutput, error) {
+func (r SetIdentityDkimEnabledRequest) Send(ctx context.Context) (*SetIdentityDkimEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3214,7 +3269,7 @@ func (r SetIdentityDkimEnabledRequest) Send() (*SetIdentityDkimEnabledOutput, er
 //
 //    // Example sending a request using the SetIdentityDkimEnabledRequest method.
 //    req := client.SetIdentityDkimEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3248,7 +3303,8 @@ type SetIdentityFeedbackForwardingEnabledRequest struct {
 }
 
 // Send marshals and sends the SetIdentityFeedbackForwardingEnabled API request.
-func (r SetIdentityFeedbackForwardingEnabledRequest) Send() (*SetIdentityFeedbackForwardingEnabledOutput, error) {
+func (r SetIdentityFeedbackForwardingEnabledRequest) Send(ctx context.Context) (*SetIdentityFeedbackForwardingEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3275,7 +3331,7 @@ func (r SetIdentityFeedbackForwardingEnabledRequest) Send() (*SetIdentityFeedbac
 //
 //    // Example sending a request using the SetIdentityFeedbackForwardingEnabledRequest method.
 //    req := client.SetIdentityFeedbackForwardingEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3309,7 +3365,8 @@ type SetIdentityHeadersInNotificationsEnabledRequest struct {
 }
 
 // Send marshals and sends the SetIdentityHeadersInNotificationsEnabled API request.
-func (r SetIdentityHeadersInNotificationsEnabledRequest) Send() (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
+func (r SetIdentityHeadersInNotificationsEnabledRequest) Send(ctx context.Context) (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3332,7 +3389,7 @@ func (r SetIdentityHeadersInNotificationsEnabledRequest) Send() (*SetIdentityHea
 //
 //    // Example sending a request using the SetIdentityHeadersInNotificationsEnabledRequest method.
 //    req := client.SetIdentityHeadersInNotificationsEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3366,7 +3423,8 @@ type SetIdentityMailFromDomainRequest struct {
 }
 
 // Send marshals and sends the SetIdentityMailFromDomain API request.
-func (r SetIdentityMailFromDomainRequest) Send() (*SetIdentityMailFromDomainOutput, error) {
+func (r SetIdentityMailFromDomainRequest) Send(ctx context.Context) (*SetIdentityMailFromDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3390,7 +3448,7 @@ func (r SetIdentityMailFromDomainRequest) Send() (*SetIdentityMailFromDomainOutp
 //
 //    // Example sending a request using the SetIdentityMailFromDomainRequest method.
 //    req := client.SetIdentityMailFromDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3424,7 +3482,8 @@ type SetIdentityNotificationTopicRequest struct {
 }
 
 // Send marshals and sends the SetIdentityNotificationTopic API request.
-func (r SetIdentityNotificationTopicRequest) Send() (*SetIdentityNotificationTopicOutput, error) {
+func (r SetIdentityNotificationTopicRequest) Send(ctx context.Context) (*SetIdentityNotificationTopicOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3450,7 +3509,7 @@ func (r SetIdentityNotificationTopicRequest) Send() (*SetIdentityNotificationTop
 //
 //    // Example sending a request using the SetIdentityNotificationTopicRequest method.
 //    req := client.SetIdentityNotificationTopicRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3484,7 +3543,8 @@ type SetReceiptRulePositionRequest struct {
 }
 
 // Send marshals and sends the SetReceiptRulePosition API request.
-func (r SetReceiptRulePositionRequest) Send() (*SetReceiptRulePositionOutput, error) {
+func (r SetReceiptRulePositionRequest) Send(ctx context.Context) (*SetReceiptRulePositionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3505,7 +3565,7 @@ func (r SetReceiptRulePositionRequest) Send() (*SetReceiptRulePositionOutput, er
 //
 //    // Example sending a request using the SetReceiptRulePositionRequest method.
 //    req := client.SetReceiptRulePositionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3539,7 +3599,8 @@ type TestRenderTemplateRequest struct {
 }
 
 // Send marshals and sends the TestRenderTemplate API request.
-func (r TestRenderTemplateRequest) Send() (*TestRenderTemplateOutput, error) {
+func (r TestRenderTemplateRequest) Send(ctx context.Context) (*TestRenderTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3558,7 +3619,7 @@ func (r TestRenderTemplateRequest) Send() (*TestRenderTemplateOutput, error) {
 //
 //    // Example sending a request using the TestRenderTemplateRequest method.
 //    req := client.TestRenderTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3592,7 +3653,8 @@ type UpdateAccountSendingEnabledRequest struct {
 }
 
 // Send marshals and sends the UpdateAccountSendingEnabled API request.
-func (r UpdateAccountSendingEnabledRequest) Send() (*UpdateAccountSendingEnabledOutput, error) {
+func (r UpdateAccountSendingEnabledRequest) Send(ctx context.Context) (*UpdateAccountSendingEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3614,7 +3676,7 @@ func (r UpdateAccountSendingEnabledRequest) Send() (*UpdateAccountSendingEnabled
 //
 //    // Example sending a request using the UpdateAccountSendingEnabledRequest method.
 //    req := client.UpdateAccountSendingEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3650,7 +3712,8 @@ type UpdateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
-func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurationSetEventDestinationOutput, error) {
+func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*UpdateConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3677,7 +3740,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurat
 //
 //    // Example sending a request using the UpdateConfigurationSetEventDestinationRequest method.
 //    req := client.UpdateConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3711,7 +3774,8 @@ type UpdateConfigurationSetReputationMetricsEnabledRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetReputationMetricsEnabled API request.
-func (r UpdateConfigurationSetReputationMetricsEnabledRequest) Send() (*UpdateConfigurationSetReputationMetricsEnabledOutput, error) {
+func (r UpdateConfigurationSetReputationMetricsEnabledRequest) Send(ctx context.Context) (*UpdateConfigurationSetReputationMetricsEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3733,7 +3797,7 @@ func (r UpdateConfigurationSetReputationMetricsEnabledRequest) Send() (*UpdateCo
 //
 //    // Example sending a request using the UpdateConfigurationSetReputationMetricsEnabledRequest method.
 //    req := client.UpdateConfigurationSetReputationMetricsEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3769,7 +3833,8 @@ type UpdateConfigurationSetSendingEnabledRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetSendingEnabled API request.
-func (r UpdateConfigurationSetSendingEnabledRequest) Send() (*UpdateConfigurationSetSendingEnabledOutput, error) {
+func (r UpdateConfigurationSetSendingEnabledRequest) Send(ctx context.Context) (*UpdateConfigurationSetSendingEnabledOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3791,7 +3856,7 @@ func (r UpdateConfigurationSetSendingEnabledRequest) Send() (*UpdateConfiguratio
 //
 //    // Example sending a request using the UpdateConfigurationSetSendingEnabledRequest method.
 //    req := client.UpdateConfigurationSetSendingEnabledRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3827,7 +3892,8 @@ type UpdateConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetTrackingOptions API request.
-func (r UpdateConfigurationSetTrackingOptionsRequest) Send() (*UpdateConfigurationSetTrackingOptionsOutput, error) {
+func (r UpdateConfigurationSetTrackingOptionsRequest) Send(ctx context.Context) (*UpdateConfigurationSetTrackingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3849,7 +3915,7 @@ func (r UpdateConfigurationSetTrackingOptionsRequest) Send() (*UpdateConfigurati
 //
 //    // Example sending a request using the UpdateConfigurationSetTrackingOptionsRequest method.
 //    req := client.UpdateConfigurationSetTrackingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3883,7 +3949,8 @@ type UpdateCustomVerificationEmailTemplateRequest struct {
 }
 
 // Send marshals and sends the UpdateCustomVerificationEmailTemplate API request.
-func (r UpdateCustomVerificationEmailTemplateRequest) Send() (*UpdateCustomVerificationEmailTemplateOutput, error) {
+func (r UpdateCustomVerificationEmailTemplateRequest) Send(ctx context.Context) (*UpdateCustomVerificationEmailTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3905,7 +3972,7 @@ func (r UpdateCustomVerificationEmailTemplateRequest) Send() (*UpdateCustomVerif
 //
 //    // Example sending a request using the UpdateCustomVerificationEmailTemplateRequest method.
 //    req := client.UpdateCustomVerificationEmailTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3941,7 +4008,8 @@ type UpdateReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateReceiptRule API request.
-func (r UpdateReceiptRuleRequest) Send() (*UpdateReceiptRuleOutput, error) {
+func (r UpdateReceiptRuleRequest) Send(ctx context.Context) (*UpdateReceiptRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3962,7 +4030,7 @@ func (r UpdateReceiptRuleRequest) Send() (*UpdateReceiptRuleOutput, error) {
 //
 //    // Example sending a request using the UpdateReceiptRuleRequest method.
 //    req := client.UpdateReceiptRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3996,7 +4064,8 @@ type UpdateTemplateRequest struct {
 }
 
 // Send marshals and sends the UpdateTemplate API request.
-func (r UpdateTemplateRequest) Send() (*UpdateTemplateOutput, error) {
+func (r UpdateTemplateRequest) Send(ctx context.Context) (*UpdateTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4016,7 +4085,7 @@ func (r UpdateTemplateRequest) Send() (*UpdateTemplateOutput, error) {
 //
 //    // Example sending a request using the UpdateTemplateRequest method.
 //    req := client.UpdateTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4050,7 +4119,8 @@ type VerifyDomainDkimRequest struct {
 }
 
 // Send marshals and sends the VerifyDomainDkim API request.
-func (r VerifyDomainDkimRequest) Send() (*VerifyDomainDkimOutput, error) {
+func (r VerifyDomainDkimRequest) Send(ctx context.Context) (*VerifyDomainDkimOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4080,7 +4150,7 @@ func (r VerifyDomainDkimRequest) Send() (*VerifyDomainDkimOutput, error) {
 //
 //    // Example sending a request using the VerifyDomainDkimRequest method.
 //    req := client.VerifyDomainDkimRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4114,7 +4184,8 @@ type VerifyDomainIdentityRequest struct {
 }
 
 // Send marshals and sends the VerifyDomainIdentity API request.
-func (r VerifyDomainIdentityRequest) Send() (*VerifyDomainIdentityOutput, error) {
+func (r VerifyDomainIdentityRequest) Send(ctx context.Context) (*VerifyDomainIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4135,7 +4206,7 @@ func (r VerifyDomainIdentityRequest) Send() (*VerifyDomainIdentityOutput, error)
 //
 //    // Example sending a request using the VerifyDomainIdentityRequest method.
 //    req := client.VerifyDomainIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4169,7 +4240,8 @@ type VerifyEmailAddressRequest struct {
 }
 
 // Send marshals and sends the VerifyEmailAddress API request.
-func (r VerifyEmailAddressRequest) Send() (*VerifyEmailAddressOutput, error) {
+func (r VerifyEmailAddressRequest) Send(ctx context.Context) (*VerifyEmailAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4185,7 +4257,7 @@ func (r VerifyEmailAddressRequest) Send() (*VerifyEmailAddressOutput, error) {
 //
 //    // Example sending a request using the VerifyEmailAddressRequest method.
 //    req := client.VerifyEmailAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4221,7 +4293,8 @@ type VerifyEmailIdentityRequest struct {
 }
 
 // Send marshals and sends the VerifyEmailIdentity API request.
-func (r VerifyEmailIdentityRequest) Send() (*VerifyEmailIdentityOutput, error) {
+func (r VerifyEmailIdentityRequest) Send(ctx context.Context) (*VerifyEmailIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4241,7 +4314,7 @@ func (r VerifyEmailIdentityRequest) Send() (*VerifyEmailIdentityOutput, error) {
 //
 //    // Example sending a request using the VerifyEmailIdentityRequest method.
 //    req := client.VerifyEmailIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

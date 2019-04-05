@@ -3,6 +3,7 @@
 package rekognition_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -53,7 +54,7 @@ func ExampleRekognition_CompareFacesRequest_shared00() {
 	}
 
 	req := svc.CompareFacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -102,7 +103,7 @@ func ExampleRekognition_CreateCollectionRequest_shared00() {
 	}
 
 	req := svc.CreateCollectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -147,7 +148,7 @@ func ExampleRekognition_DeleteCollectionRequest_shared00() {
 	}
 
 	req := svc.DeleteCollectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -195,7 +196,7 @@ func ExampleRekognition_DeleteFacesRequest_shared00() {
 	}
 
 	req := svc.DeleteFacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -245,7 +246,7 @@ func ExampleRekognition_DetectFacesRequest_shared00() {
 	}
 
 	req := svc.DetectFacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -301,7 +302,7 @@ func ExampleRekognition_DetectLabelsRequest_shared00() {
 	}
 
 	req := svc.DetectLabelsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -358,7 +359,7 @@ func ExampleRekognition_IndexFacesRequest_shared00() {
 	}
 
 	req := svc.IndexFacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -407,7 +408,7 @@ func ExampleRekognition_ListCollectionsRequest_shared00() {
 	input := &rekognition.ListCollectionsInput{}
 
 	req := svc.ListCollectionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -455,7 +456,7 @@ func ExampleRekognition_ListFacesRequest_shared00() {
 	}
 
 	req := svc.ListFacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -506,7 +507,7 @@ func ExampleRekognition_SearchFacesRequest_shared00() {
 	}
 
 	req := svc.SearchFacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -560,7 +561,7 @@ func ExampleRekognition_SearchFacesByImageRequest_shared00() {
 	}
 
 	req := svc.SearchFacesByImageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

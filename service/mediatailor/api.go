@@ -3,6 +3,8 @@
 package mediatailor
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -19,7 +21,8 @@ type DeletePlaybackConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeletePlaybackConfiguration API request.
-func (r DeletePlaybackConfigurationRequest) Send() (*DeletePlaybackConfigurationOutput, error) {
+func (r DeletePlaybackConfigurationRequest) Send(ctx context.Context) (*DeletePlaybackConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r DeletePlaybackConfigurationRequest) Send() (*DeletePlaybackConfiguration
 //
 //    // Example sending a request using the DeletePlaybackConfigurationRequest method.
 //    req := client.DeletePlaybackConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +74,8 @@ type GetPlaybackConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetPlaybackConfiguration API request.
-func (r GetPlaybackConfigurationRequest) Send() (*GetPlaybackConfigurationOutput, error) {
+func (r GetPlaybackConfigurationRequest) Send(ctx context.Context) (*GetPlaybackConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +91,7 @@ func (r GetPlaybackConfigurationRequest) Send() (*GetPlaybackConfigurationOutput
 //
 //    // Example sending a request using the GetPlaybackConfigurationRequest method.
 //    req := client.GetPlaybackConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +125,8 @@ type ListPlaybackConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListPlaybackConfigurations API request.
-func (r ListPlaybackConfigurationsRequest) Send() (*ListPlaybackConfigurationsOutput, error) {
+func (r ListPlaybackConfigurationsRequest) Send(ctx context.Context) (*ListPlaybackConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +146,7 @@ func (r ListPlaybackConfigurationsRequest) Send() (*ListPlaybackConfigurationsOu
 //
 //    // Example sending a request using the ListPlaybackConfigurationsRequest method.
 //    req := client.ListPlaybackConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +180,8 @@ type PutPlaybackConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutPlaybackConfiguration API request.
-func (r PutPlaybackConfigurationRequest) Send() (*PutPlaybackConfigurationOutput, error) {
+func (r PutPlaybackConfigurationRequest) Send(ctx context.Context) (*PutPlaybackConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +197,7 @@ func (r PutPlaybackConfigurationRequest) Send() (*PutPlaybackConfigurationOutput
 //
 //    // Example sending a request using the PutPlaybackConfigurationRequest method.
 //    req := client.PutPlaybackConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

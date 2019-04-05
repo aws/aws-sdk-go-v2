@@ -3,6 +3,7 @@
 package snowball_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -41,7 +42,7 @@ func ExampleSnowball_CancelClusterRequest_shared00() {
 	}
 
 	req := svc.CancelClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -81,7 +82,7 @@ func ExampleSnowball_CancelJobRequest_shared00() {
 	}
 
 	req := svc.CancelJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -131,7 +132,7 @@ func ExampleSnowball_CreateAddressRequest_shared00() {
 	}
 
 	req := svc.CreateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -186,7 +187,7 @@ func ExampleSnowball_CreateClusterRequest_shared00() {
 	}
 
 	req := svc.CreateClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -248,7 +249,7 @@ func ExampleSnowball_CreateJobRequest_shared00() {
 	}
 
 	req := svc.CreateJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -291,7 +292,7 @@ func ExampleSnowball_DescribeAddressRequest_shared00() {
 	}
 
 	req := svc.DescribeAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -326,7 +327,7 @@ func ExampleSnowball_DescribeAddressesRequest_shared00() {
 	input := &snowball.DescribeAddressesInput{}
 
 	req := svc.DescribeAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -364,7 +365,7 @@ func ExampleSnowball_DescribeClusterRequest_shared00() {
 	}
 
 	req := svc.DescribeClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -399,7 +400,7 @@ func ExampleSnowball_DescribeJobRequest_shared00() {
 	}
 
 	req := svc.DescribeJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -450,7 +451,7 @@ func ExampleSnowball_GetJobManifestRequest_shared00() {
 	}
 
 	req := svc.GetJobManifestRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -498,7 +499,7 @@ func ExampleSnowball_GetJobUnlockCodeRequest_shared00() {
 	}
 
 	req := svc.GetJobUnlockCodeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -537,7 +538,7 @@ func ExampleSnowball_GetSnowballUsageRequest_shared00() {
 	input := &snowball.GetSnowballUsageInput{}
 
 	req := svc.GetSnowballUsageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -572,7 +573,7 @@ func ExampleSnowball_ListClusterJobsRequest_shared00() {
 	}
 
 	req := svc.ListClusterJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -608,7 +609,7 @@ func ExampleSnowball_ListClustersRequest_shared00() {
 	input := &snowball.ListClustersInput{}
 
 	req := svc.ListClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -645,7 +646,7 @@ func ExampleSnowball_ListJobsRequest_shared00() {
 	input := &snowball.ListJobsInput{}
 
 	req := svc.ListJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -684,7 +685,7 @@ func ExampleSnowball_UpdateClusterRequest_shared00() {
 	}
 
 	req := svc.UpdateClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -733,7 +734,7 @@ func ExampleSnowball_UpdateJobRequest_shared00() {
 	}
 
 	req := svc.UpdateJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

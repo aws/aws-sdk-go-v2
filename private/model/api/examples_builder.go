@@ -22,6 +22,7 @@ type defaultExamplesBuilder struct {
 func (builder defaultExamplesBuilder) Imports(a *API) string {
 	buf := bytes.NewBuffer(nil)
 	buf.WriteString(`"fmt"
+	"context"
 	"strings"
 	"time"
 

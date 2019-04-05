@@ -3,6 +3,7 @@
 package devicefarm_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -43,7 +44,7 @@ func ExampleDeviceFarm_CreateDevicePoolRequest_shared00() {
 	}
 
 	req := svc.CreateDevicePoolRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -84,7 +85,7 @@ func ExampleDeviceFarm_CreateProjectRequest_shared00() {
 	}
 
 	req := svc.CreateProjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -130,7 +131,7 @@ func ExampleDeviceFarm_CreateRemoteAccessSessionRequest_shared00() {
 	}
 
 	req := svc.CreateRemoteAccessSessionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -174,7 +175,7 @@ func ExampleDeviceFarm_CreateUploadRequest_shared00() {
 	}
 
 	req := svc.CreateUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -215,7 +216,7 @@ func ExampleDeviceFarm_DeleteDevicePoolRequest_shared00() {
 	}
 
 	req := svc.DeleteDevicePoolRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -256,7 +257,7 @@ func ExampleDeviceFarm_DeleteProjectRequest_shared00() {
 	}
 
 	req := svc.DeleteProjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -297,7 +298,7 @@ func ExampleDeviceFarm_DeleteRemoteAccessSessionRequest_shared00() {
 	}
 
 	req := svc.DeleteRemoteAccessSessionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -338,7 +339,7 @@ func ExampleDeviceFarm_DeleteRunRequest_shared00() {
 	}
 
 	req := svc.DeleteRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -379,7 +380,7 @@ func ExampleDeviceFarm_DeleteUploadRequest_shared00() {
 	}
 
 	req := svc.DeleteUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -418,7 +419,7 @@ func ExampleDeviceFarm_GetAccountSettingsRequest_shared00() {
 	input := &devicefarm.GetAccountSettingsInput{}
 
 	req := svc.GetAccountSettingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -459,7 +460,7 @@ func ExampleDeviceFarm_GetDeviceRequest_shared00() {
 	}
 
 	req := svc.GetDeviceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -501,7 +502,7 @@ func ExampleDeviceFarm_GetDevicePoolRequest_shared00() {
 	}
 
 	req := svc.GetDevicePoolRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -545,7 +546,7 @@ func ExampleDeviceFarm_GetDevicePoolCompatibilityRequest_shared00() {
 	}
 
 	req := svc.GetDevicePoolCompatibilityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -586,7 +587,7 @@ func ExampleDeviceFarm_GetJobRequest_shared00() {
 	}
 
 	req := svc.GetJobRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -628,7 +629,7 @@ func ExampleDeviceFarm_GetOfferingStatusRequest_shared00() {
 	}
 
 	req := svc.GetOfferingStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -671,7 +672,7 @@ func ExampleDeviceFarm_GetProjectRequest_shared00() {
 	}
 
 	req := svc.GetProjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -712,7 +713,7 @@ func ExampleDeviceFarm_GetRemoteAccessSessionRequest_shared00() {
 	}
 
 	req := svc.GetRemoteAccessSessionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -753,7 +754,7 @@ func ExampleDeviceFarm_GetRunRequest_shared00() {
 	}
 
 	req := svc.GetRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -794,7 +795,7 @@ func ExampleDeviceFarm_GetSuiteRequest_shared00() {
 	}
 
 	req := svc.GetSuiteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -835,7 +836,7 @@ func ExampleDeviceFarm_GetTestRequest_shared00() {
 	}
 
 	req := svc.GetTestRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -876,7 +877,7 @@ func ExampleDeviceFarm_GetUploadRequest_shared00() {
 	}
 
 	req := svc.GetUploadRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -919,7 +920,7 @@ func ExampleDeviceFarm_InstallToRemoteAccessSessionRequest_shared00() {
 	}
 
 	req := svc.InstallToRemoteAccessSessionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -961,7 +962,7 @@ func ExampleDeviceFarm_ListArtifactsRequest_shared00() {
 	}
 
 	req := svc.ListArtifactsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1004,7 +1005,7 @@ func ExampleDeviceFarm_ListDevicePoolsRequest_shared00() {
 	}
 
 	req := svc.ListDevicePoolsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1046,7 +1047,7 @@ func ExampleDeviceFarm_ListDevicesRequest_shared00() {
 	}
 
 	req := svc.ListDevicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1087,7 +1088,7 @@ func ExampleDeviceFarm_ListJobsRequest_shared00() {
 	}
 
 	req := svc.ListJobsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1128,7 +1129,7 @@ func ExampleDeviceFarm_ListOfferingTransactionsRequest_shared00() {
 	}
 
 	req := svc.ListOfferingTransactionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1171,7 +1172,7 @@ func ExampleDeviceFarm_ListOfferingsRequest_shared00() {
 	}
 
 	req := svc.ListOfferingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1215,7 +1216,7 @@ func ExampleDeviceFarm_ListProjectsRequest_shared00() {
 	}
 
 	req := svc.ListProjectsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1258,7 +1259,7 @@ func ExampleDeviceFarm_ListRemoteAccessSessionsRequest_shared00() {
 	}
 
 	req := svc.ListRemoteAccessSessionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1300,7 +1301,7 @@ func ExampleDeviceFarm_ListRunsRequest_shared00() {
 	}
 
 	req := svc.ListRunsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1343,7 +1344,7 @@ func ExampleDeviceFarm_ListSamplesRequest_shared00() {
 	}
 
 	req := svc.ListSamplesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1386,7 +1387,7 @@ func ExampleDeviceFarm_ListSuitesRequest_shared00() {
 	}
 
 	req := svc.ListSuitesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1429,7 +1430,7 @@ func ExampleDeviceFarm_ListTestsRequest_shared00() {
 	}
 
 	req := svc.ListTestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1472,7 +1473,7 @@ func ExampleDeviceFarm_ListUniqueProblemsRequest_shared00() {
 	}
 
 	req := svc.ListUniqueProblemsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1515,7 +1516,7 @@ func ExampleDeviceFarm_ListUploadsRequest_shared00() {
 	}
 
 	req := svc.ListUploadsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1557,7 +1558,7 @@ func ExampleDeviceFarm_PurchaseOfferingRequest_shared00() {
 	}
 
 	req := svc.PurchaseOfferingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1601,7 +1602,7 @@ func ExampleDeviceFarm_RenewOfferingRequest_shared00() {
 	}
 
 	req := svc.RenewOfferingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1650,7 +1651,7 @@ func ExampleDeviceFarm_ScheduleRunRequest_shared00() {
 	}
 
 	req := svc.ScheduleRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1693,7 +1694,7 @@ func ExampleDeviceFarm_StopRunRequest_shared00() {
 	}
 
 	req := svc.StopRunRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1744,7 +1745,7 @@ func ExampleDeviceFarm_UpdateDevicePoolRequest_shared00() {
 	}
 
 	req := svc.UpdateDevicePoolRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1786,7 +1787,7 @@ func ExampleDeviceFarm_UpdateProjectRequest_shared00() {
 	}
 
 	req := svc.UpdateProjectRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

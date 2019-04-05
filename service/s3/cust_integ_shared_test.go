@@ -3,6 +3,7 @@
 package s3_test
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"os"
@@ -20,16 +21,18 @@ var bucketName *string
 var svc *s3.S3
 
 func TestMain(m *testing.M) {
+	ctx := context.Background()
+
 	sess := integration.ConfigWithDefaultRegion("us-west-2")
 	svc = s3.New(sess)
 	bucketName = aws.String(s3integ.GenerateBucketName())
-	if err := s3integ.SetupTest(svc, *bucketName); err != nil {
+	if err := s3integ.SetupTest(ctx, svc, *bucketName); err != nil {
 		panic(err)
 	}
 
 	var result int
 	defer func() {
-		if err := s3integ.CleanupTest(svc, *bucketName); err != nil {
+		if err := s3integ.CleanupTest(ctx, svc, *bucketName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 		if r := recover(); r != nil {
@@ -42,24 +45,24 @@ func TestMain(m *testing.M) {
 	result = m.Run()
 }
 
-func putTestFile(t *testing.T, filename, key string) {
+func putTestFile(ctx context.Context, t *testing.T, filename, key string) {
 	f, err := os.Open(filename)
 	if err != nil {
 		t.Fatalf("failed to open testfile, %v", err)
 	}
 	defer f.Close()
 
-	putTestContent(t, f, key)
+	putTestContent(ctx, t, f, key)
 }
 
-func putTestContent(t *testing.T, reader io.ReadSeeker, key string) {
+func putTestContent(ctx context.Context, t *testing.T, reader io.ReadSeeker, key string) {
 	fmt.Println(bucketName, key, svc)
 	req := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: bucketName,
 		Key:    aws.String(key),
 		Body:   reader,
 	})
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(ctx); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }

@@ -3,6 +3,7 @@
 package rds_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -41,7 +42,7 @@ func ExampleRDS_AddSourceIdentifierToSubscriptionRequest_shared00() {
 	}
 
 	req := svc.AddSourceIdentifierToSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -84,7 +85,7 @@ func ExampleRDS_AddTagsToResourceRequest_shared00() {
 	}
 
 	req := svc.AddTagsToResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -125,7 +126,7 @@ func ExampleRDS_ApplyPendingMaintenanceActionRequest_shared00() {
 	}
 
 	req := svc.ApplyPendingMaintenanceActionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -166,7 +167,7 @@ func ExampleRDS_AuthorizeDBSecurityGroupIngressRequest_shared00() {
 	}
 
 	req := svc.AuthorizeDBSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -209,7 +210,7 @@ func ExampleRDS_CopyDBClusterParameterGroupRequest_shared00() {
 	}
 
 	req := svc.CopyDBClusterParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -250,7 +251,7 @@ func ExampleRDS_CopyDBClusterSnapshotRequest_shared00() {
 	}
 
 	req := svc.CopyDBClusterSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -297,7 +298,7 @@ func ExampleRDS_CopyDBParameterGroupRequest_shared00() {
 	}
 
 	req := svc.CopyDBParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -337,7 +338,7 @@ func ExampleRDS_CopyDBSnapshotRequest_shared00() {
 	}
 
 	req := svc.CopyDBSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -382,7 +383,7 @@ func ExampleRDS_CopyOptionGroupRequest_shared00() {
 	}
 
 	req := svc.CopyOptionGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -433,7 +434,7 @@ func ExampleRDS_CreateDBClusterRequest_shared00() {
 	}
 
 	req := svc.CreateDBClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -502,7 +503,7 @@ func ExampleRDS_CreateDBClusterParameterGroupRequest_shared00() {
 	}
 
 	req := svc.CreateDBClusterParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -540,7 +541,7 @@ func ExampleRDS_CreateDBClusterSnapshotRequest_shared00() {
 	}
 
 	req := svc.CreateDBClusterSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -588,7 +589,7 @@ func ExampleRDS_CreateDBInstanceRequest_shared00() {
 	}
 
 	req := svc.CreateDBInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -671,7 +672,7 @@ func ExampleRDS_CreateDBInstanceReadReplicaRequest_shared00() {
 	}
 
 	req := svc.CreateDBInstanceReadReplicaRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -742,7 +743,7 @@ func ExampleRDS_CreateDBParameterGroupRequest_shared00() {
 	}
 
 	req := svc.CreateDBParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -780,7 +781,7 @@ func ExampleRDS_CreateDBSecurityGroupRequest_shared00() {
 	}
 
 	req := svc.CreateDBSecurityGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -820,7 +821,7 @@ func ExampleRDS_CreateDBSnapshotRequest_shared00() {
 	}
 
 	req := svc.CreateDBSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -866,7 +867,7 @@ func ExampleRDS_CreateDBSubnetGroupRequest_shared00() {
 	}
 
 	req := svc.CreateDBSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -918,7 +919,7 @@ func ExampleRDS_CreateEventSubscriptionRequest_shared00() {
 	}
 
 	req := svc.CreateEventSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -968,7 +969,7 @@ func ExampleRDS_CreateOptionGroupRequest_shared00() {
 	}
 
 	req := svc.CreateOptionGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1006,7 +1007,7 @@ func ExampleRDS_DeleteDBClusterRequest_shared00() {
 	}
 
 	req := svc.DeleteDBClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1049,7 +1050,7 @@ func ExampleRDS_DeleteDBClusterParameterGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteDBClusterParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1086,7 +1087,7 @@ func ExampleRDS_DeleteDBClusterSnapshotRequest_shared00() {
 	}
 
 	req := svc.DeleteDBClusterSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1124,7 +1125,7 @@ func ExampleRDS_DeleteDBInstanceRequest_shared00() {
 	}
 
 	req := svc.DeleteDBInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1169,7 +1170,7 @@ func ExampleRDS_DeleteDBParameterGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteDBParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1206,7 +1207,7 @@ func ExampleRDS_DeleteDBSecurityGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteDBSecurityGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1243,7 +1244,7 @@ func ExampleRDS_DeleteDBSnapshotRequest_shared00() {
 	}
 
 	req := svc.DeleteDBSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1280,7 +1281,7 @@ func ExampleRDS_DeleteDBSubnetGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteDBSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1319,7 +1320,7 @@ func ExampleRDS_DeleteEventSubscriptionRequest_shared00() {
 	}
 
 	req := svc.DeleteEventSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1356,7 +1357,7 @@ func ExampleRDS_DeleteOptionGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteOptionGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1391,7 +1392,7 @@ func ExampleRDS_DescribeAccountAttributesRequest_shared00() {
 	input := &rds.DescribeAccountAttributesInput{}
 
 	req := svc.DescribeAccountAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1425,7 +1426,7 @@ func ExampleRDS_DescribeCertificatesRequest_shared00() {
 	}
 
 	req := svc.DescribeCertificatesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1460,7 +1461,7 @@ func ExampleRDS_DescribeDBClusterParameterGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBClusterParameterGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1496,7 +1497,7 @@ func ExampleRDS_DescribeDBClusterParametersRequest_shared00() {
 	}
 
 	req := svc.DescribeDBClusterParametersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1531,7 +1532,7 @@ func ExampleRDS_DescribeDBClusterSnapshotAttributesRequest_shared00() {
 	}
 
 	req := svc.DescribeDBClusterSnapshotAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1567,7 +1568,7 @@ func ExampleRDS_DescribeDBClusterSnapshotsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBClusterSnapshotsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1602,7 +1603,7 @@ func ExampleRDS_DescribeDBClustersRequest_shared00() {
 	}
 
 	req := svc.DescribeDBClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1641,7 +1642,7 @@ func ExampleRDS_DescribeDBEngineVersionsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBEngineVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1674,7 +1675,7 @@ func ExampleRDS_DescribeDBInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeDBInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1713,7 +1714,7 @@ func ExampleRDS_DescribeDBLogFilesRequest_shared00() {
 	}
 
 	req := svc.DescribeDBLogFilesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1748,7 +1749,7 @@ func ExampleRDS_DescribeDBParameterGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBParameterGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1786,7 +1787,7 @@ func ExampleRDS_DescribeDBParametersRequest_shared00() {
 	}
 
 	req := svc.DescribeDBParametersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1821,7 +1822,7 @@ func ExampleRDS_DescribeDBSecurityGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1856,7 +1857,7 @@ func ExampleRDS_DescribeDBSnapshotAttributesRequest_shared00() {
 	}
 
 	req := svc.DescribeDBSnapshotAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1894,7 +1895,7 @@ func ExampleRDS_DescribeDBSnapshotsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBSnapshotsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1929,7 +1930,7 @@ func ExampleRDS_DescribeDBSubnetGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeDBSubnetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1964,7 +1965,7 @@ func ExampleRDS_DescribeEngineDefaultClusterParametersRequest_shared00() {
 	}
 
 	req := svc.DescribeEngineDefaultClusterParametersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1997,7 +1998,7 @@ func ExampleRDS_DescribeEngineDefaultParametersRequest_shared00() {
 	}
 
 	req := svc.DescribeEngineDefaultParametersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2030,7 +2031,7 @@ func ExampleRDS_DescribeEventCategoriesRequest_shared00() {
 	}
 
 	req := svc.DescribeEventCategoriesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2063,7 +2064,7 @@ func ExampleRDS_DescribeEventSubscriptionsRequest_shared00() {
 	}
 
 	req := svc.DescribeEventSubscriptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2104,7 +2105,7 @@ func ExampleRDS_DescribeEventsRequest_shared00() {
 	}
 
 	req := svc.DescribeEventsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2139,7 +2140,7 @@ func ExampleRDS_DescribeOptionGroupOptionsRequest_shared00() {
 	}
 
 	req := svc.DescribeOptionGroupOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2173,7 +2174,7 @@ func ExampleRDS_DescribeOptionGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeOptionGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2213,7 +2214,7 @@ func ExampleRDS_DescribeOrderableDBInstanceOptionsRequest_shared00() {
 	}
 
 	req := svc.DescribeOrderableDBInstanceOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2247,7 +2248,7 @@ func ExampleRDS_DescribePendingMaintenanceActionsRequest_shared00() {
 	}
 
 	req := svc.DescribePendingMaintenanceActionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2287,7 +2288,7 @@ func ExampleRDS_DescribeReservedDBInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeReservedDBInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2327,7 +2328,7 @@ func ExampleRDS_DescribeReservedDBInstancesOfferingsRequest_shared00() {
 	}
 
 	req := svc.DescribeReservedDBInstancesOfferingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2360,7 +2361,7 @@ func ExampleRDS_DescribeSourceRegionsRequest_shared00() {
 	input := &rds.DescribeSourceRegionsInput{}
 
 	req := svc.DescribeSourceRegionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2394,7 +2395,7 @@ func ExampleRDS_DownloadDBLogFilePortionRequest_shared00() {
 	}
 
 	req := svc.DownloadDBLogFilePortionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2433,7 +2434,7 @@ func ExampleRDS_FailoverDBClusterRequest_shared00() {
 	}
 
 	req := svc.FailoverDBClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2473,7 +2474,7 @@ func ExampleRDS_ListTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ListTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2517,7 +2518,7 @@ func ExampleRDS_ModifyDBClusterRequest_shared00() {
 	}
 
 	req := svc.ModifyDBClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2580,7 +2581,7 @@ func ExampleRDS_ModifyDBClusterParameterGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyDBClusterParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2626,7 +2627,7 @@ func ExampleRDS_ModifyDBClusterSnapshotAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyDBClusterSnapshotAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2672,7 +2673,7 @@ func ExampleRDS_ModifyDBInstanceRequest_shared00() {
 	}
 
 	req := svc.ModifyDBInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2747,7 +2748,7 @@ func ExampleRDS_ModifyDBParameterGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyDBParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2788,7 +2789,7 @@ func ExampleRDS_ModifyDBSnapshotAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyDBSnapshotAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2831,7 +2832,7 @@ func ExampleRDS_ModifyDBSubnetGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyDBSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2880,7 +2881,7 @@ func ExampleRDS_ModifyEventSubscriptionRequest_shared00() {
 	}
 
 	req := svc.ModifyEventSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2934,7 +2935,7 @@ func ExampleRDS_ModifyOptionGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyOptionGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2974,7 +2975,7 @@ func ExampleRDS_PromoteReadReplicaRequest_shared00() {
 	}
 
 	req := svc.PromoteReadReplicaRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3013,7 +3014,7 @@ func ExampleRDS_PurchaseReservedDBInstancesOfferingRequest_shared00() {
 	}
 
 	req := svc.PurchaseReservedDBInstancesOfferingRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3053,7 +3054,7 @@ func ExampleRDS_RebootDBInstanceRequest_shared00() {
 	}
 
 	req := svc.RebootDBInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3092,7 +3093,7 @@ func ExampleRDS_RemoveSourceIdentifierFromSubscriptionRequest_shared00() {
 	}
 
 	req := svc.RemoveSourceIdentifierFromSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3132,7 +3133,7 @@ func ExampleRDS_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsFromResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3173,7 +3174,7 @@ func ExampleRDS_ResetDBClusterParameterGroupRequest_shared00() {
 	}
 
 	req := svc.ResetDBClusterParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3212,7 +3213,7 @@ func ExampleRDS_ResetDBParameterGroupRequest_shared00() {
 	}
 
 	req := svc.ResetDBParameterGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3251,7 +3252,7 @@ func ExampleRDS_RestoreDBClusterFromSnapshotRequest_shared00() {
 	}
 
 	req := svc.RestoreDBClusterFromSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3319,7 +3320,7 @@ func ExampleRDS_RestoreDBClusterToPointInTimeRequest_shared00() {
 	}
 
 	req := svc.RestoreDBClusterToPointInTimeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3387,7 +3388,7 @@ func ExampleRDS_RestoreDBInstanceFromDBSnapshotRequest_shared00() {
 	}
 
 	req := svc.RestoreDBInstanceFromDBSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3463,7 +3464,7 @@ func ExampleRDS_RestoreDBInstanceToPointInTimeRequest_shared00() {
 	}
 
 	req := svc.RestoreDBInstanceToPointInTimeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3542,7 +3543,7 @@ func ExampleRDS_RevokeDBSecurityGroupIngressRequest_shared00() {
 	}
 
 	req := svc.RevokeDBSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

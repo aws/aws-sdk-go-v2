@@ -3,6 +3,7 @@
 package efs
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateFileSystemRequest struct {
 }
 
 // Send marshals and sends the CreateFileSystem API request.
-func (r CreateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
+func (r CreateFileSystemRequest) Send(ctx context.Context) (*UpdateFileSystemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -83,7 +85,7 @@ func (r CreateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
 //
 //    // Example sending a request using the CreateFileSystemRequest method.
 //    req := client.CreateFileSystemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -117,7 +119,8 @@ type CreateMountTargetRequest struct {
 }
 
 // Send marshals and sends the CreateMountTarget API request.
-func (r CreateMountTargetRequest) Send() (*CreateMountTargetOutput, error) {
+func (r CreateMountTargetRequest) Send(ctx context.Context) (*CreateMountTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -227,7 +230,7 @@ func (r CreateMountTargetRequest) Send() (*CreateMountTargetOutput, error) {
 //
 //    // Example sending a request using the CreateMountTargetRequest method.
 //    req := client.CreateMountTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -261,7 +264,8 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -283,7 +287,7 @@ func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 //
 //    // Example sending a request using the CreateTagsRequest method.
 //    req := client.CreateTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -319,7 +323,8 @@ type DeleteFileSystemRequest struct {
 }
 
 // Send marshals and sends the DeleteFileSystem API request.
-func (r DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
+func (r DeleteFileSystemRequest) Send(ctx context.Context) (*DeleteFileSystemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -350,7 +355,7 @@ func (r DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
 //
 //    // Example sending a request using the DeleteFileSystemRequest method.
 //    req := client.DeleteFileSystemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -386,7 +391,8 @@ type DeleteMountTargetRequest struct {
 }
 
 // Send marshals and sends the DeleteMountTarget API request.
-func (r DeleteMountTargetRequest) Send() (*DeleteMountTargetOutput, error) {
+func (r DeleteMountTargetRequest) Send(ctx context.Context) (*DeleteMountTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -426,7 +432,7 @@ func (r DeleteMountTargetRequest) Send() (*DeleteMountTargetOutput, error) {
 //
 //    // Example sending a request using the DeleteMountTargetRequest method.
 //    req := client.DeleteMountTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -462,7 +468,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -485,7 +492,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -521,7 +528,8 @@ type DescribeFileSystemsRequest struct {
 }
 
 // Send marshals and sends the DescribeFileSystems API request.
-func (r DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
+func (r DescribeFileSystemsRequest) Send(ctx context.Context) (*DescribeFileSystemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -562,7 +570,7 @@ func (r DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
 //
 //    // Example sending a request using the DescribeFileSystemsRequest method.
 //    req := client.DescribeFileSystemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -596,7 +604,8 @@ type DescribeMountTargetSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeMountTargetSecurityGroups API request.
-func (r DescribeMountTargetSecurityGroupsRequest) Send() (*DescribeMountTargetSecurityGroupsOutput, error) {
+func (r DescribeMountTargetSecurityGroupsRequest) Send(ctx context.Context) (*DescribeMountTargetSecurityGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -622,7 +631,7 @@ func (r DescribeMountTargetSecurityGroupsRequest) Send() (*DescribeMountTargetSe
 //
 //    // Example sending a request using the DescribeMountTargetSecurityGroupsRequest method.
 //    req := client.DescribeMountTargetSecurityGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -656,7 +665,8 @@ type DescribeMountTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeMountTargets API request.
-func (r DescribeMountTargetsRequest) Send() (*DescribeMountTargetsOutput, error) {
+func (r DescribeMountTargetsRequest) Send(ctx context.Context) (*DescribeMountTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -678,7 +688,7 @@ func (r DescribeMountTargetsRequest) Send() (*DescribeMountTargetsOutput, error)
 //
 //    // Example sending a request using the DescribeMountTargetsRequest method.
 //    req := client.DescribeMountTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -712,7 +722,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -733,7 +744,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -767,7 +778,8 @@ type ModifyMountTargetSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the ModifyMountTargetSecurityGroups API request.
-func (r ModifyMountTargetSecurityGroupsRequest) Send() (*ModifyMountTargetSecurityGroupsOutput, error) {
+func (r ModifyMountTargetSecurityGroupsRequest) Send(ctx context.Context) (*ModifyMountTargetSecurityGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -798,7 +810,7 @@ func (r ModifyMountTargetSecurityGroupsRequest) Send() (*ModifyMountTargetSecuri
 //
 //    // Example sending a request using the ModifyMountTargetSecurityGroupsRequest method.
 //    req := client.ModifyMountTargetSecurityGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -834,7 +846,8 @@ type UpdateFileSystemRequest struct {
 }
 
 // Send marshals and sends the UpdateFileSystem API request.
-func (r UpdateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
+func (r UpdateFileSystemRequest) Send(ctx context.Context) (*UpdateFileSystemOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -851,7 +864,7 @@ func (r UpdateFileSystemRequest) Send() (*UpdateFileSystemOutput, error) {
 //
 //    // Example sending a request using the UpdateFileSystemRequest method.
 //    req := client.UpdateFileSystemRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

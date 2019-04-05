@@ -3,6 +3,7 @@
 package signer
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CancelSigningProfileRequest struct {
 }
 
 // Send marshals and sends the CancelSigningProfile API request.
-func (r CancelSigningProfileRequest) Send() (*CancelSigningProfileOutput, error) {
+func (r CancelSigningProfileRequest) Send(ctx context.Context) (*CancelSigningProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r CancelSigningProfileRequest) Send() (*CancelSigningProfileOutput, error)
 //
 //    // Example sending a request using the CancelSigningProfileRequest method.
 //    req := client.CancelSigningProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type DescribeSigningJobRequest struct {
 }
 
 // Send marshals and sends the DescribeSigningJob API request.
-func (r DescribeSigningJobRequest) Send() (*DescribeSigningJobOutput, error) {
+func (r DescribeSigningJobRequest) Send(ctx context.Context) (*DescribeSigningJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,7 @@ func (r DescribeSigningJobRequest) Send() (*DescribeSigningJobOutput, error) {
 //
 //    // Example sending a request using the DescribeSigningJobRequest method.
 //    req := client.DescribeSigningJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +129,8 @@ type GetSigningPlatformRequest struct {
 }
 
 // Send marshals and sends the GetSigningPlatform API request.
-func (r GetSigningPlatformRequest) Send() (*GetSigningPlatformOutput, error) {
+func (r GetSigningPlatformRequest) Send(ctx context.Context) (*GetSigningPlatformOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +146,7 @@ func (r GetSigningPlatformRequest) Send() (*GetSigningPlatformOutput, error) {
 //
 //    // Example sending a request using the GetSigningPlatformRequest method.
 //    req := client.GetSigningPlatformRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -176,7 +180,8 @@ type GetSigningProfileRequest struct {
 }
 
 // Send marshals and sends the GetSigningProfile API request.
-func (r GetSigningProfileRequest) Send() (*GetSigningProfileOutput, error) {
+func (r GetSigningProfileRequest) Send(ctx context.Context) (*GetSigningProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (r GetSigningProfileRequest) Send() (*GetSigningProfileOutput, error) {
 //
 //    // Example sending a request using the GetSigningProfileRequest method.
 //    req := client.GetSigningProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -226,7 +231,8 @@ type ListSigningJobsRequest struct {
 }
 
 // Send marshals and sends the ListSigningJobs API request.
-func (r ListSigningJobsRequest) Send() (*ListSigningJobsOutput, error) {
+func (r ListSigningJobsRequest) Send(ctx context.Context) (*ListSigningJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -248,7 +254,7 @@ func (r ListSigningJobsRequest) Send() (*ListSigningJobsOutput, error) {
 //
 //    // Example sending a request using the ListSigningJobsRequest method.
 //    req := client.ListSigningJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -298,7 +304,7 @@ func (c *Signer) ListSigningJobsRequest(input *ListSigningJobsInput) ListSigning
 func (p *ListSigningJobsRequest) Paginate(opts ...aws.Option) ListSigningJobsPager {
 	return ListSigningJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -307,6 +313,7 @@ func (p *ListSigningJobsRequest) Paginate(opts ...aws.Option) ListSigningJobsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -334,7 +341,8 @@ type ListSigningPlatformsRequest struct {
 }
 
 // Send marshals and sends the ListSigningPlatforms API request.
-func (r ListSigningPlatformsRequest) Send() (*ListSigningPlatformsOutput, error) {
+func (r ListSigningPlatformsRequest) Send(ctx context.Context) (*ListSigningPlatformsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -355,7 +363,7 @@ func (r ListSigningPlatformsRequest) Send() (*ListSigningPlatformsOutput, error)
 //
 //    // Example sending a request using the ListSigningPlatformsRequest method.
 //    req := client.ListSigningPlatformsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -405,7 +413,7 @@ func (c *Signer) ListSigningPlatformsRequest(input *ListSigningPlatformsInput) L
 func (p *ListSigningPlatformsRequest) Paginate(opts ...aws.Option) ListSigningPlatformsPager {
 	return ListSigningPlatformsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningPlatformsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -414,6 +422,7 @@ func (p *ListSigningPlatformsRequest) Paginate(opts ...aws.Option) ListSigningPl
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -441,7 +450,8 @@ type ListSigningProfilesRequest struct {
 }
 
 // Send marshals and sends the ListSigningProfiles API request.
-func (r ListSigningProfilesRequest) Send() (*ListSigningProfilesOutput, error) {
+func (r ListSigningProfilesRequest) Send(ctx context.Context) (*ListSigningProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -463,7 +473,7 @@ func (r ListSigningProfilesRequest) Send() (*ListSigningProfilesOutput, error) {
 //
 //    // Example sending a request using the ListSigningProfilesRequest method.
 //    req := client.ListSigningProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -513,7 +523,7 @@ func (c *Signer) ListSigningProfilesRequest(input *ListSigningProfilesInput) Lis
 func (p *ListSigningProfilesRequest) Paginate(opts ...aws.Option) ListSigningProfilesPager {
 	return ListSigningProfilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningProfilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -522,6 +532,7 @@ func (p *ListSigningProfilesRequest) Paginate(opts ...aws.Option) ListSigningPro
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -549,7 +560,8 @@ type PutSigningProfileRequest struct {
 }
 
 // Send marshals and sends the PutSigningProfile API request.
-func (r PutSigningProfileRequest) Send() (*PutSigningProfileOutput, error) {
+func (r PutSigningProfileRequest) Send(ctx context.Context) (*PutSigningProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +580,7 @@ func (r PutSigningProfileRequest) Send() (*PutSigningProfileOutput, error) {
 //
 //    // Example sending a request using the PutSigningProfileRequest method.
 //    req := client.PutSigningProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -602,7 +614,8 @@ type StartSigningJobRequest struct {
 }
 
 // Send marshals and sends the StartSigningJob API request.
-func (r StartSigningJobRequest) Send() (*StartSigningJobOutput, error) {
+func (r StartSigningJobRequest) Send(ctx context.Context) (*StartSigningJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -641,7 +654,7 @@ func (r StartSigningJobRequest) Send() (*StartSigningJobOutput, error) {
 //
 //    // Example sending a request using the StartSigningJobRequest method.
 //    req := client.StartSigningJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -1,6 +1,7 @@
 package s3_test
 
 import (
+	"context"
 	"crypto/md5"
 	"encoding/base64"
 	"io/ioutil"
@@ -141,7 +142,7 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 		}(),
 	})
 
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -160,7 +161,7 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 		Bucket: aws.String("my_bucket"),
 		Key:    aws.String("my_key"),
 	})
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)

@@ -3,6 +3,7 @@
 package amplify
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type CreateAppRequest struct {
 }
 
 // Send marshals and sends the CreateApp API request.
-func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
+func (r CreateAppRequest) Send(ctx context.Context) (*CreateAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
 //
 //    // Example sending a request using the CreateAppRequest method.
 //    req := client.CreateAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type CreateBranchRequest struct {
 }
 
 // Send marshals and sends the CreateBranch API request.
-func (r CreateBranchRequest) Send() (*CreateBranchOutput, error) {
+func (r CreateBranchRequest) Send(ctx context.Context) (*CreateBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r CreateBranchRequest) Send() (*CreateBranchOutput, error) {
 //
 //    // Example sending a request using the CreateBranchRequest method.
 //    req := client.CreateBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +124,8 @@ type CreateDomainAssociationRequest struct {
 }
 
 // Send marshals and sends the CreateDomainAssociation API request.
-func (r CreateDomainAssociationRequest) Send() (*CreateDomainAssociationOutput, error) {
+func (r CreateDomainAssociationRequest) Send(ctx context.Context) (*CreateDomainAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r CreateDomainAssociationRequest) Send() (*CreateDomainAssociationOutput, 
 //
 //    // Example sending a request using the CreateDomainAssociationRequest method.
 //    req := client.CreateDomainAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type DeleteAppRequest struct {
 }
 
 // Send marshals and sends the DeleteApp API request.
-func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+func (r DeleteAppRequest) Send(ctx context.Context) (*DeleteAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +192,7 @@ func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
 //
 //    // Example sending a request using the DeleteAppRequest method.
 //    req := client.DeleteAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +226,8 @@ type DeleteBranchRequest struct {
 }
 
 // Send marshals and sends the DeleteBranch API request.
-func (r DeleteBranchRequest) Send() (*DeleteBranchOutput, error) {
+func (r DeleteBranchRequest) Send(ctx context.Context) (*DeleteBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +243,7 @@ func (r DeleteBranchRequest) Send() (*DeleteBranchOutput, error) {
 //
 //    // Example sending a request using the DeleteBranchRequest method.
 //    req := client.DeleteBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +277,8 @@ type DeleteDomainAssociationRequest struct {
 }
 
 // Send marshals and sends the DeleteDomainAssociation API request.
-func (r DeleteDomainAssociationRequest) Send() (*DeleteDomainAssociationOutput, error) {
+func (r DeleteDomainAssociationRequest) Send(ctx context.Context) (*DeleteDomainAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +294,7 @@ func (r DeleteDomainAssociationRequest) Send() (*DeleteDomainAssociationOutput, 
 //
 //    // Example sending a request using the DeleteDomainAssociationRequest method.
 //    req := client.DeleteDomainAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -321,7 +328,8 @@ type DeleteJobRequest struct {
 }
 
 // Send marshals and sends the DeleteJob API request.
-func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
+func (r DeleteJobRequest) Send(ctx context.Context) (*DeleteJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -337,7 +345,7 @@ func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
 //
 //    // Example sending a request using the DeleteJobRequest method.
 //    req := client.DeleteJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -371,7 +379,8 @@ type GetAppRequest struct {
 }
 
 // Send marshals and sends the GetApp API request.
-func (r GetAppRequest) Send() (*GetAppOutput, error) {
+func (r GetAppRequest) Send(ctx context.Context) (*GetAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -387,7 +396,7 @@ func (r GetAppRequest) Send() (*GetAppOutput, error) {
 //
 //    // Example sending a request using the GetAppRequest method.
 //    req := client.GetAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -421,7 +430,8 @@ type GetBranchRequest struct {
 }
 
 // Send marshals and sends the GetBranch API request.
-func (r GetBranchRequest) Send() (*GetBranchOutput, error) {
+func (r GetBranchRequest) Send(ctx context.Context) (*GetBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +447,7 @@ func (r GetBranchRequest) Send() (*GetBranchOutput, error) {
 //
 //    // Example sending a request using the GetBranchRequest method.
 //    req := client.GetBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +481,8 @@ type GetDomainAssociationRequest struct {
 }
 
 // Send marshals and sends the GetDomainAssociation API request.
-func (r GetDomainAssociationRequest) Send() (*GetDomainAssociationOutput, error) {
+func (r GetDomainAssociationRequest) Send(ctx context.Context) (*GetDomainAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -487,7 +498,7 @@ func (r GetDomainAssociationRequest) Send() (*GetDomainAssociationOutput, error)
 //
 //    // Example sending a request using the GetDomainAssociationRequest method.
 //    req := client.GetDomainAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -521,7 +532,8 @@ type GetJobRequest struct {
 }
 
 // Send marshals and sends the GetJob API request.
-func (r GetJobRequest) Send() (*GetJobOutput, error) {
+func (r GetJobRequest) Send(ctx context.Context) (*GetJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -537,7 +549,7 @@ func (r GetJobRequest) Send() (*GetJobOutput, error) {
 //
 //    // Example sending a request using the GetJobRequest method.
 //    req := client.GetJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -571,7 +583,8 @@ type ListAppsRequest struct {
 }
 
 // Send marshals and sends the ListApps API request.
-func (r ListAppsRequest) Send() (*ListAppsOutput, error) {
+func (r ListAppsRequest) Send(ctx context.Context) (*ListAppsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -587,7 +600,7 @@ func (r ListAppsRequest) Send() (*ListAppsOutput, error) {
 //
 //    // Example sending a request using the ListAppsRequest method.
 //    req := client.ListAppsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -621,7 +634,8 @@ type ListBranchesRequest struct {
 }
 
 // Send marshals and sends the ListBranches API request.
-func (r ListBranchesRequest) Send() (*ListBranchesOutput, error) {
+func (r ListBranchesRequest) Send(ctx context.Context) (*ListBranchesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,7 +651,7 @@ func (r ListBranchesRequest) Send() (*ListBranchesOutput, error) {
 //
 //    // Example sending a request using the ListBranchesRequest method.
 //    req := client.ListBranchesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -671,7 +685,8 @@ type ListDomainAssociationsRequest struct {
 }
 
 // Send marshals and sends the ListDomainAssociations API request.
-func (r ListDomainAssociationsRequest) Send() (*ListDomainAssociationsOutput, error) {
+func (r ListDomainAssociationsRequest) Send(ctx context.Context) (*ListDomainAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -687,7 +702,7 @@ func (r ListDomainAssociationsRequest) Send() (*ListDomainAssociationsOutput, er
 //
 //    // Example sending a request using the ListDomainAssociationsRequest method.
 //    req := client.ListDomainAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -721,7 +736,8 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -737,7 +753,7 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -771,7 +787,8 @@ type StartJobRequest struct {
 }
 
 // Send marshals and sends the StartJob API request.
-func (r StartJobRequest) Send() (*StartJobOutput, error) {
+func (r StartJobRequest) Send(ctx context.Context) (*StartJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,7 +804,7 @@ func (r StartJobRequest) Send() (*StartJobOutput, error) {
 //
 //    // Example sending a request using the StartJobRequest method.
 //    req := client.StartJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -821,7 +838,8 @@ type StopJobRequest struct {
 }
 
 // Send marshals and sends the StopJob API request.
-func (r StopJobRequest) Send() (*StopJobOutput, error) {
+func (r StopJobRequest) Send(ctx context.Context) (*StopJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -837,7 +855,7 @@ func (r StopJobRequest) Send() (*StopJobOutput, error) {
 //
 //    // Example sending a request using the StopJobRequest method.
 //    req := client.StopJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -871,7 +889,8 @@ type UpdateAppRequest struct {
 }
 
 // Send marshals and sends the UpdateApp API request.
-func (r UpdateAppRequest) Send() (*UpdateAppOutput, error) {
+func (r UpdateAppRequest) Send(ctx context.Context) (*UpdateAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -887,7 +906,7 @@ func (r UpdateAppRequest) Send() (*UpdateAppOutput, error) {
 //
 //    // Example sending a request using the UpdateAppRequest method.
 //    req := client.UpdateAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -921,7 +940,8 @@ type UpdateBranchRequest struct {
 }
 
 // Send marshals and sends the UpdateBranch API request.
-func (r UpdateBranchRequest) Send() (*UpdateBranchOutput, error) {
+func (r UpdateBranchRequest) Send(ctx context.Context) (*UpdateBranchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -937,7 +957,7 @@ func (r UpdateBranchRequest) Send() (*UpdateBranchOutput, error) {
 //
 //    // Example sending a request using the UpdateBranchRequest method.
 //    req := client.UpdateBranchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -971,7 +991,8 @@ type UpdateDomainAssociationRequest struct {
 }
 
 // Send marshals and sends the UpdateDomainAssociation API request.
-func (r UpdateDomainAssociationRequest) Send() (*UpdateDomainAssociationOutput, error) {
+func (r UpdateDomainAssociationRequest) Send(ctx context.Context) (*UpdateDomainAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -987,7 +1008,7 @@ func (r UpdateDomainAssociationRequest) Send() (*UpdateDomainAssociationOutput, 
 //
 //    // Example sending a request using the UpdateDomainAssociationRequest method.
 //    req := client.UpdateDomainAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

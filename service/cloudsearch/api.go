@@ -3,6 +3,7 @@
 package cloudsearch
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type BuildSuggestersRequest struct {
 }
 
 // Send marshals and sends the BuildSuggesters API request.
-func (r BuildSuggestersRequest) Send() (*BuildSuggestersOutput, error) {
+func (r BuildSuggestersRequest) Send(ctx context.Context) (*BuildSuggestersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r BuildSuggestersRequest) Send() (*BuildSuggestersOutput, error) {
 //
 //    // Example sending a request using the BuildSuggestersRequest method.
 //    req := client.BuildSuggestersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -69,7 +71,8 @@ type CreateDomainRequest struct {
 }
 
 // Send marshals and sends the CreateDomain API request.
-func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+func (r CreateDomainRequest) Send(ctx context.Context) (*CreateDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
 //
 //    // Example sending a request using the CreateDomainRequest method.
 //    req := client.CreateDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -119,7 +122,8 @@ type DefineAnalysisSchemeRequest struct {
 }
 
 // Send marshals and sends the DefineAnalysisScheme API request.
-func (r DefineAnalysisSchemeRequest) Send() (*DefineAnalysisSchemeOutput, error) {
+func (r DefineAnalysisSchemeRequest) Send(ctx context.Context) (*DefineAnalysisSchemeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -138,7 +142,7 @@ func (r DefineAnalysisSchemeRequest) Send() (*DefineAnalysisSchemeOutput, error)
 //
 //    // Example sending a request using the DefineAnalysisSchemeRequest method.
 //    req := client.DefineAnalysisSchemeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type DefineExpressionRequest struct {
 }
 
 // Send marshals and sends the DefineExpression API request.
-func (r DefineExpressionRequest) Send() (*DefineExpressionOutput, error) {
+func (r DefineExpressionRequest) Send(ctx context.Context) (*DefineExpressionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -189,7 +194,7 @@ func (r DefineExpressionRequest) Send() (*DefineExpressionOutput, error) {
 //
 //    // Example sending a request using the DefineExpressionRequest method.
 //    req := client.DefineExpressionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +226,8 @@ type DefineIndexFieldRequest struct {
 }
 
 // Send marshals and sends the DefineIndexField API request.
-func (r DefineIndexFieldRequest) Send() (*DefineIndexFieldOutput, error) {
+func (r DefineIndexFieldRequest) Send(ctx context.Context) (*DefineIndexFieldOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +250,7 @@ func (r DefineIndexFieldRequest) Send() (*DefineIndexFieldOutput, error) {
 //
 //    // Example sending a request using the DefineIndexFieldRequest method.
 //    req := client.DefineIndexFieldRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +282,8 @@ type DefineSuggesterRequest struct {
 }
 
 // Send marshals and sends the DefineSuggester API request.
-func (r DefineSuggesterRequest) Send() (*DefineSuggesterOutput, error) {
+func (r DefineSuggesterRequest) Send(ctx context.Context) (*DefineSuggesterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,7 +304,7 @@ func (r DefineSuggesterRequest) Send() (*DefineSuggesterOutput, error) {
 //
 //    // Example sending a request using the DefineSuggesterRequest method.
 //    req := client.DefineSuggesterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -329,7 +336,8 @@ type DeleteAnalysisSchemeRequest struct {
 }
 
 // Send marshals and sends the DeleteAnalysisScheme API request.
-func (r DeleteAnalysisSchemeRequest) Send() (*DeleteAnalysisSchemeOutput, error) {
+func (r DeleteAnalysisSchemeRequest) Send(ctx context.Context) (*DeleteAnalysisSchemeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +355,7 @@ func (r DeleteAnalysisSchemeRequest) Send() (*DeleteAnalysisSchemeOutput, error)
 //
 //    // Example sending a request using the DeleteAnalysisSchemeRequest method.
 //    req := client.DeleteAnalysisSchemeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -379,7 +387,8 @@ type DeleteDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteDomain API request.
-func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+func (r DeleteDomainRequest) Send(ctx context.Context) (*DeleteDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +407,7 @@ func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
 //
 //    // Example sending a request using the DeleteDomainRequest method.
 //    req := client.DeleteDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -430,7 +439,8 @@ type DeleteExpressionRequest struct {
 }
 
 // Send marshals and sends the DeleteExpression API request.
-func (r DeleteExpressionRequest) Send() (*DeleteExpressionOutput, error) {
+func (r DeleteExpressionRequest) Send(ctx context.Context) (*DeleteExpressionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +458,7 @@ func (r DeleteExpressionRequest) Send() (*DeleteExpressionOutput, error) {
 //
 //    // Example sending a request using the DeleteExpressionRequest method.
 //    req := client.DeleteExpressionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -480,7 +490,8 @@ type DeleteIndexFieldRequest struct {
 }
 
 // Send marshals and sends the DeleteIndexField API request.
-func (r DeleteIndexFieldRequest) Send() (*DeleteIndexFieldOutput, error) {
+func (r DeleteIndexFieldRequest) Send(ctx context.Context) (*DeleteIndexFieldOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -498,7 +509,7 @@ func (r DeleteIndexFieldRequest) Send() (*DeleteIndexFieldOutput, error) {
 //
 //    // Example sending a request using the DeleteIndexFieldRequest method.
 //    req := client.DeleteIndexFieldRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -530,7 +541,8 @@ type DeleteSuggesterRequest struct {
 }
 
 // Send marshals and sends the DeleteSuggester API request.
-func (r DeleteSuggesterRequest) Send() (*DeleteSuggesterOutput, error) {
+func (r DeleteSuggesterRequest) Send(ctx context.Context) (*DeleteSuggesterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -548,7 +560,7 @@ func (r DeleteSuggesterRequest) Send() (*DeleteSuggesterOutput, error) {
 //
 //    // Example sending a request using the DeleteSuggesterRequest method.
 //    req := client.DeleteSuggesterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -580,7 +592,8 @@ type DescribeAnalysisSchemesRequest struct {
 }
 
 // Send marshals and sends the DescribeAnalysisSchemes API request.
-func (r DescribeAnalysisSchemesRequest) Send() (*DescribeAnalysisSchemesOutput, error) {
+func (r DescribeAnalysisSchemesRequest) Send(ctx context.Context) (*DescribeAnalysisSchemesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,7 +615,7 @@ func (r DescribeAnalysisSchemesRequest) Send() (*DescribeAnalysisSchemesOutput, 
 //
 //    // Example sending a request using the DescribeAnalysisSchemesRequest method.
 //    req := client.DescribeAnalysisSchemesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -634,7 +647,8 @@ type DescribeAvailabilityOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAvailabilityOptions API request.
-func (r DescribeAvailabilityOptionsRequest) Send() (*DescribeAvailabilityOptionsOutput, error) {
+func (r DescribeAvailabilityOptionsRequest) Send(ctx context.Context) (*DescribeAvailabilityOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -654,7 +668,7 @@ func (r DescribeAvailabilityOptionsRequest) Send() (*DescribeAvailabilityOptions
 //
 //    // Example sending a request using the DescribeAvailabilityOptionsRequest method.
 //    req := client.DescribeAvailabilityOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -686,7 +700,8 @@ type DescribeDomainsRequest struct {
 }
 
 // Send marshals and sends the DescribeDomains API request.
-func (r DescribeDomainsRequest) Send() (*DescribeDomainsOutput, error) {
+func (r DescribeDomainsRequest) Send(ctx context.Context) (*DescribeDomainsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -707,7 +722,7 @@ func (r DescribeDomainsRequest) Send() (*DescribeDomainsOutput, error) {
 //
 //    // Example sending a request using the DescribeDomainsRequest method.
 //    req := client.DescribeDomainsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -739,7 +754,8 @@ type DescribeExpressionsRequest struct {
 }
 
 // Send marshals and sends the DescribeExpressions API request.
-func (r DescribeExpressionsRequest) Send() (*DescribeExpressionsOutput, error) {
+func (r DescribeExpressionsRequest) Send(ctx context.Context) (*DescribeExpressionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -760,7 +776,7 @@ func (r DescribeExpressionsRequest) Send() (*DescribeExpressionsOutput, error) {
 //
 //    // Example sending a request using the DescribeExpressionsRequest method.
 //    req := client.DescribeExpressionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -792,7 +808,8 @@ type DescribeIndexFieldsRequest struct {
 }
 
 // Send marshals and sends the DescribeIndexFields API request.
-func (r DescribeIndexFieldsRequest) Send() (*DescribeIndexFieldsOutput, error) {
+func (r DescribeIndexFieldsRequest) Send(ctx context.Context) (*DescribeIndexFieldsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -813,7 +830,7 @@ func (r DescribeIndexFieldsRequest) Send() (*DescribeIndexFieldsOutput, error) {
 //
 //    // Example sending a request using the DescribeIndexFieldsRequest method.
 //    req := client.DescribeIndexFieldsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -845,7 +862,8 @@ type DescribeScalingParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingParameters API request.
-func (r DescribeScalingParametersRequest) Send() (*DescribeScalingParametersOutput, error) {
+func (r DescribeScalingParametersRequest) Send(ctx context.Context) (*DescribeScalingParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -864,7 +882,7 @@ func (r DescribeScalingParametersRequest) Send() (*DescribeScalingParametersOutp
 //
 //    // Example sending a request using the DescribeScalingParametersRequest method.
 //    req := client.DescribeScalingParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -896,7 +914,8 @@ type DescribeServiceAccessPoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeServiceAccessPolicies API request.
-func (r DescribeServiceAccessPoliciesRequest) Send() (*DescribeServiceAccessPoliciesOutput, error) {
+func (r DescribeServiceAccessPoliciesRequest) Send(ctx context.Context) (*DescribeServiceAccessPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -917,7 +936,7 @@ func (r DescribeServiceAccessPoliciesRequest) Send() (*DescribeServiceAccessPoli
 //
 //    // Example sending a request using the DescribeServiceAccessPoliciesRequest method.
 //    req := client.DescribeServiceAccessPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -949,7 +968,8 @@ type DescribeSuggestersRequest struct {
 }
 
 // Send marshals and sends the DescribeSuggesters API request.
-func (r DescribeSuggestersRequest) Send() (*DescribeSuggestersOutput, error) {
+func (r DescribeSuggestersRequest) Send(ctx context.Context) (*DescribeSuggestersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -971,7 +991,7 @@ func (r DescribeSuggestersRequest) Send() (*DescribeSuggestersOutput, error) {
 //
 //    // Example sending a request using the DescribeSuggestersRequest method.
 //    req := client.DescribeSuggestersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1003,7 +1023,8 @@ type IndexDocumentsRequest struct {
 }
 
 // Send marshals and sends the IndexDocuments API request.
-func (r IndexDocumentsRequest) Send() (*IndexDocumentsOutput, error) {
+func (r IndexDocumentsRequest) Send(ctx context.Context) (*IndexDocumentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1021,7 +1042,7 @@ func (r IndexDocumentsRequest) Send() (*IndexDocumentsOutput, error) {
 //
 //    // Example sending a request using the IndexDocumentsRequest method.
 //    req := client.IndexDocumentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1053,7 +1074,8 @@ type ListDomainNamesRequest struct {
 }
 
 // Send marshals and sends the ListDomainNames API request.
-func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
+func (r ListDomainNamesRequest) Send(ctx context.Context) (*ListDomainNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1069,7 +1091,7 @@ func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
 //
 //    // Example sending a request using the ListDomainNamesRequest method.
 //    req := client.ListDomainNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1101,7 +1123,8 @@ type UpdateAvailabilityOptionsRequest struct {
 }
 
 // Send marshals and sends the UpdateAvailabilityOptions API request.
-func (r UpdateAvailabilityOptionsRequest) Send() (*UpdateAvailabilityOptionsOutput, error) {
+func (r UpdateAvailabilityOptionsRequest) Send(ctx context.Context) (*UpdateAvailabilityOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1122,7 +1145,7 @@ func (r UpdateAvailabilityOptionsRequest) Send() (*UpdateAvailabilityOptionsOutp
 //
 //    // Example sending a request using the UpdateAvailabilityOptionsRequest method.
 //    req := client.UpdateAvailabilityOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1154,7 +1177,8 @@ type UpdateScalingParametersRequest struct {
 }
 
 // Send marshals and sends the UpdateScalingParameters API request.
-func (r UpdateScalingParametersRequest) Send() (*UpdateScalingParametersOutput, error) {
+func (r UpdateScalingParametersRequest) Send(ctx context.Context) (*UpdateScalingParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1177,7 +1201,7 @@ func (r UpdateScalingParametersRequest) Send() (*UpdateScalingParametersOutput, 
 //
 //    // Example sending a request using the UpdateScalingParametersRequest method.
 //    req := client.UpdateScalingParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1209,7 +1233,8 @@ type UpdateServiceAccessPoliciesRequest struct {
 }
 
 // Send marshals and sends the UpdateServiceAccessPolicies API request.
-func (r UpdateServiceAccessPoliciesRequest) Send() (*UpdateServiceAccessPoliciesOutput, error) {
+func (r UpdateServiceAccessPoliciesRequest) Send(ctx context.Context) (*UpdateServiceAccessPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1227,7 +1252,7 @@ func (r UpdateServiceAccessPoliciesRequest) Send() (*UpdateServiceAccessPolicies
 //
 //    // Example sending a request using the UpdateServiceAccessPoliciesRequest method.
 //    req := client.UpdateServiceAccessPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

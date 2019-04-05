@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -42,7 +43,7 @@ func main() {
 		Bucket: aws.String(os.Args[1]),
 		Key:    aws.String(os.Args[2]),
 	})
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		// Casting to the awserr.Error type will allow you to inspect the error
 		// code returned by the service in code. The error code can be used

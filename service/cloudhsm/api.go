@@ -3,6 +3,7 @@
 package cloudhsm
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -46,7 +48,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -80,7 +82,8 @@ type CreateHapgRequest struct {
 }
 
 // Send marshals and sends the CreateHapg API request.
-func (r CreateHapgRequest) Send() (*CreateHapgOutput, error) {
+func (r CreateHapgRequest) Send(ctx context.Context) (*CreateHapgOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -106,7 +109,7 @@ func (r CreateHapgRequest) Send() (*CreateHapgOutput, error) {
 //
 //    // Example sending a request using the CreateHapgRequest method.
 //    req := client.CreateHapgRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -140,7 +143,8 @@ type CreateHsmRequest struct {
 }
 
 // Send marshals and sends the CreateHsm API request.
-func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
+func (r CreateHsmRequest) Send(ctx context.Context) (*CreateHsmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -175,7 +179,7 @@ func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
 //
 //    // Example sending a request using the CreateHsmRequest method.
 //    req := client.CreateHsmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -209,7 +213,8 @@ type CreateLunaClientRequest struct {
 }
 
 // Send marshals and sends the CreateLunaClient API request.
-func (r CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
+func (r CreateLunaClientRequest) Send(ctx context.Context) (*CreateLunaClientOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -234,7 +239,7 @@ func (r CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
 //
 //    // Example sending a request using the CreateLunaClientRequest method.
 //    req := client.CreateLunaClientRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -268,7 +273,8 @@ type DeleteHapgRequest struct {
 }
 
 // Send marshals and sends the DeleteHapg API request.
-func (r DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
+func (r DeleteHapgRequest) Send(ctx context.Context) (*DeleteHapgOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -293,7 +299,7 @@ func (r DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
 //
 //    // Example sending a request using the DeleteHapgRequest method.
 //    req := client.DeleteHapgRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -327,7 +333,8 @@ type DeleteHsmRequest struct {
 }
 
 // Send marshals and sends the DeleteHsm API request.
-func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
+func (r DeleteHsmRequest) Send(ctx context.Context) (*DeleteHsmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -353,7 +360,7 @@ func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
 //
 //    // Example sending a request using the DeleteHsmRequest method.
 //    req := client.DeleteHsmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -387,7 +394,8 @@ type DeleteLunaClientRequest struct {
 }
 
 // Send marshals and sends the DeleteLunaClient API request.
-func (r DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
+func (r DeleteLunaClientRequest) Send(ctx context.Context) (*DeleteLunaClientOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -412,7 +420,7 @@ func (r DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
 //
 //    // Example sending a request using the DeleteLunaClientRequest method.
 //    req := client.DeleteLunaClientRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -446,7 +454,8 @@ type DescribeHapgRequest struct {
 }
 
 // Send marshals and sends the DescribeHapg API request.
-func (r DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
+func (r DescribeHapgRequest) Send(ctx context.Context) (*DescribeHapgOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -471,7 +480,7 @@ func (r DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
 //
 //    // Example sending a request using the DescribeHapgRequest method.
 //    req := client.DescribeHapgRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -505,7 +514,8 @@ type DescribeHsmRequest struct {
 }
 
 // Send marshals and sends the DescribeHsm API request.
-func (r DescribeHsmRequest) Send() (*DescribeHsmOutput, error) {
+func (r DescribeHsmRequest) Send(ctx context.Context) (*DescribeHsmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -531,7 +541,7 @@ func (r DescribeHsmRequest) Send() (*DescribeHsmOutput, error) {
 //
 //    // Example sending a request using the DescribeHsmRequest method.
 //    req := client.DescribeHsmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -565,7 +575,8 @@ type DescribeLunaClientRequest struct {
 }
 
 // Send marshals and sends the DescribeLunaClient API request.
-func (r DescribeLunaClientRequest) Send() (*DescribeLunaClientOutput, error) {
+func (r DescribeLunaClientRequest) Send(ctx context.Context) (*DescribeLunaClientOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -590,7 +601,7 @@ func (r DescribeLunaClientRequest) Send() (*DescribeLunaClientOutput, error) {
 //
 //    // Example sending a request using the DescribeLunaClientRequest method.
 //    req := client.DescribeLunaClientRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -624,7 +635,8 @@ type GetConfigRequest struct {
 }
 
 // Send marshals and sends the GetConfig API request.
-func (r GetConfigRequest) Send() (*GetConfigOutput, error) {
+func (r GetConfigRequest) Send(ctx context.Context) (*GetConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -650,7 +662,7 @@ func (r GetConfigRequest) Send() (*GetConfigOutput, error) {
 //
 //    // Example sending a request using the GetConfigRequest method.
 //    req := client.GetConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -684,7 +696,8 @@ type ListAvailableZonesRequest struct {
 }
 
 // Send marshals and sends the ListAvailableZones API request.
-func (r ListAvailableZonesRequest) Send() (*ListAvailableZonesOutput, error) {
+func (r ListAvailableZonesRequest) Send(ctx context.Context) (*ListAvailableZonesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -709,7 +722,7 @@ func (r ListAvailableZonesRequest) Send() (*ListAvailableZonesOutput, error) {
 //
 //    // Example sending a request using the ListAvailableZonesRequest method.
 //    req := client.ListAvailableZonesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -743,7 +756,8 @@ type ListHapgsRequest struct {
 }
 
 // Send marshals and sends the ListHapgs API request.
-func (r ListHapgsRequest) Send() (*ListHapgsOutput, error) {
+func (r ListHapgsRequest) Send(ctx context.Context) (*ListHapgsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -773,7 +787,7 @@ func (r ListHapgsRequest) Send() (*ListHapgsOutput, error) {
 //
 //    // Example sending a request using the ListHapgsRequest method.
 //    req := client.ListHapgsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -807,7 +821,8 @@ type ListHsmsRequest struct {
 }
 
 // Send marshals and sends the ListHsms API request.
-func (r ListHsmsRequest) Send() (*ListHsmsOutput, error) {
+func (r ListHsmsRequest) Send(ctx context.Context) (*ListHsmsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,7 +853,7 @@ func (r ListHsmsRequest) Send() (*ListHsmsOutput, error) {
 //
 //    // Example sending a request using the ListHsmsRequest method.
 //    req := client.ListHsmsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -872,7 +887,8 @@ type ListLunaClientsRequest struct {
 }
 
 // Send marshals and sends the ListLunaClients API request.
-func (r ListLunaClientsRequest) Send() (*ListLunaClientsOutput, error) {
+func (r ListLunaClientsRequest) Send(ctx context.Context) (*ListLunaClientsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -902,7 +918,7 @@ func (r ListLunaClientsRequest) Send() (*ListLunaClientsOutput, error) {
 //
 //    // Example sending a request using the ListLunaClientsRequest method.
 //    req := client.ListLunaClientsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -936,7 +952,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -961,7 +978,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -995,7 +1012,8 @@ type ModifyHapgRequest struct {
 }
 
 // Send marshals and sends the ModifyHapg API request.
-func (r ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
+func (r ModifyHapgRequest) Send(ctx context.Context) (*ModifyHapgOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1020,7 +1038,7 @@ func (r ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
 //
 //    // Example sending a request using the ModifyHapgRequest method.
 //    req := client.ModifyHapgRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1054,7 +1072,8 @@ type ModifyHsmRequest struct {
 }
 
 // Send marshals and sends the ModifyHsm API request.
-func (r ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
+func (r ModifyHsmRequest) Send(ctx context.Context) (*ModifyHsmOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1085,7 +1104,7 @@ func (r ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
 //
 //    // Example sending a request using the ModifyHsmRequest method.
 //    req := client.ModifyHsmRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1119,7 +1138,8 @@ type ModifyLunaClientRequest struct {
 }
 
 // Send marshals and sends the ModifyLunaClient API request.
-func (r ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
+func (r ModifyLunaClientRequest) Send(ctx context.Context) (*ModifyLunaClientOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1147,7 +1167,7 @@ func (r ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
 //
 //    // Example sending a request using the ModifyLunaClientRequest method.
 //    req := client.ModifyLunaClientRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1181,7 +1201,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1209,7 +1230,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package ssm
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -55,7 +57,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -89,7 +91,8 @@ type CancelCommandRequest struct {
 }
 
 // Send marshals and sends the CancelCommand API request.
-func (r CancelCommandRequest) Send() (*CancelCommandOutput, error) {
+func (r CancelCommandRequest) Send(ctx context.Context) (*CancelCommandOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -106,7 +109,7 @@ func (r CancelCommandRequest) Send() (*CancelCommandOutput, error) {
 //
 //    // Example sending a request using the CancelCommandRequest method.
 //    req := client.CancelCommandRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -140,7 +143,8 @@ type CancelMaintenanceWindowExecutionRequest struct {
 }
 
 // Send marshals and sends the CancelMaintenanceWindowExecution API request.
-func (r CancelMaintenanceWindowExecutionRequest) Send() (*CancelMaintenanceWindowExecutionOutput, error) {
+func (r CancelMaintenanceWindowExecutionRequest) Send(ctx context.Context) (*CancelMaintenanceWindowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,7 +162,7 @@ func (r CancelMaintenanceWindowExecutionRequest) Send() (*CancelMaintenanceWindo
 //
 //    // Example sending a request using the CancelMaintenanceWindowExecutionRequest method.
 //    req := client.CancelMaintenanceWindowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -192,7 +196,8 @@ type CreateActivationRequest struct {
 }
 
 // Send marshals and sends the CreateActivation API request.
-func (r CreateActivationRequest) Send() (*CreateActivationOutput, error) {
+func (r CreateActivationRequest) Send(ctx context.Context) (*CreateActivationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -212,7 +217,7 @@ func (r CreateActivationRequest) Send() (*CreateActivationOutput, error) {
 //
 //    // Example sending a request using the CreateActivationRequest method.
 //    req := client.CreateActivationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -246,7 +251,8 @@ type CreateAssociationRequest struct {
 }
 
 // Send marshals and sends the CreateAssociation API request.
-func (r CreateAssociationRequest) Send() (*CreateAssociationOutput, error) {
+func (r CreateAssociationRequest) Send(ctx context.Context) (*CreateAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -270,7 +276,7 @@ func (r CreateAssociationRequest) Send() (*CreateAssociationOutput, error) {
 //
 //    // Example sending a request using the CreateAssociationRequest method.
 //    req := client.CreateAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -304,7 +310,8 @@ type CreateAssociationBatchRequest struct {
 }
 
 // Send marshals and sends the CreateAssociationBatch API request.
-func (r CreateAssociationBatchRequest) Send() (*CreateAssociationBatchOutput, error) {
+func (r CreateAssociationBatchRequest) Send(ctx context.Context) (*CreateAssociationBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -328,7 +335,7 @@ func (r CreateAssociationBatchRequest) Send() (*CreateAssociationBatchOutput, er
 //
 //    // Example sending a request using the CreateAssociationBatchRequest method.
 //    req := client.CreateAssociationBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -362,7 +369,8 @@ type CreateDocumentRequest struct {
 }
 
 // Send marshals and sends the CreateDocument API request.
-func (r CreateDocumentRequest) Send() (*CreateDocumentOutput, error) {
+func (r CreateDocumentRequest) Send(ctx context.Context) (*CreateDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -381,7 +389,7 @@ func (r CreateDocumentRequest) Send() (*CreateDocumentOutput, error) {
 //
 //    // Example sending a request using the CreateDocumentRequest method.
 //    req := client.CreateDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -415,7 +423,8 @@ type CreateMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the CreateMaintenanceWindow API request.
-func (r CreateMaintenanceWindowRequest) Send() (*CreateMaintenanceWindowOutput, error) {
+func (r CreateMaintenanceWindowRequest) Send(ctx context.Context) (*CreateMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -431,7 +440,7 @@ func (r CreateMaintenanceWindowRequest) Send() (*CreateMaintenanceWindowOutput, 
 //
 //    // Example sending a request using the CreateMaintenanceWindowRequest method.
 //    req := client.CreateMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -465,7 +474,8 @@ type CreatePatchBaselineRequest struct {
 }
 
 // Send marshals and sends the CreatePatchBaseline API request.
-func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
+func (r CreatePatchBaselineRequest) Send(ctx context.Context) (*CreatePatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -484,7 +494,7 @@ func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
 //
 //    // Example sending a request using the CreatePatchBaselineRequest method.
 //    req := client.CreatePatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -518,7 +528,8 @@ type CreateResourceDataSyncRequest struct {
 }
 
 // Send marshals and sends the CreateResourceDataSync API request.
-func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, error) {
+func (r CreateResourceDataSyncRequest) Send(ctx context.Context) (*CreateResourceDataSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -544,7 +555,7 @@ func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, er
 //
 //    // Example sending a request using the CreateResourceDataSyncRequest method.
 //    req := client.CreateResourceDataSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -578,7 +589,8 @@ type DeleteActivationRequest struct {
 }
 
 // Send marshals and sends the DeleteActivation API request.
-func (r DeleteActivationRequest) Send() (*DeleteActivationOutput, error) {
+func (r DeleteActivationRequest) Send(ctx context.Context) (*DeleteActivationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +609,7 @@ func (r DeleteActivationRequest) Send() (*DeleteActivationOutput, error) {
 //
 //    // Example sending a request using the DeleteActivationRequest method.
 //    req := client.DeleteActivationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +643,8 @@ type DeleteAssociationRequest struct {
 }
 
 // Send marshals and sends the DeleteAssociation API request.
-func (r DeleteAssociationRequest) Send() (*DeleteAssociationOutput, error) {
+func (r DeleteAssociationRequest) Send(ctx context.Context) (*DeleteAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -652,7 +665,7 @@ func (r DeleteAssociationRequest) Send() (*DeleteAssociationOutput, error) {
 //
 //    // Example sending a request using the DeleteAssociationRequest method.
 //    req := client.DeleteAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -686,7 +699,8 @@ type DeleteDocumentRequest struct {
 }
 
 // Send marshals and sends the DeleteDocument API request.
-func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +720,7 @@ func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
 //
 //    // Example sending a request using the DeleteDocumentRequest method.
 //    req := client.DeleteDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -740,7 +754,8 @@ type DeleteInventoryRequest struct {
 }
 
 // Send marshals and sends the DeleteInventory API request.
-func (r DeleteInventoryRequest) Send() (*DeleteInventoryOutput, error) {
+func (r DeleteInventoryRequest) Send(ctx context.Context) (*DeleteInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +773,7 @@ func (r DeleteInventoryRequest) Send() (*DeleteInventoryOutput, error) {
 //
 //    // Example sending a request using the DeleteInventoryRequest method.
 //    req := client.DeleteInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -792,7 +807,8 @@ type DeleteMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the DeleteMaintenanceWindow API request.
-func (r DeleteMaintenanceWindowRequest) Send() (*DeleteMaintenanceWindowOutput, error) {
+func (r DeleteMaintenanceWindowRequest) Send(ctx context.Context) (*DeleteMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -808,7 +824,7 @@ func (r DeleteMaintenanceWindowRequest) Send() (*DeleteMaintenanceWindowOutput, 
 //
 //    // Example sending a request using the DeleteMaintenanceWindowRequest method.
 //    req := client.DeleteMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -842,7 +858,8 @@ type DeleteParameterRequest struct {
 }
 
 // Send marshals and sends the DeleteParameter API request.
-func (r DeleteParameterRequest) Send() (*DeleteParameterOutput, error) {
+func (r DeleteParameterRequest) Send(ctx context.Context) (*DeleteParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -858,7 +875,7 @@ func (r DeleteParameterRequest) Send() (*DeleteParameterOutput, error) {
 //
 //    // Example sending a request using the DeleteParameterRequest method.
 //    req := client.DeleteParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -892,7 +909,8 @@ type DeleteParametersRequest struct {
 }
 
 // Send marshals and sends the DeleteParameters API request.
-func (r DeleteParametersRequest) Send() (*DeleteParametersOutput, error) {
+func (r DeleteParametersRequest) Send(ctx context.Context) (*DeleteParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -909,7 +927,7 @@ func (r DeleteParametersRequest) Send() (*DeleteParametersOutput, error) {
 //
 //    // Example sending a request using the DeleteParametersRequest method.
 //    req := client.DeleteParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -943,7 +961,8 @@ type DeletePatchBaselineRequest struct {
 }
 
 // Send marshals and sends the DeletePatchBaseline API request.
-func (r DeletePatchBaselineRequest) Send() (*DeletePatchBaselineOutput, error) {
+func (r DeletePatchBaselineRequest) Send(ctx context.Context) (*DeletePatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -959,7 +978,7 @@ func (r DeletePatchBaselineRequest) Send() (*DeletePatchBaselineOutput, error) {
 //
 //    // Example sending a request using the DeletePatchBaselineRequest method.
 //    req := client.DeletePatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -993,7 +1012,8 @@ type DeleteResourceDataSyncRequest struct {
 }
 
 // Send marshals and sends the DeleteResourceDataSync API request.
-func (r DeleteResourceDataSyncRequest) Send() (*DeleteResourceDataSyncOutput, error) {
+func (r DeleteResourceDataSyncRequest) Send(ctx context.Context) (*DeleteResourceDataSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1012,7 +1032,7 @@ func (r DeleteResourceDataSyncRequest) Send() (*DeleteResourceDataSyncOutput, er
 //
 //    // Example sending a request using the DeleteResourceDataSyncRequest method.
 //    req := client.DeleteResourceDataSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1046,7 +1066,8 @@ type DeregisterManagedInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterManagedInstance API request.
-func (r DeregisterManagedInstanceRequest) Send() (*DeregisterManagedInstanceOutput, error) {
+func (r DeregisterManagedInstanceRequest) Send(ctx context.Context) (*DeregisterManagedInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1064,7 +1085,7 @@ func (r DeregisterManagedInstanceRequest) Send() (*DeregisterManagedInstanceOutp
 //
 //    // Example sending a request using the DeregisterManagedInstanceRequest method.
 //    req := client.DeregisterManagedInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1098,7 +1119,8 @@ type DeregisterPatchBaselineForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the DeregisterPatchBaselineForPatchGroup API request.
-func (r DeregisterPatchBaselineForPatchGroupRequest) Send() (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+func (r DeregisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1114,7 +1136,7 @@ func (r DeregisterPatchBaselineForPatchGroupRequest) Send() (*DeregisterPatchBas
 //
 //    // Example sending a request using the DeregisterPatchBaselineForPatchGroupRequest method.
 //    req := client.DeregisterPatchBaselineForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1148,7 +1170,8 @@ type DeregisterTargetFromMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the DeregisterTargetFromMaintenanceWindow API request.
-func (r DeregisterTargetFromMaintenanceWindowRequest) Send() (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+func (r DeregisterTargetFromMaintenanceWindowRequest) Send(ctx context.Context) (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1164,7 +1187,7 @@ func (r DeregisterTargetFromMaintenanceWindowRequest) Send() (*DeregisterTargetF
 //
 //    // Example sending a request using the DeregisterTargetFromMaintenanceWindowRequest method.
 //    req := client.DeregisterTargetFromMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1198,7 +1221,8 @@ type DeregisterTaskFromMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the DeregisterTaskFromMaintenanceWindow API request.
-func (r DeregisterTaskFromMaintenanceWindowRequest) Send() (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+func (r DeregisterTaskFromMaintenanceWindowRequest) Send(ctx context.Context) (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1214,7 +1238,7 @@ func (r DeregisterTaskFromMaintenanceWindowRequest) Send() (*DeregisterTaskFromM
 //
 //    // Example sending a request using the DeregisterTaskFromMaintenanceWindowRequest method.
 //    req := client.DeregisterTaskFromMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1248,7 +1272,8 @@ type DescribeActivationsRequest struct {
 }
 
 // Send marshals and sends the DescribeActivations API request.
-func (r DescribeActivationsRequest) Send() (*DescribeActivationsOutput, error) {
+func (r DescribeActivationsRequest) Send(ctx context.Context) (*DescribeActivationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1266,7 +1291,7 @@ func (r DescribeActivationsRequest) Send() (*DescribeActivationsOutput, error) {
 //
 //    // Example sending a request using the DescribeActivationsRequest method.
 //    req := client.DescribeActivationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1316,7 +1341,7 @@ func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) Descri
 func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActivationsPager {
 	return DescribeActivationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeActivationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1325,6 +1350,7 @@ func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActiva
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1352,7 +1378,8 @@ type DescribeAssociationRequest struct {
 }
 
 // Send marshals and sends the DescribeAssociation API request.
-func (r DescribeAssociationRequest) Send() (*DescribeAssociationOutput, error) {
+func (r DescribeAssociationRequest) Send(ctx context.Context) (*DescribeAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1372,7 +1399,7 @@ func (r DescribeAssociationRequest) Send() (*DescribeAssociationOutput, error) {
 //
 //    // Example sending a request using the DescribeAssociationRequest method.
 //    req := client.DescribeAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1406,7 +1433,8 @@ type DescribeAssociationExecutionTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssociationExecutionTargets API request.
-func (r DescribeAssociationExecutionTargetsRequest) Send() (*DescribeAssociationExecutionTargetsOutput, error) {
+func (r DescribeAssociationExecutionTargetsRequest) Send(ctx context.Context) (*DescribeAssociationExecutionTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1423,7 +1451,7 @@ func (r DescribeAssociationExecutionTargetsRequest) Send() (*DescribeAssociation
 //
 //    // Example sending a request using the DescribeAssociationExecutionTargetsRequest method.
 //    req := client.DescribeAssociationExecutionTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1457,7 +1485,8 @@ type DescribeAssociationExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssociationExecutions API request.
-func (r DescribeAssociationExecutionsRequest) Send() (*DescribeAssociationExecutionsOutput, error) {
+func (r DescribeAssociationExecutionsRequest) Send(ctx context.Context) (*DescribeAssociationExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1473,7 +1502,7 @@ func (r DescribeAssociationExecutionsRequest) Send() (*DescribeAssociationExecut
 //
 //    // Example sending a request using the DescribeAssociationExecutionsRequest method.
 //    req := client.DescribeAssociationExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1507,7 +1536,8 @@ type DescribeAutomationExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAutomationExecutions API request.
-func (r DescribeAutomationExecutionsRequest) Send() (*DescribeAutomationExecutionsOutput, error) {
+func (r DescribeAutomationExecutionsRequest) Send(ctx context.Context) (*DescribeAutomationExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1523,7 +1553,7 @@ func (r DescribeAutomationExecutionsRequest) Send() (*DescribeAutomationExecutio
 //
 //    // Example sending a request using the DescribeAutomationExecutionsRequest method.
 //    req := client.DescribeAutomationExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1557,7 +1587,8 @@ type DescribeAutomationStepExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAutomationStepExecutions API request.
-func (r DescribeAutomationStepExecutionsRequest) Send() (*DescribeAutomationStepExecutionsOutput, error) {
+func (r DescribeAutomationStepExecutionsRequest) Send(ctx context.Context) (*DescribeAutomationStepExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1574,7 +1605,7 @@ func (r DescribeAutomationStepExecutionsRequest) Send() (*DescribeAutomationStep
 //
 //    // Example sending a request using the DescribeAutomationStepExecutionsRequest method.
 //    req := client.DescribeAutomationStepExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1608,7 +1639,8 @@ type DescribeAvailablePatchesRequest struct {
 }
 
 // Send marshals and sends the DescribeAvailablePatches API request.
-func (r DescribeAvailablePatchesRequest) Send() (*DescribeAvailablePatchesOutput, error) {
+func (r DescribeAvailablePatchesRequest) Send(ctx context.Context) (*DescribeAvailablePatchesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1624,7 +1656,7 @@ func (r DescribeAvailablePatchesRequest) Send() (*DescribeAvailablePatchesOutput
 //
 //    // Example sending a request using the DescribeAvailablePatchesRequest method.
 //    req := client.DescribeAvailablePatchesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1658,7 +1690,8 @@ type DescribeDocumentRequest struct {
 }
 
 // Send marshals and sends the DescribeDocument API request.
-func (r DescribeDocumentRequest) Send() (*DescribeDocumentOutput, error) {
+func (r DescribeDocumentRequest) Send(ctx context.Context) (*DescribeDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1674,7 +1707,7 @@ func (r DescribeDocumentRequest) Send() (*DescribeDocumentOutput, error) {
 //
 //    // Example sending a request using the DescribeDocumentRequest method.
 //    req := client.DescribeDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1708,7 +1741,8 @@ type DescribeDocumentPermissionRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentPermission API request.
-func (r DescribeDocumentPermissionRequest) Send() (*DescribeDocumentPermissionOutput, error) {
+func (r DescribeDocumentPermissionRequest) Send(ctx context.Context) (*DescribeDocumentPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1726,7 +1760,7 @@ func (r DescribeDocumentPermissionRequest) Send() (*DescribeDocumentPermissionOu
 //
 //    // Example sending a request using the DescribeDocumentPermissionRequest method.
 //    req := client.DescribeDocumentPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1760,7 +1794,8 @@ type DescribeEffectiveInstanceAssociationsRequest struct {
 }
 
 // Send marshals and sends the DescribeEffectiveInstanceAssociations API request.
-func (r DescribeEffectiveInstanceAssociationsRequest) Send() (*DescribeEffectiveInstanceAssociationsOutput, error) {
+func (r DescribeEffectiveInstanceAssociationsRequest) Send(ctx context.Context) (*DescribeEffectiveInstanceAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1776,7 +1811,7 @@ func (r DescribeEffectiveInstanceAssociationsRequest) Send() (*DescribeEffective
 //
 //    // Example sending a request using the DescribeEffectiveInstanceAssociationsRequest method.
 //    req := client.DescribeEffectiveInstanceAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1810,7 +1845,8 @@ type DescribeEffectivePatchesForPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the DescribeEffectivePatchesForPatchBaseline API request.
-func (r DescribeEffectivePatchesForPatchBaselineRequest) Send() (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+func (r DescribeEffectivePatchesForPatchBaselineRequest) Send(ctx context.Context) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1828,7 +1864,7 @@ func (r DescribeEffectivePatchesForPatchBaselineRequest) Send() (*DescribeEffect
 //
 //    // Example sending a request using the DescribeEffectivePatchesForPatchBaselineRequest method.
 //    req := client.DescribeEffectivePatchesForPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1862,7 +1898,8 @@ type DescribeInstanceAssociationsStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceAssociationsStatus API request.
-func (r DescribeInstanceAssociationsStatusRequest) Send() (*DescribeInstanceAssociationsStatusOutput, error) {
+func (r DescribeInstanceAssociationsStatusRequest) Send(ctx context.Context) (*DescribeInstanceAssociationsStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1878,7 +1915,7 @@ func (r DescribeInstanceAssociationsStatusRequest) Send() (*DescribeInstanceAsso
 //
 //    // Example sending a request using the DescribeInstanceAssociationsStatusRequest method.
 //    req := client.DescribeInstanceAssociationsStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1912,7 +1949,8 @@ type DescribeInstanceInformationRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceInformation API request.
-func (r DescribeInstanceInformationRequest) Send() (*DescribeInstanceInformationOutput, error) {
+func (r DescribeInstanceInformationRequest) Send(ctx context.Context) (*DescribeInstanceInformationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1937,7 +1975,7 @@ func (r DescribeInstanceInformationRequest) Send() (*DescribeInstanceInformation
 //
 //    // Example sending a request using the DescribeInstanceInformationRequest method.
 //    req := client.DescribeInstanceInformationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1987,7 +2025,7 @@ func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformat
 func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) DescribeInstanceInformationPager {
 	return DescribeInstanceInformationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeInstanceInformationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1996,6 +2034,7 @@ func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2023,7 +2062,8 @@ type DescribeInstancePatchStatesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancePatchStates API request.
-func (r DescribeInstancePatchStatesRequest) Send() (*DescribeInstancePatchStatesOutput, error) {
+func (r DescribeInstancePatchStatesRequest) Send(ctx context.Context) (*DescribeInstancePatchStatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2039,7 +2079,7 @@ func (r DescribeInstancePatchStatesRequest) Send() (*DescribeInstancePatchStates
 //
 //    // Example sending a request using the DescribeInstancePatchStatesRequest method.
 //    req := client.DescribeInstancePatchStatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2073,7 +2113,8 @@ type DescribeInstancePatchStatesForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancePatchStatesForPatchGroup API request.
-func (r DescribeInstancePatchStatesForPatchGroupRequest) Send() (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+func (r DescribeInstancePatchStatesForPatchGroupRequest) Send(ctx context.Context) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2090,7 +2131,7 @@ func (r DescribeInstancePatchStatesForPatchGroupRequest) Send() (*DescribeInstan
 //
 //    // Example sending a request using the DescribeInstancePatchStatesForPatchGroupRequest method.
 //    req := client.DescribeInstancePatchStatesForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2124,7 +2165,8 @@ type DescribeInstancePatchesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancePatches API request.
-func (r DescribeInstancePatchesRequest) Send() (*DescribeInstancePatchesOutput, error) {
+func (r DescribeInstancePatchesRequest) Send(ctx context.Context) (*DescribeInstancePatchesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2141,7 +2183,7 @@ func (r DescribeInstancePatchesRequest) Send() (*DescribeInstancePatchesOutput, 
 //
 //    // Example sending a request using the DescribeInstancePatchesRequest method.
 //    req := client.DescribeInstancePatchesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2175,7 +2217,8 @@ type DescribeInventoryDeletionsRequest struct {
 }
 
 // Send marshals and sends the DescribeInventoryDeletions API request.
-func (r DescribeInventoryDeletionsRequest) Send() (*DescribeInventoryDeletionsOutput, error) {
+func (r DescribeInventoryDeletionsRequest) Send(ctx context.Context) (*DescribeInventoryDeletionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2191,7 +2234,7 @@ func (r DescribeInventoryDeletionsRequest) Send() (*DescribeInventoryDeletionsOu
 //
 //    // Example sending a request using the DescribeInventoryDeletionsRequest method.
 //    req := client.DescribeInventoryDeletionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2225,7 +2268,8 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTaskInvocations API request.
-func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send() (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2242,7 +2286,7 @@ func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send() (*Descr
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionTaskInvocationsRequest method.
 //    req := client.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2276,7 +2320,8 @@ type DescribeMaintenanceWindowExecutionTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTasks API request.
-func (r DescribeMaintenanceWindowExecutionTasksRequest) Send() (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+func (r DescribeMaintenanceWindowExecutionTasksRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2292,7 +2337,7 @@ func (r DescribeMaintenanceWindowExecutionTasksRequest) Send() (*DescribeMainten
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionTasksRequest method.
 //    req := client.DescribeMaintenanceWindowExecutionTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2326,7 +2371,8 @@ type DescribeMaintenanceWindowExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutions API request.
-func (r DescribeMaintenanceWindowExecutionsRequest) Send() (*DescribeMaintenanceWindowExecutionsOutput, error) {
+func (r DescribeMaintenanceWindowExecutionsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2344,7 +2390,7 @@ func (r DescribeMaintenanceWindowExecutionsRequest) Send() (*DescribeMaintenance
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionsRequest method.
 //    req := client.DescribeMaintenanceWindowExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2378,7 +2424,8 @@ type DescribeMaintenanceWindowScheduleRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowSchedule API request.
-func (r DescribeMaintenanceWindowScheduleRequest) Send() (*DescribeMaintenanceWindowScheduleOutput, error) {
+func (r DescribeMaintenanceWindowScheduleRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2394,7 +2441,7 @@ func (r DescribeMaintenanceWindowScheduleRequest) Send() (*DescribeMaintenanceWi
 //
 //    // Example sending a request using the DescribeMaintenanceWindowScheduleRequest method.
 //    req := client.DescribeMaintenanceWindowScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2428,7 +2475,8 @@ type DescribeMaintenanceWindowTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTargets API request.
-func (r DescribeMaintenanceWindowTargetsRequest) Send() (*DescribeMaintenanceWindowTargetsOutput, error) {
+func (r DescribeMaintenanceWindowTargetsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2444,7 +2492,7 @@ func (r DescribeMaintenanceWindowTargetsRequest) Send() (*DescribeMaintenanceWin
 //
 //    // Example sending a request using the DescribeMaintenanceWindowTargetsRequest method.
 //    req := client.DescribeMaintenanceWindowTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2478,7 +2526,8 @@ type DescribeMaintenanceWindowTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTasks API request.
-func (r DescribeMaintenanceWindowTasksRequest) Send() (*DescribeMaintenanceWindowTasksOutput, error) {
+func (r DescribeMaintenanceWindowTasksRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2494,7 +2543,7 @@ func (r DescribeMaintenanceWindowTasksRequest) Send() (*DescribeMaintenanceWindo
 //
 //    // Example sending a request using the DescribeMaintenanceWindowTasksRequest method.
 //    req := client.DescribeMaintenanceWindowTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2528,7 +2577,8 @@ type DescribeMaintenanceWindowsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindows API request.
-func (r DescribeMaintenanceWindowsRequest) Send() (*DescribeMaintenanceWindowsOutput, error) {
+func (r DescribeMaintenanceWindowsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2544,7 +2594,7 @@ func (r DescribeMaintenanceWindowsRequest) Send() (*DescribeMaintenanceWindowsOu
 //
 //    // Example sending a request using the DescribeMaintenanceWindowsRequest method.
 //    req := client.DescribeMaintenanceWindowsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2578,7 +2628,8 @@ type DescribeMaintenanceWindowsForTargetRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowsForTarget API request.
-func (r DescribeMaintenanceWindowsForTargetRequest) Send() (*DescribeMaintenanceWindowsForTargetOutput, error) {
+func (r DescribeMaintenanceWindowsForTargetRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowsForTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2595,7 +2646,7 @@ func (r DescribeMaintenanceWindowsForTargetRequest) Send() (*DescribeMaintenance
 //
 //    // Example sending a request using the DescribeMaintenanceWindowsForTargetRequest method.
 //    req := client.DescribeMaintenanceWindowsForTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2629,7 +2680,8 @@ type DescribeParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeParameters API request.
-func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+func (r DescribeParametersRequest) Send(ctx context.Context) (*DescribeParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2653,7 +2705,7 @@ func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
 //
 //    // Example sending a request using the DescribeParametersRequest method.
 //    req := client.DescribeParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2703,7 +2755,7 @@ func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) Describe
 func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParametersPager {
 	return DescribeParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2712,6 +2764,7 @@ func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParamet
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2739,7 +2792,8 @@ type DescribePatchBaselinesRequest struct {
 }
 
 // Send marshals and sends the DescribePatchBaselines API request.
-func (r DescribePatchBaselinesRequest) Send() (*DescribePatchBaselinesOutput, error) {
+func (r DescribePatchBaselinesRequest) Send(ctx context.Context) (*DescribePatchBaselinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2755,7 +2809,7 @@ func (r DescribePatchBaselinesRequest) Send() (*DescribePatchBaselinesOutput, er
 //
 //    // Example sending a request using the DescribePatchBaselinesRequest method.
 //    req := client.DescribePatchBaselinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2789,7 +2843,8 @@ type DescribePatchGroupStateRequest struct {
 }
 
 // Send marshals and sends the DescribePatchGroupState API request.
-func (r DescribePatchGroupStateRequest) Send() (*DescribePatchGroupStateOutput, error) {
+func (r DescribePatchGroupStateRequest) Send(ctx context.Context) (*DescribePatchGroupStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2805,7 +2860,7 @@ func (r DescribePatchGroupStateRequest) Send() (*DescribePatchGroupStateOutput, 
 //
 //    // Example sending a request using the DescribePatchGroupStateRequest method.
 //    req := client.DescribePatchGroupStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2839,7 +2894,8 @@ type DescribePatchGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribePatchGroups API request.
-func (r DescribePatchGroupsRequest) Send() (*DescribePatchGroupsOutput, error) {
+func (r DescribePatchGroupsRequest) Send(ctx context.Context) (*DescribePatchGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2855,7 +2911,7 @@ func (r DescribePatchGroupsRequest) Send() (*DescribePatchGroupsOutput, error) {
 //
 //    // Example sending a request using the DescribePatchGroupsRequest method.
 //    req := client.DescribePatchGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2889,7 +2945,8 @@ type DescribeSessionsRequest struct {
 }
 
 // Send marshals and sends the DescribeSessions API request.
-func (r DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
+func (r DescribeSessionsRequest) Send(ctx context.Context) (*DescribeSessionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2906,7 +2963,7 @@ func (r DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
 //
 //    // Example sending a request using the DescribeSessionsRequest method.
 //    req := client.DescribeSessionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2940,7 +2997,8 @@ type GetAutomationExecutionRequest struct {
 }
 
 // Send marshals and sends the GetAutomationExecution API request.
-func (r GetAutomationExecutionRequest) Send() (*GetAutomationExecutionOutput, error) {
+func (r GetAutomationExecutionRequest) Send(ctx context.Context) (*GetAutomationExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2956,7 +3014,7 @@ func (r GetAutomationExecutionRequest) Send() (*GetAutomationExecutionOutput, er
 //
 //    // Example sending a request using the GetAutomationExecutionRequest method.
 //    req := client.GetAutomationExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2990,7 +3048,8 @@ type GetCommandInvocationRequest struct {
 }
 
 // Send marshals and sends the GetCommandInvocation API request.
-func (r GetCommandInvocationRequest) Send() (*GetCommandInvocationOutput, error) {
+func (r GetCommandInvocationRequest) Send(ctx context.Context) (*GetCommandInvocationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3007,7 +3066,7 @@ func (r GetCommandInvocationRequest) Send() (*GetCommandInvocationOutput, error)
 //
 //    // Example sending a request using the GetCommandInvocationRequest method.
 //    req := client.GetCommandInvocationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3041,7 +3100,8 @@ type GetConnectionStatusRequest struct {
 }
 
 // Send marshals and sends the GetConnectionStatus API request.
-func (r GetConnectionStatusRequest) Send() (*GetConnectionStatusOutput, error) {
+func (r GetConnectionStatusRequest) Send(ctx context.Context) (*GetConnectionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3058,7 +3118,7 @@ func (r GetConnectionStatusRequest) Send() (*GetConnectionStatusOutput, error) {
 //
 //    // Example sending a request using the GetConnectionStatusRequest method.
 //    req := client.GetConnectionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3092,7 +3152,8 @@ type GetDefaultPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the GetDefaultPatchBaseline API request.
-func (r GetDefaultPatchBaselineRequest) Send() (*GetDefaultPatchBaselineOutput, error) {
+func (r GetDefaultPatchBaselineRequest) Send(ctx context.Context) (*GetDefaultPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3113,7 +3174,7 @@ func (r GetDefaultPatchBaselineRequest) Send() (*GetDefaultPatchBaselineOutput, 
 //
 //    // Example sending a request using the GetDefaultPatchBaselineRequest method.
 //    req := client.GetDefaultPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3147,7 +3208,8 @@ type GetDeployablePatchSnapshotForInstanceRequest struct {
 }
 
 // Send marshals and sends the GetDeployablePatchSnapshotForInstance API request.
-func (r GetDeployablePatchSnapshotForInstanceRequest) Send() (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+func (r GetDeployablePatchSnapshotForInstanceRequest) Send(ctx context.Context) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3164,7 +3226,7 @@ func (r GetDeployablePatchSnapshotForInstanceRequest) Send() (*GetDeployablePatc
 //
 //    // Example sending a request using the GetDeployablePatchSnapshotForInstanceRequest method.
 //    req := client.GetDeployablePatchSnapshotForInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3198,7 +3260,8 @@ type GetDocumentRequest struct {
 }
 
 // Send marshals and sends the GetDocument API request.
-func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+func (r GetDocumentRequest) Send(ctx context.Context) (*GetDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3214,7 +3277,7 @@ func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
 //
 //    // Example sending a request using the GetDocumentRequest method.
 //    req := client.GetDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3248,7 +3311,8 @@ type GetInventoryRequest struct {
 }
 
 // Send marshals and sends the GetInventory API request.
-func (r GetInventoryRequest) Send() (*GetInventoryOutput, error) {
+func (r GetInventoryRequest) Send(ctx context.Context) (*GetInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3264,7 +3328,7 @@ func (r GetInventoryRequest) Send() (*GetInventoryOutput, error) {
 //
 //    // Example sending a request using the GetInventoryRequest method.
 //    req := client.GetInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3298,7 +3362,8 @@ type GetInventorySchemaRequest struct {
 }
 
 // Send marshals and sends the GetInventorySchema API request.
-func (r GetInventorySchemaRequest) Send() (*GetInventorySchemaOutput, error) {
+func (r GetInventorySchemaRequest) Send(ctx context.Context) (*GetInventorySchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3315,7 +3380,7 @@ func (r GetInventorySchemaRequest) Send() (*GetInventorySchemaOutput, error) {
 //
 //    // Example sending a request using the GetInventorySchemaRequest method.
 //    req := client.GetInventorySchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3349,7 +3414,8 @@ type GetMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindow API request.
-func (r GetMaintenanceWindowRequest) Send() (*GetMaintenanceWindowOutput, error) {
+func (r GetMaintenanceWindowRequest) Send(ctx context.Context) (*GetMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3365,7 +3431,7 @@ func (r GetMaintenanceWindowRequest) Send() (*GetMaintenanceWindowOutput, error)
 //
 //    // Example sending a request using the GetMaintenanceWindowRequest method.
 //    req := client.GetMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3399,7 +3465,8 @@ type GetMaintenanceWindowExecutionRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecution API request.
-func (r GetMaintenanceWindowExecutionRequest) Send() (*GetMaintenanceWindowExecutionOutput, error) {
+func (r GetMaintenanceWindowExecutionRequest) Send(ctx context.Context) (*GetMaintenanceWindowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3416,7 +3483,7 @@ func (r GetMaintenanceWindowExecutionRequest) Send() (*GetMaintenanceWindowExecu
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionRequest method.
 //    req := client.GetMaintenanceWindowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3450,7 +3517,8 @@ type GetMaintenanceWindowExecutionTaskRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTask API request.
-func (r GetMaintenanceWindowExecutionTaskRequest) Send() (*GetMaintenanceWindowExecutionTaskOutput, error) {
+func (r GetMaintenanceWindowExecutionTaskRequest) Send(ctx context.Context) (*GetMaintenanceWindowExecutionTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3467,7 +3535,7 @@ func (r GetMaintenanceWindowExecutionTaskRequest) Send() (*GetMaintenanceWindowE
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionTaskRequest method.
 //    req := client.GetMaintenanceWindowExecutionTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3501,7 +3569,8 @@ type GetMaintenanceWindowExecutionTaskInvocationRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTaskInvocation API request.
-func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send() (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send(ctx context.Context) (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3518,7 +3587,7 @@ func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send() (*GetMaintena
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionTaskInvocationRequest method.
 //    req := client.GetMaintenanceWindowExecutionTaskInvocationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3552,7 +3621,8 @@ type GetMaintenanceWindowTaskRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowTask API request.
-func (r GetMaintenanceWindowTaskRequest) Send() (*GetMaintenanceWindowTaskOutput, error) {
+func (r GetMaintenanceWindowTaskRequest) Send(ctx context.Context) (*GetMaintenanceWindowTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3568,7 +3638,7 @@ func (r GetMaintenanceWindowTaskRequest) Send() (*GetMaintenanceWindowTaskOutput
 //
 //    // Example sending a request using the GetMaintenanceWindowTaskRequest method.
 //    req := client.GetMaintenanceWindowTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3602,7 +3672,8 @@ type GetParameterRequest struct {
 }
 
 // Send marshals and sends the GetParameter API request.
-func (r GetParameterRequest) Send() (*GetParameterOutput, error) {
+func (r GetParameterRequest) Send(ctx context.Context) (*GetParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3619,7 +3690,7 @@ func (r GetParameterRequest) Send() (*GetParameterOutput, error) {
 //
 //    // Example sending a request using the GetParameterRequest method.
 //    req := client.GetParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3653,7 +3724,8 @@ type GetParameterHistoryRequest struct {
 }
 
 // Send marshals and sends the GetParameterHistory API request.
-func (r GetParameterHistoryRequest) Send() (*GetParameterHistoryOutput, error) {
+func (r GetParameterHistoryRequest) Send(ctx context.Context) (*GetParameterHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3669,7 +3741,7 @@ func (r GetParameterHistoryRequest) Send() (*GetParameterHistoryOutput, error) {
 //
 //    // Example sending a request using the GetParameterHistoryRequest method.
 //    req := client.GetParameterHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3719,7 +3791,7 @@ func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetPar
 func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHistoryPager {
 	return GetParameterHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetParameterHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3728,6 +3800,7 @@ func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3755,7 +3828,8 @@ type GetParametersRequest struct {
 }
 
 // Send marshals and sends the GetParameters API request.
-func (r GetParametersRequest) Send() (*GetParametersOutput, error) {
+func (r GetParametersRequest) Send(ctx context.Context) (*GetParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3772,7 +3846,7 @@ func (r GetParametersRequest) Send() (*GetParametersOutput, error) {
 //
 //    // Example sending a request using the GetParametersRequest method.
 //    req := client.GetParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3806,7 +3880,8 @@ type GetParametersByPathRequest struct {
 }
 
 // Send marshals and sends the GetParametersByPath API request.
-func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
+func (r GetParametersByPathRequest) Send(ctx context.Context) (*GetParametersByPathOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3834,7 +3909,7 @@ func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
 //
 //    // Example sending a request using the GetParametersByPathRequest method.
 //    req := client.GetParametersByPathRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3884,7 +3959,7 @@ func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) GetPar
 func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersByPathPager {
 	return GetParametersByPathPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetParametersByPathInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3893,6 +3968,7 @@ func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersB
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3920,7 +3996,8 @@ type GetPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the GetPatchBaseline API request.
-func (r GetPatchBaselineRequest) Send() (*GetPatchBaselineOutput, error) {
+func (r GetPatchBaselineRequest) Send(ctx context.Context) (*GetPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3936,7 +4013,7 @@ func (r GetPatchBaselineRequest) Send() (*GetPatchBaselineOutput, error) {
 //
 //    // Example sending a request using the GetPatchBaselineRequest method.
 //    req := client.GetPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3970,7 +4047,8 @@ type GetPatchBaselineForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the GetPatchBaselineForPatchGroup API request.
-func (r GetPatchBaselineForPatchGroupRequest) Send() (*GetPatchBaselineForPatchGroupOutput, error) {
+func (r GetPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*GetPatchBaselineForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3987,7 +4065,7 @@ func (r GetPatchBaselineForPatchGroupRequest) Send() (*GetPatchBaselineForPatchG
 //
 //    // Example sending a request using the GetPatchBaselineForPatchGroupRequest method.
 //    req := client.GetPatchBaselineForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4021,7 +4099,8 @@ type LabelParameterVersionRequest struct {
 }
 
 // Send marshals and sends the LabelParameterVersion API request.
-func (r LabelParameterVersionRequest) Send() (*LabelParameterVersionOutput, error) {
+func (r LabelParameterVersionRequest) Send(ctx context.Context) (*LabelParameterVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4065,7 +4144,7 @@ func (r LabelParameterVersionRequest) Send() (*LabelParameterVersionOutput, erro
 //
 //    // Example sending a request using the LabelParameterVersionRequest method.
 //    req := client.LabelParameterVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4099,7 +4178,8 @@ type ListAssociationVersionsRequest struct {
 }
 
 // Send marshals and sends the ListAssociationVersions API request.
-func (r ListAssociationVersionsRequest) Send() (*ListAssociationVersionsOutput, error) {
+func (r ListAssociationVersionsRequest) Send(ctx context.Context) (*ListAssociationVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4115,7 +4195,7 @@ func (r ListAssociationVersionsRequest) Send() (*ListAssociationVersionsOutput, 
 //
 //    // Example sending a request using the ListAssociationVersionsRequest method.
 //    req := client.ListAssociationVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4149,7 +4229,8 @@ type ListAssociationsRequest struct {
 }
 
 // Send marshals and sends the ListAssociations API request.
-func (r ListAssociationsRequest) Send() (*ListAssociationsOutput, error) {
+func (r ListAssociationsRequest) Send(ctx context.Context) (*ListAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4165,7 +4246,7 @@ func (r ListAssociationsRequest) Send() (*ListAssociationsOutput, error) {
 //
 //    // Example sending a request using the ListAssociationsRequest method.
 //    req := client.ListAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4215,7 +4296,7 @@ func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) ListAssociat
 func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsPager {
 	return ListAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4224,6 +4305,7 @@ func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4251,7 +4333,8 @@ type ListCommandInvocationsRequest struct {
 }
 
 // Send marshals and sends the ListCommandInvocations API request.
-func (r ListCommandInvocationsRequest) Send() (*ListCommandInvocationsOutput, error) {
+func (r ListCommandInvocationsRequest) Send(ctx context.Context) (*ListCommandInvocationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4271,7 +4354,7 @@ func (r ListCommandInvocationsRequest) Send() (*ListCommandInvocationsOutput, er
 //
 //    // Example sending a request using the ListCommandInvocationsRequest method.
 //    req := client.ListCommandInvocationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4321,7 +4404,7 @@ func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) 
 func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommandInvocationsPager {
 	return ListCommandInvocationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCommandInvocationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4330,6 +4413,7 @@ func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommand
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4357,7 +4441,8 @@ type ListCommandsRequest struct {
 }
 
 // Send marshals and sends the ListCommands API request.
-func (r ListCommandsRequest) Send() (*ListCommandsOutput, error) {
+func (r ListCommandsRequest) Send(ctx context.Context) (*ListCommandsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4373,7 +4458,7 @@ func (r ListCommandsRequest) Send() (*ListCommandsOutput, error) {
 //
 //    // Example sending a request using the ListCommandsRequest method.
 //    req := client.ListCommandsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4423,7 +4508,7 @@ func (c *SSM) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest 
 func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
 	return ListCommandsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCommandsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4432,6 +4517,7 @@ func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4459,7 +4545,8 @@ type ListComplianceItemsRequest struct {
 }
 
 // Send marshals and sends the ListComplianceItems API request.
-func (r ListComplianceItemsRequest) Send() (*ListComplianceItemsOutput, error) {
+func (r ListComplianceItemsRequest) Send(ctx context.Context) (*ListComplianceItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4478,7 +4565,7 @@ func (r ListComplianceItemsRequest) Send() (*ListComplianceItemsOutput, error) {
 //
 //    // Example sending a request using the ListComplianceItemsRequest method.
 //    req := client.ListComplianceItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4512,7 +4599,8 @@ type ListComplianceSummariesRequest struct {
 }
 
 // Send marshals and sends the ListComplianceSummaries API request.
-func (r ListComplianceSummariesRequest) Send() (*ListComplianceSummariesOutput, error) {
+func (r ListComplianceSummariesRequest) Send(ctx context.Context) (*ListComplianceSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4530,7 +4618,7 @@ func (r ListComplianceSummariesRequest) Send() (*ListComplianceSummariesOutput, 
 //
 //    // Example sending a request using the ListComplianceSummariesRequest method.
 //    req := client.ListComplianceSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4564,7 +4652,8 @@ type ListDocumentVersionsRequest struct {
 }
 
 // Send marshals and sends the ListDocumentVersions API request.
-func (r ListDocumentVersionsRequest) Send() (*ListDocumentVersionsOutput, error) {
+func (r ListDocumentVersionsRequest) Send(ctx context.Context) (*ListDocumentVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4580,7 +4669,7 @@ func (r ListDocumentVersionsRequest) Send() (*ListDocumentVersionsOutput, error)
 //
 //    // Example sending a request using the ListDocumentVersionsRequest method.
 //    req := client.ListDocumentVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4614,7 +4703,8 @@ type ListDocumentsRequest struct {
 }
 
 // Send marshals and sends the ListDocuments API request.
-func (r ListDocumentsRequest) Send() (*ListDocumentsOutput, error) {
+func (r ListDocumentsRequest) Send(ctx context.Context) (*ListDocumentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4630,7 +4720,7 @@ func (r ListDocumentsRequest) Send() (*ListDocumentsOutput, error) {
 //
 //    // Example sending a request using the ListDocumentsRequest method.
 //    req := client.ListDocumentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4680,7 +4770,7 @@ func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsReque
 func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
 	return ListDocumentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDocumentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4689,6 +4779,7 @@ func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4716,7 +4807,8 @@ type ListInventoryEntriesRequest struct {
 }
 
 // Send marshals and sends the ListInventoryEntries API request.
-func (r ListInventoryEntriesRequest) Send() (*ListInventoryEntriesOutput, error) {
+func (r ListInventoryEntriesRequest) Send(ctx context.Context) (*ListInventoryEntriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4732,7 +4824,7 @@ func (r ListInventoryEntriesRequest) Send() (*ListInventoryEntriesOutput, error)
 //
 //    // Example sending a request using the ListInventoryEntriesRequest method.
 //    req := client.ListInventoryEntriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4766,7 +4858,8 @@ type ListResourceComplianceSummariesRequest struct {
 }
 
 // Send marshals and sends the ListResourceComplianceSummaries API request.
-func (r ListResourceComplianceSummariesRequest) Send() (*ListResourceComplianceSummariesOutput, error) {
+func (r ListResourceComplianceSummariesRequest) Send(ctx context.Context) (*ListResourceComplianceSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4784,7 +4877,7 @@ func (r ListResourceComplianceSummariesRequest) Send() (*ListResourceComplianceS
 //
 //    // Example sending a request using the ListResourceComplianceSummariesRequest method.
 //    req := client.ListResourceComplianceSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4818,7 +4911,8 @@ type ListResourceDataSyncRequest struct {
 }
 
 // Send marshals and sends the ListResourceDataSync API request.
-func (r ListResourceDataSyncRequest) Send() (*ListResourceDataSyncOutput, error) {
+func (r ListResourceDataSyncRequest) Send(ctx context.Context) (*ListResourceDataSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4843,7 +4937,7 @@ func (r ListResourceDataSyncRequest) Send() (*ListResourceDataSyncOutput, error)
 //
 //    // Example sending a request using the ListResourceDataSyncRequest method.
 //    req := client.ListResourceDataSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4877,7 +4971,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4893,7 +4988,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4927,7 +5022,8 @@ type ModifyDocumentPermissionRequest struct {
 }
 
 // Send marshals and sends the ModifyDocumentPermission API request.
-func (r ModifyDocumentPermissionRequest) Send() (*ModifyDocumentPermissionOutput, error) {
+func (r ModifyDocumentPermissionRequest) Send(ctx context.Context) (*ModifyDocumentPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4946,7 +5042,7 @@ func (r ModifyDocumentPermissionRequest) Send() (*ModifyDocumentPermissionOutput
 //
 //    // Example sending a request using the ModifyDocumentPermissionRequest method.
 //    req := client.ModifyDocumentPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4980,7 +5076,8 @@ type PutComplianceItemsRequest struct {
 }
 
 // Send marshals and sends the PutComplianceItems API request.
-func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
+func (r PutComplianceItemsRequest) Send(ctx context.Context) (*PutComplianceItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5037,7 +5134,7 @@ func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
 //
 //    // Example sending a request using the PutComplianceItemsRequest method.
 //    req := client.PutComplianceItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5071,7 +5168,8 @@ type PutInventoryRequest struct {
 }
 
 // Send marshals and sends the PutInventory API request.
-func (r PutInventoryRequest) Send() (*PutInventoryOutput, error) {
+func (r PutInventoryRequest) Send(ctx context.Context) (*PutInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5089,7 +5187,7 @@ func (r PutInventoryRequest) Send() (*PutInventoryOutput, error) {
 //
 //    // Example sending a request using the PutInventoryRequest method.
 //    req := client.PutInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5123,7 +5221,8 @@ type PutParameterRequest struct {
 }
 
 // Send marshals and sends the PutParameter API request.
-func (r PutParameterRequest) Send() (*PutParameterOutput, error) {
+func (r PutParameterRequest) Send(ctx context.Context) (*PutParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5139,7 +5238,7 @@ func (r PutParameterRequest) Send() (*PutParameterOutput, error) {
 //
 //    // Example sending a request using the PutParameterRequest method.
 //    req := client.PutParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5173,7 +5272,8 @@ type RegisterDefaultPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the RegisterDefaultPatchBaseline API request.
-func (r RegisterDefaultPatchBaselineRequest) Send() (*RegisterDefaultPatchBaselineOutput, error) {
+func (r RegisterDefaultPatchBaselineRequest) Send(ctx context.Context) (*RegisterDefaultPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5189,7 +5289,7 @@ func (r RegisterDefaultPatchBaselineRequest) Send() (*RegisterDefaultPatchBaseli
 //
 //    // Example sending a request using the RegisterDefaultPatchBaselineRequest method.
 //    req := client.RegisterDefaultPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5223,7 +5323,8 @@ type RegisterPatchBaselineForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the RegisterPatchBaselineForPatchGroup API request.
-func (r RegisterPatchBaselineForPatchGroupRequest) Send() (*RegisterPatchBaselineForPatchGroupOutput, error) {
+func (r RegisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*RegisterPatchBaselineForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5239,7 +5340,7 @@ func (r RegisterPatchBaselineForPatchGroupRequest) Send() (*RegisterPatchBaselin
 //
 //    // Example sending a request using the RegisterPatchBaselineForPatchGroupRequest method.
 //    req := client.RegisterPatchBaselineForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5273,7 +5374,8 @@ type RegisterTargetWithMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the RegisterTargetWithMaintenanceWindow API request.
-func (r RegisterTargetWithMaintenanceWindowRequest) Send() (*RegisterTargetWithMaintenanceWindowOutput, error) {
+func (r RegisterTargetWithMaintenanceWindowRequest) Send(ctx context.Context) (*RegisterTargetWithMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5289,7 +5391,7 @@ func (r RegisterTargetWithMaintenanceWindowRequest) Send() (*RegisterTargetWithM
 //
 //    // Example sending a request using the RegisterTargetWithMaintenanceWindowRequest method.
 //    req := client.RegisterTargetWithMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5323,7 +5425,8 @@ type RegisterTaskWithMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the RegisterTaskWithMaintenanceWindow API request.
-func (r RegisterTaskWithMaintenanceWindowRequest) Send() (*RegisterTaskWithMaintenanceWindowOutput, error) {
+func (r RegisterTaskWithMaintenanceWindowRequest) Send(ctx context.Context) (*RegisterTaskWithMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5339,7 +5442,7 @@ func (r RegisterTaskWithMaintenanceWindowRequest) Send() (*RegisterTaskWithMaint
 //
 //    // Example sending a request using the RegisterTaskWithMaintenanceWindowRequest method.
 //    req := client.RegisterTaskWithMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5373,7 +5476,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5389,7 +5493,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5423,7 +5527,8 @@ type ResumeSessionRequest struct {
 }
 
 // Send marshals and sends the ResumeSession API request.
-func (r ResumeSessionRequest) Send() (*ResumeSessionOutput, error) {
+func (r ResumeSessionRequest) Send(ctx context.Context) (*ResumeSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5443,7 +5548,7 @@ func (r ResumeSessionRequest) Send() (*ResumeSessionOutput, error) {
 //
 //    // Example sending a request using the ResumeSessionRequest method.
 //    req := client.ResumeSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5477,7 +5582,8 @@ type SendAutomationSignalRequest struct {
 }
 
 // Send marshals and sends the SendAutomationSignal API request.
-func (r SendAutomationSignalRequest) Send() (*SendAutomationSignalOutput, error) {
+func (r SendAutomationSignalRequest) Send(ctx context.Context) (*SendAutomationSignalOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5494,7 +5600,7 @@ func (r SendAutomationSignalRequest) Send() (*SendAutomationSignalOutput, error)
 //
 //    // Example sending a request using the SendAutomationSignalRequest method.
 //    req := client.SendAutomationSignalRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5528,7 +5634,8 @@ type SendCommandRequest struct {
 }
 
 // Send marshals and sends the SendCommand API request.
-func (r SendCommandRequest) Send() (*SendCommandOutput, error) {
+func (r SendCommandRequest) Send(ctx context.Context) (*SendCommandOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5544,7 +5651,7 @@ func (r SendCommandRequest) Send() (*SendCommandOutput, error) {
 //
 //    // Example sending a request using the SendCommandRequest method.
 //    req := client.SendCommandRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5578,7 +5685,8 @@ type StartAssociationsOnceRequest struct {
 }
 
 // Send marshals and sends the StartAssociationsOnce API request.
-func (r StartAssociationsOnceRequest) Send() (*StartAssociationsOnceOutput, error) {
+func (r StartAssociationsOnceRequest) Send(ctx context.Context) (*StartAssociationsOnceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5595,7 +5703,7 @@ func (r StartAssociationsOnceRequest) Send() (*StartAssociationsOnceOutput, erro
 //
 //    // Example sending a request using the StartAssociationsOnceRequest method.
 //    req := client.StartAssociationsOnceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5629,7 +5737,8 @@ type StartAutomationExecutionRequest struct {
 }
 
 // Send marshals and sends the StartAutomationExecution API request.
-func (r StartAutomationExecutionRequest) Send() (*StartAutomationExecutionOutput, error) {
+func (r StartAutomationExecutionRequest) Send(ctx context.Context) (*StartAutomationExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5645,7 +5754,7 @@ func (r StartAutomationExecutionRequest) Send() (*StartAutomationExecutionOutput
 //
 //    // Example sending a request using the StartAutomationExecutionRequest method.
 //    req := client.StartAutomationExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5679,7 +5788,8 @@ type StartSessionRequest struct {
 }
 
 // Send marshals and sends the StartSession API request.
-func (r StartSessionRequest) Send() (*StartSessionOutput, error) {
+func (r StartSessionRequest) Send(ctx context.Context) (*StartSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5703,7 +5813,7 @@ func (r StartSessionRequest) Send() (*StartSessionOutput, error) {
 //
 //    // Example sending a request using the StartSessionRequest method.
 //    req := client.StartSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5737,7 +5847,8 @@ type StopAutomationExecutionRequest struct {
 }
 
 // Send marshals and sends the StopAutomationExecution API request.
-func (r StopAutomationExecutionRequest) Send() (*StopAutomationExecutionOutput, error) {
+func (r StopAutomationExecutionRequest) Send(ctx context.Context) (*StopAutomationExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5753,7 +5864,7 @@ func (r StopAutomationExecutionRequest) Send() (*StopAutomationExecutionOutput, 
 //
 //    // Example sending a request using the StopAutomationExecutionRequest method.
 //    req := client.StopAutomationExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5787,7 +5898,8 @@ type TerminateSessionRequest struct {
 }
 
 // Send marshals and sends the TerminateSession API request.
-func (r TerminateSessionRequest) Send() (*TerminateSessionOutput, error) {
+func (r TerminateSessionRequest) Send(ctx context.Context) (*TerminateSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5805,7 +5917,7 @@ func (r TerminateSessionRequest) Send() (*TerminateSessionOutput, error) {
 //
 //    // Example sending a request using the TerminateSessionRequest method.
 //    req := client.TerminateSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5839,7 +5951,8 @@ type UpdateAssociationRequest struct {
 }
 
 // Send marshals and sends the UpdateAssociation API request.
-func (r UpdateAssociationRequest) Send() (*UpdateAssociationOutput, error) {
+func (r UpdateAssociationRequest) Send(ctx context.Context) (*UpdateAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5856,7 +5969,7 @@ func (r UpdateAssociationRequest) Send() (*UpdateAssociationOutput, error) {
 //
 //    // Example sending a request using the UpdateAssociationRequest method.
 //    req := client.UpdateAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5890,7 +6003,8 @@ type UpdateAssociationStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateAssociationStatus API request.
-func (r UpdateAssociationStatusRequest) Send() (*UpdateAssociationStatusOutput, error) {
+func (r UpdateAssociationStatusRequest) Send(ctx context.Context) (*UpdateAssociationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5907,7 +6021,7 @@ func (r UpdateAssociationStatusRequest) Send() (*UpdateAssociationStatusOutput, 
 //
 //    // Example sending a request using the UpdateAssociationStatusRequest method.
 //    req := client.UpdateAssociationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5941,7 +6055,8 @@ type UpdateDocumentRequest struct {
 }
 
 // Send marshals and sends the UpdateDocument API request.
-func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+func (r UpdateDocumentRequest) Send(ctx context.Context) (*UpdateDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5957,7 +6072,7 @@ func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
 //
 //    // Example sending a request using the UpdateDocumentRequest method.
 //    req := client.UpdateDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5991,7 +6106,8 @@ type UpdateDocumentDefaultVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentDefaultVersion API request.
-func (r UpdateDocumentDefaultVersionRequest) Send() (*UpdateDocumentDefaultVersionOutput, error) {
+func (r UpdateDocumentDefaultVersionRequest) Send(ctx context.Context) (*UpdateDocumentDefaultVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6007,7 +6123,7 @@ func (r UpdateDocumentDefaultVersionRequest) Send() (*UpdateDocumentDefaultVersi
 //
 //    // Example sending a request using the UpdateDocumentDefaultVersionRequest method.
 //    req := client.UpdateDocumentDefaultVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6041,7 +6157,8 @@ type UpdateMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceWindow API request.
-func (r UpdateMaintenanceWindowRequest) Send() (*UpdateMaintenanceWindowOutput, error) {
+func (r UpdateMaintenanceWindowRequest) Send(ctx context.Context) (*UpdateMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6057,7 +6174,7 @@ func (r UpdateMaintenanceWindowRequest) Send() (*UpdateMaintenanceWindowOutput, 
 //
 //    // Example sending a request using the UpdateMaintenanceWindowRequest method.
 //    req := client.UpdateMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6091,7 +6208,8 @@ type UpdateMaintenanceWindowTargetRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceWindowTarget API request.
-func (r UpdateMaintenanceWindowTargetRequest) Send() (*UpdateMaintenanceWindowTargetOutput, error) {
+func (r UpdateMaintenanceWindowTargetRequest) Send(ctx context.Context) (*UpdateMaintenanceWindowTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6123,7 +6241,7 @@ func (r UpdateMaintenanceWindowTargetRequest) Send() (*UpdateMaintenanceWindowTa
 //
 //    // Example sending a request using the UpdateMaintenanceWindowTargetRequest method.
 //    req := client.UpdateMaintenanceWindowTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6157,7 +6275,8 @@ type UpdateMaintenanceWindowTaskRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceWindowTask API request.
-func (r UpdateMaintenanceWindowTaskRequest) Send() (*UpdateMaintenanceWindowTaskOutput, error) {
+func (r UpdateMaintenanceWindowTaskRequest) Send(ctx context.Context) (*UpdateMaintenanceWindowTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6192,7 +6311,7 @@ func (r UpdateMaintenanceWindowTaskRequest) Send() (*UpdateMaintenanceWindowTask
 //
 //    // Example sending a request using the UpdateMaintenanceWindowTaskRequest method.
 //    req := client.UpdateMaintenanceWindowTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6226,7 +6345,8 @@ type UpdateManagedInstanceRoleRequest struct {
 }
 
 // Send marshals and sends the UpdateManagedInstanceRole API request.
-func (r UpdateManagedInstanceRoleRequest) Send() (*UpdateManagedInstanceRoleOutput, error) {
+func (r UpdateManagedInstanceRoleRequest) Send(ctx context.Context) (*UpdateManagedInstanceRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6243,7 +6363,7 @@ func (r UpdateManagedInstanceRoleRequest) Send() (*UpdateManagedInstanceRoleOutp
 //
 //    // Example sending a request using the UpdateManagedInstanceRoleRequest method.
 //    req := client.UpdateManagedInstanceRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6277,7 +6397,8 @@ type UpdatePatchBaselineRequest struct {
 }
 
 // Send marshals and sends the UpdatePatchBaseline API request.
-func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
+func (r UpdatePatchBaselineRequest) Send(ctx context.Context) (*UpdatePatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6297,7 +6418,7 @@ func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
 //
 //    // Example sending a request using the UpdatePatchBaselineRequest method.
 //    req := client.UpdatePatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

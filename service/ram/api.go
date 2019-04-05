@@ -3,6 +3,7 @@
 package ram
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type AcceptResourceShareInvitationRequest struct {
 }
 
 // Send marshals and sends the AcceptResourceShareInvitation API request.
-func (r AcceptResourceShareInvitationRequest) Send() (*AcceptResourceShareInvitationOutput, error) {
+func (r AcceptResourceShareInvitationRequest) Send(ctx context.Context) (*AcceptResourceShareInvitationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r AcceptResourceShareInvitationRequest) Send() (*AcceptResourceShareInvita
 //
 //    // Example sending a request using the AcceptResourceShareInvitationRequest method.
 //    req := client.AcceptResourceShareInvitationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type AssociateResourceShareRequest struct {
 }
 
 // Send marshals and sends the AssociateResourceShare API request.
-func (r AssociateResourceShareRequest) Send() (*AssociateResourceShareOutput, error) {
+func (r AssociateResourceShareRequest) Send(ctx context.Context) (*AssociateResourceShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r AssociateResourceShareRequest) Send() (*AssociateResourceShareOutput, er
 //
 //    // Example sending a request using the AssociateResourceShareRequest method.
 //    req := client.AssociateResourceShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +124,8 @@ type CreateResourceShareRequest struct {
 }
 
 // Send marshals and sends the CreateResourceShare API request.
-func (r CreateResourceShareRequest) Send() (*CreateResourceShareOutput, error) {
+func (r CreateResourceShareRequest) Send(ctx context.Context) (*CreateResourceShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r CreateResourceShareRequest) Send() (*CreateResourceShareOutput, error) {
 //
 //    // Example sending a request using the CreateResourceShareRequest method.
 //    req := client.CreateResourceShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type DeleteResourceShareRequest struct {
 }
 
 // Send marshals and sends the DeleteResourceShare API request.
-func (r DeleteResourceShareRequest) Send() (*DeleteResourceShareOutput, error) {
+func (r DeleteResourceShareRequest) Send(ctx context.Context) (*DeleteResourceShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +192,7 @@ func (r DeleteResourceShareRequest) Send() (*DeleteResourceShareOutput, error) {
 //
 //    // Example sending a request using the DeleteResourceShareRequest method.
 //    req := client.DeleteResourceShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +226,8 @@ type DisassociateResourceShareRequest struct {
 }
 
 // Send marshals and sends the DisassociateResourceShare API request.
-func (r DisassociateResourceShareRequest) Send() (*DisassociateResourceShareOutput, error) {
+func (r DisassociateResourceShareRequest) Send(ctx context.Context) (*DisassociateResourceShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +244,7 @@ func (r DisassociateResourceShareRequest) Send() (*DisassociateResourceShareOutp
 //
 //    // Example sending a request using the DisassociateResourceShareRequest method.
 //    req := client.DisassociateResourceShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -272,7 +278,8 @@ type EnableSharingWithAwsOrganizationRequest struct {
 }
 
 // Send marshals and sends the EnableSharingWithAwsOrganization API request.
-func (r EnableSharingWithAwsOrganizationRequest) Send() (*EnableSharingWithAwsOrganizationOutput, error) {
+func (r EnableSharingWithAwsOrganizationRequest) Send(ctx context.Context) (*EnableSharingWithAwsOrganizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -288,7 +295,7 @@ func (r EnableSharingWithAwsOrganizationRequest) Send() (*EnableSharingWithAwsOr
 //
 //    // Example sending a request using the EnableSharingWithAwsOrganizationRequest method.
 //    req := client.EnableSharingWithAwsOrganizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -322,7 +329,8 @@ type GetResourcePoliciesRequest struct {
 }
 
 // Send marshals and sends the GetResourcePolicies API request.
-func (r GetResourcePoliciesRequest) Send() (*GetResourcePoliciesOutput, error) {
+func (r GetResourcePoliciesRequest) Send(ctx context.Context) (*GetResourcePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -338,7 +346,7 @@ func (r GetResourcePoliciesRequest) Send() (*GetResourcePoliciesOutput, error) {
 //
 //    // Example sending a request using the GetResourcePoliciesRequest method.
 //    req := client.GetResourcePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -388,7 +396,7 @@ func (c *RAM) GetResourcePoliciesRequest(input *GetResourcePoliciesInput) GetRes
 func (p *GetResourcePoliciesRequest) Paginate(opts ...aws.Option) GetResourcePoliciesPager {
 	return GetResourcePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourcePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -397,6 +405,7 @@ func (p *GetResourcePoliciesRequest) Paginate(opts ...aws.Option) GetResourcePol
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -424,7 +433,8 @@ type GetResourceShareAssociationsRequest struct {
 }
 
 // Send marshals and sends the GetResourceShareAssociations API request.
-func (r GetResourceShareAssociationsRequest) Send() (*GetResourceShareAssociationsOutput, error) {
+func (r GetResourceShareAssociationsRequest) Send(ctx context.Context) (*GetResourceShareAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -440,7 +450,7 @@ func (r GetResourceShareAssociationsRequest) Send() (*GetResourceShareAssociatio
 //
 //    // Example sending a request using the GetResourceShareAssociationsRequest method.
 //    req := client.GetResourceShareAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -490,7 +500,7 @@ func (c *RAM) GetResourceShareAssociationsRequest(input *GetResourceShareAssocia
 func (p *GetResourceShareAssociationsRequest) Paginate(opts ...aws.Option) GetResourceShareAssociationsPager {
 	return GetResourceShareAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceShareAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -499,6 +509,7 @@ func (p *GetResourceShareAssociationsRequest) Paginate(opts ...aws.Option) GetRe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -526,7 +537,8 @@ type GetResourceShareInvitationsRequest struct {
 }
 
 // Send marshals and sends the GetResourceShareInvitations API request.
-func (r GetResourceShareInvitationsRequest) Send() (*GetResourceShareInvitationsOutput, error) {
+func (r GetResourceShareInvitationsRequest) Send(ctx context.Context) (*GetResourceShareInvitationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -542,7 +554,7 @@ func (r GetResourceShareInvitationsRequest) Send() (*GetResourceShareInvitations
 //
 //    // Example sending a request using the GetResourceShareInvitationsRequest method.
 //    req := client.GetResourceShareInvitationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -592,7 +604,7 @@ func (c *RAM) GetResourceShareInvitationsRequest(input *GetResourceShareInvitati
 func (p *GetResourceShareInvitationsRequest) Paginate(opts ...aws.Option) GetResourceShareInvitationsPager {
 	return GetResourceShareInvitationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceShareInvitationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -601,6 +613,7 @@ func (p *GetResourceShareInvitationsRequest) Paginate(opts ...aws.Option) GetRes
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -628,7 +641,8 @@ type GetResourceSharesRequest struct {
 }
 
 // Send marshals and sends the GetResourceShares API request.
-func (r GetResourceSharesRequest) Send() (*GetResourceSharesOutput, error) {
+func (r GetResourceSharesRequest) Send(ctx context.Context) (*GetResourceSharesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -644,7 +658,7 @@ func (r GetResourceSharesRequest) Send() (*GetResourceSharesOutput, error) {
 //
 //    // Example sending a request using the GetResourceSharesRequest method.
 //    req := client.GetResourceSharesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -694,7 +708,7 @@ func (c *RAM) GetResourceSharesRequest(input *GetResourceSharesInput) GetResourc
 func (p *GetResourceSharesRequest) Paginate(opts ...aws.Option) GetResourceSharesPager {
 	return GetResourceSharesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetResourceSharesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -703,6 +717,7 @@ func (p *GetResourceSharesRequest) Paginate(opts ...aws.Option) GetResourceShare
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -730,7 +745,8 @@ type ListPrincipalsRequest struct {
 }
 
 // Send marshals and sends the ListPrincipals API request.
-func (r ListPrincipalsRequest) Send() (*ListPrincipalsOutput, error) {
+func (r ListPrincipalsRequest) Send(ctx context.Context) (*ListPrincipalsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -746,7 +762,7 @@ func (r ListPrincipalsRequest) Send() (*ListPrincipalsOutput, error) {
 //
 //    // Example sending a request using the ListPrincipalsRequest method.
 //    req := client.ListPrincipalsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +812,7 @@ func (c *RAM) ListPrincipalsRequest(input *ListPrincipalsInput) ListPrincipalsRe
 func (p *ListPrincipalsRequest) Paginate(opts ...aws.Option) ListPrincipalsPager {
 	return ListPrincipalsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPrincipalsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -805,6 +821,7 @@ func (p *ListPrincipalsRequest) Paginate(opts ...aws.Option) ListPrincipalsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -832,7 +849,8 @@ type ListResourcesRequest struct {
 }
 
 // Send marshals and sends the ListResources API request.
-func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
+func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -848,7 +866,7 @@ func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
 //
 //    // Example sending a request using the ListResourcesRequest method.
 //    req := client.ListResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -898,7 +916,7 @@ func (c *RAM) ListResourcesRequest(input *ListResourcesInput) ListResourcesReque
 func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 	return ListResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -907,6 +925,7 @@ func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -934,7 +953,8 @@ type RejectResourceShareInvitationRequest struct {
 }
 
 // Send marshals and sends the RejectResourceShareInvitation API request.
-func (r RejectResourceShareInvitationRequest) Send() (*RejectResourceShareInvitationOutput, error) {
+func (r RejectResourceShareInvitationRequest) Send(ctx context.Context) (*RejectResourceShareInvitationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -950,7 +970,7 @@ func (r RejectResourceShareInvitationRequest) Send() (*RejectResourceShareInvita
 //
 //    // Example sending a request using the RejectResourceShareInvitationRequest method.
 //    req := client.RejectResourceShareInvitationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -984,7 +1004,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1000,7 +1021,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1034,7 +1055,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1050,7 +1072,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1084,7 +1106,8 @@ type UpdateResourceShareRequest struct {
 }
 
 // Send marshals and sends the UpdateResourceShare API request.
-func (r UpdateResourceShareRequest) Send() (*UpdateResourceShareOutput, error) {
+func (r UpdateResourceShareRequest) Send(ctx context.Context) (*UpdateResourceShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1100,7 +1123,7 @@ func (r UpdateResourceShareRequest) Send() (*UpdateResourceShareOutput, error) {
 //
 //    // Example sending a request using the UpdateResourceShareRequest method.
 //    req := client.UpdateResourceShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

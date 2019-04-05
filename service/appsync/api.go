@@ -3,6 +3,8 @@
 package appsync
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type CreateApiKeyRequest struct {
 }
 
 // Send marshals and sends the CreateApiKey API request.
-func (r CreateApiKeyRequest) Send() (*CreateApiKeyOutput, error) {
+func (r CreateApiKeyRequest) Send(ctx context.Context) (*CreateApiKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r CreateApiKeyRequest) Send() (*CreateApiKeyOutput, error) {
 //
 //    // Example sending a request using the CreateApiKeyRequest method.
 //    req := client.CreateApiKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -69,7 +72,8 @@ type CreateDataSourceRequest struct {
 }
 
 // Send marshals and sends the CreateDataSource API request.
-func (r CreateDataSourceRequest) Send() (*CreateDataSourceOutput, error) {
+func (r CreateDataSourceRequest) Send(ctx context.Context) (*CreateDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -85,7 +89,7 @@ func (r CreateDataSourceRequest) Send() (*CreateDataSourceOutput, error) {
 //
 //    // Example sending a request using the CreateDataSourceRequest method.
 //    req := client.CreateDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -119,7 +123,8 @@ type CreateFunctionRequest struct {
 }
 
 // Send marshals and sends the CreateFunction API request.
-func (r CreateFunctionRequest) Send() (*CreateFunctionOutput, error) {
+func (r CreateFunctionRequest) Send(ctx context.Context) (*CreateFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -138,7 +143,7 @@ func (r CreateFunctionRequest) Send() (*CreateFunctionOutput, error) {
 //
 //    // Example sending a request using the CreateFunctionRequest method.
 //    req := client.CreateFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -172,7 +177,8 @@ type CreateGraphqlApiRequest struct {
 }
 
 // Send marshals and sends the CreateGraphqlApi API request.
-func (r CreateGraphqlApiRequest) Send() (*CreateGraphqlApiOutput, error) {
+func (r CreateGraphqlApiRequest) Send(ctx context.Context) (*CreateGraphqlApiOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -188,7 +194,7 @@ func (r CreateGraphqlApiRequest) Send() (*CreateGraphqlApiOutput, error) {
 //
 //    // Example sending a request using the CreateGraphqlApiRequest method.
 //    req := client.CreateGraphqlApiRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -222,7 +228,8 @@ type CreateResolverRequest struct {
 }
 
 // Send marshals and sends the CreateResolver API request.
-func (r CreateResolverRequest) Send() (*CreateResolverOutput, error) {
+func (r CreateResolverRequest) Send(ctx context.Context) (*CreateResolverOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -241,7 +248,7 @@ func (r CreateResolverRequest) Send() (*CreateResolverOutput, error) {
 //
 //    // Example sending a request using the CreateResolverRequest method.
 //    req := client.CreateResolverRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -275,7 +282,8 @@ type CreateTypeRequest struct {
 }
 
 // Send marshals and sends the CreateType API request.
-func (r CreateTypeRequest) Send() (*CreateTypeOutput, error) {
+func (r CreateTypeRequest) Send(ctx context.Context) (*CreateTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -291,7 +299,7 @@ func (r CreateTypeRequest) Send() (*CreateTypeOutput, error) {
 //
 //    // Example sending a request using the CreateTypeRequest method.
 //    req := client.CreateTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -325,7 +333,8 @@ type DeleteApiKeyRequest struct {
 }
 
 // Send marshals and sends the DeleteApiKey API request.
-func (r DeleteApiKeyRequest) Send() (*DeleteApiKeyOutput, error) {
+func (r DeleteApiKeyRequest) Send(ctx context.Context) (*DeleteApiKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,7 +350,7 @@ func (r DeleteApiKeyRequest) Send() (*DeleteApiKeyOutput, error) {
 //
 //    // Example sending a request using the DeleteApiKeyRequest method.
 //    req := client.DeleteApiKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -375,7 +384,8 @@ type DeleteDataSourceRequest struct {
 }
 
 // Send marshals and sends the DeleteDataSource API request.
-func (r DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
+func (r DeleteDataSourceRequest) Send(ctx context.Context) (*DeleteDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -391,7 +401,7 @@ func (r DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
 //
 //    // Example sending a request using the DeleteDataSourceRequest method.
 //    req := client.DeleteDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -425,7 +435,8 @@ type DeleteFunctionRequest struct {
 }
 
 // Send marshals and sends the DeleteFunction API request.
-func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
+func (r DeleteFunctionRequest) Send(ctx context.Context) (*DeleteFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -441,7 +452,7 @@ func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
 //
 //    // Example sending a request using the DeleteFunctionRequest method.
 //    req := client.DeleteFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -475,7 +486,8 @@ type DeleteGraphqlApiRequest struct {
 }
 
 // Send marshals and sends the DeleteGraphqlApi API request.
-func (r DeleteGraphqlApiRequest) Send() (*DeleteGraphqlApiOutput, error) {
+func (r DeleteGraphqlApiRequest) Send(ctx context.Context) (*DeleteGraphqlApiOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,7 +503,7 @@ func (r DeleteGraphqlApiRequest) Send() (*DeleteGraphqlApiOutput, error) {
 //
 //    // Example sending a request using the DeleteGraphqlApiRequest method.
 //    req := client.DeleteGraphqlApiRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -525,7 +537,8 @@ type DeleteResolverRequest struct {
 }
 
 // Send marshals and sends the DeleteResolver API request.
-func (r DeleteResolverRequest) Send() (*DeleteResolverOutput, error) {
+func (r DeleteResolverRequest) Send(ctx context.Context) (*DeleteResolverOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -541,7 +554,7 @@ func (r DeleteResolverRequest) Send() (*DeleteResolverOutput, error) {
 //
 //    // Example sending a request using the DeleteResolverRequest method.
 //    req := client.DeleteResolverRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -575,7 +588,8 @@ type DeleteTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteType API request.
-func (r DeleteTypeRequest) Send() (*DeleteTypeOutput, error) {
+func (r DeleteTypeRequest) Send(ctx context.Context) (*DeleteTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,7 +605,7 @@ func (r DeleteTypeRequest) Send() (*DeleteTypeOutput, error) {
 //
 //    // Example sending a request using the DeleteTypeRequest method.
 //    req := client.DeleteTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -625,7 +639,8 @@ type GetDataSourceRequest struct {
 }
 
 // Send marshals and sends the GetDataSource API request.
-func (r GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
+func (r GetDataSourceRequest) Send(ctx context.Context) (*GetDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -641,7 +656,7 @@ func (r GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
 //
 //    // Example sending a request using the GetDataSourceRequest method.
 //    req := client.GetDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -675,7 +690,8 @@ type GetFunctionRequest struct {
 }
 
 // Send marshals and sends the GetFunction API request.
-func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
+func (r GetFunctionRequest) Send(ctx context.Context) (*GetFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -691,7 +707,7 @@ func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
 //
 //    // Example sending a request using the GetFunctionRequest method.
 //    req := client.GetFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -725,7 +741,8 @@ type GetGraphqlApiRequest struct {
 }
 
 // Send marshals and sends the GetGraphqlApi API request.
-func (r GetGraphqlApiRequest) Send() (*GetGraphqlApiOutput, error) {
+func (r GetGraphqlApiRequest) Send(ctx context.Context) (*GetGraphqlApiOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -741,7 +758,7 @@ func (r GetGraphqlApiRequest) Send() (*GetGraphqlApiOutput, error) {
 //
 //    // Example sending a request using the GetGraphqlApiRequest method.
 //    req := client.GetGraphqlApiRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -775,7 +792,8 @@ type GetIntrospectionSchemaRequest struct {
 }
 
 // Send marshals and sends the GetIntrospectionSchema API request.
-func (r GetIntrospectionSchemaRequest) Send() (*GetIntrospectionSchemaOutput, error) {
+func (r GetIntrospectionSchemaRequest) Send(ctx context.Context) (*GetIntrospectionSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -791,7 +809,7 @@ func (r GetIntrospectionSchemaRequest) Send() (*GetIntrospectionSchemaOutput, er
 //
 //    // Example sending a request using the GetIntrospectionSchemaRequest method.
 //    req := client.GetIntrospectionSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -825,7 +843,8 @@ type GetResolverRequest struct {
 }
 
 // Send marshals and sends the GetResolver API request.
-func (r GetResolverRequest) Send() (*GetResolverOutput, error) {
+func (r GetResolverRequest) Send(ctx context.Context) (*GetResolverOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -841,7 +860,7 @@ func (r GetResolverRequest) Send() (*GetResolverOutput, error) {
 //
 //    // Example sending a request using the GetResolverRequest method.
 //    req := client.GetResolverRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -875,7 +894,8 @@ type GetSchemaCreationStatusRequest struct {
 }
 
 // Send marshals and sends the GetSchemaCreationStatus API request.
-func (r GetSchemaCreationStatusRequest) Send() (*GetSchemaCreationStatusOutput, error) {
+func (r GetSchemaCreationStatusRequest) Send(ctx context.Context) (*GetSchemaCreationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -891,7 +911,7 @@ func (r GetSchemaCreationStatusRequest) Send() (*GetSchemaCreationStatusOutput, 
 //
 //    // Example sending a request using the GetSchemaCreationStatusRequest method.
 //    req := client.GetSchemaCreationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -925,7 +945,8 @@ type GetTypeRequest struct {
 }
 
 // Send marshals and sends the GetType API request.
-func (r GetTypeRequest) Send() (*GetTypeOutput, error) {
+func (r GetTypeRequest) Send(ctx context.Context) (*GetTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -941,7 +962,7 @@ func (r GetTypeRequest) Send() (*GetTypeOutput, error) {
 //
 //    // Example sending a request using the GetTypeRequest method.
 //    req := client.GetTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -975,7 +996,8 @@ type ListApiKeysRequest struct {
 }
 
 // Send marshals and sends the ListApiKeys API request.
-func (r ListApiKeysRequest) Send() (*ListApiKeysOutput, error) {
+func (r ListApiKeysRequest) Send(ctx context.Context) (*ListApiKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -996,7 +1018,7 @@ func (r ListApiKeysRequest) Send() (*ListApiKeysOutput, error) {
 //
 //    // Example sending a request using the ListApiKeysRequest method.
 //    req := client.ListApiKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1030,7 +1052,8 @@ type ListDataSourcesRequest struct {
 }
 
 // Send marshals and sends the ListDataSources API request.
-func (r ListDataSourcesRequest) Send() (*ListDataSourcesOutput, error) {
+func (r ListDataSourcesRequest) Send(ctx context.Context) (*ListDataSourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1046,7 +1069,7 @@ func (r ListDataSourcesRequest) Send() (*ListDataSourcesOutput, error) {
 //
 //    // Example sending a request using the ListDataSourcesRequest method.
 //    req := client.ListDataSourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1080,7 +1103,8 @@ type ListFunctionsRequest struct {
 }
 
 // Send marshals and sends the ListFunctions API request.
-func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
+func (r ListFunctionsRequest) Send(ctx context.Context) (*ListFunctionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1096,7 +1120,7 @@ func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
 //
 //    // Example sending a request using the ListFunctionsRequest method.
 //    req := client.ListFunctionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1130,7 +1154,8 @@ type ListGraphqlApisRequest struct {
 }
 
 // Send marshals and sends the ListGraphqlApis API request.
-func (r ListGraphqlApisRequest) Send() (*ListGraphqlApisOutput, error) {
+func (r ListGraphqlApisRequest) Send(ctx context.Context) (*ListGraphqlApisOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1146,7 +1171,7 @@ func (r ListGraphqlApisRequest) Send() (*ListGraphqlApisOutput, error) {
 //
 //    // Example sending a request using the ListGraphqlApisRequest method.
 //    req := client.ListGraphqlApisRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1180,7 +1205,8 @@ type ListResolversRequest struct {
 }
 
 // Send marshals and sends the ListResolvers API request.
-func (r ListResolversRequest) Send() (*ListResolversOutput, error) {
+func (r ListResolversRequest) Send(ctx context.Context) (*ListResolversOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1196,7 +1222,7 @@ func (r ListResolversRequest) Send() (*ListResolversOutput, error) {
 //
 //    // Example sending a request using the ListResolversRequest method.
 //    req := client.ListResolversRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1230,7 +1256,8 @@ type ListResolversByFunctionRequest struct {
 }
 
 // Send marshals and sends the ListResolversByFunction API request.
-func (r ListResolversByFunctionRequest) Send() (*ListResolversByFunctionOutput, error) {
+func (r ListResolversByFunctionRequest) Send(ctx context.Context) (*ListResolversByFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1246,7 +1273,7 @@ func (r ListResolversByFunctionRequest) Send() (*ListResolversByFunctionOutput, 
 //
 //    // Example sending a request using the ListResolversByFunctionRequest method.
 //    req := client.ListResolversByFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1280,7 +1307,8 @@ type ListTypesRequest struct {
 }
 
 // Send marshals and sends the ListTypes API request.
-func (r ListTypesRequest) Send() (*ListTypesOutput, error) {
+func (r ListTypesRequest) Send(ctx context.Context) (*ListTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1296,7 +1324,7 @@ func (r ListTypesRequest) Send() (*ListTypesOutput, error) {
 //
 //    // Example sending a request using the ListTypesRequest method.
 //    req := client.ListTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1330,7 +1358,8 @@ type StartSchemaCreationRequest struct {
 }
 
 // Send marshals and sends the StartSchemaCreation API request.
-func (r StartSchemaCreationRequest) Send() (*StartSchemaCreationOutput, error) {
+func (r StartSchemaCreationRequest) Send(ctx context.Context) (*StartSchemaCreationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1348,7 +1377,7 @@ func (r StartSchemaCreationRequest) Send() (*StartSchemaCreationOutput, error) {
 //
 //    // Example sending a request using the StartSchemaCreationRequest method.
 //    req := client.StartSchemaCreationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1382,7 +1411,8 @@ type UpdateApiKeyRequest struct {
 }
 
 // Send marshals and sends the UpdateApiKey API request.
-func (r UpdateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
+func (r UpdateApiKeyRequest) Send(ctx context.Context) (*UpdateApiKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1398,7 +1428,7 @@ func (r UpdateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
 //
 //    // Example sending a request using the UpdateApiKeyRequest method.
 //    req := client.UpdateApiKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1432,7 +1462,8 @@ type UpdateDataSourceRequest struct {
 }
 
 // Send marshals and sends the UpdateDataSource API request.
-func (r UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
+func (r UpdateDataSourceRequest) Send(ctx context.Context) (*UpdateDataSourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1448,7 +1479,7 @@ func (r UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
 //
 //    // Example sending a request using the UpdateDataSourceRequest method.
 //    req := client.UpdateDataSourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1482,7 +1513,8 @@ type UpdateFunctionRequest struct {
 }
 
 // Send marshals and sends the UpdateFunction API request.
-func (r UpdateFunctionRequest) Send() (*UpdateFunctionOutput, error) {
+func (r UpdateFunctionRequest) Send(ctx context.Context) (*UpdateFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1498,7 +1530,7 @@ func (r UpdateFunctionRequest) Send() (*UpdateFunctionOutput, error) {
 //
 //    // Example sending a request using the UpdateFunctionRequest method.
 //    req := client.UpdateFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1532,7 +1564,8 @@ type UpdateGraphqlApiRequest struct {
 }
 
 // Send marshals and sends the UpdateGraphqlApi API request.
-func (r UpdateGraphqlApiRequest) Send() (*UpdateGraphqlApiOutput, error) {
+func (r UpdateGraphqlApiRequest) Send(ctx context.Context) (*UpdateGraphqlApiOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1548,7 +1581,7 @@ func (r UpdateGraphqlApiRequest) Send() (*UpdateGraphqlApiOutput, error) {
 //
 //    // Example sending a request using the UpdateGraphqlApiRequest method.
 //    req := client.UpdateGraphqlApiRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1582,7 +1615,8 @@ type UpdateResolverRequest struct {
 }
 
 // Send marshals and sends the UpdateResolver API request.
-func (r UpdateResolverRequest) Send() (*UpdateResolverOutput, error) {
+func (r UpdateResolverRequest) Send(ctx context.Context) (*UpdateResolverOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1598,7 +1632,7 @@ func (r UpdateResolverRequest) Send() (*UpdateResolverOutput, error) {
 //
 //    // Example sending a request using the UpdateResolverRequest method.
 //    req := client.UpdateResolverRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1632,7 +1666,8 @@ type UpdateTypeRequest struct {
 }
 
 // Send marshals and sends the UpdateType API request.
-func (r UpdateTypeRequest) Send() (*UpdateTypeOutput, error) {
+func (r UpdateTypeRequest) Send(ctx context.Context) (*UpdateTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1648,7 +1683,7 @@ func (r UpdateTypeRequest) Send() (*UpdateTypeOutput, error) {
 //
 //    // Example sending a request using the UpdateTypeRequest method.
 //    req := client.UpdateTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

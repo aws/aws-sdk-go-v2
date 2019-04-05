@@ -3,6 +3,7 @@
 package mediastore
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CreateContainerRequest struct {
 }
 
 // Send marshals and sends the CreateContainer API request.
-func (r CreateContainerRequest) Send() (*CreateContainerOutput, error) {
+func (r CreateContainerRequest) Send(ctx context.Context) (*CreateContainerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r CreateContainerRequest) Send() (*CreateContainerOutput, error) {
 //
 //    // Example sending a request using the CreateContainerRequest method.
 //    req := client.CreateContainerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type DeleteContainerRequest struct {
 }
 
 // Send marshals and sends the DeleteContainer API request.
-func (r DeleteContainerRequest) Send() (*DeleteContainerOutput, error) {
+func (r DeleteContainerRequest) Send(ctx context.Context) (*DeleteContainerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r DeleteContainerRequest) Send() (*DeleteContainerOutput, error) {
 //
 //    // Example sending a request using the DeleteContainerRequest method.
 //    req := client.DeleteContainerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type DeleteContainerPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteContainerPolicy API request.
-func (r DeleteContainerPolicyRequest) Send() (*DeleteContainerPolicyOutput, error) {
+func (r DeleteContainerPolicyRequest) Send(ctx context.Context) (*DeleteContainerPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +143,7 @@ func (r DeleteContainerPolicyRequest) Send() (*DeleteContainerPolicyOutput, erro
 //
 //    // Example sending a request using the DeleteContainerPolicyRequest method.
 //    req := client.DeleteContainerPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +177,8 @@ type DeleteCorsPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteCorsPolicy API request.
-func (r DeleteCorsPolicyRequest) Send() (*DeleteCorsPolicyOutput, error) {
+func (r DeleteCorsPolicyRequest) Send(ctx context.Context) (*DeleteCorsPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,7 +199,7 @@ func (r DeleteCorsPolicyRequest) Send() (*DeleteCorsPolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteCorsPolicyRequest method.
 //    req := client.DeleteCorsPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +233,8 @@ type DeleteLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
-func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, error) {
+func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +250,7 @@ func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, erro
 //
 //    // Example sending a request using the DeleteLifecyclePolicyRequest method.
 //    req := client.DeleteLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -278,7 +284,8 @@ type DescribeContainerRequest struct {
 }
 
 // Send marshals and sends the DescribeContainer API request.
-func (r DescribeContainerRequest) Send() (*DescribeContainerOutput, error) {
+func (r DescribeContainerRequest) Send(ctx context.Context) (*DescribeContainerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -299,7 +306,7 @@ func (r DescribeContainerRequest) Send() (*DescribeContainerOutput, error) {
 //
 //    // Example sending a request using the DescribeContainerRequest method.
 //    req := client.DescribeContainerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -333,7 +340,8 @@ type GetContainerPolicyRequest struct {
 }
 
 // Send marshals and sends the GetContainerPolicy API request.
-func (r GetContainerPolicyRequest) Send() (*GetContainerPolicyOutput, error) {
+func (r GetContainerPolicyRequest) Send(ctx context.Context) (*GetContainerPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -351,7 +359,7 @@ func (r GetContainerPolicyRequest) Send() (*GetContainerPolicyOutput, error) {
 //
 //    // Example sending a request using the GetContainerPolicyRequest method.
 //    req := client.GetContainerPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -385,7 +393,8 @@ type GetCorsPolicyRequest struct {
 }
 
 // Send marshals and sends the GetCorsPolicy API request.
-func (r GetCorsPolicyRequest) Send() (*GetCorsPolicyOutput, error) {
+func (r GetCorsPolicyRequest) Send(ctx context.Context) (*GetCorsPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,7 +415,7 @@ func (r GetCorsPolicyRequest) Send() (*GetCorsPolicyOutput, error) {
 //
 //    // Example sending a request using the GetCorsPolicyRequest method.
 //    req := client.GetCorsPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -440,7 +449,8 @@ type GetLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the GetLifecyclePolicy API request.
-func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
+func (r GetLifecyclePolicyRequest) Send(ctx context.Context) (*GetLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -456,7 +466,7 @@ func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
 //
 //    // Example sending a request using the GetLifecyclePolicyRequest method.
 //    req := client.GetLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -490,7 +500,8 @@ type ListContainersRequest struct {
 }
 
 // Send marshals and sends the ListContainers API request.
-func (r ListContainersRequest) Send() (*ListContainersOutput, error) {
+func (r ListContainersRequest) Send(ctx context.Context) (*ListContainersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -515,7 +526,7 @@ func (r ListContainersRequest) Send() (*ListContainersOutput, error) {
 //
 //    // Example sending a request using the ListContainersRequest method.
 //    req := client.ListContainersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -549,7 +560,8 @@ type PutContainerPolicyRequest struct {
 }
 
 // Send marshals and sends the PutContainerPolicy API request.
-func (r PutContainerPolicyRequest) Send() (*PutContainerPolicyOutput, error) {
+func (r PutContainerPolicyRequest) Send(ctx context.Context) (*PutContainerPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -572,7 +584,7 @@ func (r PutContainerPolicyRequest) Send() (*PutContainerPolicyOutput, error) {
 //
 //    // Example sending a request using the PutContainerPolicyRequest method.
 //    req := client.PutContainerPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -606,7 +618,8 @@ type PutCorsPolicyRequest struct {
 }
 
 // Send marshals and sends the PutCorsPolicy API request.
-func (r PutCorsPolicyRequest) Send() (*PutCorsPolicyOutput, error) {
+func (r PutCorsPolicyRequest) Send(ctx context.Context) (*PutCorsPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,7 +645,7 @@ func (r PutCorsPolicyRequest) Send() (*PutCorsPolicyOutput, error) {
 //
 //    // Example sending a request using the PutCorsPolicyRequest method.
 //    req := client.PutCorsPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -666,7 +679,8 @@ type PutLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the PutLifecyclePolicy API request.
-func (r PutLifecyclePolicyRequest) Send() (*PutLifecyclePolicyOutput, error) {
+func (r PutLifecyclePolicyRequest) Send(ctx context.Context) (*PutLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,7 +698,7 @@ func (r PutLifecyclePolicyRequest) Send() (*PutLifecyclePolicyOutput, error) {
 //
 //    // Example sending a request using the PutLifecyclePolicyRequest method.
 //    req := client.PutLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

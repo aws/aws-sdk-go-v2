@@ -3,6 +3,7 @@
 package alexaforbusiness
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type ApproveSkillRequest struct {
 }
 
 // Send marshals and sends the ApproveSkill API request.
-func (r ApproveSkillRequest) Send() (*ApproveSkillOutput, error) {
+func (r ApproveSkillRequest) Send(ctx context.Context) (*ApproveSkillOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r ApproveSkillRequest) Send() (*ApproveSkillOutput, error) {
 //
 //    // Example sending a request using the ApproveSkillRequest method.
 //    req := client.ApproveSkillRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type AssociateContactWithAddressBookRequest struct {
 }
 
 // Send marshals and sends the AssociateContactWithAddressBook API request.
-func (r AssociateContactWithAddressBookRequest) Send() (*AssociateContactWithAddressBookOutput, error) {
+func (r AssociateContactWithAddressBookRequest) Send(ctx context.Context) (*AssociateContactWithAddressBookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r AssociateContactWithAddressBookRequest) Send() (*AssociateContactWithAdd
 //
 //    // Example sending a request using the AssociateContactWithAddressBookRequest method.
 //    req := client.AssociateContactWithAddressBookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type AssociateDeviceWithRoomRequest struct {
 }
 
 // Send marshals and sends the AssociateDeviceWithRoom API request.
-func (r AssociateDeviceWithRoomRequest) Send() (*AssociateDeviceWithRoomOutput, error) {
+func (r AssociateDeviceWithRoomRequest) Send(ctx context.Context) (*AssociateDeviceWithRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +145,7 @@ func (r AssociateDeviceWithRoomRequest) Send() (*AssociateDeviceWithRoomOutput, 
 //
 //    // Example sending a request using the AssociateDeviceWithRoomRequest method.
 //    req := client.AssociateDeviceWithRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +179,8 @@ type AssociateSkillGroupWithRoomRequest struct {
 }
 
 // Send marshals and sends the AssociateSkillGroupWithRoom API request.
-func (r AssociateSkillGroupWithRoomRequest) Send() (*AssociateSkillGroupWithRoomOutput, error) {
+func (r AssociateSkillGroupWithRoomRequest) Send(ctx context.Context) (*AssociateSkillGroupWithRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (r AssociateSkillGroupWithRoomRequest) Send() (*AssociateSkillGroupWithRoom
 //
 //    // Example sending a request using the AssociateSkillGroupWithRoomRequest method.
 //    req := client.AssociateSkillGroupWithRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -226,7 +231,8 @@ type AssociateSkillWithSkillGroupRequest struct {
 }
 
 // Send marshals and sends the AssociateSkillWithSkillGroup API request.
-func (r AssociateSkillWithSkillGroupRequest) Send() (*AssociateSkillWithSkillGroupOutput, error) {
+func (r AssociateSkillWithSkillGroupRequest) Send(ctx context.Context) (*AssociateSkillWithSkillGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +248,7 @@ func (r AssociateSkillWithSkillGroupRequest) Send() (*AssociateSkillWithSkillGro
 //
 //    // Example sending a request using the AssociateSkillWithSkillGroupRequest method.
 //    req := client.AssociateSkillWithSkillGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +282,8 @@ type AssociateSkillWithUsersRequest struct {
 }
 
 // Send marshals and sends the AssociateSkillWithUsers API request.
-func (r AssociateSkillWithUsersRequest) Send() (*AssociateSkillWithUsersOutput, error) {
+func (r AssociateSkillWithUsersRequest) Send(ctx context.Context) (*AssociateSkillWithUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -292,7 +299,7 @@ func (r AssociateSkillWithUsersRequest) Send() (*AssociateSkillWithUsersOutput, 
 //
 //    // Example sending a request using the AssociateSkillWithUsersRequest method.
 //    req := client.AssociateSkillWithUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -326,7 +333,8 @@ type CreateAddressBookRequest struct {
 }
 
 // Send marshals and sends the CreateAddressBook API request.
-func (r CreateAddressBookRequest) Send() (*CreateAddressBookOutput, error) {
+func (r CreateAddressBookRequest) Send(ctx context.Context) (*CreateAddressBookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,7 +350,7 @@ func (r CreateAddressBookRequest) Send() (*CreateAddressBookOutput, error) {
 //
 //    // Example sending a request using the CreateAddressBookRequest method.
 //    req := client.CreateAddressBookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -376,7 +384,8 @@ type CreateBusinessReportScheduleRequest struct {
 }
 
 // Send marshals and sends the CreateBusinessReportSchedule API request.
-func (r CreateBusinessReportScheduleRequest) Send() (*CreateBusinessReportScheduleOutput, error) {
+func (r CreateBusinessReportScheduleRequest) Send(ctx context.Context) (*CreateBusinessReportScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,7 +402,7 @@ func (r CreateBusinessReportScheduleRequest) Send() (*CreateBusinessReportSchedu
 //
 //    // Example sending a request using the CreateBusinessReportScheduleRequest method.
 //    req := client.CreateBusinessReportScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -427,7 +436,8 @@ type CreateConferenceProviderRequest struct {
 }
 
 // Send marshals and sends the CreateConferenceProvider API request.
-func (r CreateConferenceProviderRequest) Send() (*CreateConferenceProviderOutput, error) {
+func (r CreateConferenceProviderRequest) Send(ctx context.Context) (*CreateConferenceProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +453,7 @@ func (r CreateConferenceProviderRequest) Send() (*CreateConferenceProviderOutput
 //
 //    // Example sending a request using the CreateConferenceProviderRequest method.
 //    req := client.CreateConferenceProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -477,7 +487,8 @@ type CreateContactRequest struct {
 }
 
 // Send marshals and sends the CreateContact API request.
-func (r CreateContactRequest) Send() (*CreateContactOutput, error) {
+func (r CreateContactRequest) Send(ctx context.Context) (*CreateContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,7 +504,7 @@ func (r CreateContactRequest) Send() (*CreateContactOutput, error) {
 //
 //    // Example sending a request using the CreateContactRequest method.
 //    req := client.CreateContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -527,7 +538,8 @@ type CreateProfileRequest struct {
 }
 
 // Send marshals and sends the CreateProfile API request.
-func (r CreateProfileRequest) Send() (*CreateProfileOutput, error) {
+func (r CreateProfileRequest) Send(ctx context.Context) (*CreateProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -543,7 +555,7 @@ func (r CreateProfileRequest) Send() (*CreateProfileOutput, error) {
 //
 //    // Example sending a request using the CreateProfileRequest method.
 //    req := client.CreateProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -577,7 +589,8 @@ type CreateRoomRequest struct {
 }
 
 // Send marshals and sends the CreateRoom API request.
-func (r CreateRoomRequest) Send() (*CreateRoomOutput, error) {
+func (r CreateRoomRequest) Send(ctx context.Context) (*CreateRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -593,7 +606,7 @@ func (r CreateRoomRequest) Send() (*CreateRoomOutput, error) {
 //
 //    // Example sending a request using the CreateRoomRequest method.
 //    req := client.CreateRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -627,7 +640,8 @@ type CreateSkillGroupRequest struct {
 }
 
 // Send marshals and sends the CreateSkillGroup API request.
-func (r CreateSkillGroupRequest) Send() (*CreateSkillGroupOutput, error) {
+func (r CreateSkillGroupRequest) Send(ctx context.Context) (*CreateSkillGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -643,7 +657,7 @@ func (r CreateSkillGroupRequest) Send() (*CreateSkillGroupOutput, error) {
 //
 //    // Example sending a request using the CreateSkillGroupRequest method.
 //    req := client.CreateSkillGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -677,7 +691,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -693,7 +708,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -727,7 +742,8 @@ type DeleteAddressBookRequest struct {
 }
 
 // Send marshals and sends the DeleteAddressBook API request.
-func (r DeleteAddressBookRequest) Send() (*DeleteAddressBookOutput, error) {
+func (r DeleteAddressBookRequest) Send(ctx context.Context) (*DeleteAddressBookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -743,7 +759,7 @@ func (r DeleteAddressBookRequest) Send() (*DeleteAddressBookOutput, error) {
 //
 //    // Example sending a request using the DeleteAddressBookRequest method.
 //    req := client.DeleteAddressBookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -777,7 +793,8 @@ type DeleteBusinessReportScheduleRequest struct {
 }
 
 // Send marshals and sends the DeleteBusinessReportSchedule API request.
-func (r DeleteBusinessReportScheduleRequest) Send() (*DeleteBusinessReportScheduleOutput, error) {
+func (r DeleteBusinessReportScheduleRequest) Send(ctx context.Context) (*DeleteBusinessReportScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,7 +811,7 @@ func (r DeleteBusinessReportScheduleRequest) Send() (*DeleteBusinessReportSchedu
 //
 //    // Example sending a request using the DeleteBusinessReportScheduleRequest method.
 //    req := client.DeleteBusinessReportScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -828,7 +845,8 @@ type DeleteConferenceProviderRequest struct {
 }
 
 // Send marshals and sends the DeleteConferenceProvider API request.
-func (r DeleteConferenceProviderRequest) Send() (*DeleteConferenceProviderOutput, error) {
+func (r DeleteConferenceProviderRequest) Send(ctx context.Context) (*DeleteConferenceProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -844,7 +862,7 @@ func (r DeleteConferenceProviderRequest) Send() (*DeleteConferenceProviderOutput
 //
 //    // Example sending a request using the DeleteConferenceProviderRequest method.
 //    req := client.DeleteConferenceProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -878,7 +896,8 @@ type DeleteContactRequest struct {
 }
 
 // Send marshals and sends the DeleteContact API request.
-func (r DeleteContactRequest) Send() (*DeleteContactOutput, error) {
+func (r DeleteContactRequest) Send(ctx context.Context) (*DeleteContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -894,7 +913,7 @@ func (r DeleteContactRequest) Send() (*DeleteContactOutput, error) {
 //
 //    // Example sending a request using the DeleteContactRequest method.
 //    req := client.DeleteContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -928,7 +947,8 @@ type DeleteDeviceRequest struct {
 }
 
 // Send marshals and sends the DeleteDevice API request.
-func (r DeleteDeviceRequest) Send() (*DeleteDeviceOutput, error) {
+func (r DeleteDeviceRequest) Send(ctx context.Context) (*DeleteDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,7 +964,7 @@ func (r DeleteDeviceRequest) Send() (*DeleteDeviceOutput, error) {
 //
 //    // Example sending a request using the DeleteDeviceRequest method.
 //    req := client.DeleteDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -978,7 +998,8 @@ type DeleteProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteProfile API request.
-func (r DeleteProfileRequest) Send() (*DeleteProfileOutput, error) {
+func (r DeleteProfileRequest) Send(ctx context.Context) (*DeleteProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -994,7 +1015,7 @@ func (r DeleteProfileRequest) Send() (*DeleteProfileOutput, error) {
 //
 //    // Example sending a request using the DeleteProfileRequest method.
 //    req := client.DeleteProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1028,7 +1049,8 @@ type DeleteRoomRequest struct {
 }
 
 // Send marshals and sends the DeleteRoom API request.
-func (r DeleteRoomRequest) Send() (*DeleteRoomOutput, error) {
+func (r DeleteRoomRequest) Send(ctx context.Context) (*DeleteRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1044,7 +1066,7 @@ func (r DeleteRoomRequest) Send() (*DeleteRoomOutput, error) {
 //
 //    // Example sending a request using the DeleteRoomRequest method.
 //    req := client.DeleteRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1078,7 +1100,8 @@ type DeleteRoomSkillParameterRequest struct {
 }
 
 // Send marshals and sends the DeleteRoomSkillParameter API request.
-func (r DeleteRoomSkillParameterRequest) Send() (*DeleteRoomSkillParameterOutput, error) {
+func (r DeleteRoomSkillParameterRequest) Send(ctx context.Context) (*DeleteRoomSkillParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1094,7 +1117,7 @@ func (r DeleteRoomSkillParameterRequest) Send() (*DeleteRoomSkillParameterOutput
 //
 //    // Example sending a request using the DeleteRoomSkillParameterRequest method.
 //    req := client.DeleteRoomSkillParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1128,7 +1151,8 @@ type DeleteSkillAuthorizationRequest struct {
 }
 
 // Send marshals and sends the DeleteSkillAuthorization API request.
-func (r DeleteSkillAuthorizationRequest) Send() (*DeleteSkillAuthorizationOutput, error) {
+func (r DeleteSkillAuthorizationRequest) Send(ctx context.Context) (*DeleteSkillAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1144,7 +1168,7 @@ func (r DeleteSkillAuthorizationRequest) Send() (*DeleteSkillAuthorizationOutput
 //
 //    // Example sending a request using the DeleteSkillAuthorizationRequest method.
 //    req := client.DeleteSkillAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1178,7 +1202,8 @@ type DeleteSkillGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteSkillGroup API request.
-func (r DeleteSkillGroupRequest) Send() (*DeleteSkillGroupOutput, error) {
+func (r DeleteSkillGroupRequest) Send(ctx context.Context) (*DeleteSkillGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1194,7 +1219,7 @@ func (r DeleteSkillGroupRequest) Send() (*DeleteSkillGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteSkillGroupRequest method.
 //    req := client.DeleteSkillGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1228,7 +1253,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1244,7 +1270,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1278,7 +1304,8 @@ type DisassociateContactFromAddressBookRequest struct {
 }
 
 // Send marshals and sends the DisassociateContactFromAddressBook API request.
-func (r DisassociateContactFromAddressBookRequest) Send() (*DisassociateContactFromAddressBookOutput, error) {
+func (r DisassociateContactFromAddressBookRequest) Send(ctx context.Context) (*DisassociateContactFromAddressBookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1294,7 +1321,7 @@ func (r DisassociateContactFromAddressBookRequest) Send() (*DisassociateContactF
 //
 //    // Example sending a request using the DisassociateContactFromAddressBookRequest method.
 //    req := client.DisassociateContactFromAddressBookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1328,7 +1355,8 @@ type DisassociateDeviceFromRoomRequest struct {
 }
 
 // Send marshals and sends the DisassociateDeviceFromRoom API request.
-func (r DisassociateDeviceFromRoomRequest) Send() (*DisassociateDeviceFromRoomOutput, error) {
+func (r DisassociateDeviceFromRoomRequest) Send(ctx context.Context) (*DisassociateDeviceFromRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1346,7 +1374,7 @@ func (r DisassociateDeviceFromRoomRequest) Send() (*DisassociateDeviceFromRoomOu
 //
 //    // Example sending a request using the DisassociateDeviceFromRoomRequest method.
 //    req := client.DisassociateDeviceFromRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1380,7 +1408,8 @@ type DisassociateSkillFromSkillGroupRequest struct {
 }
 
 // Send marshals and sends the DisassociateSkillFromSkillGroup API request.
-func (r DisassociateSkillFromSkillGroupRequest) Send() (*DisassociateSkillFromSkillGroupOutput, error) {
+func (r DisassociateSkillFromSkillGroupRequest) Send(ctx context.Context) (*DisassociateSkillFromSkillGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1396,7 +1425,7 @@ func (r DisassociateSkillFromSkillGroupRequest) Send() (*DisassociateSkillFromSk
 //
 //    // Example sending a request using the DisassociateSkillFromSkillGroupRequest method.
 //    req := client.DisassociateSkillFromSkillGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1430,7 +1459,8 @@ type DisassociateSkillFromUsersRequest struct {
 }
 
 // Send marshals and sends the DisassociateSkillFromUsers API request.
-func (r DisassociateSkillFromUsersRequest) Send() (*DisassociateSkillFromUsersOutput, error) {
+func (r DisassociateSkillFromUsersRequest) Send(ctx context.Context) (*DisassociateSkillFromUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1447,7 +1477,7 @@ func (r DisassociateSkillFromUsersRequest) Send() (*DisassociateSkillFromUsersOu
 //
 //    // Example sending a request using the DisassociateSkillFromUsersRequest method.
 //    req := client.DisassociateSkillFromUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1481,7 +1511,8 @@ type DisassociateSkillGroupFromRoomRequest struct {
 }
 
 // Send marshals and sends the DisassociateSkillGroupFromRoom API request.
-func (r DisassociateSkillGroupFromRoomRequest) Send() (*DisassociateSkillGroupFromRoomOutput, error) {
+func (r DisassociateSkillGroupFromRoomRequest) Send(ctx context.Context) (*DisassociateSkillGroupFromRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1498,7 +1529,7 @@ func (r DisassociateSkillGroupFromRoomRequest) Send() (*DisassociateSkillGroupFr
 //
 //    // Example sending a request using the DisassociateSkillGroupFromRoomRequest method.
 //    req := client.DisassociateSkillGroupFromRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1532,7 +1563,8 @@ type ForgetSmartHomeAppliancesRequest struct {
 }
 
 // Send marshals and sends the ForgetSmartHomeAppliances API request.
-func (r ForgetSmartHomeAppliancesRequest) Send() (*ForgetSmartHomeAppliancesOutput, error) {
+func (r ForgetSmartHomeAppliancesRequest) Send(ctx context.Context) (*ForgetSmartHomeAppliancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1548,7 +1580,7 @@ func (r ForgetSmartHomeAppliancesRequest) Send() (*ForgetSmartHomeAppliancesOutp
 //
 //    // Example sending a request using the ForgetSmartHomeAppliancesRequest method.
 //    req := client.ForgetSmartHomeAppliancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1582,7 +1614,8 @@ type GetAddressBookRequest struct {
 }
 
 // Send marshals and sends the GetAddressBook API request.
-func (r GetAddressBookRequest) Send() (*GetAddressBookOutput, error) {
+func (r GetAddressBookRequest) Send(ctx context.Context) (*GetAddressBookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1598,7 +1631,7 @@ func (r GetAddressBookRequest) Send() (*GetAddressBookOutput, error) {
 //
 //    // Example sending a request using the GetAddressBookRequest method.
 //    req := client.GetAddressBookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1632,7 +1665,8 @@ type GetConferencePreferenceRequest struct {
 }
 
 // Send marshals and sends the GetConferencePreference API request.
-func (r GetConferencePreferenceRequest) Send() (*GetConferencePreferenceOutput, error) {
+func (r GetConferencePreferenceRequest) Send(ctx context.Context) (*GetConferencePreferenceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1648,7 +1682,7 @@ func (r GetConferencePreferenceRequest) Send() (*GetConferencePreferenceOutput, 
 //
 //    // Example sending a request using the GetConferencePreferenceRequest method.
 //    req := client.GetConferencePreferenceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1682,7 +1716,8 @@ type GetConferenceProviderRequest struct {
 }
 
 // Send marshals and sends the GetConferenceProvider API request.
-func (r GetConferenceProviderRequest) Send() (*GetConferenceProviderOutput, error) {
+func (r GetConferenceProviderRequest) Send(ctx context.Context) (*GetConferenceProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1698,7 +1733,7 @@ func (r GetConferenceProviderRequest) Send() (*GetConferenceProviderOutput, erro
 //
 //    // Example sending a request using the GetConferenceProviderRequest method.
 //    req := client.GetConferenceProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1732,7 +1767,8 @@ type GetContactRequest struct {
 }
 
 // Send marshals and sends the GetContact API request.
-func (r GetContactRequest) Send() (*GetContactOutput, error) {
+func (r GetContactRequest) Send(ctx context.Context) (*GetContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1748,7 +1784,7 @@ func (r GetContactRequest) Send() (*GetContactOutput, error) {
 //
 //    // Example sending a request using the GetContactRequest method.
 //    req := client.GetContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1782,7 +1818,8 @@ type GetDeviceRequest struct {
 }
 
 // Send marshals and sends the GetDevice API request.
-func (r GetDeviceRequest) Send() (*GetDeviceOutput, error) {
+func (r GetDeviceRequest) Send(ctx context.Context) (*GetDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1798,7 +1835,7 @@ func (r GetDeviceRequest) Send() (*GetDeviceOutput, error) {
 //
 //    // Example sending a request using the GetDeviceRequest method.
 //    req := client.GetDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1832,7 +1869,8 @@ type GetProfileRequest struct {
 }
 
 // Send marshals and sends the GetProfile API request.
-func (r GetProfileRequest) Send() (*GetProfileOutput, error) {
+func (r GetProfileRequest) Send(ctx context.Context) (*GetProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1848,7 +1886,7 @@ func (r GetProfileRequest) Send() (*GetProfileOutput, error) {
 //
 //    // Example sending a request using the GetProfileRequest method.
 //    req := client.GetProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1882,7 +1920,8 @@ type GetRoomRequest struct {
 }
 
 // Send marshals and sends the GetRoom API request.
-func (r GetRoomRequest) Send() (*GetRoomOutput, error) {
+func (r GetRoomRequest) Send(ctx context.Context) (*GetRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1898,7 +1937,7 @@ func (r GetRoomRequest) Send() (*GetRoomOutput, error) {
 //
 //    // Example sending a request using the GetRoomRequest method.
 //    req := client.GetRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1932,7 +1971,8 @@ type GetRoomSkillParameterRequest struct {
 }
 
 // Send marshals and sends the GetRoomSkillParameter API request.
-func (r GetRoomSkillParameterRequest) Send() (*GetRoomSkillParameterOutput, error) {
+func (r GetRoomSkillParameterRequest) Send(ctx context.Context) (*GetRoomSkillParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1948,7 +1988,7 @@ func (r GetRoomSkillParameterRequest) Send() (*GetRoomSkillParameterOutput, erro
 //
 //    // Example sending a request using the GetRoomSkillParameterRequest method.
 //    req := client.GetRoomSkillParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1982,7 +2022,8 @@ type GetSkillGroupRequest struct {
 }
 
 // Send marshals and sends the GetSkillGroup API request.
-func (r GetSkillGroupRequest) Send() (*GetSkillGroupOutput, error) {
+func (r GetSkillGroupRequest) Send(ctx context.Context) (*GetSkillGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1998,7 +2039,7 @@ func (r GetSkillGroupRequest) Send() (*GetSkillGroupOutput, error) {
 //
 //    // Example sending a request using the GetSkillGroupRequest method.
 //    req := client.GetSkillGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2032,7 +2073,8 @@ type ListBusinessReportSchedulesRequest struct {
 }
 
 // Send marshals and sends the ListBusinessReportSchedules API request.
-func (r ListBusinessReportSchedulesRequest) Send() (*ListBusinessReportSchedulesOutput, error) {
+func (r ListBusinessReportSchedulesRequest) Send(ctx context.Context) (*ListBusinessReportSchedulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2048,7 +2090,7 @@ func (r ListBusinessReportSchedulesRequest) Send() (*ListBusinessReportSchedules
 //
 //    // Example sending a request using the ListBusinessReportSchedulesRequest method.
 //    req := client.ListBusinessReportSchedulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2098,7 +2140,7 @@ func (c *AlexaForBusiness) ListBusinessReportSchedulesRequest(input *ListBusines
 func (p *ListBusinessReportSchedulesRequest) Paginate(opts ...aws.Option) ListBusinessReportSchedulesPager {
 	return ListBusinessReportSchedulesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBusinessReportSchedulesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2107,6 +2149,7 @@ func (p *ListBusinessReportSchedulesRequest) Paginate(opts ...aws.Option) ListBu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2134,7 +2177,8 @@ type ListConferenceProvidersRequest struct {
 }
 
 // Send marshals and sends the ListConferenceProviders API request.
-func (r ListConferenceProvidersRequest) Send() (*ListConferenceProvidersOutput, error) {
+func (r ListConferenceProvidersRequest) Send(ctx context.Context) (*ListConferenceProvidersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2150,7 +2194,7 @@ func (r ListConferenceProvidersRequest) Send() (*ListConferenceProvidersOutput, 
 //
 //    // Example sending a request using the ListConferenceProvidersRequest method.
 //    req := client.ListConferenceProvidersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2200,7 +2244,7 @@ func (c *AlexaForBusiness) ListConferenceProvidersRequest(input *ListConferenceP
 func (p *ListConferenceProvidersRequest) Paginate(opts ...aws.Option) ListConferenceProvidersPager {
 	return ListConferenceProvidersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListConferenceProvidersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2209,6 +2253,7 @@ func (p *ListConferenceProvidersRequest) Paginate(opts ...aws.Option) ListConfer
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2236,7 +2281,8 @@ type ListDeviceEventsRequest struct {
 }
 
 // Send marshals and sends the ListDeviceEvents API request.
-func (r ListDeviceEventsRequest) Send() (*ListDeviceEventsOutput, error) {
+func (r ListDeviceEventsRequest) Send(ctx context.Context) (*ListDeviceEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2253,7 +2299,7 @@ func (r ListDeviceEventsRequest) Send() (*ListDeviceEventsOutput, error) {
 //
 //    // Example sending a request using the ListDeviceEventsRequest method.
 //    req := client.ListDeviceEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2303,7 +2349,7 @@ func (c *AlexaForBusiness) ListDeviceEventsRequest(input *ListDeviceEventsInput)
 func (p *ListDeviceEventsRequest) Paginate(opts ...aws.Option) ListDeviceEventsPager {
 	return ListDeviceEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeviceEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2312,6 +2358,7 @@ func (p *ListDeviceEventsRequest) Paginate(opts ...aws.Option) ListDeviceEventsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2339,7 +2386,8 @@ type ListSkillsRequest struct {
 }
 
 // Send marshals and sends the ListSkills API request.
-func (r ListSkillsRequest) Send() (*ListSkillsOutput, error) {
+func (r ListSkillsRequest) Send(ctx context.Context) (*ListSkillsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2355,7 +2403,7 @@ func (r ListSkillsRequest) Send() (*ListSkillsOutput, error) {
 //
 //    // Example sending a request using the ListSkillsRequest method.
 //    req := client.ListSkillsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2405,7 +2453,7 @@ func (c *AlexaForBusiness) ListSkillsRequest(input *ListSkillsInput) ListSkillsR
 func (p *ListSkillsRequest) Paginate(opts ...aws.Option) ListSkillsPager {
 	return ListSkillsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSkillsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2414,6 +2462,7 @@ func (p *ListSkillsRequest) Paginate(opts ...aws.Option) ListSkillsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2441,7 +2490,8 @@ type ListSkillsStoreCategoriesRequest struct {
 }
 
 // Send marshals and sends the ListSkillsStoreCategories API request.
-func (r ListSkillsStoreCategoriesRequest) Send() (*ListSkillsStoreCategoriesOutput, error) {
+func (r ListSkillsStoreCategoriesRequest) Send(ctx context.Context) (*ListSkillsStoreCategoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2457,7 +2507,7 @@ func (r ListSkillsStoreCategoriesRequest) Send() (*ListSkillsStoreCategoriesOutp
 //
 //    // Example sending a request using the ListSkillsStoreCategoriesRequest method.
 //    req := client.ListSkillsStoreCategoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2507,7 +2557,7 @@ func (c *AlexaForBusiness) ListSkillsStoreCategoriesRequest(input *ListSkillsSto
 func (p *ListSkillsStoreCategoriesRequest) Paginate(opts ...aws.Option) ListSkillsStoreCategoriesPager {
 	return ListSkillsStoreCategoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSkillsStoreCategoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2516,6 +2566,7 @@ func (p *ListSkillsStoreCategoriesRequest) Paginate(opts ...aws.Option) ListSkil
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2543,7 +2594,8 @@ type ListSkillsStoreSkillsByCategoryRequest struct {
 }
 
 // Send marshals and sends the ListSkillsStoreSkillsByCategory API request.
-func (r ListSkillsStoreSkillsByCategoryRequest) Send() (*ListSkillsStoreSkillsByCategoryOutput, error) {
+func (r ListSkillsStoreSkillsByCategoryRequest) Send(ctx context.Context) (*ListSkillsStoreSkillsByCategoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2559,7 +2611,7 @@ func (r ListSkillsStoreSkillsByCategoryRequest) Send() (*ListSkillsStoreSkillsBy
 //
 //    // Example sending a request using the ListSkillsStoreSkillsByCategoryRequest method.
 //    req := client.ListSkillsStoreSkillsByCategoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2609,7 +2661,7 @@ func (c *AlexaForBusiness) ListSkillsStoreSkillsByCategoryRequest(input *ListSki
 func (p *ListSkillsStoreSkillsByCategoryRequest) Paginate(opts ...aws.Option) ListSkillsStoreSkillsByCategoryPager {
 	return ListSkillsStoreSkillsByCategoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSkillsStoreSkillsByCategoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2618,6 +2670,7 @@ func (p *ListSkillsStoreSkillsByCategoryRequest) Paginate(opts ...aws.Option) Li
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2645,7 +2698,8 @@ type ListSmartHomeAppliancesRequest struct {
 }
 
 // Send marshals and sends the ListSmartHomeAppliances API request.
-func (r ListSmartHomeAppliancesRequest) Send() (*ListSmartHomeAppliancesOutput, error) {
+func (r ListSmartHomeAppliancesRequest) Send(ctx context.Context) (*ListSmartHomeAppliancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2661,7 +2715,7 @@ func (r ListSmartHomeAppliancesRequest) Send() (*ListSmartHomeAppliancesOutput, 
 //
 //    // Example sending a request using the ListSmartHomeAppliancesRequest method.
 //    req := client.ListSmartHomeAppliancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2711,7 +2765,7 @@ func (c *AlexaForBusiness) ListSmartHomeAppliancesRequest(input *ListSmartHomeAp
 func (p *ListSmartHomeAppliancesRequest) Paginate(opts ...aws.Option) ListSmartHomeAppliancesPager {
 	return ListSmartHomeAppliancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSmartHomeAppliancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2720,6 +2774,7 @@ func (p *ListSmartHomeAppliancesRequest) Paginate(opts ...aws.Option) ListSmartH
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2747,7 +2802,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2763,7 +2819,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2813,7 +2869,7 @@ func (c *AlexaForBusiness) ListTagsRequest(input *ListTagsInput) ListTagsRequest
 func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 	return ListTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2822,6 +2878,7 @@ func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2849,7 +2906,8 @@ type PutConferencePreferenceRequest struct {
 }
 
 // Send marshals and sends the PutConferencePreference API request.
-func (r PutConferencePreferenceRequest) Send() (*PutConferencePreferenceOutput, error) {
+func (r PutConferencePreferenceRequest) Send(ctx context.Context) (*PutConferencePreferenceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2866,7 +2924,7 @@ func (r PutConferencePreferenceRequest) Send() (*PutConferencePreferenceOutput, 
 //
 //    // Example sending a request using the PutConferencePreferenceRequest method.
 //    req := client.PutConferencePreferenceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2900,7 +2958,8 @@ type PutRoomSkillParameterRequest struct {
 }
 
 // Send marshals and sends the PutRoomSkillParameter API request.
-func (r PutRoomSkillParameterRequest) Send() (*PutRoomSkillParameterOutput, error) {
+func (r PutRoomSkillParameterRequest) Send(ctx context.Context) (*PutRoomSkillParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2917,7 +2976,7 @@ func (r PutRoomSkillParameterRequest) Send() (*PutRoomSkillParameterOutput, erro
 //
 //    // Example sending a request using the PutRoomSkillParameterRequest method.
 //    req := client.PutRoomSkillParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2951,7 +3010,8 @@ type PutSkillAuthorizationRequest struct {
 }
 
 // Send marshals and sends the PutSkillAuthorization API request.
-func (r PutSkillAuthorizationRequest) Send() (*PutSkillAuthorizationOutput, error) {
+func (r PutSkillAuthorizationRequest) Send(ctx context.Context) (*PutSkillAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2970,7 +3030,7 @@ func (r PutSkillAuthorizationRequest) Send() (*PutSkillAuthorizationOutput, erro
 //
 //    // Example sending a request using the PutSkillAuthorizationRequest method.
 //    req := client.PutSkillAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3004,7 +3064,8 @@ type RegisterAVSDeviceRequest struct {
 }
 
 // Send marshals and sends the RegisterAVSDevice API request.
-func (r RegisterAVSDeviceRequest) Send() (*RegisterAVSDeviceOutput, error) {
+func (r RegisterAVSDeviceRequest) Send(ctx context.Context) (*RegisterAVSDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3021,7 +3082,7 @@ func (r RegisterAVSDeviceRequest) Send() (*RegisterAVSDeviceOutput, error) {
 //
 //    // Example sending a request using the RegisterAVSDeviceRequest method.
 //    req := client.RegisterAVSDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3055,7 +3116,8 @@ type RejectSkillRequest struct {
 }
 
 // Send marshals and sends the RejectSkill API request.
-func (r RejectSkillRequest) Send() (*RejectSkillOutput, error) {
+func (r RejectSkillRequest) Send(ctx context.Context) (*RejectSkillOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3074,7 +3136,7 @@ func (r RejectSkillRequest) Send() (*RejectSkillOutput, error) {
 //
 //    // Example sending a request using the RejectSkillRequest method.
 //    req := client.RejectSkillRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3108,7 +3170,8 @@ type ResolveRoomRequest struct {
 }
 
 // Send marshals and sends the ResolveRoom API request.
-func (r ResolveRoomRequest) Send() (*ResolveRoomOutput, error) {
+func (r ResolveRoomRequest) Send(ctx context.Context) (*ResolveRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3125,7 +3188,7 @@ func (r ResolveRoomRequest) Send() (*ResolveRoomOutput, error) {
 //
 //    // Example sending a request using the ResolveRoomRequest method.
 //    req := client.ResolveRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3159,7 +3222,8 @@ type RevokeInvitationRequest struct {
 }
 
 // Send marshals and sends the RevokeInvitation API request.
-func (r RevokeInvitationRequest) Send() (*RevokeInvitationOutput, error) {
+func (r RevokeInvitationRequest) Send(ctx context.Context) (*RevokeInvitationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3175,7 +3239,7 @@ func (r RevokeInvitationRequest) Send() (*RevokeInvitationOutput, error) {
 //
 //    // Example sending a request using the RevokeInvitationRequest method.
 //    req := client.RevokeInvitationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3209,7 +3273,8 @@ type SearchAddressBooksRequest struct {
 }
 
 // Send marshals and sends the SearchAddressBooks API request.
-func (r SearchAddressBooksRequest) Send() (*SearchAddressBooksOutput, error) {
+func (r SearchAddressBooksRequest) Send(ctx context.Context) (*SearchAddressBooksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3226,7 +3291,7 @@ func (r SearchAddressBooksRequest) Send() (*SearchAddressBooksOutput, error) {
 //
 //    // Example sending a request using the SearchAddressBooksRequest method.
 //    req := client.SearchAddressBooksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3276,7 +3341,7 @@ func (c *AlexaForBusiness) SearchAddressBooksRequest(input *SearchAddressBooksIn
 func (p *SearchAddressBooksRequest) Paginate(opts ...aws.Option) SearchAddressBooksPager {
 	return SearchAddressBooksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchAddressBooksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3285,6 +3350,7 @@ func (p *SearchAddressBooksRequest) Paginate(opts ...aws.Option) SearchAddressBo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3312,7 +3378,8 @@ type SearchContactsRequest struct {
 }
 
 // Send marshals and sends the SearchContacts API request.
-func (r SearchContactsRequest) Send() (*SearchContactsOutput, error) {
+func (r SearchContactsRequest) Send(ctx context.Context) (*SearchContactsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3328,7 +3395,7 @@ func (r SearchContactsRequest) Send() (*SearchContactsOutput, error) {
 //
 //    // Example sending a request using the SearchContactsRequest method.
 //    req := client.SearchContactsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3378,7 +3445,7 @@ func (c *AlexaForBusiness) SearchContactsRequest(input *SearchContactsInput) Sea
 func (p *SearchContactsRequest) Paginate(opts ...aws.Option) SearchContactsPager {
 	return SearchContactsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchContactsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3387,6 +3454,7 @@ func (p *SearchContactsRequest) Paginate(opts ...aws.Option) SearchContactsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3414,7 +3482,8 @@ type SearchDevicesRequest struct {
 }
 
 // Send marshals and sends the SearchDevices API request.
-func (r SearchDevicesRequest) Send() (*SearchDevicesOutput, error) {
+func (r SearchDevicesRequest) Send(ctx context.Context) (*SearchDevicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3430,7 +3499,7 @@ func (r SearchDevicesRequest) Send() (*SearchDevicesOutput, error) {
 //
 //    // Example sending a request using the SearchDevicesRequest method.
 //    req := client.SearchDevicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3480,7 +3549,7 @@ func (c *AlexaForBusiness) SearchDevicesRequest(input *SearchDevicesInput) Searc
 func (p *SearchDevicesRequest) Paginate(opts ...aws.Option) SearchDevicesPager {
 	return SearchDevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchDevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3489,6 +3558,7 @@ func (p *SearchDevicesRequest) Paginate(opts ...aws.Option) SearchDevicesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3516,7 +3586,8 @@ type SearchProfilesRequest struct {
 }
 
 // Send marshals and sends the SearchProfiles API request.
-func (r SearchProfilesRequest) Send() (*SearchProfilesOutput, error) {
+func (r SearchProfilesRequest) Send(ctx context.Context) (*SearchProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3532,7 +3603,7 @@ func (r SearchProfilesRequest) Send() (*SearchProfilesOutput, error) {
 //
 //    // Example sending a request using the SearchProfilesRequest method.
 //    req := client.SearchProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3582,7 +3653,7 @@ func (c *AlexaForBusiness) SearchProfilesRequest(input *SearchProfilesInput) Sea
 func (p *SearchProfilesRequest) Paginate(opts ...aws.Option) SearchProfilesPager {
 	return SearchProfilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProfilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3591,6 +3662,7 @@ func (p *SearchProfilesRequest) Paginate(opts ...aws.Option) SearchProfilesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3618,7 +3690,8 @@ type SearchRoomsRequest struct {
 }
 
 // Send marshals and sends the SearchRooms API request.
-func (r SearchRoomsRequest) Send() (*SearchRoomsOutput, error) {
+func (r SearchRoomsRequest) Send(ctx context.Context) (*SearchRoomsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3634,7 +3707,7 @@ func (r SearchRoomsRequest) Send() (*SearchRoomsOutput, error) {
 //
 //    // Example sending a request using the SearchRoomsRequest method.
 //    req := client.SearchRoomsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3684,7 +3757,7 @@ func (c *AlexaForBusiness) SearchRoomsRequest(input *SearchRoomsInput) SearchRoo
 func (p *SearchRoomsRequest) Paginate(opts ...aws.Option) SearchRoomsPager {
 	return SearchRoomsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchRoomsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3693,6 +3766,7 @@ func (p *SearchRoomsRequest) Paginate(opts ...aws.Option) SearchRoomsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3720,7 +3794,8 @@ type SearchSkillGroupsRequest struct {
 }
 
 // Send marshals and sends the SearchSkillGroups API request.
-func (r SearchSkillGroupsRequest) Send() (*SearchSkillGroupsOutput, error) {
+func (r SearchSkillGroupsRequest) Send(ctx context.Context) (*SearchSkillGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3737,7 +3812,7 @@ func (r SearchSkillGroupsRequest) Send() (*SearchSkillGroupsOutput, error) {
 //
 //    // Example sending a request using the SearchSkillGroupsRequest method.
 //    req := client.SearchSkillGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3787,7 +3862,7 @@ func (c *AlexaForBusiness) SearchSkillGroupsRequest(input *SearchSkillGroupsInpu
 func (p *SearchSkillGroupsRequest) Paginate(opts ...aws.Option) SearchSkillGroupsPager {
 	return SearchSkillGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchSkillGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3796,6 +3871,7 @@ func (p *SearchSkillGroupsRequest) Paginate(opts ...aws.Option) SearchSkillGroup
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3823,7 +3899,8 @@ type SearchUsersRequest struct {
 }
 
 // Send marshals and sends the SearchUsers API request.
-func (r SearchUsersRequest) Send() (*SearchUsersOutput, error) {
+func (r SearchUsersRequest) Send(ctx context.Context) (*SearchUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3839,7 +3916,7 @@ func (r SearchUsersRequest) Send() (*SearchUsersOutput, error) {
 //
 //    // Example sending a request using the SearchUsersRequest method.
 //    req := client.SearchUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3889,7 +3966,7 @@ func (c *AlexaForBusiness) SearchUsersRequest(input *SearchUsersInput) SearchUse
 func (p *SearchUsersRequest) Paginate(opts ...aws.Option) SearchUsersPager {
 	return SearchUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3898,6 +3975,7 @@ func (p *SearchUsersRequest) Paginate(opts ...aws.Option) SearchUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3925,7 +4003,8 @@ type SendInvitationRequest struct {
 }
 
 // Send marshals and sends the SendInvitation API request.
-func (r SendInvitationRequest) Send() (*SendInvitationOutput, error) {
+func (r SendInvitationRequest) Send(ctx context.Context) (*SendInvitationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3942,7 +4021,7 @@ func (r SendInvitationRequest) Send() (*SendInvitationOutput, error) {
 //
 //    // Example sending a request using the SendInvitationRequest method.
 //    req := client.SendInvitationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3976,7 +4055,8 @@ type StartDeviceSyncRequest struct {
 }
 
 // Send marshals and sends the StartDeviceSync API request.
-func (r StartDeviceSyncRequest) Send() (*StartDeviceSyncOutput, error) {
+func (r StartDeviceSyncRequest) Send(ctx context.Context) (*StartDeviceSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3993,7 +4073,7 @@ func (r StartDeviceSyncRequest) Send() (*StartDeviceSyncOutput, error) {
 //
 //    // Example sending a request using the StartDeviceSyncRequest method.
 //    req := client.StartDeviceSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4027,7 +4107,8 @@ type StartSmartHomeApplianceDiscoveryRequest struct {
 }
 
 // Send marshals and sends the StartSmartHomeApplianceDiscovery API request.
-func (r StartSmartHomeApplianceDiscoveryRequest) Send() (*StartSmartHomeApplianceDiscoveryOutput, error) {
+func (r StartSmartHomeApplianceDiscoveryRequest) Send(ctx context.Context) (*StartSmartHomeApplianceDiscoveryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4044,7 +4125,7 @@ func (r StartSmartHomeApplianceDiscoveryRequest) Send() (*StartSmartHomeApplianc
 //
 //    // Example sending a request using the StartSmartHomeApplianceDiscoveryRequest method.
 //    req := client.StartSmartHomeApplianceDiscoveryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4078,7 +4159,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4094,7 +4176,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4128,7 +4210,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4144,7 +4227,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4178,7 +4261,8 @@ type UpdateAddressBookRequest struct {
 }
 
 // Send marshals and sends the UpdateAddressBook API request.
-func (r UpdateAddressBookRequest) Send() (*UpdateAddressBookOutput, error) {
+func (r UpdateAddressBookRequest) Send(ctx context.Context) (*UpdateAddressBookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4194,7 +4278,7 @@ func (r UpdateAddressBookRequest) Send() (*UpdateAddressBookOutput, error) {
 //
 //    // Example sending a request using the UpdateAddressBookRequest method.
 //    req := client.UpdateAddressBookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4228,7 +4312,8 @@ type UpdateBusinessReportScheduleRequest struct {
 }
 
 // Send marshals and sends the UpdateBusinessReportSchedule API request.
-func (r UpdateBusinessReportScheduleRequest) Send() (*UpdateBusinessReportScheduleOutput, error) {
+func (r UpdateBusinessReportScheduleRequest) Send(ctx context.Context) (*UpdateBusinessReportScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4245,7 +4330,7 @@ func (r UpdateBusinessReportScheduleRequest) Send() (*UpdateBusinessReportSchedu
 //
 //    // Example sending a request using the UpdateBusinessReportScheduleRequest method.
 //    req := client.UpdateBusinessReportScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4279,7 +4364,8 @@ type UpdateConferenceProviderRequest struct {
 }
 
 // Send marshals and sends the UpdateConferenceProvider API request.
-func (r UpdateConferenceProviderRequest) Send() (*UpdateConferenceProviderOutput, error) {
+func (r UpdateConferenceProviderRequest) Send(ctx context.Context) (*UpdateConferenceProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4295,7 +4381,7 @@ func (r UpdateConferenceProviderRequest) Send() (*UpdateConferenceProviderOutput
 //
 //    // Example sending a request using the UpdateConferenceProviderRequest method.
 //    req := client.UpdateConferenceProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4329,7 +4415,8 @@ type UpdateContactRequest struct {
 }
 
 // Send marshals and sends the UpdateContact API request.
-func (r UpdateContactRequest) Send() (*UpdateContactOutput, error) {
+func (r UpdateContactRequest) Send(ctx context.Context) (*UpdateContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4345,7 +4432,7 @@ func (r UpdateContactRequest) Send() (*UpdateContactOutput, error) {
 //
 //    // Example sending a request using the UpdateContactRequest method.
 //    req := client.UpdateContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4379,7 +4466,8 @@ type UpdateDeviceRequest struct {
 }
 
 // Send marshals and sends the UpdateDevice API request.
-func (r UpdateDeviceRequest) Send() (*UpdateDeviceOutput, error) {
+func (r UpdateDeviceRequest) Send(ctx context.Context) (*UpdateDeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4395,7 +4483,7 @@ func (r UpdateDeviceRequest) Send() (*UpdateDeviceOutput, error) {
 //
 //    // Example sending a request using the UpdateDeviceRequest method.
 //    req := client.UpdateDeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4429,7 +4517,8 @@ type UpdateProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateProfile API request.
-func (r UpdateProfileRequest) Send() (*UpdateProfileOutput, error) {
+func (r UpdateProfileRequest) Send(ctx context.Context) (*UpdateProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4445,7 +4534,7 @@ func (r UpdateProfileRequest) Send() (*UpdateProfileOutput, error) {
 //
 //    // Example sending a request using the UpdateProfileRequest method.
 //    req := client.UpdateProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4479,7 +4568,8 @@ type UpdateRoomRequest struct {
 }
 
 // Send marshals and sends the UpdateRoom API request.
-func (r UpdateRoomRequest) Send() (*UpdateRoomOutput, error) {
+func (r UpdateRoomRequest) Send(ctx context.Context) (*UpdateRoomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4495,7 +4585,7 @@ func (r UpdateRoomRequest) Send() (*UpdateRoomOutput, error) {
 //
 //    // Example sending a request using the UpdateRoomRequest method.
 //    req := client.UpdateRoomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4529,7 +4619,8 @@ type UpdateSkillGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateSkillGroup API request.
-func (r UpdateSkillGroupRequest) Send() (*UpdateSkillGroupOutput, error) {
+func (r UpdateSkillGroupRequest) Send(ctx context.Context) (*UpdateSkillGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4545,7 +4636,7 @@ func (r UpdateSkillGroupRequest) Send() (*UpdateSkillGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateSkillGroupRequest method.
 //    req := client.UpdateSkillGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

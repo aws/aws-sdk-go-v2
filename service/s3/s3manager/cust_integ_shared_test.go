@@ -3,6 +3,7 @@
 package s3manager_test
 
 import (
+	"context"
 	"crypto/md5"
 	"fmt"
 	"io"
@@ -25,15 +26,17 @@ var bucketName *string
 var svc *s3.S3
 
 func TestMain(m *testing.M) {
+	ctx := context.Background()
+
 	svc = s3.New(integCfg)
 	bucketName = aws.String(s3integ.GenerateBucketName())
-	if err := s3integ.SetupTest(svc, *bucketName); err != nil {
+	if err := s3integ.SetupTest(ctx, svc, *bucketName); err != nil {
 		panic(err)
 	}
 
 	var result int
 	defer func() {
-		if err := s3integ.CleanupTest(svc, *bucketName); err != nil {
+		if err := s3integ.CleanupTest(ctx, svc, *bucketName); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 		if r := recover(); r != nil {

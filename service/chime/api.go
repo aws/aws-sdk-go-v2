@@ -3,6 +3,7 @@
 package chime
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type BatchSuspendUserRequest struct {
 }
 
 // Send marshals and sends the BatchSuspendUser API request.
-func (r BatchSuspendUserRequest) Send() (*BatchSuspendUserOutput, error) {
+func (r BatchSuspendUserRequest) Send(ctx context.Context) (*BatchSuspendUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -51,7 +53,7 @@ func (r BatchSuspendUserRequest) Send() (*BatchSuspendUserOutput, error) {
 //
 //    // Example sending a request using the BatchSuspendUserRequest method.
 //    req := client.BatchSuspendUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -85,7 +87,8 @@ type BatchUnsuspendUserRequest struct {
 }
 
 // Send marshals and sends the BatchUnsuspendUser API request.
-func (r BatchUnsuspendUserRequest) Send() (*BatchUnsuspendUserOutput, error) {
+func (r BatchUnsuspendUserRequest) Send(ctx context.Context) (*BatchUnsuspendUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ func (r BatchUnsuspendUserRequest) Send() (*BatchUnsuspendUserOutput, error) {
 //
 //    // Example sending a request using the BatchUnsuspendUserRequest method.
 //    req := client.BatchUnsuspendUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -142,7 +145,8 @@ type BatchUpdateUserRequest struct {
 }
 
 // Send marshals and sends the BatchUpdateUser API request.
-func (r BatchUpdateUserRequest) Send() (*BatchUpdateUserOutput, error) {
+func (r BatchUpdateUserRequest) Send(ctx context.Context) (*BatchUpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +164,7 @@ func (r BatchUpdateUserRequest) Send() (*BatchUpdateUserOutput, error) {
 //
 //    // Example sending a request using the BatchUpdateUserRequest method.
 //    req := client.BatchUpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -194,7 +198,8 @@ type CreateAccountRequest struct {
 }
 
 // Send marshals and sends the CreateAccount API request.
-func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
+func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,7 +218,7 @@ func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 //
 //    // Example sending a request using the CreateAccountRequest method.
 //    req := client.CreateAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -247,7 +252,8 @@ type DeleteAccountRequest struct {
 }
 
 // Send marshals and sends the DeleteAccount API request.
-func (r DeleteAccountRequest) Send() (*DeleteAccountOutput, error) {
+func (r DeleteAccountRequest) Send(ctx context.Context) (*DeleteAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -275,7 +281,7 @@ func (r DeleteAccountRequest) Send() (*DeleteAccountOutput, error) {
 //
 //    // Example sending a request using the DeleteAccountRequest method.
 //    req := client.DeleteAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -309,7 +315,8 @@ type GetAccountRequest struct {
 }
 
 // Send marshals and sends the GetAccount API request.
-func (r GetAccountRequest) Send() (*GetAccountOutput, error) {
+func (r GetAccountRequest) Send(ctx context.Context) (*GetAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,7 +333,7 @@ func (r GetAccountRequest) Send() (*GetAccountOutput, error) {
 //
 //    // Example sending a request using the GetAccountRequest method.
 //    req := client.GetAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -360,7 +367,8 @@ type GetAccountSettingsRequest struct {
 }
 
 // Send marshals and sends the GetAccountSettings API request.
-func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
+func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,7 +387,7 @@ func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
 //
 //    // Example sending a request using the GetAccountSettingsRequest method.
 //    req := client.GetAccountSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -413,7 +421,8 @@ type GetUserRequest struct {
 }
 
 // Send marshals and sends the GetUser API request.
-func (r GetUserRequest) Send() (*GetUserOutput, error) {
+func (r GetUserRequest) Send(ctx context.Context) (*GetUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -433,7 +442,7 @@ func (r GetUserRequest) Send() (*GetUserOutput, error) {
 //
 //    // Example sending a request using the GetUserRequest method.
 //    req := client.GetUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -467,7 +476,8 @@ type InviteUsersRequest struct {
 }
 
 // Send marshals and sends the InviteUsers API request.
-func (r InviteUsersRequest) Send() (*InviteUsersOutput, error) {
+func (r InviteUsersRequest) Send(ctx context.Context) (*InviteUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -485,7 +495,7 @@ func (r InviteUsersRequest) Send() (*InviteUsersOutput, error) {
 //
 //    // Example sending a request using the InviteUsersRequest method.
 //    req := client.InviteUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -519,7 +529,8 @@ type ListAccountsRequest struct {
 }
 
 // Send marshals and sends the ListAccounts API request.
-func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
+func (r ListAccountsRequest) Send(ctx context.Context) (*ListAccountsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -538,7 +549,7 @@ func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
 //
 //    // Example sending a request using the ListAccountsRequest method.
 //    req := client.ListAccountsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -588,7 +599,7 @@ func (c *Chime) ListAccountsRequest(input *ListAccountsInput) ListAccountsReques
 func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 	return ListAccountsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -597,6 +608,7 @@ func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -624,7 +636,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -642,7 +655,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -692,7 +705,7 @@ func (c *Chime) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 	return ListUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -701,6 +714,7 @@ func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -728,7 +742,8 @@ type LogoutUserRequest struct {
 }
 
 // Send marshals and sends the LogoutUser API request.
-func (r LogoutUserRequest) Send() (*LogoutUserOutput, error) {
+func (r LogoutUserRequest) Send(ctx context.Context) (*LogoutUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -745,7 +760,7 @@ func (r LogoutUserRequest) Send() (*LogoutUserOutput, error) {
 //
 //    // Example sending a request using the LogoutUserRequest method.
 //    req := client.LogoutUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -779,7 +794,8 @@ type ResetPersonalPINRequest struct {
 }
 
 // Send marshals and sends the ResetPersonalPIN API request.
-func (r ResetPersonalPINRequest) Send() (*ResetPersonalPINOutput, error) {
+func (r ResetPersonalPINRequest) Send(ctx context.Context) (*ResetPersonalPINOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -796,7 +812,7 @@ func (r ResetPersonalPINRequest) Send() (*ResetPersonalPINOutput, error) {
 //
 //    // Example sending a request using the ResetPersonalPINRequest method.
 //    req := client.ResetPersonalPINRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -830,7 +846,8 @@ type UpdateAccountRequest struct {
 }
 
 // Send marshals and sends the UpdateAccount API request.
-func (r UpdateAccountRequest) Send() (*UpdateAccountOutput, error) {
+func (r UpdateAccountRequest) Send(ctx context.Context) (*UpdateAccountOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -847,7 +864,7 @@ func (r UpdateAccountRequest) Send() (*UpdateAccountOutput, error) {
 //
 //    // Example sending a request using the UpdateAccountRequest method.
 //    req := client.UpdateAccountRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -881,7 +898,8 @@ type UpdateAccountSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateAccountSettings API request.
-func (r UpdateAccountSettingsRequest) Send() (*UpdateAccountSettingsOutput, error) {
+func (r UpdateAccountSettingsRequest) Send(ctx context.Context) (*UpdateAccountSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -900,7 +918,7 @@ func (r UpdateAccountSettingsRequest) Send() (*UpdateAccountSettingsOutput, erro
 //
 //    // Example sending a request using the UpdateAccountSettingsRequest method.
 //    req := client.UpdateAccountSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -934,7 +952,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -951,7 +970,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

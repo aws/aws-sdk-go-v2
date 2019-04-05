@@ -3,6 +3,7 @@
 package cloudwatch
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeAlarms to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudWatch) WaitUntilAlarmExists(input *DescribeAlarmsInput) error {
-	return c.WaitUntilAlarmExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilAlarmExistsWithContext is an extended version of WaitUntilAlarmExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) WaitUntilAlarmExistsWithContext(ctx aws.Context, input *DescribeAlarmsInput, opts ...aws.WaiterOption) error {
+func (c *CloudWatch) WaitUntilAlarmExists(ctx context.Context, input *DescribeAlarmsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilAlarmExists",
 		MaxAttempts: 40,
@@ -51,5 +45,5 @@ func (c *CloudWatch) WaitUntilAlarmExistsWithContext(ctx aws.Context, input *Des
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

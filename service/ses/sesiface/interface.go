@@ -9,6 +9,8 @@
 package sesiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 )
@@ -203,8 +205,7 @@ type SESAPI interface {
 
 	VerifyEmailIdentityRequest(*ses.VerifyEmailIdentityInput) ses.VerifyEmailIdentityRequest
 
-	WaitUntilIdentityExists(*ses.GetIdentityVerificationAttributesInput) error
-	WaitUntilIdentityExistsWithContext(aws.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
+	WaitUntilIdentityExists(context.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
 }
 
 var _ SESAPI = (*ses.SES)(nil)

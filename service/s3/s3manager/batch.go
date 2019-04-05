@@ -2,6 +2,7 @@ package s3manager
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 
@@ -130,7 +131,7 @@ type BatchDeleteIterator interface {
 //	}
 //
 //	batcher := s3manager.NewBatchDeleteWithClient(svc)
-//	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {
+//	if err := batcher.Delete(context.Background(), iter); err != nil {
 //		return err
 //	}
 type DeleteListIterator struct {
@@ -159,7 +160,7 @@ func (iter *DeleteListIterator) Next() bool {
 		iter.objects = iter.objects[1:]
 	}
 
-	if len(iter.objects) == 0 && iter.Paginator.Next() {
+	if len(iter.objects) == 0 && iter.Paginator.Next(context.TODO()) {
 		iter.objects = iter.Paginator.CurrentPage().Contents
 	}
 
@@ -203,7 +204,7 @@ type BatchDelete struct {
 //		},
 //	}
 //
-//	if err := batcher.Delete(aws.BackgroundContext(), &s3manager.DeleteObjectsIterator{
+//	if err := batcher.Delete(context.Background(), &s3manager.DeleteObjectsIterator{
 //		Objects: objects,
 //	}); err != nil {
 //		return err
@@ -236,7 +237,7 @@ func NewBatchDeleteWithClient(client s3iface.S3API, options ...func(*BatchDelete
 //		},
 //	}
 //
-//	if err := batcher.Delete(aws.BackgroundContext(), &s3manager.DeleteObjectsIterator{
+//	if err := batcher.Delete(context.Background(), &s3manager.DeleteObjectsIterator{
 //		Objects: objects,
 //	}); err != nil {
 //		return err
@@ -287,7 +288,7 @@ func (iter *DeleteObjectsIterator) DeleteObject() BatchDeleteObject {
 
 // Delete will use the iterator to queue up objects that need to be deleted.
 // Once the batch size is met, this will call the deleteBatch function.
-func (d *BatchDelete) Delete(ctx aws.Context, iter BatchDeleteIterator) error {
+func (d *BatchDelete) Delete(ctx context.Context, iter BatchDeleteIterator) error {
 	var errs []Error
 	objects := []BatchDeleteObject{}
 	var input *s3.DeleteObjectsInput
@@ -356,11 +357,10 @@ const (
 )
 
 // deleteBatch will delete a batch of items in the objects parameters.
-func deleteBatch(ctx aws.Context, d *BatchDelete, input *s3.DeleteObjectsInput, objects []BatchDeleteObject) []Error {
+func deleteBatch(ctx context.Context, d *BatchDelete, input *s3.DeleteObjectsInput, objects []BatchDeleteObject) []Error {
 	errs := []Error{}
 	req := d.Client.DeleteObjectsRequest(input)
-	req.SetContext(ctx)
-	if result, err := req.Send(); err != nil {
+	if result, err := req.Send(ctx); err != nil {
 		for i := 0; i < len(input.Delete.Objects); i++ {
 			errs = append(errs, newError(err, input.Bucket, input.Delete.Objects[i].Key))
 		}

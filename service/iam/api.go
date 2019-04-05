@@ -3,6 +3,7 @@
 package iam
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddClientIDToOpenIDConnectProviderRequest struct {
 }
 
 // Send marshals and sends the AddClientIDToOpenIDConnectProvider API request.
-func (r AddClientIDToOpenIDConnectProviderRequest) Send() (*AddClientIDToOpenIDConnectProviderOutput, error) {
+func (r AddClientIDToOpenIDConnectProviderRequest) Send(ctx context.Context) (*AddClientIDToOpenIDConnectProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +44,7 @@ func (r AddClientIDToOpenIDConnectProviderRequest) Send() (*AddClientIDToOpenIDC
 //
 //    // Example sending a request using the AddClientIDToOpenIDConnectProviderRequest method.
 //    req := client.AddClientIDToOpenIDConnectProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +80,8 @@ type AddRoleToInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the AddRoleToInstanceProfile API request.
-func (r AddRoleToInstanceProfileRequest) Send() (*AddRoleToInstanceProfileOutput, error) {
+func (r AddRoleToInstanceProfileRequest) Send(ctx context.Context) (*AddRoleToInstanceProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -108,7 +111,7 @@ func (r AddRoleToInstanceProfileRequest) Send() (*AddRoleToInstanceProfileOutput
 //
 //    // Example sending a request using the AddRoleToInstanceProfileRequest method.
 //    req := client.AddRoleToInstanceProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -144,7 +147,8 @@ type AddUserToGroupRequest struct {
 }
 
 // Send marshals and sends the AddUserToGroup API request.
-func (r AddUserToGroupRequest) Send() (*AddUserToGroupOutput, error) {
+func (r AddUserToGroupRequest) Send(ctx context.Context) (*AddUserToGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +164,7 @@ func (r AddUserToGroupRequest) Send() (*AddUserToGroupOutput, error) {
 //
 //    // Example sending a request using the AddUserToGroupRequest method.
 //    req := client.AddUserToGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -196,7 +200,8 @@ type AttachGroupPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachGroupPolicy API request.
-func (r AttachGroupPolicyRequest) Send() (*AttachGroupPolicyOutput, error) {
+func (r AttachGroupPolicyRequest) Send(ctx context.Context) (*AttachGroupPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -219,7 +224,7 @@ func (r AttachGroupPolicyRequest) Send() (*AttachGroupPolicyOutput, error) {
 //
 //    // Example sending a request using the AttachGroupPolicyRequest method.
 //    req := client.AttachGroupPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -255,7 +260,8 @@ type AttachRolePolicyRequest struct {
 }
 
 // Send marshals and sends the AttachRolePolicy API request.
-func (r AttachRolePolicyRequest) Send() (*AttachRolePolicyOutput, error) {
+func (r AttachRolePolicyRequest) Send(ctx context.Context) (*AttachRolePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -282,7 +288,7 @@ func (r AttachRolePolicyRequest) Send() (*AttachRolePolicyOutput, error) {
 //
 //    // Example sending a request using the AttachRolePolicyRequest method.
 //    req := client.AttachRolePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -318,7 +324,8 @@ type AttachUserPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachUserPolicy API request.
-func (r AttachUserPolicyRequest) Send() (*AttachUserPolicyOutput, error) {
+func (r AttachUserPolicyRequest) Send(ctx context.Context) (*AttachUserPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,7 +348,7 @@ func (r AttachUserPolicyRequest) Send() (*AttachUserPolicyOutput, error) {
 //
 //    // Example sending a request using the AttachUserPolicyRequest method.
 //    req := client.AttachUserPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -377,7 +384,8 @@ type ChangePasswordRequest struct {
 }
 
 // Send marshals and sends the ChangePassword API request.
-func (r ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
+func (r ChangePasswordRequest) Send(ctx context.Context) (*ChangePasswordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +406,7 @@ func (r ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
 //
 //    // Example sending a request using the ChangePasswordRequest method.
 //    req := client.ChangePasswordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -434,7 +442,8 @@ type CreateAccessKeyRequest struct {
 }
 
 // Send marshals and sends the CreateAccessKey API request.
-func (r CreateAccessKeyRequest) Send() (*CreateAccessKeyOutput, error) {
+func (r CreateAccessKeyRequest) Send(ctx context.Context) (*CreateAccessKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -467,7 +476,7 @@ func (r CreateAccessKeyRequest) Send() (*CreateAccessKeyOutput, error) {
 //
 //    // Example sending a request using the CreateAccessKeyRequest method.
 //    req := client.CreateAccessKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -501,7 +510,8 @@ type CreateAccountAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAccountAlias API request.
-func (r CreateAccountAliasRequest) Send() (*CreateAccountAliasOutput, error) {
+func (r CreateAccountAliasRequest) Send(ctx context.Context) (*CreateAccountAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -519,7 +529,7 @@ func (r CreateAccountAliasRequest) Send() (*CreateAccountAliasOutput, error) {
 //
 //    // Example sending a request using the CreateAccountAliasRequest method.
 //    req := client.CreateAccountAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -555,7 +565,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -575,7 +586,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -609,7 +620,8 @@ type CreateInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the CreateInstanceProfile API request.
-func (r CreateInstanceProfileRequest) Send() (*CreateInstanceProfileOutput, error) {
+func (r CreateInstanceProfileRequest) Send(ctx context.Context) (*CreateInstanceProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -630,7 +642,7 @@ func (r CreateInstanceProfileRequest) Send() (*CreateInstanceProfileOutput, erro
 //
 //    // Example sending a request using the CreateInstanceProfileRequest method.
 //    req := client.CreateInstanceProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -664,7 +676,8 @@ type CreateLoginProfileRequest struct {
 }
 
 // Send marshals and sends the CreateLoginProfile API request.
-func (r CreateLoginProfileRequest) Send() (*CreateLoginProfileOutput, error) {
+func (r CreateLoginProfileRequest) Send(ctx context.Context) (*CreateLoginProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -683,7 +696,7 @@ func (r CreateLoginProfileRequest) Send() (*CreateLoginProfileOutput, error) {
 //
 //    // Example sending a request using the CreateLoginProfileRequest method.
 //    req := client.CreateLoginProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -717,7 +730,8 @@ type CreateOpenIDConnectProviderRequest struct {
 }
 
 // Send marshals and sends the CreateOpenIDConnectProvider API request.
-func (r CreateOpenIDConnectProviderRequest) Send() (*CreateOpenIDConnectProviderOutput, error) {
+func (r CreateOpenIDConnectProviderRequest) Send(ctx context.Context) (*CreateOpenIDConnectProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -754,7 +768,7 @@ func (r CreateOpenIDConnectProviderRequest) Send() (*CreateOpenIDConnectProvider
 //
 //    // Example sending a request using the CreateOpenIDConnectProviderRequest method.
 //    req := client.CreateOpenIDConnectProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -788,7 +802,8 @@ type CreatePolicyRequest struct {
 }
 
 // Send marshals and sends the CreatePolicy API request.
-func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+func (r CreatePolicyRequest) Send(ctx context.Context) (*CreatePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -813,7 +828,7 @@ func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
 //
 //    // Example sending a request using the CreatePolicyRequest method.
 //    req := client.CreatePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -847,7 +862,8 @@ type CreatePolicyVersionRequest struct {
 }
 
 // Send marshals and sends the CreatePolicyVersion API request.
-func (r CreatePolicyVersionRequest) Send() (*CreatePolicyVersionOutput, error) {
+func (r CreatePolicyVersionRequest) Send(ctx context.Context) (*CreatePolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -874,7 +890,7 @@ func (r CreatePolicyVersionRequest) Send() (*CreatePolicyVersionOutput, error) {
 //
 //    // Example sending a request using the CreatePolicyVersionRequest method.
 //    req := client.CreatePolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -908,7 +924,8 @@ type CreateRoleRequest struct {
 }
 
 // Send marshals and sends the CreateRole API request.
-func (r CreateRoleRequest) Send() (*CreateRoleOutput, error) {
+func (r CreateRoleRequest) Send(ctx context.Context) (*CreateRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -928,7 +945,7 @@ func (r CreateRoleRequest) Send() (*CreateRoleOutput, error) {
 //
 //    // Example sending a request using the CreateRoleRequest method.
 //    req := client.CreateRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -962,7 +979,8 @@ type CreateSAMLProviderRequest struct {
 }
 
 // Send marshals and sends the CreateSAMLProvider API request.
-func (r CreateSAMLProviderRequest) Send() (*CreateSAMLProviderOutput, error) {
+func (r CreateSAMLProviderRequest) Send(ctx context.Context) (*CreateSAMLProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -999,7 +1017,7 @@ func (r CreateSAMLProviderRequest) Send() (*CreateSAMLProviderOutput, error) {
 //
 //    // Example sending a request using the CreateSAMLProviderRequest method.
 //    req := client.CreateSAMLProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1033,7 +1051,8 @@ type CreateServiceLinkedRoleRequest struct {
 }
 
 // Send marshals and sends the CreateServiceLinkedRole API request.
-func (r CreateServiceLinkedRoleRequest) Send() (*CreateServiceLinkedRoleOutput, error) {
+func (r CreateServiceLinkedRoleRequest) Send(ctx context.Context) (*CreateServiceLinkedRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1059,7 +1078,7 @@ func (r CreateServiceLinkedRoleRequest) Send() (*CreateServiceLinkedRoleOutput, 
 //
 //    // Example sending a request using the CreateServiceLinkedRoleRequest method.
 //    req := client.CreateServiceLinkedRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1093,7 +1112,8 @@ type CreateServiceSpecificCredentialRequest struct {
 }
 
 // Send marshals and sends the CreateServiceSpecificCredential API request.
-func (r CreateServiceSpecificCredentialRequest) Send() (*CreateServiceSpecificCredentialOutput, error) {
+func (r CreateServiceSpecificCredentialRequest) Send(ctx context.Context) (*CreateServiceSpecificCredentialOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1122,7 +1142,7 @@ func (r CreateServiceSpecificCredentialRequest) Send() (*CreateServiceSpecificCr
 //
 //    // Example sending a request using the CreateServiceSpecificCredentialRequest method.
 //    req := client.CreateServiceSpecificCredentialRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1156,7 +1176,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1176,7 +1197,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1210,7 +1231,8 @@ type CreateVirtualMFADeviceRequest struct {
 }
 
 // Send marshals and sends the CreateVirtualMFADevice API request.
-func (r CreateVirtualMFADeviceRequest) Send() (*CreateVirtualMFADeviceOutput, error) {
+func (r CreateVirtualMFADeviceRequest) Send(ctx context.Context) (*CreateVirtualMFADeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1239,7 +1261,7 @@ func (r CreateVirtualMFADeviceRequest) Send() (*CreateVirtualMFADeviceOutput, er
 //
 //    // Example sending a request using the CreateVirtualMFADeviceRequest method.
 //    req := client.CreateVirtualMFADeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1273,7 +1295,8 @@ type DeactivateMFADeviceRequest struct {
 }
 
 // Send marshals and sends the DeactivateMFADevice API request.
-func (r DeactivateMFADeviceRequest) Send() (*DeactivateMFADeviceOutput, error) {
+func (r DeactivateMFADeviceRequest) Send(ctx context.Context) (*DeactivateMFADeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1294,7 +1317,7 @@ func (r DeactivateMFADeviceRequest) Send() (*DeactivateMFADeviceOutput, error) {
 //
 //    // Example sending a request using the DeactivateMFADeviceRequest method.
 //    req := client.DeactivateMFADeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1330,7 +1353,8 @@ type DeleteAccessKeyRequest struct {
 }
 
 // Send marshals and sends the DeleteAccessKey API request.
-func (r DeleteAccessKeyRequest) Send() (*DeleteAccessKeyOutput, error) {
+func (r DeleteAccessKeyRequest) Send(ctx context.Context) (*DeleteAccessKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1352,7 +1376,7 @@ func (r DeleteAccessKeyRequest) Send() (*DeleteAccessKeyOutput, error) {
 //
 //    // Example sending a request using the DeleteAccessKeyRequest method.
 //    req := client.DeleteAccessKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1388,7 +1412,8 @@ type DeleteAccountAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAccountAlias API request.
-func (r DeleteAccountAliasRequest) Send() (*DeleteAccountAliasOutput, error) {
+func (r DeleteAccountAliasRequest) Send(ctx context.Context) (*DeleteAccountAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1406,7 +1431,7 @@ func (r DeleteAccountAliasRequest) Send() (*DeleteAccountAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteAccountAliasRequest method.
 //    req := client.DeleteAccountAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1442,7 +1467,8 @@ type DeleteAccountPasswordPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteAccountPasswordPolicy API request.
-func (r DeleteAccountPasswordPolicyRequest) Send() (*DeleteAccountPasswordPolicyOutput, error) {
+func (r DeleteAccountPasswordPolicyRequest) Send(ctx context.Context) (*DeleteAccountPasswordPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1458,7 +1484,7 @@ func (r DeleteAccountPasswordPolicyRequest) Send() (*DeleteAccountPasswordPolicy
 //
 //    // Example sending a request using the DeleteAccountPasswordPolicyRequest method.
 //    req := client.DeleteAccountPasswordPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1494,7 +1520,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1511,7 +1538,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1547,7 +1574,8 @@ type DeleteGroupPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteGroupPolicy API request.
-func (r DeleteGroupPolicyRequest) Send() (*DeleteGroupPolicyOutput, error) {
+func (r DeleteGroupPolicyRequest) Send(ctx context.Context) (*DeleteGroupPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1569,7 +1597,7 @@ func (r DeleteGroupPolicyRequest) Send() (*DeleteGroupPolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupPolicyRequest method.
 //    req := client.DeleteGroupPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1605,7 +1633,8 @@ type DeleteInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteInstanceProfile API request.
-func (r DeleteInstanceProfileRequest) Send() (*DeleteInstanceProfileOutput, error) {
+func (r DeleteInstanceProfileRequest) Send(ctx context.Context) (*DeleteInstanceProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1630,7 +1659,7 @@ func (r DeleteInstanceProfileRequest) Send() (*DeleteInstanceProfileOutput, erro
 //
 //    // Example sending a request using the DeleteInstanceProfileRequest method.
 //    req := client.DeleteInstanceProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1666,7 +1695,8 @@ type DeleteLoginProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteLoginProfile API request.
-func (r DeleteLoginProfileRequest) Send() (*DeleteLoginProfileOutput, error) {
+func (r DeleteLoginProfileRequest) Send(ctx context.Context) (*DeleteLoginProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1688,7 +1718,7 @@ func (r DeleteLoginProfileRequest) Send() (*DeleteLoginProfileOutput, error) {
 //
 //    // Example sending a request using the DeleteLoginProfileRequest method.
 //    req := client.DeleteLoginProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1724,7 +1754,8 @@ type DeleteOpenIDConnectProviderRequest struct {
 }
 
 // Send marshals and sends the DeleteOpenIDConnectProvider API request.
-func (r DeleteOpenIDConnectProviderRequest) Send() (*DeleteOpenIDConnectProviderOutput, error) {
+func (r DeleteOpenIDConnectProviderRequest) Send(ctx context.Context) (*DeleteOpenIDConnectProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1747,7 +1778,7 @@ func (r DeleteOpenIDConnectProviderRequest) Send() (*DeleteOpenIDConnectProvider
 //
 //    // Example sending a request using the DeleteOpenIDConnectProviderRequest method.
 //    req := client.DeleteOpenIDConnectProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1783,7 +1814,8 @@ type DeletePolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePolicy API request.
-func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1821,7 +1853,7 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyRequest method.
 //    req := client.DeletePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1857,7 +1889,8 @@ type DeletePolicyVersionRequest struct {
 }
 
 // Send marshals and sends the DeletePolicyVersion API request.
-func (r DeletePolicyVersionRequest) Send() (*DeletePolicyVersionOutput, error) {
+func (r DeletePolicyVersionRequest) Send(ctx context.Context) (*DeletePolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1881,7 +1914,7 @@ func (r DeletePolicyVersionRequest) Send() (*DeletePolicyVersionOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyVersionRequest method.
 //    req := client.DeletePolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1917,7 +1950,8 @@ type DeleteRoleRequest struct {
 }
 
 // Send marshals and sends the DeleteRole API request.
-func (r DeleteRoleRequest) Send() (*DeleteRoleOutput, error) {
+func (r DeleteRoleRequest) Send(ctx context.Context) (*DeleteRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1939,7 +1973,7 @@ func (r DeleteRoleRequest) Send() (*DeleteRoleOutput, error) {
 //
 //    // Example sending a request using the DeleteRoleRequest method.
 //    req := client.DeleteRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1975,7 +2009,8 @@ type DeleteRolePermissionsBoundaryRequest struct {
 }
 
 // Send marshals and sends the DeleteRolePermissionsBoundary API request.
-func (r DeleteRolePermissionsBoundaryRequest) Send() (*DeleteRolePermissionsBoundaryOutput, error) {
+func (r DeleteRolePermissionsBoundaryRequest) Send(ctx context.Context) (*DeleteRolePermissionsBoundaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1995,7 +2030,7 @@ func (r DeleteRolePermissionsBoundaryRequest) Send() (*DeleteRolePermissionsBoun
 //
 //    // Example sending a request using the DeleteRolePermissionsBoundaryRequest method.
 //    req := client.DeleteRolePermissionsBoundaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2031,7 +2066,8 @@ type DeleteRolePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteRolePolicy API request.
-func (r DeleteRolePolicyRequest) Send() (*DeleteRolePolicyOutput, error) {
+func (r DeleteRolePolicyRequest) Send(ctx context.Context) (*DeleteRolePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2053,7 +2089,7 @@ func (r DeleteRolePolicyRequest) Send() (*DeleteRolePolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteRolePolicyRequest method.
 //    req := client.DeleteRolePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2089,7 +2125,8 @@ type DeleteSAMLProviderRequest struct {
 }
 
 // Send marshals and sends the DeleteSAMLProvider API request.
-func (r DeleteSAMLProviderRequest) Send() (*DeleteSAMLProviderOutput, error) {
+func (r DeleteSAMLProviderRequest) Send(ctx context.Context) (*DeleteSAMLProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2112,7 +2149,7 @@ func (r DeleteSAMLProviderRequest) Send() (*DeleteSAMLProviderOutput, error) {
 //
 //    // Example sending a request using the DeleteSAMLProviderRequest method.
 //    req := client.DeleteSAMLProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2148,7 +2185,8 @@ type DeleteSSHPublicKeyRequest struct {
 }
 
 // Send marshals and sends the DeleteSSHPublicKey API request.
-func (r DeleteSSHPublicKeyRequest) Send() (*DeleteSSHPublicKeyOutput, error) {
+func (r DeleteSSHPublicKeyRequest) Send(ctx context.Context) (*DeleteSSHPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2170,7 +2208,7 @@ func (r DeleteSSHPublicKeyRequest) Send() (*DeleteSSHPublicKeyOutput, error) {
 //
 //    // Example sending a request using the DeleteSSHPublicKeyRequest method.
 //    req := client.DeleteSSHPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2206,7 +2244,8 @@ type DeleteServerCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteServerCertificate API request.
-func (r DeleteServerCertificateRequest) Send() (*DeleteServerCertificateOutput, error) {
+func (r DeleteServerCertificateRequest) Send(ctx context.Context) (*DeleteServerCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2237,7 +2276,7 @@ func (r DeleteServerCertificateRequest) Send() (*DeleteServerCertificateOutput, 
 //
 //    // Example sending a request using the DeleteServerCertificateRequest method.
 //    req := client.DeleteServerCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2273,7 +2312,8 @@ type DeleteServiceLinkedRoleRequest struct {
 }
 
 // Send marshals and sends the DeleteServiceLinkedRole API request.
-func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, error) {
+func (r DeleteServiceLinkedRoleRequest) Send(ctx context.Context) (*DeleteServiceLinkedRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,7 +2348,7 @@ func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, 
 //
 //    // Example sending a request using the DeleteServiceLinkedRoleRequest method.
 //    req := client.DeleteServiceLinkedRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2342,7 +2382,8 @@ type DeleteServiceSpecificCredentialRequest struct {
 }
 
 // Send marshals and sends the DeleteServiceSpecificCredential API request.
-func (r DeleteServiceSpecificCredentialRequest) Send() (*DeleteServiceSpecificCredentialOutput, error) {
+func (r DeleteServiceSpecificCredentialRequest) Send(ctx context.Context) (*DeleteServiceSpecificCredentialOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2358,7 +2399,7 @@ func (r DeleteServiceSpecificCredentialRequest) Send() (*DeleteServiceSpecificCr
 //
 //    // Example sending a request using the DeleteServiceSpecificCredentialRequest method.
 //    req := client.DeleteServiceSpecificCredentialRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2394,7 +2435,8 @@ type DeleteSigningCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteSigningCertificate API request.
-func (r DeleteSigningCertificateRequest) Send() (*DeleteSigningCertificateOutput, error) {
+func (r DeleteSigningCertificateRequest) Send(ctx context.Context) (*DeleteSigningCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2416,7 +2458,7 @@ func (r DeleteSigningCertificateRequest) Send() (*DeleteSigningCertificateOutput
 //
 //    // Example sending a request using the DeleteSigningCertificateRequest method.
 //    req := client.DeleteSigningCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2452,7 +2494,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2470,7 +2513,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2506,7 +2549,8 @@ type DeleteUserPermissionsBoundaryRequest struct {
 }
 
 // Send marshals and sends the DeleteUserPermissionsBoundary API request.
-func (r DeleteUserPermissionsBoundaryRequest) Send() (*DeleteUserPermissionsBoundaryOutput, error) {
+func (r DeleteUserPermissionsBoundaryRequest) Send(ctx context.Context) (*DeleteUserPermissionsBoundaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2526,7 +2570,7 @@ func (r DeleteUserPermissionsBoundaryRequest) Send() (*DeleteUserPermissionsBoun
 //
 //    // Example sending a request using the DeleteUserPermissionsBoundaryRequest method.
 //    req := client.DeleteUserPermissionsBoundaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2562,7 +2606,8 @@ type DeleteUserPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteUserPolicy API request.
-func (r DeleteUserPolicyRequest) Send() (*DeleteUserPolicyOutput, error) {
+func (r DeleteUserPolicyRequest) Send(ctx context.Context) (*DeleteUserPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2584,7 +2629,7 @@ func (r DeleteUserPolicyRequest) Send() (*DeleteUserPolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteUserPolicyRequest method.
 //    req := client.DeleteUserPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2620,7 +2665,8 @@ type DeleteVirtualMFADeviceRequest struct {
 }
 
 // Send marshals and sends the DeleteVirtualMFADevice API request.
-func (r DeleteVirtualMFADeviceRequest) Send() (*DeleteVirtualMFADeviceOutput, error) {
+func (r DeleteVirtualMFADeviceRequest) Send(ctx context.Context) (*DeleteVirtualMFADeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2639,7 +2685,7 @@ func (r DeleteVirtualMFADeviceRequest) Send() (*DeleteVirtualMFADeviceOutput, er
 //
 //    // Example sending a request using the DeleteVirtualMFADeviceRequest method.
 //    req := client.DeleteVirtualMFADeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2675,7 +2721,8 @@ type DetachGroupPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachGroupPolicy API request.
-func (r DetachGroupPolicyRequest) Send() (*DetachGroupPolicyOutput, error) {
+func (r DetachGroupPolicyRequest) Send(ctx context.Context) (*DetachGroupPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2696,7 +2743,7 @@ func (r DetachGroupPolicyRequest) Send() (*DetachGroupPolicyOutput, error) {
 //
 //    // Example sending a request using the DetachGroupPolicyRequest method.
 //    req := client.DetachGroupPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2732,7 +2779,8 @@ type DetachRolePolicyRequest struct {
 }
 
 // Send marshals and sends the DetachRolePolicy API request.
-func (r DetachRolePolicyRequest) Send() (*DetachRolePolicyOutput, error) {
+func (r DetachRolePolicyRequest) Send(ctx context.Context) (*DetachRolePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2753,7 +2801,7 @@ func (r DetachRolePolicyRequest) Send() (*DetachRolePolicyOutput, error) {
 //
 //    // Example sending a request using the DetachRolePolicyRequest method.
 //    req := client.DetachRolePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2789,7 +2837,8 @@ type DetachUserPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachUserPolicy API request.
-func (r DetachUserPolicyRequest) Send() (*DetachUserPolicyOutput, error) {
+func (r DetachUserPolicyRequest) Send(ctx context.Context) (*DetachUserPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2810,7 +2859,7 @@ func (r DetachUserPolicyRequest) Send() (*DetachUserPolicyOutput, error) {
 //
 //    // Example sending a request using the DetachUserPolicyRequest method.
 //    req := client.DetachUserPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2846,7 +2895,8 @@ type EnableMFADeviceRequest struct {
 }
 
 // Send marshals and sends the EnableMFADevice API request.
-func (r EnableMFADeviceRequest) Send() (*EnableMFADeviceOutput, error) {
+func (r EnableMFADeviceRequest) Send(ctx context.Context) (*EnableMFADeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2864,7 +2914,7 @@ func (r EnableMFADeviceRequest) Send() (*EnableMFADeviceOutput, error) {
 //
 //    // Example sending a request using the EnableMFADeviceRequest method.
 //    req := client.EnableMFADeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2900,7 +2950,8 @@ type GenerateCredentialReportRequest struct {
 }
 
 // Send marshals and sends the GenerateCredentialReport API request.
-func (r GenerateCredentialReportRequest) Send() (*GenerateCredentialReportOutput, error) {
+func (r GenerateCredentialReportRequest) Send(ctx context.Context) (*GenerateCredentialReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2918,7 +2969,7 @@ func (r GenerateCredentialReportRequest) Send() (*GenerateCredentialReportOutput
 //
 //    // Example sending a request using the GenerateCredentialReportRequest method.
 //    req := client.GenerateCredentialReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2952,7 +3003,8 @@ type GenerateServiceLastAccessedDetailsRequest struct {
 }
 
 // Send marshals and sends the GenerateServiceLastAccessedDetails API request.
-func (r GenerateServiceLastAccessedDetailsRequest) Send() (*GenerateServiceLastAccessedDetailsOutput, error) {
+func (r GenerateServiceLastAccessedDetailsRequest) Send(ctx context.Context) (*GenerateServiceLastAccessedDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3017,7 +3069,7 @@ func (r GenerateServiceLastAccessedDetailsRequest) Send() (*GenerateServiceLastA
 //
 //    // Example sending a request using the GenerateServiceLastAccessedDetailsRequest method.
 //    req := client.GenerateServiceLastAccessedDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3051,7 +3103,8 @@ type GetAccessKeyLastUsedRequest struct {
 }
 
 // Send marshals and sends the GetAccessKeyLastUsed API request.
-func (r GetAccessKeyLastUsedRequest) Send() (*GetAccessKeyLastUsedOutput, error) {
+func (r GetAccessKeyLastUsedRequest) Send(ctx context.Context) (*GetAccessKeyLastUsedOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3070,7 +3123,7 @@ func (r GetAccessKeyLastUsedRequest) Send() (*GetAccessKeyLastUsedOutput, error)
 //
 //    // Example sending a request using the GetAccessKeyLastUsedRequest method.
 //    req := client.GetAccessKeyLastUsedRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3104,7 +3157,8 @@ type GetAccountAuthorizationDetailsRequest struct {
 }
 
 // Send marshals and sends the GetAccountAuthorizationDetails API request.
-func (r GetAccountAuthorizationDetailsRequest) Send() (*GetAccountAuthorizationDetailsOutput, error) {
+func (r GetAccountAuthorizationDetailsRequest) Send(ctx context.Context) (*GetAccountAuthorizationDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3132,7 +3186,7 @@ func (r GetAccountAuthorizationDetailsRequest) Send() (*GetAccountAuthorizationD
 //
 //    // Example sending a request using the GetAccountAuthorizationDetailsRequest method.
 //    req := client.GetAccountAuthorizationDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3182,7 +3236,7 @@ func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizati
 func (p *GetAccountAuthorizationDetailsRequest) Paginate(opts ...aws.Option) GetAccountAuthorizationDetailsPager {
 	return GetAccountAuthorizationDetailsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetAccountAuthorizationDetailsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3191,6 +3245,7 @@ func (p *GetAccountAuthorizationDetailsRequest) Paginate(opts ...aws.Option) Get
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3218,7 +3273,8 @@ type GetAccountPasswordPolicyRequest struct {
 }
 
 // Send marshals and sends the GetAccountPasswordPolicy API request.
-func (r GetAccountPasswordPolicyRequest) Send() (*GetAccountPasswordPolicyOutput, error) {
+func (r GetAccountPasswordPolicyRequest) Send(ctx context.Context) (*GetAccountPasswordPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3235,7 +3291,7 @@ func (r GetAccountPasswordPolicyRequest) Send() (*GetAccountPasswordPolicyOutput
 //
 //    // Example sending a request using the GetAccountPasswordPolicyRequest method.
 //    req := client.GetAccountPasswordPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3269,7 +3325,8 @@ type GetAccountSummaryRequest struct {
 }
 
 // Send marshals and sends the GetAccountSummary API request.
-func (r GetAccountSummaryRequest) Send() (*GetAccountSummaryOutput, error) {
+func (r GetAccountSummaryRequest) Send(ctx context.Context) (*GetAccountSummaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3289,7 +3346,7 @@ func (r GetAccountSummaryRequest) Send() (*GetAccountSummaryOutput, error) {
 //
 //    // Example sending a request using the GetAccountSummaryRequest method.
 //    req := client.GetAccountSummaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3323,7 +3380,8 @@ type GetContextKeysForCustomPolicyRequest struct {
 }
 
 // Send marshals and sends the GetContextKeysForCustomPolicy API request.
-func (r GetContextKeysForCustomPolicyRequest) Send() (*GetContextKeysForPrincipalPolicyOutput, error) {
+func (r GetContextKeysForCustomPolicyRequest) Send(ctx context.Context) (*GetContextKeysForPrincipalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3348,7 +3406,7 @@ func (r GetContextKeysForCustomPolicyRequest) Send() (*GetContextKeysForPrincipa
 //
 //    // Example sending a request using the GetContextKeysForCustomPolicyRequest method.
 //    req := client.GetContextKeysForCustomPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3382,7 +3440,8 @@ type GetContextKeysForPrincipalPolicyRequest struct {
 }
 
 // Send marshals and sends the GetContextKeysForPrincipalPolicy API request.
-func (r GetContextKeysForPrincipalPolicyRequest) Send() (*GetContextKeysForPrincipalPolicyOutput, error) {
+func (r GetContextKeysForPrincipalPolicyRequest) Send(ctx context.Context) (*GetContextKeysForPrincipalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3414,7 +3473,7 @@ func (r GetContextKeysForPrincipalPolicyRequest) Send() (*GetContextKeysForPrinc
 //
 //    // Example sending a request using the GetContextKeysForPrincipalPolicyRequest method.
 //    req := client.GetContextKeysForPrincipalPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3448,7 +3507,8 @@ type GetCredentialReportRequest struct {
 }
 
 // Send marshals and sends the GetCredentialReport API request.
-func (r GetCredentialReportRequest) Send() (*GetCredentialReportOutput, error) {
+func (r GetCredentialReportRequest) Send(ctx context.Context) (*GetCredentialReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3466,7 +3526,7 @@ func (r GetCredentialReportRequest) Send() (*GetCredentialReportOutput, error) {
 //
 //    // Example sending a request using the GetCredentialReportRequest method.
 //    req := client.GetCredentialReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3500,7 +3560,8 @@ type GetGroupRequest struct {
 }
 
 // Send marshals and sends the GetGroup API request.
-func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3517,7 +3578,7 @@ func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
 //
 //    // Example sending a request using the GetGroupRequest method.
 //    req := client.GetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3567,7 +3628,7 @@ func (c *IAM) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 func (p *GetGroupRequest) Paginate(opts ...aws.Option) GetGroupPager {
 	return GetGroupPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetGroupInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3576,6 +3637,7 @@ func (p *GetGroupRequest) Paginate(opts ...aws.Option) GetGroupPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3603,7 +3665,8 @@ type GetGroupPolicyRequest struct {
 }
 
 // Send marshals and sends the GetGroupPolicy API request.
-func (r GetGroupPolicyRequest) Send() (*GetGroupPolicyOutput, error) {
+func (r GetGroupPolicyRequest) Send(ctx context.Context) (*GetGroupPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3635,7 +3698,7 @@ func (r GetGroupPolicyRequest) Send() (*GetGroupPolicyOutput, error) {
 //
 //    // Example sending a request using the GetGroupPolicyRequest method.
 //    req := client.GetGroupPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3669,7 +3732,8 @@ type GetInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the GetInstanceProfile API request.
-func (r GetInstanceProfileRequest) Send() (*GetInstanceProfileOutput, error) {
+func (r GetInstanceProfileRequest) Send(ctx context.Context) (*GetInstanceProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3688,7 +3752,7 @@ func (r GetInstanceProfileRequest) Send() (*GetInstanceProfileOutput, error) {
 //
 //    // Example sending a request using the GetInstanceProfileRequest method.
 //    req := client.GetInstanceProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3722,7 +3786,8 @@ type GetLoginProfileRequest struct {
 }
 
 // Send marshals and sends the GetLoginProfile API request.
-func (r GetLoginProfileRequest) Send() (*GetLoginProfileOutput, error) {
+func (r GetLoginProfileRequest) Send(ctx context.Context) (*GetLoginProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3740,7 +3805,7 @@ func (r GetLoginProfileRequest) Send() (*GetLoginProfileOutput, error) {
 //
 //    // Example sending a request using the GetLoginProfileRequest method.
 //    req := client.GetLoginProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3774,7 +3839,8 @@ type GetOpenIDConnectProviderRequest struct {
 }
 
 // Send marshals and sends the GetOpenIDConnectProvider API request.
-func (r GetOpenIDConnectProviderRequest) Send() (*GetOpenIDConnectProviderOutput, error) {
+func (r GetOpenIDConnectProviderRequest) Send(ctx context.Context) (*GetOpenIDConnectProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3791,7 +3857,7 @@ func (r GetOpenIDConnectProviderRequest) Send() (*GetOpenIDConnectProviderOutput
 //
 //    // Example sending a request using the GetOpenIDConnectProviderRequest method.
 //    req := client.GetOpenIDConnectProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3825,7 +3891,8 @@ type GetPolicyRequest struct {
 }
 
 // Send marshals and sends the GetPolicy API request.
-func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3854,7 +3921,7 @@ func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
 //
 //    // Example sending a request using the GetPolicyRequest method.
 //    req := client.GetPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3888,7 +3955,8 @@ type GetPolicyVersionRequest struct {
 }
 
 // Send marshals and sends the GetPolicyVersion API request.
-func (r GetPolicyVersionRequest) Send() (*GetPolicyVersionOutput, error) {
+func (r GetPolicyVersionRequest) Send(ctx context.Context) (*GetPolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3925,7 +3993,7 @@ func (r GetPolicyVersionRequest) Send() (*GetPolicyVersionOutput, error) {
 //
 //    // Example sending a request using the GetPolicyVersionRequest method.
 //    req := client.GetPolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3959,7 +4027,8 @@ type GetRoleRequest struct {
 }
 
 // Send marshals and sends the GetRole API request.
-func (r GetRoleRequest) Send() (*GetRoleOutput, error) {
+func (r GetRoleRequest) Send(ctx context.Context) (*GetRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3983,7 +4052,7 @@ func (r GetRoleRequest) Send() (*GetRoleOutput, error) {
 //
 //    // Example sending a request using the GetRoleRequest method.
 //    req := client.GetRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4017,7 +4086,8 @@ type GetRolePolicyRequest struct {
 }
 
 // Send marshals and sends the GetRolePolicy API request.
-func (r GetRolePolicyRequest) Send() (*GetRolePolicyOutput, error) {
+func (r GetRolePolicyRequest) Send(ctx context.Context) (*GetRolePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4052,7 +4122,7 @@ func (r GetRolePolicyRequest) Send() (*GetRolePolicyOutput, error) {
 //
 //    // Example sending a request using the GetRolePolicyRequest method.
 //    req := client.GetRolePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4086,7 +4156,8 @@ type GetSAMLProviderRequest struct {
 }
 
 // Send marshals and sends the GetSAMLProvider API request.
-func (r GetSAMLProviderRequest) Send() (*GetSAMLProviderOutput, error) {
+func (r GetSAMLProviderRequest) Send(ctx context.Context) (*GetSAMLProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4105,7 +4176,7 @@ func (r GetSAMLProviderRequest) Send() (*GetSAMLProviderOutput, error) {
 //
 //    // Example sending a request using the GetSAMLProviderRequest method.
 //    req := client.GetSAMLProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4139,7 +4210,8 @@ type GetSSHPublicKeyRequest struct {
 }
 
 // Send marshals and sends the GetSSHPublicKey API request.
-func (r GetSSHPublicKeyRequest) Send() (*GetSSHPublicKeyOutput, error) {
+func (r GetSSHPublicKeyRequest) Send(ctx context.Context) (*GetSSHPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4161,7 +4233,7 @@ func (r GetSSHPublicKeyRequest) Send() (*GetSSHPublicKeyOutput, error) {
 //
 //    // Example sending a request using the GetSSHPublicKeyRequest method.
 //    req := client.GetSSHPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4195,7 +4267,8 @@ type GetServerCertificateRequest struct {
 }
 
 // Send marshals and sends the GetServerCertificate API request.
-func (r GetServerCertificateRequest) Send() (*GetServerCertificateOutput, error) {
+func (r GetServerCertificateRequest) Send(ctx context.Context) (*GetServerCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4216,7 +4289,7 @@ func (r GetServerCertificateRequest) Send() (*GetServerCertificateOutput, error)
 //
 //    // Example sending a request using the GetServerCertificateRequest method.
 //    req := client.GetServerCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4250,7 +4323,8 @@ type GetServiceLastAccessedDetailsRequest struct {
 }
 
 // Send marshals and sends the GetServiceLastAccessedDetails API request.
-func (r GetServiceLastAccessedDetailsRequest) Send() (*GetServiceLastAccessedDetailsOutput, error) {
+func (r GetServiceLastAccessedDetailsRequest) Send(ctx context.Context) (*GetServiceLastAccessedDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4301,7 +4375,7 @@ func (r GetServiceLastAccessedDetailsRequest) Send() (*GetServiceLastAccessedDet
 //
 //    // Example sending a request using the GetServiceLastAccessedDetailsRequest method.
 //    req := client.GetServiceLastAccessedDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4335,7 +4409,8 @@ type GetServiceLastAccessedDetailsWithEntitiesRequest struct {
 }
 
 // Send marshals and sends the GetServiceLastAccessedDetailsWithEntities API request.
-func (r GetServiceLastAccessedDetailsWithEntitiesRequest) Send() (*GetServiceLastAccessedDetailsWithEntitiesOutput, error) {
+func (r GetServiceLastAccessedDetailsWithEntitiesRequest) Send(ctx context.Context) (*GetServiceLastAccessedDetailsWithEntitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4372,7 +4447,7 @@ func (r GetServiceLastAccessedDetailsWithEntitiesRequest) Send() (*GetServiceLas
 //
 //    // Example sending a request using the GetServiceLastAccessedDetailsWithEntitiesRequest method.
 //    req := client.GetServiceLastAccessedDetailsWithEntitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4406,7 +4481,8 @@ type GetServiceLinkedRoleDeletionStatusRequest struct {
 }
 
 // Send marshals and sends the GetServiceLinkedRoleDeletionStatus API request.
-func (r GetServiceLinkedRoleDeletionStatusRequest) Send() (*GetServiceLinkedRoleDeletionStatusOutput, error) {
+func (r GetServiceLinkedRoleDeletionStatusRequest) Send(ctx context.Context) (*GetServiceLinkedRoleDeletionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4427,7 +4503,7 @@ func (r GetServiceLinkedRoleDeletionStatusRequest) Send() (*GetServiceLinkedRole
 //
 //    // Example sending a request using the GetServiceLinkedRoleDeletionStatusRequest method.
 //    req := client.GetServiceLinkedRoleDeletionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4461,7 +4537,8 @@ type GetUserRequest struct {
 }
 
 // Send marshals and sends the GetUser API request.
-func (r GetUserRequest) Send() (*GetUserOutput, error) {
+func (r GetUserRequest) Send(ctx context.Context) (*GetUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4481,7 +4558,7 @@ func (r GetUserRequest) Send() (*GetUserOutput, error) {
 //
 //    // Example sending a request using the GetUserRequest method.
 //    req := client.GetUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4515,7 +4592,8 @@ type GetUserPolicyRequest struct {
 }
 
 // Send marshals and sends the GetUserPolicy API request.
-func (r GetUserPolicyRequest) Send() (*GetUserPolicyOutput, error) {
+func (r GetUserPolicyRequest) Send(ctx context.Context) (*GetUserPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4547,7 +4625,7 @@ func (r GetUserPolicyRequest) Send() (*GetUserPolicyOutput, error) {
 //
 //    // Example sending a request using the GetUserPolicyRequest method.
 //    req := client.GetUserPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4581,7 +4659,8 @@ type ListAccessKeysRequest struct {
 }
 
 // Send marshals and sends the ListAccessKeys API request.
-func (r ListAccessKeysRequest) Send() (*ListAccessKeysOutput, error) {
+func (r ListAccessKeysRequest) Send(ctx context.Context) (*ListAccessKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4610,7 +4689,7 @@ func (r ListAccessKeysRequest) Send() (*ListAccessKeysOutput, error) {
 //
 //    // Example sending a request using the ListAccessKeysRequest method.
 //    req := client.ListAccessKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4660,7 +4739,7 @@ func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKeysRe
 func (p *ListAccessKeysRequest) Paginate(opts ...aws.Option) ListAccessKeysPager {
 	return ListAccessKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccessKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4669,6 +4748,7 @@ func (p *ListAccessKeysRequest) Paginate(opts ...aws.Option) ListAccessKeysPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4696,7 +4776,8 @@ type ListAccountAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAccountAliases API request.
-func (r ListAccountAliasesRequest) Send() (*ListAccountAliasesOutput, error) {
+func (r ListAccountAliasesRequest) Send(ctx context.Context) (*ListAccountAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4715,7 +4796,7 @@ func (r ListAccountAliasesRequest) Send() (*ListAccountAliasesOutput, error) {
 //
 //    // Example sending a request using the ListAccountAliasesRequest method.
 //    req := client.ListAccountAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4765,7 +4846,7 @@ func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) ListAcco
 func (p *ListAccountAliasesRequest) Paginate(opts ...aws.Option) ListAccountAliasesPager {
 	return ListAccountAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAccountAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4774,6 +4855,7 @@ func (p *ListAccountAliasesRequest) Paginate(opts ...aws.Option) ListAccountAlia
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4801,7 +4883,8 @@ type ListAttachedGroupPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListAttachedGroupPolicies API request.
-func (r ListAttachedGroupPoliciesRequest) Send() (*ListAttachedGroupPoliciesOutput, error) {
+func (r ListAttachedGroupPoliciesRequest) Send(ctx context.Context) (*ListAttachedGroupPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4828,7 +4911,7 @@ func (r ListAttachedGroupPoliciesRequest) Send() (*ListAttachedGroupPoliciesOutp
 //
 //    // Example sending a request using the ListAttachedGroupPoliciesRequest method.
 //    req := client.ListAttachedGroupPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4878,7 +4961,7 @@ func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesI
 func (p *ListAttachedGroupPoliciesRequest) Paginate(opts ...aws.Option) ListAttachedGroupPoliciesPager {
 	return ListAttachedGroupPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedGroupPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4887,6 +4970,7 @@ func (p *ListAttachedGroupPoliciesRequest) Paginate(opts ...aws.Option) ListAtta
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4914,7 +4998,8 @@ type ListAttachedRolePoliciesRequest struct {
 }
 
 // Send marshals and sends the ListAttachedRolePolicies API request.
-func (r ListAttachedRolePoliciesRequest) Send() (*ListAttachedRolePoliciesOutput, error) {
+func (r ListAttachedRolePoliciesRequest) Send(ctx context.Context) (*ListAttachedRolePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4941,7 +5026,7 @@ func (r ListAttachedRolePoliciesRequest) Send() (*ListAttachedRolePoliciesOutput
 //
 //    // Example sending a request using the ListAttachedRolePoliciesRequest method.
 //    req := client.ListAttachedRolePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4991,7 +5076,7 @@ func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInp
 func (p *ListAttachedRolePoliciesRequest) Paginate(opts ...aws.Option) ListAttachedRolePoliciesPager {
 	return ListAttachedRolePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedRolePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5000,6 +5085,7 @@ func (p *ListAttachedRolePoliciesRequest) Paginate(opts ...aws.Option) ListAttac
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5027,7 +5113,8 @@ type ListAttachedUserPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListAttachedUserPolicies API request.
-func (r ListAttachedUserPoliciesRequest) Send() (*ListAttachedUserPoliciesOutput, error) {
+func (r ListAttachedUserPoliciesRequest) Send(ctx context.Context) (*ListAttachedUserPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5054,7 +5141,7 @@ func (r ListAttachedUserPoliciesRequest) Send() (*ListAttachedUserPoliciesOutput
 //
 //    // Example sending a request using the ListAttachedUserPoliciesRequest method.
 //    req := client.ListAttachedUserPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5104,7 +5191,7 @@ func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInp
 func (p *ListAttachedUserPoliciesRequest) Paginate(opts ...aws.Option) ListAttachedUserPoliciesPager {
 	return ListAttachedUserPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedUserPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5113,6 +5200,7 @@ func (p *ListAttachedUserPoliciesRequest) Paginate(opts ...aws.Option) ListAttac
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5140,7 +5228,8 @@ type ListEntitiesForPolicyRequest struct {
 }
 
 // Send marshals and sends the ListEntitiesForPolicy API request.
-func (r ListEntitiesForPolicyRequest) Send() (*ListEntitiesForPolicyOutput, error) {
+func (r ListEntitiesForPolicyRequest) Send(ctx context.Context) (*ListEntitiesForPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5164,7 +5253,7 @@ func (r ListEntitiesForPolicyRequest) Send() (*ListEntitiesForPolicyOutput, erro
 //
 //    // Example sending a request using the ListEntitiesForPolicyRequest method.
 //    req := client.ListEntitiesForPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5214,7 +5303,7 @@ func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) Li
 func (p *ListEntitiesForPolicyRequest) Paginate(opts ...aws.Option) ListEntitiesForPolicyPager {
 	return ListEntitiesForPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEntitiesForPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5223,6 +5312,7 @@ func (p *ListEntitiesForPolicyRequest) Paginate(opts ...aws.Option) ListEntities
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5250,7 +5340,8 @@ type ListGroupPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListGroupPolicies API request.
-func (r ListGroupPoliciesRequest) Send() (*ListGroupPoliciesOutput, error) {
+func (r ListGroupPoliciesRequest) Send(ctx context.Context) (*ListGroupPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5277,7 +5368,7 @@ func (r ListGroupPoliciesRequest) Send() (*ListGroupPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListGroupPoliciesRequest method.
 //    req := client.ListGroupPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5327,7 +5418,7 @@ func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) ListGroupP
 func (p *ListGroupPoliciesRequest) Paginate(opts ...aws.Option) ListGroupPoliciesPager {
 	return ListGroupPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5336,6 +5427,7 @@ func (p *ListGroupPoliciesRequest) Paginate(opts ...aws.Option) ListGroupPolicie
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5363,7 +5455,8 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5381,7 +5474,7 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5431,7 +5524,7 @@ func (c *IAM) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5440,6 +5533,7 @@ func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5467,7 +5561,8 @@ type ListGroupsForUserRequest struct {
 }
 
 // Send marshals and sends the ListGroupsForUser API request.
-func (r ListGroupsForUserRequest) Send() (*ListGroupsForUserOutput, error) {
+func (r ListGroupsForUserRequest) Send(ctx context.Context) (*ListGroupsForUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5485,7 +5580,7 @@ func (r ListGroupsForUserRequest) Send() (*ListGroupsForUserOutput, error) {
 //
 //    // Example sending a request using the ListGroupsForUserRequest method.
 //    req := client.ListGroupsForUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5535,7 +5630,7 @@ func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) ListGroups
 func (p *ListGroupsForUserRequest) Paginate(opts ...aws.Option) ListGroupsForUserPager {
 	return ListGroupsForUserPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsForUserInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5544,6 +5639,7 @@ func (p *ListGroupsForUserRequest) Paginate(opts ...aws.Option) ListGroupsForUse
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5571,7 +5667,8 @@ type ListInstanceProfilesRequest struct {
 }
 
 // Send marshals and sends the ListInstanceProfiles API request.
-func (r ListInstanceProfilesRequest) Send() (*ListInstanceProfilesOutput, error) {
+func (r ListInstanceProfilesRequest) Send(ctx context.Context) (*ListInstanceProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5591,7 +5688,7 @@ func (r ListInstanceProfilesRequest) Send() (*ListInstanceProfilesOutput, error)
 //
 //    // Example sending a request using the ListInstanceProfilesRequest method.
 //    req := client.ListInstanceProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5641,7 +5738,7 @@ func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) List
 func (p *ListInstanceProfilesRequest) Paginate(opts ...aws.Option) ListInstanceProfilesPager {
 	return ListInstanceProfilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstanceProfilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5650,6 +5747,7 @@ func (p *ListInstanceProfilesRequest) Paginate(opts ...aws.Option) ListInstanceP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5677,7 +5775,8 @@ type ListInstanceProfilesForRoleRequest struct {
 }
 
 // Send marshals and sends the ListInstanceProfilesForRole API request.
-func (r ListInstanceProfilesForRoleRequest) Send() (*ListInstanceProfilesForRoleOutput, error) {
+func (r ListInstanceProfilesForRoleRequest) Send(ctx context.Context) (*ListInstanceProfilesForRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5697,7 +5796,7 @@ func (r ListInstanceProfilesForRoleRequest) Send() (*ListInstanceProfilesForRole
 //
 //    // Example sending a request using the ListInstanceProfilesForRoleRequest method.
 //    req := client.ListInstanceProfilesForRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5747,7 +5846,7 @@ func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForR
 func (p *ListInstanceProfilesForRoleRequest) Paginate(opts ...aws.Option) ListInstanceProfilesForRolePager {
 	return ListInstanceProfilesForRolePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstanceProfilesForRoleInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5756,6 +5855,7 @@ func (p *ListInstanceProfilesForRoleRequest) Paginate(opts ...aws.Option) ListIn
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5783,7 +5883,8 @@ type ListMFADevicesRequest struct {
 }
 
 // Send marshals and sends the ListMFADevices API request.
-func (r ListMFADevicesRequest) Send() (*ListMFADevicesOutput, error) {
+func (r ListMFADevicesRequest) Send(ctx context.Context) (*ListMFADevicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5804,7 +5905,7 @@ func (r ListMFADevicesRequest) Send() (*ListMFADevicesOutput, error) {
 //
 //    // Example sending a request using the ListMFADevicesRequest method.
 //    req := client.ListMFADevicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5854,7 +5955,7 @@ func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) ListMFADevicesRe
 func (p *ListMFADevicesRequest) Paginate(opts ...aws.Option) ListMFADevicesPager {
 	return ListMFADevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMFADevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -5863,6 +5964,7 @@ func (p *ListMFADevicesRequest) Paginate(opts ...aws.Option) ListMFADevicesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -5890,7 +5992,8 @@ type ListOpenIDConnectProvidersRequest struct {
 }
 
 // Send marshals and sends the ListOpenIDConnectProviders API request.
-func (r ListOpenIDConnectProvidersRequest) Send() (*ListOpenIDConnectProvidersOutput, error) {
+func (r ListOpenIDConnectProvidersRequest) Send(ctx context.Context) (*ListOpenIDConnectProvidersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5907,7 +6010,7 @@ func (r ListOpenIDConnectProvidersRequest) Send() (*ListOpenIDConnectProvidersOu
 //
 //    // Example sending a request using the ListOpenIDConnectProvidersRequest method.
 //    req := client.ListOpenIDConnectProvidersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5941,7 +6044,8 @@ type ListPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListPolicies API request.
-func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+func (r ListPoliciesRequest) Send(ctx context.Context) (*ListPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5969,7 +6073,7 @@ func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListPoliciesRequest method.
 //    req := client.ListPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6019,7 +6123,7 @@ func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 	return ListPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6028,6 +6132,7 @@ func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6055,7 +6160,8 @@ type ListPoliciesGrantingServiceAccessRequest struct {
 }
 
 // Send marshals and sends the ListPoliciesGrantingServiceAccess API request.
-func (r ListPoliciesGrantingServiceAccessRequest) Send() (*ListPoliciesGrantingServiceAccessOutput, error) {
+func (r ListPoliciesGrantingServiceAccessRequest) Send(ctx context.Context) (*ListPoliciesGrantingServiceAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6105,7 +6211,7 @@ func (r ListPoliciesGrantingServiceAccessRequest) Send() (*ListPoliciesGrantingS
 //
 //    // Example sending a request using the ListPoliciesGrantingServiceAccessRequest method.
 //    req := client.ListPoliciesGrantingServiceAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6139,7 +6245,8 @@ type ListPolicyVersionsRequest struct {
 }
 
 // Send marshals and sends the ListPolicyVersions API request.
-func (r ListPolicyVersionsRequest) Send() (*ListPolicyVersionsOutput, error) {
+func (r ListPolicyVersionsRequest) Send(ctx context.Context) (*ListPolicyVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6160,7 +6267,7 @@ func (r ListPolicyVersionsRequest) Send() (*ListPolicyVersionsOutput, error) {
 //
 //    // Example sending a request using the ListPolicyVersionsRequest method.
 //    req := client.ListPolicyVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6210,7 +6317,7 @@ func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPoli
 func (p *ListPolicyVersionsRequest) Paginate(opts ...aws.Option) ListPolicyVersionsPager {
 	return ListPolicyVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPolicyVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6219,6 +6326,7 @@ func (p *ListPolicyVersionsRequest) Paginate(opts ...aws.Option) ListPolicyVersi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6246,7 +6354,8 @@ type ListRolePoliciesRequest struct {
 }
 
 // Send marshals and sends the ListRolePolicies API request.
-func (r ListRolePoliciesRequest) Send() (*ListRolePoliciesOutput, error) {
+func (r ListRolePoliciesRequest) Send(ctx context.Context) (*ListRolePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6272,7 +6381,7 @@ func (r ListRolePoliciesRequest) Send() (*ListRolePoliciesOutput, error) {
 //
 //    // Example sending a request using the ListRolePoliciesRequest method.
 //    req := client.ListRolePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6322,7 +6431,7 @@ func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) ListRolePoli
 func (p *ListRolePoliciesRequest) Paginate(opts ...aws.Option) ListRolePoliciesPager {
 	return ListRolePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRolePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6331,6 +6440,7 @@ func (p *ListRolePoliciesRequest) Paginate(opts ...aws.Option) ListRolePoliciesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6358,7 +6468,8 @@ type ListRoleTagsRequest struct {
 }
 
 // Send marshals and sends the ListRoleTags API request.
-func (r ListRoleTagsRequest) Send() (*ListRoleTagsOutput, error) {
+func (r ListRoleTagsRequest) Send(ctx context.Context) (*ListRoleTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6377,7 +6488,7 @@ func (r ListRoleTagsRequest) Send() (*ListRoleTagsOutput, error) {
 //
 //    // Example sending a request using the ListRoleTagsRequest method.
 //    req := client.ListRoleTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6411,7 +6522,8 @@ type ListRolesRequest struct {
 }
 
 // Send marshals and sends the ListRoles API request.
-func (r ListRolesRequest) Send() (*ListRolesOutput, error) {
+func (r ListRolesRequest) Send(ctx context.Context) (*ListRolesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6431,7 +6543,7 @@ func (r ListRolesRequest) Send() (*ListRolesOutput, error) {
 //
 //    // Example sending a request using the ListRolesRequest method.
 //    req := client.ListRolesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6481,7 +6593,7 @@ func (c *IAM) ListRolesRequest(input *ListRolesInput) ListRolesRequest {
 func (p *ListRolesRequest) Paginate(opts ...aws.Option) ListRolesPager {
 	return ListRolesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRolesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6490,6 +6602,7 @@ func (p *ListRolesRequest) Paginate(opts ...aws.Option) ListRolesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6517,7 +6630,8 @@ type ListSAMLProvidersRequest struct {
 }
 
 // Send marshals and sends the ListSAMLProviders API request.
-func (r ListSAMLProvidersRequest) Send() (*ListSAMLProvidersOutput, error) {
+func (r ListSAMLProvidersRequest) Send(ctx context.Context) (*ListSAMLProvidersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6535,7 +6649,7 @@ func (r ListSAMLProvidersRequest) Send() (*ListSAMLProvidersOutput, error) {
 //
 //    // Example sending a request using the ListSAMLProvidersRequest method.
 //    req := client.ListSAMLProvidersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6569,7 +6683,8 @@ type ListSSHPublicKeysRequest struct {
 }
 
 // Send marshals and sends the ListSSHPublicKeys API request.
-func (r ListSSHPublicKeysRequest) Send() (*ListSSHPublicKeysOutput, error) {
+func (r ListSSHPublicKeysRequest) Send(ctx context.Context) (*ListSSHPublicKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6595,7 +6710,7 @@ func (r ListSSHPublicKeysRequest) Send() (*ListSSHPublicKeysOutput, error) {
 //
 //    // Example sending a request using the ListSSHPublicKeysRequest method.
 //    req := client.ListSSHPublicKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6645,7 +6760,7 @@ func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSHPub
 func (p *ListSSHPublicKeysRequest) Paginate(opts ...aws.Option) ListSSHPublicKeysPager {
 	return ListSSHPublicKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSSHPublicKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6654,6 +6769,7 @@ func (p *ListSSHPublicKeysRequest) Paginate(opts ...aws.Option) ListSSHPublicKey
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6681,7 +6797,8 @@ type ListServerCertificatesRequest struct {
 }
 
 // Send marshals and sends the ListServerCertificates API request.
-func (r ListServerCertificatesRequest) Send() (*ListServerCertificatesOutput, error) {
+func (r ListServerCertificatesRequest) Send(ctx context.Context) (*ListServerCertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6705,7 +6822,7 @@ func (r ListServerCertificatesRequest) Send() (*ListServerCertificatesOutput, er
 //
 //    // Example sending a request using the ListServerCertificatesRequest method.
 //    req := client.ListServerCertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6755,7 +6872,7 @@ func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) 
 func (p *ListServerCertificatesRequest) Paginate(opts ...aws.Option) ListServerCertificatesPager {
 	return ListServerCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServerCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6764,6 +6881,7 @@ func (p *ListServerCertificatesRequest) Paginate(opts ...aws.Option) ListServerC
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6791,7 +6909,8 @@ type ListServiceSpecificCredentialsRequest struct {
 }
 
 // Send marshals and sends the ListServiceSpecificCredentials API request.
-func (r ListServiceSpecificCredentialsRequest) Send() (*ListServiceSpecificCredentialsOutput, error) {
+func (r ListServiceSpecificCredentialsRequest) Send(ctx context.Context) (*ListServiceSpecificCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6813,7 +6932,7 @@ func (r ListServiceSpecificCredentialsRequest) Send() (*ListServiceSpecificCrede
 //
 //    // Example sending a request using the ListServiceSpecificCredentialsRequest method.
 //    req := client.ListServiceSpecificCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6847,7 +6966,8 @@ type ListSigningCertificatesRequest struct {
 }
 
 // Send marshals and sends the ListSigningCertificates API request.
-func (r ListSigningCertificatesRequest) Send() (*ListSigningCertificatesOutput, error) {
+func (r ListSigningCertificatesRequest) Send(ctx context.Context) (*ListSigningCertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6873,7 +6993,7 @@ func (r ListSigningCertificatesRequest) Send() (*ListSigningCertificatesOutput, 
 //
 //    // Example sending a request using the ListSigningCertificatesRequest method.
 //    req := client.ListSigningCertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6923,7 +7043,7 @@ func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput
 func (p *ListSigningCertificatesRequest) Paginate(opts ...aws.Option) ListSigningCertificatesPager {
 	return ListSigningCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSigningCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -6932,6 +7052,7 @@ func (p *ListSigningCertificatesRequest) Paginate(opts ...aws.Option) ListSignin
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -6959,7 +7080,8 @@ type ListUserPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListUserPolicies API request.
-func (r ListUserPoliciesRequest) Send() (*ListUserPoliciesOutput, error) {
+func (r ListUserPoliciesRequest) Send(ctx context.Context) (*ListUserPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6984,7 +7106,7 @@ func (r ListUserPoliciesRequest) Send() (*ListUserPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListUserPoliciesRequest method.
 //    req := client.ListUserPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7034,7 +7156,7 @@ func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) ListUserPoli
 func (p *ListUserPoliciesRequest) Paginate(opts ...aws.Option) ListUserPoliciesPager {
 	return ListUserPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUserPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7043,6 +7165,7 @@ func (p *ListUserPoliciesRequest) Paginate(opts ...aws.Option) ListUserPoliciesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7070,7 +7193,8 @@ type ListUserTagsRequest struct {
 }
 
 // Send marshals and sends the ListUserTags API request.
-func (r ListUserTagsRequest) Send() (*ListUserTagsOutput, error) {
+func (r ListUserTagsRequest) Send(ctx context.Context) (*ListUserTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7089,7 +7213,7 @@ func (r ListUserTagsRequest) Send() (*ListUserTagsOutput, error) {
 //
 //    // Example sending a request using the ListUserTagsRequest method.
 //    req := client.ListUserTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7123,7 +7247,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7143,7 +7268,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7193,7 +7318,7 @@ func (c *IAM) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 	return ListUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7202,6 +7327,7 @@ func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7229,7 +7355,8 @@ type ListVirtualMFADevicesRequest struct {
 }
 
 // Send marshals and sends the ListVirtualMFADevices API request.
-func (r ListVirtualMFADevicesRequest) Send() (*ListVirtualMFADevicesOutput, error) {
+func (r ListVirtualMFADevicesRequest) Send(ctx context.Context) (*ListVirtualMFADevicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7250,7 +7377,7 @@ func (r ListVirtualMFADevicesRequest) Send() (*ListVirtualMFADevicesOutput, erro
 //
 //    // Example sending a request using the ListVirtualMFADevicesRequest method.
 //    req := client.ListVirtualMFADevicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7300,7 +7427,7 @@ func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) Li
 func (p *ListVirtualMFADevicesRequest) Paginate(opts ...aws.Option) ListVirtualMFADevicesPager {
 	return ListVirtualMFADevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVirtualMFADevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -7309,6 +7436,7 @@ func (p *ListVirtualMFADevicesRequest) Paginate(opts ...aws.Option) ListVirtualM
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -7336,7 +7464,8 @@ type PutGroupPolicyRequest struct {
 }
 
 // Send marshals and sends the PutGroupPolicy API request.
-func (r PutGroupPolicyRequest) Send() (*PutGroupPolicyOutput, error) {
+func (r PutGroupPolicyRequest) Send(ctx context.Context) (*PutGroupPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7368,7 +7497,7 @@ func (r PutGroupPolicyRequest) Send() (*PutGroupPolicyOutput, error) {
 //
 //    // Example sending a request using the PutGroupPolicyRequest method.
 //    req := client.PutGroupPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7404,7 +7533,8 @@ type PutRolePermissionsBoundaryRequest struct {
 }
 
 // Send marshals and sends the PutRolePermissionsBoundary API request.
-func (r PutRolePermissionsBoundaryRequest) Send() (*PutRolePermissionsBoundaryOutput, error) {
+func (r PutRolePermissionsBoundaryRequest) Send(ctx context.Context) (*PutRolePermissionsBoundaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7432,7 +7562,7 @@ func (r PutRolePermissionsBoundaryRequest) Send() (*PutRolePermissionsBoundaryOu
 //
 //    // Example sending a request using the PutRolePermissionsBoundaryRequest method.
 //    req := client.PutRolePermissionsBoundaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7468,7 +7598,8 @@ type PutRolePolicyRequest struct {
 }
 
 // Send marshals and sends the PutRolePolicy API request.
-func (r PutRolePolicyRequest) Send() (*PutRolePolicyOutput, error) {
+func (r PutRolePolicyRequest) Send(ctx context.Context) (*PutRolePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7506,7 +7637,7 @@ func (r PutRolePolicyRequest) Send() (*PutRolePolicyOutput, error) {
 //
 //    // Example sending a request using the PutRolePolicyRequest method.
 //    req := client.PutRolePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7542,7 +7673,8 @@ type PutUserPermissionsBoundaryRequest struct {
 }
 
 // Send marshals and sends the PutUserPermissionsBoundary API request.
-func (r PutUserPermissionsBoundaryRequest) Send() (*PutUserPermissionsBoundaryOutput, error) {
+func (r PutUserPermissionsBoundaryRequest) Send(ctx context.Context) (*PutUserPermissionsBoundaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7568,7 +7700,7 @@ func (r PutUserPermissionsBoundaryRequest) Send() (*PutUserPermissionsBoundaryOu
 //
 //    // Example sending a request using the PutUserPermissionsBoundaryRequest method.
 //    req := client.PutUserPermissionsBoundaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7604,7 +7736,8 @@ type PutUserPolicyRequest struct {
 }
 
 // Send marshals and sends the PutUserPolicy API request.
-func (r PutUserPolicyRequest) Send() (*PutUserPolicyOutput, error) {
+func (r PutUserPolicyRequest) Send(ctx context.Context) (*PutUserPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7636,7 +7769,7 @@ func (r PutUserPolicyRequest) Send() (*PutUserPolicyOutput, error) {
 //
 //    // Example sending a request using the PutUserPolicyRequest method.
 //    req := client.PutUserPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7672,7 +7805,8 @@ type RemoveClientIDFromOpenIDConnectProviderRequest struct {
 }
 
 // Send marshals and sends the RemoveClientIDFromOpenIDConnectProvider API request.
-func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send() (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
+func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send(ctx context.Context) (*RemoveClientIDFromOpenIDConnectProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7693,7 +7827,7 @@ func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send() (*RemoveClientIDF
 //
 //    // Example sending a request using the RemoveClientIDFromOpenIDConnectProviderRequest method.
 //    req := client.RemoveClientIDFromOpenIDConnectProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7729,7 +7863,8 @@ type RemoveRoleFromInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the RemoveRoleFromInstanceProfile API request.
-func (r RemoveRoleFromInstanceProfileRequest) Send() (*RemoveRoleFromInstanceProfileOutput, error) {
+func (r RemoveRoleFromInstanceProfileRequest) Send(ctx context.Context) (*RemoveRoleFromInstanceProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7754,7 +7889,7 @@ func (r RemoveRoleFromInstanceProfileRequest) Send() (*RemoveRoleFromInstancePro
 //
 //    // Example sending a request using the RemoveRoleFromInstanceProfileRequest method.
 //    req := client.RemoveRoleFromInstanceProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7790,7 +7925,8 @@ type RemoveUserFromGroupRequest struct {
 }
 
 // Send marshals and sends the RemoveUserFromGroup API request.
-func (r RemoveUserFromGroupRequest) Send() (*RemoveUserFromGroupOutput, error) {
+func (r RemoveUserFromGroupRequest) Send(ctx context.Context) (*RemoveUserFromGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7806,7 +7942,7 @@ func (r RemoveUserFromGroupRequest) Send() (*RemoveUserFromGroupOutput, error) {
 //
 //    // Example sending a request using the RemoveUserFromGroupRequest method.
 //    req := client.RemoveUserFromGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7842,7 +7978,8 @@ type ResetServiceSpecificCredentialRequest struct {
 }
 
 // Send marshals and sends the ResetServiceSpecificCredential API request.
-func (r ResetServiceSpecificCredentialRequest) Send() (*ResetServiceSpecificCredentialOutput, error) {
+func (r ResetServiceSpecificCredentialRequest) Send(ctx context.Context) (*ResetServiceSpecificCredentialOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7861,7 +7998,7 @@ func (r ResetServiceSpecificCredentialRequest) Send() (*ResetServiceSpecificCred
 //
 //    // Example sending a request using the ResetServiceSpecificCredentialRequest method.
 //    req := client.ResetServiceSpecificCredentialRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7895,7 +8032,8 @@ type ResyncMFADeviceRequest struct {
 }
 
 // Send marshals and sends the ResyncMFADevice API request.
-func (r ResyncMFADeviceRequest) Send() (*ResyncMFADeviceOutput, error) {
+func (r ResyncMFADeviceRequest) Send(ctx context.Context) (*ResyncMFADeviceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7916,7 +8054,7 @@ func (r ResyncMFADeviceRequest) Send() (*ResyncMFADeviceOutput, error) {
 //
 //    // Example sending a request using the ResyncMFADeviceRequest method.
 //    req := client.ResyncMFADeviceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7952,7 +8090,8 @@ type SetDefaultPolicyVersionRequest struct {
 }
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
-func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, error) {
+func (r SetDefaultPolicyVersionRequest) Send(ctx context.Context) (*SetDefaultPolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7977,7 +8116,7 @@ func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, 
 //
 //    // Example sending a request using the SetDefaultPolicyVersionRequest method.
 //    req := client.SetDefaultPolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8013,7 +8152,8 @@ type SimulateCustomPolicyRequest struct {
 }
 
 // Send marshals and sends the SimulateCustomPolicy API request.
-func (r SimulateCustomPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, error) {
+func (r SimulateCustomPolicyRequest) Send(ctx context.Context) (*SimulatePrincipalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8045,7 +8185,7 @@ func (r SimulateCustomPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, err
 //
 //    // Example sending a request using the SimulateCustomPolicyRequest method.
 //    req := client.SimulateCustomPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8095,7 +8235,7 @@ func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) Simu
 func (p *SimulateCustomPolicyRequest) Paginate(opts ...aws.Option) SimulateCustomPolicyPager {
 	return SimulateCustomPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SimulateCustomPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -8104,6 +8244,7 @@ func (p *SimulateCustomPolicyRequest) Paginate(opts ...aws.Option) SimulateCusto
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -8131,7 +8272,8 @@ type SimulatePrincipalPolicyRequest struct {
 }
 
 // Send marshals and sends the SimulatePrincipalPolicy API request.
-func (r SimulatePrincipalPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, error) {
+func (r SimulatePrincipalPolicyRequest) Send(ctx context.Context) (*SimulatePrincipalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8173,7 +8315,7 @@ func (r SimulatePrincipalPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, 
 //
 //    // Example sending a request using the SimulatePrincipalPolicyRequest method.
 //    req := client.SimulatePrincipalPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8223,7 +8365,7 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 func (p *SimulatePrincipalPolicyRequest) Paginate(opts ...aws.Option) SimulatePrincipalPolicyPager {
 	return SimulatePrincipalPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SimulatePrincipalPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -8232,6 +8374,7 @@ func (p *SimulatePrincipalPolicyRequest) Paginate(opts ...aws.Option) SimulatePr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -8259,7 +8402,8 @@ type TagRoleRequest struct {
 }
 
 // Send marshals and sends the TagRole API request.
-func (r TagRoleRequest) Send() (*TagRoleOutput, error) {
+func (r TagRoleRequest) Send(ctx context.Context) (*TagRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8308,7 +8452,7 @@ func (r TagRoleRequest) Send() (*TagRoleOutput, error) {
 //
 //    // Example sending a request using the TagRoleRequest method.
 //    req := client.TagRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8344,7 +8488,8 @@ type TagUserRequest struct {
 }
 
 // Send marshals and sends the TagUser API request.
-func (r TagUserRequest) Send() (*TagUserOutput, error) {
+func (r TagUserRequest) Send(ctx context.Context) (*TagUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8392,7 +8537,7 @@ func (r TagUserRequest) Send() (*TagUserOutput, error) {
 //
 //    // Example sending a request using the TagUserRequest method.
 //    req := client.TagUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8428,7 +8573,8 @@ type UntagRoleRequest struct {
 }
 
 // Send marshals and sends the UntagRole API request.
-func (r UntagRoleRequest) Send() (*UntagRoleOutput, error) {
+func (r UntagRoleRequest) Send(ctx context.Context) (*UntagRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8446,7 +8592,7 @@ func (r UntagRoleRequest) Send() (*UntagRoleOutput, error) {
 //
 //    // Example sending a request using the UntagRoleRequest method.
 //    req := client.UntagRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8482,7 +8628,8 @@ type UntagUserRequest struct {
 }
 
 // Send marshals and sends the UntagUser API request.
-func (r UntagUserRequest) Send() (*UntagUserOutput, error) {
+func (r UntagUserRequest) Send(ctx context.Context) (*UntagUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8500,7 +8647,7 @@ func (r UntagUserRequest) Send() (*UntagUserOutput, error) {
 //
 //    // Example sending a request using the UntagUserRequest method.
 //    req := client.UntagUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8536,7 +8683,8 @@ type UpdateAccessKeyRequest struct {
 }
 
 // Send marshals and sends the UpdateAccessKey API request.
-func (r UpdateAccessKeyRequest) Send() (*UpdateAccessKeyOutput, error) {
+func (r UpdateAccessKeyRequest) Send(ctx context.Context) (*UpdateAccessKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8563,7 +8711,7 @@ func (r UpdateAccessKeyRequest) Send() (*UpdateAccessKeyOutput, error) {
 //
 //    // Example sending a request using the UpdateAccessKeyRequest method.
 //    req := client.UpdateAccessKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8599,7 +8747,8 @@ type UpdateAccountPasswordPolicyRequest struct {
 }
 
 // Send marshals and sends the UpdateAccountPasswordPolicy API request.
-func (r UpdateAccountPasswordPolicyRequest) Send() (*UpdateAccountPasswordPolicyOutput, error) {
+func (r UpdateAccountPasswordPolicyRequest) Send(ctx context.Context) (*UpdateAccountPasswordPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8626,7 +8775,7 @@ func (r UpdateAccountPasswordPolicyRequest) Send() (*UpdateAccountPasswordPolicy
 //
 //    // Example sending a request using the UpdateAccountPasswordPolicyRequest method.
 //    req := client.UpdateAccountPasswordPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8662,7 +8811,8 @@ type UpdateAssumeRolePolicyRequest struct {
 }
 
 // Send marshals and sends the UpdateAssumeRolePolicy API request.
-func (r UpdateAssumeRolePolicyRequest) Send() (*UpdateAssumeRolePolicyOutput, error) {
+func (r UpdateAssumeRolePolicyRequest) Send(ctx context.Context) (*UpdateAssumeRolePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8681,7 +8831,7 @@ func (r UpdateAssumeRolePolicyRequest) Send() (*UpdateAssumeRolePolicyOutput, er
 //
 //    // Example sending a request using the UpdateAssumeRolePolicyRequest method.
 //    req := client.UpdateAssumeRolePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8717,7 +8867,8 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8744,7 +8895,7 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8780,7 +8931,8 @@ type UpdateLoginProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateLoginProfile API request.
-func (r UpdateLoginProfileRequest) Send() (*UpdateLoginProfileOutput, error) {
+func (r UpdateLoginProfileRequest) Send(ctx context.Context) (*UpdateLoginProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8800,7 +8952,7 @@ func (r UpdateLoginProfileRequest) Send() (*UpdateLoginProfileOutput, error) {
 //
 //    // Example sending a request using the UpdateLoginProfileRequest method.
 //    req := client.UpdateLoginProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8836,7 +8988,8 @@ type UpdateOpenIDConnectProviderThumbprintRequest struct {
 }
 
 // Send marshals and sends the UpdateOpenIDConnectProviderThumbprint API request.
-func (r UpdateOpenIDConnectProviderThumbprintRequest) Send() (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
+func (r UpdateOpenIDConnectProviderThumbprintRequest) Send(ctx context.Context) (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8866,7 +9019,7 @@ func (r UpdateOpenIDConnectProviderThumbprintRequest) Send() (*UpdateOpenIDConne
 //
 //    // Example sending a request using the UpdateOpenIDConnectProviderThumbprintRequest method.
 //    req := client.UpdateOpenIDConnectProviderThumbprintRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8902,7 +9055,8 @@ type UpdateRoleRequest struct {
 }
 
 // Send marshals and sends the UpdateRole API request.
-func (r UpdateRoleRequest) Send() (*UpdateRoleOutput, error) {
+func (r UpdateRoleRequest) Send(ctx context.Context) (*UpdateRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8918,7 +9072,7 @@ func (r UpdateRoleRequest) Send() (*UpdateRoleOutput, error) {
 //
 //    // Example sending a request using the UpdateRoleRequest method.
 //    req := client.UpdateRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -8952,7 +9106,8 @@ type UpdateRoleDescriptionRequest struct {
 }
 
 // Send marshals and sends the UpdateRoleDescription API request.
-func (r UpdateRoleDescriptionRequest) Send() (*UpdateRoleDescriptionOutput, error) {
+func (r UpdateRoleDescriptionRequest) Send(ctx context.Context) (*UpdateRoleDescriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8971,7 +9126,7 @@ func (r UpdateRoleDescriptionRequest) Send() (*UpdateRoleDescriptionOutput, erro
 //
 //    // Example sending a request using the UpdateRoleDescriptionRequest method.
 //    req := client.UpdateRoleDescriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9005,7 +9160,8 @@ type UpdateSAMLProviderRequest struct {
 }
 
 // Send marshals and sends the UpdateSAMLProvider API request.
-func (r UpdateSAMLProviderRequest) Send() (*UpdateSAMLProviderOutput, error) {
+func (r UpdateSAMLProviderRequest) Send(ctx context.Context) (*UpdateSAMLProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9023,7 +9179,7 @@ func (r UpdateSAMLProviderRequest) Send() (*UpdateSAMLProviderOutput, error) {
 //
 //    // Example sending a request using the UpdateSAMLProviderRequest method.
 //    req := client.UpdateSAMLProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9057,7 +9213,8 @@ type UpdateSSHPublicKeyRequest struct {
 }
 
 // Send marshals and sends the UpdateSSHPublicKey API request.
-func (r UpdateSSHPublicKeyRequest) Send() (*UpdateSSHPublicKeyOutput, error) {
+func (r UpdateSSHPublicKeyRequest) Send(ctx context.Context) (*UpdateSSHPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9082,7 +9239,7 @@ func (r UpdateSSHPublicKeyRequest) Send() (*UpdateSSHPublicKeyOutput, error) {
 //
 //    // Example sending a request using the UpdateSSHPublicKeyRequest method.
 //    req := client.UpdateSSHPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9118,7 +9275,8 @@ type UpdateServerCertificateRequest struct {
 }
 
 // Send marshals and sends the UpdateServerCertificate API request.
-func (r UpdateServerCertificateRequest) Send() (*UpdateServerCertificateOutput, error) {
+func (r UpdateServerCertificateRequest) Send(ctx context.Context) (*UpdateServerCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9153,7 +9311,7 @@ func (r UpdateServerCertificateRequest) Send() (*UpdateServerCertificateOutput, 
 //
 //    // Example sending a request using the UpdateServerCertificateRequest method.
 //    req := client.UpdateServerCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9189,7 +9347,8 @@ type UpdateServiceSpecificCredentialRequest struct {
 }
 
 // Send marshals and sends the UpdateServiceSpecificCredential API request.
-func (r UpdateServiceSpecificCredentialRequest) Send() (*UpdateServiceSpecificCredentialOutput, error) {
+func (r UpdateServiceSpecificCredentialRequest) Send(ctx context.Context) (*UpdateServiceSpecificCredentialOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9208,7 +9367,7 @@ func (r UpdateServiceSpecificCredentialRequest) Send() (*UpdateServiceSpecificCr
 //
 //    // Example sending a request using the UpdateServiceSpecificCredentialRequest method.
 //    req := client.UpdateServiceSpecificCredentialRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9244,7 +9403,8 @@ type UpdateSigningCertificateRequest struct {
 }
 
 // Send marshals and sends the UpdateSigningCertificate API request.
-func (r UpdateSigningCertificateRequest) Send() (*UpdateSigningCertificateOutput, error) {
+func (r UpdateSigningCertificateRequest) Send(ctx context.Context) (*UpdateSigningCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9268,7 +9428,7 @@ func (r UpdateSigningCertificateRequest) Send() (*UpdateSigningCertificateOutput
 //
 //    // Example sending a request using the UpdateSigningCertificateRequest method.
 //    req := client.UpdateSigningCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9304,7 +9464,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9331,7 +9492,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9367,7 +9528,8 @@ type UploadSSHPublicKeyRequest struct {
 }
 
 // Send marshals and sends the UploadSSHPublicKey API request.
-func (r UploadSSHPublicKeyRequest) Send() (*UploadSSHPublicKeyOutput, error) {
+func (r UploadSSHPublicKeyRequest) Send(ctx context.Context) (*UploadSSHPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9389,7 +9551,7 @@ func (r UploadSSHPublicKeyRequest) Send() (*UploadSSHPublicKeyOutput, error) {
 //
 //    // Example sending a request using the UploadSSHPublicKeyRequest method.
 //    req := client.UploadSSHPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9423,7 +9585,8 @@ type UploadServerCertificateRequest struct {
 }
 
 // Send marshals and sends the UploadServerCertificate API request.
-func (r UploadServerCertificateRequest) Send() (*UploadServerCertificateOutput, error) {
+func (r UploadServerCertificateRequest) Send(ctx context.Context) (*UploadServerCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9464,7 +9627,7 @@ func (r UploadServerCertificateRequest) Send() (*UploadServerCertificateOutput, 
 //
 //    // Example sending a request using the UploadServerCertificateRequest method.
 //    req := client.UploadServerCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -9498,7 +9661,8 @@ type UploadSigningCertificateRequest struct {
 }
 
 // Send marshals and sends the UploadSigningCertificate API request.
-func (r UploadSigningCertificateRequest) Send() (*UploadSigningCertificateOutput, error) {
+func (r UploadSigningCertificateRequest) Send(ctx context.Context) (*UploadSigningCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9531,7 +9695,7 @@ func (r UploadSigningCertificateRequest) Send() (*UploadSigningCertificateOutput
 //
 //    // Example sending a request using the UploadSigningCertificateRequest method.
 //    req := client.UploadSigningCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

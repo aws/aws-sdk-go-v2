@@ -3,6 +3,7 @@
 package cloudtrail
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type CreateTrailRequest struct {
 }
 
 // Send marshals and sends the CreateTrail API request.
-func (r CreateTrailRequest) Send() (*CreateTrailOutput, error) {
+func (r CreateTrailRequest) Send(ctx context.Context) (*CreateTrailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r CreateTrailRequest) Send() (*CreateTrailOutput, error) {
 //
 //    // Example sending a request using the CreateTrailRequest method.
 //    req := client.CreateTrailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type DeleteTrailRequest struct {
 }
 
 // Send marshals and sends the DeleteTrail API request.
-func (r DeleteTrailRequest) Send() (*DeleteTrailOutput, error) {
+func (r DeleteTrailRequest) Send(ctx context.Context) (*DeleteTrailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -145,7 +149,7 @@ func (r DeleteTrailRequest) Send() (*DeleteTrailOutput, error) {
 //
 //    // Example sending a request using the DeleteTrailRequest method.
 //    req := client.DeleteTrailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -179,7 +183,8 @@ type DescribeTrailsRequest struct {
 }
 
 // Send marshals and sends the DescribeTrails API request.
-func (r DescribeTrailsRequest) Send() (*DescribeTrailsOutput, error) {
+func (r DescribeTrailsRequest) Send(ctx context.Context) (*DescribeTrailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -196,7 +201,7 @@ func (r DescribeTrailsRequest) Send() (*DescribeTrailsOutput, error) {
 //
 //    // Example sending a request using the DescribeTrailsRequest method.
 //    req := client.DescribeTrailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -230,7 +235,8 @@ type GetEventSelectorsRequest struct {
 }
 
 // Send marshals and sends the GetEventSelectors API request.
-func (r GetEventSelectorsRequest) Send() (*GetEventSelectorsOutput, error) {
+func (r GetEventSelectorsRequest) Send(ctx context.Context) (*GetEventSelectorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -259,7 +265,7 @@ func (r GetEventSelectorsRequest) Send() (*GetEventSelectorsOutput, error) {
 //
 //    // Example sending a request using the GetEventSelectorsRequest method.
 //    req := client.GetEventSelectorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -293,7 +299,8 @@ type GetTrailStatusRequest struct {
 }
 
 // Send marshals and sends the GetTrailStatus API request.
-func (r GetTrailStatusRequest) Send() (*GetTrailStatusOutput, error) {
+func (r GetTrailStatusRequest) Send(ctx context.Context) (*GetTrailStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -313,7 +320,7 @@ func (r GetTrailStatusRequest) Send() (*GetTrailStatusOutput, error) {
 //
 //    // Example sending a request using the GetTrailStatusRequest method.
 //    req := client.GetTrailStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -347,7 +354,8 @@ type ListPublicKeysRequest struct {
 }
 
 // Send marshals and sends the ListPublicKeys API request.
-func (r ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
+func (r ListPublicKeysRequest) Send(ctx context.Context) (*ListPublicKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -370,7 +378,7 @@ func (r ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
 //
 //    // Example sending a request using the ListPublicKeysRequest method.
 //    req := client.ListPublicKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -404,7 +412,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -420,7 +429,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -454,7 +463,8 @@ type LookupEventsRequest struct {
 }
 
 // Send marshals and sends the LookupEvents API request.
-func (r LookupEventsRequest) Send() (*LookupEventsOutput, error) {
+func (r LookupEventsRequest) Send(ctx context.Context) (*LookupEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -498,7 +508,7 @@ func (r LookupEventsRequest) Send() (*LookupEventsOutput, error) {
 //
 //    // Example sending a request using the LookupEventsRequest method.
 //    req := client.LookupEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -548,7 +558,7 @@ func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) LookupEventsR
 func (p *LookupEventsRequest) Paginate(opts ...aws.Option) LookupEventsPager {
 	return LookupEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *LookupEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -557,6 +567,7 @@ func (p *LookupEventsRequest) Paginate(opts ...aws.Option) LookupEventsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -584,7 +595,8 @@ type PutEventSelectorsRequest struct {
 }
 
 // Send marshals and sends the PutEventSelectors API request.
-func (r PutEventSelectorsRequest) Send() (*PutEventSelectorsOutput, error) {
+func (r PutEventSelectorsRequest) Send(ctx context.Context) (*PutEventSelectorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -631,7 +643,7 @@ func (r PutEventSelectorsRequest) Send() (*PutEventSelectorsOutput, error) {
 //
 //    // Example sending a request using the PutEventSelectorsRequest method.
 //    req := client.PutEventSelectorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -665,7 +677,8 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -681,7 +694,7 @@ func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsRequest method.
 //    req := client.RemoveTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -715,7 +728,8 @@ type StartLoggingRequest struct {
 }
 
 // Send marshals and sends the StartLogging API request.
-func (r StartLoggingRequest) Send() (*StartLoggingOutput, error) {
+func (r StartLoggingRequest) Send(ctx context.Context) (*StartLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -735,7 +749,7 @@ func (r StartLoggingRequest) Send() (*StartLoggingOutput, error) {
 //
 //    // Example sending a request using the StartLoggingRequest method.
 //    req := client.StartLoggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -769,7 +783,8 @@ type StopLoggingRequest struct {
 }
 
 // Send marshals and sends the StopLogging API request.
-func (r StopLoggingRequest) Send() (*StopLoggingOutput, error) {
+func (r StopLoggingRequest) Send(ctx context.Context) (*StopLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -791,7 +806,7 @@ func (r StopLoggingRequest) Send() (*StopLoggingOutput, error) {
 //
 //    // Example sending a request using the StopLoggingRequest method.
 //    req := client.StopLoggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -825,7 +840,8 @@ type UpdateTrailRequest struct {
 }
 
 // Send marshals and sends the UpdateTrail API request.
-func (r UpdateTrailRequest) Send() (*UpdateTrailOutput, error) {
+func (r UpdateTrailRequest) Send(ctx context.Context) (*UpdateTrailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -846,7 +862,7 @@ func (r UpdateTrailRequest) Send() (*UpdateTrailOutput, error) {
 //
 //    // Example sending a request using the UpdateTrailRequest method.
 //    req := client.UpdateTrailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

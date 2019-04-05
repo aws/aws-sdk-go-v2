@@ -3,6 +3,7 @@
 package servicecatalog
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AcceptPortfolioShareRequest struct {
 }
 
 // Send marshals and sends the AcceptPortfolioShare API request.
-func (r AcceptPortfolioShareRequest) Send() (*AcceptPortfolioShareOutput, error) {
+func (r AcceptPortfolioShareRequest) Send(ctx context.Context) (*AcceptPortfolioShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r AcceptPortfolioShareRequest) Send() (*AcceptPortfolioShareOutput, error)
 //
 //    // Example sending a request using the AcceptPortfolioShareRequest method.
 //    req := client.AcceptPortfolioShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type AssociatePrincipalWithPortfolioRequest struct {
 }
 
 // Send marshals and sends the AssociatePrincipalWithPortfolio API request.
-func (r AssociatePrincipalWithPortfolioRequest) Send() (*AssociatePrincipalWithPortfolioOutput, error) {
+func (r AssociatePrincipalWithPortfolioRequest) Send(ctx context.Context) (*AssociatePrincipalWithPortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r AssociatePrincipalWithPortfolioRequest) Send() (*AssociatePrincipalWithP
 //
 //    // Example sending a request using the AssociatePrincipalWithPortfolioRequest method.
 //    req := client.AssociatePrincipalWithPortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type AssociateProductWithPortfolioRequest struct {
 }
 
 // Send marshals and sends the AssociateProductWithPortfolio API request.
-func (r AssociateProductWithPortfolioRequest) Send() (*AssociateProductWithPortfolioOutput, error) {
+func (r AssociateProductWithPortfolioRequest) Send(ctx context.Context) (*AssociateProductWithPortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ func (r AssociateProductWithPortfolioRequest) Send() (*AssociateProductWithPortf
 //
 //    // Example sending a request using the AssociateProductWithPortfolioRequest method.
 //    req := client.AssociateProductWithPortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type AssociateServiceActionWithProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the AssociateServiceActionWithProvisioningArtifact API request.
-func (r AssociateServiceActionWithProvisioningArtifactRequest) Send() (*AssociateServiceActionWithProvisioningArtifactOutput, error) {
+func (r AssociateServiceActionWithProvisioningArtifactRequest) Send(ctx context.Context) (*AssociateServiceActionWithProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -186,7 +191,7 @@ func (r AssociateServiceActionWithProvisioningArtifactRequest) Send() (*Associat
 //
 //    // Example sending a request using the AssociateServiceActionWithProvisioningArtifactRequest method.
 //    req := client.AssociateServiceActionWithProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -220,7 +225,8 @@ type AssociateTagOptionWithResourceRequest struct {
 }
 
 // Send marshals and sends the AssociateTagOptionWithResource API request.
-func (r AssociateTagOptionWithResourceRequest) Send() (*AssociateTagOptionWithResourceOutput, error) {
+func (r AssociateTagOptionWithResourceRequest) Send(ctx context.Context) (*AssociateTagOptionWithResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,7 +242,7 @@ func (r AssociateTagOptionWithResourceRequest) Send() (*AssociateTagOptionWithRe
 //
 //    // Example sending a request using the AssociateTagOptionWithResourceRequest method.
 //    req := client.AssociateTagOptionWithResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -270,7 +276,8 @@ type BatchAssociateServiceActionWithProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the BatchAssociateServiceActionWithProvisioningArtifact API request.
-func (r BatchAssociateServiceActionWithProvisioningArtifactRequest) Send() (*BatchAssociateServiceActionWithProvisioningArtifactOutput, error) {
+func (r BatchAssociateServiceActionWithProvisioningArtifactRequest) Send(ctx context.Context) (*BatchAssociateServiceActionWithProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +293,7 @@ func (r BatchAssociateServiceActionWithProvisioningArtifactRequest) Send() (*Bat
 //
 //    // Example sending a request using the BatchAssociateServiceActionWithProvisioningArtifactRequest method.
 //    req := client.BatchAssociateServiceActionWithProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -320,7 +327,8 @@ type BatchDisassociateServiceActionFromProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the BatchDisassociateServiceActionFromProvisioningArtifact API request.
-func (r BatchDisassociateServiceActionFromProvisioningArtifactRequest) Send() (*BatchDisassociateServiceActionFromProvisioningArtifactOutput, error) {
+func (r BatchDisassociateServiceActionFromProvisioningArtifactRequest) Send(ctx context.Context) (*BatchDisassociateServiceActionFromProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -337,7 +345,7 @@ func (r BatchDisassociateServiceActionFromProvisioningArtifactRequest) Send() (*
 //
 //    // Example sending a request using the BatchDisassociateServiceActionFromProvisioningArtifactRequest method.
 //    req := client.BatchDisassociateServiceActionFromProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -371,7 +379,8 @@ type CopyProductRequest struct {
 }
 
 // Send marshals and sends the CopyProduct API request.
-func (r CopyProductRequest) Send() (*CopyProductOutput, error) {
+func (r CopyProductRequest) Send(ctx context.Context) (*CopyProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -394,7 +403,7 @@ func (r CopyProductRequest) Send() (*CopyProductOutput, error) {
 //
 //    // Example sending a request using the CopyProductRequest method.
 //    req := client.CopyProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -428,7 +437,8 @@ type CreateConstraintRequest struct {
 }
 
 // Send marshals and sends the CreateConstraint API request.
-func (r CreateConstraintRequest) Send() (*CreateConstraintOutput, error) {
+func (r CreateConstraintRequest) Send(ctx context.Context) (*CreateConstraintOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -444,7 +454,7 @@ func (r CreateConstraintRequest) Send() (*CreateConstraintOutput, error) {
 //
 //    // Example sending a request using the CreateConstraintRequest method.
 //    req := client.CreateConstraintRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -478,7 +488,8 @@ type CreatePortfolioRequest struct {
 }
 
 // Send marshals and sends the CreatePortfolio API request.
-func (r CreatePortfolioRequest) Send() (*CreatePortfolioOutput, error) {
+func (r CreatePortfolioRequest) Send(ctx context.Context) (*CreatePortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -494,7 +505,7 @@ func (r CreatePortfolioRequest) Send() (*CreatePortfolioOutput, error) {
 //
 //    // Example sending a request using the CreatePortfolioRequest method.
 //    req := client.CreatePortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -528,7 +539,8 @@ type CreatePortfolioShareRequest struct {
 }
 
 // Send marshals and sends the CreatePortfolioShare API request.
-func (r CreatePortfolioShareRequest) Send() (*CreatePortfolioShareOutput, error) {
+func (r CreatePortfolioShareRequest) Send(ctx context.Context) (*CreatePortfolioShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +559,7 @@ func (r CreatePortfolioShareRequest) Send() (*CreatePortfolioShareOutput, error)
 //
 //    // Example sending a request using the CreatePortfolioShareRequest method.
 //    req := client.CreatePortfolioShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +593,8 @@ type CreateProductRequest struct {
 }
 
 // Send marshals and sends the CreateProduct API request.
-func (r CreateProductRequest) Send() (*CreateProductOutput, error) {
+func (r CreateProductRequest) Send(ctx context.Context) (*CreateProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +610,7 @@ func (r CreateProductRequest) Send() (*CreateProductOutput, error) {
 //
 //    // Example sending a request using the CreateProductRequest method.
 //    req := client.CreateProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +644,8 @@ type CreateProvisionedProductPlanRequest struct {
 }
 
 // Send marshals and sends the CreateProvisionedProductPlan API request.
-func (r CreateProvisionedProductPlanRequest) Send() (*CreateProvisionedProductPlanOutput, error) {
+func (r CreateProvisionedProductPlanRequest) Send(ctx context.Context) (*CreateProvisionedProductPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -655,7 +669,7 @@ func (r CreateProvisionedProductPlanRequest) Send() (*CreateProvisionedProductPl
 //
 //    // Example sending a request using the CreateProvisionedProductPlanRequest method.
 //    req := client.CreateProvisionedProductPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -689,7 +703,8 @@ type CreateProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the CreateProvisioningArtifact API request.
-func (r CreateProvisioningArtifactRequest) Send() (*CreateProvisioningArtifactOutput, error) {
+func (r CreateProvisioningArtifactRequest) Send(ctx context.Context) (*CreateProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -709,7 +724,7 @@ func (r CreateProvisioningArtifactRequest) Send() (*CreateProvisioningArtifactOu
 //
 //    // Example sending a request using the CreateProvisioningArtifactRequest method.
 //    req := client.CreateProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -743,7 +758,8 @@ type CreateServiceActionRequest struct {
 }
 
 // Send marshals and sends the CreateServiceAction API request.
-func (r CreateServiceActionRequest) Send() (*CreateServiceActionOutput, error) {
+func (r CreateServiceActionRequest) Send(ctx context.Context) (*CreateServiceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -759,7 +775,7 @@ func (r CreateServiceActionRequest) Send() (*CreateServiceActionOutput, error) {
 //
 //    // Example sending a request using the CreateServiceActionRequest method.
 //    req := client.CreateServiceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -793,7 +809,8 @@ type CreateTagOptionRequest struct {
 }
 
 // Send marshals and sends the CreateTagOption API request.
-func (r CreateTagOptionRequest) Send() (*CreateTagOptionOutput, error) {
+func (r CreateTagOptionRequest) Send(ctx context.Context) (*CreateTagOptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -809,7 +826,7 @@ func (r CreateTagOptionRequest) Send() (*CreateTagOptionOutput, error) {
 //
 //    // Example sending a request using the CreateTagOptionRequest method.
 //    req := client.CreateTagOptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -843,7 +860,8 @@ type DeleteConstraintRequest struct {
 }
 
 // Send marshals and sends the DeleteConstraint API request.
-func (r DeleteConstraintRequest) Send() (*DeleteConstraintOutput, error) {
+func (r DeleteConstraintRequest) Send(ctx context.Context) (*DeleteConstraintOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -859,7 +877,7 @@ func (r DeleteConstraintRequest) Send() (*DeleteConstraintOutput, error) {
 //
 //    // Example sending a request using the DeleteConstraintRequest method.
 //    req := client.DeleteConstraintRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -893,7 +911,8 @@ type DeletePortfolioRequest struct {
 }
 
 // Send marshals and sends the DeletePortfolio API request.
-func (r DeletePortfolioRequest) Send() (*DeletePortfolioOutput, error) {
+func (r DeletePortfolioRequest) Send(ctx context.Context) (*DeletePortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -912,7 +931,7 @@ func (r DeletePortfolioRequest) Send() (*DeletePortfolioOutput, error) {
 //
 //    // Example sending a request using the DeletePortfolioRequest method.
 //    req := client.DeletePortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -946,7 +965,8 @@ type DeletePortfolioShareRequest struct {
 }
 
 // Send marshals and sends the DeletePortfolioShare API request.
-func (r DeletePortfolioShareRequest) Send() (*DeletePortfolioShareOutput, error) {
+func (r DeletePortfolioShareRequest) Send(ctx context.Context) (*DeletePortfolioShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -964,7 +984,7 @@ func (r DeletePortfolioShareRequest) Send() (*DeletePortfolioShareOutput, error)
 //
 //    // Example sending a request using the DeletePortfolioShareRequest method.
 //    req := client.DeletePortfolioShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -998,7 +1018,8 @@ type DeleteProductRequest struct {
 }
 
 // Send marshals and sends the DeleteProduct API request.
-func (r DeleteProductRequest) Send() (*DeleteProductOutput, error) {
+func (r DeleteProductRequest) Send(ctx context.Context) (*DeleteProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1017,7 +1038,7 @@ func (r DeleteProductRequest) Send() (*DeleteProductOutput, error) {
 //
 //    // Example sending a request using the DeleteProductRequest method.
 //    req := client.DeleteProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1051,7 +1072,8 @@ type DeleteProvisionedProductPlanRequest struct {
 }
 
 // Send marshals and sends the DeleteProvisionedProductPlan API request.
-func (r DeleteProvisionedProductPlanRequest) Send() (*DeleteProvisionedProductPlanOutput, error) {
+func (r DeleteProvisionedProductPlanRequest) Send(ctx context.Context) (*DeleteProvisionedProductPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1067,7 +1089,7 @@ func (r DeleteProvisionedProductPlanRequest) Send() (*DeleteProvisionedProductPl
 //
 //    // Example sending a request using the DeleteProvisionedProductPlanRequest method.
 //    req := client.DeleteProvisionedProductPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1101,7 +1123,8 @@ type DeleteProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the DeleteProvisioningArtifact API request.
-func (r DeleteProvisioningArtifactRequest) Send() (*DeleteProvisioningArtifactOutput, error) {
+func (r DeleteProvisioningArtifactRequest) Send(ctx context.Context) (*DeleteProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1122,7 +1145,7 @@ func (r DeleteProvisioningArtifactRequest) Send() (*DeleteProvisioningArtifactOu
 //
 //    // Example sending a request using the DeleteProvisioningArtifactRequest method.
 //    req := client.DeleteProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1156,7 +1179,8 @@ type DeleteServiceActionRequest struct {
 }
 
 // Send marshals and sends the DeleteServiceAction API request.
-func (r DeleteServiceActionRequest) Send() (*DeleteServiceActionOutput, error) {
+func (r DeleteServiceActionRequest) Send(ctx context.Context) (*DeleteServiceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1172,7 +1196,7 @@ func (r DeleteServiceActionRequest) Send() (*DeleteServiceActionOutput, error) {
 //
 //    // Example sending a request using the DeleteServiceActionRequest method.
 //    req := client.DeleteServiceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1206,7 +1230,8 @@ type DeleteTagOptionRequest struct {
 }
 
 // Send marshals and sends the DeleteTagOption API request.
-func (r DeleteTagOptionRequest) Send() (*DeleteTagOptionOutput, error) {
+func (r DeleteTagOptionRequest) Send(ctx context.Context) (*DeleteTagOptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1224,7 +1249,7 @@ func (r DeleteTagOptionRequest) Send() (*DeleteTagOptionOutput, error) {
 //
 //    // Example sending a request using the DeleteTagOptionRequest method.
 //    req := client.DeleteTagOptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1258,7 +1283,8 @@ type DescribeConstraintRequest struct {
 }
 
 // Send marshals and sends the DescribeConstraint API request.
-func (r DescribeConstraintRequest) Send() (*DescribeConstraintOutput, error) {
+func (r DescribeConstraintRequest) Send(ctx context.Context) (*DescribeConstraintOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1274,7 +1300,7 @@ func (r DescribeConstraintRequest) Send() (*DescribeConstraintOutput, error) {
 //
 //    // Example sending a request using the DescribeConstraintRequest method.
 //    req := client.DescribeConstraintRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1308,7 +1334,8 @@ type DescribeCopyProductStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeCopyProductStatus API request.
-func (r DescribeCopyProductStatusRequest) Send() (*DescribeCopyProductStatusOutput, error) {
+func (r DescribeCopyProductStatusRequest) Send(ctx context.Context) (*DescribeCopyProductStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1324,7 +1351,7 @@ func (r DescribeCopyProductStatusRequest) Send() (*DescribeCopyProductStatusOutp
 //
 //    // Example sending a request using the DescribeCopyProductStatusRequest method.
 //    req := client.DescribeCopyProductStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1358,7 +1385,8 @@ type DescribePortfolioRequest struct {
 }
 
 // Send marshals and sends the DescribePortfolio API request.
-func (r DescribePortfolioRequest) Send() (*DescribePortfolioOutput, error) {
+func (r DescribePortfolioRequest) Send(ctx context.Context) (*DescribePortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1374,7 +1402,7 @@ func (r DescribePortfolioRequest) Send() (*DescribePortfolioOutput, error) {
 //
 //    // Example sending a request using the DescribePortfolioRequest method.
 //    req := client.DescribePortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1408,7 +1436,8 @@ type DescribePortfolioShareStatusRequest struct {
 }
 
 // Send marshals and sends the DescribePortfolioShareStatus API request.
-func (r DescribePortfolioShareStatusRequest) Send() (*DescribePortfolioShareStatusOutput, error) {
+func (r DescribePortfolioShareStatusRequest) Send(ctx context.Context) (*DescribePortfolioShareStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1425,7 +1454,7 @@ func (r DescribePortfolioShareStatusRequest) Send() (*DescribePortfolioShareStat
 //
 //    // Example sending a request using the DescribePortfolioShareStatusRequest method.
 //    req := client.DescribePortfolioShareStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1459,7 +1488,8 @@ type DescribeProductRequest struct {
 }
 
 // Send marshals and sends the DescribeProduct API request.
-func (r DescribeProductRequest) Send() (*DescribeProductOutput, error) {
+func (r DescribeProductRequest) Send(ctx context.Context) (*DescribeProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1475,7 +1505,7 @@ func (r DescribeProductRequest) Send() (*DescribeProductOutput, error) {
 //
 //    // Example sending a request using the DescribeProductRequest method.
 //    req := client.DescribeProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1509,7 +1539,8 @@ type DescribeProductAsAdminRequest struct {
 }
 
 // Send marshals and sends the DescribeProductAsAdmin API request.
-func (r DescribeProductAsAdminRequest) Send() (*DescribeProductAsAdminOutput, error) {
+func (r DescribeProductAsAdminRequest) Send(ctx context.Context) (*DescribeProductAsAdminOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1526,7 +1557,7 @@ func (r DescribeProductAsAdminRequest) Send() (*DescribeProductAsAdminOutput, er
 //
 //    // Example sending a request using the DescribeProductAsAdminRequest method.
 //    req := client.DescribeProductAsAdminRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1560,7 +1591,8 @@ type DescribeProductViewRequest struct {
 }
 
 // Send marshals and sends the DescribeProductView API request.
-func (r DescribeProductViewRequest) Send() (*DescribeProductViewOutput, error) {
+func (r DescribeProductViewRequest) Send(ctx context.Context) (*DescribeProductViewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1576,7 +1608,7 @@ func (r DescribeProductViewRequest) Send() (*DescribeProductViewOutput, error) {
 //
 //    // Example sending a request using the DescribeProductViewRequest method.
 //    req := client.DescribeProductViewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1610,7 +1642,8 @@ type DescribeProvisionedProductRequest struct {
 }
 
 // Send marshals and sends the DescribeProvisionedProduct API request.
-func (r DescribeProvisionedProductRequest) Send() (*DescribeProvisionedProductOutput, error) {
+func (r DescribeProvisionedProductRequest) Send(ctx context.Context) (*DescribeProvisionedProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1626,7 +1659,7 @@ func (r DescribeProvisionedProductRequest) Send() (*DescribeProvisionedProductOu
 //
 //    // Example sending a request using the DescribeProvisionedProductRequest method.
 //    req := client.DescribeProvisionedProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1660,7 +1693,8 @@ type DescribeProvisionedProductPlanRequest struct {
 }
 
 // Send marshals and sends the DescribeProvisionedProductPlan API request.
-func (r DescribeProvisionedProductPlanRequest) Send() (*DescribeProvisionedProductPlanOutput, error) {
+func (r DescribeProvisionedProductPlanRequest) Send(ctx context.Context) (*DescribeProvisionedProductPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1676,7 +1710,7 @@ func (r DescribeProvisionedProductPlanRequest) Send() (*DescribeProvisionedProdu
 //
 //    // Example sending a request using the DescribeProvisionedProductPlanRequest method.
 //    req := client.DescribeProvisionedProductPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1710,7 +1744,8 @@ type DescribeProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the DescribeProvisioningArtifact API request.
-func (r DescribeProvisioningArtifactRequest) Send() (*DescribeProvisioningArtifactOutput, error) {
+func (r DescribeProvisioningArtifactRequest) Send(ctx context.Context) (*DescribeProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1727,7 +1762,7 @@ func (r DescribeProvisioningArtifactRequest) Send() (*DescribeProvisioningArtifa
 //
 //    // Example sending a request using the DescribeProvisioningArtifactRequest method.
 //    req := client.DescribeProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1761,7 +1796,8 @@ type DescribeProvisioningParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeProvisioningParameters API request.
-func (r DescribeProvisioningParametersRequest) Send() (*DescribeProvisioningParametersOutput, error) {
+func (r DescribeProvisioningParametersRequest) Send(ctx context.Context) (*DescribeProvisioningParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1785,7 +1821,7 @@ func (r DescribeProvisioningParametersRequest) Send() (*DescribeProvisioningPara
 //
 //    // Example sending a request using the DescribeProvisioningParametersRequest method.
 //    req := client.DescribeProvisioningParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1819,7 +1855,8 @@ type DescribeRecordRequest struct {
 }
 
 // Send marshals and sends the DescribeRecord API request.
-func (r DescribeRecordRequest) Send() (*DescribeRecordOutput, error) {
+func (r DescribeRecordRequest) Send(ctx context.Context) (*DescribeRecordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1838,7 +1875,7 @@ func (r DescribeRecordRequest) Send() (*DescribeRecordOutput, error) {
 //
 //    // Example sending a request using the DescribeRecordRequest method.
 //    req := client.DescribeRecordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1872,7 +1909,8 @@ type DescribeServiceActionRequest struct {
 }
 
 // Send marshals and sends the DescribeServiceAction API request.
-func (r DescribeServiceActionRequest) Send() (*DescribeServiceActionOutput, error) {
+func (r DescribeServiceActionRequest) Send(ctx context.Context) (*DescribeServiceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1888,7 +1926,7 @@ func (r DescribeServiceActionRequest) Send() (*DescribeServiceActionOutput, erro
 //
 //    // Example sending a request using the DescribeServiceActionRequest method.
 //    req := client.DescribeServiceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1922,7 +1960,8 @@ type DescribeTagOptionRequest struct {
 }
 
 // Send marshals and sends the DescribeTagOption API request.
-func (r DescribeTagOptionRequest) Send() (*DescribeTagOptionOutput, error) {
+func (r DescribeTagOptionRequest) Send(ctx context.Context) (*DescribeTagOptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1938,7 +1977,7 @@ func (r DescribeTagOptionRequest) Send() (*DescribeTagOptionOutput, error) {
 //
 //    // Example sending a request using the DescribeTagOptionRequest method.
 //    req := client.DescribeTagOptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1972,7 +2011,8 @@ type DisableAWSOrganizationsAccessRequest struct {
 }
 
 // Send marshals and sends the DisableAWSOrganizationsAccess API request.
-func (r DisableAWSOrganizationsAccessRequest) Send() (*DisableAWSOrganizationsAccessOutput, error) {
+func (r DisableAWSOrganizationsAccessRequest) Send(ctx context.Context) (*DisableAWSOrganizationsAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1992,7 +2032,7 @@ func (r DisableAWSOrganizationsAccessRequest) Send() (*DisableAWSOrganizationsAc
 //
 //    // Example sending a request using the DisableAWSOrganizationsAccessRequest method.
 //    req := client.DisableAWSOrganizationsAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2026,7 +2066,8 @@ type DisassociatePrincipalFromPortfolioRequest struct {
 }
 
 // Send marshals and sends the DisassociatePrincipalFromPortfolio API request.
-func (r DisassociatePrincipalFromPortfolioRequest) Send() (*DisassociatePrincipalFromPortfolioOutput, error) {
+func (r DisassociatePrincipalFromPortfolioRequest) Send(ctx context.Context) (*DisassociatePrincipalFromPortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2042,7 +2083,7 @@ func (r DisassociatePrincipalFromPortfolioRequest) Send() (*DisassociatePrincipa
 //
 //    // Example sending a request using the DisassociatePrincipalFromPortfolioRequest method.
 //    req := client.DisassociatePrincipalFromPortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2076,7 +2117,8 @@ type DisassociateProductFromPortfolioRequest struct {
 }
 
 // Send marshals and sends the DisassociateProductFromPortfolio API request.
-func (r DisassociateProductFromPortfolioRequest) Send() (*DisassociateProductFromPortfolioOutput, error) {
+func (r DisassociateProductFromPortfolioRequest) Send(ctx context.Context) (*DisassociateProductFromPortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2092,7 +2134,7 @@ func (r DisassociateProductFromPortfolioRequest) Send() (*DisassociateProductFro
 //
 //    // Example sending a request using the DisassociateProductFromPortfolioRequest method.
 //    req := client.DisassociateProductFromPortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2126,7 +2168,8 @@ type DisassociateServiceActionFromProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the DisassociateServiceActionFromProvisioningArtifact API request.
-func (r DisassociateServiceActionFromProvisioningArtifactRequest) Send() (*DisassociateServiceActionFromProvisioningArtifactOutput, error) {
+func (r DisassociateServiceActionFromProvisioningArtifactRequest) Send(ctx context.Context) (*DisassociateServiceActionFromProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2143,7 +2186,7 @@ func (r DisassociateServiceActionFromProvisioningArtifactRequest) Send() (*Disas
 //
 //    // Example sending a request using the DisassociateServiceActionFromProvisioningArtifactRequest method.
 //    req := client.DisassociateServiceActionFromProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2177,7 +2220,8 @@ type DisassociateTagOptionFromResourceRequest struct {
 }
 
 // Send marshals and sends the DisassociateTagOptionFromResource API request.
-func (r DisassociateTagOptionFromResourceRequest) Send() (*DisassociateTagOptionFromResourceOutput, error) {
+func (r DisassociateTagOptionFromResourceRequest) Send(ctx context.Context) (*DisassociateTagOptionFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2193,7 +2237,7 @@ func (r DisassociateTagOptionFromResourceRequest) Send() (*DisassociateTagOption
 //
 //    // Example sending a request using the DisassociateTagOptionFromResourceRequest method.
 //    req := client.DisassociateTagOptionFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2227,7 +2271,8 @@ type EnableAWSOrganizationsAccessRequest struct {
 }
 
 // Send marshals and sends the EnableAWSOrganizationsAccess API request.
-func (r EnableAWSOrganizationsAccessRequest) Send() (*EnableAWSOrganizationsAccessOutput, error) {
+func (r EnableAWSOrganizationsAccessRequest) Send(ctx context.Context) (*EnableAWSOrganizationsAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2250,7 +2295,7 @@ func (r EnableAWSOrganizationsAccessRequest) Send() (*EnableAWSOrganizationsAcce
 //
 //    // Example sending a request using the EnableAWSOrganizationsAccessRequest method.
 //    req := client.EnableAWSOrganizationsAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2284,7 +2329,8 @@ type ExecuteProvisionedProductPlanRequest struct {
 }
 
 // Send marshals and sends the ExecuteProvisionedProductPlan API request.
-func (r ExecuteProvisionedProductPlanRequest) Send() (*ExecuteProvisionedProductPlanOutput, error) {
+func (r ExecuteProvisionedProductPlanRequest) Send(ctx context.Context) (*ExecuteProvisionedProductPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2301,7 +2347,7 @@ func (r ExecuteProvisionedProductPlanRequest) Send() (*ExecuteProvisionedProduct
 //
 //    // Example sending a request using the ExecuteProvisionedProductPlanRequest method.
 //    req := client.ExecuteProvisionedProductPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2335,7 +2381,8 @@ type ExecuteProvisionedProductServiceActionRequest struct {
 }
 
 // Send marshals and sends the ExecuteProvisionedProductServiceAction API request.
-func (r ExecuteProvisionedProductServiceActionRequest) Send() (*ExecuteProvisionedProductServiceActionOutput, error) {
+func (r ExecuteProvisionedProductServiceActionRequest) Send(ctx context.Context) (*ExecuteProvisionedProductServiceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2351,7 +2398,7 @@ func (r ExecuteProvisionedProductServiceActionRequest) Send() (*ExecuteProvision
 //
 //    // Example sending a request using the ExecuteProvisionedProductServiceActionRequest method.
 //    req := client.ExecuteProvisionedProductServiceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2385,7 +2432,8 @@ type GetAWSOrganizationsAccessStatusRequest struct {
 }
 
 // Send marshals and sends the GetAWSOrganizationsAccessStatus API request.
-func (r GetAWSOrganizationsAccessStatusRequest) Send() (*GetAWSOrganizationsAccessStatusOutput, error) {
+func (r GetAWSOrganizationsAccessStatusRequest) Send(ctx context.Context) (*GetAWSOrganizationsAccessStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2402,7 +2450,7 @@ func (r GetAWSOrganizationsAccessStatusRequest) Send() (*GetAWSOrganizationsAcce
 //
 //    // Example sending a request using the GetAWSOrganizationsAccessStatusRequest method.
 //    req := client.GetAWSOrganizationsAccessStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2436,7 +2484,8 @@ type ListAcceptedPortfolioSharesRequest struct {
 }
 
 // Send marshals and sends the ListAcceptedPortfolioShares API request.
-func (r ListAcceptedPortfolioSharesRequest) Send() (*ListAcceptedPortfolioSharesOutput, error) {
+func (r ListAcceptedPortfolioSharesRequest) Send(ctx context.Context) (*ListAcceptedPortfolioSharesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2452,7 +2501,7 @@ func (r ListAcceptedPortfolioSharesRequest) Send() (*ListAcceptedPortfolioShares
 //
 //    // Example sending a request using the ListAcceptedPortfolioSharesRequest method.
 //    req := client.ListAcceptedPortfolioSharesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2502,7 +2551,7 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedP
 func (p *ListAcceptedPortfolioSharesRequest) Paginate(opts ...aws.Option) ListAcceptedPortfolioSharesPager {
 	return ListAcceptedPortfolioSharesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAcceptedPortfolioSharesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2511,6 +2560,7 @@ func (p *ListAcceptedPortfolioSharesRequest) Paginate(opts ...aws.Option) ListAc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2538,7 +2588,8 @@ type ListConstraintsForPortfolioRequest struct {
 }
 
 // Send marshals and sends the ListConstraintsForPortfolio API request.
-func (r ListConstraintsForPortfolioRequest) Send() (*ListConstraintsForPortfolioOutput, error) {
+func (r ListConstraintsForPortfolioRequest) Send(ctx context.Context) (*ListConstraintsForPortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2554,7 +2605,7 @@ func (r ListConstraintsForPortfolioRequest) Send() (*ListConstraintsForPortfolio
 //
 //    // Example sending a request using the ListConstraintsForPortfolioRequest method.
 //    req := client.ListConstraintsForPortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2604,7 +2655,7 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstrain
 func (p *ListConstraintsForPortfolioRequest) Paginate(opts ...aws.Option) ListConstraintsForPortfolioPager {
 	return ListConstraintsForPortfolioPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListConstraintsForPortfolioInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2613,6 +2664,7 @@ func (p *ListConstraintsForPortfolioRequest) Paginate(opts ...aws.Option) ListCo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2640,7 +2692,8 @@ type ListLaunchPathsRequest struct {
 }
 
 // Send marshals and sends the ListLaunchPaths API request.
-func (r ListLaunchPathsRequest) Send() (*ListLaunchPathsOutput, error) {
+func (r ListLaunchPathsRequest) Send(ctx context.Context) (*ListLaunchPathsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2658,7 +2711,7 @@ func (r ListLaunchPathsRequest) Send() (*ListLaunchPathsOutput, error) {
 //
 //    // Example sending a request using the ListLaunchPathsRequest method.
 //    req := client.ListLaunchPathsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2708,7 +2761,7 @@ func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) Lis
 func (p *ListLaunchPathsRequest) Paginate(opts ...aws.Option) ListLaunchPathsPager {
 	return ListLaunchPathsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListLaunchPathsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2717,6 +2770,7 @@ func (p *ListLaunchPathsRequest) Paginate(opts ...aws.Option) ListLaunchPathsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2744,7 +2798,8 @@ type ListOrganizationPortfolioAccessRequest struct {
 }
 
 // Send marshals and sends the ListOrganizationPortfolioAccess API request.
-func (r ListOrganizationPortfolioAccessRequest) Send() (*ListOrganizationPortfolioAccessOutput, error) {
+func (r ListOrganizationPortfolioAccessRequest) Send(ctx context.Context) (*ListOrganizationPortfolioAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2761,7 +2816,7 @@ func (r ListOrganizationPortfolioAccessRequest) Send() (*ListOrganizationPortfol
 //
 //    // Example sending a request using the ListOrganizationPortfolioAccessRequest method.
 //    req := client.ListOrganizationPortfolioAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2811,7 +2866,7 @@ func (c *ServiceCatalog) ListOrganizationPortfolioAccessRequest(input *ListOrgan
 func (p *ListOrganizationPortfolioAccessRequest) Paginate(opts ...aws.Option) ListOrganizationPortfolioAccessPager {
 	return ListOrganizationPortfolioAccessPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOrganizationPortfolioAccessInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2820,6 +2875,7 @@ func (p *ListOrganizationPortfolioAccessRequest) Paginate(opts ...aws.Option) Li
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2847,7 +2903,8 @@ type ListPortfolioAccessRequest struct {
 }
 
 // Send marshals and sends the ListPortfolioAccess API request.
-func (r ListPortfolioAccessRequest) Send() (*ListPortfolioAccessOutput, error) {
+func (r ListPortfolioAccessRequest) Send(ctx context.Context) (*ListPortfolioAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2863,7 +2920,7 @@ func (r ListPortfolioAccessRequest) Send() (*ListPortfolioAccessOutput, error) {
 //
 //    // Example sending a request using the ListPortfolioAccessRequest method.
 //    req := client.ListPortfolioAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2897,7 +2954,8 @@ type ListPortfoliosRequest struct {
 }
 
 // Send marshals and sends the ListPortfolios API request.
-func (r ListPortfoliosRequest) Send() (*ListPortfoliosOutput, error) {
+func (r ListPortfoliosRequest) Send(ctx context.Context) (*ListPortfoliosOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2913,7 +2971,7 @@ func (r ListPortfoliosRequest) Send() (*ListPortfoliosOutput, error) {
 //
 //    // Example sending a request using the ListPortfoliosRequest method.
 //    req := client.ListPortfoliosRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2963,7 +3021,7 @@ func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) ListP
 func (p *ListPortfoliosRequest) Paginate(opts ...aws.Option) ListPortfoliosPager {
 	return ListPortfoliosPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPortfoliosInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2972,6 +3030,7 @@ func (p *ListPortfoliosRequest) Paginate(opts ...aws.Option) ListPortfoliosPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2999,7 +3058,8 @@ type ListPortfoliosForProductRequest struct {
 }
 
 // Send marshals and sends the ListPortfoliosForProduct API request.
-func (r ListPortfoliosForProductRequest) Send() (*ListPortfoliosForProductOutput, error) {
+func (r ListPortfoliosForProductRequest) Send(ctx context.Context) (*ListPortfoliosForProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3015,7 +3075,7 @@ func (r ListPortfoliosForProductRequest) Send() (*ListPortfoliosForProductOutput
 //
 //    // Example sending a request using the ListPortfoliosForProductRequest method.
 //    req := client.ListPortfoliosForProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3065,7 +3125,7 @@ func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosFo
 func (p *ListPortfoliosForProductRequest) Paginate(opts ...aws.Option) ListPortfoliosForProductPager {
 	return ListPortfoliosForProductPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPortfoliosForProductInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3074,6 +3134,7 @@ func (p *ListPortfoliosForProductRequest) Paginate(opts ...aws.Option) ListPortf
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3101,7 +3162,8 @@ type ListPrincipalsForPortfolioRequest struct {
 }
 
 // Send marshals and sends the ListPrincipalsForPortfolio API request.
-func (r ListPrincipalsForPortfolioRequest) Send() (*ListPrincipalsForPortfolioOutput, error) {
+func (r ListPrincipalsForPortfolioRequest) Send(ctx context.Context) (*ListPrincipalsForPortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3117,7 +3179,7 @@ func (r ListPrincipalsForPortfolioRequest) Send() (*ListPrincipalsForPortfolioOu
 //
 //    // Example sending a request using the ListPrincipalsForPortfolioRequest method.
 //    req := client.ListPrincipalsForPortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3167,7 +3229,7 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipals
 func (p *ListPrincipalsForPortfolioRequest) Paginate(opts ...aws.Option) ListPrincipalsForPortfolioPager {
 	return ListPrincipalsForPortfolioPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPrincipalsForPortfolioInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3176,6 +3238,7 @@ func (p *ListPrincipalsForPortfolioRequest) Paginate(opts ...aws.Option) ListPri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3203,7 +3266,8 @@ type ListProvisionedProductPlansRequest struct {
 }
 
 // Send marshals and sends the ListProvisionedProductPlans API request.
-func (r ListProvisionedProductPlansRequest) Send() (*ListProvisionedProductPlansOutput, error) {
+func (r ListProvisionedProductPlansRequest) Send(ctx context.Context) (*ListProvisionedProductPlansOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3220,7 +3284,7 @@ func (r ListProvisionedProductPlansRequest) Send() (*ListProvisionedProductPlans
 //
 //    // Example sending a request using the ListProvisionedProductPlansRequest method.
 //    req := client.ListProvisionedProductPlansRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3254,7 +3318,8 @@ type ListProvisioningArtifactsRequest struct {
 }
 
 // Send marshals and sends the ListProvisioningArtifacts API request.
-func (r ListProvisioningArtifactsRequest) Send() (*ListProvisioningArtifactsOutput, error) {
+func (r ListProvisioningArtifactsRequest) Send(ctx context.Context) (*ListProvisioningArtifactsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3271,7 +3336,7 @@ func (r ListProvisioningArtifactsRequest) Send() (*ListProvisioningArtifactsOutp
 //
 //    // Example sending a request using the ListProvisioningArtifactsRequest method.
 //    req := client.ListProvisioningArtifactsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3305,7 +3370,8 @@ type ListProvisioningArtifactsForServiceActionRequest struct {
 }
 
 // Send marshals and sends the ListProvisioningArtifactsForServiceAction API request.
-func (r ListProvisioningArtifactsForServiceActionRequest) Send() (*ListProvisioningArtifactsForServiceActionOutput, error) {
+func (r ListProvisioningArtifactsForServiceActionRequest) Send(ctx context.Context) (*ListProvisioningArtifactsForServiceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3322,7 +3388,7 @@ func (r ListProvisioningArtifactsForServiceActionRequest) Send() (*ListProvision
 //
 //    // Example sending a request using the ListProvisioningArtifactsForServiceActionRequest method.
 //    req := client.ListProvisioningArtifactsForServiceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3372,7 +3438,7 @@ func (c *ServiceCatalog) ListProvisioningArtifactsForServiceActionRequest(input 
 func (p *ListProvisioningArtifactsForServiceActionRequest) Paginate(opts ...aws.Option) ListProvisioningArtifactsForServiceActionPager {
 	return ListProvisioningArtifactsForServiceActionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListProvisioningArtifactsForServiceActionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3381,6 +3447,7 @@ func (p *ListProvisioningArtifactsForServiceActionRequest) Paginate(opts ...aws.
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3408,7 +3475,8 @@ type ListRecordHistoryRequest struct {
 }
 
 // Send marshals and sends the ListRecordHistory API request.
-func (r ListRecordHistoryRequest) Send() (*ListRecordHistoryOutput, error) {
+func (r ListRecordHistoryRequest) Send(ctx context.Context) (*ListRecordHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3424,7 +3492,7 @@ func (r ListRecordHistoryRequest) Send() (*ListRecordHistoryOutput, error) {
 //
 //    // Example sending a request using the ListRecordHistoryRequest method.
 //    req := client.ListRecordHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3458,7 +3526,8 @@ type ListResourcesForTagOptionRequest struct {
 }
 
 // Send marshals and sends the ListResourcesForTagOption API request.
-func (r ListResourcesForTagOptionRequest) Send() (*ListResourcesForTagOptionOutput, error) {
+func (r ListResourcesForTagOptionRequest) Send(ctx context.Context) (*ListResourcesForTagOptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3474,7 +3543,7 @@ func (r ListResourcesForTagOptionRequest) Send() (*ListResourcesForTagOptionOutp
 //
 //    // Example sending a request using the ListResourcesForTagOptionRequest method.
 //    req := client.ListResourcesForTagOptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3524,7 +3593,7 @@ func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesFo
 func (p *ListResourcesForTagOptionRequest) Paginate(opts ...aws.Option) ListResourcesForTagOptionPager {
 	return ListResourcesForTagOptionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResourcesForTagOptionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3533,6 +3602,7 @@ func (p *ListResourcesForTagOptionRequest) Paginate(opts ...aws.Option) ListReso
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3560,7 +3630,8 @@ type ListServiceActionsRequest struct {
 }
 
 // Send marshals and sends the ListServiceActions API request.
-func (r ListServiceActionsRequest) Send() (*ListServiceActionsOutput, error) {
+func (r ListServiceActionsRequest) Send(ctx context.Context) (*ListServiceActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3576,7 +3647,7 @@ func (r ListServiceActionsRequest) Send() (*ListServiceActionsOutput, error) {
 //
 //    // Example sending a request using the ListServiceActionsRequest method.
 //    req := client.ListServiceActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3626,7 +3697,7 @@ func (c *ServiceCatalog) ListServiceActionsRequest(input *ListServiceActionsInpu
 func (p *ListServiceActionsRequest) Paginate(opts ...aws.Option) ListServiceActionsPager {
 	return ListServiceActionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServiceActionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3635,6 +3706,7 @@ func (p *ListServiceActionsRequest) Paginate(opts ...aws.Option) ListServiceActi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3662,7 +3734,8 @@ type ListServiceActionsForProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the ListServiceActionsForProvisioningArtifact API request.
-func (r ListServiceActionsForProvisioningArtifactRequest) Send() (*ListServiceActionsForProvisioningArtifactOutput, error) {
+func (r ListServiceActionsForProvisioningArtifactRequest) Send(ctx context.Context) (*ListServiceActionsForProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3679,7 +3752,7 @@ func (r ListServiceActionsForProvisioningArtifactRequest) Send() (*ListServiceAc
 //
 //    // Example sending a request using the ListServiceActionsForProvisioningArtifactRequest method.
 //    req := client.ListServiceActionsForProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3729,7 +3802,7 @@ func (c *ServiceCatalog) ListServiceActionsForProvisioningArtifactRequest(input 
 func (p *ListServiceActionsForProvisioningArtifactRequest) Paginate(opts ...aws.Option) ListServiceActionsForProvisioningArtifactPager {
 	return ListServiceActionsForProvisioningArtifactPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServiceActionsForProvisioningArtifactInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3738,6 +3811,7 @@ func (p *ListServiceActionsForProvisioningArtifactRequest) Paginate(opts ...aws.
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3765,7 +3839,8 @@ type ListTagOptionsRequest struct {
 }
 
 // Send marshals and sends the ListTagOptions API request.
-func (r ListTagOptionsRequest) Send() (*ListTagOptionsOutput, error) {
+func (r ListTagOptionsRequest) Send(ctx context.Context) (*ListTagOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3781,7 +3856,7 @@ func (r ListTagOptionsRequest) Send() (*ListTagOptionsOutput, error) {
 //
 //    // Example sending a request using the ListTagOptionsRequest method.
 //    req := client.ListTagOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3831,7 +3906,7 @@ func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) ListT
 func (p *ListTagOptionsRequest) Paginate(opts ...aws.Option) ListTagOptionsPager {
 	return ListTagOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3840,6 +3915,7 @@ func (p *ListTagOptionsRequest) Paginate(opts ...aws.Option) ListTagOptionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3867,7 +3943,8 @@ type ProvisionProductRequest struct {
 }
 
 // Send marshals and sends the ProvisionProduct API request.
-func (r ProvisionProductRequest) Send() (*ProvisionProductOutput, error) {
+func (r ProvisionProductRequest) Send(ctx context.Context) (*ProvisionProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3893,7 +3970,7 @@ func (r ProvisionProductRequest) Send() (*ProvisionProductOutput, error) {
 //
 //    // Example sending a request using the ProvisionProductRequest method.
 //    req := client.ProvisionProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3927,7 +4004,8 @@ type RejectPortfolioShareRequest struct {
 }
 
 // Send marshals and sends the RejectPortfolioShare API request.
-func (r RejectPortfolioShareRequest) Send() (*RejectPortfolioShareOutput, error) {
+func (r RejectPortfolioShareRequest) Send(ctx context.Context) (*RejectPortfolioShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3943,7 +4021,7 @@ func (r RejectPortfolioShareRequest) Send() (*RejectPortfolioShareOutput, error)
 //
 //    // Example sending a request using the RejectPortfolioShareRequest method.
 //    req := client.RejectPortfolioShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3977,7 +4055,8 @@ type ScanProvisionedProductsRequest struct {
 }
 
 // Send marshals and sends the ScanProvisionedProducts API request.
-func (r ScanProvisionedProductsRequest) Send() (*ScanProvisionedProductsOutput, error) {
+func (r ScanProvisionedProductsRequest) Send(ctx context.Context) (*ScanProvisionedProductsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3995,7 +4074,7 @@ func (r ScanProvisionedProductsRequest) Send() (*ScanProvisionedProductsOutput, 
 //
 //    // Example sending a request using the ScanProvisionedProductsRequest method.
 //    req := client.ScanProvisionedProductsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4029,7 +4108,8 @@ type SearchProductsRequest struct {
 }
 
 // Send marshals and sends the SearchProducts API request.
-func (r SearchProductsRequest) Send() (*SearchProductsOutput, error) {
+func (r SearchProductsRequest) Send(ctx context.Context) (*SearchProductsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4045,7 +4125,7 @@ func (r SearchProductsRequest) Send() (*SearchProductsOutput, error) {
 //
 //    // Example sending a request using the SearchProductsRequest method.
 //    req := client.SearchProductsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4095,7 +4175,7 @@ func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) Searc
 func (p *SearchProductsRequest) Paginate(opts ...aws.Option) SearchProductsPager {
 	return SearchProductsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProductsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4104,6 +4184,7 @@ func (p *SearchProductsRequest) Paginate(opts ...aws.Option) SearchProductsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4131,7 +4212,8 @@ type SearchProductsAsAdminRequest struct {
 }
 
 // Send marshals and sends the SearchProductsAsAdmin API request.
-func (r SearchProductsAsAdminRequest) Send() (*SearchProductsAsAdminOutput, error) {
+func (r SearchProductsAsAdminRequest) Send(ctx context.Context) (*SearchProductsAsAdminOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4147,7 +4229,7 @@ func (r SearchProductsAsAdminRequest) Send() (*SearchProductsAsAdminOutput, erro
 //
 //    // Example sending a request using the SearchProductsAsAdminRequest method.
 //    req := client.SearchProductsAsAdminRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4197,7 +4279,7 @@ func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdm
 func (p *SearchProductsAsAdminRequest) Paginate(opts ...aws.Option) SearchProductsAsAdminPager {
 	return SearchProductsAsAdminPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProductsAsAdminInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4206,6 +4288,7 @@ func (p *SearchProductsAsAdminRequest) Paginate(opts ...aws.Option) SearchProduc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4233,7 +4316,8 @@ type SearchProvisionedProductsRequest struct {
 }
 
 // Send marshals and sends the SearchProvisionedProducts API request.
-func (r SearchProvisionedProductsRequest) Send() (*SearchProvisionedProductsOutput, error) {
+func (r SearchProvisionedProductsRequest) Send(ctx context.Context) (*SearchProvisionedProductsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4249,7 +4333,7 @@ func (r SearchProvisionedProductsRequest) Send() (*SearchProvisionedProductsOutp
 //
 //    // Example sending a request using the SearchProvisionedProductsRequest method.
 //    req := client.SearchProvisionedProductsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4299,7 +4383,7 @@ func (c *ServiceCatalog) SearchProvisionedProductsRequest(input *SearchProvision
 func (p *SearchProvisionedProductsRequest) Paginate(opts ...aws.Option) SearchProvisionedProductsPager {
 	return SearchProvisionedProductsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchProvisionedProductsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4308,6 +4392,7 @@ func (p *SearchProvisionedProductsRequest) Paginate(opts ...aws.Option) SearchPr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4335,7 +4420,8 @@ type TerminateProvisionedProductRequest struct {
 }
 
 // Send marshals and sends the TerminateProvisionedProduct API request.
-func (r TerminateProvisionedProductRequest) Send() (*TerminateProvisionedProductOutput, error) {
+func (r TerminateProvisionedProductRequest) Send(ctx context.Context) (*TerminateProvisionedProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4356,7 +4442,7 @@ func (r TerminateProvisionedProductRequest) Send() (*TerminateProvisionedProduct
 //
 //    // Example sending a request using the TerminateProvisionedProductRequest method.
 //    req := client.TerminateProvisionedProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4390,7 +4476,8 @@ type UpdateConstraintRequest struct {
 }
 
 // Send marshals and sends the UpdateConstraint API request.
-func (r UpdateConstraintRequest) Send() (*UpdateConstraintOutput, error) {
+func (r UpdateConstraintRequest) Send(ctx context.Context) (*UpdateConstraintOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4406,7 +4493,7 @@ func (r UpdateConstraintRequest) Send() (*UpdateConstraintOutput, error) {
 //
 //    // Example sending a request using the UpdateConstraintRequest method.
 //    req := client.UpdateConstraintRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4440,7 +4527,8 @@ type UpdatePortfolioRequest struct {
 }
 
 // Send marshals and sends the UpdatePortfolio API request.
-func (r UpdatePortfolioRequest) Send() (*UpdatePortfolioOutput, error) {
+func (r UpdatePortfolioRequest) Send(ctx context.Context) (*UpdatePortfolioOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4458,7 +4546,7 @@ func (r UpdatePortfolioRequest) Send() (*UpdatePortfolioOutput, error) {
 //
 //    // Example sending a request using the UpdatePortfolioRequest method.
 //    req := client.UpdatePortfolioRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4492,7 +4580,8 @@ type UpdateProductRequest struct {
 }
 
 // Send marshals and sends the UpdateProduct API request.
-func (r UpdateProductRequest) Send() (*UpdateProductOutput, error) {
+func (r UpdateProductRequest) Send(ctx context.Context) (*UpdateProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4508,7 +4597,7 @@ func (r UpdateProductRequest) Send() (*UpdateProductOutput, error) {
 //
 //    // Example sending a request using the UpdateProductRequest method.
 //    req := client.UpdateProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4542,7 +4631,8 @@ type UpdateProvisionedProductRequest struct {
 }
 
 // Send marshals and sends the UpdateProvisionedProduct API request.
-func (r UpdateProvisionedProductRequest) Send() (*UpdateProvisionedProductOutput, error) {
+func (r UpdateProvisionedProductRequest) Send(ctx context.Context) (*UpdateProvisionedProductOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4565,7 +4655,7 @@ func (r UpdateProvisionedProductRequest) Send() (*UpdateProvisionedProductOutput
 //
 //    // Example sending a request using the UpdateProvisionedProductRequest method.
 //    req := client.UpdateProvisionedProductRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4599,7 +4689,8 @@ type UpdateProvisioningArtifactRequest struct {
 }
 
 // Send marshals and sends the UpdateProvisioningArtifact API request.
-func (r UpdateProvisioningArtifactRequest) Send() (*UpdateProvisioningArtifactOutput, error) {
+func (r UpdateProvisioningArtifactRequest) Send(ctx context.Context) (*UpdateProvisioningArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4619,7 +4710,7 @@ func (r UpdateProvisioningArtifactRequest) Send() (*UpdateProvisioningArtifactOu
 //
 //    // Example sending a request using the UpdateProvisioningArtifactRequest method.
 //    req := client.UpdateProvisioningArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4653,7 +4744,8 @@ type UpdateServiceActionRequest struct {
 }
 
 // Send marshals and sends the UpdateServiceAction API request.
-func (r UpdateServiceActionRequest) Send() (*UpdateServiceActionOutput, error) {
+func (r UpdateServiceActionRequest) Send(ctx context.Context) (*UpdateServiceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4669,7 +4761,7 @@ func (r UpdateServiceActionRequest) Send() (*UpdateServiceActionOutput, error) {
 //
 //    // Example sending a request using the UpdateServiceActionRequest method.
 //    req := client.UpdateServiceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4703,7 +4795,8 @@ type UpdateTagOptionRequest struct {
 }
 
 // Send marshals and sends the UpdateTagOption API request.
-func (r UpdateTagOptionRequest) Send() (*UpdateTagOptionOutput, error) {
+func (r UpdateTagOptionRequest) Send(ctx context.Context) (*UpdateTagOptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4719,7 +4812,7 @@ func (r UpdateTagOptionRequest) Send() (*UpdateTagOptionOutput, error) {
 //
 //    // Example sending a request using the UpdateTagOptionRequest method.
 //    req := client.UpdateTagOptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

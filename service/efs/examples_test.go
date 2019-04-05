@@ -3,6 +3,7 @@
 package efs_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExampleEFS_CreateFileSystemRequest_shared00() {
 	}
 
 	req := svc.CreateFileSystemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -88,7 +89,7 @@ func ExampleEFS_CreateMountTargetRequest_shared00() {
 	}
 
 	req := svc.CreateMountTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -151,7 +152,7 @@ func ExampleEFS_CreateTagsRequest_shared00() {
 	}
 
 	req := svc.CreateTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -190,7 +191,7 @@ func ExampleEFS_DeleteFileSystemRequest_shared00() {
 	}
 
 	req := svc.DeleteFileSystemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -231,7 +232,7 @@ func ExampleEFS_DeleteMountTargetRequest_shared00() {
 	}
 
 	req := svc.DeleteMountTargetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -275,7 +276,7 @@ func ExampleEFS_DeleteTagsRequest_shared00() {
 	}
 
 	req := svc.DeleteTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -312,7 +313,7 @@ func ExampleEFS_DescribeFileSystemsRequest_shared00() {
 	input := &efs.DescribeFileSystemsInput{}
 
 	req := svc.DescribeFileSystemsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -351,7 +352,7 @@ func ExampleEFS_DescribeMountTargetSecurityGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeMountTargetSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -392,7 +393,7 @@ func ExampleEFS_DescribeMountTargetsRequest_shared00() {
 	}
 
 	req := svc.DescribeMountTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -433,7 +434,7 @@ func ExampleEFS_DescribeTagsRequest_shared00() {
 	}
 
 	req := svc.DescribeTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -476,7 +477,7 @@ func ExampleEFS_ModifyMountTargetSecurityGroupsRequest_shared00() {
 	}
 
 	req := svc.ModifyMountTargetSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

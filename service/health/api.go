@@ -3,6 +3,7 @@
 package health
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type DescribeAffectedEntitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeAffectedEntities API request.
-func (r DescribeAffectedEntitiesRequest) Send() (*DescribeAffectedEntitiesOutput, error) {
+func (r DescribeAffectedEntitiesRequest) Send(ctx context.Context) (*DescribeAffectedEntitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r DescribeAffectedEntitiesRequest) Send() (*DescribeAffectedEntitiesOutput
 //
 //    // Example sending a request using the DescribeAffectedEntitiesRequest method.
 //    req := client.DescribeAffectedEntitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -93,7 +95,7 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeAffectedEntitiesPager {
 	return DescribeAffectedEntitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAffectedEntitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -102,6 +104,7 @@ func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeA
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -129,7 +132,8 @@ type DescribeEntityAggregatesRequest struct {
 }
 
 // Send marshals and sends the DescribeEntityAggregates API request.
-func (r DescribeEntityAggregatesRequest) Send() (*DescribeEntityAggregatesOutput, error) {
+func (r DescribeEntityAggregatesRequest) Send(ctx context.Context) (*DescribeEntityAggregatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -147,7 +151,7 @@ func (r DescribeEntityAggregatesRequest) Send() (*DescribeEntityAggregatesOutput
 //
 //    // Example sending a request using the DescribeEntityAggregatesRequest method.
 //    req := client.DescribeEntityAggregatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -181,7 +185,8 @@ type DescribeEventAggregatesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventAggregates API request.
-func (r DescribeEventAggregatesRequest) Send() (*DescribeEventAggregatesOutput, error) {
+func (r DescribeEventAggregatesRequest) Send(ctx context.Context) (*DescribeEventAggregatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -199,7 +204,7 @@ func (r DescribeEventAggregatesRequest) Send() (*DescribeEventAggregatesOutput, 
 //
 //    // Example sending a request using the DescribeEventAggregatesRequest method.
 //    req := client.DescribeEventAggregatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -249,7 +254,7 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEventAggregatesPager {
 	return DescribeEventAggregatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventAggregatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -258,6 +263,7 @@ func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEv
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -285,7 +291,8 @@ type DescribeEventDetailsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventDetails API request.
-func (r DescribeEventDetailsRequest) Send() (*DescribeEventDetailsOutput, error) {
+func (r DescribeEventDetailsRequest) Send(ctx context.Context) (*DescribeEventDetailsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,7 +315,7 @@ func (r DescribeEventDetailsRequest) Send() (*DescribeEventDetailsOutput, error)
 //
 //    // Example sending a request using the DescribeEventDetailsRequest method.
 //    req := client.DescribeEventDetailsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -342,7 +349,8 @@ type DescribeEventTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventTypes API request.
-func (r DescribeEventTypesRequest) Send() (*DescribeEventTypesOutput, error) {
+func (r DescribeEventTypesRequest) Send(ctx context.Context) (*DescribeEventTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -359,7 +367,7 @@ func (r DescribeEventTypesRequest) Send() (*DescribeEventTypesOutput, error) {
 //
 //    // Example sending a request using the DescribeEventTypesRequest method.
 //    req := client.DescribeEventTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -409,7 +417,7 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTypesPager {
 	return DescribeEventTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -418,6 +426,7 @@ func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTy
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -445,7 +454,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -468,7 +478,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -518,7 +528,7 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -527,6 +537,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

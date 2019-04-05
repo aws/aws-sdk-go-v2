@@ -3,6 +3,7 @@
 package mq
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CreateBrokerRequest struct {
 }
 
 // Send marshals and sends the CreateBroker API request.
-func (r CreateBrokerRequest) Send() (*CreateBrokerOutput, error) {
+func (r CreateBrokerRequest) Send(ctx context.Context) (*CreateBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r CreateBrokerRequest) Send() (*CreateBrokerOutput, error) {
 //
 //    // Example sending a request using the CreateBrokerRequest method.
 //    req := client.CreateBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type CreateConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateConfiguration API request.
-func (r CreateConfigurationRequest) Send() (*CreateConfigurationOutput, error) {
+func (r CreateConfigurationRequest) Send(ctx context.Context) (*CreateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r CreateConfigurationRequest) Send() (*CreateConfigurationOutput, error) {
 //
 //    // Example sending a request using the CreateConfigurationRequest method.
 //    req := client.CreateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -138,7 +142,7 @@ func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 //
 //    // Example sending a request using the CreateTagsRequest method.
 //    req := client.CreateTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +178,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -190,7 +195,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -224,7 +229,8 @@ type DeleteBrokerRequest struct {
 }
 
 // Send marshals and sends the DeleteBroker API request.
-func (r DeleteBrokerRequest) Send() (*DeleteBrokerOutput, error) {
+func (r DeleteBrokerRequest) Send(ctx context.Context) (*DeleteBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -240,7 +246,7 @@ func (r DeleteBrokerRequest) Send() (*DeleteBrokerOutput, error) {
 //
 //    // Example sending a request using the DeleteBrokerRequest method.
 //    req := client.DeleteBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -274,7 +280,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,7 +297,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -326,7 +333,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,7 +350,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -376,7 +384,8 @@ type DescribeBrokerRequest struct {
 }
 
 // Send marshals and sends the DescribeBroker API request.
-func (r DescribeBrokerRequest) Send() (*DescribeBrokerOutput, error) {
+func (r DescribeBrokerRequest) Send(ctx context.Context) (*DescribeBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -392,7 +401,7 @@ func (r DescribeBrokerRequest) Send() (*DescribeBrokerOutput, error) {
 //
 //    // Example sending a request using the DescribeBrokerRequest method.
 //    req := client.DescribeBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -426,7 +435,8 @@ type DescribeConfigurationRequest struct {
 }
 
 // Send marshals and sends the DescribeConfiguration API request.
-func (r DescribeConfigurationRequest) Send() (*DescribeConfigurationOutput, error) {
+func (r DescribeConfigurationRequest) Send(ctx context.Context) (*DescribeConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -442,7 +452,7 @@ func (r DescribeConfigurationRequest) Send() (*DescribeConfigurationOutput, erro
 //
 //    // Example sending a request using the DescribeConfigurationRequest method.
 //    req := client.DescribeConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -476,7 +486,8 @@ type DescribeConfigurationRevisionRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationRevision API request.
-func (r DescribeConfigurationRevisionRequest) Send() (*DescribeConfigurationRevisionOutput, error) {
+func (r DescribeConfigurationRevisionRequest) Send(ctx context.Context) (*DescribeConfigurationRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -492,7 +503,7 @@ func (r DescribeConfigurationRevisionRequest) Send() (*DescribeConfigurationRevi
 //
 //    // Example sending a request using the DescribeConfigurationRevisionRequest method.
 //    req := client.DescribeConfigurationRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -526,7 +537,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -542,7 +554,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -576,7 +588,8 @@ type ListBrokersRequest struct {
 }
 
 // Send marshals and sends the ListBrokers API request.
-func (r ListBrokersRequest) Send() (*ListBrokersOutput, error) {
+func (r ListBrokersRequest) Send(ctx context.Context) (*ListBrokersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -592,7 +605,7 @@ func (r ListBrokersRequest) Send() (*ListBrokersOutput, error) {
 //
 //    // Example sending a request using the ListBrokersRequest method.
 //    req := client.ListBrokersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -626,7 +639,8 @@ type ListConfigurationRevisionsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurationRevisions API request.
-func (r ListConfigurationRevisionsRequest) Send() (*ListConfigurationRevisionsOutput, error) {
+func (r ListConfigurationRevisionsRequest) Send(ctx context.Context) (*ListConfigurationRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -642,7 +656,7 @@ func (r ListConfigurationRevisionsRequest) Send() (*ListConfigurationRevisionsOu
 //
 //    // Example sending a request using the ListConfigurationRevisionsRequest method.
 //    req := client.ListConfigurationRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -676,7 +690,8 @@ type ListConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurations API request.
-func (r ListConfigurationsRequest) Send() (*ListConfigurationsOutput, error) {
+func (r ListConfigurationsRequest) Send(ctx context.Context) (*ListConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -692,7 +707,7 @@ func (r ListConfigurationsRequest) Send() (*ListConfigurationsOutput, error) {
 //
 //    // Example sending a request using the ListConfigurationsRequest method.
 //    req := client.ListConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -726,7 +741,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -742,7 +758,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -776,7 +792,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -792,7 +809,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -826,7 +843,8 @@ type RebootBrokerRequest struct {
 }
 
 // Send marshals and sends the RebootBroker API request.
-func (r RebootBrokerRequest) Send() (*RebootBrokerOutput, error) {
+func (r RebootBrokerRequest) Send(ctx context.Context) (*RebootBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -842,7 +860,7 @@ func (r RebootBrokerRequest) Send() (*RebootBrokerOutput, error) {
 //
 //    // Example sending a request using the RebootBrokerRequest method.
 //    req := client.RebootBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -876,7 +894,8 @@ type UpdateBrokerRequest struct {
 }
 
 // Send marshals and sends the UpdateBroker API request.
-func (r UpdateBrokerRequest) Send() (*UpdateBrokerOutput, error) {
+func (r UpdateBrokerRequest) Send(ctx context.Context) (*UpdateBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -892,7 +911,7 @@ func (r UpdateBrokerRequest) Send() (*UpdateBrokerOutput, error) {
 //
 //    // Example sending a request using the UpdateBrokerRequest method.
 //    req := client.UpdateBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -926,7 +945,8 @@ type UpdateConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateConfiguration API request.
-func (r UpdateConfigurationRequest) Send() (*UpdateConfigurationOutput, error) {
+func (r UpdateConfigurationRequest) Send(ctx context.Context) (*UpdateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -942,7 +962,7 @@ func (r UpdateConfigurationRequest) Send() (*UpdateConfigurationOutput, error) {
 //
 //    // Example sending a request using the UpdateConfigurationRequest method.
 //    req := client.UpdateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -976,7 +996,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,7 +1013,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

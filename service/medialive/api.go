@@ -3,6 +3,7 @@
 package medialive
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type BatchUpdateScheduleRequest struct {
 }
 
 // Send marshals and sends the BatchUpdateSchedule API request.
-func (r BatchUpdateScheduleRequest) Send() (*BatchUpdateScheduleOutput, error) {
+func (r BatchUpdateScheduleRequest) Send(ctx context.Context) (*BatchUpdateScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r BatchUpdateScheduleRequest) Send() (*BatchUpdateScheduleOutput, error) {
 //
 //    // Example sending a request using the BatchUpdateScheduleRequest method.
 //    req := client.BatchUpdateScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type CreateChannelRequest struct {
 }
 
 // Send marshals and sends the CreateChannel API request.
-func (r CreateChannelRequest) Send() (*CreateChannelOutput, error) {
+func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r CreateChannelRequest) Send() (*CreateChannelOutput, error) {
 //
 //    // Example sending a request using the CreateChannelRequest method.
 //    req := client.CreateChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type CreateInputRequest struct {
 }
 
 // Send marshals and sends the CreateInput API request.
-func (r CreateInputRequest) Send() (*CreateInputOutput, error) {
+func (r CreateInputRequest) Send(ctx context.Context) (*CreateInputOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ func (r CreateInputRequest) Send() (*CreateInputOutput, error) {
 //
 //    // Example sending a request using the CreateInputRequest method.
 //    req := client.CreateInputRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type CreateInputSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateInputSecurityGroup API request.
-func (r CreateInputSecurityGroupRequest) Send() (*CreateInputSecurityGroupOutput, error) {
+func (r CreateInputSecurityGroupRequest) Send(ctx context.Context) (*CreateInputSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -186,7 +191,7 @@ func (r CreateInputSecurityGroupRequest) Send() (*CreateInputSecurityGroupOutput
 //
 //    // Example sending a request using the CreateInputSecurityGroupRequest method.
 //    req := client.CreateInputSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -220,7 +225,8 @@ type DeleteChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteChannel API request.
-func (r DeleteChannelRequest) Send() (*DeleteChannelOutput, error) {
+func (r DeleteChannelRequest) Send(ctx context.Context) (*DeleteChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,7 +242,7 @@ func (r DeleteChannelRequest) Send() (*DeleteChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteChannelRequest method.
 //    req := client.DeleteChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -270,7 +276,8 @@ type DeleteInputRequest struct {
 }
 
 // Send marshals and sends the DeleteInput API request.
-func (r DeleteInputRequest) Send() (*DeleteInputOutput, error) {
+func (r DeleteInputRequest) Send(ctx context.Context) (*DeleteInputOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +293,7 @@ func (r DeleteInputRequest) Send() (*DeleteInputOutput, error) {
 //
 //    // Example sending a request using the DeleteInputRequest method.
 //    req := client.DeleteInputRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -320,7 +327,8 @@ type DeleteInputSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteInputSecurityGroup API request.
-func (r DeleteInputSecurityGroupRequest) Send() (*DeleteInputSecurityGroupOutput, error) {
+func (r DeleteInputSecurityGroupRequest) Send(ctx context.Context) (*DeleteInputSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -336,7 +344,7 @@ func (r DeleteInputSecurityGroupRequest) Send() (*DeleteInputSecurityGroupOutput
 //
 //    // Example sending a request using the DeleteInputSecurityGroupRequest method.
 //    req := client.DeleteInputSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -370,7 +378,8 @@ type DeleteReservationRequest struct {
 }
 
 // Send marshals and sends the DeleteReservation API request.
-func (r DeleteReservationRequest) Send() (*DeleteReservationOutput, error) {
+func (r DeleteReservationRequest) Send(ctx context.Context) (*DeleteReservationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -386,7 +395,7 @@ func (r DeleteReservationRequest) Send() (*DeleteReservationOutput, error) {
 //
 //    // Example sending a request using the DeleteReservationRequest method.
 //    req := client.DeleteReservationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -420,7 +429,8 @@ type DescribeChannelRequest struct {
 }
 
 // Send marshals and sends the DescribeChannel API request.
-func (r DescribeChannelRequest) Send() (*DescribeChannelOutput, error) {
+func (r DescribeChannelRequest) Send(ctx context.Context) (*DescribeChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -436,7 +446,7 @@ func (r DescribeChannelRequest) Send() (*DescribeChannelOutput, error) {
 //
 //    // Example sending a request using the DescribeChannelRequest method.
 //    req := client.DescribeChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -470,7 +480,8 @@ type DescribeInputRequest struct {
 }
 
 // Send marshals and sends the DescribeInput API request.
-func (r DescribeInputRequest) Send() (*DescribeInputOutput, error) {
+func (r DescribeInputRequest) Send(ctx context.Context) (*DescribeInputOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -486,7 +497,7 @@ func (r DescribeInputRequest) Send() (*DescribeInputOutput, error) {
 //
 //    // Example sending a request using the DescribeInputRequest method.
 //    req := client.DescribeInputRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -520,7 +531,8 @@ type DescribeInputSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeInputSecurityGroup API request.
-func (r DescribeInputSecurityGroupRequest) Send() (*DescribeInputSecurityGroupOutput, error) {
+func (r DescribeInputSecurityGroupRequest) Send(ctx context.Context) (*DescribeInputSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -536,7 +548,7 @@ func (r DescribeInputSecurityGroupRequest) Send() (*DescribeInputSecurityGroupOu
 //
 //    // Example sending a request using the DescribeInputSecurityGroupRequest method.
 //    req := client.DescribeInputSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -570,7 +582,8 @@ type DescribeOfferingRequest struct {
 }
 
 // Send marshals and sends the DescribeOffering API request.
-func (r DescribeOfferingRequest) Send() (*DescribeOfferingOutput, error) {
+func (r DescribeOfferingRequest) Send(ctx context.Context) (*DescribeOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -586,7 +599,7 @@ func (r DescribeOfferingRequest) Send() (*DescribeOfferingOutput, error) {
 //
 //    // Example sending a request using the DescribeOfferingRequest method.
 //    req := client.DescribeOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -620,7 +633,8 @@ type DescribeReservationRequest struct {
 }
 
 // Send marshals and sends the DescribeReservation API request.
-func (r DescribeReservationRequest) Send() (*DescribeReservationOutput, error) {
+func (r DescribeReservationRequest) Send(ctx context.Context) (*DescribeReservationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -636,7 +650,7 @@ func (r DescribeReservationRequest) Send() (*DescribeReservationOutput, error) {
 //
 //    // Example sending a request using the DescribeReservationRequest method.
 //    req := client.DescribeReservationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -670,7 +684,8 @@ type DescribeScheduleRequest struct {
 }
 
 // Send marshals and sends the DescribeSchedule API request.
-func (r DescribeScheduleRequest) Send() (*DescribeScheduleOutput, error) {
+func (r DescribeScheduleRequest) Send(ctx context.Context) (*DescribeScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -686,7 +701,7 @@ func (r DescribeScheduleRequest) Send() (*DescribeScheduleOutput, error) {
 //
 //    // Example sending a request using the DescribeScheduleRequest method.
 //    req := client.DescribeScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -736,7 +751,7 @@ func (c *MediaLive) DescribeScheduleRequest(input *DescribeScheduleInput) Descri
 func (p *DescribeScheduleRequest) Paginate(opts ...aws.Option) DescribeSchedulePager {
 	return DescribeSchedulePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScheduleInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -745,6 +760,7 @@ func (p *DescribeScheduleRequest) Paginate(opts ...aws.Option) DescribeScheduleP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -772,7 +788,8 @@ type ListChannelsRequest struct {
 }
 
 // Send marshals and sends the ListChannels API request.
-func (r ListChannelsRequest) Send() (*ListChannelsOutput, error) {
+func (r ListChannelsRequest) Send(ctx context.Context) (*ListChannelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -788,7 +805,7 @@ func (r ListChannelsRequest) Send() (*ListChannelsOutput, error) {
 //
 //    // Example sending a request using the ListChannelsRequest method.
 //    req := client.ListChannelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -838,7 +855,7 @@ func (c *MediaLive) ListChannelsRequest(input *ListChannelsInput) ListChannelsRe
 func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 	return ListChannelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChannelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -847,6 +864,7 @@ func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -874,7 +892,8 @@ type ListInputSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the ListInputSecurityGroups API request.
-func (r ListInputSecurityGroupsRequest) Send() (*ListInputSecurityGroupsOutput, error) {
+func (r ListInputSecurityGroupsRequest) Send(ctx context.Context) (*ListInputSecurityGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +909,7 @@ func (r ListInputSecurityGroupsRequest) Send() (*ListInputSecurityGroupsOutput, 
 //
 //    // Example sending a request using the ListInputSecurityGroupsRequest method.
 //    req := client.ListInputSecurityGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -940,7 +959,7 @@ func (c *MediaLive) ListInputSecurityGroupsRequest(input *ListInputSecurityGroup
 func (p *ListInputSecurityGroupsRequest) Paginate(opts ...aws.Option) ListInputSecurityGroupsPager {
 	return ListInputSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInputSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -949,6 +968,7 @@ func (p *ListInputSecurityGroupsRequest) Paginate(opts ...aws.Option) ListInputS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -976,7 +996,8 @@ type ListInputsRequest struct {
 }
 
 // Send marshals and sends the ListInputs API request.
-func (r ListInputsRequest) Send() (*ListInputsOutput, error) {
+func (r ListInputsRequest) Send(ctx context.Context) (*ListInputsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,7 +1013,7 @@ func (r ListInputsRequest) Send() (*ListInputsOutput, error) {
 //
 //    // Example sending a request using the ListInputsRequest method.
 //    req := client.ListInputsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1042,7 +1063,7 @@ func (c *MediaLive) ListInputsRequest(input *ListInputsInput) ListInputsRequest 
 func (p *ListInputsRequest) Paginate(opts ...aws.Option) ListInputsPager {
 	return ListInputsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInputsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1051,6 +1072,7 @@ func (p *ListInputsRequest) Paginate(opts ...aws.Option) ListInputsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1078,7 +1100,8 @@ type ListOfferingsRequest struct {
 }
 
 // Send marshals and sends the ListOfferings API request.
-func (r ListOfferingsRequest) Send() (*ListOfferingsOutput, error) {
+func (r ListOfferingsRequest) Send(ctx context.Context) (*ListOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1094,7 +1117,7 @@ func (r ListOfferingsRequest) Send() (*ListOfferingsOutput, error) {
 //
 //    // Example sending a request using the ListOfferingsRequest method.
 //    req := client.ListOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1144,7 +1167,7 @@ func (c *MediaLive) ListOfferingsRequest(input *ListOfferingsInput) ListOffering
 func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 	return ListOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1153,6 +1176,7 @@ func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1180,7 +1204,8 @@ type ListReservationsRequest struct {
 }
 
 // Send marshals and sends the ListReservations API request.
-func (r ListReservationsRequest) Send() (*ListReservationsOutput, error) {
+func (r ListReservationsRequest) Send(ctx context.Context) (*ListReservationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1196,7 +1221,7 @@ func (r ListReservationsRequest) Send() (*ListReservationsOutput, error) {
 //
 //    // Example sending a request using the ListReservationsRequest method.
 //    req := client.ListReservationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1246,7 +1271,7 @@ func (c *MediaLive) ListReservationsRequest(input *ListReservationsInput) ListRe
 func (p *ListReservationsRequest) Paginate(opts ...aws.Option) ListReservationsPager {
 	return ListReservationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListReservationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1255,6 +1280,7 @@ func (p *ListReservationsRequest) Paginate(opts ...aws.Option) ListReservationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1282,7 +1308,8 @@ type PurchaseOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseOffering API request.
-func (r PurchaseOfferingRequest) Send() (*PurchaseOfferingOutput, error) {
+func (r PurchaseOfferingRequest) Send(ctx context.Context) (*PurchaseOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1298,7 +1325,7 @@ func (r PurchaseOfferingRequest) Send() (*PurchaseOfferingOutput, error) {
 //
 //    // Example sending a request using the PurchaseOfferingRequest method.
 //    req := client.PurchaseOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1332,7 +1359,8 @@ type StartChannelRequest struct {
 }
 
 // Send marshals and sends the StartChannel API request.
-func (r StartChannelRequest) Send() (*StartChannelOutput, error) {
+func (r StartChannelRequest) Send(ctx context.Context) (*StartChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1348,7 +1376,7 @@ func (r StartChannelRequest) Send() (*StartChannelOutput, error) {
 //
 //    // Example sending a request using the StartChannelRequest method.
 //    req := client.StartChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1382,7 +1410,8 @@ type StopChannelRequest struct {
 }
 
 // Send marshals and sends the StopChannel API request.
-func (r StopChannelRequest) Send() (*StopChannelOutput, error) {
+func (r StopChannelRequest) Send(ctx context.Context) (*StopChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1398,7 +1427,7 @@ func (r StopChannelRequest) Send() (*StopChannelOutput, error) {
 //
 //    // Example sending a request using the StopChannelRequest method.
 //    req := client.StopChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1432,7 +1461,8 @@ type UpdateChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateChannel API request.
-func (r UpdateChannelRequest) Send() (*UpdateChannelOutput, error) {
+func (r UpdateChannelRequest) Send(ctx context.Context) (*UpdateChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1448,7 +1478,7 @@ func (r UpdateChannelRequest) Send() (*UpdateChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateChannelRequest method.
 //    req := client.UpdateChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1482,7 +1512,8 @@ type UpdateInputRequest struct {
 }
 
 // Send marshals and sends the UpdateInput API request.
-func (r UpdateInputRequest) Send() (*UpdateInputOutput, error) {
+func (r UpdateInputRequest) Send(ctx context.Context) (*UpdateInputOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1498,7 +1529,7 @@ func (r UpdateInputRequest) Send() (*UpdateInputOutput, error) {
 //
 //    // Example sending a request using the UpdateInputRequest method.
 //    req := client.UpdateInputRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1532,7 +1563,8 @@ type UpdateInputSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateInputSecurityGroup API request.
-func (r UpdateInputSecurityGroupRequest) Send() (*UpdateInputSecurityGroupOutput, error) {
+func (r UpdateInputSecurityGroupRequest) Send(ctx context.Context) (*UpdateInputSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1548,7 +1580,7 @@ func (r UpdateInputSecurityGroupRequest) Send() (*UpdateInputSecurityGroupOutput
 //
 //    // Example sending a request using the UpdateInputSecurityGroupRequest method.
 //    req := client.UpdateInputSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

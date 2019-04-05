@@ -3,6 +3,7 @@
 package mediaconvert
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type AssociateCertificateRequest struct {
 }
 
 // Send marshals and sends the AssociateCertificate API request.
-func (r AssociateCertificateRequest) Send() (*AssociateCertificateOutput, error) {
+func (r AssociateCertificateRequest) Send(ctx context.Context) (*AssociateCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r AssociateCertificateRequest) Send() (*AssociateCertificateOutput, error)
 //
 //    // Example sending a request using the AssociateCertificateRequest method.
 //    req := client.AssociateCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 //
 //    // Example sending a request using the CancelJobRequest method.
 //    req := client.CancelJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type CreateJobRequest struct {
 }
 
 // Send marshals and sends the CreateJob API request.
-func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -140,7 +144,7 @@ func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
 //
 //    // Example sending a request using the CreateJobRequest method.
 //    req := client.CreateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +178,8 @@ type CreateJobTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateJobTemplate API request.
-func (r CreateJobTemplateRequest) Send() (*CreateJobTemplateOutput, error) {
+func (r CreateJobTemplateRequest) Send(ctx context.Context) (*CreateJobTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +196,7 @@ func (r CreateJobTemplateRequest) Send() (*CreateJobTemplateOutput, error) {
 //
 //    // Example sending a request using the CreateJobTemplateRequest method.
 //    req := client.CreateJobTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +230,8 @@ type CreatePresetRequest struct {
 }
 
 // Send marshals and sends the CreatePreset API request.
-func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
+func (r CreatePresetRequest) Send(ctx context.Context) (*CreatePresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +248,7 @@ func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
 //
 //    // Example sending a request using the CreatePresetRequest method.
 //    req := client.CreatePresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +282,8 @@ type CreateQueueRequest struct {
 }
 
 // Send marshals and sends the CreateQueue API request.
-func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
+func (r CreateQueueRequest) Send(ctx context.Context) (*CreateQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -293,7 +300,7 @@ func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
 //
 //    // Example sending a request using the CreateQueueRequest method.
 //    req := client.CreateQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -327,7 +334,8 @@ type DeleteJobTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteJobTemplate API request.
-func (r DeleteJobTemplateRequest) Send() (*DeleteJobTemplateOutput, error) {
+func (r DeleteJobTemplateRequest) Send(ctx context.Context) (*DeleteJobTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -343,7 +351,7 @@ func (r DeleteJobTemplateRequest) Send() (*DeleteJobTemplateOutput, error) {
 //
 //    // Example sending a request using the DeleteJobTemplateRequest method.
 //    req := client.DeleteJobTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -377,7 +385,8 @@ type DeletePresetRequest struct {
 }
 
 // Send marshals and sends the DeletePreset API request.
-func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
+func (r DeletePresetRequest) Send(ctx context.Context) (*DeletePresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,7 +402,7 @@ func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
 //
 //    // Example sending a request using the DeletePresetRequest method.
 //    req := client.DeletePresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -427,7 +436,8 @@ type DeleteQueueRequest struct {
 }
 
 // Send marshals and sends the DeleteQueue API request.
-func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
+func (r DeleteQueueRequest) Send(ctx context.Context) (*DeleteQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +453,7 @@ func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
 //
 //    // Example sending a request using the DeleteQueueRequest method.
 //    req := client.DeleteQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -477,7 +487,8 @@ type DescribeEndpointsRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
-func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
+func (r DescribeEndpointsRequest) Send(ctx context.Context) (*DescribeEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -494,7 +505,7 @@ func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
 //
 //    // Example sending a request using the DescribeEndpointsRequest method.
 //    req := client.DescribeEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -544,7 +555,7 @@ func (c *MediaConvert) DescribeEndpointsRequest(input *DescribeEndpointsInput) D
 func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpointsPager {
 	return DescribeEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -553,6 +564,7 @@ func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpoint
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -580,7 +592,8 @@ type DisassociateCertificateRequest struct {
 }
 
 // Send marshals and sends the DisassociateCertificate API request.
-func (r DisassociateCertificateRequest) Send() (*DisassociateCertificateOutput, error) {
+func (r DisassociateCertificateRequest) Send(ctx context.Context) (*DisassociateCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +610,7 @@ func (r DisassociateCertificateRequest) Send() (*DisassociateCertificateOutput, 
 //
 //    // Example sending a request using the DisassociateCertificateRequest method.
 //    req := client.DisassociateCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +644,8 @@ type GetJobRequest struct {
 }
 
 // Send marshals and sends the GetJob API request.
-func (r GetJobRequest) Send() (*GetJobOutput, error) {
+func (r GetJobRequest) Send(ctx context.Context) (*GetJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +661,7 @@ func (r GetJobRequest) Send() (*GetJobOutput, error) {
 //
 //    // Example sending a request using the GetJobRequest method.
 //    req := client.GetJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -681,7 +695,8 @@ type GetJobTemplateRequest struct {
 }
 
 // Send marshals and sends the GetJobTemplate API request.
-func (r GetJobTemplateRequest) Send() (*GetJobTemplateOutput, error) {
+func (r GetJobTemplateRequest) Send(ctx context.Context) (*GetJobTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -697,7 +712,7 @@ func (r GetJobTemplateRequest) Send() (*GetJobTemplateOutput, error) {
 //
 //    // Example sending a request using the GetJobTemplateRequest method.
 //    req := client.GetJobTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -731,7 +746,8 @@ type GetPresetRequest struct {
 }
 
 // Send marshals and sends the GetPreset API request.
-func (r GetPresetRequest) Send() (*GetPresetOutput, error) {
+func (r GetPresetRequest) Send(ctx context.Context) (*GetPresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -747,7 +763,7 @@ func (r GetPresetRequest) Send() (*GetPresetOutput, error) {
 //
 //    // Example sending a request using the GetPresetRequest method.
 //    req := client.GetPresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -781,7 +797,8 @@ type GetQueueRequest struct {
 }
 
 // Send marshals and sends the GetQueue API request.
-func (r GetQueueRequest) Send() (*GetQueueOutput, error) {
+func (r GetQueueRequest) Send(ctx context.Context) (*GetQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -797,7 +814,7 @@ func (r GetQueueRequest) Send() (*GetQueueOutput, error) {
 //
 //    // Example sending a request using the GetQueueRequest method.
 //    req := client.GetQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -831,7 +848,8 @@ type ListJobTemplatesRequest struct {
 }
 
 // Send marshals and sends the ListJobTemplates API request.
-func (r ListJobTemplatesRequest) Send() (*ListJobTemplatesOutput, error) {
+func (r ListJobTemplatesRequest) Send(ctx context.Context) (*ListJobTemplatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -849,7 +867,7 @@ func (r ListJobTemplatesRequest) Send() (*ListJobTemplatesOutput, error) {
 //
 //    // Example sending a request using the ListJobTemplatesRequest method.
 //    req := client.ListJobTemplatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -899,7 +917,7 @@ func (c *MediaConvert) ListJobTemplatesRequest(input *ListJobTemplatesInput) Lis
 func (p *ListJobTemplatesRequest) Paginate(opts ...aws.Option) ListJobTemplatesPager {
 	return ListJobTemplatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobTemplatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -908,6 +926,7 @@ func (p *ListJobTemplatesRequest) Paginate(opts ...aws.Option) ListJobTemplatesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -935,7 +954,8 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,7 +974,7 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1004,7 +1024,7 @@ func (c *MediaConvert) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1013,6 +1033,7 @@ func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1040,7 +1061,8 @@ type ListPresetsRequest struct {
 }
 
 // Send marshals and sends the ListPresets API request.
-func (r ListPresetsRequest) Send() (*ListPresetsOutput, error) {
+func (r ListPresetsRequest) Send(ctx context.Context) (*ListPresetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1058,7 +1080,7 @@ func (r ListPresetsRequest) Send() (*ListPresetsOutput, error) {
 //
 //    // Example sending a request using the ListPresetsRequest method.
 //    req := client.ListPresetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1108,7 +1130,7 @@ func (c *MediaConvert) ListPresetsRequest(input *ListPresetsInput) ListPresetsRe
 func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 	return ListPresetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPresetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1117,6 +1139,7 @@ func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1144,7 +1167,8 @@ type ListQueuesRequest struct {
 }
 
 // Send marshals and sends the ListQueues API request.
-func (r ListQueuesRequest) Send() (*ListQueuesOutput, error) {
+func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1162,7 +1186,7 @@ func (r ListQueuesRequest) Send() (*ListQueuesOutput, error) {
 //
 //    // Example sending a request using the ListQueuesRequest method.
 //    req := client.ListQueuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1212,7 +1236,7 @@ func (c *MediaConvert) ListQueuesRequest(input *ListQueuesInput) ListQueuesReque
 func (p *ListQueuesRequest) Paginate(opts ...aws.Option) ListQueuesPager {
 	return ListQueuesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListQueuesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1221,6 +1245,7 @@ func (p *ListQueuesRequest) Paginate(opts ...aws.Option) ListQueuesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1248,7 +1273,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1264,7 +1290,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1298,7 +1324,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1315,7 +1342,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1349,7 +1376,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1366,7 +1394,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1400,7 +1428,8 @@ type UpdateJobTemplateRequest struct {
 }
 
 // Send marshals and sends the UpdateJobTemplate API request.
-func (r UpdateJobTemplateRequest) Send() (*UpdateJobTemplateOutput, error) {
+func (r UpdateJobTemplateRequest) Send(ctx context.Context) (*UpdateJobTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1416,7 +1445,7 @@ func (r UpdateJobTemplateRequest) Send() (*UpdateJobTemplateOutput, error) {
 //
 //    // Example sending a request using the UpdateJobTemplateRequest method.
 //    req := client.UpdateJobTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1450,7 +1479,8 @@ type UpdatePresetRequest struct {
 }
 
 // Send marshals and sends the UpdatePreset API request.
-func (r UpdatePresetRequest) Send() (*UpdatePresetOutput, error) {
+func (r UpdatePresetRequest) Send(ctx context.Context) (*UpdatePresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1466,7 +1496,7 @@ func (r UpdatePresetRequest) Send() (*UpdatePresetOutput, error) {
 //
 //    // Example sending a request using the UpdatePresetRequest method.
 //    req := client.UpdatePresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1500,7 +1530,8 @@ type UpdateQueueRequest struct {
 }
 
 // Send marshals and sends the UpdateQueue API request.
-func (r UpdateQueueRequest) Send() (*UpdateQueueOutput, error) {
+func (r UpdateQueueRequest) Send(ctx context.Context) (*UpdateQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1516,7 +1547,7 @@ func (r UpdateQueueRequest) Send() (*UpdateQueueOutput, error) {
 //
 //    // Example sending a request using the UpdateQueueRequest method.
 //    req := client.UpdateQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -4,6 +4,7 @@ package s3crypto_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
@@ -18,6 +19,8 @@ import (
 )
 
 func TestInteg_EncryptFixtures(t *testing.T) {
+	ctx := context.Background()
+
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 
 	const bucket = "aws-s3-shared-tests"
@@ -41,8 +44,8 @@ func TestInteg_EncryptFixtures(t *testing.T) {
 		t.Run(c.CEKAlg, func(t *testing.T) {
 			s3Client := s3.New(cfg)
 
-			fixtures := getFixtures(t, s3Client, c.CEKAlg, bucket)
-			builder, masterKey := getEncryptFixtureBuilder(t, c.KEK, c.V1, c.V2, c.CEK)
+			fixtures := getFixtures(ctx, t, s3Client, c.CEKAlg, bucket)
+			builder, masterKey := getEncryptFixtureBuilder(ctx, t, c.KEK, c.V1, c.V2, c.CEK)
 
 			encClient := s3crypto.NewEncryptionClient(cfg, builder)
 
@@ -67,6 +70,8 @@ func TestInteg_EncryptFixtures(t *testing.T) {
 }
 
 func TestInteg_DecryptFixtures(t *testing.T) {
+	ctx := context.Background()
+
 	cfg := integration.ConfigWithDefaultRegion("us-west-2")
 
 	const bucket = "aws-s3-shared-tests"
@@ -87,8 +92,8 @@ func TestInteg_DecryptFixtures(t *testing.T) {
 			decClient := s3crypto.NewDecryptionClient(cfg)
 			s3Client := s3.New(cfg)
 
-			fixtures := getFixtures(t, s3Client, c.CEKAlg, bucket)
-			ciphertexts := decryptFixtures(t, decClient, s3Client, fixtures, bucket, c.Lang, version)
+			fixtures := getFixtures(ctx, t, s3Client, c.CEKAlg, bucket)
+			ciphertexts := decryptFixtures(ctx, t, decClient, s3Client, fixtures, bucket, c.Lang, version)
 
 			for caseKey, ciphertext := range ciphertexts {
 				if e, a := len(fixtures.Plaintexts[caseKey]), len(ciphertext); e != a {
@@ -107,7 +112,7 @@ type testFixtures struct {
 	Plaintexts map[string][]byte
 }
 
-func getFixtures(t *testing.T, s3Client *s3.S3, cekAlg, bucket string) testFixtures {
+func getFixtures(ctx context.Context, t *testing.T, s3Client *s3.S3, cekAlg, bucket string) testFixtures {
 	t.Helper()
 
 	prefix := "plaintext_test_case_"
@@ -116,7 +121,7 @@ func getFixtures(t *testing.T, s3Client *s3.S3, cekAlg, bucket string) testFixtu
 	out, err := s3Client.ListObjectsRequest(&s3.ListObjectsInput{
 		Bucket: aws.String(bucket),
 		Prefix: aws.String(baseFolder + "/" + prefix),
-	}).Send()
+	}).Send(ctx)
 	if err != nil {
 		t.Fatalf("unable to list fixtures %v", err)
 	}
@@ -126,7 +131,7 @@ func getFixtures(t *testing.T, s3Client *s3.S3, cekAlg, bucket string) testFixtu
 		ptObj, err := s3Client.GetObjectRequest(&s3.GetObjectInput{
 			Bucket: aws.String(bucket),
 			Key:    obj.Key,
-		}).Send()
+		}).Send(ctx)
 		if err != nil {
 			t.Fatalf("unable to get fixture object %s, %v", *obj.Key, err)
 		}
@@ -145,14 +150,14 @@ func getFixtures(t *testing.T, s3Client *s3.S3, cekAlg, bucket string) testFixtu
 	}
 }
 
-func getEncryptFixtureBuilder(t *testing.T, kek, v1, v2, cek string,
+func getEncryptFixtureBuilder(ctx context.Context, t *testing.T, kek, v1, v2, cek string,
 ) (builder s3crypto.ContentCipherBuilder, masterKey string) {
 	t.Helper()
 
 	var handler s3crypto.CipherDataGenerator
 	switch kek {
 	case "kms":
-		arn, err := getAliasInformation(v1, v2)
+		arn, err := getAliasInformation(ctx, v1, v2)
 		if err != nil {
 			t.Fatalf("failed to get fixture alias info for %s, %v", v1, err)
 		}
@@ -183,7 +188,7 @@ func getEncryptFixtureBuilder(t *testing.T, kek, v1, v2, cek string,
 	return builder, masterKey
 }
 
-func getAliasInformation(alias, region string) (string, error) {
+func getAliasInformation(ctx context.Context, alias, region string) (string, error) {
 	kmsCfg := integration.Config()
 	kmsCfg.Region = region
 
@@ -195,7 +200,7 @@ func getAliasInformation(alias, region string) (string, error) {
 	for truncated {
 		out, err := svc.ListAliasesRequest(&kms.ListAliasesInput{
 			Marker: marker,
-		}).Send()
+		}).Send(ctx)
 		if err != nil {
 			return arn, err
 		}
@@ -211,7 +216,7 @@ func getAliasInformation(alias, region string) (string, error) {
 	return "", fmt.Errorf("kms alias %s does not exist", alias)
 }
 
-func decryptFixtures(t *testing.T, decClient *s3crypto.DecryptionClient, s3Client *s3.S3,
+func decryptFixtures(ctx context.Context, t *testing.T, decClient *s3crypto.DecryptionClient, s3Client *s3.S3,
 	fixtures testFixtures, bucket, lang, version string,
 ) map[string][]byte {
 	t.Helper()
@@ -227,7 +232,7 @@ func decryptFixtures(t *testing.T, decClient *s3crypto.DecryptionClient, s3Clien
 		ctObj, err := s3Client.GetObjectRequest(&s3.GetObjectInput{
 			Bucket: &bucket,
 			Key:    &cipherKey,
-		}).Send()
+		}).Send(ctx)
 		if err != nil {
 			// TODO error?
 			continue

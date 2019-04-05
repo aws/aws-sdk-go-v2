@@ -3,6 +3,7 @@
 package rekognition
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type CompareFacesRequest struct {
 }
 
 // Send marshals and sends the CompareFaces API request.
-func (r CompareFacesRequest) Send() (*CompareFacesOutput, error) {
+func (r CompareFacesRequest) Send(ctx context.Context) (*CompareFacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -77,7 +79,7 @@ func (r CompareFacesRequest) Send() (*CompareFacesOutput, error) {
 //
 //    // Example sending a request using the CompareFacesRequest method.
 //    req := client.CompareFacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -109,7 +111,8 @@ type CreateCollectionRequest struct {
 }
 
 // Send marshals and sends the CreateCollection API request.
-func (r CreateCollectionRequest) Send() (*CreateCollectionOutput, error) {
+func (r CreateCollectionRequest) Send(ctx context.Context) (*CreateCollectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +142,7 @@ func (r CreateCollectionRequest) Send() (*CreateCollectionOutput, error) {
 //
 //    // Example sending a request using the CreateCollectionRequest method.
 //    req := client.CreateCollectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +174,8 @@ type CreateStreamProcessorRequest struct {
 }
 
 // Send marshals and sends the CreateStreamProcessor API request.
-func (r CreateStreamProcessorRequest) Send() (*CreateStreamProcessorOutput, error) {
+func (r CreateStreamProcessorRequest) Send(ctx context.Context) (*CreateStreamProcessorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -202,7 +206,7 @@ func (r CreateStreamProcessorRequest) Send() (*CreateStreamProcessorOutput, erro
 //
 //    // Example sending a request using the CreateStreamProcessorRequest method.
 //    req := client.CreateStreamProcessorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -234,7 +238,8 @@ type DeleteCollectionRequest struct {
 }
 
 // Send marshals and sends the DeleteCollection API request.
-func (r DeleteCollectionRequest) Send() (*DeleteCollectionOutput, error) {
+func (r DeleteCollectionRequest) Send(ctx context.Context) (*DeleteCollectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -254,7 +259,7 @@ func (r DeleteCollectionRequest) Send() (*DeleteCollectionOutput, error) {
 //
 //    // Example sending a request using the DeleteCollectionRequest method.
 //    req := client.DeleteCollectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -286,7 +291,8 @@ type DeleteFacesRequest struct {
 }
 
 // Send marshals and sends the DeleteFaces API request.
-func (r DeleteFacesRequest) Send() (*DeleteFacesOutput, error) {
+func (r DeleteFacesRequest) Send(ctx context.Context) (*DeleteFacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,7 +312,7 @@ func (r DeleteFacesRequest) Send() (*DeleteFacesOutput, error) {
 //
 //    // Example sending a request using the DeleteFacesRequest method.
 //    req := client.DeleteFacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -338,7 +344,8 @@ type DeleteStreamProcessorRequest struct {
 }
 
 // Send marshals and sends the DeleteStreamProcessor API request.
-func (r DeleteStreamProcessorRequest) Send() (*DeleteStreamProcessorOutput, error) {
+func (r DeleteStreamProcessorRequest) Send(ctx context.Context) (*DeleteStreamProcessorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -357,7 +364,7 @@ func (r DeleteStreamProcessorRequest) Send() (*DeleteStreamProcessorOutput, erro
 //
 //    // Example sending a request using the DeleteStreamProcessorRequest method.
 //    req := client.DeleteStreamProcessorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -389,7 +396,8 @@ type DescribeCollectionRequest struct {
 }
 
 // Send marshals and sends the DescribeCollection API request.
-func (r DescribeCollectionRequest) Send() (*DescribeCollectionOutput, error) {
+func (r DescribeCollectionRequest) Send(ctx context.Context) (*DescribeCollectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -410,7 +418,7 @@ func (r DescribeCollectionRequest) Send() (*DescribeCollectionOutput, error) {
 //
 //    // Example sending a request using the DescribeCollectionRequest method.
 //    req := client.DescribeCollectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -442,7 +450,8 @@ type DescribeStreamProcessorRequest struct {
 }
 
 // Send marshals and sends the DescribeStreamProcessor API request.
-func (r DescribeStreamProcessorRequest) Send() (*DescribeStreamProcessorOutput, error) {
+func (r DescribeStreamProcessorRequest) Send(ctx context.Context) (*DescribeStreamProcessorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -460,7 +469,7 @@ func (r DescribeStreamProcessorRequest) Send() (*DescribeStreamProcessorOutput, 
 //
 //    // Example sending a request using the DescribeStreamProcessorRequest method.
 //    req := client.DescribeStreamProcessorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -492,7 +501,8 @@ type DetectFacesRequest struct {
 }
 
 // Send marshals and sends the DetectFaces API request.
-func (r DetectFacesRequest) Send() (*DetectFacesOutput, error) {
+func (r DetectFacesRequest) Send(ctx context.Context) (*DetectFacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -529,7 +539,7 @@ func (r DetectFacesRequest) Send() (*DetectFacesOutput, error) {
 //
 //    // Example sending a request using the DetectFacesRequest method.
 //    req := client.DetectFacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -561,7 +571,8 @@ type DetectLabelsRequest struct {
 }
 
 // Send marshals and sends the DetectLabels API request.
-func (r DetectLabelsRequest) Send() (*DetectLabelsOutput, error) {
+func (r DetectLabelsRequest) Send(ctx context.Context) (*DetectLabelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,7 +656,7 @@ func (r DetectLabelsRequest) Send() (*DetectLabelsOutput, error) {
 //
 //    // Example sending a request using the DetectLabelsRequest method.
 //    req := client.DetectLabelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -677,7 +688,8 @@ type DetectModerationLabelsRequest struct {
 }
 
 // Send marshals and sends the DetectModerationLabels API request.
-func (r DetectModerationLabelsRequest) Send() (*DetectModerationLabelsOutput, error) {
+func (r DetectModerationLabelsRequest) Send(ctx context.Context) (*DetectModerationLabelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -707,7 +719,7 @@ func (r DetectModerationLabelsRequest) Send() (*DetectModerationLabelsOutput, er
 //
 //    // Example sending a request using the DetectModerationLabelsRequest method.
 //    req := client.DetectModerationLabelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -739,7 +751,8 @@ type DetectTextRequest struct {
 }
 
 // Send marshals and sends the DetectText API request.
-func (r DetectTextRequest) Send() (*DetectTextOutput, error) {
+func (r DetectTextRequest) Send(ctx context.Context) (*DetectTextOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -786,7 +799,7 @@ func (r DetectTextRequest) Send() (*DetectTextOutput, error) {
 //
 //    // Example sending a request using the DetectTextRequest method.
 //    req := client.DetectTextRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -818,7 +831,8 @@ type GetCelebrityInfoRequest struct {
 }
 
 // Send marshals and sends the GetCelebrityInfo API request.
-func (r GetCelebrityInfoRequest) Send() (*GetCelebrityInfoOutput, error) {
+func (r GetCelebrityInfoRequest) Send(ctx context.Context) (*GetCelebrityInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -843,7 +857,7 @@ func (r GetCelebrityInfoRequest) Send() (*GetCelebrityInfoOutput, error) {
 //
 //    // Example sending a request using the GetCelebrityInfoRequest method.
 //    req := client.GetCelebrityInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -875,7 +889,8 @@ type GetCelebrityRecognitionRequest struct {
 }
 
 // Send marshals and sends the GetCelebrityRecognition API request.
-func (r GetCelebrityRecognitionRequest) Send() (*GetCelebrityRecognitionOutput, error) {
+func (r GetCelebrityRecognitionRequest) Send(ctx context.Context) (*GetCelebrityRecognitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -931,7 +946,7 @@ func (r GetCelebrityRecognitionRequest) Send() (*GetCelebrityRecognitionOutput, 
 //
 //    // Example sending a request using the GetCelebrityRecognitionRequest method.
 //    req := client.GetCelebrityRecognitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -979,7 +994,7 @@ func (c *Rekognition) GetCelebrityRecognitionRequest(input *GetCelebrityRecognit
 func (p *GetCelebrityRecognitionRequest) Paginate(opts ...aws.Option) GetCelebrityRecognitionPager {
 	return GetCelebrityRecognitionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCelebrityRecognitionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -988,6 +1003,7 @@ func (p *GetCelebrityRecognitionRequest) Paginate(opts ...aws.Option) GetCelebri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1015,7 +1031,8 @@ type GetContentModerationRequest struct {
 }
 
 // Send marshals and sends the GetContentModeration API request.
-func (r GetContentModerationRequest) Send() (*GetContentModerationOutput, error) {
+func (r GetContentModerationRequest) Send(ctx context.Context) (*GetContentModerationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1062,7 +1079,7 @@ func (r GetContentModerationRequest) Send() (*GetContentModerationOutput, error)
 //
 //    // Example sending a request using the GetContentModerationRequest method.
 //    req := client.GetContentModerationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1110,7 +1127,7 @@ func (c *Rekognition) GetContentModerationRequest(input *GetContentModerationInp
 func (p *GetContentModerationRequest) Paginate(opts ...aws.Option) GetContentModerationPager {
 	return GetContentModerationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetContentModerationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1119,6 +1136,7 @@ func (p *GetContentModerationRequest) Paginate(opts ...aws.Option) GetContentMod
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1146,7 +1164,8 @@ type GetFaceDetectionRequest struct {
 }
 
 // Send marshals and sends the GetFaceDetection API request.
-func (r GetFaceDetectionRequest) Send() (*GetFaceDetectionOutput, error) {
+func (r GetFaceDetectionRequest) Send(ctx context.Context) (*GetFaceDetectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1182,7 +1201,7 @@ func (r GetFaceDetectionRequest) Send() (*GetFaceDetectionOutput, error) {
 //
 //    // Example sending a request using the GetFaceDetectionRequest method.
 //    req := client.GetFaceDetectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1230,7 +1249,7 @@ func (c *Rekognition) GetFaceDetectionRequest(input *GetFaceDetectionInput) GetF
 func (p *GetFaceDetectionRequest) Paginate(opts ...aws.Option) GetFaceDetectionPager {
 	return GetFaceDetectionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetFaceDetectionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1239,6 +1258,7 @@ func (p *GetFaceDetectionRequest) Paginate(opts ...aws.Option) GetFaceDetectionP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1266,7 +1286,8 @@ type GetFaceSearchRequest struct {
 }
 
 // Send marshals and sends the GetFaceSearch API request.
-func (r GetFaceSearchRequest) Send() (*GetFaceSearchOutput, error) {
+func (r GetFaceSearchRequest) Send(ctx context.Context) (*GetFaceSearchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1310,7 +1331,7 @@ func (r GetFaceSearchRequest) Send() (*GetFaceSearchOutput, error) {
 //
 //    // Example sending a request using the GetFaceSearchRequest method.
 //    req := client.GetFaceSearchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1358,7 +1379,7 @@ func (c *Rekognition) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSea
 func (p *GetFaceSearchRequest) Paginate(opts ...aws.Option) GetFaceSearchPager {
 	return GetFaceSearchPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetFaceSearchInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1367,6 +1388,7 @@ func (p *GetFaceSearchRequest) Paginate(opts ...aws.Option) GetFaceSearchPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1394,7 +1416,8 @@ type GetLabelDetectionRequest struct {
 }
 
 // Send marshals and sends the GetLabelDetection API request.
-func (r GetLabelDetectionRequest) Send() (*GetLabelDetectionOutput, error) {
+func (r GetLabelDetectionRequest) Send(ctx context.Context) (*GetLabelDetectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1439,7 +1462,7 @@ func (r GetLabelDetectionRequest) Send() (*GetLabelDetectionOutput, error) {
 //
 //    // Example sending a request using the GetLabelDetectionRequest method.
 //    req := client.GetLabelDetectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1487,7 +1510,7 @@ func (c *Rekognition) GetLabelDetectionRequest(input *GetLabelDetectionInput) Ge
 func (p *GetLabelDetectionRequest) Paginate(opts ...aws.Option) GetLabelDetectionPager {
 	return GetLabelDetectionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetLabelDetectionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1496,6 +1519,7 @@ func (p *GetLabelDetectionRequest) Paginate(opts ...aws.Option) GetLabelDetectio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1523,7 +1547,8 @@ type GetPersonTrackingRequest struct {
 }
 
 // Send marshals and sends the GetPersonTracking API request.
-func (r GetPersonTrackingRequest) Send() (*GetPersonTrackingOutput, error) {
+func (r GetPersonTrackingRequest) Send(ctx context.Context) (*GetPersonTrackingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1570,7 +1595,7 @@ func (r GetPersonTrackingRequest) Send() (*GetPersonTrackingOutput, error) {
 //
 //    // Example sending a request using the GetPersonTrackingRequest method.
 //    req := client.GetPersonTrackingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1618,7 +1643,7 @@ func (c *Rekognition) GetPersonTrackingRequest(input *GetPersonTrackingInput) Ge
 func (p *GetPersonTrackingRequest) Paginate(opts ...aws.Option) GetPersonTrackingPager {
 	return GetPersonTrackingPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetPersonTrackingInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1627,6 +1652,7 @@ func (p *GetPersonTrackingRequest) Paginate(opts ...aws.Option) GetPersonTrackin
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1654,7 +1680,8 @@ type IndexFacesRequest struct {
 }
 
 // Send marshals and sends the IndexFaces API request.
-func (r IndexFacesRequest) Send() (*IndexFacesOutput, error) {
+func (r IndexFacesRequest) Send(ctx context.Context) (*IndexFacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1759,7 +1786,7 @@ func (r IndexFacesRequest) Send() (*IndexFacesOutput, error) {
 //
 //    // Example sending a request using the IndexFacesRequest method.
 //    req := client.IndexFacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1791,7 +1818,8 @@ type ListCollectionsRequest struct {
 }
 
 // Send marshals and sends the ListCollections API request.
-func (r ListCollectionsRequest) Send() (*ListCollectionsOutput, error) {
+func (r ListCollectionsRequest) Send(ctx context.Context) (*ListCollectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1815,7 +1843,7 @@ func (r ListCollectionsRequest) Send() (*ListCollectionsOutput, error) {
 //
 //    // Example sending a request using the ListCollectionsRequest method.
 //    req := client.ListCollectionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1863,7 +1891,7 @@ func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) ListCo
 func (p *ListCollectionsRequest) Paginate(opts ...aws.Option) ListCollectionsPager {
 	return ListCollectionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCollectionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1872,6 +1900,7 @@ func (p *ListCollectionsRequest) Paginate(opts ...aws.Option) ListCollectionsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1899,7 +1928,8 @@ type ListFacesRequest struct {
 }
 
 // Send marshals and sends the ListFaces API request.
-func (r ListFacesRequest) Send() (*ListFacesOutput, error) {
+func (r ListFacesRequest) Send(ctx context.Context) (*ListFacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1921,7 +1951,7 @@ func (r ListFacesRequest) Send() (*ListFacesOutput, error) {
 //
 //    // Example sending a request using the ListFacesRequest method.
 //    req := client.ListFacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1969,7 +1999,7 @@ func (c *Rekognition) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 func (p *ListFacesRequest) Paginate(opts ...aws.Option) ListFacesPager {
 	return ListFacesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFacesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1978,6 +2008,7 @@ func (p *ListFacesRequest) Paginate(opts ...aws.Option) ListFacesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2005,7 +2036,8 @@ type ListStreamProcessorsRequest struct {
 }
 
 // Send marshals and sends the ListStreamProcessors API request.
-func (r ListStreamProcessorsRequest) Send() (*ListStreamProcessorsOutput, error) {
+func (r ListStreamProcessorsRequest) Send(ctx context.Context) (*ListStreamProcessorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2021,7 +2053,7 @@ func (r ListStreamProcessorsRequest) Send() (*ListStreamProcessorsOutput, error)
 //
 //    // Example sending a request using the ListStreamProcessorsRequest method.
 //    req := client.ListStreamProcessorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2069,7 +2101,7 @@ func (c *Rekognition) ListStreamProcessorsRequest(input *ListStreamProcessorsInp
 func (p *ListStreamProcessorsRequest) Paginate(opts ...aws.Option) ListStreamProcessorsPager {
 	return ListStreamProcessorsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStreamProcessorsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2078,6 +2110,7 @@ func (p *ListStreamProcessorsRequest) Paginate(opts ...aws.Option) ListStreamPro
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2105,7 +2138,8 @@ type RecognizeCelebritiesRequest struct {
 }
 
 // Send marshals and sends the RecognizeCelebrities API request.
-func (r RecognizeCelebritiesRequest) Send() (*RecognizeCelebritiesOutput, error) {
+func (r RecognizeCelebritiesRequest) Send(ctx context.Context) (*RecognizeCelebritiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2150,7 +2184,7 @@ func (r RecognizeCelebritiesRequest) Send() (*RecognizeCelebritiesOutput, error)
 //
 //    // Example sending a request using the RecognizeCelebritiesRequest method.
 //    req := client.RecognizeCelebritiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2182,7 +2216,8 @@ type SearchFacesRequest struct {
 }
 
 // Send marshals and sends the SearchFaces API request.
-func (r SearchFacesRequest) Send() (*SearchFacesOutput, error) {
+func (r SearchFacesRequest) Send(ctx context.Context) (*SearchFacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2216,7 +2251,7 @@ func (r SearchFacesRequest) Send() (*SearchFacesOutput, error) {
 //
 //    // Example sending a request using the SearchFacesRequest method.
 //    req := client.SearchFacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2248,7 +2283,8 @@ type SearchFacesByImageRequest struct {
 }
 
 // Send marshals and sends the SearchFacesByImage API request.
-func (r SearchFacesByImageRequest) Send() (*SearchFacesByImageOutput, error) {
+func (r SearchFacesByImageRequest) Send(ctx context.Context) (*SearchFacesByImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2292,7 +2328,7 @@ func (r SearchFacesByImageRequest) Send() (*SearchFacesByImageOutput, error) {
 //
 //    // Example sending a request using the SearchFacesByImageRequest method.
 //    req := client.SearchFacesByImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2324,7 +2360,8 @@ type StartCelebrityRecognitionRequest struct {
 }
 
 // Send marshals and sends the StartCelebrityRecognition API request.
-func (r StartCelebrityRecognitionRequest) Send() (*StartCelebrityRecognitionOutput, error) {
+func (r StartCelebrityRecognitionRequest) Send(ctx context.Context) (*StartCelebrityRecognitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2353,7 +2390,7 @@ func (r StartCelebrityRecognitionRequest) Send() (*StartCelebrityRecognitionOutp
 //
 //    // Example sending a request using the StartCelebrityRecognitionRequest method.
 //    req := client.StartCelebrityRecognitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2385,7 +2422,8 @@ type StartContentModerationRequest struct {
 }
 
 // Send marshals and sends the StartContentModeration API request.
-func (r StartContentModerationRequest) Send() (*StartContentModerationOutput, error) {
+func (r StartContentModerationRequest) Send(ctx context.Context) (*StartContentModerationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2416,7 +2454,7 @@ func (r StartContentModerationRequest) Send() (*StartContentModerationOutput, er
 //
 //    // Example sending a request using the StartContentModerationRequest method.
 //    req := client.StartContentModerationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2448,7 +2486,8 @@ type StartFaceDetectionRequest struct {
 }
 
 // Send marshals and sends the StartFaceDetection API request.
-func (r StartFaceDetectionRequest) Send() (*StartFaceDetectionOutput, error) {
+func (r StartFaceDetectionRequest) Send(ctx context.Context) (*StartFaceDetectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2477,7 +2516,7 @@ func (r StartFaceDetectionRequest) Send() (*StartFaceDetectionOutput, error) {
 //
 //    // Example sending a request using the StartFaceDetectionRequest method.
 //    req := client.StartFaceDetectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2509,7 +2548,8 @@ type StartFaceSearchRequest struct {
 }
 
 // Send marshals and sends the StartFaceSearch API request.
-func (r StartFaceSearchRequest) Send() (*StartFaceSearchOutput, error) {
+func (r StartFaceSearchRequest) Send(ctx context.Context) (*StartFaceSearchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2536,7 +2576,7 @@ func (r StartFaceSearchRequest) Send() (*StartFaceSearchOutput, error) {
 //
 //    // Example sending a request using the StartFaceSearchRequest method.
 //    req := client.StartFaceSearchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2568,7 +2608,8 @@ type StartLabelDetectionRequest struct {
 }
 
 // Send marshals and sends the StartLabelDetection API request.
-func (r StartLabelDetectionRequest) Send() (*StartLabelDetectionOutput, error) {
+func (r StartLabelDetectionRequest) Send(ctx context.Context) (*StartLabelDetectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2601,7 +2642,7 @@ func (r StartLabelDetectionRequest) Send() (*StartLabelDetectionOutput, error) {
 //
 //    // Example sending a request using the StartLabelDetectionRequest method.
 //    req := client.StartLabelDetectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2633,7 +2674,8 @@ type StartPersonTrackingRequest struct {
 }
 
 // Send marshals and sends the StartPersonTracking API request.
-func (r StartPersonTrackingRequest) Send() (*StartPersonTrackingOutput, error) {
+func (r StartPersonTrackingRequest) Send(ctx context.Context) (*StartPersonTrackingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2660,7 +2702,7 @@ func (r StartPersonTrackingRequest) Send() (*StartPersonTrackingOutput, error) {
 //
 //    // Example sending a request using the StartPersonTrackingRequest method.
 //    req := client.StartPersonTrackingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2692,7 +2734,8 @@ type StartStreamProcessorRequest struct {
 }
 
 // Send marshals and sends the StartStreamProcessor API request.
-func (r StartStreamProcessorRequest) Send() (*StartStreamProcessorOutput, error) {
+func (r StartStreamProcessorRequest) Send(ctx context.Context) (*StartStreamProcessorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2710,7 +2753,7 @@ func (r StartStreamProcessorRequest) Send() (*StartStreamProcessorOutput, error)
 //
 //    // Example sending a request using the StartStreamProcessorRequest method.
 //    req := client.StartStreamProcessorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2742,7 +2785,8 @@ type StopStreamProcessorRequest struct {
 }
 
 // Send marshals and sends the StopStreamProcessor API request.
-func (r StopStreamProcessorRequest) Send() (*StopStreamProcessorOutput, error) {
+func (r StopStreamProcessorRequest) Send(ctx context.Context) (*StopStreamProcessorOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2758,7 +2802,7 @@ func (r StopStreamProcessorRequest) Send() (*StopStreamProcessorOutput, error) {
 //
 //    // Example sending a request using the StopStreamProcessorRequest method.
 //    req := client.StopStreamProcessorRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

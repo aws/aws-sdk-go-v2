@@ -27,9 +27,8 @@ func TestInteg_00_DescribeEntityAggregates(t *testing.T) {
 	params := &health.DescribeEntityAggregatesInput{}
 
 	req := svc.DescribeEntityAggregatesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}

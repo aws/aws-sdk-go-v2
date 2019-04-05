@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ func (m mockedReceiveMsgs) ReceiveMessageRequest(in *sqs.ReceiveMessageInput) sq
 	// Only need to return mocked response output
 	return sqs.ReceiveMessageRequest{
 		Request: &aws.Request{
-			Data: &m.Resp,
+			Data:        &m.Resp,
+			HTTPRequest: &http.Request{},
 		},
 	}
 }

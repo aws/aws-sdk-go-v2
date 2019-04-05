@@ -9,6 +9,8 @@
 package elbv2iface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elbv2"
 )
@@ -131,20 +133,15 @@ type ELBV2API interface {
 
 	SetSubnetsRequest(*elbv2.SetSubnetsInput) elbv2.SetSubnetsRequest
 
-	WaitUntilLoadBalancerAvailable(*elbv2.DescribeLoadBalancersInput) error
-	WaitUntilLoadBalancerAvailableWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+	WaitUntilLoadBalancerAvailable(context.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
 
-	WaitUntilLoadBalancerExists(*elbv2.DescribeLoadBalancersInput) error
-	WaitUntilLoadBalancerExistsWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+	WaitUntilLoadBalancerExists(context.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
 
-	WaitUntilLoadBalancersDeleted(*elbv2.DescribeLoadBalancersInput) error
-	WaitUntilLoadBalancersDeletedWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
+	WaitUntilLoadBalancersDeleted(context.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error
 
-	WaitUntilTargetDeregistered(*elbv2.DescribeTargetHealthInput) error
-	WaitUntilTargetDeregisteredWithContext(aws.Context, *elbv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
+	WaitUntilTargetDeregistered(context.Context, *elbv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
 
-	WaitUntilTargetInService(*elbv2.DescribeTargetHealthInput) error
-	WaitUntilTargetInServiceWithContext(aws.Context, *elbv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
+	WaitUntilTargetInService(context.Context, *elbv2.DescribeTargetHealthInput, ...aws.WaiterOption) error
 }
 
 var _ ELBV2API = (*elbv2.ELBV2)(nil)

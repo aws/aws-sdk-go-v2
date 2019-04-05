@@ -105,6 +105,7 @@ func removeImports(code string) string {
 
 var extraImports = []string{
 	"bytes",
+	"context",
 	"encoding/json",
 	"encoding/xml",
 	"fmt",

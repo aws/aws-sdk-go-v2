@@ -2,6 +2,7 @@ package s3crypto_test
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -70,7 +71,7 @@ func TestPutObject(t *testing.T) {
 			StatusCode: 200,
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if e, a := "stop", err.Error(); e != a {
 		t.Errorf("expected %s error, but received %s", e, a)
 	}

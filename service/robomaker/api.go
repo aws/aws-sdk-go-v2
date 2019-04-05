@@ -3,6 +3,7 @@
 package robomaker
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -21,7 +22,8 @@ type BatchDescribeSimulationJobRequest struct {
 }
 
 // Send marshals and sends the BatchDescribeSimulationJob API request.
-func (r BatchDescribeSimulationJobRequest) Send() (*BatchDescribeSimulationJobOutput, error) {
+func (r BatchDescribeSimulationJobRequest) Send(ctx context.Context) (*BatchDescribeSimulationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r BatchDescribeSimulationJobRequest) Send() (*BatchDescribeSimulationJobOu
 //
 //    // Example sending a request using the BatchDescribeSimulationJobRequest method.
 //    req := client.BatchDescribeSimulationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type CancelSimulationJobRequest struct {
 }
 
 // Send marshals and sends the CancelSimulationJob API request.
-func (r CancelSimulationJobRequest) Send() (*CancelSimulationJobOutput, error) {
+func (r CancelSimulationJobRequest) Send(ctx context.Context) (*CancelSimulationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r CancelSimulationJobRequest) Send() (*CancelSimulationJobOutput, error) {
 //
 //    // Example sending a request using the CancelSimulationJobRequest method.
 //    req := client.CancelSimulationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +124,8 @@ type CreateDeploymentJobRequest struct {
 }
 
 // Send marshals and sends the CreateDeploymentJob API request.
-func (r CreateDeploymentJobRequest) Send() (*CreateDeploymentJobOutput, error) {
+func (r CreateDeploymentJobRequest) Send(ctx context.Context) (*CreateDeploymentJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r CreateDeploymentJobRequest) Send() (*CreateDeploymentJobOutput, error) {
 //
 //    // Example sending a request using the CreateDeploymentJobRequest method.
 //    req := client.CreateDeploymentJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type CreateFleetRequest struct {
 }
 
 // Send marshals and sends the CreateFleet API request.
-func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+func (r CreateFleetRequest) Send(ctx context.Context) (*CreateFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +192,7 @@ func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
 //
 //    // Example sending a request using the CreateFleetRequest method.
 //    req := client.CreateFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +226,8 @@ type CreateRobotRequest struct {
 }
 
 // Send marshals and sends the CreateRobot API request.
-func (r CreateRobotRequest) Send() (*CreateRobotOutput, error) {
+func (r CreateRobotRequest) Send(ctx context.Context) (*CreateRobotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +243,7 @@ func (r CreateRobotRequest) Send() (*CreateRobotOutput, error) {
 //
 //    // Example sending a request using the CreateRobotRequest method.
 //    req := client.CreateRobotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +277,8 @@ type CreateRobotApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateRobotApplication API request.
-func (r CreateRobotApplicationRequest) Send() (*CreateRobotApplicationOutput, error) {
+func (r CreateRobotApplicationRequest) Send(ctx context.Context) (*CreateRobotApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +294,7 @@ func (r CreateRobotApplicationRequest) Send() (*CreateRobotApplicationOutput, er
 //
 //    // Example sending a request using the CreateRobotApplicationRequest method.
 //    req := client.CreateRobotApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -321,7 +328,8 @@ type CreateRobotApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the CreateRobotApplicationVersion API request.
-func (r CreateRobotApplicationVersionRequest) Send() (*CreateRobotApplicationVersionOutput, error) {
+func (r CreateRobotApplicationVersionRequest) Send(ctx context.Context) (*CreateRobotApplicationVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -337,7 +345,7 @@ func (r CreateRobotApplicationVersionRequest) Send() (*CreateRobotApplicationVer
 //
 //    // Example sending a request using the CreateRobotApplicationVersionRequest method.
 //    req := client.CreateRobotApplicationVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -371,7 +379,8 @@ type CreateSimulationApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateSimulationApplication API request.
-func (r CreateSimulationApplicationRequest) Send() (*CreateSimulationApplicationOutput, error) {
+func (r CreateSimulationApplicationRequest) Send(ctx context.Context) (*CreateSimulationApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -387,7 +396,7 @@ func (r CreateSimulationApplicationRequest) Send() (*CreateSimulationApplication
 //
 //    // Example sending a request using the CreateSimulationApplicationRequest method.
 //    req := client.CreateSimulationApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -421,7 +430,8 @@ type CreateSimulationApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the CreateSimulationApplicationVersion API request.
-func (r CreateSimulationApplicationVersionRequest) Send() (*CreateSimulationApplicationVersionOutput, error) {
+func (r CreateSimulationApplicationVersionRequest) Send(ctx context.Context) (*CreateSimulationApplicationVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +447,7 @@ func (r CreateSimulationApplicationVersionRequest) Send() (*CreateSimulationAppl
 //
 //    // Example sending a request using the CreateSimulationApplicationVersionRequest method.
 //    req := client.CreateSimulationApplicationVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +481,8 @@ type CreateSimulationJobRequest struct {
 }
 
 // Send marshals and sends the CreateSimulationJob API request.
-func (r CreateSimulationJobRequest) Send() (*CreateSimulationJobOutput, error) {
+func (r CreateSimulationJobRequest) Send(ctx context.Context) (*CreateSimulationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -487,7 +498,7 @@ func (r CreateSimulationJobRequest) Send() (*CreateSimulationJobOutput, error) {
 //
 //    // Example sending a request using the CreateSimulationJobRequest method.
 //    req := client.CreateSimulationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -521,7 +532,8 @@ type DeleteFleetRequest struct {
 }
 
 // Send marshals and sends the DeleteFleet API request.
-func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
+func (r DeleteFleetRequest) Send(ctx context.Context) (*DeleteFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -537,7 +549,7 @@ func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
 //
 //    // Example sending a request using the DeleteFleetRequest method.
 //    req := client.DeleteFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -571,7 +583,8 @@ type DeleteRobotRequest struct {
 }
 
 // Send marshals and sends the DeleteRobot API request.
-func (r DeleteRobotRequest) Send() (*DeleteRobotOutput, error) {
+func (r DeleteRobotRequest) Send(ctx context.Context) (*DeleteRobotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -587,7 +600,7 @@ func (r DeleteRobotRequest) Send() (*DeleteRobotOutput, error) {
 //
 //    // Example sending a request using the DeleteRobotRequest method.
 //    req := client.DeleteRobotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -621,7 +634,8 @@ type DeleteRobotApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteRobotApplication API request.
-func (r DeleteRobotApplicationRequest) Send() (*DeleteRobotApplicationOutput, error) {
+func (r DeleteRobotApplicationRequest) Send(ctx context.Context) (*DeleteRobotApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,7 +651,7 @@ func (r DeleteRobotApplicationRequest) Send() (*DeleteRobotApplicationOutput, er
 //
 //    // Example sending a request using the DeleteRobotApplicationRequest method.
 //    req := client.DeleteRobotApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -671,7 +685,8 @@ type DeleteSimulationApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteSimulationApplication API request.
-func (r DeleteSimulationApplicationRequest) Send() (*DeleteSimulationApplicationOutput, error) {
+func (r DeleteSimulationApplicationRequest) Send(ctx context.Context) (*DeleteSimulationApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -687,7 +702,7 @@ func (r DeleteSimulationApplicationRequest) Send() (*DeleteSimulationApplication
 //
 //    // Example sending a request using the DeleteSimulationApplicationRequest method.
 //    req := client.DeleteSimulationApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -721,7 +736,8 @@ type DeregisterRobotRequest struct {
 }
 
 // Send marshals and sends the DeregisterRobot API request.
-func (r DeregisterRobotRequest) Send() (*DeregisterRobotOutput, error) {
+func (r DeregisterRobotRequest) Send(ctx context.Context) (*DeregisterRobotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -737,7 +753,7 @@ func (r DeregisterRobotRequest) Send() (*DeregisterRobotOutput, error) {
 //
 //    // Example sending a request using the DeregisterRobotRequest method.
 //    req := client.DeregisterRobotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -771,7 +787,8 @@ type DescribeDeploymentJobRequest struct {
 }
 
 // Send marshals and sends the DescribeDeploymentJob API request.
-func (r DescribeDeploymentJobRequest) Send() (*DescribeDeploymentJobOutput, error) {
+func (r DescribeDeploymentJobRequest) Send(ctx context.Context) (*DescribeDeploymentJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -788,7 +805,7 @@ func (r DescribeDeploymentJobRequest) Send() (*DescribeDeploymentJobOutput, erro
 //
 //    // Example sending a request using the DescribeDeploymentJobRequest method.
 //    req := client.DescribeDeploymentJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -822,7 +839,8 @@ type DescribeFleetRequest struct {
 }
 
 // Send marshals and sends the DescribeFleet API request.
-func (r DescribeFleetRequest) Send() (*DescribeFleetOutput, error) {
+func (r DescribeFleetRequest) Send(ctx context.Context) (*DescribeFleetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,7 +856,7 @@ func (r DescribeFleetRequest) Send() (*DescribeFleetOutput, error) {
 //
 //    // Example sending a request using the DescribeFleetRequest method.
 //    req := client.DescribeFleetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -872,7 +890,8 @@ type DescribeRobotRequest struct {
 }
 
 // Send marshals and sends the DescribeRobot API request.
-func (r DescribeRobotRequest) Send() (*DescribeRobotOutput, error) {
+func (r DescribeRobotRequest) Send(ctx context.Context) (*DescribeRobotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -888,7 +907,7 @@ func (r DescribeRobotRequest) Send() (*DescribeRobotOutput, error) {
 //
 //    // Example sending a request using the DescribeRobotRequest method.
 //    req := client.DescribeRobotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -922,7 +941,8 @@ type DescribeRobotApplicationRequest struct {
 }
 
 // Send marshals and sends the DescribeRobotApplication API request.
-func (r DescribeRobotApplicationRequest) Send() (*DescribeRobotApplicationOutput, error) {
+func (r DescribeRobotApplicationRequest) Send(ctx context.Context) (*DescribeRobotApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -938,7 +958,7 @@ func (r DescribeRobotApplicationRequest) Send() (*DescribeRobotApplicationOutput
 //
 //    // Example sending a request using the DescribeRobotApplicationRequest method.
 //    req := client.DescribeRobotApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -972,7 +992,8 @@ type DescribeSimulationApplicationRequest struct {
 }
 
 // Send marshals and sends the DescribeSimulationApplication API request.
-func (r DescribeSimulationApplicationRequest) Send() (*DescribeSimulationApplicationOutput, error) {
+func (r DescribeSimulationApplicationRequest) Send(ctx context.Context) (*DescribeSimulationApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -988,7 +1009,7 @@ func (r DescribeSimulationApplicationRequest) Send() (*DescribeSimulationApplica
 //
 //    // Example sending a request using the DescribeSimulationApplicationRequest method.
 //    req := client.DescribeSimulationApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1022,7 +1043,8 @@ type DescribeSimulationJobRequest struct {
 }
 
 // Send marshals and sends the DescribeSimulationJob API request.
-func (r DescribeSimulationJobRequest) Send() (*DescribeSimulationJobOutput, error) {
+func (r DescribeSimulationJobRequest) Send(ctx context.Context) (*DescribeSimulationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1038,7 +1060,7 @@ func (r DescribeSimulationJobRequest) Send() (*DescribeSimulationJobOutput, erro
 //
 //    // Example sending a request using the DescribeSimulationJobRequest method.
 //    req := client.DescribeSimulationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1072,7 +1094,8 @@ type ListDeploymentJobsRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentJobs API request.
-func (r ListDeploymentJobsRequest) Send() (*ListDeploymentJobsOutput, error) {
+func (r ListDeploymentJobsRequest) Send(ctx context.Context) (*ListDeploymentJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1089,7 +1112,7 @@ func (r ListDeploymentJobsRequest) Send() (*ListDeploymentJobsOutput, error) {
 //
 //    // Example sending a request using the ListDeploymentJobsRequest method.
 //    req := client.ListDeploymentJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1123,7 +1146,8 @@ type ListFleetsRequest struct {
 }
 
 // Send marshals and sends the ListFleets API request.
-func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
+func (r ListFleetsRequest) Send(ctx context.Context) (*ListFleetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1140,7 +1164,7 @@ func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
 //
 //    // Example sending a request using the ListFleetsRequest method.
 //    req := client.ListFleetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1174,7 +1198,8 @@ type ListRobotApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListRobotApplications API request.
-func (r ListRobotApplicationsRequest) Send() (*ListRobotApplicationsOutput, error) {
+func (r ListRobotApplicationsRequest) Send(ctx context.Context) (*ListRobotApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1191,7 +1216,7 @@ func (r ListRobotApplicationsRequest) Send() (*ListRobotApplicationsOutput, erro
 //
 //    // Example sending a request using the ListRobotApplicationsRequest method.
 //    req := client.ListRobotApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1225,7 +1250,8 @@ type ListRobotsRequest struct {
 }
 
 // Send marshals and sends the ListRobots API request.
-func (r ListRobotsRequest) Send() (*ListRobotsOutput, error) {
+func (r ListRobotsRequest) Send(ctx context.Context) (*ListRobotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1242,7 +1268,7 @@ func (r ListRobotsRequest) Send() (*ListRobotsOutput, error) {
 //
 //    // Example sending a request using the ListRobotsRequest method.
 //    req := client.ListRobotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1276,7 +1302,8 @@ type ListSimulationApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListSimulationApplications API request.
-func (r ListSimulationApplicationsRequest) Send() (*ListSimulationApplicationsOutput, error) {
+func (r ListSimulationApplicationsRequest) Send(ctx context.Context) (*ListSimulationApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1293,7 +1320,7 @@ func (r ListSimulationApplicationsRequest) Send() (*ListSimulationApplicationsOu
 //
 //    // Example sending a request using the ListSimulationApplicationsRequest method.
 //    req := client.ListSimulationApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1327,7 +1354,8 @@ type ListSimulationJobsRequest struct {
 }
 
 // Send marshals and sends the ListSimulationJobs API request.
-func (r ListSimulationJobsRequest) Send() (*ListSimulationJobsOutput, error) {
+func (r ListSimulationJobsRequest) Send(ctx context.Context) (*ListSimulationJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1344,7 +1372,7 @@ func (r ListSimulationJobsRequest) Send() (*ListSimulationJobsOutput, error) {
 //
 //    // Example sending a request using the ListSimulationJobsRequest method.
 //    req := client.ListSimulationJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1378,7 +1406,8 @@ type RegisterRobotRequest struct {
 }
 
 // Send marshals and sends the RegisterRobot API request.
-func (r RegisterRobotRequest) Send() (*RegisterRobotOutput, error) {
+func (r RegisterRobotRequest) Send(ctx context.Context) (*RegisterRobotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1394,7 +1423,7 @@ func (r RegisterRobotRequest) Send() (*RegisterRobotOutput, error) {
 //
 //    // Example sending a request using the RegisterRobotRequest method.
 //    req := client.RegisterRobotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1428,7 +1457,8 @@ type RestartSimulationJobRequest struct {
 }
 
 // Send marshals and sends the RestartSimulationJob API request.
-func (r RestartSimulationJobRequest) Send() (*RestartSimulationJobOutput, error) {
+func (r RestartSimulationJobRequest) Send(ctx context.Context) (*RestartSimulationJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1444,7 +1474,7 @@ func (r RestartSimulationJobRequest) Send() (*RestartSimulationJobOutput, error)
 //
 //    // Example sending a request using the RestartSimulationJobRequest method.
 //    req := client.RestartSimulationJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1478,7 +1508,8 @@ type SyncDeploymentJobRequest struct {
 }
 
 // Send marshals and sends the SyncDeploymentJob API request.
-func (r SyncDeploymentJobRequest) Send() (*SyncDeploymentJobOutput, error) {
+func (r SyncDeploymentJobRequest) Send(ctx context.Context) (*SyncDeploymentJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1495,7 +1526,7 @@ func (r SyncDeploymentJobRequest) Send() (*SyncDeploymentJobOutput, error) {
 //
 //    // Example sending a request using the SyncDeploymentJobRequest method.
 //    req := client.SyncDeploymentJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1529,7 +1560,8 @@ type UpdateRobotApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateRobotApplication API request.
-func (r UpdateRobotApplicationRequest) Send() (*UpdateRobotApplicationOutput, error) {
+func (r UpdateRobotApplicationRequest) Send(ctx context.Context) (*UpdateRobotApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1545,7 +1577,7 @@ func (r UpdateRobotApplicationRequest) Send() (*UpdateRobotApplicationOutput, er
 //
 //    // Example sending a request using the UpdateRobotApplicationRequest method.
 //    req := client.UpdateRobotApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1579,7 +1611,8 @@ type UpdateSimulationApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateSimulationApplication API request.
-func (r UpdateSimulationApplicationRequest) Send() (*UpdateSimulationApplicationOutput, error) {
+func (r UpdateSimulationApplicationRequest) Send(ctx context.Context) (*UpdateSimulationApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1595,7 +1628,7 @@ func (r UpdateSimulationApplicationRequest) Send() (*UpdateSimulationApplication
 //
 //    // Example sending a request using the UpdateSimulationApplicationRequest method.
 //    req := client.UpdateSimulationApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

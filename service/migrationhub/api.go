@@ -3,6 +3,7 @@
 package migrationhub
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AssociateCreatedArtifactRequest struct {
 }
 
 // Send marshals and sends the AssociateCreatedArtifact API request.
-func (r AssociateCreatedArtifactRequest) Send() (*AssociateCreatedArtifactOutput, error) {
+func (r AssociateCreatedArtifactRequest) Send(ctx context.Context) (*AssociateCreatedArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -48,7 +50,7 @@ func (r AssociateCreatedArtifactRequest) Send() (*AssociateCreatedArtifactOutput
 //
 //    // Example sending a request using the AssociateCreatedArtifactRequest method.
 //    req := client.AssociateCreatedArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -82,7 +84,8 @@ type AssociateDiscoveredResourceRequest struct {
 }
 
 // Send marshals and sends the AssociateDiscoveredResource API request.
-func (r AssociateDiscoveredResourceRequest) Send() (*AssociateDiscoveredResourceOutput, error) {
+func (r AssociateDiscoveredResourceRequest) Send(ctx context.Context) (*AssociateDiscoveredResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,7 +102,7 @@ func (r AssociateDiscoveredResourceRequest) Send() (*AssociateDiscoveredResource
 //
 //    // Example sending a request using the AssociateDiscoveredResourceRequest method.
 //    req := client.AssociateDiscoveredResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -133,7 +136,8 @@ type CreateProgressUpdateStreamRequest struct {
 }
 
 // Send marshals and sends the CreateProgressUpdateStream API request.
-func (r CreateProgressUpdateStreamRequest) Send() (*CreateProgressUpdateStreamOutput, error) {
+func (r CreateProgressUpdateStreamRequest) Send(ctx context.Context) (*CreateProgressUpdateStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -153,7 +157,7 @@ func (r CreateProgressUpdateStreamRequest) Send() (*CreateProgressUpdateStreamOu
 //
 //    // Example sending a request using the CreateProgressUpdateStreamRequest method.
 //    req := client.CreateProgressUpdateStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -187,7 +191,8 @@ type DeleteProgressUpdateStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteProgressUpdateStream API request.
-func (r DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOutput, error) {
+func (r DeleteProgressUpdateStreamRequest) Send(ctx context.Context) (*DeleteProgressUpdateStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -225,7 +230,7 @@ func (r DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOu
 //
 //    // Example sending a request using the DeleteProgressUpdateStreamRequest method.
 //    req := client.DeleteProgressUpdateStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -259,7 +264,8 @@ type DescribeApplicationStateRequest struct {
 }
 
 // Send marshals and sends the DescribeApplicationState API request.
-func (r DescribeApplicationStateRequest) Send() (*DescribeApplicationStateOutput, error) {
+func (r DescribeApplicationStateRequest) Send(ctx context.Context) (*DescribeApplicationStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -275,7 +281,7 @@ func (r DescribeApplicationStateRequest) Send() (*DescribeApplicationStateOutput
 //
 //    // Example sending a request using the DescribeApplicationStateRequest method.
 //    req := client.DescribeApplicationStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -309,7 +315,8 @@ type DescribeMigrationTaskRequest struct {
 }
 
 // Send marshals and sends the DescribeMigrationTask API request.
-func (r DescribeMigrationTaskRequest) Send() (*DescribeMigrationTaskOutput, error) {
+func (r DescribeMigrationTaskRequest) Send(ctx context.Context) (*DescribeMigrationTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -325,7 +332,7 @@ func (r DescribeMigrationTaskRequest) Send() (*DescribeMigrationTaskOutput, erro
 //
 //    // Example sending a request using the DescribeMigrationTaskRequest method.
 //    req := client.DescribeMigrationTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -359,7 +366,8 @@ type DisassociateCreatedArtifactRequest struct {
 }
 
 // Send marshals and sends the DisassociateCreatedArtifact API request.
-func (r DisassociateCreatedArtifactRequest) Send() (*DisassociateCreatedArtifactOutput, error) {
+func (r DisassociateCreatedArtifactRequest) Send(ctx context.Context) (*DisassociateCreatedArtifactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -387,7 +395,7 @@ func (r DisassociateCreatedArtifactRequest) Send() (*DisassociateCreatedArtifact
 //
 //    // Example sending a request using the DisassociateCreatedArtifactRequest method.
 //    req := client.DisassociateCreatedArtifactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -421,7 +429,8 @@ type DisassociateDiscoveredResourceRequest struct {
 }
 
 // Send marshals and sends the DisassociateDiscoveredResource API request.
-func (r DisassociateDiscoveredResourceRequest) Send() (*DisassociateDiscoveredResourceOutput, error) {
+func (r DisassociateDiscoveredResourceRequest) Send(ctx context.Context) (*DisassociateDiscoveredResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -438,7 +447,7 @@ func (r DisassociateDiscoveredResourceRequest) Send() (*DisassociateDiscoveredRe
 //
 //    // Example sending a request using the DisassociateDiscoveredResourceRequest method.
 //    req := client.DisassociateDiscoveredResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -472,7 +481,8 @@ type ImportMigrationTaskRequest struct {
 }
 
 // Send marshals and sends the ImportMigrationTask API request.
-func (r ImportMigrationTaskRequest) Send() (*ImportMigrationTaskOutput, error) {
+func (r ImportMigrationTaskRequest) Send(ctx context.Context) (*ImportMigrationTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,7 +503,7 @@ func (r ImportMigrationTaskRequest) Send() (*ImportMigrationTaskOutput, error) {
 //
 //    // Example sending a request using the ImportMigrationTaskRequest method.
 //    req := client.ImportMigrationTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -527,7 +537,8 @@ type ListCreatedArtifactsRequest struct {
 }
 
 // Send marshals and sends the ListCreatedArtifacts API request.
-func (r ListCreatedArtifactsRequest) Send() (*ListCreatedArtifactsOutput, error) {
+func (r ListCreatedArtifactsRequest) Send(ctx context.Context) (*ListCreatedArtifactsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -551,7 +562,7 @@ func (r ListCreatedArtifactsRequest) Send() (*ListCreatedArtifactsOutput, error)
 //
 //    // Example sending a request using the ListCreatedArtifactsRequest method.
 //    req := client.ListCreatedArtifactsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -585,7 +596,8 @@ type ListDiscoveredResourcesRequest struct {
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
-func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+func (r ListDiscoveredResourcesRequest) Send(ctx context.Context) (*ListDiscoveredResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -601,7 +613,7 @@ func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, 
 //
 //    // Example sending a request using the ListDiscoveredResourcesRequest method.
 //    req := client.ListDiscoveredResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -635,7 +647,8 @@ type ListMigrationTasksRequest struct {
 }
 
 // Send marshals and sends the ListMigrationTasks API request.
-func (r ListMigrationTasksRequest) Send() (*ListMigrationTasksOutput, error) {
+func (r ListMigrationTasksRequest) Send(ctx context.Context) (*ListMigrationTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -659,7 +672,7 @@ func (r ListMigrationTasksRequest) Send() (*ListMigrationTasksOutput, error) {
 //
 //    // Example sending a request using the ListMigrationTasksRequest method.
 //    req := client.ListMigrationTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -693,7 +706,8 @@ type ListProgressUpdateStreamsRequest struct {
 }
 
 // Send marshals and sends the ListProgressUpdateStreams API request.
-func (r ListProgressUpdateStreamsRequest) Send() (*ListProgressUpdateStreamsOutput, error) {
+func (r ListProgressUpdateStreamsRequest) Send(ctx context.Context) (*ListProgressUpdateStreamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,7 +724,7 @@ func (r ListProgressUpdateStreamsRequest) Send() (*ListProgressUpdateStreamsOutp
 //
 //    // Example sending a request using the ListProgressUpdateStreamsRequest method.
 //    req := client.ListProgressUpdateStreamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -744,7 +758,8 @@ type NotifyApplicationStateRequest struct {
 }
 
 // Send marshals and sends the NotifyApplicationState API request.
-func (r NotifyApplicationStateRequest) Send() (*NotifyApplicationStateOutput, error) {
+func (r NotifyApplicationStateRequest) Send(ctx context.Context) (*NotifyApplicationStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -762,7 +777,7 @@ func (r NotifyApplicationStateRequest) Send() (*NotifyApplicationStateOutput, er
 //
 //    // Example sending a request using the NotifyApplicationStateRequest method.
 //    req := client.NotifyApplicationStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +811,8 @@ type NotifyMigrationTaskStateRequest struct {
 }
 
 // Send marshals and sends the NotifyMigrationTaskState API request.
-func (r NotifyMigrationTaskStateRequest) Send() (*NotifyMigrationTaskStateOutput, error) {
+func (r NotifyMigrationTaskStateRequest) Send(ctx context.Context) (*NotifyMigrationTaskStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -821,7 +837,7 @@ func (r NotifyMigrationTaskStateRequest) Send() (*NotifyMigrationTaskStateOutput
 //
 //    // Example sending a request using the NotifyMigrationTaskStateRequest method.
 //    req := client.NotifyMigrationTaskStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -855,7 +871,8 @@ type PutResourceAttributesRequest struct {
 }
 
 // Send marshals and sends the PutResourceAttributes API request.
-func (r PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, error) {
+func (r PutResourceAttributesRequest) Send(ctx context.Context) (*PutResourceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -887,7 +904,7 @@ func (r PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, erro
 //
 //    // Example sending a request using the PutResourceAttributesRequest method.
 //    req := client.PutResourceAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

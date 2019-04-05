@@ -3,6 +3,7 @@
 package mediapackage
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CreateChannelRequest struct {
 }
 
 // Send marshals and sends the CreateChannel API request.
-func (r CreateChannelRequest) Send() (*CreateChannelOutput, error) {
+func (r CreateChannelRequest) Send(ctx context.Context) (*CreateChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateChannelRequest) Send() (*CreateChannelOutput, error) {
 //
 //    // Example sending a request using the CreateChannelRequest method.
 //    req := client.CreateChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type CreateOriginEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateOriginEndpoint API request.
-func (r CreateOriginEndpointRequest) Send() (*CreateOriginEndpointOutput, error) {
+func (r CreateOriginEndpointRequest) Send(ctx context.Context) (*CreateOriginEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r CreateOriginEndpointRequest) Send() (*CreateOriginEndpointOutput, error)
 //
 //    // Example sending a request using the CreateOriginEndpointRequest method.
 //    req := client.CreateOriginEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type DeleteChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteChannel API request.
-func (r DeleteChannelRequest) Send() (*DeleteChannelOutput, error) {
+func (r DeleteChannelRequest) Send(ctx context.Context) (*DeleteChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ func (r DeleteChannelRequest) Send() (*DeleteChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteChannelRequest method.
 //    req := client.DeleteChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type DeleteOriginEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteOriginEndpoint API request.
-func (r DeleteOriginEndpointRequest) Send() (*DeleteOriginEndpointOutput, error) {
+func (r DeleteOriginEndpointRequest) Send(ctx context.Context) (*DeleteOriginEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -186,7 +191,7 @@ func (r DeleteOriginEndpointRequest) Send() (*DeleteOriginEndpointOutput, error)
 //
 //    // Example sending a request using the DeleteOriginEndpointRequest method.
 //    req := client.DeleteOriginEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -220,7 +225,8 @@ type DescribeChannelRequest struct {
 }
 
 // Send marshals and sends the DescribeChannel API request.
-func (r DescribeChannelRequest) Send() (*DescribeChannelOutput, error) {
+func (r DescribeChannelRequest) Send(ctx context.Context) (*DescribeChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,7 +242,7 @@ func (r DescribeChannelRequest) Send() (*DescribeChannelOutput, error) {
 //
 //    // Example sending a request using the DescribeChannelRequest method.
 //    req := client.DescribeChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -270,7 +276,8 @@ type DescribeOriginEndpointRequest struct {
 }
 
 // Send marshals and sends the DescribeOriginEndpoint API request.
-func (r DescribeOriginEndpointRequest) Send() (*DescribeOriginEndpointOutput, error) {
+func (r DescribeOriginEndpointRequest) Send(ctx context.Context) (*DescribeOriginEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +293,7 @@ func (r DescribeOriginEndpointRequest) Send() (*DescribeOriginEndpointOutput, er
 //
 //    // Example sending a request using the DescribeOriginEndpointRequest method.
 //    req := client.DescribeOriginEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -320,7 +327,8 @@ type ListChannelsRequest struct {
 }
 
 // Send marshals and sends the ListChannels API request.
-func (r ListChannelsRequest) Send() (*ListChannelsOutput, error) {
+func (r ListChannelsRequest) Send(ctx context.Context) (*ListChannelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -336,7 +344,7 @@ func (r ListChannelsRequest) Send() (*ListChannelsOutput, error) {
 //
 //    // Example sending a request using the ListChannelsRequest method.
 //    req := client.ListChannelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -386,7 +394,7 @@ func (c *MediaPackage) ListChannelsRequest(input *ListChannelsInput) ListChannel
 func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 	return ListChannelsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListChannelsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -395,6 +403,7 @@ func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -422,7 +431,8 @@ type ListOriginEndpointsRequest struct {
 }
 
 // Send marshals and sends the ListOriginEndpoints API request.
-func (r ListOriginEndpointsRequest) Send() (*ListOriginEndpointsOutput, error) {
+func (r ListOriginEndpointsRequest) Send(ctx context.Context) (*ListOriginEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -438,7 +448,7 @@ func (r ListOriginEndpointsRequest) Send() (*ListOriginEndpointsOutput, error) {
 //
 //    // Example sending a request using the ListOriginEndpointsRequest method.
 //    req := client.ListOriginEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -488,7 +498,7 @@ func (c *MediaPackage) ListOriginEndpointsRequest(input *ListOriginEndpointsInpu
 func (p *ListOriginEndpointsRequest) Paginate(opts ...aws.Option) ListOriginEndpointsPager {
 	return ListOriginEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOriginEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -497,6 +507,7 @@ func (p *ListOriginEndpointsRequest) Paginate(opts ...aws.Option) ListOriginEndp
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -524,7 +535,8 @@ type RotateChannelCredentialsRequest struct {
 }
 
 // Send marshals and sends the RotateChannelCredentials API request.
-func (r RotateChannelCredentialsRequest) Send() (*RotateChannelCredentialsOutput, error) {
+func (r RotateChannelCredentialsRequest) Send(ctx context.Context) (*RotateChannelCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -541,7 +553,7 @@ func (r RotateChannelCredentialsRequest) Send() (*RotateChannelCredentialsOutput
 //
 //    // Example sending a request using the RotateChannelCredentialsRequest method.
 //    req := client.RotateChannelCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -578,7 +590,8 @@ type RotateIngestEndpointCredentialsRequest struct {
 }
 
 // Send marshals and sends the RotateIngestEndpointCredentials API request.
-func (r RotateIngestEndpointCredentialsRequest) Send() (*RotateIngestEndpointCredentialsOutput, error) {
+func (r RotateIngestEndpointCredentialsRequest) Send(ctx context.Context) (*RotateIngestEndpointCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -595,7 +608,7 @@ func (r RotateIngestEndpointCredentialsRequest) Send() (*RotateIngestEndpointCre
 //
 //    // Example sending a request using the RotateIngestEndpointCredentialsRequest method.
 //    req := client.RotateIngestEndpointCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -629,7 +642,8 @@ type UpdateChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateChannel API request.
-func (r UpdateChannelRequest) Send() (*UpdateChannelOutput, error) {
+func (r UpdateChannelRequest) Send(ctx context.Context) (*UpdateChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,7 +659,7 @@ func (r UpdateChannelRequest) Send() (*UpdateChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateChannelRequest method.
 //    req := client.UpdateChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -679,7 +693,8 @@ type UpdateOriginEndpointRequest struct {
 }
 
 // Send marshals and sends the UpdateOriginEndpoint API request.
-func (r UpdateOriginEndpointRequest) Send() (*UpdateOriginEndpointOutput, error) {
+func (r UpdateOriginEndpointRequest) Send(ctx context.Context) (*UpdateOriginEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -695,7 +710,7 @@ func (r UpdateOriginEndpointRequest) Send() (*UpdateOriginEndpointOutput, error)
 //
 //    // Example sending a request using the UpdateOriginEndpointRequest method.
 //    req := client.UpdateOriginEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

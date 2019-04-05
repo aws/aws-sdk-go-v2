@@ -3,6 +3,7 @@
 package ecr
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type BatchCheckLayerAvailabilityRequest struct {
 }
 
 // Send marshals and sends the BatchCheckLayerAvailability API request.
-func (r BatchCheckLayerAvailabilityRequest) Send() (*BatchCheckLayerAvailabilityOutput, error) {
+func (r BatchCheckLayerAvailabilityRequest) Send(ctx context.Context) (*BatchCheckLayerAvailabilityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r BatchCheckLayerAvailabilityRequest) Send() (*BatchCheckLayerAvailability
 //
 //    // Example sending a request using the BatchCheckLayerAvailabilityRequest method.
 //    req := client.BatchCheckLayerAvailabilityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -74,7 +76,8 @@ type BatchDeleteImageRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteImage API request.
-func (r BatchDeleteImageRequest) Send() (*BatchDeleteImageOutput, error) {
+func (r BatchDeleteImageRequest) Send(ctx context.Context) (*BatchDeleteImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -98,7 +101,7 @@ func (r BatchDeleteImageRequest) Send() (*BatchDeleteImageOutput, error) {
 //
 //    // Example sending a request using the BatchDeleteImageRequest method.
 //    req := client.BatchDeleteImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -132,7 +135,8 @@ type BatchGetImageRequest struct {
 }
 
 // Send marshals and sends the BatchGetImage API request.
-func (r BatchGetImageRequest) Send() (*BatchGetImageOutput, error) {
+func (r BatchGetImageRequest) Send(ctx context.Context) (*BatchGetImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -149,7 +153,7 @@ func (r BatchGetImageRequest) Send() (*BatchGetImageOutput, error) {
 //
 //    // Example sending a request using the BatchGetImageRequest method.
 //    req := client.BatchGetImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -183,7 +187,8 @@ type CompleteLayerUploadRequest struct {
 }
 
 // Send marshals and sends the CompleteLayerUpload API request.
-func (r CompleteLayerUploadRequest) Send() (*CompleteLayerUploadOutput, error) {
+func (r CompleteLayerUploadRequest) Send(ctx context.Context) (*CompleteLayerUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -205,7 +210,7 @@ func (r CompleteLayerUploadRequest) Send() (*CompleteLayerUploadOutput, error) {
 //
 //    // Example sending a request using the CompleteLayerUploadRequest method.
 //    req := client.CompleteLayerUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -239,7 +244,8 @@ type CreateRepositoryRequest struct {
 }
 
 // Send marshals and sends the CreateRepository API request.
-func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
+func (r CreateRepositoryRequest) Send(ctx context.Context) (*CreateRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -255,7 +261,7 @@ func (r CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
 //
 //    // Example sending a request using the CreateRepositoryRequest method.
 //    req := client.CreateRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -289,7 +295,8 @@ type DeleteLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
-func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, error) {
+func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -305,7 +312,7 @@ func (r DeleteLifecyclePolicyRequest) Send() (*DeleteLifecyclePolicyOutput, erro
 //
 //    // Example sending a request using the DeleteLifecyclePolicyRequest method.
 //    req := client.DeleteLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -339,7 +346,8 @@ type DeleteRepositoryRequest struct {
 }
 
 // Send marshals and sends the DeleteRepository API request.
-func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
+func (r DeleteRepositoryRequest) Send(ctx context.Context) (*DeleteRepositoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,7 +364,7 @@ func (r DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
 //
 //    // Example sending a request using the DeleteRepositoryRequest method.
 //    req := client.DeleteRepositoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -390,7 +398,8 @@ type DeleteRepositoryPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteRepositoryPolicy API request.
-func (r DeleteRepositoryPolicyRequest) Send() (*DeleteRepositoryPolicyOutput, error) {
+func (r DeleteRepositoryPolicyRequest) Send(ctx context.Context) (*DeleteRepositoryPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,7 +415,7 @@ func (r DeleteRepositoryPolicyRequest) Send() (*DeleteRepositoryPolicyOutput, er
 //
 //    // Example sending a request using the DeleteRepositoryPolicyRequest method.
 //    req := client.DeleteRepositoryPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -440,7 +449,8 @@ type DescribeImagesRequest struct {
 }
 
 // Send marshals and sends the DescribeImages API request.
-func (r DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
+func (r DescribeImagesRequest) Send(ctx context.Context) (*DescribeImagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,7 +472,7 @@ func (r DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
 //
 //    // Example sending a request using the DescribeImagesRequest method.
 //    req := client.DescribeImagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -512,7 +522,7 @@ func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager {
 	return DescribeImagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeImagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -521,6 +531,7 @@ func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -548,7 +559,8 @@ type DescribeRepositoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeRepositories API request.
-func (r DescribeRepositoriesRequest) Send() (*DescribeRepositoriesOutput, error) {
+func (r DescribeRepositoriesRequest) Send(ctx context.Context) (*DescribeRepositoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -564,7 +576,7 @@ func (r DescribeRepositoriesRequest) Send() (*DescribeRepositoriesOutput, error)
 //
 //    // Example sending a request using the DescribeRepositoriesRequest method.
 //    req := client.DescribeRepositoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -614,7 +626,7 @@ func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) Desc
 func (p *DescribeRepositoriesRequest) Paginate(opts ...aws.Option) DescribeRepositoriesPager {
 	return DescribeRepositoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeRepositoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -623,6 +635,7 @@ func (p *DescribeRepositoriesRequest) Paginate(opts ...aws.Option) DescribeRepos
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -650,7 +663,8 @@ type GetAuthorizationTokenRequest struct {
 }
 
 // Send marshals and sends the GetAuthorizationToken API request.
-func (r GetAuthorizationTokenRequest) Send() (*GetAuthorizationTokenOutput, error) {
+func (r GetAuthorizationTokenRequest) Send(ctx context.Context) (*GetAuthorizationTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -673,7 +687,7 @@ func (r GetAuthorizationTokenRequest) Send() (*GetAuthorizationTokenOutput, erro
 //
 //    // Example sending a request using the GetAuthorizationTokenRequest method.
 //    req := client.GetAuthorizationTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -707,7 +721,8 @@ type GetDownloadUrlForLayerRequest struct {
 }
 
 // Send marshals and sends the GetDownloadUrlForLayer API request.
-func (r GetDownloadUrlForLayerRequest) Send() (*GetDownloadUrlForLayerOutput, error) {
+func (r GetDownloadUrlForLayerRequest) Send(ctx context.Context) (*GetDownloadUrlForLayerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -728,7 +743,7 @@ func (r GetDownloadUrlForLayerRequest) Send() (*GetDownloadUrlForLayerOutput, er
 //
 //    // Example sending a request using the GetDownloadUrlForLayerRequest method.
 //    req := client.GetDownloadUrlForLayerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -762,7 +777,8 @@ type GetLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the GetLifecyclePolicy API request.
-func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
+func (r GetLifecyclePolicyRequest) Send(ctx context.Context) (*GetLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -778,7 +794,7 @@ func (r GetLifecyclePolicyRequest) Send() (*GetLifecyclePolicyOutput, error) {
 //
 //    // Example sending a request using the GetLifecyclePolicyRequest method.
 //    req := client.GetLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -812,7 +828,8 @@ type GetLifecyclePolicyPreviewRequest struct {
 }
 
 // Send marshals and sends the GetLifecyclePolicyPreview API request.
-func (r GetLifecyclePolicyPreviewRequest) Send() (*GetLifecyclePolicyPreviewOutput, error) {
+func (r GetLifecyclePolicyPreviewRequest) Send(ctx context.Context) (*GetLifecyclePolicyPreviewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -828,7 +845,7 @@ func (r GetLifecyclePolicyPreviewRequest) Send() (*GetLifecyclePolicyPreviewOutp
 //
 //    // Example sending a request using the GetLifecyclePolicyPreviewRequest method.
 //    req := client.GetLifecyclePolicyPreviewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -862,7 +879,8 @@ type GetRepositoryPolicyRequest struct {
 }
 
 // Send marshals and sends the GetRepositoryPolicy API request.
-func (r GetRepositoryPolicyRequest) Send() (*GetRepositoryPolicyOutput, error) {
+func (r GetRepositoryPolicyRequest) Send(ctx context.Context) (*GetRepositoryPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -878,7 +896,7 @@ func (r GetRepositoryPolicyRequest) Send() (*GetRepositoryPolicyOutput, error) {
 //
 //    // Example sending a request using the GetRepositoryPolicyRequest method.
 //    req := client.GetRepositoryPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -912,7 +930,8 @@ type InitiateLayerUploadRequest struct {
 }
 
 // Send marshals and sends the InitiateLayerUpload API request.
-func (r InitiateLayerUploadRequest) Send() (*InitiateLayerUploadOutput, error) {
+func (r InitiateLayerUploadRequest) Send(ctx context.Context) (*InitiateLayerUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -932,7 +951,7 @@ func (r InitiateLayerUploadRequest) Send() (*InitiateLayerUploadOutput, error) {
 //
 //    // Example sending a request using the InitiateLayerUploadRequest method.
 //    req := client.InitiateLayerUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -966,7 +985,8 @@ type ListImagesRequest struct {
 }
 
 // Send marshals and sends the ListImages API request.
-func (r ListImagesRequest) Send() (*ListImagesOutput, error) {
+func (r ListImagesRequest) Send(ctx context.Context) (*ListImagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -988,7 +1008,7 @@ func (r ListImagesRequest) Send() (*ListImagesOutput, error) {
 //
 //    // Example sending a request using the ListImagesRequest method.
 //    req := client.ListImagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1038,7 +1058,7 @@ func (c *ECR) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 func (p *ListImagesRequest) Paginate(opts ...aws.Option) ListImagesPager {
 	return ListImagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListImagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1047,6 +1067,7 @@ func (p *ListImagesRequest) Paginate(opts ...aws.Option) ListImagesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1074,7 +1095,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1090,7 +1112,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1124,7 +1146,8 @@ type PutImageRequest struct {
 }
 
 // Send marshals and sends the PutImage API request.
-func (r PutImageRequest) Send() (*PutImageOutput, error) {
+func (r PutImageRequest) Send(ctx context.Context) (*PutImageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1144,7 +1167,7 @@ func (r PutImageRequest) Send() (*PutImageOutput, error) {
 //
 //    // Example sending a request using the PutImageRequest method.
 //    req := client.PutImageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1178,7 +1201,8 @@ type PutLifecyclePolicyRequest struct {
 }
 
 // Send marshals and sends the PutLifecyclePolicy API request.
-func (r PutLifecyclePolicyRequest) Send() (*PutLifecyclePolicyOutput, error) {
+func (r PutLifecyclePolicyRequest) Send(ctx context.Context) (*PutLifecyclePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1195,7 +1219,7 @@ func (r PutLifecyclePolicyRequest) Send() (*PutLifecyclePolicyOutput, error) {
 //
 //    // Example sending a request using the PutLifecyclePolicyRequest method.
 //    req := client.PutLifecyclePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1229,7 +1253,8 @@ type SetRepositoryPolicyRequest struct {
 }
 
 // Send marshals and sends the SetRepositoryPolicy API request.
-func (r SetRepositoryPolicyRequest) Send() (*SetRepositoryPolicyOutput, error) {
+func (r SetRepositoryPolicyRequest) Send(ctx context.Context) (*SetRepositoryPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1245,7 +1270,7 @@ func (r SetRepositoryPolicyRequest) Send() (*SetRepositoryPolicyOutput, error) {
 //
 //    // Example sending a request using the SetRepositoryPolicyRequest method.
 //    req := client.SetRepositoryPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1279,7 +1304,8 @@ type StartLifecyclePolicyPreviewRequest struct {
 }
 
 // Send marshals and sends the StartLifecyclePolicyPreview API request.
-func (r StartLifecyclePolicyPreviewRequest) Send() (*StartLifecyclePolicyPreviewOutput, error) {
+func (r StartLifecyclePolicyPreviewRequest) Send(ctx context.Context) (*StartLifecyclePolicyPreviewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1296,7 +1322,7 @@ func (r StartLifecyclePolicyPreviewRequest) Send() (*StartLifecyclePolicyPreview
 //
 //    // Example sending a request using the StartLifecyclePolicyPreviewRequest method.
 //    req := client.StartLifecyclePolicyPreviewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1330,7 +1356,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1347,7 +1374,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1381,7 +1408,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1397,7 +1425,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1431,7 +1459,8 @@ type UploadLayerPartRequest struct {
 }
 
 // Send marshals and sends the UploadLayerPart API request.
-func (r UploadLayerPartRequest) Send() (*UploadLayerPartOutput, error) {
+func (r UploadLayerPartRequest) Send(ctx context.Context) (*UploadLayerPartOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1451,7 +1480,7 @@ func (r UploadLayerPartRequest) Send() (*UploadLayerPartOutput, error) {
 //
 //    // Example sending a request using the UploadLayerPartRequest method.
 //    req := client.UploadLayerPartRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

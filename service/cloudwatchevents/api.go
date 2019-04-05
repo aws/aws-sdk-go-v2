@@ -3,6 +3,7 @@
 package cloudwatchevents
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type DeleteRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteRule API request.
-func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+func (r DeleteRuleRequest) Send(ctx context.Context) (*DeleteRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -49,7 +51,7 @@ func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteRuleRequest method.
 //    req := client.DeleteRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -85,7 +87,8 @@ type DescribeEventBusRequest struct {
 }
 
 // Send marshals and sends the DescribeEventBus API request.
-func (r DescribeEventBusRequest) Send() (*DescribeEventBusOutput, error) {
+func (r DescribeEventBusRequest) Send(ctx context.Context) (*DescribeEventBusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -103,7 +106,7 @@ func (r DescribeEventBusRequest) Send() (*DescribeEventBusOutput, error) {
 //
 //    // Example sending a request using the DescribeEventBusRequest method.
 //    req := client.DescribeEventBusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -137,7 +140,8 @@ type DescribeRuleRequest struct {
 }
 
 // Send marshals and sends the DescribeRule API request.
-func (r DescribeRuleRequest) Send() (*DescribeRuleOutput, error) {
+func (r DescribeRuleRequest) Send(ctx context.Context) (*DescribeRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +160,7 @@ func (r DescribeRuleRequest) Send() (*DescribeRuleOutput, error) {
 //
 //    // Example sending a request using the DescribeRuleRequest method.
 //    req := client.DescribeRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -190,7 +194,8 @@ type DisableRuleRequest struct {
 }
 
 // Send marshals and sends the DisableRule API request.
-func (r DisableRuleRequest) Send() (*DisableRuleOutput, error) {
+func (r DisableRuleRequest) Send(ctx context.Context) (*DisableRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -210,7 +215,7 @@ func (r DisableRuleRequest) Send() (*DisableRuleOutput, error) {
 //
 //    // Example sending a request using the DisableRuleRequest method.
 //    req := client.DisableRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -246,7 +251,8 @@ type EnableRuleRequest struct {
 }
 
 // Send marshals and sends the EnableRule API request.
-func (r EnableRuleRequest) Send() (*EnableRuleOutput, error) {
+func (r EnableRuleRequest) Send(ctx context.Context) (*EnableRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,7 +272,7 @@ func (r EnableRuleRequest) Send() (*EnableRuleOutput, error) {
 //
 //    // Example sending a request using the EnableRuleRequest method.
 //    req := client.EnableRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -302,7 +308,8 @@ type ListRuleNamesByTargetRequest struct {
 }
 
 // Send marshals and sends the ListRuleNamesByTarget API request.
-func (r ListRuleNamesByTargetRequest) Send() (*ListRuleNamesByTargetOutput, error) {
+func (r ListRuleNamesByTargetRequest) Send(ctx context.Context) (*ListRuleNamesByTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -319,7 +326,7 @@ func (r ListRuleNamesByTargetRequest) Send() (*ListRuleNamesByTargetOutput, erro
 //
 //    // Example sending a request using the ListRuleNamesByTargetRequest method.
 //    req := client.ListRuleNamesByTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -353,7 +360,8 @@ type ListRulesRequest struct {
 }
 
 // Send marshals and sends the ListRules API request.
-func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
+func (r ListRulesRequest) Send(ctx context.Context) (*ListRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -373,7 +381,7 @@ func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
 //
 //    // Example sending a request using the ListRulesRequest method.
 //    req := client.ListRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -407,7 +415,8 @@ type ListTargetsByRuleRequest struct {
 }
 
 // Send marshals and sends the ListTargetsByRule API request.
-func (r ListTargetsByRuleRequest) Send() (*ListTargetsByRuleOutput, error) {
+func (r ListTargetsByRuleRequest) Send(ctx context.Context) (*ListTargetsByRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -423,7 +432,7 @@ func (r ListTargetsByRuleRequest) Send() (*ListTargetsByRuleOutput, error) {
 //
 //    // Example sending a request using the ListTargetsByRuleRequest method.
 //    req := client.ListTargetsByRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -457,7 +466,8 @@ type PutEventsRequest struct {
 }
 
 // Send marshals and sends the PutEvents API request.
-func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
+func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +484,7 @@ func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
 //
 //    // Example sending a request using the PutEventsRequest method.
 //    req := client.PutEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -508,7 +518,8 @@ type PutPermissionRequest struct {
 }
 
 // Send marshals and sends the PutPermission API request.
-func (r PutPermissionRequest) Send() (*PutPermissionOutput, error) {
+func (r PutPermissionRequest) Send(ctx context.Context) (*PutPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -545,7 +556,7 @@ func (r PutPermissionRequest) Send() (*PutPermissionOutput, error) {
 //
 //    // Example sending a request using the PutPermissionRequest method.
 //    req := client.PutPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +592,8 @@ type PutRuleRequest struct {
 }
 
 // Send marshals and sends the PutRule API request.
-func (r PutRuleRequest) Send() (*PutRuleOutput, error) {
+func (r PutRuleRequest) Send(ctx context.Context) (*PutRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,7 +644,7 @@ func (r PutRuleRequest) Send() (*PutRuleOutput, error) {
 //
 //    // Example sending a request using the PutRuleRequest method.
 //    req := client.PutRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -666,7 +678,8 @@ type PutTargetsRequest struct {
 }
 
 // Send marshals and sends the PutTargets API request.
-func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
+func (r PutTargetsRequest) Send(ctx context.Context) (*PutTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -784,7 +797,7 @@ func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
 //
 //    // Example sending a request using the PutTargetsRequest method.
 //    req := client.PutTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -818,7 +831,8 @@ type RemovePermissionRequest struct {
 }
 
 // Send marshals and sends the RemovePermission API request.
-func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+func (r RemovePermissionRequest) Send(ctx context.Context) (*RemovePermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -837,7 +851,7 @@ func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
 //
 //    // Example sending a request using the RemovePermissionRequest method.
 //    req := client.RemovePermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -873,7 +887,8 @@ type RemoveTargetsRequest struct {
 }
 
 // Send marshals and sends the RemoveTargets API request.
-func (r RemoveTargetsRequest) Send() (*RemoveTargetsOutput, error) {
+func (r RemoveTargetsRequest) Send(ctx context.Context) (*RemoveTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -899,7 +914,7 @@ func (r RemoveTargetsRequest) Send() (*RemoveTargetsOutput, error) {
 //
 //    // Example sending a request using the RemoveTargetsRequest method.
 //    req := client.RemoveTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -933,7 +948,8 @@ type TestEventPatternRequest struct {
 }
 
 // Send marshals and sends the TestEventPattern API request.
-func (r TestEventPatternRequest) Send() (*TestEventPatternOutput, error) {
+func (r TestEventPatternRequest) Send(ctx context.Context) (*TestEventPatternOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,7 +970,7 @@ func (r TestEventPatternRequest) Send() (*TestEventPatternOutput, error) {
 //
 //    // Example sending a request using the TestEventPatternRequest method.
 //    req := client.TestEventPatternRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

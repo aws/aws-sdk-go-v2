@@ -3,6 +3,7 @@
 package codebuild
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type BatchDeleteBuildsRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteBuilds API request.
-func (r BatchDeleteBuildsRequest) Send() (*BatchDeleteBuildsOutput, error) {
+func (r BatchDeleteBuildsRequest) Send(ctx context.Context) (*BatchDeleteBuildsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r BatchDeleteBuildsRequest) Send() (*BatchDeleteBuildsOutput, error) {
 //
 //    // Example sending a request using the BatchDeleteBuildsRequest method.
 //    req := client.BatchDeleteBuildsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type BatchGetBuildsRequest struct {
 }
 
 // Send marshals and sends the BatchGetBuilds API request.
-func (r BatchGetBuildsRequest) Send() (*BatchGetBuildsOutput, error) {
+func (r BatchGetBuildsRequest) Send(ctx context.Context) (*BatchGetBuildsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r BatchGetBuildsRequest) Send() (*BatchGetBuildsOutput, error) {
 //
 //    // Example sending a request using the BatchGetBuildsRequest method.
 //    req := client.BatchGetBuildsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type BatchGetProjectsRequest struct {
 }
 
 // Send marshals and sends the BatchGetProjects API request.
-func (r BatchGetProjectsRequest) Send() (*BatchGetProjectsOutput, error) {
+func (r BatchGetProjectsRequest) Send(ctx context.Context) (*BatchGetProjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ func (r BatchGetProjectsRequest) Send() (*BatchGetProjectsOutput, error) {
 //
 //    // Example sending a request using the BatchGetProjectsRequest method.
 //    req := client.BatchGetProjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -186,7 +191,7 @@ func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 //
 //    // Example sending a request using the CreateProjectRequest method.
 //    req := client.CreateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -220,7 +225,8 @@ type CreateWebhookRequest struct {
 }
 
 // Send marshals and sends the CreateWebhook API request.
-func (r CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
+func (r CreateWebhookRequest) Send(ctx context.Context) (*CreateWebhookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -247,7 +253,7 @@ func (r CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
 //
 //    // Example sending a request using the CreateWebhookRequest method.
 //    req := client.CreateWebhookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -281,7 +287,8 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,7 +304,7 @@ func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 //
 //    // Example sending a request using the DeleteProjectRequest method.
 //    req := client.DeleteProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -331,7 +338,8 @@ type DeleteSourceCredentialsRequest struct {
 }
 
 // Send marshals and sends the DeleteSourceCredentials API request.
-func (r DeleteSourceCredentialsRequest) Send() (*DeleteSourceCredentialsOutput, error) {
+func (r DeleteSourceCredentialsRequest) Send(ctx context.Context) (*DeleteSourceCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +355,7 @@ func (r DeleteSourceCredentialsRequest) Send() (*DeleteSourceCredentialsOutput, 
 //
 //    // Example sending a request using the DeleteSourceCredentialsRequest method.
 //    req := client.DeleteSourceCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -381,7 +389,8 @@ type DeleteWebhookRequest struct {
 }
 
 // Send marshals and sends the DeleteWebhook API request.
-func (r DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
+func (r DeleteWebhookRequest) Send(ctx context.Context) (*DeleteWebhookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,7 +408,7 @@ func (r DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
 //
 //    // Example sending a request using the DeleteWebhookRequest method.
 //    req := client.DeleteWebhookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -433,7 +442,8 @@ type ImportSourceCredentialsRequest struct {
 }
 
 // Send marshals and sends the ImportSourceCredentials API request.
-func (r ImportSourceCredentialsRequest) Send() (*ImportSourceCredentialsOutput, error) {
+func (r ImportSourceCredentialsRequest) Send(ctx context.Context) (*ImportSourceCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +460,7 @@ func (r ImportSourceCredentialsRequest) Send() (*ImportSourceCredentialsOutput, 
 //
 //    // Example sending a request using the ImportSourceCredentialsRequest method.
 //    req := client.ImportSourceCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -484,7 +494,8 @@ type InvalidateProjectCacheRequest struct {
 }
 
 // Send marshals and sends the InvalidateProjectCache API request.
-func (r InvalidateProjectCacheRequest) Send() (*InvalidateProjectCacheOutput, error) {
+func (r InvalidateProjectCacheRequest) Send(ctx context.Context) (*InvalidateProjectCacheOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -500,7 +511,7 @@ func (r InvalidateProjectCacheRequest) Send() (*InvalidateProjectCacheOutput, er
 //
 //    // Example sending a request using the InvalidateProjectCacheRequest method.
 //    req := client.InvalidateProjectCacheRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -534,7 +545,8 @@ type ListBuildsRequest struct {
 }
 
 // Send marshals and sends the ListBuilds API request.
-func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
+func (r ListBuildsRequest) Send(ctx context.Context) (*ListBuildsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -550,7 +562,7 @@ func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
 //
 //    // Example sending a request using the ListBuildsRequest method.
 //    req := client.ListBuildsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -584,7 +596,8 @@ type ListBuildsForProjectRequest struct {
 }
 
 // Send marshals and sends the ListBuildsForProject API request.
-func (r ListBuildsForProjectRequest) Send() (*ListBuildsForProjectOutput, error) {
+func (r ListBuildsForProjectRequest) Send(ctx context.Context) (*ListBuildsForProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -601,7 +614,7 @@ func (r ListBuildsForProjectRequest) Send() (*ListBuildsForProjectOutput, error)
 //
 //    // Example sending a request using the ListBuildsForProjectRequest method.
 //    req := client.ListBuildsForProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -635,7 +648,8 @@ type ListCuratedEnvironmentImagesRequest struct {
 }
 
 // Send marshals and sends the ListCuratedEnvironmentImages API request.
-func (r ListCuratedEnvironmentImagesRequest) Send() (*ListCuratedEnvironmentImagesOutput, error) {
+func (r ListCuratedEnvironmentImagesRequest) Send(ctx context.Context) (*ListCuratedEnvironmentImagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,7 +665,7 @@ func (r ListCuratedEnvironmentImagesRequest) Send() (*ListCuratedEnvironmentImag
 //
 //    // Example sending a request using the ListCuratedEnvironmentImagesRequest method.
 //    req := client.ListCuratedEnvironmentImagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -685,7 +699,8 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -702,7 +717,7 @@ func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 //
 //    // Example sending a request using the ListProjectsRequest method.
 //    req := client.ListProjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -736,7 +751,8 @@ type ListSourceCredentialsRequest struct {
 }
 
 // Send marshals and sends the ListSourceCredentials API request.
-func (r ListSourceCredentialsRequest) Send() (*ListSourceCredentialsOutput, error) {
+func (r ListSourceCredentialsRequest) Send(ctx context.Context) (*ListSourceCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -752,7 +768,7 @@ func (r ListSourceCredentialsRequest) Send() (*ListSourceCredentialsOutput, erro
 //
 //    // Example sending a request using the ListSourceCredentialsRequest method.
 //    req := client.ListSourceCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -786,7 +802,8 @@ type StartBuildRequest struct {
 }
 
 // Send marshals and sends the StartBuild API request.
-func (r StartBuildRequest) Send() (*StartBuildOutput, error) {
+func (r StartBuildRequest) Send(ctx context.Context) (*StartBuildOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -802,7 +819,7 @@ func (r StartBuildRequest) Send() (*StartBuildOutput, error) {
 //
 //    // Example sending a request using the StartBuildRequest method.
 //    req := client.StartBuildRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -836,7 +853,8 @@ type StopBuildRequest struct {
 }
 
 // Send marshals and sends the StopBuild API request.
-func (r StopBuildRequest) Send() (*StopBuildOutput, error) {
+func (r StopBuildRequest) Send(ctx context.Context) (*StopBuildOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -852,7 +870,7 @@ func (r StopBuildRequest) Send() (*StopBuildOutput, error) {
 //
 //    // Example sending a request using the StopBuildRequest method.
 //    req := client.StopBuildRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -886,7 +904,8 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -902,7 +921,7 @@ func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 //
 //    // Example sending a request using the UpdateProjectRequest method.
 //    req := client.UpdateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -936,7 +955,8 @@ type UpdateWebhookRequest struct {
 }
 
 // Send marshals and sends the UpdateWebhook API request.
-func (r UpdateWebhookRequest) Send() (*UpdateWebhookOutput, error) {
+func (r UpdateWebhookRequest) Send(ctx context.Context) (*UpdateWebhookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,7 +974,7 @@ func (r UpdateWebhookRequest) Send() (*UpdateWebhookOutput, error) {
 //
 //    // Example sending a request using the UpdateWebhookRequest method.
 //    req := client.UpdateWebhookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

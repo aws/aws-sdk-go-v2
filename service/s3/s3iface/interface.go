@@ -9,6 +9,8 @@
 package s3iface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -237,17 +239,13 @@ type S3API interface {
 
 	UploadPartCopyRequest(*s3.UploadPartCopyInput) s3.UploadPartCopyRequest
 
-	WaitUntilBucketExists(*s3.HeadBucketInput) error
-	WaitUntilBucketExistsWithContext(aws.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
+	WaitUntilBucketExists(context.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
 
-	WaitUntilBucketNotExists(*s3.HeadBucketInput) error
-	WaitUntilBucketNotExistsWithContext(aws.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
+	WaitUntilBucketNotExists(context.Context, *s3.HeadBucketInput, ...aws.WaiterOption) error
 
-	WaitUntilObjectExists(*s3.HeadObjectInput) error
-	WaitUntilObjectExistsWithContext(aws.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
+	WaitUntilObjectExists(context.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
 
-	WaitUntilObjectNotExists(*s3.HeadObjectInput) error
-	WaitUntilObjectNotExistsWithContext(aws.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
+	WaitUntilObjectNotExists(context.Context, *s3.HeadObjectInput, ...aws.WaiterOption) error
 }
 
 var _ S3API = (*s3.S3)(nil)

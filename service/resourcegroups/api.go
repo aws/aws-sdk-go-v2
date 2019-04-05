@@ -3,6 +3,7 @@
 package resourcegroups
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +124,8 @@ type GetGroupRequest struct {
 }
 
 // Send marshals and sends the GetGroup API request.
-func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
 //
 //    // Example sending a request using the GetGroupRequest method.
 //    req := client.GetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type GetGroupQueryRequest struct {
 }
 
 // Send marshals and sends the GetGroupQuery API request.
-func (r GetGroupQueryRequest) Send() (*GetGroupQueryOutput, error) {
+func (r GetGroupQueryRequest) Send(ctx context.Context) (*GetGroupQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +192,7 @@ func (r GetGroupQueryRequest) Send() (*GetGroupQueryOutput, error) {
 //
 //    // Example sending a request using the GetGroupQueryRequest method.
 //    req := client.GetGroupQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +226,8 @@ type GetTagsRequest struct {
 }
 
 // Send marshals and sends the GetTags API request.
-func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
+func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +244,7 @@ func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
 //
 //    // Example sending a request using the GetTagsRequest method.
 //    req := client.GetTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -272,7 +278,8 @@ type ListGroupResourcesRequest struct {
 }
 
 // Send marshals and sends the ListGroupResources API request.
-func (r ListGroupResourcesRequest) Send() (*ListGroupResourcesOutput, error) {
+func (r ListGroupResourcesRequest) Send(ctx context.Context) (*ListGroupResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -289,7 +296,7 @@ func (r ListGroupResourcesRequest) Send() (*ListGroupResourcesOutput, error) {
 //
 //    // Example sending a request using the ListGroupResourcesRequest method.
 //    req := client.ListGroupResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -339,7 +346,7 @@ func (c *ResourceGroups) ListGroupResourcesRequest(input *ListGroupResourcesInpu
 func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResourcesPager {
 	return ListGroupResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -348,6 +355,7 @@ func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -375,7 +383,8 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -391,7 +400,7 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -441,7 +450,7 @@ func (c *ResourceGroups) ListGroupsRequest(input *ListGroupsInput) ListGroupsReq
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -450,6 +459,7 @@ func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -477,7 +487,8 @@ type SearchResourcesRequest struct {
 }
 
 // Send marshals and sends the SearchResources API request.
-func (r SearchResourcesRequest) Send() (*SearchResourcesOutput, error) {
+func (r SearchResourcesRequest) Send(ctx context.Context) (*SearchResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -495,7 +506,7 @@ func (r SearchResourcesRequest) Send() (*SearchResourcesOutput, error) {
 //
 //    // Example sending a request using the SearchResourcesRequest method.
 //    req := client.SearchResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -545,7 +556,7 @@ func (c *ResourceGroups) SearchResourcesRequest(input *SearchResourcesInput) Sea
 func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPager {
 	return SearchResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -554,6 +565,7 @@ func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -581,7 +593,8 @@ type TagRequest struct {
 }
 
 // Send marshals and sends the Tag API request.
-func (r TagRequest) Send() (*TagOutput, error) {
+func (r TagRequest) Send(ctx context.Context) (*TagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -598,7 +611,7 @@ func (r TagRequest) Send() (*TagOutput, error) {
 //
 //    // Example sending a request using the TagRequest method.
 //    req := client.TagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -632,7 +645,8 @@ type UntagRequest struct {
 }
 
 // Send marshals and sends the Untag API request.
-func (r UntagRequest) Send() (*UntagOutput, error) {
+func (r UntagRequest) Send(ctx context.Context) (*UntagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,7 +662,7 @@ func (r UntagRequest) Send() (*UntagOutput, error) {
 //
 //    // Example sending a request using the UntagRequest method.
 //    req := client.UntagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -682,7 +696,8 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -699,7 +714,7 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -733,7 +748,8 @@ type UpdateGroupQueryRequest struct {
 }
 
 // Send marshals and sends the UpdateGroupQuery API request.
-func (r UpdateGroupQueryRequest) Send() (*UpdateGroupQueryOutput, error) {
+func (r UpdateGroupQueryRequest) Send(ctx context.Context) (*UpdateGroupQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -749,7 +765,7 @@ func (r UpdateGroupQueryRequest) Send() (*UpdateGroupQueryOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupQueryRequest method.
 //    req := client.UpdateGroupQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

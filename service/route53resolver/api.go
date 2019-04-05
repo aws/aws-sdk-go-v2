@@ -3,6 +3,7 @@
 package route53resolver
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type AssociateResolverEndpointIpAddressRequest struct {
 }
 
 // Send marshals and sends the AssociateResolverEndpointIpAddress API request.
-func (r AssociateResolverEndpointIpAddressRequest) Send() (*AssociateResolverEndpointIpAddressOutput, error) {
+func (r AssociateResolverEndpointIpAddressRequest) Send(ctx context.Context) (*AssociateResolverEndpointIpAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r AssociateResolverEndpointIpAddressRequest) Send() (*AssociateResolverEnd
 //
 //    // Example sending a request using the AssociateResolverEndpointIpAddressRequest method.
 //    req := client.AssociateResolverEndpointIpAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type AssociateResolverRuleRequest struct {
 }
 
 // Send marshals and sends the AssociateResolverRule API request.
-func (r AssociateResolverRuleRequest) Send() (*AssociateResolverRuleOutput, error) {
+func (r AssociateResolverRuleRequest) Send(ctx context.Context) (*AssociateResolverRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r AssociateResolverRuleRequest) Send() (*AssociateResolverRuleOutput, erro
 //
 //    // Example sending a request using the AssociateResolverRuleRequest method.
 //    req := client.AssociateResolverRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type CreateResolverEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateResolverEndpoint API request.
-func (r CreateResolverEndpointRequest) Send() (*CreateResolverEndpointOutput, error) {
+func (r CreateResolverEndpointRequest) Send(ctx context.Context) (*CreateResolverEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -150,7 +154,7 @@ func (r CreateResolverEndpointRequest) Send() (*CreateResolverEndpointOutput, er
 //
 //    // Example sending a request using the CreateResolverEndpointRequest method.
 //    req := client.CreateResolverEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -184,7 +188,8 @@ type CreateResolverRuleRequest struct {
 }
 
 // Send marshals and sends the CreateResolverRule API request.
-func (r CreateResolverRuleRequest) Send() (*CreateResolverRuleOutput, error) {
+func (r CreateResolverRuleRequest) Send(ctx context.Context) (*CreateResolverRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -202,7 +207,7 @@ func (r CreateResolverRuleRequest) Send() (*CreateResolverRuleOutput, error) {
 //
 //    // Example sending a request using the CreateResolverRuleRequest method.
 //    req := client.CreateResolverRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -236,7 +241,8 @@ type DeleteResolverEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteResolverEndpoint API request.
-func (r DeleteResolverEndpointRequest) Send() (*DeleteResolverEndpointOutput, error) {
+func (r DeleteResolverEndpointRequest) Send(ctx context.Context) (*DeleteResolverEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -259,7 +265,7 @@ func (r DeleteResolverEndpointRequest) Send() (*DeleteResolverEndpointOutput, er
 //
 //    // Example sending a request using the DeleteResolverEndpointRequest method.
 //    req := client.DeleteResolverEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -293,7 +299,8 @@ type DeleteResolverRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteResolverRule API request.
-func (r DeleteResolverRuleRequest) Send() (*DeleteResolverRuleOutput, error) {
+func (r DeleteResolverRuleRequest) Send(ctx context.Context) (*DeleteResolverRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -311,7 +318,7 @@ func (r DeleteResolverRuleRequest) Send() (*DeleteResolverRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteResolverRuleRequest method.
 //    req := client.DeleteResolverRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -345,7 +352,8 @@ type DisassociateResolverEndpointIpAddressRequest struct {
 }
 
 // Send marshals and sends the DisassociateResolverEndpointIpAddress API request.
-func (r DisassociateResolverEndpointIpAddressRequest) Send() (*DisassociateResolverEndpointIpAddressOutput, error) {
+func (r DisassociateResolverEndpointIpAddressRequest) Send(ctx context.Context) (*DisassociateResolverEndpointIpAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -365,7 +373,7 @@ func (r DisassociateResolverEndpointIpAddressRequest) Send() (*DisassociateResol
 //
 //    // Example sending a request using the DisassociateResolverEndpointIpAddressRequest method.
 //    req := client.DisassociateResolverEndpointIpAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -399,7 +407,8 @@ type DisassociateResolverRuleRequest struct {
 }
 
 // Send marshals and sends the DisassociateResolverRule API request.
-func (r DisassociateResolverRuleRequest) Send() (*DisassociateResolverRuleOutput, error) {
+func (r DisassociateResolverRuleRequest) Send(ctx context.Context) (*DisassociateResolverRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -419,7 +428,7 @@ func (r DisassociateResolverRuleRequest) Send() (*DisassociateResolverRuleOutput
 //
 //    // Example sending a request using the DisassociateResolverRuleRequest method.
 //    req := client.DisassociateResolverRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -453,7 +462,8 @@ type GetResolverEndpointRequest struct {
 }
 
 // Send marshals and sends the GetResolverEndpoint API request.
-func (r GetResolverEndpointRequest) Send() (*GetResolverEndpointOutput, error) {
+func (r GetResolverEndpointRequest) Send(ctx context.Context) (*GetResolverEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -471,7 +481,7 @@ func (r GetResolverEndpointRequest) Send() (*GetResolverEndpointOutput, error) {
 //
 //    // Example sending a request using the GetResolverEndpointRequest method.
 //    req := client.GetResolverEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -505,7 +515,8 @@ type GetResolverRuleRequest struct {
 }
 
 // Send marshals and sends the GetResolverRule API request.
-func (r GetResolverRuleRequest) Send() (*GetResolverRuleOutput, error) {
+func (r GetResolverRuleRequest) Send(ctx context.Context) (*GetResolverRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -523,7 +534,7 @@ func (r GetResolverRuleRequest) Send() (*GetResolverRuleOutput, error) {
 //
 //    // Example sending a request using the GetResolverRuleRequest method.
 //    req := client.GetResolverRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -557,7 +568,8 @@ type GetResolverRuleAssociationRequest struct {
 }
 
 // Send marshals and sends the GetResolverRuleAssociation API request.
-func (r GetResolverRuleAssociationRequest) Send() (*GetResolverRuleAssociationOutput, error) {
+func (r GetResolverRuleAssociationRequest) Send(ctx context.Context) (*GetResolverRuleAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -574,7 +586,7 @@ func (r GetResolverRuleAssociationRequest) Send() (*GetResolverRuleAssociationOu
 //
 //    // Example sending a request using the GetResolverRuleAssociationRequest method.
 //    req := client.GetResolverRuleAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -608,7 +620,8 @@ type GetResolverRulePolicyRequest struct {
 }
 
 // Send marshals and sends the GetResolverRulePolicy API request.
-func (r GetResolverRulePolicyRequest) Send() (*GetResolverRulePolicyOutput, error) {
+func (r GetResolverRulePolicyRequest) Send(ctx context.Context) (*GetResolverRulePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -626,7 +639,7 @@ func (r GetResolverRulePolicyRequest) Send() (*GetResolverRulePolicyOutput, erro
 //
 //    // Example sending a request using the GetResolverRulePolicyRequest method.
 //    req := client.GetResolverRulePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -660,7 +673,8 @@ type ListResolverEndpointIpAddressesRequest struct {
 }
 
 // Send marshals and sends the ListResolverEndpointIpAddresses API request.
-func (r ListResolverEndpointIpAddressesRequest) Send() (*ListResolverEndpointIpAddressesOutput, error) {
+func (r ListResolverEndpointIpAddressesRequest) Send(ctx context.Context) (*ListResolverEndpointIpAddressesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -676,7 +690,7 @@ func (r ListResolverEndpointIpAddressesRequest) Send() (*ListResolverEndpointIpA
 //
 //    // Example sending a request using the ListResolverEndpointIpAddressesRequest method.
 //    req := client.ListResolverEndpointIpAddressesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -726,7 +740,7 @@ func (c *Route53Resolver) ListResolverEndpointIpAddressesRequest(input *ListReso
 func (p *ListResolverEndpointIpAddressesRequest) Paginate(opts ...aws.Option) ListResolverEndpointIpAddressesPager {
 	return ListResolverEndpointIpAddressesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverEndpointIpAddressesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -735,6 +749,7 @@ func (p *ListResolverEndpointIpAddressesRequest) Paginate(opts ...aws.Option) Li
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -762,7 +777,8 @@ type ListResolverEndpointsRequest struct {
 }
 
 // Send marshals and sends the ListResolverEndpoints API request.
-func (r ListResolverEndpointsRequest) Send() (*ListResolverEndpointsOutput, error) {
+func (r ListResolverEndpointsRequest) Send(ctx context.Context) (*ListResolverEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,7 +795,7 @@ func (r ListResolverEndpointsRequest) Send() (*ListResolverEndpointsOutput, erro
 //
 //    // Example sending a request using the ListResolverEndpointsRequest method.
 //    req := client.ListResolverEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -829,7 +845,7 @@ func (c *Route53Resolver) ListResolverEndpointsRequest(input *ListResolverEndpoi
 func (p *ListResolverEndpointsRequest) Paginate(opts ...aws.Option) ListResolverEndpointsPager {
 	return ListResolverEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -838,6 +854,7 @@ func (p *ListResolverEndpointsRequest) Paginate(opts ...aws.Option) ListResolver
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -865,7 +882,8 @@ type ListResolverRuleAssociationsRequest struct {
 }
 
 // Send marshals and sends the ListResolverRuleAssociations API request.
-func (r ListResolverRuleAssociationsRequest) Send() (*ListResolverRuleAssociationsOutput, error) {
+func (r ListResolverRuleAssociationsRequest) Send(ctx context.Context) (*ListResolverRuleAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -882,7 +900,7 @@ func (r ListResolverRuleAssociationsRequest) Send() (*ListResolverRuleAssociatio
 //
 //    // Example sending a request using the ListResolverRuleAssociationsRequest method.
 //    req := client.ListResolverRuleAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -932,7 +950,7 @@ func (c *Route53Resolver) ListResolverRuleAssociationsRequest(input *ListResolve
 func (p *ListResolverRuleAssociationsRequest) Paginate(opts ...aws.Option) ListResolverRuleAssociationsPager {
 	return ListResolverRuleAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverRuleAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -941,6 +959,7 @@ func (p *ListResolverRuleAssociationsRequest) Paginate(opts ...aws.Option) ListR
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -968,7 +987,8 @@ type ListResolverRulesRequest struct {
 }
 
 // Send marshals and sends the ListResolverRules API request.
-func (r ListResolverRulesRequest) Send() (*ListResolverRulesOutput, error) {
+func (r ListResolverRulesRequest) Send(ctx context.Context) (*ListResolverRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -984,7 +1004,7 @@ func (r ListResolverRulesRequest) Send() (*ListResolverRulesOutput, error) {
 //
 //    // Example sending a request using the ListResolverRulesRequest method.
 //    req := client.ListResolverRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1034,7 +1054,7 @@ func (c *Route53Resolver) ListResolverRulesRequest(input *ListResolverRulesInput
 func (p *ListResolverRulesRequest) Paginate(opts ...aws.Option) ListResolverRulesPager {
 	return ListResolverRulesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListResolverRulesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1043,6 +1063,7 @@ func (p *ListResolverRulesRequest) Paginate(opts ...aws.Option) ListResolverRule
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1070,7 +1091,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1086,7 +1108,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1120,7 +1142,8 @@ type PutResolverRulePolicyRequest struct {
 }
 
 // Send marshals and sends the PutResolverRulePolicy API request.
-func (r PutResolverRulePolicyRequest) Send() (*PutResolverRulePolicyOutput, error) {
+func (r PutResolverRulePolicyRequest) Send(ctx context.Context) (*PutResolverRulePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1137,7 +1160,7 @@ func (r PutResolverRulePolicyRequest) Send() (*PutResolverRulePolicyOutput, erro
 //
 //    // Example sending a request using the PutResolverRulePolicyRequest method.
 //    req := client.PutResolverRulePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1171,7 +1194,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1187,7 +1211,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1221,7 +1245,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1237,7 +1262,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1271,7 +1296,8 @@ type UpdateResolverEndpointRequest struct {
 }
 
 // Send marshals and sends the UpdateResolverEndpoint API request.
-func (r UpdateResolverEndpointRequest) Send() (*UpdateResolverEndpointOutput, error) {
+func (r UpdateResolverEndpointRequest) Send(ctx context.Context) (*UpdateResolverEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1287,7 +1313,7 @@ func (r UpdateResolverEndpointRequest) Send() (*UpdateResolverEndpointOutput, er
 //
 //    // Example sending a request using the UpdateResolverEndpointRequest method.
 //    req := client.UpdateResolverEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1321,7 +1347,8 @@ type UpdateResolverRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateResolverRule API request.
-func (r UpdateResolverRuleRequest) Send() (*UpdateResolverRuleOutput, error) {
+func (r UpdateResolverRuleRequest) Send(ctx context.Context) (*UpdateResolverRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1339,7 +1366,7 @@ func (r UpdateResolverRuleRequest) Send() (*UpdateResolverRuleOutput, error) {
 //
 //    // Example sending a request using the UpdateResolverRuleRequest method.
 //    req := client.UpdateResolverRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

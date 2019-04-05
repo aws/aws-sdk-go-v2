@@ -3,6 +3,7 @@
 package cloud9_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -45,7 +46,7 @@ func ExampleCloud9_CreateEnvironmentEC2Request_shared00() {
 	}
 
 	req := svc.CreateEnvironmentEC2Request(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -94,7 +95,7 @@ func ExampleCloud9_CreateEnvironmentMembershipRequest_shared00() {
 	}
 
 	req := svc.CreateEnvironmentMembershipRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -141,7 +142,7 @@ func ExampleCloud9_DeleteEnvironmentRequest_shared00() {
 	}
 
 	req := svc.DeleteEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -189,7 +190,7 @@ func ExampleCloud9_DeleteEnvironmentMembershipRequest_shared00() {
 	}
 
 	req := svc.DeleteEnvironmentMembershipRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -237,7 +238,7 @@ func ExampleCloud9_DescribeEnvironmentMembershipsRequest_shared00() {
 	}
 
 	req := svc.DescribeEnvironmentMembershipsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -288,7 +289,7 @@ func ExampleCloud9_DescribeEnvironmentMembershipsRequest_shared01() {
 	}
 
 	req := svc.DescribeEnvironmentMembershipsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -336,7 +337,7 @@ func ExampleCloud9_DescribeEnvironmentMembershipsRequest_shared02() {
 	}
 
 	req := svc.DescribeEnvironmentMembershipsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -383,7 +384,7 @@ func ExampleCloud9_DescribeEnvironmentStatusRequest_shared00() {
 	}
 
 	req := svc.DescribeEnvironmentStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -433,7 +434,7 @@ func ExampleCloud9_DescribeEnvironmentsRequest_shared00() {
 	}
 
 	req := svc.DescribeEnvironmentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -478,7 +479,7 @@ func ExampleCloud9_ListEnvironmentsRequest_shared00() {
 	input := &cloud9.ListEnvironmentsInput{}
 
 	req := svc.ListEnvironmentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -527,7 +528,7 @@ func ExampleCloud9_UpdateEnvironmentRequest_shared00() {
 	}
 
 	req := svc.UpdateEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -576,7 +577,7 @@ func ExampleCloud9_UpdateEnvironmentMembershipRequest_shared00() {
 	}
 
 	req := svc.UpdateEnvironmentMembershipRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

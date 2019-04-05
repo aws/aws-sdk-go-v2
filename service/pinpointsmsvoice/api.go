@@ -3,6 +3,8 @@
 package pinpointsmsvoice
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type CreateConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
-func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, error) {
+func (r CreateConfigurationSetRequest) Send(ctx context.Context) (*CreateConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, er
 //
 //    // Example sending a request using the CreateConfigurationSetRequest method.
 //    req := client.CreateConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -69,7 +72,8 @@ type CreateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
-func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurationSetEventDestinationOutput, error) {
+func (r CreateConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*CreateConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -85,7 +89,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurat
 //
 //    // Example sending a request using the CreateConfigurationSetEventDestinationRequest method.
 //    req := client.CreateConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -119,7 +123,8 @@ type DeleteConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
-func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, error) {
+func (r DeleteConfigurationSetRequest) Send(ctx context.Context) (*DeleteConfigurationSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -135,7 +140,7 @@ func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, er
 //
 //    // Example sending a request using the DeleteConfigurationSetRequest method.
 //    req := client.DeleteConfigurationSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -169,7 +174,8 @@ type DeleteConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
-func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurationSetEventDestinationOutput, error) {
+func (r DeleteConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*DeleteConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -185,7 +191,7 @@ func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurat
 //
 //    // Example sending a request using the DeleteConfigurationSetEventDestinationRequest method.
 //    req := client.DeleteConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -219,7 +225,8 @@ type GetConfigurationSetEventDestinationsRequest struct {
 }
 
 // Send marshals and sends the GetConfigurationSetEventDestinations API request.
-func (r GetConfigurationSetEventDestinationsRequest) Send() (*GetConfigurationSetEventDestinationsOutput, error) {
+func (r GetConfigurationSetEventDestinationsRequest) Send(ctx context.Context) (*GetConfigurationSetEventDestinationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +244,7 @@ func (r GetConfigurationSetEventDestinationsRequest) Send() (*GetConfigurationSe
 //
 //    // Example sending a request using the GetConfigurationSetEventDestinationsRequest method.
 //    req := client.GetConfigurationSetEventDestinationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +278,8 @@ type SendVoiceMessageRequest struct {
 }
 
 // Send marshals and sends the SendVoiceMessage API request.
-func (r SendVoiceMessageRequest) Send() (*SendVoiceMessageOutput, error) {
+func (r SendVoiceMessageRequest) Send(ctx context.Context) (*SendVoiceMessageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +295,7 @@ func (r SendVoiceMessageRequest) Send() (*SendVoiceMessageOutput, error) {
 //
 //    // Example sending a request using the SendVoiceMessageRequest method.
 //    req := client.SendVoiceMessageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -321,7 +329,8 @@ type UpdateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
-func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurationSetEventDestinationOutput, error) {
+func (r UpdateConfigurationSetEventDestinationRequest) Send(ctx context.Context) (*UpdateConfigurationSetEventDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +349,7 @@ func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurat
 //
 //    // Example sending a request using the UpdateConfigurationSetEventDestinationRequest method.
 //    req := client.UpdateConfigurationSetEventDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

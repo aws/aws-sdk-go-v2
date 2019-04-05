@@ -3,6 +3,7 @@
 package transfer
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateServerRequest struct {
 }
 
 // Send marshals and sends the CreateServer API request.
-func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
+func (r CreateServerRequest) Send(ctx context.Context) (*CreateServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
 //
 //    // Example sending a request using the CreateServerRequest method.
 //    req := client.CreateServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -101,7 +104,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -135,7 +138,8 @@ type DeleteServerRequest struct {
 }
 
 // Send marshals and sends the DeleteServer API request.
-func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
+func (r DeleteServerRequest) Send(ctx context.Context) (*DeleteServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -155,7 +159,7 @@ func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
 //
 //    // Example sending a request using the DeleteServerRequest method.
 //    req := client.DeleteServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -191,7 +195,8 @@ type DeleteSshPublicKeyRequest struct {
 }
 
 // Send marshals and sends the DeleteSshPublicKey API request.
-func (r DeleteSshPublicKeyRequest) Send() (*DeleteSshPublicKeyOutput, error) {
+func (r DeleteSshPublicKeyRequest) Send(ctx context.Context) (*DeleteSshPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -209,7 +214,7 @@ func (r DeleteSshPublicKeyRequest) Send() (*DeleteSshPublicKeyOutput, error) {
 //
 //    // Example sending a request using the DeleteSshPublicKeyRequest method.
 //    req := client.DeleteSshPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -245,7 +250,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -265,7 +271,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -301,7 +307,8 @@ type DescribeServerRequest struct {
 }
 
 // Send marshals and sends the DescribeServer API request.
-func (r DescribeServerRequest) Send() (*DescribeServerOutput, error) {
+func (r DescribeServerRequest) Send(ctx context.Context) (*DescribeServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -319,7 +326,7 @@ func (r DescribeServerRequest) Send() (*DescribeServerOutput, error) {
 //
 //    // Example sending a request using the DescribeServerRequest method.
 //    req := client.DescribeServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -353,7 +360,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -373,7 +381,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -407,7 +415,8 @@ type ImportSshPublicKeyRequest struct {
 }
 
 // Send marshals and sends the ImportSshPublicKey API request.
-func (r ImportSshPublicKeyRequest) Send() (*ImportSshPublicKeyOutput, error) {
+func (r ImportSshPublicKeyRequest) Send(ctx context.Context) (*ImportSshPublicKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -427,7 +436,7 @@ func (r ImportSshPublicKeyRequest) Send() (*ImportSshPublicKeyOutput, error) {
 //
 //    // Example sending a request using the ImportSshPublicKeyRequest method.
 //    req := client.ImportSshPublicKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -461,7 +470,8 @@ type ListServersRequest struct {
 }
 
 // Send marshals and sends the ListServers API request.
-func (r ListServersRequest) Send() (*ListServersOutput, error) {
+func (r ListServersRequest) Send(ctx context.Context) (*ListServersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -478,7 +488,7 @@ func (r ListServersRequest) Send() (*ListServersOutput, error) {
 //
 //    // Example sending a request using the ListServersRequest method.
 //    req := client.ListServersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -512,7 +522,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -529,7 +540,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -563,7 +574,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -579,7 +591,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -613,7 +625,8 @@ type StartServerRequest struct {
 }
 
 // Send marshals and sends the StartServer API request.
-func (r StartServerRequest) Send() (*StartServerOutput, error) {
+func (r StartServerRequest) Send(ctx context.Context) (*StartServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,7 +650,7 @@ func (r StartServerRequest) Send() (*StartServerOutput, error) {
 //
 //    // Example sending a request using the StartServerRequest method.
 //    req := client.StartServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -673,7 +686,8 @@ type StopServerRequest struct {
 }
 
 // Send marshals and sends the StopServer API request.
-func (r StopServerRequest) Send() (*StopServerOutput, error) {
+func (r StopServerRequest) Send(ctx context.Context) (*StopServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -699,7 +713,7 @@ func (r StopServerRequest) Send() (*StopServerOutput, error) {
 //
 //    // Example sending a request using the StopServerRequest method.
 //    req := client.StopServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -735,7 +749,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -754,7 +769,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -790,7 +805,8 @@ type TestIdentityProviderRequest struct {
 }
 
 // Send marshals and sends the TestIdentityProvider API request.
-func (r TestIdentityProviderRequest) Send() (*TestIdentityProviderOutput, error) {
+func (r TestIdentityProviderRequest) Send(ctx context.Context) (*TestIdentityProviderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +826,7 @@ func (r TestIdentityProviderRequest) Send() (*TestIdentityProviderOutput, error)
 //
 //    // Example sending a request using the TestIdentityProviderRequest method.
 //    req := client.TestIdentityProviderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -844,7 +860,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -863,7 +880,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -899,7 +916,8 @@ type UpdateServerRequest struct {
 }
 
 // Send marshals and sends the UpdateServer API request.
-func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
+func (r UpdateServerRequest) Send(ctx context.Context) (*UpdateServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -918,7 +936,7 @@ func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
 //
 //    // Example sending a request using the UpdateServerRequest method.
 //    req := client.UpdateServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -952,7 +970,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -972,7 +991,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

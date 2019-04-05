@@ -3,6 +3,8 @@
 package rdsdataservice
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type ExecuteSqlRequest struct {
 }
 
 // Send marshals and sends the ExecuteSql API request.
-func (r ExecuteSqlRequest) Send() (*ExecuteSqlOutput, error) {
+func (r ExecuteSqlRequest) Send(ctx context.Context) (*ExecuteSqlOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -34,7 +37,7 @@ func (r ExecuteSqlRequest) Send() (*ExecuteSqlOutput, error) {
 //
 //    // Example sending a request using the ExecuteSqlRequest method.
 //    req := client.ExecuteSqlRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package mobileanalytics
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type PutEventsRequest struct {
 }
 
 // Send marshals and sends the PutEvents API request.
-func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
+func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
 //
 //    // Example sending a request using the PutEventsRequest method.
 //    req := client.PutEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

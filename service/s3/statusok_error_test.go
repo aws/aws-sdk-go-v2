@@ -1,6 +1,7 @@
 package s3_test
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -27,7 +28,7 @@ func TestCopyObjectNoError(t *testing.T) {
 		CopySource: aws.String("bucketname/exists.txt"),
 		Key:        aws.String("destination.txt"),
 	})
-	res, err := req.Send()
+	res, err := req.Send(context.Background())
 
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
@@ -46,7 +47,7 @@ func TestCopyObjectError(t *testing.T) {
 		CopySource: aws.String("bucketname/doesnotexist.txt"),
 		Key:        aws.String("destination.txt"),
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 
 	if err == nil {
 		t.Error("expected error, but received none")
@@ -73,7 +74,7 @@ func TestUploadPartCopySuccess(t *testing.T) {
 		PartNumber: aws.Int64(0),
 		UploadId:   aws.String("uploadID"),
 	})
-	res, err := req.Send()
+	res, err := req.Send(context.Background())
 
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
@@ -95,7 +96,7 @@ func TestUploadPartCopyError(t *testing.T) {
 		PartNumber: aws.Int64(0),
 		UploadId:   aws.String("uploadID"),
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 
 	if err == nil {
 		t.Error("expected an error")
@@ -119,7 +120,7 @@ func TestCompleteMultipartUploadSuccess(t *testing.T) {
 		Key:      aws.String("key"),
 		UploadId: aws.String("uploadID"),
 	})
-	res, err := req.Send()
+	res, err := req.Send(context.Background())
 
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
@@ -145,7 +146,7 @@ func TestCompleteMultipartUploadError(t *testing.T) {
 		Key:      aws.String("key"),
 		UploadId: aws.String("uploadID"),
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 
 	if err == nil {
 		t.Error("expected an error")

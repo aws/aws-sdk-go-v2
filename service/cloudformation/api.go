@@ -3,6 +3,7 @@
 package cloudformation
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CancelUpdateStackRequest struct {
 }
 
 // Send marshals and sends the CancelUpdateStack API request.
-func (r CancelUpdateStackRequest) Send() (*CancelUpdateStackOutput, error) {
+func (r CancelUpdateStackRequest) Send(ctx context.Context) (*CancelUpdateStackOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r CancelUpdateStackRequest) Send() (*CancelUpdateStackOutput, error) {
 //
 //    // Example sending a request using the CancelUpdateStackRequest method.
 //    req := client.CancelUpdateStackRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type ContinueUpdateRollbackRequest struct {
 }
 
 // Send marshals and sends the ContinueUpdateRollback API request.
-func (r ContinueUpdateRollbackRequest) Send() (*ContinueUpdateRollbackOutput, error) {
+func (r ContinueUpdateRollbackRequest) Send(ctx context.Context) (*ContinueUpdateRollbackOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -105,7 +108,7 @@ func (r ContinueUpdateRollbackRequest) Send() (*ContinueUpdateRollbackOutput, er
 //
 //    // Example sending a request using the ContinueUpdateRollbackRequest method.
 //    req := client.ContinueUpdateRollbackRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -139,7 +142,8 @@ type CreateChangeSetRequest struct {
 }
 
 // Send marshals and sends the CreateChangeSet API request.
-func (r CreateChangeSetRequest) Send() (*CreateChangeSetOutput, error) {
+func (r CreateChangeSetRequest) Send(ctx context.Context) (*CreateChangeSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -175,7 +179,7 @@ func (r CreateChangeSetRequest) Send() (*CreateChangeSetOutput, error) {
 //
 //    // Example sending a request using the CreateChangeSetRequest method.
 //    req := client.CreateChangeSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -209,7 +213,8 @@ type CreateStackRequest struct {
 }
 
 // Send marshals and sends the CreateStack API request.
-func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
+func (r CreateStackRequest) Send(ctx context.Context) (*CreateStackOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -227,7 +232,7 @@ func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
 //
 //    // Example sending a request using the CreateStackRequest method.
 //    req := client.CreateStackRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -261,7 +266,8 @@ type CreateStackInstancesRequest struct {
 }
 
 // Send marshals and sends the CreateStackInstances API request.
-func (r CreateStackInstancesRequest) Send() (*CreateStackInstancesOutput, error) {
+func (r CreateStackInstancesRequest) Send(ctx context.Context) (*CreateStackInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -280,7 +286,7 @@ func (r CreateStackInstancesRequest) Send() (*CreateStackInstancesOutput, error)
 //
 //    // Example sending a request using the CreateStackInstancesRequest method.
 //    req := client.CreateStackInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -314,7 +320,8 @@ type CreateStackSetRequest struct {
 }
 
 // Send marshals and sends the CreateStackSet API request.
-func (r CreateStackSetRequest) Send() (*CreateStackSetOutput, error) {
+func (r CreateStackSetRequest) Send(ctx context.Context) (*CreateStackSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -330,7 +337,7 @@ func (r CreateStackSetRequest) Send() (*CreateStackSetOutput, error) {
 //
 //    // Example sending a request using the CreateStackSetRequest method.
 //    req := client.CreateStackSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -364,7 +371,8 @@ type DeleteChangeSetRequest struct {
 }
 
 // Send marshals and sends the DeleteChangeSet API request.
-func (r DeleteChangeSetRequest) Send() (*DeleteChangeSetOutput, error) {
+func (r DeleteChangeSetRequest) Send(ctx context.Context) (*DeleteChangeSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,7 +392,7 @@ func (r DeleteChangeSetRequest) Send() (*DeleteChangeSetOutput, error) {
 //
 //    // Example sending a request using the DeleteChangeSetRequest method.
 //    req := client.DeleteChangeSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -418,7 +426,8 @@ type DeleteStackRequest struct {
 }
 
 // Send marshals and sends the DeleteStack API request.
-func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+func (r DeleteStackRequest) Send(ctx context.Context) (*DeleteStackOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -436,7 +445,7 @@ func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
 //
 //    // Example sending a request using the DeleteStackRequest method.
 //    req := client.DeleteStackRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -472,7 +481,8 @@ type DeleteStackInstancesRequest struct {
 }
 
 // Send marshals and sends the DeleteStackInstances API request.
-func (r DeleteStackInstancesRequest) Send() (*DeleteStackInstancesOutput, error) {
+func (r DeleteStackInstancesRequest) Send(ctx context.Context) (*DeleteStackInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,7 +498,7 @@ func (r DeleteStackInstancesRequest) Send() (*DeleteStackInstancesOutput, error)
 //
 //    // Example sending a request using the DeleteStackInstancesRequest method.
 //    req := client.DeleteStackInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -522,7 +532,8 @@ type DeleteStackSetRequest struct {
 }
 
 // Send marshals and sends the DeleteStackSet API request.
-func (r DeleteStackSetRequest) Send() (*DeleteStackSetOutput, error) {
+func (r DeleteStackSetRequest) Send(ctx context.Context) (*DeleteStackSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +551,7 @@ func (r DeleteStackSetRequest) Send() (*DeleteStackSetOutput, error) {
 //
 //    // Example sending a request using the DeleteStackSetRequest method.
 //    req := client.DeleteStackSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -574,7 +585,8 @@ type DescribeAccountLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
-func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccountLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,7 +603,7 @@ func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, erro
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
 //    req := client.DescribeAccountLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -625,7 +637,8 @@ type DescribeChangeSetRequest struct {
 }
 
 // Send marshals and sends the DescribeChangeSet API request.
-func (r DescribeChangeSetRequest) Send() (*DescribeChangeSetOutput, error) {
+func (r DescribeChangeSetRequest) Send(ctx context.Context) (*DescribeChangeSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -644,7 +657,7 @@ func (r DescribeChangeSetRequest) Send() (*DescribeChangeSetOutput, error) {
 //
 //    // Example sending a request using the DescribeChangeSetRequest method.
 //    req := client.DescribeChangeSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -678,7 +691,8 @@ type DescribeStackDriftDetectionStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeStackDriftDetectionStatus API request.
-func (r DescribeStackDriftDetectionStatusRequest) Send() (*DescribeStackDriftDetectionStatusOutput, error) {
+func (r DescribeStackDriftDetectionStatusRequest) Send(ctx context.Context) (*DescribeStackDriftDetectionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +720,7 @@ func (r DescribeStackDriftDetectionStatusRequest) Send() (*DescribeStackDriftDet
 //
 //    // Example sending a request using the DescribeStackDriftDetectionStatusRequest method.
 //    req := client.DescribeStackDriftDetectionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -740,7 +754,8 @@ type DescribeStackEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeStackEvents API request.
-func (r DescribeStackEventsRequest) Send() (*DescribeStackEventsOutput, error) {
+func (r DescribeStackEventsRequest) Send(ctx context.Context) (*DescribeStackEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -761,7 +776,7 @@ func (r DescribeStackEventsRequest) Send() (*DescribeStackEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeStackEventsRequest method.
 //    req := client.DescribeStackEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -811,7 +826,7 @@ func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsIn
 func (p *DescribeStackEventsRequest) Paginate(opts ...aws.Option) DescribeStackEventsPager {
 	return DescribeStackEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStackEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -820,6 +835,7 @@ func (p *DescribeStackEventsRequest) Paginate(opts ...aws.Option) DescribeStackE
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -847,7 +863,8 @@ type DescribeStackInstanceRequest struct {
 }
 
 // Send marshals and sends the DescribeStackInstance API request.
-func (r DescribeStackInstanceRequest) Send() (*DescribeStackInstanceOutput, error) {
+func (r DescribeStackInstanceRequest) Send(ctx context.Context) (*DescribeStackInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -867,7 +884,7 @@ func (r DescribeStackInstanceRequest) Send() (*DescribeStackInstanceOutput, erro
 //
 //    // Example sending a request using the DescribeStackInstanceRequest method.
 //    req := client.DescribeStackInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -901,7 +918,8 @@ type DescribeStackResourceRequest struct {
 }
 
 // Send marshals and sends the DescribeStackResource API request.
-func (r DescribeStackResourceRequest) Send() (*DescribeStackResourceOutput, error) {
+func (r DescribeStackResourceRequest) Send(ctx context.Context) (*DescribeStackResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -920,7 +938,7 @@ func (r DescribeStackResourceRequest) Send() (*DescribeStackResourceOutput, erro
 //
 //    // Example sending a request using the DescribeStackResourceRequest method.
 //    req := client.DescribeStackResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -954,7 +972,8 @@ type DescribeStackResourceDriftsRequest struct {
 }
 
 // Send marshals and sends the DescribeStackResourceDrifts API request.
-func (r DescribeStackResourceDriftsRequest) Send() (*DescribeStackResourceDriftsOutput, error) {
+func (r DescribeStackResourceDriftsRequest) Send(ctx context.Context) (*DescribeStackResourceDriftsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -981,7 +1000,7 @@ func (r DescribeStackResourceDriftsRequest) Send() (*DescribeStackResourceDrifts
 //
 //    // Example sending a request using the DescribeStackResourceDriftsRequest method.
 //    req := client.DescribeStackResourceDriftsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1031,7 +1050,7 @@ func (c *CloudFormation) DescribeStackResourceDriftsRequest(input *DescribeStack
 func (p *DescribeStackResourceDriftsRequest) Paginate(opts ...aws.Option) DescribeStackResourceDriftsPager {
 	return DescribeStackResourceDriftsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStackResourceDriftsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1040,6 +1059,7 @@ func (p *DescribeStackResourceDriftsRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1067,7 +1087,8 @@ type DescribeStackResourcesRequest struct {
 }
 
 // Send marshals and sends the DescribeStackResources API request.
-func (r DescribeStackResourcesRequest) Send() (*DescribeStackResourcesOutput, error) {
+func (r DescribeStackResourcesRequest) Send(ctx context.Context) (*DescribeStackResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1100,7 +1121,7 @@ func (r DescribeStackResourcesRequest) Send() (*DescribeStackResourcesOutput, er
 //
 //    // Example sending a request using the DescribeStackResourcesRequest method.
 //    req := client.DescribeStackResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1134,7 +1155,8 @@ type DescribeStackSetRequest struct {
 }
 
 // Send marshals and sends the DescribeStackSet API request.
-func (r DescribeStackSetRequest) Send() (*DescribeStackSetOutput, error) {
+func (r DescribeStackSetRequest) Send(ctx context.Context) (*DescribeStackSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1150,7 +1172,7 @@ func (r DescribeStackSetRequest) Send() (*DescribeStackSetOutput, error) {
 //
 //    // Example sending a request using the DescribeStackSetRequest method.
 //    req := client.DescribeStackSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1184,7 +1206,8 @@ type DescribeStackSetOperationRequest struct {
 }
 
 // Send marshals and sends the DescribeStackSetOperation API request.
-func (r DescribeStackSetOperationRequest) Send() (*DescribeStackSetOperationOutput, error) {
+func (r DescribeStackSetOperationRequest) Send(ctx context.Context) (*DescribeStackSetOperationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1200,7 +1223,7 @@ func (r DescribeStackSetOperationRequest) Send() (*DescribeStackSetOperationOutp
 //
 //    // Example sending a request using the DescribeStackSetOperationRequest method.
 //    req := client.DescribeStackSetOperationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1234,7 +1257,8 @@ type DescribeStacksRequest struct {
 }
 
 // Send marshals and sends the DescribeStacks API request.
-func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+func (r DescribeStacksRequest) Send(ctx context.Context) (*DescribeStacksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1253,7 +1277,7 @@ func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
 //
 //    // Example sending a request using the DescribeStacksRequest method.
 //    req := client.DescribeStacksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1303,7 +1327,7 @@ func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) Descr
 func (p *DescribeStacksRequest) Paginate(opts ...aws.Option) DescribeStacksPager {
 	return DescribeStacksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeStacksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1312,6 +1336,7 @@ func (p *DescribeStacksRequest) Paginate(opts ...aws.Option) DescribeStacksPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1339,7 +1364,8 @@ type DetectStackDriftRequest struct {
 }
 
 // Send marshals and sends the DetectStackDrift API request.
-func (r DetectStackDriftRequest) Send() (*DetectStackDriftOutput, error) {
+func (r DetectStackDriftRequest) Send(ctx context.Context) (*DetectStackDriftOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1379,7 +1405,7 @@ func (r DetectStackDriftRequest) Send() (*DetectStackDriftOutput, error) {
 //
 //    // Example sending a request using the DetectStackDriftRequest method.
 //    req := client.DetectStackDriftRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1413,7 +1439,8 @@ type DetectStackResourceDriftRequest struct {
 }
 
 // Send marshals and sends the DetectStackResourceDrift API request.
-func (r DetectStackResourceDriftRequest) Send() (*DetectStackResourceDriftOutput, error) {
+func (r DetectStackResourceDriftRequest) Send(ctx context.Context) (*DetectStackResourceDriftOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1443,7 +1470,7 @@ func (r DetectStackResourceDriftRequest) Send() (*DetectStackResourceDriftOutput
 //
 //    // Example sending a request using the DetectStackResourceDriftRequest method.
 //    req := client.DetectStackResourceDriftRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1477,7 +1504,8 @@ type EstimateTemplateCostRequest struct {
 }
 
 // Send marshals and sends the EstimateTemplateCost API request.
-func (r EstimateTemplateCostRequest) Send() (*EstimateTemplateCostOutput, error) {
+func (r EstimateTemplateCostRequest) Send(ctx context.Context) (*EstimateTemplateCostOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1495,7 +1523,7 @@ func (r EstimateTemplateCostRequest) Send() (*EstimateTemplateCostOutput, error)
 //
 //    // Example sending a request using the EstimateTemplateCostRequest method.
 //    req := client.EstimateTemplateCostRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1529,7 +1557,8 @@ type ExecuteChangeSetRequest struct {
 }
 
 // Send marshals and sends the ExecuteChangeSet API request.
-func (r ExecuteChangeSetRequest) Send() (*ExecuteChangeSetOutput, error) {
+func (r ExecuteChangeSetRequest) Send(ctx context.Context) (*ExecuteChangeSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1556,7 +1585,7 @@ func (r ExecuteChangeSetRequest) Send() (*ExecuteChangeSetOutput, error) {
 //
 //    // Example sending a request using the ExecuteChangeSetRequest method.
 //    req := client.ExecuteChangeSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1590,7 +1619,8 @@ type GetStackPolicyRequest struct {
 }
 
 // Send marshals and sends the GetStackPolicy API request.
-func (r GetStackPolicyRequest) Send() (*GetStackPolicyOutput, error) {
+func (r GetStackPolicyRequest) Send(ctx context.Context) (*GetStackPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1607,7 +1637,7 @@ func (r GetStackPolicyRequest) Send() (*GetStackPolicyOutput, error) {
 //
 //    // Example sending a request using the GetStackPolicyRequest method.
 //    req := client.GetStackPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1641,7 +1671,8 @@ type GetTemplateRequest struct {
 }
 
 // Send marshals and sends the GetTemplate API request.
-func (r GetTemplateRequest) Send() (*GetTemplateOutput, error) {
+func (r GetTemplateRequest) Send(ctx context.Context) (*GetTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1663,7 +1694,7 @@ func (r GetTemplateRequest) Send() (*GetTemplateOutput, error) {
 //
 //    // Example sending a request using the GetTemplateRequest method.
 //    req := client.GetTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1697,7 +1728,8 @@ type GetTemplateSummaryRequest struct {
 }
 
 // Send marshals and sends the GetTemplateSummary API request.
-func (r GetTemplateSummaryRequest) Send() (*GetTemplateSummaryOutput, error) {
+func (r GetTemplateSummaryRequest) Send(ctx context.Context) (*GetTemplateSummaryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1724,7 +1756,7 @@ func (r GetTemplateSummaryRequest) Send() (*GetTemplateSummaryOutput, error) {
 //
 //    // Example sending a request using the GetTemplateSummaryRequest method.
 //    req := client.GetTemplateSummaryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1758,7 +1790,8 @@ type ListChangeSetsRequest struct {
 }
 
 // Send marshals and sends the ListChangeSets API request.
-func (r ListChangeSetsRequest) Send() (*ListChangeSetsOutput, error) {
+func (r ListChangeSetsRequest) Send(ctx context.Context) (*ListChangeSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1776,7 +1809,7 @@ func (r ListChangeSetsRequest) Send() (*ListChangeSetsOutput, error) {
 //
 //    // Example sending a request using the ListChangeSetsRequest method.
 //    req := client.ListChangeSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1810,7 +1843,8 @@ type ListExportsRequest struct {
 }
 
 // Send marshals and sends the ListExports API request.
-func (r ListExportsRequest) Send() (*ListExportsOutput, error) {
+func (r ListExportsRequest) Send(ctx context.Context) (*ListExportsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1832,7 +1866,7 @@ func (r ListExportsRequest) Send() (*ListExportsOutput, error) {
 //
 //    // Example sending a request using the ListExportsRequest method.
 //    req := client.ListExportsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1882,7 +1916,7 @@ func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) ListExports
 func (p *ListExportsRequest) Paginate(opts ...aws.Option) ListExportsPager {
 	return ListExportsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListExportsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1891,6 +1925,7 @@ func (p *ListExportsRequest) Paginate(opts ...aws.Option) ListExportsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1918,7 +1953,8 @@ type ListImportsRequest struct {
 }
 
 // Send marshals and sends the ListImports API request.
-func (r ListImportsRequest) Send() (*ListImportsOutput, error) {
+func (r ListImportsRequest) Send(ctx context.Context) (*ListImportsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1940,7 +1976,7 @@ func (r ListImportsRequest) Send() (*ListImportsOutput, error) {
 //
 //    // Example sending a request using the ListImportsRequest method.
 //    req := client.ListImportsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1990,7 +2026,7 @@ func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) ListImports
 func (p *ListImportsRequest) Paginate(opts ...aws.Option) ListImportsPager {
 	return ListImportsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListImportsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1999,6 +2035,7 @@ func (p *ListImportsRequest) Paginate(opts ...aws.Option) ListImportsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2026,7 +2063,8 @@ type ListStackInstancesRequest struct {
 }
 
 // Send marshals and sends the ListStackInstances API request.
-func (r ListStackInstancesRequest) Send() (*ListStackInstancesOutput, error) {
+func (r ListStackInstancesRequest) Send(ctx context.Context) (*ListStackInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2044,7 +2082,7 @@ func (r ListStackInstancesRequest) Send() (*ListStackInstancesOutput, error) {
 //
 //    // Example sending a request using the ListStackInstancesRequest method.
 //    req := client.ListStackInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2078,7 +2116,8 @@ type ListStackResourcesRequest struct {
 }
 
 // Send marshals and sends the ListStackResources API request.
-func (r ListStackResourcesRequest) Send() (*ListStackResourcesOutput, error) {
+func (r ListStackResourcesRequest) Send(ctx context.Context) (*ListStackResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2097,7 +2136,7 @@ func (r ListStackResourcesRequest) Send() (*ListStackResourcesOutput, error) {
 //
 //    // Example sending a request using the ListStackResourcesRequest method.
 //    req := client.ListStackResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2147,7 +2186,7 @@ func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInpu
 func (p *ListStackResourcesRequest) Paginate(opts ...aws.Option) ListStackResourcesPager {
 	return ListStackResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStackResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2156,6 +2195,7 @@ func (p *ListStackResourcesRequest) Paginate(opts ...aws.Option) ListStackResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2183,7 +2223,8 @@ type ListStackSetOperationResultsRequest struct {
 }
 
 // Send marshals and sends the ListStackSetOperationResults API request.
-func (r ListStackSetOperationResultsRequest) Send() (*ListStackSetOperationResultsOutput, error) {
+func (r ListStackSetOperationResultsRequest) Send(ctx context.Context) (*ListStackSetOperationResultsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2199,7 +2240,7 @@ func (r ListStackSetOperationResultsRequest) Send() (*ListStackSetOperationResul
 //
 //    // Example sending a request using the ListStackSetOperationResultsRequest method.
 //    req := client.ListStackSetOperationResultsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2233,7 +2274,8 @@ type ListStackSetOperationsRequest struct {
 }
 
 // Send marshals and sends the ListStackSetOperations API request.
-func (r ListStackSetOperationsRequest) Send() (*ListStackSetOperationsOutput, error) {
+func (r ListStackSetOperationsRequest) Send(ctx context.Context) (*ListStackSetOperationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2249,7 +2291,7 @@ func (r ListStackSetOperationsRequest) Send() (*ListStackSetOperationsOutput, er
 //
 //    // Example sending a request using the ListStackSetOperationsRequest method.
 //    req := client.ListStackSetOperationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2283,7 +2325,8 @@ type ListStackSetsRequest struct {
 }
 
 // Send marshals and sends the ListStackSets API request.
-func (r ListStackSetsRequest) Send() (*ListStackSetsOutput, error) {
+func (r ListStackSetsRequest) Send(ctx context.Context) (*ListStackSetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2300,7 +2343,7 @@ func (r ListStackSetsRequest) Send() (*ListStackSetsOutput, error) {
 //
 //    // Example sending a request using the ListStackSetsRequest method.
 //    req := client.ListStackSetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2334,7 +2377,8 @@ type ListStacksRequest struct {
 }
 
 // Send marshals and sends the ListStacks API request.
-func (r ListStacksRequest) Send() (*ListStacksOutput, error) {
+func (r ListStacksRequest) Send(ctx context.Context) (*ListStacksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2354,7 +2398,7 @@ func (r ListStacksRequest) Send() (*ListStacksOutput, error) {
 //
 //    // Example sending a request using the ListStacksRequest method.
 //    req := client.ListStacksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2404,7 +2448,7 @@ func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) ListStacksReq
 func (p *ListStacksRequest) Paginate(opts ...aws.Option) ListStacksPager {
 	return ListStacksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListStacksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2413,6 +2457,7 @@ func (p *ListStacksRequest) Paginate(opts ...aws.Option) ListStacksPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2440,7 +2485,8 @@ type SetStackPolicyRequest struct {
 }
 
 // Send marshals and sends the SetStackPolicy API request.
-func (r SetStackPolicyRequest) Send() (*SetStackPolicyOutput, error) {
+func (r SetStackPolicyRequest) Send(ctx context.Context) (*SetStackPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2456,7 +2502,7 @@ func (r SetStackPolicyRequest) Send() (*SetStackPolicyOutput, error) {
 //
 //    // Example sending a request using the SetStackPolicyRequest method.
 //    req := client.SetStackPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2492,7 +2538,8 @@ type SignalResourceRequest struct {
 }
 
 // Send marshals and sends the SignalResource API request.
-func (r SignalResourceRequest) Send() (*SignalResourceOutput, error) {
+func (r SignalResourceRequest) Send(ctx context.Context) (*SignalResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2513,7 +2560,7 @@ func (r SignalResourceRequest) Send() (*SignalResourceOutput, error) {
 //
 //    // Example sending a request using the SignalResourceRequest method.
 //    req := client.SignalResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2549,7 +2596,8 @@ type StopStackSetOperationRequest struct {
 }
 
 // Send marshals and sends the StopStackSetOperation API request.
-func (r StopStackSetOperationRequest) Send() (*StopStackSetOperationOutput, error) {
+func (r StopStackSetOperationRequest) Send(ctx context.Context) (*StopStackSetOperationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2565,7 +2613,7 @@ func (r StopStackSetOperationRequest) Send() (*StopStackSetOperationOutput, erro
 //
 //    // Example sending a request using the StopStackSetOperationRequest method.
 //    req := client.StopStackSetOperationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2599,7 +2647,8 @@ type UpdateStackRequest struct {
 }
 
 // Send marshals and sends the UpdateStack API request.
-func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+func (r UpdateStackRequest) Send(ctx context.Context) (*UpdateStackOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2623,7 +2672,7 @@ func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
 //
 //    // Example sending a request using the UpdateStackRequest method.
 //    req := client.UpdateStackRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2657,7 +2706,8 @@ type UpdateStackInstancesRequest struct {
 }
 
 // Send marshals and sends the UpdateStackInstances API request.
-func (r UpdateStackInstancesRequest) Send() (*UpdateStackInstancesOutput, error) {
+func (r UpdateStackInstancesRequest) Send(ctx context.Context) (*UpdateStackInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2690,7 +2740,7 @@ func (r UpdateStackInstancesRequest) Send() (*UpdateStackInstancesOutput, error)
 //
 //    // Example sending a request using the UpdateStackInstancesRequest method.
 //    req := client.UpdateStackInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2724,7 +2774,8 @@ type UpdateStackSetRequest struct {
 }
 
 // Send marshals and sends the UpdateStackSet API request.
-func (r UpdateStackSetRequest) Send() (*UpdateStackSetOutput, error) {
+func (r UpdateStackSetRequest) Send(ctx context.Context) (*UpdateStackSetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2746,7 +2797,7 @@ func (r UpdateStackSetRequest) Send() (*UpdateStackSetOutput, error) {
 //
 //    // Example sending a request using the UpdateStackSetRequest method.
 //    req := client.UpdateStackSetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2780,7 +2831,8 @@ type UpdateTerminationProtectionRequest struct {
 }
 
 // Send marshals and sends the UpdateTerminationProtection API request.
-func (r UpdateTerminationProtectionRequest) Send() (*UpdateTerminationProtectionOutput, error) {
+func (r UpdateTerminationProtectionRequest) Send(ctx context.Context) (*UpdateTerminationProtectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2804,7 +2856,7 @@ func (r UpdateTerminationProtectionRequest) Send() (*UpdateTerminationProtection
 //
 //    // Example sending a request using the UpdateTerminationProtectionRequest method.
 //    req := client.UpdateTerminationProtectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2838,7 +2890,8 @@ type ValidateTemplateRequest struct {
 }
 
 // Send marshals and sends the ValidateTemplate API request.
-func (r ValidateTemplateRequest) Send() (*ValidateTemplateOutput, error) {
+func (r ValidateTemplateRequest) Send(ctx context.Context) (*ValidateTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2857,7 +2910,7 @@ func (r ValidateTemplateRequest) Send() (*ValidateTemplateOutput, error) {
 //
 //    // Example sending a request using the ValidateTemplateRequest method.
 //    req := client.ValidateTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

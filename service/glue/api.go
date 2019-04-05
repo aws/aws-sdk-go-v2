@@ -3,6 +3,7 @@
 package glue
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type BatchCreatePartitionRequest struct {
 }
 
 // Send marshals and sends the BatchCreatePartition API request.
-func (r BatchCreatePartitionRequest) Send() (*BatchCreatePartitionOutput, error) {
+func (r BatchCreatePartitionRequest) Send(ctx context.Context) (*BatchCreatePartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r BatchCreatePartitionRequest) Send() (*BatchCreatePartitionOutput, error)
 //
 //    // Example sending a request using the BatchCreatePartitionRequest method.
 //    req := client.BatchCreatePartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type BatchDeleteConnectionRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteConnection API request.
-func (r BatchDeleteConnectionRequest) Send() (*BatchDeleteConnectionOutput, error) {
+func (r BatchDeleteConnectionRequest) Send(ctx context.Context) (*BatchDeleteConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r BatchDeleteConnectionRequest) Send() (*BatchDeleteConnectionOutput, erro
 //
 //    // Example sending a request using the BatchDeleteConnectionRequest method.
 //    req := client.BatchDeleteConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type BatchDeletePartitionRequest struct {
 }
 
 // Send marshals and sends the BatchDeletePartition API request.
-func (r BatchDeletePartitionRequest) Send() (*BatchDeletePartitionOutput, error) {
+func (r BatchDeletePartitionRequest) Send(ctx context.Context) (*BatchDeletePartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ func (r BatchDeletePartitionRequest) Send() (*BatchDeletePartitionOutput, error)
 //
 //    // Example sending a request using the BatchDeletePartitionRequest method.
 //    req := client.BatchDeletePartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type BatchDeleteTableRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteTable API request.
-func (r BatchDeleteTableRequest) Send() (*BatchDeleteTableOutput, error) {
+func (r BatchDeleteTableRequest) Send(ctx context.Context) (*BatchDeleteTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -195,7 +200,7 @@ func (r BatchDeleteTableRequest) Send() (*BatchDeleteTableOutput, error) {
 //
 //    // Example sending a request using the BatchDeleteTableRequest method.
 //    req := client.BatchDeleteTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -229,7 +234,8 @@ type BatchDeleteTableVersionRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteTableVersion API request.
-func (r BatchDeleteTableVersionRequest) Send() (*BatchDeleteTableVersionOutput, error) {
+func (r BatchDeleteTableVersionRequest) Send(ctx context.Context) (*BatchDeleteTableVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -245,7 +251,7 @@ func (r BatchDeleteTableVersionRequest) Send() (*BatchDeleteTableVersionOutput, 
 //
 //    // Example sending a request using the BatchDeleteTableVersionRequest method.
 //    req := client.BatchDeleteTableVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -279,7 +285,8 @@ type BatchGetPartitionRequest struct {
 }
 
 // Send marshals and sends the BatchGetPartition API request.
-func (r BatchGetPartitionRequest) Send() (*BatchGetPartitionOutput, error) {
+func (r BatchGetPartitionRequest) Send(ctx context.Context) (*BatchGetPartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -295,7 +302,7 @@ func (r BatchGetPartitionRequest) Send() (*BatchGetPartitionOutput, error) {
 //
 //    // Example sending a request using the BatchGetPartitionRequest method.
 //    req := client.BatchGetPartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -329,7 +336,8 @@ type BatchStopJobRunRequest struct {
 }
 
 // Send marshals and sends the BatchStopJobRun API request.
-func (r BatchStopJobRunRequest) Send() (*BatchStopJobRunOutput, error) {
+func (r BatchStopJobRunRequest) Send(ctx context.Context) (*BatchStopJobRunOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -345,7 +353,7 @@ func (r BatchStopJobRunRequest) Send() (*BatchStopJobRunOutput, error) {
 //
 //    // Example sending a request using the BatchStopJobRunRequest method.
 //    req := client.BatchStopJobRunRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -379,7 +387,8 @@ type CreateClassifierRequest struct {
 }
 
 // Send marshals and sends the CreateClassifier API request.
-func (r CreateClassifierRequest) Send() (*CreateClassifierOutput, error) {
+func (r CreateClassifierRequest) Send(ctx context.Context) (*CreateClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -397,7 +406,7 @@ func (r CreateClassifierRequest) Send() (*CreateClassifierOutput, error) {
 //
 //    // Example sending a request using the CreateClassifierRequest method.
 //    req := client.CreateClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -431,7 +440,8 @@ type CreateConnectionRequest struct {
 }
 
 // Send marshals and sends the CreateConnection API request.
-func (r CreateConnectionRequest) Send() (*CreateConnectionOutput, error) {
+func (r CreateConnectionRequest) Send(ctx context.Context) (*CreateConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +457,7 @@ func (r CreateConnectionRequest) Send() (*CreateConnectionOutput, error) {
 //
 //    // Example sending a request using the CreateConnectionRequest method.
 //    req := client.CreateConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -481,7 +491,8 @@ type CreateCrawlerRequest struct {
 }
 
 // Send marshals and sends the CreateCrawler API request.
-func (r CreateCrawlerRequest) Send() (*CreateCrawlerOutput, error) {
+func (r CreateCrawlerRequest) Send(ctx context.Context) (*CreateCrawlerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -499,7 +510,7 @@ func (r CreateCrawlerRequest) Send() (*CreateCrawlerOutput, error) {
 //
 //    // Example sending a request using the CreateCrawlerRequest method.
 //    req := client.CreateCrawlerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -533,7 +544,8 @@ type CreateDatabaseRequest struct {
 }
 
 // Send marshals and sends the CreateDatabase API request.
-func (r CreateDatabaseRequest) Send() (*CreateDatabaseOutput, error) {
+func (r CreateDatabaseRequest) Send(ctx context.Context) (*CreateDatabaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -549,7 +561,7 @@ func (r CreateDatabaseRequest) Send() (*CreateDatabaseOutput, error) {
 //
 //    // Example sending a request using the CreateDatabaseRequest method.
 //    req := client.CreateDatabaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -583,7 +595,8 @@ type CreateDevEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateDevEndpoint API request.
-func (r CreateDevEndpointRequest) Send() (*CreateDevEndpointOutput, error) {
+func (r CreateDevEndpointRequest) Send(ctx context.Context) (*CreateDevEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -599,7 +612,7 @@ func (r CreateDevEndpointRequest) Send() (*CreateDevEndpointOutput, error) {
 //
 //    // Example sending a request using the CreateDevEndpointRequest method.
 //    req := client.CreateDevEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -633,7 +646,8 @@ type CreateJobRequest struct {
 }
 
 // Send marshals and sends the CreateJob API request.
-func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -649,7 +663,7 @@ func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
 //
 //    // Example sending a request using the CreateJobRequest method.
 //    req := client.CreateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -683,7 +697,8 @@ type CreatePartitionRequest struct {
 }
 
 // Send marshals and sends the CreatePartition API request.
-func (r CreatePartitionRequest) Send() (*CreatePartitionOutput, error) {
+func (r CreatePartitionRequest) Send(ctx context.Context) (*CreatePartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -699,7 +714,7 @@ func (r CreatePartitionRequest) Send() (*CreatePartitionOutput, error) {
 //
 //    // Example sending a request using the CreatePartitionRequest method.
 //    req := client.CreatePartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -733,7 +748,8 @@ type CreateScriptRequest struct {
 }
 
 // Send marshals and sends the CreateScript API request.
-func (r CreateScriptRequest) Send() (*CreateScriptOutput, error) {
+func (r CreateScriptRequest) Send(ctx context.Context) (*CreateScriptOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -749,7 +765,7 @@ func (r CreateScriptRequest) Send() (*CreateScriptOutput, error) {
 //
 //    // Example sending a request using the CreateScriptRequest method.
 //    req := client.CreateScriptRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -783,7 +799,8 @@ type CreateSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateSecurityConfiguration API request.
-func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfigurationOutput, error) {
+func (r CreateSecurityConfigurationRequest) Send(ctx context.Context) (*CreateSecurityConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -799,7 +816,7 @@ func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfiguration
 //
 //    // Example sending a request using the CreateSecurityConfigurationRequest method.
 //    req := client.CreateSecurityConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -833,7 +850,8 @@ type CreateTableRequest struct {
 }
 
 // Send marshals and sends the CreateTable API request.
-func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
+func (r CreateTableRequest) Send(ctx context.Context) (*CreateTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -849,7 +867,7 @@ func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
 //
 //    // Example sending a request using the CreateTableRequest method.
 //    req := client.CreateTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -883,7 +901,8 @@ type CreateTriggerRequest struct {
 }
 
 // Send marshals and sends the CreateTrigger API request.
-func (r CreateTriggerRequest) Send() (*CreateTriggerOutput, error) {
+func (r CreateTriggerRequest) Send(ctx context.Context) (*CreateTriggerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -899,7 +918,7 @@ func (r CreateTriggerRequest) Send() (*CreateTriggerOutput, error) {
 //
 //    // Example sending a request using the CreateTriggerRequest method.
 //    req := client.CreateTriggerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -933,7 +952,8 @@ type CreateUserDefinedFunctionRequest struct {
 }
 
 // Send marshals and sends the CreateUserDefinedFunction API request.
-func (r CreateUserDefinedFunctionRequest) Send() (*CreateUserDefinedFunctionOutput, error) {
+func (r CreateUserDefinedFunctionRequest) Send(ctx context.Context) (*CreateUserDefinedFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -949,7 +969,7 @@ func (r CreateUserDefinedFunctionRequest) Send() (*CreateUserDefinedFunctionOutp
 //
 //    // Example sending a request using the CreateUserDefinedFunctionRequest method.
 //    req := client.CreateUserDefinedFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -983,7 +1003,8 @@ type DeleteClassifierRequest struct {
 }
 
 // Send marshals and sends the DeleteClassifier API request.
-func (r DeleteClassifierRequest) Send() (*DeleteClassifierOutput, error) {
+func (r DeleteClassifierRequest) Send(ctx context.Context) (*DeleteClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -999,7 +1020,7 @@ func (r DeleteClassifierRequest) Send() (*DeleteClassifierOutput, error) {
 //
 //    // Example sending a request using the DeleteClassifierRequest method.
 //    req := client.DeleteClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1033,7 +1054,8 @@ type DeleteConnectionRequest struct {
 }
 
 // Send marshals and sends the DeleteConnection API request.
-func (r DeleteConnectionRequest) Send() (*DeleteConnectionOutput, error) {
+func (r DeleteConnectionRequest) Send(ctx context.Context) (*DeleteConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1049,7 +1071,7 @@ func (r DeleteConnectionRequest) Send() (*DeleteConnectionOutput, error) {
 //
 //    // Example sending a request using the DeleteConnectionRequest method.
 //    req := client.DeleteConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1083,7 +1105,8 @@ type DeleteCrawlerRequest struct {
 }
 
 // Send marshals and sends the DeleteCrawler API request.
-func (r DeleteCrawlerRequest) Send() (*DeleteCrawlerOutput, error) {
+func (r DeleteCrawlerRequest) Send(ctx context.Context) (*DeleteCrawlerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1100,7 +1123,7 @@ func (r DeleteCrawlerRequest) Send() (*DeleteCrawlerOutput, error) {
 //
 //    // Example sending a request using the DeleteCrawlerRequest method.
 //    req := client.DeleteCrawlerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1134,7 +1157,8 @@ type DeleteDatabaseRequest struct {
 }
 
 // Send marshals and sends the DeleteDatabase API request.
-func (r DeleteDatabaseRequest) Send() (*DeleteDatabaseOutput, error) {
+func (r DeleteDatabaseRequest) Send(ctx context.Context) (*DeleteDatabaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,7 +1185,7 @@ func (r DeleteDatabaseRequest) Send() (*DeleteDatabaseOutput, error) {
 //
 //    // Example sending a request using the DeleteDatabaseRequest method.
 //    req := client.DeleteDatabaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1195,7 +1219,8 @@ type DeleteDevEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteDevEndpoint API request.
-func (r DeleteDevEndpointRequest) Send() (*DeleteDevEndpointOutput, error) {
+func (r DeleteDevEndpointRequest) Send(ctx context.Context) (*DeleteDevEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1211,7 +1236,7 @@ func (r DeleteDevEndpointRequest) Send() (*DeleteDevEndpointOutput, error) {
 //
 //    // Example sending a request using the DeleteDevEndpointRequest method.
 //    req := client.DeleteDevEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1245,7 +1270,8 @@ type DeleteJobRequest struct {
 }
 
 // Send marshals and sends the DeleteJob API request.
-func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
+func (r DeleteJobRequest) Send(ctx context.Context) (*DeleteJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1262,7 +1288,7 @@ func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
 //
 //    // Example sending a request using the DeleteJobRequest method.
 //    req := client.DeleteJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1296,7 +1322,8 @@ type DeletePartitionRequest struct {
 }
 
 // Send marshals and sends the DeletePartition API request.
-func (r DeletePartitionRequest) Send() (*DeletePartitionOutput, error) {
+func (r DeletePartitionRequest) Send(ctx context.Context) (*DeletePartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1312,7 +1339,7 @@ func (r DeletePartitionRequest) Send() (*DeletePartitionOutput, error) {
 //
 //    // Example sending a request using the DeletePartitionRequest method.
 //    req := client.DeletePartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1346,7 +1373,8 @@ type DeleteResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
-func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
+func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1362,7 +1390,7 @@ func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error)
 //
 //    // Example sending a request using the DeleteResourcePolicyRequest method.
 //    req := client.DeleteResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1396,7 +1424,8 @@ type DeleteSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteSecurityConfiguration API request.
-func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfigurationOutput, error) {
+func (r DeleteSecurityConfigurationRequest) Send(ctx context.Context) (*DeleteSecurityConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1412,7 +1441,7 @@ func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfiguration
 //
 //    // Example sending a request using the DeleteSecurityConfigurationRequest method.
 //    req := client.DeleteSecurityConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1446,7 +1475,8 @@ type DeleteTableRequest struct {
 }
 
 // Send marshals and sends the DeleteTable API request.
-func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
+func (r DeleteTableRequest) Send(ctx context.Context) (*DeleteTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1471,7 +1501,7 @@ func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
 //
 //    // Example sending a request using the DeleteTableRequest method.
 //    req := client.DeleteTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1505,7 +1535,8 @@ type DeleteTableVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteTableVersion API request.
-func (r DeleteTableVersionRequest) Send() (*DeleteTableVersionOutput, error) {
+func (r DeleteTableVersionRequest) Send(ctx context.Context) (*DeleteTableVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1521,7 +1552,7 @@ func (r DeleteTableVersionRequest) Send() (*DeleteTableVersionOutput, error) {
 //
 //    // Example sending a request using the DeleteTableVersionRequest method.
 //    req := client.DeleteTableVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1555,7 +1586,8 @@ type DeleteTriggerRequest struct {
 }
 
 // Send marshals and sends the DeleteTrigger API request.
-func (r DeleteTriggerRequest) Send() (*DeleteTriggerOutput, error) {
+func (r DeleteTriggerRequest) Send(ctx context.Context) (*DeleteTriggerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1572,7 +1604,7 @@ func (r DeleteTriggerRequest) Send() (*DeleteTriggerOutput, error) {
 //
 //    // Example sending a request using the DeleteTriggerRequest method.
 //    req := client.DeleteTriggerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1606,7 +1638,8 @@ type DeleteUserDefinedFunctionRequest struct {
 }
 
 // Send marshals and sends the DeleteUserDefinedFunction API request.
-func (r DeleteUserDefinedFunctionRequest) Send() (*DeleteUserDefinedFunctionOutput, error) {
+func (r DeleteUserDefinedFunctionRequest) Send(ctx context.Context) (*DeleteUserDefinedFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1622,7 +1655,7 @@ func (r DeleteUserDefinedFunctionRequest) Send() (*DeleteUserDefinedFunctionOutp
 //
 //    // Example sending a request using the DeleteUserDefinedFunctionRequest method.
 //    req := client.DeleteUserDefinedFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1656,7 +1689,8 @@ type GetCatalogImportStatusRequest struct {
 }
 
 // Send marshals and sends the GetCatalogImportStatus API request.
-func (r GetCatalogImportStatusRequest) Send() (*GetCatalogImportStatusOutput, error) {
+func (r GetCatalogImportStatusRequest) Send(ctx context.Context) (*GetCatalogImportStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1672,7 +1706,7 @@ func (r GetCatalogImportStatusRequest) Send() (*GetCatalogImportStatusOutput, er
 //
 //    // Example sending a request using the GetCatalogImportStatusRequest method.
 //    req := client.GetCatalogImportStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1706,7 +1740,8 @@ type GetClassifierRequest struct {
 }
 
 // Send marshals and sends the GetClassifier API request.
-func (r GetClassifierRequest) Send() (*GetClassifierOutput, error) {
+func (r GetClassifierRequest) Send(ctx context.Context) (*GetClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1722,7 +1757,7 @@ func (r GetClassifierRequest) Send() (*GetClassifierOutput, error) {
 //
 //    // Example sending a request using the GetClassifierRequest method.
 //    req := client.GetClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1756,7 +1791,8 @@ type GetClassifiersRequest struct {
 }
 
 // Send marshals and sends the GetClassifiers API request.
-func (r GetClassifiersRequest) Send() (*GetClassifiersOutput, error) {
+func (r GetClassifiersRequest) Send(ctx context.Context) (*GetClassifiersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1772,7 +1808,7 @@ func (r GetClassifiersRequest) Send() (*GetClassifiersOutput, error) {
 //
 //    // Example sending a request using the GetClassifiersRequest method.
 //    req := client.GetClassifiersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1822,7 +1858,7 @@ func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersR
 func (p *GetClassifiersRequest) Paginate(opts ...aws.Option) GetClassifiersPager {
 	return GetClassifiersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetClassifiersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1831,6 +1867,7 @@ func (p *GetClassifiersRequest) Paginate(opts ...aws.Option) GetClassifiersPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1858,7 +1895,8 @@ type GetConnectionRequest struct {
 }
 
 // Send marshals and sends the GetConnection API request.
-func (r GetConnectionRequest) Send() (*GetConnectionOutput, error) {
+func (r GetConnectionRequest) Send(ctx context.Context) (*GetConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1874,7 +1912,7 @@ func (r GetConnectionRequest) Send() (*GetConnectionOutput, error) {
 //
 //    // Example sending a request using the GetConnectionRequest method.
 //    req := client.GetConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1908,7 +1946,8 @@ type GetConnectionsRequest struct {
 }
 
 // Send marshals and sends the GetConnections API request.
-func (r GetConnectionsRequest) Send() (*GetConnectionsOutput, error) {
+func (r GetConnectionsRequest) Send(ctx context.Context) (*GetConnectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1924,7 +1963,7 @@ func (r GetConnectionsRequest) Send() (*GetConnectionsOutput, error) {
 //
 //    // Example sending a request using the GetConnectionsRequest method.
 //    req := client.GetConnectionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1974,7 +2013,7 @@ func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsR
 func (p *GetConnectionsRequest) Paginate(opts ...aws.Option) GetConnectionsPager {
 	return GetConnectionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetConnectionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1983,6 +2022,7 @@ func (p *GetConnectionsRequest) Paginate(opts ...aws.Option) GetConnectionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2010,7 +2050,8 @@ type GetCrawlerRequest struct {
 }
 
 // Send marshals and sends the GetCrawler API request.
-func (r GetCrawlerRequest) Send() (*GetCrawlerOutput, error) {
+func (r GetCrawlerRequest) Send(ctx context.Context) (*GetCrawlerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2026,7 +2067,7 @@ func (r GetCrawlerRequest) Send() (*GetCrawlerOutput, error) {
 //
 //    // Example sending a request using the GetCrawlerRequest method.
 //    req := client.GetCrawlerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2060,7 +2101,8 @@ type GetCrawlerMetricsRequest struct {
 }
 
 // Send marshals and sends the GetCrawlerMetrics API request.
-func (r GetCrawlerMetricsRequest) Send() (*GetCrawlerMetricsOutput, error) {
+func (r GetCrawlerMetricsRequest) Send(ctx context.Context) (*GetCrawlerMetricsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2076,7 +2118,7 @@ func (r GetCrawlerMetricsRequest) Send() (*GetCrawlerMetricsOutput, error) {
 //
 //    // Example sending a request using the GetCrawlerMetricsRequest method.
 //    req := client.GetCrawlerMetricsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2126,7 +2168,7 @@ func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawle
 func (p *GetCrawlerMetricsRequest) Paginate(opts ...aws.Option) GetCrawlerMetricsPager {
 	return GetCrawlerMetricsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCrawlerMetricsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2135,6 +2177,7 @@ func (p *GetCrawlerMetricsRequest) Paginate(opts ...aws.Option) GetCrawlerMetric
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2162,7 +2205,8 @@ type GetCrawlersRequest struct {
 }
 
 // Send marshals and sends the GetCrawlers API request.
-func (r GetCrawlersRequest) Send() (*GetCrawlersOutput, error) {
+func (r GetCrawlersRequest) Send(ctx context.Context) (*GetCrawlersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2178,7 +2222,7 @@ func (r GetCrawlersRequest) Send() (*GetCrawlersOutput, error) {
 //
 //    // Example sending a request using the GetCrawlersRequest method.
 //    req := client.GetCrawlersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2228,7 +2272,7 @@ func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
 func (p *GetCrawlersRequest) Paginate(opts ...aws.Option) GetCrawlersPager {
 	return GetCrawlersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCrawlersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2237,6 +2281,7 @@ func (p *GetCrawlersRequest) Paginate(opts ...aws.Option) GetCrawlersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2264,7 +2309,8 @@ type GetDataCatalogEncryptionSettingsRequest struct {
 }
 
 // Send marshals and sends the GetDataCatalogEncryptionSettings API request.
-func (r GetDataCatalogEncryptionSettingsRequest) Send() (*GetDataCatalogEncryptionSettingsOutput, error) {
+func (r GetDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*GetDataCatalogEncryptionSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2280,7 +2326,7 @@ func (r GetDataCatalogEncryptionSettingsRequest) Send() (*GetDataCatalogEncrypti
 //
 //    // Example sending a request using the GetDataCatalogEncryptionSettingsRequest method.
 //    req := client.GetDataCatalogEncryptionSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2314,7 +2360,8 @@ type GetDatabaseRequest struct {
 }
 
 // Send marshals and sends the GetDatabase API request.
-func (r GetDatabaseRequest) Send() (*GetDatabaseOutput, error) {
+func (r GetDatabaseRequest) Send(ctx context.Context) (*GetDatabaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2330,7 +2377,7 @@ func (r GetDatabaseRequest) Send() (*GetDatabaseOutput, error) {
 //
 //    // Example sending a request using the GetDatabaseRequest method.
 //    req := client.GetDatabaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2364,7 +2411,8 @@ type GetDatabasesRequest struct {
 }
 
 // Send marshals and sends the GetDatabases API request.
-func (r GetDatabasesRequest) Send() (*GetDatabasesOutput, error) {
+func (r GetDatabasesRequest) Send(ctx context.Context) (*GetDatabasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2380,7 +2428,7 @@ func (r GetDatabasesRequest) Send() (*GetDatabasesOutput, error) {
 //
 //    // Example sending a request using the GetDatabasesRequest method.
 //    req := client.GetDatabasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2430,7 +2478,7 @@ func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest
 func (p *GetDatabasesRequest) Paginate(opts ...aws.Option) GetDatabasesPager {
 	return GetDatabasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDatabasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2439,6 +2487,7 @@ func (p *GetDatabasesRequest) Paginate(opts ...aws.Option) GetDatabasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2466,7 +2515,8 @@ type GetDataflowGraphRequest struct {
 }
 
 // Send marshals and sends the GetDataflowGraph API request.
-func (r GetDataflowGraphRequest) Send() (*GetDataflowGraphOutput, error) {
+func (r GetDataflowGraphRequest) Send(ctx context.Context) (*GetDataflowGraphOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2482,7 +2532,7 @@ func (r GetDataflowGraphRequest) Send() (*GetDataflowGraphOutput, error) {
 //
 //    // Example sending a request using the GetDataflowGraphRequest method.
 //    req := client.GetDataflowGraphRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2516,7 +2566,8 @@ type GetDevEndpointRequest struct {
 }
 
 // Send marshals and sends the GetDevEndpoint API request.
-func (r GetDevEndpointRequest) Send() (*GetDevEndpointOutput, error) {
+func (r GetDevEndpointRequest) Send(ctx context.Context) (*GetDevEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2537,7 +2588,7 @@ func (r GetDevEndpointRequest) Send() (*GetDevEndpointOutput, error) {
 //
 //    // Example sending a request using the GetDevEndpointRequest method.
 //    req := client.GetDevEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2571,7 +2622,8 @@ type GetDevEndpointsRequest struct {
 }
 
 // Send marshals and sends the GetDevEndpoints API request.
-func (r GetDevEndpointsRequest) Send() (*GetDevEndpointsOutput, error) {
+func (r GetDevEndpointsRequest) Send(ctx context.Context) (*GetDevEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2592,7 +2644,7 @@ func (r GetDevEndpointsRequest) Send() (*GetDevEndpointsOutput, error) {
 //
 //    // Example sending a request using the GetDevEndpointsRequest method.
 //    req := client.GetDevEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2642,7 +2694,7 @@ func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpoin
 func (p *GetDevEndpointsRequest) Paginate(opts ...aws.Option) GetDevEndpointsPager {
 	return GetDevEndpointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetDevEndpointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2651,6 +2703,7 @@ func (p *GetDevEndpointsRequest) Paginate(opts ...aws.Option) GetDevEndpointsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2678,7 +2731,8 @@ type GetJobRequest struct {
 }
 
 // Send marshals and sends the GetJob API request.
-func (r GetJobRequest) Send() (*GetJobOutput, error) {
+func (r GetJobRequest) Send(ctx context.Context) (*GetJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2694,7 +2748,7 @@ func (r GetJobRequest) Send() (*GetJobOutput, error) {
 //
 //    // Example sending a request using the GetJobRequest method.
 //    req := client.GetJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2728,7 +2782,8 @@ type GetJobRunRequest struct {
 }
 
 // Send marshals and sends the GetJobRun API request.
-func (r GetJobRunRequest) Send() (*GetJobRunOutput, error) {
+func (r GetJobRunRequest) Send(ctx context.Context) (*GetJobRunOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2744,7 +2799,7 @@ func (r GetJobRunRequest) Send() (*GetJobRunOutput, error) {
 //
 //    // Example sending a request using the GetJobRunRequest method.
 //    req := client.GetJobRunRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2778,7 +2833,8 @@ type GetJobRunsRequest struct {
 }
 
 // Send marshals and sends the GetJobRuns API request.
-func (r GetJobRunsRequest) Send() (*GetJobRunsOutput, error) {
+func (r GetJobRunsRequest) Send(ctx context.Context) (*GetJobRunsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2794,7 +2850,7 @@ func (r GetJobRunsRequest) Send() (*GetJobRunsOutput, error) {
 //
 //    // Example sending a request using the GetJobRunsRequest method.
 //    req := client.GetJobRunsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2844,7 +2900,7 @@ func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 func (p *GetJobRunsRequest) Paginate(opts ...aws.Option) GetJobRunsPager {
 	return GetJobRunsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetJobRunsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2853,6 +2909,7 @@ func (p *GetJobRunsRequest) Paginate(opts ...aws.Option) GetJobRunsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2880,7 +2937,8 @@ type GetJobsRequest struct {
 }
 
 // Send marshals and sends the GetJobs API request.
-func (r GetJobsRequest) Send() (*GetJobsOutput, error) {
+func (r GetJobsRequest) Send(ctx context.Context) (*GetJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2896,7 +2954,7 @@ func (r GetJobsRequest) Send() (*GetJobsOutput, error) {
 //
 //    // Example sending a request using the GetJobsRequest method.
 //    req := client.GetJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2946,7 +3004,7 @@ func (c *Glue) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 func (p *GetJobsRequest) Paginate(opts ...aws.Option) GetJobsPager {
 	return GetJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2955,6 +3013,7 @@ func (p *GetJobsRequest) Paginate(opts ...aws.Option) GetJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2982,7 +3041,8 @@ type GetMappingRequest struct {
 }
 
 // Send marshals and sends the GetMapping API request.
-func (r GetMappingRequest) Send() (*GetMappingOutput, error) {
+func (r GetMappingRequest) Send(ctx context.Context) (*GetMappingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2998,7 +3058,7 @@ func (r GetMappingRequest) Send() (*GetMappingOutput, error) {
 //
 //    // Example sending a request using the GetMappingRequest method.
 //    req := client.GetMappingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3032,7 +3092,8 @@ type GetPartitionRequest struct {
 }
 
 // Send marshals and sends the GetPartition API request.
-func (r GetPartitionRequest) Send() (*GetPartitionOutput, error) {
+func (r GetPartitionRequest) Send(ctx context.Context) (*GetPartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3048,7 +3109,7 @@ func (r GetPartitionRequest) Send() (*GetPartitionOutput, error) {
 //
 //    // Example sending a request using the GetPartitionRequest method.
 //    req := client.GetPartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3082,7 +3143,8 @@ type GetPartitionsRequest struct {
 }
 
 // Send marshals and sends the GetPartitions API request.
-func (r GetPartitionsRequest) Send() (*GetPartitionsOutput, error) {
+func (r GetPartitionsRequest) Send(ctx context.Context) (*GetPartitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3098,7 +3160,7 @@ func (r GetPartitionsRequest) Send() (*GetPartitionsOutput, error) {
 //
 //    // Example sending a request using the GetPartitionsRequest method.
 //    req := client.GetPartitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3148,7 +3210,7 @@ func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRequ
 func (p *GetPartitionsRequest) Paginate(opts ...aws.Option) GetPartitionsPager {
 	return GetPartitionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetPartitionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3157,6 +3219,7 @@ func (p *GetPartitionsRequest) Paginate(opts ...aws.Option) GetPartitionsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3184,7 +3247,8 @@ type GetPlanRequest struct {
 }
 
 // Send marshals and sends the GetPlan API request.
-func (r GetPlanRequest) Send() (*GetPlanOutput, error) {
+func (r GetPlanRequest) Send(ctx context.Context) (*GetPlanOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3200,7 +3264,7 @@ func (r GetPlanRequest) Send() (*GetPlanOutput, error) {
 //
 //    // Example sending a request using the GetPlanRequest method.
 //    req := client.GetPlanRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3234,7 +3298,8 @@ type GetResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the GetResourcePolicy API request.
-func (r GetResourcePolicyRequest) Send() (*GetResourcePolicyOutput, error) {
+func (r GetResourcePolicyRequest) Send(ctx context.Context) (*GetResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3250,7 +3315,7 @@ func (r GetResourcePolicyRequest) Send() (*GetResourcePolicyOutput, error) {
 //
 //    // Example sending a request using the GetResourcePolicyRequest method.
 //    req := client.GetResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3284,7 +3349,8 @@ type GetSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetSecurityConfiguration API request.
-func (r GetSecurityConfigurationRequest) Send() (*GetSecurityConfigurationOutput, error) {
+func (r GetSecurityConfigurationRequest) Send(ctx context.Context) (*GetSecurityConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3300,7 +3366,7 @@ func (r GetSecurityConfigurationRequest) Send() (*GetSecurityConfigurationOutput
 //
 //    // Example sending a request using the GetSecurityConfigurationRequest method.
 //    req := client.GetSecurityConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3334,7 +3400,8 @@ type GetSecurityConfigurationsRequest struct {
 }
 
 // Send marshals and sends the GetSecurityConfigurations API request.
-func (r GetSecurityConfigurationsRequest) Send() (*GetSecurityConfigurationsOutput, error) {
+func (r GetSecurityConfigurationsRequest) Send(ctx context.Context) (*GetSecurityConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3350,7 +3417,7 @@ func (r GetSecurityConfigurationsRequest) Send() (*GetSecurityConfigurationsOutp
 //
 //    // Example sending a request using the GetSecurityConfigurationsRequest method.
 //    req := client.GetSecurityConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3384,7 +3451,8 @@ type GetTableRequest struct {
 }
 
 // Send marshals and sends the GetTable API request.
-func (r GetTableRequest) Send() (*GetTableOutput, error) {
+func (r GetTableRequest) Send(ctx context.Context) (*GetTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3400,7 +3468,7 @@ func (r GetTableRequest) Send() (*GetTableOutput, error) {
 //
 //    // Example sending a request using the GetTableRequest method.
 //    req := client.GetTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3434,7 +3502,8 @@ type GetTableVersionRequest struct {
 }
 
 // Send marshals and sends the GetTableVersion API request.
-func (r GetTableVersionRequest) Send() (*GetTableVersionOutput, error) {
+func (r GetTableVersionRequest) Send(ctx context.Context) (*GetTableVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3450,7 +3519,7 @@ func (r GetTableVersionRequest) Send() (*GetTableVersionOutput, error) {
 //
 //    // Example sending a request using the GetTableVersionRequest method.
 //    req := client.GetTableVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3484,7 +3553,8 @@ type GetTableVersionsRequest struct {
 }
 
 // Send marshals and sends the GetTableVersions API request.
-func (r GetTableVersionsRequest) Send() (*GetTableVersionsOutput, error) {
+func (r GetTableVersionsRequest) Send(ctx context.Context) (*GetTableVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3501,7 +3571,7 @@ func (r GetTableVersionsRequest) Send() (*GetTableVersionsOutput, error) {
 //
 //    // Example sending a request using the GetTableVersionsRequest method.
 //    req := client.GetTableVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3551,7 +3621,7 @@ func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVer
 func (p *GetTableVersionsRequest) Paginate(opts ...aws.Option) GetTableVersionsPager {
 	return GetTableVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTableVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3560,6 +3630,7 @@ func (p *GetTableVersionsRequest) Paginate(opts ...aws.Option) GetTableVersionsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3587,7 +3658,8 @@ type GetTablesRequest struct {
 }
 
 // Send marshals and sends the GetTables API request.
-func (r GetTablesRequest) Send() (*GetTablesOutput, error) {
+func (r GetTablesRequest) Send(ctx context.Context) (*GetTablesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3603,7 +3675,7 @@ func (r GetTablesRequest) Send() (*GetTablesOutput, error) {
 //
 //    // Example sending a request using the GetTablesRequest method.
 //    req := client.GetTablesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3653,7 +3725,7 @@ func (c *Glue) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 func (p *GetTablesRequest) Paginate(opts ...aws.Option) GetTablesPager {
 	return GetTablesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTablesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3662,6 +3734,7 @@ func (p *GetTablesRequest) Paginate(opts ...aws.Option) GetTablesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3689,7 +3762,8 @@ type GetTriggerRequest struct {
 }
 
 // Send marshals and sends the GetTrigger API request.
-func (r GetTriggerRequest) Send() (*GetTriggerOutput, error) {
+func (r GetTriggerRequest) Send(ctx context.Context) (*GetTriggerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3705,7 +3779,7 @@ func (r GetTriggerRequest) Send() (*GetTriggerOutput, error) {
 //
 //    // Example sending a request using the GetTriggerRequest method.
 //    req := client.GetTriggerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3739,7 +3813,8 @@ type GetTriggersRequest struct {
 }
 
 // Send marshals and sends the GetTriggers API request.
-func (r GetTriggersRequest) Send() (*GetTriggersOutput, error) {
+func (r GetTriggersRequest) Send(ctx context.Context) (*GetTriggersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3755,7 +3830,7 @@ func (r GetTriggersRequest) Send() (*GetTriggersOutput, error) {
 //
 //    // Example sending a request using the GetTriggersRequest method.
 //    req := client.GetTriggersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3805,7 +3880,7 @@ func (c *Glue) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
 func (p *GetTriggersRequest) Paginate(opts ...aws.Option) GetTriggersPager {
 	return GetTriggersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetTriggersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3814,6 +3889,7 @@ func (p *GetTriggersRequest) Paginate(opts ...aws.Option) GetTriggersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3841,7 +3917,8 @@ type GetUserDefinedFunctionRequest struct {
 }
 
 // Send marshals and sends the GetUserDefinedFunction API request.
-func (r GetUserDefinedFunctionRequest) Send() (*GetUserDefinedFunctionOutput, error) {
+func (r GetUserDefinedFunctionRequest) Send(ctx context.Context) (*GetUserDefinedFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3857,7 +3934,7 @@ func (r GetUserDefinedFunctionRequest) Send() (*GetUserDefinedFunctionOutput, er
 //
 //    // Example sending a request using the GetUserDefinedFunctionRequest method.
 //    req := client.GetUserDefinedFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3891,7 +3968,8 @@ type GetUserDefinedFunctionsRequest struct {
 }
 
 // Send marshals and sends the GetUserDefinedFunctions API request.
-func (r GetUserDefinedFunctionsRequest) Send() (*GetUserDefinedFunctionsOutput, error) {
+func (r GetUserDefinedFunctionsRequest) Send(ctx context.Context) (*GetUserDefinedFunctionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3907,7 +3985,7 @@ func (r GetUserDefinedFunctionsRequest) Send() (*GetUserDefinedFunctionsOutput, 
 //
 //    // Example sending a request using the GetUserDefinedFunctionsRequest method.
 //    req := client.GetUserDefinedFunctionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3957,7 +4035,7 @@ func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInpu
 func (p *GetUserDefinedFunctionsRequest) Paginate(opts ...aws.Option) GetUserDefinedFunctionsPager {
 	return GetUserDefinedFunctionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUserDefinedFunctionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3966,6 +4044,7 @@ func (p *GetUserDefinedFunctionsRequest) Paginate(opts ...aws.Option) GetUserDef
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3993,7 +4072,8 @@ type ImportCatalogToGlueRequest struct {
 }
 
 // Send marshals and sends the ImportCatalogToGlue API request.
-func (r ImportCatalogToGlueRequest) Send() (*ImportCatalogToGlueOutput, error) {
+func (r ImportCatalogToGlueRequest) Send(ctx context.Context) (*ImportCatalogToGlueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4009,7 +4089,7 @@ func (r ImportCatalogToGlueRequest) Send() (*ImportCatalogToGlueOutput, error) {
 //
 //    // Example sending a request using the ImportCatalogToGlueRequest method.
 //    req := client.ImportCatalogToGlueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4043,7 +4123,8 @@ type PutDataCatalogEncryptionSettingsRequest struct {
 }
 
 // Send marshals and sends the PutDataCatalogEncryptionSettings API request.
-func (r PutDataCatalogEncryptionSettingsRequest) Send() (*PutDataCatalogEncryptionSettingsOutput, error) {
+func (r PutDataCatalogEncryptionSettingsRequest) Send(ctx context.Context) (*PutDataCatalogEncryptionSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4061,7 +4142,7 @@ func (r PutDataCatalogEncryptionSettingsRequest) Send() (*PutDataCatalogEncrypti
 //
 //    // Example sending a request using the PutDataCatalogEncryptionSettingsRequest method.
 //    req := client.PutDataCatalogEncryptionSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4095,7 +4176,8 @@ type PutResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the PutResourcePolicy API request.
-func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
+func (r PutResourcePolicyRequest) Send(ctx context.Context) (*PutResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4111,7 +4193,7 @@ func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
 //
 //    // Example sending a request using the PutResourcePolicyRequest method.
 //    req := client.PutResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4145,7 +4227,8 @@ type ResetJobBookmarkRequest struct {
 }
 
 // Send marshals and sends the ResetJobBookmark API request.
-func (r ResetJobBookmarkRequest) Send() (*ResetJobBookmarkOutput, error) {
+func (r ResetJobBookmarkRequest) Send(ctx context.Context) (*ResetJobBookmarkOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4161,7 +4244,7 @@ func (r ResetJobBookmarkRequest) Send() (*ResetJobBookmarkOutput, error) {
 //
 //    // Example sending a request using the ResetJobBookmarkRequest method.
 //    req := client.ResetJobBookmarkRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4195,7 +4278,8 @@ type StartCrawlerRequest struct {
 }
 
 // Send marshals and sends the StartCrawler API request.
-func (r StartCrawlerRequest) Send() (*StartCrawlerOutput, error) {
+func (r StartCrawlerRequest) Send(ctx context.Context) (*StartCrawlerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4212,7 +4296,7 @@ func (r StartCrawlerRequest) Send() (*StartCrawlerOutput, error) {
 //
 //    // Example sending a request using the StartCrawlerRequest method.
 //    req := client.StartCrawlerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4246,7 +4330,8 @@ type StartCrawlerScheduleRequest struct {
 }
 
 // Send marshals and sends the StartCrawlerSchedule API request.
-func (r StartCrawlerScheduleRequest) Send() (*StartCrawlerScheduleOutput, error) {
+func (r StartCrawlerScheduleRequest) Send(ctx context.Context) (*StartCrawlerScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4263,7 +4348,7 @@ func (r StartCrawlerScheduleRequest) Send() (*StartCrawlerScheduleOutput, error)
 //
 //    // Example sending a request using the StartCrawlerScheduleRequest method.
 //    req := client.StartCrawlerScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4297,7 +4382,8 @@ type StartJobRunRequest struct {
 }
 
 // Send marshals and sends the StartJobRun API request.
-func (r StartJobRunRequest) Send() (*StartJobRunOutput, error) {
+func (r StartJobRunRequest) Send(ctx context.Context) (*StartJobRunOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4313,7 +4399,7 @@ func (r StartJobRunRequest) Send() (*StartJobRunOutput, error) {
 //
 //    // Example sending a request using the StartJobRunRequest method.
 //    req := client.StartJobRunRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4347,7 +4433,8 @@ type StartTriggerRequest struct {
 }
 
 // Send marshals and sends the StartTrigger API request.
-func (r StartTriggerRequest) Send() (*StartTriggerOutput, error) {
+func (r StartTriggerRequest) Send(ctx context.Context) (*StartTriggerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4364,7 +4451,7 @@ func (r StartTriggerRequest) Send() (*StartTriggerOutput, error) {
 //
 //    // Example sending a request using the StartTriggerRequest method.
 //    req := client.StartTriggerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4398,7 +4485,8 @@ type StopCrawlerRequest struct {
 }
 
 // Send marshals and sends the StopCrawler API request.
-func (r StopCrawlerRequest) Send() (*StopCrawlerOutput, error) {
+func (r StopCrawlerRequest) Send(ctx context.Context) (*StopCrawlerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4414,7 +4502,7 @@ func (r StopCrawlerRequest) Send() (*StopCrawlerOutput, error) {
 //
 //    // Example sending a request using the StopCrawlerRequest method.
 //    req := client.StopCrawlerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4448,7 +4536,8 @@ type StopCrawlerScheduleRequest struct {
 }
 
 // Send marshals and sends the StopCrawlerSchedule API request.
-func (r StopCrawlerScheduleRequest) Send() (*StopCrawlerScheduleOutput, error) {
+func (r StopCrawlerScheduleRequest) Send(ctx context.Context) (*StopCrawlerScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4465,7 +4554,7 @@ func (r StopCrawlerScheduleRequest) Send() (*StopCrawlerScheduleOutput, error) {
 //
 //    // Example sending a request using the StopCrawlerScheduleRequest method.
 //    req := client.StopCrawlerScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4499,7 +4588,8 @@ type StopTriggerRequest struct {
 }
 
 // Send marshals and sends the StopTrigger API request.
-func (r StopTriggerRequest) Send() (*StopTriggerOutput, error) {
+func (r StopTriggerRequest) Send(ctx context.Context) (*StopTriggerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4515,7 +4605,7 @@ func (r StopTriggerRequest) Send() (*StopTriggerOutput, error) {
 //
 //    // Example sending a request using the StopTriggerRequest method.
 //    req := client.StopTriggerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4549,7 +4639,8 @@ type UpdateClassifierRequest struct {
 }
 
 // Send marshals and sends the UpdateClassifier API request.
-func (r UpdateClassifierRequest) Send() (*UpdateClassifierOutput, error) {
+func (r UpdateClassifierRequest) Send(ctx context.Context) (*UpdateClassifierOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4566,7 +4657,7 @@ func (r UpdateClassifierRequest) Send() (*UpdateClassifierOutput, error) {
 //
 //    // Example sending a request using the UpdateClassifierRequest method.
 //    req := client.UpdateClassifierRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4600,7 +4691,8 @@ type UpdateConnectionRequest struct {
 }
 
 // Send marshals and sends the UpdateConnection API request.
-func (r UpdateConnectionRequest) Send() (*UpdateConnectionOutput, error) {
+func (r UpdateConnectionRequest) Send(ctx context.Context) (*UpdateConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4616,7 +4708,7 @@ func (r UpdateConnectionRequest) Send() (*UpdateConnectionOutput, error) {
 //
 //    // Example sending a request using the UpdateConnectionRequest method.
 //    req := client.UpdateConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4650,7 +4742,8 @@ type UpdateCrawlerRequest struct {
 }
 
 // Send marshals and sends the UpdateCrawler API request.
-func (r UpdateCrawlerRequest) Send() (*UpdateCrawlerOutput, error) {
+func (r UpdateCrawlerRequest) Send(ctx context.Context) (*UpdateCrawlerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4667,7 +4760,7 @@ func (r UpdateCrawlerRequest) Send() (*UpdateCrawlerOutput, error) {
 //
 //    // Example sending a request using the UpdateCrawlerRequest method.
 //    req := client.UpdateCrawlerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4701,7 +4794,8 @@ type UpdateCrawlerScheduleRequest struct {
 }
 
 // Send marshals and sends the UpdateCrawlerSchedule API request.
-func (r UpdateCrawlerScheduleRequest) Send() (*UpdateCrawlerScheduleOutput, error) {
+func (r UpdateCrawlerScheduleRequest) Send(ctx context.Context) (*UpdateCrawlerScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4717,7 +4811,7 @@ func (r UpdateCrawlerScheduleRequest) Send() (*UpdateCrawlerScheduleOutput, erro
 //
 //    // Example sending a request using the UpdateCrawlerScheduleRequest method.
 //    req := client.UpdateCrawlerScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4751,7 +4845,8 @@ type UpdateDatabaseRequest struct {
 }
 
 // Send marshals and sends the UpdateDatabase API request.
-func (r UpdateDatabaseRequest) Send() (*UpdateDatabaseOutput, error) {
+func (r UpdateDatabaseRequest) Send(ctx context.Context) (*UpdateDatabaseOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4767,7 +4862,7 @@ func (r UpdateDatabaseRequest) Send() (*UpdateDatabaseOutput, error) {
 //
 //    // Example sending a request using the UpdateDatabaseRequest method.
 //    req := client.UpdateDatabaseRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4801,7 +4896,8 @@ type UpdateDevEndpointRequest struct {
 }
 
 // Send marshals and sends the UpdateDevEndpoint API request.
-func (r UpdateDevEndpointRequest) Send() (*UpdateDevEndpointOutput, error) {
+func (r UpdateDevEndpointRequest) Send(ctx context.Context) (*UpdateDevEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4817,7 +4913,7 @@ func (r UpdateDevEndpointRequest) Send() (*UpdateDevEndpointOutput, error) {
 //
 //    // Example sending a request using the UpdateDevEndpointRequest method.
 //    req := client.UpdateDevEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4851,7 +4947,8 @@ type UpdateJobRequest struct {
 }
 
 // Send marshals and sends the UpdateJob API request.
-func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
+func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4867,7 +4964,7 @@ func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
 //
 //    // Example sending a request using the UpdateJobRequest method.
 //    req := client.UpdateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4901,7 +4998,8 @@ type UpdatePartitionRequest struct {
 }
 
 // Send marshals and sends the UpdatePartition API request.
-func (r UpdatePartitionRequest) Send() (*UpdatePartitionOutput, error) {
+func (r UpdatePartitionRequest) Send(ctx context.Context) (*UpdatePartitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4917,7 +5015,7 @@ func (r UpdatePartitionRequest) Send() (*UpdatePartitionOutput, error) {
 //
 //    // Example sending a request using the UpdatePartitionRequest method.
 //    req := client.UpdatePartitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4951,7 +5049,8 @@ type UpdateTableRequest struct {
 }
 
 // Send marshals and sends the UpdateTable API request.
-func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
+func (r UpdateTableRequest) Send(ctx context.Context) (*UpdateTableOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4967,7 +5066,7 @@ func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
 //
 //    // Example sending a request using the UpdateTableRequest method.
 //    req := client.UpdateTableRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5001,7 +5100,8 @@ type UpdateTriggerRequest struct {
 }
 
 // Send marshals and sends the UpdateTrigger API request.
-func (r UpdateTriggerRequest) Send() (*UpdateTriggerOutput, error) {
+func (r UpdateTriggerRequest) Send(ctx context.Context) (*UpdateTriggerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5017,7 +5117,7 @@ func (r UpdateTriggerRequest) Send() (*UpdateTriggerOutput, error) {
 //
 //    // Example sending a request using the UpdateTriggerRequest method.
 //    req := client.UpdateTriggerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5051,7 +5151,8 @@ type UpdateUserDefinedFunctionRequest struct {
 }
 
 // Send marshals and sends the UpdateUserDefinedFunction API request.
-func (r UpdateUserDefinedFunctionRequest) Send() (*UpdateUserDefinedFunctionOutput, error) {
+func (r UpdateUserDefinedFunctionRequest) Send(ctx context.Context) (*UpdateUserDefinedFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5067,7 +5168,7 @@ func (r UpdateUserDefinedFunctionRequest) Send() (*UpdateUserDefinedFunctionOutp
 //
 //    // Example sending a request using the UpdateUserDefinedFunctionRequest method.
 //    req := client.UpdateUserDefinedFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

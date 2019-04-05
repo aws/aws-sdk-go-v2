@@ -9,6 +9,8 @@
 package eksiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/eks"
 )
@@ -77,11 +79,9 @@ type EKSAPI interface {
 
 	UpdateClusterVersionRequest(*eks.UpdateClusterVersionInput) eks.UpdateClusterVersionRequest
 
-	WaitUntilClusterActive(*eks.DescribeClusterInput) error
-	WaitUntilClusterActiveWithContext(aws.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error
+	WaitUntilClusterActive(context.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error
 
-	WaitUntilClusterDeleted(*eks.DescribeClusterInput) error
-	WaitUntilClusterDeletedWithContext(aws.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error
+	WaitUntilClusterDeleted(context.Context, *eks.DescribeClusterInput, ...aws.WaiterOption) error
 }
 
 var _ EKSAPI = (*eks.EKS)(nil)

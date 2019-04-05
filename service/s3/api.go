@@ -3,6 +3,7 @@
 package s3
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"time"
@@ -23,7 +24,8 @@ type AbortMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the AbortMultipartUpload API request.
-func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
+func (r AbortMultipartUploadRequest) Send(ctx context.Context) (*AbortMultipartUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error)
 //
 //    // Example sending a request using the AbortMultipartUploadRequest method.
 //    req := client.AbortMultipartUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type CompleteMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the CompleteMultipartUpload API request.
-func (r CompleteMultipartUploadRequest) Send() (*CompleteMultipartUploadOutput, error) {
+func (r CompleteMultipartUploadRequest) Send(ctx context.Context) (*CompleteMultipartUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r CompleteMultipartUploadRequest) Send() (*CompleteMultipartUploadOutput, 
 //
 //    // Example sending a request using the CompleteMultipartUploadRequest method.
 //    req := client.CompleteMultipartUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type CopyObjectRequest struct {
 }
 
 // Send marshals and sends the CopyObject API request.
-func (r CopyObjectRequest) Send() (*CopyObjectOutput, error) {
+func (r CopyObjectRequest) Send(ctx context.Context) (*CopyObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r CopyObjectRequest) Send() (*CopyObjectOutput, error) {
 //
 //    // Example sending a request using the CopyObjectRequest method.
 //    req := client.CopyObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type CreateBucketRequest struct {
 }
 
 // Send marshals and sends the CreateBucket API request.
-func (r CreateBucketRequest) Send() (*CreateBucketOutput, error) {
+func (r CreateBucketRequest) Send(ctx context.Context) (*CreateBucketOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +198,7 @@ func (r CreateBucketRequest) Send() (*CreateBucketOutput, error) {
 //
 //    // Example sending a request using the CreateBucketRequest method.
 //    req := client.CreateBucketRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -227,7 +232,8 @@ type CreateMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the CreateMultipartUpload API request.
-func (r CreateMultipartUploadRequest) Send() (*CreateMultipartUploadOutput, error) {
+func (r CreateMultipartUploadRequest) Send(ctx context.Context) (*CreateMultipartUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +255,7 @@ func (r CreateMultipartUploadRequest) Send() (*CreateMultipartUploadOutput, erro
 //
 //    // Example sending a request using the CreateMultipartUploadRequest method.
 //    req := client.CreateMultipartUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -283,7 +289,8 @@ type DeleteBucketRequest struct {
 }
 
 // Send marshals and sends the DeleteBucket API request.
-func (r DeleteBucketRequest) Send() (*DeleteBucketOutput, error) {
+func (r DeleteBucketRequest) Send(ctx context.Context) (*DeleteBucketOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -300,7 +307,7 @@ func (r DeleteBucketRequest) Send() (*DeleteBucketOutput, error) {
 //
 //    // Example sending a request using the DeleteBucketRequest method.
 //    req := client.DeleteBucketRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -336,7 +343,8 @@ type DeleteBucketAnalyticsConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketAnalyticsConfiguration API request.
-func (r DeleteBucketAnalyticsConfigurationRequest) Send() (*DeleteBucketAnalyticsConfigurationOutput, error) {
+func (r DeleteBucketAnalyticsConfigurationRequest) Send(ctx context.Context) (*DeleteBucketAnalyticsConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -353,7 +361,7 @@ func (r DeleteBucketAnalyticsConfigurationRequest) Send() (*DeleteBucketAnalytic
 //
 //    // Example sending a request using the DeleteBucketAnalyticsConfigurationRequest method.
 //    req := client.DeleteBucketAnalyticsConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -389,7 +397,8 @@ type DeleteBucketCorsRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketCors API request.
-func (r DeleteBucketCorsRequest) Send() (*DeleteBucketCorsOutput, error) {
+func (r DeleteBucketCorsRequest) Send(ctx context.Context) (*DeleteBucketCorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -405,7 +414,7 @@ func (r DeleteBucketCorsRequest) Send() (*DeleteBucketCorsOutput, error) {
 //
 //    // Example sending a request using the DeleteBucketCorsRequest method.
 //    req := client.DeleteBucketCorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -441,7 +450,8 @@ type DeleteBucketEncryptionRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketEncryption API request.
-func (r DeleteBucketEncryptionRequest) Send() (*DeleteBucketEncryptionOutput, error) {
+func (r DeleteBucketEncryptionRequest) Send(ctx context.Context) (*DeleteBucketEncryptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -457,7 +467,7 @@ func (r DeleteBucketEncryptionRequest) Send() (*DeleteBucketEncryptionOutput, er
 //
 //    // Example sending a request using the DeleteBucketEncryptionRequest method.
 //    req := client.DeleteBucketEncryptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -493,7 +503,8 @@ type DeleteBucketInventoryConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketInventoryConfiguration API request.
-func (r DeleteBucketInventoryConfigurationRequest) Send() (*DeleteBucketInventoryConfigurationOutput, error) {
+func (r DeleteBucketInventoryConfigurationRequest) Send(ctx context.Context) (*DeleteBucketInventoryConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -510,7 +521,7 @@ func (r DeleteBucketInventoryConfigurationRequest) Send() (*DeleteBucketInventor
 //
 //    // Example sending a request using the DeleteBucketInventoryConfigurationRequest method.
 //    req := client.DeleteBucketInventoryConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -546,7 +557,8 @@ type DeleteBucketLifecycleRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketLifecycle API request.
-func (r DeleteBucketLifecycleRequest) Send() (*DeleteBucketLifecycleOutput, error) {
+func (r DeleteBucketLifecycleRequest) Send(ctx context.Context) (*DeleteBucketLifecycleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -562,7 +574,7 @@ func (r DeleteBucketLifecycleRequest) Send() (*DeleteBucketLifecycleOutput, erro
 //
 //    // Example sending a request using the DeleteBucketLifecycleRequest method.
 //    req := client.DeleteBucketLifecycleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -598,7 +610,8 @@ type DeleteBucketMetricsConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketMetricsConfiguration API request.
-func (r DeleteBucketMetricsConfigurationRequest) Send() (*DeleteBucketMetricsConfigurationOutput, error) {
+func (r DeleteBucketMetricsConfigurationRequest) Send(ctx context.Context) (*DeleteBucketMetricsConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -615,7 +628,7 @@ func (r DeleteBucketMetricsConfigurationRequest) Send() (*DeleteBucketMetricsCon
 //
 //    // Example sending a request using the DeleteBucketMetricsConfigurationRequest method.
 //    req := client.DeleteBucketMetricsConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -651,7 +664,8 @@ type DeleteBucketPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketPolicy API request.
-func (r DeleteBucketPolicyRequest) Send() (*DeleteBucketPolicyOutput, error) {
+func (r DeleteBucketPolicyRequest) Send(ctx context.Context) (*DeleteBucketPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -667,7 +681,7 @@ func (r DeleteBucketPolicyRequest) Send() (*DeleteBucketPolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteBucketPolicyRequest method.
 //    req := client.DeleteBucketPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -703,7 +717,8 @@ type DeleteBucketReplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketReplication API request.
-func (r DeleteBucketReplicationRequest) Send() (*DeleteBucketReplicationOutput, error) {
+func (r DeleteBucketReplicationRequest) Send(ctx context.Context) (*DeleteBucketReplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -721,7 +736,7 @@ func (r DeleteBucketReplicationRequest) Send() (*DeleteBucketReplicationOutput, 
 //
 //    // Example sending a request using the DeleteBucketReplicationRequest method.
 //    req := client.DeleteBucketReplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -757,7 +772,8 @@ type DeleteBucketTaggingRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketTagging API request.
-func (r DeleteBucketTaggingRequest) Send() (*DeleteBucketTaggingOutput, error) {
+func (r DeleteBucketTaggingRequest) Send(ctx context.Context) (*DeleteBucketTaggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -773,7 +789,7 @@ func (r DeleteBucketTaggingRequest) Send() (*DeleteBucketTaggingOutput, error) {
 //
 //    // Example sending a request using the DeleteBucketTaggingRequest method.
 //    req := client.DeleteBucketTaggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -809,7 +825,8 @@ type DeleteBucketWebsiteRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketWebsite API request.
-func (r DeleteBucketWebsiteRequest) Send() (*DeleteBucketWebsiteOutput, error) {
+func (r DeleteBucketWebsiteRequest) Send(ctx context.Context) (*DeleteBucketWebsiteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -825,7 +842,7 @@ func (r DeleteBucketWebsiteRequest) Send() (*DeleteBucketWebsiteOutput, error) {
 //
 //    // Example sending a request using the DeleteBucketWebsiteRequest method.
 //    req := client.DeleteBucketWebsiteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -861,7 +878,8 @@ type DeleteObjectRequest struct {
 }
 
 // Send marshals and sends the DeleteObject API request.
-func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -879,7 +897,7 @@ func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
 //
 //    // Example sending a request using the DeleteObjectRequest method.
 //    req := client.DeleteObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -913,7 +931,8 @@ type DeleteObjectTaggingRequest struct {
 }
 
 // Send marshals and sends the DeleteObjectTagging API request.
-func (r DeleteObjectTaggingRequest) Send() (*DeleteObjectTaggingOutput, error) {
+func (r DeleteObjectTaggingRequest) Send(ctx context.Context) (*DeleteObjectTaggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -929,7 +948,7 @@ func (r DeleteObjectTaggingRequest) Send() (*DeleteObjectTaggingOutput, error) {
 //
 //    // Example sending a request using the DeleteObjectTaggingRequest method.
 //    req := client.DeleteObjectTaggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -963,7 +982,8 @@ type DeleteObjectsRequest struct {
 }
 
 // Send marshals and sends the DeleteObjects API request.
-func (r DeleteObjectsRequest) Send() (*DeleteObjectsOutput, error) {
+func (r DeleteObjectsRequest) Send(ctx context.Context) (*DeleteObjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -980,7 +1000,7 @@ func (r DeleteObjectsRequest) Send() (*DeleteObjectsOutput, error) {
 //
 //    // Example sending a request using the DeleteObjectsRequest method.
 //    req := client.DeleteObjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1014,7 +1034,8 @@ type DeletePublicAccessBlockRequest struct {
 }
 
 // Send marshals and sends the DeletePublicAccessBlock API request.
-func (r DeletePublicAccessBlockRequest) Send() (*DeletePublicAccessBlockOutput, error) {
+func (r DeletePublicAccessBlockRequest) Send(ctx context.Context) (*DeletePublicAccessBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1030,7 +1051,7 @@ func (r DeletePublicAccessBlockRequest) Send() (*DeletePublicAccessBlockOutput, 
 //
 //    // Example sending a request using the DeletePublicAccessBlockRequest method.
 //    req := client.DeletePublicAccessBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1066,7 +1087,8 @@ type GetBucketAccelerateConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketAccelerateConfiguration API request.
-func (r GetBucketAccelerateConfigurationRequest) Send() (*GetBucketAccelerateConfigurationOutput, error) {
+func (r GetBucketAccelerateConfigurationRequest) Send(ctx context.Context) (*GetBucketAccelerateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1082,7 +1104,7 @@ func (r GetBucketAccelerateConfigurationRequest) Send() (*GetBucketAccelerateCon
 //
 //    // Example sending a request using the GetBucketAccelerateConfigurationRequest method.
 //    req := client.GetBucketAccelerateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1116,7 +1138,8 @@ type GetBucketAclRequest struct {
 }
 
 // Send marshals and sends the GetBucketAcl API request.
-func (r GetBucketAclRequest) Send() (*GetBucketAclOutput, error) {
+func (r GetBucketAclRequest) Send(ctx context.Context) (*GetBucketAclOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1132,7 +1155,7 @@ func (r GetBucketAclRequest) Send() (*GetBucketAclOutput, error) {
 //
 //    // Example sending a request using the GetBucketAclRequest method.
 //    req := client.GetBucketAclRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1166,7 +1189,8 @@ type GetBucketAnalyticsConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketAnalyticsConfiguration API request.
-func (r GetBucketAnalyticsConfigurationRequest) Send() (*GetBucketAnalyticsConfigurationOutput, error) {
+func (r GetBucketAnalyticsConfigurationRequest) Send(ctx context.Context) (*GetBucketAnalyticsConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1183,7 +1207,7 @@ func (r GetBucketAnalyticsConfigurationRequest) Send() (*GetBucketAnalyticsConfi
 //
 //    // Example sending a request using the GetBucketAnalyticsConfigurationRequest method.
 //    req := client.GetBucketAnalyticsConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1217,7 +1241,8 @@ type GetBucketCorsRequest struct {
 }
 
 // Send marshals and sends the GetBucketCors API request.
-func (r GetBucketCorsRequest) Send() (*GetBucketCorsOutput, error) {
+func (r GetBucketCorsRequest) Send(ctx context.Context) (*GetBucketCorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1233,7 +1258,7 @@ func (r GetBucketCorsRequest) Send() (*GetBucketCorsOutput, error) {
 //
 //    // Example sending a request using the GetBucketCorsRequest method.
 //    req := client.GetBucketCorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1267,7 +1292,8 @@ type GetBucketEncryptionRequest struct {
 }
 
 // Send marshals and sends the GetBucketEncryption API request.
-func (r GetBucketEncryptionRequest) Send() (*GetBucketEncryptionOutput, error) {
+func (r GetBucketEncryptionRequest) Send(ctx context.Context) (*GetBucketEncryptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1283,7 +1309,7 @@ func (r GetBucketEncryptionRequest) Send() (*GetBucketEncryptionOutput, error) {
 //
 //    // Example sending a request using the GetBucketEncryptionRequest method.
 //    req := client.GetBucketEncryptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1317,7 +1343,8 @@ type GetBucketInventoryConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketInventoryConfiguration API request.
-func (r GetBucketInventoryConfigurationRequest) Send() (*GetBucketInventoryConfigurationOutput, error) {
+func (r GetBucketInventoryConfigurationRequest) Send(ctx context.Context) (*GetBucketInventoryConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1334,7 +1361,7 @@ func (r GetBucketInventoryConfigurationRequest) Send() (*GetBucketInventoryConfi
 //
 //    // Example sending a request using the GetBucketInventoryConfigurationRequest method.
 //    req := client.GetBucketInventoryConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1368,7 +1395,8 @@ type GetBucketLifecycleRequest struct {
 }
 
 // Send marshals and sends the GetBucketLifecycle API request.
-func (r GetBucketLifecycleRequest) Send() (*GetBucketLifecycleOutput, error) {
+func (r GetBucketLifecycleRequest) Send(ctx context.Context) (*GetBucketLifecycleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1384,7 +1412,7 @@ func (r GetBucketLifecycleRequest) Send() (*GetBucketLifecycleOutput, error) {
 //
 //    // Example sending a request using the GetBucketLifecycleRequest method.
 //    req := client.GetBucketLifecycleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1421,7 +1449,8 @@ type GetBucketLifecycleConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketLifecycleConfiguration API request.
-func (r GetBucketLifecycleConfigurationRequest) Send() (*GetBucketLifecycleConfigurationOutput, error) {
+func (r GetBucketLifecycleConfigurationRequest) Send(ctx context.Context) (*GetBucketLifecycleConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1437,7 +1466,7 @@ func (r GetBucketLifecycleConfigurationRequest) Send() (*GetBucketLifecycleConfi
 //
 //    // Example sending a request using the GetBucketLifecycleConfigurationRequest method.
 //    req := client.GetBucketLifecycleConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1471,7 +1500,8 @@ type GetBucketLocationRequest struct {
 }
 
 // Send marshals and sends the GetBucketLocation API request.
-func (r GetBucketLocationRequest) Send() (*GetBucketLocationOutput, error) {
+func (r GetBucketLocationRequest) Send(ctx context.Context) (*GetBucketLocationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1487,7 +1517,7 @@ func (r GetBucketLocationRequest) Send() (*GetBucketLocationOutput, error) {
 //
 //    // Example sending a request using the GetBucketLocationRequest method.
 //    req := client.GetBucketLocationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1521,7 +1551,8 @@ type GetBucketLoggingRequest struct {
 }
 
 // Send marshals and sends the GetBucketLogging API request.
-func (r GetBucketLoggingRequest) Send() (*GetBucketLoggingOutput, error) {
+func (r GetBucketLoggingRequest) Send(ctx context.Context) (*GetBucketLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1538,7 +1569,7 @@ func (r GetBucketLoggingRequest) Send() (*GetBucketLoggingOutput, error) {
 //
 //    // Example sending a request using the GetBucketLoggingRequest method.
 //    req := client.GetBucketLoggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1572,7 +1603,8 @@ type GetBucketMetricsConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketMetricsConfiguration API request.
-func (r GetBucketMetricsConfigurationRequest) Send() (*GetBucketMetricsConfigurationOutput, error) {
+func (r GetBucketMetricsConfigurationRequest) Send(ctx context.Context) (*GetBucketMetricsConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1589,7 +1621,7 @@ func (r GetBucketMetricsConfigurationRequest) Send() (*GetBucketMetricsConfigura
 //
 //    // Example sending a request using the GetBucketMetricsConfigurationRequest method.
 //    req := client.GetBucketMetricsConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1623,7 +1655,8 @@ type GetBucketNotificationRequest struct {
 }
 
 // Send marshals and sends the GetBucketNotification API request.
-func (r GetBucketNotificationRequest) Send() (*GetBucketNotificationOutput, error) {
+func (r GetBucketNotificationRequest) Send(ctx context.Context) (*GetBucketNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1639,7 +1672,7 @@ func (r GetBucketNotificationRequest) Send() (*GetBucketNotificationOutput, erro
 //
 //    // Example sending a request using the GetBucketNotificationRequest method.
 //    req := client.GetBucketNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1676,7 +1709,8 @@ type GetBucketNotificationConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketNotificationConfiguration API request.
-func (r GetBucketNotificationConfigurationRequest) Send() (*GetBucketNotificationConfigurationOutput, error) {
+func (r GetBucketNotificationConfigurationRequest) Send(ctx context.Context) (*GetBucketNotificationConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1692,7 +1726,7 @@ func (r GetBucketNotificationConfigurationRequest) Send() (*GetBucketNotificatio
 //
 //    // Example sending a request using the GetBucketNotificationConfigurationRequest method.
 //    req := client.GetBucketNotificationConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1726,7 +1760,8 @@ type GetBucketPolicyRequest struct {
 }
 
 // Send marshals and sends the GetBucketPolicy API request.
-func (r GetBucketPolicyRequest) Send() (*GetBucketPolicyOutput, error) {
+func (r GetBucketPolicyRequest) Send(ctx context.Context) (*GetBucketPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1742,7 +1777,7 @@ func (r GetBucketPolicyRequest) Send() (*GetBucketPolicyOutput, error) {
 //
 //    // Example sending a request using the GetBucketPolicyRequest method.
 //    req := client.GetBucketPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1776,7 +1811,8 @@ type GetBucketPolicyStatusRequest struct {
 }
 
 // Send marshals and sends the GetBucketPolicyStatus API request.
-func (r GetBucketPolicyStatusRequest) Send() (*GetBucketPolicyStatusOutput, error) {
+func (r GetBucketPolicyStatusRequest) Send(ctx context.Context) (*GetBucketPolicyStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1793,7 +1829,7 @@ func (r GetBucketPolicyStatusRequest) Send() (*GetBucketPolicyStatusOutput, erro
 //
 //    // Example sending a request using the GetBucketPolicyStatusRequest method.
 //    req := client.GetBucketPolicyStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1827,7 +1863,8 @@ type GetBucketReplicationRequest struct {
 }
 
 // Send marshals and sends the GetBucketReplication API request.
-func (r GetBucketReplicationRequest) Send() (*GetBucketReplicationOutput, error) {
+func (r GetBucketReplicationRequest) Send(ctx context.Context) (*GetBucketReplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1847,7 +1884,7 @@ func (r GetBucketReplicationRequest) Send() (*GetBucketReplicationOutput, error)
 //
 //    // Example sending a request using the GetBucketReplicationRequest method.
 //    req := client.GetBucketReplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1881,7 +1918,8 @@ type GetBucketRequestPaymentRequest struct {
 }
 
 // Send marshals and sends the GetBucketRequestPayment API request.
-func (r GetBucketRequestPaymentRequest) Send() (*GetBucketRequestPaymentOutput, error) {
+func (r GetBucketRequestPaymentRequest) Send(ctx context.Context) (*GetBucketRequestPaymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1897,7 +1935,7 @@ func (r GetBucketRequestPaymentRequest) Send() (*GetBucketRequestPaymentOutput, 
 //
 //    // Example sending a request using the GetBucketRequestPaymentRequest method.
 //    req := client.GetBucketRequestPaymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1931,7 +1969,8 @@ type GetBucketTaggingRequest struct {
 }
 
 // Send marshals and sends the GetBucketTagging API request.
-func (r GetBucketTaggingRequest) Send() (*GetBucketTaggingOutput, error) {
+func (r GetBucketTaggingRequest) Send(ctx context.Context) (*GetBucketTaggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1947,7 +1986,7 @@ func (r GetBucketTaggingRequest) Send() (*GetBucketTaggingOutput, error) {
 //
 //    // Example sending a request using the GetBucketTaggingRequest method.
 //    req := client.GetBucketTaggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1981,7 +2020,8 @@ type GetBucketVersioningRequest struct {
 }
 
 // Send marshals and sends the GetBucketVersioning API request.
-func (r GetBucketVersioningRequest) Send() (*GetBucketVersioningOutput, error) {
+func (r GetBucketVersioningRequest) Send(ctx context.Context) (*GetBucketVersioningOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1997,7 +2037,7 @@ func (r GetBucketVersioningRequest) Send() (*GetBucketVersioningOutput, error) {
 //
 //    // Example sending a request using the GetBucketVersioningRequest method.
 //    req := client.GetBucketVersioningRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2031,7 +2071,8 @@ type GetBucketWebsiteRequest struct {
 }
 
 // Send marshals and sends the GetBucketWebsite API request.
-func (r GetBucketWebsiteRequest) Send() (*GetBucketWebsiteOutput, error) {
+func (r GetBucketWebsiteRequest) Send(ctx context.Context) (*GetBucketWebsiteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2047,7 +2088,7 @@ func (r GetBucketWebsiteRequest) Send() (*GetBucketWebsiteOutput, error) {
 //
 //    // Example sending a request using the GetBucketWebsiteRequest method.
 //    req := client.GetBucketWebsiteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2081,7 +2122,8 @@ type GetObjectRequest struct {
 }
 
 // Send marshals and sends the GetObject API request.
-func (r GetObjectRequest) Send() (*GetObjectOutput, error) {
+func (r GetObjectRequest) Send(ctx context.Context) (*GetObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2097,7 +2139,7 @@ func (r GetObjectRequest) Send() (*GetObjectOutput, error) {
 //
 //    // Example sending a request using the GetObjectRequest method.
 //    req := client.GetObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2131,7 +2173,8 @@ type GetObjectAclRequest struct {
 }
 
 // Send marshals and sends the GetObjectAcl API request.
-func (r GetObjectAclRequest) Send() (*GetObjectAclOutput, error) {
+func (r GetObjectAclRequest) Send(ctx context.Context) (*GetObjectAclOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2147,7 +2190,7 @@ func (r GetObjectAclRequest) Send() (*GetObjectAclOutput, error) {
 //
 //    // Example sending a request using the GetObjectAclRequest method.
 //    req := client.GetObjectAclRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2181,7 +2224,8 @@ type GetObjectLegalHoldRequest struct {
 }
 
 // Send marshals and sends the GetObjectLegalHold API request.
-func (r GetObjectLegalHoldRequest) Send() (*GetObjectLegalHoldOutput, error) {
+func (r GetObjectLegalHoldRequest) Send(ctx context.Context) (*GetObjectLegalHoldOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2197,7 +2241,7 @@ func (r GetObjectLegalHoldRequest) Send() (*GetObjectLegalHoldOutput, error) {
 //
 //    // Example sending a request using the GetObjectLegalHoldRequest method.
 //    req := client.GetObjectLegalHoldRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2231,7 +2275,8 @@ type GetObjectLockConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetObjectLockConfiguration API request.
-func (r GetObjectLockConfigurationRequest) Send() (*GetObjectLockConfigurationOutput, error) {
+func (r GetObjectLockConfigurationRequest) Send(ctx context.Context) (*GetObjectLockConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2249,7 +2294,7 @@ func (r GetObjectLockConfigurationRequest) Send() (*GetObjectLockConfigurationOu
 //
 //    // Example sending a request using the GetObjectLockConfigurationRequest method.
 //    req := client.GetObjectLockConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2283,7 +2328,8 @@ type GetObjectRetentionRequest struct {
 }
 
 // Send marshals and sends the GetObjectRetention API request.
-func (r GetObjectRetentionRequest) Send() (*GetObjectRetentionOutput, error) {
+func (r GetObjectRetentionRequest) Send(ctx context.Context) (*GetObjectRetentionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2299,7 +2345,7 @@ func (r GetObjectRetentionRequest) Send() (*GetObjectRetentionOutput, error) {
 //
 //    // Example sending a request using the GetObjectRetentionRequest method.
 //    req := client.GetObjectRetentionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2333,7 +2379,8 @@ type GetObjectTaggingRequest struct {
 }
 
 // Send marshals and sends the GetObjectTagging API request.
-func (r GetObjectTaggingRequest) Send() (*GetObjectTaggingOutput, error) {
+func (r GetObjectTaggingRequest) Send(ctx context.Context) (*GetObjectTaggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2349,7 +2396,7 @@ func (r GetObjectTaggingRequest) Send() (*GetObjectTaggingOutput, error) {
 //
 //    // Example sending a request using the GetObjectTaggingRequest method.
 //    req := client.GetObjectTaggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2383,7 +2430,8 @@ type GetObjectTorrentRequest struct {
 }
 
 // Send marshals and sends the GetObjectTorrent API request.
-func (r GetObjectTorrentRequest) Send() (*GetObjectTorrentOutput, error) {
+func (r GetObjectTorrentRequest) Send(ctx context.Context) (*GetObjectTorrentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2399,7 +2447,7 @@ func (r GetObjectTorrentRequest) Send() (*GetObjectTorrentOutput, error) {
 //
 //    // Example sending a request using the GetObjectTorrentRequest method.
 //    req := client.GetObjectTorrentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2433,7 +2481,8 @@ type GetPublicAccessBlockRequest struct {
 }
 
 // Send marshals and sends the GetPublicAccessBlock API request.
-func (r GetPublicAccessBlockRequest) Send() (*GetPublicAccessBlockOutput, error) {
+func (r GetPublicAccessBlockRequest) Send(ctx context.Context) (*GetPublicAccessBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2449,7 +2498,7 @@ func (r GetPublicAccessBlockRequest) Send() (*GetPublicAccessBlockOutput, error)
 //
 //    // Example sending a request using the GetPublicAccessBlockRequest method.
 //    req := client.GetPublicAccessBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2483,7 +2532,8 @@ type HeadBucketRequest struct {
 }
 
 // Send marshals and sends the HeadBucket API request.
-func (r HeadBucketRequest) Send() (*HeadBucketOutput, error) {
+func (r HeadBucketRequest) Send(ctx context.Context) (*HeadBucketOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2500,7 +2550,7 @@ func (r HeadBucketRequest) Send() (*HeadBucketOutput, error) {
 //
 //    // Example sending a request using the HeadBucketRequest method.
 //    req := client.HeadBucketRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2536,7 +2586,8 @@ type HeadObjectRequest struct {
 }
 
 // Send marshals and sends the HeadObject API request.
-func (r HeadObjectRequest) Send() (*HeadObjectOutput, error) {
+func (r HeadObjectRequest) Send(ctx context.Context) (*HeadObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2557,7 +2608,7 @@ func (r HeadObjectRequest) Send() (*HeadObjectOutput, error) {
 //
 //    // Example sending a request using the HeadObjectRequest method.
 //    req := client.HeadObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2591,7 +2642,8 @@ type ListBucketAnalyticsConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListBucketAnalyticsConfigurations API request.
-func (r ListBucketAnalyticsConfigurationsRequest) Send() (*ListBucketAnalyticsConfigurationsOutput, error) {
+func (r ListBucketAnalyticsConfigurationsRequest) Send(ctx context.Context) (*ListBucketAnalyticsConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2607,7 +2659,7 @@ func (r ListBucketAnalyticsConfigurationsRequest) Send() (*ListBucketAnalyticsCo
 //
 //    // Example sending a request using the ListBucketAnalyticsConfigurationsRequest method.
 //    req := client.ListBucketAnalyticsConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2641,7 +2693,8 @@ type ListBucketInventoryConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListBucketInventoryConfigurations API request.
-func (r ListBucketInventoryConfigurationsRequest) Send() (*ListBucketInventoryConfigurationsOutput, error) {
+func (r ListBucketInventoryConfigurationsRequest) Send(ctx context.Context) (*ListBucketInventoryConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2657,7 +2710,7 @@ func (r ListBucketInventoryConfigurationsRequest) Send() (*ListBucketInventoryCo
 //
 //    // Example sending a request using the ListBucketInventoryConfigurationsRequest method.
 //    req := client.ListBucketInventoryConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2691,7 +2744,8 @@ type ListBucketMetricsConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListBucketMetricsConfigurations API request.
-func (r ListBucketMetricsConfigurationsRequest) Send() (*ListBucketMetricsConfigurationsOutput, error) {
+func (r ListBucketMetricsConfigurationsRequest) Send(ctx context.Context) (*ListBucketMetricsConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2707,7 +2761,7 @@ func (r ListBucketMetricsConfigurationsRequest) Send() (*ListBucketMetricsConfig
 //
 //    // Example sending a request using the ListBucketMetricsConfigurationsRequest method.
 //    req := client.ListBucketMetricsConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2741,7 +2795,8 @@ type ListBucketsRequest struct {
 }
 
 // Send marshals and sends the ListBuckets API request.
-func (r ListBucketsRequest) Send() (*ListBucketsOutput, error) {
+func (r ListBucketsRequest) Send(ctx context.Context) (*ListBucketsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2757,7 +2812,7 @@ func (r ListBucketsRequest) Send() (*ListBucketsOutput, error) {
 //
 //    // Example sending a request using the ListBucketsRequest method.
 //    req := client.ListBucketsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2791,7 +2846,8 @@ type ListMultipartUploadsRequest struct {
 }
 
 // Send marshals and sends the ListMultipartUploads API request.
-func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
+func (r ListMultipartUploadsRequest) Send(ctx context.Context) (*ListMultipartUploadsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2807,7 +2863,7 @@ func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error)
 //
 //    // Example sending a request using the ListMultipartUploadsRequest method.
 //    req := client.ListMultipartUploadsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2857,7 +2913,7 @@ func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListM
 func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
 	return ListMultipartUploadsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListMultipartUploadsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2866,6 +2922,7 @@ func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipart
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2893,7 +2950,8 @@ type ListObjectVersionsRequest struct {
 }
 
 // Send marshals and sends the ListObjectVersions API request.
-func (r ListObjectVersionsRequest) Send() (*ListObjectVersionsOutput, error) {
+func (r ListObjectVersionsRequest) Send(ctx context.Context) (*ListObjectVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2909,7 +2967,7 @@ func (r ListObjectVersionsRequest) Send() (*ListObjectVersionsOutput, error) {
 //
 //    // Example sending a request using the ListObjectVersionsRequest method.
 //    req := client.ListObjectVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2959,7 +3017,7 @@ func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListObjec
 func (p *ListObjectVersionsRequest) Paginate(opts ...aws.Option) ListObjectVersionsPager {
 	return ListObjectVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2968,6 +3026,7 @@ func (p *ListObjectVersionsRequest) Paginate(opts ...aws.Option) ListObjectVersi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2995,7 +3054,8 @@ type ListObjectsRequest struct {
 }
 
 // Send marshals and sends the ListObjects API request.
-func (r ListObjectsRequest) Send() (*ListObjectsOutput, error) {
+func (r ListObjectsRequest) Send(ctx context.Context) (*ListObjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3013,7 +3073,7 @@ func (r ListObjectsRequest) Send() (*ListObjectsOutput, error) {
 //
 //    // Example sending a request using the ListObjectsRequest method.
 //    req := client.ListObjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3063,7 +3123,7 @@ func (c *S3) ListObjectsRequest(input *ListObjectsInput) ListObjectsRequest {
 func (p *ListObjectsRequest) Paginate(opts ...aws.Option) ListObjectsPager {
 	return ListObjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3072,6 +3132,7 @@ func (p *ListObjectsRequest) Paginate(opts ...aws.Option) ListObjectsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3099,7 +3160,8 @@ type ListObjectsV2Request struct {
 }
 
 // Send marshals and sends the ListObjectsV2 API request.
-func (r ListObjectsV2Request) Send() (*ListObjectsV2Output, error) {
+func (r ListObjectsV2Request) Send(ctx context.Context) (*ListObjectsV2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3118,7 +3180,7 @@ func (r ListObjectsV2Request) Send() (*ListObjectsV2Output, error) {
 //
 //    // Example sending a request using the ListObjectsV2Request method.
 //    req := client.ListObjectsV2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3168,7 +3230,7 @@ func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Reques
 func (p *ListObjectsV2Request) Paginate(opts ...aws.Option) ListObjectsV2Pager {
 	return ListObjectsV2Pager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectsV2Input
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3177,6 +3239,7 @@ func (p *ListObjectsV2Request) Paginate(opts ...aws.Option) ListObjectsV2Pager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3204,7 +3267,8 @@ type ListPartsRequest struct {
 }
 
 // Send marshals and sends the ListParts API request.
-func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
+func (r ListPartsRequest) Send(ctx context.Context) (*ListPartsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3220,7 +3284,7 @@ func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
 //
 //    // Example sending a request using the ListPartsRequest method.
 //    req := client.ListPartsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3270,7 +3334,7 @@ func (c *S3) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 	return ListPartsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPartsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3279,6 +3343,7 @@ func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3306,7 +3371,8 @@ type PutBucketAccelerateConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketAccelerateConfiguration API request.
-func (r PutBucketAccelerateConfigurationRequest) Send() (*PutBucketAccelerateConfigurationOutput, error) {
+func (r PutBucketAccelerateConfigurationRequest) Send(ctx context.Context) (*PutBucketAccelerateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3322,7 +3388,7 @@ func (r PutBucketAccelerateConfigurationRequest) Send() (*PutBucketAccelerateCon
 //
 //    // Example sending a request using the PutBucketAccelerateConfigurationRequest method.
 //    req := client.PutBucketAccelerateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3358,7 +3424,8 @@ type PutBucketAclRequest struct {
 }
 
 // Send marshals and sends the PutBucketAcl API request.
-func (r PutBucketAclRequest) Send() (*PutBucketAclOutput, error) {
+func (r PutBucketAclRequest) Send(ctx context.Context) (*PutBucketAclOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3374,7 +3441,7 @@ func (r PutBucketAclRequest) Send() (*PutBucketAclOutput, error) {
 //
 //    // Example sending a request using the PutBucketAclRequest method.
 //    req := client.PutBucketAclRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3410,7 +3477,8 @@ type PutBucketAnalyticsConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketAnalyticsConfiguration API request.
-func (r PutBucketAnalyticsConfigurationRequest) Send() (*PutBucketAnalyticsConfigurationOutput, error) {
+func (r PutBucketAnalyticsConfigurationRequest) Send(ctx context.Context) (*PutBucketAnalyticsConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3427,7 +3495,7 @@ func (r PutBucketAnalyticsConfigurationRequest) Send() (*PutBucketAnalyticsConfi
 //
 //    // Example sending a request using the PutBucketAnalyticsConfigurationRequest method.
 //    req := client.PutBucketAnalyticsConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3463,7 +3531,8 @@ type PutBucketCorsRequest struct {
 }
 
 // Send marshals and sends the PutBucketCors API request.
-func (r PutBucketCorsRequest) Send() (*PutBucketCorsOutput, error) {
+func (r PutBucketCorsRequest) Send(ctx context.Context) (*PutBucketCorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3479,7 +3548,7 @@ func (r PutBucketCorsRequest) Send() (*PutBucketCorsOutput, error) {
 //
 //    // Example sending a request using the PutBucketCorsRequest method.
 //    req := client.PutBucketCorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3515,7 +3584,8 @@ type PutBucketEncryptionRequest struct {
 }
 
 // Send marshals and sends the PutBucketEncryption API request.
-func (r PutBucketEncryptionRequest) Send() (*PutBucketEncryptionOutput, error) {
+func (r PutBucketEncryptionRequest) Send(ctx context.Context) (*PutBucketEncryptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3532,7 +3602,7 @@ func (r PutBucketEncryptionRequest) Send() (*PutBucketEncryptionOutput, error) {
 //
 //    // Example sending a request using the PutBucketEncryptionRequest method.
 //    req := client.PutBucketEncryptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3568,7 +3638,8 @@ type PutBucketInventoryConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketInventoryConfiguration API request.
-func (r PutBucketInventoryConfigurationRequest) Send() (*PutBucketInventoryConfigurationOutput, error) {
+func (r PutBucketInventoryConfigurationRequest) Send(ctx context.Context) (*PutBucketInventoryConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3585,7 +3656,7 @@ func (r PutBucketInventoryConfigurationRequest) Send() (*PutBucketInventoryConfi
 //
 //    // Example sending a request using the PutBucketInventoryConfigurationRequest method.
 //    req := client.PutBucketInventoryConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3621,7 +3692,8 @@ type PutBucketLifecycleRequest struct {
 }
 
 // Send marshals and sends the PutBucketLifecycle API request.
-func (r PutBucketLifecycleRequest) Send() (*PutBucketLifecycleOutput, error) {
+func (r PutBucketLifecycleRequest) Send(ctx context.Context) (*PutBucketLifecycleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3637,7 +3709,7 @@ func (r PutBucketLifecycleRequest) Send() (*PutBucketLifecycleOutput, error) {
 //
 //    // Example sending a request using the PutBucketLifecycleRequest method.
 //    req := client.PutBucketLifecycleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3676,7 +3748,8 @@ type PutBucketLifecycleConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketLifecycleConfiguration API request.
-func (r PutBucketLifecycleConfigurationRequest) Send() (*PutBucketLifecycleConfigurationOutput, error) {
+func (r PutBucketLifecycleConfigurationRequest) Send(ctx context.Context) (*PutBucketLifecycleConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3693,7 +3766,7 @@ func (r PutBucketLifecycleConfigurationRequest) Send() (*PutBucketLifecycleConfi
 //
 //    // Example sending a request using the PutBucketLifecycleConfigurationRequest method.
 //    req := client.PutBucketLifecycleConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3729,7 +3802,8 @@ type PutBucketLoggingRequest struct {
 }
 
 // Send marshals and sends the PutBucketLogging API request.
-func (r PutBucketLoggingRequest) Send() (*PutBucketLoggingOutput, error) {
+func (r PutBucketLoggingRequest) Send(ctx context.Context) (*PutBucketLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3747,7 +3821,7 @@ func (r PutBucketLoggingRequest) Send() (*PutBucketLoggingOutput, error) {
 //
 //    // Example sending a request using the PutBucketLoggingRequest method.
 //    req := client.PutBucketLoggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3783,7 +3857,8 @@ type PutBucketMetricsConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketMetricsConfiguration API request.
-func (r PutBucketMetricsConfigurationRequest) Send() (*PutBucketMetricsConfigurationOutput, error) {
+func (r PutBucketMetricsConfigurationRequest) Send(ctx context.Context) (*PutBucketMetricsConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3800,7 +3875,7 @@ func (r PutBucketMetricsConfigurationRequest) Send() (*PutBucketMetricsConfigura
 //
 //    // Example sending a request using the PutBucketMetricsConfigurationRequest method.
 //    req := client.PutBucketMetricsConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3836,7 +3911,8 @@ type PutBucketNotificationRequest struct {
 }
 
 // Send marshals and sends the PutBucketNotification API request.
-func (r PutBucketNotificationRequest) Send() (*PutBucketNotificationOutput, error) {
+func (r PutBucketNotificationRequest) Send(ctx context.Context) (*PutBucketNotificationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3852,7 +3928,7 @@ func (r PutBucketNotificationRequest) Send() (*PutBucketNotificationOutput, erro
 //
 //    // Example sending a request using the PutBucketNotificationRequest method.
 //    req := client.PutBucketNotificationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3891,7 +3967,8 @@ type PutBucketNotificationConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketNotificationConfiguration API request.
-func (r PutBucketNotificationConfigurationRequest) Send() (*PutBucketNotificationConfigurationOutput, error) {
+func (r PutBucketNotificationConfigurationRequest) Send(ctx context.Context) (*PutBucketNotificationConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3907,7 +3984,7 @@ func (r PutBucketNotificationConfigurationRequest) Send() (*PutBucketNotificatio
 //
 //    // Example sending a request using the PutBucketNotificationConfigurationRequest method.
 //    req := client.PutBucketNotificationConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3943,7 +4020,8 @@ type PutBucketPolicyRequest struct {
 }
 
 // Send marshals and sends the PutBucketPolicy API request.
-func (r PutBucketPolicyRequest) Send() (*PutBucketPolicyOutput, error) {
+func (r PutBucketPolicyRequest) Send(ctx context.Context) (*PutBucketPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3960,7 +4038,7 @@ func (r PutBucketPolicyRequest) Send() (*PutBucketPolicyOutput, error) {
 //
 //    // Example sending a request using the PutBucketPolicyRequest method.
 //    req := client.PutBucketPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3996,7 +4074,8 @@ type PutBucketReplicationRequest struct {
 }
 
 // Send marshals and sends the PutBucketReplication API request.
-func (r PutBucketReplicationRequest) Send() (*PutBucketReplicationOutput, error) {
+func (r PutBucketReplicationRequest) Send(ctx context.Context) (*PutBucketReplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4014,7 +4093,7 @@ func (r PutBucketReplicationRequest) Send() (*PutBucketReplicationOutput, error)
 //
 //    // Example sending a request using the PutBucketReplicationRequest method.
 //    req := client.PutBucketReplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4050,7 +4129,8 @@ type PutBucketRequestPaymentRequest struct {
 }
 
 // Send marshals and sends the PutBucketRequestPayment API request.
-func (r PutBucketRequestPaymentRequest) Send() (*PutBucketRequestPaymentOutput, error) {
+func (r PutBucketRequestPaymentRequest) Send(ctx context.Context) (*PutBucketRequestPaymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4070,7 +4150,7 @@ func (r PutBucketRequestPaymentRequest) Send() (*PutBucketRequestPaymentOutput, 
 //
 //    // Example sending a request using the PutBucketRequestPaymentRequest method.
 //    req := client.PutBucketRequestPaymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4106,7 +4186,8 @@ type PutBucketTaggingRequest struct {
 }
 
 // Send marshals and sends the PutBucketTagging API request.
-func (r PutBucketTaggingRequest) Send() (*PutBucketTaggingOutput, error) {
+func (r PutBucketTaggingRequest) Send(ctx context.Context) (*PutBucketTaggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4122,7 +4203,7 @@ func (r PutBucketTaggingRequest) Send() (*PutBucketTaggingOutput, error) {
 //
 //    // Example sending a request using the PutBucketTaggingRequest method.
 //    req := client.PutBucketTaggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4158,7 +4239,8 @@ type PutBucketVersioningRequest struct {
 }
 
 // Send marshals and sends the PutBucketVersioning API request.
-func (r PutBucketVersioningRequest) Send() (*PutBucketVersioningOutput, error) {
+func (r PutBucketVersioningRequest) Send(ctx context.Context) (*PutBucketVersioningOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4175,7 +4257,7 @@ func (r PutBucketVersioningRequest) Send() (*PutBucketVersioningOutput, error) {
 //
 //    // Example sending a request using the PutBucketVersioningRequest method.
 //    req := client.PutBucketVersioningRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4211,7 +4293,8 @@ type PutBucketWebsiteRequest struct {
 }
 
 // Send marshals and sends the PutBucketWebsite API request.
-func (r PutBucketWebsiteRequest) Send() (*PutBucketWebsiteOutput, error) {
+func (r PutBucketWebsiteRequest) Send(ctx context.Context) (*PutBucketWebsiteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4227,7 +4310,7 @@ func (r PutBucketWebsiteRequest) Send() (*PutBucketWebsiteOutput, error) {
 //
 //    // Example sending a request using the PutBucketWebsiteRequest method.
 //    req := client.PutBucketWebsiteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4263,7 +4346,8 @@ type PutObjectRequest struct {
 }
 
 // Send marshals and sends the PutObject API request.
-func (r PutObjectRequest) Send() (*PutObjectOutput, error) {
+func (r PutObjectRequest) Send(ctx context.Context) (*PutObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4279,7 +4363,7 @@ func (r PutObjectRequest) Send() (*PutObjectOutput, error) {
 //
 //    // Example sending a request using the PutObjectRequest method.
 //    req := client.PutObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4313,7 +4397,8 @@ type PutObjectAclRequest struct {
 }
 
 // Send marshals and sends the PutObjectAcl API request.
-func (r PutObjectAclRequest) Send() (*PutObjectAclOutput, error) {
+func (r PutObjectAclRequest) Send(ctx context.Context) (*PutObjectAclOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4330,7 +4415,7 @@ func (r PutObjectAclRequest) Send() (*PutObjectAclOutput, error) {
 //
 //    // Example sending a request using the PutObjectAclRequest method.
 //    req := client.PutObjectAclRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4364,7 +4449,8 @@ type PutObjectLegalHoldRequest struct {
 }
 
 // Send marshals and sends the PutObjectLegalHold API request.
-func (r PutObjectLegalHoldRequest) Send() (*PutObjectLegalHoldOutput, error) {
+func (r PutObjectLegalHoldRequest) Send(ctx context.Context) (*PutObjectLegalHoldOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4380,7 +4466,7 @@ func (r PutObjectLegalHoldRequest) Send() (*PutObjectLegalHoldOutput, error) {
 //
 //    // Example sending a request using the PutObjectLegalHoldRequest method.
 //    req := client.PutObjectLegalHoldRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4414,7 +4500,8 @@ type PutObjectLockConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutObjectLockConfiguration API request.
-func (r PutObjectLockConfigurationRequest) Send() (*PutObjectLockConfigurationOutput, error) {
+func (r PutObjectLockConfigurationRequest) Send(ctx context.Context) (*PutObjectLockConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4432,7 +4519,7 @@ func (r PutObjectLockConfigurationRequest) Send() (*PutObjectLockConfigurationOu
 //
 //    // Example sending a request using the PutObjectLockConfigurationRequest method.
 //    req := client.PutObjectLockConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4466,7 +4553,8 @@ type PutObjectRetentionRequest struct {
 }
 
 // Send marshals and sends the PutObjectRetention API request.
-func (r PutObjectRetentionRequest) Send() (*PutObjectRetentionOutput, error) {
+func (r PutObjectRetentionRequest) Send(ctx context.Context) (*PutObjectRetentionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4482,7 +4570,7 @@ func (r PutObjectRetentionRequest) Send() (*PutObjectRetentionOutput, error) {
 //
 //    // Example sending a request using the PutObjectRetentionRequest method.
 //    req := client.PutObjectRetentionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4516,7 +4604,8 @@ type PutObjectTaggingRequest struct {
 }
 
 // Send marshals and sends the PutObjectTagging API request.
-func (r PutObjectTaggingRequest) Send() (*PutObjectTaggingOutput, error) {
+func (r PutObjectTaggingRequest) Send(ctx context.Context) (*PutObjectTaggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4532,7 +4621,7 @@ func (r PutObjectTaggingRequest) Send() (*PutObjectTaggingOutput, error) {
 //
 //    // Example sending a request using the PutObjectTaggingRequest method.
 //    req := client.PutObjectTaggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4566,7 +4655,8 @@ type PutPublicAccessBlockRequest struct {
 }
 
 // Send marshals and sends the PutPublicAccessBlock API request.
-func (r PutPublicAccessBlockRequest) Send() (*PutPublicAccessBlockOutput, error) {
+func (r PutPublicAccessBlockRequest) Send(ctx context.Context) (*PutPublicAccessBlockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4583,7 +4673,7 @@ func (r PutPublicAccessBlockRequest) Send() (*PutPublicAccessBlockOutput, error)
 //
 //    // Example sending a request using the PutPublicAccessBlockRequest method.
 //    req := client.PutPublicAccessBlockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4619,7 +4709,8 @@ type RestoreObjectRequest struct {
 }
 
 // Send marshals and sends the RestoreObject API request.
-func (r RestoreObjectRequest) Send() (*RestoreObjectOutput, error) {
+func (r RestoreObjectRequest) Send(ctx context.Context) (*RestoreObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4635,7 +4726,7 @@ func (r RestoreObjectRequest) Send() (*RestoreObjectOutput, error) {
 //
 //    // Example sending a request using the RestoreObjectRequest method.
 //    req := client.RestoreObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4669,7 +4760,8 @@ type UploadPartRequest struct {
 }
 
 // Send marshals and sends the UploadPart API request.
-func (r UploadPartRequest) Send() (*UploadPartOutput, error) {
+func (r UploadPartRequest) Send(ctx context.Context) (*UploadPartOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4691,7 +4783,7 @@ func (r UploadPartRequest) Send() (*UploadPartOutput, error) {
 //
 //    // Example sending a request using the UploadPartRequest method.
 //    req := client.UploadPartRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4725,7 +4817,8 @@ type UploadPartCopyRequest struct {
 }
 
 // Send marshals and sends the UploadPartCopy API request.
-func (r UploadPartCopyRequest) Send() (*UploadPartCopyOutput, error) {
+func (r UploadPartCopyRequest) Send(ctx context.Context) (*UploadPartCopyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4741,7 +4834,7 @@ func (r UploadPartCopyRequest) Send() (*UploadPartCopyOutput, error) {
 //
 //    // Example sending a request using the UploadPartCopyRequest method.
 //    req := client.UploadPartCopyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

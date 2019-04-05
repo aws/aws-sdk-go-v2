@@ -29,9 +29,8 @@ func TestInteg_00_ListRules(t *testing.T) {
 	}
 
 	req := svc.ListRulesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -48,15 +47,17 @@ func TestInteg_01_CreateSqlInjectionMatchSet(t *testing.T) {
 	}
 
 	req := svc.CreateSqlInjectionMatchSetRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}
 	aerr, ok := err.(awserr.RequestFailure)
 	if !ok {
 		t.Fatalf("expect awserr, was %T", err)
+	}
+	if len(aerr.Code()) == 0 {
+		t.Errorf("expect non-empty error code")
 	}
 	if v := aerr.Code(); v == aws.ErrCodeSerialization {
 		t.Errorf("expect API error code got serialization failure")

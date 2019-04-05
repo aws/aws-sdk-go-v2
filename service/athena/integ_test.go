@@ -27,9 +27,8 @@ func TestInteg_00_ListNamedQueries(t *testing.T) {
 	params := &athena.ListNamedQueriesInput{}
 
 	req := svc.ListNamedQueriesRequest(params)
-	req.SetContext(ctx)
 
-	_, err := req.Send()
+	_, err := req.Send(ctx)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}

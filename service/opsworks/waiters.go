@@ -3,6 +3,7 @@
 package opsworks
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeApps to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *OpsWorks) WaitUntilAppExists(input *DescribeAppsInput) error {
-	return c.WaitUntilAppExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilAppExistsWithContext is an extended version of WaitUntilAppExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) WaitUntilAppExistsWithContext(ctx aws.Context, input *DescribeAppsInput, opts ...aws.WaiterOption) error {
+func (c *OpsWorks) WaitUntilAppExists(ctx context.Context, input *DescribeAppsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilAppExists",
 		MaxAttempts: 40,
@@ -56,26 +50,19 @@ func (c *OpsWorks) WaitUntilAppExistsWithContext(ctx aws.Context, input *Describ
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilDeploymentSuccessful uses the AWS OpsWorks API operation
 // DescribeDeployments to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *OpsWorks) WaitUntilDeploymentSuccessful(input *DescribeDeploymentsInput) error {
-	return c.WaitUntilDeploymentSuccessfulWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDeploymentSuccessfulWithContext is an extended version of WaitUntilDeploymentSuccessful.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) WaitUntilDeploymentSuccessfulWithContext(ctx aws.Context, input *DescribeDeploymentsInput, opts ...aws.WaiterOption) error {
+func (c *OpsWorks) WaitUntilDeploymentSuccessful(ctx context.Context, input *DescribeDeploymentsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDeploymentSuccessful",
 		MaxAttempts: 40,
@@ -107,26 +94,19 @@ func (c *OpsWorks) WaitUntilDeploymentSuccessfulWithContext(ctx aws.Context, inp
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceOnline uses the AWS OpsWorks API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *OpsWorks) WaitUntilInstanceOnline(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceOnlineWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceOnlineWithContext is an extended version of WaitUntilInstanceOnline.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) WaitUntilInstanceOnlineWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *OpsWorks) WaitUntilInstanceOnline(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceOnline",
 		MaxAttempts: 40,
@@ -193,26 +173,19 @@ func (c *OpsWorks) WaitUntilInstanceOnlineWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceRegistered uses the AWS OpsWorks API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *OpsWorks) WaitUntilInstanceRegistered(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceRegisteredWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceRegisteredWithContext is an extended version of WaitUntilInstanceRegistered.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) WaitUntilInstanceRegisteredWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *OpsWorks) WaitUntilInstanceRegistered(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceRegistered",
 		MaxAttempts: 40,
@@ -274,26 +247,19 @@ func (c *OpsWorks) WaitUntilInstanceRegisteredWithContext(ctx aws.Context, input
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceStopped uses the AWS OpsWorks API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *OpsWorks) WaitUntilInstanceStopped(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceStoppedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceStoppedWithContext is an extended version of WaitUntilInstanceStopped.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *OpsWorks) WaitUntilInstanceStopped(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStopped",
 		MaxAttempts: 40,
@@ -360,26 +326,19 @@ func (c *OpsWorks) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *D
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceTerminated uses the AWS OpsWorks API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *OpsWorks) WaitUntilInstanceTerminated(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceTerminatedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceTerminatedWithContext is an extended version of WaitUntilInstanceTerminated.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *OpsWorks) WaitUntilInstanceTerminated(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceTerminated",
 		MaxAttempts: 40,
@@ -451,5 +410,5 @@ func (c *OpsWorks) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

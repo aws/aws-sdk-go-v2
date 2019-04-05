@@ -9,6 +9,8 @@
 package ec2iface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
@@ -721,98 +723,67 @@ type EC2API interface {
 
 	WithdrawByoipCidrRequest(*ec2.WithdrawByoipCidrInput) ec2.WithdrawByoipCidrRequest
 
-	WaitUntilBundleTaskComplete(*ec2.DescribeBundleTasksInput) error
-	WaitUntilBundleTaskCompleteWithContext(aws.Context, *ec2.DescribeBundleTasksInput, ...aws.WaiterOption) error
+	WaitUntilBundleTaskComplete(context.Context, *ec2.DescribeBundleTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilConversionTaskCancelled(*ec2.DescribeConversionTasksInput) error
-	WaitUntilConversionTaskCancelledWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+	WaitUntilConversionTaskCancelled(context.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilConversionTaskCompleted(*ec2.DescribeConversionTasksInput) error
-	WaitUntilConversionTaskCompletedWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+	WaitUntilConversionTaskCompleted(context.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilConversionTaskDeleted(*ec2.DescribeConversionTasksInput) error
-	WaitUntilConversionTaskDeletedWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
+	WaitUntilConversionTaskDeleted(context.Context, *ec2.DescribeConversionTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilCustomerGatewayAvailable(*ec2.DescribeCustomerGatewaysInput) error
-	WaitUntilCustomerGatewayAvailableWithContext(aws.Context, *ec2.DescribeCustomerGatewaysInput, ...aws.WaiterOption) error
+	WaitUntilCustomerGatewayAvailable(context.Context, *ec2.DescribeCustomerGatewaysInput, ...aws.WaiterOption) error
 
-	WaitUntilExportTaskCancelled(*ec2.DescribeExportTasksInput) error
-	WaitUntilExportTaskCancelledWithContext(aws.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
+	WaitUntilExportTaskCancelled(context.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilExportTaskCompleted(*ec2.DescribeExportTasksInput) error
-	WaitUntilExportTaskCompletedWithContext(aws.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
+	WaitUntilExportTaskCompleted(context.Context, *ec2.DescribeExportTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilImageAvailable(*ec2.DescribeImagesInput) error
-	WaitUntilImageAvailableWithContext(aws.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
+	WaitUntilImageAvailable(context.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
 
-	WaitUntilImageExists(*ec2.DescribeImagesInput) error
-	WaitUntilImageExistsWithContext(aws.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
+	WaitUntilImageExists(context.Context, *ec2.DescribeImagesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceExists(*ec2.DescribeInstancesInput) error
-	WaitUntilInstanceExistsWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceExists(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceRunning(*ec2.DescribeInstancesInput) error
-	WaitUntilInstanceRunningWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceRunning(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceStatusOk(*ec2.DescribeInstanceStatusInput) error
-	WaitUntilInstanceStatusOkWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
+	WaitUntilInstanceStatusOk(context.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceStopped(*ec2.DescribeInstancesInput) error
-	WaitUntilInstanceStoppedWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceStopped(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceTerminated(*ec2.DescribeInstancesInput) error
-	WaitUntilInstanceTerminatedWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceTerminated(context.Context, *ec2.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilKeyPairExists(*ec2.DescribeKeyPairsInput) error
-	WaitUntilKeyPairExistsWithContext(aws.Context, *ec2.DescribeKeyPairsInput, ...aws.WaiterOption) error
+	WaitUntilKeyPairExists(context.Context, *ec2.DescribeKeyPairsInput, ...aws.WaiterOption) error
 
-	WaitUntilNatGatewayAvailable(*ec2.DescribeNatGatewaysInput) error
-	WaitUntilNatGatewayAvailableWithContext(aws.Context, *ec2.DescribeNatGatewaysInput, ...aws.WaiterOption) error
+	WaitUntilNatGatewayAvailable(context.Context, *ec2.DescribeNatGatewaysInput, ...aws.WaiterOption) error
 
-	WaitUntilNetworkInterfaceAvailable(*ec2.DescribeNetworkInterfacesInput) error
-	WaitUntilNetworkInterfaceAvailableWithContext(aws.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
+	WaitUntilNetworkInterfaceAvailable(context.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.WaiterOption) error
 
-	WaitUntilPasswordDataAvailable(*ec2.GetPasswordDataInput) error
-	WaitUntilPasswordDataAvailableWithContext(aws.Context, *ec2.GetPasswordDataInput, ...aws.WaiterOption) error
+	WaitUntilPasswordDataAvailable(context.Context, *ec2.GetPasswordDataInput, ...aws.WaiterOption) error
 
-	WaitUntilSnapshotCompleted(*ec2.DescribeSnapshotsInput) error
-	WaitUntilSnapshotCompletedWithContext(aws.Context, *ec2.DescribeSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilSnapshotCompleted(context.Context, *ec2.DescribeSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilSpotInstanceRequestFulfilled(*ec2.DescribeSpotInstanceRequestsInput) error
-	WaitUntilSpotInstanceRequestFulfilledWithContext(aws.Context, *ec2.DescribeSpotInstanceRequestsInput, ...aws.WaiterOption) error
+	WaitUntilSpotInstanceRequestFulfilled(context.Context, *ec2.DescribeSpotInstanceRequestsInput, ...aws.WaiterOption) error
 
-	WaitUntilSubnetAvailable(*ec2.DescribeSubnetsInput) error
-	WaitUntilSubnetAvailableWithContext(aws.Context, *ec2.DescribeSubnetsInput, ...aws.WaiterOption) error
+	WaitUntilSubnetAvailable(context.Context, *ec2.DescribeSubnetsInput, ...aws.WaiterOption) error
 
-	WaitUntilSystemStatusOk(*ec2.DescribeInstanceStatusInput) error
-	WaitUntilSystemStatusOkWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
+	WaitUntilSystemStatusOk(context.Context, *ec2.DescribeInstanceStatusInput, ...aws.WaiterOption) error
 
-	WaitUntilVolumeAvailable(*ec2.DescribeVolumesInput) error
-	WaitUntilVolumeAvailableWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+	WaitUntilVolumeAvailable(context.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
 
-	WaitUntilVolumeDeleted(*ec2.DescribeVolumesInput) error
-	WaitUntilVolumeDeletedWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+	WaitUntilVolumeDeleted(context.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
 
-	WaitUntilVolumeInUse(*ec2.DescribeVolumesInput) error
-	WaitUntilVolumeInUseWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
+	WaitUntilVolumeInUse(context.Context, *ec2.DescribeVolumesInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcAvailable(*ec2.DescribeVpcsInput) error
-	WaitUntilVpcAvailableWithContext(aws.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
+	WaitUntilVpcAvailable(context.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcExists(*ec2.DescribeVpcsInput) error
-	WaitUntilVpcExistsWithContext(aws.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
+	WaitUntilVpcExists(context.Context, *ec2.DescribeVpcsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcPeeringConnectionDeleted(*ec2.DescribeVpcPeeringConnectionsInput) error
-	WaitUntilVpcPeeringConnectionDeletedWithContext(aws.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVpcPeeringConnectionDeleted(context.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpcPeeringConnectionExists(*ec2.DescribeVpcPeeringConnectionsInput) error
-	WaitUntilVpcPeeringConnectionExistsWithContext(aws.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVpcPeeringConnectionExists(context.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpnConnectionAvailable(*ec2.DescribeVpnConnectionsInput) error
-	WaitUntilVpnConnectionAvailableWithContext(aws.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVpnConnectionAvailable(context.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
 
-	WaitUntilVpnConnectionDeleted(*ec2.DescribeVpnConnectionsInput) error
-	WaitUntilVpnConnectionDeletedWithContext(aws.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
+	WaitUntilVpnConnectionDeleted(context.Context, *ec2.DescribeVpnConnectionsInput, ...aws.WaiterOption) error
 }
 
 var _ EC2API = (*ec2.EC2)(nil)

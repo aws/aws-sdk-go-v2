@@ -3,6 +3,8 @@
 package comprehendmedical
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
@@ -17,7 +19,8 @@ type DetectEntitiesRequest struct {
 }
 
 // Send marshals and sends the DetectEntities API request.
-func (r DetectEntitiesRequest) Send() (*DetectEntitiesOutput, error) {
+func (r DetectEntitiesRequest) Send(ctx context.Context) (*DetectEntitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r DetectEntitiesRequest) Send() (*DetectEntitiesOutput, error) {
 //
 //    // Example sending a request using the DetectEntitiesRequest method.
 //    req := client.DetectEntitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -69,7 +72,8 @@ type DetectPHIRequest struct {
 }
 
 // Send marshals and sends the DetectPHI API request.
-func (r DetectPHIRequest) Send() (*DetectPHIOutput, error) {
+func (r DetectPHIRequest) Send(ctx context.Context) (*DetectPHIOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +90,7 @@ func (r DetectPHIRequest) Send() (*DetectPHIOutput, error) {
 //
 //    // Example sending a request using the DetectPHIRequest method.
 //    req := client.DetectPHIRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

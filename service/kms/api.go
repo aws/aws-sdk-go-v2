@@ -3,6 +3,7 @@
 package kms
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CancelKeyDeletionRequest struct {
 }
 
 // Send marshals and sends the CancelKeyDeletion API request.
-func (r CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
+func (r CancelKeyDeletionRequest) Send(ctx context.Context) (*CancelKeyDeletionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -49,7 +51,7 @@ func (r CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
 //
 //    // Example sending a request using the CancelKeyDeletionRequest method.
 //    req := client.CancelKeyDeletionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -83,7 +85,8 @@ type ConnectCustomKeyStoreRequest struct {
 }
 
 // Send marshals and sends the ConnectCustomKeyStore API request.
-func (r ConnectCustomKeyStoreRequest) Send() (*ConnectCustomKeyStoreOutput, error) {
+func (r ConnectCustomKeyStoreRequest) Send(ctx context.Context) (*ConnectCustomKeyStoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +139,7 @@ func (r ConnectCustomKeyStoreRequest) Send() (*ConnectCustomKeyStoreOutput, erro
 //
 //    // Example sending a request using the ConnectCustomKeyStoreRequest method.
 //    req := client.ConnectCustomKeyStoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +173,8 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+func (r CreateAliasRequest) Send(ctx context.Context) (*CreateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -212,7 +216,7 @@ func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -248,7 +252,8 @@ type CreateCustomKeyStoreRequest struct {
 }
 
 // Send marshals and sends the CreateCustomKeyStore API request.
-func (r CreateCustomKeyStoreRequest) Send() (*CreateCustomKeyStoreOutput, error) {
+func (r CreateCustomKeyStoreRequest) Send(ctx context.Context) (*CreateCustomKeyStoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -328,7 +333,7 @@ func (r CreateCustomKeyStoreRequest) Send() (*CreateCustomKeyStoreOutput, error)
 //
 //    // Example sending a request using the CreateCustomKeyStoreRequest method.
 //    req := client.CreateCustomKeyStoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -362,7 +367,8 @@ type CreateGrantRequest struct {
 }
 
 // Send marshals and sends the CreateGrant API request.
-func (r CreateGrantRequest) Send() (*CreateGrantOutput, error) {
+func (r CreateGrantRequest) Send(ctx context.Context) (*CreateGrantOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -389,7 +395,7 @@ func (r CreateGrantRequest) Send() (*CreateGrantOutput, error) {
 //
 //    // Example sending a request using the CreateGrantRequest method.
 //    req := client.CreateGrantRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -423,7 +429,8 @@ type CreateKeyRequest struct {
 }
 
 // Send marshals and sends the CreateKey API request.
-func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
+func (r CreateKeyRequest) Send(ctx context.Context) (*CreateKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,7 +468,7 @@ func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
 //
 //    // Example sending a request using the CreateKeyRequest method.
 //    req := client.CreateKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -495,7 +502,8 @@ type DecryptRequest struct {
 }
 
 // Send marshals and sends the Decrypt API request.
-func (r DecryptRequest) Send() (*DecryptOutput, error) {
+func (r DecryptRequest) Send(ctx context.Context) (*DecryptOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -531,7 +539,7 @@ func (r DecryptRequest) Send() (*DecryptOutput, error) {
 //
 //    // Example sending a request using the DecryptRequest method.
 //    req := client.DecryptRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -565,7 +573,8 @@ type DeleteAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAlias API request.
-func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,7 +600,7 @@ func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteAliasRequest method.
 //    req := client.DeleteAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -627,7 +636,8 @@ type DeleteCustomKeyStoreRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomKeyStore API request.
-func (r DeleteCustomKeyStoreRequest) Send() (*DeleteCustomKeyStoreOutput, error) {
+func (r DeleteCustomKeyStoreRequest) Send(ctx context.Context) (*DeleteCustomKeyStoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -671,7 +681,7 @@ func (r DeleteCustomKeyStoreRequest) Send() (*DeleteCustomKeyStoreOutput, error)
 //
 //    // Example sending a request using the DeleteCustomKeyStoreRequest method.
 //    req := client.DeleteCustomKeyStoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -705,7 +715,8 @@ type DeleteImportedKeyMaterialRequest struct {
 }
 
 // Send marshals and sends the DeleteImportedKeyMaterial API request.
-func (r DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutput, error) {
+func (r DeleteImportedKeyMaterialRequest) Send(ctx context.Context) (*DeleteImportedKeyMaterialOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -735,7 +746,7 @@ func (r DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutp
 //
 //    // Example sending a request using the DeleteImportedKeyMaterialRequest method.
 //    req := client.DeleteImportedKeyMaterialRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -771,7 +782,8 @@ type DescribeCustomKeyStoresRequest struct {
 }
 
 // Send marshals and sends the DescribeCustomKeyStores API request.
-func (r DescribeCustomKeyStoresRequest) Send() (*DescribeCustomKeyStoresOutput, error) {
+func (r DescribeCustomKeyStoresRequest) Send(ctx context.Context) (*DescribeCustomKeyStoresOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -813,7 +825,7 @@ func (r DescribeCustomKeyStoresRequest) Send() (*DescribeCustomKeyStoresOutput, 
 //
 //    // Example sending a request using the DescribeCustomKeyStoresRequest method.
 //    req := client.DescribeCustomKeyStoresRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -847,7 +859,8 @@ type DescribeKeyRequest struct {
 }
 
 // Send marshals and sends the DescribeKey API request.
-func (r DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
+func (r DescribeKeyRequest) Send(ctx context.Context) (*DescribeKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -870,7 +883,7 @@ func (r DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
 //
 //    // Example sending a request using the DescribeKeyRequest method.
 //    req := client.DescribeKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -904,7 +917,8 @@ type DisableKeyRequest struct {
 }
 
 // Send marshals and sends the DisableKey API request.
-func (r DisableKeyRequest) Send() (*DisableKeyOutput, error) {
+func (r DisableKeyRequest) Send(ctx context.Context) (*DisableKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -930,7 +944,7 @@ func (r DisableKeyRequest) Send() (*DisableKeyOutput, error) {
 //
 //    // Example sending a request using the DisableKeyRequest method.
 //    req := client.DisableKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -966,7 +980,8 @@ type DisableKeyRotationRequest struct {
 }
 
 // Send marshals and sends the DisableKeyRotation API request.
-func (r DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
+func (r DisableKeyRotationRequest) Send(ctx context.Context) (*DisableKeyRotationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -988,7 +1003,7 @@ func (r DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
 //
 //    // Example sending a request using the DisableKeyRotationRequest method.
 //    req := client.DisableKeyRotationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1024,7 +1039,8 @@ type DisconnectCustomKeyStoreRequest struct {
 }
 
 // Send marshals and sends the DisconnectCustomKeyStore API request.
-func (r DisconnectCustomKeyStoreRequest) Send() (*DisconnectCustomKeyStoreOutput, error) {
+func (r DisconnectCustomKeyStoreRequest) Send(ctx context.Context) (*DisconnectCustomKeyStoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1055,7 +1071,7 @@ func (r DisconnectCustomKeyStoreRequest) Send() (*DisconnectCustomKeyStoreOutput
 //
 //    // Example sending a request using the DisconnectCustomKeyStoreRequest method.
 //    req := client.DisconnectCustomKeyStoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1089,7 +1105,8 @@ type EnableKeyRequest struct {
 }
 
 // Send marshals and sends the EnableKey API request.
-func (r EnableKeyRequest) Send() (*EnableKeyOutput, error) {
+func (r EnableKeyRequest) Send(ctx context.Context) (*EnableKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1111,7 +1128,7 @@ func (r EnableKeyRequest) Send() (*EnableKeyOutput, error) {
 //
 //    // Example sending a request using the EnableKeyRequest method.
 //    req := client.EnableKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1147,7 +1164,8 @@ type EnableKeyRotationRequest struct {
 }
 
 // Send marshals and sends the EnableKeyRotation API request.
-func (r EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
+func (r EnableKeyRotationRequest) Send(ctx context.Context) (*EnableKeyRotationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1172,7 +1190,7 @@ func (r EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
 //
 //    // Example sending a request using the EnableKeyRotationRequest method.
 //    req := client.EnableKeyRotationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1208,7 +1226,8 @@ type EncryptRequest struct {
 }
 
 // Send marshals and sends the Encrypt API request.
-func (r EncryptRequest) Send() (*EncryptOutput, error) {
+func (r EncryptRequest) Send(ctx context.Context) (*EncryptOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1250,7 +1269,7 @@ func (r EncryptRequest) Send() (*EncryptOutput, error) {
 //
 //    // Example sending a request using the EncryptRequest method.
 //    req := client.EncryptRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1284,7 +1303,8 @@ type GenerateDataKeyRequest struct {
 }
 
 // Send marshals and sends the GenerateDataKey API request.
-func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
+func (r GenerateDataKeyRequest) Send(ctx context.Context) (*GenerateDataKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1349,7 +1369,7 @@ func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
 //
 //    // Example sending a request using the GenerateDataKeyRequest method.
 //    req := client.GenerateDataKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1383,7 +1403,8 @@ type GenerateDataKeyWithoutPlaintextRequest struct {
 }
 
 // Send marshals and sends the GenerateDataKeyWithoutPlaintext API request.
-func (r GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutPlaintextOutput, error) {
+func (r GenerateDataKeyWithoutPlaintextRequest) Send(ctx context.Context) (*GenerateDataKeyWithoutPlaintextOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1420,7 +1441,7 @@ func (r GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutP
 //
 //    // Example sending a request using the GenerateDataKeyWithoutPlaintextRequest method.
 //    req := client.GenerateDataKeyWithoutPlaintextRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1454,7 +1475,8 @@ type GenerateRandomRequest struct {
 }
 
 // Send marshals and sends the GenerateRandom API request.
-func (r GenerateRandomRequest) Send() (*GenerateRandomOutput, error) {
+func (r GenerateRandomRequest) Send(ctx context.Context) (*GenerateRandomOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1479,7 +1501,7 @@ func (r GenerateRandomRequest) Send() (*GenerateRandomOutput, error) {
 //
 //    // Example sending a request using the GenerateRandomRequest method.
 //    req := client.GenerateRandomRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1513,7 +1535,8 @@ type GetKeyPolicyRequest struct {
 }
 
 // Send marshals and sends the GetKeyPolicy API request.
-func (r GetKeyPolicyRequest) Send() (*GetKeyPolicyOutput, error) {
+func (r GetKeyPolicyRequest) Send(ctx context.Context) (*GetKeyPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1530,7 +1553,7 @@ func (r GetKeyPolicyRequest) Send() (*GetKeyPolicyOutput, error) {
 //
 //    // Example sending a request using the GetKeyPolicyRequest method.
 //    req := client.GetKeyPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1564,7 +1587,8 @@ type GetKeyRotationStatusRequest struct {
 }
 
 // Send marshals and sends the GetKeyRotationStatus API request.
-func (r GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error) {
+func (r GetKeyRotationStatusRequest) Send(ctx context.Context) (*GetKeyRotationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1597,7 +1621,7 @@ func (r GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error)
 //
 //    // Example sending a request using the GetKeyRotationStatusRequest method.
 //    req := client.GetKeyRotationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1631,7 +1655,8 @@ type GetParametersForImportRequest struct {
 }
 
 // Send marshals and sends the GetParametersForImport API request.
-func (r GetParametersForImportRequest) Send() (*GetParametersForImportOutput, error) {
+func (r GetParametersForImportRequest) Send(ctx context.Context) (*GetParametersForImportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1667,7 +1692,7 @@ func (r GetParametersForImportRequest) Send() (*GetParametersForImportOutput, er
 //
 //    // Example sending a request using the GetParametersForImportRequest method.
 //    req := client.GetParametersForImportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1701,7 +1726,8 @@ type ImportKeyMaterialRequest struct {
 }
 
 // Send marshals and sends the ImportKeyMaterial API request.
-func (r ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
+func (r ImportKeyMaterialRequest) Send(ctx context.Context) (*ImportKeyMaterialOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1756,7 +1782,7 @@ func (r ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
 //
 //    // Example sending a request using the ImportKeyMaterialRequest method.
 //    req := client.ImportKeyMaterialRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1790,7 +1816,8 @@ type ListAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAliases API request.
-func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1816,7 +1843,7 @@ func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 //
 //    // Example sending a request using the ListAliasesRequest method.
 //    req := client.ListAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1866,7 +1893,7 @@ func (c *KMS) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 	return ListAliasesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAliasesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1875,6 +1902,7 @@ func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1902,7 +1930,8 @@ type ListGrantsRequest struct {
 }
 
 // Send marshals and sends the ListGrants API request.
-func (r ListGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
+func (r ListGrantsRequest) Send(ctx context.Context) (*ListRetirableGrantsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1921,7 +1950,7 @@ func (r ListGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
 //
 //    // Example sending a request using the ListGrantsRequest method.
 //    req := client.ListGrantsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1971,7 +2000,7 @@ func (c *KMS) ListGrantsRequest(input *ListGrantsInput) ListGrantsRequest {
 func (p *ListGrantsRequest) Paginate(opts ...aws.Option) ListGrantsPager {
 	return ListGrantsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGrantsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1980,6 +2009,7 @@ func (p *ListGrantsRequest) Paginate(opts ...aws.Option) ListGrantsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2007,7 +2037,8 @@ type ListKeyPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListKeyPolicies API request.
-func (r ListKeyPoliciesRequest) Send() (*ListKeyPoliciesOutput, error) {
+func (r ListKeyPoliciesRequest) Send(ctx context.Context) (*ListKeyPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2026,7 +2057,7 @@ func (r ListKeyPoliciesRequest) Send() (*ListKeyPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListKeyPoliciesRequest method.
 //    req := client.ListKeyPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2076,7 +2107,7 @@ func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPolicie
 func (p *ListKeyPoliciesRequest) Paginate(opts ...aws.Option) ListKeyPoliciesPager {
 	return ListKeyPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListKeyPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2085,6 +2116,7 @@ func (p *ListKeyPoliciesRequest) Paginate(opts ...aws.Option) ListKeyPoliciesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2112,7 +2144,8 @@ type ListKeysRequest struct {
 }
 
 // Send marshals and sends the ListKeys API request.
-func (r ListKeysRequest) Send() (*ListKeysOutput, error) {
+func (r ListKeysRequest) Send(ctx context.Context) (*ListKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2129,7 +2162,7 @@ func (r ListKeysRequest) Send() (*ListKeysOutput, error) {
 //
 //    // Example sending a request using the ListKeysRequest method.
 //    req := client.ListKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2179,7 +2212,7 @@ func (c *KMS) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 func (p *ListKeysRequest) Paginate(opts ...aws.Option) ListKeysPager {
 	return ListKeysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListKeysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2188,6 +2221,7 @@ func (p *ListKeysRequest) Paginate(opts ...aws.Option) ListKeysPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2215,7 +2249,8 @@ type ListResourceTagsRequest struct {
 }
 
 // Send marshals and sends the ListResourceTags API request.
-func (r ListResourceTagsRequest) Send() (*ListResourceTagsOutput, error) {
+func (r ListResourceTagsRequest) Send(ctx context.Context) (*ListResourceTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2233,7 +2268,7 @@ func (r ListResourceTagsRequest) Send() (*ListResourceTagsOutput, error) {
 //
 //    // Example sending a request using the ListResourceTagsRequest method.
 //    req := client.ListResourceTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2267,7 +2302,8 @@ type ListRetirableGrantsRequest struct {
 }
 
 // Send marshals and sends the ListRetirableGrants API request.
-func (r ListRetirableGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
+func (r ListRetirableGrantsRequest) Send(ctx context.Context) (*ListRetirableGrantsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2287,7 +2323,7 @@ func (r ListRetirableGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
 //
 //    // Example sending a request using the ListRetirableGrantsRequest method.
 //    req := client.ListRetirableGrantsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2321,7 +2357,8 @@ type PutKeyPolicyRequest struct {
 }
 
 // Send marshals and sends the PutKeyPolicy API request.
-func (r PutKeyPolicyRequest) Send() (*PutKeyPolicyOutput, error) {
+func (r PutKeyPolicyRequest) Send(ctx context.Context) (*PutKeyPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2341,7 +2378,7 @@ func (r PutKeyPolicyRequest) Send() (*PutKeyPolicyOutput, error) {
 //
 //    // Example sending a request using the PutKeyPolicyRequest method.
 //    req := client.PutKeyPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2377,7 +2414,8 @@ type ReEncryptRequest struct {
 }
 
 // Send marshals and sends the ReEncrypt API request.
-func (r ReEncryptRequest) Send() (*ReEncryptOutput, error) {
+func (r ReEncryptRequest) Send(ctx context.Context) (*ReEncryptOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2410,7 +2448,7 @@ func (r ReEncryptRequest) Send() (*ReEncryptOutput, error) {
 //
 //    // Example sending a request using the ReEncryptRequest method.
 //    req := client.ReEncryptRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2444,7 +2482,8 @@ type RetireGrantRequest struct {
 }
 
 // Send marshals and sends the RetireGrant API request.
-func (r RetireGrantRequest) Send() (*RetireGrantOutput, error) {
+func (r RetireGrantRequest) Send(ctx context.Context) (*RetireGrantOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2475,7 +2514,7 @@ func (r RetireGrantRequest) Send() (*RetireGrantOutput, error) {
 //
 //    // Example sending a request using the RetireGrantRequest method.
 //    req := client.RetireGrantRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2511,7 +2550,8 @@ type RevokeGrantRequest struct {
 }
 
 // Send marshals and sends the RevokeGrant API request.
-func (r RevokeGrantRequest) Send() (*RevokeGrantOutput, error) {
+func (r RevokeGrantRequest) Send(ctx context.Context) (*RevokeGrantOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2531,7 +2571,7 @@ func (r RevokeGrantRequest) Send() (*RevokeGrantOutput, error) {
 //
 //    // Example sending a request using the RevokeGrantRequest method.
 //    req := client.RevokeGrantRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2567,7 +2607,8 @@ type ScheduleKeyDeletionRequest struct {
 }
 
 // Send marshals and sends the ScheduleKeyDeletion API request.
-func (r ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
+func (r ScheduleKeyDeletionRequest) Send(ctx context.Context) (*ScheduleKeyDeletionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2611,7 +2652,7 @@ func (r ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
 //
 //    // Example sending a request using the ScheduleKeyDeletionRequest method.
 //    req := client.ScheduleKeyDeletionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2645,7 +2686,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2676,7 +2718,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2712,7 +2754,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2736,7 +2779,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2772,7 +2815,8 @@ type UpdateAliasRequest struct {
 }
 
 // Send marshals and sends the UpdateAlias API request.
-func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2811,7 +2855,7 @@ func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 //
 //    // Example sending a request using the UpdateAliasRequest method.
 //    req := client.UpdateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2847,7 +2891,8 @@ type UpdateCustomKeyStoreRequest struct {
 }
 
 // Send marshals and sends the UpdateCustomKeyStore API request.
-func (r UpdateCustomKeyStoreRequest) Send() (*UpdateCustomKeyStoreOutput, error) {
+func (r UpdateCustomKeyStoreRequest) Send(ctx context.Context) (*UpdateCustomKeyStoreOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2913,7 +2958,7 @@ func (r UpdateCustomKeyStoreRequest) Send() (*UpdateCustomKeyStoreOutput, error)
 //
 //    // Example sending a request using the UpdateCustomKeyStoreRequest method.
 //    req := client.UpdateCustomKeyStoreRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2947,7 +2992,8 @@ type UpdateKeyDescriptionRequest struct {
 }
 
 // Send marshals and sends the UpdateKeyDescription API request.
-func (r UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error) {
+func (r UpdateKeyDescriptionRequest) Send(ctx context.Context) (*UpdateKeyDescriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2970,7 +3016,7 @@ func (r UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error)
 //
 //    // Example sending a request using the UpdateKeyDescriptionRequest method.
 //    req := client.UpdateKeyDescriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

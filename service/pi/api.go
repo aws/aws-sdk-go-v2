@@ -3,6 +3,7 @@
 package pi
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type DescribeDimensionKeysRequest struct {
 }
 
 // Send marshals and sends the DescribeDimensionKeys API request.
-func (r DescribeDimensionKeysRequest) Send() (*DescribeDimensionKeysOutput, error) {
+func (r DescribeDimensionKeysRequest) Send(ctx context.Context) (*DescribeDimensionKeysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r DescribeDimensionKeysRequest) Send() (*DescribeDimensionKeysOutput, erro
 //
 //    // Example sending a request using the DescribeDimensionKeysRequest method.
 //    req := client.DescribeDimensionKeysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type GetResourceMetricsRequest struct {
 }
 
 // Send marshals and sends the GetResourceMetrics API request.
-func (r GetResourceMetricsRequest) Send() (*GetResourceMetricsOutput, error) {
+func (r GetResourceMetricsRequest) Send(ctx context.Context) (*GetResourceMetricsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r GetResourceMetricsRequest) Send() (*GetResourceMetricsOutput, error) {
 //
 //    // Example sending a request using the GetResourceMetricsRequest method.
 //    req := client.GetResourceMetricsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

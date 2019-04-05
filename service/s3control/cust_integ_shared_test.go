@@ -3,6 +3,7 @@
 package s3control_test
 
 import (
+	"context"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -73,7 +74,7 @@ func setup() {
 		}
 
 		stsSvc := sts.New(stsCfg)
-		identity, err := stsSvc.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{}).Send()
+		identity, err := stsSvc.GetCallerIdentityRequest(&sts.GetCallerIdentityInput{}).Send(context.Background())
 		if err != nil {
 			panic(fmt.Sprintf("failed to get accountID, %v", err))
 		}

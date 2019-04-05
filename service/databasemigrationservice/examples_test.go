@@ -3,6 +3,7 @@
 package databasemigrationservice_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -49,7 +50,7 @@ func ExampleDatabaseMigrationService_AddTagsToResourceRequest_shared00() {
 	}
 
 	req := svc.AddTagsToResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -101,7 +102,7 @@ func ExampleDatabaseMigrationService_CreateEndpointRequest_shared00() {
 	}
 
 	req := svc.CreateEndpointRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -162,7 +163,7 @@ func ExampleDatabaseMigrationService_CreateReplicationInstanceRequest_shared00()
 	}
 
 	req := svc.CreateReplicationInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -226,7 +227,7 @@ func ExampleDatabaseMigrationService_CreateReplicationSubnetGroupRequest_shared0
 	}
 
 	req := svc.CreateReplicationSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -284,7 +285,7 @@ func ExampleDatabaseMigrationService_CreateReplicationTaskRequest_shared00() {
 	}
 
 	req := svc.CreateReplicationTaskRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -329,7 +330,7 @@ func ExampleDatabaseMigrationService_DeleteCertificateRequest_shared00() {
 	}
 
 	req := svc.DeleteCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -368,7 +369,7 @@ func ExampleDatabaseMigrationService_DeleteEndpointRequest_shared00() {
 	}
 
 	req := svc.DeleteEndpointRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -407,7 +408,7 @@ func ExampleDatabaseMigrationService_DeleteReplicationInstanceRequest_shared00()
 	}
 
 	req := svc.DeleteReplicationInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -444,7 +445,7 @@ func ExampleDatabaseMigrationService_DeleteReplicationSubnetGroupRequest_shared0
 	}
 
 	req := svc.DeleteReplicationSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -481,7 +482,7 @@ func ExampleDatabaseMigrationService_DeleteReplicationTaskRequest_shared00() {
 	}
 
 	req := svc.DeleteReplicationTaskRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -519,7 +520,7 @@ func ExampleDatabaseMigrationService_DescribeAccountAttributesRequest_shared00()
 	input := &databasemigrationservice.DescribeAccountAttributesInput{}
 
 	req := svc.DescribeAccountAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -562,7 +563,7 @@ func ExampleDatabaseMigrationService_DescribeCertificatesRequest_shared00() {
 	}
 
 	req := svc.DescribeCertificatesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -608,7 +609,7 @@ func ExampleDatabaseMigrationService_DescribeConnectionsRequest_shared00() {
 	}
 
 	req := svc.DescribeConnectionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -653,7 +654,7 @@ func ExampleDatabaseMigrationService_DescribeEndpointTypesRequest_shared00() {
 	}
 
 	req := svc.DescribeEndpointTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -696,7 +697,7 @@ func ExampleDatabaseMigrationService_DescribeEndpointsRequest_shared00() {
 	}
 
 	req := svc.DescribeEndpointsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -733,7 +734,7 @@ func ExampleDatabaseMigrationService_DescribeOrderableReplicationInstancesReques
 	}
 
 	req := svc.DescribeOrderableReplicationInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -766,7 +767,7 @@ func ExampleDatabaseMigrationService_DescribeRefreshSchemasStatusRequest_shared0
 	}
 
 	req := svc.DescribeRefreshSchemasStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -813,7 +814,7 @@ func ExampleDatabaseMigrationService_DescribeReplicationInstancesRequest_shared0
 	}
 
 	req := svc.DescribeReplicationInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -858,7 +859,7 @@ func ExampleDatabaseMigrationService_DescribeReplicationSubnetGroupsRequest_shar
 	}
 
 	req := svc.DescribeReplicationSubnetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -903,7 +904,7 @@ func ExampleDatabaseMigrationService_DescribeReplicationTasksRequest_shared00() 
 	}
 
 	req := svc.DescribeReplicationTasksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -940,7 +941,7 @@ func ExampleDatabaseMigrationService_DescribeSchemasRequest_shared00() {
 	}
 
 	req := svc.DescribeSchemasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -980,7 +981,7 @@ func ExampleDatabaseMigrationService_DescribeTableStatisticsRequest_shared00() {
 	}
 
 	req := svc.DescribeTableStatisticsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1018,7 +1019,7 @@ func ExampleDatabaseMigrationService_ImportCertificateRequest_shared00() {
 	}
 
 	req := svc.ImportCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1057,7 +1058,7 @@ func ExampleDatabaseMigrationService_ListTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ListTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1103,7 +1104,7 @@ func ExampleDatabaseMigrationService_ModifyEndpointRequest_shared00() {
 	}
 
 	req := svc.ModifyEndpointRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1157,7 +1158,7 @@ func ExampleDatabaseMigrationService_ModifyReplicationInstanceRequest_shared00()
 	}
 
 	req := svc.ModifyReplicationInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1203,7 +1204,7 @@ func ExampleDatabaseMigrationService_ModifyReplicationSubnetGroupRequest_shared0
 	}
 
 	req := svc.ModifyReplicationSubnetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1251,7 +1252,7 @@ func ExampleDatabaseMigrationService_RefreshSchemasRequest_shared00() {
 	}
 
 	req := svc.RefreshSchemasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1292,7 +1293,7 @@ func ExampleDatabaseMigrationService_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsFromResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1329,7 +1330,7 @@ func ExampleDatabaseMigrationService_StartReplicationTaskRequest_shared00() {
 	}
 
 	req := svc.StartReplicationTaskRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1368,7 +1369,7 @@ func ExampleDatabaseMigrationService_StopReplicationTaskRequest_shared00() {
 	}
 
 	req := svc.StopReplicationTaskRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1406,7 +1407,7 @@ func ExampleDatabaseMigrationService_TestConnectionRequest_shared00() {
 	}
 
 	req := svc.TestConnectionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -3,6 +3,7 @@
 package codedeploy
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AddTagsToOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the AddTagsToOnPremisesInstances API request.
-func (r AddTagsToOnPremisesInstancesRequest) Send() (*AddTagsToOnPremisesInstancesOutput, error) {
+func (r AddTagsToOnPremisesInstancesRequest) Send(ctx context.Context) (*AddTagsToOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r AddTagsToOnPremisesInstancesRequest) Send() (*AddTagsToOnPremisesInstanc
 //
 //    // Example sending a request using the AddTagsToOnPremisesInstancesRequest method.
 //    req := client.AddTagsToOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type BatchGetApplicationRevisionsRequest struct {
 }
 
 // Send marshals and sends the BatchGetApplicationRevisions API request.
-func (r BatchGetApplicationRevisionsRequest) Send() (*BatchGetApplicationRevisionsOutput, error) {
+func (r BatchGetApplicationRevisionsRequest) Send(ctx context.Context) (*BatchGetApplicationRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r BatchGetApplicationRevisionsRequest) Send() (*BatchGetApplicationRevisio
 //
 //    // Example sending a request using the BatchGetApplicationRevisionsRequest method.
 //    req := client.BatchGetApplicationRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type BatchGetApplicationsRequest struct {
 }
 
 // Send marshals and sends the BatchGetApplications API request.
-func (r BatchGetApplicationsRequest) Send() (*BatchGetApplicationsOutput, error) {
+func (r BatchGetApplicationsRequest) Send(ctx context.Context) (*BatchGetApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +143,7 @@ func (r BatchGetApplicationsRequest) Send() (*BatchGetApplicationsOutput, error)
 //
 //    // Example sending a request using the BatchGetApplicationsRequest method.
 //    req := client.BatchGetApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +177,8 @@ type BatchGetDeploymentGroupsRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeploymentGroups API request.
-func (r BatchGetDeploymentGroupsRequest) Send() (*BatchGetDeploymentGroupsOutput, error) {
+func (r BatchGetDeploymentGroupsRequest) Send(ctx context.Context) (*BatchGetDeploymentGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -189,7 +194,7 @@ func (r BatchGetDeploymentGroupsRequest) Send() (*BatchGetDeploymentGroupsOutput
 //
 //    // Example sending a request using the BatchGetDeploymentGroupsRequest method.
 //    req := client.BatchGetDeploymentGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -223,7 +228,8 @@ type BatchGetDeploymentInstancesRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeploymentInstances API request.
-func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstancesOutput, error) {
+func (r BatchGetDeploymentInstancesRequest) Send(ctx context.Context) (*BatchGetDeploymentInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +250,7 @@ func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstances
 //
 //    // Example sending a request using the BatchGetDeploymentInstancesRequest method.
 //    req := client.BatchGetDeploymentInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -281,7 +287,8 @@ type BatchGetDeploymentTargetsRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeploymentTargets API request.
-func (r BatchGetDeploymentTargetsRequest) Send() (*BatchGetDeploymentTargetsOutput, error) {
+func (r BatchGetDeploymentTargetsRequest) Send(ctx context.Context) (*BatchGetDeploymentTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,7 +313,7 @@ func (r BatchGetDeploymentTargetsRequest) Send() (*BatchGetDeploymentTargetsOutp
 //
 //    // Example sending a request using the BatchGetDeploymentTargetsRequest method.
 //    req := client.BatchGetDeploymentTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -340,7 +347,8 @@ type BatchGetDeploymentsRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeployments API request.
-func (r BatchGetDeploymentsRequest) Send() (*BatchGetDeploymentsOutput, error) {
+func (r BatchGetDeploymentsRequest) Send(ctx context.Context) (*BatchGetDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,7 +364,7 @@ func (r BatchGetDeploymentsRequest) Send() (*BatchGetDeploymentsOutput, error) {
 //
 //    // Example sending a request using the BatchGetDeploymentsRequest method.
 //    req := client.BatchGetDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -390,7 +398,8 @@ type BatchGetOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the BatchGetOnPremisesInstances API request.
-func (r BatchGetOnPremisesInstancesRequest) Send() (*BatchGetOnPremisesInstancesOutput, error) {
+func (r BatchGetOnPremisesInstancesRequest) Send(ctx context.Context) (*BatchGetOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,7 +415,7 @@ func (r BatchGetOnPremisesInstancesRequest) Send() (*BatchGetOnPremisesInstances
 //
 //    // Example sending a request using the BatchGetOnPremisesInstancesRequest method.
 //    req := client.BatchGetOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -440,7 +449,8 @@ type ContinueDeploymentRequest struct {
 }
 
 // Send marshals and sends the ContinueDeployment API request.
-func (r ContinueDeploymentRequest) Send() (*ContinueDeploymentOutput, error) {
+func (r ContinueDeploymentRequest) Send(ctx context.Context) (*ContinueDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,7 +471,7 @@ func (r ContinueDeploymentRequest) Send() (*ContinueDeploymentOutput, error) {
 //
 //    // Example sending a request using the ContinueDeploymentRequest method.
 //    req := client.ContinueDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -497,7 +507,8 @@ type CreateApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateApplication API request.
-func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -513,7 +524,7 @@ func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
 //
 //    // Example sending a request using the CreateApplicationRequest method.
 //    req := client.CreateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -547,7 +558,8 @@ type CreateDeploymentRequest struct {
 }
 
 // Send marshals and sends the CreateDeployment API request.
-func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -563,7 +575,7 @@ func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
 //
 //    // Example sending a request using the CreateDeploymentRequest method.
 //    req := client.CreateDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -597,7 +609,8 @@ type CreateDeploymentConfigRequest struct {
 }
 
 // Send marshals and sends the CreateDeploymentConfig API request.
-func (r CreateDeploymentConfigRequest) Send() (*CreateDeploymentConfigOutput, error) {
+func (r CreateDeploymentConfigRequest) Send(ctx context.Context) (*CreateDeploymentConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -613,7 +626,7 @@ func (r CreateDeploymentConfigRequest) Send() (*CreateDeploymentConfigOutput, er
 //
 //    // Example sending a request using the CreateDeploymentConfigRequest method.
 //    req := client.CreateDeploymentConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -647,7 +660,8 @@ type CreateDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDeploymentGroup API request.
-func (r CreateDeploymentGroupRequest) Send() (*CreateDeploymentGroupOutput, error) {
+func (r CreateDeploymentGroupRequest) Send(ctx context.Context) (*CreateDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -663,7 +677,7 @@ func (r CreateDeploymentGroupRequest) Send() (*CreateDeploymentGroupOutput, erro
 //
 //    // Example sending a request using the CreateDeploymentGroupRequest method.
 //    req := client.CreateDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -697,7 +711,8 @@ type DeleteApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplication API request.
-func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+func (r DeleteApplicationRequest) Send(ctx context.Context) (*DeleteApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -713,7 +728,7 @@ func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
 //    req := client.DeleteApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -749,7 +764,8 @@ type DeleteDeploymentConfigRequest struct {
 }
 
 // Send marshals and sends the DeleteDeploymentConfig API request.
-func (r DeleteDeploymentConfigRequest) Send() (*DeleteDeploymentConfigOutput, error) {
+func (r DeleteDeploymentConfigRequest) Send(ctx context.Context) (*DeleteDeploymentConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -768,7 +784,7 @@ func (r DeleteDeploymentConfigRequest) Send() (*DeleteDeploymentConfigOutput, er
 //
 //    // Example sending a request using the DeleteDeploymentConfigRequest method.
 //    req := client.DeleteDeploymentConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -804,7 +820,8 @@ type DeleteDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDeploymentGroup API request.
-func (r DeleteDeploymentGroupRequest) Send() (*DeleteDeploymentGroupOutput, error) {
+func (r DeleteDeploymentGroupRequest) Send(ctx context.Context) (*DeleteDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -820,7 +837,7 @@ func (r DeleteDeploymentGroupRequest) Send() (*DeleteDeploymentGroupOutput, erro
 //
 //    // Example sending a request using the DeleteDeploymentGroupRequest method.
 //    req := client.DeleteDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -854,7 +871,8 @@ type DeleteGitHubAccountTokenRequest struct {
 }
 
 // Send marshals and sends the DeleteGitHubAccountToken API request.
-func (r DeleteGitHubAccountTokenRequest) Send() (*DeleteGitHubAccountTokenOutput, error) {
+func (r DeleteGitHubAccountTokenRequest) Send(ctx context.Context) (*DeleteGitHubAccountTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -870,7 +888,7 @@ func (r DeleteGitHubAccountTokenRequest) Send() (*DeleteGitHubAccountTokenOutput
 //
 //    // Example sending a request using the DeleteGitHubAccountTokenRequest method.
 //    req := client.DeleteGitHubAccountTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -904,7 +922,8 @@ type DeregisterOnPremisesInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterOnPremisesInstance API request.
-func (r DeregisterOnPremisesInstanceRequest) Send() (*DeregisterOnPremisesInstanceOutput, error) {
+func (r DeregisterOnPremisesInstanceRequest) Send(ctx context.Context) (*DeregisterOnPremisesInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -920,7 +939,7 @@ func (r DeregisterOnPremisesInstanceRequest) Send() (*DeregisterOnPremisesInstan
 //
 //    // Example sending a request using the DeregisterOnPremisesInstanceRequest method.
 //    req := client.DeregisterOnPremisesInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -956,7 +975,8 @@ type GetApplicationRequest struct {
 }
 
 // Send marshals and sends the GetApplication API request.
-func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
+func (r GetApplicationRequest) Send(ctx context.Context) (*GetApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -972,7 +992,7 @@ func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
 //
 //    // Example sending a request using the GetApplicationRequest method.
 //    req := client.GetApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1006,7 +1026,8 @@ type GetApplicationRevisionRequest struct {
 }
 
 // Send marshals and sends the GetApplicationRevision API request.
-func (r GetApplicationRevisionRequest) Send() (*GetApplicationRevisionOutput, error) {
+func (r GetApplicationRevisionRequest) Send(ctx context.Context) (*GetApplicationRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1022,7 +1043,7 @@ func (r GetApplicationRevisionRequest) Send() (*GetApplicationRevisionOutput, er
 //
 //    // Example sending a request using the GetApplicationRevisionRequest method.
 //    req := client.GetApplicationRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1056,7 +1077,8 @@ type GetDeploymentRequest struct {
 }
 
 // Send marshals and sends the GetDeployment API request.
-func (r GetDeploymentRequest) Send() (*GetDeploymentOutput, error) {
+func (r GetDeploymentRequest) Send(ctx context.Context) (*GetDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1072,7 +1094,7 @@ func (r GetDeploymentRequest) Send() (*GetDeploymentOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentRequest method.
 //    req := client.GetDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1106,7 +1128,8 @@ type GetDeploymentConfigRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentConfig API request.
-func (r GetDeploymentConfigRequest) Send() (*GetDeploymentConfigOutput, error) {
+func (r GetDeploymentConfigRequest) Send(ctx context.Context) (*GetDeploymentConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1122,7 +1145,7 @@ func (r GetDeploymentConfigRequest) Send() (*GetDeploymentConfigOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentConfigRequest method.
 //    req := client.GetDeploymentConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1156,7 +1179,8 @@ type GetDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentGroup API request.
-func (r GetDeploymentGroupRequest) Send() (*GetDeploymentGroupOutput, error) {
+func (r GetDeploymentGroupRequest) Send(ctx context.Context) (*GetDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1172,7 +1196,7 @@ func (r GetDeploymentGroupRequest) Send() (*GetDeploymentGroupOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentGroupRequest method.
 //    req := client.GetDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1206,7 +1230,8 @@ type GetDeploymentInstanceRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentInstance API request.
-func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, error) {
+func (r GetDeploymentInstanceRequest) Send(ctx context.Context) (*GetDeploymentInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1222,7 +1247,7 @@ func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, erro
 //
 //    // Example sending a request using the GetDeploymentInstanceRequest method.
 //    req := client.GetDeploymentInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1259,7 +1284,8 @@ type GetDeploymentTargetRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentTarget API request.
-func (r GetDeploymentTargetRequest) Send() (*GetDeploymentTargetOutput, error) {
+func (r GetDeploymentTargetRequest) Send(ctx context.Context) (*GetDeploymentTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1275,7 +1301,7 @@ func (r GetDeploymentTargetRequest) Send() (*GetDeploymentTargetOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentTargetRequest method.
 //    req := client.GetDeploymentTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1309,7 +1335,8 @@ type GetOnPremisesInstanceRequest struct {
 }
 
 // Send marshals and sends the GetOnPremisesInstance API request.
-func (r GetOnPremisesInstanceRequest) Send() (*GetOnPremisesInstanceOutput, error) {
+func (r GetOnPremisesInstanceRequest) Send(ctx context.Context) (*GetOnPremisesInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1325,7 +1352,7 @@ func (r GetOnPremisesInstanceRequest) Send() (*GetOnPremisesInstanceOutput, erro
 //
 //    // Example sending a request using the GetOnPremisesInstanceRequest method.
 //    req := client.GetOnPremisesInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1359,7 +1386,8 @@ type ListApplicationRevisionsRequest struct {
 }
 
 // Send marshals and sends the ListApplicationRevisions API request.
-func (r ListApplicationRevisionsRequest) Send() (*ListApplicationRevisionsOutput, error) {
+func (r ListApplicationRevisionsRequest) Send(ctx context.Context) (*ListApplicationRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1375,7 +1403,7 @@ func (r ListApplicationRevisionsRequest) Send() (*ListApplicationRevisionsOutput
 //
 //    // Example sending a request using the ListApplicationRevisionsRequest method.
 //    req := client.ListApplicationRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1425,7 +1453,7 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListApplicationRevisionsPager {
 	return ListApplicationRevisionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationRevisionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1434,6 +1462,7 @@ func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListAppli
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1461,7 +1490,8 @@ type ListApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListApplications API request.
-func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
+func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1477,7 +1507,7 @@ func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
 //
 //    // Example sending a request using the ListApplicationsRequest method.
 //    req := client.ListApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1527,7 +1557,7 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) ListA
 func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
 	return ListApplicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1536,6 +1566,7 @@ func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1563,7 +1594,8 @@ type ListDeploymentConfigsRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentConfigs API request.
-func (r ListDeploymentConfigsRequest) Send() (*ListDeploymentConfigsOutput, error) {
+func (r ListDeploymentConfigsRequest) Send(ctx context.Context) (*ListDeploymentConfigsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1579,7 +1611,7 @@ func (r ListDeploymentConfigsRequest) Send() (*ListDeploymentConfigsOutput, erro
 //
 //    // Example sending a request using the ListDeploymentConfigsRequest method.
 //    req := client.ListDeploymentConfigsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1629,7 +1661,7 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeploymentConfigsPager {
 	return ListDeploymentConfigsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentConfigsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1638,6 +1670,7 @@ func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeployme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1665,7 +1698,8 @@ type ListDeploymentGroupsRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentGroups API request.
-func (r ListDeploymentGroupsRequest) Send() (*ListDeploymentGroupsOutput, error) {
+func (r ListDeploymentGroupsRequest) Send(ctx context.Context) (*ListDeploymentGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1682,7 +1716,7 @@ func (r ListDeploymentGroupsRequest) Send() (*ListDeploymentGroupsOutput, error)
 //
 //    // Example sending a request using the ListDeploymentGroupsRequest method.
 //    req := client.ListDeploymentGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1732,7 +1766,7 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymentGroupsPager {
 	return ListDeploymentGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1741,6 +1775,7 @@ func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymen
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1768,7 +1803,8 @@ type ListDeploymentInstancesRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentInstances API request.
-func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, error) {
+func (r ListDeploymentInstancesRequest) Send(ctx context.Context) (*ListDeploymentInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1789,7 +1825,7 @@ func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, 
 //
 //    // Example sending a request using the ListDeploymentInstancesRequest method.
 //    req := client.ListDeploymentInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1842,7 +1878,7 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploymentInstancesPager {
 	return ListDeploymentInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1851,6 +1887,7 @@ func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploy
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1878,7 +1915,8 @@ type ListDeploymentTargetsRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentTargets API request.
-func (r ListDeploymentTargetsRequest) Send() (*ListDeploymentTargetsOutput, error) {
+func (r ListDeploymentTargetsRequest) Send(ctx context.Context) (*ListDeploymentTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1894,7 +1932,7 @@ func (r ListDeploymentTargetsRequest) Send() (*ListDeploymentTargetsOutput, erro
 //
 //    // Example sending a request using the ListDeploymentTargetsRequest method.
 //    req := client.ListDeploymentTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1928,7 +1966,8 @@ type ListDeploymentsRequest struct {
 }
 
 // Send marshals and sends the ListDeployments API request.
-func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+func (r ListDeploymentsRequest) Send(ctx context.Context) (*ListDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1945,7 +1984,7 @@ func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
 //
 //    // Example sending a request using the ListDeploymentsRequest method.
 //    req := client.ListDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1995,7 +2034,7 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPager {
 	return ListDeploymentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2004,6 +2043,7 @@ func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2031,7 +2071,8 @@ type ListGitHubAccountTokenNamesRequest struct {
 }
 
 // Send marshals and sends the ListGitHubAccountTokenNames API request.
-func (r ListGitHubAccountTokenNamesRequest) Send() (*ListGitHubAccountTokenNamesOutput, error) {
+func (r ListGitHubAccountTokenNamesRequest) Send(ctx context.Context) (*ListGitHubAccountTokenNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2047,7 +2088,7 @@ func (r ListGitHubAccountTokenNamesRequest) Send() (*ListGitHubAccountTokenNames
 //
 //    // Example sending a request using the ListGitHubAccountTokenNamesRequest method.
 //    req := client.ListGitHubAccountTokenNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2081,7 +2122,8 @@ type ListOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the ListOnPremisesInstances API request.
-func (r ListOnPremisesInstancesRequest) Send() (*ListOnPremisesInstancesOutput, error) {
+func (r ListOnPremisesInstancesRequest) Send(ctx context.Context) (*ListOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2101,7 +2143,7 @@ func (r ListOnPremisesInstancesRequest) Send() (*ListOnPremisesInstancesOutput, 
 //
 //    // Example sending a request using the ListOnPremisesInstancesRequest method.
 //    req := client.ListOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2135,7 +2177,8 @@ type PutLifecycleEventHookExecutionStatusRequest struct {
 }
 
 // Send marshals and sends the PutLifecycleEventHookExecutionStatus API request.
-func (r PutLifecycleEventHookExecutionStatusRequest) Send() (*PutLifecycleEventHookExecutionStatusOutput, error) {
+func (r PutLifecycleEventHookExecutionStatusRequest) Send(ctx context.Context) (*PutLifecycleEventHookExecutionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2153,7 +2196,7 @@ func (r PutLifecycleEventHookExecutionStatusRequest) Send() (*PutLifecycleEventH
 //
 //    // Example sending a request using the PutLifecycleEventHookExecutionStatusRequest method.
 //    req := client.PutLifecycleEventHookExecutionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2187,7 +2230,8 @@ type RegisterApplicationRevisionRequest struct {
 }
 
 // Send marshals and sends the RegisterApplicationRevision API request.
-func (r RegisterApplicationRevisionRequest) Send() (*RegisterApplicationRevisionOutput, error) {
+func (r RegisterApplicationRevisionRequest) Send(ctx context.Context) (*RegisterApplicationRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2203,7 +2247,7 @@ func (r RegisterApplicationRevisionRequest) Send() (*RegisterApplicationRevision
 //
 //    // Example sending a request using the RegisterApplicationRevisionRequest method.
 //    req := client.RegisterApplicationRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2239,7 +2283,8 @@ type RegisterOnPremisesInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterOnPremisesInstance API request.
-func (r RegisterOnPremisesInstanceRequest) Send() (*RegisterOnPremisesInstanceOutput, error) {
+func (r RegisterOnPremisesInstanceRequest) Send(ctx context.Context) (*RegisterOnPremisesInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2258,7 +2303,7 @@ func (r RegisterOnPremisesInstanceRequest) Send() (*RegisterOnPremisesInstanceOu
 //
 //    // Example sending a request using the RegisterOnPremisesInstanceRequest method.
 //    req := client.RegisterOnPremisesInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2294,7 +2339,8 @@ type RemoveTagsFromOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromOnPremisesInstances API request.
-func (r RemoveTagsFromOnPremisesInstancesRequest) Send() (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+func (r RemoveTagsFromOnPremisesInstancesRequest) Send(ctx context.Context) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2310,7 +2356,7 @@ func (r RemoveTagsFromOnPremisesInstancesRequest) Send() (*RemoveTagsFromOnPremi
 //
 //    // Example sending a request using the RemoveTagsFromOnPremisesInstancesRequest method.
 //    req := client.RemoveTagsFromOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2346,7 +2392,8 @@ type SkipWaitTimeForInstanceTerminationRequest struct {
 }
 
 // Send marshals and sends the SkipWaitTimeForInstanceTermination API request.
-func (r SkipWaitTimeForInstanceTerminationRequest) Send() (*SkipWaitTimeForInstanceTerminationOutput, error) {
+func (r SkipWaitTimeForInstanceTerminationRequest) Send(ctx context.Context) (*SkipWaitTimeForInstanceTerminationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2363,7 +2410,7 @@ func (r SkipWaitTimeForInstanceTerminationRequest) Send() (*SkipWaitTimeForInsta
 //
 //    // Example sending a request using the SkipWaitTimeForInstanceTerminationRequest method.
 //    req := client.SkipWaitTimeForInstanceTerminationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2402,7 +2449,8 @@ type StopDeploymentRequest struct {
 }
 
 // Send marshals and sends the StopDeployment API request.
-func (r StopDeploymentRequest) Send() (*StopDeploymentOutput, error) {
+func (r StopDeploymentRequest) Send(ctx context.Context) (*StopDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2418,7 +2466,7 @@ func (r StopDeploymentRequest) Send() (*StopDeploymentOutput, error) {
 //
 //    // Example sending a request using the StopDeploymentRequest method.
 //    req := client.StopDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2452,7 +2500,8 @@ type UpdateApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateApplication API request.
-func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r UpdateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2468,7 +2517,7 @@ func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
 //    req := client.UpdateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2504,7 +2553,8 @@ type UpdateDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateDeploymentGroup API request.
-func (r UpdateDeploymentGroupRequest) Send() (*UpdateDeploymentGroupOutput, error) {
+func (r UpdateDeploymentGroupRequest) Send(ctx context.Context) (*UpdateDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2520,7 +2570,7 @@ func (r UpdateDeploymentGroupRequest) Send() (*UpdateDeploymentGroupOutput, erro
 //
 //    // Example sending a request using the UpdateDeploymentGroupRequest method.
 //    req := client.UpdateDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

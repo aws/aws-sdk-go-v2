@@ -3,6 +3,7 @@
 package rds
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddRoleToDBClusterRequest struct {
 }
 
 // Send marshals and sends the AddRoleToDBCluster API request.
-func (r AddRoleToDBClusterRequest) Send() (*AddRoleToDBClusterOutput, error) {
+func (r AddRoleToDBClusterRequest) Send(ctx context.Context) (*AddRoleToDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r AddRoleToDBClusterRequest) Send() (*AddRoleToDBClusterOutput, error) {
 //
 //    // Example sending a request using the AddRoleToDBClusterRequest method.
 //    req := client.AddRoleToDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type AddSourceIdentifierToSubscriptionRequest struct {
 }
 
 // Send marshals and sends the AddSourceIdentifierToSubscription API request.
-func (r AddSourceIdentifierToSubscriptionRequest) Send() (*AddSourceIdentifierToSubscriptionOutput, error) {
+func (r AddSourceIdentifierToSubscriptionRequest) Send(ctx context.Context) (*AddSourceIdentifierToSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r AddSourceIdentifierToSubscriptionRequest) Send() (*AddSourceIdentifierTo
 //
 //    // Example sending a request using the AddSourceIdentifierToSubscriptionRequest method.
 //    req := client.AddSourceIdentifierToSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -148,7 +152,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -184,7 +188,8 @@ type ApplyPendingMaintenanceActionRequest struct {
 }
 
 // Send marshals and sends the ApplyPendingMaintenanceAction API request.
-func (r ApplyPendingMaintenanceActionRequest) Send() (*ApplyPendingMaintenanceActionOutput, error) {
+func (r ApplyPendingMaintenanceActionRequest) Send(ctx context.Context) (*ApplyPendingMaintenanceActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +206,7 @@ func (r ApplyPendingMaintenanceActionRequest) Send() (*ApplyPendingMaintenanceAc
 //
 //    // Example sending a request using the ApplyPendingMaintenanceActionRequest method.
 //    req := client.ApplyPendingMaintenanceActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -235,7 +240,8 @@ type AuthorizeDBSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeDBSecurityGroupIngress API request.
-func (r AuthorizeDBSecurityGroupIngressRequest) Send() (*AuthorizeDBSecurityGroupIngressOutput, error) {
+func (r AuthorizeDBSecurityGroupIngressRequest) Send(ctx context.Context) (*AuthorizeDBSecurityGroupIngressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -263,7 +269,7 @@ func (r AuthorizeDBSecurityGroupIngressRequest) Send() (*AuthorizeDBSecurityGrou
 //
 //    // Example sending a request using the AuthorizeDBSecurityGroupIngressRequest method.
 //    req := client.AuthorizeDBSecurityGroupIngressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -297,7 +303,8 @@ type BacktrackDBClusterRequest struct {
 }
 
 // Send marshals and sends the BacktrackDBCluster API request.
-func (r BacktrackDBClusterRequest) Send() (*BacktrackDBClusterOutput, error) {
+func (r BacktrackDBClusterRequest) Send(ctx context.Context) (*BacktrackDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -317,7 +324,7 @@ func (r BacktrackDBClusterRequest) Send() (*BacktrackDBClusterOutput, error) {
 //
 //    // Example sending a request using the BacktrackDBClusterRequest method.
 //    req := client.BacktrackDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -351,7 +358,8 @@ type CopyDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CopyDBClusterParameterGroup API request.
-func (r CopyDBClusterParameterGroupRequest) Send() (*CopyDBClusterParameterGroupOutput, error) {
+func (r CopyDBClusterParameterGroupRequest) Send(ctx context.Context) (*CopyDBClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -367,7 +375,7 @@ func (r CopyDBClusterParameterGroupRequest) Send() (*CopyDBClusterParameterGroup
 //
 //    // Example sending a request using the CopyDBClusterParameterGroupRequest method.
 //    req := client.CopyDBClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -401,7 +409,8 @@ type CopyDBClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the CopyDBClusterSnapshot API request.
-func (r CopyDBClusterSnapshotRequest) Send() (*CopyDBClusterSnapshotOutput, error) {
+func (r CopyDBClusterSnapshotRequest) Send(ctx context.Context) (*CopyDBClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -478,7 +487,7 @@ func (r CopyDBClusterSnapshotRequest) Send() (*CopyDBClusterSnapshotOutput, erro
 //
 //    // Example sending a request using the CopyDBClusterSnapshotRequest method.
 //    req := client.CopyDBClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -512,7 +521,8 @@ type CopyDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CopyDBParameterGroup API request.
-func (r CopyDBParameterGroupRequest) Send() (*CopyDBParameterGroupOutput, error) {
+func (r CopyDBParameterGroupRequest) Send(ctx context.Context) (*CopyDBParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -528,7 +538,7 @@ func (r CopyDBParameterGroupRequest) Send() (*CopyDBParameterGroupOutput, error)
 //
 //    // Example sending a request using the CopyDBParameterGroupRequest method.
 //    req := client.CopyDBParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -562,7 +572,8 @@ type CopyDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the CopyDBSnapshot API request.
-func (r CopyDBSnapshotRequest) Send() (*CopyDBSnapshotOutput, error) {
+func (r CopyDBSnapshotRequest) Send(ctx context.Context) (*CopyDBSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -586,7 +597,7 @@ func (r CopyDBSnapshotRequest) Send() (*CopyDBSnapshotOutput, error) {
 //
 //    // Example sending a request using the CopyDBSnapshotRequest method.
 //    req := client.CopyDBSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -620,7 +631,8 @@ type CopyOptionGroupRequest struct {
 }
 
 // Send marshals and sends the CopyOptionGroup API request.
-func (r CopyOptionGroupRequest) Send() (*CopyOptionGroupOutput, error) {
+func (r CopyOptionGroupRequest) Send(ctx context.Context) (*CopyOptionGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -636,7 +648,7 @@ func (r CopyOptionGroupRequest) Send() (*CopyOptionGroupOutput, error) {
 //
 //    // Example sending a request using the CopyOptionGroupRequest method.
 //    req := client.CopyOptionGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -670,7 +682,8 @@ type CreateDBClusterRequest struct {
 }
 
 // Send marshals and sends the CreateDBCluster API request.
-func (r CreateDBClusterRequest) Send() (*CreateDBClusterOutput, error) {
+func (r CreateDBClusterRequest) Send(ctx context.Context) (*CreateDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -694,7 +707,7 @@ func (r CreateDBClusterRequest) Send() (*CreateDBClusterOutput, error) {
 //
 //    // Example sending a request using the CreateDBClusterRequest method.
 //    req := client.CreateDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -728,7 +741,8 @@ type CreateDBClusterEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateDBClusterEndpoint API request.
-func (r CreateDBClusterEndpointRequest) Send() (*ModifyDBClusterEndpointOutput, error) {
+func (r CreateDBClusterEndpointRequest) Send(ctx context.Context) (*ModifyDBClusterEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -745,7 +759,7 @@ func (r CreateDBClusterEndpointRequest) Send() (*ModifyDBClusterEndpointOutput, 
 //
 //    // Example sending a request using the CreateDBClusterEndpointRequest method.
 //    req := client.CreateDBClusterEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -779,7 +793,8 @@ type CreateDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBClusterParameterGroup API request.
-func (r CreateDBClusterParameterGroupRequest) Send() (*CreateDBClusterParameterGroupOutput, error) {
+func (r CreateDBClusterParameterGroupRequest) Send(ctx context.Context) (*CreateDBClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -822,7 +837,7 @@ func (r CreateDBClusterParameterGroupRequest) Send() (*CreateDBClusterParameterG
 //
 //    // Example sending a request using the CreateDBClusterParameterGroupRequest method.
 //    req := client.CreateDBClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -856,7 +871,8 @@ type CreateDBClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateDBClusterSnapshot API request.
-func (r CreateDBClusterSnapshotRequest) Send() (*CreateDBClusterSnapshotOutput, error) {
+func (r CreateDBClusterSnapshotRequest) Send(ctx context.Context) (*CreateDBClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -874,7 +890,7 @@ func (r CreateDBClusterSnapshotRequest) Send() (*CreateDBClusterSnapshotOutput, 
 //
 //    // Example sending a request using the CreateDBClusterSnapshotRequest method.
 //    req := client.CreateDBClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -908,7 +924,8 @@ type CreateDBInstanceRequest struct {
 }
 
 // Send marshals and sends the CreateDBInstance API request.
-func (r CreateDBInstanceRequest) Send() (*CreateDBInstanceOutput, error) {
+func (r CreateDBInstanceRequest) Send(ctx context.Context) (*CreateDBInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -924,7 +941,7 @@ func (r CreateDBInstanceRequest) Send() (*CreateDBInstanceOutput, error) {
 //
 //    // Example sending a request using the CreateDBInstanceRequest method.
 //    req := client.CreateDBInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -958,7 +975,8 @@ type CreateDBInstanceReadReplicaRequest struct {
 }
 
 // Send marshals and sends the CreateDBInstanceReadReplica API request.
-func (r CreateDBInstanceReadReplicaRequest) Send() (*CreateDBInstanceReadReplicaOutput, error) {
+func (r CreateDBInstanceReadReplicaRequest) Send(ctx context.Context) (*CreateDBInstanceReadReplicaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -987,7 +1005,7 @@ func (r CreateDBInstanceReadReplicaRequest) Send() (*CreateDBInstanceReadReplica
 //
 //    // Example sending a request using the CreateDBInstanceReadReplicaRequest method.
 //    req := client.CreateDBInstanceReadReplicaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1021,7 +1039,8 @@ type CreateDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBParameterGroup API request.
-func (r CreateDBParameterGroupRequest) Send() (*CreateDBParameterGroupOutput, error) {
+func (r CreateDBParameterGroupRequest) Send(ctx context.Context) (*CreateDBParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1057,7 +1076,7 @@ func (r CreateDBParameterGroupRequest) Send() (*CreateDBParameterGroupOutput, er
 //
 //    // Example sending a request using the CreateDBParameterGroupRequest method.
 //    req := client.CreateDBParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1091,7 +1110,8 @@ type CreateDBSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBSecurityGroup API request.
-func (r CreateDBSecurityGroupRequest) Send() (*CreateDBSecurityGroupOutput, error) {
+func (r CreateDBSecurityGroupRequest) Send(ctx context.Context) (*CreateDBSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1111,7 +1131,7 @@ func (r CreateDBSecurityGroupRequest) Send() (*CreateDBSecurityGroupOutput, erro
 //
 //    // Example sending a request using the CreateDBSecurityGroupRequest method.
 //    req := client.CreateDBSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1145,7 +1165,8 @@ type CreateDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateDBSnapshot API request.
-func (r CreateDBSnapshotRequest) Send() (*CreateDBSnapshotOutput, error) {
+func (r CreateDBSnapshotRequest) Send(ctx context.Context) (*CreateDBSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,7 +1182,7 @@ func (r CreateDBSnapshotRequest) Send() (*CreateDBSnapshotOutput, error) {
 //
 //    // Example sending a request using the CreateDBSnapshotRequest method.
 //    req := client.CreateDBSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1195,7 +1216,8 @@ type CreateDBSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBSubnetGroup API request.
-func (r CreateDBSubnetGroupRequest) Send() (*CreateDBSubnetGroupOutput, error) {
+func (r CreateDBSubnetGroupRequest) Send(ctx context.Context) (*CreateDBSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,7 +1234,7 @@ func (r CreateDBSubnetGroupRequest) Send() (*CreateDBSubnetGroupOutput, error) {
 //
 //    // Example sending a request using the CreateDBSubnetGroupRequest method.
 //    req := client.CreateDBSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1246,7 +1268,8 @@ type CreateEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
-func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+func (r CreateEventSubscriptionRequest) Send(ctx context.Context) (*CreateEventSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1279,7 +1302,7 @@ func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, 
 //
 //    // Example sending a request using the CreateEventSubscriptionRequest method.
 //    req := client.CreateEventSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1313,7 +1336,8 @@ type CreateGlobalClusterRequest struct {
 }
 
 // Send marshals and sends the CreateGlobalCluster API request.
-func (r CreateGlobalClusterRequest) Send() (*CreateGlobalClusterOutput, error) {
+func (r CreateGlobalClusterRequest) Send(ctx context.Context) (*CreateGlobalClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1337,7 +1361,7 @@ func (r CreateGlobalClusterRequest) Send() (*CreateGlobalClusterOutput, error) {
 //
 //    // Example sending a request using the CreateGlobalClusterRequest method.
 //    req := client.CreateGlobalClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1371,7 +1395,8 @@ type CreateOptionGroupRequest struct {
 }
 
 // Send marshals and sends the CreateOptionGroup API request.
-func (r CreateOptionGroupRequest) Send() (*CreateOptionGroupOutput, error) {
+func (r CreateOptionGroupRequest) Send(ctx context.Context) (*CreateOptionGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1387,7 +1412,7 @@ func (r CreateOptionGroupRequest) Send() (*CreateOptionGroupOutput, error) {
 //
 //    // Example sending a request using the CreateOptionGroupRequest method.
 //    req := client.CreateOptionGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1421,7 +1446,8 @@ type DeleteDBClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteDBCluster API request.
-func (r DeleteDBClusterRequest) Send() (*DeleteDBClusterOutput, error) {
+func (r DeleteDBClusterRequest) Send(ctx context.Context) (*DeleteDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1442,7 +1468,7 @@ func (r DeleteDBClusterRequest) Send() (*DeleteDBClusterOutput, error) {
 //
 //    // Example sending a request using the DeleteDBClusterRequest method.
 //    req := client.DeleteDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1476,7 +1502,8 @@ type DeleteDBClusterEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteDBClusterEndpoint API request.
-func (r DeleteDBClusterEndpointRequest) Send() (*ModifyDBClusterEndpointOutput, error) {
+func (r DeleteDBClusterEndpointRequest) Send(ctx context.Context) (*ModifyDBClusterEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1492,7 +1519,7 @@ func (r DeleteDBClusterEndpointRequest) Send() (*ModifyDBClusterEndpointOutput, 
 //
 //    // Example sending a request using the DeleteDBClusterEndpointRequest method.
 //    req := client.DeleteDBClusterEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1526,7 +1553,8 @@ type DeleteDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBClusterParameterGroup API request.
-func (r DeleteDBClusterParameterGroupRequest) Send() (*DeleteDBClusterParameterGroupOutput, error) {
+func (r DeleteDBClusterParameterGroupRequest) Send(ctx context.Context) (*DeleteDBClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1546,7 +1574,7 @@ func (r DeleteDBClusterParameterGroupRequest) Send() (*DeleteDBClusterParameterG
 //
 //    // Example sending a request using the DeleteDBClusterParameterGroupRequest method.
 //    req := client.DeleteDBClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1582,7 +1610,8 @@ type DeleteDBClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteDBClusterSnapshot API request.
-func (r DeleteDBClusterSnapshotRequest) Send() (*DeleteDBClusterSnapshotOutput, error) {
+func (r DeleteDBClusterSnapshotRequest) Send(ctx context.Context) (*DeleteDBClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1604,7 +1633,7 @@ func (r DeleteDBClusterSnapshotRequest) Send() (*DeleteDBClusterSnapshotOutput, 
 //
 //    // Example sending a request using the DeleteDBClusterSnapshotRequest method.
 //    req := client.DeleteDBClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1638,7 +1667,8 @@ type DeleteDBInstanceRequest struct {
 }
 
 // Send marshals and sends the DeleteDBInstance API request.
-func (r DeleteDBInstanceRequest) Send() (*DeleteDBInstanceOutput, error) {
+func (r DeleteDBInstanceRequest) Send(ctx context.Context) (*DeleteDBInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1678,7 +1708,7 @@ func (r DeleteDBInstanceRequest) Send() (*DeleteDBInstanceOutput, error) {
 //
 //    // Example sending a request using the DeleteDBInstanceRequest method.
 //    req := client.DeleteDBInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1712,7 +1742,8 @@ type DeleteDBInstanceAutomatedBackupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBInstanceAutomatedBackup API request.
-func (r DeleteDBInstanceAutomatedBackupRequest) Send() (*DeleteDBInstanceAutomatedBackupOutput, error) {
+func (r DeleteDBInstanceAutomatedBackupRequest) Send(ctx context.Context) (*DeleteDBInstanceAutomatedBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1729,7 +1760,7 @@ func (r DeleteDBInstanceAutomatedBackupRequest) Send() (*DeleteDBInstanceAutomat
 //
 //    // Example sending a request using the DeleteDBInstanceAutomatedBackupRequest method.
 //    req := client.DeleteDBInstanceAutomatedBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1763,7 +1794,8 @@ type DeleteDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBParameterGroup API request.
-func (r DeleteDBParameterGroupRequest) Send() (*DeleteDBParameterGroupOutput, error) {
+func (r DeleteDBParameterGroupRequest) Send(ctx context.Context) (*DeleteDBParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1780,7 +1812,7 @@ func (r DeleteDBParameterGroupRequest) Send() (*DeleteDBParameterGroupOutput, er
 //
 //    // Example sending a request using the DeleteDBParameterGroupRequest method.
 //    req := client.DeleteDBParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1816,7 +1848,8 @@ type DeleteDBSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBSecurityGroup API request.
-func (r DeleteDBSecurityGroupRequest) Send() (*DeleteDBSecurityGroupOutput, error) {
+func (r DeleteDBSecurityGroupRequest) Send(ctx context.Context) (*DeleteDBSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1834,7 +1867,7 @@ func (r DeleteDBSecurityGroupRequest) Send() (*DeleteDBSecurityGroupOutput, erro
 //
 //    // Example sending a request using the DeleteDBSecurityGroupRequest method.
 //    req := client.DeleteDBSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1870,7 +1903,8 @@ type DeleteDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteDBSnapshot API request.
-func (r DeleteDBSnapshotRequest) Send() (*DeleteDBSnapshotOutput, error) {
+func (r DeleteDBSnapshotRequest) Send(ctx context.Context) (*DeleteDBSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1889,7 +1923,7 @@ func (r DeleteDBSnapshotRequest) Send() (*DeleteDBSnapshotOutput, error) {
 //
 //    // Example sending a request using the DeleteDBSnapshotRequest method.
 //    req := client.DeleteDBSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1923,7 +1957,8 @@ type DeleteDBSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBSubnetGroup API request.
-func (r DeleteDBSubnetGroupRequest) Send() (*DeleteDBSubnetGroupOutput, error) {
+func (r DeleteDBSubnetGroupRequest) Send(ctx context.Context) (*DeleteDBSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1941,7 +1976,7 @@ func (r DeleteDBSubnetGroupRequest) Send() (*DeleteDBSubnetGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteDBSubnetGroupRequest method.
 //    req := client.DeleteDBSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1977,7 +2012,8 @@ type DeleteEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
-func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+func (r DeleteEventSubscriptionRequest) Send(ctx context.Context) (*DeleteEventSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1993,7 +2029,7 @@ func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, 
 //
 //    // Example sending a request using the DeleteEventSubscriptionRequest method.
 //    req := client.DeleteEventSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2027,7 +2063,8 @@ type DeleteGlobalClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteGlobalCluster API request.
-func (r DeleteGlobalClusterRequest) Send() (*DeleteGlobalClusterOutput, error) {
+func (r DeleteGlobalClusterRequest) Send(ctx context.Context) (*DeleteGlobalClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2044,7 +2081,7 @@ func (r DeleteGlobalClusterRequest) Send() (*DeleteGlobalClusterOutput, error) {
 //
 //    // Example sending a request using the DeleteGlobalClusterRequest method.
 //    req := client.DeleteGlobalClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2078,7 +2115,8 @@ type DeleteOptionGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteOptionGroup API request.
-func (r DeleteOptionGroupRequest) Send() (*DeleteOptionGroupOutput, error) {
+func (r DeleteOptionGroupRequest) Send(ctx context.Context) (*DeleteOptionGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2094,7 +2132,7 @@ func (r DeleteOptionGroupRequest) Send() (*DeleteOptionGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteOptionGroupRequest method.
 //    req := client.DeleteOptionGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2130,7 +2168,8 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAccountAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2151,7 +2190,7 @@ func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutp
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
 //    req := client.DescribeAccountAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2185,7 +2224,8 @@ type DescribeCertificatesRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificates API request.
-func (r DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
+func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2201,7 +2241,7 @@ func (r DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error)
 //
 //    // Example sending a request using the DescribeCertificatesRequest method.
 //    req := client.DescribeCertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2235,7 +2275,8 @@ type DescribeDBClusterBacktracksRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterBacktracks API request.
-func (r DescribeDBClusterBacktracksRequest) Send() (*DescribeDBClusterBacktracksOutput, error) {
+func (r DescribeDBClusterBacktracksRequest) Send(ctx context.Context) (*DescribeDBClusterBacktracksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2254,7 +2295,7 @@ func (r DescribeDBClusterBacktracksRequest) Send() (*DescribeDBClusterBacktracks
 //
 //    // Example sending a request using the DescribeDBClusterBacktracksRequest method.
 //    req := client.DescribeDBClusterBacktracksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2288,7 +2329,8 @@ type DescribeDBClusterEndpointsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterEndpoints API request.
-func (r DescribeDBClusterEndpointsRequest) Send() (*DescribeDBClusterEndpointsOutput, error) {
+func (r DescribeDBClusterEndpointsRequest) Send(ctx context.Context) (*DescribeDBClusterEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2304,7 +2346,7 @@ func (r DescribeDBClusterEndpointsRequest) Send() (*DescribeDBClusterEndpointsOu
 //
 //    // Example sending a request using the DescribeDBClusterEndpointsRequest method.
 //    req := client.DescribeDBClusterEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2338,7 +2380,8 @@ type DescribeDBClusterParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterParameterGroups API request.
-func (r DescribeDBClusterParameterGroupsRequest) Send() (*DescribeDBClusterParameterGroupsOutput, error) {
+func (r DescribeDBClusterParameterGroupsRequest) Send(ctx context.Context) (*DescribeDBClusterParameterGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2359,7 +2402,7 @@ func (r DescribeDBClusterParameterGroupsRequest) Send() (*DescribeDBClusterParam
 //
 //    // Example sending a request using the DescribeDBClusterParameterGroupsRequest method.
 //    req := client.DescribeDBClusterParameterGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2393,7 +2436,8 @@ type DescribeDBClusterParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterParameters API request.
-func (r DescribeDBClusterParametersRequest) Send() (*DescribeDBClusterParametersOutput, error) {
+func (r DescribeDBClusterParametersRequest) Send(ctx context.Context) (*DescribeDBClusterParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2413,7 +2457,7 @@ func (r DescribeDBClusterParametersRequest) Send() (*DescribeDBClusterParameters
 //
 //    // Example sending a request using the DescribeDBClusterParametersRequest method.
 //    req := client.DescribeDBClusterParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2447,7 +2491,8 @@ type DescribeDBClusterSnapshotAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshotAttributes API request.
-func (r DescribeDBClusterSnapshotAttributesRequest) Send() (*DescribeDBClusterSnapshotAttributesOutput, error) {
+func (r DescribeDBClusterSnapshotAttributesRequest) Send(ctx context.Context) (*DescribeDBClusterSnapshotAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2474,7 +2519,7 @@ func (r DescribeDBClusterSnapshotAttributesRequest) Send() (*DescribeDBClusterSn
 //
 //    // Example sending a request using the DescribeDBClusterSnapshotAttributesRequest method.
 //    req := client.DescribeDBClusterSnapshotAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2508,7 +2553,8 @@ type DescribeDBClusterSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshots API request.
-func (r DescribeDBClusterSnapshotsRequest) Send() (*DescribeDBClusterSnapshotsOutput, error) {
+func (r DescribeDBClusterSnapshotsRequest) Send(ctx context.Context) (*DescribeDBClusterSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2528,7 +2574,7 @@ func (r DescribeDBClusterSnapshotsRequest) Send() (*DescribeDBClusterSnapshotsOu
 //
 //    // Example sending a request using the DescribeDBClusterSnapshotsRequest method.
 //    req := client.DescribeDBClusterSnapshotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2562,7 +2608,8 @@ type DescribeDBClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusters API request.
-func (r DescribeDBClustersRequest) Send() (*DescribeDBClustersOutput, error) {
+func (r DescribeDBClustersRequest) Send(ctx context.Context) (*DescribeDBClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2582,7 +2629,7 @@ func (r DescribeDBClustersRequest) Send() (*DescribeDBClustersOutput, error) {
 //
 //    // Example sending a request using the DescribeDBClustersRequest method.
 //    req := client.DescribeDBClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2632,7 +2679,7 @@ func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) Describe
 func (p *DescribeDBClustersRequest) Paginate(opts ...aws.Option) DescribeDBClustersPager {
 	return DescribeDBClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2641,6 +2688,7 @@ func (p *DescribeDBClustersRequest) Paginate(opts ...aws.Option) DescribeDBClust
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2668,7 +2716,8 @@ type DescribeDBEngineVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBEngineVersions API request.
-func (r DescribeDBEngineVersionsRequest) Send() (*DescribeDBEngineVersionsOutput, error) {
+func (r DescribeDBEngineVersionsRequest) Send(ctx context.Context) (*DescribeDBEngineVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2684,7 +2733,7 @@ func (r DescribeDBEngineVersionsRequest) Send() (*DescribeDBEngineVersionsOutput
 //
 //    // Example sending a request using the DescribeDBEngineVersionsRequest method.
 //    req := client.DescribeDBEngineVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2734,7 +2783,7 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 func (p *DescribeDBEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeDBEngineVersionsPager {
 	return DescribeDBEngineVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBEngineVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2743,6 +2792,7 @@ func (p *DescribeDBEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2770,7 +2820,8 @@ type DescribeDBInstanceAutomatedBackupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBInstanceAutomatedBackups API request.
-func (r DescribeDBInstanceAutomatedBackupsRequest) Send() (*DescribeDBInstanceAutomatedBackupsOutput, error) {
+func (r DescribeDBInstanceAutomatedBackupsRequest) Send(ctx context.Context) (*DescribeDBInstanceAutomatedBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2792,7 +2843,7 @@ func (r DescribeDBInstanceAutomatedBackupsRequest) Send() (*DescribeDBInstanceAu
 //
 //    // Example sending a request using the DescribeDBInstanceAutomatedBackupsRequest method.
 //    req := client.DescribeDBInstanceAutomatedBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2842,7 +2893,7 @@ func (c *RDS) DescribeDBInstanceAutomatedBackupsRequest(input *DescribeDBInstanc
 func (p *DescribeDBInstanceAutomatedBackupsRequest) Paginate(opts ...aws.Option) DescribeDBInstanceAutomatedBackupsPager {
 	return DescribeDBInstanceAutomatedBackupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBInstanceAutomatedBackupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2851,6 +2902,7 @@ func (p *DescribeDBInstanceAutomatedBackupsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2878,7 +2930,8 @@ type DescribeDBInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBInstances API request.
-func (r DescribeDBInstancesRequest) Send() (*DescribeDBInstancesOutput, error) {
+func (r DescribeDBInstancesRequest) Send(ctx context.Context) (*DescribeDBInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2894,7 +2947,7 @@ func (r DescribeDBInstancesRequest) Send() (*DescribeDBInstancesOutput, error) {
 //
 //    // Example sending a request using the DescribeDBInstancesRequest method.
 //    req := client.DescribeDBInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2944,7 +2997,7 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Descri
 func (p *DescribeDBInstancesRequest) Paginate(opts ...aws.Option) DescribeDBInstancesPager {
 	return DescribeDBInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2953,6 +3006,7 @@ func (p *DescribeDBInstancesRequest) Paginate(opts ...aws.Option) DescribeDBInst
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2980,7 +3034,8 @@ type DescribeDBLogFilesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBLogFiles API request.
-func (r DescribeDBLogFilesRequest) Send() (*DescribeDBLogFilesOutput, error) {
+func (r DescribeDBLogFilesRequest) Send(ctx context.Context) (*DescribeDBLogFilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2996,7 +3051,7 @@ func (r DescribeDBLogFilesRequest) Send() (*DescribeDBLogFilesOutput, error) {
 //
 //    // Example sending a request using the DescribeDBLogFilesRequest method.
 //    req := client.DescribeDBLogFilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3046,7 +3101,7 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) Describe
 func (p *DescribeDBLogFilesRequest) Paginate(opts ...aws.Option) DescribeDBLogFilesPager {
 	return DescribeDBLogFilesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBLogFilesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3055,6 +3110,7 @@ func (p *DescribeDBLogFilesRequest) Paginate(opts ...aws.Option) DescribeDBLogFi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3082,7 +3138,8 @@ type DescribeDBParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBParameterGroups API request.
-func (r DescribeDBParameterGroupsRequest) Send() (*DescribeDBParameterGroupsOutput, error) {
+func (r DescribeDBParameterGroupsRequest) Send(ctx context.Context) (*DescribeDBParameterGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3100,7 +3157,7 @@ func (r DescribeDBParameterGroupsRequest) Send() (*DescribeDBParameterGroupsOutp
 //
 //    // Example sending a request using the DescribeDBParameterGroupsRequest method.
 //    req := client.DescribeDBParameterGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3150,7 +3207,7 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 func (p *DescribeDBParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeDBParameterGroupsPager {
 	return DescribeDBParameterGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBParameterGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3159,6 +3216,7 @@ func (p *DescribeDBParameterGroupsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3186,7 +3244,8 @@ type DescribeDBParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeDBParameters API request.
-func (r DescribeDBParametersRequest) Send() (*DescribeDBParametersOutput, error) {
+func (r DescribeDBParametersRequest) Send(ctx context.Context) (*DescribeDBParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3202,7 +3261,7 @@ func (r DescribeDBParametersRequest) Send() (*DescribeDBParametersOutput, error)
 //
 //    // Example sending a request using the DescribeDBParametersRequest method.
 //    req := client.DescribeDBParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3252,7 +3311,7 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) Desc
 func (p *DescribeDBParametersRequest) Paginate(opts ...aws.Option) DescribeDBParametersPager {
 	return DescribeDBParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3261,6 +3320,7 @@ func (p *DescribeDBParametersRequest) Paginate(opts ...aws.Option) DescribeDBPar
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3288,7 +3348,8 @@ type DescribeDBSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSecurityGroups API request.
-func (r DescribeDBSecurityGroupsRequest) Send() (*DescribeDBSecurityGroupsOutput, error) {
+func (r DescribeDBSecurityGroupsRequest) Send(ctx context.Context) (*DescribeDBSecurityGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3306,7 +3367,7 @@ func (r DescribeDBSecurityGroupsRequest) Send() (*DescribeDBSecurityGroupsOutput
 //
 //    // Example sending a request using the DescribeDBSecurityGroupsRequest method.
 //    req := client.DescribeDBSecurityGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3356,7 +3417,7 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 func (p *DescribeDBSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSecurityGroupsPager {
 	return DescribeDBSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3365,6 +3426,7 @@ func (p *DescribeDBSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3392,7 +3454,8 @@ type DescribeDBSnapshotAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSnapshotAttributes API request.
-func (r DescribeDBSnapshotAttributesRequest) Send() (*DescribeDBSnapshotAttributesOutput, error) {
+func (r DescribeDBSnapshotAttributesRequest) Send(ctx context.Context) (*DescribeDBSnapshotAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3419,7 +3482,7 @@ func (r DescribeDBSnapshotAttributesRequest) Send() (*DescribeDBSnapshotAttribut
 //
 //    // Example sending a request using the DescribeDBSnapshotAttributesRequest method.
 //    req := client.DescribeDBSnapshotAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3453,7 +3516,8 @@ type DescribeDBSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSnapshots API request.
-func (r DescribeDBSnapshotsRequest) Send() (*DescribeDBSnapshotsOutput, error) {
+func (r DescribeDBSnapshotsRequest) Send(ctx context.Context) (*DescribeDBSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3469,7 +3533,7 @@ func (r DescribeDBSnapshotsRequest) Send() (*DescribeDBSnapshotsOutput, error) {
 //
 //    // Example sending a request using the DescribeDBSnapshotsRequest method.
 //    req := client.DescribeDBSnapshotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3519,7 +3583,7 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) Descri
 func (p *DescribeDBSnapshotsRequest) Paginate(opts ...aws.Option) DescribeDBSnapshotsPager {
 	return DescribeDBSnapshotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBSnapshotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3528,6 +3592,7 @@ func (p *DescribeDBSnapshotsRequest) Paginate(opts ...aws.Option) DescribeDBSnap
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3555,7 +3620,8 @@ type DescribeDBSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSubnetGroups API request.
-func (r DescribeDBSubnetGroupsRequest) Send() (*DescribeDBSubnetGroupsOutput, error) {
+func (r DescribeDBSubnetGroupsRequest) Send(ctx context.Context) (*DescribeDBSubnetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3574,7 +3640,7 @@ func (r DescribeDBSubnetGroupsRequest) Send() (*DescribeDBSubnetGroupsOutput, er
 //
 //    // Example sending a request using the DescribeDBSubnetGroupsRequest method.
 //    req := client.DescribeDBSubnetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3624,7 +3690,7 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 func (p *DescribeDBSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSubnetGroupsPager {
 	return DescribeDBSubnetGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDBSubnetGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3633,6 +3699,7 @@ func (p *DescribeDBSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeDBS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3660,7 +3727,8 @@ type DescribeEngineDefaultClusterParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeEngineDefaultClusterParameters API request.
-func (r DescribeEngineDefaultClusterParametersRequest) Send() (*DescribeEngineDefaultClusterParametersOutput, error) {
+func (r DescribeEngineDefaultClusterParametersRequest) Send(ctx context.Context) (*DescribeEngineDefaultClusterParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3680,7 +3748,7 @@ func (r DescribeEngineDefaultClusterParametersRequest) Send() (*DescribeEngineDe
 //
 //    // Example sending a request using the DescribeEngineDefaultClusterParametersRequest method.
 //    req := client.DescribeEngineDefaultClusterParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3714,7 +3782,8 @@ type DescribeEngineDefaultParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
-func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+func (r DescribeEngineDefaultParametersRequest) Send(ctx context.Context) (*DescribeEngineDefaultParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3731,7 +3800,7 @@ func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultPa
 //
 //    // Example sending a request using the DescribeEngineDefaultParametersRequest method.
 //    req := client.DescribeEngineDefaultParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3781,7 +3850,7 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) DescribeEngineDefaultParametersPager {
 	return DescribeEngineDefaultParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEngineDefaultParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3790,6 +3859,7 @@ func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) De
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3817,7 +3887,8 @@ type DescribeEventCategoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
-func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEventCategoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3836,7 +3907,7 @@ func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, 
 //
 //    // Example sending a request using the DescribeEventCategoriesRequest method.
 //    req := client.DescribeEventCategoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3870,7 +3941,8 @@ type DescribeEventSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
-func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+func (r DescribeEventSubscriptionsRequest) Send(ctx context.Context) (*DescribeEventSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3890,7 +3962,7 @@ func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOu
 //
 //    // Example sending a request using the DescribeEventSubscriptionsRequest method.
 //    req := client.DescribeEventSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3940,7 +4012,7 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
 	return DescribeEventSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3949,6 +4021,7 @@ func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3976,7 +4049,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3996,7 +4070,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4046,7 +4120,7 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4055,6 +4129,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4082,7 +4157,8 @@ type DescribeGlobalClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeGlobalClusters API request.
-func (r DescribeGlobalClustersRequest) Send() (*DescribeGlobalClustersOutput, error) {
+func (r DescribeGlobalClustersRequest) Send(ctx context.Context) (*DescribeGlobalClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4102,7 +4178,7 @@ func (r DescribeGlobalClustersRequest) Send() (*DescribeGlobalClustersOutput, er
 //
 //    // Example sending a request using the DescribeGlobalClustersRequest method.
 //    req := client.DescribeGlobalClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4152,7 +4228,7 @@ func (c *RDS) DescribeGlobalClustersRequest(input *DescribeGlobalClustersInput) 
 func (p *DescribeGlobalClustersRequest) Paginate(opts ...aws.Option) DescribeGlobalClustersPager {
 	return DescribeGlobalClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeGlobalClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4161,6 +4237,7 @@ func (p *DescribeGlobalClustersRequest) Paginate(opts ...aws.Option) DescribeGlo
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4188,7 +4265,8 @@ type DescribeOptionGroupOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeOptionGroupOptions API request.
-func (r DescribeOptionGroupOptionsRequest) Send() (*DescribeOptionGroupOptionsOutput, error) {
+func (r DescribeOptionGroupOptionsRequest) Send(ctx context.Context) (*DescribeOptionGroupOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4204,7 +4282,7 @@ func (r DescribeOptionGroupOptionsRequest) Send() (*DescribeOptionGroupOptionsOu
 //
 //    // Example sending a request using the DescribeOptionGroupOptionsRequest method.
 //    req := client.DescribeOptionGroupOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4254,7 +4332,7 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 func (p *DescribeOptionGroupOptionsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupOptionsPager {
 	return DescribeOptionGroupOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOptionGroupOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4263,6 +4341,7 @@ func (p *DescribeOptionGroupOptionsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4290,7 +4369,8 @@ type DescribeOptionGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeOptionGroups API request.
-func (r DescribeOptionGroupsRequest) Send() (*DescribeOptionGroupsOutput, error) {
+func (r DescribeOptionGroupsRequest) Send(ctx context.Context) (*DescribeOptionGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4306,7 +4386,7 @@ func (r DescribeOptionGroupsRequest) Send() (*DescribeOptionGroupsOutput, error)
 //
 //    // Example sending a request using the DescribeOptionGroupsRequest method.
 //    req := client.DescribeOptionGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4356,7 +4436,7 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) Desc
 func (p *DescribeOptionGroupsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupsPager {
 	return DescribeOptionGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOptionGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4365,6 +4445,7 @@ func (p *DescribeOptionGroupsRequest) Paginate(opts ...aws.Option) DescribeOptio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4392,7 +4473,8 @@ type DescribeOrderableDBInstanceOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeOrderableDBInstanceOptions API request.
-func (r DescribeOrderableDBInstanceOptionsRequest) Send() (*DescribeOrderableDBInstanceOptionsOutput, error) {
+func (r DescribeOrderableDBInstanceOptionsRequest) Send(ctx context.Context) (*DescribeOrderableDBInstanceOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4408,7 +4490,7 @@ func (r DescribeOrderableDBInstanceOptionsRequest) Send() (*DescribeOrderableDBI
 //
 //    // Example sending a request using the DescribeOrderableDBInstanceOptionsRequest method.
 //    req := client.DescribeOrderableDBInstanceOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4458,7 +4540,7 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 func (p *DescribeOrderableDBInstanceOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableDBInstanceOptionsPager {
 	return DescribeOrderableDBInstanceOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOrderableDBInstanceOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4467,6 +4549,7 @@ func (p *DescribeOrderableDBInstanceOptionsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4494,7 +4577,8 @@ type DescribePendingMaintenanceActionsRequest struct {
 }
 
 // Send marshals and sends the DescribePendingMaintenanceActions API request.
-func (r DescribePendingMaintenanceActionsRequest) Send() (*DescribePendingMaintenanceActionsOutput, error) {
+func (r DescribePendingMaintenanceActionsRequest) Send(ctx context.Context) (*DescribePendingMaintenanceActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4511,7 +4595,7 @@ func (r DescribePendingMaintenanceActionsRequest) Send() (*DescribePendingMainte
 //
 //    // Example sending a request using the DescribePendingMaintenanceActionsRequest method.
 //    req := client.DescribePendingMaintenanceActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4545,7 +4629,8 @@ type DescribeReservedDBInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedDBInstances API request.
-func (r DescribeReservedDBInstancesRequest) Send() (*DescribeReservedDBInstancesOutput, error) {
+func (r DescribeReservedDBInstancesRequest) Send(ctx context.Context) (*DescribeReservedDBInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4562,7 +4647,7 @@ func (r DescribeReservedDBInstancesRequest) Send() (*DescribeReservedDBInstances
 //
 //    // Example sending a request using the DescribeReservedDBInstancesRequest method.
 //    req := client.DescribeReservedDBInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4612,7 +4697,7 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 func (p *DescribeReservedDBInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesPager {
 	return DescribeReservedDBInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedDBInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4621,6 +4706,7 @@ func (p *DescribeReservedDBInstancesRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4648,7 +4734,8 @@ type DescribeReservedDBInstancesOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedDBInstancesOfferings API request.
-func (r DescribeReservedDBInstancesOfferingsRequest) Send() (*DescribeReservedDBInstancesOfferingsOutput, error) {
+func (r DescribeReservedDBInstancesOfferingsRequest) Send(ctx context.Context) (*DescribeReservedDBInstancesOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4664,7 +4751,7 @@ func (r DescribeReservedDBInstancesOfferingsRequest) Send() (*DescribeReservedDB
 //
 //    // Example sending a request using the DescribeReservedDBInstancesOfferingsRequest method.
 //    req := client.DescribeReservedDBInstancesOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4714,7 +4801,7 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 func (p *DescribeReservedDBInstancesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesOfferingsPager {
 	return DescribeReservedDBInstancesOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedDBInstancesOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4723,6 +4810,7 @@ func (p *DescribeReservedDBInstancesOfferingsRequest) Paginate(opts ...aws.Optio
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4750,7 +4838,8 @@ type DescribeSourceRegionsRequest struct {
 }
 
 // Send marshals and sends the DescribeSourceRegions API request.
-func (r DescribeSourceRegionsRequest) Send() (*DescribeSourceRegionsOutput, error) {
+func (r DescribeSourceRegionsRequest) Send(ctx context.Context) (*DescribeSourceRegionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4768,7 +4857,7 @@ func (r DescribeSourceRegionsRequest) Send() (*DescribeSourceRegionsOutput, erro
 //
 //    // Example sending a request using the DescribeSourceRegionsRequest method.
 //    req := client.DescribeSourceRegionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4802,7 +4891,8 @@ type DescribeValidDBInstanceModificationsRequest struct {
 }
 
 // Send marshals and sends the DescribeValidDBInstanceModifications API request.
-func (r DescribeValidDBInstanceModificationsRequest) Send() (*DescribeValidDBInstanceModificationsOutput, error) {
+func (r DescribeValidDBInstanceModificationsRequest) Send(ctx context.Context) (*DescribeValidDBInstanceModificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4820,7 +4910,7 @@ func (r DescribeValidDBInstanceModificationsRequest) Send() (*DescribeValidDBIns
 //
 //    // Example sending a request using the DescribeValidDBInstanceModificationsRequest method.
 //    req := client.DescribeValidDBInstanceModificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4854,7 +4944,8 @@ type DownloadDBLogFilePortionRequest struct {
 }
 
 // Send marshals and sends the DownloadDBLogFilePortion API request.
-func (r DownloadDBLogFilePortionRequest) Send() (*DownloadDBLogFilePortionOutput, error) {
+func (r DownloadDBLogFilePortionRequest) Send(ctx context.Context) (*DownloadDBLogFilePortionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4870,7 +4961,7 @@ func (r DownloadDBLogFilePortionRequest) Send() (*DownloadDBLogFilePortionOutput
 //
 //    // Example sending a request using the DownloadDBLogFilePortionRequest method.
 //    req := client.DownloadDBLogFilePortionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4920,7 +5011,7 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 func (p *DownloadDBLogFilePortionRequest) Paginate(opts ...aws.Option) DownloadDBLogFilePortionPager {
 	return DownloadDBLogFilePortionPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DownloadDBLogFilePortionInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4929,6 +5020,7 @@ func (p *DownloadDBLogFilePortionRequest) Paginate(opts ...aws.Option) DownloadD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4956,7 +5048,8 @@ type FailoverDBClusterRequest struct {
 }
 
 // Send marshals and sends the FailoverDBCluster API request.
-func (r FailoverDBClusterRequest) Send() (*FailoverDBClusterOutput, error) {
+func (r FailoverDBClusterRequest) Send(ctx context.Context) (*FailoverDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4985,7 +5078,7 @@ func (r FailoverDBClusterRequest) Send() (*FailoverDBClusterOutput, error) {
 //
 //    // Example sending a request using the FailoverDBClusterRequest method.
 //    req := client.FailoverDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5019,7 +5112,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5039,7 +5133,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5073,7 +5167,8 @@ type ModifyCurrentDBClusterCapacityRequest struct {
 }
 
 // Send marshals and sends the ModifyCurrentDBClusterCapacity API request.
-func (r ModifyCurrentDBClusterCapacityRequest) Send() (*ModifyCurrentDBClusterCapacityOutput, error) {
+func (r ModifyCurrentDBClusterCapacityRequest) Send(ctx context.Context) (*ModifyCurrentDBClusterCapacityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5108,7 +5203,7 @@ func (r ModifyCurrentDBClusterCapacityRequest) Send() (*ModifyCurrentDBClusterCa
 //
 //    // Example sending a request using the ModifyCurrentDBClusterCapacityRequest method.
 //    req := client.ModifyCurrentDBClusterCapacityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5142,7 +5237,8 @@ type ModifyDBClusterRequest struct {
 }
 
 // Send marshals and sends the ModifyDBCluster API request.
-func (r ModifyDBClusterRequest) Send() (*ModifyDBClusterOutput, error) {
+func (r ModifyDBClusterRequest) Send(ctx context.Context) (*ModifyDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5162,7 +5258,7 @@ func (r ModifyDBClusterRequest) Send() (*ModifyDBClusterOutput, error) {
 //
 //    // Example sending a request using the ModifyDBClusterRequest method.
 //    req := client.ModifyDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5196,7 +5292,8 @@ type ModifyDBClusterEndpointRequest struct {
 }
 
 // Send marshals and sends the ModifyDBClusterEndpoint API request.
-func (r ModifyDBClusterEndpointRequest) Send() (*ModifyDBClusterEndpointOutput, error) {
+func (r ModifyDBClusterEndpointRequest) Send(ctx context.Context) (*ModifyDBClusterEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5212,7 +5309,7 @@ func (r ModifyDBClusterEndpointRequest) Send() (*ModifyDBClusterEndpointOutput, 
 //
 //    // Example sending a request using the ModifyDBClusterEndpointRequest method.
 //    req := client.ModifyDBClusterEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5246,7 +5343,8 @@ type ModifyDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyDBClusterParameterGroup API request.
-func (r ModifyDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
+func (r ModifyDBClusterParameterGroupRequest) Send(ctx context.Context) (*ResetDBClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5282,7 +5380,7 @@ func (r ModifyDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGr
 //
 //    // Example sending a request using the ModifyDBClusterParameterGroupRequest method.
 //    req := client.ModifyDBClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5316,7 +5414,8 @@ type ModifyDBClusterSnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyDBClusterSnapshotAttribute API request.
-func (r ModifyDBClusterSnapshotAttributeRequest) Send() (*ModifyDBClusterSnapshotAttributeOutput, error) {
+func (r ModifyDBClusterSnapshotAttributeRequest) Send(ctx context.Context) (*ModifyDBClusterSnapshotAttributeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5348,7 +5447,7 @@ func (r ModifyDBClusterSnapshotAttributeRequest) Send() (*ModifyDBClusterSnapsho
 //
 //    // Example sending a request using the ModifyDBClusterSnapshotAttributeRequest method.
 //    req := client.ModifyDBClusterSnapshotAttributeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5382,7 +5481,8 @@ type ModifyDBInstanceRequest struct {
 }
 
 // Send marshals and sends the ModifyDBInstance API request.
-func (r ModifyDBInstanceRequest) Send() (*ModifyDBInstanceOutput, error) {
+func (r ModifyDBInstanceRequest) Send(ctx context.Context) (*ModifyDBInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5401,7 +5501,7 @@ func (r ModifyDBInstanceRequest) Send() (*ModifyDBInstanceOutput, error) {
 //
 //    // Example sending a request using the ModifyDBInstanceRequest method.
 //    req := client.ModifyDBInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5435,7 +5535,8 @@ type ModifyDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyDBParameterGroup API request.
-func (r ModifyDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
+func (r ModifyDBParameterGroupRequest) Send(ctx context.Context) (*ResetDBParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5468,7 +5569,7 @@ func (r ModifyDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, err
 //
 //    // Example sending a request using the ModifyDBParameterGroupRequest method.
 //    req := client.ModifyDBParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5502,7 +5603,8 @@ type ModifyDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the ModifyDBSnapshot API request.
-func (r ModifyDBSnapshotRequest) Send() (*ModifyDBSnapshotOutput, error) {
+func (r ModifyDBSnapshotRequest) Send(ctx context.Context) (*ModifyDBSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5521,7 +5623,7 @@ func (r ModifyDBSnapshotRequest) Send() (*ModifyDBSnapshotOutput, error) {
 //
 //    // Example sending a request using the ModifyDBSnapshotRequest method.
 //    req := client.ModifyDBSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5555,7 +5657,8 @@ type ModifyDBSnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyDBSnapshotAttribute API request.
-func (r ModifyDBSnapshotAttributeRequest) Send() (*ModifyDBSnapshotAttributeOutput, error) {
+func (r ModifyDBSnapshotAttributeRequest) Send(ctx context.Context) (*ModifyDBSnapshotAttributeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5587,7 +5690,7 @@ func (r ModifyDBSnapshotAttributeRequest) Send() (*ModifyDBSnapshotAttributeOutp
 //
 //    // Example sending a request using the ModifyDBSnapshotAttributeRequest method.
 //    req := client.ModifyDBSnapshotAttributeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5621,7 +5724,8 @@ type ModifyDBSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyDBSubnetGroup API request.
-func (r ModifyDBSubnetGroupRequest) Send() (*ModifyDBSubnetGroupOutput, error) {
+func (r ModifyDBSubnetGroupRequest) Send(ctx context.Context) (*ModifyDBSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5638,7 +5742,7 @@ func (r ModifyDBSubnetGroupRequest) Send() (*ModifyDBSubnetGroupOutput, error) {
 //
 //    // Example sending a request using the ModifyDBSubnetGroupRequest method.
 //    req := client.ModifyDBSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5672,7 +5776,8 @@ type ModifyEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
-func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+func (r ModifyEventSubscriptionRequest) Send(ctx context.Context) (*ModifyEventSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5696,7 +5801,7 @@ func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, 
 //
 //    // Example sending a request using the ModifyEventSubscriptionRequest method.
 //    req := client.ModifyEventSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5730,7 +5835,8 @@ type ModifyGlobalClusterRequest struct {
 }
 
 // Send marshals and sends the ModifyGlobalCluster API request.
-func (r ModifyGlobalClusterRequest) Send() (*ModifyGlobalClusterOutput, error) {
+func (r ModifyGlobalClusterRequest) Send(ctx context.Context) (*ModifyGlobalClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5750,7 +5856,7 @@ func (r ModifyGlobalClusterRequest) Send() (*ModifyGlobalClusterOutput, error) {
 //
 //    // Example sending a request using the ModifyGlobalClusterRequest method.
 //    req := client.ModifyGlobalClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5784,7 +5890,8 @@ type ModifyOptionGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyOptionGroup API request.
-func (r ModifyOptionGroupRequest) Send() (*ModifyOptionGroupOutput, error) {
+func (r ModifyOptionGroupRequest) Send(ctx context.Context) (*ModifyOptionGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5800,7 +5907,7 @@ func (r ModifyOptionGroupRequest) Send() (*ModifyOptionGroupOutput, error) {
 //
 //    // Example sending a request using the ModifyOptionGroupRequest method.
 //    req := client.ModifyOptionGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5834,7 +5941,8 @@ type PromoteReadReplicaRequest struct {
 }
 
 // Send marshals and sends the PromoteReadReplica API request.
-func (r PromoteReadReplicaRequest) Send() (*PromoteReadReplicaOutput, error) {
+func (r PromoteReadReplicaRequest) Send(ctx context.Context) (*PromoteReadReplicaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5860,7 +5968,7 @@ func (r PromoteReadReplicaRequest) Send() (*PromoteReadReplicaOutput, error) {
 //
 //    // Example sending a request using the PromoteReadReplicaRequest method.
 //    req := client.PromoteReadReplicaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5894,7 +6002,8 @@ type PromoteReadReplicaDBClusterRequest struct {
 }
 
 // Send marshals and sends the PromoteReadReplicaDBCluster API request.
-func (r PromoteReadReplicaDBClusterRequest) Send() (*PromoteReadReplicaDBClusterOutput, error) {
+func (r PromoteReadReplicaDBClusterRequest) Send(ctx context.Context) (*PromoteReadReplicaDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5910,7 +6019,7 @@ func (r PromoteReadReplicaDBClusterRequest) Send() (*PromoteReadReplicaDBCluster
 //
 //    // Example sending a request using the PromoteReadReplicaDBClusterRequest method.
 //    req := client.PromoteReadReplicaDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5944,7 +6053,8 @@ type PurchaseReservedDBInstancesOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedDBInstancesOffering API request.
-func (r PurchaseReservedDBInstancesOfferingRequest) Send() (*PurchaseReservedDBInstancesOfferingOutput, error) {
+func (r PurchaseReservedDBInstancesOfferingRequest) Send(ctx context.Context) (*PurchaseReservedDBInstancesOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5960,7 +6070,7 @@ func (r PurchaseReservedDBInstancesOfferingRequest) Send() (*PurchaseReservedDBI
 //
 //    // Example sending a request using the PurchaseReservedDBInstancesOfferingRequest method.
 //    req := client.PurchaseReservedDBInstancesOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5994,7 +6104,8 @@ type RebootDBInstanceRequest struct {
 }
 
 // Send marshals and sends the RebootDBInstance API request.
-func (r RebootDBInstanceRequest) Send() (*RebootDBInstanceOutput, error) {
+func (r RebootDBInstanceRequest) Send(ctx context.Context) (*RebootDBInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6020,7 +6131,7 @@ func (r RebootDBInstanceRequest) Send() (*RebootDBInstanceOutput, error) {
 //
 //    // Example sending a request using the RebootDBInstanceRequest method.
 //    req := client.RebootDBInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6054,7 +6165,8 @@ type RemoveFromGlobalClusterRequest struct {
 }
 
 // Send marshals and sends the RemoveFromGlobalCluster API request.
-func (r RemoveFromGlobalClusterRequest) Send() (*RemoveFromGlobalClusterOutput, error) {
+func (r RemoveFromGlobalClusterRequest) Send(ctx context.Context) (*RemoveFromGlobalClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6073,7 +6185,7 @@ func (r RemoveFromGlobalClusterRequest) Send() (*RemoveFromGlobalClusterOutput, 
 //
 //    // Example sending a request using the RemoveFromGlobalClusterRequest method.
 //    req := client.RemoveFromGlobalClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6107,7 +6219,8 @@ type RemoveRoleFromDBClusterRequest struct {
 }
 
 // Send marshals and sends the RemoveRoleFromDBCluster API request.
-func (r RemoveRoleFromDBClusterRequest) Send() (*RemoveRoleFromDBClusterOutput, error) {
+func (r RemoveRoleFromDBClusterRequest) Send(ctx context.Context) (*RemoveRoleFromDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6126,7 +6239,7 @@ func (r RemoveRoleFromDBClusterRequest) Send() (*RemoveRoleFromDBClusterOutput, 
 //
 //    // Example sending a request using the RemoveRoleFromDBClusterRequest method.
 //    req := client.RemoveRoleFromDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6162,7 +6275,8 @@ type RemoveSourceIdentifierFromSubscriptionRequest struct {
 }
 
 // Send marshals and sends the RemoveSourceIdentifierFromSubscription API request.
-func (r RemoveSourceIdentifierFromSubscriptionRequest) Send() (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+func (r RemoveSourceIdentifierFromSubscriptionRequest) Send(ctx context.Context) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6178,7 +6292,7 @@ func (r RemoveSourceIdentifierFromSubscriptionRequest) Send() (*RemoveSourceIden
 //
 //    // Example sending a request using the RemoveSourceIdentifierFromSubscriptionRequest method.
 //    req := client.RemoveSourceIdentifierFromSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6212,7 +6326,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6232,7 +6347,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6268,7 +6383,8 @@ type ResetDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetDBClusterParameterGroup API request.
-func (r ResetDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
+func (r ResetDBClusterParameterGroupRequest) Send(ctx context.Context) (*ResetDBClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6296,7 +6412,7 @@ func (r ResetDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGro
 //
 //    // Example sending a request using the ResetDBClusterParameterGroupRequest method.
 //    req := client.ResetDBClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6330,7 +6446,8 @@ type ResetDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetDBParameterGroup API request.
-func (r ResetDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
+func (r ResetDBParameterGroupRequest) Send(ctx context.Context) (*ResetDBParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6352,7 +6469,7 @@ func (r ResetDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, erro
 //
 //    // Example sending a request using the ResetDBParameterGroupRequest method.
 //    req := client.ResetDBParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6386,7 +6503,8 @@ type RestoreDBClusterFromS3Request struct {
 }
 
 // Send marshals and sends the RestoreDBClusterFromS3 API request.
-func (r RestoreDBClusterFromS3Request) Send() (*RestoreDBClusterFromS3Output, error) {
+func (r RestoreDBClusterFromS3Request) Send(ctx context.Context) (*RestoreDBClusterFromS3Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6406,7 +6524,7 @@ func (r RestoreDBClusterFromS3Request) Send() (*RestoreDBClusterFromS3Output, er
 //
 //    // Example sending a request using the RestoreDBClusterFromS3Request method.
 //    req := client.RestoreDBClusterFromS3Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6440,7 +6558,8 @@ type RestoreDBClusterFromSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreDBClusterFromSnapshot API request.
-func (r RestoreDBClusterFromSnapshotRequest) Send() (*RestoreDBClusterFromSnapshotOutput, error) {
+func (r RestoreDBClusterFromSnapshotRequest) Send(ctx context.Context) (*RestoreDBClusterFromSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6467,7 +6586,7 @@ func (r RestoreDBClusterFromSnapshotRequest) Send() (*RestoreDBClusterFromSnapsh
 //
 //    // Example sending a request using the RestoreDBClusterFromSnapshotRequest method.
 //    req := client.RestoreDBClusterFromSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6501,7 +6620,8 @@ type RestoreDBClusterToPointInTimeRequest struct {
 }
 
 // Send marshals and sends the RestoreDBClusterToPointInTime API request.
-func (r RestoreDBClusterToPointInTimeRequest) Send() (*RestoreDBClusterToPointInTimeOutput, error) {
+func (r RestoreDBClusterToPointInTimeRequest) Send(ctx context.Context) (*RestoreDBClusterToPointInTimeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6531,7 +6651,7 @@ func (r RestoreDBClusterToPointInTimeRequest) Send() (*RestoreDBClusterToPointIn
 //
 //    // Example sending a request using the RestoreDBClusterToPointInTimeRequest method.
 //    req := client.RestoreDBClusterToPointInTimeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6565,7 +6685,8 @@ type RestoreDBInstanceFromDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreDBInstanceFromDBSnapshot API request.
-func (r RestoreDBInstanceFromDBSnapshotRequest) Send() (*RestoreDBInstanceFromDBSnapshotOutput, error) {
+func (r RestoreDBInstanceFromDBSnapshotRequest) Send(ctx context.Context) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6602,7 +6723,7 @@ func (r RestoreDBInstanceFromDBSnapshotRequest) Send() (*RestoreDBInstanceFromDB
 //
 //    // Example sending a request using the RestoreDBInstanceFromDBSnapshotRequest method.
 //    req := client.RestoreDBInstanceFromDBSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6636,7 +6757,8 @@ type RestoreDBInstanceFromS3Request struct {
 }
 
 // Send marshals and sends the RestoreDBInstanceFromS3 API request.
-func (r RestoreDBInstanceFromS3Request) Send() (*RestoreDBInstanceFromS3Output, error) {
+func (r RestoreDBInstanceFromS3Request) Send(ctx context.Context) (*RestoreDBInstanceFromS3Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6658,7 +6780,7 @@ func (r RestoreDBInstanceFromS3Request) Send() (*RestoreDBInstanceFromS3Output, 
 //
 //    // Example sending a request using the RestoreDBInstanceFromS3Request method.
 //    req := client.RestoreDBInstanceFromS3Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6692,7 +6814,8 @@ type RestoreDBInstanceToPointInTimeRequest struct {
 }
 
 // Send marshals and sends the RestoreDBInstanceToPointInTime API request.
-func (r RestoreDBInstanceToPointInTimeRequest) Send() (*RestoreDBInstanceToPointInTimeOutput, error) {
+func (r RestoreDBInstanceToPointInTimeRequest) Send(ctx context.Context) (*RestoreDBInstanceToPointInTimeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6722,7 +6845,7 @@ func (r RestoreDBInstanceToPointInTimeRequest) Send() (*RestoreDBInstanceToPoint
 //
 //    // Example sending a request using the RestoreDBInstanceToPointInTimeRequest method.
 //    req := client.RestoreDBInstanceToPointInTimeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6756,7 +6879,8 @@ type RevokeDBSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the RevokeDBSecurityGroupIngress API request.
-func (r RevokeDBSecurityGroupIngressRequest) Send() (*RevokeDBSecurityGroupIngressOutput, error) {
+func (r RevokeDBSecurityGroupIngressRequest) Send(ctx context.Context) (*RevokeDBSecurityGroupIngressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6775,7 +6899,7 @@ func (r RevokeDBSecurityGroupIngressRequest) Send() (*RevokeDBSecurityGroupIngre
 //
 //    // Example sending a request using the RevokeDBSecurityGroupIngressRequest method.
 //    req := client.RevokeDBSecurityGroupIngressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6809,7 +6933,8 @@ type StartDBClusterRequest struct {
 }
 
 // Send marshals and sends the StartDBCluster API request.
-func (r StartDBClusterRequest) Send() (*StartDBClusterOutput, error) {
+func (r StartDBClusterRequest) Send(ctx context.Context) (*StartDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6829,7 +6954,7 @@ func (r StartDBClusterRequest) Send() (*StartDBClusterOutput, error) {
 //
 //    // Example sending a request using the StartDBClusterRequest method.
 //    req := client.StartDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6863,7 +6988,8 @@ type StartDBInstanceRequest struct {
 }
 
 // Send marshals and sends the StartDBInstance API request.
-func (r StartDBInstanceRequest) Send() (*StartDBInstanceOutput, error) {
+func (r StartDBInstanceRequest) Send(ctx context.Context) (*StartDBInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6887,7 +7013,7 @@ func (r StartDBInstanceRequest) Send() (*StartDBInstanceOutput, error) {
 //
 //    // Example sending a request using the StartDBInstanceRequest method.
 //    req := client.StartDBInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6921,7 +7047,8 @@ type StopDBClusterRequest struct {
 }
 
 // Send marshals and sends the StopDBCluster API request.
-func (r StopDBClusterRequest) Send() (*StopDBClusterOutput, error) {
+func (r StopDBClusterRequest) Send(ctx context.Context) (*StopDBClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6943,7 +7070,7 @@ func (r StopDBClusterRequest) Send() (*StopDBClusterOutput, error) {
 //
 //    // Example sending a request using the StopDBClusterRequest method.
 //    req := client.StopDBClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6977,7 +7104,8 @@ type StopDBInstanceRequest struct {
 }
 
 // Send marshals and sends the StopDBInstance API request.
-func (r StopDBInstanceRequest) Send() (*StopDBInstanceOutput, error) {
+func (r StopDBInstanceRequest) Send(ctx context.Context) (*StopDBInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7003,7 +7131,7 @@ func (r StopDBInstanceRequest) Send() (*StopDBInstanceOutput, error) {
 //
 //    // Example sending a request using the StopDBInstanceRequest method.
 //    req := client.StopDBInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

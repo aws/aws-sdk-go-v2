@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 
@@ -33,7 +34,7 @@ func main() {
 
 	req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &os.Args[1]})
 	p := req.Paginate()
-	for p.Next() {
+	for p.Next(context.TODO()) {
 		page := p.CurrentPage()
 		for _, obj := range page.Contents {
 			fmt.Println("Object: ", *obj.Key)

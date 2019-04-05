@@ -91,7 +91,8 @@ type {{ $reqType}} struct {
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request. 
-func (r {{ $reqType }}) Send() ({{ .OutputRef.GoType }}, error) {
+func (r {{ $reqType }}) Send(ctx context.Context) ({{ .OutputRef.GoType }}, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -109,7 +110,7 @@ func (r {{ $reqType }}) Send() ({{ .OutputRef.GoType }}, error) {
 //
 //    // Example sending a request using the {{ $reqType }} method.
 //    req := client.{{ $reqType }}(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -180,7 +181,7 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 func (p *{{ $reqType }}) Paginate(opts ...aws.Option) {{ $pagerType }} {
 	return {{ $pagerType }}{
 		Pager: aws.Pager {
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy {{ .InputRef.GoType }}
 				if p.Input != nil  {
 					tmp := *p.Input
@@ -189,6 +190,7 @@ func (p *{{ $reqType }}) Paginate(opts ...aws.Option) {{ $pagerType }} {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -252,7 +254,7 @@ func Example{{ .API.StructName }}_{{ .ExportedName }}() {
 
 	{{ .ExampleInput }}
 	req := svc.{{ .ExportedName }}Request(params)
-	resp, err := req.Send()
+	resp, err := req.Send(context.TODO())
 
 	if err != nil {
 		// Print the error, cast err to awserr.Error to get the Code and
@@ -282,6 +284,7 @@ func (o *Operation) ExampleInput() string {
 	if len(o.InputRef.Shape.MemberRefs) == 0 {
 		if strings.Contains(o.InputRef.GoTypeElem(), ".") {
 			o.imports["github.com/aws/aws-sdk-go-v2/service/"+strings.Split(o.InputRef.GoTypeElem(), ".")[0]] = true
+			o.imports["context"] = true
 			return fmt.Sprintf("var params *%s", o.InputRef.GoTypeElem())
 		}
 		return fmt.Sprintf("var params *%s.%s",

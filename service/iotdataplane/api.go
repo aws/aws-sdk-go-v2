@@ -3,6 +3,8 @@
 package iotdataplane
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -19,7 +21,8 @@ type DeleteThingShadowRequest struct {
 }
 
 // Send marshals and sends the DeleteThingShadow API request.
-func (r DeleteThingShadowRequest) Send() (*DeleteThingShadowOutput, error) {
+func (r DeleteThingShadowRequest) Send(ctx context.Context) (*DeleteThingShadowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +41,7 @@ func (r DeleteThingShadowRequest) Send() (*DeleteThingShadowOutput, error) {
 //
 //    // Example sending a request using the DeleteThingShadowRequest method.
 //    req := client.DeleteThingShadowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +73,8 @@ type GetThingShadowRequest struct {
 }
 
 // Send marshals and sends the GetThingShadow API request.
-func (r GetThingShadowRequest) Send() (*GetThingShadowOutput, error) {
+func (r GetThingShadowRequest) Send(ctx context.Context) (*GetThingShadowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +93,7 @@ func (r GetThingShadowRequest) Send() (*GetThingShadowOutput, error) {
 //
 //    // Example sending a request using the GetThingShadowRequest method.
 //    req := client.GetThingShadowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +125,8 @@ type PublishRequest struct {
 }
 
 // Send marshals and sends the Publish API request.
-func (r PublishRequest) Send() (*PublishOutput, error) {
+func (r PublishRequest) Send(ctx context.Context) (*PublishOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -140,7 +145,7 @@ func (r PublishRequest) Send() (*PublishOutput, error) {
 //
 //    // Example sending a request using the PublishRequest method.
 //    req := client.PublishRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +179,8 @@ type UpdateThingShadowRequest struct {
 }
 
 // Send marshals and sends the UpdateThingShadow API request.
-func (r UpdateThingShadowRequest) Send() (*UpdateThingShadowOutput, error) {
+func (r UpdateThingShadowRequest) Send(ctx context.Context) (*UpdateThingShadowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +199,7 @@ func (r UpdateThingShadowRequest) Send() (*UpdateThingShadowOutput, error) {
 //
 //    // Example sending a request using the UpdateThingShadowRequest method.
 //    req := client.UpdateThingShadowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

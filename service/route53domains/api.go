@@ -3,6 +3,7 @@
 package route53domains
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CheckDomainAvailabilityRequest struct {
 }
 
 // Send marshals and sends the CheckDomainAvailability API request.
-func (r CheckDomainAvailabilityRequest) Send() (*CheckDomainAvailabilityOutput, error) {
+func (r CheckDomainAvailabilityRequest) Send(ctx context.Context) (*CheckDomainAvailabilityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r CheckDomainAvailabilityRequest) Send() (*CheckDomainAvailabilityOutput, 
 //
 //    // Example sending a request using the CheckDomainAvailabilityRequest method.
 //    req := client.CheckDomainAvailabilityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type CheckDomainTransferabilityRequest struct {
 }
 
 // Send marshals and sends the CheckDomainTransferability API request.
-func (r CheckDomainTransferabilityRequest) Send() (*CheckDomainTransferabilityOutput, error) {
+func (r CheckDomainTransferabilityRequest) Send(ctx context.Context) (*CheckDomainTransferabilityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +91,7 @@ func (r CheckDomainTransferabilityRequest) Send() (*CheckDomainTransferabilityOu
 //
 //    // Example sending a request using the CheckDomainTransferabilityRequest method.
 //    req := client.CheckDomainTransferabilityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -122,7 +125,8 @@ type DeleteTagsForDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteTagsForDomain API request.
-func (r DeleteTagsForDomainRequest) Send() (*DeleteTagsForDomainOutput, error) {
+func (r DeleteTagsForDomainRequest) Send(ctx context.Context) (*DeleteTagsForDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +145,7 @@ func (r DeleteTagsForDomainRequest) Send() (*DeleteTagsForDomainOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsForDomainRequest method.
 //    req := client.DeleteTagsForDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +179,8 @@ type DisableDomainAutoRenewRequest struct {
 }
 
 // Send marshals and sends the DisableDomainAutoRenew API request.
-func (r DisableDomainAutoRenewRequest) Send() (*DisableDomainAutoRenewOutput, error) {
+func (r DisableDomainAutoRenewRequest) Send(ctx context.Context) (*DisableDomainAutoRenewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +197,7 @@ func (r DisableDomainAutoRenewRequest) Send() (*DisableDomainAutoRenewOutput, er
 //
 //    // Example sending a request using the DisableDomainAutoRenewRequest method.
 //    req := client.DisableDomainAutoRenewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -226,7 +231,8 @@ type DisableDomainTransferLockRequest struct {
 }
 
 // Send marshals and sends the DisableDomainTransferLock API request.
-func (r DisableDomainTransferLockRequest) Send() (*DisableDomainTransferLockOutput, error) {
+func (r DisableDomainTransferLockRequest) Send(ctx context.Context) (*DisableDomainTransferLockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -248,7 +254,7 @@ func (r DisableDomainTransferLockRequest) Send() (*DisableDomainTransferLockOutp
 //
 //    // Example sending a request using the DisableDomainTransferLockRequest method.
 //    req := client.DisableDomainTransferLockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -282,7 +288,8 @@ type EnableDomainAutoRenewRequest struct {
 }
 
 // Send marshals and sends the EnableDomainAutoRenew API request.
-func (r EnableDomainAutoRenewRequest) Send() (*EnableDomainAutoRenewOutput, error) {
+func (r EnableDomainAutoRenewRequest) Send(ctx context.Context) (*EnableDomainAutoRenewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -307,7 +314,7 @@ func (r EnableDomainAutoRenewRequest) Send() (*EnableDomainAutoRenewOutput, erro
 //
 //    // Example sending a request using the EnableDomainAutoRenewRequest method.
 //    req := client.EnableDomainAutoRenewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -341,7 +348,8 @@ type EnableDomainTransferLockRequest struct {
 }
 
 // Send marshals and sends the EnableDomainTransferLock API request.
-func (r EnableDomainTransferLockRequest) Send() (*EnableDomainTransferLockOutput, error) {
+func (r EnableDomainTransferLockRequest) Send(ctx context.Context) (*EnableDomainTransferLockOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -361,7 +369,7 @@ func (r EnableDomainTransferLockRequest) Send() (*EnableDomainTransferLockOutput
 //
 //    // Example sending a request using the EnableDomainTransferLockRequest method.
 //    req := client.EnableDomainTransferLockRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -395,7 +403,8 @@ type GetContactReachabilityStatusRequest struct {
 }
 
 // Send marshals and sends the GetContactReachabilityStatus API request.
-func (r GetContactReachabilityStatusRequest) Send() (*GetContactReachabilityStatusOutput, error) {
+func (r GetContactReachabilityStatusRequest) Send(ctx context.Context) (*GetContactReachabilityStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -416,7 +425,7 @@ func (r GetContactReachabilityStatusRequest) Send() (*GetContactReachabilityStat
 //
 //    // Example sending a request using the GetContactReachabilityStatusRequest method.
 //    req := client.GetContactReachabilityStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -450,7 +459,8 @@ type GetDomainDetailRequest struct {
 }
 
 // Send marshals and sends the GetDomainDetail API request.
-func (r GetDomainDetailRequest) Send() (*GetDomainDetailOutput, error) {
+func (r GetDomainDetailRequest) Send(ctx context.Context) (*GetDomainDetailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -468,7 +478,7 @@ func (r GetDomainDetailRequest) Send() (*GetDomainDetailOutput, error) {
 //
 //    // Example sending a request using the GetDomainDetailRequest method.
 //    req := client.GetDomainDetailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -502,7 +512,8 @@ type GetDomainSuggestionsRequest struct {
 }
 
 // Send marshals and sends the GetDomainSuggestions API request.
-func (r GetDomainSuggestionsRequest) Send() (*GetDomainSuggestionsOutput, error) {
+func (r GetDomainSuggestionsRequest) Send(ctx context.Context) (*GetDomainSuggestionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +531,7 @@ func (r GetDomainSuggestionsRequest) Send() (*GetDomainSuggestionsOutput, error)
 //
 //    // Example sending a request using the GetDomainSuggestionsRequest method.
 //    req := client.GetDomainSuggestionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -554,7 +565,8 @@ type GetOperationDetailRequest struct {
 }
 
 // Send marshals and sends the GetOperationDetail API request.
-func (r GetOperationDetailRequest) Send() (*GetOperationDetailOutput, error) {
+func (r GetOperationDetailRequest) Send(ctx context.Context) (*GetOperationDetailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -570,7 +582,7 @@ func (r GetOperationDetailRequest) Send() (*GetOperationDetailOutput, error) {
 //
 //    // Example sending a request using the GetOperationDetailRequest method.
 //    req := client.GetOperationDetailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -604,7 +616,8 @@ type ListDomainsRequest struct {
 }
 
 // Send marshals and sends the ListDomains API request.
-func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+func (r ListDomainsRequest) Send(ctx context.Context) (*ListDomainsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -621,7 +634,7 @@ func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
 //
 //    // Example sending a request using the ListDomainsRequest method.
 //    req := client.ListDomainsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -671,7 +684,7 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) ListDomains
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDomainsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -680,6 +693,7 @@ func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -707,7 +721,8 @@ type ListOperationsRequest struct {
 }
 
 // Send marshals and sends the ListOperations API request.
-func (r ListOperationsRequest) Send() (*ListOperationsOutput, error) {
+func (r ListOperationsRequest) Send(ctx context.Context) (*ListOperationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -723,7 +738,7 @@ func (r ListOperationsRequest) Send() (*ListOperationsOutput, error) {
 //
 //    // Example sending a request using the ListOperationsRequest method.
 //    req := client.ListOperationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -773,7 +788,7 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) ListO
 func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
 	return ListOperationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOperationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -782,6 +797,7 @@ func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -809,7 +825,8 @@ type ListTagsForDomainRequest struct {
 }
 
 // Send marshals and sends the ListTagsForDomain API request.
-func (r ListTagsForDomainRequest) Send() (*ListTagsForDomainOutput, error) {
+func (r ListTagsForDomainRequest) Send(ctx context.Context) (*ListTagsForDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -829,7 +846,7 @@ func (r ListTagsForDomainRequest) Send() (*ListTagsForDomainOutput, error) {
 //
 //    // Example sending a request using the ListTagsForDomainRequest method.
 //    req := client.ListTagsForDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -863,7 +880,8 @@ type RegisterDomainRequest struct {
 }
 
 // Send marshals and sends the RegisterDomain API request.
-func (r RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
+func (r RegisterDomainRequest) Send(ctx context.Context) (*RegisterDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -906,7 +924,7 @@ func (r RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
 //
 //    // Example sending a request using the RegisterDomainRequest method.
 //    req := client.RegisterDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -940,7 +958,8 @@ type RenewDomainRequest struct {
 }
 
 // Send marshals and sends the RenewDomain API request.
-func (r RenewDomainRequest) Send() (*RenewDomainOutput, error) {
+func (r RenewDomainRequest) Send(ctx context.Context) (*RenewDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -963,7 +982,7 @@ func (r RenewDomainRequest) Send() (*RenewDomainOutput, error) {
 //
 //    // Example sending a request using the RenewDomainRequest method.
 //    req := client.RenewDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -997,7 +1016,8 @@ type ResendContactReachabilityEmailRequest struct {
 }
 
 // Send marshals and sends the ResendContactReachabilityEmail API request.
-func (r ResendContactReachabilityEmailRequest) Send() (*ResendContactReachabilityEmailOutput, error) {
+func (r ResendContactReachabilityEmailRequest) Send(ctx context.Context) (*ResendContactReachabilityEmailOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1015,7 +1035,7 @@ func (r ResendContactReachabilityEmailRequest) Send() (*ResendContactReachabilit
 //
 //    // Example sending a request using the ResendContactReachabilityEmailRequest method.
 //    req := client.ResendContactReachabilityEmailRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1049,7 +1069,8 @@ type RetrieveDomainAuthCodeRequest struct {
 }
 
 // Send marshals and sends the RetrieveDomainAuthCode API request.
-func (r RetrieveDomainAuthCodeRequest) Send() (*RetrieveDomainAuthCodeOutput, error) {
+func (r RetrieveDomainAuthCodeRequest) Send(ctx context.Context) (*RetrieveDomainAuthCodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1066,7 +1087,7 @@ func (r RetrieveDomainAuthCodeRequest) Send() (*RetrieveDomainAuthCodeOutput, er
 //
 //    // Example sending a request using the RetrieveDomainAuthCodeRequest method.
 //    req := client.RetrieveDomainAuthCodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1100,7 +1121,8 @@ type TransferDomainRequest struct {
 }
 
 // Send marshals and sends the TransferDomain API request.
-func (r TransferDomainRequest) Send() (*TransferDomainOutput, error) {
+func (r TransferDomainRequest) Send(ctx context.Context) (*TransferDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1141,7 +1163,7 @@ func (r TransferDomainRequest) Send() (*TransferDomainOutput, error) {
 //
 //    // Example sending a request using the TransferDomainRequest method.
 //    req := client.TransferDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1175,7 +1197,8 @@ type UpdateDomainContactRequest struct {
 }
 
 // Send marshals and sends the UpdateDomainContact API request.
-func (r UpdateDomainContactRequest) Send() (*UpdateDomainContactOutput, error) {
+func (r UpdateDomainContactRequest) Send(ctx context.Context) (*UpdateDomainContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1198,7 +1221,7 @@ func (r UpdateDomainContactRequest) Send() (*UpdateDomainContactOutput, error) {
 //
 //    // Example sending a request using the UpdateDomainContactRequest method.
 //    req := client.UpdateDomainContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1232,7 +1255,8 @@ type UpdateDomainContactPrivacyRequest struct {
 }
 
 // Send marshals and sends the UpdateDomainContactPrivacy API request.
-func (r UpdateDomainContactPrivacyRequest) Send() (*UpdateDomainContactPrivacyOutput, error) {
+func (r UpdateDomainContactPrivacyRequest) Send(ctx context.Context) (*UpdateDomainContactPrivacyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1258,7 +1282,7 @@ func (r UpdateDomainContactPrivacyRequest) Send() (*UpdateDomainContactPrivacyOu
 //
 //    // Example sending a request using the UpdateDomainContactPrivacyRequest method.
 //    req := client.UpdateDomainContactPrivacyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1292,7 +1316,8 @@ type UpdateDomainNameserversRequest struct {
 }
 
 // Send marshals and sends the UpdateDomainNameservers API request.
-func (r UpdateDomainNameserversRequest) Send() (*UpdateDomainNameserversOutput, error) {
+func (r UpdateDomainNameserversRequest) Send(ctx context.Context) (*UpdateDomainNameserversOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1315,7 +1340,7 @@ func (r UpdateDomainNameserversRequest) Send() (*UpdateDomainNameserversOutput, 
 //
 //    // Example sending a request using the UpdateDomainNameserversRequest method.
 //    req := client.UpdateDomainNameserversRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1349,7 +1374,8 @@ type UpdateTagsForDomainRequest struct {
 }
 
 // Send marshals and sends the UpdateTagsForDomain API request.
-func (r UpdateTagsForDomainRequest) Send() (*UpdateTagsForDomainOutput, error) {
+func (r UpdateTagsForDomainRequest) Send(ctx context.Context) (*UpdateTagsForDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1368,7 +1394,7 @@ func (r UpdateTagsForDomainRequest) Send() (*UpdateTagsForDomainOutput, error) {
 //
 //    // Example sending a request using the UpdateTagsForDomainRequest method.
 //    req := client.UpdateTagsForDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1402,7 +1428,8 @@ type ViewBillingRequest struct {
 }
 
 // Send marshals and sends the ViewBilling API request.
-func (r ViewBillingRequest) Send() (*ViewBillingOutput, error) {
+func (r ViewBillingRequest) Send(ctx context.Context) (*ViewBillingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1419,7 +1446,7 @@ func (r ViewBillingRequest) Send() (*ViewBillingOutput, error) {
 //
 //    // Example sending a request using the ViewBillingRequest method.
 //    req := client.ViewBillingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

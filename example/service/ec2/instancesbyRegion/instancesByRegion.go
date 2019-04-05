@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -61,7 +62,7 @@ func main() {
 		}
 
 		req := ec2Svc.DescribeInstancesRequest(params)
-		result, err := req.Send()
+		result, err := req.Send(context.Background())
 		if err != nil {
 			exitErrorf("failed to describe instances, %v", err)
 		} else {
@@ -90,7 +91,7 @@ func fetchRegion() ([]string, error) {
 
 	svc := ec2.New(cfg)
 	req := svc.DescribeRegionsRequest(&ec2.DescribeRegionsInput{})
-	awsRegions, err := req.Send()
+	awsRegions, err := req.Send(context.Background())
 	if err != nil {
 		return nil, err
 	}

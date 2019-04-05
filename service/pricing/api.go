@@ -3,6 +3,7 @@
 package pricing
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type DescribeServicesRequest struct {
 }
 
 // Send marshals and sends the DescribeServices API request.
-func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+func (r DescribeServicesRequest) Send(ctx context.Context) (*DescribeServicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
 //
 //    // Example sending a request using the DescribeServicesRequest method.
 //    req := client.DescribeServicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -90,7 +92,7 @@ func (c *Pricing) DescribeServicesRequest(input *DescribeServicesInput) Describe
 func (p *DescribeServicesRequest) Paginate(opts ...aws.Option) DescribeServicesPager {
 	return DescribeServicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeServicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -99,6 +101,7 @@ func (p *DescribeServicesRequest) Paginate(opts ...aws.Option) DescribeServicesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -126,7 +129,8 @@ type GetAttributeValuesRequest struct {
 }
 
 // Send marshals and sends the GetAttributeValues API request.
-func (r GetAttributeValuesRequest) Send() (*GetAttributeValuesOutput, error) {
+func (r GetAttributeValuesRequest) Send(ctx context.Context) (*GetAttributeValuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -145,7 +149,7 @@ func (r GetAttributeValuesRequest) Send() (*GetAttributeValuesOutput, error) {
 //
 //    // Example sending a request using the GetAttributeValuesRequest method.
 //    req := client.GetAttributeValuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -195,7 +199,7 @@ func (c *Pricing) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetA
 func (p *GetAttributeValuesRequest) Paginate(opts ...aws.Option) GetAttributeValuesPager {
 	return GetAttributeValuesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetAttributeValuesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -204,6 +208,7 @@ func (p *GetAttributeValuesRequest) Paginate(opts ...aws.Option) GetAttributeVal
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -231,7 +236,8 @@ type GetProductsRequest struct {
 }
 
 // Send marshals and sends the GetProducts API request.
-func (r GetProductsRequest) Send() (*GetProductsOutput, error) {
+func (r GetProductsRequest) Send(ctx context.Context) (*GetProductsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -247,7 +253,7 @@ func (r GetProductsRequest) Send() (*GetProductsOutput, error) {
 //
 //    // Example sending a request using the GetProductsRequest method.
 //    req := client.GetProductsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -297,7 +303,7 @@ func (c *Pricing) GetProductsRequest(input *GetProductsInput) GetProductsRequest
 func (p *GetProductsRequest) Paginate(opts ...aws.Option) GetProductsPager {
 	return GetProductsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetProductsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -306,6 +312,7 @@ func (p *GetProductsRequest) Paginate(opts ...aws.Option) GetProductsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

@@ -3,6 +3,7 @@
 package elbv2
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeLoadBalancers to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ELBV2) WaitUntilLoadBalancerAvailable(input *DescribeLoadBalancersInput) error {
-	return c.WaitUntilLoadBalancerAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilLoadBalancerAvailableWithContext is an extended version of WaitUntilLoadBalancerAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilLoadBalancerAvailableWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+func (c *ELBV2) WaitUntilLoadBalancerAvailable(ctx context.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancerAvailable",
 		MaxAttempts: 40,
@@ -61,26 +55,19 @@ func (c *ELBV2) WaitUntilLoadBalancerAvailableWithContext(ctx aws.Context, input
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilLoadBalancerExists uses the Elastic Load Balancing v2 API operation
 // DescribeLoadBalancers to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ELBV2) WaitUntilLoadBalancerExists(input *DescribeLoadBalancersInput) error {
-	return c.WaitUntilLoadBalancerExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilLoadBalancerExistsWithContext is an extended version of WaitUntilLoadBalancerExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilLoadBalancerExistsWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+func (c *ELBV2) WaitUntilLoadBalancerExists(ctx context.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancerExists",
 		MaxAttempts: 40,
@@ -112,26 +99,19 @@ func (c *ELBV2) WaitUntilLoadBalancerExistsWithContext(ctx aws.Context, input *D
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilLoadBalancersDeleted uses the Elastic Load Balancing v2 API operation
 // DescribeLoadBalancers to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ELBV2) WaitUntilLoadBalancersDeleted(input *DescribeLoadBalancersInput) error {
-	return c.WaitUntilLoadBalancersDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilLoadBalancersDeletedWithContext is an extended version of WaitUntilLoadBalancersDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilLoadBalancersDeletedWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+func (c *ELBV2) WaitUntilLoadBalancersDeleted(ctx context.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancersDeleted",
 		MaxAttempts: 40,
@@ -163,26 +143,19 @@ func (c *ELBV2) WaitUntilLoadBalancersDeletedWithContext(ctx aws.Context, input 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilTargetDeregistered uses the Elastic Load Balancing v2 API operation
 // DescribeTargetHealth to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ELBV2) WaitUntilTargetDeregistered(input *DescribeTargetHealthInput) error {
-	return c.WaitUntilTargetDeregisteredWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilTargetDeregisteredWithContext is an extended version of WaitUntilTargetDeregistered.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilTargetDeregisteredWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
+func (c *ELBV2) WaitUntilTargetDeregistered(ctx context.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTargetDeregistered",
 		MaxAttempts: 40,
@@ -214,26 +187,19 @@ func (c *ELBV2) WaitUntilTargetDeregisteredWithContext(ctx aws.Context, input *D
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilTargetInService uses the Elastic Load Balancing v2 API operation
 // DescribeTargetHealth to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *ELBV2) WaitUntilTargetInService(input *DescribeTargetHealthInput) error {
-	return c.WaitUntilTargetInServiceWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilTargetInServiceWithContext is an extended version of WaitUntilTargetInService.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilTargetInServiceWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
+func (c *ELBV2) WaitUntilTargetInService(ctx context.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTargetInService",
 		MaxAttempts: 40,
@@ -265,5 +231,5 @@ func (c *ELBV2) WaitUntilTargetInServiceWithContext(ctx aws.Context, input *Desc
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

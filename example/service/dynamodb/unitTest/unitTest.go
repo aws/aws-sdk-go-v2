@@ -5,6 +5,8 @@
 package unitTest
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
@@ -33,7 +35,7 @@ func (ig *ItemGetter) Get(id string) (value string) {
 		},
 	}
 	req := ig.DynamoDB.GetItemRequest(input)
-	if output, err := req.Send(); err == nil {
+	if output, err := req.Send(context.Background()); err == nil {
 		if v, ok := output.Item["value"]; ok {
 			dynamodbattribute.Unmarshal(&v, &value)
 		}

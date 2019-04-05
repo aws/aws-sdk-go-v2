@@ -3,6 +3,7 @@
 package directconnect
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AllocateConnectionOnInterconnectRequest struct {
 }
 
 // Send marshals and sends the AllocateConnectionOnInterconnect API request.
-func (r AllocateConnectionOnInterconnectRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r AllocateConnectionOnInterconnectRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r AllocateConnectionOnInterconnectRequest) Send() (*DisassociateConnection
 //
 //    // Example sending a request using the AllocateConnectionOnInterconnectRequest method.
 //    req := client.AllocateConnectionOnInterconnectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -80,7 +82,8 @@ type AllocateHostedConnectionRequest struct {
 }
 
 // Send marshals and sends the AllocateHostedConnection API request.
-func (r AllocateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r AllocateHostedConnectionRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -102,7 +105,7 @@ func (r AllocateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagO
 //
 //    // Example sending a request using the AllocateHostedConnectionRequest method.
 //    req := client.AllocateHostedConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -136,7 +139,8 @@ type AllocatePrivateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the AllocatePrivateVirtualInterface API request.
-func (r AllocatePrivateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+func (r AllocatePrivateVirtualInterfaceRequest) Send(ctx context.Context) (*UpdateVirtualInterfaceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +160,7 @@ func (r AllocatePrivateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceA
 //
 //    // Example sending a request using the AllocatePrivateVirtualInterfaceRequest method.
 //    req := client.AllocatePrivateVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -190,7 +194,8 @@ type AllocatePublicVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the AllocatePublicVirtualInterface API request.
-func (r AllocatePublicVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+func (r AllocatePublicVirtualInterfaceRequest) Send(ctx context.Context) (*UpdateVirtualInterfaceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -218,7 +223,7 @@ func (r AllocatePublicVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAt
 //
 //    // Example sending a request using the AllocatePublicVirtualInterfaceRequest method.
 //    req := client.AllocatePublicVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -252,7 +257,8 @@ type AssociateConnectionWithLagRequest struct {
 }
 
 // Send marshals and sends the AssociateConnectionWithLag API request.
-func (r AssociateConnectionWithLagRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r AssociateConnectionWithLagRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -284,7 +290,7 @@ func (r AssociateConnectionWithLagRequest) Send() (*DisassociateConnectionFromLa
 //
 //    // Example sending a request using the AssociateConnectionWithLagRequest method.
 //    req := client.AssociateConnectionWithLagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -318,7 +324,8 @@ type AssociateHostedConnectionRequest struct {
 }
 
 // Send marshals and sends the AssociateHostedConnection API request.
-func (r AssociateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r AssociateHostedConnectionRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +347,7 @@ func (r AssociateHostedConnectionRequest) Send() (*DisassociateConnectionFromLag
 //
 //    // Example sending a request using the AssociateHostedConnectionRequest method.
 //    req := client.AssociateHostedConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -374,7 +381,8 @@ type AssociateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the AssociateVirtualInterface API request.
-func (r AssociateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+func (r AssociateVirtualInterfaceRequest) Send(ctx context.Context) (*UpdateVirtualInterfaceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -403,7 +411,7 @@ func (r AssociateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttribu
 //
 //    // Example sending a request using the AssociateVirtualInterfaceRequest method.
 //    req := client.AssociateVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -437,7 +445,8 @@ type ConfirmConnectionRequest struct {
 }
 
 // Send marshals and sends the ConfirmConnection API request.
-func (r ConfirmConnectionRequest) Send() (*ConfirmConnectionOutput, error) {
+func (r ConfirmConnectionRequest) Send(ctx context.Context) (*ConfirmConnectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -457,7 +466,7 @@ func (r ConfirmConnectionRequest) Send() (*ConfirmConnectionOutput, error) {
 //
 //    // Example sending a request using the ConfirmConnectionRequest method.
 //    req := client.ConfirmConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -491,7 +500,8 @@ type ConfirmPrivateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the ConfirmPrivateVirtualInterface API request.
-func (r ConfirmPrivateVirtualInterfaceRequest) Send() (*ConfirmPrivateVirtualInterfaceOutput, error) {
+func (r ConfirmPrivateVirtualInterfaceRequest) Send(ctx context.Context) (*ConfirmPrivateVirtualInterfaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -511,7 +521,7 @@ func (r ConfirmPrivateVirtualInterfaceRequest) Send() (*ConfirmPrivateVirtualInt
 //
 //    // Example sending a request using the ConfirmPrivateVirtualInterfaceRequest method.
 //    req := client.ConfirmPrivateVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -545,7 +555,8 @@ type ConfirmPublicVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the ConfirmPublicVirtualInterface API request.
-func (r ConfirmPublicVirtualInterfaceRequest) Send() (*ConfirmPublicVirtualInterfaceOutput, error) {
+func (r ConfirmPublicVirtualInterfaceRequest) Send(ctx context.Context) (*ConfirmPublicVirtualInterfaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -564,7 +575,7 @@ func (r ConfirmPublicVirtualInterfaceRequest) Send() (*ConfirmPublicVirtualInter
 //
 //    // Example sending a request using the ConfirmPublicVirtualInterfaceRequest method.
 //    req := client.ConfirmPublicVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -598,7 +609,8 @@ type CreateBGPPeerRequest struct {
 }
 
 // Send marshals and sends the CreateBGPPeer API request.
-func (r CreateBGPPeerRequest) Send() (*CreateBGPPeerOutput, error) {
+func (r CreateBGPPeerRequest) Send(ctx context.Context) (*CreateBGPPeerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -628,7 +640,7 @@ func (r CreateBGPPeerRequest) Send() (*CreateBGPPeerOutput, error) {
 //
 //    // Example sending a request using the CreateBGPPeerRequest method.
 //    req := client.CreateBGPPeerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -662,7 +674,8 @@ type CreateConnectionRequest struct {
 }
 
 // Send marshals and sends the CreateConnection API request.
-func (r CreateConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r CreateConnectionRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -691,7 +704,7 @@ func (r CreateConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, e
 //
 //    // Example sending a request using the CreateConnectionRequest method.
 //    req := client.CreateConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -725,7 +738,8 @@ type CreateDirectConnectGatewayRequest struct {
 }
 
 // Send marshals and sends the CreateDirectConnectGateway API request.
-func (r CreateDirectConnectGatewayRequest) Send() (*CreateDirectConnectGatewayOutput, error) {
+func (r CreateDirectConnectGatewayRequest) Send(ctx context.Context) (*CreateDirectConnectGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -747,7 +761,7 @@ func (r CreateDirectConnectGatewayRequest) Send() (*CreateDirectConnectGatewayOu
 //
 //    // Example sending a request using the CreateDirectConnectGatewayRequest method.
 //    req := client.CreateDirectConnectGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -781,7 +795,8 @@ type CreateDirectConnectGatewayAssociationRequest struct {
 }
 
 // Send marshals and sends the CreateDirectConnectGatewayAssociation API request.
-func (r CreateDirectConnectGatewayAssociationRequest) Send() (*CreateDirectConnectGatewayAssociationOutput, error) {
+func (r CreateDirectConnectGatewayAssociationRequest) Send(ctx context.Context) (*CreateDirectConnectGatewayAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -799,7 +814,7 @@ func (r CreateDirectConnectGatewayAssociationRequest) Send() (*CreateDirectConne
 //
 //    // Example sending a request using the CreateDirectConnectGatewayAssociationRequest method.
 //    req := client.CreateDirectConnectGatewayAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -833,7 +848,8 @@ type CreateInterconnectRequest struct {
 }
 
 // Send marshals and sends the CreateInterconnect API request.
-func (r CreateInterconnectRequest) Send() (*CreateInterconnectOutput, error) {
+func (r CreateInterconnectRequest) Send(ctx context.Context) (*CreateInterconnectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -871,7 +887,7 @@ func (r CreateInterconnectRequest) Send() (*CreateInterconnectOutput, error) {
 //
 //    // Example sending a request using the CreateInterconnectRequest method.
 //    req := client.CreateInterconnectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -905,7 +921,8 @@ type CreateLagRequest struct {
 }
 
 // Send marshals and sends the CreateLag API request.
-func (r CreateLagRequest) Send() (*UpdateLagOutput, error) {
+func (r CreateLagRequest) Send(ctx context.Context) (*UpdateLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -945,7 +962,7 @@ func (r CreateLagRequest) Send() (*UpdateLagOutput, error) {
 //
 //    // Example sending a request using the CreateLagRequest method.
 //    req := client.CreateLagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -979,7 +996,8 @@ type CreatePrivateVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the CreatePrivateVirtualInterface API request.
-func (r CreatePrivateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+func (r CreatePrivateVirtualInterfaceRequest) Send(ctx context.Context) (*UpdateVirtualInterfaceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1001,7 +1019,7 @@ func (r CreatePrivateVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAtt
 //
 //    // Example sending a request using the CreatePrivateVirtualInterfaceRequest method.
 //    req := client.CreatePrivateVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1035,7 +1053,8 @@ type CreatePublicVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the CreatePublicVirtualInterface API request.
-func (r CreatePublicVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+func (r CreatePublicVirtualInterfaceRequest) Send(ctx context.Context) (*UpdateVirtualInterfaceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1057,7 +1076,7 @@ func (r CreatePublicVirtualInterfaceRequest) Send() (*UpdateVirtualInterfaceAttr
 //
 //    // Example sending a request using the CreatePublicVirtualInterfaceRequest method.
 //    req := client.CreatePublicVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1091,7 +1110,8 @@ type DeleteBGPPeerRequest struct {
 }
 
 // Send marshals and sends the DeleteBGPPeer API request.
-func (r DeleteBGPPeerRequest) Send() (*DeleteBGPPeerOutput, error) {
+func (r DeleteBGPPeerRequest) Send(ctx context.Context) (*DeleteBGPPeerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1110,7 +1130,7 @@ func (r DeleteBGPPeerRequest) Send() (*DeleteBGPPeerOutput, error) {
 //
 //    // Example sending a request using the DeleteBGPPeerRequest method.
 //    req := client.DeleteBGPPeerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1144,7 +1164,8 @@ type DeleteConnectionRequest struct {
 }
 
 // Send marshals and sends the DeleteConnection API request.
-func (r DeleteConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r DeleteConnectionRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1165,7 +1186,7 @@ func (r DeleteConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, e
 //
 //    // Example sending a request using the DeleteConnectionRequest method.
 //    req := client.DeleteConnectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1199,7 +1220,8 @@ type DeleteDirectConnectGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteDirectConnectGateway API request.
-func (r DeleteDirectConnectGatewayRequest) Send() (*DeleteDirectConnectGatewayOutput, error) {
+func (r DeleteDirectConnectGatewayRequest) Send(ctx context.Context) (*DeleteDirectConnectGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1218,7 +1240,7 @@ func (r DeleteDirectConnectGatewayRequest) Send() (*DeleteDirectConnectGatewayOu
 //
 //    // Example sending a request using the DeleteDirectConnectGatewayRequest method.
 //    req := client.DeleteDirectConnectGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1252,7 +1274,8 @@ type DeleteDirectConnectGatewayAssociationRequest struct {
 }
 
 // Send marshals and sends the DeleteDirectConnectGatewayAssociation API request.
-func (r DeleteDirectConnectGatewayAssociationRequest) Send() (*DeleteDirectConnectGatewayAssociationOutput, error) {
+func (r DeleteDirectConnectGatewayAssociationRequest) Send(ctx context.Context) (*DeleteDirectConnectGatewayAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1269,7 +1292,7 @@ func (r DeleteDirectConnectGatewayAssociationRequest) Send() (*DeleteDirectConne
 //
 //    // Example sending a request using the DeleteDirectConnectGatewayAssociationRequest method.
 //    req := client.DeleteDirectConnectGatewayAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1303,7 +1326,8 @@ type DeleteInterconnectRequest struct {
 }
 
 // Send marshals and sends the DeleteInterconnect API request.
-func (r DeleteInterconnectRequest) Send() (*DeleteInterconnectOutput, error) {
+func (r DeleteInterconnectRequest) Send(ctx context.Context) (*DeleteInterconnectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1321,7 +1345,7 @@ func (r DeleteInterconnectRequest) Send() (*DeleteInterconnectOutput, error) {
 //
 //    // Example sending a request using the DeleteInterconnectRequest method.
 //    req := client.DeleteInterconnectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1355,7 +1379,8 @@ type DeleteLagRequest struct {
 }
 
 // Send marshals and sends the DeleteLag API request.
-func (r DeleteLagRequest) Send() (*UpdateLagOutput, error) {
+func (r DeleteLagRequest) Send(ctx context.Context) (*UpdateLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1372,7 +1397,7 @@ func (r DeleteLagRequest) Send() (*UpdateLagOutput, error) {
 //
 //    // Example sending a request using the DeleteLagRequest method.
 //    req := client.DeleteLagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1406,7 +1431,8 @@ type DeleteVirtualInterfaceRequest struct {
 }
 
 // Send marshals and sends the DeleteVirtualInterface API request.
-func (r DeleteVirtualInterfaceRequest) Send() (*DeleteVirtualInterfaceOutput, error) {
+func (r DeleteVirtualInterfaceRequest) Send(ctx context.Context) (*DeleteVirtualInterfaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1422,7 +1448,7 @@ func (r DeleteVirtualInterfaceRequest) Send() (*DeleteVirtualInterfaceOutput, er
 //
 //    // Example sending a request using the DeleteVirtualInterfaceRequest method.
 //    req := client.DeleteVirtualInterfaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1456,7 +1482,8 @@ type DescribeConnectionLoaRequest struct {
 }
 
 // Send marshals and sends the DescribeConnectionLoa API request.
-func (r DescribeConnectionLoaRequest) Send() (*DescribeConnectionLoaOutput, error) {
+func (r DescribeConnectionLoaRequest) Send(ctx context.Context) (*DescribeConnectionLoaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1480,7 +1507,7 @@ func (r DescribeConnectionLoaRequest) Send() (*DescribeConnectionLoaOutput, erro
 //
 //    // Example sending a request using the DescribeConnectionLoaRequest method.
 //    req := client.DescribeConnectionLoaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1517,7 +1544,8 @@ type DescribeConnectionsRequest struct {
 }
 
 // Send marshals and sends the DescribeConnections API request.
-func (r DescribeConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+func (r DescribeConnectionsRequest) Send(ctx context.Context) (*DescribeHostedConnectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1533,7 +1561,7 @@ func (r DescribeConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, er
 //
 //    // Example sending a request using the DescribeConnectionsRequest method.
 //    req := client.DescribeConnectionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1567,7 +1595,8 @@ type DescribeConnectionsOnInterconnectRequest struct {
 }
 
 // Send marshals and sends the DescribeConnectionsOnInterconnect API request.
-func (r DescribeConnectionsOnInterconnectRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+func (r DescribeConnectionsOnInterconnectRequest) Send(ctx context.Context) (*DescribeHostedConnectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1587,7 +1616,7 @@ func (r DescribeConnectionsOnInterconnectRequest) Send() (*DescribeHostedConnect
 //
 //    // Example sending a request using the DescribeConnectionsOnInterconnectRequest method.
 //    req := client.DescribeConnectionsOnInterconnectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1624,7 +1653,8 @@ type DescribeDirectConnectGatewayAssociationsRequest struct {
 }
 
 // Send marshals and sends the DescribeDirectConnectGatewayAssociations API request.
-func (r DescribeDirectConnectGatewayAssociationsRequest) Send() (*DescribeDirectConnectGatewayAssociationsOutput, error) {
+func (r DescribeDirectConnectGatewayAssociationsRequest) Send(ctx context.Context) (*DescribeDirectConnectGatewayAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1647,7 +1677,7 @@ func (r DescribeDirectConnectGatewayAssociationsRequest) Send() (*DescribeDirect
 //
 //    // Example sending a request using the DescribeDirectConnectGatewayAssociationsRequest method.
 //    req := client.DescribeDirectConnectGatewayAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1681,7 +1711,8 @@ type DescribeDirectConnectGatewayAttachmentsRequest struct {
 }
 
 // Send marshals and sends the DescribeDirectConnectGatewayAttachments API request.
-func (r DescribeDirectConnectGatewayAttachmentsRequest) Send() (*DescribeDirectConnectGatewayAttachmentsOutput, error) {
+func (r DescribeDirectConnectGatewayAttachmentsRequest) Send(ctx context.Context) (*DescribeDirectConnectGatewayAttachmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1703,7 +1734,7 @@ func (r DescribeDirectConnectGatewayAttachmentsRequest) Send() (*DescribeDirectC
 //
 //    // Example sending a request using the DescribeDirectConnectGatewayAttachmentsRequest method.
 //    req := client.DescribeDirectConnectGatewayAttachmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1737,7 +1768,8 @@ type DescribeDirectConnectGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeDirectConnectGateways API request.
-func (r DescribeDirectConnectGatewaysRequest) Send() (*DescribeDirectConnectGatewaysOutput, error) {
+func (r DescribeDirectConnectGatewaysRequest) Send(ctx context.Context) (*DescribeDirectConnectGatewaysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1754,7 +1786,7 @@ func (r DescribeDirectConnectGatewaysRequest) Send() (*DescribeDirectConnectGate
 //
 //    // Example sending a request using the DescribeDirectConnectGatewaysRequest method.
 //    req := client.DescribeDirectConnectGatewaysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1788,7 +1820,8 @@ type DescribeHostedConnectionsRequest struct {
 }
 
 // Send marshals and sends the DescribeHostedConnections API request.
-func (r DescribeHostedConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+func (r DescribeHostedConnectionsRequest) Send(ctx context.Context) (*DescribeHostedConnectionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1807,7 +1840,7 @@ func (r DescribeHostedConnectionsRequest) Send() (*DescribeHostedConnectionsOutp
 //
 //    // Example sending a request using the DescribeHostedConnectionsRequest method.
 //    req := client.DescribeHostedConnectionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1841,7 +1874,8 @@ type DescribeInterconnectLoaRequest struct {
 }
 
 // Send marshals and sends the DescribeInterconnectLoa API request.
-func (r DescribeInterconnectLoaRequest) Send() (*DescribeInterconnectLoaOutput, error) {
+func (r DescribeInterconnectLoaRequest) Send(ctx context.Context) (*DescribeInterconnectLoaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1865,7 +1899,7 @@ func (r DescribeInterconnectLoaRequest) Send() (*DescribeInterconnectLoaOutput, 
 //
 //    // Example sending a request using the DescribeInterconnectLoaRequest method.
 //    req := client.DescribeInterconnectLoaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1902,7 +1936,8 @@ type DescribeInterconnectsRequest struct {
 }
 
 // Send marshals and sends the DescribeInterconnects API request.
-func (r DescribeInterconnectsRequest) Send() (*DescribeInterconnectsOutput, error) {
+func (r DescribeInterconnectsRequest) Send(ctx context.Context) (*DescribeInterconnectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1918,7 +1953,7 @@ func (r DescribeInterconnectsRequest) Send() (*DescribeInterconnectsOutput, erro
 //
 //    // Example sending a request using the DescribeInterconnectsRequest method.
 //    req := client.DescribeInterconnectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1952,7 +1987,8 @@ type DescribeLagsRequest struct {
 }
 
 // Send marshals and sends the DescribeLags API request.
-func (r DescribeLagsRequest) Send() (*DescribeLagsOutput, error) {
+func (r DescribeLagsRequest) Send(ctx context.Context) (*DescribeLagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1968,7 +2004,7 @@ func (r DescribeLagsRequest) Send() (*DescribeLagsOutput, error) {
 //
 //    // Example sending a request using the DescribeLagsRequest method.
 //    req := client.DescribeLagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2002,7 +2038,8 @@ type DescribeLoaRequest struct {
 }
 
 // Send marshals and sends the DescribeLoa API request.
-func (r DescribeLoaRequest) Send() (*DescribeLoaOutput, error) {
+func (r DescribeLoaRequest) Send(ctx context.Context) (*DescribeLoaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2025,7 +2062,7 @@ func (r DescribeLoaRequest) Send() (*DescribeLoaOutput, error) {
 //
 //    // Example sending a request using the DescribeLoaRequest method.
 //    req := client.DescribeLoaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2059,7 +2096,8 @@ type DescribeLocationsRequest struct {
 }
 
 // Send marshals and sends the DescribeLocations API request.
-func (r DescribeLocationsRequest) Send() (*DescribeLocationsOutput, error) {
+func (r DescribeLocationsRequest) Send(ctx context.Context) (*DescribeLocationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2076,7 +2114,7 @@ func (r DescribeLocationsRequest) Send() (*DescribeLocationsOutput, error) {
 //
 //    // Example sending a request using the DescribeLocationsRequest method.
 //    req := client.DescribeLocationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2110,7 +2148,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2126,7 +2165,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2160,7 +2199,8 @@ type DescribeVirtualGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeVirtualGateways API request.
-func (r DescribeVirtualGatewaysRequest) Send() (*DescribeVirtualGatewaysOutput, error) {
+func (r DescribeVirtualGatewaysRequest) Send(ctx context.Context) (*DescribeVirtualGatewaysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2179,7 +2219,7 @@ func (r DescribeVirtualGatewaysRequest) Send() (*DescribeVirtualGatewaysOutput, 
 //
 //    // Example sending a request using the DescribeVirtualGatewaysRequest method.
 //    req := client.DescribeVirtualGatewaysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2213,7 +2253,8 @@ type DescribeVirtualInterfacesRequest struct {
 }
 
 // Send marshals and sends the DescribeVirtualInterfaces API request.
-func (r DescribeVirtualInterfacesRequest) Send() (*DescribeVirtualInterfacesOutput, error) {
+func (r DescribeVirtualInterfacesRequest) Send(ctx context.Context) (*DescribeVirtualInterfacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2236,7 +2277,7 @@ func (r DescribeVirtualInterfacesRequest) Send() (*DescribeVirtualInterfacesOutp
 //
 //    // Example sending a request using the DescribeVirtualInterfacesRequest method.
 //    req := client.DescribeVirtualInterfacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2270,7 +2311,8 @@ type DisassociateConnectionFromLagRequest struct {
 }
 
 // Send marshals and sends the DisassociateConnectionFromLag API request.
-func (r DisassociateConnectionFromLagRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+func (r DisassociateConnectionFromLagRequest) Send(ctx context.Context) (*DisassociateConnectionFromLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2296,7 +2338,7 @@ func (r DisassociateConnectionFromLagRequest) Send() (*DisassociateConnectionFro
 //
 //    // Example sending a request using the DisassociateConnectionFromLagRequest method.
 //    req := client.DisassociateConnectionFromLagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2330,7 +2372,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2350,7 +2393,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2384,7 +2427,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2400,7 +2444,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2434,7 +2478,8 @@ type UpdateLagRequest struct {
 }
 
 // Send marshals and sends the UpdateLag API request.
-func (r UpdateLagRequest) Send() (*UpdateLagOutput, error) {
+func (r UpdateLagRequest) Send(ctx context.Context) (*UpdateLagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2464,7 +2509,7 @@ func (r UpdateLagRequest) Send() (*UpdateLagOutput, error) {
 //
 //    // Example sending a request using the UpdateLagRequest method.
 //    req := client.UpdateLagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2498,7 +2543,8 @@ type UpdateVirtualInterfaceAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateVirtualInterfaceAttributes API request.
-func (r UpdateVirtualInterfaceAttributesRequest) Send() (*UpdateVirtualInterfaceAttributesOutput, error) {
+func (r UpdateVirtualInterfaceAttributesRequest) Send(ctx context.Context) (*UpdateVirtualInterfaceAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2521,7 +2567,7 @@ func (r UpdateVirtualInterfaceAttributesRequest) Send() (*UpdateVirtualInterface
 //
 //    // Example sending a request using the UpdateVirtualInterfaceAttributesRequest method.
 //    req := client.UpdateVirtualInterfaceAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

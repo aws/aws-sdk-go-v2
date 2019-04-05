@@ -3,6 +3,7 @@
 package lambda
 
 import (
+	"context"
 	"io"
 	"time"
 
@@ -22,7 +23,8 @@ type AddLayerVersionPermissionRequest struct {
 }
 
 // Send marshals and sends the AddLayerVersionPermission API request.
-func (r AddLayerVersionPermissionRequest) Send() (*AddLayerVersionPermissionOutput, error) {
+func (r AddLayerVersionPermissionRequest) Send(ctx context.Context) (*AddLayerVersionPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -44,7 +46,7 @@ func (r AddLayerVersionPermissionRequest) Send() (*AddLayerVersionPermissionOutp
 //
 //    // Example sending a request using the AddLayerVersionPermissionRequest method.
 //    req := client.AddLayerVersionPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +80,8 @@ type AddPermissionRequest struct {
 }
 
 // Send marshals and sends the AddPermission API request.
-func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+func (r AddPermissionRequest) Send(ctx context.Context) (*AddPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -107,7 +110,7 @@ func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
 //
 //    // Example sending a request using the AddPermissionRequest method.
 //    req := client.AddPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -141,7 +144,8 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r CreateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r CreateAliasRequest) Send(ctx context.Context) (*UpdateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,7 +165,7 @@ func (r CreateAliasRequest) Send() (*UpdateAliasOutput, error) {
 //
 //    // Example sending a request using the CreateAliasRequest method.
 //    req := client.CreateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -195,7 +199,8 @@ type CreateEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the CreateEventSourceMapping API request.
-func (r CreateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r CreateEventSourceMappingRequest) Send(ctx context.Context) (*UpdateEventSourceMappingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -220,7 +225,7 @@ func (r CreateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput
 //
 //    // Example sending a request using the CreateEventSourceMappingRequest method.
 //    req := client.CreateEventSourceMappingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -254,7 +259,8 @@ type CreateFunctionRequest struct {
 }
 
 // Send marshals and sends the CreateFunction API request.
-func (r CreateFunctionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r CreateFunctionRequest) Send(ctx context.Context) (*UpdateFunctionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -274,7 +280,7 @@ func (r CreateFunctionRequest) Send() (*UpdateFunctionConfigurationOutput, error
 //
 //    // Example sending a request using the CreateFunctionRequest method.
 //    req := client.CreateFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -308,7 +314,8 @@ type DeleteAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAlias API request.
-func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+func (r DeleteAliasRequest) Send(ctx context.Context) (*DeleteAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -327,7 +334,7 @@ func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteAliasRequest method.
 //    req := client.DeleteAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -363,7 +370,8 @@ type DeleteEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the DeleteEventSourceMapping API request.
-func (r DeleteEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r DeleteEventSourceMappingRequest) Send(ctx context.Context) (*UpdateEventSourceMappingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,7 +387,7 @@ func (r DeleteEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput
 //
 //    // Example sending a request using the DeleteEventSourceMappingRequest method.
 //    req := client.DeleteEventSourceMappingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -413,7 +421,8 @@ type DeleteFunctionRequest struct {
 }
 
 // Send marshals and sends the DeleteFunction API request.
-func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
+func (r DeleteFunctionRequest) Send(ctx context.Context) (*DeleteFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -433,7 +442,7 @@ func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
 //
 //    // Example sending a request using the DeleteFunctionRequest method.
 //    req := client.DeleteFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -469,7 +478,8 @@ type DeleteFunctionConcurrencyRequest struct {
 }
 
 // Send marshals and sends the DeleteFunctionConcurrency API request.
-func (r DeleteFunctionConcurrencyRequest) Send() (*DeleteFunctionConcurrencyOutput, error) {
+func (r DeleteFunctionConcurrencyRequest) Send(ctx context.Context) (*DeleteFunctionConcurrencyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -486,7 +496,7 @@ func (r DeleteFunctionConcurrencyRequest) Send() (*DeleteFunctionConcurrencyOutp
 //
 //    // Example sending a request using the DeleteFunctionConcurrencyRequest method.
 //    req := client.DeleteFunctionConcurrencyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -522,7 +532,8 @@ type DeleteLayerVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteLayerVersion API request.
-func (r DeleteLayerVersionRequest) Send() (*DeleteLayerVersionOutput, error) {
+func (r DeleteLayerVersionRequest) Send(ctx context.Context) (*DeleteLayerVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +551,7 @@ func (r DeleteLayerVersionRequest) Send() (*DeleteLayerVersionOutput, error) {
 //
 //    // Example sending a request using the DeleteLayerVersionRequest method.
 //    req := client.DeleteLayerVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -576,7 +587,8 @@ type GetAccountSettingsRequest struct {
 }
 
 // Send marshals and sends the GetAccountSettings API request.
-func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
+func (r GetAccountSettingsRequest) Send(ctx context.Context) (*GetAccountSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -593,7 +605,7 @@ func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
 //
 //    // Example sending a request using the GetAccountSettingsRequest method.
 //    req := client.GetAccountSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -627,7 +639,8 @@ type GetAliasRequest struct {
 }
 
 // Send marshals and sends the GetAlias API request.
-func (r GetAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r GetAliasRequest) Send(ctx context.Context) (*UpdateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +660,7 @@ func (r GetAliasRequest) Send() (*UpdateAliasOutput, error) {
 //
 //    // Example sending a request using the GetAliasRequest method.
 //    req := client.GetAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -681,7 +694,8 @@ type GetEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the GetEventSourceMapping API request.
-func (r GetEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r GetEventSourceMappingRequest) Send(ctx context.Context) (*UpdateEventSourceMappingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -697,7 +711,7 @@ func (r GetEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, e
 //
 //    // Example sending a request using the GetEventSourceMappingRequest method.
 //    req := client.GetEventSourceMappingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -731,7 +745,8 @@ type GetFunctionRequest struct {
 }
 
 // Send marshals and sends the GetFunction API request.
-func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
+func (r GetFunctionRequest) Send(ctx context.Context) (*GetFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -757,7 +772,7 @@ func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
 //
 //    // Example sending a request using the GetFunctionRequest method.
 //    req := client.GetFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -791,7 +806,8 @@ type GetFunctionConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetFunctionConfiguration API request.
-func (r GetFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r GetFunctionConfigurationRequest) Send(ctx context.Context) (*UpdateFunctionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -819,7 +835,7 @@ func (r GetFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOut
 //
 //    // Example sending a request using the GetFunctionConfigurationRequest method.
 //    req := client.GetFunctionConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -853,7 +869,8 @@ type GetLayerVersionRequest struct {
 }
 
 // Send marshals and sends the GetLayerVersion API request.
-func (r GetLayerVersionRequest) Send() (*GetLayerVersionOutput, error) {
+func (r GetLayerVersionRequest) Send(ctx context.Context) (*GetLayerVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -870,7 +887,7 @@ func (r GetLayerVersionRequest) Send() (*GetLayerVersionOutput, error) {
 //
 //    // Example sending a request using the GetLayerVersionRequest method.
 //    req := client.GetLayerVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -904,7 +921,8 @@ type GetLayerVersionPolicyRequest struct {
 }
 
 // Send marshals and sends the GetLayerVersionPolicy API request.
-func (r GetLayerVersionPolicyRequest) Send() (*GetLayerVersionPolicyOutput, error) {
+func (r GetLayerVersionPolicyRequest) Send(ctx context.Context) (*GetLayerVersionPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -921,7 +939,7 @@ func (r GetLayerVersionPolicyRequest) Send() (*GetLayerVersionPolicyOutput, erro
 //
 //    // Example sending a request using the GetLayerVersionPolicyRequest method.
 //    req := client.GetLayerVersionPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -955,7 +973,8 @@ type GetPolicyRequest struct {
 }
 
 // Send marshals and sends the GetPolicy API request.
-func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -973,7 +992,7 @@ func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
 //
 //    // Example sending a request using the GetPolicyRequest method.
 //    req := client.GetPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1007,7 +1026,8 @@ type InvokeRequest struct {
 }
 
 // Send marshals and sends the Invoke API request.
-func (r InvokeRequest) Send() (*InvokeOutput, error) {
+func (r InvokeRequest) Send(ctx context.Context) (*InvokeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1047,7 +1067,7 @@ func (r InvokeRequest) Send() (*InvokeOutput, error) {
 //
 //    // Example sending a request using the InvokeRequest method.
 //    req := client.InvokeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1081,7 +1101,8 @@ type InvokeAsyncRequest struct {
 }
 
 // Send marshals and sends the InvokeAsync API request.
-func (r InvokeAsyncRequest) Send() (*InvokeAsyncOutput, error) {
+func (r InvokeAsyncRequest) Send(ctx context.Context) (*InvokeAsyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1103,7 +1124,7 @@ func (r InvokeAsyncRequest) Send() (*InvokeAsyncOutput, error) {
 //
 //    // Example sending a request using the InvokeAsyncRequest method.
 //    req := client.InvokeAsyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1140,7 +1161,8 @@ type ListAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAliases API request.
-func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+func (r ListAliasesRequest) Send(ctx context.Context) (*ListAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,7 +1183,7 @@ func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 //
 //    // Example sending a request using the ListAliasesRequest method.
 //    req := client.ListAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1195,7 +1217,8 @@ type ListEventSourceMappingsRequest struct {
 }
 
 // Send marshals and sends the ListEventSourceMappings API request.
-func (r ListEventSourceMappingsRequest) Send() (*ListEventSourceMappingsOutput, error) {
+func (r ListEventSourceMappingsRequest) Send(ctx context.Context) (*ListEventSourceMappingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,7 +1235,7 @@ func (r ListEventSourceMappingsRequest) Send() (*ListEventSourceMappingsOutput, 
 //
 //    // Example sending a request using the ListEventSourceMappingsRequest method.
 //    req := client.ListEventSourceMappingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1262,7 +1285,7 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 func (p *ListEventSourceMappingsRequest) Paginate(opts ...aws.Option) ListEventSourceMappingsPager {
 	return ListEventSourceMappingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEventSourceMappingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1271,6 +1294,7 @@ func (p *ListEventSourceMappingsRequest) Paginate(opts ...aws.Option) ListEventS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1298,7 +1322,8 @@ type ListFunctionsRequest struct {
 }
 
 // Send marshals and sends the ListFunctions API request.
-func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
+func (r ListFunctionsRequest) Send(ctx context.Context) (*ListFunctionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1322,7 +1347,7 @@ func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
 //
 //    // Example sending a request using the ListFunctionsRequest method.
 //    req := client.ListFunctionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1372,7 +1397,7 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 func (p *ListFunctionsRequest) Paginate(opts ...aws.Option) ListFunctionsPager {
 	return ListFunctionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFunctionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1381,6 +1406,7 @@ func (p *ListFunctionsRequest) Paginate(opts ...aws.Option) ListFunctionsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1408,7 +1434,8 @@ type ListLayerVersionsRequest struct {
 }
 
 // Send marshals and sends the ListLayerVersions API request.
-func (r ListLayerVersionsRequest) Send() (*ListLayerVersionsOutput, error) {
+func (r ListLayerVersionsRequest) Send(ctx context.Context) (*ListLayerVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1426,7 +1453,7 @@ func (r ListLayerVersionsRequest) Send() (*ListLayerVersionsOutput, error) {
 //
 //    // Example sending a request using the ListLayerVersionsRequest method.
 //    req := client.ListLayerVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1460,7 +1487,8 @@ type ListLayersRequest struct {
 }
 
 // Send marshals and sends the ListLayers API request.
-func (r ListLayersRequest) Send() (*ListLayersOutput, error) {
+func (r ListLayersRequest) Send(ctx context.Context) (*ListLayersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1478,7 +1506,7 @@ func (r ListLayersRequest) Send() (*ListLayersOutput, error) {
 //
 //    // Example sending a request using the ListLayersRequest method.
 //    req := client.ListLayersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1512,7 +1540,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1531,7 +1560,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1565,7 +1594,8 @@ type ListVersionsByFunctionRequest struct {
 }
 
 // Send marshals and sends the ListVersionsByFunction API request.
-func (r ListVersionsByFunctionRequest) Send() (*ListVersionsByFunctionOutput, error) {
+func (r ListVersionsByFunctionRequest) Send(ctx context.Context) (*ListVersionsByFunctionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1582,7 +1612,7 @@ func (r ListVersionsByFunctionRequest) Send() (*ListVersionsByFunctionOutput, er
 //
 //    // Example sending a request using the ListVersionsByFunctionRequest method.
 //    req := client.ListVersionsByFunctionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1616,7 +1646,8 @@ type PublishLayerVersionRequest struct {
 }
 
 // Send marshals and sends the PublishLayerVersion API request.
-func (r PublishLayerVersionRequest) Send() (*PublishLayerVersionOutput, error) {
+func (r PublishLayerVersionRequest) Send(ctx context.Context) (*PublishLayerVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1635,7 +1666,7 @@ func (r PublishLayerVersionRequest) Send() (*PublishLayerVersionOutput, error) {
 //
 //    // Example sending a request using the PublishLayerVersionRequest method.
 //    req := client.PublishLayerVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1669,7 +1700,8 @@ type PublishVersionRequest struct {
 }
 
 // Send marshals and sends the PublishVersion API request.
-func (r PublishVersionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r PublishVersionRequest) Send(ctx context.Context) (*UpdateFunctionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1689,7 +1721,7 @@ func (r PublishVersionRequest) Send() (*UpdateFunctionConfigurationOutput, error
 //
 //    // Example sending a request using the PublishVersionRequest method.
 //    req := client.PublishVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1723,7 +1755,8 @@ type PutFunctionConcurrencyRequest struct {
 }
 
 // Send marshals and sends the PutFunctionConcurrency API request.
-func (r PutFunctionConcurrencyRequest) Send() (*PutFunctionConcurrencyOutput, error) {
+func (r PutFunctionConcurrencyRequest) Send(ctx context.Context) (*PutFunctionConcurrencyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1744,7 +1777,7 @@ func (r PutFunctionConcurrencyRequest) Send() (*PutFunctionConcurrencyOutput, er
 //
 //    // Example sending a request using the PutFunctionConcurrencyRequest method.
 //    req := client.PutFunctionConcurrencyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1778,7 +1811,8 @@ type RemoveLayerVersionPermissionRequest struct {
 }
 
 // Send marshals and sends the RemoveLayerVersionPermission API request.
-func (r RemoveLayerVersionPermissionRequest) Send() (*RemoveLayerVersionPermissionOutput, error) {
+func (r RemoveLayerVersionPermissionRequest) Send(ctx context.Context) (*RemoveLayerVersionPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1795,7 +1829,7 @@ func (r RemoveLayerVersionPermissionRequest) Send() (*RemoveLayerVersionPermissi
 //
 //    // Example sending a request using the RemoveLayerVersionPermissionRequest method.
 //    req := client.RemoveLayerVersionPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1831,7 +1865,8 @@ type RemovePermissionRequest struct {
 }
 
 // Send marshals and sends the RemovePermission API request.
-func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+func (r RemovePermissionRequest) Send(ctx context.Context) (*RemovePermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1859,7 +1894,7 @@ func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
 //
 //    // Example sending a request using the RemovePermissionRequest method.
 //    req := client.RemovePermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1895,7 +1930,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1915,7 +1951,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1951,7 +1987,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1969,7 +2006,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2005,7 +2042,8 @@ type UpdateAliasRequest struct {
 }
 
 // Send marshals and sends the UpdateAlias API request.
-func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r UpdateAliasRequest) Send(ctx context.Context) (*UpdateAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2025,7 +2063,7 @@ func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 //
 //    // Example sending a request using the UpdateAliasRequest method.
 //    req := client.UpdateAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2059,7 +2097,8 @@ type UpdateEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the UpdateEventSourceMapping API request.
-func (r UpdateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r UpdateEventSourceMappingRequest) Send(ctx context.Context) (*UpdateEventSourceMappingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2076,7 +2115,7 @@ func (r UpdateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput
 //
 //    // Example sending a request using the UpdateEventSourceMappingRequest method.
 //    req := client.UpdateEventSourceMappingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2110,7 +2149,8 @@ type UpdateFunctionCodeRequest struct {
 }
 
 // Send marshals and sends the UpdateFunctionCode API request.
-func (r UpdateFunctionCodeRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r UpdateFunctionCodeRequest) Send(ctx context.Context) (*UpdateFunctionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2134,7 +2174,7 @@ func (r UpdateFunctionCodeRequest) Send() (*UpdateFunctionConfigurationOutput, e
 //
 //    // Example sending a request using the UpdateFunctionCodeRequest method.
 //    req := client.UpdateFunctionCodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2168,7 +2208,8 @@ type UpdateFunctionConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateFunctionConfiguration API request.
-func (r UpdateFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r UpdateFunctionConfigurationRequest) Send(ctx context.Context) (*UpdateFunctionConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2194,7 +2235,7 @@ func (r UpdateFunctionConfigurationRequest) Send() (*UpdateFunctionConfiguration
 //
 //    // Example sending a request using the UpdateFunctionConfigurationRequest method.
 //    req := client.UpdateFunctionConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

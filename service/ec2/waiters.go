@@ -3,6 +3,7 @@
 package ec2
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeBundleTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilBundleTaskComplete(input *DescribeBundleTasksInput) error {
-	return c.WaitUntilBundleTaskCompleteWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilBundleTaskCompleteWithContext is an extended version of WaitUntilBundleTaskComplete.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilBundleTaskCompleteWithContext(ctx aws.Context, input *DescribeBundleTasksInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilBundleTaskComplete(ctx context.Context, input *DescribeBundleTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBundleTaskComplete",
 		MaxAttempts: 40,
@@ -56,26 +50,19 @@ func (c *EC2) WaitUntilBundleTaskCompleteWithContext(ctx aws.Context, input *Des
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilConversionTaskCancelled uses the Amazon EC2 API operation
 // DescribeConversionTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilConversionTaskCancelled(input *DescribeConversionTasksInput) error {
-	return c.WaitUntilConversionTaskCancelledWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilConversionTaskCancelledWithContext is an extended version of WaitUntilConversionTaskCancelled.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilConversionTaskCancelledWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilConversionTaskCancelled(ctx context.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskCancelled",
 		MaxAttempts: 40,
@@ -102,26 +89,19 @@ func (c *EC2) WaitUntilConversionTaskCancelledWithContext(ctx aws.Context, input
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilConversionTaskCompleted uses the Amazon EC2 API operation
 // DescribeConversionTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilConversionTaskCompleted(input *DescribeConversionTasksInput) error {
-	return c.WaitUntilConversionTaskCompletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilConversionTaskCompletedWithContext is an extended version of WaitUntilConversionTaskCompleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilConversionTaskCompletedWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilConversionTaskCompleted(ctx context.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskCompleted",
 		MaxAttempts: 40,
@@ -158,26 +138,19 @@ func (c *EC2) WaitUntilConversionTaskCompletedWithContext(ctx aws.Context, input
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilConversionTaskDeleted uses the Amazon EC2 API operation
 // DescribeConversionTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilConversionTaskDeleted(input *DescribeConversionTasksInput) error {
-	return c.WaitUntilConversionTaskDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilConversionTaskDeletedWithContext is an extended version of WaitUntilConversionTaskDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilConversionTaskDeletedWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilConversionTaskDeleted(ctx context.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskDeleted",
 		MaxAttempts: 40,
@@ -204,26 +177,19 @@ func (c *EC2) WaitUntilConversionTaskDeletedWithContext(ctx aws.Context, input *
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilCustomerGatewayAvailable uses the Amazon EC2 API operation
 // DescribeCustomerGateways to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilCustomerGatewayAvailable(input *DescribeCustomerGatewaysInput) error {
-	return c.WaitUntilCustomerGatewayAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilCustomerGatewayAvailableWithContext is an extended version of WaitUntilCustomerGatewayAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilCustomerGatewayAvailableWithContext(ctx aws.Context, input *DescribeCustomerGatewaysInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilCustomerGatewayAvailable(ctx context.Context, input *DescribeCustomerGatewaysInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilCustomerGatewayAvailable",
 		MaxAttempts: 40,
@@ -260,26 +226,19 @@ func (c *EC2) WaitUntilCustomerGatewayAvailableWithContext(ctx aws.Context, inpu
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilExportTaskCancelled uses the Amazon EC2 API operation
 // DescribeExportTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilExportTaskCancelled(input *DescribeExportTasksInput) error {
-	return c.WaitUntilExportTaskCancelledWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilExportTaskCancelledWithContext is an extended version of WaitUntilExportTaskCancelled.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilExportTaskCancelledWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilExportTaskCancelled(ctx context.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilExportTaskCancelled",
 		MaxAttempts: 40,
@@ -306,26 +265,19 @@ func (c *EC2) WaitUntilExportTaskCancelledWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilExportTaskCompleted uses the Amazon EC2 API operation
 // DescribeExportTasks to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilExportTaskCompleted(input *DescribeExportTasksInput) error {
-	return c.WaitUntilExportTaskCompletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilExportTaskCompletedWithContext is an extended version of WaitUntilExportTaskCompleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilExportTaskCompletedWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilExportTaskCompleted(ctx context.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilExportTaskCompleted",
 		MaxAttempts: 40,
@@ -352,26 +304,19 @@ func (c *EC2) WaitUntilExportTaskCompletedWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilImageAvailable uses the Amazon EC2 API operation
 // DescribeImages to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilImageAvailable(input *DescribeImagesInput) error {
-	return c.WaitUntilImageAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilImageAvailableWithContext is an extended version of WaitUntilImageAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilImageAvailableWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilImageAvailable(ctx context.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilImageAvailable",
 		MaxAttempts: 40,
@@ -403,26 +348,19 @@ func (c *EC2) WaitUntilImageAvailableWithContext(ctx aws.Context, input *Describ
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilImageExists uses the Amazon EC2 API operation
 // DescribeImages to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilImageExists(input *DescribeImagesInput) error {
-	return c.WaitUntilImageExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilImageExistsWithContext is an extended version of WaitUntilImageExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilImageExistsWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilImageExists(ctx context.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilImageExists",
 		MaxAttempts: 40,
@@ -454,26 +392,19 @@ func (c *EC2) WaitUntilImageExistsWithContext(ctx aws.Context, input *DescribeIm
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceExists uses the Amazon EC2 API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilInstanceExists(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceExistsWithContext is an extended version of WaitUntilInstanceExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceExistsWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilInstanceExists(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceExists",
 		MaxAttempts: 40,
@@ -505,26 +436,19 @@ func (c *EC2) WaitUntilInstanceExistsWithContext(ctx aws.Context, input *Describ
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceRunning uses the Amazon EC2 API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilInstanceRunning(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceRunningWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceRunningWithContext is an extended version of WaitUntilInstanceRunning.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceRunningWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilInstanceRunning(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceRunning",
 		MaxAttempts: 40,
@@ -571,26 +495,19 @@ func (c *EC2) WaitUntilInstanceRunningWithContext(ctx aws.Context, input *Descri
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceStatusOk uses the Amazon EC2 API operation
 // DescribeInstanceStatus to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilInstanceStatusOk(input *DescribeInstanceStatusInput) error {
-	return c.WaitUntilInstanceStatusOkWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceStatusOkWithContext is an extended version of WaitUntilInstanceStatusOk.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceStatusOkWithContext(ctx aws.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilInstanceStatusOk(ctx context.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStatusOk",
 		MaxAttempts: 40,
@@ -622,26 +539,19 @@ func (c *EC2) WaitUntilInstanceStatusOkWithContext(ctx aws.Context, input *Descr
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceStopped uses the Amazon EC2 API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilInstanceStopped(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceStoppedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceStoppedWithContext is an extended version of WaitUntilInstanceStopped.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilInstanceStopped(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStopped",
 		MaxAttempts: 40,
@@ -678,26 +588,19 @@ func (c *EC2) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *Descri
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInstanceTerminated uses the Amazon EC2 API operation
 // DescribeInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilInstanceTerminated(input *DescribeInstancesInput) error {
-	return c.WaitUntilInstanceTerminatedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInstanceTerminatedWithContext is an extended version of WaitUntilInstanceTerminated.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilInstanceTerminated(ctx context.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInstanceTerminated",
 		MaxAttempts: 40,
@@ -734,26 +637,19 @@ func (c *EC2) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input *Des
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilKeyPairExists uses the Amazon EC2 API operation
 // DescribeKeyPairs to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilKeyPairExists(input *DescribeKeyPairsInput) error {
-	return c.WaitUntilKeyPairExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilKeyPairExistsWithContext is an extended version of WaitUntilKeyPairExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilKeyPairExistsWithContext(ctx aws.Context, input *DescribeKeyPairsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilKeyPairExists(ctx context.Context, input *DescribeKeyPairsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilKeyPairExists",
 		MaxAttempts: 6,
@@ -785,26 +681,19 @@ func (c *EC2) WaitUntilKeyPairExistsWithContext(ctx aws.Context, input *Describe
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilNatGatewayAvailable uses the Amazon EC2 API operation
 // DescribeNatGateways to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilNatGatewayAvailable(input *DescribeNatGatewaysInput) error {
-	return c.WaitUntilNatGatewayAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilNatGatewayAvailableWithContext is an extended version of WaitUntilNatGatewayAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilNatGatewayAvailableWithContext(ctx aws.Context, input *DescribeNatGatewaysInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilNatGatewayAvailable(ctx context.Context, input *DescribeNatGatewaysInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNatGatewayAvailable",
 		MaxAttempts: 40,
@@ -851,26 +740,19 @@ func (c *EC2) WaitUntilNatGatewayAvailableWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilNetworkInterfaceAvailable uses the Amazon EC2 API operation
 // DescribeNetworkInterfaces to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilNetworkInterfaceAvailable(input *DescribeNetworkInterfacesInput) error {
-	return c.WaitUntilNetworkInterfaceAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilNetworkInterfaceAvailableWithContext is an extended version of WaitUntilNetworkInterfaceAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilNetworkInterfaceAvailableWithContext(ctx aws.Context, input *DescribeNetworkInterfacesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilNetworkInterfaceAvailable(ctx context.Context, input *DescribeNetworkInterfacesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilNetworkInterfaceAvailable",
 		MaxAttempts: 10,
@@ -902,26 +784,19 @@ func (c *EC2) WaitUntilNetworkInterfaceAvailableWithContext(ctx aws.Context, inp
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilPasswordDataAvailable uses the Amazon EC2 API operation
 // GetPasswordData to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilPasswordDataAvailable(input *GetPasswordDataInput) error {
-	return c.WaitUntilPasswordDataAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilPasswordDataAvailableWithContext is an extended version of WaitUntilPasswordDataAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilPasswordDataAvailableWithContext(ctx aws.Context, input *GetPasswordDataInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilPasswordDataAvailable(ctx context.Context, input *GetPasswordDataInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilPasswordDataAvailable",
 		MaxAttempts: 40,
@@ -948,26 +823,19 @@ func (c *EC2) WaitUntilPasswordDataAvailableWithContext(ctx aws.Context, input *
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilSnapshotCompleted uses the Amazon EC2 API operation
 // DescribeSnapshots to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilSnapshotCompleted(input *DescribeSnapshotsInput) error {
-	return c.WaitUntilSnapshotCompletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilSnapshotCompletedWithContext is an extended version of WaitUntilSnapshotCompleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSnapshotCompletedWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilSnapshotCompleted(ctx context.Context, input *DescribeSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSnapshotCompleted",
 		MaxAttempts: 40,
@@ -994,26 +862,19 @@ func (c *EC2) WaitUntilSnapshotCompletedWithContext(ctx aws.Context, input *Desc
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilSpotInstanceRequestFulfilled uses the Amazon EC2 API operation
 // DescribeSpotInstanceRequests to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilSpotInstanceRequestFulfilled(input *DescribeSpotInstanceRequestsInput) error {
-	return c.WaitUntilSpotInstanceRequestFulfilledWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilSpotInstanceRequestFulfilledWithContext is an extended version of WaitUntilSpotInstanceRequestFulfilled.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSpotInstanceRequestFulfilledWithContext(ctx aws.Context, input *DescribeSpotInstanceRequestsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilSpotInstanceRequestFulfilled(ctx context.Context, input *DescribeSpotInstanceRequestsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSpotInstanceRequestFulfilled",
 		MaxAttempts: 40,
@@ -1070,26 +931,19 @@ func (c *EC2) WaitUntilSpotInstanceRequestFulfilledWithContext(ctx aws.Context, 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilSubnetAvailable uses the Amazon EC2 API operation
 // DescribeSubnets to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilSubnetAvailable(input *DescribeSubnetsInput) error {
-	return c.WaitUntilSubnetAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilSubnetAvailableWithContext is an extended version of WaitUntilSubnetAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSubnetAvailableWithContext(ctx aws.Context, input *DescribeSubnetsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilSubnetAvailable(ctx context.Context, input *DescribeSubnetsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSubnetAvailable",
 		MaxAttempts: 40,
@@ -1116,26 +970,19 @@ func (c *EC2) WaitUntilSubnetAvailableWithContext(ctx aws.Context, input *Descri
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilSystemStatusOk uses the Amazon EC2 API operation
 // DescribeInstanceStatus to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilSystemStatusOk(input *DescribeInstanceStatusInput) error {
-	return c.WaitUntilSystemStatusOkWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilSystemStatusOkWithContext is an extended version of WaitUntilSystemStatusOk.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSystemStatusOkWithContext(ctx aws.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilSystemStatusOk(ctx context.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilSystemStatusOk",
 		MaxAttempts: 40,
@@ -1162,26 +1009,19 @@ func (c *EC2) WaitUntilSystemStatusOkWithContext(ctx aws.Context, input *Describ
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVolumeAvailable uses the Amazon EC2 API operation
 // DescribeVolumes to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVolumeAvailable(input *DescribeVolumesInput) error {
-	return c.WaitUntilVolumeAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVolumeAvailableWithContext is an extended version of WaitUntilVolumeAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVolumeAvailableWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVolumeAvailable(ctx context.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVolumeAvailable",
 		MaxAttempts: 40,
@@ -1213,26 +1053,19 @@ func (c *EC2) WaitUntilVolumeAvailableWithContext(ctx aws.Context, input *Descri
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVolumeDeleted uses the Amazon EC2 API operation
 // DescribeVolumes to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVolumeDeleted(input *DescribeVolumesInput) error {
-	return c.WaitUntilVolumeDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVolumeDeletedWithContext is an extended version of WaitUntilVolumeDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVolumeDeletedWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVolumeDeleted(ctx context.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVolumeDeleted",
 		MaxAttempts: 40,
@@ -1264,26 +1097,19 @@ func (c *EC2) WaitUntilVolumeDeletedWithContext(ctx aws.Context, input *Describe
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVolumeInUse uses the Amazon EC2 API operation
 // DescribeVolumes to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVolumeInUse(input *DescribeVolumesInput) error {
-	return c.WaitUntilVolumeInUseWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVolumeInUseWithContext is an extended version of WaitUntilVolumeInUse.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVolumeInUseWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVolumeInUse(ctx context.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVolumeInUse",
 		MaxAttempts: 40,
@@ -1315,26 +1141,19 @@ func (c *EC2) WaitUntilVolumeInUseWithContext(ctx aws.Context, input *DescribeVo
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVpcAvailable uses the Amazon EC2 API operation
 // DescribeVpcs to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVpcAvailable(input *DescribeVpcsInput) error {
-	return c.WaitUntilVpcAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVpcAvailableWithContext is an extended version of WaitUntilVpcAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcAvailableWithContext(ctx aws.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVpcAvailable(ctx context.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcAvailable",
 		MaxAttempts: 40,
@@ -1361,26 +1180,19 @@ func (c *EC2) WaitUntilVpcAvailableWithContext(ctx aws.Context, input *DescribeV
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVpcExists uses the Amazon EC2 API operation
 // DescribeVpcs to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVpcExists(input *DescribeVpcsInput) error {
-	return c.WaitUntilVpcExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVpcExistsWithContext is an extended version of WaitUntilVpcExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcExistsWithContext(ctx aws.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVpcExists(ctx context.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcExists",
 		MaxAttempts: 5,
@@ -1412,26 +1224,19 @@ func (c *EC2) WaitUntilVpcExistsWithContext(ctx aws.Context, input *DescribeVpcs
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVpcPeeringConnectionDeleted uses the Amazon EC2 API operation
 // DescribeVpcPeeringConnections to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVpcPeeringConnectionDeleted(input *DescribeVpcPeeringConnectionsInput) error {
-	return c.WaitUntilVpcPeeringConnectionDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVpcPeeringConnectionDeletedWithContext is an extended version of WaitUntilVpcPeeringConnectionDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcPeeringConnectionDeletedWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVpcPeeringConnectionDeleted(ctx context.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcPeeringConnectionDeleted",
 		MaxAttempts: 40,
@@ -1463,26 +1268,19 @@ func (c *EC2) WaitUntilVpcPeeringConnectionDeletedWithContext(ctx aws.Context, i
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVpcPeeringConnectionExists uses the Amazon EC2 API operation
 // DescribeVpcPeeringConnections to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVpcPeeringConnectionExists(input *DescribeVpcPeeringConnectionsInput) error {
-	return c.WaitUntilVpcPeeringConnectionExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVpcPeeringConnectionExistsWithContext is an extended version of WaitUntilVpcPeeringConnectionExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcPeeringConnectionExistsWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVpcPeeringConnectionExists(ctx context.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpcPeeringConnectionExists",
 		MaxAttempts: 40,
@@ -1514,26 +1312,19 @@ func (c *EC2) WaitUntilVpcPeeringConnectionExistsWithContext(ctx aws.Context, in
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVpnConnectionAvailable uses the Amazon EC2 API operation
 // DescribeVpnConnections to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVpnConnectionAvailable(input *DescribeVpnConnectionsInput) error {
-	return c.WaitUntilVpnConnectionAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVpnConnectionAvailableWithContext is an extended version of WaitUntilVpnConnectionAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpnConnectionAvailableWithContext(ctx aws.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVpnConnectionAvailable(ctx context.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpnConnectionAvailable",
 		MaxAttempts: 40,
@@ -1570,26 +1361,19 @@ func (c *EC2) WaitUntilVpnConnectionAvailableWithContext(ctx aws.Context, input 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVpnConnectionDeleted uses the Amazon EC2 API operation
 // DescribeVpnConnections to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *EC2) WaitUntilVpnConnectionDeleted(input *DescribeVpnConnectionsInput) error {
-	return c.WaitUntilVpnConnectionDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVpnConnectionDeletedWithContext is an extended version of WaitUntilVpnConnectionDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpnConnectionDeletedWithContext(ctx aws.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
+func (c *EC2) WaitUntilVpnConnectionDeleted(ctx context.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVpnConnectionDeleted",
 		MaxAttempts: 40,
@@ -1621,5 +1405,5 @@ func (c *EC2) WaitUntilVpnConnectionDeletedWithContext(ctx aws.Context, input *D
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
