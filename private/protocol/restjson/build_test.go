@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -4501,6 +4501,152 @@ func (s InputService23TestShapeInputService23TestCaseOperation2Output) MarshalFi
 	return nil
 }
 
+// InputService24ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// InputService24ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService24ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the InputService24ProtocolTest client with a config.
+//
+// Example:
+//     // Create a InputService24ProtocolTest client from just a config.
+//     svc := inputservice24protocoltest.New(myConfig)
+func NewInputService24ProtocolTest(config aws.Config) *InputService24ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &InputService24ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "inputservice24protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "2014-01-01",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a InputService24ProtocolTest operation and runs any
+// custom request initialization.
+func (c *InputService24ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opInputService24TestCaseOperation1 = "OperationName"
+
+// InputService24TestCaseOperation1Request is a API request type for the InputService24TestCaseOperation1 API operation.
+type InputService24TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService24TestShapeInputService24TestCaseOperation1Input
+	Copy  func(*InputService24TestShapeInputService24TestCaseOperation1Input) InputService24TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService24TestCaseOperation1 API request.
+func (r InputService24TestCaseOperation1Request) Send(ctx context.Context) (*InputService24TestShapeInputService24TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService24TestShapeInputService24TestCaseOperation1Output), nil
+}
+
+// InputService24TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService24TestCaseOperation1Request method.
+//    req := client.InputService24TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService24ProtocolTest) InputService24TestCaseOperation1Request(input *InputService24TestShapeInputService24TestCaseOperation1Input) InputService24TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService24TestCaseOperation1,
+		HTTPMethod: "GET",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService24TestShapeInputService24TestCaseOperation1Input{}
+	}
+
+	output := &InputService24TestShapeInputService24TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return InputService24TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService24TestCaseOperation1Request}
+}
+
+type InputService24TestShapeInputService24TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Header1 *string `location:"header" type:"string"`
+
+	HeaderMap map[string]string `location:"headers" locationName:"header-map-" type:"map"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService24TestShapeInputService24TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Header1 != nil {
+		v := *s.Header1
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Header1", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.HeaderMap) > 0 {
+		v := s.HeaderMap
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.HeadersTarget, "header-map-", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+type InputService24TestShapeInputService24TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService24TestShapeInputService24TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService24TestShapeInputService24TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 //
 // Tests begin here
 //
@@ -4821,7 +4967,7 @@ func TestInputService10ProtocolTestURIParameterQuerystringParamsHeadersAndJSONBo
 
 	// assert headers
 	if e, a := "12345", r.Header.Get("x-amz-checksum"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -4860,7 +5006,7 @@ func TestInputService11ProtocolTestStreamingPayloadCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "foo", r.Header.Get("x-amz-sha256-tree-hash"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5350,7 +5496,7 @@ func TestInputService17ProtocolTestTimestampValuesCase2(t *testing.T) {
 
 	// assert headers
 	if e, a := "Sun, 25 Jan 2015 08:00:00 GMT", r.Header.Get("x-amz-timearg"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5523,7 +5669,7 @@ func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "eyJGb28iOiJCYXIifQ==", r.Header.Get("X-Amz-Foo"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5635,7 +5781,7 @@ func TestInputService22ProtocolTestEnumCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "baz", r.Header.Get("x-amz-enum"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5724,5 +5870,55 @@ func TestInputService23ProtocolTestEndpointHostTraitCase2(t *testing.T) {
 	awstesting.AssertURL(t, "https://foo-myname.service.region.amazonaws.com/path", r.URL.String())
 
 	// assert headers
+
+}
+
+func TestInputService24ProtocolTestHeaderWhitespaceCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewInputService24ProtocolTest(cfg)
+	input := &InputService24TestShapeInputService24TestCaseOperation1Input{
+		Header1: aws.String("   headerValue"),
+		HeaderMap: map[string]string{
+			"   key-leading-space": "value",
+			"   key-with-space   ": "value",
+			"leading-space":        "   value",
+			"leading-tab":          "    value",
+			"with-space":           "   value   ",
+		},
+	}
+
+	req := svc.InputService24TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert URL
+	awstesting.AssertURL(t, "https://test/", r.URL.String())
+
+	// assert headers
+	if e, a := "value", r.Header.Get("header-map-key-leading-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-key-with-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-leading-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-leading-tab"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-with-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "headerValue", r.Header.Get("header1"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 
 }

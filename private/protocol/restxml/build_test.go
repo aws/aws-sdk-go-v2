@@ -3354,7 +3354,7 @@ func (s InputService19TestShapeGrantee) MarshalFields(e protocol.FieldEncoder) e
 type InputService19TestShapeInputService19TestCaseOperation1Input struct {
 	_ struct{} `type:"structure" payload:"Grant"`
 
-	Grant *InputService19TestShapeGrant `type:"structure"`
+	Grant *InputService19TestShapeGrant `locationName:"Grant" type:"structure"`
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -5079,6 +5079,152 @@ func (s InputService26TestShapeInputService26TestCaseOperation2Output) MarshalFi
 	return nil
 }
 
+// InputService27ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// InputService27ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService27ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the InputService27ProtocolTest client with a config.
+//
+// Example:
+//     // Create a InputService27ProtocolTest client from just a config.
+//     svc := inputservice27protocoltest.New(myConfig)
+func NewInputService27ProtocolTest(config aws.Config) *InputService27ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &InputService27ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "inputservice27protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "2014-01-01",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restxml.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restxml.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restxml.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restxml.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a InputService27ProtocolTest operation and runs any
+// custom request initialization.
+func (c *InputService27ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opInputService27TestCaseOperation1 = "OperationName"
+
+// InputService27TestCaseOperation1Request is a API request type for the InputService27TestCaseOperation1 API operation.
+type InputService27TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService27TestShapeInputService27TestCaseOperation1Input
+	Copy  func(*InputService27TestShapeInputService27TestCaseOperation1Input) InputService27TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService27TestCaseOperation1 API request.
+func (r InputService27TestCaseOperation1Request) Send(ctx context.Context) (*InputService27TestShapeInputService27TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService27TestShapeInputService27TestCaseOperation1Output), nil
+}
+
+// InputService27TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService27TestCaseOperation1Request method.
+//    req := client.InputService27TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService27ProtocolTest) InputService27TestCaseOperation1Request(input *InputService27TestShapeInputService27TestCaseOperation1Input) InputService27TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService27TestCaseOperation1,
+		HTTPMethod: "GET",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService27TestShapeInputService27TestCaseOperation1Input{}
+	}
+
+	output := &InputService27TestShapeInputService27TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return InputService27TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService27TestCaseOperation1Request}
+}
+
+type InputService27TestShapeInputService27TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Header1 *string `location:"header" type:"string"`
+
+	HeaderMap map[string]string `location:"headers" locationName:"header-map-" type:"map"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService27TestShapeInputService27TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Header1 != nil {
+		v := *s.Header1
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Header1", protocol.StringValue(v), metadata)
+	}
+	if len(s.HeaderMap) > 0 {
+		v := s.HeaderMap
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.HeadersTarget, "header-map-", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.StringValue(v1))
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+type InputService27TestShapeInputService27TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService27TestShapeInputService27TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService27TestShapeInputService27TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 //
 // Tests begin here
 //
@@ -5558,10 +5704,10 @@ func TestInputService11ProtocolTestHeaderMapsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "b", r.Header.Get("x-foo-a"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "d", r.Header.Get("x-foo-c"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -6280,7 +6426,7 @@ func TestInputService23ProtocolTestTimestampInHeaderCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "Sun, 25 Jan 2015 08:00:00 GMT", r.Header.Get("x-amz-timearg"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -6389,7 +6535,7 @@ func TestInputService25ProtocolTestEnumCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "baz", r.Header.Get("x-amz-enum"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -6478,5 +6624,55 @@ func TestInputService26ProtocolTestEndpointHostTraitCase2(t *testing.T) {
 	awstesting.AssertURL(t, "https://foo-myname.service.region.amazonaws.com/path", r.URL.String())
 
 	// assert headers
+
+}
+
+func TestInputService27ProtocolTestHeaderWhitespaceCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewInputService27ProtocolTest(cfg)
+	input := &InputService27TestShapeInputService27TestCaseOperation1Input{
+		Header1: aws.String("   headerValue"),
+		HeaderMap: map[string]string{
+			"   key-leading-space": "value",
+			"   key-with-space   ": "value",
+			"leading-space":        "   value",
+			"leading-tab":          "    value",
+			"with-space":           "   value   ",
+		},
+	}
+
+	req := svc.InputService27TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert URL
+	awstesting.AssertURL(t, "https://test/", r.URL.String())
+
+	// assert headers
+	if e, a := "value", r.Header.Get("header-map-key-leading-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-key-with-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-leading-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-leading-tab"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-with-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "headerValue", r.Header.Get("header1"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 
 }
