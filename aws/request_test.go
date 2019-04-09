@@ -19,7 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -346,7 +346,7 @@ func TestMakeAddtoUserAgentHandler(t *testing.T) {
 	r.HTTPRequest.Header.Set("User-Agent", "foo/bar")
 	fn(r)
 
-	if e, a := "foo/bar name/version (extra1; extra2)", r.HTTPRequest.Header.Get("User-Agent"); e != a {
+	if e, a := "foo/bar name/version (extra1; extra2)", r.HTTPRequest.Header.Get("User-Agent"); !strings.HasPrefix(a, e) {
 		t.Errorf("expect %q user agent, got %q", e, a)
 	}
 }
@@ -357,7 +357,7 @@ func TestMakeAddtoUserAgentFreeFormHandler(t *testing.T) {
 	r.HTTPRequest.Header.Set("User-Agent", "foo/bar")
 	fn(r)
 
-	if e, a := "foo/bar name/version (extra1; extra2)", r.HTTPRequest.Header.Get("User-Agent"); e != a {
+	if e, a := "foo/bar name/version (extra1; extra2)", r.HTTPRequest.Header.Get("User-Agent"); !strings.HasPrefix(a, e) {
 		t.Errorf("expect %q user agent, got %q", e, a)
 	}
 }
