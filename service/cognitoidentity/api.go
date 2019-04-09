@@ -349,6 +349,7 @@ func (c *CognitoIdentity) GetCredentialsForIdentityRequest(input *GetCredentials
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return GetCredentialsForIdentityRequest{Request: req, Input: input, Copy: c.GetCredentialsForIdentityRequest}
 }
 
@@ -403,6 +404,7 @@ func (c *CognitoIdentity) GetIdRequest(input *GetIdInput) GetIdRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return GetIdRequest{Request: req, Input: input, Copy: c.GetIdRequest}
 }
 
@@ -513,6 +515,7 @@ func (c *CognitoIdentity) GetOpenIdTokenRequest(input *GetOpenIdTokenInput) GetO
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return GetOpenIdTokenRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenRequest}
 }
 
@@ -975,6 +978,7 @@ func (c *CognitoIdentity) UnlinkIdentityRequest(input *UnlinkIdentityInput) Unli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return UnlinkIdentityRequest{Request: req, Input: input, Copy: c.UnlinkIdentityRequest}
 }
 

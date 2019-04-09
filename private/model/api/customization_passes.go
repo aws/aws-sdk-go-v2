@@ -3,7 +3,9 @@
 package api
 
 import (
+	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -50,6 +52,19 @@ func (a *API) customizationPasses() {
 		// MTurk smoke test is invalid. The service requires AWS account to be
 		// linked to Amazon Mechanical Turk Account.
 		"mturk": supressSmokeTest,
+
+		// Backfill the authentication type for cognito identity and sts.
+		// Removes the need for the customizations in these services.
+		"cognitoidentity": backfillAuthType("none",
+			"GetId",
+			"GetOpenIdToken",
+			"UnlinkIdentity",
+			"GetCredentialsForIdentity",
+		),
+		"sts": backfillAuthType("none",
+			"AssumeRoleWithSAML",
+			"AssumeRoleWithWebIdentity",
+		),
 	}
 
 	for k := range mergeServices {
@@ -208,6 +223,22 @@ func rdsCustomizations(a *API) {
 				ShapeName:     "String",
 				Shape:         a.Shapes["String"],
 			}
+		}
+	}
+}
+func backfillAuthType(typ string, opNames ...string) func(*API) {
+	return func(a *API) {
+		for _, opName := range opNames {
+			op, ok := a.Operations[opName]
+			if !ok {
+				panic("unable to backfill auth-type for unknown operation " + opName)
+			}
+			if v := op.AuthType; len(v) != 0 {
+				fmt.Fprintf(os.Stderr, "unable to backfill auth-type for %s, already set, %s", opName, v)
+				continue
+			}
+
+			op.AuthType = typ
 		}
 	}
 }
