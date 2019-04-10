@@ -1,6 +1,7 @@
 package s3manager
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/http"
@@ -157,7 +158,7 @@ func NewDownloaderWithClient(svc s3iface.S3API, options ...func(*Downloader)) *D
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
 func (d Downloader) Download(w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
-	return d.DownloadWithContext(aws.BackgroundContext(), w, input, options...)
+	return d.DownloadWithContext(context.Background(), w, input, options...)
 }
 
 // DownloadWithContext downloads an object in S3 and writes the payload into w
@@ -186,7 +187,7 @@ func (d Downloader) Download(w io.WriterAt, input *s3.GetObjectInput, options ..
 // If the GetObjectInput's Range value is provided that will cause the downloader
 // to perform a single GetObjectInput request for that object's range. This will
 // caused the part size, and concurrency configurations to be ignored.
-func (d Downloader) DownloadWithContext(ctx aws.Context, w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
+func (d Downloader) DownloadWithContext(ctx context.Context, w io.WriterAt, input *s3.GetObjectInput, options ...func(*Downloader)) (n int64, err error) {
 	impl := downloader{w: w, in: input, cfg: d, ctx: ctx}
 
 	for _, option := range options {
@@ -244,10 +245,10 @@ func (d Downloader) DownloadWithContext(ctx aws.Context, w io.WriterAt, input *s
 //	}
 //
 //	iter := &s3manager.DownloadObjectsIterator{Objects: objects}
-//	if err := svc.DownloadWithIterator(aws.BackgroundContext(), iter); err != nil {
+//	if err := svc.DownloadWithIterator(context.Background(), iter); err != nil {
 //		return err
 //	}
-func (d Downloader) DownloadWithIterator(ctx aws.Context, iter BatchDownloadIterator, opts ...func(*Downloader)) error {
+func (d Downloader) DownloadWithIterator(ctx context.Context, iter BatchDownloadIterator, opts ...func(*Downloader)) error {
 	var errs []Error
 	for iter.Next() {
 		object := iter.DownloadObject()
@@ -272,7 +273,7 @@ func (d Downloader) DownloadWithIterator(ctx aws.Context, iter BatchDownloadIter
 
 // downloader is the implementation structure used internally by Downloader.
 type downloader struct {
-	ctx aws.Context
+	ctx context.Context
 	cfg Downloader
 
 	in *s3.GetObjectInput
@@ -418,9 +419,8 @@ func (d *downloader) downloadChunk(chunk dlchunk) error {
 	for retry := 0; retry <= d.partBodyMaxRetries; retry++ {
 		var resp *s3.GetObjectOutput
 		req := d.cfg.S3.GetObjectRequest(in)
-		req.SetContext(d.ctx)
 		req.ApplyOptions(d.cfg.RequestOptions...)
-		resp, err = req.Send()
+		resp, err = req.Send(d.ctx)
 		if err != nil {
 			return err
 		}

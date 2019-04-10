@@ -9,6 +9,9 @@
 package acmpcaiface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca"
 )
 
@@ -95,6 +98,12 @@ type ACMPCAAPI interface {
 	UntagCertificateAuthorityRequest(*acmpca.UntagCertificateAuthorityInput) acmpca.UntagCertificateAuthorityRequest
 
 	UpdateCertificateAuthorityRequest(*acmpca.UpdateCertificateAuthorityInput) acmpca.UpdateCertificateAuthorityRequest
+
+	WaitUntilAuditReportCreated(context.Context, *acmpca.DescribeCertificateAuthorityAuditReportInput, ...aws.WaiterOption) error
+
+	WaitUntilCertificateAuthorityCSRCreated(context.Context, *acmpca.GetCertificateAuthorityCsrInput, ...aws.WaiterOption) error
+
+	WaitUntilCertificateIssued(context.Context, *acmpca.GetCertificateInput, ...aws.WaiterOption) error
 }
 
 var _ ACMPCAAPI = (*acmpca.ACMPCA)(nil)

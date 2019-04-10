@@ -9,6 +9,8 @@
 package opsworksiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
 )
@@ -211,23 +213,17 @@ type OpsWorksAPI interface {
 
 	UpdateVolumeRequest(*opsworks.UpdateVolumeInput) opsworks.UpdateVolumeRequest
 
-	WaitUntilAppExists(*opsworks.DescribeAppsInput) error
-	WaitUntilAppExistsWithContext(aws.Context, *opsworks.DescribeAppsInput, ...aws.WaiterOption) error
+	WaitUntilAppExists(context.Context, *opsworks.DescribeAppsInput, ...aws.WaiterOption) error
 
-	WaitUntilDeploymentSuccessful(*opsworks.DescribeDeploymentsInput) error
-	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *opsworks.DescribeDeploymentsInput, ...aws.WaiterOption) error
+	WaitUntilDeploymentSuccessful(context.Context, *opsworks.DescribeDeploymentsInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceOnline(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceOnlineWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceOnline(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceRegistered(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceRegisteredWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceRegistered(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceStopped(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceStoppedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceStopped(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilInstanceTerminated(*opsworks.DescribeInstancesInput) error
-	WaitUntilInstanceTerminatedWithContext(aws.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
+	WaitUntilInstanceTerminated(context.Context, *opsworks.DescribeInstancesInput, ...aws.WaiterOption) error
 }
 
 var _ OpsWorksAPI = (*opsworks.OpsWorks)(nil)

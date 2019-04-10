@@ -3,11 +3,13 @@
 package mq
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opCreateBroker = "CreateBroker"
@@ -20,7 +22,8 @@ type CreateBrokerRequest struct {
 }
 
 // Send marshals and sends the CreateBroker API request.
-func (r CreateBrokerRequest) Send() (*CreateBrokerOutput, error) {
+func (r CreateBrokerRequest) Send(ctx context.Context) (*CreateBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +39,7 @@ func (r CreateBrokerRequest) Send() (*CreateBrokerOutput, error) {
 //
 //    // Example sending a request using the CreateBrokerRequest method.
 //    req := client.CreateBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +73,8 @@ type CreateConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateConfiguration API request.
-func (r CreateConfigurationRequest) Send() (*CreateConfigurationOutput, error) {
+func (r CreateConfigurationRequest) Send(ctx context.Context) (*CreateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +91,7 @@ func (r CreateConfigurationRequest) Send() (*CreateConfigurationOutput, error) {
 //
 //    // Example sending a request using the CreateConfigurationRequest method.
 //    req := client.CreateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -111,6 +115,59 @@ func (c *MQ) CreateConfigurationRequest(input *CreateConfigurationInput) CreateC
 	return CreateConfigurationRequest{Request: req, Input: input, Copy: c.CreateConfigurationRequest}
 }
 
+const opCreateTags = "CreateTags"
+
+// CreateTagsRequest is a API request type for the CreateTags API operation.
+type CreateTagsRequest struct {
+	*aws.Request
+	Input *CreateTagsInput
+	Copy  func(*CreateTagsInput) CreateTagsRequest
+}
+
+// Send marshals and sends the CreateTags API request.
+func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTagsOutput), nil
+}
+
+// CreateTagsRequest returns a request value for making API operation for
+// AmazonMQ.
+//
+// Add a tag to a resource.
+//
+//    // Example sending a request using the CreateTagsRequest method.
+//    req := client.CreateTagsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateTags
+func (c *MQ) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
+	op := &aws.Operation{
+		Name:       opCreateTags,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &CreateTagsInput{}
+	}
+
+	output := &CreateTagsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
+}
+
 const opCreateUser = "CreateUser"
 
 // CreateUserRequest is a API request type for the CreateUser API operation.
@@ -121,7 +178,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +195,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +229,8 @@ type DeleteBrokerRequest struct {
 }
 
 // Send marshals and sends the DeleteBroker API request.
-func (r DeleteBrokerRequest) Send() (*DeleteBrokerOutput, error) {
+func (r DeleteBrokerRequest) Send(ctx context.Context) (*DeleteBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +246,7 @@ func (r DeleteBrokerRequest) Send() (*DeleteBrokerOutput, error) {
 //
 //    // Example sending a request using the DeleteBrokerRequest method.
 //    req := client.DeleteBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -211,6 +270,59 @@ func (c *MQ) DeleteBrokerRequest(input *DeleteBrokerInput) DeleteBrokerRequest {
 	return DeleteBrokerRequest{Request: req, Input: input, Copy: c.DeleteBrokerRequest}
 }
 
+const opDeleteTags = "DeleteTags"
+
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
+}
+
+// Send marshals and sends the DeleteTags API request.
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// AmazonMQ.
+//
+// Remove a tag from a resource.
+//
+//    // Example sending a request using the DeleteTagsRequest method.
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteTags
+func (c *MQ) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteTags,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/v1/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &DeleteTagsInput{}
+	}
+
+	output := &DeleteTagsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
+}
+
 const opDeleteUser = "DeleteUser"
 
 // DeleteUserRequest is a API request type for the DeleteUser API operation.
@@ -221,7 +333,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +350,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +384,8 @@ type DescribeBrokerRequest struct {
 }
 
 // Send marshals and sends the DescribeBroker API request.
-func (r DescribeBrokerRequest) Send() (*DescribeBrokerOutput, error) {
+func (r DescribeBrokerRequest) Send(ctx context.Context) (*DescribeBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +401,7 @@ func (r DescribeBrokerRequest) Send() (*DescribeBrokerOutput, error) {
 //
 //    // Example sending a request using the DescribeBrokerRequest method.
 //    req := client.DescribeBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -321,7 +435,8 @@ type DescribeConfigurationRequest struct {
 }
 
 // Send marshals and sends the DescribeConfiguration API request.
-func (r DescribeConfigurationRequest) Send() (*DescribeConfigurationOutput, error) {
+func (r DescribeConfigurationRequest) Send(ctx context.Context) (*DescribeConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -337,7 +452,7 @@ func (r DescribeConfigurationRequest) Send() (*DescribeConfigurationOutput, erro
 //
 //    // Example sending a request using the DescribeConfigurationRequest method.
 //    req := client.DescribeConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -371,7 +486,8 @@ type DescribeConfigurationRevisionRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationRevision API request.
-func (r DescribeConfigurationRevisionRequest) Send() (*DescribeConfigurationRevisionOutput, error) {
+func (r DescribeConfigurationRevisionRequest) Send(ctx context.Context) (*DescribeConfigurationRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -387,7 +503,7 @@ func (r DescribeConfigurationRevisionRequest) Send() (*DescribeConfigurationRevi
 //
 //    // Example sending a request using the DescribeConfigurationRevisionRequest method.
 //    req := client.DescribeConfigurationRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -421,7 +537,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +554,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +588,8 @@ type ListBrokersRequest struct {
 }
 
 // Send marshals and sends the ListBrokers API request.
-func (r ListBrokersRequest) Send() (*ListBrokersOutput, error) {
+func (r ListBrokersRequest) Send(ctx context.Context) (*ListBrokersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -487,7 +605,7 @@ func (r ListBrokersRequest) Send() (*ListBrokersOutput, error) {
 //
 //    // Example sending a request using the ListBrokersRequest method.
 //    req := client.ListBrokersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -521,7 +639,8 @@ type ListConfigurationRevisionsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurationRevisions API request.
-func (r ListConfigurationRevisionsRequest) Send() (*ListConfigurationRevisionsOutput, error) {
+func (r ListConfigurationRevisionsRequest) Send(ctx context.Context) (*ListConfigurationRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -537,7 +656,7 @@ func (r ListConfigurationRevisionsRequest) Send() (*ListConfigurationRevisionsOu
 //
 //    // Example sending a request using the ListConfigurationRevisionsRequest method.
 //    req := client.ListConfigurationRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -571,7 +690,8 @@ type ListConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurations API request.
-func (r ListConfigurationsRequest) Send() (*ListConfigurationsOutput, error) {
+func (r ListConfigurationsRequest) Send(ctx context.Context) (*ListConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -587,7 +707,7 @@ func (r ListConfigurationsRequest) Send() (*ListConfigurationsOutput, error) {
 //
 //    // Example sending a request using the ListConfigurationsRequest method.
 //    req := client.ListConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -611,6 +731,57 @@ func (c *MQ) ListConfigurationsRequest(input *ListConfigurationsInput) ListConfi
 	return ListConfigurationsRequest{Request: req, Input: input, Copy: c.ListConfigurationsRequest}
 }
 
+const opListTags = "ListTags"
+
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
+}
+
+// Send marshals and sends the ListTags API request.
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// AmazonMQ.
+//
+// Lists tags for a resource.
+//
+//    // Example sending a request using the ListTagsRequest method.
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTags
+func (c *MQ) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
+	op := &aws.Operation{
+		Name:       opListTags,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/tags/{resource-arn}",
+	}
+
+	if input == nil {
+		input = &ListTagsInput{}
+	}
+
+	output := &ListTagsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
+}
+
 const opListUsers = "ListUsers"
 
 // ListUsersRequest is a API request type for the ListUsers API operation.
@@ -621,7 +792,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,7 +809,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -671,7 +843,8 @@ type RebootBrokerRequest struct {
 }
 
 // Send marshals and sends the RebootBroker API request.
-func (r RebootBrokerRequest) Send() (*RebootBrokerOutput, error) {
+func (r RebootBrokerRequest) Send(ctx context.Context) (*RebootBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -687,7 +860,7 @@ func (r RebootBrokerRequest) Send() (*RebootBrokerOutput, error) {
 //
 //    // Example sending a request using the RebootBrokerRequest method.
 //    req := client.RebootBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -721,7 +894,8 @@ type UpdateBrokerRequest struct {
 }
 
 // Send marshals and sends the UpdateBroker API request.
-func (r UpdateBrokerRequest) Send() (*UpdateBrokerOutput, error) {
+func (r UpdateBrokerRequest) Send(ctx context.Context) (*UpdateBrokerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -737,7 +911,7 @@ func (r UpdateBrokerRequest) Send() (*UpdateBrokerOutput, error) {
 //
 //    // Example sending a request using the UpdateBrokerRequest method.
 //    req := client.UpdateBrokerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -771,7 +945,8 @@ type UpdateConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateConfiguration API request.
-func (r UpdateConfigurationRequest) Send() (*UpdateConfigurationOutput, error) {
+func (r UpdateConfigurationRequest) Send(ctx context.Context) (*UpdateConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -787,7 +962,7 @@ func (r UpdateConfigurationRequest) Send() (*UpdateConfigurationOutput, error) {
 //
 //    // Example sending a request using the UpdateConfigurationRequest method.
 //    req := client.UpdateConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -821,7 +996,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -837,7 +1013,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1020,7 +1196,8 @@ type Configuration struct {
 	// only ACTIVEMQ.
 	EngineType EngineType `locationName:"engineType" type:"string" enum:"true"`
 
-	// Required. The version of the broker engine.
+	// Required. The version of the broker engine. For a list of supported engine
+	// versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string `locationName:"engineVersion" type:"string"`
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.
@@ -1033,6 +1210,9 @@ type Configuration struct {
 	// characters, dashes, periods, underscores, and tildes (- . _ ~). This value
 	// must be 1-150 characters long.
 	Name *string `locationName:"name" type:"string"`
+
+	// The list of all tags associated with this configuration.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -1094,6 +1274,18 @@ func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -1275,6 +1467,8 @@ type CreateBrokerInput struct {
 
 	SubnetIds []string `locationName:"subnetIds" type:"list"`
 
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	Users []User `locationName:"users" type:"list"`
 }
 
@@ -1388,6 +1582,18 @@ func (s CreateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if len(s.Users) > 0 {
 		v := s.Users
 
@@ -1456,6 +1662,8 @@ type CreateConfigurationInput struct {
 	EngineVersion *string `locationName:"engineVersion" type:"string"`
 
 	Name *string `locationName:"name" type:"string"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -1489,6 +1697,18 @@ func (s CreateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -1558,6 +1778,92 @@ func (s CreateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateTagsRequest
+type CreateTagsInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s CreateTagsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateTagsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateTagsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateTagsOutput
+type CreateTagsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s CreateTagsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateTagsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -1756,6 +2062,97 @@ func (s DeleteBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteTagsRequest
+type DeleteTagsInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+
+	// TagKeys is a required field
+	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteTagsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTagsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteTagsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.QueryTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteTagsOutput
+type DeleteTagsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteTagsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTagsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUserRequest
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
@@ -1936,6 +2333,8 @@ type DescribeBrokerOutput struct {
 
 	SubnetIds []string `locationName:"subnetIds" type:"list"`
 
+	Tags map[string]string `locationName:"tags" type:"map"`
+
 	Users []UserSummary `locationName:"users" type:"list"`
 }
 
@@ -2082,6 +2481,18 @@ func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if len(s.Users) > 0 {
 		v := s.Users
 
@@ -2165,6 +2576,8 @@ type DescribeConfigurationOutput struct {
 	LatestRevision *ConfigurationRevision `locationName:"latestRevision" type:"structure"`
 
 	Name *string `locationName:"name" type:"string"`
+
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -2231,6 +2644,18 @@ func (s DescribeConfigurationOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -2818,6 +3243,92 @@ func (s ListConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTagsRequest
+type ListTagsInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceArn is a required field
+	ResourceArn *string `location:"uri" locationName:"resource-arn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "resource-arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListTagsResponse
+type ListTagsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Tags map[string]string `locationName:"tags" type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

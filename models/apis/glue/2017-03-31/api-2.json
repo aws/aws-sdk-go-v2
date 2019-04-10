@@ -419,6 +419,22 @@
         {"shape":"OperationTimeoutException"}
       ]
     },
+    "DeleteResourcePolicy":{
+      "name":"DeleteResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteResourcePolicyRequest"},
+      "output":{"shape":"DeleteResourcePolicyResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConditionCheckFailureException"}
+      ]
+    },
     "DeleteSecurityConfiguration":{
       "name":"DeleteSecurityConfiguration",
       "http":{
@@ -809,6 +825,21 @@
         {"shape":"OperationTimeoutException"}
       ]
     },
+    "GetResourcePolicy":{
+      "name":"GetResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetResourcePolicyRequest"},
+      "output":{"shape":"GetResourcePolicyResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"}
+      ]
+    },
     "GetSecurityConfiguration":{
       "name":"GetSecurityConfiguration",
       "http":{
@@ -990,6 +1021,22 @@
         {"shape":"InternalServiceException"},
         {"shape":"InvalidInputException"},
         {"shape":"OperationTimeoutException"}
+      ]
+    },
+    "PutResourcePolicy":{
+      "name":"PutResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutResourcePolicyRequest"},
+      "output":{"shape":"PutResourcePolicyResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"ConditionCheckFailureException"}
       ]
     },
     "ResetJobBookmark":{
@@ -1691,6 +1738,13 @@
         "State":{"shape":"JobRunState"}
       }
     },
+    "ConditionCheckFailureException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"MessageString"}
+      },
+      "exception":true
+    },
     "ConditionList":{
       "type":"list",
       "member":{"shape":"Condition"}
@@ -1730,6 +1784,14 @@
       "member":{"shape":"Connection"}
     },
     "ConnectionName":{"type":"string"},
+    "ConnectionPasswordEncryption":{
+      "type":"structure",
+      "required":["ReturnConnectionPasswordEncrypted"],
+      "members":{
+        "ReturnConnectionPasswordEncrypted":{"shape":"Boolean"},
+        "AwsKmsKeyId":{"shape":"NameString"}
+      }
+    },
     "ConnectionProperties":{
       "type":"map",
       "key":{"shape":"ConnectionPropertyKey"},
@@ -1744,6 +1806,7 @@
         "PORT",
         "USERNAME",
         "PASSWORD",
+        "ENCRYPTED_PASSWORD",
         "JDBC_DRIVER_JAR_URI",
         "JDBC_DRIVER_CLASS_NAME",
         "JDBC_ENGINE",
@@ -2157,7 +2220,8 @@
     "DataCatalogEncryptionSettings":{
       "type":"structure",
       "members":{
-        "EncryptionAtRest":{"shape":"EncryptionAtRest"}
+        "EncryptionAtRest":{"shape":"EncryptionAtRest"},
+        "ConnectionPasswordEncryption":{"shape":"ConnectionPasswordEncryption"}
       }
     },
     "Database":{
@@ -2290,6 +2354,17 @@
       }
     },
     "DeletePartitionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteResourcePolicyRequest":{
+      "type":"structure",
+      "members":{
+        "PolicyHashCondition":{"shape":"HashString"}
+      }
+    },
+    "DeleteResourcePolicyResponse":{
       "type":"structure",
       "members":{
       }
@@ -2474,6 +2549,14 @@
       }
     },
     "ExecutionTime":{"type":"integer"},
+    "ExistCondition":{
+      "type":"string",
+      "enum":[
+        "MUST_EXIST",
+        "NOT_EXIST",
+        "NONE"
+      ]
+    },
     "FieldType":{"type":"string"},
     "FilterString":{
       "type":"string",
@@ -2536,7 +2619,8 @@
       "required":["Name"],
       "members":{
         "CatalogId":{"shape":"CatalogIdString"},
-        "Name":{"shape":"NameString"}
+        "Name":{"shape":"NameString"},
+        "HidePassword":{"shape":"Boolean"}
       }
     },
     "GetConnectionResponse":{
@@ -2557,6 +2641,7 @@
       "members":{
         "CatalogId":{"shape":"CatalogIdString"},
         "Filter":{"shape":"GetConnectionsFilter"},
+        "HidePassword":{"shape":"Boolean"},
         "NextToken":{"shape":"Token"},
         "MaxResults":{"shape":"PageSize"}
       }
@@ -2833,6 +2918,20 @@
         "ScalaCode":{"shape":"ScalaCode"}
       }
     },
+    "GetResourcePolicyRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetResourcePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyInJson":{"shape":"PolicyJsonString"},
+        "PolicyHash":{"shape":"HashString"},
+        "CreateTime":{"shape":"Timestamp"},
+        "UpdateTime":{"shape":"Timestamp"}
+      }
+    },
     "GetSecurityConfigurationRequest":{
       "type":"structure",
       "required":["Name"],
@@ -3036,6 +3135,12 @@
       "max":2048,
       "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\t]*"
+    },
+    "HashString":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "IdString":{
       "type":"string",
@@ -3468,6 +3573,11 @@
         "AvailabilityZone":{"shape":"NameString"}
       }
     },
+    "PolicyJsonString":{
+      "type":"string",
+      "max":10240,
+      "min":2
+    },
     "Predecessor":{
       "type":"structure",
       "members":{
@@ -3516,6 +3626,21 @@
     "PutDataCatalogEncryptionSettingsResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "PutResourcePolicyRequest":{
+      "type":"structure",
+      "required":["PolicyInJson"],
+      "members":{
+        "PolicyInJson":{"shape":"PolicyJsonString"},
+        "PolicyHashCondition":{"shape":"HashString"},
+        "PolicyExistsCondition":{"shape":"ExistCondition"}
+      }
+    },
+    "PutResourcePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyHash":{"shape":"HashString"}
       }
     },
     "PythonScript":{"type":"string"},

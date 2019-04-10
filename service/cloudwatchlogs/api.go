@@ -3,6 +3,7 @@
 package cloudwatchlogs
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AssociateKmsKeyRequest struct {
 }
 
 // Send marshals and sends the AssociateKmsKey API request.
-func (r AssociateKmsKeyRequest) Send() (*AssociateKmsKeyOutput, error) {
+func (r AssociateKmsKeyRequest) Send(ctx context.Context) (*AssociateKmsKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -50,7 +52,7 @@ func (r AssociateKmsKeyRequest) Send() (*AssociateKmsKeyOutput, error) {
 //
 //    // Example sending a request using the AssociateKmsKeyRequest method.
 //    req := client.AssociateKmsKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -86,7 +88,8 @@ type CancelExportTaskRequest struct {
 }
 
 // Send marshals and sends the CancelExportTask API request.
-func (r CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
+func (r CancelExportTaskRequest) Send(ctx context.Context) (*CancelExportTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -104,7 +107,7 @@ func (r CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
 //
 //    // Example sending a request using the CancelExportTaskRequest method.
 //    req := client.CancelExportTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -140,7 +143,8 @@ type CreateExportTaskRequest struct {
 }
 
 // Send marshals and sends the CreateExportTask API request.
-func (r CreateExportTaskRequest) Send() (*CreateExportTaskOutput, error) {
+func (r CreateExportTaskRequest) Send(ctx context.Context) (*CreateExportTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -167,7 +171,7 @@ func (r CreateExportTaskRequest) Send() (*CreateExportTaskOutput, error) {
 //
 //    // Example sending a request using the CreateExportTaskRequest method.
 //    req := client.CreateExportTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -201,7 +205,8 @@ type CreateLogGroupRequest struct {
 }
 
 // Send marshals and sends the CreateLogGroup API request.
-func (r CreateLogGroupRequest) Send() (*CreateLogGroupOutput, error) {
+func (r CreateLogGroupRequest) Send(ctx context.Context) (*CreateLogGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +243,7 @@ func (r CreateLogGroupRequest) Send() (*CreateLogGroupOutput, error) {
 //
 //    // Example sending a request using the CreateLogGroupRequest method.
 //    req := client.CreateLogGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -274,7 +279,8 @@ type CreateLogStreamRequest struct {
 }
 
 // Send marshals and sends the CreateLogStream API request.
-func (r CreateLogStreamRequest) Send() (*CreateLogStreamOutput, error) {
+func (r CreateLogStreamRequest) Send(ctx context.Context) (*CreateLogStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -301,7 +307,7 @@ func (r CreateLogStreamRequest) Send() (*CreateLogStreamOutput, error) {
 //
 //    // Example sending a request using the CreateLogStreamRequest method.
 //    req := client.CreateLogStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -337,7 +343,8 @@ type DeleteDestinationRequest struct {
 }
 
 // Send marshals and sends the DeleteDestination API request.
-func (r DeleteDestinationRequest) Send() (*DeleteDestinationOutput, error) {
+func (r DeleteDestinationRequest) Send(ctx context.Context) (*DeleteDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -355,7 +362,7 @@ func (r DeleteDestinationRequest) Send() (*DeleteDestinationOutput, error) {
 //
 //    // Example sending a request using the DeleteDestinationRequest method.
 //    req := client.DeleteDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -391,7 +398,8 @@ type DeleteLogGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteLogGroup API request.
-func (r DeleteLogGroupRequest) Send() (*DeleteLogGroupOutput, error) {
+func (r DeleteLogGroupRequest) Send(ctx context.Context) (*DeleteLogGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -408,7 +416,7 @@ func (r DeleteLogGroupRequest) Send() (*DeleteLogGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteLogGroupRequest method.
 //    req := client.DeleteLogGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -444,7 +452,8 @@ type DeleteLogStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteLogStream API request.
-func (r DeleteLogStreamRequest) Send() (*DeleteLogStreamOutput, error) {
+func (r DeleteLogStreamRequest) Send(ctx context.Context) (*DeleteLogStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,7 +470,7 @@ func (r DeleteLogStreamRequest) Send() (*DeleteLogStreamOutput, error) {
 //
 //    // Example sending a request using the DeleteLogStreamRequest method.
 //    req := client.DeleteLogStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -497,7 +506,8 @@ type DeleteMetricFilterRequest struct {
 }
 
 // Send marshals and sends the DeleteMetricFilter API request.
-func (r DeleteMetricFilterRequest) Send() (*DeleteMetricFilterOutput, error) {
+func (r DeleteMetricFilterRequest) Send(ctx context.Context) (*DeleteMetricFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -513,7 +523,7 @@ func (r DeleteMetricFilterRequest) Send() (*DeleteMetricFilterOutput, error) {
 //
 //    // Example sending a request using the DeleteMetricFilterRequest method.
 //    req := client.DeleteMetricFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -549,7 +559,8 @@ type DeleteResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
-func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
+func (r DeleteResourcePolicyRequest) Send(ctx context.Context) (*DeleteResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -566,7 +577,7 @@ func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error)
 //
 //    // Example sending a request using the DeleteResourcePolicyRequest method.
 //    req := client.DeleteResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -602,7 +613,8 @@ type DeleteRetentionPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteRetentionPolicy API request.
-func (r DeleteRetentionPolicyRequest) Send() (*DeleteRetentionPolicyOutput, error) {
+func (r DeleteRetentionPolicyRequest) Send(ctx context.Context) (*DeleteRetentionPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -621,7 +633,7 @@ func (r DeleteRetentionPolicyRequest) Send() (*DeleteRetentionPolicyOutput, erro
 //
 //    // Example sending a request using the DeleteRetentionPolicyRequest method.
 //    req := client.DeleteRetentionPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -657,7 +669,8 @@ type DeleteSubscriptionFilterRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscriptionFilter API request.
-func (r DeleteSubscriptionFilterRequest) Send() (*DeleteSubscriptionFilterOutput, error) {
+func (r DeleteSubscriptionFilterRequest) Send(ctx context.Context) (*DeleteSubscriptionFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -673,7 +686,7 @@ func (r DeleteSubscriptionFilterRequest) Send() (*DeleteSubscriptionFilterOutput
 //
 //    // Example sending a request using the DeleteSubscriptionFilterRequest method.
 //    req := client.DeleteSubscriptionFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -709,7 +722,8 @@ type DescribeDestinationsRequest struct {
 }
 
 // Send marshals and sends the DescribeDestinations API request.
-func (r DescribeDestinationsRequest) Send() (*DescribeDestinationsOutput, error) {
+func (r DescribeDestinationsRequest) Send(ctx context.Context) (*DescribeDestinationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -726,7 +740,7 @@ func (r DescribeDestinationsRequest) Send() (*DescribeDestinationsOutput, error)
 //
 //    // Example sending a request using the DescribeDestinationsRequest method.
 //    req := client.DescribeDestinationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -776,7 +790,7 @@ func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinations
 func (p *DescribeDestinationsRequest) Paginate(opts ...aws.Option) DescribeDestinationsPager {
 	return DescribeDestinationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDestinationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -785,6 +799,7 @@ func (p *DescribeDestinationsRequest) Paginate(opts ...aws.Option) DescribeDesti
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -812,7 +827,8 @@ type DescribeExportTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
-func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
+func (r DescribeExportTasksRequest) Send(ctx context.Context) (*DescribeExportTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -829,7 +845,7 @@ func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
 //
 //    // Example sending a request using the DescribeExportTasksRequest method.
 //    req := client.DescribeExportTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -863,7 +879,8 @@ type DescribeLogGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeLogGroups API request.
-func (r DescribeLogGroupsRequest) Send() (*DescribeLogGroupsOutput, error) {
+func (r DescribeLogGroupsRequest) Send(ctx context.Context) (*DescribeLogGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -880,7 +897,7 @@ func (r DescribeLogGroupsRequest) Send() (*DescribeLogGroupsOutput, error) {
 //
 //    // Example sending a request using the DescribeLogGroupsRequest method.
 //    req := client.DescribeLogGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -930,7 +947,7 @@ func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput)
 func (p *DescribeLogGroupsRequest) Paginate(opts ...aws.Option) DescribeLogGroupsPager {
 	return DescribeLogGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLogGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -939,6 +956,7 @@ func (p *DescribeLogGroupsRequest) Paginate(opts ...aws.Option) DescribeLogGroup
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -966,7 +984,8 @@ type DescribeLogStreamsRequest struct {
 }
 
 // Send marshals and sends the DescribeLogStreams API request.
-func (r DescribeLogStreamsRequest) Send() (*DescribeLogStreamsOutput, error) {
+func (r DescribeLogStreamsRequest) Send(ctx context.Context) (*DescribeLogStreamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -987,7 +1006,7 @@ func (r DescribeLogStreamsRequest) Send() (*DescribeLogStreamsOutput, error) {
 //
 //    // Example sending a request using the DescribeLogStreamsRequest method.
 //    req := client.DescribeLogStreamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1037,7 +1056,7 @@ func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInpu
 func (p *DescribeLogStreamsRequest) Paginate(opts ...aws.Option) DescribeLogStreamsPager {
 	return DescribeLogStreamsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLogStreamsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1046,6 +1065,7 @@ func (p *DescribeLogStreamsRequest) Paginate(opts ...aws.Option) DescribeLogStre
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1073,7 +1093,8 @@ type DescribeMetricFiltersRequest struct {
 }
 
 // Send marshals and sends the DescribeMetricFilters API request.
-func (r DescribeMetricFiltersRequest) Send() (*DescribeMetricFiltersOutput, error) {
+func (r DescribeMetricFiltersRequest) Send(ctx context.Context) (*DescribeMetricFiltersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1091,7 +1112,7 @@ func (r DescribeMetricFiltersRequest) Send() (*DescribeMetricFiltersOutput, erro
 //
 //    // Example sending a request using the DescribeMetricFiltersRequest method.
 //    req := client.DescribeMetricFiltersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1141,7 +1162,7 @@ func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFilte
 func (p *DescribeMetricFiltersRequest) Paginate(opts ...aws.Option) DescribeMetricFiltersPager {
 	return DescribeMetricFiltersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeMetricFiltersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1150,6 +1171,7 @@ func (p *DescribeMetricFiltersRequest) Paginate(opts ...aws.Option) DescribeMetr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1167,6 +1189,60 @@ func (p *DescribeMetricFiltersPager) CurrentPage() *DescribeMetricFiltersOutput 
 	return p.Pager.CurrentPage().(*DescribeMetricFiltersOutput)
 }
 
+const opDescribeQueries = "DescribeQueries"
+
+// DescribeQueriesRequest is a API request type for the DescribeQueries API operation.
+type DescribeQueriesRequest struct {
+	*aws.Request
+	Input *DescribeQueriesInput
+	Copy  func(*DescribeQueriesInput) DescribeQueriesRequest
+}
+
+// Send marshals and sends the DescribeQueries API request.
+func (r DescribeQueriesRequest) Send(ctx context.Context) (*DescribeQueriesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeQueriesOutput), nil
+}
+
+// DescribeQueriesRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
+//
+// Returns a list of CloudWatch Logs Insights queries that are scheduled, executing,
+// or have been executed recently in this account. You can request all queries,
+// or limit it to queries of a specific log group or queries with a certain
+// status.
+//
+//    // Example sending a request using the DescribeQueriesRequest method.
+//    req := client.DescribeQueriesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueries
+func (c *CloudWatchLogs) DescribeQueriesRequest(input *DescribeQueriesInput) DescribeQueriesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeQueries,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeQueriesInput{}
+	}
+
+	output := &DescribeQueriesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeQueriesRequest{Request: req, Input: input, Copy: c.DescribeQueriesRequest}
+}
+
 const opDescribeResourcePolicies = "DescribeResourcePolicies"
 
 // DescribeResourcePoliciesRequest is a API request type for the DescribeResourcePolicies API operation.
@@ -1177,7 +1253,8 @@ type DescribeResourcePoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeResourcePolicies API request.
-func (r DescribeResourcePoliciesRequest) Send() (*DescribeResourcePoliciesOutput, error) {
+func (r DescribeResourcePoliciesRequest) Send(ctx context.Context) (*DescribeResourcePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1193,7 +1270,7 @@ func (r DescribeResourcePoliciesRequest) Send() (*DescribeResourcePoliciesOutput
 //
 //    // Example sending a request using the DescribeResourcePoliciesRequest method.
 //    req := client.DescribeResourcePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1227,7 +1304,8 @@ type DescribeSubscriptionFiltersRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscriptionFilters API request.
-func (r DescribeSubscriptionFiltersRequest) Send() (*DescribeSubscriptionFiltersOutput, error) {
+func (r DescribeSubscriptionFiltersRequest) Send(ctx context.Context) (*DescribeSubscriptionFiltersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1245,7 +1323,7 @@ func (r DescribeSubscriptionFiltersRequest) Send() (*DescribeSubscriptionFilters
 //
 //    // Example sending a request using the DescribeSubscriptionFiltersRequest method.
 //    req := client.DescribeSubscriptionFiltersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1295,7 +1373,7 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubsc
 func (p *DescribeSubscriptionFiltersRequest) Paginate(opts ...aws.Option) DescribeSubscriptionFiltersPager {
 	return DescribeSubscriptionFiltersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeSubscriptionFiltersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1304,6 +1382,7 @@ func (p *DescribeSubscriptionFiltersRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1331,7 +1410,8 @@ type DisassociateKmsKeyRequest struct {
 }
 
 // Send marshals and sends the DisassociateKmsKey API request.
-func (r DisassociateKmsKeyRequest) Send() (*DisassociateKmsKeyOutput, error) {
+func (r DisassociateKmsKeyRequest) Send(ctx context.Context) (*DisassociateKmsKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1355,7 +1435,7 @@ func (r DisassociateKmsKeyRequest) Send() (*DisassociateKmsKeyOutput, error) {
 //
 //    // Example sending a request using the DisassociateKmsKeyRequest method.
 //    req := client.DisassociateKmsKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1391,7 +1471,8 @@ type FilterLogEventsRequest struct {
 }
 
 // Send marshals and sends the FilterLogEvents API request.
-func (r FilterLogEventsRequest) Send() (*FilterLogEventsOutput, error) {
+func (r FilterLogEventsRequest) Send(ctx context.Context) (*FilterLogEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1415,7 +1496,7 @@ func (r FilterLogEventsRequest) Send() (*FilterLogEventsOutput, error) {
 //
 //    // Example sending a request using the FilterLogEventsRequest method.
 //    req := client.FilterLogEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1465,7 +1546,7 @@ func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) Fil
 func (p *FilterLogEventsRequest) Paginate(opts ...aws.Option) FilterLogEventsPager {
 	return FilterLogEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *FilterLogEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1474,6 +1555,7 @@ func (p *FilterLogEventsRequest) Paginate(opts ...aws.Option) FilterLogEventsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1501,7 +1583,8 @@ type GetLogEventsRequest struct {
 }
 
 // Send marshals and sends the GetLogEvents API request.
-func (r GetLogEventsRequest) Send() (*GetLogEventsOutput, error) {
+func (r GetLogEventsRequest) Send(ctx context.Context) (*GetLogEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1522,7 +1605,7 @@ func (r GetLogEventsRequest) Send() (*GetLogEventsOutput, error) {
 //
 //    // Example sending a request using the GetLogEventsRequest method.
 //    req := client.GetLogEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1572,7 +1655,7 @@ func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) GetLogEve
 func (p *GetLogEventsRequest) Paginate(opts ...aws.Option) GetLogEventsPager {
 	return GetLogEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetLogEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1581,6 +1664,7 @@ func (p *GetLogEventsRequest) Paginate(opts ...aws.Option) GetLogEventsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1598,6 +1682,176 @@ func (p *GetLogEventsPager) CurrentPage() *GetLogEventsOutput {
 	return p.Pager.CurrentPage().(*GetLogEventsOutput)
 }
 
+const opGetLogGroupFields = "GetLogGroupFields"
+
+// GetLogGroupFieldsRequest is a API request type for the GetLogGroupFields API operation.
+type GetLogGroupFieldsRequest struct {
+	*aws.Request
+	Input *GetLogGroupFieldsInput
+	Copy  func(*GetLogGroupFieldsInput) GetLogGroupFieldsRequest
+}
+
+// Send marshals and sends the GetLogGroupFields API request.
+func (r GetLogGroupFieldsRequest) Send(ctx context.Context) (*GetLogGroupFieldsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLogGroupFieldsOutput), nil
+}
+
+// GetLogGroupFieldsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
+//
+// Returns a list of the fields that are included in log events in the specified
+// log group, along with the percentage of log events that contain each field.
+// The search is limited to a time period that you specify.
+//
+// In the results, fields that start with @ are fields generated by CloudWatch
+// Logs. For example, @timestamp is the timestamp of each log event.
+//
+// The response results are sorted by the frequency percentage, starting with
+// the highest percentage.
+//
+//    // Example sending a request using the GetLogGroupFieldsRequest method.
+//    req := client.GetLogGroupFieldsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFields
+func (c *CloudWatchLogs) GetLogGroupFieldsRequest(input *GetLogGroupFieldsInput) GetLogGroupFieldsRequest {
+	op := &aws.Operation{
+		Name:       opGetLogGroupFields,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetLogGroupFieldsInput{}
+	}
+
+	output := &GetLogGroupFieldsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetLogGroupFieldsRequest{Request: req, Input: input, Copy: c.GetLogGroupFieldsRequest}
+}
+
+const opGetLogRecord = "GetLogRecord"
+
+// GetLogRecordRequest is a API request type for the GetLogRecord API operation.
+type GetLogRecordRequest struct {
+	*aws.Request
+	Input *GetLogRecordInput
+	Copy  func(*GetLogRecordInput) GetLogRecordRequest
+}
+
+// Send marshals and sends the GetLogRecord API request.
+func (r GetLogRecordRequest) Send(ctx context.Context) (*GetLogRecordOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLogRecordOutput), nil
+}
+
+// GetLogRecordRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
+//
+// Retrieves all the fields and values of a single log event. All fields are
+// retrieved, even if the original query that produced the logRecordPointer
+// retrieved only a subset of fields. Fields are returned as field name/field
+// value pairs.
+//
+// Additionally, the entire unparsed log event is returned within @message.
+//
+//    // Example sending a request using the GetLogRecordRequest method.
+//    req := client.GetLogRecordRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecord
+func (c *CloudWatchLogs) GetLogRecordRequest(input *GetLogRecordInput) GetLogRecordRequest {
+	op := &aws.Operation{
+		Name:       opGetLogRecord,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetLogRecordInput{}
+	}
+
+	output := &GetLogRecordOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetLogRecordRequest{Request: req, Input: input, Copy: c.GetLogRecordRequest}
+}
+
+const opGetQueryResults = "GetQueryResults"
+
+// GetQueryResultsRequest is a API request type for the GetQueryResults API operation.
+type GetQueryResultsRequest struct {
+	*aws.Request
+	Input *GetQueryResultsInput
+	Copy  func(*GetQueryResultsInput) GetQueryResultsRequest
+}
+
+// Send marshals and sends the GetQueryResults API request.
+func (r GetQueryResultsRequest) Send(ctx context.Context) (*GetQueryResultsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQueryResultsOutput), nil
+}
+
+// GetQueryResultsRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
+//
+// Returns the results from the specified query. If the query is in progress,
+// partial results of that current execution are returned. Only the fields requested
+// in the query are returned.
+//
+// GetQueryResults does not start a query execution. To run a query, use .
+//
+//    // Example sending a request using the GetQueryResultsRequest method.
+//    req := client.GetQueryResultsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResults
+func (c *CloudWatchLogs) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryResultsRequest {
+	op := &aws.Operation{
+		Name:       opGetQueryResults,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetQueryResultsInput{}
+	}
+
+	output := &GetQueryResultsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetQueryResultsRequest{Request: req, Input: input, Copy: c.GetQueryResultsRequest}
+}
+
 const opListTagsLogGroup = "ListTagsLogGroup"
 
 // ListTagsLogGroupRequest is a API request type for the ListTagsLogGroup API operation.
@@ -1608,7 +1862,8 @@ type ListTagsLogGroupRequest struct {
 }
 
 // Send marshals and sends the ListTagsLogGroup API request.
-func (r ListTagsLogGroupRequest) Send() (*ListTagsLogGroupOutput, error) {
+func (r ListTagsLogGroupRequest) Send(ctx context.Context) (*ListTagsLogGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1624,7 +1879,7 @@ func (r ListTagsLogGroupRequest) Send() (*ListTagsLogGroupOutput, error) {
 //
 //    // Example sending a request using the ListTagsLogGroupRequest method.
 //    req := client.ListTagsLogGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1658,7 +1913,8 @@ type PutDestinationRequest struct {
 }
 
 // Send marshals and sends the PutDestination API request.
-func (r PutDestinationRequest) Send() (*PutDestinationOutput, error) {
+func (r PutDestinationRequest) Send(ctx context.Context) (*PutDestinationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1684,7 +1940,7 @@ func (r PutDestinationRequest) Send() (*PutDestinationOutput, error) {
 //
 //    // Example sending a request using the PutDestinationRequest method.
 //    req := client.PutDestinationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1718,7 +1974,8 @@ type PutDestinationPolicyRequest struct {
 }
 
 // Send marshals and sends the PutDestinationPolicy API request.
-func (r PutDestinationPolicyRequest) Send() (*PutDestinationPolicyOutput, error) {
+func (r PutDestinationPolicyRequest) Send(ctx context.Context) (*PutDestinationPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1737,7 +1994,7 @@ func (r PutDestinationPolicyRequest) Send() (*PutDestinationPolicyOutput, error)
 //
 //    // Example sending a request using the PutDestinationPolicyRequest method.
 //    req := client.PutDestinationPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1773,7 +2030,8 @@ type PutLogEventsRequest struct {
 }
 
 // Send marshals and sends the PutLogEvents API request.
-func (r PutLogEventsRequest) Send() (*PutLogEventsOutput, error) {
+func (r PutLogEventsRequest) Send(ctx context.Context) (*PutLogEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1806,7 +2064,7 @@ func (r PutLogEventsRequest) Send() (*PutLogEventsOutput, error) {
 //    retention period of the log group.
 //
 //    * The log events in the batch must be in chronological ordered by their
-//    time stamp. The time stamp is the time the event occurred, expressed as
+//    timestamp. The timestamp is the time the event occurred, expressed as
 //    the number of milliseconds after Jan 1, 1970 00:00:00 UTC. (In AWS Tools
 //    for PowerShell and the AWS SDK for .NET, the timestamp is specified in
 //    .NET format: yyyy-mm-ddThh:mm:ss. For example, 2017-09-15T13:45:30.)
@@ -1821,7 +2079,7 @@ func (r PutLogEventsRequest) Send() (*PutLogEventsOutput, error) {
 //
 //    // Example sending a request using the PutLogEventsRequest method.
 //    req := client.PutLogEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1855,7 +2113,8 @@ type PutMetricFilterRequest struct {
 }
 
 // Send marshals and sends the PutMetricFilter API request.
-func (r PutMetricFilterRequest) Send() (*PutMetricFilterOutput, error) {
+func (r PutMetricFilterRequest) Send(ctx context.Context) (*PutMetricFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1876,7 +2135,7 @@ func (r PutMetricFilterRequest) Send() (*PutMetricFilterOutput, error) {
 //
 //    // Example sending a request using the PutMetricFilterRequest method.
 //    req := client.PutMetricFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1912,7 +2171,8 @@ type PutResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the PutResourcePolicy API request.
-func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
+func (r PutResourcePolicyRequest) Send(ctx context.Context) (*PutResourcePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1930,7 +2190,7 @@ func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
 //
 //    // Example sending a request using the PutResourcePolicyRequest method.
 //    req := client.PutResourcePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1964,7 +2224,8 @@ type PutRetentionPolicyRequest struct {
 }
 
 // Send marshals and sends the PutRetentionPolicy API request.
-func (r PutRetentionPolicyRequest) Send() (*PutRetentionPolicyOutput, error) {
+func (r PutRetentionPolicyRequest) Send(ctx context.Context) (*PutRetentionPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1982,7 +2243,7 @@ func (r PutRetentionPolicyRequest) Send() (*PutRetentionPolicyOutput, error) {
 //
 //    // Example sending a request using the PutRetentionPolicyRequest method.
 //    req := client.PutRetentionPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2018,7 +2279,8 @@ type PutSubscriptionFilterRequest struct {
 }
 
 // Send marshals and sends the PutSubscriptionFilter API request.
-func (r PutSubscriptionFilterRequest) Send() (*PutSubscriptionFilterOutput, error) {
+func (r PutSubscriptionFilterRequest) Send(ctx context.Context) (*PutSubscriptionFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2054,7 +2316,7 @@ func (r PutSubscriptionFilterRequest) Send() (*PutSubscriptionFilterOutput, erro
 //
 //    // Example sending a request using the PutSubscriptionFilterRequest method.
 //    req := client.PutSubscriptionFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2080,6 +2342,113 @@ func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilt
 	return PutSubscriptionFilterRequest{Request: req, Input: input, Copy: c.PutSubscriptionFilterRequest}
 }
 
+const opStartQuery = "StartQuery"
+
+// StartQueryRequest is a API request type for the StartQuery API operation.
+type StartQueryRequest struct {
+	*aws.Request
+	Input *StartQueryInput
+	Copy  func(*StartQueryInput) StartQueryRequest
+}
+
+// Send marshals and sends the StartQuery API request.
+func (r StartQueryRequest) Send(ctx context.Context) (*StartQueryOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartQueryOutput), nil
+}
+
+// StartQueryRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
+//
+// Schedules a query of a log group using CloudWatch Logs Insights. You specify
+// the log group to query, the query string to use, and the time to query.
+//
+// For more information, see CloudWatch Logs Insights Query Syntax (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
+//
+//    // Example sending a request using the StartQueryRequest method.
+//    req := client.StartQueryRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQuery
+func (c *CloudWatchLogs) StartQueryRequest(input *StartQueryInput) StartQueryRequest {
+	op := &aws.Operation{
+		Name:       opStartQuery,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartQueryInput{}
+	}
+
+	output := &StartQueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartQueryRequest{Request: req, Input: input, Copy: c.StartQueryRequest}
+}
+
+const opStopQuery = "StopQuery"
+
+// StopQueryRequest is a API request type for the StopQuery API operation.
+type StopQueryRequest struct {
+	*aws.Request
+	Input *StopQueryInput
+	Copy  func(*StopQueryInput) StopQueryRequest
+}
+
+// Send marshals and sends the StopQuery API request.
+func (r StopQueryRequest) Send(ctx context.Context) (*StopQueryOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopQueryOutput), nil
+}
+
+// StopQueryRequest returns a request value for making API operation for
+// Amazon CloudWatch Logs.
+//
+// Stops a CloudWatch Logs Insights query that is in progress. If the query
+// has already ended, the operation returns an error indicating that the specified
+// query is not running.
+//
+//    // Example sending a request using the StopQueryRequest method.
+//    req := client.StopQueryRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQuery
+func (c *CloudWatchLogs) StopQueryRequest(input *StopQueryInput) StopQueryRequest {
+	op := &aws.Operation{
+		Name:       opStopQuery,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopQueryInput{}
+	}
+
+	output := &StopQueryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopQueryRequest{Request: req, Input: input, Copy: c.StopQueryRequest}
+}
+
 const opTagLogGroup = "TagLogGroup"
 
 // TagLogGroupRequest is a API request type for the TagLogGroup API operation.
@@ -2090,7 +2459,8 @@ type TagLogGroupRequest struct {
 }
 
 // Send marshals and sends the TagLogGroup API request.
-func (r TagLogGroupRequest) Send() (*TagLogGroupOutput, error) {
+func (r TagLogGroupRequest) Send(ctx context.Context) (*TagLogGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2113,7 +2483,7 @@ func (r TagLogGroupRequest) Send() (*TagLogGroupOutput, error) {
 //
 //    // Example sending a request using the TagLogGroupRequest method.
 //    req := client.TagLogGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2149,7 +2519,8 @@ type TestMetricFilterRequest struct {
 }
 
 // Send marshals and sends the TestMetricFilter API request.
-func (r TestMetricFilterRequest) Send() (*TestMetricFilterOutput, error) {
+func (r TestMetricFilterRequest) Send(ctx context.Context) (*TestMetricFilterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2167,7 +2538,7 @@ func (r TestMetricFilterRequest) Send() (*TestMetricFilterOutput, error) {
 //
 //    // Example sending a request using the TestMetricFilterRequest method.
 //    req := client.TestMetricFilterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2201,7 +2572,8 @@ type UntagLogGroupRequest struct {
 }
 
 // Send marshals and sends the UntagLogGroup API request.
-func (r UntagLogGroupRequest) Send() (*UntagLogGroupOutput, error) {
+func (r UntagLogGroupRequest) Send(ctx context.Context) (*UntagLogGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2220,7 +2592,7 @@ func (r UntagLogGroupRequest) Send() (*UntagLogGroupOutput, error) {
 //
 //    // Example sending a request using the UntagLogGroupRequest method.
 //    req := client.UntagLogGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2390,7 +2762,7 @@ type CreateExportTaskInput struct {
 	DestinationPrefix *string `locationName:"destinationPrefix" type:"string"`
 
 	// The start time of the range for the request, expressed as the number of milliseconds
-	// after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than this
+	// after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this
 	// time are not exported.
 	//
 	// From is a required field
@@ -2409,8 +2781,8 @@ type CreateExportTaskInput struct {
 	TaskName *string `locationName:"taskName" min:"1" type:"string"`
 
 	// The end time of the range for the request, expressed as the number of milliseconds
-	// after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this
-	// time are not exported.
+	// after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time
+	// are not exported.
 	//
 	// To is a required field
 	To *int64 `locationName:"to" type:"long" required:"true"`
@@ -3484,6 +3856,83 @@ func (s DescribeMetricFiltersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueriesRequest
+type DescribeQueriesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Limits the returned queries to only those for the specified log group.
+	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string"`
+
+	// Limits the number of returned queries to the specified number.
+	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
+	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
+
+	// Limits the returned queries to only those that have the specified status.
+	// Valid values are Cancelled, Complete, Failed, Running, and Scheduled.
+	Status QueryStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DescribeQueriesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeQueriesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeQueriesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeQueriesInput"}
+	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueriesResponse
+type DescribeQueriesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token for the next set of items to return. The token expires after 24
+	// hours.
+	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
+
+	// The list of queries that match the request.
+	Queries []QueryInfo `locationName:"queries" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeQueriesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeQueriesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeQueriesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePoliciesRequest
 type DescribeResourcePoliciesInput struct {
 	_ struct{} `type:"structure"`
@@ -3749,7 +4198,7 @@ type ExportTask struct {
 	ExecutionInfo *ExportTaskExecutionInfo `locationName:"executionInfo" type:"structure"`
 
 	// The start time, expressed as the number of milliseconds after Jan 1, 1970
-	// 00:00:00 UTC. Events with a time stamp before this time are not exported.
+	// 00:00:00 UTC. Events with a timestamp before this time are not exported.
 	From *int64 `locationName:"from" type:"long"`
 
 	// The name of the log group from which logs data was exported.
@@ -3765,7 +4214,7 @@ type ExportTask struct {
 	TaskName *string `locationName:"taskName" min:"1" type:"string"`
 
 	// The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00
-	// UTC. Events with a time stamp later than this time are not exported.
+	// UTC. Events with a timestamp later than this time are not exported.
 	To *int64 `locationName:"to" type:"long"`
 }
 
@@ -3830,7 +4279,7 @@ type FilterLogEventsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The end of the time range, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than this time are
+	// Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are
 	// not returned.
 	EndTime *int64 `locationName:"endTime" type:"long"`
 
@@ -3865,9 +4314,8 @@ type FilterLogEventsInput struct {
 
 	// Filters the results to only logs from the log streams in this list.
 	//
-	// If you specify a value for both logStreamNamePrefix and logStreamNames, but
-	// the value for logStreamNamePrefix does not match any log stream names specified
-	// in logStreamNames, the action returns an InvalidParameterException error.
+	// If you specify a value for both logStreamNamePrefix and logStreamNames, the
+	// action returns an InvalidParameterException error.
 	LogStreamNames []string `locationName:"logStreamNames" min:"1" type:"list"`
 
 	// The token for the next set of events to return. (You received this token
@@ -3875,7 +4323,7 @@ type FilterLogEventsInput struct {
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
 	// The start of the time range, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this time are not
+	// Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not
 	// returned.
 	StartTime *int64 `locationName:"startTime" type:"long"`
 }
@@ -3964,7 +4412,7 @@ type FilteredLogEvent struct {
 	// after Jan 1, 1970 00:00:00 UTC.
 	IngestionTime *int64 `locationName:"ingestionTime" type:"long"`
 
-	// The name of the log stream this event belongs to.
+	// The name of the log stream to which this event belongs.
 	LogStreamName *string `locationName:"logStreamName" min:"1" type:"string"`
 
 	// The data contained in the log event.
@@ -3990,7 +4438,7 @@ type GetLogEventsInput struct {
 	_ struct{} `type:"structure"`
 
 	// The end of the time range, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to or later than
+	// Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or later than
 	// this time are not included.
 	EndTime *int64 `locationName:"endTime" type:"long"`
 
@@ -4019,9 +4467,9 @@ type GetLogEventsInput struct {
 	StartFromHead *bool `locationName:"startFromHead" type:"boolean"`
 
 	// The start of the time range, expressed as the number of milliseconds after
-	// Jan 1, 1970 00:00:00 UTC. Events with a time stamp equal to this time or
-	// later than this time are included. Events with a time stamp earlier than
-	// this time are not included.
+	// Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this time or later
+	// than this time are included. Events with a timestamp earlier than this time
+	// are not included.
 	StartTime *int64 `locationName:"startTime" type:"long"`
 }
 
@@ -4097,6 +4545,213 @@ func (s GetLogEventsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetLogEventsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFieldsRequest
+type GetLogGroupFieldsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the log group to search.
+	//
+	// LogGroupName is a required field
+	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
+
+	// The time to set as the center of the query. If you specify time, the 8 minutes
+	// before and 8 minutes after this time are searched. If you omit time, the
+	// past 15 minutes are queried.
+	//
+	// The time value is specified as epoch time, the number of seconds since January
+	// 1, 1970, 00:00:00 UTC.
+	Time *int64 `locationName:"time" type:"long"`
+}
+
+// String returns the string representation
+func (s GetLogGroupFieldsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLogGroupFieldsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetLogGroupFieldsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetLogGroupFieldsInput"}
+
+	if s.LogGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
+	}
+	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFieldsResponse
+type GetLogGroupFieldsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The array of fields found in the query. Each object in the array contains
+	// the name of the field, along with the percentage of time it appeared in the
+	// log events that were queried.
+	LogGroupFields []LogGroupField `locationName:"logGroupFields" type:"list"`
+}
+
+// String returns the string representation
+func (s GetLogGroupFieldsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLogGroupFieldsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLogGroupFieldsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecordRequest
+type GetLogRecordInput struct {
+	_ struct{} `type:"structure"`
+
+	// The pointer corresponding to the log event record you want to retrieve. You
+	// get this from the response of a GetQueryResults operation. In that response,
+	// the value of the @ptr field for a log event is the value to use as logRecordPointer
+	// to retrieve that complete log event record.
+	//
+	// LogRecordPointer is a required field
+	LogRecordPointer *string `locationName:"logRecordPointer" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetLogRecordInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLogRecordInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetLogRecordInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetLogRecordInput"}
+
+	if s.LogRecordPointer == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogRecordPointer"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecordResponse
+type GetLogRecordOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The requested log event, as a JSON string.
+	LogRecord map[string]string `locationName:"logRecord" type:"map"`
+}
+
+// String returns the string representation
+func (s GetLogRecordOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetLogRecordOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetLogRecordOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsRequest
+type GetQueryResultsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID number of the query.
+	//
+	// QueryId is a required field
+	QueryId *string `locationName:"queryId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetQueryResultsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetQueryResultsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetQueryResultsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetQueryResultsInput"}
+
+	if s.QueryId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse
+type GetQueryResultsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The log events that matched the query criteria during the most recent time
+	// it ran.
+	//
+	// The results value is an array of arrays. Each log event is one object in
+	// the top-level array. Each of these log event objects is an array of field/value
+	// pairs.
+	Results [][]ResultField `locationName:"results" type:"list"`
+
+	// Includes the number of log events scanned by the query, the number of log
+	// events that matched the query criteria, and the total number of bytes in
+	// the log events that were scanned.
+	Statistics *QueryStatistics `locationName:"statistics" type:"structure"`
+
+	// The status of the most recent running of the query. Possible values are Cancelled,
+	// Complete, Failed, Running, Scheduled, and Unknown.
+	Status QueryStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetQueryResultsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetQueryResultsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetQueryResultsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4251,6 +4906,29 @@ func (s LogGroup) GoString() string {
 	return s.String()
 }
 
+// The fields contained in log events found by a GetLogGroupFields operation,
+// along with the percentage of queried log events in which each field appears.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroupField
+type LogGroupField struct {
+	_ struct{} `type:"structure"`
+
+	// The name of a log field.
+	Name *string `locationName:"name" type:"string"`
+
+	// The percentage of log events queried that contained the field.
+	Percent *int64 `locationName:"percent" type:"integer"`
+}
+
+// String returns the string representation
+func (s LogGroupField) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogGroupField) GoString() string {
+	return s.String()
+}
+
 // Represents a log stream, which is a sequence of log events from a single
 // emitter of logs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream
@@ -4268,11 +4946,11 @@ type LogStream struct {
 	// Jan 1, 1970 00:00:00 UTC.
 	FirstEventTimestamp *int64 `locationName:"firstEventTimestamp" type:"long"`
 
-	// the time of the most recent log event in the log stream in CloudWatch Logs.
+	// The time of the most recent log event in the log stream in CloudWatch Logs.
 	// This number is expressed as the number of milliseconds after Jan 1, 1970
-	// 00:00:00 UTC. lastEventTime updates on an eventual consistency basis. It
-	// typically updates in less than an hour from ingestion, but may take longer
-	// in some rare situations.
+	// 00:00:00 UTC. The lastEventTime value updates on an eventual consistency
+	// basis. It typically updates in less than an hour from ingestion, but may
+	// take longer in some rare situations.
 	LastEventTimestamp *int64 `locationName:"lastEventTimestamp" type:"long"`
 
 	// The ingestion time, expressed as the number of milliseconds after Jan 1,
@@ -4314,7 +4992,7 @@ type MetricFilter struct {
 	FilterName *string `locationName:"filterName" min:"1" type:"string"`
 
 	// A symbolic description of how CloudWatch Logs should interpret the data in
-	// each log event. For example, a log event may contain time stamps, IP addresses,
+	// each log event. For example, a log event may contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for
 	// in the log event message.
 	FilterPattern *string `locationName:"filterPattern" type:"string"`
@@ -4361,7 +5039,7 @@ func (s MetricFilterMatchRecord) GoString() string {
 	return s.String()
 }
 
-// Indicates how to transform ingested log events in to metric data in a CloudWatch
+// Indicates how to transform ingested log eventsto metric data in a CloudWatch
 // metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricTransformation
 type MetricTransformation struct {
@@ -5072,6 +5750,110 @@ func (s PutSubscriptionFilterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Reserved.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryCompileError
+type QueryCompileError struct {
+	_ struct{} `type:"structure"`
+
+	// Reserved.
+	Location *QueryCompileErrorLocation `locationName:"location" type:"structure"`
+
+	// Reserved.
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s QueryCompileError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryCompileError) GoString() string {
+	return s.String()
+}
+
+// Reserved.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryCompileErrorLocation
+type QueryCompileErrorLocation struct {
+	_ struct{} `type:"structure"`
+
+	// Reserved.
+	EndCharOffset *int64 `locationName:"endCharOffset" type:"integer"`
+
+	// Reserved.
+	StartCharOffset *int64 `locationName:"startCharOffset" type:"integer"`
+}
+
+// String returns the string representation
+func (s QueryCompileErrorLocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryCompileErrorLocation) GoString() string {
+	return s.String()
+}
+
+// Information about one CloudWatch Logs Insights query that matches the request
+// in a DescribeQueries operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryInfo
+type QueryInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time that this query was created.
+	CreateTime *int64 `locationName:"createTime" type:"long"`
+
+	// The name of the log group scanned by this query.
+	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string"`
+
+	// The unique ID number of this query.
+	QueryId *string `locationName:"queryId" type:"string"`
+
+	// The query string used in this query.
+	QueryString *string `locationName:"queryString" type:"string"`
+
+	// The status of this query. Possible values are Cancelled, Complete, Failed,
+	// Running, Scheduled, and Unknown.
+	Status QueryStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s QueryInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryInfo) GoString() string {
+	return s.String()
+}
+
+// Contains the number of log events scanned by the query, the number of log
+// events that matched the query criteria, and the total number of bytes in
+// the log events that were scanned.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryStatistics
+type QueryStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The total number of bytes in the log events scanned during the query.
+	BytesScanned *float64 `locationName:"bytesScanned" type:"double"`
+
+	// The number of log events that matched the query string.
+	RecordsMatched *float64 `locationName:"recordsMatched" type:"double"`
+
+	// The total number of log events scanned during the query.
+	RecordsScanned *float64 `locationName:"recordsScanned" type:"double"`
+}
+
+// String returns the string representation
+func (s QueryStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryStatistics) GoString() string {
+	return s.String()
+}
+
 // Represents the rejected events.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/RejectedLogEventsInfo
 type RejectedLogEventsInfo struct {
@@ -5103,7 +5885,7 @@ func (s RejectedLogEventsInfo) GoString() string {
 type ResourcePolicy struct {
 	_ struct{} `type:"structure"`
 
-	// Time stamp showing when this policy was last updated, expressed as the number
+	// Timestamp showing when this policy was last updated, expressed as the number
 	// of milliseconds after Jan 1, 1970 00:00:00 UTC.
 	LastUpdatedTime *int64 `locationName:"lastUpdatedTime" type:"long"`
 
@@ -5121,6 +5903,29 @@ func (s ResourcePolicy) String() string {
 
 // GoString returns the string representation
 func (s ResourcePolicy) GoString() string {
+	return s.String()
+}
+
+// Contains one field from one log event returned by a CloudWatch Logs Insights
+// query, along with the value of that field.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResultField
+type ResultField struct {
+	_ struct{} `type:"structure"`
+
+	// The log event field.
+	Field *string `locationName:"field" type:"string"`
+
+	// The value of this field.
+	Value *string `locationName:"value" type:"string"`
+}
+
+// String returns the string representation
+func (s ResultField) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResultField) GoString() string {
 	return s.String()
 }
 
@@ -5146,6 +5951,165 @@ func (s SearchedLogStream) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryRequest
+type StartQueryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The time to end this query, if it is still running. Specified as epoch time,
+	// the number of seconds since January 1, 1970, 00:00:00 UTC.
+	//
+	// EndTime is a required field
+	EndTime *int64 `locationName:"endTime" type:"long" required:"true"`
+
+	// The maximum number of log events to return in the query. If the query string
+	// uses the fields command, only the specified fields and their values are returned.
+	Limit *int64 `locationName:"limit" min:"1" type:"integer"`
+
+	// The log group on which to perform the query.
+	//
+	// LogGroupName is a required field
+	LogGroupName *string `locationName:"logGroupName" min:"1" type:"string" required:"true"`
+
+	// The query string to use. For more information, see CloudWatch Logs Insights
+	// Query Syntax (http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
+	//
+	// QueryString is a required field
+	QueryString *string `locationName:"queryString" type:"string" required:"true"`
+
+	// The time to start the query. Specified as epoch time, the number of seconds
+	// since January 1, 1970, 00:00:00 UTC.
+	//
+	// StartTime is a required field
+	StartTime *int64 `locationName:"startTime" type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s StartQueryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartQueryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartQueryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartQueryInput"}
+
+	if s.EndTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+
+	if s.LogGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
+	}
+	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
+	}
+
+	if s.QueryString == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
+	}
+
+	if s.StartTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryResponse
+type StartQueryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The unique ID of the query.
+	QueryId *string `locationName:"queryId" type:"string"`
+}
+
+// String returns the string representation
+func (s StartQueryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartQueryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartQueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQueryRequest
+type StopQueryInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID number of the query to stop. If necessary, you can use DescribeQueries
+	// to find this ID number.
+	//
+	// QueryId is a required field
+	QueryId *string `locationName:"queryId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopQueryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopQueryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopQueryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopQueryInput"}
+
+	if s.QueryId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQueryResponse
+type StopQueryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// This is true if the query was stopped by the StopQuery operation.
+	Success *bool `locationName:"success" type:"boolean"`
+}
+
+// String returns the string representation
+func (s StopQueryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopQueryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopQueryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents a subscription filter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter
 type SubscriptionFilter struct {
@@ -5166,7 +6130,7 @@ type SubscriptionFilter struct {
 	FilterName *string `locationName:"filterName" min:"1" type:"string"`
 
 	// A symbolic description of how CloudWatch Logs should interpret the data in
-	// each log event. For example, a log event may contain time stamps, IP addresses,
+	// each log event. For example, a log event may contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for
 	// in the log event message.
 	FilterPattern *string `locationName:"filterPattern" type:"string"`
@@ -5263,7 +6227,7 @@ type TestMetricFilterInput struct {
 	_ struct{} `type:"structure"`
 
 	// A symbolic description of how CloudWatch Logs should interpret the data in
-	// each log event. For example, a log event may contain time stamps, IP addresses,
+	// each log event. For example, a log event may contain timestamps, IP addresses,
 	// strings, and so on. You use the filter pattern to specify what to look for
 	// in the log event message.
 	//
@@ -5456,6 +6420,26 @@ func (enum OrderBy) MarshalValue() (string, error) {
 }
 
 func (enum OrderBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type QueryStatus string
+
+// Enum values for QueryStatus
+const (
+	QueryStatusScheduled QueryStatus = "Scheduled"
+	QueryStatusRunning   QueryStatus = "Running"
+	QueryStatusComplete  QueryStatus = "Complete"
+	QueryStatusFailed    QueryStatus = "Failed"
+	QueryStatusCancelled QueryStatus = "Cancelled"
+)
+
+func (enum QueryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

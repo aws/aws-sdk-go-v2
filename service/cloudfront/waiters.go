@@ -3,6 +3,7 @@
 package cloudfront
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // GetDistribution to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFront) WaitUntilDistributionDeployed(input *GetDistributionInput) error {
-	return c.WaitUntilDistributionDeployedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDistributionDeployedWithContext is an extended version of WaitUntilDistributionDeployed.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) WaitUntilDistributionDeployedWithContext(ctx aws.Context, input *GetDistributionInput, opts ...aws.WaiterOption) error {
+func (c *CloudFront) WaitUntilDistributionDeployed(ctx context.Context, input *GetDistributionInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDistributionDeployed",
 		MaxAttempts: 25,
@@ -51,26 +45,19 @@ func (c *CloudFront) WaitUntilDistributionDeployedWithContext(ctx aws.Context, i
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilInvalidationCompleted uses the CloudFront API operation
 // GetInvalidation to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFront) WaitUntilInvalidationCompleted(input *GetInvalidationInput) error {
-	return c.WaitUntilInvalidationCompletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilInvalidationCompletedWithContext is an extended version of WaitUntilInvalidationCompleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) WaitUntilInvalidationCompletedWithContext(ctx aws.Context, input *GetInvalidationInput, opts ...aws.WaiterOption) error {
+func (c *CloudFront) WaitUntilInvalidationCompleted(ctx context.Context, input *GetInvalidationInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilInvalidationCompleted",
 		MaxAttempts: 30,
@@ -97,26 +84,19 @@ func (c *CloudFront) WaitUntilInvalidationCompletedWithContext(ctx aws.Context, 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilStreamingDistributionDeployed uses the CloudFront API operation
 // GetStreamingDistribution to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *CloudFront) WaitUntilStreamingDistributionDeployed(input *GetStreamingDistributionInput) error {
-	return c.WaitUntilStreamingDistributionDeployedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilStreamingDistributionDeployedWithContext is an extended version of WaitUntilStreamingDistributionDeployed.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) WaitUntilStreamingDistributionDeployedWithContext(ctx aws.Context, input *GetStreamingDistributionInput, opts ...aws.WaiterOption) error {
+func (c *CloudFront) WaitUntilStreamingDistributionDeployed(ctx context.Context, input *GetStreamingDistributionInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilStreamingDistributionDeployed",
 		MaxAttempts: 25,
@@ -143,5 +123,5 @@ func (c *CloudFront) WaitUntilStreamingDistributionDeployedWithContext(ctx aws.C
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

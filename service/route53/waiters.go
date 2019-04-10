@@ -3,6 +3,7 @@
 package route53
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // GetChange to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Route53) WaitUntilResourceRecordSetsChanged(input *GetChangeInput) error {
-	return c.WaitUntilResourceRecordSetsChangedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilResourceRecordSetsChangedWithContext is an extended version of WaitUntilResourceRecordSetsChanged.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) WaitUntilResourceRecordSetsChangedWithContext(ctx aws.Context, input *GetChangeInput, opts ...aws.WaiterOption) error {
+func (c *Route53) WaitUntilResourceRecordSetsChanged(ctx context.Context, input *GetChangeInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilResourceRecordSetsChanged",
 		MaxAttempts: 60,
@@ -51,5 +45,5 @@ func (c *Route53) WaitUntilResourceRecordSetsChangedWithContext(ctx aws.Context,
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

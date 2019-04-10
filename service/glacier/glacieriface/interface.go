@@ -9,6 +9,8 @@
 package glacieriface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
 )
@@ -129,11 +131,9 @@ type GlacierAPI interface {
 
 	UploadMultipartPartRequest(*glacier.UploadMultipartPartInput) glacier.UploadMultipartPartRequest
 
-	WaitUntilVaultExists(*glacier.DescribeVaultInput) error
-	WaitUntilVaultExistsWithContext(aws.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
+	WaitUntilVaultExists(context.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
 
-	WaitUntilVaultNotExists(*glacier.DescribeVaultInput) error
-	WaitUntilVaultNotExistsWithContext(aws.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
+	WaitUntilVaultNotExists(context.Context, *glacier.DescribeVaultInput, ...aws.WaiterOption) error
 }
 
 var _ GlacierAPI = (*glacier.Glacier)(nil)

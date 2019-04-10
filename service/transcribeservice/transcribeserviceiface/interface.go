@@ -64,6 +64,8 @@ import (
 type TranscribeServiceAPI interface {
 	CreateVocabularyRequest(*transcribeservice.CreateVocabularyInput) transcribeservice.CreateVocabularyRequest
 
+	DeleteTranscriptionJobRequest(*transcribeservice.DeleteTranscriptionJobInput) transcribeservice.DeleteTranscriptionJobRequest
+
 	DeleteVocabularyRequest(*transcribeservice.DeleteVocabularyInput) transcribeservice.DeleteVocabularyRequest
 
 	GetTranscriptionJobRequest(*transcribeservice.GetTranscriptionJobInput) transcribeservice.GetTranscriptionJobRequest

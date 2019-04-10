@@ -2,6 +2,7 @@ package query_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -100,7 +101,8 @@ type OutputService1TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService1TestCaseOperation1 API request.
-func (r OutputService1TestCaseOperation1Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation1Output, error) {
+func (r OutputService1TestCaseOperation1Request) Send(ctx context.Context) (*OutputService1TestShapeOutputService1TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -114,7 +116,7 @@ func (r OutputService1TestCaseOperation1Request) Send() (*OutputService1TestShap
 //
 //    // Example sending a request using the OutputService1TestCaseOperation1Request method.
 //    req := client.OutputService1TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +230,8 @@ type OutputService2TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService2TestCaseOperation1 API request.
-func (r OutputService2TestCaseOperation1Request) Send() (*OutputService2TestShapeOutputService2TestCaseOperation1Output, error) {
+func (r OutputService2TestCaseOperation1Request) Send(ctx context.Context) (*OutputService2TestShapeOutputService2TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +245,7 @@ func (r OutputService2TestCaseOperation1Request) Send() (*OutputService2TestShap
 //
 //    // Example sending a request using the OutputService2TestCaseOperation1Request method.
 //    req := client.OutputService2TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -342,7 +345,8 @@ type OutputService3TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService3TestCaseOperation1 API request.
-func (r OutputService3TestCaseOperation1Request) Send() (*OutputService3TestShapeOutputService3TestCaseOperation1Output, error) {
+func (r OutputService3TestCaseOperation1Request) Send(ctx context.Context) (*OutputService3TestShapeOutputService3TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,7 +360,7 @@ func (r OutputService3TestCaseOperation1Request) Send() (*OutputService3TestShap
 //
 //    // Example sending a request using the OutputService3TestCaseOperation1Request method.
 //    req := client.OutputService3TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -455,7 +459,8 @@ type OutputService4TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService4TestCaseOperation1 API request.
-func (r OutputService4TestCaseOperation1Request) Send() (*OutputService4TestShapeOutputService4TestCaseOperation1Output, error) {
+func (r OutputService4TestCaseOperation1Request) Send(ctx context.Context) (*OutputService4TestShapeOutputService4TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -469,7 +474,7 @@ func (r OutputService4TestCaseOperation1Request) Send() (*OutputService4TestShap
 //
 //    // Example sending a request using the OutputService4TestCaseOperation1Request method.
 //    req := client.OutputService4TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -567,7 +572,8 @@ type OutputService5TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService5TestCaseOperation1 API request.
-func (r OutputService5TestCaseOperation1Request) Send() (*OutputService5TestShapeOutputService5TestCaseOperation1Output, error) {
+func (r OutputService5TestCaseOperation1Request) Send(ctx context.Context) (*OutputService5TestShapeOutputService5TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -581,7 +587,7 @@ func (r OutputService5TestCaseOperation1Request) Send() (*OutputService5TestShap
 //
 //    // Example sending a request using the OutputService5TestCaseOperation1Request method.
 //    req := client.OutputService5TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -679,7 +685,8 @@ type OutputService6TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService6TestCaseOperation1 API request.
-func (r OutputService6TestCaseOperation1Request) Send() (*OutputService6TestShapeOutputService6TestCaseOperation1Output, error) {
+func (r OutputService6TestCaseOperation1Request) Send(ctx context.Context) (*OutputService6TestShapeOutputService6TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -693,7 +700,7 @@ func (r OutputService6TestCaseOperation1Request) Send() (*OutputService6TestShap
 //
 //    // Example sending a request using the OutputService6TestCaseOperation1Request method.
 //    req := client.OutputService6TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -791,7 +798,8 @@ type OutputService7TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService7TestCaseOperation1 API request.
-func (r OutputService7TestCaseOperation1Request) Send() (*OutputService7TestShapeOutputService7TestCaseOperation1Output, error) {
+func (r OutputService7TestCaseOperation1Request) Send(ctx context.Context) (*OutputService7TestShapeOutputService7TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -805,7 +813,7 @@ func (r OutputService7TestCaseOperation1Request) Send() (*OutputService7TestShap
 //
 //    // Example sending a request using the OutputService7TestCaseOperation1Request method.
 //    req := client.OutputService7TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -903,7 +911,8 @@ type OutputService8TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService8TestCaseOperation1 API request.
-func (r OutputService8TestCaseOperation1Request) Send() (*OutputService8TestShapeOutputService8TestCaseOperation1Output, error) {
+func (r OutputService8TestCaseOperation1Request) Send(ctx context.Context) (*OutputService8TestShapeOutputService8TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -917,7 +926,7 @@ func (r OutputService8TestCaseOperation1Request) Send() (*OutputService8TestShap
 //
 //    // Example sending a request using the OutputService8TestCaseOperation1Request method.
 //    req := client.OutputService8TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1025,7 +1034,8 @@ type OutputService9TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService9TestCaseOperation1 API request.
-func (r OutputService9TestCaseOperation1Request) Send() (*OutputService9TestShapeOutputService9TestCaseOperation1Output, error) {
+func (r OutputService9TestCaseOperation1Request) Send(ctx context.Context) (*OutputService9TestShapeOutputService9TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1039,7 +1049,7 @@ func (r OutputService9TestCaseOperation1Request) Send() (*OutputService9TestShap
 //
 //    // Example sending a request using the OutputService9TestCaseOperation1Request method.
 //    req := client.OutputService9TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1147,7 +1157,8 @@ type OutputService10TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService10TestCaseOperation1 API request.
-func (r OutputService10TestCaseOperation1Request) Send() (*OutputService10TestShapeOutputService10TestCaseOperation1Output, error) {
+func (r OutputService10TestCaseOperation1Request) Send(ctx context.Context) (*OutputService10TestShapeOutputService10TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1161,7 +1172,7 @@ func (r OutputService10TestCaseOperation1Request) Send() (*OutputService10TestSh
 //
 //    // Example sending a request using the OutputService10TestCaseOperation1Request method.
 //    req := client.OutputService10TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1259,7 +1270,8 @@ type OutputService11TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService11TestCaseOperation1 API request.
-func (r OutputService11TestCaseOperation1Request) Send() (*OutputService11TestShapeOutputService11TestCaseOperation1Output, error) {
+func (r OutputService11TestCaseOperation1Request) Send(ctx context.Context) (*OutputService11TestShapeOutputService11TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1273,7 +1285,7 @@ func (r OutputService11TestCaseOperation1Request) Send() (*OutputService11TestSh
 //
 //    // Example sending a request using the OutputService11TestCaseOperation1Request method.
 //    req := client.OutputService11TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1377,7 +1389,8 @@ type OutputService12TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService12TestCaseOperation1 API request.
-func (r OutputService12TestCaseOperation1Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation1Output, error) {
+func (r OutputService12TestCaseOperation1Request) Send(ctx context.Context) (*OutputService12TestShapeOutputService12TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1391,7 +1404,7 @@ func (r OutputService12TestCaseOperation1Request) Send() (*OutputService12TestSh
 //
 //    // Example sending a request using the OutputService12TestCaseOperation1Request method.
 //    req := client.OutputService12TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1489,7 +1502,8 @@ type OutputService13TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService13TestCaseOperation1 API request.
-func (r OutputService13TestCaseOperation1Request) Send() (*OutputService13TestShapeOutputService13TestCaseOperation1Output, error) {
+func (r OutputService13TestCaseOperation1Request) Send(ctx context.Context) (*OutputService13TestShapeOutputService13TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1503,7 +1517,7 @@ func (r OutputService13TestCaseOperation1Request) Send() (*OutputService13TestSh
 //
 //    // Example sending a request using the OutputService13TestCaseOperation1Request method.
 //    req := client.OutputService13TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1601,7 +1615,8 @@ type OutputService14TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService14TestCaseOperation1 API request.
-func (r OutputService14TestCaseOperation1Request) Send() (*OutputService14TestShapeOutputService14TestCaseOperation1Output, error) {
+func (r OutputService14TestCaseOperation1Request) Send(ctx context.Context) (*OutputService14TestShapeOutputService14TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1615,7 +1630,7 @@ func (r OutputService14TestCaseOperation1Request) Send() (*OutputService14TestSh
 //
 //    // Example sending a request using the OutputService14TestCaseOperation1Request method.
 //    req := client.OutputService14TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1713,7 +1728,8 @@ type OutputService15TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService15TestCaseOperation1 API request.
-func (r OutputService15TestCaseOperation1Request) Send() (*OutputService15TestShapeOutputService15TestCaseOperation1Output, error) {
+func (r OutputService15TestCaseOperation1Request) Send(ctx context.Context) (*OutputService15TestShapeOutputService15TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1727,7 +1743,7 @@ func (r OutputService15TestCaseOperation1Request) Send() (*OutputService15TestSh
 //
 //    // Example sending a request using the OutputService15TestCaseOperation1Request method.
 //    req := client.OutputService15TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1825,7 +1841,8 @@ type OutputService16TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService16TestCaseOperation1 API request.
-func (r OutputService16TestCaseOperation1Request) Send() (*OutputService16TestShapeOutputService16TestCaseOperation1Output, error) {
+func (r OutputService16TestCaseOperation1Request) Send(ctx context.Context) (*OutputService16TestShapeOutputService16TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1839,7 +1856,7 @@ func (r OutputService16TestCaseOperation1Request) Send() (*OutputService16TestSh
 //
 //    // Example sending a request using the OutputService16TestCaseOperation1Request method.
 //    req := client.OutputService16TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

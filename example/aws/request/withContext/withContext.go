@@ -60,9 +60,8 @@ func main() {
 		Key:    aws.String(key),
 		Body:   os.Stdin,
 	})
-	req.SetContext(ctx)
 
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(ctx); err != nil {
 		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == request.ErrCodeRequestCanceled {
 			// If the SDK can determine the request or retry delay was canceled
 			// by a context the ErrCodeRequestCanceled error code will be returned.

@@ -3,6 +3,7 @@
 package kms_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -40,7 +41,7 @@ func ExampleKMS_CancelKeyDeletionRequest_shared00() {
 	}
 
 	req := svc.CancelKeyDeletionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -84,7 +85,7 @@ func ExampleKMS_CreateAliasRequest_shared00() {
 	}
 
 	req := svc.CreateAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -137,7 +138,7 @@ func ExampleKMS_CreateGrantRequest_shared00() {
 	}
 
 	req := svc.CreateGrantRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -191,7 +192,7 @@ func ExampleKMS_CreateKeyRequest_shared00() {
 	}
 
 	req := svc.CreateKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -209,6 +210,12 @@ func ExampleKMS_CreateKeyRequest_shared00() {
 				fmt.Println(kms.ErrCodeLimitExceededException, aerr.Error())
 			case kms.ErrCodeTagException:
 				fmt.Println(kms.ErrCodeTagException, aerr.Error())
+			case kms.ErrCodeCustomKeyStoreNotFoundException:
+				fmt.Println(kms.ErrCodeCustomKeyStoreNotFoundException, aerr.Error())
+			case kms.ErrCodeCustomKeyStoreInvalidStateException:
+				fmt.Println(kms.ErrCodeCustomKeyStoreInvalidStateException, aerr.Error())
+			case kms.ErrCodeCloudHsmClusterInvalidConfigurationException:
+				fmt.Println(kms.ErrCodeCloudHsmClusterInvalidConfigurationException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -239,7 +246,7 @@ func ExampleKMS_DecryptRequest_shared00() {
 	}
 
 	req := svc.DecryptRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -288,7 +295,7 @@ func ExampleKMS_DeleteAliasRequest_shared00() {
 	}
 
 	req := svc.DeleteAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -330,7 +337,7 @@ func ExampleKMS_DeleteImportedKeyMaterialRequest_shared00() {
 	}
 
 	req := svc.DeleteImportedKeyMaterialRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -375,7 +382,7 @@ func ExampleKMS_DescribeKeyRequest_shared00() {
 	}
 
 	req := svc.DescribeKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -416,7 +423,7 @@ func ExampleKMS_DisableKeyRequest_shared00() {
 	}
 
 	req := svc.DisableKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -460,7 +467,7 @@ func ExampleKMS_DisableKeyRotationRequest_shared00() {
 	}
 
 	req := svc.DisableKeyRotationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -507,7 +514,7 @@ func ExampleKMS_EnableKeyRequest_shared00() {
 	}
 
 	req := svc.EnableKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -553,7 +560,7 @@ func ExampleKMS_EnableKeyRotationRequest_shared00() {
 	}
 
 	req := svc.EnableKeyRotationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -601,7 +608,7 @@ func ExampleKMS_EncryptRequest_shared00() {
 	}
 
 	req := svc.EncryptRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -653,7 +660,7 @@ func ExampleKMS_GenerateDataKeyRequest_shared00() {
 	}
 
 	req := svc.GenerateDataKeyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -705,7 +712,7 @@ func ExampleKMS_GenerateDataKeyWithoutPlaintextRequest_shared00() {
 	}
 
 	req := svc.GenerateDataKeyWithoutPlaintextRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -754,7 +761,7 @@ func ExampleKMS_GenerateRandomRequest_shared00() {
 	}
 
 	req := svc.GenerateRandomRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -762,6 +769,10 @@ func ExampleKMS_GenerateRandomRequest_shared00() {
 				fmt.Println(kms.ErrCodeDependencyTimeoutException, aerr.Error())
 			case kms.ErrCodeInternalException:
 				fmt.Println(kms.ErrCodeInternalException, aerr.Error())
+			case kms.ErrCodeCustomKeyStoreNotFoundException:
+				fmt.Println(kms.ErrCodeCustomKeyStoreNotFoundException, aerr.Error())
+			case kms.ErrCodeCustomKeyStoreInvalidStateException:
+				fmt.Println(kms.ErrCodeCustomKeyStoreInvalidStateException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -793,7 +804,7 @@ func ExampleKMS_GetKeyPolicyRequest_shared00() {
 	}
 
 	req := svc.GetKeyPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -837,7 +848,7 @@ func ExampleKMS_GetKeyRotationStatusRequest_shared00() {
 	}
 
 	req := svc.GetKeyRotationStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -885,7 +896,7 @@ func ExampleKMS_GetParametersForImportRequest_shared00() {
 	}
 
 	req := svc.GetParametersForImportRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -933,7 +944,7 @@ func ExampleKMS_ImportKeyMaterialRequest_shared00() {
 	}
 
 	req := svc.ImportKeyMaterialRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -984,7 +995,7 @@ func ExampleKMS_ListAliasesRequest_shared00() {
 	input := &kms.ListAliasesInput{}
 
 	req := svc.ListAliasesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -994,6 +1005,10 @@ func ExampleKMS_ListAliasesRequest_shared00() {
 				fmt.Println(kms.ErrCodeInvalidMarkerException, aerr.Error())
 			case kms.ErrCodeInternalException:
 				fmt.Println(kms.ErrCodeInternalException, aerr.Error())
+			case kms.ErrCodeInvalidArnException:
+				fmt.Println(kms.ErrCodeInvalidArnException, aerr.Error())
+			case kms.ErrCodeNotFoundException:
+				fmt.Println(kms.ErrCodeNotFoundException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1023,7 +1038,7 @@ func ExampleKMS_ListGrantsRequest_shared00() {
 	}
 
 	req := svc.ListGrantsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1068,7 +1083,7 @@ func ExampleKMS_ListKeyPoliciesRequest_shared00() {
 	}
 
 	req := svc.ListKeyPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1109,7 +1124,7 @@ func ExampleKMS_ListKeysRequest_shared00() {
 	input := &kms.ListKeysInput{}
 
 	req := svc.ListKeysRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1148,7 +1163,7 @@ func ExampleKMS_ListResourceTagsRequest_shared00() {
 	}
 
 	req := svc.ListResourceTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1190,7 +1205,7 @@ func ExampleKMS_ListRetirableGrantsRequest_shared00() {
 	}
 
 	req := svc.ListRetirableGrantsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1235,7 +1250,7 @@ func ExampleKMS_PutKeyPolicyRequest_shared00() {
 	}
 
 	req := svc.PutKeyPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1285,7 +1300,7 @@ func ExampleKMS_ReEncryptRequest_shared00() {
 	}
 
 	req := svc.ReEncryptRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1337,7 +1352,7 @@ func ExampleKMS_RetireGrantRequest_shared00() {
 	}
 
 	req := svc.RetireGrantRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1385,7 +1400,7 @@ func ExampleKMS_RevokeGrantRequest_shared00() {
 	}
 
 	req := svc.RevokeGrantRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1431,7 +1446,7 @@ func ExampleKMS_ScheduleKeyDeletionRequest_shared00() {
 	}
 
 	req := svc.ScheduleKeyDeletionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1480,7 +1495,7 @@ func ExampleKMS_TagResourceRequest_shared00() {
 	}
 
 	req := svc.TagResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1529,7 +1544,7 @@ func ExampleKMS_UntagResourceRequest_shared00() {
 	}
 
 	req := svc.UntagResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1574,7 +1589,7 @@ func ExampleKMS_UpdateAliasRequest_shared00() {
 	}
 
 	req := svc.UpdateAliasRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1616,7 +1631,7 @@ func ExampleKMS_UpdateKeyDescriptionRequest_shared00() {
 	}
 
 	req := svc.UpdateKeyDescriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

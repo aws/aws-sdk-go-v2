@@ -3,6 +3,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
@@ -40,7 +42,7 @@ func main() {
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
-	getReq.Send()
+	getReq.Send(context.Background())
 
 	// Create the SQS service client with the shared config. This will
 	// fallback to the default endpoint resolver because the customization
@@ -51,7 +53,7 @@ func main() {
 	msgReq := sqsSvc.ReceiveMessageRequest(&sqs.ReceiveMessageInput{
 		QueueUrl: aws.String("my-queue-url"),
 	})
-	msgReq.Send()
+	msgReq.Send(context.Background())
 
 	// Create a DynamoDB service client that will use a custom endpoint
 	// resolver that overrides the shared config's. This is useful when
@@ -71,7 +73,7 @@ func main() {
 	// Operation calls will be made to the custom endpoint set in the
 	// ddCustResolverFn.
 	listReq := ddbSvc.ListTablesRequest(&dynamodb.ListTablesInput{})
-	listReq.Send()
+	listReq.Send(context.Background())
 
 	// Setting Config's Endpoint will override the EndpointResolver. Forcing
 	// the service clien to make all operation to the endpoint specified
@@ -81,5 +83,5 @@ func main() {
 
 	ddbSvcLocal := dynamodb.New(cfgCp)
 	listReq = ddbSvcLocal.ListTablesRequest(&dynamodb.ListTablesInput{})
-	listReq.Send()
+	listReq.Send(context.Background())
 }

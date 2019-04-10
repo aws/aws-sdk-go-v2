@@ -3,6 +3,7 @@
 package cognitoidentity
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type CreateIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the CreateIdentityPool API request.
-func (r CreateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+func (r CreateIdentityPoolRequest) Send(ctx context.Context) (*UpdateIdentityPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -52,7 +54,7 @@ func (r CreateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
 //
 //    // Example sending a request using the CreateIdentityPoolRequest method.
 //    req := client.CreateIdentityPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -86,7 +88,8 @@ type DeleteIdentitiesRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentities API request.
-func (r DeleteIdentitiesRequest) Send() (*DeleteIdentitiesOutput, error) {
+func (r DeleteIdentitiesRequest) Send(ctx context.Context) (*DeleteIdentitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -105,7 +108,7 @@ func (r DeleteIdentitiesRequest) Send() (*DeleteIdentitiesOutput, error) {
 //
 //    // Example sending a request using the DeleteIdentitiesRequest method.
 //    req := client.DeleteIdentitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -139,7 +142,8 @@ type DeleteIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentityPool API request.
-func (r DeleteIdentityPoolRequest) Send() (*DeleteIdentityPoolOutput, error) {
+func (r DeleteIdentityPoolRequest) Send(ctx context.Context) (*DeleteIdentityPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,7 +162,7 @@ func (r DeleteIdentityPoolRequest) Send() (*DeleteIdentityPoolOutput, error) {
 //
 //    // Example sending a request using the DeleteIdentityPoolRequest method.
 //    req := client.DeleteIdentityPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -194,7 +198,8 @@ type DescribeIdentityRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentity API request.
-func (r DescribeIdentityRequest) Send() (*DescribeIdentityOutput, error) {
+func (r DescribeIdentityRequest) Send(ctx context.Context) (*DescribeIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,7 +218,7 @@ func (r DescribeIdentityRequest) Send() (*DescribeIdentityOutput, error) {
 //
 //    // Example sending a request using the DescribeIdentityRequest method.
 //    req := client.DescribeIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -247,7 +252,8 @@ type DescribeIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityPool API request.
-func (r DescribeIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+func (r DescribeIdentityPoolRequest) Send(ctx context.Context) (*UpdateIdentityPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,7 +272,7 @@ func (r DescribeIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
 //
 //    // Example sending a request using the DescribeIdentityPoolRequest method.
 //    req := client.DescribeIdentityPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -300,7 +306,8 @@ type GetCredentialsForIdentityRequest struct {
 }
 
 // Send marshals and sends the GetCredentialsForIdentity API request.
-func (r GetCredentialsForIdentityRequest) Send() (*GetCredentialsForIdentityOutput, error) {
+func (r GetCredentialsForIdentityRequest) Send(ctx context.Context) (*GetCredentialsForIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -321,7 +328,7 @@ func (r GetCredentialsForIdentityRequest) Send() (*GetCredentialsForIdentityOutp
 //
 //    // Example sending a request using the GetCredentialsForIdentityRequest method.
 //    req := client.GetCredentialsForIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -342,6 +349,7 @@ func (c *CognitoIdentity) GetCredentialsForIdentityRequest(input *GetCredentials
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return GetCredentialsForIdentityRequest{Request: req, Input: input, Copy: c.GetCredentialsForIdentityRequest}
 }
 
@@ -355,7 +363,8 @@ type GetIdRequest struct {
 }
 
 // Send marshals and sends the GetId API request.
-func (r GetIdRequest) Send() (*GetIdOutput, error) {
+func (r GetIdRequest) Send(ctx context.Context) (*GetIdOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -374,7 +383,7 @@ func (r GetIdRequest) Send() (*GetIdOutput, error) {
 //
 //    // Example sending a request using the GetIdRequest method.
 //    req := client.GetIdRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -395,6 +404,7 @@ func (c *CognitoIdentity) GetIdRequest(input *GetIdInput) GetIdRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return GetIdRequest{Request: req, Input: input, Copy: c.GetIdRequest}
 }
 
@@ -408,7 +418,8 @@ type GetIdentityPoolRolesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityPoolRoles API request.
-func (r GetIdentityPoolRolesRequest) Send() (*GetIdentityPoolRolesOutput, error) {
+func (r GetIdentityPoolRolesRequest) Send(ctx context.Context) (*GetIdentityPoolRolesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -426,7 +437,7 @@ func (r GetIdentityPoolRolesRequest) Send() (*GetIdentityPoolRolesOutput, error)
 //
 //    // Example sending a request using the GetIdentityPoolRolesRequest method.
 //    req := client.GetIdentityPoolRolesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -460,7 +471,8 @@ type GetOpenIdTokenRequest struct {
 }
 
 // Send marshals and sends the GetOpenIdToken API request.
-func (r GetOpenIdTokenRequest) Send() (*GetOpenIdTokenOutput, error) {
+func (r GetOpenIdTokenRequest) Send(ctx context.Context) (*GetOpenIdTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -482,7 +494,7 @@ func (r GetOpenIdTokenRequest) Send() (*GetOpenIdTokenOutput, error) {
 //
 //    // Example sending a request using the GetOpenIdTokenRequest method.
 //    req := client.GetOpenIdTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -503,6 +515,7 @@ func (c *CognitoIdentity) GetOpenIdTokenRequest(input *GetOpenIdTokenInput) GetO
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return GetOpenIdTokenRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenRequest}
 }
 
@@ -516,7 +529,8 @@ type GetOpenIdTokenForDeveloperIdentityRequest struct {
 }
 
 // Send marshals and sends the GetOpenIdTokenForDeveloperIdentity API request.
-func (r GetOpenIdTokenForDeveloperIdentityRequest) Send() (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
+func (r GetOpenIdTokenForDeveloperIdentityRequest) Send(ctx context.Context) (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +561,7 @@ func (r GetOpenIdTokenForDeveloperIdentityRequest) Send() (*GetOpenIdTokenForDev
 //
 //    // Example sending a request using the GetOpenIdTokenForDeveloperIdentityRequest method.
 //    req := client.GetOpenIdTokenForDeveloperIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +595,8 @@ type ListIdentitiesRequest struct {
 }
 
 // Send marshals and sends the ListIdentities API request.
-func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
+func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -599,7 +614,7 @@ func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
 //
 //    // Example sending a request using the ListIdentitiesRequest method.
 //    req := client.ListIdentitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -633,7 +648,8 @@ type ListIdentityPoolsRequest struct {
 }
 
 // Send marshals and sends the ListIdentityPools API request.
-func (r ListIdentityPoolsRequest) Send() (*ListIdentityPoolsOutput, error) {
+func (r ListIdentityPoolsRequest) Send(ctx context.Context) (*ListIdentityPoolsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,7 +667,7 @@ func (r ListIdentityPoolsRequest) Send() (*ListIdentityPoolsOutput, error) {
 //
 //    // Example sending a request using the ListIdentityPoolsRequest method.
 //    req := client.ListIdentityPoolsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -685,7 +701,8 @@ type LookupDeveloperIdentityRequest struct {
 }
 
 // Send marshals and sends the LookupDeveloperIdentity API request.
-func (r LookupDeveloperIdentityRequest) Send() (*LookupDeveloperIdentityOutput, error) {
+func (r LookupDeveloperIdentityRequest) Send(ctx context.Context) (*LookupDeveloperIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,7 +727,7 @@ func (r LookupDeveloperIdentityRequest) Send() (*LookupDeveloperIdentityOutput, 
 //
 //    // Example sending a request using the LookupDeveloperIdentityRequest method.
 //    req := client.LookupDeveloperIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -744,7 +761,8 @@ type MergeDeveloperIdentitiesRequest struct {
 }
 
 // Send marshals and sends the MergeDeveloperIdentities API request.
-func (r MergeDeveloperIdentitiesRequest) Send() (*MergeDeveloperIdentitiesOutput, error) {
+func (r MergeDeveloperIdentitiesRequest) Send(ctx context.Context) (*MergeDeveloperIdentitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -768,7 +786,7 @@ func (r MergeDeveloperIdentitiesRequest) Send() (*MergeDeveloperIdentitiesOutput
 //
 //    // Example sending a request using the MergeDeveloperIdentitiesRequest method.
 //    req := client.MergeDeveloperIdentitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -802,7 +820,8 @@ type SetIdentityPoolRolesRequest struct {
 }
 
 // Send marshals and sends the SetIdentityPoolRoles API request.
-func (r SetIdentityPoolRolesRequest) Send() (*SetIdentityPoolRolesOutput, error) {
+func (r SetIdentityPoolRolesRequest) Send(ctx context.Context) (*SetIdentityPoolRolesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -821,7 +840,7 @@ func (r SetIdentityPoolRolesRequest) Send() (*SetIdentityPoolRolesOutput, error)
 //
 //    // Example sending a request using the SetIdentityPoolRolesRequest method.
 //    req := client.SetIdentityPoolRolesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -857,7 +876,8 @@ type UnlinkDeveloperIdentityRequest struct {
 }
 
 // Send marshals and sends the UnlinkDeveloperIdentity API request.
-func (r UnlinkDeveloperIdentityRequest) Send() (*UnlinkDeveloperIdentityOutput, error) {
+func (r UnlinkDeveloperIdentityRequest) Send(ctx context.Context) (*UnlinkDeveloperIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -878,7 +898,7 @@ func (r UnlinkDeveloperIdentityRequest) Send() (*UnlinkDeveloperIdentityOutput, 
 //
 //    // Example sending a request using the UnlinkDeveloperIdentityRequest method.
 //    req := client.UnlinkDeveloperIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -914,7 +934,8 @@ type UnlinkIdentityRequest struct {
 }
 
 // Send marshals and sends the UnlinkIdentity API request.
-func (r UnlinkIdentityRequest) Send() (*UnlinkIdentityOutput, error) {
+func (r UnlinkIdentityRequest) Send(ctx context.Context) (*UnlinkIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -934,7 +955,7 @@ func (r UnlinkIdentityRequest) Send() (*UnlinkIdentityOutput, error) {
 //
 //    // Example sending a request using the UnlinkIdentityRequest method.
 //    req := client.UnlinkIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -957,6 +978,7 @@ func (c *CognitoIdentity) UnlinkIdentityRequest(input *UnlinkIdentityInput) Unli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return UnlinkIdentityRequest{Request: req, Input: input, Copy: c.UnlinkIdentityRequest}
 }
 
@@ -970,7 +992,8 @@ type UpdateIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the UpdateIdentityPool API request.
-func (r UpdateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+func (r UpdateIdentityPoolRequest) Send(ctx context.Context) (*UpdateIdentityPoolOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -988,7 +1011,7 @@ func (r UpdateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
 //
 //    // Example sending a request using the UpdateIdentityPoolRequest method.
 //    req := client.UpdateIdentityPoolRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

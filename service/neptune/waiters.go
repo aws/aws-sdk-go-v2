@@ -3,6 +3,7 @@
 package neptune
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeDBInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Neptune) WaitUntilDBInstanceAvailable(input *DescribeDBInstancesInput) error {
-	return c.WaitUntilDBInstanceAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDBInstanceAvailableWithContext is an extended version of WaitUntilDBInstanceAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Neptune) WaitUntilDBInstanceAvailableWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Neptune) WaitUntilDBInstanceAvailable(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceAvailable",
 		MaxAttempts: 60,
@@ -76,26 +70,19 @@ func (c *Neptune) WaitUntilDBInstanceAvailableWithContext(ctx aws.Context, input
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilDBInstanceDeleted uses the Amazon Neptune API operation
 // DescribeDBInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Neptune) WaitUntilDBInstanceDeleted(input *DescribeDBInstancesInput) error {
-	return c.WaitUntilDBInstanceDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDBInstanceDeletedWithContext is an extended version of WaitUntilDBInstanceDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Neptune) WaitUntilDBInstanceDeletedWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *Neptune) WaitUntilDBInstanceDeleted(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceDeleted",
 		MaxAttempts: 60,
@@ -147,5 +134,5 @@ func (c *Neptune) WaitUntilDBInstanceDeletedWithContext(ctx aws.Context, input *
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

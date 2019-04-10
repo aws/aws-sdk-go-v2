@@ -9,6 +9,8 @@
 package ecsiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 )
@@ -67,6 +69,8 @@ type ECSAPI interface {
 
 	CreateServiceRequest(*ecs.CreateServiceInput) ecs.CreateServiceRequest
 
+	DeleteAccountSettingRequest(*ecs.DeleteAccountSettingInput) ecs.DeleteAccountSettingRequest
+
 	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
 
 	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
@@ -89,6 +93,8 @@ type ECSAPI interface {
 
 	DiscoverPollEndpointRequest(*ecs.DiscoverPollEndpointInput) ecs.DiscoverPollEndpointRequest
 
+	ListAccountSettingsRequest(*ecs.ListAccountSettingsInput) ecs.ListAccountSettingsRequest
+
 	ListAttributesRequest(*ecs.ListAttributesInput) ecs.ListAttributesRequest
 
 	ListClustersRequest(*ecs.ListClustersInput) ecs.ListClustersRequest
@@ -97,11 +103,15 @@ type ECSAPI interface {
 
 	ListServicesRequest(*ecs.ListServicesInput) ecs.ListServicesRequest
 
+	ListTagsForResourceRequest(*ecs.ListTagsForResourceInput) ecs.ListTagsForResourceRequest
+
 	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
 
 	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
 
 	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
+
+	PutAccountSettingRequest(*ecs.PutAccountSettingInput) ecs.PutAccountSettingRequest
 
 	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
 
@@ -119,23 +129,23 @@ type ECSAPI interface {
 
 	SubmitTaskStateChangeRequest(*ecs.SubmitTaskStateChangeInput) ecs.SubmitTaskStateChangeRequest
 
+	TagResourceRequest(*ecs.TagResourceInput) ecs.TagResourceRequest
+
+	UntagResourceRequest(*ecs.UntagResourceInput) ecs.UntagResourceRequest
+
 	UpdateContainerAgentRequest(*ecs.UpdateContainerAgentInput) ecs.UpdateContainerAgentRequest
 
 	UpdateContainerInstancesStateRequest(*ecs.UpdateContainerInstancesStateInput) ecs.UpdateContainerInstancesStateRequest
 
 	UpdateServiceRequest(*ecs.UpdateServiceInput) ecs.UpdateServiceRequest
 
-	WaitUntilServicesInactive(*ecs.DescribeServicesInput) error
-	WaitUntilServicesInactiveWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+	WaitUntilServicesInactive(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
 
-	WaitUntilServicesStable(*ecs.DescribeServicesInput) error
-	WaitUntilServicesStableWithContext(aws.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
+	WaitUntilServicesStable(context.Context, *ecs.DescribeServicesInput, ...aws.WaiterOption) error
 
-	WaitUntilTasksRunning(*ecs.DescribeTasksInput) error
-	WaitUntilTasksRunningWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+	WaitUntilTasksRunning(context.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
 
-	WaitUntilTasksStopped(*ecs.DescribeTasksInput) error
-	WaitUntilTasksStoppedWithContext(aws.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
+	WaitUntilTasksStopped(context.Context, *ecs.DescribeTasksInput, ...aws.WaiterOption) error
 }
 
 var _ ECSAPI = (*ecs.ECS)(nil)

@@ -9,6 +9,8 @@
 package elasticacheiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 )
@@ -147,17 +149,13 @@ type ElastiCacheAPI interface {
 
 	TestFailoverRequest(*elasticache.TestFailoverInput) elasticache.TestFailoverRequest
 
-	WaitUntilCacheClusterAvailable(*elasticache.DescribeCacheClustersInput) error
-	WaitUntilCacheClusterAvailableWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, ...aws.WaiterOption) error
+	WaitUntilCacheClusterAvailable(context.Context, *elasticache.DescribeCacheClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilCacheClusterDeleted(*elasticache.DescribeCacheClustersInput) error
-	WaitUntilCacheClusterDeletedWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, ...aws.WaiterOption) error
+	WaitUntilCacheClusterDeleted(context.Context, *elasticache.DescribeCacheClustersInput, ...aws.WaiterOption) error
 
-	WaitUntilReplicationGroupAvailable(*elasticache.DescribeReplicationGroupsInput) error
-	WaitUntilReplicationGroupAvailableWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, ...aws.WaiterOption) error
+	WaitUntilReplicationGroupAvailable(context.Context, *elasticache.DescribeReplicationGroupsInput, ...aws.WaiterOption) error
 
-	WaitUntilReplicationGroupDeleted(*elasticache.DescribeReplicationGroupsInput) error
-	WaitUntilReplicationGroupDeletedWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, ...aws.WaiterOption) error
+	WaitUntilReplicationGroupDeleted(context.Context, *elasticache.DescribeReplicationGroupsInput, ...aws.WaiterOption) error
 }
 
 var _ ElastiCacheAPI = (*elasticache.ElastiCache)(nil)

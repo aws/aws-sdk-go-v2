@@ -3,6 +3,8 @@
 package codestar
 
 import (
+	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +21,8 @@ type AssociateTeamMemberRequest struct {
 }
 
 // Send marshals and sends the AssociateTeamMember API request.
-func (r AssociateTeamMemberRequest) Send() (*AssociateTeamMemberOutput, error) {
+func (r AssociateTeamMemberRequest) Send(ctx context.Context) (*AssociateTeamMemberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r AssociateTeamMemberRequest) Send() (*AssociateTeamMemberOutput, error) {
 //
 //    // Example sending a request using the AssociateTeamMemberRequest method.
 //    req := client.AssociateTeamMemberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -69,7 +72,8 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -81,11 +85,14 @@ func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 // CreateProjectRequest returns a request value for making API operation for
 // AWS CodeStar.
 //
-// Reserved for future use. To create a project, use the AWS CodeStar console.
+// Creates a project, including project resources. This action creates a project
+// based on a submitted project request. A set of source code files and a toolchain
+// template file can be included with the project request. If these are not
+// provided, an empty project is created.
 //
 //    // Example sending a request using the CreateProjectRequest method.
 //    req := client.CreateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -119,7 +126,8 @@ type CreateUserProfileRequest struct {
 }
 
 // Send marshals and sends the CreateUserProfile API request.
-func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
+func (r CreateUserProfileRequest) Send(ctx context.Context) (*CreateUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +147,7 @@ func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
 //
 //    // Example sending a request using the CreateUserProfileRequest method.
 //    req := client.CreateUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +181,8 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +200,7 @@ func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 //
 //    // Example sending a request using the DeleteProjectRequest method.
 //    req := client.DeleteProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +234,8 @@ type DeleteUserProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteUserProfile API request.
-func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
+func (r DeleteUserProfileRequest) Send(ctx context.Context) (*DeleteUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +254,7 @@ func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
 //
 //    // Example sending a request using the DeleteUserProfileRequest method.
 //    req := client.DeleteUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -278,7 +288,8 @@ type DescribeProjectRequest struct {
 }
 
 // Send marshals and sends the DescribeProject API request.
-func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+func (r DescribeProjectRequest) Send(ctx context.Context) (*DescribeProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +305,7 @@ func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
 //
 //    // Example sending a request using the DescribeProjectRequest method.
 //    req := client.DescribeProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -328,7 +339,8 @@ type DescribeUserProfileRequest struct {
 }
 
 // Send marshals and sends the DescribeUserProfile API request.
-func (r DescribeUserProfileRequest) Send() (*DescribeUserProfileOutput, error) {
+func (r DescribeUserProfileRequest) Send(ctx context.Context) (*DescribeUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -344,7 +356,7 @@ func (r DescribeUserProfileRequest) Send() (*DescribeUserProfileOutput, error) {
 //
 //    // Example sending a request using the DescribeUserProfileRequest method.
 //    req := client.DescribeUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -378,7 +390,8 @@ type DisassociateTeamMemberRequest struct {
 }
 
 // Send marshals and sends the DisassociateTeamMember API request.
-func (r DisassociateTeamMemberRequest) Send() (*DisassociateTeamMemberOutput, error) {
+func (r DisassociateTeamMemberRequest) Send(ctx context.Context) (*DisassociateTeamMemberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -397,7 +410,7 @@ func (r DisassociateTeamMemberRequest) Send() (*DisassociateTeamMemberOutput, er
 //
 //    // Example sending a request using the DisassociateTeamMemberRequest method.
 //    req := client.DisassociateTeamMemberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -431,7 +444,8 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +461,7 @@ func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 //
 //    // Example sending a request using the ListProjectsRequest method.
 //    req := client.ListProjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -481,7 +495,8 @@ type ListResourcesRequest struct {
 }
 
 // Send marshals and sends the ListResources API request.
-func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
+func (r ListResourcesRequest) Send(ctx context.Context) (*ListResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -497,7 +512,7 @@ func (r ListResourcesRequest) Send() (*ListResourcesOutput, error) {
 //
 //    // Example sending a request using the ListResourcesRequest method.
 //    req := client.ListResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -531,7 +546,8 @@ type ListTagsForProjectRequest struct {
 }
 
 // Send marshals and sends the ListTagsForProject API request.
-func (r ListTagsForProjectRequest) Send() (*ListTagsForProjectOutput, error) {
+func (r ListTagsForProjectRequest) Send(ctx context.Context) (*ListTagsForProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +563,7 @@ func (r ListTagsForProjectRequest) Send() (*ListTagsForProjectOutput, error) {
 //
 //    // Example sending a request using the ListTagsForProjectRequest method.
 //    req := client.ListTagsForProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +597,8 @@ type ListTeamMembersRequest struct {
 }
 
 // Send marshals and sends the ListTeamMembers API request.
-func (r ListTeamMembersRequest) Send() (*ListTeamMembersOutput, error) {
+func (r ListTeamMembersRequest) Send(ctx context.Context) (*ListTeamMembersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +614,7 @@ func (r ListTeamMembersRequest) Send() (*ListTeamMembersOutput, error) {
 //
 //    // Example sending a request using the ListTeamMembersRequest method.
 //    req := client.ListTeamMembersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +648,8 @@ type ListUserProfilesRequest struct {
 }
 
 // Send marshals and sends the ListUserProfiles API request.
-func (r ListUserProfilesRequest) Send() (*ListUserProfilesOutput, error) {
+func (r ListUserProfilesRequest) Send(ctx context.Context) (*ListUserProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +665,7 @@ func (r ListUserProfilesRequest) Send() (*ListUserProfilesOutput, error) {
 //
 //    // Example sending a request using the ListUserProfilesRequest method.
 //    req := client.ListUserProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -681,7 +699,8 @@ type TagProjectRequest struct {
 }
 
 // Send marshals and sends the TagProject API request.
-func (r TagProjectRequest) Send() (*TagProjectOutput, error) {
+func (r TagProjectRequest) Send(ctx context.Context) (*TagProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -697,7 +716,7 @@ func (r TagProjectRequest) Send() (*TagProjectOutput, error) {
 //
 //    // Example sending a request using the TagProjectRequest method.
 //    req := client.TagProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -731,7 +750,8 @@ type UntagProjectRequest struct {
 }
 
 // Send marshals and sends the UntagProject API request.
-func (r UntagProjectRequest) Send() (*UntagProjectOutput, error) {
+func (r UntagProjectRequest) Send(ctx context.Context) (*UntagProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -747,7 +767,7 @@ func (r UntagProjectRequest) Send() (*UntagProjectOutput, error) {
 //
 //    // Example sending a request using the UntagProjectRequest method.
 //    req := client.UntagProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -781,7 +801,8 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -797,7 +818,7 @@ func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 //
 //    // Example sending a request using the UpdateProjectRequest method.
 //    req := client.UpdateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -831,7 +852,8 @@ type UpdateTeamMemberRequest struct {
 }
 
 // Send marshals and sends the UpdateTeamMember API request.
-func (r UpdateTeamMemberRequest) Send() (*UpdateTeamMemberOutput, error) {
+func (r UpdateTeamMemberRequest) Send(ctx context.Context) (*UpdateTeamMemberOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -849,7 +871,7 @@ func (r UpdateTeamMemberRequest) Send() (*UpdateTeamMemberOutput, error) {
 //
 //    // Example sending a request using the UpdateTeamMemberRequest method.
 //    req := client.UpdateTeamMemberRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -883,7 +905,8 @@ type UpdateUserProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateUserProfile API request.
-func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
+func (r UpdateUserProfileRequest) Send(ctx context.Context) (*UpdateUserProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -901,7 +924,7 @@ func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
 //
 //    // Example sending a request using the UpdateUserProfileRequest method.
 //    req := client.UpdateUserProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1023,25 +1046,227 @@ func (s AssociateTeamMemberOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Location and destination information about the source code files provided
+// with the project request. The source code is uploaded to the new project
+// source repository after project creation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Code
+type Code struct {
+	_ struct{} `type:"structure"`
+
+	// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit
+	// or GitHub. After AWS CodeStar provisions the new repository, the source code
+	// files provided with the project request are placed in the repository.
+	//
+	// Destination is a required field
+	Destination *CodeDestination `locationName:"destination" type:"structure" required:"true"`
+
+	// The location where the source code files provided with the project request
+	// are stored. AWS CodeStar retrieves the files during project creation.
+	//
+	// Source is a required field
+	Source *CodeSource `locationName:"source" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s Code) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Code) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Code) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Code"}
+
+	if s.Destination == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
+	}
+
+	if s.Source == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
+	}
+	if s.Destination != nil {
+		if err := s.Destination.Validate(); err != nil {
+			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Source != nil {
+		if err := s.Source.Validate(); err != nil {
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about the AWS CodeCommit repository to be created in AWS CodeStar.
+// This is where the source code files provided with the project request will
+// be uploaded after project creation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeCommitCodeDestination
+type CodeCommitCodeDestination struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the AWS CodeCommit repository to be created in AWS CodeStar.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CodeCommitCodeDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CodeCommitCodeDestination) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CodeCommitCodeDestination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CodeCommitCodeDestination"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit
+// or GitHub. After AWS CodeStar provisions the new repository, the source code
+// files provided with the project request are placed in the repository.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeDestination
+type CodeDestination struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the AWS CodeCommit repository to be created in AWS CodeStar.
+	// This is where the source code files provided with the project request will
+	// be uploaded after project creation.
+	CodeCommit *CodeCommitCodeDestination `locationName:"codeCommit" type:"structure"`
+
+	// Information about the GitHub repository to be created in AWS CodeStar. This
+	// is where the source code files provided with the project request will be
+	// uploaded after project creation.
+	GitHub *GitHubCodeDestination `locationName:"gitHub" type:"structure"`
+}
+
+// String returns the string representation
+func (s CodeDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CodeDestination) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CodeDestination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CodeDestination"}
+	if s.CodeCommit != nil {
+		if err := s.CodeCommit.Validate(); err != nil {
+			invalidParams.AddNested("CodeCommit", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.GitHub != nil {
+		if err := s.GitHub.Validate(); err != nil {
+			invalidParams.AddNested("GitHub", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The location where the source code files provided with the project request
+// are stored. AWS CodeStar retrieves the files during project creation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CodeSource
+type CodeSource struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the Amazon S3 location where the source code files provided
+	// with the project request are stored.
+	//
+	// S3 is a required field
+	S3 *S3Location `locationName:"s3" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CodeSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CodeSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CodeSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CodeSource"}
+
+	if s.S3 == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3"))
+	}
+	if s.S3 != nil {
+		if err := s.S3.Validate(); err != nil {
+			invalidParams.AddNested("S3", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectRequest
 type CreateProjectInput struct {
 	_ struct{} `type:"structure"`
 
-	// Reserved for future use.
+	// A user- or system-generated token that identifies the entity that requested
+	// project creation. This token can be used to repeat the request.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
-	// Reserved for future use.
+	// The description of the project, if any.
 	Description *string `locationName:"description" type:"string"`
 
-	// Reserved for future use.
+	// The ID of the project to be created in AWS CodeStar.
 	//
 	// Id is a required field
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
 
-	// Reserved for future use.
+	// The display name for the project to be created in AWS CodeStar.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// A list of the Code objects submitted with the project request. If this parameter
+	// is specified, the request must also include the toolchain parameter.
+	SourceCode []Code `locationName:"sourceCode" type:"list"`
+
+	// The tags created for the project.
+	Tags map[string]string `locationName:"tags" type:"map"`
+
+	// The name of the toolchain template file submitted with the project request.
+	// If this parameter is specified, the request must also include the sourceCode
+	// parameter.
+	Toolchain *Toolchain `locationName:"toolchain" type:"structure"`
 }
 
 // String returns the string representation
@@ -1074,6 +1299,18 @@ func (s *CreateProjectInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.SourceCode != nil {
+		for i, v := range s.SourceCode {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SourceCode", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Toolchain != nil {
+		if err := s.Toolchain.Validate(); err != nil {
+			invalidParams.AddNested("Toolchain", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1087,15 +1324,16 @@ type CreateProjectOutput struct {
 
 	responseMetadata aws.Response
 
-	// Reserved for future use.
+	// The Amazon Resource Name (ARN) of the created project.
 	//
 	// Arn is a required field
 	Arn *string `locationName:"arn" type:"string" required:"true"`
 
-	// Reserved for future use.
+	// A user- or system-generated token that identifies the entity that requested
+	// project creation.
 	ClientRequestToken *string `locationName:"clientRequestToken" min:"1" type:"string"`
 
-	// Reserved for future use.
+	// The ID of the project.
 	//
 	// Id is a required field
 	Id *string `locationName:"id" min:"2" type:"string" required:"true"`
@@ -1443,6 +1681,9 @@ type DescribeProjectOutput struct {
 	// The ID of the primary stack in AWS CloudFormation used to generate resources
 	// for the project.
 	StackId *string `locationName:"stackId" type:"string"`
+
+	// The project creation or deletion status.
+	Status *ProjectStatus `locationName:"status" type:"structure"`
 }
 
 // String returns the string representation
@@ -1625,6 +1866,107 @@ func (s DisassociateTeamMemberOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateTeamMemberOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Information about the GitHub repository to be created in AWS CodeStar. This
+// is where the source code files provided with the project request will be
+// uploaded after project creation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/GitHubCodeDestination
+type GitHubCodeDestination struct {
+	_ struct{} `type:"structure"`
+
+	// Description for the GitHub repository to be created in AWS CodeStar. This
+	// description displays in GitHub after the repository is created.
+	Description *string `locationName:"description" min:"1" type:"string"`
+
+	// Whether to enable issues for the GitHub repository.
+	//
+	// IssuesEnabled is a required field
+	IssuesEnabled *bool `locationName:"issuesEnabled" type:"boolean" required:"true"`
+
+	// Name of the GitHub repository to be created in AWS CodeStar.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The GitHub username for the owner of the GitHub repository to be created
+	// in AWS CodeStar. If this repository should be owned by a GitHub organization,
+	// provide its name.
+	//
+	// Owner is a required field
+	Owner *string `locationName:"owner" min:"1" type:"string" required:"true"`
+
+	// Whether the GitHub repository is to be a private repository.
+	//
+	// PrivateRepository is a required field
+	PrivateRepository *bool `locationName:"privateRepository" type:"boolean" required:"true"`
+
+	// The GitHub user's personal access token for the GitHub repository.
+	//
+	// Token is a required field
+	Token *string `locationName:"token" min:"1" type:"string" required:"true"`
+
+	// The type of GitHub repository to be created in AWS CodeStar. Valid values
+	// are User or Organization.
+	//
+	// Type is a required field
+	Type *string `locationName:"type" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GitHubCodeDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GitHubCodeDestination) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GitHubCodeDestination) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GitHubCodeDestination"}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	}
+
+	if s.IssuesEnabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IssuesEnabled"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.Owner == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Owner"))
+	}
+	if s.Owner != nil && len(*s.Owner) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Owner", 1))
+	}
+
+	if s.PrivateRepository == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PrivateRepository"))
+	}
+
+	if s.Token == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Token"))
+	}
+	if s.Token != nil && len(*s.Token) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Token", 1))
+	}
+
+	if s.Type == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjectsRequest
@@ -2002,6 +2344,30 @@ func (s ListUserProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// An indication of whether a project creation or deletion is failed or successful.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectStatus
+type ProjectStatus struct {
+	_ struct{} `type:"structure"`
+
+	// In the case of a project creation or deletion failure, a reason for the failure.
+	Reason *string `locationName:"reason" type:"string"`
+
+	// The phase of completion for a project creation or deletion.
+	//
+	// State is a required field
+	State *string `locationName:"state" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ProjectStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ProjectStatus) GoString() string {
+	return s.String()
+}
+
 // Information about the metadata for a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ProjectSummary
 type ProjectSummary struct {
@@ -2043,6 +2409,44 @@ func (s Resource) String() string {
 // GoString returns the string representation
 func (s Resource) GoString() string {
 	return s.String()
+}
+
+// The Amazon S3 location where the source code files provided with the project
+// request are stored.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/S3Location
+type S3Location struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 object key where the source code files provided with the project
+	// request are stored.
+	BucketKey *string `locationName:"bucketKey" type:"string"`
+
+	// The Amazon S3 bucket name where the source code files provided with the project
+	// request are stored.
+	BucketName *string `locationName:"bucketName" min:"3" type:"string"`
+}
+
+// String returns the string representation
+func (s S3Location) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s S3Location) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *S3Location) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "S3Location"}
+	if s.BucketName != nil && len(*s.BucketName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("BucketName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProjectRequest
@@ -2146,6 +2550,103 @@ func (s TeamMember) String() string {
 // GoString returns the string representation
 func (s TeamMember) GoString() string {
 	return s.String()
+}
+
+// The toolchain template file provided with the project request. AWS CodeStar
+// uses the template to provision the toolchain stack in AWS CloudFormation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/Toolchain
+type Toolchain struct {
+	_ struct{} `type:"structure"`
+
+	// The service role ARN for AWS CodeStar to use for the toolchain template during
+	// stack provisioning.
+	RoleArn *string `locationName:"roleArn" min:"1" type:"string"`
+
+	// The Amazon S3 location where the toolchain template file provided with the
+	// project request is stored. AWS CodeStar retrieves the file during project
+	// creation.
+	//
+	// Source is a required field
+	Source *ToolchainSource `locationName:"source" type:"structure" required:"true"`
+
+	// The list of parameter overrides to be passed into the toolchain template
+	// during stack provisioning, if any.
+	StackParameters map[string]string `locationName:"stackParameters" type:"map"`
+}
+
+// String returns the string representation
+func (s Toolchain) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Toolchain) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Toolchain) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Toolchain"}
+	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
+	}
+
+	if s.Source == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
+	}
+	if s.Source != nil {
+		if err := s.Source.Validate(); err != nil {
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The Amazon S3 location where the toolchain template file provided with the
+// project request is stored. AWS CodeStar retrieves the file during project
+// creation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ToolchainSource
+type ToolchainSource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon S3 bucket where the toolchain template file provided with the
+	// project request is stored.
+	//
+	// S3 is a required field
+	S3 *S3Location `locationName:"s3" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ToolchainSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ToolchainSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ToolchainSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ToolchainSource"}
+
+	if s.S3 == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3"))
+	}
+	if s.S3 != nil {
+		if err := s.S3.Validate(); err != nil {
+			invalidParams.AddNested("S3", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProjectRequest

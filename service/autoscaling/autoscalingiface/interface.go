@@ -9,6 +9,8 @@
 package autoscalingiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 )
@@ -171,14 +173,11 @@ type AutoScalingAPI interface {
 
 	UpdateAutoScalingGroupRequest(*autoscaling.UpdateAutoScalingGroupInput) autoscaling.UpdateAutoScalingGroupRequest
 
-	WaitUntilGroupExists(*autoscaling.DescribeAutoScalingGroupsInput) error
-	WaitUntilGroupExistsWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+	WaitUntilGroupExists(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 
-	WaitUntilGroupInService(*autoscaling.DescribeAutoScalingGroupsInput) error
-	WaitUntilGroupInServiceWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+	WaitUntilGroupInService(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 
-	WaitUntilGroupNotExists(*autoscaling.DescribeAutoScalingGroupsInput) error
-	WaitUntilGroupNotExistsWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
+	WaitUntilGroupNotExists(context.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error
 }
 
 var _ AutoScalingAPI = (*autoscaling.AutoScaling)(nil)

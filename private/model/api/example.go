@@ -64,12 +64,9 @@ func Example{{ .API.StructName }}_{{ .MethodName }}() {
 	}
 
 	svc := {{ .API.PackageName }}.New(cfg)
-	input := &{{ .Operation.InputRef.Shape.GoTypeWithPkgNameElem  }} {
-		{{ generateExampleInput . -}}
-	}
-
+	input := {{ generateExampleInput . }}
 	req := svc.{{ .OperationName }}Request(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -136,7 +133,10 @@ func (ex Example) GoCode() string {
 
 func generateExampleInput(ex Example) string {
 	if ex.Operation.HasInput() {
-		return ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false, false)
+		return fmt.Sprintf("&%s{\n%s\n}\n",
+			ex.Builder.GoType(&ex.Operation.InputRef, true),
+			ex.Builder.BuildShape(&ex.Operation.InputRef, ex.Input, false, false),
+		)
 	}
 	return ""
 }

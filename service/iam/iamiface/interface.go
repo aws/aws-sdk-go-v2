@@ -9,6 +9,8 @@
 package iamiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 )
@@ -163,6 +165,8 @@ type IAMAPI interface {
 
 	GenerateCredentialReportRequest(*iam.GenerateCredentialReportInput) iam.GenerateCredentialReportRequest
 
+	GenerateServiceLastAccessedDetailsRequest(*iam.GenerateServiceLastAccessedDetailsInput) iam.GenerateServiceLastAccessedDetailsRequest
+
 	GetAccessKeyLastUsedRequest(*iam.GetAccessKeyLastUsedInput) iam.GetAccessKeyLastUsedRequest
 
 	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
@@ -201,6 +205,10 @@ type IAMAPI interface {
 
 	GetServerCertificateRequest(*iam.GetServerCertificateInput) iam.GetServerCertificateRequest
 
+	GetServiceLastAccessedDetailsRequest(*iam.GetServiceLastAccessedDetailsInput) iam.GetServiceLastAccessedDetailsRequest
+
+	GetServiceLastAccessedDetailsWithEntitiesRequest(*iam.GetServiceLastAccessedDetailsWithEntitiesInput) iam.GetServiceLastAccessedDetailsWithEntitiesRequest
+
 	GetServiceLinkedRoleDeletionStatusRequest(*iam.GetServiceLinkedRoleDeletionStatusInput) iam.GetServiceLinkedRoleDeletionStatusRequest
 
 	GetUserRequest(*iam.GetUserInput) iam.GetUserRequest
@@ -235,9 +243,13 @@ type IAMAPI interface {
 
 	ListPoliciesRequest(*iam.ListPoliciesInput) iam.ListPoliciesRequest
 
+	ListPoliciesGrantingServiceAccessRequest(*iam.ListPoliciesGrantingServiceAccessInput) iam.ListPoliciesGrantingServiceAccessRequest
+
 	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
 
 	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) iam.ListRolePoliciesRequest
+
+	ListRoleTagsRequest(*iam.ListRoleTagsInput) iam.ListRoleTagsRequest
 
 	ListRolesRequest(*iam.ListRolesInput) iam.ListRolesRequest
 
@@ -252,6 +264,8 @@ type IAMAPI interface {
 	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
 
 	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) iam.ListUserPoliciesRequest
+
+	ListUserTagsRequest(*iam.ListUserTagsInput) iam.ListUserTagsRequest
 
 	ListUsersRequest(*iam.ListUsersInput) iam.ListUsersRequest
 
@@ -282,6 +296,14 @@ type IAMAPI interface {
 	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
 
 	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
+
+	TagRoleRequest(*iam.TagRoleInput) iam.TagRoleRequest
+
+	TagUserRequest(*iam.TagUserInput) iam.TagUserRequest
+
+	UntagRoleRequest(*iam.UntagRoleInput) iam.UntagRoleRequest
+
+	UntagUserRequest(*iam.UntagUserInput) iam.UntagUserRequest
 
 	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
 
@@ -317,11 +339,9 @@ type IAMAPI interface {
 
 	UploadSigningCertificateRequest(*iam.UploadSigningCertificateInput) iam.UploadSigningCertificateRequest
 
-	WaitUntilInstanceProfileExists(*iam.GetInstanceProfileInput) error
-	WaitUntilInstanceProfileExistsWithContext(aws.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
+	WaitUntilInstanceProfileExists(context.Context, *iam.GetInstanceProfileInput, ...aws.WaiterOption) error
 
-	WaitUntilUserExists(*iam.GetUserInput) error
-	WaitUntilUserExistsWithContext(aws.Context, *iam.GetUserInput, ...aws.WaiterOption) error
+	WaitUntilUserExists(context.Context, *iam.GetUserInput, ...aws.WaiterOption) error
 }
 
 var _ IAMAPI = (*iam.IAM)(nil)

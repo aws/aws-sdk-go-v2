@@ -3,6 +3,7 @@
 package applicationautoscaling
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type DeleteScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteScalingPolicy API request.
-func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+func (r DeleteScalingPolicyRequest) Send(ctx context.Context) (*DeleteScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +44,7 @@ func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
 //
 //    // Example sending a request using the DeleteScalingPolicyRequest method.
 //    req := client.DeleteScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +78,8 @@ type DeleteScheduledActionRequest struct {
 }
 
 // Send marshals and sends the DeleteScheduledAction API request.
-func (r DeleteScheduledActionRequest) Send() (*DeleteScheduledActionOutput, error) {
+func (r DeleteScheduledActionRequest) Send(ctx context.Context) (*DeleteScheduledActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,7 @@ func (r DeleteScheduledActionRequest) Send() (*DeleteScheduledActionOutput, erro
 //
 //    // Example sending a request using the DeleteScheduledActionRequest method.
 //    req := client.DeleteScheduledActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +129,8 @@ type DeregisterScalableTargetRequest struct {
 }
 
 // Send marshals and sends the DeregisterScalableTarget API request.
-func (r DeregisterScalableTargetRequest) Send() (*DeregisterScalableTargetOutput, error) {
+func (r DeregisterScalableTargetRequest) Send(ctx context.Context) (*DeregisterScalableTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -147,7 +151,7 @@ func (r DeregisterScalableTargetRequest) Send() (*DeregisterScalableTargetOutput
 //
 //    // Example sending a request using the DeregisterScalableTargetRequest method.
 //    req := client.DeregisterScalableTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -181,7 +185,8 @@ type DescribeScalableTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeScalableTargets API request.
-func (r DescribeScalableTargetsRequest) Send() (*DescribeScalableTargetsOutput, error) {
+func (r DescribeScalableTargetsRequest) Send(ctx context.Context) (*DescribeScalableTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,7 +208,7 @@ func (r DescribeScalableTargetsRequest) Send() (*DescribeScalableTargetsOutput, 
 //
 //    // Example sending a request using the DescribeScalableTargetsRequest method.
 //    req := client.DescribeScalableTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -253,7 +258,7 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeS
 func (p *DescribeScalableTargetsRequest) Paginate(opts ...aws.Option) DescribeScalableTargetsPager {
 	return DescribeScalableTargetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalableTargetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -262,6 +267,7 @@ func (p *DescribeScalableTargetsRequest) Paginate(opts ...aws.Option) DescribeSc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -289,7 +295,8 @@ type DescribeScalingActivitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingActivities API request.
-func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+func (r DescribeScalingActivitiesRequest) Send(ctx context.Context) (*DescribeScalingActivitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -313,7 +320,7 @@ func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutp
 //
 //    // Example sending a request using the DescribeScalingActivitiesRequest method.
 //    req := client.DescribeScalingActivitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -363,7 +370,7 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *Describ
 func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
 	return DescribeScalingActivitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalingActivitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -372,6 +379,7 @@ func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -399,7 +407,8 @@ type DescribeScalingPoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingPolicies API request.
-func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+func (r DescribeScalingPoliciesRequest) Send(ctx context.Context) (*DescribeScalingPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -421,7 +430,7 @@ func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, 
 //
 //    // Example sending a request using the DescribeScalingPoliciesRequest method.
 //    req := client.DescribeScalingPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -471,7 +480,7 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeS
 func (p *DescribeScalingPoliciesRequest) Paginate(opts ...aws.Option) DescribeScalingPoliciesPager {
 	return DescribeScalingPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalingPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -480,6 +489,7 @@ func (p *DescribeScalingPoliciesRequest) Paginate(opts ...aws.Option) DescribeSc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -507,7 +517,8 @@ type DescribeScheduledActionsRequest struct {
 }
 
 // Send marshals and sends the DescribeScheduledActions API request.
-func (r DescribeScheduledActionsRequest) Send() (*DescribeScheduledActionsOutput, error) {
+func (r DescribeScheduledActionsRequest) Send(ctx context.Context) (*DescribeScheduledActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -529,7 +540,7 @@ func (r DescribeScheduledActionsRequest) Send() (*DescribeScheduledActionsOutput
 //
 //    // Example sending a request using the DescribeScheduledActionsRequest method.
 //    req := client.DescribeScheduledActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -563,7 +574,8 @@ type PutScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
-func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+func (r PutScalingPolicyRequest) Send(ctx context.Context) (*PutScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -591,7 +603,7 @@ func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
 //
 //    // Example sending a request using the PutScalingPolicyRequest method.
 //    req := client.PutScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -625,7 +637,8 @@ type PutScheduledActionRequest struct {
 }
 
 // Send marshals and sends the PutScheduledAction API request.
-func (r PutScheduledActionRequest) Send() (*PutScheduledActionOutput, error) {
+func (r PutScheduledActionRequest) Send(ctx context.Context) (*PutScheduledActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -655,7 +668,7 @@ func (r PutScheduledActionRequest) Send() (*PutScheduledActionOutput, error) {
 //
 //    // Example sending a request using the PutScheduledActionRequest method.
 //    req := client.PutScheduledActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -689,7 +702,8 @@ type RegisterScalableTargetRequest struct {
 }
 
 // Send marshals and sends the RegisterScalableTarget API request.
-func (r RegisterScalableTargetRequest) Send() (*RegisterScalableTargetOutput, error) {
+func (r RegisterScalableTargetRequest) Send(ctx context.Context) (*RegisterScalableTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -713,7 +727,7 @@ func (r RegisterScalableTargetRequest) Send() (*RegisterScalableTargetOutput, er
 //
 //    // Example sending a request using the RegisterScalableTargetRequest method.
 //    req := client.RegisterScalableTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

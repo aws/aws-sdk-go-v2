@@ -3,6 +3,7 @@
 package sqs
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AddPermissionRequest struct {
 }
 
 // Send marshals and sends the AddPermission API request.
-func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+func (r AddPermissionRequest) Send(ctx context.Context) (*AddPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -64,7 +66,7 @@ func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
 //
 //    // Example sending a request using the AddPermissionRequest method.
 //    req := client.AddPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -100,7 +102,8 @@ type ChangeMessageVisibilityRequest struct {
 }
 
 // Send marshals and sends the ChangeMessageVisibility API request.
-func (r ChangeMessageVisibilityRequest) Send() (*ChangeMessageVisibilityOutput, error) {
+func (r ChangeMessageVisibilityRequest) Send(ctx context.Context) (*ChangeMessageVisibilityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -148,7 +151,7 @@ func (r ChangeMessageVisibilityRequest) Send() (*ChangeMessageVisibilityOutput, 
 //
 //    // Example sending a request using the ChangeMessageVisibilityRequest method.
 //    req := client.ChangeMessageVisibilityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -184,7 +187,8 @@ type ChangeMessageVisibilityBatchRequest struct {
 }
 
 // Send marshals and sends the ChangeMessageVisibilityBatch API request.
-func (r ChangeMessageVisibilityBatchRequest) Send() (*ChangeMessageVisibilityBatchOutput, error) {
+func (r ChangeMessageVisibilityBatchRequest) Send(ctx context.Context) (*ChangeMessageVisibilityBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -215,7 +219,7 @@ func (r ChangeMessageVisibilityBatchRequest) Send() (*ChangeMessageVisibilityBat
 //
 //    // Example sending a request using the ChangeMessageVisibilityBatchRequest method.
 //    req := client.ChangeMessageVisibilityBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -249,7 +253,8 @@ type CreateQueueRequest struct {
 }
 
 // Send marshals and sends the CreateQueue API request.
-func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
+func (r CreateQueueRequest) Send(ctx context.Context) (*CreateQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,7 +313,7 @@ func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
 //
 //    // Example sending a request using the CreateQueueRequest method.
 //    req := client.CreateQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -342,7 +347,8 @@ type DeleteMessageRequest struct {
 }
 
 // Send marshals and sends the DeleteMessage API request.
-func (r DeleteMessageRequest) Send() (*DeleteMessageOutput, error) {
+func (r DeleteMessageRequest) Send(ctx context.Context) (*DeleteMessageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -377,7 +383,7 @@ func (r DeleteMessageRequest) Send() (*DeleteMessageOutput, error) {
 //
 //    // Example sending a request using the DeleteMessageRequest method.
 //    req := client.DeleteMessageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -413,7 +419,8 @@ type DeleteMessageBatchRequest struct {
 }
 
 // Send marshals and sends the DeleteMessageBatch API request.
-func (r DeleteMessageBatchRequest) Send() (*DeleteMessageBatchOutput, error) {
+func (r DeleteMessageBatchRequest) Send(ctx context.Context) (*DeleteMessageBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +450,7 @@ func (r DeleteMessageBatchRequest) Send() (*DeleteMessageBatchOutput, error) {
 //
 //    // Example sending a request using the DeleteMessageBatchRequest method.
 //    req := client.DeleteMessageBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -477,7 +484,8 @@ type DeleteQueueRequest struct {
 }
 
 // Send marshals and sends the DeleteQueue API request.
-func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
+func (r DeleteQueueRequest) Send(ctx context.Context) (*DeleteQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,7 +517,7 @@ func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
 //
 //    // Example sending a request using the DeleteQueueRequest method.
 //    req := client.DeleteQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -545,7 +553,8 @@ type GetQueueAttributesRequest struct {
 }
 
 // Send marshals and sends the GetQueueAttributes API request.
-func (r GetQueueAttributesRequest) Send() (*GetQueueAttributesOutput, error) {
+func (r GetQueueAttributesRequest) Send(ctx context.Context) (*GetQueueAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -572,7 +581,7 @@ func (r GetQueueAttributesRequest) Send() (*GetQueueAttributesOutput, error) {
 //
 //    // Example sending a request using the GetQueueAttributesRequest method.
 //    req := client.GetQueueAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -606,7 +615,8 @@ type GetQueueUrlRequest struct {
 }
 
 // Send marshals and sends the GetQueueUrl API request.
-func (r GetQueueUrlRequest) Send() (*GetQueueUrlOutput, error) {
+func (r GetQueueUrlRequest) Send(ctx context.Context) (*GetQueueUrlOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -629,7 +639,7 @@ func (r GetQueueUrlRequest) Send() (*GetQueueUrlOutput, error) {
 //
 //    // Example sending a request using the GetQueueUrlRequest method.
 //    req := client.GetQueueUrlRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -663,7 +673,8 @@ type ListDeadLetterSourceQueuesRequest struct {
 }
 
 // Send marshals and sends the ListDeadLetterSourceQueues API request.
-func (r ListDeadLetterSourceQueuesRequest) Send() (*ListDeadLetterSourceQueuesOutput, error) {
+func (r ListDeadLetterSourceQueuesRequest) Send(ctx context.Context) (*ListDeadLetterSourceQueuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,7 +695,7 @@ func (r ListDeadLetterSourceQueuesRequest) Send() (*ListDeadLetterSourceQueuesOu
 //
 //    // Example sending a request using the ListDeadLetterSourceQueuesRequest method.
 //    req := client.ListDeadLetterSourceQueuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -718,7 +729,8 @@ type ListQueueTagsRequest struct {
 }
 
 // Send marshals and sends the ListQueueTags API request.
-func (r ListQueueTagsRequest) Send() (*ListQueueTagsOutput, error) {
+func (r ListQueueTagsRequest) Send(ctx context.Context) (*ListQueueTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +770,7 @@ func (r ListQueueTagsRequest) Send() (*ListQueueTagsOutput, error) {
 //
 //    // Example sending a request using the ListQueueTagsRequest method.
 //    req := client.ListQueueTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -792,7 +804,8 @@ type ListQueuesRequest struct {
 }
 
 // Send marshals and sends the ListQueues API request.
-func (r ListQueuesRequest) Send() (*ListQueuesOutput, error) {
+func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -814,7 +827,7 @@ func (r ListQueuesRequest) Send() (*ListQueuesOutput, error) {
 //
 //    // Example sending a request using the ListQueuesRequest method.
 //    req := client.ListQueuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -848,7 +861,8 @@ type PurgeQueueRequest struct {
 }
 
 // Send marshals and sends the PurgeQueue API request.
-func (r PurgeQueueRequest) Send() (*PurgeQueueOutput, error) {
+func (r PurgeQueueRequest) Send(ctx context.Context) (*PurgeQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -876,7 +890,7 @@ func (r PurgeQueueRequest) Send() (*PurgeQueueOutput, error) {
 //
 //    // Example sending a request using the PurgeQueueRequest method.
 //    req := client.PurgeQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -912,7 +926,8 @@ type ReceiveMessageRequest struct {
 }
 
 // Send marshals and sends the ReceiveMessage API request.
-func (r ReceiveMessageRequest) Send() (*ReceiveMessageOutput, error) {
+func (r ReceiveMessageRequest) Send(ctx context.Context) (*ReceiveMessageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -974,7 +989,7 @@ func (r ReceiveMessageRequest) Send() (*ReceiveMessageOutput, error) {
 //
 //    // Example sending a request using the ReceiveMessageRequest method.
 //    req := client.ReceiveMessageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1008,7 +1023,8 @@ type RemovePermissionRequest struct {
 }
 
 // Send marshals and sends the RemovePermission API request.
-func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+func (r RemovePermissionRequest) Send(ctx context.Context) (*RemovePermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1031,7 +1047,7 @@ func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
 //
 //    // Example sending a request using the RemovePermissionRequest method.
 //    req := client.RemovePermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1067,7 +1083,8 @@ type SendMessageRequest struct {
 }
 
 // Send marshals and sends the SendMessage API request.
-func (r SendMessageRequest) Send() (*SendMessageOutput, error) {
+func (r SendMessageRequest) Send(ctx context.Context) (*SendMessageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1091,7 +1108,7 @@ func (r SendMessageRequest) Send() (*SendMessageOutput, error) {
 //
 //    // Example sending a request using the SendMessageRequest method.
 //    req := client.SendMessageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1125,7 +1142,8 @@ type SendMessageBatchRequest struct {
 }
 
 // Send marshals and sends the SendMessageBatch API request.
-func (r SendMessageBatchRequest) Send() (*SendMessageBatchOutput, error) {
+func (r SendMessageBatchRequest) Send(ctx context.Context) (*SendMessageBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1171,7 +1189,7 @@ func (r SendMessageBatchRequest) Send() (*SendMessageBatchOutput, error) {
 //
 //    // Example sending a request using the SendMessageBatchRequest method.
 //    req := client.SendMessageBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1205,7 +1223,8 @@ type SetQueueAttributesRequest struct {
 }
 
 // Send marshals and sends the SetQueueAttributes API request.
-func (r SetQueueAttributesRequest) Send() (*SetQueueAttributesOutput, error) {
+func (r SetQueueAttributesRequest) Send(ctx context.Context) (*SetQueueAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1232,7 +1251,7 @@ func (r SetQueueAttributesRequest) Send() (*SetQueueAttributesOutput, error) {
 //
 //    // Example sending a request using the SetQueueAttributesRequest method.
 //    req := client.SetQueueAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1268,7 +1287,8 @@ type TagQueueRequest struct {
 }
 
 // Send marshals and sends the TagQueue API request.
-func (r TagQueueRequest) Send() (*TagQueueOutput, error) {
+func (r TagQueueRequest) Send(ctx context.Context) (*TagQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1308,7 +1328,7 @@ func (r TagQueueRequest) Send() (*TagQueueOutput, error) {
 //
 //    // Example sending a request using the TagQueueRequest method.
 //    req := client.TagQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1344,7 +1364,8 @@ type UntagQueueRequest struct {
 }
 
 // Send marshals and sends the UntagQueue API request.
-func (r UntagQueueRequest) Send() (*UntagQueueOutput, error) {
+func (r UntagQueueRequest) Send(ctx context.Context) (*UntagQueueOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1384,7 +1405,7 @@ func (r UntagQueueRequest) Send() (*UntagQueueOutput, error) {
 //
 //    // Example sending a request using the UntagQueueRequest method.
 //    req := client.UntagQueueRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3741,7 +3762,7 @@ type TagQueueInput struct {
 	// The list of tags to be added to the specified queue.
 	//
 	// Tags is a required field
-	Tags map[string]string `locationName:"Tag" locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
+	Tags map[string]string `locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
 }
 
 // String returns the string representation

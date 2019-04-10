@@ -3,6 +3,7 @@
 package s3
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // HeadBucket to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *S3) WaitUntilBucketExists(input *HeadBucketInput) error {
-	return c.WaitUntilBucketExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilBucketExistsWithContext is an extended version of WaitUntilBucketExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) WaitUntilBucketExistsWithContext(ctx aws.Context, input *HeadBucketInput, opts ...aws.WaiterOption) error {
+func (c *S3) WaitUntilBucketExists(ctx context.Context, input *HeadBucketInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBucketExists",
 		MaxAttempts: 20,
@@ -66,26 +60,19 @@ func (c *S3) WaitUntilBucketExistsWithContext(ctx aws.Context, input *HeadBucket
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilBucketNotExists uses the Amazon S3 API operation
 // HeadBucket to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *S3) WaitUntilBucketNotExists(input *HeadBucketInput) error {
-	return c.WaitUntilBucketNotExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilBucketNotExistsWithContext is an extended version of WaitUntilBucketNotExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) WaitUntilBucketNotExistsWithContext(ctx aws.Context, input *HeadBucketInput, opts ...aws.WaiterOption) error {
+func (c *S3) WaitUntilBucketNotExists(ctx context.Context, input *HeadBucketInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBucketNotExists",
 		MaxAttempts: 20,
@@ -112,26 +99,19 @@ func (c *S3) WaitUntilBucketNotExistsWithContext(ctx aws.Context, input *HeadBuc
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilObjectExists uses the Amazon S3 API operation
 // HeadObject to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *S3) WaitUntilObjectExists(input *HeadObjectInput) error {
-	return c.WaitUntilObjectExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilObjectExistsWithContext is an extended version of WaitUntilObjectExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) WaitUntilObjectExistsWithContext(ctx aws.Context, input *HeadObjectInput, opts ...aws.WaiterOption) error {
+func (c *S3) WaitUntilObjectExists(ctx context.Context, input *HeadObjectInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilObjectExists",
 		MaxAttempts: 20,
@@ -163,26 +143,19 @@ func (c *S3) WaitUntilObjectExistsWithContext(ctx aws.Context, input *HeadObject
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilObjectNotExists uses the Amazon S3 API operation
 // HeadObject to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *S3) WaitUntilObjectNotExists(input *HeadObjectInput) error {
-	return c.WaitUntilObjectNotExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilObjectNotExistsWithContext is an extended version of WaitUntilObjectNotExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) WaitUntilObjectNotExistsWithContext(ctx aws.Context, input *HeadObjectInput, opts ...aws.WaiterOption) error {
+func (c *S3) WaitUntilObjectNotExists(ctx context.Context, input *HeadObjectInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilObjectNotExists",
 		MaxAttempts: 20,
@@ -209,5 +182,5 @@ func (c *S3) WaitUntilObjectNotExistsWithContext(ctx aws.Context, input *HeadObj
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

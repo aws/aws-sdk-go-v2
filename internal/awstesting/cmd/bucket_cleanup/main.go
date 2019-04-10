@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"strings"
@@ -26,7 +27,7 @@ func main() {
 
 	svc := s3.New(cfg)
 	req := svc.ListBucketsRequest(&s3.ListBucketsInput{})
-	buckets, err := req.Send()
+	buckets, err := req.Send(context.Background())
 	if err != nil {
 		panic(fmt.Sprintf("failed to list buckets, %v", err))
 	}
@@ -68,20 +69,20 @@ func deleteBucket(svc *s3.S3, bucket string) error {
 	bucketName := &bucket
 
 	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName})
-	objs, err := listReq.Send()
+	objs, err := listReq.Send(context.Background())
 	if err != nil {
-		return fmt.Errorf("failed to list bucket %q objects, %v", bucketName, err)
+		return fmt.Errorf("failed to list bucket %q objects, %v", *bucketName, err)
 	}
 
 	for _, o := range objs.Contents {
 		delReq := svc.DeleteObjectRequest(&s3.DeleteObjectInput{Bucket: bucketName, Key: o.Key})
-		delReq.Send()
+		delReq.Send(context.Background())
 	}
 
 	listMulReq := svc.ListMultipartUploadsRequest(&s3.ListMultipartUploadsInput{Bucket: bucketName})
-	uploads, err := listMulReq.Send()
+	uploads, err := listMulReq.Send(context.Background())
 	if err != nil {
-		return fmt.Errorf("failed to list bucket %q multipart objects, %v", bucketName, err)
+		return fmt.Errorf("failed to list bucket %q multipart objects, %v", *bucketName, err)
 	}
 
 	for _, u := range uploads.Uploads {
@@ -90,12 +91,12 @@ func deleteBucket(svc *s3.S3, bucket string) error {
 			Key:      u.Key,
 			UploadId: u.UploadId,
 		})
-		abortReq.Send()
+		abortReq.Send(context.Background())
 	}
 
-	_, err = svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send()
+	_, err = svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send(context.Background())
 	if err != nil {
-		return fmt.Errorf("failed to delete bucket %q, %v", bucketName, err)
+		return fmt.Errorf("failed to delete bucket %q, %v", *bucketName, err)
 	}
 
 	return nil

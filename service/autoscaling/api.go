@@ -3,6 +3,7 @@
 package autoscaling
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AttachInstancesRequest struct {
 }
 
 // Send marshals and sends the AttachInstances API request.
-func (r AttachInstancesRequest) Send() (*AttachInstancesOutput, error) {
+func (r AttachInstancesRequest) Send(ctx context.Context) (*AttachInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -52,7 +54,7 @@ func (r AttachInstancesRequest) Send() (*AttachInstancesOutput, error) {
 //
 //    // Example sending a request using the AttachInstancesRequest method.
 //    req := client.AttachInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -88,7 +90,8 @@ type AttachLoadBalancerTargetGroupsRequest struct {
 }
 
 // Send marshals and sends the AttachLoadBalancerTargetGroups API request.
-func (r AttachLoadBalancerTargetGroupsRequest) Send() (*AttachLoadBalancerTargetGroupsOutput, error) {
+func (r AttachLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*AttachLoadBalancerTargetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,7 +114,7 @@ func (r AttachLoadBalancerTargetGroupsRequest) Send() (*AttachLoadBalancerTarget
 //
 //    // Example sending a request using the AttachLoadBalancerTargetGroupsRequest method.
 //    req := client.AttachLoadBalancerTargetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -145,7 +148,8 @@ type AttachLoadBalancersRequest struct {
 }
 
 // Send marshals and sends the AttachLoadBalancers API request.
-func (r AttachLoadBalancersRequest) Send() (*AttachLoadBalancersOutput, error) {
+func (r AttachLoadBalancersRequest) Send(ctx context.Context) (*AttachLoadBalancersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,7 +175,7 @@ func (r AttachLoadBalancersRequest) Send() (*AttachLoadBalancersOutput, error) {
 //
 //    // Example sending a request using the AttachLoadBalancersRequest method.
 //    req := client.AttachLoadBalancersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -205,7 +209,8 @@ type BatchDeleteScheduledActionRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteScheduledAction API request.
-func (r BatchDeleteScheduledActionRequest) Send() (*BatchDeleteScheduledActionOutput, error) {
+func (r BatchDeleteScheduledActionRequest) Send(ctx context.Context) (*BatchDeleteScheduledActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -221,7 +226,7 @@ func (r BatchDeleteScheduledActionRequest) Send() (*BatchDeleteScheduledActionOu
 //
 //    // Example sending a request using the BatchDeleteScheduledActionRequest method.
 //    req := client.BatchDeleteScheduledActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -255,7 +260,8 @@ type BatchPutScheduledUpdateGroupActionRequest struct {
 }
 
 // Send marshals and sends the BatchPutScheduledUpdateGroupAction API request.
-func (r BatchPutScheduledUpdateGroupActionRequest) Send() (*BatchPutScheduledUpdateGroupActionOutput, error) {
+func (r BatchPutScheduledUpdateGroupActionRequest) Send(ctx context.Context) (*BatchPutScheduledUpdateGroupActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -268,12 +274,12 @@ func (r BatchPutScheduledUpdateGroupActionRequest) Send() (*BatchPutScheduledUpd
 // Auto Scaling.
 //
 // Creates or updates one or more scheduled scaling actions for an Auto Scaling
-// group. When updating a scheduled scaling action, if you leave a parameter
-// unspecified, the corresponding value remains unchanged.
+// group. If you leave a parameter unspecified when updating a scheduled scaling
+// action, the corresponding value remains unchanged.
 //
 //    // Example sending a request using the BatchPutScheduledUpdateGroupActionRequest method.
 //    req := client.BatchPutScheduledUpdateGroupActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -307,7 +313,8 @@ type CompleteLifecycleActionRequest struct {
 }
 
 // Send marshals and sends the CompleteLifecycleAction API request.
-func (r CompleteLifecycleActionRequest) Send() (*CompleteLifecycleActionOutput, error) {
+func (r CompleteLifecycleActionRequest) Send(ctx context.Context) (*CompleteLifecycleActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -346,7 +353,7 @@ func (r CompleteLifecycleActionRequest) Send() (*CompleteLifecycleActionOutput, 
 //
 //    // Example sending a request using the CompleteLifecycleActionRequest method.
 //    req := client.CompleteLifecycleActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -380,7 +387,8 @@ type CreateAutoScalingGroupRequest struct {
 }
 
 // Send marshals and sends the CreateAutoScalingGroup API request.
-func (r CreateAutoScalingGroupRequest) Send() (*CreateAutoScalingGroupOutput, error) {
+func (r CreateAutoScalingGroupRequest) Send(ctx context.Context) (*CreateAutoScalingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -404,7 +412,7 @@ func (r CreateAutoScalingGroupRequest) Send() (*CreateAutoScalingGroupOutput, er
 //
 //    // Example sending a request using the CreateAutoScalingGroupRequest method.
 //    req := client.CreateAutoScalingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -440,7 +448,8 @@ type CreateLaunchConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateLaunchConfiguration API request.
-func (r CreateLaunchConfigurationRequest) Send() (*CreateLaunchConfigurationOutput, error) {
+func (r CreateLaunchConfigurationRequest) Send(ctx context.Context) (*CreateLaunchConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -464,7 +473,7 @@ func (r CreateLaunchConfigurationRequest) Send() (*CreateLaunchConfigurationOutp
 //
 //    // Example sending a request using the CreateLaunchConfigurationRequest method.
 //    req := client.CreateLaunchConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -500,7 +509,8 @@ type CreateOrUpdateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateOrUpdateTags API request.
-func (r CreateOrUpdateTagsRequest) Send() (*CreateOrUpdateTagsOutput, error) {
+func (r CreateOrUpdateTagsRequest) Send(ctx context.Context) (*CreateOrUpdateTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -522,7 +532,7 @@ func (r CreateOrUpdateTagsRequest) Send() (*CreateOrUpdateTagsOutput, error) {
 //
 //    // Example sending a request using the CreateOrUpdateTagsRequest method.
 //    req := client.CreateOrUpdateTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -558,7 +568,8 @@ type DeleteAutoScalingGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteAutoScalingGroup API request.
-func (r DeleteAutoScalingGroupRequest) Send() (*DeleteAutoScalingGroupOutput, error) {
+func (r DeleteAutoScalingGroupRequest) Send(ctx context.Context) (*DeleteAutoScalingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -580,8 +591,8 @@ func (r DeleteAutoScalingGroupRequest) Send() (*DeleteAutoScalingGroupOutput, er
 //
 // To remove instances from the Auto Scaling group before deleting it, call
 // DetachInstances with the list of instances and the option to decrement the
-// desired capacity so that Amazon EC2 Auto Scaling does not launch replacement
-// instances.
+// desired capacity. This ensures that Amazon EC2 Auto Scaling does not launch
+// replacement instances.
 //
 // To terminate all instances before deleting the Auto Scaling group, call UpdateAutoScalingGroup
 // and set the minimum size and desired capacity of the Auto Scaling group to
@@ -589,7 +600,7 @@ func (r DeleteAutoScalingGroupRequest) Send() (*DeleteAutoScalingGroupOutput, er
 //
 //    // Example sending a request using the DeleteAutoScalingGroupRequest method.
 //    req := client.DeleteAutoScalingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -625,7 +636,8 @@ type DeleteLaunchConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteLaunchConfiguration API request.
-func (r DeleteLaunchConfigurationRequest) Send() (*DeleteLaunchConfigurationOutput, error) {
+func (r DeleteLaunchConfigurationRequest) Send(ctx context.Context) (*DeleteLaunchConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,7 +657,7 @@ func (r DeleteLaunchConfigurationRequest) Send() (*DeleteLaunchConfigurationOutp
 //
 //    // Example sending a request using the DeleteLaunchConfigurationRequest method.
 //    req := client.DeleteLaunchConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -681,7 +693,8 @@ type DeleteLifecycleHookRequest struct {
 }
 
 // Send marshals and sends the DeleteLifecycleHook API request.
-func (r DeleteLifecycleHookRequest) Send() (*DeleteLifecycleHookOutput, error) {
+func (r DeleteLifecycleHookRequest) Send(ctx context.Context) (*DeleteLifecycleHookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -700,7 +713,7 @@ func (r DeleteLifecycleHookRequest) Send() (*DeleteLifecycleHookOutput, error) {
 //
 //    // Example sending a request using the DeleteLifecycleHookRequest method.
 //    req := client.DeleteLifecycleHookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -734,7 +747,8 @@ type DeleteNotificationConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteNotificationConfiguration API request.
-func (r DeleteNotificationConfigurationRequest) Send() (*DeleteNotificationConfigurationOutput, error) {
+func (r DeleteNotificationConfigurationRequest) Send(ctx context.Context) (*DeleteNotificationConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -750,7 +764,7 @@ func (r DeleteNotificationConfigurationRequest) Send() (*DeleteNotificationConfi
 //
 //    // Example sending a request using the DeleteNotificationConfigurationRequest method.
 //    req := client.DeleteNotificationConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -786,7 +800,8 @@ type DeletePolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePolicy API request.
-func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -805,7 +820,7 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyRequest method.
 //    req := client.DeletePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -841,7 +856,8 @@ type DeleteScheduledActionRequest struct {
 }
 
 // Send marshals and sends the DeleteScheduledAction API request.
-func (r DeleteScheduledActionRequest) Send() (*DeleteScheduledActionOutput, error) {
+func (r DeleteScheduledActionRequest) Send(ctx context.Context) (*DeleteScheduledActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -857,7 +873,7 @@ func (r DeleteScheduledActionRequest) Send() (*DeleteScheduledActionOutput, erro
 //
 //    // Example sending a request using the DeleteScheduledActionRequest method.
 //    req := client.DeleteScheduledActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -893,7 +909,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -909,7 +926,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -945,7 +962,8 @@ type DescribeAccountLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
-func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+func (r DescribeAccountLimitsRequest) Send(ctx context.Context) (*DescribeAccountLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -965,7 +983,7 @@ func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, erro
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
 //    req := client.DescribeAccountLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -999,7 +1017,8 @@ type DescribeAdjustmentTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeAdjustmentTypes API request.
-func (r DescribeAdjustmentTypesRequest) Send() (*DescribeAdjustmentTypesOutput, error) {
+func (r DescribeAdjustmentTypesRequest) Send(ctx context.Context) (*DescribeAdjustmentTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1015,7 +1034,7 @@ func (r DescribeAdjustmentTypesRequest) Send() (*DescribeAdjustmentTypesOutput, 
 //
 //    // Example sending a request using the DescribeAdjustmentTypesRequest method.
 //    req := client.DescribeAdjustmentTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1049,7 +1068,8 @@ type DescribeAutoScalingGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeAutoScalingGroups API request.
-func (r DescribeAutoScalingGroupsRequest) Send() (*DescribeAutoScalingGroupsOutput, error) {
+func (r DescribeAutoScalingGroupsRequest) Send(ctx context.Context) (*DescribeAutoScalingGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1065,7 +1085,7 @@ func (r DescribeAutoScalingGroupsRequest) Send() (*DescribeAutoScalingGroupsOutp
 //
 //    // Example sending a request using the DescribeAutoScalingGroupsRequest method.
 //    req := client.DescribeAutoScalingGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1115,7 +1135,7 @@ func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalin
 func (p *DescribeAutoScalingGroupsRequest) Paginate(opts ...aws.Option) DescribeAutoScalingGroupsPager {
 	return DescribeAutoScalingGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAutoScalingGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1124,6 +1144,7 @@ func (p *DescribeAutoScalingGroupsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1151,7 +1172,8 @@ type DescribeAutoScalingInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeAutoScalingInstances API request.
-func (r DescribeAutoScalingInstancesRequest) Send() (*DescribeAutoScalingInstancesOutput, error) {
+func (r DescribeAutoScalingInstancesRequest) Send(ctx context.Context) (*DescribeAutoScalingInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1167,7 +1189,7 @@ func (r DescribeAutoScalingInstancesRequest) Send() (*DescribeAutoScalingInstanc
 //
 //    // Example sending a request using the DescribeAutoScalingInstancesRequest method.
 //    req := client.DescribeAutoScalingInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1217,7 +1239,7 @@ func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoSca
 func (p *DescribeAutoScalingInstancesRequest) Paginate(opts ...aws.Option) DescribeAutoScalingInstancesPager {
 	return DescribeAutoScalingInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAutoScalingInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1226,6 +1248,7 @@ func (p *DescribeAutoScalingInstancesRequest) Paginate(opts ...aws.Option) Descr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1253,7 +1276,8 @@ type DescribeAutoScalingNotificationTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeAutoScalingNotificationTypes API request.
-func (r DescribeAutoScalingNotificationTypesRequest) Send() (*DescribeAutoScalingNotificationTypesOutput, error) {
+func (r DescribeAutoScalingNotificationTypesRequest) Send(ctx context.Context) (*DescribeAutoScalingNotificationTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1269,7 +1293,7 @@ func (r DescribeAutoScalingNotificationTypesRequest) Send() (*DescribeAutoScalin
 //
 //    // Example sending a request using the DescribeAutoScalingNotificationTypesRequest method.
 //    req := client.DescribeAutoScalingNotificationTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1303,7 +1327,8 @@ type DescribeLaunchConfigurationsRequest struct {
 }
 
 // Send marshals and sends the DescribeLaunchConfigurations API request.
-func (r DescribeLaunchConfigurationsRequest) Send() (*DescribeLaunchConfigurationsOutput, error) {
+func (r DescribeLaunchConfigurationsRequest) Send(ctx context.Context) (*DescribeLaunchConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1319,7 +1344,7 @@ func (r DescribeLaunchConfigurationsRequest) Send() (*DescribeLaunchConfiguratio
 //
 //    // Example sending a request using the DescribeLaunchConfigurationsRequest method.
 //    req := client.DescribeLaunchConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1369,7 +1394,7 @@ func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchC
 func (p *DescribeLaunchConfigurationsRequest) Paginate(opts ...aws.Option) DescribeLaunchConfigurationsPager {
 	return DescribeLaunchConfigurationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeLaunchConfigurationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1378,6 +1403,7 @@ func (p *DescribeLaunchConfigurationsRequest) Paginate(opts ...aws.Option) Descr
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1405,7 +1431,8 @@ type DescribeLifecycleHookTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeLifecycleHookTypes API request.
-func (r DescribeLifecycleHookTypesRequest) Send() (*DescribeLifecycleHookTypesOutput, error) {
+func (r DescribeLifecycleHookTypesRequest) Send(ctx context.Context) (*DescribeLifecycleHookTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1427,7 +1454,7 @@ func (r DescribeLifecycleHookTypesRequest) Send() (*DescribeLifecycleHookTypesOu
 //
 //    // Example sending a request using the DescribeLifecycleHookTypesRequest method.
 //    req := client.DescribeLifecycleHookTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1461,7 +1488,8 @@ type DescribeLifecycleHooksRequest struct {
 }
 
 // Send marshals and sends the DescribeLifecycleHooks API request.
-func (r DescribeLifecycleHooksRequest) Send() (*DescribeLifecycleHooksOutput, error) {
+func (r DescribeLifecycleHooksRequest) Send(ctx context.Context) (*DescribeLifecycleHooksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1477,7 +1505,7 @@ func (r DescribeLifecycleHooksRequest) Send() (*DescribeLifecycleHooksOutput, er
 //
 //    // Example sending a request using the DescribeLifecycleHooksRequest method.
 //    req := client.DescribeLifecycleHooksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1511,7 +1539,8 @@ type DescribeLoadBalancerTargetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerTargetGroups API request.
-func (r DescribeLoadBalancerTargetGroupsRequest) Send() (*DescribeLoadBalancerTargetGroupsOutput, error) {
+func (r DescribeLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*DescribeLoadBalancerTargetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1527,7 +1556,7 @@ func (r DescribeLoadBalancerTargetGroupsRequest) Send() (*DescribeLoadBalancerTa
 //
 //    // Example sending a request using the DescribeLoadBalancerTargetGroupsRequest method.
 //    req := client.DescribeLoadBalancerTargetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1561,7 +1590,8 @@ type DescribeLoadBalancersRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
-func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+func (r DescribeLoadBalancersRequest) Send(ctx context.Context) (*DescribeLoadBalancersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1575,12 +1605,12 @@ func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, erro
 //
 // Describes the load balancers for the specified Auto Scaling group.
 //
-// Note that this operation describes only Classic Load Balancers. If you have
-// Application Load Balancers, use DescribeLoadBalancerTargetGroups instead.
+// This operation describes only Classic Load Balancers. If you have Application
+// Load Balancers, use DescribeLoadBalancerTargetGroups instead.
 //
 //    // Example sending a request using the DescribeLoadBalancersRequest method.
 //    req := client.DescribeLoadBalancersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1614,7 +1644,8 @@ type DescribeMetricCollectionTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeMetricCollectionTypes API request.
-func (r DescribeMetricCollectionTypesRequest) Send() (*DescribeMetricCollectionTypesOutput, error) {
+func (r DescribeMetricCollectionTypesRequest) Send(ctx context.Context) (*DescribeMetricCollectionTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1628,12 +1659,12 @@ func (r DescribeMetricCollectionTypesRequest) Send() (*DescribeMetricCollectionT
 //
 // Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.
 //
-// Note that the GroupStandbyInstances metric is not returned by default. You
-// must explicitly request this metric when calling EnableMetricsCollection.
+// The GroupStandbyInstances metric is not returned by default. You must explicitly
+// request this metric when calling EnableMetricsCollection.
 //
 //    // Example sending a request using the DescribeMetricCollectionTypesRequest method.
 //    req := client.DescribeMetricCollectionTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1667,7 +1698,8 @@ type DescribeNotificationConfigurationsRequest struct {
 }
 
 // Send marshals and sends the DescribeNotificationConfigurations API request.
-func (r DescribeNotificationConfigurationsRequest) Send() (*DescribeNotificationConfigurationsOutput, error) {
+func (r DescribeNotificationConfigurationsRequest) Send(ctx context.Context) (*DescribeNotificationConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1684,7 +1716,7 @@ func (r DescribeNotificationConfigurationsRequest) Send() (*DescribeNotification
 //
 //    // Example sending a request using the DescribeNotificationConfigurationsRequest method.
 //    req := client.DescribeNotificationConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1734,7 +1766,7 @@ func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeN
 func (p *DescribeNotificationConfigurationsRequest) Paginate(opts ...aws.Option) DescribeNotificationConfigurationsPager {
 	return DescribeNotificationConfigurationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeNotificationConfigurationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1743,6 +1775,7 @@ func (p *DescribeNotificationConfigurationsRequest) Paginate(opts ...aws.Option)
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1770,7 +1803,8 @@ type DescribePoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribePolicies API request.
-func (r DescribePoliciesRequest) Send() (*DescribePoliciesOutput, error) {
+func (r DescribePoliciesRequest) Send(ctx context.Context) (*DescribePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1786,7 +1820,7 @@ func (r DescribePoliciesRequest) Send() (*DescribePoliciesOutput, error) {
 //
 //    // Example sending a request using the DescribePoliciesRequest method.
 //    req := client.DescribePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1836,7 +1870,7 @@ func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) Desc
 func (p *DescribePoliciesRequest) Paginate(opts ...aws.Option) DescribePoliciesPager {
 	return DescribePoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribePoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1845,6 +1879,7 @@ func (p *DescribePoliciesRequest) Paginate(opts ...aws.Option) DescribePoliciesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1872,7 +1907,8 @@ type DescribeScalingActivitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingActivities API request.
-func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+func (r DescribeScalingActivitiesRequest) Send(ctx context.Context) (*DescribeScalingActivitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1888,7 +1924,7 @@ func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutp
 //
 //    // Example sending a request using the DescribeScalingActivitiesRequest method.
 //    req := client.DescribeScalingActivitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1938,7 +1974,7 @@ func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingAct
 func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
 	return DescribeScalingActivitiesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScalingActivitiesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1947,6 +1983,7 @@ func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1974,7 +2011,8 @@ type DescribeScalingProcessTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingProcessTypes API request.
-func (r DescribeScalingProcessTypesRequest) Send() (*DescribeScalingProcessTypesOutput, error) {
+func (r DescribeScalingProcessTypesRequest) Send(ctx context.Context) (*DescribeScalingProcessTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1990,7 +2028,7 @@ func (r DescribeScalingProcessTypesRequest) Send() (*DescribeScalingProcessTypes
 //
 //    // Example sending a request using the DescribeScalingProcessTypesRequest method.
 //    req := client.DescribeScalingProcessTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2024,7 +2062,8 @@ type DescribeScheduledActionsRequest struct {
 }
 
 // Send marshals and sends the DescribeScheduledActions API request.
-func (r DescribeScheduledActionsRequest) Send() (*DescribeScheduledActionsOutput, error) {
+func (r DescribeScheduledActionsRequest) Send(ctx context.Context) (*DescribeScheduledActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2041,7 +2080,7 @@ func (r DescribeScheduledActionsRequest) Send() (*DescribeScheduledActionsOutput
 //
 //    // Example sending a request using the DescribeScheduledActionsRequest method.
 //    req := client.DescribeScheduledActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2091,7 +2130,7 @@ func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledAc
 func (p *DescribeScheduledActionsRequest) Paginate(opts ...aws.Option) DescribeScheduledActionsPager {
 	return DescribeScheduledActionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeScheduledActionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2100,6 +2139,7 @@ func (p *DescribeScheduledActionsRequest) Paginate(opts ...aws.Option) DescribeS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2127,7 +2167,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2152,7 +2193,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2202,7 +2243,7 @@ func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) DescribeTags
 func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 	return DescribeTagsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTagsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2211,6 +2252,7 @@ func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2238,7 +2280,8 @@ type DescribeTerminationPolicyTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeTerminationPolicyTypes API request.
-func (r DescribeTerminationPolicyTypesRequest) Send() (*DescribeTerminationPolicyTypesOutput, error) {
+func (r DescribeTerminationPolicyTypesRequest) Send(ctx context.Context) (*DescribeTerminationPolicyTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2252,9 +2295,13 @@ func (r DescribeTerminationPolicyTypesRequest) Send() (*DescribeTerminationPolic
 //
 // Describes the termination policies supported by Amazon EC2 Auto Scaling.
 //
+// For more information, see Controlling Which Auto Scaling Instances Terminate
+// During Scale In (http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html)
+// in the Amazon EC2 Auto Scaling User Guide.
+//
 //    // Example sending a request using the DescribeTerminationPolicyTypesRequest method.
 //    req := client.DescribeTerminationPolicyTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2288,7 +2335,8 @@ type DetachInstancesRequest struct {
 }
 
 // Send marshals and sends the DetachInstances API request.
-func (r DetachInstancesRequest) Send() (*DetachInstancesOutput, error) {
+func (r DetachInstancesRequest) Send(ctx context.Context) (*DetachInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2319,7 +2367,7 @@ func (r DetachInstancesRequest) Send() (*DetachInstancesOutput, error) {
 //
 //    // Example sending a request using the DetachInstancesRequest method.
 //    req := client.DetachInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2353,7 +2401,8 @@ type DetachLoadBalancerTargetGroupsRequest struct {
 }
 
 // Send marshals and sends the DetachLoadBalancerTargetGroups API request.
-func (r DetachLoadBalancerTargetGroupsRequest) Send() (*DetachLoadBalancerTargetGroupsOutput, error) {
+func (r DetachLoadBalancerTargetGroupsRequest) Send(ctx context.Context) (*DetachLoadBalancerTargetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2369,7 +2418,7 @@ func (r DetachLoadBalancerTargetGroupsRequest) Send() (*DetachLoadBalancerTarget
 //
 //    // Example sending a request using the DetachLoadBalancerTargetGroupsRequest method.
 //    req := client.DetachLoadBalancerTargetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2403,7 +2452,8 @@ type DetachLoadBalancersRequest struct {
 }
 
 // Send marshals and sends the DetachLoadBalancers API request.
-func (r DetachLoadBalancersRequest) Send() (*DetachLoadBalancersOutput, error) {
+func (r DetachLoadBalancersRequest) Send(ctx context.Context) (*DetachLoadBalancersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2418,17 +2468,17 @@ func (r DetachLoadBalancersRequest) Send() (*DetachLoadBalancersOutput, error) {
 // Detaches one or more Classic Load Balancers from the specified Auto Scaling
 // group.
 //
-// Note that this operation detaches only Classic Load Balancers. If you have
-// Application Load Balancers, use DetachLoadBalancerTargetGroups instead.
+// This operation detaches only Classic Load Balancers. If you have Application
+// Load Balancers, use DetachLoadBalancerTargetGroups instead.
 //
 // When you detach a load balancer, it enters the Removing state while deregistering
 // the instances in the group. When all instances are deregistered, then you
-// can no longer describe the load balancer using DescribeLoadBalancers. Note
-// that the instances remain running.
+// can no longer describe the load balancer using DescribeLoadBalancers. The
+// instances remain running.
 //
 //    // Example sending a request using the DetachLoadBalancersRequest method.
 //    req := client.DetachLoadBalancersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2462,7 +2512,8 @@ type DisableMetricsCollectionRequest struct {
 }
 
 // Send marshals and sends the DisableMetricsCollection API request.
-func (r DisableMetricsCollectionRequest) Send() (*DisableMetricsCollectionOutput, error) {
+func (r DisableMetricsCollectionRequest) Send(ctx context.Context) (*DisableMetricsCollectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2478,7 +2529,7 @@ func (r DisableMetricsCollectionRequest) Send() (*DisableMetricsCollectionOutput
 //
 //    // Example sending a request using the DisableMetricsCollectionRequest method.
 //    req := client.DisableMetricsCollectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2514,7 +2565,8 @@ type EnableMetricsCollectionRequest struct {
 }
 
 // Send marshals and sends the EnableMetricsCollection API request.
-func (r EnableMetricsCollectionRequest) Send() (*EnableMetricsCollectionOutput, error) {
+func (r EnableMetricsCollectionRequest) Send(ctx context.Context) (*EnableMetricsCollectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2532,7 +2584,7 @@ func (r EnableMetricsCollectionRequest) Send() (*EnableMetricsCollectionOutput, 
 //
 //    // Example sending a request using the EnableMetricsCollectionRequest method.
 //    req := client.EnableMetricsCollectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2568,7 +2620,8 @@ type EnterStandbyRequest struct {
 }
 
 // Send marshals and sends the EnterStandby API request.
-func (r EnterStandbyRequest) Send() (*EnterStandbyOutput, error) {
+func (r EnterStandbyRequest) Send(ctx context.Context) (*EnterStandbyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2588,7 +2641,7 @@ func (r EnterStandbyRequest) Send() (*EnterStandbyOutput, error) {
 //
 //    // Example sending a request using the EnterStandbyRequest method.
 //    req := client.EnterStandbyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2622,7 +2675,8 @@ type ExecutePolicyRequest struct {
 }
 
 // Send marshals and sends the ExecutePolicy API request.
-func (r ExecutePolicyRequest) Send() (*ExecutePolicyOutput, error) {
+func (r ExecutePolicyRequest) Send(ctx context.Context) (*ExecutePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2638,7 +2692,7 @@ func (r ExecutePolicyRequest) Send() (*ExecutePolicyOutput, error) {
 //
 //    // Example sending a request using the ExecutePolicyRequest method.
 //    req := client.ExecutePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2674,7 +2728,8 @@ type ExitStandbyRequest struct {
 }
 
 // Send marshals and sends the ExitStandby API request.
-func (r ExitStandbyRequest) Send() (*ExitStandbyOutput, error) {
+func (r ExitStandbyRequest) Send(ctx context.Context) (*ExitStandbyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2694,7 +2749,7 @@ func (r ExitStandbyRequest) Send() (*ExitStandbyOutput, error) {
 //
 //    // Example sending a request using the ExitStandbyRequest method.
 //    req := client.ExitStandbyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2728,7 +2783,8 @@ type PutLifecycleHookRequest struct {
 }
 
 // Send marshals and sends the PutLifecycleHook API request.
-func (r PutLifecycleHookRequest) Send() (*PutLifecycleHookOutput, error) {
+func (r PutLifecycleHookRequest) Send(ctx context.Context) (*PutLifecycleHookOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2740,11 +2796,11 @@ func (r PutLifecycleHookRequest) Send() (*PutLifecycleHookOutput, error) {
 // PutLifecycleHookRequest returns a request value for making API operation for
 // Auto Scaling.
 //
-// Creates or updates a lifecycle hook for the specified Auto Scaling Group.
+// Creates or updates a lifecycle hook for the specified Auto Scaling group.
 //
-// A lifecycle hook tells Amazon EC2 Auto Scaling that you want to perform an
-// action on an instance that is not actively in service; for example, either
-// when the instance launches or before the instance terminates.
+// A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an
+// instance that is not actively in service; for example, either when the instance
+// launches or before the instance terminates.
 //
 // This step is a part of the procedure for adding a lifecycle hook to an Auto
 // Scaling group:
@@ -2775,7 +2831,7 @@ func (r PutLifecycleHookRequest) Send() (*PutLifecycleHookOutput, error) {
 //
 //    // Example sending a request using the PutLifecycleHookRequest method.
 //    req := client.PutLifecycleHookRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2809,7 +2865,8 @@ type PutNotificationConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutNotificationConfiguration API request.
-func (r PutNotificationConfigurationRequest) Send() (*PutNotificationConfigurationOutput, error) {
+func (r PutNotificationConfigurationRequest) Send(ctx context.Context) (*PutNotificationConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2827,13 +2884,13 @@ func (r PutNotificationConfigurationRequest) Send() (*PutNotificationConfigurati
 //
 // This configuration overwrites any existing configuration.
 //
-// For more information see Getting SNS Notifications When Your Auto Scaling
+// For more information, see Getting SNS Notifications When Your Auto Scaling
 // Group Scales (http://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html)
 // in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the PutNotificationConfigurationRequest method.
 //    req := client.PutNotificationConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2869,7 +2926,8 @@ type PutScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
-func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+func (r PutScalingPolicyRequest) Send(ctx context.Context) (*PutScalingPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2882,9 +2940,9 @@ func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
 // Auto Scaling.
 //
 // Creates or updates a policy for an Auto Scaling group. To update an existing
-// policy, use the existing policy name and set the parameters you want to change.
-// Any existing parameter not changed in an update to an existing policy is
-// not changed in this update request.
+// policy, use the existing policy name and set the parameters to change. Any
+// existing parameter not changed in an update to an existing policy is not
+// changed in this update request.
 //
 // If you exceed your maximum limit of step adjustments, which by default is
 // 20 per region, the call fails. For information about updating this limit,
@@ -2893,7 +2951,7 @@ func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
 //
 //    // Example sending a request using the PutScalingPolicyRequest method.
 //    req := client.PutScalingPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2927,7 +2985,8 @@ type PutScheduledUpdateGroupActionRequest struct {
 }
 
 // Send marshals and sends the PutScheduledUpdateGroupAction API request.
-func (r PutScheduledUpdateGroupActionRequest) Send() (*PutScheduledUpdateGroupActionOutput, error) {
+func (r PutScheduledUpdateGroupActionRequest) Send(ctx context.Context) (*PutScheduledUpdateGroupActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2940,7 +2999,7 @@ func (r PutScheduledUpdateGroupActionRequest) Send() (*PutScheduledUpdateGroupAc
 // Auto Scaling.
 //
 // Creates or updates a scheduled scaling action for an Auto Scaling group.
-// When updating a scheduled scaling action, if you leave a parameter unspecified,
+// If you leave a parameter unspecified when updating a scheduled scaling action,
 // the corresponding value remains unchanged.
 //
 // For more information, see Scheduled Scaling (http://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html)
@@ -2948,7 +3007,7 @@ func (r PutScheduledUpdateGroupActionRequest) Send() (*PutScheduledUpdateGroupAc
 //
 //    // Example sending a request using the PutScheduledUpdateGroupActionRequest method.
 //    req := client.PutScheduledUpdateGroupActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2984,7 +3043,8 @@ type RecordLifecycleActionHeartbeatRequest struct {
 }
 
 // Send marshals and sends the RecordLifecycleActionHeartbeat API request.
-func (r RecordLifecycleActionHeartbeatRequest) Send() (*RecordLifecycleActionHeartbeatOutput, error) {
+func (r RecordLifecycleActionHeartbeatRequest) Send(ctx context.Context) (*RecordLifecycleActionHeartbeatOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3024,7 +3084,7 @@ func (r RecordLifecycleActionHeartbeatRequest) Send() (*RecordLifecycleActionHea
 //
 //    // Example sending a request using the RecordLifecycleActionHeartbeatRequest method.
 //    req := client.RecordLifecycleActionHeartbeatRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3058,7 +3118,8 @@ type ResumeProcessesRequest struct {
 }
 
 // Send marshals and sends the ResumeProcesses API request.
-func (r ResumeProcessesRequest) Send() (*ResumeProcessesOutput, error) {
+func (r ResumeProcessesRequest) Send(ctx context.Context) (*ResumeProcessesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3078,7 +3139,7 @@ func (r ResumeProcessesRequest) Send() (*ResumeProcessesOutput, error) {
 //
 //    // Example sending a request using the ResumeProcessesRequest method.
 //    req := client.ResumeProcessesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3114,7 +3175,8 @@ type SetDesiredCapacityRequest struct {
 }
 
 // Send marshals and sends the SetDesiredCapacity API request.
-func (r SetDesiredCapacityRequest) Send() (*SetDesiredCapacityOutput, error) {
+func (r SetDesiredCapacityRequest) Send(ctx context.Context) (*SetDesiredCapacityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3134,7 +3196,7 @@ func (r SetDesiredCapacityRequest) Send() (*SetDesiredCapacityOutput, error) {
 //
 //    // Example sending a request using the SetDesiredCapacityRequest method.
 //    req := client.SetDesiredCapacityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3170,7 +3232,8 @@ type SetInstanceHealthRequest struct {
 }
 
 // Send marshals and sends the SetInstanceHealth API request.
-func (r SetInstanceHealthRequest) Send() (*SetInstanceHealthOutput, error) {
+func (r SetInstanceHealthRequest) Send(ctx context.Context) (*SetInstanceHealthOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3189,7 +3252,7 @@ func (r SetInstanceHealthRequest) Send() (*SetInstanceHealthOutput, error) {
 //
 //    // Example sending a request using the SetInstanceHealthRequest method.
 //    req := client.SetInstanceHealthRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3225,7 +3288,8 @@ type SetInstanceProtectionRequest struct {
 }
 
 // Send marshals and sends the SetInstanceProtection API request.
-func (r SetInstanceProtectionRequest) Send() (*SetInstanceProtectionOutput, error) {
+func (r SetInstanceProtectionRequest) Send(ctx context.Context) (*SetInstanceProtectionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3244,7 +3308,7 @@ func (r SetInstanceProtectionRequest) Send() (*SetInstanceProtectionOutput, erro
 //
 //    // Example sending a request using the SetInstanceProtectionRequest method.
 //    req := client.SetInstanceProtectionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3278,7 +3342,8 @@ type SuspendProcessesRequest struct {
 }
 
 // Send marshals and sends the SuspendProcesses API request.
-func (r SuspendProcessesRequest) Send() (*SuspendProcessesOutput, error) {
+func (r SuspendProcessesRequest) Send(ctx context.Context) (*SuspendProcessesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3293,8 +3358,8 @@ func (r SuspendProcessesRequest) Send() (*SuspendProcessesOutput, error) {
 // Suspends the specified automatic scaling processes, or all processes, for
 // the specified Auto Scaling group.
 //
-// Note that if you suspend either the Launch or Terminate process types, it
-// can prevent other process types from functioning properly.
+// If you suspend either the Launch or Terminate process types, it can prevent
+// other process types from functioning properly.
 //
 // To resume processes that have been suspended, use ResumeProcesses.
 //
@@ -3303,7 +3368,7 @@ func (r SuspendProcessesRequest) Send() (*SuspendProcessesOutput, error) {
 //
 //    // Example sending a request using the SuspendProcessesRequest method.
 //    req := client.SuspendProcessesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3339,7 +3404,8 @@ type TerminateInstanceInAutoScalingGroupRequest struct {
 }
 
 // Send marshals and sends the TerminateInstanceInAutoScalingGroup API request.
-func (r TerminateInstanceInAutoScalingGroupRequest) Send() (*TerminateInstanceInAutoScalingGroupOutput, error) {
+func (r TerminateInstanceInAutoScalingGroupRequest) Send(ctx context.Context) (*TerminateInstanceInAutoScalingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3359,7 +3425,7 @@ func (r TerminateInstanceInAutoScalingGroupRequest) Send() (*TerminateInstanceIn
 //
 //    // Example sending a request using the TerminateInstanceInAutoScalingGroupRequest method.
 //    req := client.TerminateInstanceInAutoScalingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3393,7 +3459,8 @@ type UpdateAutoScalingGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateAutoScalingGroup API request.
-func (r UpdateAutoScalingGroupRequest) Send() (*UpdateAutoScalingGroupOutput, error) {
+func (r UpdateAutoScalingGroupRequest) Send(ctx context.Context) (*UpdateAutoScalingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3412,7 +3479,7 @@ func (r UpdateAutoScalingGroupRequest) Send() (*UpdateAutoScalingGroupOutput, er
 //
 // To update an Auto Scaling group with a launch configuration with InstanceMonitoring
 // set to false, you must first disable the collection of group metrics. Otherwise,
-// you will get an error. If you have previously enabled the collection of group
+// you get an error. If you have previously enabled the collection of group
 // metrics, you can disable it using DisableMetricsCollection.
 //
 // Note the following:
@@ -3431,7 +3498,7 @@ func (r UpdateAutoScalingGroupRequest) Send() (*UpdateAutoScalingGroupOutput, er
 //
 //    // Example sending a request using the UpdateAutoScalingGroupRequest method.
 //    req := client.UpdateAutoScalingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3517,7 +3584,7 @@ func (s Activity) GoString() string {
 
 // Describes a policy adjustment type.
 //
-// For more information, see Dynamic Scaling (http://docs.aws.amazon.com/autoscaling/ec2/DeveloperGuide/as-scale-based-on-demand.html)
+// For more information, see Dynamic Scaling (http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AdjustmentType
 type AdjustmentType struct {
@@ -3927,8 +3994,8 @@ type BlockDeviceMapping struct {
 	// Suppresses a device mapping.
 	//
 	// If this parameter is true for the root device, the instance might fail the
-	// EC2 health check. Amazon EC2 Auto Scaling launches a replacement instance
-	// if the instance fails the health check.
+	// EC2 health check. In that case, Amazon EC2 Auto Scaling launches a replacement
+	// instance.
 	NoDevice *bool `type:"boolean"`
 
 	// The name of the virtual device (for example, ephemeral0).
@@ -4111,25 +4178,25 @@ type CreateAutoScalingGroupInput struct {
 	HealthCheckType *string `min:"1" type:"string"`
 
 	// The ID of the instance used to create a launch configuration for the group.
-	// You must specify one of the following: an EC2 instance, a launch configuration,
-	// or a launch template.
+	// This parameter, a launch configuration, a launch template, or a mixed instances
+	// policy must be specified.
 	//
 	// When you specify an ID of an instance, Amazon EC2 Auto Scaling creates a
 	// new launch configuration and associates it with the group. This launch configuration
-	// derives its attributes from the specified instance, with the exception of
-	// the block device mapping.
+	// derives its attributes from the specified instance, except for the block
+	// device mapping.
 	//
 	// For more information, see Create an Auto Scaling Group Using an EC2 Instance
 	// (http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	InstanceId *string `min:"1" type:"string"`
 
-	// The name of the launch configuration. You must specify one of the following:
-	// a launch configuration, a launch template, or an EC2 instance.
+	// The name of the launch configuration. This parameter, a launch template,
+	// a mixed instances policy, or an EC2 instance must be specified.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
-	// The launch template to use to launch instances. You must specify one of the
-	// following: a launch template, a launch configuration, or an EC2 instance.
+	// The launch template to use to launch instances. This parameter, a launch
+	// configuration, a mixed instances policy, or an EC2 instance must be specified.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// One or more lifecycle hooks.
@@ -4153,12 +4220,16 @@ type CreateAutoScalingGroupInput struct {
 	// MinSize is a required field
 	MinSize *int64 `type:"integer" required:"true"`
 
+	// The mixed instances policy to use to launch instances. This parameter, a
+	// launch template, a launch configuration, or an EC2 instance must be specified.
+	MixedInstancesPolicy *MixedInstancesPolicy `type:"structure"`
+
 	// Indicates whether newly launched instances are protected from termination
 	// by Auto Scaling when scaling in.
 	NewInstancesProtectedFromScaleIn *bool `type:"boolean"`
 
-	// The name of the placement group into which you'll launch your instances,
-	// if any. For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+	// The name of the placement group into which to launch your instances, if any.
+	// For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	PlacementGroup *string `min:"1" type:"string"`
 
@@ -4257,6 +4328,11 @@ func (s *CreateAutoScalingGroupInput) Validate() error {
 			}
 		}
 	}
+	if s.MixedInstancesPolicy != nil {
+		if err := s.MixedInstancesPolicy.Validate(); err != nil {
+			invalidParams.AddNested("MixedInstancesPolicy", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if err := v.Validate(); err != nil {
@@ -4339,11 +4415,11 @@ type CreateLaunchConfigurationInput struct {
 	// The name or the Amazon Resource Name (ARN) of the instance profile associated
 	// with the IAM role for the instance.
 	//
-	// EC2 instances launched with an IAM role will automatically have AWS security
-	// credentials available. You can use IAM roles with Amazon EC2 Auto Scaling
-	// to automatically enable applications running on your EC2 instances to securely
-	// access other AWS resources. For more information, see Launch Auto Scaling
-	// Instances with an IAM Role (http://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html)
+	// EC2 instances launched with an IAM role automatically have AWS security credentials
+	// available. You can use IAM roles with Amazon EC2 Auto Scaling to automatically
+	// enable applications running on your EC2 instances to securely access other
+	// AWS resources. For more information, see Launch Auto Scaling Instances with
+	// an IAM Role (http://docs.aws.amazon.com/autoscaling/ec2/userguide/us-iam-role.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	IamInstanceProfile *string `min:"1" type:"string"`
 
@@ -4356,8 +4432,8 @@ type CreateLaunchConfigurationInput struct {
 	ImageId *string `min:"1" type:"string"`
 
 	// The ID of the instance to use to create the launch configuration. The new
-	// launch configuration derives attributes from the instance, with the exception
-	// of the block device mapping.
+	// launch configuration derives attributes from the instance, except for the
+	// block device mapping.
 	//
 	// If you do not specify InstanceId, you must specify both ImageId and InstanceType.
 	//
@@ -4399,9 +4475,9 @@ type CreateLaunchConfigurationInput struct {
 	// The tenancy of the instance. An instance with a tenancy of dedicated runs
 	// on single-tenant hardware and can only be launched into a VPC.
 	//
-	// You must set the value of this parameter to dedicated if want to launch Dedicated
-	// Instances into a shared tenancy VPC (VPC with instance placement tenancy
-	// attribute set to default).
+	// To launch Dedicated Instances into a shared tenancy VPC (a VPC with the instance
+	// placement tenancy attribute set to default), you must set the value of this
+	// parameter to dedicated.
 	//
 	// If you specify this parameter, be sure to specify at least one subnet when
 	// you create your group.
@@ -4418,8 +4494,8 @@ type CreateLaunchConfigurationInput struct {
 	// One or more security groups with which to associate the instances.
 	//
 	// If your instances are launched in EC2-Classic, you can either specify security
-	// group names or the security group IDs. For more information about security
-	// groups for EC2-Classic, see Amazon EC2 Security Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
+	// group names or the security group IDs. For more information, see Amazon EC2
+	// Security Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
 	// If your instances are launched into a VPC, specify security group IDs. For
@@ -4663,7 +4739,7 @@ type DeleteAutoScalingGroupInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// Specifies that the group will be deleted along with all instances associated
+	// Specifies that the group is to be deleted along with all instances associated
 	// with the group, without waiting for all instances to be terminated. This
 	// parameter also deletes any lifecycle actions associated with the group.
 	ForceDelete *bool `type:"boolean"`
@@ -4858,7 +4934,7 @@ type DeleteNotificationConfigurationInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
-	// (SNS) topic.
+	// (Amazon SNS) topic.
 	//
 	// TopicARN is a required field
 	TopicARN *string `min:"1" type:"string" required:"true"`
@@ -5793,7 +5869,7 @@ type DescribePoliciesInput struct {
 	NextToken *string `type:"string"`
 
 	// The names of one or more policies. If you omit this parameter, all policies
-	// are described. If an group name is provided, the results are limited to that
+	// are described. If a group name is provided, the results are limited to that
 	// group. This list is limited to 50 items. If you specify an unknown policy
 	// name, it is ignored with no error.
 	PolicyNames []string `type:"list"`
@@ -6057,7 +6133,8 @@ func (s DescribeScheduledActionsOutput) SDKResponseMetadata() aws.Response {
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A filter used to scope the tags to return.
+	// One or more filters to scope the tags to return. The maximum number of filters
+	// per filter type (for example, auto-scaling-group) is 1000.
 	Filters []Filter `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
@@ -6129,9 +6206,11 @@ type DescribeTerminationPolicyTypesOutput struct {
 
 	responseMetadata aws.Response
 
-	// The termination policies supported by Amazon EC2 Auto Scaling (OldestInstance,
-	// OldestLaunchConfiguration, NewestInstance, ClosestToNextInstanceHour, and
-	// Default).
+	// The termination policies supported by Amazon EC2 Auto Scaling: OldestInstance,
+	// OldestLaunchConfiguration, NewestInstance, ClosestToNextInstanceHour, Default,
+	// OldestLaunchTemplate, and AllocationStrategy. Currently, the OldestLaunchTemplate
+	// and AllocationStrategy policies are only supported for Auto Scaling groups
+	// with MixedInstancesPolicy.
 	TerminationPolicyTypes []string `type:"list"`
 }
 
@@ -6996,12 +7075,15 @@ type Group struct {
 	// MinSize is a required field
 	MinSize *int64 `type:"integer" required:"true"`
 
+	// The mixed instances policy for the group.
+	MixedInstancesPolicy *MixedInstancesPolicy `type:"structure"`
+
 	// Indicates whether newly launched instances are protected from termination
 	// by Auto Scaling when scaling in.
 	NewInstancesProtectedFromScaleIn *bool `type:"boolean"`
 
-	// The name of the placement group into which you'll launch your instances,
-	// if any. For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+	// The name of the placement group into which to launch your instances, if any.
+	// For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	PlacementGroup *string `min:"1" type:"string"`
 
@@ -7053,8 +7135,8 @@ type Instance struct {
 
 	// The last reported health status of the instance. "Healthy" means that the
 	// instance is healthy and should remain in service. "Unhealthy" means that
-	// the instance is unhealthy and Amazon EC2 Auto Scaling should terminate and
-	// replace it.
+	// the instance is unhealthy and that Amazon EC2 Auto Scaling should terminate
+	// and replace it.
 	//
 	// HealthStatus is a required field
 	HealthStatus *string `min:"1" type:"string" required:"true"`
@@ -7070,8 +7152,8 @@ type Instance struct {
 	// The launch template for the instance.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
-	// A description of the current lifecycle state. Note that the Quarantined state
-	// is not used.
+	// A description of the current lifecycle state. The Quarantined state is not
+	// used.
 	//
 	// LifecycleState is a required field
 	LifecycleState LifecycleState `type:"string" required:"true" enum:"true"`
@@ -7171,6 +7253,86 @@ func (s InstanceMonitoring) GoString() string {
 	return s.String()
 }
 
+// Describes an instances distribution for an Auto Scaling group with MixedInstancesPolicy.
+//
+// The instances distribution specifies the distribution of On-Demand Instances
+// and Spot Instances, the maximum price to pay for Spot Instances, and how
+// the Auto Scaling group allocates instance types.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstancesDistribution
+type InstancesDistribution struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates how to allocate instance types to fulfill On-Demand capacity.
+	//
+	// The only valid value is prioritized, which is also the default value. This
+	// strategy uses the order of instance types in the Overrides array of LaunchTemplate
+	// to define the launch priority of each instance type. The first instance type
+	// in the array is prioritized higher than the last. If all your On-Demand capacity
+	// cannot be fulfilled using your highest priority instance, then the Auto Scaling
+	// groups launches the remaining capacity using the second priority instance
+	// type, and so on.
+	OnDemandAllocationStrategy *string `type:"string"`
+
+	// The minimum amount of the Auto Scaling group's capacity that must be fulfilled
+	// by On-Demand Instances. This base portion is provisioned first as your group
+	// scales.
+	//
+	// The default value is 0. If you leave this parameter set to 0, On-Demand Instances
+	// are launched as a percentage of the Auto Scaling group's desired capacity,
+	// per the OnDemandPercentageAboveBaseCapacity setting.
+	OnDemandBaseCapacity *int64 `type:"integer"`
+
+	// Controls the percentages of On-Demand Instances and Spot Instances for your
+	// additional capacity beyond OnDemandBaseCapacity.
+	//
+	// The range is 0–100. The default value is 100. If you leave this parameter
+	// set to 100, the percentages are 100% for On-Demand Instances and 0% for Spot
+	// Instances.
+	OnDemandPercentageAboveBaseCapacity *int64 `type:"integer"`
+
+	// Indicates how to allocate Spot capacity across Spot pools.
+	//
+	// The only valid value is lowest-price, which is also the default value. The
+	// Auto Scaling group selects the cheapest Spot pools and evenly allocates your
+	// Spot capacity across the number of Spot pools that you specify.
+	SpotAllocationStrategy *string `type:"string"`
+
+	// The number of Spot pools to use to allocate your Spot capacity. The Spot
+	// pools are determined from the different instance types in the Overrides array
+	// of LaunchTemplate.
+	//
+	// The range is 1–20 and the default is 2.
+	SpotInstancePools *int64 `type:"integer"`
+
+	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
+	// If you leave this value blank (which is the default), the maximum Spot price
+	// is set at the On-Demand price.
+	SpotMaxPrice *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s InstancesDistribution) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstancesDistribution) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InstancesDistribution) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InstancesDistribution"}
+	if s.SpotMaxPrice != nil && len(*s.SpotMaxPrice) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SpotMaxPrice", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes a launch configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfiguration
 type LaunchConfiguration struct {
@@ -7262,7 +7424,100 @@ func (s LaunchConfiguration) GoString() string {
 	return s.String()
 }
 
-// Describes a launch template.
+// Describes a launch template and overrides.
+//
+// The overrides are used to override the instance type specified by the launch
+// template with multiple instance types that can be used to launch On-Demand
+// Instances and Spot Instances.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplate
+type LaunchTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The launch template to use. You must specify either the launch template ID
+	// or launch template name in the request.
+	LaunchTemplateSpecification *LaunchTemplateSpecification `type:"structure"`
+
+	// Any parameters that you specify override the same parameters in the launch
+	// template. Currently, the only supported override is instance type.
+	//
+	// You must specify between 2 and 20 overrides.
+	Overrides []LaunchTemplateOverrides `type:"list"`
+}
+
+// String returns the string representation
+func (s LaunchTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchTemplate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LaunchTemplate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LaunchTemplate"}
+	if s.LaunchTemplateSpecification != nil {
+		if err := s.LaunchTemplateSpecification.Validate(); err != nil {
+			invalidParams.AddNested("LaunchTemplateSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Overrides != nil {
+		for i, v := range s.Overrides {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Overrides", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes an override for a launch template.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides
+type LaunchTemplateOverrides struct {
+	_ struct{} `type:"structure"`
+
+	// The instance type.
+	//
+	// For information about available instance types, see Available Instance Types
+	// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	InstanceType *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchTemplateOverrides) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchTemplateOverrides) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LaunchTemplateOverrides) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LaunchTemplateOverrides"}
+	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes a launch template and the launch template version.
+//
+// The launch template that is specified must be configured for use with an
+// Auto Scaling group. For more information, see Creating a Launch Template
+// for an Auto Scaling group (http://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateSpecification
 type LaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
@@ -7344,8 +7599,8 @@ type LifecycleHook struct {
 	// The name of the lifecycle hook.
 	LifecycleHookName *string `min:"1" type:"string"`
 
-	// The state of the EC2 instance to which you want to attach the lifecycle hook.
-	// The following are possible values:
+	// The state of the EC2 instance to which to attach the lifecycle hook. The
+	// following are possible values:
 	//
 	//    * autoscaling:EC2_INSTANCE_LAUNCHING
 	//
@@ -7470,10 +7725,11 @@ func (s *LifecycleHookSpecification) Validate() error {
 //
 // If you attach a load balancer to an existing Auto Scaling group, the initial
 // state is Adding. The state transitions to Added after all instances in the
-// group are registered with the load balancer. If ELB health checks are enabled
-// for the load balancer, the state transitions to InService after at least
-// one instance in the group passes the health check. If EC2 health checks are
-// enabled instead, the load balancer remains in the Added state.
+// group are registered with the load balancer. If Elastic Load Balancing health
+// checks are enabled for the load balancer, the state transitions to InService
+// after at least one instance in the group passes the health check. If EC2
+// health checks are enabled instead, the load balancer remains in the Added
+// state.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerState
 type LoadBalancerState struct {
 	_ struct{} `type:"structure"`
@@ -7514,10 +7770,10 @@ func (s LoadBalancerState) GoString() string {
 //
 // If you attach a target group to an existing Auto Scaling group, the initial
 // state is Adding. The state transitions to Added after all Auto Scaling instances
-// are registered with the target group. If ELB health checks are enabled, the
-// state transitions to InService after at least one Auto Scaling instance passes
-// the health check. If EC2 health checks are enabled instead, the target group
-// remains in the Added state.
+// are registered with the target group. If Elastic Load Balancing health checks
+// are enabled, the state transitions to InService after at least one Auto Scaling
+// instance passes the health check. If EC2 health checks are enabled instead,
+// the target group remains in the Added state.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerTargetGroupState
 type LoadBalancerTargetGroupState struct {
 	_ struct{} `type:"structure"`
@@ -7652,6 +7908,62 @@ func (s MetricGranularityType) GoString() string {
 	return s.String()
 }
 
+// Describes a mixed instances policy for an Auto Scaling group. With mixed
+// instances, your Auto Scaling group can provision a combination of On-Demand
+// Instances and Spot Instances across multiple instance types. For more information,
+// see Using Multiple Instance Types and Purchase Options (http://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options)
+// in the Amazon EC2 Auto Scaling User Guide.
+//
+// When you create your Auto Scaling group, you can specify a launch configuration
+// or template as a parameter for the top-level object, or you can specify a
+// mixed instances policy, but not both at the same time.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MixedInstancesPolicy
+type MixedInstancesPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The instances distribution to use.
+	//
+	// If you leave this parameter unspecified when creating the group, the default
+	// values are used.
+	InstancesDistribution *InstancesDistribution `type:"structure"`
+
+	// The launch template and overrides.
+	//
+	// This parameter is required when creating an Auto Scaling group with a mixed
+	// instances policy, but is not required when updating the group.
+	LaunchTemplate *LaunchTemplate `type:"structure"`
+}
+
+// String returns the string representation
+func (s MixedInstancesPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MixedInstancesPolicy) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MixedInstancesPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MixedInstancesPolicy"}
+	if s.InstancesDistribution != nil {
+		if err := s.InstancesDistribution.Validate(); err != nil {
+			invalidParams.AddNested("InstancesDistribution", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.LaunchTemplate != nil {
+		if err := s.LaunchTemplate.Validate(); err != nil {
+			invalidParams.AddNested("LaunchTemplate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes a notification.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/NotificationConfiguration
 type NotificationConfiguration struct {
@@ -7674,7 +7986,7 @@ type NotificationConfiguration struct {
 	NotificationType *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
-	// (SNS) topic.
+	// (Amazon SNS) topic.
 	TopicARN *string `min:"1" type:"string"`
 }
 
@@ -7701,17 +8013,17 @@ type PredefinedMetricSpecification struct {
 	// Identifies the resource associated with the metric type. The following predefined
 	// metrics are available:
 	//
-	//    * ASGAverageCPUUtilization - average CPU utilization of the Auto Scaling
-	//    group
+	//    * ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling
+	//    group.
 	//
-	//    * ASGAverageNetworkIn - average number of bytes received on all network
-	//    interfaces by the Auto Scaling group
+	//    * ASGAverageNetworkIn - Average number of bytes received on all network
+	//    interfaces by the Auto Scaling group.
 	//
-	//    * ASGAverageNetworkOut - average number of bytes sent out on all network
-	//    interfaces by the Auto Scaling group
+	//    * ASGAverageNetworkOut - Average number of bytes sent out on all network
+	//    interfaces by the Auto Scaling group.
 	//
-	//    * ALBRequestCountPerTarget - number of requests completed per target in
-	//    an Application Load Balancer target group
+	//    * ALBRequestCountPerTarget - Number of requests completed per target in
+	//    an Application Load Balancer target group.
 	//
 	// For predefined metric types ASGAverageCPUUtilization, ASGAverageNetworkIn,
 	// and ASGAverageNetworkOut, the parameter must not be specified as the resource
@@ -7833,17 +8145,17 @@ type PutLifecycleHookInput struct {
 	// EC2 Auto Scaling sends a message to the notification target.
 	NotificationMetadata *string `min:"1" type:"string"`
 
-	// The ARN of the notification target that Amazon EC2 Auto Scaling will use
-	// to notify you when an instance is in the transition state for the lifecycle
-	// hook. This target can be either an SQS queue or an SNS topic. If you specify
-	// an empty string, this overrides the current ARN.
+	// The ARN of the notification target that Amazon EC2 Auto Scaling uses to notify
+	// you when an instance is in the transition state for the lifecycle hook. This
+	// target can be either an SQS queue or an SNS topic. If you specify an empty
+	// string, this overrides the current ARN.
 	//
 	// This operation uses the JSON format when sending notifications to an Amazon
-	// SQS queue, and an email key/value pair format when sending notifications
+	// SQS queue, and an email key-value pair format when sending notifications
 	// to an Amazon SNS topic.
 	//
 	// When you specify a notification target, Amazon EC2 Auto Scaling sends it
-	// a test message. Test messages contains the following additional key/value
+	// a test message. Test messages contain the following additional key-value
 	// pair: "Event": "autoscaling:TEST_NOTIFICATION".
 	NotificationTargetARN *string `type:"string"`
 
@@ -7926,14 +8238,14 @@ type PutNotificationConfigurationInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The type of event that will cause the notification to be sent. For details
+	// The type of event that causes the notification to be sent. For more information
 	// about notification types supported by Amazon EC2 Auto Scaling, see DescribeAutoScalingNotificationTypes.
 	//
 	// NotificationTypes is a required field
 	NotificationTypes []string `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service
-	// (SNS) topic.
+	// (Amazon SNS) topic.
 	//
 	// TopicARN is a required field
 	TopicARN *string `min:"1" type:"string" required:"true"`
@@ -8286,7 +8598,7 @@ type RecordLifecycleActionHeartbeatInput struct {
 
 	// A token that uniquely identifies a specific lifecycle action associated with
 	// an instance. Amazon EC2 Auto Scaling sends this token to the notification
-	// target you specified when you created the lifecycle hook.
+	// target that you specified when you created the lifecycle hook.
 	LifecycleActionToken *string `min:"36" type:"string"`
 
 	// The name of the lifecycle hook.
@@ -8481,7 +8793,7 @@ type ScheduledUpdateGroupAction struct {
 	// can be up to one month in the future.
 	//
 	// When StartTime and EndTime are specified with Recurrence, they form the boundaries
-	// of when the recurring action will start and stop.
+	// of when the recurring action starts and stops.
 	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// This parameter is deprecated.
@@ -8649,10 +8961,9 @@ func (s SetDesiredCapacityOutput) SDKResponseMetadata() aws.Response {
 type SetInstanceHealthInput struct {
 	_ struct{} `type:"structure"`
 
-	// The health status of the instance. Set to Healthy if you want the instance
-	// to remain in service. Set to Unhealthy if you want the instance to be out
-	// of service. Amazon EC2 Auto Scaling will terminate and replace the unhealthy
-	// instance.
+	// The health status of the instance. Set to Healthy to have the instance remain
+	// in service. Set to Unhealthy to have the instance be out of service. Amazon
+	// EC2 Auto Scaling terminates and replaces the unhealthy instance.
 	//
 	// HealthStatus is a required field
 	HealthStatus *string `min:"1" type:"string" required:"true"`
@@ -8663,12 +8974,11 @@ type SetInstanceHealthInput struct {
 	InstanceId *string `min:"1" type:"string" required:"true"`
 
 	// If the Auto Scaling group of the specified instance has a HealthCheckGracePeriod
-	// specified for the group, by default, this call will respect the grace period.
-	// Set this to False, if you do not want the call to respect the grace period
-	// associated with the group.
+	// specified for the group, by default, this call respects the grace period.
+	// Set this to False, to have the call not respect the grace period associated
+	// with the group.
 	//
-	// For more information, see the description of the health check grace period
-	// for CreateAutoScalingGroup.
+	// For more information about the health check grace period, see CreateAutoScalingGroup.
 	ShouldRespectGracePeriod *bool `type:"boolean"`
 }
 
@@ -8813,23 +9123,23 @@ func (s SetInstanceProtectionOutput) SDKResponseMetadata() aws.Response {
 // For the following examples, suppose that you have an alarm with a breach
 // threshold of 50:
 //
-//    * If you want the adjustment to be triggered when the metric is greater
-//    than or equal to 50 and less than 60, specify a lower bound of 0 and an
-//    upper bound of 10.
+//    * To trigger the adjustment when the metric is greater than or equal to
+//    50 and less than 60, specify a lower bound of 0 and an upper bound of
+//    10.
 //
-//    * If you want the adjustment to be triggered when the metric is greater
-//    than 40 and less than or equal to 50, specify a lower bound of -10 and
-//    an upper bound of 0.
+//    * To trigger the adjustment when the metric is greater than 40 and less
+//    than or equal to 50, specify a lower bound of -10 and an upper bound of
+//    0.
 //
 // There are a few rules for the step adjustments for your step policy:
 //
 //    * The ranges of your step adjustments can't overlap or have a gap.
 //
-//    * At most one step adjustment can have a null lower bound. If one step
+//    * At most, one step adjustment can have a null lower bound. If one step
 //    adjustment has a negative lower bound, then there must be a step adjustment
 //    with a null lower bound.
 //
-//    * At most one step adjustment can have a null upper bound. If one step
+//    * At most, one step adjustment can have a null upper bound. If one step
 //    adjustment has a positive upper bound, then there must be a step adjustment
 //    with a null upper bound.
 //
@@ -9080,9 +9390,9 @@ type TargetTrackingConfiguration struct {
 	// A customized metric.
 	CustomizedMetricSpecification *CustomizedMetricSpecification `type:"structure"`
 
-	// Indicates whether scale in by the target tracking policy is disabled. If
-	// scale in is disabled, the target tracking policy won't remove instances from
-	// the Auto Scaling group. Otherwise, the target tracking policy can remove
+	// Indicates whether scaling in by the target tracking policy is disabled. If
+	// scaling in is disabled, the target tracking policy doesn't remove instances
+	// from the Auto Scaling group. Otherwise, the target tracking policy can remove
 	// instances from the Auto Scaling group. The default is disabled.
 	DisableScaleIn *bool `type:"boolean"`
 
@@ -9237,12 +9547,13 @@ type UpdateAutoScalingGroupInput struct {
 	// The service to use for the health checks. The valid values are EC2 and ELB.
 	HealthCheckType *string `min:"1" type:"string"`
 
-	// The name of the launch configuration. If you specify a launch configuration,
-	// you can't specify a launch template.
+	// The name of the launch configuration. If you specify this parameter, you
+	// can't specify a launch template or a mixed instances policy.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
-	// The launch template to use to specify the updates. If you specify a launch
-	// template, you can't specify a launch configuration.
+	// The launch template and version to use to specify the updates. If you specify
+	// this parameter, you can't specify a launch configuration or a mixed instances
+	// policy.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// The maximum size of the Auto Scaling group.
@@ -9251,12 +9562,16 @@ type UpdateAutoScalingGroupInput struct {
 	// The minimum size of the Auto Scaling group.
 	MinSize *int64 `type:"integer"`
 
+	// The mixed instances policy to use to specify the updates. If you specify
+	// this parameter, you can't specify a launch configuration or a launch template.
+	MixedInstancesPolicy *MixedInstancesPolicy `type:"structure"`
+
 	// Indicates whether newly launched instances are protected from termination
 	// by Auto Scaling when scaling in.
 	NewInstancesProtectedFromScaleIn *bool `type:"boolean"`
 
-	// The name of the placement group into which you'll launch your instances,
-	// if any. For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
+	// The name of the placement group into which to launch your instances, if any.
+	// For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	PlacementGroup *string `min:"1" type:"string"`
 
@@ -9325,6 +9640,11 @@ func (s *UpdateAutoScalingGroupInput) Validate() error {
 	if s.LaunchTemplate != nil {
 		if err := s.LaunchTemplate.Validate(); err != nil {
 			invalidParams.AddNested("LaunchTemplate", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MixedInstancesPolicy != nil {
+		if err := s.MixedInstancesPolicy.Validate(); err != nil {
+			invalidParams.AddNested("MixedInstancesPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 

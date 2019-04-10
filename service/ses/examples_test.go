@@ -3,6 +3,7 @@
 package ses_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -41,7 +42,7 @@ func ExampleSES_CloneReceiptRuleSetRequest_shared00() {
 	}
 
 	req := svc.CloneReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -86,7 +87,7 @@ func ExampleSES_CreateReceiptFilterRequest_shared00() {
 	}
 
 	req := svc.CreateReceiptFilterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -133,7 +134,7 @@ func ExampleSES_CreateReceiptRuleRequest_shared00() {
 	}
 
 	req := svc.CreateReceiptRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -180,7 +181,7 @@ func ExampleSES_CreateReceiptRuleSetRequest_shared00() {
 	}
 
 	req := svc.CreateReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -218,7 +219,7 @@ func ExampleSES_DeleteIdentityRequest_shared00() {
 	}
 
 	req := svc.DeleteIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -252,7 +253,7 @@ func ExampleSES_DeleteIdentityPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteIdentityPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -285,7 +286,7 @@ func ExampleSES_DeleteReceiptFilterRequest_shared00() {
 	}
 
 	req := svc.DeleteReceiptFilterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -319,7 +320,7 @@ func ExampleSES_DeleteReceiptRuleRequest_shared00() {
 	}
 
 	req := svc.DeleteReceiptRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -354,7 +355,7 @@ func ExampleSES_DeleteReceiptRuleSetRequest_shared00() {
 	}
 
 	req := svc.DeleteReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -390,7 +391,7 @@ func ExampleSES_DeleteVerifiedEmailAddressRequest_shared00() {
 	}
 
 	req := svc.DeleteVerifiedEmailAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -422,7 +423,7 @@ func ExampleSES_DescribeActiveReceiptRuleSetRequest_shared00() {
 	input := &ses.DescribeActiveReceiptRuleSetInput{}
 
 	req := svc.DescribeActiveReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -456,7 +457,7 @@ func ExampleSES_DescribeReceiptRuleRequest_shared00() {
 	}
 
 	req := svc.DescribeReceiptRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -493,7 +494,7 @@ func ExampleSES_DescribeReceiptRuleSetRequest_shared00() {
 	}
 
 	req := svc.DescribeReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -527,7 +528,7 @@ func ExampleSES_GetAccountSendingEnabledRequest_shared00() {
 	input := &ses.GetAccountSendingEnabledInput{}
 
 	req := svc.GetAccountSendingEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -564,7 +565,7 @@ func ExampleSES_GetIdentityDkimAttributesRequest_shared00() {
 	}
 
 	req := svc.GetIdentityDkimAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -599,7 +600,7 @@ func ExampleSES_GetIdentityMailFromDomainAttributesRequest_shared00() {
 	}
 
 	req := svc.GetIdentityMailFromDomainAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -634,7 +635,7 @@ func ExampleSES_GetIdentityNotificationAttributesRequest_shared00() {
 	}
 
 	req := svc.GetIdentityNotificationAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -670,7 +671,7 @@ func ExampleSES_GetIdentityPoliciesRequest_shared00() {
 	}
 
 	req := svc.GetIdentityPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -706,7 +707,7 @@ func ExampleSES_GetIdentityVerificationAttributesRequest_shared00() {
 	}
 
 	req := svc.GetIdentityVerificationAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -737,7 +738,7 @@ func ExampleSES_GetSendQuotaRequest_shared00() {
 	input := &ses.GetSendQuotaInput{}
 
 	req := svc.GetSendQuotaRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -768,7 +769,7 @@ func ExampleSES_GetSendStatisticsRequest_shared00() {
 	input := &ses.GetSendStatisticsInput{}
 
 	req := svc.GetSendStatisticsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -804,7 +805,7 @@ func ExampleSES_ListIdentitiesRequest_shared00() {
 	}
 
 	req := svc.ListIdentitiesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +839,7 @@ func ExampleSES_ListIdentityPoliciesRequest_shared00() {
 	}
 
 	req := svc.ListIdentityPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -870,7 +871,7 @@ func ExampleSES_ListReceiptFiltersRequest_shared00() {
 	input := &ses.ListReceiptFiltersInput{}
 
 	req := svc.ListReceiptFiltersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -903,7 +904,7 @@ func ExampleSES_ListReceiptRuleSetsRequest_shared00() {
 	}
 
 	req := svc.ListReceiptRuleSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -935,7 +936,7 @@ func ExampleSES_ListVerifiedEmailAddressesRequest_shared00() {
 	input := &ses.ListVerifiedEmailAddressesInput{}
 
 	req := svc.ListVerifiedEmailAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -970,7 +971,7 @@ func ExampleSES_PutIdentityPolicyRequest_shared00() {
 	}
 
 	req := svc.PutIdentityPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1009,7 +1010,7 @@ func ExampleSES_ReorderReceiptRuleSetRequest_shared00() {
 	}
 
 	req := svc.ReorderReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1074,7 +1075,7 @@ func ExampleSES_SendEmailRequest_shared00() {
 	}
 
 	req := svc.SendEmailRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1123,7 +1124,7 @@ func ExampleSES_SendRawEmailRequest_shared00() {
 	}
 
 	req := svc.SendRawEmailRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1166,7 +1167,7 @@ func ExampleSES_SetActiveReceiptRuleSetRequest_shared00() {
 	}
 
 	req := svc.SetActiveReceiptRuleSetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1203,7 +1204,7 @@ func ExampleSES_SetIdentityDkimEnabledRequest_shared00() {
 	}
 
 	req := svc.SetIdentityDkimEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1238,7 +1239,7 @@ func ExampleSES_SetIdentityFeedbackForwardingEnabledRequest_shared00() {
 	}
 
 	req := svc.SetIdentityFeedbackForwardingEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1274,7 +1275,7 @@ func ExampleSES_SetIdentityHeadersInNotificationsEnabledRequest_shared00() {
 	}
 
 	req := svc.SetIdentityHeadersInNotificationsEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1310,7 +1311,7 @@ func ExampleSES_SetIdentityMailFromDomainRequest_shared00() {
 	}
 
 	req := svc.SetIdentityMailFromDomainRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1347,7 +1348,7 @@ func ExampleSES_SetIdentityNotificationTopicRequest_shared00() {
 	}
 
 	req := svc.SetIdentityNotificationTopicRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1382,7 +1383,7 @@ func ExampleSES_SetReceiptRulePositionRequest_shared00() {
 	}
 
 	req := svc.SetReceiptRulePositionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1419,7 +1420,7 @@ func ExampleSES_UpdateAccountSendingEnabledRequest_shared00() {
 	}
 
 	req := svc.UpdateAccountSendingEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1453,7 +1454,7 @@ func ExampleSES_UpdateConfigurationSetReputationMetricsEnabledRequest_shared00()
 	}
 
 	req := svc.UpdateConfigurationSetReputationMetricsEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1489,7 +1490,7 @@ func ExampleSES_UpdateConfigurationSetSendingEnabledRequest_shared00() {
 	}
 
 	req := svc.UpdateConfigurationSetSendingEnabledRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1533,7 +1534,7 @@ func ExampleSES_UpdateReceiptRuleRequest_shared00() {
 	}
 
 	req := svc.UpdateReceiptRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1579,7 +1580,7 @@ func ExampleSES_VerifyDomainDkimRequest_shared00() {
 	}
 
 	req := svc.VerifyDomainDkimRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1612,7 +1613,7 @@ func ExampleSES_VerifyDomainIdentityRequest_shared00() {
 	}
 
 	req := svc.VerifyDomainIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1645,7 +1646,7 @@ func ExampleSES_VerifyEmailAddressRequest_shared00() {
 	}
 
 	req := svc.VerifyEmailAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1678,7 +1679,7 @@ func ExampleSES_VerifyEmailIdentityRequest_shared00() {
 	}
 
 	req := svc.VerifyEmailIdentityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

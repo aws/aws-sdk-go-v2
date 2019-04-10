@@ -3,6 +3,7 @@
 package connect
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +73,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type DescribeUserRequest struct {
 }
 
 // Send marshals and sends the DescribeUser API request.
-func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
+func (r DescribeUserRequest) Send(ctx context.Context) (*DescribeUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -140,7 +144,7 @@ func (r DescribeUserRequest) Send() (*DescribeUserOutput, error) {
 //
 //    // Example sending a request using the DescribeUserRequest method.
 //    req := client.DescribeUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +178,8 @@ type DescribeUserHierarchyGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeUserHierarchyGroup API request.
-func (r DescribeUserHierarchyGroupRequest) Send() (*DescribeUserHierarchyGroupOutput, error) {
+func (r DescribeUserHierarchyGroupRequest) Send(ctx context.Context) (*DescribeUserHierarchyGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +196,7 @@ func (r DescribeUserHierarchyGroupRequest) Send() (*DescribeUserHierarchyGroupOu
 //
 //    // Example sending a request using the DescribeUserHierarchyGroupRequest method.
 //    req := client.DescribeUserHierarchyGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -225,7 +230,8 @@ type DescribeUserHierarchyStructureRequest struct {
 }
 
 // Send marshals and sends the DescribeUserHierarchyStructure API request.
-func (r DescribeUserHierarchyStructureRequest) Send() (*DescribeUserHierarchyStructureOutput, error) {
+func (r DescribeUserHierarchyStructureRequest) Send(ctx context.Context) (*DescribeUserHierarchyStructureOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +248,7 @@ func (r DescribeUserHierarchyStructureRequest) Send() (*DescribeUserHierarchyStr
 //
 //    // Example sending a request using the DescribeUserHierarchyStructureRequest method.
 //    req := client.DescribeUserHierarchyStructureRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -266,6 +272,57 @@ func (c *Connect) DescribeUserHierarchyStructureRequest(input *DescribeUserHiera
 	return DescribeUserHierarchyStructureRequest{Request: req, Input: input, Copy: c.DescribeUserHierarchyStructureRequest}
 }
 
+const opGetContactAttributes = "GetContactAttributes"
+
+// GetContactAttributesRequest is a API request type for the GetContactAttributes API operation.
+type GetContactAttributesRequest struct {
+	*aws.Request
+	Input *GetContactAttributesInput
+	Copy  func(*GetContactAttributesInput) GetContactAttributesRequest
+}
+
+// Send marshals and sends the GetContactAttributes API request.
+func (r GetContactAttributesRequest) Send(ctx context.Context) (*GetContactAttributesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetContactAttributesOutput), nil
+}
+
+// GetContactAttributesRequest returns a request value for making API operation for
+// Amazon Connect Service.
+//
+// Retrieves the contact attributes associated with a contact.
+//
+//    // Example sending a request using the GetContactAttributesRequest method.
+//    req := client.GetContactAttributesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributes
+func (c *Connect) GetContactAttributesRequest(input *GetContactAttributesInput) GetContactAttributesRequest {
+	op := &aws.Operation{
+		Name:       opGetContactAttributes,
+		HTTPMethod: "GET",
+		HTTPPath:   "/contact/attributes/{InstanceId}/{InitialContactId}",
+	}
+
+	if input == nil {
+		input = &GetContactAttributesInput{}
+	}
+
+	output := &GetContactAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetContactAttributesRequest{Request: req, Input: input, Copy: c.GetContactAttributesRequest}
+}
+
 const opGetCurrentMetricData = "GetCurrentMetricData"
 
 // GetCurrentMetricDataRequest is a API request type for the GetCurrentMetricData API operation.
@@ -276,7 +333,8 @@ type GetCurrentMetricDataRequest struct {
 }
 
 // Send marshals and sends the GetCurrentMetricData API request.
-func (r GetCurrentMetricDataRequest) Send() (*GetCurrentMetricDataOutput, error) {
+func (r GetCurrentMetricDataRequest) Send(ctx context.Context) (*GetCurrentMetricDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +354,7 @@ func (r GetCurrentMetricDataRequest) Send() (*GetCurrentMetricDataOutput, error)
 //
 //    // Example sending a request using the GetCurrentMetricDataRequest method.
 //    req := client.GetCurrentMetricDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -346,7 +404,7 @@ func (c *Connect) GetCurrentMetricDataRequest(input *GetCurrentMetricDataInput) 
 func (p *GetCurrentMetricDataRequest) Paginate(opts ...aws.Option) GetCurrentMetricDataPager {
 	return GetCurrentMetricDataPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetCurrentMetricDataInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -355,6 +413,7 @@ func (p *GetCurrentMetricDataRequest) Paginate(opts ...aws.Option) GetCurrentMet
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -382,7 +441,8 @@ type GetFederationTokenRequest struct {
 }
 
 // Send marshals and sends the GetFederationToken API request.
-func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+func (r GetFederationTokenRequest) Send(ctx context.Context) (*GetFederationTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +458,7 @@ func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
 //
 //    // Example sending a request using the GetFederationTokenRequest method.
 //    req := client.GetFederationTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +492,8 @@ type GetMetricDataRequest struct {
 }
 
 // Send marshals and sends the GetMetricData API request.
-func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
+func (r GetMetricDataRequest) Send(ctx context.Context) (*GetMetricDataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -452,7 +513,7 @@ func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
 //
 //    // Example sending a request using the GetMetricDataRequest method.
 //    req := client.GetMetricDataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -502,7 +563,7 @@ func (c *Connect) GetMetricDataRequest(input *GetMetricDataInput) GetMetricDataR
 func (p *GetMetricDataRequest) Paginate(opts ...aws.Option) GetMetricDataPager {
 	return GetMetricDataPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetMetricDataInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -511,6 +572,7 @@ func (p *GetMetricDataRequest) Paginate(opts ...aws.Option) GetMetricDataPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -538,7 +600,8 @@ type ListRoutingProfilesRequest struct {
 }
 
 // Send marshals and sends the ListRoutingProfiles API request.
-func (r ListRoutingProfilesRequest) Send() (*ListRoutingProfilesOutput, error) {
+func (r ListRoutingProfilesRequest) Send(ctx context.Context) (*ListRoutingProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -555,7 +618,7 @@ func (r ListRoutingProfilesRequest) Send() (*ListRoutingProfilesOutput, error) {
 //
 //    // Example sending a request using the ListRoutingProfilesRequest method.
 //    req := client.ListRoutingProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -589,7 +652,8 @@ type ListSecurityProfilesRequest struct {
 }
 
 // Send marshals and sends the ListSecurityProfiles API request.
-func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error) {
+func (r ListSecurityProfilesRequest) Send(ctx context.Context) (*ListSecurityProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -607,7 +671,7 @@ func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error)
 //
 //    // Example sending a request using the ListSecurityProfilesRequest method.
 //    req := client.ListSecurityProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -641,7 +705,8 @@ type ListUserHierarchyGroupsRequest struct {
 }
 
 // Send marshals and sends the ListUserHierarchyGroups API request.
-func (r ListUserHierarchyGroupsRequest) Send() (*ListUserHierarchyGroupsOutput, error) {
+func (r ListUserHierarchyGroupsRequest) Send(ctx context.Context) (*ListUserHierarchyGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -658,7 +723,7 @@ func (r ListUserHierarchyGroupsRequest) Send() (*ListUserHierarchyGroupsOutput, 
 //
 //    // Example sending a request using the ListUserHierarchyGroupsRequest method.
 //    req := client.ListUserHierarchyGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -692,7 +757,8 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send(ctx context.Context) (*ListUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -708,7 +774,7 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 //
 //    // Example sending a request using the ListUsersRequest method.
 //    req := client.ListUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -742,7 +808,8 @@ type StartOutboundVoiceContactRequest struct {
 }
 
 // Send marshals and sends the StartOutboundVoiceContact API request.
-func (r StartOutboundVoiceContactRequest) Send() (*StartOutboundVoiceContactOutput, error) {
+func (r StartOutboundVoiceContactRequest) Send(ctx context.Context) (*StartOutboundVoiceContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -760,9 +827,12 @@ func (r StartOutboundVoiceContactRequest) Send() (*StartOutboundVoiceContactOutp
 // If you are using an IAM account, it must have permission to the connect:StartOutboundVoiceContact
 // action.
 //
+// There is a 60 second dialing timeout for this operation. If the call is not
+// connected after 60 seconds, the call fails.
+//
 //    // Example sending a request using the StartOutboundVoiceContactRequest method.
 //    req := client.StartOutboundVoiceContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +866,8 @@ type StopContactRequest struct {
 }
 
 // Send marshals and sends the StopContact API request.
-func (r StopContactRequest) Send() (*StopContactOutput, error) {
+func (r StopContactRequest) Send(ctx context.Context) (*StopContactOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,7 +886,7 @@ func (r StopContactRequest) Send() (*StopContactOutput, error) {
 //
 //    // Example sending a request using the StopContactRequest method.
 //    req := client.StopContactRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -849,7 +920,8 @@ type UpdateContactAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateContactAttributes API request.
-func (r UpdateContactAttributesRequest) Send() (*UpdateContactAttributesOutput, error) {
+func (r UpdateContactAttributesRequest) Send(ctx context.Context) (*UpdateContactAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -887,7 +959,7 @@ func (r UpdateContactAttributesRequest) Send() (*UpdateContactAttributesOutput, 
 //
 //    // Example sending a request using the UpdateContactAttributesRequest method.
 //    req := client.UpdateContactAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -921,7 +993,8 @@ type UpdateUserHierarchyRequest struct {
 }
 
 // Send marshals and sends the UpdateUserHierarchy API request.
-func (r UpdateUserHierarchyRequest) Send() (*UpdateUserHierarchyOutput, error) {
+func (r UpdateUserHierarchyRequest) Send(ctx context.Context) (*UpdateUserHierarchyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -937,7 +1010,7 @@ func (r UpdateUserHierarchyRequest) Send() (*UpdateUserHierarchyOutput, error) {
 //
 //    // Example sending a request using the UpdateUserHierarchyRequest method.
 //    req := client.UpdateUserHierarchyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -973,7 +1046,8 @@ type UpdateUserIdentityInfoRequest struct {
 }
 
 // Send marshals and sends the UpdateUserIdentityInfo API request.
-func (r UpdateUserIdentityInfoRequest) Send() (*UpdateUserIdentityInfoOutput, error) {
+func (r UpdateUserIdentityInfoRequest) Send(ctx context.Context) (*UpdateUserIdentityInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -990,7 +1064,7 @@ func (r UpdateUserIdentityInfoRequest) Send() (*UpdateUserIdentityInfoOutput, er
 //
 //    // Example sending a request using the UpdateUserIdentityInfoRequest method.
 //    req := client.UpdateUserIdentityInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1026,7 +1100,8 @@ type UpdateUserPhoneConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateUserPhoneConfig API request.
-func (r UpdateUserPhoneConfigRequest) Send() (*UpdateUserPhoneConfigOutput, error) {
+func (r UpdateUserPhoneConfigRequest) Send(ctx context.Context) (*UpdateUserPhoneConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1043,7 +1118,7 @@ func (r UpdateUserPhoneConfigRequest) Send() (*UpdateUserPhoneConfigOutput, erro
 //
 //    // Example sending a request using the UpdateUserPhoneConfigRequest method.
 //    req := client.UpdateUserPhoneConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1079,7 +1154,8 @@ type UpdateUserRoutingProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateUserRoutingProfile API request.
-func (r UpdateUserRoutingProfileRequest) Send() (*UpdateUserRoutingProfileOutput, error) {
+func (r UpdateUserRoutingProfileRequest) Send(ctx context.Context) (*UpdateUserRoutingProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1095,7 +1171,7 @@ func (r UpdateUserRoutingProfileRequest) Send() (*UpdateUserRoutingProfileOutput
 //
 //    // Example sending a request using the UpdateUserRoutingProfileRequest method.
 //    req := client.UpdateUserRoutingProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1131,7 +1207,8 @@ type UpdateUserSecurityProfilesRequest struct {
 }
 
 // Send marshals and sends the UpdateUserSecurityProfiles API request.
-func (r UpdateUserSecurityProfilesRequest) Send() (*UpdateUserSecurityProfilesOutput, error) {
+func (r UpdateUserSecurityProfilesRequest) Send(ctx context.Context) (*UpdateUserSecurityProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1147,7 +1224,7 @@ func (r UpdateUserSecurityProfilesRequest) Send() (*UpdateUserSecurityProfilesOu
 //
 //    // Example sending a request using the UpdateUserSecurityProfilesRequest method.
 //    req := client.UpdateUserSecurityProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1227,7 +1304,9 @@ type CreateUserInput struct {
 	// SecurityProfileIds is a required field
 	SecurityProfileIds []string `min:"1" type:"list" required:"true"`
 
-	// The user name in Amazon Connect for the account to create.
+	// The user name in Amazon Connect for the account to create. If you are using
+	// SAML for identity management in your Amazon Connect, the value for Username
+	// can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true"`
@@ -2086,12 +2165,124 @@ func (s Filters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesRequest
+type GetContactAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the initial contact in Amazon Connect associated with the attributes
+	// to update.
+	//
+	// InitialContactId is a required field
+	InitialContactId *string `location:"uri" locationName:"InitialContactId" min:"1" type:"string" required:"true"`
+
+	// The instance ID for the instance from which to retrieve contact attributes.
+	//
+	// InstanceId is a required field
+	InstanceId *string `location:"uri" locationName:"InstanceId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetContactAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContactAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetContactAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetContactAttributesInput"}
+
+	if s.InitialContactId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InitialContactId"))
+	}
+	if s.InitialContactId != nil && len(*s.InitialContactId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InitialContactId", 1))
+	}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetContactAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InitialContactId != nil {
+		v := *s.InitialContactId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InitialContactId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetContactAttributesResponse
+type GetContactAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The attributes to update.
+	Attributes map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s GetContactAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContactAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetContactAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetContactAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentMetricDataRequest
 type GetCurrentMetricDataInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of CurrentMetric objects for the metrics to retrieve. Each CurrentMetric
-	// includes a name of a metric to retrieve and the unit to use for it.
+	// includes a name of a metric to retrieve and the unit to use for it. You must
+	// list each metric to retrieve data for in the request.
 	//
 	// The following metrics are available:
 	//
@@ -2474,8 +2665,8 @@ type GetMetricDataInput struct {
 	// A HistoricalMetric object contains: HistoricalMetricName, Statistic, Threshold,
 	// and Unit.
 	//
-	// For each historical metric you include in the request, you must include a
-	// Unit and a Statistic.
+	// You must list each metric to retrieve data for in the request. For each historical
+	// metric you include in the request, you must include a Unit and a Statistic.
 	//
 	// The following historical metrics are available:
 	//
@@ -3118,13 +3309,13 @@ type HistoricalMetric struct {
 	// The name of the historical metric.
 	Name HistoricalMetricName `type:"string" enum:"true"`
 
-	// The statistic for the metric: SUM, MAX, or SUM.
+	// The statistic for the metric.
 	Statistic Statistic `type:"string" enum:"true"`
 
 	// The threshold for the metric, used with service level metrics.
 	Threshold *Threshold `type:"structure"`
 
-	// The unit for the metric: COUNT, PERCENT, or SECONDS.
+	// The unit for the metric.
 	Unit Unit `type:"string" enum:"true"`
 }
 
@@ -3915,8 +4106,8 @@ type StartOutboundVoiceContactInput struct {
 	// standard Amazon Connect attributes, and can be accessed in contact flows
 	// just like any other contact attributes.
 	//
-	// There can be up to 32,768 UTF-8 bytes across all key-value pairs. Attribute
-	// keys can include only alphanumeric, dash, and underscore characters.
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	//
 	// For example, if you want play a greeting when the customer answers the call,
 	// you can pass the customer name in attributes similar to the following:
@@ -4244,7 +4435,12 @@ func (s Threshold) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateContactAttributesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The key-value pairs for the attribute to update.
+	// Specify a custom key-value pair using an attribute map. The attributes are
+	// standard Amazon Connect attributes, and can be accessed in contact flows
+	// just like any other contact attributes.
+	//
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	//
 	// Attributes is a required field
 	Attributes map[string]string `type:"map" required:"true"`

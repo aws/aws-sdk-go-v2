@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/url"
@@ -28,7 +29,7 @@ func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string
 		Key:        &key3,
 		UploadId:   uploadID,
 	})
-	foo, err := req.Send()
+	foo, err := req.Send(context.Background())
 	if err != nil {
 		return nil, nil, err
 	}
@@ -42,7 +43,7 @@ func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string
 		Key:        &key3,
 		UploadId:   uploadID,
 	})
-	bar, err := req.Send()
+	bar, err := req.Send(context.Background())
 	if err != nil {
 		return nil, nil, err
 	}
@@ -79,7 +80,7 @@ func main() {
 		Bucket: &bucket,
 		Key:    &key3,
 	})
-	output, err := createReq.Send()
+	output, err := createReq.Send(context.Background())
 
 	if err != nil {
 		exitErrorf("failed to create upload, %v", err)
@@ -108,7 +109,7 @@ func main() {
 			},
 		},
 	})
-	if _, err := compReq.Send(); err != nil {
+	if _, err := compReq.Send(context.Background()); err != nil {
 		exitErrorf("failed to complete CompleteMultipartUpload, %v", err)
 	}
 }

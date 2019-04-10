@@ -3,6 +3,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -67,7 +68,7 @@ func (q *Queue) GetMessages(waitTimeout int64) ([]Message, error) {
 		params.WaitTimeSeconds = aws.Int64(waitTimeout)
 	}
 	req := q.Client.ReceiveMessageRequest(&params)
-	resp, err := req.Send()
+	resp, err := req.Send(context.Background())
 	if err != nil {
 		return nil, fmt.Errorf("failed to get messages, %v", err)
 	}

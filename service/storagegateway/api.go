@@ -3,6 +3,7 @@
 package storagegateway
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type ActivateGatewayRequest struct {
 }
 
 // Send marshals and sends the ActivateGateway API request.
-func (r ActivateGatewayRequest) Send() (*ActivateGatewayOutput, error) {
+func (r ActivateGatewayRequest) Send(ctx context.Context) (*ActivateGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -43,7 +45,7 @@ func (r ActivateGatewayRequest) Send() (*ActivateGatewayOutput, error) {
 //
 //    // Example sending a request using the ActivateGatewayRequest method.
 //    req := client.ActivateGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -77,7 +79,8 @@ type AddCacheRequest struct {
 }
 
 // Send marshals and sends the AddCache API request.
-func (r AddCacheRequest) Send() (*AddCacheOutput, error) {
+func (r AddCacheRequest) Send(ctx context.Context) (*AddCacheOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -99,7 +102,7 @@ func (r AddCacheRequest) Send() (*AddCacheOutput, error) {
 //
 //    // Example sending a request using the AddCacheRequest method.
 //    req := client.AddCacheRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -133,7 +136,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -162,7 +166,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -196,7 +200,8 @@ type AddUploadBufferRequest struct {
 }
 
 // Send marshals and sends the AddUploadBuffer API request.
-func (r AddUploadBufferRequest) Send() (*AddUploadBufferOutput, error) {
+func (r AddUploadBufferRequest) Send(ctx context.Context) (*AddUploadBufferOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -218,7 +223,7 @@ func (r AddUploadBufferRequest) Send() (*AddUploadBufferOutput, error) {
 //
 //    // Example sending a request using the AddUploadBufferRequest method.
 //    req := client.AddUploadBufferRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -252,7 +257,8 @@ type AddWorkingStorageRequest struct {
 }
 
 // Send marshals and sends the AddWorkingStorage API request.
-func (r AddWorkingStorageRequest) Send() (*AddWorkingStorageOutput, error) {
+func (r AddWorkingStorageRequest) Send(ctx context.Context) (*AddWorkingStorageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -278,7 +284,7 @@ func (r AddWorkingStorageRequest) Send() (*AddWorkingStorageOutput, error) {
 //
 //    // Example sending a request using the AddWorkingStorageRequest method.
 //    req := client.AddWorkingStorageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -312,7 +318,8 @@ type CancelArchivalRequest struct {
 }
 
 // Send marshals and sends the CancelArchival API request.
-func (r CancelArchivalRequest) Send() (*CancelArchivalOutput, error) {
+func (r CancelArchivalRequest) Send(ctx context.Context) (*CancelArchivalOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -330,7 +337,7 @@ func (r CancelArchivalRequest) Send() (*CancelArchivalOutput, error) {
 //
 //    // Example sending a request using the CancelArchivalRequest method.
 //    req := client.CancelArchivalRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -364,7 +371,8 @@ type CancelRetrievalRequest struct {
 }
 
 // Send marshals and sends the CancelRetrieval API request.
-func (r CancelRetrievalRequest) Send() (*CancelRetrievalOutput, error) {
+func (r CancelRetrievalRequest) Send(ctx context.Context) (*CancelRetrievalOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -382,7 +390,7 @@ func (r CancelRetrievalRequest) Send() (*CancelRetrievalOutput, error) {
 //
 //    // Example sending a request using the CancelRetrievalRequest method.
 //    req := client.CancelRetrievalRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -416,7 +424,8 @@ type CreateCachediSCSIVolumeRequest struct {
 }
 
 // Send marshals and sends the CreateCachediSCSIVolume API request.
-func (r CreateCachediSCSIVolumeRequest) Send() (*CreateCachediSCSIVolumeOutput, error) {
+func (r CreateCachediSCSIVolumeRequest) Send(ctx context.Context) (*CreateCachediSCSIVolumeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +457,7 @@ func (r CreateCachediSCSIVolumeRequest) Send() (*CreateCachediSCSIVolumeOutput, 
 //
 //    // Example sending a request using the CreateCachediSCSIVolumeRequest method.
 //    req := client.CreateCachediSCSIVolumeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -482,7 +491,8 @@ type CreateNFSFileShareRequest struct {
 }
 
 // Send marshals and sends the CreateNFSFileShare API request.
-func (r CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
+func (r CreateNFSFileShareRequest) Send(ctx context.Context) (*CreateNFSFileShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -510,7 +520,7 @@ func (r CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
 //
 //    // Example sending a request using the CreateNFSFileShareRequest method.
 //    req := client.CreateNFSFileShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -544,7 +554,8 @@ type CreateSMBFileShareRequest struct {
 }
 
 // Send marshals and sends the CreateSMBFileShare API request.
-func (r CreateSMBFileShareRequest) Send() (*CreateSMBFileShareOutput, error) {
+func (r CreateSMBFileShareRequest) Send(ctx context.Context) (*CreateSMBFileShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -572,7 +583,7 @@ func (r CreateSMBFileShareRequest) Send() (*CreateSMBFileShareOutput, error) {
 //
 //    // Example sending a request using the CreateSMBFileShareRequest method.
 //    req := client.CreateSMBFileShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -606,7 +617,8 @@ type CreateSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshot API request.
-func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+func (r CreateSnapshotRequest) Send(ctx context.Context) (*CreateSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,7 +657,7 @@ func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
 //
 //    // Example sending a request using the CreateSnapshotRequest method.
 //    req := client.CreateSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -679,7 +691,8 @@ type CreateSnapshotFromVolumeRecoveryPointRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshotFromVolumeRecoveryPoint API request.
-func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send() (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
+func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send(ctx context.Context) (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -711,7 +724,7 @@ func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send() (*CreateSnapshotFro
 //
 //    // Example sending a request using the CreateSnapshotFromVolumeRecoveryPointRequest method.
 //    req := client.CreateSnapshotFromVolumeRecoveryPointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -745,7 +758,8 @@ type CreateStorediSCSIVolumeRequest struct {
 }
 
 // Send marshals and sends the CreateStorediSCSIVolume API request.
-func (r CreateStorediSCSIVolumeRequest) Send() (*CreateStorediSCSIVolumeOutput, error) {
+func (r CreateStorediSCSIVolumeRequest) Send(ctx context.Context) (*CreateStorediSCSIVolumeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -773,7 +787,7 @@ func (r CreateStorediSCSIVolumeRequest) Send() (*CreateStorediSCSIVolumeOutput, 
 //
 //    // Example sending a request using the CreateStorediSCSIVolumeRequest method.
 //    req := client.CreateStorediSCSIVolumeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -807,7 +821,8 @@ type CreateTapeWithBarcodeRequest struct {
 }
 
 // Send marshals and sends the CreateTapeWithBarcode API request.
-func (r CreateTapeWithBarcodeRequest) Send() (*CreateTapeWithBarcodeOutput, error) {
+func (r CreateTapeWithBarcodeRequest) Send(ctx context.Context) (*CreateTapeWithBarcodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -829,7 +844,7 @@ func (r CreateTapeWithBarcodeRequest) Send() (*CreateTapeWithBarcodeOutput, erro
 //
 //    // Example sending a request using the CreateTapeWithBarcodeRequest method.
 //    req := client.CreateTapeWithBarcodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -863,7 +878,8 @@ type CreateTapesRequest struct {
 }
 
 // Send marshals and sends the CreateTapes API request.
-func (r CreateTapesRequest) Send() (*CreateTapesOutput, error) {
+func (r CreateTapesRequest) Send(ctx context.Context) (*CreateTapesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -884,7 +900,7 @@ func (r CreateTapesRequest) Send() (*CreateTapesOutput, error) {
 //
 //    // Example sending a request using the CreateTapesRequest method.
 //    req := client.CreateTapesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -918,7 +934,8 @@ type DeleteBandwidthRateLimitRequest struct {
 }
 
 // Send marshals and sends the DeleteBandwidthRateLimit API request.
-func (r DeleteBandwidthRateLimitRequest) Send() (*DeleteBandwidthRateLimitOutput, error) {
+func (r DeleteBandwidthRateLimitRequest) Send(ctx context.Context) (*DeleteBandwidthRateLimitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -938,7 +955,7 @@ func (r DeleteBandwidthRateLimitRequest) Send() (*DeleteBandwidthRateLimitOutput
 //
 //    // Example sending a request using the DeleteBandwidthRateLimitRequest method.
 //    req := client.DeleteBandwidthRateLimitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -972,7 +989,8 @@ type DeleteChapCredentialsRequest struct {
 }
 
 // Send marshals and sends the DeleteChapCredentials API request.
-func (r DeleteChapCredentialsRequest) Send() (*DeleteChapCredentialsOutput, error) {
+func (r DeleteChapCredentialsRequest) Send(ctx context.Context) (*DeleteChapCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -989,7 +1007,7 @@ func (r DeleteChapCredentialsRequest) Send() (*DeleteChapCredentialsOutput, erro
 //
 //    // Example sending a request using the DeleteChapCredentialsRequest method.
 //    req := client.DeleteChapCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1023,7 +1041,8 @@ type DeleteFileShareRequest struct {
 }
 
 // Send marshals and sends the DeleteFileShare API request.
-func (r DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
+func (r DeleteFileShareRequest) Send(ctx context.Context) (*DeleteFileShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1040,7 +1059,7 @@ func (r DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
 //
 //    // Example sending a request using the DeleteFileShareRequest method.
 //    req := client.DeleteFileShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1074,7 +1093,8 @@ type DeleteGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteGateway API request.
-func (r DeleteGatewayRequest) Send() (*DeleteGatewayOutput, error) {
+func (r DeleteGatewayRequest) Send(ctx context.Context) (*DeleteGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1105,7 +1125,7 @@ func (r DeleteGatewayRequest) Send() (*DeleteGatewayOutput, error) {
 //
 //    // Example sending a request using the DeleteGatewayRequest method.
 //    req := client.DeleteGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1139,7 +1159,8 @@ type DeleteSnapshotScheduleRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshotSchedule API request.
-func (r DeleteSnapshotScheduleRequest) Send() (*DeleteSnapshotScheduleOutput, error) {
+func (r DeleteSnapshotScheduleRequest) Send(ctx context.Context) (*DeleteSnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1165,7 +1186,7 @@ func (r DeleteSnapshotScheduleRequest) Send() (*DeleteSnapshotScheduleOutput, er
 //
 //    // Example sending a request using the DeleteSnapshotScheduleRequest method.
 //    req := client.DeleteSnapshotScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1199,7 +1220,8 @@ type DeleteTapeRequest struct {
 }
 
 // Send marshals and sends the DeleteTape API request.
-func (r DeleteTapeRequest) Send() (*DeleteTapeOutput, error) {
+func (r DeleteTapeRequest) Send(ctx context.Context) (*DeleteTapeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1216,7 +1238,7 @@ func (r DeleteTapeRequest) Send() (*DeleteTapeOutput, error) {
 //
 //    // Example sending a request using the DeleteTapeRequest method.
 //    req := client.DeleteTapeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1250,7 +1272,8 @@ type DeleteTapeArchiveRequest struct {
 }
 
 // Send marshals and sends the DeleteTapeArchive API request.
-func (r DeleteTapeArchiveRequest) Send() (*DeleteTapeArchiveOutput, error) {
+func (r DeleteTapeArchiveRequest) Send(ctx context.Context) (*DeleteTapeArchiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1267,7 +1290,7 @@ func (r DeleteTapeArchiveRequest) Send() (*DeleteTapeArchiveOutput, error) {
 //
 //    // Example sending a request using the DeleteTapeArchiveRequest method.
 //    req := client.DeleteTapeArchiveRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1301,7 +1324,8 @@ type DeleteVolumeRequest struct {
 }
 
 // Send marshals and sends the DeleteVolume API request.
-func (r DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
+func (r DeleteVolumeRequest) Send(ctx context.Context) (*DeleteVolumeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1331,7 +1355,7 @@ func (r DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
 //
 //    // Example sending a request using the DeleteVolumeRequest method.
 //    req := client.DeleteVolumeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1365,7 +1389,8 @@ type DescribeBandwidthRateLimitRequest struct {
 }
 
 // Send marshals and sends the DescribeBandwidthRateLimit API request.
-func (r DescribeBandwidthRateLimitRequest) Send() (*DescribeBandwidthRateLimitOutput, error) {
+func (r DescribeBandwidthRateLimitRequest) Send(ctx context.Context) (*DescribeBandwidthRateLimitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1387,7 +1412,7 @@ func (r DescribeBandwidthRateLimitRequest) Send() (*DescribeBandwidthRateLimitOu
 //
 //    // Example sending a request using the DescribeBandwidthRateLimitRequest method.
 //    req := client.DescribeBandwidthRateLimitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1421,7 +1446,8 @@ type DescribeCacheRequest struct {
 }
 
 // Send marshals and sends the DescribeCache API request.
-func (r DescribeCacheRequest) Send() (*DescribeCacheOutput, error) {
+func (r DescribeCacheRequest) Send(ctx context.Context) (*DescribeCacheOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1441,7 +1467,7 @@ func (r DescribeCacheRequest) Send() (*DescribeCacheOutput, error) {
 //
 //    // Example sending a request using the DescribeCacheRequest method.
 //    req := client.DescribeCacheRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1475,7 +1501,8 @@ type DescribeCachediSCSIVolumesRequest struct {
 }
 
 // Send marshals and sends the DescribeCachediSCSIVolumes API request.
-func (r DescribeCachediSCSIVolumesRequest) Send() (*DescribeCachediSCSIVolumesOutput, error) {
+func (r DescribeCachediSCSIVolumesRequest) Send(ctx context.Context) (*DescribeCachediSCSIVolumesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1496,7 +1523,7 @@ func (r DescribeCachediSCSIVolumesRequest) Send() (*DescribeCachediSCSIVolumesOu
 //
 //    // Example sending a request using the DescribeCachediSCSIVolumesRequest method.
 //    req := client.DescribeCachediSCSIVolumesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1530,7 +1557,8 @@ type DescribeChapCredentialsRequest struct {
 }
 
 // Send marshals and sends the DescribeChapCredentials API request.
-func (r DescribeChapCredentialsRequest) Send() (*DescribeChapCredentialsOutput, error) {
+func (r DescribeChapCredentialsRequest) Send(ctx context.Context) (*DescribeChapCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1547,7 +1575,7 @@ func (r DescribeChapCredentialsRequest) Send() (*DescribeChapCredentialsOutput, 
 //
 //    // Example sending a request using the DescribeChapCredentialsRequest method.
 //    req := client.DescribeChapCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1581,7 +1609,8 @@ type DescribeGatewayInformationRequest struct {
 }
 
 // Send marshals and sends the DescribeGatewayInformation API request.
-func (r DescribeGatewayInformationRequest) Send() (*DescribeGatewayInformationOutput, error) {
+func (r DescribeGatewayInformationRequest) Send(ctx context.Context) (*DescribeGatewayInformationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1600,7 +1629,7 @@ func (r DescribeGatewayInformationRequest) Send() (*DescribeGatewayInformationOu
 //
 //    // Example sending a request using the DescribeGatewayInformationRequest method.
 //    req := client.DescribeGatewayInformationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1634,7 +1663,8 @@ type DescribeMaintenanceStartTimeRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceStartTime API request.
-func (r DescribeMaintenanceStartTimeRequest) Send() (*DescribeMaintenanceStartTimeOutput, error) {
+func (r DescribeMaintenanceStartTimeRequest) Send(ctx context.Context) (*DescribeMaintenanceStartTimeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1651,7 +1681,7 @@ func (r DescribeMaintenanceStartTimeRequest) Send() (*DescribeMaintenanceStartTi
 //
 //    // Example sending a request using the DescribeMaintenanceStartTimeRequest method.
 //    req := client.DescribeMaintenanceStartTimeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1685,7 +1715,8 @@ type DescribeNFSFileSharesRequest struct {
 }
 
 // Send marshals and sends the DescribeNFSFileShares API request.
-func (r DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, error) {
+func (r DescribeNFSFileSharesRequest) Send(ctx context.Context) (*DescribeNFSFileSharesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1702,7 +1733,7 @@ func (r DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, erro
 //
 //    // Example sending a request using the DescribeNFSFileSharesRequest method.
 //    req := client.DescribeNFSFileSharesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1736,7 +1767,8 @@ type DescribeSMBFileSharesRequest struct {
 }
 
 // Send marshals and sends the DescribeSMBFileShares API request.
-func (r DescribeSMBFileSharesRequest) Send() (*DescribeSMBFileSharesOutput, error) {
+func (r DescribeSMBFileSharesRequest) Send(ctx context.Context) (*DescribeSMBFileSharesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1753,7 +1785,7 @@ func (r DescribeSMBFileSharesRequest) Send() (*DescribeSMBFileSharesOutput, erro
 //
 //    // Example sending a request using the DescribeSMBFileSharesRequest method.
 //    req := client.DescribeSMBFileSharesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1787,7 +1819,8 @@ type DescribeSMBSettingsRequest struct {
 }
 
 // Send marshals and sends the DescribeSMBSettings API request.
-func (r DescribeSMBSettingsRequest) Send() (*DescribeSMBSettingsOutput, error) {
+func (r DescribeSMBSettingsRequest) Send(ctx context.Context) (*DescribeSMBSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1804,7 +1837,7 @@ func (r DescribeSMBSettingsRequest) Send() (*DescribeSMBSettingsOutput, error) {
 //
 //    // Example sending a request using the DescribeSMBSettingsRequest method.
 //    req := client.DescribeSMBSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1838,7 +1871,8 @@ type DescribeSnapshotScheduleRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshotSchedule API request.
-func (r DescribeSnapshotScheduleRequest) Send() (*DescribeSnapshotScheduleOutput, error) {
+func (r DescribeSnapshotScheduleRequest) Send(ctx context.Context) (*DescribeSnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1857,7 +1891,7 @@ func (r DescribeSnapshotScheduleRequest) Send() (*DescribeSnapshotScheduleOutput
 //
 //    // Example sending a request using the DescribeSnapshotScheduleRequest method.
 //    req := client.DescribeSnapshotScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1891,7 +1925,8 @@ type DescribeStorediSCSIVolumesRequest struct {
 }
 
 // Send marshals and sends the DescribeStorediSCSIVolumes API request.
-func (r DescribeStorediSCSIVolumesRequest) Send() (*DescribeStorediSCSIVolumesOutput, error) {
+func (r DescribeStorediSCSIVolumesRequest) Send(ctx context.Context) (*DescribeStorediSCSIVolumesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1910,7 +1945,7 @@ func (r DescribeStorediSCSIVolumesRequest) Send() (*DescribeStorediSCSIVolumesOu
 //
 //    // Example sending a request using the DescribeStorediSCSIVolumesRequest method.
 //    req := client.DescribeStorediSCSIVolumesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1944,7 +1979,8 @@ type DescribeTapeArchivesRequest struct {
 }
 
 // Send marshals and sends the DescribeTapeArchives API request.
-func (r DescribeTapeArchivesRequest) Send() (*DescribeTapeArchivesOutput, error) {
+func (r DescribeTapeArchivesRequest) Send(ctx context.Context) (*DescribeTapeArchivesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1964,7 +2000,7 @@ func (r DescribeTapeArchivesRequest) Send() (*DescribeTapeArchivesOutput, error)
 //
 //    // Example sending a request using the DescribeTapeArchivesRequest method.
 //    req := client.DescribeTapeArchivesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2014,7 +2050,7 @@ func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchives
 func (p *DescribeTapeArchivesRequest) Paginate(opts ...aws.Option) DescribeTapeArchivesPager {
 	return DescribeTapeArchivesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTapeArchivesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2023,6 +2059,7 @@ func (p *DescribeTapeArchivesRequest) Paginate(opts ...aws.Option) DescribeTapeA
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2050,7 +2087,8 @@ type DescribeTapeRecoveryPointsRequest struct {
 }
 
 // Send marshals and sends the DescribeTapeRecoveryPoints API request.
-func (r DescribeTapeRecoveryPointsRequest) Send() (*DescribeTapeRecoveryPointsOutput, error) {
+func (r DescribeTapeRecoveryPointsRequest) Send(ctx context.Context) (*DescribeTapeRecoveryPointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2072,7 +2110,7 @@ func (r DescribeTapeRecoveryPointsRequest) Send() (*DescribeTapeRecoveryPointsOu
 //
 //    // Example sending a request using the DescribeTapeRecoveryPointsRequest method.
 //    req := client.DescribeTapeRecoveryPointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2122,7 +2160,7 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRe
 func (p *DescribeTapeRecoveryPointsRequest) Paginate(opts ...aws.Option) DescribeTapeRecoveryPointsPager {
 	return DescribeTapeRecoveryPointsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTapeRecoveryPointsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2131,6 +2169,7 @@ func (p *DescribeTapeRecoveryPointsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2158,7 +2197,8 @@ type DescribeTapesRequest struct {
 }
 
 // Send marshals and sends the DescribeTapes API request.
-func (r DescribeTapesRequest) Send() (*DescribeTapesOutput, error) {
+func (r DescribeTapesRequest) Send(ctx context.Context) (*DescribeTapesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2177,7 +2217,7 @@ func (r DescribeTapesRequest) Send() (*DescribeTapesOutput, error) {
 //
 //    // Example sending a request using the DescribeTapesRequest method.
 //    req := client.DescribeTapesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2227,7 +2267,7 @@ func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) Describ
 func (p *DescribeTapesRequest) Paginate(opts ...aws.Option) DescribeTapesPager {
 	return DescribeTapesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeTapesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2236,6 +2276,7 @@ func (p *DescribeTapesRequest) Paginate(opts ...aws.Option) DescribeTapesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2263,7 +2304,8 @@ type DescribeUploadBufferRequest struct {
 }
 
 // Send marshals and sends the DescribeUploadBuffer API request.
-func (r DescribeUploadBufferRequest) Send() (*DescribeUploadBufferOutput, error) {
+func (r DescribeUploadBufferRequest) Send(ctx context.Context) (*DescribeUploadBufferOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2283,7 +2325,7 @@ func (r DescribeUploadBufferRequest) Send() (*DescribeUploadBufferOutput, error)
 //
 //    // Example sending a request using the DescribeUploadBufferRequest method.
 //    req := client.DescribeUploadBufferRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2317,7 +2359,8 @@ type DescribeVTLDevicesRequest struct {
 }
 
 // Send marshals and sends the DescribeVTLDevices API request.
-func (r DescribeVTLDevicesRequest) Send() (*DescribeVTLDevicesOutput, error) {
+func (r DescribeVTLDevicesRequest) Send(ctx context.Context) (*DescribeVTLDevicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2336,7 +2379,7 @@ func (r DescribeVTLDevicesRequest) Send() (*DescribeVTLDevicesOutput, error) {
 //
 //    // Example sending a request using the DescribeVTLDevicesRequest method.
 //    req := client.DescribeVTLDevicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2386,7 +2429,7 @@ func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInpu
 func (p *DescribeVTLDevicesRequest) Paginate(opts ...aws.Option) DescribeVTLDevicesPager {
 	return DescribeVTLDevicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeVTLDevicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2395,6 +2438,7 @@ func (p *DescribeVTLDevicesRequest) Paginate(opts ...aws.Option) DescribeVTLDevi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2422,7 +2466,8 @@ type DescribeWorkingStorageRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkingStorage API request.
-func (r DescribeWorkingStorageRequest) Send() (*DescribeWorkingStorageOutput, error) {
+func (r DescribeWorkingStorageRequest) Send(ctx context.Context) (*DescribeWorkingStorageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2446,7 +2491,7 @@ func (r DescribeWorkingStorageRequest) Send() (*DescribeWorkingStorageOutput, er
 //
 //    // Example sending a request using the DescribeWorkingStorageRequest method.
 //    req := client.DescribeWorkingStorageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2480,7 +2525,8 @@ type DisableGatewayRequest struct {
 }
 
 // Send marshals and sends the DisableGateway API request.
-func (r DisableGatewayRequest) Send() (*DisableGatewayOutput, error) {
+func (r DisableGatewayRequest) Send(ctx context.Context) (*DisableGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2503,7 +2549,7 @@ func (r DisableGatewayRequest) Send() (*DisableGatewayOutput, error) {
 //
 //    // Example sending a request using the DisableGatewayRequest method.
 //    req := client.DisableGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2537,7 +2583,8 @@ type JoinDomainRequest struct {
 }
 
 // Send marshals and sends the JoinDomain API request.
-func (r JoinDomainRequest) Send() (*JoinDomainOutput, error) {
+func (r JoinDomainRequest) Send(ctx context.Context) (*JoinDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2554,7 +2601,7 @@ func (r JoinDomainRequest) Send() (*JoinDomainOutput, error) {
 //
 //    // Example sending a request using the JoinDomainRequest method.
 //    req := client.JoinDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2588,7 +2635,8 @@ type ListFileSharesRequest struct {
 }
 
 // Send marshals and sends the ListFileShares API request.
-func (r ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
+func (r ListFileSharesRequest) Send(ctx context.Context) (*ListFileSharesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2606,7 +2654,7 @@ func (r ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
 //
 //    // Example sending a request using the ListFileSharesRequest method.
 //    req := client.ListFileSharesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2640,7 +2688,8 @@ type ListGatewaysRequest struct {
 }
 
 // Send marshals and sends the ListGateways API request.
-func (r ListGatewaysRequest) Send() (*ListGatewaysOutput, error) {
+func (r ListGatewaysRequest) Send(ctx context.Context) (*ListGatewaysOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2666,7 +2715,7 @@ func (r ListGatewaysRequest) Send() (*ListGatewaysOutput, error) {
 //
 //    // Example sending a request using the ListGatewaysRequest method.
 //    req := client.ListGatewaysRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2716,7 +2765,7 @@ func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) ListGatew
 func (p *ListGatewaysRequest) Paginate(opts ...aws.Option) ListGatewaysPager {
 	return ListGatewaysPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGatewaysInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2725,6 +2774,7 @@ func (p *ListGatewaysRequest) Paginate(opts ...aws.Option) ListGatewaysPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2752,7 +2802,8 @@ type ListLocalDisksRequest struct {
 }
 
 // Send marshals and sends the ListLocalDisks API request.
-func (r ListLocalDisksRequest) Send() (*ListLocalDisksOutput, error) {
+func (r ListLocalDisksRequest) Send(ctx context.Context) (*ListLocalDisksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2777,7 +2828,7 @@ func (r ListLocalDisksRequest) Send() (*ListLocalDisksOutput, error) {
 //
 //    // Example sending a request using the ListLocalDisksRequest method.
 //    req := client.ListLocalDisksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2811,7 +2862,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2828,7 +2880,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2862,7 +2914,8 @@ type ListTapesRequest struct {
 }
 
 // Send marshals and sends the ListTapes API request.
-func (r ListTapesRequest) Send() (*ListTapesOutput, error) {
+func (r ListTapesRequest) Send(ctx context.Context) (*ListTapesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2888,7 +2941,7 @@ func (r ListTapesRequest) Send() (*ListTapesOutput, error) {
 //
 //    // Example sending a request using the ListTapesRequest method.
 //    req := client.ListTapesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2922,7 +2975,8 @@ type ListVolumeInitiatorsRequest struct {
 }
 
 // Send marshals and sends the ListVolumeInitiators API request.
-func (r ListVolumeInitiatorsRequest) Send() (*ListVolumeInitiatorsOutput, error) {
+func (r ListVolumeInitiatorsRequest) Send(ctx context.Context) (*ListVolumeInitiatorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2940,7 +2994,7 @@ func (r ListVolumeInitiatorsRequest) Send() (*ListVolumeInitiatorsOutput, error)
 //
 //    // Example sending a request using the ListVolumeInitiatorsRequest method.
 //    req := client.ListVolumeInitiatorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2974,7 +3028,8 @@ type ListVolumeRecoveryPointsRequest struct {
 }
 
 // Send marshals and sends the ListVolumeRecoveryPoints API request.
-func (r ListVolumeRecoveryPointsRequest) Send() (*ListVolumeRecoveryPointsOutput, error) {
+func (r ListVolumeRecoveryPointsRequest) Send(ctx context.Context) (*ListVolumeRecoveryPointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2997,7 +3052,7 @@ func (r ListVolumeRecoveryPointsRequest) Send() (*ListVolumeRecoveryPointsOutput
 //
 //    // Example sending a request using the ListVolumeRecoveryPointsRequest method.
 //    req := client.ListVolumeRecoveryPointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3031,7 +3086,8 @@ type ListVolumesRequest struct {
 }
 
 // Send marshals and sends the ListVolumes API request.
-func (r ListVolumesRequest) Send() (*ListVolumesOutput, error) {
+func (r ListVolumesRequest) Send(ctx context.Context) (*ListVolumesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3058,7 +3114,7 @@ func (r ListVolumesRequest) Send() (*ListVolumesOutput, error) {
 //
 //    // Example sending a request using the ListVolumesRequest method.
 //    req := client.ListVolumesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3108,7 +3164,7 @@ func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) ListVolumes
 func (p *ListVolumesRequest) Paginate(opts ...aws.Option) ListVolumesPager {
 	return ListVolumesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVolumesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3117,6 +3173,7 @@ func (p *ListVolumesRequest) Paginate(opts ...aws.Option) ListVolumesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3144,7 +3201,8 @@ type NotifyWhenUploadedRequest struct {
 }
 
 // Send marshals and sends the NotifyWhenUploaded API request.
-func (r NotifyWhenUploadedRequest) Send() (*NotifyWhenUploadedOutput, error) {
+func (r NotifyWhenUploadedRequest) Send(ctx context.Context) (*NotifyWhenUploadedOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3173,7 +3231,7 @@ func (r NotifyWhenUploadedRequest) Send() (*NotifyWhenUploadedOutput, error) {
 //
 //    // Example sending a request using the NotifyWhenUploadedRequest method.
 //    req := client.NotifyWhenUploadedRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3207,7 +3265,8 @@ type RefreshCacheRequest struct {
 }
 
 // Send marshals and sends the RefreshCache API request.
-func (r RefreshCacheRequest) Send() (*RefreshCacheOutput, error) {
+func (r RefreshCacheRequest) Send(ctx context.Context) (*RefreshCacheOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3222,11 +3281,13 @@ func (r RefreshCacheRequest) Send() (*RefreshCacheOutput, error) {
 // Refreshes the cache for the specified file share. This operation finds objects
 // in the Amazon S3 bucket that were added, removed or replaced since the gateway
 // last listed the bucket's contents and cached the results. This operation
-// is only supported in the file gateway type.
+// is only supported in the file gateway type. You can subscribe to be notified
+// through an Amazon CloudWatch event when your RefreshCache operation completes.
+// For more information, see Getting Notified About File Operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification).
 //
 //    // Example sending a request using the RefreshCacheRequest method.
 //    req := client.RefreshCacheRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3260,7 +3321,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3277,7 +3339,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3311,7 +3373,8 @@ type ResetCacheRequest struct {
 }
 
 // Send marshals and sends the ResetCache API request.
-func (r ResetCacheRequest) Send() (*ResetCacheOutput, error) {
+func (r ResetCacheRequest) Send(ctx context.Context) (*ResetCacheOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3338,7 +3401,7 @@ func (r ResetCacheRequest) Send() (*ResetCacheOutput, error) {
 //
 //    // Example sending a request using the ResetCacheRequest method.
 //    req := client.ResetCacheRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3372,7 +3435,8 @@ type RetrieveTapeArchiveRequest struct {
 }
 
 // Send marshals and sends the RetrieveTapeArchive API request.
-func (r RetrieveTapeArchiveRequest) Send() (*RetrieveTapeArchiveOutput, error) {
+func (r RetrieveTapeArchiveRequest) Send(ctx context.Context) (*RetrieveTapeArchiveOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3397,7 +3461,7 @@ func (r RetrieveTapeArchiveRequest) Send() (*RetrieveTapeArchiveOutput, error) {
 //
 //    // Example sending a request using the RetrieveTapeArchiveRequest method.
 //    req := client.RetrieveTapeArchiveRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3431,7 +3495,8 @@ type RetrieveTapeRecoveryPointRequest struct {
 }
 
 // Send marshals and sends the RetrieveTapeRecoveryPoint API request.
-func (r RetrieveTapeRecoveryPointRequest) Send() (*RetrieveTapeRecoveryPointOutput, error) {
+func (r RetrieveTapeRecoveryPointRequest) Send(ctx context.Context) (*RetrieveTapeRecoveryPointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3456,7 +3521,7 @@ func (r RetrieveTapeRecoveryPointRequest) Send() (*RetrieveTapeRecoveryPointOutp
 //
 //    // Example sending a request using the RetrieveTapeRecoveryPointRequest method.
 //    req := client.RetrieveTapeRecoveryPointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3490,7 +3555,8 @@ type SetLocalConsolePasswordRequest struct {
 }
 
 // Send marshals and sends the SetLocalConsolePassword API request.
-func (r SetLocalConsolePasswordRequest) Send() (*SetLocalConsolePasswordOutput, error) {
+func (r SetLocalConsolePasswordRequest) Send(ctx context.Context) (*SetLocalConsolePasswordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3509,7 +3575,7 @@ func (r SetLocalConsolePasswordRequest) Send() (*SetLocalConsolePasswordOutput, 
 //
 //    // Example sending a request using the SetLocalConsolePasswordRequest method.
 //    req := client.SetLocalConsolePasswordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3543,7 +3609,8 @@ type SetSMBGuestPasswordRequest struct {
 }
 
 // Send marshals and sends the SetSMBGuestPassword API request.
-func (r SetSMBGuestPasswordRequest) Send() (*SetSMBGuestPasswordOutput, error) {
+func (r SetSMBGuestPasswordRequest) Send(ctx context.Context) (*SetSMBGuestPasswordOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3560,7 +3627,7 @@ func (r SetSMBGuestPasswordRequest) Send() (*SetSMBGuestPasswordOutput, error) {
 //
 //    // Example sending a request using the SetSMBGuestPasswordRequest method.
 //    req := client.SetSMBGuestPasswordRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3594,7 +3661,8 @@ type ShutdownGatewayRequest struct {
 }
 
 // Send marshals and sends the ShutdownGateway API request.
-func (r ShutdownGatewayRequest) Send() (*ShutdownGatewayOutput, error) {
+func (r ShutdownGatewayRequest) Send(ctx context.Context) (*ShutdownGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3630,7 +3698,7 @@ func (r ShutdownGatewayRequest) Send() (*ShutdownGatewayOutput, error) {
 //
 //    // Example sending a request using the ShutdownGatewayRequest method.
 //    req := client.ShutdownGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3664,7 +3732,8 @@ type StartGatewayRequest struct {
 }
 
 // Send marshals and sends the StartGateway API request.
-func (r StartGatewayRequest) Send() (*StartGatewayOutput, error) {
+func (r StartGatewayRequest) Send(ctx context.Context) (*StartGatewayOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3691,7 +3760,7 @@ func (r StartGatewayRequest) Send() (*StartGatewayOutput, error) {
 //
 //    // Example sending a request using the StartGatewayRequest method.
 //    req := client.StartGatewayRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3725,7 +3794,8 @@ type UpdateBandwidthRateLimitRequest struct {
 }
 
 // Send marshals and sends the UpdateBandwidthRateLimit API request.
-func (r UpdateBandwidthRateLimitRequest) Send() (*UpdateBandwidthRateLimitOutput, error) {
+func (r UpdateBandwidthRateLimitRequest) Send(ctx context.Context) (*UpdateBandwidthRateLimitOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3750,7 +3820,7 @@ func (r UpdateBandwidthRateLimitRequest) Send() (*UpdateBandwidthRateLimitOutput
 //
 //    // Example sending a request using the UpdateBandwidthRateLimitRequest method.
 //    req := client.UpdateBandwidthRateLimitRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3784,7 +3854,8 @@ type UpdateChapCredentialsRequest struct {
 }
 
 // Send marshals and sends the UpdateChapCredentials API request.
-func (r UpdateChapCredentialsRequest) Send() (*UpdateChapCredentialsOutput, error) {
+func (r UpdateChapCredentialsRequest) Send(ctx context.Context) (*UpdateChapCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3805,7 +3876,7 @@ func (r UpdateChapCredentialsRequest) Send() (*UpdateChapCredentialsOutput, erro
 //
 //    // Example sending a request using the UpdateChapCredentialsRequest method.
 //    req := client.UpdateChapCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3839,7 +3910,8 @@ type UpdateGatewayInformationRequest struct {
 }
 
 // Send marshals and sends the UpdateGatewayInformation API request.
-func (r UpdateGatewayInformationRequest) Send() (*UpdateGatewayInformationOutput, error) {
+func (r UpdateGatewayInformationRequest) Send(ctx context.Context) (*UpdateGatewayInformationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3861,7 +3933,7 @@ func (r UpdateGatewayInformationRequest) Send() (*UpdateGatewayInformationOutput
 //
 //    // Example sending a request using the UpdateGatewayInformationRequest method.
 //    req := client.UpdateGatewayInformationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3895,7 +3967,8 @@ type UpdateGatewaySoftwareNowRequest struct {
 }
 
 // Send marshals and sends the UpdateGatewaySoftwareNow API request.
-func (r UpdateGatewaySoftwareNowRequest) Send() (*UpdateGatewaySoftwareNowOutput, error) {
+func (r UpdateGatewaySoftwareNowRequest) Send(ctx context.Context) (*UpdateGatewaySoftwareNowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3925,7 +3998,7 @@ func (r UpdateGatewaySoftwareNowRequest) Send() (*UpdateGatewaySoftwareNowOutput
 //
 //    // Example sending a request using the UpdateGatewaySoftwareNowRequest method.
 //    req := client.UpdateGatewaySoftwareNowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3959,7 +4032,8 @@ type UpdateMaintenanceStartTimeRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceStartTime API request.
-func (r UpdateMaintenanceStartTimeRequest) Send() (*UpdateMaintenanceStartTimeOutput, error) {
+func (r UpdateMaintenanceStartTimeRequest) Send(ctx context.Context) (*UpdateMaintenanceStartTimeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3977,7 +4051,7 @@ func (r UpdateMaintenanceStartTimeRequest) Send() (*UpdateMaintenanceStartTimeOu
 //
 //    // Example sending a request using the UpdateMaintenanceStartTimeRequest method.
 //    req := client.UpdateMaintenanceStartTimeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4011,7 +4085,8 @@ type UpdateNFSFileShareRequest struct {
 }
 
 // Send marshals and sends the UpdateNFSFileShare API request.
-func (r UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
+func (r UpdateNFSFileShareRequest) Send(ctx context.Context) (*UpdateNFSFileShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4046,7 +4121,7 @@ func (r UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
 //
 //    // Example sending a request using the UpdateNFSFileShareRequest method.
 //    req := client.UpdateNFSFileShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4080,7 +4155,8 @@ type UpdateSMBFileShareRequest struct {
 }
 
 // Send marshals and sends the UpdateSMBFileShare API request.
-func (r UpdateSMBFileShareRequest) Send() (*UpdateSMBFileShareOutput, error) {
+func (r UpdateSMBFileShareRequest) Send(ctx context.Context) (*UpdateSMBFileShareOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4108,7 +4184,7 @@ func (r UpdateSMBFileShareRequest) Send() (*UpdateSMBFileShareOutput, error) {
 //
 //    // Example sending a request using the UpdateSMBFileShareRequest method.
 //    req := client.UpdateSMBFileShareRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4142,7 +4218,8 @@ type UpdateSnapshotScheduleRequest struct {
 }
 
 // Send marshals and sends the UpdateSnapshotSchedule API request.
-func (r UpdateSnapshotScheduleRequest) Send() (*UpdateSnapshotScheduleOutput, error) {
+func (r UpdateSnapshotScheduleRequest) Send(ctx context.Context) (*UpdateSnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4167,7 +4244,7 @@ func (r UpdateSnapshotScheduleRequest) Send() (*UpdateSnapshotScheduleOutput, er
 //
 //    // Example sending a request using the UpdateSnapshotScheduleRequest method.
 //    req := client.UpdateSnapshotScheduleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4201,7 +4278,8 @@ type UpdateVTLDeviceTypeRequest struct {
 }
 
 // Send marshals and sends the UpdateVTLDeviceType API request.
-func (r UpdateVTLDeviceTypeRequest) Send() (*UpdateVTLDeviceTypeOutput, error) {
+func (r UpdateVTLDeviceTypeRequest) Send(ctx context.Context) (*UpdateVTLDeviceTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4221,7 +4299,7 @@ func (r UpdateVTLDeviceTypeRequest) Send() (*UpdateVTLDeviceTypeOutput, error) {
 //
 //    // Example sending a request using the UpdateVTLDeviceTypeRequest method.
 //    req := client.UpdateVTLDeviceTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4307,7 +4385,7 @@ type ActivateGatewayInput struct {
 
 	// A value that defines the type of gateway to activate. The type specified
 	// is critical to all later functions of the gateway and cannot be changed after
-	// activation. The default value is STORED.
+	// activation. The default value is CACHED.
 	//
 	// Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"
 	GatewayType *string `min:"2" type:"string"`
@@ -7983,22 +8061,37 @@ func (s DisableGatewayOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Represents a gateway's local disk.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Disk
 type Disk struct {
 	_ struct{} `type:"structure"`
 
+	// The iSCSI Qualified Name (IQN) that is defined for a disk. This field is
+	// not included in the response if the local disk is not defined as an iSCSI
+	// target. The format of this field is targetIqn::LUNNumber::region-volumeId.
 	DiskAllocationResource *string `type:"string"`
 
+	// One of the DiskAllocationType enumeration values that identifies how a local
+	// disk is used. Valid values: "UPLOAD_BUFFER", "CACHE_STORAGE".
 	DiskAllocationType *string `min:"3" type:"string"`
 
+	// A list of values that represents attributes of a local disk.
+	DiskAttributeList []string `type:"list"`
+
+	// The unique device ID or other distinguishing data that identifies a local
+	// disk.
 	DiskId *string `min:"1" type:"string"`
 
+	// The device node of a local disk as assigned by the virtualization environment.
 	DiskNode *string `type:"string"`
 
+	// The path of a local disk in the gateway virtual machine (VM).
 	DiskPath *string `type:"string"`
 
+	// The local disk size in bytes.
 	DiskSizeInBytes *int64 `type:"long"`
 
+	// A value that represents the status of a local disk.
 	DiskStatus *string `type:"string"`
 }
 
@@ -9057,6 +9150,21 @@ type RefreshCacheInput struct {
 	//
 	// FileShareARN is a required field
 	FileShareARN *string `min:"50" type:"string" required:"true"`
+
+	// A comma-separated list of the paths of folders to refresh in the cache. The
+	// default is ["/"]. The default refreshes objects and folders at the root of
+	// the Amazon S3 bucket. If Recursive is set to "true", the entire S3 bucket
+	// that the file share has access to is refreshed.
+	FolderList []string `min:"1" type:"list"`
+
+	// A value that specifies whether to recursively refresh folders in the cache.
+	// The refresh includes folders that were in the cache the last time the gateway
+	// listed the folder's contents. If this value set to "true", each folder that
+	// is listed in FolderList is recursively updated. Otherwise, subfolders listed
+	// in FolderList are not refreshed. Only objects that are in folders listed
+	// directly under FolderList are found and used for the update. The default
+	// is "true".
+	Recursive *bool `type:"boolean"`
 }
 
 // String returns the string representation
@@ -9079,6 +9187,9 @@ func (s *RefreshCacheInput) Validate() error {
 	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
 	}
+	if s.FolderList != nil && len(s.FolderList) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FolderList", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9086,6 +9197,7 @@ func (s *RefreshCacheInput) Validate() error {
 	return nil
 }
 
+// RefreshCacheOutput
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheOutput
 type RefreshCacheOutput struct {
 	_ struct{} `type:"structure"`
@@ -9094,6 +9206,10 @@ type RefreshCacheOutput struct {
 
 	// The Amazon Resource Name (ARN) of the file share.
 	FileShareARN *string `min:"50" type:"string"`
+
+	// The randomly generated ID of the notification that was sent. This ID is in
+	// UUID format.
+	NotificationId *string `min:"1" type:"string"`
 }
 
 // String returns the string representation

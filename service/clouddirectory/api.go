@@ -3,6 +3,7 @@
 package clouddirectory
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddFacetToObjectRequest struct {
 }
 
 // Send marshals and sends the AddFacetToObject API request.
-func (r AddFacetToObjectRequest) Send() (*AddFacetToObjectOutput, error) {
+func (r AddFacetToObjectRequest) Send(ctx context.Context) (*AddFacetToObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r AddFacetToObjectRequest) Send() (*AddFacetToObjectOutput, error) {
 //
 //    // Example sending a request using the AddFacetToObjectRequest method.
 //    req := client.AddFacetToObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type ApplySchemaRequest struct {
 }
 
 // Send marshals and sends the ApplySchema API request.
-func (r ApplySchemaRequest) Send() (*ApplySchemaOutput, error) {
+func (r ApplySchemaRequest) Send(ctx context.Context) (*ApplySchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -90,7 +93,7 @@ func (r ApplySchemaRequest) Send() (*ApplySchemaOutput, error) {
 //
 //    // Example sending a request using the ApplySchemaRequest method.
 //    req := client.ApplySchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +127,8 @@ type AttachObjectRequest struct {
 }
 
 // Send marshals and sends the AttachObject API request.
-func (r AttachObjectRequest) Send() (*AttachObjectOutput, error) {
+func (r AttachObjectRequest) Send(ctx context.Context) (*AttachObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -145,7 +149,7 @@ func (r AttachObjectRequest) Send() (*AttachObjectOutput, error) {
 //
 //    // Example sending a request using the AttachObjectRequest method.
 //    req := client.AttachObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -179,7 +183,8 @@ type AttachPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachPolicy API request.
-func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -196,7 +201,7 @@ func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
 //
 //    // Example sending a request using the AttachPolicyRequest method.
 //    req := client.AttachPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -230,7 +235,8 @@ type AttachToIndexRequest struct {
 }
 
 // Send marshals and sends the AttachToIndex API request.
-func (r AttachToIndexRequest) Send() (*AttachToIndexOutput, error) {
+func (r AttachToIndexRequest) Send(ctx context.Context) (*AttachToIndexOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,7 +252,7 @@ func (r AttachToIndexRequest) Send() (*AttachToIndexOutput, error) {
 //
 //    // Example sending a request using the AttachToIndexRequest method.
 //    req := client.AttachToIndexRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -280,7 +286,8 @@ type AttachTypedLinkRequest struct {
 }
 
 // Send marshals and sends the AttachTypedLink API request.
-func (r AttachTypedLinkRequest) Send() (*AttachTypedLinkOutput, error) {
+func (r AttachTypedLinkRequest) Send(ctx context.Context) (*AttachTypedLinkOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -293,11 +300,11 @@ func (r AttachTypedLinkRequest) Send() (*AttachTypedLinkOutput, error) {
 // Amazon CloudDirectory.
 //
 // Attaches a typed link to a specified source and target object. For more information,
-// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the AttachTypedLinkRequest method.
 //    req := client.AttachTypedLinkRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -331,7 +338,8 @@ type BatchReadRequest struct {
 }
 
 // Send marshals and sends the BatchRead API request.
-func (r BatchReadRequest) Send() (*BatchReadOutput, error) {
+func (r BatchReadRequest) Send(ctx context.Context) (*BatchReadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +355,7 @@ func (r BatchReadRequest) Send() (*BatchReadOutput, error) {
 //
 //    // Example sending a request using the BatchReadRequest method.
 //    req := client.BatchReadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -381,7 +389,8 @@ type BatchWriteRequest struct {
 }
 
 // Send marshals and sends the BatchWrite API request.
-func (r BatchWriteRequest) Send() (*BatchWriteOutput, error) {
+func (r BatchWriteRequest) Send(ctx context.Context) (*BatchWriteOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +407,7 @@ func (r BatchWriteRequest) Send() (*BatchWriteOutput, error) {
 //
 //    // Example sending a request using the BatchWriteRequest method.
 //    req := client.BatchWriteRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +441,8 @@ type CreateDirectoryRequest struct {
 }
 
 // Send marshals and sends the CreateDirectory API request.
-func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
+func (r CreateDirectoryRequest) Send(ctx context.Context) (*CreateDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,9 +457,13 @@ func (r CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
 // Creates a Directory by copying the published schema into the directory. A
 // directory cannot be created without a schema.
 //
+// You can also quickly create a directory using a managed schema, called the
+// QuickStartSchema. For more information, see Managed Schema (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html)
+// in the Amazon Cloud Directory Developer Guide.
+//
 //    // Example sending a request using the CreateDirectoryRequest method.
 //    req := client.CreateDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -483,7 +497,8 @@ type CreateFacetRequest struct {
 }
 
 // Send marshals and sends the CreateFacet API request.
-func (r CreateFacetRequest) Send() (*CreateFacetOutput, error) {
+func (r CreateFacetRequest) Send(ctx context.Context) (*CreateFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -500,7 +515,7 @@ func (r CreateFacetRequest) Send() (*CreateFacetOutput, error) {
 //
 //    // Example sending a request using the CreateFacetRequest method.
 //    req := client.CreateFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -534,7 +549,8 @@ type CreateIndexRequest struct {
 }
 
 // Send marshals and sends the CreateIndex API request.
-func (r CreateIndexRequest) Send() (*CreateIndexOutput, error) {
+func (r CreateIndexRequest) Send(ctx context.Context) (*CreateIndexOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -546,12 +562,12 @@ func (r CreateIndexRequest) Send() (*CreateIndexOutput, error) {
 // CreateIndexRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html)
 // for more information.
 //
 //    // Example sending a request using the CreateIndexRequest method.
 //    req := client.CreateIndexRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -585,7 +601,8 @@ type CreateObjectRequest struct {
 }
 
 // Send marshals and sends the CreateObject API request.
-func (r CreateObjectRequest) Send() (*CreateObjectOutput, error) {
+func (r CreateObjectRequest) Send(ctx context.Context) (*CreateObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -604,7 +621,7 @@ func (r CreateObjectRequest) Send() (*CreateObjectOutput, error) {
 //
 //    // Example sending a request using the CreateObjectRequest method.
 //    req := client.CreateObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -638,7 +655,8 @@ type CreateSchemaRequest struct {
 }
 
 // Send marshals and sends the CreateSchema API request.
-func (r CreateSchemaRequest) Send() (*CreateSchemaOutput, error) {
+func (r CreateSchemaRequest) Send(ctx context.Context) (*CreateSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,7 +684,7 @@ func (r CreateSchemaRequest) Send() (*CreateSchemaOutput, error) {
 //
 //    // Example sending a request using the CreateSchemaRequest method.
 //    req := client.CreateSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -700,7 +718,8 @@ type CreateTypedLinkFacetRequest struct {
 }
 
 // Send marshals and sends the CreateTypedLinkFacet API request.
-func (r CreateTypedLinkFacetRequest) Send() (*CreateTypedLinkFacetOutput, error) {
+func (r CreateTypedLinkFacetRequest) Send(ctx context.Context) (*CreateTypedLinkFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -712,11 +731,11 @@ func (r CreateTypedLinkFacetRequest) Send() (*CreateTypedLinkFacetOutput, error)
 // CreateTypedLinkFacetRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Creates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// Creates a TypedLinkFacet. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the CreateTypedLinkFacetRequest method.
 //    req := client.CreateTypedLinkFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -750,7 +769,8 @@ type DeleteDirectoryRequest struct {
 }
 
 // Send marshals and sends the DeleteDirectory API request.
-func (r DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
+func (r DeleteDirectoryRequest) Send(ctx context.Context) (*DeleteDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -767,7 +787,7 @@ func (r DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
 //
 //    // Example sending a request using the DeleteDirectoryRequest method.
 //    req := client.DeleteDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -801,7 +821,8 @@ type DeleteFacetRequest struct {
 }
 
 // Send marshals and sends the DeleteFacet API request.
-func (r DeleteFacetRequest) Send() (*DeleteFacetOutput, error) {
+func (r DeleteFacetRequest) Send(ctx context.Context) (*DeleteFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -818,7 +839,7 @@ func (r DeleteFacetRequest) Send() (*DeleteFacetOutput, error) {
 //
 //    // Example sending a request using the DeleteFacetRequest method.
 //    req := client.DeleteFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -852,7 +873,8 @@ type DeleteObjectRequest struct {
 }
 
 // Send marshals and sends the DeleteObject API request.
-func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+func (r DeleteObjectRequest) Send(ctx context.Context) (*DeleteObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -865,11 +887,13 @@ func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
 // Amazon CloudDirectory.
 //
 // Deletes an object and its associated attributes. Only objects with no children
-// and no parents can be deleted.
+// and no parents can be deleted. The maximum number of attributes that can
+// be deleted during an object deletion is 30. For more information, see Amazon
+// Cloud Directory Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
 //
 //    // Example sending a request using the DeleteObjectRequest method.
 //    req := client.DeleteObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -903,7 +927,8 @@ type DeleteSchemaRequest struct {
 }
 
 // Send marshals and sends the DeleteSchema API request.
-func (r DeleteSchemaRequest) Send() (*DeleteSchemaOutput, error) {
+func (r DeleteSchemaRequest) Send(ctx context.Context) (*DeleteSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -920,7 +945,7 @@ func (r DeleteSchemaRequest) Send() (*DeleteSchemaOutput, error) {
 //
 //    // Example sending a request using the DeleteSchemaRequest method.
 //    req := client.DeleteSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -954,7 +979,8 @@ type DeleteTypedLinkFacetRequest struct {
 }
 
 // Send marshals and sends the DeleteTypedLinkFacet API request.
-func (r DeleteTypedLinkFacetRequest) Send() (*DeleteTypedLinkFacetOutput, error) {
+func (r DeleteTypedLinkFacetRequest) Send(ctx context.Context) (*DeleteTypedLinkFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -966,11 +992,11 @@ func (r DeleteTypedLinkFacetRequest) Send() (*DeleteTypedLinkFacetOutput, error)
 // DeleteTypedLinkFacetRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Deletes a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// Deletes a TypedLinkFacet. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the DeleteTypedLinkFacetRequest method.
 //    req := client.DeleteTypedLinkFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1004,7 +1030,8 @@ type DetachFromIndexRequest struct {
 }
 
 // Send marshals and sends the DetachFromIndex API request.
-func (r DetachFromIndexRequest) Send() (*DetachFromIndexOutput, error) {
+func (r DetachFromIndexRequest) Send(ctx context.Context) (*DetachFromIndexOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1020,7 +1047,7 @@ func (r DetachFromIndexRequest) Send() (*DetachFromIndexOutput, error) {
 //
 //    // Example sending a request using the DetachFromIndexRequest method.
 //    req := client.DetachFromIndexRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1054,7 +1081,8 @@ type DetachObjectRequest struct {
 }
 
 // Send marshals and sends the DetachObject API request.
-func (r DetachObjectRequest) Send() (*DetachObjectOutput, error) {
+func (r DetachObjectRequest) Send(ctx context.Context) (*DetachObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1071,7 +1099,7 @@ func (r DetachObjectRequest) Send() (*DetachObjectOutput, error) {
 //
 //    // Example sending a request using the DetachObjectRequest method.
 //    req := client.DetachObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1105,7 +1133,8 @@ type DetachPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachPolicy API request.
-func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+func (r DetachPolicyRequest) Send(ctx context.Context) (*DetachPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1121,7 +1150,7 @@ func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
 //
 //    // Example sending a request using the DetachPolicyRequest method.
 //    req := client.DetachPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1155,7 +1184,8 @@ type DetachTypedLinkRequest struct {
 }
 
 // Send marshals and sends the DetachTypedLink API request.
-func (r DetachTypedLinkRequest) Send() (*DetachTypedLinkOutput, error) {
+func (r DetachTypedLinkRequest) Send(ctx context.Context) (*DetachTypedLinkOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1168,11 +1198,11 @@ func (r DetachTypedLinkRequest) Send() (*DetachTypedLinkOutput, error) {
 // Amazon CloudDirectory.
 //
 // Detaches a typed link from a specified source and target object. For more
-// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the DetachTypedLinkRequest method.
 //    req := client.DetachTypedLinkRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1208,7 +1238,8 @@ type DisableDirectoryRequest struct {
 }
 
 // Send marshals and sends the DisableDirectory API request.
-func (r DisableDirectoryRequest) Send() (*DisableDirectoryOutput, error) {
+func (r DisableDirectoryRequest) Send(ctx context.Context) (*DisableDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1226,7 +1257,7 @@ func (r DisableDirectoryRequest) Send() (*DisableDirectoryOutput, error) {
 //
 //    // Example sending a request using the DisableDirectoryRequest method.
 //    req := client.DisableDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1260,7 +1291,8 @@ type EnableDirectoryRequest struct {
 }
 
 // Send marshals and sends the EnableDirectory API request.
-func (r EnableDirectoryRequest) Send() (*EnableDirectoryOutput, error) {
+func (r EnableDirectoryRequest) Send(ctx context.Context) (*EnableDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1277,7 +1309,7 @@ func (r EnableDirectoryRequest) Send() (*EnableDirectoryOutput, error) {
 //
 //    // Example sending a request using the EnableDirectoryRequest method.
 //    req := client.EnableDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1311,7 +1343,8 @@ type GetAppliedSchemaVersionRequest struct {
 }
 
 // Send marshals and sends the GetAppliedSchemaVersion API request.
-func (r GetAppliedSchemaVersionRequest) Send() (*GetAppliedSchemaVersionOutput, error) {
+func (r GetAppliedSchemaVersionRequest) Send(ctx context.Context) (*GetAppliedSchemaVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1328,7 +1361,7 @@ func (r GetAppliedSchemaVersionRequest) Send() (*GetAppliedSchemaVersionOutput, 
 //
 //    // Example sending a request using the GetAppliedSchemaVersionRequest method.
 //    req := client.GetAppliedSchemaVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1362,7 +1395,8 @@ type GetDirectoryRequest struct {
 }
 
 // Send marshals and sends the GetDirectory API request.
-func (r GetDirectoryRequest) Send() (*GetDirectoryOutput, error) {
+func (r GetDirectoryRequest) Send(ctx context.Context) (*GetDirectoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1378,7 +1412,7 @@ func (r GetDirectoryRequest) Send() (*GetDirectoryOutput, error) {
 //
 //    // Example sending a request using the GetDirectoryRequest method.
 //    req := client.GetDirectoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1412,7 +1446,8 @@ type GetFacetRequest struct {
 }
 
 // Send marshals and sends the GetFacet API request.
-func (r GetFacetRequest) Send() (*GetFacetOutput, error) {
+func (r GetFacetRequest) Send(ctx context.Context) (*GetFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1430,7 +1465,7 @@ func (r GetFacetRequest) Send() (*GetFacetOutput, error) {
 //
 //    // Example sending a request using the GetFacetRequest method.
 //    req := client.GetFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1464,7 +1499,8 @@ type GetLinkAttributesRequest struct {
 }
 
 // Send marshals and sends the GetLinkAttributes API request.
-func (r GetLinkAttributesRequest) Send() (*GetLinkAttributesOutput, error) {
+func (r GetLinkAttributesRequest) Send(ctx context.Context) (*GetLinkAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1480,7 +1516,7 @@ func (r GetLinkAttributesRequest) Send() (*GetLinkAttributesOutput, error) {
 //
 //    // Example sending a request using the GetLinkAttributesRequest method.
 //    req := client.GetLinkAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1514,7 +1550,8 @@ type GetObjectAttributesRequest struct {
 }
 
 // Send marshals and sends the GetObjectAttributes API request.
-func (r GetObjectAttributesRequest) Send() (*GetObjectAttributesOutput, error) {
+func (r GetObjectAttributesRequest) Send(ctx context.Context) (*GetObjectAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1530,7 +1567,7 @@ func (r GetObjectAttributesRequest) Send() (*GetObjectAttributesOutput, error) {
 //
 //    // Example sending a request using the GetObjectAttributesRequest method.
 //    req := client.GetObjectAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1564,7 +1601,8 @@ type GetObjectInformationRequest struct {
 }
 
 // Send marshals and sends the GetObjectInformation API request.
-func (r GetObjectInformationRequest) Send() (*GetObjectInformationOutput, error) {
+func (r GetObjectInformationRequest) Send(ctx context.Context) (*GetObjectInformationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1580,7 +1618,7 @@ func (r GetObjectInformationRequest) Send() (*GetObjectInformationOutput, error)
 //
 //    // Example sending a request using the GetObjectInformationRequest method.
 //    req := client.GetObjectInformationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1614,7 +1652,8 @@ type GetSchemaAsJsonRequest struct {
 }
 
 // Send marshals and sends the GetSchemaAsJson API request.
-func (r GetSchemaAsJsonRequest) Send() (*GetSchemaAsJsonOutput, error) {
+func (r GetSchemaAsJsonRequest) Send(ctx context.Context) (*GetSchemaAsJsonOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1626,12 +1665,12 @@ func (r GetSchemaAsJsonRequest) Send() (*GetSchemaAsJsonOutput, error) {
 // GetSchemaAsJsonRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Retrieves a JSON representation of the schema. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
+// Retrieves a JSON representation of the schema. See JSON Schema Format (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
 // for more information.
 //
 //    // Example sending a request using the GetSchemaAsJsonRequest method.
 //    req := client.GetSchemaAsJsonRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1665,7 +1704,8 @@ type GetTypedLinkFacetInformationRequest struct {
 }
 
 // Send marshals and sends the GetTypedLinkFacetInformation API request.
-func (r GetTypedLinkFacetInformationRequest) Send() (*GetTypedLinkFacetInformationOutput, error) {
+func (r GetTypedLinkFacetInformationRequest) Send(ctx context.Context) (*GetTypedLinkFacetInformationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1678,11 +1718,11 @@ func (r GetTypedLinkFacetInformationRequest) Send() (*GetTypedLinkFacetInformati
 // Amazon CloudDirectory.
 //
 // Returns the identity attribute order for a specific TypedLinkFacet. For more
-// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the GetTypedLinkFacetInformationRequest method.
 //    req := client.GetTypedLinkFacetInformationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1716,7 +1756,8 @@ type ListAppliedSchemaArnsRequest struct {
 }
 
 // Send marshals and sends the ListAppliedSchemaArns API request.
-func (r ListAppliedSchemaArnsRequest) Send() (*ListAppliedSchemaArnsOutput, error) {
+func (r ListAppliedSchemaArnsRequest) Send(ctx context.Context) (*ListAppliedSchemaArnsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1733,7 +1774,7 @@ func (r ListAppliedSchemaArnsRequest) Send() (*ListAppliedSchemaArnsOutput, erro
 //
 //    // Example sending a request using the ListAppliedSchemaArnsRequest method.
 //    req := client.ListAppliedSchemaArnsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1783,7 +1824,7 @@ func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaAr
 func (p *ListAppliedSchemaArnsRequest) Paginate(opts ...aws.Option) ListAppliedSchemaArnsPager {
 	return ListAppliedSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAppliedSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1792,6 +1833,7 @@ func (p *ListAppliedSchemaArnsRequest) Paginate(opts ...aws.Option) ListAppliedS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1819,7 +1861,8 @@ type ListAttachedIndicesRequest struct {
 }
 
 // Send marshals and sends the ListAttachedIndices API request.
-func (r ListAttachedIndicesRequest) Send() (*ListAttachedIndicesOutput, error) {
+func (r ListAttachedIndicesRequest) Send(ctx context.Context) (*ListAttachedIndicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1835,7 +1878,7 @@ func (r ListAttachedIndicesRequest) Send() (*ListAttachedIndicesOutput, error) {
 //
 //    // Example sending a request using the ListAttachedIndicesRequest method.
 //    req := client.ListAttachedIndicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1885,7 +1928,7 @@ func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesIn
 func (p *ListAttachedIndicesRequest) Paginate(opts ...aws.Option) ListAttachedIndicesPager {
 	return ListAttachedIndicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAttachedIndicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1894,6 +1937,7 @@ func (p *ListAttachedIndicesRequest) Paginate(opts ...aws.Option) ListAttachedIn
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1921,7 +1965,8 @@ type ListDevelopmentSchemaArnsRequest struct {
 }
 
 // Send marshals and sends the ListDevelopmentSchemaArns API request.
-func (r ListDevelopmentSchemaArnsRequest) Send() (*ListDevelopmentSchemaArnsOutput, error) {
+func (r ListDevelopmentSchemaArnsRequest) Send(ctx context.Context) (*ListDevelopmentSchemaArnsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1937,7 +1982,7 @@ func (r ListDevelopmentSchemaArnsRequest) Send() (*ListDevelopmentSchemaArnsOutp
 //
 //    // Example sending a request using the ListDevelopmentSchemaArnsRequest method.
 //    req := client.ListDevelopmentSchemaArnsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1987,7 +2032,7 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopment
 func (p *ListDevelopmentSchemaArnsRequest) Paginate(opts ...aws.Option) ListDevelopmentSchemaArnsPager {
 	return ListDevelopmentSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDevelopmentSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1996,6 +2041,7 @@ func (p *ListDevelopmentSchemaArnsRequest) Paginate(opts ...aws.Option) ListDeve
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2023,7 +2069,8 @@ type ListDirectoriesRequest struct {
 }
 
 // Send marshals and sends the ListDirectories API request.
-func (r ListDirectoriesRequest) Send() (*ListDirectoriesOutput, error) {
+func (r ListDirectoriesRequest) Send(ctx context.Context) (*ListDirectoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2039,7 +2086,7 @@ func (r ListDirectoriesRequest) Send() (*ListDirectoriesOutput, error) {
 //
 //    // Example sending a request using the ListDirectoriesRequest method.
 //    req := client.ListDirectoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2089,7 +2136,7 @@ func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) Lis
 func (p *ListDirectoriesRequest) Paginate(opts ...aws.Option) ListDirectoriesPager {
 	return ListDirectoriesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDirectoriesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2098,6 +2145,7 @@ func (p *ListDirectoriesRequest) Paginate(opts ...aws.Option) ListDirectoriesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2125,7 +2173,8 @@ type ListFacetAttributesRequest struct {
 }
 
 // Send marshals and sends the ListFacetAttributes API request.
-func (r ListFacetAttributesRequest) Send() (*ListFacetAttributesOutput, error) {
+func (r ListFacetAttributesRequest) Send(ctx context.Context) (*ListFacetAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2141,7 +2190,7 @@ func (r ListFacetAttributesRequest) Send() (*ListFacetAttributesOutput, error) {
 //
 //    // Example sending a request using the ListFacetAttributesRequest method.
 //    req := client.ListFacetAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2191,7 +2240,7 @@ func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesIn
 func (p *ListFacetAttributesRequest) Paginate(opts ...aws.Option) ListFacetAttributesPager {
 	return ListFacetAttributesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFacetAttributesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2200,6 +2249,7 @@ func (p *ListFacetAttributesRequest) Paginate(opts ...aws.Option) ListFacetAttri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2227,7 +2277,8 @@ type ListFacetNamesRequest struct {
 }
 
 // Send marshals and sends the ListFacetNames API request.
-func (r ListFacetNamesRequest) Send() (*ListFacetNamesOutput, error) {
+func (r ListFacetNamesRequest) Send(ctx context.Context) (*ListFacetNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2243,7 +2294,7 @@ func (r ListFacetNamesRequest) Send() (*ListFacetNamesOutput, error) {
 //
 //    // Example sending a request using the ListFacetNamesRequest method.
 //    req := client.ListFacetNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2293,7 +2344,7 @@ func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) ListF
 func (p *ListFacetNamesRequest) Paginate(opts ...aws.Option) ListFacetNamesPager {
 	return ListFacetNamesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFacetNamesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2302,6 +2353,7 @@ func (p *ListFacetNamesRequest) Paginate(opts ...aws.Option) ListFacetNamesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2329,7 +2381,8 @@ type ListIncomingTypedLinksRequest struct {
 }
 
 // Send marshals and sends the ListIncomingTypedLinks API request.
-func (r ListIncomingTypedLinksRequest) Send() (*ListIncomingTypedLinksOutput, error) {
+func (r ListIncomingTypedLinksRequest) Send(ctx context.Context) (*ListIncomingTypedLinksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2343,11 +2396,11 @@ func (r ListIncomingTypedLinksRequest) Send() (*ListIncomingTypedLinksOutput, er
 //
 // Returns a paginated list of all the incoming TypedLinkSpecifier information
 // for an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListIncomingTypedLinksRequest method.
 //    req := client.ListIncomingTypedLinksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2381,7 +2434,8 @@ type ListIndexRequest struct {
 }
 
 // Send marshals and sends the ListIndex API request.
-func (r ListIndexRequest) Send() (*ListIndexOutput, error) {
+func (r ListIndexRequest) Send(ctx context.Context) (*ListIndexOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2397,7 +2451,7 @@ func (r ListIndexRequest) Send() (*ListIndexOutput, error) {
 //
 //    // Example sending a request using the ListIndexRequest method.
 //    req := client.ListIndexRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2447,7 +2501,7 @@ func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) ListIndexReques
 func (p *ListIndexRequest) Paginate(opts ...aws.Option) ListIndexPager {
 	return ListIndexPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListIndexInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2456,6 +2510,7 @@ func (p *ListIndexRequest) Paginate(opts ...aws.Option) ListIndexPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2483,7 +2538,8 @@ type ListManagedSchemaArnsRequest struct {
 }
 
 // Send marshals and sends the ListManagedSchemaArns API request.
-func (r ListManagedSchemaArnsRequest) Send() (*ListManagedSchemaArnsOutput, error) {
+func (r ListManagedSchemaArnsRequest) Send(ctx context.Context) (*ListManagedSchemaArnsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2501,7 +2557,7 @@ func (r ListManagedSchemaArnsRequest) Send() (*ListManagedSchemaArnsOutput, erro
 //
 //    // Example sending a request using the ListManagedSchemaArnsRequest method.
 //    req := client.ListManagedSchemaArnsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2551,7 +2607,7 @@ func (c *CloudDirectory) ListManagedSchemaArnsRequest(input *ListManagedSchemaAr
 func (p *ListManagedSchemaArnsRequest) Paginate(opts ...aws.Option) ListManagedSchemaArnsPager {
 	return ListManagedSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListManagedSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2560,6 +2616,7 @@ func (p *ListManagedSchemaArnsRequest) Paginate(opts ...aws.Option) ListManagedS
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2587,7 +2644,8 @@ type ListObjectAttributesRequest struct {
 }
 
 // Send marshals and sends the ListObjectAttributes API request.
-func (r ListObjectAttributesRequest) Send() (*ListObjectAttributesOutput, error) {
+func (r ListObjectAttributesRequest) Send(ctx context.Context) (*ListObjectAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2603,7 +2661,7 @@ func (r ListObjectAttributesRequest) Send() (*ListObjectAttributesOutput, error)
 //
 //    // Example sending a request using the ListObjectAttributesRequest method.
 //    req := client.ListObjectAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2653,7 +2711,7 @@ func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributes
 func (p *ListObjectAttributesRequest) Paginate(opts ...aws.Option) ListObjectAttributesPager {
 	return ListObjectAttributesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectAttributesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2662,6 +2720,7 @@ func (p *ListObjectAttributesRequest) Paginate(opts ...aws.Option) ListObjectAtt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2689,7 +2748,8 @@ type ListObjectChildrenRequest struct {
 }
 
 // Send marshals and sends the ListObjectChildren API request.
-func (r ListObjectChildrenRequest) Send() (*ListObjectChildrenOutput, error) {
+func (r ListObjectChildrenRequest) Send(ctx context.Context) (*ListObjectChildrenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2706,7 +2766,7 @@ func (r ListObjectChildrenRequest) Send() (*ListObjectChildrenOutput, error) {
 //
 //    // Example sending a request using the ListObjectChildrenRequest method.
 //    req := client.ListObjectChildrenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2756,7 +2816,7 @@ func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInpu
 func (p *ListObjectChildrenRequest) Paginate(opts ...aws.Option) ListObjectChildrenPager {
 	return ListObjectChildrenPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectChildrenInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2765,6 +2825,7 @@ func (p *ListObjectChildrenRequest) Paginate(opts ...aws.Option) ListObjectChild
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2792,7 +2853,8 @@ type ListObjectParentPathsRequest struct {
 }
 
 // Send marshals and sends the ListObjectParentPaths API request.
-func (r ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, error) {
+func (r ListObjectParentPathsRequest) Send(ctx context.Context) (*ListObjectParentPathsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2806,7 +2868,7 @@ func (r ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, erro
 //
 // Retrieves all available parent paths for any object type such as node, leaf
 // node, policy node, and index node objects. For more information about objects,
-// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
+// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 //
 // Use this API to evaluate all parents for an object. The call returns all
 // objects from the root of the directory up to the requested object. The API
@@ -2818,7 +2880,7 @@ func (r ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, erro
 //
 //    // Example sending a request using the ListObjectParentPathsRequest method.
 //    req := client.ListObjectParentPathsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2868,7 +2930,7 @@ func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPat
 func (p *ListObjectParentPathsRequest) Paginate(opts ...aws.Option) ListObjectParentPathsPager {
 	return ListObjectParentPathsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectParentPathsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2877,6 +2939,7 @@ func (p *ListObjectParentPathsRequest) Paginate(opts ...aws.Option) ListObjectPa
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2904,7 +2967,8 @@ type ListObjectParentsRequest struct {
 }
 
 // Send marshals and sends the ListObjectParents API request.
-func (r ListObjectParentsRequest) Send() (*ListObjectParentsOutput, error) {
+func (r ListObjectParentsRequest) Send(ctx context.Context) (*ListObjectParentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2921,7 +2985,7 @@ func (r ListObjectParentsRequest) Send() (*ListObjectParentsOutput, error) {
 //
 //    // Example sending a request using the ListObjectParentsRequest method.
 //    req := client.ListObjectParentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2971,7 +3035,7 @@ func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput)
 func (p *ListObjectParentsRequest) Paginate(opts ...aws.Option) ListObjectParentsPager {
 	return ListObjectParentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectParentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2980,6 +3044,7 @@ func (p *ListObjectParentsRequest) Paginate(opts ...aws.Option) ListObjectParent
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3007,7 +3072,8 @@ type ListObjectPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListObjectPolicies API request.
-func (r ListObjectPoliciesRequest) Send() (*ListObjectPoliciesOutput, error) {
+func (r ListObjectPoliciesRequest) Send(ctx context.Context) (*ListObjectPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3023,7 +3089,7 @@ func (r ListObjectPoliciesRequest) Send() (*ListObjectPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListObjectPoliciesRequest method.
 //    req := client.ListObjectPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3073,7 +3139,7 @@ func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInpu
 func (p *ListObjectPoliciesRequest) Paginate(opts ...aws.Option) ListObjectPoliciesPager {
 	return ListObjectPoliciesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListObjectPoliciesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3082,6 +3148,7 @@ func (p *ListObjectPoliciesRequest) Paginate(opts ...aws.Option) ListObjectPolic
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3109,7 +3176,8 @@ type ListOutgoingTypedLinksRequest struct {
 }
 
 // Send marshals and sends the ListOutgoingTypedLinks API request.
-func (r ListOutgoingTypedLinksRequest) Send() (*ListOutgoingTypedLinksOutput, error) {
+func (r ListOutgoingTypedLinksRequest) Send(ctx context.Context) (*ListOutgoingTypedLinksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3123,11 +3191,11 @@ func (r ListOutgoingTypedLinksRequest) Send() (*ListOutgoingTypedLinksOutput, er
 //
 // Returns a paginated list of all the outgoing TypedLinkSpecifier information
 // for an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListOutgoingTypedLinksRequest method.
 //    req := client.ListOutgoingTypedLinksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3161,7 +3229,8 @@ type ListPolicyAttachmentsRequest struct {
 }
 
 // Send marshals and sends the ListPolicyAttachments API request.
-func (r ListPolicyAttachmentsRequest) Send() (*ListPolicyAttachmentsOutput, error) {
+func (r ListPolicyAttachmentsRequest) Send(ctx context.Context) (*ListPolicyAttachmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3177,7 +3246,7 @@ func (r ListPolicyAttachmentsRequest) Send() (*ListPolicyAttachmentsOutput, erro
 //
 //    // Example sending a request using the ListPolicyAttachmentsRequest method.
 //    req := client.ListPolicyAttachmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3227,7 +3296,7 @@ func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmen
 func (p *ListPolicyAttachmentsRequest) Paginate(opts ...aws.Option) ListPolicyAttachmentsPager {
 	return ListPolicyAttachmentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPolicyAttachmentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3236,6 +3305,7 @@ func (p *ListPolicyAttachmentsRequest) Paginate(opts ...aws.Option) ListPolicyAt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3263,7 +3333,8 @@ type ListPublishedSchemaArnsRequest struct {
 }
 
 // Send marshals and sends the ListPublishedSchemaArns API request.
-func (r ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, error) {
+func (r ListPublishedSchemaArnsRequest) Send(ctx context.Context) (*ListPublishedSchemaArnsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3281,7 +3352,7 @@ func (r ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, 
 //
 //    // Example sending a request using the ListPublishedSchemaArnsRequest method.
 //    req := client.ListPublishedSchemaArnsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3331,7 +3402,7 @@ func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSche
 func (p *ListPublishedSchemaArnsRequest) Paginate(opts ...aws.Option) ListPublishedSchemaArnsPager {
 	return ListPublishedSchemaArnsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPublishedSchemaArnsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3340,6 +3411,7 @@ func (p *ListPublishedSchemaArnsRequest) Paginate(opts ...aws.Option) ListPublis
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3367,7 +3439,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3385,7 +3458,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3435,7 +3508,7 @@ func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceIn
 func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForResourcePager {
 	return ListTagsForResourcePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTagsForResourceInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3444,6 +3517,7 @@ func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForRes
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3471,7 +3545,8 @@ type ListTypedLinkFacetAttributesRequest struct {
 }
 
 // Send marshals and sends the ListTypedLinkFacetAttributes API request.
-func (r ListTypedLinkFacetAttributesRequest) Send() (*ListTypedLinkFacetAttributesOutput, error) {
+func (r ListTypedLinkFacetAttributesRequest) Send(ctx context.Context) (*ListTypedLinkFacetAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3484,11 +3559,11 @@ func (r ListTypedLinkFacetAttributesRequest) Send() (*ListTypedLinkFacetAttribut
 // Amazon CloudDirectory.
 //
 // Returns a paginated list of all attribute definitions for a particular TypedLinkFacet.
-// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListTypedLinkFacetAttributesRequest method.
 //    req := client.ListTypedLinkFacetAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3538,7 +3613,7 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLin
 func (p *ListTypedLinkFacetAttributesRequest) Paginate(opts ...aws.Option) ListTypedLinkFacetAttributesPager {
 	return ListTypedLinkFacetAttributesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTypedLinkFacetAttributesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3547,6 +3622,7 @@ func (p *ListTypedLinkFacetAttributesRequest) Paginate(opts ...aws.Option) ListT
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3574,7 +3650,8 @@ type ListTypedLinkFacetNamesRequest struct {
 }
 
 // Send marshals and sends the ListTypedLinkFacetNames API request.
-func (r ListTypedLinkFacetNamesRequest) Send() (*ListTypedLinkFacetNamesOutput, error) {
+func (r ListTypedLinkFacetNamesRequest) Send(ctx context.Context) (*ListTypedLinkFacetNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3587,11 +3664,11 @@ func (r ListTypedLinkFacetNamesRequest) Send() (*ListTypedLinkFacetNamesOutput, 
 // Amazon CloudDirectory.
 //
 // Returns a paginated list of TypedLink facet names for a particular schema.
-// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the ListTypedLinkFacetNamesRequest method.
 //    req := client.ListTypedLinkFacetNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3641,7 +3718,7 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFace
 func (p *ListTypedLinkFacetNamesRequest) Paginate(opts ...aws.Option) ListTypedLinkFacetNamesPager {
 	return ListTypedLinkFacetNamesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTypedLinkFacetNamesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3650,6 +3727,7 @@ func (p *ListTypedLinkFacetNamesRequest) Paginate(opts ...aws.Option) ListTypedL
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3677,7 +3755,8 @@ type LookupPolicyRequest struct {
 }
 
 // Send marshals and sends the LookupPolicy API request.
-func (r LookupPolicyRequest) Send() (*LookupPolicyOutput, error) {
+func (r LookupPolicyRequest) Send(ctx context.Context) (*LookupPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3695,11 +3774,11 @@ func (r LookupPolicyRequest) Send() (*LookupPolicyOutput, error) {
 // the ObjectIdentifier for such objects. If policies are present, it returns
 // ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
 // root from the target object are ignored. For more information, see Policies
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 //
 //    // Example sending a request using the LookupPolicyRequest method.
 //    req := client.LookupPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3749,7 +3828,7 @@ func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) LookupPol
 func (p *LookupPolicyRequest) Paginate(opts ...aws.Option) LookupPolicyPager {
 	return LookupPolicyPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *LookupPolicyInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3758,6 +3837,7 @@ func (p *LookupPolicyRequest) Paginate(opts ...aws.Option) LookupPolicyPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3785,7 +3865,8 @@ type PublishSchemaRequest struct {
 }
 
 // Send marshals and sends the PublishSchema API request.
-func (r PublishSchemaRequest) Send() (*PublishSchemaOutput, error) {
+func (r PublishSchemaRequest) Send(ctx context.Context) (*PublishSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3802,7 +3883,7 @@ func (r PublishSchemaRequest) Send() (*PublishSchemaOutput, error) {
 //
 //    // Example sending a request using the PublishSchemaRequest method.
 //    req := client.PublishSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3836,7 +3917,8 @@ type PutSchemaFromJsonRequest struct {
 }
 
 // Send marshals and sends the PutSchemaFromJson API request.
-func (r PutSchemaFromJsonRequest) Send() (*PutSchemaFromJsonOutput, error) {
+func (r PutSchemaFromJsonRequest) Send(ctx context.Context) (*PutSchemaFromJsonOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3849,12 +3931,12 @@ func (r PutSchemaFromJsonRequest) Send() (*PutSchemaFromJsonOutput, error) {
 // Amazon CloudDirectory.
 //
 // Allows a schema to be updated using JSON upload. Only available for development
-// schemas. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
+// schemas. See JSON Schema Format (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json)
 // for more information.
 //
 //    // Example sending a request using the PutSchemaFromJsonRequest method.
 //    req := client.PutSchemaFromJsonRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3888,7 +3970,8 @@ type RemoveFacetFromObjectRequest struct {
 }
 
 // Send marshals and sends the RemoveFacetFromObject API request.
-func (r RemoveFacetFromObjectRequest) Send() (*RemoveFacetFromObjectOutput, error) {
+func (r RemoveFacetFromObjectRequest) Send(ctx context.Context) (*RemoveFacetFromObjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3904,7 +3987,7 @@ func (r RemoveFacetFromObjectRequest) Send() (*RemoveFacetFromObjectOutput, erro
 //
 //    // Example sending a request using the RemoveFacetFromObjectRequest method.
 //    req := client.RemoveFacetFromObjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3938,7 +4021,8 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3954,7 +4038,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3988,7 +4072,8 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4004,7 +4089,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4038,7 +4123,8 @@ type UpdateFacetRequest struct {
 }
 
 // Send marshals and sends the UpdateFacet API request.
-func (r UpdateFacetRequest) Send() (*UpdateFacetOutput, error) {
+func (r UpdateFacetRequest) Send(ctx context.Context) (*UpdateFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4060,7 +4146,7 @@ func (r UpdateFacetRequest) Send() (*UpdateFacetOutput, error) {
 //
 //    // Example sending a request using the UpdateFacetRequest method.
 //    req := client.UpdateFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4094,7 +4180,8 @@ type UpdateLinkAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateLinkAttributes API request.
-func (r UpdateLinkAttributesRequest) Send() (*UpdateLinkAttributesOutput, error) {
+func (r UpdateLinkAttributesRequest) Send(ctx context.Context) (*UpdateLinkAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4111,7 +4198,7 @@ func (r UpdateLinkAttributesRequest) Send() (*UpdateLinkAttributesOutput, error)
 //
 //    // Example sending a request using the UpdateLinkAttributesRequest method.
 //    req := client.UpdateLinkAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4145,7 +4232,8 @@ type UpdateObjectAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateObjectAttributes API request.
-func (r UpdateObjectAttributesRequest) Send() (*UpdateObjectAttributesOutput, error) {
+func (r UpdateObjectAttributesRequest) Send(ctx context.Context) (*UpdateObjectAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4161,7 +4249,7 @@ func (r UpdateObjectAttributesRequest) Send() (*UpdateObjectAttributesOutput, er
 //
 //    // Example sending a request using the UpdateObjectAttributesRequest method.
 //    req := client.UpdateObjectAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4195,7 +4283,8 @@ type UpdateSchemaRequest struct {
 }
 
 // Send marshals and sends the UpdateSchema API request.
-func (r UpdateSchemaRequest) Send() (*UpdateSchemaOutput, error) {
+func (r UpdateSchemaRequest) Send(ctx context.Context) (*UpdateSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4212,7 +4301,7 @@ func (r UpdateSchemaRequest) Send() (*UpdateSchemaOutput, error) {
 //
 //    // Example sending a request using the UpdateSchemaRequest method.
 //    req := client.UpdateSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4246,7 +4335,8 @@ type UpdateTypedLinkFacetRequest struct {
 }
 
 // Send marshals and sends the UpdateTypedLinkFacet API request.
-func (r UpdateTypedLinkFacetRequest) Send() (*UpdateTypedLinkFacetOutput, error) {
+func (r UpdateTypedLinkFacetRequest) Send(ctx context.Context) (*UpdateTypedLinkFacetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4258,11 +4348,11 @@ func (r UpdateTypedLinkFacetRequest) Send() (*UpdateTypedLinkFacetOutput, error)
 // UpdateTypedLinkFacetRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Updates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+// Updates a TypedLinkFacet. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 //
 //    // Example sending a request using the UpdateTypedLinkFacetRequest method.
 //    req := client.UpdateTypedLinkFacetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4296,7 +4386,8 @@ type UpgradeAppliedSchemaRequest struct {
 }
 
 // Send marshals and sends the UpgradeAppliedSchema API request.
-func (r UpgradeAppliedSchemaRequest) Send() (*UpgradeAppliedSchemaOutput, error) {
+func (r UpgradeAppliedSchemaRequest) Send(ctx context.Context) (*UpgradeAppliedSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4317,7 +4408,7 @@ func (r UpgradeAppliedSchemaRequest) Send() (*UpgradeAppliedSchemaOutput, error)
 //
 //    // Example sending a request using the UpgradeAppliedSchemaRequest method.
 //    req := client.UpgradeAppliedSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4351,7 +4442,8 @@ type UpgradePublishedSchemaRequest struct {
 }
 
 // Send marshals and sends the UpgradePublishedSchema API request.
-func (r UpgradePublishedSchemaRequest) Send() (*UpgradePublishedSchemaOutput, error) {
+func (r UpgradePublishedSchemaRequest) Send(ctx context.Context) (*UpgradePublishedSchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4368,7 +4460,7 @@ func (r UpgradePublishedSchemaRequest) Send() (*UpgradePublishedSchemaOutput, er
 //
 //    // Example sending a request using the UpgradePublishedSchemaRequest method.
 //    req := client.UpgradePublishedSchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5902,7 +5994,7 @@ func (s BatchAttachTypedLinkResponse) MarshalFields(e protocol.FieldEncoder) err
 type BatchCreateIndex struct {
 	_ struct{} `type:"structure"`
 
-	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
+	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string `type:"string"`
 
@@ -6039,7 +6131,7 @@ func (s BatchCreateIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
 type BatchCreateObject struct {
 	_ struct{} `type:"structure"`
 
-	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
+	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string `type:"string"`
 
@@ -6348,7 +6440,7 @@ func (s BatchDetachFromIndexResponse) MarshalFields(e protocol.FieldEncoder) err
 type BatchDetachObject struct {
 	_ struct{} `type:"structure"`
 
-	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
+	// The batch reference name. See Transaction Support (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string `type:"string"`
 
@@ -7689,6 +7781,112 @@ func (s BatchListObjectParentPathsResponse) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParents
+type BatchListObjectParents struct {
+	_ struct{} `type:"structure"`
+
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	NextToken *string `type:"string"`
+
+	// The reference that identifies an object.
+	//
+	// ObjectReference is a required field
+	ObjectReference *ObjectReference `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchListObjectParents) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchListObjectParents) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchListObjectParents) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListObjectParents"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if s.ObjectReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchListObjectParents) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ObjectReference != nil {
+		v := s.ObjectReference
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParentsResponse
+type BatchListObjectParentsResponse struct {
+	_ struct{} `type:"structure"`
+
+	NextToken *string `type:"string"`
+
+	ParentLinks []ObjectIdentifierAndLinkNameTuple `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchListObjectParentsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchListObjectParentsResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchListObjectParentsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ParentLinks) > 0 {
+		v := s.ParentLinks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ParentLinks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Returns policies attached to an object in pagination fashion inside a BatchRead
 // operation. For more information, see ListObjectPolicies and BatchReadRequest$Operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectPolicies
@@ -8148,7 +8346,7 @@ type BatchLookupPolicyResponse struct {
 	NextToken *string `type:"string"`
 
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
-	// and PolicyType. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// and PolicyType. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	PolicyToPathList []PolicyToPath `type:"list"`
 }
 
@@ -8329,7 +8527,7 @@ type BatchReadOperation struct {
 
 	// Returns a paginated list of all the incoming TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListIncomingTypedLinks *BatchListIncomingTypedLinks `type:"structure"`
 
 	// Lists objects attached to the specified index.
@@ -8344,15 +8542,17 @@ type BatchReadOperation struct {
 
 	// Retrieves all available parent paths for any object type such as node, leaf
 	// node, policy node, and index node objects. For more information about objects,
-	// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
+	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPaths `type:"structure"`
+
+	ListObjectParents *BatchListObjectParents `type:"structure"`
 
 	// Returns policies attached to an object in pagination fashion.
 	ListObjectPolicies *BatchListObjectPolicies `type:"structure"`
 
 	// Returns a paginated list of all the outgoing TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListOutgoingTypedLinks *BatchListOutgoingTypedLinks `type:"structure"`
 
 	// Returns all of the ObjectIdentifiers to which a given policy is attached.
@@ -8364,7 +8564,7 @@ type BatchReadOperation struct {
 	// the ObjectIdentifier for such objects. If policies are present, it returns
 	// ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
 	// root from the target object are ignored. For more information, see Policies
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	LookupPolicy *BatchLookupPolicy `type:"structure"`
 }
 
@@ -8424,6 +8624,11 @@ func (s *BatchReadOperation) Validate() error {
 	if s.ListObjectParentPaths != nil {
 		if err := s.ListObjectParentPaths.Validate(); err != nil {
 			invalidParams.AddNested("ListObjectParentPaths", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ListObjectParents != nil {
+		if err := s.ListObjectParents.Validate(); err != nil {
+			invalidParams.AddNested("ListObjectParents", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListObjectPolicies != nil {
@@ -8508,6 +8713,12 @@ func (s BatchReadOperation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ListObjectParentPaths", v, metadata)
+	}
+	if s.ListObjectParents != nil {
+		v := s.ListObjectParents
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ListObjectParents", v, metadata)
 	}
 	if s.ListObjectPolicies != nil {
 		v := s.ListObjectPolicies
@@ -8636,7 +8847,7 @@ type BatchReadSuccessfulResponse struct {
 
 	// Returns a paginated list of all the incoming TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListIncomingTypedLinks *BatchListIncomingTypedLinksResponse `type:"structure"`
 
 	// Lists objects attached to the specified index.
@@ -8651,15 +8862,17 @@ type BatchReadSuccessfulResponse struct {
 
 	// Retrieves all available parent paths for any object type such as node, leaf
 	// node, policy node, and index node objects. For more information about objects,
-	// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
+	// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPathsResponse `type:"structure"`
+
+	ListObjectParents *BatchListObjectParentsResponse `type:"structure"`
 
 	// Returns policies attached to an object in pagination fashion.
 	ListObjectPolicies *BatchListObjectPoliciesResponse `type:"structure"`
 
 	// Returns a paginated list of all the outgoing TypedLinkSpecifier information
 	// for an object. It also supports filtering by typed link facet and identity
-	// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// attributes. For more information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	ListOutgoingTypedLinks *BatchListOutgoingTypedLinksResponse `type:"structure"`
 
 	// Returns all of the ObjectIdentifiers to which a given policy is attached.
@@ -8671,7 +8884,7 @@ type BatchReadSuccessfulResponse struct {
 	// the ObjectIdentifier for such objects. If policies are present, it returns
 	// ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
 	// root from the target object are ignored. For more information, see Policies
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	LookupPolicy *BatchLookupPolicyResponse `type:"structure"`
 }
 
@@ -8740,6 +8953,12 @@ func (s BatchReadSuccessfulResponse) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "ListObjectParentPaths", v, metadata)
+	}
+	if s.ListObjectParents != nil {
+		v := s.ListObjectParents
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ListObjectParents", v, metadata)
 	}
 	if s.ListObjectPolicies != nil {
 		v := s.ListObjectPolicies
@@ -9156,10 +9375,10 @@ type BatchWriteOperation struct {
 	AttachToIndex *BatchAttachToIndex `type:"structure"`
 
 	// Attaches a typed link to a specified source and target object. For more information,
-	// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	AttachTypedLink *BatchAttachTypedLink `type:"structure"`
 
-	// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+	// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm)
 	// for more information.
 	CreateIndex *BatchCreateIndex `type:"structure"`
 
@@ -9179,7 +9398,7 @@ type BatchWriteOperation struct {
 	DetachPolicy *BatchDetachPolicy `type:"structure"`
 
 	// Detaches a typed link from a specified source and target object. For more
-	// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	DetachTypedLink *BatchDetachTypedLink `type:"structure"`
 
 	// A batch operation that removes a facet from an object.
@@ -9401,10 +9620,10 @@ type BatchWriteOperationResponse struct {
 	AttachToIndex *BatchAttachToIndexResponse `type:"structure"`
 
 	// Attaches a typed link to a specified source and target object. For more information,
-	// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	AttachTypedLink *BatchAttachTypedLinkResponse `type:"structure"`
 
-	// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+	// Creates an index object. See Indexing and search (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm)
 	// for more information.
 	CreateIndex *BatchCreateIndexResponse `type:"structure"`
 
@@ -9424,7 +9643,7 @@ type BatchWriteOperationResponse struct {
 	DetachPolicy *BatchDetachPolicyResponse `type:"structure"`
 
 	// Detaches a typed link from a specified source and target object. For more
-	// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// information, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	DetachTypedLink *BatchDetachTypedLinkResponse `type:"structure"`
 
 	// The result of a batch remove facet from object operation.
@@ -9748,7 +9967,7 @@ type CreateFacetInput struct {
 	//    * Leaf node: Cannot have children but can have multiple parents.
 	//
 	//    * Policy: Allows you to store a policy document and policy type. For more
-	//    information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	//    information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	//
 	//    * Index: Can be created with the Index API.
 	ObjectType ObjectType `type:"string" enum:"true"`
@@ -11445,7 +11664,7 @@ func (s EnableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A structure that contains Name, ARN, Attributes, Rules, and ObjectTypes.
-// See Facets (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html)
+// See Facets (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_whatarefacets.html)
 // for more information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/Facet
 type Facet struct {
@@ -11503,12 +11722,12 @@ type FacetAttribute struct {
 	_ struct{} `type:"structure"`
 
 	// A facet attribute consists of either a definition or a reference. This structure
-	// contains the attribute definition. See Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// contains the attribute definition. See Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	AttributeDefinition *FacetAttributeDefinition `type:"structure"`
 
 	// An attribute reference that is associated with the attribute. See Attribute
-	// References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	AttributeReference *FacetAttributeReference `type:"structure"`
 
@@ -11587,7 +11806,7 @@ func (s FacetAttribute) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A facet attribute definition. See Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+// A facet attribute definition. See Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 // for more information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttributeDefinition
 type FacetAttributeDefinition struct {
@@ -11673,14 +11892,14 @@ type FacetAttributeReference struct {
 	_ struct{} `type:"structure"`
 
 	// The target attribute name that is associated with the facet reference. See
-	// Attribute References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// Attribute References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	//
 	// TargetAttributeName is a required field
 	TargetAttributeName *string `min:"1" type:"string" required:"true"`
 
 	// The target facet name that is associated with the facet reference. See Attribute
-	// References (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences)
+	// References (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html)
 	// for more information.
 	//
 	// TargetFacetName is a required field
@@ -12073,7 +12292,7 @@ type GetLinkAttributesInput struct {
 	ConsistencyLevel ConsistencyLevel `type:"string" enum:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the typed link resides. For more information, see arns or Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// the typed link resides. For more information, see arns or Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// DirectoryArn is a required field
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
@@ -12643,7 +12862,7 @@ type GetTypedLinkFacetInformationOutput struct {
 	// Any attributes that do not have a range specified are presumed to match the
 	// entire range. Filters are interpreted in the order of the attributes on the
 	// typed link facet, not the order in which they are supplied to any API calls.
-	// For more information about identity attributes, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// For more information about identity attributes, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	IdentityAttributeOrder []string `type:"list"`
 }
 
@@ -13765,8 +13984,8 @@ type ListIndexInput struct {
 	IndexReference *ObjectReference `type:"structure" required:"true"`
 
 	// The maximum number of objects in a single page to retrieve from the index
-	// during a request. For more information, see AWS Directory Service Limits
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd).
+	// during a request. For more information, see Amazon Cloud Directory Limits
+	// (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// The pagination token.
@@ -14482,6 +14701,10 @@ type ListObjectParentsInput struct {
 	// DirectoryArn is a required field
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 
+	// When set to True, returns all ListObjectParentsResponse$ParentLinks. There
+	// could be multiple links between a parent-child pair.
+	IncludeAllLinksToEachParent *bool `type:"boolean"`
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int64 `min:"1" type:"integer"`
@@ -14530,6 +14753,12 @@ func (s *ListObjectParentsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListObjectParentsInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.IncludeAllLinksToEachParent != nil {
+		v := *s.IncludeAllLinksToEachParent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IncludeAllLinksToEachParent", protocol.BoolValue(v), metadata)
+	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
 
@@ -14572,6 +14801,9 @@ type ListObjectParentsOutput struct {
 	// The pagination token.
 	NextToken *string `type:"string"`
 
+	// Returns a list of parent reference and LinkName Tuples.
+	ParentLinks []ObjectIdentifierAndLinkNameTuple `type:"list"`
+
 	// The parent structure, which is a map with key as the ObjectIdentifier and
 	// LinkName as the value.
 	Parents map[string]string `type:"map"`
@@ -14599,6 +14831,18 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ParentLinks) > 0 {
+		v := s.ParentLinks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ParentLinks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.Parents) > 0 {
 		v := s.Parents
@@ -15670,7 +15914,7 @@ type LookupPolicyOutput struct {
 	NextToken *string `type:"string"`
 
 	// Provides list of path to policies. Policies contain PolicyId, ObjectIdentifier,
-	// and PolicyType. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+	// and PolicyType. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	PolicyToPathList []PolicyToPath `type:"list"`
 }
 
@@ -15864,6 +16108,45 @@ func (s ObjectAttributeUpdate) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A pair of ObjectIdentifier and LinkName.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectIdentifierAndLinkNameTuple
+type ObjectIdentifierAndLinkNameTuple struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the link between the parent and the child object.
+	LinkName *string `min:"1" type:"string"`
+
+	// The ID that is associated with the object.
+	ObjectIdentifier *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ObjectIdentifierAndLinkNameTuple) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ObjectIdentifierAndLinkNameTuple) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ObjectIdentifierAndLinkNameTuple) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LinkName != nil {
+		v := *s.LinkName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ObjectIdentifier != nil {
+		v := *s.ObjectIdentifier
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The reference that identifies an object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectReference
 type ObjectReference struct {
@@ -15873,7 +16156,7 @@ type ObjectReference struct {
 	// links leading to it from the directory root. Use the link names from each
 	// parent/child link to construct the path. Path selectors start with a slash
 	// (/) and link names are separated by slashes. For more information about paths,
-	// see Accessing Objects (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects).
+	// see Access Objects (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html).
 	// You can identify an object in one of the following ways:
 	//
 	//    * $ObjectIdentifier - An object identifier is an opaque string provided
@@ -15955,7 +16238,7 @@ func (s PathToObjectIdentifiers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Contains the PolicyType, PolicyId, and the ObjectIdentifier to which it is
-// attached. For more information, see Policies (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
+// attached. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PolicyAttachment
 type PolicyAttachment struct {
 	_ struct{} `type:"structure"`
@@ -16440,7 +16723,7 @@ type SchemaFacet struct {
 	FacetName *string `min:"1" type:"string"`
 
 	// The ARN of the schema that contains the facet with no minor component. See
-	// arns and In-Place Schema Upgrade (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html)
+	// arns and In-Place Schema Upgrade (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html)
 	// for a description of when to provide minor versions.
 	SchemaArn *string `type:"string"`
 }
@@ -16689,7 +16972,7 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A range of attribute values. For more information, see Range Filters (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters).
+// A range of attribute values. For more information, see Range Filters (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TypedAttributeValueRange
 type TypedAttributeValueRange struct {
 	_ struct{} `type:"structure"`
@@ -17514,8 +17797,8 @@ type UpdateLinkAttributesInput struct {
 	AttributeUpdates []LinkAttributeUpdate `type:"list" required:"true"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
-	// the updated typed link resides. For more information, see arns or Typed link
-	// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// the updated typed link resides. For more information, see arns or Typed Links
+	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// DirectoryArn is a required field
 	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
@@ -17871,7 +18154,7 @@ type UpdateTypedLinkFacetInput struct {
 	// Any attributes that do not have a range specified are presumed to match the
 	// entire range. Filters are interpreted in the order of the attributes on the
 	// typed link facet, not the order in which they are supplied to any API calls.
-	// For more information about identity attributes, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
+	// For more information about identity attributes, see Typed Links (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
 	//
 	// IdentityAttributeOrder is a required field
 	IdentityAttributeOrder []string `type:"list" required:"true"`

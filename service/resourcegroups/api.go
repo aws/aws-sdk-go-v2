@@ -3,6 +3,7 @@
 package resourcegroups
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send(ctx context.Context) (*CreateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send(ctx context.Context) (*DeleteGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +90,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +124,8 @@ type GetGroupRequest struct {
 }
 
 // Send marshals and sends the GetGroup API request.
-func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
+func (r GetGroupRequest) Send(ctx context.Context) (*GetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
 //
 //    // Example sending a request using the GetGroupRequest method.
 //    req := client.GetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type GetGroupQueryRequest struct {
 }
 
 // Send marshals and sends the GetGroupQuery API request.
-func (r GetGroupQueryRequest) Send() (*GetGroupQueryOutput, error) {
+func (r GetGroupQueryRequest) Send(ctx context.Context) (*GetGroupQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +192,7 @@ func (r GetGroupQueryRequest) Send() (*GetGroupQueryOutput, error) {
 //
 //    // Example sending a request using the GetGroupQueryRequest method.
 //    req := client.GetGroupQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -221,7 +226,8 @@ type GetTagsRequest struct {
 }
 
 // Send marshals and sends the GetTags API request.
-func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
+func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +244,7 @@ func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
 //
 //    // Example sending a request using the GetTagsRequest method.
 //    req := client.GetTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -272,7 +278,8 @@ type ListGroupResourcesRequest struct {
 }
 
 // Send marshals and sends the ListGroupResources API request.
-func (r ListGroupResourcesRequest) Send() (*ListGroupResourcesOutput, error) {
+func (r ListGroupResourcesRequest) Send(ctx context.Context) (*ListGroupResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -289,7 +296,7 @@ func (r ListGroupResourcesRequest) Send() (*ListGroupResourcesOutput, error) {
 //
 //    // Example sending a request using the ListGroupResourcesRequest method.
 //    req := client.ListGroupResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -339,7 +346,7 @@ func (c *ResourceGroups) ListGroupResourcesRequest(input *ListGroupResourcesInpu
 func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResourcesPager {
 	return ListGroupResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -348,6 +355,7 @@ func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResour
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -375,7 +383,8 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send(ctx context.Context) (*ListGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -391,7 +400,7 @@ func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 //
 //    // Example sending a request using the ListGroupsRequest method.
 //    req := client.ListGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -441,7 +450,7 @@ func (c *ResourceGroups) ListGroupsRequest(input *ListGroupsInput) ListGroupsReq
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -450,6 +459,7 @@ func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -477,7 +487,8 @@ type SearchResourcesRequest struct {
 }
 
 // Send marshals and sends the SearchResources API request.
-func (r SearchResourcesRequest) Send() (*SearchResourcesOutput, error) {
+func (r SearchResourcesRequest) Send(ctx context.Context) (*SearchResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -495,7 +506,7 @@ func (r SearchResourcesRequest) Send() (*SearchResourcesOutput, error) {
 //
 //    // Example sending a request using the SearchResourcesRequest method.
 //    req := client.SearchResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -545,7 +556,7 @@ func (c *ResourceGroups) SearchResourcesRequest(input *SearchResourcesInput) Sea
 func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPager {
 	return SearchResourcesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SearchResourcesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -554,6 +565,7 @@ func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -581,7 +593,8 @@ type TagRequest struct {
 }
 
 // Send marshals and sends the Tag API request.
-func (r TagRequest) Send() (*TagOutput, error) {
+func (r TagRequest) Send(ctx context.Context) (*TagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -598,7 +611,7 @@ func (r TagRequest) Send() (*TagOutput, error) {
 //
 //    // Example sending a request using the TagRequest method.
 //    req := client.TagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -632,7 +645,8 @@ type UntagRequest struct {
 }
 
 // Send marshals and sends the Untag API request.
-func (r UntagRequest) Send() (*UntagOutput, error) {
+func (r UntagRequest) Send(ctx context.Context) (*UntagOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,7 +662,7 @@ func (r UntagRequest) Send() (*UntagOutput, error) {
 //
 //    // Example sending a request using the UntagRequest method.
 //    req := client.UntagRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -682,7 +696,8 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send(ctx context.Context) (*UpdateGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -699,7 +714,7 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -733,7 +748,8 @@ type UpdateGroupQueryRequest struct {
 }
 
 // Send marshals and sends the UpdateGroupQuery API request.
-func (r UpdateGroupQueryRequest) Send() (*UpdateGroupQueryOutput, error) {
+func (r UpdateGroupQueryRequest) Send(ctx context.Context) (*UpdateGroupQueryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -749,7 +765,7 @@ func (r UpdateGroupQueryRequest) Send() (*UpdateGroupQueryOutput, error) {
 //
 //    // Example sending a request using the UpdateGroupQueryRequest method.
 //    req := client.UpdateGroupQueryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1340,6 +1356,116 @@ func (s Group) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A filter name and value pair that is used to obtain more specific results
+// from a list of groups.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupFilter
+type GroupFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the filter. Filter names are case-sensitive.
+	//
+	// Name is a required field
+	Name GroupFilterName `type:"string" required:"true" enum:"true"`
+
+	// One or more filter values. Allowed filter values vary by group filter name,
+	// and are case-sensitive.
+	//
+	// Values is a required field
+	Values []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s GroupFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GroupFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GroupFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GroupFilter"}
+	if len(s.Name) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Values == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Name) > 0 {
+		v := s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Values) > 0 {
+		v := s.Values
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Values", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// The ARN and group name of a group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupIdentifier
+type GroupIdentifier struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of a resource group.
+	GroupArn *string `type:"string"`
+
+	// The name of a resource group.
+	GroupName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GroupIdentifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GroupIdentifier) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupIdentifier) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupArn != nil {
+		v := *s.GroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The underlying resource query of a resource group. Resources that match query
 // results are part of the group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupQuery
@@ -1496,6 +1622,11 @@ type ListGroupResourcesOutput struct {
 	// to get more results.
 	NextToken *string `type:"string"`
 
+	// A list of QueryError objects. Each error is an object that contains ErrorCode
+	// and Message structures. Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE
+	// and CLOUDFORMATION_STACK_NOT_EXISTING.
+	QueryErrors []QueryError `type:"list"`
+
 	// The ARNs and resource types of resources that are members of the group that
 	// you specified.
 	ResourceIdentifiers []ResourceIdentifier `type:"list"`
@@ -1524,6 +1655,18 @@ func (s ListGroupResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if len(s.QueryErrors) > 0 {
+		v := s.QueryErrors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "QueryErrors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.ResourceIdentifiers) > 0 {
 		v := s.ResourceIdentifiers
 
@@ -1542,6 +1685,14 @@ func (s ListGroupResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsInput
 type ListGroupsInput struct {
 	_ struct{} `type:"structure"`
+
+	// Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups
+	// operation.
+	//
+	//    * resource-type - Filter groups by resource type. Specify up to five resource
+	//    types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance,
+	//    or AWS::S3::Bucket.
+	Filters []GroupFilter `type:"list"`
 
 	// The maximum number of resource group results that are returned by ListGroups
 	// in paginated output. By default, this number is 50.
@@ -1569,6 +1720,13 @@ func (s *ListGroupsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1579,6 +1737,18 @@ func (s *ListGroupsInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if len(s.Filters) > 0 {
+		v := s.Filters
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Filters", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
 
@@ -1600,8 +1770,12 @@ type ListGroupsOutput struct {
 
 	responseMetadata aws.Response
 
+	// A list of GroupIdentifier objects. Each identifier is an object that contains
+	// both the GroupName and the GroupArn.
+	GroupIdentifiers []GroupIdentifier `type:"list"`
+
 	// A list of resource groups.
-	Groups []Group `type:"list"`
+	Groups []Group `deprecated:"true" type:"list"`
 
 	// The NextToken value to include in a subsequent ListGroups request, to get
 	// more results.
@@ -1625,6 +1799,18 @@ func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.GroupIdentifiers) > 0 {
+		v := s.GroupIdentifiers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "GroupIdentifiers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.Groups) > 0 {
 		v := s.Groups
 
@@ -1642,6 +1828,53 @@ func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A two-part error structure that can occur in ListGroupResources or SearchResources
+// operations on CloudFormation stack-based queries. The error occurs if the
+// CloudFormation stack on which the query is based either does not exist, or
+// has a status that renders the stack inactive. A QueryError occurrence does
+// not necessarily mean that AWS Resource Groups could not complete the operation,
+// but the resulting group might have no member resources.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/QueryError
+type QueryError struct {
+	_ struct{} `type:"structure"`
+
+	// Possible values are CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
+	ErrorCode QueryErrorCode `type:"string" enum:"true"`
+
+	// A message that explains the ErrorCode value. Messages might state that the
+	// specified CloudFormation stack does not exist (or no longer exists). For
+	// CLOUDFORMATION_STACK_INACTIVE, the message typically states that the CloudFormation
+	// stack has a status that is not (or no longer) active, such as CREATE_FAILED.
+	Message *string `type:"string"`
+}
+
+// String returns the string representation
+func (s QueryError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryError) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryError) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ErrorCode) > 0 {
+		v := s.ErrorCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1766,14 +1999,40 @@ type ResourceQuery struct {
 	// Query is a required field
 	Query *string `type:"string" required:"true"`
 
-	// The type of the query. The valid value in this release is TAG_FILTERS_1_0.
+	// The type of the query. The valid values in this release are TAG_FILTERS_1_0
+	// and CLOUDFORMATION_STACK_1_0.
 	//
 	// TAG_FILTERS_1_0: A JSON syntax that lets you specify a collection of simple
 	// tag filters for resource types and tags, as supported by the AWS Tagging
-	// API GetResources operation. When more than one element is present, only resources
-	// that match all filters are part of the result. If a filter specifies more
-	// than one value for a key, a resource matches the filter if its tag value
-	// matches any of the specified values.
+	// API GetResources (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
+	// operation. If you specify more than one tag key, only resources that match
+	// all tag keys, and at least one value of each specified tag key, are returned
+	// in your query. If you specify more than one value for a tag key, a resource
+	// matches the filter if it has a tag key value that matches any of the specified
+	// values.
+	//
+	// For example, consider the following sample query for resources that have
+	// two tags, Stage and Version, with two values each. ([{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}])
+	// The results of this query might include the following.
+	//
+	//    * An EC2 instance that has the following two tags: {"Key":"Stage","Values":["Deploy"]},
+	//    and {"Key":"Version","Values":["2"]}
+	//
+	//    * An S3 bucket that has the following two tags: {"Key":"Stage","Values":["Test","Deploy"]},
+	//    and {"Key":"Version","Values":["1"]}
+	//
+	// The query would not return the following results, however. The following
+	// EC2 instance does not have all tag keys specified in the filter, so it is
+	// rejected. The RDS database has all of the tag keys, but no values that match
+	// at least one of the specified tag key values in the filter.
+	//
+	//    * An EC2 instance that has only the following tag: {"Key":"Stage","Values":["Deploy"]}.
+	//
+	//    * An RDS database that has the following two tags: {"Key":"Stage","Values":["Archived"]},
+	//    and {"Key":"Version","Values":["4"]}
+	//
+	// CLOUDFORMATION_STACK_1_0: A JSON syntax that lets you specify a CloudFormation
+	// stack ARN.
 	//
 	// Type is a required field
 	Type QueryType `type:"string" required:"true" enum:"true"`
@@ -1909,6 +2168,11 @@ type SearchResourcesOutput struct {
 	// get more results.
 	NextToken *string `type:"string"`
 
+	// A list of QueryError objects. Each error is an object that contains ErrorCode
+	// and Message structures. Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE
+	// and CLOUDFORMATION_STACK_NOT_EXISTING.
+	QueryErrors []QueryError `type:"list"`
+
 	// The ARNs and resource types of resources that are members of the group that
 	// you specified.
 	ResourceIdentifiers []ResourceIdentifier `type:"list"`
@@ -1936,6 +2200,18 @@ func (s SearchResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.QueryErrors) > 0 {
+		v := s.QueryErrors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "QueryErrors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if len(s.ResourceIdentifiers) > 0 {
 		v := s.ResourceIdentifiers
@@ -2392,11 +2668,45 @@ func (s UpdateGroupQueryOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type GroupFilterName string
+
+// Enum values for GroupFilterName
+const (
+	GroupFilterNameResourceType GroupFilterName = "resource-type"
+)
+
+func (enum GroupFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GroupFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type QueryErrorCode string
+
+// Enum values for QueryErrorCode
+const (
+	QueryErrorCodeCloudformationStackInactive    QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"
+	QueryErrorCodeCloudformationStackNotExisting QueryErrorCode = "CLOUDFORMATION_STACK_NOT_EXISTING"
+)
+
+func (enum QueryErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueryErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type QueryType string
 
 // Enum values for QueryType
 const (
-	QueryTypeTagFilters10 QueryType = "TAG_FILTERS_1_0"
+	QueryTypeTagFilters10          QueryType = "TAG_FILTERS_1_0"
+	QueryTypeCloudformationStack10 QueryType = "CLOUDFORMATION_STACK_1_0"
 )
 
 func (enum QueryType) MarshalValue() (string, error) {

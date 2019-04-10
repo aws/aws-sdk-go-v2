@@ -3,6 +3,7 @@
 package rds
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeDBInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *RDS) WaitUntilDBInstanceAvailable(input *DescribeDBInstancesInput) error {
-	return c.WaitUntilDBInstanceAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDBInstanceAvailableWithContext is an extended version of WaitUntilDBInstanceAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) WaitUntilDBInstanceAvailableWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *RDS) WaitUntilDBInstanceAvailable(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceAvailable",
 		MaxAttempts: 60,
@@ -76,26 +70,19 @@ func (c *RDS) WaitUntilDBInstanceAvailableWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilDBInstanceDeleted uses the Amazon RDS API operation
 // DescribeDBInstances to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *RDS) WaitUntilDBInstanceDeleted(input *DescribeDBInstancesInput) error {
-	return c.WaitUntilDBInstanceDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDBInstanceDeletedWithContext is an extended version of WaitUntilDBInstanceDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) WaitUntilDBInstanceDeletedWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+func (c *RDS) WaitUntilDBInstanceDeleted(ctx context.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceDeleted",
 		MaxAttempts: 60,
@@ -147,26 +134,19 @@ func (c *RDS) WaitUntilDBInstanceDeletedWithContext(ctx aws.Context, input *Desc
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilDBSnapshotAvailable uses the Amazon RDS API operation
 // DescribeDBSnapshots to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *RDS) WaitUntilDBSnapshotAvailable(input *DescribeDBSnapshotsInput) error {
-	return c.WaitUntilDBSnapshotAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDBSnapshotAvailableWithContext is an extended version of WaitUntilDBSnapshotAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) WaitUntilDBSnapshotAvailableWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *RDS) WaitUntilDBSnapshotAvailable(ctx context.Context, input *DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBSnapshotAvailable",
 		MaxAttempts: 60,
@@ -218,26 +198,19 @@ func (c *RDS) WaitUntilDBSnapshotAvailableWithContext(ctx aws.Context, input *De
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilDBSnapshotDeleted uses the Amazon RDS API operation
 // DescribeDBSnapshots to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *RDS) WaitUntilDBSnapshotDeleted(input *DescribeDBSnapshotsInput) error {
-	return c.WaitUntilDBSnapshotDeletedWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDBSnapshotDeletedWithContext is an extended version of WaitUntilDBSnapshotDeleted.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) WaitUntilDBSnapshotDeletedWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
+func (c *RDS) WaitUntilDBSnapshotDeleted(ctx context.Context, input *DescribeDBSnapshotsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDBSnapshotDeleted",
 		MaxAttempts: 60,
@@ -289,5 +262,5 @@ func (c *RDS) WaitUntilDBSnapshotDeletedWithContext(ctx aws.Context, input *Desc
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

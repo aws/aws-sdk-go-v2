@@ -3,6 +3,7 @@
 package servicediscovery
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -11,6 +12,63 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
+
+const opCreateHttpNamespace = "CreateHttpNamespace"
+
+// CreateHttpNamespaceRequest is a API request type for the CreateHttpNamespace API operation.
+type CreateHttpNamespaceRequest struct {
+	*aws.Request
+	Input *CreateHttpNamespaceInput
+	Copy  func(*CreateHttpNamespaceInput) CreateHttpNamespaceRequest
+}
+
+// Send marshals and sends the CreateHttpNamespace API request.
+func (r CreateHttpNamespaceRequest) Send(ctx context.Context) (*CreateHttpNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHttpNamespaceOutput), nil
+}
+
+// CreateHttpNamespaceRequest returns a request value for making API operation for
+// AWS Cloud Map.
+//
+// Creates an HTTP namespace. Service instances that you register using an HTTP
+// namespace can be discovered using a DiscoverInstances request but can't be
+// discovered using DNS.
+//
+// For the current limit on the number of namespaces that you can create using
+// the same AWS account, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the AWS Cloud Map Developer Guide.
+//
+//    // Example sending a request using the CreateHttpNamespaceRequest method.
+//    req := client.CreateHttpNamespaceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespace
+func (c *ServiceDiscovery) CreateHttpNamespaceRequest(input *CreateHttpNamespaceInput) CreateHttpNamespaceRequest {
+	op := &aws.Operation{
+		Name:       opCreateHttpNamespace,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateHttpNamespaceInput{}
+	}
+
+	output := &CreateHttpNamespaceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateHttpNamespaceRequest{Request: req, Input: input, Copy: c.CreateHttpNamespaceRequest}
+}
 
 const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
 
@@ -22,7 +80,8 @@ type CreatePrivateDnsNamespaceRequest struct {
 }
 
 // Send marshals and sends the CreatePrivateDnsNamespace API request.
-func (r CreatePrivateDnsNamespaceRequest) Send() (*CreatePrivateDnsNamespaceOutput, error) {
+func (r CreatePrivateDnsNamespaceRequest) Send(ctx context.Context) (*CreatePrivateDnsNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -32,19 +91,19 @@ func (r CreatePrivateDnsNamespaceRequest) Send() (*CreatePrivateDnsNamespaceOutp
 }
 
 // CreatePrivateDnsNamespaceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Creates a private namespace based on DNS, which will be visible only inside
 // a specified Amazon VPC. The namespace defines your service naming scheme.
 // For example, if you name your namespace example.com and name your service
 // backend, the resulting DNS name for the service will be backend.example.com.
 // For the current limit on the number of namespaces that you can create using
-// the same AWS account, see Limits on Auto Naming (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
-// in the Route 53 Developer Guide.
+// the same AWS account, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using the CreatePrivateDnsNamespaceRequest method.
 //    req := client.CreatePrivateDnsNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -78,7 +137,8 @@ type CreatePublicDnsNamespaceRequest struct {
 }
 
 // Send marshals and sends the CreatePublicDnsNamespace API request.
-func (r CreatePublicDnsNamespaceRequest) Send() (*CreatePublicDnsNamespaceOutput, error) {
+func (r CreatePublicDnsNamespaceRequest) Send(ctx context.Context) (*CreatePublicDnsNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,19 +148,19 @@ func (r CreatePublicDnsNamespaceRequest) Send() (*CreatePublicDnsNamespaceOutput
 }
 
 // CreatePublicDnsNamespaceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Creates a public namespace based on DNS, which will be visible on the internet.
 // The namespace defines your service naming scheme. For example, if you name
 // your namespace example.com and name your service backend, the resulting DNS
 // name for the service will be backend.example.com. For the current limit on
 // the number of namespaces that you can create using the same AWS account,
-// see Limits on Auto Naming (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
-// in the Route 53 Developer Guide.
+// see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using the CreatePublicDnsNamespaceRequest method.
 //    req := client.CreatePublicDnsNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -134,7 +194,8 @@ type CreateServiceRequest struct {
 }
 
 // Send marshals and sends the CreateService API request.
-func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
+func (r CreateServiceRequest) Send(ctx context.Context) (*CreateServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -144,26 +205,36 @@ func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
 }
 
 // CreateServiceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Creates a service, which defines the configuration for the following entities:
 //
-//    * Up to three records (A, AAAA, and SRV) or one CNAME record
+//    * For public and private DNS namespaces, one of the following combinations
+//    of DNS records in Amazon Route 53:
+//
+// A
+//
+// AAAA
+//
+// A and AAAA
+//
+// SRV
+//
+// CNAME
 //
 //    * Optionally, a health check
 //
 // After you create the service, you can submit a RegisterInstance request,
-// and Amazon Route 53 uses the values in the configuration to create the specified
+// and AWS Cloud Map uses the values in the configuration to create the specified
 // entities.
 //
 // For the current limit on the number of instances that you can register using
-// the same namespace and using the same service, see Limits on Auto Naming
-// (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
-// in the Route 53 Developer Guide.
+// the same namespace and using the same service, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using the CreateServiceRequest method.
 //    req := client.CreateServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -197,7 +268,8 @@ type DeleteNamespaceRequest struct {
 }
 
 // Send marshals and sends the DeleteNamespace API request.
-func (r DeleteNamespaceRequest) Send() (*DeleteNamespaceOutput, error) {
+func (r DeleteNamespaceRequest) Send(ctx context.Context) (*DeleteNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -207,14 +279,14 @@ func (r DeleteNamespaceRequest) Send() (*DeleteNamespaceOutput, error) {
 }
 
 // DeleteNamespaceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Deletes a namespace from the current account. If the namespace still contains
 // one or more services, the request fails.
 //
 //    // Example sending a request using the DeleteNamespaceRequest method.
 //    req := client.DeleteNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -248,7 +320,8 @@ type DeleteServiceRequest struct {
 }
 
 // Send marshals and sends the DeleteService API request.
-func (r DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
+func (r DeleteServiceRequest) Send(ctx context.Context) (*DeleteServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -258,14 +331,14 @@ func (r DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
 }
 
 // DeleteServiceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Deletes a specified service. If the service still contains one or more registered
 // instances, the request fails.
 //
 //    // Example sending a request using the DeleteServiceRequest method.
 //    req := client.DeleteServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -299,7 +372,8 @@ type DeregisterInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterInstance API request.
-func (r DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
+func (r DeregisterInstanceRequest) Send(ctx context.Context) (*DeregisterInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -309,14 +383,14 @@ func (r DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
 }
 
 // DeregisterInstanceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
-// Deletes the records and the health check, if any, that Amazon Route 53 created
-// for the specified instance.
+// Deletes the Amazon Route 53 DNS records and health check, if any, that AWS
+// Cloud Map created for the specified instance.
 //
 //    // Example sending a request using the DeregisterInstanceRequest method.
 //    req := client.DeregisterInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -340,6 +414,59 @@ func (c *ServiceDiscovery) DeregisterInstanceRequest(input *DeregisterInstanceIn
 	return DeregisterInstanceRequest{Request: req, Input: input, Copy: c.DeregisterInstanceRequest}
 }
 
+const opDiscoverInstances = "DiscoverInstances"
+
+// DiscoverInstancesRequest is a API request type for the DiscoverInstances API operation.
+type DiscoverInstancesRequest struct {
+	*aws.Request
+	Input *DiscoverInstancesInput
+	Copy  func(*DiscoverInstancesInput) DiscoverInstancesRequest
+}
+
+// Send marshals and sends the DiscoverInstances API request.
+func (r DiscoverInstancesRequest) Send(ctx context.Context) (*DiscoverInstancesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DiscoverInstancesOutput), nil
+}
+
+// DiscoverInstancesRequest returns a request value for making API operation for
+// AWS Cloud Map.
+//
+// Discovers registered instances for a specified namespace and service.
+//
+//    // Example sending a request using the DiscoverInstancesRequest method.
+//    req := client.DiscoverInstancesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstances
+func (c *ServiceDiscovery) DiscoverInstancesRequest(input *DiscoverInstancesInput) DiscoverInstancesRequest {
+	op := &aws.Operation{
+		Name:       opDiscoverInstances,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DiscoverInstancesInput{}
+	}
+
+	output := &DiscoverInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return DiscoverInstancesRequest{Request: req, Input: input, Copy: c.DiscoverInstancesRequest}
+}
+
 const opGetInstance = "GetInstance"
 
 // GetInstanceRequest is a API request type for the GetInstance API operation.
@@ -350,7 +477,8 @@ type GetInstanceRequest struct {
 }
 
 // Send marshals and sends the GetInstance API request.
-func (r GetInstanceRequest) Send() (*GetInstanceOutput, error) {
+func (r GetInstanceRequest) Send(ctx context.Context) (*GetInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -360,13 +488,13 @@ func (r GetInstanceRequest) Send() (*GetInstanceOutput, error) {
 }
 
 // GetInstanceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Gets information about a specified instance.
 //
 //    // Example sending a request using the GetInstanceRequest method.
 //    req := client.GetInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -400,7 +528,8 @@ type GetInstancesHealthStatusRequest struct {
 }
 
 // Send marshals and sends the GetInstancesHealthStatus API request.
-func (r GetInstancesHealthStatusRequest) Send() (*GetInstancesHealthStatusOutput, error) {
+func (r GetInstancesHealthStatusRequest) Send(ctx context.Context) (*GetInstancesHealthStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -410,7 +539,7 @@ func (r GetInstancesHealthStatusRequest) Send() (*GetInstancesHealthStatusOutput
 }
 
 // GetInstancesHealthStatusRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Gets the current health status (Healthy, Unhealthy, or Unknown) of one or
 // more instances that are associated with a specified service.
@@ -420,7 +549,7 @@ func (r GetInstancesHealthStatusRequest) Send() (*GetInstancesHealthStatusOutput
 //
 //    // Example sending a request using the GetInstancesHealthStatusRequest method.
 //    req := client.GetInstancesHealthStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -470,7 +599,7 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHe
 func (p *GetInstancesHealthStatusRequest) Paginate(opts ...aws.Option) GetInstancesHealthStatusPager {
 	return GetInstancesHealthStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetInstancesHealthStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -479,6 +608,7 @@ func (p *GetInstancesHealthStatusRequest) Paginate(opts ...aws.Option) GetInstan
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -506,7 +636,8 @@ type GetNamespaceRequest struct {
 }
 
 // Send marshals and sends the GetNamespace API request.
-func (r GetNamespaceRequest) Send() (*GetNamespaceOutput, error) {
+func (r GetNamespaceRequest) Send(ctx context.Context) (*GetNamespaceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -516,13 +647,13 @@ func (r GetNamespaceRequest) Send() (*GetNamespaceOutput, error) {
 }
 
 // GetNamespaceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Gets information about a namespace.
 //
 //    // Example sending a request using the GetNamespaceRequest method.
 //    req := client.GetNamespaceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -556,7 +687,8 @@ type GetOperationRequest struct {
 }
 
 // Send marshals and sends the GetOperation API request.
-func (r GetOperationRequest) Send() (*GetOperationOutput, error) {
+func (r GetOperationRequest) Send(ctx context.Context) (*GetOperationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -566,7 +698,7 @@ func (r GetOperationRequest) Send() (*GetOperationOutput, error) {
 }
 
 // GetOperationRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Gets information about any operation that returns an operation ID in the
 // response, such as a CreateService request.
@@ -575,7 +707,7 @@ func (r GetOperationRequest) Send() (*GetOperationOutput, error) {
 //
 //    // Example sending a request using the GetOperationRequest method.
 //    req := client.GetOperationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -609,7 +741,8 @@ type GetServiceRequest struct {
 }
 
 // Send marshals and sends the GetService API request.
-func (r GetServiceRequest) Send() (*GetServiceOutput, error) {
+func (r GetServiceRequest) Send(ctx context.Context) (*GetServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,13 +752,13 @@ func (r GetServiceRequest) Send() (*GetServiceOutput, error) {
 }
 
 // GetServiceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Gets the settings for a specified service.
 //
 //    // Example sending a request using the GetServiceRequest method.
 //    req := client.GetServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -659,7 +792,8 @@ type ListInstancesRequest struct {
 }
 
 // Send marshals and sends the ListInstances API request.
-func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
+func (r ListInstancesRequest) Send(ctx context.Context) (*ListInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -669,14 +803,14 @@ func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
 }
 
 // ListInstancesRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Lists summary information about the instances that you registered by using
 // a specified service.
 //
 //    // Example sending a request using the ListInstancesRequest method.
 //    req := client.ListInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -726,7 +860,7 @@ func (c *ServiceDiscovery) ListInstancesRequest(input *ListInstancesInput) ListI
 func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 	return ListInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -735,6 +869,7 @@ func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -762,7 +897,8 @@ type ListNamespacesRequest struct {
 }
 
 // Send marshals and sends the ListNamespaces API request.
-func (r ListNamespacesRequest) Send() (*ListNamespacesOutput, error) {
+func (r ListNamespacesRequest) Send(ctx context.Context) (*ListNamespacesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -772,14 +908,14 @@ func (r ListNamespacesRequest) Send() (*ListNamespacesOutput, error) {
 }
 
 // ListNamespacesRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Lists summary information about the namespaces that were created by the current
 // AWS account.
 //
 //    // Example sending a request using the ListNamespacesRequest method.
 //    req := client.ListNamespacesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -829,7 +965,7 @@ func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) Lis
 func (p *ListNamespacesRequest) Paginate(opts ...aws.Option) ListNamespacesPager {
 	return ListNamespacesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListNamespacesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -838,6 +974,7 @@ func (p *ListNamespacesRequest) Paginate(opts ...aws.Option) ListNamespacesPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -865,7 +1002,8 @@ type ListOperationsRequest struct {
 }
 
 // Send marshals and sends the ListOperations API request.
-func (r ListOperationsRequest) Send() (*ListOperationsOutput, error) {
+func (r ListOperationsRequest) Send(ctx context.Context) (*ListOperationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -875,13 +1013,13 @@ func (r ListOperationsRequest) Send() (*ListOperationsOutput, error) {
 }
 
 // ListOperationsRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Lists operations that match the criteria that you specify.
 //
 //    // Example sending a request using the ListOperationsRequest method.
 //    req := client.ListOperationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -931,7 +1069,7 @@ func (c *ServiceDiscovery) ListOperationsRequest(input *ListOperationsInput) Lis
 func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
 	return ListOperationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListOperationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -940,6 +1078,7 @@ func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -967,7 +1106,8 @@ type ListServicesRequest struct {
 }
 
 // Send marshals and sends the ListServices API request.
-func (r ListServicesRequest) Send() (*ListServicesOutput, error) {
+func (r ListServicesRequest) Send(ctx context.Context) (*ListServicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -977,14 +1117,14 @@ func (r ListServicesRequest) Send() (*ListServicesOutput, error) {
 }
 
 // ListServicesRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Lists summary information for all the services that are associated with one
 // or more specified namespaces.
 //
 //    // Example sending a request using the ListServicesRequest method.
 //    req := client.ListServicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1034,7 +1174,7 @@ func (c *ServiceDiscovery) ListServicesRequest(input *ListServicesInput) ListSer
 func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 	return ListServicesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListServicesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1043,6 +1183,7 @@ func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1070,7 +1211,8 @@ type RegisterInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterInstance API request.
-func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
+func (r RegisterInstanceRequest) Send(ctx context.Context) (*RegisterInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1080,27 +1222,28 @@ func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
 }
 
 // RegisterInstanceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
-// Creates or updates one or more records and optionally a health check based
-// on the settings in a specified service. When you submit a RegisterInstance
-// request, Amazon Route 53 does the following:
+// Creates or updates one or more records and, optionally, creates a health
+// check based on the settings in a specified service. When you submit a RegisterInstance
+// request, the following occurs:
 //
-//    * For each DNS record that you define in the service specified by ServiceId,
-//    creates or updates a record in the hosted zone that is associated with
-//    the corresponding namespace
+//    * For each DNS record that you define in the service that is specified
+//    by ServiceId, a record is created or updated in the hosted zone that is
+//    associated with the corresponding namespace.
 //
-//    * If the service includes HealthCheckConfig, creates or updates a health
-//    check based on the settings in the health check configuration
+//    * If the service includes HealthCheckConfig, a health check is created
+//    based on the settings in the health check configuration.
 //
-//    * Associates the health check, if any, with each of the records
+//    * The health check, if any, is associated with each of the new or updated
+//    records.
 //
 // One RegisterInstance request must complete before you can submit another
 // request and specify the same service ID and instance ID.
 //
 // For more information, see CreateService.
 //
-// When Route 53 receives a DNS query for the specified DNS name, it returns
+// When AWS Cloud Map receives a DNS query for the specified DNS name, it returns
 // the applicable value:
 //
 //    * If the health check is healthy: returns all the records
@@ -1112,13 +1255,12 @@ func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
 //    records
 //
 // For the current limit on the number of instances that you can register using
-// the same namespace and using the same service, see Limits on Auto Naming
-// (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
-// in the Route 53 Developer Guide.
+// the same namespace and using the same service, see AWS Cloud Map Limits (http://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
+// in the AWS Cloud Map Developer Guide.
 //
 //    // Example sending a request using the RegisterInstanceRequest method.
 //    req := client.RegisterInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1152,7 +1294,8 @@ type UpdateInstanceCustomHealthStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateInstanceCustomHealthStatus API request.
-func (r UpdateInstanceCustomHealthStatusRequest) Send() (*UpdateInstanceCustomHealthStatusOutput, error) {
+func (r UpdateInstanceCustomHealthStatusRequest) Send(ctx context.Context) (*UpdateInstanceCustomHealthStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1162,11 +1305,21 @@ func (r UpdateInstanceCustomHealthStatusRequest) Send() (*UpdateInstanceCustomHe
 }
 
 // UpdateInstanceCustomHealthStatusRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
+//
+// Submits a request to change the health status of a custom health check to
+// healthy or unhealthy.
+//
+// You can use UpdateInstanceCustomHealthStatus to change the status only for
+// custom health checks, which you define using HealthCheckCustomConfig when
+// you create a service. You can't use it to change the status for Route 53
+// health checks, which you define using HealthCheckConfig.
+//
+// For more information, see HealthCheckCustomConfig.
 //
 //    // Example sending a request using the UpdateInstanceCustomHealthStatusRequest method.
 //    req := client.UpdateInstanceCustomHealthStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1202,7 +1355,8 @@ type UpdateServiceRequest struct {
 }
 
 // Send marshals and sends the UpdateService API request.
-func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
+func (r UpdateServiceRequest) Send(ctx context.Context) (*UpdateServiceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,7 +1366,7 @@ func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
 }
 
 // UpdateServiceRequest returns a request value for making API operation for
-// Amazon Route 53 Auto Naming.
+// AWS Cloud Map.
 //
 // Submits a request to perform the following operations:
 //
@@ -1222,17 +1376,18 @@ func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
 //
 //    * Add, update, or delete HealthCheckConfig for a specified service
 //
-// You must specify all DnsRecords configurations (and, optionally, HealthCheckConfig)
-// that you want to appear in the updated service. Any current configurations
-// that don't appear in an UpdateService request are deleted.
+// For public and private DNS namespaces, you must specify all DnsRecords configurations
+// (and, optionally, HealthCheckConfig) that you want to appear in the updated
+// service. Any current configurations that don't appear in an UpdateService
+// request are deleted.
 //
-// When you update the TTL setting for a service, Amazon Route 53 also updates
+// When you update the TTL setting for a service, AWS Cloud Map also updates
 // the corresponding settings in all the records and health checks that were
 // created by using the specified service.
 //
 //    // Example sending a request using the UpdateServiceRequest method.
 //    req := client.UpdateServiceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1256,6 +1411,74 @@ func (c *ServiceDiscovery) UpdateServiceRequest(input *UpdateServiceInput) Updat
 	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespaceRequest
+type CreateHttpNamespaceInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique string that identifies the request and that allows failed CreateHttpNamespace
+	// requests to be retried without the risk of executing the operation twice.
+	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	CreatorRequestId *string `type:"string" idempotencyToken:"true"`
+
+	// A description for the namespace.
+	Description *string `type:"string"`
+
+	// The name that you want to assign to this namespace.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateHttpNamespaceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateHttpNamespaceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateHttpNamespaceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHttpNamespaceInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateHttpNamespaceResponse
+type CreateHttpNamespaceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A value that you can use to determine whether the request completed successfully.
+	// To get the status of the operation, see GetOperation.
+	OperationId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateHttpNamespaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateHttpNamespaceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateHttpNamespaceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespaceRequest
 type CreatePrivateDnsNamespaceInput struct {
 	_ struct{} `type:"structure"`
@@ -1268,9 +1491,9 @@ type CreatePrivateDnsNamespaceInput struct {
 	// A description for the namespace.
 	Description *string `type:"string"`
 
-	// The name that you want to assign to this namespace. When you create a namespace,
-	// Amazon Route 53 automatically creates a hosted zone that has the same name
-	// as the namespace.
+	// The name that you want to assign to this namespace. When you create a private
+	// DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private
+	// hosted zone that has the same name as the namespace.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
@@ -1415,26 +1638,36 @@ type CreateServiceInput struct {
 	// A description for the service.
 	Description *string `type:"string"`
 
-	// A complex type that contains information about the records that you want
-	// Route 53 to create when you register an instance.
-	//
-	// DnsConfig is a required field
-	DnsConfig *DnsConfig `type:"structure" required:"true"`
+	// A complex type that contains information about the Amazon Route 53 records
+	// that you want AWS Cloud Map to create when you register an instance.
+	DnsConfig *DnsConfig `type:"structure"`
 
 	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, Route
-	// 53 associates the health check with all the records that you specify in DnsConfig.
+	// optional Route 53 health check. If you specify settings for a health check,
+	// AWS Cloud Map associates the health check with all the Route 53 DNS records
+	// that you specify in DnsConfig.
 	//
-	// For information about the charges for health checks, see Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing).
+	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+	// or HealthCheckConfig but not both.
+	//
+	// For information about the charges for health checks, see AWS Cloud Map Pricing
+	// (http://aws.amazon.com/cloud-map/pricing/).
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 
+	// A complex type that contains information about an optional custom health
+	// check.
+	//
+	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+	// or HealthCheckConfig but not both.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
 	// The name that you want to assign to the service.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// The ID of the namespace that you want to use to create the service.
+	NamespaceId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1450,10 +1683,6 @@ func (s CreateServiceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServiceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceInput"}
-
-	if s.DnsConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DnsConfig"))
-	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -1690,25 +1919,109 @@ func (s DeregisterInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// A complex type that contains information about the records that you want
-// Amazon Route 53 to create when you register an instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesRequest
+type DiscoverInstancesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The health status of the instances that you want to discover.
+	HealthStatus HealthStatusFilter `type:"string" enum:"true"`
+
+	// The maximum number of instances that you want Cloud Map to return in the
+	// response to a DiscoverInstances request. If you don't specify a value for
+	// MaxResults, Cloud Map returns up to 100 instances.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The name of the namespace that you specified when you registered the instance.
+	//
+	// NamespaceName is a required field
+	NamespaceName *string `type:"string" required:"true"`
+
+	// A string map that contains attributes with values that you can use to filter
+	// instances by any custom attribute that you specified when you registered
+	// the instance. Only instances that match all the specified key/value pairs
+	// will be returned.
+	QueryParameters map[string]string `type:"map"`
+
+	// The name of the service that you specified when you registered the instance.
+	//
+	// ServiceName is a required field
+	ServiceName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DiscoverInstancesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DiscoverInstancesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DiscoverInstancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DiscoverInstancesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if s.NamespaceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NamespaceName"))
+	}
+
+	if s.ServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DiscoverInstancesResponse
+type DiscoverInstancesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A complex type that contains one HttpInstanceSummary for each registered
+	// instance.
+	Instances []HttpInstanceSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s DiscoverInstancesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DiscoverInstancesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DiscoverInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// A complex type that contains information about the Amazon Route 53 DNS records
+// that you want AWS Cloud Map to create when you register an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsConfig
 type DnsConfig struct {
 	_ struct{} `type:"structure"`
 
-	// An array that contains one DnsRecord object for each record that you want
-	// Route 53 to create when you register an instance.
+	// An array that contains one DnsRecord object for each Route 53 DNS record
+	// that you want AWS Cloud Map to create when you register an instance.
 	//
 	// DnsRecords is a required field
 	DnsRecords []DnsRecord `type:"list" required:"true"`
 
 	// The ID of the namespace to use for DNS configuration.
-	//
-	// NamespaceId is a required field
-	NamespaceId *string `type:"string" required:"true"`
+	NamespaceId *string `deprecated:"true" type:"string"`
 
-	// The routing policy that you want to apply to all records that Route 53 creates
-	// when you register an instance and specify this service.
+	// The routing policy that you want to apply to all Route 53 DNS records that
+	// AWS Cloud Map creates when you register an instance and specify this service.
 	//
 	// If you want to use this service to register instances that create alias records,
 	// specify WEIGHTED for the routing policy.
@@ -1773,10 +2086,6 @@ func (s *DnsConfig) Validate() error {
 	if s.DnsRecords == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DnsRecords"))
 	}
-
-	if s.NamespaceId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("NamespaceId"))
-	}
 	if s.DnsRecords != nil {
 		for i, v := range s.DnsRecords {
 			if err := v.Validate(); err != nil {
@@ -1791,14 +2100,14 @@ func (s *DnsConfig) Validate() error {
 	return nil
 }
 
-// A complex type that contains information about changes to the records that
-// Route 53 creates when you register an instance.
+// A complex type that contains information about changes to the Route 53 DNS
+// records that AWS Cloud Map creates when you register an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsConfigChange
 type DnsConfigChange struct {
 	_ struct{} `type:"structure"`
 
-	// An array that contains one DnsRecord object for each record that you want
-	// Route 53 to create when you register an instance.
+	// An array that contains one DnsRecord object for each Route 53 record that
+	// you want AWS Cloud Map to create when you register an instance.
 	//
 	// DnsRecords is a required field
 	DnsRecords []DnsRecord `type:"list" required:"true"`
@@ -1835,13 +2144,14 @@ func (s *DnsConfigChange) Validate() error {
 	return nil
 }
 
-// A complex type that contains the ID for the hosted zone that Route 53 creates
-// when you create a namespace.
+// A complex type that contains the ID for the Route 53 hosted zone that AWS
+// Cloud Map creates when you create a namespace.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsProperties
 type DnsProperties struct {
 	_ struct{} `type:"structure"`
 
-	// The ID for the hosted zone that Route 53 creates when you create a namespace.
+	// The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create
+	// a namespace.
 	HostedZoneId *string `type:"string"`
 }
 
@@ -1855,8 +2165,8 @@ func (s DnsProperties) GoString() string {
 	return s.String()
 }
 
-// A complex type that contains information about the records that you want
-// Route 53 to create when you register an instance.
+// A complex type that contains information about the Route 53 DNS records that
+// you want AWS Cloud Map to create when you register an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/DnsRecord
 type DnsRecord struct {
 	_ struct{} `type:"structure"`
@@ -1882,11 +2192,11 @@ type DnsRecord struct {
 	//    one A, one AAAA, and one SRV record. You can specify them in any combination.
 	//
 	//    * CNAME records: If you specify CNAME for Type, you can't define any other
-	//    records. This is a limitation of DNS—you can't create a CNAME record and
-	//    any other type of record that has the same name as a CNAME record.
+	//    records. This is a limitation of DNS: you can't create a CNAME record
+	//    and any other type of record that has the same name as a CNAME record.
 	//
-	//    * Alias records: If you want Route 53 to create an alias record when you
-	//    register an instance, specify A or AAAA for Type.
+	//    * Alias records: If you want AWS Cloud Map to create a Route 53 alias
+	//    record when you register an instance, specify A or AAAA for Type.
 	//
 	//    * All records: You specify settings other than TTL and Type when you register
 	//    an instance.
@@ -1944,9 +2254,9 @@ type DnsRecord struct {
 	// test.backend.example.com
 	//
 	// If you specify settings for an SRV record and if you specify values for AWS_INSTANCE_IPV4,
-	// AWS_INSTANCE_IPV6, or both in the RegisterInstance request, Route 53 automatically
-	// creates A and/or AAAA records that have the same name as the value of service-hostname
-	// in the SRV record. You can ignore these records.
+	// AWS_INSTANCE_IPV6, or both in the RegisterInstance request, AWS Cloud Map
+	// automatically creates A and/or AAAA records that have the same name as the
+	// value of service-hostname in the SRV record. You can ignore these records.
 	//
 	// Type is a required field
 	Type RecordType `type:"string" required:"true" enum:"true"`
@@ -2054,16 +2364,16 @@ type GetInstancesHealthStatusInput struct {
 	// An array that contains the IDs of all the instances that you want to get
 	// the health status for.
 	//
-	// If you omit Instances, Amazon Route 53 returns the health status for all
-	// the instances that are associated with the specified service.
+	// If you omit Instances, AWS Cloud Map returns the health status for all the
+	// instances that are associated with the specified service.
 	//
 	// To get the IDs for the instances that you've registered by using a specified
 	// service, submit a ListInstances request.
 	Instances []string `min:"1" type:"list"`
 
-	// The maximum number of instances that you want Route 53 to return in the response
-	// to a GetInstancesHealthStatus request. If you don't specify a value for MaxResults,
-	// Route 53 returns up to 100 instances.
+	// The maximum number of instances that you want AWS Cloud Map to return in
+	// the response to a GetInstancesHealthStatus request. If you don't specify
+	// a value for MaxResults, AWS Cloud Map returns up to 100 instances.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first GetInstancesHealthStatus request, omit this value.
@@ -2318,16 +2628,24 @@ func (s GetServiceOutput) SDKResponseMetadata() aws.Response {
 }
 
 // Public DNS namespaces only. A complex type that contains settings for an
-// optional health check. If you specify settings for a health check, Amazon
-// Route 53 associates the health check with all the records that you specify
-// in DnsConfig.
+// optional health check. If you specify settings for a health check, AWS Cloud
+// Map associates the health check with the records that you specify in DnsConfig.
+//
+// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+// or HealthCheckConfig but not both.
+//
+// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
+// For information about pricing for health checks, see Amazon Route 53 Pricing
+// (http://aws.amazon.com/route53/pricing/).
+//
+// Note the following about configuring health checks.
 //
 // A and AAAA records
 //
-// If DnsConfig includes configurations for both A and AAAA records, Route 53
-// creates a health check that uses the IPv4 address to check the health of
-// the resource. If the endpoint that is specified by the IPv4 address is unhealthy,
-// Route 53 considers both the A and AAAA records to be unhealthy.
+// If DnsConfig includes configurations for both A and AAAA records, AWS Cloud
+// Map creates a health check that uses the IPv4 address to check the health
+// of the resource. If the endpoint that is specified by the IPv4 address is
+// unhealthy, Route 53 considers both the A and AAAA records to be unhealthy.
 //
 // CNAME records
 //
@@ -2337,14 +2655,11 @@ func (s GetServiceOutput) SDKResponseMetadata() aws.Response {
 //
 // Request interval
 //
-// The health check uses 30 seconds as the request interval. This is the number
-// of seconds between the time that each Route 53 health checker gets a response
-// from your endpoint and the time that it sends the next health check request.
-// A health checker in each data center around the world sends your endpoint
-// a health check request every 30 seconds. On average, your endpoint receives
-// a health check request about every two seconds. Health checkers in different
-// data centers don't coordinate with one another, so you'll sometimes see several
-// requests per second followed by a few seconds with no health checks at all.
+// A Route 53 health checker in each health-checking region sends a health check
+// request to an endpoint every 30 seconds. On average, your endpoint receives
+// a health check request about every two seconds. However, health checkers
+// don't coordinate with one another, so you'll sometimes see several requests
+// per second followed by a few seconds with no health checks at all.
 //
 // Health checking regions
 //
@@ -2354,7 +2669,7 @@ func (s GetServiceOutput) SDKResponseMetadata() aws.Response {
 // Alias records
 //
 // When you register an instance, if you include the AWS_ALIAS_DNS_NAME attribute,
-// Route 53 creates an alias record. Note the following:
+// AWS Cloud Map creates a Route 53 alias record. Note the following:
 //
 //    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
 //    When EvaluateTargetHealth is true, the alias record inherits the health
@@ -2365,8 +2680,11 @@ func (s GetServiceOutput) SDKResponseMetadata() aws.Response {
 //    an instance that creates an alias record, Route 53 doesn't create the
 //    health check.
 //
-// For information about the charges for health checks, see Route 53 Pricing
-// (http://aws.amazon.com/route53/pricing).
+// Charges for health checks
+//
+// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
+// For information about pricing for health checks, see Amazon Route 53 Pricing
+// (http://aws.amazon.com/route53/pricing/).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckConfig
 type HealthCheckConfig struct {
 	_ struct{} `type:"structure"`
@@ -2381,8 +2699,10 @@ type HealthCheckConfig struct {
 	// The path that you want Route 53 to request when performing health checks.
 	// The path can be any value for which your endpoint will return an HTTP status
 	// code of 2xx or 3xx when the endpoint is healthy, such as the file /docs/route53-health-check.html.
-	// Route 53 automatically adds the DNS name for the service and a leading forward
-	// slash (/) character.
+	// Route 53 automatically adds the DNS name for the service. If you don't specify
+	// a value for ResourcePath, the default value is /.
+	//
+	// If you specify TCP for Type, you must not specify a value for ResourcePath.
 	ResourcePath *string `type:"string"`
 
 	// The type of health check that you want to create, which indicates how Route
@@ -2405,10 +2725,14 @@ type HealthCheckConfig struct {
 	//
 	//    * TCP: Route 53 tries to establish a TCP connection.
 	//
+	// If you specify TCP for Type, don't specify a value for ResourcePath.
+	//
 	// For more information, see How Route 53 Determines Whether an Endpoint Is
 	// Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Route 53 Developer Guide.
-	Type HealthCheckType `type:"string" enum:"true"`
+	//
+	// Type is a required field
+	Type HealthCheckType `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -2427,6 +2751,9 @@ func (s *HealthCheckConfig) Validate() error {
 	if s.FailureThreshold != nil && *s.FailureThreshold < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FailureThreshold", 1))
 	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2434,10 +2761,71 @@ func (s *HealthCheckConfig) Validate() error {
 	return nil
 }
 
+// A complex type that contains information about an optional custom health
+// check. A custom health check, which requires that you use a third-party health
+// checker to evaluate the health of your resources, is useful in the following
+// circumstances:
+//
+//    * You can't use a health check that is defined by HealthCheckConfig because
+//    the resource isn't available over the internet. For example, you can use
+//    a custom health check when the instance is in an Amazon VPC. (To check
+//    the health of resources in a VPC, the health checker must also be in the
+//    VPC.)
+//
+//    * You want to use a third-party health checker regardless of where your
+//    resources are.
+//
+// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+// or HealthCheckConfig but not both.
+//
+// To change the status of a custom health check, submit an UpdateInstanceCustomHealthStatus
+// request. Cloud Map doesn't monitor the status of the resource, it just keeps
+// a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
+// request.
+//
+// Here's how custom health checks work:
+//
+// You create a service and specify a value for FailureThreshold.
+//
+// The failure threshold indicates the number of 30-second intervals you want
+// AWS Cloud Map to wait between the time that your application sends an UpdateInstanceCustomHealthStatus
+// request and the time that AWS Cloud Map stops routing internet traffic to
+// the corresponding resource.
+//
+// You register an instance.
+//
+// You configure a third-party health checker to monitor the resource that is
+// associated with the new instance.
+//
+// AWS Cloud Map doesn't check the health of the resource directly.
+//
+// The third-party health-checker determines that the resource is unhealthy
+// and notifies your application.
+//
+// Your application submits an UpdateInstanceCustomHealthStatus request.
+//
+// AWS Cloud Map waits for (FailureThreshold x 30) seconds.
+//
+// If another UpdateInstanceCustomHealthStatus request doesn't arrive during
+// that time to change the status back to healthy, AWS Cloud Map stops routing
+// traffic to the resource.
+//
+// Note the following about configuring custom health checks.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckCustomConfig
 type HealthCheckCustomConfig struct {
 	_ struct{} `type:"structure"`
 
+	// The number of 30-second intervals that you want Cloud Map to wait after receiving
+	// an UpdateInstanceCustomHealthStatus request before it changes the health
+	// status of a service instance. For example, suppose you specify a value of
+	// 2 for FailureTheshold, and then your application sends an UpdateInstanceCustomHealthStatus
+	// request. Cloud Map waits for approximately 60 seconds (2 x 30) before changing
+	// the status of the service instance based on that request.
+	//
+	// Sending a second or subsequent UpdateInstanceCustomHealthStatus request with
+	// the same value before FailureThreshold x 30 seconds has passed doesn't accelerate
+	// the change. Cloud Map still waits FailureThreshold x 30 seconds after the
+	// first request to make the change.
 	FailureThreshold *int64 `min:"1" type:"integer"`
 }
 
@@ -2464,8 +2852,62 @@ func (s *HealthCheckCustomConfig) Validate() error {
 	return nil
 }
 
-// A complex type that contains information about an instance that Amazon Route
-// 53 creates when you submit a RegisterInstance request.
+// In a response to a DiscoverInstance request, HttpInstanceSummary contains
+// information about one instance that matches the values that you specified
+// in the request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HttpInstanceSummary
+type HttpInstanceSummary struct {
+	_ struct{} `type:"structure"`
+
+	// If you included any attributes when you registered the instance, the values
+	// of those attributes.
+	Attributes map[string]string `type:"map"`
+
+	// If you configured health checking in the service, the current health status
+	// of the service instance.
+	HealthStatus HealthStatus `type:"string" enum:"true"`
+
+	// The ID of an instance that matches the values that you specified in the request.
+	InstanceId *string `type:"string"`
+
+	// The name of the namespace that you specified when you registered the instance.
+	NamespaceName *string `type:"string"`
+
+	// The name of the service that you specified when you registered the instance.
+	ServiceName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HttpInstanceSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HttpInstanceSummary) GoString() string {
+	return s.String()
+}
+
+// A complex type that contains the name of an HTTP namespace.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HttpProperties
+type HttpProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an HTTP namespace.
+	HttpName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HttpProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HttpProperties) GoString() string {
+	return s.String()
+}
+
+// A complex type that contains information about an instance that AWS Cloud
+// Map creates when you submit a RegisterInstance request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/Instance
 type Instance struct {
 	_ struct{} `type:"structure"`
@@ -2482,10 +2924,10 @@ type Instance struct {
 	//
 	// AWS_ALIAS_DNS_NAME
 	//
-	// If you want Route 53 to create an alias record that routes traffic to an
-	// Elastic Load Balancing load balancer, specify the DNS name that is associated
-	// with the load balancer. For information about how to get the DNS name, see
-	// "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
+	// If you want AWS Cloud Map to create a Route 53 alias record that routes traffic
+	// to an Elastic Load Balancing load balancer, specify the DNS name that is
+	// associated with the load balancer. For information about how to get the DNS
+	// name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
 	//
 	// Note the following:
 	//
@@ -2496,7 +2938,7 @@ type Instance struct {
 	//    must be WEIGHTED.
 	//
 	//    * If the service that is specified by ServiceId includes HealthCheckConfig
-	//    settings, Route 53 will create the health check, but it won't associate
+	//    settings, AWS Cloud Map will create the health check, but it won't associate
 	//    the health check with the alias record.
 	//
 	//    * Auto naming currently doesn't support creating alias records that route
@@ -2555,9 +2997,9 @@ type Instance struct {
 	//    * To register a new instance, you must specify a value that is unique
 	//    among instances that you register by using the same service.
 	//
-	//    * If you specify an existing InstanceId and ServiceId, Route 53 updates
-	//    the existing records. If there's also an existing health check, Route
-	//    53 deletes the old health check and creates a new one.
+	//    * If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates
+	//    the existing DNS records. If there's also an existing health check, AWS
+	//    Cloud Map deletes the old health check and creates a new one.
 	//
 	// The health check isn't deleted immediately, so it will still appear for a
 	//    while if you submit a ListHealthChecks request, for example.
@@ -2626,9 +3068,9 @@ func (s InstanceSummary) GoString() string {
 type ListInstancesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of instances that you want Amazon Route 53 to return in
+	// The maximum number of instances that you want AWS Cloud Map to return in
 	// the response to a ListInstances request. If you don't specify a value for
-	// MaxResults, Route 53 returns up to 100 instances.
+	// MaxResults, AWS Cloud Map returns up to 100 instances.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListInstances request, omit this value.
@@ -2713,9 +3155,9 @@ type ListNamespacesInput struct {
 	// be returned by ListNamespaces.
 	Filters []NamespaceFilter `type:"list"`
 
-	// The maximum number of namespaces that you want Amazon Route 53 to return
-	// in the response to a ListNamespaces request. If you don't specify a value
-	// for MaxResults, Route 53 returns up to 100 namespaces.
+	// The maximum number of namespaces that you want AWS Cloud Map to return in
+	// the response to a ListNamespaces request. If you don't specify a value for
+	// MaxResults, AWS Cloud Map returns up to 100 namespaces.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListNamespaces request, omit this value.
@@ -2724,10 +3166,10 @@ type ListNamespacesInput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// Route 53 gets MaxResults namespaces and then filters them based on the specified
-	// criteria. It's possible that no namespaces in the first MaxResults namespaces
-	// matched the specified criteria but that subsequent groups of MaxResults namespaces
-	// do contain namespaces that match the criteria.
+	// AWS Cloud Map gets MaxResults namespaces and then filters them based on the
+	// specified criteria. It's possible that no namespaces in the first MaxResults
+	// namespaces matched the specified criteria but that subsequent groups of MaxResults
+	// namespaces do contain namespaces that match the criteria.
 	NextToken *string `type:"string"`
 }
 
@@ -2775,10 +3217,10 @@ type ListNamespacesOutput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// Route 53 gets MaxResults namespaces and then filters them based on the specified
-	// criteria. It's possible that no namespaces in the first MaxResults namespaces
-	// matched the specified criteria but that subsequent groups of MaxResults namespaces
-	// do contain namespaces that match the criteria.
+	// AWS Cloud Map gets MaxResults namespaces and then filters them based on the
+	// specified criteria. It's possible that no namespaces in the first MaxResults
+	// namespaces matched the specified criteria but that subsequent groups of MaxResults
+	// namespaces do contain namespaces that match the criteria.
 	NextToken *string `type:"string"`
 }
 
@@ -2809,9 +3251,9 @@ type ListOperationsInput struct {
 	// to be returned by ListOperations.
 	Filters []OperationFilter `type:"list"`
 
-	// The maximum number of items that you want Amazon Route 53 to return in the
+	// The maximum number of items that you want AWS Cloud Map to return in the
 	// response to a ListOperations request. If you don't specify a value for MaxResults,
-	// Route 53 returns up to 100 operations.
+	// AWS Cloud Map returns up to 100 operations.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListOperations request, omit this value.
@@ -2820,10 +3262,10 @@ type ListOperationsInput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// Route 53 gets MaxResults operations and then filters them based on the specified
-	// criteria. It's possible that no operations in the first MaxResults operations
-	// matched the specified criteria but that subsequent groups of MaxResults operations
-	// do contain operations that match the criteria.
+	// AWS Cloud Map gets MaxResults operations and then filters them based on the
+	// specified criteria. It's possible that no operations in the first MaxResults
+	// operations matched the specified criteria but that subsequent groups of MaxResults
+	// operations do contain operations that match the criteria.
 	NextToken *string `type:"string"`
 }
 
@@ -2867,10 +3309,10 @@ type ListOperationsOutput struct {
 	// to get the next group of results. Specify the value of NextToken from the
 	// previous response in the next request.
 	//
-	// Route 53 gets MaxResults operations and then filters them based on the specified
-	// criteria. It's possible that no operations in the first MaxResults operations
-	// matched the specified criteria but that subsequent groups of MaxResults operations
-	// do contain operations that match the criteria.
+	// AWS Cloud Map gets MaxResults operations and then filters them based on the
+	// specified criteria. It's possible that no operations in the first MaxResults
+	// operations matched the specified criteria but that subsequent groups of MaxResults
+	// operations do contain operations that match the criteria.
 	NextToken *string `type:"string"`
 
 	// Summary information about the operations that match the specified criteria.
@@ -2903,9 +3345,9 @@ type ListServicesInput struct {
 	// to be returned by ListServices.
 	Filters []ServiceFilter `type:"list"`
 
-	// The maximum number of services that you want Amazon Route 53 to return in
-	// the response to a ListServices request. If you don't specify a value for
-	// MaxResults, Route 53 returns up to 100 services.
+	// The maximum number of services that you want AWS Cloud Map to return in the
+	// response to a ListServices request. If you don't specify a value for MaxResults,
+	// AWS Cloud Map returns up to 100 services.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// For the first ListServices request, omit this value.
@@ -2914,10 +3356,10 @@ type ListServicesInput struct {
 	// get the next group of results. Specify the value of NextToken from the previous
 	// response in the next request.
 	//
-	// Route 53 gets MaxResults services and then filters them based on the specified
-	// criteria. It's possible that no services in the first MaxResults services
-	// matched the specified criteria but that subsequent groups of MaxResults services
-	// do contain services that match the criteria.
+	// AWS Cloud Map gets MaxResults services and then filters them based on the
+	// specified criteria. It's possible that no services in the first MaxResults
+	// services matched the specified criteria but that subsequent groups of MaxResults
+	// services do contain services that match the criteria.
 	NextToken *string `type:"string"`
 }
 
@@ -2961,10 +3403,10 @@ type ListServicesOutput struct {
 	// get the next group of results. Specify the value of NextToken from the previous
 	// response in the next request.
 	//
-	// Route 53 gets MaxResults services and then filters them based on the specified
-	// criteria. It's possible that no services in the first MaxResults services
-	// matched the specified criteria but that subsequent groups of MaxResults services
-	// do contain services that match the criteria.
+	// AWS Cloud Map gets MaxResults services and then filters them based on the
+	// specified criteria. It's possible that no services in the first MaxResults
+	// services matched the specified criteria but that subsequent groups of MaxResults
+	// services do contain services that match the criteria.
 	NextToken *string `type:"string"`
 
 	// An array that contains one ServiceSummary object for each service that matches
@@ -2992,8 +3434,8 @@ func (s ListServicesOutput) SDKResponseMetadata() aws.Response {
 type Namespace struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that Route 53 assigns to the namespace when
-	// you create it.
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace
+	// when you create it.
 	Arn *string `type:"string"`
 
 	// The date that the namespace was created, in Unix date/time format and Coordinated
@@ -3102,9 +3544,12 @@ func (s *NamespaceFilter) Validate() error {
 type NamespaceProperties struct {
 	_ struct{} `type:"structure"`
 
-	// A complex type that contains the ID for the hosted zone that Route 53 creates
-	// when you create a namespace.
+	// A complex type that contains the ID for the Route 53 hosted zone that AWS
+	// Cloud Map creates when you create a namespace.
 	DnsProperties *DnsProperties `type:"structure"`
+
+	// A complex type that contains the name of an HTTP namespace.
+	HttpProperties *HttpProperties `type:"structure"`
 }
 
 // String returns the string representation
@@ -3122,16 +3567,29 @@ func (s NamespaceProperties) GoString() string {
 type NamespaceSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that Route 53 assigns to the namespace when
-	// you create it.
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace
+	// when you create it.
 	Arn *string `type:"string"`
+
+	// The date and time that the namespace was created.
+	CreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A description for the namespace.
+	Description *string `type:"string"`
 
 	// The ID of the namespace.
 	Id *string `type:"string"`
 
-	// The name of the namespace. When you create a namespace, Route 53 automatically
-	// creates a hosted zone that has the same name as the namespace.
+	// The name of the namespace. When you create a namespace, AWS Cloud Map automatically
+	// creates a Route 53 hosted zone that has the same name as the namespace.
 	Name *string `type:"string"`
+
+	// A complex type that contains information that is specific to the namespace
+	// type.
+	Properties *NamespaceProperties `type:"structure"`
+
+	// The number of services that were created using the namespace.
+	ServiceCount *int64 `type:"integer"`
 
 	// The type of the namespace, either public or private.
 	Type NamespaceType `type:"string" enum:"true"`
@@ -3186,7 +3644,7 @@ type Operation struct {
 	//    * SUBMITTED: This is the initial state immediately after you submit a
 	//    request.
 	//
-	//    * PENDING: Route 53 is performing the operation.
+	//    * PENDING: AWS Cloud Map is performing the operation.
 	//
 	//    * SUCCESS: The operation succeeded.
 	//
@@ -3321,7 +3779,7 @@ type OperationSummary struct {
 	//    * SUBMITTED: This is the initial state immediately after you submit a
 	//    request.
 	//
-	//    * PENDING: Route 53 is performing the operation.
+	//    * PENDING: AWS Cloud Map is performing the operation.
 	//
 	//    * SUCCESS: The operation succeeded.
 	//
@@ -3355,10 +3813,10 @@ type RegisterInstanceInput struct {
 	//
 	// AWS_ALIAS_DNS_NAME
 	//
-	// If you want Route 53 to create an alias record that routes traffic to an
-	// Elastic Load Balancing load balancer, specify the DNS name that is associated
-	// with the load balancer. For information about how to get the DNS name, see
-	// "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
+	// If you want AWS Cloud Map to create an Amazon Route 53 alias record that
+	// routes traffic to an Elastic Load Balancing load balancer, specify the DNS
+	// name that is associated with the load balancer. For information about how
+	// to get the DNS name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)in the Route 53 API Reference.
 	//
 	// Note the following:
 	//
@@ -3369,14 +3827,18 @@ type RegisterInstanceInput struct {
 	//    must be WEIGHTED.
 	//
 	//    * If the service that is specified by ServiceId includes HealthCheckConfig
-	//    settings, Route 53 will create the health check, but it won't associate
-	//    the health check with the alias record.
+	//    settings, AWS Cloud Map will create the Route 53 health check, but it
+	//    won't associate the health check with the alias record.
 	//
 	//    * Auto naming currently doesn't support creating alias records that route
 	//    traffic to AWS resources other than ELB load balancers.
 	//
 	//    * If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values
 	//    for any of the AWS_INSTANCE attributes.
+	//
+	// AWS_INIT_HEALTH_STATUS
+	//
+	// If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUSto specify the initial status of the custom health check, HEALTHYor UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.
 	//
 	// AWS_INSTANCE_CNAME
 	//
@@ -3406,7 +3868,12 @@ type RegisterInstanceInput struct {
 	// If the service includes an SRV record, the value that you want Route 53 to
 	// return for the port.
 	//
-	// If the service includes HealthCheckConfig
+	// If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.
+	//
+	// This value is required if you specified settings for an SRV record when you
+	// created the service.
+	//
+	// Custom attributes
 	//
 	// Attributes is a required field
 	Attributes map[string]string `type:"map" required:"true"`
@@ -3430,9 +3897,9 @@ type RegisterInstanceInput struct {
 	//    * To register a new instance, you must specify a value that is unique
 	//    among instances that you register by using the same service.
 	//
-	//    * If you specify an existing InstanceId and ServiceId, Route 53 updates
-	//    the existing records. If there's also an existing health check, Route
-	//    53 deletes the old health check and creates a new one.
+	//    * If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates
+	//    the existing DNS records, if any. If there's also an existing health check,
+	//    AWS Cloud Map deletes the old health check and creates a new one.
 	//
 	// The health check isn't deleted immediately, so it will still appear for a
 	//    while if you submit a ListHealthChecks request, for example.
@@ -3440,8 +3907,7 @@ type RegisterInstanceInput struct {
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
 
-	// The ID of the service that you want to use for settings for the records and
-	// health check that Route 53 will create.
+	// The ID of the service that you want to use for settings for the instance.
 	//
 	// ServiceId is a required field
 	ServiceId *string `type:"string" required:"true"`
@@ -3510,8 +3976,8 @@ func (s RegisterInstanceOutput) SDKResponseMetadata() aws.Response {
 type Service struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that Route 53 assigns to the service when
-	// you create it.
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service
+	// when you create it.
 	Arn *string `type:"string"`
 
 	// The date and time that the service was created, in Unix format and Coordinated
@@ -3528,21 +3994,26 @@ type Service struct {
 	// The description of the service.
 	Description *string `type:"string"`
 
-	// A complex type that contains information about the records that you want
-	// Route 53 to create when you register an instance.
+	// A complex type that contains information about the Route 53 DNS records that
+	// you want AWS Cloud Map to create when you register an instance.
 	DnsConfig *DnsConfig `type:"structure"`
 
 	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, Route
-	// 53 associates the health check with all the records that you specify in DnsConfig.
+	// optional health check. If you specify settings for a health check, AWS Cloud
+	// Map associates the health check with the records that you specify in DnsConfig.
 	//
-	// For information about the charges for health checks, see Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing).
+	// For information about the charges for health checks, see Amazon Route 53
+	// Pricing (http://aws.amazon.com/route53/pricing/).
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 
+	// A complex type that contains information about an optional custom health
+	// check.
+	//
+	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+	// or HealthCheckConfig but not both.
 	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
-	// The ID that Route 53 assigned to the service when you created it.
+	// The ID that AWS Cloud Map assigned to the service when you created it.
 	Id *string `type:"string"`
 
 	// The number of instances that are currently associated with the service. Instances
@@ -3552,6 +4023,9 @@ type Service struct {
 
 	// The name of the service.
 	Name *string `type:"string"`
+
+	// The ID of the namespace that was used to create the service.
+	NamespaceId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -3572,23 +4046,31 @@ type ServiceChange struct {
 	// A description for the service.
 	Description *string `type:"string"`
 
-	// A complex type that contains information about the records that you want
-	// Route 53 to create when you register an instance.
+	// A complex type that contains information about the Route 53 DNS records that
+	// you want AWS Cloud Map to create when you register an instance.
 	//
 	// DnsConfig is a required field
 	DnsConfig *DnsConfigChange `type:"structure" required:"true"`
 
 	// Public DNS namespaces only. A complex type that contains settings for an
-	// optional health check. If you specify settings for a health check, Amazon
-	// Route 53 associates the health check with all the records that you specify
-	// in DnsConfig.
+	// optional health check. If you specify settings for a health check, AWS Cloud
+	// Map associates the health check with the records that you specify in DnsConfig.
+	//
+	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+	// or HealthCheckConfig but not both.
+	//
+	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
+	// For information about pricing for health checks, see Amazon Route 53 Pricing
+	// (http://aws.amazon.com/route53/pricing/).
+	//
+	// Note the following about configuring health checks.
 	//
 	// A and AAAA records
 	//
-	// If DnsConfig includes configurations for both A and AAAA records, Route 53
-	// creates a health check that uses the IPv4 address to check the health of
-	// the resource. If the endpoint that is specified by the IPv4 address is unhealthy,
-	// Route 53 considers both the A and AAAA records to be unhealthy.
+	// If DnsConfig includes configurations for both A and AAAA records, AWS Cloud
+	// Map creates a health check that uses the IPv4 address to check the health
+	// of the resource. If the endpoint that is specified by the IPv4 address is
+	// unhealthy, Route 53 considers both the A and AAAA records to be unhealthy.
 	//
 	// CNAME records
 	//
@@ -3598,14 +4080,11 @@ type ServiceChange struct {
 	//
 	// Request interval
 	//
-	// The health check uses 30 seconds as the request interval. This is the number
-	// of seconds between the time that each Route 53 health checker gets a response
-	// from your endpoint and the time that it sends the next health check request.
-	// A health checker in each data center around the world sends your endpoint
-	// a health check request every 30 seconds. On average, your endpoint receives
-	// a health check request about every two seconds. Health checkers in different
-	// data centers don't coordinate with one another, so you'll sometimes see several
-	// requests per second followed by a few seconds with no health checks at all.
+	// A Route 53 health checker in each health-checking region sends a health check
+	// request to an endpoint every 30 seconds. On average, your endpoint receives
+	// a health check request about every two seconds. However, health checkers
+	// don't coordinate with one another, so you'll sometimes see several requests
+	// per second followed by a few seconds with no health checks at all.
 	//
 	// Health checking regions
 	//
@@ -3615,7 +4094,7 @@ type ServiceChange struct {
 	// Alias records
 	//
 	// When you register an instance, if you include the AWS_ALIAS_DNS_NAME attribute,
-	// Route 53 creates an alias record. Note the following:
+	// AWS Cloud Map creates a Route 53 alias record. Note the following:
 	//
 	//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
 	//    When EvaluateTargetHealth is true, the alias record inherits the health
@@ -3626,8 +4105,11 @@ type ServiceChange struct {
 	//    an instance that creates an alias record, Route 53 doesn't create the
 	//    health check.
 	//
-	// For information about the charges for health checks, see Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing).
+	// Charges for health checks
+	//
+	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
+	// For information about pricing for health checks, see Amazon Route 53 Pricing
+	// (http://aws.amazon.com/route53/pricing/).
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 }
 
@@ -3727,14 +4209,133 @@ func (s *ServiceFilter) Validate() error {
 type ServiceSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that Route 53 assigns to the service when
-	// you create it.
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service
+	// when you create it.
 	Arn *string `type:"string"`
+
+	// The date and time that the service was created.
+	CreateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The description that you specify when you create the service.
 	Description *string `type:"string"`
 
-	// The ID that Route 53 assigned to the service when you created it.
+	// A complex type that contains information about the Amazon Route 53 DNS records
+	// that you want AWS Cloud Map to create when you register an instance.
+	DnsConfig *DnsConfig `type:"structure"`
+
+	// Public DNS namespaces only. A complex type that contains settings for an
+	// optional health check. If you specify settings for a health check, AWS Cloud
+	// Map associates the health check with the records that you specify in DnsConfig.
+	//
+	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+	// or HealthCheckConfig but not both.
+	//
+	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
+	// For information about pricing for health checks, see Amazon Route 53 Pricing
+	// (http://aws.amazon.com/route53/pricing/).
+	//
+	// Note the following about configuring health checks.
+	//
+	// A and AAAA records
+	//
+	// If DnsConfig includes configurations for both A and AAAA records, AWS Cloud
+	// Map creates a health check that uses the IPv4 address to check the health
+	// of the resource. If the endpoint that is specified by the IPv4 address is
+	// unhealthy, Route 53 considers both the A and AAAA records to be unhealthy.
+	//
+	// CNAME records
+	//
+	// You can't specify settings for HealthCheckConfig when the DNSConfig includes
+	// CNAME for the value of Type. If you do, the CreateService request will fail
+	// with an InvalidInput error.
+	//
+	// Request interval
+	//
+	// A Route 53 health checker in each health-checking region sends a health check
+	// request to an endpoint every 30 seconds. On average, your endpoint receives
+	// a health check request about every two seconds. However, health checkers
+	// don't coordinate with one another, so you'll sometimes see several requests
+	// per second followed by a few seconds with no health checks at all.
+	//
+	// Health checking regions
+	//
+	// Health checkers perform checks from all Route 53 health-checking regions.
+	// For a list of the current regions, see Regions (http://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
+	//
+	// Alias records
+	//
+	// When you register an instance, if you include the AWS_ALIAS_DNS_NAME attribute,
+	// AWS Cloud Map creates a Route 53 alias record. Note the following:
+	//
+	//    * Route 53 automatically sets EvaluateTargetHealth to true for alias records.
+	//    When EvaluateTargetHealth is true, the alias record inherits the health
+	//    of the referenced AWS resource. such as an ELB load balancer. For more
+	//    information, see EvaluateTargetHealth (http://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
+	//
+	//    * If you include HealthCheckConfig and then use the service to register
+	//    an instance that creates an alias record, Route 53 doesn't create the
+	//    health check.
+	//
+	// Charges for health checks
+	//
+	// Health checks are basic Route 53 health checks that monitor an AWS endpoint.
+	// For information about pricing for health checks, see Amazon Route 53 Pricing
+	// (http://aws.amazon.com/route53/pricing/).
+	HealthCheckConfig *HealthCheckConfig `type:"structure"`
+
+	// A complex type that contains information about an optional custom health
+	// check. A custom health check, which requires that you use a third-party health
+	// checker to evaluate the health of your resources, is useful in the following
+	// circumstances:
+	//
+	//    * You can't use a health check that is defined by HealthCheckConfig because
+	//    the resource isn't available over the internet. For example, you can use
+	//    a custom health check when the instance is in an Amazon VPC. (To check
+	//    the health of resources in a VPC, the health checker must also be in the
+	//    VPC.)
+	//
+	//    * You want to use a third-party health checker regardless of where your
+	//    resources are.
+	//
+	// If you specify a health check configuration, you can specify either HealthCheckCustomConfig
+	// or HealthCheckConfig but not both.
+	//
+	// To change the status of a custom health check, submit an UpdateInstanceCustomHealthStatus
+	// request. Cloud Map doesn't monitor the status of the resource, it just keeps
+	// a record of the status specified in the most recent UpdateInstanceCustomHealthStatus
+	// request.
+	//
+	// Here's how custom health checks work:
+	//
+	// You create a service and specify a value for FailureThreshold.
+	//
+	// The failure threshold indicates the number of 30-second intervals you want
+	// AWS Cloud Map to wait between the time that your application sends an UpdateInstanceCustomHealthStatus
+	// request and the time that AWS Cloud Map stops routing internet traffic to
+	// the corresponding resource.
+	//
+	// You register an instance.
+	//
+	// You configure a third-party health checker to monitor the resource that is
+	// associated with the new instance.
+	//
+	// AWS Cloud Map doesn't check the health of the resource directly.
+	//
+	// The third-party health-checker determines that the resource is unhealthy
+	// and notifies your application.
+	//
+	// Your application submits an UpdateInstanceCustomHealthStatus request.
+	//
+	// AWS Cloud Map waits for (FailureThreshold x 30) seconds.
+	//
+	// If another UpdateInstanceCustomHealthStatus request doesn't arrive during
+	// that time to change the status back to healthy, AWS Cloud Map stops routing
+	// traffic to the resource.
+	//
+	// Note the following about configuring custom health checks.
+	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
+
+	// The ID that AWS Cloud Map assigned to the service when you created it.
 	Id *string `type:"string"`
 
 	// The number of instances that are currently associated with the service. Instances
@@ -3760,12 +4361,19 @@ func (s ServiceSummary) GoString() string {
 type UpdateInstanceCustomHealthStatusInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the instance that you want to change the health status for.
+	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
 
+	// The ID of the service that includes the configuration for the custom health
+	// check that you want to change the status for.
+	//
 	// ServiceId is a required field
 	ServiceId *string `type:"string" required:"true"`
 
+	// The new status of the instance, HEALTHY or UNHEALTHY.
+	//
 	// Status is a required field
 	Status CustomHealthStatus `type:"string" required:"true" enum:"true"`
 }
@@ -3968,6 +4576,24 @@ func (enum HealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HealthStatusFilter string
+
+// Enum values for HealthStatusFilter
+const (
+	HealthStatusFilterHealthy   HealthStatusFilter = "HEALTHY"
+	HealthStatusFilterUnhealthy HealthStatusFilter = "UNHEALTHY"
+	HealthStatusFilterAll       HealthStatusFilter = "ALL"
+)
+
+func (enum HealthStatusFilter) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HealthStatusFilter) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NamespaceFilterName string
 
 // Enum values for NamespaceFilterName
@@ -3990,6 +4616,7 @@ type NamespaceType string
 const (
 	NamespaceTypeDnsPublic  NamespaceType = "DNS_PUBLIC"
 	NamespaceTypeDnsPrivate NamespaceType = "DNS_PRIVATE"
+	NamespaceTypeHttp       NamespaceType = "HTTP"
 )
 
 func (enum NamespaceType) MarshalValue() (string, error) {

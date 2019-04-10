@@ -3,6 +3,7 @@
 package kinesisvideo
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CreateStreamRequest struct {
 }
 
 // Send marshals and sends the CreateStream API request.
-func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
+func (r CreateStreamRequest) Send(ctx context.Context) (*CreateStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -46,7 +48,7 @@ func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 //
 //    // Example sending a request using the CreateStreamRequest method.
 //    req := client.CreateStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -80,7 +82,8 @@ type DeleteStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteStream API request.
-func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
+func (r DeleteStreamRequest) Send(ctx context.Context) (*DeleteStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -107,7 +110,7 @@ func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
 //
 //    // Example sending a request using the DeleteStreamRequest method.
 //    req := client.DeleteStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -141,7 +144,8 @@ type DescribeStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeStream API request.
-func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,7 +162,7 @@ func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
 //
 //    // Example sending a request using the DescribeStreamRequest method.
 //    req := client.DescribeStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -192,7 +196,8 @@ type GetDataEndpointRequest struct {
 }
 
 // Send marshals and sends the GetDataEndpoint API request.
-func (r GetDataEndpointRequest) Send() (*GetDataEndpointOutput, error) {
+func (r GetDataEndpointRequest) Send(ctx context.Context) (*GetDataEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -216,7 +221,7 @@ func (r GetDataEndpointRequest) Send() (*GetDataEndpointOutput, error) {
 //
 //    // Example sending a request using the GetDataEndpointRequest method.
 //    req := client.GetDataEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -250,7 +255,8 @@ type ListStreamsRequest struct {
 }
 
 // Send marshals and sends the ListStreams API request.
-func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -268,7 +274,7 @@ func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
 //
 //    // Example sending a request using the ListStreamsRequest method.
 //    req := client.ListStreamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -302,7 +308,8 @@ type ListTagsForStreamRequest struct {
 }
 
 // Send marshals and sends the ListTagsForStream API request.
-func (r ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
+func (r ListTagsForStreamRequest) Send(ctx context.Context) (*ListTagsForStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -320,7 +327,7 @@ func (r ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
 //
 //    // Example sending a request using the ListTagsForStreamRequest method.
 //    req := client.ListTagsForStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -354,7 +361,8 @@ type TagStreamRequest struct {
 }
 
 // Send marshals and sends the TagStream API request.
-func (r TagStreamRequest) Send() (*TagStreamOutput, error) {
+func (r TagStreamRequest) Send(ctx context.Context) (*TagStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -381,7 +389,7 @@ func (r TagStreamRequest) Send() (*TagStreamOutput, error) {
 //
 //    // Example sending a request using the TagStreamRequest method.
 //    req := client.TagStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -415,7 +423,8 @@ type UntagStreamRequest struct {
 }
 
 // Send marshals and sends the UntagStream API request.
-func (r UntagStreamRequest) Send() (*UntagStreamOutput, error) {
+func (r UntagStreamRequest) Send(ctx context.Context) (*UntagStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -435,7 +444,7 @@ func (r UntagStreamRequest) Send() (*UntagStreamOutput, error) {
 //
 //    // Example sending a request using the UntagStreamRequest method.
 //    req := client.UntagStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -469,7 +478,8 @@ type UpdateDataRetentionRequest struct {
 }
 
 // Send marshals and sends the UpdateDataRetention API request.
-func (r UpdateDataRetentionRequest) Send() (*UpdateDataRetentionOutput, error) {
+func (r UpdateDataRetentionRequest) Send(ctx context.Context) (*UpdateDataRetentionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -505,7 +515,7 @@ func (r UpdateDataRetentionRequest) Send() (*UpdateDataRetentionOutput, error) {
 //
 //    // Example sending a request using the UpdateDataRetentionRequest method.
 //    req := client.UpdateDataRetentionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -539,7 +549,8 @@ type UpdateStreamRequest struct {
 }
 
 // Send marshals and sends the UpdateStream API request.
-func (r UpdateStreamRequest) Send() (*UpdateStreamOutput, error) {
+func (r UpdateStreamRequest) Send(ctx context.Context) (*UpdateStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -566,7 +577,7 @@ func (r UpdateStreamRequest) Send() (*UpdateStreamOutput, error) {
 //
 //    // Example sending a request using the UpdateStreamRequest method.
 //    req := client.UpdateStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

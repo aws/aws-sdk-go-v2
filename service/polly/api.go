@@ -3,6 +3,7 @@
 package polly
 
 import (
+	"context"
 	"io"
 	"time"
 
@@ -21,7 +22,8 @@ type DeleteLexiconRequest struct {
 }
 
 // Send marshals and sends the DeleteLexicon API request.
-func (r DeleteLexiconRequest) Send() (*DeleteLexiconOutput, error) {
+func (r DeleteLexiconRequest) Send(ctx context.Context) (*DeleteLexiconOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -41,7 +43,7 @@ func (r DeleteLexiconRequest) Send() (*DeleteLexiconOutput, error) {
 //
 //    // Example sending a request using the DeleteLexiconRequest method.
 //    req := client.DeleteLexiconRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type DescribeVoicesRequest struct {
 }
 
 // Send marshals and sends the DescribeVoices API request.
-func (r DescribeVoicesRequest) Send() (*DescribeVoicesOutput, error) {
+func (r DescribeVoicesRequest) Send(ctx context.Context) (*DescribeVoicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -107,7 +110,7 @@ func (r DescribeVoicesRequest) Send() (*DescribeVoicesOutput, error) {
 //
 //    // Example sending a request using the DescribeVoicesRequest method.
 //    req := client.DescribeVoicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -141,7 +144,8 @@ type GetLexiconRequest struct {
 }
 
 // Send marshals and sends the GetLexicon API request.
-func (r GetLexiconRequest) Send() (*GetLexiconOutput, error) {
+func (r GetLexiconRequest) Send(ctx context.Context) (*GetLexiconOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,7 +162,7 @@ func (r GetLexiconRequest) Send() (*GetLexiconOutput, error) {
 //
 //    // Example sending a request using the GetLexiconRequest method.
 //    req := client.GetLexiconRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -192,7 +196,8 @@ type GetSpeechSynthesisTaskRequest struct {
 }
 
 // Send marshals and sends the GetSpeechSynthesisTask API request.
-func (r GetSpeechSynthesisTaskRequest) Send() (*GetSpeechSynthesisTaskOutput, error) {
+func (r GetSpeechSynthesisTaskRequest) Send(ctx context.Context) (*GetSpeechSynthesisTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -211,7 +216,7 @@ func (r GetSpeechSynthesisTaskRequest) Send() (*GetSpeechSynthesisTaskOutput, er
 //
 //    // Example sending a request using the GetSpeechSynthesisTaskRequest method.
 //    req := client.GetSpeechSynthesisTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -245,7 +250,8 @@ type ListLexiconsRequest struct {
 }
 
 // Send marshals and sends the ListLexicons API request.
-func (r ListLexiconsRequest) Send() (*ListLexiconsOutput, error) {
+func (r ListLexiconsRequest) Send(ctx context.Context) (*ListLexiconsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -262,7 +268,7 @@ func (r ListLexiconsRequest) Send() (*ListLexiconsOutput, error) {
 //
 //    // Example sending a request using the ListLexiconsRequest method.
 //    req := client.ListLexiconsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -296,7 +302,8 @@ type ListSpeechSynthesisTasksRequest struct {
 }
 
 // Send marshals and sends the ListSpeechSynthesisTasks API request.
-func (r ListSpeechSynthesisTasksRequest) Send() (*ListSpeechSynthesisTasksOutput, error) {
+func (r ListSpeechSynthesisTasksRequest) Send(ctx context.Context) (*ListSpeechSynthesisTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -314,7 +321,7 @@ func (r ListSpeechSynthesisTasksRequest) Send() (*ListSpeechSynthesisTasksOutput
 //
 //    // Example sending a request using the ListSpeechSynthesisTasksRequest method.
 //    req := client.ListSpeechSynthesisTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -364,7 +371,7 @@ func (c *Polly) ListSpeechSynthesisTasksRequest(input *ListSpeechSynthesisTasksI
 func (p *ListSpeechSynthesisTasksRequest) Paginate(opts ...aws.Option) ListSpeechSynthesisTasksPager {
 	return ListSpeechSynthesisTasksPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListSpeechSynthesisTasksInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -373,6 +380,7 @@ func (p *ListSpeechSynthesisTasksRequest) Paginate(opts ...aws.Option) ListSpeec
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -400,7 +408,8 @@ type PutLexiconRequest struct {
 }
 
 // Send marshals and sends the PutLexicon API request.
-func (r PutLexiconRequest) Send() (*PutLexiconOutput, error) {
+func (r PutLexiconRequest) Send(ctx context.Context) (*PutLexiconOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -421,7 +430,7 @@ func (r PutLexiconRequest) Send() (*PutLexiconOutput, error) {
 //
 //    // Example sending a request using the PutLexiconRequest method.
 //    req := client.PutLexiconRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -455,7 +464,8 @@ type StartSpeechSynthesisTaskRequest struct {
 }
 
 // Send marshals and sends the StartSpeechSynthesisTask API request.
-func (r StartSpeechSynthesisTaskRequest) Send() (*StartSpeechSynthesisTaskOutput, error) {
+func (r StartSpeechSynthesisTaskRequest) Send(ctx context.Context) (*StartSpeechSynthesisTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -477,7 +487,7 @@ func (r StartSpeechSynthesisTaskRequest) Send() (*StartSpeechSynthesisTaskOutput
 //
 //    // Example sending a request using the StartSpeechSynthesisTaskRequest method.
 //    req := client.StartSpeechSynthesisTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -511,7 +521,8 @@ type SynthesizeSpeechRequest struct {
 }
 
 // Send marshals and sends the SynthesizeSpeech API request.
-func (r SynthesizeSpeechRequest) Send() (*SynthesizeSpeechOutput, error) {
+func (r SynthesizeSpeechRequest) Send(ctx context.Context) (*SynthesizeSpeechOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -531,7 +542,7 @@ func (r SynthesizeSpeechRequest) Send() (*SynthesizeSpeechOutput, error) {
 //
 //    // Example sending a request using the SynthesizeSpeechRequest method.
 //    req := client.SynthesizeSpeechRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2096,6 +2107,7 @@ const (
 	LanguageCodeEnIn    LanguageCode = "en-IN"
 	LanguageCodeEnUs    LanguageCode = "en-US"
 	LanguageCodeEsEs    LanguageCode = "es-ES"
+	LanguageCodeEsMx    LanguageCode = "es-MX"
 	LanguageCodeEsUs    LanguageCode = "es-US"
 	LanguageCodeFrCa    LanguageCode = "fr-CA"
 	LanguageCodeFrFr    LanguageCode = "fr-FR"
@@ -2256,6 +2268,9 @@ const (
 	VoiceIdSeoyeon   VoiceId = "Seoyeon"
 	VoiceIdAditi     VoiceId = "Aditi"
 	VoiceIdZhiyu     VoiceId = "Zhiyu"
+	VoiceIdBianca    VoiceId = "Bianca"
+	VoiceIdLucia     VoiceId = "Lucia"
+	VoiceIdMia       VoiceId = "Mia"
 )
 
 func (enum VoiceId) MarshalValue() (string, error) {

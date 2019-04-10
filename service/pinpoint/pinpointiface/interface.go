@@ -102,6 +102,8 @@ type PinpointAPI interface {
 
 	DeleteUserEndpointsRequest(*pinpoint.DeleteUserEndpointsInput) pinpoint.DeleteUserEndpointsRequest
 
+	DeleteVoiceChannelRequest(*pinpoint.DeleteVoiceChannelInput) pinpoint.DeleteVoiceChannelRequest
+
 	GetAdmChannelRequest(*pinpoint.GetAdmChannelInput) pinpoint.GetAdmChannelRequest
 
 	GetApnsChannelRequest(*pinpoint.GetApnsChannelInput) pinpoint.GetApnsChannelRequest
@@ -164,6 +166,8 @@ type PinpointAPI interface {
 
 	GetUserEndpointsRequest(*pinpoint.GetUserEndpointsInput) pinpoint.GetUserEndpointsRequest
 
+	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
+
 	PhoneNumberValidateRequest(*pinpoint.PhoneNumberValidateInput) pinpoint.PhoneNumberValidateRequest
 
 	PutEventStreamRequest(*pinpoint.PutEventStreamInput) pinpoint.PutEventStreamRequest
@@ -203,6 +207,8 @@ type PinpointAPI interface {
 	UpdateSegmentRequest(*pinpoint.UpdateSegmentInput) pinpoint.UpdateSegmentRequest
 
 	UpdateSmsChannelRequest(*pinpoint.UpdateSmsChannelInput) pinpoint.UpdateSmsChannelRequest
+
+	UpdateVoiceChannelRequest(*pinpoint.UpdateVoiceChannelInput) pinpoint.UpdateVoiceChannelRequest
 }
 
 var _ PinpointAPI = (*pinpoint.Pinpoint)(nil)

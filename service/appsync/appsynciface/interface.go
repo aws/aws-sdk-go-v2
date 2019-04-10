@@ -66,6 +66,8 @@ type AppSyncAPI interface {
 
 	CreateDataSourceRequest(*appsync.CreateDataSourceInput) appsync.CreateDataSourceRequest
 
+	CreateFunctionRequest(*appsync.CreateFunctionInput) appsync.CreateFunctionRequest
+
 	CreateGraphqlApiRequest(*appsync.CreateGraphqlApiInput) appsync.CreateGraphqlApiRequest
 
 	CreateResolverRequest(*appsync.CreateResolverInput) appsync.CreateResolverRequest
@@ -76,6 +78,8 @@ type AppSyncAPI interface {
 
 	DeleteDataSourceRequest(*appsync.DeleteDataSourceInput) appsync.DeleteDataSourceRequest
 
+	DeleteFunctionRequest(*appsync.DeleteFunctionInput) appsync.DeleteFunctionRequest
+
 	DeleteGraphqlApiRequest(*appsync.DeleteGraphqlApiInput) appsync.DeleteGraphqlApiRequest
 
 	DeleteResolverRequest(*appsync.DeleteResolverInput) appsync.DeleteResolverRequest
@@ -83,6 +87,8 @@ type AppSyncAPI interface {
 	DeleteTypeRequest(*appsync.DeleteTypeInput) appsync.DeleteTypeRequest
 
 	GetDataSourceRequest(*appsync.GetDataSourceInput) appsync.GetDataSourceRequest
+
+	GetFunctionRequest(*appsync.GetFunctionInput) appsync.GetFunctionRequest
 
 	GetGraphqlApiRequest(*appsync.GetGraphqlApiInput) appsync.GetGraphqlApiRequest
 
@@ -98,9 +104,13 @@ type AppSyncAPI interface {
 
 	ListDataSourcesRequest(*appsync.ListDataSourcesInput) appsync.ListDataSourcesRequest
 
+	ListFunctionsRequest(*appsync.ListFunctionsInput) appsync.ListFunctionsRequest
+
 	ListGraphqlApisRequest(*appsync.ListGraphqlApisInput) appsync.ListGraphqlApisRequest
 
 	ListResolversRequest(*appsync.ListResolversInput) appsync.ListResolversRequest
+
+	ListResolversByFunctionRequest(*appsync.ListResolversByFunctionInput) appsync.ListResolversByFunctionRequest
 
 	ListTypesRequest(*appsync.ListTypesInput) appsync.ListTypesRequest
 
@@ -109,6 +119,8 @@ type AppSyncAPI interface {
 	UpdateApiKeyRequest(*appsync.UpdateApiKeyInput) appsync.UpdateApiKeyRequest
 
 	UpdateDataSourceRequest(*appsync.UpdateDataSourceInput) appsync.UpdateDataSourceRequest
+
+	UpdateFunctionRequest(*appsync.UpdateFunctionInput) appsync.UpdateFunctionRequest
 
 	UpdateGraphqlApiRequest(*appsync.UpdateGraphqlApiInput) appsync.UpdateGraphqlApiRequest
 

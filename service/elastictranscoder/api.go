@@ -3,6 +3,7 @@
 package elastictranscoder
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 //
 //    // Example sending a request using the CancelJobRequest method.
 //    req := client.CancelJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type CreateJobRequest struct {
 }
 
 // Send marshals and sends the CreateJob API request.
-func (r CreateJobRequest) Send() (*CreateJobResponse, error) {
+func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobResponse, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -94,7 +97,7 @@ func (r CreateJobRequest) Send() (*CreateJobResponse, error) {
 //
 //    // Example sending a request using the CreateJobRequest method.
 //    req := client.CreateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +129,8 @@ type CreatePipelineRequest struct {
 }
 
 // Send marshals and sends the CreatePipeline API request.
-func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+func (r CreatePipelineRequest) Send(ctx context.Context) (*CreatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +146,7 @@ func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
 //
 //    // Example sending a request using the CreatePipelineRequest method.
 //    req := client.CreatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -174,7 +178,8 @@ type CreatePresetRequest struct {
 }
 
 // Send marshals and sends the CreatePreset API request.
-func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
+func (r CreatePresetRequest) Send(ctx context.Context) (*CreatePresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -204,7 +209,7 @@ func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
 //
 //    // Example sending a request using the CreatePresetRequest method.
 //    req := client.CreatePresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -236,7 +241,8 @@ type DeletePipelineRequest struct {
 }
 
 // Send marshals and sends the DeletePipeline API request.
-func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+func (r DeletePipelineRequest) Send(ctx context.Context) (*DeletePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -256,7 +262,7 @@ func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
 //
 //    // Example sending a request using the DeletePipelineRequest method.
 //    req := client.DeletePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -288,7 +294,8 @@ type DeletePresetRequest struct {
 }
 
 // Send marshals and sends the DeletePreset API request.
-func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
+func (r DeletePresetRequest) Send(ctx context.Context) (*DeletePresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,7 +313,7 @@ func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
 //
 //    // Example sending a request using the DeletePresetRequest method.
 //    req := client.DeletePresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -338,7 +345,8 @@ type ListJobsByPipelineRequest struct {
 }
 
 // Send marshals and sends the ListJobsByPipeline API request.
-func (r ListJobsByPipelineRequest) Send() (*ListJobsByPipelineOutput, error) {
+func (r ListJobsByPipelineRequest) Send(ctx context.Context) (*ListJobsByPipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -358,7 +366,7 @@ func (r ListJobsByPipelineRequest) Send() (*ListJobsByPipelineOutput, error) {
 //
 //    // Example sending a request using the ListJobsByPipelineRequest method.
 //    req := client.ListJobsByPipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -406,7 +414,7 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 func (p *ListJobsByPipelineRequest) Paginate(opts ...aws.Option) ListJobsByPipelinePager {
 	return ListJobsByPipelinePager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsByPipelineInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -415,6 +423,7 @@ func (p *ListJobsByPipelineRequest) Paginate(opts ...aws.Option) ListJobsByPipel
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -442,7 +451,8 @@ type ListJobsByStatusRequest struct {
 }
 
 // Send marshals and sends the ListJobsByStatus API request.
-func (r ListJobsByStatusRequest) Send() (*ListJobsByStatusOutput, error) {
+func (r ListJobsByStatusRequest) Send(ctx context.Context) (*ListJobsByStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -460,7 +470,7 @@ func (r ListJobsByStatusRequest) Send() (*ListJobsByStatusOutput, error) {
 //
 //    // Example sending a request using the ListJobsByStatusRequest method.
 //    req := client.ListJobsByStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -508,7 +518,7 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 func (p *ListJobsByStatusRequest) Paginate(opts ...aws.Option) ListJobsByStatusPager {
 	return ListJobsByStatusPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsByStatusInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -517,6 +527,7 @@ func (p *ListJobsByStatusRequest) Paginate(opts ...aws.Option) ListJobsByStatusP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -544,7 +555,8 @@ type ListPipelinesRequest struct {
 }
 
 // Send marshals and sends the ListPipelines API request.
-func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+func (r ListPipelinesRequest) Send(ctx context.Context) (*ListPipelinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -561,7 +573,7 @@ func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
 //
 //    // Example sending a request using the ListPipelinesRequest method.
 //    req := client.ListPipelinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -609,7 +621,7 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) List
 func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 	return ListPipelinesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPipelinesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -618,6 +630,7 @@ func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -645,7 +658,8 @@ type ListPresetsRequest struct {
 }
 
 // Send marshals and sends the ListPresets API request.
-func (r ListPresetsRequest) Send() (*ListPresetsOutput, error) {
+func (r ListPresetsRequest) Send(ctx context.Context) (*ListPresetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -662,7 +676,7 @@ func (r ListPresetsRequest) Send() (*ListPresetsOutput, error) {
 //
 //    // Example sending a request using the ListPresetsRequest method.
 //    req := client.ListPresetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -710,7 +724,7 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) ListPres
 func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 	return ListPresetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListPresetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -719,6 +733,7 @@ func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -746,7 +761,8 @@ type ReadJobRequest struct {
 }
 
 // Send marshals and sends the ReadJob API request.
-func (r ReadJobRequest) Send() (*ReadJobOutput, error) {
+func (r ReadJobRequest) Send(ctx context.Context) (*ReadJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -762,7 +778,7 @@ func (r ReadJobRequest) Send() (*ReadJobOutput, error) {
 //
 //    // Example sending a request using the ReadJobRequest method.
 //    req := client.ReadJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -794,7 +810,8 @@ type ReadPipelineRequest struct {
 }
 
 // Send marshals and sends the ReadPipeline API request.
-func (r ReadPipelineRequest) Send() (*ReadPipelineOutput, error) {
+func (r ReadPipelineRequest) Send(ctx context.Context) (*ReadPipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +827,7 @@ func (r ReadPipelineRequest) Send() (*ReadPipelineOutput, error) {
 //
 //    // Example sending a request using the ReadPipelineRequest method.
 //    req := client.ReadPipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -842,7 +859,8 @@ type ReadPresetRequest struct {
 }
 
 // Send marshals and sends the ReadPreset API request.
-func (r ReadPresetRequest) Send() (*ReadPresetOutput, error) {
+func (r ReadPresetRequest) Send(ctx context.Context) (*ReadPresetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -858,7 +876,7 @@ func (r ReadPresetRequest) Send() (*ReadPresetOutput, error) {
 //
 //    // Example sending a request using the ReadPresetRequest method.
 //    req := client.ReadPresetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -890,7 +908,8 @@ type TestRoleRequest struct {
 }
 
 // Send marshals and sends the TestRole API request.
-func (r TestRoleRequest) Send() (*TestRoleOutput, error) {
+func (r TestRoleRequest) Send(ctx context.Context) (*TestRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -912,7 +931,7 @@ func (r TestRoleRequest) Send() (*TestRoleOutput, error) {
 //
 //    // Example sending a request using the TestRoleRequest method.
 //    req := client.TestRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -947,7 +966,8 @@ type UpdatePipelineRequest struct {
 }
 
 // Send marshals and sends the UpdatePipeline API request.
-func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+func (r UpdatePipelineRequest) Send(ctx context.Context) (*UpdatePipelineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -968,7 +988,7 @@ func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
 //
 //    // Example sending a request using the UpdatePipelineRequest method.
 //    req := client.UpdatePipelineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1000,7 +1020,8 @@ type UpdatePipelineNotificationsRequest struct {
 }
 
 // Send marshals and sends the UpdatePipelineNotifications API request.
-func (r UpdatePipelineNotificationsRequest) Send() (*UpdatePipelineNotificationsOutput, error) {
+func (r UpdatePipelineNotificationsRequest) Send(ctx context.Context) (*UpdatePipelineNotificationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1020,7 +1041,7 @@ func (r UpdatePipelineNotificationsRequest) Send() (*UpdatePipelineNotifications
 //
 //    // Example sending a request using the UpdatePipelineNotificationsRequest method.
 //    req := client.UpdatePipelineNotificationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1052,7 +1073,8 @@ type UpdatePipelineStatusRequest struct {
 }
 
 // Send marshals and sends the UpdatePipelineStatus API request.
-func (r UpdatePipelineStatusRequest) Send() (*UpdatePipelineStatusOutput, error) {
+func (r UpdatePipelineStatusRequest) Send(ctx context.Context) (*UpdatePipelineStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1075,7 +1097,7 @@ func (r UpdatePipelineStatusRequest) Send() (*UpdatePipelineStatusOutput, error)
 //
 //    // Example sending a request using the UpdatePipelineStatusRequest method.
 //    req := client.UpdatePipelineStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

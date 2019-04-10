@@ -3,6 +3,7 @@
 package elasticbeanstalk_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -41,7 +42,7 @@ func ExampleElasticBeanstalk_AbortEnvironmentUpdateRequest_shared00() {
 	}
 
 	req := svc.AbortEnvironmentUpdateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -76,7 +77,7 @@ func ExampleElasticBeanstalk_CheckDNSAvailabilityRequest_shared00() {
 	}
 
 	req := svc.CheckDNSAvailabilityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -110,7 +111,7 @@ func ExampleElasticBeanstalk_CreateApplicationRequest_shared00() {
 	}
 
 	req := svc.CreateApplicationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -153,7 +154,7 @@ func ExampleElasticBeanstalk_CreateApplicationVersionRequest_shared00() {
 	}
 
 	req := svc.CreateApplicationVersionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -199,7 +200,7 @@ func ExampleElasticBeanstalk_CreateConfigurationTemplateRequest_shared00() {
 	}
 
 	req := svc.CreateConfigurationTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -243,7 +244,7 @@ func ExampleElasticBeanstalk_CreateEnvironmentRequest_shared00() {
 	}
 
 	req := svc.CreateEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -279,7 +280,7 @@ func ExampleElasticBeanstalk_CreateStorageLocationRequest_shared00() {
 	input := &elasticbeanstalk.CreateStorageLocationInput{}
 
 	req := svc.CreateStorageLocationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -318,7 +319,7 @@ func ExampleElasticBeanstalk_DeleteApplicationRequest_shared00() {
 	}
 
 	req := svc.DeleteApplicationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -356,7 +357,7 @@ func ExampleElasticBeanstalk_DeleteApplicationVersionRequest_shared00() {
 	}
 
 	req := svc.DeleteApplicationVersionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -399,7 +400,7 @@ func ExampleElasticBeanstalk_DeleteConfigurationTemplateRequest_shared00() {
 	}
 
 	req := svc.DeleteConfigurationTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -435,7 +436,7 @@ func ExampleElasticBeanstalk_DeleteEnvironmentConfigurationRequest_shared00() {
 	}
 
 	req := svc.DeleteEnvironmentConfigurationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -472,7 +473,7 @@ func ExampleElasticBeanstalk_DescribeApplicationVersionsRequest_shared00() {
 	}
 
 	req := svc.DescribeApplicationVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -503,7 +504,7 @@ func ExampleElasticBeanstalk_DescribeApplicationsRequest_shared00() {
 	input := &elasticbeanstalk.DescribeApplicationsInput{}
 
 	req := svc.DescribeApplicationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -538,7 +539,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationOptionsRequest_shared00() {
 	}
 
 	req := svc.DescribeConfigurationOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -575,7 +576,7 @@ func ExampleElasticBeanstalk_DescribeConfigurationSettingsRequest_shared00() {
 	}
 
 	req := svc.DescribeConfigurationSettingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -614,7 +615,7 @@ func ExampleElasticBeanstalk_DescribeEnvironmentHealthRequest_shared00() {
 	}
 
 	req := svc.DescribeEnvironmentHealthRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -652,7 +653,7 @@ func ExampleElasticBeanstalk_DescribeEnvironmentResourcesRequest_shared00() {
 	}
 
 	req := svc.DescribeEnvironmentResourcesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -689,7 +690,7 @@ func ExampleElasticBeanstalk_DescribeEnvironmentsRequest_shared00() {
 	}
 
 	req := svc.DescribeEnvironmentsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -722,7 +723,7 @@ func ExampleElasticBeanstalk_DescribeEventsRequest_shared00() {
 	}
 
 	req := svc.DescribeEventsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -759,7 +760,7 @@ func ExampleElasticBeanstalk_DescribeInstancesHealthRequest_shared00() {
 	}
 
 	req := svc.DescribeInstancesHealthRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -795,7 +796,7 @@ func ExampleElasticBeanstalk_ListAvailableSolutionStacksRequest_shared00() {
 	input := &elasticbeanstalk.ListAvailableSolutionStacksInput{}
 
 	req := svc.ListAvailableSolutionStacksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -829,7 +830,7 @@ func ExampleElasticBeanstalk_RebuildEnvironmentRequest_shared00() {
 	}
 
 	req := svc.RebuildEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -865,7 +866,7 @@ func ExampleElasticBeanstalk_RequestEnvironmentInfoRequest_shared00() {
 	}
 
 	req := svc.RequestEnvironmentInfoRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -899,7 +900,7 @@ func ExampleElasticBeanstalk_RestartAppServerRequest_shared00() {
 	}
 
 	req := svc.RestartAppServerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -933,7 +934,7 @@ func ExampleElasticBeanstalk_RetrieveEnvironmentInfoRequest_shared00() {
 	}
 
 	req := svc.RetrieveEnvironmentInfoRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -967,7 +968,7 @@ func ExampleElasticBeanstalk_SwapEnvironmentCNAMEsRequest_shared00() {
 	}
 
 	req := svc.SwapEnvironmentCNAMEsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1000,7 +1001,7 @@ func ExampleElasticBeanstalk_TerminateEnvironmentRequest_shared00() {
 	}
 
 	req := svc.TerminateEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1036,7 +1037,7 @@ func ExampleElasticBeanstalk_UpdateApplicationRequest_shared00() {
 	}
 
 	req := svc.UpdateApplicationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1071,7 +1072,7 @@ func ExampleElasticBeanstalk_UpdateApplicationVersionRequest_shared00() {
 	}
 
 	req := svc.UpdateApplicationVersionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1112,7 +1113,7 @@ func ExampleElasticBeanstalk_UpdateConfigurationTemplateRequest_shared00() {
 	}
 
 	req := svc.UpdateConfigurationTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1151,7 +1152,7 @@ func ExampleElasticBeanstalk_UpdateEnvironmentRequest_shared00() {
 	}
 
 	req := svc.UpdateEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1210,7 +1211,7 @@ func ExampleElasticBeanstalk_UpdateEnvironmentRequest_shared01() {
 	}
 
 	req := svc.UpdateEnvironmentRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1255,7 +1256,7 @@ func ExampleElasticBeanstalk_ValidateConfigurationSettingsRequest_shared00() {
 	}
 
 	req := svc.ValidateConfigurationSettingsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

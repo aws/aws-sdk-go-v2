@@ -72,9 +72,23 @@ type ComprehendAPI interface {
 
 	BatchDetectSyntaxRequest(*comprehend.BatchDetectSyntaxInput) comprehend.BatchDetectSyntaxRequest
 
+	CreateDocumentClassifierRequest(*comprehend.CreateDocumentClassifierInput) comprehend.CreateDocumentClassifierRequest
+
+	CreateEntityRecognizerRequest(*comprehend.CreateEntityRecognizerInput) comprehend.CreateEntityRecognizerRequest
+
+	DeleteDocumentClassifierRequest(*comprehend.DeleteDocumentClassifierInput) comprehend.DeleteDocumentClassifierRequest
+
+	DeleteEntityRecognizerRequest(*comprehend.DeleteEntityRecognizerInput) comprehend.DeleteEntityRecognizerRequest
+
+	DescribeDocumentClassificationJobRequest(*comprehend.DescribeDocumentClassificationJobInput) comprehend.DescribeDocumentClassificationJobRequest
+
+	DescribeDocumentClassifierRequest(*comprehend.DescribeDocumentClassifierInput) comprehend.DescribeDocumentClassifierRequest
+
 	DescribeDominantLanguageDetectionJobRequest(*comprehend.DescribeDominantLanguageDetectionJobInput) comprehend.DescribeDominantLanguageDetectionJobRequest
 
 	DescribeEntitiesDetectionJobRequest(*comprehend.DescribeEntitiesDetectionJobInput) comprehend.DescribeEntitiesDetectionJobRequest
+
+	DescribeEntityRecognizerRequest(*comprehend.DescribeEntityRecognizerInput) comprehend.DescribeEntityRecognizerRequest
 
 	DescribeKeyPhrasesDetectionJobRequest(*comprehend.DescribeKeyPhrasesDetectionJobInput) comprehend.DescribeKeyPhrasesDetectionJobRequest
 
@@ -92,15 +106,23 @@ type ComprehendAPI interface {
 
 	DetectSyntaxRequest(*comprehend.DetectSyntaxInput) comprehend.DetectSyntaxRequest
 
+	ListDocumentClassificationJobsRequest(*comprehend.ListDocumentClassificationJobsInput) comprehend.ListDocumentClassificationJobsRequest
+
+	ListDocumentClassifiersRequest(*comprehend.ListDocumentClassifiersInput) comprehend.ListDocumentClassifiersRequest
+
 	ListDominantLanguageDetectionJobsRequest(*comprehend.ListDominantLanguageDetectionJobsInput) comprehend.ListDominantLanguageDetectionJobsRequest
 
 	ListEntitiesDetectionJobsRequest(*comprehend.ListEntitiesDetectionJobsInput) comprehend.ListEntitiesDetectionJobsRequest
+
+	ListEntityRecognizersRequest(*comprehend.ListEntityRecognizersInput) comprehend.ListEntityRecognizersRequest
 
 	ListKeyPhrasesDetectionJobsRequest(*comprehend.ListKeyPhrasesDetectionJobsInput) comprehend.ListKeyPhrasesDetectionJobsRequest
 
 	ListSentimentDetectionJobsRequest(*comprehend.ListSentimentDetectionJobsInput) comprehend.ListSentimentDetectionJobsRequest
 
 	ListTopicsDetectionJobsRequest(*comprehend.ListTopicsDetectionJobsInput) comprehend.ListTopicsDetectionJobsRequest
+
+	StartDocumentClassificationJobRequest(*comprehend.StartDocumentClassificationJobInput) comprehend.StartDocumentClassificationJobRequest
 
 	StartDominantLanguageDetectionJobRequest(*comprehend.StartDominantLanguageDetectionJobInput) comprehend.StartDominantLanguageDetectionJobRequest
 
@@ -119,6 +141,10 @@ type ComprehendAPI interface {
 	StopKeyPhrasesDetectionJobRequest(*comprehend.StopKeyPhrasesDetectionJobInput) comprehend.StopKeyPhrasesDetectionJobRequest
 
 	StopSentimentDetectionJobRequest(*comprehend.StopSentimentDetectionJobInput) comprehend.StopSentimentDetectionJobRequest
+
+	StopTrainingDocumentClassifierRequest(*comprehend.StopTrainingDocumentClassifierInput) comprehend.StopTrainingDocumentClassifierRequest
+
+	StopTrainingEntityRecognizerRequest(*comprehend.StopTrainingEntityRecognizerInput) comprehend.StopTrainingEntityRecognizerRequest
 }
 
 var _ ComprehendAPI = (*comprehend.Comprehend)(nil)

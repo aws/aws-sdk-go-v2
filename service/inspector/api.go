@@ -3,6 +3,7 @@
 package inspector
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddAttributesToFindingsRequest struct {
 }
 
 // Send marshals and sends the AddAttributesToFindings API request.
-func (r AddAttributesToFindingsRequest) Send() (*AddAttributesToFindingsOutput, error) {
+func (r AddAttributesToFindingsRequest) Send(ctx context.Context) (*AddAttributesToFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r AddAttributesToFindingsRequest) Send() (*AddAttributesToFindingsOutput, 
 //
 //    // Example sending a request using the AddAttributesToFindingsRequest method.
 //    req := client.AddAttributesToFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type CreateAssessmentTargetRequest struct {
 }
 
 // Send marshals and sends the CreateAssessmentTarget API request.
-func (r CreateAssessmentTargetRequest) Send() (*CreateAssessmentTargetOutput, error) {
+func (r CreateAssessmentTargetRequest) Send(ctx context.Context) (*CreateAssessmentTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -97,7 +100,7 @@ func (r CreateAssessmentTargetRequest) Send() (*CreateAssessmentTargetOutput, er
 //
 //    // Example sending a request using the CreateAssessmentTargetRequest method.
 //    req := client.CreateAssessmentTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -131,7 +134,8 @@ type CreateAssessmentTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateAssessmentTemplate API request.
-func (r CreateAssessmentTemplateRequest) Send() (*CreateAssessmentTemplateOutput, error) {
+func (r CreateAssessmentTemplateRequest) Send(ctx context.Context) (*CreateAssessmentTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -151,7 +155,7 @@ func (r CreateAssessmentTemplateRequest) Send() (*CreateAssessmentTemplateOutput
 //
 //    // Example sending a request using the CreateAssessmentTemplateRequest method.
 //    req := client.CreateAssessmentTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -185,7 +189,8 @@ type CreateExclusionsPreviewRequest struct {
 }
 
 // Send marshals and sends the CreateExclusionsPreview API request.
-func (r CreateExclusionsPreviewRequest) Send() (*CreateExclusionsPreviewOutput, error) {
+func (r CreateExclusionsPreviewRequest) Send(ctx context.Context) (*CreateExclusionsPreviewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,7 +208,7 @@ func (r CreateExclusionsPreviewRequest) Send() (*CreateExclusionsPreviewOutput, 
 //
 //    // Example sending a request using the CreateExclusionsPreviewRequest method.
 //    req := client.CreateExclusionsPreviewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -237,7 +242,8 @@ type CreateResourceGroupRequest struct {
 }
 
 // Send marshals and sends the CreateResourceGroup API request.
-func (r CreateResourceGroupRequest) Send() (*CreateResourceGroupOutput, error) {
+func (r CreateResourceGroupRequest) Send(ctx context.Context) (*CreateResourceGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -256,7 +262,7 @@ func (r CreateResourceGroupRequest) Send() (*CreateResourceGroupOutput, error) {
 //
 //    // Example sending a request using the CreateResourceGroupRequest method.
 //    req := client.CreateResourceGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -290,7 +296,8 @@ type DeleteAssessmentRunRequest struct {
 }
 
 // Send marshals and sends the DeleteAssessmentRun API request.
-func (r DeleteAssessmentRunRequest) Send() (*DeleteAssessmentRunOutput, error) {
+func (r DeleteAssessmentRunRequest) Send(ctx context.Context) (*DeleteAssessmentRunOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -307,7 +314,7 @@ func (r DeleteAssessmentRunRequest) Send() (*DeleteAssessmentRunOutput, error) {
 //
 //    // Example sending a request using the DeleteAssessmentRunRequest method.
 //    req := client.DeleteAssessmentRunRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -343,7 +350,8 @@ type DeleteAssessmentTargetRequest struct {
 }
 
 // Send marshals and sends the DeleteAssessmentTarget API request.
-func (r DeleteAssessmentTargetRequest) Send() (*DeleteAssessmentTargetOutput, error) {
+func (r DeleteAssessmentTargetRequest) Send(ctx context.Context) (*DeleteAssessmentTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -360,7 +368,7 @@ func (r DeleteAssessmentTargetRequest) Send() (*DeleteAssessmentTargetOutput, er
 //
 //    // Example sending a request using the DeleteAssessmentTargetRequest method.
 //    req := client.DeleteAssessmentTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -396,7 +404,8 @@ type DeleteAssessmentTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteAssessmentTemplate API request.
-func (r DeleteAssessmentTemplateRequest) Send() (*DeleteAssessmentTemplateOutput, error) {
+func (r DeleteAssessmentTemplateRequest) Send(ctx context.Context) (*DeleteAssessmentTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -413,7 +422,7 @@ func (r DeleteAssessmentTemplateRequest) Send() (*DeleteAssessmentTemplateOutput
 //
 //    // Example sending a request using the DeleteAssessmentTemplateRequest method.
 //    req := client.DeleteAssessmentTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -449,7 +458,8 @@ type DescribeAssessmentRunsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssessmentRuns API request.
-func (r DescribeAssessmentRunsRequest) Send() (*DescribeAssessmentRunsOutput, error) {
+func (r DescribeAssessmentRunsRequest) Send(ctx context.Context) (*DescribeAssessmentRunsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -466,7 +476,7 @@ func (r DescribeAssessmentRunsRequest) Send() (*DescribeAssessmentRunsOutput, er
 //
 //    // Example sending a request using the DescribeAssessmentRunsRequest method.
 //    req := client.DescribeAssessmentRunsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -500,7 +510,8 @@ type DescribeAssessmentTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssessmentTargets API request.
-func (r DescribeAssessmentTargetsRequest) Send() (*DescribeAssessmentTargetsOutput, error) {
+func (r DescribeAssessmentTargetsRequest) Send(ctx context.Context) (*DescribeAssessmentTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -517,7 +528,7 @@ func (r DescribeAssessmentTargetsRequest) Send() (*DescribeAssessmentTargetsOutp
 //
 //    // Example sending a request using the DescribeAssessmentTargetsRequest method.
 //    req := client.DescribeAssessmentTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -551,7 +562,8 @@ type DescribeAssessmentTemplatesRequest struct {
 }
 
 // Send marshals and sends the DescribeAssessmentTemplates API request.
-func (r DescribeAssessmentTemplatesRequest) Send() (*DescribeAssessmentTemplatesOutput, error) {
+func (r DescribeAssessmentTemplatesRequest) Send(ctx context.Context) (*DescribeAssessmentTemplatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +580,7 @@ func (r DescribeAssessmentTemplatesRequest) Send() (*DescribeAssessmentTemplates
 //
 //    // Example sending a request using the DescribeAssessmentTemplatesRequest method.
 //    req := client.DescribeAssessmentTemplatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -602,7 +614,8 @@ type DescribeCrossAccountAccessRoleRequest struct {
 }
 
 // Send marshals and sends the DescribeCrossAccountAccessRole API request.
-func (r DescribeCrossAccountAccessRoleRequest) Send() (*DescribeCrossAccountAccessRoleOutput, error) {
+func (r DescribeCrossAccountAccessRoleRequest) Send(ctx context.Context) (*DescribeCrossAccountAccessRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -618,7 +631,7 @@ func (r DescribeCrossAccountAccessRoleRequest) Send() (*DescribeCrossAccountAcce
 //
 //    // Example sending a request using the DescribeCrossAccountAccessRoleRequest method.
 //    req := client.DescribeCrossAccountAccessRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -652,7 +665,8 @@ type DescribeExclusionsRequest struct {
 }
 
 // Send marshals and sends the DescribeExclusions API request.
-func (r DescribeExclusionsRequest) Send() (*DescribeExclusionsOutput, error) {
+func (r DescribeExclusionsRequest) Send(ctx context.Context) (*DescribeExclusionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -668,7 +682,7 @@ func (r DescribeExclusionsRequest) Send() (*DescribeExclusionsOutput, error) {
 //
 //    // Example sending a request using the DescribeExclusionsRequest method.
 //    req := client.DescribeExclusionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -702,7 +716,8 @@ type DescribeFindingsRequest struct {
 }
 
 // Send marshals and sends the DescribeFindings API request.
-func (r DescribeFindingsRequest) Send() (*DescribeFindingsOutput, error) {
+func (r DescribeFindingsRequest) Send(ctx context.Context) (*DescribeFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -718,7 +733,7 @@ func (r DescribeFindingsRequest) Send() (*DescribeFindingsOutput, error) {
 //
 //    // Example sending a request using the DescribeFindingsRequest method.
 //    req := client.DescribeFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -752,7 +767,8 @@ type DescribeResourceGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeResourceGroups API request.
-func (r DescribeResourceGroupsRequest) Send() (*DescribeResourceGroupsOutput, error) {
+func (r DescribeResourceGroupsRequest) Send(ctx context.Context) (*DescribeResourceGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -769,7 +785,7 @@ func (r DescribeResourceGroupsRequest) Send() (*DescribeResourceGroupsOutput, er
 //
 //    // Example sending a request using the DescribeResourceGroupsRequest method.
 //    req := client.DescribeResourceGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -803,7 +819,8 @@ type DescribeRulesPackagesRequest struct {
 }
 
 // Send marshals and sends the DescribeRulesPackages API request.
-func (r DescribeRulesPackagesRequest) Send() (*DescribeRulesPackagesOutput, error) {
+func (r DescribeRulesPackagesRequest) Send(ctx context.Context) (*DescribeRulesPackagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -820,7 +837,7 @@ func (r DescribeRulesPackagesRequest) Send() (*DescribeRulesPackagesOutput, erro
 //
 //    // Example sending a request using the DescribeRulesPackagesRequest method.
 //    req := client.DescribeRulesPackagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -854,7 +871,8 @@ type GetAssessmentReportRequest struct {
 }
 
 // Send marshals and sends the GetAssessmentReport API request.
-func (r GetAssessmentReportRequest) Send() (*GetAssessmentReportOutput, error) {
+func (r GetAssessmentReportRequest) Send(ctx context.Context) (*GetAssessmentReportOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -871,7 +889,7 @@ func (r GetAssessmentReportRequest) Send() (*GetAssessmentReportOutput, error) {
 //
 //    // Example sending a request using the GetAssessmentReportRequest method.
 //    req := client.GetAssessmentReportRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -905,7 +923,8 @@ type GetExclusionsPreviewRequest struct {
 }
 
 // Send marshals and sends the GetExclusionsPreview API request.
-func (r GetExclusionsPreviewRequest) Send() (*GetExclusionsPreviewOutput, error) {
+func (r GetExclusionsPreviewRequest) Send(ctx context.Context) (*GetExclusionsPreviewOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -923,7 +942,7 @@ func (r GetExclusionsPreviewRequest) Send() (*GetExclusionsPreviewOutput, error)
 //
 //    // Example sending a request using the GetExclusionsPreviewRequest method.
 //    req := client.GetExclusionsPreviewRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -973,7 +992,7 @@ func (c *Inspector) GetExclusionsPreviewRequest(input *GetExclusionsPreviewInput
 func (p *GetExclusionsPreviewRequest) Paginate(opts ...aws.Option) GetExclusionsPreviewPager {
 	return GetExclusionsPreviewPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetExclusionsPreviewInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -982,6 +1001,7 @@ func (p *GetExclusionsPreviewRequest) Paginate(opts ...aws.Option) GetExclusions
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1009,7 +1029,8 @@ type GetTelemetryMetadataRequest struct {
 }
 
 // Send marshals and sends the GetTelemetryMetadata API request.
-func (r GetTelemetryMetadataRequest) Send() (*GetTelemetryMetadataOutput, error) {
+func (r GetTelemetryMetadataRequest) Send(ctx context.Context) (*GetTelemetryMetadataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1026,7 +1047,7 @@ func (r GetTelemetryMetadataRequest) Send() (*GetTelemetryMetadataOutput, error)
 //
 //    // Example sending a request using the GetTelemetryMetadataRequest method.
 //    req := client.GetTelemetryMetadataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1060,7 +1081,8 @@ type ListAssessmentRunAgentsRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentRunAgents API request.
-func (r ListAssessmentRunAgentsRequest) Send() (*ListAssessmentRunAgentsOutput, error) {
+func (r ListAssessmentRunAgentsRequest) Send(ctx context.Context) (*ListAssessmentRunAgentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1077,7 +1099,7 @@ func (r ListAssessmentRunAgentsRequest) Send() (*ListAssessmentRunAgentsOutput, 
 //
 //    // Example sending a request using the ListAssessmentRunAgentsRequest method.
 //    req := client.ListAssessmentRunAgentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1127,7 +1149,7 @@ func (c *Inspector) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgent
 func (p *ListAssessmentRunAgentsRequest) Paginate(opts ...aws.Option) ListAssessmentRunAgentsPager {
 	return ListAssessmentRunAgentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentRunAgentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1136,6 +1158,7 @@ func (p *ListAssessmentRunAgentsRequest) Paginate(opts ...aws.Option) ListAssess
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1163,7 +1186,8 @@ type ListAssessmentRunsRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentRuns API request.
-func (r ListAssessmentRunsRequest) Send() (*ListAssessmentRunsOutput, error) {
+func (r ListAssessmentRunsRequest) Send(ctx context.Context) (*ListAssessmentRunsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1180,7 +1204,7 @@ func (r ListAssessmentRunsRequest) Send() (*ListAssessmentRunsOutput, error) {
 //
 //    // Example sending a request using the ListAssessmentRunsRequest method.
 //    req := client.ListAssessmentRunsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1230,7 +1254,7 @@ func (c *Inspector) ListAssessmentRunsRequest(input *ListAssessmentRunsInput) Li
 func (p *ListAssessmentRunsRequest) Paginate(opts ...aws.Option) ListAssessmentRunsPager {
 	return ListAssessmentRunsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentRunsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1239,6 +1263,7 @@ func (p *ListAssessmentRunsRequest) Paginate(opts ...aws.Option) ListAssessmentR
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1266,7 +1291,8 @@ type ListAssessmentTargetsRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentTargets API request.
-func (r ListAssessmentTargetsRequest) Send() (*ListAssessmentTargetsOutput, error) {
+func (r ListAssessmentTargetsRequest) Send(ctx context.Context) (*ListAssessmentTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1284,7 +1310,7 @@ func (r ListAssessmentTargetsRequest) Send() (*ListAssessmentTargetsOutput, erro
 //
 //    // Example sending a request using the ListAssessmentTargetsRequest method.
 //    req := client.ListAssessmentTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1334,7 +1360,7 @@ func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInp
 func (p *ListAssessmentTargetsRequest) Paginate(opts ...aws.Option) ListAssessmentTargetsPager {
 	return ListAssessmentTargetsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentTargetsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1343,6 +1369,7 @@ func (p *ListAssessmentTargetsRequest) Paginate(opts ...aws.Option) ListAssessme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1370,7 +1397,8 @@ type ListAssessmentTemplatesRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentTemplates API request.
-func (r ListAssessmentTemplatesRequest) Send() (*ListAssessmentTemplatesOutput, error) {
+func (r ListAssessmentTemplatesRequest) Send(ctx context.Context) (*ListAssessmentTemplatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1387,7 +1415,7 @@ func (r ListAssessmentTemplatesRequest) Send() (*ListAssessmentTemplatesOutput, 
 //
 //    // Example sending a request using the ListAssessmentTemplatesRequest method.
 //    req := client.ListAssessmentTemplatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1437,7 +1465,7 @@ func (c *Inspector) ListAssessmentTemplatesRequest(input *ListAssessmentTemplate
 func (p *ListAssessmentTemplatesRequest) Paginate(opts ...aws.Option) ListAssessmentTemplatesPager {
 	return ListAssessmentTemplatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssessmentTemplatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1446,6 +1474,7 @@ func (p *ListAssessmentTemplatesRequest) Paginate(opts ...aws.Option) ListAssess
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1473,7 +1502,8 @@ type ListEventSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the ListEventSubscriptions API request.
-func (r ListEventSubscriptionsRequest) Send() (*ListEventSubscriptionsOutput, error) {
+func (r ListEventSubscriptionsRequest) Send(ctx context.Context) (*ListEventSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1491,7 +1521,7 @@ func (r ListEventSubscriptionsRequest) Send() (*ListEventSubscriptionsOutput, er
 //
 //    // Example sending a request using the ListEventSubscriptionsRequest method.
 //    req := client.ListEventSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1541,7 +1571,7 @@ func (c *Inspector) ListEventSubscriptionsRequest(input *ListEventSubscriptionsI
 func (p *ListEventSubscriptionsRequest) Paginate(opts ...aws.Option) ListEventSubscriptionsPager {
 	return ListEventSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListEventSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1550,6 +1580,7 @@ func (p *ListEventSubscriptionsRequest) Paginate(opts ...aws.Option) ListEventSu
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1577,7 +1608,8 @@ type ListExclusionsRequest struct {
 }
 
 // Send marshals and sends the ListExclusions API request.
-func (r ListExclusionsRequest) Send() (*ListExclusionsOutput, error) {
+func (r ListExclusionsRequest) Send(ctx context.Context) (*ListExclusionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1593,7 +1625,7 @@ func (r ListExclusionsRequest) Send() (*ListExclusionsOutput, error) {
 //
 //    // Example sending a request using the ListExclusionsRequest method.
 //    req := client.ListExclusionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1643,7 +1675,7 @@ func (c *Inspector) ListExclusionsRequest(input *ListExclusionsInput) ListExclus
 func (p *ListExclusionsRequest) Paginate(opts ...aws.Option) ListExclusionsPager {
 	return ListExclusionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListExclusionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1652,6 +1684,7 @@ func (p *ListExclusionsRequest) Paginate(opts ...aws.Option) ListExclusionsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1679,7 +1712,8 @@ type ListFindingsRequest struct {
 }
 
 // Send marshals and sends the ListFindings API request.
-func (r ListFindingsRequest) Send() (*ListFindingsOutput, error) {
+func (r ListFindingsRequest) Send(ctx context.Context) (*ListFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1696,7 +1730,7 @@ func (r ListFindingsRequest) Send() (*ListFindingsOutput, error) {
 //
 //    // Example sending a request using the ListFindingsRequest method.
 //    req := client.ListFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1746,7 +1780,7 @@ func (c *Inspector) ListFindingsRequest(input *ListFindingsInput) ListFindingsRe
 func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 	return ListFindingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListFindingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1755,6 +1789,7 @@ func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1782,7 +1817,8 @@ type ListRulesPackagesRequest struct {
 }
 
 // Send marshals and sends the ListRulesPackages API request.
-func (r ListRulesPackagesRequest) Send() (*ListRulesPackagesOutput, error) {
+func (r ListRulesPackagesRequest) Send(ctx context.Context) (*ListRulesPackagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1798,7 +1834,7 @@ func (r ListRulesPackagesRequest) Send() (*ListRulesPackagesOutput, error) {
 //
 //    // Example sending a request using the ListRulesPackagesRequest method.
 //    req := client.ListRulesPackagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1848,7 +1884,7 @@ func (c *Inspector) ListRulesPackagesRequest(input *ListRulesPackagesInput) List
 func (p *ListRulesPackagesRequest) Paginate(opts ...aws.Option) ListRulesPackagesPager {
 	return ListRulesPackagesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListRulesPackagesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1857,6 +1893,7 @@ func (p *ListRulesPackagesRequest) Paginate(opts ...aws.Option) ListRulesPackage
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1884,7 +1921,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1900,7 +1938,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1934,7 +1972,8 @@ type PreviewAgentsRequest struct {
 }
 
 // Send marshals and sends the PreviewAgents API request.
-func (r PreviewAgentsRequest) Send() (*PreviewAgentsOutput, error) {
+func (r PreviewAgentsRequest) Send(ctx context.Context) (*PreviewAgentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1951,7 +1990,7 @@ func (r PreviewAgentsRequest) Send() (*PreviewAgentsOutput, error) {
 //
 //    // Example sending a request using the PreviewAgentsRequest method.
 //    req := client.PreviewAgentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2001,7 +2040,7 @@ func (c *Inspector) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgent
 func (p *PreviewAgentsRequest) Paginate(opts ...aws.Option) PreviewAgentsPager {
 	return PreviewAgentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *PreviewAgentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2010,6 +2049,7 @@ func (p *PreviewAgentsRequest) Paginate(opts ...aws.Option) PreviewAgentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2037,7 +2077,8 @@ type RegisterCrossAccountAccessRoleRequest struct {
 }
 
 // Send marshals and sends the RegisterCrossAccountAccessRole API request.
-func (r RegisterCrossAccountAccessRoleRequest) Send() (*RegisterCrossAccountAccessRoleOutput, error) {
+func (r RegisterCrossAccountAccessRoleRequest) Send(ctx context.Context) (*RegisterCrossAccountAccessRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2054,7 +2095,7 @@ func (r RegisterCrossAccountAccessRoleRequest) Send() (*RegisterCrossAccountAcce
 //
 //    // Example sending a request using the RegisterCrossAccountAccessRoleRequest method.
 //    req := client.RegisterCrossAccountAccessRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2090,7 +2131,8 @@ type RemoveAttributesFromFindingsRequest struct {
 }
 
 // Send marshals and sends the RemoveAttributesFromFindings API request.
-func (r RemoveAttributesFromFindingsRequest) Send() (*RemoveAttributesFromFindingsOutput, error) {
+func (r RemoveAttributesFromFindingsRequest) Send(ctx context.Context) (*RemoveAttributesFromFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2108,7 +2150,7 @@ func (r RemoveAttributesFromFindingsRequest) Send() (*RemoveAttributesFromFindin
 //
 //    // Example sending a request using the RemoveAttributesFromFindingsRequest method.
 //    req := client.RemoveAttributesFromFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2142,7 +2184,8 @@ type SetTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the SetTagsForResource API request.
-func (r SetTagsForResourceRequest) Send() (*SetTagsForResourceOutput, error) {
+func (r SetTagsForResourceRequest) Send(ctx context.Context) (*SetTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2159,7 +2202,7 @@ func (r SetTagsForResourceRequest) Send() (*SetTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the SetTagsForResourceRequest method.
 //    req := client.SetTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2195,7 +2238,8 @@ type StartAssessmentRunRequest struct {
 }
 
 // Send marshals and sends the StartAssessmentRun API request.
-func (r StartAssessmentRunRequest) Send() (*StartAssessmentRunOutput, error) {
+func (r StartAssessmentRunRequest) Send(ctx context.Context) (*StartAssessmentRunOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2213,7 +2257,7 @@ func (r StartAssessmentRunRequest) Send() (*StartAssessmentRunOutput, error) {
 //
 //    // Example sending a request using the StartAssessmentRunRequest method.
 //    req := client.StartAssessmentRunRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2247,7 +2291,8 @@ type StopAssessmentRunRequest struct {
 }
 
 // Send marshals and sends the StopAssessmentRun API request.
-func (r StopAssessmentRunRequest) Send() (*StopAssessmentRunOutput, error) {
+func (r StopAssessmentRunRequest) Send(ctx context.Context) (*StopAssessmentRunOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2263,7 +2308,7 @@ func (r StopAssessmentRunRequest) Send() (*StopAssessmentRunOutput, error) {
 //
 //    // Example sending a request using the StopAssessmentRunRequest method.
 //    req := client.StopAssessmentRunRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2299,7 +2344,8 @@ type SubscribeToEventRequest struct {
 }
 
 // Send marshals and sends the SubscribeToEvent API request.
-func (r SubscribeToEventRequest) Send() (*SubscribeToEventOutput, error) {
+func (r SubscribeToEventRequest) Send(ctx context.Context) (*SubscribeToEventOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2316,7 +2362,7 @@ func (r SubscribeToEventRequest) Send() (*SubscribeToEventOutput, error) {
 //
 //    // Example sending a request using the SubscribeToEventRequest method.
 //    req := client.SubscribeToEventRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2352,7 +2398,8 @@ type UnsubscribeFromEventRequest struct {
 }
 
 // Send marshals and sends the UnsubscribeFromEvent API request.
-func (r UnsubscribeFromEventRequest) Send() (*UnsubscribeFromEventOutput, error) {
+func (r UnsubscribeFromEventRequest) Send(ctx context.Context) (*UnsubscribeFromEventOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2369,7 +2416,7 @@ func (r UnsubscribeFromEventRequest) Send() (*UnsubscribeFromEventOutput, error)
 //
 //    // Example sending a request using the UnsubscribeFromEventRequest method.
 //    req := client.UnsubscribeFromEventRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2405,7 +2452,8 @@ type UpdateAssessmentTargetRequest struct {
 }
 
 // Send marshals and sends the UpdateAssessmentTarget API request.
-func (r UpdateAssessmentTargetRequest) Send() (*UpdateAssessmentTargetOutput, error) {
+func (r UpdateAssessmentTargetRequest) Send(ctx context.Context) (*UpdateAssessmentTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2425,7 +2473,7 @@ func (r UpdateAssessmentTargetRequest) Send() (*UpdateAssessmentTargetOutput, er
 //
 //    // Example sending a request using the UpdateAssessmentTargetRequest method.
 //    req := client.UpdateAssessmentTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3145,10 +3193,17 @@ type AssetAttributes struct {
 	// The list of IP v4 addresses of the EC2 instance where the finding is generated.
 	Ipv4Addresses []string `locationName:"ipv4Addresses" type:"list"`
 
+	// An array of the network interfaces interacting with the EC2 instance where
+	// the finding is generated.
+	NetworkInterfaces []NetworkInterface `locationName:"networkInterfaces" type:"list"`
+
 	// The schema version of this data type.
 	//
 	// SchemaVersion is a required field
 	SchemaVersion *int64 `locationName:"schemaVersion" type:"integer" required:"true"`
+
+	// The tags related to the EC2 instance where the finding is generated.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -5596,6 +5651,56 @@ func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Contains information about the network interfaces interacting with an EC2
+// instance. This data type is used as one of the elements of the AssetAttributes
+// data type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/NetworkInterface
+type NetworkInterface struct {
+	_ struct{} `type:"structure"`
+
+	// The IP addresses associated with the network interface.
+	Ipv6Addresses []string `locationName:"ipv6Addresses" type:"list"`
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
+	// The name of a private DNS associated with the network interface.
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
+
+	// The private IP address associated with the network interface.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+
+	// A list of the private IP addresses associated with the network interface.
+	// Includes the privateDnsName and privateIpAddress.
+	PrivateIpAddresses []PrivateIp `locationName:"privateIpAddresses" type:"list"`
+
+	// The name of a public DNS associated with the network interface.
+	PublicDnsName *string `locationName:"publicDnsName" type:"string"`
+
+	// The public IP address from which the network interface is reachable.
+	PublicIp *string `locationName:"publicIp" type:"string"`
+
+	// A list of the security groups associated with the network interface. Includes
+	// the groupId and groupName.
+	SecurityGroups []SecurityGroup `locationName:"securityGroups" type:"list"`
+
+	// The ID of a subnet associated with the network interface.
+	SubnetId *string `locationName:"subnetId" type:"string"`
+
+	// The ID of a VPC associated with the network interface.
+	VpcId *string `locationName:"vpcId" type:"string"`
+}
+
+// String returns the string representation
+func (s NetworkInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NetworkInterface) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgentsRequest
 type PreviewAgentsInput struct {
 	_ struct{} `type:"structure"`
@@ -5677,6 +5782,30 @@ func (s PreviewAgentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PreviewAgentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Contains information about a private IP address associated with a network
+// interface. This data type is used as a response element in the DescribeFindings
+// action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PrivateIp
+type PrivateIp struct {
+	_ struct{} `type:"structure"`
+
+	// The DNS name of the private IP address.
+	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
+
+	// The full IP address of the network inteface.
+	PrivateIpAddress *string `locationName:"privateIpAddress" type:"string"`
+}
+
+// String returns the string representation
+func (s PrivateIp) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PrivateIp) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleRequest
@@ -5951,6 +6080,30 @@ func (s Scope) String() string {
 
 // GoString returns the string representation
 func (s Scope) GoString() string {
+	return s.String()
+}
+
+// Contains information about a security group associated with a network interface.
+// This data type is used as one of the elements of the NetworkInterface data
+// type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SecurityGroup
+type SecurityGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the security group.
+	GroupId *string `locationName:"groupId" type:"string"`
+
+	// The name of the security group.
+	GroupName *string `locationName:"groupName" type:"string"`
+}
+
+// String returns the string representation
+func (s SecurityGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SecurityGroup) GoString() string {
 	return s.String()
 }
 

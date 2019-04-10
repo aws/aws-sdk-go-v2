@@ -3,6 +3,7 @@
 package iot1clickprojects
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type AssociateDeviceWithPlacementRequest struct {
 }
 
 // Send marshals and sends the AssociateDeviceWithPlacement API request.
-func (r AssociateDeviceWithPlacementRequest) Send() (*AssociateDeviceWithPlacementOutput, error) {
+func (r AssociateDeviceWithPlacementRequest) Send(ctx context.Context) (*AssociateDeviceWithPlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r AssociateDeviceWithPlacementRequest) Send() (*AssociateDeviceWithPlaceme
 //
 //    // Example sending a request using the AssociateDeviceWithPlacementRequest method.
 //    req := client.AssociateDeviceWithPlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type CreatePlacementRequest struct {
 }
 
 // Send marshals and sends the CreatePlacement API request.
-func (r CreatePlacementRequest) Send() (*CreatePlacementOutput, error) {
+func (r CreatePlacementRequest) Send(ctx context.Context) (*CreatePlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r CreatePlacementRequest) Send() (*CreatePlacementOutput, error) {
 //
 //    // Example sending a request using the CreatePlacementRequest method.
 //    req := client.CreatePlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +141,7 @@ func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 //
 //    // Example sending a request using the CreateProjectRequest method.
 //    req := client.CreateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +175,8 @@ type DeletePlacementRequest struct {
 }
 
 // Send marshals and sends the DeletePlacement API request.
-func (r DeletePlacementRequest) Send() (*DeletePlacementOutput, error) {
+func (r DeletePlacementRequest) Send(ctx context.Context) (*DeletePlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -190,7 +195,7 @@ func (r DeletePlacementRequest) Send() (*DeletePlacementOutput, error) {
 //
 //    // Example sending a request using the DeletePlacementRequest method.
 //    req := client.DeletePlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -224,7 +229,8 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +249,7 @@ func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 //
 //    // Example sending a request using the DeleteProjectRequest method.
 //    req := client.DeleteProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -277,7 +283,8 @@ type DescribePlacementRequest struct {
 }
 
 // Send marshals and sends the DescribePlacement API request.
-func (r DescribePlacementRequest) Send() (*DescribePlacementOutput, error) {
+func (r DescribePlacementRequest) Send(ctx context.Context) (*DescribePlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -293,7 +300,7 @@ func (r DescribePlacementRequest) Send() (*DescribePlacementOutput, error) {
 //
 //    // Example sending a request using the DescribePlacementRequest method.
 //    req := client.DescribePlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -327,7 +334,8 @@ type DescribeProjectRequest struct {
 }
 
 // Send marshals and sends the DescribeProject API request.
-func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+func (r DescribeProjectRequest) Send(ctx context.Context) (*DescribeProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -343,7 +351,7 @@ func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
 //
 //    // Example sending a request using the DescribeProjectRequest method.
 //    req := client.DescribeProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -377,7 +385,8 @@ type DisassociateDeviceFromPlacementRequest struct {
 }
 
 // Send marshals and sends the DisassociateDeviceFromPlacement API request.
-func (r DisassociateDeviceFromPlacementRequest) Send() (*DisassociateDeviceFromPlacementOutput, error) {
+func (r DisassociateDeviceFromPlacementRequest) Send(ctx context.Context) (*DisassociateDeviceFromPlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,7 +402,7 @@ func (r DisassociateDeviceFromPlacementRequest) Send() (*DisassociateDeviceFromP
 //
 //    // Example sending a request using the DisassociateDeviceFromPlacementRequest method.
 //    req := client.DisassociateDeviceFromPlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -427,7 +436,8 @@ type GetDevicesInPlacementRequest struct {
 }
 
 // Send marshals and sends the GetDevicesInPlacement API request.
-func (r GetDevicesInPlacementRequest) Send() (*GetDevicesInPlacementOutput, error) {
+func (r GetDevicesInPlacementRequest) Send(ctx context.Context) (*GetDevicesInPlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +453,7 @@ func (r GetDevicesInPlacementRequest) Send() (*GetDevicesInPlacementOutput, erro
 //
 //    // Example sending a request using the GetDevicesInPlacementRequest method.
 //    req := client.GetDevicesInPlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -477,7 +487,8 @@ type ListPlacementsRequest struct {
 }
 
 // Send marshals and sends the ListPlacements API request.
-func (r ListPlacementsRequest) Send() (*ListPlacementsOutput, error) {
+func (r ListPlacementsRequest) Send(ctx context.Context) (*ListPlacementsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,7 +504,7 @@ func (r ListPlacementsRequest) Send() (*ListPlacementsOutput, error) {
 //
 //    // Example sending a request using the ListPlacementsRequest method.
 //    req := client.ListPlacementsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -527,7 +538,8 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -544,7 +556,7 @@ func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 //
 //    // Example sending a request using the ListProjectsRequest method.
 //    req := client.ListProjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -578,7 +590,8 @@ type UpdatePlacementRequest struct {
 }
 
 // Send marshals and sends the UpdatePlacement API request.
-func (r UpdatePlacementRequest) Send() (*UpdatePlacementOutput, error) {
+func (r UpdatePlacementRequest) Send(ctx context.Context) (*UpdatePlacementOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -595,7 +608,7 @@ func (r UpdatePlacementRequest) Send() (*UpdatePlacementOutput, error) {
 //
 //    // Example sending a request using the UpdatePlacementRequest method.
 //    req := client.UpdatePlacementRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -629,7 +642,8 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -648,7 +662,7 @@ func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 //
 //    // Example sending a request using the UpdateProjectRequest method.
 //    req := client.UpdateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

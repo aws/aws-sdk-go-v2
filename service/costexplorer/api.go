@@ -3,6 +3,8 @@
 package costexplorer
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
@@ -17,7 +19,8 @@ type GetCostAndUsageRequest struct {
 }
 
 // Send marshals and sends the GetCostAndUsage API request.
-func (r GetCostAndUsageRequest) Send() (*GetCostAndUsageOutput, error) {
+func (r GetCostAndUsageRequest) Send(ctx context.Context) (*GetCostAndUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +42,7 @@ func (r GetCostAndUsageRequest) Send() (*GetCostAndUsageOutput, error) {
 //
 //    // Example sending a request using the GetCostAndUsageRequest method.
 //    req := client.GetCostAndUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -63,6 +66,58 @@ func (c *CostExplorer) GetCostAndUsageRequest(input *GetCostAndUsageInput) GetCo
 	return GetCostAndUsageRequest{Request: req, Input: input, Copy: c.GetCostAndUsageRequest}
 }
 
+const opGetCostForecast = "GetCostForecast"
+
+// GetCostForecastRequest is a API request type for the GetCostForecast API operation.
+type GetCostForecastRequest struct {
+	*aws.Request
+	Input *GetCostForecastInput
+	Copy  func(*GetCostForecastInput) GetCostForecastRequest
+}
+
+// Send marshals and sends the GetCostForecast API request.
+func (r GetCostForecastRequest) Send(ctx context.Context) (*GetCostForecastOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCostForecastOutput), nil
+}
+
+// GetCostForecastRequest returns a request value for making API operation for
+// AWS Cost Explorer Service.
+//
+// Retrieves a forecast for how much Amazon Web Services predicts that you will
+// spend over the forecast time period that you select, based on your past costs.
+//
+//    // Example sending a request using the GetCostForecastRequest method.
+//    req := client.GetCostForecastRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostForecast
+func (c *CostExplorer) GetCostForecastRequest(input *GetCostForecastInput) GetCostForecastRequest {
+	op := &aws.Operation{
+		Name:       opGetCostForecast,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetCostForecastInput{}
+	}
+
+	output := &GetCostForecastOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetCostForecastRequest{Request: req, Input: input, Copy: c.GetCostForecastRequest}
+}
+
 const opGetDimensionValues = "GetDimensionValues"
 
 // GetDimensionValuesRequest is a API request type for the GetDimensionValues API operation.
@@ -73,7 +128,8 @@ type GetDimensionValuesRequest struct {
 }
 
 // Send marshals and sends the GetDimensionValues API request.
-func (r GetDimensionValuesRequest) Send() (*GetDimensionValuesOutput, error) {
+func (r GetDimensionValuesRequest) Send(ctx context.Context) (*GetDimensionValuesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -90,7 +146,7 @@ func (r GetDimensionValuesRequest) Send() (*GetDimensionValuesOutput, error) {
 //
 //    // Example sending a request using the GetDimensionValuesRequest method.
 //    req := client.GetDimensionValuesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +180,8 @@ type GetReservationCoverageRequest struct {
 }
 
 // Send marshals and sends the GetReservationCoverage API request.
-func (r GetReservationCoverageRequest) Send() (*GetReservationCoverageOutput, error) {
+func (r GetReservationCoverageRequest) Send(ctx context.Context) (*GetReservationCoverageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,8 +193,8 @@ func (r GetReservationCoverageRequest) Send() (*GetReservationCoverageOutput, er
 // GetReservationCoverageRequest returns a request value for making API operation for
 // AWS Cost Explorer Service.
 //
-// Retrieves the reservation coverage for your account. This allows you to see
-// how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon
+// Retrieves the reservation coverage for your account. This enables you to
+// see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon
 // Relational Database Service, or Amazon Redshift usage is covered by a reservation.
 // An organization's master account can see the coverage of the associated member
 // accounts. For any time period, you can filter data about reservation usage
@@ -171,7 +228,7 @@ func (r GetReservationCoverageRequest) Send() (*GetReservationCoverageOutput, er
 //
 //    // Example sending a request using the GetReservationCoverageRequest method.
 //    req := client.GetReservationCoverageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -205,7 +262,8 @@ type GetReservationPurchaseRecommendationRequest struct {
 }
 
 // Send marshals and sends the GetReservationPurchaseRecommendation API request.
-func (r GetReservationPurchaseRecommendationRequest) Send() (*GetReservationPurchaseRecommendationOutput, error) {
+func (r GetReservationPurchaseRecommendationRequest) Send(ctx context.Context) (*GetReservationPurchaseRecommendationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -227,18 +285,18 @@ func (r GetReservationPurchaseRecommendationRequest) Send() (*GetReservationPurc
 // every combination of reservations in each category of usage to identify the
 // best number of each type of RI to purchase to maximize your estimated savings.
 //
-// For example, AWS automatically aggregates your EC2 Linux, shared tenancy,
+// For example, AWS automatically aggregates your Amazon EC2 Linux, shared tenancy,
 // and c4 family usage in the US West (Oregon) Region and recommends that you
 // buy size-flexible regional reservations to apply to the c4 family usage.
 // AWS recommends the smallest size instance in an instance family. This makes
 // it easier to purchase a size-flexible RI. AWS also shows the equal number
 // of normalized units so that you can purchase any instance size that you want.
-// For this example, your RI recommendation would be for c4.large, because that
+// For this example, your RI recommendation would be for c4.large because that
 // is the smallest size instance in the c4 instance family.
 //
 //    // Example sending a request using the GetReservationPurchaseRecommendationRequest method.
 //    req := client.GetReservationPurchaseRecommendationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -272,7 +330,8 @@ type GetReservationUtilizationRequest struct {
 }
 
 // Send marshals and sends the GetReservationUtilization API request.
-func (r GetReservationUtilizationRequest) Send() (*GetReservationUtilizationOutput, error) {
+func (r GetReservationUtilizationRequest) Send(ctx context.Context) (*GetReservationUtilizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -291,7 +350,7 @@ func (r GetReservationUtilizationRequest) Send() (*GetReservationUtilizationOutp
 //
 //    // Example sending a request using the GetReservationUtilizationRequest method.
 //    req := client.GetReservationUtilizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -325,7 +384,8 @@ type GetTagsRequest struct {
 }
 
 // Send marshals and sends the GetTags API request.
-func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
+func (r GetTagsRequest) Send(ctx context.Context) (*GetTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,7 +402,7 @@ func (r GetTagsRequest) Send() (*GetTagsOutput, error) {
 //
 //    // Example sending a request using the GetTagsRequest method.
 //    req := client.GetTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -371,8 +431,15 @@ func (c *CostExplorer) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 type Coverage struct {
 	_ struct{} `type:"structure"`
 
-	// The amount of instance usage that a reservation covered, in hours.
+	// The amount of cost that the reservation covered.
+	CoverageCost *CoverageCost `type:"structure"`
+
+	// The amount of instance usage that the reservation covered, in hours.
 	CoverageHours *CoverageHours `type:"structure"`
+
+	// The amount of instance usage that the reservation covered, in normalized
+	// units.
+	CoverageNormalizedUnits *CoverageNormalizedUnits `type:"structure"`
 }
 
 // String returns the string representation
@@ -390,10 +457,10 @@ func (s Coverage) GoString() string {
 type CoverageByTime struct {
 	_ struct{} `type:"structure"`
 
-	// The groups of instances that are covered by a reservation.
+	// The groups of instances that the reservation covered.
 	Groups []ReservationCoverageGroup `type:"list"`
 
-	// The period over which this coverage was used.
+	// The period that this coverage was used over.
 	TimePeriod *DateInterval `type:"structure"`
 
 	// The total reservation coverage, in hours.
@@ -410,18 +477,37 @@ func (s CoverageByTime) GoString() string {
 	return s.String()
 }
 
+// How much it cost to run an instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageCost
+type CoverageCost struct {
+	_ struct{} `type:"structure"`
+
+	// How much an On-Demand instance cost.
+	OnDemandCost *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CoverageCost) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CoverageCost) GoString() string {
+	return s.String()
+}
+
 // How long a running instance either used a reservation or was On-Demand.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageHours
 type CoverageHours struct {
 	_ struct{} `type:"structure"`
 
-	// The percentage of instance hours that are covered by a reservation.
+	// The percentage of instance hours that a reservation covered.
 	CoverageHoursPercentage *string `type:"string"`
 
-	// The number of instance running hours that are covered by On-Demand Instances.
+	// The number of instance running hours that On-Demand Instances covered.
 	OnDemandHours *string `type:"string"`
 
-	// The number of instance running hours that are covered by reservations.
+	// The number of instance running hours that reservations covered.
 	ReservedHours *string `type:"string"`
 
 	// The total instance usage, in hours.
@@ -435,6 +521,46 @@ func (s CoverageHours) String() string {
 
 // GoString returns the string representation
 func (s CoverageHours) GoString() string {
+	return s.String()
+}
+
+// The amount of instance usage, in normalized units. Normalized units enable
+// you to see your EC2 usage for multiple sizes of instances in a uniform way.
+// For example, suppose you run an xlarge instance and a 2xlarge instance. If
+// you run both instances for the same amount of time, the 2xlarge instance
+// uses twice as much of your reservation as the xlarge instance, even though
+// both instances show only one instance-hour. Using normalized units instead
+// of instance-hours, the xlarge instance used 8 normalized units, and the 2xlarge
+// instance used 16 normalized units.
+//
+// For more information, see Modifying Reserved Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html)
+// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageNormalizedUnits
+type CoverageNormalizedUnits struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of your used instance normalized units that a reservation
+	// covers.
+	CoverageNormalizedUnitsPercentage *string `type:"string"`
+
+	// The number of normalized units that are covered by On-Demand Instances instead
+	// of a reservation.
+	OnDemandNormalizedUnits *string `type:"string"`
+
+	// The number of normalized units that a reservation covers.
+	ReservedNormalizedUnits *string `type:"string"`
+
+	// The total number of normalized units that you used.
+	TotalRunningNormalizedUnits *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CoverageNormalizedUnits) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CoverageNormalizedUnits) GoString() string {
 	return s.String()
 }
 
@@ -498,6 +624,10 @@ type DimensionValues struct {
 
 	// The metadata values that you can use to filter and group your results. You
 	// can use GetDimensionValues to find specific values.
+	//
+	// Valid values for the SERVICE dimension are Amazon Elastic Compute Cloud -
+	// Compute, Amazon Elasticsearch Service, Amazon ElastiCache, Amazon Redshift,
+	// and Amazon Relational Database Service.
 	Values []string `type:"list"`
 }
 
@@ -534,7 +664,7 @@ func (s DimensionValuesWithAttributes) GoString() string {
 	return s.String()
 }
 
-// Details about the EC2 instances that AWS recommends that you purchase.
+// Details about the Amazon EC2 instances that AWS recommends that you purchase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2InstanceDetails
 type EC2InstanceDetails struct {
 	_ struct{} `type:"structure"`
@@ -542,7 +672,7 @@ type EC2InstanceDetails struct {
 	// The Availability Zone of the recommended reservation.
 	AvailabilityZone *string `type:"string"`
 
-	// Whether the recommendation is for a current generation instance.
+	// Whether the recommendation is for a current-generation instance.
 	CurrentGeneration *bool `type:"boolean"`
 
 	// The instance family of the recommended reservation.
@@ -575,7 +705,7 @@ func (s EC2InstanceDetails) GoString() string {
 	return s.String()
 }
 
-// The EC2 hardware specifications that you want AWS to provide recommendations
+// The Amazon EC2 hardware specifications that you want AWS to provide recommendations
 // for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/EC2Specification
 type EC2Specification struct {
@@ -595,12 +725,12 @@ func (s EC2Specification) GoString() string {
 	return s.String()
 }
 
-// Details about the ES instances that AWS recommends that you purchase.
+// Details about the Amazon ES instances that AWS recommends that you purchase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ESInstanceDetails
 type ESInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Whether the recommendation is for a current generation instance.
+	// Whether the recommendation is for a current-generation instance.
 	CurrentGeneration *bool `type:"boolean"`
 
 	// The class of instance that AWS recommends.
@@ -626,7 +756,8 @@ func (s ESInstanceDetails) GoString() string {
 	return s.String()
 }
 
-// Details about the ElastiCache instances that AWS recommends that you purchase.
+// Details about the Amazon ElastiCache instances that AWS recommends that you
+// purchase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ElastiCacheInstanceDetails
 type ElastiCacheInstanceDetails struct {
 	_ struct{} `type:"structure"`
@@ -722,6 +853,34 @@ func (s Expression) GoString() string {
 	return s.String()
 }
 
+// The forecast created for your query.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ForecastResult
+type ForecastResult struct {
+	_ struct{} `type:"structure"`
+
+	// The mean value of the forecast.
+	MeanValue *string `type:"string"`
+
+	// The lower limit for the prediction interval.
+	PredictionIntervalLowerBound *string `type:"string"`
+
+	// The upper limit for the prediction interval.
+	PredictionIntervalUpperBound *string `type:"string"`
+
+	// The period of time that the forecast covers.
+	TimePeriod *DateInterval `type:"structure"`
+}
+
+// String returns the string representation
+func (s ForecastResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ForecastResult) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostAndUsageRequest
 type GetCostAndUsageInput struct {
 	_ struct{} `type:"structure"`
@@ -734,6 +893,8 @@ type GetCostAndUsageInput struct {
 
 	// Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set,
 	// the response object doesn't include the Granularity, either MONTHLY or DAILY.
+	//
+	// The GetCostAndUsageRequest operation supports only DAILY and MONTHLY granularities.
 	Granularity Granularity `type:"string" enum:"true"`
 
 	// You can group AWS costs using up to two different groups, either dimensions,
@@ -749,14 +910,15 @@ type GetCostAndUsageInput struct {
 	// and unblended rates, see Why does the "blended" annotation appear on some
 	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
-	// Valid values are AmortizedCost, BlendedCost, UnblendedCost, and UsageQuantity.
+	// Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost,
+	// NormalizedUsageAmount, UnblendedCost, and UsageQuantity.
 	//
 	// If you return the UsageQuantity metric, the service aggregates all usage
 	// numbers without taking into account the units. For example, if you aggregate
-	// usageQuantity across all of EC2, the results aren't meaningful because EC2
-	// compute hours and data transfer are measured in different units (for example,
-	// hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType
-	// or UsageTypeGroups.
+	// usageQuantity across all of Amazon EC2, the results aren't meaningful because
+	// Amazon EC2 compute hours and data transfer are measured in different units
+	// (for example, hours vs. GB). To get more meaningful UsageQuantity metrics,
+	// filter by UsageType or UsageTypeGroups.
 	//
 	// Metrics is required for GetCostAndUsage requests.
 	Metrics []string `type:"list"`
@@ -832,6 +994,121 @@ func (s GetCostAndUsageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostForecastRequest
+type GetCostForecastInput struct {
+	_ struct{} `type:"structure"`
+
+	// The filters that you want to use to filter your forecast. Cost Explorer API
+	// supports all of the Cost Explorer filters.
+	Filter *Expression `type:"structure"`
+
+	// How granular you want the forecast to be. You can get 3 months of DAILY forecasts
+	// or 12 months of MONTHLY forecasts.
+	//
+	// The GetCostForecast operation supports only DAILY and MONTHLY granularities.
+	//
+	// Granularity is a required field
+	Granularity Granularity `type:"string" required:"true" enum:"true"`
+
+	// Which metric Cost Explorer uses to create your forecast. For more information
+	// about blended and unblended rates, see Why does the "blended" annotation
+	// appear on some line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
+	//
+	// Valid values for a GetCostForecast call are the following:
+	//
+	//    * AmortizedCost
+	//
+	//    * BlendedCost
+	//
+	//    * NetAmortizedCost
+	//
+	//    * NetUnblendedCost
+	//
+	//    * UnblendedCost
+	//
+	// Metric is a required field
+	Metric Metric `type:"string" required:"true" enum:"true"`
+
+	// Cost Explorer always returns the mean forecast as a single point. You can
+	// request a prediction interval around the mean by specifying a confidence
+	// level. The higher the confidence level, the more confident Cost Explorer
+	// is about the actual value falling in the prediction interval. Higher confidence
+	// levels result in wider prediction intervals.
+	PredictionIntervalLevel *int64 `min:"51" type:"integer"`
+
+	// The period of time that you want the forecast to cover.
+	//
+	// TimePeriod is a required field
+	TimePeriod *DateInterval `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetCostForecastInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCostForecastInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetCostForecastInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetCostForecastInput"}
+	if len(s.Granularity) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Granularity"))
+	}
+	if len(s.Metric) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Metric"))
+	}
+	if s.PredictionIntervalLevel != nil && *s.PredictionIntervalLevel < 51 {
+		invalidParams.Add(aws.NewErrParamMinValue("PredictionIntervalLevel", 51))
+	}
+
+	if s.TimePeriod == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
+	}
+	if s.TimePeriod != nil {
+		if err := s.TimePeriod.Validate(); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetCostForecastResponse
+type GetCostForecastOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The forecasts for your query, in order. For DAILY forecasts, this is a list
+	// of days. For MONTHLY forecasts, this is a list of months.
+	ForecastResultsByTime []ForecastResult `type:"list"`
+
+	// How much you are forecasted to spend over the forecast period, in USD.
+	Total *MetricValue `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetCostForecastOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCostForecastOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCostForecastOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetDimensionValuesRequest
 type GetDimensionValuesInput struct {
 	_ struct{} `type:"structure"`
@@ -839,7 +1116,7 @@ type GetDimensionValuesInput struct {
 	// The context for the call to GetDimensionValues. This can be RESERVATIONS
 	// or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is
 	// set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization
-	// operation. If the context is set to COST_AND_USAGE the resulting dimension
+	// operation. If the context is set to COST_AND_USAGE, the resulting dimension
 	// values can be used in the GetCostAndUsage operation.
 	//
 	// If you set the context to COST_AND_USAGE, you can use the following dimensions
@@ -850,7 +1127,7 @@ type GetDimensionValuesInput struct {
 	//    * DATABASE_ENGINE - The Amazon Relational Database Service database. Examples
 	//    are Aurora or MySQL.
 	//
-	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.
 	//
 	//    * LEGAL_ENTITY_NAME - The name of the organization that sells you AWS
 	//    services, such as Amazon Web Services.
@@ -863,7 +1140,8 @@ type GetDimensionValuesInput struct {
 	//
 	//    * OPERATION - The action performed. Examples include RunInstance and CreateBucket.
 	//
-	//    * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+	//    * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+	//    Linux.
 	//
 	//    * PURCHASE_TYPE - The reservation type of the purchase to which this usage
 	//    is related. Examples include On-Demand Instances and Standard Reserved
@@ -876,8 +1154,8 @@ type GetDimensionValuesInput struct {
 	//    Examples include GB and Hrs.
 	//
 	//    * USAGE_TYPE_GROUP - The grouping of common usage types. An example is
-	//    EC2: CloudWatch – Alarms. The response for this operation includes a unit
-	//    attribute.
+	//    Amazon EC2: CloudWatch – Alarms. The response for this operation includes
+	//    a unit attribute.
 	//
 	//    * RECORD_TYPE - The different types of charges such as RI fees, usage
 	//    costs, tax refunds, and credits.
@@ -893,13 +1171,14 @@ type GetDimensionValuesInput struct {
 	//    * DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service
 	//    deployments. Valid values are SingleAZ and MultiAZ.
 	//
-	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.
 	//
 	//    * LINKED_ACCOUNT - The description in the attribute map that includes
 	//    the full name of the member account. The value field contains the AWS
 	//    ID of the member account.
 	//
-	//    * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+	//    * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+	//    Linux.
 	//
 	//    * REGION - The AWS Region.
 	//
@@ -912,7 +1191,7 @@ type GetDimensionValuesInput struct {
 	//    * TENANCY - The tenancy of a resource. Examples are shared or dedicated.
 	Context Context `type:"string" enum:"true"`
 
-	// The name of the dimension. Each Dimension is available for different a Context.
+	// The name of the dimension. Each Dimension is available for a different Context.
 	// For more information, see Context.
 	//
 	// Dimension is a required field
@@ -974,7 +1253,7 @@ type GetDimensionValuesOutput struct {
 	responseMetadata aws.Response
 
 	// The filters that you used to filter your request. Some dimensions are available
-	// only for a specific context:
+	// only for a specific context.
 	//
 	// If you set the context to COST_AND_USAGE, you can use the following dimensions
 	// for searching:
@@ -984,7 +1263,7 @@ type GetDimensionValuesOutput struct {
 	//    * DATABASE_ENGINE - The Amazon Relational Database Service database. Examples
 	//    are Aurora or MySQL.
 	//
-	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.
 	//
 	//    * LEGAL_ENTITY_NAME - The name of the organization that sells you AWS
 	//    services, such as Amazon Web Services.
@@ -997,7 +1276,8 @@ type GetDimensionValuesOutput struct {
 	//
 	//    * OPERATION - The action performed. Examples include RunInstance and CreateBucket.
 	//
-	//    * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+	//    * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+	//    Linux.
 	//
 	//    * PURCHASE_TYPE - The reservation type of the purchase to which this usage
 	//    is related. Examples include On-Demand Instances and Standard Reserved
@@ -1010,8 +1290,8 @@ type GetDimensionValuesOutput struct {
 	//    Examples include GB and Hrs.
 	//
 	//    * USAGE_TYPE_GROUP - The grouping of common usage types. An example is
-	//    EC2: CloudWatch – Alarms. The response for this operation includes a unit
-	//    attribute.
+	//    Amazon EC2: CloudWatch – Alarms. The response for this operation includes
+	//    a unit attribute.
 	//
 	//    * RECORD_TYPE - The different types of charges such as RI fees, usage
 	//    costs, tax refunds, and credits.
@@ -1027,13 +1307,14 @@ type GetDimensionValuesOutput struct {
 	//    * DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service
 	//    deployments. Valid values are SingleAZ and MultiAZ.
 	//
-	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.
 	//
 	//    * LINKED_ACCOUNT - The description in the attribute map that includes
 	//    the full name of the member account. The value field contains the AWS
 	//    ID of the member account.
 	//
-	//    * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
+	//    * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
+	//    Linux.
 	//
 	//    * REGION - The AWS Region.
 	//
@@ -1080,7 +1361,7 @@ func (s GetDimensionValuesOutput) SDKResponseMetadata() aws.Response {
 }
 
 // You can use the following request parameters to query for how much of your
-// instance usage is covered by a reservation.
+// instance usage a reservation covered.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverageRequest
 type GetReservationCoverageInput struct {
 	_ struct{} `type:"structure"`
@@ -1124,6 +1405,8 @@ type GetReservationCoverageInput struct {
 	//
 	// If GroupBy is set, Granularity can't be set. If Granularity isn't set, the
 	// response object doesn't include Granularity, either MONTHLY or DAILY.
+	//
+	// The GetReservationCoverage operation supports only DAILY and MONTHLY granularities.
 	Granularity Granularity `type:"string" enum:"true"`
 
 	// You can group the data by the following attributes:
@@ -1151,13 +1434,15 @@ type GetReservationCoverageInput struct {
 	//    * TENANCY
 	GroupBy []GroupDefinition `type:"list"`
 
+	Metrics []string `type:"list"`
+
 	// The token to retrieve the next set of results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page
 	// size.
 	NextPageToken *string `type:"string"`
 
-	// The start and end dates of the period for which you want to retrieve data
-	// about reservation coverage. You can retrieve data for a maximum of 13 months:
+	// The start and end dates of the period that you want to retrieve data about
+	// reservation coverage for. You can retrieve data for a maximum of 13 months:
 	// the last 12 months and the current month. The start date is inclusive, but
 	// the end date is exclusive. For example, if start is 2017-01-01 and end is
 	// 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up
@@ -1212,7 +1497,7 @@ type GetReservationCoverageOutput struct {
 	// page size.
 	NextPageToken *string `type:"string"`
 
-	// The total amount of instance usage that is covered by a reservation.
+	// The total amount of instance usage that a reservation covered.
 	Total *Coverage `type:"structure"`
 }
 
@@ -1267,7 +1552,7 @@ type GetReservationPurchaseRecommendationInput struct {
 	Service *string `type:"string" required:"true"`
 
 	// The hardware specifications for the service instances that you want recommendations
-	// for, such as standard or convertible EC2 instances.
+	// for, such as standard or convertible Amazon EC2 instances.
 	ServiceSpecification *ServiceSpecification `type:"structure"`
 
 	// The reservation term that you want recommendations for.
@@ -1370,6 +1655,8 @@ type GetReservationUtilizationInput struct {
 	// response object doesn't include Granularity, either MONTHLY or DAILY. If
 	// both GroupBy and Granularity aren't set, GetReservationUtilization defaults
 	// to DAILY.
+	//
+	// The GetReservationUtilization operation supports only DAILY and MONTHLY granularities.
 	Granularity Granularity `type:"string" enum:"true"`
 
 	// Groups only by SUBSCRIPTION_ID. Metadata is included.
@@ -1380,11 +1667,10 @@ type GetReservationUtilizationInput struct {
 	// size.
 	NextPageToken *string `type:"string"`
 
-	// Sets the start and end dates for retrieving Reserved Instance (RI) utilization.
-	// The start date is inclusive, but the end date is exclusive. For example,
-	// if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data
-	// is retrieved from 2017-01-01 up to and including 2017-04-30 but not including
-	// 2017-05-01.
+	// Sets the start and end dates for retrieving RI utilization. The start date
+	// is inclusive, but the end date is exclusive. For example, if start is 2017-01-01
+	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
+	// up to and including 2017-04-30 but not including 2017-05-01.
 	//
 	// TimePeriod is a required field
 	TimePeriod *DateInterval `type:"structure" required:"true"`
@@ -1430,10 +1716,10 @@ type GetReservationUtilizationOutput struct {
 	// page size.
 	NextPageToken *string `type:"string"`
 
-	// The total amount of time that you utilized your RIs.
+	// The total amount of time that you used your RIs.
 	Total *ReservationAggregates `type:"structure"`
 
-	// The amount of time that you utilized your RIs.
+	// The amount of time that you used your RIs.
 	//
 	// UtilizationsByTime is a required field
 	UtilizationsByTime []UtilizationByTime `type:"list" required:"true"`
@@ -1549,7 +1835,7 @@ func (s GetTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// One level of grouped data within the results.
+// One level of grouped data in the results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Group
 type Group struct {
 	_ struct{} `type:"structure"`
@@ -1571,7 +1857,7 @@ func (s Group) GoString() string {
 	return s.String()
 }
 
-// Represents a group when you specify a group by criteria, or in the response
+// Represents a group when you specify a group by criteria or in the response
 // to a query with a specific grouping.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GroupDefinition
 type GroupDefinition struct {
@@ -1599,7 +1885,7 @@ func (s GroupDefinition) GoString() string {
 type InstanceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// The EC2 instances that AWS recommends that you purchase.
+	// The Amazon EC2 instances that AWS recommends that you purchase.
 	EC2InstanceDetails *EC2InstanceDetails `type:"structure"`
 
 	// The Amazon ES instances that AWS recommends that you purchase.
@@ -1608,7 +1894,7 @@ type InstanceDetails struct {
 	// The ElastiCache instances that AWS recommends that you purchase.
 	ElastiCacheInstanceDetails *ElastiCacheInstanceDetails `type:"structure"`
 
-	// The RDS instances that AWS recommends that you purchase.
+	// The Amazon RDS instances that AWS recommends that you purchase.
 	RDSInstanceDetails *RDSInstanceDetails `type:"structure"`
 
 	// The Amazon Redshift instances that AWS recommends that you purchase.
@@ -1647,12 +1933,12 @@ func (s MetricValue) GoString() string {
 	return s.String()
 }
 
-// Details about the RDS instances that AWS recommends that you purchase.
+// Details about the Amazon RDS instances that AWS recommends that you purchase.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RDSInstanceDetails
 type RDSInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Whether the recommendation is for a current generation instance.
+	// Whether the recommendation is for a current-generation instance.
 	CurrentGeneration *bool `type:"boolean"`
 
 	// The database edition that the recommended reservation supports.
@@ -1697,7 +1983,7 @@ func (s RDSInstanceDetails) GoString() string {
 type RedshiftInstanceDetails struct {
 	_ struct{} `type:"structure"`
 
-	// Whether the recommendation is for a current generation instance.
+	// Whether the recommendation is for a current-generation instance.
 	CurrentGeneration *bool `type:"boolean"`
 
 	// The instance family of the recommended reservation.
@@ -1723,41 +2009,61 @@ func (s RedshiftInstanceDetails) GoString() string {
 	return s.String()
 }
 
-// The aggregated numbers for your Reserved Instance (RI) usage.
+// The aggregated numbers for your reservation usage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationAggregates
 type ReservationAggregates struct {
 	_ struct{} `type:"structure"`
 
-	// The monthly cost of your RI, amortized over the RI period.
+	// The monthly cost of your reservation, amortized over the reservation period.
 	AmortizedRecurringFee *string `type:"string"`
 
-	// The upfront cost of your RI, amortized over the RI period.
+	// The upfront cost of your reservation, amortized over the reservation period.
 	AmortizedUpfrontFee *string `type:"string"`
 
-	// How much you saved due to purchasing and utilizing RIs. AWS calculates this
-	// by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
+	// How much you saved due to purchasing and utilizing reservation. AWS calculates
+	// this by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
 	NetRISavings *string `type:"string"`
 
-	// How much your RIs would cost if charged On-Demand rates.
+	// How much your reservation would cost if charged On-Demand rates.
 	OnDemandCostOfRIHoursUsed *string `type:"string"`
 
-	// How many RI hours that you purchased.
+	// How many reservation hours that you purchased.
 	PurchasedHours *string `type:"string"`
 
-	// The total number of RI hours that you used.
+	// How many Amazon EC2 reservation hours that you purchased, converted to normalized
+	// units. Normalized units are available only for Amazon EC2 usage after November
+	// 11, 2017.
+	PurchasedUnits *string `type:"string"`
+
+	// The total number of reservation hours that you used.
 	TotalActualHours *string `type:"string"`
 
-	// The total cost of your RI, amortized over the RI period.
+	// The total number of Amazon EC2 reservation hours that you used, converted
+	// to normalized units. Normalized units are available only for Amazon EC2 usage
+	// after November 11, 2017.
+	TotalActualUnits *string `type:"string"`
+
+	// The total cost of your reservation, amortized over the reservation period.
 	TotalAmortizedFee *string `type:"string"`
 
 	// How much you could save if you use your entire reservation.
 	TotalPotentialRISavings *string `type:"string"`
 
-	// The number of RI hours that you didn't use.
+	// The number of reservation hours that you didn't use.
 	UnusedHours *string `type:"string"`
 
-	// The percentage of RI time that you used.
+	// The number of Amazon EC2 reservation hours that you didn't use, converted
+	// to normalized units. Normalized units are available only for Amazon EC2 usage
+	// after November 11, 2017.
+	UnusedUnits *string `type:"string"`
+
+	// The percentage of reservation time that you used.
 	UtilizationPercentage *string `type:"string"`
+
+	// The percentage of Amazon EC2 reservation time that you used, converted to
+	// normalized units. Normalized units are available only for Amazon EC2 usage
+	// after November 11, 2017.
+	UtilizationPercentageInUnits *string `type:"string"`
 }
 
 // String returns the string representation
@@ -1836,6 +2142,8 @@ func (s ReservationPurchaseRecommendation) GoString() string {
 type ReservationPurchaseRecommendationDetail struct {
 	_ struct{} `type:"structure"`
 
+	AccountId *string `type:"string"`
+
 	// The average number of normalized units that you used in an hour during the
 	// historical period. AWS uses this to calculate your recommended reservation
 	// purchases.
@@ -1883,8 +2191,9 @@ type ReservationPurchaseRecommendationDetail struct {
 	// period. AWS uses this to calculate your recommended reservation purchases.
 	MaximumNumberOfInstancesUsedPerHour *string `type:"string"`
 
-	// The minimum number of hours that you used in an hour during the historical
-	// period. AWS uses this to calculate your recommended reservation purchases.
+	// The minimum number of normalized units that you used in an hour during the
+	// historical period. AWS uses this to calculate your recommended reservation
+	// purchases.
 	MinimumNormalizedUnitsUsedPerHour *string `type:"string"`
 
 	// The minimum number of instances that you used in an hour during the historical
@@ -1966,21 +2275,21 @@ func (s ReservationPurchaseRecommendationSummary) GoString() string {
 	return s.String()
 }
 
-// A group of Reserved Instances (RIs) that share a set of attributes.
+// A group of reservations that share a set of attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationUtilizationGroup
 type ReservationUtilizationGroup struct {
 	_ struct{} `type:"structure"`
 
-	// The attributes for this group of RIs.
+	// The attributes for this group of reservations.
 	Attributes map[string]string `type:"map"`
 
-	// The key for a specific RI attribute.
+	// The key for a specific reservation attribute.
 	Key *string `type:"string"`
 
-	// How much you used this group of RIs.
+	// How much you used this group of reservations.
 	Utilization *ReservationAggregates `type:"structure"`
 
-	// The value of a specific RI attribute.
+	// The value of a specific reservation attribute.
 	Value *string `type:"string"`
 }
 
@@ -1999,13 +2308,13 @@ func (s ReservationUtilizationGroup) GoString() string {
 type ResultByTime struct {
 	_ struct{} `type:"structure"`
 
-	// Whether this result is estimated.
+	// Whether the result is estimated.
 	Estimated *bool `type:"boolean"`
 
-	// The groups that are included in this time period.
+	// The groups that this time period includes.
 	Groups []Group `type:"list"`
 
-	// The time period covered by a result.
+	// The time period that the result covers.
 	TimePeriod *DateInterval `type:"structure"`
 
 	// The total amount of cost or usage accrued during the time period.
@@ -2027,7 +2336,7 @@ func (s ResultByTime) GoString() string {
 type ServiceSpecification struct {
 	_ struct{} `type:"structure"`
 
-	// The EC2 hardware specifications that you want AWS to provide recommendations
+	// The Amazon EC2 hardware specifications that you want AWS to provide recommendations
 	// for.
 	EC2Specification *EC2Specification `type:"structure"`
 }
@@ -2047,10 +2356,10 @@ func (s ServiceSpecification) GoString() string {
 type TagValues struct {
 	_ struct{} `type:"structure"`
 
-	// The key for a tag.
+	// The key for the tag.
 	Key *string `type:"string"`
 
-	// The specific value of a tag.
+	// The specific value of the tag.
 	Values []string `type:"list"`
 }
 
@@ -2069,13 +2378,13 @@ func (s TagValues) GoString() string {
 type UtilizationByTime struct {
 	_ struct{} `type:"structure"`
 
-	// The groups that are included in this utilization result.
+	// The groups that this utilization result uses.
 	Groups []ReservationUtilizationGroup `type:"list"`
 
-	// The period of time over which this utilization was used.
+	// The period of time that this utilization was used for.
 	TimePeriod *DateInterval `type:"structure"`
 
-	// The total number of RI hours that were used.
+	// The total number of reservation hours that were used.
 	Total *ReservationAggregates `type:"structure"`
 }
 
@@ -2147,6 +2456,8 @@ const (
 	DimensionDatabaseEngine     Dimension = "DATABASE_ENGINE"
 	DimensionCacheEngine        Dimension = "CACHE_ENGINE"
 	DimensionInstanceTypeFamily Dimension = "INSTANCE_TYPE_FAMILY"
+	DimensionBillingEntity      Dimension = "BILLING_ENTITY"
+	DimensionReservationId      Dimension = "RESERVATION_ID"
 )
 
 func (enum Dimension) MarshalValue() (string, error) {
@@ -2164,6 +2475,7 @@ type Granularity string
 const (
 	GranularityDaily   Granularity = "DAILY"
 	GranularityMonthly Granularity = "MONTHLY"
+	GranularityHourly  Granularity = "HOURLY"
 )
 
 func (enum Granularity) MarshalValue() (string, error) {
@@ -2206,6 +2518,28 @@ func (enum LookbackPeriodInDays) MarshalValue() (string, error) {
 }
 
 func (enum LookbackPeriodInDays) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Metric string
+
+// Enum values for Metric
+const (
+	MetricBlendedCost           Metric = "BLENDED_COST"
+	MetricUnblendedCost         Metric = "UNBLENDED_COST"
+	MetricAmortizedCost         Metric = "AMORTIZED_COST"
+	MetricNetUnblendedCost      Metric = "NET_UNBLENDED_COST"
+	MetricNetAmortizedCost      Metric = "NET_AMORTIZED_COST"
+	MetricUsageQuantity         Metric = "USAGE_QUANTITY"
+	MetricNormalizedUsageAmount Metric = "NORMALIZED_USAGE_AMOUNT"
+)
+
+func (enum Metric) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Metric) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

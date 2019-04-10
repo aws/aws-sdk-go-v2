@@ -3,6 +3,7 @@
 package elasticbeanstalk
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AbortEnvironmentUpdateRequest struct {
 }
 
 // Send marshals and sends the AbortEnvironmentUpdate API request.
-func (r AbortEnvironmentUpdateRequest) Send() (*AbortEnvironmentUpdateOutput, error) {
+func (r AbortEnvironmentUpdateRequest) Send(ctx context.Context) (*AbortEnvironmentUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +41,7 @@ func (r AbortEnvironmentUpdateRequest) Send() (*AbortEnvironmentUpdateOutput, er
 //
 //    // Example sending a request using the AbortEnvironmentUpdateRequest method.
 //    req := client.AbortEnvironmentUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -75,7 +77,8 @@ type ApplyEnvironmentManagedActionRequest struct {
 }
 
 // Send marshals and sends the ApplyEnvironmentManagedAction API request.
-func (r ApplyEnvironmentManagedActionRequest) Send() (*ApplyEnvironmentManagedActionOutput, error) {
+func (r ApplyEnvironmentManagedActionRequest) Send(ctx context.Context) (*ApplyEnvironmentManagedActionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +96,7 @@ func (r ApplyEnvironmentManagedActionRequest) Send() (*ApplyEnvironmentManagedAc
 //
 //    // Example sending a request using the ApplyEnvironmentManagedActionRequest method.
 //    req := client.ApplyEnvironmentManagedActionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -127,7 +130,8 @@ type CheckDNSAvailabilityRequest struct {
 }
 
 // Send marshals and sends the CheckDNSAvailability API request.
-func (r CheckDNSAvailabilityRequest) Send() (*CheckDNSAvailabilityOutput, error) {
+func (r CheckDNSAvailabilityRequest) Send(ctx context.Context) (*CheckDNSAvailabilityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r CheckDNSAvailabilityRequest) Send() (*CheckDNSAvailabilityOutput, error)
 //
 //    // Example sending a request using the CheckDNSAvailabilityRequest method.
 //    req := client.CheckDNSAvailabilityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type ComposeEnvironmentsRequest struct {
 }
 
 // Send marshals and sends the ComposeEnvironments API request.
-func (r ComposeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+func (r ComposeEnvironmentsRequest) Send(ctx context.Context) (*DescribeEnvironmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -199,7 +204,7 @@ func (r ComposeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) 
 //
 //    // Example sending a request using the ComposeEnvironmentsRequest method.
 //    req := client.ComposeEnvironmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -233,7 +238,8 @@ type CreateApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateApplication API request.
-func (r CreateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r CreateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,7 +256,7 @@ func (r CreateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 //
 //    // Example sending a request using the CreateApplicationRequest method.
 //    req := client.CreateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -284,7 +290,8 @@ type CreateApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
-func (r CreateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+func (r CreateApplicationVersionRequest) Send(ctx context.Context) (*UpdateApplicationVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -316,7 +323,7 @@ func (r CreateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput
 //
 //    // Example sending a request using the CreateApplicationVersionRequest method.
 //    req := client.CreateApplicationVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -350,7 +357,8 @@ type CreateConfigurationTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationTemplate API request.
-func (r CreateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+func (r CreateConfigurationTemplateRequest) Send(ctx context.Context) (*UpdateConfigurationTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,7 +387,7 @@ func (r CreateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplate
 //
 //    // Example sending a request using the CreateConfigurationTemplateRequest method.
 //    req := client.CreateConfigurationTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -413,7 +421,8 @@ type CreateEnvironmentRequest struct {
 }
 
 // Send marshals and sends the CreateEnvironment API request.
-func (r CreateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+func (r CreateEnvironmentRequest) Send(ctx context.Context) (*UpdateEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -430,7 +439,7 @@ func (r CreateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
 //
 //    // Example sending a request using the CreateEnvironmentRequest method.
 //    req := client.CreateEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -464,7 +473,8 @@ type CreatePlatformVersionRequest struct {
 }
 
 // Send marshals and sends the CreatePlatformVersion API request.
-func (r CreatePlatformVersionRequest) Send() (*CreatePlatformVersionOutput, error) {
+func (r CreatePlatformVersionRequest) Send(ctx context.Context) (*CreatePlatformVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -480,7 +490,7 @@ func (r CreatePlatformVersionRequest) Send() (*CreatePlatformVersionOutput, erro
 //
 //    // Example sending a request using the CreatePlatformVersionRequest method.
 //    req := client.CreatePlatformVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -514,7 +524,8 @@ type CreateStorageLocationRequest struct {
 }
 
 // Send marshals and sends the CreateStorageLocation API request.
-func (r CreateStorageLocationRequest) Send() (*CreateStorageLocationOutput, error) {
+func (r CreateStorageLocationRequest) Send(ctx context.Context) (*CreateStorageLocationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -534,7 +545,7 @@ func (r CreateStorageLocationRequest) Send() (*CreateStorageLocationOutput, erro
 //
 //    // Example sending a request using the CreateStorageLocationRequest method.
 //    req := client.CreateStorageLocationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -568,7 +579,8 @@ type DeleteApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplication API request.
-func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+func (r DeleteApplicationRequest) Send(ctx context.Context) (*DeleteApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -588,7 +600,7 @@ func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
 //    req := client.DeleteApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -624,7 +636,8 @@ type DeleteApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteApplicationVersion API request.
-func (r DeleteApplicationVersionRequest) Send() (*DeleteApplicationVersionOutput, error) {
+func (r DeleteApplicationVersionRequest) Send(ctx context.Context) (*DeleteApplicationVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -643,7 +656,7 @@ func (r DeleteApplicationVersionRequest) Send() (*DeleteApplicationVersionOutput
 //
 //    // Example sending a request using the DeleteApplicationVersionRequest method.
 //    req := client.DeleteApplicationVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -679,7 +692,8 @@ type DeleteConfigurationTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationTemplate API request.
-func (r DeleteConfigurationTemplateRequest) Send() (*DeleteConfigurationTemplateOutput, error) {
+func (r DeleteConfigurationTemplateRequest) Send(ctx context.Context) (*DeleteConfigurationTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -699,7 +713,7 @@ func (r DeleteConfigurationTemplateRequest) Send() (*DeleteConfigurationTemplate
 //
 //    // Example sending a request using the DeleteConfigurationTemplateRequest method.
 //    req := client.DeleteConfigurationTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -735,7 +749,8 @@ type DeleteEnvironmentConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteEnvironmentConfiguration API request.
-func (r DeleteEnvironmentConfigurationRequest) Send() (*DeleteEnvironmentConfigurationOutput, error) {
+func (r DeleteEnvironmentConfigurationRequest) Send(ctx context.Context) (*DeleteEnvironmentConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +773,7 @@ func (r DeleteEnvironmentConfigurationRequest) Send() (*DeleteEnvironmentConfigu
 //
 //    // Example sending a request using the DeleteEnvironmentConfigurationRequest method.
 //    req := client.DeleteEnvironmentConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -794,7 +809,8 @@ type DeletePlatformVersionRequest struct {
 }
 
 // Send marshals and sends the DeletePlatformVersion API request.
-func (r DeletePlatformVersionRequest) Send() (*DeletePlatformVersionOutput, error) {
+func (r DeletePlatformVersionRequest) Send(ctx context.Context) (*DeletePlatformVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +826,7 @@ func (r DeletePlatformVersionRequest) Send() (*DeletePlatformVersionOutput, erro
 //
 //    // Example sending a request using the DeletePlatformVersionRequest method.
 //    req := client.DeletePlatformVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -844,7 +860,8 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAccountAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -863,7 +880,7 @@ func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutp
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
 //    req := client.DescribeAccountAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -897,7 +914,8 @@ type DescribeApplicationVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeApplicationVersions API request.
-func (r DescribeApplicationVersionsRequest) Send() (*DescribeApplicationVersionsOutput, error) {
+func (r DescribeApplicationVersionsRequest) Send(ctx context.Context) (*DescribeApplicationVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -913,7 +931,7 @@ func (r DescribeApplicationVersionsRequest) Send() (*DescribeApplicationVersions
 //
 //    // Example sending a request using the DescribeApplicationVersionsRequest method.
 //    req := client.DescribeApplicationVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -947,7 +965,8 @@ type DescribeApplicationsRequest struct {
 }
 
 // Send marshals and sends the DescribeApplications API request.
-func (r DescribeApplicationsRequest) Send() (*DescribeApplicationsOutput, error) {
+func (r DescribeApplicationsRequest) Send(ctx context.Context) (*DescribeApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -963,7 +982,7 @@ func (r DescribeApplicationsRequest) Send() (*DescribeApplicationsOutput, error)
 //
 //    // Example sending a request using the DescribeApplicationsRequest method.
 //    req := client.DescribeApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -997,7 +1016,8 @@ type DescribeConfigurationOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationOptions API request.
-func (r DescribeConfigurationOptionsRequest) Send() (*DescribeConfigurationOptionsOutput, error) {
+func (r DescribeConfigurationOptionsRequest) Send(ctx context.Context) (*DescribeConfigurationOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1017,7 +1037,7 @@ func (r DescribeConfigurationOptionsRequest) Send() (*DescribeConfigurationOptio
 //
 //    // Example sending a request using the DescribeConfigurationOptionsRequest method.
 //    req := client.DescribeConfigurationOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1051,7 +1071,8 @@ type DescribeConfigurationSettingsRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationSettings API request.
-func (r DescribeConfigurationSettingsRequest) Send() (*DescribeConfigurationSettingsOutput, error) {
+func (r DescribeConfigurationSettingsRequest) Send(ctx context.Context) (*DescribeConfigurationSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1079,7 +1100,7 @@ func (r DescribeConfigurationSettingsRequest) Send() (*DescribeConfigurationSett
 //
 //    // Example sending a request using the DescribeConfigurationSettingsRequest method.
 //    req := client.DescribeConfigurationSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1113,7 +1134,8 @@ type DescribeEnvironmentHealthRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentHealth API request.
-func (r DescribeEnvironmentHealthRequest) Send() (*DescribeEnvironmentHealthOutput, error) {
+func (r DescribeEnvironmentHealthRequest) Send(ctx context.Context) (*DescribeEnvironmentHealthOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1131,7 +1153,7 @@ func (r DescribeEnvironmentHealthRequest) Send() (*DescribeEnvironmentHealthOutp
 //
 //    // Example sending a request using the DescribeEnvironmentHealthRequest method.
 //    req := client.DescribeEnvironmentHealthRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1165,7 +1187,8 @@ type DescribeEnvironmentManagedActionHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActionHistory API request.
-func (r DescribeEnvironmentManagedActionHistoryRequest) Send() (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+func (r DescribeEnvironmentManagedActionHistoryRequest) Send(ctx context.Context) (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1181,7 +1204,7 @@ func (r DescribeEnvironmentManagedActionHistoryRequest) Send() (*DescribeEnviron
 //
 //    // Example sending a request using the DescribeEnvironmentManagedActionHistoryRequest method.
 //    req := client.DescribeEnvironmentManagedActionHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1215,7 +1238,8 @@ type DescribeEnvironmentManagedActionsRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActions API request.
-func (r DescribeEnvironmentManagedActionsRequest) Send() (*DescribeEnvironmentManagedActionsOutput, error) {
+func (r DescribeEnvironmentManagedActionsRequest) Send(ctx context.Context) (*DescribeEnvironmentManagedActionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1231,7 +1255,7 @@ func (r DescribeEnvironmentManagedActionsRequest) Send() (*DescribeEnvironmentMa
 //
 //    // Example sending a request using the DescribeEnvironmentManagedActionsRequest method.
 //    req := client.DescribeEnvironmentManagedActionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1265,7 +1289,8 @@ type DescribeEnvironmentResourcesRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentResources API request.
-func (r DescribeEnvironmentResourcesRequest) Send() (*DescribeEnvironmentResourcesOutput, error) {
+func (r DescribeEnvironmentResourcesRequest) Send(ctx context.Context) (*DescribeEnvironmentResourcesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1281,7 +1306,7 @@ func (r DescribeEnvironmentResourcesRequest) Send() (*DescribeEnvironmentResourc
 //
 //    // Example sending a request using the DescribeEnvironmentResourcesRequest method.
 //    req := client.DescribeEnvironmentResourcesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1315,7 +1340,8 @@ type DescribeEnvironmentsRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironments API request.
-func (r DescribeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+func (r DescribeEnvironmentsRequest) Send(ctx context.Context) (*DescribeEnvironmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1331,7 +1357,7 @@ func (r DescribeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error)
 //
 //    // Example sending a request using the DescribeEnvironmentsRequest method.
 //    req := client.DescribeEnvironmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1365,7 +1391,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1383,7 +1410,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1433,7 +1460,7 @@ func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) Des
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1442,6 +1469,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1469,7 +1497,8 @@ type DescribeInstancesHealthRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancesHealth API request.
-func (r DescribeInstancesHealthRequest) Send() (*DescribeInstancesHealthOutput, error) {
+func (r DescribeInstancesHealthRequest) Send(ctx context.Context) (*DescribeInstancesHealthOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1486,7 +1515,7 @@ func (r DescribeInstancesHealthRequest) Send() (*DescribeInstancesHealthOutput, 
 //
 //    // Example sending a request using the DescribeInstancesHealthRequest method.
 //    req := client.DescribeInstancesHealthRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1520,7 +1549,8 @@ type DescribePlatformVersionRequest struct {
 }
 
 // Send marshals and sends the DescribePlatformVersion API request.
-func (r DescribePlatformVersionRequest) Send() (*DescribePlatformVersionOutput, error) {
+func (r DescribePlatformVersionRequest) Send(ctx context.Context) (*DescribePlatformVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1536,7 +1566,7 @@ func (r DescribePlatformVersionRequest) Send() (*DescribePlatformVersionOutput, 
 //
 //    // Example sending a request using the DescribePlatformVersionRequest method.
 //    req := client.DescribePlatformVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1570,7 +1600,8 @@ type ListAvailableSolutionStacksRequest struct {
 }
 
 // Send marshals and sends the ListAvailableSolutionStacks API request.
-func (r ListAvailableSolutionStacksRequest) Send() (*ListAvailableSolutionStacksOutput, error) {
+func (r ListAvailableSolutionStacksRequest) Send(ctx context.Context) (*ListAvailableSolutionStacksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1587,7 +1618,7 @@ func (r ListAvailableSolutionStacksRequest) Send() (*ListAvailableSolutionStacks
 //
 //    // Example sending a request using the ListAvailableSolutionStacksRequest method.
 //    req := client.ListAvailableSolutionStacksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1621,7 +1652,8 @@ type ListPlatformVersionsRequest struct {
 }
 
 // Send marshals and sends the ListPlatformVersions API request.
-func (r ListPlatformVersionsRequest) Send() (*ListPlatformVersionsOutput, error) {
+func (r ListPlatformVersionsRequest) Send(ctx context.Context) (*ListPlatformVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1637,7 +1669,7 @@ func (r ListPlatformVersionsRequest) Send() (*ListPlatformVersionsOutput, error)
 //
 //    // Example sending a request using the ListPlatformVersionsRequest method.
 //    req := client.ListPlatformVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1671,7 +1703,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1692,7 +1725,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1726,7 +1759,8 @@ type RebuildEnvironmentRequest struct {
 }
 
 // Send marshals and sends the RebuildEnvironment API request.
-func (r RebuildEnvironmentRequest) Send() (*RebuildEnvironmentOutput, error) {
+func (r RebuildEnvironmentRequest) Send(ctx context.Context) (*RebuildEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1743,7 +1777,7 @@ func (r RebuildEnvironmentRequest) Send() (*RebuildEnvironmentOutput, error) {
 //
 //    // Example sending a request using the RebuildEnvironmentRequest method.
 //    req := client.RebuildEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1779,7 +1813,8 @@ type RequestEnvironmentInfoRequest struct {
 }
 
 // Send marshals and sends the RequestEnvironmentInfo API request.
-func (r RequestEnvironmentInfoRequest) Send() (*RequestEnvironmentInfoOutput, error) {
+func (r RequestEnvironmentInfoRequest) Send(ctx context.Context) (*RequestEnvironmentInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1809,7 +1844,7 @@ func (r RequestEnvironmentInfoRequest) Send() (*RequestEnvironmentInfoOutput, er
 //
 //    // Example sending a request using the RequestEnvironmentInfoRequest method.
 //    req := client.RequestEnvironmentInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1845,7 +1880,8 @@ type RestartAppServerRequest struct {
 }
 
 // Send marshals and sends the RestartAppServer API request.
-func (r RestartAppServerRequest) Send() (*RestartAppServerOutput, error) {
+func (r RestartAppServerRequest) Send(ctx context.Context) (*RestartAppServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1862,7 +1898,7 @@ func (r RestartAppServerRequest) Send() (*RestartAppServerOutput, error) {
 //
 //    // Example sending a request using the RestartAppServerRequest method.
 //    req := client.RestartAppServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1898,7 +1934,8 @@ type RetrieveEnvironmentInfoRequest struct {
 }
 
 // Send marshals and sends the RetrieveEnvironmentInfo API request.
-func (r RetrieveEnvironmentInfoRequest) Send() (*RetrieveEnvironmentInfoOutput, error) {
+func (r RetrieveEnvironmentInfoRequest) Send(ctx context.Context) (*RetrieveEnvironmentInfoOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1918,7 +1955,7 @@ func (r RetrieveEnvironmentInfoRequest) Send() (*RetrieveEnvironmentInfoOutput, 
 //
 //    // Example sending a request using the RetrieveEnvironmentInfoRequest method.
 //    req := client.RetrieveEnvironmentInfoRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1952,7 +1989,8 @@ type SwapEnvironmentCNAMEsRequest struct {
 }
 
 // Send marshals and sends the SwapEnvironmentCNAMEs API request.
-func (r SwapEnvironmentCNAMEsRequest) Send() (*SwapEnvironmentCNAMEsOutput, error) {
+func (r SwapEnvironmentCNAMEsRequest) Send(ctx context.Context) (*SwapEnvironmentCNAMEsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1968,7 +2006,7 @@ func (r SwapEnvironmentCNAMEsRequest) Send() (*SwapEnvironmentCNAMEsOutput, erro
 //
 //    // Example sending a request using the SwapEnvironmentCNAMEsRequest method.
 //    req := client.SwapEnvironmentCNAMEsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2004,7 +2042,8 @@ type TerminateEnvironmentRequest struct {
 }
 
 // Send marshals and sends the TerminateEnvironment API request.
-func (r TerminateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+func (r TerminateEnvironmentRequest) Send(ctx context.Context) (*UpdateEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2020,7 +2059,7 @@ func (r TerminateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
 //
 //    // Example sending a request using the TerminateEnvironmentRequest method.
 //    req := client.TerminateEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2054,7 +2093,8 @@ type UpdateApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateApplication API request.
-func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r UpdateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2073,7 +2113,7 @@ func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
 //    req := client.UpdateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2107,7 +2147,8 @@ type UpdateApplicationResourceLifecycleRequest struct {
 }
 
 // Send marshals and sends the UpdateApplicationResourceLifecycle API request.
-func (r UpdateApplicationResourceLifecycleRequest) Send() (*UpdateApplicationResourceLifecycleOutput, error) {
+func (r UpdateApplicationResourceLifecycleRequest) Send(ctx context.Context) (*UpdateApplicationResourceLifecycleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2123,7 +2164,7 @@ func (r UpdateApplicationResourceLifecycleRequest) Send() (*UpdateApplicationRes
 //
 //    // Example sending a request using the UpdateApplicationResourceLifecycleRequest method.
 //    req := client.UpdateApplicationResourceLifecycleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2157,7 +2198,8 @@ type UpdateApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateApplicationVersion API request.
-func (r UpdateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+func (r UpdateApplicationVersionRequest) Send(ctx context.Context) (*UpdateApplicationVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2176,7 +2218,7 @@ func (r UpdateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput
 //
 //    // Example sending a request using the UpdateApplicationVersionRequest method.
 //    req := client.UpdateApplicationVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2210,7 +2252,8 @@ type UpdateConfigurationTemplateRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationTemplate API request.
-func (r UpdateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+func (r UpdateConfigurationTemplateRequest) Send(ctx context.Context) (*UpdateConfigurationTemplateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2234,7 +2277,7 @@ func (r UpdateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplate
 //
 //    // Example sending a request using the UpdateConfigurationTemplateRequest method.
 //    req := client.UpdateConfigurationTemplateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2268,7 +2311,8 @@ type UpdateEnvironmentRequest struct {
 }
 
 // Send marshals and sends the UpdateEnvironment API request.
-func (r UpdateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+func (r UpdateEnvironmentRequest) Send(ctx context.Context) (*UpdateEnvironmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2294,7 +2338,7 @@ func (r UpdateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
 //
 //    // Example sending a request using the UpdateEnvironmentRequest method.
 //    req := client.UpdateEnvironmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2328,7 +2372,8 @@ type UpdateTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the UpdateTagsForResource API request.
-func (r UpdateTagsForResourceRequest) Send() (*UpdateTagsForResourceOutput, error) {
+func (r UpdateTagsForResourceRequest) Send(ctx context.Context) (*UpdateTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2362,7 +2407,7 @@ func (r UpdateTagsForResourceRequest) Send() (*UpdateTagsForResourceOutput, erro
 //
 //    // Example sending a request using the UpdateTagsForResourceRequest method.
 //    req := client.UpdateTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2398,7 +2443,8 @@ type ValidateConfigurationSettingsRequest struct {
 }
 
 // Send marshals and sends the ValidateConfigurationSettings API request.
-func (r ValidateConfigurationSettingsRequest) Send() (*ValidateConfigurationSettingsOutput, error) {
+func (r ValidateConfigurationSettingsRequest) Send(ctx context.Context) (*ValidateConfigurationSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2418,7 +2464,7 @@ func (r ValidateConfigurationSettingsRequest) Send() (*ValidateConfigurationSett
 //
 //    // Example sending a request using the ValidateConfigurationSettingsRequest method.
 //    req := client.ValidateConfigurationSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5162,7 +5208,11 @@ type EnvironmentInfoDescription struct {
 	// The type of information retrieved.
 	InfoType EnvironmentInfoType `type:"string" enum:"true"`
 
-	// The retrieved information.
+	// The retrieved information. Currently contains a presigned Amazon S3 URL.
+	// The files are deleted after 15 minutes.
+	//
+	// Anyone in possession of this URL can access the files before they are deleted.
+	// Make the URL available only to trusted parties.
 	Message *string `type:"string"`
 
 	// The time stamp when this information was retrieved.
@@ -5222,6 +5272,9 @@ type EnvironmentResourceDescription struct {
 	// The Auto Scaling launch configurations in use by this environment.
 	LaunchConfigurations []LaunchConfiguration `type:"list"`
 
+	// The Amazon EC2 launch templates in use by this environment.
+	LaunchTemplates []LaunchTemplate `type:"list"`
+
 	// The LoadBalancers in use by this environment.
 	LoadBalancers []LoadBalancer `type:"list"`
 
@@ -5268,9 +5321,21 @@ type EnvironmentTier struct {
 	_ struct{} `type:"structure"`
 
 	// The name of this environment tier.
+	//
+	// Valid values:
+	//
+	//    * For Web server tier – WebServer
+	//
+	//    * For Worker tier – Worker
 	Name *string `type:"string"`
 
 	// The type of this environment tier.
+	//
+	// Valid values:
+	//
+	//    * For Web server tier – Standard
+	//
+	//    * For Worker tier – SQS/HTTP
 	Type *string `type:"string"`
 
 	// The version of this environment tier. When you don't set a value to it, Elastic
@@ -5465,6 +5530,25 @@ func (s LaunchConfiguration) String() string {
 
 // GoString returns the string representation
 func (s LaunchConfiguration) GoString() string {
+	return s.String()
+}
+
+// Describes an Amazon EC2 launch template.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchTemplate
+type LaunchTemplate struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the launch template.
+	Id *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchTemplate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LaunchTemplate) GoString() string {
 	return s.String()
 }
 
@@ -7507,7 +7591,7 @@ type UpdateEnvironmentOutput struct {
 	//
 	//    * Grey: Default health for a new environment. The environment is not fully
 	//    launched and health checks have not started or health checks are suspended
-	//    during an UpdateEnvironment or RestartEnvironement request.
+	//    during an UpdateEnvironment or RestartEnvironment request.
 	//
 	// Default: Grey
 	Health EnvironmentHealth `type:"string" enum:"true"`

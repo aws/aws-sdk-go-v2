@@ -2,6 +2,7 @@ package route53_test
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -47,7 +48,7 @@ func TestUnmarshalStandardError(t *testing.T) {
 		Name:            aws.String("test_zone"),
 	})
 
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Error("expected error, but received none")
 	}
@@ -98,7 +99,7 @@ but it already exists
 	}
 
 	req := r.ChangeResourceRecordSetsRequest(params)
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Error("expected error, but received none")
 	}

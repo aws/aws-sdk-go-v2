@@ -2,6 +2,7 @@ package jsonrpc_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -102,7 +103,8 @@ type InputService1TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService1TestCaseOperation1 API request.
-func (r InputService1TestCaseOperation1Request) Send() (*InputService1TestShapeInputService1TestCaseOperation1Output, error) {
+func (r InputService1TestCaseOperation1Request) Send(ctx context.Context) (*InputService1TestShapeInputService1TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,7 +118,7 @@ func (r InputService1TestCaseOperation1Request) Send() (*InputService1TestShapeI
 //
 //    // Example sending a request using the InputService1TestCaseOperation1Request method.
 //    req := client.InputService1TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -218,7 +220,8 @@ type InputService2TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService2TestCaseOperation1 API request.
-func (r InputService2TestCaseOperation1Request) Send() (*InputService2TestShapeInputService2TestCaseOperation1Output, error) {
+func (r InputService2TestCaseOperation1Request) Send(ctx context.Context) (*InputService2TestShapeInputService2TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -232,7 +235,7 @@ func (r InputService2TestCaseOperation1Request) Send() (*InputService2TestShapeI
 //
 //    // Example sending a request using the InputService2TestCaseOperation1Request method.
 //    req := client.InputService2TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -334,7 +337,8 @@ type InputService3TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService3TestCaseOperation1 API request.
-func (r InputService3TestCaseOperation1Request) Send() (*InputService3TestShapeInputService3TestCaseOperation1Output, error) {
+func (r InputService3TestCaseOperation1Request) Send(ctx context.Context) (*InputService3TestShapeInputService3TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -348,7 +352,7 @@ func (r InputService3TestCaseOperation1Request) Send() (*InputService3TestShapeI
 //
 //    // Example sending a request using the InputService3TestCaseOperation1Request method.
 //    req := client.InputService3TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -382,7 +386,8 @@ type InputService3TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService3TestCaseOperation2 API request.
-func (r InputService3TestCaseOperation2Request) Send() (*InputService3TestShapeInputService3TestCaseOperation2Output, error) {
+func (r InputService3TestCaseOperation2Request) Send(ctx context.Context) (*InputService3TestShapeInputService3TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -396,7 +401,7 @@ func (r InputService3TestCaseOperation2Request) Send() (*InputService3TestShapeI
 //
 //    // Example sending a request using the InputService3TestCaseOperation2Request method.
 //    req := client.InputService3TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -512,7 +517,8 @@ type InputService4TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService4TestCaseOperation1 API request.
-func (r InputService4TestCaseOperation1Request) Send() (*InputService4TestShapeInputService4TestCaseOperation1Output, error) {
+func (r InputService4TestCaseOperation1Request) Send(ctx context.Context) (*InputService4TestShapeInputService4TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -526,7 +532,7 @@ func (r InputService4TestCaseOperation1Request) Send() (*InputService4TestShapeI
 //
 //    // Example sending a request using the InputService4TestCaseOperation1Request method.
 //    req := client.InputService4TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -628,7 +634,8 @@ type InputService5TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation1 API request.
-func (r InputService5TestCaseOperation1Request) Send() (*InputService5TestShapeInputService5TestCaseOperation1Output, error) {
+func (r InputService5TestCaseOperation1Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -642,7 +649,7 @@ func (r InputService5TestCaseOperation1Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation1Request method.
 //    req := client.InputService5TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -676,7 +683,8 @@ type InputService5TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation2 API request.
-func (r InputService5TestCaseOperation2Request) Send() (*InputService5TestShapeInputService5TestCaseOperation2Output, error) {
+func (r InputService5TestCaseOperation2Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -690,7 +698,7 @@ func (r InputService5TestCaseOperation2Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation2Request method.
 //    req := client.InputService5TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -724,7 +732,8 @@ type InputService5TestCaseOperation3Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation3 API request.
-func (r InputService5TestCaseOperation3Request) Send() (*InputService5TestShapeInputService5TestCaseOperation3Output, error) {
+func (r InputService5TestCaseOperation3Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation3Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -738,7 +747,7 @@ func (r InputService5TestCaseOperation3Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation3Request method.
 //    req := client.InputService5TestCaseOperation3Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -772,7 +781,8 @@ type InputService5TestCaseOperation4Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation4 API request.
-func (r InputService5TestCaseOperation4Request) Send() (*InputService5TestShapeInputService5TestCaseOperation4Output, error) {
+func (r InputService5TestCaseOperation4Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation4Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -786,7 +796,7 @@ func (r InputService5TestCaseOperation4Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation4Request method.
 //    req := client.InputService5TestCaseOperation4Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -820,7 +830,8 @@ type InputService5TestCaseOperation5Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation5 API request.
-func (r InputService5TestCaseOperation5Request) Send() (*InputService5TestShapeInputService5TestCaseOperation5Output, error) {
+func (r InputService5TestCaseOperation5Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation5Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -834,7 +845,7 @@ func (r InputService5TestCaseOperation5Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation5Request method.
 //    req := client.InputService5TestCaseOperation5Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -868,7 +879,8 @@ type InputService5TestCaseOperation6Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation6 API request.
-func (r InputService5TestCaseOperation6Request) Send() (*InputService5TestShapeInputService5TestCaseOperation6Output, error) {
+func (r InputService5TestCaseOperation6Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation6Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -882,7 +894,7 @@ func (r InputService5TestCaseOperation6Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation6Request method.
 //    req := client.InputService5TestCaseOperation6Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1051,7 +1063,8 @@ type InputService6TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService6TestCaseOperation1 API request.
-func (r InputService6TestCaseOperation1Request) Send() (*InputService6TestShapeInputService6TestCaseOperation1Output, error) {
+func (r InputService6TestCaseOperation1Request) Send(ctx context.Context) (*InputService6TestShapeInputService6TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1065,7 +1078,7 @@ func (r InputService6TestCaseOperation1Request) Send() (*InputService6TestShapeI
 //
 //    // Example sending a request using the InputService6TestCaseOperation1Request method.
 //    req := client.InputService6TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1165,7 +1178,8 @@ type InputService7TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService7TestCaseOperation1 API request.
-func (r InputService7TestCaseOperation1Request) Send() (*InputService7TestShapeInputService7TestCaseOperation1Output, error) {
+func (r InputService7TestCaseOperation1Request) Send(ctx context.Context) (*InputService7TestShapeInputService7TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1179,7 +1193,7 @@ func (r InputService7TestCaseOperation1Request) Send() (*InputService7TestShapeI
 //
 //    // Example sending a request using the InputService7TestCaseOperation1Request method.
 //    req := client.InputService7TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1213,7 +1227,8 @@ type InputService7TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService7TestCaseOperation2 API request.
-func (r InputService7TestCaseOperation2Request) Send() (*InputService7TestShapeInputService7TestCaseOperation2Output, error) {
+func (r InputService7TestCaseOperation2Request) Send(ctx context.Context) (*InputService7TestShapeInputService7TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1227,7 +1242,7 @@ func (r InputService7TestCaseOperation2Request) Send() (*InputService7TestShapeI
 //
 //    // Example sending a request using the InputService7TestCaseOperation2Request method.
 //    req := client.InputService7TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1338,7 +1353,8 @@ type InputService8TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService8TestCaseOperation1 API request.
-func (r InputService8TestCaseOperation1Request) Send() (*InputService8TestShapeInputService8TestCaseOperation1Output, error) {
+func (r InputService8TestCaseOperation1Request) Send(ctx context.Context) (*InputService8TestShapeInputService8TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1352,7 +1368,7 @@ func (r InputService8TestCaseOperation1Request) Send() (*InputService8TestShapeI
 //
 //    // Example sending a request using the InputService8TestCaseOperation1Request method.
 //    req := client.InputService8TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1386,7 +1402,8 @@ type InputService8TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService8TestCaseOperation2 API request.
-func (r InputService8TestCaseOperation2Request) Send() (*InputService8TestShapeInputService8TestCaseOperation2Output, error) {
+func (r InputService8TestCaseOperation2Request) Send(ctx context.Context) (*InputService8TestShapeInputService8TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1400,7 +1417,7 @@ func (r InputService8TestCaseOperation2Request) Send() (*InputService8TestShapeI
 //
 //    // Example sending a request using the InputService8TestCaseOperation2Request method.
 //    req := client.InputService8TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1471,6 +1488,217 @@ func (enum InputService8TestShapeEnumType) MarshalValueBuf(b []byte) ([]byte, er
 	return append(b, enum...), nil
 }
 
+// InputService9ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// InputService9ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService9ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the InputService9ProtocolTest client with a config.
+//
+// Example:
+//     // Create a InputService9ProtocolTest client from just a config.
+//     svc := inputservice9protocoltest.New(myConfig)
+func NewInputService9ProtocolTest(config aws.Config) *InputService9ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &InputService9ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "inputservice9protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "",
+				JSONVersion:   "1.1",
+				TargetPrefix:  "com.amazonaws.foo",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a InputService9ProtocolTest operation and runs any
+// custom request initialization.
+func (c *InputService9ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opInputService9TestCaseOperation1 = "StaticOp"
+
+// InputService9TestCaseOperation1Request is a API request type for the InputService9TestCaseOperation1 API operation.
+type InputService9TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService9TestShapeInputService9TestCaseOperation1Input
+	Copy  func(*InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService9TestCaseOperation1 API request.
+func (r InputService9TestCaseOperation1Request) Send(ctx context.Context) (*InputService9TestShapeInputService9TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService9TestShapeInputService9TestCaseOperation1Output), nil
+}
+
+// InputService9TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService9TestCaseOperation1Request method.
+//    req := client.InputService9TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input *InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService9TestCaseOperation1,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService9TestShapeInputService9TestCaseOperation1Input{}
+	}
+
+	output := &InputService9TestShapeInputService9TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return InputService9TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService9TestCaseOperation1Request}
+}
+
+const opInputService9TestCaseOperation2 = "MemberRefOp"
+
+// InputService9TestCaseOperation2Request is a API request type for the InputService9TestCaseOperation2 API operation.
+type InputService9TestCaseOperation2Request struct {
+	*aws.Request
+	Input *InputService9TestShapeInputService9TestCaseOperation2Input
+	Copy  func(*InputService9TestShapeInputService9TestCaseOperation2Input) InputService9TestCaseOperation2Request
+}
+
+// Send marshals and sends the InputService9TestCaseOperation2 API request.
+func (r InputService9TestCaseOperation2Request) Send(ctx context.Context) (*InputService9TestShapeInputService9TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService9TestShapeInputService9TestCaseOperation2Output), nil
+}
+
+// InputService9TestCaseOperation2Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService9TestCaseOperation2Request method.
+//    req := client.InputService9TestCaseOperation2Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService9ProtocolTest) InputService9TestCaseOperation2Request(input *InputService9TestShapeInputService9TestCaseOperation2Input) InputService9TestCaseOperation2Request {
+	op := &aws.Operation{
+		Name:       opInputService9TestCaseOperation2,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService9TestShapeInputService9TestCaseOperation2Input{}
+	}
+
+	output := &InputService9TestShapeInputService9TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("foo-{Name}.", input.hostLabels))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return InputService9TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService9TestCaseOperation2Request}
+}
+
+type InputService9TestShapeInputService9TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+}
+
+type InputService9TestShapeInputService9TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService9TestShapeInputService9TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+type InputService9TestShapeInputService9TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputService9TestShapeInputService9TestCaseOperation2Input) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputService9TestShapeInputService9TestCaseOperation2Input"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+func (s *InputService9TestShapeInputService9TestCaseOperation2Input) hostLabels() map[string]string {
+	return map[string]string{
+		"Name": aws.StringValue(s.Name),
+	}
+}
+
+type InputService9TestShapeInputService9TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService9TestShapeInputService9TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 //
 // Tests begin here
 //
@@ -1488,7 +1716,7 @@ func TestInputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1505,10 +1733,10 @@ func TestInputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1526,7 +1754,7 @@ func TestInputService2ProtocolTestTimestampValuesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1543,10 +1771,10 @@ func TestInputService2ProtocolTestTimestampValuesCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1564,7 +1792,7 @@ func TestInputService3ProtocolTestBase64EncodedBlobsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1581,10 +1809,10 @@ func TestInputService3ProtocolTestBase64EncodedBlobsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1605,7 +1833,7 @@ func TestInputService3ProtocolTestBase64EncodedBlobsCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1622,10 +1850,10 @@ func TestInputService3ProtocolTestBase64EncodedBlobsCase2(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1646,7 +1874,7 @@ func TestInputService4ProtocolTestNestedBlobsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1663,10 +1891,10 @@ func TestInputService4ProtocolTestNestedBlobsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1686,7 +1914,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1703,10 +1931,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1728,7 +1956,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1745,10 +1973,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase2(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1774,7 +2002,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase3(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1791,10 +2019,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase3(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1821,7 +2049,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1838,10 +2066,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase4(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1870,7 +2098,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1887,10 +2115,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase5(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1917,7 +2145,7 @@ func TestInputService5ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1934,10 +2162,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase6(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1955,7 +2183,7 @@ func TestInputService6ProtocolTestEmptyMapsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -1972,10 +2200,10 @@ func TestInputService6ProtocolTestEmptyMapsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1993,7 +2221,7 @@ func TestInputService7ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -2023,7 +2251,7 @@ func TestInputService7ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -2060,7 +2288,7 @@ func TestInputService8ProtocolTestEnumCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -2090,7 +2318,7 @@ func TestInputService8ProtocolTestEnumCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	jsonrpc.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -2099,5 +2327,81 @@ func TestInputService8ProtocolTestEnumCase2(t *testing.T) {
 	awstesting.AssertURL(t, "https://test/", r.URL.String())
 
 	// assert headers
+
+}
+
+func TestInputService9ProtocolTestEndpointHostTraitStaticPrefixCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://service.region.amazonaws.com")
+
+	svc := NewInputService9ProtocolTest(cfg)
+	input := &InputService9TestShapeInputService9TestCaseOperation1Input{
+		Name: aws.String("myname"),
+	}
+
+	req := svc.InputService9TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"Name":"myname"}`, util.Trim(string(body)))
+
+	// assert URL
+	awstesting.AssertURL(t, "https://data-service.region.amazonaws.com/", r.URL.String())
+
+	// assert headers
+	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "com.amazonaws.foo.StaticOp", r.Header.Get("X-Amz-Target"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+}
+
+func TestInputService9ProtocolTestEndpointHostTraitStaticPrefixCase2(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://service.region.amazonaws.com")
+
+	svc := NewInputService9ProtocolTest(cfg)
+	input := &InputService9TestShapeInputService9TestCaseOperation2Input{
+		Name: aws.String("myname"),
+	}
+
+	req := svc.InputService9TestCaseOperation2Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"Name":"myname"}`, util.Trim(string(body)))
+
+	// assert URL
+	awstesting.AssertURL(t, "https://foo-myname.service.region.amazonaws.com/", r.URL.String())
+
+	// assert headers
+	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "com.amazonaws.foo.MemberRefOp", r.Header.Get("X-Amz-Target"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 
 }

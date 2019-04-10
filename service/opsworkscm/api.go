@@ -3,6 +3,7 @@
 package opsworkscm
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type AssociateNodeRequest struct {
 }
 
 // Send marshals and sends the AssociateNode API request.
-func (r AssociateNodeRequest) Send() (*AssociateNodeOutput, error) {
+func (r AssociateNodeRequest) Send(ctx context.Context) (*AssociateNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -55,7 +57,7 @@ func (r AssociateNodeRequest) Send() (*AssociateNodeOutput, error) {
 //
 //    // Example sending a request using the AssociateNodeRequest method.
 //    req := client.AssociateNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -89,7 +91,8 @@ type CreateBackupRequest struct {
 }
 
 // Send marshals and sends the CreateBackup API request.
-func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+func (r CreateBackupRequest) Send(ctx context.Context) (*CreateBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -118,7 +121,7 @@ func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
 //
 //    // Example sending a request using the CreateBackupRequest method.
 //    req := client.CreateBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -152,7 +155,8 @@ type CreateServerRequest struct {
 }
 
 // Send marshals and sends the CreateServer API request.
-func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
+func (r CreateServerRequest) Send(ctx context.Context) (*CreateServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,7 +198,7 @@ func (r CreateServerRequest) Send() (*CreateServerOutput, error) {
 //
 //    // Example sending a request using the CreateServerRequest method.
 //    req := client.CreateServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -228,7 +232,8 @@ type DeleteBackupRequest struct {
 }
 
 // Send marshals and sends the DeleteBackup API request.
-func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+func (r DeleteBackupRequest) Send(ctx context.Context) (*DeleteBackupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +254,7 @@ func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
 //
 //    // Example sending a request using the DeleteBackupRequest method.
 //    req := client.DeleteBackupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -283,7 +288,8 @@ type DeleteServerRequest struct {
 }
 
 // Send marshals and sends the DeleteServer API request.
-func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
+func (r DeleteServerRequest) Send(ctx context.Context) (*DeleteServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -309,7 +315,7 @@ func (r DeleteServerRequest) Send() (*DeleteServerOutput, error) {
 //
 //    // Example sending a request using the DeleteServerRequest method.
 //    req := client.DeleteServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -343,7 +349,8 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAccountAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -362,7 +369,7 @@ func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutp
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
 //    req := client.DescribeAccountAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -396,7 +403,8 @@ type DescribeBackupsRequest struct {
 }
 
 // Send marshals and sends the DescribeBackups API request.
-func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+func (r DescribeBackupsRequest) Send(ctx context.Context) (*DescribeBackupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -418,7 +426,7 @@ func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
 //
 //    // Example sending a request using the DescribeBackupsRequest method.
 //    req := client.DescribeBackupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -452,7 +460,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +483,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -508,7 +517,8 @@ type DescribeNodeAssociationStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeNodeAssociationStatus API request.
-func (r DescribeNodeAssociationStatusRequest) Send() (*DescribeNodeAssociationStatusOutput, error) {
+func (r DescribeNodeAssociationStatusRequest) Send(ctx context.Context) (*DescribeNodeAssociationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -528,7 +538,7 @@ func (r DescribeNodeAssociationStatusRequest) Send() (*DescribeNodeAssociationSt
 //
 //    // Example sending a request using the DescribeNodeAssociationStatusRequest method.
 //    req := client.DescribeNodeAssociationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -562,7 +572,8 @@ type DescribeServersRequest struct {
 }
 
 // Send marshals and sends the DescribeServers API request.
-func (r DescribeServersRequest) Send() (*DescribeServersOutput, error) {
+func (r DescribeServersRequest) Send(ctx context.Context) (*DescribeServersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -585,7 +596,7 @@ func (r DescribeServersRequest) Send() (*DescribeServersOutput, error) {
 //
 //    // Example sending a request using the DescribeServersRequest method.
 //    req := client.DescribeServersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -619,7 +630,8 @@ type DisassociateNodeRequest struct {
 }
 
 // Send marshals and sends the DisassociateNode API request.
-func (r DisassociateNodeRequest) Send() (*DisassociateNodeOutput, error) {
+func (r DisassociateNodeRequest) Send(ctx context.Context) (*DisassociateNodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -643,7 +655,7 @@ func (r DisassociateNodeRequest) Send() (*DisassociateNodeOutput, error) {
 //
 //    // Example sending a request using the DisassociateNodeRequest method.
 //    req := client.DisassociateNodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -677,7 +689,8 @@ type ExportServerEngineAttributeRequest struct {
 }
 
 // Send marshals and sends the ExportServerEngineAttribute API request.
-func (r ExportServerEngineAttributeRequest) Send() (*ExportServerEngineAttributeOutput, error) {
+func (r ExportServerEngineAttributeRequest) Send(ctx context.Context) (*ExportServerEngineAttributeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -702,7 +715,7 @@ func (r ExportServerEngineAttributeRequest) Send() (*ExportServerEngineAttribute
 //
 //    // Example sending a request using the ExportServerEngineAttributeRequest method.
 //    req := client.ExportServerEngineAttributeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -736,7 +749,8 @@ type RestoreServerRequest struct {
 }
 
 // Send marshals and sends the RestoreServer API request.
-func (r RestoreServerRequest) Send() (*RestoreServerOutput, error) {
+func (r RestoreServerRequest) Send(ctx context.Context) (*RestoreServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -762,7 +776,7 @@ func (r RestoreServerRequest) Send() (*RestoreServerOutput, error) {
 //
 //    // Example sending a request using the RestoreServerRequest method.
 //    req := client.RestoreServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -796,7 +810,8 @@ type StartMaintenanceRequest struct {
 }
 
 // Send marshals and sends the StartMaintenance API request.
-func (r StartMaintenanceRequest) Send() (*StartMaintenanceOutput, error) {
+func (r StartMaintenanceRequest) Send(ctx context.Context) (*StartMaintenanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -820,7 +835,7 @@ func (r StartMaintenanceRequest) Send() (*StartMaintenanceOutput, error) {
 //
 //    // Example sending a request using the StartMaintenanceRequest method.
 //    req := client.StartMaintenanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -854,7 +869,8 @@ type UpdateServerRequest struct {
 }
 
 // Send marshals and sends the UpdateServer API request.
-func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
+func (r UpdateServerRequest) Send(ctx context.Context) (*UpdateServerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -872,7 +888,7 @@ func (r UpdateServerRequest) Send() (*UpdateServerOutput, error) {
 //
 //    // Example sending a request using the UpdateServerRequest method.
 //    req := client.UpdateServerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -906,7 +922,8 @@ type UpdateServerEngineAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateServerEngineAttributes API request.
-func (r UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttributesOutput, error) {
+func (r UpdateServerEngineAttributesRequest) Send(ctx context.Context) (*UpdateServerEngineAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -921,8 +938,7 @@ func (r UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttribut
 // Updates engine-specific attributes on a specified server. The server enters
 // the MODIFYING state when this operation is in progress. Only one update can
 // occur at a time. You can use this command to reset a Chef server's private
-// key (CHEF_PIVOTAL_KEY), a Chef server's admin password (CHEF_DELIVERY_ADMIN_PASSWORD),
-// or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).
+// key (CHEF_PIVOTAL_KEY) or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).
 //
 // This operation is asynchronous.
 //
@@ -933,7 +949,7 @@ func (r UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttribut
 //
 //    // Example sending a request using the UpdateServerEngineAttributesRequest method.
 //    req := client.UpdateServerEngineAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2040,27 +2056,35 @@ func (s EngineAttribute) GoString() string {
 type ExportServerEngineAttributeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the export attribute. Currently supported export attribute is
-	// "Userdata" which exports a userdata script filled out with parameters provided
-	// in the InputAttributes list.
+	// The name of the export attribute. Currently, the supported export attribute
+	// is Userdata. This exports a user data script that includes parameters and
+	// values provided in the InputAttributes list.
 	//
 	// ExportAttributeName is a required field
 	ExportAttributeName *string `type:"string" required:"true"`
 
-	// The list of engine attributes. The list type is EngineAttribute. EngineAttribute
-	// is a pair of attribute name and value. For ExportAttributeName "Userdata",
-	// currently supported input attribute names are: - "RunList": For Chef, an
-	// ordered list of roles and/or recipes that are run in the exact order. For
-	// Puppet, this parameter is ignored. - "OrganizationName": For Chef, an organization
-	// name. AWS OpsWorks for Chef Server always creates the organization "default".
-	// For Puppet, this parameter is ignored. - "NodeEnvironment": For Chef, a node
-	// environment (eg. development, staging, onebox). For Puppet, this parameter
-	// is ignored. - "NodeClientVersion": For Chef, version of Chef Engine (3 numbers
-	// separated by dots, eg. "13.8.5"). If empty, it uses the latest one. For Puppet,
-	// this parameter is ignored.
+	// The list of engine attributes. The list type is EngineAttribute. An EngineAttribute
+	// list item is a pair that includes an attribute name and its value. For the
+	// Userdata ExportAttributeName, the following are supported engine attribute
+	// names.
+	//
+	//    * RunList In Chef, a list of roles or recipes that are run in the specified
+	//    order. In Puppet, this parameter is ignored.
+	//
+	//    * OrganizationName In Chef, an organization name. AWS OpsWorks for Chef
+	//    Automate always creates the organization default. In Puppet, this parameter
+	//    is ignored.
+	//
+	//    * NodeEnvironment In Chef, a node environment (for example, development,
+	//    staging, or one-box). In Puppet, this parameter is ignored.
+	//
+	//    * NodeClientVersion In Chef, the version of the Chef engine (three numbers
+	//    separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks
+	//    for Chef Automate uses the most current version. In Puppet, this parameter
+	//    is ignored.
 	InputAttributes []EngineAttribute `type:"list"`
 
-	// The name of the Server to which the attribute is being exported from
+	// The name of the server from which you are exporting the attribute.
 	//
 	// ServerName is a required field
 	ServerName *string `min:"1" type:"string" required:"true"`
@@ -2106,7 +2130,7 @@ type ExportServerEngineAttributeOutput struct {
 	// The requested engine attribute pair with attribute name and value.
 	EngineAttribute *EngineAttribute `type:"structure"`
 
-	// The requested ServerName.
+	// The server name used in the request.
 	ServerName *string `min:"1" type:"string"`
 }
 

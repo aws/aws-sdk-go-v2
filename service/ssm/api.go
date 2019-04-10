@@ -3,6 +3,7 @@
 package ssm
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send(ctx context.Context) (*AddTagsToResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -55,7 +57,7 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -89,7 +91,8 @@ type CancelCommandRequest struct {
 }
 
 // Send marshals and sends the CancelCommand API request.
-func (r CancelCommandRequest) Send() (*CancelCommandOutput, error) {
+func (r CancelCommandRequest) Send(ctx context.Context) (*CancelCommandOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -106,7 +109,7 @@ func (r CancelCommandRequest) Send() (*CancelCommandOutput, error) {
 //
 //    // Example sending a request using the CancelCommandRequest method.
 //    req := client.CancelCommandRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -130,6 +133,59 @@ func (c *SSM) CancelCommandRequest(input *CancelCommandInput) CancelCommandReque
 	return CancelCommandRequest{Request: req, Input: input, Copy: c.CancelCommandRequest}
 }
 
+const opCancelMaintenanceWindowExecution = "CancelMaintenanceWindowExecution"
+
+// CancelMaintenanceWindowExecutionRequest is a API request type for the CancelMaintenanceWindowExecution API operation.
+type CancelMaintenanceWindowExecutionRequest struct {
+	*aws.Request
+	Input *CancelMaintenanceWindowExecutionInput
+	Copy  func(*CancelMaintenanceWindowExecutionInput) CancelMaintenanceWindowExecutionRequest
+}
+
+// Send marshals and sends the CancelMaintenanceWindowExecution API request.
+func (r CancelMaintenanceWindowExecutionRequest) Send(ctx context.Context) (*CancelMaintenanceWindowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelMaintenanceWindowExecutionOutput), nil
+}
+
+// CancelMaintenanceWindowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
+//
+// Stops a Maintenance Window execution that is already in progress and cancels
+// any tasks in the window that have not already starting running. (Tasks already
+// in progress will continue to completion.)
+//
+//    // Example sending a request using the CancelMaintenanceWindowExecutionRequest method.
+//    req := client.CancelMaintenanceWindowExecutionRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecution
+func (c *SSM) CancelMaintenanceWindowExecutionRequest(input *CancelMaintenanceWindowExecutionInput) CancelMaintenanceWindowExecutionRequest {
+	op := &aws.Operation{
+		Name:       opCancelMaintenanceWindowExecution,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CancelMaintenanceWindowExecutionInput{}
+	}
+
+	output := &CancelMaintenanceWindowExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CancelMaintenanceWindowExecutionRequest{Request: req, Input: input, Copy: c.CancelMaintenanceWindowExecutionRequest}
+}
+
 const opCreateActivation = "CreateActivation"
 
 // CreateActivationRequest is a API request type for the CreateActivation API operation.
@@ -140,7 +196,8 @@ type CreateActivationRequest struct {
 }
 
 // Send marshals and sends the CreateActivation API request.
-func (r CreateActivationRequest) Send() (*CreateActivationOutput, error) {
+func (r CreateActivationRequest) Send(ctx context.Context) (*CreateActivationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +217,7 @@ func (r CreateActivationRequest) Send() (*CreateActivationOutput, error) {
 //
 //    // Example sending a request using the CreateActivationRequest method.
 //    req := client.CreateActivationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -194,7 +251,8 @@ type CreateAssociationRequest struct {
 }
 
 // Send marshals and sends the CreateAssociation API request.
-func (r CreateAssociationRequest) Send() (*CreateAssociationOutput, error) {
+func (r CreateAssociationRequest) Send(ctx context.Context) (*CreateAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -214,11 +272,11 @@ func (r CreateAssociationRequest) Send() (*CreateAssociationOutput, error) {
 // the instance as specified.
 //
 // If you associate a document with an instance that already has an associated
-// document, the system throws the AssociationAlreadyExists exception.
+// document, the system returns the AssociationAlreadyExists exception.
 //
 //    // Example sending a request using the CreateAssociationRequest method.
 //    req := client.CreateAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -252,7 +310,8 @@ type CreateAssociationBatchRequest struct {
 }
 
 // Send marshals and sends the CreateAssociationBatch API request.
-func (r CreateAssociationBatchRequest) Send() (*CreateAssociationBatchOutput, error) {
+func (r CreateAssociationBatchRequest) Send(ctx context.Context) (*CreateAssociationBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -272,11 +331,11 @@ func (r CreateAssociationBatchRequest) Send() (*CreateAssociationBatchOutput, er
 // the instance as specified.
 //
 // If you associate a document with an instance that already has an associated
-// document, the system throws the AssociationAlreadyExists exception.
+// document, the system returns the AssociationAlreadyExists exception.
 //
 //    // Example sending a request using the CreateAssociationBatchRequest method.
 //    req := client.CreateAssociationBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -310,7 +369,8 @@ type CreateDocumentRequest struct {
 }
 
 // Send marshals and sends the CreateDocument API request.
-func (r CreateDocumentRequest) Send() (*CreateDocumentOutput, error) {
+func (r CreateDocumentRequest) Send(ctx context.Context) (*CreateDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -329,7 +389,7 @@ func (r CreateDocumentRequest) Send() (*CreateDocumentOutput, error) {
 //
 //    // Example sending a request using the CreateDocumentRequest method.
 //    req := client.CreateDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -363,7 +423,8 @@ type CreateMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the CreateMaintenanceWindow API request.
-func (r CreateMaintenanceWindowRequest) Send() (*CreateMaintenanceWindowOutput, error) {
+func (r CreateMaintenanceWindowRequest) Send(ctx context.Context) (*CreateMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,7 +440,7 @@ func (r CreateMaintenanceWindowRequest) Send() (*CreateMaintenanceWindowOutput, 
 //
 //    // Example sending a request using the CreateMaintenanceWindowRequest method.
 //    req := client.CreateMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -413,7 +474,8 @@ type CreatePatchBaselineRequest struct {
 }
 
 // Send marshals and sends the CreatePatchBaseline API request.
-func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
+func (r CreatePatchBaselineRequest) Send(ctx context.Context) (*CreatePatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -432,7 +494,7 @@ func (r CreatePatchBaselineRequest) Send() (*CreatePatchBaselineOutput, error) {
 //
 //    // Example sending a request using the CreatePatchBaselineRequest method.
 //    req := client.CreatePatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -466,7 +528,8 @@ type CreateResourceDataSyncRequest struct {
 }
 
 // Send marshals and sends the CreateResourceDataSync API request.
-func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, error) {
+func (r CreateResourceDataSyncRequest) Send(ctx context.Context) (*CreateResourceDataSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -492,7 +555,7 @@ func (r CreateResourceDataSyncRequest) Send() (*CreateResourceDataSyncOutput, er
 //
 //    // Example sending a request using the CreateResourceDataSyncRequest method.
 //    req := client.CreateResourceDataSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -526,7 +589,8 @@ type DeleteActivationRequest struct {
 }
 
 // Send marshals and sends the DeleteActivation API request.
-func (r DeleteActivationRequest) Send() (*DeleteActivationOutput, error) {
+func (r DeleteActivationRequest) Send(ctx context.Context) (*DeleteActivationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -545,7 +609,7 @@ func (r DeleteActivationRequest) Send() (*DeleteActivationOutput, error) {
 //
 //    // Example sending a request using the DeleteActivationRequest method.
 //    req := client.DeleteActivationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -579,7 +643,8 @@ type DeleteAssociationRequest struct {
 }
 
 // Send marshals and sends the DeleteAssociation API request.
-func (r DeleteAssociationRequest) Send() (*DeleteAssociationOutput, error) {
+func (r DeleteAssociationRequest) Send(ctx context.Context) (*DeleteAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -600,7 +665,7 @@ func (r DeleteAssociationRequest) Send() (*DeleteAssociationOutput, error) {
 //
 //    // Example sending a request using the DeleteAssociationRequest method.
 //    req := client.DeleteAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -634,7 +699,8 @@ type DeleteDocumentRequest struct {
 }
 
 // Send marshals and sends the DeleteDocument API request.
-func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -654,7 +720,7 @@ func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
 //
 //    // Example sending a request using the DeleteDocumentRequest method.
 //    req := client.DeleteDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -688,7 +754,8 @@ type DeleteInventoryRequest struct {
 }
 
 // Send marshals and sends the DeleteInventory API request.
-func (r DeleteInventoryRequest) Send() (*DeleteInventoryOutput, error) {
+func (r DeleteInventoryRequest) Send(ctx context.Context) (*DeleteInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +773,7 @@ func (r DeleteInventoryRequest) Send() (*DeleteInventoryOutput, error) {
 //
 //    // Example sending a request using the DeleteInventoryRequest method.
 //    req := client.DeleteInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -740,7 +807,8 @@ type DeleteMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the DeleteMaintenanceWindow API request.
-func (r DeleteMaintenanceWindowRequest) Send() (*DeleteMaintenanceWindowOutput, error) {
+func (r DeleteMaintenanceWindowRequest) Send(ctx context.Context) (*DeleteMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -756,7 +824,7 @@ func (r DeleteMaintenanceWindowRequest) Send() (*DeleteMaintenanceWindowOutput, 
 //
 //    // Example sending a request using the DeleteMaintenanceWindowRequest method.
 //    req := client.DeleteMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -790,7 +858,8 @@ type DeleteParameterRequest struct {
 }
 
 // Send marshals and sends the DeleteParameter API request.
-func (r DeleteParameterRequest) Send() (*DeleteParameterOutput, error) {
+func (r DeleteParameterRequest) Send(ctx context.Context) (*DeleteParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -806,7 +875,7 @@ func (r DeleteParameterRequest) Send() (*DeleteParameterOutput, error) {
 //
 //    // Example sending a request using the DeleteParameterRequest method.
 //    req := client.DeleteParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -840,7 +909,8 @@ type DeleteParametersRequest struct {
 }
 
 // Send marshals and sends the DeleteParameters API request.
-func (r DeleteParametersRequest) Send() (*DeleteParametersOutput, error) {
+func (r DeleteParametersRequest) Send(ctx context.Context) (*DeleteParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -857,7 +927,7 @@ func (r DeleteParametersRequest) Send() (*DeleteParametersOutput, error) {
 //
 //    // Example sending a request using the DeleteParametersRequest method.
 //    req := client.DeleteParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -891,7 +961,8 @@ type DeletePatchBaselineRequest struct {
 }
 
 // Send marshals and sends the DeletePatchBaseline API request.
-func (r DeletePatchBaselineRequest) Send() (*DeletePatchBaselineOutput, error) {
+func (r DeletePatchBaselineRequest) Send(ctx context.Context) (*DeletePatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -907,7 +978,7 @@ func (r DeletePatchBaselineRequest) Send() (*DeletePatchBaselineOutput, error) {
 //
 //    // Example sending a request using the DeletePatchBaselineRequest method.
 //    req := client.DeletePatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -941,7 +1012,8 @@ type DeleteResourceDataSyncRequest struct {
 }
 
 // Send marshals and sends the DeleteResourceDataSync API request.
-func (r DeleteResourceDataSyncRequest) Send() (*DeleteResourceDataSyncOutput, error) {
+func (r DeleteResourceDataSyncRequest) Send(ctx context.Context) (*DeleteResourceDataSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -960,7 +1032,7 @@ func (r DeleteResourceDataSyncRequest) Send() (*DeleteResourceDataSyncOutput, er
 //
 //    // Example sending a request using the DeleteResourceDataSyncRequest method.
 //    req := client.DeleteResourceDataSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -994,7 +1066,8 @@ type DeregisterManagedInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterManagedInstance API request.
-func (r DeregisterManagedInstanceRequest) Send() (*DeregisterManagedInstanceOutput, error) {
+func (r DeregisterManagedInstanceRequest) Send(ctx context.Context) (*DeregisterManagedInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1012,7 +1085,7 @@ func (r DeregisterManagedInstanceRequest) Send() (*DeregisterManagedInstanceOutp
 //
 //    // Example sending a request using the DeregisterManagedInstanceRequest method.
 //    req := client.DeregisterManagedInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1046,7 +1119,8 @@ type DeregisterPatchBaselineForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the DeregisterPatchBaselineForPatchGroup API request.
-func (r DeregisterPatchBaselineForPatchGroupRequest) Send() (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+func (r DeregisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1062,7 +1136,7 @@ func (r DeregisterPatchBaselineForPatchGroupRequest) Send() (*DeregisterPatchBas
 //
 //    // Example sending a request using the DeregisterPatchBaselineForPatchGroupRequest method.
 //    req := client.DeregisterPatchBaselineForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1096,7 +1170,8 @@ type DeregisterTargetFromMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the DeregisterTargetFromMaintenanceWindow API request.
-func (r DeregisterTargetFromMaintenanceWindowRequest) Send() (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+func (r DeregisterTargetFromMaintenanceWindowRequest) Send(ctx context.Context) (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1112,7 +1187,7 @@ func (r DeregisterTargetFromMaintenanceWindowRequest) Send() (*DeregisterTargetF
 //
 //    // Example sending a request using the DeregisterTargetFromMaintenanceWindowRequest method.
 //    req := client.DeregisterTargetFromMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1146,7 +1221,8 @@ type DeregisterTaskFromMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the DeregisterTaskFromMaintenanceWindow API request.
-func (r DeregisterTaskFromMaintenanceWindowRequest) Send() (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+func (r DeregisterTaskFromMaintenanceWindowRequest) Send(ctx context.Context) (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1162,7 +1238,7 @@ func (r DeregisterTaskFromMaintenanceWindowRequest) Send() (*DeregisterTaskFromM
 //
 //    // Example sending a request using the DeregisterTaskFromMaintenanceWindowRequest method.
 //    req := client.DeregisterTaskFromMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1196,7 +1272,8 @@ type DescribeActivationsRequest struct {
 }
 
 // Send marshals and sends the DescribeActivations API request.
-func (r DescribeActivationsRequest) Send() (*DescribeActivationsOutput, error) {
+func (r DescribeActivationsRequest) Send(ctx context.Context) (*DescribeActivationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1214,7 +1291,7 @@ func (r DescribeActivationsRequest) Send() (*DescribeActivationsOutput, error) {
 //
 //    // Example sending a request using the DescribeActivationsRequest method.
 //    req := client.DescribeActivationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1264,7 +1341,7 @@ func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) Descri
 func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActivationsPager {
 	return DescribeActivationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeActivationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1273,6 +1350,7 @@ func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActiva
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1300,7 +1378,8 @@ type DescribeAssociationRequest struct {
 }
 
 // Send marshals and sends the DescribeAssociation API request.
-func (r DescribeAssociationRequest) Send() (*DescribeAssociationOutput, error) {
+func (r DescribeAssociationRequest) Send(ctx context.Context) (*DescribeAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1320,7 +1399,7 @@ func (r DescribeAssociationRequest) Send() (*DescribeAssociationOutput, error) {
 //
 //    // Example sending a request using the DescribeAssociationRequest method.
 //    req := client.DescribeAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1354,7 +1433,8 @@ type DescribeAssociationExecutionTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssociationExecutionTargets API request.
-func (r DescribeAssociationExecutionTargetsRequest) Send() (*DescribeAssociationExecutionTargetsOutput, error) {
+func (r DescribeAssociationExecutionTargetsRequest) Send(ctx context.Context) (*DescribeAssociationExecutionTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1371,7 +1451,7 @@ func (r DescribeAssociationExecutionTargetsRequest) Send() (*DescribeAssociation
 //
 //    // Example sending a request using the DescribeAssociationExecutionTargetsRequest method.
 //    req := client.DescribeAssociationExecutionTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1405,7 +1485,8 @@ type DescribeAssociationExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssociationExecutions API request.
-func (r DescribeAssociationExecutionsRequest) Send() (*DescribeAssociationExecutionsOutput, error) {
+func (r DescribeAssociationExecutionsRequest) Send(ctx context.Context) (*DescribeAssociationExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1421,7 +1502,7 @@ func (r DescribeAssociationExecutionsRequest) Send() (*DescribeAssociationExecut
 //
 //    // Example sending a request using the DescribeAssociationExecutionsRequest method.
 //    req := client.DescribeAssociationExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1455,7 +1536,8 @@ type DescribeAutomationExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAutomationExecutions API request.
-func (r DescribeAutomationExecutionsRequest) Send() (*DescribeAutomationExecutionsOutput, error) {
+func (r DescribeAutomationExecutionsRequest) Send(ctx context.Context) (*DescribeAutomationExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1471,7 +1553,7 @@ func (r DescribeAutomationExecutionsRequest) Send() (*DescribeAutomationExecutio
 //
 //    // Example sending a request using the DescribeAutomationExecutionsRequest method.
 //    req := client.DescribeAutomationExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1505,7 +1587,8 @@ type DescribeAutomationStepExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAutomationStepExecutions API request.
-func (r DescribeAutomationStepExecutionsRequest) Send() (*DescribeAutomationStepExecutionsOutput, error) {
+func (r DescribeAutomationStepExecutionsRequest) Send(ctx context.Context) (*DescribeAutomationStepExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1522,7 +1605,7 @@ func (r DescribeAutomationStepExecutionsRequest) Send() (*DescribeAutomationStep
 //
 //    // Example sending a request using the DescribeAutomationStepExecutionsRequest method.
 //    req := client.DescribeAutomationStepExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1556,7 +1639,8 @@ type DescribeAvailablePatchesRequest struct {
 }
 
 // Send marshals and sends the DescribeAvailablePatches API request.
-func (r DescribeAvailablePatchesRequest) Send() (*DescribeAvailablePatchesOutput, error) {
+func (r DescribeAvailablePatchesRequest) Send(ctx context.Context) (*DescribeAvailablePatchesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1572,7 +1656,7 @@ func (r DescribeAvailablePatchesRequest) Send() (*DescribeAvailablePatchesOutput
 //
 //    // Example sending a request using the DescribeAvailablePatchesRequest method.
 //    req := client.DescribeAvailablePatchesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1606,7 +1690,8 @@ type DescribeDocumentRequest struct {
 }
 
 // Send marshals and sends the DescribeDocument API request.
-func (r DescribeDocumentRequest) Send() (*DescribeDocumentOutput, error) {
+func (r DescribeDocumentRequest) Send(ctx context.Context) (*DescribeDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1622,7 +1707,7 @@ func (r DescribeDocumentRequest) Send() (*DescribeDocumentOutput, error) {
 //
 //    // Example sending a request using the DescribeDocumentRequest method.
 //    req := client.DescribeDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1656,7 +1741,8 @@ type DescribeDocumentPermissionRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentPermission API request.
-func (r DescribeDocumentPermissionRequest) Send() (*DescribeDocumentPermissionOutput, error) {
+func (r DescribeDocumentPermissionRequest) Send(ctx context.Context) (*DescribeDocumentPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1674,7 +1760,7 @@ func (r DescribeDocumentPermissionRequest) Send() (*DescribeDocumentPermissionOu
 //
 //    // Example sending a request using the DescribeDocumentPermissionRequest method.
 //    req := client.DescribeDocumentPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1708,7 +1794,8 @@ type DescribeEffectiveInstanceAssociationsRequest struct {
 }
 
 // Send marshals and sends the DescribeEffectiveInstanceAssociations API request.
-func (r DescribeEffectiveInstanceAssociationsRequest) Send() (*DescribeEffectiveInstanceAssociationsOutput, error) {
+func (r DescribeEffectiveInstanceAssociationsRequest) Send(ctx context.Context) (*DescribeEffectiveInstanceAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1724,7 +1811,7 @@ func (r DescribeEffectiveInstanceAssociationsRequest) Send() (*DescribeEffective
 //
 //    // Example sending a request using the DescribeEffectiveInstanceAssociationsRequest method.
 //    req := client.DescribeEffectiveInstanceAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1758,7 +1845,8 @@ type DescribeEffectivePatchesForPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the DescribeEffectivePatchesForPatchBaseline API request.
-func (r DescribeEffectivePatchesForPatchBaselineRequest) Send() (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+func (r DescribeEffectivePatchesForPatchBaselineRequest) Send(ctx context.Context) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1776,7 +1864,7 @@ func (r DescribeEffectivePatchesForPatchBaselineRequest) Send() (*DescribeEffect
 //
 //    // Example sending a request using the DescribeEffectivePatchesForPatchBaselineRequest method.
 //    req := client.DescribeEffectivePatchesForPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1810,7 +1898,8 @@ type DescribeInstanceAssociationsStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceAssociationsStatus API request.
-func (r DescribeInstanceAssociationsStatusRequest) Send() (*DescribeInstanceAssociationsStatusOutput, error) {
+func (r DescribeInstanceAssociationsStatusRequest) Send(ctx context.Context) (*DescribeInstanceAssociationsStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1826,7 +1915,7 @@ func (r DescribeInstanceAssociationsStatusRequest) Send() (*DescribeInstanceAsso
 //
 //    // Example sending a request using the DescribeInstanceAssociationsStatusRequest method.
 //    req := client.DescribeInstanceAssociationsStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1860,7 +1949,8 @@ type DescribeInstanceInformationRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceInformation API request.
-func (r DescribeInstanceInformationRequest) Send() (*DescribeInstanceInformationOutput, error) {
+func (r DescribeInstanceInformationRequest) Send(ctx context.Context) (*DescribeInstanceInformationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1885,7 +1975,7 @@ func (r DescribeInstanceInformationRequest) Send() (*DescribeInstanceInformation
 //
 //    // Example sending a request using the DescribeInstanceInformationRequest method.
 //    req := client.DescribeInstanceInformationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1935,7 +2025,7 @@ func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformat
 func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) DescribeInstanceInformationPager {
 	return DescribeInstanceInformationPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeInstanceInformationInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1944,6 +2034,7 @@ func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1971,7 +2062,8 @@ type DescribeInstancePatchStatesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancePatchStates API request.
-func (r DescribeInstancePatchStatesRequest) Send() (*DescribeInstancePatchStatesOutput, error) {
+func (r DescribeInstancePatchStatesRequest) Send(ctx context.Context) (*DescribeInstancePatchStatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1987,7 +2079,7 @@ func (r DescribeInstancePatchStatesRequest) Send() (*DescribeInstancePatchStates
 //
 //    // Example sending a request using the DescribeInstancePatchStatesRequest method.
 //    req := client.DescribeInstancePatchStatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2021,7 +2113,8 @@ type DescribeInstancePatchStatesForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancePatchStatesForPatchGroup API request.
-func (r DescribeInstancePatchStatesForPatchGroupRequest) Send() (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+func (r DescribeInstancePatchStatesForPatchGroupRequest) Send(ctx context.Context) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2038,7 +2131,7 @@ func (r DescribeInstancePatchStatesForPatchGroupRequest) Send() (*DescribeInstan
 //
 //    // Example sending a request using the DescribeInstancePatchStatesForPatchGroupRequest method.
 //    req := client.DescribeInstancePatchStatesForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2072,7 +2165,8 @@ type DescribeInstancePatchesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancePatches API request.
-func (r DescribeInstancePatchesRequest) Send() (*DescribeInstancePatchesOutput, error) {
+func (r DescribeInstancePatchesRequest) Send(ctx context.Context) (*DescribeInstancePatchesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2089,7 +2183,7 @@ func (r DescribeInstancePatchesRequest) Send() (*DescribeInstancePatchesOutput, 
 //
 //    // Example sending a request using the DescribeInstancePatchesRequest method.
 //    req := client.DescribeInstancePatchesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2123,7 +2217,8 @@ type DescribeInventoryDeletionsRequest struct {
 }
 
 // Send marshals and sends the DescribeInventoryDeletions API request.
-func (r DescribeInventoryDeletionsRequest) Send() (*DescribeInventoryDeletionsOutput, error) {
+func (r DescribeInventoryDeletionsRequest) Send(ctx context.Context) (*DescribeInventoryDeletionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2139,7 +2234,7 @@ func (r DescribeInventoryDeletionsRequest) Send() (*DescribeInventoryDeletionsOu
 //
 //    // Example sending a request using the DescribeInventoryDeletionsRequest method.
 //    req := client.DescribeInventoryDeletionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2173,7 +2268,8 @@ type DescribeMaintenanceWindowExecutionTaskInvocationsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTaskInvocations API request.
-func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send() (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2190,7 +2286,7 @@ func (r DescribeMaintenanceWindowExecutionTaskInvocationsRequest) Send() (*Descr
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionTaskInvocationsRequest method.
 //    req := client.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2224,7 +2320,8 @@ type DescribeMaintenanceWindowExecutionTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTasks API request.
-func (r DescribeMaintenanceWindowExecutionTasksRequest) Send() (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+func (r DescribeMaintenanceWindowExecutionTasksRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2240,7 +2337,7 @@ func (r DescribeMaintenanceWindowExecutionTasksRequest) Send() (*DescribeMainten
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionTasksRequest method.
 //    req := client.DescribeMaintenanceWindowExecutionTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2274,7 +2371,8 @@ type DescribeMaintenanceWindowExecutionsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutions API request.
-func (r DescribeMaintenanceWindowExecutionsRequest) Send() (*DescribeMaintenanceWindowExecutionsOutput, error) {
+func (r DescribeMaintenanceWindowExecutionsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowExecutionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2292,7 +2390,7 @@ func (r DescribeMaintenanceWindowExecutionsRequest) Send() (*DescribeMaintenance
 //
 //    // Example sending a request using the DescribeMaintenanceWindowExecutionsRequest method.
 //    req := client.DescribeMaintenanceWindowExecutionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2316,6 +2414,57 @@ func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintena
 	return DescribeMaintenanceWindowExecutionsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowExecutionsRequest}
 }
 
+const opDescribeMaintenanceWindowSchedule = "DescribeMaintenanceWindowSchedule"
+
+// DescribeMaintenanceWindowScheduleRequest is a API request type for the DescribeMaintenanceWindowSchedule API operation.
+type DescribeMaintenanceWindowScheduleRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowScheduleInput
+	Copy  func(*DescribeMaintenanceWindowScheduleInput) DescribeMaintenanceWindowScheduleRequest
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowSchedule API request.
+func (r DescribeMaintenanceWindowScheduleRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowScheduleOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowScheduleOutput), nil
+}
+
+// DescribeMaintenanceWindowScheduleRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
+//
+// Retrieves information about upcoming executions of a Maintenance Window.
+//
+//    // Example sending a request using the DescribeMaintenanceWindowScheduleRequest method.
+//    req := client.DescribeMaintenanceWindowScheduleRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowSchedule
+func (c *SSM) DescribeMaintenanceWindowScheduleRequest(input *DescribeMaintenanceWindowScheduleInput) DescribeMaintenanceWindowScheduleRequest {
+	op := &aws.Operation{
+		Name:       opDescribeMaintenanceWindowSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeMaintenanceWindowScheduleInput{}
+	}
+
+	output := &DescribeMaintenanceWindowScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeMaintenanceWindowScheduleRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowScheduleRequest}
+}
+
 const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 
 // DescribeMaintenanceWindowTargetsRequest is a API request type for the DescribeMaintenanceWindowTargets API operation.
@@ -2326,7 +2475,8 @@ type DescribeMaintenanceWindowTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTargets API request.
-func (r DescribeMaintenanceWindowTargetsRequest) Send() (*DescribeMaintenanceWindowTargetsOutput, error) {
+func (r DescribeMaintenanceWindowTargetsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowTargetsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2342,7 +2492,7 @@ func (r DescribeMaintenanceWindowTargetsRequest) Send() (*DescribeMaintenanceWin
 //
 //    // Example sending a request using the DescribeMaintenanceWindowTargetsRequest method.
 //    req := client.DescribeMaintenanceWindowTargetsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2376,7 +2526,8 @@ type DescribeMaintenanceWindowTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTasks API request.
-func (r DescribeMaintenanceWindowTasksRequest) Send() (*DescribeMaintenanceWindowTasksOutput, error) {
+func (r DescribeMaintenanceWindowTasksRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2392,7 +2543,7 @@ func (r DescribeMaintenanceWindowTasksRequest) Send() (*DescribeMaintenanceWindo
 //
 //    // Example sending a request using the DescribeMaintenanceWindowTasksRequest method.
 //    req := client.DescribeMaintenanceWindowTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2426,7 +2577,8 @@ type DescribeMaintenanceWindowsRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceWindows API request.
-func (r DescribeMaintenanceWindowsRequest) Send() (*DescribeMaintenanceWindowsOutput, error) {
+func (r DescribeMaintenanceWindowsRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2442,7 +2594,7 @@ func (r DescribeMaintenanceWindowsRequest) Send() (*DescribeMaintenanceWindowsOu
 //
 //    // Example sending a request using the DescribeMaintenanceWindowsRequest method.
 //    req := client.DescribeMaintenanceWindowsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2466,6 +2618,58 @@ func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindow
 	return DescribeMaintenanceWindowsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowsRequest}
 }
 
+const opDescribeMaintenanceWindowsForTarget = "DescribeMaintenanceWindowsForTarget"
+
+// DescribeMaintenanceWindowsForTargetRequest is a API request type for the DescribeMaintenanceWindowsForTarget API operation.
+type DescribeMaintenanceWindowsForTargetRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceWindowsForTargetInput
+	Copy  func(*DescribeMaintenanceWindowsForTargetInput) DescribeMaintenanceWindowsForTargetRequest
+}
+
+// Send marshals and sends the DescribeMaintenanceWindowsForTarget API request.
+func (r DescribeMaintenanceWindowsForTargetRequest) Send(ctx context.Context) (*DescribeMaintenanceWindowsForTargetOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceWindowsForTargetOutput), nil
+}
+
+// DescribeMaintenanceWindowsForTargetRequest returns a request value for making API operation for
+// Amazon Simple Systems Manager (SSM).
+//
+// Retrieves information about the Maintenance Windows targets or tasks that
+// an instance is associated with.
+//
+//    // Example sending a request using the DescribeMaintenanceWindowsForTargetRequest method.
+//    req := client.DescribeMaintenanceWindowsForTargetRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTarget
+func (c *SSM) DescribeMaintenanceWindowsForTargetRequest(input *DescribeMaintenanceWindowsForTargetInput) DescribeMaintenanceWindowsForTargetRequest {
+	op := &aws.Operation{
+		Name:       opDescribeMaintenanceWindowsForTarget,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeMaintenanceWindowsForTargetInput{}
+	}
+
+	output := &DescribeMaintenanceWindowsForTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeMaintenanceWindowsForTargetRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowsForTargetRequest}
+}
+
 const opDescribeParameters = "DescribeParameters"
 
 // DescribeParametersRequest is a API request type for the DescribeParameters API operation.
@@ -2476,7 +2680,8 @@ type DescribeParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeParameters API request.
-func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
+func (r DescribeParametersRequest) Send(ctx context.Context) (*DescribeParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2500,7 +2705,7 @@ func (r DescribeParametersRequest) Send() (*DescribeParametersOutput, error) {
 //
 //    // Example sending a request using the DescribeParametersRequest method.
 //    req := client.DescribeParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2550,7 +2755,7 @@ func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) Describe
 func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParametersPager {
 	return DescribeParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2559,6 +2764,7 @@ func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParamet
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2586,7 +2792,8 @@ type DescribePatchBaselinesRequest struct {
 }
 
 // Send marshals and sends the DescribePatchBaselines API request.
-func (r DescribePatchBaselinesRequest) Send() (*DescribePatchBaselinesOutput, error) {
+func (r DescribePatchBaselinesRequest) Send(ctx context.Context) (*DescribePatchBaselinesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2602,7 +2809,7 @@ func (r DescribePatchBaselinesRequest) Send() (*DescribePatchBaselinesOutput, er
 //
 //    // Example sending a request using the DescribePatchBaselinesRequest method.
 //    req := client.DescribePatchBaselinesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2636,7 +2843,8 @@ type DescribePatchGroupStateRequest struct {
 }
 
 // Send marshals and sends the DescribePatchGroupState API request.
-func (r DescribePatchGroupStateRequest) Send() (*DescribePatchGroupStateOutput, error) {
+func (r DescribePatchGroupStateRequest) Send(ctx context.Context) (*DescribePatchGroupStateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2652,7 +2860,7 @@ func (r DescribePatchGroupStateRequest) Send() (*DescribePatchGroupStateOutput, 
 //
 //    // Example sending a request using the DescribePatchGroupStateRequest method.
 //    req := client.DescribePatchGroupStateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2686,7 +2894,8 @@ type DescribePatchGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribePatchGroups API request.
-func (r DescribePatchGroupsRequest) Send() (*DescribePatchGroupsOutput, error) {
+func (r DescribePatchGroupsRequest) Send(ctx context.Context) (*DescribePatchGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2702,7 +2911,7 @@ func (r DescribePatchGroupsRequest) Send() (*DescribePatchGroupsOutput, error) {
 //
 //    // Example sending a request using the DescribePatchGroupsRequest method.
 //    req := client.DescribePatchGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2736,7 +2945,8 @@ type DescribeSessionsRequest struct {
 }
 
 // Send marshals and sends the DescribeSessions API request.
-func (r DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
+func (r DescribeSessionsRequest) Send(ctx context.Context) (*DescribeSessionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2753,7 +2963,7 @@ func (r DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
 //
 //    // Example sending a request using the DescribeSessionsRequest method.
 //    req := client.DescribeSessionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2787,7 +2997,8 @@ type GetAutomationExecutionRequest struct {
 }
 
 // Send marshals and sends the GetAutomationExecution API request.
-func (r GetAutomationExecutionRequest) Send() (*GetAutomationExecutionOutput, error) {
+func (r GetAutomationExecutionRequest) Send(ctx context.Context) (*GetAutomationExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2803,7 +3014,7 @@ func (r GetAutomationExecutionRequest) Send() (*GetAutomationExecutionOutput, er
 //
 //    // Example sending a request using the GetAutomationExecutionRequest method.
 //    req := client.GetAutomationExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2837,7 +3048,8 @@ type GetCommandInvocationRequest struct {
 }
 
 // Send marshals and sends the GetCommandInvocation API request.
-func (r GetCommandInvocationRequest) Send() (*GetCommandInvocationOutput, error) {
+func (r GetCommandInvocationRequest) Send(ctx context.Context) (*GetCommandInvocationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2854,7 +3066,7 @@ func (r GetCommandInvocationRequest) Send() (*GetCommandInvocationOutput, error)
 //
 //    // Example sending a request using the GetCommandInvocationRequest method.
 //    req := client.GetCommandInvocationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2888,7 +3100,8 @@ type GetConnectionStatusRequest struct {
 }
 
 // Send marshals and sends the GetConnectionStatus API request.
-func (r GetConnectionStatusRequest) Send() (*GetConnectionStatusOutput, error) {
+func (r GetConnectionStatusRequest) Send(ctx context.Context) (*GetConnectionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2905,7 +3118,7 @@ func (r GetConnectionStatusRequest) Send() (*GetConnectionStatusOutput, error) {
 //
 //    // Example sending a request using the GetConnectionStatusRequest method.
 //    req := client.GetConnectionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2939,7 +3152,8 @@ type GetDefaultPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the GetDefaultPatchBaseline API request.
-func (r GetDefaultPatchBaselineRequest) Send() (*GetDefaultPatchBaselineOutput, error) {
+func (r GetDefaultPatchBaselineRequest) Send(ctx context.Context) (*GetDefaultPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2960,7 +3174,7 @@ func (r GetDefaultPatchBaselineRequest) Send() (*GetDefaultPatchBaselineOutput, 
 //
 //    // Example sending a request using the GetDefaultPatchBaselineRequest method.
 //    req := client.GetDefaultPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2994,7 +3208,8 @@ type GetDeployablePatchSnapshotForInstanceRequest struct {
 }
 
 // Send marshals and sends the GetDeployablePatchSnapshotForInstance API request.
-func (r GetDeployablePatchSnapshotForInstanceRequest) Send() (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+func (r GetDeployablePatchSnapshotForInstanceRequest) Send(ctx context.Context) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3011,7 +3226,7 @@ func (r GetDeployablePatchSnapshotForInstanceRequest) Send() (*GetDeployablePatc
 //
 //    // Example sending a request using the GetDeployablePatchSnapshotForInstanceRequest method.
 //    req := client.GetDeployablePatchSnapshotForInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3045,7 +3260,8 @@ type GetDocumentRequest struct {
 }
 
 // Send marshals and sends the GetDocument API request.
-func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+func (r GetDocumentRequest) Send(ctx context.Context) (*GetDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3061,7 +3277,7 @@ func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
 //
 //    // Example sending a request using the GetDocumentRequest method.
 //    req := client.GetDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3095,7 +3311,8 @@ type GetInventoryRequest struct {
 }
 
 // Send marshals and sends the GetInventory API request.
-func (r GetInventoryRequest) Send() (*GetInventoryOutput, error) {
+func (r GetInventoryRequest) Send(ctx context.Context) (*GetInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3111,7 +3328,7 @@ func (r GetInventoryRequest) Send() (*GetInventoryOutput, error) {
 //
 //    // Example sending a request using the GetInventoryRequest method.
 //    req := client.GetInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3145,7 +3362,8 @@ type GetInventorySchemaRequest struct {
 }
 
 // Send marshals and sends the GetInventorySchema API request.
-func (r GetInventorySchemaRequest) Send() (*GetInventorySchemaOutput, error) {
+func (r GetInventorySchemaRequest) Send(ctx context.Context) (*GetInventorySchemaOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3162,7 +3380,7 @@ func (r GetInventorySchemaRequest) Send() (*GetInventorySchemaOutput, error) {
 //
 //    // Example sending a request using the GetInventorySchemaRequest method.
 //    req := client.GetInventorySchemaRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3196,7 +3414,8 @@ type GetMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindow API request.
-func (r GetMaintenanceWindowRequest) Send() (*GetMaintenanceWindowOutput, error) {
+func (r GetMaintenanceWindowRequest) Send(ctx context.Context) (*GetMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3212,7 +3431,7 @@ func (r GetMaintenanceWindowRequest) Send() (*GetMaintenanceWindowOutput, error)
 //
 //    // Example sending a request using the GetMaintenanceWindowRequest method.
 //    req := client.GetMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3246,7 +3465,8 @@ type GetMaintenanceWindowExecutionRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecution API request.
-func (r GetMaintenanceWindowExecutionRequest) Send() (*GetMaintenanceWindowExecutionOutput, error) {
+func (r GetMaintenanceWindowExecutionRequest) Send(ctx context.Context) (*GetMaintenanceWindowExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3263,7 +3483,7 @@ func (r GetMaintenanceWindowExecutionRequest) Send() (*GetMaintenanceWindowExecu
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionRequest method.
 //    req := client.GetMaintenanceWindowExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3297,7 +3517,8 @@ type GetMaintenanceWindowExecutionTaskRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTask API request.
-func (r GetMaintenanceWindowExecutionTaskRequest) Send() (*GetMaintenanceWindowExecutionTaskOutput, error) {
+func (r GetMaintenanceWindowExecutionTaskRequest) Send(ctx context.Context) (*GetMaintenanceWindowExecutionTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3314,7 +3535,7 @@ func (r GetMaintenanceWindowExecutionTaskRequest) Send() (*GetMaintenanceWindowE
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionTaskRequest method.
 //    req := client.GetMaintenanceWindowExecutionTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3348,7 +3569,8 @@ type GetMaintenanceWindowExecutionTaskInvocationRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTaskInvocation API request.
-func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send() (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send(ctx context.Context) (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3365,7 +3587,7 @@ func (r GetMaintenanceWindowExecutionTaskInvocationRequest) Send() (*GetMaintena
 //
 //    // Example sending a request using the GetMaintenanceWindowExecutionTaskInvocationRequest method.
 //    req := client.GetMaintenanceWindowExecutionTaskInvocationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3399,7 +3621,8 @@ type GetMaintenanceWindowTaskRequest struct {
 }
 
 // Send marshals and sends the GetMaintenanceWindowTask API request.
-func (r GetMaintenanceWindowTaskRequest) Send() (*GetMaintenanceWindowTaskOutput, error) {
+func (r GetMaintenanceWindowTaskRequest) Send(ctx context.Context) (*GetMaintenanceWindowTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3415,7 +3638,7 @@ func (r GetMaintenanceWindowTaskRequest) Send() (*GetMaintenanceWindowTaskOutput
 //
 //    // Example sending a request using the GetMaintenanceWindowTaskRequest method.
 //    req := client.GetMaintenanceWindowTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3449,7 +3672,8 @@ type GetParameterRequest struct {
 }
 
 // Send marshals and sends the GetParameter API request.
-func (r GetParameterRequest) Send() (*GetParameterOutput, error) {
+func (r GetParameterRequest) Send(ctx context.Context) (*GetParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3466,7 +3690,7 @@ func (r GetParameterRequest) Send() (*GetParameterOutput, error) {
 //
 //    // Example sending a request using the GetParameterRequest method.
 //    req := client.GetParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3500,7 +3724,8 @@ type GetParameterHistoryRequest struct {
 }
 
 // Send marshals and sends the GetParameterHistory API request.
-func (r GetParameterHistoryRequest) Send() (*GetParameterHistoryOutput, error) {
+func (r GetParameterHistoryRequest) Send(ctx context.Context) (*GetParameterHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3516,7 +3741,7 @@ func (r GetParameterHistoryRequest) Send() (*GetParameterHistoryOutput, error) {
 //
 //    // Example sending a request using the GetParameterHistoryRequest method.
 //    req := client.GetParameterHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3566,7 +3791,7 @@ func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetPar
 func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHistoryPager {
 	return GetParameterHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetParameterHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3575,6 +3800,7 @@ func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHi
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3602,7 +3828,8 @@ type GetParametersRequest struct {
 }
 
 // Send marshals and sends the GetParameters API request.
-func (r GetParametersRequest) Send() (*GetParametersOutput, error) {
+func (r GetParametersRequest) Send(ctx context.Context) (*GetParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3619,7 +3846,7 @@ func (r GetParametersRequest) Send() (*GetParametersOutput, error) {
 //
 //    // Example sending a request using the GetParametersRequest method.
 //    req := client.GetParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3653,7 +3880,8 @@ type GetParametersByPathRequest struct {
 }
 
 // Send marshals and sends the GetParametersByPath API request.
-func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
+func (r GetParametersByPathRequest) Send(ctx context.Context) (*GetParametersByPathOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3681,7 +3909,7 @@ func (r GetParametersByPathRequest) Send() (*GetParametersByPathOutput, error) {
 //
 //    // Example sending a request using the GetParametersByPathRequest method.
 //    req := client.GetParametersByPathRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3731,7 +3959,7 @@ func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) GetPar
 func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersByPathPager {
 	return GetParametersByPathPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetParametersByPathInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3740,6 +3968,7 @@ func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersB
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3767,7 +3996,8 @@ type GetPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the GetPatchBaseline API request.
-func (r GetPatchBaselineRequest) Send() (*GetPatchBaselineOutput, error) {
+func (r GetPatchBaselineRequest) Send(ctx context.Context) (*GetPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3783,7 +4013,7 @@ func (r GetPatchBaselineRequest) Send() (*GetPatchBaselineOutput, error) {
 //
 //    // Example sending a request using the GetPatchBaselineRequest method.
 //    req := client.GetPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3817,7 +4047,8 @@ type GetPatchBaselineForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the GetPatchBaselineForPatchGroup API request.
-func (r GetPatchBaselineForPatchGroupRequest) Send() (*GetPatchBaselineForPatchGroupOutput, error) {
+func (r GetPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*GetPatchBaselineForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3834,7 +4065,7 @@ func (r GetPatchBaselineForPatchGroupRequest) Send() (*GetPatchBaselineForPatchG
 //
 //    // Example sending a request using the GetPatchBaselineForPatchGroupRequest method.
 //    req := client.GetPatchBaselineForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3868,7 +4099,8 @@ type LabelParameterVersionRequest struct {
 }
 
 // Send marshals and sends the LabelParameterVersion API request.
-func (r LabelParameterVersionRequest) Send() (*LabelParameterVersionOutput, error) {
+func (r LabelParameterVersionRequest) Send(ctx context.Context) (*LabelParameterVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3912,7 +4144,7 @@ func (r LabelParameterVersionRequest) Send() (*LabelParameterVersionOutput, erro
 //
 //    // Example sending a request using the LabelParameterVersionRequest method.
 //    req := client.LabelParameterVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3946,7 +4178,8 @@ type ListAssociationVersionsRequest struct {
 }
 
 // Send marshals and sends the ListAssociationVersions API request.
-func (r ListAssociationVersionsRequest) Send() (*ListAssociationVersionsOutput, error) {
+func (r ListAssociationVersionsRequest) Send(ctx context.Context) (*ListAssociationVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3962,7 +4195,7 @@ func (r ListAssociationVersionsRequest) Send() (*ListAssociationVersionsOutput, 
 //
 //    // Example sending a request using the ListAssociationVersionsRequest method.
 //    req := client.ListAssociationVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3996,7 +4229,8 @@ type ListAssociationsRequest struct {
 }
 
 // Send marshals and sends the ListAssociations API request.
-func (r ListAssociationsRequest) Send() (*ListAssociationsOutput, error) {
+func (r ListAssociationsRequest) Send(ctx context.Context) (*ListAssociationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4012,7 +4246,7 @@ func (r ListAssociationsRequest) Send() (*ListAssociationsOutput, error) {
 //
 //    // Example sending a request using the ListAssociationsRequest method.
 //    req := client.ListAssociationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4062,7 +4296,7 @@ func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) ListAssociat
 func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsPager {
 	return ListAssociationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListAssociationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4071,6 +4305,7 @@ func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4098,7 +4333,8 @@ type ListCommandInvocationsRequest struct {
 }
 
 // Send marshals and sends the ListCommandInvocations API request.
-func (r ListCommandInvocationsRequest) Send() (*ListCommandInvocationsOutput, error) {
+func (r ListCommandInvocationsRequest) Send(ctx context.Context) (*ListCommandInvocationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4118,7 +4354,7 @@ func (r ListCommandInvocationsRequest) Send() (*ListCommandInvocationsOutput, er
 //
 //    // Example sending a request using the ListCommandInvocationsRequest method.
 //    req := client.ListCommandInvocationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4168,7 +4404,7 @@ func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) 
 func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommandInvocationsPager {
 	return ListCommandInvocationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCommandInvocationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4177,6 +4413,7 @@ func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommand
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4204,7 +4441,8 @@ type ListCommandsRequest struct {
 }
 
 // Send marshals and sends the ListCommands API request.
-func (r ListCommandsRequest) Send() (*ListCommandsOutput, error) {
+func (r ListCommandsRequest) Send(ctx context.Context) (*ListCommandsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4220,7 +4458,7 @@ func (r ListCommandsRequest) Send() (*ListCommandsOutput, error) {
 //
 //    // Example sending a request using the ListCommandsRequest method.
 //    req := client.ListCommandsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4270,7 +4508,7 @@ func (c *SSM) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest 
 func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
 	return ListCommandsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListCommandsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4279,6 +4517,7 @@ func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4306,7 +4545,8 @@ type ListComplianceItemsRequest struct {
 }
 
 // Send marshals and sends the ListComplianceItems API request.
-func (r ListComplianceItemsRequest) Send() (*ListComplianceItemsOutput, error) {
+func (r ListComplianceItemsRequest) Send(ctx context.Context) (*ListComplianceItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4325,7 +4565,7 @@ func (r ListComplianceItemsRequest) Send() (*ListComplianceItemsOutput, error) {
 //
 //    // Example sending a request using the ListComplianceItemsRequest method.
 //    req := client.ListComplianceItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4359,7 +4599,8 @@ type ListComplianceSummariesRequest struct {
 }
 
 // Send marshals and sends the ListComplianceSummaries API request.
-func (r ListComplianceSummariesRequest) Send() (*ListComplianceSummariesOutput, error) {
+func (r ListComplianceSummariesRequest) Send(ctx context.Context) (*ListComplianceSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4377,7 +4618,7 @@ func (r ListComplianceSummariesRequest) Send() (*ListComplianceSummariesOutput, 
 //
 //    // Example sending a request using the ListComplianceSummariesRequest method.
 //    req := client.ListComplianceSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4411,7 +4652,8 @@ type ListDocumentVersionsRequest struct {
 }
 
 // Send marshals and sends the ListDocumentVersions API request.
-func (r ListDocumentVersionsRequest) Send() (*ListDocumentVersionsOutput, error) {
+func (r ListDocumentVersionsRequest) Send(ctx context.Context) (*ListDocumentVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4427,7 +4669,7 @@ func (r ListDocumentVersionsRequest) Send() (*ListDocumentVersionsOutput, error)
 //
 //    // Example sending a request using the ListDocumentVersionsRequest method.
 //    req := client.ListDocumentVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4461,7 +4703,8 @@ type ListDocumentsRequest struct {
 }
 
 // Send marshals and sends the ListDocuments API request.
-func (r ListDocumentsRequest) Send() (*ListDocumentsOutput, error) {
+func (r ListDocumentsRequest) Send(ctx context.Context) (*ListDocumentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4477,7 +4720,7 @@ func (r ListDocumentsRequest) Send() (*ListDocumentsOutput, error) {
 //
 //    // Example sending a request using the ListDocumentsRequest method.
 //    req := client.ListDocumentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4527,7 +4770,7 @@ func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsReque
 func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
 	return ListDocumentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDocumentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -4536,6 +4779,7 @@ func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -4563,7 +4807,8 @@ type ListInventoryEntriesRequest struct {
 }
 
 // Send marshals and sends the ListInventoryEntries API request.
-func (r ListInventoryEntriesRequest) Send() (*ListInventoryEntriesOutput, error) {
+func (r ListInventoryEntriesRequest) Send(ctx context.Context) (*ListInventoryEntriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4579,7 +4824,7 @@ func (r ListInventoryEntriesRequest) Send() (*ListInventoryEntriesOutput, error)
 //
 //    // Example sending a request using the ListInventoryEntriesRequest method.
 //    req := client.ListInventoryEntriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4613,7 +4858,8 @@ type ListResourceComplianceSummariesRequest struct {
 }
 
 // Send marshals and sends the ListResourceComplianceSummaries API request.
-func (r ListResourceComplianceSummariesRequest) Send() (*ListResourceComplianceSummariesOutput, error) {
+func (r ListResourceComplianceSummariesRequest) Send(ctx context.Context) (*ListResourceComplianceSummariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4631,7 +4877,7 @@ func (r ListResourceComplianceSummariesRequest) Send() (*ListResourceComplianceS
 //
 //    // Example sending a request using the ListResourceComplianceSummariesRequest method.
 //    req := client.ListResourceComplianceSummariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4665,7 +4911,8 @@ type ListResourceDataSyncRequest struct {
 }
 
 // Send marshals and sends the ListResourceDataSync API request.
-func (r ListResourceDataSyncRequest) Send() (*ListResourceDataSyncOutput, error) {
+func (r ListResourceDataSyncRequest) Send(ctx context.Context) (*ListResourceDataSyncOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4690,7 +4937,7 @@ func (r ListResourceDataSyncRequest) Send() (*ListResourceDataSyncOutput, error)
 //
 //    // Example sending a request using the ListResourceDataSyncRequest method.
 //    req := client.ListResourceDataSyncRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4724,7 +4971,8 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4740,7 +4988,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
 //    req := client.ListTagsForResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4774,7 +5022,8 @@ type ModifyDocumentPermissionRequest struct {
 }
 
 // Send marshals and sends the ModifyDocumentPermission API request.
-func (r ModifyDocumentPermissionRequest) Send() (*ModifyDocumentPermissionOutput, error) {
+func (r ModifyDocumentPermissionRequest) Send(ctx context.Context) (*ModifyDocumentPermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4793,7 +5042,7 @@ func (r ModifyDocumentPermissionRequest) Send() (*ModifyDocumentPermissionOutput
 //
 //    // Example sending a request using the ModifyDocumentPermissionRequest method.
 //    req := client.ModifyDocumentPermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4827,7 +5076,8 @@ type PutComplianceItemsRequest struct {
 }
 
 // Send marshals and sends the PutComplianceItems API request.
-func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
+func (r PutComplianceItemsRequest) Send(ctx context.Context) (*PutComplianceItemsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4884,7 +5134,7 @@ func (r PutComplianceItemsRequest) Send() (*PutComplianceItemsOutput, error) {
 //
 //    // Example sending a request using the PutComplianceItemsRequest method.
 //    req := client.PutComplianceItemsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4918,7 +5168,8 @@ type PutInventoryRequest struct {
 }
 
 // Send marshals and sends the PutInventory API request.
-func (r PutInventoryRequest) Send() (*PutInventoryOutput, error) {
+func (r PutInventoryRequest) Send(ctx context.Context) (*PutInventoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4936,7 +5187,7 @@ func (r PutInventoryRequest) Send() (*PutInventoryOutput, error) {
 //
 //    // Example sending a request using the PutInventoryRequest method.
 //    req := client.PutInventoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4970,7 +5221,8 @@ type PutParameterRequest struct {
 }
 
 // Send marshals and sends the PutParameter API request.
-func (r PutParameterRequest) Send() (*PutParameterOutput, error) {
+func (r PutParameterRequest) Send(ctx context.Context) (*PutParameterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4986,7 +5238,7 @@ func (r PutParameterRequest) Send() (*PutParameterOutput, error) {
 //
 //    // Example sending a request using the PutParameterRequest method.
 //    req := client.PutParameterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5020,7 +5272,8 @@ type RegisterDefaultPatchBaselineRequest struct {
 }
 
 // Send marshals and sends the RegisterDefaultPatchBaseline API request.
-func (r RegisterDefaultPatchBaselineRequest) Send() (*RegisterDefaultPatchBaselineOutput, error) {
+func (r RegisterDefaultPatchBaselineRequest) Send(ctx context.Context) (*RegisterDefaultPatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5036,7 +5289,7 @@ func (r RegisterDefaultPatchBaselineRequest) Send() (*RegisterDefaultPatchBaseli
 //
 //    // Example sending a request using the RegisterDefaultPatchBaselineRequest method.
 //    req := client.RegisterDefaultPatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5070,7 +5323,8 @@ type RegisterPatchBaselineForPatchGroupRequest struct {
 }
 
 // Send marshals and sends the RegisterPatchBaselineForPatchGroup API request.
-func (r RegisterPatchBaselineForPatchGroupRequest) Send() (*RegisterPatchBaselineForPatchGroupOutput, error) {
+func (r RegisterPatchBaselineForPatchGroupRequest) Send(ctx context.Context) (*RegisterPatchBaselineForPatchGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5086,7 +5340,7 @@ func (r RegisterPatchBaselineForPatchGroupRequest) Send() (*RegisterPatchBaselin
 //
 //    // Example sending a request using the RegisterPatchBaselineForPatchGroupRequest method.
 //    req := client.RegisterPatchBaselineForPatchGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5120,7 +5374,8 @@ type RegisterTargetWithMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the RegisterTargetWithMaintenanceWindow API request.
-func (r RegisterTargetWithMaintenanceWindowRequest) Send() (*RegisterTargetWithMaintenanceWindowOutput, error) {
+func (r RegisterTargetWithMaintenanceWindowRequest) Send(ctx context.Context) (*RegisterTargetWithMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5136,7 +5391,7 @@ func (r RegisterTargetWithMaintenanceWindowRequest) Send() (*RegisterTargetWithM
 //
 //    // Example sending a request using the RegisterTargetWithMaintenanceWindowRequest method.
 //    req := client.RegisterTargetWithMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5170,7 +5425,8 @@ type RegisterTaskWithMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the RegisterTaskWithMaintenanceWindow API request.
-func (r RegisterTaskWithMaintenanceWindowRequest) Send() (*RegisterTaskWithMaintenanceWindowOutput, error) {
+func (r RegisterTaskWithMaintenanceWindowRequest) Send(ctx context.Context) (*RegisterTaskWithMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5186,7 +5442,7 @@ func (r RegisterTaskWithMaintenanceWindowRequest) Send() (*RegisterTaskWithMaint
 //
 //    // Example sending a request using the RegisterTaskWithMaintenanceWindowRequest method.
 //    req := client.RegisterTaskWithMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5220,7 +5476,8 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send(ctx context.Context) (*RemoveTagsFromResourceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5236,7 +5493,7 @@ func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, er
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
 //    req := client.RemoveTagsFromResourceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5270,7 +5527,8 @@ type ResumeSessionRequest struct {
 }
 
 // Send marshals and sends the ResumeSession API request.
-func (r ResumeSessionRequest) Send() (*ResumeSessionOutput, error) {
+func (r ResumeSessionRequest) Send(ctx context.Context) (*ResumeSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5290,7 +5548,7 @@ func (r ResumeSessionRequest) Send() (*ResumeSessionOutput, error) {
 //
 //    // Example sending a request using the ResumeSessionRequest method.
 //    req := client.ResumeSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5324,7 +5582,8 @@ type SendAutomationSignalRequest struct {
 }
 
 // Send marshals and sends the SendAutomationSignal API request.
-func (r SendAutomationSignalRequest) Send() (*SendAutomationSignalOutput, error) {
+func (r SendAutomationSignalRequest) Send(ctx context.Context) (*SendAutomationSignalOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5341,7 +5600,7 @@ func (r SendAutomationSignalRequest) Send() (*SendAutomationSignalOutput, error)
 //
 //    // Example sending a request using the SendAutomationSignalRequest method.
 //    req := client.SendAutomationSignalRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5375,7 +5634,8 @@ type SendCommandRequest struct {
 }
 
 // Send marshals and sends the SendCommand API request.
-func (r SendCommandRequest) Send() (*SendCommandOutput, error) {
+func (r SendCommandRequest) Send(ctx context.Context) (*SendCommandOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5391,7 +5651,7 @@ func (r SendCommandRequest) Send() (*SendCommandOutput, error) {
 //
 //    // Example sending a request using the SendCommandRequest method.
 //    req := client.SendCommandRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5425,7 +5685,8 @@ type StartAssociationsOnceRequest struct {
 }
 
 // Send marshals and sends the StartAssociationsOnce API request.
-func (r StartAssociationsOnceRequest) Send() (*StartAssociationsOnceOutput, error) {
+func (r StartAssociationsOnceRequest) Send(ctx context.Context) (*StartAssociationsOnceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5442,7 +5703,7 @@ func (r StartAssociationsOnceRequest) Send() (*StartAssociationsOnceOutput, erro
 //
 //    // Example sending a request using the StartAssociationsOnceRequest method.
 //    req := client.StartAssociationsOnceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5476,7 +5737,8 @@ type StartAutomationExecutionRequest struct {
 }
 
 // Send marshals and sends the StartAutomationExecution API request.
-func (r StartAutomationExecutionRequest) Send() (*StartAutomationExecutionOutput, error) {
+func (r StartAutomationExecutionRequest) Send(ctx context.Context) (*StartAutomationExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5492,7 +5754,7 @@ func (r StartAutomationExecutionRequest) Send() (*StartAutomationExecutionOutput
 //
 //    // Example sending a request using the StartAutomationExecutionRequest method.
 //    req := client.StartAutomationExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5526,7 +5788,8 @@ type StartSessionRequest struct {
 }
 
 // Send marshals and sends the StartSession API request.
-func (r StartSessionRequest) Send() (*StartSessionOutput, error) {
+func (r StartSessionRequest) Send(ctx context.Context) (*StartSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5550,7 +5813,7 @@ func (r StartSessionRequest) Send() (*StartSessionOutput, error) {
 //
 //    // Example sending a request using the StartSessionRequest method.
 //    req := client.StartSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5584,7 +5847,8 @@ type StopAutomationExecutionRequest struct {
 }
 
 // Send marshals and sends the StopAutomationExecution API request.
-func (r StopAutomationExecutionRequest) Send() (*StopAutomationExecutionOutput, error) {
+func (r StopAutomationExecutionRequest) Send(ctx context.Context) (*StopAutomationExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5600,7 +5864,7 @@ func (r StopAutomationExecutionRequest) Send() (*StopAutomationExecutionOutput, 
 //
 //    // Example sending a request using the StopAutomationExecutionRequest method.
 //    req := client.StopAutomationExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5634,7 +5898,8 @@ type TerminateSessionRequest struct {
 }
 
 // Send marshals and sends the TerminateSession API request.
-func (r TerminateSessionRequest) Send() (*TerminateSessionOutput, error) {
+func (r TerminateSessionRequest) Send(ctx context.Context) (*TerminateSessionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5652,7 +5917,7 @@ func (r TerminateSessionRequest) Send() (*TerminateSessionOutput, error) {
 //
 //    // Example sending a request using the TerminateSessionRequest method.
 //    req := client.TerminateSessionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5686,7 +5951,8 @@ type UpdateAssociationRequest struct {
 }
 
 // Send marshals and sends the UpdateAssociation API request.
-func (r UpdateAssociationRequest) Send() (*UpdateAssociationOutput, error) {
+func (r UpdateAssociationRequest) Send(ctx context.Context) (*UpdateAssociationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5703,7 +5969,7 @@ func (r UpdateAssociationRequest) Send() (*UpdateAssociationOutput, error) {
 //
 //    // Example sending a request using the UpdateAssociationRequest method.
 //    req := client.UpdateAssociationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5737,7 +6003,8 @@ type UpdateAssociationStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateAssociationStatus API request.
-func (r UpdateAssociationStatusRequest) Send() (*UpdateAssociationStatusOutput, error) {
+func (r UpdateAssociationStatusRequest) Send(ctx context.Context) (*UpdateAssociationStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5754,7 +6021,7 @@ func (r UpdateAssociationStatusRequest) Send() (*UpdateAssociationStatusOutput, 
 //
 //    // Example sending a request using the UpdateAssociationStatusRequest method.
 //    req := client.UpdateAssociationStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5788,7 +6055,8 @@ type UpdateDocumentRequest struct {
 }
 
 // Send marshals and sends the UpdateDocument API request.
-func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+func (r UpdateDocumentRequest) Send(ctx context.Context) (*UpdateDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5804,7 +6072,7 @@ func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
 //
 //    // Example sending a request using the UpdateDocumentRequest method.
 //    req := client.UpdateDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5838,7 +6106,8 @@ type UpdateDocumentDefaultVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentDefaultVersion API request.
-func (r UpdateDocumentDefaultVersionRequest) Send() (*UpdateDocumentDefaultVersionOutput, error) {
+func (r UpdateDocumentDefaultVersionRequest) Send(ctx context.Context) (*UpdateDocumentDefaultVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5854,7 +6123,7 @@ func (r UpdateDocumentDefaultVersionRequest) Send() (*UpdateDocumentDefaultVersi
 //
 //    // Example sending a request using the UpdateDocumentDefaultVersionRequest method.
 //    req := client.UpdateDocumentDefaultVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5888,7 +6157,8 @@ type UpdateMaintenanceWindowRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceWindow API request.
-func (r UpdateMaintenanceWindowRequest) Send() (*UpdateMaintenanceWindowOutput, error) {
+func (r UpdateMaintenanceWindowRequest) Send(ctx context.Context) (*UpdateMaintenanceWindowOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5904,7 +6174,7 @@ func (r UpdateMaintenanceWindowRequest) Send() (*UpdateMaintenanceWindowOutput, 
 //
 //    // Example sending a request using the UpdateMaintenanceWindowRequest method.
 //    req := client.UpdateMaintenanceWindowRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5938,7 +6208,8 @@ type UpdateMaintenanceWindowTargetRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceWindowTarget API request.
-func (r UpdateMaintenanceWindowTargetRequest) Send() (*UpdateMaintenanceWindowTargetOutput, error) {
+func (r UpdateMaintenanceWindowTargetRequest) Send(ctx context.Context) (*UpdateMaintenanceWindowTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5970,7 +6241,7 @@ func (r UpdateMaintenanceWindowTargetRequest) Send() (*UpdateMaintenanceWindowTa
 //
 //    // Example sending a request using the UpdateMaintenanceWindowTargetRequest method.
 //    req := client.UpdateMaintenanceWindowTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6004,7 +6275,8 @@ type UpdateMaintenanceWindowTaskRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceWindowTask API request.
-func (r UpdateMaintenanceWindowTaskRequest) Send() (*UpdateMaintenanceWindowTaskOutput, error) {
+func (r UpdateMaintenanceWindowTaskRequest) Send(ctx context.Context) (*UpdateMaintenanceWindowTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6039,7 +6311,7 @@ func (r UpdateMaintenanceWindowTaskRequest) Send() (*UpdateMaintenanceWindowTask
 //
 //    // Example sending a request using the UpdateMaintenanceWindowTaskRequest method.
 //    req := client.UpdateMaintenanceWindowTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6073,7 +6345,8 @@ type UpdateManagedInstanceRoleRequest struct {
 }
 
 // Send marshals and sends the UpdateManagedInstanceRole API request.
-func (r UpdateManagedInstanceRoleRequest) Send() (*UpdateManagedInstanceRoleOutput, error) {
+func (r UpdateManagedInstanceRoleRequest) Send(ctx context.Context) (*UpdateManagedInstanceRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6090,7 +6363,7 @@ func (r UpdateManagedInstanceRoleRequest) Send() (*UpdateManagedInstanceRoleOutp
 //
 //    // Example sending a request using the UpdateManagedInstanceRoleRequest method.
 //    req := client.UpdateManagedInstanceRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6124,7 +6397,8 @@ type UpdatePatchBaselineRequest struct {
 }
 
 // Send marshals and sends the UpdatePatchBaseline API request.
-func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
+func (r UpdatePatchBaselineRequest) Send(ctx context.Context) (*UpdatePatchBaselineOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6144,7 +6418,7 @@ func (r UpdatePatchBaselineRequest) Send() (*UpdatePatchBaselineOutput, error) {
 //
 //    // Example sending a request using the UpdatePatchBaselineRequest method.
 //    req := client.UpdatePatchBaselineRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6378,6 +6652,9 @@ type AssociationDescription struct {
 	// The association version.
 	AssociationVersion *string `type:"string"`
 
+	// The severity level that is assigned to the association.
+	ComplianceSeverity AssociationComplianceSeverity `type:"string" enum:"true"`
+
 	// The date when the association was made.
 	Date *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -6395,6 +6672,32 @@ type AssociationDescription struct {
 
 	// The date when the association was last updated.
 	LastUpdateAssociationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of targets allowed to run the association at the same
+	// time. You can specify a number, for example 10, or a percentage of the target
+	// set, for example 10%. The default value is 100%, which means all targets
+	// run the association at the same time.
+	//
+	// If a new instance starts and attempts to execute an association while Systems
+	// Manager is executing MaxConcurrency associations, the association is allowed
+	// to run. During the next association interval, the new instance will process
+	// its association within the limit specified for MaxConcurrency.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The number of errors that are allowed before the system stops sending requests
+	// to run the association on additional targets. You can specify either an absolute
+	// number of errors, for example 10, or a percentage of the target set, for
+	// example 10%. If you specify 3, for example, the system stops sending requests
+	// when the fourth error is received. If you specify 0, then the system stops
+	// sending requests after the first error is returned. If you run an association
+	// on 50 instances and set MaxError to 10%, then the system stops sending the
+	// request when the sixth error is received.
+	//
+	// Executions that are already running an association when MaxErrors is reached
+	// are allowed to complete, but some of these executions may fail as well. If
+	// you need to ensure that there won't be more than max-errors failed executions,
+	// set MaxConcurrency to 1 so that executions proceed one at a time.
+	MaxErrors *string `min:"1" type:"string"`
 
 	// The name of the Systems Manager document.
 	Name *string `type:"string"`
@@ -6761,12 +7064,41 @@ type AssociationVersionInfo struct {
 	// The association version.
 	AssociationVersion *string `type:"string"`
 
+	// The severity level that is assigned to the association.
+	ComplianceSeverity AssociationComplianceSeverity `type:"string" enum:"true"`
+
 	// The date the association version was created.
 	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The version of a Systems Manager document used when the association version
 	// was created.
 	DocumentVersion *string `type:"string"`
+
+	// The maximum number of targets allowed to run the association at the same
+	// time. You can specify a number, for example 10, or a percentage of the target
+	// set, for example 10%. The default value is 100%, which means all targets
+	// run the association at the same time.
+	//
+	// If a new instance starts and attempts to execute an association while Systems
+	// Manager is executing MaxConcurrency associations, the association is allowed
+	// to run. During the next association interval, the new instance will process
+	// its association within the limit specified for MaxConcurrency.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The number of errors that are allowed before the system stops sending requests
+	// to run the association on additional targets. You can specify either an absolute
+	// number of errors, for example 10, or a percentage of the target set, for
+	// example 10%. If you specify 3, for example, the system stops sending requests
+	// when the fourth error is received. If you specify 0, then the system stops
+	// sending requests after the first error is returned. If you run an association
+	// on 50 instances and set MaxError to 10%, then the system stops sending the
+	// request when the sixth error is received.
+	//
+	// Executions that are already running an association when MaxErrors is reached
+	// are allowed to complete, but some of these executions may fail as well. If
+	// you need to ensure that there won't be more than max-errors failed executions,
+	// set MaxConcurrency to 1 so that executions proceed one at a time.
+	MaxErrors *string `min:"1" type:"string"`
 
 	// The name specified when the association was created.
 	Name *string `type:"string"`
@@ -6795,6 +7127,92 @@ func (s AssociationVersionInfo) String() string {
 // GoString returns the string representation
 func (s AssociationVersionInfo) GoString() string {
 	return s.String()
+}
+
+// A structure that includes attributes that describe a document attachment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentContent
+type AttachmentContent struct {
+	_ struct{} `type:"structure"`
+
+	// The cryptographic hash value of the document content.
+	Hash *string `type:"string"`
+
+	// The hash algorithm used to calculate the hash value.
+	HashType AttachmentHashType `type:"string" enum:"true"`
+
+	// The name of an attachment.
+	Name *string `type:"string"`
+
+	// The size of an attachment in bytes.
+	Size *int64 `type:"long"`
+
+	// The URL location of the attachment content.
+	Url *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AttachmentContent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttachmentContent) GoString() string {
+	return s.String()
+}
+
+// An attribute of an attachment, such as the attachment name or size.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentInformation
+type AttachmentInformation struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AttachmentInformation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttachmentInformation) GoString() string {
+	return s.String()
+}
+
+// A key and value pair that identifies the location of an attachment to a document.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AttachmentsSource
+type AttachmentsSource struct {
+	_ struct{} `type:"structure"`
+
+	// The key of a key and value pair that identifies the location of an attachment
+	// to a document.
+	Key AttachmentsSourceKey `type:"string" enum:"true"`
+
+	// The URL of the location of a document attachment, such as the URL of an Amazon
+	// S3 bucket.
+	Values []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s AttachmentsSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttachmentsSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AttachmentsSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AttachmentsSource"}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Detailed information about the current state of an individual Automation
@@ -6853,6 +7271,10 @@ type AutomationExecution struct {
 	// The AutomationExecutionId of the parent automation.
 	ParentAutomationExecutionId *string `min:"36" type:"string"`
 
+	// An aggregate of step execution statuses displayed in the AWS Console for
+	// a multi-Region and multi-account Automation execution.
+	ProgressCounters *ProgressCounters `type:"structure"`
+
 	// A list of resolved targets in the rate control execution.
 	ResolvedTargets *ResolvedTargets `type:"structure"`
 
@@ -6867,6 +7289,10 @@ type AutomationExecution struct {
 
 	// The target of the execution.
 	Target *string `type:"string"`
+
+	// The combination of AWS Regions and/or AWS accounts where you want to execute
+	// the Automation.
+	TargetLocations []TargetLocation `min:"1" type:"list"`
 
 	// The specified key-value mapping of document parameters to target resources.
 	TargetMaps []map[string][]string `type:"list"`
@@ -6949,6 +7375,13 @@ type AutomationExecutionMetadata struct {
 	// The status of the execution. Valid values include: Running, Succeeded, Failed,
 	// Timed out, or Cancelled.
 	AutomationExecutionStatus AutomationExecutionStatus `type:"string" enum:"true"`
+
+	// Use this filter with DescribeAutomationExecution. Specify either Local of
+	// CrossAccount. CrossAccount is an Automation that executes in multiple AWS
+	// Regions and accounts. For more information, see Concurrently Executing Automations
+	// in Multiple AWS Regions and Accounts (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
+	// in the AWS Systems Manager User Guide.
+	AutomationType AutomationType `type:"string" enum:"true"`
 
 	// The action of the currently executing step.
 	CurrentAction *string `type:"string"`
@@ -7082,6 +7515,68 @@ func (s CancelCommandOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelCommandOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionRequest
+type CancelMaintenanceWindowExecutionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the Maintenance Window execution to stop.
+	//
+	// WindowExecutionId is a required field
+	WindowExecutionId *string `min:"36" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CancelMaintenanceWindowExecutionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelMaintenanceWindowExecutionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CancelMaintenanceWindowExecutionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CancelMaintenanceWindowExecutionInput"}
+
+	if s.WindowExecutionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
+	}
+	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
+		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelMaintenanceWindowExecutionResult
+type CancelMaintenanceWindowExecutionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the Maintenance Window execution that has been stopped.
+	WindowExecutionId *string `min:"36" type:"string"`
+}
+
+// String returns the string representation
+func (s CancelMaintenanceWindowExecutionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelMaintenanceWindowExecutionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelMaintenanceWindowExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7276,11 +7771,13 @@ type CommandFilter struct {
 
 	// The filter value. Valid values for each filter key are as follows:
 	//
-	//    * InvokedAfter: A timestamp to limit your results. For example, specify
-	//    2018-07-07T00:00:00Z to see results occurring July 7, 2018, and later.
+	//    * InvokedAfter: Specify a timestamp to limit your results. For example,
+	//    specify 2018-07-07T00:00:00Z to see a list of command executions occurring
+	//    July 7, 2018, and later.
 	//
-	//    * InvokedBefore: A timestamp to limit your results. For example, specify
-	//    2018-07-07T00:00:00Z to see results before July 7, 2018.
+	//    * InvokedBefore: Specify a timestamp to limit your results. For example,
+	//    specify 2018-07-07T00:00:00Z to see a list of command executions from
+	//    before July 7, 2018.
 	//
 	//    * Status: Specify a valid command status to see a list of all command
 	//    executions with that status. Status values you can specify include:
@@ -7299,19 +7796,17 @@ type CommandFilter struct {
 	//
 	// Cancelling
 	//
-	//    * DocumentName: The name of the SSM document for which you want to see
-	//    command results.
+	//    * DocumentName: Specify name of the SSM document for which you want to
+	//    see command execution results. For example, specify AWS-RunPatchBaseline
+	//    to see command executions that used this SSM document to perform security
+	//    patching operations on instances.
 	//
-	// For example, specify AWS-RunPatchBaseline to see command executions that
-	//    used this SSM document to perform security patching operations on instances.
+	//    * ExecutionStage: Specify one of the following values:
 	//
+	// Executing: Returns a list of command executions that are currently still
+	//    running.
 	//
-	//    * ExecutionStage: An enum whose value can be either Executing or Complete.
-	//
-	// Specify Executing to see a list of command executions that are currently
-	//    still running.
-	//
-	// Specify Complete to see a list of command exeuctions that have already completed.
+	// Complete: Returns a list of command executions that have already completed.
 	//
 	// Value is a required field
 	Value *string `locationName:"value" min:"1" type:"string" required:"true"`
@@ -8000,7 +8495,7 @@ func (s CreateAssociationBatchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Describes the association of a Systems Manager document and an instance.
+// Describes the association of a Systems Manager SSM document and an instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry
 type CreateAssociationBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
@@ -8008,11 +8503,40 @@ type CreateAssociationBatchRequestEntry struct {
 	// Specify a descriptive name for the association.
 	AssociationName *string `type:"string"`
 
+	// The severity level to assign to the association.
+	ComplianceSeverity AssociationComplianceSeverity `type:"string" enum:"true"`
+
 	// The document version.
 	DocumentVersion *string `type:"string"`
 
 	// The ID of the instance.
 	InstanceId *string `type:"string"`
+
+	// The maximum number of targets allowed to run the association at the same
+	// time. You can specify a number, for example 10, or a percentage of the target
+	// set, for example 10%. The default value is 100%, which means all targets
+	// run the association at the same time.
+	//
+	// If a new instance starts and attempts to execute an association while Systems
+	// Manager is executing MaxConcurrency associations, the association is allowed
+	// to run. During the next association interval, the new instance will process
+	// its association within the limit specified for MaxConcurrency.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The number of errors that are allowed before the system stops sending requests
+	// to run the association on additional targets. You can specify either an absolute
+	// number of errors, for example 10, or a percentage of the target set, for
+	// example 10%. If you specify 3, for example, the system stops sending requests
+	// when the fourth error is received. If you specify 0, then the system stops
+	// sending requests after the first error is returned. If you run an association
+	// on 50 instances and set MaxError to 10%, then the system stops sending the
+	// request when the sixth error is received.
+	//
+	// Executions that are already running an association when MaxErrors is reached
+	// are allowed to complete, but some of these executions may fail as well. If
+	// you need to ensure that there won't be more than max-errors failed executions,
+	// set MaxConcurrency to 1 so that executions proceed one at a time.
+	MaxErrors *string `min:"1" type:"string"`
 
 	// The name of the configuration document.
 	//
@@ -8045,6 +8569,12 @@ func (s CreateAssociationBatchRequestEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationBatchRequestEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationBatchRequestEntry"}
+	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
+	}
+	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -8078,12 +8608,41 @@ type CreateAssociationInput struct {
 	// Specify a descriptive name for the association.
 	AssociationName *string `type:"string"`
 
+	// The severity level to assign to the association.
+	ComplianceSeverity AssociationComplianceSeverity `type:"string" enum:"true"`
+
 	// The document version you want to associate with the target(s). Can be a specific
 	// version or the default version.
 	DocumentVersion *string `type:"string"`
 
 	// The instance ID.
 	InstanceId *string `type:"string"`
+
+	// The maximum number of targets allowed to run the association at the same
+	// time. You can specify a number, for example 10, or a percentage of the target
+	// set, for example 10%. The default value is 100%, which means all targets
+	// run the association at the same time.
+	//
+	// If a new instance starts and attempts to execute an association while Systems
+	// Manager is executing MaxConcurrency associations, the association is allowed
+	// to run. During the next association interval, the new instance will process
+	// its association within the limit specified for MaxConcurrency.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The number of errors that are allowed before the system stops sending requests
+	// to run the association on additional targets. You can specify either an absolute
+	// number of errors, for example 10, or a percentage of the target set, for
+	// example 10%. If you specify 3, for example, the system stops sending requests
+	// when the fourth error is received. If you specify 0, then the system stops
+	// sending requests after the first error is returned. If you run an association
+	// on 50 instances and set MaxError to 10%, then the system stops sending the
+	// request when the sixth error is received.
+	//
+	// Executions that are already running an association when MaxErrors is reached
+	// are allowed to complete, but some of these executions may fail as well. If
+	// you need to ensure that there won't be more than max-errors failed executions,
+	// set MaxConcurrency to 1 so that executions proceed one at a time.
+	MaxErrors *string `min:"1" type:"string"`
 
 	// The name of the Systems Manager document.
 	//
@@ -8116,6 +8675,12 @@ func (s CreateAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationInput"}
+	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
+	}
+	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -8171,6 +8736,10 @@ func (s CreateAssociationOutput) SDKResponseMetadata() aws.Response {
 type CreateDocumentInput struct {
 	_ struct{} `type:"structure"`
 
+	// A list of key and value pairs that describe attachments to a version of a
+	// document.
+	Attachments []AttachmentsSource `type:"list"`
+
 	// A valid JSON or YAML string.
 	//
 	// Content is a required field
@@ -8180,8 +8749,8 @@ type CreateDocumentInput struct {
 	// JSON or YAML. JSON is the default format.
 	DocumentFormat DocumentFormat `type:"string" enum:"true"`
 
-	// The type of document to create. Valid document types include: Policy, Automation,
-	// and Command.
+	// The type of document to create. Valid document types include: Command, Policy,
+	// Automation, Session, and Package.
 	DocumentType DocumentType `type:"string" enum:"true"`
 
 	// A name for the Systems Manager document.
@@ -8206,6 +8775,11 @@ type CreateDocumentInput struct {
 	// Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string `type:"string"`
+
+	// An optional field specifying the version of the artifact you are creating
+	// with the document. For example, "Release 12, Update 6". This value is unique
+	// across all versions of a document, and cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -8231,6 +8805,13 @@ func (s *CreateDocumentInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Attachments != nil {
+		for i, v := range s.Attachments {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attachments", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8297,6 +8878,11 @@ type CreateMaintenanceWindowInput struct {
 	// Duration is a required field
 	Duration *int64 `min:"1" type:"integer" required:"true"`
 
+	// The date and time, in ISO-8601 Extended format, for when you want the Maintenance
+	// Window to become inactive. EndDate allows you to set a date and time in the
+	// future when the Maintenance Window will no longer run.
+	EndDate *string `type:"string"`
+
 	// The name of the Maintenance Window.
 	//
 	// Name is a required field
@@ -8306,6 +8892,17 @@ type CreateMaintenanceWindowInput struct {
 	//
 	// Schedule is a required field
 	Schedule *string `min:"1" type:"string" required:"true"`
+
+	// The time zone that the scheduled Maintenance Window executions are based
+	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
+	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
+	// (https://www.iana.org/time-zones) on the IANA website.
+	ScheduleTimezone *string `type:"string"`
+
+	// The date and time, in ISO-8601 Extended format, for when you want the Maintenance
+	// Window to become active. StartDate allows you to delay activation of the
+	// Maintenance Window until the specified future date.
+	StartDate *string `type:"string"`
 }
 
 // String returns the string representation
@@ -8438,6 +9035,21 @@ type CreatePatchBaselineInput struct {
 	// Lists (http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
 	RejectedPatches []string `type:"list"`
+
+	// The action for Patch Manager to take on patches included in the RejectedPackages
+	// list.
+	//
+	//    * ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed
+	//    only if it is a dependency of another package. It is considered compliant
+	//    with the patch baseline, and its status is reported as InstalledOther.
+	//    This is the default action if no option is specified.
+	//
+	//    * BLOCK: Packages in the RejectedPatches list, and packages that include
+	//    them as dependencies, are not installed under any circumstances. If a
+	//    package was installed before it was added to the Rejected patches list,
+	//    it is considered non-compliant with the patch baseline, and its status
+	//    is reported as InstalledRejected.
+	RejectedPatchesAction PatchAction `type:"string" enum:"true"`
 
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
@@ -10055,6 +10667,11 @@ type DescribeDocumentInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// An optional field specifying the version of the artifact associated with
+	// the document. For example, "Release 12, Update 6". This value is unique across
+	// all versions of a document, and cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -10405,6 +11022,7 @@ type DescribeInstanceInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// One or more filters. Use a filter to return a more specific list of instances.
+	// You can filter on Amazon EC2 tag. Specify tags by using a key-value mapping.
 	Filters []InstanceInformationStringFilter `type:"list"`
 
 	// This is a legacy method. We recommend that you don't use this method. Instead,
@@ -10737,8 +11355,7 @@ type DescribeInstancePatchesOutput struct {
 	//
 	// Severity (string)
 	//
-	// State (string: "INSTALLED", "INSTALLED OTHER", "MISSING", "NOT APPLICABLE",
-	// "FAILED")
+	// State (string, such as "INSTALLED" or "FAILED")
 	//
 	// InstalledTime (DateTime)
 	//
@@ -11119,6 +11736,105 @@ func (s DescribeMaintenanceWindowExecutionsOutput) SDKResponseMetadata() aws.Res
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowScheduleRequest
+type DescribeMaintenanceWindowScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// Filters used to limit the range of results. For example, you can limit Maintenance
+	// Window executions to only those scheduled before or after a certain date
+	// and time.
+	Filters []PatchOrchestratorFilter `type:"list"`
+
+	// The maximum number of items to return for this call. The call also returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token for the next set of items to return. (You received this token from
+	// a previous call.)
+	NextToken *string `type:"string"`
+
+	// The type of resource you want to retrieve information about. For example,
+	// "INSTANCE".
+	ResourceType MaintenanceWindowResourceType `type:"string" enum:"true"`
+
+	// The instance ID or key/value pair to retrieve information about.
+	Targets []Target `type:"list"`
+
+	// The ID of the Maintenance Window to retrieve information about.
+	WindowId *string `min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeMaintenanceWindowScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeMaintenanceWindowScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeMaintenanceWindowScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowScheduleInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.WindowId != nil && len(*s.WindowId) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Targets != nil {
+		for i, v := range s.Targets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowScheduleResult
+type DescribeMaintenanceWindowScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token for the next set of items to return. (You use this token in the
+	// next call.)
+	NextToken *string `type:"string"`
+
+	// Information about Maintenance Window executions scheduled for the specified
+	// time range.
+	ScheduledWindowExecutions []ScheduledWindowExecution `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeMaintenanceWindowScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeMaintenanceWindowScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargetsRequest
 type DescribeMaintenanceWindowTargetsInput struct {
 	_ struct{} `type:"structure"`
@@ -11294,6 +12010,98 @@ func (s DescribeMaintenanceWindowTasksOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeMaintenanceWindowTasksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTargetRequest
+type DescribeMaintenanceWindowsForTargetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of items to return for this call. The call also returns
+	// a token that you can specify in a subsequent call to get the next set of
+	// results.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token for the next set of items to return. (You received this token from
+	// a previous call.)
+	NextToken *string `type:"string"`
+
+	// The type of resource you want to retrieve information about. For example,
+	// "INSTANCE".
+	//
+	// ResourceType is a required field
+	ResourceType MaintenanceWindowResourceType `type:"string" required:"true" enum:"true"`
+
+	// The instance ID or key/value pair to retrieve information about.
+	//
+	// Targets is a required field
+	Targets []Target `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeMaintenanceWindowsForTargetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeMaintenanceWindowsForTargetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeMaintenanceWindowsForTargetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowsForTargetInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if len(s.ResourceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+
+	if s.Targets == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
+	}
+	if s.Targets != nil {
+		for i, v := range s.Targets {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsForTargetResult
+type DescribeMaintenanceWindowsForTargetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token for the next set of items to return. (You use this token in the
+	// next call.)
+	NextToken *string `type:"string"`
+
+	// Information about the Maintenance Window targets and tasks an instance is
+	// associated with.
+	WindowIdentities []MaintenanceWindowIdentityForTarget `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeMaintenanceWindowsForTargetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeMaintenanceWindowsForTargetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeMaintenanceWindowsForTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -11595,6 +12403,14 @@ type DescribePatchGroupStateOutput struct {
 	// The number of instances with installed patches.
 	InstancesWithInstalledPatches *int64 `type:"integer"`
 
+	// The number of instances with patches installed that are specified in a RejectedPatches
+	// list. Patches with a status of INSTALLED_REJECTED were typically installed
+	// before they were added to a RejectedPatches list.
+	//
+	// If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction,
+	// the value of InstancesWithInstalledRejectedPatches will always be 0 (zero).
+	InstancesWithInstalledRejectedPatches *int64 `type:"integer"`
+
 	// The number of instances with missing patches from the patch baseline.
 	InstancesWithMissingPatches *int64 `type:"integer"`
 
@@ -11711,7 +12527,7 @@ type DescribeSessionsInput struct {
 	// a previous call.)
 	NextToken *string `type:"string"`
 
-	// The session status to retrieve a list of sessions for. For example, "active".
+	// The session status to retrieve a list of sessions for. For example, "Active".
 	//
 	// State is a required field
 	State SessionState `type:"string" required:"true" enum:"true"`
@@ -11790,6 +12606,9 @@ type DocumentDefaultVersionDescription struct {
 	// The default version of the document.
 	DefaultVersion *string `type:"string"`
 
+	// The default version of the artifact associated with the document.
+	DefaultVersionName *string `type:"string"`
+
 	// The name of the document.
 	Name *string `type:"string"`
 }
@@ -11808,6 +12627,10 @@ func (s DocumentDefaultVersionDescription) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription
 type DocumentDescription struct {
 	_ struct{} `type:"structure"`
+
+	// Details about the document attachments, including names, locations, sizes,
+	// etc.
+	AttachmentsInformation []AttachmentInformation `type:"list"`
 
 	// The date when the document was created.
 	CreatedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -11832,7 +12655,7 @@ type DocumentDescription struct {
 	// Sha1 hashes have been deprecated.
 	Hash *string `type:"string"`
 
-	// Sha256 or Sha1.
+	// The hash type of the document. Valid values include Sha256 or Sha1.
 	//
 	// Sha1 hashes have been deprecated.
 	HashType DocumentHashType `type:"string" enum:"true"`
@@ -11861,6 +12684,12 @@ type DocumentDescription struct {
 	// The status of the Systems Manager document.
 	Status DocumentStatus `type:"string" enum:"true"`
 
+	// A message returned by AWS Systems Manager that explains the Status value.
+	// For example, a Failed status might be explained by the StatusInformation
+	// message, "The specified S3 bucket does not exist. Verify that the URL of
+	// the S3 bucket is correct."
+	StatusInformation *string `type:"string"`
+
 	// The tags, or metadata, that have been applied to the document.
 	Tags []Tag `type:"list"`
 
@@ -11869,6 +12698,9 @@ type DocumentDescription struct {
 	// see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string `type:"string"`
+
+	// The version of the artifact associated with the document.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -11961,6 +12793,11 @@ type DocumentIdentifier struct {
 	// see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string `type:"string"`
+
+	// An optional field specifying the version of the artifact associated with
+	// the document. For example, "Release 12, Update 6". This value is unique across
+	// all versions of a document, and cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12082,6 +12919,21 @@ type DocumentVersionInfo struct {
 
 	// The document name.
 	Name *string `type:"string"`
+
+	// The status of the Systems Manager document, such as Creating, Active, Failed,
+	// and Deleting.
+	Status DocumentStatus `type:"string" enum:"true"`
+
+	// A message returned by AWS Systems Manager that explains the Status value.
+	// For example, a Failed status might be explained by the StatusInformation
+	// message, "The specified S3 bucket does not exist. Verify that the URL of
+	// the S3 bucket is correct."
+	StatusInformation *string `type:"string"`
+
+	// The version of the artifact associated with the document. For example, "Release
+	// 12, Update 6". This value is unique across all versions of a document, and
+	// cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12647,6 +13499,11 @@ type GetDocumentInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// An optional field specifying the version of the artifact associated with
+	// the document. For example, "Release 12, Update 6". This value is unique across
+	// all versions of a document, and cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -12679,6 +13536,10 @@ type GetDocumentOutput struct {
 
 	responseMetadata aws.Response
 
+	// A description of the document attachments, including names, locations, sizes,
+	// etc.
+	AttachmentsContent []AttachmentContent `type:"list"`
+
 	// The contents of the Systems Manager document.
 	Content *string `min:"1" type:"string"`
 
@@ -12693,6 +13554,21 @@ type GetDocumentOutput struct {
 
 	// The name of the Systems Manager document.
 	Name *string `type:"string"`
+
+	// The status of the Systems Manager document, such as Creating, Active, Updating,
+	// Failed, and Deleting.
+	Status DocumentStatus `type:"string" enum:"true"`
+
+	// A message returned by AWS Systems Manager that explains the Status value.
+	// For example, a Failed status might be explained by the StatusInformation
+	// message, "The specified S3 bucket does not exist. Verify that the URL of
+	// the S3 bucket is correct."
+	StatusInformation *string `type:"string"`
+
+	// The version of the artifact associated with the document. For example, "Release
+	// 12, Update 6". This value is unique across all versions of a document, and
+	// cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -13282,14 +14158,34 @@ type GetMaintenanceWindowOutput struct {
 	// Whether the Maintenance Windows is enabled.
 	Enabled *bool `type:"boolean"`
 
+	// The date and time, in ISO-8601 Extended format, for when the Maintenance
+	// Window is scheduled to become inactive. The Maintenance Window will not run
+	// after this specified time.
+	EndDate *string `type:"string"`
+
 	// The date the Maintenance Window was last modified.
 	ModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the Maintenance Window.
 	Name *string `min:"3" type:"string"`
 
+	// The next time the Maintenance Window will actually run, taking into account
+	// any specified times for the Maintenance Window to become active or inactive.
+	NextExecutionTime *string `type:"string"`
+
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
+
+	// The time zone that the scheduled Maintenance Window executions are based
+	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
+	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
+	// (https://www.iana.org/time-zones) on the IANA website.
+	ScheduleTimezone *string `type:"string"`
+
+	// The date and time, in ISO-8601 Extended format, for when the Maintenance
+	// Window is scheduled to become active. The Maintenance Window will not run
+	// before this specified time.
+	StartDate *string `type:"string"`
 
 	// The ID of the created Maintenance Window.
 	WindowId *string `min:"20" type:"string"`
@@ -13916,6 +14812,11 @@ type GetPatchBaselineOutput struct {
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
 
+	// The action specified to take on patches included in the RejectedPatches list.
+	// A patch can be allowed only if it is a dependency of another package, or
+	// blocked entirely along with packages that include it as a dependency.
+	RejectedPatchesAction PatchAction `type:"string" enum:"true"`
+
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
 	Sources []PatchSource `type:"list"`
@@ -14291,12 +15192,30 @@ type InstancePatchState struct {
 	// during the last patching operation, but failed to install.
 	FailedCount *int64 `type:"integer"`
 
+	// An https URL or an Amazon S3 path-style URL to a list of patches to be installed.
+	// This patch installation list, which you maintain in an Amazon S3 bucket in
+	// YAML format and specify in the SSM document AWS-RunPatchBaseline, overrides
+	// the patches specified by the default patch baseline.
+	//
+	// For more information about the InstallOverrideList parameter, see About the
+	// SSM Document AWS-RunPatchBaseline (http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html)
+	// in the AWS Systems Manager User Guide.
+	InstallOverrideList *string `min:"1" type:"string"`
+
 	// The number of patches from the patch baseline that are installed on the instance.
 	InstalledCount *int64 `type:"integer"`
 
 	// The number of patches not specified in the patch baseline that are installed
 	// on the instance.
 	InstalledOtherCount *int64 `type:"integer"`
+
+	// The number of instances with patches installed that are specified in a RejectedPatches
+	// list. Patches with a status of InstalledRejected were typically installed
+	// before they were added to a RejectedPatches list.
+	//
+	// If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction,
+	// the value of InstalledRejectedCount will always be 0 (zero).
+	InstalledRejectedCount *int64 `type:"integer"`
 
 	// The ID of the managed instance the high-level patch compliance information
 	// was collected for.
@@ -16197,7 +17116,7 @@ func (s MaintenanceWindowExecutionTaskInvocationIdentity) GoString() string {
 	return s.String()
 }
 
-// Filter used in the request.
+// Filter used in the request. Supported filter keys are Name and Enabled.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowFilter
 type MaintenanceWindowFilter struct {
 	_ struct{} `type:"structure"`
@@ -16250,8 +17169,27 @@ type MaintenanceWindowIdentity struct {
 	// Whether the Maintenance Window is enabled.
 	Enabled *bool `type:"boolean"`
 
+	// The date and time, in ISO-8601 Extended format, for when the Maintenance
+	// Window is scheduled to become inactive.
+	EndDate *string `type:"string"`
+
 	// The name of the Maintenance Window.
 	Name *string `min:"3" type:"string"`
+
+	// The next time the Maintenance Window will actually run, taking into account
+	// any specified times for the Maintenance Window to become active or inactive.
+	NextExecutionTime *string `type:"string"`
+
+	// The schedule of the Maintenance Window in the form of a cron or rate expression.
+	Schedule *string `min:"1" type:"string"`
+
+	// The time zone that the scheduled Maintenance Window executions are based
+	// on, in Internet Assigned Numbers Authority (IANA) format.
+	ScheduleTimezone *string `type:"string"`
+
+	// The date and time, in ISO-8601 Extended format, for when the Maintenance
+	// Window is scheduled to become active.
+	StartDate *string `type:"string"`
 
 	// The ID of the Maintenance Window.
 	WindowId *string `min:"20" type:"string"`
@@ -16264,6 +17202,28 @@ func (s MaintenanceWindowIdentity) String() string {
 
 // GoString returns the string representation
 func (s MaintenanceWindowIdentity) GoString() string {
+	return s.String()
+}
+
+// The Maintenance Window to which the specified target belongs.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentityForTarget
+type MaintenanceWindowIdentityForTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Maintenance Window.
+	Name *string `min:"3" type:"string"`
+
+	// The ID of the Maintenance Window.
+	WindowId *string `min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s MaintenanceWindowIdentityForTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MaintenanceWindowIdentityForTarget) GoString() string {
 	return s.String()
 }
 
@@ -16379,7 +17339,7 @@ type MaintenanceWindowRunCommandParameters struct {
 	ServiceRoleArn *string `type:"string"`
 
 	// If this time is reached and the command has not already started executing,
-	// it doesn not execute.
+	// it doesn't run.
 	TimeoutSeconds *int64 `min:"30" type:"integer"`
 }
 
@@ -17158,8 +18118,10 @@ type PatchComplianceData struct {
 	// Severity is a required field
 	Severity *string `type:"string" required:"true"`
 
-	// The state of the patch on the instance (INSTALLED, INSTALLED_OTHER, MISSING,
-	// NOT_APPLICABLE or FAILED).
+	// The state of the patch on the instance, such as INSTALLED or FAILED.
+	//
+	// For descriptions of each patch state, see About Patch Compliance (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch)
+	// in the AWS Systems Manager User Guide.
 	//
 	// State is a required field
 	State PatchComplianceDataState `type:"string" required:"true" enum:"true"`
@@ -17936,6 +18898,43 @@ func (s PatchStatus) String() string {
 
 // GoString returns the string representation
 func (s PatchStatus) GoString() string {
+	return s.String()
+}
+
+// An aggregate of step execution statuses displayed in the AWS Console for
+// a multi-Region and multi-account Automation execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ProgressCounters
+type ProgressCounters struct {
+	_ struct{} `type:"structure"`
+
+	// The total number of steps that the system cancelled in all specified AWS
+	// Regions and accounts for the current Automation execution.
+	CancelledSteps *int64 `type:"integer"`
+
+	// The total number of steps that failed to execute in all specified AWS Regions
+	// and accounts for the current Automation execution.
+	FailedSteps *int64 `type:"integer"`
+
+	// The total number of steps that successfully completed in all specified AWS
+	// Regions and accounts for the current Automation execution.
+	SuccessSteps *int64 `type:"integer"`
+
+	// The total number of steps that timed out in all specified AWS Regions and
+	// accounts for the current Automation execution.
+	TimedOutSteps *int64 `type:"integer"`
+
+	// The total number of steps executed in all specified AWS Regions and accounts
+	// for the current Automation execution.
+	TotalSteps *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s ProgressCounters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ProgressCounters) GoString() string {
 	return s.String()
 }
 
@@ -18734,7 +19733,7 @@ type RegisterTaskWithMaintenanceWindowOutput struct {
 
 	responseMetadata aws.Response
 
-	// The id of the task in the Maintenance Window.
+	// The ID of the task in the Maintenance Window.
 	WindowTaskId *string `min:"36" type:"string"`
 }
 
@@ -19197,6 +20196,32 @@ func (s S3OutputUrl) GoString() string {
 	return s.String()
 }
 
+// Information about a scheduled execution for a Maintenance Window.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ScheduledWindowExecution
+type ScheduledWindowExecution struct {
+	_ struct{} `type:"structure"`
+
+	// The time, in ISO-8601 Extended format, that the Maintenance Window is scheduled
+	// to be run.
+	ExecutionTime *string `type:"string"`
+
+	// The name of the Maintenance Window to be run.
+	Name *string `min:"3" type:"string"`
+
+	// The ID of the Maintenance Window to be run.
+	WindowId *string `min:"20" type:"string"`
+}
+
+// String returns the string representation
+func (s ScheduledWindowExecution) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ScheduledWindowExecution) GoString() string {
+	return s.String()
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignalRequest
 type SendAutomationSignalInput struct {
 	_ struct{} `type:"structure"`
@@ -19316,7 +20341,7 @@ type SendCommandInput struct {
 	// The instance IDs where the command should execute. You can specify a maximum
 	// of 50 IDs. If you prefer not to list individual instance IDs, you can instead
 	// send commands to a fleet of instances using the Targets parameter, which
-	// accepts EC2 tags. For more information about how to use Targets, see Sending
+	// accepts EC2 tags. For more information about how to use targets, see Sending
 	// Commands to a Fleet (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
 	InstanceIds []string `type:"list"`
@@ -19359,7 +20384,7 @@ type SendCommandInput struct {
 
 	// (Optional) An array of search criteria that targets instances using a Key,Value
 	// combination that you specify. Targets is required if you don't provide one
-	// or more instance IDs in the call. For more information about how to use Targets,
+	// or more instance IDs in the call. For more information about how to use targets,
 	// see Sending Commands to a Fleet (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the AWS Systems Manager User Guide.
 	Targets []Target `type:"list"`
@@ -19737,12 +20762,19 @@ type StartAutomationExecutionInput struct {
 	// in the Automation document.
 	Parameters map[string][]string `min:"1" type:"map"`
 
+	// A location is a combination of AWS Regions and/or AWS accounts where you
+	// want to execute the Automation. Use this action to start an Automation in
+	// multiple Regions and multiple accounts. For more information, see Concurrently
+	// Executing Automations in Multiple AWS Regions and Accounts (http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
+	// in the AWS Systems Manager User Guide.
+	TargetLocations []TargetLocation `min:"1" type:"list"`
+
 	// A key-value mapping of document parameters to target resources. Both Targets
 	// and TargetMaps cannot be specified together.
 	TargetMaps []map[string][]string `type:"list"`
 
 	// The name of the parameter used as the target resource for the rate-controlled
-	// execution. Required if you specify Targets.
+	// execution. Required if you specify targets.
 	TargetParameterName *string `min:"1" type:"string"`
 
 	// A key-value mapping to target resources. Required if you specify TargetParameterName.
@@ -19778,8 +20810,18 @@ func (s *StartAutomationExecutionInput) Validate() error {
 	if s.Parameters != nil && len(s.Parameters) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
 	}
+	if s.TargetLocations != nil && len(s.TargetLocations) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetLocations", 1))
+	}
 	if s.TargetParameterName != nil && len(*s.TargetParameterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetParameterName", 1))
+	}
+	if s.TargetLocations != nil {
+		for i, v := range s.TargetLocations {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetLocations", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -19971,6 +21013,13 @@ type StepExecution struct {
 	// The execution status for this step. Valid values include: Pending, InProgress,
 	// Success, Cancelled, Failed, and TimedOut.
 	StepStatus AutomationExecutionStatus `type:"string" enum:"true"`
+
+	// The combination of AWS Regions and accounts targeted by the current Automation
+	// execution.
+	TargetLocation *TargetLocation `type:"structure"`
+
+	// The targets for the step execution.
+	Targets []Target `type:"list"`
 
 	// The timeout seconds of the step.
 	TimeoutSeconds *int64 `type:"long"`
@@ -20204,6 +21253,65 @@ func (s *Target) Validate() error {
 	return nil
 }
 
+// The combination of AWS Regions and accounts targeted by the current Automation
+// execution.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TargetLocation
+type TargetLocation struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS accounts targeted by the current Automation execution.
+	Accounts []string `min:"1" type:"list"`
+
+	// The Automation execution role used by the currently executing Automation.
+	ExecutionRoleName *string `min:"1" type:"string"`
+
+	// The AWS Regions targeted by the current Automation execution.
+	Regions []string `min:"1" type:"list"`
+
+	// The maxium number of AWS accounts and AWS regions allowed to run the Automation
+	// concurrently
+	TargetLocationMaxConcurrency *string `min:"1" type:"string"`
+
+	// The maxium number of errors allowed before the system stops queueing additional
+	// Automation executions for the currently executing Automation.
+	TargetLocationMaxErrors *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s TargetLocation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TargetLocation) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TargetLocation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TargetLocation"}
+	if s.Accounts != nil && len(s.Accounts) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Accounts", 1))
+	}
+	if s.ExecutionRoleName != nil && len(*s.ExecutionRoleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExecutionRoleName", 1))
+	}
+	if s.Regions != nil && len(s.Regions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Regions", 1))
+	}
+	if s.TargetLocationMaxConcurrency != nil && len(*s.TargetLocationMaxConcurrency) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetLocationMaxConcurrency", 1))
+	}
+	if s.TargetLocationMaxErrors != nil && len(*s.TargetLocationMaxErrors) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetLocationMaxErrors", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TerminateSessionRequest
 type TerminateSessionInput struct {
 	_ struct{} `type:"structure"`
@@ -20283,8 +21391,37 @@ type UpdateAssociationInput struct {
 	// this request succeeds, either specify $LATEST, or omit this parameter.
 	AssociationVersion *string `type:"string"`
 
+	// The severity level to assign to the association.
+	ComplianceSeverity AssociationComplianceSeverity `type:"string" enum:"true"`
+
 	// The document version you want update for the association.
 	DocumentVersion *string `type:"string"`
+
+	// The maximum number of targets allowed to run the association at the same
+	// time. You can specify a number, for example 10, or a percentage of the target
+	// set, for example 10%. The default value is 100%, which means all targets
+	// run the association at the same time.
+	//
+	// If a new instance starts and attempts to execute an association while Systems
+	// Manager is executing MaxConcurrency associations, the association is allowed
+	// to run. During the next association interval, the new instance will process
+	// its association within the limit specified for MaxConcurrency.
+	MaxConcurrency *string `min:"1" type:"string"`
+
+	// The number of errors that are allowed before the system stops sending requests
+	// to run the association on additional targets. You can specify either an absolute
+	// number of errors, for example 10, or a percentage of the target set, for
+	// example 10%. If you specify 3, for example, the system stops sending requests
+	// when the fourth error is received. If you specify 0, then the system stops
+	// sending requests after the first error is returned. If you run an association
+	// on 50 instances and set MaxError to 10%, then the system stops sending the
+	// request when the sixth error is received.
+	//
+	// Executions that are already running an association when MaxErrors is reached
+	// are allowed to complete, but some of these executions may fail as well. If
+	// you need to ensure that there won't be more than max-errors failed executions,
+	// set MaxConcurrency to 1 so that executions proceed one at a time.
+	MaxErrors *string `min:"1" type:"string"`
 
 	// The name of the association document.
 	Name *string `type:"string"`
@@ -20319,6 +21456,12 @@ func (s *UpdateAssociationInput) Validate() error {
 
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
+	}
+	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
+	}
+	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
 	}
 	if s.ScheduleExpression != nil && len(*s.ScheduleExpression) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ScheduleExpression", 1))
@@ -20522,7 +21665,11 @@ func (s UpdateDocumentDefaultVersionOutput) SDKResponseMetadata() aws.Response {
 type UpdateDocumentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The content in a document that you want to update.
+	// A list of key and value pairs that describe attachments to a version of a
+	// document.
+	Attachments []AttachmentsSource `type:"list"`
+
+	// A valid JSON or YAML string.
 	//
 	// Content is a required field
 	Content *string `min:"1" type:"string" required:"true"`
@@ -20541,6 +21688,11 @@ type UpdateDocumentInput struct {
 
 	// Specify a new target type for the document.
 	TargetType *string `type:"string"`
+
+	// An optional field specifying the version of the artifact you are updating
+	// with the document. For example, "Release 12, Update 6". This value is unique
+	// across all versions of a document, and cannot be changed.
+	VersionName *string `type:"string"`
 }
 
 // String returns the string representation
@@ -20566,6 +21718,13 @@ func (s *UpdateDocumentInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Attachments != nil {
+		for i, v := range s.Attachments {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attachments", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20620,6 +21779,11 @@ type UpdateMaintenanceWindowInput struct {
 	// Whether the Maintenance Window is enabled.
 	Enabled *bool `type:"boolean"`
 
+	// The date and time, in ISO-8601 Extended format, for when you want the Maintenance
+	// Window to become inactive. EndDate allows you to set a date and time in the
+	// future when the Maintenance Window will no longer run.
+	EndDate *string `type:"string"`
+
 	// The name of the Maintenance Window.
 	Name *string `min:"3" type:"string"`
 
@@ -20630,6 +21794,18 @@ type UpdateMaintenanceWindowInput struct {
 
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
+
+	// The time zone that the scheduled Maintenance Window executions are based
+	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
+	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
+	// (https://www.iana.org/time-zones) on the IANA website.
+	ScheduleTimezone *string `type:"string"`
+
+	// The time zone that the scheduled Maintenance Window executions are based
+	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
+	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
+	// (https://www.iana.org/time-zones) on the IANA website.
+	StartDate *string `type:"string"`
 
 	// The ID of the Maintenance Window to update.
 	//
@@ -20699,11 +21875,27 @@ type UpdateMaintenanceWindowOutput struct {
 	// Whether the Maintenance Window is enabled.
 	Enabled *bool `type:"boolean"`
 
+	// The date and time, in ISO-8601 Extended format, for when the Maintenance
+	// Window is scheduled to become inactive. The Maintenance Window will not run
+	// after this specified time.
+	EndDate *string `type:"string"`
+
 	// The name of the Maintenance Window.
 	Name *string `min:"3" type:"string"`
 
 	// The schedule of the Maintenance Window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
+
+	// The time zone that the scheduled Maintenance Window executions are based
+	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
+	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
+	// (https://www.iana.org/time-zones) on the IANA website.
+	ScheduleTimezone *string `type:"string"`
+
+	// The date and time, in ISO-8601 Extended format, for when the Maintenance
+	// Window is scheduled to become active. The Maintenance Window will not run
+	// before this specified time.
+	StartDate *string `type:"string"`
 
 	// The ID of the created Maintenance Window.
 	WindowId *string `min:"20" type:"string"`
@@ -21182,6 +22374,21 @@ type UpdatePatchBaselineInput struct {
 	// in the AWS Systems Manager User Guide.
 	RejectedPatches []string `type:"list"`
 
+	// The action for Patch Manager to take on patches included in the RejectedPackages
+	// list.
+	//
+	//    * ALLOW_AS_DEPENDENCY: A package in the Rejected patches list is installed
+	//    only if it is a dependency of another package. It is considered compliant
+	//    with the patch baseline, and its status is reported as InstalledOther.
+	//    This is the default action if no option is specified.
+	//
+	//    * BLOCK: Packages in the RejectedPatches list, and packages that include
+	//    them as dependencies, are not installed under any circumstances. If a
+	//    package was installed before it was added to the Rejected patches list,
+	//    it is considered non-compliant with the patch baseline, and its status
+	//    is reported as InstalledRejected.
+	RejectedPatchesAction PatchAction `type:"string" enum:"true"`
+
 	// If True, then all fields that are required by the CreatePatchBaseline action
 	// are also required for this API request. Optional fields that are not specified
 	// are set to null.
@@ -21287,6 +22494,11 @@ type UpdatePatchBaselineOutput struct {
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
 
+	// The action specified to take on patches included in the RejectedPatches list.
+	// A patch can be allowed only if it is a dependency of another package, or
+	// blocked entirely along with packages that include it as a dependency.
+	RejectedPatchesAction PatchAction `type:"string" enum:"true"`
+
 	// Information about the patches to use to update the instances, including target
 	// operating systems and source repositories. Applies to Linux instances only.
 	Sources []PatchSource `type:"list"`
@@ -21305,6 +22517,26 @@ func (s UpdatePatchBaselineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePatchBaselineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+type AssociationComplianceSeverity string
+
+// Enum values for AssociationComplianceSeverity
+const (
+	AssociationComplianceSeverityCritical    AssociationComplianceSeverity = "CRITICAL"
+	AssociationComplianceSeverityHigh        AssociationComplianceSeverity = "HIGH"
+	AssociationComplianceSeverityMedium      AssociationComplianceSeverity = "MEDIUM"
+	AssociationComplianceSeverityLow         AssociationComplianceSeverity = "LOW"
+	AssociationComplianceSeverityUnspecified AssociationComplianceSeverity = "UNSPECIFIED"
+)
+
+func (enum AssociationComplianceSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssociationComplianceSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type AssociationExecutionFilterKey string
@@ -21401,6 +22633,38 @@ func (enum AssociationStatusName) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AttachmentHashType string
+
+// Enum values for AttachmentHashType
+const (
+	AttachmentHashTypeSha256 AttachmentHashType = "Sha256"
+)
+
+func (enum AttachmentHashType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttachmentHashType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AttachmentsSourceKey string
+
+// Enum values for AttachmentsSourceKey
+const (
+	AttachmentsSourceKeySourceUrl AttachmentsSourceKey = "SourceUrl"
+)
+
+func (enum AttachmentsSourceKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttachmentsSourceKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutomationExecutionFilterKey string
 
 // Enum values for AutomationExecutionFilterKey
@@ -21412,6 +22676,7 @@ const (
 	AutomationExecutionFilterKeyCurrentAction      AutomationExecutionFilterKey = "CurrentAction"
 	AutomationExecutionFilterKeyStartTimeBefore    AutomationExecutionFilterKey = "StartTimeBefore"
 	AutomationExecutionFilterKeyStartTimeAfter     AutomationExecutionFilterKey = "StartTimeAfter"
+	AutomationExecutionFilterKeyAutomationType     AutomationExecutionFilterKey = "AutomationType"
 )
 
 func (enum AutomationExecutionFilterKey) MarshalValue() (string, error) {
@@ -21442,6 +22707,23 @@ func (enum AutomationExecutionStatus) MarshalValue() (string, error) {
 }
 
 func (enum AutomationExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AutomationType string
+
+// Enum values for AutomationType
+const (
+	AutomationTypeCrossAccount AutomationType = "CrossAccount"
+	AutomationTypeLocal        AutomationType = "Local"
+)
+
+func (enum AutomationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutomationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -21711,6 +22993,7 @@ func (enum DocumentPermissionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The status of a document.
 type DocumentStatus string
 
 // Enum values for DocumentStatus
@@ -21719,6 +23002,7 @@ const (
 	DocumentStatusActive   DocumentStatus = "Active"
 	DocumentStatusUpdating DocumentStatus = "Updating"
 	DocumentStatusDeleting DocumentStatus = "Deleting"
+	DocumentStatusFailed   DocumentStatus = "Failed"
 )
 
 func (enum DocumentStatus) MarshalValue() (string, error) {
@@ -21738,6 +23022,7 @@ const (
 	DocumentTypePolicy     DocumentType = "Policy"
 	DocumentTypeAutomation DocumentType = "Automation"
 	DocumentTypeSession    DocumentType = "Session"
+	DocumentTypePackage    DocumentType = "Package"
 )
 
 func (enum DocumentType) MarshalValue() (string, error) {
@@ -22070,15 +23355,33 @@ func (enum ParametersFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type PatchAction string
+
+// Enum values for PatchAction
+const (
+	PatchActionAllowAsDependency PatchAction = "ALLOW_AS_DEPENDENCY"
+	PatchActionBlock             PatchAction = "BLOCK"
+)
+
+func (enum PatchAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PatchAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PatchComplianceDataState string
 
 // Enum values for PatchComplianceDataState
 const (
-	PatchComplianceDataStateInstalled      PatchComplianceDataState = "INSTALLED"
-	PatchComplianceDataStateInstalledOther PatchComplianceDataState = "INSTALLED_OTHER"
-	PatchComplianceDataStateMissing        PatchComplianceDataState = "MISSING"
-	PatchComplianceDataStateNotApplicable  PatchComplianceDataState = "NOT_APPLICABLE"
-	PatchComplianceDataStateFailed         PatchComplianceDataState = "FAILED"
+	PatchComplianceDataStateInstalled         PatchComplianceDataState = "INSTALLED"
+	PatchComplianceDataStateInstalledOther    PatchComplianceDataState = "INSTALLED_OTHER"
+	PatchComplianceDataStateInstalledRejected PatchComplianceDataState = "INSTALLED_REJECTED"
+	PatchComplianceDataStateMissing           PatchComplianceDataState = "MISSING"
+	PatchComplianceDataStateNotApplicable     PatchComplianceDataState = "NOT_APPLICABLE"
+	PatchComplianceDataStateFailed            PatchComplianceDataState = "FAILED"
 )
 
 func (enum PatchComplianceDataState) MarshalValue() (string, error) {

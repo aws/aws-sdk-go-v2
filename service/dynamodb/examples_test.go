@@ -3,6 +3,7 @@
 package dynamodb_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -71,7 +72,7 @@ func ExampleDynamoDB_BatchGetItemRequest_shared00() {
 	}
 
 	req := svc.BatchGetItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -79,6 +80,8 @@ func ExampleDynamoDB_BatchGetItemRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeProvisionedThroughputExceededException, aerr.Error())
 			case dynamodb.ErrCodeResourceNotFoundException:
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -159,7 +162,7 @@ func ExampleDynamoDB_BatchWriteItemRequest_shared00() {
 	}
 
 	req := svc.BatchWriteItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -169,6 +172,8 @@ func ExampleDynamoDB_BatchWriteItemRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
 			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
 				fmt.Println(dynamodb.ErrCodeItemCollectionSizeLimitExceededException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -224,7 +229,7 @@ func ExampleDynamoDB_CreateTableRequest_shared00() {
 	}
 
 	req := svc.CreateTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -271,7 +276,7 @@ func ExampleDynamoDB_DeleteItemRequest_shared00() {
 	}
 
 	req := svc.DeleteItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -283,6 +288,10 @@ func ExampleDynamoDB_DeleteItemRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
 			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
 				fmt.Println(dynamodb.ErrCodeItemCollectionSizeLimitExceededException, aerr.Error())
+			case dynamodb.ErrCodeTransactionConflictException:
+				fmt.Println(dynamodb.ErrCodeTransactionConflictException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -314,7 +323,7 @@ func ExampleDynamoDB_DeleteTableRequest_shared00() {
 	}
 
 	req := svc.DeleteTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -354,7 +363,7 @@ func ExampleDynamoDB_DescribeLimitsRequest_shared00() {
 	input := &dynamodb.DescribeLimitsInput{}
 
 	req := svc.DescribeLimitsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -389,7 +398,7 @@ func ExampleDynamoDB_DescribeTableRequest_shared00() {
 	}
 
 	req := svc.DescribeTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -435,7 +444,7 @@ func ExampleDynamoDB_GetItemRequest_shared00() {
 	}
 
 	req := svc.GetItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -443,6 +452,8 @@ func ExampleDynamoDB_GetItemRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeProvisionedThroughputExceededException, aerr.Error())
 			case dynamodb.ErrCodeResourceNotFoundException:
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -473,7 +484,7 @@ func ExampleDynamoDB_ListTablesRequest_shared00() {
 	input := &dynamodb.ListTablesInput{}
 
 	req := svc.ListTablesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -520,7 +531,7 @@ func ExampleDynamoDB_PutItemRequest_shared00() {
 	}
 
 	req := svc.PutItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -532,6 +543,10 @@ func ExampleDynamoDB_PutItemRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
 			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
 				fmt.Println(dynamodb.ErrCodeItemCollectionSizeLimitExceededException, aerr.Error())
+			case dynamodb.ErrCodeTransactionConflictException:
+				fmt.Println(dynamodb.ErrCodeTransactionConflictException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -572,7 +587,7 @@ func ExampleDynamoDB_QueryRequest_shared00() {
 	}
 
 	req := svc.QueryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -580,6 +595,8 @@ func ExampleDynamoDB_QueryRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeProvisionedThroughputExceededException, aerr.Error())
 			case dynamodb.ErrCodeResourceNotFoundException:
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -624,7 +641,7 @@ func ExampleDynamoDB_ScanRequest_shared00() {
 	}
 
 	req := svc.ScanRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -632,6 +649,8 @@ func ExampleDynamoDB_ScanRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeProvisionedThroughputExceededException, aerr.Error())
 			case dynamodb.ErrCodeResourceNotFoundException:
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -687,7 +706,7 @@ func ExampleDynamoDB_UpdateItemRequest_shared00() {
 	}
 
 	req := svc.UpdateItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -699,6 +718,10 @@ func ExampleDynamoDB_UpdateItemRequest_shared00() {
 				fmt.Println(dynamodb.ErrCodeResourceNotFoundException, aerr.Error())
 			case dynamodb.ErrCodeItemCollectionSizeLimitExceededException:
 				fmt.Println(dynamodb.ErrCodeItemCollectionSizeLimitExceededException, aerr.Error())
+			case dynamodb.ErrCodeTransactionConflictException:
+				fmt.Println(dynamodb.ErrCodeTransactionConflictException, aerr.Error())
+			case dynamodb.ErrCodeRequestLimitExceeded:
+				fmt.Println(dynamodb.ErrCodeRequestLimitExceeded, aerr.Error())
 			case dynamodb.ErrCodeInternalServerError:
 				fmt.Println(dynamodb.ErrCodeInternalServerError, aerr.Error())
 			default:
@@ -734,7 +757,7 @@ func ExampleDynamoDB_UpdateTableRequest_shared00() {
 	}
 
 	req := svc.UpdateTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -3,6 +3,7 @@
 package mobile
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -20,7 +21,8 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send(ctx context.Context) (*CreateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -36,7 +38,7 @@ func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 //
 //    // Example sending a request using the CreateProjectRequest method.
 //    req := client.CreateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -70,7 +72,8 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send(ctx context.Context) (*DeleteProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +89,7 @@ func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 //
 //    // Example sending a request using the DeleteProjectRequest method.
 //    req := client.DeleteProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -120,7 +123,8 @@ type DescribeBundleRequest struct {
 }
 
 // Send marshals and sends the DescribeBundle API request.
-func (r DescribeBundleRequest) Send() (*DescribeBundleOutput, error) {
+func (r DescribeBundleRequest) Send(ctx context.Context) (*DescribeBundleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +140,7 @@ func (r DescribeBundleRequest) Send() (*DescribeBundleOutput, error) {
 //
 //    // Example sending a request using the DescribeBundleRequest method.
 //    req := client.DescribeBundleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -170,7 +174,8 @@ type DescribeProjectRequest struct {
 }
 
 // Send marshals and sends the DescribeProject API request.
-func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+func (r DescribeProjectRequest) Send(ctx context.Context) (*DescribeProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -186,7 +191,7 @@ func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
 //
 //    // Example sending a request using the DescribeProjectRequest method.
 //    req := client.DescribeProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -220,7 +225,8 @@ type ExportBundleRequest struct {
 }
 
 // Send marshals and sends the ExportBundle API request.
-func (r ExportBundleRequest) Send() (*ExportBundleOutput, error) {
+func (r ExportBundleRequest) Send(ctx context.Context) (*ExportBundleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +243,7 @@ func (r ExportBundleRequest) Send() (*ExportBundleOutput, error) {
 //
 //    // Example sending a request using the ExportBundleRequest method.
 //    req := client.ExportBundleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -271,7 +277,8 @@ type ExportProjectRequest struct {
 }
 
 // Send marshals and sends the ExportProject API request.
-func (r ExportProjectRequest) Send() (*ExportProjectOutput, error) {
+func (r ExportProjectRequest) Send(ctx context.Context) (*ExportProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -289,7 +296,7 @@ func (r ExportProjectRequest) Send() (*ExportProjectOutput, error) {
 //
 //    // Example sending a request using the ExportProjectRequest method.
 //    req := client.ExportProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -323,7 +330,8 @@ type ListBundlesRequest struct {
 }
 
 // Send marshals and sends the ListBundles API request.
-func (r ListBundlesRequest) Send() (*ListBundlesOutput, error) {
+func (r ListBundlesRequest) Send(ctx context.Context) (*ListBundlesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -339,7 +347,7 @@ func (r ListBundlesRequest) Send() (*ListBundlesOutput, error) {
 //
 //    // Example sending a request using the ListBundlesRequest method.
 //    req := client.ListBundlesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -389,7 +397,7 @@ func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 func (p *ListBundlesRequest) Paginate(opts ...aws.Option) ListBundlesPager {
 	return ListBundlesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListBundlesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -398,6 +406,7 @@ func (p *ListBundlesRequest) Paginate(opts ...aws.Option) ListBundlesPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -425,7 +434,8 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send(ctx context.Context) (*ListProjectsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -441,7 +451,7 @@ func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 //
 //    // Example sending a request using the ListProjectsRequest method.
 //    req := client.ListProjectsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -491,7 +501,7 @@ func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 	return ListProjectsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListProjectsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -500,6 +510,7 @@ func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -527,7 +538,8 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send(ctx context.Context) (*UpdateProjectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -543,7 +555,7 @@ func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 //
 //    // Example sending a request using the UpdateProjectRequest method.
 //    req := client.UpdateProjectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

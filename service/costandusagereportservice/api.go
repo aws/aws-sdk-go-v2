@@ -3,6 +3,8 @@
 package costandusagereportservice
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
@@ -17,7 +19,8 @@ type DeleteReportDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeleteReportDefinition API request.
-func (r DeleteReportDefinitionRequest) Send() (*DeleteReportDefinitionOutput, error) {
+func (r DeleteReportDefinitionRequest) Send(ctx context.Context) (*DeleteReportDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -33,7 +36,7 @@ func (r DeleteReportDefinitionRequest) Send() (*DeleteReportDefinitionOutput, er
 //
 //    // Example sending a request using the DeleteReportDefinitionRequest method.
 //    req := client.DeleteReportDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -67,7 +70,8 @@ type DescribeReportDefinitionsRequest struct {
 }
 
 // Send marshals and sends the DescribeReportDefinitions API request.
-func (r DescribeReportDefinitionsRequest) Send() (*DescribeReportDefinitionsOutput, error) {
+func (r DescribeReportDefinitionsRequest) Send(ctx context.Context) (*DescribeReportDefinitionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -83,7 +87,7 @@ func (r DescribeReportDefinitionsRequest) Send() (*DescribeReportDefinitionsOutp
 //
 //    // Example sending a request using the DescribeReportDefinitionsRequest method.
 //    req := client.DescribeReportDefinitionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -133,7 +137,7 @@ func (c *CostAndUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 func (p *DescribeReportDefinitionsRequest) Paginate(opts ...aws.Option) DescribeReportDefinitionsPager {
 	return DescribeReportDefinitionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReportDefinitionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -142,6 +146,7 @@ func (p *DescribeReportDefinitionsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -169,7 +174,8 @@ type PutReportDefinitionRequest struct {
 }
 
 // Send marshals and sends the PutReportDefinition API request.
-func (r PutReportDefinitionRequest) Send() (*PutReportDefinitionOutput, error) {
+func (r PutReportDefinitionRequest) Send(ctx context.Context) (*PutReportDefinitionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -185,7 +191,7 @@ func (r PutReportDefinitionRequest) Send() (*PutReportDefinitionOutput, error) {
 //
 //    // Example sending a request using the PutReportDefinitionRequest method.
 //    req := client.PutReportDefinitionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

@@ -3,6 +3,7 @@
 package ec2_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -40,7 +41,7 @@ func ExampleEC2_AllocateAddressRequest_shared00() {
 	}
 
 	req := svc.AllocateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -71,7 +72,7 @@ func ExampleEC2_AllocateAddressRequest_shared01() {
 	input := &ec2.AllocateAddressInput{}
 
 	req := svc.AllocateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -108,7 +109,7 @@ func ExampleEC2_AssignPrivateIpAddressesRequest_shared00() {
 	}
 
 	req := svc.AssignPrivateIpAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -145,7 +146,7 @@ func ExampleEC2_AssignPrivateIpAddressesRequest_shared01() {
 	}
 
 	req := svc.AssignPrivateIpAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -180,7 +181,7 @@ func ExampleEC2_AssociateAddressRequest_shared00() {
 	}
 
 	req := svc.AssociateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -215,7 +216,7 @@ func ExampleEC2_AssociateAddressRequest_shared01() {
 	}
 
 	req := svc.AssociateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -249,7 +250,7 @@ func ExampleEC2_AssociateAddressRequest_shared02() {
 	}
 
 	req := svc.AssociateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -283,7 +284,7 @@ func ExampleEC2_AssociateDhcpOptionsRequest_shared00() {
 	}
 
 	req := svc.AssociateDhcpOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -317,7 +318,7 @@ func ExampleEC2_AssociateDhcpOptionsRequest_shared01() {
 	}
 
 	req := svc.AssociateDhcpOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -354,7 +355,7 @@ func ExampleEC2_AssociateIamInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.AssociateIamInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -388,7 +389,7 @@ func ExampleEC2_AssociateRouteTableRequest_shared00() {
 	}
 
 	req := svc.AssociateRouteTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -422,7 +423,7 @@ func ExampleEC2_AttachInternetGatewayRequest_shared00() {
 	}
 
 	req := svc.AttachInternetGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -457,7 +458,7 @@ func ExampleEC2_AttachNetworkInterfaceRequest_shared00() {
 	}
 
 	req := svc.AttachNetworkInterfaceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -493,7 +494,7 @@ func ExampleEC2_AttachVolumeRequest_shared00() {
 	}
 
 	req := svc.AttachVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -539,7 +540,7 @@ func ExampleEC2_AuthorizeSecurityGroupEgressRequest_shared00() {
 	}
 
 	req := svc.AuthorizeSecurityGroupEgressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -585,7 +586,7 @@ func ExampleEC2_AuthorizeSecurityGroupEgressRequest_shared01() {
 	}
 
 	req := svc.AuthorizeSecurityGroupEgressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -632,7 +633,7 @@ func ExampleEC2_AuthorizeSecurityGroupIngressRequest_shared00() {
 	}
 
 	req := svc.AuthorizeSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -681,7 +682,7 @@ func ExampleEC2_AuthorizeSecurityGroupIngressRequest_shared01() {
 	}
 
 	req := svc.AuthorizeSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -728,7 +729,7 @@ func ExampleEC2_AuthorizeSecurityGroupIngressRequest_shared02() {
 	}
 
 	req := svc.AuthorizeSecurityGroupIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -765,7 +766,7 @@ func ExampleEC2_CancelSpotFleetRequestsRequest_shared00() {
 	}
 
 	req := svc.CancelSpotFleetRequestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -802,7 +803,7 @@ func ExampleEC2_CancelSpotFleetRequestsRequest_shared01() {
 	}
 
 	req := svc.CancelSpotFleetRequestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -837,7 +838,7 @@ func ExampleEC2_CancelSpotInstanceRequestsRequest_shared00() {
 	}
 
 	req := svc.CancelSpotInstanceRequestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -872,7 +873,7 @@ func ExampleEC2_ConfirmProductInstanceRequest_shared00() {
 	}
 
 	req := svc.ConfirmProductInstanceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -908,7 +909,7 @@ func ExampleEC2_CopyImageRequest_shared00() {
 	}
 
 	req := svc.CopyImageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -946,7 +947,7 @@ func ExampleEC2_CopySnapshotRequest_shared00() {
 	}
 
 	req := svc.CopySnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -982,7 +983,7 @@ func ExampleEC2_CreateCustomerGatewayRequest_shared00() {
 	}
 
 	req := svc.CreateCustomerGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1023,7 +1024,7 @@ func ExampleEC2_CreateDhcpOptionsRequest_shared00() {
 	}
 
 	req := svc.CreateDhcpOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1069,7 +1070,7 @@ func ExampleEC2_CreateImageRequest_shared00() {
 	}
 
 	req := svc.CreateImageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1100,7 +1101,7 @@ func ExampleEC2_CreateInternetGatewayRequest_shared00() {
 	input := &ec2.CreateInternetGatewayInput{}
 
 	req := svc.CreateInternetGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1133,7 +1134,7 @@ func ExampleEC2_CreateKeyPairRequest_shared00() {
 	}
 
 	req := svc.CreateKeyPairRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1192,7 +1193,7 @@ func ExampleEC2_CreateLaunchTemplateRequest_shared00() {
 	}
 
 	req := svc.CreateLaunchTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1231,7 +1232,7 @@ func ExampleEC2_CreateLaunchTemplateVersionRequest_shared00() {
 	}
 
 	req := svc.CreateLaunchTemplateVersionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1266,7 +1267,7 @@ func ExampleEC2_CreateNatGatewayRequest_shared00() {
 	}
 
 	req := svc.CreateNatGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1299,7 +1300,7 @@ func ExampleEC2_CreateNetworkAclRequest_shared00() {
 	}
 
 	req := svc.CreateNetworkAclRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1336,13 +1337,13 @@ func ExampleEC2_CreateNetworkAclEntryRequest_shared00() {
 			From: aws.Int64(53),
 			To:   aws.Int64(53),
 		},
-		Protocol:   aws.String("udp"),
+		Protocol:   aws.String("17"),
 		RuleAction: ec2.RuleActionAllow,
 		RuleNumber: aws.Int64(100),
 	}
 
 	req := svc.CreateNetworkAclEntryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1380,7 +1381,7 @@ func ExampleEC2_CreateNetworkInterfaceRequest_shared00() {
 	}
 
 	req := svc.CreateNetworkInterfaceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1414,7 +1415,7 @@ func ExampleEC2_CreatePlacementGroupRequest_shared00() {
 	}
 
 	req := svc.CreatePlacementGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1450,7 +1451,7 @@ func ExampleEC2_CreateRouteRequest_shared00() {
 	}
 
 	req := svc.CreateRouteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1483,7 +1484,7 @@ func ExampleEC2_CreateRouteTableRequest_shared00() {
 	}
 
 	req := svc.CreateRouteTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1518,7 +1519,7 @@ func ExampleEC2_CreateSecurityGroupRequest_shared00() {
 	}
 
 	req := svc.CreateSecurityGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1553,7 +1554,7 @@ func ExampleEC2_CreateSnapshotRequest_shared00() {
 	}
 
 	req := svc.CreateSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1587,7 +1588,7 @@ func ExampleEC2_CreateSpotDatafeedSubscriptionRequest_shared00() {
 	}
 
 	req := svc.CreateSpotDatafeedSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1622,7 +1623,7 @@ func ExampleEC2_CreateSubnetRequest_shared00() {
 	}
 
 	req := svc.CreateSubnetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1664,7 +1665,7 @@ func ExampleEC2_CreateTagsRequest_shared00() {
 	}
 
 	req := svc.CreateTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1700,7 +1701,7 @@ func ExampleEC2_CreateVolumeRequest_shared00() {
 	}
 
 	req := svc.CreateVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1737,7 +1738,7 @@ func ExampleEC2_CreateVolumeRequest_shared01() {
 	}
 
 	req := svc.CreateVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1770,7 +1771,7 @@ func ExampleEC2_CreateVpcRequest_shared00() {
 	}
 
 	req := svc.CreateVpcRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1803,7 +1804,7 @@ func ExampleEC2_DeleteCustomerGatewayRequest_shared00() {
 	}
 
 	req := svc.DeleteCustomerGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1836,7 +1837,7 @@ func ExampleEC2_DeleteDhcpOptionsRequest_shared00() {
 	}
 
 	req := svc.DeleteDhcpOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1869,7 +1870,7 @@ func ExampleEC2_DeleteInternetGatewayRequest_shared00() {
 	}
 
 	req := svc.DeleteInternetGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1902,7 +1903,7 @@ func ExampleEC2_DeleteKeyPairRequest_shared00() {
 	}
 
 	req := svc.DeleteKeyPairRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1935,7 +1936,7 @@ func ExampleEC2_DeleteLaunchTemplateRequest_shared00() {
 	}
 
 	req := svc.DeleteLaunchTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1971,7 +1972,7 @@ func ExampleEC2_DeleteLaunchTemplateVersionsRequest_shared00() {
 	}
 
 	req := svc.DeleteLaunchTemplateVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2004,7 +2005,7 @@ func ExampleEC2_DeleteNatGatewayRequest_shared00() {
 	}
 
 	req := svc.DeleteNatGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2037,7 +2038,7 @@ func ExampleEC2_DeleteNetworkAclRequest_shared00() {
 	}
 
 	req := svc.DeleteNetworkAclRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2072,7 +2073,7 @@ func ExampleEC2_DeleteNetworkAclEntryRequest_shared00() {
 	}
 
 	req := svc.DeleteNetworkAclEntryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2105,7 +2106,7 @@ func ExampleEC2_DeleteNetworkInterfaceRequest_shared00() {
 	}
 
 	req := svc.DeleteNetworkInterfaceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2139,7 +2140,7 @@ func ExampleEC2_DeletePlacementGroupRequest_shared00() {
 	}
 
 	req := svc.DeletePlacementGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2173,7 +2174,7 @@ func ExampleEC2_DeleteRouteRequest_shared00() {
 	}
 
 	req := svc.DeleteRouteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2206,7 +2207,7 @@ func ExampleEC2_DeleteRouteTableRequest_shared00() {
 	}
 
 	req := svc.DeleteRouteTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2239,7 +2240,7 @@ func ExampleEC2_DeleteSecurityGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteSecurityGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2273,7 +2274,7 @@ func ExampleEC2_DeleteSnapshotRequest_shared00() {
 	}
 
 	req := svc.DeleteSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2304,7 +2305,7 @@ func ExampleEC2_DeleteSpotDatafeedSubscriptionRequest_shared00() {
 	input := &ec2.DeleteSpotDatafeedSubscriptionInput{}
 
 	req := svc.DeleteSpotDatafeedSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2337,7 +2338,7 @@ func ExampleEC2_DeleteSubnetRequest_shared00() {
 	}
 
 	req := svc.DeleteSubnetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2378,7 +2379,7 @@ func ExampleEC2_DeleteTagsRequest_shared00() {
 	}
 
 	req := svc.DeleteTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2412,7 +2413,7 @@ func ExampleEC2_DeleteVolumeRequest_shared00() {
 	}
 
 	req := svc.DeleteVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2445,7 +2446,7 @@ func ExampleEC2_DeleteVpcRequest_shared00() {
 	}
 
 	req := svc.DeleteVpcRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2480,7 +2481,7 @@ func ExampleEC2_DescribeAccountAttributesRequest_shared00() {
 	}
 
 	req := svc.DescribeAccountAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2511,7 +2512,7 @@ func ExampleEC2_DescribeAccountAttributesRequest_shared01() {
 	input := &ec2.DescribeAccountAttributesInput{}
 
 	req := svc.DescribeAccountAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2542,7 +2543,7 @@ func ExampleEC2_DescribeAddressesRequest_shared00() {
 	input := &ec2.DescribeAddressesInput{}
 
 	req := svc.DescribeAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2582,7 +2583,7 @@ func ExampleEC2_DescribeAddressesRequest_shared01() {
 	}
 
 	req := svc.DescribeAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2622,7 +2623,7 @@ func ExampleEC2_DescribeAddressesRequest_shared02() {
 	}
 
 	req := svc.DescribeAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2654,7 +2655,7 @@ func ExampleEC2_DescribeAvailabilityZonesRequest_shared00() {
 	input := &ec2.DescribeAvailabilityZonesInput{}
 
 	req := svc.DescribeAvailabilityZonesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2689,7 +2690,7 @@ func ExampleEC2_DescribeCustomerGatewaysRequest_shared00() {
 	}
 
 	req := svc.DescribeCustomerGatewaysRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2724,7 +2725,7 @@ func ExampleEC2_DescribeDhcpOptionsRequest_shared00() {
 	}
 
 	req := svc.DescribeDhcpOptionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2759,7 +2760,7 @@ func ExampleEC2_DescribeIamInstanceProfileAssociationsRequest_shared00() {
 	}
 
 	req := svc.DescribeIamInstanceProfileAssociationsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2793,7 +2794,7 @@ func ExampleEC2_DescribeImageAttributeRequest_shared00() {
 	}
 
 	req := svc.DescribeImageAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2828,7 +2829,7 @@ func ExampleEC2_DescribeImagesRequest_shared00() {
 	}
 
 	req := svc.DescribeImagesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2863,7 +2864,7 @@ func ExampleEC2_DescribeInstanceAttributeRequest_shared00() {
 	}
 
 	req := svc.DescribeInstanceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2898,7 +2899,7 @@ func ExampleEC2_DescribeInstanceAttributeRequest_shared01() {
 	}
 
 	req := svc.DescribeInstanceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2933,7 +2934,7 @@ func ExampleEC2_DescribeInstanceAttributeRequest_shared02() {
 	}
 
 	req := svc.DescribeInstanceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2968,7 +2969,7 @@ func ExampleEC2_DescribeInstanceStatusRequest_shared00() {
 	}
 
 	req := svc.DescribeInstanceStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3003,7 +3004,7 @@ func ExampleEC2_DescribeInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3043,7 +3044,7 @@ func ExampleEC2_DescribeInstancesRequest_shared01() {
 	}
 
 	req := svc.DescribeInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3083,7 +3084,7 @@ func ExampleEC2_DescribeInstancesRequest_shared02() {
 	}
 
 	req := svc.DescribeInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3123,7 +3124,7 @@ func ExampleEC2_DescribeInternetGatewaysRequest_shared00() {
 	}
 
 	req := svc.DescribeInternetGatewaysRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3158,7 +3159,7 @@ func ExampleEC2_DescribeKeyPairsRequest_shared00() {
 	}
 
 	req := svc.DescribeKeyPairsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3191,7 +3192,7 @@ func ExampleEC2_DescribeLaunchTemplateVersionsRequest_shared00() {
 	}
 
 	req := svc.DescribeLaunchTemplateVersionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3226,7 +3227,7 @@ func ExampleEC2_DescribeLaunchTemplatesRequest_shared00() {
 	}
 
 	req := svc.DescribeLaunchTemplatesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3257,7 +3258,7 @@ func ExampleEC2_DescribeMovingAddressesRequest_shared00() {
 	input := &ec2.DescribeMovingAddressesInput{}
 
 	req := svc.DescribeMovingAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3297,7 +3298,7 @@ func ExampleEC2_DescribeNatGatewaysRequest_shared00() {
 	}
 
 	req := svc.DescribeNatGatewaysRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3332,7 +3333,7 @@ func ExampleEC2_DescribeNetworkAclsRequest_shared00() {
 	}
 
 	req := svc.DescribeNetworkAclsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3366,7 +3367,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared00() {
 	}
 
 	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3400,7 +3401,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared01() {
 	}
 
 	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3434,7 +3435,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared02() {
 	}
 
 	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3468,7 +3469,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared03() {
 	}
 
 	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3503,7 +3504,7 @@ func ExampleEC2_DescribeNetworkInterfacesRequest_shared00() {
 	}
 
 	req := svc.DescribeNetworkInterfacesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3534,7 +3535,7 @@ func ExampleEC2_DescribeRegionsRequest_shared00() {
 	input := &ec2.DescribeRegionsInput{}
 
 	req := svc.DescribeRegionsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3569,7 +3570,7 @@ func ExampleEC2_DescribeRouteTablesRequest_shared00() {
 	}
 
 	req := svc.DescribeRouteTablesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3613,7 +3614,7 @@ func ExampleEC2_DescribeScheduledInstanceAvailabilityRequest_shared00() {
 	}
 
 	req := svc.DescribeScheduledInstanceAvailabilityRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3648,7 +3649,7 @@ func ExampleEC2_DescribeScheduledInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeScheduledInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3683,7 +3684,7 @@ func ExampleEC2_DescribeSecurityGroupReferencesRequest_shared00() {
 	}
 
 	req := svc.DescribeSecurityGroupReferencesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3718,7 +3719,7 @@ func ExampleEC2_DescribeSecurityGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3758,7 +3759,7 @@ func ExampleEC2_DescribeSecurityGroupsRequest_shared01() {
 	}
 
 	req := svc.DescribeSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3793,7 +3794,7 @@ func ExampleEC2_DescribeSnapshotAttributeRequest_shared00() {
 	}
 
 	req := svc.DescribeSnapshotAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3828,7 +3829,7 @@ func ExampleEC2_DescribeSnapshotsRequest_shared00() {
 	}
 
 	req := svc.DescribeSnapshotsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3872,7 +3873,7 @@ func ExampleEC2_DescribeSnapshotsRequest_shared01() {
 	}
 
 	req := svc.DescribeSnapshotsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3903,7 +3904,7 @@ func ExampleEC2_DescribeSpotDatafeedSubscriptionRequest_shared00() {
 	input := &ec2.DescribeSpotDatafeedSubscriptionInput{}
 
 	req := svc.DescribeSpotDatafeedSubscriptionRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3936,7 +3937,7 @@ func ExampleEC2_DescribeSpotFleetInstancesRequest_shared00() {
 	}
 
 	req := svc.DescribeSpotFleetInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3971,7 +3972,7 @@ func ExampleEC2_DescribeSpotFleetRequestHistoryRequest_shared00() {
 	}
 
 	req := svc.DescribeSpotFleetRequestHistoryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4006,7 +4007,7 @@ func ExampleEC2_DescribeSpotFleetRequestsRequest_shared00() {
 	}
 
 	req := svc.DescribeSpotFleetRequestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4041,7 +4042,7 @@ func ExampleEC2_DescribeSpotInstanceRequestsRequest_shared00() {
 	}
 
 	req := svc.DescribeSpotInstanceRequestsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4082,7 +4083,7 @@ func ExampleEC2_DescribeSpotPriceHistoryRequest_shared00() {
 	}
 
 	req := svc.DescribeSpotPriceHistoryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4122,7 +4123,7 @@ func ExampleEC2_DescribeSubnetsRequest_shared00() {
 	}
 
 	req := svc.DescribeSubnetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4162,7 +4163,7 @@ func ExampleEC2_DescribeTagsRequest_shared00() {
 	}
 
 	req := svc.DescribeTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4196,7 +4197,7 @@ func ExampleEC2_DescribeVolumeAttributeRequest_shared00() {
 	}
 
 	req := svc.DescribeVolumeAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4231,7 +4232,7 @@ func ExampleEC2_DescribeVolumeStatusRequest_shared00() {
 	}
 
 	req := svc.DescribeVolumeStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4272,7 +4273,7 @@ func ExampleEC2_DescribeVolumeStatusRequest_shared01() {
 	}
 
 	req := svc.DescribeVolumeStatusRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4303,7 +4304,7 @@ func ExampleEC2_DescribeVolumesRequest_shared00() {
 	input := &ec2.DescribeVolumesInput{}
 
 	req := svc.DescribeVolumesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4350,7 +4351,7 @@ func ExampleEC2_DescribeVolumesRequest_shared01() {
 	}
 
 	req := svc.DescribeVolumesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4387,7 +4388,7 @@ func ExampleEC2_DescribeVpcAttributeRequest_shared00() {
 	}
 
 	req := svc.DescribeVpcAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4423,7 +4424,7 @@ func ExampleEC2_DescribeVpcAttributeRequest_shared01() {
 	}
 
 	req := svc.DescribeVpcAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4458,7 +4459,7 @@ func ExampleEC2_DescribeVpcsRequest_shared00() {
 	}
 
 	req := svc.DescribeVpcsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4492,7 +4493,7 @@ func ExampleEC2_DetachInternetGatewayRequest_shared00() {
 	}
 
 	req := svc.DetachInternetGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4525,7 +4526,7 @@ func ExampleEC2_DetachNetworkInterfaceRequest_shared00() {
 	}
 
 	req := svc.DetachNetworkInterfaceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4559,7 +4560,7 @@ func ExampleEC2_DetachVolumeRequest_shared00() {
 	}
 
 	req := svc.DetachVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4594,7 +4595,7 @@ func ExampleEC2_DisableVgwRoutePropagationRequest_shared00() {
 	}
 
 	req := svc.DisableVgwRoutePropagationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4627,7 +4628,7 @@ func ExampleEC2_DisassociateAddressRequest_shared00() {
 	}
 
 	req := svc.DisassociateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4660,7 +4661,7 @@ func ExampleEC2_DisassociateAddressRequest_shared01() {
 	}
 
 	req := svc.DisassociateAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4693,7 +4694,7 @@ func ExampleEC2_DisassociateIamInstanceProfileRequest_shared00() {
 	}
 
 	req := svc.DisassociateIamInstanceProfileRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4726,7 +4727,7 @@ func ExampleEC2_DisassociateRouteTableRequest_shared00() {
 	}
 
 	req := svc.DisassociateRouteTableRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4761,7 +4762,7 @@ func ExampleEC2_EnableVgwRoutePropagationRequest_shared00() {
 	}
 
 	req := svc.EnableVgwRoutePropagationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4794,7 +4795,7 @@ func ExampleEC2_EnableVolumeIORequest_shared00() {
 	}
 
 	req := svc.EnableVolumeIORequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4827,7 +4828,7 @@ func ExampleEC2_GetConsoleOutputRequest_shared00() {
 	}
 
 	req := svc.GetConsoleOutputRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4860,7 +4861,7 @@ func ExampleEC2_GetLaunchTemplateDataRequest_shared00() {
 	}
 
 	req := svc.GetLaunchTemplateDataRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4900,7 +4901,7 @@ func ExampleEC2_ModifyImageAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyImageAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4941,7 +4942,7 @@ func ExampleEC2_ModifyImageAttributeRequest_shared01() {
 	}
 
 	req := svc.ModifyImageAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4977,7 +4978,7 @@ func ExampleEC2_ModifyInstanceAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyInstanceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5013,7 +5014,7 @@ func ExampleEC2_ModifyInstanceAttributeRequest_shared01() {
 	}
 
 	req := svc.ModifyInstanceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5047,7 +5048,7 @@ func ExampleEC2_ModifyLaunchTemplateRequest_shared00() {
 	}
 
 	req := svc.ModifyLaunchTemplateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5084,7 +5085,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5120,7 +5121,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared01() {
 	}
 
 	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5157,7 +5158,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared02() {
 	}
 
 	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5194,7 +5195,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared03() {
 	}
 
 	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5234,7 +5235,7 @@ func ExampleEC2_ModifySnapshotAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifySnapshotAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5272,7 +5273,7 @@ func ExampleEC2_ModifySnapshotAttributeRequest_shared01() {
 	}
 
 	req := svc.ModifySnapshotAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5306,7 +5307,7 @@ func ExampleEC2_ModifySpotFleetRequestRequest_shared00() {
 	}
 
 	req := svc.ModifySpotFleetRequestRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5342,7 +5343,7 @@ func ExampleEC2_ModifySpotFleetRequestRequest_shared01() {
 	}
 
 	req := svc.ModifySpotFleetRequestRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5379,7 +5380,7 @@ func ExampleEC2_ModifySubnetAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifySubnetAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5417,7 +5418,7 @@ func ExampleEC2_ModifyVolumeAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyVolumeAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5456,7 +5457,7 @@ func ExampleEC2_ModifyVpcAttributeRequest_shared00() {
 	}
 
 	req := svc.ModifyVpcAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5494,7 +5495,7 @@ func ExampleEC2_ModifyVpcAttributeRequest_shared01() {
 	}
 
 	req := svc.ModifyVpcAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5527,7 +5528,7 @@ func ExampleEC2_MoveAddressToVpcRequest_shared00() {
 	}
 
 	req := svc.MoveAddressToVpcRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5565,7 +5566,7 @@ func ExampleEC2_PurchaseScheduledInstancesRequest_shared00() {
 	}
 
 	req := svc.PurchaseScheduledInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5600,7 +5601,7 @@ func ExampleEC2_RebootInstancesRequest_shared00() {
 	}
 
 	req := svc.RebootInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5633,7 +5634,7 @@ func ExampleEC2_ReleaseAddressRequest_shared00() {
 	}
 
 	req := svc.ReleaseAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5666,7 +5667,7 @@ func ExampleEC2_ReleaseAddressRequest_shared01() {
 	}
 
 	req := svc.ReleaseAddressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5701,7 +5702,7 @@ func ExampleEC2_ReplaceNetworkAclAssociationRequest_shared00() {
 	}
 
 	req := svc.ReplaceNetworkAclAssociationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5738,13 +5739,13 @@ func ExampleEC2_ReplaceNetworkAclEntryRequest_shared00() {
 			From: aws.Int64(53),
 			To:   aws.Int64(53),
 		},
-		Protocol:   aws.String("udp"),
+		Protocol:   aws.String("17"),
 		RuleAction: ec2.RuleActionAllow,
 		RuleNumber: aws.Int64(100),
 	}
 
 	req := svc.ReplaceNetworkAclEntryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5781,7 +5782,7 @@ func ExampleEC2_ReplaceRouteRequest_shared00() {
 	}
 
 	req := svc.ReplaceRouteRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5816,7 +5817,7 @@ func ExampleEC2_ReplaceRouteTableAssociationRequest_shared00() {
 	}
 
 	req := svc.ReplaceRouteTableAssociationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5871,7 +5872,7 @@ func ExampleEC2_RequestSpotFleetRequest_shared00() {
 	}
 
 	req := svc.RequestSpotFleetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5925,7 +5926,7 @@ func ExampleEC2_RequestSpotFleetRequest_shared01() {
 	}
 
 	req := svc.RequestSpotFleetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -5981,7 +5982,7 @@ func ExampleEC2_RequestSpotFleetRequest_shared02() {
 	}
 
 	req := svc.RequestSpotFleetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6039,7 +6040,7 @@ func ExampleEC2_RequestSpotFleetRequest_shared03() {
 	}
 
 	req := svc.RequestSpotFleetRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6092,7 +6093,7 @@ func ExampleEC2_RequestSpotInstancesRequest_shared00() {
 	}
 
 	req := svc.RequestSpotInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6141,7 +6142,7 @@ func ExampleEC2_RequestSpotInstancesRequest_shared01() {
 	}
 
 	req := svc.RequestSpotInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6176,7 +6177,7 @@ func ExampleEC2_ResetImageAttributeRequest_shared00() {
 	}
 
 	req := svc.ResetImageAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6210,7 +6211,7 @@ func ExampleEC2_ResetInstanceAttributeRequest_shared00() {
 	}
 
 	req := svc.ResetInstanceAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6245,7 +6246,7 @@ func ExampleEC2_ResetSnapshotAttributeRequest_shared00() {
 	}
 
 	req := svc.ResetSnapshotAttributeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6278,7 +6279,7 @@ func ExampleEC2_RestoreAddressToClassicRequest_shared00() {
 	}
 
 	req := svc.RestoreAddressToClassicRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6336,7 +6337,7 @@ func ExampleEC2_RunInstancesRequest_shared00() {
 	}
 
 	req := svc.RunInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6388,7 +6389,7 @@ func ExampleEC2_RunScheduledInstancesRequest_shared00() {
 	}
 
 	req := svc.RunScheduledInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6436,7 +6437,7 @@ func ExampleEC2_RunScheduledInstancesRequest_shared01() {
 	}
 
 	req := svc.RunScheduledInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6471,7 +6472,7 @@ func ExampleEC2_StartInstancesRequest_shared00() {
 	}
 
 	req := svc.StartInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6506,7 +6507,7 @@ func ExampleEC2_StopInstancesRequest_shared00() {
 	}
 
 	req := svc.StopInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6541,7 +6542,7 @@ func ExampleEC2_TerminateInstancesRequest_shared00() {
 	}
 
 	req := svc.TerminateInstancesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6578,7 +6579,7 @@ func ExampleEC2_UnassignPrivateIpAddressesRequest_shared00() {
 	}
 
 	req := svc.UnassignPrivateIpAddressesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6624,7 +6625,7 @@ func ExampleEC2_UpdateSecurityGroupRuleDescriptionsEgressRequest_shared00() {
 	}
 
 	req := svc.UpdateSecurityGroupRuleDescriptionsEgressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -6670,7 +6671,7 @@ func ExampleEC2_UpdateSecurityGroupRuleDescriptionsIngressRequest_shared00() {
 	}
 
 	req := svc.UpdateSecurityGroupRuleDescriptionsIngressRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

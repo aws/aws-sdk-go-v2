@@ -3,6 +3,7 @@
 package transcribeservice
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type CreateVocabularyRequest struct {
 }
 
 // Send marshals and sends the CreateVocabulary API request.
-func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
+func (r CreateVocabularyRequest) Send(ctx context.Context) (*CreateVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
 //
 //    // Example sending a request using the CreateVocabularyRequest method.
 //    req := client.CreateVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -62,6 +64,60 @@ func (c *TranscribeService) CreateVocabularyRequest(input *CreateVocabularyInput
 	return CreateVocabularyRequest{Request: req, Input: input, Copy: c.CreateVocabularyRequest}
 }
 
+const opDeleteTranscriptionJob = "DeleteTranscriptionJob"
+
+// DeleteTranscriptionJobRequest is a API request type for the DeleteTranscriptionJob API operation.
+type DeleteTranscriptionJobRequest struct {
+	*aws.Request
+	Input *DeleteTranscriptionJobInput
+	Copy  func(*DeleteTranscriptionJobInput) DeleteTranscriptionJobRequest
+}
+
+// Send marshals and sends the DeleteTranscriptionJob API request.
+func (r DeleteTranscriptionJobRequest) Send(ctx context.Context) (*DeleteTranscriptionJobOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTranscriptionJobOutput), nil
+}
+
+// DeleteTranscriptionJobRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Deletes a previously submitted transcription job along with any other generated
+// results such as the transcription, models, and so on.
+//
+//    // Example sending a request using the DeleteTranscriptionJobRequest method.
+//    req := client.DeleteTranscriptionJobRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJob
+func (c *TranscribeService) DeleteTranscriptionJobRequest(input *DeleteTranscriptionJobInput) DeleteTranscriptionJobRequest {
+	op := &aws.Operation{
+		Name:       opDeleteTranscriptionJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteTranscriptionJobInput{}
+	}
+
+	output := &DeleteTranscriptionJobOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteTranscriptionJobRequest{Request: req, Input: input, Copy: c.DeleteTranscriptionJobRequest}
+}
+
 const opDeleteVocabulary = "DeleteVocabulary"
 
 // DeleteVocabularyRequest is a API request type for the DeleteVocabulary API operation.
@@ -72,7 +128,8 @@ type DeleteVocabularyRequest struct {
 }
 
 // Send marshals and sends the DeleteVocabulary API request.
-func (r DeleteVocabularyRequest) Send() (*DeleteVocabularyOutput, error) {
+func (r DeleteVocabularyRequest) Send(ctx context.Context) (*DeleteVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -88,7 +145,7 @@ func (r DeleteVocabularyRequest) Send() (*DeleteVocabularyOutput, error) {
 //
 //    // Example sending a request using the DeleteVocabularyRequest method.
 //    req := client.DeleteVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +181,8 @@ type GetTranscriptionJobRequest struct {
 }
 
 // Send marshals and sends the GetTranscriptionJob API request.
-func (r GetTranscriptionJobRequest) Send() (*GetTranscriptionJobOutput, error) {
+func (r GetTranscriptionJobRequest) Send(ctx context.Context) (*GetTranscriptionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +201,7 @@ func (r GetTranscriptionJobRequest) Send() (*GetTranscriptionJobOutput, error) {
 //
 //    // Example sending a request using the GetTranscriptionJobRequest method.
 //    req := client.GetTranscriptionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +235,8 @@ type GetVocabularyRequest struct {
 }
 
 // Send marshals and sends the GetVocabulary API request.
-func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
+func (r GetVocabularyRequest) Send(ctx context.Context) (*GetVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +252,7 @@ func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
 //
 //    // Example sending a request using the GetVocabularyRequest method.
 //    req := client.GetVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -227,7 +286,8 @@ type ListTranscriptionJobsRequest struct {
 }
 
 // Send marshals and sends the ListTranscriptionJobs API request.
-func (r ListTranscriptionJobsRequest) Send() (*ListTranscriptionJobsOutput, error) {
+func (r ListTranscriptionJobsRequest) Send(ctx context.Context) (*ListTranscriptionJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +303,7 @@ func (r ListTranscriptionJobsRequest) Send() (*ListTranscriptionJobsOutput, erro
 //
 //    // Example sending a request using the ListTranscriptionJobsRequest method.
 //    req := client.ListTranscriptionJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -293,7 +353,7 @@ func (c *TranscribeService) ListTranscriptionJobsRequest(input *ListTranscriptio
 func (p *ListTranscriptionJobsRequest) Paginate(opts ...aws.Option) ListTranscriptionJobsPager {
 	return ListTranscriptionJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListTranscriptionJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -302,6 +362,7 @@ func (p *ListTranscriptionJobsRequest) Paginate(opts ...aws.Option) ListTranscri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -329,7 +390,8 @@ type ListVocabulariesRequest struct {
 }
 
 // Send marshals and sends the ListVocabularies API request.
-func (r ListVocabulariesRequest) Send() (*ListVocabulariesOutput, error) {
+func (r ListVocabulariesRequest) Send(ctx context.Context) (*ListVocabulariesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -346,7 +408,7 @@ func (r ListVocabulariesRequest) Send() (*ListVocabulariesOutput, error) {
 //
 //    // Example sending a request using the ListVocabulariesRequest method.
 //    req := client.ListVocabulariesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -396,7 +458,7 @@ func (c *TranscribeService) ListVocabulariesRequest(input *ListVocabulariesInput
 func (p *ListVocabulariesRequest) Paginate(opts ...aws.Option) ListVocabulariesPager {
 	return ListVocabulariesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListVocabulariesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -405,6 +467,7 @@ func (p *ListVocabulariesRequest) Paginate(opts ...aws.Option) ListVocabulariesP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -432,7 +495,8 @@ type StartTranscriptionJobRequest struct {
 }
 
 // Send marshals and sends the StartTranscriptionJob API request.
-func (r StartTranscriptionJobRequest) Send() (*StartTranscriptionJobOutput, error) {
+func (r StartTranscriptionJobRequest) Send(ctx context.Context) (*StartTranscriptionJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +512,7 @@ func (r StartTranscriptionJobRequest) Send() (*StartTranscriptionJobOutput, erro
 //
 //    // Example sending a request using the StartTranscriptionJobRequest method.
 //    req := client.StartTranscriptionJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -482,7 +546,8 @@ type UpdateVocabularyRequest struct {
 }
 
 // Send marshals and sends the UpdateVocabulary API request.
-func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
+func (r UpdateVocabularyRequest) Send(ctx context.Context) (*UpdateVocabularyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -500,7 +565,7 @@ func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
 //
 //    // Example sending a request using the UpdateVocabularyRequest method.
 //    req := client.UpdateVocabularyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -615,6 +680,65 @@ func (s CreateVocabularyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVocabularyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJobRequest
+type DeleteTranscriptionJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the transcription job to be deleted.
+	//
+	// TranscriptionJobName is a required field
+	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteTranscriptionJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTranscriptionJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteTranscriptionJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTranscriptionJobInput"}
+
+	if s.TranscriptionJobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TranscriptionJobName"))
+	}
+	if s.TranscriptionJobName != nil && len(*s.TranscriptionJobName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TranscriptionJobName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteTranscriptionJobOutput
+type DeleteTranscriptionJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteTranscriptionJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTranscriptionJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTranscriptionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -835,6 +959,9 @@ type ListTranscriptionJobsInput struct {
 	NextToken *string `type:"string"`
 
 	// When specified, returns only transcription jobs with the specified status.
+	// Jobs are ordered by creation date, with the newest jobs returned first. If
+	// you don’t specify a status, Amazon Transcribe returns all transcription jobs
+	// ordered by creation date.
 	Status TranscriptionJobStatus `type:"string" enum:"true"`
 }
 
@@ -992,7 +1119,7 @@ type Media struct {
 	// The S3 location of the input media file. The URI must be in the same region
 	// as the API endpoint that you are calling. The general form is:
 	//
-	// https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
+	// https://s3-<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
 	//
 	// For example:
 	//
@@ -1129,8 +1256,8 @@ type StartTranscriptionJobInput struct {
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *Settings `type:"structure"`
 
-	// The name of the job. You can't use the strings "." or ".." in the job name.
-	// The name must be unique within an AWS account.
+	// The name of the job. Note that you can't use the strings "." or ".." by themselves
+	// as the job name. The name must also be unique within an AWS account.
 	//
 	// TranscriptionJobName is a required field
 	TranscriptionJobName *string `min:"1" type:"string" required:"true"`
@@ -1289,7 +1416,7 @@ func (s TranscriptionJob) GoString() string {
 	return s.String()
 }
 
-// Provides a summary of information about a transcription job.
+// Provides a summary of information about a transcription job. .
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary
 type TranscriptionJobSummary struct {
 	_ struct{} `type:"structure"`
@@ -1459,6 +1586,13 @@ type LanguageCode string
 const (
 	LanguageCodeEnUs LanguageCode = "en-US"
 	LanguageCodeEsUs LanguageCode = "es-US"
+	LanguageCodeEnAu LanguageCode = "en-AU"
+	LanguageCodeFrCa LanguageCode = "fr-CA"
+	LanguageCodeEnGb LanguageCode = "en-GB"
+	LanguageCodeDeDe LanguageCode = "de-DE"
+	LanguageCodePtBr LanguageCode = "pt-BR"
+	LanguageCodeFrFr LanguageCode = "fr-FR"
+	LanguageCodeItIt LanguageCode = "it-IT"
 )
 
 func (enum LanguageCode) MarshalValue() (string, error) {

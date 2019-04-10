@@ -5,6 +5,7 @@ package unitTest
 
 import (
 	"errors"
+	"net/http"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -34,6 +35,7 @@ func (fd *fakeDynamoDB) GetItemRequest(input *dynamodb.GetItemInput) dynamodb.Ge
 		Request: &aws.Request{
 			Data:  output,
 			Error: fd.err,
+			HTTPRequest: &http.Request{},
 		},
 	}
 

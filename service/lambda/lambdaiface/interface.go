@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Lambda.
 //    func myFunc(svc lambdaiface.LambdaAPI) bool {
-//        // Make svc.AddPermission request
+//        // Make svc.AddLayerVersionPermission request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockLambdaClient struct {
 //        lambdaiface.LambdaAPI
 //    }
-//    func (m *mockLambdaClient) AddPermission(input *lambda.AddPermissionInput) (*lambda.AddPermissionOutput, error) {
+//    func (m *mockLambdaClient) AddLayerVersionPermission(input *lambda.AddLayerVersionPermissionInput) (*lambda.AddLayerVersionPermissionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type LambdaAPI interface {
+	AddLayerVersionPermissionRequest(*lambda.AddLayerVersionPermissionInput) lambda.AddLayerVersionPermissionRequest
+
 	AddPermissionRequest(*lambda.AddPermissionInput) lambda.AddPermissionRequest
 
 	CreateAliasRequest(*lambda.CreateAliasInput) lambda.CreateAliasRequest
@@ -78,6 +80,8 @@ type LambdaAPI interface {
 
 	DeleteFunctionConcurrencyRequest(*lambda.DeleteFunctionConcurrencyInput) lambda.DeleteFunctionConcurrencyRequest
 
+	DeleteLayerVersionRequest(*lambda.DeleteLayerVersionInput) lambda.DeleteLayerVersionRequest
+
 	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) lambda.GetAccountSettingsRequest
 
 	GetAliasRequest(*lambda.GetAliasInput) lambda.GetAliasRequest
@@ -87,6 +91,10 @@ type LambdaAPI interface {
 	GetFunctionRequest(*lambda.GetFunctionInput) lambda.GetFunctionRequest
 
 	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) lambda.GetFunctionConfigurationRequest
+
+	GetLayerVersionRequest(*lambda.GetLayerVersionInput) lambda.GetLayerVersionRequest
+
+	GetLayerVersionPolicyRequest(*lambda.GetLayerVersionPolicyInput) lambda.GetLayerVersionPolicyRequest
 
 	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest
 
@@ -100,13 +108,21 @@ type LambdaAPI interface {
 
 	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
 
+	ListLayerVersionsRequest(*lambda.ListLayerVersionsInput) lambda.ListLayerVersionsRequest
+
+	ListLayersRequest(*lambda.ListLayersInput) lambda.ListLayersRequest
+
 	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
 
 	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) lambda.ListVersionsByFunctionRequest
 
+	PublishLayerVersionRequest(*lambda.PublishLayerVersionInput) lambda.PublishLayerVersionRequest
+
 	PublishVersionRequest(*lambda.PublishVersionInput) lambda.PublishVersionRequest
 
 	PutFunctionConcurrencyRequest(*lambda.PutFunctionConcurrencyInput) lambda.PutFunctionConcurrencyRequest
+
+	RemoveLayerVersionPermissionRequest(*lambda.RemoveLayerVersionPermissionInput) lambda.RemoveLayerVersionPermissionRequest
 
 	RemovePermissionRequest(*lambda.RemovePermissionInput) lambda.RemovePermissionRequest
 

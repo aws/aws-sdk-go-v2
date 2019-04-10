@@ -89,6 +89,19 @@
         {"shape":"InvalidInputException"}
       ]
     },
+    "DeleteSourceCredentials":{
+      "name":"DeleteSourceCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteSourceCredentialsInput"},
+      "output":{"shape":"DeleteSourceCredentialsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "DeleteWebhook":{
       "name":"DeleteWebhook",
       "http":{
@@ -101,6 +114,19 @@
         {"shape":"InvalidInputException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"OAuthProviderException"}
+      ]
+    },
+    "ImportSourceCredentials":{
+      "name":"ImportSourceCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportSourceCredentialsInput"},
+      "output":{"shape":"ImportSourceCredentialsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"AccountLimitExceededException"}
       ]
     },
     "InvalidateProjectCache":{
@@ -161,6 +187,15 @@
       "errors":[
         {"shape":"InvalidInputException"}
       ]
+    },
+    "ListSourceCredentials":{
+      "name":"ListSourceCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSourceCredentialsInput"},
+      "output":{"shape":"ListSourceCredentialsOutput"}
     },
     "StartBuild":{
       "name":"StartBuild",
@@ -246,6 +281,14 @@
         "NO_ARTIFACTS"
       ]
     },
+    "AuthType":{
+      "type":"string",
+      "enum":[
+        "OAUTH",
+        "BASIC_AUTH",
+        "PERSONAL_ACCESS_TOKEN"
+      ]
+    },
     "BatchDeleteBuildsInput":{
       "type":"structure",
       "required":["ids"],
@@ -299,6 +342,7 @@
         "currentPhase":{"shape":"String"},
         "buildStatus":{"shape":"StatusType"},
         "sourceVersion":{"shape":"NonEmptyString"},
+        "resolvedSourceVersion":{"shape":"NonEmptyString"},
         "projectName":{"shape":"NonEmptyString"},
         "phases":{"shape":"BuildPhases"},
         "source":{"shape":"ProjectSource"},
@@ -311,6 +355,7 @@
         "serviceRole":{"shape":"NonEmptyString"},
         "logs":{"shape":"LogsLocation"},
         "timeoutInMinutes":{"shape":"WrapperInt"},
+        "queuedTimeoutInMinutes":{"shape":"WrapperInt"},
         "buildComplete":{"shape":"Boolean"},
         "initiator":{"shape":"String"},
         "vpcConfig":{"shape":"VpcConfig"},
@@ -363,6 +408,7 @@
       "type":"string",
       "enum":[
         "SUBMITTED",
+        "QUEUED",
         "PROVISIONING",
         "DOWNLOAD_SOURCE",
         "INSTALL",
@@ -430,6 +476,7 @@
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "timeoutInMinutes":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutes":{"shape":"TimeOut"},
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "vpcConfig":{"shape":"VpcConfig"},
@@ -467,6 +514,19 @@
     "DeleteProjectOutput":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DeleteSourceCredentialsInput":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
+    },
+    "DeleteSourceCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
       }
     },
     "DeleteWebhookInput":{
@@ -553,6 +613,26 @@
       "type":"list",
       "member":{"shape":"String"}
     },
+    "ImportSourceCredentialsInput":{
+      "type":"structure",
+      "required":[
+        "token",
+        "serverType",
+        "authType"
+      ],
+      "members":{
+        "username":{"shape":"NonEmptyString"},
+        "token":{"shape":"SensitiveNonEmptyString"},
+        "serverType":{"shape":"ServerType"},
+        "authType":{"shape":"AuthType"}
+      }
+    },
+    "ImportSourceCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
+    },
     "InvalidInputException":{
       "type":"structure",
       "members":{
@@ -588,7 +668,8 @@
         "DOCKER",
         "ANDROID",
         "DOTNET",
-        "BASE"
+        "BASE",
+        "PHP"
       ]
     },
     "ListBuildsForProjectInput":{
@@ -645,6 +726,17 @@
       "members":{
         "nextToken":{"shape":"String"},
         "projects":{"shape":"ProjectNames"}
+      }
+    },
+    "ListSourceCredentialsInput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ListSourceCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "sourceCredentialsInfos":{"shape":"SourceCredentialsInfos"}
       }
     },
     "LogsConfig":{
@@ -723,6 +815,7 @@
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "timeoutInMinutes":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutes":{"shape":"TimeOut"},
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "created":{"shape":"Timestamp"},
@@ -876,6 +969,19 @@
       "member":{"shape":"NonEmptyString"},
       "max":5
     },
+    "SensitiveNonEmptyString":{
+      "type":"string",
+      "min":1,
+      "sensitive":true
+    },
+    "ServerType":{
+      "type":"string",
+      "enum":[
+        "GITHUB",
+        "BITBUCKET",
+        "GITHUB_ENTERPRISE"
+      ]
+    },
     "SortOrderType":{
       "type":"string",
       "enum":[
@@ -894,6 +1000,18 @@
     "SourceAuthType":{
       "type":"string",
       "enum":["OAUTH"]
+    },
+    "SourceCredentialsInfo":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"},
+        "serverType":{"shape":"ServerType"},
+        "authType":{"shape":"AuthType"}
+      }
+    },
+    "SourceCredentialsInfos":{
+      "type":"list",
+      "member":{"shape":"SourceCredentialsInfo"}
     },
     "SourceType":{
       "type":"string",
@@ -933,6 +1051,7 @@
         "serviceRoleOverride":{"shape":"NonEmptyString"},
         "privilegedModeOverride":{"shape":"WrapperBoolean"},
         "timeoutInMinutesOverride":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutesOverride":{"shape":"TimeOut"},
         "idempotencyToken":{"shape":"String"},
         "logsConfigOverride":{"shape":"LogsConfig"}
       }
@@ -1006,6 +1125,7 @@
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "timeoutInMinutes":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutes":{"shape":"TimeOut"},
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "vpcConfig":{"shape":"VpcConfig"},

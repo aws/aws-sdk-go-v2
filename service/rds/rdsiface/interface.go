@@ -9,6 +9,8 @@
 package rdsiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
 )
@@ -87,6 +89,8 @@ type RDSAPI interface {
 
 	CreateDBClusterRequest(*rds.CreateDBClusterInput) rds.CreateDBClusterRequest
 
+	CreateDBClusterEndpointRequest(*rds.CreateDBClusterEndpointInput) rds.CreateDBClusterEndpointRequest
+
 	CreateDBClusterParameterGroupRequest(*rds.CreateDBClusterParameterGroupInput) rds.CreateDBClusterParameterGroupRequest
 
 	CreateDBClusterSnapshotRequest(*rds.CreateDBClusterSnapshotInput) rds.CreateDBClusterSnapshotRequest
@@ -105,15 +109,21 @@ type RDSAPI interface {
 
 	CreateEventSubscriptionRequest(*rds.CreateEventSubscriptionInput) rds.CreateEventSubscriptionRequest
 
+	CreateGlobalClusterRequest(*rds.CreateGlobalClusterInput) rds.CreateGlobalClusterRequest
+
 	CreateOptionGroupRequest(*rds.CreateOptionGroupInput) rds.CreateOptionGroupRequest
 
 	DeleteDBClusterRequest(*rds.DeleteDBClusterInput) rds.DeleteDBClusterRequest
+
+	DeleteDBClusterEndpointRequest(*rds.DeleteDBClusterEndpointInput) rds.DeleteDBClusterEndpointRequest
 
 	DeleteDBClusterParameterGroupRequest(*rds.DeleteDBClusterParameterGroupInput) rds.DeleteDBClusterParameterGroupRequest
 
 	DeleteDBClusterSnapshotRequest(*rds.DeleteDBClusterSnapshotInput) rds.DeleteDBClusterSnapshotRequest
 
 	DeleteDBInstanceRequest(*rds.DeleteDBInstanceInput) rds.DeleteDBInstanceRequest
+
+	DeleteDBInstanceAutomatedBackupRequest(*rds.DeleteDBInstanceAutomatedBackupInput) rds.DeleteDBInstanceAutomatedBackupRequest
 
 	DeleteDBParameterGroupRequest(*rds.DeleteDBParameterGroupInput) rds.DeleteDBParameterGroupRequest
 
@@ -125,6 +135,8 @@ type RDSAPI interface {
 
 	DeleteEventSubscriptionRequest(*rds.DeleteEventSubscriptionInput) rds.DeleteEventSubscriptionRequest
 
+	DeleteGlobalClusterRequest(*rds.DeleteGlobalClusterInput) rds.DeleteGlobalClusterRequest
+
 	DeleteOptionGroupRequest(*rds.DeleteOptionGroupInput) rds.DeleteOptionGroupRequest
 
 	DescribeAccountAttributesRequest(*rds.DescribeAccountAttributesInput) rds.DescribeAccountAttributesRequest
@@ -132,6 +144,8 @@ type RDSAPI interface {
 	DescribeCertificatesRequest(*rds.DescribeCertificatesInput) rds.DescribeCertificatesRequest
 
 	DescribeDBClusterBacktracksRequest(*rds.DescribeDBClusterBacktracksInput) rds.DescribeDBClusterBacktracksRequest
+
+	DescribeDBClusterEndpointsRequest(*rds.DescribeDBClusterEndpointsInput) rds.DescribeDBClusterEndpointsRequest
 
 	DescribeDBClusterParameterGroupsRequest(*rds.DescribeDBClusterParameterGroupsInput) rds.DescribeDBClusterParameterGroupsRequest
 
@@ -144,6 +158,8 @@ type RDSAPI interface {
 	DescribeDBClustersRequest(*rds.DescribeDBClustersInput) rds.DescribeDBClustersRequest
 
 	DescribeDBEngineVersionsRequest(*rds.DescribeDBEngineVersionsInput) rds.DescribeDBEngineVersionsRequest
+
+	DescribeDBInstanceAutomatedBackupsRequest(*rds.DescribeDBInstanceAutomatedBackupsInput) rds.DescribeDBInstanceAutomatedBackupsRequest
 
 	DescribeDBInstancesRequest(*rds.DescribeDBInstancesInput) rds.DescribeDBInstancesRequest
 
@@ -171,6 +187,8 @@ type RDSAPI interface {
 
 	DescribeEventsRequest(*rds.DescribeEventsInput) rds.DescribeEventsRequest
 
+	DescribeGlobalClustersRequest(*rds.DescribeGlobalClustersInput) rds.DescribeGlobalClustersRequest
+
 	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
 
 	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) rds.DescribeOptionGroupsRequest
@@ -197,6 +215,8 @@ type RDSAPI interface {
 
 	ModifyDBClusterRequest(*rds.ModifyDBClusterInput) rds.ModifyDBClusterRequest
 
+	ModifyDBClusterEndpointRequest(*rds.ModifyDBClusterEndpointInput) rds.ModifyDBClusterEndpointRequest
+
 	ModifyDBClusterParameterGroupRequest(*rds.ModifyDBClusterParameterGroupInput) rds.ModifyDBClusterParameterGroupRequest
 
 	ModifyDBClusterSnapshotAttributeRequest(*rds.ModifyDBClusterSnapshotAttributeInput) rds.ModifyDBClusterSnapshotAttributeRequest
@@ -213,6 +233,8 @@ type RDSAPI interface {
 
 	ModifyEventSubscriptionRequest(*rds.ModifyEventSubscriptionInput) rds.ModifyEventSubscriptionRequest
 
+	ModifyGlobalClusterRequest(*rds.ModifyGlobalClusterInput) rds.ModifyGlobalClusterRequest
+
 	ModifyOptionGroupRequest(*rds.ModifyOptionGroupInput) rds.ModifyOptionGroupRequest
 
 	PromoteReadReplicaRequest(*rds.PromoteReadReplicaInput) rds.PromoteReadReplicaRequest
@@ -222,6 +244,8 @@ type RDSAPI interface {
 	PurchaseReservedDBInstancesOfferingRequest(*rds.PurchaseReservedDBInstancesOfferingInput) rds.PurchaseReservedDBInstancesOfferingRequest
 
 	RebootDBInstanceRequest(*rds.RebootDBInstanceInput) rds.RebootDBInstanceRequest
+
+	RemoveFromGlobalClusterRequest(*rds.RemoveFromGlobalClusterInput) rds.RemoveFromGlobalClusterRequest
 
 	RemoveRoleFromDBClusterRequest(*rds.RemoveRoleFromDBClusterInput) rds.RemoveRoleFromDBClusterRequest
 
@@ -255,17 +279,13 @@ type RDSAPI interface {
 
 	StopDBInstanceRequest(*rds.StopDBInstanceInput) rds.StopDBInstanceRequest
 
-	WaitUntilDBInstanceAvailable(*rds.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceAvailableWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceAvailable(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBInstanceDeleted(*rds.DescribeDBInstancesInput) error
-	WaitUntilDBInstanceDeletedWithContext(aws.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
+	WaitUntilDBInstanceDeleted(context.Context, *rds.DescribeDBInstancesInput, ...aws.WaiterOption) error
 
-	WaitUntilDBSnapshotAvailable(*rds.DescribeDBSnapshotsInput) error
-	WaitUntilDBSnapshotAvailableWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBSnapshotAvailable(context.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
 
-	WaitUntilDBSnapshotDeleted(*rds.DescribeDBSnapshotsInput) error
-	WaitUntilDBSnapshotDeletedWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
+	WaitUntilDBSnapshotDeleted(context.Context, *rds.DescribeDBSnapshotsInput, ...aws.WaiterOption) error
 }
 
 var _ RDSAPI = (*rds.RDS)(nil)

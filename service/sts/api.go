@@ -3,6 +3,7 @@
 package sts
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,8 @@ type AssumeRoleRequest struct {
 }
 
 // Send marshals and sends the AssumeRole API request.
-func (r AssumeRoleRequest) Send() (*AssumeRoleOutput, error) {
+func (r AssumeRoleRequest) Send(ctx context.Context) (*AssumeRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +139,7 @@ func (r AssumeRoleRequest) Send() (*AssumeRoleOutput, error) {
 //
 //    // Example sending a request using the AssumeRoleRequest method.
 //    req := client.AssumeRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -171,7 +173,8 @@ type AssumeRoleWithSAMLRequest struct {
 }
 
 // Send marshals and sends the AssumeRoleWithSAML API request.
-func (r AssumeRoleWithSAMLRequest) Send() (*AssumeRoleWithSAMLOutput, error) {
+func (r AssumeRoleWithSAMLRequest) Send(ctx context.Context) (*AssumeRoleWithSAMLOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -262,7 +265,7 @@ func (r AssumeRoleWithSAMLRequest) Send() (*AssumeRoleWithSAMLOutput, error) {
 //
 //    // Example sending a request using the AssumeRoleWithSAMLRequest method.
 //    req := client.AssumeRoleWithSAMLRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -283,6 +286,7 @@ func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) AssumeRo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return AssumeRoleWithSAMLRequest{Request: req, Input: input, Copy: c.AssumeRoleWithSAMLRequest}
 }
 
@@ -296,7 +300,8 @@ type AssumeRoleWithWebIdentityRequest struct {
 }
 
 // Send marshals and sends the AssumeRoleWithWebIdentity API request.
-func (r AssumeRoleWithWebIdentityRequest) Send() (*AssumeRoleWithWebIdentityOutput, error) {
+func (r AssumeRoleWithWebIdentityRequest) Send(ctx context.Context) (*AssumeRoleWithWebIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -409,7 +414,7 @@ func (r AssumeRoleWithWebIdentityRequest) Send() (*AssumeRoleWithWebIdentityOutp
 //
 //    // Example sending a request using the AssumeRoleWithWebIdentityRequest method.
 //    req := client.AssumeRoleWithWebIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -430,6 +435,7 @@ func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
+	req.Config.Credentials = aws.AnonymousCredentials
 	return AssumeRoleWithWebIdentityRequest{Request: req, Input: input, Copy: c.AssumeRoleWithWebIdentityRequest}
 }
 
@@ -443,7 +449,8 @@ type DecodeAuthorizationMessageRequest struct {
 }
 
 // Send marshals and sends the DecodeAuthorizationMessage API request.
-func (r DecodeAuthorizationMessageRequest) Send() (*DecodeAuthorizationMessageOutput, error) {
+func (r DecodeAuthorizationMessageRequest) Send(ctx context.Context) (*DecodeAuthorizationMessageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -490,7 +497,7 @@ func (r DecodeAuthorizationMessageRequest) Send() (*DecodeAuthorizationMessageOu
 //
 //    // Example sending a request using the DecodeAuthorizationMessageRequest method.
 //    req := client.DecodeAuthorizationMessageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -524,7 +531,8 @@ type GetCallerIdentityRequest struct {
 }
 
 // Send marshals and sends the GetCallerIdentity API request.
-func (r GetCallerIdentityRequest) Send() (*GetCallerIdentityOutput, error) {
+func (r GetCallerIdentityRequest) Send(ctx context.Context) (*GetCallerIdentityOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -541,7 +549,7 @@ func (r GetCallerIdentityRequest) Send() (*GetCallerIdentityOutput, error) {
 //
 //    // Example sending a request using the GetCallerIdentityRequest method.
 //    req := client.GetCallerIdentityRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -575,7 +583,8 @@ type GetFederationTokenRequest struct {
 }
 
 // Send marshals and sends the GetFederationToken API request.
-func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+func (r GetFederationTokenRequest) Send(ctx context.Context) (*GetFederationTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -668,7 +677,7 @@ func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
 //
 //    // Example sending a request using the GetFederationTokenRequest method.
 //    req := client.GetFederationTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -702,7 +711,8 @@ type GetSessionTokenRequest struct {
 }
 
 // Send marshals and sends the GetSessionToken API request.
-func (r GetSessionTokenRequest) Send() (*GetSessionTokenOutput, error) {
+func (r GetSessionTokenRequest) Send(ctx context.Context) (*GetSessionTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -763,7 +773,7 @@ func (r GetSessionTokenRequest) Send() (*GetSessionTokenOutput, error) {
 //
 //    // Example sending a request using the GetSessionTokenRequest method.
 //    req := client.GetSessionTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

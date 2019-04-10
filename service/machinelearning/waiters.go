@@ -3,6 +3,7 @@
 package machinelearning
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeBatchPredictions to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *MachineLearning) WaitUntilBatchPredictionAvailable(input *DescribeBatchPredictionsInput) error {
-	return c.WaitUntilBatchPredictionAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilBatchPredictionAvailableWithContext is an extended version of WaitUntilBatchPredictionAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilBatchPredictionAvailableWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, opts ...aws.WaiterOption) error {
+func (c *MachineLearning) WaitUntilBatchPredictionAvailable(ctx context.Context, input *DescribeBatchPredictionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilBatchPredictionAvailable",
 		MaxAttempts: 60,
@@ -56,26 +50,19 @@ func (c *MachineLearning) WaitUntilBatchPredictionAvailableWithContext(ctx aws.C
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilDataSourceAvailable uses the Amazon Machine Learning API operation
 // DescribeDataSources to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *MachineLearning) WaitUntilDataSourceAvailable(input *DescribeDataSourcesInput) error {
-	return c.WaitUntilDataSourceAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilDataSourceAvailableWithContext is an extended version of WaitUntilDataSourceAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilDataSourceAvailableWithContext(ctx aws.Context, input *DescribeDataSourcesInput, opts ...aws.WaiterOption) error {
+func (c *MachineLearning) WaitUntilDataSourceAvailable(ctx context.Context, input *DescribeDataSourcesInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilDataSourceAvailable",
 		MaxAttempts: 60,
@@ -107,26 +94,19 @@ func (c *MachineLearning) WaitUntilDataSourceAvailableWithContext(ctx aws.Contex
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilEvaluationAvailable uses the Amazon Machine Learning API operation
 // DescribeEvaluations to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *MachineLearning) WaitUntilEvaluationAvailable(input *DescribeEvaluationsInput) error {
-	return c.WaitUntilEvaluationAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilEvaluationAvailableWithContext is an extended version of WaitUntilEvaluationAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilEvaluationAvailableWithContext(ctx aws.Context, input *DescribeEvaluationsInput, opts ...aws.WaiterOption) error {
+func (c *MachineLearning) WaitUntilEvaluationAvailable(ctx context.Context, input *DescribeEvaluationsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilEvaluationAvailable",
 		MaxAttempts: 60,
@@ -158,26 +138,19 @@ func (c *MachineLearning) WaitUntilEvaluationAvailableWithContext(ctx aws.Contex
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilMLModelAvailable uses the Amazon Machine Learning API operation
 // DescribeMLModels to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *MachineLearning) WaitUntilMLModelAvailable(input *DescribeMLModelsInput) error {
-	return c.WaitUntilMLModelAvailableWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilMLModelAvailableWithContext is an extended version of WaitUntilMLModelAvailable.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) WaitUntilMLModelAvailableWithContext(ctx aws.Context, input *DescribeMLModelsInput, opts ...aws.WaiterOption) error {
+func (c *MachineLearning) WaitUntilMLModelAvailable(ctx context.Context, input *DescribeMLModelsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilMLModelAvailable",
 		MaxAttempts: 60,
@@ -209,5 +182,5 @@ func (c *MachineLearning) WaitUntilMLModelAvailableWithContext(ctx aws.Context, 
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

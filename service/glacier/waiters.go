@@ -3,6 +3,7 @@
 package glacier
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,19 +13,12 @@ import (
 // DescribeVault to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Glacier) WaitUntilVaultExists(input *DescribeVaultInput) error {
-	return c.WaitUntilVaultExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVaultExistsWithContext is an extended version of WaitUntilVaultExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) WaitUntilVaultExistsWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
+func (c *Glacier) WaitUntilVaultExists(ctx context.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVaultExists",
 		MaxAttempts: 15,
@@ -56,26 +50,19 @@ func (c *Glacier) WaitUntilVaultExistsWithContext(ctx aws.Context, input *Descri
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }
 
 // WaitUntilVaultNotExists uses the Amazon Glacier API operation
 // DescribeVault to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
-func (c *Glacier) WaitUntilVaultNotExists(input *DescribeVaultInput) error {
-	return c.WaitUntilVaultNotExistsWithContext(aws.BackgroundContext(), input)
-}
-
-// WaitUntilVaultNotExistsWithContext is an extended version of WaitUntilVaultNotExists.
-// With the support for passing in a context and options to configure the
-// Waiter and the underlying request options.
 //
 // The context must be non-nil and will be used for request cancellation. If
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) WaitUntilVaultNotExistsWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
+func (c *Glacier) WaitUntilVaultNotExists(ctx context.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilVaultNotExists",
 		MaxAttempts: 15,
@@ -107,5 +94,5 @@ func (c *Glacier) WaitUntilVaultNotExistsWithContext(ctx aws.Context, input *Des
 	}
 	w.ApplyOptions(opts...)
 
-	return w.WaitWithContext(ctx)
+	return w.Wait(ctx)
 }

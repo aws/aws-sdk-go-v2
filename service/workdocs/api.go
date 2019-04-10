@@ -3,6 +3,7 @@
 package workdocs
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AbortDocumentVersionUploadRequest struct {
 }
 
 // Send marshals and sends the AbortDocumentVersionUpload API request.
-func (r AbortDocumentVersionUploadRequest) Send() (*AbortDocumentVersionUploadOutput, error) {
+func (r AbortDocumentVersionUploadRequest) Send(ctx context.Context) (*AbortDocumentVersionUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r AbortDocumentVersionUploadRequest) Send() (*AbortDocumentVersionUploadOu
 //
 //    // Example sending a request using the AbortDocumentVersionUploadRequest method.
 //    req := client.AbortDocumentVersionUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -76,7 +78,8 @@ type ActivateUserRequest struct {
 }
 
 // Send marshals and sends the ActivateUser API request.
-func (r ActivateUserRequest) Send() (*ActivateUserOutput, error) {
+func (r ActivateUserRequest) Send(ctx context.Context) (*ActivateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +95,7 @@ func (r ActivateUserRequest) Send() (*ActivateUserOutput, error) {
 //
 //    // Example sending a request using the ActivateUserRequest method.
 //    req := client.ActivateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -126,7 +129,8 @@ type AddResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the AddResourcePermissions API request.
-func (r AddResourcePermissionsRequest) Send() (*AddResourcePermissionsOutput, error) {
+func (r AddResourcePermissionsRequest) Send(ctx context.Context) (*AddResourcePermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r AddResourcePermissionsRequest) Send() (*AddResourcePermissionsOutput, er
 //
 //    // Example sending a request using the AddResourcePermissionsRequest method.
 //    req := client.AddResourcePermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type CreateCommentRequest struct {
 }
 
 // Send marshals and sends the CreateComment API request.
-func (r CreateCommentRequest) Send() (*CreateCommentOutput, error) {
+func (r CreateCommentRequest) Send(ctx context.Context) (*CreateCommentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +198,7 @@ func (r CreateCommentRequest) Send() (*CreateCommentOutput, error) {
 //
 //    // Example sending a request using the CreateCommentRequest method.
 //    req := client.CreateCommentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -227,7 +232,8 @@ type CreateCustomMetadataRequest struct {
 }
 
 // Send marshals and sends the CreateCustomMetadata API request.
-func (r CreateCustomMetadataRequest) Send() (*CreateCustomMetadataOutput, error) {
+func (r CreateCustomMetadataRequest) Send(ctx context.Context) (*CreateCustomMetadataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +250,7 @@ func (r CreateCustomMetadataRequest) Send() (*CreateCustomMetadataOutput, error)
 //
 //    // Example sending a request using the CreateCustomMetadataRequest method.
 //    req := client.CreateCustomMetadataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -278,7 +284,8 @@ type CreateFolderRequest struct {
 }
 
 // Send marshals and sends the CreateFolder API request.
-func (r CreateFolderRequest) Send() (*CreateFolderOutput, error) {
+func (r CreateFolderRequest) Send(ctx context.Context) (*CreateFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +301,7 @@ func (r CreateFolderRequest) Send() (*CreateFolderOutput, error) {
 //
 //    // Example sending a request using the CreateFolderRequest method.
 //    req := client.CreateFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -328,7 +335,8 @@ type CreateLabelsRequest struct {
 }
 
 // Send marshals and sends the CreateLabels API request.
-func (r CreateLabelsRequest) Send() (*CreateLabelsOutput, error) {
+func (r CreateLabelsRequest) Send(ctx context.Context) (*CreateLabelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -344,7 +352,7 @@ func (r CreateLabelsRequest) Send() (*CreateLabelsOutput, error) {
 //
 //    // Example sending a request using the CreateLabelsRequest method.
 //    req := client.CreateLabelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -378,7 +386,8 @@ type CreateNotificationSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateNotificationSubscription API request.
-func (r CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscriptionOutput, error) {
+func (r CreateNotificationSubscriptionRequest) Send(ctx context.Context) (*CreateNotificationSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -390,15 +399,15 @@ func (r CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscr
 // CreateNotificationSubscriptionRequest returns a request value for making API operation for
 // Amazon WorkDocs.
 //
-// Configure WorkDocs to use Amazon SNS notifications.
+// Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives
+// a confirmation message, and must confirm the subscription.
 //
-// The endpoint receives a confirmation message, and must confirm the subscription.
-// For more information, see Confirm the Subscription (http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.confirm)
-// in the Amazon Simple Notification Service Developer Guide.
+// For more information, see Subscribe to Notifications (http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html)
+// in the Amazon WorkDocs Developer Guide.
 //
 //    // Example sending a request using the CreateNotificationSubscriptionRequest method.
 //    req := client.CreateNotificationSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -432,7 +441,8 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send(ctx context.Context) (*CreateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -449,7 +459,7 @@ func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 //
 //    // Example sending a request using the CreateUserRequest method.
 //    req := client.CreateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -483,7 +493,8 @@ type DeactivateUserRequest struct {
 }
 
 // Send marshals and sends the DeactivateUser API request.
-func (r DeactivateUserRequest) Send() (*DeactivateUserOutput, error) {
+func (r DeactivateUserRequest) Send(ctx context.Context) (*DeactivateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -500,7 +511,7 @@ func (r DeactivateUserRequest) Send() (*DeactivateUserOutput, error) {
 //
 //    // Example sending a request using the DeactivateUserRequest method.
 //    req := client.DeactivateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -536,7 +547,8 @@ type DeleteCommentRequest struct {
 }
 
 // Send marshals and sends the DeleteComment API request.
-func (r DeleteCommentRequest) Send() (*DeleteCommentOutput, error) {
+func (r DeleteCommentRequest) Send(ctx context.Context) (*DeleteCommentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -552,7 +564,7 @@ func (r DeleteCommentRequest) Send() (*DeleteCommentOutput, error) {
 //
 //    // Example sending a request using the DeleteCommentRequest method.
 //    req := client.DeleteCommentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -588,7 +600,8 @@ type DeleteCustomMetadataRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomMetadata API request.
-func (r DeleteCustomMetadataRequest) Send() (*DeleteCustomMetadataOutput, error) {
+func (r DeleteCustomMetadataRequest) Send(ctx context.Context) (*DeleteCustomMetadataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -604,7 +617,7 @@ func (r DeleteCustomMetadataRequest) Send() (*DeleteCustomMetadataOutput, error)
 //
 //    // Example sending a request using the DeleteCustomMetadataRequest method.
 //    req := client.DeleteCustomMetadataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -638,7 +651,8 @@ type DeleteDocumentRequest struct {
 }
 
 // Send marshals and sends the DeleteDocument API request.
-func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+func (r DeleteDocumentRequest) Send(ctx context.Context) (*DeleteDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -654,7 +668,7 @@ func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
 //
 //    // Example sending a request using the DeleteDocumentRequest method.
 //    req := client.DeleteDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -690,7 +704,8 @@ type DeleteFolderRequest struct {
 }
 
 // Send marshals and sends the DeleteFolder API request.
-func (r DeleteFolderRequest) Send() (*DeleteFolderOutput, error) {
+func (r DeleteFolderRequest) Send(ctx context.Context) (*DeleteFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +721,7 @@ func (r DeleteFolderRequest) Send() (*DeleteFolderOutput, error) {
 //
 //    // Example sending a request using the DeleteFolderRequest method.
 //    req := client.DeleteFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -742,7 +757,8 @@ type DeleteFolderContentsRequest struct {
 }
 
 // Send marshals and sends the DeleteFolderContents API request.
-func (r DeleteFolderContentsRequest) Send() (*DeleteFolderContentsOutput, error) {
+func (r DeleteFolderContentsRequest) Send(ctx context.Context) (*DeleteFolderContentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -758,7 +774,7 @@ func (r DeleteFolderContentsRequest) Send() (*DeleteFolderContentsOutput, error)
 //
 //    // Example sending a request using the DeleteFolderContentsRequest method.
 //    req := client.DeleteFolderContentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -794,7 +810,8 @@ type DeleteLabelsRequest struct {
 }
 
 // Send marshals and sends the DeleteLabels API request.
-func (r DeleteLabelsRequest) Send() (*DeleteLabelsOutput, error) {
+func (r DeleteLabelsRequest) Send(ctx context.Context) (*DeleteLabelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +827,7 @@ func (r DeleteLabelsRequest) Send() (*DeleteLabelsOutput, error) {
 //
 //    // Example sending a request using the DeleteLabelsRequest method.
 //    req := client.DeleteLabelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -844,7 +861,8 @@ type DeleteNotificationSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteNotificationSubscription API request.
-func (r DeleteNotificationSubscriptionRequest) Send() (*DeleteNotificationSubscriptionOutput, error) {
+func (r DeleteNotificationSubscriptionRequest) Send(ctx context.Context) (*DeleteNotificationSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -860,7 +878,7 @@ func (r DeleteNotificationSubscriptionRequest) Send() (*DeleteNotificationSubscr
 //
 //    // Example sending a request using the DeleteNotificationSubscriptionRequest method.
 //    req := client.DeleteNotificationSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -896,7 +914,8 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send(ctx context.Context) (*DeleteUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -912,7 +931,7 @@ func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 //
 //    // Example sending a request using the DeleteUserRequest method.
 //    req := client.DeleteUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -948,7 +967,8 @@ type DescribeActivitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeActivities API request.
-func (r DescribeActivitiesRequest) Send() (*DescribeActivitiesOutput, error) {
+func (r DescribeActivitiesRequest) Send(ctx context.Context) (*DescribeActivitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -964,7 +984,7 @@ func (r DescribeActivitiesRequest) Send() (*DescribeActivitiesOutput, error) {
 //
 //    // Example sending a request using the DescribeActivitiesRequest method.
 //    req := client.DescribeActivitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -998,7 +1018,8 @@ type DescribeCommentsRequest struct {
 }
 
 // Send marshals and sends the DescribeComments API request.
-func (r DescribeCommentsRequest) Send() (*DescribeCommentsOutput, error) {
+func (r DescribeCommentsRequest) Send(ctx context.Context) (*DescribeCommentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1014,7 +1035,7 @@ func (r DescribeCommentsRequest) Send() (*DescribeCommentsOutput, error) {
 //
 //    // Example sending a request using the DescribeCommentsRequest method.
 //    req := client.DescribeCommentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1048,7 +1069,8 @@ type DescribeDocumentVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentVersions API request.
-func (r DescribeDocumentVersionsRequest) Send() (*DescribeDocumentVersionsOutput, error) {
+func (r DescribeDocumentVersionsRequest) Send(ctx context.Context) (*DescribeDocumentVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1066,7 +1088,7 @@ func (r DescribeDocumentVersionsRequest) Send() (*DescribeDocumentVersionsOutput
 //
 //    // Example sending a request using the DescribeDocumentVersionsRequest method.
 //    req := client.DescribeDocumentVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1116,7 +1138,7 @@ func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersio
 func (p *DescribeDocumentVersionsRequest) Paginate(opts ...aws.Option) DescribeDocumentVersionsPager {
 	return DescribeDocumentVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDocumentVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1125,6 +1147,7 @@ func (p *DescribeDocumentVersionsRequest) Paginate(opts ...aws.Option) DescribeD
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1152,7 +1175,8 @@ type DescribeFolderContentsRequest struct {
 }
 
 // Send marshals and sends the DescribeFolderContents API request.
-func (r DescribeFolderContentsRequest) Send() (*DescribeFolderContentsOutput, error) {
+func (r DescribeFolderContentsRequest) Send(ctx context.Context) (*DescribeFolderContentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1174,7 +1198,7 @@ func (r DescribeFolderContentsRequest) Send() (*DescribeFolderContentsOutput, er
 //
 //    // Example sending a request using the DescribeFolderContentsRequest method.
 //    req := client.DescribeFolderContentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1224,7 +1248,7 @@ func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsIn
 func (p *DescribeFolderContentsRequest) Paginate(opts ...aws.Option) DescribeFolderContentsPager {
 	return DescribeFolderContentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeFolderContentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1233,6 +1257,7 @@ func (p *DescribeFolderContentsRequest) Paginate(opts ...aws.Option) DescribeFol
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1260,7 +1285,8 @@ type DescribeGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeGroups API request.
-func (r DescribeGroupsRequest) Send() (*DescribeGroupsOutput, error) {
+func (r DescribeGroupsRequest) Send(ctx context.Context) (*DescribeGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1272,11 +1298,12 @@ func (r DescribeGroupsRequest) Send() (*DescribeGroupsOutput, error) {
 // DescribeGroupsRequest returns a request value for making API operation for
 // Amazon WorkDocs.
 //
-// Describes the groups specified by query.
+// Describes the groups specified by the query. Groups are defined by the underlying
+// Active Directory.
 //
 //    // Example sending a request using the DescribeGroupsRequest method.
 //    req := client.DescribeGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1310,7 +1337,8 @@ type DescribeNotificationSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeNotificationSubscriptions API request.
-func (r DescribeNotificationSubscriptionsRequest) Send() (*DescribeNotificationSubscriptionsOutput, error) {
+func (r DescribeNotificationSubscriptionsRequest) Send(ctx context.Context) (*DescribeNotificationSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1326,7 +1354,7 @@ func (r DescribeNotificationSubscriptionsRequest) Send() (*DescribeNotificationS
 //
 //    // Example sending a request using the DescribeNotificationSubscriptionsRequest method.
 //    req := client.DescribeNotificationSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1360,7 +1388,8 @@ type DescribeResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the DescribeResourcePermissions API request.
-func (r DescribeResourcePermissionsRequest) Send() (*DescribeResourcePermissionsOutput, error) {
+func (r DescribeResourcePermissionsRequest) Send(ctx context.Context) (*DescribeResourcePermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1376,7 +1405,7 @@ func (r DescribeResourcePermissionsRequest) Send() (*DescribeResourcePermissions
 //
 //    // Example sending a request using the DescribeResourcePermissionsRequest method.
 //    req := client.DescribeResourcePermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1410,7 +1439,8 @@ type DescribeRootFoldersRequest struct {
 }
 
 // Send marshals and sends the DescribeRootFolders API request.
-func (r DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
+func (r DescribeRootFoldersRequest) Send(ctx context.Context) (*DescribeRootFoldersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1427,9 +1457,14 @@ func (r DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
 // root of recycled items. This is not a valid action for SigV4 (administrative
 // API) clients.
 //
+// This action requires an authentication token. To get an authentication token,
+// register an application with Amazon WorkDocs. For more information, see Authentication
+// and Access Control for User Applications (http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// in the Amazon WorkDocs Developer Guide.
+//
 //    // Example sending a request using the DescribeRootFoldersRequest method.
 //    req := client.DescribeRootFoldersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1463,7 +1498,8 @@ type DescribeUsersRequest struct {
 }
 
 // Send marshals and sends the DescribeUsers API request.
-func (r DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
+func (r DescribeUsersRequest) Send(ctx context.Context) (*DescribeUsersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1484,7 +1520,7 @@ func (r DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
 //
 //    // Example sending a request using the DescribeUsersRequest method.
 //    req := client.DescribeUsersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1534,7 +1570,7 @@ func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsers
 func (p *DescribeUsersRequest) Paginate(opts ...aws.Option) DescribeUsersPager {
 	return DescribeUsersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeUsersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1543,6 +1579,7 @@ func (p *DescribeUsersRequest) Paginate(opts ...aws.Option) DescribeUsersPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1570,7 +1607,8 @@ type GetCurrentUserRequest struct {
 }
 
 // Send marshals and sends the GetCurrentUser API request.
-func (r GetCurrentUserRequest) Send() (*GetCurrentUserOutput, error) {
+func (r GetCurrentUserRequest) Send(ctx context.Context) (*GetCurrentUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1587,7 +1625,7 @@ func (r GetCurrentUserRequest) Send() (*GetCurrentUserOutput, error) {
 //
 //    // Example sending a request using the GetCurrentUserRequest method.
 //    req := client.GetCurrentUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1621,7 +1659,8 @@ type GetDocumentRequest struct {
 }
 
 // Send marshals and sends the GetDocument API request.
-func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+func (r GetDocumentRequest) Send(ctx context.Context) (*GetDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1637,7 +1676,7 @@ func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
 //
 //    // Example sending a request using the GetDocumentRequest method.
 //    req := client.GetDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1671,7 +1710,8 @@ type GetDocumentPathRequest struct {
 }
 
 // Send marshals and sends the GetDocumentPath API request.
-func (r GetDocumentPathRequest) Send() (*GetDocumentPathOutput, error) {
+func (r GetDocumentPathRequest) Send(ctx context.Context) (*GetDocumentPathOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1693,7 +1733,7 @@ func (r GetDocumentPathRequest) Send() (*GetDocumentPathOutput, error) {
 //
 //    // Example sending a request using the GetDocumentPathRequest method.
 //    req := client.GetDocumentPathRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1727,7 +1767,8 @@ type GetDocumentVersionRequest struct {
 }
 
 // Send marshals and sends the GetDocumentVersion API request.
-func (r GetDocumentVersionRequest) Send() (*GetDocumentVersionOutput, error) {
+func (r GetDocumentVersionRequest) Send(ctx context.Context) (*GetDocumentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1743,7 +1784,7 @@ func (r GetDocumentVersionRequest) Send() (*GetDocumentVersionOutput, error) {
 //
 //    // Example sending a request using the GetDocumentVersionRequest method.
 //    req := client.GetDocumentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1777,7 +1818,8 @@ type GetFolderRequest struct {
 }
 
 // Send marshals and sends the GetFolder API request.
-func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
+func (r GetFolderRequest) Send(ctx context.Context) (*GetFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1793,7 +1835,7 @@ func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
 //
 //    // Example sending a request using the GetFolderRequest method.
 //    req := client.GetFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1827,7 +1869,8 @@ type GetFolderPathRequest struct {
 }
 
 // Send marshals and sends the GetFolderPath API request.
-func (r GetFolderPathRequest) Send() (*GetFolderPathOutput, error) {
+func (r GetFolderPathRequest) Send(ctx context.Context) (*GetFolderPathOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1849,7 +1892,7 @@ func (r GetFolderPathRequest) Send() (*GetFolderPathOutput, error) {
 //
 //    // Example sending a request using the GetFolderPathRequest method.
 //    req := client.GetFolderPathRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1873,6 +1916,58 @@ func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPath
 	return GetFolderPathRequest{Request: req, Input: input, Copy: c.GetFolderPathRequest}
 }
 
+const opGetResources = "GetResources"
+
+// GetResourcesRequest is a API request type for the GetResources API operation.
+type GetResourcesRequest struct {
+	*aws.Request
+	Input *GetResourcesInput
+	Copy  func(*GetResourcesInput) GetResourcesRequest
+}
+
+// Send marshals and sends the GetResources API request.
+func (r GetResourcesRequest) Send(ctx context.Context) (*GetResourcesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourcesOutput), nil
+}
+
+// GetResourcesRequest returns a request value for making API operation for
+// Amazon WorkDocs.
+//
+// Retrieves a collection of resources, including folders and documents. The
+// only CollectionType supported is SHARED_WITH_ME.
+//
+//    // Example sending a request using the GetResourcesRequest method.
+//    req := client.GetResourcesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResources
+func (c *WorkDocs) GetResourcesRequest(input *GetResourcesInput) GetResourcesRequest {
+	op := &aws.Operation{
+		Name:       opGetResources,
+		HTTPMethod: "GET",
+		HTTPPath:   "/api/v1/resources",
+	}
+
+	if input == nil {
+		input = &GetResourcesInput{}
+	}
+
+	output := &GetResourcesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetResourcesRequest{Request: req, Input: input, Copy: c.GetResourcesRequest}
+}
+
 const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 
 // InitiateDocumentVersionUploadRequest is a API request type for the InitiateDocumentVersionUpload API operation.
@@ -1883,7 +1978,8 @@ type InitiateDocumentVersionUploadRequest struct {
 }
 
 // Send marshals and sends the InitiateDocumentVersionUpload API request.
-func (r InitiateDocumentVersionUploadRequest) Send() (*InitiateDocumentVersionUploadOutput, error) {
+func (r InitiateDocumentVersionUploadRequest) Send(ctx context.Context) (*InitiateDocumentVersionUploadOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1906,7 +2002,7 @@ func (r InitiateDocumentVersionUploadRequest) Send() (*InitiateDocumentVersionUp
 //
 //    // Example sending a request using the InitiateDocumentVersionUploadRequest method.
 //    req := client.InitiateDocumentVersionUploadRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1940,7 +2036,8 @@ type RemoveAllResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the RemoveAllResourcePermissions API request.
-func (r RemoveAllResourcePermissionsRequest) Send() (*RemoveAllResourcePermissionsOutput, error) {
+func (r RemoveAllResourcePermissionsRequest) Send(ctx context.Context) (*RemoveAllResourcePermissionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1956,7 +2053,7 @@ func (r RemoveAllResourcePermissionsRequest) Send() (*RemoveAllResourcePermissio
 //
 //    // Example sending a request using the RemoveAllResourcePermissionsRequest method.
 //    req := client.RemoveAllResourcePermissionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1992,7 +2089,8 @@ type RemoveResourcePermissionRequest struct {
 }
 
 // Send marshals and sends the RemoveResourcePermission API request.
-func (r RemoveResourcePermissionRequest) Send() (*RemoveResourcePermissionOutput, error) {
+func (r RemoveResourcePermissionRequest) Send(ctx context.Context) (*RemoveResourcePermissionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2008,7 +2106,7 @@ func (r RemoveResourcePermissionRequest) Send() (*RemoveResourcePermissionOutput
 //
 //    // Example sending a request using the RemoveResourcePermissionRequest method.
 //    req := client.RemoveResourcePermissionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2044,7 +2142,8 @@ type UpdateDocumentRequest struct {
 }
 
 // Send marshals and sends the UpdateDocument API request.
-func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+func (r UpdateDocumentRequest) Send(ctx context.Context) (*UpdateDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2061,7 +2160,7 @@ func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
 //
 //    // Example sending a request using the UpdateDocumentRequest method.
 //    req := client.UpdateDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2097,7 +2196,8 @@ type UpdateDocumentVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentVersion API request.
-func (r UpdateDocumentVersionRequest) Send() (*UpdateDocumentVersionOutput, error) {
+func (r UpdateDocumentVersionRequest) Send(ctx context.Context) (*UpdateDocumentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2117,7 +2217,7 @@ func (r UpdateDocumentVersionRequest) Send() (*UpdateDocumentVersionOutput, erro
 //
 //    // Example sending a request using the UpdateDocumentVersionRequest method.
 //    req := client.UpdateDocumentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2153,7 +2253,8 @@ type UpdateFolderRequest struct {
 }
 
 // Send marshals and sends the UpdateFolder API request.
-func (r UpdateFolderRequest) Send() (*UpdateFolderOutput, error) {
+func (r UpdateFolderRequest) Send(ctx context.Context) (*UpdateFolderOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2170,7 +2271,7 @@ func (r UpdateFolderRequest) Send() (*UpdateFolderOutput, error) {
 //
 //    // Example sending a request using the UpdateFolderRequest method.
 //    req := client.UpdateFolderRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2206,7 +2307,8 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send(ctx context.Context) (*UpdateUserOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2223,7 +2325,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 //
 //    // Example sending a request using the UpdateUserRequest method.
 //    req := client.UpdateUserRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2466,6 +2568,12 @@ type Activity struct {
 	// The user who performed the action.
 	Initiator *UserMetadata `type:"structure"`
 
+	// Indicates whether an activity is indirect or direct. An indirect activity
+	// results from a direct activity performed on a parent resource. For example,
+	// sharing a parent folder (the direct activity) shares all of the subfolders
+	// and documents within the parent folder (the indirect activity).
+	IsIndirectActivity *bool `type:"boolean"`
+
 	// The ID of the organization.
 	OrganizationId *string `min:"1" type:"string"`
 
@@ -2511,6 +2619,12 @@ func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Initiator", v, metadata)
+	}
+	if s.IsIndirectActivity != nil {
+		v := *s.IsIndirectActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsIndirectActivity", protocol.BoolValue(v), metadata)
 	}
 	if s.OrganizationId != nil {
 		v := *s.OrganizationId
@@ -4644,6 +4758,10 @@ func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeActivitiesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies which activity types to include in the response. If this field
+	// is left empty, all activity types are returned.
+	ActivityTypes *string `location:"querystring" locationName:"activityTypes" min:"1" type:"string"`
+
 	// Amazon WorkDocs authentication token. Do not set this field when using administrative
 	// API actions, as in accessing the API using AWS credentials.
 	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
@@ -4651,6 +4769,12 @@ type DescribeActivitiesInput struct {
 	// The timestamp that determines the end time of the activities. The response
 	// includes the activities performed before the specified timestamp.
 	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Includes indirect activities. An indirect activity results from a direct
+	// activity performed on a parent resource. For example, sharing a parent folder
+	// (the direct activity) shares all of the subfolders and documents within the
+	// parent folder (the indirect activity).
+	IncludeIndirectActivities *bool `location:"querystring" locationName:"includeIndirectActivities" type:"boolean"`
 
 	// The maximum number of items to return.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
@@ -4661,6 +4785,9 @@ type DescribeActivitiesInput struct {
 	// The ID of the organization. This is a mandatory parameter when using administrative
 	// API (SigV4) requests.
 	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
+
+	// The document or folder ID for which to describe activity types.
+	ResourceId *string `location:"querystring" locationName:"resourceId" min:"1" type:"string"`
 
 	// The timestamp that determines the starting time of the activities. The response
 	// includes the activities performed after the specified timestamp.
@@ -4685,6 +4812,9 @@ func (s DescribeActivitiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivitiesInput"}
+	if s.ActivityTypes != nil && len(*s.ActivityTypes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityTypes", 1))
+	}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
@@ -4696,6 +4826,9 @@ func (s *DescribeActivitiesInput) Validate() error {
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
+	}
+	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
@@ -4717,11 +4850,23 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ActivityTypes != nil {
+		v := *s.ActivityTypes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "activityTypes", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndTime != nil {
 		v := *s.EndTime
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "endTime", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+	}
+	if s.IncludeIndirectActivities != nil {
+		v := *s.IncludeIndirectActivities
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "includeIndirectActivities", protocol.BoolValue(v), metadata)
 	}
 	if s.Limit != nil {
 		v := *s.Limit
@@ -4740,6 +4885,12 @@ func (s DescribeActivitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "organizationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StartTime != nil {
 		v := *s.StartTime
@@ -7224,6 +7375,165 @@ func (s GetFolderPathOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesRequest
+type GetResourcesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon WorkDocs authentication token. Do not set this field when using
+	// administrative API actions, as in accessing the API operation using AWS credentials.
+	AuthenticationToken *string `location:"header" locationName:"Authentication" min:"1" type:"string"`
+
+	// The collection type.
+	CollectionType ResourceCollectionType `location:"querystring" locationName:"collectionType" type:"string" enum:"true"`
+
+	// The maximum number of resources to return.
+	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
+
+	// The marker for the next set of results. This marker was received from a previous
+	// call.
+	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
+
+	// The user ID for the resource collection. This is a required field for accessing
+	// the API operation using IAM credentials.
+	UserId *string `location:"querystring" locationName:"userId" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetResourcesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourcesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetResourcesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
+	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+	if s.Marker != nil && len(*s.Marker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
+	}
+	if s.UserId != nil && len(*s.UserId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.AuthenticationToken != nil {
+		v := *s.AuthenticationToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Authentication", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CollectionType) > 0 {
+		v := s.CollectionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "collectionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Limit != nil {
+		v := *s.Limit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "limit", protocol.Int64Value(v), metadata)
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetResourcesResponse
+type GetResourcesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The documents in the specified collection.
+	Documents []DocumentMetadata `type:"list"`
+
+	// The folders in the specified folder.
+	Folders []FolderMetadata `type:"list"`
+
+	// The marker to use when requesting the next set of results. If there are no
+	// additional results, the string is empty.
+	Marker *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s GetResourcesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourcesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourcesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Documents) > 0 {
+		v := s.Documents
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Documents", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Folders) > 0 {
+		v := s.Folders
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Folders", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Describes the metadata of a user group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GroupMetadata
 type GroupMetadata struct {
@@ -8066,6 +8376,9 @@ func (s SharePrincipal) MarshalFields(e protocol.FieldEncoder) error {
 type ShareResult struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the invited user.
+	InviteePrincipalId *string `min:"1" type:"string"`
+
 	// The ID of the principal.
 	PrincipalId *string `min:"1" type:"string"`
 
@@ -8094,6 +8407,12 @@ func (s ShareResult) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ShareResult) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InviteePrincipalId != nil {
+		v := *s.InviteePrincipalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InviteePrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.PrincipalId != nil {
 		v := *s.PrincipalId
 
@@ -9064,6 +9383,8 @@ const (
 	ActivityTypeDocumentRenamed                        ActivityType = "DOCUMENT_RENAMED"
 	ActivityTypeDocumentVersionUploaded                ActivityType = "DOCUMENT_VERSION_UPLOADED"
 	ActivityTypeDocumentVersionDeleted                 ActivityType = "DOCUMENT_VERSION_DELETED"
+	ActivityTypeDocumentVersionViewed                  ActivityType = "DOCUMENT_VERSION_VIEWED"
+	ActivityTypeDocumentVersionDownloaded              ActivityType = "DOCUMENT_VERSION_DOWNLOADED"
 	ActivityTypeDocumentRecycled                       ActivityType = "DOCUMENT_RECYCLED"
 	ActivityTypeDocumentRestored                       ActivityType = "DOCUMENT_RESTORED"
 	ActivityTypeDocumentReverted                       ActivityType = "DOCUMENT_REVERTED"
@@ -9298,6 +9619,22 @@ func (enum PrincipalType) MarshalValue() (string, error) {
 }
 
 func (enum PrincipalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResourceCollectionType string
+
+// Enum values for ResourceCollectionType
+const (
+	ResourceCollectionTypeSharedWithMe ResourceCollectionType = "SHARED_WITH_ME"
+)
+
+func (enum ResourceCollectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceCollectionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

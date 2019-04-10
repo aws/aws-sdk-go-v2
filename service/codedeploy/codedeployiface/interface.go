@@ -9,6 +9,8 @@
 package codedeployiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy"
 )
@@ -73,6 +75,8 @@ type CodeDeployAPI interface {
 
 	BatchGetDeploymentInstancesRequest(*codedeploy.BatchGetDeploymentInstancesInput) codedeploy.BatchGetDeploymentInstancesRequest
 
+	BatchGetDeploymentTargetsRequest(*codedeploy.BatchGetDeploymentTargetsInput) codedeploy.BatchGetDeploymentTargetsRequest
+
 	BatchGetDeploymentsRequest(*codedeploy.BatchGetDeploymentsInput) codedeploy.BatchGetDeploymentsRequest
 
 	BatchGetOnPremisesInstancesRequest(*codedeploy.BatchGetOnPremisesInstancesInput) codedeploy.BatchGetOnPremisesInstancesRequest
@@ -109,6 +113,8 @@ type CodeDeployAPI interface {
 
 	GetDeploymentInstanceRequest(*codedeploy.GetDeploymentInstanceInput) codedeploy.GetDeploymentInstanceRequest
 
+	GetDeploymentTargetRequest(*codedeploy.GetDeploymentTargetInput) codedeploy.GetDeploymentTargetRequest
+
 	GetOnPremisesInstanceRequest(*codedeploy.GetOnPremisesInstanceInput) codedeploy.GetOnPremisesInstanceRequest
 
 	ListApplicationRevisionsRequest(*codedeploy.ListApplicationRevisionsInput) codedeploy.ListApplicationRevisionsRequest
@@ -120,6 +126,8 @@ type CodeDeployAPI interface {
 	ListDeploymentGroupsRequest(*codedeploy.ListDeploymentGroupsInput) codedeploy.ListDeploymentGroupsRequest
 
 	ListDeploymentInstancesRequest(*codedeploy.ListDeploymentInstancesInput) codedeploy.ListDeploymentInstancesRequest
+
+	ListDeploymentTargetsRequest(*codedeploy.ListDeploymentTargetsInput) codedeploy.ListDeploymentTargetsRequest
 
 	ListDeploymentsRequest(*codedeploy.ListDeploymentsInput) codedeploy.ListDeploymentsRequest
 
@@ -143,8 +151,7 @@ type CodeDeployAPI interface {
 
 	UpdateDeploymentGroupRequest(*codedeploy.UpdateDeploymentGroupInput) codedeploy.UpdateDeploymentGroupRequest
 
-	WaitUntilDeploymentSuccessful(*codedeploy.GetDeploymentInput) error
-	WaitUntilDeploymentSuccessfulWithContext(aws.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
+	WaitUntilDeploymentSuccessful(context.Context, *codedeploy.GetDeploymentInput, ...aws.WaiterOption) error
 }
 
 var _ CodeDeployAPI = (*codedeploy.CodeDeploy)(nil)

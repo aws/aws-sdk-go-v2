@@ -3,6 +3,8 @@
 package sagemakerruntime
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type InvokeEndpointRequest struct {
 }
 
 // Send marshals and sends the InvokeEndpoint API request.
-func (r InvokeEndpointRequest) Send() (*InvokeEndpointOutput, error) {
+func (r InvokeEndpointRequest) Send(ctx context.Context) (*InvokeEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -50,7 +53,7 @@ func (r InvokeEndpointRequest) Send() (*InvokeEndpointOutput, error) {
 //
 //    // Example sending a request using the InvokeEndpointRequest method.
 //    req := client.InvokeEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }

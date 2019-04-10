@@ -3,6 +3,8 @@
 package pinpoint
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -18,7 +20,8 @@ type CreateAppRequest struct {
 }
 
 // Send marshals and sends the CreateApp API request.
-func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
+func (r CreateAppRequest) Send(ctx context.Context) (*CreateAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -34,7 +37,7 @@ func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
 //
 //    // Example sending a request using the CreateAppRequest method.
 //    req := client.CreateAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -68,7 +71,8 @@ type CreateCampaignRequest struct {
 }
 
 // Send marshals and sends the CreateCampaign API request.
-func (r CreateCampaignRequest) Send() (*CreateCampaignOutput, error) {
+func (r CreateCampaignRequest) Send(ctx context.Context) (*CreateCampaignOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -84,7 +88,7 @@ func (r CreateCampaignRequest) Send() (*CreateCampaignOutput, error) {
 //
 //    // Example sending a request using the CreateCampaignRequest method.
 //    req := client.CreateCampaignRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -118,7 +122,8 @@ type CreateExportJobRequest struct {
 }
 
 // Send marshals and sends the CreateExportJob API request.
-func (r CreateExportJobRequest) Send() (*CreateExportJobOutput, error) {
+func (r CreateExportJobRequest) Send(ctx context.Context) (*CreateExportJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -134,7 +139,7 @@ func (r CreateExportJobRequest) Send() (*CreateExportJobOutput, error) {
 //
 //    // Example sending a request using the CreateExportJobRequest method.
 //    req := client.CreateExportJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -168,7 +173,8 @@ type CreateImportJobRequest struct {
 }
 
 // Send marshals and sends the CreateImportJob API request.
-func (r CreateImportJobRequest) Send() (*CreateImportJobOutput, error) {
+func (r CreateImportJobRequest) Send(ctx context.Context) (*CreateImportJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -184,7 +190,7 @@ func (r CreateImportJobRequest) Send() (*CreateImportJobOutput, error) {
 //
 //    // Example sending a request using the CreateImportJobRequest method.
 //    req := client.CreateImportJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -218,7 +224,8 @@ type CreateSegmentRequest struct {
 }
 
 // Send marshals and sends the CreateSegment API request.
-func (r CreateSegmentRequest) Send() (*CreateSegmentOutput, error) {
+func (r CreateSegmentRequest) Send(ctx context.Context) (*CreateSegmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -234,7 +241,7 @@ func (r CreateSegmentRequest) Send() (*CreateSegmentOutput, error) {
 //
 //    // Example sending a request using the CreateSegmentRequest method.
 //    req := client.CreateSegmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -268,7 +275,8 @@ type DeleteAdmChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteAdmChannel API request.
-func (r DeleteAdmChannelRequest) Send() (*DeleteAdmChannelOutput, error) {
+func (r DeleteAdmChannelRequest) Send(ctx context.Context) (*DeleteAdmChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -284,7 +292,7 @@ func (r DeleteAdmChannelRequest) Send() (*DeleteAdmChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteAdmChannelRequest method.
 //    req := client.DeleteAdmChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -318,7 +326,8 @@ type DeleteApnsChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteApnsChannel API request.
-func (r DeleteApnsChannelRequest) Send() (*DeleteApnsChannelOutput, error) {
+func (r DeleteApnsChannelRequest) Send(ctx context.Context) (*DeleteApnsChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -334,7 +343,7 @@ func (r DeleteApnsChannelRequest) Send() (*DeleteApnsChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteApnsChannelRequest method.
 //    req := client.DeleteApnsChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -368,7 +377,8 @@ type DeleteApnsSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteApnsSandboxChannel API request.
-func (r DeleteApnsSandboxChannelRequest) Send() (*DeleteApnsSandboxChannelOutput, error) {
+func (r DeleteApnsSandboxChannelRequest) Send(ctx context.Context) (*DeleteApnsSandboxChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,7 +394,7 @@ func (r DeleteApnsSandboxChannelRequest) Send() (*DeleteApnsSandboxChannelOutput
 //
 //    // Example sending a request using the DeleteApnsSandboxChannelRequest method.
 //    req := client.DeleteApnsSandboxChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -418,7 +428,8 @@ type DeleteApnsVoipChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteApnsVoipChannel API request.
-func (r DeleteApnsVoipChannelRequest) Send() (*DeleteApnsVoipChannelOutput, error) {
+func (r DeleteApnsVoipChannelRequest) Send(ctx context.Context) (*DeleteApnsVoipChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -434,7 +445,7 @@ func (r DeleteApnsVoipChannelRequest) Send() (*DeleteApnsVoipChannelOutput, erro
 //
 //    // Example sending a request using the DeleteApnsVoipChannelRequest method.
 //    req := client.DeleteApnsVoipChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -468,7 +479,8 @@ type DeleteApnsVoipSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteApnsVoipSandboxChannel API request.
-func (r DeleteApnsVoipSandboxChannelRequest) Send() (*DeleteApnsVoipSandboxChannelOutput, error) {
+func (r DeleteApnsVoipSandboxChannelRequest) Send(ctx context.Context) (*DeleteApnsVoipSandboxChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -484,7 +496,7 @@ func (r DeleteApnsVoipSandboxChannelRequest) Send() (*DeleteApnsVoipSandboxChann
 //
 //    // Example sending a request using the DeleteApnsVoipSandboxChannelRequest method.
 //    req := client.DeleteApnsVoipSandboxChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -518,7 +530,8 @@ type DeleteAppRequest struct {
 }
 
 // Send marshals and sends the DeleteApp API request.
-func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+func (r DeleteAppRequest) Send(ctx context.Context) (*DeleteAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -534,7 +547,7 @@ func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
 //
 //    // Example sending a request using the DeleteAppRequest method.
 //    req := client.DeleteAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -568,7 +581,8 @@ type DeleteBaiduChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteBaiduChannel API request.
-func (r DeleteBaiduChannelRequest) Send() (*DeleteBaiduChannelOutput, error) {
+func (r DeleteBaiduChannelRequest) Send(ctx context.Context) (*DeleteBaiduChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -584,7 +598,7 @@ func (r DeleteBaiduChannelRequest) Send() (*DeleteBaiduChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteBaiduChannelRequest method.
 //    req := client.DeleteBaiduChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -618,7 +632,8 @@ type DeleteCampaignRequest struct {
 }
 
 // Send marshals and sends the DeleteCampaign API request.
-func (r DeleteCampaignRequest) Send() (*DeleteCampaignOutput, error) {
+func (r DeleteCampaignRequest) Send(ctx context.Context) (*DeleteCampaignOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -634,7 +649,7 @@ func (r DeleteCampaignRequest) Send() (*DeleteCampaignOutput, error) {
 //
 //    // Example sending a request using the DeleteCampaignRequest method.
 //    req := client.DeleteCampaignRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -668,7 +683,8 @@ type DeleteEmailChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteEmailChannel API request.
-func (r DeleteEmailChannelRequest) Send() (*DeleteEmailChannelOutput, error) {
+func (r DeleteEmailChannelRequest) Send(ctx context.Context) (*DeleteEmailChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,7 +700,7 @@ func (r DeleteEmailChannelRequest) Send() (*DeleteEmailChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteEmailChannelRequest method.
 //    req := client.DeleteEmailChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -718,7 +734,8 @@ type DeleteEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
-func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+func (r DeleteEndpointRequest) Send(ctx context.Context) (*DeleteEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -734,7 +751,7 @@ func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
 //
 //    // Example sending a request using the DeleteEndpointRequest method.
 //    req := client.DeleteEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -768,7 +785,8 @@ type DeleteEventStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteEventStream API request.
-func (r DeleteEventStreamRequest) Send() (*DeleteEventStreamOutput, error) {
+func (r DeleteEventStreamRequest) Send(ctx context.Context) (*DeleteEventStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -784,7 +802,7 @@ func (r DeleteEventStreamRequest) Send() (*DeleteEventStreamOutput, error) {
 //
 //    // Example sending a request using the DeleteEventStreamRequest method.
 //    req := client.DeleteEventStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -818,7 +836,8 @@ type DeleteGcmChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteGcmChannel API request.
-func (r DeleteGcmChannelRequest) Send() (*DeleteGcmChannelOutput, error) {
+func (r DeleteGcmChannelRequest) Send(ctx context.Context) (*DeleteGcmChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -834,7 +853,7 @@ func (r DeleteGcmChannelRequest) Send() (*DeleteGcmChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteGcmChannelRequest method.
 //    req := client.DeleteGcmChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -868,7 +887,8 @@ type DeleteSegmentRequest struct {
 }
 
 // Send marshals and sends the DeleteSegment API request.
-func (r DeleteSegmentRequest) Send() (*DeleteSegmentOutput, error) {
+func (r DeleteSegmentRequest) Send(ctx context.Context) (*DeleteSegmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -884,7 +904,7 @@ func (r DeleteSegmentRequest) Send() (*DeleteSegmentOutput, error) {
 //
 //    // Example sending a request using the DeleteSegmentRequest method.
 //    req := client.DeleteSegmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -918,7 +938,8 @@ type DeleteSmsChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteSmsChannel API request.
-func (r DeleteSmsChannelRequest) Send() (*DeleteSmsChannelOutput, error) {
+func (r DeleteSmsChannelRequest) Send(ctx context.Context) (*DeleteSmsChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -934,7 +955,7 @@ func (r DeleteSmsChannelRequest) Send() (*DeleteSmsChannelOutput, error) {
 //
 //    // Example sending a request using the DeleteSmsChannelRequest method.
 //    req := client.DeleteSmsChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -968,7 +989,8 @@ type DeleteUserEndpointsRequest struct {
 }
 
 // Send marshals and sends the DeleteUserEndpoints API request.
-func (r DeleteUserEndpointsRequest) Send() (*DeleteUserEndpointsOutput, error) {
+func (r DeleteUserEndpointsRequest) Send(ctx context.Context) (*DeleteUserEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -984,7 +1006,7 @@ func (r DeleteUserEndpointsRequest) Send() (*DeleteUserEndpointsOutput, error) {
 //
 //    // Example sending a request using the DeleteUserEndpointsRequest method.
 //    req := client.DeleteUserEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1008,6 +1030,57 @@ func (c *Pinpoint) DeleteUserEndpointsRequest(input *DeleteUserEndpointsInput) D
 	return DeleteUserEndpointsRequest{Request: req, Input: input, Copy: c.DeleteUserEndpointsRequest}
 }
 
+const opDeleteVoiceChannel = "DeleteVoiceChannel"
+
+// DeleteVoiceChannelRequest is a API request type for the DeleteVoiceChannel API operation.
+type DeleteVoiceChannelRequest struct {
+	*aws.Request
+	Input *DeleteVoiceChannelInput
+	Copy  func(*DeleteVoiceChannelInput) DeleteVoiceChannelRequest
+}
+
+// Send marshals and sends the DeleteVoiceChannel API request.
+func (r DeleteVoiceChannelRequest) Send(ctx context.Context) (*DeleteVoiceChannelOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVoiceChannelOutput), nil
+}
+
+// DeleteVoiceChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Delete an Voice channel
+//
+//    // Example sending a request using the DeleteVoiceChannelRequest method.
+//    req := client.DeleteVoiceChannelRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceChannel
+func (c *Pinpoint) DeleteVoiceChannelRequest(input *DeleteVoiceChannelInput) DeleteVoiceChannelRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVoiceChannel,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/v1/apps/{application-id}/channels/voice",
+	}
+
+	if input == nil {
+		input = &DeleteVoiceChannelInput{}
+	}
+
+	output := &DeleteVoiceChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVoiceChannelRequest{Request: req, Input: input, Copy: c.DeleteVoiceChannelRequest}
+}
+
 const opGetAdmChannel = "GetAdmChannel"
 
 // GetAdmChannelRequest is a API request type for the GetAdmChannel API operation.
@@ -1018,7 +1091,8 @@ type GetAdmChannelRequest struct {
 }
 
 // Send marshals and sends the GetAdmChannel API request.
-func (r GetAdmChannelRequest) Send() (*GetAdmChannelOutput, error) {
+func (r GetAdmChannelRequest) Send(ctx context.Context) (*GetAdmChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1034,7 +1108,7 @@ func (r GetAdmChannelRequest) Send() (*GetAdmChannelOutput, error) {
 //
 //    // Example sending a request using the GetAdmChannelRequest method.
 //    req := client.GetAdmChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1068,7 +1142,8 @@ type GetApnsChannelRequest struct {
 }
 
 // Send marshals and sends the GetApnsChannel API request.
-func (r GetApnsChannelRequest) Send() (*GetApnsChannelOutput, error) {
+func (r GetApnsChannelRequest) Send(ctx context.Context) (*GetApnsChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1084,7 +1159,7 @@ func (r GetApnsChannelRequest) Send() (*GetApnsChannelOutput, error) {
 //
 //    // Example sending a request using the GetApnsChannelRequest method.
 //    req := client.GetApnsChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1118,7 +1193,8 @@ type GetApnsSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the GetApnsSandboxChannel API request.
-func (r GetApnsSandboxChannelRequest) Send() (*GetApnsSandboxChannelOutput, error) {
+func (r GetApnsSandboxChannelRequest) Send(ctx context.Context) (*GetApnsSandboxChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1134,7 +1210,7 @@ func (r GetApnsSandboxChannelRequest) Send() (*GetApnsSandboxChannelOutput, erro
 //
 //    // Example sending a request using the GetApnsSandboxChannelRequest method.
 //    req := client.GetApnsSandboxChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1168,7 +1244,8 @@ type GetApnsVoipChannelRequest struct {
 }
 
 // Send marshals and sends the GetApnsVoipChannel API request.
-func (r GetApnsVoipChannelRequest) Send() (*GetApnsVoipChannelOutput, error) {
+func (r GetApnsVoipChannelRequest) Send(ctx context.Context) (*GetApnsVoipChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1184,7 +1261,7 @@ func (r GetApnsVoipChannelRequest) Send() (*GetApnsVoipChannelOutput, error) {
 //
 //    // Example sending a request using the GetApnsVoipChannelRequest method.
 //    req := client.GetApnsVoipChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1218,7 +1295,8 @@ type GetApnsVoipSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the GetApnsVoipSandboxChannel API request.
-func (r GetApnsVoipSandboxChannelRequest) Send() (*GetApnsVoipSandboxChannelOutput, error) {
+func (r GetApnsVoipSandboxChannelRequest) Send(ctx context.Context) (*GetApnsVoipSandboxChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1234,7 +1312,7 @@ func (r GetApnsVoipSandboxChannelRequest) Send() (*GetApnsVoipSandboxChannelOutp
 //
 //    // Example sending a request using the GetApnsVoipSandboxChannelRequest method.
 //    req := client.GetApnsVoipSandboxChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1268,7 +1346,8 @@ type GetAppRequest struct {
 }
 
 // Send marshals and sends the GetApp API request.
-func (r GetAppRequest) Send() (*GetAppOutput, error) {
+func (r GetAppRequest) Send(ctx context.Context) (*GetAppOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1284,7 +1363,7 @@ func (r GetAppRequest) Send() (*GetAppOutput, error) {
 //
 //    // Example sending a request using the GetAppRequest method.
 //    req := client.GetAppRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1318,7 +1397,8 @@ type GetApplicationSettingsRequest struct {
 }
 
 // Send marshals and sends the GetApplicationSettings API request.
-func (r GetApplicationSettingsRequest) Send() (*GetApplicationSettingsOutput, error) {
+func (r GetApplicationSettingsRequest) Send(ctx context.Context) (*GetApplicationSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1334,7 +1414,7 @@ func (r GetApplicationSettingsRequest) Send() (*GetApplicationSettingsOutput, er
 //
 //    // Example sending a request using the GetApplicationSettingsRequest method.
 //    req := client.GetApplicationSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1368,7 +1448,8 @@ type GetAppsRequest struct {
 }
 
 // Send marshals and sends the GetApps API request.
-func (r GetAppsRequest) Send() (*GetAppsOutput, error) {
+func (r GetAppsRequest) Send(ctx context.Context) (*GetAppsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1384,7 +1465,7 @@ func (r GetAppsRequest) Send() (*GetAppsOutput, error) {
 //
 //    // Example sending a request using the GetAppsRequest method.
 //    req := client.GetAppsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1418,7 +1499,8 @@ type GetBaiduChannelRequest struct {
 }
 
 // Send marshals and sends the GetBaiduChannel API request.
-func (r GetBaiduChannelRequest) Send() (*GetBaiduChannelOutput, error) {
+func (r GetBaiduChannelRequest) Send(ctx context.Context) (*GetBaiduChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1434,7 +1516,7 @@ func (r GetBaiduChannelRequest) Send() (*GetBaiduChannelOutput, error) {
 //
 //    // Example sending a request using the GetBaiduChannelRequest method.
 //    req := client.GetBaiduChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1468,7 +1550,8 @@ type GetCampaignRequest struct {
 }
 
 // Send marshals and sends the GetCampaign API request.
-func (r GetCampaignRequest) Send() (*GetCampaignOutput, error) {
+func (r GetCampaignRequest) Send(ctx context.Context) (*GetCampaignOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1484,7 +1567,7 @@ func (r GetCampaignRequest) Send() (*GetCampaignOutput, error) {
 //
 //    // Example sending a request using the GetCampaignRequest method.
 //    req := client.GetCampaignRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1518,7 +1601,8 @@ type GetCampaignActivitiesRequest struct {
 }
 
 // Send marshals and sends the GetCampaignActivities API request.
-func (r GetCampaignActivitiesRequest) Send() (*GetCampaignActivitiesOutput, error) {
+func (r GetCampaignActivitiesRequest) Send(ctx context.Context) (*GetCampaignActivitiesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1534,7 +1618,7 @@ func (r GetCampaignActivitiesRequest) Send() (*GetCampaignActivitiesOutput, erro
 //
 //    // Example sending a request using the GetCampaignActivitiesRequest method.
 //    req := client.GetCampaignActivitiesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1568,7 +1652,8 @@ type GetCampaignVersionRequest struct {
 }
 
 // Send marshals and sends the GetCampaignVersion API request.
-func (r GetCampaignVersionRequest) Send() (*GetCampaignVersionOutput, error) {
+func (r GetCampaignVersionRequest) Send(ctx context.Context) (*GetCampaignVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1584,7 +1669,7 @@ func (r GetCampaignVersionRequest) Send() (*GetCampaignVersionOutput, error) {
 //
 //    // Example sending a request using the GetCampaignVersionRequest method.
 //    req := client.GetCampaignVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1618,7 +1703,8 @@ type GetCampaignVersionsRequest struct {
 }
 
 // Send marshals and sends the GetCampaignVersions API request.
-func (r GetCampaignVersionsRequest) Send() (*GetCampaignVersionsOutput, error) {
+func (r GetCampaignVersionsRequest) Send(ctx context.Context) (*GetCampaignVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1634,7 +1720,7 @@ func (r GetCampaignVersionsRequest) Send() (*GetCampaignVersionsOutput, error) {
 //
 //    // Example sending a request using the GetCampaignVersionsRequest method.
 //    req := client.GetCampaignVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1668,7 +1754,8 @@ type GetCampaignsRequest struct {
 }
 
 // Send marshals and sends the GetCampaigns API request.
-func (r GetCampaignsRequest) Send() (*GetCampaignsOutput, error) {
+func (r GetCampaignsRequest) Send(ctx context.Context) (*GetCampaignsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1684,7 +1771,7 @@ func (r GetCampaignsRequest) Send() (*GetCampaignsOutput, error) {
 //
 //    // Example sending a request using the GetCampaignsRequest method.
 //    req := client.GetCampaignsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1718,7 +1805,8 @@ type GetChannelsRequest struct {
 }
 
 // Send marshals and sends the GetChannels API request.
-func (r GetChannelsRequest) Send() (*GetChannelsOutput, error) {
+func (r GetChannelsRequest) Send(ctx context.Context) (*GetChannelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1734,7 +1822,7 @@ func (r GetChannelsRequest) Send() (*GetChannelsOutput, error) {
 //
 //    // Example sending a request using the GetChannelsRequest method.
 //    req := client.GetChannelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1768,7 +1856,8 @@ type GetEmailChannelRequest struct {
 }
 
 // Send marshals and sends the GetEmailChannel API request.
-func (r GetEmailChannelRequest) Send() (*GetEmailChannelOutput, error) {
+func (r GetEmailChannelRequest) Send(ctx context.Context) (*GetEmailChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1784,7 +1873,7 @@ func (r GetEmailChannelRequest) Send() (*GetEmailChannelOutput, error) {
 //
 //    // Example sending a request using the GetEmailChannelRequest method.
 //    req := client.GetEmailChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1818,7 +1907,8 @@ type GetEndpointRequest struct {
 }
 
 // Send marshals and sends the GetEndpoint API request.
-func (r GetEndpointRequest) Send() (*GetEndpointOutput, error) {
+func (r GetEndpointRequest) Send(ctx context.Context) (*GetEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1834,7 +1924,7 @@ func (r GetEndpointRequest) Send() (*GetEndpointOutput, error) {
 //
 //    // Example sending a request using the GetEndpointRequest method.
 //    req := client.GetEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1868,7 +1958,8 @@ type GetEventStreamRequest struct {
 }
 
 // Send marshals and sends the GetEventStream API request.
-func (r GetEventStreamRequest) Send() (*GetEventStreamOutput, error) {
+func (r GetEventStreamRequest) Send(ctx context.Context) (*GetEventStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1884,7 +1975,7 @@ func (r GetEventStreamRequest) Send() (*GetEventStreamOutput, error) {
 //
 //    // Example sending a request using the GetEventStreamRequest method.
 //    req := client.GetEventStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1918,7 +2009,8 @@ type GetExportJobRequest struct {
 }
 
 // Send marshals and sends the GetExportJob API request.
-func (r GetExportJobRequest) Send() (*GetExportJobOutput, error) {
+func (r GetExportJobRequest) Send(ctx context.Context) (*GetExportJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1934,7 +2026,7 @@ func (r GetExportJobRequest) Send() (*GetExportJobOutput, error) {
 //
 //    // Example sending a request using the GetExportJobRequest method.
 //    req := client.GetExportJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1968,7 +2060,8 @@ type GetExportJobsRequest struct {
 }
 
 // Send marshals and sends the GetExportJobs API request.
-func (r GetExportJobsRequest) Send() (*GetExportJobsOutput, error) {
+func (r GetExportJobsRequest) Send(ctx context.Context) (*GetExportJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1984,7 +2077,7 @@ func (r GetExportJobsRequest) Send() (*GetExportJobsOutput, error) {
 //
 //    // Example sending a request using the GetExportJobsRequest method.
 //    req := client.GetExportJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2018,7 +2111,8 @@ type GetGcmChannelRequest struct {
 }
 
 // Send marshals and sends the GetGcmChannel API request.
-func (r GetGcmChannelRequest) Send() (*GetGcmChannelOutput, error) {
+func (r GetGcmChannelRequest) Send(ctx context.Context) (*GetGcmChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2034,7 +2128,7 @@ func (r GetGcmChannelRequest) Send() (*GetGcmChannelOutput, error) {
 //
 //    // Example sending a request using the GetGcmChannelRequest method.
 //    req := client.GetGcmChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2068,7 +2162,8 @@ type GetImportJobRequest struct {
 }
 
 // Send marshals and sends the GetImportJob API request.
-func (r GetImportJobRequest) Send() (*GetImportJobOutput, error) {
+func (r GetImportJobRequest) Send(ctx context.Context) (*GetImportJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2084,7 +2179,7 @@ func (r GetImportJobRequest) Send() (*GetImportJobOutput, error) {
 //
 //    // Example sending a request using the GetImportJobRequest method.
 //    req := client.GetImportJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2118,7 +2213,8 @@ type GetImportJobsRequest struct {
 }
 
 // Send marshals and sends the GetImportJobs API request.
-func (r GetImportJobsRequest) Send() (*GetImportJobsOutput, error) {
+func (r GetImportJobsRequest) Send(ctx context.Context) (*GetImportJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2134,7 +2230,7 @@ func (r GetImportJobsRequest) Send() (*GetImportJobsOutput, error) {
 //
 //    // Example sending a request using the GetImportJobsRequest method.
 //    req := client.GetImportJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2168,7 +2264,8 @@ type GetSegmentRequest struct {
 }
 
 // Send marshals and sends the GetSegment API request.
-func (r GetSegmentRequest) Send() (*GetSegmentOutput, error) {
+func (r GetSegmentRequest) Send(ctx context.Context) (*GetSegmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2184,7 +2281,7 @@ func (r GetSegmentRequest) Send() (*GetSegmentOutput, error) {
 //
 //    // Example sending a request using the GetSegmentRequest method.
 //    req := client.GetSegmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2218,7 +2315,8 @@ type GetSegmentExportJobsRequest struct {
 }
 
 // Send marshals and sends the GetSegmentExportJobs API request.
-func (r GetSegmentExportJobsRequest) Send() (*GetSegmentExportJobsOutput, error) {
+func (r GetSegmentExportJobsRequest) Send(ctx context.Context) (*GetSegmentExportJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2234,7 +2332,7 @@ func (r GetSegmentExportJobsRequest) Send() (*GetSegmentExportJobsOutput, error)
 //
 //    // Example sending a request using the GetSegmentExportJobsRequest method.
 //    req := client.GetSegmentExportJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2268,7 +2366,8 @@ type GetSegmentImportJobsRequest struct {
 }
 
 // Send marshals and sends the GetSegmentImportJobs API request.
-func (r GetSegmentImportJobsRequest) Send() (*GetSegmentImportJobsOutput, error) {
+func (r GetSegmentImportJobsRequest) Send(ctx context.Context) (*GetSegmentImportJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2284,7 +2383,7 @@ func (r GetSegmentImportJobsRequest) Send() (*GetSegmentImportJobsOutput, error)
 //
 //    // Example sending a request using the GetSegmentImportJobsRequest method.
 //    req := client.GetSegmentImportJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2318,7 +2417,8 @@ type GetSegmentVersionRequest struct {
 }
 
 // Send marshals and sends the GetSegmentVersion API request.
-func (r GetSegmentVersionRequest) Send() (*GetSegmentVersionOutput, error) {
+func (r GetSegmentVersionRequest) Send(ctx context.Context) (*GetSegmentVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2334,7 +2434,7 @@ func (r GetSegmentVersionRequest) Send() (*GetSegmentVersionOutput, error) {
 //
 //    // Example sending a request using the GetSegmentVersionRequest method.
 //    req := client.GetSegmentVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2368,7 +2468,8 @@ type GetSegmentVersionsRequest struct {
 }
 
 // Send marshals and sends the GetSegmentVersions API request.
-func (r GetSegmentVersionsRequest) Send() (*GetSegmentVersionsOutput, error) {
+func (r GetSegmentVersionsRequest) Send(ctx context.Context) (*GetSegmentVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2384,7 +2485,7 @@ func (r GetSegmentVersionsRequest) Send() (*GetSegmentVersionsOutput, error) {
 //
 //    // Example sending a request using the GetSegmentVersionsRequest method.
 //    req := client.GetSegmentVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2418,7 +2519,8 @@ type GetSegmentsRequest struct {
 }
 
 // Send marshals and sends the GetSegments API request.
-func (r GetSegmentsRequest) Send() (*GetSegmentsOutput, error) {
+func (r GetSegmentsRequest) Send(ctx context.Context) (*GetSegmentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2434,7 +2536,7 @@ func (r GetSegmentsRequest) Send() (*GetSegmentsOutput, error) {
 //
 //    // Example sending a request using the GetSegmentsRequest method.
 //    req := client.GetSegmentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2468,7 +2570,8 @@ type GetSmsChannelRequest struct {
 }
 
 // Send marshals and sends the GetSmsChannel API request.
-func (r GetSmsChannelRequest) Send() (*GetSmsChannelOutput, error) {
+func (r GetSmsChannelRequest) Send(ctx context.Context) (*GetSmsChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2484,7 +2587,7 @@ func (r GetSmsChannelRequest) Send() (*GetSmsChannelOutput, error) {
 //
 //    // Example sending a request using the GetSmsChannelRequest method.
 //    req := client.GetSmsChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2518,7 +2621,8 @@ type GetUserEndpointsRequest struct {
 }
 
 // Send marshals and sends the GetUserEndpoints API request.
-func (r GetUserEndpointsRequest) Send() (*GetUserEndpointsOutput, error) {
+func (r GetUserEndpointsRequest) Send(ctx context.Context) (*GetUserEndpointsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2534,7 +2638,7 @@ func (r GetUserEndpointsRequest) Send() (*GetUserEndpointsOutput, error) {
 //
 //    // Example sending a request using the GetUserEndpointsRequest method.
 //    req := client.GetUserEndpointsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2558,6 +2662,57 @@ func (c *Pinpoint) GetUserEndpointsRequest(input *GetUserEndpointsInput) GetUser
 	return GetUserEndpointsRequest{Request: req, Input: input, Copy: c.GetUserEndpointsRequest}
 }
 
+const opGetVoiceChannel = "GetVoiceChannel"
+
+// GetVoiceChannelRequest is a API request type for the GetVoiceChannel API operation.
+type GetVoiceChannelRequest struct {
+	*aws.Request
+	Input *GetVoiceChannelInput
+	Copy  func(*GetVoiceChannelInput) GetVoiceChannelRequest
+}
+
+// Send marshals and sends the GetVoiceChannel API request.
+func (r GetVoiceChannelRequest) Send(ctx context.Context) (*GetVoiceChannelOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVoiceChannelOutput), nil
+}
+
+// GetVoiceChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Get a Voice Channel
+//
+//    // Example sending a request using the GetVoiceChannelRequest method.
+//    req := client.GetVoiceChannelRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannel
+func (c *Pinpoint) GetVoiceChannelRequest(input *GetVoiceChannelInput) GetVoiceChannelRequest {
+	op := &aws.Operation{
+		Name:       opGetVoiceChannel,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apps/{application-id}/channels/voice",
+	}
+
+	if input == nil {
+		input = &GetVoiceChannelInput{}
+	}
+
+	output := &GetVoiceChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVoiceChannelRequest{Request: req, Input: input, Copy: c.GetVoiceChannelRequest}
+}
+
 const opPhoneNumberValidate = "PhoneNumberValidate"
 
 // PhoneNumberValidateRequest is a API request type for the PhoneNumberValidate API operation.
@@ -2568,7 +2723,8 @@ type PhoneNumberValidateRequest struct {
 }
 
 // Send marshals and sends the PhoneNumberValidate API request.
-func (r PhoneNumberValidateRequest) Send() (*PhoneNumberValidateOutput, error) {
+func (r PhoneNumberValidateRequest) Send(ctx context.Context) (*PhoneNumberValidateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2584,7 +2740,7 @@ func (r PhoneNumberValidateRequest) Send() (*PhoneNumberValidateOutput, error) {
 //
 //    // Example sending a request using the PhoneNumberValidateRequest method.
 //    req := client.PhoneNumberValidateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2618,7 +2774,8 @@ type PutEventStreamRequest struct {
 }
 
 // Send marshals and sends the PutEventStream API request.
-func (r PutEventStreamRequest) Send() (*PutEventStreamOutput, error) {
+func (r PutEventStreamRequest) Send(ctx context.Context) (*PutEventStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2634,7 +2791,7 @@ func (r PutEventStreamRequest) Send() (*PutEventStreamOutput, error) {
 //
 //    // Example sending a request using the PutEventStreamRequest method.
 //    req := client.PutEventStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2668,7 +2825,8 @@ type PutEventsRequest struct {
 }
 
 // Send marshals and sends the PutEvents API request.
-func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
+func (r PutEventsRequest) Send(ctx context.Context) (*PutEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2685,7 +2843,7 @@ func (r PutEventsRequest) Send() (*PutEventsOutput, error) {
 //
 //    // Example sending a request using the PutEventsRequest method.
 //    req := client.PutEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2719,7 +2877,8 @@ type RemoveAttributesRequest struct {
 }
 
 // Send marshals and sends the RemoveAttributes API request.
-func (r RemoveAttributesRequest) Send() (*RemoveAttributesOutput, error) {
+func (r RemoveAttributesRequest) Send(ctx context.Context) (*RemoveAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2735,7 +2894,7 @@ func (r RemoveAttributesRequest) Send() (*RemoveAttributesOutput, error) {
 //
 //    // Example sending a request using the RemoveAttributesRequest method.
 //    req := client.RemoveAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2769,7 +2928,8 @@ type SendMessagesRequest struct {
 }
 
 // Send marshals and sends the SendMessages API request.
-func (r SendMessagesRequest) Send() (*SendMessagesOutput, error) {
+func (r SendMessagesRequest) Send(ctx context.Context) (*SendMessagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2785,7 +2945,7 @@ func (r SendMessagesRequest) Send() (*SendMessagesOutput, error) {
 //
 //    // Example sending a request using the SendMessagesRequest method.
 //    req := client.SendMessagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2819,7 +2979,8 @@ type SendUsersMessagesRequest struct {
 }
 
 // Send marshals and sends the SendUsersMessages API request.
-func (r SendUsersMessagesRequest) Send() (*SendUsersMessagesOutput, error) {
+func (r SendUsersMessagesRequest) Send(ctx context.Context) (*SendUsersMessagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2835,7 +2996,7 @@ func (r SendUsersMessagesRequest) Send() (*SendUsersMessagesOutput, error) {
 //
 //    // Example sending a request using the SendUsersMessagesRequest method.
 //    req := client.SendUsersMessagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2869,7 +3030,8 @@ type UpdateAdmChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateAdmChannel API request.
-func (r UpdateAdmChannelRequest) Send() (*UpdateAdmChannelOutput, error) {
+func (r UpdateAdmChannelRequest) Send(ctx context.Context) (*UpdateAdmChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2885,7 +3047,7 @@ func (r UpdateAdmChannelRequest) Send() (*UpdateAdmChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateAdmChannelRequest method.
 //    req := client.UpdateAdmChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2919,7 +3081,8 @@ type UpdateApnsChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateApnsChannel API request.
-func (r UpdateApnsChannelRequest) Send() (*UpdateApnsChannelOutput, error) {
+func (r UpdateApnsChannelRequest) Send(ctx context.Context) (*UpdateApnsChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2935,7 +3098,7 @@ func (r UpdateApnsChannelRequest) Send() (*UpdateApnsChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateApnsChannelRequest method.
 //    req := client.UpdateApnsChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2969,7 +3132,8 @@ type UpdateApnsSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateApnsSandboxChannel API request.
-func (r UpdateApnsSandboxChannelRequest) Send() (*UpdateApnsSandboxChannelOutput, error) {
+func (r UpdateApnsSandboxChannelRequest) Send(ctx context.Context) (*UpdateApnsSandboxChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2985,7 +3149,7 @@ func (r UpdateApnsSandboxChannelRequest) Send() (*UpdateApnsSandboxChannelOutput
 //
 //    // Example sending a request using the UpdateApnsSandboxChannelRequest method.
 //    req := client.UpdateApnsSandboxChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3019,7 +3183,8 @@ type UpdateApnsVoipChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateApnsVoipChannel API request.
-func (r UpdateApnsVoipChannelRequest) Send() (*UpdateApnsVoipChannelOutput, error) {
+func (r UpdateApnsVoipChannelRequest) Send(ctx context.Context) (*UpdateApnsVoipChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3035,7 +3200,7 @@ func (r UpdateApnsVoipChannelRequest) Send() (*UpdateApnsVoipChannelOutput, erro
 //
 //    // Example sending a request using the UpdateApnsVoipChannelRequest method.
 //    req := client.UpdateApnsVoipChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3069,7 +3234,8 @@ type UpdateApnsVoipSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateApnsVoipSandboxChannel API request.
-func (r UpdateApnsVoipSandboxChannelRequest) Send() (*UpdateApnsVoipSandboxChannelOutput, error) {
+func (r UpdateApnsVoipSandboxChannelRequest) Send(ctx context.Context) (*UpdateApnsVoipSandboxChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3085,7 +3251,7 @@ func (r UpdateApnsVoipSandboxChannelRequest) Send() (*UpdateApnsVoipSandboxChann
 //
 //    // Example sending a request using the UpdateApnsVoipSandboxChannelRequest method.
 //    req := client.UpdateApnsVoipSandboxChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3119,7 +3285,8 @@ type UpdateApplicationSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateApplicationSettings API request.
-func (r UpdateApplicationSettingsRequest) Send() (*UpdateApplicationSettingsOutput, error) {
+func (r UpdateApplicationSettingsRequest) Send(ctx context.Context) (*UpdateApplicationSettingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3135,7 +3302,7 @@ func (r UpdateApplicationSettingsRequest) Send() (*UpdateApplicationSettingsOutp
 //
 //    // Example sending a request using the UpdateApplicationSettingsRequest method.
 //    req := client.UpdateApplicationSettingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3169,7 +3336,8 @@ type UpdateBaiduChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateBaiduChannel API request.
-func (r UpdateBaiduChannelRequest) Send() (*UpdateBaiduChannelOutput, error) {
+func (r UpdateBaiduChannelRequest) Send(ctx context.Context) (*UpdateBaiduChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3185,7 +3353,7 @@ func (r UpdateBaiduChannelRequest) Send() (*UpdateBaiduChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateBaiduChannelRequest method.
 //    req := client.UpdateBaiduChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3219,7 +3387,8 @@ type UpdateCampaignRequest struct {
 }
 
 // Send marshals and sends the UpdateCampaign API request.
-func (r UpdateCampaignRequest) Send() (*UpdateCampaignOutput, error) {
+func (r UpdateCampaignRequest) Send(ctx context.Context) (*UpdateCampaignOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3235,7 +3404,7 @@ func (r UpdateCampaignRequest) Send() (*UpdateCampaignOutput, error) {
 //
 //    // Example sending a request using the UpdateCampaignRequest method.
 //    req := client.UpdateCampaignRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3269,7 +3438,8 @@ type UpdateEmailChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateEmailChannel API request.
-func (r UpdateEmailChannelRequest) Send() (*UpdateEmailChannelOutput, error) {
+func (r UpdateEmailChannelRequest) Send(ctx context.Context) (*UpdateEmailChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3285,7 +3455,7 @@ func (r UpdateEmailChannelRequest) Send() (*UpdateEmailChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateEmailChannelRequest method.
 //    req := client.UpdateEmailChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3319,7 +3489,8 @@ type UpdateEndpointRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpoint API request.
-func (r UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
+func (r UpdateEndpointRequest) Send(ctx context.Context) (*UpdateEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3335,7 +3506,7 @@ func (r UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
 //
 //    // Example sending a request using the UpdateEndpointRequest method.
 //    req := client.UpdateEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3369,7 +3540,8 @@ type UpdateEndpointsBatchRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpointsBatch API request.
-func (r UpdateEndpointsBatchRequest) Send() (*UpdateEndpointsBatchOutput, error) {
+func (r UpdateEndpointsBatchRequest) Send(ctx context.Context) (*UpdateEndpointsBatchOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3385,7 +3557,7 @@ func (r UpdateEndpointsBatchRequest) Send() (*UpdateEndpointsBatchOutput, error)
 //
 //    // Example sending a request using the UpdateEndpointsBatchRequest method.
 //    req := client.UpdateEndpointsBatchRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3419,7 +3591,8 @@ type UpdateGcmChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateGcmChannel API request.
-func (r UpdateGcmChannelRequest) Send() (*UpdateGcmChannelOutput, error) {
+func (r UpdateGcmChannelRequest) Send(ctx context.Context) (*UpdateGcmChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3435,7 +3608,7 @@ func (r UpdateGcmChannelRequest) Send() (*UpdateGcmChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateGcmChannelRequest method.
 //    req := client.UpdateGcmChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3469,7 +3642,8 @@ type UpdateSegmentRequest struct {
 }
 
 // Send marshals and sends the UpdateSegment API request.
-func (r UpdateSegmentRequest) Send() (*UpdateSegmentOutput, error) {
+func (r UpdateSegmentRequest) Send(ctx context.Context) (*UpdateSegmentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3485,7 +3659,7 @@ func (r UpdateSegmentRequest) Send() (*UpdateSegmentOutput, error) {
 //
 //    // Example sending a request using the UpdateSegmentRequest method.
 //    req := client.UpdateSegmentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3519,7 +3693,8 @@ type UpdateSmsChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateSmsChannel API request.
-func (r UpdateSmsChannelRequest) Send() (*UpdateSmsChannelOutput, error) {
+func (r UpdateSmsChannelRequest) Send(ctx context.Context) (*UpdateSmsChannelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3535,7 +3710,7 @@ func (r UpdateSmsChannelRequest) Send() (*UpdateSmsChannelOutput, error) {
 //
 //    // Example sending a request using the UpdateSmsChannelRequest method.
 //    req := client.UpdateSmsChannelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3557,6 +3732,57 @@ func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) UpdateS
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateSmsChannelRequest{Request: req, Input: input, Copy: c.UpdateSmsChannelRequest}
+}
+
+const opUpdateVoiceChannel = "UpdateVoiceChannel"
+
+// UpdateVoiceChannelRequest is a API request type for the UpdateVoiceChannel API operation.
+type UpdateVoiceChannelRequest struct {
+	*aws.Request
+	Input *UpdateVoiceChannelInput
+	Copy  func(*UpdateVoiceChannelInput) UpdateVoiceChannelRequest
+}
+
+// Send marshals and sends the UpdateVoiceChannel API request.
+func (r UpdateVoiceChannelRequest) Send(ctx context.Context) (*UpdateVoiceChannelOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVoiceChannelOutput), nil
+}
+
+// UpdateVoiceChannelRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Update an Voice channel
+//
+//    // Example sending a request using the UpdateVoiceChannelRequest method.
+//    req := client.UpdateVoiceChannelRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannel
+func (c *Pinpoint) UpdateVoiceChannelRequest(input *UpdateVoiceChannelInput) UpdateVoiceChannelRequest {
+	op := &aws.Operation{
+		Name:       opUpdateVoiceChannel,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/v1/apps/{application-id}/channels/voice",
+	}
+
+	if input == nil {
+		input = &UpdateVoiceChannelInput{}
+	}
+
+	output := &UpdateVoiceChannelOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateVoiceChannelRequest{Request: req, Input: input, Copy: c.UpdateVoiceChannelRequest}
 }
 
 // Amazon Device Messaging channel definition.
@@ -4180,7 +4406,8 @@ type APNSMessage struct {
 	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
-	// The URL that points to a video used in the push notification.
+	// A URL that refers to the location of an image or video that you want to display
+	// in the push notification.
 	MediaUrl *string `type:"string"`
 
 	// The preferred authentication method, either "CERTIFICATE" or "TOKEN"
@@ -5377,9 +5604,20 @@ type ApplicationSettingsResource struct {
 	// own.
 	Limits *CampaignLimits `type:"structure"`
 
-	// The default quiet time for the app. Each campaign for this app sends no messages
-	// during this time unless the campaign overrides the default with a quiet time
-	// of its own.
+	// The default quiet time for the app. Campaigns in the app don't send messages
+	// to endpoints during the quiet time.Note: Make sure that your endpoints include
+	// the Demographics.Timezone attribute if you plan to enable a quiet time for
+	// your app. If your endpoints don't include this attribute, they'll receive
+	// the messages that you send them, even if quiet time is enabled.When you set
+	// up an app to use quiet time, campaigns in that app don't send messages during
+	// the time range you specified, as long as all of the following are true:-
+	// The endpoint includes a valid Demographic.Timezone attribute.- The current
+	// time in the endpoint's time zone is later than or equal to the time specified
+	// in the QuietTime.Start attribute for the app (or campaign, if applicable).-
+	// The current time in the endpoint's time zone is earlier than or equal to
+	// the time specified in the QuietTime.End attribute for the app (or campaign,
+	// if applicable).Individual campaigns within the app can have their own quiet
+	// time settings, which override the quiet time settings at the app level.
 	QuietTime *QuietTime `type:"structure"`
 }
 
@@ -5984,6 +6222,48 @@ func (s CampaignEmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that defines the events that cause the campaign to be sent.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignEventFilter
+type CampaignEventFilter struct {
+	_ struct{} `type:"structure"`
+
+	// An object that defines the dimensions for the event filter.
+	Dimensions *EventDimensions `type:"structure"`
+
+	// The type of event that causes the campaign to be sent. Possible values:SYSTEM
+	// - Send the campaign when a system event occurs. See the System resource for
+	// more information.ENDPOINT - Send the campaign when an endpoint event occurs.
+	// See the Event resource for more information.
+	FilterType FilterType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CampaignEventFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CampaignEventFilter) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CampaignEventFilter) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Dimensions != nil {
+		v := s.Dimensions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Dimensions", v, metadata)
+	}
+	if len(s.FilterType) > 0 {
+		v := s.FilterType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FilterType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Campaign hook information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignHook
 type CampaignHook struct {
@@ -6034,12 +6314,13 @@ func (s CampaignHook) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Campaign Limits are used to limit the number of messages that can be sent
-// to a user.
+// to a single endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignLimits
 type CampaignLimits struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of messages that the campaign can send daily.
+	// The maximum number of messages that each campaign can send to a single endpoint
+	// in a 24-hour period.
 	Daily *int64 `type:"integer"`
 
 	// The length of time (in seconds) that the campaign can run before it ends
@@ -6051,7 +6332,8 @@ type CampaignLimits struct {
 	// value is 50, and the maximum is 20000.
 	MessagesPerSecond *int64 `type:"integer"`
 
-	// The maximum total number of messages that the campaign can send.
+	// The maximum number of messages that an individual campaign can send to a
+	// single endpoint over the course of the campaign.
 	Total *int64 `type:"integer"`
 }
 
@@ -7148,8 +7430,9 @@ type DefaultPushNotificationMessage struct {
 	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
-	// Indicates if the message should display on the users device. Silent pushes
-	// can be used for Remote Configuration and Phone Home use cases.
+	// Indicates if the message should display on the recipient's device. You can
+	// use silent pushes for remote configuration or to deliver messages to in-app
+	// notification centers.
 	SilentPush *bool `type:"boolean"`
 
 	// Default message substitutions. Can be overridden by individual address substitutions.
@@ -8534,6 +8817,89 @@ func (s DeleteUserEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceChannelRequest
+type DeleteVoiceChannelInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVoiceChannelInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceChannelInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVoiceChannelInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceChannelInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceChannelResponse
+type DeleteVoiceChannelOutput struct {
+	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
+
+	responseMetadata aws.Response
+
+	// Voice Channel Response.
+	//
+	// VoiceChannelResponse is a required field
+	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVoiceChannelOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVoiceChannelOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVoiceChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteVoiceChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VoiceChannelResponse != nil {
+		v := s.VoiceChannelResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "VoiceChannelResponse", v, metadata)
+	}
+	return nil
+}
+
 // Message definitions for the default message and any messages that are tailored
 // for specific channels.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DirectMessageConfiguration
@@ -8556,11 +8922,17 @@ type DirectMessageConfiguration struct {
 	// The default push notification message for all push channels.
 	DefaultPushNotificationMessage *DefaultPushNotificationMessage `type:"structure"`
 
+	// The message to Email channels. Overrides the default message.
+	EmailMessage *EmailMessage `type:"structure"`
+
 	// The message to GCM channels. Overrides the default push notification message.
 	GCMMessage *GCMMessage `type:"structure"`
 
 	// The message to SMS channels. Overrides the default message.
 	SMSMessage *SMSMessage `type:"structure"`
+
+	// The message to Voice channels. Overrides the default message.
+	VoiceMessage *VoiceMessage `type:"structure"`
 }
 
 // String returns the string representation
@@ -8605,6 +8977,12 @@ func (s DirectMessageConfiguration) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "DefaultPushNotificationMessage", v, metadata)
 	}
+	if s.EmailMessage != nil {
+		v := s.EmailMessage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EmailMessage", v, metadata)
+	}
 	if s.GCMMessage != nil {
 		v := s.GCMMessage
 
@@ -8617,6 +8995,12 @@ func (s DirectMessageConfiguration) MarshalFields(e protocol.FieldEncoder) error
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SMSMessage", v, metadata)
 	}
+	if s.VoiceMessage != nil {
+		v := s.VoiceMessage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "VoiceMessage", v, metadata)
+	}
 	return nil
 }
 
@@ -8624,6 +9008,10 @@ func (s DirectMessageConfiguration) MarshalFields(e protocol.FieldEncoder) error
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelRequest
 type EmailChannelRequest struct {
 	_ struct{} `type:"structure"`
+
+	// The configuration set that you want to use when you send email using the
+	// Pinpoint Email API.
+	ConfigurationSet *string `type:"string"`
 
 	// If the channel is enabled for sending messages.
 	Enabled *bool `type:"boolean"`
@@ -8651,6 +9039,12 @@ func (s EmailChannelRequest) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s EmailChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfigurationSet != nil {
+		v := *s.ConfigurationSet
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConfigurationSet", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Enabled != nil {
 		v := *s.Enabled
 
@@ -8685,6 +9079,10 @@ type EmailChannelResponse struct {
 
 	// The unique ID of the application to which the email channel belongs.
 	ApplicationId *string `type:"string"`
+
+	// The configuration set that you want to use when you send email using the
+	// Pinpoint Email API.
+	ConfigurationSet *string `type:"string"`
 
 	// The date that the settings were last updated in ISO 8601 format.
 	CreationDate *string `type:"string"`
@@ -8744,6 +9142,12 @@ func (s EmailChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConfigurationSet != nil {
+		v := *s.ConfigurationSet
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConfigurationSet", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreationDate != nil {
 		v := *s.CreationDate
@@ -8822,6 +9226,110 @@ func (s EmailChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Email Message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailMessage
+type EmailMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The body of the email message.
+	Body *string `type:"string"`
+
+	// The email address that bounces and complaints will be forwarded to when feedback
+	// forwarding is enabled.
+	FeedbackForwardingAddress *string `type:"string"`
+
+	// The email address used to send the email from. Defaults to use FromAddress
+	// specified in the Email Channel.
+	FromAddress *string `type:"string"`
+
+	// An email represented as a raw MIME message.
+	RawEmail *RawEmail `type:"structure"`
+
+	// The reply-to email address(es) for the email. If the recipient replies to
+	// the email, each reply-to address will receive the reply.
+	ReplyToAddresses []string `type:"list"`
+
+	// An email composed of a subject, a text part and a html part.
+	SimpleEmail *SimpleEmail `type:"structure"`
+
+	// Default message substitutions. Can be overridden by individual address substitutions.
+	Substitutions map[string][]string `type:"map"`
+}
+
+// String returns the string representation
+func (s EmailMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EmailMessage) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FeedbackForwardingAddress != nil {
+		v := *s.FeedbackForwardingAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FeedbackForwardingAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FromAddress != nil {
+		v := *s.FromAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FromAddress", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RawEmail != nil {
+		v := s.RawEmail
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "RawEmail", v, metadata)
+	}
+	if len(s.ReplyToAddresses) > 0 {
+		v := s.ReplyToAddresses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ReplyToAddresses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SimpleEmail != nil {
+		v := s.SimpleEmail
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SimpleEmail", v, metadata)
+	}
+	if len(s.Substitutions) > 0 {
+		v := s.Substitutions
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Substitutions", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
+			}
+			ls1.End()
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -9116,8 +9624,8 @@ func (s EndpointDemographic) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The responses that are returned after you create or update an endpoint and
-// record an event.
+// A complex object that holds the status code and message as a result of processing
+// an endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointItemResponse
 type EndpointItemResponse struct {
 	_ struct{} `type:"structure"`
@@ -9126,8 +9634,8 @@ type EndpointItemResponse struct {
 	// a response.
 	Message *string `type:"string"`
 
-	// The status code to respond with for a particular endpoint id after endpoint
-	// registration
+	// The status code associated with the merging of an endpoint when issuing a
+	// response.
 	StatusCode *int64 `type:"integer"`
 }
 
@@ -9167,7 +9675,7 @@ type EndpointLocation struct {
 	City *string `type:"string"`
 
 	// The two-letter code for the country or region of the endpoint. Specified
-	// as an ISO 3166-1 Alpha-2 code, such as "US" for the United States.
+	// as an ISO 3166-1 alpha-2 code, such as "US" for the United States.
 	Country *string `type:"string"`
 
 	// The latitude of the endpoint location, rounded to one decimal place.
@@ -9249,14 +9757,14 @@ type EndpointMessageResult struct {
 	// later.FAILURE_PERMANENT - An error occurred when delivering the message to
 	// the endpoint. Amazon Pinpoint won't attempt to send the message again.TIMEOUT
 	// - The message couldn't be sent within the timeout period.QUIET_TIME - The
-	// local time for the endpoint was within the Quiet Hours for the campaign.DAILY_CAP
-	// - The endpoint has received the maximum number of messages it can receive
-	// within a 24-hour period.HOLDOUT - The endpoint was in a hold out treatment
-	// for the campaign.THROTTLED - Amazon Pinpoint throttled sending to this endpoint.EXPIRED
-	// - The endpoint address is expired.CAMPAIGN_CAP - The endpoint received the
-	// maximum number of messages allowed by the campaign.SERVICE_FAILURE - A service-level
-	// failure prevented Amazon Pinpoint from delivering the message.UNKNOWN - An
-	// unknown error occurred.
+	// local time for the endpoint was within the QuietTime for the campaign or
+	// app.DAILY_CAP - The endpoint has received the maximum number of messages
+	// it can receive within a 24-hour period.HOLDOUT - The endpoint was in a hold
+	// out treatment for the campaign.THROTTLED - Amazon Pinpoint throttled sending
+	// to this endpoint.EXPIRED - The endpoint address is expired.CAMPAIGN_CAP -
+	// The endpoint received the maximum number of messages allowed by the campaign.SERVICE_FAILURE
+	// - A service-level failure prevented Amazon Pinpoint from delivering the message.UNKNOWN
+	// - An unknown error occurred.
 	DeliveryStatus DeliveryStatus `type:"string" enum:"true"`
 
 	// Unique message identifier associated with the message that was sent.
@@ -9323,7 +9831,7 @@ func (s EndpointMessageResult) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Endpoint update request
+// An endpoint update request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EndpointRequest
 type EndpointRequest struct {
 	_ struct{} `type:"structure"`
@@ -9858,10 +10366,10 @@ type Event struct {
 	// The name of the custom event that you're recording.
 	EventType *string `type:"string"`
 
-	// Event metrics
+	// Custom metrics related to the event.
 	Metrics map[string]float64 `type:"map"`
 
-	// The session
+	// Information about the session in which the event occurred.
 	Session *Session `type:"structure"`
 
 	// The date and time when the event occurred, in ISO 8601 format.
@@ -9931,7 +10439,72 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The responses that are returned after you record an event.
+// Event dimensions.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventDimensions
+type EventDimensions struct {
+	_ struct{} `type:"structure"`
+
+	// Custom attributes that your app reports to Amazon Pinpoint. You can use these
+	// attributes as selection criteria when you create an event filter.
+	Attributes map[string]AttributeDimension `type:"map"`
+
+	// The name of the event that causes the campaign to be sent. This can be a
+	// standard event type that Amazon Pinpoint generates, such as _session.start,
+	// or a custom event that's specific to your app.
+	EventType *SetDimension `type:"structure"`
+
+	// Custom metrics that your app reports to Amazon Pinpoint. You can use these
+	// attributes as selection criteria when you create an event filter.
+	Metrics map[string]MetricDimension `type:"map"`
+}
+
+// String returns the string representation
+func (s EventDimensions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EventDimensions) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EventDimensions) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	if s.EventType != nil {
+		v := s.EventType
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EventType", v, metadata)
+	}
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Metrics", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+// A complex object that holds the status code and message as a result of processing
+// an event.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventItemResponse
 type EventItemResponse struct {
 	_ struct{} `type:"structure"`
@@ -9939,7 +10512,8 @@ type EventItemResponse struct {
 	// A custom message that is associated with the processing of an event.
 	Message *string `type:"string"`
 
-	// The status code to respond with for a particular event id
+	// The status returned in the response as a result of processing the event.Possible
+	// values: 400 (for invalid events) and 202 (for events that were accepted).
 	StatusCode *int64 `type:"integer"`
 }
 
@@ -10051,15 +10625,15 @@ func (s EventStream) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Events batch definition
+// A batch of PublicEndpoints and Events to process.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsBatch
 type EventsBatch struct {
 	_ struct{} `type:"structure"`
 
-	// Endpoint information
+	// The PublicEndpoint attached to the EndpointId from the request.
 	Endpoint *PublicEndpoint `type:"structure"`
 
-	// Events
+	// An object that contains a set of events associated with the endpoint.
 	Events map[string]Event `type:"map"`
 }
 
@@ -10096,14 +10670,13 @@ func (s EventsBatch) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Put Events request
+// A set of events to process.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsRequest
 type EventsRequest struct {
 	_ struct{} `type:"structure"`
 
-	// Batch of events with endpoint id as the key and an object of EventsBatch
-	// as value. The EventsBatch object has the PublicEndpoint and a map of event
-	// Id's to events
+	// A batch of events to process. Each BatchItem consists of an endpoint ID as
+	// the key, and an EventsBatch object as the value.
 	BatchItem map[string]EventsBatch `type:"map"`
 }
 
@@ -10134,13 +10707,16 @@ func (s EventsRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The results from processing a put events request
+// Custom messages associated with events.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EventsResponse
 type EventsResponse struct {
 	_ struct{} `type:"structure"`
 
-	// A map containing a multi part response for each endpoint, with the endpoint
-	// id as the key and item response as the value
+	// A map that contains a multipart response for each endpoint. Each item in
+	// this object uses the endpoint ID as the key, and the item response as the
+	// value.If no item response exists, the value can also be one of the following:
+	// 202 (if the request was processed successfully) or 400 (if the payload was
+	// invalid, or required fields were missing).
 	Results map[string]ItemResponse `type:"map"`
 }
 
@@ -13852,6 +14428,89 @@ func (s GetUserEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannelRequest
+type GetVoiceChannelInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVoiceChannelInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceChannelInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVoiceChannelInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVoiceChannelInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceChannelResponse
+type GetVoiceChannelOutput struct {
+	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
+
+	responseMetadata aws.Response
+
+	// Voice Channel Response.
+	//
+	// VoiceChannelResponse is a required field
+	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVoiceChannelOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVoiceChannelOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVoiceChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetVoiceChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VoiceChannelResponse != nil {
+		v := s.VoiceChannelResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "VoiceChannelResponse", v, metadata)
+	}
+	return nil
+}
+
 // Import job request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ImportJobRequest
 type ImportJobRequest struct {
@@ -14255,16 +14914,17 @@ func (s ImportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The endpoint and events combined response definition
+// The response that's provided after registering the endpoint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ItemResponse
 type ItemResponse struct {
 	_ struct{} `type:"structure"`
 
-	// Endpoint item response after endpoint registration
+	// The response received after the endpoint was accepted.
 	EndpointItemResponse *EndpointItemResponse `type:"structure"`
 
-	// Events item response is a multipart response object per event Id, with eventId
-	// as the key and EventItemResponse object as the value
+	// A multipart response object that contains a key and value for each event
+	// ID in the request. In each object, the event ID is the key, and an EventItemResponse
+	// object is the value.
 	EventsItemResponse map[string]EventItemResponse `type:"map"`
 }
 
@@ -14331,7 +14991,8 @@ type Message struct {
 	// The JSON payload used for a silent push.
 	JsonBody *string `type:"string"`
 
-	// The URL that points to the media resource, for example a .mp4 or .gif file.
+	// A URL that refers to the location of an image or video that you want to display
+	// in the push notification.
 	MediaUrl *string `type:"string"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
@@ -14746,14 +15407,14 @@ type MessageResult struct {
 	// later.FAILURE_PERMANENT - An error occurred when delivering the message to
 	// the endpoint. Amazon Pinpoint won't attempt to send the message again.TIMEOUT
 	// - The message couldn't be sent within the timeout period.QUIET_TIME - The
-	// local time for the endpoint was within the Quiet Hours for the campaign.DAILY_CAP
-	// - The endpoint has received the maximum number of messages it can receive
-	// within a 24-hour period.HOLDOUT - The endpoint was in a hold out treatment
-	// for the campaign.THROTTLED - Amazon Pinpoint throttled sending to this endpoint.EXPIRED
-	// - The endpoint address is expired.CAMPAIGN_CAP - The endpoint received the
-	// maximum number of messages allowed by the campaign.SERVICE_FAILURE - A service-level
-	// failure prevented Amazon Pinpoint from delivering the message.UNKNOWN - An
-	// unknown error occurred.
+	// local time for the endpoint was within the QuietTime for the campaign or
+	// app.DAILY_CAP - The endpoint has received the maximum number of messages
+	// it can receive within a 24-hour period.HOLDOUT - The endpoint was in a hold
+	// out treatment for the campaign.THROTTLED - Amazon Pinpoint throttled sending
+	// to this endpoint.EXPIRED - The endpoint address is expired.CAMPAIGN_CAP -
+	// The endpoint received the maximum number of messages allowed by the campaign.SERVICE_FAILURE
+	// - A service-level failure prevented Amazon Pinpoint from delivering the message.UNKNOWN
+	// - An unknown error occurred.
 	DeliveryStatus DeliveryStatus `type:"string" enum:"true"`
 
 	// Unique message identifier associated with the message that was sent.
@@ -14819,10 +15480,11 @@ func (s MessageResult) MarshalFields(e protocol.FieldEncoder) error {
 type MetricDimension struct {
 	_ struct{} `type:"structure"`
 
-	// GREATER_THAN | LESS_THAN | GREATER_THAN_OR_EQUAL | LESS_THAN_OR_EQUAL | EQUAL
+	// The operator that you're using to compare metric values. Possible values:
+	// GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, or EQUAL
 	ComparisonOperator *string `type:"string"`
 
-	// Value to be compared.
+	// The value to be compared.
 	Value *float64 `type:"double"`
 }
 
@@ -14853,7 +15515,7 @@ func (s MetricDimension) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Phone Number Information request.
+// Phone Number Validate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NumberValidateRequest
 type NumberValidateRequest struct {
 	_ struct{} `type:"structure"`
@@ -14895,7 +15557,7 @@ func (s NumberValidateRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Phone Number Information response.
+// Phone Number Validate response.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/NumberValidateResponse
 type NumberValidateResponse struct {
 	_ struct{} `type:"structure"`
@@ -14927,8 +15589,8 @@ type NumberValidateResponse struct {
 	// The county where the phone number was originally registered.
 	County *string `type:"string"`
 
-	// The two-character ISO code for the country or region that you included in
-	// the request body.
+	// The two-character code (in ISO 3166-1 alpha-2 format) for the country or
+	// region in the request body.
 	OriginalCountryCodeIso2 *string `type:"string"`
 
 	// The phone number that you included in the request body.
@@ -15052,7 +15714,7 @@ func (s NumberValidateResponse) MarshalFields(e protocol.FieldEncoder) error {
 type PhoneNumberValidateInput struct {
 	_ struct{} `type:"structure" payload:"NumberValidateRequest"`
 
-	// Phone Number Information request.
+	// Phone Number Validate request.
 	//
 	// NumberValidateRequest is a required field
 	NumberValidateRequest *NumberValidateRequest `type:"structure" required:"true"`
@@ -15101,7 +15763,7 @@ type PhoneNumberValidateOutput struct {
 
 	responseMetadata aws.Response
 
-	// Phone Number Information response.
+	// Phone Number Validate response.
 	//
 	// NumberValidateResponse is a required field
 	NumberValidateResponse *NumberValidateResponse `type:"structure" required:"true"`
@@ -15139,7 +15801,7 @@ type PublicEndpoint struct {
 	_ struct{} `type:"structure"`
 
 	// The unique identifier for the recipient. For example, an address could be
-	// a device token or an endpoint ID.
+	// a device token, email address, or mobile phone number.
 	Address *string `type:"string"`
 
 	// Custom attributes that your app reports to Amazon Pinpoint. You can use these
@@ -15152,7 +15814,7 @@ type PublicEndpoint struct {
 	// The endpoint demographic attributes.
 	Demographic *EndpointDemographic `type:"structure"`
 
-	// The date and time when the endpoint was last updated.
+	// The date and time when the endpoint was last updated, in ISO 8601 format.
 	EffectiveDate *string `type:"string"`
 
 	// The status of the endpoint. If the update fails, the value is INACTIVE. If
@@ -15380,7 +16042,7 @@ type PutEventsInput struct {
 	// ApplicationId is a required field
 	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
 
-	// Put Events request
+	// A set of events to process.
 	//
 	// EventsRequest is a required field
 	EventsRequest *EventsRequest `type:"structure" required:"true"`
@@ -15439,7 +16101,7 @@ type PutEventsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The results from processing a put events request
+	// Custom messages associated with events.
 	//
 	// EventsResponse is a required field
 	EventsResponse *EventsResponse `type:"structure" required:"true"`
@@ -15476,10 +16138,16 @@ func (s PutEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
 type QuietTime struct {
 	_ struct{} `type:"structure"`
 
-	// The default end time for quiet time in ISO 8601 format.
+	// The time at which quiet time should end. The value that you specify has to
+	// be in HH:mm format, where HH is the hour in 24-hour format (with a leading
+	// zero, if applicable), and mm is the minutes. For example, use 02:30 to represent
+	// 2:30 AM, or 14:30 to represent 2:30 PM.
 	End *string `type:"string"`
 
-	// The default start time for quiet time in ISO 8601 format.
+	// The time at which quiet time should begin. The value that you specify has
+	// to be in HH:mm format, where HH is the hour in 24-hour format (with a leading
+	// zero, if applicable), and mm is the minutes. For example, use 02:30 to represent
+	// 2:30 AM, or 14:30 to represent 2:30 PM.
 	Start *string `type:"string"`
 }
 
@@ -15506,6 +16174,38 @@ func (s QuietTime) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Start", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An email represented as a raw MIME message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RawEmail
+type RawEmail struct {
+	_ struct{} `type:"structure"`
+
+	// The raw email message itself. Then entire message must be base64-encoded.
+	//
+	// Data is automatically base64 encoded/decoded by the SDK.
+	Data []byte `type:"blob"`
+}
+
+// String returns the string representation
+func (s RawEmail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RawEmail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RawEmail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Data != nil {
+		v := s.Data
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Data", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15957,15 +16657,29 @@ type Schedule struct {
 	// The scheduled time that the campaign ends in ISO 8601 format.
 	EndTime *string `type:"string"`
 
-	// How often the campaign delivers messages.Valid values: ONCE, HOURLY, DAILY,
-	// WEEKLY, MONTHLY
+	// Defines the type of events that can trigger the campaign. Used when the Frequency
+	// is set to EVENT.
+	EventFilter *CampaignEventFilter `type:"structure"`
+
+	// How often the campaign delivers messages.Valid values:ONCEHOURLYDAILYWEEKLYMONTHLYEVENT
 	Frequency Frequency `type:"string" enum:"true"`
 
 	// Indicates whether the campaign schedule takes effect according to each user's
 	// local time.
 	IsLocalTime *bool `type:"boolean"`
 
-	// The time during which the campaign sends no messages.
+	// The default quiet time for the campaign. The campaign doesn't send messages
+	// to endpoints during the quiet time.Note: Make sure that your endpoints include
+	// the Demographics.Timezone attribute if you plan to enable a quiet time for
+	// your campaign. If your endpoints don't include this attribute, they'll receive
+	// the messages that you send them, even if quiet time is enabled.When you set
+	// up a campaign to use quiet time, the campaign doesn't send messages during
+	// the time range you specified, as long as all of the following are true:-
+	// The endpoint includes a valid Demographic.Timezone attribute.- The current
+	// time in the endpoint's time zone is later than or equal to the time specified
+	// in the QuietTime.Start attribute for the campaign.- The current time in the
+	// endpoint's time zone is earlier than or equal to the time specified in the
+	// QuietTime.End attribute for the campaign.
 	QuietTime *QuietTime `type:"structure"`
 
 	// The scheduled time that the campaign begins in ISO 8601 format.
@@ -15993,6 +16707,12 @@ func (s Schedule) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "EndTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EventFilter != nil {
+		v := s.EventFilter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EventFilter", v, metadata)
 	}
 	if len(s.Frequency) > 0 {
 		v := s.Frequency
@@ -16237,7 +16957,9 @@ type SegmentGroup struct {
 	// the starting "universe" of endpoints. When you add dimensions to the segment,
 	// it filters the source segment based on the dimensions that you specify. You
 	// can specify more than one dimensional segment. You can only specify one imported
-	// segment.
+	// segment.NOTE: If you specify an imported segment for this attribute, the
+	// segment size estimate that appears in the Amazon Pinpoint console shows the
+	// size of the imported segment, without any filters applied to it.
 	SourceSegments []SegmentReference `type:"list"`
 
 	// Specify how to handle multiple source segments. For example, if you specify
@@ -16442,7 +17164,7 @@ func (s SegmentImportResource) MarshalFields(e protocol.FieldEncoder) error {
 type SegmentLocation struct {
 	_ struct{} `type:"structure"`
 
-	// The country filter according to ISO 3166-1 Alpha-2 codes.
+	// The country or region, in ISO 3166-1 alpha-2 format.
 	Country *SetDimension `type:"structure"`
 
 	// The GPS Point dimension.
@@ -17017,7 +17739,7 @@ func (s SendUsersMessagesOutput) MarshalFields(e protocol.FieldEncoder) error {
 type Session struct {
 	_ struct{} `type:"structure"`
 
-	// Session duration in millis
+	// The duration of the session, in milliseconds.
 	Duration *int64 `type:"integer"`
 
 	// A unique identifier for the session.
@@ -17114,6 +17836,97 @@ func (s SetDimension) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// An email composed of a subject, a text part and a html part.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleEmail
+type SimpleEmail struct {
+	_ struct{} `type:"structure"`
+
+	// The content of the message, in HTML format. Use this for email clients that
+	// can process HTML. You can include clickable links, formatted text, and much
+	// more in an HTML message.
+	HtmlPart *SimpleEmailPart `type:"structure"`
+
+	// The subject of the message: A short summary of the content, which will appear
+	// in the recipient's inbox.
+	Subject *SimpleEmailPart `type:"structure"`
+
+	// The content of the message, in text format. Use this for text-based email
+	// clients, or clients on high-latency networks (such as mobile devices).
+	TextPart *SimpleEmailPart `type:"structure"`
+}
+
+// String returns the string representation
+func (s SimpleEmail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SimpleEmail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SimpleEmail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HtmlPart != nil {
+		v := s.HtmlPart
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HtmlPart", v, metadata)
+	}
+	if s.Subject != nil {
+		v := s.Subject
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Subject", v, metadata)
+	}
+	if s.TextPart != nil {
+		v := s.TextPart
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TextPart", v, metadata)
+	}
+	return nil
+}
+
+// Textual email data, plus an optional character set specification.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleEmailPart
+type SimpleEmailPart struct {
+	_ struct{} `type:"structure"`
+
+	// The character set of the content.
+	Charset *string `type:"string"`
+
+	// The textual data of the content.
+	Data *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SimpleEmailPart) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SimpleEmailPart) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SimpleEmailPart) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Charset != nil {
+		v := *s.Charset
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Charset", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Data != nil {
+		v := *s.Data
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Data", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -18143,7 +18956,7 @@ type UpdateEndpointInput struct {
 	// EndpointId is a required field
 	EndpointId *string `location:"uri" locationName:"endpoint-id" type:"string" required:"true"`
 
-	// Endpoint update request
+	// An endpoint update request.
 	//
 	// EndpointRequest is a required field
 	EndpointRequest *EndpointRequest `type:"structure" required:"true"`
@@ -18649,6 +19462,321 @@ func (s UpdateSmsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannelRequest
+type UpdateVoiceChannelInput struct {
+	_ struct{} `type:"structure" payload:"VoiceChannelRequest"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+
+	// Voice Channel Request
+	//
+	// VoiceChannelRequest is a required field
+	VoiceChannelRequest *VoiceChannelRequest `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVoiceChannelInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVoiceChannelInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateVoiceChannelInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVoiceChannelInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.VoiceChannelRequest == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VoiceChannelRequest"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateVoiceChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VoiceChannelRequest != nil {
+		v := s.VoiceChannelRequest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "VoiceChannelRequest", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceChannelResponse
+type UpdateVoiceChannelOutput struct {
+	_ struct{} `type:"structure" payload:"VoiceChannelResponse"`
+
+	responseMetadata aws.Response
+
+	// Voice Channel Response.
+	//
+	// VoiceChannelResponse is a required field
+	VoiceChannelResponse *VoiceChannelResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVoiceChannelOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVoiceChannelOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVoiceChannelOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateVoiceChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VoiceChannelResponse != nil {
+		v := s.VoiceChannelResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "VoiceChannelResponse", v, metadata)
+	}
+	return nil
+}
+
+// Voice Channel Request
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceChannelRequest
+type VoiceChannelRequest struct {
+	_ struct{} `type:"structure"`
+
+	// If the channel is enabled for sending messages.
+	Enabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s VoiceChannelRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VoiceChannelRequest) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Voice Channel Response.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceChannelResponse
+type VoiceChannelResponse struct {
+	_ struct{} `type:"structure"`
+
+	// Application id
+	ApplicationId *string `type:"string"`
+
+	// The date that the settings were last updated in ISO 8601 format.
+	CreationDate *string `type:"string"`
+
+	// If the channel is enabled for sending messages.
+	Enabled *bool `type:"boolean"`
+
+	HasCredential *bool `type:"boolean"`
+
+	// Channel ID. Not used, only for backwards compatibility.
+	Id *string `type:"string"`
+
+	// Is this channel archived
+	IsArchived *bool `type:"boolean"`
+
+	// Who made the last change
+	LastModifiedBy *string `type:"string"`
+
+	// Last date this was updated
+	LastModifiedDate *string `type:"string"`
+
+	// Platform type. Will be "Voice"
+	Platform *string `type:"string"`
+
+	// Version of channel
+	Version *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s VoiceChannelResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VoiceChannelResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.HasCredential != nil {
+		v := *s.HasCredential
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HasCredential", protocol.BoolValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IsArchived != nil {
+		v := *s.IsArchived
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsArchived", protocol.BoolValue(v), metadata)
+	}
+	if s.LastModifiedBy != nil {
+		v := *s.LastModifiedBy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedBy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Platform != nil {
+		v := *s.Platform
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Platform", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Voice Message.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VoiceMessage
+type VoiceMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The message body of the notification, the email body or the text message.
+	Body *string `type:"string"`
+
+	// Language of sent message
+	LanguageCode *string `type:"string"`
+
+	// Is the number from the pool or messaging service to send from.
+	OriginationNumber *string `type:"string"`
+
+	// Default message substitutions. Can be overridden by individual address substitutions.
+	Substitutions map[string][]string `type:"map"`
+
+	// Voice ID of sent message.
+	VoiceId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VoiceMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VoiceMessage) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Body != nil {
+		v := *s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Body", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LanguageCode != nil {
+		v := *s.LanguageCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OriginationNumber != nil {
+		v := *s.OriginationNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginationNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Substitutions) > 0 {
+		v := s.Substitutions
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Substitutions", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
+			}
+			ls1.End()
+		}
+		ms0.End()
+
+	}
+	if s.VoiceId != nil {
+		v := *s.VoiceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Creating application setting request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/WriteApplicationSettingsRequest
 type WriteApplicationSettingsRequest struct {
@@ -18660,14 +19788,25 @@ type WriteApplicationSettingsRequest struct {
 	// The CloudWatchMetrics settings for the app.
 	CloudWatchMetricsEnabled *bool `type:"boolean"`
 
-	// The default campaign limits for the app. These limits apply to each campaign
-	// for the app, unless the campaign overrides the default with limits of its
-	// own.
+	// The limits that apply to each campaign in the project by default. Campaigns
+	// can also have their own limits, which override the settings at the project
+	// level.
 	Limits *CampaignLimits `type:"structure"`
 
-	// The default quiet time for the app. Each campaign for this app sends no messages
-	// during this time unless the campaign overrides the default with a quiet time
-	// of its own.
+	// The default quiet time for the app. Campaigns in the app don't send messages
+	// to endpoints during the quiet time.Note: Make sure that your endpoints include
+	// the Demographics.Timezone attribute if you plan to enable a quiet time for
+	// your app. If your endpoints don't include this attribute, they'll receive
+	// the messages that you send them, even if quiet time is enabled.When you set
+	// up an app to use quiet time, campaigns in that app don't send messages during
+	// the time range you specified, as long as all of the following are true:-
+	// The endpoint includes a valid Demographic.Timezone attribute.- The current
+	// time in the endpoint's time zone is later than or equal to the time specified
+	// in the QuietTime.Start attribute for the app (or campaign, if applicable).-
+	// The current time in the endpoint's time zone is earlier than or equal to
+	// the time specified in the QuietTime.End attribute for the app (or campaign,
+	// if applicable).Individual campaigns within the app can have their own quiet
+	// time settings, which override the quiet time settings at the app level.
 	QuietTime *QuietTime `type:"structure"`
 }
 
@@ -19082,6 +20221,7 @@ const (
 	ChannelTypeApnsVoipSandbox ChannelType = "APNS_VOIP_SANDBOX"
 	ChannelTypeAdm             ChannelType = "ADM"
 	ChannelTypeSms             ChannelType = "SMS"
+	ChannelTypeVoice           ChannelType = "VOICE"
 	ChannelTypeEmail           ChannelType = "EMAIL"
 	ChannelTypeBaidu           ChannelType = "BAIDU"
 	ChannelTypeCustom          ChannelType = "CUSTOM"
@@ -19154,6 +20294,23 @@ func (enum Duration) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FilterType string
+
+// Enum values for FilterType
+const (
+	FilterTypeSystem   FilterType = "SYSTEM"
+	FilterTypeEndpoint FilterType = "ENDPOINT"
+)
+
+func (enum FilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Format string
 
 // Enum values for Format
@@ -19180,6 +20337,7 @@ const (
 	FrequencyDaily   Frequency = "DAILY"
 	FrequencyWeekly  Frequency = "WEEKLY"
 	FrequencyMonthly Frequency = "MONTHLY"
+	FrequencyEvent   Frequency = "EVENT"
 )
 
 func (enum Frequency) MarshalValue() (string, error) {

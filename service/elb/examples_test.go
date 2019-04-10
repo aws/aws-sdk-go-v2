@@ -3,6 +3,7 @@
 package elb_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -52,7 +53,7 @@ func ExampleELB_AddTagsRequest_shared00() {
 	}
 
 	req := svc.AddTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -94,7 +95,7 @@ func ExampleELB_ApplySecurityGroupsToLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.ApplySecurityGroupsToLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -137,7 +138,7 @@ func ExampleELB_AttachLoadBalancerToSubnetsRequest_shared00() {
 	}
 
 	req := svc.AttachLoadBalancerToSubnetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -186,7 +187,7 @@ func ExampleELB_ConfigureHealthCheckRequest_shared00() {
 	}
 
 	req := svc.ConfigureHealthCheckRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -224,7 +225,7 @@ func ExampleELB_CreateAppCookieStickinessPolicyRequest_shared00() {
 	}
 
 	req := svc.CreateAppCookieStickinessPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -268,7 +269,7 @@ func ExampleELB_CreateLBCookieStickinessPolicyRequest_shared00() {
 	}
 
 	req := svc.CreateLBCookieStickinessPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -323,7 +324,7 @@ func ExampleELB_CreateLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -391,7 +392,7 @@ func ExampleELB_CreateLoadBalancerRequest_shared01() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -469,7 +470,7 @@ func ExampleELB_CreateLoadBalancerRequest_shared02() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -544,7 +545,7 @@ func ExampleELB_CreateLoadBalancerRequest_shared03() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -616,7 +617,7 @@ func ExampleELB_CreateLoadBalancerRequest_shared04() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -682,7 +683,7 @@ func ExampleELB_CreateLoadBalancerListenersRequest_shared00() {
 	}
 
 	req := svc.CreateLoadBalancerListenersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -735,7 +736,7 @@ func ExampleELB_CreateLoadBalancerListenersRequest_shared01() {
 	}
 
 	req := svc.CreateLoadBalancerListenersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -786,7 +787,7 @@ func ExampleELB_CreateLoadBalancerPolicyRequest_shared00() {
 	}
 
 	req := svc.CreateLoadBalancerPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -837,7 +838,7 @@ func ExampleELB_CreateLoadBalancerPolicyRequest_shared01() {
 	}
 
 	req := svc.CreateLoadBalancerPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -889,7 +890,7 @@ func ExampleELB_CreateLoadBalancerPolicyRequest_shared02() {
 	}
 
 	req := svc.CreateLoadBalancerPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -932,7 +933,7 @@ func ExampleELB_DeleteLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.DeleteLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -969,7 +970,7 @@ func ExampleELB_DeleteLoadBalancerListenersRequest_shared00() {
 	}
 
 	req := svc.DeleteLoadBalancerListenersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1006,7 +1007,7 @@ func ExampleELB_DeleteLoadBalancerPolicyRequest_shared00() {
 	}
 
 	req := svc.DeleteLoadBalancerPolicyRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1048,7 +1049,7 @@ func ExampleELB_DeregisterInstancesFromLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.DeregisterInstancesFromLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1085,7 +1086,7 @@ func ExampleELB_DescribeInstanceHealthRequest_shared00() {
 	}
 
 	req := svc.DescribeInstanceHealthRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1122,7 +1123,7 @@ func ExampleELB_DescribeLoadBalancerAttributesRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1162,7 +1163,7 @@ func ExampleELB_DescribeLoadBalancerPoliciesRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancerPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1201,7 +1202,7 @@ func ExampleELB_DescribeLoadBalancerPolicyTypesRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancerPolicyTypesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1238,7 +1239,7 @@ func ExampleELB_DescribeLoadBalancersRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1277,7 +1278,7 @@ func ExampleELB_DescribeTagsRequest_shared00() {
 	}
 
 	req := svc.DescribeTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1315,7 +1316,7 @@ func ExampleELB_DetachLoadBalancerFromSubnetsRequest_shared00() {
 	}
 
 	req := svc.DetachLoadBalancerFromSubnetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1356,7 +1357,7 @@ func ExampleELB_DisableAvailabilityZonesForLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.DisableAvailabilityZonesForLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1396,7 +1397,7 @@ func ExampleELB_EnableAvailabilityZonesForLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.EnableAvailabilityZonesForLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1436,7 +1437,7 @@ func ExampleELB_ModifyLoadBalancerAttributesRequest_shared00() {
 	}
 
 	req := svc.ModifyLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1481,7 +1482,7 @@ func ExampleELB_ModifyLoadBalancerAttributesRequest_shared01() {
 	}
 
 	req := svc.ModifyLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1525,7 +1526,7 @@ func ExampleELB_RegisterInstancesWithLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.RegisterInstancesWithLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1569,7 +1570,7 @@ func ExampleELB_RemoveTagsRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1606,7 +1607,7 @@ func ExampleELB_SetLoadBalancerListenerSSLCertificateRequest_shared00() {
 	}
 
 	req := svc.SetLoadBalancerListenerSSLCertificateRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1654,7 +1655,7 @@ func ExampleELB_SetLoadBalancerPoliciesForBackendServerRequest_shared00() {
 	}
 
 	req := svc.SetLoadBalancerPoliciesForBackendServerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1698,7 +1699,7 @@ func ExampleELB_SetLoadBalancerPoliciesOfListenerRequest_shared00() {
 	}
 
 	req := svc.SetLoadBalancerPoliciesOfListenerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

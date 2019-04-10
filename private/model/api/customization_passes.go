@@ -3,7 +3,9 @@
 package api
 
 import (
+	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -43,8 +45,26 @@ func (a *API) EnableSelectGeneratedMarshalers() {
 func (a *API) customizationPasses() {
 	var svcCustomizations = map[string]func(*API){
 		"s3":         s3Customizations,
+		"s3control":  s3ControlCustomizations,
 		"cloudfront": cloudfrontCustomizations,
 		"rds":        rdsCustomizations,
+
+		// MTurk smoke test is invalid. The service requires AWS account to be
+		// linked to Amazon Mechanical Turk Account.
+		"mturk": supressSmokeTest,
+
+		// Backfill the authentication type for cognito identity and sts.
+		// Removes the need for the customizations in these services.
+		"cognitoidentity": backfillAuthType("none",
+			"GetId",
+			"GetOpenIdToken",
+			"UnlinkIdentity",
+			"GetCredentialsForIdentity",
+		),
+		"sts": backfillAuthType("none",
+			"AssumeRoleWithSAML",
+			"AssumeRoleWithWebIdentity",
+		),
 	}
 
 	for k := range mergeServices {
@@ -56,6 +76,10 @@ func (a *API) customizationPasses() {
 	}
 
 	a.EnableSelectGeneratedMarshalers()
+}
+
+func supressSmokeTest(a *API) {
+	a.SmokeTests.TestCases = []SmokeTestCase{}
 }
 
 // s3Customizations customizes the API generation to replace values specific to S3.
@@ -99,6 +123,21 @@ func s3Customizations(a *API) {
 		}
 	}
 	s3CustRemoveHeadObjectModeledErrors(a)
+}
+
+// S3 Control service operations with an AccountId need accessors to be
+// generated for them so the fields can be dynamically accessed without
+// reflection.
+func s3ControlCustomizations(a *API) {
+	for _, op := range a.Operations {
+		// Add moving AccountId into the hostname instead of header.
+		if _, ok := op.InputRef.Shape.MemberRefs["AccountId"]; ok {
+			op.CustomBuildHandlers = append(op.CustomBuildHandlers,
+				`buildPrefixHostHandler("AccountID", aws.StringValue(input.AccountId))`,
+				`buildRemoveHeaderHandler("X-Amz-Account-Id")`,
+			)
+		}
+	}
 }
 
 // S3 HeadObject API call incorrect models NoSuchKey as valid
@@ -184,6 +223,22 @@ func rdsCustomizations(a *API) {
 				ShapeName:     "String",
 				Shape:         a.Shapes["String"],
 			}
+		}
+	}
+}
+func backfillAuthType(typ string, opNames ...string) func(*API) {
+	return func(a *API) {
+		for _, opName := range opNames {
+			op, ok := a.Operations[opName]
+			if !ok {
+				panic("unable to backfill auth-type for unknown operation " + opName)
+			}
+			if v := op.AuthType; len(v) != 0 {
+				fmt.Fprintf(os.Stderr, "unable to backfill auth-type for %s, already set, %s", opName, v)
+				continue
+			}
+
+			op.AuthType = typ
 		}
 	}
 }

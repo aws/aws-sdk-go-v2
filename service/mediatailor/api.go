@@ -3,6 +3,8 @@
 package mediatailor
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -19,7 +21,8 @@ type DeletePlaybackConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeletePlaybackConfiguration API request.
-func (r DeletePlaybackConfigurationRequest) Send() (*DeletePlaybackConfigurationOutput, error) {
+func (r DeletePlaybackConfigurationRequest) Send(ctx context.Context) (*DeletePlaybackConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -35,7 +38,7 @@ func (r DeletePlaybackConfigurationRequest) Send() (*DeletePlaybackConfiguration
 //
 //    // Example sending a request using the DeletePlaybackConfigurationRequest method.
 //    req := client.DeletePlaybackConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -71,7 +74,8 @@ type GetPlaybackConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetPlaybackConfiguration API request.
-func (r GetPlaybackConfigurationRequest) Send() (*GetPlaybackConfigurationOutput, error) {
+func (r GetPlaybackConfigurationRequest) Send(ctx context.Context) (*GetPlaybackConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +91,7 @@ func (r GetPlaybackConfigurationRequest) Send() (*GetPlaybackConfigurationOutput
 //
 //    // Example sending a request using the GetPlaybackConfigurationRequest method.
 //    req := client.GetPlaybackConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -121,7 +125,8 @@ type ListPlaybackConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListPlaybackConfigurations API request.
-func (r ListPlaybackConfigurationsRequest) Send() (*ListPlaybackConfigurationsOutput, error) {
+func (r ListPlaybackConfigurationsRequest) Send(ctx context.Context) (*ListPlaybackConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +146,7 @@ func (r ListPlaybackConfigurationsRequest) Send() (*ListPlaybackConfigurationsOu
 //
 //    // Example sending a request using the ListPlaybackConfigurationsRequest method.
 //    req := client.ListPlaybackConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -175,7 +180,8 @@ type PutPlaybackConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutPlaybackConfiguration API request.
-func (r PutPlaybackConfigurationRequest) Send() (*PutPlaybackConfigurationOutput, error) {
+func (r PutPlaybackConfigurationRequest) Send(ctx context.Context) (*PutPlaybackConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -191,7 +197,7 @@ func (r PutPlaybackConfigurationRequest) Send() (*PutPlaybackConfigurationOutput
 //
 //    // Example sending a request using the PutPlaybackConfigurationRequest method.
 //    req := client.PutPlaybackConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -260,6 +266,81 @@ func (s CdnConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ContentSegmentUrlPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The configuration object for dash content.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfiguration
+type DashConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The URL that is used to initiate a playback session for devices that support
+	// DASH.
+	ManifestEndpointPrefix *string `type:"string"`
+
+	// The setting that controls whether MediaTailor includes the Location tag in
+	// DASH Manifests. MediaTailor populates the Location tag with the URL for manifest
+	// update requests, to be used by players that don't support sticky redirects.
+	// Disable this if you have CDN routing rules set up for accessing MediaTailor
+	// manifests and you are either using client-side reporting or your players
+	// support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT.
+	// The EMT_DEFAULT setting enables the inclusion of the tag and is the default
+	// value.
+	MpdLocation *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DashConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DashConfiguration) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ManifestEndpointPrefix != nil {
+		v := *s.ManifestEndpointPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ManifestEndpointPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MpdLocation != nil {
+		v := *s.MpdLocation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MpdLocation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DashConfigurationForPut
+type DashConfigurationForPut struct {
+	_ struct{} `type:"structure"`
+
+	MpdLocation *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DashConfigurationForPut) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DashConfigurationForPut) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashConfigurationForPut) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MpdLocation != nil {
+		v := *s.MpdLocation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MpdLocation", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -398,6 +479,9 @@ type GetPlaybackConfigurationOutput struct {
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
+	// The configuration object for dash content.
+	DashConfiguration *DashConfiguration `type:"structure"`
+
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration `type:"structure"`
 
@@ -419,6 +503,11 @@ type GetPlaybackConfigurationOutput struct {
 	// it in the slots designated for dynamic ad content. The slate must be a high-quality
 	// asset that contains both audio and video.
 	SlateAdUrl *string `type:"string"`
+
+	// Associate this playbackConfiguration with a custom transcode profile, overriding
+	// MediaTailor's dynamic transcoding defaults. Do not include this field if
+	// you have not setup custom profiles with the MediaTailor service team.
+	TranscodeProfileName *string `type:"string"`
 
 	// The URL prefix for the master playlist for the stream, minus the asset ID.
 	// The maximum length is 512 characters.
@@ -454,6 +543,12 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CdnConfiguration", v, metadata)
 	}
+	if s.DashConfiguration != nil {
+		v := s.DashConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DashConfiguration", v, metadata)
+	}
 	if s.HlsConfiguration != nil {
 		v := s.HlsConfiguration
 
@@ -483,6 +578,12 @@ func (s GetPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TranscodeProfileName != nil {
+		v := *s.TranscodeProfileName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TranscodeProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoContentSourceUrl != nil {
 		v := *s.VideoContentSourceUrl
@@ -706,6 +807,8 @@ type PutPlaybackConfigurationInput struct {
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
+	DashConfiguration *DashConfigurationForPut `type:"structure"`
+
 	// The identifier for the configuration.
 	Name *string `type:"string"`
 
@@ -716,6 +819,11 @@ type PutPlaybackConfigurationInput struct {
 	// provides it in the slots that are designated for dynamic ad content. The
 	// slate must be a high-quality asset that contains both audio and video.
 	SlateAdUrl *string `type:"string"`
+
+	// Associate this playbackConfiguration with a custom transcode profile, overriding
+	// MediaTailor's dynamic transcoding defaults. Do not include this field if
+	// you have not setup custom profiles with the MediaTailor service team.
+	TranscodeProfileName *string `type:"string"`
 
 	// The URL prefix for the master playlist for the stream, minus the asset ID.
 	// The maximum length is 512 characters.
@@ -748,6 +856,12 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CdnConfiguration", v, metadata)
 	}
+	if s.DashConfiguration != nil {
+		v := s.DashConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DashConfiguration", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -759,6 +873,12 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TranscodeProfileName != nil {
+		v := *s.TranscodeProfileName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TranscodeProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoContentSourceUrl != nil {
 		v := *s.VideoContentSourceUrl
@@ -781,6 +901,9 @@ type PutPlaybackConfigurationOutput struct {
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
 
+	// The configuration object for dash content.
+	DashConfiguration *DashConfiguration `type:"structure"`
+
 	// The configuration for HLS content.
 	HlsConfiguration *HlsConfiguration `type:"structure"`
 
@@ -791,6 +914,8 @@ type PutPlaybackConfigurationOutput struct {
 	SessionInitializationEndpointPrefix *string `type:"string"`
 
 	SlateAdUrl *string `type:"string"`
+
+	TranscodeProfileName *string `type:"string"`
 
 	VideoContentSourceUrl *string `type:"string"`
 }
@@ -824,6 +949,12 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CdnConfiguration", v, metadata)
 	}
+	if s.DashConfiguration != nil {
+		v := s.DashConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DashConfiguration", v, metadata)
+	}
 	if s.HlsConfiguration != nil {
 		v := s.HlsConfiguration
 
@@ -853,6 +984,12 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SlateAdUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TranscodeProfileName != nil {
+		v := *s.TranscodeProfileName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TranscodeProfileName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoContentSourceUrl != nil {
 		v := *s.VideoContentSourceUrl

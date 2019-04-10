@@ -3,6 +3,7 @@
 package elasticsearchservice
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send(ctx context.Context) (*AddTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -40,7 +42,7 @@ func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 //
 //    // Example sending a request using the AddTagsRequest method.
 //    req := client.AddTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -64,6 +66,57 @@ func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) AddTagsReques
 	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
+const opCancelElasticsearchServiceSoftwareUpdate = "CancelElasticsearchServiceSoftwareUpdate"
+
+// CancelElasticsearchServiceSoftwareUpdateRequest is a API request type for the CancelElasticsearchServiceSoftwareUpdate API operation.
+type CancelElasticsearchServiceSoftwareUpdateRequest struct {
+	*aws.Request
+	Input *CancelElasticsearchServiceSoftwareUpdateInput
+	Copy  func(*CancelElasticsearchServiceSoftwareUpdateInput) CancelElasticsearchServiceSoftwareUpdateRequest
+}
+
+// Send marshals and sends the CancelElasticsearchServiceSoftwareUpdate API request.
+func (r CancelElasticsearchServiceSoftwareUpdateRequest) Send(ctx context.Context) (*CancelElasticsearchServiceSoftwareUpdateOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelElasticsearchServiceSoftwareUpdateOutput), nil
+}
+
+// CancelElasticsearchServiceSoftwareUpdateRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Cancels a scheduled service software update for an Amazon ES domain. You
+// can only perform this operation before the AutomatedUpdateDate and when the
+// UpdateStatus is in the PENDING_UPDATE state.
+//
+//    // Example sending a request using the CancelElasticsearchServiceSoftwareUpdateRequest method.
+//    req := client.CancelElasticsearchServiceSoftwareUpdateRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) CancelElasticsearchServiceSoftwareUpdateRequest(input *CancelElasticsearchServiceSoftwareUpdateInput) CancelElasticsearchServiceSoftwareUpdateRequest {
+	op := &aws.Operation{
+		Name:       opCancelElasticsearchServiceSoftwareUpdate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-01-01/es/serviceSoftwareUpdate/cancel",
+	}
+
+	if input == nil {
+		input = &CancelElasticsearchServiceSoftwareUpdateInput{}
+	}
+
+	output := &CancelElasticsearchServiceSoftwareUpdateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CancelElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.CancelElasticsearchServiceSoftwareUpdateRequest}
+}
+
 const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
 
 // CreateElasticsearchDomainRequest is a API request type for the CreateElasticsearchDomain API operation.
@@ -74,7 +127,8 @@ type CreateElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the CreateElasticsearchDomain API request.
-func (r CreateElasticsearchDomainRequest) Send() (*CreateElasticsearchDomainOutput, error) {
+func (r CreateElasticsearchDomainRequest) Send(ctx context.Context) (*CreateElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +146,7 @@ func (r CreateElasticsearchDomainRequest) Send() (*CreateElasticsearchDomainOutp
 //
 //    // Example sending a request using the CreateElasticsearchDomainRequest method.
 //    req := client.CreateElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +178,8 @@ type DeleteElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteElasticsearchDomain API request.
-func (r DeleteElasticsearchDomainRequest) Send() (*DeleteElasticsearchDomainOutput, error) {
+func (r DeleteElasticsearchDomainRequest) Send(ctx context.Context) (*DeleteElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +196,7 @@ func (r DeleteElasticsearchDomainRequest) Send() (*DeleteElasticsearchDomainOutp
 //
 //    // Example sending a request using the DeleteElasticsearchDomainRequest method.
 //    req := client.DeleteElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +228,8 @@ type DeleteElasticsearchServiceRoleRequest struct {
 }
 
 // Send marshals and sends the DeleteElasticsearchServiceRole API request.
-func (r DeleteElasticsearchServiceRoleRequest) Send() (*DeleteElasticsearchServiceRoleOutput, error) {
+func (r DeleteElasticsearchServiceRoleRequest) Send(ctx context.Context) (*DeleteElasticsearchServiceRoleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -193,7 +249,7 @@ func (r DeleteElasticsearchServiceRoleRequest) Send() (*DeleteElasticsearchServi
 //
 //    // Example sending a request using the DeleteElasticsearchServiceRoleRequest method.
 //    req := client.DeleteElasticsearchServiceRoleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -227,7 +283,8 @@ type DescribeElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchDomain API request.
-func (r DescribeElasticsearchDomainRequest) Send() (*DescribeElasticsearchDomainOutput, error) {
+func (r DescribeElasticsearchDomainRequest) Send(ctx context.Context) (*DescribeElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -244,7 +301,7 @@ func (r DescribeElasticsearchDomainRequest) Send() (*DescribeElasticsearchDomain
 //
 //    // Example sending a request using the DescribeElasticsearchDomainRequest method.
 //    req := client.DescribeElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -276,7 +333,8 @@ type DescribeElasticsearchDomainConfigRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchDomainConfig API request.
-func (r DescribeElasticsearchDomainConfigRequest) Send() (*DescribeElasticsearchDomainConfigOutput, error) {
+func (r DescribeElasticsearchDomainConfigRequest) Send(ctx context.Context) (*DescribeElasticsearchDomainConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -294,7 +352,7 @@ func (r DescribeElasticsearchDomainConfigRequest) Send() (*DescribeElasticsearch
 //
 //    // Example sending a request using the DescribeElasticsearchDomainConfigRequest method.
 //    req := client.DescribeElasticsearchDomainConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -326,7 +384,8 @@ type DescribeElasticsearchDomainsRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchDomains API request.
-func (r DescribeElasticsearchDomainsRequest) Send() (*DescribeElasticsearchDomainsOutput, error) {
+func (r DescribeElasticsearchDomainsRequest) Send(ctx context.Context) (*DescribeElasticsearchDomainsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -343,7 +402,7 @@ func (r DescribeElasticsearchDomainsRequest) Send() (*DescribeElasticsearchDomai
 //
 //    // Example sending a request using the DescribeElasticsearchDomainsRequest method.
 //    req := client.DescribeElasticsearchDomainsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -375,7 +434,8 @@ type DescribeElasticsearchInstanceTypeLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticsearchInstanceTypeLimits API request.
-func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send() (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send(ctx context.Context) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -393,7 +453,7 @@ func (r DescribeElasticsearchInstanceTypeLimitsRequest) Send() (*DescribeElastic
 //
 //    // Example sending a request using the DescribeElasticsearchInstanceTypeLimitsRequest method.
 //    req := client.DescribeElasticsearchInstanceTypeLimitsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -425,7 +485,8 @@ type DescribeReservedElasticsearchInstanceOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedElasticsearchInstanceOfferings API request.
-func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send() (*DescribeReservedElasticsearchInstanceOfferingsOutput, error) {
+func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send(ctx context.Context) (*DescribeReservedElasticsearchInstanceOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -441,7 +502,7 @@ func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send() (*Describe
 //
 //    // Example sending a request using the DescribeReservedElasticsearchInstanceOfferingsRequest method.
 //    req := client.DescribeReservedElasticsearchInstanceOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -489,7 +550,7 @@ func (c *ElasticsearchService) DescribeReservedElasticsearchInstanceOfferingsReq
 func (p *DescribeReservedElasticsearchInstanceOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedElasticsearchInstanceOfferingsPager {
 	return DescribeReservedElasticsearchInstanceOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedElasticsearchInstanceOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -498,6 +559,7 @@ func (p *DescribeReservedElasticsearchInstanceOfferingsRequest) Paginate(opts ..
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -525,7 +587,8 @@ type DescribeReservedElasticsearchInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedElasticsearchInstances API request.
-func (r DescribeReservedElasticsearchInstancesRequest) Send() (*DescribeReservedElasticsearchInstancesOutput, error) {
+func (r DescribeReservedElasticsearchInstancesRequest) Send(ctx context.Context) (*DescribeReservedElasticsearchInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -541,7 +604,7 @@ func (r DescribeReservedElasticsearchInstancesRequest) Send() (*DescribeReserved
 //
 //    // Example sending a request using the DescribeReservedElasticsearchInstancesRequest method.
 //    req := client.DescribeReservedElasticsearchInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -589,7 +652,7 @@ func (c *ElasticsearchService) DescribeReservedElasticsearchInstancesRequest(inp
 func (p *DescribeReservedElasticsearchInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedElasticsearchInstancesPager {
 	return DescribeReservedElasticsearchInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedElasticsearchInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -598,6 +661,7 @@ func (p *DescribeReservedElasticsearchInstancesRequest) Paginate(opts ...aws.Opt
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -625,7 +689,8 @@ type GetCompatibleElasticsearchVersionsRequest struct {
 }
 
 // Send marshals and sends the GetCompatibleElasticsearchVersions API request.
-func (r GetCompatibleElasticsearchVersionsRequest) Send() (*GetCompatibleElasticsearchVersionsOutput, error) {
+func (r GetCompatibleElasticsearchVersionsRequest) Send(ctx context.Context) (*GetCompatibleElasticsearchVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -643,7 +708,7 @@ func (r GetCompatibleElasticsearchVersionsRequest) Send() (*GetCompatibleElastic
 //
 //    // Example sending a request using the GetCompatibleElasticsearchVersionsRequest method.
 //    req := client.GetCompatibleElasticsearchVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -675,7 +740,8 @@ type GetUpgradeHistoryRequest struct {
 }
 
 // Send marshals and sends the GetUpgradeHistory API request.
-func (r GetUpgradeHistoryRequest) Send() (*GetUpgradeHistoryOutput, error) {
+func (r GetUpgradeHistoryRequest) Send(ctx context.Context) (*GetUpgradeHistoryOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -692,7 +758,7 @@ func (r GetUpgradeHistoryRequest) Send() (*GetUpgradeHistoryOutput, error) {
 //
 //    // Example sending a request using the GetUpgradeHistoryRequest method.
 //    req := client.GetUpgradeHistoryRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -740,7 +806,7 @@ func (c *ElasticsearchService) GetUpgradeHistoryRequest(input *GetUpgradeHistory
 func (p *GetUpgradeHistoryRequest) Paginate(opts ...aws.Option) GetUpgradeHistoryPager {
 	return GetUpgradeHistoryPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *GetUpgradeHistoryInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -749,6 +815,7 @@ func (p *GetUpgradeHistoryRequest) Paginate(opts ...aws.Option) GetUpgradeHistor
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -776,7 +843,8 @@ type GetUpgradeStatusRequest struct {
 }
 
 // Send marshals and sends the GetUpgradeStatus API request.
-func (r GetUpgradeStatusRequest) Send() (*GetUpgradeStatusOutput, error) {
+func (r GetUpgradeStatusRequest) Send(ctx context.Context) (*GetUpgradeStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,7 +861,7 @@ func (r GetUpgradeStatusRequest) Send() (*GetUpgradeStatusOutput, error) {
 //
 //    // Example sending a request using the GetUpgradeStatusRequest method.
 //    req := client.GetUpgradeStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -825,7 +893,8 @@ type ListDomainNamesRequest struct {
 }
 
 // Send marshals and sends the ListDomainNames API request.
-func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
+func (r ListDomainNamesRequest) Send(ctx context.Context) (*ListDomainNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -842,7 +911,7 @@ func (r ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
 //
 //    // Example sending a request using the ListDomainNamesRequest method.
 //    req := client.ListDomainNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -874,7 +943,8 @@ type ListElasticsearchInstanceTypesRequest struct {
 }
 
 // Send marshals and sends the ListElasticsearchInstanceTypes API request.
-func (r ListElasticsearchInstanceTypesRequest) Send() (*ListElasticsearchInstanceTypesOutput, error) {
+func (r ListElasticsearchInstanceTypesRequest) Send(ctx context.Context) (*ListElasticsearchInstanceTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +960,7 @@ func (r ListElasticsearchInstanceTypesRequest) Send() (*ListElasticsearchInstanc
 //
 //    // Example sending a request using the ListElasticsearchInstanceTypesRequest method.
 //    req := client.ListElasticsearchInstanceTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -938,7 +1008,7 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *List
 func (p *ListElasticsearchInstanceTypesRequest) Paginate(opts ...aws.Option) ListElasticsearchInstanceTypesPager {
 	return ListElasticsearchInstanceTypesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListElasticsearchInstanceTypesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -947,6 +1017,7 @@ func (p *ListElasticsearchInstanceTypesRequest) Paginate(opts ...aws.Option) Lis
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -974,7 +1045,8 @@ type ListElasticsearchVersionsRequest struct {
 }
 
 // Send marshals and sends the ListElasticsearchVersions API request.
-func (r ListElasticsearchVersionsRequest) Send() (*ListElasticsearchVersionsOutput, error) {
+func (r ListElasticsearchVersionsRequest) Send(ctx context.Context) (*ListElasticsearchVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -990,7 +1062,7 @@ func (r ListElasticsearchVersionsRequest) Send() (*ListElasticsearchVersionsOutp
 //
 //    // Example sending a request using the ListElasticsearchVersionsRequest method.
 //    req := client.ListElasticsearchVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1038,7 +1110,7 @@ func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElast
 func (p *ListElasticsearchVersionsRequest) Paginate(opts ...aws.Option) ListElasticsearchVersionsPager {
 	return ListElasticsearchVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListElasticsearchVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1047,6 +1119,7 @@ func (p *ListElasticsearchVersionsRequest) Paginate(opts ...aws.Option) ListElas
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1074,7 +1147,8 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send(ctx context.Context) (*ListTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1090,7 +1164,7 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1122,7 +1196,8 @@ type PurchaseReservedElasticsearchInstanceOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedElasticsearchInstanceOffering API request.
-func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send() (*PurchaseReservedElasticsearchInstanceOfferingOutput, error) {
+func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send(ctx context.Context) (*PurchaseReservedElasticsearchInstanceOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1138,7 +1213,7 @@ func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send() (*PurchaseR
 //
 //    // Example sending a request using the PurchaseReservedElasticsearchInstanceOfferingRequest method.
 //    req := client.PurchaseReservedElasticsearchInstanceOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1170,7 +1245,8 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send(ctx context.Context) (*RemoveTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1186,7 +1262,7 @@ func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 //
 //    // Example sending a request using the RemoveTagsRequest method.
 //    req := client.RemoveTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1210,6 +1286,55 @@ func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) RemoveT
 	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
+const opStartElasticsearchServiceSoftwareUpdate = "StartElasticsearchServiceSoftwareUpdate"
+
+// StartElasticsearchServiceSoftwareUpdateRequest is a API request type for the StartElasticsearchServiceSoftwareUpdate API operation.
+type StartElasticsearchServiceSoftwareUpdateRequest struct {
+	*aws.Request
+	Input *StartElasticsearchServiceSoftwareUpdateInput
+	Copy  func(*StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest
+}
+
+// Send marshals and sends the StartElasticsearchServiceSoftwareUpdate API request.
+func (r StartElasticsearchServiceSoftwareUpdateRequest) Send(ctx context.Context) (*StartElasticsearchServiceSoftwareUpdateOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartElasticsearchServiceSoftwareUpdateOutput), nil
+}
+
+// StartElasticsearchServiceSoftwareUpdateRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Schedules a service software update for an Amazon ES domain.
+//
+//    // Example sending a request using the StartElasticsearchServiceSoftwareUpdateRequest method.
+//    req := client.StartElasticsearchServiceSoftwareUpdateRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) StartElasticsearchServiceSoftwareUpdateRequest(input *StartElasticsearchServiceSoftwareUpdateInput) StartElasticsearchServiceSoftwareUpdateRequest {
+	op := &aws.Operation{
+		Name:       opStartElasticsearchServiceSoftwareUpdate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-01-01/es/serviceSoftwareUpdate/start",
+	}
+
+	if input == nil {
+		input = &StartElasticsearchServiceSoftwareUpdateInput{}
+	}
+
+	output := &StartElasticsearchServiceSoftwareUpdateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartElasticsearchServiceSoftwareUpdateRequest{Request: req, Input: input, Copy: c.StartElasticsearchServiceSoftwareUpdateRequest}
+}
+
 const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
 
 // UpdateElasticsearchDomainConfigRequest is a API request type for the UpdateElasticsearchDomainConfig API operation.
@@ -1220,7 +1345,8 @@ type UpdateElasticsearchDomainConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateElasticsearchDomainConfig API request.
-func (r UpdateElasticsearchDomainConfigRequest) Send() (*UpdateElasticsearchDomainConfigOutput, error) {
+func (r UpdateElasticsearchDomainConfigRequest) Send(ctx context.Context) (*UpdateElasticsearchDomainConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1237,7 +1363,7 @@ func (r UpdateElasticsearchDomainConfigRequest) Send() (*UpdateElasticsearchDoma
 //
 //    // Example sending a request using the UpdateElasticsearchDomainConfigRequest method.
 //    req := client.UpdateElasticsearchDomainConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1269,7 +1395,8 @@ type UpgradeElasticsearchDomainRequest struct {
 }
 
 // Send marshals and sends the UpgradeElasticsearchDomain API request.
-func (r UpgradeElasticsearchDomainRequest) Send() (*UpgradeElasticsearchDomainOutput, error) {
+func (r UpgradeElasticsearchDomainRequest) Send(ctx context.Context) (*UpgradeElasticsearchDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1286,7 +1413,7 @@ func (r UpgradeElasticsearchDomainRequest) Send() (*UpgradeElasticsearchDomainOu
 //
 //    // Example sending a request using the UpgradeElasticsearchDomainRequest method.
 //    req := client.UpgradeElasticsearchDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1561,6 +1688,95 @@ func (s AdvancedOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Container for the parameters to the CancelElasticsearchServiceSoftwareUpdate
+// operation. Specifies the name of the Elasticsearch domain that you wish to
+// cancel a service software update on.
+type CancelElasticsearchServiceSoftwareUpdateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that you want to stop the latest service software
+	// update on.
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CancelElasticsearchServiceSoftwareUpdateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CancelElasticsearchServiceSoftwareUpdateInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelElasticsearchServiceSoftwareUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The result of a CancelElasticsearchServiceSoftwareUpdate operation. Contains
+// the status of the update.
+type CancelElasticsearchServiceSoftwareUpdateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The current status of the Elasticsearch service software update.
+	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
+}
+
+// String returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelElasticsearchServiceSoftwareUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServiceSoftwareOptions != nil {
+		v := s.ServiceSoftwareOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
 	}
 	return nil
 }
@@ -3137,6 +3353,9 @@ type ElasticsearchDomainStatus struct {
 	// active.
 	Processing *bool `type:"boolean"`
 
+	// The current status of the Elasticsearch domain's service software.
+	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
+
 	// Specifies the status of the SnapshotOptions
 	SnapshotOptions *SnapshotOptions `type:"structure"`
 
@@ -3280,6 +3499,12 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Processing", protocol.BoolValue(v), metadata)
+	}
+	if s.ServiceSoftwareOptions != nil {
+		v := s.ServiceSoftwareOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
 	}
 	if s.SnapshotOptions != nil {
 		v := s.SnapshotOptions
@@ -5029,6 +5254,93 @@ func (s ReservedElasticsearchInstanceOffering) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
+// The current options of an Elasticsearch domain service software options.
+type ServiceSoftwareOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Timestamp, in Epoch time, until which you can manually request a service
+	// software update. After this date, we automatically update your service software.
+	AutomatedUpdateDate *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// True if you are able to cancel your service software version update. False
+	// if you are not able to cancel your service software version.
+	Cancellable *bool `type:"boolean"`
+
+	// The current service software version that is present on the domain.
+	CurrentVersion *string `type:"string"`
+
+	// The description of the UpdateStatus.
+	Description *string `type:"string"`
+
+	// The new service software version if one is available.
+	NewVersion *string `type:"string"`
+
+	// True if you are able to update you service software version. False if you
+	// are not able to update your service software version.
+	UpdateAvailable *bool `type:"boolean"`
+
+	// The status of your service software update. This field can take the following
+	// values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
+	UpdateStatus DeploymentStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ServiceSoftwareOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServiceSoftwareOptions) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ServiceSoftwareOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutomatedUpdateDate != nil {
+		v := *s.AutomatedUpdateDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AutomatedUpdateDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Cancellable != nil {
+		v := *s.Cancellable
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Cancellable", protocol.BoolValue(v), metadata)
+	}
+	if s.CurrentVersion != nil {
+		v := *s.CurrentVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NewVersion != nil {
+		v := *s.NewVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NewVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdateAvailable != nil {
+		v := *s.UpdateAvailable
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateAvailable", protocol.BoolValue(v), metadata)
+	}
+	if len(s.UpdateStatus) > 0 {
+		v := s.UpdateStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Specifies the time, in UTC format, when the service takes a daily automated
 // snapshot of the specified Elasticsearch domain. Default value is 0 hours.
 type SnapshotOptions struct {
@@ -5098,6 +5410,94 @@ func (s SnapshotOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
+// Container for the parameters to the StartElasticsearchServiceSoftwareUpdate
+// operation. Specifies the name of the Elasticsearch domain that you wish to
+// schedule a service software update on.
+type StartElasticsearchServiceSoftwareUpdateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the domain that you want to update to the latest service software.
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartElasticsearchServiceSoftwareUpdateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartElasticsearchServiceSoftwareUpdateInput"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartElasticsearchServiceSoftwareUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The result of a StartElasticsearchServiceSoftwareUpdate operation. Contains
+// the status of the update.
+type StartElasticsearchServiceSoftwareUpdateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The current status of the Elasticsearch service software update.
+	ServiceSoftwareOptions *ServiceSoftwareOptions `type:"structure"`
+}
+
+// String returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartElasticsearchServiceSoftwareUpdateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartElasticsearchServiceSoftwareUpdateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartElasticsearchServiceSoftwareUpdateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServiceSoftwareOptions != nil {
+		v := s.ServiceSoftwareOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ServiceSoftwareOptions", v, metadata)
 	}
 	return nil
 }
@@ -5913,6 +6313,26 @@ func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
 
 	}
 	return nil
+}
+
+type DeploymentStatus string
+
+// Enum values for DeploymentStatus
+const (
+	DeploymentStatusPendingUpdate DeploymentStatus = "PENDING_UPDATE"
+	DeploymentStatusInProgress    DeploymentStatus = "IN_PROGRESS"
+	DeploymentStatusCompleted     DeploymentStatus = "COMPLETED"
+	DeploymentStatusNotEligible   DeploymentStatus = "NOT_ELIGIBLE"
+	DeploymentStatusEligible      DeploymentStatus = "ELIGIBLE"
+)
+
+func (enum DeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type ESPartitionInstanceType string

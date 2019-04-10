@@ -3,6 +3,7 @@
 package route53_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -46,7 +47,7 @@ func ExampleRoute53_AssociateVPCWithHostedZoneRequest_shared00() {
 	}
 
 	req := svc.AssociateVPCWithHostedZoneRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -102,7 +103,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared00() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -158,7 +159,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared01() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -210,7 +211,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared02() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -267,7 +268,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared03() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -323,7 +324,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared04() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -379,7 +380,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared05() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -436,7 +437,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared06() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -493,7 +494,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared07() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -556,7 +557,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared08() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -619,7 +620,7 @@ func ExampleRoute53_ChangeResourceRecordSetsRequest_shared09() {
 	}
 
 	req := svc.ChangeResourceRecordSetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -677,7 +678,7 @@ func ExampleRoute53_ChangeTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ChangeTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -720,7 +721,7 @@ func ExampleRoute53_GetHostedZoneRequest_shared00() {
 	}
 
 	req := svc.GetHostedZoneRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

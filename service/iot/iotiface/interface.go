@@ -64,6 +64,8 @@ import (
 type IoTAPI interface {
 	AcceptCertificateTransferRequest(*iot.AcceptCertificateTransferInput) iot.AcceptCertificateTransferRequest
 
+	AddThingToBillingGroupRequest(*iot.AddThingToBillingGroupInput) iot.AddThingToBillingGroupRequest
+
 	AddThingToThingGroupRequest(*iot.AddThingToThingGroupInput) iot.AddThingToThingGroupRequest
 
 	AssociateTargetsWithJobRequest(*iot.AssociateTargetsWithJobInput) iot.AssociateTargetsWithJobRequest
@@ -88,7 +90,11 @@ type IoTAPI interface {
 
 	CreateAuthorizerRequest(*iot.CreateAuthorizerInput) iot.CreateAuthorizerRequest
 
+	CreateBillingGroupRequest(*iot.CreateBillingGroupInput) iot.CreateBillingGroupRequest
+
 	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) iot.CreateCertificateFromCsrRequest
+
+	CreateDynamicThingGroupRequest(*iot.CreateDynamicThingGroupInput) iot.CreateDynamicThingGroupRequest
 
 	CreateJobRequest(*iot.CreateJobInput) iot.CreateJobRequest
 
@@ -120,9 +126,13 @@ type IoTAPI interface {
 
 	DeleteAuthorizerRequest(*iot.DeleteAuthorizerInput) iot.DeleteAuthorizerRequest
 
+	DeleteBillingGroupRequest(*iot.DeleteBillingGroupInput) iot.DeleteBillingGroupRequest
+
 	DeleteCACertificateRequest(*iot.DeleteCACertificateInput) iot.DeleteCACertificateRequest
 
 	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
+
+	DeleteDynamicThingGroupRequest(*iot.DeleteDynamicThingGroupInput) iot.DeleteDynamicThingGroupRequest
 
 	DeleteJobRequest(*iot.DeleteJobInput) iot.DeleteJobRequest
 
@@ -161,6 +171,8 @@ type IoTAPI interface {
 	DescribeAuditTaskRequest(*iot.DescribeAuditTaskInput) iot.DescribeAuditTaskRequest
 
 	DescribeAuthorizerRequest(*iot.DescribeAuthorizerInput) iot.DescribeAuthorizerRequest
+
+	DescribeBillingGroupRequest(*iot.DescribeBillingGroupInput) iot.DescribeBillingGroupRequest
 
 	DescribeCACertificateRequest(*iot.DescribeCACertificateInput) iot.DescribeCACertificateRequest
 
@@ -236,6 +248,8 @@ type IoTAPI interface {
 
 	ListAuthorizersRequest(*iot.ListAuthorizersInput) iot.ListAuthorizersRequest
 
+	ListBillingGroupsRequest(*iot.ListBillingGroupsInput) iot.ListBillingGroupsRequest
+
 	ListCACertificatesRequest(*iot.ListCACertificatesInput) iot.ListCACertificatesRequest
 
 	ListCertificatesRequest(*iot.ListCertificatesInput) iot.ListCertificatesRequest
@@ -274,6 +288,8 @@ type IoTAPI interface {
 
 	ListStreamsRequest(*iot.ListStreamsInput) iot.ListStreamsRequest
 
+	ListTagsForResourceRequest(*iot.ListTagsForResourceInput) iot.ListTagsForResourceRequest
+
 	ListTargetsForPolicyRequest(*iot.ListTargetsForPolicyInput) iot.ListTargetsForPolicyRequest
 
 	ListTargetsForSecurityProfileRequest(*iot.ListTargetsForSecurityProfileInput) iot.ListTargetsForSecurityProfileRequest
@@ -292,6 +308,8 @@ type IoTAPI interface {
 
 	ListThingsRequest(*iot.ListThingsInput) iot.ListThingsRequest
 
+	ListThingsInBillingGroupRequest(*iot.ListThingsInBillingGroupInput) iot.ListThingsInBillingGroupRequest
+
 	ListThingsInThingGroupRequest(*iot.ListThingsInThingGroupInput) iot.ListThingsInThingGroupRequest
 
 	ListTopicRulesRequest(*iot.ListTopicRulesInput) iot.ListTopicRulesRequest
@@ -307,6 +325,8 @@ type IoTAPI interface {
 	RegisterThingRequest(*iot.RegisterThingInput) iot.RegisterThingRequest
 
 	RejectCertificateTransferRequest(*iot.RejectCertificateTransferInput) iot.RejectCertificateTransferRequest
+
+	RemoveThingFromBillingGroupRequest(*iot.RemoveThingFromBillingGroupInput) iot.RemoveThingFromBillingGroupRequest
 
 	RemoveThingFromThingGroupRequest(*iot.RemoveThingFromThingGroupInput) iot.RemoveThingFromThingGroupRequest
 
@@ -330,23 +350,33 @@ type IoTAPI interface {
 
 	StopThingRegistrationTaskRequest(*iot.StopThingRegistrationTaskInput) iot.StopThingRegistrationTaskRequest
 
+	TagResourceRequest(*iot.TagResourceInput) iot.TagResourceRequest
+
 	TestAuthorizationRequest(*iot.TestAuthorizationInput) iot.TestAuthorizationRequest
 
 	TestInvokeAuthorizerRequest(*iot.TestInvokeAuthorizerInput) iot.TestInvokeAuthorizerRequest
 
 	TransferCertificateRequest(*iot.TransferCertificateInput) iot.TransferCertificateRequest
 
+	UntagResourceRequest(*iot.UntagResourceInput) iot.UntagResourceRequest
+
 	UpdateAccountAuditConfigurationRequest(*iot.UpdateAccountAuditConfigurationInput) iot.UpdateAccountAuditConfigurationRequest
 
 	UpdateAuthorizerRequest(*iot.UpdateAuthorizerInput) iot.UpdateAuthorizerRequest
+
+	UpdateBillingGroupRequest(*iot.UpdateBillingGroupInput) iot.UpdateBillingGroupRequest
 
 	UpdateCACertificateRequest(*iot.UpdateCACertificateInput) iot.UpdateCACertificateRequest
 
 	UpdateCertificateRequest(*iot.UpdateCertificateInput) iot.UpdateCertificateRequest
 
+	UpdateDynamicThingGroupRequest(*iot.UpdateDynamicThingGroupInput) iot.UpdateDynamicThingGroupRequest
+
 	UpdateEventConfigurationsRequest(*iot.UpdateEventConfigurationsInput) iot.UpdateEventConfigurationsRequest
 
 	UpdateIndexingConfigurationRequest(*iot.UpdateIndexingConfigurationInput) iot.UpdateIndexingConfigurationRequest
+
+	UpdateJobRequest(*iot.UpdateJobInput) iot.UpdateJobRequest
 
 	UpdateRoleAliasRequest(*iot.UpdateRoleAliasInput) iot.UpdateRoleAliasRequest
 

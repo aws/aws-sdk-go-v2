@@ -3,6 +3,7 @@
 package storagegateway_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -46,7 +47,7 @@ func ExampleStorageGateway_ActivateGatewayRequest_shared00() {
 	}
 
 	req := svc.ActivateGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -87,7 +88,7 @@ func ExampleStorageGateway_AddCacheRequest_shared00() {
 	}
 
 	req := svc.AddCacheRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -130,7 +131,7 @@ func ExampleStorageGateway_AddTagsToResourceRequest_shared00() {
 	}
 
 	req := svc.AddTagsToResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -171,7 +172,7 @@ func ExampleStorageGateway_AddUploadBufferRequest_shared00() {
 	}
 
 	req := svc.AddUploadBufferRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -213,7 +214,7 @@ func ExampleStorageGateway_AddWorkingStorageRequest_shared00() {
 	}
 
 	req := svc.AddWorkingStorageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -252,7 +253,7 @@ func ExampleStorageGateway_CancelArchivalRequest_shared00() {
 	}
 
 	req := svc.CancelArchivalRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -291,7 +292,7 @@ func ExampleStorageGateway_CancelRetrievalRequest_shared00() {
 	}
 
 	req := svc.CancelRetrievalRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -333,7 +334,7 @@ func ExampleStorageGateway_CreateCachediSCSIVolumeRequest_shared00() {
 	}
 
 	req := svc.CreateCachediSCSIVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -371,7 +372,7 @@ func ExampleStorageGateway_CreateSnapshotRequest_shared00() {
 	}
 
 	req := svc.CreateSnapshotRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -411,7 +412,7 @@ func ExampleStorageGateway_CreateSnapshotFromVolumeRecoveryPointRequest_shared00
 	}
 
 	req := svc.CreateSnapshotFromVolumeRecoveryPointRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -455,7 +456,7 @@ func ExampleStorageGateway_CreateStorediSCSIVolumeRequest_shared00() {
 	}
 
 	req := svc.CreateStorediSCSIVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -494,7 +495,7 @@ func ExampleStorageGateway_CreateTapeWithBarcodeRequest_shared00() {
 	}
 
 	req := svc.CreateTapeWithBarcodeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -535,7 +536,7 @@ func ExampleStorageGateway_CreateTapesRequest_shared00() {
 	}
 
 	req := svc.CreateTapesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -574,7 +575,7 @@ func ExampleStorageGateway_DeleteBandwidthRateLimitRequest_shared00() {
 	}
 
 	req := svc.DeleteBandwidthRateLimitRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -613,7 +614,7 @@ func ExampleStorageGateway_DeleteChapCredentialsRequest_shared00() {
 	}
 
 	req := svc.DeleteChapCredentialsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -650,7 +651,7 @@ func ExampleStorageGateway_DeleteGatewayRequest_shared00() {
 	}
 
 	req := svc.DeleteGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -687,7 +688,7 @@ func ExampleStorageGateway_DeleteSnapshotScheduleRequest_shared00() {
 	}
 
 	req := svc.DeleteSnapshotScheduleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -725,7 +726,7 @@ func ExampleStorageGateway_DeleteTapeRequest_shared00() {
 	}
 
 	req := svc.DeleteTapeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -762,7 +763,7 @@ func ExampleStorageGateway_DeleteTapeArchiveRequest_shared00() {
 	}
 
 	req := svc.DeleteTapeArchiveRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -800,7 +801,7 @@ func ExampleStorageGateway_DeleteVolumeRequest_shared00() {
 	}
 
 	req := svc.DeleteVolumeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +839,7 @@ func ExampleStorageGateway_DescribeBandwidthRateLimitRequest_shared00() {
 	}
 
 	req := svc.DescribeBandwidthRateLimitRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -875,7 +876,7 @@ func ExampleStorageGateway_DescribeCacheRequest_shared00() {
 	}
 
 	req := svc.DescribeCacheRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -914,7 +915,7 @@ func ExampleStorageGateway_DescribeCachediSCSIVolumesRequest_shared00() {
 	}
 
 	req := svc.DescribeCachediSCSIVolumesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -952,7 +953,7 @@ func ExampleStorageGateway_DescribeChapCredentialsRequest_shared00() {
 	}
 
 	req := svc.DescribeChapCredentialsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -990,7 +991,7 @@ func ExampleStorageGateway_DescribeGatewayInformationRequest_shared00() {
 	}
 
 	req := svc.DescribeGatewayInformationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1028,7 +1029,7 @@ func ExampleStorageGateway_DescribeMaintenanceStartTimeRequest_shared00() {
 	}
 
 	req := svc.DescribeMaintenanceStartTimeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1066,7 +1067,7 @@ func ExampleStorageGateway_DescribeSnapshotScheduleRequest_shared00() {
 	}
 
 	req := svc.DescribeSnapshotScheduleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1106,7 +1107,7 @@ func ExampleStorageGateway_DescribeStorediSCSIVolumesRequest_shared00() {
 	}
 
 	req := svc.DescribeStorediSCSIVolumesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1148,7 +1149,7 @@ func ExampleStorageGateway_DescribeTapeArchivesRequest_shared00() {
 	}
 
 	req := svc.DescribeTapeArchivesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1188,7 +1189,7 @@ func ExampleStorageGateway_DescribeTapeRecoveryPointsRequest_shared00() {
 	}
 
 	req := svc.DescribeTapeRecoveryPointsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1232,7 +1233,7 @@ func ExampleStorageGateway_DescribeTapesRequest_shared00() {
 	}
 
 	req := svc.DescribeTapesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1270,7 +1271,7 @@ func ExampleStorageGateway_DescribeUploadBufferRequest_shared00() {
 	}
 
 	req := svc.DescribeUploadBufferRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1308,7 +1309,7 @@ func ExampleStorageGateway_DescribeUploadBufferRequest_shared01() {
 	}
 
 	req := svc.DescribeUploadBufferRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1347,7 +1348,7 @@ func ExampleStorageGateway_DescribeVTLDevicesRequest_shared00() {
 	}
 
 	req := svc.DescribeVTLDevicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1386,7 +1387,7 @@ func ExampleStorageGateway_DescribeWorkingStorageRequest_shared00() {
 	}
 
 	req := svc.DescribeWorkingStorageRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1424,7 +1425,7 @@ func ExampleStorageGateway_DisableGatewayRequest_shared00() {
 	}
 
 	req := svc.DisableGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1463,7 +1464,7 @@ func ExampleStorageGateway_ListGatewaysRequest_shared00() {
 	}
 
 	req := svc.ListGatewaysRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1501,7 +1502,7 @@ func ExampleStorageGateway_ListLocalDisksRequest_shared00() {
 	}
 
 	req := svc.ListLocalDisksRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1540,7 +1541,7 @@ func ExampleStorageGateway_ListTagsForResourceRequest_shared00() {
 	}
 
 	req := svc.ListTagsForResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1578,7 +1579,7 @@ func ExampleStorageGateway_ListVolumeRecoveryPointsRequest_shared00() {
 	}
 
 	req := svc.ListVolumeRecoveryPointsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1618,7 +1619,7 @@ func ExampleStorageGateway_ListVolumesRequest_shared00() {
 	}
 
 	req := svc.ListVolumesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1660,7 +1661,7 @@ func ExampleStorageGateway_RemoveTagsFromResourceRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsFromResourceRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1698,7 +1699,7 @@ func ExampleStorageGateway_ResetCacheRequest_shared00() {
 	}
 
 	req := svc.ResetCacheRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1737,7 +1738,7 @@ func ExampleStorageGateway_RetrieveTapeArchiveRequest_shared00() {
 	}
 
 	req := svc.RetrieveTapeArchiveRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1775,7 +1776,7 @@ func ExampleStorageGateway_RetrieveTapeRecoveryPointRequest_shared00() {
 	}
 
 	req := svc.RetrieveTapeRecoveryPointRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1813,7 +1814,7 @@ func ExampleStorageGateway_SetLocalConsolePasswordRequest_shared00() {
 	}
 
 	req := svc.SetLocalConsolePasswordRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1851,7 +1852,7 @@ func ExampleStorageGateway_ShutdownGatewayRequest_shared00() {
 	}
 
 	req := svc.ShutdownGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1888,7 +1889,7 @@ func ExampleStorageGateway_StartGatewayRequest_shared00() {
 	}
 
 	req := svc.StartGatewayRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1929,7 +1930,7 @@ func ExampleStorageGateway_UpdateBandwidthRateLimitRequest_shared00() {
 	}
 
 	req := svc.UpdateBandwidthRateLimitRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1970,7 +1971,7 @@ func ExampleStorageGateway_UpdateChapCredentialsRequest_shared00() {
 	}
 
 	req := svc.UpdateChapCredentialsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2009,7 +2010,7 @@ func ExampleStorageGateway_UpdateGatewayInformationRequest_shared00() {
 	}
 
 	req := svc.UpdateGatewayInformationRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2047,7 +2048,7 @@ func ExampleStorageGateway_UpdateGatewaySoftwareNowRequest_shared00() {
 	}
 
 	req := svc.UpdateGatewaySoftwareNowRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2088,7 +2089,7 @@ func ExampleStorageGateway_UpdateMaintenanceStartTimeRequest_shared00() {
 	}
 
 	req := svc.UpdateMaintenanceStartTimeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2128,7 +2129,7 @@ func ExampleStorageGateway_UpdateSnapshotScheduleRequest_shared00() {
 	}
 
 	req := svc.UpdateSnapshotScheduleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2166,7 +2167,7 @@ func ExampleStorageGateway_UpdateVTLDeviceTypeRequest_shared00() {
 	}
 
 	req := svc.UpdateVTLDeviceTypeRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -5,15 +5,14 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/go-sql-driver/mysql"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
 // Usage ./iam_authentication <region> <db user> <db name> <endpoint to database> <iam arn>
@@ -37,8 +36,7 @@ func main() {
 
 	credProvider := stscreds.NewAssumeRoleProvider(sts.New(cfg), os.Args[5])
 
-	awsCreds := aws.NewCredentials(credProvider)
-	authToken, err := rdsutils.BuildAuthToken(dbEndpoint, awsRegion, dbUser, awsCreds)
+	authToken, err := rdsutils.BuildAuthToken(dbEndpoint, awsRegion, dbUser, credProvider)
 
 	// Create the MySQL DNS string for the DB connection
 	// user:password@protocol(endpoint)/dbname?<params>

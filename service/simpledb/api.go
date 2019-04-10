@@ -3,6 +3,7 @@
 package simpledb
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type BatchDeleteAttributesRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteAttributes API request.
-func (r BatchDeleteAttributesRequest) Send() (*BatchDeleteAttributesOutput, error) {
+func (r BatchDeleteAttributesRequest) Send(ctx context.Context) (*BatchDeleteAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -60,7 +62,7 @@ func (r BatchDeleteAttributesRequest) Send() (*BatchDeleteAttributesOutput, erro
 //
 //    // Example sending a request using the BatchDeleteAttributesRequest method.
 //    req := client.BatchDeleteAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -94,7 +96,8 @@ type BatchPutAttributesRequest struct {
 }
 
 // Send marshals and sends the BatchPutAttributes API request.
-func (r BatchPutAttributesRequest) Send() (*BatchPutAttributesOutput, error) {
+func (r BatchPutAttributesRequest) Send(ctx context.Context) (*BatchPutAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -152,7 +155,7 @@ func (r BatchPutAttributesRequest) Send() (*BatchPutAttributesOutput, error) {
 //
 //    // Example sending a request using the BatchPutAttributesRequest method.
 //    req := client.BatchPutAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -186,7 +189,8 @@ type CreateDomainRequest struct {
 }
 
 // Send marshals and sends the CreateDomain API request.
-func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+func (r CreateDomainRequest) Send(ctx context.Context) (*CreateDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -210,7 +214,7 @@ func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
 //
 //    // Example sending a request using the CreateDomainRequest method.
 //    req := client.CreateDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -244,7 +248,8 @@ type DeleteAttributesRequest struct {
 }
 
 // Send marshals and sends the DeleteAttributes API request.
-func (r DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+func (r DeleteAttributesRequest) Send(ctx context.Context) (*DeleteAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -270,7 +275,7 @@ func (r DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
 //
 //    // Example sending a request using the DeleteAttributesRequest method.
 //    req := client.DeleteAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -304,7 +309,8 @@ type DeleteDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteDomain API request.
-func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+func (r DeleteDomainRequest) Send(ctx context.Context) (*DeleteDomainOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -325,7 +331,7 @@ func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
 //
 //    // Example sending a request using the DeleteDomainRequest method.
 //    req := client.DeleteDomainRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -359,7 +365,8 @@ type DomainMetadataRequest struct {
 }
 
 // Send marshals and sends the DomainMetadata API request.
-func (r DomainMetadataRequest) Send() (*DomainMetadataOutput, error) {
+func (r DomainMetadataRequest) Send(ctx context.Context) (*DomainMetadataOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -377,7 +384,7 @@ func (r DomainMetadataRequest) Send() (*DomainMetadataOutput, error) {
 //
 //    // Example sending a request using the DomainMetadataRequest method.
 //    req := client.DomainMetadataRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -409,7 +416,8 @@ type GetAttributesRequest struct {
 }
 
 // Send marshals and sends the GetAttributes API request.
-func (r GetAttributesRequest) Send() (*GetAttributesOutput, error) {
+func (r GetAttributesRequest) Send(ctx context.Context) (*GetAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -434,7 +442,7 @@ func (r GetAttributesRequest) Send() (*GetAttributesOutput, error) {
 //
 //    // Example sending a request using the GetAttributesRequest method.
 //    req := client.GetAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -466,7 +474,8 @@ type ListDomainsRequest struct {
 }
 
 // Send marshals and sends the ListDomains API request.
-func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+func (r ListDomainsRequest) Send(ctx context.Context) (*ListDomainsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -487,7 +496,7 @@ func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
 //
 //    // Example sending a request using the ListDomainsRequest method.
 //    req := client.ListDomainsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -535,7 +544,7 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) ListDomainsReques
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDomainsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -544,6 +553,7 @@ func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -571,7 +581,8 @@ type PutAttributesRequest struct {
 }
 
 // Send marshals and sends the PutAttributes API request.
-func (r PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+func (r PutAttributesRequest) Send(ctx context.Context) (*PutAttributesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -617,7 +628,7 @@ func (r PutAttributesRequest) Send() (*PutAttributesOutput, error) {
 //
 //    // Example sending a request using the PutAttributesRequest method.
 //    req := client.PutAttributesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -651,7 +662,8 @@ type SelectRequest struct {
 }
 
 // Send marshals and sends the Select API request.
-func (r SelectRequest) Send() (*SelectOutput, error) {
+func (r SelectRequest) Send(ctx context.Context) (*SelectOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -677,7 +689,7 @@ func (r SelectRequest) Send() (*SelectOutput, error) {
 //
 //    // Example sending a request using the SelectRequest method.
 //    req := client.SelectRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -725,7 +737,7 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) SelectRequest {
 func (p *SelectRequest) Paginate(opts ...aws.Option) SelectPager {
 	return SelectPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *SelectInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -734,6 +746,7 @@ func (p *SelectRequest) Paginate(opts ...aws.Option) SelectPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},

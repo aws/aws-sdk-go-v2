@@ -3,6 +3,7 @@
 package pricing_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -42,7 +43,7 @@ func ExamplePricing_DescribeServicesRequest_shared00() {
 	}
 
 	req := svc.DescribeServicesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -87,7 +88,7 @@ func ExamplePricing_GetAttributeValuesRequest_shared00() {
 	}
 
 	req := svc.GetAttributeValuesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -143,7 +144,7 @@ func ExamplePricing_GetProductsRequest_shared00() {
 	}
 
 	req := svc.GetProductsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

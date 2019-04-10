@@ -58,6 +58,9 @@ func New(config aws.Config) *EC2Metadata {
 		svc.Handlers.Send.SwapNamed(aws.NamedHandler{
 			Name: defaults.SendHandler.Name,
 			Fn: func(r *aws.Request) {
+				r.HTTPResponse = &http.Response{
+					Header: http.Header{},
+				}
 				r.Error = awserr.New(
 					aws.ErrCodeRequestCanceled,
 					"EC2 IMDS access disabled via "+disableServiceEnvVar+" env var",

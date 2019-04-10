@@ -114,6 +114,8 @@ type GlueAPI interface {
 
 	DeletePartitionRequest(*glue.DeletePartitionInput) glue.DeletePartitionRequest
 
+	DeleteResourcePolicyRequest(*glue.DeleteResourcePolicyInput) glue.DeleteResourcePolicyRequest
+
 	DeleteSecurityConfigurationRequest(*glue.DeleteSecurityConfigurationInput) glue.DeleteSecurityConfigurationRequest
 
 	DeleteTableRequest(*glue.DeleteTableInput) glue.DeleteTableRequest
@@ -168,6 +170,8 @@ type GlueAPI interface {
 
 	GetPlanRequest(*glue.GetPlanInput) glue.GetPlanRequest
 
+	GetResourcePolicyRequest(*glue.GetResourcePolicyInput) glue.GetResourcePolicyRequest
+
 	GetSecurityConfigurationRequest(*glue.GetSecurityConfigurationInput) glue.GetSecurityConfigurationRequest
 
 	GetSecurityConfigurationsRequest(*glue.GetSecurityConfigurationsInput) glue.GetSecurityConfigurationsRequest
@@ -191,6 +195,8 @@ type GlueAPI interface {
 	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
 
 	PutDataCatalogEncryptionSettingsRequest(*glue.PutDataCatalogEncryptionSettingsInput) glue.PutDataCatalogEncryptionSettingsRequest
+
+	PutResourcePolicyRequest(*glue.PutResourcePolicyInput) glue.PutResourcePolicyRequest
 
 	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) glue.ResetJobBookmarkRequest
 

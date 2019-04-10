@@ -3,6 +3,7 @@
 package eks_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -52,7 +53,7 @@ func ExampleEKS_CreateClusterRequest_shared00() {
 	}
 
 	req := svc.CreateClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -99,7 +100,7 @@ func ExampleEKS_DeleteClusterRequest_shared00() {
 	}
 
 	req := svc.DeleteClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -143,7 +144,7 @@ func ExampleEKS_DescribeClusterRequest_shared00() {
 	}
 
 	req := svc.DescribeClusterRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -182,7 +183,7 @@ func ExampleEKS_ListClustersRequest_shared00() {
 	input := &eks.ListClustersInput{}
 
 	req := svc.ListClustersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

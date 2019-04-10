@@ -3,6 +3,7 @@
 package iot
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -22,7 +23,8 @@ type AcceptCertificateTransferRequest struct {
 }
 
 // Send marshals and sends the AcceptCertificateTransfer API request.
-func (r AcceptCertificateTransferRequest) Send() (*AcceptCertificateTransferOutput, error) {
+func (r AcceptCertificateTransferRequest) Send(ctx context.Context) (*AcceptCertificateTransferOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -42,7 +44,7 @@ func (r AcceptCertificateTransferRequest) Send() (*AcceptCertificateTransferOutp
 //
 //    // Example sending a request using the AcceptCertificateTransferRequest method.
 //    req := client.AcceptCertificateTransferRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -66,6 +68,55 @@ func (c *IoT) AcceptCertificateTransferRequest(input *AcceptCertificateTransferI
 	return AcceptCertificateTransferRequest{Request: req, Input: input, Copy: c.AcceptCertificateTransferRequest}
 }
 
+const opAddThingToBillingGroup = "AddThingToBillingGroup"
+
+// AddThingToBillingGroupRequest is a API request type for the AddThingToBillingGroup API operation.
+type AddThingToBillingGroupRequest struct {
+	*aws.Request
+	Input *AddThingToBillingGroupInput
+	Copy  func(*AddThingToBillingGroupInput) AddThingToBillingGroupRequest
+}
+
+// Send marshals and sends the AddThingToBillingGroup API request.
+func (r AddThingToBillingGroupRequest) Send(ctx context.Context) (*AddThingToBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddThingToBillingGroupOutput), nil
+}
+
+// AddThingToBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Adds a thing to a billing group.
+//
+//    // Example sending a request using the AddThingToBillingGroupRequest method.
+//    req := client.AddThingToBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) AddThingToBillingGroupRequest(input *AddThingToBillingGroupInput) AddThingToBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opAddThingToBillingGroup,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/billing-groups/addThingToBillingGroup",
+	}
+
+	if input == nil {
+		input = &AddThingToBillingGroupInput{}
+	}
+
+	output := &AddThingToBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AddThingToBillingGroupRequest{Request: req, Input: input, Copy: c.AddThingToBillingGroupRequest}
+}
+
 const opAddThingToThingGroup = "AddThingToThingGroup"
 
 // AddThingToThingGroupRequest is a API request type for the AddThingToThingGroup API operation.
@@ -76,7 +127,8 @@ type AddThingToThingGroupRequest struct {
 }
 
 // Send marshals and sends the AddThingToThingGroup API request.
-func (r AddThingToThingGroupRequest) Send() (*AddThingToThingGroupOutput, error) {
+func (r AddThingToThingGroupRequest) Send(ctx context.Context) (*AddThingToThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -92,7 +144,7 @@ func (r AddThingToThingGroupRequest) Send() (*AddThingToThingGroupOutput, error)
 //
 //    // Example sending a request using the AddThingToThingGroupRequest method.
 //    req := client.AddThingToThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +176,8 @@ type AssociateTargetsWithJobRequest struct {
 }
 
 // Send marshals and sends the AssociateTargetsWithJob API request.
-func (r AssociateTargetsWithJobRequest) Send() (*AssociateTargetsWithJobOutput, error) {
+func (r AssociateTargetsWithJobRequest) Send(ctx context.Context) (*AssociateTargetsWithJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -148,7 +201,7 @@ func (r AssociateTargetsWithJobRequest) Send() (*AssociateTargetsWithJobOutput, 
 //
 //    // Example sending a request using the AssociateTargetsWithJobRequest method.
 //    req := client.AssociateTargetsWithJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -180,7 +233,8 @@ type AttachPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachPolicy API request.
-func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -196,7 +250,7 @@ func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
 //
 //    // Example sending a request using the AttachPolicyRequest method.
 //    req := client.AttachPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -230,7 +284,8 @@ type AttachPrincipalPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachPrincipalPolicy API request.
-func (r AttachPrincipalPolicyRequest) Send() (*AttachPrincipalPolicyOutput, error) {
+func (r AttachPrincipalPolicyRequest) Send(ctx context.Context) (*AttachPrincipalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +304,7 @@ func (r AttachPrincipalPolicyRequest) Send() (*AttachPrincipalPolicyOutput, erro
 //
 //    // Example sending a request using the AttachPrincipalPolicyRequest method.
 //    req := client.AttachPrincipalPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -286,7 +341,8 @@ type AttachSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the AttachSecurityProfile API request.
-func (r AttachSecurityProfileRequest) Send() (*AttachSecurityProfileOutput, error) {
+func (r AttachSecurityProfileRequest) Send(ctx context.Context) (*AttachSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -304,7 +360,7 @@ func (r AttachSecurityProfileRequest) Send() (*AttachSecurityProfileOutput, erro
 //
 //    // Example sending a request using the AttachSecurityProfileRequest method.
 //    req := client.AttachSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -336,7 +392,8 @@ type AttachThingPrincipalRequest struct {
 }
 
 // Send marshals and sends the AttachThingPrincipal API request.
-func (r AttachThingPrincipalRequest) Send() (*AttachThingPrincipalOutput, error) {
+func (r AttachThingPrincipalRequest) Send(ctx context.Context) (*AttachThingPrincipalOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -352,7 +409,7 @@ func (r AttachThingPrincipalRequest) Send() (*AttachThingPrincipalOutput, error)
 //
 //    // Example sending a request using the AttachThingPrincipalRequest method.
 //    req := client.AttachThingPrincipalRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -384,7 +441,8 @@ type CancelAuditTaskRequest struct {
 }
 
 // Send marshals and sends the CancelAuditTask API request.
-func (r CancelAuditTaskRequest) Send() (*CancelAuditTaskOutput, error) {
+func (r CancelAuditTaskRequest) Send(ctx context.Context) (*CancelAuditTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -402,7 +460,7 @@ func (r CancelAuditTaskRequest) Send() (*CancelAuditTaskOutput, error) {
 //
 //    // Example sending a request using the CancelAuditTaskRequest method.
 //    req := client.CancelAuditTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -434,7 +492,8 @@ type CancelCertificateTransferRequest struct {
 }
 
 // Send marshals and sends the CancelCertificateTransfer API request.
-func (r CancelCertificateTransferRequest) Send() (*CancelCertificateTransferOutput, error) {
+func (r CancelCertificateTransferRequest) Send(ctx context.Context) (*CancelCertificateTransferOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -459,7 +518,7 @@ func (r CancelCertificateTransferRequest) Send() (*CancelCertificateTransferOutp
 //
 //    // Example sending a request using the CancelCertificateTransferRequest method.
 //    req := client.CancelCertificateTransferRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -493,7 +552,8 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,7 +569,7 @@ func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 //
 //    // Example sending a request using the CancelJobRequest method.
 //    req := client.CancelJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -541,7 +601,8 @@ type CancelJobExecutionRequest struct {
 }
 
 // Send marshals and sends the CancelJobExecution API request.
-func (r CancelJobExecutionRequest) Send() (*CancelJobExecutionOutput, error) {
+func (r CancelJobExecutionRequest) Send(ctx context.Context) (*CancelJobExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -557,7 +618,7 @@ func (r CancelJobExecutionRequest) Send() (*CancelJobExecutionOutput, error) {
 //
 //    // Example sending a request using the CancelJobExecutionRequest method.
 //    req := client.CancelJobExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -591,7 +652,8 @@ type ClearDefaultAuthorizerRequest struct {
 }
 
 // Send marshals and sends the ClearDefaultAuthorizer API request.
-func (r ClearDefaultAuthorizerRequest) Send() (*ClearDefaultAuthorizerOutput, error) {
+func (r ClearDefaultAuthorizerRequest) Send(ctx context.Context) (*ClearDefaultAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -607,7 +669,7 @@ func (r ClearDefaultAuthorizerRequest) Send() (*ClearDefaultAuthorizerOutput, er
 //
 //    // Example sending a request using the ClearDefaultAuthorizerRequest method.
 //    req := client.ClearDefaultAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -639,7 +701,8 @@ type CreateAuthorizerRequest struct {
 }
 
 // Send marshals and sends the CreateAuthorizer API request.
-func (r CreateAuthorizerRequest) Send() (*CreateAuthorizerOutput, error) {
+func (r CreateAuthorizerRequest) Send(ctx context.Context) (*CreateAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -655,7 +718,7 @@ func (r CreateAuthorizerRequest) Send() (*CreateAuthorizerOutput, error) {
 //
 //    // Example sending a request using the CreateAuthorizerRequest method.
 //    req := client.CreateAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -677,6 +740,55 @@ func (c *IoT) CreateAuthorizerRequest(input *CreateAuthorizerInput) CreateAuthor
 	return CreateAuthorizerRequest{Request: req, Input: input, Copy: c.CreateAuthorizerRequest}
 }
 
+const opCreateBillingGroup = "CreateBillingGroup"
+
+// CreateBillingGroupRequest is a API request type for the CreateBillingGroup API operation.
+type CreateBillingGroupRequest struct {
+	*aws.Request
+	Input *CreateBillingGroupInput
+	Copy  func(*CreateBillingGroupInput) CreateBillingGroupRequest
+}
+
+// Send marshals and sends the CreateBillingGroup API request.
+func (r CreateBillingGroupRequest) Send(ctx context.Context) (*CreateBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBillingGroupOutput), nil
+}
+
+// CreateBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Creates a billing group.
+//
+//    // Example sending a request using the CreateBillingGroupRequest method.
+//    req := client.CreateBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) CreateBillingGroupRequest(input *CreateBillingGroupInput) CreateBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateBillingGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/billing-groups/{billingGroupName}",
+	}
+
+	if input == nil {
+		input = &CreateBillingGroupInput{}
+	}
+
+	output := &CreateBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateBillingGroupRequest{Request: req, Input: input, Copy: c.CreateBillingGroupRequest}
+}
+
 const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
 
 // CreateCertificateFromCsrRequest is a API request type for the CreateCertificateFromCsr API operation.
@@ -687,7 +799,8 @@ type CreateCertificateFromCsrRequest struct {
 }
 
 // Send marshals and sends the CreateCertificateFromCsr API request.
-func (r CreateCertificateFromCsrRequest) Send() (*CreateCertificateFromCsrOutput, error) {
+func (r CreateCertificateFromCsrRequest) Send(ctx context.Context) (*CreateCertificateFromCsrOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -744,7 +857,7 @@ func (r CreateCertificateFromCsrRequest) Send() (*CreateCertificateFromCsrOutput
 //
 //    // Example sending a request using the CreateCertificateFromCsrRequest method.
 //    req := client.CreateCertificateFromCsrRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -766,6 +879,55 @@ func (c *IoT) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsrInp
 	return CreateCertificateFromCsrRequest{Request: req, Input: input, Copy: c.CreateCertificateFromCsrRequest}
 }
 
+const opCreateDynamicThingGroup = "CreateDynamicThingGroup"
+
+// CreateDynamicThingGroupRequest is a API request type for the CreateDynamicThingGroup API operation.
+type CreateDynamicThingGroupRequest struct {
+	*aws.Request
+	Input *CreateDynamicThingGroupInput
+	Copy  func(*CreateDynamicThingGroupInput) CreateDynamicThingGroupRequest
+}
+
+// Send marshals and sends the CreateDynamicThingGroup API request.
+func (r CreateDynamicThingGroupRequest) Send(ctx context.Context) (*CreateDynamicThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDynamicThingGroupOutput), nil
+}
+
+// CreateDynamicThingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Creates a dynamic thing group.
+//
+//    // Example sending a request using the CreateDynamicThingGroupRequest method.
+//    req := client.CreateDynamicThingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) CreateDynamicThingGroupRequest(input *CreateDynamicThingGroupInput) CreateDynamicThingGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateDynamicThingGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/dynamic-thing-groups/{thingGroupName}",
+	}
+
+	if input == nil {
+		input = &CreateDynamicThingGroupInput{}
+	}
+
+	output := &CreateDynamicThingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateDynamicThingGroupRequest{Request: req, Input: input, Copy: c.CreateDynamicThingGroupRequest}
+}
+
 const opCreateJob = "CreateJob"
 
 // CreateJobRequest is a API request type for the CreateJob API operation.
@@ -776,7 +938,8 @@ type CreateJobRequest struct {
 }
 
 // Send marshals and sends the CreateJob API request.
-func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -792,7 +955,7 @@ func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
 //
 //    // Example sending a request using the CreateJobRequest method.
 //    req := client.CreateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -824,7 +987,8 @@ type CreateKeysAndCertificateRequest struct {
 }
 
 // Send marshals and sends the CreateKeysAndCertificate API request.
-func (r CreateKeysAndCertificateRequest) Send() (*CreateKeysAndCertificateOutput, error) {
+func (r CreateKeysAndCertificateRequest) Send(ctx context.Context) (*CreateKeysAndCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -844,7 +1008,7 @@ func (r CreateKeysAndCertificateRequest) Send() (*CreateKeysAndCertificateOutput
 //
 //    // Example sending a request using the CreateKeysAndCertificateRequest method.
 //    req := client.CreateKeysAndCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -876,7 +1040,8 @@ type CreateOTAUpdateRequest struct {
 }
 
 // Send marshals and sends the CreateOTAUpdate API request.
-func (r CreateOTAUpdateRequest) Send() (*CreateOTAUpdateOutput, error) {
+func (r CreateOTAUpdateRequest) Send(ctx context.Context) (*CreateOTAUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -892,7 +1057,7 @@ func (r CreateOTAUpdateRequest) Send() (*CreateOTAUpdateOutput, error) {
 //
 //    // Example sending a request using the CreateOTAUpdateRequest method.
 //    req := client.CreateOTAUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -924,7 +1089,8 @@ type CreatePolicyRequest struct {
 }
 
 // Send marshals and sends the CreatePolicy API request.
-func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+func (r CreatePolicyRequest) Send(ctx context.Context) (*CreatePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,7 +1110,7 @@ func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
 //
 //    // Example sending a request using the CreatePolicyRequest method.
 //    req := client.CreatePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -976,7 +1142,8 @@ type CreatePolicyVersionRequest struct {
 }
 
 // Send marshals and sends the CreatePolicyVersion API request.
-func (r CreatePolicyVersionRequest) Send() (*CreatePolicyVersionOutput, error) {
+func (r CreatePolicyVersionRequest) Send(ctx context.Context) (*CreatePolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -999,7 +1166,7 @@ func (r CreatePolicyVersionRequest) Send() (*CreatePolicyVersionOutput, error) {
 //
 //    // Example sending a request using the CreatePolicyVersionRequest method.
 //    req := client.CreatePolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1031,7 +1198,8 @@ type CreateRoleAliasRequest struct {
 }
 
 // Send marshals and sends the CreateRoleAlias API request.
-func (r CreateRoleAliasRequest) Send() (*CreateRoleAliasOutput, error) {
+func (r CreateRoleAliasRequest) Send(ctx context.Context) (*CreateRoleAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1047,7 +1215,7 @@ func (r CreateRoleAliasRequest) Send() (*CreateRoleAliasOutput, error) {
 //
 //    // Example sending a request using the CreateRoleAliasRequest method.
 //    req := client.CreateRoleAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1079,7 +1247,8 @@ type CreateScheduledAuditRequest struct {
 }
 
 // Send marshals and sends the CreateScheduledAudit API request.
-func (r CreateScheduledAuditRequest) Send() (*CreateScheduledAuditOutput, error) {
+func (r CreateScheduledAuditRequest) Send(ctx context.Context) (*CreateScheduledAuditOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1095,7 +1264,7 @@ func (r CreateScheduledAuditRequest) Send() (*CreateScheduledAuditOutput, error)
 //
 //    // Example sending a request using the CreateScheduledAuditRequest method.
 //    req := client.CreateScheduledAuditRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1127,7 +1296,8 @@ type CreateSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the CreateSecurityProfile API request.
-func (r CreateSecurityProfileRequest) Send() (*CreateSecurityProfileOutput, error) {
+func (r CreateSecurityProfileRequest) Send(ctx context.Context) (*CreateSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1143,7 +1313,7 @@ func (r CreateSecurityProfileRequest) Send() (*CreateSecurityProfileOutput, erro
 //
 //    // Example sending a request using the CreateSecurityProfileRequest method.
 //    req := client.CreateSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1175,7 +1345,8 @@ type CreateStreamRequest struct {
 }
 
 // Send marshals and sends the CreateStream API request.
-func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
+func (r CreateStreamRequest) Send(ctx context.Context) (*CreateStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1197,7 +1368,7 @@ func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 //
 //    // Example sending a request using the CreateStreamRequest method.
 //    req := client.CreateStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1229,7 +1400,8 @@ type CreateThingRequest struct {
 }
 
 // Send marshals and sends the CreateThing API request.
-func (r CreateThingRequest) Send() (*CreateThingOutput, error) {
+func (r CreateThingRequest) Send(ctx context.Context) (*CreateThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1248,7 +1420,7 @@ func (r CreateThingRequest) Send() (*CreateThingOutput, error) {
 //
 //    // Example sending a request using the CreateThingRequest method.
 //    req := client.CreateThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1280,7 +1452,8 @@ type CreateThingGroupRequest struct {
 }
 
 // Send marshals and sends the CreateThingGroup API request.
-func (r CreateThingGroupRequest) Send() (*CreateThingGroupOutput, error) {
+func (r CreateThingGroupRequest) Send(ctx context.Context) (*CreateThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1299,7 +1472,7 @@ func (r CreateThingGroupRequest) Send() (*CreateThingGroupOutput, error) {
 //
 //    // Example sending a request using the CreateThingGroupRequest method.
 //    req := client.CreateThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1331,7 +1504,8 @@ type CreateThingTypeRequest struct {
 }
 
 // Send marshals and sends the CreateThingType API request.
-func (r CreateThingTypeRequest) Send() (*CreateThingTypeOutput, error) {
+func (r CreateThingTypeRequest) Send(ctx context.Context) (*CreateThingTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1347,7 +1521,7 @@ func (r CreateThingTypeRequest) Send() (*CreateThingTypeOutput, error) {
 //
 //    // Example sending a request using the CreateThingTypeRequest method.
 //    req := client.CreateThingTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1379,7 +1553,8 @@ type CreateTopicRuleRequest struct {
 }
 
 // Send marshals and sends the CreateTopicRule API request.
-func (r CreateTopicRuleRequest) Send() (*CreateTopicRuleOutput, error) {
+func (r CreateTopicRuleRequest) Send(ctx context.Context) (*CreateTopicRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1397,7 +1572,7 @@ func (r CreateTopicRuleRequest) Send() (*CreateTopicRuleOutput, error) {
 //
 //    // Example sending a request using the CreateTopicRuleRequest method.
 //    req := client.CreateTopicRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1431,7 +1606,8 @@ type DeleteAccountAuditConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteAccountAuditConfiguration API request.
-func (r DeleteAccountAuditConfigurationRequest) Send() (*DeleteAccountAuditConfigurationOutput, error) {
+func (r DeleteAccountAuditConfigurationRequest) Send(ctx context.Context) (*DeleteAccountAuditConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1449,7 +1625,7 @@ func (r DeleteAccountAuditConfigurationRequest) Send() (*DeleteAccountAuditConfi
 //
 //    // Example sending a request using the DeleteAccountAuditConfigurationRequest method.
 //    req := client.DeleteAccountAuditConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1481,7 +1657,8 @@ type DeleteAuthorizerRequest struct {
 }
 
 // Send marshals and sends the DeleteAuthorizer API request.
-func (r DeleteAuthorizerRequest) Send() (*DeleteAuthorizerOutput, error) {
+func (r DeleteAuthorizerRequest) Send(ctx context.Context) (*DeleteAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1497,7 +1674,7 @@ func (r DeleteAuthorizerRequest) Send() (*DeleteAuthorizerOutput, error) {
 //
 //    // Example sending a request using the DeleteAuthorizerRequest method.
 //    req := client.DeleteAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1519,6 +1696,55 @@ func (c *IoT) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAuthor
 	return DeleteAuthorizerRequest{Request: req, Input: input, Copy: c.DeleteAuthorizerRequest}
 }
 
+const opDeleteBillingGroup = "DeleteBillingGroup"
+
+// DeleteBillingGroupRequest is a API request type for the DeleteBillingGroup API operation.
+type DeleteBillingGroupRequest struct {
+	*aws.Request
+	Input *DeleteBillingGroupInput
+	Copy  func(*DeleteBillingGroupInput) DeleteBillingGroupRequest
+}
+
+// Send marshals and sends the DeleteBillingGroup API request.
+func (r DeleteBillingGroupRequest) Send(ctx context.Context) (*DeleteBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBillingGroupOutput), nil
+}
+
+// DeleteBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Deletes the billing group.
+//
+//    // Example sending a request using the DeleteBillingGroupRequest method.
+//    req := client.DeleteBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) DeleteBillingGroupRequest(input *DeleteBillingGroupInput) DeleteBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBillingGroup,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/billing-groups/{billingGroupName}",
+	}
+
+	if input == nil {
+		input = &DeleteBillingGroupInput{}
+	}
+
+	output := &DeleteBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteBillingGroupRequest{Request: req, Input: input, Copy: c.DeleteBillingGroupRequest}
+}
+
 const opDeleteCACertificate = "DeleteCACertificate"
 
 // DeleteCACertificateRequest is a API request type for the DeleteCACertificate API operation.
@@ -1529,7 +1755,8 @@ type DeleteCACertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteCACertificate API request.
-func (r DeleteCACertificateRequest) Send() (*DeleteCACertificateOutput, error) {
+func (r DeleteCACertificateRequest) Send(ctx context.Context) (*DeleteCACertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1545,7 +1772,7 @@ func (r DeleteCACertificateRequest) Send() (*DeleteCACertificateOutput, error) {
 //
 //    // Example sending a request using the DeleteCACertificateRequest method.
 //    req := client.DeleteCACertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1577,7 +1804,8 @@ type DeleteCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteCertificate API request.
-func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+func (r DeleteCertificateRequest) Send(ctx context.Context) (*DeleteCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1598,7 +1826,7 @@ func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
 //
 //    // Example sending a request using the DeleteCertificateRequest method.
 //    req := client.DeleteCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1622,6 +1850,55 @@ func (c *IoT) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCert
 	return DeleteCertificateRequest{Request: req, Input: input, Copy: c.DeleteCertificateRequest}
 }
 
+const opDeleteDynamicThingGroup = "DeleteDynamicThingGroup"
+
+// DeleteDynamicThingGroupRequest is a API request type for the DeleteDynamicThingGroup API operation.
+type DeleteDynamicThingGroupRequest struct {
+	*aws.Request
+	Input *DeleteDynamicThingGroupInput
+	Copy  func(*DeleteDynamicThingGroupInput) DeleteDynamicThingGroupRequest
+}
+
+// Send marshals and sends the DeleteDynamicThingGroup API request.
+func (r DeleteDynamicThingGroupRequest) Send(ctx context.Context) (*DeleteDynamicThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDynamicThingGroupOutput), nil
+}
+
+// DeleteDynamicThingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Deletes a dynamic thing group.
+//
+//    // Example sending a request using the DeleteDynamicThingGroupRequest method.
+//    req := client.DeleteDynamicThingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) DeleteDynamicThingGroupRequest(input *DeleteDynamicThingGroupInput) DeleteDynamicThingGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteDynamicThingGroup,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/dynamic-thing-groups/{thingGroupName}",
+	}
+
+	if input == nil {
+		input = &DeleteDynamicThingGroupInput{}
+	}
+
+	output := &DeleteDynamicThingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteDynamicThingGroupRequest{Request: req, Input: input, Copy: c.DeleteDynamicThingGroupRequest}
+}
+
 const opDeleteJob = "DeleteJob"
 
 // DeleteJobRequest is a API request type for the DeleteJob API operation.
@@ -1632,7 +1909,8 @@ type DeleteJobRequest struct {
 }
 
 // Send marshals and sends the DeleteJob API request.
-func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
+func (r DeleteJobRequest) Send(ctx context.Context) (*DeleteJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1657,7 +1935,7 @@ func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
 //
 //    // Example sending a request using the DeleteJobRequest method.
 //    req := client.DeleteJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1691,7 +1969,8 @@ type DeleteJobExecutionRequest struct {
 }
 
 // Send marshals and sends the DeleteJobExecution API request.
-func (r DeleteJobExecutionRequest) Send() (*DeleteJobExecutionOutput, error) {
+func (r DeleteJobExecutionRequest) Send(ctx context.Context) (*DeleteJobExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1707,7 +1986,7 @@ func (r DeleteJobExecutionRequest) Send() (*DeleteJobExecutionOutput, error) {
 //
 //    // Example sending a request using the DeleteJobExecutionRequest method.
 //    req := client.DeleteJobExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1741,7 +2020,8 @@ type DeleteOTAUpdateRequest struct {
 }
 
 // Send marshals and sends the DeleteOTAUpdate API request.
-func (r DeleteOTAUpdateRequest) Send() (*DeleteOTAUpdateOutput, error) {
+func (r DeleteOTAUpdateRequest) Send(ctx context.Context) (*DeleteOTAUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1757,7 +2037,7 @@ func (r DeleteOTAUpdateRequest) Send() (*DeleteOTAUpdateOutput, error) {
 //
 //    // Example sending a request using the DeleteOTAUpdateRequest method.
 //    req := client.DeleteOTAUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1789,7 +2069,8 @@ type DeletePolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePolicy API request.
-func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+func (r DeletePolicyRequest) Send(ctx context.Context) (*DeletePolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1815,7 +2096,7 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyRequest method.
 //    req := client.DeletePolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1849,7 +2130,8 @@ type DeletePolicyVersionRequest struct {
 }
 
 // Send marshals and sends the DeletePolicyVersion API request.
-func (r DeletePolicyVersionRequest) Send() (*DeletePolicyVersionOutput, error) {
+func (r DeletePolicyVersionRequest) Send(ctx context.Context) (*DeletePolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1868,7 +2150,7 @@ func (r DeletePolicyVersionRequest) Send() (*DeletePolicyVersionOutput, error) {
 //
 //    // Example sending a request using the DeletePolicyVersionRequest method.
 //    req := client.DeletePolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1902,7 +2184,8 @@ type DeleteRegistrationCodeRequest struct {
 }
 
 // Send marshals and sends the DeleteRegistrationCode API request.
-func (r DeleteRegistrationCodeRequest) Send() (*DeleteRegistrationCodeOutput, error) {
+func (r DeleteRegistrationCodeRequest) Send(ctx context.Context) (*DeleteRegistrationCodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1918,7 +2201,7 @@ func (r DeleteRegistrationCodeRequest) Send() (*DeleteRegistrationCodeOutput, er
 //
 //    // Example sending a request using the DeleteRegistrationCodeRequest method.
 //    req := client.DeleteRegistrationCodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1950,7 +2233,8 @@ type DeleteRoleAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteRoleAlias API request.
-func (r DeleteRoleAliasRequest) Send() (*DeleteRoleAliasOutput, error) {
+func (r DeleteRoleAliasRequest) Send(ctx context.Context) (*DeleteRoleAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1966,7 +2250,7 @@ func (r DeleteRoleAliasRequest) Send() (*DeleteRoleAliasOutput, error) {
 //
 //    // Example sending a request using the DeleteRoleAliasRequest method.
 //    req := client.DeleteRoleAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1998,7 +2282,8 @@ type DeleteScheduledAuditRequest struct {
 }
 
 // Send marshals and sends the DeleteScheduledAudit API request.
-func (r DeleteScheduledAuditRequest) Send() (*DeleteScheduledAuditOutput, error) {
+func (r DeleteScheduledAuditRequest) Send(ctx context.Context) (*DeleteScheduledAuditOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2014,7 +2299,7 @@ func (r DeleteScheduledAuditRequest) Send() (*DeleteScheduledAuditOutput, error)
 //
 //    // Example sending a request using the DeleteScheduledAuditRequest method.
 //    req := client.DeleteScheduledAuditRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2046,7 +2331,8 @@ type DeleteSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteSecurityProfile API request.
-func (r DeleteSecurityProfileRequest) Send() (*DeleteSecurityProfileOutput, error) {
+func (r DeleteSecurityProfileRequest) Send(ctx context.Context) (*DeleteSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2062,7 +2348,7 @@ func (r DeleteSecurityProfileRequest) Send() (*DeleteSecurityProfileOutput, erro
 //
 //    // Example sending a request using the DeleteSecurityProfileRequest method.
 //    req := client.DeleteSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2094,7 +2380,8 @@ type DeleteStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteStream API request.
-func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
+func (r DeleteStreamRequest) Send(ctx context.Context) (*DeleteStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2110,7 +2397,7 @@ func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
 //
 //    // Example sending a request using the DeleteStreamRequest method.
 //    req := client.DeleteStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2142,7 +2429,8 @@ type DeleteThingRequest struct {
 }
 
 // Send marshals and sends the DeleteThing API request.
-func (r DeleteThingRequest) Send() (*DeleteThingOutput, error) {
+func (r DeleteThingRequest) Send(ctx context.Context) (*DeleteThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2154,11 +2442,12 @@ func (r DeleteThingRequest) Send() (*DeleteThingOutput, error) {
 // DeleteThingRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Deletes the specified thing.
+// Deletes the specified thing. Returns successfully with no error if the deletion
+// is successful or you specify a thing that doesn't exist.
 //
 //    // Example sending a request using the DeleteThingRequest method.
 //    req := client.DeleteThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2190,7 +2479,8 @@ type DeleteThingGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteThingGroup API request.
-func (r DeleteThingGroupRequest) Send() (*DeleteThingGroupOutput, error) {
+func (r DeleteThingGroupRequest) Send(ctx context.Context) (*DeleteThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2206,7 +2496,7 @@ func (r DeleteThingGroupRequest) Send() (*DeleteThingGroupOutput, error) {
 //
 //    // Example sending a request using the DeleteThingGroupRequest method.
 //    req := client.DeleteThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2238,7 +2528,8 @@ type DeleteThingTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteThingType API request.
-func (r DeleteThingTypeRequest) Send() (*DeleteThingTypeOutput, error) {
+func (r DeleteThingTypeRequest) Send(ctx context.Context) (*DeleteThingTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2250,7 +2541,7 @@ func (r DeleteThingTypeRequest) Send() (*DeleteThingTypeOutput, error) {
 // DeleteThingTypeRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Deletes the specified thing type . You cannot delete a thing type if it has
+// Deletes the specified thing type. You cannot delete a thing type if it has
 // things associated with it. To delete a thing type, first mark it as deprecated
 // by calling DeprecateThingType, then remove any associated things by calling
 // UpdateThing to change the thing type on any associated thing, and finally
@@ -2258,7 +2549,7 @@ func (r DeleteThingTypeRequest) Send() (*DeleteThingTypeOutput, error) {
 //
 //    // Example sending a request using the DeleteThingTypeRequest method.
 //    req := client.DeleteThingTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2290,7 +2581,8 @@ type DeleteTopicRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteTopicRule API request.
-func (r DeleteTopicRuleRequest) Send() (*DeleteTopicRuleOutput, error) {
+func (r DeleteTopicRuleRequest) Send(ctx context.Context) (*DeleteTopicRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2306,7 +2598,7 @@ func (r DeleteTopicRuleRequest) Send() (*DeleteTopicRuleOutput, error) {
 //
 //    // Example sending a request using the DeleteTopicRuleRequest method.
 //    req := client.DeleteTopicRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2340,7 +2632,8 @@ type DeleteV2LoggingLevelRequest struct {
 }
 
 // Send marshals and sends the DeleteV2LoggingLevel API request.
-func (r DeleteV2LoggingLevelRequest) Send() (*DeleteV2LoggingLevelOutput, error) {
+func (r DeleteV2LoggingLevelRequest) Send(ctx context.Context) (*DeleteV2LoggingLevelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2356,7 +2649,7 @@ func (r DeleteV2LoggingLevelRequest) Send() (*DeleteV2LoggingLevelOutput, error)
 //
 //    // Example sending a request using the DeleteV2LoggingLevelRequest method.
 //    req := client.DeleteV2LoggingLevelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2390,7 +2683,8 @@ type DeprecateThingTypeRequest struct {
 }
 
 // Send marshals and sends the DeprecateThingType API request.
-func (r DeprecateThingTypeRequest) Send() (*DeprecateThingTypeOutput, error) {
+func (r DeprecateThingTypeRequest) Send(ctx context.Context) (*DeprecateThingTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2407,7 +2701,7 @@ func (r DeprecateThingTypeRequest) Send() (*DeprecateThingTypeOutput, error) {
 //
 //    // Example sending a request using the DeprecateThingTypeRequest method.
 //    req := client.DeprecateThingTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2439,7 +2733,8 @@ type DescribeAccountAuditConfigurationRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAuditConfiguration API request.
-func (r DescribeAccountAuditConfigurationRequest) Send() (*DescribeAccountAuditConfigurationOutput, error) {
+func (r DescribeAccountAuditConfigurationRequest) Send(ctx context.Context) (*DescribeAccountAuditConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2457,7 +2752,7 @@ func (r DescribeAccountAuditConfigurationRequest) Send() (*DescribeAccountAuditC
 //
 //    // Example sending a request using the DescribeAccountAuditConfigurationRequest method.
 //    req := client.DescribeAccountAuditConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2489,7 +2784,8 @@ type DescribeAuditTaskRequest struct {
 }
 
 // Send marshals and sends the DescribeAuditTask API request.
-func (r DescribeAuditTaskRequest) Send() (*DescribeAuditTaskOutput, error) {
+func (r DescribeAuditTaskRequest) Send(ctx context.Context) (*DescribeAuditTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2505,7 +2801,7 @@ func (r DescribeAuditTaskRequest) Send() (*DescribeAuditTaskOutput, error) {
 //
 //    // Example sending a request using the DescribeAuditTaskRequest method.
 //    req := client.DescribeAuditTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2537,7 +2833,8 @@ type DescribeAuthorizerRequest struct {
 }
 
 // Send marshals and sends the DescribeAuthorizer API request.
-func (r DescribeAuthorizerRequest) Send() (*DescribeAuthorizerOutput, error) {
+func (r DescribeAuthorizerRequest) Send(ctx context.Context) (*DescribeAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2553,7 +2850,7 @@ func (r DescribeAuthorizerRequest) Send() (*DescribeAuthorizerOutput, error) {
 //
 //    // Example sending a request using the DescribeAuthorizerRequest method.
 //    req := client.DescribeAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2575,6 +2872,55 @@ func (c *IoT) DescribeAuthorizerRequest(input *DescribeAuthorizerInput) Describe
 	return DescribeAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeAuthorizerRequest}
 }
 
+const opDescribeBillingGroup = "DescribeBillingGroup"
+
+// DescribeBillingGroupRequest is a API request type for the DescribeBillingGroup API operation.
+type DescribeBillingGroupRequest struct {
+	*aws.Request
+	Input *DescribeBillingGroupInput
+	Copy  func(*DescribeBillingGroupInput) DescribeBillingGroupRequest
+}
+
+// Send marshals and sends the DescribeBillingGroup API request.
+func (r DescribeBillingGroupRequest) Send(ctx context.Context) (*DescribeBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBillingGroupOutput), nil
+}
+
+// DescribeBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Returns information about a billing group.
+//
+//    // Example sending a request using the DescribeBillingGroupRequest method.
+//    req := client.DescribeBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) DescribeBillingGroupRequest(input *DescribeBillingGroupInput) DescribeBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opDescribeBillingGroup,
+		HTTPMethod: "GET",
+		HTTPPath:   "/billing-groups/{billingGroupName}",
+	}
+
+	if input == nil {
+		input = &DescribeBillingGroupInput{}
+	}
+
+	output := &DescribeBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeBillingGroupRequest{Request: req, Input: input, Copy: c.DescribeBillingGroupRequest}
+}
+
 const opDescribeCACertificate = "DescribeCACertificate"
 
 // DescribeCACertificateRequest is a API request type for the DescribeCACertificate API operation.
@@ -2585,7 +2931,8 @@ type DescribeCACertificateRequest struct {
 }
 
 // Send marshals and sends the DescribeCACertificate API request.
-func (r DescribeCACertificateRequest) Send() (*DescribeCACertificateOutput, error) {
+func (r DescribeCACertificateRequest) Send(ctx context.Context) (*DescribeCACertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2601,7 +2948,7 @@ func (r DescribeCACertificateRequest) Send() (*DescribeCACertificateOutput, erro
 //
 //    // Example sending a request using the DescribeCACertificateRequest method.
 //    req := client.DescribeCACertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2633,7 +2980,8 @@ type DescribeCertificateRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificate API request.
-func (r DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
+func (r DescribeCertificateRequest) Send(ctx context.Context) (*DescribeCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2649,7 +2997,7 @@ func (r DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
 //
 //    // Example sending a request using the DescribeCertificateRequest method.
 //    req := client.DescribeCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2681,7 +3029,8 @@ type DescribeDefaultAuthorizerRequest struct {
 }
 
 // Send marshals and sends the DescribeDefaultAuthorizer API request.
-func (r DescribeDefaultAuthorizerRequest) Send() (*DescribeDefaultAuthorizerOutput, error) {
+func (r DescribeDefaultAuthorizerRequest) Send(ctx context.Context) (*DescribeDefaultAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2697,7 +3046,7 @@ func (r DescribeDefaultAuthorizerRequest) Send() (*DescribeDefaultAuthorizerOutp
 //
 //    // Example sending a request using the DescribeDefaultAuthorizerRequest method.
 //    req := client.DescribeDefaultAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2729,7 +3078,8 @@ type DescribeEndpointRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpoint API request.
-func (r DescribeEndpointRequest) Send() (*DescribeEndpointOutput, error) {
+func (r DescribeEndpointRequest) Send(ctx context.Context) (*DescribeEndpointOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2745,7 +3095,7 @@ func (r DescribeEndpointRequest) Send() (*DescribeEndpointOutput, error) {
 //
 //    // Example sending a request using the DescribeEndpointRequest method.
 //    req := client.DescribeEndpointRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2777,7 +3127,8 @@ type DescribeEventConfigurationsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventConfigurations API request.
-func (r DescribeEventConfigurationsRequest) Send() (*DescribeEventConfigurationsOutput, error) {
+func (r DescribeEventConfigurationsRequest) Send(ctx context.Context) (*DescribeEventConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2793,7 +3144,7 @@ func (r DescribeEventConfigurationsRequest) Send() (*DescribeEventConfigurations
 //
 //    // Example sending a request using the DescribeEventConfigurationsRequest method.
 //    req := client.DescribeEventConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2825,7 +3176,8 @@ type DescribeIndexRequest struct {
 }
 
 // Send marshals and sends the DescribeIndex API request.
-func (r DescribeIndexRequest) Send() (*DescribeIndexOutput, error) {
+func (r DescribeIndexRequest) Send(ctx context.Context) (*DescribeIndexOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2841,7 +3193,7 @@ func (r DescribeIndexRequest) Send() (*DescribeIndexOutput, error) {
 //
 //    // Example sending a request using the DescribeIndexRequest method.
 //    req := client.DescribeIndexRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2873,7 +3225,8 @@ type DescribeJobRequest struct {
 }
 
 // Send marshals and sends the DescribeJob API request.
-func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+func (r DescribeJobRequest) Send(ctx context.Context) (*DescribeJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2889,7 +3242,7 @@ func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
 //
 //    // Example sending a request using the DescribeJobRequest method.
 //    req := client.DescribeJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2921,7 +3274,8 @@ type DescribeJobExecutionRequest struct {
 }
 
 // Send marshals and sends the DescribeJobExecution API request.
-func (r DescribeJobExecutionRequest) Send() (*DescribeJobExecutionOutput, error) {
+func (r DescribeJobExecutionRequest) Send(ctx context.Context) (*DescribeJobExecutionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2937,7 +3291,7 @@ func (r DescribeJobExecutionRequest) Send() (*DescribeJobExecutionOutput, error)
 //
 //    // Example sending a request using the DescribeJobExecutionRequest method.
 //    req := client.DescribeJobExecutionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2969,7 +3323,8 @@ type DescribeRoleAliasRequest struct {
 }
 
 // Send marshals and sends the DescribeRoleAlias API request.
-func (r DescribeRoleAliasRequest) Send() (*DescribeRoleAliasOutput, error) {
+func (r DescribeRoleAliasRequest) Send(ctx context.Context) (*DescribeRoleAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2985,7 +3340,7 @@ func (r DescribeRoleAliasRequest) Send() (*DescribeRoleAliasOutput, error) {
 //
 //    // Example sending a request using the DescribeRoleAliasRequest method.
 //    req := client.DescribeRoleAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3017,7 +3372,8 @@ type DescribeScheduledAuditRequest struct {
 }
 
 // Send marshals and sends the DescribeScheduledAudit API request.
-func (r DescribeScheduledAuditRequest) Send() (*DescribeScheduledAuditOutput, error) {
+func (r DescribeScheduledAuditRequest) Send(ctx context.Context) (*DescribeScheduledAuditOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3033,7 +3389,7 @@ func (r DescribeScheduledAuditRequest) Send() (*DescribeScheduledAuditOutput, er
 //
 //    // Example sending a request using the DescribeScheduledAuditRequest method.
 //    req := client.DescribeScheduledAuditRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3065,7 +3421,8 @@ type DescribeSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the DescribeSecurityProfile API request.
-func (r DescribeSecurityProfileRequest) Send() (*DescribeSecurityProfileOutput, error) {
+func (r DescribeSecurityProfileRequest) Send(ctx context.Context) (*DescribeSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3081,7 +3438,7 @@ func (r DescribeSecurityProfileRequest) Send() (*DescribeSecurityProfileOutput, 
 //
 //    // Example sending a request using the DescribeSecurityProfileRequest method.
 //    req := client.DescribeSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3113,7 +3470,8 @@ type DescribeStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeStream API request.
-func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+func (r DescribeStreamRequest) Send(ctx context.Context) (*DescribeStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3129,7 +3487,7 @@ func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
 //
 //    // Example sending a request using the DescribeStreamRequest method.
 //    req := client.DescribeStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3161,7 +3519,8 @@ type DescribeThingRequest struct {
 }
 
 // Send marshals and sends the DescribeThing API request.
-func (r DescribeThingRequest) Send() (*DescribeThingOutput, error) {
+func (r DescribeThingRequest) Send(ctx context.Context) (*DescribeThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3177,7 +3536,7 @@ func (r DescribeThingRequest) Send() (*DescribeThingOutput, error) {
 //
 //    // Example sending a request using the DescribeThingRequest method.
 //    req := client.DescribeThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3209,7 +3568,8 @@ type DescribeThingGroupRequest struct {
 }
 
 // Send marshals and sends the DescribeThingGroup API request.
-func (r DescribeThingGroupRequest) Send() (*DescribeThingGroupOutput, error) {
+func (r DescribeThingGroupRequest) Send(ctx context.Context) (*DescribeThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3225,7 +3585,7 @@ func (r DescribeThingGroupRequest) Send() (*DescribeThingGroupOutput, error) {
 //
 //    // Example sending a request using the DescribeThingGroupRequest method.
 //    req := client.DescribeThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3257,7 +3617,8 @@ type DescribeThingRegistrationTaskRequest struct {
 }
 
 // Send marshals and sends the DescribeThingRegistrationTask API request.
-func (r DescribeThingRegistrationTaskRequest) Send() (*DescribeThingRegistrationTaskOutput, error) {
+func (r DescribeThingRegistrationTaskRequest) Send(ctx context.Context) (*DescribeThingRegistrationTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3273,7 +3634,7 @@ func (r DescribeThingRegistrationTaskRequest) Send() (*DescribeThingRegistration
 //
 //    // Example sending a request using the DescribeThingRegistrationTaskRequest method.
 //    req := client.DescribeThingRegistrationTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3305,7 +3666,8 @@ type DescribeThingTypeRequest struct {
 }
 
 // Send marshals and sends the DescribeThingType API request.
-func (r DescribeThingTypeRequest) Send() (*DescribeThingTypeOutput, error) {
+func (r DescribeThingTypeRequest) Send(ctx context.Context) (*DescribeThingTypeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3321,7 +3683,7 @@ func (r DescribeThingTypeRequest) Send() (*DescribeThingTypeOutput, error) {
 //
 //    // Example sending a request using the DescribeThingTypeRequest method.
 //    req := client.DescribeThingTypeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3353,7 +3715,8 @@ type DetachPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachPolicy API request.
-func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+func (r DetachPolicyRequest) Send(ctx context.Context) (*DetachPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3369,7 +3732,7 @@ func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
 //
 //    // Example sending a request using the DetachPolicyRequest method.
 //    req := client.DetachPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3403,7 +3766,8 @@ type DetachPrincipalPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachPrincipalPolicy API request.
-func (r DetachPrincipalPolicyRequest) Send() (*DetachPrincipalPolicyOutput, error) {
+func (r DetachPrincipalPolicyRequest) Send(ctx context.Context) (*DetachPrincipalPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3421,7 +3785,7 @@ func (r DetachPrincipalPolicyRequest) Send() (*DetachPrincipalPolicyOutput, erro
 //
 //    // Example sending a request using the DetachPrincipalPolicyRequest method.
 //    req := client.DetachPrincipalPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3458,7 +3822,8 @@ type DetachSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the DetachSecurityProfile API request.
-func (r DetachSecurityProfileRequest) Send() (*DetachSecurityProfileOutput, error) {
+func (r DetachSecurityProfileRequest) Send(ctx context.Context) (*DetachSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3475,7 +3840,7 @@ func (r DetachSecurityProfileRequest) Send() (*DetachSecurityProfileOutput, erro
 //
 //    // Example sending a request using the DetachSecurityProfileRequest method.
 //    req := client.DetachSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3507,7 +3872,8 @@ type DetachThingPrincipalRequest struct {
 }
 
 // Send marshals and sends the DetachThingPrincipal API request.
-func (r DetachThingPrincipalRequest) Send() (*DetachThingPrincipalOutput, error) {
+func (r DetachThingPrincipalRequest) Send(ctx context.Context) (*DetachThingPrincipalOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3521,9 +3887,12 @@ func (r DetachThingPrincipalRequest) Send() (*DetachThingPrincipalOutput, error)
 //
 // Detaches the specified principal from the specified thing.
 //
+// This call is asynchronous. It might take several seconds for the detachment
+// to propagate.
+//
 //    // Example sending a request using the DetachThingPrincipalRequest method.
 //    req := client.DetachThingPrincipalRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3555,7 +3924,8 @@ type DisableTopicRuleRequest struct {
 }
 
 // Send marshals and sends the DisableTopicRule API request.
-func (r DisableTopicRuleRequest) Send() (*DisableTopicRuleOutput, error) {
+func (r DisableTopicRuleRequest) Send(ctx context.Context) (*DisableTopicRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3571,7 +3941,7 @@ func (r DisableTopicRuleRequest) Send() (*DisableTopicRuleOutput, error) {
 //
 //    // Example sending a request using the DisableTopicRuleRequest method.
 //    req := client.DisableTopicRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3605,7 +3975,8 @@ type EnableTopicRuleRequest struct {
 }
 
 // Send marshals and sends the EnableTopicRule API request.
-func (r EnableTopicRuleRequest) Send() (*EnableTopicRuleOutput, error) {
+func (r EnableTopicRuleRequest) Send(ctx context.Context) (*EnableTopicRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3621,7 +3992,7 @@ func (r EnableTopicRuleRequest) Send() (*EnableTopicRuleOutput, error) {
 //
 //    // Example sending a request using the EnableTopicRuleRequest method.
 //    req := client.EnableTopicRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3655,7 +4026,8 @@ type GetEffectivePoliciesRequest struct {
 }
 
 // Send marshals and sends the GetEffectivePolicies API request.
-func (r GetEffectivePoliciesRequest) Send() (*GetEffectivePoliciesOutput, error) {
+func (r GetEffectivePoliciesRequest) Send(ctx context.Context) (*GetEffectivePoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3672,7 +4044,7 @@ func (r GetEffectivePoliciesRequest) Send() (*GetEffectivePoliciesOutput, error)
 //
 //    // Example sending a request using the GetEffectivePoliciesRequest method.
 //    req := client.GetEffectivePoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3704,7 +4076,8 @@ type GetIndexingConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetIndexingConfiguration API request.
-func (r GetIndexingConfigurationRequest) Send() (*GetIndexingConfigurationOutput, error) {
+func (r GetIndexingConfigurationRequest) Send(ctx context.Context) (*GetIndexingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3720,7 +4093,7 @@ func (r GetIndexingConfigurationRequest) Send() (*GetIndexingConfigurationOutput
 //
 //    // Example sending a request using the GetIndexingConfigurationRequest method.
 //    req := client.GetIndexingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3752,7 +4125,8 @@ type GetJobDocumentRequest struct {
 }
 
 // Send marshals and sends the GetJobDocument API request.
-func (r GetJobDocumentRequest) Send() (*GetJobDocumentOutput, error) {
+func (r GetJobDocumentRequest) Send(ctx context.Context) (*GetJobDocumentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3768,7 +4142,7 @@ func (r GetJobDocumentRequest) Send() (*GetJobDocumentOutput, error) {
 //
 //    // Example sending a request using the GetJobDocumentRequest method.
 //    req := client.GetJobDocumentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3800,7 +4174,8 @@ type GetLoggingOptionsRequest struct {
 }
 
 // Send marshals and sends the GetLoggingOptions API request.
-func (r GetLoggingOptionsRequest) Send() (*GetLoggingOptionsOutput, error) {
+func (r GetLoggingOptionsRequest) Send(ctx context.Context) (*GetLoggingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3818,7 +4193,7 @@ func (r GetLoggingOptionsRequest) Send() (*GetLoggingOptionsOutput, error) {
 //
 //    // Example sending a request using the GetLoggingOptionsRequest method.
 //    req := client.GetLoggingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3850,7 +4225,8 @@ type GetOTAUpdateRequest struct {
 }
 
 // Send marshals and sends the GetOTAUpdate API request.
-func (r GetOTAUpdateRequest) Send() (*GetOTAUpdateOutput, error) {
+func (r GetOTAUpdateRequest) Send(ctx context.Context) (*GetOTAUpdateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3866,7 +4242,7 @@ func (r GetOTAUpdateRequest) Send() (*GetOTAUpdateOutput, error) {
 //
 //    // Example sending a request using the GetOTAUpdateRequest method.
 //    req := client.GetOTAUpdateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3898,7 +4274,8 @@ type GetPolicyRequest struct {
 }
 
 // Send marshals and sends the GetPolicy API request.
-func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+func (r GetPolicyRequest) Send(ctx context.Context) (*GetPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3915,7 +4292,7 @@ func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
 //
 //    // Example sending a request using the GetPolicyRequest method.
 //    req := client.GetPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3947,7 +4324,8 @@ type GetPolicyVersionRequest struct {
 }
 
 // Send marshals and sends the GetPolicyVersion API request.
-func (r GetPolicyVersionRequest) Send() (*GetPolicyVersionOutput, error) {
+func (r GetPolicyVersionRequest) Send(ctx context.Context) (*GetPolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3963,7 +4341,7 @@ func (r GetPolicyVersionRequest) Send() (*GetPolicyVersionOutput, error) {
 //
 //    // Example sending a request using the GetPolicyVersionRequest method.
 //    req := client.GetPolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3995,7 +4373,8 @@ type GetRegistrationCodeRequest struct {
 }
 
 // Send marshals and sends the GetRegistrationCode API request.
-func (r GetRegistrationCodeRequest) Send() (*GetRegistrationCodeOutput, error) {
+func (r GetRegistrationCodeRequest) Send(ctx context.Context) (*GetRegistrationCodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4011,7 +4390,7 @@ func (r GetRegistrationCodeRequest) Send() (*GetRegistrationCodeOutput, error) {
 //
 //    // Example sending a request using the GetRegistrationCodeRequest method.
 //    req := client.GetRegistrationCodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4043,7 +4422,8 @@ type GetTopicRuleRequest struct {
 }
 
 // Send marshals and sends the GetTopicRule API request.
-func (r GetTopicRuleRequest) Send() (*GetTopicRuleOutput, error) {
+func (r GetTopicRuleRequest) Send(ctx context.Context) (*GetTopicRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4059,7 +4439,7 @@ func (r GetTopicRuleRequest) Send() (*GetTopicRuleOutput, error) {
 //
 //    // Example sending a request using the GetTopicRuleRequest method.
 //    req := client.GetTopicRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4091,7 +4471,8 @@ type GetV2LoggingOptionsRequest struct {
 }
 
 // Send marshals and sends the GetV2LoggingOptions API request.
-func (r GetV2LoggingOptionsRequest) Send() (*GetV2LoggingOptionsOutput, error) {
+func (r GetV2LoggingOptionsRequest) Send(ctx context.Context) (*GetV2LoggingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4107,7 +4488,7 @@ func (r GetV2LoggingOptionsRequest) Send() (*GetV2LoggingOptionsOutput, error) {
 //
 //    // Example sending a request using the GetV2LoggingOptionsRequest method.
 //    req := client.GetV2LoggingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4139,7 +4520,8 @@ type ListActiveViolationsRequest struct {
 }
 
 // Send marshals and sends the ListActiveViolations API request.
-func (r ListActiveViolationsRequest) Send() (*ListActiveViolationsOutput, error) {
+func (r ListActiveViolationsRequest) Send(ctx context.Context) (*ListActiveViolationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4155,7 +4537,7 @@ func (r ListActiveViolationsRequest) Send() (*ListActiveViolationsOutput, error)
 //
 //    // Example sending a request using the ListActiveViolationsRequest method.
 //    req := client.ListActiveViolationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4187,7 +4569,8 @@ type ListAttachedPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListAttachedPolicies API request.
-func (r ListAttachedPoliciesRequest) Send() (*ListAttachedPoliciesOutput, error) {
+func (r ListAttachedPoliciesRequest) Send(ctx context.Context) (*ListAttachedPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4203,7 +4586,7 @@ func (r ListAttachedPoliciesRequest) Send() (*ListAttachedPoliciesOutput, error)
 //
 //    // Example sending a request using the ListAttachedPoliciesRequest method.
 //    req := client.ListAttachedPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4235,7 +4618,8 @@ type ListAuditFindingsRequest struct {
 }
 
 // Send marshals and sends the ListAuditFindings API request.
-func (r ListAuditFindingsRequest) Send() (*ListAuditFindingsOutput, error) {
+func (r ListAuditFindingsRequest) Send(ctx context.Context) (*ListAuditFindingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4253,7 +4637,7 @@ func (r ListAuditFindingsRequest) Send() (*ListAuditFindingsOutput, error) {
 //
 //    // Example sending a request using the ListAuditFindingsRequest method.
 //    req := client.ListAuditFindingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4285,7 +4669,8 @@ type ListAuditTasksRequest struct {
 }
 
 // Send marshals and sends the ListAuditTasks API request.
-func (r ListAuditTasksRequest) Send() (*ListAuditTasksOutput, error) {
+func (r ListAuditTasksRequest) Send(ctx context.Context) (*ListAuditTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4302,7 +4687,7 @@ func (r ListAuditTasksRequest) Send() (*ListAuditTasksOutput, error) {
 //
 //    // Example sending a request using the ListAuditTasksRequest method.
 //    req := client.ListAuditTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4334,7 +4719,8 @@ type ListAuthorizersRequest struct {
 }
 
 // Send marshals and sends the ListAuthorizers API request.
-func (r ListAuthorizersRequest) Send() (*ListAuthorizersOutput, error) {
+func (r ListAuthorizersRequest) Send(ctx context.Context) (*ListAuthorizersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4350,7 +4736,7 @@ func (r ListAuthorizersRequest) Send() (*ListAuthorizersOutput, error) {
 //
 //    // Example sending a request using the ListAuthorizersRequest method.
 //    req := client.ListAuthorizersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4372,6 +4758,55 @@ func (c *IoT) ListAuthorizersRequest(input *ListAuthorizersInput) ListAuthorizer
 	return ListAuthorizersRequest{Request: req, Input: input, Copy: c.ListAuthorizersRequest}
 }
 
+const opListBillingGroups = "ListBillingGroups"
+
+// ListBillingGroupsRequest is a API request type for the ListBillingGroups API operation.
+type ListBillingGroupsRequest struct {
+	*aws.Request
+	Input *ListBillingGroupsInput
+	Copy  func(*ListBillingGroupsInput) ListBillingGroupsRequest
+}
+
+// Send marshals and sends the ListBillingGroups API request.
+func (r ListBillingGroupsRequest) Send(ctx context.Context) (*ListBillingGroupsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBillingGroupsOutput), nil
+}
+
+// ListBillingGroupsRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Lists the billing groups you have created.
+//
+//    // Example sending a request using the ListBillingGroupsRequest method.
+//    req := client.ListBillingGroupsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) ListBillingGroupsRequest(input *ListBillingGroupsInput) ListBillingGroupsRequest {
+	op := &aws.Operation{
+		Name:       opListBillingGroups,
+		HTTPMethod: "GET",
+		HTTPPath:   "/billing-groups",
+	}
+
+	if input == nil {
+		input = &ListBillingGroupsInput{}
+	}
+
+	output := &ListBillingGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListBillingGroupsRequest{Request: req, Input: input, Copy: c.ListBillingGroupsRequest}
+}
+
 const opListCACertificates = "ListCACertificates"
 
 // ListCACertificatesRequest is a API request type for the ListCACertificates API operation.
@@ -4382,7 +4817,8 @@ type ListCACertificatesRequest struct {
 }
 
 // Send marshals and sends the ListCACertificates API request.
-func (r ListCACertificatesRequest) Send() (*ListCACertificatesOutput, error) {
+func (r ListCACertificatesRequest) Send(ctx context.Context) (*ListCACertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4401,7 +4837,7 @@ func (r ListCACertificatesRequest) Send() (*ListCACertificatesOutput, error) {
 //
 //    // Example sending a request using the ListCACertificatesRequest method.
 //    req := client.ListCACertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4433,7 +4869,8 @@ type ListCertificatesRequest struct {
 }
 
 // Send marshals and sends the ListCertificates API request.
-func (r ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
+func (r ListCertificatesRequest) Send(ctx context.Context) (*ListCertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4452,7 +4889,7 @@ func (r ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
 //
 //    // Example sending a request using the ListCertificatesRequest method.
 //    req := client.ListCertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4484,7 +4921,8 @@ type ListCertificatesByCARequest struct {
 }
 
 // Send marshals and sends the ListCertificatesByCA API request.
-func (r ListCertificatesByCARequest) Send() (*ListCertificatesByCAOutput, error) {
+func (r ListCertificatesByCARequest) Send(ctx context.Context) (*ListCertificatesByCAOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4500,7 +4938,7 @@ func (r ListCertificatesByCARequest) Send() (*ListCertificatesByCAOutput, error)
 //
 //    // Example sending a request using the ListCertificatesByCARequest method.
 //    req := client.ListCertificatesByCARequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4532,7 +4970,8 @@ type ListIndicesRequest struct {
 }
 
 // Send marshals and sends the ListIndices API request.
-func (r ListIndicesRequest) Send() (*ListIndicesOutput, error) {
+func (r ListIndicesRequest) Send(ctx context.Context) (*ListIndicesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4548,7 +4987,7 @@ func (r ListIndicesRequest) Send() (*ListIndicesOutput, error) {
 //
 //    // Example sending a request using the ListIndicesRequest method.
 //    req := client.ListIndicesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4580,7 +5019,8 @@ type ListJobExecutionsForJobRequest struct {
 }
 
 // Send marshals and sends the ListJobExecutionsForJob API request.
-func (r ListJobExecutionsForJobRequest) Send() (*ListJobExecutionsForJobOutput, error) {
+func (r ListJobExecutionsForJobRequest) Send(ctx context.Context) (*ListJobExecutionsForJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4596,7 +5036,7 @@ func (r ListJobExecutionsForJobRequest) Send() (*ListJobExecutionsForJobOutput, 
 //
 //    // Example sending a request using the ListJobExecutionsForJobRequest method.
 //    req := client.ListJobExecutionsForJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4628,7 +5068,8 @@ type ListJobExecutionsForThingRequest struct {
 }
 
 // Send marshals and sends the ListJobExecutionsForThing API request.
-func (r ListJobExecutionsForThingRequest) Send() (*ListJobExecutionsForThingOutput, error) {
+func (r ListJobExecutionsForThingRequest) Send(ctx context.Context) (*ListJobExecutionsForThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4644,7 +5085,7 @@ func (r ListJobExecutionsForThingRequest) Send() (*ListJobExecutionsForThingOutp
 //
 //    // Example sending a request using the ListJobExecutionsForThingRequest method.
 //    req := client.ListJobExecutionsForThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4676,7 +5117,8 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4692,7 +5134,7 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4724,7 +5166,8 @@ type ListOTAUpdatesRequest struct {
 }
 
 // Send marshals and sends the ListOTAUpdates API request.
-func (r ListOTAUpdatesRequest) Send() (*ListOTAUpdatesOutput, error) {
+func (r ListOTAUpdatesRequest) Send(ctx context.Context) (*ListOTAUpdatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4740,7 +5183,7 @@ func (r ListOTAUpdatesRequest) Send() (*ListOTAUpdatesOutput, error) {
 //
 //    // Example sending a request using the ListOTAUpdatesRequest method.
 //    req := client.ListOTAUpdatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4772,7 +5215,8 @@ type ListOutgoingCertificatesRequest struct {
 }
 
 // Send marshals and sends the ListOutgoingCertificates API request.
-func (r ListOutgoingCertificatesRequest) Send() (*ListOutgoingCertificatesOutput, error) {
+func (r ListOutgoingCertificatesRequest) Send(ctx context.Context) (*ListOutgoingCertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4788,7 +5232,7 @@ func (r ListOutgoingCertificatesRequest) Send() (*ListOutgoingCertificatesOutput
 //
 //    // Example sending a request using the ListOutgoingCertificatesRequest method.
 //    req := client.ListOutgoingCertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4820,7 +5264,8 @@ type ListPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListPolicies API request.
-func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+func (r ListPoliciesRequest) Send(ctx context.Context) (*ListPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4836,7 +5281,7 @@ func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
 //
 //    // Example sending a request using the ListPoliciesRequest method.
 //    req := client.ListPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4868,7 +5313,8 @@ type ListPolicyPrincipalsRequest struct {
 }
 
 // Send marshals and sends the ListPolicyPrincipals API request.
-func (r ListPolicyPrincipalsRequest) Send() (*ListPolicyPrincipalsOutput, error) {
+func (r ListPolicyPrincipalsRequest) Send(ctx context.Context) (*ListPolicyPrincipalsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4886,7 +5332,7 @@ func (r ListPolicyPrincipalsRequest) Send() (*ListPolicyPrincipalsOutput, error)
 //
 //    // Example sending a request using the ListPolicyPrincipalsRequest method.
 //    req := client.ListPolicyPrincipalsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4921,7 +5367,8 @@ type ListPolicyVersionsRequest struct {
 }
 
 // Send marshals and sends the ListPolicyVersions API request.
-func (r ListPolicyVersionsRequest) Send() (*ListPolicyVersionsOutput, error) {
+func (r ListPolicyVersionsRequest) Send(ctx context.Context) (*ListPolicyVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4937,7 +5384,7 @@ func (r ListPolicyVersionsRequest) Send() (*ListPolicyVersionsOutput, error) {
 //
 //    // Example sending a request using the ListPolicyVersionsRequest method.
 //    req := client.ListPolicyVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4969,7 +5416,8 @@ type ListPrincipalPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListPrincipalPolicies API request.
-func (r ListPrincipalPoliciesRequest) Send() (*ListPrincipalPoliciesOutput, error) {
+func (r ListPrincipalPoliciesRequest) Send(ctx context.Context) (*ListPrincipalPoliciesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4988,7 +5436,7 @@ func (r ListPrincipalPoliciesRequest) Send() (*ListPrincipalPoliciesOutput, erro
 //
 //    // Example sending a request using the ListPrincipalPoliciesRequest method.
 //    req := client.ListPrincipalPoliciesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5023,7 +5471,8 @@ type ListPrincipalThingsRequest struct {
 }
 
 // Send marshals and sends the ListPrincipalThings API request.
-func (r ListPrincipalThingsRequest) Send() (*ListPrincipalThingsOutput, error) {
+func (r ListPrincipalThingsRequest) Send(ctx context.Context) (*ListPrincipalThingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5039,7 +5488,7 @@ func (r ListPrincipalThingsRequest) Send() (*ListPrincipalThingsOutput, error) {
 //
 //    // Example sending a request using the ListPrincipalThingsRequest method.
 //    req := client.ListPrincipalThingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5071,7 +5520,8 @@ type ListRoleAliasesRequest struct {
 }
 
 // Send marshals and sends the ListRoleAliases API request.
-func (r ListRoleAliasesRequest) Send() (*ListRoleAliasesOutput, error) {
+func (r ListRoleAliasesRequest) Send(ctx context.Context) (*ListRoleAliasesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5087,7 +5537,7 @@ func (r ListRoleAliasesRequest) Send() (*ListRoleAliasesOutput, error) {
 //
 //    // Example sending a request using the ListRoleAliasesRequest method.
 //    req := client.ListRoleAliasesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5119,7 +5569,8 @@ type ListScheduledAuditsRequest struct {
 }
 
 // Send marshals and sends the ListScheduledAudits API request.
-func (r ListScheduledAuditsRequest) Send() (*ListScheduledAuditsOutput, error) {
+func (r ListScheduledAuditsRequest) Send(ctx context.Context) (*ListScheduledAuditsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5135,7 +5586,7 @@ func (r ListScheduledAuditsRequest) Send() (*ListScheduledAuditsOutput, error) {
 //
 //    // Example sending a request using the ListScheduledAuditsRequest method.
 //    req := client.ListScheduledAuditsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5167,7 +5618,8 @@ type ListSecurityProfilesRequest struct {
 }
 
 // Send marshals and sends the ListSecurityProfiles API request.
-func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error) {
+func (r ListSecurityProfilesRequest) Send(ctx context.Context) (*ListSecurityProfilesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5185,7 +5637,7 @@ func (r ListSecurityProfilesRequest) Send() (*ListSecurityProfilesOutput, error)
 //
 //    // Example sending a request using the ListSecurityProfilesRequest method.
 //    req := client.ListSecurityProfilesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5217,7 +5669,8 @@ type ListSecurityProfilesForTargetRequest struct {
 }
 
 // Send marshals and sends the ListSecurityProfilesForTarget API request.
-func (r ListSecurityProfilesForTargetRequest) Send() (*ListSecurityProfilesForTargetOutput, error) {
+func (r ListSecurityProfilesForTargetRequest) Send(ctx context.Context) (*ListSecurityProfilesForTargetOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5233,7 +5686,7 @@ func (r ListSecurityProfilesForTargetRequest) Send() (*ListSecurityProfilesForTa
 //
 //    // Example sending a request using the ListSecurityProfilesForTargetRequest method.
 //    req := client.ListSecurityProfilesForTargetRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5265,7 +5718,8 @@ type ListStreamsRequest struct {
 }
 
 // Send marshals and sends the ListStreams API request.
-func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+func (r ListStreamsRequest) Send(ctx context.Context) (*ListStreamsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5281,7 +5735,7 @@ func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
 //
 //    // Example sending a request using the ListStreamsRequest method.
 //    req := client.ListStreamsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5303,6 +5757,55 @@ func (c *IoT) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
 	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Lists the tags (metadata) you have assigned to the resource.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "GET",
+		HTTPPath:   "/tags",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
 const opListTargetsForPolicy = "ListTargetsForPolicy"
 
 // ListTargetsForPolicyRequest is a API request type for the ListTargetsForPolicy API operation.
@@ -5313,7 +5816,8 @@ type ListTargetsForPolicyRequest struct {
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
-func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error) {
+func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForPolicyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5329,7 +5833,7 @@ func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error)
 //
 //    // Example sending a request using the ListTargetsForPolicyRequest method.
 //    req := client.ListTargetsForPolicyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5361,7 +5865,8 @@ type ListTargetsForSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the ListTargetsForSecurityProfile API request.
-func (r ListTargetsForSecurityProfileRequest) Send() (*ListTargetsForSecurityProfileOutput, error) {
+func (r ListTargetsForSecurityProfileRequest) Send(ctx context.Context) (*ListTargetsForSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5378,7 +5883,7 @@ func (r ListTargetsForSecurityProfileRequest) Send() (*ListTargetsForSecurityPro
 //
 //    // Example sending a request using the ListTargetsForSecurityProfileRequest method.
 //    req := client.ListTargetsForSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5410,7 +5915,8 @@ type ListThingGroupsRequest struct {
 }
 
 // Send marshals and sends the ListThingGroups API request.
-func (r ListThingGroupsRequest) Send() (*ListThingGroupsOutput, error) {
+func (r ListThingGroupsRequest) Send(ctx context.Context) (*ListThingGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5426,7 +5932,7 @@ func (r ListThingGroupsRequest) Send() (*ListThingGroupsOutput, error) {
 //
 //    // Example sending a request using the ListThingGroupsRequest method.
 //    req := client.ListThingGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5458,7 +5964,8 @@ type ListThingGroupsForThingRequest struct {
 }
 
 // Send marshals and sends the ListThingGroupsForThing API request.
-func (r ListThingGroupsForThingRequest) Send() (*ListThingGroupsForThingOutput, error) {
+func (r ListThingGroupsForThingRequest) Send(ctx context.Context) (*ListThingGroupsForThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5474,7 +5981,7 @@ func (r ListThingGroupsForThingRequest) Send() (*ListThingGroupsForThingOutput, 
 //
 //    // Example sending a request using the ListThingGroupsForThingRequest method.
 //    req := client.ListThingGroupsForThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5506,7 +6013,8 @@ type ListThingPrincipalsRequest struct {
 }
 
 // Send marshals and sends the ListThingPrincipals API request.
-func (r ListThingPrincipalsRequest) Send() (*ListThingPrincipalsOutput, error) {
+func (r ListThingPrincipalsRequest) Send(ctx context.Context) (*ListThingPrincipalsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5522,7 +6030,7 @@ func (r ListThingPrincipalsRequest) Send() (*ListThingPrincipalsOutput, error) {
 //
 //    // Example sending a request using the ListThingPrincipalsRequest method.
 //    req := client.ListThingPrincipalsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5554,7 +6062,8 @@ type ListThingRegistrationTaskReportsRequest struct {
 }
 
 // Send marshals and sends the ListThingRegistrationTaskReports API request.
-func (r ListThingRegistrationTaskReportsRequest) Send() (*ListThingRegistrationTaskReportsOutput, error) {
+func (r ListThingRegistrationTaskReportsRequest) Send(ctx context.Context) (*ListThingRegistrationTaskReportsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5570,7 +6079,7 @@ func (r ListThingRegistrationTaskReportsRequest) Send() (*ListThingRegistrationT
 //
 //    // Example sending a request using the ListThingRegistrationTaskReportsRequest method.
 //    req := client.ListThingRegistrationTaskReportsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5602,7 +6111,8 @@ type ListThingRegistrationTasksRequest struct {
 }
 
 // Send marshals and sends the ListThingRegistrationTasks API request.
-func (r ListThingRegistrationTasksRequest) Send() (*ListThingRegistrationTasksOutput, error) {
+func (r ListThingRegistrationTasksRequest) Send(ctx context.Context) (*ListThingRegistrationTasksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5618,7 +6128,7 @@ func (r ListThingRegistrationTasksRequest) Send() (*ListThingRegistrationTasksOu
 //
 //    // Example sending a request using the ListThingRegistrationTasksRequest method.
 //    req := client.ListThingRegistrationTasksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5650,7 +6160,8 @@ type ListThingTypesRequest struct {
 }
 
 // Send marshals and sends the ListThingTypes API request.
-func (r ListThingTypesRequest) Send() (*ListThingTypesOutput, error) {
+func (r ListThingTypesRequest) Send(ctx context.Context) (*ListThingTypesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5666,7 +6177,7 @@ func (r ListThingTypesRequest) Send() (*ListThingTypesOutput, error) {
 //
 //    // Example sending a request using the ListThingTypesRequest method.
 //    req := client.ListThingTypesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5698,7 +6209,8 @@ type ListThingsRequest struct {
 }
 
 // Send marshals and sends the ListThings API request.
-func (r ListThingsRequest) Send() (*ListThingsOutput, error) {
+func (r ListThingsRequest) Send(ctx context.Context) (*ListThingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5717,7 +6229,7 @@ func (r ListThingsRequest) Send() (*ListThingsOutput, error) {
 //
 //    // Example sending a request using the ListThingsRequest method.
 //    req := client.ListThingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5739,6 +6251,55 @@ func (c *IoT) ListThingsRequest(input *ListThingsInput) ListThingsRequest {
 	return ListThingsRequest{Request: req, Input: input, Copy: c.ListThingsRequest}
 }
 
+const opListThingsInBillingGroup = "ListThingsInBillingGroup"
+
+// ListThingsInBillingGroupRequest is a API request type for the ListThingsInBillingGroup API operation.
+type ListThingsInBillingGroupRequest struct {
+	*aws.Request
+	Input *ListThingsInBillingGroupInput
+	Copy  func(*ListThingsInBillingGroupInput) ListThingsInBillingGroupRequest
+}
+
+// Send marshals and sends the ListThingsInBillingGroup API request.
+func (r ListThingsInBillingGroupRequest) Send(ctx context.Context) (*ListThingsInBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListThingsInBillingGroupOutput), nil
+}
+
+// ListThingsInBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Lists the things you have added to the given billing group.
+//
+//    // Example sending a request using the ListThingsInBillingGroupRequest method.
+//    req := client.ListThingsInBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) ListThingsInBillingGroupRequest(input *ListThingsInBillingGroupInput) ListThingsInBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opListThingsInBillingGroup,
+		HTTPMethod: "GET",
+		HTTPPath:   "/billing-groups/{billingGroupName}/things",
+	}
+
+	if input == nil {
+		input = &ListThingsInBillingGroupInput{}
+	}
+
+	output := &ListThingsInBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListThingsInBillingGroupRequest{Request: req, Input: input, Copy: c.ListThingsInBillingGroupRequest}
+}
+
 const opListThingsInThingGroup = "ListThingsInThingGroup"
 
 // ListThingsInThingGroupRequest is a API request type for the ListThingsInThingGroup API operation.
@@ -5749,7 +6310,8 @@ type ListThingsInThingGroupRequest struct {
 }
 
 // Send marshals and sends the ListThingsInThingGroup API request.
-func (r ListThingsInThingGroupRequest) Send() (*ListThingsInThingGroupOutput, error) {
+func (r ListThingsInThingGroupRequest) Send(ctx context.Context) (*ListThingsInThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5765,7 +6327,7 @@ func (r ListThingsInThingGroupRequest) Send() (*ListThingsInThingGroupOutput, er
 //
 //    // Example sending a request using the ListThingsInThingGroupRequest method.
 //    req := client.ListThingsInThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5797,7 +6359,8 @@ type ListTopicRulesRequest struct {
 }
 
 // Send marshals and sends the ListTopicRules API request.
-func (r ListTopicRulesRequest) Send() (*ListTopicRulesOutput, error) {
+func (r ListTopicRulesRequest) Send(ctx context.Context) (*ListTopicRulesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5813,7 +6376,7 @@ func (r ListTopicRulesRequest) Send() (*ListTopicRulesOutput, error) {
 //
 //    // Example sending a request using the ListTopicRulesRequest method.
 //    req := client.ListTopicRulesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5845,7 +6408,8 @@ type ListV2LoggingLevelsRequest struct {
 }
 
 // Send marshals and sends the ListV2LoggingLevels API request.
-func (r ListV2LoggingLevelsRequest) Send() (*ListV2LoggingLevelsOutput, error) {
+func (r ListV2LoggingLevelsRequest) Send(ctx context.Context) (*ListV2LoggingLevelsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5861,7 +6425,7 @@ func (r ListV2LoggingLevelsRequest) Send() (*ListV2LoggingLevelsOutput, error) {
 //
 //    // Example sending a request using the ListV2LoggingLevelsRequest method.
 //    req := client.ListV2LoggingLevelsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5893,7 +6457,8 @@ type ListViolationEventsRequest struct {
 }
 
 // Send marshals and sends the ListViolationEvents API request.
-func (r ListViolationEventsRequest) Send() (*ListViolationEventsOutput, error) {
+func (r ListViolationEventsRequest) Send(ctx context.Context) (*ListViolationEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5911,7 +6476,7 @@ func (r ListViolationEventsRequest) Send() (*ListViolationEventsOutput, error) {
 //
 //    // Example sending a request using the ListViolationEventsRequest method.
 //    req := client.ListViolationEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5943,7 +6508,8 @@ type RegisterCACertificateRequest struct {
 }
 
 // Send marshals and sends the RegisterCACertificate API request.
-func (r RegisterCACertificateRequest) Send() (*RegisterCACertificateOutput, error) {
+func (r RegisterCACertificateRequest) Send(ctx context.Context) (*RegisterCACertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5965,7 +6531,7 @@ func (r RegisterCACertificateRequest) Send() (*RegisterCACertificateOutput, erro
 //
 //    // Example sending a request using the RegisterCACertificateRequest method.
 //    req := client.RegisterCACertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -5997,7 +6563,8 @@ type RegisterCertificateRequest struct {
 }
 
 // Send marshals and sends the RegisterCertificate API request.
-func (r RegisterCertificateRequest) Send() (*RegisterCertificateOutput, error) {
+func (r RegisterCertificateRequest) Send(ctx context.Context) (*RegisterCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6015,7 +6582,7 @@ func (r RegisterCertificateRequest) Send() (*RegisterCertificateOutput, error) {
 //
 //    // Example sending a request using the RegisterCertificateRequest method.
 //    req := client.RegisterCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6047,7 +6614,8 @@ type RegisterThingRequest struct {
 }
 
 // Send marshals and sends the RegisterThing API request.
-func (r RegisterThingRequest) Send() (*RegisterThingOutput, error) {
+func (r RegisterThingRequest) Send(ctx context.Context) (*RegisterThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6063,7 +6631,7 @@ func (r RegisterThingRequest) Send() (*RegisterThingOutput, error) {
 //
 //    // Example sending a request using the RegisterThingRequest method.
 //    req := client.RegisterThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6095,7 +6663,8 @@ type RejectCertificateTransferRequest struct {
 }
 
 // Send marshals and sends the RejectCertificateTransfer API request.
-func (r RejectCertificateTransferRequest) Send() (*RejectCertificateTransferOutput, error) {
+func (r RejectCertificateTransferRequest) Send(ctx context.Context) (*RejectCertificateTransferOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6119,7 +6688,7 @@ func (r RejectCertificateTransferRequest) Send() (*RejectCertificateTransferOutp
 //
 //    // Example sending a request using the RejectCertificateTransferRequest method.
 //    req := client.RejectCertificateTransferRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6143,6 +6712,55 @@ func (c *IoT) RejectCertificateTransferRequest(input *RejectCertificateTransferI
 	return RejectCertificateTransferRequest{Request: req, Input: input, Copy: c.RejectCertificateTransferRequest}
 }
 
+const opRemoveThingFromBillingGroup = "RemoveThingFromBillingGroup"
+
+// RemoveThingFromBillingGroupRequest is a API request type for the RemoveThingFromBillingGroup API operation.
+type RemoveThingFromBillingGroupRequest struct {
+	*aws.Request
+	Input *RemoveThingFromBillingGroupInput
+	Copy  func(*RemoveThingFromBillingGroupInput) RemoveThingFromBillingGroupRequest
+}
+
+// Send marshals and sends the RemoveThingFromBillingGroup API request.
+func (r RemoveThingFromBillingGroupRequest) Send(ctx context.Context) (*RemoveThingFromBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveThingFromBillingGroupOutput), nil
+}
+
+// RemoveThingFromBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Removes the given thing from the billing group.
+//
+//    // Example sending a request using the RemoveThingFromBillingGroupRequest method.
+//    req := client.RemoveThingFromBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) RemoveThingFromBillingGroupRequest(input *RemoveThingFromBillingGroupInput) RemoveThingFromBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opRemoveThingFromBillingGroup,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/billing-groups/removeThingFromBillingGroup",
+	}
+
+	if input == nil {
+		input = &RemoveThingFromBillingGroupInput{}
+	}
+
+	output := &RemoveThingFromBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RemoveThingFromBillingGroupRequest{Request: req, Input: input, Copy: c.RemoveThingFromBillingGroupRequest}
+}
+
 const opRemoveThingFromThingGroup = "RemoveThingFromThingGroup"
 
 // RemoveThingFromThingGroupRequest is a API request type for the RemoveThingFromThingGroup API operation.
@@ -6153,7 +6771,8 @@ type RemoveThingFromThingGroupRequest struct {
 }
 
 // Send marshals and sends the RemoveThingFromThingGroup API request.
-func (r RemoveThingFromThingGroupRequest) Send() (*RemoveThingFromThingGroupOutput, error) {
+func (r RemoveThingFromThingGroupRequest) Send(ctx context.Context) (*RemoveThingFromThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6169,7 +6788,7 @@ func (r RemoveThingFromThingGroupRequest) Send() (*RemoveThingFromThingGroupOutp
 //
 //    // Example sending a request using the RemoveThingFromThingGroupRequest method.
 //    req := client.RemoveThingFromThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6201,7 +6820,8 @@ type ReplaceTopicRuleRequest struct {
 }
 
 // Send marshals and sends the ReplaceTopicRule API request.
-func (r ReplaceTopicRuleRequest) Send() (*ReplaceTopicRuleOutput, error) {
+func (r ReplaceTopicRuleRequest) Send(ctx context.Context) (*ReplaceTopicRuleOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6219,7 +6839,7 @@ func (r ReplaceTopicRuleRequest) Send() (*ReplaceTopicRuleOutput, error) {
 //
 //    // Example sending a request using the ReplaceTopicRuleRequest method.
 //    req := client.ReplaceTopicRuleRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6253,7 +6873,8 @@ type SearchIndexRequest struct {
 }
 
 // Send marshals and sends the SearchIndex API request.
-func (r SearchIndexRequest) Send() (*SearchIndexOutput, error) {
+func (r SearchIndexRequest) Send(ctx context.Context) (*SearchIndexOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6269,7 +6890,7 @@ func (r SearchIndexRequest) Send() (*SearchIndexOutput, error) {
 //
 //    // Example sending a request using the SearchIndexRequest method.
 //    req := client.SearchIndexRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6301,7 +6922,8 @@ type SetDefaultAuthorizerRequest struct {
 }
 
 // Send marshals and sends the SetDefaultAuthorizer API request.
-func (r SetDefaultAuthorizerRequest) Send() (*SetDefaultAuthorizerOutput, error) {
+func (r SetDefaultAuthorizerRequest) Send(ctx context.Context) (*SetDefaultAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6318,7 +6940,7 @@ func (r SetDefaultAuthorizerRequest) Send() (*SetDefaultAuthorizerOutput, error)
 //
 //    // Example sending a request using the SetDefaultAuthorizerRequest method.
 //    req := client.SetDefaultAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6350,7 +6972,8 @@ type SetDefaultPolicyVersionRequest struct {
 }
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
-func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, error) {
+func (r SetDefaultPolicyVersionRequest) Send(ctx context.Context) (*SetDefaultPolicyVersionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6369,7 +6992,7 @@ func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, 
 //
 //    // Example sending a request using the SetDefaultPolicyVersionRequest method.
 //    req := client.SetDefaultPolicyVersionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6403,7 +7026,8 @@ type SetLoggingOptionsRequest struct {
 }
 
 // Send marshals and sends the SetLoggingOptions API request.
-func (r SetLoggingOptionsRequest) Send() (*SetLoggingOptionsOutput, error) {
+func (r SetLoggingOptionsRequest) Send(ctx context.Context) (*SetLoggingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6421,7 +7045,7 @@ func (r SetLoggingOptionsRequest) Send() (*SetLoggingOptionsOutput, error) {
 //
 //    // Example sending a request using the SetLoggingOptionsRequest method.
 //    req := client.SetLoggingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6455,7 +7079,8 @@ type SetV2LoggingLevelRequest struct {
 }
 
 // Send marshals and sends the SetV2LoggingLevel API request.
-func (r SetV2LoggingLevelRequest) Send() (*SetV2LoggingLevelOutput, error) {
+func (r SetV2LoggingLevelRequest) Send(ctx context.Context) (*SetV2LoggingLevelOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6471,7 +7096,7 @@ func (r SetV2LoggingLevelRequest) Send() (*SetV2LoggingLevelOutput, error) {
 //
 //    // Example sending a request using the SetV2LoggingLevelRequest method.
 //    req := client.SetV2LoggingLevelRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6505,7 +7130,8 @@ type SetV2LoggingOptionsRequest struct {
 }
 
 // Send marshals and sends the SetV2LoggingOptions API request.
-func (r SetV2LoggingOptionsRequest) Send() (*SetV2LoggingOptionsOutput, error) {
+func (r SetV2LoggingOptionsRequest) Send(ctx context.Context) (*SetV2LoggingOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6521,7 +7147,7 @@ func (r SetV2LoggingOptionsRequest) Send() (*SetV2LoggingOptionsOutput, error) {
 //
 //    // Example sending a request using the SetV2LoggingOptionsRequest method.
 //    req := client.SetV2LoggingOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6555,7 +7181,8 @@ type StartOnDemandAuditTaskRequest struct {
 }
 
 // Send marshals and sends the StartOnDemandAuditTask API request.
-func (r StartOnDemandAuditTaskRequest) Send() (*StartOnDemandAuditTaskOutput, error) {
+func (r StartOnDemandAuditTaskRequest) Send(ctx context.Context) (*StartOnDemandAuditTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6571,7 +7198,7 @@ func (r StartOnDemandAuditTaskRequest) Send() (*StartOnDemandAuditTaskOutput, er
 //
 //    // Example sending a request using the StartOnDemandAuditTaskRequest method.
 //    req := client.StartOnDemandAuditTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6603,7 +7230,8 @@ type StartThingRegistrationTaskRequest struct {
 }
 
 // Send marshals and sends the StartThingRegistrationTask API request.
-func (r StartThingRegistrationTaskRequest) Send() (*StartThingRegistrationTaskOutput, error) {
+func (r StartThingRegistrationTaskRequest) Send(ctx context.Context) (*StartThingRegistrationTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6619,7 +7247,7 @@ func (r StartThingRegistrationTaskRequest) Send() (*StartThingRegistrationTaskOu
 //
 //    // Example sending a request using the StartThingRegistrationTaskRequest method.
 //    req := client.StartThingRegistrationTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6651,7 +7279,8 @@ type StopThingRegistrationTaskRequest struct {
 }
 
 // Send marshals and sends the StopThingRegistrationTask API request.
-func (r StopThingRegistrationTaskRequest) Send() (*StopThingRegistrationTaskOutput, error) {
+func (r StopThingRegistrationTaskRequest) Send(ctx context.Context) (*StopThingRegistrationTaskOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6667,7 +7296,7 @@ func (r StopThingRegistrationTaskRequest) Send() (*StopThingRegistrationTaskOutp
 //
 //    // Example sending a request using the StopThingRegistrationTaskRequest method.
 //    req := client.StopThingRegistrationTaskRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6689,6 +7318,56 @@ func (c *IoT) StopThingRegistrationTaskRequest(input *StopThingRegistrationTaskI
 	return StopThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StopThingRegistrationTaskRequest}
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Adds to or modifies the tags of the given resource. Tags are metadata which
+// can be used to manage a resource.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/tags",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
 const opTestAuthorization = "TestAuthorization"
 
 // TestAuthorizationRequest is a API request type for the TestAuthorization API operation.
@@ -6699,7 +7378,8 @@ type TestAuthorizationRequest struct {
 }
 
 // Send marshals and sends the TestAuthorization API request.
-func (r TestAuthorizationRequest) Send() (*TestAuthorizationOutput, error) {
+func (r TestAuthorizationRequest) Send(ctx context.Context) (*TestAuthorizationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6717,7 +7397,7 @@ func (r TestAuthorizationRequest) Send() (*TestAuthorizationOutput, error) {
 //
 //    // Example sending a request using the TestAuthorizationRequest method.
 //    req := client.TestAuthorizationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6749,7 +7429,8 @@ type TestInvokeAuthorizerRequest struct {
 }
 
 // Send marshals and sends the TestInvokeAuthorizer API request.
-func (r TestInvokeAuthorizerRequest) Send() (*TestInvokeAuthorizerOutput, error) {
+func (r TestInvokeAuthorizerRequest) Send(ctx context.Context) (*TestInvokeAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6767,7 +7448,7 @@ func (r TestInvokeAuthorizerRequest) Send() (*TestInvokeAuthorizerOutput, error)
 //
 //    // Example sending a request using the TestInvokeAuthorizerRequest method.
 //    req := client.TestInvokeAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6799,7 +7480,8 @@ type TransferCertificateRequest struct {
 }
 
 // Send marshals and sends the TransferCertificate API request.
-func (r TransferCertificateRequest) Send() (*TransferCertificateOutput, error) {
+func (r TransferCertificateRequest) Send(ctx context.Context) (*TransferCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6826,7 +7508,7 @@ func (r TransferCertificateRequest) Send() (*TransferCertificateOutput, error) {
 //
 //    // Example sending a request using the TransferCertificateRequest method.
 //    req := client.TransferCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6848,6 +7530,55 @@ func (c *IoT) TransferCertificateRequest(input *TransferCertificateInput) Transf
 	return TransferCertificateRequest{Request: req, Input: input, Copy: c.TransferCertificateRequest}
 }
 
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Removes the given tags (metadata) from the resource.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/untag",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
 const opUpdateAccountAuditConfiguration = "UpdateAccountAuditConfiguration"
 
 // UpdateAccountAuditConfigurationRequest is a API request type for the UpdateAccountAuditConfiguration API operation.
@@ -6858,7 +7589,8 @@ type UpdateAccountAuditConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateAccountAuditConfiguration API request.
-func (r UpdateAccountAuditConfigurationRequest) Send() (*UpdateAccountAuditConfigurationOutput, error) {
+func (r UpdateAccountAuditConfigurationRequest) Send(ctx context.Context) (*UpdateAccountAuditConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6876,7 +7608,7 @@ func (r UpdateAccountAuditConfigurationRequest) Send() (*UpdateAccountAuditConfi
 //
 //    // Example sending a request using the UpdateAccountAuditConfigurationRequest method.
 //    req := client.UpdateAccountAuditConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6908,7 +7640,8 @@ type UpdateAuthorizerRequest struct {
 }
 
 // Send marshals and sends the UpdateAuthorizer API request.
-func (r UpdateAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
+func (r UpdateAuthorizerRequest) Send(ctx context.Context) (*UpdateAuthorizerOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6924,7 +7657,7 @@ func (r UpdateAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
 //
 //    // Example sending a request using the UpdateAuthorizerRequest method.
 //    req := client.UpdateAuthorizerRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -6946,6 +7679,55 @@ func (c *IoT) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) UpdateAuthor
 	return UpdateAuthorizerRequest{Request: req, Input: input, Copy: c.UpdateAuthorizerRequest}
 }
 
+const opUpdateBillingGroup = "UpdateBillingGroup"
+
+// UpdateBillingGroupRequest is a API request type for the UpdateBillingGroup API operation.
+type UpdateBillingGroupRequest struct {
+	*aws.Request
+	Input *UpdateBillingGroupInput
+	Copy  func(*UpdateBillingGroupInput) UpdateBillingGroupRequest
+}
+
+// Send marshals and sends the UpdateBillingGroup API request.
+func (r UpdateBillingGroupRequest) Send(ctx context.Context) (*UpdateBillingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBillingGroupOutput), nil
+}
+
+// UpdateBillingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Updates information about the billing group.
+//
+//    // Example sending a request using the UpdateBillingGroupRequest method.
+//    req := client.UpdateBillingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) UpdateBillingGroupRequest(input *UpdateBillingGroupInput) UpdateBillingGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateBillingGroup,
+		HTTPMethod: "PATCH",
+		HTTPPath:   "/billing-groups/{billingGroupName}",
+	}
+
+	if input == nil {
+		input = &UpdateBillingGroupInput{}
+	}
+
+	output := &UpdateBillingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateBillingGroupRequest{Request: req, Input: input, Copy: c.UpdateBillingGroupRequest}
+}
+
 const opUpdateCACertificate = "UpdateCACertificate"
 
 // UpdateCACertificateRequest is a API request type for the UpdateCACertificate API operation.
@@ -6956,7 +7738,8 @@ type UpdateCACertificateRequest struct {
 }
 
 // Send marshals and sends the UpdateCACertificate API request.
-func (r UpdateCACertificateRequest) Send() (*UpdateCACertificateOutput, error) {
+func (r UpdateCACertificateRequest) Send(ctx context.Context) (*UpdateCACertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6972,7 +7755,7 @@ func (r UpdateCACertificateRequest) Send() (*UpdateCACertificateOutput, error) {
 //
 //    // Example sending a request using the UpdateCACertificateRequest method.
 //    req := client.UpdateCACertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7006,7 +7789,8 @@ type UpdateCertificateRequest struct {
 }
 
 // Send marshals and sends the UpdateCertificate API request.
-func (r UpdateCertificateRequest) Send() (*UpdateCertificateOutput, error) {
+func (r UpdateCertificateRequest) Send(ctx context.Context) (*UpdateCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7028,7 +7812,7 @@ func (r UpdateCertificateRequest) Send() (*UpdateCertificateOutput, error) {
 //
 //    // Example sending a request using the UpdateCertificateRequest method.
 //    req := client.UpdateCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7052,6 +7836,55 @@ func (c *IoT) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateCert
 	return UpdateCertificateRequest{Request: req, Input: input, Copy: c.UpdateCertificateRequest}
 }
 
+const opUpdateDynamicThingGroup = "UpdateDynamicThingGroup"
+
+// UpdateDynamicThingGroupRequest is a API request type for the UpdateDynamicThingGroup API operation.
+type UpdateDynamicThingGroupRequest struct {
+	*aws.Request
+	Input *UpdateDynamicThingGroupInput
+	Copy  func(*UpdateDynamicThingGroupInput) UpdateDynamicThingGroupRequest
+}
+
+// Send marshals and sends the UpdateDynamicThingGroup API request.
+func (r UpdateDynamicThingGroupRequest) Send(ctx context.Context) (*UpdateDynamicThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDynamicThingGroupOutput), nil
+}
+
+// UpdateDynamicThingGroupRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Updates a dynamic thing group.
+//
+//    // Example sending a request using the UpdateDynamicThingGroupRequest method.
+//    req := client.UpdateDynamicThingGroupRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) UpdateDynamicThingGroupRequest(input *UpdateDynamicThingGroupInput) UpdateDynamicThingGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateDynamicThingGroup,
+		HTTPMethod: "PATCH",
+		HTTPPath:   "/dynamic-thing-groups/{thingGroupName}",
+	}
+
+	if input == nil {
+		input = &UpdateDynamicThingGroupInput{}
+	}
+
+	output := &UpdateDynamicThingGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateDynamicThingGroupRequest{Request: req, Input: input, Copy: c.UpdateDynamicThingGroupRequest}
+}
+
 const opUpdateEventConfigurations = "UpdateEventConfigurations"
 
 // UpdateEventConfigurationsRequest is a API request type for the UpdateEventConfigurations API operation.
@@ -7062,7 +7895,8 @@ type UpdateEventConfigurationsRequest struct {
 }
 
 // Send marshals and sends the UpdateEventConfigurations API request.
-func (r UpdateEventConfigurationsRequest) Send() (*UpdateEventConfigurationsOutput, error) {
+func (r UpdateEventConfigurationsRequest) Send(ctx context.Context) (*UpdateEventConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7078,7 +7912,7 @@ func (r UpdateEventConfigurationsRequest) Send() (*UpdateEventConfigurationsOutp
 //
 //    // Example sending a request using the UpdateEventConfigurationsRequest method.
 //    req := client.UpdateEventConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7110,7 +7944,8 @@ type UpdateIndexingConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateIndexingConfiguration API request.
-func (r UpdateIndexingConfigurationRequest) Send() (*UpdateIndexingConfigurationOutput, error) {
+func (r UpdateIndexingConfigurationRequest) Send(ctx context.Context) (*UpdateIndexingConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7126,7 +7961,7 @@ func (r UpdateIndexingConfigurationRequest) Send() (*UpdateIndexingConfiguration
 //
 //    // Example sending a request using the UpdateIndexingConfigurationRequest method.
 //    req := client.UpdateIndexingConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7148,6 +7983,57 @@ func (c *IoT) UpdateIndexingConfigurationRequest(input *UpdateIndexingConfigurat
 	return UpdateIndexingConfigurationRequest{Request: req, Input: input, Copy: c.UpdateIndexingConfigurationRequest}
 }
 
+const opUpdateJob = "UpdateJob"
+
+// UpdateJobRequest is a API request type for the UpdateJob API operation.
+type UpdateJobRequest struct {
+	*aws.Request
+	Input *UpdateJobInput
+	Copy  func(*UpdateJobInput) UpdateJobRequest
+}
+
+// Send marshals and sends the UpdateJob API request.
+func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateJobOutput), nil
+}
+
+// UpdateJobRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Updates supported fields of the specified job.
+//
+//    // Example sending a request using the UpdateJobRequest method.
+//    req := client.UpdateJobRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
+	op := &aws.Operation{
+		Name:       opUpdateJob,
+		HTTPMethod: "PATCH",
+		HTTPPath:   "/jobs/{jobId}",
+	}
+
+	if input == nil {
+		input = &UpdateJobInput{}
+	}
+
+	output := &UpdateJobOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
+}
+
 const opUpdateRoleAlias = "UpdateRoleAlias"
 
 // UpdateRoleAliasRequest is a API request type for the UpdateRoleAlias API operation.
@@ -7158,7 +8044,8 @@ type UpdateRoleAliasRequest struct {
 }
 
 // Send marshals and sends the UpdateRoleAlias API request.
-func (r UpdateRoleAliasRequest) Send() (*UpdateRoleAliasOutput, error) {
+func (r UpdateRoleAliasRequest) Send(ctx context.Context) (*UpdateRoleAliasOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7174,7 +8061,7 @@ func (r UpdateRoleAliasRequest) Send() (*UpdateRoleAliasOutput, error) {
 //
 //    // Example sending a request using the UpdateRoleAliasRequest method.
 //    req := client.UpdateRoleAliasRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7206,7 +8093,8 @@ type UpdateScheduledAuditRequest struct {
 }
 
 // Send marshals and sends the UpdateScheduledAudit API request.
-func (r UpdateScheduledAuditRequest) Send() (*UpdateScheduledAuditOutput, error) {
+func (r UpdateScheduledAuditRequest) Send(ctx context.Context) (*UpdateScheduledAuditOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7223,7 +8111,7 @@ func (r UpdateScheduledAuditRequest) Send() (*UpdateScheduledAuditOutput, error)
 //
 //    // Example sending a request using the UpdateScheduledAuditRequest method.
 //    req := client.UpdateScheduledAuditRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7255,7 +8143,8 @@ type UpdateSecurityProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateSecurityProfile API request.
-func (r UpdateSecurityProfileRequest) Send() (*UpdateSecurityProfileOutput, error) {
+func (r UpdateSecurityProfileRequest) Send(ctx context.Context) (*UpdateSecurityProfileOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7271,7 +8160,7 @@ func (r UpdateSecurityProfileRequest) Send() (*UpdateSecurityProfileOutput, erro
 //
 //    // Example sending a request using the UpdateSecurityProfileRequest method.
 //    req := client.UpdateSecurityProfileRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7303,7 +8192,8 @@ type UpdateStreamRequest struct {
 }
 
 // Send marshals and sends the UpdateStream API request.
-func (r UpdateStreamRequest) Send() (*UpdateStreamOutput, error) {
+func (r UpdateStreamRequest) Send(ctx context.Context) (*UpdateStreamOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7319,7 +8209,7 @@ func (r UpdateStreamRequest) Send() (*UpdateStreamOutput, error) {
 //
 //    // Example sending a request using the UpdateStreamRequest method.
 //    req := client.UpdateStreamRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7351,7 +8241,8 @@ type UpdateThingRequest struct {
 }
 
 // Send marshals and sends the UpdateThing API request.
-func (r UpdateThingRequest) Send() (*UpdateThingOutput, error) {
+func (r UpdateThingRequest) Send(ctx context.Context) (*UpdateThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7367,7 +8258,7 @@ func (r UpdateThingRequest) Send() (*UpdateThingOutput, error) {
 //
 //    // Example sending a request using the UpdateThingRequest method.
 //    req := client.UpdateThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7399,7 +8290,8 @@ type UpdateThingGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateThingGroup API request.
-func (r UpdateThingGroupRequest) Send() (*UpdateThingGroupOutput, error) {
+func (r UpdateThingGroupRequest) Send(ctx context.Context) (*UpdateThingGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7415,7 +8307,7 @@ func (r UpdateThingGroupRequest) Send() (*UpdateThingGroupOutput, error) {
 //
 //    // Example sending a request using the UpdateThingGroupRequest method.
 //    req := client.UpdateThingGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7447,7 +8339,8 @@ type UpdateThingGroupsForThingRequest struct {
 }
 
 // Send marshals and sends the UpdateThingGroupsForThing API request.
-func (r UpdateThingGroupsForThingRequest) Send() (*UpdateThingGroupsForThingOutput, error) {
+func (r UpdateThingGroupsForThingRequest) Send(ctx context.Context) (*UpdateThingGroupsForThingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7463,7 +8356,7 @@ func (r UpdateThingGroupsForThingRequest) Send() (*UpdateThingGroupsForThingOutp
 //
 //    // Example sending a request using the UpdateThingGroupsForThingRequest method.
 //    req := client.UpdateThingGroupsForThingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7495,7 +8388,8 @@ type ValidateSecurityProfileBehaviorsRequest struct {
 }
 
 // Send marshals and sends the ValidateSecurityProfileBehaviors API request.
-func (r ValidateSecurityProfileBehaviorsRequest) Send() (*ValidateSecurityProfileBehaviorsOutput, error) {
+func (r ValidateSecurityProfileBehaviorsRequest) Send(ctx context.Context) (*ValidateSecurityProfileBehaviorsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7511,7 +8405,7 @@ func (r ValidateSecurityProfileBehaviorsRequest) Send() (*ValidateSecurityProfil
 //
 //    // Example sending a request using the ValidateSecurityProfileBehaviorsRequest method.
 //    req := client.ValidateSecurityProfileBehaviorsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -7531,6 +8425,162 @@ func (c *IoT) ValidateSecurityProfileBehaviorsRequest(input *ValidateSecurityPro
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ValidateSecurityProfileBehaviorsRequest{Request: req, Input: input, Copy: c.ValidateSecurityProfileBehaviorsRequest}
+}
+
+// Details of abort criteria to abort the job.
+type AbortConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The list of abort criteria to define rules to abort the job.
+	//
+	// CriteriaList is a required field
+	CriteriaList []AbortCriteria `locationName:"criteriaList" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s AbortConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AbortConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AbortConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AbortConfig"}
+
+	if s.CriteriaList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CriteriaList"))
+	}
+	if s.CriteriaList != nil && len(s.CriteriaList) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CriteriaList", 1))
+	}
+	if s.CriteriaList != nil {
+		for i, v := range s.CriteriaList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CriteriaList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AbortConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CriteriaList) > 0 {
+		v := s.CriteriaList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "criteriaList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Details of abort criteria to define rules to abort the job.
+type AbortCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The type of abort action to initiate a job abort.
+	//
+	// Action is a required field
+	Action AbortAction `locationName:"action" type:"string" required:"true" enum:"true"`
+
+	// The type of job execution failure to define a rule to initiate a job abort.
+	//
+	// FailureType is a required field
+	FailureType JobExecutionFailureType `locationName:"failureType" type:"string" required:"true" enum:"true"`
+
+	// Minimum number of executed things before evaluating an abort rule.
+	//
+	// MinNumberOfExecutedThings is a required field
+	MinNumberOfExecutedThings *int64 `locationName:"minNumberOfExecutedThings" min:"1" type:"integer" required:"true"`
+
+	// The threshold as a percentage of the total number of executed things that
+	// will initiate a job abort.
+	//
+	// AWS IoT supports up to two digits after the decimal (for example, 10.9 and
+	// 10.99, but not 10.999).
+	//
+	// ThresholdPercentage is a required field
+	ThresholdPercentage *float64 `locationName:"thresholdPercentage" type:"double" required:"true"`
+}
+
+// String returns the string representation
+func (s AbortCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AbortCriteria) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AbortCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AbortCriteria"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+	if len(s.FailureType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FailureType"))
+	}
+
+	if s.MinNumberOfExecutedThings == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinNumberOfExecutedThings"))
+	}
+	if s.MinNumberOfExecutedThings != nil && *s.MinNumberOfExecutedThings < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinNumberOfExecutedThings", 1))
+	}
+
+	if s.ThresholdPercentage == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThresholdPercentage"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AbortCriteria) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FailureType) > 0 {
+		v := s.FailureType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failureType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.MinNumberOfExecutedThings != nil {
+		v := *s.MinNumberOfExecutedThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minNumberOfExecutedThings", protocol.Int64Value(v), metadata)
+	}
+	if s.ThresholdPercentage != nil {
+		v := *s.ThresholdPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thresholdPercentage", protocol.Float64Value(v), metadata)
+	}
+	return nil
 }
 
 // The input for the AcceptCertificateTransfer operation.
@@ -7645,6 +8695,9 @@ type Action struct {
 	// Sends message data to an AWS IoT Analytics channel.
 	IotAnalytics *IotAnalyticsAction `locationName:"iotAnalytics" type:"structure"`
 
+	// Sends an input to an AWS IoT Events detector.
+	IotEvents *IotEventsAction `locationName:"iotEvents" type:"structure"`
+
 	// Write data to an Amazon Kinesis stream.
 	Kinesis *KinesisAction `locationName:"kinesis" type:"structure"`
 
@@ -7711,6 +8764,11 @@ func (s *Action) Validate() error {
 	if s.Firehose != nil {
 		if err := s.Firehose.Validate(); err != nil {
 			invalidParams.AddNested("Firehose", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.IotEvents != nil {
+		if err := s.IotEvents.Validate(); err != nil {
+			invalidParams.AddNested("IotEvents", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Kinesis != nil {
@@ -7803,6 +8861,12 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "iotAnalytics", v, metadata)
+	}
+	if s.IotEvents != nil {
+		v := s.IotEvents
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "iotEvents", v, metadata)
 	}
 	if s.Kinesis != nil {
 		v := s.Kinesis
@@ -7938,8 +9002,112 @@ func (s ActiveViolation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type AddThingToBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the billing group.
+	BillingGroupArn *string `locationName:"billingGroupArn" type:"string"`
+
+	// The name of the billing group.
+	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
+
+	// The ARN of the thing to be added to the billing group.
+	ThingArn *string `locationName:"thingArn" type:"string"`
+
+	// The name of the thing to be added to the billing group.
+	ThingName *string `locationName:"thingName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AddThingToBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AddThingToBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AddThingToBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AddThingToBillingGroupInput"}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+	if s.ThingName != nil && len(*s.ThingName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AddThingToBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupArn != nil {
+		v := *s.BillingGroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingArn != nil {
+		v := *s.ThingArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type AddThingToBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AddThingToBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AddThingToBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AddThingToBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AddThingToBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 type AddThingToThingGroupInput struct {
 	_ struct{} `type:"structure"`
+
+	// Override dynamic thing groups with static thing groups when 10-group limit
+	// is reached. If a thing belongs to 10 thing groups, and one or more of those
+	// groups are dynamic thing groups, adding a thing to a static group removes
+	// the thing from the last dynamic group.
+	OverrideDynamicGroups *bool `locationName:"overrideDynamicGroups" type:"boolean"`
 
 	// The ARN of the thing to add to a group.
 	ThingArn *string `locationName:"thingArn" type:"string"`
@@ -7983,6 +9151,12 @@ func (s *AddThingToThingGroupInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AddThingToThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.OverrideDynamicGroups != nil {
+		v := *s.OverrideDynamicGroups
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "overrideDynamicGroups", protocol.BoolValue(v), metadata)
+	}
 	if s.ThingArn != nil {
 		v := *s.ThingArn
 
@@ -8278,7 +9452,8 @@ type AttachPolicyInput struct {
 	// PolicyName is a required field
 	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
 
-	// The identity to which the policy is attached.
+	// The identity (https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html)
+	// to which the policy is attached.
 	//
 	// Target is a required field
 	Target *string `locationName:"target" type:"string" required:"true"`
@@ -9415,6 +10590,64 @@ func (s BehaviorCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Additional information about the billing group.
+type BillingGroupMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The date the billing group was created.
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s BillingGroupMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BillingGroupMetadata) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BillingGroupMetadata) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
+// The properties of a billing group.
+type BillingGroupProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the billing group.
+	BillingGroupDescription *string `locationName:"billingGroupDescription" type:"string"`
+}
+
+// String returns the string representation
+func (s BillingGroupProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BillingGroupProperties) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BillingGroupProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BillingGroupDescription != nil {
+		v := *s.BillingGroupDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A CA certificate.
 type CACertificate struct {
 	_ struct{} `type:"structure"`
@@ -9905,6 +11138,9 @@ type CancelJobInput struct {
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"jobId" min:"1" type:"string" required:"true"`
+
+	// (Optional)A reason code string that explains why the job was canceled.
+	ReasonCode *string `locationName:"reasonCode" type:"string"`
 }
 
 // String returns the string representation
@@ -9942,6 +11178,12 @@ func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "comment", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReasonCode != nil {
+		v := *s.ReasonCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reasonCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId
@@ -10812,6 +12054,131 @@ func (s CreateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type CreateBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name you wish to give to the billing group.
+	//
+	// BillingGroupName is a required field
+	BillingGroupName *string `location:"uri" locationName:"billingGroupName" min:"1" type:"string" required:"true"`
+
+	// The properties of the billing group.
+	BillingGroupProperties *BillingGroupProperties `locationName:"billingGroupProperties" type:"structure"`
+
+	// Metadata which can be used to manage the billing group.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBillingGroupInput"}
+
+	if s.BillingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BillingGroupName"))
+	}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupProperties != nil {
+		v := s.BillingGroupProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "billingGroupProperties", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type CreateBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the billing group.
+	BillingGroupArn *string `locationName:"billingGroupArn" type:"string"`
+
+	// The ID of the billing group.
+	BillingGroupId *string `locationName:"billingGroupId" min:"1" type:"string"`
+
+	// The name you gave to the billing group.
+	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BillingGroupArn != nil {
+		v := *s.BillingGroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupId != nil {
+		v := *s.BillingGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The input for the CreateCertificateFromCsr operation.
 type CreateCertificateFromCsrInput struct {
 	_ struct{} `type:"structure"`
@@ -10926,13 +12293,225 @@ func (s CreateCertificateFromCsrOutput) MarshalFields(e protocol.FieldEncoder) e
 	return nil
 }
 
+type CreateDynamicThingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The dynamic thing group index name.
+	//
+	// Currently one index is supported: "AWS_Things".
+	IndexName *string `locationName:"indexName" min:"1" type:"string"`
+
+	// The dynamic thing group search query string.
+	//
+	// See Query Syntax (http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
+	// for information about query string syntax.
+	//
+	// QueryString is a required field
+	QueryString *string `locationName:"queryString" min:"1" type:"string" required:"true"`
+
+	// The dynamic thing group query version.
+	//
+	// Currently one query version is supported: "2017-09-30". If not specified,
+	// the query version defaults to this value.
+	QueryVersion *string `locationName:"queryVersion" type:"string"`
+
+	// Metadata which can be used to manage the dynamic thing group.
+	Tags []Tag `locationName:"tags" type:"list"`
+
+	// The dynamic thing group name to create.
+	//
+	// ThingGroupName is a required field
+	ThingGroupName *string `location:"uri" locationName:"thingGroupName" min:"1" type:"string" required:"true"`
+
+	// The dynamic thing group properties.
+	ThingGroupProperties *ThingGroupProperties `locationName:"thingGroupProperties" type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateDynamicThingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateDynamicThingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateDynamicThingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDynamicThingGroupInput"}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
+	}
+
+	if s.QueryString == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
+	}
+	if s.QueryString != nil && len(*s.QueryString) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
+	}
+
+	if s.ThingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingGroupName"))
+	}
+	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDynamicThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IndexName != nil {
+		v := *s.IndexName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryString != nil {
+		v := *s.QueryString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryVersion != nil {
+		v := *s.QueryVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ThingGroupProperties != nil {
+		v := s.ThingGroupProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "thingGroupProperties", v, metadata)
+	}
+	if s.ThingGroupName != nil {
+		v := *s.ThingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type CreateDynamicThingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The dynamic thing group index name.
+	IndexName *string `locationName:"indexName" min:"1" type:"string"`
+
+	// The dynamic thing group search query string.
+	QueryString *string `locationName:"queryString" min:"1" type:"string"`
+
+	// The dynamic thing group query version.
+	QueryVersion *string `locationName:"queryVersion" type:"string"`
+
+	// The dynamic thing group ARN.
+	ThingGroupArn *string `locationName:"thingGroupArn" type:"string"`
+
+	// The dynamic thing group ID.
+	ThingGroupId *string `locationName:"thingGroupId" min:"1" type:"string"`
+
+	// The dynamic thing group name.
+	ThingGroupName *string `locationName:"thingGroupName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateDynamicThingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateDynamicThingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateDynamicThingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDynamicThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IndexName != nil {
+		v := *s.IndexName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryString != nil {
+		v := *s.QueryString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryVersion != nil {
+		v := *s.QueryVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingGroupArn != nil {
+		v := *s.ThingGroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingGroupId != nil {
+		v := *s.ThingGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingGroupName != nil {
+		v := *s.ThingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type CreateJobInput struct {
 	_ struct{} `type:"structure"`
+
+	// Allows you to create criteria to abort a job.
+	AbortConfig *AbortConfig `locationName:"abortConfig" type:"structure"`
 
 	// A short text description of the job.
 	Description *string `locationName:"description" type:"string"`
 
 	// The job document.
+	//
+	// If the job document resides in an S3 bucket, you must use a placeholder link
+	// when specifying the document.
+	//
+	// The placeholder link is of the following form:
+	//
+	// ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}
+	//
+	// where bucket is your bucket name and key is the object in the bucket to which
+	// you are linking.
 	Document *string `locationName:"document" type:"string"`
 
 	// An S3 link to the job document.
@@ -10950,6 +12529,9 @@ type CreateJobInput struct {
 	// Configuration information for pre-signed S3 URLs.
 	PresignedUrlConfig *PresignedUrlConfig `locationName:"presignedUrlConfig" type:"structure"`
 
+	// Metadata which can be used to manage the job.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
 	// after all those things specified as targets have completed the job (SNAPSHOT).
 	// If continuous, the job may also be run on a thing when a change is detected
@@ -10962,6 +12544,12 @@ type CreateJobInput struct {
 	//
 	// Targets is a required field
 	Targets []string `locationName:"targets" min:"1" type:"list" required:"true"`
+
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. The timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the
+	// time expires, it will be automatically set to TIMED_OUT.
+	TimeoutConfig *TimeoutConfig `locationName:"timeoutConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -10994,6 +12582,11 @@ func (s *CreateJobInput) Validate() error {
 	if s.Targets != nil && len(s.Targets) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Targets", 1))
 	}
+	if s.AbortConfig != nil {
+		if err := s.AbortConfig.Validate(); err != nil {
+			invalidParams.AddNested("AbortConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.JobExecutionsRolloutConfig != nil {
 		if err := s.JobExecutionsRolloutConfig.Validate(); err != nil {
 			invalidParams.AddNested("JobExecutionsRolloutConfig", err.(aws.ErrInvalidParams))
@@ -11014,6 +12607,12 @@ func (s *CreateJobInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.AbortConfig != nil {
+		v := s.AbortConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "abortConfig", v, metadata)
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -11044,6 +12643,18 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "presignedUrlConfig", v, metadata)
 	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if len(s.TargetSelection) > 0 {
 		v := s.TargetSelection
 
@@ -11061,6 +12672,12 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.TimeoutConfig != nil {
+		v := s.TimeoutConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeoutConfig", v, metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId
@@ -12018,6 +13635,9 @@ type CreateSecurityProfileInput struct {
 	//
 	// SecurityProfileName is a required field
 	SecurityProfileName *string `location:"uri" locationName:"securityProfileName" min:"1" type:"string" required:"true"`
+
+	// Metadata which can be used to manage the security profile.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -12097,6 +13717,18 @@ func (s CreateSecurityProfileInput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "securityProfileDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.SecurityProfileName != nil {
 		v := *s.SecurityProfileName
@@ -12326,6 +13958,9 @@ type CreateThingGroupInput struct {
 	// The name of the parent thing group.
 	ParentGroupName *string `locationName:"parentGroupName" min:"1" type:"string"`
 
+	// Metadata which can be used to manage the thing group.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// The thing group name to create.
 	//
 	// ThingGroupName is a required field
@@ -12373,6 +14008,18 @@ func (s CreateThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "parentGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.ThingGroupProperties != nil {
 		v := s.ThingGroupProperties
@@ -12452,6 +14099,9 @@ type CreateThingInput struct {
 	// {\"attributes\":{\"string1\":\"string2\"}}
 	AttributePayload *AttributePayload `locationName:"attributePayload" type:"structure"`
 
+	// The name of the billing group the thing will be added to.
+	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
+
 	// The name of the thing to create.
 	//
 	// ThingName is a required field
@@ -12474,6 +14124,9 @@ func (s CreateThingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateThingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateThingInput"}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
 
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
@@ -12499,6 +14152,12 @@ func (s CreateThingInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "attributePayload", v, metadata)
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ThingTypeName != nil {
 		v := *s.ThingTypeName
@@ -12573,6 +14232,9 @@ func (s CreateThingOutput) MarshalFields(e protocol.FieldEncoder) error {
 type CreateThingTypeInput struct {
 	_ struct{} `type:"structure"`
 
+	// Metadata which can be used to manage the thing type.
+	Tags []Tag `locationName:"tags" type:"list"`
+
 	// The name of the thing type.
 	//
 	// ThingTypeName is a required field
@@ -12614,6 +14276,18 @@ func (s *CreateThingTypeInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CreateThingTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.ThingTypeProperties != nil {
 		v := s.ThingTypeProperties
 
@@ -12963,6 +14637,91 @@ func (s DeleteAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type DeleteBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the billing group.
+	//
+	// BillingGroupName is a required field
+	BillingGroupName *string `location:"uri" locationName:"billingGroupName" min:"1" type:"string" required:"true"`
+
+	// The expected version of the billing group. If the version of the billing
+	// group does not match the expected version specified in the request, the DeleteBillingGroup
+	// request is rejected with a VersionConflictException.
+	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
+}
+
+// String returns the string representation
+func (s DeleteBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBillingGroupInput"}
+
+	if s.BillingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BillingGroupName"))
+	}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExpectedVersion != nil {
+		v := *s.ExpectedVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "expectedVersion", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+type DeleteBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Input for the DeleteCACertificate operation.
 type DeleteCACertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -13122,6 +14881,89 @@ func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type DeleteDynamicThingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The expected version of the dynamic thing group to delete.
+	ExpectedVersion *int64 `location:"querystring" locationName:"expectedVersion" type:"long"`
+
+	// The name of the dynamic thing group to delete.
+	//
+	// ThingGroupName is a required field
+	ThingGroupName *string `location:"uri" locationName:"thingGroupName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteDynamicThingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteDynamicThingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteDynamicThingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDynamicThingGroupInput"}
+
+	if s.ThingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingGroupName"))
+	}
+	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDynamicThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ThingGroupName != nil {
+		v := *s.ThingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExpectedVersion != nil {
+		v := *s.ExpectedVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "expectedVersion", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+type DeleteDynamicThingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteDynamicThingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteDynamicThingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteDynamicThingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDynamicThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -14800,6 +16642,134 @@ func (s DescribeAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type DescribeBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the billing group.
+	//
+	// BillingGroupName is a required field
+	BillingGroupName *string `location:"uri" locationName:"billingGroupName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBillingGroupInput"}
+
+	if s.BillingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BillingGroupName"))
+	}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type DescribeBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the billing group.
+	BillingGroupArn *string `locationName:"billingGroupArn" type:"string"`
+
+	// The ID of the billing group.
+	BillingGroupId *string `locationName:"billingGroupId" min:"1" type:"string"`
+
+	// Additional information about the billing group.
+	BillingGroupMetadata *BillingGroupMetadata `locationName:"billingGroupMetadata" type:"structure"`
+
+	// The name of the billing group.
+	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
+
+	// The properties of the billing group.
+	BillingGroupProperties *BillingGroupProperties `locationName:"billingGroupProperties" type:"structure"`
+
+	// The version of the billing group.
+	Version *int64 `locationName:"version" type:"long"`
+}
+
+// String returns the string representation
+func (s DescribeBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BillingGroupArn != nil {
+		v := *s.BillingGroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupId != nil {
+		v := *s.BillingGroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupMetadata != nil {
+		v := s.BillingGroupMetadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "billingGroupMetadata", v, metadata)
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupProperties != nil {
+		v := s.BillingGroupProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "billingGroupProperties", v, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The input for the DescribeCACertificate operation.
 type DescribeCACertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -15039,7 +17009,16 @@ func (s DescribeDefaultAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) 
 type DescribeEndpointInput struct {
 	_ struct{} `type:"structure"`
 
-	// The endpoint type (such as iot:Data, iot:CredentialProvider and iot:Jobs).
+	// The endpoint type. Valid endpoint types include:
+	//
+	//    * iot:Data - Returns a VeriSign signed data endpoint.
+	//
+	//    * iot:Data-ATS - Returns an ATS signed data endpoint.
+	//
+	//    * iot:CredentialProvider - Returns an AWS IoT credentials provider API
+	//    endpoint.
+	//
+	//    * iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.
 	EndpointType *string `location:"querystring" locationName:"endpointType" type:"string"`
 }
 
@@ -15242,9 +17221,16 @@ type DescribeIndexOutput struct {
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:
 	//
-	// REGISTRY – Your thing index will contain only registry data.
+	//    * REGISTRY – Your thing index will contain only registry data.
 	//
-	// REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.
+	//    * REGISTRY_AND_SHADOW - Your thing index will contain registry data and
+	//    shadow data.
+	//
+	//    * REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry
+	//    data and thing connectivity status data.
+	//
+	//    * REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will
+	//    contain registry data, shadow data, and thing connectivity status data.
 	Schema *string `locationName:"schema" type:"string"`
 }
 
@@ -16010,6 +17996,18 @@ type DescribeThingGroupOutput struct {
 
 	responseMetadata aws.Response
 
+	// The dynamic thing group index name.
+	IndexName *string `locationName:"indexName" min:"1" type:"string"`
+
+	// The dynamic thing group search query string.
+	QueryString *string `locationName:"queryString" min:"1" type:"string"`
+
+	// The dynamic thing group query version.
+	QueryVersion *string `locationName:"queryVersion" type:"string"`
+
+	// The dynamic thing group status.
+	Status DynamicGroupStatus `locationName:"status" type:"string" enum:"true"`
+
 	// The thing group ARN.
 	ThingGroupArn *string `locationName:"thingGroupArn" type:"string"`
 
@@ -16046,6 +18044,30 @@ func (s DescribeThingGroupOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IndexName != nil {
+		v := *s.IndexName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryString != nil {
+		v := *s.QueryString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryVersion != nil {
+		v := *s.QueryVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.ThingGroupArn != nil {
 		v := *s.ThingGroupArn
 
@@ -16143,6 +18165,9 @@ type DescribeThingOutput struct {
 	// The thing attributes.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
 
+	// The name of the billing group the thing belongs to.
+	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
+
 	// The default client ID.
 	DefaultClientId *string `locationName:"defaultClientId" type:"string"`
 
@@ -16194,6 +18219,12 @@ func (s DescribeThingOutput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DefaultClientId != nil {
 		v := *s.DefaultClientId
@@ -17545,6 +19576,97 @@ func (s ExplicitDeny) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Allows you to create an exponential rate of rollout for a job.
+type ExponentialRolloutRate struct {
+	_ struct{} `type:"structure"`
+
+	// The minimum number of things that will be notified of a pending job, per
+	// minute at the start of job rollout. This parameter allows you to define the
+	// initial rate of rollout.
+	//
+	// BaseRatePerMinute is a required field
+	BaseRatePerMinute *int64 `locationName:"baseRatePerMinute" min:"1" type:"integer" required:"true"`
+
+	// The exponential factor to increase the rate of rollout for a job.
+	//
+	// IncrementFactor is a required field
+	IncrementFactor *float64 `locationName:"incrementFactor" min:"1" type:"double" required:"true"`
+
+	// The criteria to initiate the increase in rate of rollout for a job.
+	//
+	// AWS IoT supports up to one digit after the decimal (for example, 1.5, but
+	// not 1.55).
+	//
+	// RateIncreaseCriteria is a required field
+	RateIncreaseCriteria *RateIncreaseCriteria `locationName:"rateIncreaseCriteria" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ExponentialRolloutRate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExponentialRolloutRate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExponentialRolloutRate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExponentialRolloutRate"}
+
+	if s.BaseRatePerMinute == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BaseRatePerMinute"))
+	}
+	if s.BaseRatePerMinute != nil && *s.BaseRatePerMinute < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("BaseRatePerMinute", 1))
+	}
+
+	if s.IncrementFactor == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IncrementFactor"))
+	}
+	if s.IncrementFactor != nil && *s.IncrementFactor < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("IncrementFactor", 1))
+	}
+
+	if s.RateIncreaseCriteria == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RateIncreaseCriteria"))
+	}
+	if s.RateIncreaseCriteria != nil {
+		if err := s.RateIncreaseCriteria.Validate(); err != nil {
+			invalidParams.AddNested("RateIncreaseCriteria", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExponentialRolloutRate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BaseRatePerMinute != nil {
+		v := *s.BaseRatePerMinute
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "baseRatePerMinute", protocol.Int64Value(v), metadata)
+	}
+	if s.IncrementFactor != nil {
+		v := *s.IncrementFactor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "incrementFactor", protocol.Float64Value(v), metadata)
+	}
+	if s.RateIncreaseCriteria != nil {
+		v := s.RateIncreaseCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rateIncreaseCriteria", v, metadata)
+	}
+	return nil
+}
+
 // The location of the OTA update.
 type FileLocation struct {
 	_ struct{} `type:"structure"`
@@ -18721,9 +20843,86 @@ func (s IotAnalyticsAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Sends an input to an AWS IoT Events detector.
+type IotEventsAction struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the AWS IoT Events input.
+	//
+	// InputName is a required field
+	InputName *string `locationName:"inputName" min:"1" type:"string" required:"true"`
+
+	// [Optional] Use this to ensure that only one input (message) with a given
+	// messageId will be processed by an AWS IoT Events detector.
+	MessageId *string `locationName:"messageId" type:"string"`
+
+	// The ARN of the role that grants AWS IoT permission to send an input to an
+	// AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").
+	//
+	// RoleArn is a required field
+	RoleArn *string `locationName:"roleArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s IotEventsAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IotEventsAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IotEventsAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IotEventsAction"}
+
+	if s.InputName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputName"))
+	}
+	if s.InputName != nil && len(*s.InputName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("InputName", 1))
+	}
+
+	if s.RoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IotEventsAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InputName != nil {
+		v := *s.InputName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MessageId != nil {
+		v := *s.MessageId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "messageId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The Job object contains details about a job.
 type Job struct {
 	_ struct{} `type:"structure"`
+
+	// Configuration for criteria to abort the job.
+	AbortConfig *AbortConfig `locationName:"abortConfig" type:"structure"`
 
 	// If the job was updated, describes the reason for the update.
 	Comment *string `locationName:"comment" type:"string"`
@@ -18759,7 +20958,11 @@ type Job struct {
 	// Configuration for pre-signed S3 URLs.
 	PresignedUrlConfig *PresignedUrlConfig `locationName:"presignedUrlConfig" type:"structure"`
 
-	// The status of the job, one of IN_PROGRESS, CANCELED, or COMPLETED.
+	// If the job was updated, provides the reason code for the update.
+	ReasonCode *string `locationName:"reasonCode" type:"string"`
+
+	// The status of the job, one of IN_PROGRESS, CANCELED, DELETION_IN_PROGRESS
+	// or COMPLETED.
 	Status JobStatus `locationName:"status" type:"string" enum:"true"`
 
 	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
@@ -18772,6 +20975,12 @@ type Job struct {
 
 	// A list of IoT things and thing groups to which the job should be sent.
 	Targets []string `locationName:"targets" min:"1" type:"list"`
+
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. A timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the
+	// timer expires, it will be automatically set to TIMED_OUT.
+	TimeoutConfig *TimeoutConfig `locationName:"timeoutConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -18786,6 +20995,12 @@ func (s Job) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Job) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AbortConfig != nil {
+		v := s.AbortConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "abortConfig", v, metadata)
+	}
 	if s.Comment != nil {
 		v := *s.Comment
 
@@ -18852,6 +21067,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "presignedUrlConfig", v, metadata)
 	}
+	if s.ReasonCode != nil {
+		v := *s.ReasonCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reasonCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
@@ -18876,6 +21097,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.TimeoutConfig != nil {
+		v := s.TimeoutConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeoutConfig", v, metadata)
+	}
 	return nil
 }
 
@@ -18883,6 +21110,13 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 // device.
 type JobExecution struct {
 	_ struct{} `type:"structure"`
+
+	// The estimated number of seconds that remain before the job execution status
+	// will be changed to TIMED_OUT. The timeout interval can be anywhere between
+	// 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout
+	// can occur up to 60 seconds later than the estimated duration. This value
+	// will not be included if the job execution has reached a terminal status.
+	ApproximateSecondsBeforeTimedOut *int64 `locationName:"approximateSecondsBeforeTimedOut" type:"long"`
 
 	// A string (consisting of the digits "0" through "9") which identifies this
 	// particular job execution on this particular device. It can be used in commands
@@ -18906,8 +21140,8 @@ type JobExecution struct {
 	// The time, in milliseconds since the epoch, when the job execution started.
 	StartedAt *time.Time `locationName:"startedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCESS, CANCELED,
-	// or REJECTED).
+	// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED,
+	// TIMED_OUT, CANCELED, or REJECTED).
 	Status JobExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A collection of name/value pairs that describe the status of the job execution.
@@ -18933,6 +21167,12 @@ func (s JobExecution) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApproximateSecondsBeforeTimedOut != nil {
+		v := *s.ApproximateSecondsBeforeTimedOut
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "approximateSecondsBeforeTimedOut", protocol.Int64Value(v), metadata)
+	}
 	if s.ExecutionNumber != nil {
 		v := *s.ExecutionNumber
 
@@ -19179,6 +21419,10 @@ func (s JobExecutionSummaryForThing) MarshalFields(e protocol.FieldEncoder) erro
 type JobExecutionsRolloutConfig struct {
 	_ struct{} `type:"structure"`
 
+	// The rate of increase for a job rollout. This parameter allows you to define
+	// an exponential rate for a job rollout.
+	ExponentialRate *ExponentialRolloutRate `locationName:"exponentialRate" type:"structure"`
+
 	// The maximum number of things that will be notified of a pending job, per
 	// minute. This parameter allows you to create a staged rollout.
 	MaximumPerMinute *int64 `locationName:"maximumPerMinute" min:"1" type:"integer"`
@@ -19200,6 +21444,11 @@ func (s *JobExecutionsRolloutConfig) Validate() error {
 	if s.MaximumPerMinute != nil && *s.MaximumPerMinute < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaximumPerMinute", 1))
 	}
+	if s.ExponentialRate != nil {
+		if err := s.ExponentialRate.Validate(); err != nil {
+			invalidParams.AddNested("ExponentialRate", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -19209,6 +21458,12 @@ func (s *JobExecutionsRolloutConfig) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s JobExecutionsRolloutConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExponentialRate != nil {
+		v := s.ExponentialRate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "exponentialRate", v, metadata)
+	}
 	if s.MaximumPerMinute != nil {
 		v := *s.MaximumPerMinute
 
@@ -19244,6 +21499,9 @@ type JobProcessDetails struct {
 
 	// The number of things which successfully completed the job.
 	NumberOfSucceededThings *int64 `locationName:"numberOfSucceededThings" type:"integer"`
+
+	// The number of things whose job execution status is TIMED_OUT.
+	NumberOfTimedOutThings *int64 `locationName:"numberOfTimedOutThings" type:"integer"`
 
 	// The target devices to which the job execution is being rolled out. This value
 	// will be null after the job execution has finished rolling out to all the
@@ -19304,6 +21562,12 @@ func (s JobProcessDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "numberOfSucceededThings", protocol.Int64Value(v), metadata)
+	}
+	if s.NumberOfTimedOutThings != nil {
+		v := *s.NumberOfTimedOutThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberOfTimedOutThings", protocol.Int64Value(v), metadata)
 	}
 	if len(s.ProcessingTargets) > 0 {
 		v := s.ProcessingTargets
@@ -20249,6 +22513,120 @@ func (s ListAuthorizersOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "nextMarker", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type ListBillingGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to return per request.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// Limit the results to billing groups whose names have the given prefix.
+	NamePrefixFilter *string `location:"querystring" locationName:"namePrefixFilter" min:"1" type:"string"`
+
+	// The token to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListBillingGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListBillingGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListBillingGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListBillingGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NamePrefixFilter != nil && len(*s.NamePrefixFilter) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NamePrefixFilter", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBillingGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NamePrefixFilter != nil {
+		v := *s.NamePrefixFilter
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "namePrefixFilter", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type ListBillingGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The list of billing groups.
+	BillingGroups []GroupNameAndArn `locationName:"billingGroups" type:"list"`
+
+	// The token used to get the next set of results, or null if there are no additional
+	// results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListBillingGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListBillingGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBillingGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBillingGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BillingGroups) > 0 {
+		v := s.BillingGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "billingGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -22483,6 +24861,111 @@ func (s ListStreamsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The token to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	// The ARN of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `location:"querystring" locationName:"resourceArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token used to get the next set of results, or null if there are no additional
+	// results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The list of tags assigned to the resource.
+	Tags []Tag `locationName:"tags" type:"list"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 type ListTargetsForPolicyInput struct {
 	_ struct{} `type:"structure"`
 
@@ -23428,6 +25911,126 @@ func (s ListThingTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+type ListThingsInBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the billing group.
+	//
+	// BillingGroupName is a required field
+	BillingGroupName *string `location:"uri" locationName:"billingGroupName" min:"1" type:"string" required:"true"`
+
+	// The maximum number of results to return per request.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	// The token to retrieve the next set of results.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListThingsInBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListThingsInBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListThingsInBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListThingsInBillingGroupInput"}
+
+	if s.BillingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BillingGroupName"))
+	}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListThingsInBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type ListThingsInBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token used to get the next set of results, or null if there are no additional
+	// results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// A list of things in the billing group.
+	Things []string `locationName:"things" type:"list"`
+}
+
+// String returns the string representation
+func (s ListThingsInBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListThingsInBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListThingsInBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListThingsInBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Things) > 0 {
+		v := s.Things
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "things", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -24971,6 +27574,63 @@ func (s PutItemInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Allows you to define a criteria to initiate the increase in rate of rollout
+// for a job.
+type RateIncreaseCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The threshold for number of notified things that will initiate the increase
+	// in rate of rollout.
+	NumberOfNotifiedThings *int64 `locationName:"numberOfNotifiedThings" min:"1" type:"integer"`
+
+	// The threshold for number of succeeded things that will initiate the increase
+	// in rate of rollout.
+	NumberOfSucceededThings *int64 `locationName:"numberOfSucceededThings" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s RateIncreaseCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RateIncreaseCriteria) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RateIncreaseCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RateIncreaseCriteria"}
+	if s.NumberOfNotifiedThings != nil && *s.NumberOfNotifiedThings < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfNotifiedThings", 1))
+	}
+	if s.NumberOfSucceededThings != nil && *s.NumberOfSucceededThings < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfSucceededThings", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RateIncreaseCriteria) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NumberOfNotifiedThings != nil {
+		v := *s.NumberOfNotifiedThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberOfNotifiedThings", protocol.Int64Value(v), metadata)
+	}
+	if s.NumberOfSucceededThings != nil {
+		v := *s.NumberOfSucceededThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberOfSucceededThings", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The input to the RegisterCACertificate operation.
 type RegisterCACertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -25537,6 +28197,104 @@ func (s RelatedResource) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	return nil
+}
+
+type RemoveThingFromBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the billing group.
+	BillingGroupArn *string `locationName:"billingGroupArn" type:"string"`
+
+	// The name of the billing group.
+	BillingGroupName *string `locationName:"billingGroupName" min:"1" type:"string"`
+
+	// The ARN of the thing to be removed from the billing group.
+	ThingArn *string `locationName:"thingArn" type:"string"`
+
+	// The name of the thing to be removed from the billing group.
+	ThingName *string `locationName:"thingName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RemoveThingFromBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RemoveThingFromBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RemoveThingFromBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveThingFromBillingGroupInput"}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+	if s.ThingName != nil && len(*s.ThingName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RemoveThingFromBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupArn != nil {
+		v := *s.BillingGroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingArn != nil {
+		v := *s.ThingArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type RemoveThingFromBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s RemoveThingFromBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RemoveThingFromBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RemoveThingFromBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RemoveThingFromBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -27875,6 +30633,136 @@ func (s StreamSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A set of key/value pairs that are used to manage the resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The tag's key.
+	Key *string `type:"string"`
+
+	// The tag's value.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Tag) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
+
+	// The new or modified tags for the resource.
+	//
+	// Tags is a required field
+	Tags []Tag `locationName:"tags" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Statistics for the checks performed during the audit.
 type TaskStatistics struct {
 	_ struct{} `type:"structure"`
@@ -28347,12 +31235,56 @@ func (s ThingAttribute) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The connectivity status of the thing.
+type ThingConnectivity struct {
+	_ struct{} `type:"structure"`
+
+	// True if the thing is connected to the AWS IoT service, false if it is not
+	// connected.
+	Connected *bool `locationName:"connected" type:"boolean"`
+
+	// The epoch time (in milliseconds) when the thing last connected or disconnected.
+	// Note that if the thing has been disconnected for more than a few weeks, the
+	// time value can be missing.
+	Timestamp *int64 `locationName:"timestamp" type:"long"`
+}
+
+// String returns the string representation
+func (s ThingConnectivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ThingConnectivity) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThingConnectivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Connected != nil {
+		v := *s.Connected
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "connected", protocol.BoolValue(v), metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timestamp", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The thing search index document.
 type ThingDocument struct {
 	_ struct{} `type:"structure"`
 
 	// The attributes.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
+
+	// Indicates whether or not the thing is connected to the AWS IoT service.
+	Connectivity *ThingConnectivity `locationName:"connectivity" type:"structure"`
 
 	// The shadow.
 	Shadow *string `locationName:"shadow" type:"string"`
@@ -28393,6 +31325,12 @@ func (s ThingDocument) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.Connectivity != nil {
+		v := s.Connectivity
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "connectivity", v, metadata)
 	}
 	if s.Shadow != nil {
 		v := *s.Shadow
@@ -28645,9 +31583,19 @@ func (s ThingGroupProperties) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Thing indexing configuration.
+// The thing indexing configuration. For more information, see Managing Thing
+// Indexing (https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html).
 type ThingIndexingConfiguration struct {
 	_ struct{} `type:"structure"`
+
+	// Thing connectivity indexing mode. Valid values are:
+	//
+	//    * STATUS – Your thing index will contain connectivity status. In order
+	//    to enable thing connectivity indexing, thingIndexMode must not be set
+	//    to OFF.
+	//
+	//    * OFF - Thing connectivity status indexing is disabled.
+	ThingConnectivityIndexingMode ThingConnectivityIndexingMode `locationName:"thingConnectivityIndexingMode" type:"string" enum:"true"`
 
 	// Thing indexing mode. Valid values are:
 	//
@@ -28687,6 +31635,12 @@ func (s *ThingIndexingConfiguration) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ThingIndexingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ThingConnectivityIndexingMode) > 0 {
+		v := s.ThingConnectivityIndexingMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingConnectivityIndexingMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if len(s.ThingIndexingMode) > 0 {
 		v := s.ThingIndexingMode
 
@@ -28845,6 +31799,43 @@ func (s ThingTypeProperties) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "thingTypeDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Specifies the amount of time each device has to finish its execution of the
+// job. A timer is started when the job execution status is set to IN_PROGRESS.
+// If the job execution status is not set to another terminal state before the
+// timer expires, it will be automatically set to TIMED_OUT.
+type TimeoutConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the amount of time, in minutes, this device has to finish execution
+	// of this job. The timeout interval can be anywhere between 1 minute and 7
+	// days (1 to 10080 minutes). The in progress timer can't be updated and will
+	// apply to all job executions for the job. Whenever a job execution remains
+	// in the IN_PROGRESS status for longer than this interval, the job execution
+	// will fail and switch to the terminal TIMED_OUT status.
+	InProgressTimeoutInMinutes *int64 `locationName:"inProgressTimeoutInMinutes" type:"long"`
+}
+
+// String returns the string representation
+func (s TimeoutConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TimeoutConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TimeoutConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InProgressTimeoutInMinutes != nil {
+		v := *s.InProgressTimeoutInMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inProgressTimeoutInMinutes", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -29307,6 +32298,98 @@ func (s TransferData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `locationName:"resourceArn" type:"string" required:"true"`
+
+	// A list of the keys of the tags to be removed from the resource.
+	//
+	// TagKeys is a required field
+	TagKeys []string `locationName:"tagKeys" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeys) > 0 {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tagKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 type UpdateAccountAuditConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29564,6 +32647,115 @@ func (s UpdateAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type UpdateBillingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the billing group.
+	//
+	// BillingGroupName is a required field
+	BillingGroupName *string `location:"uri" locationName:"billingGroupName" min:"1" type:"string" required:"true"`
+
+	// The properties of the billing group.
+	//
+	// BillingGroupProperties is a required field
+	BillingGroupProperties *BillingGroupProperties `locationName:"billingGroupProperties" type:"structure" required:"true"`
+
+	// The expected version of the billing group. If the version of the billing
+	// group does not match the expected version specified in the request, the UpdateBillingGroup
+	// request is rejected with a VersionConflictException.
+	ExpectedVersion *int64 `locationName:"expectedVersion" type:"long"`
+}
+
+// String returns the string representation
+func (s UpdateBillingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateBillingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateBillingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBillingGroupInput"}
+
+	if s.BillingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BillingGroupName"))
+	}
+	if s.BillingGroupName != nil && len(*s.BillingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BillingGroupName", 1))
+	}
+
+	if s.BillingGroupProperties == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BillingGroupProperties"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateBillingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.BillingGroupProperties != nil {
+		v := s.BillingGroupProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "billingGroupProperties", v, metadata)
+	}
+	if s.ExpectedVersion != nil {
+		v := *s.ExpectedVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
+	}
+	if s.BillingGroupName != nil {
+		v := *s.BillingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "billingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type UpdateBillingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The latest version of the billing group.
+	Version *int64 `locationName:"version" type:"long"`
+}
+
+// String returns the string representation
+func (s UpdateBillingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateBillingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateBillingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateBillingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The input to the UpdateCACertificate operation.
 type UpdateCACertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -29781,6 +32973,151 @@ func (s UpdateCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type UpdateDynamicThingGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The expected version of the dynamic thing group to update.
+	ExpectedVersion *int64 `locationName:"expectedVersion" type:"long"`
+
+	// The dynamic thing group index to update.
+	//
+	// Currently one index is supported: 'AWS_Things'.
+	IndexName *string `locationName:"indexName" min:"1" type:"string"`
+
+	// The dynamic thing group search query string to update.
+	QueryString *string `locationName:"queryString" min:"1" type:"string"`
+
+	// The dynamic thing group query version to update.
+	//
+	// Currently one query version is supported: "2017-09-30". If not specified,
+	// the query version defaults to this value.
+	QueryVersion *string `locationName:"queryVersion" type:"string"`
+
+	// The name of the dynamic thing group to update.
+	//
+	// ThingGroupName is a required field
+	ThingGroupName *string `location:"uri" locationName:"thingGroupName" min:"1" type:"string" required:"true"`
+
+	// The dynamic thing group properties to update.
+	//
+	// ThingGroupProperties is a required field
+	ThingGroupProperties *ThingGroupProperties `locationName:"thingGroupProperties" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateDynamicThingGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateDynamicThingGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateDynamicThingGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDynamicThingGroupInput"}
+	if s.IndexName != nil && len(*s.IndexName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
+	}
+	if s.QueryString != nil && len(*s.QueryString) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("QueryString", 1))
+	}
+
+	if s.ThingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingGroupName"))
+	}
+	if s.ThingGroupName != nil && len(*s.ThingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingGroupName", 1))
+	}
+
+	if s.ThingGroupProperties == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingGroupProperties"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDynamicThingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExpectedVersion != nil {
+		v := *s.ExpectedVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
+	}
+	if s.IndexName != nil {
+		v := *s.IndexName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "indexName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryString != nil {
+		v := *s.QueryString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryVersion != nil {
+		v := *s.QueryVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingGroupProperties != nil {
+		v := s.ThingGroupProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "thingGroupProperties", v, metadata)
+	}
+	if s.ThingGroupName != nil {
+		v := *s.ThingGroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type UpdateDynamicThingGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The dynamic thing group version.
+	Version *int64 `locationName:"version" type:"long"`
+}
+
+// String returns the string representation
+func (s UpdateDynamicThingGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateDynamicThingGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDynamicThingGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDynamicThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 type UpdateEventConfigurationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -29923,6 +33260,143 @@ func (s UpdateIndexingConfigurationOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateIndexingConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type UpdateJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// Allows you to create criteria to abort a job.
+	AbortConfig *AbortConfig `locationName:"abortConfig" type:"structure"`
+
+	// A short text description of the job.
+	Description *string `locationName:"description" type:"string"`
+
+	// Allows you to create a staged rollout of the job.
+	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig `locationName:"jobExecutionsRolloutConfig" type:"structure"`
+
+	// The ID of the job to be updated.
+	//
+	// JobId is a required field
+	JobId *string `location:"uri" locationName:"jobId" min:"1" type:"string" required:"true"`
+
+	// Configuration information for pre-signed S3 URLs.
+	PresignedUrlConfig *PresignedUrlConfig `locationName:"presignedUrlConfig" type:"structure"`
+
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. The timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the
+	// time expires, it will be automatically set to TIMED_OUT.
+	TimeoutConfig *TimeoutConfig `locationName:"timeoutConfig" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobInput"}
+
+	if s.JobId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
+	}
+	if s.JobId != nil && len(*s.JobId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
+	}
+	if s.AbortConfig != nil {
+		if err := s.AbortConfig.Validate(); err != nil {
+			invalidParams.AddNested("AbortConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.JobExecutionsRolloutConfig != nil {
+		if err := s.JobExecutionsRolloutConfig.Validate(); err != nil {
+			invalidParams.AddNested("JobExecutionsRolloutConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PresignedUrlConfig != nil {
+		if err := s.PresignedUrlConfig.Validate(); err != nil {
+			invalidParams.AddNested("PresignedUrlConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AbortConfig != nil {
+		v := s.AbortConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "abortConfig", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.JobExecutionsRolloutConfig != nil {
+		v := s.JobExecutionsRolloutConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "jobExecutionsRolloutConfig", v, metadata)
+	}
+	if s.PresignedUrlConfig != nil {
+		v := s.PresignedUrlConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "presignedUrlConfig", v, metadata)
+	}
+	if s.TimeoutConfig != nil {
+		v := s.TimeoutConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeoutConfig", v, metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type UpdateJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -30669,6 +34143,12 @@ func (s UpdateThingGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateThingGroupsForThingInput struct {
 	_ struct{} `type:"structure"`
 
+	// Override dynamic thing groups with static thing groups when 10-group limit
+	// is reached. If a thing belongs to 10 thing groups, and one or more of those
+	// groups are dynamic thing groups, adding a thing to a static group removes
+	// the thing from the last dynamic group.
+	OverrideDynamicGroups *bool `locationName:"overrideDynamicGroups" type:"boolean"`
+
 	// The groups to which the thing will be added.
 	ThingGroupsToAdd []string `locationName:"thingGroupsToAdd" type:"list"`
 
@@ -30705,6 +34185,12 @@ func (s *UpdateThingGroupsForThingInput) Validate() error {
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateThingGroupsForThingInput) MarshalFields(e protocol.FieldEncoder) error {
 
+	if s.OverrideDynamicGroups != nil {
+		v := *s.OverrideDynamicGroups
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "overrideDynamicGroups", protocol.BoolValue(v), metadata)
+	}
 	if len(s.ThingGroupsToAdd) > 0 {
 		v := s.ThingGroupsToAdd
 
@@ -31107,6 +34593,22 @@ func (s ViolationEvent) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type AbortAction string
+
+// Enum values for AbortAction
+const (
+	AbortActionCancel AbortAction = "CANCEL"
+)
+
+func (enum AbortAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AbortAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ActionType string
 
 // Enum values for ActionType
@@ -31412,6 +34914,24 @@ func (enum DayOfWeek) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DynamicGroupStatus string
+
+// Enum values for DynamicGroupStatus
+const (
+	DynamicGroupStatusActive     DynamicGroupStatus = "ACTIVE"
+	DynamicGroupStatusBuilding   DynamicGroupStatus = "BUILDING"
+	DynamicGroupStatusRebuilding DynamicGroupStatus = "REBUILDING"
+)
+
+func (enum DynamicGroupStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DynamicGroupStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DynamoKeyType string
 
 // Enum values for DynamoKeyType
@@ -31473,6 +34993,25 @@ func (enum IndexStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type JobExecutionFailureType string
+
+// Enum values for JobExecutionFailureType
+const (
+	JobExecutionFailureTypeFailed   JobExecutionFailureType = "FAILED"
+	JobExecutionFailureTypeRejected JobExecutionFailureType = "REJECTED"
+	JobExecutionFailureTypeTimedOut JobExecutionFailureType = "TIMED_OUT"
+	JobExecutionFailureTypeAll      JobExecutionFailureType = "ALL"
+)
+
+func (enum JobExecutionFailureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobExecutionFailureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JobExecutionStatus string
 
 // Enum values for JobExecutionStatus
@@ -31481,6 +35020,7 @@ const (
 	JobExecutionStatusInProgress JobExecutionStatus = "IN_PROGRESS"
 	JobExecutionStatusSucceeded  JobExecutionStatus = "SUCCEEDED"
 	JobExecutionStatusFailed     JobExecutionStatus = "FAILED"
+	JobExecutionStatusTimedOut   JobExecutionStatus = "TIMED_OUT"
 	JobExecutionStatusRejected   JobExecutionStatus = "REJECTED"
 	JobExecutionStatusRemoved    JobExecutionStatus = "REMOVED"
 	JobExecutionStatusCanceled   JobExecutionStatus = "CANCELED"
@@ -31658,6 +35198,23 @@ func (enum TargetSelection) MarshalValue() (string, error) {
 }
 
 func (enum TargetSelection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ThingConnectivityIndexingMode string
+
+// Enum values for ThingConnectivityIndexingMode
+const (
+	ThingConnectivityIndexingModeOff    ThingConnectivityIndexingMode = "OFF"
+	ThingConnectivityIndexingModeStatus ThingConnectivityIndexingMode = "STATUS"
+)
+
+func (enum ThingConnectivityIndexingMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThingConnectivityIndexingMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

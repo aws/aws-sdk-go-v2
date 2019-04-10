@@ -1,6 +1,7 @@
 package expression_test
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -49,7 +50,7 @@ func ExampleBuilder_WithProjection() {
 	}
 
 	req := svc.QueryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -112,7 +113,7 @@ func ExampleBuilder_WithKeyCondition() {
 	}
 
 	req := svc.QueryRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -177,7 +178,7 @@ func ExampleBuilder_WithFilter() {
 	}
 
 	req := svc.ScanRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -247,7 +248,7 @@ func ExampleBuilder_WithUpdate() {
 	}
 
 	req := svc.UpdateItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -316,7 +317,7 @@ func ExampleBuilder_WithCondition() {
 	}
 
 	req := svc.DeleteItemRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

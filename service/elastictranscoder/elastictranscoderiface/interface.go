@@ -9,6 +9,8 @@
 package elastictranscoderiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
 )
@@ -97,8 +99,7 @@ type ElasticTranscoderAPI interface {
 
 	UpdatePipelineStatusRequest(*elastictranscoder.UpdatePipelineStatusInput) elastictranscoder.UpdatePipelineStatusRequest
 
-	WaitUntilJobComplete(*elastictranscoder.ReadJobInput) error
-	WaitUntilJobCompleteWithContext(aws.Context, *elastictranscoder.ReadJobInput, ...aws.WaiterOption) error
+	WaitUntilJobComplete(context.Context, *elastictranscoder.ReadJobInput, ...aws.WaiterOption) error
 }
 
 var _ ElasticTranscoderAPI = (*elastictranscoder.ElasticTranscoder)(nil)

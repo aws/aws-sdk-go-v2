@@ -9,6 +9,8 @@
 package dynamodbiface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
@@ -117,6 +119,10 @@ type DynamoDBAPI interface {
 
 	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
 
+	TransactGetItemsRequest(*dynamodb.TransactGetItemsInput) dynamodb.TransactGetItemsRequest
+
+	TransactWriteItemsRequest(*dynamodb.TransactWriteItemsInput) dynamodb.TransactWriteItemsRequest
+
 	UntagResourceRequest(*dynamodb.UntagResourceInput) dynamodb.UntagResourceRequest
 
 	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
@@ -131,11 +137,9 @@ type DynamoDBAPI interface {
 
 	UpdateTimeToLiveRequest(*dynamodb.UpdateTimeToLiveInput) dynamodb.UpdateTimeToLiveRequest
 
-	WaitUntilTableExists(*dynamodb.DescribeTableInput) error
-	WaitUntilTableExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
+	WaitUntilTableExists(context.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
 
-	WaitUntilTableNotExists(*dynamodb.DescribeTableInput) error
-	WaitUntilTableNotExistsWithContext(aws.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
+	WaitUntilTableNotExists(context.Context, *dynamodb.DescribeTableInput, ...aws.WaiterOption) error
 }
 
 var _ DynamoDBAPI = (*dynamodb.DynamoDB)(nil)

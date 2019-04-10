@@ -2,6 +2,7 @@ package restjson_test
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -14,7 +15,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -100,7 +101,8 @@ type InputService1TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService1TestCaseOperation1 API request.
-func (r InputService1TestCaseOperation1Request) Send() (*InputService1TestShapeInputService1TestCaseOperation1Output, error) {
+func (r InputService1TestCaseOperation1Request) Send(ctx context.Context) (*InputService1TestShapeInputService1TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -114,7 +116,7 @@ func (r InputService1TestCaseOperation1Request) Send() (*InputService1TestShapeI
 //
 //    // Example sending a request using the InputService1TestCaseOperation1Request method.
 //    req := client.InputService1TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -223,7 +225,8 @@ type InputService2TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService2TestCaseOperation1 API request.
-func (r InputService2TestCaseOperation1Request) Send() (*InputService2TestShapeInputService2TestCaseOperation1Output, error) {
+func (r InputService2TestCaseOperation1Request) Send(ctx context.Context) (*InputService2TestShapeInputService2TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +240,7 @@ func (r InputService2TestCaseOperation1Request) Send() (*InputService2TestShapeI
 //
 //    // Example sending a request using the InputService2TestCaseOperation1Request method.
 //    req := client.InputService2TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -354,7 +357,8 @@ type InputService3TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService3TestCaseOperation1 API request.
-func (r InputService3TestCaseOperation1Request) Send() (*InputService3TestShapeInputService3TestCaseOperation1Output, error) {
+func (r InputService3TestCaseOperation1Request) Send(ctx context.Context) (*InputService3TestShapeInputService3TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -368,7 +372,7 @@ func (r InputService3TestCaseOperation1Request) Send() (*InputService3TestShapeI
 //
 //    // Example sending a request using the InputService3TestCaseOperation1Request method.
 //    req := client.InputService3TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -485,7 +489,8 @@ type InputService4TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService4TestCaseOperation1 API request.
-func (r InputService4TestCaseOperation1Request) Send() (*InputService4TestShapeInputService4TestCaseOperation1Output, error) {
+func (r InputService4TestCaseOperation1Request) Send(ctx context.Context) (*InputService4TestShapeInputService4TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -499,7 +504,7 @@ func (r InputService4TestCaseOperation1Request) Send() (*InputService4TestShapeI
 //
 //    // Example sending a request using the InputService4TestCaseOperation1Request method.
 //    req := client.InputService4TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -622,7 +627,8 @@ type InputService5TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService5TestCaseOperation1 API request.
-func (r InputService5TestCaseOperation1Request) Send() (*InputService5TestShapeInputService5TestCaseOperation1Output, error) {
+func (r InputService5TestCaseOperation1Request) Send(ctx context.Context) (*InputService5TestShapeInputService5TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -636,7 +642,7 @@ func (r InputService5TestCaseOperation1Request) Send() (*InputService5TestShapeI
 //
 //    // Example sending a request using the InputService5TestCaseOperation1Request method.
 //    req := client.InputService5TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -767,7 +773,8 @@ type InputService6TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService6TestCaseOperation1 API request.
-func (r InputService6TestCaseOperation1Request) Send() (*InputService6TestShapeInputService6TestCaseOperation1Output, error) {
+func (r InputService6TestCaseOperation1Request) Send(ctx context.Context) (*InputService6TestShapeInputService6TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -781,7 +788,7 @@ func (r InputService6TestCaseOperation1Request) Send() (*InputService6TestShapeI
 //
 //    // Example sending a request using the InputService6TestCaseOperation1Request method.
 //    req := client.InputService6TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -917,7 +924,8 @@ type InputService7TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService7TestCaseOperation1 API request.
-func (r InputService7TestCaseOperation1Request) Send() (*InputService7TestShapeInputService7TestCaseOperation1Output, error) {
+func (r InputService7TestCaseOperation1Request) Send(ctx context.Context) (*InputService7TestShapeInputService7TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -931,7 +939,7 @@ func (r InputService7TestCaseOperation1Request) Send() (*InputService7TestShapeI
 //
 //    // Example sending a request using the InputService7TestCaseOperation1Request method.
 //    req := client.InputService7TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -965,7 +973,8 @@ type InputService7TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService7TestCaseOperation2 API request.
-func (r InputService7TestCaseOperation2Request) Send() (*InputService7TestShapeInputService7TestCaseOperation2Output, error) {
+func (r InputService7TestCaseOperation2Request) Send(ctx context.Context) (*InputService7TestShapeInputService7TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -979,7 +988,7 @@ func (r InputService7TestCaseOperation2Request) Send() (*InputService7TestShapeI
 //
 //    // Example sending a request using the InputService7TestCaseOperation2Request method.
 //    req := client.InputService7TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1112,7 +1121,8 @@ type InputService8TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService8TestCaseOperation1 API request.
-func (r InputService8TestCaseOperation1Request) Send() (*InputService8TestShapeInputService8TestCaseOperation1Output, error) {
+func (r InputService8TestCaseOperation1Request) Send(ctx context.Context) (*InputService8TestShapeInputService8TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1126,7 +1136,7 @@ func (r InputService8TestCaseOperation1Request) Send() (*InputService8TestShapeI
 //
 //    // Example sending a request using the InputService8TestCaseOperation1Request method.
 //    req := client.InputService8TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1259,7 +1269,8 @@ type InputService9TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService9TestCaseOperation1 API request.
-func (r InputService9TestCaseOperation1Request) Send() (*InputService9TestShapeInputService9TestCaseOperation1Output, error) {
+func (r InputService9TestCaseOperation1Request) Send(ctx context.Context) (*InputService9TestShapeInputService9TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1273,7 +1284,7 @@ func (r InputService9TestCaseOperation1Request) Send() (*InputService9TestShapeI
 //
 //    // Example sending a request using the InputService9TestCaseOperation1Request method.
 //    req := client.InputService9TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1439,7 +1450,8 @@ type InputService10TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService10TestCaseOperation1 API request.
-func (r InputService10TestCaseOperation1Request) Send() (*InputService10TestShapeInputService10TestCaseOperation1Output, error) {
+func (r InputService10TestCaseOperation1Request) Send(ctx context.Context) (*InputService10TestShapeInputService10TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1453,7 +1465,7 @@ func (r InputService10TestCaseOperation1Request) Send() (*InputService10TestShap
 //
 //    // Example sending a request using the InputService10TestCaseOperation1Request method.
 //    req := client.InputService10TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1627,7 +1639,8 @@ type InputService11TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService11TestCaseOperation1 API request.
-func (r InputService11TestCaseOperation1Request) Send() (*InputService11TestShapeInputService11TestCaseOperation1Output, error) {
+func (r InputService11TestCaseOperation1Request) Send(ctx context.Context) (*InputService11TestShapeInputService11TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1641,7 +1654,7 @@ func (r InputService11TestCaseOperation1Request) Send() (*InputService11TestShap
 //
 //    // Example sending a request using the InputService11TestCaseOperation1Request method.
 //    req := client.InputService11TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1789,7 +1802,8 @@ type InputService12TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService12TestCaseOperation1 API request.
-func (r InputService12TestCaseOperation1Request) Send() (*InputService12TestShapeInputService12TestCaseOperation1Output, error) {
+func (r InputService12TestCaseOperation1Request) Send(ctx context.Context) (*InputService12TestShapeInputService12TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1803,7 +1817,7 @@ func (r InputService12TestCaseOperation1Request) Send() (*InputService12TestShap
 //
 //    // Example sending a request using the InputService12TestCaseOperation1Request method.
 //    req := client.InputService12TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1944,7 +1958,8 @@ type InputService13TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService13TestCaseOperation1 API request.
-func (r InputService13TestCaseOperation1Request) Send() (*InputService13TestShapeInputService13TestCaseOperation1Output, error) {
+func (r InputService13TestCaseOperation1Request) Send(ctx context.Context) (*InputService13TestShapeInputService13TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1958,7 +1973,7 @@ func (r InputService13TestCaseOperation1Request) Send() (*InputService13TestShap
 //
 //    // Example sending a request using the InputService13TestCaseOperation1Request method.
 //    req := client.InputService13TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1992,7 +2007,8 @@ type InputService13TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService13TestCaseOperation2 API request.
-func (r InputService13TestCaseOperation2Request) Send() (*InputService13TestShapeInputService13TestCaseOperation2Output, error) {
+func (r InputService13TestCaseOperation2Request) Send(ctx context.Context) (*InputService13TestShapeInputService13TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2006,7 +2022,7 @@ func (r InputService13TestCaseOperation2Request) Send() (*InputService13TestShap
 //
 //    // Example sending a request using the InputService13TestCaseOperation2Request method.
 //    req := client.InputService13TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2139,7 +2155,8 @@ type InputService14TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService14TestCaseOperation1 API request.
-func (r InputService14TestCaseOperation1Request) Send() (*InputService14TestShapeInputService14TestCaseOperation1Output, error) {
+func (r InputService14TestCaseOperation1Request) Send(ctx context.Context) (*InputService14TestShapeInputService14TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2153,7 +2170,7 @@ func (r InputService14TestCaseOperation1Request) Send() (*InputService14TestShap
 //
 //    // Example sending a request using the InputService14TestCaseOperation1Request method.
 //    req := client.InputService14TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2187,7 +2204,8 @@ type InputService14TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService14TestCaseOperation2 API request.
-func (r InputService14TestCaseOperation2Request) Send() (*InputService14TestShapeInputService14TestCaseOperation2Output, error) {
+func (r InputService14TestCaseOperation2Request) Send(ctx context.Context) (*InputService14TestShapeInputService14TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2201,7 +2219,7 @@ func (r InputService14TestCaseOperation2Request) Send() (*InputService14TestShap
 //
 //    // Example sending a request using the InputService14TestCaseOperation2Request method.
 //    req := client.InputService14TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2351,7 +2369,8 @@ type InputService15TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService15TestCaseOperation1 API request.
-func (r InputService15TestCaseOperation1Request) Send() (*InputService15TestShapeInputService15TestCaseOperation1Output, error) {
+func (r InputService15TestCaseOperation1Request) Send(ctx context.Context) (*InputService15TestShapeInputService15TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2365,7 +2384,7 @@ func (r InputService15TestCaseOperation1Request) Send() (*InputService15TestShap
 //
 //    // Example sending a request using the InputService15TestCaseOperation1Request method.
 //    req := client.InputService15TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2399,7 +2418,8 @@ type InputService15TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService15TestCaseOperation2 API request.
-func (r InputService15TestCaseOperation2Request) Send() (*InputService15TestShapeInputService15TestCaseOperation2Output, error) {
+func (r InputService15TestCaseOperation2Request) Send(ctx context.Context) (*InputService15TestShapeInputService15TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2413,7 +2433,7 @@ func (r InputService15TestCaseOperation2Request) Send() (*InputService15TestShap
 //
 //    // Example sending a request using the InputService15TestCaseOperation2Request method.
 //    req := client.InputService15TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2546,7 +2566,8 @@ type InputService16TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService16TestCaseOperation1 API request.
-func (r InputService16TestCaseOperation1Request) Send() (*InputService16TestShapeInputService16TestCaseOperation1Output, error) {
+func (r InputService16TestCaseOperation1Request) Send(ctx context.Context) (*InputService16TestShapeInputService16TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2560,7 +2581,7 @@ func (r InputService16TestCaseOperation1Request) Send() (*InputService16TestShap
 //
 //    // Example sending a request using the InputService16TestCaseOperation1Request method.
 //    req := client.InputService16TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2594,7 +2615,8 @@ type InputService16TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService16TestCaseOperation2 API request.
-func (r InputService16TestCaseOperation2Request) Send() (*InputService16TestShapeInputService16TestCaseOperation2Output, error) {
+func (r InputService16TestCaseOperation2Request) Send(ctx context.Context) (*InputService16TestShapeInputService16TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2608,7 +2630,7 @@ func (r InputService16TestCaseOperation2Request) Send() (*InputService16TestShap
 //
 //    // Example sending a request using the InputService16TestCaseOperation2Request method.
 //    req := client.InputService16TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2642,7 +2664,8 @@ type InputService16TestCaseOperation3Request struct {
 }
 
 // Send marshals and sends the InputService16TestCaseOperation3 API request.
-func (r InputService16TestCaseOperation3Request) Send() (*InputService16TestShapeInputService16TestCaseOperation3Output, error) {
+func (r InputService16TestCaseOperation3Request) Send(ctx context.Context) (*InputService16TestShapeInputService16TestCaseOperation3Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2656,7 +2679,7 @@ func (r InputService16TestCaseOperation3Request) Send() (*InputService16TestShap
 //
 //    // Example sending a request using the InputService16TestCaseOperation3Request method.
 //    req := client.InputService16TestCaseOperation3Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2690,7 +2713,8 @@ type InputService16TestCaseOperation4Request struct {
 }
 
 // Send marshals and sends the InputService16TestCaseOperation4 API request.
-func (r InputService16TestCaseOperation4Request) Send() (*InputService16TestShapeInputService16TestCaseOperation4Output, error) {
+func (r InputService16TestCaseOperation4Request) Send(ctx context.Context) (*InputService16TestShapeInputService16TestCaseOperation4Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2704,7 +2728,7 @@ func (r InputService16TestCaseOperation4Request) Send() (*InputService16TestShap
 //
 //    // Example sending a request using the InputService16TestCaseOperation4Request method.
 //    req := client.InputService16TestCaseOperation4Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2738,7 +2762,8 @@ type InputService16TestCaseOperation5Request struct {
 }
 
 // Send marshals and sends the InputService16TestCaseOperation5 API request.
-func (r InputService16TestCaseOperation5Request) Send() (*InputService16TestShapeInputService16TestCaseOperation5Output, error) {
+func (r InputService16TestCaseOperation5Request) Send(ctx context.Context) (*InputService16TestShapeInputService16TestCaseOperation5Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2752,7 +2777,7 @@ func (r InputService16TestCaseOperation5Request) Send() (*InputService16TestShap
 //
 //    // Example sending a request using the InputService16TestCaseOperation5Request method.
 //    req := client.InputService16TestCaseOperation5Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2786,7 +2811,8 @@ type InputService16TestCaseOperation6Request struct {
 }
 
 // Send marshals and sends the InputService16TestCaseOperation6 API request.
-func (r InputService16TestCaseOperation6Request) Send() (*InputService16TestShapeInputService16TestCaseOperation6Output, error) {
+func (r InputService16TestCaseOperation6Request) Send(ctx context.Context) (*InputService16TestShapeInputService16TestCaseOperation6Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2800,7 +2826,7 @@ func (r InputService16TestCaseOperation6Request) Send() (*InputService16TestShap
 //
 //    // Example sending a request using the InputService16TestCaseOperation6Request method.
 //    req := client.InputService16TestCaseOperation6Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3050,7 +3076,8 @@ type InputService17TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService17TestCaseOperation1 API request.
-func (r InputService17TestCaseOperation1Request) Send() (*InputService17TestShapeInputService17TestCaseOperation1Output, error) {
+func (r InputService17TestCaseOperation1Request) Send(ctx context.Context) (*InputService17TestShapeInputService17TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3064,7 +3091,7 @@ func (r InputService17TestCaseOperation1Request) Send() (*InputService17TestShap
 //
 //    // Example sending a request using the InputService17TestCaseOperation1Request method.
 //    req := client.InputService17TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3098,7 +3125,8 @@ type InputService17TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService17TestCaseOperation2 API request.
-func (r InputService17TestCaseOperation2Request) Send() (*InputService17TestShapeInputService17TestCaseOperation2Output, error) {
+func (r InputService17TestCaseOperation2Request) Send(ctx context.Context) (*InputService17TestShapeInputService17TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3112,7 +3140,7 @@ func (r InputService17TestCaseOperation2Request) Send() (*InputService17TestShap
 //
 //    // Example sending a request using the InputService17TestCaseOperation2Request method.
 //    req := client.InputService17TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3253,7 +3281,8 @@ type InputService18TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService18TestCaseOperation1 API request.
-func (r InputService18TestCaseOperation1Request) Send() (*InputService18TestShapeInputService18TestCaseOperation1Output, error) {
+func (r InputService18TestCaseOperation1Request) Send(ctx context.Context) (*InputService18TestShapeInputService18TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3267,7 +3296,7 @@ func (r InputService18TestCaseOperation1Request) Send() (*InputService18TestShap
 //
 //    // Example sending a request using the InputService18TestCaseOperation1Request method.
 //    req := client.InputService18TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3384,7 +3413,8 @@ type InputService19TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService19TestCaseOperation1 API request.
-func (r InputService19TestCaseOperation1Request) Send() (*InputService19TestShapeInputService19TestCaseOperation1Output, error) {
+func (r InputService19TestCaseOperation1Request) Send(ctx context.Context) (*InputService19TestShapeInputService19TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3398,7 +3428,7 @@ func (r InputService19TestCaseOperation1Request) Send() (*InputService19TestShap
 //
 //    // Example sending a request using the InputService19TestCaseOperation1Request method.
 //    req := client.InputService19TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3515,7 +3545,8 @@ type InputService20TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService20TestCaseOperation1 API request.
-func (r InputService20TestCaseOperation1Request) Send() (*InputService20TestShapeInputService20TestCaseOperation1Output, error) {
+func (r InputService20TestCaseOperation1Request) Send(ctx context.Context) (*InputService20TestShapeInputService20TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3529,7 +3560,7 @@ func (r InputService20TestCaseOperation1Request) Send() (*InputService20TestShap
 //
 //    // Example sending a request using the InputService20TestCaseOperation1Request method.
 //    req := client.InputService20TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3563,7 +3594,8 @@ type InputService20TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService20TestCaseOperation2 API request.
-func (r InputService20TestCaseOperation2Request) Send() (*InputService20TestShapeInputService20TestCaseOperation2Output, error) {
+func (r InputService20TestCaseOperation2Request) Send(ctx context.Context) (*InputService20TestShapeInputService20TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3577,7 +3609,7 @@ func (r InputService20TestCaseOperation2Request) Send() (*InputService20TestShap
 //
 //    // Example sending a request using the InputService20TestCaseOperation2Request method.
 //    req := client.InputService20TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3716,7 +3748,8 @@ type InputService21TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService21TestCaseOperation1 API request.
-func (r InputService21TestCaseOperation1Request) Send() (*InputService21TestShapeInputService21TestCaseOperation1Output, error) {
+func (r InputService21TestCaseOperation1Request) Send(ctx context.Context) (*InputService21TestShapeInputService21TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3730,7 +3763,7 @@ func (r InputService21TestCaseOperation1Request) Send() (*InputService21TestShap
 //
 //    // Example sending a request using the InputService21TestCaseOperation1Request method.
 //    req := client.InputService21TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3764,7 +3797,8 @@ type InputService21TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService21TestCaseOperation2 API request.
-func (r InputService21TestCaseOperation2Request) Send() (*InputService21TestShapeInputService21TestCaseOperation2Output, error) {
+func (r InputService21TestCaseOperation2Request) Send(ctx context.Context) (*InputService21TestShapeInputService21TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3778,7 +3812,7 @@ func (r InputService21TestCaseOperation2Request) Send() (*InputService21TestShap
 //
 //    // Example sending a request using the InputService21TestCaseOperation2Request method.
 //    req := client.InputService21TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3812,7 +3846,8 @@ type InputService21TestCaseOperation3Request struct {
 }
 
 // Send marshals and sends the InputService21TestCaseOperation3 API request.
-func (r InputService21TestCaseOperation3Request) Send() (*InputService21TestShapeInputService21TestCaseOperation3Output, error) {
+func (r InputService21TestCaseOperation3Request) Send(ctx context.Context) (*InputService21TestShapeInputService21TestCaseOperation3Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3826,7 +3861,7 @@ func (r InputService21TestCaseOperation3Request) Send() (*InputService21TestShap
 //
 //    // Example sending a request using the InputService21TestCaseOperation3Request method.
 //    req := client.InputService21TestCaseOperation3Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4022,7 +4057,8 @@ type InputService22TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the InputService22TestCaseOperation1 API request.
-func (r InputService22TestCaseOperation1Request) Send() (*InputService22TestShapeInputService22TestCaseOperation1Output, error) {
+func (r InputService22TestCaseOperation1Request) Send(ctx context.Context) (*InputService22TestShapeInputService22TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4036,7 +4072,7 @@ func (r InputService22TestCaseOperation1Request) Send() (*InputService22TestShap
 //
 //    // Example sending a request using the InputService22TestCaseOperation1Request method.
 //    req := client.InputService22TestCaseOperation1Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4070,7 +4106,8 @@ type InputService22TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the InputService22TestCaseOperation2 API request.
-func (r InputService22TestCaseOperation2Request) Send() (*InputService22TestShapeInputService22TestCaseOperation2Output, error) {
+func (r InputService22TestCaseOperation2Request) Send(ctx context.Context) (*InputService22TestShapeInputService22TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4084,7 +4121,7 @@ func (r InputService22TestCaseOperation2Request) Send() (*InputService22TestShap
 //
 //    // Example sending a request using the InputService22TestCaseOperation2Request method.
 //    req := client.InputService22TestCaseOperation2Request(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4221,6 +4258,395 @@ func (enum InputService22TestShapeEnumType) MarshalValueBuf(b []byte) ([]byte, e
 	return append(b, enum...), nil
 }
 
+// InputService23ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// InputService23ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService23ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the InputService23ProtocolTest client with a config.
+//
+// Example:
+//     // Create a InputService23ProtocolTest client from just a config.
+//     svc := inputservice23protocoltest.New(myConfig)
+func NewInputService23ProtocolTest(config aws.Config) *InputService23ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &InputService23ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "inputservice23protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "2014-01-01",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a InputService23ProtocolTest operation and runs any
+// custom request initialization.
+func (c *InputService23ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opInputService23TestCaseOperation1 = "StaticOp"
+
+// InputService23TestCaseOperation1Request is a API request type for the InputService23TestCaseOperation1 API operation.
+type InputService23TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService23TestShapeInputService23TestCaseOperation1Input
+	Copy  func(*InputService23TestShapeInputService23TestCaseOperation1Input) InputService23TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService23TestCaseOperation1 API request.
+func (r InputService23TestCaseOperation1Request) Send(ctx context.Context) (*InputService23TestShapeInputService23TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService23TestShapeInputService23TestCaseOperation1Output), nil
+}
+
+// InputService23TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService23TestCaseOperation1Request method.
+//    req := client.InputService23TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService23ProtocolTest) InputService23TestCaseOperation1Request(input *InputService23TestShapeInputService23TestCaseOperation1Input) InputService23TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService23TestCaseOperation1,
+		HTTPMethod: "POST",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &InputService23TestShapeInputService23TestCaseOperation1Input{}
+	}
+
+	output := &InputService23TestShapeInputService23TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("data-", nil))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return InputService23TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService23TestCaseOperation1Request}
+}
+
+const opInputService23TestCaseOperation2 = "MemberRefOp"
+
+// InputService23TestCaseOperation2Request is a API request type for the InputService23TestCaseOperation2 API operation.
+type InputService23TestCaseOperation2Request struct {
+	*aws.Request
+	Input *InputService23TestShapeInputService23TestCaseOperation2Input
+	Copy  func(*InputService23TestShapeInputService23TestCaseOperation2Input) InputService23TestCaseOperation2Request
+}
+
+// Send marshals and sends the InputService23TestCaseOperation2 API request.
+func (r InputService23TestCaseOperation2Request) Send(ctx context.Context) (*InputService23TestShapeInputService23TestCaseOperation2Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService23TestShapeInputService23TestCaseOperation2Output), nil
+}
+
+// InputService23TestCaseOperation2Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService23TestCaseOperation2Request method.
+//    req := client.InputService23TestCaseOperation2Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService23ProtocolTest) InputService23TestCaseOperation2Request(input *InputService23TestShapeInputService23TestCaseOperation2Input) InputService23TestCaseOperation2Request {
+	op := &aws.Operation{
+		Name:       opInputService23TestCaseOperation2,
+		HTTPMethod: "POST",
+		HTTPPath:   "/path",
+	}
+
+	if input == nil {
+		input = &InputService23TestShapeInputService23TestCaseOperation2Input{}
+	}
+
+	output := &InputService23TestShapeInputService23TestCaseOperation2Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	req.Handlers.Build.PushBackNamed(protocol.NewHostPrefixHandler("foo-{Name}.", input.hostLabels))
+	req.Handlers.Build.PushBackNamed(protocol.ValidateEndpointHostHandler)
+	return InputService23TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService23TestCaseOperation2Request}
+}
+
+type InputService23TestShapeInputService23TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService23TestShapeInputService23TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+type InputService23TestShapeInputService23TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService23TestShapeInputService23TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService23TestShapeInputService23TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type InputService23TestShapeInputService23TestCaseOperation2Input struct {
+	_ struct{} `type:"structure"`
+
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputService23TestShapeInputService23TestCaseOperation2Input) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputService23TestShapeInputService23TestCaseOperation2Input"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService23TestShapeInputService23TestCaseOperation2Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+func (s *InputService23TestShapeInputService23TestCaseOperation2Input) hostLabels() map[string]string {
+	return map[string]string{
+		"Name": aws.StringValue(s.Name),
+	}
+}
+
+type InputService23TestShapeInputService23TestCaseOperation2Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService23TestShapeInputService23TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService23TestShapeInputService23TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// InputService24ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// InputService24ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type InputService24ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the InputService24ProtocolTest client with a config.
+//
+// Example:
+//     // Create a InputService24ProtocolTest client from just a config.
+//     svc := inputservice24protocoltest.New(myConfig)
+func NewInputService24ProtocolTest(config aws.Config) *InputService24ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &InputService24ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "inputservice24protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "2014-01-01",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(restjson.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(restjson.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(restjson.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(restjson.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a InputService24ProtocolTest operation and runs any
+// custom request initialization.
+func (c *InputService24ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opInputService24TestCaseOperation1 = "OperationName"
+
+// InputService24TestCaseOperation1Request is a API request type for the InputService24TestCaseOperation1 API operation.
+type InputService24TestCaseOperation1Request struct {
+	*aws.Request
+	Input *InputService24TestShapeInputService24TestCaseOperation1Input
+	Copy  func(*InputService24TestShapeInputService24TestCaseOperation1Input) InputService24TestCaseOperation1Request
+}
+
+// Send marshals and sends the InputService24TestCaseOperation1 API request.
+func (r InputService24TestCaseOperation1Request) Send(ctx context.Context) (*InputService24TestShapeInputService24TestCaseOperation1Output, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InputService24TestShapeInputService24TestCaseOperation1Output), nil
+}
+
+// InputService24TestCaseOperation1Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the InputService24TestCaseOperation1Request method.
+//    req := client.InputService24TestCaseOperation1Request(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *InputService24ProtocolTest) InputService24TestCaseOperation1Request(input *InputService24TestShapeInputService24TestCaseOperation1Input) InputService24TestCaseOperation1Request {
+	op := &aws.Operation{
+		Name:       opInputService24TestCaseOperation1,
+		HTTPMethod: "GET",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &InputService24TestShapeInputService24TestCaseOperation1Input{}
+	}
+
+	output := &InputService24TestShapeInputService24TestCaseOperation1Output{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return InputService24TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService24TestCaseOperation1Request}
+}
+
+type InputService24TestShapeInputService24TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+
+	Header1 *string `location:"header" type:"string"`
+
+	HeaderMap map[string]string `location:"headers" locationName:"header-map-" type:"map"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService24TestShapeInputService24TestCaseOperation1Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Header1 != nil {
+		v := *s.Header1
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Header1", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.HeaderMap) > 0 {
+		v := s.HeaderMap
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.HeadersTarget, "header-map-", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
+type InputService24TestShapeInputService24TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s InputService24TestShapeInputService24TestCaseOperation1Output) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputService24TestShapeInputService24TestCaseOperation1Output) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 //
 // Tests begin here
 //
@@ -4235,7 +4661,7 @@ func TestInputService1ProtocolTestNoParametersCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4260,7 +4686,7 @@ func TestInputService2ProtocolTestURIParameterOnlyWithNoLocationNameCase1(t *tes
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4285,7 +4711,7 @@ func TestInputService3ProtocolTestURIParameterOnlyWithLocationNameCase1(t *testi
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4313,7 +4739,7 @@ func TestInputService4ProtocolTestQuerystringListOfStringsCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4342,7 +4768,7 @@ func TestInputService5ProtocolTestStringToStringMapsInQuerystringCase1(t *testin
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4377,7 +4803,7 @@ func TestInputService6ProtocolTestStringToStringListMapsInQuerystringCase1(t *te
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4402,7 +4828,7 @@ func TestInputService7ProtocolTestBooleanInQuerystringCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4427,7 +4853,7 @@ func TestInputService7ProtocolTestBooleanInQuerystringCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4454,7 +4880,7 @@ func TestInputService8ProtocolTestURIParameterAndQuerystringParamsCase1(t *testi
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4485,7 +4911,7 @@ func TestInputService9ProtocolTestURIParameterQuerystringParamsAndJSONBodyCase1(
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4524,7 +4950,7 @@ func TestInputService10ProtocolTestURIParameterQuerystringParamsHeadersAndJSONBo
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4541,7 +4967,7 @@ func TestInputService10ProtocolTestURIParameterQuerystringParamsHeadersAndJSONBo
 
 	// assert headers
 	if e, a := "12345", r.Header.Get("x-amz-checksum"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -4561,7 +4987,7 @@ func TestInputService11ProtocolTestStreamingPayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4580,7 +5006,7 @@ func TestInputService11ProtocolTestStreamingPayloadCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "foo", r.Header.Get("x-amz-sha256-tree-hash"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -4599,7 +5025,7 @@ func TestInputService12ProtocolTestSerializeBlobsInBodyCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4631,7 +5057,7 @@ func TestInputService13ProtocolTestBlobPayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4663,7 +5089,7 @@ func TestInputService13ProtocolTestBlobPayloadCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4690,7 +5116,7 @@ func TestInputService14ProtocolTestStructurePayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4720,7 +5146,7 @@ func TestInputService14ProtocolTestStructurePayloadCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4743,7 +5169,7 @@ func TestInputService15ProtocolTestOmitsNullQueryParamsButSerializesEmptyStrings
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4768,7 +5194,7 @@ func TestInputService15ProtocolTestOmitsNullQueryParamsButSerializesEmptyStrings
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4795,7 +5221,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4831,7 +5257,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4871,7 +5297,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase3(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4912,7 +5338,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase4(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4955,7 +5381,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase5(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -4996,7 +5422,7 @@ func TestInputService16ProtocolTestRecursiveShapesCase6(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5028,7 +5454,7 @@ func TestInputService17ProtocolTestTimestampValuesCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5060,7 +5486,7 @@ func TestInputService17ProtocolTestTimestampValuesCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5070,7 +5496,7 @@ func TestInputService17ProtocolTestTimestampValuesCase2(t *testing.T) {
 
 	// assert headers
 	if e, a := "Sun, 25 Jan 2015 08:00:00 GMT", r.Header.Get("x-amz-timearg"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5088,7 +5514,7 @@ func TestInputService18ProtocolTestNamedLocationsInJSONBodyCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5120,7 +5546,7 @@ func TestInputService19ProtocolTestStringPayloadCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5154,7 +5580,7 @@ func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5184,7 +5610,7 @@ func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5226,7 +5652,7 @@ func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5243,7 +5669,7 @@ func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "eyJGb28iOiJCYXIifQ==", r.Header.Get("X-Amz-Foo"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5271,7 +5697,7 @@ func TestInputService21ProtocolTestJSONValueTraitCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5301,7 +5727,7 @@ func TestInputService21ProtocolTestJSONValueTraitCase3(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5338,7 +5764,7 @@ func TestInputService22ProtocolTestEnumCase1(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5355,7 +5781,7 @@ func TestInputService22ProtocolTestEnumCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "baz", r.Header.Get("x-amz-enum"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -5371,7 +5797,7 @@ func TestInputService22ProtocolTestEnumCase2(t *testing.T) {
 	r := req.HTTPRequest
 
 	// build request
-	restjson.Build(req.Request)
+	req.Build()
 	if req.Error != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
@@ -5380,5 +5806,119 @@ func TestInputService22ProtocolTestEnumCase2(t *testing.T) {
 	awstesting.AssertURL(t, "https://test/path", r.URL.String())
 
 	// assert headers
+
+}
+
+func TestInputService23ProtocolTestEndpointHostTraitCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://service.region.amazonaws.com")
+
+	svc := NewInputService23ProtocolTest(cfg)
+	input := &InputService23TestShapeInputService23TestCaseOperation1Input{
+		Name: aws.String("myname"),
+	}
+
+	req := svc.InputService23TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"Name":"myname"}`, util.Trim(string(body)))
+
+	// assert URL
+	awstesting.AssertURL(t, "https://data-service.region.amazonaws.com/path", r.URL.String())
+
+	// assert headers
+
+}
+
+func TestInputService23ProtocolTestEndpointHostTraitCase2(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://service.region.amazonaws.com")
+
+	svc := NewInputService23ProtocolTest(cfg)
+	input := &InputService23TestShapeInputService23TestCaseOperation2Input{
+		Name: aws.String("myname"),
+	}
+
+	req := svc.InputService23TestCaseOperation2Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert body
+	if r.Body == nil {
+		t.Errorf("expect body not to be nil")
+	}
+	body, _ := ioutil.ReadAll(r.Body)
+	awstesting.AssertJSON(t, `{"Name":"myname"}`, util.Trim(string(body)))
+
+	// assert URL
+	awstesting.AssertURL(t, "https://foo-myname.service.region.amazonaws.com/path", r.URL.String())
+
+	// assert headers
+
+}
+
+func TestInputService24ProtocolTestHeaderWhitespaceCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewInputService24ProtocolTest(cfg)
+	input := &InputService24TestShapeInputService24TestCaseOperation1Input{
+		Header1: aws.String("   headerValue"),
+		HeaderMap: map[string]string{
+			"   key-leading-space": "value",
+			"   key-with-space   ": "value",
+			"leading-space":        "   value",
+			"leading-tab":          "    value",
+			"with-space":           "   value   ",
+		},
+	}
+
+	req := svc.InputService24TestCaseOperation1Request(input)
+	r := req.HTTPRequest
+
+	// build request
+	req.Build()
+	if req.Error != nil {
+		t.Errorf("expect no error, got %v", req.Error)
+	}
+
+	// assert URL
+	awstesting.AssertURL(t, "https://test/", r.URL.String())
+
+	// assert headers
+	if e, a := "value", r.Header.Get("header-map-key-leading-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-key-with-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-leading-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-leading-tab"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value", r.Header.Get("header-map-with-space"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "headerValue", r.Header.Get("header1"); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
 
 }

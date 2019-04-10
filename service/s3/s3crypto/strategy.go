@@ -2,6 +2,7 @@ package s3crypto
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -42,7 +43,7 @@ func (strat S3SaveStrategy) Save(env Envelope, req *aws.Request) error {
 		instInput.Key = aws.String(*input.Key + strat.InstructionFileSuffix)
 	}
 
-	_, err = strat.Client.PutObjectRequest(&instInput).Send()
+	_, err = strat.Client.PutObjectRequest(&instInput).Send(context.Background())
 	return err
 }
 
@@ -93,7 +94,7 @@ func (load S3LoadStrategy) Load(req *aws.Request) (Envelope, error) {
 	out, err := load.Client.GetObjectRequest(&s3.GetObjectInput{
 		Key:    aws.String(strings.Join([]string{*input.Key, load.InstructionFileSuffix}, "")),
 		Bucket: input.Bucket,
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		return env, err
 	}

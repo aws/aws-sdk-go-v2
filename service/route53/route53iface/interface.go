@@ -9,6 +9,8 @@
 package route53iface
 
 import (
+	"context"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
 )
@@ -175,8 +177,7 @@ type Route53API interface {
 
 	UpdateTrafficPolicyInstanceRequest(*route53.UpdateTrafficPolicyInstanceInput) route53.UpdateTrafficPolicyInstanceRequest
 
-	WaitUntilResourceRecordSetsChanged(*route53.GetChangeInput) error
-	WaitUntilResourceRecordSetsChangedWithContext(aws.Context, *route53.GetChangeInput, ...aws.WaiterOption) error
+	WaitUntilResourceRecordSetsChanged(context.Context, *route53.GetChangeInput, ...aws.WaiterOption) error
 }
 
 var _ Route53API = (*route53.Route53)(nil)

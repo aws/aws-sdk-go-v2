@@ -24,6 +24,7 @@ type API struct {
 	Waiters       []Waiter
 	Documentation string
 	Examples      Examples
+	SmokeTests    SmokeTestSuite
 
 	// Set to true to avoid removing unused shapes
 	NoRemoveUnusedShapes bool
@@ -311,6 +312,7 @@ var tplAPI = template.Must(template.New("api").Parse(`
 func (a *API) APIGoCode() string {
 	a.resetImports()
 	a.imports["github.com/aws/aws-sdk-go-v2/internal/awsutil"] = true
+	a.imports["context"] = true
 	if a.OperationHasOutputPlaceholder() {
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol/"+a.ProtocolPackage()] = true
 		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true
@@ -727,6 +729,12 @@ func resolveShapeValidations(s *Shape, ancestry ...*Shape) {
 		}
 
 		if ref.Shape.Min != 0 && !s.Validations.Has(ref, ShapeValidationMinVal) {
+			s.Validations = append(s.Validations, ShapeValidation{
+				Name: name, Ref: ref, Type: ShapeValidationMinVal,
+			})
+		}
+
+		if !ref.CanBeEmpty() && !s.Validations.Has(ref, ShapeValidationMinVal) {
 			s.Validations = append(s.Validations, ShapeValidation{
 				Name: name, Ref: ref, Type: ShapeValidationMinVal,
 			})

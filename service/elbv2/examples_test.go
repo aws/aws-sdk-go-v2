@@ -3,6 +3,7 @@
 package elbv2_test
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"time"
@@ -52,7 +53,7 @@ func ExampleELBV2_AddTagsRequest_shared00() {
 	}
 
 	req := svc.AddTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -102,7 +103,7 @@ func ExampleELBV2_CreateListenerRequest_shared00() {
 	}
 
 	req := svc.CreateListenerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -184,7 +185,7 @@ func ExampleELBV2_CreateListenerRequest_shared01() {
 	}
 
 	req := svc.CreateListenerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -252,7 +253,7 @@ func ExampleELBV2_CreateLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -317,7 +318,7 @@ func ExampleELBV2_CreateLoadBalancerRequest_shared01() {
 	}
 
 	req := svc.CreateLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -392,7 +393,7 @@ func ExampleELBV2_CreateRuleRequest_shared00() {
 	}
 
 	req := svc.CreateRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -455,7 +456,7 @@ func ExampleELBV2_CreateTargetGroupRequest_shared00() {
 	}
 
 	req := svc.CreateTargetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -494,7 +495,7 @@ func ExampleELBV2_DeleteListenerRequest_shared00() {
 	}
 
 	req := svc.DeleteListenerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -529,7 +530,7 @@ func ExampleELBV2_DeleteLoadBalancerRequest_shared00() {
 	}
 
 	req := svc.DeleteLoadBalancerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -568,7 +569,7 @@ func ExampleELBV2_DeleteRuleRequest_shared00() {
 	}
 
 	req := svc.DeleteRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -605,7 +606,7 @@ func ExampleELBV2_DeleteTargetGroupRequest_shared00() {
 	}
 
 	req := svc.DeleteTargetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -645,7 +646,7 @@ func ExampleELBV2_DeregisterTargetsRequest_shared00() {
 	}
 
 	req := svc.DeregisterTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -684,7 +685,7 @@ func ExampleELBV2_DescribeListenersRequest_shared00() {
 	}
 
 	req := svc.DescribeListenersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -723,7 +724,7 @@ func ExampleELBV2_DescribeLoadBalancerAttributesRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -760,7 +761,7 @@ func ExampleELBV2_DescribeLoadBalancersRequest_shared00() {
 	}
 
 	req := svc.DescribeLoadBalancersRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -797,7 +798,7 @@ func ExampleELBV2_DescribeRulesRequest_shared00() {
 	}
 
 	req := svc.DescribeRulesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +839,7 @@ func ExampleELBV2_DescribeSSLPoliciesRequest_shared00() {
 	}
 
 	req := svc.DescribeSSLPoliciesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -875,7 +876,7 @@ func ExampleELBV2_DescribeTagsRequest_shared00() {
 	}
 
 	req := svc.DescribeTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -916,7 +917,7 @@ func ExampleELBV2_DescribeTargetGroupAttributesRequest_shared00() {
 	}
 
 	req := svc.DescribeTargetGroupAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -953,7 +954,7 @@ func ExampleELBV2_DescribeTargetGroupsRequest_shared00() {
 	}
 
 	req := svc.DescribeTargetGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -992,7 +993,7 @@ func ExampleELBV2_DescribeTargetHealthRequest_shared00() {
 	}
 
 	req := svc.DescribeTargetHealthRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1037,7 +1038,7 @@ func ExampleELBV2_DescribeTargetHealthRequest_shared01() {
 	}
 
 	req := svc.DescribeTargetHealthRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1082,7 +1083,7 @@ func ExampleELBV2_ModifyListenerRequest_shared00() {
 	}
 
 	req := svc.ModifyListenerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1150,7 +1151,7 @@ func ExampleELBV2_ModifyListenerRequest_shared01() {
 	}
 
 	req := svc.ModifyListenerRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1219,7 +1220,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared00() {
 	}
 
 	req := svc.ModifyLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1262,7 +1263,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared01() {
 	}
 
 	req := svc.ModifyLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1315,7 +1316,7 @@ func ExampleELBV2_ModifyLoadBalancerAttributesRequest_shared02() {
 	}
 
 	req := svc.ModifyLoadBalancerAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1360,7 +1361,7 @@ func ExampleELBV2_ModifyRuleRequest_shared00() {
 	}
 
 	req := svc.ModifyRuleRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1416,7 +1417,7 @@ func ExampleELBV2_ModifyTargetGroupRequest_shared00() {
 	}
 
 	req := svc.ModifyTargetGroupRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1460,7 +1461,7 @@ func ExampleELBV2_ModifyTargetGroupAttributesRequest_shared00() {
 	}
 
 	req := svc.ModifyTargetGroupAttributesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1505,7 +1506,7 @@ func ExampleELBV2_RegisterTargetsRequest_shared00() {
 	}
 
 	req := svc.RegisterTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1558,7 +1559,7 @@ func ExampleELBV2_RegisterTargetsRequest_shared01() {
 	}
 
 	req := svc.RegisterTargetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1605,7 +1606,7 @@ func ExampleELBV2_RemoveTagsRequest_shared00() {
 	}
 
 	req := svc.RemoveTagsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1653,7 +1654,7 @@ func ExampleELBV2_SetRulePrioritiesRequest_shared00() {
 	}
 
 	req := svc.SetRulePrioritiesRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1695,7 +1696,7 @@ func ExampleELBV2_SetSecurityGroupsRequest_shared00() {
 	}
 
 	req := svc.SetSecurityGroupsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1739,7 +1740,7 @@ func ExampleELBV2_SetSubnetsRequest_shared00() {
 	}
 
 	req := svc.SetSubnetsRequest(input)
-	result, err := req.Send()
+	result, err := req.Send(context.Background())
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -3,6 +3,7 @@
 package snowball
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -20,7 +21,8 @@ type CancelClusterRequest struct {
 }
 
 // Send marshals and sends the CancelCluster API request.
-func (r CancelClusterRequest) Send() (*CancelClusterOutput, error) {
+func (r CancelClusterRequest) Send(ctx context.Context) (*CancelClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -38,7 +40,7 @@ func (r CancelClusterRequest) Send() (*CancelClusterOutput, error) {
 //
 //    // Example sending a request using the CancelClusterRequest method.
 //    req := client.CancelClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -72,7 +74,8 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send(ctx context.Context) (*CancelJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -90,7 +93,7 @@ func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 //
 //    // Example sending a request using the CancelJobRequest method.
 //    req := client.CancelJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -124,7 +127,8 @@ type CreateAddressRequest struct {
 }
 
 // Send marshals and sends the CreateAddress API request.
-func (r CreateAddressRequest) Send() (*CreateAddressOutput, error) {
+func (r CreateAddressRequest) Send(ctx context.Context) (*CreateAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -143,7 +147,7 @@ func (r CreateAddressRequest) Send() (*CreateAddressOutput, error) {
 //
 //    // Example sending a request using the CreateAddressRequest method.
 //    req := client.CreateAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -177,7 +181,8 @@ type CreateClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCluster API request.
-func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -195,7 +200,7 @@ func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 //
 //    // Example sending a request using the CreateClusterRequest method.
 //    req := client.CreateClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -229,7 +234,8 @@ type CreateJobRequest struct {
 }
 
 // Send marshals and sends the CreateJob API request.
-func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
+func (r CreateJobRequest) Send(ctx context.Context) (*CreateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +255,7 @@ func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
 //
 //    // Example sending a request using the CreateJobRequest method.
 //    req := client.CreateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -283,7 +289,8 @@ type DescribeAddressRequest struct {
 }
 
 // Send marshals and sends the DescribeAddress API request.
-func (r DescribeAddressRequest) Send() (*DescribeAddressOutput, error) {
+func (r DescribeAddressRequest) Send(ctx context.Context) (*DescribeAddressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -300,7 +307,7 @@ func (r DescribeAddressRequest) Send() (*DescribeAddressOutput, error) {
 //
 //    // Example sending a request using the DescribeAddressRequest method.
 //    req := client.DescribeAddressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -334,7 +341,8 @@ type DescribeAddressesRequest struct {
 }
 
 // Send marshals and sends the DescribeAddresses API request.
-func (r DescribeAddressesRequest) Send() (*DescribeAddressesOutput, error) {
+func (r DescribeAddressesRequest) Send(ctx context.Context) (*DescribeAddressesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -352,7 +360,7 @@ func (r DescribeAddressesRequest) Send() (*DescribeAddressesOutput, error) {
 //
 //    // Example sending a request using the DescribeAddressesRequest method.
 //    req := client.DescribeAddressesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -402,7 +410,7 @@ func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) Descr
 func (p *DescribeAddressesRequest) Paginate(opts ...aws.Option) DescribeAddressesPager {
 	return DescribeAddressesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeAddressesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -411,6 +419,7 @@ func (p *DescribeAddressesRequest) Paginate(opts ...aws.Option) DescribeAddresse
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -438,7 +447,8 @@ type DescribeClusterRequest struct {
 }
 
 // Send marshals and sends the DescribeCluster API request.
-func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+func (r DescribeClusterRequest) Send(ctx context.Context) (*DescribeClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -455,7 +465,7 @@ func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
 //
 //    // Example sending a request using the DescribeClusterRequest method.
 //    req := client.DescribeClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -489,7 +499,8 @@ type DescribeJobRequest struct {
 }
 
 // Send marshals and sends the DescribeJob API request.
-func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+func (r DescribeJobRequest) Send(ctx context.Context) (*DescribeJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -506,7 +517,7 @@ func (r DescribeJobRequest) Send() (*DescribeJobOutput, error) {
 //
 //    // Example sending a request using the DescribeJobRequest method.
 //    req := client.DescribeJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -540,7 +551,8 @@ type GetJobManifestRequest struct {
 }
 
 // Send marshals and sends the GetJobManifest API request.
-func (r GetJobManifestRequest) Send() (*GetJobManifestOutput, error) {
+func (r GetJobManifestRequest) Send(ctx context.Context) (*GetJobManifestOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -573,7 +585,7 @@ func (r GetJobManifestRequest) Send() (*GetJobManifestOutput, error) {
 //
 //    // Example sending a request using the GetJobManifestRequest method.
 //    req := client.GetJobManifestRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -607,7 +619,8 @@ type GetJobUnlockCodeRequest struct {
 }
 
 // Send marshals and sends the GetJobUnlockCode API request.
-func (r GetJobUnlockCodeRequest) Send() (*GetJobUnlockCodeOutput, error) {
+func (r GetJobUnlockCodeRequest) Send(ctx context.Context) (*GetJobUnlockCodeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -635,7 +648,7 @@ func (r GetJobUnlockCodeRequest) Send() (*GetJobUnlockCodeOutput, error) {
 //
 //    // Example sending a request using the GetJobUnlockCodeRequest method.
 //    req := client.GetJobUnlockCodeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -669,7 +682,8 @@ type GetSnowballUsageRequest struct {
 }
 
 // Send marshals and sends the GetSnowballUsage API request.
-func (r GetSnowballUsageRequest) Send() (*GetSnowballUsageOutput, error) {
+func (r GetSnowballUsageRequest) Send(ctx context.Context) (*GetSnowballUsageOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -689,7 +703,7 @@ func (r GetSnowballUsageRequest) Send() (*GetSnowballUsageOutput, error) {
 //
 //    // Example sending a request using the GetSnowballUsageRequest method.
 //    req := client.GetSnowballUsageRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -723,7 +737,8 @@ type ListClusterJobsRequest struct {
 }
 
 // Send marshals and sends the ListClusterJobs API request.
-func (r ListClusterJobsRequest) Send() (*ListClusterJobsOutput, error) {
+func (r ListClusterJobsRequest) Send(ctx context.Context) (*ListClusterJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -741,7 +756,7 @@ func (r ListClusterJobsRequest) Send() (*ListClusterJobsOutput, error) {
 //
 //    // Example sending a request using the ListClusterJobsRequest method.
 //    req := client.ListClusterJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -775,7 +790,8 @@ type ListClustersRequest struct {
 }
 
 // Send marshals and sends the ListClusters API request.
-func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
+func (r ListClustersRequest) Send(ctx context.Context) (*ListClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,7 +809,7 @@ func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
 //
 //    // Example sending a request using the ListClustersRequest method.
 //    req := client.ListClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -827,7 +843,8 @@ type ListCompatibleImagesRequest struct {
 }
 
 // Send marshals and sends the ListCompatibleImages API request.
-func (r ListCompatibleImagesRequest) Send() (*ListCompatibleImagesOutput, error) {
+func (r ListCompatibleImagesRequest) Send(ctx context.Context) (*ListCompatibleImagesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -841,13 +858,13 @@ func (r ListCompatibleImagesRequest) Send() (*ListCompatibleImagesOutput, error)
 //
 // This action returns a list of the different Amazon EC2 Amazon Machine Images
 // (AMIs) that are owned by your AWS account that would be supported for use
-// on a Snowball Edge device. Currently, supported AMIs are based on the CentOS
-// 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu
-// 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.
+// on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible
+// AMIs, see Using Amazon EC2 Compute Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
+// in the AWS Snowball Developer Guide.
 //
 //    // Example sending a request using the ListCompatibleImagesRequest method.
 //    req := client.ListCompatibleImagesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -881,7 +898,8 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send(ctx context.Context) (*ListJobsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -901,7 +919,7 @@ func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 //
 //    // Example sending a request using the ListJobsRequest method.
 //    req := client.ListJobsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -951,7 +969,7 @@ func (c *Snowball) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListJobsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -960,6 +978,7 @@ func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -987,7 +1006,8 @@ type UpdateClusterRequest struct {
 }
 
 // Send marshals and sends the UpdateCluster API request.
-func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
+func (r UpdateClusterRequest) Send(ctx context.Context) (*UpdateClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,7 +1026,7 @@ func (r UpdateClusterRequest) Send() (*UpdateClusterOutput, error) {
 //
 //    // Example sending a request using the UpdateClusterRequest method.
 //    req := client.UpdateClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1040,7 +1060,8 @@ type UpdateJobRequest struct {
 }
 
 // Send marshals and sends the UpdateJob API request.
-func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
+func (r UpdateJobRequest) Send(ctx context.Context) (*UpdateJobOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1058,7 +1079,7 @@ func (r UpdateJobRequest) Send() (*UpdateJobOutput, error) {
 //
 //    // Example sending a request using the UpdateJobRequest method.
 //    req := client.UpdateJobRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1392,25 +1413,25 @@ type ClusterMetadata struct {
 	RoleARN *string `type:"string"`
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
-	// how soon you'll get each Snowball Edge device, rather it represents how quickly
-	// each device moves to its destination while in transit. Regional shipping
-	// speeds are as follows:
+	// how soon you'll get each device, rather it represents how quickly each device
+	// moves to its destination while in transit. Regional shipping speeds are as
+	// follows:
 	//
 	//    * In Australia, you have access to express shipping. Typically, devices
 	//    shipped express are delivered in about a day.
 	//
 	//    * In the European Union (EU), you have access to express shipping. Typically,
-	//    Snowball Edges shipped express are delivered in about a day. In addition,
-	//    most countries in the EU have access to standard shipping, which typically
+	//    devices shipped express are delivered in about a day. In addition, most
+	//    countries in the EU have access to standard shipping, which typically
 	//    takes less than a week, one way.
 	//
-	//    * In India, Snowball Edges are delivered in one to seven days.
+	//    * In India, devices are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster. The only supported
+	// device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1425,9 +1446,9 @@ func (s ClusterMetadata) GoString() string {
 }
 
 // A JSON-formatted object that describes a compatible Amazon Machine Image
-// (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible
-// with the device's physical hardware requirements, and it should be able to
-// be run in an SBE1 instance on the device.
+// (AMI). For more information on compatible AMIs, see Using Amazon EC2 Compute
+// Instances (http://docs.aws.amazon.com/snowball/latest/developer-guide/using-ec2.html)
+// in the AWS Snowball Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CompatibleImage
 type CompatibleImage struct {
 	_ struct{} `type:"structure"`
@@ -1573,15 +1594,15 @@ type CreateClusterInput struct {
 	//    most countries in the EU have access to standard shipping, which typically
 	//    takes less than a week, one way.
 	//
-	//    * In India, Snowball Edges are delivered in one to seven days.
+	//    * In India, devices are delivered in one to seven days.
 	//
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// ShippingOption is a required field
 	ShippingOption ShippingOption `type:"string" required:"true" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster. The only supported
+	// device types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -1733,8 +1754,8 @@ type CreateJobInput struct {
 	// Snowballs come with 80 TB in storage capacity.
 	SnowballCapacityPreference Capacity `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this job. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this job. The only supported device
+	// types for cluster jobs are EDGE, EDGE_C, and EDGE_CG.
 	SnowballType Type `type:"string" enum:"true"`
 }
 
@@ -2106,7 +2127,7 @@ type Ec2AmiResource struct {
 	// AmiId is a required field
 	AmiId *string `min:"12" type:"string" required:"true"`
 
-	// The ID of the AMI on the Snowball Edge device.
+	// The ID of the AMI on the supported device.
 	SnowballAmiId *string `min:"1" type:"string"`
 }
 
@@ -2775,7 +2796,7 @@ type ListCompatibleImagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of results for the list of compatible images. Currently,
-	// a Snowball Edge device can store 10 AMIs.
+	// each supported device can store 10 AMIs.
 	MaxResults *int64 `type:"integer"`
 
 	// HTTP requests are stateless. To identify what object comes "next" in the
@@ -2813,8 +2834,7 @@ type ListCompatibleImagesOutput struct {
 
 	responseMetadata aws.Response
 
-	// A JSON-formatted object that describes a compatible AMI, including the ID
-	// and name for a Snowball Edge AMI.
+	// A JSON-formatted object that describes a compatible AMI.
 	CompatibleImages []CompatibleImage `type:"list"`
 
 	// Because HTTP requests are stateless, this is the starting point for your
@@ -3263,6 +3283,7 @@ const (
 	CapacityT50          Capacity = "T50"
 	CapacityT80          Capacity = "T80"
 	CapacityT100         Capacity = "T100"
+	CapacityT42          Capacity = "T42"
 	CapacityNoPreference Capacity = "NoPreference"
 )
 
@@ -3366,6 +3387,8 @@ type Type string
 const (
 	TypeStandard Type = "STANDARD"
 	TypeEdge     Type = "EDGE"
+	TypeEdgeC    Type = "EDGE_C"
+	TypeEdgeCg   Type = "EDGE_CG"
 )
 
 func (enum Type) MarshalValue() (string, error) {

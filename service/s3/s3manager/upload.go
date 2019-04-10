@@ -2,11 +2,11 @@ package s3manager
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"sort"
 	"sync"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
@@ -93,100 +93,6 @@ func (m multiUploadError) String() string {
 // UploadID returns the id of the S3 upload which failed.
 func (m multiUploadError) UploadID() string {
 	return m.uploadID
-}
-
-// UploadInput contains all input for upload requests to Amazon S3.
-type UploadInput struct {
-	// The canned ACL to apply to the object.
-	ACL s3.ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
-
-	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
-
-	// Specifies caching behavior along the request/reply chain.
-	CacheControl *string `location:"header" locationName:"Cache-Control" type:"string"`
-
-	// Specifies presentational information for the object.
-	ContentDisposition *string `location:"header" locationName:"Content-Disposition" type:"string"`
-
-	// Specifies what content encodings have been applied to the object and thus
-	// what decoding mechanisms must be applied to obtain the media-type referenced
-	// by the Content-Type header field.
-	ContentEncoding *string `location:"header" locationName:"Content-Encoding" type:"string"`
-
-	// The language the content is in.
-	ContentLanguage *string `location:"header" locationName:"Content-Language" type:"string"`
-
-	// The base64-encoded 128-bit MD5 digest of the part data.
-	ContentMD5 *string `location:"header" locationName:"Content-MD5" type:"string"`
-
-	// A standard MIME type describing the format of the object data.
-	ContentType *string `location:"header" locationName:"Content-Type" type:"string"`
-
-	// The date and time at which the object is no longer cacheable.
-	Expires *time.Time `location:"header" locationName:"Expires" type:"timestamp" timestampFormat:"rfc822"`
-
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
-	GrantFullControl *string `location:"header" locationName:"x-amz-grant-full-control" type:"string"`
-
-	// Allows grantee to read the object data and its metadata.
-	GrantRead *string `location:"header" locationName:"x-amz-grant-read" type:"string"`
-
-	// Allows grantee to read the object ACL.
-	GrantReadACP *string `location:"header" locationName:"x-amz-grant-read-acp" type:"string"`
-
-	// Allows grantee to write the ACL for the applicable object.
-	GrantWriteACP *string `location:"header" locationName:"x-amz-grant-write-acp" type:"string"`
-
-	Key *string `location:"uri" locationName:"Key" type:"string" required:"true"`
-
-	// A map of metadata to store with the object in S3.
-	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
-
-	// Confirms that the requester knows that she or he will be charged for the
-	// request. Bucket owners need not specify this parameter in their requests.
-	// Documentation on downloading objects from requester pays buckets can be found
-	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer s3.RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
-
-	// Specifies the algorithm to use to when encrypting the object (e.g., AES256,
-	// aws:kms).
-	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
-
-	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting
-	// data. This value is used to store the object and then it is discarded; Amazon
-	// does not store the encryption key. The key must be appropriate for use with
-	// the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm
-	// header.
-	SSECustomerKey *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key" type:"string"`
-
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
-	// Amazon S3 uses this header for a message integrity check to ensure the encryption
-	// key was transmitted without error.
-	SSECustomerKeyMD5 *string `location:"header" locationName:"x-amz-server-side-encryption-customer-key-MD5" type:"string"`
-
-	// Specifies the AWS KMS key ID to use for object encryption. All GET and PUT
-	// requests for an object protected by AWS KMS will fail if not made via SSL
-	// or using SigV4. Documentation on configuring any of the officially supported
-	// AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
-	SSEKMSKeyId *string `location:"header" locationName:"x-amz-server-side-encryption-aws-kms-key-id" type:"string"`
-
-	// The Server-side encryption algorithm used when storing this object in S3
-	// (e.g., AES256, aws:kms).
-	ServerSideEncryption s3.ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
-
-	// The type of storage to use for the object. Defaults to 'STANDARD'.
-	StorageClass s3.StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
-
-	// The tag-set for the object. The tag-set must be encoded as URL Query parameters
-	Tagging *string `location:"header" locationName:"x-amz-tagging" type:"string"`
-
-	// If the bucket is configured as a website, redirects requests for this object
-	// to another object in the same bucket or to an external URL. Amazon S3 stores
-	// the value of this header in the object metadata.
-	WebsiteRedirectLocation *string `location:"header" locationName:"x-amz-website-redirect-location" type:"string"`
-
-	// The readable body payload to send to S3.
-	Body io.Reader
 }
 
 // UploadOutput represents a response from the Upload() call.
@@ -344,7 +250,7 @@ func NewUploaderWithClient(svc s3iface.S3API, options ...func(*Uploader)) *Uploa
 //          u.LeavePartsOnError = true    // Don't delete the parts if the upload fails.
 //     })
 func (u Uploader) Upload(input *UploadInput, options ...func(*Uploader)) (*UploadOutput, error) {
-	return u.UploadWithContext(aws.BackgroundContext(), input, options...)
+	return u.UploadWithContext(context.Background(), input, options...)
 }
 
 // UploadWithContext uploads an object to S3, intelligently buffering large
@@ -365,7 +271,7 @@ func (u Uploader) Upload(input *UploadInput, options ...func(*Uploader)) (*Uploa
 // options that will be applied to all API operations made with this uploader.
 //
 // It is safe to call this method concurrently across goroutines.
-func (u Uploader) UploadWithContext(ctx aws.Context, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
+func (u Uploader) UploadWithContext(ctx context.Context, input *UploadInput, opts ...func(*Uploader)) (*UploadOutput, error) {
 	i := uploader{in: input, cfg: u, ctx: ctx}
 
 	for _, opt := range opts {
@@ -393,10 +299,10 @@ func (u Uploader) UploadWithContext(ctx aws.Context, input *UploadInput, opts ..
 //	}
 //
 //	iter := &s3managee.UploadObjectsIterator{Objects: objects}
-//	if err := svc.UploadWithIterator(aws.BackgroundContext(), iter); err != nil {
+//	if err := svc.UploadWithIterator(context.Background(), iter); err != nil {
 //		return err
 //	}
-func (u Uploader) UploadWithIterator(ctx aws.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
+func (u Uploader) UploadWithIterator(ctx context.Context, iter BatchUploadIterator, opts ...func(*Uploader)) error {
 	var errs []Error
 	for iter.Next() {
 		object := iter.UploadObject()
@@ -433,7 +339,7 @@ func (u Uploader) UploadWithIterator(ctx aws.Context, iter BatchUploadIterator, 
 
 // internal structure to manage an upload to S3.
 type uploader struct {
-	ctx aws.Context
+	ctx context.Context
 	cfg Uploader
 
 	in *UploadInput
@@ -561,9 +467,8 @@ func (u *uploader) singlePart(buf io.ReadSeeker) (*UploadOutput, error) {
 	// Need to use request form because URL generated in request is
 	// used in return.
 	req := u.cfg.S3.PutObjectRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -607,9 +512,8 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 
 	// Create the multipart
 	req := u.cfg.S3.CreateMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -718,9 +622,8 @@ func (u *multiuploader) send(c chunk) error {
 		PartNumber:           &c.num,
 	}
 	req := u.cfg.S3.UploadPartRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		return err
 	}
@@ -763,9 +666,8 @@ func (u *multiuploader) fail() {
 		UploadId: &u.uploadID,
 	}
 	req := u.cfg.S3.AbortMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	if _, err := req.Send(); err != nil {
+	if _, err := req.Send(u.ctx); err != nil {
 		logMessage(u.cfg.S3, aws.LogDebug, fmt.Sprintf("failed to abort multipart upload, %v", err))
 	}
 }
@@ -787,9 +689,8 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 		MultipartUpload: &s3.CompletedMultipartUpload{Parts: u.parts},
 	}
 	req := u.cfg.S3.CompleteMultipartUploadRequest(params)
-	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	resp, err := req.Send()
+	resp, err := req.Send(u.ctx)
 	if err != nil {
 		u.seterr(err)
 		u.fail()

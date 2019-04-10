@@ -3,6 +3,8 @@
 package redshift
 
 import (
+	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +23,8 @@ type AcceptReservedNodeExchangeRequest struct {
 }
 
 // Send marshals and sends the AcceptReservedNodeExchange API request.
-func (r AcceptReservedNodeExchangeRequest) Send() (*AcceptReservedNodeExchangeOutput, error) {
+func (r AcceptReservedNodeExchangeRequest) Send(ctx context.Context) (*AcceptReservedNodeExchangeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -39,7 +42,7 @@ func (r AcceptReservedNodeExchangeRequest) Send() (*AcceptReservedNodeExchangeOu
 //
 //    // Example sending a request using the AcceptReservedNodeExchangeRequest method.
 //    req := client.AcceptReservedNodeExchangeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +76,8 @@ type AuthorizeClusterSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeClusterSecurityGroupIngress API request.
-func (r AuthorizeClusterSecurityGroupIngressRequest) Send() (*AuthorizeClusterSecurityGroupIngressOutput, error) {
+func (r AuthorizeClusterSecurityGroupIngressRequest) Send(ctx context.Context) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -94,7 +98,7 @@ func (r AuthorizeClusterSecurityGroupIngressRequest) Send() (*AuthorizeClusterSe
 //
 // If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName
 // and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift
-// cluster must be in the same AWS region.
+// cluster must be in the same AWS Region.
 //
 // If you authorize access to a CIDR/IP address range, specify CIDRIP. For an
 // overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain
@@ -108,7 +112,7 @@ func (r AuthorizeClusterSecurityGroupIngressRequest) Send() (*AuthorizeClusterSe
 //
 //    // Example sending a request using the AuthorizeClusterSecurityGroupIngressRequest method.
 //    req := client.AuthorizeClusterSecurityGroupIngressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -142,7 +146,8 @@ type AuthorizeSnapshotAccessRequest struct {
 }
 
 // Send marshals and sends the AuthorizeSnapshotAccess API request.
-func (r AuthorizeSnapshotAccessRequest) Send() (*AuthorizeSnapshotAccessOutput, error) {
+func (r AuthorizeSnapshotAccessRequest) Send(ctx context.Context) (*AuthorizeSnapshotAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -162,7 +167,7 @@ func (r AuthorizeSnapshotAccessRequest) Send() (*AuthorizeSnapshotAccessOutput, 
 //
 //    // Example sending a request using the AuthorizeSnapshotAccessRequest method.
 //    req := client.AuthorizeSnapshotAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -186,6 +191,159 @@ func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccess
 	return AuthorizeSnapshotAccessRequest{Request: req, Input: input, Copy: c.AuthorizeSnapshotAccessRequest}
 }
 
+const opBatchDeleteClusterSnapshots = "BatchDeleteClusterSnapshots"
+
+// BatchDeleteClusterSnapshotsRequest is a API request type for the BatchDeleteClusterSnapshots API operation.
+type BatchDeleteClusterSnapshotsRequest struct {
+	*aws.Request
+	Input *BatchDeleteClusterSnapshotsInput
+	Copy  func(*BatchDeleteClusterSnapshotsInput) BatchDeleteClusterSnapshotsRequest
+}
+
+// Send marshals and sends the BatchDeleteClusterSnapshots API request.
+func (r BatchDeleteClusterSnapshotsRequest) Send(ctx context.Context) (*BatchDeleteClusterSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeleteClusterSnapshotsOutput), nil
+}
+
+// BatchDeleteClusterSnapshotsRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Deletes a set of cluster snapshots.
+//
+//    // Example sending a request using the BatchDeleteClusterSnapshotsRequest method.
+//    req := client.BatchDeleteClusterSnapshotsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshots
+func (c *Redshift) BatchDeleteClusterSnapshotsRequest(input *BatchDeleteClusterSnapshotsInput) BatchDeleteClusterSnapshotsRequest {
+	op := &aws.Operation{
+		Name:       opBatchDeleteClusterSnapshots,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchDeleteClusterSnapshotsInput{}
+	}
+
+	output := &BatchDeleteClusterSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchDeleteClusterSnapshotsRequest{Request: req, Input: input, Copy: c.BatchDeleteClusterSnapshotsRequest}
+}
+
+const opBatchModifyClusterSnapshots = "BatchModifyClusterSnapshots"
+
+// BatchModifyClusterSnapshotsRequest is a API request type for the BatchModifyClusterSnapshots API operation.
+type BatchModifyClusterSnapshotsRequest struct {
+	*aws.Request
+	Input *BatchModifyClusterSnapshotsInput
+	Copy  func(*BatchModifyClusterSnapshotsInput) BatchModifyClusterSnapshotsRequest
+}
+
+// Send marshals and sends the BatchModifyClusterSnapshots API request.
+func (r BatchModifyClusterSnapshotsRequest) Send(ctx context.Context) (*BatchModifyClusterSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchModifyClusterSnapshotsOutput), nil
+}
+
+// BatchModifyClusterSnapshotsRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Modifies the settings for a list of snapshots.
+//
+//    // Example sending a request using the BatchModifyClusterSnapshotsRequest method.
+//    req := client.BatchModifyClusterSnapshotsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshots
+func (c *Redshift) BatchModifyClusterSnapshotsRequest(input *BatchModifyClusterSnapshotsInput) BatchModifyClusterSnapshotsRequest {
+	op := &aws.Operation{
+		Name:       opBatchModifyClusterSnapshots,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchModifyClusterSnapshotsInput{}
+	}
+
+	output := &BatchModifyClusterSnapshotsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchModifyClusterSnapshotsRequest{Request: req, Input: input, Copy: c.BatchModifyClusterSnapshotsRequest}
+}
+
+const opCancelResize = "CancelResize"
+
+// CancelResizeRequest is a API request type for the CancelResize API operation.
+type CancelResizeRequest struct {
+	*aws.Request
+	Input *CancelResizeInput
+	Copy  func(*CancelResizeInput) CancelResizeRequest
+}
+
+// Send marshals and sends the CancelResize API request.
+func (r CancelResizeRequest) Send(ctx context.Context) (*DescribeResizeOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeResizeOutput), nil
+}
+
+// CancelResizeRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Cancels a resize operation.
+//
+//    // Example sending a request using the CancelResizeRequest method.
+//    req := client.CancelResizeRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResize
+func (c *Redshift) CancelResizeRequest(input *CancelResizeInput) CancelResizeRequest {
+	op := &aws.Operation{
+		Name:       opCancelResize,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CancelResizeInput{}
+	}
+
+	output := &DescribeResizeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CancelResizeRequest{Request: req, Input: input, Copy: c.CancelResizeRequest}
+}
+
 const opCopyClusterSnapshot = "CopyClusterSnapshot"
 
 // CopyClusterSnapshotRequest is a API request type for the CopyClusterSnapshot API operation.
@@ -196,7 +354,8 @@ type CopyClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the CopyClusterSnapshot API request.
-func (r CopyClusterSnapshotRequest) Send() (*CopyClusterSnapshotOutput, error) {
+func (r CopyClusterSnapshotRequest) Send(ctx context.Context) (*CopyClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -224,7 +383,7 @@ func (r CopyClusterSnapshotRequest) Send() (*CopyClusterSnapshotOutput, error) {
 //
 //    // Example sending a request using the CopyClusterSnapshotRequest method.
 //    req := client.CopyClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -258,7 +417,8 @@ type CreateClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCluster API request.
-func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+func (r CreateClusterRequest) Send(ctx context.Context) (*CreateClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -280,7 +440,7 @@ func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 //
 //    // Example sending a request using the CreateClusterRequest method.
 //    req := client.CreateClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -314,7 +474,8 @@ type CreateClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateClusterParameterGroup API request.
-func (r CreateClusterParameterGroupRequest) Send() (*CreateClusterParameterGroupOutput, error) {
+func (r CreateClusterParameterGroupRequest) Send(ctx context.Context) (*CreateClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +501,7 @@ func (r CreateClusterParameterGroupRequest) Send() (*CreateClusterParameterGroup
 //
 //    // Example sending a request using the CreateClusterParameterGroupRequest method.
 //    req := client.CreateClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -374,7 +535,8 @@ type CreateClusterSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateClusterSecurityGroup API request.
-func (r CreateClusterSecurityGroupRequest) Send() (*CreateClusterSecurityGroupOutput, error) {
+func (r CreateClusterSecurityGroupRequest) Send(ctx context.Context) (*CreateClusterSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -395,7 +557,7 @@ func (r CreateClusterSecurityGroupRequest) Send() (*CreateClusterSecurityGroupOu
 //
 //    // Example sending a request using the CreateClusterSecurityGroupRequest method.
 //    req := client.CreateClusterSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -429,7 +591,8 @@ type CreateClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateClusterSnapshot API request.
-func (r CreateClusterSnapshotRequest) Send() (*CreateClusterSnapshotOutput, error) {
+func (r CreateClusterSnapshotRequest) Send(ctx context.Context) (*CreateClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +613,7 @@ func (r CreateClusterSnapshotRequest) Send() (*CreateClusterSnapshotOutput, erro
 //
 //    // Example sending a request using the CreateClusterSnapshotRequest method.
 //    req := client.CreateClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -484,7 +647,8 @@ type CreateClusterSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateClusterSubnetGroup API request.
-func (r CreateClusterSubnetGroupRequest) Send() (*CreateClusterSubnetGroupOutput, error) {
+func (r CreateClusterSubnetGroupRequest) Send(ctx context.Context) (*CreateClusterSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -506,7 +670,7 @@ func (r CreateClusterSubnetGroupRequest) Send() (*CreateClusterSubnetGroupOutput
 //
 //    // Example sending a request using the CreateClusterSubnetGroupRequest method.
 //    req := client.CreateClusterSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -540,7 +704,8 @@ type CreateEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
-func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+func (r CreateEventSubscriptionRequest) Send(ctx context.Context) (*CreateEventSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -577,7 +742,7 @@ func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, 
 //
 //    // Example sending a request using the CreateEventSubscriptionRequest method.
 //    req := client.CreateEventSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -611,7 +776,8 @@ type CreateHsmClientCertificateRequest struct {
 }
 
 // Send marshals and sends the CreateHsmClientCertificate API request.
-func (r CreateHsmClientCertificateRequest) Send() (*CreateHsmClientCertificateOutput, error) {
+func (r CreateHsmClientCertificateRequest) Send(ctx context.Context) (*CreateHsmClientCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -635,7 +801,7 @@ func (r CreateHsmClientCertificateRequest) Send() (*CreateHsmClientCertificateOu
 //
 //    // Example sending a request using the CreateHsmClientCertificateRequest method.
 //    req := client.CreateHsmClientCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -669,7 +835,8 @@ type CreateHsmConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateHsmConfiguration API request.
-func (r CreateHsmConfigurationRequest) Send() (*CreateHsmConfigurationOutput, error) {
+func (r CreateHsmConfigurationRequest) Send(ctx context.Context) (*CreateHsmConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -694,7 +861,7 @@ func (r CreateHsmConfigurationRequest) Send() (*CreateHsmConfigurationOutput, er
 //
 //    // Example sending a request using the CreateHsmConfigurationRequest method.
 //    req := client.CreateHsmConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -728,7 +895,8 @@ type CreateSnapshotCopyGrantRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshotCopyGrant API request.
-func (r CreateSnapshotCopyGrantRequest) Send() (*CreateSnapshotCopyGrantOutput, error) {
+func (r CreateSnapshotCopyGrantRequest) Send(ctx context.Context) (*CreateSnapshotCopyGrantOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -750,7 +918,7 @@ func (r CreateSnapshotCopyGrantRequest) Send() (*CreateSnapshotCopyGrantOutput, 
 //
 //    // Example sending a request using the CreateSnapshotCopyGrantRequest method.
 //    req := client.CreateSnapshotCopyGrantRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -774,6 +942,57 @@ func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrant
 	return CreateSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.CreateSnapshotCopyGrantRequest}
 }
 
+const opCreateSnapshotSchedule = "CreateSnapshotSchedule"
+
+// CreateSnapshotScheduleRequest is a API request type for the CreateSnapshotSchedule API operation.
+type CreateSnapshotScheduleRequest struct {
+	*aws.Request
+	Input *CreateSnapshotScheduleInput
+	Copy  func(*CreateSnapshotScheduleInput) CreateSnapshotScheduleRequest
+}
+
+// Send marshals and sends the CreateSnapshotSchedule API request.
+func (r CreateSnapshotScheduleRequest) Send(ctx context.Context) (*ModifySnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifySnapshotScheduleOutput), nil
+}
+
+// CreateSnapshotScheduleRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Creates a new snapshot schedule.
+//
+//    // Example sending a request using the CreateSnapshotScheduleRequest method.
+//    req := client.CreateSnapshotScheduleRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotSchedule
+func (c *Redshift) CreateSnapshotScheduleRequest(input *CreateSnapshotScheduleInput) CreateSnapshotScheduleRequest {
+	op := &aws.Operation{
+		Name:       opCreateSnapshotSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateSnapshotScheduleInput{}
+	}
+
+	output := &ModifySnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateSnapshotScheduleRequest{Request: req, Input: input, Copy: c.CreateSnapshotScheduleRequest}
+}
+
 const opCreateTags = "CreateTags"
 
 // CreateTagsRequest is a API request type for the CreateTags API operation.
@@ -784,7 +1003,8 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -806,7 +1026,7 @@ func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 //
 //    // Example sending a request using the CreateTagsRequest method.
 //    req := client.CreateTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -842,7 +1062,8 @@ type DeleteClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCluster API request.
-func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+func (r DeleteClusterRequest) Send(ctx context.Context) (*DeleteClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -874,7 +1095,7 @@ func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
 //
 //    // Example sending a request using the DeleteClusterRequest method.
 //    req := client.DeleteClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -908,7 +1129,8 @@ type DeleteClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteClusterParameterGroup API request.
-func (r DeleteClusterParameterGroupRequest) Send() (*DeleteClusterParameterGroupOutput, error) {
+func (r DeleteClusterParameterGroupRequest) Send(ctx context.Context) (*DeleteClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -926,7 +1148,7 @@ func (r DeleteClusterParameterGroupRequest) Send() (*DeleteClusterParameterGroup
 //
 //    // Example sending a request using the DeleteClusterParameterGroupRequest method.
 //    req := client.DeleteClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -962,7 +1184,8 @@ type DeleteClusterSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteClusterSecurityGroup API request.
-func (r DeleteClusterSecurityGroupRequest) Send() (*DeleteClusterSecurityGroupOutput, error) {
+func (r DeleteClusterSecurityGroupRequest) Send(ctx context.Context) (*DeleteClusterSecurityGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -985,7 +1208,7 @@ func (r DeleteClusterSecurityGroupRequest) Send() (*DeleteClusterSecurityGroupOu
 //
 //    // Example sending a request using the DeleteClusterSecurityGroupRequest method.
 //    req := client.DeleteClusterSecurityGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1021,7 +1244,8 @@ type DeleteClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteClusterSnapshot API request.
-func (r DeleteClusterSnapshotRequest) Send() (*DeleteClusterSnapshotOutput, error) {
+func (r DeleteClusterSnapshotRequest) Send(ctx context.Context) (*DeleteClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1044,7 +1268,7 @@ func (r DeleteClusterSnapshotRequest) Send() (*DeleteClusterSnapshotOutput, erro
 //
 //    // Example sending a request using the DeleteClusterSnapshotRequest method.
 //    req := client.DeleteClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1078,7 +1302,8 @@ type DeleteClusterSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteClusterSubnetGroup API request.
-func (r DeleteClusterSubnetGroupRequest) Send() (*DeleteClusterSubnetGroupOutput, error) {
+func (r DeleteClusterSubnetGroupRequest) Send(ctx context.Context) (*DeleteClusterSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1094,7 +1319,7 @@ func (r DeleteClusterSubnetGroupRequest) Send() (*DeleteClusterSubnetGroupOutput
 //
 //    // Example sending a request using the DeleteClusterSubnetGroupRequest method.
 //    req := client.DeleteClusterSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1130,7 +1355,8 @@ type DeleteEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
-func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+func (r DeleteEventSubscriptionRequest) Send(ctx context.Context) (*DeleteEventSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1146,7 +1372,7 @@ func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, 
 //
 //    // Example sending a request using the DeleteEventSubscriptionRequest method.
 //    req := client.DeleteEventSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1182,7 +1408,8 @@ type DeleteHsmClientCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteHsmClientCertificate API request.
-func (r DeleteHsmClientCertificateRequest) Send() (*DeleteHsmClientCertificateOutput, error) {
+func (r DeleteHsmClientCertificateRequest) Send(ctx context.Context) (*DeleteHsmClientCertificateOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1198,7 +1425,7 @@ func (r DeleteHsmClientCertificateRequest) Send() (*DeleteHsmClientCertificateOu
 //
 //    // Example sending a request using the DeleteHsmClientCertificateRequest method.
 //    req := client.DeleteHsmClientCertificateRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1234,7 +1461,8 @@ type DeleteHsmConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteHsmConfiguration API request.
-func (r DeleteHsmConfigurationRequest) Send() (*DeleteHsmConfigurationOutput, error) {
+func (r DeleteHsmConfigurationRequest) Send(ctx context.Context) (*DeleteHsmConfigurationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1250,7 +1478,7 @@ func (r DeleteHsmConfigurationRequest) Send() (*DeleteHsmConfigurationOutput, er
 //
 //    // Example sending a request using the DeleteHsmConfigurationRequest method.
 //    req := client.DeleteHsmConfigurationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1286,7 +1514,8 @@ type DeleteSnapshotCopyGrantRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshotCopyGrant API request.
-func (r DeleteSnapshotCopyGrantRequest) Send() (*DeleteSnapshotCopyGrantOutput, error) {
+func (r DeleteSnapshotCopyGrantRequest) Send(ctx context.Context) (*DeleteSnapshotCopyGrantOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1302,7 +1531,7 @@ func (r DeleteSnapshotCopyGrantRequest) Send() (*DeleteSnapshotCopyGrantOutput, 
 //
 //    // Example sending a request using the DeleteSnapshotCopyGrantRequest method.
 //    req := client.DeleteSnapshotCopyGrantRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1328,6 +1557,59 @@ func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrant
 	return DeleteSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.DeleteSnapshotCopyGrantRequest}
 }
 
+const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
+
+// DeleteSnapshotScheduleRequest is a API request type for the DeleteSnapshotSchedule API operation.
+type DeleteSnapshotScheduleRequest struct {
+	*aws.Request
+	Input *DeleteSnapshotScheduleInput
+	Copy  func(*DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest
+}
+
+// Send marshals and sends the DeleteSnapshotSchedule API request.
+func (r DeleteSnapshotScheduleRequest) Send(ctx context.Context) (*DeleteSnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSnapshotScheduleOutput), nil
+}
+
+// DeleteSnapshotScheduleRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Deletes a snapshot schedule.
+//
+//    // Example sending a request using the DeleteSnapshotScheduleRequest method.
+//    req := client.DeleteSnapshotScheduleRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotSchedule
+func (c *Redshift) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSnapshotSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteSnapshotScheduleInput{}
+	}
+
+	output := &DeleteSnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteSnapshotScheduleRequest{Request: req, Input: input, Copy: c.DeleteSnapshotScheduleRequest}
+}
+
 const opDeleteTags = "DeleteTags"
 
 // DeleteTagsRequest is a API request type for the DeleteTags API operation.
@@ -1338,7 +1620,8 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1355,7 +1638,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1381,6 +1664,57 @@ func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
+const opDescribeAccountAttributes = "DescribeAccountAttributes"
+
+// DescribeAccountAttributesRequest is a API request type for the DescribeAccountAttributes API operation.
+type DescribeAccountAttributesRequest struct {
+	*aws.Request
+	Input *DescribeAccountAttributesInput
+	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
+}
+
+// Send marshals and sends the DescribeAccountAttributes API request.
+func (r DescribeAccountAttributesRequest) Send(ctx context.Context) (*DescribeAccountAttributesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountAttributesOutput), nil
+}
+
+// DescribeAccountAttributesRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Returns a list of attributes attached to an account
+//
+//    // Example sending a request using the DescribeAccountAttributesRequest method.
+//    req := client.DescribeAccountAttributesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributes
+func (c *Redshift) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeAccountAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeAccountAttributesInput{}
+	}
+
+	output := &DescribeAccountAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
+}
+
 const opDescribeClusterDbRevisions = "DescribeClusterDbRevisions"
 
 // DescribeClusterDbRevisionsRequest is a API request type for the DescribeClusterDbRevisions API operation.
@@ -1391,7 +1725,8 @@ type DescribeClusterDbRevisionsRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterDbRevisions API request.
-func (r DescribeClusterDbRevisionsRequest) Send() (*DescribeClusterDbRevisionsOutput, error) {
+func (r DescribeClusterDbRevisionsRequest) Send(ctx context.Context) (*DescribeClusterDbRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1407,7 +1742,7 @@ func (r DescribeClusterDbRevisionsRequest) Send() (*DescribeClusterDbRevisionsOu
 //
 //    // Example sending a request using the DescribeClusterDbRevisionsRequest method.
 //    req := client.DescribeClusterDbRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1441,7 +1776,8 @@ type DescribeClusterParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterParameterGroups API request.
-func (r DescribeClusterParameterGroupsRequest) Send() (*DescribeClusterParameterGroupsOutput, error) {
+func (r DescribeClusterParameterGroupsRequest) Send(ctx context.Context) (*DescribeClusterParameterGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1475,7 +1811,7 @@ func (r DescribeClusterParameterGroupsRequest) Send() (*DescribeClusterParameter
 //
 //    // Example sending a request using the DescribeClusterParameterGroupsRequest method.
 //    req := client.DescribeClusterParameterGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1525,7 +1861,7 @@ func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterP
 func (p *DescribeClusterParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterParameterGroupsPager {
 	return DescribeClusterParameterGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterParameterGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1534,6 +1870,7 @@ func (p *DescribeClusterParameterGroupsRequest) Paginate(opts ...aws.Option) Des
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1561,7 +1898,8 @@ type DescribeClusterParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterParameters API request.
-func (r DescribeClusterParametersRequest) Send() (*DescribeClusterParametersOutput, error) {
+func (r DescribeClusterParametersRequest) Send(ctx context.Context) (*DescribeClusterParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1588,7 +1926,7 @@ func (r DescribeClusterParametersRequest) Send() (*DescribeClusterParametersOutp
 //
 //    // Example sending a request using the DescribeClusterParametersRequest method.
 //    req := client.DescribeClusterParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1638,7 +1976,7 @@ func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParame
 func (p *DescribeClusterParametersRequest) Paginate(opts ...aws.Option) DescribeClusterParametersPager {
 	return DescribeClusterParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1647,6 +1985,7 @@ func (p *DescribeClusterParametersRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1674,7 +2013,8 @@ type DescribeClusterSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterSecurityGroups API request.
-func (r DescribeClusterSecurityGroupsRequest) Send() (*DescribeClusterSecurityGroupsOutput, error) {
+func (r DescribeClusterSecurityGroupsRequest) Send(ctx context.Context) (*DescribeClusterSecurityGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1706,7 +2046,7 @@ func (r DescribeClusterSecurityGroupsRequest) Send() (*DescribeClusterSecurityGr
 //
 //    // Example sending a request using the DescribeClusterSecurityGroupsRequest method.
 //    req := client.DescribeClusterSecurityGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1756,7 +2096,7 @@ func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSe
 func (p *DescribeClusterSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterSecurityGroupsPager {
 	return DescribeClusterSecurityGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterSecurityGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1765,6 +2105,7 @@ func (p *DescribeClusterSecurityGroupsRequest) Paginate(opts ...aws.Option) Desc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1792,7 +2133,8 @@ type DescribeClusterSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterSnapshots API request.
-func (r DescribeClusterSnapshotsRequest) Send() (*DescribeClusterSnapshotsOutput, error) {
+func (r DescribeClusterSnapshotsRequest) Send(ctx context.Context) (*DescribeClusterSnapshotsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1822,7 +2164,7 @@ func (r DescribeClusterSnapshotsRequest) Send() (*DescribeClusterSnapshotsOutput
 //
 //    // Example sending a request using the DescribeClusterSnapshotsRequest method.
 //    req := client.DescribeClusterSnapshotsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1872,7 +2214,7 @@ func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapsho
 func (p *DescribeClusterSnapshotsRequest) Paginate(opts ...aws.Option) DescribeClusterSnapshotsPager {
 	return DescribeClusterSnapshotsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterSnapshotsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1881,6 +2223,7 @@ func (p *DescribeClusterSnapshotsRequest) Paginate(opts ...aws.Option) DescribeC
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1908,7 +2251,8 @@ type DescribeClusterSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterSubnetGroups API request.
-func (r DescribeClusterSubnetGroupsRequest) Send() (*DescribeClusterSubnetGroupsOutput, error) {
+func (r DescribeClusterSubnetGroupsRequest) Send(ctx context.Context) (*DescribeClusterSubnetGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1936,7 +2280,7 @@ func (r DescribeClusterSubnetGroupsRequest) Send() (*DescribeClusterSubnetGroups
 //
 //    // Example sending a request using the DescribeClusterSubnetGroupsRequest method.
 //    req := client.DescribeClusterSubnetGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1986,7 +2330,7 @@ func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubn
 func (p *DescribeClusterSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterSubnetGroupsPager {
 	return DescribeClusterSubnetGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterSubnetGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1995,6 +2339,7 @@ func (p *DescribeClusterSubnetGroupsRequest) Paginate(opts ...aws.Option) Descri
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2022,7 +2367,8 @@ type DescribeClusterTracksRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterTracks API request.
-func (r DescribeClusterTracksRequest) Send() (*DescribeClusterTracksOutput, error) {
+func (r DescribeClusterTracksRequest) Send(ctx context.Context) (*DescribeClusterTracksOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2038,7 +2384,7 @@ func (r DescribeClusterTracksRequest) Send() (*DescribeClusterTracksOutput, erro
 //
 //    // Example sending a request using the DescribeClusterTracksRequest method.
 //    req := client.DescribeClusterTracksRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2072,7 +2418,8 @@ type DescribeClusterVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeClusterVersions API request.
-func (r DescribeClusterVersionsRequest) Send() (*DescribeClusterVersionsOutput, error) {
+func (r DescribeClusterVersionsRequest) Send(ctx context.Context) (*DescribeClusterVersionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2092,7 +2439,7 @@ func (r DescribeClusterVersionsRequest) Send() (*DescribeClusterVersionsOutput, 
 //
 //    // Example sending a request using the DescribeClusterVersionsRequest method.
 //    req := client.DescribeClusterVersionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2142,7 +2489,7 @@ func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersions
 func (p *DescribeClusterVersionsRequest) Paginate(opts ...aws.Option) DescribeClusterVersionsPager {
 	return DescribeClusterVersionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClusterVersionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2151,6 +2498,7 @@ func (p *DescribeClusterVersionsRequest) Paginate(opts ...aws.Option) DescribeCl
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2178,7 +2526,8 @@ type DescribeClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeClusters API request.
-func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+func (r DescribeClustersRequest) Send(ctx context.Context) (*DescribeClustersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2207,7 +2556,7 @@ func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
 //
 //    // Example sending a request using the DescribeClustersRequest method.
 //    req := client.DescribeClustersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2257,7 +2606,7 @@ func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) Describ
 func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersPager {
 	return DescribeClustersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeClustersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2266,6 +2615,7 @@ func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2293,7 +2643,8 @@ type DescribeDefaultClusterParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeDefaultClusterParameters API request.
-func (r DescribeDefaultClusterParametersRequest) Send() (*DescribeDefaultClusterParametersOutput, error) {
+func (r DescribeDefaultClusterParametersRequest) Send(ctx context.Context) (*DescribeDefaultClusterParametersOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2313,7 +2664,7 @@ func (r DescribeDefaultClusterParametersRequest) Send() (*DescribeDefaultCluster
 //
 //    // Example sending a request using the DescribeDefaultClusterParametersRequest method.
 //    req := client.DescribeDefaultClusterParametersRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2363,7 +2714,7 @@ func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaul
 func (p *DescribeDefaultClusterParametersRequest) Paginate(opts ...aws.Option) DescribeDefaultClusterParametersPager {
 	return DescribeDefaultClusterParametersPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeDefaultClusterParametersInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2372,6 +2723,7 @@ func (p *DescribeDefaultClusterParametersRequest) Paginate(opts ...aws.Option) D
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2399,7 +2751,8 @@ type DescribeEventCategoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
-func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+func (r DescribeEventCategoriesRequest) Send(ctx context.Context) (*DescribeEventCategoriesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2417,7 +2770,7 @@ func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, 
 //
 //    // Example sending a request using the DescribeEventCategoriesRequest method.
 //    req := client.DescribeEventCategoriesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2451,7 +2804,8 @@ type DescribeEventSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
-func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+func (r DescribeEventSubscriptionsRequest) Send(ctx context.Context) (*DescribeEventSubscriptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2479,7 +2833,7 @@ func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOu
 //
 //    // Example sending a request using the DescribeEventSubscriptionsRequest method.
 //    req := client.DescribeEventSubscriptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2529,7 +2883,7 @@ func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscri
 func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
 	return DescribeEventSubscriptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventSubscriptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2538,6 +2892,7 @@ func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) Describ
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2565,7 +2920,8 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send(ctx context.Context) (*DescribeEventsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2584,7 +2940,7 @@ func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 //
 //    // Example sending a request using the DescribeEventsRequest method.
 //    req := client.DescribeEventsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2634,7 +2990,7 @@ func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) DescribeEve
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeEventsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2643,6 +2999,7 @@ func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2670,7 +3027,8 @@ type DescribeHsmClientCertificatesRequest struct {
 }
 
 // Send marshals and sends the DescribeHsmClientCertificates API request.
-func (r DescribeHsmClientCertificatesRequest) Send() (*DescribeHsmClientCertificatesOutput, error) {
+func (r DescribeHsmClientCertificatesRequest) Send(ctx context.Context) (*DescribeHsmClientCertificatesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2698,7 +3056,7 @@ func (r DescribeHsmClientCertificatesRequest) Send() (*DescribeHsmClientCertific
 //
 //    // Example sending a request using the DescribeHsmClientCertificatesRequest method.
 //    req := client.DescribeHsmClientCertificatesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2748,7 +3106,7 @@ func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClient
 func (p *DescribeHsmClientCertificatesRequest) Paginate(opts ...aws.Option) DescribeHsmClientCertificatesPager {
 	return DescribeHsmClientCertificatesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeHsmClientCertificatesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2757,6 +3115,7 @@ func (p *DescribeHsmClientCertificatesRequest) Paginate(opts ...aws.Option) Desc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2784,7 +3143,8 @@ type DescribeHsmConfigurationsRequest struct {
 }
 
 // Send marshals and sends the DescribeHsmConfigurations API request.
-func (r DescribeHsmConfigurationsRequest) Send() (*DescribeHsmConfigurationsOutput, error) {
+func (r DescribeHsmConfigurationsRequest) Send(ctx context.Context) (*DescribeHsmConfigurationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2812,7 +3172,7 @@ func (r DescribeHsmConfigurationsRequest) Send() (*DescribeHsmConfigurationsOutp
 //
 //    // Example sending a request using the DescribeHsmConfigurationsRequest method.
 //    req := client.DescribeHsmConfigurationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2862,7 +3222,7 @@ func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurat
 func (p *DescribeHsmConfigurationsRequest) Paginate(opts ...aws.Option) DescribeHsmConfigurationsPager {
 	return DescribeHsmConfigurationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeHsmConfigurationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -2871,6 +3231,7 @@ func (p *DescribeHsmConfigurationsRequest) Paginate(opts ...aws.Option) Describe
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -2898,7 +3259,8 @@ type DescribeLoggingStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeLoggingStatus API request.
-func (r DescribeLoggingStatusRequest) Send() (*EnableLoggingOutput, error) {
+func (r DescribeLoggingStatusRequest) Send(ctx context.Context) (*EnableLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2915,7 +3277,7 @@ func (r DescribeLoggingStatusRequest) Send() (*EnableLoggingOutput, error) {
 //
 //    // Example sending a request using the DescribeLoggingStatusRequest method.
 //    req := client.DescribeLoggingStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2949,7 +3311,8 @@ type DescribeOrderableClusterOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeOrderableClusterOptions API request.
-func (r DescribeOrderableClusterOptionsRequest) Send() (*DescribeOrderableClusterOptionsOutput, error) {
+func (r DescribeOrderableClusterOptionsRequest) Send(ctx context.Context) (*DescribeOrderableClusterOptionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2963,7 +3326,7 @@ func (r DescribeOrderableClusterOptionsRequest) Send() (*DescribeOrderableCluste
 //
 // Returns a list of orderable cluster options. Before you create a new cluster
 // you can use this operation to find what options are available, such as the
-// EC2 Availability Zones (AZ) in the specific AWS region that you can specify,
+// EC2 Availability Zones (AZ) in the specific AWS Region that you can specify,
 // and the node types you can request. The node types differ by available storage,
 // memory, CPU and price. With the cost involved you might want to obtain a
 // list of cluster options in the specific region and specify values when creating
@@ -2973,7 +3336,7 @@ func (r DescribeOrderableClusterOptionsRequest) Send() (*DescribeOrderableCluste
 //
 //    // Example sending a request using the DescribeOrderableClusterOptionsRequest method.
 //    req := client.DescribeOrderableClusterOptionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3023,7 +3386,7 @@ func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderab
 func (p *DescribeOrderableClusterOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableClusterOptionsPager {
 	return DescribeOrderableClusterOptionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeOrderableClusterOptionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3032,6 +3395,7 @@ func (p *DescribeOrderableClusterOptionsRequest) Paginate(opts ...aws.Option) De
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3059,7 +3423,8 @@ type DescribeReservedNodeOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedNodeOfferings API request.
-func (r DescribeReservedNodeOfferingsRequest) Send() (*DescribeReservedNodeOfferingsOutput, error) {
+func (r DescribeReservedNodeOfferingsRequest) Send(ctx context.Context) (*DescribeReservedNodeOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3084,7 +3449,7 @@ func (r DescribeReservedNodeOfferingsRequest) Send() (*DescribeReservedNodeOffer
 //
 //    // Example sending a request using the DescribeReservedNodeOfferingsRequest method.
 //    req := client.DescribeReservedNodeOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3134,7 +3499,7 @@ func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedN
 func (p *DescribeReservedNodeOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedNodeOfferingsPager {
 	return DescribeReservedNodeOfferingsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedNodeOfferingsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3143,6 +3508,7 @@ func (p *DescribeReservedNodeOfferingsRequest) Paginate(opts ...aws.Option) Desc
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3170,7 +3536,8 @@ type DescribeReservedNodesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedNodes API request.
-func (r DescribeReservedNodesRequest) Send() (*DescribeReservedNodesOutput, error) {
+func (r DescribeReservedNodesRequest) Send(ctx context.Context) (*DescribeReservedNodesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3186,7 +3553,7 @@ func (r DescribeReservedNodesRequest) Send() (*DescribeReservedNodesOutput, erro
 //
 //    // Example sending a request using the DescribeReservedNodesRequest method.
 //    req := client.DescribeReservedNodesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3236,7 +3603,7 @@ func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInpu
 func (p *DescribeReservedNodesRequest) Paginate(opts ...aws.Option) DescribeReservedNodesPager {
 	return DescribeReservedNodesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *DescribeReservedNodesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -3245,6 +3612,7 @@ func (p *DescribeReservedNodesRequest) Paginate(opts ...aws.Option) DescribeRese
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -3272,7 +3640,8 @@ type DescribeResizeRequest struct {
 }
 
 // Send marshals and sends the DescribeResize API request.
-func (r DescribeResizeRequest) Send() (*DescribeResizeOutput, error) {
+func (r DescribeResizeRequest) Send(ctx context.Context) (*DescribeResizeOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3294,7 +3663,7 @@ func (r DescribeResizeRequest) Send() (*DescribeResizeOutput, error) {
 //
 //    // Example sending a request using the DescribeResizeRequest method.
 //    req := client.DescribeResizeRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3328,7 +3697,8 @@ type DescribeSnapshotCopyGrantsRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshotCopyGrants API request.
-func (r DescribeSnapshotCopyGrantsRequest) Send() (*DescribeSnapshotCopyGrantsOutput, error) {
+func (r DescribeSnapshotCopyGrantsRequest) Send(ctx context.Context) (*DescribeSnapshotCopyGrantsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3349,7 +3719,7 @@ func (r DescribeSnapshotCopyGrantsRequest) Send() (*DescribeSnapshotCopyGrantsOu
 //
 //    // Example sending a request using the DescribeSnapshotCopyGrantsRequest method.
 //    req := client.DescribeSnapshotCopyGrantsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3373,6 +3743,109 @@ func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopy
 	return DescribeSnapshotCopyGrantsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotCopyGrantsRequest}
 }
 
+const opDescribeSnapshotSchedules = "DescribeSnapshotSchedules"
+
+// DescribeSnapshotSchedulesRequest is a API request type for the DescribeSnapshotSchedules API operation.
+type DescribeSnapshotSchedulesRequest struct {
+	*aws.Request
+	Input *DescribeSnapshotSchedulesInput
+	Copy  func(*DescribeSnapshotSchedulesInput) DescribeSnapshotSchedulesRequest
+}
+
+// Send marshals and sends the DescribeSnapshotSchedules API request.
+func (r DescribeSnapshotSchedulesRequest) Send(ctx context.Context) (*DescribeSnapshotSchedulesOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSnapshotSchedulesOutput), nil
+}
+
+// DescribeSnapshotSchedulesRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Returns a list of snapshot schedules.
+//
+//    // Example sending a request using the DescribeSnapshotSchedulesRequest method.
+//    req := client.DescribeSnapshotSchedulesRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedules
+func (c *Redshift) DescribeSnapshotSchedulesRequest(input *DescribeSnapshotSchedulesInput) DescribeSnapshotSchedulesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeSnapshotSchedules,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeSnapshotSchedulesInput{}
+	}
+
+	output := &DescribeSnapshotSchedulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeSnapshotSchedulesRequest{Request: req, Input: input, Copy: c.DescribeSnapshotSchedulesRequest}
+}
+
+const opDescribeStorage = "DescribeStorage"
+
+// DescribeStorageRequest is a API request type for the DescribeStorage API operation.
+type DescribeStorageRequest struct {
+	*aws.Request
+	Input *DescribeStorageInput
+	Copy  func(*DescribeStorageInput) DescribeStorageRequest
+}
+
+// Send marshals and sends the DescribeStorage API request.
+func (r DescribeStorageRequest) Send(ctx context.Context) (*DescribeStorageOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStorageOutput), nil
+}
+
+// DescribeStorageRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Returns the total amount of snapshot usage and provisioned storage for a
+// user in megabytes.
+//
+//    // Example sending a request using the DescribeStorageRequest method.
+//    req := client.DescribeStorageRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeStorage
+func (c *Redshift) DescribeStorageRequest(input *DescribeStorageInput) DescribeStorageRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStorage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeStorageInput{}
+	}
+
+	output := &DescribeStorageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeStorageRequest{Request: req, Input: input, Copy: c.DescribeStorageRequest}
+}
+
 const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 
 // DescribeTableRestoreStatusRequest is a API request type for the DescribeTableRestoreStatus API operation.
@@ -3383,7 +3856,8 @@ type DescribeTableRestoreStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeTableRestoreStatus API request.
-func (r DescribeTableRestoreStatusRequest) Send() (*DescribeTableRestoreStatusOutput, error) {
+func (r DescribeTableRestoreStatusRequest) Send(ctx context.Context) (*DescribeTableRestoreStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3403,7 +3877,7 @@ func (r DescribeTableRestoreStatusRequest) Send() (*DescribeTableRestoreStatusOu
 //
 //    // Example sending a request using the DescribeTableRestoreStatusRequest method.
 //    req := client.DescribeTableRestoreStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3437,7 +3911,8 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3475,7 +3950,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3509,7 +3984,8 @@ type DisableLoggingRequest struct {
 }
 
 // Send marshals and sends the DisableLogging API request.
-func (r DisableLoggingRequest) Send() (*EnableLoggingOutput, error) {
+func (r DisableLoggingRequest) Send(ctx context.Context) (*EnableLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3526,7 +4002,7 @@ func (r DisableLoggingRequest) Send() (*EnableLoggingOutput, error) {
 //
 //    // Example sending a request using the DisableLoggingRequest method.
 //    req := client.DisableLoggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3560,7 +4036,8 @@ type DisableSnapshotCopyRequest struct {
 }
 
 // Send marshals and sends the DisableSnapshotCopy API request.
-func (r DisableSnapshotCopyRequest) Send() (*DisableSnapshotCopyOutput, error) {
+func (r DisableSnapshotCopyRequest) Send(ctx context.Context) (*DisableSnapshotCopyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3581,7 +4058,7 @@ func (r DisableSnapshotCopyRequest) Send() (*DisableSnapshotCopyOutput, error) {
 //
 //    // Example sending a request using the DisableSnapshotCopyRequest method.
 //    req := client.DisableSnapshotCopyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3615,7 +4092,8 @@ type EnableLoggingRequest struct {
 }
 
 // Send marshals and sends the EnableLogging API request.
-func (r EnableLoggingRequest) Send() (*EnableLoggingOutput, error) {
+func (r EnableLoggingRequest) Send(ctx context.Context) (*EnableLoggingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3632,7 +4110,7 @@ func (r EnableLoggingRequest) Send() (*EnableLoggingOutput, error) {
 //
 //    // Example sending a request using the EnableLoggingRequest method.
 //    req := client.EnableLoggingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3666,7 +4144,8 @@ type EnableSnapshotCopyRequest struct {
 }
 
 // Send marshals and sends the EnableSnapshotCopy API request.
-func (r EnableSnapshotCopyRequest) Send() (*EnableSnapshotCopyOutput, error) {
+func (r EnableSnapshotCopyRequest) Send(ctx context.Context) (*EnableSnapshotCopyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3683,7 +4162,7 @@ func (r EnableSnapshotCopyRequest) Send() (*EnableSnapshotCopyOutput, error) {
 //
 //    // Example sending a request using the EnableSnapshotCopyRequest method.
 //    req := client.EnableSnapshotCopyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3717,7 +4196,8 @@ type GetClusterCredentialsRequest struct {
 }
 
 // Send marshals and sends the GetClusterCredentials API request.
-func (r GetClusterCredentialsRequest) Send() (*GetClusterCredentialsOutput, error) {
+func (r GetClusterCredentialsRequest) Send(ctx context.Context) (*GetClusterCredentialsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3756,7 +4236,7 @@ func (r GetClusterCredentialsRequest) Send() (*GetClusterCredentialsOutput, erro
 //
 //    // Example sending a request using the GetClusterCredentialsRequest method.
 //    req := client.GetClusterCredentialsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3790,7 +4270,8 @@ type GetReservedNodeExchangeOfferingsRequest struct {
 }
 
 // Send marshals and sends the GetReservedNodeExchangeOfferings API request.
-func (r GetReservedNodeExchangeOfferingsRequest) Send() (*GetReservedNodeExchangeOfferingsOutput, error) {
+func (r GetReservedNodeExchangeOfferingsRequest) Send(ctx context.Context) (*GetReservedNodeExchangeOfferingsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3807,7 +4288,7 @@ func (r GetReservedNodeExchangeOfferingsRequest) Send() (*GetReservedNodeExchang
 //
 //    // Example sending a request using the GetReservedNodeExchangeOfferingsRequest method.
 //    req := client.GetReservedNodeExchangeOfferingsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3841,7 +4322,8 @@ type ModifyClusterRequest struct {
 }
 
 // Send marshals and sends the ModifyCluster API request.
-func (r ModifyClusterRequest) Send() (*ModifyClusterOutput, error) {
+func (r ModifyClusterRequest) Send(ctx context.Context) (*ModifyClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3867,7 +4349,7 @@ func (r ModifyClusterRequest) Send() (*ModifyClusterOutput, error) {
 //
 //    // Example sending a request using the ModifyClusterRequest method.
 //    req := client.ModifyClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3901,7 +4383,8 @@ type ModifyClusterDbRevisionRequest struct {
 }
 
 // Send marshals and sends the ModifyClusterDbRevision API request.
-func (r ModifyClusterDbRevisionRequest) Send() (*ModifyClusterDbRevisionOutput, error) {
+func (r ModifyClusterDbRevisionRequest) Send(ctx context.Context) (*ModifyClusterDbRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3918,7 +4401,7 @@ func (r ModifyClusterDbRevisionRequest) Send() (*ModifyClusterDbRevisionOutput, 
 //
 //    // Example sending a request using the ModifyClusterDbRevisionRequest method.
 //    req := client.ModifyClusterDbRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3952,7 +4435,8 @@ type ModifyClusterIamRolesRequest struct {
 }
 
 // Send marshals and sends the ModifyClusterIamRoles API request.
-func (r ModifyClusterIamRolesRequest) Send() (*ModifyClusterIamRolesOutput, error) {
+func (r ModifyClusterIamRolesRequest) Send(ctx context.Context) (*ModifyClusterIamRolesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3971,7 +4455,7 @@ func (r ModifyClusterIamRolesRequest) Send() (*ModifyClusterIamRolesOutput, erro
 //
 //    // Example sending a request using the ModifyClusterIamRolesRequest method.
 //    req := client.ModifyClusterIamRolesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -3995,6 +4479,58 @@ func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInpu
 	return ModifyClusterIamRolesRequest{Request: req, Input: input, Copy: c.ModifyClusterIamRolesRequest}
 }
 
+const opModifyClusterMaintenance = "ModifyClusterMaintenance"
+
+// ModifyClusterMaintenanceRequest is a API request type for the ModifyClusterMaintenance API operation.
+type ModifyClusterMaintenanceRequest struct {
+	*aws.Request
+	Input *ModifyClusterMaintenanceInput
+	Copy  func(*ModifyClusterMaintenanceInput) ModifyClusterMaintenanceRequest
+}
+
+// Send marshals and sends the ModifyClusterMaintenance API request.
+func (r ModifyClusterMaintenanceRequest) Send(ctx context.Context) (*ModifyClusterMaintenanceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterMaintenanceOutput), nil
+}
+
+// ModifyClusterMaintenanceRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Modifies the maintenance settings of a cluster. For example, you can defer
+// a maintenance window. You can also update or cancel a deferment.
+//
+//    // Example sending a request using the ModifyClusterMaintenanceRequest method.
+//    req := client.ModifyClusterMaintenanceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenance
+func (c *Redshift) ModifyClusterMaintenanceRequest(input *ModifyClusterMaintenanceInput) ModifyClusterMaintenanceRequest {
+	op := &aws.Operation{
+		Name:       opModifyClusterMaintenance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyClusterMaintenanceInput{}
+	}
+
+	output := &ModifyClusterMaintenanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifyClusterMaintenanceRequest{Request: req, Input: input, Copy: c.ModifyClusterMaintenanceRequest}
+}
+
 const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 
 // ModifyClusterParameterGroupRequest is a API request type for the ModifyClusterParameterGroup API operation.
@@ -4005,7 +4541,8 @@ type ModifyClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyClusterParameterGroup API request.
-func (r ModifyClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOutput, error) {
+func (r ModifyClusterParameterGroupRequest) Send(ctx context.Context) (*ResetClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4025,7 +4562,7 @@ func (r ModifyClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupO
 //
 //    // Example sending a request using the ModifyClusterParameterGroupRequest method.
 //    req := client.ModifyClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4049,6 +4586,110 @@ func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParame
 	return ModifyClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterParameterGroupRequest}
 }
 
+const opModifyClusterSnapshot = "ModifyClusterSnapshot"
+
+// ModifyClusterSnapshotRequest is a API request type for the ModifyClusterSnapshot API operation.
+type ModifyClusterSnapshotRequest struct {
+	*aws.Request
+	Input *ModifyClusterSnapshotInput
+	Copy  func(*ModifyClusterSnapshotInput) ModifyClusterSnapshotRequest
+}
+
+// Send marshals and sends the ModifyClusterSnapshot API request.
+func (r ModifyClusterSnapshotRequest) Send(ctx context.Context) (*ModifyClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterSnapshotOutput), nil
+}
+
+// ModifyClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Modifies the settings for a snapshot.
+//
+//    // Example sending a request using the ModifyClusterSnapshotRequest method.
+//    req := client.ModifyClusterSnapshotRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshot
+func (c *Redshift) ModifyClusterSnapshotRequest(input *ModifyClusterSnapshotInput) ModifyClusterSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opModifyClusterSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyClusterSnapshotInput{}
+	}
+
+	output := &ModifyClusterSnapshotOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifyClusterSnapshotRequest{Request: req, Input: input, Copy: c.ModifyClusterSnapshotRequest}
+}
+
+const opModifyClusterSnapshotSchedule = "ModifyClusterSnapshotSchedule"
+
+// ModifyClusterSnapshotScheduleRequest is a API request type for the ModifyClusterSnapshotSchedule API operation.
+type ModifyClusterSnapshotScheduleRequest struct {
+	*aws.Request
+	Input *ModifyClusterSnapshotScheduleInput
+	Copy  func(*ModifyClusterSnapshotScheduleInput) ModifyClusterSnapshotScheduleRequest
+}
+
+// Send marshals and sends the ModifyClusterSnapshotSchedule API request.
+func (r ModifyClusterSnapshotScheduleRequest) Send(ctx context.Context) (*ModifyClusterSnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyClusterSnapshotScheduleOutput), nil
+}
+
+// ModifyClusterSnapshotScheduleRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Modifies a snapshot schedule for a cluster.
+//
+//    // Example sending a request using the ModifyClusterSnapshotScheduleRequest method.
+//    req := client.ModifyClusterSnapshotScheduleRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotSchedule
+func (c *Redshift) ModifyClusterSnapshotScheduleRequest(input *ModifyClusterSnapshotScheduleInput) ModifyClusterSnapshotScheduleRequest {
+	op := &aws.Operation{
+		Name:       opModifyClusterSnapshotSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyClusterSnapshotScheduleInput{}
+	}
+
+	output := &ModifyClusterSnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifyClusterSnapshotScheduleRequest{Request: req, Input: input, Copy: c.ModifyClusterSnapshotScheduleRequest}
+}
+
 const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 
 // ModifyClusterSubnetGroupRequest is a API request type for the ModifyClusterSubnetGroup API operation.
@@ -4059,7 +4700,8 @@ type ModifyClusterSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyClusterSubnetGroup API request.
-func (r ModifyClusterSubnetGroupRequest) Send() (*ModifyClusterSubnetGroupOutput, error) {
+func (r ModifyClusterSubnetGroupRequest) Send(ctx context.Context) (*ModifyClusterSubnetGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4077,7 +4719,7 @@ func (r ModifyClusterSubnetGroupRequest) Send() (*ModifyClusterSubnetGroupOutput
 //
 //    // Example sending a request using the ModifyClusterSubnetGroupRequest method.
 //    req := client.ModifyClusterSubnetGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4111,7 +4753,8 @@ type ModifyEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
-func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+func (r ModifyEventSubscriptionRequest) Send(ctx context.Context) (*ModifyEventSubscriptionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4127,7 +4770,7 @@ func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, 
 //
 //    // Example sending a request using the ModifyEventSubscriptionRequest method.
 //    req := client.ModifyEventSubscriptionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4161,7 +4804,8 @@ type ModifySnapshotCopyRetentionPeriodRequest struct {
 }
 
 // Send marshals and sends the ModifySnapshotCopyRetentionPeriod API request.
-func (r ModifySnapshotCopyRetentionPeriodRequest) Send() (*ModifySnapshotCopyRetentionPeriodOutput, error) {
+func (r ModifySnapshotCopyRetentionPeriodRequest) Send(ctx context.Context) (*ModifySnapshotCopyRetentionPeriodOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4173,12 +4817,17 @@ func (r ModifySnapshotCopyRetentionPeriodRequest) Send() (*ModifySnapshotCopyRet
 // ModifySnapshotCopyRetentionPeriodRequest returns a request value for making API operation for
 // Amazon Redshift.
 //
-// Modifies the number of days to retain automated snapshots in the destination
-// region after they are copied from the source region.
+// Modifies the number of days to retain snapshots in the destination AWS Region
+// after they are copied from the source AWS Region. By default, this operation
+// only changes the retention period of copied automated snapshots. The retention
+// periods for both new and existing copied automated snapshots are updated
+// with the new retention period. You can set the manual option to change only
+// the retention periods of copied manual snapshots. If you set this option,
+// only newly copied manual snapshots have the new retention period.
 //
 //    // Example sending a request using the ModifySnapshotCopyRetentionPeriodRequest method.
 //    req := client.ModifySnapshotCopyRetentionPeriodRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4202,6 +4851,58 @@ func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapsho
 	return ModifySnapshotCopyRetentionPeriodRequest{Request: req, Input: input, Copy: c.ModifySnapshotCopyRetentionPeriodRequest}
 }
 
+const opModifySnapshotSchedule = "ModifySnapshotSchedule"
+
+// ModifySnapshotScheduleRequest is a API request type for the ModifySnapshotSchedule API operation.
+type ModifySnapshotScheduleRequest struct {
+	*aws.Request
+	Input *ModifySnapshotScheduleInput
+	Copy  func(*ModifySnapshotScheduleInput) ModifySnapshotScheduleRequest
+}
+
+// Send marshals and sends the ModifySnapshotSchedule API request.
+func (r ModifySnapshotScheduleRequest) Send(ctx context.Context) (*ModifySnapshotScheduleOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifySnapshotScheduleOutput), nil
+}
+
+// ModifySnapshotScheduleRequest returns a request value for making API operation for
+// Amazon Redshift.
+//
+// Modifies a snapshot schedule. Any schedule associated with a cluster is modified
+// asynchronously.
+//
+//    // Example sending a request using the ModifySnapshotScheduleRequest method.
+//    req := client.ModifySnapshotScheduleRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotSchedule
+func (c *Redshift) ModifySnapshotScheduleRequest(input *ModifySnapshotScheduleInput) ModifySnapshotScheduleRequest {
+	op := &aws.Operation{
+		Name:       opModifySnapshotSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifySnapshotScheduleInput{}
+	}
+
+	output := &ModifySnapshotScheduleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifySnapshotScheduleRequest{Request: req, Input: input, Copy: c.ModifySnapshotScheduleRequest}
+}
+
 const opPurchaseReservedNodeOffering = "PurchaseReservedNodeOffering"
 
 // PurchaseReservedNodeOfferingRequest is a API request type for the PurchaseReservedNodeOffering API operation.
@@ -4212,7 +4913,8 @@ type PurchaseReservedNodeOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedNodeOffering API request.
-func (r PurchaseReservedNodeOfferingRequest) Send() (*PurchaseReservedNodeOfferingOutput, error) {
+func (r PurchaseReservedNodeOfferingRequest) Send(ctx context.Context) (*PurchaseReservedNodeOfferingOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4236,7 +4938,7 @@ func (r PurchaseReservedNodeOfferingRequest) Send() (*PurchaseReservedNodeOfferi
 //
 //    // Example sending a request using the PurchaseReservedNodeOfferingRequest method.
 //    req := client.PurchaseReservedNodeOfferingRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4270,7 +4972,8 @@ type RebootClusterRequest struct {
 }
 
 // Send marshals and sends the RebootCluster API request.
-func (r RebootClusterRequest) Send() (*RebootClusterOutput, error) {
+func (r RebootClusterRequest) Send(ctx context.Context) (*RebootClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4292,7 +4995,7 @@ func (r RebootClusterRequest) Send() (*RebootClusterOutput, error) {
 //
 //    // Example sending a request using the RebootClusterRequest method.
 //    req := client.RebootClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4326,7 +5029,8 @@ type ResetClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetClusterParameterGroup API request.
-func (r ResetClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOutput, error) {
+func (r ResetClusterParameterGroupRequest) Send(ctx context.Context) (*ResetClusterParameterGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4345,7 +5049,7 @@ func (r ResetClusterParameterGroupRequest) Send() (*ResetClusterParameterGroupOu
 //
 //    // Example sending a request using the ResetClusterParameterGroupRequest method.
 //    req := client.ResetClusterParameterGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4379,7 +5083,8 @@ type ResizeClusterRequest struct {
 }
 
 // Send marshals and sends the ResizeCluster API request.
-func (r ResizeClusterRequest) Send() (*ResizeClusterOutput, error) {
+func (r ResizeClusterRequest) Send(ctx context.Context) (*ResizeClusterOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4393,7 +5098,7 @@ func (r ResizeClusterRequest) Send() (*ResizeClusterOutput, error) {
 //
 // Changes the size of the cluster. You can change the cluster's type, or change
 // the number or type of nodes. The default behavior is to use the elastic resize
-// method. With an elastic resize your cluster is avaialble for read and write
+// method. With an elastic resize, your cluster is available for read and write
 // operations more quickly than with the classic resize method.
 //
 // Elastic resize operations have the following restrictions:
@@ -4408,11 +5113,11 @@ func (r ResizeClusterRequest) Send() (*ResizeClusterOutput, error) {
 //
 // ds2.8xlarge
 //
-//    * The type of nodes you add must match the node type for the cluster.
+//    * The type of nodes that you add must match the node type for the cluster.
 //
 //    // Example sending a request using the ResizeClusterRequest method.
 //    req := client.ResizeClusterRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4446,7 +5151,8 @@ type RestoreFromClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreFromClusterSnapshot API request.
-func (r RestoreFromClusterSnapshotRequest) Send() (*RestoreFromClusterSnapshotOutput, error) {
+func (r RestoreFromClusterSnapshotRequest) Send(ctx context.Context) (*RestoreFromClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4476,7 +5182,7 @@ func (r RestoreFromClusterSnapshotRequest) Send() (*RestoreFromClusterSnapshotOu
 //
 //    // Example sending a request using the RestoreFromClusterSnapshotRequest method.
 //    req := client.RestoreFromClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4510,7 +5216,8 @@ type RestoreTableFromClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreTableFromClusterSnapshot API request.
-func (r RestoreTableFromClusterSnapshotRequest) Send() (*RestoreTableFromClusterSnapshotOutput, error) {
+func (r RestoreTableFromClusterSnapshotRequest) Send(ctx context.Context) (*RestoreTableFromClusterSnapshotOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4538,7 +5245,7 @@ func (r RestoreTableFromClusterSnapshotRequest) Send() (*RestoreTableFromCluster
 //
 //    // Example sending a request using the RestoreTableFromClusterSnapshotRequest method.
 //    req := client.RestoreTableFromClusterSnapshotRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4572,7 +5279,8 @@ type RevokeClusterSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the RevokeClusterSecurityGroupIngress API request.
-func (r RevokeClusterSecurityGroupIngressRequest) Send() (*RevokeClusterSecurityGroupIngressOutput, error) {
+func (r RevokeClusterSecurityGroupIngressRequest) Send(ctx context.Context) (*RevokeClusterSecurityGroupIngressOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4592,7 +5300,7 @@ func (r RevokeClusterSecurityGroupIngressRequest) Send() (*RevokeClusterSecurity
 //
 //    // Example sending a request using the RevokeClusterSecurityGroupIngressRequest method.
 //    req := client.RevokeClusterSecurityGroupIngressRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4626,7 +5334,8 @@ type RevokeSnapshotAccessRequest struct {
 }
 
 // Send marshals and sends the RevokeSnapshotAccess API request.
-func (r RevokeSnapshotAccessRequest) Send() (*RevokeSnapshotAccessOutput, error) {
+func (r RevokeSnapshotAccessRequest) Send(ctx context.Context) (*RevokeSnapshotAccessOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4648,7 +5357,7 @@ func (r RevokeSnapshotAccessRequest) Send() (*RevokeSnapshotAccessOutput, error)
 //
 //    // Example sending a request using the RevokeSnapshotAccessRequest method.
 //    req := client.RevokeSnapshotAccessRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4682,7 +5391,8 @@ type RotateEncryptionKeyRequest struct {
 }
 
 // Send marshals and sends the RotateEncryptionKey API request.
-func (r RotateEncryptionKeyRequest) Send() (*RotateEncryptionKeyOutput, error) {
+func (r RotateEncryptionKeyRequest) Send(ctx context.Context) (*RotateEncryptionKeyOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4698,7 +5408,7 @@ func (r RotateEncryptionKeyRequest) Send() (*RotateEncryptionKeyOutput, error) {
 //
 //    // Example sending a request using the RotateEncryptionKeyRequest method.
 //    req := client.RotateEncryptionKeyRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -4793,6 +5503,28 @@ func (s AcceptReservedNodeExchangeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// A name value pair that describes an aspect of an account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttribute
+type AccountAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the attribute.
+	AttributeName *string `type:"string"`
+
+	// A list of attribute values.
+	AttributeValues []AttributeValueTarget `locationNameList:"AttributeValueTarget" type:"list"`
+}
+
+// String returns the string representation
+func (s AccountAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccountAttribute) GoString() string {
+	return s.String()
+}
+
 // Describes an AWS customer account authorized to restore a snapshot.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountWithRestoreAccess
 type AccountWithRestoreAccess struct {
@@ -4813,6 +5545,25 @@ func (s AccountWithRestoreAccess) String() string {
 
 // GoString returns the string representation
 func (s AccountWithRestoreAccess) GoString() string {
+	return s.String()
+}
+
+// Describes an attribute value.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AttributeValueTarget
+type AttributeValueTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The value of the attribute.
+	AttributeValue *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AttributeValueTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AttributeValueTarget) GoString() string {
 	return s.String()
 }
 
@@ -4985,12 +5736,193 @@ func (s AvailabilityZone) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshotsRequest
+type BatchDeleteClusterSnapshotsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of identifiers for the snapshots that you want to delete.
+	//
+	// Identifiers is a required field
+	Identifiers []DeleteClusterSnapshotInput `locationNameList:"DeleteClusterSnapshotMessage" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchDeleteClusterSnapshotsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchDeleteClusterSnapshotsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchDeleteClusterSnapshotsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteClusterSnapshotsInput"}
+
+	if s.Identifiers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Identifiers"))
+	}
+	if s.Identifiers != nil {
+		for i, v := range s.Identifiers {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Identifiers", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteClusterSnapshotsResult
+type BatchDeleteClusterSnapshotsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of any errors returned.
+	Errors []SnapshotErrorMessage `locationNameList:"SnapshotErrorMessage" type:"list"`
+
+	// A list of the snapshot identifiers that were deleted.
+	Resources []string `locationNameList:"String" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchDeleteClusterSnapshotsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchDeleteClusterSnapshotsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchDeleteClusterSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshotsMessage
+type BatchModifyClusterSnapshotsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A boolean value indicating whether to override an exception if the retention
+	// period has passed.
+	Force *bool `type:"boolean"`
+
+	// The number of days that a manual snapshot is retained. If you specify the
+	// value -1, the manual snapshot is retained indefinitely.
+	//
+	// The number must be either -1 or an integer between 1 and 3,653.
+	//
+	// If you decrease the manual snapshot retention period from its current value,
+	// existing manual snapshots that fall outside of the new retention period will
+	// return an error. If you want to suppress the errors and delete the snapshots,
+	// use the force option.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
+	// A list of snapshot identifiers you want to modify.
+	//
+	// SnapshotIdentifierList is a required field
+	SnapshotIdentifierList []string `locationNameList:"String" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchModifyClusterSnapshotsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchModifyClusterSnapshotsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchModifyClusterSnapshotsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchModifyClusterSnapshotsInput"}
+
+	if s.SnapshotIdentifierList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifierList"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshotsOutputMessage
+type BatchModifyClusterSnapshotsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of any errors returned.
+	Errors []SnapshotErrorMessage `locationNameList:"SnapshotErrorMessage" type:"list"`
+
+	// A list of the snapshots that were modified.
+	Resources []string `locationNameList:"String" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchModifyClusterSnapshotsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchModifyClusterSnapshotsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchModifyClusterSnapshotsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResizeMessage
+type CancelResizeInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the cluster that you want to cancel a resize operation
+	// for.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CancelResizeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelResizeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CancelResizeInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CancelResizeInput"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes a cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster
 type Cluster struct {
 	_ struct{} `type:"structure"`
 
-	// A Boolean value that, if true, indicates that major version upgrades will
+	// A boolean value that, if true, indicates that major version upgrades will
 	// be applied automatically to the cluster during the maintenance window.
 	AllowVersionUpgrade *bool `type:"boolean"`
 
@@ -5036,6 +5968,12 @@ type Cluster struct {
 	//
 	//    * available
 	//
+	//    * available, prep-for-resize
+	//
+	//    * available, resize-cleanup
+	//
+	//    * cancelling-resize
+	//
 	//    * creating
 	//
 	//    * deleting
@@ -5079,14 +6017,21 @@ type Cluster struct {
 	// was not specified, a database named devdev was created by default.
 	DBName *string `type:"string"`
 
+	// Describes the status of a cluster while it is in the process of resizing
+	// with an incremental resize.
+	DataTransferProgress *DataTransferProgress `type:"structure"`
+
+	// Describes a group of DeferredMaintenanceWindow objects.
+	DeferredMaintenanceWindows []DeferredMaintenanceWindow `locationNameList:"DeferredMaintenanceWindow" type:"list"`
+
 	// The status of the elastic IP (EIP) address.
 	ElasticIpStatus *ElasticIpStatus `type:"structure"`
 
-	// Indicates the number of nodes the cluster can be resized to with the elastic
-	// resize method.
+	// The number of nodes that you can resize the cluster to with the elastic resize
+	// method.
 	ElasticResizeNumberOfNodeOptions *string `type:"string"`
 
-	// A Boolean value that, if true, indicates that data in the cluster is encrypted
+	// A boolean value that, if true, indicates that data in the cluster is encrypted
 	// at rest.
 	Encrypted *bool `type:"boolean"`
 
@@ -5122,6 +6067,13 @@ type Cluster struct {
 	// The name of the maintenance track for the cluster.
 	MaintenanceTrackName *string `type:"string"`
 
+	// The default number of days to retain a manual snapshot. If the value is -1,
+	// the snapshot is retained indefinitely. This setting doesn't change the retention
+	// period of existing snapshots.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
 	// The master user name for the cluster. This name is used to connect to the
 	// database that is specified in the DBName parameter.
 	MasterUsername *string `type:"string"`
@@ -5146,13 +6098,27 @@ type Cluster struct {
 	// system maintenance can occur.
 	PreferredMaintenanceWindow *string `type:"string"`
 
-	// A Boolean value that, if true, indicates that the cluster can be accessed
+	// A boolean value that, if true, indicates that the cluster can be accessed
 	// from a public network.
 	PubliclyAccessible *bool `type:"boolean"`
+
+	// Returns the following:
+	//
+	//    * AllowCancelResize: a boolean value indicating if the resize operation
+	//    can be cancelled.
+	//
+	//    * ResizeType: Returns ClassicResize
+	ResizeInfo *ResizeInfo `type:"structure"`
 
 	// A value that describes the status of a cluster restore action. This parameter
 	// returns null if the cluster was not created by restoring a snapshot.
 	RestoreStatus *RestoreStatus `type:"structure"`
+
+	// A unique identifier for the cluster snapshot schedule.
+	SnapshotScheduleIdentifier *string `type:"string"`
+
+	// The current state of the cluster snapshot schedule.
+	SnapshotScheduleState ScheduleState `type:"string" enum:"true"`
 
 	// The list of tags for the cluster.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
@@ -5435,6 +6401,13 @@ type ClusterSnapshotCopyStatus struct {
 	DestinationRegion *string `type:"string"`
 
 	// The number of days that automated snapshots are retained in the destination
+	// region after they are copied from a source region. If the value is -1, the
+	// manual snapshot is retained indefinitely.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
+	// The number of days that automated snapshots are retained in the destination
 	// region after they are copied from a source region.
 	RetentionPeriod *int64 `type:"long"`
 
@@ -5516,6 +6489,14 @@ func (s ClusterVersion) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshotMessage
 type CopyClusterSnapshotInput struct {
 	_ struct{} `type:"structure"`
+
+	// The number of days that a manual snapshot is retained. If the value is -1,
+	// the manual snapshot is retained indefinitely.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	//
+	// The default value is -1.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
 
 	// The identifier of the cluster the source snapshot was created from. This
 	// parameter is required if your IAM user has a policy containing a snapshot
@@ -5784,6 +6765,13 @@ type CreateClusterInput struct {
 	// the current track.
 	MaintenanceTrackName *string `type:"string"`
 
+	// The default number of days to retain a manual snapshot. If the value is -1,
+	// the snapshot is retained indefinitely. This setting doesn't change the retention
+	// period of existing snapshots.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
 	// The password associated with the master user account for the cluster that
 	// is being created.
 	//
@@ -5873,6 +6861,9 @@ type CreateClusterInput struct {
 
 	// If true, the cluster can be accessed from a public network.
 	PubliclyAccessible *bool `type:"boolean"`
+
+	// A unique identifier for the snapshot schedule.
+	SnapshotScheduleIdentifier *string `type:"string"`
 
 	// A list of tag instances.
 	Tags []Tag `locationNameList:"Tag" type:"list"`
@@ -6137,6 +7128,14 @@ type CreateClusterSnapshotInput struct {
 	// ClusterIdentifier is a required field
 	ClusterIdentifier *string `type:"string" required:"true"`
 
+	// The number of days that a manual snapshot is retained. If the value is -1,
+	// the manual snapshot is retained indefinitely.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	//
+	// The default value is -1.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
 	// A unique identifier for the snapshot that you are requesting. This identifier
 	// must be unique for all snapshots within the AWS account.
 	//
@@ -6308,14 +7307,14 @@ func (s CreateClusterSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 type CreateEventSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
-	// A Boolean value; set to true to activate the subscription, set to false to
-	// create the subscription but not active it.
+	// A boolean value; set to true to activate the subscription, and set to false
+	// to create the subscription but not activate it.
 	Enabled *bool `type:"boolean"`
 
 	// Specifies the Amazon Redshift event categories to be published by the event
 	// notification subscription.
 	//
-	// Values: Configuration, Management, Monitoring, Security
+	// Values: configuration, management, monitoring, security
 	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// Specifies the Amazon Redshift event severity to be published by the event
@@ -6686,6 +7685,38 @@ func (s CreateSnapshotCopyGrantOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotScheduleMessage
+type CreateSnapshotScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	DryRun *bool `type:"boolean"`
+
+	NextInvocations *int64 `type:"integer"`
+
+	// The definition of the snapshot schedule. The definition is made up of schedule
+	// expressions, for example "cron(30 12 *)" or "rate(12 hours)".
+	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list"`
+
+	// The description of the snapshot schedule.
+	ScheduleDescription *string `type:"string"`
+
+	// A unique identifier for a snapshot schedule. Only alphanumeric characters
+	// are allowed for the identifier.
+	ScheduleIdentifier *string `type:"string"`
+
+	Tags []Tag `locationNameList:"Tag" type:"list"`
+}
+
+// String returns the string representation
+func (s CreateSnapshotScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSnapshotScheduleInput) GoString() string {
+	return s.String()
+}
+
 // Contains the output from the CreateTags action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTagsMessage
 type CreateTagsInput struct {
@@ -6757,6 +7788,42 @@ func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Describes the status of a cluster while it is in the process of resizing
+// with an incremental resize.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DataTransferProgress
+type DataTransferProgress struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the data transfer rate in MB's per second.
+	CurrentRateInMegaBytesPerSecond *float64 `type:"double"`
+
+	// Describes the total amount of data that has been transfered in MB's.
+	DataTransferredInMegaBytes *int64 `type:"long"`
+
+	// Describes the number of seconds that have elapsed during the data transfer.
+	ElapsedTimeInSeconds *int64 `type:"long"`
+
+	// Describes the estimated number of seconds remaining to complete the transfer.
+	EstimatedTimeToCompletionInSeconds *int64 `type:"long"`
+
+	// Describes the status of the cluster. While the transfer is in progress the
+	// status is transferringdata.
+	Status *string `type:"string"`
+
+	// Describes the total amount of data to be transfered in megabytes.
+	TotalDataInMegaBytes *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s DataTransferProgress) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DataTransferProgress) GoString() string {
+	return s.String()
+}
+
 // Describes the default cluster parameters for a parameter group family.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DefaultClusterParameters
 type DefaultClusterParameters struct {
@@ -6784,6 +7851,31 @@ func (s DefaultClusterParameters) String() string {
 
 // GoString returns the string representation
 func (s DefaultClusterParameters) GoString() string {
+	return s.String()
+}
+
+// Describes a deferred maintenance window
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeferredMaintenanceWindow
+type DeferredMaintenanceWindow struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp for the end of the time period when we defer maintenance.
+	DeferMaintenanceEndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// A unique identifier for the maintenance window.
+	DeferMaintenanceIdentifier *string `type:"string"`
+
+	// A timestamp for the beginning of the time period when we defer maintenance.
+	DeferMaintenanceStartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s DeferredMaintenanceWindow) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeferredMaintenanceWindow) GoString() string {
 	return s.String()
 }
 
@@ -6818,6 +7910,14 @@ type DeleteClusterInput struct {
 	//
 	//    * Cannot end with a hyphen or contain two consecutive hyphens.
 	FinalClusterSnapshotIdentifier *string `type:"string"`
+
+	// The number of days that a manual snapshot is retained. If the value is -1,
+	// the manual snapshot is retained indefinitely.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	//
+	// The default value is -1.
+	FinalClusterSnapshotRetentionPeriod *int64 `type:"integer"`
 
 	// Determines whether a final snapshot of the cluster is created before Amazon
 	// Redshift deletes the cluster. If true, a final cluster snapshot is not created.
@@ -7010,8 +8110,8 @@ type DeleteClusterSnapshotInput struct {
 
 	// The unique identifier of the manual snapshot to be deleted.
 	//
-	// Constraints: Must be the name of an existing snapshot that is in the available
-	// state.
+	// Constraints: Must be the name of an existing snapshot that is in the available,
+	// failed, or cancelled state.
 	//
 	// SnapshotIdentifier is a required field
 	SnapshotIdentifier *string `type:"string" required:"true"`
@@ -7347,6 +8447,62 @@ func (s DeleteSnapshotCopyGrantOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotScheduleMessage
+type DeleteSnapshotScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier of the snapshot schedule to delete.
+	//
+	// ScheduleIdentifier is a required field
+	ScheduleIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteSnapshotScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSnapshotScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteSnapshotScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotScheduleInput"}
+
+	if s.ScheduleIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotScheduleOutput
+type DeleteSnapshotScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteSnapshotScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteSnapshotScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Contains the output from the DeleteTags action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTagsMessage
 type DeleteTagsInput struct {
@@ -7411,6 +8567,49 @@ func (s DeleteTagsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeAccountAttributesMessage
+type DescribeAccountAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of attribute names.
+	AttributeNames []string `locationNameList:"AttributeName" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeAccountAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAccountAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountAttributeList
+type DescribeAccountAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of attributes assigned to an account.
+	AccountAttributes []AccountAttribute `locationNameList:"AccountAttribute" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeAccountAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAccountAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7766,8 +8965,19 @@ type DescribeClusterSnapshotsInput struct {
 
 	// A value that indicates whether to return snapshots only for an existing cluster.
 	// Table-level restore can be performed only using a snapshot of an existing
-	// cluster, that is, a cluster that has not been deleted. If ClusterExists is
-	// set to true, ClusterIdentifier is required.
+	// cluster, that is, a cluster that has not been deleted.
+	//
+	//    * If ClusterExists is set to true, ClusterIdentifier is required.
+	//
+	//    * If ClusterExists is set to false and ClusterIdentifier is not specified,
+	//    all snapshots associated with deleted clusters (orphaned snapshots) are
+	//    returned.
+	//
+	//    * If ClusterExists is set to false and ClusterIdentifier is specified
+	//    for a deleted cluster, snapshots associated with that cluster are returned.
+	//
+	//    * If ClusterExists is set to false and ClusterIdentifier is specified
+	//    for an existing cluster, no snapshots are returned.
 	ClusterExists *bool `type:"boolean"`
 
 	// The identifier of the cluster for which information about snapshots is requested.
@@ -7813,6 +9023,8 @@ type DescribeClusterSnapshotsInput struct {
 	// Valid Values: automated | manual
 	SnapshotType *string `type:"string"`
 
+	SortingEntities []SnapshotSortingEntity `locationNameList:"SnapshotSortingEntity" type:"list"`
+
 	// A value that requests only snapshots created at or after the specified time.
 	// The time value is specified in ISO 8601 format. For more information about
 	// ISO 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
@@ -7845,6 +9057,23 @@ func (s DescribeClusterSnapshotsInput) String() string {
 // GoString returns the string representation
 func (s DescribeClusterSnapshotsInput) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeClusterSnapshotsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterSnapshotsInput"}
+	if s.SortingEntities != nil {
+		for i, v := range s.SortingEntities {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortingEntities", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Contains the output from the DescribeClusterSnapshots action.
@@ -8985,7 +10214,7 @@ func (s *DescribeResizeInput) Validate() error {
 }
 
 // Describes the result of a cluster resize operation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CancelResizeOutput
 type DescribeResizeOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9038,7 +10267,7 @@ type DescribeResizeOutput struct {
 
 	// The status of the resize operation.
 	//
-	// Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED
+	// Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING
 	Status *string `type:"string"`
 
 	// The cluster type after the resize operation is complete.
@@ -9168,6 +10397,122 @@ func (s DescribeSnapshotCopyGrantsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSnapshotCopyGrantsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedulesMessage
+type DescribeSnapshotSchedulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the cluster whose snapshot schedules you want to
+	// view.
+	ClusterIdentifier *string `type:"string"`
+
+	// A value that indicates the starting point for the next set of response records
+	// in a subsequent request. If a value is returned in a response, you can retrieve
+	// the next set of records by providing this returned marker value in the marker
+	// parameter and retrying the command. If the marker field is empty, all response
+	// records have been retrieved for the request.
+	Marker *string `type:"string"`
+
+	// The maximum number or response records to return in each call. If the number
+	// of remaining response records exceeds the specified MaxRecords value, a value
+	// is returned in a marker field of the response. You can retrieve the next
+	// set of records by retrying the command with the returned marker value.
+	MaxRecords *int64 `type:"integer"`
+
+	// A unique identifier for a snapshot schedule.
+	ScheduleIdentifier *string `type:"string"`
+
+	// The key value for a snapshot schedule tag.
+	TagKeys []string `locationNameList:"TagKey" type:"list"`
+
+	// The value corresponding to the key of the snapshot schedule tag.
+	TagValues []string `locationNameList:"TagValue" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeSnapshotSchedulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSnapshotSchedulesInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotSchedulesOutputMessage
+type DescribeSnapshotSchedulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A value that indicates the starting point for the next set of response records
+	// in a subsequent request. If a value is returned in a response, you can retrieve
+	// the next set of records by providing this returned marker value in the marker
+	// parameter and retrying the command. If the marker field is empty, all response
+	// records have been retrieved for the request.
+	Marker *string `type:"string"`
+
+	// A list of SnapshotSchedules.
+	SnapshotSchedules []ModifySnapshotScheduleOutput `locationNameList:"SnapshotSchedule" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeSnapshotSchedulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeSnapshotSchedulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeSnapshotSchedulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeStorageInput
+type DescribeStorageInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeStorageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStorageInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CustomerStorageMessage
+type DescribeStorageOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The total amount of storage currently used for snapshots.
+	TotalBackupSizeInMegaBytes *float64 `type:"double"`
+
+	// The total amount of storage currently provisioned.
+	TotalProvisionedStorageInMegaBytes *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s DescribeStorageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeStorageOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeStorageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -9617,14 +10962,21 @@ type EnableSnapshotCopyInput struct {
 	// ClusterIdentifier is a required field
 	ClusterIdentifier *string `type:"string" required:"true"`
 
-	// The destination region that you want to copy snapshots to.
+	// The destination AWS Region that you want to copy snapshots to.
 	//
-	// Constraints: Must be the name of a valid region. For more information, see
-	// Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region)
+	// Constraints: Must be the name of a valid AWS Region. For more information,
+	// see Regions and Endpoints (http://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region)
 	// in the Amazon Web Services General Reference.
 	//
 	// DestinationRegion is a required field
 	DestinationRegion *string `type:"string" required:"true"`
+
+	// The number of days to retain newly copied snapshots in the destination AWS
+	// Region after they are copied from the source AWS Region. If the value is
+	// -1, the manual snapshot is retained indefinitely.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
 
 	// The number of days to retain automated snapshots in the destination region
 	// after they are copied from the source region.
@@ -9820,8 +11172,8 @@ type EventSubscription struct {
 	// subscription.
 	CustomerAwsId *string `type:"string"`
 
-	// A Boolean value indicating whether the subscription is enabled. true indicates
-	// the subscription is enabled.
+	// A boolean value indicating whether the subscription is enabled; true indicates
+	// that the subscription is enabled.
 	Enabled *bool `type:"boolean"`
 
 	// The list of Amazon Redshift event categories specified in the event notification
@@ -10518,6 +11870,15 @@ type ModifyClusterInput struct {
 	// for the maintenance track. At this point, the maintenance track name is applied.
 	MaintenanceTrackName *string `type:"string"`
 
+	// The default for number of days that a newly created manual snapshot is retained.
+	// If the value is -1, the manual snapshot is retained indefinitely. This value
+	// doesn't retroactively change the retention periods of existing manual snapshots.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	//
+	// The default value is -1.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
 	// The new password for the cluster master user. This change is asynchronously
 	// applied as soon as possible. Between the time of the request and the completion
 	// of the request, the MasterUserPassword element exists in the PendingModifiedValues
@@ -10640,6 +12001,83 @@ func (s *ModifyClusterInput) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceMessage
+type ModifyClusterMaintenanceInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for the cluster.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+
+	// A boolean indicating whether to enable the deferred maintenance window.
+	DeferMaintenance *bool `type:"boolean"`
+
+	// An integer indicating the duration of the maintenance window in days. If
+	// you specify a duration, you can't specify an end time. The duration must
+	// be 14 days or less.
+	DeferMaintenanceDuration *int64 `type:"integer"`
+
+	// A timestamp indicating end time for the deferred maintenance window. If you
+	// specify an end time, you can't specify a duration.
+	DeferMaintenanceEndTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// A unique identifier for the deferred maintenance window.
+	DeferMaintenanceIdentifier *string `type:"string"`
+
+	// A timestamp indicating the start time for the deferred maintenance window.
+	DeferMaintenanceStartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s ModifyClusterMaintenanceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterMaintenanceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyClusterMaintenanceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterMaintenanceInput"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMaintenanceResult
+type ModifyClusterMaintenanceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Describes a cluster.
+	Cluster *Cluster `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyClusterMaintenanceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterMaintenanceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyClusterMaintenanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterResult
 type ModifyClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -10713,6 +12151,142 @@ func (s *ModifyClusterParameterGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotMessage
+type ModifyClusterSnapshotInput struct {
+	_ struct{} `type:"structure"`
+
+	// A Boolean option to override an exception if the retention period has already
+	// passed.
+	Force *bool `type:"boolean"`
+
+	// The number of days that a manual snapshot is retained. If the value is -1,
+	// the manual snapshot is retained indefinitely.
+	//
+	// If the manual snapshot falls outside of the new retention period, you can
+	// specify the force option to immediately delete the snapshot.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
+	// The identifier of the snapshot whose setting you want to modify.
+	//
+	// SnapshotIdentifier is a required field
+	SnapshotIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ModifyClusterSnapshotInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterSnapshotInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyClusterSnapshotInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSnapshotInput"}
+
+	if s.SnapshotIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotResult
+type ModifyClusterSnapshotOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Describes a snapshot.
+	Snapshot *Snapshot `type:"structure"`
+}
+
+// String returns the string representation
+func (s ModifyClusterSnapshotOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterSnapshotOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyClusterSnapshotOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotScheduleMessage
+type ModifyClusterSnapshotScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique identifier for the cluster whose snapshot schedule you want to modify.
+	//
+	// ClusterIdentifier is a required field
+	ClusterIdentifier *string `type:"string" required:"true"`
+
+	// A boolean to indicate whether to remove the assoiciation between the cluster
+	// and the schedule.
+	DisassociateSchedule *bool `type:"boolean"`
+
+	// A unique alphanumeric identifier for the schedule that you want to associate
+	// with the cluster.
+	ScheduleIdentifier *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ModifyClusterSnapshotScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterSnapshotScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyClusterSnapshotScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyClusterSnapshotScheduleInput"}
+
+	if s.ClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSnapshotScheduleOutput
+type ModifyClusterSnapshotScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s ModifyClusterSnapshotScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyClusterSnapshotScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyClusterSnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupMessage
@@ -10798,7 +12372,7 @@ type ModifyEventSubscriptionInput struct {
 	// Specifies the Amazon Redshift event categories to be published by the event
 	// notification subscription.
 	//
-	// Values: Configuration, Management, Monitoring, Security
+	// Values: configuration, management, monitoring, security
 	EventCategories []string `locationNameList:"EventCategory" type:"list"`
 
 	// Specifies the Amazon Redshift event severity to be published by the event
@@ -10892,7 +12466,8 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	_ struct{} `type:"structure"`
 
 	// The unique identifier of the cluster for which you want to change the retention
-	// period for automated snapshots that are copied to a destination region.
+	// period for either automated or manual snapshots that are copied to a destination
+	// AWS Region.
 	//
 	// Constraints: Must be the valid name of an existing cluster that has cross-region
 	// snapshot copy enabled.
@@ -10900,15 +12475,30 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	// ClusterIdentifier is a required field
 	ClusterIdentifier *string `type:"string" required:"true"`
 
-	// The number of days to retain automated snapshots in the destination region
-	// after they are copied from the source region.
+	// Indicates whether to apply the snapshot retention period to newly copied
+	// manual snapshots instead of automated snapshots.
+	Manual *bool `type:"boolean"`
+
+	// The number of days to retain automated snapshots in the destination AWS Region
+	// after they are copied from the source AWS Region.
+	//
+	// By default, this only changes the retention period of copied automated snapshots.
 	//
 	// If you decrease the retention period for automated snapshots that are copied
-	// to a destination region, Amazon Redshift will delete any existing automated
-	// snapshots that were copied to the destination region and that fall outside
+	// to a destination AWS Region, Amazon Redshift deletes any existing automated
+	// snapshots that were copied to the destination AWS Region and that fall outside
 	// of the new retention period.
 	//
-	// Constraints: Must be at least 1 and no more than 35.
+	// Constraints: Must be at least 1 and no more than 35 for automated snapshots.
+	//
+	// If you specify the manual option, only newly copied manual snapshots will
+	// have the new retention period.
+	//
+	// If you specify the value of -1 newly copied manual snapshots are retained
+	// indefinitely.
+	//
+	// Constraints: The number of days must be either -1 or an integer between 1
+	// and 3,653 for manual snapshots.
 	//
 	// RetentionPeriod is a required field
 	RetentionPeriod *int64 `type:"integer" required:"true"`
@@ -10964,6 +12554,88 @@ func (s ModifySnapshotCopyRetentionPeriodOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ModifySnapshotCopyRetentionPeriodOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotScheduleMessage
+type ModifySnapshotScheduleInput struct {
+	_ struct{} `type:"structure"`
+
+	// An updated list of schedule definitions. A schedule definition is made up
+	// of schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".
+	//
+	// ScheduleDefinitions is a required field
+	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list" required:"true"`
+
+	// A unique alphanumeric identifier of the schedule to modify.
+	//
+	// ScheduleIdentifier is a required field
+	ScheduleIdentifier *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ModifySnapshotScheduleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifySnapshotScheduleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifySnapshotScheduleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifySnapshotScheduleInput"}
+
+	if s.ScheduleDefinitions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleDefinitions"))
+	}
+
+	if s.ScheduleIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScheduleIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes a snapshot schedule. You can set a regular interval for creating
+// snapshots of a cluster. You can also schedule snapshots for specific dates.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotScheduleOutput
+type ModifySnapshotScheduleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	NextInvocations []time.Time `locationNameList:"SnapshotTime" type:"list"`
+
+	// A list of ScheduleDefinitions
+	ScheduleDefinitions []string `locationNameList:"ScheduleDefinition" type:"list"`
+
+	// The description of the schedule.
+	ScheduleDescription *string `type:"string"`
+
+	// A unique identifier for the schedule.
+	ScheduleIdentifier *string `type:"string"`
+
+	// An optional set of tags describing the schedule.
+	Tags []Tag `locationNameList:"Tag" type:"list"`
+}
+
+// String returns the string representation
+func (s ModifySnapshotScheduleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifySnapshotScheduleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifySnapshotScheduleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -11452,7 +13124,7 @@ type ResizeClusterInput struct {
 	_ struct{} `type:"structure"`
 
 	// A boolean value indicating whether the resize operation is using the classic
-	// resize process. If you don't provide this parameter or set the value to false
+	// resize process. If you don't provide this parameter or set the value to false,
 	// the resize type is elastic.
 	Classic *bool `type:"boolean"`
 
@@ -11524,6 +13196,28 @@ func (s ResizeClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResizeClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Describes a resize operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeInfo
+type ResizeInfo struct {
+	_ struct{} `type:"structure"`
+
+	// A boolean value indicating if the resize operation can be cancelled.
+	AllowCancelResize *bool `type:"boolean"`
+
+	// Returns the value ClassicResize.
+	ResizeType *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResizeInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResizeInfo) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage
@@ -11644,6 +13338,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// are on different tracks.
 	MaintenanceTrackName *string `type:"string"`
 
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
 	// The node type that the restored cluster will be provisioned with.
 	//
 	// Default: The node type of the cluster from which the snapshot was taken.
@@ -11700,6 +13396,9 @@ type RestoreFromClusterSnapshotInput struct {
 	//
 	// SnapshotIdentifier is a required field
 	SnapshotIdentifier *string `type:"string" required:"true"`
+
+	// A unique identifier for the snapshot schedule.
+	SnapshotScheduleIdentifier *string `type:"string"`
 
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with
 	// the cluster.
@@ -12217,6 +13916,15 @@ type Snapshot struct {
 	// The name of the maintenance track for the snapshot.
 	MaintenanceTrackName *string `type:"string"`
 
+	// The number of days until a manual snapshot will pass its retention period.
+	ManualSnapshotRemainingDays *int64 `type:"integer"`
+
+	// The number of days that a manual snapshot is retained. If the value is -1,
+	// the manual snapshot is retained indefinitely.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
+	ManualSnapshotRetentionPeriod *int64 `type:"integer"`
+
 	// The master user name for the cluster.
 	MasterUsername *string `type:"string"`
 
@@ -12237,22 +13945,25 @@ type Snapshot struct {
 	// The list of node types that this cluster snapshot is able to restore into.
 	RestorableNodeTypes []string `locationNameList:"NodeType" type:"list"`
 
-	// The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains
-	// a copy of the cluster data as of this exact time.
+	// The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot
+	// contains a copy of the cluster data as of this exact time.
 	SnapshotCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The snapshot identifier that is provided in the request.
 	SnapshotIdentifier *string `type:"string"`
 
+	// A timestamp representing the start of the retention period for the snapshot.
+	SnapshotRetentionStartTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
 	// The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot
-	// will be of type "manual".
+	// are of type "manual".
 	SnapshotType *string `type:"string"`
 
 	// The source region from which the snapshot was copied.
 	SourceRegion *string `type:"string"`
 
 	// The snapshot status. The value of the status depends on the API operation
-	// used.
+	// used:
 	//
 	//    * CreateClusterSnapshot and CopyClusterSnapshot returns status as "creating".
 	//
@@ -12317,6 +14028,71 @@ func (s SnapshotCopyGrant) GoString() string {
 	return s.String()
 }
 
+// Describes the errors returned by a snapshot.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotErrorMessage
+type SnapshotErrorMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The failure code for the error.
+	FailureCode *string `type:"string"`
+
+	// The text message describing the error.
+	FailureReason *string `type:"string"`
+
+	// A unique identifier for the cluster.
+	SnapshotClusterIdentifier *string `type:"string"`
+
+	// A unique identifier for the snapshot returning the error.
+	SnapshotIdentifier *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SnapshotErrorMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SnapshotErrorMessage) GoString() string {
+	return s.String()
+}
+
+// Describes a sorting entity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotSortingEntity
+type SnapshotSortingEntity struct {
+	_ struct{} `type:"structure"`
+
+	// The category for sorting the snapshots.
+	//
+	// Attribute is a required field
+	Attribute SnapshotAttributeToSortBy `type:"string" required:"true" enum:"true"`
+
+	// The order for listing the attributes.
+	SortOrder SortByOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SnapshotSortingEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SnapshotSortingEntity) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SnapshotSortingEntity) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SnapshotSortingEntity"}
+	if len(s.Attribute) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes a subnet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Subnet
 type Subnet struct {
@@ -12339,6 +14115,25 @@ func (s Subnet) String() string {
 
 // GoString returns the string representation
 func (s Subnet) GoString() string {
+	return s.String()
+}
+
+// Describes the operations that are allowed on a maintenance track.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SupportedOperation
+type SupportedOperation struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the supported operations.
+	OperationName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SupportedOperation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SupportedOperation) GoString() string {
 	return s.String()
 }
 
@@ -12450,7 +14245,7 @@ func (s Tag) GoString() string {
 type TaggedResource struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) with which the tag is associated. For example,
+	// The Amazon Resource Name (ARN) with which the tag is associated, for example:
 	// arn:aws:redshift:us-east-1:123456789:cluster:t1.
 	ResourceName *string `type:"string"`
 
@@ -12504,6 +14299,9 @@ type UpdateTarget struct {
 
 	// The name of the new maintenance track.
 	MaintenanceTrackName *string `type:"string"`
+
+	// A list of operations supported by the maintenance track.
+	SupportedOperations []SupportedOperation `locationNameList:"SupportedOperation" type:"list"`
 }
 
 // String returns the string representation
@@ -12568,6 +14366,59 @@ func (enum ReservedNodeOfferingType) MarshalValue() (string, error) {
 }
 
 func (enum ReservedNodeOfferingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ScheduleState string
+
+// Enum values for ScheduleState
+const (
+	ScheduleStateModifying ScheduleState = "MODIFYING"
+	ScheduleStateActive    ScheduleState = "ACTIVE"
+	ScheduleStateFailed    ScheduleState = "FAILED"
+)
+
+func (enum ScheduleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScheduleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SnapshotAttributeToSortBy string
+
+// Enum values for SnapshotAttributeToSortBy
+const (
+	SnapshotAttributeToSortBySourceType SnapshotAttributeToSortBy = "SOURCE_TYPE"
+	SnapshotAttributeToSortByTotalSize  SnapshotAttributeToSortBy = "TOTAL_SIZE"
+	SnapshotAttributeToSortByCreateTime SnapshotAttributeToSortBy = "CREATE_TIME"
+)
+
+func (enum SnapshotAttributeToSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SnapshotAttributeToSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SortByOrder string
+
+// Enum values for SortByOrder
+const (
+	SortByOrderAsc  SortByOrder = "ASC"
+	SortByOrderDesc SortByOrder = "DESC"
+)
+
+func (enum SortByOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortByOrder) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

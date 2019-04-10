@@ -120,7 +120,7 @@ func TestWaiterPathAll(t *testing.T) {
 		NewRequest: BuildNewMockRequest(svc, &MockInput{}),
 	}
 
-	err := w.WaitWithContext(aws.BackgroundContext())
+	err := w.Wait(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -190,7 +190,7 @@ func TestWaiterPath(t *testing.T) {
 		NewRequest: BuildNewMockRequest(svc, &MockInput{}),
 	}
 
-	err := w.WaitWithContext(aws.BackgroundContext())
+	err := w.Wait(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -266,7 +266,7 @@ func TestWaiterFailure(t *testing.T) {
 		NewRequest: BuildNewMockRequest(svc, &MockInput{}),
 	}
 
-	err := w.WaitWithContext(aws.BackgroundContext()).(awserr.Error)
+	err := w.Wait(context.Background()).(awserr.Error)
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
@@ -374,7 +374,7 @@ func TestWaiterError(t *testing.T) {
 		NewRequest: BuildNewMockRequest(svc, &MockInput{}),
 	}
 
-	err := w.WaitWithContext(aws.BackgroundContext())
+	err := w.Wait(context.Background())
 	if err == nil {
 		t.Fatalf("expected error, but did not get one")
 	}
@@ -429,7 +429,7 @@ func TestWaiterStatus(t *testing.T) {
 		NewRequest: BuildNewMockRequest(svc, &MockInput{}),
 	}
 
-	err := w.WaitWithContext(aws.BackgroundContext())
+	err := w.Wait(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -507,7 +507,7 @@ func TestWaiter_WithContextCanceled(t *testing.T) {
 		},
 	}
 
-	w.SleepWithContext = func(c aws.Context, delay time.Duration) error {
+	w.SleepWithContext = func(c context.Context, delay time.Duration) error {
 		context := c.(*awstesting.FakeContext)
 		select {
 		case <-context.DoneCh:
@@ -517,7 +517,7 @@ func TestWaiter_WithContextCanceled(t *testing.T) {
 		}
 	}
 
-	err := w.WaitWithContext(ctx)
+	err := w.Wait(ctx)
 
 	if err == nil {
 		t.Fatalf("expect waiter to be canceled.")
@@ -569,7 +569,7 @@ func TestWaiter_WithContext(t *testing.T) {
 		},
 	}
 
-	err := w.WaitWithContext(ctx)
+	err := w.Wait(ctx)
 
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -611,7 +611,7 @@ func TestWaiter_AttemptsExpires(t *testing.T) {
 		},
 	}
 
-	err := w.WaitWithContext(ctx)
+	err := w.Wait(ctx)
 
 	if err == nil {
 		t.Fatalf("expect error did not get one")
@@ -648,7 +648,7 @@ func TestWaiterNilInput(t *testing.T) {
 
 	// Ensure waiters do not panic on nil input. It doesn't make sense to
 	// call a waiter without an input, Validation will
-	err := svc.WaitUntilBucketExists(nil)
+	err := svc.WaitUntilBucketExists(context.Background(), nil)
 	if err != nil {
 		t.Fatalf("expect no error, but got %v", err)
 	}
@@ -673,7 +673,7 @@ func TestWaiterWithContextNilInput(t *testing.T) {
 
 	// Ensure waiters do not panic on nil input
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
-	err := svc.WaitUntilBucketExistsWithContext(ctx, nil,
+	err := svc.WaitUntilBucketExists(ctx, nil,
 		aws.WithWaiterDelay(aws.ConstantWaiterDelay(0)),
 		aws.WithWaiterMaxAttempts(1),
 	)

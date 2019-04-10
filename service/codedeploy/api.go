@@ -3,6 +3,7 @@
 package codedeploy
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -21,7 +22,8 @@ type AddTagsToOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the AddTagsToOnPremisesInstances API request.
-func (r AddTagsToOnPremisesInstancesRequest) Send() (*AddTagsToOnPremisesInstancesOutput, error) {
+func (r AddTagsToOnPremisesInstancesRequest) Send(ctx context.Context) (*AddTagsToOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -37,7 +39,7 @@ func (r AddTagsToOnPremisesInstancesRequest) Send() (*AddTagsToOnPremisesInstanc
 //
 //    // Example sending a request using the AddTagsToOnPremisesInstancesRequest method.
 //    req := client.AddTagsToOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -73,7 +75,8 @@ type BatchGetApplicationRevisionsRequest struct {
 }
 
 // Send marshals and sends the BatchGetApplicationRevisions API request.
-func (r BatchGetApplicationRevisionsRequest) Send() (*BatchGetApplicationRevisionsOutput, error) {
+func (r BatchGetApplicationRevisionsRequest) Send(ctx context.Context) (*BatchGetApplicationRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +92,7 @@ func (r BatchGetApplicationRevisionsRequest) Send() (*BatchGetApplicationRevisio
 //
 //    // Example sending a request using the BatchGetApplicationRevisionsRequest method.
 //    req := client.BatchGetApplicationRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -123,7 +126,8 @@ type BatchGetApplicationsRequest struct {
 }
 
 // Send marshals and sends the BatchGetApplications API request.
-func (r BatchGetApplicationsRequest) Send() (*BatchGetApplicationsOutput, error) {
+func (r BatchGetApplicationsRequest) Send(ctx context.Context) (*BatchGetApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -139,7 +143,7 @@ func (r BatchGetApplicationsRequest) Send() (*BatchGetApplicationsOutput, error)
 //
 //    // Example sending a request using the BatchGetApplicationsRequest method.
 //    req := client.BatchGetApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -173,7 +177,8 @@ type BatchGetDeploymentGroupsRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeploymentGroups API request.
-func (r BatchGetDeploymentGroupsRequest) Send() (*BatchGetDeploymentGroupsOutput, error) {
+func (r BatchGetDeploymentGroupsRequest) Send(ctx context.Context) (*BatchGetDeploymentGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -189,7 +194,7 @@ func (r BatchGetDeploymentGroupsRequest) Send() (*BatchGetDeploymentGroupsOutput
 //
 //    // Example sending a request using the BatchGetDeploymentGroupsRequest method.
 //    req := client.BatchGetDeploymentGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -223,7 +228,8 @@ type BatchGetDeploymentInstancesRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeploymentInstances API request.
-func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstancesOutput, error) {
+func (r BatchGetDeploymentInstancesRequest) Send(ctx context.Context) (*BatchGetDeploymentInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -235,18 +241,25 @@ func (r BatchGetDeploymentInstancesRequest) Send() (*BatchGetDeploymentInstances
 // BatchGetDeploymentInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
-// Gets information about one or more instance that are part of a deployment
-// group.
+// This method works, but is considered deprecated. Use BatchGetDeploymentTargets
+// instead.
+//
+// Returns an array of instances associated with a deployment. This method works
+// with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets
+// works with all compute platforms.
 //
 //    // Example sending a request using the BatchGetDeploymentInstancesRequest method.
 //    req := client.BatchGetDeploymentInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances
 func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, BatchGetDeploymentInstances, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opBatchGetDeploymentInstances,
 		HTTPMethod: "POST",
@@ -264,6 +277,66 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 	return BatchGetDeploymentInstancesRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentInstancesRequest}
 }
 
+const opBatchGetDeploymentTargets = "BatchGetDeploymentTargets"
+
+// BatchGetDeploymentTargetsRequest is a API request type for the BatchGetDeploymentTargets API operation.
+type BatchGetDeploymentTargetsRequest struct {
+	*aws.Request
+	Input *BatchGetDeploymentTargetsInput
+	Copy  func(*BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest
+}
+
+// Send marshals and sends the BatchGetDeploymentTargets API request.
+func (r BatchGetDeploymentTargetsRequest) Send(ctx context.Context) (*BatchGetDeploymentTargetsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetDeploymentTargetsOutput), nil
+}
+
+// BatchGetDeploymentTargetsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Returns an array of targets associated with a deployment. This method works
+// with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.
+//
+// The type of targets returned depends on the deployment's compute platform:
+//
+//    * EC2/On-premises - Information about EC2 instance targets.
+//
+//    * AWS Lambda - Information about Lambda functions targets.
+//
+//    * Amazon ECS - Information about ECS service targets.
+//
+//    // Example sending a request using the BatchGetDeploymentTargetsRequest method.
+//    req := client.BatchGetDeploymentTargetsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargets
+func (c *CodeDeploy) BatchGetDeploymentTargetsRequest(input *BatchGetDeploymentTargetsInput) BatchGetDeploymentTargetsRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetDeploymentTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BatchGetDeploymentTargetsInput{}
+	}
+
+	output := &BatchGetDeploymentTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BatchGetDeploymentTargetsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentTargetsRequest}
+}
+
 const opBatchGetDeployments = "BatchGetDeployments"
 
 // BatchGetDeploymentsRequest is a API request type for the BatchGetDeployments API operation.
@@ -274,7 +347,8 @@ type BatchGetDeploymentsRequest struct {
 }
 
 // Send marshals and sends the BatchGetDeployments API request.
-func (r BatchGetDeploymentsRequest) Send() (*BatchGetDeploymentsOutput, error) {
+func (r BatchGetDeploymentsRequest) Send(ctx context.Context) (*BatchGetDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,7 +364,7 @@ func (r BatchGetDeploymentsRequest) Send() (*BatchGetDeploymentsOutput, error) {
 //
 //    // Example sending a request using the BatchGetDeploymentsRequest method.
 //    req := client.BatchGetDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -324,7 +398,8 @@ type BatchGetOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the BatchGetOnPremisesInstances API request.
-func (r BatchGetOnPremisesInstancesRequest) Send() (*BatchGetOnPremisesInstancesOutput, error) {
+func (r BatchGetOnPremisesInstancesRequest) Send(ctx context.Context) (*BatchGetOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +415,7 @@ func (r BatchGetOnPremisesInstancesRequest) Send() (*BatchGetOnPremisesInstances
 //
 //    // Example sending a request using the BatchGetOnPremisesInstancesRequest method.
 //    req := client.BatchGetOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -374,7 +449,8 @@ type ContinueDeploymentRequest struct {
 }
 
 // Send marshals and sends the ContinueDeployment API request.
-func (r ContinueDeploymentRequest) Send() (*ContinueDeploymentOutput, error) {
+func (r ContinueDeploymentRequest) Send(ctx context.Context) (*ContinueDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -395,7 +471,7 @@ func (r ContinueDeploymentRequest) Send() (*ContinueDeploymentOutput, error) {
 //
 //    // Example sending a request using the ContinueDeploymentRequest method.
 //    req := client.ContinueDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -431,7 +507,8 @@ type CreateApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateApplication API request.
-func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+func (r CreateApplicationRequest) Send(ctx context.Context) (*CreateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +524,7 @@ func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
 //
 //    // Example sending a request using the CreateApplicationRequest method.
 //    req := client.CreateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -481,7 +558,8 @@ type CreateDeploymentRequest struct {
 }
 
 // Send marshals and sends the CreateDeployment API request.
-func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+func (r CreateDeploymentRequest) Send(ctx context.Context) (*CreateDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -497,7 +575,7 @@ func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
 //
 //    // Example sending a request using the CreateDeploymentRequest method.
 //    req := client.CreateDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -531,7 +609,8 @@ type CreateDeploymentConfigRequest struct {
 }
 
 // Send marshals and sends the CreateDeploymentConfig API request.
-func (r CreateDeploymentConfigRequest) Send() (*CreateDeploymentConfigOutput, error) {
+func (r CreateDeploymentConfigRequest) Send(ctx context.Context) (*CreateDeploymentConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +626,7 @@ func (r CreateDeploymentConfigRequest) Send() (*CreateDeploymentConfigOutput, er
 //
 //    // Example sending a request using the CreateDeploymentConfigRequest method.
 //    req := client.CreateDeploymentConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -581,7 +660,8 @@ type CreateDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDeploymentGroup API request.
-func (r CreateDeploymentGroupRequest) Send() (*CreateDeploymentGroupOutput, error) {
+func (r CreateDeploymentGroupRequest) Send(ctx context.Context) (*CreateDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -597,7 +677,7 @@ func (r CreateDeploymentGroupRequest) Send() (*CreateDeploymentGroupOutput, erro
 //
 //    // Example sending a request using the CreateDeploymentGroupRequest method.
 //    req := client.CreateDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -631,7 +711,8 @@ type DeleteApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplication API request.
-func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+func (r DeleteApplicationRequest) Send(ctx context.Context) (*DeleteApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +728,7 @@ func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
 //
 //    // Example sending a request using the DeleteApplicationRequest method.
 //    req := client.DeleteApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -683,7 +764,8 @@ type DeleteDeploymentConfigRequest struct {
 }
 
 // Send marshals and sends the DeleteDeploymentConfig API request.
-func (r DeleteDeploymentConfigRequest) Send() (*DeleteDeploymentConfigOutput, error) {
+func (r DeleteDeploymentConfigRequest) Send(ctx context.Context) (*DeleteDeploymentConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -702,7 +784,7 @@ func (r DeleteDeploymentConfigRequest) Send() (*DeleteDeploymentConfigOutput, er
 //
 //    // Example sending a request using the DeleteDeploymentConfigRequest method.
 //    req := client.DeleteDeploymentConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -738,7 +820,8 @@ type DeleteDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDeploymentGroup API request.
-func (r DeleteDeploymentGroupRequest) Send() (*DeleteDeploymentGroupOutput, error) {
+func (r DeleteDeploymentGroupRequest) Send(ctx context.Context) (*DeleteDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -754,7 +837,7 @@ func (r DeleteDeploymentGroupRequest) Send() (*DeleteDeploymentGroupOutput, erro
 //
 //    // Example sending a request using the DeleteDeploymentGroupRequest method.
 //    req := client.DeleteDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -788,7 +871,8 @@ type DeleteGitHubAccountTokenRequest struct {
 }
 
 // Send marshals and sends the DeleteGitHubAccountToken API request.
-func (r DeleteGitHubAccountTokenRequest) Send() (*DeleteGitHubAccountTokenOutput, error) {
+func (r DeleteGitHubAccountTokenRequest) Send(ctx context.Context) (*DeleteGitHubAccountTokenOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -804,7 +888,7 @@ func (r DeleteGitHubAccountTokenRequest) Send() (*DeleteGitHubAccountTokenOutput
 //
 //    // Example sending a request using the DeleteGitHubAccountTokenRequest method.
 //    req := client.DeleteGitHubAccountTokenRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -838,7 +922,8 @@ type DeregisterOnPremisesInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterOnPremisesInstance API request.
-func (r DeregisterOnPremisesInstanceRequest) Send() (*DeregisterOnPremisesInstanceOutput, error) {
+func (r DeregisterOnPremisesInstanceRequest) Send(ctx context.Context) (*DeregisterOnPremisesInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -854,7 +939,7 @@ func (r DeregisterOnPremisesInstanceRequest) Send() (*DeregisterOnPremisesInstan
 //
 //    // Example sending a request using the DeregisterOnPremisesInstanceRequest method.
 //    req := client.DeregisterOnPremisesInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -890,7 +975,8 @@ type GetApplicationRequest struct {
 }
 
 // Send marshals and sends the GetApplication API request.
-func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
+func (r GetApplicationRequest) Send(ctx context.Context) (*GetApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -906,7 +992,7 @@ func (r GetApplicationRequest) Send() (*GetApplicationOutput, error) {
 //
 //    // Example sending a request using the GetApplicationRequest method.
 //    req := client.GetApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -940,7 +1026,8 @@ type GetApplicationRevisionRequest struct {
 }
 
 // Send marshals and sends the GetApplicationRevision API request.
-func (r GetApplicationRevisionRequest) Send() (*GetApplicationRevisionOutput, error) {
+func (r GetApplicationRevisionRequest) Send(ctx context.Context) (*GetApplicationRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -956,7 +1043,7 @@ func (r GetApplicationRevisionRequest) Send() (*GetApplicationRevisionOutput, er
 //
 //    // Example sending a request using the GetApplicationRevisionRequest method.
 //    req := client.GetApplicationRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -990,7 +1077,8 @@ type GetDeploymentRequest struct {
 }
 
 // Send marshals and sends the GetDeployment API request.
-func (r GetDeploymentRequest) Send() (*GetDeploymentOutput, error) {
+func (r GetDeploymentRequest) Send(ctx context.Context) (*GetDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,7 +1094,7 @@ func (r GetDeploymentRequest) Send() (*GetDeploymentOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentRequest method.
 //    req := client.GetDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1040,7 +1128,8 @@ type GetDeploymentConfigRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentConfig API request.
-func (r GetDeploymentConfigRequest) Send() (*GetDeploymentConfigOutput, error) {
+func (r GetDeploymentConfigRequest) Send(ctx context.Context) (*GetDeploymentConfigOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1056,7 +1145,7 @@ func (r GetDeploymentConfigRequest) Send() (*GetDeploymentConfigOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentConfigRequest method.
 //    req := client.GetDeploymentConfigRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1090,7 +1179,8 @@ type GetDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentGroup API request.
-func (r GetDeploymentGroupRequest) Send() (*GetDeploymentGroupOutput, error) {
+func (r GetDeploymentGroupRequest) Send(ctx context.Context) (*GetDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1106,7 +1196,7 @@ func (r GetDeploymentGroupRequest) Send() (*GetDeploymentGroupOutput, error) {
 //
 //    // Example sending a request using the GetDeploymentGroupRequest method.
 //    req := client.GetDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1140,7 +1230,8 @@ type GetDeploymentInstanceRequest struct {
 }
 
 // Send marshals and sends the GetDeploymentInstance API request.
-func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, error) {
+func (r GetDeploymentInstanceRequest) Send(ctx context.Context) (*GetDeploymentInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1156,13 +1247,16 @@ func (r GetDeploymentInstanceRequest) Send() (*GetDeploymentInstanceOutput, erro
 //
 //    // Example sending a request using the GetDeploymentInstanceRequest method.
 //    req := client.GetDeploymentInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance
 func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceInput) GetDeploymentInstanceRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, GetDeploymentInstance, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opGetDeploymentInstance,
 		HTTPMethod: "POST",
@@ -1180,6 +1274,57 @@ func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceIn
 	return GetDeploymentInstanceRequest{Request: req, Input: input, Copy: c.GetDeploymentInstanceRequest}
 }
 
+const opGetDeploymentTarget = "GetDeploymentTarget"
+
+// GetDeploymentTargetRequest is a API request type for the GetDeploymentTarget API operation.
+type GetDeploymentTargetRequest struct {
+	*aws.Request
+	Input *GetDeploymentTargetInput
+	Copy  func(*GetDeploymentTargetInput) GetDeploymentTargetRequest
+}
+
+// Send marshals and sends the GetDeploymentTarget API request.
+func (r GetDeploymentTargetRequest) Send(ctx context.Context) (*GetDeploymentTargetOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeploymentTargetOutput), nil
+}
+
+// GetDeploymentTargetRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Returns information about a deployment target.
+//
+//    // Example sending a request using the GetDeploymentTargetRequest method.
+//    req := client.GetDeploymentTargetRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTarget
+func (c *CodeDeploy) GetDeploymentTargetRequest(input *GetDeploymentTargetInput) GetDeploymentTargetRequest {
+	op := &aws.Operation{
+		Name:       opGetDeploymentTarget,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetDeploymentTargetInput{}
+	}
+
+	output := &GetDeploymentTargetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetDeploymentTargetRequest{Request: req, Input: input, Copy: c.GetDeploymentTargetRequest}
+}
+
 const opGetOnPremisesInstance = "GetOnPremisesInstance"
 
 // GetOnPremisesInstanceRequest is a API request type for the GetOnPremisesInstance API operation.
@@ -1190,7 +1335,8 @@ type GetOnPremisesInstanceRequest struct {
 }
 
 // Send marshals and sends the GetOnPremisesInstance API request.
-func (r GetOnPremisesInstanceRequest) Send() (*GetOnPremisesInstanceOutput, error) {
+func (r GetOnPremisesInstanceRequest) Send(ctx context.Context) (*GetOnPremisesInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1206,7 +1352,7 @@ func (r GetOnPremisesInstanceRequest) Send() (*GetOnPremisesInstanceOutput, erro
 //
 //    // Example sending a request using the GetOnPremisesInstanceRequest method.
 //    req := client.GetOnPremisesInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1240,7 +1386,8 @@ type ListApplicationRevisionsRequest struct {
 }
 
 // Send marshals and sends the ListApplicationRevisions API request.
-func (r ListApplicationRevisionsRequest) Send() (*ListApplicationRevisionsOutput, error) {
+func (r ListApplicationRevisionsRequest) Send(ctx context.Context) (*ListApplicationRevisionsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1256,7 +1403,7 @@ func (r ListApplicationRevisionsRequest) Send() (*ListApplicationRevisionsOutput
 //
 //    // Example sending a request using the ListApplicationRevisionsRequest method.
 //    req := client.ListApplicationRevisionsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1306,7 +1453,7 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListApplicationRevisionsPager {
 	return ListApplicationRevisionsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationRevisionsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1315,6 +1462,7 @@ func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListAppli
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1342,7 +1490,8 @@ type ListApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListApplications API request.
-func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
+func (r ListApplicationsRequest) Send(ctx context.Context) (*ListApplicationsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1358,7 +1507,7 @@ func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
 //
 //    // Example sending a request using the ListApplicationsRequest method.
 //    req := client.ListApplicationsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1408,7 +1557,7 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) ListA
 func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
 	return ListApplicationsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListApplicationsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1417,6 +1566,7 @@ func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsP
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1444,7 +1594,8 @@ type ListDeploymentConfigsRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentConfigs API request.
-func (r ListDeploymentConfigsRequest) Send() (*ListDeploymentConfigsOutput, error) {
+func (r ListDeploymentConfigsRequest) Send(ctx context.Context) (*ListDeploymentConfigsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1460,7 +1611,7 @@ func (r ListDeploymentConfigsRequest) Send() (*ListDeploymentConfigsOutput, erro
 //
 //    // Example sending a request using the ListDeploymentConfigsRequest method.
 //    req := client.ListDeploymentConfigsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1510,7 +1661,7 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeploymentConfigsPager {
 	return ListDeploymentConfigsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentConfigsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1519,6 +1670,7 @@ func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeployme
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1546,7 +1698,8 @@ type ListDeploymentGroupsRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentGroups API request.
-func (r ListDeploymentGroupsRequest) Send() (*ListDeploymentGroupsOutput, error) {
+func (r ListDeploymentGroupsRequest) Send(ctx context.Context) (*ListDeploymentGroupsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1563,7 +1716,7 @@ func (r ListDeploymentGroupsRequest) Send() (*ListDeploymentGroupsOutput, error)
 //
 //    // Example sending a request using the ListDeploymentGroupsRequest method.
 //    req := client.ListDeploymentGroupsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1613,7 +1766,7 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymentGroupsPager {
 	return ListDeploymentGroupsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentGroupsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1622,6 +1775,7 @@ func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymen
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1649,7 +1803,8 @@ type ListDeploymentInstancesRequest struct {
 }
 
 // Send marshals and sends the ListDeploymentInstances API request.
-func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, error) {
+func (r ListDeploymentInstancesRequest) Send(ctx context.Context) (*ListDeploymentInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1661,18 +1816,25 @@ func (r ListDeploymentInstancesRequest) Send() (*ListDeploymentInstancesOutput, 
 // ListDeploymentInstancesRequest returns a request value for making API operation for
 // AWS CodeDeploy.
 //
+// The newer BatchGetDeploymentTargets should be used instead because it works
+// with all compute types. ListDeploymentInstances throws an exception if it
+// is used with a compute platform other than EC2/On-premises or AWS Lambda.
+//
 // Lists the instance for a deployment associated with the applicable IAM user
 // or AWS account.
 //
 //    // Example sending a request using the ListDeploymentInstancesRequest method.
 //    req := client.ListDeploymentInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances
 func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstancesInput) ListDeploymentInstancesRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, ListDeploymentInstances, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opListDeploymentInstances,
 		HTTPMethod: "POST",
@@ -1716,7 +1878,7 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploymentInstancesPager {
 	return ListDeploymentInstancesPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentInstancesInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1725,6 +1887,7 @@ func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploy
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1742,6 +1905,57 @@ func (p *ListDeploymentInstancesPager) CurrentPage() *ListDeploymentInstancesOut
 	return p.Pager.CurrentPage().(*ListDeploymentInstancesOutput)
 }
 
+const opListDeploymentTargets = "ListDeploymentTargets"
+
+// ListDeploymentTargetsRequest is a API request type for the ListDeploymentTargets API operation.
+type ListDeploymentTargetsRequest struct {
+	*aws.Request
+	Input *ListDeploymentTargetsInput
+	Copy  func(*ListDeploymentTargetsInput) ListDeploymentTargetsRequest
+}
+
+// Send marshals and sends the ListDeploymentTargets API request.
+func (r ListDeploymentTargetsRequest) Send(ctx context.Context) (*ListDeploymentTargetsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeploymentTargetsOutput), nil
+}
+
+// ListDeploymentTargetsRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Returns an array of target IDs that are associated a deployment.
+//
+//    // Example sending a request using the ListDeploymentTargetsRequest method.
+//    req := client.ListDeploymentTargetsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargets
+func (c *CodeDeploy) ListDeploymentTargetsRequest(input *ListDeploymentTargetsInput) ListDeploymentTargetsRequest {
+	op := &aws.Operation{
+		Name:       opListDeploymentTargets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListDeploymentTargetsInput{}
+	}
+
+	output := &ListDeploymentTargetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDeploymentTargetsRequest{Request: req, Input: input, Copy: c.ListDeploymentTargetsRequest}
+}
+
 const opListDeployments = "ListDeployments"
 
 // ListDeploymentsRequest is a API request type for the ListDeployments API operation.
@@ -1752,7 +1966,8 @@ type ListDeploymentsRequest struct {
 }
 
 // Send marshals and sends the ListDeployments API request.
-func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
+func (r ListDeploymentsRequest) Send(ctx context.Context) (*ListDeploymentsOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1769,7 +1984,7 @@ func (r ListDeploymentsRequest) Send() (*ListDeploymentsOutput, error) {
 //
 //    // Example sending a request using the ListDeploymentsRequest method.
 //    req := client.ListDeploymentsRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1819,7 +2034,7 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPager {
 	return ListDeploymentsPager{
 		Pager: aws.Pager{
-			NewRequest: func() (*aws.Request, error) {
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
 				var inCpy *ListDeploymentsInput
 				if p.Input != nil {
 					tmp := *p.Input
@@ -1828,6 +2043,7 @@ func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPag
 
 				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
 
 				return req.Request, nil
 			},
@@ -1855,7 +2071,8 @@ type ListGitHubAccountTokenNamesRequest struct {
 }
 
 // Send marshals and sends the ListGitHubAccountTokenNames API request.
-func (r ListGitHubAccountTokenNamesRequest) Send() (*ListGitHubAccountTokenNamesOutput, error) {
+func (r ListGitHubAccountTokenNamesRequest) Send(ctx context.Context) (*ListGitHubAccountTokenNamesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1871,7 +2088,7 @@ func (r ListGitHubAccountTokenNamesRequest) Send() (*ListGitHubAccountTokenNames
 //
 //    // Example sending a request using the ListGitHubAccountTokenNamesRequest method.
 //    req := client.ListGitHubAccountTokenNamesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1905,7 +2122,8 @@ type ListOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the ListOnPremisesInstances API request.
-func (r ListOnPremisesInstancesRequest) Send() (*ListOnPremisesInstancesOutput, error) {
+func (r ListOnPremisesInstancesRequest) Send(ctx context.Context) (*ListOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1925,7 +2143,7 @@ func (r ListOnPremisesInstancesRequest) Send() (*ListOnPremisesInstancesOutput, 
 //
 //    // Example sending a request using the ListOnPremisesInstancesRequest method.
 //    req := client.ListOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -1959,7 +2177,8 @@ type PutLifecycleEventHookExecutionStatusRequest struct {
 }
 
 // Send marshals and sends the PutLifecycleEventHookExecutionStatus API request.
-func (r PutLifecycleEventHookExecutionStatusRequest) Send() (*PutLifecycleEventHookExecutionStatusOutput, error) {
+func (r PutLifecycleEventHookExecutionStatusRequest) Send(ctx context.Context) (*PutLifecycleEventHookExecutionStatusOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1977,7 +2196,7 @@ func (r PutLifecycleEventHookExecutionStatusRequest) Send() (*PutLifecycleEventH
 //
 //    // Example sending a request using the PutLifecycleEventHookExecutionStatusRequest method.
 //    req := client.PutLifecycleEventHookExecutionStatusRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2011,7 +2230,8 @@ type RegisterApplicationRevisionRequest struct {
 }
 
 // Send marshals and sends the RegisterApplicationRevision API request.
-func (r RegisterApplicationRevisionRequest) Send() (*RegisterApplicationRevisionOutput, error) {
+func (r RegisterApplicationRevisionRequest) Send(ctx context.Context) (*RegisterApplicationRevisionOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2027,7 +2247,7 @@ func (r RegisterApplicationRevisionRequest) Send() (*RegisterApplicationRevision
 //
 //    // Example sending a request using the RegisterApplicationRevisionRequest method.
 //    req := client.RegisterApplicationRevisionRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2063,7 +2283,8 @@ type RegisterOnPremisesInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterOnPremisesInstance API request.
-func (r RegisterOnPremisesInstanceRequest) Send() (*RegisterOnPremisesInstanceOutput, error) {
+func (r RegisterOnPremisesInstanceRequest) Send(ctx context.Context) (*RegisterOnPremisesInstanceOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2082,7 +2303,7 @@ func (r RegisterOnPremisesInstanceRequest) Send() (*RegisterOnPremisesInstanceOu
 //
 //    // Example sending a request using the RegisterOnPremisesInstanceRequest method.
 //    req := client.RegisterOnPremisesInstanceRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2118,7 +2339,8 @@ type RemoveTagsFromOnPremisesInstancesRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromOnPremisesInstances API request.
-func (r RemoveTagsFromOnPremisesInstancesRequest) Send() (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+func (r RemoveTagsFromOnPremisesInstancesRequest) Send(ctx context.Context) (*RemoveTagsFromOnPremisesInstancesOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2134,7 +2356,7 @@ func (r RemoveTagsFromOnPremisesInstancesRequest) Send() (*RemoveTagsFromOnPremi
 //
 //    // Example sending a request using the RemoveTagsFromOnPremisesInstancesRequest method.
 //    req := client.RemoveTagsFromOnPremisesInstancesRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2170,7 +2392,8 @@ type SkipWaitTimeForInstanceTerminationRequest struct {
 }
 
 // Send marshals and sends the SkipWaitTimeForInstanceTermination API request.
-func (r SkipWaitTimeForInstanceTerminationRequest) Send() (*SkipWaitTimeForInstanceTerminationOutput, error) {
+func (r SkipWaitTimeForInstanceTerminationRequest) Send(ctx context.Context) (*SkipWaitTimeForInstanceTerminationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2187,13 +2410,16 @@ func (r SkipWaitTimeForInstanceTerminationRequest) Send() (*SkipWaitTimeForInsta
 //
 //    // Example sending a request using the SkipWaitTimeForInstanceTerminationRequest method.
 //    req := client.SkipWaitTimeForInstanceTerminationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination
 func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest {
+	if c.Client.Config.Logger != nil {
+		c.Client.Config.Logger.Log("This operation, SkipWaitTimeForInstanceTermination, has been deprecated")
+	}
 	op := &aws.Operation{
 		Name:       opSkipWaitTimeForInstanceTermination,
 		HTTPMethod: "POST",
@@ -2223,7 +2449,8 @@ type StopDeploymentRequest struct {
 }
 
 // Send marshals and sends the StopDeployment API request.
-func (r StopDeploymentRequest) Send() (*StopDeploymentOutput, error) {
+func (r StopDeploymentRequest) Send(ctx context.Context) (*StopDeploymentOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2239,7 +2466,7 @@ func (r StopDeploymentRequest) Send() (*StopDeploymentOutput, error) {
 //
 //    // Example sending a request using the StopDeploymentRequest method.
 //    req := client.StopDeploymentRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2273,7 +2500,8 @@ type UpdateApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateApplication API request.
-func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r UpdateApplicationRequest) Send(ctx context.Context) (*UpdateApplicationOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2289,7 +2517,7 @@ func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 //
 //    // Example sending a request using the UpdateApplicationRequest method.
 //    req := client.UpdateApplicationRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2325,7 +2553,8 @@ type UpdateDeploymentGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateDeploymentGroup API request.
-func (r UpdateDeploymentGroupRequest) Send() (*UpdateDeploymentGroupOutput, error) {
+func (r UpdateDeploymentGroupRequest) Send(ctx context.Context) (*UpdateDeploymentGroupOutput, error) {
+	r.Request.SetContext(ctx)
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2341,7 +2570,7 @@ func (r UpdateDeploymentGroupRequest) Send() (*UpdateDeploymentGroupOutput, erro
 //
 //    // Example sending a request using the UpdateDeploymentGroupRequest method.
 //    req := client.UpdateDeploymentGroupRequest(params)
-//    resp, err := req.Send()
+//    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
@@ -2485,6 +2714,42 @@ func (s AlarmConfiguration) String() string {
 
 // GoString returns the string representation
 func (s AlarmConfiguration) GoString() string {
+	return s.String()
+}
+
+// A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted
+// or JSON-formatted string. For AWS Lambda and Amazon ECS deployments, the
+// revision is the same as the AppSpec file. This method replaces the deprecated
+// RawString data type.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AppSpecContent
+type AppSpecContent struct {
+	_ struct{} `type:"structure"`
+
+	// The YAML-formatted or JSON-formatted revision string.
+	//
+	// For an AWS Lambda deployment the content includes a Lambda function name,
+	// the alias for its original version, and the alias for its replacement version.
+	// The deployment shifts traffic from the original version of the Lambda function
+	// to the replacement version.
+	//
+	// For an Amazon ECS deployment the content includes the task name, information
+	// about the load balancer that serves traffic to the container, and more.
+	//
+	// For both types of deployments, the content can specify Lambda functions that
+	// run at specified hooks, such as BeforeInstall, during a deployment.
+	Content *string `locationName:"content" type:"string"`
+
+	// The SHA256 hash value of the revision content.
+	Sha256 *string `locationName:"sha256" type:"string"`
+}
+
+// String returns the string representation
+func (s AppSpecContent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AppSpecContent) GoString() string {
 	return s.String()
 }
 
@@ -2797,7 +3062,7 @@ type BatchGetDeploymentInstancesInput struct {
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
 
-	// The unique IDs of instances in the deployment group.
+	// The unique IDs of instances of the deployment.
 	//
 	// InstanceIds is a required field
 	InstanceIds []string `locationName:"instanceIds" type:"list" required:"true"`
@@ -2857,6 +3122,75 @@ func (s BatchGetDeploymentInstancesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargetsInput
+type BatchGetDeploymentTargetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The unique IDs of the deployment targets. The compute platform of the deployment
+	// determines the type of the targets and their formats.
+	//
+	//    *  For deployments that use the EC2/On-premises compute platform, the
+	//    target IDs are EC2 or on-premises instances IDs and their target type
+	//    is instanceTarget.
+	//
+	//    *  For deployments that use the AWS Lambda compute platform, the target
+	//    IDs are the names of Lambda functions and their target type is instanceTarget.
+	//
+	//
+	//    *  For deployments that use the Amazon ECS compute platform, the target
+	//    IDs are pairs of Amazon ECS clusters and services specified using the
+	//    format <clustername>:<servicename>. Their target type is ecsTarget.
+	TargetIds []string `locationName:"targetIds" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetDeploymentTargetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetDeploymentTargetsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargetsOutput
+type BatchGetDeploymentTargetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of target objects for a deployment. Each target object contains details
+	// about the target, such as its status and lifecycle events. The type of the
+	// target objects depends on the deployment' compute platform.
+	//
+	//    * EC2/On-premises - Each target object is an EC2 or on-premises instance.
+	//
+	//
+	//    * AWS Lambda - The target object is a specific version of an AWS Lambda
+	//    function.
+	//
+	//    * Amazon ECS - The target object is an Amazon ECS service.
+	DeploymentTargets []DeploymentTarget `locationName:"deploymentTargets" type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetDeploymentTargetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetDeploymentTargetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BatchGetDeploymentTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -3045,9 +3379,14 @@ func (s BlueInstanceTerminationOption) GoString() string {
 type ContinueDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// The deployment ID of the blue/green deployment for which you want to start
-	// rerouting traffic to the replacement environment.
+	// The unique ID of a blue/green deployment for which you want to start rerouting
+	// traffic to the replacement environment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The status of the deployment's waiting period. READY_WAIT indicates the deployment
+	// is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic
+	// is shifted, but the original target is not terminated.
+	DeploymentWaitType DeploymentWaitType `locationName:"deploymentWaitType" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3299,6 +3638,12 @@ type CreateDeploymentGroupInput struct {
 	// be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
+	// The target ECS services in the deployment group. This only applies to deployment
+	// groups that use the Amazon ECS compute platform. A target ECS service is
+	// specified as an Amazon ECS cluster and service name pair using the format
+	// <clustername>:<servicename>.
+	EcsServices []ECSService `locationName:"ecsServices" type:"list"`
+
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *LoadBalancerInfo `locationName:"loadBalancerInfo" type:"structure"`
 
@@ -3499,7 +3844,7 @@ type CreateDeploymentOutput struct {
 
 	responseMetadata aws.Response
 
-	// A unique deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
 
@@ -3848,6 +4193,12 @@ type DeploymentGroupInfo struct {
 	// be used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
+	// The target ECS services in the deployment group. This only applies to deployment
+	// groups that use the Amazon ECS compute platform. A target ECS service is
+	// specified as an Amazon ECS cluster and service name pair using the format
+	// <clustername>:<servicename>.
+	EcsServices []ECSService `locationName:"ecsServices" type:"list"`
+
 	// Information about the most recent attempted deployment to the deployment
 	// group.
 	LastAttemptedDeployment *LastDeploymentInfo `locationName:"lastAttemptedDeployment" type:"structure"`
@@ -3932,7 +4283,7 @@ type DeploymentInfo struct {
 	// The deployment group name.
 	DeploymentGroupName *string `locationName:"deploymentGroupName" min:"1" type:"string"`
 
-	// The deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// A summary of the deployment status of the instances in the deployment.
@@ -4120,6 +4471,37 @@ func (s DeploymentStyle) GoString() string {
 	return s.String()
 }
 
+// Information about the deployment target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTarget
+type DeploymentTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The deployment type which is specific to the deployment's compute platform.
+	DeploymentTargetType DeploymentTargetType `locationName:"deploymentTargetType" type:"string" enum:"true"`
+
+	// Information about the target for a deployment that uses the Amazon ECS compute
+	// platform.
+	EcsTarget *ECSTarget `locationName:"ecsTarget" type:"structure"`
+
+	// Information about the target for a deployment that uses the EC2/On-premises
+	// compute platform.
+	InstanceTarget *InstanceTarget `locationName:"instanceTarget" type:"structure"`
+
+	// Information about the target for a deployment that uses the AWS Lambda compute
+	// platform.
+	LambdaTarget *LambdaTarget `locationName:"lambdaTarget" type:"structure"`
+}
+
+// String returns the string representation
+func (s DeploymentTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeploymentTarget) GoString() string {
+	return s.String()
+}
+
 // Represents the input of a DeregisterOnPremisesInstance operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstanceInput
 type DeregisterOnPremisesInstanceInput struct {
@@ -4271,6 +4653,129 @@ func (s EC2TagSet) String() string {
 
 // GoString returns the string representation
 func (s EC2TagSet) GoString() string {
+	return s.String()
+}
+
+// Contains the service and cluster names used to identify an Amazon ECS deployment's
+// target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSService
+type ECSService struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the cluster that the ECS service is associated with.
+	ClusterName *string `locationName:"clusterName" type:"string"`
+
+	// The name of the target ECS service.
+	ServiceName *string `locationName:"serviceName" type:"string"`
+}
+
+// String returns the string representation
+func (s ECSService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ECSService) GoString() string {
+	return s.String()
+}
+
+// Information about the target of an Amazon ECS deployment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSTarget
+type ECSTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The date and time when the target Amazon ECS application was updated by a
+	// deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The lifecycle events of the deployment to this target Amazon ECS application.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The status an Amazon ECS deployment's target ECS application.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The ARN of the target.
+	TargetArn *string `locationName:"targetArn" type:"string"`
+
+	// The unique ID of a deployment target that has a type of ecsTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+
+	// The ECSTaskSet objects associated with the ECS target.
+	TaskSetsInfo []ECSTaskSet `locationName:"taskSetsInfo" type:"list"`
+}
+
+// String returns the string representation
+func (s ECSTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ECSTarget) GoString() string {
+	return s.String()
+}
+
+// A set of Amazon ECS tasks. A task set runs a specified number of instances
+// of a task definition simultaneously inside an Amazon ECS service. Information
+// about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An Amazon
+// ECS task set includes details such as the desired number of tasks, how many
+// tasks are running, and whether the task set serves production traffic or
+// not.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSTaskSet
+type ECSTaskSet struct {
+	_ struct{} `type:"structure"`
+
+	// The number of tasks in a task set. During a deployment that uses the Amazon
+	// ECS compute type, CodeDeploy asks Amazon ECS to create a new task set and
+	// uses this value to determine how many tasks to create. After the updated
+	// task set is created, CodeDeploy shifts traffic to the new task set.
+	DesiredCount *int64 `locationName:"desiredCount" type:"long"`
+
+	// A unique ID of an ECSTaskSet.
+	Identifer *string `locationName:"identifer" type:"string"`
+
+	// The number of tasks in the task set that are in the PENDING status during
+	// an Amazon ECS deployment. A task in the PENDING state is preparing to enter
+	// the RUNNING state. A task set enters the PENDING status when it launches
+	// for the first time, or when it is restarted after being in the STOPPED state.
+	PendingCount *int64 `locationName:"pendingCount" type:"long"`
+
+	// The number of tasks in the task set that are in the RUNNING status during
+	// an Amazon ECS deployment. A task in the RUNNING state is running and ready
+	// for use.
+	RunningCount *int64 `locationName:"runningCount" type:"long"`
+
+	// The status of the task set. There are three valid task set statuses:
+	//
+	//    * PRIMARY - indicates the task set is serving production traffic.
+	//
+	//    * ACTIVE - indicates the task set is not serving production traffic.
+	//
+	//    * DRAINING - indicates the tasks in the task set are being stopped and
+	//    their corresponding targets are being deregistered from their target group.
+	Status *string `locationName:"status" type:"string"`
+
+	// The target group associated with the task set. The target group is used by
+	// AWS CodeDeploy to manage traffic to a task set.
+	TargetGroup *TargetGroupInfo `locationName:"targetGroup" type:"structure"`
+
+	// A label that identifies whether the ECS task set is an original target (BLUE)
+	// or a replacement target (GREEN).
+	TaskSetLabel TargetLabel `locationName:"taskSetLabel" type:"string" enum:"true"`
+
+	// The percentage of traffic served by this task set.
+	TrafficWeight *float64 `locationName:"trafficWeight" type:"double"`
+}
+
+// String returns the string representation
+func (s ECSTaskSet) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ECSTaskSet) GoString() string {
 	return s.String()
 }
 
@@ -4683,7 +5188,8 @@ func (s GetDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
 type GetDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// A deployment ID associated with the applicable IAM user or AWS account.
+	// The unique ID of a deployment associated with the applicable IAM user or
+	// AWS account.
 	//
 	// DeploymentId is a required field
 	DeploymentId *string `locationName:"deploymentId" type:"string" required:"true"`
@@ -4765,7 +5271,7 @@ type GetDeploymentInstanceOutput struct {
 	responseMetadata aws.Response
 
 	// Information about the instance.
-	InstanceSummary *InstanceSummary `locationName:"instanceSummary" type:"structure"`
+	InstanceSummary *InstanceSummary `locationName:"instanceSummary" deprecated:"true" type:"structure"`
 }
 
 // String returns the string representation
@@ -4806,6 +5312,55 @@ func (s GetDeploymentOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeploymentOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTargetInput
+type GetDeploymentTargetInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The unique ID of a deployment target.
+	TargetId *string `locationName:"targetId" type:"string"`
+}
+
+// String returns the string representation
+func (s GetDeploymentTargetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeploymentTargetInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTargetOutput
+type GetDeploymentTargetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A deployment target that contains information about a deployment such as
+	// its status, lifecyle events, and when it was updated last. It also contains
+	// metadata about the deployment target. The deployment target metadata depends
+	// on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget).
+	DeploymentTarget *DeploymentTarget `locationName:"deploymentTarget" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetDeploymentTargetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeploymentTargetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeploymentTargetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4963,9 +5518,9 @@ func (s InstanceInfo) GoString() string {
 // Information about an instance in a deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceSummary
 type InstanceSummary struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
-	// The deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// The instance ID.
@@ -4998,7 +5553,7 @@ type InstanceSummary struct {
 	//    * Skipped: The deployment has been skipped for this instance.
 	//
 	//    * Unknown: The deployment status is unknown for this instance.
-	Status InstanceStatus `locationName:"status" type:"string" enum:"true"`
+	Status InstanceStatus `locationName:"status" deprecated:"true" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -5008,6 +5563,79 @@ func (s InstanceSummary) String() string {
 
 // GoString returns the string representation
 func (s InstanceSummary) GoString() string {
+	return s.String()
+}
+
+// A target Amazon EC2 or on-premises instance during a deployment that uses
+// the EC2/On-premises compute platform.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceTarget
+type InstanceTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// A label that identifies whether the instance is an original target (BLUE)
+	// or a replacement target (GREEN).
+	InstanceLabel TargetLabel `locationName:"instanceLabel" type:"string" enum:"true"`
+
+	// The date and time when the target instance was updated by a deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The lifecycle events of the deployment to this target instance.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The status an EC2/On-premises deployment's target instance.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The ARN of the target.
+	TargetArn *string `locationName:"targetArn" type:"string"`
+
+	// The unique ID of a deployment target that has a type of instanceTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstanceTarget) GoString() string {
+	return s.String()
+}
+
+// Information about the target AWS Lambda function during an AWS Lambda deployment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LambdaTarget
+type LambdaTarget struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The date and time when the target Lambda function was updated by a deployment.
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
+
+	// The lifecycle events of the deployment to this target Lambda function.
+	LifecycleEvents []LifecycleEvent `locationName:"lifecycleEvents" type:"list"`
+
+	// The status an AWS Lambda deployment's target Lambda function.
+	Status TargetStatus `locationName:"status" type:"string" enum:"true"`
+
+	// The ARN of the target.
+	TargetArn *string `locationName:"targetArn" type:"string"`
+
+	// The unique ID of a deployment target that has a type of lambdaTarget.
+	TargetId *string `locationName:"targetId" type:"string"`
+}
+
+// String returns the string representation
+func (s LambdaTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LambdaTarget) GoString() string {
 	return s.String()
 }
 
@@ -5021,7 +5649,7 @@ type LastDeploymentInfo struct {
 	// group started.
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
 
-	// The deployment ID.
+	// The unique ID of a deployment.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
 	// A timestamp indicating when the most recent deployment to the deployment
@@ -5108,13 +5736,13 @@ type ListApplicationRevisionsInput struct {
 	//    * ignore: List all revisions.
 	Deployed ListStateFilterAction `locationName:"deployed" type:"string" enum:"true"`
 
-	// An identifier returned from the previous list application revisions call.
-	// It can be used to return the next set of applications in the list.
+	// An identifier returned from the previous ListApplicationRevisions call. It
+	// can be used to return the next set of applications in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// An Amazon S3 bucket name to limit the search for revisions.
 	//
-	// If set to null, all of the user's buckets will be searched.
+	// If set to null, all of the user's buckets are searched.
 	S3Bucket *string `locationName:"s3Bucket" type:"string"`
 
 	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
@@ -5259,9 +5887,8 @@ func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
 type ListDeploymentConfigsInput struct {
 	_ struct{} `type:"structure"`
 
-	// An identifier returned from the previous list deployment configurations call.
-	// It can be used to return the next set of deployment configurations in the
-	// list.
+	// An identifier returned from the previous ListDeploymentConfigs call. It can
+	// be used to return the next set of deployment configurations in the list.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -5471,6 +6098,61 @@ func (s ListDeploymentInstancesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargetsInput
+type ListDeploymentTargetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of a deployment.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// A token identifier returned from the previous ListDeploymentTargets call.
+	// It can be used to return the next set of deployment targets in the list.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// A key used to filter the returned targets.
+	TargetFilters map[string][]string `locationName:"targetFilters" type:"map"`
+}
+
+// String returns the string representation
+func (s ListDeploymentTargetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeploymentTargetsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargetsOutput
+type ListDeploymentTargetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If a large amount of information is returned, a token identifier will also
+	// be returned. It can be used in a subsequent ListDeploymentTargets call to
+	// return the next set of deployment targets in the list.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The unique IDs of deployment targets.
+	TargetIds []string `locationName:"targetIds" type:"list"`
+}
+
+// String returns the string representation
+func (s ListDeploymentTargetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeploymentTargetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeploymentTargetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5700,6 +6382,10 @@ type LoadBalancerInfo struct {
 	//
 	// Adding more than one target group to the array is not supported.
 	TargetGroupInfoList []TargetGroupInfo `locationName:"targetGroupInfoList" type:"list"`
+
+	// The target group pair information. This is an array of TargeGroupPairInfo
+	// objects with a maximum size of one.
+	TargetGroupPairInfoList []TargetGroupPairInfo `locationName:"targetGroupPairInfoList" type:"list"`
 }
 
 // String returns the string representation
@@ -5784,7 +6470,7 @@ func (s OnPremisesTagSet) GoString() string {
 type PutLifecycleEventHookExecutionStatusInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the deployment. Pass this ID to a Lambda function that validates
+	// The unique ID of a deployment. Pass this ID to a Lambda function that validates
 	// a deployment lifecycle event.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 
@@ -5838,14 +6524,14 @@ func (s PutLifecycleEventHookExecutionStatusOutput) SDKResponseMetadata() aws.Re
 // file.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RawString
 type RawString struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `deprecated:"true" type:"structure"`
 
 	// The YAML-formatted or JSON-formatted revision string. It includes information
 	// about which Lambda function to update and optional Lambda functions that
 	// validate deployment lifecycle events.
 	Content *string `locationName:"content" type:"string"`
 
-	// The SHA256 hash value of the revision that is specified as a RawString.
+	// The SHA256 hash value of the revision content.
 	Sha256 *string `locationName:"sha256" type:"string"`
 }
 
@@ -6090,6 +6776,10 @@ func (s RevisionInfo) GoString() string {
 type RevisionLocation struct {
 	_ struct{} `type:"structure"`
 
+	// The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment.
+	// The content is formatted as JSON or YAML and stored as a RawString.
+	AppSpecContent *AppSpecContent `locationName:"appSpecContent" type:"structure"`
+
 	// Information about the location of application artifacts stored in GitHub.
 	GitHubLocation *GitHubLocation `locationName:"gitHubLocation" type:"structure"`
 
@@ -6109,7 +6799,7 @@ type RevisionLocation struct {
 
 	// Information about the location of an AWS Lambda deployment revision stored
 	// as a RawString.
-	String_ *RawString `locationName:"string" type:"structure"`
+	String_ *RawString `locationName:"string" deprecated:"true" type:"structure"`
 }
 
 // String returns the string representation
@@ -6200,7 +6890,7 @@ func (s S3Location) GoString() string {
 type SkipWaitTimeForInstanceTerminationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the blue/green deployment for which you want to skip the instance
+	// The unique ID of a blue/green deployment for which you want to skip the instance
 	// termination wait time.
 	DeploymentId *string `locationName:"deploymentId" type:"string"`
 }
@@ -6388,6 +7078,37 @@ func (s TargetGroupInfo) GoString() string {
 	return s.String()
 }
 
+// Information about two target groups and how traffic routes during an Amazon
+// ECS deployment. An optional test traffic route can be specified.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetGroupPairInfo
+type TargetGroupPairInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The path used by a load balancer to route production traffic when an Amazon
+	// ECS deployment is complete.
+	ProdTrafficRoute *TrafficRoute `locationName:"prodTrafficRoute" type:"structure"`
+
+	// One pair of target groups. One is associated with the original task set.
+	// The second target is associated with the task set that serves traffic after
+	// the deployment completes.
+	TargetGroups []TargetGroupInfo `locationName:"targetGroups" type:"list"`
+
+	// An optional path used by a load balancer to route test traffic after an Amazon
+	// ECS deployment. Validation can happen while test traffic is served during
+	// a deployment.
+	TestTrafficRoute *TrafficRoute `locationName:"testTrafficRoute" type:"structure"`
+}
+
+// String returns the string representation
+func (s TargetGroupPairInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TargetGroupPairInfo) GoString() string {
+	return s.String()
+}
+
 // Information about the instances to be used in the replacement environment
 // in a blue/green deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetInstances
@@ -6495,6 +7216,28 @@ func (s TimeRange) String() string {
 
 // GoString returns the string representation
 func (s TimeRange) GoString() string {
+	return s.String()
+}
+
+// Information about a listener. The listener contains the path used to route
+// traffic that is received from the load balancer to a target group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoute
+type TrafficRoute struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of one listener. The listener identifies the route between a target
+	// group and a load balancer. This is an array of strings with a maximum size
+	// of one.
+	ListenerArns []string `locationName:"listenerArns" type:"list"`
+}
+
+// String returns the string representation
+func (s TrafficRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TrafficRoute) GoString() string {
 	return s.String()
 }
 
@@ -6665,6 +7408,12 @@ type UpdateDeploymentGroupInput struct {
 	// group will include only EC2 instances identified by all the tag groups.
 	Ec2TagSet *EC2TagSet `locationName:"ec2TagSet" type:"structure"`
 
+	// The target ECS services in the deployment group. This only applies to deployment
+	// groups that use the Amazon ECS compute platform. A target ECS service is
+	// specified as an Amazon ECS cluster and service name pair using the format
+	// <clustername>:<servicename>.
+	EcsServices []ECSService `locationName:"ecsServices" type:"list"`
+
 	// Information about the load balancer used in a deployment.
 	LoadBalancerInfo *LoadBalancerInfo `locationName:"loadBalancerInfo" type:"structure"`
 
@@ -6821,6 +7570,7 @@ type ComputePlatform string
 const (
 	ComputePlatformServer ComputePlatform = "Server"
 	ComputePlatformLambda ComputePlatform = "Lambda"
+	ComputePlatformEcs    ComputePlatform = "ECS"
 )
 
 func (enum ComputePlatform) MarshalValue() (string, error) {
@@ -6906,6 +7656,24 @@ func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DeploymentTargetType string
+
+// Enum values for DeploymentTargetType
+const (
+	DeploymentTargetTypeInstanceTarget DeploymentTargetType = "InstanceTarget"
+	DeploymentTargetTypeLambdaTarget   DeploymentTargetType = "LambdaTarget"
+	DeploymentTargetTypeEcstarget      DeploymentTargetType = "ECSTarget"
+)
+
+func (enum DeploymentTargetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentTargetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentType string
 
 // Enum values for DeploymentType
@@ -6919,6 +7687,23 @@ func (enum DeploymentType) MarshalValue() (string, error) {
 }
 
 func (enum DeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeploymentWaitType string
+
+// Enum values for DeploymentWaitType
+const (
+	DeploymentWaitTypeReadyWait       DeploymentWaitType = "READY_WAIT"
+	DeploymentWaitTypeTerminationWait DeploymentWaitType = "TERMINATION_WAIT"
+)
+
+func (enum DeploymentWaitType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentWaitType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -6971,6 +7756,10 @@ const (
 	ErrorCodeInvalidLambdaConfiguration              ErrorCode = "INVALID_LAMBDA_CONFIGURATION"
 	ErrorCodeInvalidLambdaFunction                   ErrorCode = "INVALID_LAMBDA_FUNCTION"
 	ErrorCodeHookExecutionFailure                    ErrorCode = "HOOK_EXECUTION_FAILURE"
+	ErrorCodeAutoscalingValidationError              ErrorCode = "AUTOSCALING_VALIDATION_ERROR"
+	ErrorCodeInvalidEcsService                       ErrorCode = "INVALID_ECS_SERVICE"
+	ErrorCodeEcsUpdateError                          ErrorCode = "ECS_UPDATE_ERROR"
+	ErrorCodeInvalidRevision                         ErrorCode = "INVALID_REVISION"
 )
 
 func (enum ErrorCode) MarshalValue() (string, error) {
@@ -7171,9 +7960,10 @@ type RevisionLocationType string
 
 // Enum values for RevisionLocationType
 const (
-	RevisionLocationTypeS3     RevisionLocationType = "S3"
-	RevisionLocationTypeGitHub RevisionLocationType = "GitHub"
-	RevisionLocationTypeString RevisionLocationType = "String"
+	RevisionLocationTypeS3             RevisionLocationType = "S3"
+	RevisionLocationTypeGitHub         RevisionLocationType = "GitHub"
+	RevisionLocationTypeString         RevisionLocationType = "String"
+	RevisionLocationTypeAppSpecContent RevisionLocationType = "AppSpecContent"
 )
 
 func (enum RevisionLocationType) MarshalValue() (string, error) {
@@ -7233,6 +8023,62 @@ func (enum TagFilterType) MarshalValue() (string, error) {
 }
 
 func (enum TagFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetFilterName string
+
+// Enum values for TargetFilterName
+const (
+	TargetFilterNameTargetStatus        TargetFilterName = "TargetStatus"
+	TargetFilterNameServerInstanceLabel TargetFilterName = "ServerInstanceLabel"
+)
+
+func (enum TargetFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetLabel string
+
+// Enum values for TargetLabel
+const (
+	TargetLabelBlue  TargetLabel = "Blue"
+	TargetLabelGreen TargetLabel = "Green"
+)
+
+func (enum TargetLabel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetLabel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TargetStatus string
+
+// Enum values for TargetStatus
+const (
+	TargetStatusPending    TargetStatus = "Pending"
+	TargetStatusInProgress TargetStatus = "InProgress"
+	TargetStatusSucceeded  TargetStatus = "Succeeded"
+	TargetStatusFailed     TargetStatus = "Failed"
+	TargetStatusSkipped    TargetStatus = "Skipped"
+	TargetStatusUnknown    TargetStatus = "Unknown"
+	TargetStatusReady      TargetStatus = "Ready"
+)
+
+func (enum TargetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

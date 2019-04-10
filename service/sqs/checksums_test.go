@@ -2,6 +2,7 @@ package sqs_test
 
 import (
 	"bytes"
+	"context"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -36,7 +37,7 @@ func TestSendMessageChecksum(t *testing.T) {
 			MessageId:        aws.String("12345"),
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -54,7 +55,7 @@ func TestSendMessageChecksumInvalid(t *testing.T) {
 			MessageId:        aws.String("12345"),
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got nil")
 	}
@@ -86,7 +87,7 @@ func TestSendMessageChecksumInvalidNoValidation(t *testing.T) {
 			MessageId:        aws.String("12345"),
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -99,7 +100,7 @@ func TestSendMessageChecksumNoInput(t *testing.T) {
 		r.HTTPResponse = &http.Response{StatusCode: 200, Body: body}
 		r.Data = &sqs.SendMessageOutput{}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got nil")
 	}
@@ -121,7 +122,7 @@ func TestSendMessageChecksumNoOutput(t *testing.T) {
 		r.HTTPResponse = &http.Response{StatusCode: 200, Body: body}
 		r.Data = &sqs.SendMessageOutput{}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got nil")
 	}
@@ -149,7 +150,7 @@ func TestRecieveMessageChecksum(t *testing.T) {
 			},
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -171,7 +172,7 @@ func TestRecieveMessageChecksumInvalid(t *testing.T) {
 			},
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got nil")
 	}
@@ -206,7 +207,34 @@ func TestSendMessageBatchChecksum(t *testing.T) {
 			},
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+}
+
+func TestSendMessageBatchChecksumFailed(t *testing.T) {
+	req := svc.SendMessageBatchRequest(&sqs.SendMessageBatchInput{
+		Entries: []sqs.SendMessageBatchRequestEntry{
+			{Id: aws.String("1"), MessageBody: aws.String("test")},
+			{Id: aws.String("2"), MessageBody: aws.String("test")},
+			{Id: aws.String("3"), MessageBody: aws.String("test")},
+			{Id: aws.String("4"), MessageBody: aws.String("test")},
+		},
+	})
+	req.Handlers.Send.PushBack(func(r *request.Request) {
+		body := ioutil.NopCloser(bytes.NewReader([]byte("")))
+		r.HTTPResponse = &http.Response{StatusCode: 200, Body: body}
+		r.Data = &sqs.SendMessageBatchOutput{
+			Failed: []sqs.BatchResultErrorEntry{
+				{Id: aws.String("1"), Code: aws.String("test"), Message: aws.String("test"), SenderFault: aws.Bool(false)},
+				{Id: aws.String("2"), Code: aws.String("test"), Message: aws.String("test"), SenderFault: aws.Bool(false)},
+				{Id: aws.String("3"), Code: aws.String("test"), Message: aws.String("test"), SenderFault: aws.Bool(false)},
+				{Id: aws.String("4"), Code: aws.String("test"), Message: aws.String("test"), SenderFault: aws.Bool(false)},
+			},
+		}
+	})
+	_, err := req.Send(context.Background())
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -234,7 +262,7 @@ func TestSendMessageBatchChecksumInvalid(t *testing.T) {
 			},
 		}
 	})
-	_, err := req.Send()
+	_, err := req.Send(context.Background())
 	if err == nil {
 		t.Fatalf("expect error, got nil")
 	}

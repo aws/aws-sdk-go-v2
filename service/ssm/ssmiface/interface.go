@@ -66,6 +66,8 @@ type SSMAPI interface {
 
 	CancelCommandRequest(*ssm.CancelCommandInput) ssm.CancelCommandRequest
 
+	CancelMaintenanceWindowExecutionRequest(*ssm.CancelMaintenanceWindowExecutionInput) ssm.CancelMaintenanceWindowExecutionRequest
+
 	CreateActivationRequest(*ssm.CreateActivationInput) ssm.CreateActivationRequest
 
 	CreateAssociationRequest(*ssm.CreateAssociationInput) ssm.CreateAssociationRequest
@@ -146,11 +148,15 @@ type SSMAPI interface {
 
 	DescribeMaintenanceWindowExecutionsRequest(*ssm.DescribeMaintenanceWindowExecutionsInput) ssm.DescribeMaintenanceWindowExecutionsRequest
 
+	DescribeMaintenanceWindowScheduleRequest(*ssm.DescribeMaintenanceWindowScheduleInput) ssm.DescribeMaintenanceWindowScheduleRequest
+
 	DescribeMaintenanceWindowTargetsRequest(*ssm.DescribeMaintenanceWindowTargetsInput) ssm.DescribeMaintenanceWindowTargetsRequest
 
 	DescribeMaintenanceWindowTasksRequest(*ssm.DescribeMaintenanceWindowTasksInput) ssm.DescribeMaintenanceWindowTasksRequest
 
 	DescribeMaintenanceWindowsRequest(*ssm.DescribeMaintenanceWindowsInput) ssm.DescribeMaintenanceWindowsRequest
+
+	DescribeMaintenanceWindowsForTargetRequest(*ssm.DescribeMaintenanceWindowsForTargetInput) ssm.DescribeMaintenanceWindowsForTargetRequest
 
 	DescribeParametersRequest(*ssm.DescribeParametersInput) ssm.DescribeParametersRequest
 
