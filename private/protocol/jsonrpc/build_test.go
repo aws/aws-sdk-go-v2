@@ -1733,10 +1733,10 @@ func TestInputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1771,10 +1771,10 @@ func TestInputService2ProtocolTestTimestampValuesCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1809,10 +1809,10 @@ func TestInputService3ProtocolTestBase64EncodedBlobsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1850,10 +1850,10 @@ func TestInputService3ProtocolTestBase64EncodedBlobsCase2(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1891,10 +1891,10 @@ func TestInputService4ProtocolTestNestedBlobsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1931,10 +1931,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -1973,10 +1973,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase2(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2019,10 +2019,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase3(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2066,10 +2066,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase4(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2115,10 +2115,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase5(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2162,10 +2162,10 @@ func TestInputService5ProtocolTestRecursiveShapesCase6(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2200,10 +2200,10 @@ func TestInputService6ProtocolTestEmptyMapsCase1(t *testing.T) {
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.OperationName", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2360,10 +2360,10 @@ func TestInputService9ProtocolTestEndpointHostTraitStaticPrefixCase1(t *testing.
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.StaticOp", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
@@ -2398,10 +2398,10 @@ func TestInputService9ProtocolTestEndpointHostTraitStaticPrefixCase2(t *testing.
 
 	// assert headers
 	if e, a := "application/x-amz-json-1.1", r.Header.Get("Content-Type"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := "com.amazonaws.foo.MemberRefOp", r.Header.Get("X-Amz-Target"); e != a {
-		t.Errorf("expect %v to be %v", e, a)
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }
