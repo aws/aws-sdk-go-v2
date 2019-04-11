@@ -15,7 +15,7 @@ import (
 )
 
 type client struct {
-	s3Client *s3.S3
+	s3Client *s3.Client
 	bucket   *string
 }
 

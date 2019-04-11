@@ -11,15 +11,15 @@ import (
 )
 
 type mockS3Client struct {
-	*s3.S3
+	*s3.Client
 	index   int
 	objects []s3.ListObjectsOutput
 }
 
 func (c *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
-	req := c.S3.ListObjectsRequest(input)
+	req := c.Client.ListObjectsRequest(input)
 	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
-		r := c.S3.ListObjectsRequest(v)
+		r := c.Client.ListObjectsRequest(v)
 		r.Handlers.Clear()
 		r.Handlers.Send.PushBack(func(r *aws.Request) {
 			object := c.objects[c.index]
@@ -72,7 +72,7 @@ func TestListObjectsPagination(t *testing.T) {
 		},
 	}
 
-	svc.S3 = s3.New(defaults.Config())
+	svc.Client = s3.New(defaults.Config())
 	svc.objects = objects
 
 	keys := getKeys(svc, "foo")

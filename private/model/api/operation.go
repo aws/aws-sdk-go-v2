@@ -56,16 +56,14 @@ func (o *Operation) HasOutput() bool {
 
 // GetSigner returns the signer to use for a request.
 func (o *Operation) GetSigner() string {
-	if o.AuthType == "v4-unsigned-body" {
-		o.API.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v4"] = true
-	}
-
 	buf := bytes.NewBuffer(nil)
 
 	switch o.AuthType {
 	case "none":
 		buf.WriteString("req.Config.Credentials = aws.AnonymousCredentials")
 	case "v4-unsigned-body":
+		o.API.AddSDKImport("aws/signer/v4")
+
 		buf.WriteString("req.Handlers.Sign.Remove(v4.SignRequestHandler)\n")
 		buf.WriteString("handler := v4.BuildNamedHandler(\"v4.CustomSignerHandler\", v4.WithUnsignedPayload)\n")
 		buf.WriteString("req.Handlers.Sign.PushFrontNamed(handler)")
@@ -80,26 +78,18 @@ var operationTmpl = template.Must(template.New("operation").Funcs(template.FuncM
 	"GetCrosslinkURL": GetCrosslinkURL,
 }).Parse(`
 {{ $reqType := printf "%sRequest" .ExportedName -}}
-{{ $pagerType := printf "%sPager" .ExportedName -}}
+{{ $respType := printf "%sResponse" .ExportedName -}}
+{{ $pagerType := printf "%sPaginator" .ExportedName -}}
+
+{{ if .HasInput -}}
+	{{ .InputRef.Shape.GoCode }}
+{{- end }}
+
+{{ if .HasOutput -}}
+	{{ .OutputRef.Shape.GoCode }}
+{{- end }}
+
 const op{{ .ExportedName }} = "{{ .Name }}"
-
-// {{ $reqType }} is a API request type for the {{ .ExportedName }} API operation.
-type {{ $reqType}} struct {
-	*aws.Request
-	Input {{ .InputRef.GoType }}
-	Copy func({{ .InputRef.GoType }}) {{ $reqType }}
-}
-
-// Send marshals and sends the {{ .ExportedName }} API request. 
-func (r {{ $reqType }}) Send(ctx context.Context) ({{ .OutputRef.GoType }}, error) {
-	r.Request.SetContext(ctx)
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	return r.Request.Data.({{ .OutputRef.GoType }}), nil
-}
 
 // {{ $reqType }} returns a request value for making API operation for
 // {{ .API.Metadata.ServiceFullName }}.
@@ -108,22 +98,22 @@ func (r {{ $reqType }}) Send(ctx context.Context) ({{ .OutputRef.GoType }}, erro
 {{ .Documentation }}
 {{ end -}}
 //
-//    // Example sending a request using the {{ $reqType }} method.
+//    // Example sending a request using {{ $reqType }}.
 //    req := client.{{ $reqType }}(params)
 //    resp, err := req.Send(context.TODO())
 //    if err == nil {
 //        fmt.Println(resp)
 //    }
 {{ $crosslinkURL := GetCrosslinkURL $.API.BaseCrosslinkURL $.API.Metadata.UID $.ExportedName -}}
-{{ if ne $crosslinkURL "" -}} 
+{{ if ne $crosslinkURL "" -}}
 //
 // Please also see {{ $crosslinkURL }}
 {{ end -}}
 func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{ $reqType }}) {
-	{{- if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) }}
-	if c.Client.Config.Logger != nil {
-		c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
-	}
+	{{ if (or .Deprecated (or .InputRef.Deprecated .OutputRef.Deprecated)) -}}
+		if c.Client.Config.Logger != nil {
+			c.Client.Config.Logger.Log("This operation, {{ .ExportedName }}, has been deprecated")
+		}
 	{{ end -}}
 
 	op := &aws.Operation{
@@ -144,71 +134,110 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 		input = &{{ .InputRef.GoTypeElem }}{}
 	}
 
-	output := &{{ .OutputRef.GoTypeElem }}{}
-	req := c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &{{ .OutputRef.GoTypeElem }}{})
 	{{ if eq .OutputRef.Shape.Placeholder true -}}
 		req.Handlers.Unmarshal.Remove({{ .API.ProtocolPackage }}.UnmarshalHandler)
 		req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	{{ end -}}
-	output.responseMetadata = aws.Response{Request:req}
 
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
 	{{- range $_, $handler := $.CustomBuildHandlers -}}
 		req.Handlers.Build.PushBackNamed({{ $handler }})
 	{{ end -}}
 
-	return {{ $reqType}}{Request: req, Input: input, Copy: c.{{ $reqType }} }
+	return {{ $reqType }}{Request: req, Input: input, Copy: c.{{ $reqType }} }
+}
+
+// {{ $reqType }} is the request type for the
+// {{ .ExportedName }} API operation.
+type {{ $reqType}} struct {
+	*aws.Request
+	Input {{ .InputRef.GoType }}
+	Copy func({{ .InputRef.GoType }}) {{ $reqType }}
+}
+
+// Send marshals and sends the {{ .ExportedName }} API request.
+func (r {{ $reqType }}) Send(ctx context.Context) (*{{ $respType }}, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &{{ $respType }}{
+		{{ if .HasOutput -}}
+			{{ .OutputRef.GoTypeElem }}: r.Request.Data.({{ .OutputRef.GoType }}),
+		{{- end }}
+		response: &aws.Response{Request: r.Request},
+	}
+
+	return resp, nil
 }
 
 {{ if .Paginator }}
-// Paginate pages iterates over the pages of a {{ $reqType }} operation,
-// calling the Next method for each page. Using the paginators Next
-// method will depict whether or not there are more pages.
-//
-// Note: This operation can generate multiple requests to a service.
-//
-//    // Example iterating over at most 3 pages of a {{ .ExportedName }} operation.
-//		req := client.{{ $reqType }}(input)		
-//		p := req.Paginate()
-//		for p.Next() {
-//			page := p.CurrentPage()
-//		}
-//		
-//		if err := p.Err(); err != nil {
-//			return err
-//		}
-//
-func (p *{{ $reqType }}) Paginate(opts ...aws.Option) {{ $pagerType }} {
-	return {{ $pagerType }}{
-		Pager: aws.Pager {
-			NewRequest: func(ctx context.Context) (*aws.Request, error) {
-				var inCpy {{ .InputRef.GoType }}
-				if p.Input != nil  {
-					tmp := *p.Input
-					inCpy = &tmp
-				}
+	// New{{ $reqType }}Paginator returns a paginator for {{ .ExportedName }}.
+	// Use Next method to get the next page, and CurrentPage to get the current
+	// response page from the paginator. Next will return false, if there are
+	// no more pages, or an error was encountered.
+	//
+	// Note: This operation can generate multiple requests to a service.
+	//
+	//   // Example iterating over pages.
+	//   req := client.{{ $reqType }}(input)
+	//   p := New{{ $reqType}}Paginator(req)
+	//
+	//   for p.Next() {
+	//       page := p.CurrentPage()
+	//   }
+	//
+	//   if err := p.Err(); err != nil {
+	//       return err
+	//   }
+	//
+	func New{{ .ExportedName }}Paginator(req {{ $reqType }}) {{ $pagerType }} {
+		return {{ $pagerType }}{
+			Pager: aws.Pager {
+				NewRequest: func(ctx context.Context) (*aws.Request, error) {
+					var inCpy {{ .InputRef.GoType }}
+					if req.Input != nil  {
+						tmp := *req.Input
+						inCpy = &tmp
+					}
 
-				req := p.Copy(inCpy)
-				req.ApplyOptions(opts...)
-				req.SetContext(ctx)
-
-				return req.Request, nil
+					newReq := req.Copy(inCpy)
+					newReq.SetContext(ctx)
+					return newReq.Request, nil
+				},
 			},
-		},
+		}
 	}
-}
 
-// {{ $pagerType }} is used to paginate the request. This can be done by
-// calling Next and CurrentPage.
-type {{ $pagerType }} struct {
-	aws.Pager
-}
+	// {{ $pagerType }} is used to paginate the request. This can be done by
+	// calling Next and CurrentPage.
+	type {{ $pagerType }} struct {
+		aws.Pager
+	}
 
-func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
-	return p.Pager.CurrentPage().({{ .OutputRef.GoType }})
-}
-
+	func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
+		return p.Pager.CurrentPage().({{ .OutputRef.GoType }})
+	}
 {{ end }}
+
+// {{ $respType }} is the response type for the
+// {{ .ExportedName }} API operation.
+type {{ $respType }} struct {
+	{{ if .HasOutput -}}
+		{{ .OutputRef.GoType }}
+	{{- end }}
+
+	response *aws.Response
+}
+
+// SDKResponseMetdata returns the response metadata for the
+// {{ .ExportedName }} request.
+func (r * {{ $respType }}) SDKResponseMetdata() *aws.Response {
+	return r.response
+}
 `))
 
 // GoCode returns a string of rendered GoCode for this Operation
@@ -283,7 +312,7 @@ func (o *Operation) Example() string {
 func (o *Operation) ExampleInput() string {
 	if len(o.InputRef.Shape.MemberRefs) == 0 {
 		if strings.Contains(o.InputRef.GoTypeElem(), ".") {
-			o.imports["github.com/aws/aws-sdk-go-v2/service/"+strings.Split(o.InputRef.GoTypeElem(), ".")[0]] = true
+			o.imports[SDKImportRoot+"/service/"+strings.Split(o.InputRef.GoTypeElem(), ".")[0]] = true
 			o.imports["context"] = true
 			return fmt.Sprintf("var params *%s", o.InputRef.GoTypeElem())
 		}

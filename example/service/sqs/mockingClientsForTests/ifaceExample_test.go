@@ -13,7 +13,7 @@ import (
 )
 
 type mockedReceiveMsgs struct {
-	sqsiface.SQSAPI
+	sqsiface.ClientAPI
 	Resp sqs.ReceiveMessageOutput
 }
 

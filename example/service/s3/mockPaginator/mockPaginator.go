@@ -29,7 +29,7 @@ func main() {
 	fmt.Printf("keys for bucket %q,\n%v\n", bucket, keys)
 }
 
-func getKeys(svc s3iface.S3API, bucket string) []string {
+func getKeys(svc s3iface.ClientAPI, bucket string) []string {
 	req := svc.ListObjectsRequest(&s3.ListObjectsInput{
 		Bucket: &bucket,
 	})

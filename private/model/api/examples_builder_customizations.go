@@ -4,7 +4,6 @@ package api
 
 import (
 	"bytes"
-	"fmt"
 )
 
 type wafregionalExamplesBuilder struct {
@@ -18,12 +17,12 @@ func (builder wafregionalExamplesBuilder) Imports(a *API) string {
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/service/waf"
+	"` + SDKImportRoot + `/aws"
+	"` + SDKImportRoot + `/aws/awserr"
+	"` + SDKImportRoot + `/aws/external"
+	"` + SDKImportRoot + `/service/waf"
+	"` + a.ImportPath() + `"
 	`)
 
-	buf.WriteString(fmt.Sprintf("\"%s/%s\"", "github.com/aws/aws-sdk-go-v2/service", a.PackageName()))
 	return buf.String()
 }

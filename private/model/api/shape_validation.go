@@ -120,6 +120,7 @@ func (sv ShapeValidation) GoCode() string {
 	case ShapeValidationNested:
 		switch sv.Ref.Shape.Type {
 		case "map", "list":
+			sv.Ref.API.AddImport("fmt")
 			err = validationGoCodeTmpls.ExecuteTemplate(w, "nestedMapList", sv)
 		default:
 			err = validationGoCodeTmpls.ExecuteTemplate(w, "nestedStruct", sv)

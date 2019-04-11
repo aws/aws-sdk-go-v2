@@ -15,7 +15,7 @@ import (
 // GetMetadata uses the path provided to request information from the EC2
 // instance metdata service. The content will be returned as a string, or
 // error if the request failed.
-func (c *EC2Metadata) GetMetadata(p string) (string, error) {
+func (c *Client) GetMetadata(p string) (string, error) {
 	op := &aws.Operation{
 		Name:       "GetMetadata",
 		HTTPMethod: "GET",
@@ -31,7 +31,7 @@ func (c *EC2Metadata) GetMetadata(p string) (string, error) {
 // GetUserData returns the userdata that was configured for the service. If
 // there is no user-data setup for the EC2 instance a "NotFoundError" error
 // code will be returned.
-func (c *EC2Metadata) GetUserData() (string, error) {
+func (c *Client) GetUserData() (string, error) {
 	op := &aws.Operation{
 		Name:       "GetUserData",
 		HTTPMethod: "GET",
@@ -52,7 +52,7 @@ func (c *EC2Metadata) GetUserData() (string, error) {
 // GetDynamicData uses the path provided to request information from the EC2
 // instance metadata service for dynamic data. The content will be returned
 // as a string, or error if the request failed.
-func (c *EC2Metadata) GetDynamicData(p string) (string, error) {
+func (c *Client) GetDynamicData(p string) (string, error) {
 	op := &aws.Operation{
 		Name:       "GetDynamicData",
 		HTTPMethod: "GET",
@@ -68,7 +68,7 @@ func (c *EC2Metadata) GetDynamicData(p string) (string, error) {
 // GetInstanceIdentityDocument retrieves an identity document describing an
 // instance. Error is returned if the request fails or is unable to parse
 // the response.
-func (c *EC2Metadata) GetInstanceIdentityDocument() (EC2InstanceIdentityDocument, error) {
+func (c *Client) GetInstanceIdentityDocument() (EC2InstanceIdentityDocument, error) {
 	resp, err := c.GetDynamicData("instance-identity/document")
 	if err != nil {
 		return EC2InstanceIdentityDocument{},
@@ -87,7 +87,7 @@ func (c *EC2Metadata) GetInstanceIdentityDocument() (EC2InstanceIdentityDocument
 }
 
 // IAMInfo retrieves IAM info from the metadata API
-func (c *EC2Metadata) IAMInfo() (EC2IAMInfo, error) {
+func (c *Client) IAMInfo() (EC2IAMInfo, error) {
 	resp, err := c.GetMetadata("iam/info")
 	if err != nil {
 		return EC2IAMInfo{},
@@ -112,7 +112,7 @@ func (c *EC2Metadata) IAMInfo() (EC2IAMInfo, error) {
 }
 
 // Region returns the region the instance is running in.
-func (c *EC2Metadata) Region() (string, error) {
+func (c *Client) Region() (string, error) {
 	resp, err := c.GetMetadata("placement/availability-zone")
 	if err != nil {
 		return "", err
@@ -122,10 +122,10 @@ func (c *EC2Metadata) Region() (string, error) {
 	return resp[:len(resp)-1], nil
 }
 
-// Available returns if the application has access to the EC2 Metadata service.
-// Can be used to determine if application is running within an EC2 Instance and
-// the metadata service is available.
-func (c *EC2Metadata) Available() bool {
+// Available returns if the application has access to the EC2 Instance Metadata
+// service.  Can be used to determine if application is running within an EC2
+// Instance and the metadata service is available.
+func (c *Client) Available() bool {
 	if _, err := c.GetMetadata("instance-id"); err != nil {
 		return false
 	}

@@ -65,7 +65,7 @@ func main() {
 	}
 }
 
-func deleteBucket(svc *s3.S3, bucket string) error {
+func deleteBucket(svc *s3.Client, bucket string) error {
 	bucketName := &bucket
 
 	listReq := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName})

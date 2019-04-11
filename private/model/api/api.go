@@ -5,16 +5,17 @@ package api
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"path"
-	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"text/template"
 	"unicode"
 )
+
+// SDKImportRoot is the root import path of the SDK.
+const SDKImportRoot = "github.com/aws/aws-sdk-go-v2"
 
 // An API defines a service API's definition. and logic to serialize the definition.
 type API struct {
@@ -35,7 +36,7 @@ type API struct {
 	// Set to true to ignore service/request init methods (for testing)
 	NoInitMethods bool
 
-	// Set to true to ignore String() and GoString methods (for generated tests)
+	// Set to true to not generate String() methods (e.g for generated tests)
 	NoStringerMethods bool
 
 	// Set to true to not generate API service name constants
@@ -47,15 +48,20 @@ type API struct {
 	// Set to true to not generate struct field accessors
 	NoGenStructFieldAccessors bool
 
+	// Set to true to use the model's ServiceID instead of "Client" for client
+	// struct name. For protocol tests with multiple clients in the same
+	// package.
+	UseServiceIDForClientStruct bool
+
 	// Set to true to not generate (un)marshalers
 	NoGenMarshalers   bool
 	NoGenUnmarshalers bool
 
-	SvcClientImportPath string
+	BaseImportPath string
 
 	initialized bool
 	imports     map[string]bool
-	name        string
+	serviceID   string
 	path        string
 
 	BaseCrosslinkURL string
@@ -73,24 +79,18 @@ type Metadata struct {
 	TargetPrefix        string
 	Protocol            string
 	UID                 string
-	EndpointsID         string
-}
-
-var serviceAliases map[string]string
-
-// Bootstrap intiializes the codegen setup needed before API models are read.
-func Bootstrap() error {
-	b, err := ioutil.ReadFile(filepath.Join("..", "models", "customizations", "service-aliases.json"))
-	if err != nil {
-		return err
-	}
-
-	return json.Unmarshal(b, &serviceAliases)
+	EndpointsID         string `json:"endpointsId"`
+	ServiceID           string
 }
 
 // PackageName name of the API package
 func (a *API) PackageName() string {
-	return strings.ToLower(a.StructName())
+	return strings.ToLower(a.ServiceID())
+}
+
+// ImportPath returns the client's full import path
+func (a *API) ImportPath() string {
+	return path.Join(a.BaseImportPath, a.PackageName())
 }
 
 // InterfacePackageName returns the package name for the interface.
@@ -105,47 +105,12 @@ var stripServiceNamePrefixes = []string{
 
 // StructName returns the struct name for a given API.
 func (a *API) StructName() string {
-	if len(a.name) != 0 {
-		return a.name
+	if a.UseServiceIDForClientStruct {
+		// Allow many protocol test clients to be generated in the same
+		// package.
+		return a.ServiceID()
 	}
-
-	name := a.Metadata.ServiceAbbreviation
-	if len(name) == 0 {
-		name = a.Metadata.ServiceFullName
-	}
-
-	name = strings.TrimSpace(name)
-
-	// Strip out prefix names not reflected in service client symbol names.
-	for _, prefix := range stripServiceNamePrefixes {
-		if strings.HasPrefix(name, prefix) {
-			name = name[len(prefix):]
-			break
-		}
-	}
-
-	// Replace all Non-letter/number values with space
-	runes := []rune(name)
-	for i := 0; i < len(runes); i++ {
-		if r := runes[i]; !(unicode.IsNumber(r) || unicode.IsLetter(r)) {
-			runes[i] = ' '
-		}
-	}
-	name = string(runes)
-
-	// Title case name so its readable as a symbol.
-	name = strings.Title(name)
-
-	// Strip out spaces.
-	name = strings.Replace(name, " ", "", -1)
-
-	// Swap out for alias name if one is defined.
-	if alias, ok := serviceAliases[strings.ToLower(name)]; ok {
-		name = alias
-	}
-
-	a.name = name
-	return a.name
+	return "Client"
 }
 
 // UseInitMethods returns if the service's init method should be rendered.
@@ -155,10 +120,12 @@ func (a *API) UseInitMethods() bool {
 
 // NiceName returns the human friendly API name.
 func (a *API) NiceName() string {
-	if a.Metadata.ServiceAbbreviation != "" {
-		return a.Metadata.ServiceAbbreviation
+	name := a.Metadata.ServiceAbbreviation
+	if len(name) == 0 {
+		name = a.Metadata.ServiceFullName
 	}
-	return a.Metadata.ServiceFullName
+
+	return strings.TrimSpace(name)
 }
 
 // ProtocolPackage returns the package name of the protocol this API uses.
@@ -254,9 +221,7 @@ func (a *API) ShapeEnumList() []*Shape {
 
 // resetImports resets the import map to default values.
 func (a *API) resetImports() {
-	a.imports = map[string]bool{
-		"github.com/aws/aws-sdk-go-v2/aws": true,
-	}
+	a.imports = map[string]bool{}
 }
 
 // importsGoCode returns the generated Go import code.
@@ -298,8 +263,9 @@ var tplAPI = template.Must(template.New("api").Parse(`
 {{ end }}
 
 {{ range $_, $s := .ShapeList }}
-{{ if and $s.IsInternal (eq $s.Type "structure") }}{{ $s.GoCode }}{{ end }}
-
+	{{- if and (and (not $s.UsedAsOutput) (not $s.UsedAsInput)) (eq $s.Type "structure") }}
+		{{ $s.GoCode }}
+	{{- end }}
 {{ end }}
 
 {{ range $_, $s := .ShapeList }}
@@ -308,17 +274,35 @@ var tplAPI = template.Must(template.New("api").Parse(`
 {{ end }}
 `))
 
+// AddImport adds the import path to the generated file's import.
+func (a *API) AddImport(v string) error {
+	a.imports[v] = true
+	return nil
+}
+
+// AddSDKImport adds a SDK package import to the generated file's import.
+func (a *API) AddSDKImport(v ...string) error {
+	e := make([]string, 0, 5)
+	e = append(e, SDKImportRoot)
+	e = append(e, v...)
+
+	a.imports[path.Join(e...)] = true
+	return nil
+}
+
 // APIGoCode renders the API in Go code. Returning it as a string
 func (a *API) APIGoCode() string {
 	a.resetImports()
-	a.imports["github.com/aws/aws-sdk-go-v2/internal/awsutil"] = true
-	a.imports["context"] = true
+	a.AddSDKImport("aws")
+	a.AddSDKImport("internal/awsutil")
+	a.AddImport("context")
+
 	if a.OperationHasOutputPlaceholder() {
-		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol/"+a.ProtocolPackage()] = true
-		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true
+		a.AddSDKImport("private/protocol", a.ProtocolPackage())
+		a.AddSDKImport("private/protocol")
 	}
 	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
-		a.imports["github.com/aws/aws-sdk-go-v2/private/protocol"] = true
+		a.AddSDKImport("private/protocol")
 	}
 
 	var buf bytes.Buffer
@@ -328,6 +312,79 @@ func (a *API) APIGoCode() string {
 	}
 
 	code := a.importsGoCode() + strings.TrimSpace(buf.String())
+	return code
+}
+
+// APIOperationGoCode renders the Operation's in Go code. Returning it as a
+// string.
+func (a *API) APIOperationGoCode(op *Operation) string {
+	a.resetImports()
+	a.AddSDKImport("aws")
+	a.AddSDKImport("internal/awsutil")
+	a.AddImport("context")
+
+	if op.OutputRef.Shape.Placeholder {
+		a.AddSDKImport("private/protocol", a.ProtocolPackage())
+		a.AddSDKImport("private/protocol")
+	}
+	if !a.NoGenMarshalers || !a.NoGenUnmarshalers {
+		a.AddSDKImport("private/protocol")
+	}
+
+	// Need to generate code before imports are generated.
+	code := op.GoCode()
+	return a.importsGoCode() + code
+}
+
+// APIEnumsGoCode renders the API's enumerations in Go code. Returning them as
+// a string.
+func (a *API) APIEnumsGoCode() string {
+	a.resetImports()
+
+	var code strings.Builder
+	code.WriteString(a.importsGoCode())
+
+	for _, s := range a.ShapeEnumList() {
+		code.WriteString(s.GoCode())
+		fmt.Fprintln(&code)
+	}
+
+	return code.String()
+}
+
+// A tplAPIShapes is the top level template for the API Shapes.
+var tplAPIShapes = template.Must(template.New("api").Parse(`
+{{ range $_, $s := .ShapeList }}
+	{{ if and (and (not $s.UsedAsInput) (not $s.UsedAsOutput)) (eq $s.Type "structure") -}}
+		{{ $s.GoCode }}
+	{{- end }}
+{{ end }}
+`))
+
+// APIParamShapesGoCode renders the API's shape types in Go code. Returning
+// them as a string.
+func (a *API) APIParamShapesGoCode() string {
+	a.resetImports()
+	a.AddSDKImport("aws")
+	a.AddSDKImport("internal/awsutil")
+
+	if (!a.NoGenMarshalers || !a.NoGenUnmarshalers) && (a.hasNonIOShapes()) {
+		a.AddSDKImport("private/protocol")
+	}
+
+	var buf bytes.Buffer
+	err := tplAPIShapes.Execute(&buf, a)
+	if err != nil {
+		panic(err)
+	}
+
+	// TODO this is hacky, imports should only be added when needed.
+	importStubs := `
+	var _ aws.Config
+	var _ = awsutil.Prettify
+	`
+
+	code := a.importsGoCode() + importStubs + strings.TrimSpace(buf.String())
 	return code
 }
 
@@ -355,14 +412,17 @@ func GetCrosslinkURL(baseURL, uid string, params ...string) string {
 		return ""
 	}
 
-	if _, ok := noCrossLinkServices[strings.ToLower(serviceIDFromUID(uid))]; ok {
+	id := crosslinkServiceIDFromUID(uid)
+	if _, ok := noCrossLinkServices[strings.ToLower(id)]; ok {
 		return ""
 	}
 
 	return strings.Join(append([]string{baseURL, "goto", "WebAPI", uid}, params...), "/")
 }
 
-func serviceIDFromUID(uid string) string {
+// crosslinkServiceIDFromUID will parse the service id from the uid and return
+// the service id that was found.
+func crosslinkServiceIDFromUID(uid string) string {
 	found := 0
 	i := len(uid) - 1
 	for ; i >= 0; i-- {
@@ -378,9 +438,62 @@ func serviceIDFromUID(uid string) string {
 	return uid[0:i]
 }
 
-// APIName returns the API's service name.
-func (a *API) APIName() string {
-	return a.name
+var serviceIDRegex = regexp.MustCompile("[^a-zA-Z0-9 ]+")
+var prefixDigitRegex = regexp.MustCompile("^[0-9]+")
+
+// RawServiceID will return a unique identifier specific to a service.
+func (a *API) RawServiceID() string {
+	if len(a.Metadata.ServiceID) > 0 {
+		return a.Metadata.ServiceID
+	}
+
+	name := a.NiceName()
+
+	name = strings.Replace(name, "Amazon", "", -1)
+	name = strings.Replace(name, "AWS", "", -1)
+	name = serviceIDRegex.ReplaceAllString(name, "")
+	name = prefixDigitRegex.ReplaceAllString(name, "")
+	name = strings.TrimSpace(name)
+
+	return name
+}
+
+// ServiceID returns the symbolized service identifier for the API model.
+func (a *API) ServiceID() string {
+	if len(a.serviceID) != 0 {
+		return a.serviceID
+	}
+
+	name := a.RawServiceID()
+	if len(name) == 0 {
+		name = a.NiceName()
+	}
+
+	// Strip out prefix names not reflected in service client symbol names.
+	for _, prefix := range stripServiceNamePrefixes {
+		if strings.HasPrefix(name, prefix) {
+			name = name[len(prefix):]
+			break
+		}
+	}
+
+	// Replace all Non-letter/number values with space
+	runes := []rune(name)
+	for i := 0; i < len(runes); i++ {
+		if r := runes[i]; !(unicode.IsNumber(r) || unicode.IsLetter(r)) {
+			runes[i] = ' '
+		}
+	}
+	name = string(runes)
+
+	// Title case name so its readable as a symbol.
+	name = strings.Title(name)
+
+	// Strip out spaces.
+	name = strings.Replace(name, " ", "", -1)
+
+	a.serviceID = name
+	return a.serviceID
 }
 
 var tplServiceDoc = template.Must(template.New("service docs").Funcs(template.FuncMap{
@@ -388,7 +501,7 @@ var tplServiceDoc = template.Must(template.New("service docs").Funcs(template.Fu
 }).
 	Parse(`
 // Package {{ .PackageName }} provides the client and types for making API
-// requests to {{ .Metadata.ServiceFullName }}.
+// requests to {{ .NiceName }}.
 {{ if .Documentation -}}
 //
 {{ .Documentation }}
@@ -404,7 +517,7 @@ var tplServiceDoc = template.Must(template.New("service docs").Funcs(template.Fu
 //
 // Using the Client
 //
-// To {{ .Metadata.ServiceFullName }} with the SDK use the New function to create
+// To use {{ .NiceName }} with the SDK use the New function to create
 // a new service client. With that client you can make API requests to the service.
 // These clients are safe to use concurrently.
 //
@@ -414,39 +527,49 @@ var tplServiceDoc = template.Must(template.New("service docs").Funcs(template.Fu
 // See aws.Config documentation for more information on configuring SDK clients.
 // https://docs.aws.amazon.com/sdk-for-go/api/aws/#Config
 //
-// See the {{ .Metadata.ServiceFullName }} client {{ .StructName }} for more
-// information on creating client for this service.
+// See the {{ .NiceName }} client for more information on 
+// creating client for this service.
 // https://docs.aws.amazon.com/sdk-for-go/api/service/{{ .PackageName }}/#New
 `))
 
 // A tplService defines the template for the service generated code.
 var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 	"ServiceNameValue": func(a *API) string {
+		return fmt.Sprintf("%q", a.NiceName())
+	},
+	"ServiceNameConst": func(a *API) string {
 		if a.NoConstServiceNames {
-			return fmt.Sprintf("%q", a.Metadata.EndpointPrefix)
+			return fmt.Sprintf("%q", a.NiceName())
 		}
 		return "ServiceName"
 	},
-	"EndpointsIDConstValue": func(a *API) string {
+	"ServiceIDValue": func(a *API) string {
+		return fmt.Sprintf("%q", a.ServiceID())
+	},
+	"ServiceIDConst": func(a *API) string {
 		if a.NoConstServiceNames {
-			return fmt.Sprintf("%q", a.Metadata.EndpointPrefix)
+			return fmt.Sprintf("%q", a.ServiceID())
 		}
-		if a.Metadata.EndpointPrefix == a.Metadata.EndpointsID {
-			return "ServiceName"
-		}
-		return fmt.Sprintf("%q", a.Metadata.EndpointsID)
+		return "ServiceID"
 	},
 	"EndpointsIDValue": func(a *API) string {
+		return fmt.Sprintf("%q", a.Metadata.EndpointsID)
+	},
+	"EndpointsIDConst": func(a *API) string {
 		if a.NoConstServiceNames {
-			return fmt.Sprintf("%q", a.Metadata.EndpointPrefix)
+			return fmt.Sprintf("%q", a.Metadata.EndpointsID)
 		}
-
 		return "EndpointsID"
 	},
-	"ServiceSpecificConfig": func(svcName string) string {
-		// TODO need unique way to refer to service.
-		cfgs := serviceSpecificConfigs[svcName]
-		if len(cfgs) == 0 {
+	"SigningName": func(a *API) string {
+		if v := a.Metadata.SigningName; len(v) != 0 {
+			return v
+		}
+		return a.Metadata.EndpointsID
+	},
+	"ServiceSpecificConfig": func(a *API) string {
+		cfgs, ok := serviceSpecificConfigs[a.ServiceID()]
+		if !ok || len(cfgs) == 0 {
 			return ""
 		}
 
@@ -454,14 +577,14 @@ var tplService = template.Must(template.New("service").Funcs(template.FuncMap{
 	},
 }).Parse(`
 // {{ .StructName }} provides the API operation methods for making requests to
-// {{ .Metadata.ServiceFullName }}. See this package's package overview docs
+// {{ .NiceName }}. See this package's package overview docs
 // for details on the service.
 //
-// {{ .StructName }} methods are safe to use concurrently. It is not safe to
+// The client's methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type {{ .StructName }} struct {
 	*aws.Client
-	{{ ServiceSpecificConfig .StructName -}}
+	{{ ServiceSpecificConfig . -}}
 }
 
 {{ if .UseInitMethods -}}
@@ -472,65 +595,65 @@ var initClient func(*{{ .StructName }})
 var initRequest func(*{{ .StructName }}, *aws.Request)
 {{ end }}
 
-
 {{ if not .NoConstServiceNames -}}
-// Service information constants
 const (
-	ServiceName = "{{ .Metadata.EndpointPrefix }}" // Service endpoint prefix API calls made to.
-	EndpointsID = {{ EndpointsIDConstValue . }} // Service ID for Regions and Endpoints metadata.
+	ServiceName = {{ ServiceNameValue . }} // Service's name
+	ServiceID   = {{ ServiceIDValue . }}   // Service's identifier
+	EndpointsID = {{ EndpointsIDValue . }} // Service's Endpoint identifier
 )
-{{- end }}
+{{ end }}
 
-// New creates a new instance of the {{ .StructName }} client with a config.
+// New creates a new instance of the client from the provided Config.
 //
 // Example:
-//     // Create a {{ .StructName }} client from just a config.
+//     // Create a client from just a config.
 //     svc := {{ .PackageName }}.New(myConfig)
 func New(config aws.Config) *{{ .StructName }} {
-	var signingName string
-	{{- if .Metadata.SigningName }}
-		signingName = "{{ .Metadata.SigningName }}"
-	{{- end }}
-	signingRegion := config.Region
-
     svc := &{{ .StructName }}{
     	Client: aws.NewClient(
     		config,
     		aws.Metadata{
-				ServiceName: {{ ServiceNameValue . }},
-				SigningName: signingName,
-				SigningRegion: signingRegion,
-				APIVersion:   "{{ .Metadata.APIVersion }}",
-				{{ if .Metadata.JSONVersion -}}
-					JSONVersion:  "{{ .Metadata.JSONVersion }}",
-				{{- end }}
-				{{ if .Metadata.TargetPrefix -}}
-					TargetPrefix: "{{ .Metadata.TargetPrefix }}",
+				ServiceName:   {{ ServiceNameConst . }},
+				ServiceID:     {{ ServiceIDConst . }},
+				EndpointsID:   {{ EndpointsIDConst . }},
+				SigningName:   "{{ SigningName . }}",
+				SigningRegion: config.Region,
+				APIVersion:    "{{ .Metadata.APIVersion }}",
+				{{ if eq .Metadata.Protocol "json" -}}
+					{{ if .Metadata.JSONVersion -}}
+						JSONVersion:  "{{ .Metadata.JSONVersion }}",
+					{{- end }}
+					{{ if .Metadata.TargetPrefix -}}
+						TargetPrefix: "{{ .Metadata.TargetPrefix }}",
+					{{- end }}
 				{{- end }}
     		},
     	),
     }
 
 	// Handlers
-	svc.Handlers.Sign.PushBackNamed({{if eq .Metadata.SignatureVersion "v2"}}v2{{else}}v4{{end}}.SignRequestHandler)
 	{{- if eq .Metadata.SignatureVersion "v2" }}
+		svc.Handlers.Sign.PushBackNamed(v2.SignRequestHandler)
 		svc.Handlers.Sign.PushBackNamed(defaults.BuildContentLengthHandler)
+	{{- else }}
+		svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
 	{{- end }}
 	svc.Handlers.Build.PushBackNamed({{ .ProtocolPackage }}.BuildHandler)
 	svc.Handlers.Unmarshal.PushBackNamed({{ .ProtocolPackage }}.UnmarshalHandler)
 	svc.Handlers.UnmarshalMeta.PushBackNamed({{ .ProtocolPackage }}.UnmarshalMetaHandler)
 	svc.Handlers.UnmarshalError.PushBackNamed({{ .ProtocolPackage }}.UnmarshalErrorHandler)
 
-	{{ if .UseInitMethods }}// Run custom client initialization if present
-	if initClient != nil {
-		initClient(svc)
-	}
-	{{ end  }}
+	{{ if .UseInitMethods -}}
+		// Run custom client initialization if present
+		if initClient != nil {
+			initClient(svc)
+		}
+	{{ end }}
 
 	return svc
 }
 
-// newRequest creates a new request for a {{ .StructName }} operation and runs any
+// newRequest creates a new request for a client operation and runs any
 // custom request initialization.
 func (c *{{ .StructName }}) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
@@ -562,14 +685,14 @@ func (a *API) ServicePackageDoc() string {
 // ServiceGoCode renders service go code. Returning it as a string.
 func (a *API) ServiceGoCode() string {
 	a.resetImports()
-	a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
+	a.AddSDKImport("aws")
 	if a.Metadata.SignatureVersion == "v2" {
-		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v2"] = true
-		a.imports["github.com/aws/aws-sdk-go-v2/aws/defaults"] = true
+		a.AddSDKImport("aws/signer/v2")
+		a.AddSDKImport("aws/defaults")
 	} else {
-		a.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v4"] = true
+		a.AddSDKImport("aws/signer/v4")
 	}
-	a.imports["github.com/aws/aws-sdk-go-v2/private/protocol/"+a.ProtocolPackage()] = true
+	a.AddSDKImport("private/protocol", a.ProtocolPackage())
 
 	var buf bytes.Buffer
 	err := tplService.Execute(&buf, a)
@@ -597,8 +720,8 @@ func (a *API) ExampleGoCode() string {
 		"bytes",
 		"fmt",
 		"time",
-		"github.com/aws/aws-sdk-go-v2/aws",
-		path.Join(a.SvcClientImportPath, a.PackageName()),
+		SDKImportRoot+"/aws",
+		a.ImportPath(),
 	)
 	for k := range imports {
 		code += fmt.Sprintf("%q\n", k)
@@ -612,16 +735,15 @@ func (a *API) ExampleGoCode() string {
 // A tplInterface defines the template for the service interface type.
 var tplInterface = template.Must(template.New("interface").Parse(`
 // {{ .StructName }}API provides an interface to enable mocking the
-// {{ .PackageName }}.{{ .StructName }} service client's API operation,
-// paginators, and waiters. This make unit testing your code that calls out
-// to the SDK's service client's calls easier.
+// {{ .PackageName }}.{{ .StructName }} methods. This make unit testing your code that
+// calls out to the SDK's service client's calls easier.
 //
 // The best way to use this interface is so the SDK's service client's calls
 // can be stubbed out for unit testing your code with the SDK without needing
 // to inject custom request handlers into the SDK's request pipeline.
 //
 //    // myFunc uses an SDK service client to make a request to
-//    // {{.Metadata.ServiceFullName}}. {{ $opts := .OperationList }}{{ $opt := index $opts 0 }}
+//    // {{ .NiceName }}. {{ $opts := .OperationList }}{{ $opt := index $opts 0 }}
 //    func myFunc(svc {{ .InterfacePackageName }}.{{ .StructName }}API) bool {
 //        // Make svc.{{ $opt.ExportedName }} request
 //    }
@@ -641,7 +763,7 @@ var tplInterface = template.Must(template.New("interface").Parse(`
 //
 //    // Define a mock struct to be used in your unit tests of myFunc.
 //    type mock{{ .StructName }}Client struct {
-//        {{ .InterfacePackageName }}.{{ .StructName }}API
+//        {{ .InterfacePackageName }}.{{ .StructName }}PI
 //    }
 //    func (m *mock{{ .StructName }}Client) {{ $opt.ExportedName }}(input {{ $opt.InputRef.GoTypeWithPkgName }}) ({{ $opt.OutputRef.GoTypeWithPkgName }}, error) {
 //        // mock response/functionality
@@ -677,13 +799,10 @@ var _ {{ .StructName }}API = (*{{ .PackageName }}.{{ .StructName }})(nil)
 // package than the service API's package.
 func (a *API) InterfaceGoCode() string {
 	a.resetImports()
-	a.imports = map[string]bool{
-		path.Join(a.SvcClientImportPath, a.PackageName()): true,
+	if len(a.Waiters) != 0 {
+		a.AddSDKImport("aws")
 	}
-
-	if len(a.Waiters) > 0 {
-		a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
-	}
+	a.AddImport(a.ImportPath())
 
 	var buf bytes.Buffer
 	err := tplInterface.Execute(&buf, a)
@@ -807,7 +926,7 @@ func (a *API) APIErrorsGoCode() string {
 // removeOperation removes an operation, its input/output shapes, as well as
 // any references/shapes that are unique to this operation.
 func (a *API) removeOperation(name string) {
-	fmt.Println("removing operation,", name)
+	debugLogger.Logln("removing operation,", name)
 	op := a.Operations[name]
 
 	delete(a.Operations, name)
@@ -821,7 +940,7 @@ func (a *API) removeOperation(name string) {
 // shapes. Will also remove member reference targeted shapes if those shapes do
 // not have any additional references.
 func (a *API) removeShape(s *Shape) {
-	fmt.Println("removing shape,", s.ShapeName)
+	debugLogger.Logln("removing shape,", s.ShapeName)
 
 	delete(a.Shapes, s.ShapeName)
 
@@ -851,4 +970,16 @@ func (a *API) removeShapeRef(ref *ShapeRef) {
 	if len(ref.Shape.refs) == 0 {
 		a.removeShape(ref.Shape)
 	}
+}
+
+func (a *API) hasNonIOShapes() bool {
+	for _, s := range a.Shapes {
+		if s.IsError || s.Type != "structure" {
+			continue
+		}
+		if !(s.UsedAsInput || s.UsedAsOutput) {
+			return true
+		}
+	}
+	return false
 }

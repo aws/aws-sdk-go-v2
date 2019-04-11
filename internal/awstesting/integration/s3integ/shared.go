@@ -20,7 +20,7 @@ func GenerateBucketName() string {
 }
 
 // SetupTest returns a test bucket created for the integration tests.
-func SetupTest(ctx context.Context, svc *s3.S3, bucketName string) (err error) {
+func SetupTest(ctx context.Context, svc *s3.Client, bucketName string) (err error) {
 	fmt.Println("Setup: Creating test bucket,", bucketName)
 	_, err = svc.CreateBucketRequest(&s3.CreateBucketInput{Bucket: &bucketName}).Send(ctx)
 	if err != nil {
@@ -39,7 +39,7 @@ func SetupTest(ctx context.Context, svc *s3.S3, bucketName string) (err error) {
 
 // CleanupTest deletes the contents of a S3 bucket, before deleting the bucket
 // it self.
-func CleanupTest(ctx context.Context, svc *s3.S3, bucketName string) error {
+func CleanupTest(ctx context.Context, svc *s3.Client, bucketName string) error {
 	errs := []error{}
 
 	fmt.Println("TearDown: Deleting objects from test bucket,", bucketName)

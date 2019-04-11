@@ -67,10 +67,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/eks"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
-	"github.com/aws/aws-sdk-go-v2/service/elb"
-	"github.com/aws/aws-sdk-go-v2/service/elbv2"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
 	"github.com/aws/aws-sdk-go-v2/service/fms"
@@ -133,7 +133,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/quicksight"
 	"github.com/aws/aws-sdk-go-v2/service/ram"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
-	"github.com/aws/aws-sdk-go-v2/service/rdsdataservice"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata"
 	"github.com/aws/aws-sdk-go-v2/service/redshift"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups"
@@ -166,7 +166,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/support"
 	"github.com/aws/aws-sdk-go-v2/service/swf"
 	"github.com/aws/aws-sdk-go-v2/service/textract"
-	"github.com/aws/aws-sdk-go-v2/service/transcribeservice"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe"
 	"github.com/aws/aws-sdk-go-v2/service/transfer"
 	"github.com/aws/aws-sdk-go-v2/service/translate"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
@@ -253,10 +253,10 @@ func createServices(cfg aws.Config) []service {
 		{name: "eks", value: reflect.ValueOf(eks.New(cfg))},
 		{name: "elasticache", value: reflect.ValueOf(elasticache.New(cfg))},
 		{name: "elasticbeanstalk", value: reflect.ValueOf(elasticbeanstalk.New(cfg))},
+		{name: "elasticloadbalancing", value: reflect.ValueOf(elasticloadbalancing.New(cfg))},
+		{name: "elasticloadbalancingv2", value: reflect.ValueOf(elasticloadbalancingv2.New(cfg))},
 		{name: "elasticsearchservice", value: reflect.ValueOf(elasticsearchservice.New(cfg))},
 		{name: "elastictranscoder", value: reflect.ValueOf(elastictranscoder.New(cfg))},
-		{name: "elb", value: reflect.ValueOf(elb.New(cfg))},
-		{name: "elbv2", value: reflect.ValueOf(elbv2.New(cfg))},
 		{name: "emr", value: reflect.ValueOf(emr.New(cfg))},
 		{name: "firehose", value: reflect.ValueOf(firehose.New(cfg))},
 		{name: "fms", value: reflect.ValueOf(fms.New(cfg))},
@@ -319,7 +319,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "quicksight", value: reflect.ValueOf(quicksight.New(cfg))},
 		{name: "ram", value: reflect.ValueOf(ram.New(cfg))},
 		{name: "rds", value: reflect.ValueOf(rds.New(cfg))},
-		{name: "rdsdataservice", value: reflect.ValueOf(rdsdataservice.New(cfg))},
+		{name: "rdsdata", value: reflect.ValueOf(rdsdata.New(cfg))},
 		{name: "redshift", value: reflect.ValueOf(redshift.New(cfg))},
 		{name: "rekognition", value: reflect.ValueOf(rekognition.New(cfg))},
 		{name: "resourcegroups", value: reflect.ValueOf(resourcegroups.New(cfg))},
@@ -352,7 +352,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "support", value: reflect.ValueOf(support.New(cfg))},
 		{name: "swf", value: reflect.ValueOf(swf.New(cfg))},
 		{name: "textract", value: reflect.ValueOf(textract.New(cfg))},
-		{name: "transcribeservice", value: reflect.ValueOf(transcribeservice.New(cfg))},
+		{name: "transcribe", value: reflect.ValueOf(transcribe.New(cfg))},
 		{name: "transfer", value: reflect.ValueOf(transfer.New(cfg))},
 		{name: "translate", value: reflect.ValueOf(translate.New(cfg))},
 		{name: "waf", value: reflect.ValueOf(waf.New(cfg))},

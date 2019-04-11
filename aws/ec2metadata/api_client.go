@@ -1,5 +1,5 @@
 // Package ec2metadata provides the client for making API calls to the
-// EC2 Metadata service.
+// EC2 Instance Metadata service.
 //
 // This package's client can be disabled completely by setting the environment
 // variable "AWS_EC2_METADATA_DISABLED=true". This environment variable set to
@@ -20,27 +20,27 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 )
 
-// ServiceName is the name of the service.
-const ServiceName = "ec2metadata"
 const disableServiceEnvVar = "AWS_EC2_METADATA_DISABLED"
 
-// A EC2Metadata is an EC2 Metadata service Client.
-type EC2Metadata struct {
+// A Client is an EC2 Instance Metadata service Client.
+type Client struct {
 	*aws.Client
 }
 
-// New creates a new instance of the EC2Metadata client with a Config.
+// New creates a new instance of the Client client with a Config.
 // This client is safe to use across multiple goroutines.
 //
 // Example:
-//     // Create a EC2Metadata client from just a config.
+//     // Create a Client client from just a config.
 //     svc := ec2metadata.New(cfg)
-func New(config aws.Config) *EC2Metadata {
-	svc := &EC2Metadata{
+func New(config aws.Config) *Client {
+	svc := &Client{
 		Client: aws.NewClient(
 			config,
 			aws.Metadata{
-				ServiceName: ServiceName,
+				ServiceName: "EC2 Instance Metadata",
+				ServiceID:   "EC2InstanceMetadata",
+				EndpointsID:  "ec2metadata",
 				APIVersion:  "latest",
 			},
 		),
@@ -51,9 +51,9 @@ func New(config aws.Config) *EC2Metadata {
 	svc.Handlers.Validate.Clear()
 	svc.Handlers.Validate.PushBack(validateEndpointHandler)
 
-	// Disable the EC2 Metadata service if the environment variable is set.
-	// This shortcirctes the service's functionality to always fail to send
-	// requests.
+	// Disable the EC2 Instance Metadata service if the environment variable is
+	// set. This shortcirctes the service's functionality to always fail to
+	// send requests.
 	if strings.ToLower(os.Getenv(disableServiceEnvVar)) == "true" {
 		svc.Handlers.Send.SwapNamed(aws.NamedHandler{
 			Name: defaults.SendHandler.Name,
@@ -103,7 +103,7 @@ func unmarshalError(r *aws.Request) {
 
 	// Response body format is not consistent between metadata endpoints.
 	// Grab the error message as a string and include that as the source error
-	r.Error = awserr.New("EC2MetadataError", "failed to make EC2Metadata request", errors.New(b.String()))
+	r.Error = awserr.New("EC2MetadataError", "failed to make Client request", errors.New(b.String()))
 }
 
 func validateEndpointHandler(r *aws.Request) {

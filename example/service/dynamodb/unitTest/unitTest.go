@@ -17,7 +17,7 @@ import (
 //	svc := dynamodb.DynamoDB(sess)
 //	getter.DynamoDB = dynamodbiface.DynamoDBAPI(svc)
 type ItemGetter struct {
-	DynamoDB dynamodbiface.DynamoDBAPI
+	DynamoDB dynamodbiface.ClientAPI
 }
 
 // Get a value from a DynamoDB table containing entries like:
