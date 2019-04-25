@@ -1,17 +1,17 @@
 {
   "version": "2.0",
-  "service": "<p>his section provides documentation for the AWS RoboMaker API operations.</p>",
+  "service": "<p>This section provides documentation for the AWS RoboMaker API operations.</p>",
   "operations": {
     "BatchDescribeSimulationJob": "<p>Describes one or more simulation jobs.</p>",
     "CancelSimulationJob": "<p>Cancels the specified simulation job.</p>",
-    "CreateDeploymentJob": "<p>Creates a deployment job.</p>",
+    "CreateDeploymentJob": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>",
     "CreateFleet": "<p>Creates a fleet, a logical group of robots running the same robot application.</p>",
     "CreateRobot": "<p>Creates a robot.</p>",
     "CreateRobotApplication": "<p>Creates a robot application. </p>",
     "CreateRobotApplicationVersion": "<p>Creates a version of a robot application.</p>",
     "CreateSimulationApplication": "<p>Creates a simulation application.</p>",
     "CreateSimulationApplicationVersion": "<p>Creates a simulation application with a specific revision id.</p>",
-    "CreateSimulationJob": "<p>Creates a simulation job.</p>",
+    "CreateSimulationJob": "<p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>",
     "DeleteFleet": "<p>Deletes a fleet.</p>",
     "DeleteRobot": "<p>Deletes a robot.</p>",
     "DeleteRobotApplication": "<p>Deletes a robot application.</p>",
@@ -23,15 +23,18 @@
     "DescribeRobotApplication": "<p>Describes a robot application.</p>",
     "DescribeSimulationApplication": "<p>Describes a simulation application.</p>",
     "DescribeSimulationJob": "<p>Describes a simulation job.</p>",
-    "ListDeploymentJobs": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.</p>",
-    "ListFleets": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.</p>",
+    "ListDeploymentJobs": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p> <note> <p> </p> </note>",
+    "ListFleets": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. </p>",
     "ListRobotApplications": "<p>Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.</p>",
     "ListRobots": "<p>Returns a list of robots. You can optionally provide filters to retrieve specific robots.</p>",
-    "ListSimulationApplications": "<p>Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.</p>",
-    "ListSimulationJobs": "<p>Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.</p>",
+    "ListSimulationApplications": "<p>Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications. </p>",
+    "ListSimulationJobs": "<p>Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. </p>",
+    "ListTagsForResource": "<p>Lists all tags on a AWS RoboMaker resource.</p>",
     "RegisterRobot": "<p>Registers a robot with a fleet.</p>",
     "RestartSimulationJob": "<p>Restarts a running simulation job.</p>",
     "SyncDeploymentJob": "<p>Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.</p>",
+    "TagResource": "<p>Adds or edits tags for a AWS RoboMaker resource.</p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings. </p> <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>",
+    "UntagResource": "<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html\"> <code>TagResource</code> </a>. </p>",
     "UpdateRobotApplication": "<p>Updates a robot application.</p>",
     "UpdateSimulationApplication": "<p>Updates a simulation application.</p>"
   },
@@ -68,7 +71,7 @@
         "DeleteRobotApplicationRequest$application": "<p>The Amazon Resource Name (ARN) of the the robot application.</p>",
         "DeleteRobotRequest$robot": "<p>The Amazon Resource Name (ARN) of the robot.</p>",
         "DeleteSimulationApplicationRequest$application": "<p>The application information for the simulation application to delete.</p>",
-        "DeploymentApplicationConfig$application": "<p>The application.</p>",
+        "DeploymentApplicationConfig$application": "<p>The Amazon Resource Name (ARN) of the robot application.</p>",
         "DeploymentJob$arn": "<p>The Amazon Resource Name (ARN) of the deployment job.</p>",
         "DeploymentJob$fleet": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
         "DeregisterRobotRequest$fleet": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
@@ -93,6 +96,7 @@
         "DescribeSimulationJobResponse$arn": "<p>The Amazon Resource Name (ARN) of the simulation job.</p>",
         "Fleet$arn": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
         "Fleet$lastDeploymentJob": "<p>The Amazon Resource Name (ARN) of the last deployment job.</p>",
+        "ListTagsForResourceRequest$resourceArn": "<p>The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.</p>",
         "RegisterRobotRequest$fleet": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
         "RegisterRobotRequest$robot": "<p>The Amazon Resource Name (ARN) of the robot.</p>",
         "RegisterRobotResponse$fleet": "<p>The Amazon Resource Name (ARN) of the fleet that the robot will join.</p>",
@@ -111,6 +115,8 @@
         "SyncDeploymentJobRequest$fleet": "<p>The target fleet for the synchronization.</p>",
         "SyncDeploymentJobResponse$arn": "<p>The Amazon Resource Name (ARN) of the synchronization request.</p>",
         "SyncDeploymentJobResponse$fleet": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
+        "TagResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are tagging.</p>",
+        "UntagResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.</p>",
         "UpdateRobotApplicationRequest$application": "<p>The application information for the robot application.</p>",
         "UpdateRobotApplicationResponse$arn": "<p>The Amazon Resource Name (ARN) of the updated robot application.</p>",
         "UpdateSimulationApplicationRequest$application": "<p>The application information for the simulation application.</p>",
@@ -162,8 +168,17 @@
         "SyncDeploymentJobRequest$clientRequestToken": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
       }
     },
+    "Command": {
+      "base": null,
+      "refs": {
+        "DeploymentLaunchConfig$packageName": "<p>The package name.</p>",
+        "DeploymentLaunchConfig$launchFile": "<p>The launch file name.</p>",
+        "LaunchConfig$packageName": "<p>The package name.</p>",
+        "LaunchConfig$launchFile": "<p>The launch file name.</p>"
+      }
+    },
     "ConcurrentDeploymentException": {
-      "base": "<p/>",
+      "base": "<p>The failure percentage threshold percentage was met.</p>",
       "refs": {
       }
     },
@@ -343,11 +358,11 @@
     "DeploymentJobErrorCode": {
       "base": null,
       "refs": {
-        "CreateDeploymentJobResponse$failureCode": "<p>The failure code of the deployment job if it failed.</p>",
+        "CreateDeploymentJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>BadPermissionError</dt> <dd> <p>AWS Greengrass requires a service-level role permission to access other services. The role must include the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor\"> <code>AWSGreengrassResourceAccessRolePolicy</code> managed policy</a>. </p> </dd> <dt>ExtractingBundleFailure</dt> <dd> <p>The robot application could not be extracted from the bundle.</p> </dd> <dt>FailureThresholdBreached</dt> <dd> <p>The percentage of robots that could not be updated exceeded the percentage set for the deployment.</p> </dd> <dt>GreengrassDeploymentFailed</dt> <dd> <p>The robot application could not be deployed to the robot.</p> </dd> <dt>GreengrassGroupVersionDoesNotExist</dt> <dd> <p>The AWS Greengrass group or version associated with a robot is missing.</p> </dd> <dt>InternalServerError</dt> <dd> <p>An internal error has occurred. Retry your request, but if the problem persists, contact us with details.</p> </dd> <dt>MissingRobotApplicationArchitecture</dt> <dd> <p>The robot application does not have a source that matches the architecture of the robot.</p> </dd> <dt>MissingRobotDeploymentResource</dt> <dd> <p>One or more of the resources specified for the robot application are missing. For example, does the robot application have the correct launch package and launch file?</p> </dd> <dt>PostLaunchFileFailure</dt> <dd> <p>The post-launch script failed.</p> </dd> <dt>PreLaunchFileFailure</dt> <dd> <p>The pre-launch script failed.</p> </dd> <dt>ResourceNotFound</dt> <dd> <p>One or more deployment resources are missing. For example, do robot application source bundles still exist? </p> </dd> <dt>RobotDeploymentNoResponse</dt> <dd> <p>There is no response from the robot. It might not be powered on or connected to the internet.</p> </dd> </dl>",
         "DeploymentJob$failureCode": "<p>The deployment job failure code.</p>",
         "DescribeDeploymentJobResponse$failureCode": "<p>The deployment job failure code.</p>",
         "RobotDeployment$failureCode": "<p>The robot deployment failure code.</p>",
-        "SyncDeploymentJobResponse$failureCode": "<p>The failure code if the job fails.</p>"
+        "SyncDeploymentJobResponse$failureCode": "<p>The failure code if the job fails:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>"
       }
     },
     "DeploymentJobs": {
@@ -359,7 +374,7 @@
     "DeploymentLaunchConfig": {
       "base": "<p>Configuration information for a deployment launch.</p>",
       "refs": {
-        "DeploymentApplicationConfig$launchConfig": "<p>The launch configuration, usually <code>roslaunch</code>.</p>"
+        "DeploymentApplicationConfig$launchConfig": "<p>The launch configuration.</p>"
       }
     },
     "DeploymentStatus": {
@@ -371,6 +386,12 @@
         "DescribeFleetResponse$lastDeploymentStatus": "<p>The status of the last deployment.</p>",
         "Fleet$lastDeploymentStatus": "<p>The status of the last fleet deployment.</p>",
         "SyncDeploymentJobResponse$status": "<p>The status of the synchronization job.</p>"
+      }
+    },
+    "DeploymentVersion": {
+      "base": null,
+      "refs": {
+        "DeploymentApplicationConfig$applicationVersion": "<p>The version of the application.</p>"
       }
     },
     "DeregisterRobotRequest": {
@@ -452,7 +473,7 @@
     "EnvironmentVariableMap": {
       "base": null,
       "refs": {
-        "DeploymentLaunchConfig$environmentVariables": "<p>An array of key/value pairs specifying environment variables for the deployment application.</p>",
+        "DeploymentLaunchConfig$environmentVariables": "<p>An array of key/value pairs specifying environment variables for the robot application</p>",
         "LaunchConfig$environmentVariables": "<p>The environment variables for the application launch.</p>"
       }
     },
@@ -486,12 +507,12 @@
     "Filters": {
       "base": null,
       "refs": {
-        "ListDeploymentJobsRequest$filters": "<p>Optional filters to limit results.</p>",
-        "ListFleetsRequest$filters": "<p>Optional filters to limit results.</p>",
-        "ListRobotApplicationsRequest$filters": "<p>Optional filters to limit results.</p>",
-        "ListRobotsRequest$filters": "<p>Optional filters to limit results.</p>",
-        "ListSimulationApplicationsRequest$filters": "<p>Optional list of filters to limit results. The only valid filter name is <code>name</code>.</p>",
-        "ListSimulationJobsRequest$filters": "<p>Optional filters to limit results.</p>"
+        "ListDeploymentJobsRequest$filters": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>",
+        "ListFleetsRequest$filters": "<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>",
+        "ListRobotApplicationsRequest$filters": "<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>",
+        "ListRobotsRequest$filters": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>",
+        "ListSimulationApplicationsRequest$filters": "<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>",
+        "ListSimulationJobsRequest$filters": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>"
       }
     },
     "Fleet": {
@@ -506,22 +527,23 @@
         "ListFleetsResponse$fleetDetails": "<p>A list of fleet details meeting the request criteria.</p>"
       }
     },
+    "GenericInteger": {
+      "base": null,
+      "refs": {
+        "ProgressDetail$estimatedTimeRemainingSeconds": "<p>Estimated amount of time in seconds remaining in the step. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.</p>"
+      }
+    },
     "GenericString": {
       "base": null,
       "refs": {
         "CreateDeploymentJobResponse$failureReason": "<p>The failure reason of the deployment job if it failed.</p>",
         "DeploymentJob$failureReason": "<p>A short description of the reason why the deployment job failed.</p>",
-        "DeploymentLaunchConfig$packageName": "<p>The package name.</p>",
-        "DeploymentLaunchConfig$preLaunchFile": "<p>The deployment pre-launch file. This file will be executed prior to the deployment launch file.</p>",
-        "DeploymentLaunchConfig$launchFile": "<p>The deployment launch file.</p>",
-        "DeploymentLaunchConfig$postLaunchFile": "<p>The deployment post-launch file. This file will be executed after the deployment launch file.</p>",
         "DescribeDeploymentJobResponse$failureReason": "<p>A short description of the reason why the deployment job failed.</p>",
-        "LaunchConfig$packageName": "<p>The package name.</p>",
-        "LaunchConfig$launchFile": "<p>The launch file.</p>",
-        "ProgressDetail$currentProgress": "<p>The current progress status.</p>",
+        "DescribeSimulationJobResponse$failureReason": "<p>Details about why the simulation job failed. For more information about troubleshooting, see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html\">Troubleshooting</a>.</p>",
         "ProgressDetail$targetResource": "<p>The Amazon Resource Name (ARN) of the deployment job.</p>",
         "RobotDeployment$failureReason": "<p>A short description of the reason why the robot deployment failed.</p>",
         "SecurityGroups$member": null,
+        "SimulationJob$failureReason": "<p>The reason why the simulation job failed.</p>",
         "Subnets$member": null,
         "SyncDeploymentJobResponse$failureReason": "<p>The failure reason if the job fails.</p>",
         "VPCConfigResponse$vpcId": "<p>The VPC ID associated with your simulation job.</p>"
@@ -530,7 +552,7 @@
     "IamRole": {
       "base": null,
       "refs": {
-        "CreateSimulationJobRequest$iamRole": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href=\"https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials\">specify AWS security credentials for your application</a>. </p>",
+        "CreateSimulationJobRequest$iamRole": "<p>The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. </p>",
         "CreateSimulationJobResponse$iamRole": "<p>The IAM role that allows the simulation job to call the AWS APIs that are specified in its associated policies on your behalf.</p>",
         "DescribeSimulationJobResponse$iamRole": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf.</p>",
         "SimulationJob$iamRole": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href=\"https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials\">specify AWS security credentials for your application</a>. </p>"
@@ -564,7 +586,7 @@
       "base": null,
       "refs": {
         "CreateSimulationJobRequest$maxJobDurationInSeconds": "<p>The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.</p>",
-        "CreateSimulationJobResponse$maxJobDurationInSeconds": "<p>The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less. </p>",
+        "CreateSimulationJobResponse$maxJobDurationInSeconds": "<p>The maximum simulation job duration in seconds. </p>",
         "DescribeSimulationJobResponse$maxJobDurationInSeconds": "<p>The maximum job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>",
         "SimulationJob$maxJobDurationInSeconds": "<p>The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less.</p>"
       }
@@ -660,15 +682,25 @@
       "refs": {
       }
     },
+    "ListTagsForResourceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "MaxResults": {
       "base": null,
       "refs": {
         "ListDeploymentJobsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListDeploymentJobs</code> in paginated output. When this parameter is used, <code>ListDeploymentJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListDeploymentJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListDeploymentJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
         "ListFleetsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
-        "ListRobotApplicationsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
-        "ListRobotsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
-        "ListSimulationApplicationsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
-        "ListSimulationJobsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+        "ListRobotApplicationsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
+        "ListRobotsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
+        "ListSimulationApplicationsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>",
+        "ListSimulationJobsRequest$maxResults": "<p>The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
       }
     },
     "Name": {
@@ -729,6 +761,19 @@
         "ListSimulationJobsResponse$nextToken": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
       }
     },
+    "Path": {
+      "base": null,
+      "refs": {
+        "DeploymentLaunchConfig$preLaunchFile": "<p>The deployment pre-launch file. This file will be executed prior to the launch file.</p>",
+        "DeploymentLaunchConfig$postLaunchFile": "<p>The deployment post-launch file. This file will be executed after the launch file.</p>"
+      }
+    },
+    "PercentDone": {
+      "base": null,
+      "refs": {
+        "ProgressDetail$percentDone": "<p>Precentage of the step that is done. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.</p>"
+      }
+    },
     "Percentage": {
       "base": null,
       "refs": {
@@ -776,7 +821,7 @@
       }
     },
     "ResourceAlreadyExistsException": {
-      "base": "<p>The specified resource already exists</p>",
+      "base": "<p>The specified resource already exists.</p>",
       "refs": {
       }
     },
@@ -855,6 +900,12 @@
       "base": "<p>Information about a robot deployment.</p>",
       "refs": {
         "RobotDeploymentSummary$member": null
+      }
+    },
+    "RobotDeploymentStep": {
+      "base": null,
+      "refs": {
+        "ProgressDetail$currentProgress": "<p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>Downloading/Extracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>Executing pre-launch script(s)</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>Executing post-launch script(s)</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>"
       }
     },
     "RobotDeploymentSummary": {
@@ -978,8 +1029,8 @@
     "SimulationJobErrorCode": {
       "base": null,
       "refs": {
-        "CreateSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed.</p>",
-        "DescribeSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally (segfault, etc.)</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally (segfault, etc.)</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation</p> </dd> </dl>",
+        "CreateSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>",
+        "DescribeSimulationJobResponse$failureCode": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>",
         "SimulationJob$failureCode": "<p>The failure code of the simulation job if it failed.</p>"
       }
     },
@@ -1092,8 +1143,73 @@
       "refs": {
       }
     },
+    "TagKey": {
+      "base": null,
+      "refs": {
+        "TagKeyList$member": null,
+        "TagMap$key": null
+      }
+    },
+    "TagKeyList": {
+      "base": null,
+      "refs": {
+        "UntagResourceRequest$tagKeys": "<p>A map that contains tag keys and tag values that will be unattached from the resource.</p>"
+      }
+    },
+    "TagMap": {
+      "base": null,
+      "refs": {
+        "CreateDeploymentJobRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the deployment job.</p>",
+        "CreateDeploymentJobResponse$tags": "<p>The list of all tags added to the deployment job.</p>",
+        "CreateFleetRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the fleet.</p>",
+        "CreateFleetResponse$tags": "<p>The list of all tags added to the fleet.</p>",
+        "CreateRobotApplicationRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the robot application.</p>",
+        "CreateRobotApplicationResponse$tags": "<p>The list of all tags added to the robot application.</p>",
+        "CreateRobotRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the robot.</p>",
+        "CreateRobotResponse$tags": "<p>The list of all tags added to the robot.</p>",
+        "CreateSimulationApplicationRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the simulation application.</p>",
+        "CreateSimulationApplicationResponse$tags": "<p>The list of all tags added to the simulation application.</p>",
+        "CreateSimulationJobRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the simulation job.</p>",
+        "CreateSimulationJobResponse$tags": "<p>The list of all tags added to the simulation job.</p>",
+        "DescribeDeploymentJobResponse$tags": "<p>The list of all tags added to the specified deployment job.</p>",
+        "DescribeFleetResponse$tags": "<p>The list of all tags added to the specified fleet.</p>",
+        "DescribeRobotApplicationResponse$tags": "<p>The list of all tags added to the specified robot application.</p>",
+        "DescribeRobotResponse$tags": "<p>The list of all tags added to the specified robot.</p>",
+        "DescribeSimulationApplicationResponse$tags": "<p>The list of all tags added to the specified simulation application.</p>",
+        "DescribeSimulationJobResponse$tags": "<p>The list of all tags added to the specified simulation job.</p>",
+        "ListTagsForResourceResponse$tags": "<p>The list of all tags added to the specified resource.</p>",
+        "SimulationJob$tags": "<p>A map that contains tag keys and tag values that are attached to the simulation job.</p>",
+        "TagResourceRequest$tags": "<p>A map that contains tag keys and tag values that are attached to the resource.</p>"
+      }
+    },
+    "TagResourceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "TagResourceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "TagValue": {
+      "base": null,
+      "refs": {
+        "TagMap$value": null
+      }
+    },
     "ThrottlingException": {
       "base": "<p>AWS RoboMaker is temporarily unable to process the request. Try your call again.</p>",
+      "refs": {
+      }
+    },
+    "UntagResourceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UntagResourceResponse": {
+      "base": null,
       "refs": {
       }
     },
@@ -1140,7 +1256,6 @@
         "CreateSimulationApplicationVersionResponse$version": "<p>The version of the simulation application.</p>",
         "DeleteRobotApplicationRequest$applicationVersion": "<p>The version of the robot application to delete.</p>",
         "DeleteSimulationApplicationRequest$applicationVersion": "<p>The version of the simulation application to delete.</p>",
-        "DeploymentApplicationConfig$applicationVersion": "<p>The version of the application.</p>",
         "DescribeRobotApplicationRequest$applicationVersion": "<p>The version of the robot application to describe.</p>",
         "DescribeRobotApplicationResponse$version": "<p>The version of the robot application.</p>",
         "DescribeSimulationApplicationRequest$applicationVersion": "<p>The version of the simulation application to describe.</p>",

@@ -423,6 +423,21 @@
         {"shape":"ThrottlingException"}
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"GET",
+        "requestUri":"/tags/{resourceArn}"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
     "RegisterRobot":{
       "name":"RegisterRobot",
       "http":{
@@ -471,6 +486,36 @@
         {"shape":"LimitExceededException"},
         {"shape":"ConcurrentDeploymentException"},
         {"shape":"IdempotentParameterMismatchException"}
+      ]
+    },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/tags/{resourceArn}"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/tags/{resourceArn}"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidParameterException"},
+        {"shape":"ThrottlingException"}
       ]
     },
     "UpdateRobotApplication":{
@@ -560,6 +605,12 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_\\-=]*"
     },
+    "Command":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"[a-zA-Z0-9_.\\-]*"
+    },
     "ConcurrentDeploymentException":{
       "type":"structure",
       "members":{
@@ -582,7 +633,8 @@
           "idempotencyToken":true
         },
         "fleet":{"shape":"Arn"},
-        "deploymentApplicationConfigs":{"shape":"DeploymentApplicationConfigs"}
+        "deploymentApplicationConfigs":{"shape":"DeploymentApplicationConfigs"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateDeploymentJobResponse":{
@@ -595,14 +647,16 @@
         "failureReason":{"shape":"GenericString"},
         "failureCode":{"shape":"DeploymentJobErrorCode"},
         "createdAt":{"shape":"CreatedAt"},
-        "deploymentConfig":{"shape":"DeploymentConfig"}
+        "deploymentConfig":{"shape":"DeploymentConfig"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateFleetRequest":{
       "type":"structure",
       "required":["name"],
       "members":{
-        "name":{"shape":"Name"}
+        "name":{"shape":"Name"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateFleetResponse":{
@@ -610,7 +664,8 @@
       "members":{
         "arn":{"shape":"Arn"},
         "name":{"shape":"Name"},
-        "createdAt":{"shape":"CreatedAt"}
+        "createdAt":{"shape":"CreatedAt"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateRobotApplicationRequest":{
@@ -623,7 +678,8 @@
       "members":{
         "name":{"shape":"Name"},
         "sources":{"shape":"SourceConfigs"},
-        "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"}
+        "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateRobotApplicationResponse":{
@@ -635,7 +691,8 @@
         "sources":{"shape":"Sources"},
         "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
-        "revisionId":{"shape":"RevisionId"}
+        "revisionId":{"shape":"RevisionId"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateRobotApplicationVersionRequest":{
@@ -668,7 +725,8 @@
       "members":{
         "name":{"shape":"Name"},
         "architecture":{"shape":"Architecture"},
-        "greengrassGroupId":{"shape":"Id"}
+        "greengrassGroupId":{"shape":"Id"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateRobotResponse":{
@@ -678,7 +736,8 @@
         "name":{"shape":"Name"},
         "createdAt":{"shape":"CreatedAt"},
         "greengrassGroupId":{"shape":"Id"},
-        "architecture":{"shape":"Architecture"}
+        "architecture":{"shape":"Architecture"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateSimulationApplicationRequest":{
@@ -695,7 +754,8 @@
         "sources":{"shape":"SourceConfigs"},
         "simulationSoftwareSuite":{"shape":"SimulationSoftwareSuite"},
         "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
-        "renderingEngine":{"shape":"RenderingEngine"}
+        "renderingEngine":{"shape":"RenderingEngine"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateSimulationApplicationResponse":{
@@ -709,7 +769,8 @@
         "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
         "renderingEngine":{"shape":"RenderingEngine"},
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
-        "revisionId":{"shape":"RevisionId"}
+        "revisionId":{"shape":"RevisionId"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "CreateSimulationApplicationVersionRequest":{
@@ -751,6 +812,7 @@
         "failureBehavior":{"shape":"FailureBehavior"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfig"}
       }
     },
@@ -769,6 +831,7 @@
         "iamRole":{"shape":"IamRole"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"}
       }
     },
@@ -832,7 +895,7 @@
       ],
       "members":{
         "application":{"shape":"Arn"},
-        "applicationVersion":{"shape":"Version"},
+        "applicationVersion":{"shape":"DeploymentVersion"},
         "launchConfig":{"shape":"DeploymentLaunchConfig"}
       }
     },
@@ -866,8 +929,11 @@
       "type":"string",
       "enum":[
         "ResourceNotFound",
+        "EnvironmentSetupError",
+        "EtagMismatch",
         "FailureThresholdBreached",
         "RobotDeploymentNoResponse",
+        "RobotAgentConnectionTimeout",
         "GreengrassDeploymentFailed",
         "MissingRobotArchitecture",
         "MissingRobotApplicationArchitecture",
@@ -893,10 +959,10 @@
         "launchFile"
       ],
       "members":{
-        "packageName":{"shape":"GenericString"},
-        "preLaunchFile":{"shape":"GenericString"},
-        "launchFile":{"shape":"GenericString"},
-        "postLaunchFile":{"shape":"GenericString"},
+        "packageName":{"shape":"Command"},
+        "preLaunchFile":{"shape":"Path"},
+        "launchFile":{"shape":"Command"},
+        "postLaunchFile":{"shape":"Path"},
         "environmentVariables":{"shape":"EnvironmentVariableMap"}
       }
     },
@@ -909,6 +975,12 @@
         "Failed",
         "Succeeded"
       ]
+    },
+    "DeploymentVersion":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"[0-9]*"
     },
     "DeregisterRobotRequest":{
       "type":"structure",
@@ -946,7 +1018,8 @@
         "failureReason":{"shape":"GenericString"},
         "failureCode":{"shape":"DeploymentJobErrorCode"},
         "createdAt":{"shape":"CreatedAt"},
-        "robotDeploymentSummary":{"shape":"RobotDeploymentSummary"}
+        "robotDeploymentSummary":{"shape":"RobotDeploymentSummary"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "DescribeFleetRequest":{
@@ -965,7 +1038,8 @@
         "createdAt":{"shape":"CreatedAt"},
         "lastDeploymentStatus":{"shape":"DeploymentStatus"},
         "lastDeploymentJob":{"shape":"Arn"},
-        "lastDeploymentTime":{"shape":"CreatedAt"}
+        "lastDeploymentTime":{"shape":"CreatedAt"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "DescribeRobotApplicationRequest":{
@@ -985,7 +1059,8 @@
         "sources":{"shape":"Sources"},
         "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
         "revisionId":{"shape":"RevisionId"},
-        "lastUpdatedAt":{"shape":"LastUpdatedAt"}
+        "lastUpdatedAt":{"shape":"LastUpdatedAt"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "DescribeRobotRequest":{
@@ -1006,7 +1081,8 @@
         "createdAt":{"shape":"CreatedAt"},
         "architecture":{"shape":"Architecture"},
         "lastDeploymentJob":{"shape":"Arn"},
-        "lastDeploymentTime":{"shape":"CreatedAt"}
+        "lastDeploymentTime":{"shape":"CreatedAt"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "DescribeSimulationApplicationRequest":{
@@ -1028,7 +1104,8 @@
         "robotSoftwareSuite":{"shape":"RobotSoftwareSuite"},
         "renderingEngine":{"shape":"RenderingEngine"},
         "revisionId":{"shape":"RevisionId"},
-        "lastUpdatedAt":{"shape":"LastUpdatedAt"}
+        "lastUpdatedAt":{"shape":"LastUpdatedAt"},
+        "tags":{"shape":"TagMap"}
       }
     },
     "DescribeSimulationJobRequest":{
@@ -1047,6 +1124,7 @@
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
         "failureBehavior":{"shape":"FailureBehavior"},
         "failureCode":{"shape":"SimulationJobErrorCode"},
+        "failureReason":{"shape":"GenericString"},
         "clientRequestToken":{"shape":"ClientRequestToken"},
         "outputLocation":{"shape":"OutputLocation"},
         "maxJobDurationInSeconds":{"shape":"JobDuration"},
@@ -1054,6 +1132,7 @@
         "iamRole":{"shape":"IamRole"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"}
       }
     },
@@ -1118,6 +1197,7 @@
       "max":200,
       "min":0
     },
+    "GenericInteger":{"type":"integer"},
     "GenericString":{"type":"string"},
     "IamRole":{
       "type":"string",
@@ -1163,8 +1243,8 @@
         "launchFile"
       ],
       "members":{
-        "packageName":{"shape":"GenericString"},
-        "launchFile":{"shape":"GenericString"},
+        "packageName":{"shape":"Command"},
+        "launchFile":{"shape":"Command"},
         "environmentVariables":{"shape":"EnvironmentVariableMap"}
       }
     },
@@ -1269,6 +1349,23 @@
         "nextToken":{"shape":"PaginationToken"}
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["resourceArn"],
+      "members":{
+        "resourceArn":{
+          "shape":"Arn",
+          "location":"uri",
+          "locationName":"resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "tags":{"shape":"TagMap"}
+      }
+    },
     "MaxResults":{"type":"integer"},
     "Name":{
       "type":"string",
@@ -1289,6 +1386,16 @@
       "min":1,
       "pattern":"[a-zA-Z0-9_.\\-\\/+=]*"
     },
+    "Path":{
+      "type":"string",
+      "max":1024,
+      "min":1
+    },
+    "PercentDone":{
+      "type":"float",
+      "max":100.0,
+      "min":0.0
+    },
     "Percentage":{
       "type":"integer",
       "max":100,
@@ -1297,7 +1404,9 @@
     "ProgressDetail":{
       "type":"structure",
       "members":{
-        "currentProgress":{"shape":"GenericString"},
+        "currentProgress":{"shape":"RobotDeploymentStep"},
+        "percentDone":{"shape":"PercentDone"},
+        "estimatedTimeRemainingSeconds":{"shape":"GenericInteger"},
         "targetResource":{"shape":"GenericString"}
       }
     },
@@ -1433,6 +1542,17 @@
         "failureCode":{"shape":"DeploymentJobErrorCode"}
       }
     },
+    "RobotDeploymentStep":{
+      "type":"string",
+      "enum":[
+        "Validating",
+        "DownloadingExtracting",
+        "ExecutingPreLaunch",
+        "Launching",
+        "ExecutingPostLaunch",
+        "Finished"
+      ]
+    },
     "RobotDeploymentSummary":{
       "type":"list",
       "member":{"shape":"RobotDeployment"}
@@ -1537,6 +1657,7 @@
         "lastUpdatedAt":{"shape":"LastUpdatedAt"},
         "failureBehavior":{"shape":"FailureBehavior"},
         "failureCode":{"shape":"SimulationJobErrorCode"},
+        "failureReason":{"shape":"GenericString"},
         "clientRequestToken":{"shape":"ClientRequestToken"},
         "outputLocation":{"shape":"OutputLocation"},
         "maxJobDurationInSeconds":{"shape":"JobDuration"},
@@ -1544,6 +1665,7 @@
         "iamRole":{"shape":"IamRole"},
         "robotApplications":{"shape":"RobotApplicationConfigs"},
         "simulationApplications":{"shape":"SimulationApplicationConfigs"},
+        "tags":{"shape":"TagMap"},
         "vpcConfig":{"shape":"VPCConfigResponse"}
       }
     },
@@ -1563,7 +1685,10 @@
         "InvalidBundleRobotApplication",
         "InvalidBundleSimulationApplication",
         "RobotApplicationVersionMismatchedEtag",
-        "SimulationApplicationVersionMismatchedEtag"
+        "SimulationApplicationVersionMismatchedEtag",
+        "WrongRegionS3Output",
+        "WrongRegionRobotApplication",
+        "WrongRegionSimulationApplication"
       ]
     },
     "SimulationJobStatus":{
@@ -1615,7 +1740,7 @@
     },
     "SimulationSoftwareSuiteVersionType":{
       "type":"string",
-      "pattern":"7"
+      "pattern":"7|9"
     },
     "SimulationTimeMillis":{"type":"long"},
     "Source":{
@@ -1676,6 +1801,49 @@
         "createdAt":{"shape":"CreatedAt"}
       }
     },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "pattern":"[a-zA-Z0-9 _.\\-\\/+=:]*"
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagMap":{
+      "type":"map",
+      "key":{"shape":"TagKey"},
+      "value":{"shape":"TagValue"},
+      "max":50,
+      "min":0
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "tags"
+      ],
+      "members":{
+        "resourceArn":{
+          "shape":"Arn",
+          "location":"uri",
+          "locationName":"resourceArn"
+        },
+        "tags":{"shape":"TagMap"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[a-zA-Z0-9 _.\\-\\/+=:]*"
+    },
     "ThrottlingException":{
       "type":"structure",
       "members":{
@@ -1683,6 +1851,30 @@
       },
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members":{
+        "resourceArn":{
+          "shape":"Arn",
+          "location":"uri",
+          "locationName":"resourceArn"
+        },
+        "tagKeys":{
+          "shape":"TagKeyList",
+          "location":"querystring",
+          "locationName":"tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdateRobotApplicationRequest":{
       "type":"structure",
