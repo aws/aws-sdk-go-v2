@@ -70,6 +70,8 @@ type MediaLiveAPI interface {
 
 	CreateInputSecurityGroupRequest(*medialive.CreateInputSecurityGroupInput) medialive.CreateInputSecurityGroupRequest
 
+	CreateTagsRequest(*medialive.CreateTagsInput) medialive.CreateTagsRequest
+
 	DeleteChannelRequest(*medialive.DeleteChannelInput) medialive.DeleteChannelRequest
 
 	DeleteInputRequest(*medialive.DeleteInputInput) medialive.DeleteInputRequest
@@ -77,6 +79,8 @@ type MediaLiveAPI interface {
 	DeleteInputSecurityGroupRequest(*medialive.DeleteInputSecurityGroupInput) medialive.DeleteInputSecurityGroupRequest
 
 	DeleteReservationRequest(*medialive.DeleteReservationInput) medialive.DeleteReservationRequest
+
+	DeleteTagsRequest(*medialive.DeleteTagsInput) medialive.DeleteTagsRequest
 
 	DescribeChannelRequest(*medialive.DescribeChannelInput) medialive.DescribeChannelRequest
 
@@ -100,6 +104,8 @@ type MediaLiveAPI interface {
 
 	ListReservationsRequest(*medialive.ListReservationsInput) medialive.ListReservationsRequest
 
+	ListTagsForResourceRequest(*medialive.ListTagsForResourceInput) medialive.ListTagsForResourceRequest
+
 	PurchaseOfferingRequest(*medialive.PurchaseOfferingInput) medialive.PurchaseOfferingRequest
 
 	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
@@ -111,6 +117,8 @@ type MediaLiveAPI interface {
 	UpdateInputRequest(*medialive.UpdateInputInput) medialive.UpdateInputRequest
 
 	UpdateInputSecurityGroupRequest(*medialive.UpdateInputSecurityGroupInput) medialive.UpdateInputSecurityGroupRequest
+
+	UpdateReservationRequest(*medialive.UpdateReservationInput) medialive.UpdateReservationRequest
 }
 
 var _ MediaLiveAPI = (*medialive.MediaLive)(nil)

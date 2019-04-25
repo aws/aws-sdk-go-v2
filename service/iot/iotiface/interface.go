@@ -234,6 +234,8 @@ type IoTAPI interface {
 
 	GetRegistrationCodeRequest(*iot.GetRegistrationCodeInput) iot.GetRegistrationCodeRequest
 
+	GetStatisticsRequest(*iot.GetStatisticsInput) iot.GetStatisticsRequest
+
 	GetTopicRuleRequest(*iot.GetTopicRuleInput) iot.GetTopicRuleRequest
 
 	GetV2LoggingOptionsRequest(*iot.GetV2LoggingOptionsInput) iot.GetV2LoggingOptionsRequest

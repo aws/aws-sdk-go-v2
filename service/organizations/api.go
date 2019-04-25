@@ -55,10 +55,10 @@ func (r AcceptHandshakeRequest) Send(ctx context.Context) (*AcceptHandshakeOutpu
 //    the master account.
 //
 // For more information about invitations, see Inviting an AWS Account to Join
-//    Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)
+//    Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)
 //    in the AWS Organizations User Guide. For more information about requests
 //    to enable all features in the organization, see Enabling All Features
-//    in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+//    in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 //    in the AWS Organizations User Guide.
 //
 // After you accept a handshake, it continues to appear in the results of relevant
@@ -128,14 +128,15 @@ func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyOutput, err
 // If you attach the policy directly to an account, then it affects only that
 //    account.
 //
-// SCPs essentially are permission "filters". When you attach one SCP to a higher
-//    level root or OU, and you also attach a different SCP to a child OU or
-//    to an account, the child policy can further restrict only the permissions
-//    that pass through the parent filter and are available to the child. An
-//    SCP that is attached to a child cannot grant a permission that is not
-//    already granted by the parent. For example, imagine that the parent SCP
-//    allows permissions A, B, C, D, and E. The child SCP allows C, D, E, F,
-//    and G. The result is that the accounts affected by the child SCP are allowed
+// SCPs are JSON policies that specify the maximum permissions for an organization
+//    or organizational unit (OU). When you attach one SCP to a higher level
+//    root or OU, and you also attach a different SCP to a child OU or to an
+//    account, the child policy can further restrict only the permissions that
+//    pass through the parent filter and are available to the child. An SCP
+//    that is attached to a child cannot grant a permission that is not already
+//    granted by the parent. For example, imagine that the parent SCP allows
+//    permissions A, B, C, D, and E. The child SCP allows C, D, E, F, and G.
+//    The result is that the accounts affected by the child SCP are allowed
 //    to use only C, D, and E. They cannot use A or B because they were filtered
 //    out by the child OU. They also cannot use F and G because they were filtered
 //    out by the parent OU. They cannot be granted back by the child SCP; child
@@ -148,7 +149,7 @@ func (r AttachPolicyRequest) Send(ctx context.Context) (*AttachPolicyOutput, err
 //    that specifies the permissions that you want to allow in that OU or account.
 //
 // For more information about how Organizations policies permissions work, see
-//    Using Service Control Policies (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+//    Using Service Control Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
 //    in the AWS Organizations User Guide.
 //
 // This operation can be called only from the organization's master account.
@@ -291,7 +292,7 @@ func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountOutput, e
 // This operation can be called only from the organization's master account.
 //
 // For more information about creating accounts, see Creating an AWS Account
-// in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)in the AWS Organizations User Guide.
+// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)in the AWS Organizations User Guide.
 //
 // When you create an account in an organization using the AWS Organizations
 // console, API, or CLI commands, the information required for the account to
@@ -309,7 +310,7 @@ func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountOutput, e
 // your organization is still initializing, wait one hour and then try again.
 // If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
 //
-// Using CreateAccount to create multiple temporary accounts is not recommended.
+// Using CreateAccount to create multiple temporary accounts isn't recommended.
 // You can only close an account from the Billing and Cost Management Console,
 // and you must be signed in as the root user. For information on the requirements
 // and process for closing an account, see Closing an AWS Account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
@@ -321,7 +322,7 @@ func (r CreateAccountRequest) Send(ctx context.Context) (*CreateAccountOutput, e
 // permissions can view billing information for the account. If you disable
 // it, only the account root user can access billing information. For information
 // about how to disable this switch for an account, see Granting Access to Your
-// Billing Information and Tools (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
+// Billing Information and Tools (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
 //
 //    // Example sending a request using the CreateAccountRequest method.
 //    req := client.CreateAccountRequest(params)
@@ -349,6 +350,153 @@ func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) CreateAc
 	return CreateAccountRequest{Request: req, Input: input, Copy: c.CreateAccountRequest}
 }
 
+const opCreateGovCloudAccount = "CreateGovCloudAccount"
+
+// CreateGovCloudAccountRequest is a API request type for the CreateGovCloudAccount API operation.
+type CreateGovCloudAccountRequest struct {
+	*aws.Request
+	Input *CreateGovCloudAccountInput
+	Copy  func(*CreateGovCloudAccountInput) CreateGovCloudAccountRequest
+}
+
+// Send marshals and sends the CreateGovCloudAccount API request.
+func (r CreateGovCloudAccountRequest) Send(ctx context.Context) (*CreateGovCloudAccountOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGovCloudAccountOutput), nil
+}
+
+// CreateGovCloudAccountRequest returns a request value for making API operation for
+// AWS Organizations.
+//
+// This action is available if all of the following are true:
+//
+//    * You are authorized to create accounts in the AWS GovCloud (US) Region.
+//    For more information on the AWS GovCloud (US) Region, see the AWS GovCloud
+//    User Guide (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html).
+//
+//    * You already have an account in the AWS GovCloud (US) Region that is
+//    associated with your master account in the commercial Region.
+//
+//    * You call this action from the master account of your organization in
+//    the commercial Region.
+//
+//    * You have the organizations:CreateGovCloudAccount permission. AWS Organizations
+//    creates the required service-linked role named AWSServiceRoleForOrganizations.
+//    For more information, see AWS Organizations and Service-Linked Roles (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_integrate_services-using_slrs)
+//    in the AWS Organizations User Guide.
+//
+// AWS automatically enables AWS CloudTrail for AWS GovCloud (US) accounts,
+// but you should also do the following:
+//
+//    * Verify that AWS CloudTrail is enabled to store logs.
+//
+//    * Create an S3 bucket for AWS CloudTrail log storage.
+//
+// For more information, see Verifying AWS CloudTrail Is Enabled (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
+//    in the AWS GovCloud User Guide.
+//
+// You call this action from the master account of your organization in the
+// commercial Region to create a standalone AWS account in the AWS GovCloud
+// (US) Region. After the account is created, the master account of an organization
+// in the AWS GovCloud (US) Region can invite it to that organization. For more
+// information on inviting standalone accounts in the AWS GovCloud (US) to join
+// an organization, see AWS Organizations (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)
+// in the AWS GovCloud User Guide.
+//
+// Calling CreateGovCloudAccount is an asynchronous request that AWS performs
+// in the background. Because CreateGovCloudAccount operates asynchronously,
+// it can return a successful completion message even though account initialization
+// might still be in progress. You might need to wait a few minutes before you
+// can successfully access the account. To check the status of the request,
+// do one of the following:
+//
+//    * Use the OperationId response element from this operation to provide
+//    as a parameter to the DescribeCreateAccountStatus operation.
+//
+//    * Check the AWS CloudTrail log for the CreateAccountResult event. For
+//    information on using AWS CloudTrail with Organizations, see Monitoring
+//    the Activity in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+//    in the AWS Organizations User Guide.
+//
+// When you call the CreateGovCloudAccountaction, you create two accounts: a standalone account in the AWS GovCloud
+// (US) Region and an associated account in the commercial Region for billing
+// and support purposes. The account in the commercial Region is automatically
+// a member of the organization whose credentials made the request. Both accounts
+// are associated with the same email address.
+//
+// A role is created in the new account in the commercial Region that allows
+// the master account in the organization in the commercial Region to assume
+// it. An AWS GovCloud (US) account is then created and associated with the
+// commercial account that you just created. A role is created in the new AWS
+// GovCloud (US) account that can be assumed by the AWS GovCloud (US) account
+// that is associated with the master account of the commercial organization.
+// For more information and to view a diagram that explains how account access
+// works, see AWS Organizations (http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html)in the AWS GovCloud User Guide.
+//
+// For more information about creating accounts, see Creating an AWS Account
+// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)in the AWS Organizations User Guide.
+//
+// When you create an account in an organization using the AWS Organizations
+// console, API, or CLI commands, the information required for the account to
+// operate as a standalone account, such as a payment method and signing the
+// end user license agreement (EULA) is not automatically collected. If you
+// must remove an account from your organization later, you can do so only after
+// you provide the missing information. Follow the steps at  To leave an organization
+// as a member account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
+// in the AWS Organizations User Guide.
+//
+// If you get an exception that indicates that you exceeded your account limits
+// for the organization, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//
+// If you get an exception that indicates that the operation failed because
+// your organization is still initializing, wait one hour and then try again.
+// If the error persists, contact AWS Support (https://console.aws.amazon.com/support/home#/).
+//
+// Using CreateGovCloudAccount to create multiple temporary accounts isn't recommended.
+// You can only close an account from the AWS Billing and Cost Management console,
+// and you must be signed in as the root user. For information on the requirements
+// and process for closing an account, see Closing an AWS Account (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
+// in the AWS Organizations User Guide.
+//
+// When you create a member account with this operation, you can choose whether
+// to create the account with the IAM User and Role Access to Billing Information
+// switch enabled. If you enable it, IAM users and roles that have appropriate
+// permissions can view billing information for the account. If you disable
+// it, only the account root user can access billing information. For information
+// about how to disable this switch for an account, see Granting Access to Your
+// Billing Information and Tools (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
+//
+//    // Example sending a request using the CreateGovCloudAccountRequest method.
+//    req := client.CreateGovCloudAccountRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount
+func (c *Organizations) CreateGovCloudAccountRequest(input *CreateGovCloudAccountInput) CreateGovCloudAccountRequest {
+	op := &aws.Operation{
+		Name:       opCreateGovCloudAccount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateGovCloudAccountInput{}
+	}
+
+	output := &CreateGovCloudAccountOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateGovCloudAccountRequest{Request: req, Input: input, Copy: c.CreateGovCloudAccountRequest}
+}
+
 const opCreateOrganization = "CreateOrganization"
 
 // CreateOrganizationRequest is a API request type for the CreateOrganization API operation.
@@ -373,7 +521,7 @@ func (r CreateOrganizationRequest) Send(ctx context.Context) (*CreateOrganizatio
 // AWS Organizations.
 //
 // Creates an AWS organization. The account whose user is calling the CreateOrganization
-// operation automatically becomes the master account (http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_getting-started_concepts.html#account)
+// operation automatically becomes the master account (https://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_getting-started_concepts.html#account)
 // of the new organization.
 //
 // This operation must be called using credentials from the account that is
@@ -442,7 +590,7 @@ func (r CreateOrganizationalUnitRequest) Send(ctx context.Context) (*CreateOrgan
 // that you can nest OUs is dependent upon the policy types enabled for that
 // root. For service control policies, the limit is five.
 //
-// For more information about OUs, see Managing Organizational Units (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
+// For more information about OUs, see Managing Organizational Units (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
 // in the AWS Organizations User Guide.
 //
 // This operation can be called only from the organization's master account.
@@ -500,7 +648,7 @@ func (r CreatePolicyRequest) Send(ctx context.Context) (*CreatePolicyOutput, err
 // unit (OU), or an individual AWS account.
 //
 // For more information about policies and their use, see Managing Organization
-// Policies (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html).
+// Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html).
 //
 // This operation can be called only from the organization's master account.
 //
@@ -1117,11 +1265,11 @@ func (r DetachPolicyRequest) Send(ctx context.Context) (*DetachPolicyOutput, err
 // you want to replace the default FullAWSAccess policy with one that limits
 // the permissions that can be delegated, then you must attach the replacement
 // policy before you can remove the default one. This is the authorization strategy
-// of whitelisting (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_whitelist).
+// of whitelisting (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_whitelist).
 // If you instead attach a second SCP and leave the FullAWSAccess SCP still
 // attached, and specify "Effect": "Deny" in the second SCP to override the
 // "Effect": "Allow" in the FullAWSAccess policy (or any other attached SCP),
-// then you are using the authorization strategy of blacklisting (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist).
+// then you are using the authorization strategy of blacklisting (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html#orgs_policies_blacklist).
 //
 // This operation can be called only from the organization's master account.
 //
@@ -1390,7 +1538,7 @@ func (r EnableAllFeaturesRequest) Send(ctx context.Context) (*EnableAllFeaturesO
 // each account. Until you enable all features, you have access only to consolidated
 // billing, and you can't use any of the advanced account administration features
 // that AWS Organizations supports. For more information, see Enabling All Features
-// in Your Organization (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
+// in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 // in the AWS Organizations User Guide.
 //
 // This operation is required only for organizations that were created explicitly
@@ -3045,7 +3193,7 @@ func (r ListTargetsForPolicyRequest) Send(ctx context.Context) (*ListTargetsForP
 // ListTargetsForPolicyRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Lists all the roots, organizaitonal units (OUs), and accounts to which the
+// Lists all the roots, organizational units (OUs), and accounts to which the
 // specified policy is attached.
 //
 // Always check the NextToken response parameter for a null value when calling
@@ -3447,7 +3595,7 @@ type Account struct {
 	// The Amazon Resource Name (ARN) of the account.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -3691,7 +3839,7 @@ type CreateAccountInput struct {
 	// information if they have the required permissions. If set to DENY, only the
 	// root user of the new account can access account billing information. For
 	// more information, see Activating Access to the Billing and Cost Management
-	// Console (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+	// Console (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
 	// in the AWS Billing and Cost Management User Guide.
 	//
 	// If you don't specify this parameter, the value defaults to ALLOW, and IAM
@@ -3711,9 +3859,9 @@ type CreateAccountInput struct {
 	//
 	// For more information about how to use this role to access the member account,
 	// see Accessing and Administering the Member Accounts in Your Organization
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the AWS Organizations User Guide, and steps 2 and 3 in Tutorial: Delegate
-	// Access Across AWS Accounts Using IAM Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
+	// Access Across AWS Accounts Using IAM Roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
 	// in the IAM User Guide.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
@@ -3789,8 +3937,8 @@ func (s CreateAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Contains the status about a CreateAccount request to create an AWS account
-// in an organization.
+// Contains the status about a CreateAccount or CreateGovCloudAccount request
+// to create an AWS account or an AWS GovCloud (US) account in an organization.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus
 type CreateAccountStatus struct {
 	_ struct{} `type:"structure"`
@@ -3826,6 +3974,8 @@ type CreateAccountStatus struct {
 	//    failure. Try again later. If the problem persists, contact Customer Support.
 	FailureReason CreateAccountFailureReason `type:"string" enum:"true"`
 
+	GovCloudAccountId *string `type:"string"`
+
 	// The unique identifier (ID) that references this request. You get this value
 	// from the response of the initial CreateAccount request to create the account.
 	//
@@ -3851,6 +4001,123 @@ func (s CreateAccountStatus) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccountRequest
+type CreateGovCloudAccountInput struct {
+	_ struct{} `type:"structure"`
+
+	// The friendly name of the member account.
+	//
+	// AccountName is a required field
+	AccountName *string `min:"1" type:"string" required:"true"`
+
+	// The email address of the owner to assign to the new member account in the
+	// commercial Region. This email address must not already be associated with
+	// another AWS account. You must use a valid email address to complete account
+	// creation. You can't access the root user of the account or remove an account
+	// that was created with an invalid email address. Like all request parameters
+	// for CreateGovCloudAccount, the request for the email address for the AWS
+	// GovCloud (US) account originates from the commercial Region, not from the
+	// AWS GovCloud (US) Region.
+	//
+	// Email is a required field
+	Email *string `min:"6" type:"string" required:"true"`
+
+	// If set to ALLOW, the new linked account in the commercial Region enables
+	// IAM users to access account billing information if they have the required
+	// permissions. If set to DENY, only the root user of the new account can access
+	// account billing information. For more information, see Activating Access
+	// to the Billing and Cost Management Console (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+	// in the AWS Billing and Cost Management User Guide.
+	//
+	// If you don't specify this parameter, the value defaults to ALLOW, and IAM
+	// users and roles with the required permissions can access billing information
+	// for the new account.
+	IamUserAccessToBilling IAMUserAccessToBilling `type:"string" enum:"true"`
+
+	// (Optional)
+	//
+	// The name of an IAM role that AWS Organizations automatically preconfigures
+	// in the new member accounts in both the AWS GovCloud (US) Region and in the
+	// commercial Region. This role trusts the master account, allowing users in
+	// the master account to assume the role, as permitted by the master account
+	// administrator. The role has administrator permissions in the new member account.
+	//
+	// If you don't specify this parameter, the role name defaults to OrganizationAccountAccessRole.
+	//
+	// For more information about how to use this role to access the member account,
+	// see Accessing and Administering the Member Accounts in Your Organization
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
+	// in the AWS Organizations User Guide and steps 2 and 3 in Tutorial: Delegate
+	// Access Across AWS Accounts Using IAM Roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
+	// in the IAM User Guide.
+	//
+	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
+	// this parameter is a string of characters that can consist of uppercase letters,
+	// lowercase letters, digits with no spaces, and any of the following characters:
+	// =,.@-
+	RoleName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateGovCloudAccountInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGovCloudAccountInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGovCloudAccountInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGovCloudAccountInput"}
+
+	if s.AccountName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountName"))
+	}
+	if s.AccountName != nil && len(*s.AccountName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AccountName", 1))
+	}
+
+	if s.Email == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Email"))
+	}
+	if s.Email != nil && len(*s.Email) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("Email", 6))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccountResponse
+type CreateGovCloudAccountOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the status about a CreateAccount or CreateGovCloudAccount request
+	// to create an AWS account or an AWS GovCloud (US) account in an organization.
+	CreateAccountStatus *CreateAccountStatus `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateGovCloudAccountOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGovCloudAccountOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGovCloudAccountOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganizationRequest
 type CreateOrganizationInput struct {
 	_ struct{} `type:"structure"`
@@ -3860,13 +4127,16 @@ type CreateOrganizationInput struct {
 	//
 	//    * CONSOLIDATED_BILLING: All member accounts have their bills consolidated
 	//    to and paid by the master account. For more information, see Consolidated
-	//    billing (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only)
+	//    billing (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only)
 	//    in the AWS Organizations User Guide.
+	//
+	//  The consolidated billing feature subset isn't available for organizations
+	//    in the AWS GovCloud (US) Region.
 	//
 	//    * ALL: In addition to all the features supported by the consolidated billing
 	//    feature set, the master account can also apply any type of policy to any
 	//    member account in the organization. For more information, see All features
-	//    (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
+	//    (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
 	//    in the AWS Organizations User Guide.
 	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
 }
@@ -3994,11 +4264,11 @@ type CreatePolicyInput struct {
 	_ struct{} `type:"structure"`
 
 	// The policy content to add to the new policy. For example, if you create a
-	// service control policy (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	// service control policy (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
 	// (SCP), this string must be JSON text that specifies the permissions that
 	// admins in attached accounts can delegate to their users, groups, and roles.
 	// For more information about the SCP syntax, see Service Control Policy Syntax
-	// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
 	// in the AWS Organizations User Guide.
 	//
 	// Content is a required field
@@ -5123,7 +5393,7 @@ type Handshake struct {
 	// The Amazon Resource Name (ARN) of a handshake.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -5865,8 +6135,8 @@ type ListHandshakesForAccountInput struct {
 
 	// Filters the handshakes that you want included in the response. The default
 	// is all types. Use the ActionType element to limit the output to only a specified
-	// type, such as INVITE, ENABLE-FULL-CONTROL, or APPROVE-FULL-CONTROL. Alternatively,
-	// for the ENABLE-FULL-CONTROL handshake that generates a separate child handshake
+	// type, such as INVITE, ENABLE_ALL_FEATURES, or APPROVE_ALL_FEATURES. Alternatively,
+	// for the ENABLE_ALL_FEATURES handshake that generates a separate child handshake
 	// for each member account, you can specify ParentHandshakeId to see only the
 	// handshakes that were generated by that parent request.
 	Filter *HandshakeFilter `type:"structure"`
@@ -6700,7 +6970,7 @@ type Organization struct {
 	// The Amazon Resource Name (ARN) of an organization.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -6718,7 +6988,7 @@ type Organization struct {
 	// If set to "ALL", then all features are enabled and policies can be applied
 	// to accounts in the organization. If set to "CONSOLIDATED_BILLING", then only
 	// consolidated billing functionality is available. For more information, see
-	// Enabling All Features in Your Organization (http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html)
+	// Enabling All Features in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 	// in the AWS Organizations User Guide.
 	FeatureSet OrganizationFeatureSet `type:"string" enum:"true"`
 
@@ -6732,7 +7002,7 @@ type Organization struct {
 	// account for the organization.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	MasterAccountArn *string `type:"string"`
 
@@ -6767,7 +7037,7 @@ type OrganizationalUnit struct {
 	// The Amazon Resource Name (ARN) of this OU.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -6864,7 +7134,7 @@ type PolicySummary struct {
 	// The Amazon Resource Name (ARN) of the policy.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -6912,7 +7182,7 @@ type PolicyTargetSummary struct {
 	// The Amazon Resource Name (ARN) of the policy target.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -7050,7 +7320,7 @@ type Root struct {
 	// The Amazon Resource Name (ARN) of the root.
 	//
 	// For more information about ARNs in Organizations, see ARN Formats Supported
-	// by Organizations (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// by Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
@@ -7169,7 +7439,7 @@ type UpdatePolicyInput struct {
 
 	// If provided, the new content for the policy. The text must be correctly formatted
 	// JSON that complies with the syntax for the policy's type. For more information,
-	// see Service Control Policy Syntax (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
+	// see Service Control Policy Syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
 	// in the AWS Organizations User Guide.
 	Content *string `min:"1" type:"string"`
 
@@ -7338,24 +7608,26 @@ type ConstraintViolationExceptionReason string
 
 // Enum values for ConstraintViolationExceptionReason
 const (
-	ConstraintViolationExceptionReasonAccountNumberLimitExceeded                  ConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonHandshakeRateLimitExceeded                  ConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonOuNumberLimitExceeded                       ConstraintViolationExceptionReason = "OU_NUMBER_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonOuDepthLimitExceeded                        ConstraintViolationExceptionReason = "OU_DEPTH_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonPolicyNumberLimitExceeded                   ConstraintViolationExceptionReason = "POLICY_NUMBER_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonMaxPolicyTypeAttachmentLimitExceeded        ConstraintViolationExceptionReason = "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonMinPolicyTypeAttachmentLimitExceeded        ConstraintViolationExceptionReason = "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonAccountCannotLeaveOrganization              ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_ORGANIZATION"
-	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutEula               ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"
-	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutPhoneVerification  ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"
-	ConstraintViolationExceptionReasonMasterAccountPaymentInstrumentRequired      ConstraintViolationExceptionReason = "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
-	ConstraintViolationExceptionReasonMemberAccountPaymentInstrumentRequired      ConstraintViolationExceptionReason = "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
-	ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded            ConstraintViolationExceptionReason = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
-	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
-	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo             ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
-	ConstraintViolationExceptionReasonOrganizationNotInAllFeaturesMode            ConstraintViolationExceptionReason = "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"
-	ConstraintViolationExceptionReasonEmailVerificationCodeExpired                ConstraintViolationExceptionReason = "EMAIL_VERIFICATION_CODE_EXPIRED"
-	ConstraintViolationExceptionReasonWaitPeriodActive                            ConstraintViolationExceptionReason = "WAIT_PERIOD_ACTIVE"
+	ConstraintViolationExceptionReasonAccountNumberLimitExceeded                       ConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonHandshakeRateLimitExceeded                       ConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonOuNumberLimitExceeded                            ConstraintViolationExceptionReason = "OU_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonOuDepthLimitExceeded                             ConstraintViolationExceptionReason = "OU_DEPTH_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonPolicyNumberLimitExceeded                        ConstraintViolationExceptionReason = "POLICY_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMaxPolicyTypeAttachmentLimitExceeded             ConstraintViolationExceptionReason = "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMinPolicyTypeAttachmentLimitExceeded             ConstraintViolationExceptionReason = "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonAccountCannotLeaveOrganization                   ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_ORGANIZATION"
+	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutEula                    ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"
+	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutPhoneVerification       ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"
+	ConstraintViolationExceptionReasonMasterAccountPaymentInstrumentRequired           ConstraintViolationExceptionReason = "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
+	ConstraintViolationExceptionReasonMemberAccountPaymentInstrumentRequired           ConstraintViolationExceptionReason = "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
+	ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded                 ConstraintViolationExceptionReason = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace      ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
+	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo                  ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
+	ConstraintViolationExceptionReasonMasterAccountNotGovcloudEnabled                  ConstraintViolationExceptionReason = "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED"
+	ConstraintViolationExceptionReasonOrganizationNotInAllFeaturesMode                 ConstraintViolationExceptionReason = "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE"
+	ConstraintViolationExceptionReasonCreateOrganizationInBillingModeUnsupportedRegion ConstraintViolationExceptionReason = "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION"
+	ConstraintViolationExceptionReasonEmailVerificationCodeExpired                     ConstraintViolationExceptionReason = "EMAIL_VERIFICATION_CODE_EXPIRED"
+	ConstraintViolationExceptionReasonWaitPeriodActive                                 ConstraintViolationExceptionReason = "WAIT_PERIOD_ACTIVE"
 )
 
 func (enum ConstraintViolationExceptionReason) MarshalValue() (string, error) {

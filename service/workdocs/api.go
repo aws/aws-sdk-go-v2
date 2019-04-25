@@ -402,7 +402,7 @@ func (r CreateNotificationSubscriptionRequest) Send(ctx context.Context) (*Creat
 // Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives
 // a confirmation message, and must confirm the subscription.
 //
-// For more information, see Subscribe to Notifications (http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html)
+// For more information, see Subscribe to Notifications (https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html)
 // in the Amazon WorkDocs Developer Guide.
 //
 //    // Example sending a request using the CreateNotificationSubscriptionRequest method.
@@ -1459,7 +1459,7 @@ func (r DescribeRootFoldersRequest) Send(ctx context.Context) (*DescribeRootFold
 //
 // This action requires an authentication token. To get an authentication token,
 // register an application with Amazon WorkDocs. For more information, see Authentication
-// and Access Control for User Applications (http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
+// and Access Control for User Applications (https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html)
 // in the Amazon WorkDocs Developer Guide.
 //
 //    // Example sending a request using the DescribeRootFoldersRequest method.
@@ -3514,7 +3514,7 @@ type CreateNotificationSubscriptionInput struct {
 	_ struct{} `type:"structure"`
 
 	// The endpoint to receive the notifications. If the protocol is HTTPS, the
-	// endpoint is a URL that begins with "https://".
+	// endpoint is a URL that begins with https.
 	//
 	// Endpoint is a required field
 	Endpoint *string `min:"1" type:"string" required:"true"`

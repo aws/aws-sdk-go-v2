@@ -76,6 +76,8 @@ type EFSAPI interface {
 
 	DescribeFileSystemsRequest(*efs.DescribeFileSystemsInput) efs.DescribeFileSystemsRequest
 
+	DescribeLifecycleConfigurationRequest(*efs.DescribeLifecycleConfigurationInput) efs.DescribeLifecycleConfigurationRequest
+
 	DescribeMountTargetSecurityGroupsRequest(*efs.DescribeMountTargetSecurityGroupsInput) efs.DescribeMountTargetSecurityGroupsRequest
 
 	DescribeMountTargetsRequest(*efs.DescribeMountTargetsInput) efs.DescribeMountTargetsRequest
@@ -83,6 +85,8 @@ type EFSAPI interface {
 	DescribeTagsRequest(*efs.DescribeTagsInput) efs.DescribeTagsRequest
 
 	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
+
+	PutLifecycleConfigurationRequest(*efs.PutLifecycleConfigurationInput) efs.PutLifecycleConfigurationRequest
 
 	UpdateFileSystemRequest(*efs.UpdateFileSystemInput) efs.UpdateFileSystemRequest
 }

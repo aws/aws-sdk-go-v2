@@ -846,7 +846,7 @@ type GetSpeechSynthesisTaskInput struct {
 	// The Amazon Polly generated identifier for a speech synthesis task.
 	//
 	// TaskId is a required field
-	TaskId *string `location:"uri" locationName:"TaskId" min:"1" type:"string" required:"true"`
+	TaskId *string `location:"uri" locationName:"TaskId" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -865,9 +865,6 @@ func (s *GetSpeechSynthesisTaskInput) Validate() error {
 
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
-	}
-	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1642,7 +1639,7 @@ type SynthesisTask struct {
 	SpeechMarkTypes []SpeechMarkType `type:"list"`
 
 	// The Amazon Polly generated identifier for a speech synthesis task.
-	TaskId *string `min:"1" type:"string"`
+	TaskId *string `type:"string"`
 
 	// Current status of the individual speech synthesis task.
 	TaskStatus TaskStatus `type:"string" enum:"true"`
@@ -2097,6 +2094,7 @@ type LanguageCode string
 
 // Enum values for LanguageCode
 const (
+	LanguageCodeArb     LanguageCode = "arb"
 	LanguageCodeCmnCn   LanguageCode = "cmn-CN"
 	LanguageCodeCyGb    LanguageCode = "cy-GB"
 	LanguageCodeDaDk    LanguageCode = "da-DK"
@@ -2214,63 +2212,64 @@ type VoiceId string
 
 // Enum values for VoiceId
 const (
-	VoiceIdGeraint   VoiceId = "Geraint"
-	VoiceIdGwyneth   VoiceId = "Gwyneth"
-	VoiceIdMads      VoiceId = "Mads"
-	VoiceIdNaja      VoiceId = "Naja"
-	VoiceIdHans      VoiceId = "Hans"
-	VoiceIdMarlene   VoiceId = "Marlene"
-	VoiceIdNicole    VoiceId = "Nicole"
-	VoiceIdRussell   VoiceId = "Russell"
+	VoiceIdAditi     VoiceId = "Aditi"
 	VoiceIdAmy       VoiceId = "Amy"
+	VoiceIdAstrid    VoiceId = "Astrid"
+	VoiceIdBianca    VoiceId = "Bianca"
 	VoiceIdBrian     VoiceId = "Brian"
+	VoiceIdCarla     VoiceId = "Carla"
+	VoiceIdCarmen    VoiceId = "Carmen"
+	VoiceIdCeline    VoiceId = "Celine"
+	VoiceIdChantal   VoiceId = "Chantal"
+	VoiceIdConchita  VoiceId = "Conchita"
+	VoiceIdCristiano VoiceId = "Cristiano"
+	VoiceIdDora      VoiceId = "Dora"
 	VoiceIdEmma      VoiceId = "Emma"
-	VoiceIdRaveena   VoiceId = "Raveena"
+	VoiceIdEnrique   VoiceId = "Enrique"
+	VoiceIdEwa       VoiceId = "Ewa"
+	VoiceIdFiliz     VoiceId = "Filiz"
+	VoiceIdGeraint   VoiceId = "Geraint"
+	VoiceIdGiorgio   VoiceId = "Giorgio"
+	VoiceIdGwyneth   VoiceId = "Gwyneth"
+	VoiceIdHans      VoiceId = "Hans"
+	VoiceIdInes      VoiceId = "Ines"
 	VoiceIdIvy       VoiceId = "Ivy"
+	VoiceIdJacek     VoiceId = "Jacek"
+	VoiceIdJan       VoiceId = "Jan"
 	VoiceIdJoanna    VoiceId = "Joanna"
 	VoiceIdJoey      VoiceId = "Joey"
 	VoiceIdJustin    VoiceId = "Justin"
+	VoiceIdKarl      VoiceId = "Karl"
 	VoiceIdKendra    VoiceId = "Kendra"
 	VoiceIdKimberly  VoiceId = "Kimberly"
-	VoiceIdMatthew   VoiceId = "Matthew"
-	VoiceIdSalli     VoiceId = "Salli"
-	VoiceIdConchita  VoiceId = "Conchita"
-	VoiceIdEnrique   VoiceId = "Enrique"
-	VoiceIdMiguel    VoiceId = "Miguel"
-	VoiceIdPenelope  VoiceId = "Penelope"
-	VoiceIdChantal   VoiceId = "Chantal"
-	VoiceIdCeline    VoiceId = "Celine"
 	VoiceIdLea       VoiceId = "Lea"
-	VoiceIdMathieu   VoiceId = "Mathieu"
-	VoiceIdDora      VoiceId = "Dora"
-	VoiceIdKarl      VoiceId = "Karl"
-	VoiceIdCarla     VoiceId = "Carla"
-	VoiceIdGiorgio   VoiceId = "Giorgio"
-	VoiceIdMizuki    VoiceId = "Mizuki"
 	VoiceIdLiv       VoiceId = "Liv"
 	VoiceIdLotte     VoiceId = "Lotte"
-	VoiceIdRuben     VoiceId = "Ruben"
-	VoiceIdEwa       VoiceId = "Ewa"
-	VoiceIdJacek     VoiceId = "Jacek"
-	VoiceIdJan       VoiceId = "Jan"
-	VoiceIdMaja      VoiceId = "Maja"
-	VoiceIdRicardo   VoiceId = "Ricardo"
-	VoiceIdVitoria   VoiceId = "Vitoria"
-	VoiceIdCristiano VoiceId = "Cristiano"
-	VoiceIdInes      VoiceId = "Ines"
-	VoiceIdCarmen    VoiceId = "Carmen"
-	VoiceIdMaxim     VoiceId = "Maxim"
-	VoiceIdTatyana   VoiceId = "Tatyana"
-	VoiceIdAstrid    VoiceId = "Astrid"
-	VoiceIdFiliz     VoiceId = "Filiz"
-	VoiceIdVicki     VoiceId = "Vicki"
-	VoiceIdTakumi    VoiceId = "Takumi"
-	VoiceIdSeoyeon   VoiceId = "Seoyeon"
-	VoiceIdAditi     VoiceId = "Aditi"
-	VoiceIdZhiyu     VoiceId = "Zhiyu"
-	VoiceIdBianca    VoiceId = "Bianca"
 	VoiceIdLucia     VoiceId = "Lucia"
+	VoiceIdMads      VoiceId = "Mads"
+	VoiceIdMaja      VoiceId = "Maja"
+	VoiceIdMarlene   VoiceId = "Marlene"
+	VoiceIdMathieu   VoiceId = "Mathieu"
+	VoiceIdMatthew   VoiceId = "Matthew"
+	VoiceIdMaxim     VoiceId = "Maxim"
 	VoiceIdMia       VoiceId = "Mia"
+	VoiceIdMiguel    VoiceId = "Miguel"
+	VoiceIdMizuki    VoiceId = "Mizuki"
+	VoiceIdNaja      VoiceId = "Naja"
+	VoiceIdNicole    VoiceId = "Nicole"
+	VoiceIdPenelope  VoiceId = "Penelope"
+	VoiceIdRaveena   VoiceId = "Raveena"
+	VoiceIdRicardo   VoiceId = "Ricardo"
+	VoiceIdRuben     VoiceId = "Ruben"
+	VoiceIdRussell   VoiceId = "Russell"
+	VoiceIdSalli     VoiceId = "Salli"
+	VoiceIdSeoyeon   VoiceId = "Seoyeon"
+	VoiceIdTakumi    VoiceId = "Takumi"
+	VoiceIdTatyana   VoiceId = "Tatyana"
+	VoiceIdVicki     VoiceId = "Vicki"
+	VoiceIdVitoria   VoiceId = "Vitoria"
+	VoiceIdZeina     VoiceId = "Zeina"
+	VoiceIdZhiyu     VoiceId = "Zhiyu"
 )
 
 func (enum VoiceId) MarshalValue() (string, error) {

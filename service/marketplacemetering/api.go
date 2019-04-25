@@ -358,10 +358,8 @@ type MeterUsageInput struct {
 
 	// Checks whether you have the permissions required for the action, but does
 	// not make the request. If you have the permissions, the request returns DryRunOperation;
-	// otherwise, it returns UnauthorizedException.
-	//
-	// DryRun is a required field
-	DryRun *bool `type:"boolean" required:"true"`
+	// otherwise, it returns UnauthorizedException. Defaults to false if not specified.
+	DryRun *bool `type:"boolean"`
 
 	// Product code is used to uniquely identify a product in AWS Marketplace. The
 	// product code should be the same as the one used during the publishing of
@@ -382,10 +380,8 @@ type MeterUsageInput struct {
 	// UsageDimension is a required field
 	UsageDimension *string `min:"1" type:"string" required:"true"`
 
-	// Consumption value for the hour.
-	//
-	// UsageQuantity is a required field
-	UsageQuantity *int64 `type:"integer" required:"true"`
+	// Consumption value for the hour. Defaults to 0 if not specified.
+	UsageQuantity *int64 `type:"integer"`
 }
 
 // String returns the string representation
@@ -401,10 +397,6 @@ func (s MeterUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MeterUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MeterUsageInput"}
-
-	if s.DryRun == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DryRun"))
-	}
 
 	if s.ProductCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
@@ -422,10 +414,6 @@ func (s *MeterUsageInput) Validate() error {
 	}
 	if s.UsageDimension != nil && len(*s.UsageDimension) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UsageDimension", 1))
-	}
-
-	if s.UsageQuantity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UsageQuantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -636,10 +624,8 @@ type UsageRecord struct {
 	Dimension *string `min:"1" type:"string" required:"true"`
 
 	// The quantity of usage consumed by the customer for the given dimension and
-	// time.
-	//
-	// Quantity is a required field
-	Quantity *int64 `type:"integer" required:"true"`
+	// time. Defaults to 0 if not specified.
+	Quantity *int64 `type:"integer"`
 
 	// Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions
 	// of the timestamp will be ignored.
@@ -676,10 +662,6 @@ func (s *UsageRecord) Validate() error {
 	}
 	if s.Dimension != nil && len(*s.Dimension) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Dimension", 1))
-	}
-
-	if s.Quantity == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if s.Timestamp == nil {

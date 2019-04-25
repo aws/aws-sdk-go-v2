@@ -94,6 +94,8 @@ type LambdaAPI interface {
 
 	GetLayerVersionRequest(*lambda.GetLayerVersionInput) lambda.GetLayerVersionRequest
 
+	GetLayerVersionByArnRequest(*lambda.GetLayerVersionByArnInput) lambda.GetLayerVersionByArnRequest
+
 	GetLayerVersionPolicyRequest(*lambda.GetLayerVersionPolicyInput) lambda.GetLayerVersionPolicyRequest
 
 	GetPolicyRequest(*lambda.GetPolicyInput) lambda.GetPolicyRequest

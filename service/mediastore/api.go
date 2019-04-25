@@ -246,7 +246,8 @@ func (r DeleteLifecyclePolicyRequest) Send(ctx context.Context) (*DeleteLifecycl
 // DeleteLifecyclePolicyRequest returns a request value for making API operation for
 // AWS Elemental MediaStore.
 //
-// Removes an object lifecycle policy from a container.
+// Removes an object lifecycle policy from a container. It takes up to 20 minutes
+// for the change to take effect.
 //
 //    // Example sending a request using the DeleteLifecyclePolicyRequest method.
 //    req := client.DeleteLifecyclePolicyRequest(params)
@@ -643,6 +644,9 @@ func (r PutCorsPolicyRequest) Send(ctx context.Context) (*PutCorsPolicyOutput, e
 // to 398,000 characters. You can add up to 100 rules to a CORS policy. If more
 // than one rule applies, the service uses the first applicable rule listed.
 //
+// To learn more about CORS, see Cross-Origin Resource Sharing (CORS) in AWS
+// Elemental MediaStore (https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html).
+//
 //    // Example sending a request using the PutCorsPolicyRequest method.
 //    req := client.PutCorsPolicyRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -694,7 +698,10 @@ func (r PutLifecyclePolicyRequest) Send(ctx context.Context) (*PutLifecyclePolic
 //
 // Writes an object lifecycle policy to a container. If the container already
 // has an object lifecycle policy, the service replaces the existing policy
-// with the new policy.
+// with the new policy. It takes up to 20 minutes for the change to take effect.
+//
+// For information about how to construct an object lifecycle policy, see Components
+// of an Object Lifecycle Policy (https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html).
 //
 //    // Example sending a request using the PutLifecyclePolicyRequest method.
 //    req := client.PutLifecyclePolicyRequest(params)
@@ -722,6 +729,112 @@ func (c *MediaStore) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) P
 	return PutLifecyclePolicyRequest{Request: req, Input: input, Copy: c.PutLifecyclePolicyRequest}
 }
 
+const opStartAccessLogging = "StartAccessLogging"
+
+// StartAccessLoggingRequest is a API request type for the StartAccessLogging API operation.
+type StartAccessLoggingRequest struct {
+	*aws.Request
+	Input *StartAccessLoggingInput
+	Copy  func(*StartAccessLoggingInput) StartAccessLoggingRequest
+}
+
+// Send marshals and sends the StartAccessLogging API request.
+func (r StartAccessLoggingRequest) Send(ctx context.Context) (*StartAccessLoggingOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartAccessLoggingOutput), nil
+}
+
+// StartAccessLoggingRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Starts access logging on the specified container. When you enable access
+// logging on a container, MediaStore delivers access logs for objects stored
+// in that container to Amazon CloudWatch Logs.
+//
+//    // Example sending a request using the StartAccessLoggingRequest method.
+//    req := client.StartAccessLoggingRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLogging
+func (c *MediaStore) StartAccessLoggingRequest(input *StartAccessLoggingInput) StartAccessLoggingRequest {
+	op := &aws.Operation{
+		Name:       opStartAccessLogging,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartAccessLoggingInput{}
+	}
+
+	output := &StartAccessLoggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartAccessLoggingRequest{Request: req, Input: input, Copy: c.StartAccessLoggingRequest}
+}
+
+const opStopAccessLogging = "StopAccessLogging"
+
+// StopAccessLoggingRequest is a API request type for the StopAccessLogging API operation.
+type StopAccessLoggingRequest struct {
+	*aws.Request
+	Input *StopAccessLoggingInput
+	Copy  func(*StopAccessLoggingInput) StopAccessLoggingRequest
+}
+
+// Send marshals and sends the StopAccessLogging API request.
+func (r StopAccessLoggingRequest) Send(ctx context.Context) (*StopAccessLoggingOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopAccessLoggingOutput), nil
+}
+
+// StopAccessLoggingRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Stops access logging on the specified container. When you stop access logging
+// on a container, MediaStore stops sending access logs to Amazon CloudWatch
+// Logs. These access logs are not saved and are not retrievable.
+//
+//    // Example sending a request using the StopAccessLoggingRequest method.
+//    req := client.StopAccessLoggingRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLogging
+func (c *MediaStore) StopAccessLoggingRequest(input *StopAccessLoggingInput) StopAccessLoggingRequest {
+	op := &aws.Operation{
+		Name:       opStopAccessLogging,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopAccessLoggingInput{}
+	}
+
+	output := &StopAccessLoggingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopAccessLoggingRequest{Request: req, Input: input, Copy: c.StopAccessLoggingRequest}
+}
+
 // This section describes operations that you can perform on an AWS Elemental
 // MediaStore container.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Container
@@ -735,6 +848,13 @@ type Container struct {
 	//
 	// For example: arn:aws:mediastore:us-west-2:111122223333:container/movies
 	ARN *string `min:"1" type:"string"`
+
+	// The state of access logging on the container. This value is false by default,
+	// indicating that AWS Elemental MediaStore does not send access logs to Amazon
+	// CloudWatch Logs. When you enable access logging on the container, MediaStore
+	// changes this value to true, indicating that the service delivers access logs
+	// for objects stored in that container to CloudWatch Logs.
+	AccessLoggingEnabled *bool `type:"boolean"`
 
 	// Unix timestamp.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -1703,6 +1823,124 @@ func (s PutLifecyclePolicyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutLifecyclePolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLoggingInput
+type StartAccessLoggingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that you want to start access logging on.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StartAccessLoggingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartAccessLoggingInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartAccessLoggingInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartAccessLoggingInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StartAccessLoggingOutput
+type StartAccessLoggingOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StartAccessLoggingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartAccessLoggingOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartAccessLoggingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLoggingInput
+type StopAccessLoggingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that you want to stop access logging on.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopAccessLoggingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopAccessLoggingInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopAccessLoggingInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopAccessLoggingInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/StopAccessLoggingOutput
+type StopAccessLoggingOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopAccessLoggingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopAccessLoggingOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopAccessLoggingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 

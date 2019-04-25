@@ -268,6 +268,58 @@ func (c *PinpointSMSVoice) GetConfigurationSetEventDestinationsRequest(input *Ge
 	return GetConfigurationSetEventDestinationsRequest{Request: req, Input: input, Copy: c.GetConfigurationSetEventDestinationsRequest}
 }
 
+const opListConfigurationSets = "ListConfigurationSets"
+
+// ListConfigurationSetsRequest is a API request type for the ListConfigurationSets API operation.
+type ListConfigurationSetsRequest struct {
+	*aws.Request
+	Input *ListConfigurationSetsInput
+	Copy  func(*ListConfigurationSetsInput) ListConfigurationSetsRequest
+}
+
+// Send marshals and sends the ListConfigurationSets API request.
+func (r ListConfigurationSetsRequest) Send(ctx context.Context) (*ListConfigurationSetsOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListConfigurationSetsOutput), nil
+}
+
+// ListConfigurationSetsRequest returns a request value for making API operation for
+// Amazon Pinpoint SMS and Voice Service.
+//
+// List all of the configuration sets associated with your Amazon Pinpoint account
+// in the current region.
+//
+//    // Example sending a request using the ListConfigurationSetsRequest method.
+//    req := client.ListConfigurationSetsRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSets
+func (c *PinpointSMSVoice) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) ListConfigurationSetsRequest {
+	op := &aws.Operation{
+		Name:       opListConfigurationSets,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/sms-voice/configuration-sets",
+	}
+
+	if input == nil {
+		input = &ListConfigurationSetsInput{}
+	}
+
+	output := &ListConfigurationSetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListConfigurationSetsRequest{Request: req, Input: input, Copy: c.ListConfigurationSetsRequest}
+}
+
 const opSendVoiceMessage = "SendVoiceMessage"
 
 // SendVoiceMessageRequest is a API request type for the SendVoiceMessage API operation.
@@ -1051,6 +1103,99 @@ func (s KinesisFirehoseDestination) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IamRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsRequest
+type ListConfigurationSetsInput struct {
+	_ struct{} `type:"structure"`
+
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
+
+	PageSize *string `location:"querystring" locationName:"PageSize" type:"string"`
+}
+
+// String returns the string representation
+func (s ListConfigurationSetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListConfigurationSetsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListConfigurationSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PageSize != nil {
+		v := *s.PageSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageSize", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that contains information about the configuration sets for your
+// account in the current region.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-2018-09-05/ListConfigurationSetsResponse
+type ListConfigurationSetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object that contains a list of configuration sets for your account in
+	// the current region.
+	ConfigurationSets []string `type:"list"`
+
+	// A token returned from a previous call to ListConfigurationSets to indicate
+	// the position in the list of configuration sets.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListConfigurationSetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListConfigurationSetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListConfigurationSetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListConfigurationSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ConfigurationSets) > 0 {
+		v := s.ConfigurationSets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ConfigurationSets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

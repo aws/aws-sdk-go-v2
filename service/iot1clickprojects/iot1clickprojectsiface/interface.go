@@ -84,6 +84,12 @@ type IoT1ClickProjectsAPI interface {
 
 	ListProjectsRequest(*iot1clickprojects.ListProjectsInput) iot1clickprojects.ListProjectsRequest
 
+	ListTagsForResourceRequest(*iot1clickprojects.ListTagsForResourceInput) iot1clickprojects.ListTagsForResourceRequest
+
+	TagResourceRequest(*iot1clickprojects.TagResourceInput) iot1clickprojects.TagResourceRequest
+
+	UntagResourceRequest(*iot1clickprojects.UntagResourceInput) iot1clickprojects.UntagResourceRequest
+
 	UpdatePlacementRequest(*iot1clickprojects.UpdatePlacementInput) iot1clickprojects.UpdatePlacementRequest
 
 	UpdateProjectRequest(*iot1clickprojects.UpdateProjectInput) iot1clickprojects.UpdateProjectRequest

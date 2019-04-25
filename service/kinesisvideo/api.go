@@ -42,7 +42,7 @@ func (r CreateStreamRequest) Send(ctx context.Context) (*CreateStreamOutput, err
 //
 // CreateStream is an asynchronous operation.
 //
-// For information about how the service works, see How it Works (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html).
+// For information about how the service works, see How it Works (https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html).
 //
 // You must have permissions for the KinesisVideo:CreateStream action.
 //
@@ -378,7 +378,7 @@ func (r TagStreamRequest) Send(ctx context.Context) (*TagStreamOutput, error) {
 // optional) that you can define and assign to AWS resources. If you specify
 // a tag that already exists, the tag value is replaced with the value that
 // you specify in the request. For more information, see Using Cost Allocation
-// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the AWS Billing and Cost Management User Guide.
 //
 // You must provide either the StreamName or the StreamARN.
@@ -628,7 +628,7 @@ type CreateStreamInput struct {
 	// If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo)
 	// is used.
 	//
-	// For more information, see DescribeKey (http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
+	// For more information, see DescribeKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
 	KmsKeyId *string `min:"1" type:"string"`
 
 	// The media type of the stream. Consumers of the stream can use this information
@@ -636,9 +636,6 @@ type CreateStreamInput struct {
 	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml). If
 	// you choose to specify the MediaType, see Naming Requirements (https://tools.ietf.org/html/rfc6838#section-4.2)
 	// for guidelines.
-	//
-	// To play video on the console, the media must be H.264 encoded, and you need
-	// to specify this video type in this parameter as video/h264.
 	//
 	// This parameter is optional; the default value is null (or empty in JSON).
 	MediaType *string `min:"1" type:"string"`
@@ -650,6 +647,10 @@ type CreateStreamInput struct {
 	//
 	// StreamName is a required field
 	StreamName *string `min:"1" type:"string" required:"true"`
+
+	// A list of tags to associate with the specified stream. Each tag is a key-value
+	// pair (the value is optional).
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -680,6 +681,9 @@ func (s *CreateStreamInput) Validate() error {
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -720,6 +724,18 @@ func (s CreateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -1677,7 +1693,7 @@ type UpdateDataRetentionInput struct {
 	CurrentVersion *string `min:"1" type:"string" required:"true"`
 
 	// The retention period, in hours. The value you specify replaces the current
-	// value.
+	// value. The maximum value for this parameter is 87600 (ten years).
 	//
 	// DataRetentionChangeInHours is a required field
 	DataRetentionChangeInHours *int64 `min:"1" type:"integer" required:"true"`

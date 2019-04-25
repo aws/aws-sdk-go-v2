@@ -107,6 +107,23 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "UpdateClusterConfig":{
+      "name":"UpdateClusterConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/clusters/{name}/update-config"
+      },
+      "input":{"shape":"UpdateClusterConfigRequest"},
+      "output":{"shape":"UpdateClusterConfigResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ClientException"},
+        {"shape":"ServerException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidRequestException"}
+      ]
+    },
     "UpdateClusterVersion":{
       "name":"UpdateClusterVersion",
       "http":{
@@ -126,6 +143,11 @@
     }
   },
   "shapes":{
+    "Boolean":{"type":"boolean"},
+    "BoxedBoolean":{
+      "type":"boolean",
+      "box":true
+    },
     "Certificate":{
       "type":"structure",
       "members":{
@@ -151,6 +173,7 @@
         "endpoint":{"shape":"String"},
         "roleArn":{"shape":"String"},
         "resourcesVpcConfig":{"shape":"VpcConfigResponse"},
+        "logging":{"shape":"Logging"},
         "status":{"shape":"ClusterStatus"},
         "certificateAuthority":{"shape":"Certificate"},
         "clientRequestToken":{"shape":"String"},
@@ -184,6 +207,7 @@
         "version":{"shape":"String"},
         "roleArn":{"shape":"String"},
         "resourcesVpcConfig":{"shape":"VpcConfigRequest"},
+        "logging":{"shape":"Logging"},
         "clientRequestToken":{
           "shape":"String",
           "idempotencyToken":true
@@ -360,6 +384,37 @@
         "nextToken":{"shape":"String"}
       }
     },
+    "LogSetup":{
+      "type":"structure",
+      "members":{
+        "types":{"shape":"LogTypes"},
+        "enabled":{"shape":"BoxedBoolean"}
+      }
+    },
+    "LogSetups":{
+      "type":"list",
+      "member":{"shape":"LogSetup"}
+    },
+    "LogType":{
+      "type":"string",
+      "enum":[
+        "api",
+        "audit",
+        "authenticator",
+        "controllerManager",
+        "scheduler"
+      ]
+    },
+    "LogTypes":{
+      "type":"list",
+      "member":{"shape":"LogType"}
+    },
+    "Logging":{
+      "type":"structure",
+      "members":{
+        "clusterLogging":{"shape":"LogSetups"}
+      }
+    },
     "ResourceInUseException":{
       "type":"structure",
       "members":{
@@ -433,6 +488,29 @@
         "errors":{"shape":"ErrorDetails"}
       }
     },
+    "UpdateClusterConfigRequest":{
+      "type":"structure",
+      "required":["name"],
+      "members":{
+        "name":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"name"
+        },
+        "resourcesVpcConfig":{"shape":"VpcConfigRequest"},
+        "logging":{"shape":"Logging"},
+        "clientRequestToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "UpdateClusterConfigResponse":{
+      "type":"structure",
+      "members":{
+        "update":{"shape":"Update"}
+      }
+    },
     "UpdateClusterVersionRequest":{
       "type":"structure",
       "required":[
@@ -469,7 +547,10 @@
       "type":"string",
       "enum":[
         "Version",
-        "PlatformVersion"
+        "PlatformVersion",
+        "EndpointPrivateAccess",
+        "EndpointPublicAccess",
+        "ClusterLogging"
       ]
     },
     "UpdateParams":{
@@ -487,14 +568,19 @@
     },
     "UpdateType":{
       "type":"string",
-      "enum":["VersionUpdate"]
+      "enum":[
+        "VersionUpdate",
+        "EndpointAccessUpdate",
+        "LoggingUpdate"
+      ]
     },
     "VpcConfigRequest":{
       "type":"structure",
-      "required":["subnetIds"],
       "members":{
         "subnetIds":{"shape":"StringList"},
-        "securityGroupIds":{"shape":"StringList"}
+        "securityGroupIds":{"shape":"StringList"},
+        "endpointPublicAccess":{"shape":"BoxedBoolean"},
+        "endpointPrivateAccess":{"shape":"BoxedBoolean"}
       }
     },
     "VpcConfigResponse":{
@@ -502,7 +588,9 @@
       "members":{
         "subnetIds":{"shape":"StringList"},
         "securityGroupIds":{"shape":"StringList"},
-        "vpcId":{"shape":"String"}
+        "vpcId":{"shape":"String"},
+        "endpointPublicAccess":{"shape":"Boolean"},
+        "endpointPrivateAccess":{"shape":"Boolean"}
       }
     }
   }

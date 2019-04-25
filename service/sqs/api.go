@@ -3762,7 +3762,7 @@ type TagQueueInput struct {
 	// The list of tags to be added to the specified queue.
 	//
 	// Tags is a required field
-	Tags map[string]string `locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
+	Tags map[string]string `locationName:"Tag" locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
 }
 
 // String returns the string representation

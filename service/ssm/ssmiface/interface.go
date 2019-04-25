@@ -206,6 +206,8 @@ type SSMAPI interface {
 
 	GetPatchBaselineForPatchGroupRequest(*ssm.GetPatchBaselineForPatchGroupInput) ssm.GetPatchBaselineForPatchGroupRequest
 
+	GetServiceSettingRequest(*ssm.GetServiceSettingInput) ssm.GetServiceSettingRequest
+
 	LabelParameterVersionRequest(*ssm.LabelParameterVersionInput) ssm.LabelParameterVersionRequest
 
 	ListAssociationVersionsRequest(*ssm.ListAssociationVersionsInput) ssm.ListAssociationVersionsRequest
@@ -250,6 +252,8 @@ type SSMAPI interface {
 
 	RemoveTagsFromResourceRequest(*ssm.RemoveTagsFromResourceInput) ssm.RemoveTagsFromResourceRequest
 
+	ResetServiceSettingRequest(*ssm.ResetServiceSettingInput) ssm.ResetServiceSettingRequest
+
 	ResumeSessionRequest(*ssm.ResumeSessionInput) ssm.ResumeSessionRequest
 
 	SendAutomationSignalRequest(*ssm.SendAutomationSignalInput) ssm.SendAutomationSignalRequest
@@ -283,6 +287,8 @@ type SSMAPI interface {
 	UpdateManagedInstanceRoleRequest(*ssm.UpdateManagedInstanceRoleInput) ssm.UpdateManagedInstanceRoleRequest
 
 	UpdatePatchBaselineRequest(*ssm.UpdatePatchBaselineInput) ssm.UpdatePatchBaselineRequest
+
+	UpdateServiceSettingRequest(*ssm.UpdateServiceSettingInput) ssm.UpdateServiceSettingRequest
 }
 
 var _ SSMAPI = (*ssm.SSM)(nil)

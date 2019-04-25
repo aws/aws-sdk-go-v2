@@ -1408,7 +1408,7 @@ func (r GetBucketLifecycleRequest) Send(ctx context.Context) (*GetBucketLifecycl
 // GetBucketLifecycleRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deprecated, see the GetBucketLifecycleConfiguration operation.
+// No longer used, see the GetBucketLifecycleConfiguration operation.
 //
 //    // Example sending a request using the GetBucketLifecycleRequest method.
 //    req := client.GetBucketLifecycleRequest(params)
@@ -1668,7 +1668,7 @@ func (r GetBucketNotificationRequest) Send(ctx context.Context) (*GetBucketNotif
 // GetBucketNotificationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deprecated, see the GetBucketNotificationConfiguration operation.
+// No longer used, see the GetBucketNotificationConfiguration operation.
 //
 //    // Example sending a request using the GetBucketNotificationRequest method.
 //    req := client.GetBucketNotificationRequest(params)
@@ -3705,7 +3705,7 @@ func (r PutBucketLifecycleRequest) Send(ctx context.Context) (*PutBucketLifecycl
 // PutBucketLifecycleRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deprecated, see the PutBucketLifecycleConfiguration operation.
+// No longer used, see the PutBucketLifecycleConfiguration operation.
 //
 //    // Example sending a request using the PutBucketLifecycleRequest method.
 //    req := client.PutBucketLifecycleRequest(params)
@@ -3924,7 +3924,7 @@ func (r PutBucketNotificationRequest) Send(ctx context.Context) (*PutBucketNotif
 // PutBucketNotificationRequest returns a request value for making API operation for
 // Amazon Simple Storage Service.
 //
-// Deprecated, see the PutBucketNotificationConfiguraiton operation.
+// No longer used, see the PutBucketNotificationConfiguration operation.
 //
 //    // Example sending a request using the PutBucketNotificationRequest method.
 //    req := client.PutBucketNotificationRequest(params)
@@ -7018,7 +7018,7 @@ type CreateBucketConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the region where the bucket will be created. If you don't specify
-	// a region, the bucket will be created in US Standard.
+	// a region, the bucket is created in US East (N. Virginia) Region (us-east-1).
 	LocationConstraint BucketLocationConstraint `type:"string" enum:"true"`
 }
 
@@ -9673,7 +9673,7 @@ type FilterRule struct {
 	// The object key name prefix or suffix identifying one or more objects to which
 	// the filtering rule applies. The maximum prefix length is 1,024 characters.
 	// Overlapping prefixes and suffixes are not supported. For more information,
-	// see Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Name FilterRuleName `type:"string" enum:"true"`
 
@@ -14446,7 +14446,7 @@ type LambdaFunctionConfiguration struct {
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
 	// A container for object key name filtering rules. For information about key
-	// name filtering, see Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
@@ -14659,7 +14659,7 @@ type LifecycleRule struct {
 	NoncurrentVersionTransitions []NoncurrentVersionTransition `locationName:"NoncurrentVersionTransition" type:"list" flattened:"true"`
 
 	// Prefix identifying one or more objects to which the rule applies. This is
-	// deprecated; use Filter instead.
+	// No longer used; use Filter instead.
 	Prefix *string `deprecated:"true" type:"string"`
 
 	// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule
@@ -17294,8 +17294,8 @@ type NoncurrentVersionExpiration struct {
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	NoncurrentDays *int64 `type:"integer"`
 }
 
@@ -17321,11 +17321,12 @@ func (s NoncurrentVersionExpiration) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // Container for the transition rule that describes when noncurrent objects
-// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER
-// storage class. If your bucket is versioning-enabled (or versioning is suspended),
-// you can set this action to request that Amazon S3 transition noncurrent object
-// versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER storage
-// class at a specific period in the object's lifetime.
+// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER or
+// DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
+// is suspended), you can set this action to request that Amazon S3 transition
+// noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,
+// GLACIER or DEEP_ARCHIVE storage class at a specific period in the object's
+// lifetime.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionTransition
 type NoncurrentVersionTransition struct {
 	_ struct{} `type:"structure"`
@@ -17333,8 +17334,8 @@ type NoncurrentVersionTransition struct {
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html)
+	// in the Amazon Simple Storage Service Developer Guide.
 	NoncurrentDays *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
@@ -17369,7 +17370,7 @@ func (s NoncurrentVersionTransition) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // A container for object key name filtering rules. For information about key
-// name filtering, see Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 // in the Amazon Simple Storage Service Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter
 type NotificationConfigurationFilter struct {
@@ -20134,7 +20135,8 @@ type PutObjectInput struct {
 	// body cannot be determined automatically.
 	ContentLength *int64 `location:"header" locationName:"Content-Length" type:"long"`
 
-	// The base64-encoded 128-bit MD5 digest of the part data.
+	// The base64-encoded 128-bit MD5 digest of the part data. This parameter is
+	// auto-populated when using the command from the CLI
 	ContentMD5 *string `location:"header" locationName:"Content-MD5" type:"string"`
 
 	// A standard MIME type describing the format of the object data.
@@ -20604,6 +20606,7 @@ type PutObjectLockConfigurationInput struct {
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
 	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"true"`
 
+	// A token to allow Object Lock to be enabled for an existing bucket.
 	Token *string `location:"header" locationName:"x-amz-bucket-object-lock-token" type:"string"`
 }
 
@@ -21201,7 +21204,7 @@ type QueueConfiguration struct {
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
 	// A container for object key name filtering rules. For information about key
-	// name filtering, see Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
@@ -22218,11 +22221,12 @@ type Rule struct {
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration `type:"structure"`
 
 	// Container for the transition rule that describes when noncurrent objects
-	// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER
-	// storage class. If your bucket is versioning-enabled (or versioning is suspended),
-	// you can set this action to request that Amazon S3 transition noncurrent object
-	// versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING or GLACIER storage
-	// class at a specific period in the object's lifetime.
+	// transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER or
+	// DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning
+	// is suspended), you can set this action to request that Amazon S3 transition
+	// noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING,
+	// GLACIER or DEEP_ARCHIVE storage class at a specific period in the object's
+	// lifetime.
 	NoncurrentVersionTransition *NoncurrentVersionTransition `type:"structure"`
 
 	// Prefix identifying one or more objects to which the rule applies.
@@ -23034,7 +23038,7 @@ type TopicConfiguration struct {
 	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
 	// A container for object key name filtering rules. For information about key
-	// name filtering, see Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+	// name filtering, see Configuring Event Notifications (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
 	// in the Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter `type:"structure"`
 
@@ -23254,7 +23258,7 @@ type UploadPartCopyInput struct {
 	// the form bytes=first-last, where the first and last are the zero-based byte
 	// offsets to copy. For example, bytes=0-9 indicates that you want to copy the
 	// first ten bytes of the source. You can copy a range only if the source object
-	// is greater than 5 GB.
+	// is greater than 5 MB.
 	CopySourceRange *string `location:"header" locationName:"x-amz-copy-source-range" type:"string"`
 
 	// Specifies the algorithm to use when decrypting the source object (e.g., AES256).
@@ -24486,6 +24490,7 @@ const (
 	ObjectStorageClassStandardIa         ObjectStorageClass = "STANDARD_IA"
 	ObjectStorageClassOnezoneIa          ObjectStorageClass = "ONEZONE_IA"
 	ObjectStorageClassIntelligentTiering ObjectStorageClass = "INTELLIGENT_TIERING"
+	ObjectStorageClassDeepArchive        ObjectStorageClass = "DEEP_ARCHIVE"
 )
 
 func (enum ObjectStorageClass) MarshalValue() (string, error) {
@@ -24734,6 +24739,7 @@ const (
 	StorageClassOnezoneIa          StorageClass = "ONEZONE_IA"
 	StorageClassIntelligentTiering StorageClass = "INTELLIGENT_TIERING"
 	StorageClassGlacier            StorageClass = "GLACIER"
+	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
 )
 
 func (enum StorageClass) MarshalValue() (string, error) {
@@ -24804,6 +24810,7 @@ const (
 	TransitionStorageClassStandardIa         TransitionStorageClass = "STANDARD_IA"
 	TransitionStorageClassOnezoneIa          TransitionStorageClass = "ONEZONE_IA"
 	TransitionStorageClassIntelligentTiering TransitionStorageClass = "INTELLIGENT_TIERING"
+	TransitionStorageClassDeepArchive        TransitionStorageClass = "DEEP_ARCHIVE"
 )
 
 func (enum TransitionStorageClass) MarshalValue() (string, error) {

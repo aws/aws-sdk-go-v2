@@ -87,6 +87,10 @@ type MediaStoreAPI interface {
 	PutCorsPolicyRequest(*mediastore.PutCorsPolicyInput) mediastore.PutCorsPolicyRequest
 
 	PutLifecyclePolicyRequest(*mediastore.PutLifecyclePolicyInput) mediastore.PutLifecyclePolicyRequest
+
+	StartAccessLoggingRequest(*mediastore.StartAccessLoggingInput) mediastore.StartAccessLoggingRequest
+
+	StopAccessLoggingRequest(*mediastore.StopAccessLoggingInput) mediastore.StopAccessLoggingRequest
 }
 
 var _ MediaStoreAPI = (*mediastore.MediaStore)(nil)

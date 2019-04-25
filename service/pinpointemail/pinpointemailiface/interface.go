@@ -108,6 +108,8 @@ type PinpointEmailAPI interface {
 
 	ListEmailIdentitiesRequest(*pinpointemail.ListEmailIdentitiesInput) pinpointemail.ListEmailIdentitiesRequest
 
+	ListTagsForResourceRequest(*pinpointemail.ListTagsForResourceInput) pinpointemail.ListTagsForResourceRequest
+
 	PutAccountDedicatedIpWarmupAttributesRequest(*pinpointemail.PutAccountDedicatedIpWarmupAttributesInput) pinpointemail.PutAccountDedicatedIpWarmupAttributesRequest
 
 	PutAccountSendingAttributesRequest(*pinpointemail.PutAccountSendingAttributesInput) pinpointemail.PutAccountSendingAttributesRequest
@@ -133,6 +135,10 @@ type PinpointEmailAPI interface {
 	PutEmailIdentityMailFromAttributesRequest(*pinpointemail.PutEmailIdentityMailFromAttributesInput) pinpointemail.PutEmailIdentityMailFromAttributesRequest
 
 	SendEmailRequest(*pinpointemail.SendEmailInput) pinpointemail.SendEmailRequest
+
+	TagResourceRequest(*pinpointemail.TagResourceInput) pinpointemail.TagResourceRequest
+
+	UntagResourceRequest(*pinpointemail.UntagResourceInput) pinpointemail.UntagResourceRequest
 
 	UpdateConfigurationSetEventDestinationRequest(*pinpointemail.UpdateConfigurationSetEventDestinationInput) pinpointemail.UpdateConfigurationSetEventDestinationRequest
 }

@@ -91,6 +91,8 @@ type CloudWatchAPI interface {
 
 	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
 
+	ListTagsForResourceRequest(*cloudwatch.ListTagsForResourceInput) cloudwatch.ListTagsForResourceRequest
+
 	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
 
 	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
@@ -98,6 +100,10 @@ type CloudWatchAPI interface {
 	PutMetricDataRequest(*cloudwatch.PutMetricDataInput) cloudwatch.PutMetricDataRequest
 
 	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
+
+	TagResourceRequest(*cloudwatch.TagResourceInput) cloudwatch.TagResourceRequest
+
+	UntagResourceRequest(*cloudwatch.UntagResourceInput) cloudwatch.UntagResourceRequest
 
 	WaitUntilAlarmExists(context.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error
 }

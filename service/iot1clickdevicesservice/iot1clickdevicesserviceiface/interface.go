@@ -78,7 +78,13 @@ type IoT1ClickDevicesServiceAPI interface {
 
 	ListDevicesRequest(*iot1clickdevicesservice.ListDevicesInput) iot1clickdevicesservice.ListDevicesRequest
 
+	ListTagsForResourceRequest(*iot1clickdevicesservice.ListTagsForResourceInput) iot1clickdevicesservice.ListTagsForResourceRequest
+
+	TagResourceRequest(*iot1clickdevicesservice.TagResourceInput) iot1clickdevicesservice.TagResourceRequest
+
 	UnclaimDeviceRequest(*iot1clickdevicesservice.UnclaimDeviceInput) iot1clickdevicesservice.UnclaimDeviceRequest
+
+	UntagResourceRequest(*iot1clickdevicesservice.UntagResourceInput) iot1clickdevicesservice.UntagResourceRequest
 
 	UpdateDeviceStateRequest(*iot1clickdevicesservice.UpdateDeviceStateInput) iot1clickdevicesservice.UpdateDeviceStateRequest
 }

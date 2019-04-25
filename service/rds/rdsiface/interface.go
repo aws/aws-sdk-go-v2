@@ -67,6 +67,8 @@ import (
 type RDSAPI interface {
 	AddRoleToDBClusterRequest(*rds.AddRoleToDBClusterInput) rds.AddRoleToDBClusterRequest
 
+	AddRoleToDBInstanceRequest(*rds.AddRoleToDBInstanceInput) rds.AddRoleToDBInstanceRequest
+
 	AddSourceIdentifierToSubscriptionRequest(*rds.AddSourceIdentifierToSubscriptionInput) rds.AddSourceIdentifierToSubscriptionRequest
 
 	AddTagsToResourceRequest(*rds.AddTagsToResourceInput) rds.AddTagsToResourceRequest
@@ -248,6 +250,8 @@ type RDSAPI interface {
 	RemoveFromGlobalClusterRequest(*rds.RemoveFromGlobalClusterInput) rds.RemoveFromGlobalClusterRequest
 
 	RemoveRoleFromDBClusterRequest(*rds.RemoveRoleFromDBClusterInput) rds.RemoveRoleFromDBClusterRequest
+
+	RemoveRoleFromDBInstanceRequest(*rds.RemoveRoleFromDBInstanceInput) rds.RemoveRoleFromDBInstanceRequest
 
 	RemoveSourceIdentifierFromSubscriptionRequest(*rds.RemoveSourceIdentifierFromSubscriptionInput) rds.RemoveSourceIdentifierFromSubscriptionRequest
 

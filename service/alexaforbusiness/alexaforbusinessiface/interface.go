@@ -82,6 +82,8 @@ type AlexaForBusinessAPI interface {
 
 	CreateContactRequest(*alexaforbusiness.CreateContactInput) alexaforbusiness.CreateContactRequest
 
+	CreateGatewayGroupRequest(*alexaforbusiness.CreateGatewayGroupInput) alexaforbusiness.CreateGatewayGroupRequest
+
 	CreateProfileRequest(*alexaforbusiness.CreateProfileInput) alexaforbusiness.CreateProfileRequest
 
 	CreateRoomRequest(*alexaforbusiness.CreateRoomInput) alexaforbusiness.CreateRoomRequest
@@ -99,6 +101,8 @@ type AlexaForBusinessAPI interface {
 	DeleteContactRequest(*alexaforbusiness.DeleteContactInput) alexaforbusiness.DeleteContactRequest
 
 	DeleteDeviceRequest(*alexaforbusiness.DeleteDeviceInput) alexaforbusiness.DeleteDeviceRequest
+
+	DeleteGatewayGroupRequest(*alexaforbusiness.DeleteGatewayGroupInput) alexaforbusiness.DeleteGatewayGroupRequest
 
 	DeleteProfileRequest(*alexaforbusiness.DeleteProfileInput) alexaforbusiness.DeleteProfileRequest
 
@@ -134,6 +138,12 @@ type AlexaForBusinessAPI interface {
 
 	GetDeviceRequest(*alexaforbusiness.GetDeviceInput) alexaforbusiness.GetDeviceRequest
 
+	GetGatewayRequest(*alexaforbusiness.GetGatewayInput) alexaforbusiness.GetGatewayRequest
+
+	GetGatewayGroupRequest(*alexaforbusiness.GetGatewayGroupInput) alexaforbusiness.GetGatewayGroupRequest
+
+	GetInvitationConfigurationRequest(*alexaforbusiness.GetInvitationConfigurationInput) alexaforbusiness.GetInvitationConfigurationRequest
+
 	GetProfileRequest(*alexaforbusiness.GetProfileInput) alexaforbusiness.GetProfileRequest
 
 	GetRoomRequest(*alexaforbusiness.GetRoomInput) alexaforbusiness.GetRoomRequest
@@ -148,6 +158,10 @@ type AlexaForBusinessAPI interface {
 
 	ListDeviceEventsRequest(*alexaforbusiness.ListDeviceEventsInput) alexaforbusiness.ListDeviceEventsRequest
 
+	ListGatewayGroupsRequest(*alexaforbusiness.ListGatewayGroupsInput) alexaforbusiness.ListGatewayGroupsRequest
+
+	ListGatewaysRequest(*alexaforbusiness.ListGatewaysInput) alexaforbusiness.ListGatewaysRequest
+
 	ListSkillsRequest(*alexaforbusiness.ListSkillsInput) alexaforbusiness.ListSkillsRequest
 
 	ListSkillsStoreCategoriesRequest(*alexaforbusiness.ListSkillsStoreCategoriesInput) alexaforbusiness.ListSkillsStoreCategoriesRequest
@@ -159,6 +173,8 @@ type AlexaForBusinessAPI interface {
 	ListTagsRequest(*alexaforbusiness.ListTagsInput) alexaforbusiness.ListTagsRequest
 
 	PutConferencePreferenceRequest(*alexaforbusiness.PutConferencePreferenceInput) alexaforbusiness.PutConferencePreferenceRequest
+
+	PutInvitationConfigurationRequest(*alexaforbusiness.PutInvitationConfigurationInput) alexaforbusiness.PutInvitationConfigurationRequest
 
 	PutRoomSkillParameterRequest(*alexaforbusiness.PutRoomSkillParameterInput) alexaforbusiness.PutRoomSkillParameterRequest
 
@@ -205,6 +221,10 @@ type AlexaForBusinessAPI interface {
 	UpdateContactRequest(*alexaforbusiness.UpdateContactInput) alexaforbusiness.UpdateContactRequest
 
 	UpdateDeviceRequest(*alexaforbusiness.UpdateDeviceInput) alexaforbusiness.UpdateDeviceRequest
+
+	UpdateGatewayRequest(*alexaforbusiness.UpdateGatewayInput) alexaforbusiness.UpdateGatewayRequest
+
+	UpdateGatewayGroupRequest(*alexaforbusiness.UpdateGatewayGroupInput) alexaforbusiness.UpdateGatewayGroupRequest
 
 	UpdateProfileRequest(*alexaforbusiness.UpdateProfileInput) alexaforbusiness.UpdateProfileRequest
 

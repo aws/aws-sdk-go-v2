@@ -41,6 +41,9 @@ func (r CreateActivityRequest) Send(ctx context.Context) (*CreateActivityOutput,
 // of your activity and returns an identifier for use in a state machine and
 // when polling from the activity.
 //
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
+//
 //    // Example sending a request using the CreateActivityRequest method.
 //    req := client.CreateActivityRequest(params)
 //    resp, err := req.Send(context.TODO())
@@ -94,6 +97,9 @@ func (r CreateStateMachineRequest) Send(ctx context.Context) (*CreateStateMachin
 // that can do work (Task states), determine to which states to transition next
 // (Choice states), stop an execution with an error (Fail states), and so on.
 // State machines are specified using a JSON-based, structured language.
+//
+// This operation is eventually consistent. The results are best effort and
+// may not reflect very recent updates and changes.
 //
 //    // Example sending a request using the CreateStateMachineRequest method.
 //    req := client.CreateStateMachineRequest(params)
@@ -479,7 +485,7 @@ func (r GetActivityTaskRequest) Send(ctx context.Context) (*GetActivityTaskOutpu
 // (5 seconds higher than the maximum time the service may hold the poll request).
 //
 // Polling with GetActivityTask can cause latency in some implementations. See
-// Avoid Latency When Polling for Activity Tasks (http://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html)
+// Avoid Latency When Polling for Activity Tasks (https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html)
 // in the Step Functions Developer Guide.
 //
 //    // Example sending a request using the GetActivityTaskRequest method.
@@ -1631,7 +1637,7 @@ type CreateActivityInput struct {
 
 	// The name of the activity to create. This name must be unique for your AWS
 	// account and region for 90 days. For more information, see  Limits Related
-	// to State Machine Executions (http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
+	// to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the AWS Step Functions Developer Guide.
 	//
 	// A name must not contain:
@@ -1648,6 +1654,9 @@ type CreateActivityInput struct {
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The list of tags to add to a resource.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -1669,6 +1678,13 @@ func (s *CreateActivityInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1714,7 +1730,7 @@ type CreateStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
@@ -1740,6 +1756,9 @@ type CreateStateMachineInput struct {
 	//
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" min:"1" type:"string" required:"true"`
+
+	// Tags to be added when creating a state machine.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -1775,6 +1794,13 @@ func (s *CreateStateMachineInput) Validate() error {
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2172,7 +2198,7 @@ type DescribeStateMachineForExecutionOutput struct {
 	responseMetadata aws.Response
 
 	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
@@ -2264,7 +2290,7 @@ type DescribeStateMachineOutput struct {
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix" required:"true"`
 
 	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	//
 	// Definition is a required field
 	Definition *string `locationName:"definition" min:"1" type:"string" required:"true"`
@@ -2723,28 +2749,28 @@ type HistoryEvent struct {
 	// Contains details about an exit from a state during an execution.
 	StateExitedEventDetails *StateExitedEventDetails `locationName:"stateExitedEventDetails" type:"structure"`
 
-	// Contains details about a task failure event.
+	// Contains details about the failure of a task.
 	TaskFailedEventDetails *TaskFailedEventDetails `locationName:"taskFailedEventDetails" type:"structure"`
 
-	// Contains details about a task scheduled during an execution.
+	// Contains details about a task that was scheduled.
 	TaskScheduledEventDetails *TaskScheduledEventDetails `locationName:"taskScheduledEventDetails" type:"structure"`
 
-	// Contains details about a task that failed to start during an execution.
+	// Contains details about a task that failed to start.
 	TaskStartFailedEventDetails *TaskStartFailedEventDetails `locationName:"taskStartFailedEventDetails" type:"structure"`
 
-	// Contains details about the start of a task during an execution.
+	// Contains details about a task that was started.
 	TaskStartedEventDetails *TaskStartedEventDetails `locationName:"taskStartedEventDetails" type:"structure"`
 
-	// Contains details about a task that failed to submit during an execution.
+	// Contains details about a task that where the submit failed.
 	TaskSubmitFailedEventDetails *TaskSubmitFailedEventDetails `locationName:"taskSubmitFailedEventDetails" type:"structure"`
 
-	// Contains details about a task submitted to a resource .
+	// Contains details about a submitted task.
 	TaskSubmittedEventDetails *TaskSubmittedEventDetails `locationName:"taskSubmittedEventDetails" type:"structure"`
 
-	// Contains details about the successful completion of a task state.
+	// Contains details about a task that succeeded.
 	TaskSucceededEventDetails *TaskSucceededEventDetails `locationName:"taskSucceededEventDetails" type:"structure"`
 
-	// Contains details about a resource timeout that occurred during an execution.
+	// Contains details about a task that timed out.
 	TaskTimedOutEventDetails *TaskTimedOutEventDetails `locationName:"taskTimedOutEventDetails" type:"structure"`
 
 	// The date and time the event occurred.
@@ -3419,9 +3445,9 @@ type StartExecutionInput struct {
 	// braces, for example: "input": "{}"
 	Input *string `locationName:"input" type:"string"`
 
-	// The name of the execution. This name must be unique for your AWS account
-	// and region for 90 days. For more information, see  Limits Related to State
-	// Machine Executions (http://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
+	// The name of the execution. This name must be unique for your AWS account,
+	// region, and state machine for 90 days. For more information, see  Limits
+	// Related to State Machine Executions (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the AWS Step Functions Developer Guide.
 	//
 	// A name must not contain:
@@ -4117,7 +4143,7 @@ type UpdateStateMachineInput struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language (http://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 	Definition *string `locationName:"definition" min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.

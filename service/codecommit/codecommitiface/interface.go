@@ -66,6 +66,8 @@ type CodeCommitAPI interface {
 
 	CreateBranchRequest(*codecommit.CreateBranchInput) codecommit.CreateBranchRequest
 
+	CreateCommitRequest(*codecommit.CreateCommitInput) codecommit.CreateCommitRequest
+
 	CreatePullRequestRequest(*codecommit.CreatePullRequestInput) codecommit.CreatePullRequestRequest
 
 	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) codecommit.CreateRepositoryRequest

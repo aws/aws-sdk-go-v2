@@ -168,6 +168,8 @@ type PinpointAPI interface {
 
 	GetVoiceChannelRequest(*pinpoint.GetVoiceChannelInput) pinpoint.GetVoiceChannelRequest
 
+	ListTagsForResourceRequest(*pinpoint.ListTagsForResourceInput) pinpoint.ListTagsForResourceRequest
+
 	PhoneNumberValidateRequest(*pinpoint.PhoneNumberValidateInput) pinpoint.PhoneNumberValidateRequest
 
 	PutEventStreamRequest(*pinpoint.PutEventStreamInput) pinpoint.PutEventStreamRequest
@@ -179,6 +181,10 @@ type PinpointAPI interface {
 	SendMessagesRequest(*pinpoint.SendMessagesInput) pinpoint.SendMessagesRequest
 
 	SendUsersMessagesRequest(*pinpoint.SendUsersMessagesInput) pinpoint.SendUsersMessagesRequest
+
+	TagResourceRequest(*pinpoint.TagResourceInput) pinpoint.TagResourceRequest
+
+	UntagResourceRequest(*pinpoint.UntagResourceInput) pinpoint.UntagResourceRequest
 
 	UpdateAdmChannelRequest(*pinpoint.UpdateAdmChannelInput) pinpoint.UpdateAdmChannelRequest
 

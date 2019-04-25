@@ -316,6 +316,57 @@ func (c *QuickSight) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
+const opDeleteUserByPrincipalId = "DeleteUserByPrincipalId"
+
+// DeleteUserByPrincipalIdRequest is a API request type for the DeleteUserByPrincipalId API operation.
+type DeleteUserByPrincipalIdRequest struct {
+	*aws.Request
+	Input *DeleteUserByPrincipalIdInput
+	Copy  func(*DeleteUserByPrincipalIdInput) DeleteUserByPrincipalIdRequest
+}
+
+// Send marshals and sends the DeleteUserByPrincipalId API request.
+func (r DeleteUserByPrincipalIdRequest) Send(ctx context.Context) (*DeleteUserByPrincipalIdOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserByPrincipalIdOutput), nil
+}
+
+// DeleteUserByPrincipalIdRequest returns a request value for making API operation for
+// Amazon QuickSight.
+//
+// Deletes a user after locating the user by its principal ID.
+//
+//    // Example sending a request using the DeleteUserByPrincipalIdRequest method.
+//    req := client.DeleteUserByPrincipalIdRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalId
+func (c *QuickSight) DeleteUserByPrincipalIdRequest(input *DeleteUserByPrincipalIdInput) DeleteUserByPrincipalIdRequest {
+	op := &aws.Operation{
+		Name:       opDeleteUserByPrincipalId,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}",
+	}
+
+	if input == nil {
+		input = &DeleteUserByPrincipalIdInput{}
+	}
+
+	output := &DeleteUserByPrincipalIdOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteUserByPrincipalIdRequest{Request: req, Input: input, Copy: c.DeleteUserByPrincipalIdRequest}
+}
+
 const opDescribeGroup = "DescribeGroup"
 
 // DescribeGroupRequest is a API request type for the DescribeGroup API operation.
@@ -1505,6 +1556,127 @@ func (s DeleteGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalIdRequest
+type DeleteUserByPrincipalIdInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the AWS account that the user is in. Currently, you use the ID
+	// for the AWS account that contains your Amazon QuickSight account.
+	//
+	// AwsAccountId is a required field
+	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
+
+	// The namespace. Currently, you should set this to default.
+	//
+	// Namespace is a required field
+	Namespace *string `location:"uri" locationName:"Namespace" type:"string" required:"true"`
+
+	// The principal ID of the user.
+	//
+	// PrincipalId is a required field
+	PrincipalId *string `location:"uri" locationName:"PrincipalId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteUserByPrincipalIdInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserByPrincipalIdInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteUserByPrincipalIdInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserByPrincipalIdInput"}
+
+	if s.AwsAccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AwsAccountId"))
+	}
+	if s.AwsAccountId != nil && len(*s.AwsAccountId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountId", 12))
+	}
+
+	if s.Namespace == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
+	}
+
+	if s.PrincipalId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PrincipalId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteUserByPrincipalIdInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.0"), protocol.Metadata{})
+
+	if s.AwsAccountId != nil {
+		v := *s.AwsAccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "AwsAccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Namespace != nil {
+		v := *s.Namespace
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Namespace", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrincipalId != nil {
+		v := *s.PrincipalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "PrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserByPrincipalIdResponse
+type DeleteUserByPrincipalIdOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The AWS request ID for this operation.
+	RequestId *string `type:"string"`
+
+	// The http status of the request.
+	Status *int64 `location:"statusCode" type:"integer"`
+}
+
+// String returns the string representation
+func (s DeleteUserByPrincipalIdOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteUserByPrincipalIdOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteUserByPrincipalIdOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteUserByPrincipalIdOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RequestId != nil {
+		v := *s.RequestId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	// ignoring invalid encode state, StatusCode. Status
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteUserRequest
 type DeleteUserInput struct {
 	_ struct{} `type:"structure"`
@@ -2074,6 +2246,9 @@ type Group struct {
 
 	// The name of the group.
 	GroupName *string `min:"1" type:"string"`
+
+	// The principal ID of the group.
+	PrincipalId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -2105,6 +2280,12 @@ func (s Group) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrincipalId != nil {
+		v := *s.PrincipalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2828,7 +3009,7 @@ type RegisterUserInput struct {
 	// has a different session name. For more information on assuming IAM roles,
 	// see assume-role (https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html)
 	// in the AWS CLI Reference.
-	SessionName *string `type:"string"`
+	SessionName *string `min:"2" type:"string"`
 
 	// The Amazon QuickSight user name that you want to create for the user you
 	// are registering.
@@ -2878,6 +3059,9 @@ func (s *RegisterUserInput) Validate() error {
 
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
+	}
+	if s.SessionName != nil && len(*s.SessionName) < 2 {
+		invalidParams.Add(aws.NewErrParamMinLen("SessionName", 2))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
@@ -3341,6 +3525,9 @@ type User struct {
 	// The type of identity authentication used by the user.
 	IdentityType IdentityType `type:"string" enum:"true"`
 
+	// The principal ID of the user.
+	PrincipalId *string `type:"string"`
+
 	// The Amazon QuickSight role for the user.
 	Role UserRole `type:"string" enum:"true"`
 
@@ -3383,6 +3570,12 @@ func (s User) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "IdentityType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PrincipalId != nil {
+		v := *s.PrincipalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PrincipalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Role) > 0 {
 		v := s.Role

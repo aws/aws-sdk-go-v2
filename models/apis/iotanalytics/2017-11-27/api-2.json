@@ -779,6 +779,7 @@
         "triggers":{"shape":"DatasetTriggers"},
         "contentDeliveryRules":{"shape":"DatasetContentDeliveryRules"},
         "retentionPeriod":{"shape":"RetentionPeriod"},
+        "versioningConfiguration":{"shape":"VersioningConfiguration"},
         "tags":{"shape":"TagList"}
       }
     },
@@ -837,7 +838,8 @@
         "status":{"shape":"DatasetStatus"},
         "creationTime":{"shape":"Timestamp"},
         "lastUpdateTime":{"shape":"Timestamp"},
-        "retentionPeriod":{"shape":"RetentionPeriod"}
+        "retentionPeriod":{"shape":"RetentionPeriod"},
+        "versioningConfiguration":{"shape":"VersioningConfiguration"}
       }
     },
     "DatasetAction":{
@@ -1404,6 +1406,16 @@
           "shape":"MaxResults",
           "location":"querystring",
           "locationName":"maxResults"
+        },
+        "scheduledOnOrAfter":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"scheduledOnOrAfter"
+        },
+        "scheduledBefore":{
+          "shape":"Timestamp",
+          "location":"querystring",
+          "locationName":"scheduledBefore"
         }
       }
     },
@@ -1543,6 +1555,11 @@
     "MaxResults":{
       "type":"integer",
       "max":250,
+      "min":1
+    },
+    "MaxVersions":{
+      "type":"integer",
+      "max":1000,
       "min":1
     },
     "Message":{
@@ -1926,6 +1943,7 @@
       }
     },
     "UnlimitedRetentionPeriod":{"type":"boolean"},
+    "UnlimitedVersioning":{"type":"boolean"},
     "UntagResourceRequest":{
       "type":"structure",
       "required":[
@@ -1977,7 +1995,8 @@
         "actions":{"shape":"DatasetActions"},
         "triggers":{"shape":"DatasetTriggers"},
         "contentDeliveryRules":{"shape":"DatasetContentDeliveryRules"},
-        "retentionPeriod":{"shape":"RetentionPeriod"}
+        "retentionPeriod":{"shape":"RetentionPeriod"},
+        "versioningConfiguration":{"shape":"VersioningConfiguration"}
       }
     },
     "UpdateDatastoreRequest":{
@@ -2031,6 +2050,13 @@
       "member":{"shape":"Variable"},
       "max":50,
       "min":0
+    },
+    "VersioningConfiguration":{
+      "type":"structure",
+      "members":{
+        "unlimited":{"shape":"UnlimitedVersioning"},
+        "maxVersions":{"shape":"MaxVersions"}
+      }
     },
     "VolumeSizeInGB":{
       "type":"integer",

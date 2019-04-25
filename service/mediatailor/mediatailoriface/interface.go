@@ -68,7 +68,13 @@ type MediaTailorAPI interface {
 
 	ListPlaybackConfigurationsRequest(*mediatailor.ListPlaybackConfigurationsInput) mediatailor.ListPlaybackConfigurationsRequest
 
+	ListTagsForResourceRequest(*mediatailor.ListTagsForResourceInput) mediatailor.ListTagsForResourceRequest
+
 	PutPlaybackConfigurationRequest(*mediatailor.PutPlaybackConfigurationInput) mediatailor.PutPlaybackConfigurationRequest
+
+	TagResourceRequest(*mediatailor.TagResourceInput) mediatailor.TagResourceRequest
+
+	UntagResourceRequest(*mediatailor.UntagResourceInput) mediatailor.UntagResourceRequest
 }
 
 var _ MediaTailorAPI = (*mediatailor.MediaTailor)(nil)

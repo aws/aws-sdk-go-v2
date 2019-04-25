@@ -1019,6 +1019,10 @@ func (c *Transfer) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 type CreateServerInput struct {
 	_ struct{} `type:"structure"`
 
+	EndpointDetails *EndpointDetails `type:"structure"`
+
+	EndpointType EndpointType `type:"string" enum:"true"`
+
 	// An array containing all of the information required to call a customer-supplied
 	// authentication API. This parameter is not required when the IdentityProviderType
 	// value of server that is created uses the SERVICE_MANAGED authentication method.
@@ -1031,7 +1035,7 @@ type CreateServerInput struct {
 	// by you to integrate an identity provider of your choice.
 	IdentityProviderType IdentityProviderType `type:"string" enum:"true"`
 
-	// A value that allows the service to write your SFTP users’ activity to your
+	// A value that allows the service to write your SFTP users' activity to your
 	// Amazon CloudWatch logs for monitoring and auditing purposes.
 	LoggingRole *string `type:"string"`
 
@@ -1110,12 +1114,12 @@ type CreateUserInput struct {
 	// ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
 	Policy *string `type:"string"`
 
-	// The IAM role that controls your user’s access to your Amazon S3 bucket. The
+	// The IAM role that controls your user's access to your Amazon S3 bucket. The
 	// policies attached to this role will determine the level of access you want
 	// to provide your users when transferring files into and out of your Amazon
 	// S3 bucket or buckets. The IAM role should also contain a trust relationship
 	// that allows the SFTP server to access your resources when servicing your
-	// SFTP user’s transfer requests.
+	// SFTP user's transfer requests.
 	//
 	// Role is a required field
 	Role *string `type:"string" required:"true"`
@@ -1281,7 +1285,7 @@ type DeleteSshPublicKeyInput struct {
 	// ServerId is a required field
 	ServerId *string `type:"string" required:"true"`
 
-	// A unique identifier used to reference your user’s specific SSH key.
+	// A unique identifier used to reference your user's specific SSH key.
 	//
 	// SshPublicKeyId is a required field
 	SshPublicKeyId *string `type:"string" required:"true"`
@@ -1565,6 +1569,10 @@ type DescribedServer struct {
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
+	EndpointDetails *EndpointDetails `type:"structure"`
+
+	EndpointType EndpointType `type:"string" enum:"true"`
+
 	// Specifies information to call a customer-supplied authentication API. This
 	// field is not populated when the IdentityProviderType of the server is SERVICE_MANAGED>.
 	IdentityProviderDetails *IdentityProviderDetails `type:"structure"`
@@ -1633,12 +1641,12 @@ type DescribedUser struct {
 	// Specifies the name of the policy in use for the described user.
 	Policy *string `type:"string"`
 
-	// This property specifies the IAM role that controls your user’s access to
+	// This property specifies the IAM role that controls your user's access to
 	// your Amazon S3 bucket. The policies attached to this role will determine
 	// the level of access you want to provide your users when transferring files
 	// into and out of your Amazon S3 bucket or buckets. The IAM role should also
 	// contain a trust relationship that allows the SFTP server to access your resources
-	// when servicing your SFTP user’s transfer requests.
+	// when servicing your SFTP user's transfer requests.
 	Role *string `type:"string"`
 
 	// This property contains the public key portion of the Secure Shell (SSH) keys
@@ -1662,6 +1670,23 @@ func (s DescribedUser) String() string {
 
 // GoString returns the string representation
 func (s DescribedUser) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails
+type EndpointDetails struct {
+	_ struct{} `type:"structure"`
+
+	VpcEndpointId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s EndpointDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EndpointDetails) GoString() string {
 	return s.String()
 }
 
@@ -1866,8 +1891,13 @@ type ListTagsForResourceInput struct {
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
 
+	// Specifies the number of tags to return as a response to the ListTagsForResource
+	// request.
 	MaxResults *int64 `min:"1" type:"integer"`
 
+	// When you request additional results from the ListTagsForResource call, a
+	// NextToken parameter is returned in the input. You can then pass in a subsequent
+	// command the NextToken parameter to continue listing additional tags.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -1913,6 +1943,9 @@ type ListTagsForResourceOutput struct {
 	// This value is the ARN you specified to list the tags of.
 	Arn *string `min:"20" type:"string"`
 
+	// When you can get additional results from the ListTagsForResource call, a
+	// NextToken parameter is returned in the output. You can then pass in a subsequent
+	// command the NextToken parameter to continue listing additional tags.
 	NextToken *string `min:"1" type:"string"`
 
 	// Key-value pairs that are assigned to a resource, usually for the purpose
@@ -1943,7 +1976,7 @@ type ListUsersInput struct {
 	// Specifies the number of users to return as a response to the ListUsers request.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// When you can get additional results from the ListUsersListUsers call, a NextToken
+	// When you can get additional results from the ListUsers call, a NextToken
 	// parameter is returned in the output. You can then pass in a subsequent command
 	// the NextToken parameter to continue listing additional users.
 	NextToken *string `min:"1" type:"string"`
@@ -2033,6 +2066,8 @@ type ListedServer struct {
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
+
+	EndpointType EndpointType `type:"string" enum:"true"`
 
 	// The authentication method used to validate a user for the server that was
 	// specified. listed. This can include Secure Shell (SSH), user name and password
@@ -2551,6 +2586,10 @@ func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 type UpdateServerInput struct {
 	_ struct{} `type:"structure"`
 
+	EndpointDetails *EndpointDetails `type:"structure"`
+
+	EndpointType EndpointType `type:"string" enum:"true"`
+
 	// This response parameter is an array containing all of the information required
 	// to call a customer's authentication API method.
 	IdentityProviderDetails *IdentityProviderDetails `type:"structure"`
@@ -2634,12 +2673,12 @@ type UpdateUserInput struct {
 	// and ${Transfer:HomeBucket}.
 	Policy *string `type:"string"`
 
-	// The IAM role that controls your user’s access to your Amazon S3 bucket. The
+	// The IAM role that controls your user's access to your Amazon S3 bucket. The
 	// policies attached to this role will determine the level of access you want
 	// to provide your users when transferring files into and out of your Amazon
 	// S3 bucket or buckets. The IAM role should also contain a trust relationship
 	// that allows the Secure File Transfer Protocol (SFTP) server to access your
-	// resources when servicing your SFTP user’s transfer requests.
+	// resources when servicing your SFTP user's transfer requests.
 	Role *string `type:"string"`
 
 	// A system-assigned unique identifier for an SFTP server instance that the
@@ -2718,6 +2757,23 @@ func (s UpdateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypePublic      EndpointType = "PUBLIC"
+	EndpointTypeVpcEndpoint EndpointType = "VPC_ENDPOINT"
+)
+
+func (enum EndpointType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 // Returns information related to the type of user authentication that is in

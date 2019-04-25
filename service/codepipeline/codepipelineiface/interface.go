@@ -92,6 +92,8 @@ type CodePipelineAPI interface {
 
 	GetThirdPartyJobDetailsRequest(*codepipeline.GetThirdPartyJobDetailsInput) codepipeline.GetThirdPartyJobDetailsRequest
 
+	ListActionExecutionsRequest(*codepipeline.ListActionExecutionsInput) codepipeline.ListActionExecutionsRequest
+
 	ListActionTypesRequest(*codepipeline.ListActionTypesInput) codepipeline.ListActionTypesRequest
 
 	ListPipelineExecutionsRequest(*codepipeline.ListPipelineExecutionsInput) codepipeline.ListPipelineExecutionsRequest

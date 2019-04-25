@@ -72,7 +72,15 @@ type GlueAPI interface {
 
 	BatchDeleteTableVersionRequest(*glue.BatchDeleteTableVersionInput) glue.BatchDeleteTableVersionRequest
 
+	BatchGetCrawlersRequest(*glue.BatchGetCrawlersInput) glue.BatchGetCrawlersRequest
+
+	BatchGetDevEndpointsRequest(*glue.BatchGetDevEndpointsInput) glue.BatchGetDevEndpointsRequest
+
+	BatchGetJobsRequest(*glue.BatchGetJobsInput) glue.BatchGetJobsRequest
+
 	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) glue.BatchGetPartitionRequest
+
+	BatchGetTriggersRequest(*glue.BatchGetTriggersInput) glue.BatchGetTriggersRequest
 
 	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
 
@@ -184,6 +192,8 @@ type GlueAPI interface {
 
 	GetTablesRequest(*glue.GetTablesInput) glue.GetTablesRequest
 
+	GetTagsRequest(*glue.GetTagsInput) glue.GetTagsRequest
+
 	GetTriggerRequest(*glue.GetTriggerInput) glue.GetTriggerRequest
 
 	GetTriggersRequest(*glue.GetTriggersInput) glue.GetTriggersRequest
@@ -193,6 +203,14 @@ type GlueAPI interface {
 	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) glue.GetUserDefinedFunctionsRequest
 
 	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
+
+	ListCrawlersRequest(*glue.ListCrawlersInput) glue.ListCrawlersRequest
+
+	ListDevEndpointsRequest(*glue.ListDevEndpointsInput) glue.ListDevEndpointsRequest
+
+	ListJobsRequest(*glue.ListJobsInput) glue.ListJobsRequest
+
+	ListTriggersRequest(*glue.ListTriggersInput) glue.ListTriggersRequest
 
 	PutDataCatalogEncryptionSettingsRequest(*glue.PutDataCatalogEncryptionSettingsInput) glue.PutDataCatalogEncryptionSettingsRequest
 
@@ -213,6 +231,10 @@ type GlueAPI interface {
 	StopCrawlerScheduleRequest(*glue.StopCrawlerScheduleInput) glue.StopCrawlerScheduleRequest
 
 	StopTriggerRequest(*glue.StopTriggerInput) glue.StopTriggerRequest
+
+	TagResourceRequest(*glue.TagResourceInput) glue.TagResourceRequest
+
+	UntagResourceRequest(*glue.UntagResourceInput) glue.UntagResourceRequest
 
 	UpdateClassifierRequest(*glue.UpdateClassifierInput) glue.UpdateClassifierRequest
 

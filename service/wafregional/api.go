@@ -107,7 +107,7 @@ func (r CreateByteMatchSetRequest) Send(ctx context.Context) (*CreateByteMatchSe
 // value that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateByteMatchSetRequest method.
 //    req := client.CreateByteMatchSetRequest(params)
@@ -178,7 +178,7 @@ func (r CreateGeoMatchSetRequest) Send(ctx context.Context) (*CreateGeoMatchSetO
 // want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateGeoMatchSetRequest method.
 //    req := client.CreateGeoMatchSetRequest(params)
@@ -250,7 +250,7 @@ func (r CreateIPSetRequest) Send(ctx context.Context) (*CreateIPSetOutput, error
 // WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateIPSetRequest method.
 //    req := client.CreateIPSetRequest(params)
@@ -361,7 +361,7 @@ func (r CreateRateBasedRuleRequest) Send(ctx context.Context) (*CreateRateBasedR
 // see CreateWebACL.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateRateBasedRuleRequest method.
 //    req := client.CreateRateBasedRuleRequest(params)
@@ -434,7 +434,7 @@ func (r CreateRegexMatchSetRequest) Send(ctx context.Context) (*CreateRegexMatch
 // the value, using a RegexPatternSet, that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateRegexMatchSetRequest method.
 //    req := client.CreateRegexMatchSetRequest(params)
@@ -503,7 +503,7 @@ func (r CreateRegexPatternSetRequest) Send(ctx context.Context) (*CreateRegexPat
 // AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateRegexPatternSetRequest method.
 //    req := client.CreateRegexPatternSetRequest(params)
@@ -589,7 +589,7 @@ func (r CreateRuleRequest) Send(ctx context.Context) (*CreateRuleOutput, error) 
 // see CreateWebACL.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateRuleRequest method.
 //    req := client.CreateRuleRequest(params)
@@ -653,7 +653,7 @@ func (r CreateRuleGroupRequest) Send(ctx context.Context) (*CreateRuleGroupOutpu
 //    * Ten rules per rule group.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateRuleGroupRequest method.
 //    req := client.CreateRuleGroupRequest(params)
@@ -726,7 +726,7 @@ func (r CreateSizeConstraintSetRequest) Send(ctx context.Context) (*CreateSizeCo
 // the value that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateSizeConstraintSetRequest method.
 //    req := client.CreateSizeConstraintSetRequest(params)
@@ -795,7 +795,7 @@ func (r CreateSqlInjectionMatchSetRequest) Send(ctx context.Context) (*CreateSql
 // requests in which you want to allow, block, or count malicious SQL code.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateSqlInjectionMatchSetRequest method.
 //    req := client.CreateSqlInjectionMatchSetRequest(params)
@@ -876,7 +876,7 @@ func (r CreateWebACLRequest) Send(ctx context.Context) (*CreateWebACLOutput, err
 // with a CloudFront distribution.
 //
 // For more information about how to use the AWS WAF API, see the AWS WAF Developer
-// Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateWebACLRequest method.
 //    req := client.CreateWebACLRequest(params)
@@ -946,7 +946,7 @@ func (r CreateXssMatchSetRequest) Send(ctx context.Context) (*CreateXssMatchSetO
 // in which you want to allow, block, or count cross-site scripting attacks.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the CreateXssMatchSetRequest method.
 //    req := client.CreateXssMatchSetRequest(params)
@@ -2040,7 +2040,7 @@ func (r GetChangeTokenStatusRequest) Send(ctx context.Context) (*GetChangeTokenS
 //    * PENDING: AWS WAF is propagating the create, update, or delete request
 //    to all AWS WAF servers.
 //
-//    * IN_SYNC: Propagation is complete.
+//    * INSYNC: Propagation is complete.
 //
 //    // Example sending a request using the GetChangeTokenStatusRequest method.
 //    req := client.GetChangeTokenStatusRequest(params)
@@ -3749,12 +3749,16 @@ func (r PutLoggingConfigurationRequest) Send(ctx context.Context) (*PutLoggingCo
 //
 // Create an Amazon Kinesis Data Firehose .
 //
+// Create the data firehose with a PUT source and in the region that you are
+// operating. However, if you are capturing logs for Amazon CloudFront, always
+// create the firehose in US East (N. Virginia).
+//
 // Associate that firehose to your web ACL using a PutLoggingConfiguration request.
 //
 // When you successfully enable logging using a PutLoggingConfiguration request,
 // AWS WAF will create a service linked role with the necessary permissions
 // to write logs to the Amazon Kinesis Data Firehose. For more information,
-// see Logging Web ACL Traffic Information (http://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
+// see Logging Web ACL Traffic Information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
 // in the AWS WAF Developer Guide.
 //
 //    // Example sending a request using the PutLoggingConfigurationRequest method.
@@ -3919,7 +3923,7 @@ func (r UpdateByteMatchSetRequest) Send(ctx context.Context) (*UpdateByteMatchSe
 // value that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateByteMatchSetRequest method.
 //    req := client.UpdateByteMatchSetRequest(params)
@@ -3997,7 +4001,7 @@ func (r UpdateGeoMatchSetRequest) Send(ctx context.Context) (*UpdateGeoMatchSetO
 // you delete the existing country and add the new one.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateGeoMatchSetRequest method.
 //    req := client.UpdateGeoMatchSetRequest(params)
@@ -4062,9 +4066,9 @@ func (r UpdateIPSetRequest) Send(ctx context.Context) (*UpdateIPSetOutput, error
 //    (for the individual IP address 192.0.2.44).
 //
 // AWS WAF supports IPv4 address ranges: /8 and any range between /16 through
-// /32. AWS WAF supports IPv6 address ranges: /16, /24, /32, /48, /56, /64,
-// and /128. For more information about CIDR notation, see the Wikipedia entry
-// Classless Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
+// /32. AWS WAF supports IPv6 address ranges: /24, /32, /48, /56, /64, and /128.
+// For more information about CIDR notation, see the Wikipedia entry Classless
+// Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 //
 // IPv6 addresses can be represented using any of the following formats:
 //
@@ -4099,7 +4103,7 @@ func (r UpdateIPSetRequest) Send(ctx context.Context) (*UpdateIPSetOutput, error
 // You can insert a maximum of 1000 addresses in a single request.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateIPSetRequest method.
 //    req := client.UpdateIPSetRequest(params)
@@ -4271,7 +4275,7 @@ func (r UpdateRegexMatchSetRequest) Send(ctx context.Context) (*UpdateRegexMatch
 // patters you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateRegexMatchSetRequest method.
 //    req := client.UpdateRegexMatchSetRequest(params)
@@ -4352,7 +4356,7 @@ func (r UpdateRegexPatternSetRequest) Send(ctx context.Context) (*UpdateRegexPat
 // pattern that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateRegexPatternSetRequest method.
 //    req := client.UpdateRegexPatternSetRequest(params)
@@ -4436,7 +4440,7 @@ func (r UpdateRuleRequest) Send(ctx context.Context) (*UpdateRuleOutput, error) 
 // the existing one and add the new one.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateRuleRequest method.
 //    req := client.UpdateRuleRequest(params)
@@ -4509,7 +4513,7 @@ func (r UpdateRuleGroupRequest) Send(ctx context.Context) (*UpdateRuleGroupOutpu
 // and add the new one.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateRuleGroupRequest method.
 //    req := client.UpdateRuleGroupRequest(params)
@@ -4600,7 +4604,7 @@ func (r UpdateSizeConstraintSetRequest) Send(ctx context.Context) (*UpdateSizeCo
 // the value that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateSizeConstraintSetRequest method.
 //    req := client.UpdateSizeConstraintSetRequest(params)
@@ -4685,7 +4689,7 @@ func (r UpdateSqlInjectionMatchSetRequest) Send(ctx context.Context) (*UpdateSql
 // requests that you want AWS WAF to inspect for snippets of SQL code.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateSqlInjectionMatchSetRequest method.
 //    req := client.UpdateSqlInjectionMatchSetRequest(params)
@@ -4791,7 +4795,7 @@ func (r UpdateWebACLRequest) Send(ctx context.Context) (*UpdateWebACLOutput, err
 // with the specified ID, which does not exist.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateWebACLRequest method.
 //    req := client.UpdateWebACLRequest(params)
@@ -4876,7 +4880,7 @@ func (r UpdateXssMatchSetRequest) Send(ctx context.Context) (*UpdateXssMatchSetO
 // that you want AWS WAF to inspect for cross-site scripting attacks.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (http://docs.aws.amazon.com/waf/latest/developerguide/).
+// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/).
 //
 //    // Example sending a request using the UpdateXssMatchSetRequest method.
 //    req := client.UpdateXssMatchSetRequest(params)

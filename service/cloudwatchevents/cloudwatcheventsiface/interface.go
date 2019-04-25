@@ -76,6 +76,8 @@ type CloudWatchEventsAPI interface {
 
 	ListRulesRequest(*cloudwatchevents.ListRulesInput) cloudwatchevents.ListRulesRequest
 
+	ListTagsForResourceRequest(*cloudwatchevents.ListTagsForResourceInput) cloudwatchevents.ListTagsForResourceRequest
+
 	ListTargetsByRuleRequest(*cloudwatchevents.ListTargetsByRuleInput) cloudwatchevents.ListTargetsByRuleRequest
 
 	PutEventsRequest(*cloudwatchevents.PutEventsInput) cloudwatchevents.PutEventsRequest
@@ -90,7 +92,11 @@ type CloudWatchEventsAPI interface {
 
 	RemoveTargetsRequest(*cloudwatchevents.RemoveTargetsInput) cloudwatchevents.RemoveTargetsRequest
 
+	TagResourceRequest(*cloudwatchevents.TagResourceInput) cloudwatchevents.TagResourceRequest
+
 	TestEventPatternRequest(*cloudwatchevents.TestEventPatternInput) cloudwatchevents.TestEventPatternRequest
+
+	UntagResourceRequest(*cloudwatchevents.UntagResourceInput) cloudwatchevents.UntagResourceRequest
 }
 
 var _ CloudWatchEventsAPI = (*cloudwatchevents.CloudWatchEvents)(nil)

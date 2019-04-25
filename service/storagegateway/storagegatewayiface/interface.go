@@ -72,6 +72,8 @@ type StorageGatewayAPI interface {
 
 	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) storagegateway.AddWorkingStorageRequest
 
+	AttachVolumeRequest(*storagegateway.AttachVolumeInput) storagegateway.AttachVolumeRequest
+
 	CancelArchivalRequest(*storagegateway.CancelArchivalInput) storagegateway.CancelArchivalRequest
 
 	CancelRetrievalRequest(*storagegateway.CancelRetrievalInput) storagegateway.CancelRetrievalRequest
@@ -141,6 +143,8 @@ type StorageGatewayAPI interface {
 	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) storagegateway.DescribeVTLDevicesRequest
 
 	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
+
+	DetachVolumeRequest(*storagegateway.DetachVolumeInput) storagegateway.DetachVolumeRequest
 
 	DisableGatewayRequest(*storagegateway.DisableGatewayInput) storagegateway.DisableGatewayRequest
 

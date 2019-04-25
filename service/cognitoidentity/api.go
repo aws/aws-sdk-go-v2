@@ -155,8 +155,8 @@ func (r DeleteIdentityPoolRequest) Send(ctx context.Context) (*DeleteIdentityPoo
 // DeleteIdentityPoolRequest returns a request value for making API operation for
 // Amazon Cognito Identity.
 //
-// Deletes a user pool. Once a pool is deleted, users will not be able to authenticate
-// with the pool.
+// Deletes an identity pool. Once a pool is deleted, users will not be able
+// to authenticate with the pool.
 //
 // You must use AWS Developer credentials to call this API.
 //
@@ -488,7 +488,7 @@ func (r GetOpenIdTokenRequest) Send(ctx context.Context) (*GetOpenIdTokenOutput,
 // returned by GetId. You can optionally add additional logins for the identity.
 // Supplying multiple logins creates an implicit link.
 //
-// The OpenId token is valid for 15 minutes.
+// The OpenId token is valid for 10 minutes.
 //
 // This is a public API. You do not need any credentials to call this API.
 //
@@ -608,7 +608,7 @@ func (r ListIdentitiesRequest) Send(ctx context.Context) (*ListIdentitiesOutput,
 // ListIdentitiesRequest returns a request value for making API operation for
 // Amazon Cognito Identity.
 //
-// Lists the identities in a pool.
+// Lists the identities in an identity pool.
 //
 // You must use AWS Developer credentials to call this API.
 //
@@ -691,6 +691,63 @@ func (c *CognitoIdentity) ListIdentityPoolsRequest(input *ListIdentityPoolsInput
 	return ListIdentityPoolsRequest{Request: req, Input: input, Copy: c.ListIdentityPoolsRequest}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon Cognito Identity.
+//
+// Lists the tags that are assigned to an Amazon Cognito identity pool.
+//
+// A tag is a label that you can apply to identity pools to categorize and manage
+// them in different ways, such as by purpose, owner, environment, or other
+// criteria.
+//
+// You can use this action up to 10 times per second, per account.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListTagsForResource
+func (c *CognitoIdentity) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
+}
+
 const opLookupDeveloperIdentity = "LookupDeveloperIdentity"
 
 // LookupDeveloperIdentityRequest is a API request type for the LookupDeveloperIdentity API operation.
@@ -715,13 +772,20 @@ func (r LookupDeveloperIdentityRequest) Send(ctx context.Context) (*LookupDevelo
 // Amazon Cognito Identity.
 //
 // Retrieves the IdentityID associated with a DeveloperUserIdentifier or the
-// list of DeveloperUserIdentifiers associated with an IdentityId for an existing
-// identity. Either IdentityID or DeveloperUserIdentifier must not be null.
-// If you supply only one of these values, the other value will be searched
-// in the database and returned as a part of the response. If you supply both,
-// DeveloperUserIdentifier will be matched against IdentityID. If the values
-// are verified against the database, the response returns both values and is
-// the same as the request. Otherwise a ResourceConflictException is thrown.
+// list of DeveloperUserIdentifier values associated with an IdentityId for
+// an existing identity. Either IdentityID or DeveloperUserIdentifier must not
+// be null. If you supply only one of these values, the other value will be
+// searched in the database and returned as a part of the response. If you supply
+// both, DeveloperUserIdentifier will be matched against IdentityID. If the
+// values are verified against the database, the response returns both values
+// and is the same as the request. Otherwise a ResourceConflictException is
+// thrown.
+//
+// LookupDeveloperIdentity is intended for low-throughput control plane operations:
+// for example, to enable customer service to locate an identity ID by username.
+// If you are using it for higher-volume operations such as user authentication,
+// your requests are likely to be throttled. GetOpenIdTokenForDeveloperIdentity
+// is a better option for higher-volume operations for user authentication.
 //
 // You must use AWS Developer credentials to call this API.
 //
@@ -781,6 +845,10 @@ func (r MergeDeveloperIdentitiesRequest) Send(ctx context.Context) (*MergeDevelo
 // with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated
 // users can be merged. If the users to be merged are associated with the same
 // public provider, but as two different users, an exception will be thrown.
+//
+// The number of linked logins is limited to 20. So, the number of linked logins
+// for the source user, SourceUserIdentifier, and the destination user, DestinationUserIdentifier,
+// together should not be larger than 20. Otherwise, an exception will be thrown.
 //
 // You must use AWS Developer credentials to call this API.
 //
@@ -864,6 +932,74 @@ func (c *CognitoIdentity) SetIdentityPoolRolesRequest(input *SetIdentityPoolRole
 	output.responseMetadata = aws.Response{Request: req}
 
 	return SetIdentityPoolRolesRequest{Request: req, Input: input, Copy: c.SetIdentityPoolRolesRequest}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon Cognito Identity.
+//
+// Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label
+// that you can use to categorize and manage identity pools in different ways,
+// such as by purpose, owner, environment, or other criteria.
+//
+// Each tag consists of a key and value, both of which you define. A key is
+// a general category for more specific values. For example, if you have two
+// versions of an identity pool, one for testing and another for production,
+// you might assign an Environment tag key to both identity pools. The value
+// of this key might be Test for one identity pool and Production for the other.
+//
+// Tags are useful for cost tracking and access control. You can activate your
+// tags so that they appear on the Billing and Cost Management console, where
+// you can track the costs associated with your identity pools. In an IAM policy,
+// you can constrain permissions for identity pools based on specific tags or
+// tag values.
+//
+// You can use this action up to 5 times per second, per account. An identity
+// pool can have as many as 50 tags.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResource
+func (c *CognitoIdentity) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUnlinkDeveloperIdentity = "UnlinkDeveloperIdentity"
@@ -982,6 +1118,58 @@ func (c *CognitoIdentity) UnlinkIdentityRequest(input *UnlinkIdentityInput) Unli
 	return UnlinkIdentityRequest{Request: req, Input: input, Copy: c.UnlinkIdentityRequest}
 }
 
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon Cognito Identity.
+//
+// Removes the specified tags from an Amazon Cognito identity pool. You can
+// use this action up to 5 times per second, per account
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResource
+func (c *CognitoIdentity) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
 const opUpdateIdentityPool = "UpdateIdentityPool"
 
 // UpdateIdentityPoolRequest is a API request type for the UpdateIdentityPool API operation.
@@ -1005,7 +1193,7 @@ func (r UpdateIdentityPoolRequest) Send(ctx context.Context) (*UpdateIdentityPoo
 // UpdateIdentityPoolRequest returns a request value for making API operation for
 // Amazon Cognito Identity.
 //
-// Updates a user pool.
+// Updates an identity pool.
 //
 // You must use AWS Developer credentials to call this API.
 //
@@ -1045,7 +1233,7 @@ type CreateIdentityPoolInput struct {
 	// AllowUnauthenticatedIdentities is a required field
 	AllowUnauthenticatedIdentities *bool `type:"boolean" required:"true"`
 
-	// An array of Amazon Cognito Identity user pools and their client IDs.
+	// An array of Amazon Cognito user pools and their client IDs.
 	CognitoIdentityProviders []Provider `type:"list"`
 
 	// The "domain" by which Cognito will refer to your users. This name acts as
@@ -1061,6 +1249,11 @@ type CreateIdentityPoolInput struct {
 	//
 	// IdentityPoolName is a required field
 	IdentityPoolName *string `min:"1" type:"string" required:"true"`
+
+	// Tags to assign to the identity pool. A tag is a label that you can apply
+	// to identity pools to categorize and manage them in different ways, such as
+	// by purpose, owner, environment, or other criteria.
+	IdentityPoolTags map[string]string `type:"map"`
 
 	// A list of OpendID Connect provider ARNs.
 	OpenIdConnectProviderARNs []string `type:"list"`
@@ -1321,7 +1514,7 @@ type DescribeIdentityOutput struct {
 	// Date on which the identity was last modified.
 	LastModifiedDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// A set of optional name-value pairs that map provider names to provider tokens.
+	// The provider names.
 	Logins []string `type:"list"`
 }
 
@@ -1395,6 +1588,15 @@ type GetCredentialsForIdentityInput struct {
 	IdentityId *string `min:"1" type:"string" required:"true"`
 
 	// A set of optional name-value pairs that map provider names to provider tokens.
+	// The name-value pair will follow the syntax "provider_name": "provider_user_identifier".
+	//
+	// Logins should not be specified when trying to get credentials for an unauthenticated
+	// identity.
+	//
+	// The Logins parameter is required when using identities associated with external
+	// identity providers such as FaceBook. For examples of Logins maps, see the
+	// code examples in the External Identity Providers (http://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
+	// section of the Amazon Cognito Developer Guide.
 	Logins map[string]string `type:"map"`
 }
 
@@ -1475,7 +1677,9 @@ type GetIdInput struct {
 	//
 	//    * Facebook: graph.facebook.com
 	//
-	//    * Amazon Cognito Identity Provider: cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789
+	//    * Amazon Cognito user pool: cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>,
+	//    for example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
+	//
 	//
 	//    * Google: accounts.google.com
 	//
@@ -1593,7 +1797,7 @@ type GetIdentityPoolRolesOutput struct {
 
 	// How users for a specific identity provider are to mapped to roles. This is
 	// a String-to-RoleMapping object map. The string identifies the identity provider,
-	// for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
+	// for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
 	RoleMappings map[string]RoleMapping `type:"map"`
 
 	// The map of roles associated with this pool. Currently only authenticated
@@ -1732,8 +1936,8 @@ type GetOpenIdTokenInput struct {
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// When using graph.facebook.com and www.amazon.com, supply the access_token
 	// returned from the provider's authflow. For accounts.google.com, an Amazon
-	// Cognito Identity Provider, or any other OpenId Connect provider, always include
-	// the id_token.
+	// Cognito user pool provider, or any other OpenId Connect provider, always
+	// include the id_token.
 	Logins map[string]string `type:"map"`
 }
 
@@ -1775,7 +1979,7 @@ type GetOpenIdTokenOutput struct {
 	// may not match the one passed on input.
 	IdentityId *string `min:"1" type:"string"`
 
-	// An OpenID token, valid for 15 minutes.
+	// An OpenID token, valid for 10 minutes.
 	Token *string `type:"string"`
 }
 
@@ -1979,6 +2183,69 @@ func (s ListIdentityPoolsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIdentityPoolsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListTagsForResourceInput
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the identity pool that the tags are assigned
+	// to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The tags that are assigned to the identity pool.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -2267,21 +2534,27 @@ func (s MergeDeveloperIdentitiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// A provider representing an Amazon Cognito Identity User Pool and its client
-// ID.
+// A provider representing an Amazon Cognito user pool and its client ID.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CognitoIdentityProvider
 type Provider struct {
 	_ struct{} `type:"structure"`
 
-	// The client ID for the Amazon Cognito Identity User Pool.
+	// The client ID for the Amazon Cognito user pool.
 	ClientId *string `min:"1" type:"string"`
 
-	// The provider name for an Amazon Cognito Identity User Pool. For example,
-	// cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
+	// The provider name for an Amazon Cognito user pool. For example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
 	ProviderName *string `min:"1" type:"string"`
 
 	// TRUE if server-side token validation is enabled for the identity provider’s
 	// token.
+	//
+	// Once you set ServerSideTokenCheck to TRUE for an identity pool, that identity
+	// pool will check with the integrated user pools to make sure that the user
+	// has not been globally signed out or deleted before the identity pool provides
+	// an OIDC token or AWS credentials for the user.
+	//
+	// If the user is signed out or deleted, the identity pool will return a 400
+	// Not Authorized error.
 	ServerSideTokenCheck *bool `type:"boolean"`
 }
 
@@ -2496,6 +2769,68 @@ func (s SetIdentityPoolRolesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResourceInput
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the identity pool to assign the tags to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"20" type:"string" required:"true"`
+
+	// The tags to assign to the identity pool.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/TagResourceResponse
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Input to the UnlinkDeveloperIdentity action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentityInput
 type UnlinkDeveloperIdentityInput struct {
@@ -2693,6 +3028,69 @@ func (s UnprocessedIdentityId) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResourceInput
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the identity pool that the tags are assigned
+	// to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"20" type:"string" required:"true"`
+
+	// The keys of the tags to remove from the user pool.
+	TagKeys []string `type:"list"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UntagResourceResponse
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // An object representing an Amazon Cognito identity pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UpdateIdentityPoolInput
 type UpdateIdentityPoolOutput struct {
@@ -2705,7 +3103,7 @@ type UpdateIdentityPoolOutput struct {
 	// AllowUnauthenticatedIdentities is a required field
 	AllowUnauthenticatedIdentities *bool `type:"boolean" required:"true"`
 
-	// A list representing an Amazon Cognito Identity User Pool and its client ID.
+	// A list representing an Amazon Cognito user pool and its client ID.
 	CognitoIdentityProviders []Provider `type:"list"`
 
 	// The "domain" by which Cognito will refer to your users.
@@ -2720,6 +3118,11 @@ type UpdateIdentityPoolOutput struct {
 	//
 	// IdentityPoolName is a required field
 	IdentityPoolName *string `min:"1" type:"string" required:"true"`
+
+	// The tags that are assigned to the identity pool. A tag is a label that you
+	// can apply to identity pools to categorize and manage them in different ways,
+	// such as by purpose, owner, environment, or other criteria.
+	IdentityPoolTags map[string]string `type:"map"`
 
 	// A list of OpendID Connect provider ARNs.
 	OpenIdConnectProviderARNs []string `type:"list"`

@@ -4147,6 +4147,8 @@ type Artifact struct {
 	//
 	//    * MESSAGE_LOG: The message log type.
 	//
+	//    * VIDEO_LOG: The video log type.
+	//
 	//    * RESULT_LOG: The result log type.
 	//
 	//    * SERVICE_LOG: The service log type.
@@ -4185,6 +4187,14 @@ type Artifact struct {
 	//    * APPLICATION_CRASH_REPORT: The application crash report output type.
 	//
 	//    * XCTEST_LOG: The XCode test output type.
+	//
+	//    * VIDEO: The Video output type.
+	//
+	//    * CUSTOMER_ARTIFACT:The Customer Artifact output type.
+	//
+	//    * CUSTOMER_ARTIFACT_LOG: The Customer Artifact Log output type.
+	//
+	//    * TESTSPEC_OUTPUT: The Test Spec Output type.
 	Type ArtifactType `locationName:"type" type:"string" enum:"true"`
 
 	// The pre-signed Amazon S3 URL that can be used with a corresponding GET request
@@ -4274,6 +4284,16 @@ type CreateDevicePoolInput struct {
 
 	// The device pool's description.
 	Description *string `locationName:"description" type:"string"`
+
+	// The number of devices that Device Farm can add to your device pool. Device
+	// Farm adds devices that are available and that meet the criteria that you
+	// assign for the rules parameter. Depending on how many devices meet these
+	// constraints, your device pool might contain fewer devices than the value
+	// for this parameter.
+	//
+	// By specifying the maximum number of devices, you can control the costs that
+	// you incur by running tests.
+	MaxDevices *int64 `locationName:"maxDevices" type:"integer"`
 
 	// The device pool's name.
 	//
@@ -4802,13 +4822,24 @@ type CreateUploadInput struct {
 	//
 	//    * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
 	//
+	//    * APPIUM_NODE_TEST_PACKAGE: An Appium Node.js test package upload.
+	//
+	//    * APPIUM_RUBY_TEST_PACKAGE: An Appium Ruby test package upload.
+	//
 	//    * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package
-	//    upload.
+	//    upload for a web app.
 	//
 	//    * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package
-	//    upload.
+	//    upload for a web app.
 	//
-	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_NODE_TEST_PACKAGE: An Appium Node.js test package upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_RUBY_TEST_PACKAGE: An Appium Ruby test package upload for
+	//    a web app.
 	//
 	//    * CALABASH_TEST_PACKAGE: A Calabash test package upload.
 	//
@@ -4828,11 +4859,24 @@ type CreateUploadInput struct {
 	//
 	//    * APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
+	//    * APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.
+	//    * APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.
 	//
-	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload.
+	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload for a
+	//    web app.
+	//
+	//    * APPIUM_WEB_NODE_TEST_SPEC: An Appium Node.js test spec upload for a
+	//    web app.
+	//
+	//    * APPIUM_WEB_RUBY_TEST_SPEC: An Appium Ruby test spec upload for a web
+	//    app.
 	//
 	//    * INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.
 	//
@@ -5518,7 +5562,8 @@ type Device struct {
 	// The device's ARN.
 	Arn *string `locationName:"arn" min:"32" type:"string"`
 
-	// Reflects how likely a device will be available for a test run.
+	// Reflects how likely a device will be available for a test run. It is currently
+	// available in the ListDevices and GetDevice API methods.
 	Availability DeviceAvailability `locationName:"availability" type:"string" enum:"true"`
 
 	// The device's carrier.
@@ -5603,11 +5648,11 @@ func (s Device) GoString() string {
 }
 
 // Represents a device filter used to select a set of devices to be included
-// in a test run. This data structure is passed in as the "deviceSelectionConfiguration"
+// in a test run. This data structure is passed in as the deviceSelectionConfiguration
 // parameter to ScheduleRun. For an example of the JSON request syntax, see
 // ScheduleRun.
 //
-// It is also passed in as the "filters" parameter to ListDevices. For an example
+// It is also passed in as the filters parameter to ListDevices. For an example
 // of the JSON request syntax, see ListDevices.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceFilter
 type DeviceFilter struct {
@@ -5616,53 +5661,71 @@ type DeviceFilter struct {
 	// The aspect of a device such as platform or model used as the selection criteria
 	// in a device filter.
 	//
-	// Allowed values include:
+	// The supported operators for each attribute are provided in the following
+	// list.
 	//
-	//    * ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
+	// ARNThe Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
 	//
-	//    * PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".
+	// Supported operators: EQUALS, IN, NOT_IN
 	//
-	//    * OS_VERSION: The operating system version. For example, "10.3.2".
+	// PLATFORMThe device platform. Valid values are "ANDROID" or "IOS".
 	//
-	//    * MODEL: The device model. For example, "iPad 5th Gen".
+	// Supported operators: EQUALS
 	//
-	//    * AVAILABILITY: The current availability of the device. Valid values are
-	//    "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".
+	// OS_VERSIONThe operating system version. For example, "10.3.2".
 	//
-	//    * FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".
+	// Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN,
+	// LESS_THAN_OR_EQUALS, NOT_IN
 	//
-	//    * MANUFACTURER: The device manufacturer. For example, "Apple".
+	// MODELThe device model. For example, "iPad 5th Gen".
 	//
-	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
+	// Supported operators: CONTAINS, EQUALS, IN, NOT_IN
 	//
-	//    * REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.
+	// AVAILABILITYThe current availability of the device. Valid values are "AVAILABLE",
+	// "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".
 	//
-	//    * INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.
+	// Supported operators: EQUALS
 	//
-	//    * INSTANCE_LABELS: The label of the device instance.
+	// FORM_FACTORThe device form factor. Valid values are "PHONE" or "TABLET".
 	//
-	//    * FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".
+	// Supported operators: EQUALS
+	//
+	// MANUFACTURERThe device manufacturer. For example, "Apple".
+	//
+	// Supported operators: EQUALS, IN, NOT_IN
+	//
+	// REMOTE_ACCESS_ENABLEDWhether the device is enabled for remote access. Valid
+	// values are "TRUE" or "FALSE".
+	//
+	// Supported operators: EQUALS
+	//
+	// REMOTE_DEBUG_ENABLEDWhether the device is enabled for remote debugging. Valid
+	// values are "TRUE" or "FALSE".
+	//
+	// Supported operators: EQUALS
+	//
+	// INSTANCE_ARNThe Amazon Resource Name (ARN) of the device instance.
+	//
+	// Supported operators: EQUALS, IN, NOT_IN
+	//
+	// INSTANCE_LABELSThe label of the device instance.
+	//
+	// Supported operators: CONTAINS
+	//
+	// FLEET_TYPEThe fleet type. Valid values are "PUBLIC" or "PRIVATE".
+	//
+	// Supported operators: EQUALS
 	Attribute DeviceFilterAttribute `locationName:"attribute" type:"string" enum:"true"`
 
-	// The filter operator.
-	//
-	//    * The EQUALS operator is available for every attribute except INSTANCE_LABELS.
-	//
-	//    * The CONTAINS operator is available for the INSTANCE_LABELS and MODEL
-	//    attributes.
-	//
-	//    * The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL,
-	//    MANUFACTURER, and INSTANCE_ARN attributes.
-	//
-	//    * The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS
-	//    operators are also available for the OS_VERSION attribute.
-	Operator DeviceFilterOperator `locationName:"operator" type:"string" enum:"true"`
+	// Specifies how Device Farm compares the filter's attribute to the value. For
+	// the operators that are supported by each attribute, see the attribute descriptions.
+	Operator RuleOperator `locationName:"operator" type:"string" enum:"true"`
 
 	// An array of one or more filter values used in a device filter.
 	//
 	// Operator Values
 	//
-	//    * The IN and NOT operators can take a values array that has more than
+	//    * The IN and NOT_IN operators can take a values array that has more than
 	//    one element.
 	//
 	//    * The other operators require an array with a single element.
@@ -5764,6 +5827,16 @@ type DevicePool struct {
 	// The device pool's description.
 	Description *string `locationName:"description" type:"string"`
 
+	// The number of devices that Device Farm can add to your device pool. Device
+	// Farm adds devices that are available and that meet the criteria that you
+	// assign for the rules parameter. Depending on how many devices meet these
+	// constraints, your device pool might contain fewer devices than the value
+	// for this parameter.
+	//
+	// By specifying the maximum number of devices, you can control the costs that
+	// you incur by running tests.
+	MaxDevices *int64 `locationName:"maxDevices" type:"integer"`
+
 	// The device pool's name.
 	Name *string `locationName:"name" type:"string"`
 
@@ -5826,8 +5899,10 @@ type DeviceSelectionConfiguration struct {
 	// Used to dynamically select a set of devices for a test run. A filter is made
 	// up of an attribute, an operator, and one or more values.
 	//
-	//    * Attribute: The aspect of a device such as platform or model used as
-	//    the selection criteria in a device filter.
+	//    * Attribute
+	//
+	// The aspect of a device such as platform or model used as the selection criteria
+	//    in a device filter.
 	//
 	// Allowed values include:
 	//
@@ -5846,9 +5921,11 @@ type DeviceSelectionConfiguration struct {
 	//
 	// MANUFACTURER: The device manufacturer. For example, "Apple".
 	//
-	// REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
+	// REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid
+	//    values are "TRUE" or "FALSE".
 	//
 	// REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.
+	//    Valid values are "TRUE" or "FALSE".
 	//
 	// INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.
 	//
@@ -5856,7 +5933,9 @@ type DeviceSelectionConfiguration struct {
 	//
 	// FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".
 	//
-	//    * Operator: The filter operator.
+	//    * Operator
+	//
+	// The filter operator.
 	//
 	// The EQUALS operator is available for every attribute except INSTANCE_LABELS.
 	//
@@ -5868,14 +5947,27 @@ type DeviceSelectionConfiguration struct {
 	// The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS
 	//    operators are also available for the OS_VERSION attribute.
 	//
-	//    * Values: An array of one or more filter values.
+	//    * Values
 	//
-	// The IN and NOT operators can take a values array that has more than one element.
+	// An array of one or more filter values.
+	//
+	// Operator Values
+	//
+	// The IN and NOT_IN operators can take a values array that has more than one
+	//    element.
 	//
 	// The other operators require an array with a single element.
 	//
-	// In a request, the AVAILABILITY attribute takes "AVAILABLE", "HIGHLY_AVAILABLE",
-	//    "BUSY", or "TEMPORARY_NOT_AVAILABLE" as values.
+	// Attribute Values
+	//
+	// The PLATFORM attribute can be set to "ANDROID" or "IOS".
+	//
+	// The AVAILABILITY attribute can be set to "AVAILABLE", "HIGHLY_AVAILABLE",
+	//    "BUSY", or "TEMPORARY_NOT_AVAILABLE".
+	//
+	// The FORM_FACTOR attribute can be set to "PHONE" or "TABLET".
+	//
+	// The FLEET_TYPE attribute can be set to "PUBLIC" or "PRIVATE".
 	//
 	// Filters is a required field
 	Filters []DeviceFilter `locationName:"filters" type:"list" required:"true"`
@@ -6188,11 +6280,19 @@ type GetDevicePoolCompatibilityInput struct {
 	//
 	//    * APPIUM_PYTHON: The Appium Python type.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+	//    * APPIUM_NODE: The Appium Node.js type.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+	//    * APPIUM_RUBY: The Appium Ruby type.
 	//
-	//    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.
+	//
+	//    * APPIUM_WEB_PYTHON: The Appium Python type for web apps.
+	//
+	//    * APPIUM_WEB_NODE: The Appium Node.js type for web apps.
+	//
+	//    * APPIUM_WEB_RUBY: The Appium Ruby type for web apps.
 	//
 	//    * CALABASH: The Calabash type.
 	//
@@ -7295,11 +7395,19 @@ type Job struct {
 	//
 	//    * APPIUM_PYTHON: The Appium Python type.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+	//    * APPIUM_NODE: The Appium Node.js type.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+	//    * APPIUM_RUBY: The Appium Ruby type.
 	//
-	//    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.
+	//
+	//    * APPIUM_WEB_PYTHON: The Appium Python type for web apps.
+	//
+	//    * APPIUM_WEB_NODE: The Appium Node.js type for web apps.
+	//
+	//    * APPIUM_WEB_RUBY: The Appium Ruby test type for web apps.
 	//
 	//    * CALABASH: The Calabash type.
 	//
@@ -7606,9 +7714,11 @@ type ListDevicesInput struct {
 	//
 	// MANUFACTURER: The device manufacturer. For example, "Apple".
 	//
-	// REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
+	// REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid
+	//    values are "TRUE" or "FALSE".
 	//
 	// REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.
+	//    Valid values are "TRUE" or "FALSE".
 	//
 	// INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.
 	//
@@ -7630,7 +7740,7 @@ type ListDevicesInput struct {
 	//
 	//    * Values: An array of one or more filter values.
 	//
-	// The IN and NOT operators can take a values array that has more than one element.
+	// The IN and NOT_IN operators take a values array that has one or more elements.
 	//
 	// The other operators require an array with a single element.
 	//
@@ -8688,13 +8798,24 @@ type ListUploadsInput struct {
 	//
 	//    * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
 	//
+	//    * APPIUM_NODE_TEST_PACKAGE: An Appium Node.js test package upload.
+	//
+	//    * APPIUM_RUBY_TEST_PACKAGE: An Appium Ruby test package upload.
+	//
 	//    * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package
-	//    upload.
+	//    upload for a web app.
 	//
 	//    * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package
-	//    upload.
+	//    upload for a web app.
 	//
-	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_NODE_TEST_PACKAGE: An Appium Node.js test package upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_RUBY_TEST_PACKAGE: An Appium Ruby test package upload for
+	//    a web app.
 	//
 	//    * CALABASH_TEST_PACKAGE: A Calabash test package upload.
 	//
@@ -8714,11 +8835,24 @@ type ListUploadsInput struct {
 	//
 	//    * APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
+	//    * APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.
+	//    *  APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.
 	//
-	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload.
+	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload for a
+	//    web app.
+	//
+	//    * APPIUM_WEB_NODE_TEST_SPEC: An Appium Node.js test spec upload for a
+	//    web app.
+	//
+	//    * APPIUM_WEB_RUBY_TEST_SPEC: An Appium Ruby test spec upload for a web
+	//    app.
 	//
 	//    * INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.
 	//
@@ -9323,7 +9457,7 @@ type RemoteAccessSession struct {
 
 	// The billing method of the remote access session. Possible values include
 	// METERED or UNMETERED. For more information about metered devices, see AWS
-	// Device Farm terminology (http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology)."
+	// Device Farm terminology (https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology)."
 	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 
 	// Unique identifier of your client for the remote access session. Only returned
@@ -9534,60 +9668,78 @@ func (s Resolution) GoString() string {
 	return s.String()
 }
 
-// Represents a condition for a device pool. It is passed in as the rules parameter
-// to CreateDevicePool and UpdateDevicePool.
+// Represents a condition for a device pool.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Rule
 type Rule struct {
 	_ struct{} `type:"structure"`
 
-	// The rule's attribute. It is the aspect of a device such as platform or model
-	// used as selection criteria to create or update a device pool.
+	// The rule's stringified attribute. For example, specify the value as "\"abc\"".
 	//
-	// Allowed values include:
+	// The supported operators for each attribute are provided in the following
+	// list.
 	//
-	//    * ARN: The Amazon Resource Name (ARN) of a device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
+	// APPIUM_VERSIONThe Appium version for the test.
 	//
-	//    * PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".
+	// Supported operators: CONTAINS
 	//
-	//    * FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".
+	// ARNThe Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".
 	//
-	//    * MANUFACTURER: The device manufacturer. For example, "Apple".
+	// Supported operators: EQUALS, IN, NOT_IN
 	//
-	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
+	// AVAILABILITYThe current availability of the device. Valid values are "AVAILABLE",
+	// "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".
 	//
-	//    * REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging.
+	// Supported operators: EQUALS
 	//
-	//    * APPIUM_VERSION: The Appium version for the test.
+	// FLEET_TYPEThe fleet type. Valid values are "PUBLIC" or "PRIVATE".
 	//
-	//    * INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.
+	// Supported operators: EQUALS
 	//
-	//    * INSTANCE_LABELS: The label of the device instance.
+	// FORM_FACTORThe device form factor. Valid values are "PHONE" or "TABLET".
 	//
-	//    * FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".
+	// Supported operators: EQUALS, IN, NOT_IN
+	//
+	// INSTANCE_ARNThe Amazon Resource Name (ARN) of the device instance.
+	//
+	// Supported operators: IN, NOT_IN
+	//
+	// INSTANCE_LABELSThe label of the device instance.
+	//
+	// Supported operators: CONTAINS
+	//
+	// MANUFACTURERThe device manufacturer. For example, "Apple".
+	//
+	// Supported operators: EQUALS, IN, NOT_IN
+	//
+	// MODELThe device model, such as "Apple iPad Air 2" or "Google Pixel".
+	//
+	// Supported operators: CONTAINS, EQUALS, IN, NOT_IN
+	//
+	// OS_VERSIONThe operating system version. For example, "10.3.2".
+	//
+	// Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN,
+	// LESS_THAN_OR_EQUALS, NOT_IN
+	//
+	// PLATFORMThe device platform. Valid values are "ANDROID" or "IOS".
+	//
+	// Supported operators: EQUALS, IN, NOT_IN
+	//
+	// REMOTE_ACCESS_ENABLEDWhether the device is enabled for remote access. Valid
+	// values are "TRUE" or "FALSE".
+	//
+	// Supported operators: EQUALS
+	//
+	// REMOTE_DEBUG_ENABLEDWhether the device is enabled for remote debugging. Valid
+	// values are "TRUE" or "FALSE".
+	//
+	// Supported operators: EQUALS
 	Attribute DeviceAttribute `locationName:"attribute" type:"string" enum:"true"`
 
-	// The rule's operator.
-	//
-	//    * EQUALS: The equals operator.
-	//
-	//    * GREATER_THAN: The greater-than operator.
-	//
-	//    * IN: The in operator.
-	//
-	//    * LESS_THAN: The less-than operator.
-	//
-	//    * NOT_IN: The not-in operator.
-	//
-	//    * CONTAINS: The contains operator.
+	// Specifies how Device Farm compares the rule's attribute to the value. For
+	// the operators that are supported by each attribute, see the attribute descriptions.
 	Operator RuleOperator `locationName:"operator" type:"string" enum:"true"`
 
 	// The rule's value.
-	//
-	// The value must be passed in as a string using escaped quotes.
-	//
-	// For example:
-	//
-	// "value": "\"ANDROID\""
 	Value *string `locationName:"value" type:"string"`
 }
 
@@ -9764,11 +9916,19 @@ type Run struct {
 	//
 	//    * APPIUM_PYTHON: The Appium Python type.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+	//    * APPIUM_NODE: The Appium Node.js type.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+	//    * APPIUM_RUBY: The Appium Ruby type.
 	//
-	//    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.
+	//
+	//    * APPIUM_WEB_PYTHON: The Appium Python type for web apps.
+	//
+	//    * APPIUM_WEB_NODE: The Appium Node.js type for web apps.
+	//
+	//    * APPIUM_WEB_RUBY: The Appium Ruby type for web apps.
 	//
 	//    * CALABASH: The Calabash type.
 	//
@@ -9944,14 +10104,12 @@ type ScheduleRunInput struct {
 	Configuration *ScheduleRunConfiguration `locationName:"configuration" type:"structure"`
 
 	// The ARN of the device pool for the run to be scheduled.
-	//
-	// Either devicePoolArn or deviceSelectionConfiguration are required in a request.
 	DevicePoolArn *string `locationName:"devicePoolArn" min:"32" type:"string"`
 
 	// The filter criteria used to dynamically select a set of devices for a test
 	// run, as well as the maximum number of devices to be included in the run.
 	//
-	// Either devicePoolArn or deviceSelectionConfiguration are required in a request.
+	// Either devicePoolArn or deviceSelectionConfiguration is required in a request.
 	DeviceSelectionConfiguration *DeviceSelectionConfiguration `locationName:"deviceSelectionConfiguration" type:"structure"`
 
 	// Specifies configuration information about a test run, such as the execution
@@ -10077,10 +10235,10 @@ type ScheduleRunTest struct {
 	//
 	// For Appium tests (all types):
 	//
-	//    * appium_version: The Appium version. Currently supported values are "1.7.2",
-	//    "1.7.1", "1.6.5", "latest", and "default".
+	//    * appium_version: The Appium version. Currently supported values are "1.6.5"
+	//    (and higher), "latest", and "default".
 	//
-	// “latest” will run the latest Appium version supported by Device Farm (1.7.2).
+	// “latest” will run the latest Appium version supported by Device Farm (1.9.1).
 	//
 	// For “default”, Device Farm will choose a compatible version of Appium for
 	//    the device. The current behavior is to run 1.7.2 on Android devices and
@@ -10162,11 +10320,19 @@ type ScheduleRunTest struct {
 	//
 	//    * APPIUM_PYTHON: The Appium Python type.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+	//    * APPIUM_NODE: The Appium Node.js type.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+	//    * APPIUM_RUBY: The Appium Ruby type.
 	//
-	//    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.
+	//
+	//    * APPIUM_WEB_PYTHON: The Appium Python type for web apps.
+	//
+	//    * APPIUM_WEB_NODE: The Appium Node.js type for web apps.
+	//
+	//    * APPIUM_WEB_RUBY: The Appium Ruby type for web apps.
 	//
 	//    * CALABASH: The Calabash type.
 	//
@@ -10494,11 +10660,19 @@ type Suite struct {
 	//
 	//    * APPIUM_PYTHON: The Appium Python type.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+	//    * APPIUM_NODE: The Appium Node.js type.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+	//    * APPIUM_RUBY: The Appium Ruby type.
 	//
-	//    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.
+	//
+	//    * APPIUM_WEB_PYTHON: The Appium Python type for web apps.
+	//
+	//    * APPIUM_WEB_NODE: The Appium Node.js type for web apps.
+	//
+	//    * APPIUM_WEB_RUBY: The Appium Ruby type for web apps.
 	//
 	//    * CALABASH: The Calabash type.
 	//
@@ -10611,11 +10785,19 @@ type Test struct {
 	//
 	//    * APPIUM_PYTHON: The Appium Python type.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.
+	//    * APPIUM_NODE: The Appium Node.js type.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.
+	//    * APPIUM_RUBY: The Appium Ruby type.
 	//
-	//    * APPIUM_WEB_PYTHON: The Appium Python type for Web apps.
+	//    * APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.
+	//
+	//    * APPIUM_WEB_PYTHON: The Appium Python type for web apps.
+	//
+	//    * APPIUM_WEB_NODE: The Appium Node.js type for web apps.
+	//
+	//    * APPIUM_WEB_RUBY: The Appium Ruby type for web apps.
 	//
 	//    * CALABASH: The Calabash type.
 	//
@@ -10768,8 +10950,31 @@ type UpdateDevicePoolInput struct {
 	// Arn is a required field
 	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
 
+	// Sets whether the maxDevices parameter applies to your device pool. If you
+	// set this parameter to true, the maxDevices parameter does not apply, and
+	// Device Farm does not limit the number of devices that it adds to your device
+	// pool. In this case, Device Farm adds all available devices that meet the
+	// criteria that are specified for the rules parameter.
+	//
+	// If you use this parameter in your request, you cannot use the maxDevices
+	// parameter in the same request.
+	ClearMaxDevices *bool `locationName:"clearMaxDevices" type:"boolean"`
+
 	// A description of the device pool you wish to update.
 	Description *string `locationName:"description" type:"string"`
+
+	// The number of devices that Device Farm can add to your device pool. Device
+	// Farm adds devices that are available and that meet the criteria that you
+	// assign for the rules parameter. Depending on how many devices meet these
+	// constraints, your device pool might contain fewer devices than the value
+	// for this parameter.
+	//
+	// By specifying the maximum number of devices, you can control the costs that
+	// you incur by running tests.
+	//
+	// If you use this parameter in your request, you cannot use the clearMaxDevices
+	// parameter in the same request.
+	MaxDevices *int64 `locationName:"maxDevices" type:"integer"`
 
 	// A string representing the name of the device pool you wish to update.
 	Name *string `locationName:"name" type:"string"`
@@ -11302,13 +11507,24 @@ type Upload struct {
 	//
 	//    * APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
 	//
+	//    * APPIUM_NODE_TEST_PACKAGE: An Appium Node.js test package upload.
+	//
+	//    * APPIUM_RUBY_TEST_PACKAGE: An Appium Ruby test package upload.
+	//
 	//    * APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package
-	//    upload.
+	//    upload for web apps.
 	//
 	//    * APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package
-	//    upload.
+	//    upload for web apps.
 	//
-	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.
+	//    * APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload
+	//    for web apps.
+	//
+	//    * APPIUM_WEB_NODE_TEST_PACKAGE: An Appium Node.js test package upload
+	//    for web apps.
+	//
+	//    * APPIUM_WEB_RUBY_TEST_PACKAGE: An Appium Ruby test package upload for
+	//    web apps.
 	//
 	//    * CALABASH_TEST_PACKAGE: A Calabash test package upload.
 	//
@@ -11328,11 +11544,24 @@ type Upload struct {
 	//
 	//    * APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.
 	//
-	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.
+	//    * APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.
 	//
-	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.
+	//    * APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.
 	//
-	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload.
+	//    * APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload
+	//    for a web app.
+	//
+	//    * APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload for a
+	//    web app.
+	//
+	//    * APPIUM_WEB_NODE_TEST_SPEC: An Appium Node.js test spec upload for a
+	//    web app.
+	//
+	//    * APPIUM_WEB_RUBY_TEST_SPEC: An Appium Ruby test spec upload for a web
+	//    app.
 	//
 	//    * INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.
 	//
@@ -11496,6 +11725,9 @@ const (
 	DeviceAttributeInstanceArn         DeviceAttribute = "INSTANCE_ARN"
 	DeviceAttributeInstanceLabels      DeviceAttribute = "INSTANCE_LABELS"
 	DeviceAttributeFleetType           DeviceAttribute = "FLEET_TYPE"
+	DeviceAttributeOsVersion           DeviceAttribute = "OS_VERSION"
+	DeviceAttributeModel               DeviceAttribute = "MODEL"
+	DeviceAttributeAvailability        DeviceAttribute = "AVAILABILITY"
 )
 
 func (enum DeviceAttribute) MarshalValue() (string, error) {
@@ -11549,29 +11781,6 @@ func (enum DeviceFilterAttribute) MarshalValue() (string, error) {
 }
 
 func (enum DeviceFilterAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
-	b = b[0:0]
-	return append(b, enum...), nil
-}
-
-type DeviceFilterOperator string
-
-// Enum values for DeviceFilterOperator
-const (
-	DeviceFilterOperatorEquals              DeviceFilterOperator = "EQUALS"
-	DeviceFilterOperatorLessThan            DeviceFilterOperator = "LESS_THAN"
-	DeviceFilterOperatorLessThanOrEquals    DeviceFilterOperator = "LESS_THAN_OR_EQUALS"
-	DeviceFilterOperatorGreaterThan         DeviceFilterOperator = "GREATER_THAN"
-	DeviceFilterOperatorGreaterThanOrEquals DeviceFilterOperator = "GREATER_THAN_OR_EQUALS"
-	DeviceFilterOperatorIn                  DeviceFilterOperator = "IN"
-	DeviceFilterOperatorNotIn               DeviceFilterOperator = "NOT_IN"
-	DeviceFilterOperatorContains            DeviceFilterOperator = "CONTAINS"
-)
-
-func (enum DeviceFilterOperator) MarshalValue() (string, error) {
-	return string(enum), nil
-}
-
-func (enum DeviceFilterOperator) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -11798,12 +12007,14 @@ type RuleOperator string
 
 // Enum values for RuleOperator
 const (
-	RuleOperatorEquals      RuleOperator = "EQUALS"
-	RuleOperatorLessThan    RuleOperator = "LESS_THAN"
-	RuleOperatorGreaterThan RuleOperator = "GREATER_THAN"
-	RuleOperatorIn          RuleOperator = "IN"
-	RuleOperatorNotIn       RuleOperator = "NOT_IN"
-	RuleOperatorContains    RuleOperator = "CONTAINS"
+	RuleOperatorEquals              RuleOperator = "EQUALS"
+	RuleOperatorLessThan            RuleOperator = "LESS_THAN"
+	RuleOperatorLessThanOrEquals    RuleOperator = "LESS_THAN_OR_EQUALS"
+	RuleOperatorGreaterThan         RuleOperator = "GREATER_THAN"
+	RuleOperatorGreaterThanOrEquals RuleOperator = "GREATER_THAN_OR_EQUALS"
+	RuleOperatorIn                  RuleOperator = "IN"
+	RuleOperatorNotIn               RuleOperator = "NOT_IN"
+	RuleOperatorContains            RuleOperator = "CONTAINS"
 )
 
 func (enum RuleOperator) MarshalValue() (string, error) {
@@ -11857,9 +12068,13 @@ const (
 	TestTypeAppiumJavaJunit       TestType = "APPIUM_JAVA_JUNIT"
 	TestTypeAppiumJavaTestng      TestType = "APPIUM_JAVA_TESTNG"
 	TestTypeAppiumPython          TestType = "APPIUM_PYTHON"
+	TestTypeAppiumNode            TestType = "APPIUM_NODE"
+	TestTypeAppiumRuby            TestType = "APPIUM_RUBY"
 	TestTypeAppiumWebJavaJunit    TestType = "APPIUM_WEB_JAVA_JUNIT"
 	TestTypeAppiumWebJavaTestng   TestType = "APPIUM_WEB_JAVA_TESTNG"
 	TestTypeAppiumWebPython       TestType = "APPIUM_WEB_PYTHON"
+	TestTypeAppiumWebNode         TestType = "APPIUM_WEB_NODE"
+	TestTypeAppiumWebRuby         TestType = "APPIUM_WEB_RUBY"
 	TestTypeCalabash              TestType = "CALABASH"
 	TestTypeInstrumentation       TestType = "INSTRUMENTATION"
 	TestTypeUiautomation          TestType = "UIAUTOMATION"
@@ -11926,9 +12141,13 @@ const (
 	UploadTypeAppiumJavaJunitTestPackage     UploadType = "APPIUM_JAVA_JUNIT_TEST_PACKAGE"
 	UploadTypeAppiumJavaTestngTestPackage    UploadType = "APPIUM_JAVA_TESTNG_TEST_PACKAGE"
 	UploadTypeAppiumPythonTestPackage        UploadType = "APPIUM_PYTHON_TEST_PACKAGE"
+	UploadTypeAppiumNodeTestPackage          UploadType = "APPIUM_NODE_TEST_PACKAGE"
+	UploadTypeAppiumRubyTestPackage          UploadType = "APPIUM_RUBY_TEST_PACKAGE"
 	UploadTypeAppiumWebJavaJunitTestPackage  UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"
 	UploadTypeAppiumWebJavaTestngTestPackage UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"
 	UploadTypeAppiumWebPythonTestPackage     UploadType = "APPIUM_WEB_PYTHON_TEST_PACKAGE"
+	UploadTypeAppiumWebNodeTestPackage       UploadType = "APPIUM_WEB_NODE_TEST_PACKAGE"
+	UploadTypeAppiumWebRubyTestPackage       UploadType = "APPIUM_WEB_RUBY_TEST_PACKAGE"
 	UploadTypeCalabashTestPackage            UploadType = "CALABASH_TEST_PACKAGE"
 	UploadTypeInstrumentationTestPackage     UploadType = "INSTRUMENTATION_TEST_PACKAGE"
 	UploadTypeUiautomationTestPackage        UploadType = "UIAUTOMATION_TEST_PACKAGE"
@@ -11938,9 +12157,13 @@ const (
 	UploadTypeAppiumJavaJunitTestSpec        UploadType = "APPIUM_JAVA_JUNIT_TEST_SPEC"
 	UploadTypeAppiumJavaTestngTestSpec       UploadType = "APPIUM_JAVA_TESTNG_TEST_SPEC"
 	UploadTypeAppiumPythonTestSpec           UploadType = "APPIUM_PYTHON_TEST_SPEC"
+	UploadTypeAppiumNodeTestSpec             UploadType = "APPIUM_NODE_TEST_SPEC"
+	UploadTypeAppiumRubyTestSpec             UploadType = "APPIUM_RUBY_TEST_SPEC"
 	UploadTypeAppiumWebJavaJunitTestSpec     UploadType = "APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"
 	UploadTypeAppiumWebJavaTestngTestSpec    UploadType = "APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"
 	UploadTypeAppiumWebPythonTestSpec        UploadType = "APPIUM_WEB_PYTHON_TEST_SPEC"
+	UploadTypeAppiumWebNodeTestSpec          UploadType = "APPIUM_WEB_NODE_TEST_SPEC"
+	UploadTypeAppiumWebRubyTestSpec          UploadType = "APPIUM_WEB_RUBY_TEST_SPEC"
 	UploadTypeInstrumentationTestSpec        UploadType = "INSTRUMENTATION_TEST_SPEC"
 	UploadTypeXctestUiTestSpec               UploadType = "XCTEST_UI_TEST_SPEC"
 )

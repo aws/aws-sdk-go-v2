@@ -910,6 +910,12 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminList
 		Name:       opAdminListGroupsForUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -921,6 +927,53 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminList
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AdminListGroupsForUserRequest{Request: req, Input: input, Copy: c.AdminListGroupsForUserRequest}
+}
+
+// Paginate pages iterates over the pages of a AdminListGroupsForUserRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a AdminListGroupsForUser operation.
+//		req := client.AdminListGroupsForUserRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *AdminListGroupsForUserRequest) Paginate(opts ...aws.Option) AdminListGroupsForUserPager {
+	return AdminListGroupsForUserPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *AdminListGroupsForUserInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// AdminListGroupsForUserPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type AdminListGroupsForUserPager struct {
+	aws.Pager
+}
+
+func (p *AdminListGroupsForUserPager) CurrentPage() *AdminListGroupsForUserOutput {
+	return p.Pager.CurrentPage().(*AdminListGroupsForUserOutput)
 }
 
 const opAdminListUserAuthEvents = "AdminListUserAuthEvents"
@@ -962,6 +1015,12 @@ func (c *CognitoIdentityProvider) AdminListUserAuthEventsRequest(input *AdminLis
 		Name:       opAdminListUserAuthEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -973,6 +1032,53 @@ func (c *CognitoIdentityProvider) AdminListUserAuthEventsRequest(input *AdminLis
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AdminListUserAuthEventsRequest{Request: req, Input: input, Copy: c.AdminListUserAuthEventsRequest}
+}
+
+// Paginate pages iterates over the pages of a AdminListUserAuthEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a AdminListUserAuthEvents operation.
+//		req := client.AdminListUserAuthEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *AdminListUserAuthEventsRequest) Paginate(opts ...aws.Option) AdminListUserAuthEventsPager {
+	return AdminListUserAuthEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *AdminListUserAuthEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// AdminListUserAuthEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type AdminListUserAuthEventsPager struct {
+	aws.Pager
+}
+
+func (p *AdminListUserAuthEventsPager) CurrentPage() *AdminListUserAuthEventsOutput {
+	return p.Pager.CurrentPage().(*AdminListUserAuthEventsOutput)
 }
 
 const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
@@ -3646,6 +3752,12 @@ func (c *CognitoIdentityProvider) ListGroupsRequest(input *ListGroupsInput) List
 		Name:       opListGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3657,6 +3769,53 @@ func (c *CognitoIdentityProvider) ListGroupsRequest(input *ListGroupsInput) List
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListGroups operation.
+//		req := client.ListGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
+	return ListGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupsPager) CurrentPage() *ListGroupsOutput {
+	return p.Pager.CurrentPage().(*ListGroupsOutput)
 }
 
 const opListIdentityProviders = "ListIdentityProviders"
@@ -3697,6 +3856,12 @@ func (c *CognitoIdentityProvider) ListIdentityProvidersRequest(input *ListIdenti
 		Name:       opListIdentityProviders,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3708,6 +3873,53 @@ func (c *CognitoIdentityProvider) ListIdentityProvidersRequest(input *ListIdenti
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListIdentityProvidersRequest{Request: req, Input: input, Copy: c.ListIdentityProvidersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListIdentityProvidersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListIdentityProviders operation.
+//		req := client.ListIdentityProvidersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListIdentityProvidersRequest) Paginate(opts ...aws.Option) ListIdentityProvidersPager {
+	return ListIdentityProvidersPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListIdentityProvidersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListIdentityProvidersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListIdentityProvidersPager struct {
+	aws.Pager
+}
+
+func (p *ListIdentityProvidersPager) CurrentPage() *ListIdentityProvidersOutput {
+	return p.Pager.CurrentPage().(*ListIdentityProvidersOutput)
 }
 
 const opListResourceServers = "ListResourceServers"
@@ -3748,6 +3960,12 @@ func (c *CognitoIdentityProvider) ListResourceServersRequest(input *ListResource
 		Name:       opListResourceServers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3759,6 +3977,110 @@ func (c *CognitoIdentityProvider) ListResourceServersRequest(input *ListResource
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListResourceServersRequest{Request: req, Input: input, Copy: c.ListResourceServersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListResourceServersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListResourceServers operation.
+//		req := client.ListResourceServersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListResourceServersRequest) Paginate(opts ...aws.Option) ListResourceServersPager {
+	return ListResourceServersPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListResourceServersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListResourceServersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListResourceServersPager struct {
+	aws.Pager
+}
+
+func (p *ListResourceServersPager) CurrentPage() *ListResourceServersOutput {
+	return p.Pager.CurrentPage().(*ListResourceServersOutput)
+}
+
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send(ctx context.Context) (*ListTagsForResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Lists the tags that are assigned to an Amazon Cognito user pool.
+//
+// A tag is a label that you can apply to user pools to categorize and manage
+// them in different ways, such as by purpose, owner, environment, or other
+// criteria.
+//
+// You can use this action up to 10 times per second, per account.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListTagsForResource
+func (c *CognitoIdentityProvider) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opListUserImportJobs = "ListUserImportJobs"
@@ -3850,6 +4172,12 @@ func (c *CognitoIdentityProvider) ListUserPoolClientsRequest(input *ListUserPool
 		Name:       opListUserPoolClients,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3861,6 +4189,53 @@ func (c *CognitoIdentityProvider) ListUserPoolClientsRequest(input *ListUserPool
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListUserPoolClientsRequest{Request: req, Input: input, Copy: c.ListUserPoolClientsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListUserPoolClientsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListUserPoolClients operation.
+//		req := client.ListUserPoolClientsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListUserPoolClientsRequest) Paginate(opts ...aws.Option) ListUserPoolClientsPager {
+	return ListUserPoolClientsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListUserPoolClientsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListUserPoolClientsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUserPoolClientsPager struct {
+	aws.Pager
+}
+
+func (p *ListUserPoolClientsPager) CurrentPage() *ListUserPoolClientsOutput {
+	return p.Pager.CurrentPage().(*ListUserPoolClientsOutput)
 }
 
 const opListUserPools = "ListUserPools"
@@ -3901,6 +4276,12 @@ func (c *CognitoIdentityProvider) ListUserPoolsRequest(input *ListUserPoolsInput
 		Name:       opListUserPools,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -3912,6 +4293,53 @@ func (c *CognitoIdentityProvider) ListUserPoolsRequest(input *ListUserPoolsInput
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListUserPoolsRequest{Request: req, Input: input, Copy: c.ListUserPoolsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListUserPoolsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListUserPools operation.
+//		req := client.ListUserPoolsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListUserPoolsRequest) Paginate(opts ...aws.Option) ListUserPoolsPager {
+	return ListUserPoolsPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListUserPoolsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListUserPoolsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUserPoolsPager struct {
+	aws.Pager
+}
+
+func (p *ListUserPoolsPager) CurrentPage() *ListUserPoolsOutput {
+	return p.Pager.CurrentPage().(*ListUserPoolsOutput)
 }
 
 const opListUsers = "ListUsers"
@@ -4005,6 +4433,12 @@ func (c *CognitoIdentityProvider) ListUsersInGroupRequest(input *ListUsersInGrou
 		Name:       opListUsersInGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -4016,6 +4450,53 @@ func (c *CognitoIdentityProvider) ListUsersInGroupRequest(input *ListUsersInGrou
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListUsersInGroupRequest{Request: req, Input: input, Copy: c.ListUsersInGroupRequest}
+}
+
+// Paginate pages iterates over the pages of a ListUsersInGroupRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListUsersInGroup operation.
+//		req := client.ListUsersInGroupRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListUsersInGroupRequest) Paginate(opts ...aws.Option) ListUsersInGroupPager {
+	return ListUsersInGroupPager{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListUsersInGroupInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+				req.SetContext(ctx)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListUsersInGroupPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUsersInGroupPager struct {
+	aws.Pager
+}
+
+func (p *ListUsersInGroupPager) CurrentPage() *ListUsersInGroupOutput {
+	return p.Pager.CurrentPage().(*ListUsersInGroupOutput)
 }
 
 const opResendConfirmationCode = "ResendConfirmationCode"
@@ -4552,6 +5033,126 @@ func (c *CognitoIdentityProvider) StopUserImportJobRequest(input *StopUserImport
 	return StopUserImportJobRequest{Request: req, Input: input, Copy: c.StopUserImportJobRequest}
 }
 
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send(ctx context.Context) (*TagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Assigns a set of tags to an Amazon Cognito user pool. A tag is a label that
+// you can use to categorize and manage user pools in different ways, such as
+// by purpose, owner, environment, or other criteria.
+//
+// Each tag consists of a key and value, both of which you define. A key is
+// a general category for more specific values. For example, if you have two
+// versions of a user pool, one for testing and another for production, you
+// might assign an Environment tag key to both user pools. The value of this
+// key might be Test for one user pool and Production for the other.
+//
+// Tags are useful for cost tracking and access control. You can activate your
+// tags so that they appear on the Billing and Cost Management console, where
+// you can track the costs associated with your user pools. In an IAM policy,
+// you can constrain permissions for user pools based on specific tags or tag
+// values.
+//
+// You can use this action up to 5 times per second, per account. A user pool
+// can have as many as 50 tags.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TagResource
+func (c *CognitoIdentityProvider) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send(ctx context.Context) (*UntagResourceOutput, error) {
+	r.Request.SetContext(ctx)
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// Removes the specified tags from an Amazon Cognito user pool. You can use
+// this action up to 5 times per second, per account
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send(context.TODO())
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UntagResource
+func (c *CognitoIdentityProvider) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
+}
+
 const opUpdateAuthEventFeedback = "UpdateAuthEventFeedback"
 
 // UpdateAuthEventFeedbackRequest is a API request type for the UpdateAuthEventFeedback API operation.
@@ -5021,7 +5622,7 @@ func (r UpdateUserPoolDomainRequest) Send(ctx context.Context) (*UpdateUserPoolD
 // your new certificate to your custom domain.
 //
 // For more information about adding a custom domain to your user pool, see
-// Using Your Own Domain for the Hosted UI (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
+// Using Your Own Domain for the Hosted UI (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
 //
 //    // Example sending a request using the UpdateUserPoolDomainRequest method.
 //    req := client.UpdateUserPoolDomainRequest(params)
@@ -5560,6 +6161,10 @@ type AdminCreateUserConfigType struct {
 	// longer usable. To reset the account after that time limit, you must call
 	// AdminCreateUser again, specifying "RESEND" for the MessageAction parameter.
 	// The default value for this parameter is 7.
+	//
+	// If you set a value for TemporaryPasswordValidityDays in PasswordPolicy, that
+	// value will be used and UnusedAccountValidityDays will be deprecated for that
+	// user pool.
 	UnusedAccountValidityDays *int64 `type:"integer"`
 }
 
@@ -6407,6 +7012,13 @@ type AdminGetUserOutput struct {
 	//    * COMPROMISED - User is disabled due to a potential security threat.
 	//
 	//    * UNKNOWN - User status is not known.
+	//
+	//    * RESET_REQUIRED - User is confirmed, but the user must request a code
+	//    and reset his or her password before he or she can sign in.
+	//
+	//    * FORCE_CHANGE_PASSWORD - The user is confirmed and the user can sign
+	//    in using a temporary password, but on first sign-in, the user must change
+	//    his or her password to a new value before doing anything else.
 	UserStatus UserStatusType `type:"string" enum:"true"`
 
 	// The user name of the user about whom you are receiving information.
@@ -9146,7 +9758,7 @@ type CreateUserPoolClientInput struct {
 	RefreshTokenValidity *int64 `type:"integer"`
 
 	// A list of provider names for the identity providers that are supported on
-	// this client.
+	// this client. The following are supported: COGNITO, Facebook, Google and LoginWithAmazon.
 	SupportedIdentityProviders []string `type:"list"`
 
 	// The user pool ID for the user pool where you want to create a user pool client.
@@ -9162,7 +9774,7 @@ type CreateUserPoolClientInput struct {
 	// your application through an identity provider. If your app client lacks write
 	// access to a mapped attribute, Amazon Cognito throws an error when it attempts
 	// to update the attribute. For more information, see Specifying Identity Provider
-	// Attribute Mappings for Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
+	// Attribute Mappings for Your User Pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
 	WriteAttributes []string `type:"list"`
 }
 
@@ -9246,7 +9858,7 @@ type CreateUserPoolDomainInput struct {
 	// hosted domain instead.
 	//
 	// For more information about the hosted domain and custom domains, see Configuring
-	// a User Pool Domain (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html).
+	// a User Pool Domain (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html).
 	CustomDomainConfig *CustomDomainConfigType `type:"structure"`
 
 	// The domain string.
@@ -9392,8 +10004,9 @@ type CreateUserPoolInput struct {
 	// to the value "AUDIT".
 	UserPoolAddOns *UserPoolAddOnsType `type:"structure"`
 
-	// The cost allocation tags for the user pool. For more information, see Adding
-	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
+	// The tag keys and values to assign to the user pool. A tag is a label that
+	// you can use to categorize and manage user pools in different ways, such as
+	// by purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]string `type:"map"`
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
@@ -10723,10 +11336,57 @@ func (s DomainDescriptionType) GoString() string {
 type EmailConfigurationType struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether Amazon Cognito emails your users by using its built-in
+	// email functionality or your Amazon SES email configuration. Specify one of
+	// the following values:
+	//
+	// COGNITO_DEFAULTWhen Amazon Cognito emails your users, it uses its built-in
+	// email functionality. When you use the default option, Amazon Cognito allows
+	// only a limited number of emails each day for your user pool. For typical
+	// production environments, the default email limit is below the required delivery
+	// volume. To achieve a higher delivery volume, specify DEVELOPER to use your
+	// Amazon SES email configuration.
+	//
+	// To look up the email delivery limit for the default option, see Limits in
+	// Amazon Cognito (https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html)
+	// in the Amazon Cognito Developer Guide.
+	//
+	// The default FROM address is no-reply@verificationemail.com. To customize
+	// the FROM address, provide the ARN of an Amazon SES verified email address
+	// for the SourceArn parameter.
+	//
+	// DEVELOPERWhen Amazon Cognito emails your users, it uses your Amazon SES configuration.
+	// Amazon Cognito calls Amazon SES on your behalf to send email from your verified
+	// email address. When you use this option, the email delivery limits are the
+	// same limits that apply to your Amazon SES verified email address in your
+	// AWS account.
+	//
+	// If you use this option, you must provide the ARN of an Amazon SES verified
+	// email address for the SourceArn parameter.
+	//
+	// Before Amazon Cognito can email your users, it requires additional permissions
+	// to call Amazon SES on your behalf. When you update your user pool with this
+	// option, Amazon Cognito creates a service-linked role, which is a type of
+	// IAM role, in your AWS account. This role contains the permissions that allow
+	// Amazon Cognito to access Amazon SES and send email messages with your address.
+	// For more information about the service-linked role that Amazon Cognito creates,
+	// see Using Service-Linked Roles for Amazon Cognito (https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html)
+	// in the Amazon Cognito Developer Guide.
+	EmailSendingAccount EmailSendingAccountType `type:"string" enum:"true"`
+
 	// The destination to which the receiver of the email should reply to.
 	ReplyToEmailAddress *string `type:"string"`
 
-	// The Amazon Resource Name (ARN) of the email source.
+	// The Amazon Resource Name (ARN) of a verified email address in Amazon SES.
+	// This email address is used in one of the following ways, depending on the
+	// value that you specify for the EmailSendingAccount parameter:
+	//
+	//    * If you specify COGNITO_DEFAULT, Amazon Cognito uses this address as
+	//    the custom FROM address when it emails your users by using its built-in
+	//    email account.
+	//
+	//    * If you specify DEVELOPER, Amazon Cognito emails your users with this
+	//    address by calling Amazon SES on your behalf.
 	SourceArn *string `min:"20" type:"string"`
 }
 
@@ -12225,7 +12885,7 @@ type ListIdentityProvidersInput struct {
 	_ struct{} `type:"structure"`
 
 	// The maximum number of identity providers to return.
-	MaxResults *int64 `min:"1" type:"integer"`
+	MaxResults *int64 `type:"integer"`
 
 	// A pagination token.
 	NextToken *string `min:"1" type:"string"`
@@ -12249,9 +12909,6 @@ func (s ListIdentityProvidersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIdentityProvidersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityProvidersInput"}
-	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
@@ -12375,6 +13032,69 @@ func (s ListResourceServersOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResourceServersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the user pool that the tags are assigned
+	// to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The tags that are assigned to the user pool.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -13595,7 +14315,7 @@ type SchemaAttributeType struct {
 	// when users sign in to your application through an identity provider. If an
 	// attribute is immutable, Amazon Cognito throws an error when it attempts to
 	// update the attribute. For more information, see Specifying Identity Provider
-	// Attribute Mappings for Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
+	// Attribute Mappings for Your User Pool (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
 	Mutable *bool `type:"boolean"`
 
 	// A schema attribute of the name type.
@@ -14464,6 +15184,68 @@ func (s StringAttributeConstraintsType) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the user pool to assign the tags to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"20" type:"string" required:"true"`
+
+	// The tags to assign to the user pool.
+	Tags map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/TagResourceResponse
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // A container for the UI customization information for a user pool's built-in
 // app UI.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UICustomizationType
@@ -14500,6 +15282,69 @@ func (s UICustomizationType) String() string {
 // GoString returns the string representation
 func (s UICustomizationType) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the user pool that the tags are assigned
+	// to.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `min:"20" type:"string" required:"true"`
+
+	// The keys of the tags to remove from the user pool.
+	TagKeys []string `type:"list"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UntagResourceResponse
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedbackRequest
@@ -15035,9 +15880,6 @@ type UpdateUserPoolClientInput struct {
 	// Set to code to initiate a code grant flow, which provides an authorization
 	// code as the response. This code can be exchanged for access tokens with the
 	// token endpoint.
-	//
-	// Set to token to specify that the client should get the access token (and,
-	// optionally, ID token, based on scopes) directly.
 	AllowedOAuthFlows []OAuthFlowType `type:"list"`
 
 	// Set to TRUE if the client is allowed to follow the OAuth protocol when interacting
@@ -15355,8 +16197,9 @@ type UpdateUserPoolInput struct {
 	// UserPoolId is a required field
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
-	// The cost allocation tags for the user pool. For more information, see Adding
-	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
+	// The tag keys and values to assign to the user pool. A tag is a label that
+	// you can use to categorize and manage user pools in different ways, such as
+	// by purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]string `type:"map"`
 
 	// The template for verification messages.
@@ -15819,6 +16662,12 @@ type UserPoolType struct {
 	// The date the user pool was created.
 	CreationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// A custom domain name that you provide to Amazon Cognito. This parameter applies
+	// only if you use a custom domain to host the sign-up and sign-in pages for
+	// your application. For example: auth.example.com.
+	//
+	// For more information about adding a custom domain to your user pool, see
+	// Using Your Own Domain for the Hosted UI (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
 	CustomDomain *string `min:"1" type:"string"`
 
 	// The device configuration.
@@ -15889,8 +16738,9 @@ type UserPoolType struct {
 	// The user pool add-ons.
 	UserPoolAddOns *UserPoolAddOnsType `type:"structure"`
 
-	// The cost allocation tags for the user pool. For more information, see Adding
-	// Cost Allocation Tags to Your User Pool (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html)
+	// The tags that are assigned to the user pool. A tag is a label that you can
+	// apply to user pools to categorize and manage them in different ways, such
+	// as by purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]string `type:"map"`
 
 	// Specifies whether email addresses or phone numbers can be specified as usernames
@@ -15942,6 +16792,13 @@ type UserType struct {
 	//    * COMPROMISED - User is disabled due to a potential security threat.
 	//
 	//    * UNKNOWN - User status is not known.
+	//
+	//    * RESET_REQUIRED - User is confirmed, but the user must request a code
+	//    and reset his or her password before he or she can sign in.
+	//
+	//    * FORCE_CHANGE_PASSWORD - The user is confirmed and the user can sign
+	//    in using a temporary password, but on first sign-in, the user must change
+	//    his or her password to a new value before doing anything else.
 	UserStatus UserStatusType `type:"string" enum:"true"`
 
 	// The user name of the user you wish to describe.
@@ -16418,6 +17275,23 @@ func (enum DomainStatusType) MarshalValue() (string, error) {
 }
 
 func (enum DomainStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EmailSendingAccountType string
+
+// Enum values for EmailSendingAccountType
+const (
+	EmailSendingAccountTypeCognitoDefault EmailSendingAccountType = "COGNITO_DEFAULT"
+	EmailSendingAccountTypeDeveloper      EmailSendingAccountType = "DEVELOPER"
+)
+
+func (enum EmailSendingAccountType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EmailSendingAccountType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

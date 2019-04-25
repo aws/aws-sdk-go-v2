@@ -463,7 +463,7 @@ func (c *DatabaseMigrationService) WaitUntilReplicationTaskStopped(ctx context.C
 }
 
 // WaitUntilTestConnectionSucceeds uses the AWS Database Migration Service API operation
-// TestConnection to wait for a condition to be met before returning.
+// DescribeConnections to wait for a condition to be met before returning.
 // If the condition is not met within the max attempt window, an error will
 // be returned.
 //
@@ -471,7 +471,7 @@ func (c *DatabaseMigrationService) WaitUntilReplicationTaskStopped(ctx context.C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceeds(ctx context.Context, input *TestConnectionInput, opts ...aws.WaiterOption) error {
+func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceeds(ctx context.Context, input *DescribeConnectionsInput, opts ...aws.WaiterOption) error {
 	w := aws.Waiter{
 		Name:        "WaitUntilTestConnectionSucceeds",
 		MaxAttempts: 60,
@@ -479,23 +479,23 @@ func (c *DatabaseMigrationService) WaitUntilTestConnectionSucceeds(ctx context.C
 		Acceptors: []aws.WaiterAcceptor{
 			{
 				State:   aws.SuccessWaiterState,
-				Matcher: aws.PathWaiterMatch, Argument: "Connection.Status",
+				Matcher: aws.PathAllWaiterMatch, Argument: "Connections[].Status",
 				Expected: "successful",
 			},
 			{
 				State:   aws.FailureWaiterState,
-				Matcher: aws.PathWaiterMatch, Argument: "Connection.Status",
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Connections[].Status",
 				Expected: "failed",
 			},
 		},
 		Logger: c.Config.Logger,
 		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
-			var inCpy *TestConnectionInput
+			var inCpy *DescribeConnectionsInput
 			if input != nil {
 				tmp := *input
 				inCpy = &tmp
 			}
-			req := c.TestConnectionRequest(inCpy)
+			req := c.DescribeConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
 			return req.Request, nil

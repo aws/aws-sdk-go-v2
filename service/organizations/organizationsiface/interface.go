@@ -70,6 +70,8 @@ type OrganizationsAPI interface {
 
 	CreateAccountRequest(*organizations.CreateAccountInput) organizations.CreateAccountRequest
 
+	CreateGovCloudAccountRequest(*organizations.CreateGovCloudAccountInput) organizations.CreateGovCloudAccountRequest
+
 	CreateOrganizationRequest(*organizations.CreateOrganizationInput) organizations.CreateOrganizationRequest
 
 	CreateOrganizationalUnitRequest(*organizations.CreateOrganizationalUnitInput) organizations.CreateOrganizationalUnitRequest

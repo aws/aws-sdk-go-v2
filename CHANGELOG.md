@@ -1,3 +1,37 @@
+Release v0.8.0 (2019-04-25)
+===
+
+### Services
+* Synced the V2 SDK with latests AWS service API definitions.
+
+### SDK Breaking changes
+* Update SDK API operation request send to required Context ([#265](https://github.com/aws/aws-sdk-go-v2/pull/265))
+  * Updates the SDK's API operation request Send method to require a context.Context value when called. This is done to encourage best applications to use Context for cancellation and request tracing.  Standardizing on this pattern will also help reduce code paths which accidentally do not have the Context causing the cancellation and tracing chain to be lost. Leading to difficult to trace down losses of cancellation and tracing within an application.
+  * Fixes [#264](https://github.com/aws/aws-sdk-go-v2/pull/264)
+
+### SDK Enhancements
+* Update README.md for getting SDK without Go Modules
+  * Updates the README.md with instructions how to get the SDK without Go Modules enabled, or using the SDK within a GOPATH with Go 1.11, and Go 1.12.
+* Refactor SDK's integration tests to be code generated ([#283](https://github.com/aws/aws-sdk-go-v2/pull/283))
+* `aws`: Add RequestThrottledException to set of throttled exceptions ([#292](https://github.com/aws/aws-sdk-go-v2/pull/292))
+* `private/model/api`: Backfill authtype, STS and Cognito Identity ([#293](https://github.com/aws/aws-sdk-go-v2/pull/293))
+  * Backfills the authtype=none modeled trait for STS and Cognito Identity services. This removes the in code customization for these two services' APIs that should not be signed.
+
+### SDK Bugs
+* Fix HTTP endpoint credential provider test for unresolved hosts ([#262](https://github.com/aws/aws-sdk-go-v2/pull/262))
+  * Fixes the HTTP endpoint credential provider's tests to check for a host that resolves to no addresses.
+* `example/service/s3/mockPaginator`: Update example to not use internal pkg ([#278](https://github.com/aws/aws-sdk-go-v2/pull/278))
+  * Updates the SDK's S3 Mock Paginator example to not use internal SDK packages and instead use the SDK's provided defaults package for default configuration.
+  * Fixes [#116](https://github.com/aws/aws-sdk-go-v2/issues/116)
+* Cleanup go mod unused dependencies ([#284](https://github.com/aws/aws-sdk-go-v2/pull/284))
+* `service/s3/s3manager`: Fix brittle Upload unit test ([#288](https://github.com/aws/aws-sdk-go-v2/pull/288))
+* `aws/ec2metadata`: Fix EC2 Metadata client panic with debug logging ([#290](https://github.com/aws/aws-sdk-go-v2/pull/290))
+  * Fixes a panic that could occur within the EC2 Metadata client when both AWS_EC2_METADATA_DISABLED env var is set and log level is LogDebugWithHTTPBody. The SDK's client response body debug functionality would panic because the Request.HTTPResponse value was not specified.
+* `aws`: Fix RequestUserAgent test to be stable ([#289](https://github.com/aws/aws-sdk-go-v2/pull/289))
+* `private/protocol/rest`: Trim space in header key and value ([#291](https://github.com/aws/aws-sdk-go-v2/pull/291))
+  * Fixes a bug when using S3 metadata where metadata values with leading spaces would trigger request signature validation errors when the request is received by the service.
+
+
 Release v0.7.0 (2019-01-03)
 ===
 

@@ -202,7 +202,7 @@ func (r CreateTagsRequest) Send(ctx context.Context) (*CreateTagsOutput, error) 
 // CreateTagsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Creates the specified tags for the specified WorkSpace.
+// Creates the specified tags for the specified WorkSpaces resource.
 //
 //    // Example sending a request using the CreateTagsRequest method.
 //    req := client.CreateTagsRequest(params)
@@ -359,7 +359,7 @@ func (r DeleteTagsRequest) Send(ctx context.Context) (*DeleteTagsOutput, error) 
 // DeleteTagsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Deletes the specified tags from the specified WorkSpace.
+// Deletes the specified tags from the specified WorkSpaces resource.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
@@ -668,7 +668,7 @@ func (r DescribeTagsRequest) Send(ctx context.Context) (*DescribeTagsOutput, err
 // DescribeTagsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Describes the specified tags for the specified WorkSpace.
+// Describes the specified tags for the specified WorkSpaces resource.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
@@ -1354,7 +1354,7 @@ func (r ModifyClientPropertiesRequest) Send(ctx context.Context) (*ModifyClientP
 // ModifyClientPropertiesRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Modifies the properties of the specified Amazon WorkSpaces client.
+// Modifies the properties of the specified Amazon WorkSpaces clients.
 //
 //    // Example sending a request using the ModifyClientPropertiesRequest method.
 //    req := client.ModifyClientPropertiesRequest(params)
@@ -1572,7 +1572,7 @@ func (r RebuildWorkspacesRequest) Send(ctx context.Context) (*RebuildWorkspacesO
 // You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY.
 //
 // Rebuilding a WorkSpace is a potentially destructive action that can result
-// in the loss of data. For more information, see Rebuild a WorkSpace (http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html).
+// in the loss of data. For more information, see Rebuild a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html).
 //
 // This operation is asynchronous and returns before the WorkSpaces have been
 // completely rebuilt.
@@ -2115,6 +2115,9 @@ type CreateIpGroupInput struct {
 	// GroupName is a required field
 	GroupName *string `type:"string" required:"true"`
 
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+	Tags []Tag `type:"list"`
+
 	// The rules to add to the group.
 	UserRules []IpRuleItem `type:"list"`
 }
@@ -2135,6 +2138,13 @@ func (s *CreateIpGroupInput) Validate() error {
 
 	if s.GroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2172,12 +2182,14 @@ func (s CreateIpGroupOutput) SDKResponseMetadata() aws.Response {
 type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
+	// The identifier of the WorkSpaces resource. The supported resource types are
+	// WorkSpaces, registered directories, images, custom bundles, and IP access
+	// control groups.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
-	// The tags. Each WorkSpace can have a maximum of 50 tags.
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
 	//
 	// Tags is a required field
 	Tags []Tag `type:"list" required:"true"`
@@ -2411,7 +2423,9 @@ func (s DeleteIpGroupOutput) SDKResponseMetadata() aws.Response {
 type DeleteTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
+	// The identifier of the WorkSpaces resource. The supported resource types are
+	// WorkSpaces, registered directories, images, custom bundles, and IP access
+	// control groups.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -2645,7 +2659,7 @@ func (s DescribeAccountOutput) SDKResponseMetadata() aws.Response {
 type DescribeClientPropertiesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource identifiers, in the form of directory IDs.
+	// The resource identifier, in the form of directory IDs.
 	//
 	// ResourceIds is a required field
 	ResourceIds []string `min:"1" type:"list" required:"true"`
@@ -2777,7 +2791,9 @@ func (s DescribeIpGroupsOutput) SDKResponseMetadata() aws.Response {
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
+	// The identifier of the WorkSpaces resource. The supported resource types are
+	// WorkSpaces, registered directories, images, custom bundles, and IP access
+	// control groups.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -3357,6 +3373,9 @@ type ImportWorkspaceImageInput struct {
 	//
 	// IngestionProcess is a required field
 	IngestionProcess WorkspaceImageIngestionProcess `type:"string" required:"true" enum:"true"`
+
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -3392,6 +3411,13 @@ func (s *ImportWorkspaceImageInput) Validate() error {
 	}
 	if len(s.IngestionProcess) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("IngestionProcess"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3628,7 +3654,9 @@ type ModifyClientPropertiesInput struct {
 	_ struct{} `type:"structure"`
 
 	// Information about the Amazon WorkSpaces client.
-	ClientProperties *ClientProperties `type:"structure"`
+	//
+	// ClientProperties is a required field
+	ClientProperties *ClientProperties `type:"structure" required:"true"`
 
 	// The resource identifiers, in the form of directory IDs.
 	//
@@ -3649,6 +3677,10 @@ func (s ModifyClientPropertiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyClientPropertiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyClientPropertiesInput"}
+
+	if s.ClientProperties == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientProperties"))
+	}
 
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
@@ -3975,6 +4007,9 @@ func (s *RebuildRequest) Validate() error {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesRequest
 type RebuildWorkspacesInput struct {
 	_ struct{} `type:"structure"`
+
+	// Reserved.
+	AdditionalInfo *string `type:"string"`
 
 	// The WorkSpace to rebuild. You can specify a single WorkSpace.
 	//
@@ -4755,7 +4790,7 @@ type WorkspaceProperties struct {
 	RootVolumeSizeGib *int64 `type:"integer"`
 
 	// The running mode. For more information, see Manage the WorkSpace Running
-	// Mode (http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
+	// Mode (https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
 	RunningMode RunningMode `type:"string" enum:"true"`
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
